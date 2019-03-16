@@ -339,5 +339,5 @@
   <string name="provider_bookmarks">Obeleživači</string>
   <string name="bookmark_empty">Niste dodali nijedan obeleživač</string>
   <string name="provider_bookmarks_location">Obeleživači</string>
-  <string name="no_uploads">Dobro došli na Ostavu!\n\nOtpremite prve medije dodirom gorenavedene ikonice kamere ili galerije.</string>
+  <string name="no_uploads" fuzzy="true">Dobro došli na Ostavu!\n\nOtpremite prve medije dodirom gorenavedene ikonice kamere ili galerije.</string>
 </resources>

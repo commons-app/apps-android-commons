@@ -5,8 +5,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.RemoteException;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,6 +90,26 @@ public class RecentSearchesDao {
             }
         }
     }
+
+    /**
+     * Deletes a recent search from the database
+     */
+    public void delete(RecentSearch recentSearch) {
+
+        ContentProviderClient db = clientProvider.get();
+        try {
+            if (recentSearch.getContentUri() == null) {
+                throw new RuntimeException("tried to delete item with no content URI");
+            } else {
+                db.delete(recentSearch.getContentUri(), null, null);
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } finally {
+            db.release();
+        }
+    }
+
 
     /**
      * Find persisted search query in database, based on its name.

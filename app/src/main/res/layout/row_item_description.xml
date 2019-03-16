@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:weightSum="8">
 
-    <android.support.v7.widget.AppCompatSpinner
+    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner_description_languages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:padding="0dp"
         android:spinnerMode="dialog" />
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="217dp"
         android:layout_height="wrap_content"
         android:layout_weight="8">
@@ -30,7 +30,7 @@
             android:paddingRight="4dp"
             android:drawableRight="@drawable/mapbox_info_icon_default"
             android:inputType="textMultiLine" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </LinearLayout>

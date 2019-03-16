@@ -240,6 +240,7 @@
   <string name="upload_problem_image_blurry">Сликата е матна.</string>
   <string name="upload_problem_image_duplicate">Сликата веќе ја има на Ризницата.</string>
   <string name="upload_problem_different_geolocation">Оваа слика е направена на друго место.</string>
+  <string name="upload_problem_fbmd">Подигајте само слики кои самите сте ги направиле. Не подигајте слики пронајдени на туѓи профили на Фејсбук.</string>
   <string name="upload_problem_do_you_continue">Дали сепак сакате да ја подигнете?</string>
   <string name="give_permission">Дај дозвола</string>
   <string name="use_external_storage">Користи надворешен склад</string>
@@ -396,10 +397,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Сфатив дека ќе ми ја наруши приватноста</string>
   <string name="deletion_reason_no_longer_want_public">Се премислив. Не сакам повеќе да биде видлива</string>
   <string name="deletion_reason_not_interesting">За жал, сликава не е соодветна за енциклопедија</string>
-  <string name="uploaded_by_myself">Подигната од мене на</string>
-  <string name="used_by">, се користи во</string>
-  <string name="articles">статии</string>
-  <string name="no_uploads">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи ја иконката за камера или галерија.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Подигната од мене на</string>
+  <string name="no_uploads" fuzzy="true">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи ја иконката за камера или галерија.</string>
   <string name="desc_language_Worldwide">Цел свет</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>

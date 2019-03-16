@@ -11,17 +11,16 @@ import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v4.widget.CursorAdapter;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.cursoradapter.widget.CursorAdapter;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,7 @@ import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.campaigns.CampaignsPresenter;
 import fr.free.nrw.commons.campaigns.ICampaignsView;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
@@ -82,7 +81,7 @@ public class ContributionsFragment
                     ContributionsListFragment.SourceRefresher,
                     LocationUpdateListener,
                     ICampaignsView {
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject @Named("default_preferences") JsonKvStore store;
     @Inject ContributionDao contributionDao;
     @Inject MediaWikiApi mediaWikiApi;
     @Inject NearbyController nearbyController;
@@ -152,7 +151,7 @@ public class ContributionsFragment
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Do not ask for permission on activity start again
-                defaultKvStore.putBoolean("displayLocationPermissionForCardView",false);
+                store.putBoolean("displayLocationPermissionForCardView",false);
             }
         });
 
@@ -178,7 +177,7 @@ public class ContributionsFragment
                 @Override public void onFragmentResumed(FragmentManager fm, Fragment f) {
                     super.onFragmentResumed(fm, f);
                     //If media detail pager fragment is visible, hide the campaigns view [might not be the best way to do, this but yeah, this proves to work for now]
-                    Log.e("#CF#", "onFragmentResumed" + f.getClass().getName());
+                    Timber.e("onFragmentResumed %s", f.getClass().getName());
                     if (f instanceof MediaDetailPagerFragment) {
                         campaignView.setVisibility(View.GONE);
                     }
@@ -186,7 +185,7 @@ public class ContributionsFragment
 
                 @Override public void onFragmentDetached(FragmentManager fm, Fragment f) {
                     super.onFragmentDetached(fm, f);
-                    Log.e("#CF#", "onFragmentDetached" + f.getClass().getName());
+                    Timber.e("onFragmentDetached %s", f.getClass().getName());
                     //If media detail pager fragment is detached, ContributionsList fragment is gonna be visible, [becomes tightly coupled though]
                     if (f instanceof MediaDetailPagerFragment) {
                         fetchCampaigns();
@@ -223,7 +222,7 @@ public class ContributionsFragment
         ((MainActivity)getActivity()).showTabs();
         // show nearby card view on contributions list is visible
         if (nearbyNotificationCardView != null) {
-            if (defaultKvStore.getBoolean("displayNearbyCardView", true)) {
+            if (store.getBoolean("displayNearbyCardView", true)) {
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);
                 }
@@ -291,7 +290,7 @@ public class ContributionsFragment
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        int uploads = defaultKvStore.getInt(UPLOADS_SHOWING, 100);
+        int uploads = store.getInt(UPLOADS_SHOWING, 100);
         return new CursorLoader(getActivity(), BASE_URI, //TODO find out the reason we pass activity here
                 ALL_FIELDS, "", null,
                 ContributionDao.CONTRIBUTION_SORT + "LIMIT " + uploads);
@@ -309,7 +308,7 @@ public class ContributionsFragment
                 ((CursorAdapter) contributionsListFragment.getAdapter()).swapCursor(cursor);
             }
 
-            contributionsListFragment.clearSyncMessage();
+            contributionsListFragment.showWelcomeTip(cursor.getCount() == 0);
             notifyAndMigrateDataSetObservers();
             ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
         }
@@ -332,6 +331,12 @@ public class ContributionsFragment
         // Now fire off a first notification...
         for (DataSetObserver observer : observersWaitingForLoad) {
             observer.onChanged();
+        }
+
+        if (ConfigUtils.isBetaFlavour()) {
+            betaSetUploadCount(getTotalMediaCount());
+        } else {
+            setUploadCount();
         }
     }
 
@@ -360,7 +365,7 @@ public class ContributionsFragment
                     // No need to display permission request button anymore
                     locationManager.registerLocationManager();
                 } else {
-                    if (defaultKvStore.getBoolean("displayLocationPermissionForCardView", true)) {
+                    if (store.getBoolean("displayLocationPermissionForCardView", true)) {
                         // Still ask for permission
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
@@ -496,14 +501,14 @@ public class ContributionsFragment
         firstLocationUpdate = true;
         locationManager.addLocationListener(this);
 
-        boolean isSettingsChanged = defaultKvStore.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
-        defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
+        boolean isSettingsChanged = store.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
+        store.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
         if (isSettingsChanged) {
             refreshSource();
         }
 
 
-        if (defaultKvStore.getBoolean("displayNearbyCardView", true)) {
+        if (store.getBoolean("displayNearbyCardView", true)) {
             checkGPS();
             if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                 nearbyNotificationCardView.setVisibility(View.VISIBLE);
@@ -524,7 +529,7 @@ public class ContributionsFragment
         if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
             nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_GPS;
-            if (defaultKvStore.getBoolean("displayLocationPermissionForCardView", true)) {
+            if (store.getBoolean("displayLocationPermissionForCardView", true)) {
                 DialogUtil.showAlertDialog(getActivity(),
                         getString(R.string.nearby_card_permission_title),
                         getString(R.string.nearby_card_permission_explanation),
@@ -548,7 +553,7 @@ public class ContributionsFragment
                 nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
                 // If user didn't selected Don't ask again
                 if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
-                        && defaultKvStore.getBoolean("displayLocationPermissionForCardView", true)) {
+                        && store.getBoolean("displayLocationPermissionForCardView", true)) {
                         DialogUtil.showAlertDialog(getActivity(),
                                 getString(R.string.nearby_card_permission_title),
                                 getString(R.string.nearby_card_permission_explanation),
@@ -686,7 +691,7 @@ public class ContributionsFragment
      * ask the presenter to fetch the campaigns only if user has not manually disabled it
      */
     private void fetchCampaigns() {
-        if (defaultKvStore.getBoolean("displayCampaignsCardView", true)) {
+        if (store.getBoolean("displayCampaignsCardView", true)) {
             presenter.getCampaigns();
         }
     }

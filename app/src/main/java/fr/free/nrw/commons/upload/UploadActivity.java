@@ -5,12 +5,13 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -23,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -78,7 +80,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @Inject MediaWikiApi mwApi;
     @Inject
     ContributionController contributionController;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") JsonKvStore directKvStore;
     @Inject UploadPresenter presenter;
     @Inject CategoriesModel categoriesModel;
     @Inject SessionManager sessionManager;
@@ -120,6 +122,8 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.category_search) EditText categoriesSearch;
     @BindView(R.id.category_search_container) TextInputLayout categoriesSearchContainer;
     @BindView(R.id.categories) RecyclerView categoriesList;
+    @BindView(R.id.category_search_layout)
+    FrameLayout categoryFrameLayout;
 
     // Final Submission
     @BindView(R.id.license_title) TextView licenseTitle;
@@ -563,6 +567,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureCategories() {
+        categoryFrameLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         categoriesAdapter = new UploadCategoriesAdapterFactory(categoriesModel).create(new ArrayList<>());
         categoriesList.setLayoutManager(new LinearLayoutManager(this));
         categoriesList.setAdapter(categoriesAdapter);
