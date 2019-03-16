@@ -66,6 +66,6 @@
     <color name="black">#000000</color>
 
     <color name="swipe_red" tools:ignore="MissingDefaultResource">#FF0000</color>
-    <color name="yes_button_color">#DC143C</color>
-    <color name="no_button_color">#228B22</color>
+    <color name="yes_button_color">#B22222</color>
+    <color name="no_button_color">#006400</color>
 </resources>

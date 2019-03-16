@@ -126,7 +126,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 yesButtonText = getString(R.string.review_thanks_yes_button_text);
                 noButtonText = getString(R.string.review_thanks_no_button_text);
                 yesButton.setTextColor(Color.parseColor("#228b22"));
-                noButton.setTextColor(Color.parseColor("#00376d"));
+                noButton.setTextColor(Color.parseColor("#116aaa"));
                 yesButton.setOnClickListener(view -> {
                     ((ReviewActivity) getActivity()).reviewController.sendThanks();
                 });

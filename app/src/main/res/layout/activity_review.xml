@@ -35,8 +35,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="SKIP THIS IMAGE"
-                    android:textColor="@color/primaryDarkColor"
-                    android:background="@color/white"
+                    android:textColor="@color/button_blue_dark"
+                    android:background="@android:color/transparent"
                     android:layout_weight="1"
                     android:textStyle="bold"/>
 

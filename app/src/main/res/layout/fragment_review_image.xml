@@ -54,11 +54,11 @@
     <TextView
         android:id="@+id/reviewQuestion"
         android:layout_width="match_parent"
-        android:textColor="@android:color/black"
         android:layout_height="0dp"
         android:layout_weight="0.7"
         android:textAlignment="center"
         android:textSize="32sp"
+        android:textColor="?attr/reviewHeading"
         android:gravity="center_vertical"
         android:text="testing1"
         />
