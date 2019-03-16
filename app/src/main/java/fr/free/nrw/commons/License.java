@@ -1,6 +1,6 @@
 package fr.free.nrw.commons;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * represents Licence object

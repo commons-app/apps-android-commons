@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.contributions;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,8 +100,14 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private void setListeners() {
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
-        fabCamera.setOnClickListener(view -> controller.initiateCameraPick(getActivity()));
-        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity(), true));
+        fabCamera.setOnClickListener(view -> {
+            controller.initiateCameraPick(getActivity());
+            animateFAB(isFabOpen);
+        });
+        fabGallery.setOnClickListener(view -> {
+            controller.initiateGalleryPick(getActivity(), true);
+            animateFAB(isFabOpen);
+        });
     }
 
     private void animateFAB(boolean isFabOpen) {

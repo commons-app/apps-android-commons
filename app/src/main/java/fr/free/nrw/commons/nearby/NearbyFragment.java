@@ -6,13 +6,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,6 +154,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         // Find the retained fragment on activity restarts
         nearbyMapFragment = getMapFragment();
         nearbyListFragment = getListFragment();
+        addNetworkBroadcastReceiver();
     }
 
     /**
@@ -163,7 +166,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private void removeMapFragment() {
         if (nearbyMapFragment != null) {
-            android.support.v4.app.FragmentManager fm = getFragmentManager();
+            FragmentManager fm = getFragmentManager();
             fm.beginTransaction().remove(nearbyMapFragment).commit();
             nearbyMapFragment = null;
         }
@@ -179,7 +182,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private void removeListFragment() {
         if (nearbyListFragment != null) {
-            android.support.v4.app.FragmentManager fm = getFragmentManager();
+            FragmentManager fm = getFragmentManager();
             fm.beginTransaction().remove(nearbyListFragment).commit();
             nearbyListFragment = null;
         }
@@ -711,21 +714,32 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         if (!FragmentUtils.isFragmentUIActive(this)) {
             return;
         }
+
+        if (broadcastReceiver != null) {
+            return;
+        }
         
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
-        snackbar = Snackbar.make(transparentView, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (snackbar != null && getActivity() != null) {
+                if (getActivity() != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
                         if (isNetworkErrorOccured) {
                             refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
                             isNetworkErrorOccured = false;
                         }
-                        snackbar.dismiss();
+
+                        if (snackbar != null) {
+                            snackbar.dismiss();
+                            snackbar = null;
+                        }
                     } else {
+                        if (snackbar == null) {
+                            snackbar = Snackbar.make(view, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
+                        }
+
                         isNetworkErrorOccured = true;
                         snackbar.show();
                     }
@@ -733,12 +747,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             }
         };
 
-        if (getActivity() == null) {
-            return;
-        }
-
         getActivity().registerReceiver(broadcastReceiver, intentFilter);
-
     }
 
     @Override
