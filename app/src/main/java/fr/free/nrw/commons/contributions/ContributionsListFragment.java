@@ -67,7 +67,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, view);
 
-        contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
+        //contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
 
         changeProgressBarVisibility(true);
         return view;

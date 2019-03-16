@@ -6,6 +6,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
@@ -25,10 +26,11 @@ class ContributionsListAdapter extends CursorAdapter {
     public ContributionsListAdapter(Context context,
                                     Cursor c,
                                     int flags,
-                                    ContributionDao contributionDao) {
+                                    ContributionDao contributionDao, EventListener listener) {
         super(context, c, flags);
         this.context = context;
         this.contributionDao = contributionDao;
+        this.listener=listener;
     }
 
     public void setUploadService(UploadService uploadService) {
@@ -59,6 +61,11 @@ class ContributionsListAdapter extends CursorAdapter {
                     @Override
                     public void deleteUpload() {
                         ContributionsListAdapter.this.deleteUpload(contribution);
+                    }
+
+                    @Override
+                    public void onClick() {
+                        ContributionsListAdapter.this.openMediaDetail(cursor.getPosition());
                     }
                 });
         views.bindModel(context, displayableContribution);
@@ -99,5 +106,16 @@ class ContributionsListAdapter extends CursorAdapter {
             ViewUtil.showLongToast(context, R.string.this_function_needs_network_connection);
         }
 
+    }
+
+    private void openMediaDetail(int position){
+        Toast.makeText(context,"Media clicked "+position,Toast.LENGTH_SHORT).show();
+        listener.onEvent(position);
+
+    }
+    EventListener listener;
+
+    public interface EventListener {
+        void onEvent(int data);
     }
 }
