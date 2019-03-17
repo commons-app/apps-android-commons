@@ -17,7 +17,6 @@ dependencies {
     implementation 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
     implementation 'commons-codec:commons-codec:1.10'
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'info.debatty:java-string-similarity:0.24'
     implementation 'in.yuvi:http.fluent:1.3'
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
     implementation 'com.squareup.okio:okio:1.15.0'
@@ -66,11 +65,11 @@ dependencies {
 
     // Android testing
     androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation 'androidx.annotation:annotation:1.0.2'
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.10.0'
-    androidTestImplementation 'androidx.test:rules:1.1.2-alpha02'
-    androidTestImplementation 'androidx.test:runner:1.1.2-alpha02'
-    androidTestImplementation "androidx.annotation:annotation:1.0.2"
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha02'
     androidTestImplementation 'org.mockito:mockito-core:2.10.0'
 
     // Debugging
