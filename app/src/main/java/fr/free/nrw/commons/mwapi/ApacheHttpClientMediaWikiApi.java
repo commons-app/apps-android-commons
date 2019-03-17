@@ -3,12 +3,9 @@ package fr.free.nrw.commons.mwapi;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.conn.ClientConnectionManager;
@@ -29,7 +26,6 @@ import org.w3c.dom.NodeList;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,12 +39,13 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.Callable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
-import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
@@ -812,27 +809,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
 
         return queryContinueParameters;
-    }
-
-     * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
-     * https://www.mediawiki.org/wiki/API:Raw_query_continue
-     * After fetching images a page of image for a particular category, shared defaultKvStore are updated with the latest QueryContinue Values
-     * @param keyword
-     * @param queryContinue
-     */
-    private void setQueryContinueValues(String keyword, QueryContinue queryContinue) {
-        defaultKvStore.putString(keyword, gson.toJson(queryContinue));
-    }
-
-    /**
-     * Before making a paginated API call, this method is called to get the latest query continue values to be used
-     * @param keyword
-     * @return
-     */
-    @Nullable
-    private QueryContinue getQueryContinueValues(String keyword) {
-        String queryContinueString = defaultKvStore.getString(keyword, null);
-        return gson.fromJson(queryContinueString, QueryContinue.class);
     }
 
     @Override
