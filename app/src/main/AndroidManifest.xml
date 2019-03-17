@@ -110,6 +110,11 @@
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
+            android:name=".explore.categories.ExploreActivity"
+            android:label="@string/title_activity_explore"
+            android:parentActivityName=".contributions.MainActivity" />
+
+        <activity
             android:name=".explore.SearchActivity"
             android:label="@string/title_activity_search"
             android:launchMode="singleTop"
