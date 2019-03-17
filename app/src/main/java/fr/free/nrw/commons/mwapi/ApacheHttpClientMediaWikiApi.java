@@ -2,14 +2,12 @@ package fr.free.nrw.commons.mwapi;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -26,7 +24,6 @@ import org.w3c.dom.NodeList;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,7 +46,6 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
@@ -809,29 +805,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("aisha1", fileSha1)
                 .get()
                 .getNodes("/api/query/allimages/img").size() > 0;
-    }
-
-    @Override
-    public boolean logEvents(LogBuilder[] logBuilders) {
-        boolean allSuccess = true;
-        // Not using the default URL connection, since that seems to have different behavior than the rest of the code
-        for (LogBuilder logBuilder : logBuilders) {
-            try {
-                URL url = logBuilder.toUrl();
-                HttpResponse response = Http.get(url.toString()).use(httpClient).asResponse();
-
-                if (response.getStatusLine().getStatusCode() != 204) {
-                    allSuccess = false;
-                }
-                Timber.d("EventLog hit %s", url);
-
-            } catch (IOException e) {
-                // Probably just ignore for now. Can be much more robust with a service, etc later on.
-                Timber.d("IO Error, EventLog hit skipped");
-            }
-        }
-
-        return allSuccess;
     }
 
     @Override
