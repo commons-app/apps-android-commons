@@ -384,14 +384,6 @@ public class ContributionsFragment
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
-    /*@Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        // show detail at a position
-        showDetail(i);
-    }*/
-
-
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with
      * mediaDetailPagerFragment, and preserve previous state in back stack.
