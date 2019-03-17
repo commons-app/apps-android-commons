@@ -20,6 +20,7 @@ import com.squareup.leakcanary.RefWatcher;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
+import org.wikipedia.AppAdapter;
 
 import java.io.File;
 
@@ -93,6 +94,7 @@ public class CommonsApplication extends Application {
     public void onCreate() {
         super.onCreate();
         INSTANCE = this;
+        AppAdapter.set(new CommonsAppAdapter());
         ACRA.init(this);
 
         ApplicationlessInjection
