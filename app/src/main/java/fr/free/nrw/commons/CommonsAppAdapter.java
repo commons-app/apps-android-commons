@@ -13,6 +13,8 @@ import fr.free.nrw.commons.auth.SessionManager;
 import okhttp3.OkHttpClient;
 
 public class CommonsAppAdapter extends AppAdapter {
+    private final int DEFAULT_THUMB_SIZE = 640;
+
     @Inject SessionManager sessionManager;
 
     @Override
@@ -32,7 +34,7 @@ public class CommonsAppAdapter extends AppAdapter {
 
     @Override
     public int getDesiredLeadImageDp() {
-        return 640;
+        return DEFAULT_THUMB_SIZE;
     }
 
     @Override

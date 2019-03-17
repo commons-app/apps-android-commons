@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -44,7 +45,6 @@ import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
-import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -554,7 +554,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 notfilter = "!read";
             }
             String language=Locale.getDefault().getLanguage();
-            if(StringUtils.isNullOrWhiteSpace(language)){
+            if(StringUtils.isBlank(language)){
                 //if no language is set we use the default user language defined on wikipedia
                 language="user";
             }
@@ -591,7 +591,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .post()
                 .getString("/api/query/echomarkread/@result");
 
-        if (StringUtils.isNullOrWhiteSpace(result)) {
+        if (StringUtils.isBlank(result)) {
             return false;
         }
 

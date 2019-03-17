@@ -5,9 +5,9 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
+import org.apache.commons.lang3.StringUtils;
 
-import fr.free.nrw.commons.utils.StringUtils;
+import java.io.Serializable;
 
 /**
  * Gson POJO for a standard image info object as returned by the API ImageInfo module

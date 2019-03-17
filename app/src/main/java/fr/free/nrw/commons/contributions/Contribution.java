@@ -3,6 +3,9 @@ package fr.free.nrw.commons.contributions;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
+
+import org.apache.commons.lang3.StringUtils;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
 
@@ -18,7 +21,6 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ConfigUtils;
-import fr.free.nrw.commons.utils.StringUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -168,7 +170,7 @@ public class  Contribution extends Media {
                 .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");
 
         String templatizedCreatedDate = getTemplatizedCreatedDate();
-        if (!StringUtils.isNullOrWhiteSpace(templatizedCreatedDate)) {
+        if (!StringUtils.isBlank(templatizedCreatedDate)) {
             buffer.append("|date=").append(templatizedCreatedDate);
         }
 

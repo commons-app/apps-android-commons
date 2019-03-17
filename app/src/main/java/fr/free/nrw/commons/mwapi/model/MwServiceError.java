@@ -1,12 +1,12 @@
 package fr.free.nrw.commons.mwapi.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.List;
-
-import fr.free.nrw.commons.utils.StringUtils;
 
 /**
  * Gson POJO for a MediaWiki API error.

@@ -2,9 +2,11 @@ package fr.free.nrw.commons.category;
 
 import androidx.annotation.NonNull;
 
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.wikipedia.util.StringUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +18,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.utils.StringUtils;
 import timber.log.Timber;
 
 public class CategoryImageUtils {
@@ -114,10 +115,10 @@ public class CategoryImageUtils {
     @NonNull
     private static String getCreator(Node document) {
         String artist = getMetaDataValue(document, "Artist");
-        if (StringUtils.isNullOrWhiteSpace(artist)) {
+        if (StringUtils.isBlank(artist)) {
             return "";
         }
-        return StringUtils.getParsedStringFromHtml(artist);
+        return StringUtil.fromHtml(artist).toString();
     }
 
     /**

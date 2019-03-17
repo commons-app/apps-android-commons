@@ -3,11 +3,12 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import org.wikipedia.util.StringUtil;
 
 public class WelcomePagerAdapter extends PagerAdapter {
     private static final int[] PAGE_LAYOUTS = new int[]{
@@ -61,7 +62,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
         if (position == PAGE_FINAL) {
             // Add link to more information
             TextView moreInfo = layout.findViewById(R.id.welcomeInfo);
-            moreInfo.setText(Html.fromHtml(WelcomeActivity.moreInformation));
+            moreInfo.setText(StringUtil.fromHtml(WelcomeActivity.moreInformation));
             moreInfo.setOnClickListener(view -> {
                 try {
                     Utils.handleWebUrl(

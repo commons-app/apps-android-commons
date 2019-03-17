@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.Menu;
@@ -16,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import org.wikipedia.util.StringUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,11 +67,11 @@ public class AboutActivity extends NavigationBaseActivity {
         TextView credits = findViewById(R.id.about_credits);
         TextView faq = findViewById(R.id.about_faq);
 
-        rate_us.setText(Html.fromHtml(getString(R.string.about_rate_us)));
-        privacy_policy.setText(Html.fromHtml(getString(R.string.about_privacy_policy)));
-        translate.setText(Html.fromHtml(getString(R.string.about_translate)));
-        credits.setText(Html.fromHtml(getString(R.string.about_credits)));
-        faq.setText(Html.fromHtml(getString(R.string.about_faq)));
+        rate_us.setText(StringUtil.fromHtml(getString(R.string.about_rate_us)));
+        privacy_policy.setText(StringUtil.fromHtml(getString(R.string.about_privacy_policy)));
+        translate.setText(StringUtil.fromHtml(getString(R.string.about_translate)));
+        credits.setText(StringUtil.fromHtml(getString(R.string.about_credits)));
+        faq.setText(StringUtil.fromHtml(getString(R.string.about_faq)));
 
         initDrawer();
     }

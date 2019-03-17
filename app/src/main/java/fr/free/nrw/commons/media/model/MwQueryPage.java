@@ -5,10 +5,10 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Collections;
 import java.util.List;
-
-import fr.free.nrw.commons.utils.StringUtils;
 
 /**
  * A class representing a standard page object as returned by the MediaWiki API.
