@@ -192,7 +192,7 @@
   <string name="maximum_limit_alert">Unable to display more than 500</string>
   <string name="enter_valid">Enter a valid number</string>
   <string name="cannot_be_zero">Upload limit cannot be 0</string>
-  <string name="set_limit">Set Recent Upload Limit</string>
+  <string name="set_limit">Recent upload limit</string>
   <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
   <string name="logout_verification">Do you really want to logout?</string>
   <string name="commons_logo">Commons Logo</string>
