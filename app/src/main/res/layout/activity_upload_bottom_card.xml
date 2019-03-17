@@ -67,7 +67,7 @@
     </androidx.cardview.widget.CardView>
 
 
-    <androidx.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/bottom_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -177,8 +177,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                
