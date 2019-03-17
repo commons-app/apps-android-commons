@@ -28,7 +28,7 @@
                 android:layout_below="@id/toolbar"
                 android:background="?attr/tabBackground"
                 app:tabIndicatorColor="?attr/tabIndicatorColor"
-                app:tabMode="scrollable"
+                app:tabMode="fixed"
                 app:tabSelectedTextColor="?attr/tabSelectedTextColor"
                 app:tabTextColor="?attr/tabTextColor" />
         </com.google.android.material.appbar.AppBarLayout>
