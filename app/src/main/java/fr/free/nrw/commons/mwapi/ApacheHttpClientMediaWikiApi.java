@@ -38,6 +38,7 @@ import java.util.TimeZone;
 import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
@@ -46,7 +47,6 @@ import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
-import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import in.yuvi.http.fluent.Http;
@@ -82,7 +82,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         final SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
         schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-        params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
+        params.setParameter(CoreProtocolPNames.USER_AGENT, CommonsApplication.getInstance().getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
         if (BuildConfig.DEBUG) {
             httpClient.addRequestInterceptor(NetworkInterceptors.getHttpRequestInterceptor());
@@ -91,12 +91,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         wikidataApi = new CustomMwApi(wikidatApiURL, httpClient);
         this.defaultKvStore = defaultKvStore;
         this.gson = gson;
-    }
-
-    @Override
-    @NonNull
-    public String getUserAgent() {
-        return "Commons/" + ConfigUtils.getVersionNameWithSha(context) + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
     }
 
     /**

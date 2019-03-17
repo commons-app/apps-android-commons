@@ -13,7 +13,6 @@ import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 
 public interface MediaWikiApi {
-    String getUserAgent();
 
     String getAuthCookie();
 
