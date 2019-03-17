@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.category;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

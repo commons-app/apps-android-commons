@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="fr.free.nrw.commons">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,7 +31,7 @@
         android:theme="@style/LightAppTheme"
         android:largeHeap="true"
         android:hardwareAccelerated="false"
-        android:supportsRtl="true" >
+
         <activity android:name="org.acra.dialog.CrashReportDialog"
             android:process=":acra"
             android:launchMode="singleInstance"
@@ -102,6 +103,11 @@
         <activity
             android:name=".category.CategoryDetailsActivity"
             android:label="@string/title_activity_featured_images"
+            android:parentActivityName=".contributions.MainActivity" />
+
+        <activity
+            android:name=".explore.categories.ExploreActivity"
+            android:label="@string/title_activity_explore"
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity

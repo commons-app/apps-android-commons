@@ -9,10 +9,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.FileProvider;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
+import androidx.core.content.FileProvider;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -242,7 +242,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
         okHttpJsonApiClient.getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)));
+                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)), e -> {
+                    Timber.e("Error:" + e);
+                });
     }
 
     private void showSnackBarWithRetry() {
@@ -339,12 +341,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
-        thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
+        thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
                 (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
-        imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
+        imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         String levelUpInfoString = getString(R.string.level);
         levelUpInfoString += " " + Integer.toString(levelInfo.getLevelNumber());
         levelNumber.setText(levelUpInfoString);

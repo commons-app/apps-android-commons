@@ -5,9 +5,9 @@ import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +32,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -64,7 +64,9 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject
     OkHttpJsonApiClient okHttpJsonApiClient;
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore defaultKvStore;
 
     private RVRendererAdapter<Media> imagesAdapter;
     private List<Media> queryList = new ArrayList<>();
@@ -144,6 +146,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .doOnSubscribe(disposable -> saveQuery(query))
                 .subscribe(this::handleSuccess, this::handleError);
     }
 
@@ -197,10 +200,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
             ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
-
-            // check if user is waiting for 5 seconds if yes then save search query to history.
-            Handler handler = new Handler();
-            handler.postDelayed(() -> saveQuery(query), 5000);
         }
     }
 

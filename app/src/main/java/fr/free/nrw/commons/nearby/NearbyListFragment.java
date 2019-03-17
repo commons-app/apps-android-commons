@@ -2,8 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +15,16 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
-import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
-public class NearbyListFragment extends DaggerFragment {
+public class NearbyListFragment extends CommonsDaggerSupportFragment {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
 
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
@@ -40,8 +36,6 @@ public class NearbyListFragment extends DaggerFragment {
     private RecyclerView recyclerView;
 
     @Inject ContributionController controller;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
     @Inject Gson gson;
 
     @Override
@@ -52,7 +46,6 @@ public class NearbyListFragment extends DaggerFragment {
 
     @Override
     public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 
