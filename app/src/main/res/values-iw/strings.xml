@@ -249,6 +249,7 @@
   <string name="upload_problem_image_blurry">התמונה מטושטשת.</string>
   <string name="upload_problem_image_duplicate">התמונה כבר בוויקישיתוף.</string>
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
+  <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
   <string name="upload_problem_do_you_continue">האם ברצונך להעלות את התמונה הזאת עדיין?</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
@@ -405,10 +406,8 @@
   <string name="deletion_reason_bad_for_my_privacy">הבנתי שזה לא טוב לפרטיות שלי</string>
   <string name="deletion_reason_no_longer_want_public">התחרטתי, אינני רוצה עוד שהיא תוצג לציבור</string>
   <string name="deletion_reason_not_interesting">סליחה, התמונה אינה מעניינת עבור אנציקלופדיה</string>
-  <string name="uploaded_by_myself">הועלה על ידי ב־</string>
-  <string name="used_by">, בשימוש עבור</string>
-  <string name="articles">ערכים</string>
-  <string name="no_uploads">ברוך בואך לוויקישיתוף!\n\nכדי להעלות את המדיה הראשונה שלך, נא לגעת בסמל המצלמה או הגלריה למעלה.</string>
+  <string name="uploaded_by_myself" fuzzy="true">הועלה על ידי ב־</string>
+  <string name="no_uploads" fuzzy="true">ברוך בואך לוויקישיתוף!\n\nכדי להעלות את המדיה הראשונה שלך, נא לגעת בסמל המצלמה או הגלריה למעלה.</string>
   <string name="desc_language_Worldwide">בכל רחבי העולם</string>
   <string name="desc_language_America">אמריקה</string>
   <string name="desc_language_Europe">אירופה</string>

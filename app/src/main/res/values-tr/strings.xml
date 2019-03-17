@@ -390,10 +390,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Gizliliğim açısından kötü olduğunu fark ettim</string>
   <string name="deletion_reason_no_longer_want_public">Fikrimi değiştirdim, bunun herkese görünür olmasını istemiyorum</string>
   <string name="deletion_reason_not_interesting">Ansiklopedi için gerekli olmayan bir resim</string>
-  <string name="uploaded_by_myself">Kendi tarafımdan yüklendi</string>
-  <string name="used_by">,kullanılan</string>
-  <string name="articles">maddeler</string>
-  <string name="no_uploads">Commons\'a Hoş Geldiniz!\n\nYukarıdaki kamera ya da galeri simgesine dokunarak ilk medyanızı yükleyin.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Kendi tarafımdan yüklendi</string>
+  <string name="no_uploads" fuzzy="true">Commons\'a Hoş Geldiniz!\n\nYukarıdaki kamera ya da galeri simgesine dokunarak ilk medyanızı yükleyin.</string>
   <string name="desc_language_Worldwide">Dünya çapında</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Avrupa</string>

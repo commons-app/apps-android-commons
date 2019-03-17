@@ -1,11 +1,6 @@
 package fr.free.nrw.commons.utils;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-
-import timber.log.Timber;
+import androidx.fragment.app.Fragment;
 
 public class FragmentUtils {
 

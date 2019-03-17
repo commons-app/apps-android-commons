@@ -2,7 +2,7 @@ package fr.free.nrw.commons.category;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +27,8 @@ import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.mwapi.CategoryImagesResult;
+import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -56,8 +58,13 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private String categoryName = null;
 
     @Inject CategoryImageController controller;
-    private Map<String, String> queryContinueParam;
+  
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore categoryKvStore;
 
+    private Map<String, String> queryContinueParam;
+  
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_category_images, container, false);
@@ -240,6 +247,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
             }
             try {
                 ((CategoryDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try {
+                ((ExploreActivity) getContext()).viewPagerNotifyDataSetChanged();
             }catch (Exception e){
                 e.printStackTrace();
             }

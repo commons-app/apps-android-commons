@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.settings;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -22,18 +20,17 @@ import javax.inject.Named;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-
-import static android.R.*;
 
 public class SettingsFragment extends PreferenceFragment {
 
     @Inject
     @Named("default_preferences")
-    BasicKvStore defaultKvStore;
+    JsonKvStore defaultKvStore;
     @Inject
     CommonsLogSender commonsLogSender;
 

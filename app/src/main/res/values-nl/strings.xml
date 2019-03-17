@@ -224,6 +224,7 @@
   <string name="contributions_fragment">Bijdragen</string>
   <string name="nearby_fragment">Dichtbij</string>
   <string name="notifications">Meldingen</string>
+  <string name="archived_notifications">Meldingen (in het archief)</string>
   <string name="display_nearby_notification">Meldingen dichtbij weergeven</string>
   <string name="list_sheet">Lijst</string>
   <string name="storage_permission">Toestemming om op te slaan</string>
@@ -231,6 +232,7 @@
   <string name="next">Volgende</string>
   <string name="previous">Vorige</string>
   <string name="submit">Verzenden</string>
+  <string name="uploaded_by_myself" fuzzy="true">Geüpload van mij op %1$s, gebruikt in %2$d artikel(s).</string>
   <string name="desc_language_Worldwide">Wereldwijd</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>

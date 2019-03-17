@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/coordinator_layout"
@@ -43,7 +43,7 @@
 
             </View>
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_recenter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
             android:visibility="gone"
             />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
             app:layout_anchor="@id/fab_plus"
             app:layout_anchorGravity="center_horizontal" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
             app:pressedTranslationZ="12dp"
             app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
             app:pressedTranslationZ="12dp"
             app:srcCompat="@drawable/ic_photo_white_24dp" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_commons_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -178,5 +178,5 @@
             app:layout_anchorGravity="center_horizontal"
             app:pressedTranslationZ="12dp"
             app:srcCompat="@drawable/ic_commons_icon_vector" />
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

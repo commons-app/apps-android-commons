@@ -54,10 +54,8 @@ public class ReasonBuilder {
     }
 
     private String appendArticlesUsed(FeedbackResponse object, Media media, String reason) {
-        reason += context.getString(R.string.uploaded_by_myself) + prettyUploadedDate(media);
-        reason += context.getString(R.string.used_by)
-                + object.getArticlesUsingImages()
-                + context.getString(R.string.articles);
+        String reason1Template = context.getString(R.string.uploaded_by_myself);
+        reason += String.format(Locale.getDefault(), reason1Template, prettyUploadedDate(media), object.getArticlesUsingImages());
         Timber.i("New Reason %s", reason);
         return reason;
     }

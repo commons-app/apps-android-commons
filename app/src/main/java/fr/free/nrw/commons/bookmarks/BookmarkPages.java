@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.bookmarks;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * Data class for handling a bookmark fragment and it title

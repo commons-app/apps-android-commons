@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -16,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -31,7 +30,7 @@ public class BookmarksActivity extends NavigationBaseActivity
     private MediaDetailPagerFragment mediaDetails;
     @BindView(R.id.viewPagerBookmarks)
     ViewPager viewPager;
-    @BindView(R.id.tabLayoutBookmarks)
+    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
 
     @Inject

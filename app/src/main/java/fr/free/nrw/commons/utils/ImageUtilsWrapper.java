@@ -9,8 +9,6 @@ import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import fr.free.nrw.commons.location.LatLng;
 
-import static fr.free.nrw.commons.utils.ImageUtils.*;
-
 @Singleton
 public class ImageUtilsWrapper {
 
