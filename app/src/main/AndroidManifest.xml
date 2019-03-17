@@ -31,6 +31,10 @@
         android:theme="@style/LightAppTheme"
         android:largeHeap="true"
         android:hardwareAccelerated="false"
+        android:supportsRtl="true"
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="commons"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name="org.acra.dialog.CrashReportDialog"
             android:process=":acra"
