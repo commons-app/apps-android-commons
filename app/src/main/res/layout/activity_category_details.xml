@@ -12,8 +12,9 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:background="@color/primaryDarkColor"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/primaryDarkColor">
+
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar"
@@ -24,31 +25,27 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/toolbar"
                 android:background="?attr/tabBackground"
                 app:tabIndicatorColor="?attr/tabIndicatorColor"
-                app:tabSelectedTextColor="?attr/tabSelectedTextColor"
-                app:tabTextColor="?attr/tabTextColor"
                 app:tabMode="scrollable"
-                android:layout_below="@id/toolbar"
-                />
+                app:tabSelectedTextColor="?attr/tabSelectedTextColor"
+                app:tabTextColor="?attr/tabTextColor" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
-            android:visibility="gone"
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mediaContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/mediaContainer"
-            android:orientation="horizontal"
             android:layout_below="@id/toolbar_layout"
-            />
+            android:orientation="horizontal"
+            android:visibility="gone" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar_layout"
-            />
+            android:layout_below="@id/toolbar_layout" />
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -57,6 +54,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/drawer"/>
+        app:menu="@menu/drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
