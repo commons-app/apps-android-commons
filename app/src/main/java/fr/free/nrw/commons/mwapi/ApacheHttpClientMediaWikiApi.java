@@ -308,12 +308,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public String readFeedback(String source) throws IOException {
-        return api.action("query")
+        return wikidataApi.action("query")
                 .param("prop", "revisions")
                 .param("rvprop", "content")
+                .param("rvslots","main")
                 .param("titles", "Talk:Q11311478")
-                .get()
-                .getString("/api/flow-parsoid-utils/@content");
+                .get().getString("api");
     }
 
     @Override
