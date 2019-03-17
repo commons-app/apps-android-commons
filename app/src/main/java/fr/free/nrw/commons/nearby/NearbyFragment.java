@@ -132,14 +132,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Hide or expand bottom sheet according to states of all sheets
      */
-    public void listOptionMenuIteClicked() {
+    public void listOptionMenuItemClicked() {
         if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
             bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
-
     }
 
     /**
@@ -311,7 +310,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                             });
 
         } else if (locationChangeType
-                .equals(LOCATION_SLIGHTLY_CHANGED)) {
+                .equals(LOCATION_SLIGHTLY_CHANGED) && nearbyMapFragment != null) {
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(false,true, null, null);
@@ -821,6 +820,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             locationManager.removeLocationListener(this);
             locationManager.unregisterLocationManager();
         }
+    }
+
+    public boolean isBottomSheetExpanded() { return bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
     }
 }
 

@@ -242,7 +242,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
         okHttpJsonApiClient.getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)));
+                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)), e -> {
+                    Timber.e("Error:" + e);
+                });
     }
 
     private void showSnackBarWithRetry() {
@@ -361,8 +363,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     public static void startYourself(Context context) {
         Intent intent = new Intent(context, AchievementsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
 
