@@ -15,7 +15,11 @@ import okhttp3.OkHttpClient;
 public class CommonsAppAdapter extends AppAdapter {
     private final int DEFAULT_THUMB_SIZE = 640;
 
-    @Inject SessionManager sessionManager;
+    private final SessionManager sessionManager;
+
+    CommonsAppAdapter(@NonNull SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
+    }
 
     @Override
     public String getMediaWikiBaseUrl() {

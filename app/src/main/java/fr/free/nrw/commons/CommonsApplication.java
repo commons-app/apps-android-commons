@@ -99,13 +99,14 @@ public class CommonsApplication extends Application {
     public void onCreate() {
         super.onCreate();
         INSTANCE = this;
-        AppAdapter.set(new CommonsAppAdapter());
         ACRA.init(this);
 
         ApplicationlessInjection
                 .getInstance(this)
                 .getCommonsApplicationComponent()
                 .inject(this);
+
+        AppAdapter.set(new CommonsAppAdapter(sessionManager));
 
         initTimber();
 
