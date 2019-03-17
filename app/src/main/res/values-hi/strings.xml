@@ -153,16 +153,13 @@
   <string name="tutorial_1_text">विकिपीडिया में उपयोग होने वाले अधिकतर चित्र विकिमीडिया कॉमन्स पर रखे जाते है।</string>
   <string name="tutorial_1_subtext">आपके लिए चित्र पूरे विश्व के लोगों को शिक्षित करने में सहायता करेंगे!</string>
   <string name="tutorial_2_text">कृपया उन तस्वीरों को डालें, जो केवल आपके द्वारा ली गई या बनाई गई है:</string>
-  <string name="tutorial_2_subtext">प्राकृतिक वस्तुएँ (फूल, पशु, पहाड़)\n• उपयोगी वस्तुएँ (साइकिल, रेलवे स्टेशन)\n• प्रसिद्ध लोग (आपके महापौर, ओलंपिक एथलीट जिनसे आप मिले हों)</string>
   <string name="tutorial_2_subtext_1">प्राकृतिक वस्तु (फूल, पशु, पर्वत)</string>
   <string name="tutorial_2_subtext_2">उपयोगी वस्तु (साइकिल, रेलवे स्टेशन)</string>
   <string name="tutorial_2_subtext_3">प्रसिद्ध लोग (आपके महापौर, ओलम्पिक खिलाड़ी जिससे आप मिले हैं)</string>
   <string name="tutorial_3_text">कृपया अपलोड न करें:</string>
-  <string name="tutorial_3_subtext">- सेल्फी या अपने दोस्तों की तस्वीरें\n- इंटरनेट से डाउनलोड की गई तस्वीरें\n- किसी निजी एप का स्क्रीनशॉट</string>
   <string name="tutorial_3_subtext_1">आपके मित्र की सेल्फी अथवा चित्र</string>
   <string name="tutorial_3_subtext_2">चित्र जो आपने इंटरनेट से डाऊनलोड किया है</string>
   <string name="tutorial_4_text">अपलोड का उदाहरण:</string>
-  <string name="tutorial_4_subtext">- शीर्षक: सिडनी ओपेरा हाउस\n- विवरण: सिडनी ओपेरा हाउस का खाड़ी के पार से दृश्य\n- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
   <string name="tutorial_4_subtext_1">शीर्षक:सिडनी ओपरा हाउस</string>
   <string name="tutorial_4_subtext_2">विवरण: खाड़ी से सिडनी ओपरा हाउस का एक दृश्य</string>
   <string name="tutorial_4_subtext_3">श्रेणियाँ: पश्चिम से सिडनी ओपरा हाउस का दृश्य, सिडनी ओपरा हाउस के सुदुर दृश्य</string>
@@ -189,9 +186,7 @@
   <string name="yes">हाँ</string>
   <string name="no">नहीं</string>
   <string name="media_detail_title">शीर्षक</string>
-  <string name="media_detail_media_title">मीडिया का शीर्षक</string>
   <string name="media_detail_description">विवरण</string>
-  <string name="media_detail_description_explanation">मीडिया का विवरण यहाँ किया जाता है यह संभवतः काफी लंबा हो सकता है, और कई पंक्तियों में लपेटने की आवश्यकता होगी हालांकि हमें उम्मीद है कि यह अच्छा लग रहा है।</string>
   <string name="media_detail_author">लेखक</string>
   <string name="media_detail_uploaded_date">अपलोड की गई दिनांक</string>
   <string name="media_detail_license">लाइसेंस</string>
@@ -354,6 +349,7 @@
   <string name="contributions_fragment">योगदान</string>
   <string name="nearby_fragment">निकट</string>
   <string name="notifications">सूचनायें</string>
+  <string name="archived_notifications">सूचनाएँ (पुरालेखित)</string>
   <string name="list_sheet">सूची</string>
   <string name="storage_permission">स्टोरेज अनुमति</string>
   <string name="next">अगला</string>
@@ -372,9 +368,8 @@
   <string name="deletion_reason_bad_for_my_privacy">मुझे ज्ञात हुआ कि यह मेरी गोपनीयता के लिये सही नहीं है</string>
   <string name="deletion_reason_no_longer_want_public">मैंने अपना मन बदल लिया है, मैं इसे और अधिक सार्वजनिक रूप से दृश्य नहीं रखना चाहता</string>
   <string name="deletion_reason_not_interesting">क्षमा करें, यह चित्र ज्ञानकोष के लिये दिलचस्प नहीं है</string>
-  <string name="uploaded_by_myself">मेरे द्वारा अपलोड किया गया</string>
-  <string name="articles">लेख</string>
-  <string name="no_uploads">कॉमन्स पर आपका स्वागत है!</string>
+  <string name="uploaded_by_myself" fuzzy="true">मेरे द्वारा अपलोड किया गया</string>
+  <string name="no_uploads" fuzzy="true">कॉमन्स पर आपका स्वागत है!</string>
   <string name="desc_language_Worldwide">वैश्विक</string>
   <string name="desc_language_America">अमेरिका</string>
   <string name="desc_language_Europe">यूरोप</string>
@@ -398,4 +393,7 @@
   <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>
   <string name="no_image_uploaded">कोई चित्र अपलोड नहीं किया</string>
   <string name="no_notification">आपके पास कोई अपठित सूचना नहीं है</string>
+  <string name="no_archived_notification">आपकी कोई सूचना पुरालेखित नहीं है</string>
+  <string name="menu_option_archived">पुरालेखित देखें</string>
+  <string name="menu_option_unread">अपठित देखें</string>
 </resources>

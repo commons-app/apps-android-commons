@@ -9,14 +9,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.NavUtils;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.core.app.NavUtils;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuInflater;
@@ -41,10 +41,10 @@ import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -62,17 +62,11 @@ import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
-    public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
-    private static final String FEATURED_IMAGES_CATEGORY = "Category:Featured_pictures_on_Wikimedia_Commons";
-
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
     @Inject
-    @Named("application_preferences")
-    BasicKvStore applicationKvStore;
-    @Inject
     @Named("default_preferences")
-    BasicKvStore defaultKvStore;
+    JsonKvStore applicationKvStore;
 
     @BindView(R.id.loginButton) Button loginButton;
     @BindView(R.id.signupButton) Button signupButton;
@@ -105,7 +99,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .getCommonsApplicationComponent()
                 .inject(this);
 
-        boolean isDarkTheme = defaultKvStore.getBoolean("theme", false);
+        boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
         setTheme(isDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
@@ -158,7 +152,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
      */
     private void skipLogin() {
         applicationKvStore.putBoolean("login_skipped", true);
-        CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_explore), FEATURED_IMAGES_CATEGORY);
+        ExploreActivity.startYourself(this);
         finish();
 
     }
@@ -387,10 +381,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onRestoreInstanceState(savedInstanceState);
         loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGGING_IN, false);
         errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
-        if (loginCurrentlyInProgress){
+        if (loginCurrentlyInProgress) {
             performLogin();
         }
-        if (errorMessageShown){
+        if (errorMessageShown) {
             resultantError = savedInstanceState.getString(RESULTANT_ERROR);
             handleOtherResults(resultantError);
         }

@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;

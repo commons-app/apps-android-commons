@@ -142,7 +142,6 @@
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Títol</string>
-  <string name="media_detail_media_title">Títol del fitxer multimèdia</string>
   <string name="media_detail_description">Descripció</string>
   <string name="media_detail_uploaded_date">Data de càrrega</string>
   <string name="media_detail_license">Llicència</string>

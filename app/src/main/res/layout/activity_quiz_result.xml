@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         app:cardCornerRadius="8dp"
@@ -44,7 +44,7 @@
                         android:layout_gravity="center_horizontal"
                         android:text="@string/result"
                         style="?android:textAppearanceLarge"
-                        android:textSize="32dp"
+                        android:textSize="32sp"
                         android:layout_marginTop="@dimen/activity_margin_vertical" />
 
                     <com.dinuscxj.progressbar.CircleProgressBar
@@ -91,5 +91,5 @@
 
             </RelativeLayout>
         </ScrollView>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

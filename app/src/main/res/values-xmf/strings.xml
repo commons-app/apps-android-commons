@@ -129,17 +129,14 @@
   <string name="tutorial_1_text">ვიკიოწკარუე იკათუანს ვიკიპედიას გჷმორინაფილი სურათეფიშ უმენტაშობას.</string>
   <string name="tutorial_1_subtext">თქვანი სურათი მეხვარებუ მახორობაშ გონათუას მოსოფელიშ მუკი-მუკი!</string>
   <string name="tutorial_2_text">ქორთხინთ გეხარგეთ, ხვალე თქვანით ინოღალირი ვარდა აკოქიმინელი სურათეფი:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- ორთაშობური ობიექტეფი (პიოლეფი, ჩხოლარეფი, გვალეფი)\n- ორგებელი ობიექტეფი (ველოსიპედეფი, მახინწალიშ დგჷმიელფი)\n- ჩინებული ადამიერეფი (თქვანი ნოღაშ მერი, ოლიმპიარი სპორტსმენეფი, ნამუეფსჷთ შეხვალამუთჷნ)</string>
   <string name="tutorial_2_subtext_1">ორთაშობური ობიექტეფი (პიოლეფი, ჩხოლარეფი, გვალეფი)</string>
   <string name="tutorial_2_subtext_2">ორგებელი ობიექტეფი (ველოსიპედეფი, მახინწალიშ დგჷმილეფი)</string>
   <string name="tutorial_2_subtext_3">ჩინებული ადამიერეფი (თქვანი მერი, ოლიმპიალი ათლეტეფი, ნამუეფსჷთ შეხვალამუთჷნ)</string>
   <string name="tutorial_3_text">ქორთხინთ ვეხარგათ:</string>
-  <string name="tutorial_3_subtext">- სელფი ვარდა მაჸალეეფიშ სურათეფი\n- ინტერნეტშე გჷმოხარგილი ფოტოეფი\n- ვადუდიშული აპლიკაციეფიშ სკრინშოტეფი</string>
   <string name="tutorial_3_subtext_1">სელფეფი ვარდა თქვანი მაჸალეეფიშ სურათეფი</string>
   <string name="tutorial_3_subtext_2">სურათეფი, ნამუეფით თქვა გჷნოჭარით ინტერნეტშე</string>
   <string name="tutorial_3_subtext_3">დორხველი აპლიკაციაშ სკრინშოტი</string>
   <string name="tutorial_4_text">ეხარგუაშ მინუში:</string>
-  <string name="tutorial_4_subtext">- დუდჯოხო: სიდნეიშ ოპერაშ თეატრი\n- ეჭარუა: სიდნეიშ ოპერაშ თეატრიშ მიოჯინი ლუბაშე\n- კატეგორიეფი: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">დუდჯოხო: სიდნეიშ ოპერაშ ჸუდე</string>
   <string name="tutorial_4_subtext_2">ეჭარუა: სიდნეიშ ოპერაშ ჸუდეშ მიოჯინი ჸუჯიშე</string>
   <string name="tutorial_4_subtext_3">კატეგორიეფი: Sydney Opera House from the west, Sydney Opera House remote views</string>
@@ -168,11 +165,8 @@
   <string name="yes">ქო</string>
   <string name="no">ვარი</string>
   <string name="media_detail_title">დუდჯოხო</string>
-  <string name="media_detail_media_title">მედიაფაილიშ დუდჯოხო</string>
   <string name="media_detail_description">ეჭარუა</string>
-  <string name="media_detail_description_explanation">თაქ რე მედიაფაილიშ ეჭარუა. თინა შილებე ძალამ გჷრძექ იჸუასჷნ დო მუსხირენ აბზაცი იკორინუასჷნ. მარა, იმენდი მიღჷნა, ჯგირო მიოჯინინედას იჸი.</string>
   <string name="media_detail_author">ავტორი</string>
-  <string name="media_detail_author_explanation">თაქ იჸი მეწურაფილი გიშნაგორა სურათეფიშ ავტორეფიშ ჯოხოეფი</string>
   <string name="media_detail_uploaded_date">ეხარგუაშ თარიღი</string>
   <string name="media_detail_license">ლიცენზია</string>
   <string name="media_detail_coordinates">კოორდინატეფი</string>

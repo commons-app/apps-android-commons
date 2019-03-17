@@ -1,21 +1,16 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.achievements.FeedbackResponse;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
-import io.reactivex.Single;
 
 public interface MediaWikiApi {
     String getUserAgent();
@@ -81,7 +76,7 @@ public interface MediaWikiApi {
     Observable<String> allCategories(String filter, int searchCatsLimit);
 
     @NonNull
-    List<Notification> getNotifications() throws IOException;
+    List<Notification> getNotifications(boolean archived) throws IOException;
 
     @NonNull
     boolean markNotificationAsRead(Notification notification) throws IOException;
@@ -96,7 +91,6 @@ public interface MediaWikiApi {
 
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
-
 
     boolean isUserBlockedFromCommons();
 

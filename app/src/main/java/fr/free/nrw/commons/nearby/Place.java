@@ -1,10 +1,9 @@
 package fr.free.nrw.commons.nearby;
 
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
@@ -20,22 +19,17 @@ public class Place implements Parcelable {
     public final String name;
     private final Label label;
     private final String longDescription;
-    private final Uri secondaryImageUrl;
     public final LatLng location;
     private final String category;
 
-    public Bitmap image;
-    private Bitmap secondaryImage;
     public String distance;
     public final Sitelinks siteLinks;
 
 
-    public Place(String name, Label label, String longDescription,
-                 Uri secondaryImageUrl, LatLng location, String category, Sitelinks siteLinks) {
+    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks) {
         this.name = name;
         this.label = label;
         this.longDescription = longDescription;
-        this.secondaryImageUrl = secondaryImageUrl;
         this.location = location;
         this.category = category;
         this.siteLinks = siteLinks;
@@ -45,7 +39,6 @@ public class Place implements Parcelable {
         this.name = in.readString();
         this.label = (Label) in.readSerializable();
         this.longDescription = in.readString();
-        this.secondaryImageUrl = in.readParcelable(Uri.class.getClassLoader());
         this.location = in.readParcelable(LatLng.class.getClassLoader());
         this.category = in.readString();
         this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
@@ -61,7 +54,6 @@ public class Place implements Parcelable {
                 item.getLabel().getValue(),
                 Label.fromText(classEntityId), // list
                 item.getClassLabel().getValue(), // details
-                Uri.parse(item.getIcon().getValue()),
                 PlaceUtils.latLngFromPointString(item.getLocation().getValue()),
                 item.getCommonsCategory().getValue(),
                 new Sitelinks.Builder()
@@ -108,12 +100,6 @@ public class Place implements Parcelable {
     public void setDistance(String distance) {
         this.distance = distance;
     }
-
-    /**
-     * Gets the secondary image url for bookmarks
-     * @return secondary image url
-     */
-    public Uri getSecondaryImageUrl() { return this.secondaryImageUrl; }
 
     /**
      * Extracts the entity id from the wikidata link
@@ -181,11 +167,8 @@ public class Place implements Parcelable {
                 "name='" + name + '\'' +
                 ", label='" + label + '\'' +
                 ", longDescription='" + longDescription + '\'' +
-                ", secondaryImageUrl='" + secondaryImageUrl + '\'' +
                 ", location='" + location + '\'' +
                 ", category='" + category + '\'' +
-                ", image='" + image + '\'' +
-                ", secondaryImage=" + secondaryImage +
                 ", distance='" + distance + '\'' +
                 ", siteLinks='" + siteLinks.toString() + '\'' +
                 '}';
@@ -201,7 +184,6 @@ public class Place implements Parcelable {
         dest.writeString(name);
         dest.writeSerializable(label);
         dest.writeString(longDescription);
-        dest.writeParcelable(secondaryImageUrl, 0);
         dest.writeParcelable(location, 0);
         dest.writeString(category);
         dest.writeParcelable(siteLinks, 0);

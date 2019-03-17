@@ -6,7 +6,6 @@ import android.content.Context;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,8 +14,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.UploadableFile;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
@@ -53,19 +51,16 @@ public class UploadPresenter {
     private final UploadModel uploadModel;
     private final UploadController uploadController;
     private final Context context;
-    private final BasicKvStore defaultKvStore;
     private final JsonKvStore directKvStore;
 
     @Inject
     UploadPresenter(UploadModel uploadModel,
                     UploadController uploadController,
                     Context context,
-                    @Named("default_preferences") BasicKvStore defaultKvStore,
-                    @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
+                    @Named("default_preferences") JsonKvStore directKvStore) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
         this.context = context;
-        this.defaultKvStore = defaultKvStore;
         this.directKvStore = directKvStore;
     }
 
@@ -130,6 +125,7 @@ public class UploadPresenter {
         if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
             Timber.d("Set title and desc; Show next uploaded item");
             setTitleAndDescription(title, descriptions);
+            directKvStore.putBoolean("Picture_Has_Correct_Location", true);
             nextUploadedItem();
         } else {
             handleBadImage(imageResult);
@@ -267,14 +263,6 @@ public class UploadPresenter {
     }
 
     /**
-     * Toggles the right card's state between open and closed.
-     */
-    void toggleRightCardState() {
-        uploadModel.setRightCardState(!uploadModel.isRightCardState());
-        view.setRightCardState(uploadModel.isRightCardState());
-    }
-
-    /**
      * Sets all the cards' states to closed.
      */
     void closeAllCards() {
@@ -284,7 +272,6 @@ public class UploadPresenter {
         }
         if (uploadModel.isRightCardState()) {
             uploadModel.setRightCardState(false);
-            view.setRightCardState(false);
         }
         if (uploadModel.isBottomCardState()) {
             uploadModel.setBottomCardState(false);
@@ -331,7 +318,7 @@ public class UploadPresenter {
      * Sets the list of licences and the default license.
      */
     private void updateLicenses() {
-        String selectedLicense = defaultKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        String selectedLicense = directKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
         view.updateLicenseSummary(selectedLicense, uploadModel.getCount());
     }

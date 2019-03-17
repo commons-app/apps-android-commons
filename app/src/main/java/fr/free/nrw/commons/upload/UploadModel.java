@@ -3,8 +3,6 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,9 +17,9 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.UploadableFile;
 import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -38,14 +36,14 @@ import timber.log.Timber;
 public class UploadModel {
 
     private static UploadItem DUMMY = new UploadItem(
-            Uri.EMPTY,
+            Uri.EMPTY, Uri.EMPTY,
             "",
             "",
             GPSExtractor.DUMMY,
             null,
-            -1L) {
+            -1L, "") {
     };
-    private final BasicKvStore basicKvStore;
+    private final JsonKvStore store;
     private final List<String> licenses;
     private String license;
     private final Map<String, String> licensesByName;
@@ -54,7 +52,7 @@ public class UploadModel {
     private boolean bottomCardState = true;
     private boolean rightCardState = true;
     private int currentStepIndex = 0;
-    private Context context;
+    public static Context context;
     private Disposable badImageSubscription;
 
     private SessionManager sessionManager;
@@ -63,15 +61,15 @@ public class UploadModel {
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
-                @Named("default_preferences") BasicKvStore basicKvStore,
+                @Named("default_preferences") JsonKvStore store,
                 @Named("licenses_by_name") Map<String, String> licensesByName,
                 Context context,
                 SessionManager sessionManager,
                 FileProcessor fileProcessor,
                 ImageProcessingService imageProcessingService) {
         this.licenses = licenses;
-        this.basicKvStore = basicKvStore;
-        this.license = basicKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        this.store = store;
+        this.license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         this.licensesByName = licensesByName;
         this.context = context;
         this.sessionManager = sessionManager;
@@ -93,15 +91,21 @@ public class UploadModel {
         return imageProcessingService.validateImage(uploadItem, checkTitle);
     }
 
-    @NonNull
     private UploadItem getUploadItem(UploadableFile uploadableFile,
                                      Place place,
                                      String source,
                                      SimilarImageInterface similarImageInterface) {
         fileProcessor.initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()), context.getContentResolver());
-        long fileCreatedDate = uploadableFile.getFileCreatedDate(context);
+        UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile.getFileCreatedDate(context);
+        long fileCreatedDate = -1;
+        String createdTimestampSource = "";
+        if (dateTimeWithSource != null) {
+            fileCreatedDate = dateTimeWithSource.getEpochDate();
+            createdTimestampSource = dateTimeWithSource.getSource();
+        }
+        Timber.d("File created date is %d", fileCreatedDate);
         GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
-        return new UploadItem(Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate);
+        return new UploadItem(uploadableFile.getContentUri(), Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate, createdTimestampSource);
     }
 
     void onItemsProcessed(Place place, List<UploadItem> uploadItems) {
@@ -116,7 +120,7 @@ public class UploadModel {
 
         if (place != null) {
             uploadItem.title.setTitleText(place.getName());
-            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
+            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription().equals("?")?"":place.getLongDescription());
             //TODO figure out if default descriptions in other languages exist
             uploadItem.descriptions.get(0).setLanguageCode("en");
         }
@@ -265,7 +269,7 @@ public class UploadModel {
 
     void setSelectedLicense(String licenseName) {
         this.license = licensesByName.get(licenseName);
-        basicKvStore.putString(Prefs.DEFAULT_LICENSE, license);
+        store.putString(Prefs.DEFAULT_LICENSE, license);
     }
 
     Observable<Contribution> buildContributions(List<String> categoryStringList) {
@@ -283,8 +287,13 @@ public class UploadModel {
             contribution.setTag("mimeType", item.mimeType);
             contribution.setSource(item.source);
             contribution.setContentProviderUri(item.mediaUri);
+
+            Timber.d("Created timestamp while building contribution is %s, %s",
+                    item.getCreatedTimestamp(),
+                    new Date(item.getCreatedTimestamp()));
             if (item.createdTimestamp != -1L) {
-                contribution.setDateCreated(new Date(item.createdTimestamp));
+                contribution.setDateCreated(new Date(item.getCreatedTimestamp()));
+                contribution.setDateCreatedSource(item.getCreatedTimestampSource());
                 //Set the date only if you have it, else the upload service is gonna try it the other way
             }
             return contribution;
@@ -315,6 +324,7 @@ public class UploadModel {
 
     @SuppressWarnings("WeakerAccess")
     static class UploadItem {
+        private final Uri originalContentUri;
         private final Uri mediaUri;
         private final String mimeType;
         private final String source;
@@ -328,10 +338,17 @@ public class UploadModel {
         private boolean visited;
         private boolean error;
         private long createdTimestamp;
+        private String createdTimestampSource;
         private BehaviorSubject<Integer> imageQuality;
 
         @SuppressLint("CheckResult")
-        UploadItem(Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords, @Nullable Place place, long createdTimestamp) {
+        UploadItem(Uri originalContentUri,
+                   Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
+                   Place place,
+                   long createdTimestamp,
+                   String createdTimestampSource) {
+            this.originalContentUri = originalContentUri;
+            this.createdTimestampSource = createdTimestampSource;
             title = new Title();
             descriptions = new ArrayList<>();
             descriptions.add(new Description());
@@ -342,6 +359,10 @@ public class UploadModel {
             this.gpsCoords = gpsCoords;
             this.createdTimestamp = createdTimestamp;
             imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
+        }
+
+        public String getCreatedTimestampSource() {
+            return createdTimestampSource;
         }
 
         public String getMimeType() {
@@ -406,6 +427,14 @@ public class UploadModel {
 
         public Place getPlace() {
             return place;
+        }
+
+        public Uri getContentUri() {
+            return originalContentUri;
+        }
+
+        public Context getContext(){
+            return UploadModel.context;
         }
     }
 

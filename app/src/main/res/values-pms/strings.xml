@@ -137,17 +137,14 @@
   <string name="tutorial_1_text">Wikimedia Comun a òspita la pipart ëd le plance ch\'a son dovrà an Wikipedia.</string>
   <string name="tutorial_1_subtext">Soe plance a giuto a eduché la gent daspërtut ant ël mond!</string>
   <string name="tutorial_2_text">Për piasì, ch\'a caria dle fòto ch\'a son ëstàite scatà o creà tute da chiel:</string>
-  <string name="tutorial_2_subtext">Oget naturaj (fior, animaj, montagne) \n• Oget ùtij (biciclëtte, stassion feroviarie) \n• Përson-e arnomà (sò sìndich, j\'atleta olìmpich che chiel a l\'ha rancontrà)</string>
   <string name="tutorial_2_subtext_1">Oget naturaj (fior, animaj, montagne)</string>
   <string name="tutorial_2_subtext_2">Oget ùtij (biciclëtte, stassion feroviarie)</string>
   <string name="tutorial_2_subtext_3">Përson-e arnomà (sò sìndich, j\'atleta olìmpich che chiel a l\'ha rancontrà)</string>
   <string name="tutorial_3_text">Për piasì, ch\'a caria NEN:</string>
-  <string name="tutorial_3_subtext">- dj\'àuto-scat o dle fòto dij sò amis\n- dle fòto ch\'a l\'ha dëscarià d\'an sl\'Aragnà\n- Plance d\'aplicassion sota drit d\'autor</string>
   <string name="tutorial_3_subtext_1">Fotografìe ëd chiel-midem o dij sò amis</string>
   <string name="tutorial_3_subtext_2">Plance ch\'a l\'ha dëscarià da \'n sl\'aragnà</string>
   <string name="tutorial_3_subtext_3">Schërmà d\'aplicassion sota drit d\'autor</string>
   <string name="tutorial_4_text">Esempi ëd cariament:</string>
-  <string name="tutorial_4_subtext">- Tìtol: Ël teatro dl\'òpera ëd Sidney\n- Descrission: Ël teatro dl\'òpera ëd Sidney s-ciairà dëdlà dl\'ansen\n- Categorìe: Teatro dl\'òpera ëd Sidney da ponent, viste a distansa dël Teatro dl\'òpera ëd Sydney</string>
   <string name="tutorial_4_subtext_1">Tìtol: Teatro dl\'òpera ëd Sidney</string>
   <string name="tutorial_4_subtext_2">Descrission: Teatro dl\'Òpera ëd Sidney s-ciairà da l\'àutra part ëd l\'ansen</string>
   <string name="tutorial_4_subtext_3">Categorìe: Teatro dl\'òpera ëd Sidney da ponent, Viste da leugn dël Teatro dl\'òpera ëd Sidney</string>
@@ -176,11 +173,8 @@
   <string name="yes">Bò</string>
   <string name="no">Nò</string>
   <string name="media_detail_title">Tìtol</string>
-  <string name="media_detail_media_title">Tìtol dël mojen</string>
   <string name="media_detail_description">Descrission</string>
-  <string name="media_detail_description_explanation">La descrission dël mojen a va ambelessì. Sòn a podrìa esse potensialman longh, e a dovrà esse spantià su vàire linie. I speroma comsëssìa ch\'a ven-a grassios.</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_author_explanation">Lë stranòm ëd l\'autor ëd na plancia an evidensa a va ambelessì.</string>
   <string name="media_detail_uploaded_date">Dàita ëd cariament</string>
   <string name="media_detail_license">Licensa</string>
   <string name="media_detail_coordinates">Coordinà</string>
@@ -190,7 +184,11 @@
   <string name="_2fa_code">Còdes 2FA</string>
   <string name="number_of_uploads">Mè lìmit ëd cariament recent</string>
   <string name="maximum_limit">Lìmit màssim</string>
+  <string name="invalid_zero">Zero a l\'é nen un valor bon</string>
+  <string name="invalid_input">Anseriment nen bon</string>
   <string name="maximum_limit_alert">Impossìbil ësmon-e pi che 500</string>
+  <string name="enter_valid">Ch\'a buta un nùmer bon</string>
+  <string name="cannot_be_zero">Ël lìmit ëd cariament a peul pa esse 0</string>
   <string name="set_limit">Fissé la limitassion ëd cariament recent</string>
   <string name="login_failed_2fa_not_supported">L\'autentificassion a doi fator për ël moment a l\'é nen sostnùa.</string>
   <string name="logout_verification">Veul-lo për da bon seurte dal sistema?</string>
@@ -241,6 +239,7 @@
   <string name="upload_problem_image_blurry">La plancia a l\'é tërbola.</string>
   <string name="upload_problem_image_duplicate">La plancia a l\'é già su Commons.</string>
   <string name="upload_problem_different_geolocation">Sa fòto a l\'é stàita fàita ant un pòst diferent.</string>
+  <string name="upload_problem_fbmd">Për piasì, ch\'a caria mach dle fòto che a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha trovà an sij cont Facebook d\'àutra gent.</string>
   <string name="upload_problem_do_you_continue">Veul-lo istess carié sta plancia?</string>
   <string name="give_permission">Dé ël përmess</string>
   <string name="use_external_storage">Dovré n\'anmagasinament estern</string>
@@ -344,6 +343,7 @@
   <string name="statistics">STATÌSTICHE</string>
   <string name="statistics_thanks">Aringrassiament arseivù</string>
   <string name="statistics_featured">Plance an evidensa</string>
+  <string name="statistics_wikidata_edits">Plance për \"Pòst davzin\"</string>
   <string name="level">LIVEL</string>
   <string name="images_uploaded">Plance carià</string>
   <string name="image_reverts">Plance nen anulà</string>
@@ -363,6 +363,7 @@
   <string name="contributions_fragment">Contribussion</string>
   <string name="nearby_fragment">Davzin</string>
   <string name="notifications">Notìfiche</string>
+  <string name="archived_notifications">Notìfiche (archivià)</string>
   <string name="display_nearby_notification">Smon-e la notìfica ëd prossimità</string>
   <string name="display_nearby_notification_summary">Sgnaché sì për vëdde ël pòst pi davzin ch\'a l\'ha damanca ëd plance</string>
   <string name="no_close_nearby">Gnun pòst trovà davzin a chiel</string>
@@ -395,10 +396,8 @@
   <string name="deletion_reason_bad_for_my_privacy">I l\'hai pensa ch\'a l\'era nen bon për mia arservatëssa</string>
   <string name="deletion_reason_no_longer_want_public">I l\'hai cangià d\'idèja, i veui pi nen ch\'a sia visìbil ëd fasson pùblica</string>
   <string name="deletion_reason_not_interesting">Am dëspias, ma costa plancia a l\'é nen anteressanta për n\'enciclopedìa</string>
-  <string name="uploaded_by_myself">Carià da mi ai</string>
-  <string name="used_by">dovrà an</string>
-  <string name="articles">artìcoj</string>
-  <string name="no_uploads">Bin-ëvnù su Commons!\n\nCh\'a caria sò prim archivi multimedial an sgnacand an sla plancia dla màchina fòto o an sla galarìa sì-dzora.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Carià da mi ai</string>
+  <string name="no_uploads" fuzzy="true">Bin-ëvnù su Commons!\n\nCh\'a caria sò prim archivi multimedial an sgnacand an sla plancia dla màchina fòto o an sla galarìa sì-dzora.</string>
   <string name="desc_language_Worldwide">Mondial</string>
   <string name="desc_language_America">Mérica</string>
   <string name="desc_language_Europe">Euròpa</string>
@@ -434,7 +433,10 @@
   <string name="no_image_reverted">Gnun-e plance anvertìe</string>
   <string name="no_image_uploaded">Gnun-e plance carià</string>
   <string name="no_notification">A l\'ha gnun-e notìfiche nen lesùe</string>
+  <string name="no_archived_notification">A l\'ha gnun-e notìfiche archivià</string>
   <string name="share_logs_using">Partagé j\'argistr dovrand</string>
+  <string name="menu_option_archived">Vëdde l\'archivi</string>
+  <string name="menu_option_unread">Vëdde lòn ch\'a l\'é ancor nen ëstàit lesù</string>
   <string name="error_occurred_in_picking_images">A-i é staje n\'eror an selessionand le plance</string>
   <string name="image_chooser_title">Serne le plance da carié</string>
   <string name="please_wait">Ch\'a l\'abia passiensa...</string>

@@ -1,14 +1,14 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import fr.free.nrw.commons.R;
@@ -25,7 +25,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
     private Context context;
 
     private Button permissionRequestButton;
-    private RelativeLayout contentLayout;
+    private LinearLayout contentLayout;
     private TextView notificationTitle;
     private TextView notificationDistance;
     private ImageView notificationIcon;

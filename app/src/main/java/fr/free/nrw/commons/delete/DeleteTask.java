@@ -3,8 +3,8 @@ package fr.free.nrw.commons.delete;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationCompat.Builder;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -22,15 +22,15 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
-import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
-import static android.support.v4.app.NotificationCompat.PRIORITY_HIGH;
+import static androidx.core.app.NotificationCompat.DEFAULT_ALL;
+import static androidx.core.app.NotificationCompat.PRIORITY_HIGH;
 
 public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
 
-    public static final int NOTIFICATION_DELETE = 1;
+    private static final int NOTIFICATION_DELETE = 1;
 
     private NotificationManager notificationManager;
     private Builder notificationBuilder;
@@ -55,7 +55,8 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationBuilder = new NotificationCompat.Builder(
                 context,
-                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
+                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)
+                .setOnlyAlertOnce(true);
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER,0,0);
         toast = Toast.makeText(context,"Trying to nominate "+media.getDisplayTitle()+ " for deletion",Toast.LENGTH_SHORT);
@@ -113,11 +114,11 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
             publishProgress(4);
 
             mwApi.appendEdit(editToken,userPageString+"\n",
-                    "User_Talk:"+sessionManager.getCurrentAccount().name,summary);
+                    "User_Talk:"+ sessionManager.getCurrentAccount().name,summary);
             publishProgress(5);
         }
         catch (Exception e) {
-            Timber.d(e.getMessage());
+            Timber.e(e);
             return false;
         }
         return true;
@@ -160,7 +161,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Override
     protected void onPostExecute(Boolean result) {
-        String message = "";
+        String message;
         String title = "Nominating for Deletion";
 
         if (result){

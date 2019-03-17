@@ -5,9 +5,8 @@ import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v4.content.FileProvider;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import android.webkit.MimeTypeMap;
 
 import java.io.File;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+
+import timber.log.Timber;
 
 
 class PickedFiles implements Constants {
@@ -55,13 +56,14 @@ class PickedFiles implements Constants {
         writeToFile(in, dst);
     }
 
-    static void copyFilesInSeparateThread(final Context context, final List<File> filesToCopy) {
+    static void copyFilesInSeparateThread(final Context context, final List<UploadableFile> filesToCopy) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 List<File> copiedFiles = new ArrayList<>();
                 int i = 1;
-                for (File fileToCopy : filesToCopy) {
+                for (UploadableFile uploadableFile : filesToCopy) {
+                    File fileToCopy = uploadableFile.getFile();
                     File dstDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getFolderName(context));
                     if (!dstDir.exists()) dstDir.mkdirs();
 
@@ -84,8 +86,8 @@ class PickedFiles implements Constants {
         }).run();
     }
 
-    static List<File> singleFileList(File file) {
-        List<File> list = new ArrayList<>();
+    static List<UploadableFile> singleFileList(UploadableFile file) {
+        List<UploadableFile> list = new ArrayList<>();
         list.add(file);
         return list;
     }
@@ -100,19 +102,19 @@ class PickedFiles implements Constants {
                 paths, null,
                 new MediaScannerConnection.OnScanCompletedListener() {
                     public void onScanCompleted(String path, Uri uri) {
-                        Log.d(getClass().getSimpleName(), "Scanned " + path + ":");
-                        Log.d(getClass().getSimpleName(), "-> uri=" + uri);
+                        Timber.d("Scanned " + path + ":");
+                        Timber.d("-> uri=%s", uri);
                     }
                 });
     }
 
-    static File pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException {
+    static UploadableFile pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException {
         InputStream pictureInputStream = context.getContentResolver().openInputStream(photoUri);
         File directory = tempImageDirectory(context);
         File photoFile = new File(directory, UUID.randomUUID().toString() + "." + getMimeType(context, photoUri));
         photoFile.createNewFile();
         writeToFile(pictureInputStream, photoFile);
-        return photoFile;
+        return new UploadableFile(photoUri, photoFile);
     }
 
     static File getCameraPicturesLocation(@NonNull Context context) throws IOException {

@@ -3,7 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Handles the links to Wikipedia, Commons, and Wikidata that are displayed for a Place

@@ -4,10 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +16,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
 import fr.free.nrw.commons.filepicker.FilePicker;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadActivity;
@@ -36,14 +34,11 @@ public class ContributionController {
 
     public static final String ACTION_INTERNAL_UPLOADS = "internalImageUploads";
 
-    private final BasicKvStore defaultKvStore;
-    private final JsonKvStore directKvStore;
+    private final JsonKvStore defaultKvStore;
 
     @Inject
-    public ContributionController(@Named("default_preferences") BasicKvStore defaultKvStore,
-                                  @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
+    public ContributionController(@Named("default_preferences") JsonKvStore defaultKvStore) {
         this.defaultKvStore = defaultKvStore;
-        this.directKvStore = directKvStore;
     }
 
     /**
@@ -67,15 +62,11 @@ public class ContributionController {
      * Check for permissions and initiate gallery picker
      */
     public void initiateGalleryPick(Activity activity, boolean allowMultipleUploads) {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            initiateGalleryUpload(activity, allowMultipleUploads);
-        } else {
-            PermissionUtils.checkPermissionsAndPerformAction(activity,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    () -> initiateGalleryUpload(activity, allowMultipleUploads),
-                    R.string.storage_permission_title,
-                    R.string.read_storage_permission_rationale);
-        }
+        PermissionUtils.checkPermissionsAndPerformAction(activity,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                () -> initiateGalleryUpload(activity, allowMultipleUploads),
+                R.string.storage_permission_title,
+                R.string.read_storage_permission_rationale);
     }
 
     /**
@@ -116,7 +107,7 @@ public class ContributionController {
             }
 
             @Override
-            public void onImagesPicked(@NonNull List<File> imagesFiles, FilePicker.ImageSource source, int type) {
+            public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles, FilePicker.ImageSource source, int type) {
                 Intent intent = handleImagesPicked(activity, imagesFiles, getSourceFromImageSource(source));
                 activity.startActivity(intent);
             }
@@ -124,8 +115,8 @@ public class ContributionController {
     }
 
     public List<UploadableFile> handleExternalImagesPicked(Activity activity,
-                                                            Intent data) {
-        return getUploadableFiles(FilePicker.handleExternalImagesPicked(data, activity));
+                                                           Intent data) {
+        return FilePicker.handleExternalImagesPicked(data, activity);
     }
 
     /**
@@ -133,28 +124,18 @@ public class ContributionController {
      * Attaches place object for nearby uploads
      */
     private Intent handleImagesPicked(Context context,
-                                      List<File> imagesFiles,
+                                      List<UploadableFile> imagesFiles,
                                       String source) {
-        ArrayList<UploadableFile> uploadableFiles = getUploadableFiles(imagesFiles);
         Intent shareIntent = new Intent(context, UploadActivity.class);
         shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
         shareIntent.putExtra(EXTRA_SOURCE, source);
-        shareIntent.putParcelableArrayListExtra(EXTRA_FILES, uploadableFiles);
-        Place place = directKvStore.getJson(PLACE_OBJECT, Place.class);
+        shareIntent.putParcelableArrayListExtra(EXTRA_FILES, new ArrayList<>(imagesFiles));
+        Place place = defaultKvStore.getJson(PLACE_OBJECT, Place.class);
         if (place != null) {
             shareIntent.putExtra(PLACE_OBJECT, place);
         }
 
         return shareIntent;
-    }
-
-    @NonNull
-    private ArrayList<UploadableFile> getUploadableFiles(List<File> imagesFiles) {
-        ArrayList<UploadableFile> uploadableFiles = new ArrayList<>();
-        for (File file : imagesFiles) {
-            uploadableFiles.add(new UploadableFile(file));
-        }
-        return uploadableFiles;
     }
 
     /**

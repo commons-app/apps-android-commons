@@ -2,11 +2,12 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.transition.TransitionManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.PopupMenu;
+import androidx.transition.TransitionManager;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +31,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import timber.log.Timber;
 
@@ -53,9 +52,9 @@ public class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
     @BindView(R.id.cameraButtonText) TextView cameraButtonText;
     @BindView(R.id.galleryButtonText) TextView galleryButtonText;
-    @BindView(R.id.bookmarkButton) LinearLayout bookmarkButton;
+    @BindView(R.id.bookmarkRowButton) LinearLayout bookmarkButton;
     @BindView(R.id.bookmarkButtonText) TextView bookmarkButtonText;
-    @BindView(R.id.bookmarkButtonImage) ImageView bookmarkButtonImage;
+    @BindView(R.id.bookmarkRowButtonImage) ImageView bookmarkButtonImage;
 
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
     @BindView(R.id.iconOverflowText) TextView iconOverflowText;
@@ -69,10 +68,9 @@ public class PlaceRenderer extends Renderer<Place> {
     private OnBookmarkClick onBookmarkClick;
 
     @Inject BookmarkLocationsDao bookmarkLocationDao;
-    @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
-    @Inject @Named("defaultKvStore") BasicKvStore prefs;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore applicationKvStore;
 
     public PlaceRenderer(){
         openedItems = new ArrayList<>();
@@ -112,6 +110,11 @@ public class PlaceRenderer extends Renderer<Place> {
                 closeLayout(buttonLayout);
             } else {
                 openLayout(buttonLayout);
+                RecyclerView recyclerView = (RecyclerView) view.getParent();
+                int lastPosition = recyclerView.getAdapter().getItemCount() - 1;
+                if (recyclerView.getChildLayoutPosition(view) == lastPosition) {
+                    ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(lastPosition, buttonLayout.getHeight());
+                }
             }
 
         };
@@ -133,7 +136,7 @@ public class PlaceRenderer extends Renderer<Place> {
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.putBoolean("login_skipped", false);
+                            applicationKvStore.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
@@ -153,7 +156,7 @@ public class PlaceRenderer extends Renderer<Place> {
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.putBoolean("login_skipped", false);
+                            applicationKvStore.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
@@ -172,7 +175,7 @@ public class PlaceRenderer extends Renderer<Place> {
                         .setPositiveButton(R.string.login, (dialog, which) -> {
                             startActivityWithFlags( getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            prefs.putBoolean("login_skipped", false);
+                            applicationKvStore.putBoolean("login_skipped", false);
                             fragment.getActivity().finish();
                         })
                         .show();
@@ -192,7 +195,7 @@ public class PlaceRenderer extends Renderer<Place> {
 
     private void storeSharedPrefs() {
         Timber.d("Store place object %s", place.toString());
-        directKvStore.putJson(PLACE_OBJECT, place);
+        applicationKvStore.putJson(PLACE_OBJECT, place);
     }
 
     private void closeLayout(LinearLayout buttonLayout){
@@ -218,7 +221,7 @@ public class PlaceRenderer extends Renderer<Place> {
         distance.setText(place.distance);
 
 
-        icon.setImageURI(place.getSecondaryImageUrl());
+        icon.setImageResource(place.getLabel().getIcon());
 
         directionsButton.setOnClickListener(view -> {
             //Open map app at given position

@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.mwapi;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
@@ -26,6 +26,7 @@ import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.HttpUrl;
@@ -63,7 +64,7 @@ public class OkHttpJsonApiClient {
     public Single<Integer> getUploadCount(String userName) {
         HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
         urlBuilder
-                .addPathSegments("urbanecmbot/commonsmisc/uploadsbyuser.py")
+                .addPathSegments("/uploadsbyuser.py")
                 .addQueryParameter("user", userName);
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
@@ -72,7 +73,33 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.isSuccessful()) {
+
                 return Integer.parseInt(response.body().string().trim());
+            }
+            return 0;
+        });
+    }
+
+    @NonNull
+    public Single<Integer> getWikidataEdits(String userName) {
+        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
+        urlBuilder
+                .addPathSegments("/wikidataedits.py")
+                .addQueryParameter("user", userName);
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+
+        return Single.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null &&
+                    response.isSuccessful() && response.body() != null) {
+                String json = response.body().string();
+                if (json == null) {
+                    return 0;
+                }
+                GetWikidataEditCountResponse countResponse = gson.fromJson(json, GetWikidataEditCountResponse.class);
+                return countResponse.getWikidataEditCount();
             }
             return 0;
         });
@@ -87,7 +114,7 @@ public class OkHttpJsonApiClient {
      */
     public Single<FeedbackResponse> getAchievements(String userName) {
         final String fetchAchievementUrlTemplate =
-                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
+                wikiMediaToolforgeUrl + "/feedback.py";
         return Single.fromCallable(() -> {
             String url = String.format(
                     Locale.ENGLISH,

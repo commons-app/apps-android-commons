@@ -4,6 +4,10 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.net.Uri;
+import androidx.annotation.Nullable;
 import android.widget.RemoteViews;
 
 import javax.inject.Inject;

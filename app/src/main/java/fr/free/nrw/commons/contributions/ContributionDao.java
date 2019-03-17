@@ -4,19 +4,18 @@ import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.RemoteException;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
-
+import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.StringUtils;
 import java.util.Date;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
-
-import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.StringUtils;
+import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.COLUMN_WIKI_DATA_ENTITY_ID;
@@ -262,16 +261,20 @@ public class ContributionDao {
             if (from == to) {
                 return;
             }
+
+            //Considering the crashes we have been facing recently, lets blindly add this column to any table which has ever existed
+            runQuery(db,ADD_WIKI_DATA_ENTITY_ID_FIELD);
+
             if (from == 1) {
-                db.execSQL(ADD_DESCRIPTION_FIELD);
-                db.execSQL(ADD_CREATOR_FIELD);
+                runQuery(db,ADD_DESCRIPTION_FIELD);
+                runQuery(db,ADD_CREATOR_FIELD);
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
             if (from == 2) {
-                db.execSQL(ADD_MULTIPLE_FIELD);
-                db.execSQL(SET_DEFAULT_MULTIPLE);
+                runQuery(db, ADD_MULTIPLE_FIELD);
+                runQuery(db, SET_DEFAULT_MULTIPLE);
                 from++;
                 onUpdate(db, from, to);
                 return;
@@ -290,23 +293,34 @@ public class ContributionDao {
             }
             if (from == 5) {
                 // Added width and height fields
-                db.execSQL(ADD_WIDTH_FIELD);
-                db.execSQL(SET_DEFAULT_WIDTH);
-                db.execSQL(ADD_HEIGHT_FIELD);
-                db.execSQL(SET_DEFAULT_HEIGHT);
-                db.execSQL(ADD_LICENSE_FIELD);
-                db.execSQL(SET_DEFAULT_LICENSE);
+                runQuery(db, ADD_WIDTH_FIELD);
+                runQuery(db, SET_DEFAULT_WIDTH);
+                runQuery(db, ADD_HEIGHT_FIELD);
+                runQuery(db, SET_DEFAULT_HEIGHT);
+                runQuery(db, ADD_LICENSE_FIELD);
+                runQuery(db, SET_DEFAULT_LICENSE);
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if (from == 8) {
+            if (from > 5) {
                 // Added place field
-                db.execSQL(ADD_WIKI_DATA_ENTITY_ID_FIELD);
-                from++;
+                from=to;
                 onUpdate(db, from, to);
                 return;
             }
         }
+
+        /**
+         * perform the db.execSQl with handled exceptions
+         */
+        private static void runQuery(SQLiteDatabase db, String query) {
+            try {
+                db.execSQL(query);
+            } catch (SQLiteException e) {
+                Timber.e(e, "Exception performing query: " + query);
+            }
+        }
+
     }
 }

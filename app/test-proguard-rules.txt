@@ -2,3 +2,5 @@
 -dontoptimize
 -dontshrink
 -ignorewarnings
+
+-dontnote **
