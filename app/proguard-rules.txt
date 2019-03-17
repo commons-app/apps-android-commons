@@ -5,9 +5,10 @@
 -dontwarn net.bytebuddy.**
 -dontwarn org.mockito.**
 
+# --- Apache ---
 -keep class org.apache.http.** { *; }
--dontwarn org.apache.http.**
--keep class android.support.v7.widget.ShareActionProvider { *; }
+-dontwarn org.apache.**
+# --- /Apache ---
 
 # --- Butter Knife ---
 # Finder.castParam() is stripped when not needed and ProGuard notes it
