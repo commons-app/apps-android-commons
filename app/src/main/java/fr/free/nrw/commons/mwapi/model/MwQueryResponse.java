@@ -5,6 +5,8 @@ import androidx.annotation.VisibleForTesting;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.wikipedia.dataclient.mwapi.MwResponse;
+
 import java.util.Map;
 
 public class MwQueryResponse extends MwResponse {
