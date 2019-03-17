@@ -5,9 +5,9 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Map;
+import org.wikipedia.json.PostProcessingTypeAdapter;
 
-import fr.free.nrw.commons.json.PostProcessingTypeAdapter;
+import java.util.Map;
 
 public abstract class MwResponse implements PostProcessingTypeAdapter.PostProcessable {
     @SuppressWarnings("unused")
