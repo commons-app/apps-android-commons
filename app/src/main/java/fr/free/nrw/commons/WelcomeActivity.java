@@ -3,7 +3,7 @@ package fr.free.nrw.commons;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
 import com.viewpagerindicator.CirclePageIndicator;
@@ -14,14 +14,13 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.quiz.QuizActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 
 public class WelcomeActivity extends BaseActivity {
-
-    @Inject @Named("application_preferences") BasicKvStore kvStore;
 
     @BindView(R.id.welcomePager)
     ViewPager pager;
@@ -102,7 +101,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @OnClick(R.id.finishTutorialButton)
     public void finishTutorial() {
-        kvStore.putBoolean("firstrun", false);
+        defaultKvStore.putBoolean("firstrun", false);
         finish();
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="fr.free.nrw.commons">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,7 +31,10 @@
         android:theme="@style/LightAppTheme"
         android:largeHeap="true"
         android:hardwareAccelerated="false"
-        android:supportsRtl="true" >
+        android:supportsRtl="true"
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="commons"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name="org.acra.CrashReportDialog"
             android:theme="@android:style/Theme.Dialog"
@@ -224,6 +228,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/pic_of_day_app_widget_info" />
         </receiver>
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
     </application>
 

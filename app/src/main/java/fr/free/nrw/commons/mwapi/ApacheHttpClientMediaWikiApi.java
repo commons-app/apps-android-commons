@@ -3,8 +3,8 @@ package fr.free.nrw.commons.mwapi;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -43,7 +43,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -65,8 +65,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private CustomMwApi api;
     private CustomMwApi wikidataApi;
     private Context context;
-    private BasicKvStore defaultKvStore;
-    private BasicKvStore categoryKvStore;
+    private JsonKvStore defaultKvStore;
     private Gson gson;
 
     private final String ERROR_CODE_BAD_TOKEN = "badtoken";
@@ -74,8 +73,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     public ApacheHttpClientMediaWikiApi(Context context,
                                         String apiURL,
                                         String wikidatApiURL,
-                                        BasicKvStore defaultKvStore,
-                                        BasicKvStore categoryKvStore,
+                                        JsonKvStore defaultKvStore,
                                         Gson gson) {
         this.context = context;
         BasicHttpParams params = new BasicHttpParams();
@@ -92,7 +90,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         api = new CustomMwApi(apiURL, httpClient);
         wikidataApi = new CustomMwApi(wikidatApiURL, httpClient);
         this.defaultKvStore = defaultKvStore;
-        this.categoryKvStore = categoryKvStore;
         this.gson = gson;
     }
 
@@ -566,6 +563,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }else {
                 notfilter = "!read";
             }
+            String language=Locale.getDefault().getLanguage();
+            if(StringUtils.isNullOrWhiteSpace(language)){
+                //if no language is set we use the default user language defined on wikipedia
+                language="user";
+            }
             notificationNode = api.action("query")
                     .param("notprop", "list")
                     .param("format", "xml")
@@ -573,6 +575,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("notformat", "model")
                     .param("notwikis", "wikidatawiki|commonswiki|enwiki")
                     .param("notfilter", notfilter)
+                    .param("uselang", language)
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
@@ -790,7 +793,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * @param queryContinue
      */
     private void setQueryContinueValues(String keyword, QueryContinue queryContinue) {
-        categoryKvStore.putString(keyword, gson.toJson(queryContinue));
+        defaultKvStore.putString(keyword, gson.toJson(queryContinue));
     }
 
     /**
@@ -800,7 +803,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      */
     @Nullable
     private QueryContinue getQueryContinueValues(String keyword) {
-        String queryContinueString = categoryKvStore.getString(keyword, null);
+        String queryContinueString = defaultKvStore.getString(keyword, null);
         return gson.fromJson(queryContinueString, QueryContinue.class);
     }
 

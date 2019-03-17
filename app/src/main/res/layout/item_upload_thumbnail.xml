@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <android.support.v4.widget.Space
+        <androidx.legacy.widget.Space
             android:id="@+id/left_space"
             android:layout_width="8dp"
             android:layout_height="90dp" />
@@ -20,7 +20,7 @@
             android:layout_height="90dp"
             fresco:actualImageScaleType="fitCenter" />
 
-        <android.support.v4.widget.Space
+        <androidx.legacy.widget.Space
             android:id="@+id/right_space"
             android:layout_width="8dp"
             android:layout_height="90dp" />

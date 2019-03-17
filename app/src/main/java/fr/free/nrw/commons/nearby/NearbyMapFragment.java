@@ -8,13 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -29,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -44,6 +39,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -52,6 +48,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -59,7 +60,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
@@ -128,10 +128,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Bundle bundleForUpdates;// Carry information from activity about changed nearby places and current location
     private boolean searchedAroundCurrentLocation = true;
 
-    @Inject @Named("application_preferences") BasicKvStore applicationKvStore;
-    @Inject @Named("defaultKvStore") BasicKvStore prefs;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject @Named("default_preferences") JsonKvStore applicationKvStore;
     @Inject BookmarkLocationsDao bookmarkLocationDao;
     @Inject ContributionController controller;
     @Inject Gson gson;
@@ -511,10 +508,11 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void setupMapView(Bundle savedInstanceState) {
         Timber.d("setupMapView called");
+        boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
         MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                 .compassMargins(new int[]{12, 0, 0, 24})
-                .styleUrl(Style.OUTDOORS)
+                .styleUrl(isDarkTheme ? Style.DARK : Style.OUTDOORS)
                 .logoEnabled(false)
                 .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
@@ -527,6 +525,14 @@ public class NearbyMapFragment extends DaggerFragment {
             // create map
             mapView.onCreate(savedInstanceState);
             mapView.getMapAsync(mapboxMap -> {
+                LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
+
+                try {
+                    localizationPlugin.matchMapLanguageWithDeviceDefault();
+                } catch (RuntimeException exception) {
+                    Timber.d(exception.toString());
+                }
+
                 NearbyMapFragment.this.mapboxMap = mapboxMap;
                 addMapMovementListeners();
                 updateMapSignificantlyForCurrentLocation();
@@ -836,10 +842,10 @@ public class NearbyMapFragment extends DaggerFragment {
             updateMarker(isBookmarked, this.place);
         });
 
-        wikipediaButton.setEnabled(place.hasWikipediaLink());
+        wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
         wikipediaButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getWikipediaLink()));
 
-        wikidataButton.setEnabled(place.hasWikidataLink());
+        wikidataButton.setVisibility(place.hasWikidataLink()?View.VISIBLE:View.GONE);
         wikidataButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getWikidataLink()));
 
         directionsButton.setOnClickListener(view -> {
@@ -850,7 +856,7 @@ public class NearbyMapFragment extends DaggerFragment {
             }
         });
 
-        commonsButton.setEnabled(this.place.hasCommonsLink());
+        commonsButton.setVisibility(this.place.hasCommonsLink()?View.VISIBLE:View.GONE);
         commonsButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getCommonsLink()));
 
         icon.setImageResource(this.place.getLabel().getIcon());
@@ -890,7 +896,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
     void storeSharedPrefs() {
         Timber.d("Store place object %s", place.toString());
-        directKvStore.putJson(PLACE_OBJECT, place);
+        applicationKvStore.putJson(PLACE_OBJECT, place);
     }
 
     private void openWebView(Uri link) {

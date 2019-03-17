@@ -5,9 +5,8 @@ import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v4.content.FileProvider;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import android.webkit.MimeTypeMap;
 
 import java.io.File;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+
+import timber.log.Timber;
 
 
 class PickedFiles implements Constants {
@@ -101,8 +102,8 @@ class PickedFiles implements Constants {
                 paths, null,
                 new MediaScannerConnection.OnScanCompletedListener() {
                     public void onScanCompleted(String path, Uri uri) {
-                        Log.d(getClass().getSimpleName(), "Scanned " + path + ":");
-                        Log.d(getClass().getSimpleName(), "-> uri=" + uri);
+                        Timber.d("Scanned " + path + ":");
+                        Timber.d("-> uri=%s", uri);
                     }
                 });
     }

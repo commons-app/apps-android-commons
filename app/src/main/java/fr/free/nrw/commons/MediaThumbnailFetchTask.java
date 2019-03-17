@@ -1,7 +1,7 @@
 package fr.free.nrw.commons;
 
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 

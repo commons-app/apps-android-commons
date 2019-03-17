@@ -252,6 +252,7 @@
   <string name="upload_problem_image_blurry">A imagem está embaçada.</string>
   <string name="upload_problem_image_duplicate">A imagem já está no Commons.</string>
   <string name="upload_problem_different_geolocation">Esta foto foi tirada em um local diferente.</string>
+  <string name="upload_problem_fbmd">Por favor, apenas envie fotos que você tirou sozinho. Não faça upload de fotos que você encontrou nas contas do Facebook de outras pessoas.</string>
   <string name="upload_problem_do_you_continue">Você ainda quer enviar esta foto?</string>
   <string name="give_permission">Dar permissão</string>
   <string name="use_external_storage">Usar o armazenamento externo</string>
@@ -408,10 +409,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Eu percebi que é ruim para minha privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Eu mudei de ideia, eu não quero mais que seja publicamente visível</string>
   <string name="deletion_reason_not_interesting">Desculpe, esta foto não é interessante para uma enciclopédia</string>
-  <string name="uploaded_by_myself">Enviado por mim mesmo em</string>
-  <string name="used_by">,usado em</string>
-  <string name="articles">artigos</string>
-  <string name="no_uploads">Bem-vindo ao Commons!\n\nCarregue a sua primeira mídia tocando no ícone da câmera ou galeria acima.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Enviado por mim mesmo em</string>
+  <string name="no_uploads" fuzzy="true">Bem-vindo ao Commons!\n\nCarregue a sua primeira mídia tocando no ícone da câmera ou galeria acima.</string>
   <string name="desc_language_Worldwide">Global</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>

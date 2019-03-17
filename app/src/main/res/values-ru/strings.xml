@@ -416,10 +416,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Я осознал, что это разглашает мою приватность</string>
   <string name="deletion_reason_no_longer_want_public">Я передумал. Больше не хочу чтобы было доступным публично</string>
   <string name="deletion_reason_not_interesting">Извините, это изображение не для энциклопедии</string>
-  <string name="uploaded_by_myself">Загружено мною на</string>
-  <string name="used_by">,использовано в</string>
-  <string name="articles">статьи</string>
-  <string name="no_uploads">Добро пожаловать на Викисклад!\n\nЗагрузите ваш первый файл, нажав на значок камеры или галереи.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Загружено мною на</string>
+  <string name="no_uploads" fuzzy="true">Добро пожаловать на Викисклад!\n\nЗагрузите ваш первый файл, нажав на значок камеры или галереи.</string>
   <string name="desc_language_Worldwide">Всемирные</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>

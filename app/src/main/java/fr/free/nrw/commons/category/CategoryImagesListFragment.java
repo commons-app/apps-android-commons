@@ -2,7 +2,7 @@ package fr.free.nrw.commons.category;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +26,7 @@ import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -57,8 +57,8 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
     @Inject CategoryImageController controller;
     @Inject
-    @Named("category_prefs")
-    BasicKvStore categoryKvStore;
+    @Named("default_preferences")
+    JsonKvStore categoryKvStore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

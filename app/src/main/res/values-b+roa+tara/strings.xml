@@ -95,9 +95,7 @@
   <string name="menu_bookmark">Aggiungi/Live le signalibbre</string>
   <string name="provider_bookmarks">Signalibbre</string>
   <string name="provider_bookmarks_location">Signalibbre</string>
-  <string name="used_by">, ausate jndr\'à</string>
-  <string name="articles">vôsce</string>
-  <string name="no_uploads">Bovègne jndr\'à Commons!\n\nCareche \'u prime media cazzanne l\'icone d\'a maghena fotografeche o d\'a gallerie, aqquà sus.</string>
+  <string name="no_uploads" fuzzy="true">Bovègne jndr\'à Commons!\n\nCareche \'u prime media cazzanne l\'icone d\'a maghena fotografeche o d\'a gallerie, aqquà sus.</string>
   <string name="desc_language_Worldwide">Tutte \'u munne</string>
   <string name="desc_language_America">Americhe</string>
   <string name="desc_language_Europe">Europe</string>
