@@ -9,12 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll" />
+        <include layout="@layout/toolbar"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
