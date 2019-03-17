@@ -15,13 +15,9 @@ import android.widget.Toast;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.wikipedia.util.UriUtil;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.LinkedHashMap;
 import java.util.Locale;
-import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.settings.Prefs;
@@ -40,20 +36,7 @@ public class Utils {
     public static String makeThumbBaseUrl(@NonNull String filename) {
         String name = new PageTitle(filename).getPrefixedText();
         String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
-        return String.format("%s/%s/%s/%s", BuildConfig.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
-    }
-
-    /**
-     * URL Encode an URL in UTF-8 format
-     * @param url Unformatted URL
-     * @return Encoded URL
-     */
-    public static String urlEncode(String url) {
-        try {
-            return URLEncoder.encode(url, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        return String.format("%s/%s/%s/%s", BuildConfig.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), UriUtil.encodeURL(name));
     }
 
     /**
@@ -200,15 +183,6 @@ public class Utils {
         return bitmap;
     }
 
-    public static <K,V> Map<K,V>  arraysToMap(K[] kArray, V[] vArray){
-        if(kArray.length!=vArray.length)
-            throw new RuntimeException("arraysToMap array sizes don't match");
-        Map<K,V> map=new LinkedHashMap<>();
-        for (int i=0;i<vArray.length;i++){
-            map.put(kArray[i], vArray[i]);
-        }
-        return map;
-    }
     /*
     *Copies the content to the clipboard
     *
