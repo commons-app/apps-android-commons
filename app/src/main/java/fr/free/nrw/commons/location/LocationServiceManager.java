@@ -50,7 +50,7 @@ public class LocationServiceManager implements LocationListener {
      * @return true if the GPS provider is enabled
      */
     public boolean isProviderEnabled() {
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
     }
 
     /**
