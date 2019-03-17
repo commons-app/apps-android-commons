@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.gallery.ImageInfo;
 import org.wikipedia.util.DateUtil;
 import org.wikipedia.util.StringUtil;
 
@@ -19,8 +21,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.media.model.ImageInfo;
-import fr.free.nrw.commons.media.model.MwQueryPage;
 
 public class Media implements Parcelable {
 
@@ -471,12 +471,12 @@ public class Media implements Parcelable {
                 page.title(),
                 imageInfo.getMetadata().imageDescription().value(),
                 0,
-                safeParseDate(imageInfo.getMetadata().getDateTimeOriginal().value()),
-                safeParseDate(imageInfo.getMetadata().getDateTime().value()),
-                StringUtil.fromHtml(imageInfo.getMetadata().getArtist().value()).toString()
+                safeParseDate(imageInfo.getMetadata().dateTimeOriginal().value()),
+                safeParseDate(imageInfo.getMetadata().dateTime().value()),
+                StringUtil.fromHtml(imageInfo.getMetadata().artist().value()).toString()
         );
 
-        media.setLicense(imageInfo.getMetadata().getLicenseShortName().value());
+        media.setLicense(imageInfo.getMetadata().licenseShortName().value());
 
         return media;
     }

@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.util.DateUtil;
 
 import java.io.IOException;
@@ -22,8 +24,6 @@ import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.media.model.MwQueryPage;
-import fr.free.nrw.commons.mwapi.model.MwQueryResponse;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
@@ -265,14 +265,13 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             List<Media> mediaList = new ArrayList<>();
-            if (response != null && response.body() != null && response.isSuccessful()) {
+            if (response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
-                if (json == null) {
+                MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
+                if (mwQueryResponse.query() == null || mwQueryResponse.query().pages() == null) {
                     return mediaList;
                 }
-                MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
-                List<MwQueryPage> pages = mwQueryResponse.query().pages();
-                for (MwQueryPage page : pages) {
+                for (MwQueryPage page : mwQueryResponse.query().pages()) {
                     mediaList.add(Media.from(page));
                 }
             }
