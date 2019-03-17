@@ -66,48 +66,6 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/right_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_card"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_card"
-        tools:ignore="UnusedAttribute"
-        tools:showIn="@layout/activity_upload">
-
-        <LinearLayout
-            android:id="@+id/right_card_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/right_card_expand_button"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_margin="8dp"
-                android:rotation="90"
-                app:srcCompat="@drawable/ic_expand_less_black_24dp" />
-
-            <ImageButton
-                android:id="@+id/right_card_map_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                android:visibility="visible"
-                app:srcCompat="@drawable/ic_map_white_24dp" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/bottom_card"
@@ -148,6 +106,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bottom_card_title"
                 tools:text="1st image" />
+
+            <ImageButton
+                android:id="@+id/right_card_map_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/bottom_card_expand_button"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_map_white_24dp" />
 
             <ImageButton
                 android:id="@+id/bottom_card_expand_button"
@@ -210,4 +181,3 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                

@@ -113,6 +113,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     TextView coordinates;
     @BindView(R.id.mediaDetailuploadeddate)
     TextView uploadedDate;
+    @BindView(R.id.mediaDetailDisc)
+    TextView mediaDiscussion;
     @BindView(R.id.seeMore)
     TextView seeMore;
     @BindView(R.id.nominatedDeletionBanner)
@@ -342,6 +344,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         license.setText(prettyLicense(media));
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
+        mediaDiscussion.setText(prettyDiscussion(media));
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
@@ -501,6 +504,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             return getString(R.string.detail_description_empty);
         } else {
             return desc;
+        }
+    }
+    private String prettyDiscussion(Media media) {
+        String disc = media.getDiscussion().trim();
+        if (disc.equals("")) {
+            return getString(R.string.detail_discussion_empty);
+        } else {
+            return disc;
         }
     }
 

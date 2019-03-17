@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.text.Html;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -40,6 +41,7 @@ public class MediaDataExtractor {
     private boolean deletionStatus;
     private ArrayList<String> categories;
     private Map<String, String> descriptions;
+    private String discussion;
     private String license;
     private @Nullable LatLng coordinates;
 
@@ -49,6 +51,7 @@ public class MediaDataExtractor {
         this.descriptions = new HashMap<>();
         this.fetched = false;
         this.mediaWikiApi = mwApi;
+        this.discussion = new String();
     }
 
     /*
@@ -71,6 +74,9 @@ public class MediaDataExtractor {
         }
 
         MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);
+        MediaResult discussion = mediaWikiApi.fetchMediaByFilename(filename.replace("File", "File talk"));
+        setDiscussion(discussion.getWikiSource());
+
 
         // In-page category links are extracted from source, as XML doesn't cover [[links]]
         extractCategories(result.getWikiSource());
@@ -92,6 +98,14 @@ public class MediaDataExtractor {
         while (matcher.find()) {
             String cat = matcher.group(1).trim();
             categories.add(cat);
+        }
+    }
+
+    private void setDiscussion(String source) {
+        try {
+            discussion = Html.fromHtml(mediaWikiApi.parseWikicode(source)).toString();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -308,6 +322,7 @@ public class MediaDataExtractor {
         media.setCategories(categories);
         media.setDescriptions(descriptions);
         media.setCoordinates(coordinates);
+        media.setDiscussion(discussion);
         if (license != null) {
             media.setLicense(license);
         }
