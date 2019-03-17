@@ -4,31 +4,35 @@ import org.wikipedia.AppAdapter;
 import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.SharedPreferenceCookieManager;
 import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.json.GsonMarshaller;
+import org.wikipedia.json.GsonUnmarshaller;
 import org.wikipedia.login.LoginResult;
-
-import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import okhttp3.OkHttpClient;
 
 public class CommonsAppAdapter extends AppAdapter {
     private final int DEFAULT_THUMB_SIZE = 640;
+    private final String COOKIE_STORE_NAME = "cookie_store";
 
     private final SessionManager sessionManager;
+    private final JsonKvStore preferences;
 
-    CommonsAppAdapter(@NonNull SessionManager sessionManager) {
+    CommonsAppAdapter(@NonNull SessionManager sessionManager, @NonNull JsonKvStore preferences) {
         this.sessionManager = sessionManager;
+        this.preferences = preferences;
     }
 
     @Override
     public String getMediaWikiBaseUrl() {
-        return Service.COMMONS_URL;
+        return BuildConfig.COMMONS_URL;
     }
 
     @Override
     public String getRestbaseUriFormat() {
-        return Service.COMMONS_URL;
+        return BuildConfig.COMMONS_URL;
     }
 
     @Override
@@ -58,15 +62,20 @@ public class CommonsAppAdapter extends AppAdapter {
 
     @Override
     public void updateAccount(@NonNull LoginResult result) {
+        // TODO:  sessionManager.updateAccount(result);
     }
 
     @Override
     public SharedPreferenceCookieManager getCookies() {
-        return null;
+        if (!preferences.contains(COOKIE_STORE_NAME)) {
+            return null;
+        }
+        return GsonUnmarshaller.unmarshal(SharedPreferenceCookieManager.class, preferences.getString(COOKIE_STORE_NAME, null));
     }
 
     @Override
     public void setCookies(@NonNull SharedPreferenceCookieManager cookies) {
+        preferences.putString(COOKIE_STORE_NAME, GsonMarshaller.marshal(cookies));
     }
 
     @Override
