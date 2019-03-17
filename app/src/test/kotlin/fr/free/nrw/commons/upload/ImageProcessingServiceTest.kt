@@ -62,7 +62,7 @@ class u {
         `when`(fileUtilsWrapper!!.getGeolocationOfFile(ArgumentMatchers.anyString()))
                 .thenReturn("latLng")
 
-        `when`(imageUtilsWrapper!!.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
+        `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
         `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
