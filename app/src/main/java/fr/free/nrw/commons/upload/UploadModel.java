@@ -4,9 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +19,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper;
 import fr.free.nrw.commons.filepicker.UploadableFile;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -46,7 +43,7 @@ public class UploadModel {
             null,
             -1L, "") {
     };
-    private final BasicKvStore basicKvStore;
+    private final JsonKvStore store;
     private final List<String> licenses;
     private String license;
     private final Map<String, String> licensesByName;
@@ -64,15 +61,15 @@ public class UploadModel {
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
-                @Named("default_preferences") BasicKvStore basicKvStore,
+                @Named("default_preferences") JsonKvStore store,
                 @Named("licenses_by_name") Map<String, String> licensesByName,
                 Context context,
                 SessionManager sessionManager,
                 FileProcessor fileProcessor,
                 ImageProcessingService imageProcessingService) {
         this.licenses = licenses;
-        this.basicKvStore = basicKvStore;
-        this.license = basicKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        this.store = store;
+        this.license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         this.licensesByName = licensesByName;
         this.context = context;
         this.sessionManager = sessionManager;
@@ -94,7 +91,6 @@ public class UploadModel {
         return imageProcessingService.validateImage(uploadItem, checkTitle);
     }
 
-    @NonNull
     private UploadItem getUploadItem(UploadableFile uploadableFile,
                                      Place place,
                                      String source,
@@ -273,7 +269,7 @@ public class UploadModel {
 
     void setSelectedLicense(String licenseName) {
         this.license = licensesByName.get(licenseName);
-        basicKvStore.putString(Prefs.DEFAULT_LICENSE, license);
+        store.putString(Prefs.DEFAULT_LICENSE, license);
     }
 
     Observable<Contribution> buildContributions(List<String> categoryStringList) {
@@ -348,7 +344,7 @@ public class UploadModel {
         @SuppressLint("CheckResult")
         UploadItem(Uri originalContentUri,
                    Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
-                   @Nullable Place place,
+                   Place place,
                    long createdTimestamp,
                    String createdTimestampSource) {
             this.originalContentUri = originalContentUri;

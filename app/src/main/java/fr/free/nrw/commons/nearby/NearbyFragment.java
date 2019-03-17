@@ -27,14 +27,12 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
@@ -76,9 +74,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     NearbyController nearbyController;
     @Inject
     WikidataEditListener wikidataEditListener;
-    @Inject
-    @Named("application_preferences")
-    BasicKvStore applicationKvStore;
     @Inject Gson gson;
 
     public NearbyMapFragment nearbyMapFragment;
@@ -137,14 +132,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Hide or expand bottom sheet according to states of all sheets
      */
-    public void listOptionMenuIteClicked() {
+    public void listOptionMenuItemClicked() {
         if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
             bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
-
     }
 
     /**
@@ -316,7 +310,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                             });
 
         } else if (locationChangeType
-                .equals(LOCATION_SLIGHTLY_CHANGED)) {
+                .equals(LOCATION_SLIGHTLY_CHANGED) && nearbyMapFragment != null) {
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(false,true, null, null);
@@ -826,6 +820,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             locationManager.removeLocationListener(this);
             locationManager.unregisterLocationManager();
         }
+    }
+
+    public boolean isBottomSheetExpanded() { return bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
     }
 }
 

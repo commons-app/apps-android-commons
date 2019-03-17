@@ -30,7 +30,7 @@ import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -62,7 +62,9 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
-    @Inject @Named("default_preferences") BasicKvStore basicKvStore;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore basicKvStore;
 
     private RVRendererAdapter<String> categoriesAdapter;
     private List<String> queryList = new ArrayList<>();
@@ -138,6 +140,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .doOnSubscribe(disposable -> saveQuery(query))
                 .subscribe(this::handleSuccess, this::handleError);
     }
 
@@ -187,10 +190,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(GONE);
             categoriesAdapter.addAll(mediaList);
             categoriesAdapter.notifyDataSetChanged();
-
-            // check if user is waiting for 5 seconds if yes then save search query to history.
-            Handler handler = new Handler();
-            handler.postDelayed(() -> saveQuery(query), 5000);
         }
     }
 

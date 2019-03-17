@@ -80,7 +80,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @Inject MediaWikiApi mwApi;
     @Inject
     ContributionController contributionController;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") JsonKvStore directKvStore;
     @Inject UploadPresenter presenter;
     @Inject CategoriesModel categoriesModel;
     @Inject SessionManager sessionManager;
@@ -109,9 +109,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.license_subtitle) TextView licenseSubtitle;
     @BindView(R.id.please_wait_text_view) TextView pleaseWaitTextView;
 
-    //Right Card
-    @BindView(R.id.right_card) CardView rightCard;
-    @BindView(R.id.right_card_expand_button) ImageView rightCardExpandButton;
+
     @BindView(R.id.right_card_map_button) View rightCardMapButton;
 
     // Category Search
@@ -325,7 +323,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     @Override
     public void setRightCardVisibility(boolean visible) {
-        rightCard.setVisibility(visible ? View.VISIBLE : View.GONE);
+        rightCardMapButton.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -358,12 +356,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next, bottomCardAddDescription);
     }
 
-    @Override
-    public void setRightCardState(boolean state) {
-        rightCardExpandButton.animate().rotation(rightCardExpandButton.getRotation() + (state ? -180 : 180)).start();
-        //Add all items in rightCard here
-        rightCardMapButton.setVisibility(state ? View.VISIBLE : View.GONE);
-    }
 
     @Override
     public void setBackground(Uri mediaUri) {
@@ -530,7 +522,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureRightCard() {
-        rightCardExpandButton.setOnClickListener(v -> presenter.toggleRightCardState());
         rightCardMapButton.setOnClickListener(v -> presenter.openCoordinateMap());
     }
 

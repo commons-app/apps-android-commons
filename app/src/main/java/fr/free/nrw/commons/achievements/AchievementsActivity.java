@@ -242,7 +242,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
         okHttpJsonApiClient.getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)));
+                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)), e -> {
+                    Timber.e("Error:" + e);
+                });
     }
 
     private void showSnackBarWithRetry() {
@@ -339,12 +341,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
-        thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
+        thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
                 (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
-        imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
+        imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         String levelUpInfoString = getString(R.string.level);
         levelUpInfoString += " " + Integer.toString(levelInfo.getLevelNumber());
         levelNumber.setText(levelUpInfoString);
@@ -361,8 +363,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     public static void startYourself(Context context) {
         Intent intent = new Intent(context, AchievementsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
 
