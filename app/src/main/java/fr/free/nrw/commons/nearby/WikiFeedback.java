@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -8,6 +7,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;

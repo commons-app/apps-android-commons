@@ -1,7 +1,7 @@
 package fr.free.nrw.commons;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class PageTitle {
     private final String namespace;

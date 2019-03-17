@@ -273,7 +273,7 @@
   <string name="showcase_view_plus_fab">場所の写真をアップロードするには、ギャラリーから選ぶことも撮影することもできます</string>
   <string name="no_images_found">画像がありません</string>
   <string name="error_loading_images">画像の読み込み中にエラーが発生しました</string>
-  <string name="image_uploaded_by">アップロードした人: %1$</string>
+  <string name="image_uploaded_by">アップロードした人: %1$s</string>
   <string name="appwidget_img">今日の一枚</string>
   <string name="app_widget_heading">今日の一枚</string>
   <string name="menu_search_button">検索</string>

@@ -303,7 +303,7 @@
   <string name="showcase_view_plus_fab">يمكنك رفع صورة لأي مكان من معرضك أو كاميرتك</string>
   <string name="no_images_found">لم يتم العثور على صور!</string>
   <string name="error_loading_images">حدث خطأ أثناء تحميل الصور.</string>
-  <string name="image_uploaded_by">تم الرفع بواسطة: %1$s</string>
+  <string name="image_uploaded_by">%1$s :تم الرفع بواسطة</string>
   <string name="block_notification">أنت ممنوع من تحرير كومنز</string>
   <string name="appwidget_img">صورة اليوم</string>
   <string name="app_widget_heading">صورة اليوم</string>
@@ -406,8 +406,8 @@
   <string name="deletion_reason_bad_for_my_privacy">أدركت أنه سيئ لخصوصيتي</string>
   <string name="deletion_reason_no_longer_want_public">لقد غيرت رأيي، ولا أريد أن يكون مرئيا للجميع بعد الآن</string>
   <string name="deletion_reason_not_interesting">آسف هذه الصورة ليست مثيرة للاهتمام لموسوعة</string>
-  <string name="uploaded_by_myself" fuzzy="true">رفعته بنفسي على</string>
-  <string name="no_uploads" fuzzy="true">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق لمس أيقونة الكاميرا أو المعرض أعلاه.</string>
+  <string name="uploaded_by_myself">رفعته بنفسي في %1$s، مستخدم في %2$d مقالة(ات).</string>
+  <string name="no_uploads">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق النقر على زر الإضافة.</string>
   <string name="desc_language_Worldwide">في جميع أنحاء العالم</string>
   <string name="desc_language_America">أمريكا</string>
   <string name="desc_language_Europe">أوروبا</string>

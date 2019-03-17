@@ -6,7 +6,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +18,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -37,7 +37,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     CategoryApi apiCall;
     @Inject
     @Named("default_preferences")
-    BasicKvStore defaultKvStore;
+    JsonKvStore defaultKvStore;
     private String filePath;
     private ContentResolver contentResolver;
     private GPSExtractor imageObj;
