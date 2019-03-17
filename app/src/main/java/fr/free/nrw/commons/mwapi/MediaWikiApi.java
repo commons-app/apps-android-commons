@@ -66,6 +66,8 @@ public interface MediaWikiApi {
     @Nullable
     boolean addWikidataEditTag(String revisionId) throws IOException;
 
+    String parseWikicode(String source) throws IOException;
+
     @NonNull
     MediaResult fetchMediaByFilename(String filename) throws IOException;
 
