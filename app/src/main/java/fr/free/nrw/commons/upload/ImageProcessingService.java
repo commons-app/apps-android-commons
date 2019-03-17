@@ -10,7 +10,6 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import fr.free.nrw.commons.utils.StringUtils;
@@ -30,18 +29,15 @@ import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 @Singleton
 public class ImageProcessingService {
     private final FileUtilsWrapper fileUtilsWrapper;
-    private final BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper;
     private final ImageUtilsWrapper imageUtilsWrapper;
     private final MediaWikiApi mwApi;
     private final ReadFBMD readFBMD;
 
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
-                                  BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
                                   ImageUtilsWrapper imageUtilsWrapper,
                                   MediaWikiApi mwApi, ReadFBMD readFBMD) {
         this.fileUtilsWrapper = fileUtilsWrapper;
-        this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.mwApi = mwApi;
         this.readFBMD = readFBMD;
@@ -149,10 +145,7 @@ public class ImageProcessingService {
      */
     private Single<Integer> checkDarkImage(String filePath) {
         Timber.d("Checking for dark image %s", filePath);
-        return Single.fromCallable(() ->
-                fileUtilsWrapper.getFileInputStream(filePath))
-                .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
-                .flatMap(imageUtilsWrapper::checkIfImageIsTooDark);
+        return imageUtilsWrapper.checkIfImageIsTooDark(filePath);
     }
 
     /**

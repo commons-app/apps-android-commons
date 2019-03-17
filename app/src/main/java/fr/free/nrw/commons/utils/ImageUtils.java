@@ -3,10 +3,10 @@ package fr.free.nrw.commons.utils;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapRegionDecoder;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.net.Uri;
+
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 
@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import androidx.exifinterface.media.ExifInterface;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
@@ -83,33 +84,26 @@ public class ImageUtils {
     }
 
     /**
-     * @param bitmapRegionDecoder BitmapRegionDecoder for the image we wish to process
-     * @return IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
+     * @return IMAGE_OK if image is not too dark
      * IMAGE_DARK if image is too dark
      */
-    static @Result
-    int checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
-        if (bitmapRegionDecoder == null) {
-            Timber.e("Expected bitmapRegionDecoder was null");
-            return IMAGE_OK;
+    static @Result int checkIfImageIsTooDark(String imagePath) {
+        long millis = System.currentTimeMillis();
+        try {
+            Bitmap bmp = new ExifInterface(imagePath).getThumbnailBitmap();
+            if (bmp == null) {
+                bmp = BitmapFactory.decodeFile(imagePath);
+            }
+
+            if (checkIfImageIsDark(bmp)) {
+                return IMAGE_DARK;
+            }
+
+        } catch (Exception e) {
+            Timber.d(e, "Error while checking image darkness.");
+        } finally {
+            Timber.d("Checking image darkness took " + (System.currentTimeMillis() - millis) + " ms.");
         }
-
-        int loadImageHeight = bitmapRegionDecoder.getHeight();
-        int loadImageWidth = bitmapRegionDecoder.getWidth();
-
-        int checkImageTopPosition = 0;
-        int checkImageLeftPosition = 0;
-
-        Timber.v("left: " + checkImageLeftPosition + " right: " + loadImageWidth + " top: " + checkImageTopPosition + " bottom: " + loadImageHeight);
-
-        Rect rect = new Rect(checkImageLeftPosition,checkImageTopPosition, loadImageWidth, loadImageHeight);
-
-        Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect,null);
-
-        if (checkIfImageIsDark(processBitmap)) {
-            return IMAGE_DARK;
-        }
-
         return IMAGE_OK;
     }
 
@@ -143,7 +137,6 @@ public class ImageUtils {
         int bitmapHeight = bitmap.getHeight();
 
         int allPixelsCount = bitmapWidth * bitmapHeight;
-        Timber.d("total %s", Integer.toString(allPixelsCount));
         int numberOfBrightPixels = 0;
         int numberOfMediumBrightnessPixels = 0;
         double brightPixelThreshold = 0.025 * allPixelsCount;

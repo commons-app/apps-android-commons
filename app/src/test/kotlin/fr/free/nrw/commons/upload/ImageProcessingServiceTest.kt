@@ -1,11 +1,9 @@
 package fr.free.nrw.commons.upload
 
-import android.graphics.BitmapRegionDecoder
 import android.net.Uri
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
-import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper
 import fr.free.nrw.commons.utils.ImageUtils
 import fr.free.nrw.commons.utils.ImageUtilsWrapper
 import io.reactivex.Single
@@ -22,8 +20,6 @@ import java.io.FileInputStream
 class u {
     @Mock
     internal var fileUtilsWrapper: FileUtilsWrapper? = null
-    @Mock
-    internal var bitmapRegionDecoderWrapper: BitmapRegionDecoderWrapper? = null
     @Mock
     internal var imageUtilsWrapper: ImageUtilsWrapper? = null
     @Mock
@@ -66,9 +62,7 @@ class u {
         `when`(fileUtilsWrapper!!.getGeolocationOfFile(ArgumentMatchers.anyString()))
                 .thenReturn("latLng")
 
-        `when`(bitmapRegionDecoderWrapper!!.newInstance(any(FileInputStream::class.java), anyBoolean()))
-                .thenReturn(mock(BitmapRegionDecoder::class.java))
-        `when`(imageUtilsWrapper!!.checkIfImageIsTooDark(any(BitmapRegionDecoder::class.java)))
+        `when`(imageUtilsWrapper!!.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
         `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
@@ -109,7 +103,7 @@ class u {
 
     @Test
     fun validateImageForDarkImage() {
-        `when`(imageUtilsWrapper!!.checkIfImageIsTooDark(any(BitmapRegionDecoder::class.java)))
+        `when`(imageUtilsWrapper!!.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_DARK))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, false)
         assertEquals(ImageUtils.IMAGE_DARK, validateImage.blockingGet())
