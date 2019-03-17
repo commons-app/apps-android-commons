@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.wikipedia.json.GsonUtil;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
@@ -20,8 +22,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
-import fr.free.nrw.commons.utils.UriDeserializer;
-import fr.free.nrw.commons.utils.UriSerializer;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -107,10 +107,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public Gson provideGson() {
-        return new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriSerializer())
-                .registerTypeAdapter(Uri.class, new UriDeserializer())
-                .create();
+        return GsonUtil.getDefaultGson();
     }
 
 }
