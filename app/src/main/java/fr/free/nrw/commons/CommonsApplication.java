@@ -5,11 +5,10 @@ import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Process;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -17,7 +16,6 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
-import com.tspoon.traceur.Traceur;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -37,11 +35,13 @@ import fr.free.nrw.commons.concurrency.ThreadPoolService;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.utils.ContributionUtils;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -58,12 +58,7 @@ public class CommonsApplication extends Application {
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
 
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
-    @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
-    @Inject @Named("prefs") SharedPreferences otherPrefs;
-    @Inject
-    @Named("isBeta")
-    boolean isBeta;
+    @Inject @Named("default_preferences") JsonKvStore defaultPrefs;
 
     /**
      * Constants begin
@@ -74,9 +69,11 @@ public class CommonsApplication extends Application {
 
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
 
-    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
+    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App Feedback";
 
     public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
+
+    public static final String FEEDBACK_EMAIL_TEMPLATE_HEADER = "-- Technical information --";
 
     /**
      * Constants End
@@ -92,11 +89,6 @@ public class CommonsApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ACRA.init(this);
-        if (BuildConfig.DEBUG) {
-            //FIXME: Traceur should be disabled for release builds until error fixed
-            //See https://github.com/commons-app/apps-android-commons/issues/1877
-            Traceur.enableLogging();
-        }
 
         ApplicationlessInjection
                 .getInstance(this)
@@ -115,9 +107,6 @@ public class CommonsApplication extends Application {
             Timber.e(e);
             // TODO: Remove when we're able to initialize Fresco in test builds.
         }
-
-        // Empty temp directory in case some temp files are created and never removed.
-        ContributionUtils.emptyTemporaryDirectory();
 
         if (BuildConfig.DEBUG && !isRoboUnitTest()) {
             Stetho.initializeWithDefaults(this);
@@ -139,8 +128,9 @@ public class CommonsApplication extends Application {
      *
      */
     private void initTimber() {
+        boolean isBeta = ConfigUtils.isBetaFlavour();
         String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
-        String logDirectory = LogUtils.getLogDirectory(isBeta);
+        String logDirectory = LogUtils.getLogDirectory();
         FileLoggingTree tree = new FileLoggingTree(
                 Log.DEBUG,
                 logFileName,
@@ -222,10 +212,8 @@ public class CommonsApplication extends Application {
                 .subscribe(() -> {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
-                    defaultPrefs.edit().clear().apply();
-                    applicationPrefs.edit().clear().apply();
-                    applicationPrefs.edit().putBoolean("firstrun", false).apply();
-                    otherPrefs.edit().clear().apply();
+                    defaultPrefs.clearAll();
+                    defaultPrefs.putBoolean("firstrun", false);
                     updateAllDatabases();
                     logoutListener.onLogoutComplete();
                 });

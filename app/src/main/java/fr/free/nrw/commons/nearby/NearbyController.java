@@ -1,10 +1,9 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.support.graphics.drawable.VectorDrawableCompat;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
@@ -17,7 +16,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
@@ -30,15 +28,12 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
-    private final SharedPreferences prefs;
     public static double searchedRadius = 10.0; //in kilometers
     public static LatLng currentLocation;
 
     @Inject
-    public NearbyController(NearbyPlaces nearbyPlaces,
-                            @Named("default_preferences") SharedPreferences prefs) {
+    public NearbyController(NearbyPlaces nearbyPlaces) {
         this.nearbyPlaces = nearbyPlaces;
-        this.prefs = prefs;
     }
 
 
@@ -117,7 +112,7 @@ public class NearbyController {
      * @param placeList list of nearby places in Place data type
      * @return Place list that holds nearby places
      */
-    public static List<Place> loadAttractionsFromLocationToPlaces(
+    static List<Place> loadAttractionsFromLocationToPlaces(
             LatLng curLatLng,
             List<Place> placeList) {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
@@ -138,7 +133,8 @@ public class NearbyController {
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
             LatLng curLatLng,
             List<Place> placeList,
-            Context context) {
+            Context context,
+            List<Place> bookmarkplacelist) {
         List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
 
         if (placeList == null) {
@@ -148,6 +144,37 @@ public class NearbyController {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
         VectorDrawableCompat vectorDrawable = null;
+        try {
+            vectorDrawable = VectorDrawableCompat.create(
+                    context.getResources(), R.drawable.ic_custom_bookmark_marker, context.getTheme()
+            );
+        } catch (Resources.NotFoundException e) {
+            // ignore when running tests.
+        }
+        if (vectorDrawable != null) {
+            Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+
+            for (Place place : bookmarkplacelist) {
+
+                String distance = formatDistanceBetween(curLatLng, place.location);
+                place.setDistance(distance);
+
+                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
+                nearbyBaseMarker.title(place.name);
+                nearbyBaseMarker.position(
+                        new com.mapbox.mapboxsdk.geometry.LatLng(
+                                place.location.getLatitude(),
+                                place.location.getLongitude()));
+                nearbyBaseMarker.place(place);
+                nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                        .fromBitmap(icon));
+                placeList.remove(place);
+
+                baseMarkerOptions.add(nearbyBaseMarker);
+            }
+        }
+
+        vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
@@ -175,6 +202,7 @@ public class NearbyController {
                 baseMarkerOptions.add(nearbyBaseMarker);
             }
         }
+
         return baseMarkerOptions;
     }
 

@@ -2,13 +2,11 @@ package fr.free.nrw.commons.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
+import androidx.annotation.StringRes;
+import com.google.android.material.snackbar.Snackbar;
 import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 public class ViewUtil {
@@ -85,14 +83,16 @@ public class ViewUtil {
      * A snack bar which has an action button which on click dismisses the snackbar and invokes the
      * listener passed
      */
-    public static void showDismissibleSnackBar(View view, int messageResourceId,
-        int actionButtonResourceId, View.OnClickListener onClickListener) {
+    public static void showDismissibleSnackBar(View view,
+                                               int messageResourceId,
+                                               int actionButtonResourceId,
+                                               View.OnClickListener onClickListener) {
         if (view.getContext() == null) {
             return;
         }
         ExecutorUtils.uiExecutor().execute(() -> {
             Snackbar snackbar = Snackbar.make(view, view.getContext().getString(messageResourceId),
-                Snackbar.LENGTH_INDEFINITE);
+                    Snackbar.LENGTH_INDEFINITE);
             snackbar.setAction(view.getContext().getString(actionButtonResourceId), v -> {
                 snackbar.dismiss();
                 onClickListener.onClick(v);

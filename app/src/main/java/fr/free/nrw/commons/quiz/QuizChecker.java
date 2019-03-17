@@ -1,17 +1,26 @@
 package fr.free.nrw.commons.quiz;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog.Builder;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * fetches the number of images uploaded and number of images reverted.
@@ -19,18 +28,20 @@ import timber.log.Timber;
  * if the percentage of images reverted after last quiz exceeds 50% and number of images uploaded is
  * greater than 50, then quiz is popped up
  */
+@Singleton
 public class QuizChecker {
 
     private int revertCount ;
     private int totalUploadCount ;
     private boolean isRevertCountFetched;
     private boolean isUploadCountFetched;
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     public Context context;
-    private String userName;
-    private MediaWikiApi mediaWikiApi;
-    private SharedPreferences revertPref;
-    private SharedPreferences countPref;
+
+    private final SessionManager sessionManager;
+    private final OkHttpJsonApiClient okHttpJsonApiClient;
+    private final JsonKvStore revertKvStore;
 
     private static final int UPLOAD_COUNT_THRESHOLD = 5;
     private static final String REVERT_PERCENTAGE_FOR_MESSAGE = "50%";
@@ -40,28 +51,34 @@ public class QuizChecker {
     /**
      * constructor to set the parameters for quiz
      * @param context context
-     * @param userName Commons user name
-     * @param mediaWikiApi instance of MediaWikiApi
+     * @param sessionManager
+     * @param okHttpJsonApiClient instance of MediaWikiApi
      */
-    public QuizChecker(Context context, String userName, MediaWikiApi mediaWikiApi) {
+    @Inject
+    public QuizChecker(Context context,
+                       SessionManager sessionManager,
+                       OkHttpJsonApiClient okHttpJsonApiClient,
+                       @Named("default_preferences") JsonKvStore revertKvStore) {
         this.context = context;
-        this.userName = userName;
-        this.mediaWikiApi = mediaWikiApi;
-        revertPref = context.getSharedPreferences(REVERT_SHARED_PREFERENCE, Context.MODE_PRIVATE);
-        countPref = context.getSharedPreferences(UPLOAD_SHARED_PREFERENCE,Context.MODE_PRIVATE);
-        setUploadCount();
-        setRevertCount();
+        this.sessionManager = sessionManager;
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
+        this.revertKvStore = revertKvStore;
+    }
+
+    public void initQuizCheck(Activity activity) {
+        setUploadCount(activity);
+        setRevertCount(activity);
     }
 
     /**
      * to fet the total number of images uploaded
      */
-    private void setUploadCount() {
-            compositeDisposable.add(mediaWikiApi
-                    .getUploadCount(userName)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::setTotalUploadCount,
+    private void setUploadCount(Activity activity) {
+        compositeDisposable.add(okHttpJsonApiClient
+                .getUploadCount(sessionManager.getUserName())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(uploadCount -> setTotalUploadCount(activity, uploadCount),
                             t -> Timber.e(t, "Fetching upload count failed")
                     ));
     }
@@ -71,28 +88,28 @@ public class QuizChecker {
      * call function to check for quiz
      * @param uploadCount user's upload count
      */
-    private void setTotalUploadCount(int uploadCount) {
-        totalUploadCount = uploadCount - countPref.getInt(UPLOAD_SHARED_PREFERENCE,0);
+    private void setTotalUploadCount(Activity activity, int uploadCount) {
+        totalUploadCount = uploadCount - revertKvStore.getInt(UPLOAD_SHARED_PREFERENCE, 0);
         if ( totalUploadCount < 0){
             totalUploadCount = 0;
-            countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE,0).apply();
+            revertKvStore.putInt(UPLOAD_SHARED_PREFERENCE, 0);
         }
         isUploadCountFetched = true;
-        calculateRevertParameter();
+        calculateRevertParameter(activity);
     }
 
     /**
      * To call the API to get reverts count in form of JSONObject
      */
-    private void setRevertCount() {
-            compositeDisposable.add(mediaWikiApi
-                    .getAchievements(userName)
+    private void setRevertCount(Activity activity) {
+        compositeDisposable.add(okHttpJsonApiClient
+                .getAchievements(sessionManager.getUserName())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             response -> {
                                 if (response != null) {
-                                    setRevertParameter(response.getDeletedUploads());
+                                    setRevertParameter(activity, response.getDeletedUploads());
                                 }
                             }, throwable -> Timber.e(throwable, "Fetching feedback failed"))
             );
@@ -102,52 +119,52 @@ public class QuizChecker {
      * to calculate the number of images reverted after previous quiz
      * @param revertCountFetched count of deleted uploads
      */
-    private void setRevertParameter(int revertCountFetched) {
-        revertCount = revertCountFetched - revertPref.getInt(REVERT_SHARED_PREFERENCE,0);
+    private void setRevertParameter(Activity activity, int revertCountFetched) {
+        revertCount = revertCountFetched - revertKvStore.getInt(REVERT_SHARED_PREFERENCE, 0);
         if (revertCount < 0){
             revertCount = 0;
-            revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, 0).apply();
+            revertKvStore.putInt(REVERT_SHARED_PREFERENCE, 0);
         }
         isRevertCountFetched = true;
-        calculateRevertParameter();
+        calculateRevertParameter(activity);
     }
 
     /**
      * to check whether the criterion to call quiz is satisfied
      */
-    private void calculateRevertParameter() {
+    private void calculateRevertParameter(Activity activity) {
         if ( revertCount < 0 || totalUploadCount < 0){
-            revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, 0).apply();
-            countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE,0).apply();
+            revertKvStore.putInt(REVERT_SHARED_PREFERENCE, 0);
+            revertKvStore.putInt(UPLOAD_SHARED_PREFERENCE, 0);
             return;
         }
         if (isRevertCountFetched && isUploadCountFetched &&
                 totalUploadCount >= UPLOAD_COUNT_THRESHOLD &&
                 (revertCount * 100) / totalUploadCount >= 50) {
-            callQuiz();
+            callQuiz(activity);
         }
     }
 
     /**
      * Alert which prompts to quiz
      */
-    private void callQuiz() {
-        Builder alert = new Builder(context);
-        alert.setTitle(context.getResources().getString(R.string.quiz));
-        alert.setMessage(context.getResources().getString(R.string.quiz_alert_message,
-                REVERT_PERCENTAGE_FOR_MESSAGE));
-        alert.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
-            int newRevetSharedPrefs = revertCount + revertPref.getInt(REVERT_SHARED_PREFERENCE, 0);
-            revertPref.edit().putInt(REVERT_SHARED_PREFERENCE, newRevetSharedPrefs).apply();
-            int newUploadCount = totalUploadCount + countPref.getInt(UPLOAD_SHARED_PREFERENCE, 0);
-            countPref.edit().putInt(UPLOAD_SHARED_PREFERENCE, newUploadCount).apply();
-            Intent i = new Intent(context, WelcomeActivity.class);
-            i.putExtra("isQuiz", true);
-            dialog.dismiss();
-            context.startActivity(i);
-        });
-        alert.setNegativeButton(android.R.string.cancel, (dialogInterface, i) -> dialogInterface.cancel());
-        android.support.v7.app.AlertDialog dialog = alert.create();
-        dialog.show();
+    @SuppressLint("StringFormatInvalid")
+    private void callQuiz(Activity activity) {
+        DialogUtil.showAlertDialog(activity,
+                context.getResources().getString(R.string.quiz),
+                context.getResources().getString(R.string.quiz_alert_message, REVERT_PERCENTAGE_FOR_MESSAGE),
+                context.getResources().getString(R.string.about_translate_proceed),
+                context.getResources().getString(android.R.string.cancel),
+                () -> startQuizActivity(activity), null);
+    }
+
+    private void startQuizActivity(Activity activity) {
+        int newRevetSharedPrefs = revertCount + revertKvStore.getInt(REVERT_SHARED_PREFERENCE, 0);
+        revertKvStore.putInt(REVERT_SHARED_PREFERENCE, newRevetSharedPrefs);
+        int newUploadCount = totalUploadCount + revertKvStore.getInt(UPLOAD_SHARED_PREFERENCE, 0);
+        revertKvStore.putInt(UPLOAD_SHARED_PREFERENCE, newUploadCount);
+        Intent i = new Intent(context, WelcomeActivity.class);
+        i.putExtra("isQuiz", true);
+        activity.startActivity(i);
     }
 }

@@ -1,19 +1,14 @@
 package fr.free.nrw.commons.settings;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.widget.Toast;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
@@ -25,16 +20,19 @@ import javax.inject.Named;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
 
-    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 100;
-
-    @Inject @Named("default_preferences") SharedPreferences prefs;
-    @Inject CommonsLogSender commonsLogSender;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore defaultKvStore;
+    @Inject
+    CommonsLogSender commonsLogSender;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,16 +45,6 @@ public class SettingsFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
-        // Update spinner to show selected value as summary
-        ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
-        licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
-
-        // Keep summary updated when changing value
-        licensePreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
-            return true;
-        });
-
         SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
         themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
             getActivity().recreate();
@@ -66,44 +54,58 @@ public class SettingsFragment extends PreferenceFragment {
         //Check if the Author Name switch is enabled and appropriately handle the author name usage
         SwitchPreference useAuthorName = (SwitchPreference) findPreference("useAuthorName");
         EditTextPreference authorName = (EditTextPreference) findPreference("authorName");
-        authorName.setEnabled(prefs.getBoolean("useAuthorName", false));
+        authorName.setEnabled(defaultKvStore.getBoolean("useAuthorName", false));
         useAuthorName.setOnPreferenceChangeListener((preference, newValue) -> {
             authorName.setEnabled((Boolean)newValue);
             return true;
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        int uploads = prefs.getInt(Prefs.UPLOADS_SHOWING, 100);
+        int uploads = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
-        uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
-            int value;
-            try {
-                value = Integer.parseInt(newValue.toString());
-            } catch(Exception e) {
-                value = 100; //Default number
-            }
-            final SharedPreferences.Editor editor = prefs.edit();
-            if (value > 500) {
-                new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.maximum_limit)
-                        .setMessage(R.string.maximum_limit_alert)
-                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {})
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-                editor.putInt(Prefs.UPLOADS_SHOWING, 500);
-                editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
-                uploadLimit.setSummary(500 + "");
-                uploadLimit.setText(500 + "");
-            } else {
-                editor.putInt(Prefs.UPLOADS_SHOWING, value);
-                editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
-                uploadLimit.setSummary(String.valueOf(value));
-            }
-            editor.apply();
-            return true;
-        });
+        uploadLimit.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int value;
+                if (s.length()>0)
+                try {
+                    value = Integer.parseInt(s.toString());
+                    if (value > 500) {
+                        uploadLimit.getEditText().setError(getString((R.string.maximum_limit_alert)));
+                        defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 500);
+                        defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+                        uploadLimit.setSummary(500 + "");
+                        uploadLimit.setText(500 + "");
+                    } else if (value == 0) {
+                        uploadLimit.getEditText().setError(getString(R.string.cannot_be_zero));
+                        defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 100);
+                        defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+                        uploadLimit.setSummary(100 + "");
+                        uploadLimit.setText(100 + "");
+                    } else {
+                        defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, value);
+                        defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+                        uploadLimit.setSummary(String.valueOf(value));
+                    }
+                } catch (Exception e) {
+                    uploadLimit.getEditText().setError(getString(R.string.enter_valid));
+                    defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 100);
+                    defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+                    uploadLimit.setSummary(100 + "");
+                    uploadLimit.setText(100 + "");
+                }
+            }
+        });
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
             Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));

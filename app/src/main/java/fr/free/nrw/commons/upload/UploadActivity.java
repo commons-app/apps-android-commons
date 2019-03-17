@@ -1,30 +1,33 @@
 package fr.free.nrw.commons.upload;
 
 import android.Manifest;
-import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,14 +50,20 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.StringUtils;
+import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -62,21 +71,24 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.utils.ImageUtils.Result;
-import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
+import static fr.free.nrw.commons.contributions.Contribution.SOURCE_EXTERNAL;
+import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
-public class UploadActivity extends AuthenticatedActivity implements UploadView, SimilarImageInterface {
-    @Inject InputMethodManager inputMethodManager;
+public class UploadActivity extends BaseActivity implements UploadView, SimilarImageInterface {
     @Inject MediaWikiApi mwApi;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+    @Inject
+    ContributionController contributionController;
+    @Inject @Named("default_preferences") JsonKvStore directKvStore;
     @Inject UploadPresenter presenter;
     @Inject CategoriesModel categoriesModel;
+    @Inject SessionManager sessionManager;
 
     // Main GUI
     @BindView(R.id.backgroundImage) PhotoView background;
-    @BindView(R.id.activity_upload_cards) ConstraintLayout cardLayout;
+    @BindView(R.id.upload_root_layout)
+    RelativeLayout rootLayout;
     @BindView(R.id.view_flipper) ViewFlipper viewFlipper;
 
     // Top Card
@@ -93,10 +105,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     @BindView(R.id.bottom_card_next) Button next;
     @BindView(R.id.bottom_card_previous) Button previous;
     @BindView(R.id.bottom_card_add_desc) Button bottomCardAddDescription;
+    @BindView(R.id.categories_subtitle) TextView categoriesSubtitle;
+    @BindView(R.id.license_subtitle) TextView licenseSubtitle;
+    @BindView(R.id.please_wait_text_view) TextView pleaseWaitTextView;
 
-    //Right Card
-    @BindView(R.id.right_card) CardView rightCard;
-    @BindView(R.id.right_card_expand_button) ImageView rightCardExpandButton;
+
     @BindView(R.id.right_card_map_button) View rightCardMapButton;
 
     // Category Search
@@ -107,6 +120,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     @BindView(R.id.category_search) EditText categoriesSearch;
     @BindView(R.id.category_search_container) TextInputLayout categoriesSearchContainer;
     @BindView(R.id.categories) RecyclerView categoriesList;
+    @BindView(R.id.category_search_layout)
+    FrameLayout categoryFrameLayout;
 
     // Final Submission
     @BindView(R.id.license_title) TextView licenseTitle;
@@ -120,8 +135,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private CompositeDisposable compositeDisposable;
-
-    DexterPermissionObtainer dexterPermissionObtainer;
+    private ProgressDialog progressDialog;
 
 
     @SuppressLint("CheckResult")
@@ -141,15 +155,15 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         configureNavigationButtons();
         configureCategories();
         configureLicenses();
+        configurePolicy();
 
         presenter.init();
 
-        dexterPermissionObtainer = new DexterPermissionObtainer(this,
+        PermissionUtils.checkPermissionsAndPerformAction(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                getString(R.string.storage_permission),
-                getString(R.string.write_storage_permission_rationale_for_image_share));
-
-        dexterPermissionObtainer.confirmStoragePermissions().subscribe(this::receiveSharedItems);
+                this::receiveSharedItems,
+                R.string.storage_permission_title,
+                R.string.write_storage_permission_rationale_for_image_share);
     }
 
     @Override
@@ -174,9 +188,8 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     protected void onResume() {
         super.onResume();
         checkIfLoggedIn();
-        compositeDisposable.add(
-                dexterPermissionObtainer.confirmStoragePermissions()
-                        .subscribe(() -> presenter.addView(this)));
+
+        checkStoragePermissions();
         compositeDisposable.add(
                 RxTextView.textChanges(categoriesSearch)
                         .doOnEach(v -> categoriesSearchContainer.setError(null))
@@ -185,6 +198,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(filter -> updateCategoryList(filter.toString()), Timber::e)
         );
+    }
+
+    private void checkStoragePermissions() {
+        PermissionUtils.checkPermissionsAndPerformAction(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                () -> presenter.addView(this),
+                R.string.storage_permission_title,
+                R.string.write_storage_permission_rationale_for_image_share);
     }
 
     @Override
@@ -228,7 +249,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             dismissKeyboard();
         }
         if(isShowingItem) {
-            descriptionsAdapter.setItems(uploadItem.title, uploadItem.descriptions);
+            descriptionsAdapter.setItems(uploadItem.getTitle(), uploadItem.getDescriptions());
             rvDescriptions.setAdapter(descriptionsAdapter);
         }
     }
@@ -253,13 +274,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     @SuppressLint("StringFormatInvalid")
     @Override
     public void updateLicenseSummary(String selectedLicense, int imageCount) {
-        String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense)+"'>" +
+        String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense) + "'>" +
                 getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>";
-        licenseSummary.setMovementMethod(LinkMovementMethod.getInstance());
-        licenseSummary.setText(
-                Html.fromHtml(
-                        getResources().getQuantityString(R.plurals.share_license_summary,
-                                imageCount, licenseHyperLink)));
+
+          setTextViewHTML(licenseSummary, getResources().getQuantityString(R.plurals.share_license_summary, imageCount, licenseHyperLink));
     }
 
     @Override
@@ -305,11 +323,11 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     @Override
     public void setRightCardVisibility(boolean visible) {
-        rightCard.setVisibility(visible ? View.VISIBLE : View.GONE);
+        rightCardMapButton.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void setBottomCardVisibility(@UploadPage int page) {
+    public void setBottomCardVisibility(@UploadPage int page, int uploadCount) {
         if (page == TITLE_CARD) {
             viewFlipper.setDisplayedChild(0);
         } else if (page == CATEGORIES) {
@@ -319,7 +337,18 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             dismissKeyboard();
         } else if (page == PLEASE_WAIT) {
             viewFlipper.setDisplayedChild(3);
+            pleaseWaitTextView.setText(getResources().getQuantityText(R.plurals.receiving_shared_content, uploadCount));
         }
+    }
+
+    /**
+     * Only show the subtitle ("For all images in set") if multiple images being uploaded
+     * @param imageCount Number of images being uploaded
+     */
+    @Override
+    public void updateSubtitleVisibility(int imageCount) {
+        categoriesSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
+        licenseSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -327,12 +356,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
         updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next, bottomCardAddDescription);
     }
 
-    @Override
-    public void setRightCardState(boolean state) {
-        rightCardExpandButton.animate().rotation(rightCardExpandButton.getRotation() + (state ? -180 : 180)).start();
-        //Add all items in rightCard here
-        rightCardMapButton.setVisibility(state ? View.VISIBLE : View.GONE);
-    }
 
     @Override
     public void setBackground(Uri mediaUri) {
@@ -351,18 +374,10 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
-    public void showBadPicturePopup(@Result int result) {
-        if (result >= 8 ) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
-            directPrefs.edit().putBoolean("Picture_Has_Correct_Location",false);
-        }
-        String errorMessageForResult = getErrorMessageForResult(this, result);
-        if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
-            return;
-        }
-
+    public void showBadPicturePopup(String errorMessage) {
         DialogUtil.showAlertDialog(this,
                 getString(R.string.warning),
-                errorMessageForResult,
+                errorMessage,
                 () -> presenter.deletePicture(),
                 () -> presenter.keepPicture());
     }
@@ -390,6 +405,22 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
+    public void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        if (progressDialog != null && !isFinishing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
     public void launchMapActivity(String decCoords) {
         Utils.handleGeoCoordinates(this, decCoords);
     }
@@ -405,24 +436,52 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     @Override
-    protected void onAuthCookieAcquired(String authCookie) {
-        mwApi.setAuthCookie(authCookie);
-    }
-
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
-            dexterPermissionObtainer.onManualPermissionReturned();
+            //TODO: Confirm if handling manual permission enabled is required
         }
     }
 
+    /**
+     * Parses links from HTML string, and makes the links clickable in the specified TextView.<br>
+     * Uses {@link #makeLinkClickable(SpannableStringBuilder, URLSpan)}.
+     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
+     */
+    private void setTextViewHTML(TextView text, String html)
+    {
+        CharSequence sequence = Html.fromHtml(html);
+        SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
+        URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
+        for (URLSpan span : urls) {
+            makeLinkClickable(strBuilder, span);
+        }
+        text.setText(strBuilder);
+        text.setMovementMethod(LinkMovementMethod.getInstance());
+    }
 
-    @Override
-    protected void onAuthFailure() {
-        Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG).show();
-        finish();
+    /**
+     * Sets onClick handler to launch browser for the specified URLSpan.
+     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
+     */
+    private void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span)
+    {
+        int start = strBuilder.getSpanStart(span);
+        int end = strBuilder.getSpanEnd(span);
+        int flags = strBuilder.getSpanFlags(span);
+        ClickableSpan clickable = new ClickableSpan() {
+            public void onClick(View view) {
+                // Handle hyperlink click
+                String hyperLink = span.getURL();
+                launchBrowser(hyperLink);
+            }
+        };
+        strBuilder.setSpan(clickable, start, end, flags);
+        strBuilder.removeSpan(span);
+    }
+
+    private void launchBrowser(String hyperLink) {
+        Utils.handleWebUrl(this, Uri.parse(hyperLink));
     }
 
     private void configureLicenses() {
@@ -441,9 +500,6 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     private void configureLayout() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            cardLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
-        }
         background.setScaleType(ImageView.ScaleType.CENTER_CROP);
         background.setOnScaleChangeListener((scaleFactor, x, y) -> presenter.closeAllCards());
     }
@@ -456,6 +512,7 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     private void configureBottomCard() {
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
+        bottomCard.setOnClickListener(v -> presenter.toggleBottomCardState());
         bottomCardAddDescription.setOnClickListener(v -> addNewDescription());
     }
 
@@ -465,13 +522,16 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     private void configureRightCard() {
-        rightCardExpandButton.setOnClickListener(v -> presenter.toggleRightCardState());
         rightCardMapButton.setOnClickListener(v -> presenter.openCoordinateMap());
     }
 
     private void configureNavigationButtons() {
         // Navigation next / previous for each image as we're collecting title + description
         next.setOnClickListener(v -> {
+            if (!NetworkUtils.isInternetConnectionEstablished(this)) {
+                ViewUtil.showShortSnackbar(rootLayout, R.string.no_internet);
+                return;
+            }
             setTitleAndDescriptions();
             presenter.handleNext(descriptionsAdapter.getTitle(),
                     descriptionsAdapter.getDescriptions());
@@ -498,9 +558,14 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
     }
 
     private void configureCategories() {
+        categoryFrameLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         categoriesAdapter = new UploadCategoriesAdapterFactory(categoriesModel).create(new ArrayList<>());
         categoriesList.setLayoutManager(new LinearLayoutManager(this));
         categoriesList.setAdapter(categoriesAdapter);
+    }
+
+    private void configurePolicy() {
+        setTextViewHTML(licensePolicy, getString(R.string.media_upload_policy));
     }
 
     @SuppressLint("CheckResult")
@@ -542,7 +607,26 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
 
     private void receiveSharedItems() {
         Intent intent = getIntent();
-        String mimeType = intent.getType();
+        String action = intent.getAction();
+        if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
+            receiveExternalSharedItems();
+        } else if (ACTION_INTERNAL_UPLOADS.equals(action)) {
+            receiveInternalSharedItems();
+        }
+    }
+
+    private void receiveExternalSharedItems() {
+        List<UploadableFile> uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
+        if (uploadableFiles.isEmpty()) {
+            handleNullMedia();
+            return;
+        }
+
+        presenter.receive(uploadableFiles, SOURCE_EXTERNAL, null);
+    }
+
+    private void receiveInternalSharedItems() {
+        Intent intent = getIntent();
         String source;
 
         if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
@@ -551,24 +635,36 @@ public class UploadActivity extends AuthenticatedActivity implements UploadView,
             source = Contribution.SOURCE_EXTERNAL;
         }
 
-        if (Intent.ACTION_SEND.equals(intent.getAction())) {
-            Uri mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            if (intent.getBooleanExtra("isDirectUpload", false)) {
-                String imageTitle = directPrefs.getString("Title", "");
-                String imageDesc = directPrefs.getString("Desc", "");
-                Timber.i("Received direct upload with title %s and description %s", imageTitle, imageDesc);
-                String wikidataEntityIdPref = intent.getStringExtra(WIKIDATA_ENTITY_ID_PREF);
-                String wikidataItemLocation = intent.getStringExtra(WIKIDATA_ITEM_LOCATION);
-                presenter.receiveDirect(mediaUri, mimeType, source, wikidataEntityIdPref, imageTitle, imageDesc, wikidataItemLocation);
-            } else {
-                Timber.i("Received single upload");
-                presenter.receive(mediaUri, mimeType, source);
-            }
-        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
-            ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-            Timber.i("Received multiple upload %s", urisList.size());
-            presenter.receive(urisList, mimeType, source);
+        Timber.d("Received intent %s with action %s and from source %s",
+                intent.toString(),
+                intent.getAction(),
+                source);
+
+        ArrayList<UploadableFile> uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
+        Timber.i("Received multiple upload %s", uploadableFiles.size());
+
+        if (uploadableFiles.isEmpty()) {
+            handleNullMedia();
+            return;
         }
+
+        Place place = intent.getParcelableExtra(PLACE_OBJECT);
+        presenter.receive(uploadableFiles, source, place);
+
+        resetDirectPrefs();
+    }
+
+    public void resetDirectPrefs() {
+        directKvStore.remove(PLACE_OBJECT);
+    }
+
+    /**
+     * Handle null URI from the received intent.
+     * Current implementation will simply show a toast and finish the upload activity.
+     */
+    private void handleNullMedia() {
+        ViewUtil.showLongToast(this, R.string.error_processing_image);
+        finish();
     }
 
     private void updateCardState(boolean state, ImageView button, View... content) {

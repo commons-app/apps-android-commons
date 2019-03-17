@@ -38,7 +38,7 @@
         android:textSize="@dimen/subtitle_text"
         android:text="@string/upload_flow_all_images_in_set"
         android:layout_below="@+id/categories_title"
-        tools:text="(For all images in set)" />
+        android:visibility="gone" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -49,12 +49,12 @@
         android:layout_marginRight="@dimen/standard_gap"
         android:layout_below="@id/categories_subtitle">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/category_search_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/category_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ProgressBar
             android:id="@+id/categoriesSearchInProgress"
@@ -78,7 +78,7 @@
             tools:visibility="visible" />
     </FrameLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

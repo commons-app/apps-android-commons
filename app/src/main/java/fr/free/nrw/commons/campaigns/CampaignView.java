@@ -3,20 +3,22 @@ package fr.free.nrw.commons.campaigns;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * A view which represents a single campaign
@@ -52,9 +54,8 @@ public class CampaignView extends SwipableCardView {
 
     @Override public boolean onSwipe(View view) {
         view.setVisibility(View.GONE);
-        ((MainActivity) getContext()).prefs.edit()
-            .putBoolean("displayCampaignsCardView", false)
-            .apply();
+        ((MainActivity) getContext()).defaultKvStore
+                .putBoolean("displayCampaignsCardView", false);
         ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_campaign_dismiss_message));
         return true;

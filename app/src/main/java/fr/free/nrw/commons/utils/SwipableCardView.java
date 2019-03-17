@@ -2,13 +2,14 @@ package fr.free.nrw.commons.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import timber.log.Timber;
 
 /**
  * A card view which informs onSwipe events to its child
@@ -37,7 +38,7 @@ public abstract class SwipableCardView extends CardView {
         this.setOnTouchListener((v, event) -> {
             boolean isSwipe = false;
             float deltaX = 0.0f;
-            Log.e("#SwipableCardView#", event.getAction() + "");
+            Timber.e(event.getAction() + "");
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     x1 = event.getX();

@@ -1,12 +1,10 @@
 package fr.free.nrw.commons.upload;
 
 import android.net.Uri;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.util.List;
-
-import fr.free.nrw.commons.utils.ImageUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -44,15 +42,13 @@ public interface UploadView {
 
     void setBottomCardState(boolean state);
 
-    void setRightCardState(boolean bottomCardState);
-
     void setBackground(Uri mediaUri);
 
     void setTopCardVisibility(boolean visible);
 
     void setBottomCardVisibility(boolean visible);
 
-    void setBottomCardVisibility(@UploadPage int page);
+    void setBottomCardVisibility(@UploadPage int page, int uploadCount);
 
     void updateRightCardContent(boolean gpsPresent);
 
@@ -64,9 +60,11 @@ public interface UploadView {
 
     void updateTopCardContent();
 
+    void updateSubtitleVisibility(int imageCount);
+
     void dismissKeyboard();
 
-    void showBadPicturePopup(@ImageUtils.Result int errorMessage);
+    void showBadPicturePopup(String errorMessage);
 
     void showDuplicatePicturePopup();
 
@@ -79,4 +77,8 @@ public interface UploadView {
     void initDefaultCategories();
 
     void showNoCategorySelectedWarning();
+
+    void showProgressDialog();
+
+    void hideProgressDialog();
 }

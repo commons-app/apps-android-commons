@@ -1,99 +1,160 @@
 package fr.free.nrw.commons;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.assertion.ViewAssertions;
-import android.support.test.espresso.matcher.PreferenceMatchers;
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.filters.LargeTest;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+import android.content.Context;
 
+import com.google.gson.Gson;
+
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Map;
-
+import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.matcher.PreferenceMatchers;
+import androidx.test.filters.LargeTest;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.settings.SettingsActivity;
+
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertEquals;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class SettingsActivityTest {
-    private SharedPreferences prefs;
-    private Map<String,?> prefValues;
+    JsonKvStore defaultKvStore;
 
     @Rule
-    public ActivityTestRule<SettingsActivity> activityRule =
-            new ActivityTestRule<SettingsActivity>(SettingsActivity.class,
-                    false /* Initial touch mode */, true /*  launch activity */) {
+    public ActivityTestRule activityRule = new ActivityTestRule<>(SettingsActivity.class);
 
-                @Override
-                protected void afterActivityLaunched() {
-                    // save preferences
-                    prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
-                    prefValues = prefs.getAll();
-                }
-
-                @Override
-                protected void afterActivityFinished() {
-                    // restore preferences
-                    SharedPreferences.Editor editor = prefs.edit();
-                    for (Map.Entry<String,?> entry: prefValues.entrySet()) {
-                        String key = entry.getKey();
-                        Object val = entry.getValue();
-                        if (val instanceof String) {
-                            editor.putString(key, (String)val);
-                        } else if (val instanceof Boolean) {
-                            editor.putBoolean(key, (Boolean)val);
-                        } else if (val instanceof Integer) {
-                            editor.putInt(key, (Integer)val);
-                        } else {
-                            throw new RuntimeException("type not implemented: " + entry);
-                        }
-                    }
-                    editor.apply();
-                }
-            };
-
-    @Test
-    public void oneLicenseIsChecked() {
-        // click "License" (the first item)
-        Espresso.onData(PreferenceMatchers.withKey("defaultLicense"))
-                .inAdapterView(ViewMatchers.withId(android.R.id.list))
-                .atPosition(0)
-                .perform(ViewActions.click());
-
-        // test the selected item
-        Espresso.onView(ViewMatchers.isChecked())
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    @Before
+    public void setup() {
+        Context context = InstrumentationRegistry.getTargetContext();
+        String storeName = context.getPackageName() + "_preferences";
+        defaultKvStore = new JsonKvStore(context, storeName, new Gson());
     }
 
     @Test
-    public void afterClickingCcby4ItWillStay() {
-        // click "License" (the first item)
-        Espresso.onData(PreferenceMatchers.withKey("defaultLicense"))
-                .inAdapterView(ViewMatchers.withId(android.R.id.list))
-                .atPosition(0)
-                .perform(ViewActions.click());
+    public void setRecentUploadLimitTo123() {
+        // Open "Use external storage" preference
+        Espresso.onData(PreferenceMatchers.withKey("uploads"))
+                .inAdapterView(withId(android.R.id.list))
+                .perform(click());
 
-        // click "Attribution 4.0"
-        Espresso.onView(
-                ViewMatchers.withText(R.string.license_name_cc_by_four)
-        ).perform(ViewActions.click());
+        // Try setting it to 123
+        Espresso.onView(withId(android.R.id.edit))
+                .perform(replaceText("123"));
 
-        // click "License" (the first item)
-        Espresso.onData(PreferenceMatchers.withKey("defaultLicense"))
-                .inAdapterView(ViewMatchers.withId(android.R.id.list))
-                .atPosition(0)
-                .perform(ViewActions.click());
+        // Click "OK"
+        Espresso.onView(allOf(withId(android.R.id.button1), withText("OK")))
+                .perform(click());
 
-        // test the value remains "Attribution 4.0"
-        Espresso.onView(ViewMatchers.isChecked())
-                .check(ViewAssertions.matches(
-                        ViewMatchers.withText(R.string.license_name_cc_by_four)
-                ));
+        // Check setting set to 123 in SharedPreferences
+        assertEquals(
+                123,
+                defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 0)
+        );
+
+        // Check displaying 123 in summary text
+        Espresso.onData(PreferenceMatchers.withKey("uploads"))
+                .inAdapterView(withId(android.R.id.list))
+                .onChildView(withId(android.R.id.summary))
+                .check(matches(withText("123")));
+    }
+
+    @Test
+    public void setRecentUploadLimitTo0() {
+        // Open "Use external storage" preference
+        Espresso.onData(PreferenceMatchers.withKey("uploads"))
+                .inAdapterView(withId(android.R.id.list))
+                .perform(click());
+
+        // Try setting it to 0
+        Espresso.onView(withId(android.R.id.edit))
+                .perform(replaceText("0"));
+
+        // Click "OK"
+        Espresso.onView(allOf(withId(android.R.id.button1), withText("OK")))
+                .perform(click());
+
+        // Check setting set to 100 in SharedPreferences
+        assertEquals(
+                100,
+                defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 0)
+        );
+
+        // Check displaying 100 in summary text
+        Espresso.onData(PreferenceMatchers.withKey("uploads"))
+                .inAdapterView(withId(android.R.id.list))
+                .onChildView(withId(android.R.id.summary))
+                .check(matches(withText("100")));
+    }
+
+    @Test
+    public void setRecentUploadLimitTo700() {
+        // Open "Use external storage" preference
+        Espresso.onData(PreferenceMatchers.withKey("uploads"))
+                .inAdapterView(withId(android.R.id.list))
+                .perform(click());
+
+        // Try setting it to 700
+        Espresso.onView(withId(android.R.id.edit))
+                .perform(replaceText("700"));
+
+        // Click "OK"
+        Espresso.onView(allOf(withId(android.R.id.button1), withText("OK")))
+                .perform(click());
+
+        // Check setting set to 500 in SharedPreferences
+        assertEquals(
+                500,
+                defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 0)
+        );
+
+        // Check displaying 100 in summary text
+        Espresso.onData(PreferenceMatchers.withKey("uploads"))
+                .inAdapterView(withId(android.R.id.list))
+                .onChildView(withId(android.R.id.summary))
+                .check(matches(withText("500")));
+    }
+
+    @Test
+    public void useAuthorNameTogglesOn() {
+        // Turn on "Use external storage" preference if currently off
+        if (!defaultKvStore.getBoolean("useAuthorName", true)) {
+            Espresso.onData(PreferenceMatchers.withKey("useAuthorName"))
+                    .inAdapterView(withId(android.R.id.list))
+                    .perform(click());
+        }
+
+        // Check authorName preference is enabled
+        Espresso.onData(PreferenceMatchers.withKey("authorName"))
+                .inAdapterView(withId(android.R.id.list))
+                .check(matches(isEnabled()));
+    }
+
+    @Test
+    public void useAuthorNameTogglesOff() {
+        // Turn off "Use external storage" preference if currently on
+        if (defaultKvStore.getBoolean("useAuthorName", false)) {
+            Espresso.onData(PreferenceMatchers.withKey("useAuthorName"))
+                    .inAdapterView(withId(android.R.id.list))
+                    .perform(click());
+        }
+
+        // Check authorName preference is enabled
+        Espresso.onData(PreferenceMatchers.withKey("authorName"))
+                .inAdapterView(withId(android.R.id.list))
+                .check(matches(not(isEnabled())));
     }
 }

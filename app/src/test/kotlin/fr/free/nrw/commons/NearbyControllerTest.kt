@@ -18,7 +18,7 @@ class NearbyControllerTest {
         val location = LatLng(0.0, 0.0, 0f)
 
         val options = loadAttractionsFromLocationToBaseMarkerOptions(
-                location, null, RuntimeEnvironment.application)
+                location, null, RuntimeEnvironment.application, null)
 
         assertEquals(0, options.size.toLong())
     }
@@ -28,7 +28,7 @@ class NearbyControllerTest {
         val location = LatLng(0.0, 0.0, 0f)
 
         val options = loadAttractionsFromLocationToBaseMarkerOptions(
-                location, emptyList(), RuntimeEnvironment.application)
+                location, emptyList(), RuntimeEnvironment.application, emptyList())
 
         assertEquals(0, options.size.toLong())
     }

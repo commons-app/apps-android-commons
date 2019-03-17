@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/standard_gap"
     android:layout_marginBottom="8dp"
     android:gravity="center"
-    android:orientation="vertical"
-    tools:showIn="@layout/activity_upload">
+    android:orientation="vertical">
 
     <ProgressBar
         android:id="@+id/shareInProgress"
@@ -18,6 +16,7 @@
         android:indeterminateOnly="true" />
 
     <TextView
+        android:id="@+id/please_wait_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/standard_gap"
@@ -25,7 +24,6 @@
         android:layout_marginTop="@dimen/standard_gap"
         android:layout_marginEnd="@dimen/standard_gap"
         android:layout_marginRight="@dimen/standard_gap"
-        android:gravity="center"
-        android:text="Receiving shared content,\nthis may take a moment or two." />
+        android:gravity="center" />
 
 </LinearLayout>

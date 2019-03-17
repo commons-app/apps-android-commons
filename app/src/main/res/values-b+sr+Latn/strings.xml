@@ -136,17 +136,14 @@
   <string name="tutorial_1_text">Vikimedijina Ostava sadrži većinu slika koja se koristi na Vikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomažu u obrazovanju ljudi širom sveta.</string>
   <string name="tutorial_2_text">Postavite slike koje ste preuzeli ili kreirali u potpunosti sami:</string>
-  <string name="tutorial_2_subtext">Prirodne objekte (cveće, životinje, planine)\n• Korisne objekte (bicikle, železničke stanice)\n• Poznate ljude (vaš gradonačelnik, olimpijci koje ste sreli)</string>
   <string name="tutorial_2_subtext_1">Prirodni objekti (cveće, životinje, planine)</string>
   <string name="tutorial_2_subtext_2">Korisni objekti (bicikli, železničke stanice)</string>
   <string name="tutorial_2_subtext_3">Poznati ljudi (vaš gradonačelnik, olimpijci koje ste sreli)</string>
   <string name="tutorial_3_text">NE otpremajte:</string>
-  <string name="tutorial_3_subtext">- Selfije i slike Vaših prijatelja\n- Slike koje Ste preuzeli sa interneta\n- Skrinšotove iz sopstvenih aplikacija</string>
   <string name="tutorial_3_subtext_1">Selfiji ili slike vaših prijatelja</string>
   <string name="tutorial_3_subtext_2">Slike koje ste preuzeli sa interneta</string>
   <string name="tutorial_3_subtext_3">Snimci ekrana sa prikazanim sadržajem vlasničkih aplikacija</string>
   <string name="tutorial_4_text">Primer otpremanja:</string>
-  <string name="tutorial_4_subtext">— Naslov: Sidnejska opera\n— Opis: Sidnejska opera, pogled preko zaliva\n— Kategorije: Sidnejska opera sa zapada, pogledi na Sidnejksu operu iz daljine</string>
   <string name="tutorial_4_subtext_1">Naslov: Sidnejska opera</string>
   <string name="tutorial_4_subtext_2">Opis: Sidnejska opera, pogled preko zaliva</string>
   <string name="tutorial_4_subtext_3">Kategorije: Sydney Opera House from the west, Sydney Opera House remote views</string>
@@ -172,11 +169,8 @@
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Naslov</string>
-  <string name="media_detail_media_title">Naslov medija</string>
   <string name="media_detail_description">Opis</string>
-  <string name="media_detail_description_explanation">Opis datoteke ide ovde. Može da bude poprilično dug i prikazivaće se u više redova. Nadamo se da će izgledati lepo.</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_author_explanation">Korisničko ime autora izabrane slike ide ovde.</string>
   <string name="media_detail_uploaded_date">Datum otpremanja</string>
   <string name="media_detail_license">Licenca</string>
   <string name="media_detail_coordinates">Koordinate</string>
@@ -246,7 +240,7 @@
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavi me</string>
   <string name="skip_login_title">Zaista želite da preskočite prijavu?</string>
-  <string name="skip_login_message">Nećete moći da otpremate slike.</string>
+  <string name="skip_login_message" fuzzy="true">Nećete moći da otpremate slike.</string>
   <string name="login_alert_message">Prijavite se da biste koristili ovu funkciju</string>
   <string name="copy_wikicode">Kopiraj vikitekst u ostavu</string>
   <string name="wikicode_copied">Vikitekst je kopiran u ostavu</string>
@@ -345,5 +339,5 @@
   <string name="provider_bookmarks">Obeleživači</string>
   <string name="bookmark_empty">Niste dodali nijedan obeleživač</string>
   <string name="provider_bookmarks_location">Obeleživači</string>
-  <string name="no_uploads">Dobro došli na Ostavu!\n\nOtpremite prve medije dodirom gorenavedene ikonice kamere ili galerije.</string>
+  <string name="no_uploads" fuzzy="true">Dobro došli na Ostavu!\n\nOtpremite prve medije dodirom gorenavedene ikonice kamere ili galerije.</string>
 </resources>

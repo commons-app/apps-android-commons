@@ -1,13 +1,12 @@
 package fr.free.nrw.commons.explore.categories;
 
 
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +30,7 @@ import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -57,10 +57,14 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.imagesNotFound)
     TextView categoriesNotFoundView;
     String query;
+    @BindView(R.id.bottomProgressBar)
+    ProgressBar bottomProgressBar;
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore basicKvStore;
 
     private RVRendererAdapter<String> categoriesAdapter;
     private List<String> queryList = new ArrayList<>();
@@ -128,13 +132,15 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
             handleNoInternet();
             return;
         }
-        progressBar.setVisibility(View.VISIBLE);
+        bottomProgressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(GONE);
         queryList.clear();
         categoriesAdapter.clear();
         Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .doOnSubscribe(disposable -> saveQuery(query))
                 .subscribe(this::handleSuccess, this::handleError);
     }
 
@@ -144,7 +150,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      */
     public void addCategoriesToList(String query) {
         this.query = query;
-        progressBar.setVisibility(View.VISIBLE);
+        bottomProgressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(GONE);
         Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -160,6 +167,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private void handlePaginationSuccess(List<String> mediaList) {
         queryList.addAll(mediaList);
         progressBar.setVisibility(View.GONE);
+        bottomProgressBar.setVisibility(GONE);
         categoriesAdapter.addAll(mediaList);
         categoriesAdapter.notifyDataSetChanged();
     }
@@ -178,13 +186,10 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         }
         else {
 
-            progressBar.setVisibility(View.GONE);
+            bottomProgressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(GONE);
             categoriesAdapter.addAll(mediaList);
             categoriesAdapter.notifyDataSetChanged();
-
-            // check if user is waiting for 5 seconds if yes then save search query to history.
-            Handler handler = new Handler();
-            handler.postDelayed(() -> saveQuery(query), 5000);
         }
     }
 

@@ -1,9 +1,8 @@
 package fr.free.nrw.commons.category;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +25,8 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -55,7 +56,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private String categoryName = null;
 
     @Inject CategoryImageController controller;
-    @Inject @Named("category_prefs") SharedPreferences categoryPreferences;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore categoryKvStore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,9 +94,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param keyword
      */
     private void resetQueryContinueValues(String keyword) {
-        SharedPreferences.Editor editor = categoryPreferences.edit();
-        editor.remove(keyword);
-        editor.apply();
+        categoryKvStore.remove(keyword);
     }
 
     /**
@@ -248,6 +249,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
             }
             try {
                 ((CategoryDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try {
+                ((ExploreActivity) getContext()).viewPagerNotifyDataSetChanged();
             }catch (Exception e){
                 e.printStackTrace();
             }

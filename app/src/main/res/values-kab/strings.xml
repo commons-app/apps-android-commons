@@ -119,11 +119,8 @@
   <string name="tutorial_1_text">Wikimedia Commons tettmuddu tanezduɣt i tugett n tugniwin ara yettwasqedcen di Wikipedia.</string>
   <string name="tutorial_1_subtext">Tugniwin-ik ad d-muddent afus i useklem n yimdanen deg umaḍal meṛṛa.</string>
   <string name="tutorial_2_text">Sali tugniwin yettwaṭṭfen neɣ yettwarnan kan sɣuṛ-k.</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- Tiɣawsiwin n ugama (tijeggigin, iɣrsiwen, idurar) \n- Tiɣawsiwin ilaqen (iviluten, tiɣsar n tmacinin) \n- Imdanen yettwasnen(aselway n tɣiwant, inaddalen ulimpiken i d-muggreḍ)</string>
   <string name="tutorial_3_text">UR salay ara:</string>
-  <string name="tutorial_3_subtext">- isilfiyen neɣ tugniwin n yimdakkal-ik \n- tugniwin i d-sidreḍ si Internet\n- inɣal n ugdil n yisnasen yesɛan imawlan</string>
   <string name="tutorial_4_text">Amedya n usali:</string>
-  <string name="tutorial_4_subtext">- Azwel: Tazqqa Opera n Sydney\n- Aglam : Tazeqqa Opera n Sydney seg ilel\n- Taggayin: Tazeqqa Opera n Sydney, Tazeqqa Opera n Sydney seg umalu, timeẓriyin s lebɛid n Tazeqqa Opera n Sydney</string>
   <string name="welcome_wikipedia_text">Ttekki s tugniwin-ik. Snerni imagraden n Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Tugniwin ɣef Wikipedia ttasent-d si Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Tugniwin-ik ad slemdent imdanen deg umaḍal.</string>
@@ -146,9 +143,7 @@
   <string name="yes">Ih</string>
   <string name="no">Uhu</string>
   <string name="media_detail_title">Azwel</string>
-  <string name="media_detail_media_title">Azmel n umidya</string>
   <string name="media_detail_description">Aglam</string>
-  <string name="media_detail_description_explanation">Aglak n umidya yusa-d sya. Ayagi yezmer ad yaẓay, sakin ad yeddu akken iwata, udiɣ ɣef ddeqs n izirigen. Nessaram d akken aya ad yeqqim yecbeḥ.</string>
   <string name="media_detail_uploaded_date">Azemz n usali</string>
   <string name="media_detail_license">Turagt</string>
   <string name="media_detail_coordinates">imsidag</string>
