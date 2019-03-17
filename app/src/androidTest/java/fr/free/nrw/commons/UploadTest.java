@@ -19,6 +19,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import timber.log.Timber;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -122,5 +123,9 @@ public class UploadTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        String fileUrl = "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
+                commonsFileName.replace(' ', '_') + ".jpg";
+        Timber.i("File should be uploaded to " + fileUrl);
     }
 }
