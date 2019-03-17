@@ -12,7 +12,7 @@ import java.net.URL;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ConfigUtils;
 
@@ -22,7 +22,7 @@ public class LogBuilder {
     private final JSONObject data;
     private final long rev;
     private final String schema;
-    private final BasicKvStore prefs;
+    private final JsonKvStore prefs;
     private final Context context;
 
     /**
@@ -36,7 +36,7 @@ public class LogBuilder {
     LogBuilder(String schema,
                long revision,
                MediaWikiApi mwApi,
-               BasicKvStore prefs,
+               JsonKvStore prefs,
                Context context) {
         this.prefs = prefs;
         this.data = new JSONObject();

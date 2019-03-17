@@ -10,7 +10,6 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -30,13 +29,13 @@ public class WikidataEditService {
     private final Context context;
     private final MediaWikiApi mediaWikiApi;
     private final WikidataEditListener wikidataEditListener;
-    private final BasicKvStore directKvStore;
+    private final JsonKvStore directKvStore;
 
     @Inject
     public WikidataEditService(Context context,
                                MediaWikiApi mediaWikiApi,
                                WikidataEditListener wikidataEditListener,
-                               @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
+                               @Named("default_preferences") JsonKvStore directKvStore) {
         this.context = context;
         this.mediaWikiApi = mediaWikiApi;
         this.wikidataEditListener = wikidataEditListener;
