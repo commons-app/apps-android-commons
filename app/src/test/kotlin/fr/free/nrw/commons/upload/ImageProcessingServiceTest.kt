@@ -103,7 +103,7 @@ class u {
 
     @Test
     fun validateImageForDarkImage() {
-        `when`(imageUtilsWrapper!!.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
+        `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_DARK))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, false)
         assertEquals(ImageUtils.IMAGE_DARK, validateImage.blockingGet())
