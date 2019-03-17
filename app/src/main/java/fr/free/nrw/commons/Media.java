@@ -4,10 +4,12 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.wikipedia.util.DateUtil;
 import org.wikipedia.util.StringUtil;
 
 import androidx.annotation.Nullable;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,7 +21,6 @@ import java.util.regex.Pattern;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.model.ImageInfo;
 import fr.free.nrw.commons.media.model.MwQueryPage;
-import fr.free.nrw.commons.utils.DateUtils;
 
 public class Media implements Parcelable {
 
@@ -84,7 +85,7 @@ public class Media implements Parcelable {
      * @param creator Media creator
      */
     public Media(Uri localUri, String imageUrl, String filename, String description,
-                 long dataLength, Date dateCreated, @Nullable Date dateUploaded, String creator) {
+                 long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this();
         this.localUri = localUri;
         this.imageUrl = imageUrl;
@@ -387,6 +388,14 @@ public class Media implements Parcelable {
         }
     }
 
+    @Nullable private static Date safeParseDate(String dateStr) {
+        try {
+            return DateUtil.getIso8601DateFormatShort().parse(dateStr);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
     /**
      * Method of Parcelable interface
      * @return zero
@@ -445,8 +454,8 @@ public class Media implements Parcelable {
                 page.title(),
                 imageInfo.getMetadata().imageDescription().value(),
                 0,
-                DateUtils.getDateFromString(imageInfo.getMetadata().getDateTimeOriginal().value()),
-                DateUtils.getDateFromString(imageInfo.getMetadata().getDateTime().value()),
+                safeParseDate(imageInfo.getMetadata().getDateTimeOriginal().value()),
+                safeParseDate(imageInfo.getMetadata().getDateTime().value()),
                 StringUtil.fromHtml(imageInfo.getMetadata().getArtist().value()).toString()
         );
 

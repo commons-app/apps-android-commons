@@ -5,8 +5,11 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
+import org.wikipedia.util.DateUtil;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,7 +28,6 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.utils.DateUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -205,7 +207,7 @@ public class OkHttpJsonApiClient {
      */
     @Nullable
     public Single<Media> getPictureOfTheDay() {
-        String template = "Template:Potd/" + DateUtils.getCurrentDate();
+        String template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort().format(new Date());
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(commonsBaseUrl)
                 .newBuilder()
