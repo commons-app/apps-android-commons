@@ -32,22 +32,6 @@ import static android.widget.Toast.LENGTH_SHORT;
 public class Utils {
 
     /**
-     * Strips localization symbols from a string.
-     * Removes the suffix after "@" and quotes.
-     *
-     * @param s string possibly containing localization symbols
-     * @return stripped string
-     */
-    public static String stripLocalizedString(String s) {
-        Matcher matcher = Pattern.compile("\\\"(.*)\\\"(@\\w+)?").matcher(s);
-        if (matcher.find()) {
-            return matcher.group(1);
-        } else {
-            return s;
-        }
-    }
-
-    /**
      * Creates an URL for thumbnail
      *
      * @param filename Thumbnail file name
@@ -69,20 +53,6 @@ public class Utils {
             return URLEncoder.encode(url, "utf-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Capitalizes the first character of a string.
-     *
-     * @param string String to alter
-     * @return string with capitalized first character
-     */
-    public static String capitalize(String string) {
-        if (string.length() > 0) {
-            return string.substring(0, 1).toUpperCase(Locale.getDefault()) + string.substring(1);
-        } else {
-            return string;
         }
     }
 

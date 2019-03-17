@@ -3,6 +3,7 @@ package fr.free.nrw.commons;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -194,7 +195,7 @@ public class MediaDataExtractor {
         return findTemplateParameter(templateNode, new TemplateChildNodeComparator() {
             @Override
             public boolean match(Node node) {
-                return (Utils.capitalize(node.getTextContent().trim()).equals(Utils.capitalize(theName)));
+                return (StringUtils.capitalize(node.getTextContent().trim()).equals(StringUtils.capitalize(theName)));
             }
         });
     }
