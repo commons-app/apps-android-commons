@@ -492,7 +492,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_spam_report_default_answer">Because it is a selfie, very blurry or has nonsense etc.</string>
   <string name="review_c_violation_report_question">Why do you think this is copyright violation?</string>
   <string name="review_c_violation_report_default_answer">Because it looks like a press photo, a random photo from internet, a famous brand logo etc.</string>
-    <string name="review_category_yes_button_text">NO</string>
+    <string name="review_category_yes_button_text">NO, MIS-CATEGORIZED</string>
     <string name="review_category_no_button_text">SEEMS FINE</string>
     <string name="review_spam_yes_button_text">NO, OUT OF SCOPE</string>
     <string name="review_spam_no_button_text">SEEMS FINE</string>
