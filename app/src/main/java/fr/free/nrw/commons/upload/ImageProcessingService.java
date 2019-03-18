@@ -79,7 +79,7 @@ public class ImageProcessingService {
                 });
         return Single.zip(zipResult,checkFBMD,checkEXIF, (zip,fbmd,exif)->{
             Timber.d("zip:"+zip+"fbmd:"+fbmd+"exif:"+exif);
-            return zip| fbmd| exif;
+            return zip | fbmd | exif;
                 });
     }
 
@@ -109,11 +109,7 @@ public class ImageProcessingService {
      * * */
 
     public Single<Integer> checkEXIF(String filepath){
-        try {
-            return EXIFReader.processMetadata(filepath);
-        } catch (IOException e) {
-            return Single.just(ImageUtils.IMAGE_OK);
-        }
+        return EXIFReader.processMetadata(filepath);
     }
 
 

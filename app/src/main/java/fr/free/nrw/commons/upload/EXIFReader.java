@@ -25,21 +25,29 @@ import timber.log.Timber;
 public class EXIFReader {
     @Inject
     public EXIFReader() {
-
+        //Empty
     }
+    /**
+    * The method takes in path of the image and reads metadata using the library metadata-extractor
+     * And the checks for the presence of EXIF Directories in metadata object
+     * */
 
-    public Single<Integer> processMetadata(String path) throws IOException {
+    public Single<Integer> processMetadata(String path) {
         Metadata readMetadata = null;
         try {
             readMetadata = ImageMetadataReader.readMetadata(new File(path));
         } catch (ImageProcessingException e) {
-            e.printStackTrace();
+            Timber.d(e.toString());
         } catch (IOException e) {
-            e.printStackTrace();
+            Timber.d(e.toString());
         }
         if (readMetadata != null) {
             for (Directory directory : readMetadata.getDirectories()) {
-                if (directory.getName().equals("Exif IFD0") || directory.getName().equals("Exif SubIFD") || directory.getName().equals("Exif Thumbnail")) {
+                // In case of internet downloaded image these three fields are not present
+                if (directory.getName().equals("Exif IFD0") //Contains information about the device capturing the photo
+                        || directory.getName().equals("Exif SubIFD") //contains information like date, time and pixels of the image
+                        || directory.getName().equals("Exif Thumbnail")) //contains information about Image THumbnail like compression and reolution
+                {
                     Timber.d(directory.getName() + " Contains metadata");
                     return Single.just(ImageUtils.IMAGE_OK);
                 }
