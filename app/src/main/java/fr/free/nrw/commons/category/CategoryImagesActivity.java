@@ -128,19 +128,6 @@ public class CategoryImagesActivity
     }
 
     /**
-     * This method is called on backPressed when mediaDetailFragment is opened in the activity.
-     */
-    @Override
-    protected void onResume() {
-        if (supportFragmentManager.getBackStackEntryCount()==1){
-            //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
-            //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
-            onBackPressed();
-        }
-        super.onResume();
-    }
-
-    /**
      * Consumers should be simply using this method to use this activity.
      * @param context A Context of the application package implementing this class.
      * @param title Page title
