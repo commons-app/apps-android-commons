@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.daimajia.swipe.SwipeLayout;
 import com.google.android.material.animation.ArgbEvaluatorCompat;
 import com.pedrogomez.renderers.Renderer;
 
@@ -31,12 +30,8 @@ public class NotificationRenderer extends Renderer<Notification> {
     TextView time;
     @BindView(R.id.icon)
     ImageView icon;
-    @BindView(R.id.swipeLayout)
-    SwipeLayout swipeLayout;
-    @BindView(R.id.bottom)
-    LinearLayout bottomLayout;
-    @BindView(R.id.notification_view)
-    RelativeLayout notificationView;
+    /*@BindView(R.id.bottom)
+    LinearLayout bottomLayout;*/
 
     private NotificationClicked listener;
     private boolean isarchivedvisible = false;
@@ -50,13 +45,6 @@ public class NotificationRenderer extends Renderer<Notification> {
     @OnClick(R.id.notification_view)
     void onNotificationClicked() {
         listener.notificationClicked(getContent());
-    }
-
-    @OnClick(R.id.bottom)
-    void onBottomLayoutClicked(){
-        Notification notification = getContent();
-        Timber.d("NotificationID: %s", notification.notificationId);
-        listener.markNotificationAsRead(notification);
     }
 
     @Override
@@ -73,21 +61,6 @@ public class NotificationRenderer extends Renderer<Notification> {
     protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
         View inflatedView = layoutInflater.inflate(R.layout.item_notification, viewGroup, false);
         ButterKnife.bind(this, inflatedView);
-        if (isarchivedvisible) {
-            swipeLayout.setSwipeEnabled(false);
-        }else {
-            swipeLayout.setSwipeEnabled(true);
-        }
-        swipeLayout.addDrag(SwipeLayout.DragEdge.Top, bottomLayout);
-        swipeLayout.addRevealListener(R.id.bottom_wrapper_child1, (child, edge, fraction, distance) -> {
-            View star = child.findViewById(R.id.star);
-            float d = child.getHeight() / 2 - star.getHeight() / 2;
-            star.setTranslationY(d * fraction);
-            star.setScaleX(fraction + 0.6f);
-            star.setScaleY(fraction + 0.6f);
-            int c = ArgbEvaluatorCompat.getInstance().evaluate(fraction, Color.parseColor("#dddddd"), Color.parseColor("#90960a0a"));
-            child.setBackgroundColor(c);
-        });
         return inflatedView;
     }
 

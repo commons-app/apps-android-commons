@@ -226,6 +226,7 @@ public class NotificationActivity extends NavigationBaseActivity {
             public void notificationClicked(Notification notification) {
                 Timber.d("Notification clicked %s", notification.link);
                 handleUrl(notification.link);
+                removeNotification(notification);
             }
 
             @Override
