@@ -62,8 +62,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
 
-    private final String TAG="#SearchImageFragment#";
-
     private RVRendererAdapter<Media> imagesAdapter;
     private List<Media> queryList = new ArrayList<>();
 
@@ -236,7 +234,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             }
             ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.no_internet);
         } else {
-            Timber.d(TAG + ": attempt to update fragment ui after its view was destroyed");
+            Timber.d("Attempt to update fragment ui after its view was destroyed");
         }
     }
 

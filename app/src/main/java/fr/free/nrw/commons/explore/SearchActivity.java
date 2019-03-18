@@ -23,6 +23,7 @@ import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -108,17 +109,14 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                     viewPager.setVisibility(View.VISIBLE);
                     tabLayout.setVisibility(View.VISIBLE);
                     searchHistoryContainer.setVisibility(View.GONE);
-                    if (searchImageFragment != null
-                        && searchImageFragment.isAdded()
-                        && !searchImageFragment.isDetached()) {
+                    if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
                         searchImageFragment.updateImageList(query.toString());
                     }
 
-                    if (searchCategoryFragment != null
-                        && searchCategoryFragment.isAdded()
-                        && !searchCategoryFragment.isDetached()) {
+                    if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
                         searchCategoryFragment.updateCategoryList(query.toString());
                     }
+
                 } else {
                     viewPager.setVisibility(View.GONE);
                     tabLayout.setVisibility(View.GONE);
