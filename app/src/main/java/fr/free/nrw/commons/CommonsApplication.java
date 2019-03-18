@@ -8,7 +8,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Process;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -35,7 +35,8 @@ import fr.free.nrw.commons.concurrency.ThreadPoolService;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
@@ -57,8 +58,7 @@ public class CommonsApplication extends Application {
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
 
-    @Inject @Named("default_preferences") BasicKvStore defaultPrefs;
-    @Inject @Named("application_preferences") BasicKvStore applicationPrefs;
+    @Inject @Named("default_preferences") JsonKvStore defaultPrefs;
 
     /**
      * Constants begin
@@ -213,8 +213,7 @@ public class CommonsApplication extends Application {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
                     defaultPrefs.clearAll();
-                    applicationPrefs.clearAll();
-                    applicationPrefs.putBoolean("firstrun", false);
+                    defaultPrefs.putBoolean("firstrun", false);
                     updateAllDatabases();
                     logoutListener.onLogoutComplete();
                 });

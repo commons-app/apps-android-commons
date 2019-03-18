@@ -196,7 +196,7 @@
   <string name="maximum_limit">Μέγιστο Όριο</string>
   <string name="maximum_limit_alert">Δεν μπορεί να προβάλλει περισσότερα από 500 αρχεία</string>
   <string name="enter_valid">Εισαγάγετε έγκυρο αριθμό</string>
-  <string name="set_limit">Ορίσετε το Όριο της Πρόσφατης Επιφόρτωσης</string>
+  <string name="set_limit" fuzzy="true">Ορίσετε το Όριο της Πρόσφατης Επιφόρτωσης</string>
   <string name="login_failed_2fa_not_supported">Πιστοποίηση με δύο παράγοντες δεν υποστηρίζεται προς το παρόν.</string>
   <string name="logout_verification">Θέλετε πράγματι να αποσυνδεθείτε;</string>
   <string name="commons_logo">Κοινό Λογότυπο</string>
@@ -291,7 +291,7 @@
   <string name="about_translate_cancel">Ακύρωση</string>
   <string name="retry">Ξαναπροσπαθήστε</string>
   <string name="showcase_view_got_it_button">Κατάλαβα!</string>
-  <string name="showcase_view_whole_nearby_activity">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
   <string name="showcase_view_list_icon">Πατώντας αυτό το κουμπί φέρνει μια λίστα αυτών των μερών</string>
   <string name="showcase_view_plus_fab">Μπορείτε να ανεβάσετε μια εικόνα για οποιοδήποτε μέρος από την γκαλερί ή την κάμερά σας</string>
   <string name="no_images_found">Δεν βρέθηκαν εικόνες!</string>
@@ -398,7 +398,7 @@
   <string name="no_go_back">Όχι, Επιστροφή</string>
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
   <string name="no_image_uploaded">Δεν έχουν ανεβεί εικόνες</string>
-  <string name="no_notification">Δεν έχετε αδιάβαστες Ενημερώσεις.</string>
-  <string name="no_archived_notification">Δεν έχετε αρχειοθετημένες Ενημερώσεις.</string>
+  <string name="no_notification" fuzzy="true">Δεν έχετε αδιάβαστες Ενημερώσεις.</string>
+  <string name="no_archived_notification" fuzzy="true">Δεν έχετε αρχειοθετημένες Ενημερώσεις.</string>
   <string name="please_wait">Παρακαλούμε περιμένετε…</string>
 </resources>

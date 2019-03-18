@@ -1,7 +1,7 @@
 package fr.free.nrw.commons;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class PageTitle {
     private final String namespace;
@@ -14,11 +14,9 @@ public class PageTitle {
     public PageTitle(@NonNull String prefixedText) {
         String[] segments = prefixedText.trim().replace(" ", "_").split(":", 2);
 
-        // canonicalize and capitalize page title as done by MediaWiki
+        // Canonicalize and capitalize page title and namespace (if present)
         if (segments.length == 2) {
-            // TODO: canonicalize and capitalize namespace as well
-            // see https://www.mediawiki.org/wiki/Manual:Title.php#Canonical_forms
-            namespace = segments[0];
+            namespace = Utils.capitalize(segments[0]);
             titleKey = Utils.capitalize(segments[1]);
         } else {
             namespace = "";

@@ -190,7 +190,7 @@
   <string name="invalid_input">Ugyldig indtastning</string>
   <string name="maximum_limit_alert">Kan ikke vise mere end 500</string>
   <string name="enter_valid">Angiv et gyldigt tal</string>
-  <string name="set_limit">Angiv grænse for seneste overførelser</string>
+  <string name="set_limit" fuzzy="true">Angiv grænse for seneste overførelser</string>
   <string name="login_failed_2fa_not_supported">Tofaktorgodkendelse er ikke understøttet i øjeblikket.</string>
   <string name="logout_verification">Ønsker du at logge ud?</string>
   <string name="commons_logo">Commons-logo</string>
@@ -305,6 +305,7 @@
   <string name="no_recent_searches">Ingen seneste søgninger</string>
   <string name="search_history_deleted">Søgehistorik slettet</string>
   <string name="nominate_delete">Nominer til sletning</string>
+  <string name="delete">SLET</string>
   <string name="Achievements">Præstationer</string>
   <string name="statistics">STATISTIKKER</string>
   <string name="statistics_thanks">Tak modtaget</string>
