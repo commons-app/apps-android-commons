@@ -15,6 +15,6 @@ public class FragmentUtils {
      * @return
      */
     public static boolean isFragmentUIActive(Fragment fragment) {
-        return fragment.getActivity() != null && fragment.isAdded() && !fragment.isDetached() && !fragment.isRemoving();
+        return fragment!=null && fragment.getActivity() != null && fragment.isAdded() && !fragment.isDetached() && !fragment.isRemoving();
     }
 }
