@@ -126,17 +126,14 @@
   <string name="tutorial_1_text">Викисклад Википедияла ҡулланылғандан күберәк рәсемде һаҡлай.</string>
   <string name="tutorial_1_subtext">Һеҙ ҡуйған рәсемдәр ер шары халҡын мәғрифәтлерәк итә!</string>
   <string name="tutorial_2_text">Зинһар, тик үҙегеҙ төшөргән йәки үҙегеҙ эшләгән фотографияларҙы ғына тейәгеҙ:</string>
-  <string name="tutorial_2_subtext">- Тәбиғи объекттар (мәҫәлән, сәскәләр, хайуандар, тауҙар)\n- Файҙалы әйберҙәр (мәҫәлән, велосипедтар, вокзалдар)\n- Билдәле кешеләр (мәҫәлән, ҡалағыҙ мэры, һеҙ күргән олимпия спортсмендары)</string>
   <string name="tutorial_2_subtext_1">Тәбиғи объекттар (сәскәләр, хайуандар, тауҙар)</string>
   <string name="tutorial_2_subtext_2">Файҙалы объекттар (велосипедтар, вокзалдар)</string>
   <string name="tutorial_2_subtext_3">Билдәле шәхестәр (ҡала мэры, олимпия атлеттары һ.б.)</string>
   <string name="tutorial_3_text">Зинһар, ЙӨКЛӘМӘГЕҘ:</string>
-  <string name="tutorial_3_subtext">- Селфи йәки дуҫтарығыҙҙың фотоларын\n- Интернеттан күсереп алған фотоларҙы\n- Ирекһеҙ ҡушымталарҙан алынған скриншоттарҙы</string>
   <string name="tutorial_3_subtext_1">Селфи йәки дуҫтарығыҙҙың фотоһүрәттәре</string>
   <string name="tutorial_3_subtext_2">Интернеттан күсереп алынған һүрәттәр</string>
   <string name="tutorial_3_subtext_3">Патентлы ҡушылмаларҙан алынған скриншоттар</string>
   <string name="tutorial_4_text">Тейәү миҫалы:</string>
-  <string name="tutorial_4_subtext">- Атамаһы: Сидней опера театры\n- Һүрәтләмәһе: Сидней опера театры, ҡултыҡ яғынан күренеш\n- Категориялары:Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">Атама: Сидней опера театры</string>
   <string name="tutorial_4_subtext_2">Һүрәтләмә: Сидней опера театры ҡултыҡ яғынан ҡарағанда</string>
   <string name="tutorial_4_subtext_3">Категориялар: Сидней опера театры көнбайыштан ҡарағанда, Сидней опера театры</string>
@@ -158,8 +155,6 @@
   <string name="title_activity_nearby">Яҡындағы урындар</string>
   <string name="no_nearby">Яҡындағы урындар табылманы</string>
   <string name="media_detail_title">Атама</string>
-  <string name="media_detail_media_title">Мәғлүмәт йөрөтөүсенең атамаһы</string>
-  <string name="media_detail_description_explanation">Мәғлүмәт йөрөтөүсене һүрәтләү ошонда яҙыла.Уның ярайһы уҡ оҙон, хатта бер-нисә юлға һуҙылып китеүе лә бар. Шулай булһа ла ул бик матур күренер тип уйлайбыҙ.</string>
   <string name="media_detail_uploaded_date">Тейәү датаһы</string>
   <string name="media_detail_coordinates">Координаттар</string>
   <string name="media_detail_coordinates_empty">Бер ни ҙә бирелмәне</string>

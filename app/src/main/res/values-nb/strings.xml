@@ -6,6 +6,7 @@
 * Imre Eilertsen
 * JohSan65
 * Jon Harald Søby
+* Kingu
 * Laaknor
 * Orf3us
 * SuperPotato
@@ -145,17 +146,14 @@
   <string name="tutorial_1_text">Wikimedia Commons lagrer de fleste bildene som brukes på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dine bilder hjelper til å utdanne mennesker verden over!</string>
   <string name="tutorial_2_text">Last opp bilder som er tatt eller skapt av deg:</string>
-  <string name="tutorial_2_subtext">– Naturlige objekter (blomster, dyr, fjell)\n– Nyttige objekter (sykler, jernbanestasjoner)\n– Berømte personer (ordføreren din, OL-deltakere du har møtt)</string>
   <string name="tutorial_2_subtext_1">Naturlige objekter (blomster, dyr, fjell)</string>
   <string name="tutorial_2_subtext_2">Nyttige objekter (sykler, togstasjoner)</string>
   <string name="tutorial_2_subtext_3">Berømte personer (din ordfører, OL-deltakere du møtte)</string>
   <string name="tutorial_3_text">Vennligst IKKE last opp:</string>
-  <string name="tutorial_3_subtext">- Selfies eller bilder av vennene dine\n- Bilder som du har lastet ned fra internet\n- Skjermbilder tatt fra proprietære apper</string>
   <string name="tutorial_3_subtext_1">Selvportrett eller bilder av dine venner</string>
   <string name="tutorial_3_subtext_2">Bilder du lastet ned fra Internett</string>
   <string name="tutorial_3_subtext_3">Skjermbilder av proprietære programmer</string>
   <string name="tutorial_4_text">Opplastingseksempel:</string>
-  <string name="tutorial_4_subtext">- Tittel: Sydneys operahus\n- Beskrivelse: Operahuset i Sydney sett fra andre siden av bukten\n- Kategorier: Operahuset i Sydney ifra vest, Operahuset i Sydney utenfra</string>
   <string name="tutorial_4_subtext_1">Tittel: Operahuset i Sydney</string>
   <string name="tutorial_4_subtext_2">Beskrivelse: Operahuset i Sydney som det sees fra motsatt side av bukten</string>
   <string name="tutorial_4_subtext_3">Kategorier: Sydneys operahus fra vest, Sydneys operahus fra utsiden</string>
@@ -184,11 +182,8 @@
   <string name="yes">Ja</string>
   <string name="no">Nei</string>
   <string name="media_detail_title">Tittel</string>
-  <string name="media_detail_media_title">Medietittel</string>
   <string name="media_detail_description">Beskrivelse</string>
-  <string name="media_detail_description_explanation">Beskrivelse av mediet skal være her. Denne kan potensielt være ganske lang, og vil trenge å strekke seg over flere linjer. Vi håper det ser bra nok ut.</string>
   <string name="media_detail_author">Opphavsperson</string>
-  <string name="media_detail_author_explanation">Brukernavnet til opphavspersonen til utvalgte bilder kommer her.</string>
   <string name="media_detail_uploaded_date">Opplastingsdato</string>
   <string name="media_detail_license">Lisens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -199,10 +194,11 @@
   <string name="number_of_uploads">Grense for mine seneste opplastinger</string>
   <string name="maximum_limit">Maksimumsgrense</string>
   <string name="invalid_zero">Null er ikke gyldig</string>
+  <string name="invalid_input">Ugyldig inndata</string>
   <string name="maximum_limit_alert">Kan ikke vise mer enn 500</string>
   <string name="enter_valid">Angi et gyldig tall</string>
   <string name="cannot_be_zero">Opplastingsgrensen kan ikke være 0</string>
-  <string name="set_limit">Sett grense for seneste opplastinger</string>
+  <string name="set_limit" fuzzy="true">Sett grense for seneste opplastinger</string>
   <string name="login_failed_2fa_not_supported">Totrinns pålogging støttes ikke ennå.</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
   <string name="commons_logo">Commons-logo</string>
@@ -300,7 +296,7 @@
   <string name="about_translate_cancel">Avbryt</string>
   <string name="retry">Prøv igjen</string>
   <string name="showcase_view_got_it_button">Skjønner!</string>
-  <string name="showcase_view_whole_nearby_activity">Det er steder i nærheten av deg som trenger bilder for å illustrere Wikipedia-artiklene sine</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Det er steder i nærheten av deg som trenger bilder for å illustrere Wikipedia-artiklene sine</string>
   <string name="showcase_view_list_icon">Trykk på denne knappen for å få en liste over disse stedene</string>
   <string name="showcase_view_plus_fab">Du kan laste opp et bilde for alle steder fra galleriet eller kameraet ditt</string>
   <string name="no_images_found">Ingen bilder funnet!</string>
@@ -406,10 +402,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Jeg innså at det er dårlig for mitt personvern</string>
   <string name="deletion_reason_no_longer_want_public">Jeg ombestemte meg, jeg ønsker ikke at det skal være offentlig synlig lenger</string>
   <string name="deletion_reason_not_interesting">Beklager, dette bildet har ingen ensyklopedisk interesse</string>
-  <string name="uploaded_by_myself">Lastet opp av meg selv</string>
-  <string name="used_by">, brukt i</string>
-  <string name="articles">artikler</string>
-  <string name="no_uploads">Velkommen til Commons!\n\nLast opp din første mediefil ved å trykke på kamera- eller galleriikonet ovenfor.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Lastet opp av meg selv</string>
+  <string name="no_uploads" fuzzy="true">Velkommen til Commons!\n\nLast opp din første mediefil ved å trykke på kamera- eller galleriikonet ovenfor.</string>
   <string name="desc_language_Worldwide">Verdensomspennende</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>
@@ -443,4 +437,9 @@
   <string name="no_image">Ingen bilder brukt</string>
   <string name="no_image_reverted">Ingen bilder tilbakestilt</string>
   <string name="no_image_uploaded">Ingen bilder lastet opp</string>
+  <string name="menu_option_archived">Vis arkiverte</string>
+  <string name="menu_option_unread">Vis uleste</string>
+  <string name="error_occurred_in_picking_images">Feil under utvalg av bilder</string>
+  <string name="image_chooser_title">Velg bilder å laste opp</string>
+  <string name="please_wait">Vent…</string>
 </resources>

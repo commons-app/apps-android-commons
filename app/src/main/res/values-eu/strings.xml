@@ -140,7 +140,6 @@
   <string name="tutorial_1_text">Wikimedia Commons-ek Wikipedian erabiltzen diren irudi gehienak barne hartzen ditu.</string>
   <string name="tutorial_1_subtext">Zure irudiek mundu osoko jendeari irakasten laguntzen dute!</string>
   <string name="tutorial_2_text">Mesedez, igo bakarrik zuk ateratako edo sortutako irudiak:</string>
-  <string name="tutorial_2_subtext">Naturako elementuak (loreak, animaliak, mendiak)\n• Objektu erabilgarriak (bizikletak, tren geltokiak)\n• Pertsona famatuak (zure alkatea, zuk ezagututako atleta olinpikoren bat)</string>
   <string name="tutorial_2_subtext_1">Naturako elementuak (loreak, animaliak, mendiak)</string>
   <string name="tutorial_2_subtext_2">Objektu erabilgarriak (bizikletak, tren geltokiak)</string>
   <string name="tutorial_2_subtext_3">Pertsona famatuak (zure alkatea, zuk ezagututako atleta olinpikoren bat...)</string>
@@ -148,7 +147,6 @@
   <string name="tutorial_3_subtext_1">Autorretratuak edo zure lagunen argazkiak</string>
   <string name="tutorial_3_subtext_2">Internetetik jaitsitako irudiak</string>
   <string name="tutorial_4_text">Igoera adibidea:</string>
-  <string name="tutorial_4_subtext">- Izenburua: Sydney Opera House\n- Deskribapena: Sydney Opera House badiaren beste aldetik ikusita\n- Kategoriak: Sydney Opera House mendebaldetik, Sydney Opera House urrunetik ikusita</string>
   <string name="tutorial_4_subtext_1">Izenburua: Sydney Opera House</string>
   <string name="tutorial_4_subtext_2">Deskribapena: Sydney Opera House badiaren beste aldetik ikusita</string>
   <string name="tutorial_4_subtext_3">Kategoriak: Sydney Opera House mendebaldetik, Sydney Opera House urrunetik ikusita</string>
@@ -175,9 +173,7 @@
   <string name="yes">Bai</string>
   <string name="no">Ez</string>
   <string name="media_detail_title">Izenburua</string>
-  <string name="media_detail_media_title">Fitxategiaren izenburua</string>
   <string name="media_detail_description">Deskribapena</string>
-  <string name="media_detail_description_explanation">Hemen doa multimediaren deskribapena. Nahiko luzea izan daiteke, eta hala izatekotan zenbait lerrotan egokitu beharko da. Hala ere, ondo ikustea espero dugu.</string>
   <string name="media_detail_author">Egilea</string>
   <string name="media_detail_uploaded_date">Igoera data</string>
   <string name="media_detail_license">Lizentzia</string>
@@ -272,7 +268,7 @@
   <string name="about_translate_cancel">Utzi</string>
   <string name="retry">Saiatu berriro</string>
   <string name="showcase_view_got_it_button">Ulertu dut!</string>
-  <string name="showcase_view_whole_nearby_activity">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko</string>
   <string name="showcase_view_list_icon">Botoi hau sakatzeak leku hauetako zerrenda eskeiniko dizu</string>
   <string name="showcase_view_plus_fab">Edozein lekutako irudi bat igo dezakezu zure kamera edo galeriatik</string>
   <string name="no_images_found">Ez da irudirik aurkitu!</string>

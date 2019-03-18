@@ -3,8 +3,8 @@ package fr.free.nrw.commons.contributions;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringDef;
 
 import java.lang.annotation.Retention;
 import java.text.SimpleDateFormat;
@@ -25,7 +25,7 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 public class  Contribution extends Media {
 
     //{{According to EXIF data|2009-01-09}}
-    private static final String TEMPLATE_DATE_ACC_TO_EXIF = "|date={{According to EXIF data|%s}}";
+    private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to EXIF data|%s}}";
 
     //{{date|2009|1|9}} → 9 January 2009
     private static final String TEMPLATE_DATA_OTHER_SOURCE = "{{date|%d|%d|%d}}";

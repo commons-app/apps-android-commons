@@ -149,17 +149,14 @@
   <string name="tutorial_1_text">Wikimedia Commons, Vikipedi\'de kullanılan resimlerin çoğunu barındırır.</string>
   <string name="tutorial_1_subtext">Resimleriniz dünyanın dört bir yanındaki insanlara eğitim vermeye yardımcı olur!</string>
   <string name="tutorial_2_text">Lütfen tamamen kendiniz çektiğiniz veya oluşturduğunuz resimleri yükleyin:</string>
-  <string name="tutorial_2_subtext">Doğal nesneler (çiçekler, hayvanlar, dağlar)\n- Faydalı nesneler (bisiklet, tren istasyonları)\n- Ünlü insanlar (belediye başkanınız, tanıştığınız Olimpik atletler)</string>
   <string name="tutorial_2_subtext_1">Doğal objeler (çiçekler, hayvanlar, dağlar)</string>
   <string name="tutorial_2_subtext_2">Kullanışlı objeler (bisikletler, tren istasyonları)</string>
   <string name="tutorial_2_subtext_3">Ünlü kişiler (belediye başkanınız, tanıştığınız Olimpik atletler)</string>
   <string name="tutorial_3_text">Lütfen şunları YÜKLEMEYİN:</string>
-  <string name="tutorial_3_subtext">- Öz çekimlerinizi ya da arkadaşlarınızın fotoğraflarını\n- İnternetten indirdiğiniz resimleri\n- Tescilli uygulamaların ekran görüntülerini</string>
   <string name="tutorial_3_subtext_1">Selfiler veya arkadaşlarınızın fotoğrafları</string>
   <string name="tutorial_3_subtext_2">İnternet\'ten indirdiğiniz fotoğraflar</string>
   <string name="tutorial_3_subtext_3">Özel mülk uygulamaların ekran görüntüleri</string>
   <string name="tutorial_4_text">Yüklenebileceklere örnekler:</string>
-  <string name="tutorial_4_subtext">- Başlık: Sydney Opera Binası\n- Tanım: Körfezin genelinden bakıldığında Sydney Opera Binası\n- Kategoriler: Sydney Opera Binası, batıdan Sydney Opera Binası</string>
   <string name="tutorial_4_subtext_1">Başlık: Sidney Opera Binası</string>
   <string name="tutorial_4_subtext_2">Açıklama: Sidney Opera Binası\'nın körfezin karşısından görünümü</string>
   <string name="tutorial_4_subtext_3">Kategoriler: Batıdan Sidney Opera Binası, Sidney Opera Binası uzaktan manzaraları</string>
@@ -187,11 +184,8 @@
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
   <string name="media_detail_title">Başlık</string>
-  <string name="media_detail_media_title">Medyanın başlığı</string>
   <string name="media_detail_description">Açıklama</string>
-  <string name="media_detail_description_explanation">Medya için yapılan tanımı/açıklamayı buraya yazınız. Açıklamanız uzun olabilir ve birden fazla satıra sığabilir. Umuyoruz ki güzel ve bilgilendirici olacaktır.</string>
   <string name="media_detail_author">Yazar</string>
-  <string name="media_detail_author_explanation">Seçkin resim yazarının kullanıcı adı buraya eklenir.</string>
   <string name="media_detail_uploaded_date">Yükleme tarihi</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinatlar</string>
@@ -202,7 +196,7 @@
   <string name="number_of_uploads">Son Yükleme Limitim</string>
   <string name="maximum_limit">Maksimum Limit</string>
   <string name="maximum_limit_alert">500\'den fazla görüntülenemiyor</string>
-  <string name="set_limit">Yeni Yükleme Sınırı Ayarla</string>
+  <string name="set_limit" fuzzy="true">Yeni Yükleme Sınırı Ayarla</string>
   <string name="login_failed_2fa_not_supported">İki faktörlü kimlik doğrulama şu anda desteklenmiyor.</string>
   <string name="logout_verification">Gerçekten çıkış yapmak istiyor musunuz?</string>
   <string name="commons_logo">Commons Logo</string>
@@ -294,7 +288,7 @@
   <string name="about_translate_cancel">Vazgeç</string>
   <string name="retry">Tekrar Deneyin</string>
   <string name="showcase_view_got_it_button">Anladım!</string>
-  <string name="showcase_view_whole_nearby_activity">Vikipedi maddelerine eklemek için fotoğrafa ihtiyaç duyan size yakın yerler</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Vikipedi maddelerine eklemek için fotoğrafa ihtiyaç duyan size yakın yerler</string>
   <string name="showcase_view_list_icon">Bu tuşa dokunmak bu yerlerin bir listesini getirir</string>
   <string name="showcase_view_plus_fab">Galerinizden veya kameranızla herhangi bir yer için resim yükleyebilirsiniz.</string>
   <string name="no_images_found">Resim bulunamadı!</string>
@@ -342,8 +336,10 @@
   <string name="add_description">+ Açıklama ekle</string>
   <string name="no_recent_searches">Son arama yok</string>
   <string name="delete_recent_searches_dialog">Arama geçmişinizi silmek istediğinize emin misiniz?</string>
+  <string name="delete_search_dialog">Bu aramayı silmek istiyor musunuz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
   <string name="nominate_delete">Silinmeye aday göster</string>
+  <string name="delete">SİL</string>
   <string name="Achievements">Başarılar</string>
   <string name="statistics">İSTATİSTİKLER</string>
   <string name="statistics_thanks">Alınan Teşekkürler</string>
@@ -363,7 +359,7 @@
   <string name="contributions_fragment">Katkılar</string>
   <string name="nearby_fragment">Yakınındakiler</string>
   <string name="notifications">Bildirimler</string>
-  <string name="archived_notifications">Bildirimler (arşivlenmiş)</string>
+  <string name="archived_notifications" fuzzy="true">Bildirimler (arşivlenmiş)</string>
   <string name="display_nearby_notification">Yakındaki bildirimi görüntüle</string>
   <string name="display_nearby_notification_summary">Resimlere en yakın yeri görmek için buraya dokunun</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
@@ -396,10 +392,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Gizliliğim açısından kötü olduğunu fark ettim</string>
   <string name="deletion_reason_no_longer_want_public">Fikrimi değiştirdim, bunun herkese görünür olmasını istemiyorum</string>
   <string name="deletion_reason_not_interesting">Ansiklopedi için gerekli olmayan bir resim</string>
-  <string name="uploaded_by_myself">Kendi tarafımdan yüklendi</string>
-  <string name="used_by">,kullanılan</string>
-  <string name="articles">maddeler</string>
-  <string name="no_uploads">Commons\'a Hoş Geldiniz!\n\nYukarıdaki kamera ya da galeri simgesine dokunarak ilk medyanızı yükleyin.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Kendi tarafımdan yüklendi</string>
+  <string name="no_uploads" fuzzy="true">Commons\'a Hoş Geldiniz!\n\nYukarıdaki kamera ya da galeri simgesine dokunarak ilk medyanızı yükleyin.</string>
   <string name="desc_language_Worldwide">Dünya çapında</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Avrupa</string>
@@ -423,7 +417,7 @@
   <string name="display_campaigns">Kampanyaları göster</string>
   <string name="display_campaigns_explanation">Devam eden kampanyaları görmek için buraya dokunun</string>
   <string name="nearby_campaign_dismiss_message">Artık kampanyaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'da yeniden etkinleştirebilirsiniz.</string>
-  <string name="no_archived_notification">Arşivlenmiş bildiriminiz yok</string>
+  <string name="no_archived_notification" fuzzy="true">Arşivlenmiş bildiriminiz yok</string>
   <string name="menu_option_archived">Arşivlenmişleri görüntüle</string>
   <string name="menu_option_unread">Okunmamışları görüntüle</string>
   <string name="please_wait">Lütfen bekleyin…</string>

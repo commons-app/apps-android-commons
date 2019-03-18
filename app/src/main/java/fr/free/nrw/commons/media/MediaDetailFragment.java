@@ -2,14 +2,12 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -58,7 +56,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -115,6 +112,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     TextView coordinates;
     @BindView(R.id.mediaDetailuploadeddate)
     TextView uploadedDate;
+    @BindView(R.id.mediaDetailDisc)
+    TextView mediaDiscussion;
     @BindView(R.id.seeMore)
     TextView seeMore;
     @BindView(R.id.nominatedDeletionBanner)
@@ -344,6 +343,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         license.setText(prettyLicense(media));
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
+        mediaDiscussion.setText(prettyDiscussion(media));
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
@@ -503,6 +503,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             return getString(R.string.detail_description_empty);
         } else {
             return desc;
+        }
+    }
+    private String prettyDiscussion(Media media) {
+        String disc = media.getDiscussion().trim();
+        if (disc.equals("")) {
+            return getString(R.string.detail_discussion_empty);
+        } else {
+            return disc;
         }
     }
 

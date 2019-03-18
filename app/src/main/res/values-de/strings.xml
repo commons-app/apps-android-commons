@@ -143,17 +143,14 @@
   <string name="tutorial_1_text">Wikimedia Commons speichert die meisten Bilder, die in Wikipedia verwendet werden.</string>
   <string name="tutorial_1_subtext">Deine Bilder helfen bei der Ausbildung von Menschen auf der ganzen Welt!</string>
   <string name="tutorial_2_text">Bitte lade Bilder hoch, die du völlig selbst aufgenommen oder erstellt hast:</string>
-  <string name="tutorial_2_subtext">Natürliche Objekte (Blumen, Tiere, Berge)\n• Nützliche Objekte (Fahrräder, Bahnhöfe)\n• Berühmte Personen (deinen Bürgermeister, olympische Athleten, die du getroffen hast)</string>
   <string name="tutorial_2_subtext_1">Natürliche Objekte (Blumen, Tiere, Berge)</string>
   <string name="tutorial_2_subtext_2">Nützliche Objekte (Fahrräder, Bahnhöfe)</string>
   <string name="tutorial_2_subtext_3">Berühmte Personen (dein Bürgermeister, olympische Athleten, die du getroffen hast)</string>
   <string name="tutorial_3_text">Bitte NICHT hochladen:</string>
-  <string name="tutorial_3_subtext">- Selfies oder Bilder deiner Freunde\n- Bilder, die du aus dem Internet heruntergeladen hast\n- Screenshots von proprietären Softwareanwendungen</string>
   <string name="tutorial_3_subtext_1">Selfies oder Bilder deiner Freunde</string>
   <string name="tutorial_3_subtext_2">Bilder, die du aus dem Internet heruntergeladen hast</string>
   <string name="tutorial_3_subtext_3">Screenshots von proprietären Apps</string>
   <string name="tutorial_4_text">Beispiel-Upload:</string>
-  <string name="tutorial_4_subtext">- Titel: Opernhaus von Sydney\n- Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\n- Kategorien: Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
   <string name="tutorial_4_subtext_1">Titel: Opernhaus von Sydney</string>
   <string name="tutorial_4_subtext_2">Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen</string>
   <string name="tutorial_4_subtext_3">Kategorien: Opernhaus von Sydney von Westen, Fernansichten vom Opernhaus von Sydney</string>
@@ -168,6 +165,7 @@
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
   <string name="detail_description_empty">Keine Beschreibung</string>
+  <string name="detail_discussion_empty">Keine Diskussion</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
   <string name="menu_refresh">Aktualisieren</string>
   <string name="storage_permission_title">Anforderung einer Speicherberechtigung</string>
@@ -182,11 +180,9 @@
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
   <string name="media_detail_title">Titel</string>
-  <string name="media_detail_media_title">Titel des Mediums</string>
   <string name="media_detail_description">Beschreibung</string>
-  <string name="media_detail_description_explanation">Hier folgt die Beschreibung des Mediums. Diese kann möglicherweise ziemlich lang sein und erfordert dann einen Umbruch auf mehreren Zeilen. Wir hoffen, dass sie dennoch gut aussieht.</string>
+  <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_author_explanation">Hier steht der Benutzername des Autors des vorgestellten Bildes.</string>
   <string name="media_detail_uploaded_date">Hochgeladen am</string>
   <string name="media_detail_license">Lizenz</string>
   <string name="media_detail_coordinates">Koordinaten</string>
@@ -201,7 +197,7 @@
   <string name="maximum_limit_alert">Mehr als 500 Einträge können nicht angezeigt werden</string>
   <string name="enter_valid">Eine gültige Zahl eingeben</string>
   <string name="cannot_be_zero">Das Hochladelimit kann nicht 0 sein</string>
-  <string name="set_limit">Grenze für kürzlich hochgeladene Dateien festlegen</string>
+  <string name="set_limit">Grenze für kürzlich hochgeladene Dateien</string>
   <string name="login_failed_2fa_not_supported">Die Zwei-Faktor-Authentifikation wird derzeit nicht unterstützt.</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
   <string name="commons_logo">Commons-Logo</string>
@@ -251,6 +247,7 @@
   <string name="upload_problem_image_blurry">Das Bild ist unscharf.</string>
   <string name="upload_problem_image_duplicate">Das Bild ist bereits auf Commons.</string>
   <string name="upload_problem_different_geolocation">Dieses Bild wurde an einem anderen Ort aufgenommen.</string>
+  <string name="upload_problem_fbmd">Lade bitte nur Bilder hoch, die du selber erstellt hast. Lade keine Bilder hoch, die du auf Facebook-Konten anderer Personen gefunden hast.</string>
   <string name="upload_problem_do_you_continue">Möchtest du immer noch dieses Bild hochladen?</string>
   <string name="give_permission">Berechtigung geben</string>
   <string name="use_external_storage">Externen Speicher verwenden</string>
@@ -299,7 +296,7 @@
   <string name="about_translate_cancel">Abbrechen</string>
   <string name="retry">Erneut versuchen</string>
   <string name="showcase_view_got_it_button">Verstanden!</string>
-  <string name="showcase_view_whole_nearby_activity">Dies sind die Orte in deiner Nähe, die Bilder zur Illustration ihrer Wikipedia-Artikel benötigen.</string>
+  <string name="showcase_view_whole_nearby_activity">Dies sind die Orte in deiner Nähe, die Bilder zur Illustration ihrer Wikipedia-Artikel benötigen.\n\nEin Klick auf „DIESEN BEREICH DURCHSUCHEN“ sperrt die Karte und startet eine Suche um diesen Standort.</string>
   <string name="showcase_view_list_icon">Das Antippen dieser Schaltfläche zeigt eine Liste mit diesen Orten</string>
   <string name="showcase_view_plus_fab">Du kannst ein Bild für einen beliebigen Ort von deiner Galerie oder Kamera hochladen</string>
   <string name="no_images_found">Keine Bilder gefunden!</string>
@@ -318,6 +315,8 @@
   <string name="error_loading_subcategories">Beim Laden der Unterkategorien ist ein Fehler aufgetreten.</string>
   <string name="search_tab_title_media">MEDIEN</string>
   <string name="search_tab_title_categories">KATEGORIEN</string>
+  <string name="explore_tab_title_featured">VORGESTELLT</string>
+  <string name="explore_tab_title_mobile">ÜBER MOBIL HOCHGELADEN</string>
   <string name="successful_wikidata_edit">Bild erfolgreich nach %1$s auf Wikidata hinzugefügt!</string>
   <string name="wikidata_edit_failure">Fehler bei der Aktualisierung des dazugehörigen Wikidata-Objekts!</string>
   <string name="menu_set_wallpaper">Als Hintergrundbild festlegen</string>
@@ -348,8 +347,10 @@
   <string name="add_description">+ Beschreibung hinzufügen</string>
   <string name="no_recent_searches">Keine letzten Suchanfragen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
+  <string name="delete_search_dialog">Möchtest du diese Suche löschen?</string>
   <string name="search_history_deleted">Suchverlauf gelöscht</string>
   <string name="nominate_delete">Zur Löschung vorschlagen</string>
+  <string name="delete">LÖSCHEN</string>
   <string name="Achievements">Errungenschaften</string>
   <string name="statistics">STATISTIKEN</string>
   <string name="statistics_thanks">Erhaltene Dankeschöns</string>
@@ -407,10 +408,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Ich habe erkannt, dass es schlecht für meine Privatsphäre ist.</string>
   <string name="deletion_reason_no_longer_want_public">Ich habe meine Meinung geändert. Ich möchte nicht mehr, dass es öffentlich sichtbar ist.</string>
   <string name="deletion_reason_not_interesting">Entschuldigung, aber dieses Bild ist nicht für eine Enzyklopädie relevant.</string>
-  <string name="uploaded_by_myself">Von mir hochgeladen am</string>
-  <string name="used_by">, verwendet in</string>
-  <string name="articles">Artikel</string>
-  <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du oben auf das Kamera- oder Galeriesymbol tippst.</string>
+  <string name="uploaded_by_myself">Von mir selbst hochgeladen am %1$s, verwendet in %2$d Artikel(n).</string>
+  <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du auf die Hinzufügen-Schaltfläche tippst.</string>
   <string name="desc_language_Worldwide">Weltweit</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>

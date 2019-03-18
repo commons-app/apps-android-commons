@@ -158,6 +158,7 @@
   <string name="detail_panel_cats_loading">Loading…</string>
   <string name="detail_panel_cats_none">None selected</string>
   <string name="detail_description_empty">No description</string>
+  <string name="detail_discussion_empty">No discussion</string>
   <string name="detail_license_empty">Unknown license</string>
   <string name="menu_refresh">Refresh</string>
   <string name="storage_permission_title">Requesting Storage Permission</string>
@@ -173,6 +174,7 @@
   <string name="no">No</string>
   <string name="media_detail_title">Title</string>
   <string name="media_detail_description">Description</string>
+  <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Author</string>
   <string name="media_detail_uploaded_date">Uploaded date</string>
   <string name="media_detail_license">License</string>
@@ -192,7 +194,7 @@
   <string name="maximum_limit_alert">Unable to display more than 500</string>
   <string name="enter_valid">Enter a valid number</string>
   <string name="cannot_be_zero">Upload limit cannot be 0</string>
-  <string name="set_limit">Set Recent Upload Limit</string>
+  <string name="set_limit">Recent upload limit</string>
   <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
   <string name="logout_verification">Do you really want to logout?</string>
   <string name="commons_logo">Commons Logo</string>
@@ -238,7 +240,7 @@
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 
-  <string name="upload_problem_exist">Potential problems with this image :\n\n</string>
+  <string name="upload_problem_exist">Potential problems with this image :</string>
   <string name="upload_problem_image_dark">Image is too dark.</string>
   <string name="upload_problem_image_blurry">Image is blurry.</string>
   <string name="upload_problem_image_duplicate">Image is already on Commons.</string>
@@ -296,7 +298,7 @@
   <string name="retry">Retry</string>
 
   <string name="showcase_view_got_it_button">Got it!</string>
-  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles</string>
+  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles.\n\nClicking on \'SEARCH THIS AREA\' locks the map and launches a nearby search around that location.</string>
   <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
   <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
 
@@ -317,6 +319,8 @@
   <string name="error_loading_subcategories">Error occurred while loading subcategories.</string>
   <string name="search_tab_title_media">MEDIA</string>
   <string name="search_tab_title_categories">CATEGORIES</string>
+  <string name="explore_tab_title_featured">FEATURED</string>
+  <string name="explore_tab_title_mobile">UPLOADED VIA MOBILE</string>
 
   <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
@@ -349,8 +353,10 @@
 
   <string name="no_recent_searches">No recent searches</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
+  <string name="delete_search_dialog">Do you want to delete this search?</string>
   <string name="search_history_deleted">Search history deleted</string>
   <string name="nominate_delete">Nominate For Deletion</string>
+  <string name="delete">DELETE</string>
 
   <string name="Achievements">Achievements</string>
   <string name="statistics">STATISTICS</string>
@@ -414,12 +420,10 @@
   <string name="deletion_reason_bad_for_my_privacy">I realized it is bad for my privacy</string>
   <string name="deletion_reason_no_longer_want_public">I changed my mind, I don\'t want it to be publicly visible anymore</string>
   <string name="deletion_reason_not_interesting">Sorry this picture is not interesting for an encyclopedia</string>
-  <string name="uploaded_by_myself">Uploaded by myself on</string>
-  <string name="used_by">,used in</string>
-  <string name="articles">articles</string>
+  <string name="uploaded_by_myself">Uploaded by myself on %1$s, used in %2$d article(s).</string>
 
   <string name="no_uploads">Welcome to Commons!\n
-Upload your first media by touching the camera or gallery icon above.</string>
+Upload your first media by tapping on the add button.</string>
 
   <string name="desc_language_Worldwide">Worldwide</string>
   <string name="desc_language_America">America</string>
@@ -462,8 +466,8 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="no_image_reverted">No images reverted</string>
   <string name="no_image_uploaded">No images uploaded</string>
 
-  <string name="no_notification">You have no unread Notification</string>
-  <string name="no_archived_notification">You have no archived notification</string>
+  <string name="no_notification">You have no unread notifications</string>
+  <string name="no_archived_notification">You have no archived notifications</string>
   <string name="share_logs_using">Share logs using</string>
   <string name="menu_option_archived">View archived</string>
   <string name="menu_option_unread">View unread</string>

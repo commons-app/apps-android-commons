@@ -148,17 +148,14 @@
   <string name="tutorial_1_text">Wikimedia Commons ospita la maggior parte delle immagini che vengono utilizzate in Wikipedia.</string>
   <string name="tutorial_1_subtext">Le tue immagini aiutano l\'istruzione di persone in tutto il mondo!</string>
   <string name="tutorial_2_text">Si prega di caricare le immagini che vengono prese o create interamente da soli:</string>
-  <string name="tutorial_2_subtext">Oggetti naturali (fiori, animali, montagne)\n• Oggetti utili (biciclette, stazioni ferroviarie)\n• Personaggi famosi (il tuo sindaco, gli atleti olimpici che hai incontrato)</string>
   <string name="tutorial_2_subtext_1">Oggetti naturali (fiori, animali, montagne)</string>
   <string name="tutorial_2_subtext_2">Oggetti utili (biciclette, stazioni ferroviarie)</string>
   <string name="tutorial_2_subtext_3">Personaggi famosi (il tuo sindaco, gli atleti olimpici che hai incontrato)</string>
   <string name="tutorial_3_text">Per favore NON caricare:</string>
-  <string name="tutorial_3_subtext">-Selfie o immagini dei tuoi amici\n-Immagini che hai scaricato da Internet\n-Screenshot di applicazioni proprietarie</string>
   <string name="tutorial_3_subtext_1">Selfie o foto dei tuoi amici</string>
   <string name="tutorial_3_subtext_2">Immagini scaricate da internet</string>
   <string name="tutorial_3_subtext_3">Schermate di app proprietarie</string>
   <string name="tutorial_4_text">Esempi di caricamento:</string>
-  <string name="tutorial_4_subtext">-Titolo: Sydney Opera House\n-Descrizione: Sydney Opera House vista dall\'altra parte della baia\n-Categorie: Sydney Opera House da ovest, viste remote di Sydney Opera House</string>
   <string name="tutorial_4_subtext_1">Titolo: Sydney Opera House</string>
   <string name="tutorial_4_subtext_2">Descrizione: Sydney Opera House vista dall\'altra parte della baia</string>
   <string name="tutorial_4_subtext_3">Categorie: Sydney Opera House da ovest, viste remote della Sydney Opera House</string>
@@ -187,11 +184,8 @@
   <string name="yes">Sì</string>
   <string name="no">No</string>
   <string name="media_detail_title">Titolo</string>
-  <string name="media_detail_media_title">Titolo del file multimediale</string>
   <string name="media_detail_description">Descrizione</string>
-  <string name="media_detail_description_explanation">La descrizione dei media va qui. Questo può potenzialmente essere abbastanza lungo e dovrà essere eseguito su più righe. Speriamo che sia comunque carino.</string>
   <string name="media_detail_author">Autore</string>
-  <string name="media_detail_author_explanation">Il nome dell\'autore dell\'immagine in evidenza va scritto qui.</string>
   <string name="media_detail_uploaded_date">Data di caricamento</string>
   <string name="media_detail_license">Licenza</string>
   <string name="media_detail_coordinates">Coordinate</string>
@@ -206,7 +200,7 @@
   <string name="maximum_limit_alert">Non è possibile mostrarne più di 500</string>
   <string name="enter_valid">Inserisci un numero valido</string>
   <string name="cannot_be_zero">Il limite di caricamento non può essere 0</string>
-  <string name="set_limit">Imposta limite caricamento recente</string>
+  <string name="set_limit" fuzzy="true">Imposta limite caricamento recente</string>
   <string name="login_failed_2fa_not_supported">L\'autenticazione a due fattori non è attualmente supportata.</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
   <string name="commons_logo">Logo di Commons</string>
@@ -256,6 +250,7 @@
   <string name="upload_problem_image_blurry">L\'immagine è sfocata.</string>
   <string name="upload_problem_image_duplicate">L\'immagine è già su Commons.</string>
   <string name="upload_problem_different_geolocation">Questa foto è stata scattata in una posizione diversa.</string>
+  <string name="upload_problem_fbmd">Carica solo le foto che hai scattato tu stesso. Non caricare immagini che hai trovato negli account Facebook di altre persone.</string>
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
   <string name="give_permission">Dai autorizzazione</string>
   <string name="use_external_storage">Usa memoria esterna</string>
@@ -304,7 +299,7 @@
   <string name="about_translate_cancel">Annulla</string>
   <string name="retry">Riprova</string>
   <string name="showcase_view_got_it_button">Capito!</string>
-  <string name="showcase_view_whole_nearby_activity">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia</string>
   <string name="showcase_view_list_icon">Toccando questo pulsante viene visualizzato un elenco di questi luoghi</string>
   <string name="showcase_view_plus_fab">Puoi caricare un\'immagine per ogni luogo dalla tua galleria o fotocamera</string>
   <string name="no_images_found">Nessuna immagine trovata!</string>
@@ -412,10 +407,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi sono reso conto che è un male per la mia privacy</string>
   <string name="deletion_reason_no_longer_want_public">Ho cambiato idea, non voglio più che sia pubblicamente visibile</string>
   <string name="deletion_reason_not_interesting">Spiacente, questa immagine non è interessante per un\'enciclopedia</string>
-  <string name="uploaded_by_myself">Caricato da me stesso il</string>
-  <string name="used_by">, usato in</string>
-  <string name="articles">voci</string>
-  <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando l\'icona della fotocamera o della galleria sopra.</string>
+  <string name="uploaded_by_myself">Caricato da me stesso il %1$s, utilizzato in %2$d voce/i.</string>
+  <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando il pulsante aggiungi.</string>
   <string name="desc_language_Worldwide">Tutto il mondo</string>
   <string name="desc_language_America">America</string>
   <string name="desc_language_Europe">Europa</string>
@@ -450,8 +443,8 @@
   <string name="no_image">Nessuna immagine utilizzata</string>
   <string name="no_image_reverted">Nessuna immagine ripristinata</string>
   <string name="no_image_uploaded">Nessuna immagine caricata</string>
-  <string name="no_notification">Non hai alcuna notifica non letta</string>
-  <string name="no_archived_notification">Non hai notifiche archiviate</string>
+  <string name="no_notification" fuzzy="true">Non hai alcuna notifica non letta</string>
+  <string name="no_archived_notification" fuzzy="true">Non hai notifiche archiviate</string>
   <string name="share_logs_using">Condividi i registri usando</string>
   <string name="menu_option_archived">Vedi archiviate</string>
   <string name="menu_option_unread">Vedi non lette</string>

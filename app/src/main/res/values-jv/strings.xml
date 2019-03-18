@@ -148,10 +148,8 @@
   <string name="yes">Iya</string>
   <string name="no">Ora</string>
   <string name="media_detail_title">Sesirah</string>
-  <string name="media_detail_media_title">Sesirahé médhia</string>
   <string name="media_detail_description">Wedharan</string>
   <string name="media_detail_author">Kang ngripta</string>
-  <string name="media_detail_author_explanation">Jeneng kang ngripta gambar pilihan kapacak ing kéné.</string>
   <string name="media_detail_uploaded_date">Tanggal ngunggah</string>
   <string name="media_detail_license">Lisènsi</string>
   <string name="media_detail_coordinates">Koordhinat</string>
@@ -161,7 +159,7 @@
   <string name="number_of_uploads">Watesan Unggahan Anyarku</string>
   <string name="maximum_limit">Watesan Akèh Dhéwé</string>
   <string name="maximum_limit_alert">Mokal nuduhaké yèn punjul 500</string>
-  <string name="set_limit">Setèl Watesan Unggahan Anyar</string>
+  <string name="set_limit" fuzzy="true">Setèl Watesan Unggahan Anyar</string>
   <string name="login_failed_2fa_not_supported">Otèntifikasi rong faktor saiki durung bisa.</string>
   <string name="logout_verification">Panjenengan yakin arep metu log?</string>
   <string name="commons_logo">Logo Commons</string>

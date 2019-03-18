@@ -155,17 +155,14 @@
   <string name="tutorial_1_text">Wikimedia Commons aloja la mayoría de las imágenes utilizadas en Wikipedia.</string>
   <string name="tutorial_1_subtext">¡Tus imágenes ayudan a instruir a personas de todo el mundo!</string>
   <string name="tutorial_2_text">Carga únicamente imágenes capturadas o creadas por ti.</string>
-  <string name="tutorial_2_subtext">Objetos naturales (flores, animales, montañas)\n• Objetos útiles (bicicletas, estaciones de tren)\n• Personas famosas (tu alcalde, algún atleta olímpico que conociste)</string>
   <string name="tutorial_2_subtext_1">Naturaleza (flores, animales, montañas)</string>
   <string name="tutorial_2_subtext_2">Objetos utilitarios (bicicletas, estaciones de tren)</string>
   <string name="tutorial_2_subtext_3">Gente famosa (tu regente, algún atleta que hayas conocido…)</string>
   <string name="tutorial_3_text">NO cargues:</string>
-  <string name="tutorial_3_subtext">- Autorretratos o fotos de tus amigos\n- Imágenes que hayas descargado de Internet\n- Capturas de pantalla de aplicaciones privativas</string>
   <string name="tutorial_3_subtext_1">Autorretratos o fotos de tus amigos</string>
   <string name="tutorial_3_subtext_2">Imágenes descargadas de Internet</string>
   <string name="tutorial_3_subtext_3">Capturas de pantalla de aplicaciones privativas</string>
   <string name="tutorial_4_text">Ejemplo de carga:</string>
-  <string name="tutorial_4_subtext">- Título: Casa de la Ópera de Sídney\n- Descripción: Casa de la Ópera de Sídney vista desde el otro lado de la bahía\n- Categorías: Casa de la Ópera de Sídney desde el oeste, Vistas a distancia de la Casa de la Ópera de Sídney</string>
   <string name="tutorial_4_subtext_1">Título: Ópera de Sídney</string>
   <string name="tutorial_4_subtext_2">Descripción: La Ópera de Sídney, vista desde el otro lado de la bahía</string>
   <string name="tutorial_4_subtext_3">Categorías: Ópera de Sídney desde el oeste, Vistas a distancia de la Ópera de Sídney</string>
@@ -194,11 +191,8 @@
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Título</string>
-  <string name="media_detail_media_title">Título del multimedia</string>
   <string name="media_detail_description">Descripción</string>
-  <string name="media_detail_description_explanation">Aquí va la descripción del archivo multimedia. Esta puede ser muy extensa, en cuyo caso deberá ajustarse en varios renglones. No obstante, esperamos que se vea bien.</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_author_explanation">El usuario del autor de la imagen mencionada va aquí.</string>
   <string name="media_detail_uploaded_date">Fecha de subida</string>
   <string name="media_detail_license">Licencia</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -208,8 +202,9 @@
   <string name="_2fa_code">Código de autenticación de 2 pasos</string>
   <string name="number_of_uploads">Mi límite de subidas recientes</string>
   <string name="maximum_limit">Límite máximo</string>
+  <string name="invalid_input">Entrada no válida</string>
   <string name="maximum_limit_alert">No se pueden mostrar más de 500</string>
-  <string name="set_limit">Establecer el límite de subidas recientes</string>
+  <string name="set_limit" fuzzy="true">Establecer el límite de subidas recientes</string>
   <string name="login_failed_2fa_not_supported">Por el momento no se admite la autenticación de dos factores.</string>
   <string name="logout_verification">¿Confirmas que quieres salir?</string>
   <string name="commons_logo">Logo de Commons</string>
@@ -307,7 +302,7 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
   <string name="showcase_view_got_it_button">Entendido</string>
-  <string name="showcase_view_whole_nearby_activity">Estos sitios cercanos a ti necesitan imágenes para ilustrar sus artículos de Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Estos sitios cercanos a ti necesitan imágenes para ilustrar sus artículos de Wikipedia</string>
   <string name="showcase_view_list_icon">Tocando este botón se desplegara una lista de estos lugares</string>
   <string name="showcase_view_plus_fab">Puedes cargar una imagen para cualquier sitio desde la galería o la cámara</string>
   <string name="no_images_found">No se encontró ninguna imagen.</string>
@@ -414,10 +409,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Me di cuenta que es malo para mi privacidad</string>
   <string name="deletion_reason_no_longer_want_public">Cambié de opinión, no quiero que siga siendo visible públicamente</string>
   <string name="deletion_reason_not_interesting">Lo sentimos, esta imagen no es interesante para una enciclopedia</string>
-  <string name="uploaded_by_myself">Subida por mí mismo el</string>
-  <string name="used_by">, usado en</string>
-  <string name="articles">artículos</string>
-  <string name="no_uploads">¡Bienvenido a Commons!\n\nSube tu primer archivo tocando el icono de la cámara o galería arriba.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Subida por mí mismo el %1$s, usado en %2$d artículo(s).</string>
+  <string name="no_uploads" fuzzy="true">¡Bienvenido a Commons!\n\nSube tu primer archivo tocando el icono de la cámara o galería arriba.</string>
   <string name="desc_language_Worldwide">Mundial</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>
@@ -452,4 +445,5 @@
   <string name="no_image">Ninguna imagen usada</string>
   <string name="no_image_reverted">Ninguna imagen revertida</string>
   <string name="no_image_uploaded">Ninguna imagen subida</string>
+  <string name="please_wait">Un momento…</string>
 </resources>

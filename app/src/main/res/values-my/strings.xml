@@ -109,12 +109,10 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_subtext">သင်၏ ရုပ်ပုံများသည် တစ်ကမ္ဘာလုံးရှိ လူပုဂ္ဂိုလ်များကို ပညာတတ်စေရန် ကူညီပါသည်</string>
-  <string name="tutorial_2_subtext">သဘာဝ အရာဝတ္ထုများ (ပန်းများ၊ တိရိစ္ဆာန်များ၊ တောင်များ) \n• အသုံးဝင်သော အရာဝတ္ထုများ (စက်ဘီးများ၊ ရထားဘူတာများ)\n• နာမည်ကြီးပုဂ္ဂိုလ် (သင်၏မြို့တော်ဝန်၊ သင်ဆုံတွေ့ခဲ့သော အိုလံပစ်အားကစားသမား)</string>
   <string name="tutorial_2_subtext_1">သဘာဝ အရာဝတ္ထုများ (ပန်းများ၊ တိရိစ္ဆာန်များ၊ တောင်များ)</string>
   <string name="tutorial_2_subtext_2">အသုံးဝင်သော အရာဝတ္ထုများ (စက်ဘီးများ၊ ရထားဘူတာများ)</string>
   <string name="tutorial_2_subtext_3">နာမည်ကြီးပုဂ္ဂိုလ် (သင်၏မြို့တော်ဝန်၊ သင်ဆုံတွေ့ခဲ့သော အိုလံပစ်အားကစားသမား)</string>
   <string name="tutorial_3_text">ကျေးဇူးပြု၍ မတင်ပါနှင့် :</string>
-  <string name="tutorial_3_subtext">- Selfies ပုံများ သို့မဟုတ် မိတ်ဆွေ၏ ပုံများ\n- အင်တာနက်မှ ဒေါင်းလုဒ်ဆွဲထားသော ပုံများ\n- ပိုင်ရှင်ရှိ app များ၏ Screenshot များ</string>
   <string name="tutorial_3_subtext_1">Selfies ပုံများ သို့မဟုတ် မိတ်ဆွေ၏ ပုံများ</string>
   <string name="tutorial_3_subtext_2">အင်တာနက်မှ ဒေါင်းလုဒ်ဆွဲထားသော ပုံများ</string>
   <string name="tutorial_3_subtext_3">ပိုင်ရှင်ရှိ app များ၏ Screenshot များ</string>
@@ -137,7 +135,6 @@
   <string name="yes">မှန်</string>
   <string name="no">မလုပ်ပါ</string>
   <string name="media_detail_title">ခေါင်းစဉ်</string>
-  <string name="media_detail_media_title">မီဒီယာ ခေါင်းစဉ်</string>
   <string name="media_detail_description">ဖော်ပြချက်</string>
   <string name="media_detail_author">စာရေးသူ</string>
   <string name="media_detail_uploaded_date">တင်ခဲ့သည် ရက်စွဲ</string>
@@ -146,7 +143,7 @@
   <string name="number_of_uploads">မိမိ၏ လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက်</string>
   <string name="maximum_limit">အများဆုံး ကန့်သတ်ချက်</string>
   <string name="maximum_limit_alert">၅၀၀ ထက်ပို၍ မပြသနိုင်ပါ</string>
-  <string name="set_limit">လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက် သတ်မှတ်ရန်</string>
+  <string name="set_limit" fuzzy="true">လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက် သတ်မှတ်ရန်</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
   <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
   <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>

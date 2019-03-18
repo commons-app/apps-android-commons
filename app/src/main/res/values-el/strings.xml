@@ -147,17 +147,14 @@
   <string name="tutorial_1_text">Το Wikimedia Commons φιλοξενεί τις περισσότερες από τις εικόνες που χρησιμοποιούνται στη Wikipedia.</string>
   <string name="tutorial_1_subtext">Οι εικόνες σας βοηθούν να μορφωθούν άνθρωποι σε όλο τον κόσμο!</string>
   <string name="tutorial_2_text">Παρακαλούμε ανεβάστε εικόνες που έχουν ληφθεί ή δημιουργηθεί εξ ολοκλήρου από τον εαυτό σας:</string>
-  <string name="tutorial_2_subtext">Φυσικά αντικείμενα (λουλούδια, ζώα, βουνά)\n• Χρήσιμα αντικείμενα (ποδήλατα, σταθμοί τρένων)\n• Διάσημοι άνθρωποι (ο δήμαρχος, αθλητές Ολυμπιακών αγώνων που συναντήσατε)</string>
   <string name="tutorial_2_subtext_1">Φυσικά αντικείμενα (λουλούδια, ζώα, βουνά)</string>
   <string name="tutorial_2_subtext_2">Χρήσιμα αντικείμενα (ποδήλατα, σταθμοί τρένων)</string>
   <string name="tutorial_2_subtext_3">Διάσημοι άνθρωποι (ο δήμαρχος, αθλητές Ολυμπιακών αγώνων που συναντήσατε)</string>
   <string name="tutorial_3_text">Παρακαλούμε ΜΗΝ ανεβάσετε:</string>
-  <string name="tutorial_3_subtext">- Selfies ή φωτογραφίες των φίλων σας\n- Εικόνες που έχετε κατεβάσει από το Internet\n- Στιγμιότυπα από ιδιοταγείς εφαρμογές</string>
   <string name="tutorial_3_subtext_1">Σέλφι ή φωτογραφίες των φίλων σας</string>
   <string name="tutorial_3_subtext_2">Φωτογραφίες που κατεβάσατε από το διαδίκτυο</string>
   <string name="tutorial_3_subtext_3">Στιγμιότυπα ιδιόκτητων εφαρμογών</string>
   <string name="tutorial_4_text">Παράδειγμα ανεβάσματος:</string>
-  <string name="tutorial_4_subtext">- Τίτλος: Όπερα Του Σίδνεϊ\n- Περιγραφή: Η Όπερα του Σίδνεϊ όπως φαίνεται απέναντι από τον κόλπο\n- Κατηγορίες: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">Τίτλος: Όπερα του Σίδνεϋ</string>
   <string name="tutorial_4_subtext_2">Περιγραφή: Η Όπερα του Σίδνεϋ όπως φαίνεται κατά μήκος του κόλπου</string>
   <string name="tutorial_4_subtext_3">Κατηγορία: η Όπερα του Σίδνεϋ από τα δυτικά, απομακρυσμένες προβολές της Όπερας του Σίδνεϋ</string>
@@ -186,11 +183,8 @@
   <string name="yes">Ναι</string>
   <string name="no">Όχι</string>
   <string name="media_detail_title">Τίτλος</string>
-  <string name="media_detail_media_title">Τίτλος πολυμέσου</string>
   <string name="media_detail_description">Περιγραφή</string>
-  <string name="media_detail_description_explanation">Η περιγραφή του πολυμέσου μπαίνει εδώ. Αυτή μπορεί να είναι σχετικά μεγάλη, και θα χρειαστεί να αναδιπλωθεί σε πολλές γραμμές. Ελπίζουμε ωστόσο ότι θα φαίνεται όμορφα.</string>
   <string name="media_detail_author">Συγγραφέας</string>
-  <string name="media_detail_author_explanation">Το όνομα χρήστη του συγγραφέα της επιλεγμένης εικόνας πάει εδώ.</string>
   <string name="media_detail_uploaded_date">Ημερομηνία φόρτωσης</string>
   <string name="media_detail_license">Άδεια</string>
   <string name="media_detail_coordinates">Συντεταγμένες</string>
@@ -202,7 +196,7 @@
   <string name="maximum_limit">Μέγιστο Όριο</string>
   <string name="maximum_limit_alert">Δεν μπορεί να προβάλλει περισσότερα από 500 αρχεία</string>
   <string name="enter_valid">Εισαγάγετε έγκυρο αριθμό</string>
-  <string name="set_limit">Ορίσετε το Όριο της Πρόσφατης Επιφόρτωσης</string>
+  <string name="set_limit" fuzzy="true">Ορίσετε το Όριο της Πρόσφατης Επιφόρτωσης</string>
   <string name="login_failed_2fa_not_supported">Πιστοποίηση με δύο παράγοντες δεν υποστηρίζεται προς το παρόν.</string>
   <string name="logout_verification">Θέλετε πράγματι να αποσυνδεθείτε;</string>
   <string name="commons_logo">Κοινό Λογότυπο</string>
@@ -297,7 +291,7 @@
   <string name="about_translate_cancel">Ακύρωση</string>
   <string name="retry">Ξαναπροσπαθήστε</string>
   <string name="showcase_view_got_it_button">Κατάλαβα!</string>
-  <string name="showcase_view_whole_nearby_activity">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
   <string name="showcase_view_list_icon">Πατώντας αυτό το κουμπί φέρνει μια λίστα αυτών των μερών</string>
   <string name="showcase_view_plus_fab">Μπορείτε να ανεβάσετε μια εικόνα για οποιοδήποτε μέρος από την γκαλερί ή την κάμερά σας</string>
   <string name="no_images_found">Δεν βρέθηκαν εικόνες!</string>
@@ -391,9 +385,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Κατάλαβα πως δεν προστατεύονται τα ατομικά μου στοιχεία</string>
   <string name="deletion_reason_no_longer_want_public">Άλλαξα γνώμη, δεν θέλω να προβάλλεται πλέον δημόσια</string>
   <string name="deletion_reason_not_interesting">Λυπάμαι αυτή η εικόνα δεν έχει ενδιαφέρον για εγκυκλοπαίδεια</string>
-  <string name="uploaded_by_myself">Φορτώθηκε από μένα σε</string>
-  <string name="used_by">χρησιμοποιήθηκε στο</string>
-  <string name="articles">άρθρα</string>
+  <string name="uploaded_by_myself" fuzzy="true">Φορτώθηκε από μένα σε</string>
   <string name="desc_language_Worldwide">Παγκόσμιες</string>
   <string name="desc_language_America">Αμερική</string>
   <string name="desc_language_Europe">Ευρώπη</string>
@@ -406,7 +398,7 @@
   <string name="no_go_back">Όχι, Επιστροφή</string>
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
   <string name="no_image_uploaded">Δεν έχουν ανεβεί εικόνες</string>
-  <string name="no_notification">Δεν έχετε αδιάβαστες Ενημερώσεις.</string>
-  <string name="no_archived_notification">Δεν έχετε αρχειοθετημένες Ενημερώσεις.</string>
+  <string name="no_notification" fuzzy="true">Δεν έχετε αδιάβαστες Ενημερώσεις.</string>
+  <string name="no_archived_notification" fuzzy="true">Δεν έχετε αρχειοθετημένες Ενημερώσεις.</string>
   <string name="please_wait">Παρακαλούμε περιμένετε…</string>
 </resources>

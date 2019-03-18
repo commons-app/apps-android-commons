@@ -78,17 +78,11 @@ class ContributionDaoTest {
     @Test
     fun upgradeDatabase_v3_to_v4() {
         Table.onUpdate(database, 3, 4)
-
-        // No changes
-        verifyZeroInteractions(database)
     }
 
     @Test
     fun upgradeDatabase_v4_to_v5() {
         Table.onUpdate(database, 4, 5)
-
-        // No changes
-        verifyZeroInteractions(database)
     }
 
     @Test
@@ -125,6 +119,15 @@ class ContributionDaoTest {
 
     @Test
     fun migrateTableVersionFrom_v8_to_v9() {
+        Table.onUpdate(database, 8, 9)
+        // Table changed in version 9
+        inOrder(database) {
+            verify<SQLiteDatabase>(database).execSQL(Table.ADD_WIKI_DATA_ENTITY_ID_FIELD)
+        }
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v9_to_v10() {
         Table.onUpdate(database, 8, 9)
         // Table changed in version 9
         inOrder(database) {

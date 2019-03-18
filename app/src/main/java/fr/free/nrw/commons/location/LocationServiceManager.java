@@ -9,8 +9,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.HashSet;
 import java.util.List;
@@ -45,12 +45,12 @@ public class LocationServiceManager implements LocationListener {
     }
 
     /**
-     * Returns the current status of the GPS provider.
+     * Returns the current status of the location provider.
      *
-     * @return true if the GPS provider is enabled
+     * @return true if the location provider is enabled
      */
     public boolean isProviderEnabled() {
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
     }
 
     /**

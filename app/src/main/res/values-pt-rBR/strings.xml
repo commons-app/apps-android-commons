@@ -150,17 +150,14 @@
   <string name="tutorial_1_text">Wikimedia Commons hospeda a maioria das imagens que são usadas na Wikipedia</string>
   <string name="tutorial_1_subtext">Suas imagens ajudam a educar as pessoas ao redor do mundo!</string>
   <string name="tutorial_2_text">Carregue as fotografias tiradas ou criadas inteiramente por você:</string>
-  <string name="tutorial_2_subtext">• Objetos naturais (flores, animais, montanhas)\n• Objetos úteis (bicicletas, estações de trem)\n• Pessoas famosas (seu prefeito, atletas olímpicos que você conheceu)</string>
   <string name="tutorial_2_subtext_1">Objetos naturais (flores, animais, montanhas)</string>
   <string name="tutorial_2_subtext_2">Objetos úteis (bicicletas, estações de trem)</string>
   <string name="tutorial_2_subtext_3">Pessoas famosas (seu prefeito, atletas olímpicos que conheceu)</string>
   <string name="tutorial_3_text">Por favor NÃO carregue:</string>
-  <string name="tutorial_3_subtext">- Selfies ou fotos de seus amigos\n- Imagens que você baixou da Internet\n- Imagens de aplicativos proprietários</string>
   <string name="tutorial_3_subtext_1">Autorretratos ou fotos de seus amigos</string>
   <string name="tutorial_3_subtext_2">Imagens que você baixou da Internet</string>
   <string name="tutorial_3_subtext_3">Capturas de tela de aplicativos proprietários</string>
   <string name="tutorial_4_text">Exemplo de upload:</string>
-  <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrição: Ópera de Sydney como visto de toda a baía\n- =Categorias: =Ópera de Sydney, =Ópera de Sydney a partir do oeste, Ópera de Sydney vistas remotas</string>
   <string name="tutorial_4_subtext_1">Título: Ópera de Sydney</string>
   <string name="tutorial_4_subtext_2">Descrição: Ópera de Sydney como visto do outro lado da baía</string>
   <string name="tutorial_4_subtext_3">Categorias: Teatro da Ópera de Sydney a partir do oeste, visões remotas da Ópera de Sydney</string>
@@ -189,11 +186,8 @@
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <string name="media_detail_title">Título</string>
-  <string name="media_detail_media_title">Título da mídia</string>
   <string name="media_detail_description">Descrição</string>
-  <string name="media_detail_description_explanation">Descrição da mídia aqui. Isso pode ser potencialmente longo e precisará envolver múltiplas linhas. Esperamos que seja agradável.</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_author_explanation">O nome de usuário do autor da imagem destacada fica aqui.</string>
   <string name="media_detail_uploaded_date">Data de envio.</string>
   <string name="media_detail_license">Licença</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -208,7 +202,7 @@
   <string name="maximum_limit_alert">Incapaz de exibir mais de 500.</string>
   <string name="enter_valid">Digite um número válido</string>
   <string name="cannot_be_zero">O limite de upload não pode ser 0</string>
-  <string name="set_limit">Definir o limite de carregamento recente</string>
+  <string name="set_limit" fuzzy="true">Definir o limite de carregamento recente</string>
   <string name="login_failed_2fa_not_supported">Dois fatores de autenticação não são suportados.</string>
   <string name="logout_verification">Quer realmente sair ?</string>
   <string name="commons_logo">Logotipo do Commons</string>
@@ -258,6 +252,7 @@
   <string name="upload_problem_image_blurry">A imagem está embaçada.</string>
   <string name="upload_problem_image_duplicate">A imagem já está no Commons.</string>
   <string name="upload_problem_different_geolocation">Esta foto foi tirada em um local diferente.</string>
+  <string name="upload_problem_fbmd">Por favor, apenas envie fotos que você tirou sozinho. Não faça upload de fotos que você encontrou nas contas do Facebook de outras pessoas.</string>
   <string name="upload_problem_do_you_continue">Você ainda quer enviar esta foto?</string>
   <string name="give_permission">Dar permissão</string>
   <string name="use_external_storage">Usar o armazenamento externo</string>
@@ -306,7 +301,7 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
-  <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de você que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Estes são os lugares perto de você que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
   <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes lugares</string>
   <string name="showcase_view_plus_fab">Pode carregar uma fotografia para qualquer dos lugares, da sua galeria ou câmara</string>
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
@@ -414,10 +409,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Eu percebi que é ruim para minha privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Eu mudei de ideia, eu não quero mais que seja publicamente visível</string>
   <string name="deletion_reason_not_interesting">Desculpe, esta foto não é interessante para uma enciclopédia</string>
-  <string name="uploaded_by_myself">Enviado por mim mesmo em</string>
-  <string name="used_by">,usado em</string>
-  <string name="articles">artigos</string>
-  <string name="no_uploads">Bem-vindo ao Commons!\n\nCarregue a sua primeira mídia tocando no ícone da câmera ou galeria acima.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Enviado por mim mesmo em</string>
+  <string name="no_uploads" fuzzy="true">Bem-vindo ao Commons!\n\nCarregue a sua primeira mídia tocando no ícone da câmera ou galeria acima.</string>
   <string name="desc_language_Worldwide">Global</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>
@@ -452,8 +445,8 @@
   <string name="no_image">Nenhuma imagem usada</string>
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
-  <string name="no_notification">Você não tem notificações não lidas</string>
-  <string name="no_archived_notification">Você não tem nenhuma notificação arquivada</string>
+  <string name="no_notification" fuzzy="true">Você não tem notificações não lidas</string>
+  <string name="no_archived_notification" fuzzy="true">Você não tem nenhuma notificação arquivada</string>
   <string name="share_logs_using">Compartilhar registros usando</string>
   <string name="menu_option_archived">Ver arquivadas</string>
   <string name="menu_option_unread">Ver não lidas</string>

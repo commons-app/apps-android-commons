@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.mwapi.model;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class Page {
     public String title;

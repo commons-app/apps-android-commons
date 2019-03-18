@@ -7,90 +7,88 @@
     android:layout_centerVertical="true"
     android:minHeight="72dp">
 
-        <Button
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/permission_request_button"
+        android:text="@string/display_nearby_notification_summary"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:minWidth="48dp"
+        android:textColor="@android:color/white"
+        android:singleLine="true"
+        android:theme="?attr/mainScreenNearbyPermissionbutton"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_layout"
+        android:layout_centerInParent="true"
+        >
+
+        <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/permission_request_button"
-            android:text="@string/display_nearby_notification_summary"
+            android:id="@+id/progressBar"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:minWidth="48dp"
-            android:textColor="@android:color/white"
-            android:singleLine="true"
-            android:theme="?attr/mainScreenNearbyPermissionbutton"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
             />
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/nearby_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_location_white_24dp"/>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/content_layout"
             android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:weightSum="4"
             >
 
-            <ProgressBar
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/nearby_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
+                android:layout_weight="3"
                 android:layout_centerInParent="true"
-                />
-
-            <ImageView
-                android:id="@+id/nearby_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_location_white_24dp"/>
+                android:layout_marginRight="16dp"
+                tools:text="test distance"
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                >
+            </TextView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/nearby_distance"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="horizontal"
-                android:layout_toRightOf="@id/nearby_icon"
-                android:weightSum="4"
+                android:layout_weight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:minWidth="48dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                tools:text="test distance"
+                android:textColor="@android:color/white"
+                android:singleLine="true"
                 >
 
-                <TextView
-                    android:id="@+id/nearby_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:layout_toRightOf="@id/nearby_icon"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    tools:text="test distance"
-                    android:textColor="@android:color/white"
-                    android:singleLine="true"
-                    >
-                </TextView>
+            </TextView>
 
-                <TextView
-                    android:id="@+id/nearby_distance"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:minWidth="48dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    tools:text="test distance"
-                    android:textColor="@android:color/white"
-                    android:singleLine="true"
-                    >
+        </LinearLayout>
 
-                </TextView>
-
-            </LinearLayout>
-
-        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

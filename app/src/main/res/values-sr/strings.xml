@@ -142,17 +142,14 @@
   <string name="tutorial_1_text">Викимедијина остава садржи већину слика које се користе на Википедији.</string>
   <string name="tutorial_1_subtext">Ваше слике помажу у образовању људи широм света.</string>
   <string name="tutorial_2_text">Отпремајте слике које сте снимили или направили у потпуности сами:</string>
-  <string name="tutorial_2_subtext">Природне објекте (цвеће, животиње, планине)\n• Корисне објекте (бицикле, железничке станице)\n• Познате људе (ваш градоначелник, олимпијци које сте срели)</string>
   <string name="tutorial_2_subtext_1">природне објекте (цвеће, животиње, планине);</string>
   <string name="tutorial_2_subtext_2">корисне објекте (бицикле, железничке станице);</string>
   <string name="tutorial_2_subtext_3">познате људе (ваш градоначелник, олимпијци које сте срели).</string>
   <string name="tutorial_3_text">НЕ отпремајте:</string>
-  <string name="tutorial_3_subtext">— селфије и слике ваших пријатеља\n— слике које сте преузели са интернета\n— снимке екрана неслободних апликација</string>
   <string name="tutorial_3_subtext_1">селфије или слике ваших пријатеља;</string>
   <string name="tutorial_3_subtext_2">слике које сте преузели са интернета;</string>
   <string name="tutorial_3_subtext_3">снимке екрана власничких апликација.</string>
   <string name="tutorial_4_text">Пример отпремања:</string>
-  <string name="tutorial_4_subtext">— Наслов: Сиднејска опера\n— Опис: Сиднејска опера, поглед преко залива\n— Категорије: Сиднејска опера са запада, погледи на Сиднејксу оперу из даљине</string>
   <string name="tutorial_4_subtext_1">Наслов: Сиднејска опера</string>
   <string name="tutorial_4_subtext_2">Опис: Сиднејска опера гледана преко залива</string>
   <string name="tutorial_4_subtext_3">Категорије: Sydney Opera House from the west, Sydney Opera House remote views</string>
@@ -180,11 +177,8 @@
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>
-  <string name="media_detail_media_title">Наслов медија</string>
   <string name="media_detail_description">Опис</string>
-  <string name="media_detail_description_explanation">Опис датотеке иде овде. Може да буде поприлично дуг и приказиваће се у више редова. Надамо се да ће изгледати лепо.</string>
   <string name="media_detail_author">Аутор</string>
-  <string name="media_detail_author_explanation">Корисничко име аутора изабране слике иде овде.</string>
   <string name="media_detail_uploaded_date">Датум отпремања</string>
   <string name="media_detail_license">Лиценца</string>
   <string name="media_detail_coordinates">Координате</string>
@@ -199,7 +193,7 @@
   <string name="maximum_limit_alert">Није могуће приказати више од 500</string>
   <string name="enter_valid">Унесите важећи број</string>
   <string name="cannot_be_zero">Граница отпремања не може бити 0</string>
-  <string name="set_limit">Постави ограничење за недавна отпремања</string>
+  <string name="set_limit" fuzzy="true">Постави ограничење за недавна отпремања</string>
   <string name="login_failed_2fa_not_supported">Двофакторска аутентификација тренутно није подржана.</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
   <string name="commons_logo">Лого Оставе</string>
@@ -297,7 +291,7 @@
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Покушај поново</string>
   <string name="showcase_view_got_it_button">Разумем</string>
-  <string name="showcase_view_whole_nearby_activity">Ово су места у Вашој близини којима је потребна слика да илуструје њихове википедијске чланке</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Ово су места у Вашој близини којима је потребна слика да илуструје њихове википедијске чланке</string>
   <string name="showcase_view_list_icon">Додир овог дугмета даће вам листу ових места</string>
   <string name="showcase_view_plus_fab">Можете да отпремите слику за било које место из своје галерије или камере</string>
   <string name="no_images_found">Слике нису пронађене.</string>
@@ -396,10 +390,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Схватио/ла сам да је лоша за моју приватност</string>
   <string name="deletion_reason_no_longer_want_public">Променио/ла сам мишљење, не желим да више јавно буду видљиве</string>
   <string name="deletion_reason_not_interesting">Ова слика није занимљива за енциклопедију</string>
-  <string name="uploaded_by_myself">Отпремио/ла сам на</string>
-  <string name="used_by">, користи се у</string>
-  <string name="articles">чланци</string>
-  <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром горенаведене иконице камере или галерије.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Отпремио/ла сам на</string>
+  <string name="no_uploads" fuzzy="true">Добро дошли на Оставу!\n\nОтпремите прве медије додиром горенаведене иконице камере или галерије.</string>
   <string name="desc_language_Worldwide">Светски</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>

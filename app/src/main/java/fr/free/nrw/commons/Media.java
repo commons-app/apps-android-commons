@@ -3,7 +3,7 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +39,7 @@ public class Media implements Parcelable {
     protected String imageUrl;
     protected String filename;
     protected String description; // monolingual description on input...
+    protected String discussion;
     protected long dataLength;
     protected Date dateCreated;
     protected @Nullable Date dateUploaded;
@@ -193,6 +194,22 @@ public class Media implements Parcelable {
      */
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    /**
+     * Sets the discussion of the file.
+     * @param discussion
+     */
+    public void setDiscussion(String discussion) {
+        this.discussion = discussion;
+    }
+
+    /**
+     * Gets the file discussion as a string.
+     * @return file discussion as a string
+     */
+    public String getDiscussion() {
+        return discussion;
     }
 
     /**
