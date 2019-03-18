@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.page.PageTitle;
 import org.wikipedia.util.UriUtil;
 
 import java.util.Locale;
@@ -27,6 +29,12 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class Utils {
 
+    private static WikiSite COMMONS_WIKI_SITE = new WikiSite(BuildConfig.COMMONS_URL);
+
+    public static PageTitle getPageTitle(@NonNull String title) {
+        return new PageTitle(title, COMMONS_WIKI_SITE);
+    }
+
     /**
      * Creates an URL for thumbnail
      *
@@ -34,7 +42,7 @@ public class Utils {
      * @return URL of thumbnail
      */
     public static String makeThumbBaseUrl(@NonNull String filename) {
-        String name = new PageTitle(filename).getPrefixedText();
+        String name = getPageTitle(filename).getPrefixedText();
         String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
         return String.format("%s/%s/%s/%s", BuildConfig.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), UriUtil.encodeURL(name));
     }

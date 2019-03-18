@@ -171,13 +171,13 @@ public class MediaDataExtractor {
     }
 
     private Node findTemplate(Element parentNode, String title_) throws IOException {
-        String title = new PageTitle(title_).getDisplayText();
+        String title = Utils.getPageTitle(title_).getDisplayText();
         NodeList nodes = parentNode.getChildNodes();
         for (int i = 0, length = nodes.getLength(); i < length; i++) {
             Node node = nodes.item(i);
             if (node.getNodeName().equals("template")) {
                 String foundTitle = getTemplateTitle(node);
-                String displayText = new PageTitle(foundTitle).getDisplayText();
+                String displayText = Utils.getPageTitle(foundTitle).getDisplayText();
                 //replaced equals with contains because multiple sources had multiple formats
                 //say from two sources I had {{Location|12.958117388888889|77.6440805}} & {{Location dec|47.99081|7.845416|heading:255.9}},
                 //So exact string match would show null results for uploads via web

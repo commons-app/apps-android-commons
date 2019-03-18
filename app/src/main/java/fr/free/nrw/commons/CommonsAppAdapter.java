@@ -1,7 +1,6 @@
 package fr.free.nrw.commons;
 
 import org.wikipedia.AppAdapter;
-import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.SharedPreferenceCookieManager;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonMarshaller;

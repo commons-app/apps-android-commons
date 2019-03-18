@@ -19,7 +19,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
@@ -121,7 +120,7 @@ public class OkHttpJsonApiClient {
             String url = String.format(
                     Locale.ENGLISH,
                     fetchAchievementUrlTemplate,
-                    new PageTitle(userName).getText());
+                    userName);
             HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
             urlBuilder.addQueryParameter("user", userName);
             Timber.i("Url %s", urlBuilder.toString());

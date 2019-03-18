@@ -6,9 +6,11 @@ import android.os.Parcelable;
 
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.gallery.ImageInfo;
+import org.wikipedia.page.PageTitle;
 import org.wikipedia.util.DateUtil;
 import org.wikipedia.util.StringUtil;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.text.ParseException;
@@ -17,8 +19,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.location.LatLng;
 
@@ -36,7 +36,6 @@ public class Media implements Parcelable {
         }
     };
 
-    private static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
     // Primary metadata fields
     protected Uri localUri;
     protected String imageUrl;
@@ -140,26 +139,16 @@ public class Media implements Parcelable {
      * Gets media display title
      * @return Media title
      */
-    public String getDisplayTitle() {
-        if (filename == null) {
-            return "";
-        }
-        // FIXME: Gross hack because my regex skills suck maybe or I am too lazy who knows
-        String title = getFilePageTitle().getDisplayText().replaceFirst("^File:", "");
-        Matcher matcher = displayTitlePattern.matcher(title);
-        if (matcher.matches()) {
-            return matcher.group(1);
-        } else {
-            return title;
-        }
+    @NonNull public String getDisplayTitle() {
+        return filename != null ? getPageTitle().getDisplayTextWithoutNamespace().replaceFirst("[.][^.]+$", "") : "";
     }
 
     /**
      * Gets file page title
      * @return New media page title
      */
-    public PageTitle getFilePageTitle() {
-        return new PageTitle("File:" + getFilename().replaceFirst("^File:", ""));
+    @NonNull public PageTitle getPageTitle() {
+        return Utils.getPageTitle(getFilename());
     }
 
     /**
