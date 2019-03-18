@@ -229,7 +229,7 @@ public class NearbyMapFragment extends DaggerFragment {
             }
             updateMapToTrackPosition();
             if (nearbyplace != null){
-                setMapCenter(nearbyplace);
+                centerMapToPlace(nearbyplace);
             }
         }
 
@@ -519,7 +519,6 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void setupMapView(Bundle savedInstanceState) {
         Timber.d("setupMapView called");
-
         MapboxMapOptions options = new MapboxMapOptions()
                     .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                     .compassMargins(new int[]{12, 0, 0, 24})
@@ -1025,7 +1024,11 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
-    public void setMapCenter(Place place) {
+    /**
+     * Centers the map in nearby fragment to a given place
+     * @param place is new center of the map
+     */
+    public void centerMapToPlace(Place place) {
         mapView.getMapAsync(mapboxMap1 -> {
             CameraPosition position = new CameraPosition.Builder()
                     .target(isBottomListSheetExpanded ?

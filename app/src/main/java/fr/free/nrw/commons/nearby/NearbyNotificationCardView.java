@@ -90,7 +90,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
     private void setActionListeners(Place place) {
         this.setOnClickListener(view -> {
             ((MainActivity)context).viewPager.setCurrentItem(1);
-            ((NearbyFragment)((MainActivity) context).contributionsActivityPagerAdapter.getItem(1)).setMapCenter(place);
+            ((NearbyFragment)((MainActivity) context).contributionsActivityPagerAdapter.getItem(1)).centerMapToPlace(place);
         });
     }
 

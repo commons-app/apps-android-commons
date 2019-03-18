@@ -254,7 +254,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      */
     public void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
         Timber.d("Refreshing nearby places");
-
         if (lockNearbyView) {
             return;
         }
@@ -747,7 +746,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onResume();
         // Resume the fragment if exist
         resumeFragment();
-
         }
 
     /**
@@ -820,11 +818,16 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             locationManager.unregisterLocationManager();
         }
     }
-    public void setMapCenter(Place place) {
+
+    /**
+     * Centers the map in nearby fragment to a given place
+     * @param place is new center of the map
+     */
+    public void centerMapToPlace(Place place) {
         if (nearbyMapFragment == null) {
             nearbyMapFragment.nearbyplace = place;
         }else {
-            nearbyMapFragment.setMapCenter(place);
+            nearbyMapFragment.centerMapToPlace(place);
         }
     }
 }
