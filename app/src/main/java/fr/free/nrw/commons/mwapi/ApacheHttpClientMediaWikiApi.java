@@ -318,6 +318,19 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
+    public String getCaptionsByFilename(String filename) throws IOException {
+        return api.action("wbgetentities")
+                .param("sites", "commonswiki")
+                .param("titles", filename)
+                .param("props", "labels")
+                .param("format", "xml")
+                .param("languages", "en")
+                .param("languagefallback", "1")
+                .get()
+                .getString("/api/entities/entity/labels/label/@value");
+    }
+
+    @Override
     @NonNull
     public MediaResult fetchMediaByFilename(String filename) throws IOException {
         CustomApiResult apiResult = api.action("query")
