@@ -55,7 +55,7 @@ public class UploadTest {
             Manifest.permission.ACCESS_FINE_LOCATION);
 
     @Rule
-    public ActivityTestRule activityRule = new IntentsTestRule<>(MainActivity.class);
+    public ActivityTestRule activityRule = new IntentsTestRule<>(WelcomeActivity.class);
 
     @Before
     public void setup() {
@@ -96,6 +96,14 @@ public class UploadTest {
         Bitmap bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
         bitmap.eraseColor(random.nextInt(255));
         return bitmap;
+    }
+
+    private void getToMainActivity() {
+        //Skip tutorial
+        onView(withId(R.id.finishTutorialButton))
+                .perform(click());
+        //Perform Login
+
     }
 
     @Test
