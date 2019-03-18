@@ -8,7 +8,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Process;
-import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -18,14 +17,17 @@ import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import org.acra.ACRA;
-import org.acra.annotation.*;
-import static org.acra.ReportField.*;
+import org.acra.annotation.AcraCore;
+import org.acra.annotation.AcraDialog;
+import org.acra.annotation.AcraMailSender;
+import org.acra.data.StringFormat;
 
 import java.io.File;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.NonNull;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
@@ -36,7 +38,6 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
@@ -46,10 +47,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static org.acra.ReportField.*;
+
 @AcraCore(
         buildConfigClass = BuildConfig.class,
         resReportSendSuccessToast = R.string.crash_dialog_ok_toast,
-        reportContent = {USER_COMMENT, APP_VERSION_CODE, APP_VERSION_NAME, ANDROID_VERSION, PHONE_MODEL, CUSTOM_DATA, STACK_TRACE}
+        reportFormat = StringFormat.KEY_VALUE_LIST,
+        reportContent = {USER_COMMENT, APP_VERSION_CODE, APP_VERSION_NAME, ANDROID_VERSION, PHONE_MODEL, STACK_TRACE}
 )
 
 @AcraMailSender(
