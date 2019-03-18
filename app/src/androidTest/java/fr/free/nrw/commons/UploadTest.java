@@ -110,9 +110,9 @@ public class UploadTest {
 
             //Perform Login
             onView(withId(R.id.loginUsername))
-                    .perform(clearText(), typeText("TestCommonsApp"));
+                    .perform(clearText(), typeText(BuildConfig.TEST_USERNAME));
             onView(withId(R.id.loginPassword))
-                    .perform(clearText(), typeText("CommonsApp"));
+                    .perform(clearText(), typeText(BuildConfig.TEST_PASSWORD));
             onView(withId(R.id.loginButton))
                     .perform(click());
         } catch (NoMatchingViewException ignored) {
