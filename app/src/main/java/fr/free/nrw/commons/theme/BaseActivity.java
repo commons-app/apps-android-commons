@@ -7,12 +7,13 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 
 public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
     @Inject
     @Named("default_preferences")
-    BasicKvStore defaultKvStore;
+    public JsonKvStore defaultKvStore;
 
     protected boolean wasPreviouslyDarkTheme;
 

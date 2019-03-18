@@ -33,7 +33,7 @@ public class UploadCategoriesRenderer extends Renderer<CategoryItem> {
     protected void setUpView(View view) {
         ButterKnife.bind(this, view);
         Configuration config = getContext().getResources().getConfiguration();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+        if (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
             checkedView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
     }

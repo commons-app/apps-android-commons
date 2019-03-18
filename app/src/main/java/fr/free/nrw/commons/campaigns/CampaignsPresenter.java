@@ -107,7 +107,7 @@ public class CampaignsPresenter implements BasePresenter {
                     }
 
                     @Override public void onError(Throwable e) {
-                        Timber.e(e.getMessage(), "could not fetch campaigns");
+                        Timber.e(e, "could not fetch campaigns");
                     }
                 });
         }

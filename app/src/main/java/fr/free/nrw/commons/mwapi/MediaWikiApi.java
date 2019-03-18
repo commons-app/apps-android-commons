@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,6 +65,8 @@ public interface MediaWikiApi {
 
     @Nullable
     boolean addWikidataEditTag(String revisionId) throws IOException;
+
+    String parseWikicode(String source) throws IOException;
 
     @NonNull
     MediaResult fetchMediaByFilename(String filename) throws IOException;

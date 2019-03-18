@@ -202,7 +202,7 @@
   <string name="maximum_limit_alert">Incapaz de exibir mais de 500.</string>
   <string name="enter_valid">Digite um número válido</string>
   <string name="cannot_be_zero">O limite de upload não pode ser 0</string>
-  <string name="set_limit">Definir o limite de carregamento recente</string>
+  <string name="set_limit" fuzzy="true">Definir o limite de carregamento recente</string>
   <string name="login_failed_2fa_not_supported">Dois fatores de autenticação não são suportados.</string>
   <string name="logout_verification">Quer realmente sair ?</string>
   <string name="commons_logo">Logotipo do Commons</string>
@@ -301,7 +301,7 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
-  <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de você que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Estes são os lugares perto de você que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
   <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes lugares</string>
   <string name="showcase_view_plus_fab">Pode carregar uma fotografia para qualquer dos lugares, da sua galeria ou câmara</string>
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
@@ -445,8 +445,8 @@
   <string name="no_image">Nenhuma imagem usada</string>
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
-  <string name="no_notification">Você não tem notificações não lidas</string>
-  <string name="no_archived_notification">Você não tem nenhuma notificação arquivada</string>
+  <string name="no_notification" fuzzy="true">Você não tem notificações não lidas</string>
+  <string name="no_archived_notification" fuzzy="true">Você não tem nenhuma notificação arquivada</string>
   <string name="share_logs_using">Compartilhar registros usando</string>
   <string name="menu_option_archived">Ver arquivadas</string>
   <string name="menu_option_unread">Ver não lidas</string>

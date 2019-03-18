@@ -196,7 +196,7 @@
   <string name="maximum_limit_alert">Non se poden amosar máis de 500</string>
   <string name="enter_valid">Indique un número válido</string>
   <string name="cannot_be_zero">O límite de subas non pode ser 0</string>
-  <string name="set_limit">Establecer o límite de subas recentes</string>
+  <string name="set_limit" fuzzy="true">Establecer o límite de subas recentes</string>
   <string name="login_failed_2fa_not_supported">Actualmente non se permite a autenticación de dous factores.</string>
   <string name="logout_verification">Está seguro de querer saír?</string>
   <string name="commons_logo">Logo de Commons</string>
@@ -294,7 +294,7 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
-  <string name="showcase_view_whole_nearby_activity">Hai sitios preto de vostede que precisan fotos para ilustrar os seus artigos de Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Hai sitios preto de vostede que precisan fotos para ilustrar os seus artigos de Wikipedia</string>
   <string name="showcase_view_list_icon">Premendo neste botón aparecerá unha lista destes lugares</string>
   <string name="showcase_view_plus_fab">Pode cargar unha imaxe de calquera lugar dende a galería ou a cámara</string>
   <string name="no_images_found">Non se atopou ningunha imaxeǃ</string>
@@ -435,8 +435,8 @@
   <string name="no_image">Ningunha imaxe usada</string>
   <string name="no_image_reverted">Ningunha imaxe revertida</string>
   <string name="no_image_uploaded">Ningunha imaxe subida</string>
-  <string name="no_notification">Non ten ningunha notificación sen ler</string>
-  <string name="no_archived_notification">Non ten notificacións arquivadas</string>
+  <string name="no_notification" fuzzy="true">Non ten ningunha notificación sen ler</string>
+  <string name="no_archived_notification" fuzzy="true">Non ten notificacións arquivadas</string>
   <string name="share_logs_using">Compartir os rexistros usando</string>
   <string name="menu_option_archived">Ver arquivadas</string>
   <string name="menu_option_unread">Ver as non lidas</string>

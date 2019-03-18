@@ -2,7 +2,7 @@ package fr.free.nrw.commons.notification;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

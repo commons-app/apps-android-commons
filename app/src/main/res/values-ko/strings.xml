@@ -199,7 +199,7 @@
   <string name="maximum_limit_alert">500개를 초과하여 표시할 수 없습니다</string>
   <string name="enter_valid">유효한 번호를 입력하십시오</string>
   <string name="cannot_be_zero">업로드 제한은 0으로 둘 수 없습니다</string>
-  <string name="set_limit">최근 업로드 제한 설정</string>
+  <string name="set_limit" fuzzy="true">최근 업로드 제한 설정</string>
   <string name="login_failed_2fa_not_supported">2요소 인증은 현재 지원하지 않습니다.</string>
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
   <string name="commons_logo">공용 로고</string>
@@ -297,7 +297,7 @@
   <string name="about_translate_cancel">취소</string>
   <string name="retry">다시 시도</string>
   <string name="showcase_view_got_it_button">알겠습니다!</string>
-  <string name="showcase_view_whole_nearby_activity">이들은 위키백과 글에 사진을 넣을 필요가 있는 당신 주위의 장소들입니다</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">이들은 위키백과 글에 사진을 넣을 필요가 있는 당신 주위의 장소들입니다</string>
   <string name="showcase_view_list_icon">이 버튼을 탭하면 이 장소들의 목록을 가져옵니다</string>
   <string name="showcase_view_plus_fab">갤러리나 카메라 어느 곳이든 사진을 올릴 수 있습니다</string>
   <string name="no_images_found">그림이 없습니다!</string>
@@ -346,8 +346,10 @@
   <string name="add_description">+ 설명 추가</string>
   <string name="no_recent_searches">최근 검색 없음</string>
   <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
+  <string name="delete_search_dialog">이 검색을 삭제하시겠습니까?</string>
   <string name="search_history_deleted">검색 기록 삭제됨</string>
   <string name="nominate_delete">삭제 신청</string>
+  <string name="delete">삭제</string>
   <string name="Achievements">성과</string>
   <string name="statistics">통계</string>
   <string name="statistics_featured">알찬 그림</string>
@@ -415,8 +417,8 @@
   <string name="display_location_permission_title">위치 권한 표시</string>
   <string name="bad_token_error_proposed_solution">편집 토큰에 문제가 있어서 업로드를 실패했습니다. 로그아웃한 다음 다시 로그인해 보십시오.</string>
   <string name="error_processing_image">이미지를 처리하는 동안 오류가 발생했습니다. 다시 시도해 주십시오!</string>
-  <string name="no_notification">읽지 않은 알림이 없습니다</string>
-  <string name="no_archived_notification">보관된 알림이 없습니다</string>
+  <string name="no_notification" fuzzy="true">읽지 않은 알림이 없습니다</string>
+  <string name="no_archived_notification" fuzzy="true">보관된 알림이 없습니다</string>
   <string name="menu_option_archived">보관한 항목 보기</string>
   <string name="menu_option_unread">읽지 않은 항목 보기</string>
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>

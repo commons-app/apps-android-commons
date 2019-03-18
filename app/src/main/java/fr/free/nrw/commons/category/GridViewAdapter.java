@@ -2,6 +2,7 @@ package fr.free.nrw.commons.category;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,7 +101,7 @@ public class GridViewAdapter extends ArrayAdapter {
      * @param author
      */
     private void setAuthorView(Media item, TextView author) {
-        if (item.getCreator() != null && !item.getCreator().equals("")) {
+        if (!TextUtils.isEmpty(item.getCreator())) {
             String uploadedByTemplate = context.getString(R.string.image_uploaded_by);
 
             String uploadedBy = String.format(Locale.getDefault(), uploadedByTemplate, item.getCreator());

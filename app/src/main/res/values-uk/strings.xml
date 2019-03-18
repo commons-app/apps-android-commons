@@ -207,7 +207,7 @@
   <string name="maximum_limit_alert">Неможливо показати понад 500</string>
   <string name="enter_valid">Вкажіть коректне значення</string>
   <string name="cannot_be_zero">Ліміт завантажень не може бути нульовим</string>
-  <string name="set_limit">Встановити ліміт останніх завантажень</string>
+  <string name="set_limit" fuzzy="true">Встановити ліміт останніх завантажень</string>
   <string name="login_failed_2fa_not_supported">Двофакторна автентифікація наразі не підтримується.</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
   <string name="commons_logo">Логотип Вікісховища</string>
@@ -306,7 +306,7 @@
   <string name="about_translate_cancel">Скасувати</string>
   <string name="retry">Повторити</string>
   <string name="showcase_view_got_it_button">Зрозуміло</string>
-  <string name="showcase_view_whole_nearby_activity">Це місця поблизу, про які є статті Вікіпедії, але які потребують ілюстрацій</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Це місця поблизу, про які є статті Вікіпедії, але які потребують ілюстрацій</string>
   <string name="showcase_view_list_icon">Натискання цієї кнопки згенерує список таких місць</string>
   <string name="showcase_view_plus_fab">Ви можете завантажити зображення для любого з цих місць, зробивши знімок камерою або вибравши зображення з галереї</string>
   <string name="no_images_found">Зображень не знайдено!</string>
@@ -452,8 +452,8 @@
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
-  <string name="no_notification">У вас немає непрочитаних сповіщень</string>
-  <string name="no_archived_notification">Немає архівованих сповіщень</string>
+  <string name="no_notification" fuzzy="true">У вас немає непрочитаних сповіщень</string>
+  <string name="no_archived_notification" fuzzy="true">Немає архівованих сповіщень</string>
   <string name="share_logs_using">Поширення журналів</string>
   <string name="menu_option_archived">Перегляд архівованих</string>
   <string name="menu_option_unread">Перегляд непрочитаних</string>

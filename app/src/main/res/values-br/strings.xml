@@ -188,7 +188,7 @@
   <string name="invalid_zero">Zero n\'eo ket un talvoud reizh</string>
   <string name="maximum_limit_alert">Ne c\'haller ket diskwel ouzhpenn 500</string>
   <string name="enter_valid">Ebarzhiñ un niver reizh</string>
-  <string name="set_limit">Lakaat ar vevenn bellgargañ nevez</string>
+  <string name="set_limit" fuzzy="true">Lakaat ar vevenn bellgargañ nevez</string>
   <string name="login_failed_2fa_not_supported">Ne vez ket embreget an dilesadur gant daou faktor evit ar mare.</string>
   <string name="logout_verification">Sur oc\'h e fell deoc\'h digevreañ ?</string>
   <string name="commons_logo">Logo Commons</string>
@@ -277,7 +277,7 @@
   <string name="about_translate_cancel">Nullañ</string>
   <string name="retry">Klask en-dro</string>
   <string name="showcase_view_got_it_button">Mat eo !</string>
-  <string name="showcase_view_whole_nearby_activity">Lec\'hioù zo en-dro deoc\'h zo ezhomm skeudennoù anezho evit skeudennaouiñ pennadoù Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Lec\'hioù zo en-dro deoc\'h zo ezhomm skeudennoù anezho evit skeudennaouiñ pennadoù Wikipedia</string>
   <string name="showcase_view_list_icon">En ur glikañ war ar bouton-se e tiskwelot ur roll eus al lec\'hioù-se</string>
   <string name="showcase_view_plus_fab">Gallout a reot ezporzhiañ ur skeudenn eus n\'eus forzh lec\'h eus ho palier pe eus ho luc\'hskeudennerez</string>
   <string name="no_images_found">N\'eus bet kavet skeudenn ebet !</string>
