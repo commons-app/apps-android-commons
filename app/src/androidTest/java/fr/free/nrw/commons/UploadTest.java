@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Instrumentation.ActivityResult;
 import android.content.Context;
@@ -26,6 +27,7 @@ import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.filters.LargeTest;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -48,8 +50,9 @@ import static org.hamcrest.core.AllOf.allOf;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class UploadTest {
-//    @Rule
-//    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    @Rule
+    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION);
 
     @Rule
     public ActivityTestRule activityRule = new IntentsTestRule<>(MainActivity.class);
