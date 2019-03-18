@@ -871,6 +871,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
         discussionButton.setOnClickListener(v -> {
             Intent intent=new Intent(this.getActivity(), WikiFeedback.class);
+            intent.putExtra("place",this.place.name);
             Timber.d("line866"+ this.place.name);
             Observable.fromCallable(() -> nearbyController.getFeedback(this.place.name))
                     .subscribeOn(Schedulers.io())

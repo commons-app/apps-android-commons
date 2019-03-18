@@ -14,6 +14,10 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 public class WikiFeedback extends AppCompatActivity {
 TextView textView;
+private static final String headerString1="Write something about the ";
+    private static final String headerString2=" item. It will be publicly visible.";
+
+TextView textHeader;
 @Inject
     MediaWikiApi mediaWikiApi;
 
@@ -22,13 +26,10 @@ TextView textView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wiki_feedback);
         textView=findViewById(R.id.descText);
+        textHeader=findViewById(R.id.textHeader);
         textView.setText(getIntent().getStringExtra("wikidataEntry"));
-        /*String text;
-        try {
-            text=mediaWikiApi.readFeedback();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        String place=getIntent().getStringExtra("place");
+        place=headerString1+"'"+place+"'"+headerString2;
+        textHeader.setText(place);
     }
 }
