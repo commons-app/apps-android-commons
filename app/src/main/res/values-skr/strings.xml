@@ -101,7 +101,7 @@
   <string name="become_a_tester_title">بیٹا ٹیسٹر بݨو</string>
   <string name="number_of_uploads">میݙے حالیہ اپ لوڈ دی حد</string>
   <string name="maximum_limit">زیادہ حد</string>
-  <string name="set_limit">حالیہ اپ لوڈ دی حد مقرر کرو</string>
+  <string name="set_limit" fuzzy="true">حالیہ اپ لوڈ دی حد مقرر کرو</string>
   <string name="logout_verification">بھلا تساں سچی دا لاگ آؤٹ تھیوݨ چاہندے ہو؟</string>
   <string name="commons_logo">کامنز لوگو</string>
   <string name="mediaimage_failed">میڈیا فوٹو ناکام</string>

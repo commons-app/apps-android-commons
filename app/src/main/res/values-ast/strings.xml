@@ -180,7 +180,7 @@
   <string name="number_of_uploads">Mio llende de xubes recién</string>
   <string name="maximum_limit">Llende máxima</string>
   <string name="maximum_limit_alert">Nun pueden vese más de 500</string>
-  <string name="set_limit">Configurar la llende de xubíes recién</string>
+  <string name="set_limit" fuzzy="true">Configurar la llende de xubíes recién</string>
   <string name="login_failed_2fa_not_supported">Anguaño nun hai encontu pa autenticación de dos factores.</string>
   <string name="logout_verification">¿Confirmes que quies salir?</string>
   <string name="commons_logo">Logo de Commons</string>
@@ -270,7 +270,7 @@
   <string name="about_translate_cancel">Encaboxar</string>
   <string name="retry">Retentar</string>
   <string name="showcase_view_got_it_button">Entendílo</string>
-  <string name="showcase_view_whole_nearby_activity">Estos son sitios cercanos a ti que precisen imaxes para ilustrar los sos artículos de Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Estos son sitios cercanos a ti que precisen imaxes para ilustrar los sos artículos de Wikipedia</string>
   <string name="showcase_view_list_icon">Tocando esti botón amuésase la llista d\'esos llugares</string>
   <string name="showcase_view_plus_fab">Puedes xubir una imaxe pa cualquier sitiu dende la galería o la cámara</string>
   <string name="no_images_found">Nun s\'alcontró nenguna imaxe</string>

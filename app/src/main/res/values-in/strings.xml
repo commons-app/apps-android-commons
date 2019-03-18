@@ -170,7 +170,7 @@
   <string name="invalid_input">Masukan tidak sah</string>
   <string name="enter_valid">Masukkan angka yang sah</string>
   <string name="cannot_be_zero">Batas unggah tidak boleh 0</string>
-  <string name="set_limit">Atur Batasan Unggah Terkini</string>
+  <string name="set_limit" fuzzy="true">Atur Batasan Unggah Terkini</string>
   <string name="login_failed_2fa_not_supported">Otentikasi Dua Faktor saat ini belum didukung.</string>
   <string name="logout_verification">Apakah Anda benar-benar ingin keluar?</string>
   <string name="commons_logo">Logo Commons</string>
@@ -254,7 +254,7 @@
   <string name="about_translate_cancel">Batal</string>
   <string name="retry">Coba lagi</string>
   <string name="showcase_view_got_it_button">Paham!</string>
-  <string name="showcase_view_whole_nearby_activity">Berikut ini adalah tempat-tempat di sekitarmu yang membutuhkan gambar untuk ilustrasi di artikel Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Berikut ini adalah tempat-tempat di sekitarmu yang membutuhkan gambar untuk ilustrasi di artikel Wikipedia</string>
   <string name="showcase_view_plus_fab">Anda dapat mengunggah gambar untuk tempat manapun dari galeri atau kamera Anda</string>
   <string name="no_images_found">tidak ada gambar yang ditemukan</string>
   <string name="error_loading_images">Terjadi kesalahan selama memuat gambar.</string>
