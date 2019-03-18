@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,8 +60,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private LevelController.LevelInfo levelInfo;
 
-    @BindView(R.id.achievement_badge)
+    @BindView(R.id.achievement_badge_image)
     ImageView imageView;
+    @BindView(R.id.achievement_badge_text)
+    TextView badgeText;
     @BindView(R.id.achievement_level)
     TextView levelNumber;
     @BindView(R.id.toolbar)
@@ -352,9 +353,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
         levelNumber.setText(levelUpInfoString);
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, levelInfo.getLevelStyle());
         Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.badge, wrapper.getTheme());
-        Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);
-        BitmapDrawable bitmapImage = BitmapUtils.writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevelNumber()),this);
-        imageView.setImageDrawable(bitmapImage);
+        imageView.setImageDrawable(drawable);
+        badgeText.setText(Integer.toString(levelInfo.getLevelNumber()));
     }
 
     /**
