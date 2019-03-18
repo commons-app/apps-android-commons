@@ -29,10 +29,8 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class Utils {
 
-    private static WikiSite COMMONS_WIKI_SITE = new WikiSite(BuildConfig.COMMONS_URL);
-
     public static PageTitle getPageTitle(@NonNull String title) {
-        return new PageTitle(title, COMMONS_WIKI_SITE);
+        return new PageTitle(title, new WikiSite(BuildConfig.COMMONS_URL));
     }
 
     /**
