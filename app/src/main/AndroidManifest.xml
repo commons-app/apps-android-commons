@@ -112,7 +112,8 @@
         <activity
             android:name=".explore.categories.ExploreActivity"
             android:label="@string/title_activity_explore"
-            android:parentActivityName=".contributions.MainActivity" />
+            android:parentActivityName=".contributions.MainActivity"
+            android:configChanges="orientation|screenSize|keyboard" />
 
         <activity
             android:name=".explore.SearchActivity"
