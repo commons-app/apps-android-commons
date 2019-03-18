@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.view.autofill.AutofillManager;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -29,13 +30,15 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 import androidx.test.runner.AndroidJUnit4;
-import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import timber.log.Timber;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.Intents.intending;
@@ -55,10 +58,11 @@ public class UploadTest {
             Manifest.permission.ACCESS_FINE_LOCATION);
 
     @Rule
-    public ActivityTestRule activityRule = new IntentsTestRule<>(WelcomeActivity.class);
+    public ActivityTestRule activityRule = new IntentsTestRule<>(LoginActivity.class);
 
     @Before
     public void setup() {
+
         saveToInternalStorage();
     }
 
@@ -99,11 +103,20 @@ public class UploadTest {
     }
 
     private void getToMainActivity() {
-        //Skip tutorial
-        onView(withId(R.id.finishTutorialButton))
-                .perform(click());
-        //Perform Login
+        try {
+            //Skip tutorial
+            onView(withId(R.id.finishTutorialButton))
+                    .perform(click());
 
+            //Perform Login
+            onView(withId(R.id.loginUsername))
+                    .perform(clearText(), typeText("TestCommonsApp"));
+            onView(withId(R.id.loginPassword))
+                    .perform(clearText(), typeText("CommonsApp"));
+            onView(withId(R.id.loginButton))
+                    .perform(click());
+        } catch (NoMatchingViewException ignored) {
+        }
     }
 
     @Test
@@ -111,6 +124,8 @@ public class UploadTest {
         if (!ConfigUtils.isBetaFlavour()) {
             throw new Error("This test should only be run in Beta!");
         }
+
+        getToMainActivity();
 
         // Uri to return by our mock gallery selector
         // Requires file 'image.jpg' to be placed at root of file structure
