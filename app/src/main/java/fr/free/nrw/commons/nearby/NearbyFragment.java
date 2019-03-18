@@ -310,7 +310,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                             });
 
         } else if (locationChangeType
-                .equals(LOCATION_SLIGHTLY_CHANGED)) {
+                .equals(LOCATION_SLIGHTLY_CHANGED) && nearbyMapFragment != null) {
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(false,true, null, null);

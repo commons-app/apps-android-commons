@@ -180,7 +180,7 @@
   <string name="number_of_uploads">내 최근 올리적재 제한</string>
   <string name="maximum_limit">최대한</string>
   <string name="maximum_limit_alert">500개를 초과하여 표시할수 없습니다</string>
-  <string name="set_limit">최근 올리적재 제한 설정</string>
+  <string name="set_limit" fuzzy="true">최근 올리적재 제한 설정</string>
   <string name="login_failed_2fa_not_supported">2요소인증은 현재 지원하지 않습니다.</string>
   <string name="logout_verification">정말 탈퇴하시겠습니까?</string>
   <string name="commons_logo">공용 로고</string>
@@ -269,7 +269,7 @@
   <string name="about_translate_cancel">취소</string>
   <string name="retry">다시 시도</string>
   <string name="showcase_view_got_it_button">알겠습니다!</string>
-  <string name="showcase_view_whole_nearby_activity">이들은 위키백과 글에 화상을 넣을 필요가 있는 당신 주위의 장소들입니다</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">이들은 위키백과 글에 화상을 넣을 필요가 있는 당신 주위의 장소들입니다</string>
   <string name="no_images_found">그림이 없습니다!</string>
   <string name="error_loading_images">그림을 불러오는 동안 오유가 생겼습니다.</string>
   <string name="image_uploaded_by">올리적재자: %1$s</string>

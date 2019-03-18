@@ -67,6 +67,8 @@ dependencies {
     // Android testing
     androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test:rules:1.1.1'
     androidTestImplementation 'androidx.annotation:annotation:1.0.2'
@@ -194,6 +196,8 @@ android {
             buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.contentprovider\""
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.locations.contentprovider\""
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
+            buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
+            buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
 
             dimension 'tier'
         }
@@ -224,6 +228,8 @@ android {
             buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.contentprovider\""
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\""
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
+            buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
+            buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
 
             dimension 'tier'
         }

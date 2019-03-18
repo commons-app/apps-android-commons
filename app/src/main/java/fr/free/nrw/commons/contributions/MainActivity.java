@@ -5,13 +5,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.core.view.GravityCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,18 +13,24 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
@@ -464,6 +463,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Timber.d(data.toString());
         super.onActivityResult(requestCode, resultCode, data);
         controller.handleActivityResult(this, requestCode, resultCode, data);
     }

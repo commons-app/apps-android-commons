@@ -201,7 +201,7 @@
   <string name="maximum_limit_alert">Não é possível apresentar mais de 500</string>
   <string name="enter_valid">Introduza um número válido</string>
   <string name="cannot_be_zero">O limite de carregamentos não pode ser 0</string>
-  <string name="set_limit">Definir o limite de carregamentos recentes</string>
+  <string name="set_limit" fuzzy="true">Definir o limite de carregamentos recentes</string>
   <string name="login_failed_2fa_not_supported">Atualmente, a autenticação de dois fatores não é suportada.</string>
   <string name="logout_verification">Deseja realmente sair?</string>
   <string name="commons_logo">Logótipo da wiki Commons</string>
@@ -300,7 +300,7 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
-  <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Estes são os lugares perto de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
   <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes lugares</string>
   <string name="showcase_view_plus_fab">Pode carregar uma fotografia para qualquer dos lugares, da sua galeria ou câmara</string>
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
@@ -349,8 +349,10 @@
   <string name="add_description">+ Adicionar descrição</string>
   <string name="no_recent_searches">Não há pesquisas recentes</string>
   <string name="delete_recent_searches_dialog">Tem a certeza de que deseja limpar o historial de pesquisas?</string>
+  <string name="delete_search_dialog">Deseja eliminar esta pesquisa?</string>
   <string name="search_history_deleted">O historial de pesquisas foi eliminado</string>
   <string name="nominate_delete">Nomear para eliminação</string>
+  <string name="delete">ELIMINAR</string>
   <string name="Achievements">Realizações</string>
   <string name="statistics">ESTATÍSTICAS</string>
   <string name="statistics_thanks">Agradecimentos recebidos</string>
@@ -408,8 +410,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Apercebi-me de que prejudica a minha privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Mudei de ideias, já não quero possa ser vista pelo público</string>
   <string name="deletion_reason_not_interesting">Desculpe, esta fotografia não tem interesse para uma enciclopédia</string>
-  <string name="uploaded_by_myself" fuzzy="true">Carregada por mim em</string>
-  <string name="no_uploads" fuzzy="true">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no ícone da câmara ou da galeria acima.</string>
+  <string name="uploaded_by_myself">Carregada por mim em %1$s, usada em %2$d artigo(s).</string>
+  <string name="no_uploads">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no botão Adicionar.</string>
   <string name="desc_language_Worldwide">Global</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>
@@ -444,8 +446,8 @@
   <string name="no_image">Não foi usada nenhuma imagem</string>
   <string name="no_image_reverted">Não foi revertida nenhuma imagem</string>
   <string name="no_image_uploaded">Não foi carregada nenhuma imagem</string>
-  <string name="no_notification">Não tem nenhuma notificação por ler</string>
-  <string name="no_archived_notification">Não tem nenhuma notificação arquivada</string>
+  <string name="no_notification" fuzzy="true">Não tem nenhuma notificação por ler</string>
+  <string name="no_archived_notification" fuzzy="true">Não tem nenhuma notificação arquivada</string>
   <string name="share_logs_using">Partilhar os registos usando</string>
   <string name="menu_option_archived">Ver arquivadas</string>
   <string name="menu_option_unread">Ver não lidas</string>
