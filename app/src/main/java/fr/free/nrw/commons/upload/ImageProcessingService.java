@@ -34,19 +34,19 @@ public class ImageProcessingService {
     private final ImageUtilsWrapper imageUtilsWrapper;
     private final MediaWikiApi mwApi;
     private final ReadFBMD readFBMD;
-    private final ReadEXIF readEXIF;
+    private final EXIFReader EXIFReader;
 
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
                                   BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
                                   ImageUtilsWrapper imageUtilsWrapper,
-                                  MediaWikiApi mwApi, ReadFBMD readFBMD, ReadEXIF readEXIF) {
+                                  MediaWikiApi mwApi, ReadFBMD readFBMD, EXIFReader EXIFReader) {
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.mwApi = mwApi;
         this.readFBMD = readFBMD;
-        this.readEXIF=readEXIF;
+        this.EXIFReader = EXIFReader;
     }
 
     /**
@@ -110,7 +110,7 @@ public class ImageProcessingService {
 
     public Single<Integer> checkEXIF(String filepath){
         try {
-            return readEXIF.processMetadata(filepath);
+            return EXIFReader.processMetadata(filepath);
         } catch (IOException e) {
             return Single.just(ImageUtils.IMAGE_OK);
         }

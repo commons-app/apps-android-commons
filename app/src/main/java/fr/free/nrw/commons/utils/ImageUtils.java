@@ -56,7 +56,7 @@ public class ImageUtils {
      */
     public static final int FILE_FBMD = 1 << 4;
     /**
-    * The parameter FILE_NO_EXIF is returned from the class ReadEXIF if the uploaded image does not contains EXIF data else returns IMAGE_OK
+    * The parameter FILE_NO_EXIF is returned from the class EXIFReader if the uploaded image does not contains EXIF data else returns IMAGE_OK
     * ie. 100000
     */
     public static final int FILE_NO_EXIF = 1 << 5;

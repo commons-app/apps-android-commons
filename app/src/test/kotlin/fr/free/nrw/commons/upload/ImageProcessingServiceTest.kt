@@ -31,7 +31,7 @@ class u {
     @Mock
     internal var readFBMD: ReadFBMD?=null
     @Mock
-    internal var readEXIF: ReadEXIF?=null
+    internal var readEXIF: EXIFReader?=null
 
     @InjectMocks
     var imageProcessingService: ImageProcessingService? = null

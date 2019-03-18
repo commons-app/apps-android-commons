@@ -15,10 +15,16 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Single;
 import timber.log.Timber;
 
+/**
+* We try to avoid copyright violations in commons app.
+* For doing that we read EXIF data using the library metadata-reader
+* If an image doesn't have any EXIF Directoris in it's metadata then the image is an
+* internet download image(and not the one taken using phone's camera) */
+
 @Singleton
-public class ReadEXIF {
+public class EXIFReader {
     @Inject
-    public ReadEXIF() {
+    public EXIFReader() {
 
     }
 
