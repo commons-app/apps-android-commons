@@ -175,7 +175,7 @@
   <string name="number_of_uploads">माझ्या अलिकडच्या अपभरणाची मर्यादा</string>
   <string name="maximum_limit">जास्तीची मर्यादा</string>
   <string name="maximum_limit_alert">५०० पेक्षा जास्त दाखवण्यास असमर्थ</string>
-  <string name="set_limit">माझ्या अलिकडच्या अपभरणाची मर्यादा</string>
+  <string name="set_limit" fuzzy="true">माझ्या अलिकडच्या अपभरणाची मर्यादा</string>
   <string name="login_failed_2fa_not_supported">दोन पायऱ्यांची वैधता तपासणी सध्या उपलब्ध नाही.</string>
   <string name="logout_verification">काय आपणास खरेच बंद करायचे आहे?</string>
   <string name="commons_logo">कॉमन्सचे चिन्ह</string>

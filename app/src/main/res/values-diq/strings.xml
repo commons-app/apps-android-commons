@@ -146,6 +146,7 @@
   <string name="no">Nê</string>
   <string name="media_detail_title">Sername</string>
   <string name="media_detail_description">Şınasnayış</string>
+  <string name="media_detail_discussion">Werênayış</string>
   <string name="media_detail_author">Nuştekar</string>
   <string name="media_detail_uploaded_date">Tarixê barkerdışi</string>
   <string name="media_detail_license">Lisans</string>
@@ -201,6 +202,8 @@
   <string name="about_translate_cancel">Bıtexelne</string>
   <string name="retry">Anciya bıcerrebne</string>
   <string name="showcase_view_got_it_button">Mı fehm kerd!</string>
+  <string name="appwidget_img">Resmê roce</string>
+  <string name="app_widget_heading">Resmê roce</string>
   <string name="menu_search_button">Cıgeyrayış</string>
   <string name="title_activity_search">Cıgeyrayış</string>
   <string name="search_tab_title_media">MEDYA</string>
@@ -211,6 +214,7 @@
   <string name="continue_message">Dewam kerê</string>
   <string name="correct">Cewabo raşt</string>
   <string name="wrong">Cewabo ğelet</string>
+  <string name="delete">BESTERE</string>
   <string name="statistics">İSTATİSTİKİ</string>
   <string name="statistics_thanks">Teşekurê gêriyayi</string>
   <string name="level">SEWİYA</string>
@@ -238,7 +242,7 @@
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
   <string name="yes_submit">Eya, bırışe</string>
   <string name="no_go_back">Nê, Peyser Şo</string>
-  <string name="no_archived_notification">Xeberê şımayê arşivkerdeyi çıniyê</string>
+  <string name="no_archived_notification" fuzzy="true">Xeberê şımayê arşivkerdeyi çıniyê</string>
   <string name="menu_option_archived">Arşivkerdeyan bıvêne</string>
   <string name="menu_option_unread">Nêwendeyan bıvêne</string>
   <string name="please_wait">Kerem kerên, bıpawên...</string>

@@ -165,6 +165,7 @@
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
   <string name="detail_description_empty">Keine Beschreibung</string>
+  <string name="detail_discussion_empty">Keine Diskussion</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
   <string name="menu_refresh">Aktualisieren</string>
   <string name="storage_permission_title">Anforderung einer Speicherberechtigung</string>
@@ -180,6 +181,7 @@
   <string name="no">Nein</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_description">Beschreibung</string>
+  <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Hochgeladen am</string>
   <string name="media_detail_license">Lizenz</string>
@@ -195,7 +197,7 @@
   <string name="maximum_limit_alert">Mehr als 500 Einträge können nicht angezeigt werden</string>
   <string name="enter_valid">Eine gültige Zahl eingeben</string>
   <string name="cannot_be_zero">Das Hochladelimit kann nicht 0 sein</string>
-  <string name="set_limit">Grenze für kürzlich hochgeladene Dateien festlegen</string>
+  <string name="set_limit">Grenze für kürzlich hochgeladene Dateien</string>
   <string name="login_failed_2fa_not_supported">Die Zwei-Faktor-Authentifikation wird derzeit nicht unterstützt.</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
   <string name="commons_logo">Commons-Logo</string>
@@ -294,7 +296,7 @@
   <string name="about_translate_cancel">Abbrechen</string>
   <string name="retry">Erneut versuchen</string>
   <string name="showcase_view_got_it_button">Verstanden!</string>
-  <string name="showcase_view_whole_nearby_activity">Dies sind die Orte in deiner Nähe, die Bilder zur Illustration ihrer Wikipedia-Artikel benötigen.</string>
+  <string name="showcase_view_whole_nearby_activity">Dies sind die Orte in deiner Nähe, die Bilder zur Illustration ihrer Wikipedia-Artikel benötigen.\n\nEin Klick auf „DIESEN BEREICH DURCHSUCHEN“ sperrt die Karte und startet eine Suche um diesen Standort.</string>
   <string name="showcase_view_list_icon">Das Antippen dieser Schaltfläche zeigt eine Liste mit diesen Orten</string>
   <string name="showcase_view_plus_fab">Du kannst ein Bild für einen beliebigen Ort von deiner Galerie oder Kamera hochladen</string>
   <string name="no_images_found">Keine Bilder gefunden!</string>
@@ -313,6 +315,8 @@
   <string name="error_loading_subcategories">Beim Laden der Unterkategorien ist ein Fehler aufgetreten.</string>
   <string name="search_tab_title_media">MEDIEN</string>
   <string name="search_tab_title_categories">KATEGORIEN</string>
+  <string name="explore_tab_title_featured">VORGESTELLT</string>
+  <string name="explore_tab_title_mobile">ÜBER MOBIL HOCHGELADEN</string>
   <string name="successful_wikidata_edit">Bild erfolgreich nach %1$s auf Wikidata hinzugefügt!</string>
   <string name="wikidata_edit_failure">Fehler bei der Aktualisierung des dazugehörigen Wikidata-Objekts!</string>
   <string name="menu_set_wallpaper">Als Hintergrundbild festlegen</string>
@@ -343,8 +347,10 @@
   <string name="add_description">+ Beschreibung hinzufügen</string>
   <string name="no_recent_searches">Keine letzten Suchanfragen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
+  <string name="delete_search_dialog">Möchtest du diese Suche löschen?</string>
   <string name="search_history_deleted">Suchverlauf gelöscht</string>
   <string name="nominate_delete">Zur Löschung vorschlagen</string>
+  <string name="delete">LÖSCHEN</string>
   <string name="Achievements">Errungenschaften</string>
   <string name="statistics">STATISTIKEN</string>
   <string name="statistics_thanks">Erhaltene Dankeschöns</string>
