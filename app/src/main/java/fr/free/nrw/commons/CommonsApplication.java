@@ -19,6 +19,7 @@ import com.squareup.leakcanary.RefWatcher;
 
 import org.acra.ACRA;
 import org.acra.annotation.*;
+import static org.acra.ReportField.*;
 
 import java.io.File;
 
@@ -47,11 +48,13 @@ import timber.log.Timber;
 
 @AcraCore(
         buildConfigClass = BuildConfig.class,
-        resReportSendSuccessToast = R.string.crash_dialog_ok_toast
+        resReportSendSuccessToast = R.string.crash_dialog_ok_toast,
+        reportContent = {USER_COMMENT, APP_VERSION_CODE, APP_VERSION_NAME, ANDROID_VERSION, PHONE_MODEL, CUSTOM_DATA, STACK_TRACE}
 )
 
 @AcraMailSender(
-        mailTo = "commons-app-android-private@googlegroups.com"
+        mailTo = "commons-app-android-private@googlegroups.com",
+        reportAsFile = false
 )
 
 @AcraDialog(
