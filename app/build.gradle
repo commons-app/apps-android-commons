@@ -42,7 +42,8 @@ dependencies {
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
     // Logging
-    implementation 'ch.acra:acra:4.9.2'
+    implementation 'ch.acra:acra-dialog:5.3.0'
+    implementation 'ch.acra:acra-mail:5.3.0'
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'org.slf4j:slf4j-api:1.7.25'
     api('com.github.tony19:logback-android-classic:1.1.1-6') {
@@ -117,6 +118,7 @@ android {
 
     testOptions {
         unitTests.returnDefaultValues = true
+        unitTests.includeAndroidResources = true
 
         unitTests.all {
             jvmArgs '-noverify'

@@ -35,8 +35,8 @@
         android:appComponentFactory="commons"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="org.acra.CrashReportDialog"
-            android:theme="@android:style/Theme.Dialog"
+        <activity android:name="org.acra.dialog.CrashReportDialog"
+            android:process=":acra"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"
             android:finishOnTaskLaunch="true" />
