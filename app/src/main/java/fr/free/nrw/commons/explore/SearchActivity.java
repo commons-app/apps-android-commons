@@ -12,16 +12,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
-
-import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxSearchView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
@@ -31,6 +25,10 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Represents search screen of this app
@@ -52,6 +50,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     private MediaDetailPagerFragment mediaDetails;
     ViewPagerAdapter viewPagerAdapter;
     private String query;
+    private Disposable searchDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,28 +97,36 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
-        RxSearchView.queryTextChanges(searchView)
-                .takeUntil(RxView.detaches(searchView))
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( query -> {
-                    this.query = query.toString();
-                            //update image list
-                            if (!TextUtils.isEmpty(query)) {
-                                viewPager.setVisibility(View.VISIBLE);
-                                tabLayout.setVisibility(View.VISIBLE);
-                                searchHistoryContainer.setVisibility(View.GONE);
-                                searchImageFragment.updateImageList(query.toString());
-                                searchCategoryFragment.updateCategoryList(query.toString());
-                            }else {
-                                viewPager.setVisibility(View.GONE);
-                                tabLayout.setVisibility(View.GONE);
-                                searchHistoryContainer.setVisibility(View.VISIBLE);
-                                recentSearchesFragment.updateRecentSearches();
-                                // open search history fragment
-                            }
-                        }
-                );
+        searchDisposable = RxSearchView.queryTextChanges(searchView)
+            .takeUntil(RxView.detaches(searchView))
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(query -> {
+                this.query = query.toString();
+                //update image list
+                if (!TextUtils.isEmpty(query)) {
+                    viewPager.setVisibility(View.VISIBLE);
+                    tabLayout.setVisibility(View.VISIBLE);
+                    searchHistoryContainer.setVisibility(View.GONE);
+                    if (searchImageFragment != null
+                        && searchImageFragment.isAdded()
+                        && !searchImageFragment.isDetached()) {
+                        searchImageFragment.updateImageList(query.toString());
+                    }
+
+                    if (searchCategoryFragment != null
+                        && searchCategoryFragment.isAdded()
+                        && !searchCategoryFragment.isDetached()) {
+                        searchCategoryFragment.updateCategoryList(query.toString());
+                    }
+                } else {
+                    viewPager.setVisibility(View.GONE);
+                    tabLayout.setVisibility(View.GONE);
+                    searchHistoryContainer.setVisibility(View.VISIBLE);
+                    recentSearchesFragment.updateRecentSearches();
+                    // open search history fragment
+                }
+            });
     }
 
     /**
@@ -258,6 +265,14 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     public void requestMoreImages() {
         if (searchImageFragment!=null){
             searchImageFragment.addImagesToList(query);
+        }
+    }
+
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        //Dispose the disposables when the activity is destroyed
+        if (searchDisposable != null) {
+            searchDisposable.dispose();
         }
     }
 }
