@@ -50,7 +50,6 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     public ReviewPagerAdapter reviewPagerAdapter;
 
-    //private ReviewCallback reviewCallback;
     public ReviewController reviewController;
 
     @BindView(R.id.reviewPagerIndicator)
@@ -82,12 +81,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
         runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
 
-        skip_image_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                runRandomizer();
-            }
-        });
+        skip_image_button.setOnClickListener(view -> runRandomizer());
     }
 
 
@@ -157,7 +151,6 @@ public class ReviewActivity extends AuthenticatedActivity {
      */
     @Override
     public void onDestroy() {
-        //adapter.setCallback(null);
         super.onDestroy();
     }
 
