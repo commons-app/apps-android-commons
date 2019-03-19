@@ -143,7 +143,7 @@
   <string name="number_of_uploads">මගේ අලුත්ම උඩුගත කිරීම් පෙන්වීමේ සීමාව</string>
   <string name="maximum_limit">උපරිම සීමාව</string>
   <string name="maximum_limit_alert">500 කට වඩා පෙන්විය නොහැක</string>
-  <string name="set_limit">අලුත්ම උඩුගත කිරීම් පෙන්වීමට සීමාවක් දමන්න</string>
+  <string name="set_limit" fuzzy="true">අලුත්ම උඩුගත කිරීම් පෙන්වීමට සීමාවක් දමන්න</string>
   <string name="login_failed_2fa_not_supported">ද්විත්ව තහවුරු කිරීමේ ක්‍රියා මාර්ගය තවම ක්‍රියා කරන්නෙ නැත.</string>
   <string name="logout_verification">ඔබට ඇත්තටම නික්මීමට අවශ්‍යද?</string>
   <string name="commons_logo">කොමන්ස් ලාන්චනය</string>

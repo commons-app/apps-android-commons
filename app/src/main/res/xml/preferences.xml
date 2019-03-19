@@ -26,7 +26,7 @@
             android:key="uploads"
             android:defaultValue="100"
             android:title= "@string/set_limit"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:maxLength="3" />
 
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference

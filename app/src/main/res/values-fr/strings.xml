@@ -180,6 +180,7 @@
   <string name="detail_panel_cats_loading">Chargement…</string>
   <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
   <string name="detail_description_empty">Aucune description</string>
+  <string name="detail_discussion_empty">Aucune discussion</string>
   <string name="detail_license_empty">Licence inconnue</string>
   <string name="menu_refresh">Rafraîchir</string>
   <string name="storage_permission_title">Demande d\'autorisation d\'accès au stockage</string>
@@ -195,6 +196,7 @@
   <string name="no">Non</string>
   <string name="media_detail_title">Titre</string>
   <string name="media_detail_description">Description</string>
+  <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Auteur</string>
   <string name="media_detail_uploaded_date">Date de téléversement</string>
   <string name="media_detail_license">Licence</string>
@@ -210,7 +212,7 @@
   <string name="maximum_limit_alert">Impossible d’afficher plus de 500</string>
   <string name="enter_valid">Entrez un nombre valide</string>
   <string name="cannot_be_zero">La limite de téléversement ne peut pas être zéro</string>
-  <string name="set_limit">Fixer la limite de téléversement récent</string>
+  <string name="set_limit">Limite récente de téléversement</string>
   <string name="login_failed_2fa_not_supported">L’authentification à deux facteurs n’est pas prise en charge pour le moment.</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
   <string name="commons_logo">Logo de Commons</string>
@@ -309,7 +311,7 @@
   <string name="about_translate_cancel">Annuler</string>
   <string name="retry">Réessayer</string>
   <string name="showcase_view_got_it_button">C’est bon !</string>
-  <string name="showcase_view_whole_nearby_activity">Il y a des lieux autour de vous qui demandent des images pour illustrer leurs articles Wikipédia</string>
+  <string name="showcase_view_whole_nearby_activity">Ce sont les lieux autour de vous qui ont besoin d\'images pour illustrer leurs articles Wikipédia.\n\nEn cliquant sur \'CHERCHER DANS CETTE ZONE\' vous bloquez la carte et lancez une recherche de proximité autour de ce lieu.</string>
   <string name="showcase_view_list_icon">En cliquant sur ce bouton vous afficherez une liste de ces endroits</string>
   <string name="showcase_view_plus_fab">Vous pouvez téléverser une photo de n\'importe quel endroit de votre gallerie ou de votre appareil photo</string>
   <string name="no_images_found">Aucune images trouvée.</string>
@@ -328,6 +330,8 @@
   <string name="error_loading_subcategories">Erreur durant le chargement des sous-catégories.</string>
   <string name="search_tab_title_media">MEDIA</string>
   <string name="search_tab_title_categories">CATÉGORIES</string>
+  <string name="explore_tab_title_featured">MIS EN AVANT</string>
+  <string name="explore_tab_title_mobile">TÉLÉCHARGÉ VIA MOBILE</string>
   <string name="successful_wikidata_edit">Image bien ajoutée à %1$s sur Wikidata !</string>
   <string name="wikidata_edit_failure">Échec de la mise à jour de l\'entité Wikidata correspondante !</string>
   <string name="menu_set_wallpaper">Définir comme fond d\'écran</string>
@@ -358,8 +362,10 @@
   <string name="add_description">+ Ajouter une description</string>
   <string name="no_recent_searches">Aucune recherche récente</string>
   <string name="delete_recent_searches_dialog">Êtes-vous sûr de vouloir effacer votre historique de recherche ?</string>
+  <string name="delete_search_dialog">Désirez-vous supprimer cette recherche ?</string>
   <string name="search_history_deleted">Historique de recherche effacée</string>
   <string name="nominate_delete">Proposé à la suppression</string>
+  <string name="delete">SUPPRIMER</string>
   <string name="Achievements">Accomplissements</string>
   <string name="statistics">STATISTIQUES</string>
   <string name="statistics_thanks">Remerciements reçus</string>
