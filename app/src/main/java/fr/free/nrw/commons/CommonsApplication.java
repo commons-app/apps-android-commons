@@ -44,6 +44,8 @@ import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.internal.functions.Functions;
+import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -128,6 +130,9 @@ public class CommonsApplication extends Application {
 
         createNotificationChannel(this);
 
+        // This handler will catch exceptions thrown from Observables after they are disposed,
+        // or from Observables that are (deliberately or not) missing an onError handler.
+        RxJavaPlugins.setErrorHandler(Functions.emptyConsumer());
 
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
