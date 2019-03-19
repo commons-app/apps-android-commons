@@ -158,6 +158,7 @@
   <string name="detail_panel_cats_loading">Loading…</string>
   <string name="detail_panel_cats_none">None selected</string>
   <string name="detail_description_empty">No description</string>
+  <string name="detail_discussion_empty">No discussion</string>
   <string name="detail_license_empty">Unknown license</string>
   <string name="menu_refresh">Refresh</string>
   <string name="storage_permission_title">Requesting Storage Permission</string>
@@ -173,6 +174,7 @@
   <string name="no">No</string>
   <string name="media_detail_title">Title</string>
   <string name="media_detail_description">Description</string>
+  <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Author</string>
   <string name="media_detail_uploaded_date">Uploaded date</string>
   <string name="media_detail_license">License</string>
@@ -192,7 +194,7 @@
   <string name="maximum_limit_alert">Unable to display more than 500</string>
   <string name="enter_valid">Enter a valid number</string>
   <string name="cannot_be_zero">Upload limit cannot be 0</string>
-  <string name="set_limit">Set Recent Upload Limit</string>
+  <string name="set_limit">Recent upload limit</string>
   <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
   <string name="logout_verification">Do you really want to logout?</string>
   <string name="commons_logo">Commons Logo</string>
@@ -296,7 +298,7 @@
   <string name="retry">Retry</string>
 
   <string name="showcase_view_got_it_button">Got it!</string>
-  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles</string>
+  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles.\n\nClicking on \'SEARCH THIS AREA\' locks the map and launches a nearby search around that location.</string>
   <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
   <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
 

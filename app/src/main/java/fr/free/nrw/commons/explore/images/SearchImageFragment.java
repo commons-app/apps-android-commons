@@ -4,7 +4,6 @@ package fr.free.nrw.commons.explore.images;
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -142,12 +141,12 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         bottomProgressBar.setVisibility(GONE);
         queryList.clear();
         imagesAdapter.clear();
-        okHttpJsonApiClient.searchImages(query, queryList.size())
+        compositeDisposable.add(okHttpJsonApiClient.searchImages(query, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .doOnSubscribe(disposable -> saveQuery(query))
-                .subscribe(this::handleSuccess, this::handleError);
+                .subscribe(this::handleSuccess, this::handleError));
     }
 
 
@@ -159,11 +158,11 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        okHttpJsonApiClient.searchImages(query, queryList.size())
+        compositeDisposable.add(okHttpJsonApiClient.searchImages(query, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handlePaginationSuccess, this::handleError);
+                .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
     /**

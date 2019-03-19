@@ -9,6 +9,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -26,13 +28,12 @@ public class LocationServiceManager implements LocationListener {
     private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 100;
     private static final long MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 10;
 
-    public Context context;
     private LocationManager locationManager;
     private Location lastLocation;
     //private Location lastLocationDuplicate; // Will be used for nearby card view on contributions activity
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
-    public Set<Activity> locationExplanationDisplayed = new HashSet<>();
+    private Set<Activity> locationExplanationDisplayed = new HashSet<>();
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -40,24 +41,23 @@ public class LocationServiceManager implements LocationListener {
      * @param context the context
      */
     public LocationServiceManager(Context context) {
-        this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
     /**
-     * Returns the current status of the GPS provider.
+     * Returns the current status of the location provider.
      *
-     * @return true if the GPS provider is enabled
+     * @return true if the location provider is enabled
      */
     public boolean isProviderEnabled() {
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
     }
 
     /**
      * Returns whether the location permission is granted.
      * @return true if the location permission is granted
      */
-    public boolean isLocationPermissionGranted() {
+    public boolean isLocationPermissionGranted(@NonNull Context context) {
         return ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
@@ -101,8 +101,8 @@ public class LocationServiceManager implements LocationListener {
      * @return last known LatLng
      */
     @SuppressLint("MissingPermission")
-    public LatLng getLKL() {
-        if (isLocationPermissionGranted()) {
+    public LatLng getLKL(@NonNull Context context) {
+        if (isLocationPermissionGranted(context)) {
             Location lastKL = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (lastKL == null) {
                 lastKL = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -225,6 +225,7 @@ public class LocationServiceManager implements LocationListener {
      */
     public void unregisterLocationManager() {
         isLocationManagerRegistered = false;
+        locationExplanationDisplayed.clear();
         try {
             locationManager.removeUpdates(this);
         } catch (SecurityException e) {

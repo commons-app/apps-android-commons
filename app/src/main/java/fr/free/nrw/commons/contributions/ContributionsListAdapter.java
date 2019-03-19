@@ -2,10 +2,13 @@ package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
 import android.database.Cursor;
+
+import androidx.annotation.NonNull;
 import androidx.cursoradapter.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
@@ -20,15 +23,14 @@ class ContributionsListAdapter extends CursorAdapter {
 
     private final ContributionDao contributionDao;
     private UploadService uploadService;
-    private Context context;
 
     public ContributionsListAdapter(Context context,
                                     Cursor c,
                                     int flags,
-                                    ContributionDao contributionDao) {
+                                    ContributionDao contributionDao, EventListener listener) {
         super(context, c, flags);
-        this.context = context;
         this.contributionDao = contributionDao;
+        this.listener=listener;
     }
 
     public void setUploadService(UploadService uploadService) {
@@ -53,12 +55,17 @@ class ContributionsListAdapter extends CursorAdapter {
                 new DisplayableContribution.ContributionActions() {
                     @Override
                     public void retryUpload() {
-                        ContributionsListAdapter.this.retryUpload(contribution);
+                        ContributionsListAdapter.this.retryUpload(view.getContext(), contribution);
                     }
 
                     @Override
                     public void deleteUpload() {
-                        ContributionsListAdapter.this.deleteUpload(contribution);
+                        ContributionsListAdapter.this.deleteUpload(view.getContext(), contribution);
+                    }
+
+                    @Override
+                    public void onClick() {
+                        ContributionsListAdapter.this.openMediaDetail(contribution);
                     }
                 });
         views.bindModel(context, displayableContribution);
@@ -68,7 +75,7 @@ class ContributionsListAdapter extends CursorAdapter {
      * Retry upload when it is failed
      * @param contribution contribution to be retried
      */
-    private void retryUpload(Contribution contribution) {
+    private void retryUpload(@NonNull Context context, Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(context)) {
             if (contribution.getState() == STATE_FAILED
                     && uploadService!= null) {
@@ -87,7 +94,7 @@ class ContributionsListAdapter extends CursorAdapter {
      * Delete a failed upload attempt
      * @param contribution contribution to be deleted
      */
-    private void deleteUpload(Contribution contribution) {
+    private void deleteUpload(@NonNull Context context, Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(context)) {
             if (contribution.getState() == STATE_FAILED) {
                 Timber.d("Deleting failed contrib %s", contribution.toString());
@@ -99,5 +106,15 @@ class ContributionsListAdapter extends CursorAdapter {
             ViewUtil.showLongToast(context, R.string.this_function_needs_network_connection);
         }
 
+    }
+
+    private void openMediaDetail(Contribution contribution){
+        listener.onEvent(contribution.getFilename());
+
+    }
+    EventListener listener;
+
+    public interface EventListener {
+        void onEvent(String filename);
     }
 }

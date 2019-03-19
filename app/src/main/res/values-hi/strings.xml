@@ -198,7 +198,7 @@
   <string name="number_of_uploads">मेरी हाल ही की अपलोड सीमा</string>
   <string name="maximum_limit">अधिकतम सीमा</string>
   <string name="maximum_limit_alert">500 से अधिक प्रदर्शित करने में असमर्थ</string>
-  <string name="set_limit">हाल ही में अपलोड सीमा सेट करें</string>
+  <string name="set_limit" fuzzy="true">हाल ही में अपलोड सीमा सेट करें</string>
   <string name="login_failed_2fa_not_supported">दो कारक प्रमाणीकरण वर्तमान में समर्थित नहीं है</string>
   <string name="logout_verification">क्या आप वास्तव में निकास करना चाहते हैं?</string>
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
@@ -392,8 +392,8 @@
   <string name="no_image">कोई चित्र उपयोग नहीं हुआ</string>
   <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>
   <string name="no_image_uploaded">कोई चित्र अपलोड नहीं किया</string>
-  <string name="no_notification">आपके पास कोई अपठित सूचना नहीं है</string>
-  <string name="no_archived_notification">आपकी कोई सूचना पुरालेखित नहीं है</string>
+  <string name="no_notification" fuzzy="true">आपके पास कोई अपठित सूचना नहीं है</string>
+  <string name="no_archived_notification" fuzzy="true">आपकी कोई सूचना पुरालेखित नहीं है</string>
   <string name="menu_option_archived">पुरालेखित देखें</string>
   <string name="menu_option_unread">अपठित देखें</string>
 </resources>
