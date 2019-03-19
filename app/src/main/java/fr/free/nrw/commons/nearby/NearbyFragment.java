@@ -830,12 +830,12 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     public void centerMapToPlace(Place place) {
         if (nearbyMapFragment == null) {
             nearbyMapFragment.nearbyplace = place;
-        }else {
+        } else {
             nearbyMapFragment.centerMapToPlace(place);
         }
+    }
 
     public boolean isBottomSheetExpanded() { return bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
-
     }
 }
 
