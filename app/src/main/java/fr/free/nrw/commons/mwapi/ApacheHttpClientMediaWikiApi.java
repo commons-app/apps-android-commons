@@ -324,7 +324,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("titles", filename)
                 .param("props", "labels")
                 .param("format", "xml")
-                .param("languages", "en")
+                .param("languages", Locale.getDefault().getLanguage())
                 .param("languagefallback", "1")
                 .get()
                 .getString("/api/entities/entity/labels/label/@value");

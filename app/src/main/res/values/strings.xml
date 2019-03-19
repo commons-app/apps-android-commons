@@ -159,7 +159,7 @@
   <string name="detail_panel_cats_none">None selected</string>
   <string name="detail_description_empty">No description</string>
   <string name="detail_discussion_empty">No discussion</string>
-  <string name="detail_captions_empty">No captions</string>
+  <string name="detail_caption_empty">No caption</string>
   <string name="detail_license_empty">Unknown license</string>
   <string name="menu_refresh">Refresh</string>
   <string name="storage_permission_title">Requesting Storage Permission</string>
@@ -173,7 +173,7 @@
   <string name="upload_image_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
-  <string name="media_detail_captions">Captions</string>
+  <string name="media_detail_caption">Caption</string>
   <string name="media_detail_title">Title</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_discussion">Discussion</string>

@@ -512,7 +512,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private String prettyCaptions(Media media) {
         String captions = media.getCaptions().trim();
         if (captions.equals("")) {
-            return getString(R.string.detail_captions_empty);
+            return getString(R.string.detail_caption_empty);
         } else {
             return captions;
         }
