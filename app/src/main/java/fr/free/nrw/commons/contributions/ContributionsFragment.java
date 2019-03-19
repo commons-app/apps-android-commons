@@ -25,7 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -75,12 +74,12 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
         implements  LoaderManager.LoaderCallbacks<Cursor>,
-                    AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
                     ContributionsListFragment.SourceRefresher,
                     LocationUpdateListener,
-                    ICampaignsView {
+                    ICampaignsView,
+                    ContributionsListAdapter.EventListener{
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject ContributionDao contributionDao;
     @Inject MediaWikiApi mediaWikiApi;
@@ -302,7 +301,7 @@ public class ContributionsFragment
 
             if (contributionsListFragment.getAdapter() == null) {
                 contributionsListFragment.setAdapter(new ContributionsListAdapter(getActivity().getApplicationContext(),
-                        cursor, 0, contributionDao));
+                        cursor, 0, contributionDao, this));
             } else {
                 ((CursorAdapter) contributionsListFragment.getAdapter()).swapCursor(cursor);
             }
@@ -383,20 +382,12 @@ public class ContributionsFragment
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        // show detail at a position
-        showDetail(i);
-    }
-
-
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with
      * mediaDetailPagerFragment, and preserve previous state in back stack.
      * Called when user selects a contribution.
      */
-    private void showDetail(int i) {
+    public void showDetail(int i) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             mediaDetailPagerFragment = new MediaDetailPagerFragment();
             setMediaDetailPagerFragment();
@@ -705,6 +696,14 @@ public class ContributionsFragment
     @Override public void onDestroyView() {
         super.onDestroyView();
         presenter.onDetachView();
+    }
+
+    @Override
+    public void onEvent(String filename) {
+        for (int i=0;i<getTotalMediaCount();i++){
+            if (getMediaAtPosition(i).getFilename().equals(filename))
+                showDetail(i);
+        }
     }
 }
 
