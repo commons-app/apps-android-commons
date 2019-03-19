@@ -2,7 +2,6 @@ package fr.free.nrw.commons.quiz;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 import javax.inject.Inject;
@@ -20,8 +19,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-
 /**
  * fetches the number of images uploaded and number of images reverted.
  * Then it calculates the percentage of the images reverted
@@ -37,7 +34,6 @@ public class QuizChecker {
     private boolean isUploadCountFetched;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    public Context context;
 
     private final SessionManager sessionManager;
     private final OkHttpJsonApiClient okHttpJsonApiClient;
@@ -50,16 +46,13 @@ public class QuizChecker {
 
     /**
      * constructor to set the parameters for quiz
-     * @param context context
      * @param sessionManager
      * @param okHttpJsonApiClient instance of MediaWikiApi
      */
     @Inject
-    public QuizChecker(Context context,
-                       SessionManager sessionManager,
+    public QuizChecker(SessionManager sessionManager,
                        OkHttpJsonApiClient okHttpJsonApiClient,
                        @Named("default_preferences") JsonKvStore revertKvStore) {
-        this.context = context;
         this.sessionManager = sessionManager;
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.revertKvStore = revertKvStore;
@@ -68,6 +61,10 @@ public class QuizChecker {
     public void initQuizCheck(Activity activity) {
         setUploadCount(activity);
         setRevertCount(activity);
+    }
+
+    public void cleanup() {
+        compositeDisposable.clear();
     }
 
     /**
@@ -151,10 +148,10 @@ public class QuizChecker {
     @SuppressLint("StringFormatInvalid")
     private void callQuiz(Activity activity) {
         DialogUtil.showAlertDialog(activity,
-                context.getResources().getString(R.string.quiz),
-                context.getResources().getString(R.string.quiz_alert_message, REVERT_PERCENTAGE_FOR_MESSAGE),
-                context.getResources().getString(R.string.about_translate_proceed),
-                context.getResources().getString(android.R.string.cancel),
+                activity.getString(R.string.quiz),
+                activity.getString(R.string.quiz_alert_message, REVERT_PERCENTAGE_FOR_MESSAGE),
+                activity.getString(R.string.about_translate_proceed),
+                activity.getString(android.R.string.cancel),
                 () -> startQuizActivity(activity), null);
     }
 
@@ -163,7 +160,7 @@ public class QuizChecker {
         revertKvStore.putInt(REVERT_SHARED_PREFERENCE, newRevetSharedPrefs);
         int newUploadCount = totalUploadCount + revertKvStore.getInt(UPLOAD_SHARED_PREFERENCE, 0);
         revertKvStore.putInt(UPLOAD_SHARED_PREFERENCE, newUploadCount);
-        Intent i = new Intent(context, WelcomeActivity.class);
+        Intent i = new Intent(activity, WelcomeActivity.class);
         i.putExtra("isQuiz", true);
         activity.startActivity(i);
     }

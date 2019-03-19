@@ -506,6 +506,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     protected void onDestroy() {
+        quizChecker.cleanup();
         locationManager.unregisterLocationManager();
         // Remove ourself from hashmap to prevent memory leaks
         locationManager = null;
