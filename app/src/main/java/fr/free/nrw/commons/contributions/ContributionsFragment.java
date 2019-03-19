@@ -87,6 +87,7 @@ public class ContributionsFragment
     @Inject NearbyController nearbyController;
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject CampaignsPresenter presenter;
+    @Inject LocationServiceManager locationManager;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private UploadService uploadService;
@@ -105,8 +106,6 @@ public class ContributionsFragment
     private LatLng curLatLng;
 
     private boolean firstLocationUpdate = true;
-    public LocationServiceManager locationManager;
-
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
@@ -496,7 +495,6 @@ public class ContributionsFragment
     @Override
     public void onResume() {
         super.onResume();
-        locationManager = new LocationServiceManager(getActivity());
 
         firstLocationUpdate = true;
         locationManager.addLocationListener(this);
@@ -546,7 +544,7 @@ public class ContributionsFragment
 
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (locationManager.isLocationPermissionGranted()) {
+            if (locationManager.isLocationPermissionGranted(requireContext())) {
                 nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
                 locationManager.registerLocationManager();
             } else {
@@ -638,8 +636,6 @@ public class ContributionsFragment
         getChildFragmentManager().removeOnBackStackChangedListener(this);
         locationManager.unregisterLocationManager();
         locationManager.removeLocationListener(this);
-        // Try to prevent a possible NPE
-        locationManager.context = null;
         super.onDestroy();
 
         if (isUploadServiceConnected) {
