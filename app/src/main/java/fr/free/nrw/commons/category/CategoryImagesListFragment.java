@@ -258,6 +258,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
 
         queryContinueParam = result.getQueryContinueParam();
+        if (queryContinueParam == null || ! queryContinueParam.containsKey("continue")) {
+            hasMoreImages = false;
+        }
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);
