@@ -8,7 +8,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Process;
-import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -18,14 +17,17 @@ import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import org.acra.ACRA;
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
+import org.acra.annotation.AcraCore;
+import org.acra.annotation.AcraDialog;
+import org.acra.annotation.AcraMailSender;
+import org.acra.data.StringFormat;
 
 import java.io.File;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.NonNull;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
@@ -36,7 +38,6 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
@@ -46,14 +47,27 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-@ReportsCrashes(
-        mailTo = "commons-app-android-private@googlegroups.com",
-        mode = ReportingInteractionMode.DIALOG,
-        resDialogText = R.string.crash_dialog_text,
-        resDialogTitle = R.string.crash_dialog_title,
-        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
-        resDialogOkToast = R.string.crash_dialog_ok_toast
+import static org.acra.ReportField.*;
+
+@AcraCore(
+        buildConfigClass = BuildConfig.class,
+        resReportSendSuccessToast = R.string.crash_dialog_ok_toast,
+        reportFormat = StringFormat.KEY_VALUE_LIST,
+        reportContent = {USER_COMMENT, APP_VERSION_CODE, APP_VERSION_NAME, ANDROID_VERSION, PHONE_MODEL, STACK_TRACE}
 )
+
+@AcraMailSender(
+        mailTo = "commons-app-android-private@googlegroups.com",
+        reportAsFile = false
+)
+
+@AcraDialog(
+        resTheme = R.style.Theme_AppCompat_Dialog,
+        resText = R.string.crash_dialog_text,
+        resTitle = R.string.crash_dialog_title,
+        resCommentPrompt = R.string.crash_dialog_comment_prompt
+)
+
 public class CommonsApplication extends Application {
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;

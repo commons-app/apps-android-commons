@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,12 +21,10 @@ import fr.free.nrw.commons.R;
  */
 
 public class GridViewAdapter extends ArrayAdapter {
-    private Context context;
     private List<Media> data;
 
     public GridViewAdapter(Context context, int layoutResourceId, List<Media> data) {
         super(context, layoutResourceId, data);
-        this.context = context;
         this.data = data;
     }
 
@@ -81,8 +78,7 @@ public class GridViewAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            convertView = inflater.inflate(R.layout.layout_category_images, null);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_category_images, null);
         }
 
         Media item = data.get(position);
@@ -102,7 +98,7 @@ public class GridViewAdapter extends ArrayAdapter {
      */
     private void setAuthorView(Media item, TextView author) {
         if (!TextUtils.isEmpty(item.getCreator())) {
-            String uploadedByTemplate = context.getString(R.string.image_uploaded_by);
+            String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
 
             String uploadedBy = String.format(Locale.getDefault(), uploadedByTemplate, item.getCreator());
             author.setText(uploadedBy);

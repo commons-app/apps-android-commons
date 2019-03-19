@@ -5,12 +5,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.core.content.FileProvider;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -34,6 +31,7 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -61,8 +59,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private LevelController.LevelInfo levelInfo;
 
-    @BindView(R.id.achievement_badge)
+    @BindView(R.id.achievement_badge_image)
     ImageView imageView;
+    @BindView(R.id.achievement_badge_text)
+    TextView badgeText;
     @BindView(R.id.achievement_level)
     TextView levelNumber;
     @BindView(R.id.toolbar)
@@ -131,7 +131,6 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
-        imageView.setImageResource(R.drawable.badge);
         imageView.requestLayout();
 
         setSupportActionBar(toolbar);
@@ -350,11 +349,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
         String levelUpInfoString = getString(R.string.level);
         levelUpInfoString += " " + Integer.toString(levelInfo.getLevelNumber());
         levelNumber.setText(levelUpInfoString);
-        final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, levelInfo.getLevelStyle());
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.badge, wrapper.getTheme());
-        Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);
-        BitmapDrawable bitmapImage = BitmapUtils.writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevelNumber()),this);
-        imageView.setImageDrawable(bitmapImage);
+        imageView.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
+                new ContextThemeWrapper(this, levelInfo.getLevelStyle()).getTheme()));
+        badgeText.setText(Integer.toString(levelInfo.getLevelNumber()));
     }
 
     /**

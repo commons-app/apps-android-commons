@@ -572,7 +572,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      */
     private void registerLocationUpdates() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (locationManager.isLocationPermissionGranted()) {
+            if (locationManager.isLocationPermissionGranted(requireContext())) {
                 locationManager.registerLocationManager();
             } else {
                 // Should we show an explanation?
@@ -666,7 +666,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private void checkLocationPermission() {
         Timber.d("Checking location permission");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (locationManager.isLocationPermissionGranted()) {
+            if (locationManager.isLocationPermissionGranted(requireContext())) {
                 refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
                 // Should we show an explanation?
