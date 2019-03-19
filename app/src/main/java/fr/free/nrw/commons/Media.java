@@ -40,6 +40,7 @@ public class Media implements Parcelable {
     protected String filename;
     protected String description; // monolingual description on input...
     protected String discussion;
+    protected String captions;
     protected long dataLength;
     protected Date dateCreated;
     protected @Nullable Date dateUploaded;
@@ -178,6 +179,22 @@ public class Media implements Parcelable {
             imageUrl = Utils.makeThumbBaseUrl(this.getFilename());
         }
         return imageUrl;
+    }
+
+    /**
+     * Sets the Captions of the file.
+     * @param captions
+     */
+    public void setCaptions(String captions) {
+        this.captions = captions;
+    }
+
+    /**
+     * Gets the file Captions as a string.
+     * @return file Captions as a string
+     */
+    public String getCaptions() {
+        return captions;
     }
 
     /**

@@ -74,7 +74,7 @@ public interface MediaWikiApi {
 
     String parseWikicode(String source) throws IOException;
 
-    String getCaptionsByFilename(String filename) throws IOException;
+    String fetchCaptionsByFilename(String filename) throws IOException;
 
     @NonNull
     MediaResult fetchMediaByFilename(String filename) throws IOException;

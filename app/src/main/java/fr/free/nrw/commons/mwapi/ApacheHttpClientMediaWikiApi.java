@@ -318,7 +318,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    public String getCaptionsByFilename(String filename) throws IOException {
+    public String fetchCaptionsByFilename(String filename) throws IOException {
         return api.action("wbgetentities")
                 .param("sites", "commonswiki")
                 .param("titles", filename)
