@@ -40,7 +40,7 @@ public class MediaDataExtractor {
     private boolean deletionStatus;
     private ArrayList<String> categories;
     private Map<String, String> descriptions;
-    private String captions;
+    private String caption;
     private String discussion;
     private String license;
     private @Nullable LatLng coordinates;
@@ -52,7 +52,7 @@ public class MediaDataExtractor {
         this.fetched = false;
         this.mediaWikiApi = mwApi;
         this.discussion = new String();
-        this.captions = new String();
+        this.caption = new String();
     }
 
     /*
@@ -77,7 +77,7 @@ public class MediaDataExtractor {
         MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);
         MediaResult discussion = mediaWikiApi.fetchMediaByFilename(filename.replace("File", "File talk"));
         setDiscussion(discussion.getWikiSource());
-        captions = mediaWikiApi.fetchCaptionsByFilename(filename);
+        caption = mediaWikiApi.fetchCaptionByFilename(filename);
 
         // In-page category links are extracted from source, as XML doesn't cover [[links]]
         extractCategories(result.getWikiSource());
@@ -324,7 +324,7 @@ public class MediaDataExtractor {
         media.setDescriptions(descriptions);
         media.setCoordinates(coordinates);
         media.setDiscussion(discussion);
-        media.setCaptions(captions);
+        media.setCaption(caption);
         if (license != null) {
             media.setLicense(license);
         }

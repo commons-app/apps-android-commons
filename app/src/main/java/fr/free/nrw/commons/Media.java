@@ -40,7 +40,7 @@ public class Media implements Parcelable {
     protected String filename;
     protected String description; // monolingual description on input...
     protected String discussion;
-    protected String captions;
+    protected String caption;
     protected long dataLength;
     protected Date dateCreated;
     protected @Nullable Date dateUploaded;
@@ -183,18 +183,18 @@ public class Media implements Parcelable {
 
     /**
      * Sets the Captions of the file.
-     * @param captions
+     * @param caption
      */
-    public void setCaptions(String captions) {
-        this.captions = captions;
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 
     /**
      * Gets the file Captions as a string.
      * @return file Captions as a string
      */
-    public String getCaptions() {
-        return captions;
+    public String getCaption() {
+        return caption;
     }
 
     /**

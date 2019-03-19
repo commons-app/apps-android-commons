@@ -317,8 +317,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .getString("/api/flow-parsoid-utils/@content");
     }
 
+    /**
+     * fetches the Caption of the file with a given name.
+     * @param filename title of the file
+     */
     @Override
-    public String fetchCaptionsByFilename(String filename) throws IOException {
+    public String fetchCaptionByFilename(String filename) throws IOException {
         return api.action("wbgetentities")
                 .param("sites", "commonswiki")
                 .param("titles", filename)
