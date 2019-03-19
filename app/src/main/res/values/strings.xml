@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!--
 <<<<<<< HEAD
     <string name="title_activity_explore">Explore</string>
     <string name="navigation_item_explore">Explore</string>
@@ -68,7 +69,7 @@
     <string name="enable_gps">Enable GPS</string>
     <string name="contributions_subtitle_zero">No uploads yet</string>
     <plurals name="contributions_subtitle">
-        <!--zero is not used in english. Category mentioned here for easy reference in future-->
+        &lt;!&ndash;zero is not used in english. Category mentioned here for easy reference in future&ndash;&gt;
         <item quantity="zero">@string/contributions_subtitle_zero</item>
         <item quantity="one">(%1$d)</item>
         <item quantity="other">(%1$d)</item>
@@ -239,6 +240,7 @@
     <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
     <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 =======
+-->
   <string name="title_activity_explore">Explore</string>
   <string name="navigation_item_explore">Explore</string>
   <string name="preference_category_appearance">Appearance</string>
@@ -478,7 +480,6 @@
   <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
->>>>>>> f4807a5e4bd0f78bc01bdb792b34eb700c326cce
 
     <string name="upload_problem_exist">Potential problems with this image :</string>
     <string name="upload_problem_image_dark">Image is too dark.</string>
@@ -537,37 +538,15 @@
     <string name="about_translate_cancel">Cancel</string>
     <string name="retry">Retry</string>
 
-<<<<<<< HEAD
-    <string name="showcase_view_got_it_button">Got it!</string>
-    <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles</string>
-    <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
-    <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
-=======
   <string name="showcase_view_got_it_button">Got it!</string>
   <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles.\n\nClicking on \'SEARCH THIS AREA\' locks the map and launches a nearby search around that location.</string>
   <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
   <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
->>>>>>> f4807a5e4bd0f78bc01bdb792b34eb700c326cce
 
     <string name="no_images_found">No images found!</string>
     <string name="error_loading_images">Error occurred while loading images.</string>
     <string name="image_uploaded_by">Uploaded by: %1$s</string>
 
-<<<<<<< HEAD
-    <string name="block_notification">You are blocked from editing Commons</string>
-    <string name="appwidget_img">Pic of the Day</string>
-    <string name="app_widget_heading">Pic of the Day</string>
-    <string name="menu_search_button">Search</string>
-    <string name="search_commons">Search Commons</string>
-    <string name="images_not_found">No Images matching %1$s found</string>
-    <string name="title_activity_search">Search</string>
-    <string name="search_recent_header">Recent searches:</string>
-    <string name="provider_searches">Recently searched queries</string>
-    <string name="error_loading_categories">Error occurred while loading categories.</string>
-    <string name="error_loading_subcategories">Error occurred while loading subcategories.</string>
-    <string name="search_tab_title_media">MEDIA</string>
-    <string name="search_tab_title_categories">CATEGORIES</string>
-=======
   <string name="block_notification">You are blocked from editing Commons</string>
   <string name="appwidget_img">Pic of the Day</string>
   <string name="app_widget_heading">Pic of the Day</string>
@@ -583,7 +562,6 @@
   <string name="search_tab_title_categories">CATEGORIES</string>
   <string name="explore_tab_title_featured">FEATURED</string>
   <string name="explore_tab_title_mobile">UPLOADED VIA MOBILE</string>
->>>>>>> 40568eccf8b8dd4406d9cca11f9990cd41653120
 
     <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
     <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
@@ -614,19 +592,12 @@
     <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
     <string name="add_description">+ Add description</string>
 
-<<<<<<< HEAD
-    <string name="no_recent_searches">No recent searches</string>
-    <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
-    <string name="search_history_deleted">Search history deleted</string>
-    <string name="nominate_delete">Nominate For Deletion</string>
-=======
   <string name="no_recent_searches">No recent searches</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
   <string name="delete_search_dialog">Do you want to delete this search?</string>
   <string name="search_history_deleted">Search history deleted</string>
   <string name="nominate_delete">Nominate For Deletion</string>
   <string name="delete">DELETE</string>
->>>>>>> 40568eccf8b8dd4406d9cca11f9990cd41653120
 
     <string name="Achievements">Achievements</string>
     <string name="statistics">STATISTICS</string>
@@ -736,19 +707,11 @@ Upload your first media by tapping on the add button.</string>
     <string name="no_image_reverted">No images reverted</string>
     <string name="no_image_uploaded">No images uploaded</string>
 
-<<<<<<< HEAD
-    <string name="no_notification">You have no unread Notification</string>
-    <string name="no_archived_notification">You have no archived notification</string>
-    <string name="share_logs_using">Share logs using</string>
-    <string name="menu_option_archived">View archived</string>
-    <string name="menu_option_unread">View unread</string>
-=======
   <string name="no_notification">You have no unread notifications</string>
   <string name="no_archived_notification">You have no archived notifications</string>
   <string name="share_logs_using">Share logs using</string>
   <string name="menu_option_archived">View archived</string>
   <string name="menu_option_unread">View unread</string>
->>>>>>> 40568eccf8b8dd4406d9cca11f9990cd41653120
 
     <string name="error_occurred_in_picking_images">Error occurred while picking images</string>
     <string name="image_chooser_title">Choose Images to upload</string>
