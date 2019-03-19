@@ -62,7 +62,6 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -101,7 +100,6 @@ public class ContributionsFragment
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
 
-    private Disposable placesDisposable;
     private LatLng curLatLng;
 
     private boolean firstLocationUpdate = true;
@@ -603,7 +601,7 @@ public class ContributionsFragment
     private void updateClosestNearbyCardViewInfo() {
         curLatLng = locationManager.getLastLocation();
 
-        placesDisposable = Observable.fromCallable(() -> nearbyController
+        compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curLatLng, curLatLng, true, false)) // thanks to boolean, it will only return closest result
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -611,7 +609,7 @@ public class ContributionsFragment
                         throwable -> {
                             Timber.d(throwable);
                             updateNearbyNotification(null);
-                        });
+                        }));
     }
 
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
@@ -647,10 +645,6 @@ public class ContributionsFragment
                 getActivity().unbindService(uploadServiceConnection);
                 isUploadServiceConnected = false;
             }
-        }
-
-        if (placesDisposable != null) {
-            placesDisposable.dispose();
         }
     }
 
