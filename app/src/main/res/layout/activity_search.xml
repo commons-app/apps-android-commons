@@ -15,12 +15,8 @@
             android:layout_height="wrap_content">
 
             <!-- Toolbar for viewing media -->
-        <include
-            android:visibility="gone"
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <include layout="@layout/toolbar"
+                android:visibility="gone" />
 
         <!--Toolbar containing search bar -->
         <androidx.appcompat.widget.Toolbar
