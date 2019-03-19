@@ -34,17 +34,19 @@ public class ImageProcessingService {
     private final ImageUtilsWrapper imageUtilsWrapper;
     private final MediaWikiApi mwApi;
     private final ReadFBMD readFBMD;
+    private final EXIFReader EXIFReader;
 
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
                                   BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
                                   ImageUtilsWrapper imageUtilsWrapper,
-                                  MediaWikiApi mwApi, ReadFBMD readFBMD) {
+                                  MediaWikiApi mwApi, ReadFBMD readFBMD, EXIFReader EXIFReader) {
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.mwApi = mwApi;
         this.readFBMD = readFBMD;
+        this.EXIFReader = EXIFReader;
     }
 
     /**
@@ -69,17 +71,16 @@ public class ImageProcessingService {
         Single<Integer> darkImage = checkDarkImage(filePath);
         Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
         Single<Integer> checkFBMD = checkFBMD(context,contentUri);
-
+        Single<Integer> checkEXIF = checkEXIF(filePath);
         Single<Integer> zipResult = Single.zip(duplicateImage, wrongGeoLocation, darkImage, itemTitle,
                 (duplicate, wrongGeo, dark, title) -> {
                     Timber.d("Result for duplicate: %d, geo: %d, dark: %d, title: %d", duplicate, wrongGeo, dark, title);
                     return duplicate | wrongGeo | dark | title;
                 });
-
-        return Single.zip(zipResult, checkFBMD, (zip, fbmd) -> {
-            Timber.d("zip:" + zip + "fbmd:" + fbmd);
-            return zip | fbmd;
-        });
+        return Single.zip(zipResult, checkFBMD , checkEXIF , (zip , fbmd , exif)->{
+            Timber.d("zip:" + zip + "fbmd:" + fbmd + "exif:" + exif);
+            return zip | fbmd | exif;
+                });
     }
 
     /**
@@ -98,6 +99,17 @@ public class ImageProcessingService {
         } catch (IOException e) {
             return Single.just(ImageUtils.FILE_FBMD);
         }
+    }
+
+    /**
+    * To avoid copyright we check for EXIF data in any image.
+     * Images that are downloaded from internet generally don't have any EXIF data in them
+     * while images taken via camera or screenshots in phone have EXIF data with them.
+     * So we check if the image has no EXIF data then we display a warning to the user
+     * * */
+
+    public Single<Integer> checkEXIF(String filepath){
+        return EXIFReader.processMetadata(filepath);
     }
 
 
