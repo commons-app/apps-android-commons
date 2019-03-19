@@ -189,7 +189,7 @@
   <string name="maximum_limit_alert">Impossìbil ësmon-e pi che 500</string>
   <string name="enter_valid">Ch\'a buta un nùmer bon</string>
   <string name="cannot_be_zero">Ël lìmit ëd cariament a peul pa esse 0</string>
-  <string name="set_limit">Fissé la limitassion ëd cariament recent</string>
+  <string name="set_limit" fuzzy="true">Fissé la limitassion ëd cariament recent</string>
   <string name="login_failed_2fa_not_supported">L\'autentificassion a doi fator për ël moment a l\'é nen sostnùa.</string>
   <string name="logout_verification">Veul-lo për da bon seurte dal sistema?</string>
   <string name="commons_logo">Marca ëd Comun</string>
@@ -288,7 +288,7 @@
   <string name="about_translate_cancel">Anulé</string>
   <string name="retry">Prové torna</string>
   <string name="showcase_view_got_it_button">Fàit!</string>
-  <string name="showcase_view_whole_nearby_activity">A-i é dij pòst davzin a chiel ch\'a l\'han da manca ëd plance për ilustré ij sò artìcoj su Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">A-i é dij pòst davzin a chiel ch\'a l\'han da manca ëd plance për ilustré ij sò artìcoj su Wikipedia</string>
   <string name="showcase_view_list_icon">Sgnacand su \'s boton a comparirà na lista ëd si pòst</string>
   <string name="showcase_view_plus_fab">A peul carié na fòto da \'n pòst qualsëssìa ëd soa galarìa o màchina fòto</string>
   <string name="no_images_found">Gnun-e plance trovà!</string>
@@ -337,8 +337,10 @@
   <string name="add_description">Gionté na descrission</string>
   <string name="no_recent_searches">Gnun-e arserche recente</string>
   <string name="delete_recent_searches_dialog">É-lo sigur ëd vorèj dëscancelé lë stòrich ëd soe arserche?</string>
+  <string name="delete_search_dialog">Veul-lo dëscancelé costa arserca?</string>
   <string name="search_history_deleted">Lë stòrich ëd j\'arserche a l\'é stàit dëscancelà</string>
   <string name="nominate_delete">Propon-e për la scancelassion</string>
+  <string name="delete">DËSCANCELÉ</string>
   <string name="Achievements">Realisassion</string>
   <string name="statistics">STATÌSTICHE</string>
   <string name="statistics_thanks">Aringrassiament arseivù</string>
@@ -396,8 +398,8 @@
   <string name="deletion_reason_bad_for_my_privacy">I l\'hai pensa ch\'a l\'era nen bon për mia arservatëssa</string>
   <string name="deletion_reason_no_longer_want_public">I l\'hai cangià d\'idèja, i veui pi nen ch\'a sia visìbil ëd fasson pùblica</string>
   <string name="deletion_reason_not_interesting">Am dëspias, ma costa plancia a l\'é nen anteressanta për n\'enciclopedìa</string>
-  <string name="uploaded_by_myself" fuzzy="true">Carià da mi ai</string>
-  <string name="no_uploads" fuzzy="true">Bin-ëvnù su Commons!\n\nCh\'a caria sò prim archivi multimedial an sgnacand an sla plancia dla màchina fòto o an sla galarìa sì-dzora.</string>
+  <string name="uploaded_by_myself">Carià da mi-midem ai %1$s, dovrà an %2$d artìcoj.</string>
+  <string name="no_uploads">Bin-ëvnù su Commons!\n\nCh\'a caria sò prim archivi multimedial an sgnacand an sël boton për gionté.</string>
   <string name="desc_language_Worldwide">Mondial</string>
   <string name="desc_language_America">Mérica</string>
   <string name="desc_language_Europe">Euròpa</string>
@@ -432,8 +434,8 @@
   <string name="no_image">Gnun-e plance dovrà</string>
   <string name="no_image_reverted">Gnun-e plance anvertìe</string>
   <string name="no_image_uploaded">Gnun-e plance carià</string>
-  <string name="no_notification">A l\'ha gnun-e notìfiche nen lesùe</string>
-  <string name="no_archived_notification">A l\'ha gnun-e notìfiche archivià</string>
+  <string name="no_notification" fuzzy="true">A l\'ha gnun-e notìfiche nen lesùe</string>
+  <string name="no_archived_notification" fuzzy="true">A l\'ha gnun-e notìfiche archivià</string>
   <string name="share_logs_using">Partagé j\'argistr dovrand</string>
   <string name="menu_option_archived">Vëdde l\'archivi</string>
   <string name="menu_option_unread">Vëdde lòn ch\'a l\'é ancor nen ëstàit lesù</string>
