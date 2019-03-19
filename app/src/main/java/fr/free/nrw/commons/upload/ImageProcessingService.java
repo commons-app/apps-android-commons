@@ -33,16 +33,19 @@ public class ImageProcessingService {
     private final MediaWikiApi mwApi;
     private final ReadFBMD readFBMD;
     private final EXIFReader EXIFReader;
+    private final Context context;
 
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
                                   ImageUtilsWrapper imageUtilsWrapper,
-                                  MediaWikiApi mwApi, ReadFBMD readFBMD, EXIFReader EXIFReader) {
+                                  MediaWikiApi mwApi, ReadFBMD readFBMD, EXIFReader EXIFReader,
+                                  Context context) {
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.mwApi = mwApi;
         this.readFBMD = readFBMD;
         this.EXIFReader = EXIFReader;
+        this.context = context;
     }
 
     /**
@@ -61,13 +64,13 @@ public class ImageProcessingService {
         Timber.d("Checking the validity of image");
         String filePath = uploadItem.getMediaUri().getPath();
         Uri contentUri=uploadItem.getContentUri();
-        Context context=uploadItem.getContext();
         Single<Integer> duplicateImage = checkDuplicateImage(filePath);
         Single<Integer> wrongGeoLocation = checkImageGeoLocation(uploadItem.getPlace(), filePath);
         Single<Integer> darkImage = checkDarkImage(filePath);
         Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
         Single<Integer> checkFBMD = checkFBMD(context,contentUri);
         Single<Integer> checkEXIF = checkEXIF(filePath);
+
         Single<Integer> zipResult = Single.zip(duplicateImage, wrongGeoLocation, darkImage, itemTitle,
                 (duplicate, wrongGeo, dark, title) -> {
                     Timber.d("Result for duplicate: %d, geo: %d, dark: %d, title: %d", duplicate, wrongGeo, dark, title);

@@ -142,6 +142,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
         initDrawer();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
+    }
+
     /**
      * To invoke the AlertDialog on clicking info button
      */
@@ -238,12 +244,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
         if (StringUtils.isNullOrWhiteSpace(userName)) {
             return;
         }
-        okHttpJsonApiClient.getWikidataEdits(userName)
+        compositeDisposable.add(okHttpJsonApiClient.getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)), e -> {
                     Timber.e("Error:" + e);
-                });
+                }));
     }
 
     private void showSnackBarWithRetry() {

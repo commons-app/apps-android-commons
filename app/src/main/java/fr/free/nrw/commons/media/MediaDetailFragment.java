@@ -420,7 +420,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private void onDeleteClicked(Spinner spinner) {
         String reason = spinner.getSelectedItem().toString();
         Single<String> deletionReason = reasonBuilder.getReason(media, reason);
-        deletionReason
+        compositeDisposable.add(deletionReason
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
@@ -428,7 +428,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     deleteTask.execute();
                     isDeleted = true;
                     enableDeleteButton(false);
-                });
+                }));
     }
 
     @OnClick(R.id.seeMore)

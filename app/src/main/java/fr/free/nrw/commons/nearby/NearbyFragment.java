@@ -42,7 +42,6 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -85,8 +84,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private BottomSheetBehavior bottomSheetBehaviorForDetails; // Behavior for details bottom sheet
 
     private LatLng curLatLng;
-    private Disposable placesDisposable;
-    private Disposable placesDisposableCustom;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
     public View view;
     private Snackbar snackbar;
@@ -298,7 +295,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             bundle.clear();
             bundle.putString("CurLatLng", gsonCurLatLng);
 
-            placesDisposable = Observable.fromCallable(() -> nearbyController
+            compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                     .loadAttractionsFromLocation(curLatLng, curLatLng, false, true))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -307,7 +304,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                 Timber.d(throwable);
                                 showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                 progressBar.setVisibility(View.GONE);
-                            });
+                            }));
 
         } else if (locationChangeType
                 .equals(LOCATION_SLIGHTLY_CHANGED) && nearbyMapFragment != null) {
@@ -335,7 +332,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         populateForCurrentLocation = refreshForCurrentLocation;
         this.customLatLng = customLatLng;
-        placesDisposableCustom = Observable.fromCallable(() -> nearbyController
+        compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curLatLng, customLatLng, false, populateForCurrentLocation))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -343,7 +340,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                         throwable -> {
                             Timber.d(throwable);
                             showErrorMessage(getString(R.string.error_fetching_nearby_places));
-                        });
+                        }));
 
         if (nearbyMapFragment != null) {
             nearbyMapFragment.searchThisAreaButton.setVisibility(View.GONE);
@@ -467,7 +464,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     || curLatLng.getLongitude() < nearbyMapFragment.boundaryCoordinates[2].getLongitude()
                     || curLatLng.getLongitude() > nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
-                placesDisposable = Observable.fromCallable(() -> nearbyController
+                compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                         .loadAttractionsFromLocation(curLatLng, curLatLng, false, updateViaButton))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -476,7 +473,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                     Timber.d(throwable);
                                     showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                     progressBar.setVisibility(View.GONE);
-                                });
+                                }));
                 nearbyMapFragment.setBundleForUpdates(bundle);
                 nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
@@ -782,13 +779,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (placesDisposable != null) {
-            placesDisposable.dispose();
-        }
         wikidataEditListener.setAuthenticationStateListener(null);
-        if (placesDisposableCustom != null) {
-            placesDisposableCustom.dispose();
-        }
     }
 
     @Override

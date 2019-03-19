@@ -3,7 +3,6 @@ package fr.free.nrw.commons.explore.categories;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -136,12 +135,12 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         progressBar.setVisibility(GONE);
         queryList.clear();
         categoriesAdapter.clear();
-        Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
+        compositeDisposable.add(Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .doOnSubscribe(disposable -> saveQuery(query))
-                .subscribe(this::handleSuccess, this::handleError);
+                .subscribe(this::handleSuccess, this::handleError));
     }
 
 
@@ -152,11 +151,11 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
+        compositeDisposable.add(Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handlePaginationSuccess, this::handleError);
+                .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
     /**
