@@ -18,10 +18,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.Revision;
 
-/**
- * Created by root on 19.05.2018.
- */
-
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
     public static final int SPAM = 0;

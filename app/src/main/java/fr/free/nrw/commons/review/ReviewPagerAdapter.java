@@ -1,15 +1,11 @@
 package fr.free.nrw.commons.review;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import fr.free.nrw.commons.mwapi.Revision;
-
-/**
- * Created by nes on 19.05.2018.
- */
 
 public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
     ReviewImageFragment[] reviewImageFragments;

@@ -3,24 +3,19 @@ package fr.free.nrw.commons.review;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.app.NotificationCompat;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import androidx.core.app.NotificationCompat;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.Revision;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
-
-import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
-import static android.support.v4.app.NotificationCompat.PRIORITY_HIGH;
 
 // example code:
 //
@@ -130,14 +125,14 @@ public class SendThankTask extends AsyncTask<Void, Integer, Boolean> {
             message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
         }
 
-        notificationBuilder.setDefaults(DEFAULT_ALL)
+        notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentTitle(title)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setProgress(0,0,false)
                 .setOngoing(false)
-                .setPriority(PRIORITY_HIGH);
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
         notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
     }
 }

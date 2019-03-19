@@ -1,21 +1,15 @@
 package fr.free.nrw.commons.review;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
 
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.mwapi.Revision;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
-/**
- * Created by nes on 19.05.2018.
- */
 
 public class ReviewController {
     private String fileName;

@@ -1,13 +1,10 @@
 package fr.free.nrw.commons.review;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-/**
- * Created by root on 20.05.2018.
- */
+import androidx.viewpager.widget.ViewPager;
 
 public class ReviewViewPager extends ViewPager {
 
