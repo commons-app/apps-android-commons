@@ -118,7 +118,7 @@
         <activity
             android:name=".bookmarks.BookmarksActivity"
             android:label="@string/title_activity_bookmarks" />
-            <activity android:name=".nearby.WikiFeedback"
+            <activity android:name=".nearby.WikidataFeedback"
                 android:theme="@style/Theme.AppCompat.Light"></activity>
 
         <service android:name=".upload.UploadService" />

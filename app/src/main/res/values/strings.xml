@@ -478,4 +478,6 @@ Upload your first media by tapping on the add button.</string>
     <string name="image_chooser_title">Choose Images to upload</string>
 
     <string name="please_wait">Please wait…</string>
+    <string name="write_feedback_for_wikidata">Write something about the </string>
+    <string name="item_publicly_visible"> item. It will be publicly visible.</string>
 </resources>

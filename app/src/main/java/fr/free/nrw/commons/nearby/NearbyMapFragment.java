@@ -61,7 +61,6 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -870,32 +869,7 @@ public class NearbyMapFragment extends DaggerFragment {
         commonsButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getCommonsLink()));
 
         discussionButton.setOnClickListener(v -> {
-            Intent intent=new Intent(this.getActivity(), WikiFeedback.class);
-            intent.putExtra("place",this.place.name);
-            Timber.d("line866"+ this.place.name);
-            Observable.fromCallable(() -> nearbyController.getFeedback(this.place.name))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(result -> {
-                        if (result!=null){
-                            Timber.d("line871"+result);
-                            intent.putExtra("wikidataEntry",result);
-                            startActivity(intent);
-                        }
-                        else {Toast.makeText(this.getActivity(),"Failed",Toast.LENGTH_SHORT).show();
-                                                    }
-                    }, throwable -> {
-
-                        Timber.e(throwable, "Error occurred while loading notifications");
-                        throwable.printStackTrace();
-                    });
-            /*try {
-                intent.putExtra("wikidataEntry",this.place.name);
-                startActivity(intent);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
-
+            getFeedback(this.place.name);
         });
 
         icon.setImageResource(this.place.getLabel().getIcon());
@@ -919,6 +893,31 @@ public class NearbyMapFragment extends DaggerFragment {
                 controller.initiateGalleryPick(getActivity(), false);
             }
         });
+    }
+    /**
+    * This functions starts the activity Wikidata feedback activty of the selected place
+     * The API returns feedback given by other users*/
+
+    private void getFeedback(String name) {
+        Intent intent=new Intent(this.getActivity(), WikidataFeedback.class);
+        intent.putExtra("place",name);
+        Timber.d("line866"+ name);
+        Observable.fromCallable(() -> nearbyController.getFeedback(name))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    if (result!=null){
+                        Timber.d("line871"+result);
+                        intent.putExtra("wikidataEntry",result);
+                        startActivity(intent);
+                    }
+                    else {Toast.makeText(this.getActivity(),"Failed",Toast.LENGTH_SHORT).show();
+                    }
+                }, throwable -> {
+
+                    Timber.e(throwable, "Error occurred while loading notifications");
+                    throwable.printStackTrace();
+                });
     }
 
     public void updateBookmarkButtonImage(Place place) {
