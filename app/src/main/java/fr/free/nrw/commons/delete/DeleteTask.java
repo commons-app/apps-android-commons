@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.delete;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.Builder;
@@ -31,6 +34,8 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
     @Inject SessionManager sessionManager;
 
     private static final int NOTIFICATION_DELETE = 1;
+    private static final String baseUrl="https://commons.wikimedia.org/wiki/Commons:Deletion_requests/File:";
+
 
     private NotificationManager notificationManager;
     private Builder notificationBuilder;
@@ -181,6 +186,10 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 .setProgress(0,0,false)
                 .setOngoing(false)
                 .setPriority(PRIORITY_HIGH);
+        String urlForDelete=baseUrl+media.getFilename();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForDelete));
+        PendingIntent pendingIntent = PendingIntent.getActivity(context , 1 , browserIntent , PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationBuilder.setContentIntent(pendingIntent);
         notificationManager.notify(NOTIFICATION_DELETE, notificationBuilder.build());
     }
 }
