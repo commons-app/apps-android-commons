@@ -77,8 +77,8 @@ public class ImageProcessingService {
                     Timber.d("Result for duplicate: %d, geo: %d, dark: %d, title: %d", duplicate, wrongGeo, dark, title);
                     return duplicate | wrongGeo | dark | title;
                 });
-        return Single.zip(zipResult,checkFBMD,checkEXIF, (zip,fbmd,exif)->{
-            Timber.d("zip:"+zip+"fbmd:"+fbmd+"exif:"+exif);
+        return Single.zip(zipResult, checkFBMD , checkEXIF , (zip , fbmd , exif)->{
+            Timber.d("zip:" + zip + "fbmd:" + fbmd + "exif:" + exif);
             return zip | fbmd | exif;
                 });
     }

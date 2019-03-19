@@ -46,7 +46,7 @@ public class EXIFReader {
                 // In case of internet downloaded image these three fields are not present
                 if (directory.getName().equals("Exif IFD0") //Contains information about the device capturing the photo
                         || directory.getName().equals("Exif SubIFD") //contains information like date, time and pixels of the image
-                        || directory.getName().equals("Exif Thumbnail")) //contains information about Image THumbnail like compression and reolution
+                        || directory.getName().equals("Exif Thumbnail")) //contains information about image thumbnail like compression and reolution
                 {
                     Timber.d(directory.getName() + " Contains metadata");
                     return Single.just(ImageUtils.IMAGE_OK);
