@@ -100,8 +100,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     MediaWikiImageView image;
     @BindView(R.id.mediaDetailSpacer)
     MediaDetailSpacer spacer;
-    @BindView(R.id.mediaDetailCaptions)
-    TextView mediaCaptions;
+    @BindView(R.id.mediaDetailCaption)
+    TextView mediaCaption;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
     @BindView(R.id.mediaDetailDesc)
@@ -346,7 +346,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
         mediaDiscussion.setText(prettyDiscussion(media));
-        mediaCaptions.setText(prettyCaptions(media));
+        mediaCaption.setText(prettyCaption(media));
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
@@ -509,12 +509,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-    private String prettyCaptions(Media media) {
-        String captions = media.getCaption().trim();
-        if (captions.equals("")) {
+    private String prettyCaption(Media media) {
+        String caption = media.getCaption().trim();
+        if (caption.equals("")) {
             return getString(R.string.detail_caption_empty);
         } else {
-            return captions;
+            return caption;
         }
     }
 

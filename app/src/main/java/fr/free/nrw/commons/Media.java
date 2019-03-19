@@ -182,7 +182,7 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Sets the Captions of the file.
+     * Sets the Caption of the file.
      * @param caption
      */
     public void setCaption(String caption) {
@@ -190,8 +190,8 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Gets the file Captions as a string.
-     * @return file Captions as a string
+     * Gets the file Caption as a string.
+     * @return file Caption as a string
      */
     public String getCaption() {
         return caption;
