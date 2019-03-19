@@ -175,7 +175,7 @@
   <string name="maximum_limit_alert">ไม่สามารถแสดงมากกว่า 500 รายการได้</string>
   <string name="enter_valid">ป้อนหมายเลขที่ถูกต้อง</string>
   <string name="cannot_be_zero">ขีดจำกัดการอัปโหลดต้องไม่เป็น 0</string>
-  <string name="set_limit">กำหนดขีดจำกัดการอัปโหลดล่าสุด</string>
+  <string name="set_limit" fuzzy="true">กำหนดขีดจำกัดการอัปโหลดล่าสุด</string>
   <string name="login_failed_2fa_not_supported">ไม่รองรับการยืนยันตัวบุคคลแบบสองขั้นตอนในขณะนี้</string>
   <string name="logout_verification">คุณต้องการออกจากระบบจริง ๆ หรือไม่?</string>
   <string name="commons_logo">โลโก้คอมมอนส์</string>

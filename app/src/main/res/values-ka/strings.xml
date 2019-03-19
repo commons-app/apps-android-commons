@@ -179,7 +179,7 @@
   <string name="number_of_uploads">ჩემი ბოლო ატვირთვების ლიმიტი</string>
   <string name="maximum_limit">მაქსიმალური ლიმიტი</string>
   <string name="maximum_limit_alert">500-ზე მეტის ჩვენება შეუძლებელია</string>
-  <string name="set_limit">ბოლო ატვირთვების ლიმიტის დაყენება</string>
+  <string name="set_limit" fuzzy="true">ბოლო ატვირთვების ლიმიტის დაყენება</string>
   <string name="login_failed_2fa_not_supported">ორფაქტორიანი ავტორიზაცია ამჟამად მიუწვდომელია.</string>
   <string name="logout_verification">ნამდვილად გსურთ გასვლა?</string>
   <string name="commons_logo">ვიკისაწყობის ლოგო</string>

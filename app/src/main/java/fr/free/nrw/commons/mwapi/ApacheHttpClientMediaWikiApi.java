@@ -311,9 +311,19 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return wikidataApi.action("query")
                 .param("prop", "revisions")
                 .param("rvprop", "content")
-                .param("rvslots","main")
+                .param("rvslots", "main")
                 .param("titles", "Talk:Q11311478")
                 .get().getString("api");
+    }
+
+        public String parseWikicode(String source) throws IOException {
+        return api.action("flow-parsoid-utils")
+                .param("from", "wikitext")
+                .param("to", "html")
+                .param("content", source)
+                .param("title", "Main_page")
+                .get()
+                .getString("/api/flow-parsoid-utils/@content");
     }
 
     @Override
@@ -852,35 +862,65 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     @NonNull
-    public UploadResult uploadFile(String filename,
-                                   @NonNull InputStream file,
-                                   long dataLength,
-                                   String pageContents,
-                                   String editSummary,
-                                   Uri fileUri,
-                                   Uri contentProviderUri,
-                                   final ProgressListener progressListener) throws IOException {
+    public Single<UploadStash> uploadFile(
+            String filename,
+            @NonNull InputStream file,
+            long dataLength,
+            Uri fileUri,
+            Uri contentProviderUri,
+            ProgressListener progressListener) throws IOException {
+        return Single.fromCallable(() -> {
+            CustomApiResult result = api.uploadToStash(filename, file, dataLength, getEditToken(), progressListener::onProgress);
 
-        CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getEditToken(), progressListener::onProgress);
+            Timber.wtf("Result: " + result.toString());
 
-        Timber.d("Result: %s", result.toString());
-
-        String resultStatus = result.getString("/api/upload/@result");
-
-        if (!resultStatus.equals("Success")) {
-            String errorCode = result.getString("/api/error/@code");
-            Timber.e(errorCode);
-
-            if (errorCode.equals(ERROR_CODE_BAD_TOKEN)) {
-                ViewUtil.showLongToast(context, R.string.bad_token_error_proposed_solution);
+            String resultStatus = result.getString("/api/upload/@result");
+            if (!resultStatus.equals("Success")) {
+                String errorCode = result.getString("/api/error/@code");
+                Timber.e(errorCode);
+                
+                if (errorCode.equals(ERROR_CODE_BAD_TOKEN)) {
+                    ViewUtil.showLongToast(context, R.string.bad_token_error_proposed_solution);
+                }
+                return new UploadStash(errorCode, resultStatus, filename, "");
+            } else {
+                String filekey = result.getString("/api/upload/@filekey");
+                return new UploadStash("", resultStatus, filename, filekey);
             }
-            return new UploadResult(resultStatus, errorCode);
-        } else {
-            Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
-            String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
-            String imageUrl = result.getString("/api/upload/imageinfo/@url");
-            return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
-        }
+        });
+    }
+
+
+    @Override
+    @NonNull
+    public Single<UploadResult> uploadFileFinalize(
+            String filename,
+            String filekey,
+            String pageContents,
+            String editSummary) throws IOException {
+        return Single.fromCallable(() -> {
+            CustomApiResult result = api.uploadFromStash(
+                    filename, filekey, pageContents, editSummary,
+                    getEditToken());
+
+            Timber.d("Result: %s", result.toString());
+
+            String resultStatus = result.getString("/api/upload/@result");
+            if (!resultStatus.equals("Success")) {
+                String errorCode = result.getString("/api/error/@code");
+                Timber.e(errorCode);
+
+                if (errorCode.equals(ERROR_CODE_BAD_TOKEN)) {
+                    ViewUtil.showLongToast(context, R.string.bad_token_error_proposed_solution);
+                }
+                return new UploadResult(resultStatus, errorCode);
+            } else {
+                Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
+                String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
+                String imageUrl = result.getString("/api/upload/imageinfo/@url");
+                return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
+            }
+        });
     }
 
     /**

@@ -193,7 +193,7 @@
   <string name="maximum_limit_alert">Није могуће приказати више од 500</string>
   <string name="enter_valid">Унесите важећи број</string>
   <string name="cannot_be_zero">Граница отпремања не може бити 0</string>
-  <string name="set_limit">Постави ограничење за недавна отпремања</string>
+  <string name="set_limit" fuzzy="true">Постави ограничење за недавна отпремања</string>
   <string name="login_failed_2fa_not_supported">Двофакторска аутентификација тренутно није подржана.</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
   <string name="commons_logo">Лого Оставе</string>
@@ -291,7 +291,7 @@
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Покушај поново</string>
   <string name="showcase_view_got_it_button">Разумем</string>
-  <string name="showcase_view_whole_nearby_activity">Ово су места у Вашој близини којима је потребна слика да илуструје њихове википедијске чланке</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Ово су места у Вашој близини којима је потребна слика да илуструје њихове википедијске чланке</string>
   <string name="showcase_view_list_icon">Додир овог дугмета даће вам листу ових места</string>
   <string name="showcase_view_plus_fab">Можете да отпремите слику за било које место из своје галерије или камере</string>
   <string name="no_images_found">Слике нису пронађене.</string>
