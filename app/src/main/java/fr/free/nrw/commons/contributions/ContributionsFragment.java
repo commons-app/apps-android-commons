@@ -25,7 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -704,8 +703,11 @@ public class ContributionsFragment
     }
 
     @Override
-    public void onEvent(int i) {
-        showDetail(i);
+    public void onEvent(String filename) {
+        for (int i=0;i<getTotalMediaCount();i++){
+            if (getMediaAtPosition(i).getFilename().equals(filename))
+                showDetail(i);
+        }
     }
 }
 

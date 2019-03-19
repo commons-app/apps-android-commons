@@ -65,7 +65,7 @@ class ContributionsListAdapter extends CursorAdapter {
 
                     @Override
                     public void onClick() {
-                        ContributionsListAdapter.this.openMediaDetail(cursor.getPosition());
+                        ContributionsListAdapter.this.openMediaDetail(contribution);
                     }
                 });
         views.bindModel(context, displayableContribution);
@@ -108,14 +108,13 @@ class ContributionsListAdapter extends CursorAdapter {
 
     }
 
-    private void openMediaDetail(int position){
-        Toast.makeText(context,"Media clicked "+position,Toast.LENGTH_SHORT).show();
-        listener.onEvent(position);
+    private void openMediaDetail(Contribution contribution){
+        listener.onEvent(contribution.getFilename());
 
     }
     EventListener listener;
 
     public interface EventListener {
-        void onEvent(int data);
+        void onEvent(String filename);
     }
 }
