@@ -200,7 +200,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
         if(problem.equals("spam")){
             reasonList[0] = "A selfie";
             reasonList[1] = "Blurry";
-            reasonList[2] = "Nonsence";
+            reasonList[2] = "Nonsense";
             reasonList[3] = "Other";
         }
         else if(problem.equals("copyRightViolation")){
