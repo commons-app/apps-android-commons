@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -186,49 +187,108 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
     // TODO: refactor; see MediaDetailsFragment.onDeleteButtonClicked
     // ReviewActivity will use this
-    public static void askReasonAndExecute(Media media, Context context, String question, String defaultValue) {
+    public static void askReasonAndExecute(Media media, Context context, String question, String problem) {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
-        alert.setMessage(question);
-        final EditText input = new EditText(context);
-        input.setText(defaultValue);
-        alert.setView(input);
-        input.requestFocus();
-        alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
-            String reason = input.getText().toString();
+        alert.setTitle(question);
 
-            ((ReviewActivity)context).reviewController.swipeToNext();
-            ((ReviewActivity)context).runRandomizer();
+        boolean[] checkedItems = {false , false, false, false};
+        ArrayList<Integer> mUserReason = new ArrayList<>();
 
-            DeleteTask deleteTask = new DeleteTask(context, media, reason);
-            deleteTask.execute();
-        });
-        alert.setNegativeButton(R.string.cancel, (dialog, whichButton) -> {
-        });
-        AlertDialog d = alert.create();
-        input.addTextChangedListener(new TextWatcher() {
-            private void handleText() {
-                final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                if (input.getText().length() == 0) {
-                    okButton.setEnabled(false);
-                } else {
-                    okButton.setEnabled(true);
+        String[] reasonList= {"Reason 1","Reason 2","Reason 3","Reason 4"};
+
+
+        if(problem.equals("spam")){
+            reasonList[0] = "A selfie";
+            reasonList[1] = "Blurry";
+            reasonList[2] = "Nonsence";
+            reasonList[3] = "Other";
+        }
+        else if(problem.equals("copyRightViolation")){
+            reasonList[0] = "Press photo";
+            reasonList[1] = "Random photo from internet";
+            reasonList[2] = "Logo";
+            reasonList[3] = "Other";
+        }
+
+        alert.setMultiChoiceItems(reasonList, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
+                if(isChecked){
+                    mUserReason.add(position);
+                }else{
+                    mUserReason.remove((Integer.valueOf(position)));
                 }
             }
+        });
 
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void afterTextChanged(Editable arg0) {
-                handleText();
-            }
+            public void onClick(DialogInterface dialogInterface, int i) {
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+                String reason = "Because it is ";
+                for (int j = 0; j < mUserReason.size(); j++) {
+                    reason = reason + reasonList[mUserReason.get(j)];
+                    if (j != mUserReason.size() - 1) {
+                        reason = reason + ", ";
+                    }
+                }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ((ReviewActivity)context).reviewController.swipeToNext();
+                ((ReviewActivity)context).runRandomizer();
+
+                DeleteTask deleteTask = new DeleteTask(context, media, reason);
+                deleteTask.execute();
             }
         });
+        alert.setNegativeButton("Cancel" , null);
+
+
+        AlertDialog d = alert.create();
         d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(defaultValue.length() > 0);
+
+//        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+//        alert.setMessage(question);
+//        final EditText input = ne
+// w EditText(context);
+//        input.setText(defaultValue);
+//        alert.setView(input);
+//        input.requestFocus();
+//        alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
+//            String reason = input.getText().toString();
+//
+//            ((ReviewActivity)context).reviewController.swipeToNext();
+//            ((ReviewActivity)context).runRandomizer();
+//
+//            DeleteTask deleteTask = new DeleteTask(context, media, reason);
+//            deleteTask.execute();
+//        });
+//        alert.setNegativeButton(R.string.cancel, (dialog, whichButton) -> {
+//        });
+//        AlertDialog d = alert.create();
+//        input.addTextChangedListener(new TextWatcher() {
+//            private void handleText() {
+//                final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+//                if (input.getText().length() == 0) {
+//                    okButton.setEnabled(false);
+//                } else {
+//                    okButton.setEnabled(true);
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable arg0) {
+//                handleText();
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//        });
+//        d.show();
+//        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(defaultValue.length() > 0);
     }
 }

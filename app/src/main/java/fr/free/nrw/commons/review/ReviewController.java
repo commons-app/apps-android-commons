@@ -55,14 +55,14 @@ public class ReviewController {
         DeleteTask.askReasonAndExecute(new Media("File:"+fileName),
                 reviewActivity,
                 reviewActivity.getResources().getString(R.string.review_spam_report_question),
-                reviewActivity.getResources().getString(R.string.review_spam_report_default_answer));
+                reviewActivity.getResources().getString(R.string.review_spam_report_problem));
     }
 
     public void reportPossibleCopyRightViolation() {
         DeleteTask.askReasonAndExecute(new Media("File:"+fileName),
                 reviewActivity,
                 reviewActivity.getResources().getString(R.string.review_c_violation_report_question),
-                reviewActivity.getResources().getString(R.string.review_c_violation_report_default_answer));
+                reviewActivity.getResources().getString(R.string.review_c_violation_report_problem));
     }
 
     public void reportWrongCategory() {
