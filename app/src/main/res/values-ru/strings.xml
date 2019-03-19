@@ -208,7 +208,7 @@
   <string name="maximum_limit_alert">Невозможно отобразить более 500</string>
   <string name="enter_valid">Укажите корректное значение</string>
   <string name="cannot_be_zero">Лимит загрузок не может быть нулевым</string>
-  <string name="set_limit">Установить лимит недавних загрузок</string>
+  <string name="set_limit" fuzzy="true">Установить лимит недавних загрузок</string>
   <string name="login_failed_2fa_not_supported">Двухфакторная аутентификация в настоящее время не поддерживается.</string>
   <string name="logout_verification">Вы действительно хотите выйти?</string>
   <string name="commons_logo">Логотип Викисклада</string>
@@ -307,7 +307,7 @@
   <string name="about_translate_cancel">Отмена</string>
   <string name="retry">Повторить</string>
   <string name="showcase_view_got_it_button">Понятно!</string>
-  <string name="showcase_view_whole_nearby_activity">Это места поблизости, статьи о которых нуждаются в иллюстрациях</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Это места поблизости, статьи о которых нуждаются в иллюстрациях</string>
   <string name="showcase_view_list_icon">Нажатие этой кнопки сгенерирует список таких мест</string>
   <string name="showcase_view_plus_fab">Вы можете загрузить изображение для любого из этих мест, сделав снимок камерой или выбрав уже существующее изображение из галереи</string>
   <string name="no_images_found">Изображений не найдено!</string>

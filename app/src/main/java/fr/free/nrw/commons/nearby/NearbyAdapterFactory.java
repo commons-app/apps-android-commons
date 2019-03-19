@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.pedrogomez.renderers.ListAdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;

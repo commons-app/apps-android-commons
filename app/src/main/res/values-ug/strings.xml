@@ -115,7 +115,7 @@
   <string name="_2fa_code">2FAكودى</string>
   <string name="number_of_uploads">مېنىڭ يېقىندىن بۇيان يۇقىرىغا يوللاش چەكلەش</string>
   <string name="maximum_limit">ئەڭ چوڭ چەكلەش</string>
-  <string name="set_limit">يېقىندا چىقىرىش چەكلىمىسى تەڭشەش</string>
+  <string name="set_limit" fuzzy="true">يېقىندا چىقىرىش چەكلىمىسى تەڭشەش</string>
   <string name="login_failed_2fa_not_supported">نۆۋەتتىكى قوش ئامىل دەلىللەشنى قوللىمايدۇ</string>
   <string name="logout_verification">سىز راستتىنلا چېكىنىپ چىقامسىز ؟</string>
   <string name="commons_logo">بايلىقتىن ئورتاق بەھرىمەن بولۇش بەلگىسى</string>

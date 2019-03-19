@@ -8,7 +8,6 @@ import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -35,6 +34,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -116,6 +116,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     TextView coordinates;
     @BindView(R.id.mediaDetailuploadeddate)
     TextView uploadedDate;
+    @BindView(R.id.mediaDetailDisc)
+    TextView mediaDiscussion;
     @BindView(R.id.seeMore)
     TextView seeMore;
     @BindView(R.id.nominatedDeletionBanner)
@@ -345,6 +347,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         license.setText(prettyLicense(media));
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
+        mediaDiscussion.setText(prettyDiscussion(media));
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
@@ -468,7 +471,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private void onDeleteClicked(Spinner spinner) {
         String reason = spinner.getSelectedItem().toString();
         Single<String> deletionReason = reasonBuilder.getReason(media, reason);
-        deletionReason
+        compositeDisposable.add(deletionReason
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
@@ -476,7 +479,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     deleteTask.execute();
                     isDeleted = true;
                     enableDeleteButton(false);
-                });
+                }));
     }
 
     @OnClick(R.id.seeMore)
@@ -551,6 +554,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             return getString(R.string.detail_description_empty);
         } else {
             return desc;
+        }
+    }
+    private String prettyDiscussion(Media media) {
+        String disc = media.getDiscussion().trim();
+        if (disc.equals("")) {
+            return getString(R.string.detail_discussion_empty);
+        } else {
+            return disc;
         }
     }
 

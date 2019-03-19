@@ -5,13 +5,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Gravity;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -21,7 +15,8 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import butterknife.OnClick;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationCompat.Builder;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -31,8 +26,8 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.review.ReviewActivity;
 import timber.log.Timber;
 
-import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
-import static android.support.v4.app.NotificationCompat.PRIORITY_HIGH;
+import static androidx.core.app.NotificationCompat.DEFAULT_ALL;
+import static androidx.core.app.NotificationCompat.PRIORITY_HIGH;
 
 public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 

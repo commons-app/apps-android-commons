@@ -200,7 +200,7 @@
   <string name="maximum_limit_alert">Non è possibile mostrarne più di 500</string>
   <string name="enter_valid">Inserisci un numero valido</string>
   <string name="cannot_be_zero">Il limite di caricamento non può essere 0</string>
-  <string name="set_limit">Imposta limite caricamento recente</string>
+  <string name="set_limit" fuzzy="true">Imposta limite caricamento recente</string>
   <string name="login_failed_2fa_not_supported">L\'autenticazione a due fattori non è attualmente supportata.</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
   <string name="commons_logo">Logo di Commons</string>
@@ -250,6 +250,7 @@
   <string name="upload_problem_image_blurry">L\'immagine è sfocata.</string>
   <string name="upload_problem_image_duplicate">L\'immagine è già su Commons.</string>
   <string name="upload_problem_different_geolocation">Questa foto è stata scattata in una posizione diversa.</string>
+  <string name="upload_problem_fbmd">Carica solo le foto che hai scattato tu stesso. Non caricare immagini che hai trovato negli account Facebook di altre persone.</string>
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
   <string name="give_permission">Dai autorizzazione</string>
   <string name="use_external_storage">Usa memoria esterna</string>
@@ -298,7 +299,7 @@
   <string name="about_translate_cancel">Annulla</string>
   <string name="retry">Riprova</string>
   <string name="showcase_view_got_it_button">Capito!</string>
-  <string name="showcase_view_whole_nearby_activity">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia</string>
   <string name="showcase_view_list_icon">Toccando questo pulsante viene visualizzato un elenco di questi luoghi</string>
   <string name="showcase_view_plus_fab">Puoi caricare un\'immagine per ogni luogo dalla tua galleria o fotocamera</string>
   <string name="no_images_found">Nessuna immagine trovata!</string>
@@ -442,8 +443,8 @@
   <string name="no_image">Nessuna immagine utilizzata</string>
   <string name="no_image_reverted">Nessuna immagine ripristinata</string>
   <string name="no_image_uploaded">Nessuna immagine caricata</string>
-  <string name="no_notification">Non hai alcuna notifica non letta</string>
-  <string name="no_archived_notification">Non hai notifiche archiviate</string>
+  <string name="no_notification" fuzzy="true">Non hai alcuna notifica non letta</string>
+  <string name="no_archived_notification" fuzzy="true">Non hai notifiche archiviate</string>
   <string name="share_logs_using">Condividi i registri usando</string>
   <string name="menu_option_archived">Vedi archiviate</string>
   <string name="menu_option_unread">Vedi non lette</string>

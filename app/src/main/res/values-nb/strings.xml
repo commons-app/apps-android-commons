@@ -198,7 +198,7 @@
   <string name="maximum_limit_alert">Kan ikke vise mer enn 500</string>
   <string name="enter_valid">Angi et gyldig tall</string>
   <string name="cannot_be_zero">Opplastingsgrensen kan ikke være 0</string>
-  <string name="set_limit">Sett grense for seneste opplastinger</string>
+  <string name="set_limit" fuzzy="true">Sett grense for seneste opplastinger</string>
   <string name="login_failed_2fa_not_supported">Totrinns pålogging støttes ikke ennå.</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
   <string name="commons_logo">Commons-logo</string>
@@ -296,7 +296,7 @@
   <string name="about_translate_cancel">Avbryt</string>
   <string name="retry">Prøv igjen</string>
   <string name="showcase_view_got_it_button">Skjønner!</string>
-  <string name="showcase_view_whole_nearby_activity">Det er steder i nærheten av deg som trenger bilder for å illustrere Wikipedia-artiklene sine</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Det er steder i nærheten av deg som trenger bilder for å illustrere Wikipedia-artiklene sine</string>
   <string name="showcase_view_list_icon">Trykk på denne knappen for å få en liste over disse stedene</string>
   <string name="showcase_view_plus_fab">Du kan laste opp et bilde for alle steder fra galleriet eller kameraet ditt</string>
   <string name="no_images_found">Ingen bilder funnet!</string>

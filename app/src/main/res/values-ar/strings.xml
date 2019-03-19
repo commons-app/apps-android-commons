@@ -169,6 +169,7 @@
   <string name="detail_panel_cats_loading">جارٍ التحميل…</string>
   <string name="detail_panel_cats_none">لا شيء محدد</string>
   <string name="detail_description_empty">لا وصف</string>
+  <string name="detail_discussion_empty">لا يوجد نقاش</string>
   <string name="detail_license_empty">ترخيص غير معلوم</string>
   <string name="menu_refresh">تحديث</string>
   <string name="storage_permission_title">طلب إذن التخزين</string>
@@ -184,6 +185,7 @@
   <string name="no">لا</string>
   <string name="media_detail_title">العنوان</string>
   <string name="media_detail_description">الوصف</string>
+  <string name="media_detail_discussion">نقاش</string>
   <string name="media_detail_author">المؤلف</string>
   <string name="media_detail_uploaded_date">تاريخ الرفع</string>
   <string name="media_detail_license">الترخيص</string>
@@ -199,7 +201,7 @@
   <string name="maximum_limit_alert">لا يمكن عرض أكثر من 500</string>
   <string name="enter_valid">أدخل رقما صحيحا</string>
   <string name="cannot_be_zero">لا يمكن أن يكون حد الرفع 0</string>
-  <string name="set_limit">تحديد حد الرفع الحالي</string>
+  <string name="set_limit">حد الرفع الأخير</string>
   <string name="login_failed_2fa_not_supported">التحقق المزدودج 2FA غير مدعوم حاليا</string>
   <string name="logout_verification">أترغب فعلا في الخروج؟</string>
   <string name="commons_logo">شعار كومنز</string>
@@ -298,12 +300,12 @@
   <string name="about_translate_cancel">إلغاء</string>
   <string name="retry">إعادة المحاولة</string>
   <string name="showcase_view_got_it_button">فهمت!</string>
-  <string name="showcase_view_whole_nearby_activity">هذه هي الأماكن القريبة التي تحتاج إلى صور لتوضيح مقالات ويكيبيديا الخاصة بها</string>
+  <string name="showcase_view_whole_nearby_activity">هذه هي الأماكن القريبة منك التي تحتاج إلى صور لتوضيح مقالات ويكيبيديا الخاصة بها. \n\nيؤدي النقر فوق \"البحث في هذه المنطقة\" إلى إغلاق الخريطة وإطلاق بحث قريب حول هذا الموقع.</string>
   <string name="showcase_view_list_icon">يؤدي النقر على هذا الزر إلى جلب قائمة بهذه الأماكن</string>
   <string name="showcase_view_plus_fab">يمكنك رفع صورة لأي مكان من معرضك أو كاميرتك</string>
   <string name="no_images_found">لم يتم العثور على صور!</string>
   <string name="error_loading_images">حدث خطأ أثناء تحميل الصور.</string>
-  <string name="image_uploaded_by">تم الرفع بواسطة: %1$s</string>
+  <string name="image_uploaded_by">%1$s :تم الرفع بواسطة</string>
   <string name="block_notification">أنت ممنوع من تحرير كومنز</string>
   <string name="appwidget_img">صورة اليوم</string>
   <string name="app_widget_heading">صورة اليوم</string>
@@ -317,6 +319,8 @@
   <string name="error_loading_subcategories">حدث خطأ أثناء تحميل التصنيفات الفرعية.</string>
   <string name="search_tab_title_media">وسائط</string>
   <string name="search_tab_title_categories">تصنيفات</string>
+  <string name="explore_tab_title_featured">متميز</string>
+  <string name="explore_tab_title_mobile">تم الرفع عبر الجوال</string>
   <string name="successful_wikidata_edit">تمت إضافة الصورة بنجاح إلى %1$s في ويكي بيانات!</string>
   <string name="wikidata_edit_failure">فشل في تحديث كيان ويكي بيانات المقابل!</string>
   <string name="menu_set_wallpaper">تعيين كخلفية</string>
@@ -347,8 +351,10 @@
   <string name="add_description">+ إضافة الوصف</string>
   <string name="no_recent_searches">لا توجد عمليات بحث حديثة</string>
   <string name="delete_recent_searches_dialog">هل أنت متأكد من أنك تريد مسح سجل بحثك؟</string>
+  <string name="delete_search_dialog">هل تريد حذف هذا البحث؟</string>
   <string name="search_history_deleted">تم حذف سجل البحث</string>
   <string name="nominate_delete">ترشيح للحذف</string>
+  <string name="delete">حذف</string>
   <string name="Achievements">الإنجازات</string>
   <string name="statistics">إحصاءات</string>
   <string name="statistics_thanks">تم تلقي الشكر</string>
@@ -406,8 +412,8 @@
   <string name="deletion_reason_bad_for_my_privacy">أدركت أنه سيئ لخصوصيتي</string>
   <string name="deletion_reason_no_longer_want_public">لقد غيرت رأيي، ولا أريد أن يكون مرئيا للجميع بعد الآن</string>
   <string name="deletion_reason_not_interesting">آسف هذه الصورة ليست مثيرة للاهتمام لموسوعة</string>
-  <string name="uploaded_by_myself" fuzzy="true">رفعته بنفسي على</string>
-  <string name="no_uploads" fuzzy="true">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق لمس أيقونة الكاميرا أو المعرض أعلاه.</string>
+  <string name="uploaded_by_myself">رفعته بنفسي في %1$s، مستخدم في %2$d مقالة(ات).</string>
+  <string name="no_uploads">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق النقر على زر الإضافة.</string>
   <string name="desc_language_Worldwide">في جميع أنحاء العالم</string>
   <string name="desc_language_America">أمريكا</string>
   <string name="desc_language_Europe">أوروبا</string>
@@ -442,8 +448,8 @@
   <string name="no_image">لا صور مستخدمة</string>
   <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
   <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
-  <string name="no_notification">ليس لديك إشعار غير مقروء</string>
-  <string name="no_archived_notification">ليس لديك إشعار مؤرشف</string>
+  <string name="no_notification">ليست لديك إشعارات غير مقروءة</string>
+  <string name="no_archived_notification">ليست لديك إشعارات مؤرشفة</string>
   <string name="share_logs_using">مشاركة السجلات باستخدام</string>
   <string name="menu_option_archived">عرض المؤرشفة</string>
   <string name="menu_option_unread">عرض غير المقروءة</string>
