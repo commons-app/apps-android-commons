@@ -31,8 +31,8 @@
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="commons"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name="org.acra.CrashReportDialog"
+        <activity android:name="org.acra.dialog.CrashReportDialog"
+            android:process=":acra"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"
             android:finishOnTaskLaunch="true"
@@ -94,7 +94,8 @@
         <activity
             android:name=".category.CategoryImagesActivity"
             android:label="@string/title_activity_featured_images"
-            android:parentActivityName=".contributions.MainActivity" />
+            android:parentActivityName=".contributions.MainActivity"
+            android:configChanges="orientation|screenSize|keyboard"/>
         <activity
             android:name=".category.CategoryDetailsActivity"
             android:label="@string/title_activity_featured_images"
@@ -102,7 +103,8 @@
         <activity
             android:name=".explore.categories.ExploreActivity"
             android:label="@string/title_activity_explore"
-            android:parentActivityName=".contributions.MainActivity" />
+            android:parentActivityName=".contributions.MainActivity"
+            android:configChanges="orientation|screenSize|keyboard" />
 
         <activity
             android:name=".explore.SearchActivity"

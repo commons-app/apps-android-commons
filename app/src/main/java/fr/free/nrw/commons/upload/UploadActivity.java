@@ -667,8 +667,18 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         finish();
     }
 
+    /**
+     * Rotates the button and shows or hides the content based on the given state. Typically used
+     * for collapsing or expanding {@link CardView} animation.
+     *
+     * @param state the expanded state of the View whose elements are to be updated. True if
+     *              expanded.
+     * @param button the image to rotate. Typically an arrow points up when the CardView is
+     *               collapsed and down when it is expanded.
+     * @param content the Views that should be shown or hidden based on the state.
+     */
     private void updateCardState(boolean state, ImageView button, View... content) {
-        button.animate().rotation(button.getRotation() + (state ? 180 : -180)).start();
+        button.animate().rotation(state ? 180 : 0).start();
         if (content != null) {
             for (View view : content) {
                 view.setVisibility(state ? View.VISIBLE : View.GONE);
