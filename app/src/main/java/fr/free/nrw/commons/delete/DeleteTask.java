@@ -186,8 +186,8 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 .setProgress(0,0,false)
                 .setOngoing(false)
                 .setPriority(PRIORITY_HIGH);
-        String urlForDelete=baseUrl+media.getFilename();
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForDelete));
+        String urlForDelete = baseUrl + media.getFilename();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW , Uri.parse(urlForDelete));
         PendingIntent pendingIntent = PendingIntent.getActivity(context , 1 , browserIntent , PendingIntent.FLAG_UPDATE_CURRENT);
         notificationBuilder.setContentIntent(pendingIntent);
         notificationManager.notify(NOTIFICATION_DELETE, notificationBuilder.build());
