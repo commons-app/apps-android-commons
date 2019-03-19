@@ -2,6 +2,8 @@ package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
 import android.database.Cursor;
+
+import androidx.annotation.NonNull;
 import androidx.cursoradapter.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +22,12 @@ class ContributionsListAdapter extends CursorAdapter {
 
     private final ContributionDao contributionDao;
     private UploadService uploadService;
-    private Context context;
 
     public ContributionsListAdapter(Context context,
                                     Cursor c,
                                     int flags,
                                     ContributionDao contributionDao) {
         super(context, c, flags);
-        this.context = context;
         this.contributionDao = contributionDao;
     }
 
@@ -53,12 +53,12 @@ class ContributionsListAdapter extends CursorAdapter {
                 new DisplayableContribution.ContributionActions() {
                     @Override
                     public void retryUpload() {
-                        ContributionsListAdapter.this.retryUpload(contribution);
+                        ContributionsListAdapter.this.retryUpload(view.getContext(), contribution);
                     }
 
                     @Override
                     public void deleteUpload() {
-                        ContributionsListAdapter.this.deleteUpload(contribution);
+                        ContributionsListAdapter.this.deleteUpload(view.getContext(), contribution);
                     }
                 });
         views.bindModel(context, displayableContribution);
@@ -68,7 +68,7 @@ class ContributionsListAdapter extends CursorAdapter {
      * Retry upload when it is failed
      * @param contribution contribution to be retried
      */
-    private void retryUpload(Contribution contribution) {
+    private void retryUpload(@NonNull Context context, Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(context)) {
             if (contribution.getState() == STATE_FAILED
                     && uploadService!= null) {
@@ -87,7 +87,7 @@ class ContributionsListAdapter extends CursorAdapter {
      * Delete a failed upload attempt
      * @param contribution contribution to be deleted
      */
-    private void deleteUpload(Contribution contribution) {
+    private void deleteUpload(@NonNull Context context, Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(context)) {
             if (contribution.getState() == STATE_FAILED) {
                 Timber.d("Deleting failed contrib %s", contribution.toString());
