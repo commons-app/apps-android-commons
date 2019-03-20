@@ -6,13 +6,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +27,12 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
@@ -42,7 +42,6 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -74,9 +73,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     NearbyController nearbyController;
     @Inject
     WikidataEditListener wikidataEditListener;
-    @Inject
-    @Named("application_preferences")
-    BasicKvStore applicationKvStore;
     @Inject Gson gson;
 
     public NearbyMapFragment nearbyMapFragment;
@@ -88,8 +84,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private BottomSheetBehavior bottomSheetBehaviorForDetails; // Behavior for details bottom sheet
 
     private LatLng curLatLng;
-    private Disposable placesDisposable;
-    private Disposable placesDisposableCustom;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
     public View view;
     private Snackbar snackbar;
@@ -135,14 +129,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     /**
      * Hide or expand bottom sheet according to states of all sheets
      */
-    public void listOptionMenuIteClicked() {
+    public void listOptionMenuItemClicked() {
         if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
             bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
-
     }
 
     /**
@@ -152,6 +145,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         // Find the retained fragment on activity restarts
         nearbyMapFragment = getMapFragment();
         nearbyListFragment = getListFragment();
+        addNetworkBroadcastReceiver();
     }
 
     /**
@@ -163,7 +157,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private void removeMapFragment() {
         if (nearbyMapFragment != null) {
-            android.support.v4.app.FragmentManager fm = getFragmentManager();
+            FragmentManager fm = getFragmentManager();
             fm.beginTransaction().remove(nearbyMapFragment).commit();
             nearbyMapFragment = null;
         }
@@ -179,7 +173,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     private void removeListFragment() {
         if (nearbyListFragment != null) {
-            android.support.v4.app.FragmentManager fm = getFragmentManager();
+            FragmentManager fm = getFragmentManager();
             fm.beginTransaction().remove(nearbyListFragment).commit();
             nearbyListFragment = null;
         }
@@ -301,7 +295,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             bundle.clear();
             bundle.putString("CurLatLng", gsonCurLatLng);
 
-            placesDisposable = Observable.fromCallable(() -> nearbyController
+            compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                     .loadAttractionsFromLocation(curLatLng, curLatLng, false, true))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -310,10 +304,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                 Timber.d(throwable);
                                 showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                 progressBar.setVisibility(View.GONE);
-                            });
+                            }));
 
         } else if (locationChangeType
-                .equals(LOCATION_SLIGHTLY_CHANGED)) {
+                .equals(LOCATION_SLIGHTLY_CHANGED) && nearbyMapFragment != null) {
             String gsonCurLatLng = gson.toJson(curLatLng);
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(false,true, null, null);
@@ -338,7 +332,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         populateForCurrentLocation = refreshForCurrentLocation;
         this.customLatLng = customLatLng;
-        placesDisposableCustom = Observable.fromCallable(() -> nearbyController
+        compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curLatLng, customLatLng, false, populateForCurrentLocation))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -346,7 +340,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                         throwable -> {
                             Timber.d(throwable);
                             showErrorMessage(getString(R.string.error_fetching_nearby_places));
-                        });
+                        }));
 
         if (nearbyMapFragment != null) {
             nearbyMapFragment.searchThisAreaButton.setVisibility(View.GONE);
@@ -470,7 +464,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     || curLatLng.getLongitude() < nearbyMapFragment.boundaryCoordinates[2].getLongitude()
                     || curLatLng.getLongitude() > nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
                 // populate places
-                placesDisposable = Observable.fromCallable(() -> nearbyController
+                compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                         .loadAttractionsFromLocation(curLatLng, curLatLng, false, updateViaButton))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -479,7 +473,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                                     Timber.d(throwable);
                                     showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                     progressBar.setVisibility(View.GONE);
-                                });
+                                }));
                 nearbyMapFragment.setBundleForUpdates(bundle);
                 nearbyMapFragment.updateMapSignificantlyForCurrentLocation();
                 updateListFragment();
@@ -575,7 +569,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      */
     private void registerLocationUpdates() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (locationManager.isLocationPermissionGranted()) {
+            if (locationManager.isLocationPermissionGranted(requireContext())) {
                 locationManager.registerLocationManager();
             } else {
                 // Should we show an explanation?
@@ -669,7 +663,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private void checkLocationPermission() {
         Timber.d("Checking location permission");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (locationManager.isLocationPermissionGranted()) {
+            if (locationManager.isLocationPermissionGranted(requireContext())) {
                 refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
                 // Should we show an explanation?
@@ -711,21 +705,32 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         if (!FragmentUtils.isFragmentUIActive(this)) {
             return;
         }
+
+        if (broadcastReceiver != null) {
+            return;
+        }
         
         IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
-        snackbar = Snackbar.make(transparentView, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
 
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (snackbar != null && getActivity() != null) {
+                if (getActivity() != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
                         if (isNetworkErrorOccured) {
                             refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
                             isNetworkErrorOccured = false;
                         }
-                        snackbar.dismiss();
+
+                        if (snackbar != null) {
+                            snackbar.dismiss();
+                            snackbar = null;
+                        }
                     } else {
+                        if (snackbar == null) {
+                            snackbar = Snackbar.make(view, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
+                        }
+
                         isNetworkErrorOccured = true;
                         snackbar.show();
                     }
@@ -733,12 +738,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             }
         };
 
-        if (getActivity() == null) {
-            return;
-        }
-
         getActivity().registerReceiver(broadcastReceiver, intentFilter);
-
     }
 
     @Override
@@ -779,13 +779,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (placesDisposable != null) {
-            placesDisposable.dispose();
-        }
         wikidataEditListener.setAuthenticationStateListener(null);
-        if (placesDisposableCustom != null) {
-            placesDisposableCustom.dispose();
-        }
     }
 
     @Override
@@ -817,6 +811,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
             locationManager.removeLocationListener(this);
             locationManager.unregisterLocationManager();
         }
+    }
+
+    public boolean isBottomSheetExpanded() { return bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
     }
 }
 

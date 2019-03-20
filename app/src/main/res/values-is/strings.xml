@@ -189,7 +189,7 @@
   <string name="maximum_limit_alert">Get ekki birt fleiri en 500</string>
   <string name="enter_valid">Settu inn gilda tölu</string>
   <string name="cannot_be_zero">Mork innsendinga geta ekki verið 0</string>
-  <string name="set_limit">Setja nýleg sendingartakmörk mín</string>
+  <string name="set_limit" fuzzy="true">Setja nýleg sendingartakmörk mín</string>
   <string name="login_failed_2fa_not_supported">Tveggja-þrepa auðkenning er ekki studd í augnablikinu.</string>
   <string name="logout_verification">Viltu í alvörunni skrá þig út?</string>
   <string name="commons_logo">Táknmerki Commons</string>
@@ -287,7 +287,7 @@
   <string name="about_translate_cancel">Hætta við</string>
   <string name="retry">Reyna aftur</string>
   <string name="showcase_view_got_it_button">Náði því!</string>
-  <string name="showcase_view_whole_nearby_activity">Þetta eru þeir staðir í næsta nágrenni við þig sem vantar myndir til að skýra með Wikipedia-greinar</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Þetta eru þeir staðir í næsta nágrenni við þig sem vantar myndir til að skýra með Wikipedia-greinar</string>
   <string name="showcase_view_list_icon">Ef ýtt er á þennan hnapp birtist listi yfir þessa staði</string>
   <string name="showcase_view_plus_fab">Þú getur sent inn mynd úr myndasafninu þínu eða myndavélinni</string>
   <string name="no_images_found">Engir myndir fundust!</string>
@@ -422,7 +422,7 @@
   <string name="no_image">Enagar myndir notaðar</string>
   <string name="no_image_reverted">Engar myndir endurstilltar</string>
   <string name="no_image_uploaded">Engar myndir sendar inn</string>
-  <string name="no_notification">Þú ert ekki með neinar ólesnar tilkynningar</string>
+  <string name="no_notification" fuzzy="true">Þú ert ekki með neinar ólesnar tilkynningar</string>
   <string name="menu_option_archived">Skoða í geymslu</string>
   <string name="menu_option_unread">Skoða ólesið</string>
   <string name="error_occurred_in_picking_images">Villa kom upp við að velja myndir</string>

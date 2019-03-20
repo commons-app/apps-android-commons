@@ -192,7 +192,7 @@
   <string name="maximum_limit">حداکثر محدودیت</string>
   <string name="invalid_input">ورودی نامعتبر</string>
   <string name="maximum_limit_alert">عدم توانایی در نمایش بیش از ۵۰۰ مورد</string>
-  <string name="set_limit">تنظیم محدودیت بارگذاری‌های اخیر</string>
+  <string name="set_limit" fuzzy="true">تنظیم محدودیت بارگذاری‌های اخیر</string>
   <string name="login_failed_2fa_not_supported">تأیید دومرحله‌ای الان پشتیبانی نمی‌شود.</string>
   <string name="logout_verification">آیا واقعاً قصد خروج از سامانه را دارید؟</string>
   <string name="commons_logo">نشان ویکی‌انبار</string>
