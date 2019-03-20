@@ -8,11 +8,9 @@
   <string name="preference_category_appearance">Ymddangosiad</string>
   <string name="preference_category_general">Cyffredinol</string>
   <string name="preference_category_feedback">Adborth</string>
-  <string name="preference_category_location">Lleoliad</string>
-  <string name="app_name">Comin Wicimedia</string>
+    <string name="app_name">Comin Wicimedia</string>
   <string name="bullet">•</string>
-  <string name="menu_settings">Gosodiadau</string>
-  <string name="username">Enw defnyddiwr</string>
+    <string name="username">Enw defnyddiwr</string>
   <string name="password">Cyfrinair</string>
   <string name="login_credential">Mewngofnodwch i\'ch cyfri Comin Beta</string>
   <string name="login">Mewngofnodi</string>
@@ -21,13 +19,10 @@
   <string name="logging_in_title">Wrthi\'n mewngofnodi</string>
   <string name="logging_in_message">Disgwyliwch…</string>
   <string name="login_success">Llwyddodd y mewngofnodi!</string>
-  <string name="login_failed">Methodd y mewngofnodi!</string>
-  <string name="upload_failed">Ni chafwyd hyd i\'r ffeil. Ceisiwch un arall.</string>
+    <string name="upload_failed">Ni chafwyd hyd i\'r ffeil. Ceisiwch un arall.</string>
   <string name="authentication_failed">Methodd y dilysu! Mewngofnodwch eto.</string>
   <string name="uploading_started">Dechreuodd yr uwchlwytho!</string>
-  <string name="upload_completed_notification_title">Uwchlwythwyd %1$s!</string>
-  <string name="upload_completed_notification_text">Tapiwch i weld eich uwchlwythiad</string>
-  <string name="upload_progress_notification_title_start">Yn dechrau uwchlwytho %1$s</string>
+    <string name="upload_progress_notification_title_start">Yn dechrau uwchlwytho %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Wrthi\'n uwchlwytho %1$s</string>
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
   <string name="upload_failed_notification_title">Methwyd uwchlwytho %1$s</string>
@@ -36,15 +31,9 @@
     <item quantity="one">%1$d ffeil yn uwchlwytho</item>
     <item quantity="other">%1$d ffeil yn uwchlwytho</item>
   </plurals>
-  <string name="title_activity_contributions">Fy Uwchlwythiadau Diweddaraf</string>
-  <string name="contribution_state_queued">Yn y ciw</string>
+    <string name="contribution_state_queued">Yn y ciw</string>
   <string name="contribution_state_failed">Methiant</string>
-  <string name="contribution_state_in_progress">Wedi cwblhau %1$d%%</string>
-  <string name="contribution_state_starting">Ar fin uwchlwytho</string>
-  <string name="menu_from_gallery">O\'r galeri</string>
-  <string name="menu_from_camera">Tynnu llun</string>
-  <string name="menu_nearby">Gerllaw</string>
-  <string name="provider_contributions">Fy uwchlwythiadau</string>
+    <string name="provider_contributions">Fy uwchlwythiadau</string>
   <string name="menu_share">Rhannu</string>
   <string name="menu_open_in_browser">Agor yn y Porwr</string>
   <string name="share_title_hint" fuzzy="true">Teitl</string>
@@ -56,15 +45,9 @@
   <string name="login_failed_blocked">Ymddiheurwn. Mae\'r defnyddiwr hwn wedi ei flocio ar Gomin Wikimedia</string>
   <string name="login_failed_2fa_needed">Mae\'n rhaid i chi roi eich cod adnabod 2 ffactor.</string>
   <string name="login_failed_generic">Methodd y mewngofnodi</string>
-  <string name="share_upload_button">Uwchlwyther</string>
-  <string name="multiple_share_base_title">Enwch y set hwn</string>
-  <string name="provider_modifications">Newidiadau</string>
-  <string name="menu_upload_single">Uwchlwytho</string>
-  <string name="categories_search_text_hint">Archwilio\'r categorïau</string>
-  <string name="menu_save_categories">Cadw</string>
-  <string name="refresh_button">Ailgyrchu</string>
-  <string name="display_list_button">Rhestr</string>
-  <string name="gps_disabled">Ataliwyd GPS ar eich dyfais. Ydych chi am ei droi\'n weithredol?</string>
+    <string name="provider_modifications">Newidiadau</string>
+    <string name="categories_search_text_hint">Archwilio\'r categorïau</string>
+    <string name="gps_disabled">Ataliwyd GPS ar eich dyfais. Ydych chi am ei droi\'n weithredol?</string>
   <string name="enable_gps">Gweithredu\'r GPS</string>
   <string name="contributions_subtitle_zero">Heb uwchlwytho eto</string>
   <plurals name="contributions_subtitle" fuzzy="true">
@@ -72,41 +55,23 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uwchlwythiad</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Cychwyn %1$d uwchlwythiad</item>
-    <item quantity="other">Cychwyn uwchlwytho %1$d ffeil</item>
-  </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d uwchlwythiad</item>
-    <item quantity="other">%1$d uwchlwythiad</item>
-  </plurals>
-  <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
-  <string name="categories_skip_explanation">Ychwanegwch gategori/au er mwyn i bobl fedru canfod eich ffeiliau ar Gomin Wicimedia.\n\nCychwynwch deipio i ychwanegu categori/au.</string>
-  <string name="categories_activity_title">Categorïau</string>
-  <string name="title_activity_settings">Gosodiadau</string>
+    <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
+    <string name="title_activity_settings">Gosodiadau</string>
   <string name="title_activity_signup">Cofrestru</string>
   <string name="title_activity_featured_images">Delweddau nodwedd</string>
-  <string name="menu_about">Amdanom</string>
-  <string name="about_license">Ap Cynnwys Agored a grewyd ac a gefnogir gan wirfoddolwyr cymuned Wicimedia yw ap Comin Wicimedia. Does a wnelo Sefydliad Wicimedia ddim byd ag e (ei greu, ei gynnal na\'i ddatblygu).</string>
+    <string name="about_license">Ap Cynnwys Agored a grewyd ac a gefnogir gan wirfoddolwyr cymuned Wicimedia yw ap Comin Wicimedia. Does a wnelo Sefydliad Wicimedia ddim byd ag e (ei greu, ei gynnal na\'i ddatblygu).</string>
   <string name="about_improve">\n\nCrewch &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ymholiad GitHub&lt;/a&gt; os oes gennych fyg, broblem neu awgrym.</string>
   <string name="about_privacy_policy">&lt;u&gt;Polisi preifatrwydd&lt;/u&gt;</string>
   <string name="about_credits">Clod a bri</string>
   <string name="title_activity_about">Amdanom</string>
-  <string name="menu_feedback">Danfonwch Adborth (drwy Ebost)</string>
-  <string name="no_email_client">Dim ebost client wedi\'i ganfod</string>
+    <string name="no_email_client">Dim ebost client wedi\'i ganfod</string>
   <string name="provider_categories">Categorïau a ddefnyddiwyd yn ddiweddar</string>
   <string name="waiting_first_sync">Yn aros am y sync cyntaf…</string>
-  <string name="no_uploads_yet">Nid ydych wedi uwchlwytho ffotograffau eto.</string>
-  <string name="menu_retry_upload">Ailgynnig</string>
+    <string name="menu_retry_upload">Ailgynnig</string>
   <string name="menu_cancel_upload">Diddymer</string>
-  <string name="share_license_summary" fuzzy="true">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
-  <string name="media_upload_policy">Wrth gynnig y llun yma, rwy\'n datgan mai fy ngwaith i ydyw ac nad yw\'n cynnwys unrhyw beth dan hawlfrain, na hunlun, a\'i fod yn cadw at &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Bolisiau Comin Wicimedia&lt;/a&gt;.</string>
+    <string name="media_upload_policy">Wrth gynnig y llun yma, rwy\'n datgan mai fy ngwaith i ydyw ac nad yw\'n cynnwys unrhyw beth dan hawlfrain, na hunlun, a\'i fod yn cadw at &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Bolisiau Comin Wicimedia&lt;/a&gt;.</string>
   <string name="menu_download">Lawrlwytho</string>
-  <string name="preference_license">Trwydded Ddiofyn (\'default\')</string>
-  <string name="use_previous">Defnydiwch y teitl/disgrifiad blaenorol</string>
-  <string name="allow_gps">Defnyddiwch y lleoliad cyfredol</string>
-  <string name="allow_gps_summary">Adfer eich lleoliad presennol os nad yw\'r ddelwedd yn cynnwys cyfesurynnau. Bydd hyn yn datgelu eich lleoliad chi!</string>
-  <string name="preference_theme">Modd fin nos</string>
+    <string name="preference_theme">Modd fin nos</string>
   <string name="preference_theme_summary">Defnyddiwch thema tywyll</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
@@ -114,21 +79,8 @@
   <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Awstria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Yr Almaen)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Sbaen)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lwcsembwrg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Yr Iseldiroedd)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norwy)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Gwlad Pwyl)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Cyhelir llawer o luniau ar Gomin Wicimedia sy\'n cael eu defnyddio ar Wicipedia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Cyhelir llawer o luniau ar Gomin Wicimedia sy\'n cael eu defnyddio ar Wicipedia.</string>
   <string name="tutorial_1_subtext">Mae eich lluniau\'n gymorth i addysgu pobl drwy\'r byd mawr crwn!</string>
   <string name="tutorial_2_text">Uwchlwythwch lluniau a dynnoch eich hun:</string>
   <string name="tutorial_2_subtext_1">Gwrthrychau byd natur (blodau, anifeiliaid, mynyddoedd)</string>
@@ -142,19 +94,14 @@
   <string name="tutorial_4_subtext_1">Teitl:Tŷ Opera Sydney</string>
   <string name="tutorial_4_subtext_2">Disgrifiad: Golygfa o Dŷ Opera Sydney o ochr arall y bae</string>
   <string name="tutorial_4_subtext_3">Categoriau: Tŷ Opera Sydney o\'r gorllewin</string>
-  <string name="welcome_wikipedia_text">Cyfranwch luniau. Cynorthwywch Wicipedia i roi bywyd yn yr erthyglau!</string>
-  <string name="welcome_wikipedia_subtext">Mae\'r delweddau ar Wicipedia\'n dod o\nGomin Wikimedia.</string>
-  <string name="welcome_copyright_text">Mae eich delweddau\'n cynorthwyo i addysgu pobl ledled y byd.</string>
-  <string name="welcome_copyright_subtext">Cadwch yn glir o ddeunydd a hawlfraint arno a ganfyddwch ar y we, ac hefyd lluniau o bosteri, cloriau llyfrau, ayb.</string>
-  <string name="welcome_final_text">Ydych chi wedi deall?</string>
+    <string name="welcome_final_text">Ydych chi wedi deall?</string>
   <string name="welcome_final_button_text">Do!</string>
   <string name="detail_panel_cats_label">Categorïau</string>
   <string name="detail_panel_cats_loading">Wrthi\'n llwytho…</string>
   <string name="detail_panel_cats_none">Dim categorïau wedi eu dewis</string>
   <string name="detail_description_empty">Dim disgrifiad</string>
   <string name="detail_license_empty">Trwydded anhysbys</string>
-  <string name="menu_refresh">Adnewyddu</string>
-  <string name="ok">Iawn</string>
+    <string name="ok">Iawn</string>
   <string name="title_activity_nearby">Lleoedd Cyfagos</string>
   <string name="no_nearby">Ni chafwyd hyd i leoedd cyfagos</string>
   <string name="warning">Rhybudd</string>
@@ -171,14 +118,10 @@
   <string name="nearby_info_menu_wikipedia_article">Erthygl Wicipedia</string>
   <string name="login_to_your_account">Mewngofnodwch i\'ch cyfri</string>
   <string name="send_log_file">Danfonwch y ffeil log</string>
-  <string name="view_browser">Gweld yn y porwr</string>
-  <string name="nearby_location_has_not_changed">Nid yw\'r lleoliad wedi newid.</string>
-  <string name="nearby_location_not_available">Nid yw\'r lleoliad ar gael.</string>
-  <string name="about_translate_proceed">Parhau</string>
+    <string name="about_translate_proceed">Parhau</string>
   <string name="about_translate_cancel">Canslo</string>
   <string name="retry">Ailgeisio</string>
-  <string name="showcase_view_got_it_button">Gwnaed!</string>
-  <string name="appwidget_img">Llun y Dydd</string>
+    <string name="appwidget_img">Llun y Dydd</string>
   <string name="app_widget_heading">Llun y Dydd</string>
   <string name="successful_wikidata_edit">Mae %1$s o luniau wedi\'u hychwanegu ar Wicidata!</string>
 </resources>

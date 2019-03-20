@@ -1,12 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:id="@+id/drawer_login">
+    <group>
         <item
             android:id="@+id/action_login"
             android:visible="false"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/navigation_item_login" />
     </group>
-    <group android:id="@+id/drawer_main">
+    <group>
         <item
             android:id="@+id/action_home"
             android:icon="@drawable/ic_home_black_24dp"
@@ -23,14 +23,14 @@
             android:title="@string/navigation_item_bookmarks"/>
 
     </group>
-    <group android:id="@+id/drawer_account">
+    <group>
         <item
             android:id="@+id/action_settings"
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="@string/navigation_item_settings" />
 
     </group>
-    <group android:id="@+id/drawer_contact">
+    <group>
         <item
             android:id="@+id/action_about"
             android:icon="@drawable/ic_info_outline_black_24dp"
@@ -48,7 +48,7 @@
 
     </group>
 
-    <group android:id="@+id/drawer_logout">
+    <group>
         <item
             android:id="@+id/action_logout"
             android:icon="@drawable/ic_exit_to_app_black_24dp"

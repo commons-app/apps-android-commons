@@ -21,7 +21,6 @@
             fresco:actualImageScaleType="fitCenter" />
 
         <androidx.legacy.widget.Space
-            android:id="@+id/right_space"
             android:layout_width="8dp"
             android:layout_height="90dp" />
 

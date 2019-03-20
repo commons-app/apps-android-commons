@@ -9,7 +9,6 @@
     >
 
     <TextView
-        android:id="@+id/categoryImagesSequenceNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="98sp"
@@ -33,7 +32,6 @@
         android:padding="@dimen/small_gap"
         >
         <ProgressBar
-            android:id="@+id/categoryProgress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/ProgressBar"

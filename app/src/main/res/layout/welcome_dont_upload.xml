@@ -23,7 +23,6 @@
 
         <ImageView
             android:src="@drawable/selfie_x"
-            android:id="@+id/selfie_x"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/welcome_image_no_selfies"
@@ -31,7 +30,6 @@
 
         <ImageView
             android:src="@drawable/proprietary_x"
-            android:id="@+id/proprietary_x"
             android:layout_marginLeft="@dimen/standard_gap"
             android:layout_marginStart="@dimen/standard_gap"
             android:layout_width="140dp"

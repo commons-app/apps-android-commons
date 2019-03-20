@@ -2,7 +2,6 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -166,7 +165,6 @@
             app:srcCompat="@drawable/ic_photo_white_24dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_commons_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="center"

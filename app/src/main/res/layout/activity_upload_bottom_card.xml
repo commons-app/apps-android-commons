@@ -79,7 +79,6 @@
         tools:showIn="@layout/activity_upload">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/small_gap">

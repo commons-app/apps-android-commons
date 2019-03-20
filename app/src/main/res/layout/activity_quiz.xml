@@ -44,7 +44,6 @@
                             android:layout_marginBottom="@dimen/activity_margin_vertical" />
 
                         <include
-                            android:id="@+id/question"
                             layout="@layout/question_layout"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
@@ -52,7 +51,6 @@
                             android:layout_marginBottom="@dimen/activity_margin_vertical" />
 
                         <include
-                            android:id="@+id/answer"
                             layout="@layout/answer_layout"
                             android:layout_marginTop="@dimen/activity_margin_vertical"
                             android:layout_marginBottom="@dimen/activity_margin_vertical"

@@ -297,7 +297,6 @@
                             <ImageView
                                 android:layout_width="@dimen/overflow_icon_dimen"
                                 android:layout_height="@dimen/overflow_icon_dimen"
-                                android:id="@+id/wikidata_edits_icon"
                                 app:srcCompat="@drawable/ic_custom_map_marker" />
 
                             <TextView
@@ -364,7 +363,6 @@
                             <ImageView
                                 android:layout_width="@dimen/overflow_icon_dimen"
                                 android:layout_height="@dimen/overflow_icon_dimen"
-                                android:id="@+id/featured_image_icon"
                                 app:srcCompat="@drawable/featured"
                                 android:scaleType="centerCrop" />
 
@@ -431,7 +429,6 @@
                             <ImageView
                                 android:layout_width="@dimen/overflow_icon_dimen"
                                 android:layout_height="@dimen/overflow_icon_dimen"
-                                android:id="@+id/thanks_image_icon"
                                 app:srcCompat="@drawable/ic_thanks"
                                 android:scaleType="centerCrop" />
 
