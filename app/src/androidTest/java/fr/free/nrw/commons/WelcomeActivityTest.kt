@@ -37,7 +37,7 @@ class WelcomeActivityTest {
     }
 
     @Test
-    fun ifSkipButtonClicked() {
+    fun testBetaSkipButton() {
         if (ConfigUtils.isBetaFlavour()) {
             onView(withId(R.id.finishTutorialButton))
                     .perform(ViewActions.click())
@@ -47,29 +47,27 @@ class WelcomeActivityTest {
 
     @Test
     fun testSwipingOnce() {
-            onView(withId(R.id.welcomePager))
-                    .perform(ViewActions.swipeLeft())
-            assert(true)
-            onView(withId(R.id.welcomePager))
-                    .perform(ViewActions.swipeRight())
-            assert(true)
+        onView(withId(R.id.welcomePager))
+                .perform(ViewActions.swipeLeft())
+        assert(true)
+        onView(withId(R.id.welcomePager))
+                .perform(ViewActions.swipeRight())
+        assert(true)
     }
 
     @Test
     fun testSwipingWholeTutorial() {
-        if (!ConfigUtils.isBetaFlavour()) {
-            onView(withId(R.id.welcomePager))
-                    .perform(ViewActions.swipeLeft())
-                    .perform(ViewActions.swipeLeft())
-                    .perform(ViewActions.swipeLeft())
-                    .perform(ViewActions.swipeLeft())
-            assert(true)
-            onView(withId(R.id.welcomePager))
-                    .perform(ViewActions.swipeRight())
-                    .perform(ViewActions.swipeRight())
-                    .perform(ViewActions.swipeRight())
-                    .perform(ViewActions.swipeRight())
-            assert(true)
-        }
+        onView(withId(R.id.welcomePager))
+                .perform(ViewActions.swipeLeft())
+                .perform(ViewActions.swipeLeft())
+                .perform(ViewActions.swipeLeft())
+                .perform(ViewActions.swipeLeft())
+        assert(true)
+        onView(withId(R.id.welcomePager))
+                .perform(ViewActions.swipeRight())
+                .perform(ViewActions.swipeRight())
+                .perform(ViewActions.swipeRight())
+                .perform(ViewActions.swipeRight())
+        assert(true)
     }
 }
