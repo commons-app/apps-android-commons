@@ -463,7 +463,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Timber.d(data!=null?data.toString():"");
+        Timber.d(data!=null?data.toString():"onActivityResult data is null");
         super.onActivityResult(requestCode, resultCode, data);
         controller.handleActivityResult(this, requestCode, resultCode, data);
     }
