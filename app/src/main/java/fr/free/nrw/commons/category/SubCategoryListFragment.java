@@ -97,17 +97,17 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
         }
         progressBar.setVisibility(View.VISIBLE);
         if (!isParentCategory){
-            Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
+            compositeDisposable.add(Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                    .subscribe(this::handleSuccess, this::handleError);
+                    .subscribe(this::handleSuccess, this::handleError));
         }else {
-            Observable.fromCallable(() -> mwApi.getParentCategoryList(categoryName))
+            compositeDisposable.add(Observable.fromCallable(() -> mwApi.getParentCategoryList(categoryName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                    .subscribe(this::handleSuccess, this::handleError);
+                    .subscribe(this::handleSuccess, this::handleError));
         }
     }
 

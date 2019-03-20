@@ -7,12 +7,12 @@
     android:layout_height="wrap_content"
     tools:showIn="@layout/activity_upload">
 
-    <fr.free.nrw.commons.ui.widget.CustomEditText
+    <EditText
         android:id="@+id/description_item_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/share_title_hint"
-        android:imeOptions="actionNext"
-        android:inputType="textMultiLine"
+        android:imeOptions="actionNext|flagNoExtractUi"
+        android:inputType="text"
         android:nextFocusForward="@+id/image_description" />
 </com.google.android.material.textfield.TextInputLayout>

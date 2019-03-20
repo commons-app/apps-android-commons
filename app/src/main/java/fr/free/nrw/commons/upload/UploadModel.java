@@ -26,7 +26,7 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
@@ -45,6 +45,7 @@ public class UploadModel {
     };
     private final JsonKvStore store;
     private final List<String> licenses;
+    private final Context context;
     private String license;
     private final Map<String, String> licensesByName;
     private List<UploadItem> items = new ArrayList<>();
@@ -52,8 +53,7 @@ public class UploadModel {
     private boolean bottomCardState = true;
     private boolean rightCardState = true;
     private int currentStepIndex = 0;
-    public static Context context;
-    private Disposable badImageSubscription;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private SessionManager sessionManager;
     private FileProcessor fileProcessor;
@@ -75,6 +75,11 @@ public class UploadModel {
         this.sessionManager = sessionManager;
         this.fileProcessor = fileProcessor;
         this.imageProcessingService = imageProcessingService;
+    }
+
+    void cleanup() {
+        compositeDisposable.clear();
+        fileProcessor.cleanup();
     }
 
     @SuppressLint("CheckResult")
@@ -219,8 +224,7 @@ public class UploadModel {
     }
 
     public void previous() {
-        if (badImageSubscription != null)
-            badImageSubscription.dispose();
+        cleanup();
         markCurrentUploadVisited();
         if (currentStepIndex > 0) {
             currentStepIndex--;
@@ -305,16 +309,16 @@ public class UploadModel {
     }
 
     void deletePicture() {
-        badImageSubscription.dispose();
+        cleanup();
         updateItemState();
     }
 
     void subscribeBadPicture(Consumer<Integer> consumer, boolean checkTitle) {
         if (isShowingItem()) {
-            badImageSubscription = getImageQuality(getCurrentItem(), checkTitle)
+            compositeDisposable.add(getImageQuality(getCurrentItem(), checkTitle)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(consumer, Timber::e);
+                    .subscribe(consumer, Timber::e));
         }
     }
 
@@ -431,10 +435,6 @@ public class UploadModel {
 
         public Uri getContentUri() {
             return originalContentUri;
-        }
-
-        public Context getContext(){
-            return UploadModel.context;
         }
     }
 

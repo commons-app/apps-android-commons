@@ -21,9 +21,6 @@ import timber.log.Timber;
  * Custom card view for nearby notification card view on main screen, above contributions list
  */
 public class NearbyNotificationCardView extends SwipableCardView {
-
-    private Context context;
-
     private Button permissionRequestButton;
     private LinearLayout contentLayout;
     private TextView notificationTitle;
@@ -37,21 +34,18 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
     public NearbyNotificationCardView(@NonNull Context context) {
         super(context);
-        this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
     public NearbyNotificationCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
     public NearbyNotificationCardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
@@ -60,7 +54,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
      * Initializes views and action listeners
      */
     private void init() {
-        View rootView = inflate(context, R.layout.nearby_card_view, this);
+        View rootView = inflate(getContext(), R.layout.nearby_card_view, this);
 
         permissionRequestButton = rootView.findViewById(R.id.permission_request_button);
         contentLayout = rootView.findViewById(R.id.content_layout);
@@ -72,14 +66,14 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
         progressBar = rootView.findViewById(R.id.progressBar);
 
-
+        setActionListeners();
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         // If you don't setVisibility after getting layout params, then you will se an empty space in place of nearby NotificationCardView
-        if (((MainActivity)context).defaultKvStore.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+        if (((MainActivity)getContext()).defaultKvStore.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
             this.setVisibility(VISIBLE);
         } else {
             this.setVisibility(GONE);
@@ -89,16 +83,16 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
     private void setActionListeners(Place place) {
         this.setOnClickListener(view -> {
-            ((MainActivity)context).viewPager.setCurrentItem(1);
-            ((NearbyFragment)((MainActivity) context).contributionsActivityPagerAdapter.getItem(1)).centerMapToPlace(place);
+            ((MainActivity)getContext()).viewPager.setCurrentItem(1);
+            ((NearbyFragment)((MainActivity) getcontext()).contributionsActivityPagerAdapter.getItem(1)).centerMapToPlace(place);
         });
     }
 
     @Override public boolean onSwipe(View view) {
         view.setVisibility(GONE);
         // Save shared preference for nearby card view accordingly
-        ((MainActivity) context).defaultKvStore.putBoolean("displayNearbyCardView", false);
-        ViewUtil.showLongToast(context,
+        ((MainActivity) getContext()).defaultKvStore.putBoolean("displayNearbyCardView", false);
+        ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_notification_dismiss_message));
         return true;
     }
@@ -129,7 +123,6 @@ public class NearbyNotificationCardView extends SwipableCardView {
         contentLayout.setVisibility(VISIBLE);
         // Make progress bar invisible once data is ready
         progressBar.setVisibility(GONE);
-        setActionListeners(place);
         // And content views visible since they are ready
         notificationTitle.setVisibility(VISIBLE);
         notificationDistance.setVisibility(VISIBLE);

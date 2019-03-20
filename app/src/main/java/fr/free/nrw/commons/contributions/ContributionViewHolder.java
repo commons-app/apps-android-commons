@@ -92,4 +92,12 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
             actions.deleteUpload();
         }
     }
+
+    @OnClick(R.id.contributionImage)
+    public void imageClicked(){
+        DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
+        if (actions != null) {
+            actions.onClick();
+        }
+    }
 }
