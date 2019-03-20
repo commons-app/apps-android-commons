@@ -38,7 +38,7 @@ class WelcomeActivityTest {
 
     @Test
     fun ifSkipButtonClicked() {
-        if (!ConfigUtils.isBetaFlavour()) {
+        if (ConfigUtils.isBetaFlavour()) {
             onView(withId(R.id.finishTutorialButton))
                     .perform(ViewActions.click())
             assert(activityRule.activity.isDestroyed)
@@ -46,19 +46,17 @@ class WelcomeActivityTest {
     }
 
     @Test
-    fun ifSwiped() {
-        if (!ConfigUtils.isBetaFlavour()) {
+    fun testSwipingOnce() {
             onView(withId(R.id.welcomePager))
                     .perform(ViewActions.swipeLeft())
             assert(true)
             onView(withId(R.id.welcomePager))
                     .perform(ViewActions.swipeRight())
             assert(true)
-        }
     }
 
     @Test
-    fun ifEndedTutorial() {
+    fun testSwipingWholeTutorial() {
         if (!ConfigUtils.isBetaFlavour()) {
             onView(withId(R.id.welcomePager))
                     .perform(ViewActions.swipeLeft())
