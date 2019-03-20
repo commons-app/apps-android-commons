@@ -2,11 +2,9 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
@@ -26,13 +24,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import androidx.annotation.Nullable;
 import butterknife.BindView;
@@ -48,7 +44,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
-import fr.free.nrw.commons.delete.DeleteTask;
+import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
@@ -57,6 +53,7 @@ import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.utils.DateUtils;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -90,13 +87,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     @Inject
-    Provider<MediaDataExtractor> mediaDataExtractorProvider;
-    @Inject
-    MediaWikiApi mwApi;
-    @Inject
-    SessionManager sessionManager;
+    MediaDataExtractor mediaDataExtractor;
     @Inject
     ReasonBuilder reasonBuilder;
+    @Inject
+    DeleteHelper deleteHelper;
 
     private int initialListTop = 0;
 
@@ -137,7 +132,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
     private DataSetObserver dataObserver;
-    private AsyncTask<Void, Void, Boolean> detailFetchTask;
     private LicenseList licenseList;
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
@@ -271,62 +265,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private void displayMediaDetails() {
         //Always load image from Internet to allow viewing the desc, license, and cats
         image.setMedia(media);
-
-        // FIXME: For transparent images
-        // FIXME: keep the spinner going while we load data
-        // FIXME: cache this data
-        // Load image metadata: desc, license, categories
-        detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
-            private MediaDataExtractor extractor;
-
-            @Override
-            protected void onPreExecute() {
-                extractor = mediaDataExtractorProvider.get();
-            }
-
-            @Override
-            protected Boolean doInBackground(Void... voids) {
-                // Local files have no filename yet
-                if (media.getFilename() == null) {
-                    return Boolean.FALSE;
-                }
-                try {
-                    extractor.fetch(media.getFilename(), licenseList);
-                    return Boolean.TRUE;
-                } catch (IOException e) {
-                    Timber.d(e);
-                }
-                return Boolean.FALSE;
-            }
-
-            @Override
-            protected void onPostExecute(Boolean success) {
-                detailFetchTask = null;
-                if (!isAdded()) {
-                    return;
-                }
-
-                if (success) {
-                    extractor.fill(media);
-                    setTextFields(media);
-                } else {
-                    Timber.d("Failed to load photo details.");
-                }
-            }
-        };
-        detailFetchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
         title.setText(media.getDisplayTitle());
         desc.setText(""); // fill in from network...
         license.setText(""); // fill in from network...
+
+        Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::setTextFields);
+        compositeDisposable.add(disposable);
     }
 
     @Override
     public void onDestroyView() {
-        if (detailFetchTask != null) {
-            detailFetchTask.cancel(true);
-            detailFetchTask = null;
-        }
         if (layoutListener != null && getView() != null) {
             getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
             layoutListener = null;
@@ -426,18 +377,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final EditText input = new EditText(getActivity());
         alert.setView(input);
         input.requestFocus();
-        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String reason = input.getText().toString();
+        alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
+            String reason = input.getText().toString();
 
-                DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                deleteTask.execute();
-                enableDeleteButton(false);
-            }
+            deleteHelper.makeDeletion(getContext(), media, reason);
+            enableDeleteButton(false);
         });
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
+        alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
         });
         AlertDialog d = alert.create();
         input.addTextChangedListener(new TextWatcher() {
@@ -470,13 +416,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
         String reason = spinner.getSelectedItem().toString();
-        Single<String> deletionReason = reasonBuilder.getReason(media, reason);
-        compositeDisposable.add(deletionReason
+        Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
+                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+        compositeDisposable.add(resultSingle
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                    deleteTask.execute();
                     isDeleted = true;
                     enableDeleteButton(false);
                 }));

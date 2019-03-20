@@ -21,13 +21,13 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.mwapi.MediaResult;
+import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -49,6 +49,8 @@ public class ReviewActivity extends AuthenticatedActivity {
     @Inject MediaWikiApi mwApi;
     @Inject
     ReviewHelper reviewHelper;
+    @Inject
+    DeleteHelper deleteHelper;
 
     public ReviewPagerAdapter reviewPagerAdapter;
 
@@ -76,7 +78,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         ButterKnife.bind(this);
         initDrawer();
 
-        reviewController = new ReviewController();
+        reviewController = new ReviewController(deleteHelper, this);
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         reviewPager.setAdapter(reviewPagerAdapter);
@@ -119,15 +121,15 @@ public class ReviewActivity extends AuthenticatedActivity {
                     reviewPagerAdapter.updateFileInformation(fileName, revision);
                 }));
         reviewPager.setCurrentItem(0);
-        compositeDisposable.add(Observable.fromCallable(() -> {
-            MediaResult media = mwApi.fetchMediaByFilename("File:" + fileName);
-            return MediaDataExtractorUtil.extractCategories(media.getWikiSource());
-        })
+
+        Disposable disposable = mwApi.fetchMediaByFilename("File:" + fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateCategories, this::categoryFetchError));
-
-
+                .subscribe(mediaResult -> {
+                    ArrayList<String> categories = MediaDataExtractorUtil.extractCategories(mediaResult.getWikiSource());
+                    updateCategories(categories);
+                }, this::categoryFetchError);
+        compositeDisposable.add(disposable);
     }
 
     private void categoryFetchError(Throwable throwable) {

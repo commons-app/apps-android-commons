@@ -249,11 +249,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    public boolean pageExists(String pageName) throws IOException {
-        return Double.parseDouble( api.action("query")
+    public Single<Boolean> pageExists(String pageName) {
+        return Single.fromCallable(() -> Double.parseDouble(api.action("query")
                 .param("titles", pageName)
                 .get()
-                .getString("/api/query/pages/page/@_idx")) != -1;
+                .getString("/api/query/pages/page/@_idx")) != -1);
     }
 
     @Override
@@ -308,42 +308,44 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    public String findThumbnailByFilename(String filename) throws IOException {
-        return api.action("query")
+    public Single<String> findThumbnailByFilename(String filename) {
+        return Single.fromCallable(() -> api.action("query")
                 .param("format", "xml")
                 .param("prop", "imageinfo")
                 .param("iiprop", "url")
                 .param("iiurlwidth", THUMB_SIZE)
                 .param("titles", filename)
                 .get()
-                .getString("/api/query/pages/page/imageinfo/ii/@thumburl");
+                .getString("/api/query/pages/page/imageinfo/ii/@thumburl"));
     }
 
     @Override
-    public String parseWikicode(String source) throws IOException {
-        return api.action("flow-parsoid-utils")
+    public Single<String> parseWikicode(String source) {
+        return Single.fromCallable(() -> api.action("flow-parsoid-utils")
                 .param("from", "wikitext")
                 .param("to", "html")
                 .param("content", source)
                 .param("title", "Main_page")
                 .get()
-                .getString("/api/flow-parsoid-utils/@content");
+                .getString("/api/flow-parsoid-utils/@content"));
     }
 
     @Override
     @NonNull
-    public MediaResult fetchMediaByFilename(String filename) throws IOException {
-        CustomApiResult apiResult = api.action("query")
-                .param("prop", "revisions")
-                .param("titles", filename)
-                .param("rvprop", "content")
-                .param("rvlimit", 1)
-                .param("rvgeneratexml", 1)
-                .get();
+    public Single<MediaResult> fetchMediaByFilename(String filename) {
+        return Single.fromCallable(() -> {
+            CustomApiResult apiResult = api.action("query")
+                    .param("prop", "revisions")
+                    .param("titles", filename)
+                    .param("rvprop", "content")
+                    .param("rvlimit", 1)
+                    .param("rvgeneratexml", 1)
+                    .get();
 
-        return new MediaResult(
-                apiResult.getString("/api/query/pages/page/revisions/rev"),
-                apiResult.getString("/api/query/pages/page/revisions/rev/@parsetree"));
+            return new MediaResult(
+                    apiResult.getString("/api/query/pages/page/revisions/rev"),
+                    apiResult.getString("/api/query/pages/page/revisions/rev/@parsetree"));
+        });
     }
 
     @Override

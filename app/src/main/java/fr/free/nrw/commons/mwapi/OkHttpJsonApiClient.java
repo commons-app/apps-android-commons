@@ -208,32 +208,43 @@ public class OkHttpJsonApiClient {
     @Nullable
     public Single<Media> getPictureOfTheDay() {
         String template = "Template:Potd/" + DateUtils.getCurrentDate();
+        return getMedia(template, true);
+    }
+
+    public Single<Media> getMedia(String titles, boolean useGenerator) {
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(commonsBaseUrl)
                 .newBuilder()
                 .addQueryParameter("action", "query")
-                .addQueryParameter("generator", "images")
                 .addQueryParameter("format", "json")
-                .addQueryParameter("titles", template)
-                .addQueryParameter("prop", "imageinfo")
-                .addQueryParameter("iiprop", "url|extmetadata");
+                .addQueryParameter("titles", titles);
+
+        if (useGenerator) {
+            urlBuilder.addQueryParameter("generator", "images");
+        }
 
         Request request = new Request.Builder()
-                .url(urlBuilder.build())
+                .url(appendMediaProperties(urlBuilder).build())
                 .build();
 
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
-            if (response != null && response.body() != null && response.isSuccessful()) {
+            if (response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
-                if (json == null) {
-                    return null;
-                }
                 MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
-                return Media.from(mwQueryPage.query().firstPage());
+                if (mwQueryPage.success() && mwQueryPage.query().firstPage() != null) {
+                    return Media.from(mwQueryPage.query().firstPage(), gson);
+                }
             }
             return null;
         });
+    }
+
+    private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
+        builder.addQueryParameter("prop", "imageinfo")
+                .addQueryParameter("iiprop", "url|extmetadata")
+                .addQueryParameter("iiextmetadatamultilang", String.valueOf(true));
+        return builder;
     }
 
     /**
@@ -254,12 +265,10 @@ public class OkHttpJsonApiClient {
                 .addQueryParameter("gsrnamespace", "6")
                 .addQueryParameter("gsrlimit", "25")
                 .addQueryParameter("gsroffset", String.valueOf(offset))
-                .addQueryParameter("gsrsearch", query)
-                .addQueryParameter("prop", "imageinfo")
-                .addQueryParameter("iiprop", "url|extmetadata");
+                .addQueryParameter("gsrsearch", query);
 
         Request request = new Request.Builder()
-                .url(urlBuilder.build())
+                .url(appendMediaProperties(urlBuilder).build())
                 .build();
 
         return Single.fromCallable(() -> {
@@ -273,7 +282,7 @@ public class OkHttpJsonApiClient {
                 MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
                 List<MwQueryPage> pages = mwQueryResponse.query().pages();
                 for (MwQueryPage page : pages) {
-                    mediaList.add(Media.from(page));
+                    mediaList.add(Media.from(page, gson));
                 }
             }
             return mediaList;
