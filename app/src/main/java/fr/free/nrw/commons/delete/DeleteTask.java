@@ -17,6 +17,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -34,8 +35,6 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
     @Inject SessionManager sessionManager;
 
     private static final int NOTIFICATION_DELETE = 1;
-    private static final String baseUrl="https://commons.wikimedia.org/wiki/Commons:Deletion_requests/File:";
-
 
     private NotificationManager notificationManager;
     private Builder notificationBuilder;
@@ -186,7 +185,7 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 .setProgress(0,0,false)
                 .setOngoing(false)
                 .setPriority(PRIORITY_HIGH);
-        String urlForDelete = baseUrl + media.getFilename();
+        String urlForDelete = BuildConfig.COMMONS_URL + "/wiki/Commons:Deletion_requests/File:" + media.getFilename();
         Intent browserIntent = new Intent(Intent.ACTION_VIEW , Uri.parse(urlForDelete));
         PendingIntent pendingIntent = PendingIntent.getActivity(context , 1 , browserIntent , PendingIntent.FLAG_UPDATE_CURRENT);
         notificationBuilder.setContentIntent(pendingIntent);
