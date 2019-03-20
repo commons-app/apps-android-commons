@@ -46,10 +46,6 @@
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d رفع ملف</item>
-    <item quantity="other">%1$d رفع ملفات</item>
-  </plurals>
   <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
   <string name="contribution_state_failed">فشل</string>
@@ -82,16 +78,6 @@
   <string name="gps_disabled">عطل نظام الملاحة العالمي GPS بجهازك. أترغب في التنشيط؟</string>
   <string name="enable_gps">تفعيل GPS</string>
   <string name="contributions_subtitle_zero">لا مرفوعات بعد</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">جارٍ بدء %1$d رفع</item>
-    <item quantity="other">جارٍ بدء %1$d مرفوعات</item>
-  </plurals>
-  <string name="multiple_uploads_title">{{جمع|واحد=%1$d رفع|%1$d رفع}}</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
   <string name="categories_skip_explanation">أضف تصنيفات لجعل صورك أكثر قابلية للاكتشاف على ويكيميديا ​​كومنز.\n\nابدأ الكتابة لإضافة تصنيفات.</string>
   <string name="categories_activity_title">تصنيفات</string>
@@ -112,10 +98,6 @@
   <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
   <string name="menu_retry_upload">إعادة المحاولة</string>
   <string name="menu_cancel_upload">إلغاء</string>
-  <plurals name="share_license_summary">
-    <item quantity="one">سيتم ترخيص هذه الصورة تحت %1$s</item>
-    <item quantity="other">سيتم ترخيص هذه الصور تحت %1$s</item>
-  </plurals>
   <string name="media_upload_policy">بتقديم هذه الصورة، أعلن أن هذا عملي الخاص، وأنه لا يحتوي على مواد محفوظة الحقوق أو صور شخصية، وغير ذلك يلتزم &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;بسياسات ويكيميديا ​​كومنز&lt;/a&gt;.</string>
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة الافتراضية</string>
@@ -394,10 +376,6 @@
   <string name="submit">إرسال</string>
   <string name="upload_title_duplicate">يوجد ملف باسم الملف %1$s، هل أنت متأكد أنك تريد المتابعة؟</string>
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
-  <plurals name="upload_count_title">
-    <item quantity="one">%1$d رفع</item>
-    <item quantity="other">%1$d مرفوعات</item>
-  </plurals>
   <string name="navigation_item_bookmarks">العلامات</string>
   <string name="title_activity_bookmarks">العلامات</string>
   <string name="title_page_bookmarks_pictures">الصور</string>
@@ -441,10 +419,6 @@
   <string name="this_function_needs_network_connection">تتطلب هذه الوظيفة الاتصال بالشبكة; يُرجَى التحقق من إعدادات اتصالك.</string>
   <string name="bad_token_error_proposed_solution">فشل التحميل بسبب مشكلات في الرمز المميز للتعديل تُرجَى محاولة تسجيل الخروج والدخول مرة ​​أخرى.</string>
   <string name="error_processing_image">حدث خطأ أثناء معالجة الصورة. رجاءً حاول مرة أخرى!</string>
-  <plurals name="receiving_shared_content">
-    <item quantity="one">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصورة بعض الوقت بناءً على حجم الصور وجهازك</item>
-    <item quantity="other">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
-  </plurals>
   <string name="no_image">لا صور مستخدمة</string>
   <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
   <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
