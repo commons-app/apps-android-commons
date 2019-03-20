@@ -38,7 +38,16 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.theartofdev.edmodo.cropper.CropImage;
+import org.apache.commons.imaging.ImageReadException;
+import org.apache.commons.imaging.ImageWriteException;
+import org.apache.commons.imaging.Imaging;
+import org.apache.commons.imaging.common.IImageMetadata;
+import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
+import org.apache.commons.imaging.formats.jpeg.exif.ExifRewriter;
+import org.apache.commons.imaging.formats.tiff.TiffImageMetadata;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -144,6 +153,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private static int currentItem=0;
     private String source;
     private ArrayList<UploadableFile> files;
+    private  EXIFReader EXIFReader ;
 
 
     @SuppressLint("CheckResult")
@@ -471,8 +481,18 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 resultUri = result.getUri();
-                //presenter.updateImageUri(currentItem,resultUri);
-                files.get(currentItem).updateFilePath(resultUri);
+                try {
+                    resultUri=presenter.restoreEXIFData(files.get(currentItem).getMediaUri(),resultUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ImageReadException e) {
+                    e.printStackTrace();
+                } catch (ImageWriteException e) {
+                    e.printStackTrace();
+                }
+
+                //files.get(currentItem).updateFilePath(resultUri);
+                fr.free.nrw.commons.upload.EXIFReader.processMetadata(resultUri.getPath());
                 Intent shareIntent = new Intent(this, UploadActivity.class);
                 shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
                 shareIntent.putExtra(EXTRA_SOURCE, source);

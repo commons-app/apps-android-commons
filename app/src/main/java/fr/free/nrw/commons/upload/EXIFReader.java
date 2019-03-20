@@ -32,7 +32,7 @@ public class EXIFReader {
      * And the checks for the presence of EXIF Directories in metadata object
      * */
 
-    public Single<Integer> processMetadata(String path) {
+    public static Single<Integer> processMetadata(String path) {
         Metadata readMetadata = null;
         try {
             readMetadata = ImageMetadataReader.readMetadata(new File(path));

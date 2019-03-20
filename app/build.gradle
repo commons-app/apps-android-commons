@@ -82,21 +82,24 @@ dependencies {
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY_VERSION"
 
     // Support libraries
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation "androidx.appcompat:appcompat:1.0.2"
-    implementation "com.google.android.material:material:1.1.0-alpha04"
-    implementation "androidx.browser:browser:1.0.0"
-    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.google.android.material:material:1.1.0-alpha04'
+    implementation 'androidx.browser:browser:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation "androidx.exifinterface:exifinterface:1.0.0"
+    implementation 'androidx.exifinterface:exifinterface:1.0.0'
 
     //swipe_layout
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
+
     //image crop
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
+
     //metadata extractor
     implementation 'com.drewnoakes:metadata-extractor:2.11.0'
+    implementation files('libs/commons-imaging-1.0-R1401825.jar')
 }
 
 android {
