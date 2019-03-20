@@ -66,7 +66,6 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
         progressBar = rootView.findViewById(R.id.progressBar);
 
-        setActionListeners();
     }
 
     @Override
@@ -84,7 +83,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
     private void setActionListeners(Place place) {
         this.setOnClickListener(view -> {
             ((MainActivity)getContext()).viewPager.setCurrentItem(1);
-            ((NearbyFragment)((MainActivity) getcontext()).contributionsActivityPagerAdapter.getItem(1)).centerMapToPlace(place);
+            ((NearbyFragment)((MainActivity) getContext()).contributionsActivityPagerAdapter.getItem(1)).centerMapToPlace(place);
         });
     }
 
@@ -123,6 +122,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
         contentLayout.setVisibility(VISIBLE);
         // Make progress bar invisible once data is ready
         progressBar.setVisibility(GONE);
+        setActionListeners(place);
         // And content views visible since they are ready
         notificationTitle.setVisibility(VISIBLE);
         notificationDistance.setVisibility(VISIBLE);
