@@ -165,7 +165,7 @@
   <string name="menu_refresh">Refresh</string>
   <string name="storage_permission_title">Requesting Storage Permission</string>
   <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot access your gallery without this.</string>
-  <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera without this.</string>
+  <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera/gallery without this.</string>
   <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nearby Places</string>
@@ -472,4 +472,5 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="image_chooser_title">Choose Images to upload</string>
 
   <string name="please_wait">Please wait…</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
 </resources>
