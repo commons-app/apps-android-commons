@@ -440,6 +440,24 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 ,getResources().getString(R.string.images_used_explanation));
     }
 
+    @OnClick(R.id.images_nearby_info)
+    public void showImagesViaNearbyInfo(){
+        launchAlert(getResources().getString(R.string.statistics_wikidata_edits)
+                ,getResources().getString(R.string.images_via_nearby_explanation));
+    }
+
+    @OnClick(R.id.images_featured_info)
+    public void showFeaturedImagesInfo(){
+        launchAlert(getResources().getString(R.string.statistics_featured)
+                ,getResources().getString(R.string.images_featured_explanation));
+    }
+
+    @OnClick(R.id.thanks_received_info)
+    public void showThanksReceivedInfo(){
+        launchAlert(getResources().getString(R.string.statistics_thanks)
+                ,getResources().getString(R.string.thanks_received_explanation));
+    }
+
     /**
      * takes title and message as input to display alerts
      * @param title
