@@ -34,9 +34,9 @@ public interface MediaWikiApi {
 
     boolean fileExistsWithName(String fileName) throws IOException;
 
-    boolean pageExists(String pageName) throws IOException;
+    Single<Boolean> pageExists(String pageName);
 
-    String findThumbnailByFilename(String filename) throws IOException;
+    Single<String> findThumbnailByFilename(String filename);
 
     boolean logEvents(LogBuilder[] logBuilders);
 
@@ -72,10 +72,10 @@ public interface MediaWikiApi {
     @Nullable
     boolean addWikidataEditTag(String revisionId) throws IOException;
 
-    String parseWikicode(String source) throws IOException;
+    Single<String> parseWikicode(String source);
 
     @NonNull
-    MediaResult fetchMediaByFilename(String filename) throws IOException;
+    Single<MediaResult> fetchMediaByFilename(String filename);
 
     @NonNull
     Observable<String> searchCategories(String filterValue, int searchCatsLimit);

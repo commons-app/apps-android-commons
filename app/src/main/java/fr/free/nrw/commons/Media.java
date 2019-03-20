@@ -3,8 +3,11 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,13 +16,19 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.media.model.ExtMetadata;
 import fr.free.nrw.commons.media.model.ImageInfo;
 import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import fr.free.nrw.commons.utils.StringUtils;
 
 public class Media implements Parcelable {
+
+    private static final Type MAP_TYPE = new TypeToken<Map<String, String>>() {
+    }.getType();
 
     public static Creator<Media> CREATOR = new Creator<Media>() {
         @Override
@@ -450,20 +459,36 @@ public class Media implements Parcelable {
         return requestedDeletion;
     }
 
-    public static Media from(MwQueryPage page) {
+    public static Media from(MwQueryPage page, Gson gson) {
         ImageInfo imageInfo = page.imageInfo();
         if(imageInfo == null) {
             return null;
         }
+        ExtMetadata metadata = imageInfo.getMetadata();
+
+        String categories = metadata.categories().value();
+
         Media media = new Media(null,
                 imageInfo.getOriginalUrl(),
                 page.title(),
-                imageInfo.getMetadata().imageDescription().value(),
+                "",
                 0,
                 DateUtils.getDateFromString(imageInfo.getMetadata().dateTimeOriginal().value()),
                 DateUtils.getDateFromString(imageInfo.getMetadata().dateTime().value()),
                 StringUtils.getParsedStringFromHtml(imageInfo.getMetadata().artist().value())
         );
+
+        media.setDescriptions(metadata.imageDescription().value());
+
+        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(categories));
+
+        String latitude = metadata.gpsLatitude().value();
+        String longitude = metadata.gpsLongitude().value();
+
+        if(!StringUtils.isNullOrWhiteSpace(latitude) && !StringUtils.isNullOrWhiteSpace(longitude)) {
+            LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude), 0);
+            media.setCoordinates(latLng);
+        }
 
         media.setLicense(imageInfo.getMetadata().licenseShortName().value());
 

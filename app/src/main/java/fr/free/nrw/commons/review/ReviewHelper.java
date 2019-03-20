@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.review;
 
+import android.util.Pair;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -23,20 +25,20 @@ public class ReviewHelper {
         this.mediaWikiApi = mediaWikiApi;
     }
 
-    public Single<Media> getRandomMedia() {
+    Single<Media> getRandomMedia() {
         return okHttpJsonApiClient.getRecentFileChanges()
                 .map(RecentChangesImageUtils::findImageInRecentChanges)
-                .map(title -> {
-                    boolean pageExists = mediaWikiApi.pageExists("Commons:Deletion_requests/" + title);
-                    if (!pageExists) {
-                        title = title.replace("File:", "");
-                        return new Media(title);
+                .flatMap(title -> mediaWikiApi.pageExists("Commons:Deletion_requests/" + title)
+                        .map(pageExists -> new Pair<>(title, pageExists)))
+                .map((Pair<String, Boolean> pair) -> {
+                    if (!pair.second) {
+                        return new Media(pair.first.replace("File:", ""));
                     }
                     throw new Exception("Page does not exist");
                 }).retry(MAX_RANDOM_TRIES);
     }
 
-    public Single<MwQueryPage.Revision> getFirstRevisionOfFile(String fileName) {
+    Single<MwQueryPage.Revision> getFirstRevisionOfFile(String fileName) {
         return okHttpJsonApiClient.getFirstRevisionOfFile(fileName);
     }
 }
