@@ -471,11 +471,12 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="please_wait">Please wait…</string>
 
-  <string name="nominating_for_Deletion">Nominating for Deletion</string>
+  <string name="nominating_for_deletion">Nominating for Deletion</string>
   <string name="success">Success</string>
   <string name="successfully_nominated">Successfully nominated</string>
   <string name="for_deletion">for deletion</string>
   <string name="failed">Failed</string>
   <string name="could_not_request_deletion">Could not request deletion</string>
+  <string name="point">.</string>
 
 </resources>
