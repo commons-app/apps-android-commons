@@ -62,43 +62,11 @@ public class PermissionUtils {
      * @param rationaleTitle rationale title to be displayed when permission was denied
      * @param rationaleMessage rationale message to be displayed when permission was denied
      */
-    public static void checkPermissionsAndPerformAction(Activity activity,
-                                                  String permission,
-                                                  Runnable onPermissionGranted,
-                                                  @StringRes int rationaleTitle,
-                                                  @StringRes int rationaleMessage) {
-        Dexter.withActivity(activity)
-                .withPermission(permission)
-                .withListener(new BasePermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        onPermissionGranted.run();
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        if (response.isPermanentlyDenied()) {
-                            DialogUtil.showAlertDialog(activity,
-                                    activity.getString(rationaleTitle),
-                                    activity.getString(rationaleMessage),
-                                    activity.getString(R.string.navigation_item_settings),
-                                    null,
-                                    () -> askUserToManuallyEnablePermissionFromSettings(activity),
-                                    null);
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        DialogUtil.showAlertDialog(activity,
-                                activity.getString(rationaleTitle),
-                                activity.getString(rationaleMessage),
-                                activity.getString(android.R.string.ok),
-                                activity.getString(android.R.string.cancel),
-                                token::continuePermissionRequest,
-                                token::cancelPermissionRequest);
-                    }
-                }).check();
+    public static void checkPermissionsAndPerformAction(Activity activity, String permission,
+        Runnable onPermissionGranted, @StringRes int rationaleTitle,
+        @StringRes int rationaleMessage) {
+        checkPermissionsAndPerformAction(activity, permission, onPermissionGranted, null,
+            rationaleTitle, rationaleMessage);
     }
 
     /**
@@ -140,7 +108,9 @@ public class PermissionUtils {
                             activity.getString(R.string.navigation_item_settings), null,
                             () -> askUserToManuallyEnablePermissionFromSettings(activity), null);
                     } else {
-                        onPermissionDenied.run();
+                        if (null != onPermissionDenied) {
+                            onPermissionDenied.run();
+                        }
                     }
                 }
 
