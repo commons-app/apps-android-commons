@@ -546,7 +546,6 @@ public class NearbyMapFragment extends DaggerFragment {
                 addMapMovementListeners();
                 updateMapSignificantlyForCurrentLocation();
             });
-            mapView.setStyleUrl("asset://mapstyle.json");
         }
     }
 
