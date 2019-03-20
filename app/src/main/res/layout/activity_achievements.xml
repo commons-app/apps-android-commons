@@ -301,6 +301,17 @@
                                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                                 android:text="@string/statistics_wikidata_edits"  />
 
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:id="@+id/images_nearby_info"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                                android:layout_gravity="top"
+                                app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                                android:tint="?attr/icon" />
+
                         </LinearLayout>
 
 
@@ -358,6 +369,17 @@
                                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                                 android:text="@string/statistics_featured"  />
 
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:id="@+id/images_featured_info"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                                android:layout_gravity="top"
+                                app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                                android:tint="?attr/icon" />
+
                         </LinearLayout>
 
                         <TextView
@@ -413,6 +435,17 @@
                                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
                                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                                 android:text="@string/statistics_thanks"  />
+
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:id="@+id/thanks_received_info"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                                android:layout_gravity="top"
+                                app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                                android:tint="?attr/icon" />
 
                         </LinearLayout>
 
