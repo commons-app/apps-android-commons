@@ -151,7 +151,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             loginCredentials.setVisibility(View.GONE);
         }
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
 
 
     }
