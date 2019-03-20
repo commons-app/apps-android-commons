@@ -233,7 +233,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(), WRITE_EXTERNAL_STORAGE,
             () -> enqueueRequest(req), () -> Toast.makeText(getContext(),
-                R.string.donwload_failed_we_cannot_download_the_file_without_storage_permission,
+                R.string.download_failed_we_cannot_download_the_file_without_storage_permission,
                 Toast.LENGTH_SHORT).show(), R.string.storage_permission,
             R.string.write_storage_permission_rationale);
 

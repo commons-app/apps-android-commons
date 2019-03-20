@@ -472,5 +472,5 @@ Upload your first media by touching the camera or gallery icon above.</string>
   <string name="image_chooser_title">Choose Images to upload</string>
 
   <string name="please_wait">Please wait…</string>
-  <string name="donwload_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
 </resources>
