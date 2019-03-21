@@ -17,6 +17,7 @@
     <attr name="textEnabled" format="reference"/>
     <attr name="bookmarkButtonColor" format="reference"/>
     <attr name="rowButtonColor" format="reference"/>
+    <attr name="reviewHeading" format="reference"/>
 
     <attr name="contributionsListBackground" format="reference"/>
     <attr name="achievementBackground" format="reference"/>

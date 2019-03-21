@@ -320,7 +320,7 @@
   <string name="search_tab_title_media">وسائط</string>
   <string name="search_tab_title_categories">تصنيفات</string>
   <string name="explore_tab_title_featured">متميز</string>
-  <string name="explore_tab_title_mobile">تم الرفع عبر الجوال</string>
+  <string name="explore_tab_title_mobile">تم الرفع عبر المحمول</string>
   <string name="successful_wikidata_edit">تمت إضافة الصورة بنجاح إلى %1$s في ويكي بيانات!</string>
   <string name="wikidata_edit_failure">فشل في تحديث كيان ويكي بيانات المقابل!</string>
   <string name="menu_set_wallpaper">تعيين كخلفية</string>
@@ -456,4 +456,7 @@
   <string name="error_occurred_in_picking_images">حدث خطأ أثناء التقاط الصور</string>
   <string name="image_chooser_title">اختيار الصور للرفع</string>
   <string name="please_wait">الرجاء الانتظار...</string>
+  <string name="images_featured_explanation">الصور المختارة هي صور من مصورين ورسامين ذوي مهارات عالية اختارها مجتمع ويكيميديا ​​كومنز كبعض الأفضل جودة على الموقع.</string>
+  <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
+  <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
 </resources>
