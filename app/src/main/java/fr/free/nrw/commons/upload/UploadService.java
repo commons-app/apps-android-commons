@@ -36,7 +36,6 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Single;
-import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -196,6 +195,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0));
     }
 
+    @SuppressLint("CheckResult")
     private void uploadContribution(Contribution contribution) {
         InputStream fileInputStream;
         Uri localUri = contribution.getLocalUri();
@@ -223,7 +223,13 @@ public class UploadService extends HandlerService<Contribution> {
 
         String filename = contribution.getFilename();
 
-        try {
+        NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(notificationTag,
+                getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()),
+                getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
+                contribution
+        );
+
+        Single.fromCallable(() -> {
             if (!mwApi.validateLogin()) {
                 // Need to revalidate!
                 if (sessionManager.revalidateAuthToken()) {
@@ -231,31 +237,27 @@ public class UploadService extends HandlerService<Contribution> {
                 } else {
                     Timber.d("Unable to revalidate :(");
                     stopForeground(true);
-                    Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
-                    failureToast.show();
-                    sessionManager.forceLogin(this);
-                    return;
+                    sessionManager.forceLogin(UploadService.this);
+                    throw new RuntimeException(getString(R.string.authentication_failed));
                 }
             }
-        } catch (IOException e) {
-            onUploadError(contribution, e);
-            onUploadFinally(filename);
-            return;
-        }
-
-        NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(notificationTag,
-                getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()),
-                getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
-                contribution
-        );
-
-        String stashFilename = "Temp_" + contribution.hashCode() + filename;
-        mwApi.uploadFile(
+            return "Temp_" + contribution.hashCode() + filename;
+        }).flatMap(stashFilename -> mwApi.uploadFile(
                 stashFilename, fileInputStream, contribution.getDataLength(),
-                localUri, contribution.getContentProviderUri(), notificationUpdater)
+                localUri, contribution.getContentProviderUri(), notificationUpdater))
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .doFinally(() -> onUploadFinally(filename))
+                .doFinally(() -> {
+                    if (filename != null) {
+                        unfinishedUploads.remove(filename);
+                    }
+                    toUpload--;
+                    if (toUpload == 0) {
+                        // Sync modifications right after all uploads are processed
+                        ContentResolver.requestSync(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY, new Bundle());
+                        stopForeground(true);
+                    }
+                })
                 .flatMap(uploadStash -> {
                     notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
 
@@ -299,25 +301,11 @@ public class UploadService extends HandlerService<Contribution> {
                         contribution.setDateUploaded(uploadResult.getDateUploaded());
                         contributionDao.save(contribution);
                     }
-                }, throwable -> onUploadError(contribution, throwable));
-    }
-
-    private void onUploadError(Contribution contribution, Throwable t) {
-        Timber.w(t,"Exception during upload");
-        notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
-        showFailedNotification(contribution);
-    }
-
-    private void onUploadFinally(String filename) {
-        if (filename != null) {
-            unfinishedUploads.remove(filename);
-        }
-        toUpload--;
-        if (toUpload == 0) {
-            // Sync modifications right after all uploads are processed
-            ContentResolver.requestSync(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY, new Bundle());
-            stopForeground(true);
-        }
+                }, throwable -> {
+                    Timber.w(throwable, "Exception during upload");
+                    notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    showFailedNotification(contribution);
+                });
     }
 
     @SuppressLint("StringFormatInvalid")
