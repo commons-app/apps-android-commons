@@ -150,7 +150,7 @@
   <string name="number_of_uploads">Moje ograničenje za nedavna postavljanja</string>
   <string name="maximum_limit">Krajnja granica</string>
   <string name="maximum_limit_alert">Ne mogu prikazati više od 500</string>
-  <string name="set_limit">Postavi ograničenje za nedavna postavljanja</string>
+  <string name="set_limit" fuzzy="true">Postavi ograničenje za nedavna postavljanja</string>
   <string name="login_failed_2fa_not_supported">Potvrda u 2 koraka trenutno nije podržana.</string>
   <string name="logout_verification">Želite li se zaista odjaviti?</string>
   <string name="commons_logo">Logo Commonsa</string>

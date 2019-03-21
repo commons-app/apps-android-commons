@@ -148,7 +148,7 @@
   <string name="invalid_input">Недопустим вход</string>
   <string name="enter_valid">Внесете валиден брой</string>
   <string name="cannot_be_zero">Границата на качвания не може да е 0</string>
-  <string name="set_limit">Задайте ограничение на последните качвания</string>
+  <string name="set_limit" fuzzy="true">Задайте ограничение на последните качвания</string>
   <string name="commons_logo">Лого на Общомедия</string>
   <string name="commons_website">Общомедия</string>
   <string name="commons_facebook">Общомедия на Facebook</string>
@@ -206,6 +206,7 @@
   <string name="search_tab_title_media">ИЗОБРАЖЕНИЯ/ЗАПИСИ</string>
   <string name="search_tab_title_categories">КАТЕГОРИИ</string>
   <string name="no_recent_searches">Няма последни търсения</string>
+  <string name="nominate_delete">Предлагане за изтриване</string>
   <string name="statistics_wikidata_edits">Изображения чрез „Близки места“</string>
   <string name="preference_author_name_toggle">Използване на персонализирано авторско име</string>
   <string name="preference_author_name_toggle_summary">При качването използвайте персонализирано авторско име вместо потребителското си име</string>
@@ -238,8 +239,8 @@
   <string name="no_image">Няма използвани изображения</string>
   <string name="no_image_reverted">Няма върнати изображения</string>
   <string name="no_image_uploaded">Няма качени изображения</string>
-  <string name="no_notification">Нямате непрочетени известия</string>
-  <string name="no_archived_notification">Нямате архивирани известия</string>
+  <string name="no_notification" fuzzy="true">Нямате непрочетени известия</string>
+  <string name="no_archived_notification" fuzzy="true">Нямате архивирани известия</string>
   <string name="share_logs_using">Споделяне на дневници, използвайки</string>
   <string name="menu_option_archived">Преглеждане на архивирани</string>
   <string name="menu_option_unread">Преглеждане на непрочетени</string>

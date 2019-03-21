@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Athena in Wonderland
+* CaiusSPQR
 * Fúlvio
 * Giro720
 * Hamilton Abreu
@@ -171,6 +172,7 @@
   <string name="detail_panel_cats_loading">A carregar…</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>
   <string name="detail_description_empty">Sem descrição</string>
+  <string name="detail_discussion_empty">Nenhuma discussão</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Actualizar</string>
   <string name="storage_permission_title">A pedir permissão de armazenamento</string>
@@ -186,6 +188,7 @@
   <string name="no">Não</string>
   <string name="media_detail_title">Título</string>
   <string name="media_detail_description">Descrição</string>
+  <string name="media_detail_discussion">Discussão</string>
   <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Data de carregamento</string>
   <string name="media_detail_license">Licença</string>
@@ -201,7 +204,7 @@
   <string name="maximum_limit_alert">Não é possível apresentar mais de 500</string>
   <string name="enter_valid">Introduza um número válido</string>
   <string name="cannot_be_zero">O limite de carregamentos não pode ser 0</string>
-  <string name="set_limit">Definir o limite de carregamentos recentes</string>
+  <string name="set_limit">Limite de carregamentos recentes</string>
   <string name="login_failed_2fa_not_supported">Atualmente, a autenticação de dois fatores não é suportada.</string>
   <string name="logout_verification">Deseja realmente sair?</string>
   <string name="commons_logo">Logótipo da wiki Commons</string>
@@ -300,7 +303,7 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
-  <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
+  <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia.\n\nClicar em \'Pesquisar nesta área\' bloqueia a localização do mapa e inicia uma pesquisa de lugares na área circundante.</string>
   <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes lugares</string>
   <string name="showcase_view_plus_fab">Pode carregar uma fotografia para qualquer dos lugares, da sua galeria ou câmara</string>
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
@@ -319,6 +322,8 @@
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
   <string name="search_tab_title_media">MULTIMÉDIA</string>
   <string name="search_tab_title_categories">CATEGORIAS</string>
+  <string name="explore_tab_title_featured">DESTACADAS</string>
+  <string name="explore_tab_title_mobile">CARREGADA VIA TELEMÓVEL</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
@@ -349,8 +354,10 @@
   <string name="add_description">+ Adicionar descrição</string>
   <string name="no_recent_searches">Não há pesquisas recentes</string>
   <string name="delete_recent_searches_dialog">Tem a certeza de que deseja limpar o historial de pesquisas?</string>
+  <string name="delete_search_dialog">Deseja eliminar esta pesquisa?</string>
   <string name="search_history_deleted">O historial de pesquisas foi eliminado</string>
   <string name="nominate_delete">Nomear para eliminação</string>
+  <string name="delete">ELIMINAR</string>
   <string name="Achievements">Realizações</string>
   <string name="statistics">ESTATÍSTICAS</string>
   <string name="statistics_thanks">Agradecimentos recebidos</string>
@@ -408,8 +415,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Apercebi-me de que prejudica a minha privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Mudei de ideias, já não quero possa ser vista pelo público</string>
   <string name="deletion_reason_not_interesting">Desculpe, esta fotografia não tem interesse para uma enciclopédia</string>
-  <string name="uploaded_by_myself" fuzzy="true">Carregada por mim em</string>
-  <string name="no_uploads" fuzzy="true">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no ícone da câmara ou da galeria acima.</string>
+  <string name="uploaded_by_myself">Carregada por mim em %1$s, usada em %2$d artigo(s).</string>
+  <string name="no_uploads">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no botão Adicionar.</string>
   <string name="desc_language_Worldwide">Global</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>
@@ -452,4 +459,7 @@
   <string name="error_occurred_in_picking_images">Ocorreu um erro ao escolher imagens</string>
   <string name="image_chooser_title">Escolher imagens a carregar</string>
   <string name="please_wait">Aguarde, por favor...</string>
+  <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
+  <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
+  <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
 </resources>

@@ -165,6 +165,7 @@
   <string name="detail_panel_cats_loading">Läser in…</string>
   <string name="detail_panel_cats_none">Ingen markerad</string>
   <string name="detail_description_empty">Ingen beskrivning</string>
+  <string name="detail_discussion_empty">Ingen diskussion</string>
   <string name="detail_license_empty">Okänd licens</string>
   <string name="menu_refresh">Uppdatera</string>
   <string name="storage_permission_title">Begär lagringsbehörighet</string>
@@ -180,6 +181,7 @@
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_description">Beskrivning</string>
+  <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Skapare</string>
   <string name="media_detail_uploaded_date">Uppladdningsdatum</string>
   <string name="media_detail_license">Licens</string>
@@ -195,7 +197,7 @@
   <string name="maximum_limit_alert">Kan inte visa fler än 500</string>
   <string name="enter_valid">Ange en giltig siffra</string>
   <string name="cannot_be_zero">Uppladdningsgränsen kan inte vara 0</string>
-  <string name="set_limit">Ändra gräns för senaste uppladdningar</string>
+  <string name="set_limit">Gräns för senaste uppladdningar</string>
   <string name="login_failed_2fa_not_supported">Tvåstegsverifiering stöds för tillfället inte.</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
   <string name="commons_logo">Commons-logotyp</string>
@@ -294,7 +296,7 @@
   <string name="about_translate_cancel">Avbryt</string>
   <string name="retry">Försök igen</string>
   <string name="showcase_view_got_it_button">Uppfattat!</string>
-  <string name="showcase_view_whole_nearby_activity">Detta är platserna nära dig som behöver bilder för att illustrera deras Wikipedia-artiklar</string>
+  <string name="showcase_view_whole_nearby_activity">Detta är platserna nära dig som behöver bilder för att illustrera deras Wikipedia-artiklar.\n\nNär du klickar på \"SÖK I DETTA OMRÅDE\" kommer kartan låsas och en sökning startas i närheten runt detta plats.</string>
   <string name="showcase_view_list_icon">Klicka på den här knappen för att få upp en lista med dessa platser</string>
   <string name="showcase_view_plus_fab">Du kan ladda upp en bild från vilken plats som helst från ditt galleri eller kamera</string>
   <string name="no_images_found">Inga bilder hittades!</string>
@@ -313,6 +315,8 @@
   <string name="error_loading_subcategories">Fel uppstod när underkategorier lästes in.</string>
   <string name="search_tab_title_media">MEDIA</string>
   <string name="search_tab_title_categories">KATEGORIER</string>
+  <string name="explore_tab_title_featured">UTVALD</string>
+  <string name="explore_tab_title_mobile">LADDADES UPP VIA MOBIL</string>
   <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
   <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
@@ -343,8 +347,10 @@
   <string name="add_description">+ Lägg till beskrivning</string>
   <string name="no_recent_searches">Inga senaste sökningar</string>
   <string name="delete_recent_searches_dialog">Är du säker på att du vill rensa din sökhistorik?</string>
+  <string name="delete_search_dialog">Vill du radera denna sökning?</string>
   <string name="search_history_deleted">Sökhistoriken raderades</string>
   <string name="nominate_delete">Nominera för radering</string>
+  <string name="delete">RADERA</string>
   <string name="Achievements">Prestationer</string>
   <string name="statistics">STATISTIK</string>
   <string name="statistics_thanks">Mottagna tack</string>
@@ -402,8 +408,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Jag insåg att den är dålig för mitt privatliv</string>
   <string name="deletion_reason_no_longer_want_public">Jag ändrade mig, jag vill inte längre att den ska vara synlig offentligt</string>
   <string name="deletion_reason_not_interesting">Tyvärr, denna bild är inte intressant för en encyklopedi</string>
-  <string name="uploaded_by_myself" fuzzy="true">Laddades upp av mig den</string>
-  <string name="no_uploads" fuzzy="true">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på kameran eller galleriikonen ovan.</string>
+  <string name="uploaded_by_myself">Laddades upp av mig den %1$s och används i %2$d artiklar.</string>
+  <string name="no_uploads">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på knappen för att lägga till.</string>
   <string name="desc_language_Worldwide">Världsomfattande</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>

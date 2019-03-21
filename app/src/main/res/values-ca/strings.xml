@@ -143,6 +143,7 @@
   <string name="no">No</string>
   <string name="media_detail_title">Títol</string>
   <string name="media_detail_description">Descripció</string>
+  <string name="media_detail_discussion">Discussió</string>
   <string name="media_detail_uploaded_date">Data de càrrega</string>
   <string name="media_detail_license">Llicència</string>
   <string name="media_detail_coordinates">Coordenades</string>
@@ -191,5 +192,10 @@
   <string name="no_images_found">No s’ha trobat cap imatge.</string>
   <string name="search_tab_title_media">MULTIMÈDIA</string>
   <string name="search_tab_title_categories">CATEGORIES</string>
+  <string name="explore_tab_title_featured">DESTACATS</string>
+  <string name="explore_tab_title_mobile">PUJATS MITJANÇANT EL MÒBIL</string>
   <string name="no_recent_searches">No hi ha cap cerca recent</string>
+  <string name="delete_search_dialog">Voleu suprimir aquesta cerca?</string>
+  <string name="delete">SUPRIMEIX</string>
+  <string name="no_notification">No teniu cap notificació sense llegir</string>
 </resources>

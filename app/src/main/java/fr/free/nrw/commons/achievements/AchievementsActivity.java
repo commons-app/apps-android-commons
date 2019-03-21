@@ -5,14 +5,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.FileProvider;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -34,6 +33,7 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -61,8 +61,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private LevelController.LevelInfo levelInfo;
 
-    @BindView(R.id.achievement_badge)
+    @BindView(R.id.achievement_badge_image)
     ImageView imageView;
+    @BindView(R.id.achievement_badge_text)
+    TextView badgeText;
     @BindView(R.id.achievement_level)
     TextView levelNumber;
     @BindView(R.id.toolbar)
@@ -127,11 +129,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
         int width = displayMetrics.widthPixels;
 
         // Used for the setting the size of imageView at runtime
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
-        imageView.setImageResource(R.drawable.badge);
         imageView.requestLayout();
 
         setSupportActionBar(toolbar);
@@ -141,6 +142,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
         setAchievements();
         setWikidataEditCount();
         initDrawer();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
     }
 
     /**
@@ -239,10 +246,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
         if (StringUtils.isNullOrWhiteSpace(userName)) {
             return;
         }
-        okHttpJsonApiClient.getWikidataEdits(userName)
+        compositeDisposable.add(okHttpJsonApiClient.getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)));
+                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)), e -> {
+                    Timber.e("Error:" + e);
+                }));
     }
 
     private void showSnackBarWithRetry() {
@@ -339,20 +348,18 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
-        thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
+        thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
                 (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
-        imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
+        imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         String levelUpInfoString = getString(R.string.level);
         levelUpInfoString += " " + Integer.toString(levelInfo.getLevelNumber());
         levelNumber.setText(levelUpInfoString);
-        final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, levelInfo.getLevelStyle());
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.badge, wrapper.getTheme());
-        Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);
-        BitmapDrawable bitmapImage = BitmapUtils.writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevelNumber()),this);
-        imageView.setImageDrawable(bitmapImage);
+        imageView.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
+                new ContextThemeWrapper(this, levelInfo.getLevelStyle()).getTheme()));
+        badgeText.setText(Integer.toString(levelInfo.getLevelNumber()));
     }
 
     /**
@@ -361,8 +368,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     public static void startYourself(Context context) {
         Intent intent = new Intent(context, AchievementsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
 
@@ -434,6 +440,24 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public void showUsedByWikiInfo(){
         launchAlert(getResources().getString(R.string.images_used_by_wiki)
                 ,getResources().getString(R.string.images_used_explanation));
+    }
+
+    @OnClick(R.id.images_nearby_info)
+    public void showImagesViaNearbyInfo(){
+        launchAlert(getResources().getString(R.string.statistics_wikidata_edits)
+                ,getResources().getString(R.string.images_via_nearby_explanation));
+    }
+
+    @OnClick(R.id.images_featured_info)
+    public void showFeaturedImagesInfo(){
+        launchAlert(getResources().getString(R.string.statistics_featured)
+                ,getResources().getString(R.string.images_featured_explanation));
+    }
+
+    @OnClick(R.id.thanks_received_info)
+    public void showThanksReceivedInfo(){
+        launchAlert(getResources().getString(R.string.statistics_thanks)
+                ,getResources().getString(R.string.thanks_received_explanation));
     }
 
     /**

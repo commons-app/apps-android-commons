@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.utils;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 

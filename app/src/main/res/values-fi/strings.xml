@@ -191,7 +191,7 @@
   <string name="number_of_uploads">Tuorein latausrajani</string>
   <string name="maximum_limit">Maksimimäärä</string>
   <string name="maximum_limit_alert">Ei voida näyttää enempää, kuin 500</string>
-  <string name="set_limit">Aseta tuore latausraja</string>
+  <string name="set_limit" fuzzy="true">Aseta tuore latausraja</string>
   <string name="login_failed_2fa_not_supported">Kaksivaiheinen tunnistus ei ole vielä tuettu.</string>
   <string name="logout_verification">Haluatko varmasti kirjautua ulos?</string>
   <string name="commons_logo">Commons-logo</string>
@@ -283,7 +283,7 @@
   <string name="about_translate_cancel">Peruuta</string>
   <string name="retry">Yritä uudelleen</string>
   <string name="showcase_view_got_it_button">Selvä!</string>
-  <string name="showcase_view_whole_nearby_activity">Tässä lähellä olevia paikkoja, jotka tarvitsevat kuvitusta Wikipedia-artikkeleihinsa</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Tässä lähellä olevia paikkoja, jotka tarvitsevat kuvitusta Wikipedia-artikkeleihinsa</string>
   <string name="showcase_view_list_icon">Tämä nappi näyttää listan kyseisistä paikoista</string>
   <string name="showcase_view_plus_fab">Voit lähettää kuvan mistä tahansa paikasta galleriastasi tai kamerasta</string>
   <string name="no_images_found">Kuvia ei löytynyt!</string>

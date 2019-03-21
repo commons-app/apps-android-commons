@@ -13,9 +13,9 @@ import android.os.Build;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
 
 import java.io.File;
@@ -353,11 +353,7 @@ public class FilePicker implements Constants {
     }
 
     private static boolean isPhoto(Intent data) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            return data == null || (data.getData() == null && data.getClipData() == null);
-        } else {
-            return data == null || (data.getData() == null);
-        }
+        return data == null || (data.getData() == null && data.getClipData() == null);
     }
 
     public static boolean willHandleActivityResult(int requestCode, int resultCode, Intent data) {
@@ -430,10 +426,7 @@ public class FilePicker implements Constants {
 
     private static List<UploadableFile> getFilesFromGalleryPictures(Intent data, Activity activity) throws IOException {
         List<UploadableFile> files = new ArrayList<>();
-        ClipData clipData = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            clipData = data.getClipData();
-        }
+        ClipData clipData = data.getClipData();
         if (clipData == null) {
             Uri uri = data.getData();
             UploadableFile file = PickedFiles.pickedExistingPicture(activity, uri);

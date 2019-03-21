@@ -160,6 +160,7 @@
   <string name="detail_panel_cats_loading">Вчитувам…</string>
   <string name="detail_panel_cats_none">Ништо не е одбрано</string>
   <string name="detail_description_empty">Нема опис</string>
+  <string name="detail_discussion_empty">Нема разговор</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Превчитај</string>
   <string name="storage_permission_title">Се бара дозвола за складирање</string>
@@ -175,6 +176,7 @@
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>
   <string name="media_detail_description">Опис</string>
+  <string name="media_detail_discussion">Разговор</string>
   <string name="media_detail_author">Автор</string>
   <string name="media_detail_uploaded_date">Датум на подигање</string>
   <string name="media_detail_license">Лиценца</string>
@@ -190,7 +192,7 @@
   <string name="maximum_limit_alert">Не можам да прикажам повеќе од 500</string>
   <string name="enter_valid">Внесете важечки број</string>
   <string name="cannot_be_zero">Границата на подигања не може да е 0</string>
-  <string name="set_limit">Задај ограничување на скорешни подигања</string>
+  <string name="set_limit">Ограничување на скорешните подигања</string>
   <string name="login_failed_2fa_not_supported">Двочинителската заверка засега не е поддржана.</string>
   <string name="logout_verification">Дали навистина сакате да се одјавите?</string>
   <string name="commons_logo">Лого на Ризницата</string>
@@ -289,7 +291,7 @@
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Пробај пак</string>
   <string name="showcase_view_got_it_button">Јасно!</string>
-  <string name="showcase_view_whole_nearby_activity">Ова се места во ваша близинана кои им требаат слики за илустрирање на нивните статии на Википедија</string>
+  <string name="showcase_view_whole_nearby_activity">Ова се места во ваша близинана кои им требаат слики за илустрирање на нивните статии на Википедија.\n\nСо стискање на „ПРЕБАРАЈ НА ОВА ПОДРАЧЈЕ“ ќе направите задршка на картата и ќе ви се даде пребарување на нешта во таа околина.</string>
   <string name="showcase_view_list_icon">Ако допрете на копчево ќе добиете список на тие места</string>
   <string name="showcase_view_plus_fab">Можете да подигнете слика за било кое од местата од вашата галерија или камера</string>
   <string name="no_images_found">Не пронајдов ниедна слика!</string>
@@ -308,6 +310,8 @@
   <string name="error_loading_subcategories">Се јави грешка при вчитувањето на поткатегориите.</string>
   <string name="search_tab_title_media">СЛИКИ/СНИМКИ</string>
   <string name="search_tab_title_categories">КАТЕГОРИИ</string>
+  <string name="explore_tab_title_featured">ИЗБРАНИ</string>
+  <string name="explore_tab_title_mobile">ПОДИГНАТО ОД МОБИЛЕН</string>
   <string name="successful_wikidata_edit">Сликата е успешно додадена кон %1$s на Википодатоците!</string>
   <string name="wikidata_edit_failure">Не успеав да ја изменам соодветната единица на Википодатоците!</string>
   <string name="menu_set_wallpaper">Задај како позадина</string>
@@ -338,8 +342,10 @@
   <string name="add_description">+ Додај опис</string>
   <string name="no_recent_searches">Нема скорешни пребарувања</string>
   <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
+  <string name="delete_search_dialog">Дали би сакале да го избришете ова пребарување?</string>
   <string name="search_history_deleted">Историјата на пребарување е избришана</string>
   <string name="nominate_delete">Предложи за бришење</string>
+  <string name="delete">ИЗБРИШИ</string>
   <string name="Achievements">Достигнувања</string>
   <string name="statistics">СТАТИСТИКА</string>
   <string name="statistics_thanks">Примени благодарници</string>
@@ -397,8 +403,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Сфатив дека ќе ми ја наруши приватноста</string>
   <string name="deletion_reason_no_longer_want_public">Се премислив. Не сакам повеќе да биде видлива</string>
   <string name="deletion_reason_not_interesting">За жал, сликава не е соодветна за енциклопедија</string>
-  <string name="uploaded_by_myself" fuzzy="true">Подигната од мене на</string>
-  <string name="no_uploads" fuzzy="true">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи ја иконката за камера или галерија.</string>
+  <string name="uploaded_by_myself">Подигнато од мене %1$s, кое се користи во %2$d статии.</string>
+  <string name="no_uploads">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи го копчето за додавање.</string>
   <string name="desc_language_Worldwide">Цел свет</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>
@@ -441,4 +447,7 @@
   <string name="error_occurred_in_picking_images">Се јави грешка при избирањето на сликите</string>
   <string name="image_chooser_title">Изберете слики за подигање</string>
   <string name="please_wait">Почекајте...</string>
+  <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
+  <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
+  <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
 </resources>

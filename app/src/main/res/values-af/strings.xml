@@ -31,8 +31,6 @@
   <string name="share_title_hint">Naam</string>
   <string name="share_description_hint">Beskrywing</string>
   <string name="login_failed_network">Aanmelding nie moontlik - probleem met netwerk</string>
-  <string name="login_failed_username">Aanmelding nie moontlik - kontroleer gebruikersnaam</string>
-  <string name="login_failed_password">Aanmelding nie moontlik - kontroleer wagwoord</string>
   <string name="login_failed_throttled" fuzzy="true">Te veel mislukte probeerslae. Probeer weer oor \'n paar minute</string>
   <string name="login_failed_blocked">Die gebruiker is op Commons geblokkeer</string>
   <string name="login_failed_generic">Aanmelding het gefaal</string>
