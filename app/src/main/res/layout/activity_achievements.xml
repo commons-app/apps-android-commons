@@ -28,7 +28,6 @@
                 android:orientation="vertical">
 
 
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -59,32 +58,41 @@
                         android:tint="?attr/icon"
                         android:layout_marginVertical="@dimen/activity_margin_vertical" />
 
-                    <ImageView
-                        android:id="@+id/achievement_badge_image"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/badge_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/achievement_info"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginVertical="@dimen/activity_margin_vertical" />
+                        android:layout_centerHorizontal="true">
 
-                    <TextView
-                        android:id="@+id/achievement_badge_text"
-                        android:textColor="@color/achievement_badge_text"
-                        android:textSize="90dp"
-                        android:textAlignment="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:layout_alignTop="@+id/achievement_badge_image"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentRight="true" />
+                        <ImageView
+                            android:id="@+id/achievement_badge_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/badge" />
+
+                        <TextView
+                            android:id="@+id/achievement_badge_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="@color/achievement_badge_text"
+                            android:textSize="75sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/achievement_badge_image"
+                            app:layout_constraintEnd_toEndOf="@+id/achievement_badge_image"
+                            app:layout_constraintStart_toStartOf="@+id/achievement_badge_image"
+                            app:layout_constraintTop_toTopOf="@+id/achievement_badge_image"
+                            app:layout_constraintVertical_bias="0.58" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <RelativeLayout
                         android:id="@+id/layout_image_uploaded"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/achievement_badge_image"
+                        android:layout_below="@+id/badge_layout"
                         android:layout_marginEnd="@dimen/activity_margin_horizontal"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginRight="@dimen/activity_margin_horizontal"
