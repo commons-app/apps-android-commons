@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
@@ -127,7 +129,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         int width = displayMetrics.widthPixels;
 
         // Used for the setting the size of imageView at runtime
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
