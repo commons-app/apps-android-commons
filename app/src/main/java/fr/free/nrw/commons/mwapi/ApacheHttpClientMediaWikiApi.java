@@ -944,7 +944,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             long dataLength,
             Uri fileUri,
             Uri contentProviderUri,
-            ProgressListener progressListener) throws IOException {
+            ProgressListener progressListener) {
         return Single.fromCallable(() -> {
             CustomApiResult result = api.uploadToStash(filename, file, dataLength, getEditToken(), progressListener::onProgress);
 
