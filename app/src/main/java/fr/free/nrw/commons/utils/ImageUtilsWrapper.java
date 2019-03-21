@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.utils;
 
-import android.graphics.BitmapRegionDecoder;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -17,9 +15,8 @@ public class ImageUtilsWrapper {
 
     }
 
-    public Single<Integer> checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
-        int isImageDark = ImageUtils.checkIfImageIsTooDark(bitmapRegionDecoder);
-        return Single.just(isImageDark)
+    public Single<Integer> checkIfImageIsTooDark(String bitmapPath) {
+        return Single.just(ImageUtils.checkIfImageIsTooDark(bitmapPath))
                 .subscribeOn(Schedulers.computation())
                 .observeOn(Schedulers.computation());
     }

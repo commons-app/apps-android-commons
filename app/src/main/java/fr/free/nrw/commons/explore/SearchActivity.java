@@ -98,7 +98,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
-        RxSearchView.queryTextChanges(searchView)
+        compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
                 .takeUntil(RxView.detaches(searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -120,7 +120,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                                 searchHistoryContainer.setVisibility(View.VISIBLE);
                             }
                         }
-                );
+                ));
     }
 
     /**

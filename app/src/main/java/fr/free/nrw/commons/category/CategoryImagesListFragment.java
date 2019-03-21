@@ -31,6 +31,7 @@ import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -51,6 +52,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
     @BindView(R.id.categoryImagesList) GridView gridView;
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private boolean hasMoreImages = true;
     private boolean isLoading = true;
     private String categoryName = null;
@@ -72,6 +74,12 @@ public class CategoryImagesListFragment extends DaggerFragment {
         super.onViewCreated(view, savedInstanceState);
         gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
         initViews();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
     }
 
     /**
@@ -109,11 +117,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
-        Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
+        compositeDisposable.add(Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handleSuccess, this::handleError);
+                .subscribe(this::handleSuccess, this::handleError));
     }
 
     /**
@@ -215,11 +223,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
 
         progressBar.setVisibility(VISIBLE);
-        Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
+        compositeDisposable.add(Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handleSuccess, this::handleError);
+                .subscribe(this::handleSuccess, this::handleError));
     }
 
     /**

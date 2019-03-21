@@ -58,13 +58,12 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
      * Makes API call to check if user is blocked from Commons. If the user is blocked, a snackbar
      * is created to notify the user
      */
-    protected void showBlockStatus()
-    {
-        Observable.fromCallable(() -> mediaWikiApi.isUserBlockedFromCommons())
+    protected void showBlockStatus() {
+        compositeDisposable.add(Observable.fromCallable(() -> mediaWikiApi.isUserBlockedFromCommons())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter(result -> result)
                 .subscribe(result -> ViewUtil.showShortSnackbar(findViewById(android.R.id.content), R.string.block_notification)
-                );
+                ));
     }
 }

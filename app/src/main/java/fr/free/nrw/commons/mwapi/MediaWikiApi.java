@@ -11,6 +11,7 @@ import java.util.List;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public interface MediaWikiApi {
     String getUserAgent();
@@ -49,8 +50,13 @@ public interface MediaWikiApi {
     List<String> searchCategory(String title, int offset);
 
     @NonNull
-    UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, Uri fileUri, Uri contentProviderUri, ProgressListener progressListener) throws IOException;
+    Single<UploadStash> uploadFile(String filename, InputStream file,
+                                   long dataLength, Uri fileUri, Uri contentProviderUri,
+                                   final ProgressListener progressListener) throws IOException;
 
+    @NonNull
+    Single<UploadResult> uploadFileFinalize(String filename, String filekey,
+                                            String pageContents, String editSummary) throws IOException;
     @Nullable
     String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
 
