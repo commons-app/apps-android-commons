@@ -3,8 +3,6 @@ package fr.free.nrw.commons.mwapi;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -34,9 +32,12 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.TimeZone;
 import java.util.concurrent.Callable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -44,6 +45,7 @@ import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.RecentChangesImageUtils;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -61,6 +63,14 @@ import static fr.free.nrw.commons.utils.ContinueUtils.getQueryContinue;
  */
 public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private static final String THUMB_SIZE = "640";
+    // Give up if no random recent image found after 5 tries
+    private static final int MAX_RANDOM_TRIES = 5;
+    // Random image request is for some time in the past 30 days
+    private static final int RANDOM_SECONDS = 60 * 60 * 24 * 30;
+    // Assuming MW always gives me UTC
+    private static final SimpleDateFormat isoFormat =
+            new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
+    private static final String FILE_NAMESPACE = "6";
     private AbstractHttpClient httpClient;
     private CustomMwApi api;
     private CustomMwApi wikidataApi;
@@ -254,6 +264,19 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("titles", pageName)
                 .get()
                 .getString("/api/query/pages/page/@_idx")) != -1;
+    }
+
+    @Override
+    public boolean thank(String editToken, String revision) throws IOException {
+        CustomApiResult res = api.action("thank")
+                .param("rev", revision)
+                .param("token", editToken)
+                .param("source", getUserAgent())
+                .post();
+        String r = res.getString("/api/result/@success");
+        // Does this correctly check the success/failure?
+        // The docs https://www.mediawiki.org/wiki/Extension:Thanks seems unclear about that.
+        return r.equals("success");
     }
 
     @Override
@@ -564,6 +587,24 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
+    @Nullable
+    public Single<Revision> firstRevisionOfFile(String filename) {
+        return Single.fromCallable(() -> {
+            CustomApiResult res = api.action("query")
+                    .param("prop", "revisions")
+                    .param("rvprop", "timestamp|ids|user")
+                    .param("titles", filename)
+                    .param("rvdir", "newer")
+                    .param("rvlimit", "1")
+                    .get();
+            return new Revision(
+                    res.getString("/api/query/pages/page/revisions/rev/@revid"),
+                    res.getString("/api/query/pages/page/revisions/rev/@user"),
+                    filename);
+        });
+    }
+
+    @Override
     @NonNull
     public List<Notification> getNotifications(boolean archived) {
         CustomApiResult notificationNode = null;
@@ -759,6 +800,50 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
+     * This method takes search keyword as input and returns a list of  Media objects filtered using search query
+     * It uses the generator query API to get the images searched using a query, 25 at a time.
+     * @param query keyword to search images on commons
+     * @return
+     */
+//    @Override
+    @NonNull
+    public List<Media> searchImages(String query, int offset) {
+        List<CustomApiResult> imageNodes = null;
+        List<CustomApiResult> authorNodes = null;
+        CustomApiResult customApiResult;
+        try {
+            customApiResult= api.action("query")
+                    .param("format", "xml")
+                    .param("generator", "search")
+                    .param("gsrwhat", "text")
+                    .param("gsrnamespace", "6")
+                    .param("gsrlimit", "25")
+                    .param("gsroffset",offset)
+                    .param("gsrsearch", query)
+                    .param("prop", "imageinfo")
+                    .get();
+            imageNodes= customApiResult.getNodes("/api/query/pages/page/@title");
+            authorNodes= customApiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
+        } catch (IOException e) {
+            Timber.e(e, "Failed to obtain searchImages");
+        }
+
+        if (imageNodes == null) {
+            return new ArrayList<>();
+        }
+
+        List<Media> images = new ArrayList<>();
+
+        for (int i=0; i< imageNodes.size();i++){
+            String imgName = imageNodes.get(i).getDocument().getTextContent();
+            Media media = new Media(imgName);
+            media.setCreator(authorNodes.get(i).getDocument().getTextContent());
+            images.add(media);
+        }
+        return images;
+    }
+
+    /**
      * This method takes search keyword as input and returns a list of categories objects filtered using search query
      * It uses the generator query API to get the categories searched using a query, 25 at a time.
      * @param query keyword to search categories on commons
@@ -947,6 +1032,78 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return userBlocked;
     }
 
+//    /**
+//     * This takes userName as input, which is then used to fetch the feedback/achievements
+//     * statistics using OkHttp and JavaRx. This function return JSONObject
+//     * @param userName MediaWiki user name
+//     * @return
+//     */
+//    @Override
+//    public Single<FeedbackResponse> getAchievements(String userName) {
+//        final String fetchAchievementUrlTemplate =
+//                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
+//        return Single.fromCallable(() -> {
+//            String url = String.format(
+//                    Locale.ENGLISH,
+//                    fetchAchievementUrlTemplate,
+//                    new PageTitle(userName).getText());
+//            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+//            urlBuilder.addQueryParameter("user", userName);
+//            Timber.i("Url %s", urlBuilder.toString());
+//            Request request = new Request.Builder()
+//                    .url(urlBuilder.toString())
+//                    .build();
+//            Response response = okHttpClient.newCall(request).execute();
+//            if (response != null && response.body() != null && response.isSuccessful()) {
+//                String json = response.body().string();
+//                if (json == null) {
+//                    return null;
+//                }
+//                return gson.fromJson(json, FeedbackResponse.class);
+//            }
+//            return null;
+//        });
+//
+//    }
+
+//    /**
+//     * The method returns the picture of the day
+//     *
+//     * @return Media object corresponding to the picture of the day
+//     */
+//    @Override
+//    @Nullable
+//    public Single<Media> getPictureOfTheDay() {
+//        return Single.fromCallable(() -> {
+//            CustomApiResult apiResult = null;
+//            try {
+//                String template = "Template:Potd/" + DateUtils.getCurrentDate();
+//                CustomMwApi.RequestBuilder requestBuilder = api.action("query")
+//                        .param("generator", "images")
+//                        .param("format", "xml")
+//                        .param("titles", template)
+//                        .param("prop", "imageinfo")
+//                        .param("iiprop", "url|extmetadata");
+//
+//                apiResult = requestBuilder.get();
+//            } catch (IOException e) {
+//                Timber.e(e, "Failed to obtain searchCategories");
+//            }
+//
+//            if (apiResult == null) {
+//                return null;
+//            }
+//
+//            CustomApiResult imageNode = apiResult.getNode("/api/query/pages/page");
+//            if (imageNode == null
+//                    || imageNode.getDocument() == null) {
+//                return null;
+//            }
+//
+//            return CategoryImageUtils.getMediaFromPage(imageNode.getDocument());
+//        });
+//    }
+
     private Date parseMWDate(String mwDate) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -966,5 +1123,69 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         } catch (IOException e) {
             Timber.e(e, "Error occurred while logging out");
         }
+    }
+
+//    @Override public Single<CampaignResponseDTO> getCampaigns() {
+//        return Single.fromCallable(() -> {
+//            Request request = new Request.Builder().url(WIKIMEDIA_CAMPAIGNS_BASE_URL).build();
+//            Response response = okHttpClient.newCall(request).execute();
+//            if (response != null && response.body() != null && response.isSuccessful()) {
+//                String json = response.body().string();
+//                if (json == null) {
+//                    return null;
+//                }
+//                return gson.fromJson(json, CampaignResponseDTO.class);
+//            }
+//            return null;
+//        });
+//    }
+
+    private String formatMWDate(Date date) {
+        return isoFormat.format(date);
+    }
+
+    public Media getRecentRandomImage() throws IOException {
+        Media media = null;
+        int tries = 0;
+        Random r = new Random();
+
+        while (media == null && tries < MAX_RANDOM_TRIES) {
+            Date now = new Date();
+            Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
+            CustomApiResult apiResult = null;
+            try {
+                CustomMwApi.RequestBuilder requestBuilder = api.action("query")
+                        .param("list", "recentchanges")
+                        .param("rcstart", formatMWDate(startDate))
+                        .param("rcnamespace", FILE_NAMESPACE)
+                        .param("rcprop", "title|ids")
+                        .param("rctype", "new|log")
+                        .param("rctoponly", "1");
+
+                apiResult = requestBuilder.get();
+            } catch (IOException e) {
+                Timber.e(e, "Failed to obtain recent random");
+            }
+            if (apiResult != null) {
+                CustomApiResult recentChangesNode = apiResult.getNode("/api/query/recentchanges");
+                if (recentChangesNode != null
+                        && recentChangesNode.getDocument() != null
+                        && recentChangesNode.getDocument().getChildNodes() != null
+                        && recentChangesNode.getDocument().getChildNodes().getLength() > 0) {
+                    NodeList childNodes = recentChangesNode.getDocument().getChildNodes();
+                    String imageTitle = RecentChangesImageUtils.findImageInRecentChanges(childNodes);
+                    if (imageTitle != null) {
+                        boolean deletionStatus = pageExists("Commons:Deletion_requests/" + imageTitle);
+                        if (!deletionStatus) {
+                            // strip File: prefix
+                            imageTitle = imageTitle.replace("File:", "");
+                            media = new Media(imageTitle);
+                        }
+                    }
+                }
+            }
+            tries++;
+        }
+        return media;
     }
 }
