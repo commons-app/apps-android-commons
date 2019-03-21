@@ -159,7 +159,7 @@
   <string name="number_of_uploads">Watesan Unggahan Anyarku</string>
   <string name="maximum_limit">Watesan Akèh Dhéwé</string>
   <string name="maximum_limit_alert">Mokal nuduhaké yèn punjul 500</string>
-  <string name="set_limit">Setèl Watesan Unggahan Anyar</string>
+  <string name="set_limit" fuzzy="true">Setèl Watesan Unggahan Anyar</string>
   <string name="login_failed_2fa_not_supported">Otèntifikasi rong faktor saiki durung bisa.</string>
   <string name="logout_verification">Panjenengan yakin arep metu log?</string>
   <string name="commons_logo">Logo Commons</string>

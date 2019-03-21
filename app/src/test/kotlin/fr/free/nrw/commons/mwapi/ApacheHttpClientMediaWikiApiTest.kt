@@ -4,7 +4,7 @@ import android.os.Build
 import com.google.gson.Gson
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.kvstore.BasicKvStore
+import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.utils.ConfigUtils
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
@@ -30,8 +30,7 @@ class ApacheHttpClientMediaWikiApiTest {
     private lateinit var testObject: ApacheHttpClientMediaWikiApi
     private lateinit var server: MockWebServer
     private lateinit var wikidataServer: MockWebServer
-    private lateinit var sharedPreferences: BasicKvStore
-    private lateinit var categoryPreferences: BasicKvStore
+    private lateinit var sharedPreferences: JsonKvStore
     private lateinit var okHttpClient: OkHttpClient
 
     @Before
@@ -39,9 +38,8 @@ class ApacheHttpClientMediaWikiApiTest {
         server = MockWebServer()
         wikidataServer = MockWebServer()
         okHttpClient = OkHttpClient()
-        sharedPreferences = mock(BasicKvStore::class.java)
-        categoryPreferences = mock(BasicKvStore::class.java)
-        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, categoryPreferences, Gson())
+        sharedPreferences = mock(JsonKvStore::class.java)
+        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, Gson())
     }
 
     @After

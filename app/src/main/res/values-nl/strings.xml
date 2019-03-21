@@ -240,7 +240,7 @@
   <string name="never_ask_again">Niet meer vragen</string>
   <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
   <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
-  <string name="no_archived_notification">U hebt geen gearchiveerde melding</string>
+  <string name="no_archived_notification" fuzzy="true">U hebt geen gearchiveerde melding</string>
   <string name="share_logs_using">Logboeken delen via</string>
   <string name="menu_option_archived">Gearchiveerd bekijken</string>
   <string name="menu_option_unread">Ongelezen bekijken</string>

@@ -268,7 +268,7 @@
   <string name="about_translate_cancel">Utzi</string>
   <string name="retry">Saiatu berriro</string>
   <string name="showcase_view_got_it_button">Ulertu dut!</string>
-  <string name="showcase_view_whole_nearby_activity">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko</string>
   <string name="showcase_view_list_icon">Botoi hau sakatzeak leku hauetako zerrenda eskeiniko dizu</string>
   <string name="showcase_view_plus_fab">Edozein lekutako irudi bat igo dezakezu zure kamera edo galeriatik</string>
   <string name="no_images_found">Ez da irudirik aurkitu!</string>

@@ -2,7 +2,7 @@ package fr.free.nrw.commons.di;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,7 +16,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
@@ -66,10 +66,9 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public MediaWikiApi provideMediaWikiApi(Context context,
-                                            @Named("default_preferences") BasicKvStore defaultKvStore,
-                                            @Named("category_prefs") BasicKvStore categoryKvStore,
+                                            @Named("default_preferences") JsonKvStore defaultKvStore,
                                             Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, categoryKvStore, gson);
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, gson);
     }
 
     @Provides
