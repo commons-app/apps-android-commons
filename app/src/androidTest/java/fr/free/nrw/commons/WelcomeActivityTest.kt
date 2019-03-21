@@ -1,6 +1,7 @@
 package fr.free.nrw.commons
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -33,5 +34,40 @@ class WelcomeActivityTest {
             onView(withId(R.id.finishTutorialButton))
                     .check(matches(not(isDisplayed())))
         }
+    }
+
+    @Test
+    fun testBetaSkipButton() {
+        if (ConfigUtils.isBetaFlavour()) {
+            onView(withId(R.id.finishTutorialButton))
+                    .perform(ViewActions.click())
+            assert(activityRule.activity.isDestroyed)
+        }
+    }
+
+    @Test
+    fun testSwipingOnce() {
+        onView(withId(R.id.welcomePager))
+                .perform(ViewActions.swipeLeft())
+        assert(true)
+        onView(withId(R.id.welcomePager))
+                .perform(ViewActions.swipeRight())
+        assert(true)
+    }
+
+    @Test
+    fun testSwipingWholeTutorial() {
+        onView(withId(R.id.welcomePager))
+                .perform(ViewActions.swipeLeft())
+                .perform(ViewActions.swipeLeft())
+                .perform(ViewActions.swipeLeft())
+                .perform(ViewActions.swipeLeft())
+        assert(true)
+        onView(withId(R.id.welcomePager))
+                .perform(ViewActions.swipeRight())
+                .perform(ViewActions.swipeRight())
+                .perform(ViewActions.swipeRight())
+                .perform(ViewActions.swipeRight())
+        assert(true)
     }
 }

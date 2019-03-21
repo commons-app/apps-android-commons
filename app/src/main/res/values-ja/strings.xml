@@ -183,7 +183,7 @@
   <string name="number_of_uploads">最近のアップロードファイルに表示する最大件数</string>
   <string name="maximum_limit">最大限</string>
   <string name="maximum_limit_alert">表示できるのは500件以下です</string>
-  <string name="set_limit" fuzzy="true">最近のアップロードファイルに表示する最大件数</string>
+  <string name="set_limit">最近のアップロード上限件数</string>
   <string name="login_failed_2fa_not_supported">2段階認証は現在サポートされていません。</string>
   <string name="logout_verification">ログアウトしてもよろしいですか？</string>
   <string name="commons_logo">コモンズの商標</string>
@@ -266,7 +266,7 @@
   <string name="about_translate_cancel">キャンセル</string>
   <string name="retry">やり直す</string>
   <string name="showcase_view_got_it_button">了解</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">近くでウィキペディアの記事に使う写真がない場所はこちら</string>
+  <string name="showcase_view_whole_nearby_activity">以下のとおり、近くにウィキペディアの記事に使う写真が足りない場所があります。\n\n\'この近くを検索\' ボタンを押すと、地図をロックしてその地点周辺の検索結果を表示します。</string>
   <string name="showcase_view_list_icon">このボタンをタップするとリストを表示します</string>
   <string name="showcase_view_plus_fab">場所の写真をアップロードするには、ギャラリーから選ぶことも撮影することもできます</string>
   <string name="no_images_found">画像がありません</string>

@@ -121,6 +121,10 @@
             <activity android:name=".nearby.WikidataFeedback"
                 android:theme="@style/Theme.AppCompat.Light"></activity>
 
+        <activity
+            android:name=".review.ReviewActivity"
+            android:label="@string/title_activity_review" />
+
         <service android:name=".upload.UploadService" />
         <service
             android:name=".auth.WikiAccountAuthenticatorService"
