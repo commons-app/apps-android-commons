@@ -74,6 +74,8 @@ dependencies {
     androidTestImplementation 'androidx.annotation:annotation:1.0.2'
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.10.0'
     androidTestImplementation 'org.mockito:mockito-core:2.10.0'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestUtil 'androidx.test:orchestrator:1.1.0'
 
     // Debugging
     implementation 'com.facebook.stetho:stetho:1.5.0'
@@ -109,6 +111,12 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+
+        testOptions {
+            execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        }
+
         vectorDrawables.useSupportLibrary = true
     }
 
