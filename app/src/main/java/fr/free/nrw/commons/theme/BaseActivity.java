@@ -40,4 +40,5 @@ public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
         super.onDestroy();
         compositeDisposable.clear();
     }
+
 }

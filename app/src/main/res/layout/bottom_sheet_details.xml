@@ -194,6 +194,7 @@
                 android:layout_gravity="center_horizontal"
                 android:duplicateParentState="true"
                 app:srcCompat="@drawable/ic_commons_icon_vector"
+                android:tint="?attr/rowButtonColor"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -222,6 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:duplicateParentState="true"
+                android:tint="?attr/rowButtonColor"
                 app:srcCompat="@drawable/ic_rate_review_black_24dp"
                 />
             <TextView
@@ -232,7 +234,7 @@
                 android:duplicateParentState="true"
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/nearby_feedback"
+                android:text="@string/wikidata_feedback"
 
                 />
         </LinearLayout>

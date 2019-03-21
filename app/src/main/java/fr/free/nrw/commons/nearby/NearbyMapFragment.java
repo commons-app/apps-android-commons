@@ -869,7 +869,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
         discussionButton.setOnClickListener(v -> {
             Timber.d(this.place.getWikiDataEntityId());
-            getFeedback(this.place.name,this.place.getWikiDataEntityId());
+            WikidataFeedback.startYourself(getContext(),this.place.name, this.place.getWikiDataEntityId());
         });
 
         icon.setImageResource(this.place.getLabel().getIcon());
@@ -893,31 +893,6 @@ public class NearbyMapFragment extends DaggerFragment {
                 controller.initiateGalleryPick(getActivity(), false);
             }
         });
-    }
-    /**
-    * This functions starts the activity Wikidata feedback activty of the selected place
-     * The API returns feedback given by other users*/
-
-    private void getFeedback(String name, String wikidataQID) {
-        Intent intent=new Intent(this.getActivity(), WikidataFeedback.class);
-        intent.putExtra("place",name);
-        Timber.d("line866"+ name);
-        Observable.fromCallable(() -> nearbyController.getFeedback(name, wikidataQID))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                    if (result!=null){
-                        Timber.d("line871"+result);
-                        intent.putExtra("wikidataEntry",result);
-                        startActivity(intent);
-                    }
-                    else {Toast.makeText(this.getActivity(),"Failed",Toast.LENGTH_SHORT).show();
-                    }
-                }, throwable -> {
-
-                    Timber.e(throwable, "Error occurred while loading notifications");
-                    throwable.printStackTrace();
-                });
     }
 
     public void updateBookmarkButtonImage(Place place) {

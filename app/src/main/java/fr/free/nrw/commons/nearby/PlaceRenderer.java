@@ -253,6 +253,8 @@ public class PlaceRenderer extends Renderer<Place> {
                 .findItem(R.id.nearby_info_menu_wikidata_article);
         MenuItem wikipediaArticle = popupMenu.getMenu()
                 .findItem(R.id.nearby_info_menu_wikipedia_article);
+        MenuItem wikiDataFeedback = popupMenu.getMenu()
+                .findItem(R.id.nearby_info_menu_wikidata_feedback);
 
         commonsArticle.setEnabled(place.hasCommonsLink());
         wikiDataArticle.setEnabled(place.hasWikidataLink());
@@ -268,6 +270,9 @@ public class PlaceRenderer extends Renderer<Place> {
                     return true;
                 case R.id.nearby_info_menu_wikipedia_article:
                     openWebView(place.siteLinks.getWikipediaLink());
+                    return true;
+                case R.id.nearby_info_menu_wikidata_feedback:
+                    WikidataFeedback.startYourself(getContext(),place.name,place.getWikiDataEntityId());
                     return true;
                 default:
                     break;

@@ -9,4 +9,7 @@
     <item android:id="@+id/nearby_info_menu_wikipedia_article"
         android:title="@string/nearby_info_menu_wikipedia_article"
         />
+    <item android:id="@+id/nearby_info_menu_wikidata_feedback"
+        android:title="@string/wikidata_feedback"
+        />
 </menu>
