@@ -2,8 +2,11 @@ package fr.free.nrw.commons.delete;
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import javax.inject.Inject;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.Builder;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -177,6 +181,10 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
                 .setProgress(0,0,false)
                 .setOngoing(false)
                 .setPriority(PRIORITY_HIGH);
+        String urlForDelete = BuildConfig.COMMONS_URL + "/wiki/Commons:Deletion_requests/File:" + media.getFilename();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW , Uri.parse(urlForDelete));
+        PendingIntent pendingIntent = PendingIntent.getActivity(context , 1 , browserIntent , PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationBuilder.setContentIntent(pendingIntent);
         notificationManager.notify(NOTIFICATION_DELETE, notificationBuilder.build());
     }
 

@@ -137,6 +137,7 @@
   <string name="detail_panel_cats_loading">Bar beno…</string>
   <string name="detail_panel_cats_none">Theba nêweçineya</string>
   <string name="detail_description_empty">Akerdenayış çıniyo</string>
+  <string name="detail_discussion_empty">Mışewre çıniyo</string>
   <string name="detail_license_empty">Lisans nizaneyeno</string>
   <string name="menu_refresh">Newe ke</string>
   <string name="ok">TEMAM</string>
@@ -242,7 +243,8 @@
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
   <string name="yes_submit">Eya, bırışe</string>
   <string name="no_go_back">Nê, Peyser Şo</string>
-  <string name="no_archived_notification" fuzzy="true">Xeberê şımayê arşivkerdeyi çıniyê</string>
+  <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
+  <string name="no_archived_notification">Beyanatên şımayê arçivkerdeyi çıniyê</string>
   <string name="menu_option_archived">Arşivkerdeyan bıvêne</string>
   <string name="menu_option_unread">Nêwendeyan bıvêne</string>
   <string name="please_wait">Kerem kerên, bıpawên...</string>
