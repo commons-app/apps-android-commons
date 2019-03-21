@@ -159,6 +159,7 @@
   <string name="detail_panel_cats_loading">Cariament…</string>
   <string name="detail_panel_cats_none">Gnun-a selession</string>
   <string name="detail_description_empty">Gnun-a descrission</string>
+  <string name="detail_discussion_empty">Gnun-a discussion</string>
   <string name="detail_license_empty">Licensa sconossùa</string>
   <string name="menu_refresh">Rinfrësché</string>
   <string name="storage_permission_title">Arcesta dël përmess ëd deposité</string>
@@ -174,6 +175,7 @@
   <string name="no">Nò</string>
   <string name="media_detail_title">Tìtol</string>
   <string name="media_detail_description">Descrission</string>
+  <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Dàita ëd cariament</string>
   <string name="media_detail_license">Licensa</string>
@@ -189,7 +191,7 @@
   <string name="maximum_limit_alert">Impossìbil ësmon-e pi che 500</string>
   <string name="enter_valid">Ch\'a buta un nùmer bon</string>
   <string name="cannot_be_zero">Ël lìmit ëd cariament a peul pa esse 0</string>
-  <string name="set_limit" fuzzy="true">Fissé la limitassion ëd cariament recent</string>
+  <string name="set_limit">Lìmit recent ëd cariament</string>
   <string name="login_failed_2fa_not_supported">L\'autentificassion a doi fator për ël moment a l\'é nen sostnùa.</string>
   <string name="logout_verification">Veul-lo për da bon seurte dal sistema?</string>
   <string name="commons_logo">Marca ëd Comun</string>
@@ -288,7 +290,7 @@
   <string name="about_translate_cancel">Anulé</string>
   <string name="retry">Prové torna</string>
   <string name="showcase_view_got_it_button">Fàit!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">A-i é dij pòst davzin a chiel ch\'a l\'han da manca ëd plance për ilustré ij sò artìcoj su Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity">A-i é dij pòst davzin a chiel ch\'a l\'han da manca ëd plance për ilustré ij sò artìcoj su Wikipedia.\n\nSgnaché su \'SËRCHÉ AN COSTA ZÒNA\' a blòca la carta e a fa parte n\'arserca ëd prossimità davzin a cola posission.</string>
   <string name="showcase_view_list_icon">Sgnacand su \'s boton a comparirà na lista ëd si pòst</string>
   <string name="showcase_view_plus_fab">A peul carié na fòto da \'n pòst qualsëssìa ëd soa galarìa o màchina fòto</string>
   <string name="no_images_found">Gnun-e plance trovà!</string>
@@ -307,6 +309,8 @@
   <string name="error_loading_subcategories">A l\'é ancapitaje n\'eror antrametre ch\'as cariavo le sot-categorìe.</string>
   <string name="search_tab_title_media">MOJEN</string>
   <string name="search_tab_title_categories">CATEGORÌE</string>
+  <string name="explore_tab_title_featured">AN EVIDENSA</string>
+  <string name="explore_tab_title_mobile">CARIÀ DA SACOCIÀBIL</string>
   <string name="successful_wikidata_edit">Plancia giontà për da bin a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd Wikidata corëspondenta!</string>
   <string name="menu_set_wallpaper">Definì \'me tapissarìa</string>
@@ -434,12 +438,15 @@
   <string name="no_image">Gnun-e plance dovrà</string>
   <string name="no_image_reverted">Gnun-e plance anvertìe</string>
   <string name="no_image_uploaded">Gnun-e plance carià</string>
-  <string name="no_notification" fuzzy="true">A l\'ha gnun-e notìfiche nen lesùe</string>
-  <string name="no_archived_notification" fuzzy="true">A l\'ha gnun-e notìfiche archivià</string>
+  <string name="no_notification">A l\'ha gnun-e notìfiche nen lesùe</string>
+  <string name="no_archived_notification">A l\'ha gnun-e notìfiche archivià</string>
   <string name="share_logs_using">Partagé j\'argistr dovrand</string>
   <string name="menu_option_archived">Vëdde l\'archivi</string>
   <string name="menu_option_unread">Vëdde lòn ch\'a l\'é ancor nen ëstàit lesù</string>
   <string name="error_occurred_in_picking_images">A-i é staje n\'eror an selessionand le plance</string>
   <string name="image_chooser_title">Serne le plance da carié</string>
   <string name="please_wait">Ch\'a l\'abia passiensa...</string>
+  <string name="images_featured_explanation">Le fòto an evidensa a son ëd plance fàite da dij fotògraf e ilustrator motobin àbij che la comunità ëd Wikipedia Commons a l\'ha sernù tra cole ëd qualità pi àuta an sël sit.</string>
+  <string name="images_via_nearby_explanation">Le plance carià dai pòst ëd prossimità a son le plance carià con la dëscuverta dij pòst an sla carta.</string>
+  <string name="thanks_received_explanation">Costa fonsionalità a përmet ai contributor ëd mandé na notìfica d\'aringrassiament a j\'utent ch\'a fan dle modìfiche ùtij -  an dovrand na cita liura d\'aringrassiament an sla pàgina dla stòria o cola dle diferense.</string>
 </resources>
