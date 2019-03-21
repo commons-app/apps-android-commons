@@ -60,4 +60,16 @@
   <string name="detail_description_empty">Geen beskrywing</string>
   <string name="detail_license_empty">Onbekende lisensie</string>
   <string name="menu_refresh">Verfris</string>
+
+  <string name="nominating_for_deletion">Nominating for Deletion</string>
+  <string name="success">Success</string>
+  <string name="successfully_nominated">Successfully nominated</string>
+  <string name="for_deletion">for deletion</string>
+  <string name="failed">Failed</string>
+  <string name="could_not_request_deletion">Could not request deletion</string>
+  <string name="point">.</string>
+
+
+
+
 </resources>
