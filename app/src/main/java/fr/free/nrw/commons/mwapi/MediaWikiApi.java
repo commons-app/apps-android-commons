@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.util.List;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -53,7 +52,7 @@ public interface MediaWikiApi {
     @NonNull
     Single<UploadStash> uploadFile(String filename, InputStream file,
                                    long dataLength, Uri fileUri, Uri contentProviderUri,
-                                   final ProgressListener progressListener) throws IOException;
+                                   final ProgressListener progressListener);
 
     @NonNull
     Single<UploadResult> uploadFileFinalize(String filename, String filekey,
