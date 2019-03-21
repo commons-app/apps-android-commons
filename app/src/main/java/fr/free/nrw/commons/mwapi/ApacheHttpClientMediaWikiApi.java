@@ -1032,78 +1032,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return userBlocked;
     }
 
-//    /**
-//     * This takes userName as input, which is then used to fetch the feedback/achievements
-//     * statistics using OkHttp and JavaRx. This function return JSONObject
-//     * @param userName MediaWiki user name
-//     * @return
-//     */
-//    @Override
-//    public Single<FeedbackResponse> getAchievements(String userName) {
-//        final String fetchAchievementUrlTemplate =
-//                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
-//        return Single.fromCallable(() -> {
-//            String url = String.format(
-//                    Locale.ENGLISH,
-//                    fetchAchievementUrlTemplate,
-//                    new PageTitle(userName).getText());
-//            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-//            urlBuilder.addQueryParameter("user", userName);
-//            Timber.i("Url %s", urlBuilder.toString());
-//            Request request = new Request.Builder()
-//                    .url(urlBuilder.toString())
-//                    .build();
-//            Response response = okHttpClient.newCall(request).execute();
-//            if (response != null && response.body() != null && response.isSuccessful()) {
-//                String json = response.body().string();
-//                if (json == null) {
-//                    return null;
-//                }
-//                return gson.fromJson(json, FeedbackResponse.class);
-//            }
-//            return null;
-//        });
-//
-//    }
-
-//    /**
-//     * The method returns the picture of the day
-//     *
-//     * @return Media object corresponding to the picture of the day
-//     */
-//    @Override
-//    @Nullable
-//    public Single<Media> getPictureOfTheDay() {
-//        return Single.fromCallable(() -> {
-//            CustomApiResult apiResult = null;
-//            try {
-//                String template = "Template:Potd/" + DateUtils.getCurrentDate();
-//                CustomMwApi.RequestBuilder requestBuilder = api.action("query")
-//                        .param("generator", "images")
-//                        .param("format", "xml")
-//                        .param("titles", template)
-//                        .param("prop", "imageinfo")
-//                        .param("iiprop", "url|extmetadata");
-//
-//                apiResult = requestBuilder.get();
-//            } catch (IOException e) {
-//                Timber.e(e, "Failed to obtain searchCategories");
-//            }
-//
-//            if (apiResult == null) {
-//                return null;
-//            }
-//
-//            CustomApiResult imageNode = apiResult.getNode("/api/query/pages/page");
-//            if (imageNode == null
-//                    || imageNode.getDocument() == null) {
-//                return null;
-//            }
-//
-//            return CategoryImageUtils.getMediaFromPage(imageNode.getDocument());
-//        });
-//    }
-
     private Date parseMWDate(String mwDate) {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -1124,21 +1052,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             Timber.e(e, "Error occurred while logging out");
         }
     }
-
-//    @Override public Single<CampaignResponseDTO> getCampaigns() {
-//        return Single.fromCallable(() -> {
-//            Request request = new Request.Builder().url(WIKIMEDIA_CAMPAIGNS_BASE_URL).build();
-//            Response response = okHttpClient.newCall(request).execute();
-//            if (response != null && response.body() != null && response.isSuccessful()) {
-//                String json = response.body().string();
-//                if (json == null) {
-//                    return null;
-//                }
-//                return gson.fromJson(json, CampaignResponseDTO.class);
-//            }
-//            return null;
-//        });
-//    }
 
     private String formatMWDate(Date date) {
         return isoFormat.format(date);
