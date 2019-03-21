@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 import com.google.android.material.navigation.NavigationView;
 import com.viewpagerindicator.CirclePageIndicator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -19,7 +18,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.mwapi.MediaResult;
@@ -28,6 +26,7 @@ import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -47,6 +46,8 @@ public class ReviewActivity extends AuthenticatedActivity {
     Button skip_image_button;
 
     @Inject MediaWikiApi mwApi;
+    @Inject
+    ReviewHelper reviewHelper;
 
     public ReviewPagerAdapter reviewPagerAdapter;
 
@@ -54,6 +55,8 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     @BindView(R.id.reviewPagerIndicator)
     public CirclePageIndicator pagerIndicator;
+
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
     @Override
@@ -93,21 +96,11 @@ public class ReviewActivity extends AuthenticatedActivity {
         }
 
         reviewPager.setCurrentItem(0);
-        Observable.fromCallable(() -> {
-            String result = "";
-            try {
-                Media media = mwApi.getRecentRandomImage();
-                if (media != null) {
-                    result = media.getFilename();
-                }
-            } catch (IOException e) {
-                Timber.e("Error fetching recent random image: " + e.toString());
-            }
-            return result;
-        })
+        compositeDisposable.add(reviewHelper.getRandomMedia()
+                .map(media -> media.getFilename())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateImage);
+                .subscribe(this::updateImage));
         return true;
     }
 
@@ -117,7 +110,7 @@ public class ReviewActivity extends AuthenticatedActivity {
             return;
         }
         reviewController.onImageRefreshed(fileName); //file name is updated
-        mwApi.firstRevisionOfFile("File:" + fileName)
+        reviewHelper.getFirstRevisionOfFile("File:" + fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revision -> {

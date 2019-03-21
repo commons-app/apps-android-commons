@@ -1,13 +1,13 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
@@ -108,12 +108,7 @@ public interface MediaWikiApi {
 
     boolean thank(String editToken, String revision) throws IOException;
 
-    Single<Revision> firstRevisionOfFile(String filename);
-
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }
-
-    @Nullable
-    Media getRecentRandomImage() throws IOException;
 }

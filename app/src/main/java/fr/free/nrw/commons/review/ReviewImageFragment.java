@@ -16,7 +16,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.mwapi.Revision;
+import fr.free.nrw.commons.media.model.MwQueryPage;
 
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
@@ -38,10 +38,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     private Button noButton;
 
     public ProgressBar progressBar;
-    private Revision revision;
+    private MwQueryPage.Revision revision;
 
 
-    public void update(int position, String fileName, Revision revision) {
+    public void update(int position, String fileName, MwQueryPage.Revision revision) {
         this.position = position;
         this.fileName = fileName;
         this.revision = revision;
@@ -118,7 +118,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 break;
             case THANKS:
                 question = getString(R.string.review_thanks);
-                explanation = getString(R.string.review_thanks_explanation, ((ReviewActivity) getActivity()).reviewController.firstRevision.username);
+                explanation = getString(R.string.review_thanks_explanation, ((ReviewActivity) getActivity()).reviewController.firstRevision.getUser());
                 yesButtonText = getString(R.string.review_thanks_yes_button_text);
                 noButtonText = getString(R.string.review_thanks_no_button_text);
                 yesButton.setTextColor(Color.parseColor("#228b22"));
@@ -158,7 +158,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
     private void fillImageCaption() {
         if (imageCaption != null && fileName != null && revision != null) {
-            ((TextView) imageCaption).setText(fileName + " is uploaded by: " + revision.username);
+            ((TextView) imageCaption).setText(fileName + " is uploaded by: " + revision.getUser());
         }
     }
 }

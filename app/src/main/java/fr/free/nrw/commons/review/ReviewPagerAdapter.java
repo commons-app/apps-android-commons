@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import fr.free.nrw.commons.mwapi.Revision;
+import fr.free.nrw.commons.media.model.MwQueryPage;
 
 public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
     ReviewImageFragment[] reviewImageFragments;
@@ -26,7 +26,7 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
         return reviewImageFragments.length;
     }
 
-    public void updateFileInformation(String fileName, Revision revision) {
+    public void updateFileInformation(String fileName, MwQueryPage.Revision revision) {
         for (int i = 0; i < getCount(); i++) {
             ReviewImageFragment fragment = reviewImageFragments[i];
             fragment.update(i, fileName, revision);
