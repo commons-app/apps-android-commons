@@ -307,12 +307,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    public String readFeedback(String source) throws IOException {
+    public String readFeedback(String source, String wikidataQID) throws IOException {
         return wikidataApi.action("query")
                 .param("prop", "revisions")
                 .param("rvprop", "content")
                 .param("rvslots", "main")
-                .param("titles", "Talk:Q11311478")
+                .param("titles", "Talk:"+wikidataQID)
                 .get().getString("api");
     }
 

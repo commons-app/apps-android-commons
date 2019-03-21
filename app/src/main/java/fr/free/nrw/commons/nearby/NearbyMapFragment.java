@@ -868,7 +868,8 @@ public class NearbyMapFragment extends DaggerFragment {
         commonsButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getCommonsLink()));
 
         discussionButton.setOnClickListener(v -> {
-            getFeedback(this.place.name);
+            Timber.d(this.place.getWikiDataEntityId());
+            getFeedback(this.place.name,this.place.getWikiDataEntityId());
         });
 
         icon.setImageResource(this.place.getLabel().getIcon());
@@ -897,11 +898,11 @@ public class NearbyMapFragment extends DaggerFragment {
     * This functions starts the activity Wikidata feedback activty of the selected place
      * The API returns feedback given by other users*/
 
-    private void getFeedback(String name) {
+    private void getFeedback(String name, String wikidataQID) {
         Intent intent=new Intent(this.getActivity(), WikidataFeedback.class);
         intent.putExtra("place",name);
         Timber.d("line866"+ name);
-        Observable.fromCallable(() -> nearbyController.getFeedback(name))
+        Observable.fromCallable(() -> nearbyController.getFeedback(name, wikidataQID))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {

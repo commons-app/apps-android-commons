@@ -209,8 +209,8 @@ public class NearbyController {
         return baseMarkerOptions;
     }
 
-    public  String getFeedback(String place) throws IOException {
-        return mediaWikiApi.readFeedback(place);
+    public  String getFeedback(String place, String wikidataQID) throws IOException {
+        return mediaWikiApi.readFeedback(place, wikidataQID);
     }
     /**
      * We pass this variable as a group of placeList and boundaryCoordinates

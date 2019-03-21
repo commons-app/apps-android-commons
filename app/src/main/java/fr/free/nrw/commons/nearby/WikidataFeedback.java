@@ -20,7 +20,8 @@ public class WikidataFeedback extends AppCompatActivity {
         setContentView(R.layout.activity_wiki_feedback);
         textView = findViewById(R.id.descText);
         textHeader = findViewById(R.id.textHeader);
-        textView.setText(getIntent().getStringExtra("wikidataEntry"));
+        String feedback=getIntent().getStringExtra("wikidataEntry");
+        textView.setText(!feedback.equals("")?feedback:getString(R.string.no_feedback));
         String place = getIntent().getStringExtra("place");
         place = getString(R.string.write_feedback_for_wikidata) + "'" + place + "'" + getString(R.string.item_publicly_visible);
         textHeader.setText(place);
