@@ -253,8 +253,6 @@ public class PlaceRenderer extends Renderer<Place> {
                 .findItem(R.id.nearby_info_menu_wikidata_article);
         MenuItem wikipediaArticle = popupMenu.getMenu()
                 .findItem(R.id.nearby_info_menu_wikipedia_article);
-        MenuItem wikiDataFeedback = popupMenu.getMenu()
-                .findItem(R.id.nearby_info_menu_wikidata_feedback);
 
         commonsArticle.setEnabled(place.hasCommonsLink());
         wikiDataArticle.setEnabled(place.hasWikidataLink());
