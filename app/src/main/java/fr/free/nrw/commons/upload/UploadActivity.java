@@ -38,6 +38,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -56,6 +57,7 @@ import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
@@ -103,6 +105,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.bottom_card_next) Button next;
     @BindView(R.id.bottom_card_previous) Button previous;
     @BindView(R.id.bottom_card_add_desc) Button bottomCardAddDescription;
+    @BindView(R.id.prev_title_desc) Button prevTitleDecs;
     @BindView(R.id.categories_subtitle) TextView categoriesSubtitle;
     @BindView(R.id.license_subtitle) TextView licenseSubtitle;
     @BindView(R.id.please_wait_text_view) TextView pleaseWaitTextView;
@@ -133,6 +136,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private ProgressDialog progressDialog;
+    private int flag = 0;
 
 
     @SuppressLint("CheckResult")
@@ -242,6 +246,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         if (currentStep == stepCount) {
             dismissKeyboard();
         }
+        configurePrevButton();
         if(isShowingItem) {
             descriptionsAdapter.setItems(uploadItem.getTitle(), uploadItem.getDescriptions());
             rvDescriptions.setAdapter(descriptionsAdapter);
@@ -505,6 +510,14 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureBottomCard() {
+        BasicKvStore flag = new BasicKvStore(this, "prevTitleDesc");
+        int flagVal = flag.getInt("flag");
+        if(flagVal == 0){
+            prevTitleDecs.setVisibility(View.INVISIBLE);
+        }
+        else {
+            prevTitleDecs.setVisibility(View.VISIBLE);
+        }
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
         bottomCard.setOnClickListener(v -> presenter.toggleBottomCardState());
         bottomCardAddDescription.setOnClickListener(v -> addNewDescription());
@@ -517,6 +530,24 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     private void configureRightCard() {
         rightCardMapButton.setOnClickListener(v -> presenter.openCoordinateMap());
+    }
+
+    public void configurePrevButton(){
+        prevTitleDecs.setOnClickListener((View v) -> {
+            BasicKvStore storePrevTitleDesc = new BasicKvStore(this, "prevTitleDesc");
+            int descCount = storePrevTitleDesc.getInt("descCount");
+            String title = storePrevTitleDesc.getString("title");
+            Title t = new Title();
+            t.setTitleText(title);
+
+            Description description= new Description();
+            List<Description> finalDesc = new LinkedList<>();
+            String desc = storePrevTitleDesc.getString("description0");
+            description.setDescriptionText(desc);
+            finalDesc.add(description);
+            descriptionsAdapter.setItems(t, finalDesc);
+            rvDescriptions.setAdapter(descriptionsAdapter);
+        });
     }
 
     private void configureNavigationButtons() {
@@ -539,6 +570,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         // Finally, the previous / submit buttons on the final currentPage of the wizard
         licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
         submit.setOnClickListener(v -> {
+            saveOnSubmit();
             Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG).show();
             presenter.handleSubmit(categoriesModel);
             finish();
@@ -712,5 +744,16 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         args.putString("possibleImagePath", possibleFilePath);
         newFragment.setArguments(args);
         newFragment.show(getSupportFragmentManager(), "dialog");
+    }
+
+    public void saveOnSubmit(){
+        flag++;
+        BasicKvStore storePrevTitleDesc = new BasicKvStore(this, "prevTitleDesc");
+        storePrevTitleDesc.putString("title", descriptionsAdapter.getTitle().toString());
+        storePrevTitleDesc.putInt("descCount", descriptionsAdapter.getItemCount());
+        for(int i = 0; i < descriptionsAdapter.getItemCount() - 1; i++) {
+            storePrevTitleDesc.putString("description"+Integer.toString(i), descriptionsAdapter.getDescriptions().get(i).getDescriptionText());
+        }
+        storePrevTitleDesc.putInt("flag", flag);
     }
 }

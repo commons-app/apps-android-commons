@@ -132,6 +132,22 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_expand_less_black_24dp" />
 
+            <Button
+                android:id="@+id/prev_title_desc"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:height="10dp"
+                android:background="@color/white"
+                android:text="Copy Title/Desc from previous Upload &amp; Edit "
+                android:textColor="@color/button_blue"
+                app:layout_constraintBottom_toTopOf="@id/rv_descriptions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bottom_card_subtitle"
+                app:layout_constraintVertical_bias="1.0" />
+
             <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
                 android:id="@+id/rv_descriptions"
                 android:layout_width="match_parent"
@@ -141,7 +157,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/bottom_card_previous"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bottom_card_subtitle"
+                app:layout_constraintTop_toBottomOf="@+id/prev_title_desc"
                 tools:visibility="gone" />
 
             <Button
