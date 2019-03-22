@@ -8,15 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.mwapi.Revision;
 
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
@@ -30,28 +25,16 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     private String catString;
 
     private View textViewQuestionContext;
-    private View imageCaption;
     private View textViewQuestion;
-    private SimpleDraweeView simpleDraweeView;
 
     private Button yesButton;
     private Button noButton;
 
-    public ProgressBar progressBar;
-    private Revision revision;
 
-
-    public void update(int position, String fileName, Revision revision) {
+    public void update(int position, String fileName) {
         this.position = position;
         this.fileName = fileName;
-        this.revision = revision;
 
-        fillImageCaption();
-
-        if (simpleDraweeView != null) {
-            simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
-            progressBar.setVisibility(View.GONE);
-        }
     }
 
     public void updateCategories(Iterable<String> categories) {
@@ -78,14 +61,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         position = getArguments().getInt("position");
         View layoutView = inflater.inflate(R.layout.fragment_review_image, container,
                 false);
-        progressBar = layoutView.findViewById(R.id.progressBar);
         textViewQuestion = layoutView.findViewById(R.id.reviewQuestion);
         textViewQuestionContext = layoutView.findViewById(R.id.reviewQuestionContext);
-        imageCaption = layoutView.findViewById(R.id.imageCaption);
         yesButton = layoutView.findViewById(R.id.yesButton);
         noButton = layoutView.findViewById(R.id.noButton);
-
-        fillImageCaption();
 
         String question, explanation, yesButtonText, noButtonText;
         switch (position) {
@@ -127,7 +106,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                     ((ReviewActivity) getActivity()).reviewController.sendThanks();
                 });
                 break;
-            default :
+            default:
                 question = "How did we get here?";
                 explanation = "No idea.";
                 yesButtonText = "yes";
@@ -143,22 +122,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         yesButton.setText(yesButtonText);
         noButton.setText(noButtonText);
 
-        if(position==CATEGORY){
+        if (position == CATEGORY) {
             updateCategories(ReviewController.categories);
         }
 
-        simpleDraweeView = layoutView.findViewById(R.id.imageView);
-
-        if (fileName != null) {
-            simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
-            progressBar.setVisibility(View.GONE);
-        }
         return layoutView;
-    }
-
-    private void fillImageCaption() {
-        if (imageCaption != null && fileName != null && revision != null) {
-            ((TextView) imageCaption).setText(fileName + " is uploaded by: " + revision.username);
-        }
     }
 }
