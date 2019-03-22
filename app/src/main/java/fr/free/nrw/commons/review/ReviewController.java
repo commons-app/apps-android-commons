@@ -19,8 +19,8 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.mwapi.Revision;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -30,7 +30,7 @@ import timber.log.Timber;
 public class ReviewController {
     private String fileName;
     @Nullable
-    public Revision firstRevision; // TODO: maybe we can expand this class to include fileName
+    public MwQueryPage.Revision firstRevision; // TODO: maybe we can expand this class to include fileName
     protected static ArrayList<String> categories;
     public static final int NOTIFICATION_SEND_THANK = 0x102;
     public static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
@@ -197,7 +197,7 @@ public class ReviewController {
                 }
                 publishProgress(1);
                 assert firstRevision != null;
-                mwApi.thank(editToken, firstRevision.revisionId);
+                mwApi.thank(editToken, firstRevision.getRevid());
                 publishProgress(2);
             } catch (Exception e) {
                 Timber.d(e);
