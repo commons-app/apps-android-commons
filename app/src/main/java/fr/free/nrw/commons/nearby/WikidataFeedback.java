@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ import timber.log.Timber;
 public class WikidataFeedback extends BaseActivity {
     TextView textView;
     TextView textHeader;
-    private static String place, wikidataQId;
+    public static String place, wikidataQId;
     ProgressBar progressBar;
     ConstraintLayout activityLayout;
     @Inject
@@ -47,7 +48,8 @@ public class WikidataFeedback extends BaseActivity {
      * This functions starts the activity Wikidata feedback activty of the selected place
      * The API returns feedback given by other users*/
 
-    private void getWikidataFeedback(String name, String wikidataQID) {
+    @SuppressLint("CheckResult")
+    public void getWikidataFeedback(String name, String wikidataQID) {
         Observable.fromCallable(() -> nearbyController.getFeedback(name, wikidataQID))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
