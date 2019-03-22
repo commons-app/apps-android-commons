@@ -140,12 +140,6 @@ public class ReviewActivity extends AuthenticatedActivity {
         reviewPagerAdapter.updateCategories();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        compositeDisposable.clear();
-    }
-
     public void swipeToNext() {
         int nextPos = reviewPager.getCurrentItem() + 1;
         if (nextPos <= 3) {
