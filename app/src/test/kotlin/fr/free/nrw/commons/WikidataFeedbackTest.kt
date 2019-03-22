@@ -5,6 +5,8 @@ import fr.free.nrw.commons.nearby.WikidataFeedback
 import org.junit.Before
 import org.junit.Test
 import org.mockito.*
+/**
+ * Unit Tests for WikidataFeedback.java*/
 
 class WikidataFeedbackTest {
 
@@ -12,6 +14,9 @@ class WikidataFeedbackTest {
 
     @InjectMocks
     var wikidataFeedback: WikidataFeedback? = null
+
+    /**
+     * Check whether the network call for retrieving feebacks returns the correct response*/
 
     @Before
     @Throws(Exception::class)
