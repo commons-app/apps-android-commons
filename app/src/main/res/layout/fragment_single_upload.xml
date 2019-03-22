@@ -80,12 +80,11 @@
             android:background="?attr/buttonBackground"
             android:text="@string/use_previous" />
 
-        <TextView
+        <fr.free.nrw.commons.ui.widget.HtmlTextView
             android:id="@+id/share_license_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/standard_gap"
-            android:clickable="true"
             android:gravity="center"
             android:text="@plurals/share_license_summary"
             android:textColorLink="@color/button_blue" />

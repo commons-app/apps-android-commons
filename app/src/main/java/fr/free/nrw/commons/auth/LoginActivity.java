@@ -37,7 +37,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -213,8 +212,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private void performLogin() {
         loginCurrentlyInProgress = true;
         Timber.d("Login to start!");
-        final String username = canonicializeUsername(usernameEdit.getText().toString());
-        final String rawUsername = Utils.capitalize(usernameEdit.getText().toString().trim());
+        final String username = usernameEdit.getText().toString();
+        final String rawUsername = usernameEdit.getText().toString().trim();
         final String password = passwordEdit.getText().toString();
         String twoFactorCode = twoFactorEdit.getText().toString();
 
@@ -318,15 +317,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             Timber.d("Login failed with reason: %s", result);
             showMessageAndCancelDialog(R.string.login_failed_generic);
         }
-    }
-
-    /**
-     * Because Mediawiki is upercase-first-char-then-case-sensitive :)
-     * @param username String
-     * @return String canonicial username
-     */
-    private String canonicializeUsername(String username) {
-        return new PageTitle(username).getText();
     }
 
     @Override

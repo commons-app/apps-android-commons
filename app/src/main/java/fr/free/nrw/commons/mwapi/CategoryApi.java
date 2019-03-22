@@ -2,6 +2,9 @@ package fr.free.nrw.commons.mwapi;
 
 import com.google.gson.Gson;
 
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -11,9 +14,6 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.mwapi.model.ApiResponse;
-import fr.free.nrw.commons.mwapi.model.Page;
-import fr.free.nrw.commons.mwapi.model.PageCategory;
 import io.reactivex.Single;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -54,12 +54,14 @@ public class CategoryApi {
                 return Collections.emptyList();
             }
 
-            ApiResponse apiResponse = gson.fromJson(body.charStream(), ApiResponse.class);
+            MwQueryResponse apiResponse = gson.fromJson(body.charStream(), MwQueryResponse.class);
             Set<String> categories = new LinkedHashSet<>();
-            if (apiResponse != null && apiResponse.hasPages()) {
-                for (Page page : apiResponse.query.pages) {
-                    for (PageCategory category : page.getCategories()) {
-                        categories.add(category.withoutPrefix());
+            if (apiResponse != null && apiResponse.query() != null && apiResponse.query().pages() != null) {
+                for (MwQueryPage page : apiResponse.query().pages()) {
+                    if (page.categories() != null) {
+                        for (MwQueryPage.Category category : page.categories()) {
+                            categories.add(category.title().replace("Category:", ""));
+                        }
                     }
                 }
             }

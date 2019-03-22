@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.text.Html;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -22,6 +21,9 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.wikipedia.util.DateUtil;
+import org.wikipedia.util.StringUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,7 +52,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
-import fr.free.nrw.commons.utils.DateUtils;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -188,7 +189,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
         ButterKnife.bind(this,view);
-        seeMore.setText(Html.fromHtml(getString(R.string.nominated_see_more)));
+        seeMore.setText(StringUtil.fromHtml(getString(R.string.nominated_see_more)));
 
         if (isCategoryImage){
             authorLayout.setVisibility(VISIBLE);
@@ -434,7 +435,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
         if (nominatedForDeletion.getVisibility()== VISIBLE) {
-            openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
+            openWebBrowser(media.getPageTitle().getMobileUri());
         }
     }
 
@@ -533,7 +534,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
-        return DateUtils.dateInLocaleFormat(date);
+        return DateUtil.getDateStringWithSkeletonPattern(date, "dd MMM yyyy");
     }
 
     /**

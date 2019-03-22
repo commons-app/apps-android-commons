@@ -5,8 +5,13 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import org.wikipedia.util.DateUtil;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -14,18 +19,14 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.media.model.MwQueryPage;
-import fr.free.nrw.commons.mwapi.model.MwQueryResponse;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.utils.DateUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -119,7 +120,7 @@ public class OkHttpJsonApiClient {
             String url = String.format(
                     Locale.ENGLISH,
                     fetchAchievementUrlTemplate,
-                    new PageTitle(userName).getText());
+                    userName);
             HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
             urlBuilder.addQueryParameter("user", userName);
             Timber.i("Url %s", urlBuilder.toString());
@@ -205,7 +206,7 @@ public class OkHttpJsonApiClient {
      */
     @Nullable
     public Single<Media> getPictureOfTheDay() {
-        String template = "Template:Potd/" + DateUtils.getCurrentDate();
+        String template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort().format(new Date());
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(commonsBaseUrl)
                 .newBuilder()
@@ -263,14 +264,13 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             List<Media> mediaList = new ArrayList<>();
-            if (response != null && response.body() != null && response.isSuccessful()) {
+            if (response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
-                if (json == null) {
+                MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
+                if (mwQueryResponse.query() == null || mwQueryResponse.query().pages() == null) {
                     return mediaList;
                 }
-                MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
-                List<MwQueryPage> pages = mwQueryResponse.query().pages();
-                for (MwQueryPage page : pages) {
+                for (MwQueryPage page : mwQueryResponse.query().pages()) {
                     mediaList.add(Media.from(page));
                 }
             }

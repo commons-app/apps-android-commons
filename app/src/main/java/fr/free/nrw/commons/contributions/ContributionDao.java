@@ -9,8 +9,10 @@ import android.net.Uri;
 import android.os.RemoteException;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
+
+import org.apache.commons.lang3.StringUtils;
+
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.StringUtils;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -144,7 +146,7 @@ public class ContributionDao {
             );
 
             String wikidataEntityId = cursor.getString(cursor.getColumnIndex(COLUMN_WIKI_DATA_ENTITY_ID));
-            if (!StringUtils.isNullOrWhiteSpace(wikidataEntityId)) {
+            if (!StringUtils.isBlank(wikidataEntityId)) {
                 contribution.setWikiDataEntityId(wikidataEntityId);
             }
 

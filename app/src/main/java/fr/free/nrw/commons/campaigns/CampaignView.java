@@ -9,8 +9,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import org.wikipedia.util.DateUtil;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -95,13 +96,11 @@ public class CampaignView extends SwipableCardView {
             if (campaign != null) {
                 tvTitle.setText(campaign.getTitle());
                 tvDescription.setText(campaign.getDescription());
-                SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMM");
                 try {
-                    Date startDate = inputDateFormat.parse(campaign.getStartDate());
-                    Date endDate = inputDateFormat.parse(campaign.getEndDate());
-                    tvDates.setText(String.format("%1s - %2s", outputDateFormat.format(startDate),
-                        outputDateFormat.format(endDate)));
+                    Date startDate = DateUtil.getIso8601DateFormatShort().parse(campaign.getStartDate());
+                    Date endDate = DateUtil.getIso8601DateFormatShort().parse(campaign.getEndDate());
+                    tvDates.setText(String.format("%1s - %2s", DateUtil.getExtraShortDateString(startDate),
+                            DateUtil.getExtraShortDateString(endDate)));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

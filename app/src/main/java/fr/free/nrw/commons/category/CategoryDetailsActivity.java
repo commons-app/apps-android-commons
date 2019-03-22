@@ -3,6 +3,7 @@ package fr.free.nrw.commons.category;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.net.Uri;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
@@ -22,8 +23,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -222,7 +223,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
             case R.id.menu_browser_current_category:
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
-                viewIntent.setData(new PageTitle(categoryName).getCanonicalUri());
+                viewIntent.setData(Uri.parse(Utils.getPageTitle(categoryName).getCanonicalUri()));
                 //check if web browser available
                 if (viewIntent.resolveActivity(this.getPackageManager()) != null) {
                     startActivity(viewIntent);

@@ -14,7 +14,6 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface MediaWikiApi {
-    String getUserAgent();
 
     String getAuthCookie();
 
@@ -37,8 +36,6 @@ public interface MediaWikiApi {
     boolean pageExists(String pageName) throws IOException;
 
     String findThumbnailByFilename(String filename) throws IOException;
-
-    boolean logEvents(LogBuilder[] logBuilders);
 
     List<Media> getCategoryImages(String categoryName);
 

@@ -20,6 +20,8 @@ import com.squareup.leakcanary.RefWatcher;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
+import org.wikipedia.AppAdapter;
+import org.wikipedia.language.AppLanguageLookUpTable;
 
 import java.io.File;
 
@@ -35,7 +37,6 @@ import fr.free.nrw.commons.concurrency.ThreadPoolService;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
@@ -81,6 +82,15 @@ public class CommonsApplication extends Application {
 
     private RefWatcher refWatcher;
 
+    private static CommonsApplication INSTANCE;
+    public static CommonsApplication getInstance() {
+        return INSTANCE;
+    }
+
+    private AppLanguageLookUpTable languageLookUpTable;
+    public AppLanguageLookUpTable getLanguageLookUpTable() {
+        return languageLookUpTable;
+    }
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -88,12 +98,15 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        INSTANCE = this;
         ACRA.init(this);
 
         ApplicationlessInjection
                 .getInstance(this)
                 .getCommonsApplicationComponent()
                 .inject(this);
+
+        AppAdapter.set(new CommonsAppAdapter(sessionManager, defaultPrefs));
 
         initTimber();
 
@@ -114,6 +127,7 @@ public class CommonsApplication extends Application {
 
         createNotificationChannel(this);
 
+        languageLookUpTable = new AppLanguageLookUpTable(this);
 
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
@@ -164,6 +178,10 @@ public class CommonsApplication extends Application {
                 manager.createNotificationChannel(channel);
             }
         }
+    }
+
+    public String getUserAgent() {
+        return "Commons/" + ConfigUtils.getVersionNameWithSha(this) + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
     }
 
     /**

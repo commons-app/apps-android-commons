@@ -4,6 +4,7 @@ import android.text.Html;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -170,13 +171,13 @@ public class MediaDataExtractor {
     }
 
     private Node findTemplate(Element parentNode, String title_) throws IOException {
-        String title = new PageTitle(title_).getDisplayText();
+        String title = Utils.getPageTitle(title_).getDisplayText();
         NodeList nodes = parentNode.getChildNodes();
         for (int i = 0, length = nodes.getLength(); i < length; i++) {
             Node node = nodes.item(i);
             if (node.getNodeName().equals("template")) {
                 String foundTitle = getTemplateTitle(node);
-                String displayText = new PageTitle(foundTitle).getDisplayText();
+                String displayText = Utils.getPageTitle(foundTitle).getDisplayText();
                 //replaced equals with contains because multiple sources had multiple formats
                 //say from two sources I had {{Location|12.958117388888889|77.6440805}} & {{Location dec|47.99081|7.845416|heading:255.9}},
                 //So exact string match would show null results for uploads via web
@@ -208,7 +209,7 @@ public class MediaDataExtractor {
         return findTemplateParameter(templateNode, new TemplateChildNodeComparator() {
             @Override
             public boolean match(Node node) {
-                return (Utils.capitalize(node.getTextContent().trim()).equals(Utils.capitalize(theName)));
+                return (StringUtils.capitalize(node.getTextContent().trim()).equals(StringUtils.capitalize(theName)));
             }
         });
     }

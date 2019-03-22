@@ -3,7 +3,8 @@ package fr.free.nrw.commons.delete;
 import android.accounts.Account;
 import android.content.Context;
 
-import java.text.SimpleDateFormat;
+import org.wikipedia.util.DateUtil;
+
 import java.util.Date;
 import java.util.Locale;
 
@@ -40,8 +41,7 @@ public class ReasonBuilder {
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        return formatter.format(date);
+        return DateUtil.getDateStringWithSkeletonPattern(date,"dd MMM yyyy");
     }
 
     private Single<String> fetchArticleNumber(Media media, String reason) {

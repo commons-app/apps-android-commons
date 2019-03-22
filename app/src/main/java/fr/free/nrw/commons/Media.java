@@ -3,21 +3,24 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.gallery.ImageInfo;
+import org.wikipedia.page.PageTitle;
+import org.wikipedia.util.DateUtil;
+import org.wikipedia.util.StringUtil;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.media.model.ImageInfo;
-import fr.free.nrw.commons.media.model.MwQueryPage;
-import fr.free.nrw.commons.utils.DateUtils;
-import fr.free.nrw.commons.utils.StringUtils;
 
 public class Media implements Parcelable {
 
@@ -33,7 +36,6 @@ public class Media implements Parcelable {
         }
     };
 
-    private static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
     // Primary metadata fields
     protected Uri localUri;
     protected String imageUrl;
@@ -83,7 +85,7 @@ public class Media implements Parcelable {
      * @param creator Media creator
      */
     public Media(Uri localUri, String imageUrl, String filename, String description,
-                 long dataLength, Date dateCreated, @Nullable Date dateUploaded, String creator) {
+                 long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this();
         this.localUri = localUri;
         this.imageUrl = imageUrl;
@@ -137,26 +139,16 @@ public class Media implements Parcelable {
      * Gets media display title
      * @return Media title
      */
-    public String getDisplayTitle() {
-        if (filename == null) {
-            return "";
-        }
-        // FIXME: Gross hack because my regex skills suck maybe or I am too lazy who knows
-        String title = getFilePageTitle().getDisplayText().replaceFirst("^File:", "");
-        Matcher matcher = displayTitlePattern.matcher(title);
-        if (matcher.matches()) {
-            return matcher.group(1);
-        } else {
-            return title;
-        }
+    @NonNull public String getDisplayTitle() {
+        return filename != null ? getPageTitle().getDisplayTextWithoutNamespace().replaceFirst("[.][^.]+$", "") : "";
     }
 
     /**
      * Gets file page title
      * @return New media page title
      */
-    public PageTitle getFilePageTitle() {
-        return new PageTitle("File:" + getFilename().replaceFirst("^File:", ""));
+    @NonNull public PageTitle getPageTitle() {
+        return Utils.getPageTitle(getFilename());
     }
 
     /**
@@ -402,6 +394,14 @@ public class Media implements Parcelable {
         }
     }
 
+    @Nullable private static Date safeParseDate(String dateStr) {
+        try {
+            return DateUtil.getIso8601DateFormatShort().parse(dateStr);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
     /**
      * Method of Parcelable interface
      * @return zero
@@ -460,12 +460,12 @@ public class Media implements Parcelable {
                 page.title(),
                 imageInfo.getMetadata().imageDescription().value(),
                 0,
-                DateUtils.getDateFromString(imageInfo.getMetadata().getDateTimeOriginal().value()),
-                DateUtils.getDateFromString(imageInfo.getMetadata().getDateTime().value()),
-                StringUtils.getParsedStringFromHtml(imageInfo.getMetadata().getArtist().value())
+                safeParseDate(imageInfo.getMetadata().dateTimeOriginal().value()),
+                safeParseDate(imageInfo.getMetadata().dateTime().value()),
+                StringUtil.fromHtml(imageInfo.getMetadata().artist().value()).toString()
         );
 
-        media.setLicense(imageInfo.getMetadata().getLicenseShortName().value());
+        media.setLicense(imageInfo.getMetadata().licenseShortName().value());
 
         return media;
     }
