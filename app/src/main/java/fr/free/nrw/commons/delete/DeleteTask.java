@@ -163,13 +163,15 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
     protected void onPostExecute(Boolean result) {
 
         //link to string resources
+
+
         String title_resource = context.getResources().getString(R.string.nominating_for_deletion);
         String success_resource = context.getResources().getString(R.string.success);
         String successfully_nominated_resource = context.getResources().getString(R.string.successfully_nominated);
         String for_deletion_resource = context.getResources().getString(R.string.for_deletion);
         String failed_resource = context.getResources().getString(R.string.failed);
         String could_not_request_deletion_resource = context.getResources().getString(R.string.could_not_request_deletion);
-        String point_resource = context.getResources().getString(R.string.point);
+
 
         String message;
         String title = title_resource;
@@ -177,11 +179,11 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
         if (result){
 
             title += ":"+success_resource;
-            message = successfully_nominated_resource + media.getDisplayTitle() + for_deletion_resource+point_resource;
+            message = successfully_nominated_resource + media.getDisplayTitle() + for_deletion_resource;
         }
         else {
             title += ":"+failed_resource;
-            message = could_not_request_deletion_resource+point_resource;
+            message = could_not_request_deletion_resource;
         }
 
         notificationBuilder.setDefaults(DEFAULT_ALL)

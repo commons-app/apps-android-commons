@@ -530,10 +530,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="nominating_for_deletion">Nominating for Deletion</string>
   <string name="success">Success</string>
   <string name="successfully_nominated">Successfully nominated</string>
-  <string name="for_deletion">for deletion</string>
+  <string name="for_deletion">for deletion.</string>
   <string name="failed">Failed</string>
-  <string name="could_not_request_deletion">Could not request deletion</string>
-  <string name="point">.</string>
+  <string name="could_not_request_deletion">Could not request deletion.</string>
+
 
   <string name="images_featured_explanation">Featured pictures are images from highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
   <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
