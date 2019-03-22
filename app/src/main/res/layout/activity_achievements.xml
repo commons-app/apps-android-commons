@@ -9,11 +9,7 @@
         android:id="@+id/toolbarLayout"
         android:layout_width="wrap_content"
         android:layout_height="?attr/actionBarSize">
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <include layout="@layout/toolbar"/>
     </LinearLayout>
 
     <LinearLayout
@@ -30,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
 
 
                 <RelativeLayout
@@ -63,19 +58,41 @@
                         android:tint="?attr/icon"
                         android:layout_marginVertical="@dimen/activity_margin_vertical" />
 
-                    <ImageView
-                        android:id="@+id/achievement_badge"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/badge_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/achievement_level"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginVertical="@dimen/activity_margin_vertical" />
+                        android:layout_below="@id/achievement_info"
+                        android:layout_centerHorizontal="true">
+
+                        <ImageView
+                            android:id="@+id/achievement_badge_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/badge" />
+
+                        <TextView
+                            android:id="@+id/achievement_badge_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="@color/achievement_badge_text"
+                            android:textSize="75sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/achievement_badge_image"
+                            app:layout_constraintEnd_toEndOf="@+id/achievement_badge_image"
+                            app:layout_constraintStart_toStartOf="@+id/achievement_badge_image"
+                            app:layout_constraintTop_toTopOf="@+id/achievement_badge_image"
+                            app:layout_constraintVertical_bias="0.58" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <RelativeLayout
                         android:id="@+id/layout_image_uploaded"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/achievement_badge"
+                        android:layout_below="@+id/badge_layout"
                         android:layout_marginEnd="@dimen/activity_margin_horizontal"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginRight="@dimen/activity_margin_horizontal"
@@ -301,6 +318,17 @@
                                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                                 android:text="@string/statistics_wikidata_edits"  />
 
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:id="@+id/images_nearby_info"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                                android:layout_gravity="top"
+                                app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                                android:tint="?attr/icon" />
+
                         </LinearLayout>
 
 
@@ -358,6 +386,17 @@
                                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                                 android:text="@string/statistics_featured"  />
 
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:id="@+id/images_featured_info"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                                android:layout_gravity="top"
+                                app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                                android:tint="?attr/icon" />
+
                         </LinearLayout>
 
                         <TextView
@@ -414,6 +453,17 @@
                                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                                 android:text="@string/statistics_thanks"  />
 
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:id="@+id/thanks_received_info"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                                android:layout_gravity="top"
+                                app:srcCompat="@drawable/ic_info_outline_blue_24dp"
+                                android:tint="?attr/icon" />
+
                         </LinearLayout>
 
                         <TextView
@@ -438,12 +488,6 @@
         </ScrollView>
     </LinearLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/drawer" />
+    <include layout="@layout/drawer_view" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

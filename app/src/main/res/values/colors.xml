@@ -5,6 +5,7 @@
     <color name="main_background_light">#fafafa</color>
     <color name="achievement_background_dark">#494949</color>
     <color name="achievement_background_light">#D6DCE0</color>
+    <color name="achievement_badge_text">#ffffff</color>
     <color name="drawerHeader_background_dark">#494949</color>
     <color name="drawerHeader_background_light">#aaaaaa</color>
     <color name="tutorial_background_dark">#303030</color>
@@ -66,4 +67,6 @@
     <color name="black">#000000</color>
 
     <color name="swipe_red" tools:ignore="MissingDefaultResource">#FF0000</color>
+    <color name="yes_button_color">#B22222</color>
+    <color name="no_button_color">#006400</color>
 </resources>

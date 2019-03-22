@@ -49,7 +49,7 @@ public interface MediaWikiApi {
     @NonNull
     Single<UploadStash> uploadFile(String filename, InputStream file,
                                    long dataLength, Uri fileUri, Uri contentProviderUri,
-                                   final ProgressListener progressListener) throws IOException;
+                                   final ProgressListener progressListener);
 
     @NonNull
     Single<UploadResult> uploadFileFinalize(String filename, String filekey,
@@ -101,7 +101,16 @@ public interface MediaWikiApi {
 
     void logout();
 
+//    Single<CampaignResponseDTO> getCampaigns();
+
+    boolean thank(String editToken, String revision) throws IOException;
+
+    Single<Revision> firstRevisionOfFile(String filename);
+
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }
+
+    @Nullable
+    Media getRecentRandomImage() throws IOException;
 }

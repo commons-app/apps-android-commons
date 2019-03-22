@@ -51,6 +51,7 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -82,6 +83,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private Boolean loginCurrentlyInProgress = false;
     private Boolean errorMessageShown = false;
@@ -194,6 +196,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     @Override
     protected void onDestroy() {
+        compositeDisposable.clear();
         try {
             // To prevent leaked window when finish() is called, see http://stackoverflow.com/questions/32065854/activity-has-leaked-window-at-alertdialog-show-method
             if (progressDialog != null && progressDialog.isShowing()) {
@@ -218,10 +221,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         String twoFactorCode = twoFactorEdit.getText().toString();
 
         showLoggingProgressBar();
-        Observable.fromCallable(() -> login(username, password, twoFactorCode))
+        compositeDisposable.add(Observable.fromCallable(() -> login(username, password, twoFactorCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> handleLogin(username, rawUsername, password, result));
+                .subscribe(result -> handleLogin(username, rawUsername, password, result)));
     }
 
     private String login(String username, String password, String twoFactorCode) {

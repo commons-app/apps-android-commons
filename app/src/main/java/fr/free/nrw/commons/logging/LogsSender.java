@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 
-import org.acra.collector.CrashReportData;
+import org.acra.data.CrashReportData;
 import org.acra.sender.ReportSender;
 import org.apache.commons.codec.Charsets;
 
