@@ -66,7 +66,6 @@ public class ExtMetadata {
     public class Values {
         @SuppressWarnings("unused,NullableProblems") @Nullable private String value;
         @SuppressWarnings("unused,NullableProblems") @Nullable private String source;
-        @SuppressWarnings("unused,NullableProblems") @Nullable private String hidden;
 
         @NonNull public String value() {
             return StringUtils.defaultString(value);
