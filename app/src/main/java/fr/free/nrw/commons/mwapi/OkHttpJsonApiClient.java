@@ -242,6 +242,13 @@ public class OkHttpJsonApiClient {
                     return mediaList;
                 }
                 MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
+
+                if (null == mwQueryResponse
+                    || null == mwQueryResponse.query()
+                    || null == mwQueryResponse.query().pages()) {
+                    return mediaList;
+                }
+
                 List<MwQueryPage> pages = mwQueryResponse.query().pages();
                 for (MwQueryPage page : pages) {
                     mediaList.add(Media.from(page));
