@@ -94,9 +94,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 explanation = getString(R.string.review_copyright_explanation);
                 yesButtonText = getString(R.string.review_copyright_yes_button_text);
                 noButtonText = getString(R.string.review_copyright_no_button_text);
-                yesButton.setOnClickListener(view -> {
-                    ((ReviewActivity) getActivity()).reviewController.reportPossibleCopyRightViolation();
-                });
+                yesButton.setOnClickListener(view -> getReviewActivity().reviewController.reportPossibleCopyRightViolation(requireActivity()));
                 break;
             case CATEGORY:
                 question = getString(R.string.review_category);
@@ -104,7 +102,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 yesButtonText = getString(R.string.review_category_yes_button_text);
                 noButtonText = getString(R.string.review_category_no_button_text);
                 yesButton.setOnClickListener(view -> {
-                    ((ReviewActivity) getActivity()).reviewController.reportWrongCategory();
+                    getReviewActivity().reviewController.reportWrongCategory(requireActivity());
+                    getReviewActivity().swipeToNext();
                 });
                 break;
             case SPAM:
@@ -112,19 +111,18 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 explanation = getString(R.string.review_spam_explanation);
                 yesButtonText = getString(R.string.review_spam_yes_button_text);
                 noButtonText = getString(R.string.review_spam_no_button_text);
-                yesButton.setOnClickListener(view -> {
-                    ((ReviewActivity) getActivity()).reviewController.reportSpam();
-                });
+                yesButton.setOnClickListener(view -> getReviewActivity().reviewController.reportSpam(requireActivity()));
                 break;
             case THANKS:
                 question = getString(R.string.review_thanks);
-                explanation = getString(R.string.review_thanks_explanation, ((ReviewActivity) getActivity()).reviewController.firstRevision.getUser());
+                explanation = getString(R.string.review_thanks_explanation, getReviewActivity().reviewController.firstRevision.getUser());
                 yesButtonText = getString(R.string.review_thanks_yes_button_text);
                 noButtonText = getString(R.string.review_thanks_no_button_text);
                 yesButton.setTextColor(Color.parseColor("#228b22"));
                 noButton.setTextColor(Color.parseColor("#116aaa"));
                 yesButton.setOnClickListener(view -> {
-                    ((ReviewActivity) getActivity()).reviewController.sendThanks();
+                    getReviewActivity().reviewController.sendThanks(getReviewActivity());
+                    getReviewActivity().swipeToNext();
                 });
                 break;
             default :
@@ -134,9 +132,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 noButtonText = "no";
         }
 
-        noButton.setOnClickListener(view -> {
-            ((ReviewActivity) getActivity()).reviewController.swipeToNext();
-        });
+        noButton.setOnClickListener(view -> getReviewActivity().swipeToNext());
 
         ((TextView) textViewQuestion).setText(question);
         ((TextView) textViewQuestionContext).setText(explanation);
@@ -154,6 +150,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(View.GONE);
         }
         return layoutView;
+    }
+
+    private ReviewActivity getReviewActivity() {
+        return (ReviewActivity) requireActivity();
     }
 
     private void fillImageCaption() {

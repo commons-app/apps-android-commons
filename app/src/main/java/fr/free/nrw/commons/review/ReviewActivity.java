@@ -75,7 +75,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         ButterKnife.bind(this);
         initDrawer();
 
-        reviewController = new ReviewController(this);
+        reviewController = new ReviewController();
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         reviewPager.setAdapter(reviewPagerAdapter);
@@ -145,6 +145,15 @@ public class ReviewActivity extends AuthenticatedActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    public void swipeToNext() {
+        int nextPos = reviewPager.getCurrentItem() + 1;
+        if (nextPos <= 3) {
+            reviewPager.setCurrentItem(nextPos);
+        } else {
+            runRandomizer();
+        }
     }
 
     /**
