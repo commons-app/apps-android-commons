@@ -39,18 +39,11 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import com.theartofdev.edmodo.cropper.CropImage;
 import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.ImageWriteException;
-import org.apache.commons.imaging.Imaging;
-import org.apache.commons.imaging.common.IImageMetadata;
-import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
-import org.apache.commons.imaging.formats.jpeg.exif.ExifRewriter;
-import org.apache.commons.imaging.formats.tiff.TiffImageMetadata;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -150,7 +143,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private static int currentItem=0;
     private String source;
     private ArrayList<UploadableFile> files;
-    private  EXIFReader EXIFReader ;
 
 
     @SuppressLint("CheckResult")
