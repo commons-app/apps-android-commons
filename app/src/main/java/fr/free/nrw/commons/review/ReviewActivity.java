@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.mwapi.MediaResult;
@@ -75,7 +76,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         ButterKnife.bind(this);
         initDrawer();
 
-        reviewController = new ReviewController(this);
+        reviewController = new ReviewController();
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         reviewPager.setAdapter(reviewPagerAdapter);
@@ -97,7 +98,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
         reviewPager.setCurrentItem(0);
         compositeDisposable.add(reviewHelper.getRandomMedia()
-                .map(media -> media.getFilename())
+                .map(Media::getFilename)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::updateImage));
@@ -110,21 +111,21 @@ public class ReviewActivity extends AuthenticatedActivity {
             return;
         }
         reviewController.onImageRefreshed(fileName); //file name is updated
-        reviewHelper.getFirstRevisionOfFile("File:" + fileName)
+        compositeDisposable.add(reviewHelper.getFirstRevisionOfFile("File:" + fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revision -> {
                     reviewController.firstRevision = revision;
                     reviewPagerAdapter.updateFileInformation(fileName, revision);
-                });
+                }));
         reviewPager.setCurrentItem(0);
-        Observable.fromCallable(() -> {
+        compositeDisposable.add(Observable.fromCallable(() -> {
             MediaResult media = mwApi.fetchMediaByFilename("File:" + fileName);
             return MediaDataExtractorUtil.extractCategories(media.getWikiSource());
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateCategories, this::categoryFetchError);
+                .subscribe(this::updateCategories, this::categoryFetchError));
 
 
     }
@@ -139,12 +140,13 @@ public class ReviewActivity extends AuthenticatedActivity {
         reviewPagerAdapter.updateCategories();
     }
 
-    /**
-     * References ReviewPagerAdapter to null before the activity is destroyed
-     */
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void swipeToNext() {
+        int nextPos = reviewPager.getCurrentItem() + 1;
+        if (nextPos <= 3) {
+            reviewPager.setCurrentItem(nextPos);
+        } else {
+            runRandomizer();
+        }
     }
 
     /**

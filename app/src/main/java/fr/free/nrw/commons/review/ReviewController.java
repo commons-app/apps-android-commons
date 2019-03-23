@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.review;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.view.Gravity;
@@ -11,9 +12,9 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import androidx.viewpager.widget.ViewPager;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -43,16 +44,6 @@ public class ReviewController {
     @Inject
     SessionManager sessionManager;
 
-    private ReviewPagerAdapter reviewPagerAdapter;
-    private ViewPager viewPager;
-    private ReviewActivity reviewActivity;
-
-    ReviewController(Context context) {
-        reviewActivity = (ReviewActivity) context;
-        reviewPagerAdapter = reviewActivity.reviewPagerAdapter;
-        viewPager = ((ReviewActivity) context).reviewPager;
-    }
-
     public void onImageRefreshed(String fileName) {
         this.fileName = fileName;
         media = new Media("File:" + fileName);
@@ -63,49 +54,41 @@ public class ReviewController {
         ReviewController.categories = categories;
     }
 
-    public void swipeToNext() {
-        int nextPos = viewPager.getCurrentItem() + 1;
-        if (nextPos <= 3) {
-            viewPager.setCurrentItem(nextPos);
-        } else {
-            reviewActivity.runRandomizer();
-        }
+    public void reportSpam(@NonNull Activity activity) {
+        DeleteTask.askReasonAndExecute(new Media("File:" + fileName),
+                activity,
+                activity.getString(R.string.review_spam_report_question),
+                activity.getString(R.string.review_spam_report_problem));
     }
 
-    public void reportSpam() {
+    public void reportPossibleCopyRightViolation(@NonNull Activity activity) {
         DeleteTask.askReasonAndExecute(new Media("File:" + fileName),
-                reviewActivity,
-                reviewActivity.getResources().getString(R.string.review_spam_report_question),
-                reviewActivity.getResources().getString(R.string.review_spam_report_problem));
-    }
-
-    public void reportPossibleCopyRightViolation() {
-        DeleteTask.askReasonAndExecute(new Media("File:" + fileName),
-                reviewActivity,
-                reviewActivity.getResources().getString(R.string.review_c_violation_report_question),
-                reviewActivity.getResources().getString(R.string.review_c_violation_report_problem));
+                activity,
+                activity.getResources().getString(R.string.review_c_violation_report_question),
+                activity.getResources().getString(R.string.review_c_violation_report_problem));
     }
 
     @SuppressLint("CheckResult")
-    public void reportWrongCategory() {
+    public void reportWrongCategory(@NonNull Activity activity) {
+        Context context = activity.getApplicationContext();
         ApplicationlessInjection
-                .getInstance(reviewActivity.getApplicationContext())
+                .getInstance(context)
                 .getCommonsApplicationComponent()
                 .inject(this);
 
-        notificationManager = (NotificationManager) reviewActivity.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationBuilder = new NotificationCompat.Builder(reviewActivity);
-        Toast toast = new Toast(reviewActivity);
+        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationBuilder = new NotificationCompat.Builder(context);
+        Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER, 0, 0);
-        toast = Toast.makeText(reviewActivity, reviewActivity.getString(R.string.check_category_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
+        toast = Toast.makeText(context, context.getString(R.string.check_category_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
         toast.show();
 
         Observable.fromCallable(() -> {
-            publishProgress(0);
+            publishProgress(context, 0);
 
             String editToken;
             String authCookie;
-            String summary = reviewActivity.getString(R.string.check_category_edit_summary);
+            String summary = context.getString(R.string.check_category_edit_summary);
 
             authCookie = sessionManager.getAuthCookie();
             mwApi.setAuthCookie(authCookie);
@@ -115,10 +98,10 @@ public class ReviewController {
                 if (editToken.equals("+\\")) {
                     return false;
                 }
-                publishProgress(1);
+                publishProgress(context, 1);
 
                 mwApi.appendEdit(editToken, "\n{{subst:chc}}\n", media.getFilename(), summary);
-                publishProgress(2);
+                publishProgress(context, 2);
             } catch (Exception e) {
                 Timber.d(e);
                 return false;
@@ -132,11 +115,11 @@ public class ReviewController {
                     String title = "";
 
                     if (result) {
-                        title = reviewActivity.getString(R.string.check_category_success_title);
-                        message = reviewActivity.getString(R.string.check_category_success_message, media.getDisplayTitle());
+                        title = context.getString(R.string.check_category_success_title);
+                        message = context.getString(R.string.check_category_success_message, media.getDisplayTitle());
                     } else {
-                        title = reviewActivity.getString(R.string.check_category_failure_title);
-                        message = reviewActivity.getString(R.string.check_category_failure_message, media.getDisplayTitle());
+                        title = context.getString(R.string.check_category_failure_title);
+                        message = context.getString(R.string.check_category_failure_message, media.getDisplayTitle());
                     }
 
                     notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
@@ -150,17 +133,16 @@ public class ReviewController {
                     notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
 
                 }, Timber::e);
-        swipeToNext();
     }
 
-    private void publishProgress(int i) {
+    private void publishProgress(@NonNull Context context, int i) {
         int[] messages = new int[]{R.string.getting_edit_token, R.string.check_category_adding_template};
         String message = "";
         if (0 < i && i < messages.length) {
-            message = reviewActivity.getString(messages[i]);
+            message = context.getString(messages[i]);
         }
 
-        notificationBuilder.setContentTitle(reviewActivity.getString(R.string.check_category_notification_title, media.getDisplayTitle()))
+        notificationBuilder.setContentTitle(context.getString(R.string.check_category_notification_title, media.getDisplayTitle()))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
@@ -170,20 +152,21 @@ public class ReviewController {
     }
 
     @SuppressLint("CheckResult")
-    public void sendThanks() {
+    public void sendThanks(@NonNull Activity activity) {
+        Context context = activity.getApplicationContext();
         ApplicationlessInjection
-                .getInstance(reviewActivity.getApplicationContext())
+                .getInstance(context)
                 .getCommonsApplicationComponent()
                 .inject(this);
-        notificationManager = (NotificationManager) reviewActivity.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationBuilder = new NotificationCompat.Builder(reviewActivity);
-        Toast toast = new Toast(reviewActivity);
+        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationBuilder = new NotificationCompat.Builder(context);
+        Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER, 0, 0);
-        toast = Toast.makeText(reviewActivity, reviewActivity.getString(R.string.send_thank_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
+        toast = Toast.makeText(context, context.getString(R.string.send_thank_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
         toast.show();
 
         Observable.fromCallable(() -> {
-            publishProgress(0);
+            publishProgress(context, 0);
 
             String editToken;
             String authCookie;
@@ -195,10 +178,10 @@ public class ReviewController {
                 if (editToken.equals("+\\")) {
                     return false;
                 }
-                publishProgress(1);
+                publishProgress(context, 1);
                 assert firstRevision != null;
                 mwApi.thank(editToken, firstRevision.getRevid());
-                publishProgress(2);
+                publishProgress(context, 2);
             } catch (Exception e) {
                 Timber.d(e);
                 return false;
@@ -211,11 +194,11 @@ public class ReviewController {
                     String message = "";
                     String title = "";
                     if (result) {
-                        title = reviewActivity.getString(R.string.send_thank_success_title);
-                        message = reviewActivity.getString(R.string.send_thank_success_message, media.getDisplayTitle());
+                        title = context.getString(R.string.send_thank_success_title);
+                        message = context.getString(R.string.send_thank_success_message, media.getDisplayTitle());
                     } else {
-                        title = reviewActivity.getString(R.string.send_thank_failure_title);
-                        message = reviewActivity.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
+                        title = context.getString(R.string.send_thank_failure_title);
+                        message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
                     }
 
                     notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
@@ -229,6 +212,5 @@ public class ReviewController {
                     notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
 
                 }, Timber::e);
-        swipeToNext();
     }
 }
