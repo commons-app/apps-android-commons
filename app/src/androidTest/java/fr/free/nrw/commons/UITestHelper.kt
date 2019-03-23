@@ -1,6 +1,5 @@
 package fr.free.nrw.commons
 
-import android.content.Context
 import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
@@ -30,6 +29,7 @@ class UITestHelper {
                 closeSoftKeyboard()
                 onView(ViewMatchers.withId(R.id.loginButton))
                         .perform(ViewActions.click())
+                sleep(5000)
             } catch (ignored: NoMatchingViewException) {
             }
 
@@ -48,7 +48,6 @@ class UITestHelper {
             val username = BuildConfig.TEST_USERNAME
             if (StringUtils.isNullOrWhiteSpace(username) || username == "null") {
                 throw NotImplementedError("Configure your beta account's username")
-                //return ""
             } else return username
         }
 
@@ -56,7 +55,6 @@ class UITestHelper {
             val password = BuildConfig.TEST_PASSWORD
             if (StringUtils.isNullOrWhiteSpace(password) || password == "null") {
                 throw NotImplementedError("Configure your beta account's password")
-                return ""
             } else return password
         }
     }
