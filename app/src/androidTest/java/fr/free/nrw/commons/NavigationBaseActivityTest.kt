@@ -4,7 +4,6 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.contrib.DrawerActions
 import androidx.test.espresso.contrib.NavigationViewActions
-import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
@@ -51,7 +50,7 @@ class NavigationBaseActivityTest {
         openNavigationDrawerAndNavigateTo(R.id.action_login)
 
         // Feedback
-        openNavigationDrawerAndNavigateToFeedback(R.id.action_feedback)
+        openNavigationDrawerAndNavigateTo(R.id.action_feedback)
     }
 
     /**
@@ -74,12 +73,4 @@ class NavigationBaseActivityTest {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
         onView(withId(R.id.navigation_view)).perform(NavigationViewActions.navigateTo(menuItemId))
     }
-
-    private fun openNavigationDrawerAndNavigateToFeedback(menuItemId: Int) {
-        Intents.init()
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
-        onView(withId(R.id.navigation_view)).perform(NavigationViewActions.navigateTo(menuItemId))
-        Intents.release()
-    }
-
 }
