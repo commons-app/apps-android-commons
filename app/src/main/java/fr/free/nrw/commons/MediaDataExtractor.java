@@ -27,6 +27,12 @@ public class MediaDataExtractor {
         this.mediaWikiApi = mwApi;
     }
 
+    /**
+     * Simplified method to extract all details required to show media details.
+     * It fetches media object, deletion status and talk page for the filename
+     * @param filename for which the details are to be fetched
+     * @return full Media object with all details including deletion status and talk page
+     */
     public Single<Media> fetchMediaDetails(String filename) {
         Single<Media> mediaSingle = okHttpJsonApiClient.getMedia(filename, false);
         Single<Boolean> pageExistsSingle = mediaWikiApi.pageExists("Commons:Deletion_requests/" + filename);

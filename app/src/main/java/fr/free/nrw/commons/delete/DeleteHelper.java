@@ -30,6 +30,9 @@ import timber.log.Timber;
 import static androidx.core.app.NotificationCompat.DEFAULT_ALL;
 import static androidx.core.app.NotificationCompat.PRIORITY_HIGH;
 
+/**
+ * Refactored async task to Rx
+ */
 @Singleton
 public class DeleteHelper {
     private static final int NOTIFICATION_DELETE = 1;
@@ -46,6 +49,13 @@ public class DeleteHelper {
         this.sessionManager = sessionManager;
     }
 
+    /**
+     * Public interface to nominate a particular media file for deletion
+     * @param context
+     * @param media
+     * @param reason
+     * @return
+     */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationBuilder = new NotificationCompat.Builder(context, CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)
@@ -57,6 +67,12 @@ public class DeleteHelper {
                         showDeletionNotification(context, media, result)));
     }
 
+    /**
+     * Makes several API calls to nominate the file for deletion
+     * @param media
+     * @param reason
+     * @return
+     */
     private boolean delete(Media media, String reason) {
         String editToken;
         String authCookie;
@@ -135,6 +151,13 @@ public class DeleteHelper {
         return result;
     }
 
+    /**
+     * Invoked when a reason needs to be asked before nominating for deletion
+     * @param media
+     * @param context
+     * @param question
+     * @param problem
+     */
     public void askReasonAndExecute(Media media, Context context, String question, String problem) {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle(question);

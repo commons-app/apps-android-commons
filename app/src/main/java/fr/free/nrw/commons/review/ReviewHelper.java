@@ -25,6 +25,14 @@ public class ReviewHelper {
         this.mediaWikiApi = mediaWikiApi;
     }
 
+    /**
+     * Gets a random media file for review.
+     * - Picks the most recent changes in the last 30 day window
+     * - Picks a random file from those changes
+     * - Checks if the file is nominated for deletion
+     * - Retries upto 5 times for getting a file which is not nominated for deletion
+     * @return
+     */
     Single<Media> getRandomMedia() {
         return okHttpJsonApiClient.getRecentFileChanges()
                 .map(RecentChangesImageUtils::findImageInRecentChanges)

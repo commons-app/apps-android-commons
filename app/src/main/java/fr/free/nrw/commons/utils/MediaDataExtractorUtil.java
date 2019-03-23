@@ -26,6 +26,11 @@ public class MediaDataExtractorUtil {
         return categories;
     }
 
+    /**
+     * Extracts a list of categories from | separated category string
+     * @param source
+     * @return
+     */
     public static List<String> extractCategoriesFromList(String source) {
         String[] categories = source.split("\\|");
         return Arrays.asList(categories);

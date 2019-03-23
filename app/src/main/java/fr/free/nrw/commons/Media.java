@@ -4,10 +4,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,9 +22,6 @@ import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import fr.free.nrw.commons.utils.StringUtils;
 
 public class Media implements Parcelable {
-
-    private static final Type MAP_TYPE = new TypeToken<Map<String, String>>() {
-    }.getType();
 
     public static Creator<Media> CREATOR = new Creator<Media>() {
         @Override
@@ -459,12 +452,24 @@ public class Media implements Parcelable {
         return requestedDeletion;
     }
 
-    public static Media from(MwQueryPage page, Gson gson) {
+    /**
+     * Creating Media object from MWQueryPage.
+     * Earlier only basic details were set for the media object but going forward,
+     * a full media object(with categories, descriptions, coordinates etc) can be constructed using this method
+     *
+     * @param page response from the API
+     * @return Media object
+     */
+    public static Media from(MwQueryPage page) {
         ImageInfo imageInfo = page.imageInfo();
         if(imageInfo == null) {
             return null;
         }
         ExtMetadata metadata = imageInfo.getMetadata();
+        if (metadata == null) {
+            return new Media(null, imageInfo.getOriginalUrl(),
+                    page.title(), "", 0, null, null, null);
+        }
 
         String categories = metadata.categories().value();
 
@@ -473,13 +478,12 @@ public class Media implements Parcelable {
                 page.title(),
                 "",
                 0,
-                DateUtils.getDateFromString(imageInfo.getMetadata().dateTimeOriginal().value()),
-                DateUtils.getDateFromString(imageInfo.getMetadata().dateTime().value()),
-                StringUtils.getParsedStringFromHtml(imageInfo.getMetadata().artist().value())
+                DateUtils.getDateFromString(metadata.dateTimeOriginal().value()),
+                DateUtils.getDateFromString(metadata.dateTime().value()),
+                StringUtils.getParsedStringFromHtml(metadata.artist().value())
         );
 
         media.setDescriptions(metadata.imageDescription().value());
-
         media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(categories));
 
         String latitude = metadata.gpsLatitude().value();
@@ -490,7 +494,7 @@ public class Media implements Parcelable {
             media.setCoordinates(latLng);
         }
 
-        media.setLicense(imageInfo.getMetadata().licenseShortName().value());
+        media.setLicense(metadata.licenseShortName().value());
 
         return media;
     }
