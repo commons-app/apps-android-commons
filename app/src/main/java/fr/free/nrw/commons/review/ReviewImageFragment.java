@@ -2,6 +2,7 @@ package fr.free.nrw.commons.review;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -139,7 +140,12 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         yesButton.setText(yesButtonText);
         noButton.setText(noButtonText);
 
-        if(position==CATEGORY){
+        if(position==THANKS){
+            if (ReviewController.categories.size() == 0){
+                Handler uiHandler = new Handler();
+                uiHandler.post(() -> getReviewActivity().swipeToNext());
+
+            } else
             updateCategories(ReviewController.categories);
         }
 
