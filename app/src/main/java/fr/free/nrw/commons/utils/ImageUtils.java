@@ -263,6 +263,10 @@ public class ImageUtils {
                 errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_fbmd));
             }
 
+            if ((FILE_NO_EXIF & result) != 0){
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.internet_downloaded));
+            }
+
             errorMessage.append("\n\n").append(context.getResources().getString(R.string.upload_problem_do_you_continue));
         }
 

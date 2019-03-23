@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.media;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
+
+import fr.free.nrw.commons.mwapi.model.RecentChange;
 
 public class RecentChangesImageUtils {
 
@@ -13,10 +13,10 @@ public class RecentChangesImageUtils {
             {".jpg", ".jpeg", ".png"};
 
     @Nullable
-    public static String findImageInRecentChanges(NodeList childNodes) {
+    public static String findImageInRecentChanges(List<RecentChange> recentChanges) {
         String imageTitle;
         Random r = new Random();
-        int count = childNodes.getLength();
+        int count = recentChanges.size();
         // Build a range array
         int[] randomIndexes = new int[count];
         for (int i = 0; i < count; i++) {
@@ -31,12 +31,12 @@ public class RecentChangesImageUtils {
         }
         for (int i = 0; i < count; i++) {
             int randomIndex = randomIndexes[i];
-            Element e = (Element) childNodes.item(randomIndex);
-            if (e.getAttribute("type").equals("log") && !e.getAttribute("old_revid").equals("0")) {
+            RecentChange recentChange = recentChanges.get(randomIndex);
+            if (recentChange.getType().equals("log") && !recentChange.getOldRevisionId().equals("0")) {
                 // For log entries, we only want ones where old_revid is zero, indicating a new file
                 continue;
             }
-            imageTitle = e.getAttribute("title");
+            imageTitle = recentChange.getTitle();
 
             for (String imageExtension : imageExtensions) {
                 if (imageTitle.toLowerCase().endsWith(imageExtension)) {

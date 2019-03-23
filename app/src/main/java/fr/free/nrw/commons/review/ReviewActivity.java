@@ -13,7 +13,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.material.navigation.NavigationView;
 import com.viewpagerindicator.CirclePageIndicator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -32,6 +31,7 @@ import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -70,6 +70,10 @@ public class ReviewActivity extends AuthenticatedActivity {
         Intent reviewActivity = new Intent(context, ReviewActivity.class);
         context.startActivity(reviewActivity);
     }
+    @Inject
+    ReviewHelper reviewHelper;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
@@ -87,7 +91,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         ButterKnife.bind(this);
         initDrawer();
 
-        reviewController = new ReviewController(this);
+        reviewController = new ReviewController();
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         reviewPager.setAdapter(reviewPagerAdapter);
@@ -104,21 +108,11 @@ public class ReviewActivity extends AuthenticatedActivity {
     public boolean runRandomizer() {
         progressBar.setVisibility(View.VISIBLE);
         reviewPager.setCurrentItem(0);
-        Observable.fromCallable(() -> {
-            String result = "";
-            try {
-                Media media = mwApi.getRecentRandomImage();
-                if (media != null) {
-                    result = media.getFilename();
-                }
-            } catch (IOException e) {
-                Timber.e("Error fetching recent random image: " + e.toString());
-            }
-            return result;
-        })
+        compositeDisposable.add(reviewHelper.getRandomMedia()
+                .map(Media::getFilename)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateImage);
+                .subscribe(this::updateImage));
         return true;
     }
 
@@ -130,7 +124,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         }
         simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
         reviewController.onImageRefreshed(fileName); //file name is updated
-        mwApi.firstRevisionOfFile("File:" + fileName)
+        compositeDisposable.add(reviewHelper.getFirstRevisionOfFile("File:" + fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revision -> {
@@ -138,15 +132,15 @@ public class ReviewActivity extends AuthenticatedActivity {
                     reviewPagerAdapter.updateFileInformation(fileName);
                     ((TextView) imageCaption).setText(fileName + " is uploaded by: " + revision);
                     progressBar.setVisibility(View.GONE);
-                });
+                }));
         reviewPager.setCurrentItem(0);
-        Observable.fromCallable(() -> {
+        compositeDisposable.add(Observable.fromCallable(() -> {
             MediaResult media = mwApi.fetchMediaByFilename("File:" + fileName);
             return MediaDataExtractorUtil.extractCategories(media.getWikiSource());
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateCategories, this::categoryFetchError);
+                .subscribe(this::updateCategories, this::categoryFetchError));
 
 
     }
@@ -161,11 +155,12 @@ public class ReviewActivity extends AuthenticatedActivity {
         reviewPagerAdapter.updateCategories();
     }
 
-    /**
-     * References ReviewPagerAdapter to null before the activity is destroyed
-     */
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void swipeToNext() {
+        int nextPos = reviewPager.getCurrentItem() + 1;
+        if (nextPos <= 3) {
+            reviewPager.setCurrentItem(nextPos);
+        } else {
+            runRandomizer();
+        }
     }
 }
