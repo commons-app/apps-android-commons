@@ -1,7 +1,7 @@
 package fr.free.nrw.commons
 
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.contrib.DrawerActions
 import androidx.test.espresso.contrib.NavigationViewActions
 import androidx.test.espresso.intent.Intents
@@ -44,7 +44,8 @@ class NavigationBaseActivityTest {
         openNavigationDrawerAndNavigateTo(R.id.action_about)
 
         // Tutorial
-        openNavigationDrawerAndNavigateToTutorial(R.id.action_introduction)
+        openNavigationDrawerAndNavigateTo(R.id.action_introduction)
+        Espresso.pressBack()
 
         // Achievements
         openNavigationDrawerAndNavigateTo(R.id.action_login)
@@ -72,12 +73,6 @@ class NavigationBaseActivityTest {
     private fun openNavigationDrawerAndNavigateTo(menuItemId: Int) {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
         onView(withId(R.id.navigation_view)).perform(NavigationViewActions.navigateTo(menuItemId))
-    }
-
-    private fun openNavigationDrawerAndNavigateToTutorial(menuItemId: Int) {
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
-        onView(withId(R.id.navigation_view)).perform(NavigationViewActions.navigateTo(menuItemId))
-        onView(withId(R.id.finishTutorialButton)).perform(ViewActions.click())
     }
 
     private fun openNavigationDrawerAndNavigateToFeedback(menuItemId: Int) {
