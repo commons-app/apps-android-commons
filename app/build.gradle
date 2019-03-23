@@ -100,6 +100,7 @@ dependencies {
     //metadata extractor
     implementation 'com.drewnoakes:metadata-extractor:2.11.0'
     implementation files('libs/commons-imaging-1.0-R1401825.jar')
+    annotationProcessor 'com.android.tools.build.jetifier:jetifier-core:1.0.0-beta02'
 }
 
 android {
