@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DateUtils {
+    private static final SimpleDateFormat isoFormat =
+            new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
+
     public static String getTimeAgo(Date currDate, Date itemDate) {
         Calendar c = Calendar.getInstance();
         c.setTime(currDate);
@@ -56,5 +59,9 @@ public class DateUtils {
 
     public static String dateInLocaleFormat(Date date){
         return new SimpleDateFormat(DateFormat.getBestDateTimePattern(Locale.getDefault(), "dd MMM yyyy"), Locale.getDefault()).format(date);
+    }
+
+    public static String formatMWDate(Date date) {
+        return isoFormat.format(date);
     }
 }

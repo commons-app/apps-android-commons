@@ -1,13 +1,13 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
@@ -52,7 +52,7 @@ public interface MediaWikiApi {
     @NonNull
     Single<UploadStash> uploadFile(String filename, InputStream file,
                                    long dataLength, Uri fileUri, Uri contentProviderUri,
-                                   final ProgressListener progressListener) throws IOException;
+                                   final ProgressListener progressListener);
 
     @NonNull
     Single<UploadResult> uploadFileFinalize(String filename, String filekey,
@@ -103,6 +103,10 @@ public interface MediaWikiApi {
     boolean isUserBlockedFromCommons();
 
     void logout();
+
+//    Single<CampaignResponseDTO> getCampaigns();
+
+    boolean thank(String editToken, String revision) throws IOException;
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

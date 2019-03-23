@@ -8,6 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import androidx.viewpager.widget.ViewPager
 import fr.free.nrw.commons.utils.ConfigUtils
 import org.hamcrest.core.IsNot.not
 import org.junit.Rule
@@ -69,5 +70,32 @@ class WelcomeActivityTest {
                 .perform(ViewActions.swipeRight())
                 .perform(ViewActions.swipeRight())
         assert(true)
+    }
+
+    @Test
+    fun swipeBeyondBounds(){
+            var  view_pager=activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
+
+            view_pager.adapter?.let {  view_pager.currentItem == view_pager.adapter?.count?.minus(1)
+                if (view_pager.currentItem==3){
+                    onView(withId(R.id.welcomePager))
+                            .perform(ViewActions.swipeLeft())
+                    assert(true)
+                    onView(withId(R.id.welcomePager))
+                            .perform(ViewActions.swipeRight())
+                    assert(false)
+                }}
+    }
+
+    @Test
+    fun swipeTillLastAndFinish(){
+            var  view_pager=activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
+
+            view_pager.adapter?.let {  view_pager.currentItem == view_pager.adapter?.count?.minus(1)
+                if (view_pager.currentItem==3){
+                    onView(withId(R.id.finishTutorialButton))
+                            .perform(ViewActions.click())
+                    assert(activityRule.activity.isDestroyed)
+                }}
     }
 }

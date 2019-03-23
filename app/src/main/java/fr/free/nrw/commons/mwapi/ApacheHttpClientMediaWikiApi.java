@@ -3,8 +3,6 @@ package fr.free.nrw.commons.mwapi;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -37,6 +35,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.Callable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -254,6 +254,19 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("titles", pageName)
                 .get()
                 .getString("/api/query/pages/page/@_idx")) != -1;
+    }
+
+    @Override
+    public boolean thank(String editToken, String revision) throws IOException {
+        CustomApiResult res = api.action("thank")
+                .param("rev", revision)
+                .param("token", editToken)
+                .param("source", getUserAgent())
+                .post();
+        String r = res.getString("/api/result/@success");
+        // Does this correctly check the success/failure?
+        // The docs https://www.mediawiki.org/wiki/Extension:Thanks seems unclear about that.
+        return r.equals("success");
     }
 
     @Override
@@ -859,7 +872,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             long dataLength,
             Uri fileUri,
             Uri contentProviderUri,
-            ProgressListener progressListener) throws IOException {
+            ProgressListener progressListener) {
         return Single.fromCallable(() -> {
             CustomApiResult result = api.uploadToStash(filename, file, dataLength, getEditToken(), progressListener::onProgress);
 
@@ -967,4 +980,5 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             Timber.e(e, "Error occurred while logging out");
         }
     }
+
 }
