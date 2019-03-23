@@ -1,10 +1,12 @@
 package fr.free.nrw.commons
 
+import android.content.Intent
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -31,6 +33,17 @@ class LoginActivityTest {
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
                 .perform(click())
         intended(hasComponent(SignupActivity::class.java.name))
+        Intents.release()
+    }
+
+    @Test
+    fun isForgotPasswordWorks() {
+        // Clicks the forgot password
+        Intents.init()
+        Espresso.onView(withId(R.id.forgotPassword))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(click())
+        intended(hasAction(Intent.ACTION_VIEW))
         Intents.release()
     }
 }
