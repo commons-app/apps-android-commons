@@ -47,7 +47,6 @@ public class UploadController {
         void onUploadStarted(Contribution contribution);
     }
 
-
     @Inject
     public UploadController(SessionManager sessionManager,
                             Context context,
@@ -138,6 +137,12 @@ public class UploadController {
         uploadTask(contribution, onComplete);
     }
 
+    /**
+     * Initiates the upload task
+     * @param contribution
+     * @param onComplete
+     * @return
+     */
     private Disposable uploadTask(Contribution contribution, ContributionUploadProgress onComplete) {
         return Single.fromCallable(() -> makeUpload(contribution))
                 .subscribeOn(Schedulers.io())
@@ -145,6 +150,11 @@ public class UploadController {
                 .subscribe(finalContribution -> onUploadCompleted(finalContribution, onComplete));
     }
 
+    /**
+     * Make the Contribution object ready to be uploaded
+     * @param contribution
+     * @return
+     */
     private Contribution makeUpload(Contribution contribution) {
         long length;
         ContentResolver contentResolver = context.getContentResolver();
@@ -201,6 +211,11 @@ public class UploadController {
         return contribution;
     }
 
+    /**
+     * When the contribution object is completely formed, the item is queued to the upload service
+     * @param contribution
+     * @param onComplete
+     */
     private void onUploadCompleted(Contribution contribution, ContributionUploadProgress onComplete) {
         //Starts the upload. If commented out, user can proceed to next Fragment but upload doesn't happen
         uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);

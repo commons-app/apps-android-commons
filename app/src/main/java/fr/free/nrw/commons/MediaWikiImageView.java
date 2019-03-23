@@ -88,6 +88,12 @@ public class MediaWikiImageView extends SimpleDraweeView {
                 .build());
     }
 
+    //TODO: refactor the logic for thumbnails. ImageInfo API can be used to fetch thumbnail upfront
+    /**
+     * Fetches media thumbnail from the server
+     * @param media
+     * @return
+     */
     public Single<String> fetchMediaThumbnail(Media media) {
         if (media.getFilename() != null && thumbnailUrlCache.get(media.getFilename()) != null) {
             return Single.just(thumbnailUrlCache.get(media.getFilename()));

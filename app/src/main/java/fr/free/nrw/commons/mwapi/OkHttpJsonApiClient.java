@@ -211,6 +211,13 @@ public class OkHttpJsonApiClient {
         return getMedia(template, true);
     }
 
+    /**
+     * Fetches Media object from the imageInfo API
+     *
+     * @param titles
+     * @param useGenerator
+     * @return
+     */
     public Single<Media> getMedia(String titles, boolean useGenerator) {
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(commonsBaseUrl)
@@ -233,16 +240,23 @@ public class OkHttpJsonApiClient {
                 String json = response.body().string();
                 MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
                 if (mwQueryPage.success() && mwQueryPage.query().firstPage() != null) {
-                    return Media.from(mwQueryPage.query().firstPage(), gson);
+                    return Media.from(mwQueryPage.query().firstPage());
                 }
             }
             return null;
         });
     }
 
+    /**
+     * Whenever imageInfo is fetched, these common properties can be specified for the API call
+     * https://www.mediawiki.org/wiki/API:Imageinfo
+     * @param builder
+     * @return
+     */
     private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
         builder.addQueryParameter("prop", "imageinfo")
                 .addQueryParameter("iiprop", "url|extmetadata")
+                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName")
                 .addQueryParameter("iiextmetadatamultilang", String.valueOf(true));
         return builder;
     }
@@ -282,7 +296,7 @@ public class OkHttpJsonApiClient {
                 MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
                 List<MwQueryPage> pages = mwQueryResponse.query().pages();
                 for (MwQueryPage page : pages) {
-                    mediaList.add(Media.from(page, gson));
+                    mediaList.add(Media.from(page));
                 }
             }
             return mediaList;
