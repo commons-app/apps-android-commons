@@ -141,7 +141,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         bottomProgressBar.setVisibility(GONE);
         queryList.clear();
         imagesAdapter.clear();
-        compositeDisposable.add(okHttpJsonApiClient.searchImages(query, queryList.size())
+        compositeDisposable.add(okHttpJsonApiClient.searchImages(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -158,7 +158,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        compositeDisposable.add(okHttpJsonApiClient.searchImages(query, queryList.size())
+        compositeDisposable.add(okHttpJsonApiClient.searchImages(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

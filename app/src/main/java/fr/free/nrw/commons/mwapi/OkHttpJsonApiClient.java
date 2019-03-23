@@ -1,12 +1,15 @@
 package fr.free.nrw.commons.mwapi;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -19,6 +22,7 @@ import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.mwapi.model.MwQueryResponse;
@@ -28,6 +32,7 @@ import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -39,11 +44,16 @@ import timber.log.Timber;
 
 @Singleton
 public class OkHttpJsonApiClient {
+
+    private static final Type mapType = new TypeToken<Map<String, String>>() {
+    }.getType();
+
     private final OkHttpClient okHttpClient;
     private final HttpUrl wikiMediaToolforgeUrl;
     private final String sparqlQueryUrl;
     private final String campaignsUrl;
     private final String commonsBaseUrl;
+    private final JsonKvStore defaultKvStore;
     private Gson gson;
 
 
@@ -53,12 +63,14 @@ public class OkHttpJsonApiClient {
                                String sparqlQueryUrl,
                                String campaignsUrl,
                                String commonsBaseUrl,
+                               JsonKvStore defaultKvStore,
                                Gson gson) {
         this.okHttpClient = okHttpClient;
         this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
         this.sparqlQueryUrl = sparqlQueryUrl;
         this.campaignsUrl = campaignsUrl;
         this.commonsBaseUrl = commonsBaseUrl;
+        this.defaultKvStore = defaultKvStore;
         this.gson = gson;
     }
 
@@ -75,7 +87,6 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.isSuccessful()) {
-
                 return Integer.parseInt(response.body().string().trim());
             }
             return 0;
@@ -237,13 +248,32 @@ public class OkHttpJsonApiClient {
     }
 
     /**
+     * Whenever imageInfo is fetched, these common properties can be specified for the API call
+     * https://www.mediawiki.org/wiki/API:Imageinfo
+     * @param builder
+     * @return
+     */
+    private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
+        builder.addQueryParameter("prop", "imageinfo")
+                .addQueryParameter("iiprop", "url|extmetadata")
+                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName");
+
+        String language = Locale.getDefault().getLanguage();
+        if (!StringUtils.isNullOrWhiteSpace(language)) {
+            builder.addQueryParameter("iiextmetadatalanguage", language);
+        }
+
+        return builder;
+    }
+
+    /**
      * This method takes search keyword as input and returns a list of  Media objects filtered using search query
      * It uses the generator query API to get the images searched using a query, 25 at a time.
      * @param query keyword to search images on commons
      * @return
      */
     @Nullable
-    public Single<List<Media>> searchImages(String query, int offset) {
+    public Single<List<Media>> searchImages(String query) {
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(commonsBaseUrl)
                 .newBuilder()
@@ -253,10 +283,9 @@ public class OkHttpJsonApiClient {
                 .addQueryParameter("gsrwhat", "text")
                 .addQueryParameter("gsrnamespace", "6")
                 .addQueryParameter("gsrlimit", "25")
-                .addQueryParameter("gsroffset", String.valueOf(offset))
-                .addQueryParameter("gsrsearch", query)
-                .addQueryParameter("prop", "imageinfo")
-                .addQueryParameter("iiprop", "url|extmetadata");
+                .addQueryParameter("gsrsearch", query);
+
+        appendQueryContinueValues(query, urlBuilder);
 
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
@@ -265,12 +294,60 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             List<Media> mediaList = new ArrayList<>();
-            if (response != null && response.body() != null && response.isSuccessful()) {
+            if (response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
-                if (json == null) {
-                    return mediaList;
-                }
                 MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
+                List<MwQueryPage> pages = mwQueryResponse.query().pages();
+                putContinueValues(query, mwQueryResponse.continuation());
+                for (MwQueryPage page : pages) {
+                    mediaList.add(Media.from(page));
+                }
+            }
+            return mediaList;
+        });
+    }
+
+    private void appendQueryContinueValues(String query, HttpUrl.Builder urlBuilder) {
+        Map<String, String> continueValues = getContinueValues(query);
+        if (continueValues != null && continueValues.size() > 0) {
+            for (Map.Entry<String, String> entry : continueValues.entrySet()) {
+                urlBuilder.addQueryParameter(entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
+    /**
+     * This method takes cateogry name as input and returns a list of  Media objects filtered using image generator query
+     * It uses the generator query API to get the images searched using a query, 10 at a time.
+     * @return
+     */
+    @Nullable
+    public Single<List<Media>> getCategoryImages(String categoryName) {
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(commonsBaseUrl)
+                .newBuilder()
+                .addQueryParameter("action", "query")
+                .addQueryParameter("generator", "categorymembers")
+                .addQueryParameter("format", "json")
+                .addQueryParameter("gcmtype", "file")
+                .addQueryParameter("gcmtitle", categoryName)
+                .addQueryParameter("gcmsort", "timestamp")//property to sort by;timestamp
+                .addQueryParameter("gcmdir", "desc")//in which direction to sort;descending
+                .addQueryParameter("gcmlimit", "10");
+
+        appendQueryContinueValues(categoryName, urlBuilder);
+
+        Request request = new Request.Builder()
+                .url(appendMediaProperties(urlBuilder).build())
+                .build();
+
+        return Single.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            List<Media> mediaList = new ArrayList<>();
+            if (response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
+                putContinueValues(categoryName, mwQueryResponse.continuation());
                 List<MwQueryPage> pages = mwQueryResponse.query().pages();
                 for (MwQueryPage page : pages) {
                     mediaList.add(Media.from(page));
@@ -278,6 +355,14 @@ public class OkHttpJsonApiClient {
             }
             return mediaList;
         });
+    }
+
+    private void putContinueValues(String keyword, Map<String, String> values) {
+        defaultKvStore.putJson("query_continue_" + keyword, values);
+    }
+
+    private Map<String, String> getContinueValues(String keyword) {
+        return defaultKvStore.getJson("query_continue_" + keyword, mapType);
     }
 
     /**
