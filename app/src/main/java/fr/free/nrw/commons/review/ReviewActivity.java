@@ -130,7 +130,7 @@ public class ReviewActivity extends AuthenticatedActivity {
                 .subscribe(revision -> {
                     reviewController.firstRevision = revision;
                     reviewPagerAdapter.updateFileInformation(fileName);
-                    ((TextView) imageCaption).setText(fileName + " is uploaded by: " + revision);
+                    ((TextView) imageCaption).setText(fileName + " is uploaded by: " + revision.getUser());
                     progressBar.setVisibility(View.GONE);
                 }));
         reviewPager.setCurrentItem(0);
