@@ -10,13 +10,14 @@ import android.os.Environment
 import android.view.View
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
-import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.Intents.intending
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasType
-import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
@@ -25,6 +26,7 @@ import androidx.test.runner.AndroidJUnit4
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.utils.ConfigUtils
 import org.hamcrest.core.AllOf.allOf
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -41,10 +43,10 @@ import java.util.*
 class UploadTest {
     @get:Rule
     var permissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_FINE_LOCATION)
+            Manifest.permission.ACCESS_FINE_LOCATION)!!
 
     @get:Rule
-    var activityRule: ActivityTestRule<*> = IntentsTestRule(LoginActivity::class.java)
+    var activityRule = ActivityTestRule(LoginActivity::class.java)
 
     private val randomBitmap: Bitmap
         get() {
@@ -56,7 +58,19 @@ class UploadTest {
 
     @Before
     fun setup() {
+        try {
+            Intents.init()
+        } catch (ex: IllegalStateException) {
+
+        }
+        UITestHelper.skipWelcome()
+        UITestHelper.loginUser()
         saveToInternalStorage()
+    }
+
+    @After
+    fun teardown() {
+        Intents.release()
     }
 
     private fun saveToInternalStorage() {
@@ -86,29 +100,11 @@ class UploadTest {
         }
     }
 
-    private fun getToMainActivity() {
-        try {
-            //Skip tutorial
-            onView(withId(R.id.finishTutorialButton))
-                    .perform(click())
-
-            //Perform Login
-            onView(withId(R.id.loginUsername))
-                    .perform(clearText(), typeText(BuildConfig.TEST_USERNAME))
-            onView(withId(R.id.loginPassword))
-                    .perform(clearText(), typeText(BuildConfig.TEST_PASSWORD))
-            onView(withId(R.id.loginButton))
-                    .perform(click())
-        } catch (ignored: NoMatchingViewException) {}
-    }
-
     @Test
     fun uploadTest() {
         if (!ConfigUtils.isBetaFlavour()) {
             throw Error("This test should only be run in Beta!")
         }
-
-        getToMainActivity()
 
         // Uri to return by our mock gallery selector
         // Requires file 'image.jpg' to be placed at root of file structure
@@ -151,20 +147,12 @@ class UploadTest {
         onView(withId(R.id.bottom_card_next))
                 .perform(click())
 
-        try {
-            Thread.sleep(500)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
+        UITestHelper.sleep(1000)
 
         onView(withId(R.id.category_search))
                 .perform(replaceText("Uploaded with Mobile/Android Tests"))
 
-        try {
-            Thread.sleep(3000)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
+        UITestHelper.sleep(3000)
 
         onView(withParent(withId(R.id.categories)))
                 .perform(click())
@@ -172,20 +160,12 @@ class UploadTest {
         onView(withId(R.id.category_next))
                 .perform(click())
 
-        try {
-            Thread.sleep(500)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
+        UITestHelper.sleep(500)
 
         onView(withId(R.id.submit))
                 .perform(click())
 
-        try {
-            Thread.sleep(10000)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
+        UITestHelper.sleep(10000)
 
         val fileUrl = "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
                 commonsFileName.replace(' ', '_') + ".jpg"
