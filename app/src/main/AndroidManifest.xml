@@ -122,6 +122,10 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
 
+        <activity
+            android:name=".review.ReviewActivity"
+            android:label="@string/title_activity_review" />
+
         <service android:name=".upload.UploadService" />
         <service
             android:name=".auth.WikiAccountAuthenticatorService"

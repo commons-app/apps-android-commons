@@ -17,6 +17,7 @@ import androidx.exifinterface.media.ExifInterface;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -42,9 +43,14 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     private ExifInterface exifInterface;
     private boolean haveCheckedForOtherImages = false;
     private GPSExtractor tempImageObj;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
     FileProcessor() {
+    }
+
+    public void cleanup() {
+        compositeDisposable.clear();
     }
 
     void initFileDetails(@NonNull String filePath, ContentResolver contentResolver) {
@@ -138,7 +144,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
             if (catListEmpty) {
-                apiCall.request(decimalCoords)
+                compositeDisposable.add(apiCall.request(decimalCoords)
                         .subscribeOn(Schedulers.io())
                         .observeOn(Schedulers.io())
                         .subscribe(
@@ -147,7 +153,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                                     Timber.e(throwable);
                                     gpsCategoryModel.clear();
                                 }
-                        );
+                        ));
                 Timber.d("displayCatList size 0, calling MWAPI %s", displayCatList);
             } else {
                 Timber.d("Cache found, setting categoryList in model to %s", displayCatList);

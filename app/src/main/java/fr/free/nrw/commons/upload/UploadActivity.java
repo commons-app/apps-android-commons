@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.appcompat.app.AlertDialog;
@@ -79,7 +78,6 @@ import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -148,7 +146,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
-    private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
     private static int currentItem=0;
     private String source;
@@ -163,7 +160,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
         setContentView(R.layout.activity_upload);
         ButterKnife.bind(this);
-        compositeDisposable = new CompositeDisposable();
 
         files = getIntent().getParcelableArrayListExtra(EXTRA_FILES);
         source=getIntent().getStringExtra(EXTRA_SOURCE);
@@ -233,8 +229,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @Override
     protected void onPause() {
         presenter.removeView();
-        compositeDisposable.dispose();
-        compositeDisposable = new CompositeDisposable();
         super.onPause();
     }
 
@@ -642,7 +636,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @SuppressLint("CheckResult")
     private void updateCategoryList(String filter) {
         List<String> imageTitleList = presenter.getImageTitleList();
-        Observable.fromIterable(categoriesModel.getSelectedCategories())
+        compositeDisposable.add(Observable.fromIterable(categoriesModel.getSelectedCategories())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
@@ -673,7 +667,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                                 categoriesSearchContainer.setError("No categories found");
                             }
                         }
-                );
+                ));
     }
 
     private void receiveSharedItems() {

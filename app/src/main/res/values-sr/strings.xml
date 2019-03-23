@@ -178,6 +178,7 @@
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>
   <string name="media_detail_description">Опис</string>
+  <string name="media_detail_discussion">Разговор</string>
   <string name="media_detail_author">Аутор</string>
   <string name="media_detail_uploaded_date">Датум отпремања</string>
   <string name="media_detail_license">Лиценца</string>

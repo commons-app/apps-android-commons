@@ -307,11 +307,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
-        Observable.fromCallable(() -> notificationController.getNotifications(false))
+        compositeDisposable.add(Observable.fromCallable(() -> notificationController.getNotifications(false))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::initNotificationViews,
-                        throwable -> Timber.e(throwable, "Error occurred while loading notifications"));
+                        throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
     }
 
     private void initNotificationViews(List<Notification> notificationList) {

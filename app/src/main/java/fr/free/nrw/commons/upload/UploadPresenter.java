@@ -45,6 +45,7 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -77,6 +78,7 @@ public class UploadPresenter {
     private final UploadController uploadController;
     private final Context context;
     private final JsonKvStore directKvStore;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
     UploadPresenter(UploadModel uploadModel,
@@ -102,12 +104,12 @@ public class UploadPresenter {
         Observable<UploadItem> uploadItemObservable = uploadModel
                 .preProcessImages(media, place, source, similarImageInterface);
 
-        uploadItemObservable
+        compositeDisposable.add(uploadItemObservable
                 .toList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(uploadItems -> onImagesProcessed(uploadItems, place),
-                        throwable -> Timber.e(throwable, "Error occurred in processing images"));
+                        throwable -> Timber.e(throwable, "Error occurred in processing images")));
     }
 
     private void onImagesProcessed(List<UploadItem> uploadItems, Place place) {
@@ -138,11 +140,11 @@ public class UploadPresenter {
                     List<Description> descriptions) {
         Timber.e("Inside handleNext");
         view.showProgressDialog();
-        uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
+        compositeDisposable.add(uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageResult -> handleImage(title, descriptions, imageResult),
-                        throwable -> Timber.e(throwable, "Error occurred while handling image"));
+                        throwable -> Timber.e(throwable, "Error occurred while handling image")));
     }
 
     private void handleImage(Title title, List<Description> descriptions, Integer imageResult) {
@@ -296,9 +298,9 @@ public class UploadPresenter {
     @SuppressLint("CheckResult")
     void handleSubmit(CategoriesModel categoriesModel) {
         if (view.checkIfLoggedIn())
-            uploadModel.buildContributions(categoriesModel.getCategoryStringList())
+            compositeDisposable.add(uploadModel.buildContributions(categoriesModel.getCategoryStringList())
                     .observeOn(Schedulers.io())
-                    .subscribe(uploadController::startUpload);
+                    .subscribe(uploadController::startUpload));
     }
 
     /**
@@ -371,6 +373,8 @@ public class UploadPresenter {
     }
 
     void cleanup() {
+        compositeDisposable.clear();
+        uploadModel.cleanup();
         uploadController.cleanup();
     }
 

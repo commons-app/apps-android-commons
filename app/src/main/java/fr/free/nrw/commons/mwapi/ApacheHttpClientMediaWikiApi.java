@@ -3,8 +3,6 @@ package fr.free.nrw.commons.mwapi;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -37,6 +35,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.Callable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -254,6 +254,19 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("titles", pageName)
                 .get()
                 .getString("/api/query/pages/page/@_idx")) != -1;
+    }
+
+    @Override
+    public boolean thank(String editToken, String revision) throws IOException {
+        CustomApiResult res = api.action("thank")
+                .param("rev", revision)
+                .param("token", editToken)
+                .param("source", getUserAgent())
+                .post();
+        String r = res.getString("/api/result/@success");
+        // Does this correctly check the success/failure?
+        // The docs https://www.mediawiki.org/wiki/Extension:Thanks seems unclear about that.
+        return r.equals("success");
     }
 
     @Override
@@ -759,6 +772,50 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
+     * This method takes search keyword as input and returns a list of  Media objects filtered using search query
+     * It uses the generator query API to get the images searched using a query, 25 at a time.
+     * @param query keyword to search images on commons
+     * @return
+     */
+//    @Override
+    @NonNull
+    public List<Media> searchImages(String query, int offset) {
+        List<CustomApiResult> imageNodes = null;
+        List<CustomApiResult> authorNodes = null;
+        CustomApiResult customApiResult;
+        try {
+            customApiResult= api.action("query")
+                    .param("format", "xml")
+                    .param("generator", "search")
+                    .param("gsrwhat", "text")
+                    .param("gsrnamespace", "6")
+                    .param("gsrlimit", "25")
+                    .param("gsroffset",offset)
+                    .param("gsrsearch", query)
+                    .param("prop", "imageinfo")
+                    .get();
+            imageNodes= customApiResult.getNodes("/api/query/pages/page/@title");
+            authorNodes= customApiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
+        } catch (IOException e) {
+            Timber.e(e, "Failed to obtain searchImages");
+        }
+
+        if (imageNodes == null) {
+            return new ArrayList<>();
+        }
+
+        List<Media> images = new ArrayList<>();
+
+        for (int i=0; i< imageNodes.size();i++){
+            String imgName = imageNodes.get(i).getDocument().getTextContent();
+            Media media = new Media(imgName);
+            media.setCreator(authorNodes.get(i).getDocument().getTextContent());
+            images.add(media);
+        }
+        return images;
+    }
+
+    /**
      * This method takes search keyword as input and returns a list of categories objects filtered using search query
      * It uses the generator query API to get the categories searched using a query, 25 at a time.
      * @param query keyword to search categories on commons
@@ -859,7 +916,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             long dataLength,
             Uri fileUri,
             Uri contentProviderUri,
-            ProgressListener progressListener) throws IOException {
+            ProgressListener progressListener) {
         return Single.fromCallable(() -> {
             CustomApiResult result = api.uploadToStash(filename, file, dataLength, getEditToken(), progressListener::onProgress);
 
@@ -967,4 +1024,5 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             Timber.e(e, "Error occurred while logging out");
         }
     }
+
 }

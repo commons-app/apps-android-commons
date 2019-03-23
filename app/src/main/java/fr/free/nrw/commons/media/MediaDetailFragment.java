@@ -2,14 +2,16 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
+import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -31,6 +34,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -414,13 +418,60 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if(isDeleted) {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         }
+        //Reviewer correct me if i have misunderstood something over here
+        //But how does this  if (delete.getVisibility() == View.VISIBLE) {
+        //            enableDeleteButton(true);   makes sense ?
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setMessage("Why should this fileckathon-2018  be deleted?");
+        final EditText input = new EditText(getActivity());
+        alert.setView(input);
+        input.requestFocus();
+        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String reason = input.getText().toString();
+
+                DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
+                deleteTask.execute();
+                enableDeleteButton(false);
+            }
+        });
+        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+            }
+        });
+        AlertDialog d = alert.create();
+        input.addTextChangedListener(new TextWatcher() {
+            private void handleText() {
+                final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                if (input.getText().length() == 0) {
+                    okButton.setEnabled(false);
+                } else {
+                    okButton.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                handleText();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        });
+        d.show();
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
         String reason = spinner.getSelectedItem().toString();
         Single<String> deletionReason = reasonBuilder.getReason(media, reason);
-        deletionReason
+        compositeDisposable.add(deletionReason
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
@@ -428,7 +479,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     deleteTask.execute();
                     isDeleted = true;
                     enableDeleteButton(false);
-                });
+                }));
     }
 
     @OnClick(R.id.seeMore)

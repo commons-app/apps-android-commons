@@ -170,6 +170,7 @@
   <string name="detail_panel_cats_loading">Caricamento…</string>
   <string name="detail_panel_cats_none">Nessuna selezione</string>
   <string name="detail_description_empty">Nessuna descrizione</string>
+  <string name="detail_discussion_empty">Nessuna discussione</string>
   <string name="detail_license_empty">Licenza sconosciuta</string>
   <string name="menu_refresh">Aggiorna</string>
   <string name="storage_permission_title">Richiesta di autorizzazione di archiviazione</string>
@@ -185,6 +186,7 @@
   <string name="no">No</string>
   <string name="media_detail_title">Titolo</string>
   <string name="media_detail_description">Descrizione</string>
+  <string name="media_detail_discussion">Discussione</string>
   <string name="media_detail_author">Autore</string>
   <string name="media_detail_uploaded_date">Data di caricamento</string>
   <string name="media_detail_license">Licenza</string>
@@ -200,7 +202,7 @@
   <string name="maximum_limit_alert">Non è possibile mostrarne più di 500</string>
   <string name="enter_valid">Inserisci un numero valido</string>
   <string name="cannot_be_zero">Il limite di caricamento non può essere 0</string>
-  <string name="set_limit" fuzzy="true">Imposta limite caricamento recente</string>
+  <string name="set_limit">Limite caricamento recente</string>
   <string name="login_failed_2fa_not_supported">L\'autenticazione a due fattori non è attualmente supportata.</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
   <string name="commons_logo">Logo di Commons</string>
@@ -299,7 +301,7 @@
   <string name="about_translate_cancel">Annulla</string>
   <string name="retry">Riprova</string>
   <string name="showcase_view_got_it_button">Capito!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia.\n\nCliccando su \"CERCA QUESTA AREA\" si blocca la mappa e si avvia una ricerca nelle vicinanze intorno a quella posizione.</string>
   <string name="showcase_view_list_icon">Toccando questo pulsante viene visualizzato un elenco di questi luoghi</string>
   <string name="showcase_view_plus_fab">Puoi caricare un\'immagine per ogni luogo dalla tua galleria o fotocamera</string>
   <string name="no_images_found">Nessuna immagine trovata!</string>
@@ -350,6 +352,7 @@
   <string name="delete_recent_searches_dialog">Sei sicuro di voler cancellare la tua cronologia di ricerca?</string>
   <string name="search_history_deleted">Cronologia di ricerca cancellata</string>
   <string name="nominate_delete">Proponi per la cancellazione</string>
+  <string name="delete">CANCELLA</string>
   <string name="Achievements">Risultati</string>
   <string name="statistics">STATISTICHE</string>
   <string name="statistics_thanks">Ringraziamenti ricevuti</string>
@@ -443,8 +446,8 @@
   <string name="no_image">Nessuna immagine utilizzata</string>
   <string name="no_image_reverted">Nessuna immagine ripristinata</string>
   <string name="no_image_uploaded">Nessuna immagine caricata</string>
-  <string name="no_notification" fuzzy="true">Non hai alcuna notifica non letta</string>
-  <string name="no_archived_notification" fuzzy="true">Non hai notifiche archiviate</string>
+  <string name="no_notification">Non hai alcuna notifica non letta</string>
+  <string name="no_archived_notification">Non hai notifiche archiviate</string>
   <string name="share_logs_using">Condividi i registri usando</string>
   <string name="menu_option_archived">Vedi archiviate</string>
   <string name="menu_option_unread">Vedi non lette</string>
