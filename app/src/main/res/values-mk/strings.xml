@@ -447,4 +447,7 @@
   <string name="error_occurred_in_picking_images">Се јави грешка при избирањето на сликите</string>
   <string name="image_chooser_title">Изберете слики за подигање</string>
   <string name="please_wait">Почекајте...</string>
+  <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
+  <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
+  <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
 </resources>

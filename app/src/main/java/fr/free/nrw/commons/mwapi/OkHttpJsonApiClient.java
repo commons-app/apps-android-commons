@@ -1,18 +1,19 @@
 package fr.free.nrw.commons.mwapi;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.achievements.FeaturedImages;
@@ -21,6 +22,7 @@ import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.mwapi.model.MwQueryResponse;
+import fr.free.nrw.commons.mwapi.model.RecentChange;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
@@ -275,6 +277,78 @@ public class OkHttpJsonApiClient {
                 }
             }
             return mediaList;
+        });
+    }
+
+    /**
+     * Returns recent changes on commons
+     * @return list of recent changes made
+     */
+    @Nullable
+    public Single<List<RecentChange>> getRecentFileChanges() {
+        final int RANDOM_SECONDS = 60 * 60 * 24 * 30;
+        final String FILE_NAMESPACE = "6";
+        Random r = new Random();
+        Date now = new Date();
+        Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
+
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(commonsBaseUrl)
+                .newBuilder()
+                .addQueryParameter("action", "query")
+                .addQueryParameter("format", "json")
+                .addQueryParameter("list", "recentchanges")
+                .addQueryParameter("rcstart", DateUtils.formatMWDate(startDate))
+                .addQueryParameter("rcnamespace", FILE_NAMESPACE)
+                .addQueryParameter("rcprop", "title|ids")
+                .addQueryParameter("rctype", "new|log")
+                .addQueryParameter("rctoponly", "1");
+
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+
+        return Single.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
+                return mwQueryPage.query().getRecentchanges();
+            }
+            return new ArrayList<>();
+        });
+    }
+
+    /**
+     * Returns the first revision of the file
+     *
+     * @return Revision object
+     */
+    @Nullable
+    public Single<MwQueryPage.Revision> getFirstRevisionOfFile(String filename) {
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(commonsBaseUrl)
+                .newBuilder()
+                .addQueryParameter("action", "query")
+                .addQueryParameter("format", "json")
+                .addQueryParameter("prop", "revisions")
+                .addQueryParameter("rvprop", "timestamp|ids|user")
+                .addQueryParameter("titles", filename)
+                .addQueryParameter("rvdir", "newer")
+                .addQueryParameter("rvlimit", "1");
+
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+
+        return Single.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
+                return mwQueryPage.query().firstPage().revisions().get(0);
+            }
+            return null;
         });
     }
 }

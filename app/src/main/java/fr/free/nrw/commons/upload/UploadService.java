@@ -195,6 +195,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0));
     }
 
+    @SuppressLint("CheckResult")
     private void uploadContribution(Contribution contribution) {
         InputStream fileInputStream;
         Uri localUri = contribution.getLocalUri();
@@ -222,8 +223,13 @@ public class UploadService extends HandlerService<Contribution> {
 
         String filename = contribution.getFilename();
 
-        try {
+        NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(notificationTag,
+                getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()),
+                getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
+                contribution
+        );
 
+        Single.fromCallable(() -> {
             if (!mwApi.validateLogin()) {
                 // Need to revalidate!
                 if (sessionManager.revalidateAuthToken()) {
@@ -231,84 +237,75 @@ public class UploadService extends HandlerService<Contribution> {
                 } else {
                     Timber.d("Unable to revalidate :(");
                     stopForeground(true);
-                    Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
-                    failureToast.show();
-                    sessionManager.forceLogin(this);
-                    return;
+                    sessionManager.forceLogin(UploadService.this);
+                    throw new RuntimeException(getString(R.string.authentication_failed));
                 }
             }
-            NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(notificationTag,
-                    getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()),
-                    getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
-                    contribution
-            );
-            String stashFilename = "Temp_" + contribution.hashCode() + filename;
-            mwApi.uploadFile(
-                    stashFilename, fileInputStream, contribution.getDataLength(),
-                    localUri, contribution.getContentProviderUri(), notificationUpdater)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.io())
-                    .flatMap(uploadStash -> {
-                        notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
+            return "Temp_" + contribution.hashCode() + filename;
+        }).flatMap(stashFilename -> mwApi.uploadFile(
+                stashFilename, fileInputStream, contribution.getDataLength(),
+                localUri, contribution.getContentProviderUri(), notificationUpdater))
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .doFinally(() -> {
+                    if (filename != null) {
+                        unfinishedUploads.remove(filename);
+                    }
+                    toUpload--;
+                    if (toUpload == 0) {
+                        // Sync modifications right after all uploads are processed
+                        ContentResolver.requestSync(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY, new Bundle());
+                        stopForeground(true);
+                    }
+                })
+                .flatMap(uploadStash -> {
+                    notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
 
-                        Timber.d("Stash upload response 1 is %s", uploadStash.toString());
+                    Timber.d("Stash upload response 1 is %s", uploadStash.toString());
 
-                        String resultStatus = uploadStash.getResultStatus();
-                        if (!resultStatus.equals("Success")) {
-                            Timber.d("Contribution upload failed. Wikidata entity won't be edited");
-                            showFailedNotification(contribution);
-                            return Single.never();
-                        } else {
-                            synchronized (unfinishedUploads) {
-                                Timber.d("making sure of uniqueness of name: %s", filename);
-                                String uniqueFilename = findUniqueFilename(filename);
-                                unfinishedUploads.add(uniqueFilename);
-                                return mwApi.uploadFileFinalize(
-                                        uniqueFilename,
-                                        uploadStash.getFilekey(),
-                                        contribution.getPageContents(getApplicationContext()),
-                                        contribution.getEditSummary());
-                            }
+                    String resultStatus = uploadStash.getResultStatus();
+                    if (!resultStatus.equals("Success")) {
+                        Timber.d("Contribution upload failed. Wikidata entity won't be edited");
+                        showFailedNotification(contribution);
+                        return Single.never();
+                    } else {
+                        synchronized (unfinishedUploads) {
+                            Timber.d("making sure of uniqueness of name: %s", filename);
+                            String uniqueFilename = findUniqueFilename(filename);
+                            unfinishedUploads.add(uniqueFilename);
+                            return mwApi.uploadFileFinalize(
+                                    uniqueFilename,
+                                    uploadStash.getFilekey(),
+                                    contribution.getPageContents(getApplicationContext()),
+                                    contribution.getEditSummary());
                         }
-                    })
-                    .subscribe(uploadResult -> {
-                        Timber.d("Stash upload response 2 is %s", uploadResult.toString());
+                    }
+                })
+                .subscribe(uploadResult -> {
+                    Timber.d("Stash upload response 2 is %s", uploadResult.toString());
 
-                        notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
 
-                        String resultStatus = uploadResult.getResultStatus();
-                        if (!resultStatus.equals("Success")) {
-                            Timber.d("Contribution upload failed. Wikidata entity won't be edited");
-                            showFailedNotification(contribution);
-                        } else {
-                            String canonicalFilename = uploadResult.getCanonicalFilename();
-                            Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
-                                    contribution.getWikiDataEntityId());
-                            wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename);
-                            contribution.setFilename(canonicalFilename);
-                            contribution.setImageUrl(uploadResult.getImageUrl());
-                            contribution.setState(Contribution.STATE_COMPLETED);
-                            contribution.setDateUploaded(uploadResult.getDateUploaded());
-                            contributionDao.save(contribution);
-                        }
-                    }, throwable -> {
-                        throw new RuntimeException(throwable);
-                    });
-        } catch (IOException e) {
-            Timber.w(e,"IOException during upload");
-            notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
-            showFailedNotification(contribution);
-        } finally {
-            if (filename != null) {
-                unfinishedUploads.remove(filename);
-            }
-            toUpload--;
-            if (toUpload == 0) {
-                // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync(sessionManager.getCurrentAccount(), BuildConfig.MODIFICATION_AUTHORITY, new Bundle());
-                stopForeground(true);
-            }
-        }
+                    String resultStatus = uploadResult.getResultStatus();
+                    if (!resultStatus.equals("Success")) {
+                        Timber.d("Contribution upload failed. Wikidata entity won't be edited");
+                        showFailedNotification(contribution);
+                    } else {
+                        String canonicalFilename = uploadResult.getCanonicalFilename();
+                        Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
+                                contribution.getWikiDataEntityId());
+                        wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename);
+                        contribution.setFilename(canonicalFilename);
+                        contribution.setImageUrl(uploadResult.getImageUrl());
+                        contribution.setState(Contribution.STATE_COMPLETED);
+                        contribution.setDateUploaded(uploadResult.getDateUploaded());
+                        contributionDao.save(contribution);
+                    }
+                }, throwable -> {
+                    Timber.w(throwable, "Exception during upload");
+                    notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    showFailedNotification(contribution);
+                });
     }
 
     @SuppressLint("StringFormatInvalid")

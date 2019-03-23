@@ -26,6 +26,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import timber.log.Timber;
 
 /**
@@ -78,7 +79,7 @@ public class MediaDataExtractor {
 
 
         // In-page category links are extracted from source, as XML doesn't cover [[links]]
-        extractCategories(result.getWikiSource());
+        categories = MediaDataExtractorUtil.extractCategories(result.getWikiSource());
 
         // Description template info is extracted from preprocessor XML
         processWikiParseTree(result.getParseTreeXmlSource(), licenseList);
@@ -107,7 +108,7 @@ public class MediaDataExtractor {
             e.printStackTrace();
         }
     }
-
+    
     private void processWikiParseTree(String source, LicenseList licenseList) throws IOException {
         Document doc;
         try {

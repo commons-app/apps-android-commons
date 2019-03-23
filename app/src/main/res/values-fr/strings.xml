@@ -331,7 +331,7 @@
   <string name="search_tab_title_media">MEDIA</string>
   <string name="search_tab_title_categories">CATÉGORIES</string>
   <string name="explore_tab_title_featured">MIS EN AVANT</string>
-  <string name="explore_tab_title_mobile">TÉLÉCHARGÉ VIA MOBILE</string>
+  <string name="explore_tab_title_mobile">TÉLÉVERSÉ VIA MOBILE</string>
   <string name="successful_wikidata_edit">Image bien ajoutée à %1$s sur Wikidata !</string>
   <string name="wikidata_edit_failure">Échec de la mise à jour de l\'entité Wikidata correspondante !</string>
   <string name="menu_set_wallpaper">Définir comme fond d\'écran</string>
@@ -467,4 +467,6 @@
   <string name="error_occurred_in_picking_images">Erreur lors de la sélection des images</string>
   <string name="image_chooser_title">Choisir les images à téléverser</string>
   <string name="please_wait">Veuillez patienter…</string>
+  <string name="images_via_nearby_explanation">Les images téléversées par les lieux de proximité sont les images téléversées par la découverte des lieux sur la carte.</string>
+  <string name="thanks_received_explanation">Cette fonctionalité permet aux contributeurs d\'envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles – en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
 </resources>

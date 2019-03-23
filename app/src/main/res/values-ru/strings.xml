@@ -178,6 +178,7 @@
   <string name="detail_panel_cats_loading">Загрузка…</string>
   <string name="detail_panel_cats_none">Ничего не выбрано</string>
   <string name="detail_description_empty">Нет описания</string>
+  <string name="detail_discussion_empty">Обсуждений нет</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
   <string name="menu_refresh">Обновить</string>
   <string name="storage_permission_title">Запрос разрешения по использованию внешнего носителя</string>
@@ -193,6 +194,7 @@
   <string name="no">Нет</string>
   <string name="media_detail_title">Название</string>
   <string name="media_detail_description">Описание</string>
+  <string name="media_detail_discussion">Обсуждение</string>
   <string name="media_detail_author">Автор</string>
   <string name="media_detail_uploaded_date">Дата загрузки</string>
   <string name="media_detail_license">Лицензия</string>
@@ -208,7 +210,7 @@
   <string name="maximum_limit_alert">Невозможно отобразить более 500</string>
   <string name="enter_valid">Укажите корректное значение</string>
   <string name="cannot_be_zero">Лимит загрузок не может быть нулевым</string>
-  <string name="set_limit" fuzzy="true">Установить лимит недавних загрузок</string>
+  <string name="set_limit">Лимит недавних загрузок</string>
   <string name="login_failed_2fa_not_supported">Двухфакторная аутентификация в настоящее время не поддерживается.</string>
   <string name="logout_verification">Вы действительно хотите выйти?</string>
   <string name="commons_logo">Логотип Викисклада</string>
@@ -307,7 +309,7 @@
   <string name="about_translate_cancel">Отмена</string>
   <string name="retry">Повторить</string>
   <string name="showcase_view_got_it_button">Понятно!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Это места поблизости, статьи о которых нуждаются в иллюстрациях</string>
+  <string name="showcase_view_whole_nearby_activity">Это места поблизости, статьи о которых нуждаются в иллюстрациях.\n\nПосле нажатия кнопки \"Искать в этой области\" карта фиксируется и происходит поиск вокруг указанного места.</string>
   <string name="showcase_view_list_icon">Нажатие этой кнопки сгенерирует список таких мест</string>
   <string name="showcase_view_plus_fab">Вы можете загрузить изображение для любого из этих мест, сделав снимок камерой или выбрав уже существующее изображение из галереи</string>
   <string name="no_images_found">Изображений не найдено!</string>
@@ -326,6 +328,8 @@
   <string name="error_loading_subcategories">При загрузке подкатегорий произошла ошибка.</string>
   <string name="search_tab_title_media">МЕДИАФАЙЛЫ</string>
   <string name="search_tab_title_categories">КАТЕГОРИИ</string>
+  <string name="explore_tab_title_featured">ИЗБРАННОЕ</string>
+  <string name="explore_tab_title_mobile">ЗАГРУЖЕНО ТЕКУЩИМ ПРИЛОЖЕНИЕМ</string>
   <string name="successful_wikidata_edit">Изображение успешно добавлено на страницу викиданных!</string>
   <string name="wikidata_edit_failure">Не удалось обновить соответствующую страницу викиданных!</string>
   <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
@@ -356,8 +360,10 @@
   <string name="add_description">+ Добавление описания</string>
   <string name="no_recent_searches">История поиска пуста</string>
   <string name="delete_recent_searches_dialog">Вы уверены, что хотите очистить историю поисковых запросов?</string>
+  <string name="delete_search_dialog">Удалить этот поиск?</string>
   <string name="search_history_deleted">История поиска очищена</string>
   <string name="nominate_delete">Номинировать к удалению</string>
+  <string name="delete">УДАЛИТЬ</string>
   <string name="Achievements">Достижения</string>
   <string name="statistics">СТАТИСТИКА</string>
   <string name="statistics_thanks">Получены благодарности</string>
@@ -416,8 +422,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Я осознал, что это разглашает мою приватность</string>
   <string name="deletion_reason_no_longer_want_public">Я передумал. Больше не хочу чтобы было доступным публично</string>
   <string name="deletion_reason_not_interesting">Извините, это изображение не для энциклопедии</string>
-  <string name="uploaded_by_myself" fuzzy="true">Загружено мною на</string>
-  <string name="no_uploads" fuzzy="true">Добро пожаловать на Викисклад!\n\nЗагрузите ваш первый файл, нажав на значок камеры или галереи.</string>
+  <string name="uploaded_by_myself">Загружено мною на сайт «%1$s» и использовано в {{PLURAL:%2$d|one=одной статье|%2$d статьях}}.</string>
+  <string name="no_uploads">Добро пожаловать на Викисклад!\n\nЗагрузите ваш первый файл, нажав на кнопку добавления.</string>
   <string name="desc_language_Worldwide">Всемирные</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>
@@ -430,7 +436,7 @@
   <string name="yes_submit">Да, отправить</string>
   <string name="no_go_back">Нет, вернуться</string>
   <string name="upload_flow_all_images_in_set">(Для всех изображений в наборе)</string>
-  <string name="search_this_area">Поискать в этой области</string>
+  <string name="search_this_area">Искать в этой области</string>
   <string name="nearby_card_permission_title">Запрос разрешения</string>
   <string name="nearby_card_permission_explanation">Вы бы хотели чтобы использовалось ваше текущее местоположение для показа ближайшего места, у которого ещё нет изображений?</string>
   <string name="unable_to_display_nearest_place">Невозможно отобразить ближайшее место, которому требуются изображения без разрешения на геолокацию</string>

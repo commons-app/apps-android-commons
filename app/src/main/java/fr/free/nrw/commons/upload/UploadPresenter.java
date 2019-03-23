@@ -115,11 +115,11 @@ public class UploadPresenter {
                     List<Description> descriptions) {
         Timber.e("Inside handleNext");
         view.showProgressDialog();
-        uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
+        compositeDisposable.add(uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageResult -> handleImage(title, descriptions, imageResult),
-                        throwable -> Timber.e(throwable, "Error occurred while handling image"));
+                        throwable -> Timber.e(throwable, "Error occurred while handling image")));
     }
 
     private void handleImage(Title title, List<Description> descriptions, Integer imageResult) {
