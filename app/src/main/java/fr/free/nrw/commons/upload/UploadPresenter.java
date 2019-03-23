@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -26,6 +27,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Proxy;
 import java.net.URI;
 import java.util.ArrayList;
@@ -186,6 +188,10 @@ public class UploadPresenter {
     Uri restoreEXIFData(Uri originalImageUri, Uri postCropUri) throws IOException, ImageReadException, ImageWriteException {
         InputStream iStream =   context.getContentResolver().openInputStream(postCropUri);
         byte[] inputData = ByteStreams.toByteArray(iStream);
+        TiffImageMetadata metadata = readExifMetadata(originalImageUri);
+        if (metadata == null)
+            return originalImageUri;
+        else
         return writeExifMetadata(readExifMetadata(originalImageUri), inputData);
     }
 
@@ -205,19 +211,14 @@ public class UploadPresenter {
             throws ImageReadException, ImageWriteException, IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         new ExifRewriter().updateExifMetadataLossless(jpegData, out, metadata.getOutputSet());
-        out.close();
-        Bitmap bmp = BitmapFactory.decodeByteArray(out.toByteArray(), 0, out.toByteArray().length);
-        EXIFReader.processMetadata(getImageUri(bmp, Bitmap.CompressFormat.JPEG,100).getPath());
-        return getImageUri(bmp, Bitmap.CompressFormat.JPEG,100);
+        File myFileName = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/My Directory");
+        String filePath = myFileName.toString();
+        try(OutputStream outputStream = new FileOutputStream(new File(filePath))) {
+            out.writeTo(outputStream);
+        }
+        Uri uri = Uri.fromFile(new File(filePath));
+        return uri;
     }
-    public Uri getImageUri(Bitmap src, Bitmap.CompressFormat format, int quality) {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        src.compress(format, quality, os);
-
-        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), src, "title", null);
-        return Uri.parse(path);
-    }
-
 
     /**
      * Called by the next button in {@link UploadActivity}

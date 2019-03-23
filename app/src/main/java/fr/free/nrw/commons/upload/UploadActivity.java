@@ -485,8 +485,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                     e.printStackTrace();
                 }
 
-                //files.get(currentItem).updateFilePath(resultUri);
-                fr.free.nrw.commons.upload.EXIFReader.processMetadata(resultUri.getPath());
+                files.get(currentItem).updateFilePath(resultUri);
                 Intent shareIntent = new Intent(this, UploadActivity.class);
                 shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
                 shareIntent.putExtra(EXTRA_SOURCE, source);
