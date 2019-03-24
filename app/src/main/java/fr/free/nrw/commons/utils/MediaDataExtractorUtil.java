@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,8 +33,17 @@ public class MediaDataExtractorUtil {
      * @return
      */
     public static List<String> extractCategoriesFromList(String source) {
-        String[] categories = source.split("\\|");
-        return Arrays.asList(categories);
+        if (StringUtils.isNullOrWhiteSpace(source)) {
+            return new ArrayList<>();
+        }
+        String[] cats = source.split("\\|");
+        List<String> categories = new ArrayList<>();
+        for (String category : cats) {
+            if (!StringUtils.isNullOrWhiteSpace(category.trim())) {
+                categories.add(category);
+            }
+        }
+        return categories;
     }
 
 }
