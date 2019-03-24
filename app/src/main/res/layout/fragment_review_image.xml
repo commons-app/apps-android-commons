@@ -4,12 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scroll"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomview"
-        android:layout_alignParentTop="true">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,8 +66,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-    </ScrollView>
 
 
     <View
