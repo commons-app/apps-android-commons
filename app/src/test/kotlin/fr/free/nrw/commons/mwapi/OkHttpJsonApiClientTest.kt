@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.mwapi
 
-import android.os.Build
 import com.google.gson.Gson
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.utils.ConfigUtils
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient.mapType
 import junit.framework.Assert.assertEquals
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -18,11 +17,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import java.net.URLDecoder
-import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, sdk = [23], application = TestCommonsApplication::class)
@@ -59,21 +57,20 @@ class OkHttpJsonApiClientTest {
     @Test
     fun getCategoryImages() {
         server.enqueue(getFirstPageOfImages())
-        val categoryImages = testObject.getCategoryImages("Watercraft moored off shore")
+        val categoryImages = testObject.getCategoryImages("Watercraft moored off shore")!!.blockingGet()
 
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
-                Assert.assertEquals("format", body["json"])
+                Assert.assertEquals("json", body["format"])
                 Assert.assertEquals("query", body["action"])
-                Assert.assertEquals("generator", body["categorymembers"])
-                Assert.assertEquals("gcmtype", body["file"])
-                Assert.assertEquals("gcmtitle", body["Watercraft moored off shore"])
-                Assert.assertEquals("gcmsort", body["timestamp"])
-                Assert.assertEquals("gcmdir", body["desc"])
-                Assert.assertEquals("gcmlimit", body["2"])
+                Assert.assertEquals("categorymembers", body["generator"])
+                Assert.assertEquals("file", body["gcmtype"])
+                Assert.assertEquals("Watercraft moored off shore", body["gcmtitle"])
+                Assert.assertEquals("timestamp", body["gcmsort"])
+                Assert.assertEquals("desc", body["gcmdir"])
             }
         }
-        assertEquals(categoryImages!!.blockingGet().size, 2)
+        assertEquals(categoryImages.size, 2)
     }
 
     private fun getFirstPageOfImages(): MockResponse {
@@ -94,51 +91,48 @@ class OkHttpJsonApiClientTest {
     fun getCategoryImagesWithContinue() {
         server.enqueue(getFirstPageOfImages())
         server.enqueue(getSecondPageOfImages())
-        val categoryImages = testObject.getCategoryImages("Watercraft moored off shore")
+        val categoryImages = testObject.getCategoryImages("Watercraft moored off shore")!!.blockingGet()
 
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
-                Assert.assertEquals("format", body["json"])
+                Assert.assertEquals("json", body["format"])
                 Assert.assertEquals("query", body["action"])
-                Assert.assertEquals("generator", body["categorymembers"])
-                Assert.assertEquals("gcmtype", body["file"])
-                Assert.assertEquals("gcmtitle", body["Watercraft moored off shore"])
-                Assert.assertEquals("gcmsort", body["timestamp"])
-                Assert.assertEquals("gcmdir", body["desc"])
-                Assert.assertEquals("gcmlimit", body["2"])
+                Assert.assertEquals("categorymembers", body["generator"])
+                Assert.assertEquals("file", body["gcmtype"])
+                Assert.assertEquals("Watercraft moored off shore", body["gcmtitle"])
+                Assert.assertEquals("timestamp", body["gcmsort"])
+                Assert.assertEquals("desc", body["gcmdir"])
             }
         }
 
-        assertEquals(categoryImages!!.blockingGet().size, 2)
+        assertEquals(categoryImages.size, 2)
 
-        val categoryImagesContinued = testObject.getCategoryImages("Watercraft moored off shore")
+        `when`(sharedPreferences.getJson<HashMap<String, String>>("query_continue_Watercraft moored off shore", mapType))
+                .thenReturn(hashMapOf(Pair("gcmcontinue", "testvalue"), Pair("continue", "gcmcontinue||")))
+
+
+        val categoryImagesContinued = testObject.getCategoryImages("Watercraft moored off shore")!!.blockingGet()
 
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
-                Assert.assertEquals("format", body["json"])
+                Assert.assertEquals("json", body["format"])
                 Assert.assertEquals("query", body["action"])
-                Assert.assertEquals("generator", body["categorymembers"])
-                Assert.assertEquals("gcmtype", body["file"])
-                Assert.assertEquals("gcmtitle", body["Watercraft moored off shore"])
-                Assert.assertEquals("gcmsort", body["timestamp"])
-                Assert.assertEquals("gcmdir", body["desc"])
-                Assert.assertEquals("gcmlimit", body["2"])
-                Assert.assertEquals("gcmcontinue", body["testvalue"])
-                Assert.assertEquals("continue", body["gcmcontinue||"])
+                Assert.assertEquals("categorymembers", body["generator"])
+                Assert.assertEquals("file", body["gcmtype"])
+                Assert.assertEquals("Watercraft moored off shore", body["gcmtitle"])
+                Assert.assertEquals("timestamp", body["gcmsort"])
+                Assert.assertEquals("desc", body["gcmdir"])
+                Assert.assertEquals("testvalue", body["gcmcontinue"])
+                Assert.assertEquals("gcmcontinue||", body["continue"])
             }
         }
 
-        assertEquals(categoryImagesContinued!!.blockingGet().size, 2)
+        assertEquals(categoryImagesContinued.size, 2)
     }
 
     private fun assertBasicRequestParameters(server: MockWebServer, method: String): RecordedRequest = server.takeRequest().let {
         Assert.assertEquals("/", it.requestUrl.encodedPath())
         Assert.assertEquals(method, it.method)
-        Assert.assertEquals("Commons/${ConfigUtils.getVersionNameWithSha(RuntimeEnvironment.application)} (https://mediawiki.org/wiki/Apps/Commons) Android/${Build.VERSION.RELEASE}",
-                it.getHeader("User-Agent"))
-        if ("POST" == method) {
-            Assert.assertEquals("application/x-www-form-urlencoded", it.getHeader("Content-Type"))
-        }
         return it
     }
 

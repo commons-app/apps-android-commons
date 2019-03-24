@@ -45,7 +45,7 @@ import timber.log.Timber;
 @Singleton
 public class OkHttpJsonApiClient {
 
-    private static final Type mapType = new TypeToken<Map<String, String>>() {
+    public static final Type mapType = new TypeToken<Map<String, String>>() {
     }.getType();
 
     private final OkHttpClient okHttpClient;
@@ -294,10 +294,16 @@ public class OkHttpJsonApiClient {
             if (response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
                 MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
+                if (mwQueryResponse.query() == null) {
+                    return mediaList;
+                }
                 List<MwQueryPage> pages = mwQueryResponse.query().pages();
                 putContinueValues(query, mwQueryResponse.continuation());
                 for (MwQueryPage page : pages) {
-                    mediaList.add(Media.from(page));
+                    Media media = Media.from(page);
+                    if (media != null) {
+                        mediaList.add(media);
+                    }
                 }
             }
             return mediaList;
@@ -345,9 +351,15 @@ public class OkHttpJsonApiClient {
                 String json = response.body().string();
                 MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
                 putContinueValues(categoryName, mwQueryResponse.continuation());
+                if (mwQueryResponse.query() == null) {
+                    return mediaList;
+                }
                 List<MwQueryPage> pages = mwQueryResponse.query().pages();
                 for (MwQueryPage page : pages) {
-                    mediaList.add(Media.from(page));
+                    Media media = Media.from(page);
+                    if (media != null) {
+                        mediaList.add(media);
+                    }
                 }
             }
             return mediaList;

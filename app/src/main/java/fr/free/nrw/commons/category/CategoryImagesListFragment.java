@@ -101,7 +101,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param keyword
      */
     private void resetQueryContinueValues(String keyword) {
-        categoryKvStore.remove(keyword);
+        categoryKvStore.remove("query_continue_" + keyword);
     }
 
     /**
