@@ -3,6 +3,11 @@ package fr.free.nrw.commons.utils;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
+/**
+ * Returns a new instance of proxy with overriden invocationhanlder() returning appropriate values
+ * for different datatypes
+ * See https://stackoverflow.com/questions/52083338/expected-to-unbox-a-string-primitive-type-but-was-returned-null
+ */
 public class CustomProxy extends Proxy {
     protected CustomProxy(InvocationHandler h) {
         super(h);
