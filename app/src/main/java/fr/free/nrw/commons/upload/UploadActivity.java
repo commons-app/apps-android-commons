@@ -535,7 +535,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     public void configurePrevButton(){
         prevTitleDecs.setOnClickListener((View v) -> {
             BasicKvStore storePrevTitleDesc = new BasicKvStore(this, "prevTitleDesc");
-            int descCount = storePrevTitleDesc.getInt("descCount");
             String title = storePrevTitleDesc.getString("title");
             Title t = new Title();
             t.setTitleText(title);
@@ -750,7 +749,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         flag++;
         BasicKvStore storePrevTitleDesc = new BasicKvStore(this, "prevTitleDesc");
         storePrevTitleDesc.putString("title", descriptionsAdapter.getTitle().toString());
-        storePrevTitleDesc.putInt("descCount", descriptionsAdapter.getItemCount());
         for(int i = 0; i < descriptionsAdapter.getItemCount() - 1; i++) {
             storePrevTitleDesc.putString("description"+Integer.toString(i), descriptionsAdapter.getDescriptions().get(i).getDescriptionText());
         }
