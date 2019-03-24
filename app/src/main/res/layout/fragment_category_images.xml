@@ -20,10 +20,19 @@
         />
 
     <ProgressBar
+        android:id="@+id/bottomProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:visibility="gone"/>
+
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone"
         android:id="@+id/loadingImagesProgressBar"
         />
 
@@ -36,6 +45,7 @@
         android:numColumns="auto_fit"
         android:listSelector="@null"
         android:fadingEdge="none"
+        android:layout_above="@+id/bottomProgressBar"
         android:fastScrollEnabled="true"
         />
 

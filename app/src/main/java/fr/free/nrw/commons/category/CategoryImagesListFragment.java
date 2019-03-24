@@ -52,6 +52,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
     @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
     @BindView(R.id.categoryImagesList) GridView gridView;
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
+    @BindView(R.id.bottomProgressBar)
+    ProgressBar bottomProgressBar;
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private boolean hasMoreImages = true;
     private boolean isLoading = true;
@@ -189,6 +192,8 @@ public class CategoryImagesListFragment extends DaggerFragment {
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount + 1 >= totalItemCount)) {
                     isLoading = true;
+                    progressBar.setVisibility(GONE);
+                    bottomProgressBar.setVisibility(View.VISIBLE);
                     fetchMoreImages();
                 }
                 if (!hasMoreImages){
@@ -222,7 +227,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
             return;
         }
 
-        progressBar.setVisibility(VISIBLE);
         compositeDisposable.add(Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -266,6 +270,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 e.printStackTrace();
             }
         }
+        bottomProgressBar.setVisibility(GONE);
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);
