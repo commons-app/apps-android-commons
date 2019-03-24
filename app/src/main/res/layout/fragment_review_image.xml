@@ -31,7 +31,7 @@
             <TextView
                 android:id="@+id/reviewQuestionContext"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:gravity="center_vertical"
                 android:text="testing2"
@@ -78,7 +78,7 @@
     <View
         android:id="@+id/bottomview"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="15dp"
         android:layout_alignParentBottom="true"
         android:background="?attr/colorPrimaryDark"></View>
 
