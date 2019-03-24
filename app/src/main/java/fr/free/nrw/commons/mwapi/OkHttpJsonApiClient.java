@@ -235,11 +235,8 @@ public class OkHttpJsonApiClient {
 
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
-            if (response != null && response.body() != null && response.isSuccessful()) {
+            if (response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
-                if (json == null) {
-                    return null;
-                }
                 MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
                 return Media.from(mwQueryPage.query().firstPage());
             }
