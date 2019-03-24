@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include layout="@layout/toolbar"/>
+            <include layout="@layout/toolbar" />
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -26,31 +26,71 @@
                     android:id="@+id/skip_image"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
                     android:text="SKIP THIS IMAGE"
                     android:textColor="@color/button_blue_dark"
-                    android:background="@android:color/transparent"
-                    android:layout_weight="1"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="5dp">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:src="@drawable/commons_logo_large" />
+
+                    <RelativeLayout
+                        android:id="@+id/uploadOverlay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center|bottom"
+                        android:background="#77000000"
+                        android:gravity="center"
+                        android:padding="@dimen/tiny_gap">
+
+                        <TextView
+                            android:id="@+id/imageCaption"
+                            style="?android:textAppearanceMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#FFFFFFFF" />
+
+                    </RelativeLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
 
 
                 <fr.free.nrw.commons.review.ReviewViewPager
                     android:id="@+id/reviewPager"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:fadingEdge="none"
-                    android:layout_weight="13.5"/>
+                    android:layout_weight="13.5"
+                    android:fadingEdge="none" />
 
 
                 <com.viewpagerindicator.CirclePageIndicator
                     android:id="@+id/reviewPagerIndicator"
-                    android:layout_height="0dp"
                     android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_gravity="center"
-                    android:foregroundGravity="center_vertical"
-                    android:elevation="1dp"
-                    android:background="?attr/colorPrimaryDark"
                     android:layout_weight="0.5"
-                />
+                    android:background="?attr/colorPrimaryDark"
+                    android:elevation="1dp"
+                    android:foregroundGravity="center_vertical" />
 
             </LinearLayout>
 

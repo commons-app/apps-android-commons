@@ -460,12 +460,12 @@ public class Media implements Parcelable {
                 page.title(),
                 imageInfo.getMetadata().imageDescription().value(),
                 0,
-                DateUtils.getDateFromString(imageInfo.getMetadata().getDateTimeOriginal().value()),
-                DateUtils.getDateFromString(imageInfo.getMetadata().getDateTime().value()),
-                StringUtils.getParsedStringFromHtml(imageInfo.getMetadata().getArtist().value())
+                DateUtils.getDateFromString(imageInfo.getMetadata().dateTimeOriginal().value()),
+                DateUtils.getDateFromString(imageInfo.getMetadata().dateTime().value()),
+                StringUtils.getParsedStringFromHtml(imageInfo.getMetadata().artist().value())
         );
 
-        media.setLicense(imageInfo.getMetadata().getLicenseShortName().value());
+        media.setLicense(imageInfo.getMetadata().licenseShortName().value());
 
         return media;
     }
