@@ -99,7 +99,8 @@ dependencies {
 
     //metadata extractor
     implementation 'com.drewnoakes:metadata-extractor:2.11.0'
-    implementation files('libs/commons-imaging-1.0-R1401825.jar')
+    implementation fileTree(include:['commons-imaging-1.0-R1401825.jar'], dir: "/media/vanshika/25151b5f-bb91-4813-863c-b418727a0635/vanshika/apps-android-commons/app/libs")
+    //implementation files('libs/commons-imaging-1.0-R1401825.jar')
     annotationProcessor 'com.android.tools.build.jetifier:jetifier-core:1.0.0-beta02'
 }
 

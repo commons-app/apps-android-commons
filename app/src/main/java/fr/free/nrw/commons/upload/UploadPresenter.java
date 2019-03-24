@@ -190,7 +190,7 @@ public class UploadPresenter {
         byte[] inputData = ByteStreams.toByteArray(iStream);
         TiffImageMetadata metadata = readExifMetadata(originalImageUri);
         if (metadata == null)
-            return originalImageUri;
+            return postCropUri;
         else
         return writeExifMetadata(readExifMetadata(originalImageUri), inputData);
     }
