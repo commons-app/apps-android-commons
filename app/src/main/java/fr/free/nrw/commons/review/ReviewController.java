@@ -69,7 +69,8 @@ public class ReviewController {
     }
 
     @SuppressLint("CheckResult")
-    public void reportWrongCategory(@NonNull Activity activity) {
+    public void reportWrongCategory(@NonNull Activity activity, String fileName) {
+        media = new Media("File:" + fileName);
         Context context = activity.getApplicationContext();
         ApplicationlessInjection
                 .getInstance(context)
@@ -84,7 +85,7 @@ public class ReviewController {
         toast.show();
 
         Observable.fromCallable(() -> {
-            publishProgress(context, 0);
+            publishProgressforWrongCategory(context, 0);
 
             String editToken;
             String authCookie;
@@ -98,10 +99,10 @@ public class ReviewController {
                 if (editToken.equals("+\\")) {
                     return false;
                 }
-                publishProgress(context, 1);
+                publishProgressforWrongCategory(context, 1);
 
                 mwApi.appendEdit(editToken, "\n{{subst:chc}}\n", media.getFilename(), summary);
-                publishProgress(context, 2);
+                publishProgressforWrongCategory(context, 2);
             } catch (Exception e) {
                 Timber.d(e);
                 return false;
@@ -135,7 +136,7 @@ public class ReviewController {
                 }, Timber::e);
     }
 
-    private void publishProgress(@NonNull Context context, int i) {
+    private void publishProgressforWrongCategory(@NonNull Context context, int i) {
         int[] messages = new int[]{R.string.getting_edit_token, R.string.check_category_adding_template};
         String message = "";
         if (0 < i && i < messages.length) {
@@ -151,8 +152,24 @@ public class ReviewController {
         notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
     }
 
+    private void publishProgressforSendingThanks(Context context, int i){
+        int[] messages = new int[]{R.string.getting_edit_token, R.string.send_thank_send};
+        String message = "";
+        if (0 < i && i < messages.length) {
+            message = context.getString(messages[i]);
+        }
+
+        notificationBuilder.setContentTitle(context.getString(R.string.send_thank_notification_title))
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setProgress(messages.length, i, false)
+                .setOngoing(true);
+        notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
+    }
+
     @SuppressLint("CheckResult")
-    public void sendThanks(@NonNull Activity activity) {
+    public void sendThanks(@NonNull Activity activity, String fileName) {
         Context context = activity.getApplicationContext();
         ApplicationlessInjection
                 .getInstance(context)
@@ -165,8 +182,10 @@ public class ReviewController {
         toast = Toast.makeText(context, context.getString(R.string.send_thank_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
         toast.show();
 
+        media = new Media("File:" + fileName);
+
         Observable.fromCallable(() -> {
-            publishProgress(context, 0);
+            publishProgressforSendingThanks(context, 0);
 
             String editToken;
             String authCookie;
@@ -178,10 +197,10 @@ public class ReviewController {
                 if (editToken.equals("+\\")) {
                     return false;
                 }
-                publishProgress(context, 1);
+                publishProgressforSendingThanks(context, 1);
                 assert firstRevision != null;
                 mwApi.thank(editToken, firstRevision.getRevid());
-                publishProgress(context, 2);
+                publishProgressforSendingThanks(context, 2);
             } catch (Exception e) {
                 Timber.d(e);
                 return false;
