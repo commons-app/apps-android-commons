@@ -85,7 +85,7 @@ public class ReviewController {
         toast.show();
 
         Observable.fromCallable(() -> {
-            publishProgressforWrongCategory(context, 0);
+            publishProgressForWrongCategory(context, 0);
 
             String editToken;
             String authCookie;
@@ -99,10 +99,10 @@ public class ReviewController {
                 if (editToken.equals("+\\")) {
                     return false;
                 }
-                publishProgressforWrongCategory(context, 1);
+                publishProgressForWrongCategory(context, 1);
 
                 mwApi.appendEdit(editToken, "\n{{subst:chc}}\n", media.getFilename(), summary);
-                publishProgressforWrongCategory(context, 2);
+                publishProgressForWrongCategory(context, 2);
             } catch (Exception e) {
                 Timber.d(e);
                 return false;
@@ -136,7 +136,7 @@ public class ReviewController {
                 }, Timber::e);
     }
 
-    private void publishProgressforWrongCategory(@NonNull Context context, int i) {
+    private void publishProgressForWrongCategory(@NonNull Context context, int i) {
         int[] messages = new int[]{R.string.getting_edit_token, R.string.check_category_adding_template};
         String message = "";
         if (0 < i && i < messages.length) {
@@ -152,7 +152,7 @@ public class ReviewController {
         notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
     }
 
-    private void publishProgressforSendingThanks(Context context, int i){
+    private void publishProgressForSendingThank(Context context, int i){
         int[] messages = new int[]{R.string.getting_edit_token, R.string.send_thank_send};
         String message = "";
         if (0 < i && i < messages.length) {
@@ -168,8 +168,14 @@ public class ReviewController {
         notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
     }
 
+    /**
+     * @param activity
+     * @param fileName Name of the file which recieves "thanks"
+     * Sending "Thanks" to the user for the particular contribution
+     * Generating a notification for the current user for publishing progress of sending thanks and also completion*/
+
     @SuppressLint("CheckResult")
-    public void sendThanks(@NonNull Activity activity, String fileName) {
+    public void sendThank(@NonNull Activity activity, String fileName) {
         Context context = activity.getApplicationContext();
         ApplicationlessInjection
                 .getInstance(context)
@@ -185,7 +191,7 @@ public class ReviewController {
         media = new Media("File:" + fileName);
 
         Observable.fromCallable(() -> {
-            publishProgressforSendingThanks(context, 0);
+            publishProgressForSendingThank(context, 0);
 
             String editToken;
             String authCookie;
@@ -197,10 +203,10 @@ public class ReviewController {
                 if (editToken.equals("+\\")) {
                     return false;
                 }
-                publishProgressforSendingThanks(context, 1);
+                publishProgressForSendingThank(context, 1);
                 assert firstRevision != null;
                 mwApi.thank(editToken, firstRevision.getRevid());
-                publishProgressforSendingThanks(context, 2);
+                publishProgressForSendingThank(context, 2);
             } catch (Exception e) {
                 Timber.d(e);
                 return false;
