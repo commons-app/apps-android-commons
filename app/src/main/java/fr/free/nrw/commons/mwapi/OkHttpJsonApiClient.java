@@ -310,6 +310,11 @@ public class OkHttpJsonApiClient {
         });
     }
 
+    /**
+     * It takes a urlBuilder and appends all the continue values as query parameters
+     * @param query
+     * @param urlBuilder
+     */
     private void appendQueryContinueValues(String query, HttpUrl.Builder urlBuilder) {
         Map<String, String> continueValues = getContinueValues(query);
         if (continueValues != null && continueValues.size() > 0) {
@@ -366,10 +371,22 @@ public class OkHttpJsonApiClient {
         });
     }
 
+    /**
+     * Stores the continue values for action=query
+     * These values are sent to the server in the subsequent call to fetch results after this point
+     * @param keyword
+     * @param values
+     */
     private void putContinueValues(String keyword, Map<String, String> values) {
         defaultKvStore.putJson("query_continue_" + keyword, values);
     }
 
+    /**
+     * Retrieves a map of continue values from shared preferences.
+     * These values are appended to the next API call
+     * @param keyword
+     * @return
+     */
     private Map<String, String> getContinueValues(String keyword) {
         return defaultKvStore.getJson("query_continue_" + keyword, mapType);
     }
