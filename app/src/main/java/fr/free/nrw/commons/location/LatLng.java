@@ -4,6 +4,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 /**
@@ -161,6 +162,10 @@ public class LatLng implements Parcelable {
      */
     public double getLatitude() {
         return latitude;
+    }
+
+    public String getDecimalCoordinates() {
+        return latitude + "," + longitude;
     }
 
     public Uri getGmmIntentUri() {

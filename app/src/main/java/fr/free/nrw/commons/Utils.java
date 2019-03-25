@@ -7,9 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,6 +21,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
@@ -175,7 +176,7 @@ public class Utils {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
         }
         catch (android.content.ActivityNotFoundException anfe) {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            handleWebUrl(context, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName));
         }
     }
 
@@ -204,9 +205,9 @@ public class Utils {
         customTabsIntent.launchUrl(context, url);
     }
 
-    public static void handleGeoCoordinates(Context context, String coords) {
+    public static void handleGeoCoordinates(Context context, LatLng latLng) {
         try {
-            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + coords);
+            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + latLng.getDecimalCoordinates());
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             context.startActivity(mapIntent);

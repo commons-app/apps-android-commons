@@ -16,6 +16,7 @@ import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.StringUtils;
@@ -224,7 +225,7 @@ public class UploadPresenter {
     void openCoordinateMap() {
         GPSExtractor gpsObj = uploadModel.getCurrentItem().getGpsCoords();
         if (gpsObj != null && gpsObj.imageCoordsExists) {
-            view.launchMapActivity(gpsObj.getDecLatitude() + "," + gpsObj.getDecLongitude());
+            view.launchMapActivity(new LatLng(gpsObj.getDecLatitude(), gpsObj.getDecLongitude(), 0.0f));
         }
     }
 

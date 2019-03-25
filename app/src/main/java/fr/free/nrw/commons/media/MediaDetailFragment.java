@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -51,10 +50,10 @@ import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -62,7 +61,6 @@ import timber.log.Timber;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
@@ -371,8 +369,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.mediaDetailLicense)
     public void onMediaDetailLicenceClicked(){
-        if (!TextUtils.isEmpty(licenseLink(media))) {
-            openWebBrowser(licenseLink(media));
+        String url = licenseLink(media);
+        if (!StringUtils.isNullOrWhiteSpace(url) && getActivity() != null) {
+            Utils.handleWebUrl(getActivity(), Uri.parse(url));
         } else {
             if (isCategoryImage) {
                 Timber.d("Unable to fetch license URL for %s", media.getLicense());
@@ -385,8 +384,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.mediaDetailCoordinates)
     public void onMediaDetailCoordinatesClicked(){
-        if (media.getCoordinates() != null) {
-            openMap(media.getCoordinates());
+        if (media.getCoordinates() != null && getActivity() != null) {
+            Utils.handleGeoCoordinates(getActivity(), media.getCoordinates());
         }
     }
 
@@ -484,8 +483,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
-        if (nominatedForDeletion.getVisibility()== VISIBLE) {
-            openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
+        if (nominatedForDeletion.getVisibility() == VISIBLE && getActivity() != null) {
+            Utils.handleWebUrl(getActivity(), media.getFilePageTitle().getMobileUri());
         }
     }
 
@@ -623,26 +622,4 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-    private void openWebBrowser(String url) {
-        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        //check if web browser available
-        if (browser.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(browser);
-        } else {
-            Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
-            toast.show();
-        }
-
-    }
-
-    private void openMap(LatLng coordinates) {
-        //Open map app at given position
-        Uri gmmIntentUri = Uri.parse(
-                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLongitude());
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-
-        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(mapIntent);
-        }
-    }
 }
