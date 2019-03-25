@@ -123,8 +123,8 @@ class SettingsActivityTest {
 
     @Test
     fun useAuthorNameTogglesOn() {
-        // Turn on "Use external storage" preference if currently off
-        if (!defaultKvStore.getBoolean("useAuthorName", true)) {
+        // Turn on "Use author name" preference if currently off
+        if (!defaultKvStore.getBoolean("useAuthorName", false)) {
             Espresso.onData(PreferenceMatchers.withKey("useAuthorName"))
                     .inAdapterView(withId(android.R.id.list))
                     .perform(click())

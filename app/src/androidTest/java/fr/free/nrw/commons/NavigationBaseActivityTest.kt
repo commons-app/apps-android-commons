@@ -60,6 +60,7 @@ class NavigationBaseActivityTest {
 
     private fun openNavigationDrawerAndNavigateTo(menuItemId: Int) {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
+        UITestHelper.sleep(500)
         onView(withId(R.id.navigation_view)).perform(NavigationViewActions.navigateTo(menuItemId))
     }
 }
