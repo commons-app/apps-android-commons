@@ -420,7 +420,7 @@
   <string name="achievements_fetch_failed">Ceva a mers prost, nu am reușit să ne aducem realizările</string>
   <string name="ends_on">Se încheie la:</string>
   <string name="display_campaigns">Campaniile de afișare</string>
-  <string name="display_campaigns_explanation">Atingeți aici pentru a vedea campaniile în desfășurare</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Atingeți aici pentru a vedea campaniile în desfășurare</string>
   <string name="nearby_campaign_dismiss_message">Nu veți mai vedea campaniile. Cu toate acestea, puteți reactiva această notificare în Setări, dacă doriți.</string>
   <string name="this_function_needs_network_connection">Această funcție necesită conectare la rețea, verificați setările de conectare.</string>
   <string name="bad_token_error_proposed_solution">Încărcarea a eșuat din cauza problemelor cu Edit token. Încearcă să te deconectezi și să intri din nou.</string>

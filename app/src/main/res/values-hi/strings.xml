@@ -387,7 +387,7 @@
   <string name="never_ask_again">फिर कभी न पूछें</string>
   <string name="ends_on">खत्म होगा:</string>
   <string name="display_campaigns">दृश्य अभियान</string>
-  <string name="display_campaigns_explanation">वर्तमान में चल रहे अभियानों को जानने के लिये यहाँ दबायें</string>
+  <string name="display_campaigns_explanation" fuzzy="true">वर्तमान में चल रहे अभियानों को जानने के लिये यहाँ दबायें</string>
   <string name="error_processing_image">छवि संसाधित करते समय त्रुटि आई। कृपया पुन: प्रयास करें!</string>
   <string name="no_image">कोई चित्र उपयोग नहीं हुआ</string>
   <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>

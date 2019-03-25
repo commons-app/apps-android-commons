@@ -33,6 +33,10 @@
   <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
   <string name="upload_failed_notification_title">Falló la xuba de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toque pa velo</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Xubiendo un ficheru</item>
+    <item quantity="other">Xubiendo %1$d ficheros</item>
+  </plurals>
   <string name="title_activity_contributions">Les mios xubes recién</string>
   <string name="contribution_state_queued">En cola</string>
   <string name="contribution_state_failed">Falló</string>
@@ -70,6 +74,14 @@
     <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargues</item>
   </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Principiando %1$d carga</item>
+    <item quantity="other">Principiando %1$d cargues</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargues</item>
+  </plurals>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
   <string name="categories_skip_explanation">Amiesta categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\nPrincipia a escribir p\'amestar categoríes.</string>
   <string name="categories_activity_title">Categoríes</string>
@@ -90,6 +102,7 @@
   <string name="no_uploads_yet">Inda nun xubió denguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Encaboxar</string>
+  <string name="share_license_summary" fuzzy="true">Esta imaxe quedará baxo la llicencia %1$s</string>
   <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Llicencia predeterminada</string>
