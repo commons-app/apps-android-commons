@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Single;
+import timber.log.Timber;
 
 /**
  * Fetch additional media data from the network that we don't store locally.
@@ -49,6 +50,10 @@ public class MediaDataExtractor {
     private Single<String> getDiscussion(String filename) {
         return mediaWikiApi.fetchMediaByFilename(filename.replace("File", "File talk"))
                 .flatMap(mediaResult -> mediaWikiApi.parseWikicode(mediaResult.getWikiSource()))
-                .map(discussion -> Html.fromHtml(discussion).toString());
+                .map(discussion -> Html.fromHtml(discussion).toString())
+                .onErrorReturn(throwable -> {
+                    Timber.e(throwable, "Error occurred while fetching discussion");
+                    return "";
+                });
     }
 }

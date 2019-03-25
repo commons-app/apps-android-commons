@@ -266,8 +266,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         //Always load image from Internet to allow viewing the desc, license, and cats
         image.setMedia(media);
         title.setText(media.getDisplayTitle());
-        desc.setText(""); // fill in from network...
-        license.setText(""); // fill in from network...
+        desc.setText(media.getDescription());
+        license.setText(media.getLicense());
 
         Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename())
                 .subscribeOn(Schedulers.io())

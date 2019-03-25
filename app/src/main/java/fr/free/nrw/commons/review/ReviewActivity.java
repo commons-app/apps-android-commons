@@ -37,8 +37,6 @@ import timber.log.Timber;
 
 public class ReviewActivity extends AuthenticatedActivity {
 
-    public ReviewPagerAdapter reviewPagerAdapter;
-    public ReviewController reviewController;
     @BindView(R.id.reviewPagerIndicator)
     public CirclePageIndicator pagerIndicator;
     @BindView(R.id.toolbar)
@@ -57,8 +55,16 @@ public class ReviewActivity extends AuthenticatedActivity {
     ProgressBar progressBar;
     @BindView(R.id.imageCaption)
     TextView imageCaption;
+
+    public ReviewPagerAdapter reviewPagerAdapter;
+    public ReviewController reviewController;
+
     @Inject
     MediaWikiApi mwApi;
+    @Inject
+    ReviewHelper reviewHelper;
+    @Inject
+    DeleteHelper deleteHelper;
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -70,20 +76,6 @@ public class ReviewActivity extends AuthenticatedActivity {
         Intent reviewActivity = new Intent(context, ReviewActivity.class);
         context.startActivity(reviewActivity);
     }
-    @Inject
-    ReviewHelper reviewHelper;
-    @Inject
-    DeleteHelper deleteHelper;
-
-    @Inject
-    DeleteHelper deleteHelper;
-
-    public ReviewPagerAdapter reviewPagerAdapter;
-
-    public ReviewController reviewController;
-
-    @BindView(R.id.reviewPagerIndicator)
-    public CirclePageIndicator pagerIndicator;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
