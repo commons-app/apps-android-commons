@@ -171,6 +171,7 @@
   <string name="detail_panel_cats_loading">載入中…</string>
   <string name="detail_panel_cats_none">未選擇</string>
   <string name="detail_description_empty">無說明</string>
+  <string name="detail_discussion_empty">沒有討論</string>
   <string name="detail_license_empty">不明授權</string>
   <string name="menu_refresh">重新整理</string>
   <string name="storage_permission_title">請求存儲裝置權限</string>
@@ -186,6 +187,7 @@
   <string name="no">否</string>
   <string name="media_detail_title">標題</string>
   <string name="media_detail_description">說明</string>
+  <string name="media_detail_discussion">討論</string>
   <string name="media_detail_author">作者</string>
   <string name="media_detail_uploaded_date">上傳日期</string>
   <string name="media_detail_license">授權協議</string>
@@ -201,7 +203,7 @@
   <string name="maximum_limit_alert">無法顯示超過 500 項</string>
   <string name="enter_valid">輸入有效數字</string>
   <string name="cannot_be_zero">上傳限制不能為 0</string>
-  <string name="set_limit">設定最近上傳限制</string>
+  <string name="set_limit">最近上傳限制</string>
   <string name="login_failed_2fa_not_supported">目前不支援雙重驗證。</string>
   <string name="logout_verification">您確定要登出嗎？</string>
   <string name="commons_logo">維基共享資源標誌</string>
@@ -300,7 +302,7 @@
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重試</string>
   <string name="showcase_view_got_it_button">了解！</string>
-  <string name="showcase_view_whole_nearby_activity">這些是在您的附近，並且需要圖片來圖解有關它們的維基百科條目之地點</string>
+  <string name="showcase_view_whole_nearby_activity">這些是在您的周遭，並且需要圖片來圖解、描述它們本身的維基百科條目之地點。\n\n請點擊「搜尋此區域」來查看地圖，然後在位置啟動周遭搜尋。</string>
   <string name="showcase_view_list_icon">輕觸此按鈕來帶出這些地點的清單</string>
   <string name="showcase_view_plus_fab">您可從您的圖庫或相機，來上傳任何地點的圖片</string>
   <string name="no_images_found">找不到圖片！</string>
@@ -319,6 +321,8 @@
   <string name="error_loading_subcategories">當載入子分類時發生錯誤。</string>
   <string name="search_tab_title_media">媒體</string>
   <string name="search_tab_title_categories">分類</string>
+  <string name="explore_tab_title_featured">特色</string>
+  <string name="explore_tab_title_mobile">透過行動設備上傳</string>
   <string name="successful_wikidata_edit">圖片已成功添加到維基數據上的 %1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定為桌布</string>
@@ -349,8 +353,10 @@
   <string name="add_description">+ 添加描述</string>
   <string name="no_recent_searches">無近期搜尋</string>
   <string name="delete_recent_searches_dialog">確定要清除搜尋歷史嗎？</string>
+  <string name="delete_search_dialog">您要刪除此搜尋嗎？</string>
   <string name="search_history_deleted">搜尋歷史已刪除</string>
   <string name="nominate_delete">提名刪除</string>
+  <string name="delete">刪除</string>
   <string name="Achievements">成果</string>
   <string name="statistics">統計內容</string>
   <string name="statistics_thanks">已收到的感謝</string>
@@ -432,7 +438,7 @@
   <string name="achievements_fetch_failed">發生了一些狀況，我們無法索取您的成果</string>
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
-  <string name="display_campaigns_explanation">在此輕觸來查看進行中的活動</string>
+  <string name="display_campaigns_explanation" fuzzy="true">在此輕觸來查看進行中的活動</string>
   <string name="nearby_campaign_dismiss_message">您不會再看到活動。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
   <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連接設定。</string>
   <string name="bad_token_error_proposed_solution">出於編輯訊標問題導致上傳失敗。請重試登入後再登入。</string>
@@ -452,4 +458,7 @@
   <string name="error_occurred_in_picking_images">當挑選圖片時發生錯誤</string>
   <string name="image_chooser_title">選擇要上傳的圖片</string>
   <string name="please_wait">請稍待…</string>
+  <string name="images_featured_explanation">特色圖片是出自於高水準技巧的攝影師或繪圖師，且被維基共享資源社群挑選為在站台上的最高品質圖片。</string>
+  <string name="images_via_nearby_explanation">以「附近地點」所上傳的圖片，是透過找出在地圖上地點來上傳的。</string>
+  <string name="thanks_received_explanation">此功能允許編輯者透過利用在歷史頁面或是差異頁面上的感謝連結，來發送感謝通知給做出有用編輯的使用者。</string>
 </resources>

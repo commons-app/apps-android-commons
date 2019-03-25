@@ -41,8 +41,7 @@
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d file uploading</item>
-    <item quantity="other">%1$d件のファイルをアップロード中</item>
+    <item quantity="other">%1$d 件のファイルをアップロード中</item>
   </plurals>
   <string name="title_activity_contributions">自分の最近のアップロードファイル</string>
   <string name="contribution_state_queued">順番待ち中</string>
@@ -81,11 +80,9 @@
     <item quantity="other">(%1$d件のアップロード)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starting %1$d upload</item>
-    <item quantity="other">%1$d件のアップロードを開始中</item>
+    <item quantity="other">%1$d 件のアップロードを開始中</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
@@ -157,6 +154,7 @@
   <string name="welcome_copyright_subtext">インターネットで見つけた画像、ポスター、書籍の表紙など著作権のある素材は避けてください。</string>
   <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>
+  <string name="welcome_help_button_text">&lt;u&gt;詳細情報&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">カテゴリ</string>
   <string name="detail_panel_cats_loading">読み込み中…</string>
   <string name="detail_panel_cats_none">ファイルを選択していません</string>
@@ -185,7 +183,7 @@
   <string name="number_of_uploads">最近のアップロードファイルに表示する最大件数</string>
   <string name="maximum_limit">最大限</string>
   <string name="maximum_limit_alert">表示できるのは500件以下です</string>
-  <string name="set_limit">最近のアップロードファイルに表示する最大件数</string>
+  <string name="set_limit">最近のアップロード上限件数</string>
   <string name="login_failed_2fa_not_supported">2段階認証は現在サポートされていません。</string>
   <string name="logout_verification">ログアウトしてもよろしいですか？</string>
   <string name="commons_logo">コモンズの商標</string>
@@ -268,7 +266,7 @@
   <string name="about_translate_cancel">キャンセル</string>
   <string name="retry">やり直す</string>
   <string name="showcase_view_got_it_button">了解</string>
-  <string name="showcase_view_whole_nearby_activity">近くでウィキペディアの記事に使う写真がない場所はこちら</string>
+  <string name="showcase_view_whole_nearby_activity">以下のとおり、近くにウィキペディアの記事に使う写真が足りない場所があります。\n\n\'この近くを検索\' ボタンを押すと、地図をロックしてその地点周辺の検索結果を表示します。</string>
   <string name="showcase_view_list_icon">このボタンをタップするとリストを表示します</string>
   <string name="showcase_view_plus_fab">場所の写真をアップロードするには、ギャラリーから選ぶことも撮影することもできます</string>
   <string name="no_images_found">画像がありません</string>
@@ -278,6 +276,7 @@
   <string name="app_widget_heading">今日の一枚</string>
   <string name="menu_search_button">検索</string>
   <string name="title_activity_search">検索</string>
+  <string name="search_tab_title_categories">カテゴリ</string>
   <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
   <string name="menu_set_wallpaper">壁紙として設定</string>
@@ -287,5 +286,19 @@
   <string name="share_app_title">アプリをシェアする</string>
   <string name="share_coordinates_not_present">画像の選択中に位置情報を特定できませんでした</string>
   <string name="error_fetching_nearby_places">付近の場所を取得しようとしてエラーが発生しました。</string>
+  <string name="delete_search_dialog">この検索を削除しますか?</string>
+  <string name="delete">削除</string>
   <string name="statistics">統計</string>
+  <string name="submit">送信</string>
+  <plurals name="upload_count_title">
+    <item quantity="other">%1$d 件のアップロード</item>
+  </plurals>
+  <string name="desc_language_Worldwide">全世界</string>
+  <string name="desc_language_America">アメリカ</string>
+  <string name="desc_language_Europe">ヨーロッパ</string>
+  <string name="desc_language_Middle_East">中東</string>
+  <string name="desc_language_Africa">アフリカ</string>
+  <string name="desc_language_Asia">アジア</string>
+  <string name="desc_language_Pacific">太平洋地域</string>
+  <string name="please_wait">お待ちください…</string>
 </resources>

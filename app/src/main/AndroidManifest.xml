@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="fr.free.nrw.commons">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -29,11 +30,13 @@
         android:label="@string/app_name"
         android:theme="@style/LightAppTheme"
         android:largeHeap="true"
-        android:hardwareAccelerated="false"
-        android:supportsRtl="true" >
+        android:supportsRtl="true"
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="commons"
+        tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="org.acra.CrashReportDialog"
-            android:theme="@android:style/Theme.Dialog"
+        <activity android:name="org.acra.dialog.CrashReportDialog"
+            android:process=":acra"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"
             android:finishOnTaskLaunch="true" />
@@ -98,12 +101,19 @@
         <activity
             android:name=".category.CategoryImagesActivity"
             android:label="@string/title_activity_featured_images"
-            android:parentActivityName=".contributions.MainActivity" />
+            android:parentActivityName=".contributions.MainActivity"
+            android:configChanges="orientation|screenSize|keyboard"/>
 
         <activity
             android:name=".category.CategoryDetailsActivity"
             android:label="@string/title_activity_featured_images"
             android:parentActivityName=".contributions.MainActivity" />
+
+        <activity
+            android:name=".explore.categories.ExploreActivity"
+            android:label="@string/title_activity_explore"
+            android:parentActivityName=".contributions.MainActivity"
+            android:configChanges="orientation|screenSize|keyboard" />
 
         <activity
             android:name=".explore.SearchActivity"
@@ -120,6 +130,10 @@
         <activity
             android:name=".bookmarks.BookmarksActivity"
             android:label="@string/title_activity_bookmarks" />
+
+        <activity
+            android:name=".review.ReviewActivity"
+            android:label="@string/title_activity_review" />
 
         <service android:name=".upload.UploadService" />
         <service

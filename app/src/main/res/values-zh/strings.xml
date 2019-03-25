@@ -204,7 +204,7 @@
   <string name="maximum_limit_alert">无法显示超过500张</string>
   <string name="enter_valid">输入有效数字</string>
   <string name="cannot_be_zero">上传数量限制不能是 0</string>
-  <string name="set_limit">设置最近上传限制</string>
+  <string name="set_limit" fuzzy="true">设置最近上传限制</string>
   <string name="login_failed_2fa_not_supported">目前不支持双因素验证。</string>
   <string name="logout_verification">您真的想要退出么？</string>
   <string name="commons_logo">共享资源标志</string>
@@ -303,7 +303,7 @@
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重试</string>
   <string name="showcase_view_got_it_button">明白了！</string>
-  <string name="showcase_view_whole_nearby_activity">这些是您附近需要图片以阐明维基百科条目的地方</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">这些是您附近需要图片以阐明维基百科条目的地方</string>
   <string name="showcase_view_list_icon">点按此按钮会出现这些地点的列表</string>
   <string name="showcase_view_plus_fab">您可以从您的图库或照相机中上传任意地点的图片</string>
   <string name="no_images_found">找不到图片！</string>
@@ -435,7 +435,7 @@
   <string name="achievements_fetch_failed">有错误发生，无法获取你的成就</string>
   <string name="ends_on">结束于：</string>
   <string name="display_campaigns">显示活动</string>
-  <string name="display_campaigns_explanation">点击此处显示正在进行的活动</string>
+  <string name="display_campaigns_explanation" fuzzy="true">点击此处显示正在进行的活动</string>
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
   <string name="bad_token_error_proposed_solution">因为编辑令牌失效上传失败。请尝试登出后重新登录。</string>
@@ -446,8 +446,8 @@
   <string name="no_image">没有被使用的图片</string>
   <string name="no_image_reverted">没有被撤回的图片</string>
   <string name="no_image_uploaded">还没有上传图片</string>
-  <string name="no_notification">您没有未读通知</string>
-  <string name="no_archived_notification">您没有已存档的通知</string>
+  <string name="no_notification" fuzzy="true">您没有未读通知</string>
+  <string name="no_archived_notification" fuzzy="true">您没有已存档的通知</string>
   <string name="share_logs_using">分享日志于</string>
   <string name="menu_option_archived">查看已存档</string>
   <string name="menu_option_unread">查看未读</string>

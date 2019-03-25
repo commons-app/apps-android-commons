@@ -143,7 +143,7 @@
   <string name="number_of_uploads">မိမိ၏ လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက်</string>
   <string name="maximum_limit">အများဆုံး ကန့်သတ်ချက်</string>
   <string name="maximum_limit_alert">၅၀၀ ထက်ပို၍ မပြသနိုင်ပါ</string>
-  <string name="set_limit">လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက် သတ်မှတ်ရန်</string>
+  <string name="set_limit" fuzzy="true">လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက် သတ်မှတ်ရန်</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
   <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
   <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>

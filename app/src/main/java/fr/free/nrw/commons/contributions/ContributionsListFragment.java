@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.contributions;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.ConfigUtils;
 
@@ -51,8 +51,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.fab_layout)
     LinearLayout fab_layout;
 
-    @Inject @Named("default_preferences") BasicKvStore basicKvStore;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") JsonKvStore kvStore;
     @Inject ContributionController controller;
 
     private Animation fab_close;
@@ -66,8 +65,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, view);
-
-        contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
 
         changeProgressBarVisibility(true);
         return view;
@@ -100,8 +97,14 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private void setListeners() {
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
-        fabCamera.setOnClickListener(view -> controller.initiateCameraPick(getActivity()));
-        fabGallery.setOnClickListener(view -> controller.initiateGalleryPick(getActivity(), true));
+        fabCamera.setOnClickListener(view -> {
+            controller.initiateCameraPick(getActivity());
+            animateFAB(isFabOpen);
+        });
+        fabGallery.setOnClickListener(view -> {
+            controller.initiateGalleryPick(getActivity(), true);
+            animateFAB(isFabOpen);
+        });
     }
 
     private void animateFAB(boolean isFabOpen) {

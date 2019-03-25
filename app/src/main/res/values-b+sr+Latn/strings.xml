@@ -181,7 +181,7 @@
   <string name="number_of_uploads">Moj limit za skorašnja otpremanja</string>
   <string name="maximum_limit">Maksimalni limit</string>
   <string name="maximum_limit_alert">Nije moguće prikazati više od 500</string>
-  <string name="set_limit">Postavi limit za skorašnja otpremanja</string>
+  <string name="set_limit" fuzzy="true">Postavi limit za skorašnja otpremanja</string>
   <string name="login_failed_2fa_not_supported">Dvofaktorska autentifikacija trenutno nije podržana.</string>
   <string name="logout_verification">Zaista želite da se odjavite?</string>
   <string name="commons_logo">Logo Ostave</string>
@@ -272,7 +272,7 @@
   <string name="about_translate_cancel">Otkaži</string>
   <string name="retry">Pokušaj ponovo</string>
   <string name="showcase_view_got_it_button">Razumem</string>
-  <string name="showcase_view_whole_nearby_activity">Ovo su mesta u Vašoj blizini kojima je potrebna slika da ilustruje njihove vikipedijske članke</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Ovo su mesta u Vašoj blizini kojima je potrebna slika da ilustruje njihove vikipedijske članke</string>
   <string name="showcase_view_list_icon">Dodir ovog dugmeta daće vam listu ovih mesta</string>
   <string name="showcase_view_plus_fab">Možete da otpremite sliku za bilo koje mesto iz svoje galerije ili kamere</string>
   <string name="no_images_found">Slike nisu pronađene.</string>

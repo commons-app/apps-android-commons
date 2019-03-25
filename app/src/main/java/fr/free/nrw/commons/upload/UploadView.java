@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.net.Uri;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.util.List;
@@ -41,8 +41,6 @@ public interface UploadView {
     void setRightCardVisibility(boolean visible);
 
     void setBottomCardState(boolean state);
-
-    void setRightCardState(boolean bottomCardState);
 
     void setBackground(Uri mediaUri);
 

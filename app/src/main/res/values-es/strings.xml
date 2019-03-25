@@ -14,6 +14,7 @@
 * Ktranz
 * Luisangelrg
 * Macofe
+* MarcoAurelio
 * MarionaDSR
 * Miguel2706
 * Mirzali
@@ -204,7 +205,7 @@
   <string name="maximum_limit">Límite máximo</string>
   <string name="invalid_input">Entrada no válida</string>
   <string name="maximum_limit_alert">No se pueden mostrar más de 500</string>
-  <string name="set_limit">Establecer el límite de subidas recientes</string>
+  <string name="set_limit" fuzzy="true">Establecer el límite de subidas recientes</string>
   <string name="login_failed_2fa_not_supported">Por el momento no se admite la autenticación de dos factores.</string>
   <string name="logout_verification">¿Confirmas que quieres salir?</string>
   <string name="commons_logo">Logo de Commons</string>
@@ -255,6 +256,7 @@
   <string name="upload_problem_image_duplicate">La imagen ya está en Commons.</string>
   <string name="upload_problem_different_geolocation">Esta imagen fue tomada en una ubicación diferente.</string>
   <string name="upload_problem_do_you_continue">¿Todavía quieres cargar esta imagen?</string>
+  <string name="internet_downloaded" fuzzy="true">Por favor sube solo fotografías que tu mismo hayas tomado. No subas nada que hayas descargado desde Internet.</string>
   <string name="give_permission">Otorgar permiso</string>
   <string name="use_external_storage">Utilizar almacenamiento externo</string>
   <string name="use_external_storage_summary">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
@@ -302,7 +304,7 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
   <string name="showcase_view_got_it_button">Entendido</string>
-  <string name="showcase_view_whole_nearby_activity">Estos sitios cercanos a ti necesitan imágenes para ilustrar sus artículos de Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Estos sitios cercanos a ti necesitan imágenes para ilustrar sus artículos de Wikipedia</string>
   <string name="showcase_view_list_icon">Tocando este botón se desplegara una lista de estos lugares</string>
   <string name="showcase_view_plus_fab">Puedes cargar una imagen para cualquier sitio desde la galería o la cámara</string>
   <string name="no_images_found">No se encontró ninguna imagen.</string>
@@ -433,7 +435,7 @@
   <string name="achievements_fetch_failed">Algo salió mal, no pudimos obtener tus logros</string>
   <string name="ends_on">Finaliza el:</string>
   <string name="display_campaigns">Mostrar campañas</string>
-  <string name="display_campaigns_explanation">Toca aquí para ver las campañas en curso</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Toca aquí para ver las campañas en curso</string>
   <string name="nearby_campaign_dismiss_message">Ya no verás las campañas. Sin embargo, puedes volver a habilitar esta notificación en configuración.</string>
   <string name="this_function_needs_network_connection">Esta función requiere conexión de red, verifica tus ajustes de conexión.</string>
   <string name="bad_token_error_proposed_solution">Error de carga debido a problemas con el token de edición. Cierra la sesión y vuelva a entrar.</string>

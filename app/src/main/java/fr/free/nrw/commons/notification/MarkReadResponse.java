@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.notification;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public class MarkReadResponse {
     @SuppressWarnings("unused") @Nullable

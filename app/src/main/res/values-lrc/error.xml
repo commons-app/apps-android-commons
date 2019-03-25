@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Lorestani
 * Mogoeilor
 -->
 <resources>
-  <string name="crash_dialog_ok_toast">دتو منمونیم!</string>
+  <string name="crash_dialog_ok_toast">دتو مٱنمۊنؽم!</string>
 </resources>

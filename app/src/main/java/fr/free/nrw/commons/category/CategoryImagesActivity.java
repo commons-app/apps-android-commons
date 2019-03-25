@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -125,19 +125,6 @@ public class CategoryImagesActivity
         }
         mediaDetails.showImage(i);
         forceInitBackButton();
-    }
-
-    /**
-     * This method is called on backPressed when mediaDetailFragment is opened in the activity.
-     */
-    @Override
-    protected void onResume() {
-        if (supportFragmentManager.getBackStackEntryCount()==1){
-            //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
-            //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
-            onBackPressed();
-        }
-        super.onResume();
     }
 
     /**

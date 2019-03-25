@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.settings;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.appcompat.app.AppCompatDelegate;
 import android.view.MenuItem;
 
 import butterknife.ButterKnife;

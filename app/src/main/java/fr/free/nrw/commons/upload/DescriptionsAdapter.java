@@ -1,25 +1,27 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.ui.widget.CustomEditText;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import fr.free.nrw.commons.utils.BiMap;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -117,7 +119,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
         AppCompatSpinner spinnerDescriptionLanguages;
 
         @BindView(R.id.description_item_edit_text)
-        CustomEditText descItemEditText;
+        EditText descItemEditText;
 
         private View view;
 
@@ -128,6 +130,7 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
             Timber.i("descItemEditText:" + descItemEditText);
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         public void init(int position) {
             if (position == 0) {
                 Timber.d("Title is " + title);
@@ -150,16 +153,19 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     }
                 });
 
-                descItemEditText.setDrawableClickListener(target -> {
-                    switch (target) {
-                        case RIGHT:
-                            if (getAdapterPosition() == 0) {
-                                callback.showAlert(R.string.media_detail_title, R.string.title_info);
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+                descItemEditText.setOnTouchListener((v, event) -> {
+                    // Check this is a touch up event
+                    if(event.getAction() != MotionEvent.ACTION_UP) return false;
+
+                    // Check we are tapping within 15px of the info icon
+                    int extraTapArea = 15;
+                    Drawable info = descItemEditText.getCompoundDrawables()[2];
+                    int infoHitboxX = descItemEditText.getWidth() - info.getBounds().width();
+                    if (event.getX() + extraTapArea < infoHitboxX) return false;
+
+                    // If the above are true, show the info dialog
+                    callback.showAlert(R.string.media_detail_title, R.string.title_info);
+                    return true;
                 });
 
             } else {
@@ -170,10 +176,24 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                 } else {
                     descItemEditText.setText("");
                 }
+
+                // Show the info icon for the first description
                 if (position == 1) {
                     descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(), null);
-                } else {
-                    descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                    descItemEditText.setOnTouchListener((v, event) -> {
+                        // Check this is a touch up event
+                        if(event.getAction() != MotionEvent.ACTION_UP) return false;
+
+                        // Check we are tapping within 15px of the info icon
+                        int extraTapArea = 15;
+                        Drawable info = descItemEditText.getCompoundDrawables()[2];
+                        int infoHitboxX = descItemEditText.getWidth() - info.getBounds().width();
+                        if (event.getX() + extraTapArea < infoHitboxX) return false;
+
+                        // If the above are true, show the info dialog
+                        callback.showAlert(R.string.media_detail_description, R.string.description_info);
+                        return true;
+                    });
                 }
 
                 descItemEditText.addTextChangedListener(new AbstractTextWatcher(descriptionText->{
@@ -185,20 +205,6 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                         ViewUtil.hideKeyboard(v);
                     } else {
                         uploadView.setTopCardState(false);
-                    }
-                });
-
-
-                descItemEditText.setDrawableClickListener(target -> {
-                    switch (target) {
-                        case RIGHT:
-                            if (getAdapterPosition() == 1) {
-                                callback.showAlert(R.string.media_detail_description,
-                                        R.string.description_info);
-                            }
-                            break;
-                        default:
-                            break;
                     }
                 });
 
