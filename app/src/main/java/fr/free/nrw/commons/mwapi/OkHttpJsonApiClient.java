@@ -245,6 +245,56 @@ public class OkHttpJsonApiClient {
     }
 
     /**
+     * This method takes cateogry name as input and returns a list of  Media objects filtered using image generator query
+     * It uses the generator query API to get the images searched using a query, 10 at a time.
+     * @param queryType queryType can be "search" OR "category"
+     * @param keyword
+     * @return
+     */
+    @Nullable
+    public Single<List<Media>> getMediaList(String queryType, String keyword) {
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(commonsBaseUrl)
+                .newBuilder()
+                .addQueryParameter("action", "query")
+                .addQueryParameter("format", "json");
+
+
+        if (queryType.equals("search")) {
+            appendSearchParam(keyword, urlBuilder);
+        } else {
+            appendCategoryParams(keyword, urlBuilder);
+        }
+
+        appendQueryContinueValues(keyword, urlBuilder);
+
+        Request request = new Request.Builder()
+                .url(appendMediaProperties(urlBuilder).build())
+                .build();
+
+        return Single.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            List<Media> mediaList = new ArrayList<>();
+            if (response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
+                putContinueValues(keyword, mwQueryResponse.continuation());
+                if (mwQueryResponse.query() == null) {
+                    return mediaList;
+                }
+                List<MwQueryPage> pages = mwQueryResponse.query().pages();
+                for (MwQueryPage page : pages) {
+                    Media media = Media.from(page);
+                    if (media != null) {
+                        mediaList.add(media);
+                    }
+                }
+            }
+            return mediaList;
+        });
+    }
+
+    /**
      * Whenever imageInfo is fetched, these common properties can be specified for the API call
      * https://www.mediawiki.org/wiki/API:Imageinfo
      * @param builder
@@ -263,51 +313,12 @@ public class OkHttpJsonApiClient {
         return builder;
     }
 
-    /**
-     * This method takes search keyword as input and returns a list of  Media objects filtered using search query
-     * It uses the generator query API to get the images searched using a query, 25 at a time.
-     * @param query keyword to search images on commons
-     * @return
-     */
-    @Nullable
-    public Single<List<Media>> searchImages(String query) {
-        HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(commonsBaseUrl)
-                .newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("generator", "search")
-                .addQueryParameter("format", "json")
+    private void appendSearchParam(String query, HttpUrl.Builder urlBuilder) {
+        urlBuilder.addQueryParameter("generator", "search")
                 .addQueryParameter("gsrwhat", "text")
                 .addQueryParameter("gsrnamespace", "6")
                 .addQueryParameter("gsrlimit", "25")
                 .addQueryParameter("gsrsearch", query);
-
-        appendQueryContinueValues(query, urlBuilder);
-
-        Request request = new Request.Builder()
-                .url(urlBuilder.build())
-                .build();
-
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            List<Media> mediaList = new ArrayList<>();
-            if (response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
-                if (mwQueryResponse.query() == null) {
-                    return mediaList;
-                }
-                List<MwQueryPage> pages = mwQueryResponse.query().pages();
-                putContinueValues(query, mwQueryResponse.continuation());
-                for (MwQueryPage page : pages) {
-                    Media media = Media.from(page);
-                    if (media != null) {
-                        mediaList.add(media);
-                    }
-                }
-            }
-            return mediaList;
-        });
     }
 
     /**
@@ -324,51 +335,13 @@ public class OkHttpJsonApiClient {
         }
     }
 
-    /**
-     * This method takes cateogry name as input and returns a list of  Media objects filtered using image generator query
-     * It uses the generator query API to get the images searched using a query, 10 at a time.
-     * @return
-     */
-    @Nullable
-    public Single<List<Media>> getCategoryImages(String categoryName) {
-        HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(commonsBaseUrl)
-                .newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("generator", "categorymembers")
-                .addQueryParameter("format", "json")
+    private void appendCategoryParams(String categoryName, HttpUrl.Builder urlBuilder) {
+        urlBuilder.addQueryParameter("generator", "categorymembers")
                 .addQueryParameter("gcmtype", "file")
                 .addQueryParameter("gcmtitle", categoryName)
                 .addQueryParameter("gcmsort", "timestamp")//property to sort by;timestamp
                 .addQueryParameter("gcmdir", "desc")//in which direction to sort;descending
                 .addQueryParameter("gcmlimit", "10");
-
-        appendQueryContinueValues(categoryName, urlBuilder);
-
-        Request request = new Request.Builder()
-                .url(appendMediaProperties(urlBuilder).build())
-                .build();
-
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            List<Media> mediaList = new ArrayList<>();
-            if (response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
-                putContinueValues(categoryName, mwQueryResponse.continuation());
-                if (mwQueryResponse.query() == null) {
-                    return mediaList;
-                }
-                List<MwQueryPage> pages = mwQueryResponse.query().pages();
-                for (MwQueryPage page : pages) {
-                    Media media = Media.from(page);
-                    if (media != null) {
-                        mediaList.add(media);
-                    }
-                }
-            }
-            return mediaList;
-        });
     }
 
     /**

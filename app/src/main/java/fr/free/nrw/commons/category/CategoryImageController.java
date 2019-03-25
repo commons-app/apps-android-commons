@@ -25,6 +25,6 @@ public class CategoryImageController {
      * @return
      */
     public Single<List<Media>> getCategoryImages(String categoryName) {
-        return okHttpJsonApiClient.getCategoryImages(categoryName);
+        return okHttpJsonApiClient.getMediaList("category", categoryName);
     }
 }
