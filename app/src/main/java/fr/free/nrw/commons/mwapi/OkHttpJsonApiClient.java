@@ -245,7 +245,7 @@ public class OkHttpJsonApiClient {
     }
 
     /**
-     * This method takes cateogry name as input and returns a list of  Media objects filtered using image generator query
+     * This method takes the keyword and queryType as input and returns a list of  Media objects filtered using image generator query
      * It uses the generator query API to get the images searched using a query, 10 at a time.
      * @param queryType queryType can be "search" OR "category"
      * @param keyword
@@ -313,6 +313,11 @@ public class OkHttpJsonApiClient {
         return builder;
     }
 
+    /**
+     * Append params for search query.
+     * @param query
+     * @param urlBuilder
+     */
     private void appendSearchParam(String query, HttpUrl.Builder urlBuilder) {
         urlBuilder.addQueryParameter("generator", "search")
                 .addQueryParameter("gsrwhat", "text")
