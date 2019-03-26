@@ -59,7 +59,6 @@ public class ReviewActivity extends AuthenticatedActivity {
     TextView imageCaption;
     @Inject
     MediaWikiApi mwApi;
-    Button yesButton, noButton;
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -91,9 +90,6 @@ public class ReviewActivity extends AuthenticatedActivity {
         setContentView(R.layout.activity_review);
         ButterKnife.bind(this);
         initDrawer();
-
-        yesButton=findViewById(R.id.yesButton);
-        noButton=findViewById(R.id.noButton);
 
         reviewController = new ReviewController();
 
