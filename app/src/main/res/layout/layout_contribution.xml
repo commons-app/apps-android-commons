@@ -32,6 +32,27 @@
         android:layout_gravity="center|bottom"
         android:background="#AA000000"
         >
+        <LinearLayout
+            android:id="@+id/failed_image_options_retry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:padding="@dimen/small_gap"
+            >
+
+            <ImageButton
+                android:id="@+id/retryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_retry_white"
+                android:text="@string/menu_retry_upload"
+                android:background="@android:color/transparent"
+                android:padding="8dp"
+                />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -88,16 +109,6 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_cancel_white"
                 android:text="@string/menu_cancel_upload"
-                android:background="@android:color/transparent"
-                android:padding="8dp"
-                />
-
-            <ImageButton
-                android:id="@+id/retryButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_retry_white"
-                android:text="@string/menu_retry_upload"
                 android:background="@android:color/transparent"
                 android:padding="8dp"
                 />
