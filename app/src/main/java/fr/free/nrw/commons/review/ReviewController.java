@@ -68,6 +68,11 @@ public class ReviewController {
                 activity.getResources().getString(R.string.review_c_violation_report_problem));
     }
 
+    /**
+    * @param activity
+     * @param fileName Name of the file for which "Wrong Category" report is to be sent
+     * Generating a notification for the current user for publishing progress of reporting wrong category and also completion of the network request*/
+
     @SuppressLint("CheckResult")
     public void reportWrongCategory(@NonNull Activity activity, String fileName) {
         media = new Media("File:" + fileName);
@@ -136,34 +141,44 @@ public class ReviewController {
                 }, Timber::e);
     }
 
+    /**
+     * @param context
+     * @param i progress as an integer
+    * While reportWrongCategory() is in background notify the user about current progress in the newtwork request*/
+
     private void publishProgressForWrongCategory(@NonNull Context context, int i) {
-        int[] messages = new int[]{R.string.getting_edit_token, R.string.check_category_adding_template};
+        int[] listOfMessages = new int[]{R.string.getting_edit_token, R.string.check_category_adding_template};
         String message = "";
-        if (0 < i && i < messages.length) {
-            message = context.getString(messages[i]);
+        if (0 < i && i < listOfMessages.length) {
+            message = context.getString(listOfMessages[i]);
         }
 
         notificationBuilder.setContentTitle(context.getString(R.string.check_category_notification_title, media.getDisplayTitle()))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setProgress(messages.length, i, false)
+                .setProgress(listOfMessages.length, i, false)
                 .setOngoing(true);
         notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
     }
 
+    /**
+     * @param context
+     * @param i progress as an integer
+     * While sending thanks is in progress notify the user about the current progress in network request*/
+
     private void publishProgressForSendingThank(Context context, int i){
-        int[] messages = new int[]{R.string.getting_edit_token, R.string.send_thank_send};
+        int[] listOfMessages = new int[]{R.string.getting_edit_token, R.string.send_thank_send};
         String message = "";
-        if (0 < i && i < messages.length) {
-            message = context.getString(messages[i]);
+        if (0 < i && i < listOfMessages.length) {
+            message = context.getString(listOfMessages[i]);
         }
 
         notificationBuilder.setContentTitle(context.getString(R.string.send_thank_notification_title))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setProgress(messages.length, i, false)
+                .setProgress(listOfMessages.length, i, false)
                 .setOngoing(true);
         notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
     }
