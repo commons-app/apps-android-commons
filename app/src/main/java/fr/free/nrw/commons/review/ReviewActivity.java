@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,13 +18,16 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -57,6 +61,8 @@ public class ReviewActivity extends AuthenticatedActivity {
     ProgressBar progressBar;
     @BindView(R.id.imageCaption)
     TextView imageCaption;
+    @BindView(R.id.skip_image_info)
+    ImageView skipImageInfo;
     @Inject
     MediaWikiApi mwApi;
 
@@ -102,6 +108,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
 
         skip_image_button.setOnClickListener(view -> runRandomizer());
+        skipImageInfo.setOnClickListener(view -> showSkipImageInfo());
     }
 
     @SuppressLint("CheckResult")
@@ -162,5 +169,21 @@ public class ReviewActivity extends AuthenticatedActivity {
         } else {
             runRandomizer();
         }
+    }
+
+
+    public void showSkipImageInfo(){
+        launchAlert(getResources().getString(R.string.images_uploaded)
+                ,getResources().getString(R.string.images_uploaded_explanation));
+    }
+
+    private void launchAlert(String title, String message){
+        new AlertDialog.Builder(ReviewActivity.this)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .create()
+                .show();
     }
 }
