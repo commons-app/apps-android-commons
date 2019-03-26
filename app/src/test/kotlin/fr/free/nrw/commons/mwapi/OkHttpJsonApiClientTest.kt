@@ -2,9 +2,11 @@ package fr.free.nrw.commons.mwapi
 
 import com.google.gson.Gson
 import fr.free.nrw.commons.BuildConfig
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient.mapType
+import fr.free.nrw.commons.utils.DateUtils
 import junit.framework.Assert.assertEquals
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -21,6 +23,7 @@ import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.net.URLDecoder
+import kotlin.random.Random
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, sdk = [23], application = TestCommonsApplication::class)
@@ -130,6 +133,48 @@ class OkHttpJsonApiClientTest {
         assertEquals(categoryImagesContinued.size, 2)
     }
 
+    @Test
+    fun getMedia() {
+        server.enqueue(getMediaList("", "", "", 1))
+
+        val media = testObject.getMedia("Test.jpg", false)!!.blockingGet()
+
+        assertBasicRequestParameters(server, "GET").let { request ->
+            parseQueryParams(request).let { body ->
+                Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("query", body["action"])
+                Assert.assertEquals("Test.jpg", body["titles"])
+                Assert.assertEquals("imageinfo", body["prop"])
+                Assert.assertEquals("url|extmetadata", body["iiprop"])
+                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName", body["iiextmetadatafilter"])
+            }
+        }
+
+        assert(media is Media)
+    }
+
+    @Test
+    fun getPictureOfTheDay() {
+        val template = "Template:Potd/" + DateUtils.getCurrentDate()
+        server.enqueue(getMediaList("", "", "", 1))
+
+        val media = testObject.getMedia(template, true)!!.blockingGet()
+
+        assertBasicRequestParameters(server, "GET").let { request ->
+            parseQueryParams(request).let { body ->
+                Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("query", body["action"])
+                Assert.assertEquals(template, body["titles"])
+                Assert.assertEquals("images", body["generator"])
+                Assert.assertEquals("imageinfo", body["prop"])
+                Assert.assertEquals("url|extmetadata", body["iiprop"])
+                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName", body["iiextmetadatafilter"])
+            }
+        }
+
+        assert(media is Media)
+    }
+
     private fun testFirstPageSearchQuery() {
         val categoryImages = testObject.getMediaList("search", "Watercraft moored off shore")!!.blockingGet()
 
@@ -171,31 +216,53 @@ class OkHttpJsonApiClientTest {
     }
 
     private fun getFirstPageOfImages(): MockResponse {
-        val mockResponse = MockResponse()
-        mockResponse.setResponseCode(200)
-        mockResponse.setBody("{\"batchcomplete\":\"\",\"continue\":{\"gcmcontinue\":\"testvalue\",\"continue\":\"gcmcontinue||\"},\"query\":{\"pages\":{\"4406048\":{\"pageid\":4406048,\"ns\":6,\"title\":\"File:test1.jpg\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/test1.jpg\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:test1.jpg\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"cat1|cat2\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]},\"24259710\":{\"pageid\":24259710,\"ns\":6,\"title\":\"File:test2.jpg\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/test2.jpg\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:test2.jpg\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"cat3|cat4\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]}}}}")
-        return mockResponse
+        return getMediaList("gcmcontinue", "testvalue", "gcmcontinue||", 2)
     }
 
     private fun getSecondPageOfImages(): MockResponse {
-        val mockResponse = MockResponse()
-        mockResponse.setResponseCode(200)
-        mockResponse.setBody("{\"batchcomplete\":\"\",\"continue\":{\"gcmcontinue\":\"testvalue2\",\"continue\":\"gcmcontinue||\"},\"query\":{\"pages\":{\"4406048\":{\"pageid\":4406048,\"ns\":6,\"title\":\"File:test3.jpg\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/test3.jpg\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:test3.jpg\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"cat5|cat6\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]},\"24259710\":{\"pageid\":24259710,\"ns\":6,\"title\":\"File:test4.jpg\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/test4.jpg\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:test4.jpg\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"cat7\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]}}}}")
-        return mockResponse
+        return getMediaList("gcmcontinue", "testvalue2", "gcmcontinue||", 2)
     }
 
     private fun getFirstPageOfSearchImages(): MockResponse {
-        val mockResponse = MockResponse()
-        mockResponse.setResponseCode(200)
-        mockResponse.setBody("{\"batchcomplete\":\"\",\"continue\":{\"continue\":\"gsroffset||\",\"gsroffset\":\"25\"},\"query\":{\"pages\":{\"4406048\":{\"pageid\":4406048,\"ns\":6,\"title\":\"File:test1.jpg\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/test1.jpg\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:test1.jpg\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"cat1|cat2\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]},\"24259710\":{\"pageid\":24259710,\"ns\":6,\"title\":\"File:test2.jpg\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/test2.jpg\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:test2.jpg\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"cat3|cat4\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]}}}}")
-        return mockResponse
+        return getMediaList("gsroffset", "25", "gsroffset||", 2)
     }
 
     private fun getSecondPageOfSearchImages(): MockResponse {
+        return getMediaList("gsroffset", "25", "gsroffset||", 2)
+    }
+
+    private fun getMediaList(queryContinueType: String,
+                             queryContinueValue: String,
+                             continueVal: String,
+                             numberOfPages: Int): MockResponse {
         val mockResponse = MockResponse()
         mockResponse.setResponseCode(200)
-        mockResponse.setBody("{\"batchcomplete\":\"\",\"continue\":{\"continue\":\"gsroffset||\",\"gsroffset\":\"50\"},\"query\":{\"pages\":{\"4406048\":{\"pageid\":4406048,\"ns\":6,\"title\":\"File:test3.jpg\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/test3.jpg\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:test3.jpg\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"cat5|cat6\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]},\"24259710\":{\"pageid\":24259710,\"ns\":6,\"title\":\"File:test4.jpg\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/test4.jpg\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:test4.jpg\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"cat7\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]}}}}")
+        var continueJson = ""
+
+        if (queryContinueType != "" && queryContinueValue != "" && continueVal != "") {
+            continueJson = ",\"continue\":{\"$queryContinueType\":\"$queryContinueValue\",\"continue\":\"$continueVal\"}"
+        }
+
+        val mediaList = mutableListOf<String>()
+        val random = Random(1000)
+        for (i in 0 until numberOfPages) {
+            mediaList.add(getMediaPage(random))
+        }
+
+        val pagesString = mediaList.joinToString()
+        val responseBody = "{\"batchcomplete\":\"\"$continueJson,\"query\":{\"pages\":{$pagesString}}}"
+        mockResponse.setBody(responseBody)
         return mockResponse
+    }
+
+    private fun getMediaPage(random: Random): String {
+        val pageID = random.nextInt()
+        val id = random.nextInt()
+        val fileName = "Test$id"
+        val id1 = random.nextInt()
+        val id2 = random.nextInt()
+        val categories = "cat$id1|cat$id2"
+        return "\"$pageID\":{\"pageid\":$pageID,\"ns\":6,\"title\":\"File:$fileName\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/$fileName\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:$fileName\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"$categories\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]}"
     }
 
     private fun assertBasicRequestParameters(server: MockWebServer, method: String): RecordedRequest = server.takeRequest().let {

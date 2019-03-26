@@ -5,6 +5,7 @@ import android.text.Html;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.core.text.HtmlCompat;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Single;
@@ -47,10 +48,15 @@ public class MediaDataExtractor {
         });
     }
 
+    /**
+     * Fetch talk page from the MediaWiki API
+     * @param filename
+     * @return
+     */
     private Single<String> getDiscussion(String filename) {
         return mediaWikiApi.fetchMediaByFilename(filename.replace("File", "File talk"))
                 .flatMap(mediaResult -> mediaWikiApi.parseWikicode(mediaResult.getWikiSource()))
-                .map(discussion -> Html.fromHtml(discussion).toString())
+                .map(discussion -> HtmlCompat.fromHtml(discussion, HtmlCompat.FROM_HTML_MODE_LEGACY).toString())
                 .onErrorReturn(throwable -> {
                     Timber.e(throwable, "Error occurred while fetching discussion");
                     return "";

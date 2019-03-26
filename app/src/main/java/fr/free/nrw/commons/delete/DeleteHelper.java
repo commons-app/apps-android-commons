@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.delete;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,38 +13,34 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.NotificationCompat;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Single;
 import timber.log.Timber;
 
-import static androidx.core.app.NotificationCompat.DEFAULT_ALL;
-import static androidx.core.app.NotificationCompat.PRIORITY_HIGH;
+import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_DELETE;
 
 /**
  * Refactored async task to Rx
  */
 @Singleton
 public class DeleteHelper {
-    private static final int NOTIFICATION_DELETE = 1;
-
     private final MediaWikiApi mwApi;
     private final SessionManager sessionManager;
-
-    private NotificationManager notificationManager;
-    private NotificationCompat.Builder notificationBuilder;
+    private final NotificationHelper notificationHelper;
 
     @Inject
-    public DeleteHelper(MediaWikiApi mwApi, SessionManager sessionManager) {
+    public DeleteHelper(MediaWikiApi mwApi,
+                        SessionManager sessionManager,
+                        NotificationHelper notificationHelper) {
         this.mwApi = mwApi;
         this.sessionManager = sessionManager;
+        this.notificationHelper = notificationHelper;
     }
 
     /**
@@ -57,9 +51,6 @@ public class DeleteHelper {
      * @return
      */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
-        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationBuilder = new NotificationCompat.Builder(context, CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)
-                .setOnlyAlertOnce(true);
         ViewUtil.showShortToast(context, "Trying to nominate " + media.getDisplayTitle() + " for deletion");
 
         return Single.fromCallable(() -> delete(media, reason))
@@ -122,7 +113,7 @@ public class DeleteHelper {
         return true;
     }
 
-    public boolean showDeletionNotification(Context context, Media media, boolean result) {
+    private boolean showDeletionNotification(Context context, Media media, boolean result) {
         String message;
         String title = "Nominating for Deletion";
 
@@ -134,20 +125,9 @@ public class DeleteHelper {
             message = "Could not request deletion.";
         }
 
-        notificationBuilder.setDefaults(DEFAULT_ALL)
-                .setContentTitle(title)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(message))
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setProgress(0, 0, false)
-                .setOngoing(false)
-                .setPriority(PRIORITY_HIGH);
-
         String urlForDelete = BuildConfig.COMMONS_URL + "/wiki/Commons:Deletion_requests/File:" + media.getFilename();
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForDelete));
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, browserIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        notificationBuilder.setContentIntent(pendingIntent);
-        notificationManager.notify(NOTIFICATION_DELETE, notificationBuilder.build());
+        notificationHelper.showNotification(context, title, message, NOTIFICATION_DELETE, browserIntent);
         return result;
     }
 
