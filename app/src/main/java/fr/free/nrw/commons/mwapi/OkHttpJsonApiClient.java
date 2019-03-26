@@ -267,8 +267,13 @@ public class OkHttpJsonApiClient {
     private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
         builder.addQueryParameter("prop", "imageinfo")
                 .addQueryParameter("iiprop", "url|extmetadata")
-                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName")
-                .addQueryParameter("iiextmetadatamultilang", String.valueOf(true));
+                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName");
+
+        String language = Locale.getDefault().getLanguage();
+        if (!StringUtils.isNullOrWhiteSpace(language)) {
+            builder.addQueryParameter("iiextmetadatalanguage", language);
+        }
+
         return builder;
     }
 
