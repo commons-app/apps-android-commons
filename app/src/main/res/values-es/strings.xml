@@ -14,6 +14,7 @@
 * Ktranz
 * Luisangelrg
 * Macofe
+* MarcoAurelio
 * MarionaDSR
 * Miguel2706
 * Mirzali
@@ -255,6 +256,7 @@
   <string name="upload_problem_image_duplicate">La imagen ya está en Commons.</string>
   <string name="upload_problem_different_geolocation">Esta imagen fue tomada en una ubicación diferente.</string>
   <string name="upload_problem_do_you_continue">¿Todavía quieres cargar esta imagen?</string>
+  <string name="internet_downloaded" fuzzy="true">Por favor sube solo fotografías que tu mismo hayas tomado. No subas nada que hayas descargado desde Internet.</string>
   <string name="give_permission">Otorgar permiso</string>
   <string name="use_external_storage">Utilizar almacenamiento externo</string>
   <string name="use_external_storage_summary">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
@@ -433,7 +435,7 @@
   <string name="achievements_fetch_failed">Algo salió mal, no pudimos obtener tus logros</string>
   <string name="ends_on">Finaliza el:</string>
   <string name="display_campaigns">Mostrar campañas</string>
-  <string name="display_campaigns_explanation">Toca aquí para ver las campañas en curso</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Toca aquí para ver las campañas en curso</string>
   <string name="nearby_campaign_dismiss_message">Ya no verás las campañas. Sin embargo, puedes volver a habilitar esta notificación en configuración.</string>
   <string name="this_function_needs_network_connection">Esta función requiere conexión de red, verifica tus ajustes de conexión.</string>
   <string name="bad_token_error_proposed_solution">Error de carga debido a problemas con el token de edición. Cierra la sesión y vuelva a entrar.</string>

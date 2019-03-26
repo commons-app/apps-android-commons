@@ -8,7 +8,6 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -39,8 +38,6 @@ public interface MediaWikiApi {
     Single<String> findThumbnailByFilename(String filename);
 
     boolean logEvents(LogBuilder[] logBuilders);
-
-    List<Media> getCategoryImages(String categoryName);
 
     List<String> getSubCategoryList(String categoryName);
 

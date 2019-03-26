@@ -2,6 +2,7 @@
 <!-- Authors:
 * Athena in Wonderland
 * CaiusSPQR
+* Fitoschido
 * Fúlvio
 * Giro720
 * Hamilton Abreu
@@ -439,11 +440,12 @@
   <string name="achievements_fetch_failed">Algo correu mal, não conseguimos obter as suas realizações</string>
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Apresentar campanhas</string>
-  <string name="display_campaigns_explanation">Tocar aqui para ver as campanhas em andamento</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Tocar aqui para ver as campanhas em andamento</string>
   <string name="nearby_campaign_dismiss_message">Deixará de ver as campanhas. No entanto, pode reativar esta notificação nas configurações, se desejar.</string>
   <string name="this_function_needs_network_connection">Esta função requer uma ligação de rede. Verifique as suas configurações de ligação, por favor.</string>
   <string name="bad_token_error_proposed_solution">O carregamento falhou devido a problemas com a chave de edição. Tente sair e voltar a entrar, por favor.</string>
   <string name="error_processing_image">Ocorreu um erro ao processar a imagem. Tente novamente, por favor!</string>
+  <string name="review_copyright_yes_button_text">NÃO, VIOLAÇÃO DE DIREITOS AUTORAIS</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">A receber conteúdo partilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da mesma e do seu dispositivo</item>
     <item quantity="other">A receber conteúdo partilhado. O processamento das imagens pode demorar algum tempo, dependendo do tamanho das mesmas e do seu dispositivo</item>

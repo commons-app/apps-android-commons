@@ -5,9 +5,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -95,6 +97,8 @@ public class Media implements Parcelable {
         this.dateCreated = dateCreated;
         this.dateUploaded = dateUploaded;
         this.creator = creator;
+        this.categories = new ArrayList<>();
+        this.descriptions = new HashMap<>();
     }
 
     @SuppressWarnings("unchecked")
@@ -460,6 +464,7 @@ public class Media implements Parcelable {
      * @param page response from the API
      * @return Media object
      */
+    @Nullable
     public static Media from(MwQueryPage page) {
         ImageInfo imageInfo = page.imageInfo();
         if(imageInfo == null) {
@@ -471,8 +476,6 @@ public class Media implements Parcelable {
                     page.title(), "", 0, null, null, null);
         }
 
-        String categories = metadata.categories().value();
-
         Media media = new Media(null,
                 imageInfo.getOriginalUrl(),
                 page.title(),
@@ -483,9 +486,12 @@ public class Media implements Parcelable {
                 StringUtils.getParsedStringFromHtml(metadata.artist().value())
         );
 
-        media.setDescriptions(metadata.imageDescription().value());
-        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(categories));
-
+        String language = Locale.getDefault().getLanguage();
+        if (StringUtils.isNullOrWhiteSpace(language)) {
+            language = "default";
+        }
+        media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription().value()));
+        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories().value()));
         String latitude = metadata.gpsLatitude().value();
         String longitude = metadata.gpsLongitude().value();
 
@@ -495,7 +501,6 @@ public class Media implements Parcelable {
         }
 
         media.setLicense(metadata.licenseShortName().value());
-
         return media;
     }
 }
