@@ -178,7 +178,7 @@
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>
   <string name="media_detail_description">Опис</string>
-  <string name="media_detail_discussion">Разговор</string>
+  <string name="media_detail_discussion">Дискусија</string>
   <string name="media_detail_author">Аутор</string>
   <string name="media_detail_uploaded_date">Датум отпремања</string>
   <string name="media_detail_license">Лиценца</string>
@@ -194,7 +194,7 @@
   <string name="maximum_limit_alert">Није могуће приказати више од 500</string>
   <string name="enter_valid">Унесите важећи број</string>
   <string name="cannot_be_zero">Граница отпремања не може бити 0</string>
-  <string name="set_limit" fuzzy="true">Постави ограничење за недавна отпремања</string>
+  <string name="set_limit">Ограничење за недавна отпремања</string>
   <string name="login_failed_2fa_not_supported">Двофакторска аутентификација тренутно није подржана.</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
   <string name="commons_logo">Лого Оставе</string>
@@ -391,8 +391,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Схватио/ла сам да је лоша за моју приватност</string>
   <string name="deletion_reason_no_longer_want_public">Променио/ла сам мишљење, не желим да више јавно буду видљиве</string>
   <string name="deletion_reason_not_interesting">Ова слика није занимљива за енциклопедију</string>
-  <string name="uploaded_by_myself" fuzzy="true">Отпремио/ла сам на</string>
-  <string name="no_uploads" fuzzy="true">Добро дошли на Оставу!\n\nОтпремите прве медије додиром горенаведене иконице камере или галерије.</string>
+  <string name="uploaded_by_myself">Отпремио/ла сам на %1$s, користи се у чланку/цима — %2$d.</string>
+  <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром дугмета за додавање.</string>
   <string name="desc_language_Worldwide">Светски</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>
@@ -414,7 +414,7 @@
   <string name="display_location_permission_explanation">Тражи дозволу за локацију када је то потребно за функцију приказа картице обавештења у близини.</string>
   <string name="achievements_fetch_failed">Нешто није у реду. Није могуће добавити достигнућа.</string>
   <string name="display_campaigns">Прикажи кампање</string>
-  <string name="display_campaigns_explanation">Додирните ове да бисте видели кампање у току</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Додирните ове да бисте видели кампање у току</string>
   <string name="this_function_needs_network_connection">Ова функција захтева мрежну везу. Проверите подешавања везе.</string>
   <string name="bad_token_error_proposed_solution">Отпремање није успело због проблема са токеном за уређивање. Покушајте да се пријавите поново.</string>
   <string name="no_image">Нема коришћених датотека</string>

@@ -4,9 +4,6 @@ package fr.free.nrw.commons.explore.images;
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +20,9 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -141,7 +141,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         bottomProgressBar.setVisibility(GONE);
         queryList.clear();
         imagesAdapter.clear();
-        compositeDisposable.add(okHttpJsonApiClient.searchImages(query, queryList.size())
+        compositeDisposable.add(okHttpJsonApiClient.getMediaList("search", query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -158,7 +158,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        compositeDisposable.add(okHttpJsonApiClient.searchImages(query, queryList.size())
+        compositeDisposable.add(okHttpJsonApiClient.getMediaList("search", query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

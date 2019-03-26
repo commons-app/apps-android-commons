@@ -425,7 +425,7 @@
   <string name="achievements_fetch_failed">Noe gikk galt. Vi kunne ikke hente prestasjonene dine.</string>
   <string name="ends_on">Slutter:</string>
   <string name="display_campaigns">Vis kampanjer</string>
-  <string name="display_campaigns_explanation">Trykk her for å se pågående kampanjer</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Trykk her for å se pågående kampanjer</string>
   <string name="nearby_campaign_dismiss_message">Du vil ikke se kampanjer lenger. Du kan slå på dette igjen i innstillingene om du ønsker.</string>
   <string name="this_function_needs_network_connection">Denne funksjonen trenger nettverksforbindelse, sjekk tilkoblingsinnstillingene dine.</string>
   <string name="bad_token_error_proposed_solution">Opplastingen feilet på grunn av problemer med redigeringsnøkkelen. Prøv å logge ut og logge inn igjen.</string>
