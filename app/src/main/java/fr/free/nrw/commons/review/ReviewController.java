@@ -42,6 +42,7 @@ public class ReviewController {
     private NotificationManager notificationManager;
     private NotificationCompat.Builder notificationBuilder;
     private Media media;
+    private static final String THANKS_LOG="https://en.wikipedia.org/wiki/Special:Log/thanks";
 
     @Inject
     MediaWikiApi mwApi;
@@ -213,8 +214,7 @@ public class ReviewController {
                             .setProgress(0, 0, false)
                             .setOngoing(false)
                             .setPriority(NotificationCompat.PRIORITY_HIGH);
-                    String urlForDelete = BuildConfig.THANKS_LOG;
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW , Uri.parse(urlForDelete));
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW , Uri.parse(THANKS_LOG));
                     PendingIntent pendingIntent = PendingIntent.getActivity(context , 1 , browserIntent , PendingIntent.FLAG_UPDATE_CURRENT);
                     notificationBuilder.setContentIntent(pendingIntent);
                     notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
