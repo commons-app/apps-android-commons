@@ -26,6 +26,7 @@ import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -42,7 +43,7 @@ public class ReviewController {
     private NotificationManager notificationManager;
     private NotificationCompat.Builder notificationBuilder;
     private Media media;
-    private static final String THANKS_LOG="https://en.wikipedia.org/wiki/Special:Log/thanks";
+    private static final String THANKS_LOG="https://commons.wikimedia.org/wiki/Special:Log/thanks";
 
     @Inject
     MediaWikiApi mwApi;
@@ -214,7 +215,14 @@ public class ReviewController {
                             .setProgress(0, 0, false)
                             .setOngoing(false)
                             .setPriority(NotificationCompat.PRIORITY_HIGH);
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW , Uri.parse(THANKS_LOG));
+                    /**
+                     * On tapping the notification it should take to visit the Thanks Log page
+                     * Thus adding a pending content to redirect to a url depending on the beta flavor*/
+                    String url;
+                    if (ConfigUtils.isBetaFlavour())
+                        url = BuildConfig.HOME_URL+"Special:Log/thanks";
+                    else url = THANKS_LOG;
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW , Uri.parse(url));
                     PendingIntent pendingIntent = PendingIntent.getActivity(context , 1 , browserIntent , PendingIntent.FLAG_UPDATE_CURRENT);
                     notificationBuilder.setContentIntent(pendingIntent);
                     notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
