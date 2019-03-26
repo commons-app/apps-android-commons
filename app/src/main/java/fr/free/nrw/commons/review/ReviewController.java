@@ -3,7 +3,10 @@ package fr.free.nrw.commons.review;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import javax.inject.Singleton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -209,6 +213,10 @@ public class ReviewController {
                             .setProgress(0, 0, false)
                             .setOngoing(false)
                             .setPriority(NotificationCompat.PRIORITY_HIGH);
+                    String urlForDelete = BuildConfig.THANKS_LOG;
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW , Uri.parse(urlForDelete));
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context , 1 , browserIntent , PendingIntent.FLAG_UPDATE_CURRENT);
+                    notificationBuilder.setContentIntent(pendingIntent);
                     notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
 
                 }, Timber::e);
