@@ -59,6 +59,7 @@ public class ReviewActivity extends AuthenticatedActivity {
     TextView imageCaption;
     @Inject
     MediaWikiApi mwApi;
+    Button yesButton, noButton;
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -91,6 +92,9 @@ public class ReviewActivity extends AuthenticatedActivity {
         ButterKnife.bind(this);
         initDrawer();
 
+        yesButton=findViewById(R.id.yesButton);
+        noButton=findViewById(R.id.noButton);
+
         reviewController = new ReviewController();
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
@@ -118,6 +122,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     @SuppressLint("CheckResult")
     private void updateImage(String fileName) {
+        reviewPagerAdapter.disableButtons();
         if (fileName.length() == 0) {
             ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review);
             return;
@@ -151,6 +156,7 @@ public class ReviewActivity extends AuthenticatedActivity {
     }
 
     private void updateCategories(ArrayList<String> categories) {
+        reviewPagerAdapter.enableButtons();
         reviewController.onCategoriesRefreshed(categories);
         reviewPagerAdapter.updateCategories();
     }

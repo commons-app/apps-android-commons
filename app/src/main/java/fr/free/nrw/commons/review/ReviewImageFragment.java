@@ -133,4 +133,17 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     private ReviewActivity getReviewActivity() {
         return (ReviewActivity) requireActivity();
     }
+
+    public void enableButtons(){
+        yesButton.setEnabled(true);
+        yesButton.setAlpha(1);
+        noButton.setEnabled(true);
+        noButton.setAlpha(1);
+    }
+    public void disableButtons(){
+        yesButton.setEnabled(false);
+        yesButton.setAlpha(0.5f);
+        noButton.setEnabled(false);
+        noButton.setAlpha(0.5f);
+    }
 }
