@@ -89,6 +89,7 @@
   <string name="title_activity_signup">Marchesse</string>
   <string name="title_activity_featured_images">Plance an evidensa</string>
   <string name="title_activity_category_details">Categorìa</string>
+  <string name="title_activity_review">Revision da par</string>
   <string name="menu_about">A propòsit</string>
   <string name="about_license">L\'aplicassion Wikimedia Commons a l\'é n\'aplicassion a sorgiss duverta creà e mantnùa da \'d përson-e pagà e da \'d volontari ëd la comunità Wikimedia. La Fondassion Wikimedia a l\'é nen amplicà ant la creassion, ël dësvlup, o la manutension dl\'aplicassion.</string>
   <string name="about_improve">Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
@@ -226,6 +227,7 @@
   <string name="navigation_item_info">Cors d\'antrodussion</string>
   <string name="navigation_item_notification">Notìfiche</string>
   <string name="navigation_item_featured_images">Butà an evidensa</string>
+  <string name="navigation_item_review">Revision</string>
   <string name="nearby_needs_permissions">Ij pòst ant j\'anviron a peulo nen esse smonù sensa ij përmess ëd localisassion</string>
   <string name="no_description_found">gnun-a descrission trovà</string>
   <string name="nearby_info_menu_commons_article">Pàgina dj\'archivi ëd Comun</string>
@@ -243,6 +245,7 @@
   <string name="upload_problem_different_geolocation">Sa fòto a l\'é stàita fàita ant un pòst diferent.</string>
   <string name="upload_problem_fbmd">Për piasì, ch\'a caria mach dle fòto che a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha trovà an sij cont Facebook d\'àutra gent.</string>
   <string name="upload_problem_do_you_continue">Veul-lo istess carié sta plancia?</string>
+  <string name="internet_downloaded" fuzzy="true">Për piasì, ch\'a caria mach dle fòto ch\'a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha dëscarià da \'ns l\'aragnà.</string>
   <string name="give_permission">Dé ël përmess</string>
   <string name="use_external_storage">Dovré n\'anmagasinament estern</string>
   <string name="use_external_storage_summary">Argistré le plance pijà con la màchina fòto ëd sò angign</string>
@@ -254,6 +257,8 @@
   <string name="nominate_deletion">Propon-e për la scancelassion</string>
   <string name="nominated_for_deletion">Sa plancia a l\'é stàita nominà për ël dëscancelament.</string>
   <string name="nominated_see_more">&lt;u&gt;Vëdde la pàgina an sl\'aragnà për ij detaj&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">Nominé %1$s për la dëscancelassion.</string>
+  <string name="nominating_for_deletion_status">Nominé n\'archivi për la dëscancelassion: %1$s</string>
   <string name="view_browser">Smon-e ant ël navigador</string>
   <string name="skip_login">Sauté</string>
   <string name="navigation_item_login">Intré ant ël sistema</string>
@@ -282,6 +287,8 @@
   <string name="no_internet">Aragnà nen disponìbil</string>
   <string name="internet_established">Aragnà disponìbil</string>
   <string name="error_notifications">Eror an sl\'arserca dle notìfiche</string>
+  <string name="error_review">Eror durant l\'acess a la plancia për la revision. Sgnaché su rinfrësché për prové torna.</string>
+  <string name="error_review_categories">Eror durant l\'acess a le categorìe ëd plance për la revision. Sgnaché su rinfrësché për prové torna.</string>
   <string name="no_notifications">Gnun-e notìfiche trovà</string>
   <string name="about_translate">&lt;u&gt;Volté&lt;/u&gt;</string>
   <string name="about_translate_title">Lenghe</string>
@@ -426,11 +433,37 @@
   <string name="achievements_fetch_failed">Cheicòs a l\'ha nen marcià, i l\'oma nen podù arcuperé soe realisassion</string>
   <string name="ends_on">A finiss ai:</string>
   <string name="display_campaigns">Campagne ëd visualisassion</string>
-  <string name="display_campaigns_explanation">Ch\'a toca ambelessì për vëdde le campagne an cors</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Ch\'a toca ambelessì për vëdde le campagne an cors</string>
   <string name="nearby_campaign_dismiss_message">A vëdrà pi nen le campagna. Comsëssìa, a peul torna abilité costa notìfica ant ij paràmeter, s\'a veul.</string>
   <string name="this_function_needs_network_connection">Sa fonsion a l\'ha damanca ëd na conession ëd rej, për piasì ch\'a contròla ij sò paràmtere ëd conession.</string>
   <string name="bad_token_error_proposed_solution">Ël cariament a l\'ha falì për dij problema con ël geton ëd modìfica. Ch\'a preuva a seurte e rintré torna ant ël sistema.</string>
   <string name="error_processing_image">A-i è staje n\'eror durant ël tratament ëd la plancia. Ch\'a ancamin-a torna, për piasì!</string>
+  <string name="getting_edit_token">Oten-e un geton për modifiché</string>
+  <string name="check_category_adding_template">Gionté në stamp për ël contròl ëd categorìa</string>
+  <string name="check_category_notification_title">Arcesta an cors dël contròl ëd la categorìa për %1$s</string>
+  <string name="check_category_edit_summary">Arcesta ëd contròl ëd categorìa</string>
+  <string name="check_category_success_title">Arcesta ëd contròl ëd categorìa: Riussì</string>
+  <string name="check_category_failure_title">Arcesta ëd contròl ëd categorìa: Falì</string>
+  <string name="check_category_success_message">Contròl ëd categorìa ciamà con sucess për %1$s</string>
+  <string name="check_category_failure_message">Impossìbil ciamé un contròl ëd categorìa për %1$s</string>
+  <string name="check_category_toast">Arcesta an cors dël contròl ëd la categorìa për %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Gionté un mëssagi dë scancelassion a l\'archivi</string>
+  <string name="nominate_for_deletion_done">Fàit</string>
+  <string name="nominate_for_deletion_notify_user">Notìfica a l\'utent su soa pàgina ëd ciaciarade</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Gionté l\'archivi a l\'argistr dj\'arceste dë scancelassion</string>
+  <string name="nominate_for_deletion_create_deletion_request">Creé na sot-pàgina d\'arceste dë scancelassion</string>
+  <string name="notsure">Nen sigur</string>
+  <string name="send_thank_success_title">Spedission sj\'aringrassiament: Riussìa</string>
+  <string name="send_thank_success_message">Aringrassiament mandà con sucess a %1$s</string>
+  <string name="send_thank_failure_message">Falì a mandé d\'aringrassiament %1$s</string>
+  <string name="send_thank_failure_title">Spedission sj\'aringrassiament: Falìa</string>
+  <string name="send_thank_send">Spedission d\'aringrassiament</string>
+  <string name="send_thank_notification_title">Spedission d\'aringrassiament</string>
+  <string name="send_thank_toast">Spedission d\'aringrassiament për %1$s</string>
+  <string name="review_copyright">É-lo sòn conforma a le régole dij drit d\'autor?</string>
+  <string name="review_category">É-lo sòn categorisà për da bin?</string>
+  <string name="review_spam">A rësguarda l\'argoment?</string>
+  <string name="review_thanks">Veul-lo aringrassié ël contributor?</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Arseiviment ëd contnù partagià. Ël tratament ëd la plancia a peul pijé un pò \'d temp an fonsion ëd la taja dla plancia e ëd sò material</item>
     <item quantity="other">Arseiviment ëd contnù partagià. Ël tratament ëd le plance a peul pijé un pò \'d temp an fonsion ëd la taja dla plancia e ëd sò material</item>

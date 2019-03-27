@@ -102,6 +102,7 @@
   <string name="title_activity_signup">Criar conta</string>
   <string name="title_activity_featured_images">Imagens destacadas</string>
   <string name="title_activity_category_details">Categoria</string>
+  <string name="title_activity_review">Revisão por pares</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license">O Wikimedia Commons é um aplicativo de código aberto criado e mantido por beneficiários e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção do aplicativo.</string>
   <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
@@ -239,6 +240,7 @@
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificações</string>
   <string name="navigation_item_featured_images">Destacado</string>
+  <string name="navigation_item_review">Revisão</string>
   <string name="nearby_needs_permissions">Os locais próximos não podem ser exibidos sem permissões de localização</string>
   <string name="no_description_found">Nenhuma descrição encontrada</string>
   <string name="nearby_info_menu_commons_article">Página de arquivo do Commons</string>
@@ -256,6 +258,7 @@
   <string name="upload_problem_different_geolocation">Esta foto foi tirada em um local diferente.</string>
   <string name="upload_problem_fbmd">Por favor, apenas envie fotos que você tirou sozinho. Não faça upload de fotos que você encontrou nas contas do Facebook de outras pessoas.</string>
   <string name="upload_problem_do_you_continue">Você ainda quer enviar esta foto?</string>
+  <string name="internet_downloaded" fuzzy="true">Por favor, só envie fotos que você tirou sozinho. Não faça upload de fotos baixadas da Internet</string>
   <string name="give_permission">Dar permissão</string>
   <string name="use_external_storage">Usar o armazenamento externo</string>
   <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
@@ -267,6 +270,8 @@
   <string name="nominate_deletion">Nomear para a exclusão</string>
   <string name="nominated_for_deletion">Esta imagem foi nomeada para eliminação.</string>
   <string name="nominated_see_more">&lt;u&gt;Veja a página para detalhes&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">Nomeando %1$s para exclusão.</string>
+  <string name="nominating_for_deletion_status">Nomeando arquivo para exclusão: %1$s</string>
   <string name="view_browser">Exibir no navegador</string>
   <string name="skip_login">Pular</string>
   <string name="navigation_item_login">Entrar</string>
@@ -295,6 +300,8 @@
   <string name="no_internet">A Internet não está disponível</string>
   <string name="internet_established">A Internet está disponível</string>
   <string name="error_notifications">Erro ao tentar obter as notificações</string>
+  <string name="error_review">Erro ao buscar a imagem para revisão. Pressione atualizar para tentar novamente.</string>
+  <string name="error_review_categories">Erro ao buscar categorias de imagem para revisão. Pressione atualizar para tentar novamente.</string>
   <string name="no_notifications">Não foram encontradas notificações</string>
   <string name="about_translate">&lt;u&gt;Traduzir&lt;/u&gt;</string>
   <string name="about_translate_title">Idiomas</string>
@@ -439,11 +446,51 @@
   <string name="achievements_fetch_failed">Algo deu errado, não conseguimos buscar suas conquistas</string>
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Exibir campanhas</string>
-  <string name="display_campaigns_explanation">Toque aqui para ver as campanhas em andamento</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Toque aqui para ver as campanhas em andamento</string>
   <string name="nearby_campaign_dismiss_message">Você não verá mais as campanhas. No entanto, você pode reativar essa notificação em Configurações, se desejar.</string>
   <string name="this_function_needs_network_connection">Esta função requer conexão de rede, por favor, verifique suas configurações de conexão.</string>
   <string name="bad_token_error_proposed_solution">O carregamento falhou devido a problemas com o token de edição. Por favor, tente sair e entrar novamente.</string>
   <string name="error_processing_image">Ocorreu um erro ao processar a imagem. Tente novamente, por favor!</string>
+  <string name="getting_edit_token">Obtendo token para edição</string>
+  <string name="check_category_adding_template">Adicionando predefinição para verificação de categoria</string>
+  <string name="check_category_notification_title">Solicitando verificação de categoria para %1$s</string>
+  <string name="check_category_edit_summary">Solicitando verificação de categoria</string>
+  <string name="check_category_success_title">Solicitação de verificação de categoria: Sucesso</string>
+  <string name="check_category_failure_title">Solicitar verificação de categoria: falha</string>
+  <string name="check_category_success_message">Verificação de categoria solicitada com êxito para %1$s</string>
+  <string name="check_category_failure_message">Não foi possível solicitar a verificação de categoria para %1$s</string>
+  <string name="check_category_toast">Solicitando verificação de categoria para %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Acionando mensagem de exclusão ao arquivo</string>
+  <string name="nominate_for_deletion_done">Feito</string>
+  <string name="nominate_for_deletion_notify_user">Notificando o usuário na página de discussão</string>
+  <string name="notsure">Talvez</string>
+  <string name="send_thank_success_title">Enviando obrigado: Sucesso</string>
+  <string name="send_thank_success_message">Enviado com sucesso graças para %1$s</string>
+  <string name="send_thank_failure_message">Não foi possível enviar %1$s agradecimentos</string>
+  <string name="send_thank_failure_title">Envio de agradecimento: falha</string>
+  <string name="send_thank_send">Enviando agradecimentos</string>
+  <string name="send_thank_notification_title">Enviando agradecimentos</string>
+  <string name="send_thank_toast">Enviando obrigado por %1$s</string>
+  <string name="review_copyright">Isso segue as regras dos direitos autorais?</string>
+  <string name="review_category">Isso é categorizado corretamente?</string>
+  <string name="review_spam">Isso é dentro do escopo?</string>
+  <string name="review_thanks">Gostaria de agradecer ao colaborador?</string>
+  <string name="review_spam_explanation">Clique em NÃO para nomear esta imagem para exclusão, se não for útil.</string>
+  <string name="review_copyright_explanation">Logotipos, capturas de tela, pôsteres de filmes geralmente são violações de direitos autorais.\n  Clique em NÃO para indicar esta imagem para exclusão</string>
+  <string name="review_thanks_explanation">%1$s será encorajado por sua apreciação</string>
+  <string name="review_no_category">Ah, isso nem é categorizado!</string>
+  <string name="review_category_explanation">Esta imagem está abaixo das %1$s categorias</string>
+  <string name="review_spam_report_question">Está fora do escopo porque é</string>
+  <string name="review_spam_report_problem">spam</string>
+  <string name="review_c_violation_report_question">É violação de direitos autorais porque é</string>
+  <string name="review_category_yes_button_text">NÃO, MIS-CATEGORIZADO</string>
+  <string name="review_category_no_button_text">PARECE BEM</string>
+  <string name="review_spam_yes_button_text">NÃO, FORA DE ESCOPO</string>
+  <string name="review_spam_no_button_text">PARECE BEM</string>
+  <string name="review_copyright_yes_button_text">NÃO, VIOLAÇÃO DE DIREITOS AUTORAIS</string>
+  <string name="review_copyright_no_button_text">PARECE BEM</string>
+  <string name="review_thanks_yes_button_text">SIM, PORQUE NÃO</string>
+  <string name="review_thanks_no_button_text">PRÓXIMA IMAGEM</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
     <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>

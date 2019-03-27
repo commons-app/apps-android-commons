@@ -36,7 +36,7 @@ public class BookmarkPicturesController {
         ArrayList<Media> medias = new ArrayList<>();
         for (Bookmark bookmark : bookmarks) {
             List<Media> tmpMedias = okHttpJsonApiClient
-                    .searchImages(bookmark.getMediaName(), 0)
+                    .getMediaList("search", bookmark.getMediaName())
                     .blockingGet();
             for (Media m : tmpMedias) {
                 if (m.getCreator().trim().equals(bookmark.getMediaCreator().trim())) {

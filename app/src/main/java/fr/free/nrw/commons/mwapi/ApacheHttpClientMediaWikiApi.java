@@ -38,7 +38,6 @@ import java.util.concurrent.Callable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
@@ -53,8 +52,6 @@ import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.ContinueUtils.getQueryContinue;
 
 /**
  * @author Addshore
@@ -712,63 +709,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
         return CategoryImageUtils.getSubCategoryList(childNodes);
-    }
-
-
-    /**
-     * The method takes categoryName as input and returns a List of Media objects
-     * It uses the generator query API to get the images in a category, 10 at a time.
-     * Uses the query continue values for fetching paginated responses
-     * @param categoryName Category name as defined on commons
-     * @return
-     */
-    @Override
-    @NonNull
-    public List<Media> getCategoryImages(String categoryName) {
-        CustomApiResult apiResult = null;
-        try {
-            CustomMwApi.RequestBuilder requestBuilder = api.action("query")
-                    .param("generator", "categorymembers")
-                    .param("format", "xml")
-                    .param("gcmtype", "file")
-                    .param("gcmtitle", categoryName)
-                    .param("gcmsort", "timestamp")//property to sort by;timestamp
-                    .param("gcmdir", "desc")//in which direction to sort;descending
-                    .param("prop", "imageinfo")
-                    .param("gcmlimit", "10")
-                    .param("iiprop", "url|extmetadata");
-
-            QueryContinue queryContinueValues = getQueryContinueValues(categoryName);
-            if (queryContinueValues != null) {
-                requestBuilder.param("continue", queryContinueValues.getContinueParam());
-                requestBuilder.param("gcmcontinue", queryContinueValues.getGcmContinueParam());
-            }
-            apiResult = requestBuilder.get();
-        } catch (IOException e) {
-            Timber.e(e, "Failed to obtain searchCategories");
-        }
-
-        if (apiResult == null) {
-            return new ArrayList<>();
-        }
-
-        CustomApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
-        if (categoryImagesNode == null
-                || categoryImagesNode.getDocument() == null
-                || categoryImagesNode.getDocument().getChildNodes() == null
-                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
-            return new ArrayList<>();
-        }
-
-        if (apiResult.getNode("/api/continue").getDocument()==null){
-            setQueryContinueValues(categoryName, null);
-        }else {
-            QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
-            setQueryContinueValues(categoryName, queryContinue);
-        }
-
-        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
-        return CategoryImageUtils.getMediaList(childNodes);
     }
 
     /**
