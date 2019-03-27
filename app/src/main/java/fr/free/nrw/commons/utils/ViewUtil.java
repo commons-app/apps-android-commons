@@ -2,18 +2,25 @@ package fr.free.nrw.commons.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import androidx.annotation.StringRes;
-import com.google.android.material.snackbar.Snackbar;
 import android.view.Display;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import androidx.annotation.StringRes;
+
+@Singleton
 public class ViewUtil {
 
-    public static final String SHOWCASE_VIEW_ID_1 = "SHOWCASE_VIEW_ID_1";
-    public static final String SHOWCASE_VIEW_ID_2 = "SHOWCASE_VIEW_ID_2";
-    public static final String SHOWCASE_VIEW_ID_3 = "SHOWCASE_VIEW_ID_3";
+    @Inject
+    public ViewUtil() {
+
+    }
 
     /**
      * Utility function to show short snack bar
@@ -44,7 +51,7 @@ public class ViewUtil {
         ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, context.getString(stringResourceId), Toast.LENGTH_LONG).show());
     }
 
-    public static void showShortToast(Context context, String text) {
+    public void showShortToast(Context context, String text) {
         if (context == null) {
             return;
         }

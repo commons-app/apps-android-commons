@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -485,7 +486,12 @@ public class Media implements Parcelable {
                 StringUtils.getParsedStringFromHtml(metadata.artist().value())
         );
 
-        media.setDescriptions(Collections.singletonMap("default", metadata.imageDescription().value()));
+        String language = Locale.getDefault().getLanguage();
+        if (StringUtils.isNullOrWhiteSpace(language)) {
+            language = "default";
+        }
+
+        media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription().value()));
         media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories().value()));
         String latitude = metadata.gpsLatitude().value();
         String longitude = metadata.gpsLongitude().value();

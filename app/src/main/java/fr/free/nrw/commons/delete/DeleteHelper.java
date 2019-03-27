@@ -33,14 +33,17 @@ public class DeleteHelper {
     private final MediaWikiApi mwApi;
     private final SessionManager sessionManager;
     private final NotificationHelper notificationHelper;
+    private final ViewUtil viewUtil;
 
     @Inject
     public DeleteHelper(MediaWikiApi mwApi,
                         SessionManager sessionManager,
-                        NotificationHelper notificationHelper) {
+                        NotificationHelper notificationHelper,
+                        ViewUtil viewUtil) {
         this.mwApi = mwApi;
         this.sessionManager = sessionManager;
         this.notificationHelper = notificationHelper;
+        this.viewUtil = viewUtil;
     }
 
     /**
@@ -51,7 +54,7 @@ public class DeleteHelper {
      * @return
      */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
-        ViewUtil.showShortToast(context, "Trying to nominate " + media.getDisplayTitle() + " for deletion");
+        viewUtil.showShortToast(context, "Trying to nominate " + media.getDisplayTitle() + " for deletion");
 
         return Single.fromCallable(() -> delete(media, reason))
                 .flatMap(result -> Single.fromCallable(() ->
