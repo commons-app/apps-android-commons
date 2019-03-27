@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -62,6 +64,9 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                         response -> {
                             if (response != null) {
                                 views.setTextViewText(R.id.appwidget_title, response.getDisplayTitle());
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(response.getImageUrl()));
+                                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+                                views.setOnClickPendingIntent(R.id.appwidget_image, pendingIntent);
                                 loadImageFromUrl(response.getImageUrl(), context, views, appWidgetManager, appWidgetId);
                             }
                         },
