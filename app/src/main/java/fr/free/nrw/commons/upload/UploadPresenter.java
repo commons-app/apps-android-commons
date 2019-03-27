@@ -115,11 +115,8 @@ public class UploadPresenter {
                     List<Description> descriptions) {
         Timber.e("Inside handleNext");
         view.showProgressDialog();
-        prevTitleDescription
         setTitleAndDescription(title, descriptions);
-        uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
         compositeDisposable.add(uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
-        master
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageResult -> handleImage(title, descriptions, imageResult),

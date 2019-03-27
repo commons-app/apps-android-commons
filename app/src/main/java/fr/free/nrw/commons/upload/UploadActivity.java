@@ -57,7 +57,6 @@ import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.filepicker.UploadableFile;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
@@ -223,9 +222,10 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     @Override
     public void updateRightCardContent(boolean gpsPresent) {
-        if(gpsPresent){
+        if (gpsPresent) {
             rightCardMapButton.setVisibility(View.VISIBLE);
-        }else{
+        }
+        else {
             rightCardMapButton.setVisibility(View.GONE);
         }
         //The card should be disabled if it has no buttons.
@@ -510,8 +510,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureBottomCard() {
-        BasicKvStore flag = new BasicKvStore(this, "prevTitleDesc");
-        int flagVal = flag.getInt("flag");
+        int flagVal = directKvStore.getInt("flag");
         if(flagVal == 0){
             prevTitleDecs.setVisibility(View.INVISIBLE);
         }
@@ -534,16 +533,18 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     public void configurePrevButton(){
         prevTitleDecs.setOnClickListener((View v) -> {
-            BasicKvStore storePrevTitleDesc = new BasicKvStore(this, "prevTitleDesc");
-            String title = storePrevTitleDesc.getString("title");
+            String title = directKvStore.getString("title");
             Title t = new Title();
             t.setTitleText(title);
 
             Description description= new Description();
             List<Description> finalDesc = new LinkedList<>();
-            String desc = storePrevTitleDesc.getString("description0");
-            description.setDescriptionText(desc);
-            finalDesc.add(description);
+            int descCount = directKvStore.getInt("descCount");
+            for (int i = 0; i < descCount; i++) {
+                String desc = directKvStore.getString("description_<"+Integer.toString(i)+">");
+                description.setDescriptionText(desc);
+                finalDesc.add(description);
+            }
             descriptionsAdapter.setItems(t, finalDesc);
             rvDescriptions.setAdapter(descriptionsAdapter);
         });
@@ -747,11 +748,12 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     public void saveOnSubmit(){
         flag++;
-        BasicKvStore storePrevTitleDesc = new BasicKvStore(this, "prevTitleDesc");
-        storePrevTitleDesc.putString("title", descriptionsAdapter.getTitle().toString());
-        for(int i = 0; i < descriptionsAdapter.getItemCount() - 1; i++) {
-            storePrevTitleDesc.putString("description"+Integer.toString(i), descriptionsAdapter.getDescriptions().get(i).getDescriptionText());
+        directKvStore.putInt("flag", flag);
+        directKvStore.putString("title", descriptionsAdapter.getTitle().toString());
+        int n = descriptionsAdapter.getItemCount() - 1;
+        directKvStore.putInt("descCount", n);
+        for (int i = 0; i < n; i++) {
+            directKvStore.putString("description_<"+Integer.toString(i)+">", descriptionsAdapter.getDescriptions().get(i).getDescriptionText());
         }
-        storePrevTitleDesc.putInt("flag", flag);
     }
 }
