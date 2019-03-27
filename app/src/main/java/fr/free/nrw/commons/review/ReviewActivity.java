@@ -60,6 +60,17 @@ public class ReviewActivity extends AuthenticatedActivity {
     @Inject
     MediaWikiApi mwApi;
 
+    final String SAVED_FILE = "filename";
+    private String fileName;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (fileName != null) {
+            outState.putString(SAVED_FILE, fileName);
+        }
+    }
+
     /**
      * Consumers should be simply using this method to use this activity.
      *
@@ -99,7 +110,11 @@ public class ReviewActivity extends AuthenticatedActivity {
         pagerIndicator.setViewPager(reviewPager);
         progressBar.setVisibility(View.VISIBLE);
 
-        runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
+        if (savedInstanceState != null) {
+            updateImage(savedInstanceState.getString(SAVED_FILE));
+        } else {
+            runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
+        }
 
         skip_image_button.setOnClickListener(view -> runRandomizer());
     }
@@ -122,6 +137,7 @@ public class ReviewActivity extends AuthenticatedActivity {
             ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review);
             return;
         }
+        this.fileName = fileName;
         simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
         reviewController.onImageRefreshed(fileName); //file name is updated
         compositeDisposable.add(reviewHelper.getFirstRevisionOfFile("File:" + fileName)
