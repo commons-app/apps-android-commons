@@ -163,12 +163,13 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
     protected void onPostExecute(Boolean result) {
 
         String media_message=media.getDisplayTitle();
+        String full_colon=":";
 
         //link to string resources
         String title_resource = context.getResources().getString(R.string.nominating_for_deletion);
-        String success_resource = context.getResources().getString(R.string.success);
+        String success_resource = context.getResources().getString(R.string.success,full_colon);
         String message_resource = context.getResources().getString(R.string.message,media_message);
-        String failed_resource = context.getResources().getString(R.string.failed);
+        String failed_resource = context.getResources().getString(R.string.failed,full_colon);
         String could_not_request_deletion_resource = context.getResources().getString(R.string.could_not_request_deletion);
 
         String message;
@@ -176,12 +177,12 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
         if (result){
 
-            title += ":"+success_resource;
+            title +=success_resource;
             message = message_resource;
 
         }
         else {
-            title += ":"+failed_resource;
+            title +=failed_resource;
             message = could_not_request_deletion_resource;
         }
 

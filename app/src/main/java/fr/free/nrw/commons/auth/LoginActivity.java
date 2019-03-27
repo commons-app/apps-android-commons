@@ -146,10 +146,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         } else {
             loginCredentials.setVisibility(View.GONE);
         }
-
-
-
-
     }
 
     /**
