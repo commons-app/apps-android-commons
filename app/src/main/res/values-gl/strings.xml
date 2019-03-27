@@ -423,7 +423,7 @@
   <string name="display_location_permission_title">Amosar permiso de localización</string>
   <string name="ends_on">Finaliza o:</string>
   <string name="display_campaigns">Amosar campañas</string>
-  <string name="display_campaigns_explanation">Preme aquí para ver as campañas en curso</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Preme aquí para ver as campañas en curso</string>
   <string name="nearby_campaign_dismiss_message">Xa non verá as campañas. Porén, pode volver habilitar esta notificación na configuración.</string>
   <string name="this_function_needs_network_connection">Esta función require conexión de rede, verifique a súa configuración de conexión.</string>
   <string name="bad_token_error_proposed_solution">Erro na suba debido a problemas co identificador de edición. Peche a sesión e volva a entrar.</string>

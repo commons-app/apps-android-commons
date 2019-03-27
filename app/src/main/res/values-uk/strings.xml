@@ -439,7 +439,7 @@
   <string name="achievements_fetch_failed">Щось пішло не так. Нам не вдалося отримати Ваші досягнення</string>
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
-  <string name="display_campaigns_explanation">Торкніться тут, щоб побачити чинні кампанії</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Торкніться тут, щоб побачити чинні кампанії</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
   <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
   <string name="bad_token_error_proposed_solution">Завантаження було невдалим через проблему з токеном редагування. Будь ласка, спробуйте вийти з системи й увійти повторно.</string>

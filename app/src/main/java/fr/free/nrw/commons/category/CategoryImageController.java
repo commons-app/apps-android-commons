@@ -6,16 +6,17 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import io.reactivex.Single;
 
 @Singleton
 public class CategoryImageController {
 
-    private MediaWikiApi mediaWikiApi;
+    private OkHttpJsonApiClient okHttpJsonApiClient;
 
     @Inject
-    public CategoryImageController(MediaWikiApi mediaWikiApi) {
-        this.mediaWikiApi = mediaWikiApi;
+    public CategoryImageController(OkHttpJsonApiClient okHttpJsonApiClient) {
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
     }
 
     /**
@@ -23,7 +24,7 @@ public class CategoryImageController {
      * @param categoryName
      * @return
      */
-    public List<Media> getCategoryImages(String categoryName) {
-        return mediaWikiApi.getCategoryImages(categoryName);
+    public Single<List<Media>> getCategoryImages(String categoryName) {
+        return okHttpJsonApiClient.getMediaList("category", categoryName);
     }
 }

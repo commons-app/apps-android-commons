@@ -61,6 +61,7 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                 .subscribe(
                         response -> {
                             if (response != null) {
+                                views.setTextViewText(R.id.appwidget_title, response.getDisplayTitle());
                                 loadImageFromUrl(response.getImageUrl(), context, views, appWidgetManager, appWidgetId);
                             }
                         },

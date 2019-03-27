@@ -438,7 +438,7 @@
   <string name="achievements_fetch_failed">發生了一些狀況，我們無法索取您的成果</string>
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
-  <string name="display_campaigns_explanation">在此輕觸來查看進行中的活動</string>
+  <string name="display_campaigns_explanation" fuzzy="true">在此輕觸來查看進行中的活動</string>
   <string name="nearby_campaign_dismiss_message">您不會再看到活動。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
   <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連接設定。</string>
   <string name="bad_token_error_proposed_solution">出於編輯訊標問題導致上傳失敗。請重試登入後再登入。</string>
