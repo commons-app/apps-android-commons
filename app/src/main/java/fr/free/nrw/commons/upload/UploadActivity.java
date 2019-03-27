@@ -13,7 +13,10 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -453,44 +456,42 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     /**
      * Parses links from HTML string, and makes the links clickable in the specified TextView.<br>
-     * Uses {@link #makeLinkClickable(SpannableStringBuilder, URLSpan)}.
+     * Uses {@link //#makeLinkClickable(url,start,end,strBuilder)}.
      * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
      */
-    private void setTextViewHTML(TextView text, String html)
-    {
+
+    private void setTextViewHTML(TextView text, String html){
         CharSequence sequence = Html.fromHtml(html);
-        SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
+        SpannableString strBuilder = new SpannableString(sequence);
         URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
         for (URLSpan span : urls) {
-            makeLinkClickable(strBuilder, span);
+
+            int start = strBuilder.getSpanStart(span);
+            int end = strBuilder.getSpanEnd(span);
+            String url = span.getURL();
+
+            makeLinkClickable(url,start,end,strBuilder);
         }
         text.setText(strBuilder);
         text.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
+
     /**
-     * Sets onClick handler to launch browser for the specified URLSpan.
-     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
+     * URLSpan class extends ClickableSpan implements ParcelableSpan hance avoiding the memeory leak
+     *URLSpan  open the url, by launching an an Activity with an Intent#ACTION_VIEW intent.
+     * https://developer.android.com/reference/android/text/style/URLSpan
      */
-    private void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span)
-    {
-        int start = strBuilder.getSpanStart(span);
-        int end = strBuilder.getSpanEnd(span);
-        int flags = strBuilder.getSpanFlags(span);
-        ClickableSpan clickable = new ClickableSpan() {
-            public void onClick(View view) {
-                // Handle hyperlink click
-                String hyperLink = span.getURL();
-                launchBrowser(hyperLink);
-            }
-        };
-        strBuilder.setSpan(clickable, start, end, flags);
-        strBuilder.removeSpan(span);
+
+
+    private  final void makeLinkClickable(final String url, int start, int end, SpannableString  strBuilder) {
+
+        strBuilder.setSpan(new URLSpan(url),start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
     }
 
-    private void launchBrowser(String hyperLink) {
-        Utils.handleWebUrl(this, Uri.parse(hyperLink));
-    }
+
+
 
     private void configureLicenses() {
         licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
