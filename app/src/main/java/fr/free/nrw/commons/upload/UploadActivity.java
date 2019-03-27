@@ -465,8 +465,13 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     /**
      * URLSpan class extends ClickableSpan implements ParcelableSpan hance avoiding the memeory leak
-     *URLSpan  open the url, by launching an an Activity with an Intent#ACTION_VIEW intent.
-     * https://developer.android.com/reference/android/text/style/URLSpan
+     *URLSpan  open the {@param url}, by launching an an Activity with an Intent#ACTION_VIEW intent.
+     * @see <a https://developer.android.com/reference/android/text/style/URLSpan">Source</a>
+
+     * @param  url        span URL giving to be clicked on
+     * @param  start      span start
+     * @param  end        span send
+     * @param  strBuilder span send
      */
 
 
