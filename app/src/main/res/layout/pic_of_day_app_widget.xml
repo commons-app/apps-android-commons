@@ -15,11 +15,23 @@
         android:layout_marginTop="10dp"
         android:text="@string/app_widget_heading"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appwidget_title"
+        android:textAlignment="center"
+        android:layout_gravity="bottom"
+        android:textColor="@color/white"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:textSize="12sp"/>
+
     <ImageView
         android:padding="15dp"
         android:id="@+id/appwidget_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/appwidget_img" />
 
 </LinearLayout>
