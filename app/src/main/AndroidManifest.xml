@@ -133,7 +133,8 @@
 
         <activity
             android:name=".review.ReviewActivity"
-            android:label="@string/title_activity_review" />
+            android:label="@string/title_activity_review"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <service android:name=".upload.UploadService" />
         <service
