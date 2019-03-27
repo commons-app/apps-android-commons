@@ -192,7 +192,7 @@
   <string name="number_of_uploads">Limita mea de încărcare recentă</string>
   <string name="maximum_limit">Limită maximă</string>
   <string name="maximum_limit_alert">Nu pot afișa mai mult de 500</string>
-  <string name="set_limit">Setați limita de încărcări recente</string>
+  <string name="set_limit" fuzzy="true">Setați limita de încărcări recente</string>
   <string name="login_failed_2fa_not_supported">Autentificare cu doi factori nu este acceptată în prezent.</string>
   <string name="logout_verification">Chiar vrei să te deconectezi?</string>
   <string name="commons_logo">Logoul Commons</string>
@@ -290,7 +290,7 @@
   <string name="about_translate_cancel">Anulare</string>
   <string name="retry">Reîncercare</string>
   <string name="showcase_view_got_it_button">Am înțeles!</string>
-  <string name="showcase_view_whole_nearby_activity">Acestea sunt locurile din apropierea ta care au nevoie de imagini pentru a ilustra articolele lor Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Acestea sunt locurile din apropierea ta care au nevoie de imagini pentru a ilustra articolele lor Wikipedia</string>
   <string name="showcase_view_list_icon">Atingând acest buton, se afișează o listă a acestor locuri</string>
   <string name="showcase_view_plus_fab">Puteți încărca o imagine pentru orice loc din galerie sau camera foto</string>
   <string name="no_images_found">Nu s-au gasit imagini!</string>
@@ -420,7 +420,7 @@
   <string name="achievements_fetch_failed">Ceva a mers prost, nu am reușit să ne aducem realizările</string>
   <string name="ends_on">Se încheie la:</string>
   <string name="display_campaigns">Campaniile de afișare</string>
-  <string name="display_campaigns_explanation">Atingeți aici pentru a vedea campaniile în desfășurare</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Atingeți aici pentru a vedea campaniile în desfășurare</string>
   <string name="nearby_campaign_dismiss_message">Nu veți mai vedea campaniile. Cu toate acestea, puteți reactiva această notificare în Setări, dacă doriți.</string>
   <string name="this_function_needs_network_connection">Această funcție necesită conectare la rețea, verificați setările de conectare.</string>
   <string name="bad_token_error_proposed_solution">Încărcarea a eșuat din cauza problemelor cu Edit token. Încearcă să te deconectezi și să intri din nou.</string>

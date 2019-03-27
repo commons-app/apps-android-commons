@@ -192,7 +192,7 @@
   <string name="maximum_limit">সর্বোচ্চ সীমা</string>
   <string name="invalid_zero">শুন্য বৈধ নয়</string>
   <string name="maximum_limit_alert">৫০০টির বেশি প্রদর্শন করা সম্ভব নয়</string>
-  <string name="set_limit">সাম্প্রতিক আপলোড সীমা নির্ধারন করুন</string>
+  <string name="set_limit" fuzzy="true">সাম্প্রতিক আপলোড সীমা নির্ধারন করুন</string>
   <string name="login_failed_2fa_not_supported">দুটি স্তরের প্রমাণীকরণ বর্তমানে সমর্থিত নয়।</string>
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
   <string name="commons_logo">কমন্সের লোগো</string>
@@ -320,5 +320,6 @@
   <string name="desc_language_Pacific">প্রশান্ত মহাসাগরীয়</string>
   <string name="yes_submit">হ্যাঁ, জমা দিন</string>
   <string name="no_go_back">না, ফিরে যান</string>
+  <string name="review_spam_report_problem">স্প্যাম</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
 </resources>

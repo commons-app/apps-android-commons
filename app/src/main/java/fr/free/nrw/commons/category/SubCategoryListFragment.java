@@ -4,9 +4,9 @@ package fr.free.nrw.commons.category;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,17 +97,17 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
         }
         progressBar.setVisibility(View.VISIBLE);
         if (!isParentCategory){
-            Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
+            compositeDisposable.add(Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                    .subscribe(this::handleSuccess, this::handleError);
+                    .subscribe(this::handleSuccess, this::handleError));
         }else {
-            Observable.fromCallable(() -> mwApi.getParentCategoryList(categoryName))
+            compositeDisposable.add(Observable.fromCallable(() -> mwApi.getParentCategoryList(categoryName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                    .subscribe(this::handleSuccess, this::handleError);
+                    .subscribe(this::handleSuccess, this::handleError));
         }
     }
 

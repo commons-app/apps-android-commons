@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.notification;
 
 import android.graphics.Color;
-import android.support.design.animation.ArgbEvaluatorCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
+import com.google.android.material.animation.ArgbEvaluatorCompat;
 import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;

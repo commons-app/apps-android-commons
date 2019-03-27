@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.notification;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.pedrogomez.renderers.ListAdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;

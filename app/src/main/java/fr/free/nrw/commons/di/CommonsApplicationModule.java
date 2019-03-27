@@ -3,7 +3,7 @@ package fr.free.nrw.commons.di;
 import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
-import android.support.v4.util.LruCache;
+import androidx.collection.LruCache;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
@@ -23,10 +23,9 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -124,54 +123,17 @@ public class CommonsApplicationModule {
     }
 
     @Provides
-    @Named("application_preferences")
-    public BasicKvStore providesApplicationKvStore(Context context) {
-        return new BasicKvStore(context, "fr.free.nrw.commons");
-    }
-
-    @Provides
     @Named("default_preferences")
-    public BasicKvStore providesDefaultKvStore(Context context) {
+    public JsonKvStore providesDefaultKvStore(Context context, Gson gson) {
         String storeName = context.getPackageName() + "_preferences";
-        return new BasicKvStore(context, storeName);
-    }
-
-    @Provides
-    @Named("defaultKvStore")
-    public BasicKvStore providesOtherKvStore(Context context) {
-        return new BasicKvStore(context, "defaultKvStore");
-    }
-
-    /**
-     *
-     * @param context
-     * @return returns categoryPrefs
-     */
-    @Provides
-    @Named("category_prefs")
-    public BasicKvStore providesCategoryKvStore(Context context) {
-        return new BasicKvStore(context, "categoryPrefs");
-    }
-
-    @Provides
-    @Named("direct_nearby_upload_prefs")
-    public JsonKvStore providesDirectNearbyUploadKvStore(Context context, Gson gson) {
-        return new JsonKvStore(context, "direct_nearby_upload_prefs", gson);
+        return new JsonKvStore(context, storeName, gson);
     }
 
     @Provides
     public UploadController providesUploadController(SessionManager sessionManager,
-                                                     @Named("default_preferences") BasicKvStore kvStore,
+                                                     @Named("default_preferences") JsonKvStore kvStore,
                                                      Context context) {
         return new UploadController(sessionManager, context, kvStore);
-    }
-
-    @Provides
-    @Singleton
-    public SessionManager providesSessionManager(Context context,
-                                                 MediaWikiApi mediaWikiApi,
-                                                 @Named("default_preferences") BasicKvStore defaultKvStore) {
-        return new SessionManager(context, mediaWikiApi, defaultKvStore);
     }
 
     @Provides

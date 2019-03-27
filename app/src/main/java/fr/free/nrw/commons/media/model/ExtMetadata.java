@@ -1,9 +1,10 @@
 package fr.free.nrw.commons.media.model;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import com.google.gson.annotations.SerializedName;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import fr.free.nrw.commons.utils.StringUtils;
 
 public class ExtMetadata {
     @SuppressWarnings("unused") @SerializedName("DateTime") @Nullable
@@ -13,6 +14,8 @@ public class ExtMetadata {
     @SuppressWarnings("unused") @SerializedName("Categories") @Nullable private Values categories;
     @SuppressWarnings("unused") @SerializedName("Assessments") @Nullable private Values assessments;
     @SuppressWarnings("unused") @SerializedName("ImageDescription") @Nullable private Values imageDescription;
+    @SuppressWarnings("unused") @SerializedName("GPSLatitude") @Nullable private Values gpsLatitude;
+    @SuppressWarnings("unused") @SerializedName("GPSLongitude") @Nullable private Values gpsLongitude;
     @SuppressWarnings("unused") @SerializedName("DateTimeOriginal") @Nullable private Values dateTimeOriginal;
     @SuppressWarnings("unused") @SerializedName("Artist") @Nullable private Values artist;
     @SuppressWarnings("unused") @SerializedName("Credit") @Nullable private Values credit;
@@ -26,136 +29,67 @@ public class ExtMetadata {
     @SuppressWarnings("unused") @SerializedName("Restrictions") @Nullable private Values restrictions;
     @SuppressWarnings("unused") @SerializedName("License") @Nullable private Values license;
 
-    @Nullable public Values licenseShortName() {
-        return licenseShortName;
+    @NonNull public Values dateTime() {
+        return dateTime != null ? dateTime : new Values();
     }
 
-    @Nullable public Values licenseUrl() {
-        return licenseUrl;
+    @NonNull public Values dateTimeOriginal() {
+        return dateTimeOriginal != null ? dateTimeOriginal : new Values();
     }
 
-    @Nullable public Values license() {
-        return license;
+    @NonNull public Values licenseShortName() {
+        return licenseShortName != null ? licenseShortName : new Values();
     }
 
-    @Nullable public Values imageDescription() {
-        return imageDescription;
+    @NonNull public Values licenseUrl() {
+        return licenseUrl != null ? licenseUrl : new Values();
     }
 
-    @Nullable
-    public Values getDateTime() {
-        return dateTime;
+    @NonNull public Values license() {
+        return license != null ? license : new Values();
     }
 
-    @Nullable
-    public Values getObjectName() {
-        return objectName;
+    @NonNull public Values imageDescription() {
+        return imageDescription != null ? imageDescription : new Values();
     }
 
-    @Nullable
-    public Values getCommonsMetadataExtension() {
-        return commonsMetadataExtension;
+    @NonNull
+    public Values categories() {
+        return categories != null ? categories : new Values();
     }
 
-    @Nullable
-    public Values getCategories() {
-        return categories;
+    @NonNull
+    public Values gpsLatitude() {
+        return gpsLatitude != null ? gpsLatitude : new Values();
     }
 
-    @Nullable
-    public Values getAssessments() {
-        return assessments;
+    @NonNull
+    public Values gpsLongitude() {
+        return gpsLongitude != null ? gpsLongitude : new Values();
     }
 
-    @Nullable
-    public Values getImageDescription() {
-        return imageDescription;
+    @NonNull public Values objectName() {
+        return objectName != null ? objectName : new Values();
     }
 
-    @Nullable
-    public Values getDateTimeOriginal() {
-        return dateTimeOriginal;
+    @NonNull public Values usageTerms() {
+        return usageTerms != null ? usageTerms : new Values();
     }
 
-    @Nullable
-    public Values getArtist() {
-        return artist;
-    }
-
-    @Nullable
-    public Values getCredit() {
-        return credit;
-    }
-
-    @Nullable
-    public Values getPermission() {
-        return permission;
-    }
-
-    @Nullable
-    public Values getAuthorCount() {
-        return authorCount;
-    }
-
-    @Nullable
-    public Values getLicenseShortName() {
-        return licenseShortName;
-    }
-
-    @Nullable
-    public Values getUsageTerms() {
-        return usageTerms;
-    }
-
-    @Nullable
-    public Values getLicenseUrl() {
-        return licenseUrl;
-    }
-
-    @Nullable
-    public Values getAttributionRequired() {
-        return attributionRequired;
-    }
-
-    @Nullable
-    public Values getCopyrighted() {
-        return copyrighted;
-    }
-
-    @Nullable
-    public Values getRestrictions() {
-        return restrictions;
-    }
-
-    @Nullable
-    public Values getLicense() {
-        return license;
-    }
-
-    @Nullable public Values objectName() {
-        return objectName;
-    }
-
-    @Nullable public Values usageTerms() {
-        return usageTerms;
-    }
-
-    @Nullable public Values artist() {
-        return artist;
+    @NonNull public Values artist() {
+        return artist != null ? artist : new Values();
     }
 
     public class Values {
-        @SuppressWarnings("unused,NullableProblems") @NonNull
-        private String value;
-        @SuppressWarnings("unused,NullableProblems") @NonNull private String source;
-        @SuppressWarnings("unused,NullableProblems") @NonNull private String hidden;
+        @SuppressWarnings("unused,NullableProblems") @Nullable private String value;
+        @SuppressWarnings("unused,NullableProblems") @Nullable private String source;
 
         @NonNull public String value() {
-            return value;
+            return StringUtils.defaultString(value);
         }
 
         @NonNull public String source() {
-            return source;
+            return StringUtils.defaultString(source);
         }
     }
 }

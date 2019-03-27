@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.media.model;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -162,6 +162,9 @@ public class MwQueryPage {
     }
 
     public static class Revision {
+        private String revid;
+        private String user;
+
         @SuppressWarnings("unused,NullableProblems")
         @SerializedName("contentformat")
         @NonNull
@@ -178,6 +181,8 @@ public class MwQueryPage {
         @NonNull
         private String content;
 
+
+
         @NonNull
         public String content() {
             return content;
@@ -186,6 +191,14 @@ public class MwQueryPage {
         @NonNull
         public String timeStamp() {
             return StringUtils.defaultString(timeStamp);
+        }
+
+        public String getRevid() {
+            return revid;
+        }
+
+        public String getUser() {
+            return user;
         }
     }
 

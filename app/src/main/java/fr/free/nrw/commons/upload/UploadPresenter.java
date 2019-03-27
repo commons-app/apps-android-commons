@@ -2,27 +2,24 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.CustomProxy;
 import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
@@ -38,12 +35,16 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 @Singleton
 public class UploadPresenter {
 
-    private static final UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
-            new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
+    private static final UploadView DUMMY =
+        (UploadView) CustomProxy.newInstance(UploadView.class.getClassLoader(),
+            new Class[] { UploadView.class });
+
     private UploadView view = DUMMY;
 
-    private static final SimilarImageInterface SIMILAR_IMAGE = (SimilarImageInterface) Proxy.newProxyInstance(SimilarImageInterface.class.getClassLoader(),
-            new Class[]{SimilarImageInterface.class}, (proxy, method, methodArgs) -> null);
+    private static final SimilarImageInterface SIMILAR_IMAGE =
+        (SimilarImageInterface) CustomProxy.newInstance(
+            SimilarImageInterface.class.getClassLoader(),
+            new Class[] { SimilarImageInterface.class });
     private SimilarImageInterface similarImageInterface = SIMILAR_IMAGE;
 
     @UploadView.UploadPage
@@ -52,19 +53,17 @@ public class UploadPresenter {
     private final UploadModel uploadModel;
     private final UploadController uploadController;
     private final Context context;
-    private final BasicKvStore defaultKvStore;
     private final JsonKvStore directKvStore;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
     UploadPresenter(UploadModel uploadModel,
                     UploadController uploadController,
                     Context context,
-                    @Named("default_preferences") BasicKvStore defaultKvStore,
-                    @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
+                    @Named("default_preferences") JsonKvStore directKvStore) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
         this.context = context;
-        this.defaultKvStore = defaultKvStore;
         this.directKvStore = directKvStore;
     }
 
@@ -81,12 +80,12 @@ public class UploadPresenter {
         Observable<UploadItem> uploadItemObservable = uploadModel
                 .preProcessImages(media, place, source, similarImageInterface);
 
-        uploadItemObservable
+        compositeDisposable.add(uploadItemObservable
                 .toList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(uploadItems -> onImagesProcessed(uploadItems, place),
-                        throwable -> Timber.e(throwable, "Error occurred in processing images"));
+                        throwable -> Timber.e(throwable, "Error occurred in processing images")));
     }
 
     private void onImagesProcessed(List<UploadItem> uploadItems, Place place) {
@@ -117,11 +116,11 @@ public class UploadPresenter {
                     List<Description> descriptions) {
         Timber.e("Inside handleNext");
         view.showProgressDialog();
-        uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
+        compositeDisposable.add(uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageResult -> handleImage(title, descriptions, imageResult),
-                        throwable -> Timber.e(throwable, "Error occurred while handling image"));
+                        throwable -> Timber.e(throwable, "Error occurred while handling image")));
     }
 
     private void handleImage(Title title, List<Description> descriptions, Integer imageResult) {
@@ -215,9 +214,9 @@ public class UploadPresenter {
     @SuppressLint("CheckResult")
     void handleSubmit(CategoriesModel categoriesModel) {
         if (view.checkIfLoggedIn())
-            uploadModel.buildContributions(categoriesModel.getCategoryStringList())
+            compositeDisposable.add(uploadModel.buildContributions(categoriesModel.getCategoryStringList())
                     .observeOn(Schedulers.io())
-                    .subscribe(uploadController::startUpload);
+                    .subscribe(uploadController::startUpload));
     }
 
     /**
@@ -267,14 +266,6 @@ public class UploadPresenter {
     }
 
     /**
-     * Toggles the right card's state between open and closed.
-     */
-    void toggleRightCardState() {
-        uploadModel.setRightCardState(!uploadModel.isRightCardState());
-        view.setRightCardState(uploadModel.isRightCardState());
-    }
-
-    /**
      * Sets all the cards' states to closed.
      */
     void closeAllCards() {
@@ -284,7 +275,6 @@ public class UploadPresenter {
         }
         if (uploadModel.isRightCardState()) {
             uploadModel.setRightCardState(false);
-            view.setRightCardState(false);
         }
         if (uploadModel.isBottomCardState()) {
             uploadModel.setBottomCardState(false);
@@ -299,6 +289,8 @@ public class UploadPresenter {
     }
 
     void cleanup() {
+        compositeDisposable.clear();
+        uploadModel.cleanup();
         uploadController.cleanup();
     }
 
@@ -331,7 +323,7 @@ public class UploadPresenter {
      * Sets the list of licences and the default license.
      */
     private void updateLicenses() {
-        String selectedLicense = defaultKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        String selectedLicense = directKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
         view.updateLicenseSummary(selectedLicense, uploadModel.getCount());
     }

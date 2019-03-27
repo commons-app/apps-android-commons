@@ -149,7 +149,7 @@
   <string name="number_of_uploads">Min grens för huuchschüürd datein</string>
   <string name="maximum_limit">Boowergrens</string>
   <string name="maximum_limit_alert">Muar üs 500 iindracher kön ei uunwiset wurd</string>
-  <string name="set_limit">Grens för huuchschüürd datein fäästlei</string>
+  <string name="set_limit" fuzzy="true">Grens för huuchschüürd datein fäästlei</string>
   <string name="login_failed_2fa_not_supported">Tau-straal-gudkäänen (2FA) wal uun uugenblak ei.</string>
   <string name="logout_verification">Wel dü di würelk ufmelde?</string>
   <string name="cancel">Ufbreeg</string>

@@ -8,37 +8,66 @@ import org.robolectric.annotation.Config
 import java.net.URLEncoder
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(21), application = TestCommonsApplication::class)
+@Config(constants = BuildConfig::class, sdk = [21], application = TestCommonsApplication::class)
 class PageTitleTest {
     @Test
     fun displayTextShouldNotBeUnderscored() {
-        val pageTitle = PageTitle("Ex_1 ")
-        assertEquals("Ex 1", pageTitle.displayText)
-    }
-
-    @Test
-    fun moreThanTwoColons() {
-        val pageTitle = PageTitle("File:sample:a.jpg")
-        assertEquals("File:Sample:a.jpg", pageTitle.prefixedText)
-    }
-
-    @Test
-    fun getTextShouldReturnWithoutNamespace() {
-        val pageTitle = PageTitle("File:sample.jpg")
-        assertEquals("Sample.jpg", pageTitle.text)
-    }
-
-
-    @Test
-    fun capitalizeNameAfterNamespace() {
-        val pageTitle = PageTitle("File:sample.jpg")
-        assertEquals("File:Sample.jpg", pageTitle.prefixedText)
+        assertEquals("Ex 1", PageTitle("Ex_1").displayText)
+        assertEquals("Ex 1", PageTitle("Ex_1 ").displayText)
+        assertEquals("Ex 1", PageTitle("Ex 1").displayText)
+        assertEquals("Ex 1", PageTitle("Ex 1 ").displayText)
+        assertEquals("File:Ex 1 2", PageTitle("File:Ex_1_2 ").displayText)
     }
 
     @Test
     fun prefixedTextShouldBeUnderscored() {
-        val pageTitle = PageTitle("Ex 1 ")
-        assertEquals("Ex_1", pageTitle.prefixedText)
+        assertEquals("Ex_1", PageTitle("Ex_1").prefixedText)
+        assertEquals("Ex_1", PageTitle("Ex_1 ").prefixedText)
+        assertEquals("Ex_1", PageTitle("Ex 1").prefixedText)
+        assertEquals("Ex_1", PageTitle("Ex 1 ").prefixedText)
+        assertEquals("File:Ex_1_2", PageTitle("File:Ex 1 2 ").prefixedText)
+    }
+
+    @Test
+    fun fileNameWithOneColon() {
+        val pageTitle = PageTitle("File:sample:a.jpg")
+        assertEquals("File:Sample:a.jpg", pageTitle.prefixedText)
+        assertEquals("File:Sample:a.jpg", pageTitle.displayText)
+        assertEquals("Sample:a.jpg", pageTitle.text)
+    }
+
+    @Test
+    fun fileNameWithMoreThanOneColon() {
+        var pageTitle = PageTitle("File:sample:a:b.jpg")
+        assertEquals("File:Sample:a:b.jpg", pageTitle.prefixedText)
+        assertEquals("File:Sample:a:b.jpg", pageTitle.displayText)
+        assertEquals("Sample:a:b.jpg", pageTitle.text)
+
+        pageTitle = PageTitle("File:sample:a:b:c.jpg")
+        assertEquals("File:Sample:a:b:c.jpg", pageTitle.prefixedText)
+        assertEquals("File:Sample:a:b:c.jpg", pageTitle.displayText)
+        assertEquals("Sample:a:b:c.jpg", pageTitle.text)
+    }
+
+    @Test
+    fun keyShouldNotIncludeNamespace() {
+        val pageTitle = PageTitle("File:Sample.jpg")
+        assertEquals("Sample.jpg", pageTitle.text)
+    }
+
+    @Test
+    fun capitalizeNamespace() {
+        val pageTitle = PageTitle("file:Sample.jpg")
+        assertEquals("File:Sample.jpg", pageTitle.prefixedText)
+        assertEquals("File:Sample.jpg", pageTitle.displayText)
+    }
+
+    @Test
+    fun capitalizeKey() {
+        val pageTitle = PageTitle("File:sample.jpg")
+        assertEquals("File:Sample.jpg", pageTitle.prefixedText)
+        assertEquals("File:Sample.jpg", pageTitle.displayText)
+        assertEquals("Sample.jpg", pageTitle.text)
     }
 
     @Test
