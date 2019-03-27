@@ -217,6 +217,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                             BaseLogoutListener logoutListener = new BaseLogoutListener();
                             CommonsApplication app = (CommonsApplication) getApplication();
                             app.clearApplicationData(this, logoutListener);
+                            Toast.makeText(app, getString(R.string.logout_success), Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
