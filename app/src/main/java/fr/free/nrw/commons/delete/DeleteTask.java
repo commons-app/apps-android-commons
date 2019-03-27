@@ -161,7 +161,6 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Override
     protected void onPostExecute(Boolean result) {
-
         String message;
         String title = "Nominating for Deletion";
 
