@@ -20,17 +20,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/standard_gap"
         android:layout_marginBottom="@dimen/standard_gap"
+        android:text="@string/tutorial_1_text"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="@dimen/normal_text"
-        android:textStyle="bold"
-        android:text="@string/tutorial_1_text" />
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
         android:text="@string/tutorial_1_subtext"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>
