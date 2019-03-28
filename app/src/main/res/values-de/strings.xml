@@ -251,7 +251,7 @@
   <string name="upload_problem_different_geolocation">Dieses Bild wurde an einem anderen Ort aufgenommen.</string>
   <string name="upload_problem_fbmd">Lade bitte nur Bilder hoch, die du selber erstellt hast. Lade keine Bilder hoch, die du auf Facebook-Konten anderer Personen gefunden hast.</string>
   <string name="upload_problem_do_you_continue">Möchtest du immer noch dieses Bild hochladen?</string>
-  <string name="internet_downloaded" fuzzy="true">Lade bitte nur Bilder hoch, die du selber aufgenommen hast. Lade keine Bilder hoch, die du aus dem Internet heruntergeladen hast.</string>
+  <string name="internet_downloaded">Lade bitte nur Bilder hoch, die du selber aufgenommen hast. Lade keine Bilder hoch, die du aus dem Internet heruntergeladen hast.</string>
   <string name="give_permission">Berechtigung geben</string>
   <string name="use_external_storage">Externen Speicher verwenden</string>
   <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
@@ -439,7 +439,7 @@
   <string name="achievements_fetch_failed">Etwas ist schief gelaufen. Wir konnten deine Errungenschaften nicht abrufen.</string>
   <string name="ends_on">Endet am:</string>
   <string name="display_campaigns">Kampagnen anzeigen</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Hier tippen, um die laufenden Kampagnen anzusehen.</string>
+  <string name="display_campaigns_explanation">Die laufenden Kampagnen ansehen</string>
   <string name="nearby_campaign_dismiss_message">Du wirst die Kampagnen nicht mehr sehen. Du kannst dennoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du dies möchtest.</string>
   <string name="this_function_needs_network_connection">Diese Funktion erfordert eine Netzwerkverbindung. Bitte überprüfe deine Verbindungseinstellungen.</string>
   <string name="bad_token_error_proposed_solution">Das Hochladen ist aufgrund von Problemen mit dem Bearbeitungstoken fehlgeschlagen. Bitte versuche, dich ab- und anschließend wieder anzumelden.</string>
@@ -505,4 +505,5 @@
   <string name="images_featured_explanation">Vorgestellte Bilder sind Bilder von professionellen Fotografen und Zeichnern, die die Gemeinschaft von Wikimedia Commons als diejenigen mit der höchsten Qualität auf der Website ausgewählt hat.</string>
   <string name="images_via_nearby_explanation">Über Orte in der Nähe hochgeladene Bilder sind die Bilder, die von entdeckten Orten auf der Karte hochgeladen wurden.</string>
   <string name="thanks_received_explanation">Diese Funktion erlaubt es Autoren, eine Dankeschön-Benachrichtigung an Benutzer zu senden, die nützliche Bearbeitungen durchgeführt haben – durch die Benutzung eines kleinen Dankeschön-Links in der Versionsgeschichte oder Unterschiedsseite.</string>
+  <string name="skip_image">DIESES BILD ÜBERSPRINGEN</string>
 </resources>
