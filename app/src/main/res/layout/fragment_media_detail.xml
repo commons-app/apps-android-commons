@@ -133,7 +133,7 @@
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <fr.free.nrw.commons.ui.widget.HtmlTextView
                         android:id="@+id/mediaDetailDesc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
