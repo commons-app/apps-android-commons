@@ -164,10 +164,6 @@ public class LatLng implements Parcelable {
         return latitude;
     }
 
-    public String getDecimalCoordinates() {
-        return latitude + "," + longitude;
-    }
-
     public Uri getGmmIntentUri() {
         return Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
     }

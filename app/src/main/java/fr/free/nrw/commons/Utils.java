@@ -1,6 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -26,6 +25,7 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -205,15 +205,18 @@ public class Utils {
         customTabsIntent.launchUrl(context, url);
     }
 
+    /**
+     * Util function to handle geo coordinates
+     * It no longer depends on google maps and any app capable of handling the map intent can handle it
+     * @param context
+     * @param latLng
+     */
     public static void handleGeoCoordinates(Context context, LatLng latLng) {
-        try {
-            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + latLng.getDecimalCoordinates());
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, latLng.getGmmIntentUri());
+        if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(mapIntent);
-        } catch (ActivityNotFoundException ex) {
-            Toast toast = Toast.makeText(context, context.getString(R.string.map_application_missing), LENGTH_SHORT);
-            toast.show();
+        } else {
+            ViewUtil.showShortToast(context, context.getString(R.string.map_application_missing));
         }
     }
 
