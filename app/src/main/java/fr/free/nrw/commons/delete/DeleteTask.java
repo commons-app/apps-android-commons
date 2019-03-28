@@ -162,28 +162,28 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
     @Override
     protected void onPostExecute(Boolean result) {
 
-        String media_message=media.getDisplayTitle();
-        String full_colon=":";
+        String mediaMessage=media.getDisplayTitle();
+        String fullColon=":";
 
         //link to string resources
-        String title_resource = context.getResources().getString(R.string.nominating_for_deletion);
-        String success_resource = context.getResources().getString(R.string.success,full_colon);
-        String message_resource = context.getResources().getString(R.string.message,media_message);
-        String failed_resource = context.getResources().getString(R.string.failed,full_colon);
-        String could_not_request_deletion_resource = context.getResources().getString(R.string.could_not_request_deletion);
+        String titleResource = context.getResources().getString(R.string.nominating_for_deletion);
+        String successResource = context.getResources().getString(R.string.success,fullColon);
+        String messageResource = context.getResources().getString(R.string.message,mediaMessage);
+        String failedResource = context.getResources().getString(R.string.failed,fullColon);
+        String couldRequest_deletion_resource = context.getResources().getString(R.string.could_not_request_deletion);
 
         String message;
-        String title = title_resource;
+        String title = titleResource;
 
         if (result){
 
-            title +=success_resource;
-            message = message_resource;
+            title += successResource;
+            message = messageResource;
 
         }
         else {
-            title +=failed_resource;
-            message = could_not_request_deletion_resource;
+            title += failedResource;
+            message = couldRequest_deletion_resource;
         }
 
         notificationBuilder.setDefaults(DEFAULT_ALL)
