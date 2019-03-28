@@ -551,10 +551,8 @@ public class NearbyMapFragment extends DaggerFragment {
 
             if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
 
-                if (searchThisAreaButton.getVisibility() == View.GONE) {
-                    if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
+                if (searchThisAreaButton.getVisibility() == View.GONE && NetworkUtils.isInternetConnectionEstablished(getContext())) {
                         searchThisAreaButton.setVisibility(View.VISIBLE);
-                    }
                 }
                 double distance = mapboxMap.getCameraPosition().target
                         .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
