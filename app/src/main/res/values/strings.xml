@@ -511,7 +511,7 @@ Upload your first media by tapping on the add button.</string>
     <string name="skip_this_image">Skip this image</string>
     <string name="skip_this_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
     <string name="review_image">Peer Review</string>
-    <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commoms.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of    copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the     contributor.</string>
+    <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commoms.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
 
   <plurals name="receiving_shared_content">
     <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>

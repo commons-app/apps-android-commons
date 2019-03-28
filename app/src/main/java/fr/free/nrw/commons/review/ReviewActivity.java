@@ -65,7 +65,6 @@ public class ReviewActivity extends AuthenticatedActivity {
     ImageView skipImageInfo;
     @BindView(R.id.review_image_info)
     ImageView reviewImageInfo;
-
     @Inject
     MediaWikiApi mwApi;
 
@@ -174,7 +173,6 @@ public class ReviewActivity extends AuthenticatedActivity {
             runRandomizer();
         }
     }
-
 
     public void showSkipImageInfo(){
         launchAlert(getResources().getString(R.string.skip_this_image)
