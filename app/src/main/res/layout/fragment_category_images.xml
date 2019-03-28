@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parentLayout"
     android:orientation="vertical"
@@ -38,5 +39,21 @@
         android:fadingEdge="none"
         android:fastScrollEnabled="true"
         />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        app:backgroundTint="@color/status_bar_blue"
+        app:useCompatPadding="true"
+        app:elevation="4dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="8dp"
+        app:srcCompat="@drawable/ic_search_white_24dp" />
 
 </RelativeLayout>

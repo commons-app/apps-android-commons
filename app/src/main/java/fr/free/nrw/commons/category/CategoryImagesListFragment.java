@@ -22,11 +22,14 @@ import javax.inject.Named;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -55,6 +58,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private boolean hasMoreImages = true;
     private boolean isLoading = true;
     private String categoryName = null;
+
+    @OnClick(R.id.fab_search)
+    void launchSearch() {
+        NavigationBaseActivity.startActivityWithFlags(getContext(), SearchActivity.class);
+    }
 
     @Inject CategoryImageController controller;
     @Inject

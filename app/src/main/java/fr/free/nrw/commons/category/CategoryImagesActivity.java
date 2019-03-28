@@ -4,21 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 /**
  * This activity displays pictures of a particular category
@@ -212,26 +209,15 @@ public class CategoryImagesActivity
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     /**
      * This method handles the logic on ItemSelect in toolbar menu
-     * Currently only 1 choice is available to open search page of the app
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                NavigationBaseActivity.startActivityWithFlags(this, SearchActivity.class);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
