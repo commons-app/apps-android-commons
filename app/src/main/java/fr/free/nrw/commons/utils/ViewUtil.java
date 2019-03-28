@@ -9,19 +9,9 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import androidx.annotation.StringRes;
 
-@Singleton
 public class ViewUtil {
-
-    @Inject
-    public ViewUtil() {
-
-    }
-
     /**
      * Utility function to show short snack bar
      * @param view
@@ -51,7 +41,7 @@ public class ViewUtil {
         ExecutorUtils.uiExecutor().execute(() -> Toast.makeText(context, context.getString(stringResourceId), Toast.LENGTH_LONG).show());
     }
 
-    public void showShortToast(Context context, String text) {
+    public static void showShortToast(Context context, String text) {
         if (context == null) {
             return;
         }

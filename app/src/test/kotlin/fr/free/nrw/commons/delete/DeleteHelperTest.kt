@@ -6,7 +6,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.notification.NotificationHelper
-import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.ViewUtilWrapper
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
@@ -34,7 +34,7 @@ class DeleteHelperTest {
     internal var context: Context? = null
 
     @Mock
-    internal var viewUtil: ViewUtil? = null
+    internal var viewUtil: ViewUtilWrapper? = null
 
     @Mock
     internal var media: Media? = null

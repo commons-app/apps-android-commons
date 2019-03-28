@@ -1,15 +1,11 @@
 package fr.free.nrw.commons;
 
-import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,7 +20,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -175,7 +176,7 @@ public class Utils {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
         }
         catch (android.content.ActivityNotFoundException anfe) {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            handleWebUrl(context, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName));
         }
     }
 
@@ -204,15 +205,18 @@ public class Utils {
         customTabsIntent.launchUrl(context, url);
     }
 
-    public static void handleGeoCoordinates(Context context, String coords) {
-        try {
-            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + coords);
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");
+    /**
+     * Util function to handle geo coordinates
+     * It no longer depends on google maps and any app capable of handling the map intent can handle it
+     * @param context
+     * @param latLng
+     */
+    public static void handleGeoCoordinates(Context context, LatLng latLng) {
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, latLng.getGmmIntentUri());
+        if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(mapIntent);
-        } catch (ActivityNotFoundException ex) {
-            Toast toast = Toast.makeText(context, context.getString(R.string.map_application_missing), LENGTH_SHORT);
-            toast.show();
+        } else {
+            ViewUtil.showShortToast(context, context.getString(R.string.map_application_missing));
         }
     }
 

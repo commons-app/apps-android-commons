@@ -20,6 +20,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import timber.log.Timber;
 
@@ -33,13 +34,13 @@ public class DeleteHelper {
     private final MediaWikiApi mwApi;
     private final SessionManager sessionManager;
     private final NotificationHelper notificationHelper;
-    private final ViewUtil viewUtil;
+    private final ViewUtilWrapper viewUtil;
 
     @Inject
     public DeleteHelper(MediaWikiApi mwApi,
                         SessionManager sessionManager,
                         NotificationHelper notificationHelper,
-                        ViewUtil viewUtil) {
+                        ViewUtilWrapper viewUtil) {
         this.mwApi = mwApi;
         this.sessionManager = sessionManager;
         this.notificationHelper = notificationHelper;

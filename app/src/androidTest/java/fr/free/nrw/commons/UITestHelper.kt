@@ -22,12 +22,12 @@ class UITestHelper {
         fun loginUser() {
             try {
                 //Perform Login
-                onView(ViewMatchers.withId(R.id.loginUsername))
+                onView(ViewMatchers.withId(R.id.login_username))
                         .perform(ViewActions.clearText(), ViewActions.typeText(getTestUsername()))
-                onView(ViewMatchers.withId(R.id.loginPassword))
+                onView(ViewMatchers.withId(R.id.login_password))
                         .perform(ViewActions.clearText(), ViewActions.typeText(getTestUserPassword()))
                 closeSoftKeyboard()
-                onView(ViewMatchers.withId(R.id.loginButton))
+                onView(ViewMatchers.withId(R.id.login_button))
                         .perform(ViewActions.click())
                 sleep(5000)
             } catch (ignored: NoMatchingViewException) {
