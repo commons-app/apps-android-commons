@@ -107,7 +107,7 @@ class OkHttpJsonApiClientTest {
                 Assert.assertEquals("gcmcontinue||", body["continue"])
                 Assert.assertEquals("imageinfo", body["prop"])
                 Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName", body["iiextmetadatafilter"])
+                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
             }
         }
 
@@ -151,7 +151,7 @@ class OkHttpJsonApiClientTest {
                 Assert.assertEquals("gsroffset||", body["continue"])
                 Assert.assertEquals("imageinfo", body["prop"])
                 Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName", body["iiextmetadatafilter"])
+                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
             }
         }
 
@@ -174,7 +174,7 @@ class OkHttpJsonApiClientTest {
                 Assert.assertEquals("Test.jpg", body["titles"])
                 Assert.assertEquals("imageinfo", body["prop"])
                 Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName", body["iiextmetadatafilter"])
+                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
             }
         }
 
@@ -200,7 +200,7 @@ class OkHttpJsonApiClientTest {
                 Assert.assertEquals("images", body["generator"])
                 Assert.assertEquals("imageinfo", body["prop"])
                 Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName", body["iiextmetadatafilter"])
+                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
             }
         }
 
@@ -225,7 +225,7 @@ class OkHttpJsonApiClientTest {
                 Assert.assertEquals("images", body["generator"])
                 Assert.assertEquals("imageinfo", body["prop"])
                 Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName", body["iiextmetadatafilter"])
+                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
             }
         }
 
@@ -246,7 +246,7 @@ class OkHttpJsonApiClientTest {
                 Assert.assertEquals("Watercraft moored off shore", body["gsrsearch"])
                 Assert.assertEquals("imageinfo", body["prop"])
                 Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName", body["iiextmetadatafilter"])
+                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
             }
         }
         assertEquals(categoryImages.size, 2)
