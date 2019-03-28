@@ -537,10 +537,10 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             Title t = new Title();
             t.setTitleText(title);
 
-            Description description= new Description();
             List<Description> finalDesc = new LinkedList<>();
             int descCount = directKvStore.getInt("descCount");
             for (int i = 0; i < descCount; i++) {
+                Description description= new Description();
                 String desc = directKvStore.getString("description_<"+Integer.toString(i)+">");
                 description.setDescriptionText(desc);
                 finalDesc.add(description);
