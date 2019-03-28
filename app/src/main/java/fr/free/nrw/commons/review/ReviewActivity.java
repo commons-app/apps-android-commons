@@ -31,6 +31,7 @@ import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -175,22 +176,21 @@ public class ReviewActivity extends AuthenticatedActivity {
     }
 
     public void showSkipImageInfo(){
-        launchAlert(getResources().getString(R.string.skip_this_image)
-                ,getResources().getString(R.string.skip_this_image_explanation));
+        DialogUtil.showAlertDialog(ReviewActivity.this,
+                getString(R.string.skip_image),
+                getString(R.string.skip_image_explanation),
+                getString(R.string.about_translate_proceed),
+                getString(android.R.string.cancel),
+                () -> runRandomizer(),null);
     }
 
-    public void showReviewImageInfo(){
-        launchAlert(getResources().getString(R.string.review_image)
-                ,getResources().getString(R.string.review_image_explanation));
-    }
-
-    private void launchAlert(String title, String message){
-        new AlertDialog.Builder(ReviewActivity.this)
-                .setTitle(title)
-                .setMessage(message)
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                .create()
-                .show();
+    public void showReviewImageInfo() {
+        DialogUtil.showAlertDialog(ReviewActivity.this,
+                getString(R.string.review_image),
+                getString(R.string.review_image_explanation),
+                getString(R.string.about_translate_proceed),
+                getString(R.string.go_back_button_text),
+                null,
+                () -> onBackPressed());
     }
 }

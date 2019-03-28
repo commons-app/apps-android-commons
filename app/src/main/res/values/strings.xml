@@ -508,8 +508,8 @@ Upload your first media by tapping on the add button.</string>
     <string name="review_copyright_no_button_text">SEEMS FINE</string>
     <string name="review_thanks_yes_button_text">YES, WHY NOT</string>
     <string name="review_thanks_no_button_text">NEXT IMAGE</string>
-    <string name="skip_this_image">Skip this image</string>
-    <string name="skip_this_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
+    <string name="go_back_button_text">GO BACK</string>
+    <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
     <string name="review_image">Peer Review</string>
     <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commoms.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
 
