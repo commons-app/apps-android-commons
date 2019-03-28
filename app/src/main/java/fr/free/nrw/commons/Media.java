@@ -392,6 +392,10 @@ public class Media implements Parcelable {
      */
     public void setLicenseInformation(String license, String licenseUrl) {
         this.license = license;
+
+        if (!licenseUrl.startsWith("http://") && !licenseUrl.startsWith("https://")) {
+            licenseUrl = "https://" + licenseUrl;
+        }
         this.licenseUrl = licenseUrl;
     }
 
