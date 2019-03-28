@@ -177,7 +177,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/description_text_size"
                         app:drawablePadding="@dimen/tiny_gap"
-                        app:drawableStart="@drawable/ic_info_outline_white_24dp"
+                        app:drawableStart="@drawable/ic_info_outline_24dp"
                         tools:text="License link" />
                 </LinearLayout>
 
