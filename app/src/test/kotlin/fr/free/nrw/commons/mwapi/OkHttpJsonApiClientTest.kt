@@ -215,7 +215,7 @@ class OkHttpJsonApiClientTest {
         val template = "Template:Potd/" + DateUtils.getCurrentDate()
         server.enqueue(getMediaList("", "", "", 1))
 
-        val media = testObject.pictureOfTheDay!!.blockingGet()
+        val media = testObject.pictureOfTheDay?.blockingGet()
 
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
@@ -253,7 +253,7 @@ class OkHttpJsonApiClientTest {
     }
 
     private fun testFirstPageQuery() {
-        val categoryImages = testObject.getMediaList("category", "Watercraft moored off shore")!!.blockingGet()
+        val categoryImages = testObject.getMediaList("category", "Watercraft moored off shore")?.blockingGet()
 
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
@@ -269,7 +269,7 @@ class OkHttpJsonApiClientTest {
                 Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
             }
         }
-        assertEquals(categoryImages.size, 2)
+        assertEquals(categoryImages?.size, 2)
     }
 
     private fun getFirstPageOfImages(): MockResponse {

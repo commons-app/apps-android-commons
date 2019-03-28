@@ -7,8 +7,7 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.utils.ViewUtilWrapper
-import junit.framework.Assert.assertFalse
-import junit.framework.Assert.assertNotNull
+import junit.framework.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
@@ -63,7 +62,7 @@ class DeleteHelperTest {
 
         val makeDeletion = deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
         assertNotNull(makeDeletion)
-        assertFalse(makeDeletion!!)
+        assertTrue(makeDeletion!!)
     }
 
     /**
