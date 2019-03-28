@@ -167,22 +167,22 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
 
         //link to string resources
         String titleResource = context.getResources().getString(R.string.nominating_for_deletion);
-        String successResource = context.getResources().getString(R.string.success,fullColon);
+        String successResource = context.getResources().getString(R.string.success,titleResource,fullColon);
         String messageResource = context.getResources().getString(R.string.message,mediaMessage);
-        String failedResource = context.getResources().getString(R.string.failed,fullColon);
+        String failedResource = context.getResources().getString(R.string.failed,titleResource,fullColon);
         String couldRequest_deletion_resource = context.getResources().getString(R.string.could_not_request_deletion);
 
         String message;
-        String title = titleResource;
+        String title; //String title = titleResource;
 
         if (result){
 
-            title += successResource;
+            title = successResource;
             message = messageResource;
 
         }
         else {
-            title += failedResource;
+            title = failedResource;
             message = couldRequest_deletion_resource;
         }
 

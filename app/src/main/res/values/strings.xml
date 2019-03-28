@@ -531,8 +531,8 @@ Upload your first media by tapping on the add button.</string>
 
 
   <string name="nominating_for_deletion">Nominating for Deletion</string>
-  <string name="success">%1$s Success</string>
-  <string name="failed">%1$s Failed</string>
+  <string name="success">%1$s %2$s Success</string>
+  <string name="failed">%1$s %2$s Failed</string>
   <string name="could_not_request_deletion">Could not request deletion.</string>
   <string name="message">Successfully nominated %1$s for deletion.</string>
 
