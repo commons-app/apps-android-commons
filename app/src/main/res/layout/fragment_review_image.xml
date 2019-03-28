@@ -4,12 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scroll"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomview"
-        android:layout_alignParentTop="true">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +26,7 @@
             <TextView
                 android:id="@+id/reviewQuestionContext"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:gravity="center_vertical"
                 android:text="testing2"
@@ -72,13 +67,11 @@
 
         </LinearLayout>
 
-    </ScrollView>
-
 
     <View
         android:id="@+id/bottomview"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="15dp"
         android:layout_alignParentBottom="true"
         android:background="?attr/colorPrimaryDark"></View>
 

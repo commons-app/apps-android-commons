@@ -437,7 +437,7 @@
   <string name="achievements_fetch_failed">Nastala neočekávaná chyba. Nemohli jsme dokončit akci</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobrazovat kampaně</string>
-  <string name="display_campaigns_explanation">Klepnutím sem zobrazíte probíhající kampaně</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Klepnutím sem zobrazíte probíhající kampaně</string>
   <string name="nearby_campaign_dismiss_message">Kampaně již neuvidíte. Toto oznámení však můžete znovu zapnout v Nastavení.</string>
   <string name="this_function_needs_network_connection">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
   <string name="bad_token_error_proposed_solution">Nahrávání se nezdařilo kvůli problémům s editačním tokenem. Zkuste se prosím odhlásit a zkuste to znovu.</string>

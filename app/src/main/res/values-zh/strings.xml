@@ -435,7 +435,7 @@
   <string name="achievements_fetch_failed">有错误发生，无法获取你的成就</string>
   <string name="ends_on">结束于：</string>
   <string name="display_campaigns">显示活动</string>
-  <string name="display_campaigns_explanation">点击此处显示正在进行的活动</string>
+  <string name="display_campaigns_explanation" fuzzy="true">点击此处显示正在进行的活动</string>
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
   <string name="bad_token_error_proposed_solution">因为编辑令牌失效上传失败。请尝试登出后重新登录。</string>

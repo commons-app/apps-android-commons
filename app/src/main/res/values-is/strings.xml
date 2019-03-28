@@ -418,7 +418,7 @@
   <string name="display_location_permission_explanation">Biðja um heimild til að sjá staðsetningu þegar þess er þörf fyrir tilkynningaspjald um næsta nágrenni.</string>
   <string name="ends_on">Endar þann:</string>
   <string name="display_campaigns">Birta herferðir</string>
-  <string name="display_campaigns_explanation">Ýttu hér til að sjá yfirstandandi herferðir</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Ýttu hér til að sjá yfirstandandi herferðir</string>
   <string name="no_image">Enagar myndir notaðar</string>
   <string name="no_image_reverted">Engar myndir endurstilltar</string>
   <string name="no_image_uploaded">Engar myndir sendar inn</string>

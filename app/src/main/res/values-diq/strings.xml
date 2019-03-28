@@ -178,6 +178,7 @@
   <string name="navigation_item_info">Musnayış</string>
   <string name="navigation_item_notification">Tebliği</string>
   <string name="navigation_item_featured_images">Weçinaye</string>
+  <string name="navigation_item_review">Çım berze cı</string>
   <string name="nearby_needs_permissions">Cayê nezdiy, bêicazetê lokasyoni nêmocneyêno</string>
   <string name="nearby_info_menu_commons_article">Pela dosyay commonsi</string>
   <string name="nearby_info_menu_wikidata_article">Pbcey Wikidata</string>
@@ -243,6 +244,7 @@
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
   <string name="yes_submit">Eya, bırışe</string>
   <string name="no_go_back">Nê, Peyser Şo</string>
+  <string name="nominate_for_deletion_done">Temam</string>
   <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
   <string name="no_archived_notification">Beyanatên şımayê arçivkerdeyi çıniyê</string>
   <string name="menu_option_archived">Arşivkerdeyan bıvêne</string>

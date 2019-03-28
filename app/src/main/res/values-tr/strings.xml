@@ -415,7 +415,7 @@
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görünümü özelliği için gerektiğinde konum izni isteyin.</string>
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
-  <string name="display_campaigns_explanation">Devam eden kampanyaları görmek için buraya dokunun</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Devam eden kampanyaları görmek için buraya dokunun</string>
   <string name="nearby_campaign_dismiss_message">Artık kampanyaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'da yeniden etkinleştirebilirsiniz.</string>
   <string name="no_archived_notification" fuzzy="true">Arşivlenmiş bildiriminiz yok</string>
   <string name="menu_option_archived">Arşivlenmişleri görüntüle</string>
