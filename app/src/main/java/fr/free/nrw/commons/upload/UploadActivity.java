@@ -468,14 +468,15 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
      * @see <a https://developer.android.com/reference/android/text/style/URLSpan">Source</a>
 
      * @param  url        span URL giving to be clicked on
-     * @param  start      span  text start
+     * @param  start      spannable text  start index
+     * @param  end        spannable text end index
+     * @param  strBuilder spannable text string clickable variable
      */
 
 
     private  final void makeLinkClickable(final String url, int start, int end, SpannableString  strBuilder) {
 
         strBuilder.setSpan(new URLSpan(url),start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
     }
 
     private void configureLicenses() {
