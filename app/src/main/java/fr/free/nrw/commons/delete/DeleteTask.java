@@ -173,7 +173,6 @@ public class DeleteTask extends AsyncTask<Void, Integer, Boolean> {
             message = "Could not request deletion.";
         }
 
-
         notificationBuilder.setDefaults(DEFAULT_ALL)
                 .setContentTitle(title)
                 .setStyle(new NotificationCompat.BigTextStyle()

@@ -445,7 +445,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
      * Uses {@link //#makeLinkClickable(url,start,end,strBuilder)}.
      * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
      */
-
     private void setTextViewHTML(TextView text, String html){
         CharSequence sequence = Html.fromHtml(html);
         SpannableString strBuilder = new SpannableString(sequence);
@@ -479,10 +478,10 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
         strBuilder.setSpan(new URLSpan(url),start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+
+
+
     }
-
-
-
 
     private void configureLicenses() {
         licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
