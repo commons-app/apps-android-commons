@@ -13,7 +13,7 @@
         android:layout_marginRight="@dimen/large_gap"
         android:layout_weight="0.5"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/welcome_dont_upload_contentDescription"
+        android:contentDescription="@string/welcome_dont_upload_content_description"
         android:src="@drawable/welcome_dont_upload" />
 
     <LinearLayout
