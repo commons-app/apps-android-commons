@@ -63,6 +63,9 @@ public class ReviewActivity extends AuthenticatedActivity {
     TextView imageCaption;
     @BindView(R.id.skip_image_info)
     ImageView skipImageInfo;
+    @BindView(R.id.review_image_info)
+    ImageView reviewImageInfo;
+
     @Inject
     MediaWikiApi mwApi;
 
@@ -109,6 +112,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
         skip_image_button.setOnClickListener(view -> runRandomizer());
         skipImageInfo.setOnClickListener(view -> showSkipImageInfo());
+        reviewImageInfo.setOnClickListener(view -> showReviewImageInfo());
     }
 
     @SuppressLint("CheckResult")
@@ -173,8 +177,13 @@ public class ReviewActivity extends AuthenticatedActivity {
 
 
     public void showSkipImageInfo(){
-        launchAlert(getResources().getString(R.string.images_uploaded)
-                ,getResources().getString(R.string.images_uploaded_explanation));
+        launchAlert(getResources().getString(R.string.skip_this_image)
+                ,getResources().getString(R.string.skip_this_image_explanation));
+    }
+
+    public void showReviewImageInfo(){
+        launchAlert(getResources().getString(R.string.review_image)
+                ,getResources().getString(R.string.review_image_explanation));
     }
 
     private void launchAlert(String title, String message){

@@ -16,6 +16,15 @@
 
             <include layout="@layout/toolbar" />
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/review_image_info"
+                app:srcCompat="@drawable/ic_help_black_24dp"
+                android:tint="@color/white"
+                android:layout_alignParentRight="true"
+                android:layout_margin="20dp"/>
+
             <LinearLayout
                 android:id="@+id/skip_image_row"
                 android:layout_width="match_parent"
@@ -34,15 +43,15 @@
                     android:layout_marginLeft="100dp"/>
 
                 <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:id="@+id/skip_image_info"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginRight="@dimen/activity_margin_horizontal"
                     android:layout_marginEnd="@dimen/activity_margin_horizontal"
                     android:layout_gravity="top"
-                    app:srcCompat="@drawable/ic_info_outline_blue_24dp"
-                    android:tint="?attr/icon" />
+                    app:srcCompat="@drawable/ic_help_black_24dp"
+                    android:tint="@color/button_blue_dark" />
 
             </LinearLayout>
             <ScrollView
