@@ -42,6 +42,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import timber.log.Timber;
 
+/**
+ * Test methods in ok http api client
+ */
 @Singleton
 public class OkHttpJsonApiClient {
 
@@ -225,8 +228,8 @@ public class OkHttpJsonApiClient {
     /**
      * Fetches Media object from the imageInfo API
      *
-     * @param titles
-     * @param useGenerator
+     * @param titles the tiles to be searched for. Can be filename or template name
+     * @param useGenerator specifies if a image generator parameter needs to be passed or not
      * @return
      */
     public Single<Media> getMedia(String titles, boolean useGenerator) {
@@ -267,7 +270,7 @@ public class OkHttpJsonApiClient {
     private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
         builder.addQueryParameter("prop", "imageinfo")
                 .addQueryParameter("iiprop", "url|extmetadata")
-                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName");
+                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl");
 
         String language = Locale.getDefault().getLanguage();
         if (!StringUtils.isNullOrWhiteSpace(language)) {
@@ -281,7 +284,7 @@ public class OkHttpJsonApiClient {
      * This method takes the keyword and queryType as input and returns a list of  Media objects filtered using image generator query
      * It uses the generator query API to get the images searched using a query, 10 at a time.
      * @param queryType queryType can be "search" OR "category"
-     * @param keyword
+     * @param keyword the search keyword. Can be either category name or search query
      * @return
      */
     @Nullable
@@ -329,8 +332,8 @@ public class OkHttpJsonApiClient {
 
     /**
      * Append params for search query.
-     * @param query
-     * @param urlBuilder
+     * @param query the search query to be sent to the API
+     * @param urlBuilder builder for HttpUrl
      */
     private void appendSearchParam(String query, HttpUrl.Builder urlBuilder) {
         urlBuilder.addQueryParameter("generator", "search")
@@ -354,6 +357,11 @@ public class OkHttpJsonApiClient {
         }
     }
 
+    /**
+     * Append parameters for category image generator
+     * @param categoryName name of the category
+     * @param urlBuilder HttpUrl builder
+     */
     private void appendCategoryParams(String categoryName, HttpUrl.Builder urlBuilder) {
         urlBuilder.addQueryParameter("generator", "categorymembers")
                 .addQueryParameter("gcmtype", "file")

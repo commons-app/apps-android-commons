@@ -50,6 +50,7 @@ public class Media implements Parcelable {
     protected int width;
     protected int height;
     protected String license;
+    protected String licenseUrl;
     protected String creator;
     protected ArrayList<String> categories; // as loaded at runtime?
     protected boolean requestedDeletion;
@@ -333,11 +334,65 @@ public class Media implements Parcelable {
     }
 
     /**
+     * Creating Media object from MWQueryPage.
+     * Earlier only basic details were set for the media object but going forward,
+     * a full media object(with categories, descriptions, coordinates etc) can be constructed using this method
+     *
+     * @param page response from the API
+     * @return Media object
+     */
+    @Nullable
+    public static Media from(MwQueryPage page) {
+        ImageInfo imageInfo = page.imageInfo();
+        if(imageInfo == null) {
+            return null;
+        }
+        ExtMetadata metadata = imageInfo.getMetadata();
+        if (metadata == null) {
+            return new Media(null, imageInfo.getOriginalUrl(),
+                    page.title(), "", 0, null, null, null);
+        }
+
+        Media media = new Media(null,
+                imageInfo.getOriginalUrl(),
+                page.title(),
+                "",
+                0,
+                DateUtils.getDateFromString(metadata.dateTimeOriginal().value()),
+                DateUtils.getDateFromString(metadata.dateTime().value()),
+                StringUtils.getParsedStringFromHtml(metadata.artist().value())
+        );
+
+        String language = Locale.getDefault().getLanguage();
+        if (StringUtils.isNullOrWhiteSpace(language)) {
+            language = "default";
+        }
+
+        media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription().value()));
+        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories().value()));
+        String latitude = metadata.gpsLatitude().value();
+        String longitude = metadata.gpsLongitude().value();
+
+        if(!StringUtils.isNullOrWhiteSpace(latitude) && !StringUtils.isNullOrWhiteSpace(longitude)) {
+            LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude), 0);
+            media.setCoordinates(latLng);
+        }
+
+        media.setLicenseInformation(metadata.licenseShortName().value(), metadata.licenseUrl().value());
+        return media;
+    }
+
+    public String getLicenseUrl() {
+        return licenseUrl;
+    }
+
+    /**
      * Sets the license name of the file.
      * @param license license name as a String
      */
-    public void setLicense(String license) {
+    public void setLicenseInformation(String license, String licenseUrl) {
         this.license = license;
+        this.licenseUrl = licenseUrl;
     }
 
     /**
@@ -457,51 +512,11 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Creating Media object from MWQueryPage.
-     * Earlier only basic details were set for the media object but going forward,
-     * a full media object(with categories, descriptions, coordinates etc) can be constructed using this method
+     * Sets the license name of the file.
      *
-     * @param page response from the API
-     * @return Media object
+     * @param license license name as a String
      */
-    @Nullable
-    public static Media from(MwQueryPage page) {
-        ImageInfo imageInfo = page.imageInfo();
-        if(imageInfo == null) {
-            return null;
-        }
-        ExtMetadata metadata = imageInfo.getMetadata();
-        if (metadata == null) {
-            return new Media(null, imageInfo.getOriginalUrl(),
-                    page.title(), "", 0, null, null, null);
-        }
-
-        Media media = new Media(null,
-                imageInfo.getOriginalUrl(),
-                page.title(),
-                "",
-                0,
-                DateUtils.getDateFromString(metadata.dateTimeOriginal().value()),
-                DateUtils.getDateFromString(metadata.dateTime().value()),
-                StringUtils.getParsedStringFromHtml(metadata.artist().value())
-        );
-
-        String language = Locale.getDefault().getLanguage();
-        if (StringUtils.isNullOrWhiteSpace(language)) {
-            language = "default";
-        }
-
-        media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription().value()));
-        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories().value()));
-        String latitude = metadata.gpsLatitude().value();
-        String longitude = metadata.gpsLongitude().value();
-
-        if(!StringUtils.isNullOrWhiteSpace(latitude) && !StringUtils.isNullOrWhiteSpace(longitude)) {
-            LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude), 0);
-            media.setCoordinates(latLng);
-        }
-
-        media.setLicense(metadata.licenseShortName().value());
-        return media;
+    public void setLicense(String license) {
+        this.license = license;
     }
 }

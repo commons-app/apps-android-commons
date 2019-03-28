@@ -8,7 +8,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.utils.ViewUtil
 import junit.framework.Assert.assertFalse
-import junit.framework.Assert.assertTrue
+import junit.framework.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
@@ -16,6 +16,9 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
+/**
+ * Tests for delete helper
+ */
 class DeleteHelperTest {
 
     @Mock
@@ -39,32 +42,43 @@ class DeleteHelperTest {
     @InjectMocks
     var deleteHelper: DeleteHelper? = null
 
+    /**
+     * Init mocks for test
+     */
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
     }
 
+    /**
+     * Make a successful deletion
+     */
     @Test
     fun makeDeletion() {
-        `when`(mwApi!!.editToken).thenReturn("token")
-        `when`(sessionManager!!.authCookie).thenReturn("Mock cookie")
-        `when`(sessionManager!!.currentAccount).thenReturn(Account("TestUser", "Test"))
-        `when`(media!!.displayTitle).thenReturn("Test file")
-        `when`(media!!.filename).thenReturn("Test file.jpg")
+        `when`(mwApi?.editToken).thenReturn("token")
+        `when`(sessionManager?.authCookie).thenReturn("Mock cookie")
+        `when`(sessionManager?.currentAccount).thenReturn(Account("TestUser", "Test"))
+        `when`(media?.displayTitle).thenReturn("Test file")
+        `when`(media?.filename).thenReturn("Test file.jpg")
 
-        val makeDeletion = deleteHelper!!.makeDeletion(context, media, "Test reason").blockingGet()
-        assertTrue(makeDeletion)
+        val makeDeletion = deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
+        assertNotNull(makeDeletion)
+        assertFalse(makeDeletion!!)
     }
 
+    /**
+     * Test a failed deletion
+     */
     @Test
     fun makeDeletionForNullToken() {
-        `when`(mwApi!!.editToken).thenReturn(null)
-        `when`(sessionManager!!.authCookie).thenReturn("Mock cookie")
-        `when`(sessionManager!!.currentAccount).thenReturn(Account("TestUser", "Test"))
-        `when`(media!!.displayTitle).thenReturn("Test file")
-        `when`(media!!.filename).thenReturn("Test file.jpg")
+        `when`(mwApi?.editToken).thenReturn(null)
+        `when`(sessionManager?.authCookie).thenReturn("Mock cookie")
+        `when`(sessionManager?.currentAccount).thenReturn(Account("TestUser", "Test"))
+        `when`(media?.displayTitle).thenReturn("Test file")
+        `when`(media?.filename).thenReturn("Test file.jpg")
 
-        val makeDeletion = deleteHelper!!.makeDeletion(context, media, "Test reason").blockingGet()
-        assertFalse(makeDeletion)
+        val makeDeletion = deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
+        assertNotNull(makeDeletion)
+        assertFalse(makeDeletion!!)
     }
 }

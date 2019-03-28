@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -30,27 +29,25 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.free.nrw.commons.License;
-import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.StringUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -92,6 +89,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     ReasonBuilder reasonBuilder;
     @Inject
     DeleteHelper deleteHelper;
+    @Inject
+    ViewUtil viewUtil;
 
     private int initialListTop = 0;
 
@@ -102,7 +101,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.mediaDetailTitle)
     TextView title;
     @BindView(R.id.mediaDetailDesc)
-    TextView desc;
+    HtmlTextView desc;
     @BindView(R.id.mediaDetailAuthor)
     TextView author;
     @BindView(R.id.mediaDetailLicense)
@@ -132,7 +131,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
     private DataSetObserver dataObserver;
-    private LicenseList licenseList;
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
@@ -193,8 +191,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         } else {
             authorLayout.setVisibility(GONE);
         }
-
-        licenseList = new LicenseList(getActivity());
 
         // Progressively darken the image in the background when we scroll detail pane up
         scrollListener = this::updateTheDarkness;
@@ -266,7 +262,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         //Always load image from Internet to allow viewing the desc, license, and cats
         image.setMedia(media);
         title.setText(media.getDisplayTitle());
-        desc.setText(media.getDescription());
+        desc.setHtmlText(media.getDescription());
         license.setText(media.getLicense());
 
         Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename())
@@ -294,7 +290,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setTextFields(Media media) {
-        desc.setText(prettyDescription(media));
+        desc.setHtmlText(prettyDescription(media));
         license.setText(prettyLicense(media));
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
@@ -322,15 +318,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.mediaDetailLicense)
     public void onMediaDetailLicenceClicked(){
-        if (!TextUtils.isEmpty(licenseLink(media))) {
-            openWebBrowser(licenseLink(media));
+        if (!StringUtils.isNullOrWhiteSpace(media.getLicenseUrl())) {
+            openWebBrowser(media.getLicenseUrl());
         } else {
-            if (isCategoryImage) {
-                Timber.d("Unable to fetch license URL for %s", media.getLicense());
-            } else {
-                Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
-                toast.show();
-            }
+            viewUtil.showShortToast(getActivity(), getString(R.string.null_url));
         }
     }
 
@@ -516,12 +507,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (licenseKey == null || licenseKey.equals("")) {
             return getString(R.string.detail_license_empty);
         }
-        License licenseObj = licenseList.get(licenseKey);
-        if (licenseObj == null) {
-            return licenseKey;
-        } else {
-            return licenseObj.getName();
-        }
+        return licenseKey;
     }
 
     private String prettyUploadedDate(Media media) {
@@ -551,20 +537,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         } else if (!isCategoryImage) {
             delete.setVisibility(VISIBLE);
             nominatedForDeletion.setVisibility(GONE);
-        }
-    }
-
-    private @Nullable
-    String licenseLink(Media media) {
-        String licenseKey = media.getLicense();
-        if (licenseKey == null || licenseKey.equals("")) {
-            return null;
-        }
-        License licenseObj = licenseList.get(licenseKey);
-        if (licenseObj == null) {
-            return null;
-        } else {
-            return licenseObj.getUrl(Locale.getDefault().getLanguage());
         }
     }
 

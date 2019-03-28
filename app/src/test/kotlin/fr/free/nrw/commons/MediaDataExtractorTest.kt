@@ -14,6 +14,9 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 
+/**
+ * Test methods in media data extractor
+ */
 class MediaDataExtractorTest {
 
     @Mock
@@ -25,29 +28,35 @@ class MediaDataExtractorTest {
     @InjectMocks
     var mediaDataExtractor: MediaDataExtractor? = null
 
+    /**
+     * Init mocks for test
+     */
     @Before
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
     }
 
+    /**
+     * test method to fetch media details
+     */
     @Test
     fun fetchMediaDetails() {
-        `when`(okHttpJsonApiClient!!.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
+        `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
                 .thenReturn(Single.just(mock(Media::class.java)))
 
-        `when`(mwApi!!.pageExists(ArgumentMatchers.anyString()))
+        `when`(mwApi?.pageExists(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
 
         val mediaResult = mock(MediaResult::class.java)
         `when`(mediaResult.wikiSource).thenReturn("some wiki source")
-        `when`(mwApi!!.fetchMediaByFilename(ArgumentMatchers.anyString()))
+        `when`(mwApi?.fetchMediaByFilename(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(mediaResult))
 
-        `when`(mwApi!!.parseWikicode(ArgumentMatchers.anyString()))
+        `when`(mwApi?.parseWikicode(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just("discussion text"))
 
-        val fetchMediaDetails = mediaDataExtractor!!.fetchMediaDetails("test.jpg").blockingGet()
+        val fetchMediaDetails = mediaDataExtractor?.fetchMediaDetails("test.jpg")?.blockingGet()
 
         assertTrue(fetchMediaDetails is Media)
     }
