@@ -147,17 +147,17 @@ public class ReviewController {
     * While reportWrongCategory() is in background notify the user about current progress in the newtwork request*/
 
     private void publishProgressForWrongCategory(@NonNull Context context, int i) {
-        int[] listOfMessages = new int[]{R.string.getting_edit_token, R.string.check_category_adding_template};
+        int[] idOfMessages = new int[]{R.string.getting_edit_token, R.string.check_category_adding_template};
         String message = "";
-        if (0 < i && i < listOfMessages.length) {
-            message = context.getString(listOfMessages[i]);
+        if (0 < i && i < idOfMessages.length) {
+            message = context.getString(idOfMessages[i]);
         }
 
         notificationBuilder.setContentTitle(context.getString(R.string.check_category_notification_title, media.getDisplayTitle()))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setProgress(listOfMessages.length, i, false)
+                .setProgress(idOfMessages.length, i, false)
                 .setOngoing(true);
         notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
     }
@@ -168,17 +168,17 @@ public class ReviewController {
      * While sending thanks is in progress notify the user about the current progress in network request*/
 
     private void publishProgressForSendingThank(Context context, int i){
-        int[] listOfMessages = new int[]{R.string.getting_edit_token, R.string.send_thank_send};
+        int[] idOfMessages = new int[]{R.string.getting_edit_token, R.string.send_thank_send};
         String message = "";
-        if (0 < i && i < listOfMessages.length) {
-            message = context.getString(listOfMessages[i]);
+        if (0 < i && i < idOfMessages.length) {
+            message = context.getString(idOfMessages[i]);
         }
 
         notificationBuilder.setContentTitle(context.getString(R.string.send_thank_notification_title))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setProgress(listOfMessages.length, i, false)
+                .setProgress(idOfMessages.length, i, false)
                 .setOngoing(true);
         notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
     }
