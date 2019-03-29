@@ -44,7 +44,6 @@ class LoginActivityTest {
     @Test
     fun testLogin() {
         UITestHelper.loginUser()
-        UITestHelper.sleep(10000)
         Intents.intended(hasComponent(MainActivity::class.java.name))
     }
 
