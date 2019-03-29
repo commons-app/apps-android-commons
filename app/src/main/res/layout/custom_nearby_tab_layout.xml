@@ -20,6 +20,6 @@
         android:id="@+id/nearby_info_image"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        app:srcCompat="@drawable/ic_info_outline_white_24dp"
+        app:srcCompat="@drawable/ic_info_outline_24dp"
         />
 </LinearLayout>

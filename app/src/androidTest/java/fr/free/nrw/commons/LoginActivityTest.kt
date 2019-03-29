@@ -44,13 +44,12 @@ class LoginActivityTest {
     @Test
     fun testLogin() {
         UITestHelper.loginUser()
-        UITestHelper.sleep(10000)
         Intents.intended(hasComponent(MainActivity::class.java.name))
     }
 
     @Test
     fun testForgotPassword() {
-        Espresso.onView(ViewMatchers.withId(R.id.forgotPassword))
+        Espresso.onView(ViewMatchers.withId(R.id.forgot_password))
                 .perform(ViewActions.click())
         Intents.intended(CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(BuildConfig.FORGOT_PASSWORD_URL)));
     }
