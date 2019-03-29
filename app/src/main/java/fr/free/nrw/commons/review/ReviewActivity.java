@@ -179,18 +179,19 @@ public class ReviewActivity extends AuthenticatedActivity {
         DialogUtil.showAlertDialog(ReviewActivity.this,
                 getString(R.string.skip_image),
                 getString(R.string.skip_image_explanation),
-                getString(R.string.about_translate_proceed),
-                getString(android.R.string.cancel),
-                () -> runRandomizer(),null);
+                getString(android.R.string.ok),
+                "",
+                null,
+                null);
     }
 
     public void showReviewImageInfo() {
         DialogUtil.showAlertDialog(ReviewActivity.this,
-                getString(R.string.review_image),
+                getString(R.string.title_activity_review),
                 getString(R.string.review_image_explanation),
-                getString(R.string.about_translate_proceed),
-                getString(R.string.go_back_button_text),
+                getString(android.R.string.ok),
+                "",
                 null,
-                () -> onBackPressed());
+                null);
     }
 }
