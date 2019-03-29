@@ -426,9 +426,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     if(null!=getActivity()) {
                         deleteTask = new DeleteTask(getActivity(), media, reason);
                         deleteTask.execute();
+                        isDeleted = true;
+                        enableDeleteButton(false);
                     }
-                    isDeleted = true;
-                    enableDeleteButton(false);
                 });
     }
 
