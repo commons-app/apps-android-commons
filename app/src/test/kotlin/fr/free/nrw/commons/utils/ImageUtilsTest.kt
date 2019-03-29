@@ -10,6 +10,9 @@ class AlgoCheck {
         assertEquals(ImageUtils.IMAGE_OK, ImageUtils.checkIfImageIsTooDark("src/test/resources/fr/free/nrw/commons/utils/check2.jpg"))
         assertEquals(ImageUtils.IMAGE_OK, ImageUtils.checkIfImageIsTooDark("src/test/resources/fr/free/nrw/commons/utils/check3.jpg"))
         assertEquals(ImageUtils.IMAGE_OK, ImageUtils.checkIfImageIsTooDark("src/test/resources/fr/free/nrw/commons/utils/check4.jpg"))
+    }
+    @Test
+    fun validateImageForDarkImage() {
         assertEquals(ImageUtils.IMAGE_DARK, ImageUtils.checkIfImageIsTooDark("src/test/resources/fr/free/nrw/commons/utils/check5.jpg"))
     }
 }
