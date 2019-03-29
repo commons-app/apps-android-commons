@@ -423,7 +423,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    if(null!=getActivity()) {
+                    if (getActivity() != null) {
                         deleteTask = new DeleteTask(getActivity(), media, reason);
                         deleteTask.execute();
                         isDeleted = true;
