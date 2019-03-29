@@ -19,10 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import fr.free.nrw.commons.BuildConfig;
+import androidx.viewpager.widget.ViewPager;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.delete.DeleteTask;
+import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -43,12 +44,22 @@ public class ReviewController {
     private NotificationManager notificationManager;
     private NotificationCompat.Builder notificationBuilder;
     private Media media;
-    private static final String THANKS_LOG="https://commons.wikimedia.org/wiki/Special:Log/thanks";
 
     @Inject
     MediaWikiApi mwApi;
     @Inject
     SessionManager sessionManager;
+
+    private final DeleteHelper deleteHelper;
+
+    private ViewPager viewPager;
+    private ReviewActivity reviewActivity;
+
+    ReviewController(DeleteHelper deleteHelper, Context context) {
+        this.deleteHelper = deleteHelper;
+        reviewActivity = (ReviewActivity) context;
+        viewPager = ((ReviewActivity) context).reviewPager;
+    }
 
     public void onImageRefreshed(String fileName) {
         this.fileName = fileName;
@@ -60,15 +71,24 @@ public class ReviewController {
         ReviewController.categories = categories;
     }
 
+    public void swipeToNext() {
+        int nextPos = viewPager.getCurrentItem() + 1;
+        if (nextPos <= 3) {
+            viewPager.setCurrentItem(nextPos);
+        } else {
+            reviewActivity.runRandomizer();
+        }
+    }
+
     public void reportSpam(@NonNull Activity activity) {
-        DeleteTask.askReasonAndExecute(new Media("File:" + fileName),
+        deleteHelper.askReasonAndExecute(new Media("File:" + fileName),
                 activity,
-                activity.getString(R.string.review_spam_report_question),
-                activity.getString(R.string.review_spam_report_problem));
+                activity.getResources().getString(R.string.review_spam_report_question),
+                activity.getResources().getString(R.string.review_spam_report_problem));
     }
 
     public void reportPossibleCopyRightViolation(@NonNull Activity activity) {
-        DeleteTask.askReasonAndExecute(new Media("File:" + fileName),
+        deleteHelper.askReasonAndExecute(new Media("File:" + fileName),
                 activity,
                 activity.getResources().getString(R.string.review_c_violation_report_question),
                 activity.getResources().getString(R.string.review_c_violation_report_problem));
@@ -218,10 +238,7 @@ public class ReviewController {
                     /**
                      * On tapping the notification it should take to visit the Thanks Log page
                      * Thus adding a pending content to redirect to a url depending on the beta flavor*/
-                    String url;
-                    if (ConfigUtils.isBetaFlavour())
-                        url = BuildConfig.HOME_URL+"Special:Log/thanks";
-                    else url = THANKS_LOG;
+                    String url = BuildConfig.HOME_URL+"Special:Log/thanks";
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW , Uri.parse(url));
                     PendingIntent pendingIntent = PendingIntent.getActivity(context , 1 , browserIntent , PendingIntent.FLAG_UPDATE_CURRENT);
                     notificationBuilder.setContentIntent(pendingIntent);

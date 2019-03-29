@@ -25,20 +25,18 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.mwapi.MediaResult;
+import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class ReviewActivity extends AuthenticatedActivity {
 
-    public ReviewPagerAdapter reviewPagerAdapter;
-    public ReviewController reviewController;
     @BindView(R.id.reviewPagerIndicator)
     public CirclePageIndicator pagerIndicator;
     @BindView(R.id.toolbar)
@@ -57,8 +55,16 @@ public class ReviewActivity extends AuthenticatedActivity {
     ProgressBar progressBar;
     @BindView(R.id.imageCaption)
     TextView imageCaption;
+
+    public ReviewPagerAdapter reviewPagerAdapter;
+    public ReviewController reviewController;
+
     @Inject
     MediaWikiApi mwApi;
+    @Inject
+    ReviewHelper reviewHelper;
+    @Inject
+    DeleteHelper deleteHelper;
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -70,8 +76,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         Intent reviewActivity = new Intent(context, ReviewActivity.class);
         context.startActivity(reviewActivity);
     }
-    @Inject
-    ReviewHelper reviewHelper;
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
@@ -91,7 +96,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         ButterKnife.bind(this);
         initDrawer();
 
-        reviewController = new ReviewController();
+        reviewController = new ReviewController(deleteHelper, this);
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
         reviewPager.setAdapter(reviewPagerAdapter);
@@ -134,15 +139,15 @@ public class ReviewActivity extends AuthenticatedActivity {
                     progressBar.setVisibility(View.GONE);
                 }));
         reviewPager.setCurrentItem(0);
-        compositeDisposable.add(Observable.fromCallable(() -> {
-            MediaResult media = mwApi.fetchMediaByFilename("File:" + fileName);
-            return MediaDataExtractorUtil.extractCategories(media.getWikiSource());
-        })
+
+        Disposable disposable = mwApi.fetchMediaByFilename("File:" + fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateCategories, this::categoryFetchError));
-
-
+                .subscribe(mediaResult -> {
+                    ArrayList<String> categories = MediaDataExtractorUtil.extractCategories(mediaResult.getWikiSource());
+                    updateCategories(categories);
+                }, this::categoryFetchError);
+        compositeDisposable.add(disposable);
     }
 
     private void categoryFetchError(Throwable throwable) {

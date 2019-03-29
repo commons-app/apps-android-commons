@@ -8,7 +8,6 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -34,13 +33,11 @@ public interface MediaWikiApi {
 
     boolean fileExistsWithName(String fileName) throws IOException;
 
-    boolean pageExists(String pageName) throws IOException;
+    Single<Boolean> pageExists(String pageName);
 
-    String findThumbnailByFilename(String filename) throws IOException;
+    Single<String> findThumbnailByFilename(String filename);
 
     boolean logEvents(LogBuilder[] logBuilders);
-
-    List<Media> getCategoryImages(String categoryName);
 
     List<String> getSubCategoryList(String categoryName);
 
@@ -72,10 +69,10 @@ public interface MediaWikiApi {
     @Nullable
     boolean addWikidataEditTag(String revisionId) throws IOException;
 
-    String parseWikicode(String source) throws IOException;
+    Single<String> parseWikicode(String source);
 
     @NonNull
-    MediaResult fetchMediaByFilename(String filename) throws IOException;
+    Single<MediaResult> fetchMediaByFilename(String filename);
 
     @NonNull
     Observable<String> searchCategories(String filterValue, int searchCatsLimit);
