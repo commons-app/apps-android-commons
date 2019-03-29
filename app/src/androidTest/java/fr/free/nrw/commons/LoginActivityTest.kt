@@ -50,7 +50,7 @@ class LoginActivityTest {
 
     @Test
     fun testForgotPassword() {
-        Espresso.onView(ViewMatchers.withId(R.id.forgotPassword))
+        Espresso.onView(ViewMatchers.withId(R.id.forgot_password))
                 .perform(ViewActions.click())
         Intents.intended(CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(BuildConfig.FORGOT_PASSWORD_URL)));
     }
