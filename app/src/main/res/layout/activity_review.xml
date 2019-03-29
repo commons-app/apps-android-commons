@@ -20,7 +20,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:id="@+id/review_image_info"
-                app:srcCompat="@drawable/ic_info_outline_white_24dp"
+                app:srcCompat="@drawable/ic_info_outline_24dp"
                 android:tint="@color/white"
                 android:layout_alignParentRight="true"
                 android:layout_margin="20dp"/>
@@ -50,7 +50,7 @@
                     android:layout_marginRight="@dimen/activity_margin_horizontal"
                     android:layout_marginEnd="@dimen/activity_margin_horizontal"
                     android:layout_gravity="top"
-                    app:srcCompat="@drawable/ic_info_outline_white_24dp"
+                    app:srcCompat="@drawable/ic_info_outline_24dp"
                     android:tint="@color/button_blue_dark" />
 
             </LinearLayout>
