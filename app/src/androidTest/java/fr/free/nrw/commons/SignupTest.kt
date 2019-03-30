@@ -43,4 +43,8 @@ class SignupTest {
         intended(hasComponent(SignupActivity::class.java.name))
         Intents.release()
     }
+    @Test
+    fun orientationChange(){
+        UITestHelper.getOrientation(activityRule)
+    }
 }

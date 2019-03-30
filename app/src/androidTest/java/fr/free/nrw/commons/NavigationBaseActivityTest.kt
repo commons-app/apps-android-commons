@@ -47,4 +47,8 @@ class NavigationBaseActivityTest {
         UITestHelper.sleep(500)
         onView(withId(R.id.navigation_view)).perform(NavigationViewActions.navigateTo(menuItemId))
     }
+    @Test
+    fun orientationChange(){
+        UITestHelper.getOrientation(activityRule)
+    }
 }

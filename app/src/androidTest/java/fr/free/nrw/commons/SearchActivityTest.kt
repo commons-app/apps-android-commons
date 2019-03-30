@@ -7,15 +7,16 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import android.content.pm.ActivityInfo
+import fr.free.nrw.commons.explore.SearchActivity
 
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
+class SearchActivityTest {
     @get:Rule
-    public var activityRule = ActivityTestRule(MainActivity::class.java)
+    public var activityRule = ActivityTestRule(SearchActivity::class.java)
 
     @Test
-    fun orientationChange(){
+    fun orientationChange() {
         UITestHelper.getOrientation(activityRule)
     }
 }

@@ -53,4 +53,8 @@ class LoginActivityTest {
                 .perform(ViewActions.click())
         Intents.intended(CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(BuildConfig.FORGOT_PASSWORD_URL)));
     }
+    @Test
+    fun orientationChange(){
+        UITestHelper.getOrientation(activityRule)
+    }
 }

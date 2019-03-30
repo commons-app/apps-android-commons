@@ -35,4 +35,8 @@ class AchievementsActivityTest {
 
         Intents.intended(hasComponent(AchievementsActivity::class.java.name))
     }
+    @Test
+    fun orientationChange(){
+        UITestHelper.getOrientation(activityRule)
+    }
 }
