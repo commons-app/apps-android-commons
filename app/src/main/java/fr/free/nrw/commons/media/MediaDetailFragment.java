@@ -2,8 +2,6 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
@@ -24,15 +22,6 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -56,9 +45,14 @@ import fr.free.nrw.commons.utils.DateUtils;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import javax.inject.Inject;
+import javax.inject.Provider;
 import timber.log.Timber;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -71,7 +65,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private int index;
     private Locale locale;
     private boolean isDeleted = false;
-
+    private DeleteTask deleteTask;
 
     public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage) {
         MediaDetailFragment mf = new MediaDetailFragment();
@@ -336,6 +330,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             detailProvider.unregisterDataSetObserver(dataObserver);
             dataObserver = null;
         }
+
+        if (deleteTask != null) {
+            deleteTask.cancel(true);
+            deleteTask = null;
+        }
         super.onDestroyView();
     }
 
@@ -424,10 +423,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                    deleteTask.execute();
-                    isDeleted = true;
-                    enableDeleteButton(false);
+                    if (getActivity() != null) {
+                        deleteTask = new DeleteTask(getActivity(), media, reason);
+                        deleteTask.execute();
+                        isDeleted = true;
+                        enableDeleteButton(false);
+                    }
                 });
     }
 
