@@ -22,7 +22,6 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import java.net.URLDecoder
 import kotlin.random.Random
 
 /**
@@ -97,6 +96,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals("categorymembers", body["generator"])
                 Assert.assertEquals("file", body["gcmtype"])
@@ -141,6 +141,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals("search", body["generator"])
                 Assert.assertEquals("text", body["gsrwhat"])
@@ -170,6 +171,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals("Test.jpg", body["titles"])
                 Assert.assertEquals("imageinfo", body["prop"])
@@ -195,6 +197,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals(template, body["titles"])
                 Assert.assertEquals("images", body["generator"])
@@ -220,6 +223,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals(template, body["titles"])
                 Assert.assertEquals("images", body["generator"])
@@ -238,6 +242,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals("search", body["generator"])
                 Assert.assertEquals("text", body["gsrwhat"])
@@ -258,6 +263,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals("categorymembers", body["generator"])
                 Assert.assertEquals("file", body["gcmtype"])
@@ -310,7 +316,7 @@ class OkHttpJsonApiClientTest {
         }
 
         val pagesString = mediaList.joinToString()
-        val responseBody = "{\"batchcomplete\":\"\"$continueJson,\"query\":{\"pages\":{$pagesString}}}"
+        val responseBody = "{\"batchcomplete\":\"\"$continueJson,\"query\":{\"pages\":[$pagesString]}}"
         mockResponse.setBody(responseBody)
         return mockResponse
     }
@@ -325,7 +331,7 @@ class OkHttpJsonApiClientTest {
         val id1 = random.nextInt()
         val id2 = random.nextInt()
         val categories = "cat$id1|cat$id2"
-        return "\"$pageID\":{\"pageid\":$pageID,\"ns\":6,\"title\":\"File:$fileName\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/$fileName\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:$fileName\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"$categories\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]}"
+        return "{\"pageid\":$pageID,\"ns\":6,\"title\":\"File:$fileName\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/$fileName\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:$fileName\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"$categories\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]}"
     }
 
     /**
