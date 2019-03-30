@@ -14,6 +14,11 @@ android:
   - extra-android-m2repository
   - $ANDROID_TARGET
   - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+before_script:
+  - echo no | android create avd -f -n test -t $ANDROID_TARGET --abi ANDROID_ABI
+  - emulator @test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
 script:
 - "./gradlew -Pcoverage connectedCheck jacocoTestReport"
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
