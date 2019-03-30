@@ -13,10 +13,9 @@ android:
   - extra-google-m2repository
   - extra-android-m2repository
   - $ANDROID_TARGET
-  licenses:
-  - android-sdk-license-.+
+  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
 script:
-- "./gradlew -Pcoverage jacocoTestReport"
+- "./gradlew -Pcoverage connectedCheck jacocoTestReport"
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
   mkdir -p app/src/prodRelease/play/release-notes/en-US;
   fi
