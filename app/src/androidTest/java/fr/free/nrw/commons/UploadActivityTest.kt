@@ -1,9 +1,7 @@
 package fr.free.nrw.commons
 
-import android.content.pm.ActivityInfo
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.upload.UploadActivity
 import org.junit.Rule
 import org.junit.Test
@@ -15,7 +13,7 @@ class UploadActivityTest {
     var activityRule = ActivityTestRule(UploadActivity::class.java)
 
     @Test
-    fun orientationChange(){
-        UITestHelper.getOrientation(activityRule)
+    fun orientationChange() {
+        UITestHelper.changeOrientation(activityRule)
     }
 }

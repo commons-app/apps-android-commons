@@ -60,7 +60,7 @@ class UITestHelper {
                 throw NotImplementedError("Configure your beta account's password")
             } else return password
         }
-        fun <T: Activity> getOrientation(activityRule: ActivityTestRule<T>){
+        fun <T: Activity> changeOrientation(activityRule: ActivityTestRule<T>){
             activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             assert(activityRule.activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
             activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE

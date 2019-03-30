@@ -7,7 +7,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import fr.free.nrw.commons.theme.NavigationBaseActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,7 +15,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class NavigationBaseActivityTest {
     @get:Rule
-    var activityRule: ActivityTestRule<*> = ActivityTestRule(NavigationBaseActivity::class.java)
+    var activityRule: ActivityTestRule<*> = ActivityTestRule(AboutActivity::class.java)
 
     /**
      * Goes through all the activities in the app and checks we don't crash
@@ -48,8 +47,9 @@ class NavigationBaseActivityTest {
         UITestHelper.sleep(500)
         onView(withId(R.id.navigation_view)).perform(NavigationViewActions.navigateTo(menuItemId))
     }
+
     @Test
-    fun orientationChange(){
-        UITestHelper.getOrientation(activityRule)
+    fun orientationChange() {
+        UITestHelper.changeOrientation(activityRule)
     }
 }

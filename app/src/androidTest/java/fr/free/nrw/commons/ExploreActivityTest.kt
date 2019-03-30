@@ -5,9 +5,7 @@ import androidx.test.runner.AndroidJUnit4
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import android.content.pm.ActivityInfo
 import fr.free.nrw.commons.explore.categories.ExploreActivity
-
 
 @RunWith(AndroidJUnit4::class)
 class ExploreActivityTest {
@@ -15,7 +13,7 @@ class ExploreActivityTest {
     var activityRule = ActivityTestRule(ExploreActivity::class.java)
 
     @Test
-    fun orientationChange(){
-        UITestHelper.getOrientation(activityRule)
+    fun orientationChange() {
+        UITestHelper.changeOrientation(activityRule)
     }
 }
