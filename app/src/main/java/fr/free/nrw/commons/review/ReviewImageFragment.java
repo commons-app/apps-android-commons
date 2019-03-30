@@ -71,10 +71,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         textViewQuestionContext = layoutView.findViewById(R.id.reviewQuestionContext);
         yesButton = layoutView.findViewById(R.id.yesButton);
         noButton = layoutView.findViewById(R.id.noButton);
-
         String question, explanation, yesButtonText, noButtonText;
         switch (position) {
             case COPYRIGHT:
+                enableButtons();
                 question = getString(R.string.review_copyright);
                 explanation = getString(R.string.review_copyright_explanation);
                 yesButtonText = getString(R.string.review_copyright_yes_button_text);
@@ -82,6 +82,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 yesButton.setOnClickListener(view -> getReviewActivity().reviewController.reportPossibleCopyRightViolation(requireActivity()));
                 break;
             case CATEGORY:
+                enableButtons();
                 question = getString(R.string.review_category);
                 explanation = getString(R.string.review_no_category);
                 yesButtonText = getString(R.string.review_category_yes_button_text);
@@ -92,6 +93,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 });
                 break;
             case SPAM:
+                disableButtons();
                 question = getString(R.string.review_spam);
                 explanation = getString(R.string.review_spam_explanation);
                 yesButtonText = getString(R.string.review_spam_yes_button_text);
@@ -99,6 +101,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 yesButton.setOnClickListener(view -> getReviewActivity().reviewController.reportSpam(requireActivity()));
                 break;
             case THANKS:
+                enableButtons();
                 question = getString(R.string.review_thanks);
                 explanation = getString(R.string.review_thanks_explanation, getReviewActivity().reviewController.firstRevision.getUser());
                 yesButtonText = getString(R.string.review_thanks_yes_button_text);

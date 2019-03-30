@@ -50,8 +50,4 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
         if (reviewImageFragments != null)
         reviewImageFragments[0].enableButtons();
     }
-    public void disableButtons(){
-        if (reviewImageFragments != null)
-        reviewImageFragments[0].disableButtons();
-    }
 }

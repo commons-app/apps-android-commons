@@ -118,7 +118,6 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     @SuppressLint("CheckResult")
     private void updateImage(String fileName) {
-        reviewPagerAdapter.disableButtons();
         if (fileName.length() == 0) {
             ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review);
             return;
