@@ -3,7 +3,6 @@ package fr.free.nrw.commons.mwapi
 import com.google.gson.Gson
 import fr.free.nrw.commons.mwapi.model.Page
 import fr.free.nrw.commons.mwapi.model.PageCategory
-import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -22,7 +21,7 @@ class CategoryApiTest {
     fun setUp() {
         server = MockWebServer()
         url = "http://${server.hostName}:${server.port}/"
-        categoryApi = CategoryApi(OkHttpClient.Builder().build(), Gson(), HttpUrl.parse(url))
+        categoryApi = CategoryApi(OkHttpClient.Builder().build(), Gson(), url)
     }
 
     @After
@@ -144,7 +143,6 @@ class CategoryApiTest {
 
         server.takeRequest().let { request ->
             assertEquals("GET", request.method)
-            assertEquals("/w/api.php", request.requestUrl.encodedPath())
             request.requestUrl.let { url ->
                 assertEquals("query", url.queryParameter("action"))
                 assertEquals("categories|coordinates|pageprops", url.queryParameter("prop"))
