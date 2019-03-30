@@ -304,6 +304,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
     /**
      * Initialize all views.
+     * TODO: View elements that are part of NearbyFragment should ideally be not accessed directly in NearbyMapFragment.
      */
     private void initViews() {
         Timber.d("initViews called");
