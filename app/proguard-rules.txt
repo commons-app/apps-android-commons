@@ -75,3 +75,8 @@
 -keep class org.acra.** { *; }
 -keepattributes SourceFile,LineNumberTable
 -keepattributes *Annotation*
+
+# --- /recycler view ---
+-keep class androidx.recyclerview.widget.RecyclerView  {
+    public androidx.recyclerview.widget.RecyclerView$ViewHolder findViewHolderForPosition(int);
+}
