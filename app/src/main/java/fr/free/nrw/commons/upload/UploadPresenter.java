@@ -18,12 +18,19 @@ import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.CustomProxy;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
@@ -39,12 +46,16 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 @Singleton
 public class UploadPresenter {
 
-    private static final UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
-            new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
+    private static final UploadView DUMMY =
+        (UploadView) CustomProxy.newInstance(UploadView.class.getClassLoader(),
+            new Class[] { UploadView.class });
+
     private UploadView view = DUMMY;
 
-    private static final SimilarImageInterface SIMILAR_IMAGE = (SimilarImageInterface) Proxy.newProxyInstance(SimilarImageInterface.class.getClassLoader(),
-            new Class[]{SimilarImageInterface.class}, (proxy, method, methodArgs) -> null);
+    private static final SimilarImageInterface SIMILAR_IMAGE =
+        (SimilarImageInterface) CustomProxy.newInstance(
+            SimilarImageInterface.class.getClassLoader(),
+            new Class[] { SimilarImageInterface.class });
     private SimilarImageInterface similarImageInterface = SIMILAR_IMAGE;
 
     @UploadView.UploadPage
@@ -116,11 +127,11 @@ public class UploadPresenter {
                     List<Description> descriptions) {
         Timber.e("Inside handleNext");
         view.showProgressDialog();
-        uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
+        compositeDisposable.add(uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageResult -> handleImage(title, descriptions, imageResult),
-                        throwable -> Timber.e(throwable, "Error occurred while handling image"));
+                        throwable -> Timber.e(throwable, "Error occurred while handling image")));
     }
 
     private void handleImage(Title title, List<Description> descriptions, Integer imageResult) {
@@ -225,7 +236,7 @@ public class UploadPresenter {
     void openCoordinateMap() {
         GPSExtractor gpsObj = uploadModel.getCurrentItem().getGpsCoords();
         if (gpsObj != null && gpsObj.imageCoordsExists) {
-            view.launchMapActivity(gpsObj.getDecLatitude() + "," + gpsObj.getDecLongitude());
+            view.launchMapActivity(new LatLng(gpsObj.getDecLatitude(), gpsObj.getDecLongitude(), 0.0f));
         }
     }
 

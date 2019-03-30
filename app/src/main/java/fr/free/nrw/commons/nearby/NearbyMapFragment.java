@@ -847,13 +847,7 @@ public class NearbyMapFragment extends DaggerFragment {
         wikidataButton.setVisibility(place.hasWikidataLink()?View.VISIBLE:View.GONE);
         wikidataButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getWikidataLink()));
 
-        directionsButton.setOnClickListener(view -> {
-            //Open map app at given position
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, this.place.location.getGmmIntentUri());
-            if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                startActivity(mapIntent);
-            }
-        });
+        directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(), this.place.getLocation()));
 
         commonsButton.setVisibility(this.place.hasCommonsLink()?View.VISIBLE:View.GONE);
         commonsButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getCommonsLink()));

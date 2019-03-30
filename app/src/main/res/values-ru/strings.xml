@@ -301,6 +301,7 @@
   <string name="no_internet">Интернет недоступен</string>
   <string name="internet_established">Интернет доступен</string>
   <string name="error_notifications">Ошибка при получении уведомления</string>
+  <string name="error_review_categories">Ошибка при получении категорий изображения для проверки. Пожалуйста нажмите \"Обновить\", чтобы попробовать снова.</string>
   <string name="no_notifications">Уведомлений нет</string>
   <string name="about_translate">&lt;u&gt;Перевести&lt;/u&gt;</string>
   <string name="about_translate_title">Языки</string>
@@ -446,11 +447,26 @@
   <string name="achievements_fetch_failed">Что-то пошло не так. Не получается получить список ваших достижений</string>
   <string name="ends_on">Заканчивается:</string>
   <string name="display_campaigns">Показ кампаний</string>
-  <string name="display_campaigns_explanation">Нажмите здесь, чтобы просмотреть текущие кампании</string>
+  <string name="display_campaigns_explanation">Просмотр текущих кампаний</string>
   <string name="nearby_campaign_dismiss_message">Вы больше не увидите кампаний. Однако, если захочете, вы сможете включить нотификации о кампаниях в настройках.</string>
   <string name="this_function_needs_network_connection">Для этой функции требуется доступ к интернет. Пожалуйста, проверьте своё подключение.</string>
   <string name="bad_token_error_proposed_solution">Загрузка прервана из-за проблем с токеном редактирования. Пожалуйста, выйдите из учётной записи и зайдите заново.</string>
   <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
+  <string name="getting_edit_token">Получение токена редактирования</string>
+  <string name="check_category_notification_title">Проверка категории %1$s</string>
+  <string name="check_category_success_title">Проверка категории: Успешно</string>
+  <string name="check_category_success_message">Успешно отправлена на проверку категория %1$s</string>
+  <string name="check_category_toast">Проверка категории %1$s</string>
+  <string name="nominate_for_deletion_done">Готово</string>
+  <string name="send_thank_send">Отправка благодарности</string>
+  <string name="send_thank_notification_title">Отправка благодарности</string>
+  <string name="review_category">Правильно ли указаны категории?</string>
+  <string name="review_no_category">Йоу, да тут даже категорий нет!</string>
+  <string name="review_spam_report_problem">спам</string>
+  <string name="review_category_yes_button_text">НЕВЕРНО КАТЕГОРИЗИРОВАНО</string>
+  <string name="review_category_no_button_text">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
+  <string name="review_spam_no_button_text">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
+  <string name="review_thanks_no_button_text">СЛЕДУЮЩЕЕ ИЗОБРАЖЕНИЕ</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Получение общего содержимого. Обработка изображения может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
     <item quantity="other">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
@@ -466,4 +482,5 @@
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
   <string name="image_chooser_title">Выберите изображения для загрузки</string>
   <string name="please_wait">Пожалуйста, подождите…</string>
+  <string name="skip_image">ПРОПУСТИТЬ ЭТО ИЗОБРАЖЕНИЕ</string>
 </resources>

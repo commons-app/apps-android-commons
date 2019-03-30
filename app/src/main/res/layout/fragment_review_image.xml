@@ -1,130 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scroll"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomview"
-        android:layout_alignParentTop="true">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="6dp"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="300dp">
-
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="0dp"
-                    android:src="@drawable/commons_logo_large" />
-
-                <RelativeLayout
-                    android:id="@+id/uploadOverlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:gravity="center"
-                    android:layout_alignParentBottom="true"
-                    android:background="#77000000"
-                    android:padding="@dimen/tiny_gap"
-                    >
-
-                    <TextView
-                        android:id="@+id/imageCaption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#FFFFFFFF"
-                        style="?android:textAppearanceMedium"
-                        />
-
-                </RelativeLayout>
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:visibility="visible"
-                    />
-
-            </RelativeLayout>
 
             <TextView
                 android:id="@+id/reviewQuestion"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:textAlignment="center"
-                android:textSize="32sp"
-                android:textColor="?attr/reviewHeading"
                 android:gravity="center_vertical"
                 android:text="testing1"
-                />
+                android:textAlignment="center"
+                android:textColor="?attr/reviewHeading"
+                android:textSize="32sp" />
+
             <TextView
                 android:id="@+id/reviewQuestionContext"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:textAlignment="center"
-                android:textSize="22sp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:gravity="center_vertical"
                 android:text="testing2"
-                />
+                android:textAlignment="center"
+                android:textSize="22sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <Button
                     android:id="@+id/yesButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="@dimen/activity_margin_horizontal"
+                    android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:text="@string/yes"
-                    android:textSize="18sp"
-                    android:textColor="@color/yes_button_color"
                     android:textAlignment="center"
-                    />
+                    android:textColor="@color/yes_button_color"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/noButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:layout_weight="1"
                     android:layout_margin="@dimen/activity_margin_horizontal"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
                     android:text="@string/no"
-                    android:textSize="18sp"
-                    android:textColor="@color/no_button_color"
                     android:textAlignment="center"
-                    />
+                    android:textColor="@color/no_button_color"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
-
 
     <View
         android:id="@+id/bottomview"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="15dp"
         android:layout_alignParentBottom="true"
         android:background="?attr/colorPrimaryDark"></View>
 

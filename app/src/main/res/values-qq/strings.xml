@@ -134,6 +134,7 @@
   <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
   <string name="navigation_item_notification">{{Identical|Notification}}</string>
+  <string name="navigation_item_review">{{Identical|Review}}</string>
   <string name="nominated_see_more">&lt;u&gt;See webpage for details&lt;/u&gt;</string>
   <string name="skip_login">{{Identical|Skip}}</string>
   <string name="navigation_item_login">{{Identical|Log in}}</string>
@@ -153,4 +154,5 @@
   <string name="nearby_fragment">{{Identical|Nearby}}</string>
   <string name="submit">{{Identical|Submit}}</string>
   <string name="log_collection_started">\"Send log file\" is {{msg-wm|Commons-android-strings-send log file}}.</string>
+  <string name="nominate_for_deletion_done">{{Identical|Done}}</string>
 </resources>

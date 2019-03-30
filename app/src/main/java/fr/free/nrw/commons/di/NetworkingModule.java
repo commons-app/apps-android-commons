@@ -75,12 +75,14 @@ public class NetworkingModule {
     @Singleton
     public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
                                                           @Named("tools_force") HttpUrl toolsForgeUrl,
+                                                          @Named("default_preferences") JsonKvStore defaultKvStore,
                                                           Gson gson) {
         return new OkHttpJsonApiClient(okHttpClient,
                 toolsForgeUrl,
                 WIKIDATA_SPARQL_QUERY_URL,
                 WIKIMEDIA_CAMPAIGNS_BASE_URL,
                 BuildConfig.WIKIMEDIA_API_HOST,
+                defaultKvStore,
                 gson);
     }
 

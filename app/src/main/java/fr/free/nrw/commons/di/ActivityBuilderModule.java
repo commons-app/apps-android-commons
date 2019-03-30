@@ -65,7 +65,6 @@ public abstract class ActivityBuilderModule {
     @ContributesAndroidInjector
     abstract BookmarksActivity bindBookmarksActivity();
 
-
     @ContributesAndroidInjector
     abstract ReviewActivity bindReviewActivity();
 }

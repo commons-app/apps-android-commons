@@ -1,14 +1,13 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import fr.free.nrw.commons.Media;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -33,11 +32,9 @@ public interface MediaWikiApi {
 
     boolean fileExistsWithName(String fileName) throws IOException;
 
-    boolean pageExists(String pageName) throws IOException;
+    Single<Boolean> pageExists(String pageName);
 
-    String findThumbnailByFilename(String filename) throws IOException;
-
-    List<Media> getCategoryImages(String categoryName);
+    Single<String> findThumbnailByFilename(String filename);
 
     List<String> getSubCategoryList(String categoryName);
 
@@ -69,10 +66,10 @@ public interface MediaWikiApi {
     @Nullable
     boolean addWikidataEditTag(String revisionId) throws IOException;
 
-    String parseWikicode(String source) throws IOException;
+    Single<String> parseWikicode(String source);
 
     @NonNull
-    MediaResult fetchMediaByFilename(String filename) throws IOException;
+    Single<MediaResult> fetchMediaByFilename(String filename);
 
     @NonNull
     Observable<String> searchCategories(String filterValue, int searchCatsLimit);
@@ -105,12 +102,7 @@ public interface MediaWikiApi {
 
     boolean thank(String editToken, String revision) throws IOException;
 
-    Single<Revision> firstRevisionOfFile(String filename);
-
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }
-
-    @Nullable
-    Media getRecentRandomImage() throws IOException;
 }

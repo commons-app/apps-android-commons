@@ -1,13 +1,14 @@
 package fr.free.nrw.commons.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.net.Uri;
-import androidx.annotation.Nullable;
 import android.widget.RemoteViews;
 
 import com.facebook.common.executors.CallerThreadExecutor;
@@ -22,6 +23,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
@@ -29,6 +31,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static android.content.Intent.ACTION_VIEW;
 
 /**
  * Implementation of App Widget functionality.
@@ -61,6 +65,15 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                 .subscribe(
                         response -> {
                             if (response != null) {
+                                views.setTextViewText(R.id.appwidget_title, response.getDisplayTitle());
+
+                                // View in browser
+                                Intent viewIntent = new Intent();
+                                viewIntent.setAction(ACTION_VIEW);
+                                viewIntent.setData(Uri.parse(response.getPageTitle().getMobileUri()));
+                                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, 0);
+                                views.setOnClickPendingIntent(R.id.appwidget_image, pendingIntent);
+
                                 loadImageFromUrl(response.getImageUrl(), context, views, appWidgetManager, appWidgetId);
                             }
                         },

@@ -204,7 +204,7 @@
   <string name="maximum_limit_alert">Není možné zobrazit více než 500</string>
   <string name="enter_valid">Zadejte platné číslo</string>
   <string name="cannot_be_zero">Limit nahrávání nemůže být 0</string>
-  <string name="set_limit" fuzzy="true">Počet nahraných souborů, které se zobrazí</string>
+  <string name="set_limit">Počet nahraných souborů, které se zobrazí</string>
   <string name="login_failed_2fa_not_supported">Tato aplikace zatím nepodporuje tzv. dvoufázové ověření.</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
   <string name="commons_logo">Logo Wikimedia Commons</string>
@@ -303,7 +303,7 @@
   <string name="about_translate_cancel">Zrušit</string>
   <string name="retry">Zkusit znovu</string>
   <string name="showcase_view_got_it_button">Jasně!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Toto jsou místa poblíž vaší současné polohy, které potřebují fotografie k ilustraci příslušných článků na Wikipedii</string>
+  <string name="showcase_view_whole_nearby_activity">Toto jsou místa poblíž vaší současné polohy, které potřebují fotografie k ilustraci příslušných článků na Wikipedii.\n\nKlepnutím na \'PROHLEDAT TUTO OBLAST\' se zamkne mapa a spustí se prohledávání okolí daného místa.</string>
   <string name="showcase_view_list_icon">Klíknutím na toto tlačítko otevřete seznam těchto míst</string>
   <string name="showcase_view_plus_fab">Můžete nahrát obrázek jakéhokoliv z těchto míst z vaší galerie nebo přímo z fotoaparátu.</string>
   <string name="no_images_found">Nebyly nalezeny žádné obrázky!</string>
@@ -437,7 +437,7 @@
   <string name="achievements_fetch_failed">Nastala neočekávaná chyba. Nemohli jsme dokončit akci</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobrazovat kampaně</string>
-  <string name="display_campaigns_explanation">Klepnutím sem zobrazíte probíhající kampaně</string>
+  <string name="display_campaigns_explanation">Podívejte se na probíhající kampaně</string>
   <string name="nearby_campaign_dismiss_message">Kampaně již neuvidíte. Toto oznámení však můžete znovu zapnout v Nastavení.</string>
   <string name="this_function_needs_network_connection">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
   <string name="bad_token_error_proposed_solution">Nahrávání se nezdařilo kvůli problémům s editačním tokenem. Zkuste se prosím odhlásit a zkuste to znovu.</string>
@@ -449,8 +449,8 @@
   <string name="no_image">Nejsou použity žádné obrázky</string>
   <string name="no_image_reverted">Žádné revertované obrázky</string>
   <string name="no_image_uploaded">Žádné nahrané obrázky</string>
-  <string name="no_notification" fuzzy="true">Nemáte žádné nepřečtené upozornění</string>
-  <string name="no_archived_notification" fuzzy="true">Nemáte nepřečtené upozornění</string>
+  <string name="no_notification">Nemáte žádná nepřečtená upozornění</string>
+  <string name="no_archived_notification">Nemáte nepřečtená upozornění</string>
   <string name="share_logs_using">Sdílet logy pomocí</string>
   <string name="menu_option_archived">Zobrazit přečtené</string>
   <string name="menu_option_unread">Zobrazit nepřečtené</string>

@@ -10,12 +10,9 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
-import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
-import fr.free.nrw.commons.review.CheckCategoryTask;
-import fr.free.nrw.commons.review.SendThankTask;
-import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
+import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.FileProcessor;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
@@ -43,13 +40,9 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
 
     void inject(LoginActivity activity);
 
-    void inject(DeleteTask deleteTask);
-
-    void inject(CheckCategoryTask checkCategoryTask);
-
-    void inject(SendThankTask sendThankTask);
-
     void inject(SettingsFragment fragment);
+
+    void inject(ReviewController reviewController);
 
     @Override
     void inject(ApplicationlessInjection instance);

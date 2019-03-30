@@ -1,28 +1,33 @@
 package fr.free.nrw.commons;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-import androidx.collection.LruCache;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.widget.Toast;
 
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
+import androidx.collection.LruCache;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class MediaWikiImageView extends SimpleDraweeView {
     @Inject MediaWikiApi mwApi;
     @Inject LruCache<String, String> thumbnailUrlCache;
 
-    private ThumbnailFetchTask currentThumbnailTask;
+    protected CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public MediaWikiImageView(Context context) {
         this(context, null);
@@ -44,27 +49,25 @@ public class MediaWikiImageView extends SimpleDraweeView {
      * @param media the new media
      */
     public void setMedia(Media media) {
-        if (currentThumbnailTask != null) {
-            currentThumbnailTask.cancel(true);
-        }
         if (media == null) {
             return;
         }
 
-        if (media.getFilename() != null && thumbnailUrlCache.get(media.getFilename()) != null) {
-            setImageUrl(thumbnailUrlCache.get(media.getFilename()));
-        } else {
-            setImageUrl(null);
-            currentThumbnailTask = new ThumbnailFetchTask(media, mwApi);
-            currentThumbnailTask.execute(media.getFilename());
-        }
+        Disposable disposable = fetchMediaThumbnail(media)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(thumbnail -> {
+                    if (!StringUtils.isBlank(thumbnail)) {
+                        setImageUrl(thumbnail);
+                    }
+                }, throwable -> Timber.e(throwable, "Error occurred while fetching thumbnail"));
+
+        compositeDisposable.add(disposable);
     }
 
     @Override
     protected void onDetachedFromWindow() {
-        if (currentThumbnailTask != null) {
-            currentThumbnailTask.cancel(true);
-        }
+        compositeDisposable.clear();
         super.onDetachedFromWindow();
     }
 
@@ -86,6 +89,29 @@ public class MediaWikiImageView extends SimpleDraweeView {
                 .build());
     }
 
+    //TODO: refactor the logic for thumbnails. ImageInfo API can be used to fetch thumbnail upfront
+
+    /**
+     * Fetches media thumbnail from the server
+     *
+     * @param media
+     * @return
+     */
+    public Single<String> fetchMediaThumbnail(Media media) {
+        if (media.getFilename() != null && thumbnailUrlCache.get(media.getFilename()) != null) {
+            return Single.just(thumbnailUrlCache.get(media.getFilename()));
+        }
+        return mwApi.findThumbnailByFilename(media.getFilename())
+                .map(result -> {
+                    if (TextUtils.isEmpty(result) && media.getLocalUri() != null) {
+                        return media.getLocalUri().toString();
+                    } else {
+                        thumbnailUrlCache.put(media.getFilename(), result);
+                        return result;
+                    }
+                });
+    }
+
     /**
      * Displays the image from the URL.
      * @param url the URL of the image
@@ -94,29 +120,4 @@ public class MediaWikiImageView extends SimpleDraweeView {
         setImageURI(url);
     }
 
-    private class ThumbnailFetchTask extends MediaThumbnailFetchTask {
-        ThumbnailFetchTask(@NonNull Media media, @NonNull MediaWikiApi mwApi) {
-            super(media, mwApi);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            if (isCancelled()) {
-                return;
-            }
-            if (TextUtils.isEmpty(result) && media.getLocalUri() != null) {
-                result = media.getLocalUri().toString();
-            } else {
-                // only cache meaningful thumbnails received from network.
-                try {
-                    thumbnailUrlCache.put(media.getFilename(), result);
-                } catch (NullPointerException npe) {
-                    Timber.e("error when adding pic to cache " + npe);
-
-                    Toast.makeText(getContext(), R.string.error_while_cache, Toast.LENGTH_SHORT).show();
-                }
-            }
-            setImageUrl(result);
-        }
-    }
 }

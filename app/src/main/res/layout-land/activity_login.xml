@@ -95,7 +95,7 @@
                     android:layout_marginTop="@dimen/standard_gap">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/loginUsername"
+                        android:id="@+id/login_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/username"
@@ -121,7 +121,7 @@
                     app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/loginPassword"
+                        android:id="@+id/login_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/password"
@@ -145,7 +145,7 @@
                     tools:visibility="visible">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/loginTwoFactor"
+                        android:id="@+id/login_two_factor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/_2fa_code"
@@ -168,7 +168,7 @@
                     android:layout_marginStart="@dimen/standard_gap">
 
                     <Button
-                        android:id="@+id/signupButton"
+                        android:id="@+id/sign_up_button"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                         android:text="@string/signup" />
 
                     <Button
-                        android:id="@+id/loginButton"
+                        android:id="@+id/login_button"
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
 
                 <fr.free.nrw.commons.ui.widget.HtmlTextView
                     android:visibility="visible"
-                    android:id="@+id/forgotPassword"
+                    android:id="@+id/forgot_password"
                     android:layout_width="match_parent"
                     android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
@@ -203,11 +203,11 @@
                     android:textColor="@color/status_bar_blue"/>
 
               <fr.free.nrw.commons.ui.widget.HtmlTextView
-                android:id="@+id/skipLogin"
+                android:id="@+id/skip_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/standard_gap"
-                android:layout_below="@id/forgotPassword"
+                android:layout_below="@id/forgot_password"
                 android:gravity="center_horizontal"
                 android:text="@string/skip_login"
                 android:visibility="visible"/>
@@ -239,7 +239,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/standard_gap"
-        android:layout_below="@id/forgotPassword"
+        android:layout_below="@id/forgot_password"
         android:layout_gravity="center_horizontal"
         android:text="@string/about_privacy_policy"/>
     </LinearLayout>

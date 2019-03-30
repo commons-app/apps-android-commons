@@ -434,11 +434,12 @@
   <string name="achievements_fetch_failed">Qualcosa è andato storto, non siamo riusciti a recuperare i tuoi risultati</string>
   <string name="ends_on">Termina il:</string>
   <string name="display_campaigns">Visualizza campagne</string>
-  <string name="display_campaigns_explanation">Tocca qui per vedere le campagne in corso</string>
+  <string name="display_campaigns_explanation">Vedi le campagne in corso</string>
   <string name="nearby_campaign_dismiss_message">Non vedrai più le campagne. Tuttavia, puoi riattivare questa notifica in Impostazioni, se lo desideri.</string>
   <string name="this_function_needs_network_connection">Questa funzione richiede una connessione di rete, controlla le impostazioni di connessione.</string>
   <string name="bad_token_error_proposed_solution">Caricamento non riuscito a causa di problemi con il token di modifica. Si prega di provare a disconnettersi e riconnettersi nuovamente.</string>
   <string name="error_processing_image">Si è verificato un errore durante l\'elaborazione dell\'immagine. Per favore riprova!</string>
+  <string name="nominate_for_deletion_done">Fatto</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Ricezione di contenuti condivisi. L\'elaborazione dell\'immagine potrebbe richiedere del tempo a seconda delle dimensioni dell\'immagine e del dispositivo</item>
     <item quantity="other">Ricezione di contenuti condivisi. L\'elaborazione delle immagini potrebbe richiedere del tempo a seconda delle dimensioni delle immagini e del dispositivo</item>
@@ -454,4 +455,5 @@
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="image_chooser_title">Scegli le immagini da caricare</string>
   <string name="please_wait">Attendi per favore…</string>
+  <string name="skip_image">SALTA QUESTA IMMAGINE</string>
 </resources>
