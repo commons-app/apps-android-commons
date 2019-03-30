@@ -320,5 +320,6 @@
   <string name="desc_language_Pacific">প্রশান্ত মহাসাগরীয়</string>
   <string name="yes_submit">হ্যাঁ, জমা দিন</string>
   <string name="no_go_back">না, ফিরে যান</string>
+  <string name="review_spam_report_problem">স্প্যাম</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
 </resources>

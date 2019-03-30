@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.filepicker.UploadableFile
-import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place

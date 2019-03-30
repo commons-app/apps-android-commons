@@ -13,7 +13,12 @@ public class ExtMetadata {
     @SuppressWarnings("unused") @SerializedName("CommonsMetadataExtension") @Nullable private Values commonsMetadataExtension;
     @SuppressWarnings("unused") @SerializedName("Categories") @Nullable private Values categories;
     @SuppressWarnings("unused") @SerializedName("Assessments") @Nullable private Values assessments;
-    @SuppressWarnings("unused") @SerializedName("ImageDescription") @Nullable private Values imageDescription;
+    @SuppressWarnings("unused")
+    @SerializedName("ImageDescription")
+    @Nullable
+    private Values imageDescription;
+    @SuppressWarnings("unused") @SerializedName("GPSLatitude") @Nullable private Values gpsLatitude;
+    @SuppressWarnings("unused") @SerializedName("GPSLongitude") @Nullable private Values gpsLongitude;
     @SuppressWarnings("unused") @SerializedName("DateTimeOriginal") @Nullable private Values dateTimeOriginal;
     @SuppressWarnings("unused") @SerializedName("Artist") @Nullable private Values artist;
     @SuppressWarnings("unused") @SerializedName("Credit") @Nullable private Values credit;
@@ -47,8 +52,24 @@ public class ExtMetadata {
         return license != null ? license : new Values();
     }
 
-    @NonNull public Values imageDescription() {
+    @NonNull
+    public Values imageDescription() {
         return imageDescription != null ? imageDescription : new Values();
+    }
+
+    @NonNull
+    public Values categories() {
+        return categories != null ? categories : new Values();
+    }
+
+    @NonNull
+    public Values gpsLatitude() {
+        return gpsLatitude != null ? gpsLatitude : new Values();
+    }
+
+    @NonNull
+    public Values gpsLongitude() {
+        return gpsLongitude != null ? gpsLongitude : new Values();
     }
 
     @NonNull public Values objectName() {

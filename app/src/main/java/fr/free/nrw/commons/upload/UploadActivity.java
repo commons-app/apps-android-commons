@@ -62,6 +62,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -441,8 +442,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             currentItem=position;
     }
 
-    @Override
-    public void launchMapActivity(String decCoords) {
+    public void launchMapActivity(LatLng decCoords) {
         Utils.handleGeoCoordinates(this, decCoords);
     }
 

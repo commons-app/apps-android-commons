@@ -1,32 +1,14 @@
 package fr.free.nrw.commons;
 
 import android.text.Html;
-import androidx.annotation.Nullable;
-import android.text.TextUtils;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import javax.inject.Singleton;
 
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.mwapi.MediaResult;
+import androidx.core.text.HtmlCompat;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import io.reactivex.Single;
 import timber.log.Timber;
 
 /**
@@ -35,301 +17,49 @@ import timber.log.Timber;
  * This includes things like category lists and multilingual descriptions,
  * which are not intrinsic to the media and may change due to editing.
  */
+@Singleton
 public class MediaDataExtractor {
     private final MediaWikiApi mediaWikiApi;
-    private boolean fetched;
-    private boolean deletionStatus;
-    private ArrayList<String> categories;
-    private Map<String, String> descriptions;
-    private String discussion;
-    private String license;
-    private @Nullable LatLng coordinates;
+    private final OkHttpJsonApiClient okHttpJsonApiClient;
 
     @Inject
-    public MediaDataExtractor(MediaWikiApi mwApi) {
-        this.categories = new ArrayList<>();
-        this.descriptions = new HashMap<>();
-        this.fetched = false;
+    public MediaDataExtractor(MediaWikiApi mwApi,
+                              OkHttpJsonApiClient okHttpJsonApiClient) {
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.mediaWikiApi = mwApi;
-        this.discussion = new String();
-    }
-
-    /*
-     * Actually fetch the data over the network.
-     * todo: use local caching?
-     *
-     * Warning: synchronous i/o, call on a background thread
-     */
-    public void fetch(String filename, LicenseList licenseList) throws IOException {
-        if (fetched) {
-            throw new IllegalStateException("Tried to call MediaDataExtractor.fetch() again.");
-        }
-
-        try{
-            deletionStatus = mediaWikiApi.pageExists("Commons:Deletion_requests/" + filename);
-            Timber.d("Nominated for deletion: " + deletionStatus);
-        }
-        catch (Exception e){
-            Timber.d(e, "Exception during fetching");
-        }
-
-        MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);
-        MediaResult discussion = mediaWikiApi.fetchMediaByFilename(filename.replace("File", "File talk"));
-        setDiscussion(discussion.getWikiSource());
-
-
-        // In-page category links are extracted from source, as XML doesn't cover [[links]]
-        categories = MediaDataExtractorUtil.extractCategories(result.getWikiSource());
-
-        // Description template info is extracted from preprocessor XML
-        processWikiParseTree(result.getParseTreeXmlSource(), licenseList);
-        fetched = true;
     }
 
     /**
-     * We could fetch all category links from API, but we actually only want the ones
-     * directly in the page source so they're editable. In the future this may change.
-     *
-     * @param source wikitext source code
+     * Simplified method to extract all details required to show media details.
+     * It fetches media object, deletion status and talk page for the filename
+     * @param filename for which the details are to be fetched
+     * @return full Media object with all details including deletion status and talk page
      */
-    private void extractCategories(String source) {
-        Pattern regex = Pattern.compile("\\[\\[\\s*Category\\s*:([^]]*)\\s*\\]\\]", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = regex.matcher(source);
-        while (matcher.find()) {
-            String cat = matcher.group(1).trim();
-            categories.add(cat);
-        }
-    }
-
-    private void setDiscussion(String source) {
-        try {
-            discussion = Html.fromHtml(mediaWikiApi.parseWikicode(source)).toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    private void processWikiParseTree(String source, LicenseList licenseList) throws IOException {
-        Document doc;
-        try {
-            DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            doc = docBuilder.parse(new ByteArrayInputStream(source.getBytes("UTF-8")));
-        } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalStateException | SAXException e) {
-            throw new IOException(e);
-        }
-        Node templateNode = findTemplate(doc.getDocumentElement(), "information");
-        if (templateNode != null) {
-            Node descriptionNode = findTemplateParameter(templateNode, "description");
-            descriptions = getMultilingualText(descriptionNode);
-
-            Node authorNode = findTemplateParameter(templateNode, "author");
-        }
-
-        Node coordinateTemplateNode = findTemplate(doc.getDocumentElement(), "location");
-
-        if (coordinateTemplateNode != null) {
-            coordinates = getCoordinates(coordinateTemplateNode);
-        } else {
-            coordinates = null;
-        }
-
-        /*
-        Pull up the license data list...
-        look for the templates in two ways:
-            * look for 'self' template and check its first parameter
-            * if none, look for any of the known templates
-         */
-        Timber.d("MediaDataExtractor searching for license");
-        Node selfLicenseNode = findTemplate(doc.getDocumentElement(), "self");
-        if (selfLicenseNode != null) {
-            Node firstNode = findTemplateParameter(selfLicenseNode, 1);
-            String licenseTemplate = getFlatText(firstNode);
-            License license = licenseList.licenseForTemplate(licenseTemplate);
-            if (license == null) {
-                Timber.d("MediaDataExtractor found no matching license for self parameter: %s; faking it", licenseTemplate);
-                this.license = licenseTemplate; // hack hack! For non-selectable licenses that are still in the system.
-            } else {
-                // fixme: record the self-ness in here too... sigh
-                // all this needs better server-side metadata
-                this.license = license.getKey();
-                Timber.d("MediaDataExtractor found self-license %s", this.license);
+    public Single<Media> fetchMediaDetails(String filename) {
+        Single<Media> mediaSingle = okHttpJsonApiClient.getMedia(filename, false);
+        Single<Boolean> pageExistsSingle = mediaWikiApi.pageExists("Commons:Deletion_requests/" + filename);
+        Single<String> discussionSingle = getDiscussion(filename);
+        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, (media, deletionStatus, discussion) -> {
+            media.setDiscussion(discussion);
+            if (deletionStatus) {
+                media.setRequestedDeletion();
             }
-        } else {
-            for (License license : licenseList.values()) {
-                String templateName = license.getTemplate();
-                Node template = findTemplate(doc.getDocumentElement(), templateName);
-                if (template != null) {
-                    // Found!
-                    this.license = license.getKey();
-                    Timber.d("MediaDataExtractor found non-self license %s", this.license);
-                    break;
-                }
-            }
-        }
-    }
-
-    private Node findTemplate(Element parentNode, String title_) throws IOException {
-        String title = new PageTitle(title_).getDisplayText();
-        NodeList nodes = parentNode.getChildNodes();
-        for (int i = 0, length = nodes.getLength(); i < length; i++) {
-            Node node = nodes.item(i);
-            if (node.getNodeName().equals("template")) {
-                String foundTitle = getTemplateTitle(node);
-                String displayText = new PageTitle(foundTitle).getDisplayText();
-                //replaced equals with contains because multiple sources had multiple formats
-                //say from two sources I had {{Location|12.958117388888889|77.6440805}} & {{Location dec|47.99081|7.845416|heading:255.9}},
-                //So exact string match would show null results for uploads via web
-                if (!(TextUtils.isEmpty(displayText)) && displayText.contains(title)) {
-                    return node;
-                }
-            }
-        }
-        return null;
-    }
-
-    private String getTemplateTitle(Node templateNode) throws IOException {
-        NodeList nodes = templateNode.getChildNodes();
-        for (int i = 0, length = nodes.getLength(); i < length; i++) {
-            Node node = nodes.item(i);
-            if (node.getNodeName().equals("title")) {
-                return node.getTextContent().trim();
-            }
-        }
-        throw new IOException("Template has no title element.");
-    }
-
-    private static abstract class TemplateChildNodeComparator {
-        public abstract boolean match(Node node);
-    }
-
-    private Node findTemplateParameter(Node templateNode, String name) throws IOException {
-        final String theName = name;
-        return findTemplateParameter(templateNode, new TemplateChildNodeComparator() {
-            @Override
-            public boolean match(Node node) {
-                return (Utils.capitalize(node.getTextContent().trim()).equals(Utils.capitalize(theName)));
-            }
+            return media;
         });
     }
 
-    private Node findTemplateParameter(Node templateNode, int index) throws IOException {
-        final String theIndex = "" + index;
-        return findTemplateParameter(templateNode, new TemplateChildNodeComparator() {
-            @Override
-            public boolean match(Node node) {
-                Element el = (Element)node;
-                if (el.getTextContent().trim().equals(theIndex)) {
-                    return true;
-                } else if (el.getAttribute("index") != null && el.getAttribute("index").trim().equals(theIndex)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-    }
-
-    private Node findTemplateParameter(Node templateNode, TemplateChildNodeComparator comparator) throws IOException {
-        NodeList nodes = templateNode.getChildNodes();
-        for (int i = 0, length = nodes.getLength(); i < length; i++) {
-            Node node = nodes.item(i);
-            if (node.getNodeName().equals("part")) {
-                NodeList childNodes = node.getChildNodes();
-                for (int j = 0, childNodesLength = childNodes.getLength(); j < childNodesLength; j++) {
-                    Node childNode = childNodes.item(j);
-                    if (childNode.getNodeName().equals("name") && comparator.match(childNode)) {
-                        // yay! Now fetch the value node.
-                        for (int k = j + 1; k < childNodesLength; k++) {
-                            Node siblingNode = childNodes.item(k);
-                            if (siblingNode.getNodeName().equals("value")) {
-                                return siblingNode;
-                            }
-                        }
-                        throw new IOException("No value node found for matched template parameter.");
-                    }
-                }
-            }
-        }
-        throw new IOException("No matching template parameter node found.");
-    }
-
-    private String getFlatText(Node parentNode) throws IOException {
-        return parentNode.getTextContent();
-    }
-
     /**
-     * Extracts the coordinates from the template.
-     * Loops over the children of the coordinate template:
-     *      {{Location|47.50111007666667|19.055700301944444}}
-     * and extracts the latitude and longitude.
-     *
-     * @param parentNode The node of the coordinates template.
-     * @return Extracted coordinates.
-     * @throws IOException Parsing failed.
+     * Fetch talk page from the MediaWiki API
+     * @param filename
+     * @return
      */
-    private LatLng getCoordinates(Node parentNode) throws IOException {
-        NodeList childNodes = parentNode.getChildNodes();
-        double latitudeText = Double.parseDouble(childNodes.item(1).getTextContent());
-        double longitudeText = Double.parseDouble(childNodes.item(2).getTextContent());
-        return new LatLng(latitudeText, longitudeText, 0);
-    }
-
-    // Extract a dictionary of multilingual texts from a subset of the parse tree.
-    // Texts are wrapped in things like {{en|foo} or {{en|1=foo bar}}.
-    // Text outside those wrappers is stuffed into a 'default' faux language key if present.
-    private Map<String, String> getMultilingualText(Node parentNode) throws IOException {
-        Map<String, String> texts = new HashMap<>();
-        StringBuilder localText = new StringBuilder();
-
-        NodeList nodes = parentNode.getChildNodes();
-        for (int i = 0, length = nodes.getLength(); i < length; i++) {
-            Node node = nodes.item(i);
-            if (node.getNodeName().equals("template")) {
-                // process a template node
-                String title = getTemplateTitle(node);
-                if (title.length() < 3) {
-                    // Hopefully a language code. Nasty hack!
-                    String lang = title;
-                    Node valueNode = findTemplateParameter(node, 1);
-                    String value = valueNode.getTextContent(); // hope there's no subtemplates or formatting for now
-                    texts.put(lang, value);
-                }
-            } else if (node.getNodeType() == Node.TEXT_NODE) {
-                localText.append(node.getTextContent());
-            }
-        }
-
-        // Some descriptions don't list multilingual variants
-        String defaultText = localText.toString().trim();
-        if (defaultText.length() > 0) {
-            texts.put("default", localText.toString());
-        }
-        return texts;
-    }
-
-    /**
-     * Take our metadata and inject it into a live Media object.
-     * Media object might contain stale or cached data, or emptiness.
-     * @param media Media object to inject into
-     */
-    public void fill(Media media) {
-        if (!fetched) {
-            throw new IllegalStateException("Tried to call MediaDataExtractor.fill() before fetch().");
-        }
-
-        media.setCategories(categories);
-        media.setDescriptions(descriptions);
-        media.setCoordinates(coordinates);
-        media.setDiscussion(discussion);
-        if (license != null) {
-            media.setLicense(license);
-        }
-        if (deletionStatus){
-            media.setRequestedDeletion();
-        }
-
-        // add author, date, etc fields
+    private Single<String> getDiscussion(String filename) {
+        return mediaWikiApi.fetchMediaByFilename(filename.replace("File", "File talk"))
+                .flatMap(mediaResult -> mediaWikiApi.parseWikicode(mediaResult.getWikiSource()))
+                .map(discussion -> HtmlCompat.fromHtml(discussion, HtmlCompat.FROM_HTML_MODE_LEGACY).toString())
+                .onErrorReturn(throwable -> {
+                    Timber.e(throwable, "Error occurred while fetching discussion");
+                    return "";
+                });
     }
 }

@@ -227,7 +227,7 @@
   <string name="display_location_permission_explanation">Потърсете разрешение за местоположение, когато трябва да уведомите за местоположението.</string>
   <string name="ends_on">Завършва:</string>
   <string name="display_campaigns">Показване на кампании</string>
-  <string name="display_campaigns_explanation">Кликнете тук, за да видите текущите кампании</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Кликнете тук, за да видите текущите кампании</string>
   <string name="nearby_campaign_dismiss_message">Вече няма да ви се показват кампаниите. Ако промените решението си, ще намерите тази настройка в Настройки.</string>
   <string name="this_function_needs_network_connection">Тази опция изисква да сте свързани към мрежата. Проверете настройките за връзка.</string>
   <string name="bad_token_error_proposed_solution">Качването не е успешно поради проблеми с редакторския шифър. Моля, излезете и отново влезете в системата.</string>

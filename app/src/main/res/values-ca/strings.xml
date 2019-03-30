@@ -197,5 +197,8 @@
   <string name="no_recent_searches">No hi ha cap cerca recent</string>
   <string name="delete_search_dialog">Voleu suprimir aquesta cerca?</string>
   <string name="delete">SUPRIMEIX</string>
+  <string name="nominate_for_deletion_done">Fet</string>
+  <string name="review_copyright_yes_button_text">NO, VIOLACIÓ DE DRETS D’AUTOR</string>
   <string name="no_notification">No teniu cap notificació sense llegir</string>
+  <string name="no_archived_notification">No teniu cap notificació arxivada</string>
 </resources>
