@@ -1,18 +1,18 @@
 package fr.free.nrw.commons
 
-import android.content.pm.ActivityInfo
-import androidx.test.rule.ActivityTestRule
+import androidx.test.espresso.intent.rule.IntentsTestRule
+import androidx.test.filters.MediumTest
 import androidx.test.runner.AndroidJUnit4
-import fr.free.nrw.commons.contributions.MainActivity
-import fr.free.nrw.commons.upload.UploadActivity
+import fr.free.nrw.commons.auth.LoginActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@MediumTest
 @RunWith(AndroidJUnit4::class)
-class UploadActivityTest {
+class BookmarkActivity {
     @get:Rule
-    var activityRule = ActivityTestRule(UploadActivity::class.java)
+    var activityRule = IntentsTestRule(LoginActivity::class.java)
 
     @Test
     fun orientationChange(){
