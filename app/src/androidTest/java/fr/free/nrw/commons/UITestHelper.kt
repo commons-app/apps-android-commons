@@ -6,6 +6,7 @@ import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import fr.free.nrw.commons.utils.StringUtils
+import org.junit.Assume
 import timber.log.Timber
 
 class UITestHelper {
@@ -20,19 +21,28 @@ class UITestHelper {
         }
 
         fun loginUser() {
+            Assume.assumeTrue(
+                    "Beta account username not set\n" +
+                    "This can be done in the build config of app/build.gradle or by exporting the environment variable test_user_name\n" +
+                    "This message is expected on PR builds on Travis",
+                    credentialIsSet(BuildConfig.TEST_USERNAME))
+
+            Assume.assumeTrue(
+                    "Beta account password not set\n" +
+                    "This can be done in the build config of app/build.gradle or by exporting the environment variable test_user_password\n" +
+                    "This message is expected on PR builds on Travis",
+                    credentialIsSet(BuildConfig.TEST_PASSWORD))
+
             try {
-                //Perform Login
                 onView(ViewMatchers.withId(R.id.login_username))
-                        .perform(ViewActions.clearText(), ViewActions.typeText(getTestUsername()))
+                        .perform(ViewActions.clearText(), ViewActions.typeText(BuildConfig.TEST_USERNAME))
                 onView(ViewMatchers.withId(R.id.login_password))
-                        .perform(ViewActions.clearText(), ViewActions.typeText(getTestUserPassword()))
+                        .perform(ViewActions.clearText(), ViewActions.typeText(BuildConfig.TEST_PASSWORD))
                 closeSoftKeyboard()
                 onView(ViewMatchers.withId(R.id.login_button))
                         .perform(ViewActions.click())
                 sleep(5000)
-            } catch (ignored: NoMatchingViewException) {
-            }
-
+            } catch (ignored: NoMatchingViewException) {}
         }
 
         fun sleep(timeInMillis: Long) {
@@ -44,18 +54,9 @@ class UITestHelper {
             }
         }
 
-        private fun getTestUsername(): String {
-            val username = BuildConfig.TEST_USERNAME
-            if (StringUtils.isNullOrWhiteSpace(username) || username == "null") {
-                throw NotImplementedError("Configure your beta account's username")
-            } else return username
-        }
-
-        private fun getTestUserPassword(): String {
-            val password = BuildConfig.TEST_PASSWORD
-            if (StringUtils.isNullOrWhiteSpace(password) || password == "null") {
-                throw NotImplementedError("Configure your beta account's password")
-            } else return password
+        private fun credentialIsSet(credential: String): Boolean {
+            return !(StringUtils.isNullOrWhiteSpace(BuildConfig.TEST_USERNAME)
+                    || BuildConfig.TEST_USERNAME == "null")
         }
     }
 }
