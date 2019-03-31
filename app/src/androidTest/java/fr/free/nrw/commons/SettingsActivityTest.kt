@@ -15,7 +15,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.settings.SettingsActivity
 import org.hamcrest.Matchers.allOf
-import org.hamcrest.core.IsNot.not
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -134,20 +133,5 @@ class SettingsActivityTest {
         Espresso.onData(PreferenceMatchers.withKey("authorName"))
                 .inAdapterView(withId(android.R.id.list))
                 .check(matches(isEnabled()))
-    }
-
-    @Test
-    fun useAuthorNameTogglesOff() {
-        // Turn off "Use external storage" preference if currently on
-        if (defaultKvStore.getBoolean("useAuthorName", false)) {
-            Espresso.onData(PreferenceMatchers.withKey("useAuthorName"))
-                    .inAdapterView(withId(android.R.id.list))
-                    .perform(click())
-        }
-
-        // Check authorName preference is enabled
-        Espresso.onData(PreferenceMatchers.withKey("authorName"))
-                .inAdapterView(withId(android.R.id.list))
-                .check(matches(not(isEnabled())))
     }
 }
