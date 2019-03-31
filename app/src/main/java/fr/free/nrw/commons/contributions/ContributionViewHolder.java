@@ -21,7 +21,6 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
     @BindView(R.id.contributionSequenceNumber) TextView seqNumView;
     @BindView(R.id.contributionProgress) ProgressBar progressView;
     @BindView(R.id.failed_image_options) LinearLayout failedImageOptions;
-    @BindView(R.id.failed_image_options_retry) LinearLayout failedImageOptionsretry;
 
     private DisplayableContribution contribution;
 
@@ -43,7 +42,6 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
                 stateView.setVisibility(View.GONE);
                 progressView.setVisibility(View.GONE);
                 failedImageOptions.setVisibility(View.GONE);
-                failedImageOptionsretry.setVisibility(View.GONE);
                 stateView.setText("");
                 break;
             case Contribution.STATE_QUEUED:
@@ -51,13 +49,11 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
                 progressView.setVisibility(View.GONE);
                 stateView.setText(R.string.contribution_state_queued);
                 failedImageOptions.setVisibility(View.GONE);
-                failedImageOptionsretry.setVisibility(View.GONE);
                 break;
             case Contribution.STATE_IN_PROGRESS:
                 stateView.setVisibility(View.GONE);
                 progressView.setVisibility(View.VISIBLE);
                 failedImageOptions.setVisibility(View.GONE);
-                failedImageOptionsretry.setVisibility(View.GONE);
                 long total = contribution.getDataLength();
                 long transferred = contribution.getTransferred();
                 if (transferred == 0 || transferred >= total) {
@@ -71,7 +67,6 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
                 stateView.setText(R.string.contribution_state_failed);
                 progressView.setVisibility(View.GONE);
                 failedImageOptions.setVisibility(View.VISIBLE);
-                failedImageOptionsretry.setVisibility(View.VISIBLE);
                 break;
         }
     }
