@@ -4,31 +4,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-
-import static android.widget.Toast.LENGTH_SHORT;
 
 /**
  * This activity displays details of a particular category
@@ -220,16 +219,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_browser_current_category:
-                Intent viewIntent = new Intent();
-                viewIntent.setAction(Intent.ACTION_VIEW);
-                viewIntent.setData(new PageTitle(categoryName).getCanonicalUri());
-                //check if web browser available
-                if (viewIntent.resolveActivity(this.getPackageManager()) != null) {
-                    startActivity(viewIntent);
-                } else {
-                    Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
-                    toast.show();
-                }
+                Utils.handleWebUrl(this, new PageTitle(categoryName).getCanonicalUri());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

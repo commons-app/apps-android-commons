@@ -170,6 +170,7 @@
   <string name="detail_panel_cats_loading">טעינה...</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
   <string name="detail_description_empty">אין תיאור</string>
+  <string name="detail_discussion_empty">אין דיון</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>
   <string name="menu_refresh">רענון</string>
   <string name="storage_permission_title">בקשת הרשאה לאחסון</string>
@@ -185,6 +186,7 @@
   <string name="no">לא</string>
   <string name="media_detail_title">כותרת</string>
   <string name="media_detail_description">תיאור</string>
+  <string name="media_detail_discussion">דיון</string>
   <string name="media_detail_author">יוצר</string>
   <string name="media_detail_uploaded_date">תאריך העלאה</string>
   <string name="media_detail_license">רישיון</string>
@@ -200,7 +202,7 @@
   <string name="maximum_limit_alert">לא ניתן להציג יותר מ־500</string>
   <string name="enter_valid">נא להכניס מספר תקף</string>
   <string name="cannot_be_zero">מגבלת ההעלאה לא יכולה להיות 0</string>
-  <string name="set_limit" fuzzy="true">הגדרת מגבלת העלאות אחרונות</string>
+  <string name="set_limit">מגבלת העלאות אחרונות</string>
   <string name="login_failed_2fa_not_supported">אימות דו־שלבי אינו נתמך כעת.</string>
   <string name="logout_verification">האם באמת לצאת מהחשבון?</string>
   <string name="commons_logo">סמל ויקישיתוף</string>
@@ -292,7 +294,7 @@
   <string name="internet_established">האינטרנט זמין</string>
   <string name="error_notifications">שגיאה באחזור התראות</string>
   <string name="no_notifications">לא נמצאו התראות</string>
-  <string name="about_translate">&lt;u&gt;תרגום&lt;/u&gt;</string>
+  <string name="about_translate">תרגום</string>
   <string name="about_translate_title">שפות</string>
   <string name="about_translate_message">נא לבחור את השפה שבה תשלחו את התרגומים</string>
   <string name="about_translate_proceed">המשך</string>
@@ -318,6 +320,8 @@
   <string name="error_loading_subcategories">אירעה שגיאה בעת טעינת תת־קטגוריות.</string>
   <string name="search_tab_title_media">מדיה</string>
   <string name="search_tab_title_categories">קטגוריות</string>
+  <string name="explore_tab_title_featured">מומלץ</string>
+  <string name="explore_tab_title_mobile">העלאה דרך נייד</string>
   <string name="successful_wikidata_edit">התמונה נוספה בהצלחה לדף %1$s בוויקינתונים!</string>
   <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
   <string name="menu_set_wallpaper">הגדרה בתור טפט</string>
@@ -433,7 +437,7 @@
   <string name="achievements_fetch_failed">משהו השתבש, לא הצלחנו לקבל את ההישגים שלך</string>
   <string name="ends_on">מסתיים ב־:</string>
   <string name="display_campaigns">הצגת מסעי פרסום</string>
-  <string name="display_campaigns_explanation">יש לגעת כאן כדי לצפות במסעי פרסום שמתרחשים כרגע</string>
+  <string name="display_campaigns_explanation" fuzzy="true">יש לגעת כאן כדי לצפות במסעי פרסום שמתרחשים כרגע</string>
   <string name="nearby_campaign_dismiss_message">מסעי הפרסום לא יופיעו עוד. עם זאת, ניתן להפעיל את ההתראות האלה מחדש בהגדרות בהתאם לרצונך.</string>
   <string name="this_function_needs_network_connection">תכונה זו דורשת חיבור לרשת, נא לבדוק את הגדרות החיבור שלך.</string>
   <string name="bad_token_error_proposed_solution">ההעלאה נכשלה עקב תקלות עם אסימון עריכה. נא לנסות לצאת ולהיכנס שוב.</string>
@@ -445,8 +449,8 @@
   <string name="no_image">לא נעשה שימוש בתמונות</string>
   <string name="no_image_reverted">לא שוחזרו תמונות</string>
   <string name="no_image_uploaded">לא הועלו תמונות</string>
-  <string name="no_notification" fuzzy="true">אין לך התראות שלא נקראו</string>
-  <string name="no_archived_notification" fuzzy="true">יש לך התראות בארכיון</string>
+  <string name="no_notification">אין לך התראות שלא נקראו</string>
+  <string name="no_archived_notification">אין לך התראות בארכיון</string>
   <string name="share_logs_using">שיתוף יומנים בעזרת</string>
   <string name="menu_option_archived">הצגת ארכיון</string>
   <string name="menu_option_unread">הצגת התראות שלא נקראו</string>

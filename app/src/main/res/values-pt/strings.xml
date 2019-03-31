@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Athena in Wonderland
+* CaiusSPQR
+* Fitoschido
 * Fúlvio
 * Giro720
 * Hamilton Abreu
@@ -171,6 +173,7 @@
   <string name="detail_panel_cats_loading">A carregar…</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>
   <string name="detail_description_empty">Sem descrição</string>
+  <string name="detail_discussion_empty">Nenhuma discussão</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Actualizar</string>
   <string name="storage_permission_title">A pedir permissão de armazenamento</string>
@@ -186,6 +189,7 @@
   <string name="no">Não</string>
   <string name="media_detail_title">Título</string>
   <string name="media_detail_description">Descrição</string>
+  <string name="media_detail_discussion">Discussão</string>
   <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Data de carregamento</string>
   <string name="media_detail_license">Licença</string>
@@ -201,7 +205,7 @@
   <string name="maximum_limit_alert">Não é possível apresentar mais de 500</string>
   <string name="enter_valid">Introduza um número válido</string>
   <string name="cannot_be_zero">O limite de carregamentos não pode ser 0</string>
-  <string name="set_limit" fuzzy="true">Definir o limite de carregamentos recentes</string>
+  <string name="set_limit">Limite de carregamentos recentes</string>
   <string name="login_failed_2fa_not_supported">Atualmente, a autenticação de dois fatores não é suportada.</string>
   <string name="logout_verification">Deseja realmente sair?</string>
   <string name="commons_logo">Logótipo da wiki Commons</string>
@@ -300,7 +304,7 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Estes são os lugares perto de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia</string>
+  <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia.\n\nClicar em \'Pesquisar nesta área\' bloqueia a localização do mapa e inicia uma pesquisa de lugares na área circundante.</string>
   <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes lugares</string>
   <string name="showcase_view_plus_fab">Pode carregar uma fotografia para qualquer dos lugares, da sua galeria ou câmara</string>
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
@@ -319,6 +323,8 @@
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
   <string name="search_tab_title_media">MULTIMÉDIA</string>
   <string name="search_tab_title_categories">CATEGORIAS</string>
+  <string name="explore_tab_title_featured">DESTACADAS</string>
+  <string name="explore_tab_title_mobile">CARREGADA VIA TELEMÓVEL</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
@@ -434,11 +440,12 @@
   <string name="achievements_fetch_failed">Algo correu mal, não conseguimos obter as suas realizações</string>
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Apresentar campanhas</string>
-  <string name="display_campaigns_explanation">Tocar aqui para ver as campanhas em andamento</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Tocar aqui para ver as campanhas em andamento</string>
   <string name="nearby_campaign_dismiss_message">Deixará de ver as campanhas. No entanto, pode reativar esta notificação nas configurações, se desejar.</string>
   <string name="this_function_needs_network_connection">Esta função requer uma ligação de rede. Verifique as suas configurações de ligação, por favor.</string>
   <string name="bad_token_error_proposed_solution">O carregamento falhou devido a problemas com a chave de edição. Tente sair e voltar a entrar, por favor.</string>
   <string name="error_processing_image">Ocorreu um erro ao processar a imagem. Tente novamente, por favor!</string>
+  <string name="review_copyright_yes_button_text">NÃO, VIOLAÇÃO DE DIREITOS AUTORAIS</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">A receber conteúdo partilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da mesma e do seu dispositivo</item>
     <item quantity="other">A receber conteúdo partilhado. O processamento das imagens pode demorar algum tempo, dependendo do tamanho das mesmas e do seu dispositivo</item>
@@ -446,12 +453,15 @@
   <string name="no_image">Não foi usada nenhuma imagem</string>
   <string name="no_image_reverted">Não foi revertida nenhuma imagem</string>
   <string name="no_image_uploaded">Não foi carregada nenhuma imagem</string>
-  <string name="no_notification" fuzzy="true">Não tem nenhuma notificação por ler</string>
-  <string name="no_archived_notification" fuzzy="true">Não tem nenhuma notificação arquivada</string>
+  <string name="no_notification">Não tem nenhuma notificação por ler</string>
+  <string name="no_archived_notification">Não tem nenhuma notificação arquivada</string>
   <string name="share_logs_using">Partilhar os registos usando</string>
   <string name="menu_option_archived">Ver arquivadas</string>
   <string name="menu_option_unread">Ver não lidas</string>
   <string name="error_occurred_in_picking_images">Ocorreu um erro ao escolher imagens</string>
   <string name="image_chooser_title">Escolher imagens a carregar</string>
   <string name="please_wait">Aguarde, por favor...</string>
+  <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
+  <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
+  <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
 </resources>

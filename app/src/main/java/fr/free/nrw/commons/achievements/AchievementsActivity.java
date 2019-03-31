@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
@@ -127,7 +129,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         int width = displayMetrics.widthPixels;
 
         // Used for the setting the size of imageView at runtime
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
@@ -438,6 +440,24 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public void showUsedByWikiInfo(){
         launchAlert(getResources().getString(R.string.images_used_by_wiki)
                 ,getResources().getString(R.string.images_used_explanation));
+    }
+
+    @OnClick(R.id.images_nearby_info)
+    public void showImagesViaNearbyInfo(){
+        launchAlert(getResources().getString(R.string.statistics_wikidata_edits)
+                ,getResources().getString(R.string.images_via_nearby_explanation));
+    }
+
+    @OnClick(R.id.images_featured_info)
+    public void showFeaturedImagesInfo(){
+        launchAlert(getResources().getString(R.string.statistics_featured)
+                ,getResources().getString(R.string.images_featured_explanation));
+    }
+
+    @OnClick(R.id.thanks_received_info)
+    public void showThanksReceivedInfo(){
+        launchAlert(getResources().getString(R.string.statistics_thanks)
+                ,getResources().getString(R.string.thanks_received_explanation));
     }
 
     /**

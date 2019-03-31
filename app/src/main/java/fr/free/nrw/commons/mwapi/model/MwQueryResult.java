@@ -1,13 +1,12 @@
 package fr.free.nrw.commons.mwapi.model;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.media.model.ImageInfo;
 import fr.free.nrw.commons.media.model.MwQueryPage;
 
@@ -15,6 +14,7 @@ public class MwQueryResult {
     @SuppressWarnings("unused")
     @Nullable
     private HashMap<String, MwQueryPage> pages;
+    private List<RecentChange> recentchanges;
 
     @NonNull
     public List<MwQueryPage> pages() {
@@ -22,6 +22,10 @@ public class MwQueryResult {
             return new ArrayList<>();
         }
         return new ArrayList<>(pages.values());
+    }
+
+    public List<RecentChange> getRecentchanges() {
+        return recentchanges;
     }
 
     @Nullable

@@ -87,6 +87,7 @@
   <string name="title_activity_signup">Sign Up</string>
   <string name="title_activity_featured_images">Featured Images</string>
   <string name="title_activity_category_details">Category</string>
+  <string name="title_activity_review">Peer Review</string>
   <string name="menu_about">About</string>
   <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app. </string>
   <string name="trademarked_name" translatable="false">Wikimedia Commons</string>
@@ -229,6 +230,7 @@
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notifications</string>
   <string name="navigation_item_featured_images">Featured</string>
+  <string name="navigation_item_review">Review</string>
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>
@@ -247,6 +249,8 @@
   <string name="upload_problem_different_geolocation">This picture was taken at a different location.</string>
   <string name="upload_problem_fbmd">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have found on other people\'s Facebook accounts.</string>
   <string name="upload_problem_do_you_continue">Do you still want to upload this picture?</string>
+  <string name="internet_downloaded">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have downloaded from the Internet.</string>
+
 
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
@@ -259,6 +263,8 @@
   <string name="nominate_deletion">Nominate for Deletion</string>
   <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
   <string name="nominated_see_more"><![CDATA[<u>See webpage for details</u>]]></string>
+  <string name="nominating_file_for_deletion">Nominating %1$s for deletion.</string>
+  <string name="nominating_for_deletion_status">Nominating file for deletion: %1$s</string>
   <string name="view_browser">View in Browser</string>
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
@@ -289,6 +295,8 @@
   <string name="no_internet">Internet unavailable</string>
   <string name="internet_established">Internet available</string>
   <string name="error_notifications">Error fetching notifications</string>
+  <string name="error_review">Error fetching image for review. Press refresh to try again.</string>
+  <string name="error_review_categories">Error fetching image categories for review. Press refresh to try again.</string>
   <string name="no_notifications">No notifications found</string>
   <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
   <string name="about_translate_title">Languages</string>
@@ -450,12 +458,58 @@ Upload your first media by tapping on the add button.</string>
   <string name="achievements_fetch_failed">Something went wrong, We could not fetch your achievements</string>
   <string name="ends_on">Ends on:</string>
   <string name="display_campaigns">Display campaigns</string>
-  <string name="display_campaigns_explanation">Tap here to see the ongoing campaigns</string>
+  <string name="display_campaigns_explanation">See the ongoing campaigns</string>
   <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
 
   <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
   <string name="bad_token_error_proposed_solution">Upload failed due to issues with edit token. Please try logging out and in again. </string>
     <string name="error_processing_image">Error occurred while processing the image. Please try again!</string>
+  <string name="getting_edit_token">Getting token for editing</string>
+  <string name="check_category_adding_template">Adding template for category check</string>
+  <string name="check_category_notification_title">Requesting category check for %1$s</string>
+    <string name="check_category_edit_summary">Requesting category check</string>
+  <string name="check_category_success_title">Requesting category check: Success</string>
+  <string name="check_category_failure_title">Requesting category check: Failed</string>
+  <string name="check_category_success_message">Successfully requested category check for %1$s</string>
+  <string name="check_category_failure_message">Could not request category check for %1$s</string>
+  <string name="check_category_toast">Requesting category check for %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Adding delete message to file</string>
+  <string name="nominate_for_deletion_done">Done</string>
+  <string name="nominate_for_deletion_notify_user">Notifying User on Talk page</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Adding file to Delete requests log</string>
+  <string name="nominate_for_deletion_create_deletion_request">Creating Delete requests subpage</string>
+  <string name="notsure">Not sure</string>
+    <string name="send_thank_success_title">Sending Thanks: Success</string>
+  <string name="send_thank_success_message">Successfully sent thanks to %1$s</string>
+  <string name="send_thank_failure_message">Failed to send thanks %1$s</string>
+  <string name="send_thank_failure_title">Sending Thanks: Failure</string>
+  <string name="send_thank_send">Sending thanks</string>
+  <string name="send_thank_notification_title">Sending thanks</string>
+  <string name="send_thank_toast">Sending Thanks for %1$s</string>
+
+  <string name="review_copyright">Does this follow the rules of copyright?</string>
+  <string name="review_category">Is this correctly categorized?</string>
+  <string name="review_spam">Is this in-scope?</string>
+  <string name="review_thanks">Would you like to thank the contributor?</string>
+  <string name="review_spam_explanation">Click NO to nominate this image for deletion if it is not useful at all.</string>
+  <string name="review_copyright_explanation">Logos, screenshots, movie posters are often copyright violations.\n Click NO to nominate this image for deletion</string>
+  <string name="review_thanks_explanation">%1$s will be encouraged by your appreciation</string>
+  <string name="review_no_category">Oh, this is not even categorized!</string>
+  <string name="review_category_explanation">This image is under %1$s categories.</string>
+  <string name="review_spam_report_question">It is out of scope because it is</string>
+  <string name="review_spam_report_problem">spam</string>
+  <string name="review_c_violation_report_question">It is copyright violation because it is </string>
+  <string name="review_c_violation_report_problem">copyRightViolation</string>
+    <string name="review_category_yes_button_text">NO, MIS-CATEGORIZED</string>
+    <string name="review_category_no_button_text">SEEMS FINE</string>
+    <string name="review_spam_yes_button_text">NO, OUT OF SCOPE</string>
+    <string name="review_spam_no_button_text">SEEMS FINE</string>
+    <string name="review_copyright_yes_button_text">NO, COPYRIGHT VIOLATION</string>
+    <string name="review_copyright_no_button_text">SEEMS FINE</string>
+    <string name="review_thanks_yes_button_text">YES, WHY NOT</string>
+    <string name="review_thanks_no_button_text">NEXT IMAGE</string>
+    <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
+    <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commoms.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
 
   <plurals name="receiving_shared_content">
     <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>
@@ -476,4 +530,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="image_chooser_title">Choose Images to upload</string>
 
   <string name="please_wait">Please wait…</string>
+  <string name="images_featured_explanation">Featured pictures are images from highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
+  <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
+  <string name="thanks_received_explanation" >This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
+  <string name="skip_image">SKIP THIS IMAGE</string>
 </resources>

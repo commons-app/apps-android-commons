@@ -208,6 +208,7 @@
   <string name="navigation_item_info">Uleedung</string>
   <string name="navigation_item_notification">Notifikatiounen</string>
   <string name="navigation_item_featured_images">Bemierkenswäert</string>
+  <string name="navigation_item_review">Nokucken</string>
   <string name="nearby_needs_permissions">Plazen nobäi kënnen net gewise ginn ouni Rechter fir d\'Lokalisatioun</string>
   <string name="no_description_found">keng Beschreiwung fonnt</string>
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
@@ -219,6 +220,7 @@
   <string name="upload_problem_image_duplicate">Bild ass schonn op Commons.</string>
   <string name="upload_problem_different_geolocation">Dëst Bild gouf op enger anerer Plaz gemaach.</string>
   <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
+  <string name="internet_downloaded" fuzzy="true">Lued w.e.g. nëmme Biller erop déi Dir selwer opgeholl hutt. Lued keng Biller erop déi Dir aus dem Internet erofgelueden hutt.</string>
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
@@ -265,6 +267,7 @@
   <string name="title_activity_search">Sichen</string>
   <string name="search_tab_title_media">MEDIEN</string>
   <string name="search_tab_title_categories">KATEGORIEN</string>
+  <string name="explore_tab_title_mobile">MOBIL EROPGELUEDEN</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
@@ -315,6 +318,10 @@
   <string name="yes_submit">Jo, schécken</string>
   <string name="no_go_back">Neen, zréck goen</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
+  <string name="nominate_for_deletion_done">Fäerdeg</string>
+  <string name="notsure">Net sécher</string>
+  <string name="send_thank_send">Merci schécken</string>
+  <string name="send_thank_notification_title">Merci schécken</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
   <string name="no_archived_notification">Dir hutt keng archivéier Notifikatiounen</string>

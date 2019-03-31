@@ -165,6 +165,7 @@
   <string name="detail_panel_cats_loading">Läser in…</string>
   <string name="detail_panel_cats_none">Ingen markerad</string>
   <string name="detail_description_empty">Ingen beskrivning</string>
+  <string name="detail_discussion_empty">Ingen diskussion</string>
   <string name="detail_license_empty">Okänd licens</string>
   <string name="menu_refresh">Uppdatera</string>
   <string name="storage_permission_title">Begär lagringsbehörighet</string>
@@ -180,6 +181,7 @@
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_description">Beskrivning</string>
+  <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Skapare</string>
   <string name="media_detail_uploaded_date">Uppladdningsdatum</string>
   <string name="media_detail_license">Licens</string>
@@ -195,7 +197,7 @@
   <string name="maximum_limit_alert">Kan inte visa fler än 500</string>
   <string name="enter_valid">Ange en giltig siffra</string>
   <string name="cannot_be_zero">Uppladdningsgränsen kan inte vara 0</string>
-  <string name="set_limit" fuzzy="true">Ändra gräns för senaste uppladdningar</string>
+  <string name="set_limit">Gräns för senaste uppladdningar</string>
   <string name="login_failed_2fa_not_supported">Tvåstegsverifiering stöds för tillfället inte.</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
   <string name="commons_logo">Commons-logotyp</string>
@@ -230,6 +232,7 @@
   <string name="navigation_item_info">Guide</string>
   <string name="navigation_item_notification">Meddelanden</string>
   <string name="navigation_item_featured_images">Utvald</string>
+  <string name="navigation_item_review">Granska</string>
   <string name="nearby_needs_permissions">Platser i närheten kan inte visas utan platsbehörigheter</string>
   <string name="no_description_found">ingen beskrivning hittades</string>
   <string name="nearby_info_menu_commons_article">Commons-filsida</string>
@@ -247,6 +250,7 @@
   <string name="upload_problem_different_geolocation">Bilden togs på en annan plats.</string>
   <string name="upload_problem_fbmd">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har hittat på andra personers Facebook-konton.</string>
   <string name="upload_problem_do_you_continue">Vill du fortfarande ladda upp denna bild?</string>
+  <string name="internet_downloaded">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har laddat ned från Internet.</string>
   <string name="give_permission">Ge behörighet</string>
   <string name="use_external_storage">Använd extern lagring</string>
   <string name="use_external_storage_summary">Spara bilder som tas med kameran i appen på din enhet</string>
@@ -258,6 +262,8 @@
   <string name="nominate_deletion">Nominera för radering</string>
   <string name="nominated_for_deletion">Denna bild har nominerats för radering.</string>
   <string name="nominated_see_more"/>
+  <string name="nominating_file_for_deletion">Nominerar %1$s för radering.</string>
+  <string name="nominating_for_deletion_status">Nominerar filen för radering: %1$s</string>
   <string name="view_browser">Visa i webbläsare</string>
   <string name="skip_login">Hoppa över</string>
   <string name="navigation_item_login">Logga in</string>
@@ -286,6 +292,8 @@
   <string name="no_internet">Uppkopplingen bröts</string>
   <string name="internet_established">Uppkopplingen återupprättades</string>
   <string name="error_notifications">Fel uppstod när aviseringar hämtades</string>
+  <string name="error_review">Fel uppstod när bilden hämtades för granskning. Tryck på uppdatera för att försöka igen.</string>
+  <string name="error_review_categories">Fel uppstod när bildkategorier hämtades för granskning. Tryck på uppdatera för att försöka igen.</string>
   <string name="no_notifications">Inga aviseringar hittades</string>
   <string name="about_translate">&lt;u&gt;Översätt&lt;/u&gt;</string>
   <string name="about_translate_title">Språk</string>
@@ -294,7 +302,7 @@
   <string name="about_translate_cancel">Avbryt</string>
   <string name="retry">Försök igen</string>
   <string name="showcase_view_got_it_button">Uppfattat!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Detta är platserna nära dig som behöver bilder för att illustrera deras Wikipedia-artiklar</string>
+  <string name="showcase_view_whole_nearby_activity">Detta är platserna nära dig som behöver bilder för att illustrera deras Wikipedia-artiklar.\n\nNär du klickar på \"SÖK I DETTA OMRÅDE\" kommer kartan låsas och en sökning startas i närheten runt detta plats.</string>
   <string name="showcase_view_list_icon">Klicka på den här knappen för att få upp en lista med dessa platser</string>
   <string name="showcase_view_plus_fab">Du kan ladda upp en bild från vilken plats som helst från ditt galleri eller kamera</string>
   <string name="no_images_found">Inga bilder hittades!</string>
@@ -313,6 +321,8 @@
   <string name="error_loading_subcategories">Fel uppstod när underkategorier lästes in.</string>
   <string name="search_tab_title_media">MEDIA</string>
   <string name="search_tab_title_categories">KATEGORIER</string>
+  <string name="explore_tab_title_featured">UTVALD</string>
+  <string name="explore_tab_title_mobile">LADDADES UPP VIA MOBIL</string>
   <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
   <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
@@ -343,8 +353,10 @@
   <string name="add_description">+ Lägg till beskrivning</string>
   <string name="no_recent_searches">Inga senaste sökningar</string>
   <string name="delete_recent_searches_dialog">Är du säker på att du vill rensa din sökhistorik?</string>
+  <string name="delete_search_dialog">Vill du radera denna sökning?</string>
   <string name="search_history_deleted">Sökhistoriken raderades</string>
   <string name="nominate_delete">Nominera för radering</string>
+  <string name="delete">RADERA</string>
   <string name="Achievements">Prestationer</string>
   <string name="statistics">STATISTIK</string>
   <string name="statistics_thanks">Mottagna tack</string>
@@ -402,8 +414,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Jag insåg att den är dålig för mitt privatliv</string>
   <string name="deletion_reason_no_longer_want_public">Jag ändrade mig, jag vill inte längre att den ska vara synlig offentligt</string>
   <string name="deletion_reason_not_interesting">Tyvärr, denna bild är inte intressant för en encyklopedi</string>
-  <string name="uploaded_by_myself" fuzzy="true">Laddades upp av mig den</string>
-  <string name="no_uploads" fuzzy="true">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på kameran eller galleriikonen ovan.</string>
+  <string name="uploaded_by_myself">Laddades upp av mig den %1$s och används i %2$d artiklar.</string>
+  <string name="no_uploads">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på knappen för att lägga till.</string>
   <string name="desc_language_Worldwide">Världsomfattande</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>
@@ -426,11 +438,54 @@
   <string name="achievements_fetch_failed">Någonting gick fel. Vi kunde inte hämta dina prestationer</string>
   <string name="ends_on">Slutar den:</string>
   <string name="display_campaigns">Visa kampanjer</string>
-  <string name="display_campaigns_explanation">Tryck här för att se pågående kampanjer</string>
+  <string name="display_campaigns_explanation">Se pågående kampanjer</string>
   <string name="nearby_campaign_dismiss_message">Du kommer inte längre se kampanjerna. Om du vill kan du återaktivera denna avisering i inställningarna.</string>
   <string name="this_function_needs_network_connection">Denna funktion kräver nätverksuppkoppling. Kontrollera dina anslutningsinställningar.</string>
   <string name="bad_token_error_proposed_solution">Uppladdningen misslyckades p.g.a. problem med redigeringsnyckeln. Försök logga ut och in igen.</string>
   <string name="error_processing_image">Fel uppstod när bilden behandlades. Försök igen!</string>
+  <string name="getting_edit_token">Hämtar nyckel för redigering</string>
+  <string name="check_category_adding_template">Lägger till mall för kategorikontroll</string>
+  <string name="check_category_notification_title">Begär kategorikontroll för %1$s</string>
+  <string name="check_category_edit_summary">Begär kategorikontroll</string>
+  <string name="check_category_success_title">Begär kategorikontroll: Färdig</string>
+  <string name="check_category_failure_title">Begär kategorikontroll: Misslyckades</string>
+  <string name="check_category_success_message">Begärde kategorikontroll för %1$s</string>
+  <string name="check_category_failure_message">Kunde inte begära kategorikontroll för %1$s</string>
+  <string name="check_category_toast">Begär kategorikontroll för %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Lägger till raderingsmeddelande i filen</string>
+  <string name="nominate_for_deletion_done">Klar</string>
+  <string name="nominate_for_deletion_notify_user">Meddelar användaren på diskussionssidan</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Lägger till fil i loggen med raderingsbegäran</string>
+  <string name="nominate_for_deletion_create_deletion_request">Skapar undersida för raderingbegäran</string>
+  <string name="notsure">Osäker</string>
+  <string name="send_thank_success_title">Skickar tack: Färdig</string>
+  <string name="send_thank_success_message">Skickade tack till %1$s</string>
+  <string name="send_thank_failure_message">Misslyckades att skicka tack %1$s</string>
+  <string name="send_thank_failure_title">Skickar tack: Misslyckades</string>
+  <string name="send_thank_send">Skickar tack</string>
+  <string name="send_thank_notification_title">Skickar tack</string>
+  <string name="send_thank_toast">Skickar tack för %1$s</string>
+  <string name="review_copyright">Följer detta upphovsreglerna?</string>
+  <string name="review_category">Är detta riktigt kategoriserat?</string>
+  <string name="review_spam">Är detta relevant?</string>
+  <string name="review_thanks">Vill du tacka bidragsgivaren?</string>
+  <string name="review_spam_explanation">Klicka NEJ för att nominera denna bild för radering om den inte är användbar alls.</string>
+  <string name="review_copyright_explanation">Logotyper, skärmdumpar, filmaffischer är oftast upphovsbrott.\n Klicka NEJ för att nominera denna bild för radering</string>
+  <string name="review_thanks_explanation">%1$s kommer att uppmuntras av din uppskattning</string>
+  <string name="review_no_category">Oj, den är inte ens kategoriserad!</string>
+  <string name="review_category_explanation">Denna bild finns i %1$s kategorier.</string>
+  <string name="review_spam_report_question">Det är irrelevant eftersom det är</string>
+  <string name="review_spam_report_problem">spam</string>
+  <string name="review_c_violation_report_question">Den bryter mot upphovsrätten eftersom den är</string>
+  <string name="review_c_violation_report_problem">upphovsrättsbrott</string>
+  <string name="review_category_yes_button_text">NEJ, FELKATEGORISERAD</string>
+  <string name="review_category_no_button_text">VERKAR OKEJ</string>
+  <string name="review_spam_yes_button_text">NEJ, IRRELEVANT</string>
+  <string name="review_spam_no_button_text">VERKAR OKEJ</string>
+  <string name="review_copyright_yes_button_text">NEJ, UPPHOVSBROTT</string>
+  <string name="review_copyright_no_button_text">VERKAR OKEJ</string>
+  <string name="review_thanks_yes_button_text">VISST, VARFÖR INTE</string>
+  <string name="review_thanks_no_button_text">NÄSTA BILD</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Hämtar delat innehåll. Det kan ta en stund att behandla bilden beroende på bildens storlek och din enhet</item>
     <item quantity="other">Hämtar delat innehåll. Det kan ta en stund att behandla bilderna beroende på bildens storlek och din enhet</item>
@@ -438,12 +493,15 @@
   <string name="no_image">Inga bilder används</string>
   <string name="no_image_reverted">Inga bilder återställdes</string>
   <string name="no_image_uploaded">Inga bilder laddades upp</string>
-  <string name="no_notification" fuzzy="true">Du har inga olästa aviseringar</string>
-  <string name="no_archived_notification" fuzzy="true">Du har inga arkiverade aviseringar</string>
+  <string name="no_notification">Du har inga olästa aviseringar</string>
+  <string name="no_archived_notification">Du har inga arkiverade aviseringar</string>
   <string name="share_logs_using">Dela loggar med</string>
   <string name="menu_option_archived">Visa arkiverade</string>
   <string name="menu_option_unread">Visa olästa</string>
   <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
   <string name="image_chooser_title">Välj bilder att ladda upp</string>
   <string name="please_wait">Var god vänta…</string>
+  <string name="images_via_nearby_explanation">Bilder som har laddats upp via \"Platser i närheten\" är bilderna som laddas upp genom att upptäcka platser på kartan.</string>
+  <string name="thanks_received_explanation">Denna funktion låter redigerare skicka en tackavisering till användare som gör användbara redigeringar – genom att använda en liten tacklänk på historik- eller diff-sidor.</string>
+  <string name="skip_image">HOPPA ÖVER DENNA BILD</string>
 </resources>
