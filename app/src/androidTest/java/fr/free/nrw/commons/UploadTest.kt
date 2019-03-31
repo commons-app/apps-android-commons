@@ -26,10 +26,7 @@ import androidx.test.runner.AndroidJUnit4
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.utils.ConfigUtils
 import org.hamcrest.core.AllOf.allOf
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 import org.junit.runner.RunWith
 import timber.log.Timber
 import java.io.File
@@ -102,9 +99,9 @@ class UploadTest {
 
     @Test
     fun uploadTest() {
-        if (!ConfigUtils.isBetaFlavour()) {
-            throw Error("This test should only be run in Beta!")
-        }
+        Assume.assumeTrue(
+                "The automated upload test should only be run in Beta!",
+                ConfigUtils.isBetaFlavour())
 
         // Uri to return by our mock gallery selector
         // Requires file 'image.jpg' to be placed at root of file structure

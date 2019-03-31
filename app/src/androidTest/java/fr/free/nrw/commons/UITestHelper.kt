@@ -3,9 +3,12 @@ package fr.free.nrw.commons
 import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
+import androidx.test.espresso.PerformException
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import fr.free.nrw.commons.utils.ConfigUtils
 import fr.free.nrw.commons.utils.StringUtils
+import org.hamcrest.CoreMatchers.allOf
 import org.junit.Assume
 import timber.log.Timber
 
@@ -17,21 +20,21 @@ class UITestHelper {
                 onView(ViewMatchers.withId(R.id.finishTutorialButton))
                         .perform(ViewActions.click())
             } catch (ignored: NoMatchingViewException) {
+            } catch (ignored: PerformException) {
+                onView(ViewMatchers.withId(R.id.welcomePager))
+                        .perform(ViewActions.swipeLeft())
+                        .perform(ViewActions.swipeLeft())
+                        .perform(ViewActions.swipeLeft())
+                        .perform(ViewActions.swipeLeft())
+                onView(allOf(
+                        ViewMatchers.withId(R.id.finishTutorialButton),
+                        ViewMatchers.withText("YES!")))
+                        .perform(ViewActions.click())
             }
         }
 
         fun loginUser() {
-            Assume.assumeTrue(
-                    "Beta account username not set\n" +
-                    "This can be done in the build config of app/build.gradle or by exporting the environment variable test_user_name\n" +
-                    "This message is expected on PR builds on Travis",
-                    credentialIsSet(BuildConfig.TEST_USERNAME))
-
-            Assume.assumeTrue(
-                    "Beta account password not set\n" +
-                    "This can be done in the build config of app/build.gradle or by exporting the environment variable test_user_password\n" +
-                    "This message is expected on PR builds on Travis",
-                    credentialIsSet(BuildConfig.TEST_PASSWORD))
+            checkShouldLogin()
 
             try {
                 onView(ViewMatchers.withId(R.id.login_username))
@@ -55,8 +58,25 @@ class UITestHelper {
         }
 
         private fun credentialIsSet(credential: String): Boolean {
-            return !(StringUtils.isNullOrWhiteSpace(BuildConfig.TEST_USERNAME)
-                    || BuildConfig.TEST_USERNAME == "null")
+            return !(StringUtils.isNullOrWhiteSpace(credential) || credential == "null")
+        }
+
+        private fun checkShouldLogin() {
+            Assume.assumeTrue(
+                    "Tests requiring login should only be performed on Beta Commons",
+                    ConfigUtils.isBetaFlavour())
+
+            Assume.assumeTrue(
+                    "Beta account username not set\n" +
+                    "This can be done in the build config of app/build.gradle or by exporting the environment variable test_user_name\n" +
+                    "This message is expected on PR builds on Travis",
+                    credentialIsSet(BuildConfig.TEST_USERNAME))
+
+            Assume.assumeTrue(
+                    "Beta account password not set\n" +
+                    "This can be done in the build config of app/build.gradle or by exporting the environment variable test_user_password\n" +
+                    "This message is expected on PR builds on Travis",
+                    credentialIsSet(BuildConfig.TEST_PASSWORD))
         }
     }
 }
