@@ -544,6 +544,8 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                 String desc = directKvStore.getString("description_<"+Integer.toString(i)+">");
                 description.setDescriptionText(desc);
                 finalDesc.add(description);
+                int position = directKvStore.getInt("spinnerPosition_<"+Integer.toString(i)+">");
+                description.setSelectedLanguageIndex(position);
             }
             descriptionsAdapter.setItems(t, finalDesc);
             rvDescriptions.setAdapter(descriptionsAdapter);
@@ -754,6 +756,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         directKvStore.putInt("descCount", n);
         for (int i = 0; i < n; i++) {
             directKvStore.putString("description_<"+Integer.toString(i)+">", descriptionsAdapter.getDescriptions().get(i).getDescriptionText());
+            directKvStore.putInt("spinnerPosition_<" + Integer.toString(i) + ">", descriptionsAdapter.getDescriptions().get(i).getSelectedLanguageIndex());
         }
     }
 }
