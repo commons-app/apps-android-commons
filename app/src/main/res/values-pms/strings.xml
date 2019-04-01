@@ -466,6 +466,23 @@
   <string name="review_thanks">Veul-lo aringrassié ël contributor?</string>
   <string name="review_spam_explanation">Sgnaché su NÒ për propon-e costa plancia për la scancelassion s\'a l\'é pa d\'autut ùtil.</string>
   <string name="review_copyright_explanation">Le marche, le schërmà, ij tilèt dij film a son soens dle violassion dij drit d\'autor.\nCh\'a sgnaca su NÒ për propon-e la dëscancelassion ëd costa plancia</string>
+  <string name="review_thanks_explanation">%1$s a sarà ancoragià da sò sostegn</string>
+  <string name="review_no_category">Contacc, sòn a l\'ha gnanca na categorìa!</string>
+  <string name="review_category_explanation">Costa plancia a l\'é ant le categorìe %1$s .</string>
+  <string name="review_spam_report_question">A l\'é fòra argoment përché a l\'é</string>
+  <string name="review_spam_report_problem">rumenta</string>
+  <string name="review_c_violation_report_question">A l\'é na violassion dij drit d\'autor përché a l\'é</string>
+  <string name="review_c_violation_report_problem">copyRightViolation</string>
+  <string name="review_category_yes_button_text">NÒ, EROR ËD CATEGORÌA</string>
+  <string name="review_category_no_button_text">A SMIJA GIUST</string>
+  <string name="review_spam_yes_button_text">NÒ, FÒRA ARGOMENT</string>
+  <string name="review_spam_no_button_text">A SMIJA GIUST</string>
+  <string name="review_copyright_yes_button_text">NÒ, VIOLASSION DIJ DRIT D\'AUTOR</string>
+  <string name="review_copyright_no_button_text">A SMIJA CH\'A VADA BIN</string>
+  <string name="review_thanks_yes_button_text">É, PËRCHÉ NÒ</string>
+  <string name="review_thanks_no_button_text">PLANCIA APRESS</string>
+  <string name="skip_image_explanation">Sgnaché ansima a \'s boton a-j darà n\'àutra plancia carià ëd recent ëd Wikimedia Comun</string>
+  <string name="review_image_explanation">A peul revisioné le plance e amelioré la qualità ëd Wikimedia Comun.\nIj quatr paràmeter dla revision a son:\n- Costa plancia a l\'é an argoment?\n- Costa plancia a rëspeta le régole ëd drit d\'autor?\n- Costa plancia a l\'é categorisà për da bin?\n- Si tut a va bin, a peul ëdcò aringrassié ël contributor.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Arseiviment ëd contnù partagià. Ël tratament ëd la plancia a peul pijé un pò \'d temp an fonsion ëd la taja dla plancia e ëd sò material</item>
     <item quantity="other">Arseiviment ëd contnù partagià. Ël tratament ëd le plance a peul pijé un pò \'d temp an fonsion ëd la taja dla plancia e ëd sò material</item>
@@ -484,4 +501,5 @@
   <string name="images_featured_explanation">Le fòto an evidensa a son ëd plance fàite da dij fotògraf e ilustrator motobin àbij che la comunità ëd Wikipedia Commons a l\'ha sernù tra cole ëd qualità pi àuta an sël sit.</string>
   <string name="images_via_nearby_explanation">Le plance carià dai pòst ëd prossimità a son le plance carià con la dëscuverta dij pòst an sla carta.</string>
   <string name="thanks_received_explanation">Costa fonsionalità a përmet ai contributor ëd mandé na notìfica d\'aringrassiament a j\'utent ch\'a fan dle modìfiche ùtij -  an dovrand na cita liura d\'aringrassiament an sla pàgina dla stòria o cola dle diferense.</string>
+  <string name="skip_image">SAUTÉ COSTA PLANCIA</string>
 </resources>

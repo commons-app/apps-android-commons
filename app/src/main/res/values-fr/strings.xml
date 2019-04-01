@@ -502,6 +502,8 @@
   <string name="review_copyright_no_button_text">SEMBLE CORRECT</string>
   <string name="review_thanks_yes_button_text">OUI, POURQUOI PAS</string>
   <string name="review_thanks_no_button_text">IMAGE SUIVANTE</string>
+  <string name="skip_image_explanation">Cliquer sur ce bouton vous fournira une autre image récemment téléversée de Wikimédia Communs.</string>
+  <string name="review_image_explanation">Vous pouvez revoir les images et améliorer la qualité de Wikimédia Communs.\n Les quatre paramètres à revoir sont : \n - Cette image est-elle à propos ? \n - Cette image respecte-t-elle les règles de droit d’auteur ? \n - Cette image est-elle bien catégorisée ? \n - Si tout va bien, vous pouvez aussi remercier le contributeur.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Réception de contenu partagé. Le traitement de l\'image peut prendre un certain temps en fonction de la taille de l\'image et de votre matériel</item>
     <item quantity="other">Réception de contenu partagé. Le traitement des images peut prendre un certain temps en fonction de la taille des images et de votre matériel</item>
@@ -517,7 +519,7 @@
   <string name="error_occurred_in_picking_images">Erreur lors de la sélection des images</string>
   <string name="image_chooser_title">Choisir les images à téléverser</string>
   <string name="please_wait">Veuillez patienter…</string>
-  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Communs a choisi comme quelques-unes de la meilleure qualité sur le site.</string>
+  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Communs a choisi comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par les lieux de proximité sont les images téléversées par la découverte des lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionalité permet aux contributeurs d\'envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles – en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
   <string name="skip_image">SAUTER CETTE IMAGE</string>

@@ -100,6 +100,7 @@
   <string name="title_activity_signup">רישום</string>
   <string name="title_activity_featured_images">תמונות מומלצות</string>
   <string name="title_activity_category_details">קטגוריה</string>
+  <string name="title_activity_review">ביקורת עמיתים</string>
   <string name="menu_about">אודות</string>
   <string name="about_license">יישום ויקישיתוף (Wikimedia Commons app) הוא יישום קוד פתוח שמפותח ומתוחזק על־ידי מקבלי מלגות ומתנדבים של קהילת ויקימדיה. קרן ויקימדיה אינה מעורבת ביצירה, פיתוח, או תחזוקה של היישום.</string>
   <string name="about_improve">נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
@@ -237,6 +238,7 @@
   <string name="navigation_item_info">מדריך</string>
   <string name="navigation_item_notification">התראות</string>
   <string name="navigation_item_featured_images">מומלץ</string>
+  <string name="navigation_item_review">סקירה</string>
   <string name="nearby_needs_permissions">אי־אפשר להציג מקומות בסביבה ללא הרשאות מיקום</string>
   <string name="no_description_found">לא נמצא תיאור</string>
   <string name="nearby_info_menu_commons_article">דף קובץ בוויקישיתוף</string>
@@ -254,6 +256,7 @@
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
   <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
   <string name="upload_problem_do_you_continue">האם ברצונך להעלות את התמונה הזאת עדיין?</string>
+  <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
@@ -265,6 +268,7 @@
   <string name="nominate_deletion">להציע מחיקה</string>
   <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה</string>
   <string name="nominated_see_more">&lt;u&gt;ר\' את האתר לפרטים&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">העלאה של %1$s להצבעה למחיקה.</string>
   <string name="view_browser">הצגה בדפדפן</string>
   <string name="skip_login">לדלג</string>
   <string name="navigation_item_login">כניסה לחשבון</string>
@@ -442,6 +446,17 @@
   <string name="this_function_needs_network_connection">תכונה זו דורשת חיבור לרשת, נא לבדוק את הגדרות החיבור שלך.</string>
   <string name="bad_token_error_proposed_solution">ההעלאה נכשלה עקב תקלות עם אסימון עריכה. נא לנסות לצאת ולהיכנס שוב.</string>
   <string name="error_processing_image">אירעה שגיאה בעת עיבוד התמונה. נא לנסות שוב!</string>
+  <string name="notsure">לא בטוח</string>
+  <string name="send_thank_success_title">שליחת תודה: הצלחה</string>
+  <string name="send_thank_success_message">נשלחה תודה בהצלחה אל %1$s</string>
+  <string name="send_thank_failure_message">שליחת התודה נכשלה %1$s</string>
+  <string name="send_thank_failure_title">שליחת תודה: כשל</string>
+  <string name="send_thank_send">שליחת תודות</string>
+  <string name="send_thank_notification_title">שליחת תודות</string>
+  <string name="send_thank_toast">נשלחת תודה עבור %1$s</string>
+  <string name="review_copyright">האם זה עומד בתנאי זכויות היוצרים?</string>
+  <string name="review_category">האם הקטגוריה נכונה?</string>
+  <string name="review_thanks">ברצונך להודות לתורם?</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">מתקבל תוכן שיתופי. עיבוד התמונה עשוי לארוך זמן מה כתלות בגודל התמונה והמכשיר שלך</item>
     <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>

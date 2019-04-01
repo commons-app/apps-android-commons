@@ -494,6 +494,8 @@
   <string name="review_copyright_no_button_text">PARECE BEM</string>
   <string name="review_thanks_yes_button_text">SIM, PORQUE NÃO</string>
   <string name="review_thanks_no_button_text">PRÓXIMA IMAGEM</string>
+  <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>
+  <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commoms.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
     <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>

@@ -487,6 +487,8 @@
   <string name="review_copyright_no_button_text">SIEHT GUT AUS</string>
   <string name="review_thanks_yes_button_text">JA, WARUM NICHT</string>
   <string name="review_thanks_no_button_text">NÄCHSTES BILD</string>
+  <string name="skip_image_explanation">Das Anklicken dieser Schaltfläche gibt dir ein anderes kürzlich hochgeladenes Bild von Wikimedia Commons</string>
+  <string name="review_image_explanation">Du kannst Bilder überprüfen und die Qualität von Wikimedia Commons verbessern.\nDie vier Parameter der Überprüfung sind: \n- Ist dieses Bild im Geltungsbereich? \n- Folgt dieses Bild den Regeln des Urheberrechts? \n- Ist dieses Bild korrekt kategorisiert? \n- Falls alles gut geht, kannst du auch dem Beitrager danken.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Der geteilte Inhalt wird abgerufen. Die Verarbeitung des Bildes kann einige Zeit in Anspruch nehmen, abhängig von der Größe des Bildes und deines Gerätes.</item>
     <item quantity="other">Der geteilte Inhalt wird abgerufen. Die Verarbeitung der Bilder kann einige Zeit in Anspruch nehmen, abhängig von der Größe der Bilder und deines Gerätes.</item>

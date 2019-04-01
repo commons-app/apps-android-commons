@@ -180,6 +180,7 @@
   <string name="no">Ei</string>
   <string name="media_detail_title">Otsikko</string>
   <string name="media_detail_description">Kuvaus</string>
+  <string name="media_detail_discussion">Keskustelu</string>
   <string name="media_detail_author">Tekijä</string>
   <string name="media_detail_uploaded_date">Tallennuspäivämäärä</string>
   <string name="media_detail_license">Lisenssi</string>
@@ -190,8 +191,10 @@
   <string name="_2fa_code">2FA koodi</string>
   <string name="number_of_uploads">Tuorein latausrajani</string>
   <string name="maximum_limit">Maksimimäärä</string>
+  <string name="invalid_zero">Nolla ei ole kelvollinen</string>
   <string name="maximum_limit_alert">Ei voida näyttää enempää, kuin 500</string>
-  <string name="set_limit" fuzzy="true">Aseta tuore latausraja</string>
+  <string name="cannot_be_zero">Tallennusraja ei voi olla 0</string>
+  <string name="set_limit">Tuore latausraja</string>
   <string name="login_failed_2fa_not_supported">Kaksivaiheinen tunnistus ei ole vielä tuettu.</string>
   <string name="logout_verification">Haluatko varmasti kirjautua ulos?</string>
   <string name="commons_logo">Commons-logo</string>
@@ -251,7 +254,7 @@
   <string name="skip_login">Ohita</string>
   <string name="navigation_item_login">Kirjaudu sisään</string>
   <string name="skip_login_title">Haluatko todella ohittaa kirjautumisen?</string>
-  <string name="skip_login_message" fuzzy="true">Et voi ladata kuvia.</string>
+  <string name="skip_login_message">Sinun täytyy kirjautua sisään tallentaaksesi kuvia tulevaisuudessa.</string>
   <string name="login_alert_message">Kirjaudu sisään käyttääksesi tätä ominaisuutta</string>
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
   <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>
@@ -348,10 +351,14 @@
   <string name="provider_bookmarks_location">Kirjanmerkit</string>
   <string name="deletion_reason_uploaded_by_mistake">Tallensin sen vahingossa</string>
   <string name="no_uploads" fuzzy="true">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla kamera tai galleriakuvaketta yllä.</string>
+  <string name="desc_language_Worldwide">Maailmanlaajuinen</string>
   <string name="desc_language_America">Amerikka</string>
   <string name="desc_language_Europe">Eurooppa</string>
   <string name="desc_language_Middle_East">Lähi-itä</string>
   <string name="desc_language_Africa">Afrikka</string>
   <string name="desc_language_Asia">Aasia</string>
   <string name="desc_language_Pacific">Tyynenmeren alue</string>
+  <string name="never_ask_again">Älä kysy tätä uudelleen</string>
+  <string name="please_wait">Odota…</string>
+  <string name="skip_image">OHITA TÄMÄ KUVA</string>
 </resources>

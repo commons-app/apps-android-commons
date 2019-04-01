@@ -8,6 +8,7 @@
 * MeskoBalazs
 * Misibacsi
 * Máté
+* R-Joe
 * Tacsipacsi
 * Urbalazs
 * ViDam
@@ -79,7 +80,7 @@
   <string name="gps_disabled">A GPS le van tiltva az eszközén. Szeretné engedélyezni?</string>
   <string name="enable_gps">GPS engedélyezése</string>
   <string name="contributions_subtitle_zero">Még nincsenek feltöltések</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d feltöltés</item>
     <item quantity="other">%1$d feltöltés</item>
@@ -196,7 +197,7 @@
   <string name="maximum_limit_alert">Nem lehet 500-nál többet megjeleníteni</string>
   <string name="enter_valid">Írj be egy rendes számot</string>
   <string name="cannot_be_zero">Feltöltési limit nem lehet 0</string>
-  <string name="set_limit" fuzzy="true">Legutóbbi feltöltési korlát beállítása</string>
+  <string name="set_limit">Legutóbbi feltöltési korlát</string>
   <string name="login_failed_2fa_not_supported">A kétlépcsős hitelesítés jelenleg nem támogatott.</string>
   <string name="logout_verification">Kilépsz?</string>
   <string name="commons_logo">Commons Logo</string>
