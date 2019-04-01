@@ -43,10 +43,11 @@ class ReviewHelperTest {
      */
     @Test
     fun getRandomMedia() {
+        val recentChange = getMockRecentChange("test", "File:Test1.jpeg", 0)
+        val recentChange1 = getMockRecentChange("test", "File:Test2.png", 0)
+        val recentChange2 = getMockRecentChange("test", "File:Test3.jpg", 0)
         `when`(okHttpJsonApiClient?.recentFileChanges)
-                .thenReturn(Single.just(listOf(getMockRecentChange("test", "File:Test1.jpeg", 0),
-                        getMockRecentChange("test", "File:Test2.png", 0),
-                        getMockRecentChange("test", "File:Test3.jpg", 0))))
+                .thenReturn(Single.just(listOf(recentChange, recentChange1, recentChange2)))
 
         `when`(mediaWikiApi?.pageExists(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
@@ -58,8 +59,8 @@ class ReviewHelperTest {
     fun getMockRecentChange(type: String, title: String, oldRevisionId: Long): RecentChange {
         val recentChange = mock(RecentChange::class.java)
         `when`(recentChange!!.type).thenReturn(type)
-        `when`(recentChange!!.title).thenReturn(title)
-        `when`(recentChange!!.oldRevisionId).thenReturn(oldRevisionId)
+        `when`(recentChange.title).thenReturn(title)
+        `when`(recentChange.oldRevisionId).thenReturn(oldRevisionId)
         return recentChange
     }
 
