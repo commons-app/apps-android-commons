@@ -13,7 +13,7 @@ import fr.free.nrw.commons.media.model.MwQueryPage;
 public class MwQueryResult {
     @SuppressWarnings("unused")
     @Nullable
-    private HashMap<String, MwQueryPage> pages;
+    private List<MwQueryPage> pages;
     private List<RecentChange> recentchanges;
 
     @NonNull
@@ -21,7 +21,7 @@ public class MwQueryResult {
         if (pages == null) {
             return new ArrayList<>();
         }
-        return new ArrayList<>(pages.values());
+        return pages;
     }
 
     public List<RecentChange> getRecentchanges() {
