@@ -238,6 +238,7 @@ public class OkHttpJsonApiClient {
                 .newBuilder()
                 .addQueryParameter("action", "query")
                 .addQueryParameter("format", "json")
+                .addQueryParameter("formatversion", "2")
                 .addQueryParameter("titles", titles);
 
         if (useGenerator) {
@@ -294,7 +295,8 @@ public class OkHttpJsonApiClient {
                 .parse(commonsBaseUrl)
                 .newBuilder()
                 .addQueryParameter("action", "query")
-                .addQueryParameter("format", "json");
+                .addQueryParameter("format", "json")
+                .addQueryParameter("formatversion", "2");
 
 
         if (queryType.equals("search")) {
@@ -416,6 +418,7 @@ public class OkHttpJsonApiClient {
                 .newBuilder()
                 .addQueryParameter("action", "query")
                 .addQueryParameter("format", "json")
+                .addQueryParameter("formatversion", "2")
                 .addQueryParameter("list", "recentchanges")
                 .addQueryParameter("rcstart", rcStart)
                 .addQueryParameter("rcnamespace", FILE_NAMESPACE)
@@ -450,6 +453,7 @@ public class OkHttpJsonApiClient {
                 .newBuilder()
                 .addQueryParameter("action", "query")
                 .addQueryParameter("format", "json")
+                .addQueryParameter("formatversion", "2")
                 .addQueryParameter("prop", "revisions")
                 .addQueryParameter("rvprop", "timestamp|ids|user")
                 .addQueryParameter("titles", filename)
