@@ -100,7 +100,7 @@ public interface MediaWikiApi {
 
 //    Single<CampaignResponseDTO> getCampaigns();
 
-    boolean thank(String editToken, String revision) throws IOException;
+    boolean thank(String editToken, long revision) throws IOException;
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

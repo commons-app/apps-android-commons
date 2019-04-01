@@ -200,7 +200,7 @@ public class ReviewController {
                 }
                 publishProgress(context, 1);
                 assert firstRevision != null;
-                mwApi.thank(editToken, firstRevision.getRevid());
+                mwApi.thank(editToken, firstRevision.getRevisionId());
                 publishProgress(context, 2);
             } catch (Exception e) {
                 Timber.d(e);
