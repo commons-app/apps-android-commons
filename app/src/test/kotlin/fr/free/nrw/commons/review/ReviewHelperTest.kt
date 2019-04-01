@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.review
 
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.media.model.MwQueryPage
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.Single
@@ -14,6 +13,8 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+import org.wikipedia.dataclient.mwapi.MwQueryPage
+import org.wikipedia.dataclient.mwapi.RecentChange
 
 /**
  * Test class for ReviewHelper
@@ -43,15 +44,23 @@ class ReviewHelperTest {
     @Test
     fun getRandomMedia() {
         `when`(okHttpJsonApiClient?.recentFileChanges)
-                .thenReturn(Single.just(listOf(RecentChange("test", "File:Test1.jpeg", "0"),
-                        RecentChange("test", "File:Test2.png", "0"),
-                        RecentChange("test", "File:Test3.jpg", "0"))))
+                .thenReturn(Single.just(listOf(getMockRecentChange("test", "File:Test1.jpeg", 0),
+                        getMockRecentChange("test", "File:Test2.png", 0),
+                        getMockRecentChange("test", "File:Test3.jpg", 0))))
 
         `when`(mediaWikiApi?.pageExists(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
         val randomMedia = reviewHelper?.randomMedia?.blockingGet()
 
         assertTrue(randomMedia is Media)
+    }
+
+    fun getMockRecentChange(type: String, title: String, oldRevisionId: Long): RecentChange {
+        val recentChange = mock(RecentChange::class.java)
+        `when`(recentChange!!.type).thenReturn(type)
+        `when`(recentChange!!.title).thenReturn(title)
+        `when`(recentChange!!.oldRevisionId).thenReturn(oldRevisionId)
+        return recentChange
     }
 
     /**
