@@ -414,7 +414,7 @@ public class OkHttpJsonApiClient {
         Date now = new Date();
         Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
 
-        String rcStart = DateUtil.getDateStringWithSkeletonPattern(startDate, "yyyy-MM-dd'T'HH:mm:ss'Z'");
+        String rcStart = DateUtil.getIso8601DateFormat().format(startDate);
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(commonsBaseUrl)
                 .newBuilder()
