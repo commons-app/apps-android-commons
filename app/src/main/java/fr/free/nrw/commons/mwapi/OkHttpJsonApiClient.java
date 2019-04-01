@@ -221,7 +221,9 @@ public class OkHttpJsonApiClient {
      */
     @Nullable
     public Single<Media> getPictureOfTheDay() {
-        String template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort();
+        String date = DateUtil.getIso8601DateFormatShort().format(new Date());
+        Timber.d("Current date is %s", date);
+        String template = "Template:Potd/" + date;
         return getMedia(template, true);
     }
 

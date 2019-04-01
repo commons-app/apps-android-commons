@@ -22,6 +22,7 @@ import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.wikipedia.util.DateUtil
+import java.util.*
 import kotlin.random.Random
 
 /**
@@ -189,7 +190,7 @@ class OkHttpJsonApiClientTest {
      */
     @Test
     fun getImageWithGenerator() {
-        val template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort();
+        val template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort().format(Date())
         server.enqueue(getMediaList("", "", "", 1))
 
         val media = testObject.getMedia(template, true)!!.blockingGet()
@@ -215,7 +216,7 @@ class OkHttpJsonApiClientTest {
      */
     @Test
     fun getPictureOfTheDay() {
-        val template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort();
+        val template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort().format(Date())
         server.enqueue(getMediaList("", "", "", 1))
 
         val media = testObject.pictureOfTheDay?.blockingGet()
