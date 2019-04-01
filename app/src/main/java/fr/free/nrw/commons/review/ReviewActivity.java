@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,16 +18,20 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -55,10 +60,12 @@ public class ReviewActivity extends AuthenticatedActivity {
     ProgressBar progressBar;
     @BindView(R.id.imageCaption)
     TextView imageCaption;
-
+    @BindView(R.id.skip_image_info)
+    ImageView skipImageInfo;
+    @BindView(R.id.review_image_info)
+    ImageView reviewImageInfo;
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
-
     @Inject
     MediaWikiApi mwApi;
     @Inject
@@ -107,6 +114,8 @@ public class ReviewActivity extends AuthenticatedActivity {
         runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
 
         skip_image_button.setOnClickListener(view -> runRandomizer());
+        skipImageInfo.setOnClickListener(view -> showSkipImageInfo());
+        reviewImageInfo.setOnClickListener(view -> showReviewImageInfo());
     }
 
     @SuppressLint("CheckResult")
@@ -167,5 +176,25 @@ public class ReviewActivity extends AuthenticatedActivity {
         } else {
             runRandomizer();
         }
+    }
+
+    public void showSkipImageInfo(){
+        DialogUtil.showAlertDialog(ReviewActivity.this,
+                getString(R.string.skip_image),
+                getString(R.string.skip_image_explanation),
+                getString(android.R.string.ok),
+                "",
+                null,
+                null);
+    }
+
+    public void showReviewImageInfo() {
+        DialogUtil.showAlertDialog(ReviewActivity.this,
+                getString(R.string.title_activity_review),
+                getString(R.string.review_image_explanation),
+                getString(android.R.string.ok),
+                "",
+                null,
+                null);
     }
 }

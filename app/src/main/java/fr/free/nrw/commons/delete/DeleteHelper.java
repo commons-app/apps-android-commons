@@ -129,7 +129,7 @@ public class DeleteHelper {
             message = "Could not request deletion.";
         }
 
-        String urlForDelete = BuildConfig.COMMONS_URL + "/wiki/Commons:Deletion_requests/File:" + media.getFilename();
+        String urlForDelete = BuildConfig.COMMONS_URL + "/wiki/Commons:Deletion_requests/" + media.getFilename();
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlForDelete));
         notificationHelper.showNotification(context, title, message, NOTIFICATION_DELETE, browserIntent);
         return result;
