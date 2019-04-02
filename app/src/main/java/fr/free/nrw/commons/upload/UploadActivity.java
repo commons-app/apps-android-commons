@@ -489,7 +489,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         strBuilder.setSpan(new URLSpan(url),start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
-
     private void configureLicenses() {
         licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
