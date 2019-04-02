@@ -11,9 +11,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.media.model.MwQueryPage;
 
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
@@ -130,6 +131,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
         return layoutView;
     }
+
     private ReviewActivity getReviewActivity() {
         return (ReviewActivity) requireActivity();
     }

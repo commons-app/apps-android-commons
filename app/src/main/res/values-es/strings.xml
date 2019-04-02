@@ -492,12 +492,12 @@
   <string name="review_spam_report_problem">publicidad no deseada</string>
   <string name="review_c_violation_report_question">Es una violación de derechos de autor porque es</string>
   <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text">NO, MAL-CATEGORIZADO</string>
-  <string name="review_category_no_button_text">PARECE CORRECTO</string>
+  <string name="review_category_yes_button_text">NO, MAL CATEGORIZADO</string>
+  <string name="review_category_no_button_text">PARECE BIEN</string>
   <string name="review_spam_yes_button_text">NO, FUERA DE ALCANCE</string>
   <string name="review_spam_no_button_text">PARECE CORRECTO</string>
   <string name="review_copyright_yes_button_text">NO, INFRACCIÓN A LOS DERECHOS DE AUTOR</string>
-  <string name="review_copyright_no_button_text">PARECE CORRECTO</string>
+  <string name="review_copyright_no_button_text">PARECE BIEN</string>
   <string name="review_thanks_yes_button_text">SÍ, POR QUÉ NO</string>
   <string name="review_thanks_no_button_text">IMAGEN SIGUIENTE</string>
   <plurals name="receiving_shared_content">

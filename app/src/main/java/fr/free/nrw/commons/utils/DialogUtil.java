@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.View;
 
+import org.apache.commons.lang3.StringUtils;
+
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
@@ -59,7 +61,7 @@ public class DialogUtil {
         builder.setTitle(title);
         builder.setMessage(message);
 
-        if (!StringUtils.isNullOrWhiteSpace(positiveButtonText)) {
+        if (!StringUtils.isBlank(positiveButtonText)) {
             builder.setPositiveButton(positiveButtonText, (dialogInterface, i) -> {
                 dialogInterface.dismiss();
                 if (onPositiveBtnClick != null) {
@@ -68,7 +70,7 @@ public class DialogUtil {
             });
         }
 
-        if (!StringUtils.isNullOrWhiteSpace(negativeButtonText)) {
+        if (!StringUtils.isBlank(negativeButtonText)) {
             builder.setNegativeButton(negativeButtonText, (DialogInterface dialogInterface, int i) -> {
                 dialogInterface.dismiss();
                 if (onNegativeBtnClick != null) {

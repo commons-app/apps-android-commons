@@ -21,6 +21,8 @@ import org.acra.annotation.AcraCore;
 import org.acra.annotation.AcraDialog;
 import org.acra.annotation.AcraMailSender;
 import org.acra.data.StringFormat;
+import org.wikipedia.AppAdapter;
+import org.wikipedia.language.AppLanguageLookUpTable;
 
 import java.io.File;
 
@@ -49,7 +51,12 @@ import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static org.acra.ReportField.*;
+import static org.acra.ReportField.ANDROID_VERSION;
+import static org.acra.ReportField.APP_VERSION_CODE;
+import static org.acra.ReportField.APP_VERSION_NAME;
+import static org.acra.ReportField.PHONE_MODEL;
+import static org.acra.ReportField.STACK_TRACE;
+import static org.acra.ReportField.USER_COMMENT;
 
 @AcraCore(
         buildConfigClass = BuildConfig.class,
@@ -97,6 +104,15 @@ public class CommonsApplication extends Application {
 
     private RefWatcher refWatcher;
 
+    private static CommonsApplication INSTANCE;
+    public static CommonsApplication getInstance() {
+        return INSTANCE;
+    }
+
+    private AppLanguageLookUpTable languageLookUpTable;
+    public AppLanguageLookUpTable getLanguageLookUpTable() {
+        return languageLookUpTable;
+    }
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -104,12 +120,15 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        INSTANCE = this;
         ACRA.init(this);
 
         ApplicationlessInjection
                 .getInstance(this)
                 .getCommonsApplicationComponent()
                 .inject(this);
+
+        AppAdapter.set(new CommonsAppAdapter(sessionManager, defaultPrefs));
 
         initTimber();
 
@@ -129,6 +148,8 @@ public class CommonsApplication extends Application {
         }
 
         createNotificationChannel(this);
+
+        languageLookUpTable = new AppLanguageLookUpTable(this);
 
         // This handler will catch exceptions thrown from Observables after they are disposed,
         // or from Observables that are (deliberately or not) missing an onError handler.
@@ -183,6 +204,10 @@ public class CommonsApplication extends Application {
                 manager.createNotificationChannel(channel);
             }
         }
+    }
+
+    public String getUserAgent() {
+        return "Commons/" + ConfigUtils.getVersionNameWithSha(this) + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
     }
 
     /**

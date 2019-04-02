@@ -11,13 +11,11 @@ import android.widget.Toast;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.page.PageTitle;
+import org.wikipedia.util.UriUtil;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.LinkedHashMap;
 import java.util.Locale;
-import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
@@ -32,20 +30,8 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class Utils {
 
-    /**
-     * Strips localization symbols from a string.
-     * Removes the suffix after "@" and quotes.
-     *
-     * @param s string possibly containing localization symbols
-     * @return stripped string
-     */
-    public static String stripLocalizedString(String s) {
-        Matcher matcher = Pattern.compile("\\\"(.*)\\\"(@\\w+)?").matcher(s);
-        if (matcher.find()) {
-            return matcher.group(1);
-        } else {
-            return s;
-        }
+    public static PageTitle getPageTitle(@NonNull String title) {
+        return new PageTitle(title, new WikiSite(BuildConfig.COMMONS_URL));
     }
 
     /**
@@ -55,36 +41,9 @@ public class Utils {
      * @return URL of thumbnail
      */
     public static String makeThumbBaseUrl(@NonNull String filename) {
-        String name = new PageTitle(filename).getPrefixedText();
+        String name = getPageTitle(filename).getPrefixedText();
         String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
-        return String.format("%s/%s/%s/%s", BuildConfig.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
-    }
-
-    /**
-     * URL Encode an URL in UTF-8 format
-     * @param url Unformatted URL
-     * @return Encoded URL
-     */
-    public static String urlEncode(String url) {
-        try {
-            return URLEncoder.encode(url, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Capitalizes the first character of a string.
-     *
-     * @param string String to alter
-     * @return string with capitalized first character
-     */
-    public static String capitalize(String string) {
-        if (string.length() > 0) {
-            return string.substring(0, 1).toUpperCase(Locale.getDefault()) + string.substring(1);
-        } else {
-            return string;
-        }
+        return String.format("%s/%s/%s/%s", BuildConfig.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), UriUtil.encodeURL(name));
     }
 
     /**
@@ -234,15 +193,6 @@ public class Utils {
         return bitmap;
     }
 
-    public static <K,V> Map<K,V>  arraysToMap(K[] kArray, V[] vArray){
-        if(kArray.length!=vArray.length)
-            throw new RuntimeException("arraysToMap array sizes don't match");
-        Map<K,V> map=new LinkedHashMap<>();
-        for (int i=0;i<vArray.length;i++){
-            map.put(kArray[i], vArray[i]);
-        }
-        return map;
-    }
     /*
     *Copies the content to the clipboard
     *

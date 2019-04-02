@@ -7,6 +7,8 @@ import android.util.AttributeSet;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
@@ -14,7 +16,6 @@ import androidx.collection.LruCache;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -56,7 +57,7 @@ public class MediaWikiImageView extends SimpleDraweeView {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(thumbnail -> {
-                    if (!StringUtils.isNullOrWhiteSpace(thumbnail)) {
+                    if (!StringUtils.isBlank(thumbnail)) {
                         setImageUrl(thumbnail);
                     }
                 }, throwable -> Timber.e(throwable, "Error occurred while fetching thumbnail"));
@@ -89,8 +90,10 @@ public class MediaWikiImageView extends SimpleDraweeView {
     }
 
     //TODO: refactor the logic for thumbnails. ImageInfo API can be used to fetch thumbnail upfront
+
     /**
      * Fetches media thumbnail from the server
+     *
      * @param media
      * @return
      */

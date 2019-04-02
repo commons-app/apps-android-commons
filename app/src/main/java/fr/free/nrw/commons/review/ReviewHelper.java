@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.review;
 
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.dataclient.mwapi.RecentChange;
+
 import java.util.List;
 import java.util.Random;
 
@@ -9,10 +12,8 @@ import javax.inject.Singleton;
 
 import androidx.core.util.Pair;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
-import fr.free.nrw.commons.mwapi.model.RecentChange;
 import io.reactivex.Single;
 
 @Singleton
@@ -36,6 +37,7 @@ public class ReviewHelper {
      * - Picks a random file from those changes
      * - Checks if the file is nominated for deletion
      * - Retries upto 5 times for getting a file which is not nominated for deletion
+     *
      * @return
      */
     Single<Media> getRandomMedia() {
@@ -75,7 +77,7 @@ public class ReviewHelper {
         for (int i = 0; i < count; i++) {
             int randomIndex = randomIndexes[i];
             RecentChange recentChange = recentChanges.get(randomIndex);
-            if (recentChange.getType().equals("log") && !recentChange.getOldRevisionId().equals("0")) {
+            if (recentChange.getType().equals("log") && !(recentChange.getOldRevisionId() == 0)) {
                 // For log entries, we only want ones where old_revid is zero, indicating a new file
                 continue;
             }

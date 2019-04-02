@@ -352,10 +352,17 @@
   <string name="display_location_permission_title">Vis placeringstilladelse</string>
   <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
+  <string name="notsure">Ikke sikker</string>
+  <string name="review_category_no_button_text">SER FINT UD</string>
+  <string name="review_spam_no_button_text">SER FINT UD</string>
+  <string name="review_copyright_no_button_text">SER FINT UD</string>
+  <string name="review_thanks_yes_button_text">JA, HVORFOR IKKE</string>
+  <string name="review_thanks_no_button_text">NÆSTE BILLEDE</string>
   <string name="no_image">Ingen billeder brugt</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
   <string name="menu_option_archived">Vis arkiverede</string>
   <string name="menu_option_unread">Vis ulæste</string>
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
+  <string name="skip_image">Spring over dette billede</string>
 </resources>

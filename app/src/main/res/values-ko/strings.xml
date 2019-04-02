@@ -422,6 +422,7 @@
   <string name="nominate_for_deletion_done">완료</string>
   <string name="notsure">확실치 않음</string>
   <string name="review_spam_report_problem">스팸</string>
+  <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
   <string name="no_notification">읽지 않은 알림이 없습니다</string>
   <string name="no_archived_notification">보관된 알림이 없습니다</string>
   <string name="menu_option_archived">보관한 항목 보기</string>

@@ -2,6 +2,17 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -11,7 +22,6 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.CustomProxy;
-import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -166,7 +176,7 @@ public class UploadPresenter {
                 break;
             default:
                 String errorMessageForResult = getErrorMessageForResult(context, errorCode);
-                if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
+                if (StringUtils.isBlank(errorMessageForResult)) {
                     return;
                 }
                 view.showBadPicturePopup(errorMessageForResult);
