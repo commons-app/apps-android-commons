@@ -81,6 +81,8 @@ public class ReviewActivity extends AuthenticatedActivity {
      */
     public static void startYourself(Context context, String title) {
         Intent reviewActivity = new Intent(context, ReviewActivity.class);
+        reviewActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        reviewActivity.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(reviewActivity);
     }
 
