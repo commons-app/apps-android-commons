@@ -28,6 +28,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.1'
     implementation 'com.facebook.fresco:fresco:1.13.0'
     implementation 'com.drewnoakes:metadata-extractor:2.11.0'
+    implementation 'com.dmitrybrant:wikimedia-android-data-client:0.0.12'
 
     // UI
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
@@ -191,8 +192,6 @@ android {
             buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.org/wiki/\""
             buildConfigField "String", "COMMONS_URL", "\"https://commons.wikimedia.org\""
             buildConfigField "String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.org/wiki/\""
-            buildConfigField "String", "EVENTLOG_URL", "\"https://www.wikimedia.org/beacon/event\""
-            buildConfigField "String", "EVENTLOG_WIKI", "\"commonswiki\""
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes\""
             buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.org/wiki/Special:PasswordReset\""
@@ -224,8 +223,6 @@ android {
             buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/\""
             buildConfigField "String", "COMMONS_URL", "\"https://commons.wikimedia.beta.wmflabs.org\""
             buildConfigField "String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/wiki/\""
-            buildConfigField "String", "EVENTLOG_URL", "\"https://commons.wikimedia.beta.wmflabs.org/beacon/event\""
-            buildConfigField "String", "EVENTLOG_WIKI", "\"commonswiki\""
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Main_Page&welcome=yes\""
             buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/Special:PasswordReset\""

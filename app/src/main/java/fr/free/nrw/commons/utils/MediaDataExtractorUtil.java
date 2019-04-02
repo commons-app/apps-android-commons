@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -33,13 +35,13 @@ public class MediaDataExtractorUtil {
      * @return
      */
     public static List<String> extractCategoriesFromList(String source) {
-        if (StringUtils.isNullOrWhiteSpace(source)) {
+        if (StringUtils.isBlank(source)) {
             return new ArrayList<>();
         }
         String[] cats = source.split("\\|");
         List<String> categories = new ArrayList<>();
         for (String category : cats) {
-            if (!StringUtils.isNullOrWhiteSpace(category.trim())) {
+            if (!StringUtils.isBlank(category.trim())) {
                 categories.add(category);
             }
         }

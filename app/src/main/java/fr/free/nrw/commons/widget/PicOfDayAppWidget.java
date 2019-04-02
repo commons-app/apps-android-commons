@@ -70,7 +70,7 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                                 // View in browser
                                 Intent viewIntent = new Intent();
                                 viewIntent.setAction(ACTION_VIEW);
-                                viewIntent.setData(response.getFilePageTitle().getMobileUri());
+                                viewIntent.setData(Uri.parse(response.getPageTitle().getMobileUri()));
                                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, 0);
                                 views.setOnClickPendingIntent(R.id.appwidget_image, pendingIntent);
 

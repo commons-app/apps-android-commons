@@ -6,7 +6,6 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient.mapType
-import fr.free.nrw.commons.utils.DateUtils
 import junit.framework.Assert.assertEquals
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -22,6 +21,8 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.wikipedia.util.DateUtil
+import java.util.*
 import kotlin.random.Random
 
 /**
@@ -189,7 +190,7 @@ class OkHttpJsonApiClientTest {
      */
     @Test
     fun getImageWithGenerator() {
-        val template = "Template:Potd/" + DateUtils.getCurrentDate()
+        val template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort().format(Date())
         server.enqueue(getMediaList("", "", "", 1))
 
         val media = testObject.getMedia(template, true)!!.blockingGet()
@@ -215,7 +216,7 @@ class OkHttpJsonApiClientTest {
      */
     @Test
     fun getPictureOfTheDay() {
-        val template = "Template:Potd/" + DateUtils.getCurrentDate()
+        val template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort().format(Date())
         server.enqueue(getMediaList("", "", "", 1))
 
         val media = testObject.pictureOfTheDay?.blockingGet()

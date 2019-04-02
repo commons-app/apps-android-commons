@@ -4,6 +4,15 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.gallery.ExtMetadata;
+import org.wikipedia.gallery.ImageInfo;
+import org.wikipedia.page.PageTitle;
+import org.wikipedia.util.DateUtil;
+import org.wikipedia.util.StringUtil;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -11,17 +20,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.media.model.ExtMetadata;
-import fr.free.nrw.commons.media.model.ImageInfo;
-import fr.free.nrw.commons.media.model.MwQueryPage;
-import fr.free.nrw.commons.utils.DateUtils;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
-import fr.free.nrw.commons.utils.StringUtils;
 
 public class Media implements Parcelable {
 
@@ -37,7 +40,6 @@ public class Media implements Parcelable {
         }
     };
 
-    private static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
     // Primary metadata fields
     protected Uri localUri;
     protected String imageUrl;
@@ -88,7 +90,7 @@ public class Media implements Parcelable {
      * @param creator Media creator
      */
     public Media(Uri localUri, String imageUrl, String filename, String description,
-                 long dataLength, Date dateCreated, @Nullable Date dateUploaded, String creator) {
+                 long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this();
         this.localUri = localUri;
         this.imageUrl = imageUrl;
@@ -144,26 +146,16 @@ public class Media implements Parcelable {
      * Gets media display title
      * @return Media title
      */
-    public String getDisplayTitle() {
-        if (filename == null) {
-            return "";
-        }
-        // FIXME: Gross hack because my regex skills suck maybe or I am too lazy who knows
-        String title = getFilePageTitle().getDisplayText().replaceFirst("^File:", "");
-        Matcher matcher = displayTitlePattern.matcher(title);
-        if (matcher.matches()) {
-            return matcher.group(1);
-        } else {
-            return title;
-        }
+    @NonNull public String getDisplayTitle() {
+        return filename != null ? getPageTitle().getDisplayTextWithoutNamespace().replaceFirst("[.][^.]+$", "") : "";
     }
 
     /**
      * Gets file page title
      * @return New media page title
      */
-    public PageTitle getFilePageTitle() {
-        return new PageTitle("File:" + getFilename().replaceFirst("^File:", ""));
+    @NonNull public PageTitle getPageTitle() {
+        return Utils.getPageTitle(getFilename());
     }
 
     /**
@@ -344,7 +336,7 @@ public class Media implements Parcelable {
     @Nullable
     public static Media from(MwQueryPage page) {
         ImageInfo imageInfo = page.imageInfo();
-        if(imageInfo == null) {
+        if (imageInfo == null) {
             return null;
         }
         ExtMetadata metadata = imageInfo.getMetadata();
@@ -358,13 +350,13 @@ public class Media implements Parcelable {
                 page.title(),
                 "",
                 0,
-                DateUtils.getDateFromString(metadata.dateTimeOriginal().value()),
-                DateUtils.getDateFromString(metadata.dateTime().value()),
-                StringUtils.getParsedStringFromHtml(metadata.artist().value())
+                safeParseDate(metadata.dateTimeOriginal().value()),
+                safeParseDate(metadata.dateTime().value()),
+                StringUtil.fromHtml(metadata.artist().value()).toString()
         );
 
         String language = Locale.getDefault().getLanguage();
-        if (StringUtils.isNullOrWhiteSpace(language)) {
+        if (StringUtils.isBlank(language)) {
             language = "default";
         }
 
@@ -373,7 +365,7 @@ public class Media implements Parcelable {
         String latitude = metadata.gpsLatitude().value();
         String longitude = metadata.gpsLongitude().value();
 
-        if(!StringUtils.isNullOrWhiteSpace(latitude) && !StringUtils.isNullOrWhiteSpace(longitude)) {
+        if (!StringUtils.isBlank(latitude) && !StringUtils.isBlank(longitude)) {
             LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude), 0);
             media.setCoordinates(latLng);
         }
@@ -464,6 +456,14 @@ public class Media implements Parcelable {
         } else {
             // FIXME: return the first available non-English description?
             return "";
+        }
+    }
+
+    @Nullable private static Date safeParseDate(String dateStr) {
+        try {
+            return DateUtil.getIso8601DateFormatShort().parse(dateStr);
+        } catch (ParseException e) {
+            return null;
         }
     }
 
