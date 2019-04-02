@@ -117,6 +117,14 @@
 
             </LinearLayout>
             </ScrollView>
+
+            <View
+                android:id="@+id/bottomview"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_alignParentBottom="true"
+                android:background="?attr/colorPrimaryDark"></View>
+
             <com.viewpagerindicator.CirclePageIndicator
                 android:id="@+id/reviewPagerIndicator"
                 android:layout_width="match_parent"
