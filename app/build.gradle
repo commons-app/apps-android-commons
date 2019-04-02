@@ -85,7 +85,7 @@ dependencies {
     // Support libraries
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "androidx.appcompat:appcompat:1.0.2"
-    implementation "com.google.android.material:material:1.1.0-alpha04"
+    implementation "com.google.android.material:material:1.1.0-alpha05"
     implementation "androidx.browser:browser:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
