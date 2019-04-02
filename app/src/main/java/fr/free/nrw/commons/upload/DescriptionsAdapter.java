@@ -229,7 +229,17 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     int defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(context);
                     spinnerDescriptionLanguages.setSelection(defaultLocaleIndex);
                 } else {
-                    spinnerDescriptionLanguages.setSelection(0);
+                    int availableLangIndex = -1;
+                    for (int i = 0; i < languagesAdapter.getCount(); i++) {
+                        if (!selectedLanguages.containsKey(languagesAdapter.getLanguageCode(i))) {
+                            availableLangIndex = i;
+                            break;
+                        }
+                    }
+                    if (availableLangIndex >= 0) {
+                        spinnerDescriptionLanguages.setSelection(availableLangIndex);
+                        selectedLanguages.put(spinnerDescriptionLanguages, languagesAdapter.getLanguageCode(position));
+                    }
                 }
             } else {
                 spinnerDescriptionLanguages.setSelection(description.getSelectedLanguageIndex());
