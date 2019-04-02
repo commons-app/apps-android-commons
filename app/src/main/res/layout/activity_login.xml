@@ -235,7 +235,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:elevation="8dp"
-            app:srcCompat="@drawable/commons_logo_large"
+            app:srcCompat="@drawable/commons_logo"
             tools:ignore="UnusedAttribute" />
     </FrameLayout>
 
