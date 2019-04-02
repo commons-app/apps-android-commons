@@ -14,9 +14,5 @@ public class Prefs {
         public static final String CC_BY_SA_4 = "CC BY-SA 4.0";
         public static final String CC_BY_4 = "CC BY 4.0";
         public static final String CC0 = "CC0";
-
-        // kept for backward compatibility to v2.1
-        @Deprecated public static final String CC_BY = "CC BY";
-        @Deprecated public static final String CC_BY_SA = "CC BY-SA";
     }
 }
