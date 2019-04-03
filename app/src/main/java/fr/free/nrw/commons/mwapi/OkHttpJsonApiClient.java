@@ -319,10 +319,13 @@ public class OkHttpJsonApiClient {
             if (response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
                 MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
-                putContinueValues(keyword, mwQueryResponse.continuation());
-                if (mwQueryResponse.query() == null) {
+                if (null == mwQueryResponse
+                    || null == mwQueryResponse.query()
+                    || null == mwQueryResponse.query().pages()) {
                     return mediaList;
                 }
+                putContinueValues(keyword, mwQueryResponse.continuation());
+
                 List<MwQueryPage> pages = mwQueryResponse.query().pages();
                 for (MwQueryPage page : pages) {
                     Media media = Media.from(page);
