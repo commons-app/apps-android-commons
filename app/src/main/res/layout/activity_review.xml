@@ -19,6 +19,7 @@
                 android:id="@+id/mediaContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@id/toolbar"
                 android:orientation="horizontal"
                 android:visibility="gone" />
 
@@ -27,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:layout_below="@+id/toolbar"
+                android:layout_below="@+id/mediaContainer"
                 android:text="@string/skip_image"
                 android:textColor="@color/button_blue_dark"
                 android:textStyle="bold" />

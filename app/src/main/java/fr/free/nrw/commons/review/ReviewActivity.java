@@ -129,6 +129,7 @@ public class ReviewActivity extends AuthenticatedActivity {
                             .addToBackStack(null)
                             .commit();
                 }
+                forceInitBackButton();
             }
         });
     }
