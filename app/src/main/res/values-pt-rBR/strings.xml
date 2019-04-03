@@ -258,7 +258,7 @@
   <string name="upload_problem_different_geolocation">Esta foto foi tirada em um local diferente.</string>
   <string name="upload_problem_fbmd">Por favor, apenas envie fotos que você tirou sozinho. Não faça upload de fotos que você encontrou nas contas do Facebook de outras pessoas.</string>
   <string name="upload_problem_do_you_continue">Você ainda quer enviar esta foto?</string>
-  <string name="internet_downloaded" fuzzy="true">Por favor, só envie fotos que você tirou sozinho. Não faça upload de fotos baixadas da Internet</string>
+  <string name="internet_downloaded">Por favor, só envie fotos que você tirou. Não faça upload de fotos baixadas da Internet.</string>
   <string name="give_permission">Dar permissão</string>
   <string name="use_external_storage">Usar o armazenamento externo</string>
   <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
@@ -446,7 +446,7 @@
   <string name="achievements_fetch_failed">Algo deu errado, não conseguimos buscar suas conquistas</string>
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Exibir campanhas</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Toque aqui para ver as campanhas em andamento</string>
+  <string name="display_campaigns_explanation">Ver as campanhas em andamento</string>
   <string name="nearby_campaign_dismiss_message">Você não verá mais as campanhas. No entanto, você pode reativar essa notificação em Configurações, se desejar.</string>
   <string name="this_function_needs_network_connection">Esta função requer conexão de rede, por favor, verifique suas configurações de conexão.</string>
   <string name="bad_token_error_proposed_solution">O carregamento falhou devido a problemas com o token de edição. Por favor, tente sair e entrar novamente.</string>
@@ -463,6 +463,8 @@
   <string name="nominate_for_deletion_edit_file_page">Acionando mensagem de exclusão ao arquivo</string>
   <string name="nominate_for_deletion_done">Feito</string>
   <string name="nominate_for_deletion_notify_user">Notificando o usuário na página de discussão</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Adicionando arquivo ao registro de consulta excluído</string>
+  <string name="nominate_for_deletion_create_deletion_request">Criando subpágina para a consulta de exclusão</string>
   <string name="notsure">Talvez</string>
   <string name="send_thank_success_title">Enviando obrigado: Sucesso</string>
   <string name="send_thank_success_message">Enviado com sucesso graças para %1$s</string>
@@ -483,6 +485,7 @@
   <string name="review_spam_report_question">Está fora do escopo porque é</string>
   <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">É violação de direitos autorais porque é</string>
+  <string name="review_c_violation_report_problem">copyRightViolation</string>
   <string name="review_category_yes_button_text">NÃO, MIS-CATEGORIZADO</string>
   <string name="review_category_no_button_text">PARECE BEM</string>
   <string name="review_spam_yes_button_text">NÃO, FORA DE ESCOPO</string>
@@ -491,6 +494,8 @@
   <string name="review_copyright_no_button_text">PARECE BEM</string>
   <string name="review_thanks_yes_button_text">SIM, PORQUE NÃO</string>
   <string name="review_thanks_no_button_text">PRÓXIMA IMAGEM</string>
+  <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>
+  <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commoms.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
     <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>
@@ -509,4 +514,5 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos usuários que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
+  <string name="skip_image">PULAR ESTA IMAGEM</string>
 </resources>

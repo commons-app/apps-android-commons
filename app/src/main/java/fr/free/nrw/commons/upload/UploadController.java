@@ -10,7 +10,6 @@ import android.content.ServiceConnection;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -20,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
-import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -32,6 +30,10 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 @Singleton
@@ -44,7 +46,6 @@ public class UploadController {
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
     }
-
 
     @Inject
     public UploadController(SessionManager sessionManager,
@@ -133,81 +134,92 @@ public class UploadController {
         String license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         contribution.setLicense(license);
 
-        //FIXME: Add permission request here. Only executeAsyncTask if permission has been granted
-        new AsyncTask<Void, Void, Contribution>() {
+        uploadTask(contribution, onComplete);
+    }
 
-            // Fills up missing information about Contributions
-            // Only does things that involve some form of IO
-            // Runs in background thread
-            @Override
-            protected Contribution doInBackground(Void... voids /* stare into you */) {
-                long length;
-                ContentResolver contentResolver = context.getContentResolver();
-                try {
-                    if (contribution.getDataLength() <= 0) {
-                        Timber.d("UploadController/doInBackground, contribution.getLocalUri():" + contribution.getLocalUri());
-                        AssetFileDescriptor assetFileDescriptor = contentResolver
-                                .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().getPath())), "r");
-                        if (assetFileDescriptor != null) {
-                            length = assetFileDescriptor.getLength();
-                            if (length == -1) {
-                                // Let us find out the long way!
-                                length = countBytes(contentResolver
-                                        .openInputStream(contribution.getLocalUri()));
-                            }
-                            contribution.setDataLength(length);
-                        }
+    /**
+     * Initiates the upload task
+     * @param contribution
+     * @param onComplete
+     * @return
+     */
+    private Disposable uploadTask(Contribution contribution, ContributionUploadProgress onComplete) {
+        return Single.fromCallable(() -> makeUpload(contribution))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(finalContribution -> onUploadCompleted(finalContribution, onComplete));
+    }
+
+    /**
+     * Make the Contribution object ready to be uploaded
+     * @param contribution
+     * @return
+     */
+    private Contribution makeUpload(Contribution contribution) {
+        long length;
+        ContentResolver contentResolver = context.getContentResolver();
+        try {
+            if (contribution.getDataLength() <= 0) {
+                Timber.d("UploadController/doInBackground, contribution.getLocalUri():%s", contribution.getLocalUri());
+                AssetFileDescriptor assetFileDescriptor = contentResolver
+                        .openAssetFileDescriptor(Uri.fromFile(new File(contribution.getLocalUri().getPath())), "r");
+                if (assetFileDescriptor != null) {
+                    length = assetFileDescriptor.getLength();
+                    if (length == -1) {
+                        // Let us find out the long way!
+                        length = countBytes(contentResolver
+                                .openInputStream(contribution.getLocalUri()));
                     }
-                } catch (IOException e) {
-                    Timber.e(e, "IO Exception: ");
-                } catch (NullPointerException e) {
-                    Timber.e(e, "Null Pointer Exception: ");
-                } catch (SecurityException e) {
-                    Timber.e(e, "Security Exception: ");
+                    contribution.setDataLength(length);
                 }
-
-                String mimeType = (String) contribution.getTag("mimeType");
-                Boolean imagePrefix = false;
-
-                if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
-                    mimeType = contentResolver.getType(contribution.getLocalUri());
-                }
-
-                if (mimeType != null) {
-                    contribution.setTag("mimeType", mimeType);
-                    imagePrefix = mimeType.startsWith("image/");
-                    Timber.d("MimeType is: %s", mimeType);
-                }
-
-                if (imagePrefix && contribution.getDateCreated() == null) {
-                    Timber.d("local uri   " + contribution.getLocalUri());
-                    Cursor cursor = contentResolver.query(contribution.getLocalUri(),
-                            new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
-                    if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
-                        cursor.moveToFirst();
-                        Date dateCreated = new Date(cursor.getLong(0));
-                        Date epochStart = new Date(0);
-                        if (dateCreated.equals(epochStart) || dateCreated.before(epochStart)) {
-                            // If date is incorrect (1st second of unix time) then set it to the current date
-                            dateCreated = new Date();
-                        }
-                        contribution.setDateCreated(dateCreated);
-                        cursor.close();
-                    } else {
-                        contribution.setDateCreated(new Date());
-                    }
-                }
-                return contribution;
             }
+        } catch (IOException | NullPointerException | SecurityException e) {
+            Timber.e(e, "Exception occurred while uploading image");
+        }
 
-            @Override
-            protected void onPostExecute(Contribution contribution) {
-                super.onPostExecute(contribution);
-                //Starts the upload. If commented out, user can proceed to next Fragment but upload doesn't happen
-                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
-                onComplete.onUploadStarted(contribution);
+        String mimeType = (String) contribution.getTag("mimeType");
+        boolean imagePrefix = false;
+
+        if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
+            mimeType = contentResolver.getType(contribution.getLocalUri());
+        }
+
+        if (mimeType != null) {
+            contribution.setTag("mimeType", mimeType);
+            imagePrefix = mimeType.startsWith("image/");
+            Timber.d("MimeType is: %s", mimeType);
+        }
+
+        if (imagePrefix && contribution.getDateCreated() == null) {
+            Timber.d("local uri   %s", contribution.getLocalUri());
+            Cursor cursor = contentResolver.query(contribution.getLocalUri(),
+                    new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
+            if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
+                cursor.moveToFirst();
+                Date dateCreated = new Date(cursor.getLong(0));
+                Date epochStart = new Date(0);
+                if (dateCreated.equals(epochStart) || dateCreated.before(epochStart)) {
+                    // If date is incorrect (1st second of unix time) then set it to the current date
+                    dateCreated = new Date();
+                }
+                contribution.setDateCreated(dateCreated);
+                cursor.close();
+            } else {
+                contribution.setDateCreated(new Date());
             }
-        }.executeOnExecutor(Executors.newFixedThreadPool(1)); // TODO remove this by using a sensible thread handling strategy
+        }
+        return contribution;
+    }
+
+    /**
+     * When the contribution object is completely formed, the item is queued to the upload service
+     * @param contribution
+     * @param onComplete
+     */
+    private void onUploadCompleted(Contribution contribution, ContributionUploadProgress onComplete) {
+        //Starts the upload. If commented out, user can proceed to next Fragment but upload doesn't happen
+        uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+        onComplete.onUploadStarted(contribution);
     }
 
 

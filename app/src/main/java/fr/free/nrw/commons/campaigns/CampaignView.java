@@ -1,21 +1,22 @@
 package fr.free.nrw.commons.campaigns;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import org.wikipedia.util.DateUtil;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -66,19 +67,9 @@ public class CampaignView extends SwipableCardView {
         viewHolder = new ViewHolder(rootView);
         setOnClickListener(view -> {
             if (campaign != null) {
-                showCampaignInBrowser(campaign.getLink());
+                Utils.handleWebUrl(getContext(), Uri.parse(campaign.getLink()));
             }
         });
-    }
-
-    /**
-     * open the url associated with the campaign in the system's default browser
-     */
-    private void showCampaignInBrowser(String link) {
-        Intent view = new Intent();
-        view.setAction(Intent.ACTION_VIEW);
-        view.setData(Uri.parse(link));
-        getContext().startActivity(view);
     }
 
     public class ViewHolder {
@@ -95,13 +86,11 @@ public class CampaignView extends SwipableCardView {
             if (campaign != null) {
                 tvTitle.setText(campaign.getTitle());
                 tvDescription.setText(campaign.getDescription());
-                SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMM");
                 try {
-                    Date startDate = inputDateFormat.parse(campaign.getStartDate());
-                    Date endDate = inputDateFormat.parse(campaign.getEndDate());
-                    tvDates.setText(String.format("%1s - %2s", outputDateFormat.format(startDate),
-                        outputDateFormat.format(endDate)));
+                    Date startDate = DateUtil.getIso8601DateFormatShort().parse(campaign.getStartDate());
+                    Date endDate = DateUtil.getIso8601DateFormatShort().parse(campaign.getEndDate());
+                    tvDates.setText(String.format("%1s - %2s", DateUtil.getExtraShortDateString(startDate),
+                            DateUtil.getExtraShortDateString(endDate)));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

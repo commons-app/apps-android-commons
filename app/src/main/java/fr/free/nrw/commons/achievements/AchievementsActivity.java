@@ -26,6 +26,8 @@ import android.widget.TextView;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,7 +44,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -243,7 +244,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     @SuppressLint("CheckResult")
     private void setWikidataEditCount() {
         String userName = sessionManager.getUserName();
-        if (StringUtils.isNullOrWhiteSpace(userName)) {
+        if (StringUtils.isBlank(userName)) {
             return;
         }
         compositeDisposable.add(okHttpJsonApiClient.getWikidataEdits(userName)

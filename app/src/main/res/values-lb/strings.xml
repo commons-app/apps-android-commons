@@ -322,10 +322,12 @@
   <string name="notsure">Net sécher</string>
   <string name="send_thank_send">Merci schécken</string>
   <string name="send_thank_notification_title">Merci schécken</string>
+  <string name="review_thanks_no_button_text">NÄCHST BILD</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
   <string name="no_archived_notification">Dir hutt keng archivéier Notifikatiounen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
   <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>
   <string name="please_wait">Waart w.e.g. ...</string>
+  <string name="skip_image">DËST BILD IWWERWSPRANGEN</string>
 </resources>

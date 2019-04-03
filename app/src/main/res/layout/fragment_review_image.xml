@@ -67,12 +67,4 @@
 
         </LinearLayout>
 
-
-    <View
-        android:id="@+id/bottomview"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_alignParentBottom="true"
-        android:background="?attr/colorPrimaryDark"></View>
-
 </RelativeLayout>

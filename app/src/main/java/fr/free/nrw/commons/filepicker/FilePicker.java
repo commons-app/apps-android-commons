@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -65,11 +64,8 @@ public class FilePicker implements Constants {
 
     private static Intent createGalleryIntent(@NonNull Context context, int type) {
         storeType(context, type);
-        Intent intent = plainGalleryPickerIntent();
-        if (Build.VERSION.SDK_INT >= 18) {
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, configuration(context).allowsMultiplePickingInGallery());
-        }
-        return intent;
+        return plainGalleryPickerIntent()
+                .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, configuration(context).allowsMultiplePickingInGallery());
     }
 
     private static Intent createCameraForImageIntent(@NonNull Context context, int type) {

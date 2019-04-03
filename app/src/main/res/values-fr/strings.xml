@@ -266,7 +266,7 @@
   <string name="upload_problem_different_geolocation">Cette image a été prise à un emplacement différent.</string>
   <string name="upload_problem_fbmd">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez pas d\'images prises sur les comptes Facebook d\'autres personnes.</string>
   <string name="upload_problem_do_you_continue">Voulez-vous tout de même téléverser cette image ?</string>
-  <string name="internet_downloaded" fuzzy="true">Veuillez ne télécharger que des images que vous avez prises vous-même. Ne téléchargez pas d’images que vous avez récupéré depuis Internet</string>
+  <string name="internet_downloaded">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez pas d’images que vous avez récupérées depuis Internet</string>
   <string name="give_permission">Accorder le droit</string>
   <string name="use_external_storage">Utiliser le stockage externe</string>
   <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
@@ -454,7 +454,7 @@
   <string name="achievements_fetch_failed">Un problème est survenu, nous n\'avons pas pu récupérer vos accomplissements</string>
   <string name="ends_on">Se termine le:</string>
   <string name="display_campaigns">Campagnes d\'affichage</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Touchez ici pour voir les campagnes en cours</string>
+  <string name="display_campaigns_explanation">Voir les campagnes en cours</string>
   <string name="nearby_campaign_dismiss_message">Vous ne verrez plus les campagnes. Néanmoins, vous pouvez réactiver cette notification dans vos paramètres de configuration, si vous le souhaitez.</string>
   <string name="this_function_needs_network_connection">Cette fonction requiert une connexion réseau, veuillez consulter vos paramètres de connexion.</string>
   <string name="bad_token_error_proposed_solution">Le téléversement a échoué en raison d\'incidents liés au jeton d\'édition. Essayez de vous déconnecter puis de vous reconnecter.</string>
@@ -502,6 +502,8 @@
   <string name="review_copyright_no_button_text">SEMBLE CORRECT</string>
   <string name="review_thanks_yes_button_text">OUI, POURQUOI PAS</string>
   <string name="review_thanks_no_button_text">IMAGE SUIVANTE</string>
+  <string name="skip_image_explanation">Cliquer sur ce bouton vous fournira une autre image récemment téléversée de Wikimédia Communs.</string>
+  <string name="review_image_explanation">Vous pouvez revoir les images et améliorer la qualité de Wikimédia Communs.\n Les quatre paramètres à revoir sont : \n - Cette image est-elle à propos ? \n - Cette image respecte-t-elle les règles de droit d’auteur ? \n - Cette image est-elle bien catégorisée ? \n - Si tout va bien, vous pouvez aussi remercier le contributeur.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Réception de contenu partagé. Le traitement de l\'image peut prendre un certain temps en fonction de la taille de l\'image et de votre matériel</item>
     <item quantity="other">Réception de contenu partagé. Le traitement des images peut prendre un certain temps en fonction de la taille des images et de votre matériel</item>
@@ -517,7 +519,8 @@
   <string name="error_occurred_in_picking_images">Erreur lors de la sélection des images</string>
   <string name="image_chooser_title">Choisir les images à téléverser</string>
   <string name="please_wait">Veuillez patienter…</string>
-  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Communs a choisi comme quelques-unes de la meilleure qualité sur le site.</string>
+  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Communs a choisi comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par les lieux de proximité sont les images téléversées par la découverte des lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionalité permet aux contributeurs d\'envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles – en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
+  <string name="skip_image">SAUTER CETTE IMAGE</string>
 </resources>
