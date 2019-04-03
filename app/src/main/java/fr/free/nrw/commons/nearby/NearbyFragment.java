@@ -180,15 +180,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Initialize bottom sheet behaviour (sheet for map list.) Set height 9/16 of all window.
+     * Initialize bottom sheet behaviour (sheet for map list.)
      * Add callback for bottom sheet changes, so that we can sync it with bottom sheet for details
      * (sheet for nearby details)
      */
     private void initBottomSheetBehaviour() {
 
         transparentView.setAlpha(0);
-        bottomSheet.getLayoutParams().height = getActivity().getWindowManager()
-                .getDefaultDisplay().getHeight() / 16 * 9;
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
 
