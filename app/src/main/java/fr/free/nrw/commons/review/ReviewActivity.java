@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -59,6 +60,8 @@ public class ReviewActivity extends AuthenticatedActivity {
     ReviewViewPager reviewPager;
     @BindView(R.id.skip_image)
     Button skip_image_button;
+    @BindView(R.id.skip_image_row)
+    LinearLayout skipimagerow;
     @BindView(R.id.imageView)
     SimpleDraweeView simpleDraweeView;
     @BindView(R.id.progressBar)
@@ -69,6 +72,8 @@ public class ReviewActivity extends AuthenticatedActivity {
     ImageView skipImageInfo;
     @BindView(R.id.review_image_info)
     ImageView reviewImageInfo;
+    @BindView(R.id.bottomview)
+    View bottomview;
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
     private MediaDetailFragment mediaDetails;
@@ -133,7 +138,11 @@ public class ReviewActivity extends AuthenticatedActivity {
             @Override
             public void onClick(View v) {
                 peerreview.setVisibility(View.GONE);
-                skip_image_button.setVisibility(View.GONE);
+                skipimagerow.setVisibility(View.GONE);
+                pagerIndicator.setVisibility(View.GONE);
+                reviewImageInfo.setVisibility(View.GONE);
+                bottomview.setVisibility(View.GONE);
+
                 mediaContainer.setVisibility(View.VISIBLE);
                 if (mediaDetails == null || !mediaDetails.isVisible()) {
                     mediaDetails = MediaDetailFragment.forMedia(0, false, false);
@@ -156,7 +165,11 @@ public class ReviewActivity extends AuthenticatedActivity {
         super.onBackPressed();
         if (mediaContainer.getVisibility() == View.VISIBLE) {
             peerreview.setVisibility(View.VISIBLE);
-            skip_image_button.setVisibility(View.VISIBLE);
+            skipimagerow.setVisibility(View.VISIBLE);
+            pagerIndicator.setVisibility(View.VISIBLE);
+            reviewImageInfo.setVisibility(View.VISIBLE);
+            bottomview.setVisibility(View.VISIBLE);
+
             mediaContainer.setVisibility(View.GONE);
         }
     }
