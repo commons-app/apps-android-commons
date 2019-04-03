@@ -65,8 +65,8 @@ public class ReviewActivity extends AuthenticatedActivity {
     TextView imageCaption;
     @BindView(R.id.mediaContainer)
     FrameLayout mediaContainer;
-    @BindView(R.id.temp)
-    ScrollView temp;
+    @BindView(R.id.peerreview)
+    ScrollView peerreview;
     @Inject
     MediaWikiApi mwApi;
 
@@ -115,13 +115,12 @@ public class ReviewActivity extends AuthenticatedActivity {
         simpleDraweeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                temp.setVisibility(View.GONE);
+                peerreview.setVisibility(View.GONE);
                 skip_image_button.setVisibility(View.GONE);
                 mediaContainer.setVisibility(View.VISIBLE);
                 if (mediaDetails == null || !mediaDetails.isVisible()) {
-                    // set isFeaturedImage true for featured images, to include author field on media detail
                     mediaDetails = MediaDetailFragment.forMedia(0, false, false);
-                    mediaDetails.setFilename(fileName);
+                    mediaDetails.setFilename("File:" + fileName);
                     FragmentManager supportFragmentManager = getSupportFragmentManager();
                     supportFragmentManager
                             .beginTransaction()
@@ -138,7 +137,7 @@ public class ReviewActivity extends AuthenticatedActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (mediaContainer.getVisibility() == View.VISIBLE) {
-            temp.setVisibility(View.VISIBLE);
+            peerreview.setVisibility(View.VISIBLE);
             skip_image_button.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);
         }
