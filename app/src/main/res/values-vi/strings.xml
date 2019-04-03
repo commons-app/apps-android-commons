@@ -132,17 +132,14 @@
   <string name="tutorial_1_text">Wikimedia Commons là nơi lưu giữ phần nhiều hình ảnh xuất hiện trong Wikipedia.</string>
   <string name="tutorial_1_subtext">Các hình ảnh của bạn giúp giáo dục người dân trên khắp thế giới!</string>
   <string name="tutorial_2_text">Xin hãy tải lên các hình ảnh do chính bạn chụp hoặc vẽ:</string>
-  <string name="tutorial_2_subtext">Thiên nhiên (bông hoa, thú vật, cảnh núi)\n* Vật nhân tạo (xe đạp, nhà ga, món ăn)\n* Nhân vật nổi tiếng (thị trưởng của bạn, cầu thủ đội tuyển mà bạn gặp)</string>
   <string name="tutorial_2_subtext_1">Thiên nhiên (bông hoa, thú vật, cảnh núi)</string>
   <string name="tutorial_2_subtext_2">Vật nhân tạo (xe đạp, nhà ga, món ăn)</string>
   <string name="tutorial_2_subtext_3">Nhân vật nổi tiếng (thị trưởng của bạn, cầu thủ đội tuyển mà bạn gặp)</string>
   <string name="tutorial_3_text">Xin DỪNG tải lên:</string>
-  <string name="tutorial_3_subtext">- Hình tự sướng hoặc hình bạn bè\n- Hình ảnh tải về từ Internet\n- Ảnh chụp màn hình của ứng dụng thương mại</string>
   <string name="tutorial_3_subtext_1">Ảnh tự chụp hoặc hình bạn bè</string>
   <string name="tutorial_3_subtext_2">Hình ảnh trên Internet tải về</string>
   <string name="tutorial_3_subtext_3">Ảnh chụp màn hình của ứng dụng có bản quyền</string>
   <string name="tutorial_4_text">Tập tin tải lên ví dụ:</string>
-  <string name="tutorial_4_subtext">- Tiêu đề: Nhà hát Opera Sydney\n- Miêu tả: Nhà hát Opera Sydney nhìn qua cảng\n- Thể loại: Nhà hát Opera Sydney nhìn từ phía tây, Nhà hát Opera Sydney nhìn từ xa</string>
   <string name="tutorial_4_subtext_1">Tiêu đề: Nhà hát Opera Sydney</string>
   <string name="tutorial_4_subtext_2">Miêu tả: Nhà hát Opera Sydney nhìn qua cảng</string>
   <string name="tutorial_4_subtext_3">Thể loại: Nhà hát Opera Sydney nhìn từ phía tây, Nhà hát Opera Sydney nhìn từ xa</string>
@@ -169,9 +166,7 @@
   <string name="yes">Có</string>
   <string name="no">Không</string>
   <string name="media_detail_title">Tiêu đề</string>
-  <string name="media_detail_media_title">Tiêu đề phương tiện</string>
   <string name="media_detail_description">Mô tả</string>
-  <string name="media_detail_description_explanation">Mô tả phương tiện xuất hiện tại đây. Nó có thể khá dài và sẽ cần phải ngắt thành nhiều dòng. Nhưng chúng tôi hy vọng sẽ trông ưa nhìn.</string>
   <string name="media_detail_author">Tác giả</string>
   <string name="media_detail_uploaded_date">Ngày tải lên</string>
   <string name="media_detail_license">Giấy phép</string>
@@ -183,7 +178,7 @@
   <string name="number_of_uploads">Giới hạn Tải lên Gần đây của Tôi</string>
   <string name="maximum_limit">Tối đa</string>
   <string name="maximum_limit_alert">Không thể hiển thị hơn 500 cái</string>
-  <string name="set_limit">Đặt Giới hạn Tải lên Gần đây</string>
+  <string name="set_limit" fuzzy="true">Đặt Giới hạn Tải lên Gần đây</string>
   <string name="login_failed_2fa_not_supported">Hiện chưa hỗ trợ xác thực dùng hai nhân tố.</string>
   <string name="logout_verification">Bạn có chắc chắn muốn đăng xuất?</string>
   <string name="commons_logo">Biểu trưng Commons</string>

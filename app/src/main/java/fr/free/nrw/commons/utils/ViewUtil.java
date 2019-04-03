@@ -2,20 +2,17 @@ package fr.free.nrw.commons.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
 import android.view.Display;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import timber.log.Timber;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.StringRes;
+
 public class ViewUtil {
-
-    public static final String SHOWCASE_VIEW_ID_1 = "SHOWCASE_VIEW_ID_1";
-    public static final String SHOWCASE_VIEW_ID_2 = "SHOWCASE_VIEW_ID_2";
-    public static final String SHOWCASE_VIEW_ID_3 = "SHOWCASE_VIEW_ID_3";
-
     /**
      * Utility function to show short snack bar
      * @param view

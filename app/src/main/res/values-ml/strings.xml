@@ -137,7 +137,6 @@
   <string name="yes">അതെ</string>
   <string name="no">അല്ല</string>
   <string name="media_detail_title">ശീർഷകം</string>
-  <string name="media_detail_media_title">മീഡിയയുടെ തലക്കെട്ട്</string>
   <string name="media_detail_description">വിവരണം</string>
   <string name="media_detail_author">സ്രഷ്ടാവ്</string>
   <string name="media_detail_uploaded_date">അപ്‌ലോഡ് ചെയ്ത തീയതി</string>

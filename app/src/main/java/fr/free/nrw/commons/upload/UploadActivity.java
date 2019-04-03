@@ -6,23 +6,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.SpannableStringBuilder;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.text.style.URLSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -56,16 +52,17 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -78,7 +75,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @Inject MediaWikiApi mwApi;
     @Inject
     ContributionController contributionController;
-    @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
+    @Inject @Named("default_preferences") JsonKvStore directKvStore;
     @Inject UploadPresenter presenter;
     @Inject CategoriesModel categoriesModel;
     @Inject SessionManager sessionManager;
@@ -107,9 +104,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.license_subtitle) TextView licenseSubtitle;
     @BindView(R.id.please_wait_text_view) TextView pleaseWaitTextView;
 
-    //Right Card
-    @BindView(R.id.right_card) CardView rightCard;
-    @BindView(R.id.right_card_expand_button) ImageView rightCardExpandButton;
+
     @BindView(R.id.right_card_map_button) View rightCardMapButton;
 
     // Category Search
@@ -120,11 +115,12 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.category_search) EditText categoriesSearch;
     @BindView(R.id.category_search_container) TextInputLayout categoriesSearchContainer;
     @BindView(R.id.categories) RecyclerView categoriesList;
+    @BindView(R.id.category_search_layout)
+    FrameLayout categoryFrameLayout;
 
     // Final Submission
     @BindView(R.id.license_title) TextView licenseTitle;
-    @BindView(R.id.share_license_summary) TextView licenseSummary;
-    @BindView(R.id.media_upload_policy) TextView licensePolicy;
+    @BindView(R.id.share_license_summary) HtmlTextView licenseSummary;
     @BindView(R.id.license_list) Spinner licenseSpinner;
     @BindView(R.id.submit) Button submit;
     @BindView(R.id.license_previous) Button licensePrevious;
@@ -132,7 +128,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
-    private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
 
 
@@ -143,7 +138,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
         setContentView(R.layout.activity_upload);
         ButterKnife.bind(this);
-        compositeDisposable = new CompositeDisposable();
 
         configureLayout();
         configureTopCard();
@@ -153,7 +147,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         configureNavigationButtons();
         configureCategories();
         configureLicenses();
-        configurePolicy();
 
         presenter.init();
 
@@ -209,8 +202,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @Override
     protected void onPause() {
         presenter.removeView();
-        compositeDisposable.dispose();
-        compositeDisposable = new CompositeDisposable();
         super.onPause();
     }
 
@@ -274,8 +265,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     public void updateLicenseSummary(String selectedLicense, int imageCount) {
         String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense) + "'>" +
                 getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>";
-
-          setTextViewHTML(licenseSummary, getResources().getQuantityString(R.plurals.share_license_summary, imageCount, licenseHyperLink));
+        licenseSummary.setHtmlText(getResources().getQuantityString(R.plurals.share_license_summary, imageCount, licenseHyperLink));
     }
 
     @Override
@@ -321,7 +311,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     @Override
     public void setRightCardVisibility(boolean visible) {
-        rightCard.setVisibility(visible ? View.VISIBLE : View.GONE);
+        rightCardMapButton.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -354,12 +344,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next, bottomCardAddDescription);
     }
 
-    @Override
-    public void setRightCardState(boolean state) {
-        rightCardExpandButton.animate().rotation(rightCardExpandButton.getRotation() + (state ? -180 : 180)).start();
-        //Add all items in rightCard here
-        rightCardMapButton.setVisibility(state ? View.VISIBLE : View.GONE);
-    }
 
     @Override
     public void setBackground(Uri mediaUri) {
@@ -425,7 +409,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     @Override
-    public void launchMapActivity(String decCoords) {
+    public void launchMapActivity(LatLng decCoords) {
         Utils.handleGeoCoordinates(this, decCoords);
     }
 
@@ -445,47 +429,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
             //TODO: Confirm if handling manual permission enabled is required
         }
-    }
-
-    /**
-     * Parses links from HTML string, and makes the links clickable in the specified TextView.<br>
-     * Uses {@link #makeLinkClickable(SpannableStringBuilder, URLSpan)}.
-     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
-     */
-    private void setTextViewHTML(TextView text, String html)
-    {
-        CharSequence sequence = Html.fromHtml(html);
-        SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
-        URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
-        for (URLSpan span : urls) {
-            makeLinkClickable(strBuilder, span);
-        }
-        text.setText(strBuilder);
-        text.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
-    /**
-     * Sets onClick handler to launch browser for the specified URLSpan.
-     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
-     */
-    private void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span)
-    {
-        int start = strBuilder.getSpanStart(span);
-        int end = strBuilder.getSpanEnd(span);
-        int flags = strBuilder.getSpanFlags(span);
-        ClickableSpan clickable = new ClickableSpan() {
-            public void onClick(View view) {
-                // Handle hyperlink click
-                String hyperLink = span.getURL();
-                launchBrowser(hyperLink);
-            }
-        };
-        strBuilder.setSpan(clickable, start, end, flags);
-        strBuilder.removeSpan(span);
-    }
-
-    private void launchBrowser(String hyperLink) {
-        Utils.handleWebUrl(this, Uri.parse(hyperLink));
     }
 
     private void configureLicenses() {
@@ -516,6 +459,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     private void configureBottomCard() {
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
+        bottomCard.setOnClickListener(v -> presenter.toggleBottomCardState());
         bottomCardAddDescription.setOnClickListener(v -> addNewDescription());
     }
 
@@ -525,7 +469,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureRightCard() {
-        rightCardExpandButton.setOnClickListener(v -> presenter.toggleRightCardState());
         rightCardMapButton.setOnClickListener(v -> presenter.openCoordinateMap());
     }
 
@@ -562,19 +505,16 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureCategories() {
+        categoryFrameLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         categoriesAdapter = new UploadCategoriesAdapterFactory(categoriesModel).create(new ArrayList<>());
         categoriesList.setLayoutManager(new LinearLayoutManager(this));
         categoriesList.setAdapter(categoriesAdapter);
     }
 
-    private void configurePolicy() {
-        setTextViewHTML(licensePolicy, getString(R.string.media_upload_policy));
-    }
-
     @SuppressLint("CheckResult")
     private void updateCategoryList(String filter) {
         List<String> imageTitleList = presenter.getImageTitleList();
-        Observable.fromIterable(categoriesModel.getSelectedCategories())
+        compositeDisposable.add(Observable.fromIterable(categoriesModel.getSelectedCategories())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
@@ -605,7 +545,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                                 categoriesSearchContainer.setError("No categories found");
                             }
                         }
-                );
+                ));
     }
 
     private void receiveSharedItems() {
@@ -670,8 +610,18 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         finish();
     }
 
+    /**
+     * Rotates the button and shows or hides the content based on the given state. Typically used
+     * for collapsing or expanding {@link CardView} animation.
+     *
+     * @param state the expanded state of the View whose elements are to be updated. True if
+     *              expanded.
+     * @param button the image to rotate. Typically an arrow points up when the CardView is
+     *               collapsed and down when it is expanded.
+     * @param content the Views that should be shown or hidden based on the state.
+     */
     private void updateCardState(boolean state, ImageView button, View... content) {
-        button.animate().rotation(button.getRotation() + (state ? 180 : -180)).start();
+        button.animate().rotation(state ? 180 : 0).start();
         if (content != null) {
             for (View view : content) {
                 view.setVisibility(state ? View.VISIBLE : View.GONE);

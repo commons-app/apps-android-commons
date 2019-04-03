@@ -2,12 +2,12 @@ package fr.free.nrw.commons.explore;
 
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -41,7 +41,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
     @BindView(R.id.searchBox) SearchView searchView;
-    @BindView(R.id.tabLayout) TabLayout tabLayout;
+    @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
 
     private SearchImageFragment searchImageFragment;
@@ -51,7 +51,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     private MediaDetailPagerFragment mediaDetails;
     ViewPagerAdapter viewPagerAdapter;
     private String query;
-    private Disposable searchDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,33 +97,34 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
-        searchDisposable = RxSearchView.queryTextChanges(searchView)
-            .takeUntil(RxView.detaches(searchView))
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(query -> {
-                this.query = query.toString();
-                //update image list
-                if (!TextUtils.isEmpty(query)) {
-                    viewPager.setVisibility(View.VISIBLE);
-                    tabLayout.setVisibility(View.VISIBLE);
-                    searchHistoryContainer.setVisibility(View.GONE);
-                    if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
-                        searchImageFragment.updateImageList(query.toString());
-                    }
+        compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
+                .takeUntil(RxView.detaches(searchView))
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( query -> {
+                    this.query = query.toString();
+                            //update image list
+                            if (!TextUtils.isEmpty(query)) {
+                                viewPager.setVisibility(View.VISIBLE);
+                                tabLayout.setVisibility(View.VISIBLE);
+                                searchHistoryContainer.setVisibility(View.GONE);
+                                if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
+                                    searchImageFragment.updateImageList(query.toString());
+                                }
 
-                    if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
-                        searchCategoryFragment.updateCategoryList(query.toString());
-                    }
-
-                } else {
-                    viewPager.setVisibility(View.GONE);
-                    tabLayout.setVisibility(View.GONE);
-                    searchHistoryContainer.setVisibility(View.VISIBLE);
-                    recentSearchesFragment.updateRecentSearches();
-                    // open search history fragment
-                }
-            });
+                                if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
+                                    searchCategoryFragment.updateCategoryList(query.toString());
+                                }
+                            }else {
+                                //Open RecentSearchesFragment
+                                recentSearchesFragment.updateRecentSearches();
+                                viewPager.setVisibility(View.GONE);
+                                tabLayout.setVisibility(View.GONE);
+                                setSearchHistoryFragment();
+                                searchHistoryContainer.setVisibility(View.VISIBLE);
+                            }
+                        }
+                ));
     }
 
     /**
@@ -269,8 +269,8 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     @Override protected void onDestroy() {
         super.onDestroy();
         //Dispose the disposables when the activity is destroyed
-        if (searchDisposable != null) {
-            searchDisposable.dispose();
+        if (compositeDisposable != null) {
+            compositeDisposable.clear();
         }
     }
 }

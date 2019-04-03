@@ -1,13 +1,14 @@
 package fr.free.nrw.commons.settings;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
@@ -19,7 +20,7 @@ import javax.inject.Named;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -28,8 +29,9 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Inject
     @Named("default_preferences")
-    BasicKvStore defaultKvStore;
-    @Inject CommonsLogSender commonsLogSender;
+    JsonKvStore defaultKvStore;
+    @Inject
+    CommonsLogSender commonsLogSender;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,33 +60,38 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        int uploads = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100);
-        uploadLimit.setText(uploads + "");
-        uploadLimit.setSummary(uploads + "");
-        uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
-            int value;
-            try {
-                value = Integer.parseInt(newValue.toString());
-            } catch(Exception e) {
-                value = 100; //Default number
+        int currentUploadLimit = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100);
+        uploadLimit.setText(Integer.toString(currentUploadLimit));
+        uploadLimit.setSummary(Integer.toString(currentUploadLimit));
+        uploadLimit.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
-            if (value > 500) {
-                new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.maximum_limit)
-                        .setMessage(R.string.maximum_limit_alert)
-                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {})
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-                defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, 500);
-                defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
-                uploadLimit.setSummary(500 + "");
-                uploadLimit.setText(500 + "");
-            } else {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) return;
+
+                int value = Integer.parseInt(s.toString());
+
+                if (value > 500) {
+                    uploadLimit.getEditText().setError(getString(R.string.maximum_limit_alert));
+                    value = 500;
+                } else if (value == 0) {
+                    uploadLimit.getEditText().setError(getString(R.string.cannot_be_zero));
+                    value = 100;
+                }
+
                 defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, value);
                 defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
-                uploadLimit.setSummary(String.valueOf(value));
+                uploadLimit.setText(Integer.toString(value));
+                uploadLimit.setSummary(Integer.toString(value));
             }
-            return true;
         });
 
         Preference betaTesterPreference = findPreference("becomeBetaTester");

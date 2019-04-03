@@ -2,14 +2,10 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
-import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
-import android.os.ParcelFileDescriptor;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,9 +13,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import androidx.exifinterface.media.ExifInterface;
 import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -37,7 +35,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     CategoryApi apiCall;
     @Inject
     @Named("default_preferences")
-    BasicKvStore defaultKvStore;
+    JsonKvStore defaultKvStore;
     private String filePath;
     private ContentResolver contentResolver;
     private GPSExtractor imageObj;
@@ -45,9 +43,14 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     private ExifInterface exifInterface;
     private boolean haveCheckedForOtherImages = false;
     private GPSExtractor tempImageObj;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
     FileProcessor() {
+    }
+
+    public void cleanup() {
+        compositeDisposable.clear();
     }
 
     void initFileDetails(@NonNull String filePath, ContentResolver contentResolver) {
@@ -96,22 +99,14 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 //Make sure the photos were taken within 20seconds
                 Timber.d("fild date:" + file.lastModified() + " time of creation" + timeOfCreation);
                 tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
-                ParcelFileDescriptor descriptor = null;
                 try {
-                    descriptor = contentResolver.openFileDescriptor(Uri.fromFile(file), "r");
-                } catch (FileNotFoundException e) {
+                    tempImageObj = new GPSExtractor(contentResolver.openInputStream(Uri.fromFile(file)));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    if (descriptor != null) {
-                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor());
-                    }
-                } else {
-                    if (filePath != null) {
-                        tempImageObj = new GPSExtractor(file.getAbsolutePath());
-                    }
+                if (tempImageObj != null) {
+                    tempImageObj = new GPSExtractor(file.getAbsolutePath());
                 }
-
                 if (tempImageObj != null) {
                     Timber.d("not null fild EXIF" + tempImageObj.imageCoordsExists + " coords" + tempImageObj.getCoords());
                     if (tempImageObj.getCoords() != null && tempImageObj.imageCoordsExists) {
@@ -149,7 +144,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
             if (catListEmpty) {
-                apiCall.request(decimalCoords)
+                compositeDisposable.add(apiCall.request(decimalCoords)
                         .subscribeOn(Schedulers.io())
                         .observeOn(Schedulers.io())
                         .subscribe(
@@ -158,7 +153,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                                     Timber.e(throwable);
                                     gpsCategoryModel.clear();
                                 }
-                        );
+                        ));
                 Timber.d("displayCatList size 0, calling MWAPI %s", displayCatList);
             } else {
                 Timber.d("Cache found, setting categoryList in model to %s", displayCatList);

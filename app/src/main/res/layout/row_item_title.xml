@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.TextInputLayout
+<com.google.android.material.textfield.TextInputLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/image_title_container"
@@ -7,13 +7,12 @@
     android:layout_height="wrap_content"
     tools:showIn="@layout/activity_upload">
 
-    <fr.free.nrw.commons.ui.widget.CustomEditText
+    <EditText
         android:id="@+id/description_item_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/share_title_hint"
-        android:imeOptions="actionNext"
+        android:imeOptions="actionNext|flagNoExtractUi"
         android:inputType="text"
-        android:maxLines="1"
         android:nextFocusForward="@+id/image_description" />
-</android.support.design.widget.TextInputLayout>
+</com.google.android.material.textfield.TextInputLayout>

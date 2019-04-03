@@ -9,13 +9,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
 
 import java.io.File;
@@ -65,11 +64,8 @@ public class FilePicker implements Constants {
 
     private static Intent createGalleryIntent(@NonNull Context context, int type) {
         storeType(context, type);
-        Intent intent = plainGalleryPickerIntent();
-        if (Build.VERSION.SDK_INT >= 18) {
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, configuration(context).allowsMultiplePickingInGallery());
-        }
-        return intent;
+        return plainGalleryPickerIntent()
+                .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, configuration(context).allowsMultiplePickingInGallery());
     }
 
     private static Intent createCameraForImageIntent(@NonNull Context context, int type) {
@@ -152,7 +148,7 @@ public class FilePicker implements Constants {
     }
 
     private static void storeType(@NonNull Context context, int type) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(KEY_TYPE, type).commit();
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(KEY_TYPE, type).apply();
     }
 
     private static int restoreType(@NonNull Context context) {
@@ -353,11 +349,7 @@ public class FilePicker implements Constants {
     }
 
     private static boolean isPhoto(Intent data) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            return data == null || (data.getData() == null && data.getClipData() == null);
-        } else {
-            return data == null || (data.getData() == null);
-        }
+        return data == null || (data.getData() == null && data.getClipData() == null);
     }
 
     public static boolean willHandleActivityResult(int requestCode, int resultCode, Intent data) {
@@ -430,10 +422,7 @@ public class FilePicker implements Constants {
 
     private static List<UploadableFile> getFilesFromGalleryPictures(Intent data, Activity activity) throws IOException {
         List<UploadableFile> files = new ArrayList<>();
-        ClipData clipData = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            clipData = data.getClipData();
-        }
+        ClipData clipData = data.getClipData();
         if (clipData == null) {
             Uri uri = data.getData();
             UploadableFile file = PickedFiles.pickedExistingPicture(activity, uri);

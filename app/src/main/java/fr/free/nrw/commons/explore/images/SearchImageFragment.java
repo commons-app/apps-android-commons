@@ -3,15 +3,25 @@ package fr.free.nrw.commons.explore.images;
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.pedrogomez.renderers.RVRendererAdapter;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.pedrogomez.renderers.RVRendererAdapter;
@@ -21,7 +31,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -60,7 +70,9 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject
     OkHttpJsonApiClient okHttpJsonApiClient;
-    @Inject @Named("default_preferences") BasicKvStore defaultKvStore;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore defaultKvStore;
 
     private RVRendererAdapter<Media> imagesAdapter;
     private List<Media> queryList = new ArrayList<>();
@@ -137,11 +149,12 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         bottomProgressBar.setVisibility(GONE);
         queryList.clear();
         imagesAdapter.clear();
-        searchImagesDisposable = okHttpJsonApiClient.searchImages(query, queryList.size())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .subscribe(this::handleSuccess, this::handleError);
+        compositeDisposable.add(okHttpJsonApiClient.getMediaList("search", query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .doOnSubscribe(disposable -> saveQuery(query))
+                .subscribe(this::handleSuccess, this::handleError));
     }
 
 
@@ -153,11 +166,11 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        okHttpJsonApiClient.searchImages(query, queryList.size())
+        compositeDisposable.add(okHttpJsonApiClient.getMediaList("search", query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handlePaginationSuccess, this::handleError);
+                .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
     /**
@@ -168,7 +181,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void handlePaginationSuccess(List<Media> mediaList) {
         progressBar.setVisibility(View.GONE);
         bottomProgressBar.setVisibility(GONE);
-        if (mediaList.size() != 0 || !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
+        if (mediaList.size() != 0 && !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
             queryList.addAll(mediaList);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
@@ -194,10 +207,6 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
             ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
-
-            // check if user is waiting for 5 seconds if yes then save search query to history.
-            Handler handler = new Handler();
-            handler.postDelayed(() -> saveQuery(query), 5000);
         }
     }
 
@@ -266,8 +275,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
 
     @Override public void onDestroyView() {
         super.onDestroyView();
-        if(searchImagesDisposable!=null) {
-            searchImagesDisposable.dispose();//Always dispose the disposables when view is no longer there
+        if(compositeDisposable!=null) {
+            compositeDisposable.clear();//Always dispose the disposables when view is no longer there
         }
     }
 }

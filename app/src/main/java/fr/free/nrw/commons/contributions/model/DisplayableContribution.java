@@ -50,5 +50,7 @@ public class DisplayableContribution extends Contribution {
         void retryUpload();
 
         void deleteUpload();
+
+        void onClick();
     }
 }

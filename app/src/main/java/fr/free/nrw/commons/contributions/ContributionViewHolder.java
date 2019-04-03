@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -91,6 +90,14 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
         DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
         if (actions != null) {
             actions.deleteUpload();
+        }
+    }
+
+    @OnClick(R.id.contributionImage)
+    public void imageClicked(){
+        DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
+        if (actions != null) {
+            actions.onClick();
         }
     }
 }

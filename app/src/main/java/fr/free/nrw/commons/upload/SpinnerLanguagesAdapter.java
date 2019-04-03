@@ -2,9 +2,6 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +15,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
@@ -126,18 +125,14 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
                 view.setVisibility(View.VISIBLE);
                 if (languageCodesList.get(position).isEmpty()) {
                     tvLanguage.setText(languageNamesList.get(position));
-                    tvLanguage.setTextColor(Color.GRAY);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                        tvLanguage.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    }
+                    tvLanguage.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 } else {
                     tvLanguage.setText(
                             String.format("%s [%s]", languageNamesList.get(position), languageCodesList.get(position)));
                     if(selectedLanguages.containsKey(languageCodesList.get(position))&&
-                            !languageCodesList.get(position).equals(selectedLangCode))
+                            !languageCodesList.get(position).equals(selectedLangCode)) {
                         tvLanguage.setTextColor(Color.GRAY);
-                    else
-                        tvLanguage.setTextColor(Color.BLACK);
+                    }
                 }
             }
         }
