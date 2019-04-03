@@ -63,12 +63,8 @@ public class Utils {
                 return R.string.license_name_cc_by_sa_four;
             case Prefs.Licenses.CC0:
                 return R.string.license_name_cc0;
-            case Prefs.Licenses.CC_BY:  // for backward compatibility to v2.1
-                return R.string.license_name_cc_by_3_0;
-            case Prefs.Licenses.CC_BY_SA:  // for backward compatibility to v2.1
-                return R.string.license_name_cc_by_sa_3_0;
         }
-        throw new RuntimeException("Unrecognized license value: " + license);
+        throw new IllegalStateException("Unrecognized license value: " + license);
     }
 
     /**
@@ -92,7 +88,7 @@ public class Utils {
             case Prefs.Licenses.CC0:
                 return "https://creativecommons.org/publicdomain/zero/1.0/";
             default:
-                throw new RuntimeException("Unrecognized license value: " + license);
+                throw new IllegalStateException("Unrecognized license value: " + license);
         }
     }
 
