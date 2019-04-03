@@ -44,6 +44,7 @@ public class ReviewActivity extends AuthenticatedActivity {
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
     private MediaDetailFragment mediaDetails;
+    private String fileName;
     @BindView(R.id.reviewPagerIndicator)
     public CirclePageIndicator pagerIndicator;
     @BindView(R.id.toolbar)
@@ -120,7 +121,7 @@ public class ReviewActivity extends AuthenticatedActivity {
                 if (mediaDetails == null || !mediaDetails.isVisible()) {
                     // set isFeaturedImage true for featured images, to include author field on media detail
                     mediaDetails = MediaDetailFragment.forMedia(0, false, false);
-                    mediaDetails.setFilename("");
+                    mediaDetails.setFilename(fileName);
                     FragmentManager supportFragmentManager = getSupportFragmentManager();
                     supportFragmentManager
                             .beginTransaction()
@@ -131,6 +132,16 @@ public class ReviewActivity extends AuthenticatedActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (mediaContainer.getVisibility() == View.VISIBLE) {
+            temp.setVisibility(View.VISIBLE);
+            skip_image_button.setVisibility(View.VISIBLE);
+            mediaContainer.setVisibility(View.GONE);
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -150,6 +161,9 @@ public class ReviewActivity extends AuthenticatedActivity {
         if (fileName.length() == 0) {
             ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review);
             return;
+        }
+        if (fileName != null) {
+            this.fileName = fileName;
         }
         simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
         reviewController.onImageRefreshed(fileName); //file name is updated

@@ -244,8 +244,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNotificationCardView
                 .setVisibility(View.GONE);
         }
-        //media = detailProvider.getMediaAtPosition(index);
-        media = new Media("File:foo");
+        if (detailProvider != null) {
+            media = detailProvider.getMediaAtPosition(index);
+        }
+        if (filename != null) {
+            media = new Media(filename);
+        }
         if (media == null) {
             // Ask the detail provider to ping us when we're ready
             Timber.d("MediaDetailFragment not yet ready to display details; registering observer");
@@ -262,7 +266,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     displayMediaDetails();
                 }
             };
-            detailProvider.registerDataSetObserver(dataObserver);
+            if (detailProvider != null) {
+                detailProvider.registerDataSetObserver(dataObserver);
+            }
         } else {
             Timber.d("MediaDetailFragment ready to display details");
             displayMediaDetails();
@@ -337,7 +343,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             scrollListener = null;
         }
         if (dataObserver != null) {
-            detailProvider.unregisterDataSetObserver(dataObserver);
+            if (detailProvider != null) {
+                detailProvider.unregisterDataSetObserver(dataObserver);
+            }
             dataObserver = null;
         }
         super.onDestroyView();
