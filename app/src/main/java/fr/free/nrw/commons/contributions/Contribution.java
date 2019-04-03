@@ -259,10 +259,6 @@ public class  Contribution extends Media {
                 return "{{self|cc-by-sa-4.0}}";
             case Prefs.Licenses.CC0:
                 return "{{self|cc-zero}}";
-            case Prefs.Licenses.CC_BY:
-                return "{{self|cc-by-3.0}}";
-            case Prefs.Licenses.CC_BY_SA:
-                return "{{self|cc-by-sa-3.0}}";
         }
 
         throw new RuntimeException("Unrecognized license value: " + license);

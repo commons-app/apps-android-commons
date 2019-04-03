@@ -9,10 +9,9 @@ import android.net.Uri;
 import android.os.RemoteException;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
+import fr.free.nrw.commons.settings.Prefs;
 
 import org.apache.commons.lang3.StringUtils;
-
-import fr.free.nrw.commons.settings.Prefs;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -320,7 +319,7 @@ public class ContributionDao {
             try {
                 db.execSQL(query);
             } catch (SQLiteException e) {
-                Timber.e(e, "Exception performing query: " + query);
+                Timber.e("Exception performing query: " + query + " message: " + e.getMessage());
             }
         }
 

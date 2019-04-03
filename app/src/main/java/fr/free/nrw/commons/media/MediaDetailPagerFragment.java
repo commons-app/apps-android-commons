@@ -5,7 +5,6 @@ import android.app.DownloadManager;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -15,14 +14,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -44,12 +41,12 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static fr.free.nrw.commons.Utils.handleWebUrl;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
@@ -227,20 +224,19 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         // Modern Android updates the gallery automatically. Yay!
         req.allowScanningByMediaScanner();
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        PermissionUtils.checkPermissionsAndPerformAction(getActivity(), WRITE_EXTERNAL_STORAGE,
+            () -> enqueueRequest(req), () -> Toast.makeText(getContext(),
+                R.string.download_failed_we_cannot_download_the_file_without_storage_permission,
+                Toast.LENGTH_SHORT).show(), R.string.storage_permission,
+            R.string.write_storage_permission_rationale);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE)
-                        != PERMISSION_GRANTED
-                && getView() != null) {
-            Snackbar.make(getView(), R.string.read_storage_permission_rationale,
-                    Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
-                    view -> ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{READ_EXTERNAL_STORAGE}, 1)).show();
-        } else {
-            DownloadManager systemService = (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
-            if (systemService != null) {
-                systemService.enqueue(req);
-            }
+    }
+
+    private void enqueueRequest(DownloadManager.Request req) {
+        DownloadManager systemService =
+            (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
+        if (systemService != null) {
+            systemService.enqueue(req);
         }
     }
 

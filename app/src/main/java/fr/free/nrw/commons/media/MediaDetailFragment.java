@@ -52,6 +52,12 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import javax.inject.Inject;
+import javax.inject.Provider;
 import timber.log.Timber;
 
 import static android.view.View.GONE;
@@ -285,6 +291,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             detailProvider.unregisterDataSetObserver(dataObserver);
             dataObserver = null;
         }
+        compositeDisposable.clear();
         super.onDestroyView();
     }
 
@@ -414,9 +421,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    isDeleted = true;
-                    enableDeleteButton(false);
+                    if (getActivity() != null) {
+                        isDeleted = true;
+                        enableDeleteButton(false);
+                    }
                 }));
+
     }
 
     @OnClick(R.id.seeMore)
@@ -540,4 +550,5 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             nominatedForDeletion.setVisibility(GONE);
         }
     }
+
 }

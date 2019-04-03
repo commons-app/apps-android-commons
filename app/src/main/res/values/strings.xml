@@ -164,7 +164,7 @@
   <string name="menu_refresh">Refresh</string>
   <string name="storage_permission_title">Requesting Storage Permission</string>
   <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot access your gallery without this.</string>
-  <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera without this.</string>
+  <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera/gallery without this.</string>
   <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nearby Places</string>
@@ -534,4 +534,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
   <string name="thanks_received_explanation" >This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
   <string name="skip_image">SKIP THIS IMAGE</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
 </resources>

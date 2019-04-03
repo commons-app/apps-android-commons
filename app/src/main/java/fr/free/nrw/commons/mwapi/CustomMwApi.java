@@ -69,6 +69,10 @@ public class CustomMwApi {
     }
 
     public void setAuthCookie(String authCookie) {
+        if (authCookie == null) {//If the authCookie is null, no need to proceed
+            return;
+        }
+
         this.authCookie = authCookie;
         this.isLoggedIn = true;
         String[] cookies = authCookie.split(";");
