@@ -15,6 +15,13 @@
 
             <include layout="@layout/toolbar" />
 
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/mediaContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone" />
+
             <Button
                 android:id="@+id/skip_image"
                 android:layout_width="match_parent"
@@ -29,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/skip_image"
                 android:layout_above="@+id/reviewPagerIndicator"
+                android:id="@+id/temp"
                 >
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

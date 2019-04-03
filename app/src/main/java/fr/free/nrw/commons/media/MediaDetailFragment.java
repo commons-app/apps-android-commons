@@ -72,7 +72,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private int index;
     private Locale locale;
     private boolean isDeleted = false;
-
+    private String filename;
 
     public static MediaDetailFragment forMedia(int index, boolean editable, boolean isCategoryImage) {
         MediaDetailFragment mf = new MediaDetailFragment();
@@ -244,7 +244,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNotificationCardView
                 .setVisibility(View.GONE);
         }
-        media = detailProvider.getMediaAtPosition(index);
+        //media = detailProvider.getMediaAtPosition(index);
+        media = new Media("File:foo");
         if (media == null) {
             // Ask the detail provider to ping us when we're ready
             Timber.d("MediaDetailFragment not yet ready to display details; registering observer");
@@ -644,5 +645,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(mapIntent);
         }
+    }
+
+    public void setFilename(String filename){
+        this.filename = filename;
     }
 }

@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -19,12 +21,14 @@ import javax.inject.Inject;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
@@ -39,6 +43,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
+    private MediaDetailFragment mediaDetails;
     @BindView(R.id.reviewPagerIndicator)
     public CirclePageIndicator pagerIndicator;
     @BindView(R.id.toolbar)
@@ -57,6 +62,10 @@ public class ReviewActivity extends AuthenticatedActivity {
     ProgressBar progressBar;
     @BindView(R.id.imageCaption)
     TextView imageCaption;
+    @BindView(R.id.mediaContainer)
+    FrameLayout mediaContainer;
+    @BindView(R.id.temp)
+    ScrollView temp;
     @Inject
     MediaWikiApi mwApi;
 
@@ -102,6 +111,26 @@ public class ReviewActivity extends AuthenticatedActivity {
         runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
 
         skip_image_button.setOnClickListener(view -> runRandomizer());
+        simpleDraweeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                temp.setVisibility(View.GONE);
+                skip_image_button.setVisibility(View.GONE);
+                mediaContainer.setVisibility(View.VISIBLE);
+                if (mediaDetails == null || !mediaDetails.isVisible()) {
+                    // set isFeaturedImage true for featured images, to include author field on media detail
+                    mediaDetails = MediaDetailFragment.forMedia(0, false, false);
+                    mediaDetails.setFilename("");
+                    FragmentManager supportFragmentManager = getSupportFragmentManager();
+                    supportFragmentManager
+                            .beginTransaction()
+                            .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+                            .add(R.id.mediaContainer, mediaDetails)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            }
+        });
     }
 
     @SuppressLint("CheckResult")
