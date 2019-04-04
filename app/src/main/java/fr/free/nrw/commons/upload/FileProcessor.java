@@ -7,7 +7,9 @@ import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -67,6 +69,9 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      * Processes filePath coordinates, either from EXIF data or user location
      */
     GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface) {
+        // Redact EXIF data as indicated in preferences.
+        redactExifData();
+
         Timber.d("Calling GPSExtractor");
         imageObj = new GPSExtractor(exifInterface);
         decimalCoords = imageObj.getCoords();
@@ -79,6 +84,60 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
         }
 
         return imageObj;
+    }
+
+    /**
+     * Redacts EXIF data as indicated in preferences.
+     *
+     **/
+    private void redactExifData() {
+        Set<String> prefRedactEXIFTags = defaultKvStore.getStringSet("redactExifTags");
+        double prefLocationAccuracy = Double.valueOf(defaultKvStore.getString("locationAccuracy", "0"))
+                / 111300; // About 111300 meters in one degree.
+
+        try {
+            Timber.d("Tags to be redacted: %s", Arrays.toString(prefRedactEXIFTags.toArray()));
+            if (!prefRedactEXIFTags.isEmpty() || prefLocationAccuracy != 0) {
+                for (String tag : prefRedactEXIFTags) {
+                    String oldValue = exifInterface.getAttribute(tag);
+                    if (oldValue != null && !oldValue.isEmpty()) {
+                        Timber.d("Exif tag " + tag + " with value " + oldValue + " redacted.");
+                        exifInterface.setAttribute(tag, null);
+                    }
+                }
+
+                if (prefLocationAccuracy < 0d) {
+                    Timber.d("Setting EXIF coordinates to 0.");
+                    exifInterface.setLatLong(0d, 0d);
+                } else if (prefLocationAccuracy != 0d) {
+                    Timber.d("Reducing location accuracy by k = %s", prefLocationAccuracy);
+                    String latitudeStr = exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+                    double latitude = latitudeStr == null ? 0d : GPSExtractor.convertToDegree(latitudeStr);
+
+                    String longitudeStr = exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
+                    double longitude = longitudeStr == null ? 0d : GPSExtractor.convertToDegree(longitudeStr);
+
+                    exifInterface.setLatLong(
+                            anonymizeCoord(latitude, prefLocationAccuracy),
+                            anonymizeCoord(longitude, prefLocationAccuracy));
+                }
+                exifInterface.saveAttributes();
+            }
+        } catch (IOException e) {
+            Timber.w(e);
+            throw new RuntimeException("EXIF redaction failed.");
+        }
+    }
+
+    /**
+     * Reduces the accuracy of the coordinate according to location accuracy preference.
+     *
+     * @param input
+     * @return The coordinate with reduced accuracy.
+     */
+    private double anonymizeCoord(double input, double prefLocationAccuracy){
+        double intermediate = Math.round(input / prefLocationAccuracy) * prefLocationAccuracy;
+        return Math.round(intermediate * 100000.0) / 100000.0; // Round to 5th decimal place.
     }
 
     /**

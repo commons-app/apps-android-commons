@@ -127,7 +127,7 @@ class GPSExtractor {
         return decimalCoords;
     }
 
-    private double convertToDegree(String stringDMS) {
+    public static double convertToDegree(String stringDMS) {
         double result;
         String[] DMS = stringDMS.split(",", 3);
 
