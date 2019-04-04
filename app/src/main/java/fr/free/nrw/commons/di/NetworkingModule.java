@@ -74,14 +74,14 @@ public class NetworkingModule {
     public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
                                                           @Named("tools_force") HttpUrl toolsForgeUrl,
                                                           @Named("default_preferences") JsonKvStore defaultKvStore,
-                                                          Gson gson) {
+                                                          Gson gson,MediaWikiApi mediaWikiApi) {
         return new OkHttpJsonApiClient(okHttpClient,
                 toolsForgeUrl,
                 WIKIDATA_SPARQL_QUERY_URL,
                 BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
                 BuildConfig.WIKIMEDIA_API_HOST,
                 defaultKvStore,
-                gson);
+                gson,mediaWikiApi);
     }
 
     @Provides

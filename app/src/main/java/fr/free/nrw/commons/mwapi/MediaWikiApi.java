@@ -2,6 +2,8 @@ package fr.free.nrw.commons.mwapi;
 
 import android.net.Uri;
 
+import org.wikipedia.page.PageTitle;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -105,4 +107,8 @@ public interface MediaWikiApi {
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }
+
+    @NonNull
+    String getWikiText(PageTitle title) throws IOException;
+
 }

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -58,6 +59,7 @@ public class OkHttpJsonApiClient {
     private final String commonsBaseUrl;
     private final JsonKvStore defaultKvStore;
     private Gson gson;
+    private MediaWikiApi mediaWikiApi;
 
 
     @Inject
@@ -67,7 +69,7 @@ public class OkHttpJsonApiClient {
                                String campaignsUrl,
                                String commonsBaseUrl,
                                JsonKvStore defaultKvStore,
-                               Gson gson) {
+                               Gson gson,MediaWikiApi mediaWikiApi) {
         this.okHttpClient = okHttpClient;
         this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
         this.sparqlQueryUrl = sparqlQueryUrl;
@@ -75,6 +77,7 @@ public class OkHttpJsonApiClient {
         this.commonsBaseUrl = commonsBaseUrl;
         this.defaultKvStore = defaultKvStore;
         this.gson = gson;
+        this.mediaWikiApi = mediaWikiApi;
     }
 
     @NonNull
@@ -330,7 +333,19 @@ public class OkHttpJsonApiClient {
                 for (MwQueryPage page : pages) {
                     Media media = Media.from(page);
                     if (media != null) {
-                        mediaList.add(media);
+                        if(keyword.equals("Category:Uploaded_with_Mobile/Android")){
+
+                            String wikiText = "";
+                            try {
+                                wikiText = mediaWikiApi.getWikiText(media.getPageTitle());
+                            } catch (Exception e){
+                                e.printStackTrace();
+                            }
+
+                            if(!wikiText.contains("{{delete")){
+                                mediaList.add(media);
+                            }
+                        } else mediaList.add(media);
                     }
                 }
             }

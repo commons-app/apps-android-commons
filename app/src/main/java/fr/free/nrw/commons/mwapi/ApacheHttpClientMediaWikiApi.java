@@ -20,6 +20,7 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.wikipedia.page.PageTitle;
 import org.wikipedia.util.DateUtil;
 
 import java.io.IOException;
@@ -314,6 +315,17 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("title", "Main_page")
                 .get()
                 .getString("/api/flow-parsoid-utils/@content"));
+    }
+
+    @Override
+    @NonNull
+    public String getWikiText(PageTitle title) throws IOException {
+         return api.action("parse")
+                .param("page", title)
+                .param("prop", "wikitext")
+                .param("format", "json")
+                .get()
+                .getString("/api/parse/wikitext");
     }
 
     @Override
