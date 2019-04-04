@@ -59,6 +59,20 @@
 
     </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 
+    <!-- EXIF Tags for privacy concerns -->
+    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
+        android:entries="@array/pref_locationAccuracy_entries"
+        android:entryValues="@array/pref_locationAccuracy_values"
+        android:key="locationAccuracy"
+        android:title="@string/location_accuracy"
+        android:defaultValue="0"/>
+    <MultiSelectListPreference
+        android:entries="@array/pref_exifTag_entries"
+        android:entryValues="@array/pref_exifTag_values"
+        android:key="redactExifTags"
+        android:title="@string/redact_exif_tags"
+        android:summary="@string/redact_exif_tags_summary"/>
+
     <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.
           Do not reuse this key unless you revive the same feature with the changes mentioned at #1599.-->
 
