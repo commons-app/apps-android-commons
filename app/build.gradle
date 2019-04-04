@@ -206,6 +206,16 @@ android {
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
             buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
+            buildConfigField "String", "NEW_ISSUE_URL", "\"https://github.com/commons-app/apps-android-commons/issues\""
+            buildConfigField "String", "GITHUB_REPO_URL", "\"https://github.com/commons-app/apps-android-commons\""
+            buildConfigField "String", "WEBSITE_URL", "\"https://commons-app.github.io\""
+            buildConfigField "String", "CREDITS_URL", "\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\""
+            buildConfigField "String", "FAQ_URL", "\"https://github.com/commons-app/apps-android-commons/wiki/Frequently-Asked-Questions\""
+            buildConfigField "String", "PLAY_STORE_URL", "\"https://play.google.com/store/apps/details?id=fr.free.nrw.commons\""
+            buildConfigField "String", "TRANSLATE_WIKI_URL", "\"https://translatewiki.net/w/i.php?title=Special:Translate&group=commons-android-strings&filter=%21translated&action=translate&language=\""
+            buildConfigField "String", "FACEBOOK_WEB_URL", "\"https://www.facebook.com/1921335171459985\""
+            buildConfigField "String", "FACEBOOK_APP_URL", "\"fb://page/1921335171459985\""
+            buildConfigField "String", "FACEBOOK_PACKAGE_NAME", "\"com.facebook.katana\""
 
             dimension 'tier'
         }
@@ -237,6 +247,16 @@ android {
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
             buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
+            buildConfigField "String", "NEW_ISSUE_URL", "\"https://github.com/commons-app/apps-android-commons/issues\""
+            buildConfigField "String", "GITHUB_REPO_URL", "\"https://github.com/commons-app/apps-android-commons\""
+            buildConfigField "String", "WEBSITE_URL", "\"https://commons-app.github.io\""
+            buildConfigField "String", "CREDITS_URL", "\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\""
+            buildConfigField "String", "FAQ_URL", "\"https://github.com/commons-app/apps-android-commons/wiki/Frequently-Asked-Questions\""
+            buildConfigField "String", "PLAY_STORE_URL", "\"https://play.google.com/store/apps/details?id=fr.free.nrw.commons\""
+            buildConfigField "String", "TRANSLATE_WIKI_URL", "\"https://translatewiki.net/w/i.php?title=Special:Translate&group=commons-android-strings&filter=%21translated&action=translate&language=\""
+            buildConfigField "String", "FACEBOOK_WEB_URL", "\"https://www.facebook.com/1921335171459985\""
+            buildConfigField "String", "FACEBOOK_APP_URL", "\"fb://page/1921335171459985\""
+            buildConfigField "String", "FACEBOOK_PACKAGE_NAME", "\"com.facebook.katana\""
 
             dimension 'tier'
         }
