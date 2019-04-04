@@ -2,26 +2,38 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.net.Uri;
+import android.webkit.MimeTypeMap;
+
 import androidx.annotation.NonNull;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import androidx.exifinterface.media.ExifInterface;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.filepicker.Constants.DEFAULT_FOLDER_NAME;
 
 /**
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
@@ -68,9 +80,9 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     /**
      * Processes filePath coordinates, either from EXIF data or user location
      */
-    GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface) {
+    GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface, Context context) {
         // Redact EXIF data as indicated in preferences.
-        redactExifData();
+        redactMetadata(context);
 
         Timber.d("Calling GPSExtractor");
         imageObj = new GPSExtractor(exifInterface);
@@ -87,24 +99,54 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     }
 
     /**
-     * Redacts EXIF data as indicated in preferences.
+     * Redacts EXIF and XMP metadata as indicated in preferences.
      *
-     **/
-    private void redactExifData() {
-        Set<String> prefRedactEXIFTags = defaultKvStore.getStringSet("redactExifTags");
+     */
+    @SuppressLint("CheckResult")
+    private void redactMetadata(Context context) {
+        Set<String> prefManageEXIFTags = defaultKvStore.getStringSet("manageExifTags");
         double prefLocationAccuracy = Double.valueOf(defaultKvStore.getString("locationAccuracy", "0"))
                 / 111300; // About 111300 meters in one degree.
+        boolean prefKeepXmp = defaultKvStore.getBoolean("keepXmp", true);
 
         try {
-            Timber.d("Tags to be redacted: %s", Arrays.toString(prefRedactEXIFTags.toArray()));
-            if (!prefRedactEXIFTags.isEmpty() || prefLocationAccuracy != 0) {
-                for (String tag : prefRedactEXIFTags) {
-                    String oldValue = exifInterface.getAttribute(tag);
-                    if (oldValue != null && !oldValue.isEmpty()) {
-                        Timber.d("Exif tag " + tag + " with value " + oldValue + " redacted.");
-                        exifInterface.setAttribute(tag, null);
-                    }
-                }
+            if (!prefKeepXmp) {
+                String extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(filePath)).toString());
+                String newFilePath = context.getCacheDir().getAbsolutePath() + "/"
+                        + DEFAULT_FOLDER_NAME + "/"
+                        + UUID.randomUUID().toString() + "." + extension;
+
+                FileInputStream inStream = new FileInputStream(filePath);
+                FileOutputStream outStream = new FileOutputStream(newFilePath);
+                FileChannel inChannel = inStream.getChannel();
+                FileChannel outChannel = outStream.getChannel();
+                inChannel.transferTo(0, inChannel.size(), outChannel);
+                inStream.close();
+                outStream.close();
+                // Overwrites original file while removing XMP data.
+                // inputPath - newFilePath, the copy of FilePath
+                // outputPath - original FilePath
+                FileMetadataUtils.removeXmpAndWriteToFile(newFilePath, filePath);
+            }
+
+            Set<String> redactTags = new HashSet<>(Arrays.asList(
+                    context.getResources().getStringArray(R.array.pref_exifTag_values)));
+
+            Timber.d(redactTags.toString());
+            redactTags.removeAll(prefManageEXIFTags);
+
+            if (!redactTags.isEmpty() || prefLocationAccuracy != 0) {
+                //noinspection ResultOfMethodCallIgnored
+                Observable.fromIterable(redactTags)
+                        .flatMap(FileMetadataUtils::getTagsFromPref)
+                        .forEach(tag -> {
+                            Timber.d("Checking for tag:%s", tag);
+                            String oldValue = exifInterface.getAttribute(tag);
+                            if (oldValue != null && !oldValue.isEmpty()) {
+                                Timber.d("Exif tag %s with value %s redacted.", tag, oldValue);
+                                exifInterface.setAttribute(tag, null);
+                            }
+                        });
 
                 if (prefLocationAccuracy < 0d) {
                     Timber.d("Setting EXIF coordinates to 0.");

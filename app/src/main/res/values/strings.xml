@@ -5,6 +5,7 @@
   <string name="preference_category_appearance">Appearance</string>
   <string name="preference_category_general">General</string>
   <string name="preference_category_feedback">Feedback</string>
+  <string name="preference_category_privacy">Privacy</string>
   <string name="preference_category_location">Location</string>
   <string name="app_name">Commons</string>
   <string name="bullet">&#8226;  </string>
@@ -536,8 +537,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="skip_image">SKIP THIS IMAGE</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
 
-  <string name="redact_exif_tags">Remove EXIF Tags</string>
-  <string name="redact_exif_tags_summary">Select which EXIF tags to remove from uploads</string>
+  <string name="manage_exif_tags">Manage EXIF Tags</string>
+  <string name="manage_exif_tags_summary">Select which EXIF tags to keep in uploads</string>
   <string name="location_accuracy">Set Location Accuracy</string>
   <string name="location_accuracy_pref_remove">Remove all location data</string>
   <string name="location_accuracy_pref_20km">Reduce accuracy to 20km</string>
@@ -548,10 +549,13 @@ Upload your first media by tapping on the add button.</string>
   <string name="location_accuracy_pref_do_nothing">Do nothing</string>
 
   <string name="exif_tag_name_author">Author</string>
-  <string name="exif_tag_name_artist">Artist</string>
   <string name="exif_tag_name_copyright">Copyright</string>
-  <string name="exif_tag_name_model">Camera Model</string>
-  <string name="exif_tag_name_make">Camera Make</string>
+  <string name="exif_tag_name_cameraModel">Camera Model</string>
+  <string name="exif_tag_name_lensModel">Lens Model</string>
+  <string name="exif_tag_name_serialNumbers">Serial Numbers</string>
   <string name="exif_tag_name_software">Software</string>
+
+  <string name="keep_xmp">Keep XMP Metadata</string>
+  <string name="keep_xmp_summary">XMP is another form of image metadata storage, but it is currently not possible to remove individual XMP tags from the image. You are encouraged to disable this option if anonymity is a concern.</string>
 
 </resources>
