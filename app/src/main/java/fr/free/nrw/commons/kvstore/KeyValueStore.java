@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.kvstore;
 
+import java.util.Set;
+
 public interface KeyValueStore {
     String getString(String key);
 
@@ -10,6 +12,10 @@ public interface KeyValueStore {
     int getInt(String key);
 
     String getString(String key, String defaultValue);
+
+    Set<String> getStringSet(String key);
+
+    Set<String> getStringSet(String key, Set<String> defaultValue);
 
     boolean getBoolean(String key, boolean defaultValue);
 
