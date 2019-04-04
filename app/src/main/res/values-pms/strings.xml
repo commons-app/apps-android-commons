@@ -165,7 +165,7 @@
   <string name="menu_refresh">Rinfrësché</string>
   <string name="storage_permission_title">Arcesta dël përmess ëd deposité</string>
   <string name="read_storage_permission_rationale">Autorisassion necessaria: Lese n\'anmagasinament estern. L\'aplicassion a peul pa acede a soa galarìa sensa \'d lòn.</string>
-  <string name="write_storage_permission_rationale">Autorisassion necessaria: Scrive an sn\'anmagasinament estern. L\'aplicassion a peul pa acede a soa màchina fòto sensa \'d lòn.</string>
+  <string name="write_storage_permission_rationale">Autorisassion necessaria: Scrive an sn\'anmagasinament estern. L\'aplicassion a peul pa acede a soa màchina fòto o galarìa sensa \'d lòn.</string>
   <string name="location_permission_rationale">Autorisassion facoltativa: Oten-e la posission atual për dij sugeriment ëd categorìa</string>
   <string name="ok">Va bin</string>
   <string name="title_activity_nearby">Pòst davzin</string>
@@ -502,4 +502,5 @@
   <string name="images_via_nearby_explanation">Le plance carià dai pòst ëd prossimità a son le plance carià con la dëscuverta dij pòst an sla carta.</string>
   <string name="thanks_received_explanation">Costa fonsionalità a përmet ai contributor ëd mandé na notìfica d\'aringrassiament a j\'utent ch\'a fan dle modìfiche ùtij -  an dovrand na cita liura d\'aringrassiament an sla pàgina dla stòria o cola dle diferense.</string>
   <string name="skip_image">SAUTÉ COSTA PLANCIA</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Dëscariament falì! I podoma nen dëscarié l\'archivi sensa ël përmess dël depòsit estern.</string>
 </resources>

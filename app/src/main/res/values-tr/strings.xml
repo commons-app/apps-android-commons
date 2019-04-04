@@ -174,7 +174,7 @@
   <string name="detail_license_empty">Bilinmeyen lisans</string>
   <string name="menu_refresh">Yenile</string>
   <string name="read_storage_permission_rationale">Gerekli izin: Harici belleği oku. Uygulama, galerinize bu olmadan erişemez.</string>
-  <string name="write_storage_permission_rationale">Gerekli izin: Harici depolama yazın. Uygulama kameranıza bu olmadan erişemez.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Gerekli izin: Harici depolama yazın. Uygulama kameranıza bu olmadan erişemez.</string>
   <string name="location_permission_rationale">İsteğe bağlı izin: Kategori önerileri için geçerli konum alma</string>
   <string name="ok">Tamam</string>
   <string name="title_activity_nearby">Yakındaki yerler</string>

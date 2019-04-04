@@ -160,7 +160,7 @@
   <string name="detail_license_empty">Nepoznata licenca</string>
   <string name="menu_refresh">Osveži</string>
   <string name="read_storage_permission_rationale">Potrebna dozvola: Čitanje spoljašnje memorije. Aplikacija ne može da pristupi Vaših galeriji bez ovoga.</string>
-  <string name="write_storage_permission_rationale">Potrebna dozvola: Pisanje spoljašnje memorije. Aplikacija ne može da pristupi Vašoj kameri bez ovoga.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Potrebna dozvola: Pisanje spoljašnje memorije. Aplikacija ne može da pristupi Vašoj kameri bez ovoga.</string>
   <string name="location_permission_rationale">Neobavezna dozvola: preuzmi trenutnu lokaciju za predloge kategorija</string>
   <string name="ok">U redu</string>
   <string name="title_activity_nearby">Mesta u blizini</string>

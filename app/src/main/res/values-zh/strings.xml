@@ -178,7 +178,7 @@
   <string name="menu_refresh">刷新</string>
   <string name="storage_permission_title">请求存储权限</string>
   <string name="read_storage_permission_rationale">需要权限：读取外部存储。应用不能在没有它的情况下访问您的图册。</string>
-  <string name="write_storage_permission_rationale">需要权限：写入外部存储。应用不能在没有它的情况下访问您的图册。</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">需要权限：写入外部存储。应用不能在没有它的情况下访问您的图册。</string>
   <string name="location_permission_rationale">可选权限：获取当前位置以提供分类建议</string>
   <string name="ok">确定</string>
   <string name="title_activity_nearby">附近地点</string>

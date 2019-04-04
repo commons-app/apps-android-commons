@@ -170,7 +170,7 @@
   <string name="detail_license_empty">Tuntematon lisenssi</string>
   <string name="menu_refresh">Päivitä</string>
   <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Sovellus ei voi päästä galleriaasi ilman tätä oikeutta.</string>
-  <string name="write_storage_permission_rationale">Vaadittu oikeus: Kirjoita ulkoiseen tallennustilaan. Sovellus ei voi päästä kameraasi ilman tätä oikeutta.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Vaadittu oikeus: Kirjoita ulkoiseen tallennustilaan. Sovellus ei voi päästä kameraasi ilman tätä oikeutta.</string>
   <string name="location_permission_rationale">Valinnainen lupa: Saada tämänhetkinen sijainti loukkasuosituksia varten.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
@@ -192,7 +192,9 @@
   <string name="number_of_uploads">Tuorein latausrajani</string>
   <string name="maximum_limit">Maksimimäärä</string>
   <string name="invalid_zero">Nolla ei ole kelvollinen</string>
+  <string name="invalid_input">Virheellinen syöte</string>
   <string name="maximum_limit_alert">Ei voida näyttää enempää, kuin 500</string>
+  <string name="enter_valid">Anna kelvollinen numero</string>
   <string name="cannot_be_zero">Tallennusraja ei voi olla 0</string>
   <string name="set_limit">Tuore latausraja</string>
   <string name="login_failed_2fa_not_supported">Kaksivaiheinen tunnistus ei ole vielä tuettu.</string>
@@ -325,6 +327,7 @@
   <string name="add_description">+ Lisää kuvaus</string>
   <string name="delete_recent_searches_dialog">Haluatko varmasti tyhjentää hakuhistoriasi?</string>
   <string name="search_history_deleted">Hakuhistoria poistettu</string>
+  <string name="delete">POISTA</string>
   <string name="Achievements">Saavutukset</string>
   <string name="statistics">TILASTOT</string>
   <string name="statistics_thanks">Kiitos vastaanotettu</string>
@@ -337,6 +340,7 @@
   <string name="notifications_channel_name_all">Commons-ilmoitus</string>
   <string name="nearby_fragment">Lähistöllä</string>
   <string name="notifications">Ilmoitukset</string>
+  <string name="archived_notifications">Ilmoitukset (arkistoidut)</string>
   <string name="list_sheet">Lista</string>
   <string name="next">Seuraava</string>
   <string name="previous">Edellinen</string>
@@ -359,6 +363,7 @@
   <string name="desc_language_Asia">Aasia</string>
   <string name="desc_language_Pacific">Tyynenmeren alue</string>
   <string name="never_ask_again">Älä kysy tätä uudelleen</string>
+  <string name="image_chooser_title">Valitse tallennettavat tiedostot</string>
   <string name="please_wait">Odota…</string>
   <string name="skip_image">OHITA TÄMÄ KUVA</string>
 </resources>

@@ -164,7 +164,7 @@
   <string name="detail_license_empty">Lizentzia ezezaguna</string>
   <string name="menu_refresh">Eguneratu</string>
   <string name="read_storage_permission_rationale">Nahitaezko baimena: kanpo-biltegiaren irakurketa. Aplikazioa ezin da zure galeriara sartu hau gabe.</string>
-  <string name="write_storage_permission_rationale">Nahitaezko baimena: kanpo-biltegiaren idazketa. Aplikazioa ezin da zure kamerara sartu hau gabe.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Nahitaezko baimena: kanpo-biltegiaren idazketa. Aplikazioa ezin da zure kamerara sartu hau gabe.</string>
   <string name="location_permission_rationale">Aukerako baimena: momentuko kokapena zehaztu kategoriak iradokitzeko</string>
   <string name="ok">Ados</string>
   <string name="title_activity_nearby">Gertuko lekuak</string>

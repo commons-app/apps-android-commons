@@ -162,7 +162,7 @@
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
   <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリはギャラリーを開けません。</string>
-  <string name="write_storage_permission_rationale">必要な権限:外部ストレージに入力します。これがないとアプリはカメラにアクセスできません。</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">必要な権限:外部ストレージに入力します。これがないとアプリはカメラにアクセスできません。</string>
   <string name="location_permission_rationale">オプションの権限：カテゴリ候補のため現在の位置を取得する</string>
   <string name="ok">承認</string>
   <string name="title_activity_nearby">近くの場所</string>

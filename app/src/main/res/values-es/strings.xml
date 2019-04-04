@@ -184,7 +184,7 @@
   <string name="menu_refresh">Actualizar</string>
   <string name="storage_permission_title">Pidiendo permiso de almacenamiento</string>
   <string name="read_storage_permission_rationale">Permiso necesario: lectura de almacenamiento externo. La aplicación no puede acceder a la galería sin él.</string>
-  <string name="write_storage_permission_rationale">Permiso necesario: Escribir en almacenamiento externo. La aplicación no puede acceder a la cámara sin él.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Permiso necesario: Escribir en almacenamiento externo. La aplicación no puede acceder a la cámara sin él.</string>
   <string name="location_permission_rationale">Permiso opcional: obtener la ubicación actual para sugerir categorías</string>
   <string name="ok">Aceptar</string>
   <string name="title_activity_nearby">Lugares cercanos</string>
