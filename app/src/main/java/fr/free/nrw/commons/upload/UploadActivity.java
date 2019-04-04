@@ -135,7 +135,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private ProgressDialog progressDialog;
-    private int flag = 0;
+    private int flag = 0, s_count = 0;
 
 
     @SuppressLint("CheckResult")
@@ -237,6 +237,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                                         int stepCount,
                                         UploadModel.UploadItem uploadItem,
                                         boolean isShowingItem) {
+        boolean multipleUpload = false;
+        prevTitleDecs.setText(getResources().getString(R.string.previous_upload_title_description));
+        s_count = stepCount;
         String cardTitle = getResources().getString(R.string.step_count, currentStep, stepCount);
         String cardSubTitle = getResources().getString(R.string.image_in_set_label, currentStep);
         bottomCardTitle.setText(cardTitle);
@@ -246,7 +249,11 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         if (currentStep == stepCount) {
             dismissKeyboard();
         }
-        configurePrevButton();
+        if (s_count > 3 && currentStep != 1) {
+            multipleUpload = true;
+            prevTitleDecs.setText(getResources().getString(R.string.prprevious_image_title_description));
+        }
+        configurePrevButton(multipleUpload);
         if(isShowingItem) {
             descriptionsAdapter.setItems(uploadItem.getTitle(), uploadItem.getDescriptions());
             rvDescriptions.setAdapter(descriptionsAdapter);
@@ -531,22 +538,28 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         rightCardMapButton.setOnClickListener(v -> presenter.openCoordinateMap());
     }
 
-    public void configurePrevButton(){
-        prevTitleDecs.setOnClickListener((View v) -> {
-            String title = directKvStore.getString("title");
-            Title t = new Title();
-            t.setTitleText(title);
+    public void configurePrevButton(Boolean b){
+        String name = "prev_";
+        if (b){
+            name = name + "image_";
+        } else {
+            name = name + "upload_";
+        }
+        String title = directKvStore.getString(name + "title");
+        Title t = new Title();
+        t.setTitleText(title);
 
-            List<Description> finalDesc = new LinkedList<>();
-            int descCount = directKvStore.getInt("descCount");
-            for (int i = 0; i < descCount; i++) {
-                Description description= new Description();
-                String desc = directKvStore.getString("description_<"+Integer.toString(i)+">");
-                description.setDescriptionText(desc);
-                finalDesc.add(description);
-                int position = directKvStore.getInt("spinnerPosition_<"+Integer.toString(i)+">");
-                description.setSelectedLanguageIndex(position);
-            }
+        List<Description> finalDesc = new LinkedList<>();
+        int descCount = directKvStore.getInt(name + "descCount");
+        for (int i = 0; i < descCount; i++) {
+            Description description= new Description();
+            String desc = directKvStore.getString(name + "description_<"+Integer.toString(i)+">");
+            description.setDescriptionText(desc);
+            finalDesc.add(description);
+            int position = directKvStore.getInt(name + "spinnerPosition_<"+Integer.toString(i)+">");
+            description.setSelectedLanguageIndex(position);
+        }
+        prevTitleDecs.setOnClickListener((View v) -> {
             descriptionsAdapter.setItems(t, finalDesc);
             rvDescriptions.setAdapter(descriptionsAdapter);
         });
@@ -560,6 +573,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                 return;
             }
             setTitleAndDescriptions();
+            if (s_count > 3) {
+                savePrevTitleDesc("prev_image_");
+            }
             presenter.handleNext(descriptionsAdapter.getTitle(),
                     descriptionsAdapter.getDescriptions());
         });
@@ -572,7 +588,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         // Finally, the previous / submit buttons on the final currentPage of the wizard
         licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
         submit.setOnClickListener(v -> {
-            saveOnSubmit();
+            flag++;
+            directKvStore.putInt("flag", flag);
+            savePrevTitleDesc("prev_upload_");
             Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG).show();
             presenter.handleSubmit(categoriesModel);
             finish();
@@ -748,15 +766,14 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         newFragment.show(getSupportFragmentManager(), "dialog");
     }
 
-    public void saveOnSubmit(){
-        flag++;
-        directKvStore.putInt("flag", flag);
-        directKvStore.putString("title", descriptionsAdapter.getTitle().toString());
+    public void savePrevTitleDesc(String name){
+
+        directKvStore.putString(name + "title", descriptionsAdapter.getTitle().toString());
         int n = descriptionsAdapter.getItemCount() - 1;
-        directKvStore.putInt("descCount", n);
+        directKvStore.putInt(name + "descCount", n);
         for (int i = 0; i < n; i++) {
-            directKvStore.putString("description_<"+Integer.toString(i)+">", descriptionsAdapter.getDescriptions().get(i).getDescriptionText());
-            directKvStore.putInt("spinnerPosition_<" + Integer.toString(i) + ">", descriptionsAdapter.getDescriptions().get(i).getSelectedLanguageIndex());
+            directKvStore.putString(name + "description_<"+Integer.toString(i)+">", descriptionsAdapter.getDescriptions().get(i).getDescriptionText());
+            directKvStore.putInt(name + "spinnerPosition_<" + Integer.toString(i) + ">", descriptionsAdapter.getDescriptions().get(i).getSelectedLanguageIndex());
         }
     }
 }
