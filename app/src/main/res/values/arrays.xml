@@ -14,4 +14,42 @@
         <item>@string/license_pref_cc_by_sa_3_0</item>
         <item>@string/license_pref_cc_by_sa_4_0</item>
     </array>
+
+    <!--TODO add more EXIF tags-->
+    <array name="pref_exifTag_entries">
+        <item>@string/exif_tag_name_author</item>
+        <item>@string/exif_tag_name_artist</item>
+        <item>@string/exif_tag_name_copyright</item>
+        <item>@string/exif_tag_name_model</item>
+        <item>@string/exif_tag_name_make</item>
+        <item>@string/exif_tag_name_software</item>
+    </array>
+    <array name="pref_exifTag_values">
+        <item>@string/exif_tag_author</item>
+        <item>@string/exif_tag_artist</item>
+        <item>@string/exif_tag_copyright</item>
+        <item>@string/exif_tag_model</item>
+        <item>@string/exif_tag_make</item>
+        <item>@string/exif_tag_software</item>
+    </array>
+
+    <array name="pref_locationAccuracy_entries">
+        <item>@string/location_accuracy_pref_remove</item>
+        <item>@string/location_accuracy_pref_20km</item>
+        <item>@string/location_accuracy_pref_10km</item>
+        <item>@string/location_accuracy_pref_5km</item>
+        <item>@string/location_accuracy_pref_1km</item>
+        <item>@string/location_accuracy_pref_100m</item>
+        <item>@string/location_accuracy_pref_do_nothing</item>
+    </array>
+    <string-array name="pref_locationAccuracy_values">
+        <item>-1</item>
+        <item>20000</item>
+        <item>10000</item>
+        <item>5000</item>
+        <item>1000</item>
+        <item>100</item>
+        <item>0</item>
+    </string-array>
+
 </resources>
