@@ -125,6 +125,7 @@
 
         <activity
             android:name=".achievements.AchievementsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/Achievements" />
 
         <activity
