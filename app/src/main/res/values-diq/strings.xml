@@ -14,7 +14,7 @@
   <string name="navigation_item_explore">Keşf kerê</string>
   <string name="preference_category_appearance">Asayış</string>
   <string name="preference_category_general">Bıngeh</string>
-  <string name="preference_category_feedback">Peydrışten</string>
+  <string name="preference_category_feedback">Peyderıştış</string>
   <string name="preference_category_location">Lokasyon</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -173,7 +173,7 @@
   <string name="navigation_item_nearby">Nezdıra</string>
   <string name="navigation_item_about">Heqa</string>
   <string name="navigation_item_settings">Eyari</string>
-  <string name="navigation_item_feedback">Peydrışten</string>
+  <string name="navigation_item_feedback">Peyderıştış</string>
   <string name="navigation_item_logout">Veciyayış</string>
   <string name="navigation_item_info">Musnayış</string>
   <string name="navigation_item_notification">Tebliği</string>

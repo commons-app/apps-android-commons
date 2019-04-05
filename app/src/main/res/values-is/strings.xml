@@ -163,7 +163,7 @@
   <string name="menu_refresh">Endurlesa</string>
   <string name="storage_permission_title">Biður um aðgang að geymslurými</string>
   <string name="read_storage_permission_rationale">Nauðsynlegar heimildir: Lesa ytri gagnageymslu. Forritið fær ekki aðgang að myndasafni ekki án þessa.</string>
-  <string name="write_storage_permission_rationale">Nauðsynlegar heimildir: Skrifa í ytri gagnageymslu. Forritið nær ekki sambandi við myndavél ekki án þessa.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Nauðsynlegar heimildir: Skrifa í ytri gagnageymslu. Forritið nær ekki sambandi við myndavél ekki án þessa.</string>
   <string name="location_permission_rationale">Nauðsynlegar heimildir: Lesa núverandi staðsetningu til að geta stungið upp á flokkum</string>
   <string name="ok">Í lagi</string>
   <string name="title_activity_nearby">Staðir í nágrenninu</string>

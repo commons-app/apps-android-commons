@@ -171,7 +171,7 @@
   <string name="menu_refresh">Uppdatera</string>
   <string name="storage_permission_title">Begär lagringsbehörighet</string>
   <string name="read_storage_permission_rationale">Nödvändig behörighet: Läs extern lagring. Appen kan inte komma åt ditt galleri utan detta.</string>
-  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera utan detta.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera utan detta.</string>
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Platser i närheten</string>

@@ -174,12 +174,12 @@
   <string name="detail_panel_cats_loading">A carregar…</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>
   <string name="detail_description_empty">Sem descrição</string>
-  <string name="detail_discussion_empty">Nenhuma discussão</string>
+  <string name="detail_discussion_empty">Não há nenhuma discussão</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Actualizar</string>
   <string name="storage_permission_title">A pedir permissão de armazenamento</string>
   <string name="read_storage_permission_rationale">Permissão necessária: Ler a armazenagem externa. A aplicação não pode aceder à sua galeria sem isto.</string>
-  <string name="write_storage_permission_rationale">Permissão necessária: Escrever na armazenagem externa. A aplicação não pode aceder à sua câmara sem isto.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Permissão necessária: Escrever na armazenagem externa. A aplicação não pode aceder à sua câmara sem isto.</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual para sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Locais Próximos</string>
@@ -491,7 +491,7 @@
   <string name="review_category_no_button_text">PARECE BEM</string>
   <string name="review_spam_yes_button_text">NÃO, FORA DO ÂMBITO</string>
   <string name="review_spam_no_button_text">PARECE BEM</string>
-  <string name="review_copyright_yes_button_text">NÃO, VIOLAÇÃO DE DIREITOS AUTORAIS</string>
+  <string name="review_copyright_yes_button_text">NÃO, INFRINGIMENTO DE DIREITOS DE AUTOR</string>
   <string name="review_copyright_no_button_text">PARECE BEM</string>
   <string name="review_thanks_yes_button_text">SIM, POR QUE NÃO?</string>
   <string name="review_thanks_no_button_text">IMAGEM SEGUINTE</string>

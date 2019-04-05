@@ -145,7 +145,7 @@
   <string name="menu_refresh">Segarkan</string>
   <string name="storage_permission_title">Meminta Izin Akses Penyimpanan</string>
   <string name="read_storage_permission_rationale">Perlu Izin: Membaca penyimpanan eksternal. Tanpa hal ini aplikasi tidak dapat mengakses galeri Anda.</string>
-  <string name="write_storage_permission_rationale">Perlu Izin: Menulis penyimpanan eksternal. Tanpa hal ini aplikasi tidak dapat mengakses kamera.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Perlu Izin: Menulis penyimpanan eksternal. Tanpa hal ini aplikasi tidak dapat mengakses kamera.</string>
   <string name="location_permission_rationale">Pilihan Izin: Lokasi saat ini untuk saran kategori</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Tempat disekitar</string>

@@ -175,7 +175,7 @@
   <string name="detail_license_empty">مجوز ناشناخته</string>
   <string name="menu_refresh">تازه‌کردن</string>
   <string name="read_storage_permission_rationale">اجازه‌های مورد نیاز: مطالعهٔ حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
-  <string name="write_storage_permission_rationale">اجازه‌های مورد نیاز: نوشتن در حافظهٔ خارجی. اپلیکیشن نمیتواند به دبین دسترسی داشته باشد.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">اجازه‌های مورد نیاز: نوشتن در حافظهٔ خارجی. اپلیکیشن نمیتواند به دبین دسترسی داشته باشد.</string>
   <string name="location_permission_rationale">اجازه‌های اختیاری: دریافت موقعیت برای پیشنهاد رده</string>
   <string name="ok">تأیید</string>
   <string name="title_activity_nearby">مکان‌‌های اطراف</string>

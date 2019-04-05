@@ -183,7 +183,7 @@
   <string name="menu_refresh">Обновить</string>
   <string name="storage_permission_title">Запрос разрешения по использованию внешнего носителя</string>
   <string name="read_storage_permission_rationale">Требуемые разрешения: чтение с внешнего носителя. Приложение не сможет получить доступ к вашей галерее без этого разрешения.</string>
-  <string name="write_storage_permission_rationale">Требуемые разрешения: запись на внешнее хранилище. Приложение не сможет получить доступ к камере без этого разрешения.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Требуемые разрешения: запись на внешнее хранилище. Приложение не сможет получить доступ к камере без этого разрешения.</string>
   <string name="location_permission_rationale">Необязательное разрешение: получение текущего местоположения для предложения категорий</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Места поблизости</string>
@@ -458,9 +458,14 @@
   <string name="check_category_success_message">Успешно отправлена на проверку категория %1$s</string>
   <string name="check_category_toast">Проверка категории %1$s</string>
   <string name="nominate_for_deletion_done">Готово</string>
+  <string name="send_thank_success_title">Отправка благодарности: Успешно</string>
+  <string name="send_thank_success_message">Благодарности успешно отправлены %1$s</string>
+  <string name="send_thank_failure_message">Не удалось отправить благодарности %1$s</string>
+  <string name="send_thank_failure_title">Отправка благодарности: Неуспешно</string>
   <string name="send_thank_send">Отправка благодарности</string>
   <string name="send_thank_notification_title">Отправка благодарности</string>
   <string name="review_category">Правильно ли указаны категории?</string>
+  <string name="review_thanks">Хотите отблагодарить участника?</string>
   <string name="review_no_category">Йоу, да тут даже категорий нет!</string>
   <string name="review_spam_report_problem">спам</string>
   <string name="review_category_yes_button_text">НЕВЕРНО КАТЕГОРИЗИРОВАНО</string>

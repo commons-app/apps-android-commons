@@ -166,7 +166,7 @@
   <string name="menu_refresh">Превчитај</string>
   <string name="storage_permission_title">Се бара дозвола за складирање</string>
   <string name="read_storage_permission_rationale">Потребна дозвола: Треба да се прочита од надворешен склад. Прилогот без ова нема пристап до вашата галерија.</string>
-  <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера.</string>
   <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
   <string name="ok">ОК</string>
   <string name="title_activity_nearby">Околни места</string>

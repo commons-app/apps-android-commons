@@ -175,7 +175,7 @@
   <string name="menu_refresh">تحديث</string>
   <string name="storage_permission_title">طلب إذن التخزين</string>
   <string name="read_storage_permission_rationale">صلاحية مطلوبة: قراءة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
-  <string name="write_storage_permission_rationale">صلاحية مطلوبة: كتابة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
+  <string name="write_storage_permission_rationale">صلاحية مطلوبة: اكتب وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور/الكاميرا الخاصة بك بدونها.</string>
   <string name="location_permission_rationale">صلاحية اختيارية: احصل على الموقع الحالي لاقتراحات التصنيفات</string>
   <string name="ok">موافق</string>
   <string name="title_activity_nearby">الأماكن القريبة</string>
@@ -512,4 +512,5 @@
   <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
   <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
   <string name="skip_image">تخطي هذه الصورة</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">التنزيل فشل!!. لا يمكننا تنزيل الملف دون إذن تخزين خارجي.</string>
 </resources>
