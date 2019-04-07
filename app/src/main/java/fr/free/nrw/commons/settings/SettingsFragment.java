@@ -106,6 +106,8 @@ public class SettingsFragment extends PreferenceFragment {
         });
         // Disable "Recent upload limit" and "Use custom author name" when not logged in.
         if (defaultKvStore.getBoolean("login_skipped", false)){
+            SwitchPreference useExternalStorage = (SwitchPreference) findPreference("useExternalStorage");
+            useExternalStorage.setEnabled(false);
             uploadLimit.setEnabled(false);
             useAuthorName.setEnabled(false);
         }
