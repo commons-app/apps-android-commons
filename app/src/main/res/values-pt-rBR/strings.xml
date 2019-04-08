@@ -178,7 +178,7 @@
   <string name="menu_refresh">Atualizar</string>
   <string name="storage_permission_title">Solicitando permissão de armazenamento</string>
   <string name="read_storage_permission_rationale">Permissão necessária: leia o armazenamento externo. App não pode acessar sua galeria sem isso.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera sem isso.</string>
+  <string name="write_storage_permission_rationale">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera/galeria sem isso.</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual de sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lugares próximos</string>
@@ -515,4 +515,5 @@
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos usuários que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
   <string name="skip_image">PULAR ESTA IMAGEM</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Falha no Download!!. Não podemos fazer o download do arquivo sem permissão de armazenamento externo.</string>
 </resources>

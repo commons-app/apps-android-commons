@@ -170,7 +170,7 @@
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
   <string name="read_storage_permission_rationale">প্রয়োজনীয় অনুমতি: বহিস্থ স্মৃতি পড়া। এটি ছাড়া এ্যাপ আপনার গ্যালারি দেখতে পাবে না।</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">অনুমতি প্রয়োজন: অালাদাভাবে সংযুক্ত স্টোরেজ লিখুন। এটি ছাড়া অ্যাপটি আপনার ক্যামেরা নিয়ন্ত্রন করতে পারবে না।</string>
+  <string name="write_storage_permission_rationale">অনুমতি প্রয়োজন: বাহ্যিক স্টোরেজে লেখা। এটি ছাড়া অ্যাপটি আপনার ক্যামেরা/গ্যালারিতে প্রবেশ করতে পারবে না।</string>
   <string name="location_permission_rationale">ঐচ্ছিক অনুমতি: বিষয়শ্রেণী পরামর্শের জন্য বর্তমান অবস্থান নেয়</string>
   <string name="ok">ঠিক আছে</string>
   <string name="title_activity_nearby">কাছাকাছি স্থান</string>
@@ -192,7 +192,7 @@
   <string name="maximum_limit">সর্বোচ্চ সীমা</string>
   <string name="invalid_zero">শুন্য বৈধ নয়</string>
   <string name="maximum_limit_alert">৫০০টির বেশি প্রদর্শন করা সম্ভব নয়</string>
-  <string name="set_limit" fuzzy="true">সাম্প্রতিক আপলোড সীমা নির্ধারন করুন</string>
+  <string name="set_limit">সাম্প্রতিক আপলোডের সীমা</string>
   <string name="login_failed_2fa_not_supported">দুটি স্তরের প্রমাণীকরণ বর্তমানে সমর্থিত নয়।</string>
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
   <string name="commons_logo">কমন্সের লোগো</string>

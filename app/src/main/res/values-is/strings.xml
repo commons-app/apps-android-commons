@@ -89,6 +89,7 @@
   <string name="title_activity_signup">Nýskrá</string>
   <string name="title_activity_featured_images">Áberandi myndir</string>
   <string name="title_activity_category_details">Flokkur</string>
+  <string name="title_activity_review">Yfirlestur jafningja</string>
   <string name="menu_about">Um</string>
   <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \</string>
   <string name="about_improve">Útbúðu nýjar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
@@ -159,11 +160,12 @@
   <string name="detail_panel_cats_loading">Hleð…</string>
   <string name="detail_panel_cats_none">Ekkert valið</string>
   <string name="detail_description_empty">Engin lýsing</string>
+  <string name="detail_discussion_empty">Engin umræða</string>
   <string name="detail_license_empty">Óþekkt notkunarleyfi</string>
   <string name="menu_refresh">Endurlesa</string>
   <string name="storage_permission_title">Biður um aðgang að geymslurými</string>
   <string name="read_storage_permission_rationale">Nauðsynlegar heimildir: Lesa ytri gagnageymslu. Forritið fær ekki aðgang að myndasafni ekki án þessa.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Nauðsynlegar heimildir: Skrifa í ytri gagnageymslu. Forritið nær ekki sambandi við myndavél ekki án þessa.</string>
+  <string name="write_storage_permission_rationale">Nauðsynlegar heimildir: Skrifa í ytri gagnageymslu. Forritið nær ekki sambandi við myndavél/myndasafn ekki án þessa.</string>
   <string name="location_permission_rationale">Nauðsynlegar heimildir: Lesa núverandi staðsetningu til að geta stungið upp á flokkum</string>
   <string name="ok">Í lagi</string>
   <string name="title_activity_nearby">Staðir í nágrenninu</string>
@@ -174,6 +176,7 @@
   <string name="no">Nei</string>
   <string name="media_detail_title">Titill</string>
   <string name="media_detail_description">Lýsing</string>
+  <string name="media_detail_discussion">Umræða</string>
   <string name="media_detail_author">Höfundur</string>
   <string name="media_detail_uploaded_date">Sent inn þann</string>
   <string name="media_detail_license">Notkunarleyfi</string>
@@ -189,7 +192,7 @@
   <string name="maximum_limit_alert">Get ekki birt fleiri en 500</string>
   <string name="enter_valid">Settu inn gilda tölu</string>
   <string name="cannot_be_zero">Mork innsendinga geta ekki verið 0</string>
-  <string name="set_limit" fuzzy="true">Setja nýleg sendingartakmörk mín</string>
+  <string name="set_limit">Nýleg sendingartakmörk</string>
   <string name="login_failed_2fa_not_supported">Tveggja-þrepa auðkenning er ekki studd í augnablikinu.</string>
   <string name="logout_verification">Viltu í alvörunni skrá þig út?</string>
   <string name="commons_logo">Táknmerki Commons</string>
@@ -224,6 +227,7 @@
   <string name="navigation_item_info">Kennsla</string>
   <string name="navigation_item_notification">Tilkynningar</string>
   <string name="navigation_item_featured_images">Efst á baugi</string>
+  <string name="navigation_item_review">Yfirferð</string>
   <string name="nearby_needs_permissions">Ekki er hægt að birta nálæga staði an heimildar til að ná í hnattstaðsetningu</string>
   <string name="no_description_found">engin lýsing fannst</string>
   <string name="nearby_info_menu_commons_article">Síða Commons-skrár</string>
@@ -287,7 +291,7 @@
   <string name="about_translate_cancel">Hætta við</string>
   <string name="retry">Reyna aftur</string>
   <string name="showcase_view_got_it_button">Náði því!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Þetta eru þeir staðir í næsta nágrenni við þig sem vantar myndir til að skýra með Wikipedia-greinar</string>
+  <string name="showcase_view_whole_nearby_activity">Þetta eru þeir staðir í næsta nágrenni við þig sem vantar myndir til skýringa með Wikipedia-greinum.\n\nEf smellt er á \'LEITA Á ÞESSU SVÆÐI\' er kortinu læst og í gang fer leit á nálægu svæði.</string>
   <string name="showcase_view_list_icon">Ef ýtt er á þennan hnapp birtist listi yfir þessa staði</string>
   <string name="showcase_view_plus_fab">Þú getur sent inn mynd úr myndasafninu þínu eða myndavélinni</string>
   <string name="no_images_found">Engir myndir fundust!</string>
@@ -306,6 +310,8 @@
   <string name="error_loading_subcategories">Villa kom upp við að hlaða inn undirflokkum.</string>
   <string name="search_tab_title_media">MIÐILL</string>
   <string name="search_tab_title_categories">FLOKKAR</string>
+  <string name="explore_tab_title_featured">ÚRVAL</string>
+  <string name="explore_tab_title_mobile">SENT INN ÚR SNJALLTÆKI</string>
   <string name="successful_wikidata_edit">Tókst að hlaða mynd inn í %1$s á Wikidata!</string>
   <string name="wikidata_edit_failure">Mistókst að uppfæra samsvarandi Wikidata-einindi!</string>
   <string name="menu_set_wallpaper">Setja sem bakgrunnsmynd</string>
@@ -336,8 +342,10 @@
   <string name="add_description">+ Bæta við lýsingu</string>
   <string name="no_recent_searches">Engar nýlegar leitir</string>
   <string name="delete_recent_searches_dialog">Ertu viss um að þú viljir eyða leitarferlinum þínum?</string>
+  <string name="delete_search_dialog">Viltu eyða þessari leit?</string>
   <string name="search_history_deleted">Leitarferli eytt</string>
   <string name="nominate_delete">Tilnefna til eyðingar</string>
+  <string name="delete">EYÐA</string>
   <string name="Achievements">Frammistaða</string>
   <string name="statistics">TÖLFRÆÐI</string>
   <string name="statistics_thanks">Mótteknar þakkir</string>
@@ -395,8 +403,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Ég áttaði mig á að þetta væri slæmt fyrir gagnaleynd mína</string>
   <string name="deletion_reason_no_longer_want_public">Ég skipti um skoðun, ég vil ekki að hún sé lengur öllum sýnileg</string>
   <string name="deletion_reason_not_interesting">Afsakið, þessi mynd hefur ekkert gildi fyrir alfræðirit</string>
-  <string name="uploaded_by_myself" fuzzy="true">Sent inn af mér sjálfum</string>
-  <string name="no_uploads" fuzzy="true">Velkomin í Commons!\n\nSendu inn fyrstu margmiðlunargögnin þín með því að ýta á myndavélina eða myndasafnstáknið hér fyrir ofan.</string>
+  <string name="uploaded_by_myself">Sent inn af mér sjálfum %1$s, notað í %2$d grein(um).</string>
+  <string name="no_uploads">Velkomin í Commons!\n\nSendu inn fyrstu margmiðlunargögnin þín með því að ýta á viðbætingarhnappinn.</string>
   <string name="desc_language_Worldwide">Á heimsvísu</string>
   <string name="desc_language_America">Ameríka</string>
   <string name="desc_language_Europe">Evrópa</string>
@@ -418,14 +426,29 @@
   <string name="display_location_permission_explanation">Biðja um heimild til að sjá staðsetningu þegar þess er þörf fyrir tilkynningaspjald um næsta nágrenni.</string>
   <string name="ends_on">Endar þann:</string>
   <string name="display_campaigns">Birta herferðir</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Ýttu hér til að sjá yfirstandandi herferðir</string>
+  <string name="display_campaigns_explanation">Sjá yfirstandandi herferðir</string>
+  <string name="nominate_for_deletion_done">Lokið</string>
+  <string name="notsure">Ekki viss</string>
+  <string name="review_category">Er þetta rétt flokkað?</string>
+  <string name="review_spam">Kemur þetta umfjöllunarefninu við?</string>
+  <string name="review_spam_report_problem">ruslsending</string>
+  <string name="review_c_violation_report_question">Það brýtur á móti höfundarrétti því það er</string>
+  <string name="review_category_yes_button_text">NEI, RANGT FLOKKAÐ</string>
+  <string name="review_category_no_button_text">LÍTUR VEL ÚT</string>
+  <string name="review_spam_yes_button_text">NEI, KEMUR EFNINU EKKI VIÐ</string>
+  <string name="review_spam_no_button_text">LÍTUR VEL ÚT</string>
+  <string name="review_copyright_yes_button_text">NEI, HÖFUNDARRÉTTARBROT</string>
+  <string name="review_copyright_no_button_text">LÍTUR VEL ÚT</string>
+  <string name="review_thanks_yes_button_text">JÁ, ÞVÍ EKKI</string>
+  <string name="review_thanks_no_button_text">NÆSTA MYND</string>
   <string name="no_image">Enagar myndir notaðar</string>
   <string name="no_image_reverted">Engar myndir endurstilltar</string>
   <string name="no_image_uploaded">Engar myndir sendar inn</string>
-  <string name="no_notification" fuzzy="true">Þú ert ekki með neinar ólesnar tilkynningar</string>
+  <string name="no_notification">Þú ert ekki með neinar ólesnar tilkynningar</string>
   <string name="menu_option_archived">Skoða í geymslu</string>
   <string name="menu_option_unread">Skoða ólesið</string>
   <string name="error_occurred_in_picking_images">Villa kom upp við að velja myndir</string>
   <string name="image_chooser_title">Veldu myndir til að senda inn</string>
   <string name="please_wait">Bíddu aðeins…</string>
+  <string name="skip_image">SLEPPA ÞESSARI MYND</string>
 </resources>

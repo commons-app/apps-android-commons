@@ -170,12 +170,13 @@
   <string name="detail_license_empty">Tuntematon lisenssi</string>
   <string name="menu_refresh">Päivitä</string>
   <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Sovellus ei voi päästä galleriaasi ilman tätä oikeutta.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Vaadittu oikeus: Kirjoita ulkoiseen tallennustilaan. Sovellus ei voi päästä kameraasi ilman tätä oikeutta.</string>
+  <string name="write_storage_permission_rationale">Vaadittu oikeus: Kirjoita ulkoiseen tallennustilaan. Sovelluksella ei ole pääsyä kameraasi/galleriaasi ilman tätä oikeutta.</string>
   <string name="location_permission_rationale">Valinnainen lupa: Saada tämänhetkinen sijainti loukkasuosituksia varten.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
   <string name="no_nearby">Lähistöltä ei löytynyt paikkoja</string>
   <string name="warning">Varoitus</string>
+  <string name="upload_image_duplicate">Tämä tiedosto on jo Commonsissa. Haluatko varmasti jatkaa?</string>
   <string name="yes">Kyllä</string>
   <string name="no">Ei</string>
   <string name="media_detail_title">Otsikko</string>
@@ -238,6 +239,7 @@
   <string name="error_while_cache">Virhe varastoidessa kuvia</string>
   <string name="title_info">Tiedoston yksilöllinen ja kuvaava otsikko, jota käytetään tiedostonimenä. Voit käyttää tavallista kieltä välilyönnein. Älä sisällytä tiedoston päätettä.</string>
   <string name="description_info">Kuvaile mediaa niin paljon kuin mahdollista: Missä se otettiin? Mitä se esittää? Mikä on asiayhteys? Kuvaile esineitä tai henkilöitä. Tuo ilmi tietoja, joita ei ole helppo arvailla, esimerkiksi vuorokaudenaika, jos se on maisema. Jos media esittää jotain epätavallista, selitä, mikä tekee siitä epätavallisen.</string>
+  <string name="upload_image_too_dark">Tämä kuva on liian tumma, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvoa.</string>
   <string name="upload_problem_image_dark">Kuva on liian tumma.</string>
   <string name="upload_problem_image_blurry">Kuva on epäselvä.</string>
   <string name="upload_problem_image_duplicate">Kuva on jo Commonsissa.</string>
@@ -303,6 +305,7 @@
   <string name="search_recent_header">Äskettäiset haut:</string>
   <string name="search_tab_title_media">MEDIA</string>
   <string name="search_tab_title_categories">LUOKAT</string>
+  <string name="explore_tab_title_mobile">TALLENNETTU MOBIILIN KAUTTA</string>
   <string name="successful_wikidata_edit">Kuva onnistuneesti lisätty Wikidata-kohteeseen %1$s!</string>
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
   <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>
@@ -338,6 +341,7 @@
   <string name="achievements_share_message">Jaa saavutuksesi ystäviesi kanssa!</string>
   <string name="error_occurred">Tapahtui virhe!</string>
   <string name="notifications_channel_name_all">Commons-ilmoitus</string>
+  <string name="contributions_fragment">Muokkaukset</string>
   <string name="nearby_fragment">Lähistöllä</string>
   <string name="notifications">Ilmoitukset</string>
   <string name="archived_notifications">Ilmoitukset (arkistoidut)</string>
@@ -345,6 +349,10 @@
   <string name="next">Seuraava</string>
   <string name="previous">Edellinen</string>
   <string name="submit">Lähetä</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d tallennus</item>
+    <item quantity="other">%1$d tallennusta</item>
+  </plurals>
   <string name="navigation_item_bookmarks">Kirjanmerkit</string>
   <string name="title_activity_bookmarks">Kirjanmerkit</string>
   <string name="title_page_bookmarks_pictures">Kuvat</string>
@@ -354,7 +362,7 @@
   <string name="bookmark_empty">Et ole lisännyt yhtään kirjanmerkkejä</string>
   <string name="provider_bookmarks_location">Kirjanmerkit</string>
   <string name="deletion_reason_uploaded_by_mistake">Tallensin sen vahingossa</string>
-  <string name="no_uploads" fuzzy="true">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla kamera tai galleriakuvaketta yllä.</string>
+  <string name="no_uploads">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla lisäyspainiketta.</string>
   <string name="desc_language_Worldwide">Maailmanlaajuinen</string>
   <string name="desc_language_America">Amerikka</string>
   <string name="desc_language_Europe">Eurooppa</string>
@@ -362,7 +370,11 @@
   <string name="desc_language_Africa">Afrikka</string>
   <string name="desc_language_Asia">Aasia</string>
   <string name="desc_language_Pacific">Tyynenmeren alue</string>
+  <string name="no_go_back">Ei, palaa takaisin</string>
   <string name="never_ask_again">Älä kysy tätä uudelleen</string>
+  <string name="review_no_category">Oh, tämä ei ole edes luokiteltu!</string>
+  <string name="review_thanks_yes_button_text">KYLLÄ, MIKSI EI</string>
+  <string name="review_thanks_no_button_text">SEURAAVA KUVA</string>
   <string name="image_chooser_title">Valitse tallennettavat tiedostot</string>
   <string name="please_wait">Odota…</string>
   <string name="skip_image">OHITA TÄMÄ KUVA</string>

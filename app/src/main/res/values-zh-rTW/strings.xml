@@ -88,11 +88,9 @@
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">開始 %1$d 次上傳</item>
-    <item quantity="other">開始 %1$d 次上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d 次上傳</item>
-    <item quantity="other">%1$d 次上傳</item>
   </plurals>
   <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
   <string name="categories_skip_explanation">為您的圖片添加分類，使別人在維基共享資源更容易找到。\n\n開始輸入以添加分類。</string>
