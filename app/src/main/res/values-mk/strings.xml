@@ -166,7 +166,7 @@
   <string name="menu_refresh">Превчитај</string>
   <string name="storage_permission_title">Се бара дозвола за складирање</string>
   <string name="read_storage_permission_rationale">Потребна дозвола: Треба да се прочита од надворешен склад. Прилогот без ова нема пристап до вашата галерија.</string>
-  <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера.</string>
+  <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера/галерија.</string>
   <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
   <string name="ok">ОК</string>
   <string name="title_activity_nearby">Околни места</string>
@@ -246,7 +246,7 @@
   <string name="upload_problem_different_geolocation">Оваа слика е направена на друго место.</string>
   <string name="upload_problem_fbmd">Подигајте само слики кои самите сте ги направиле. Не подигајте слики пронајдени на туѓи профили на Фејсбук.</string>
   <string name="upload_problem_do_you_continue">Дали сепак сакате да ја подигнете?</string>
-  <string name="internet_downloaded" fuzzy="true">Подигајте само слики кои самите сте ги направиле. Не подигајте слики што сте ги нашле некаде на семрежјето.</string>
+  <string name="internet_downloaded">Подигајте само слики кои самите сте ги направиле. Не подигајте слики што сте ги нашле некаде на семрежјето.</string>
   <string name="give_permission">Дај дозвола</string>
   <string name="use_external_storage">Користи надворешен склад</string>
   <string name="use_external_storage_summary">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>
@@ -434,7 +434,7 @@
   <string name="achievements_fetch_failed">Нешто не е во ред. Не можев да ги добијам вашите достигнувања</string>
   <string name="ends_on">Завршува:</string>
   <string name="display_campaigns">Прикажи походи</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Стиснете тука за да ги видите тековните походи</string>
+  <string name="display_campaigns_explanation">Погледајте ги тековните походи</string>
   <string name="nearby_campaign_dismiss_message">Повеќе нема да ви се прикажуваат походите. Доколку се премислите, таа поставка ќе ја најдете во Нагодувањата.</string>
   <string name="this_function_needs_network_connection">Оваа можност бара да бидете поврзани со мрежата. Проверете ги поставките за поврзување.</string>
   <string name="bad_token_error_proposed_solution">Подигањето не успеа поради проблеми со уредувачката шифра. Одјавете се и повторно најавете се.</string>
@@ -482,6 +482,8 @@
   <string name="review_copyright_no_button_text">ДЕЛУВА ВО РЕД</string>
   <string name="review_thanks_yes_button_text">ДА, ШТО ДА НЕ</string>
   <string name="review_thanks_no_button_text">СЛЕДНА СЛИКА</string>
+  <string name="skip_image_explanation">Копчево ќе ви даде друга неодамна подигната слика од Ризницата</string>
+  <string name="review_image_explanation">Можете да оценувате слики и да го подобрувате квалитетот на Ризницата.\n Четирите мерила за оценка се следниве: \n - Дали сликата е во делокругот? \n - Дали сликата ги следи правилата за авторски права? \n - Дали сликата е исправно категоризирана? \n - Ако сè е во ред, можете и да му се заблагодарите на подигачот.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликата и вашиот уред</item>
     <item quantity="other">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликите и вашиот уред</item>
@@ -500,4 +502,6 @@
   <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
   <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
   <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
+  <string name="skip_image">ПРЕСКОКНИ ЈА ПОРАКАВА</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преземањето не успеа!!! Не можеме да ја преземеме податотеката без дозвола од надворешен склад.</string>
 </resources>

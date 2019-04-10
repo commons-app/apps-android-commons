@@ -170,7 +170,7 @@
   <string name="menu_refresh">Reîncarcă</string>
   <string name="storage_permission_title">Solicitarea Permisiunilor de Stocare</string>
   <string name="read_storage_permission_rationale">Necesită permisiune: Citiți spațiul de stocare extern. Aplicația nu poate accesa galeria dvs. fără aceasta.</string>
-  <string name="write_storage_permission_rationale">Necesită permisiune: Scrieți un spațiu de stocare extern. Aplicația nu poate accesa camera fără acest lucru.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Necesită permisiune: Scrieți un spațiu de stocare extern. Aplicația nu poate accesa camera fără acest lucru.</string>
   <string name="location_permission_rationale">Permisiune opțională: Obțineți locația curentă pentru sugestiile de categorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Locurile din Apropiere</string>

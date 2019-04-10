@@ -38,7 +38,7 @@
     <group android:id="@+id/drawer_contact">
         <item
             android:id="@+id/action_about"
-            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:icon="@drawable/ic_info_outline_24dp"
             android:title="@string/navigation_item_about" />
         <item
             android:id="@+id/action_introduction"

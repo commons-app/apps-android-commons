@@ -164,7 +164,7 @@
   <string name="menu_refresh">Refresh</string>
   <string name="storage_permission_title">Requesting Storage Permission</string>
   <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot access your gallery without this.</string>
-  <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera without this.</string>
+  <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera/gallery without this.</string>
   <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nearby Places</string>
@@ -508,6 +508,8 @@ Upload your first media by tapping on the add button.</string>
     <string name="review_copyright_no_button_text">SEEMS FINE</string>
     <string name="review_thanks_yes_button_text">YES, WHY NOT</string>
     <string name="review_thanks_no_button_text">NEXT IMAGE</string>
+    <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
+    <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commoms.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
 
   <plurals name="receiving_shared_content">
     <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>
@@ -534,4 +536,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
   <string name="skip_image">SKIP THIS IMAGE</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
 </resources>

@@ -167,7 +167,7 @@
   <string name="menu_refresh">ರಿಫ್ರೆಶ್ ಮಲ್ಪುಲೆ</string>
   <string name="storage_permission_title">ಶೇಖರಣ ಅನುಮತಿ ಕೇಣುನು</string>
   <string name="read_storage_permission_rationale">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಓದಿ. ಇದೆಂಡ್ತ್ ಇರ್ ಗ್ಯಾಲರಿಗ್ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರವೇಶಗ್ ಸಾಧ್ಯ ಇಜ್ಜಿ.</string>
-  <string name="write_storage_permission_rationale">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಬರೆಲೆ. ಇದೆಂಡ್ತ್ ಅಪ್ಲಿಕೇಶನ್ ಇರೆನ ಕ್ಯಾಮರೊನ್ ಪ್ರವೇಶ ಮಾಲ್ಪಯರ ಸಾಧ್ಯಿಜ್ಜಿ.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಬರೆಲೆ. ಇದೆಂಡ್ತ್ ಅಪ್ಲಿಕೇಶನ್ ಇರೆನ ಕ್ಯಾಮರೊನ್ ಪ್ರವೇಶ ಮಾಲ್ಪಯರ ಸಾಧ್ಯಿಜ್ಜಿ.</string>
   <string name="location_permission_rationale">ಐಚ್ಛಿಕ ಅನುಮತಿ: ವರ್ಗೊ ಸಲಹೆಗ್ ಇತ್ತೆತ ಸ್ಥಳೊನ್ ಪಡೆಲೆ.</string>
   <string name="ok">ಅವು</string>
   <string name="title_activity_nearby">ಕೈದಲ್ತಾ ಜಾಗೆಲು</string>

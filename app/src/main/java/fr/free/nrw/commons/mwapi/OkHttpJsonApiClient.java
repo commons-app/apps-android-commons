@@ -3,6 +3,12 @@ package fr.free.nrw.commons.mwapi;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import org.wikipedia.dataclient.mwapi.RecentChange;
+import org.wikipedia.util.DateUtil;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -18,21 +24,15 @@ import javax.inject.Singleton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.media.model.MwQueryPage;
-import fr.free.nrw.commons.mwapi.model.MwQueryResponse;
-import fr.free.nrw.commons.mwapi.model.RecentChange;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.utils.DateUtils;
-import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -42,6 +42,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import timber.log.Timber;
 
+/**
+ * Test methods in ok http api client
+ */
 @Singleton
 public class OkHttpJsonApiClient {
 
@@ -132,7 +135,7 @@ public class OkHttpJsonApiClient {
             String url = String.format(
                     Locale.ENGLISH,
                     fetchAchievementUrlTemplate,
-                    new PageTitle(userName).getText());
+                    userName);
             HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
             urlBuilder.addQueryParameter("user", userName);
             Timber.i("Url %s", urlBuilder.toString());
@@ -218,19 +221,34 @@ public class OkHttpJsonApiClient {
      */
     @Nullable
     public Single<Media> getPictureOfTheDay() {
-        String template = "Template:Potd/" + DateUtils.getCurrentDate();
+        String date = DateUtil.getIso8601DateFormatShort().format(new Date());
+        Timber.d("Current date is %s", date);
+        String template = "Template:Potd/" + date;
+        return getMedia(template, true);
+    }
+
+    /**
+     * Fetches Media object from the imageInfo API
+     *
+     * @param titles       the tiles to be searched for. Can be filename or template name
+     * @param useGenerator specifies if a image generator parameter needs to be passed or not
+     * @return
+     */
+    public Single<Media> getMedia(String titles, boolean useGenerator) {
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(commonsBaseUrl)
                 .newBuilder()
                 .addQueryParameter("action", "query")
-                .addQueryParameter("generator", "images")
                 .addQueryParameter("format", "json")
-                .addQueryParameter("titles", template)
-                .addQueryParameter("prop", "imageinfo")
-                .addQueryParameter("iiprop", "url|extmetadata");
+                .addQueryParameter("formatversion", "2")
+                .addQueryParameter("titles", titles);
+
+        if (useGenerator) {
+            urlBuilder.addQueryParameter("generator", "images");
+        }
 
         Request request = new Request.Builder()
-                .url(urlBuilder.build())
+                .url(appendMediaProperties(urlBuilder).build())
                 .build();
 
         return Single.fromCallable(() -> {
@@ -238,17 +256,39 @@ public class OkHttpJsonApiClient {
             if (response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
                 MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
-                return Media.from(mwQueryPage.query().firstPage());
+                if (mwQueryPage.success() && mwQueryPage.query().firstPage() != null) {
+                    return Media.from(mwQueryPage.query().firstPage());
+                }
             }
             return null;
         });
     }
 
     /**
+     * Whenever imageInfo is fetched, these common properties can be specified for the API call
+     * https://www.mediawiki.org/wiki/API:Imageinfo
+     *
+     * @param builder
+     * @return
+     */
+    private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
+        builder.addQueryParameter("prop", "imageinfo")
+                .addQueryParameter("iiprop", "url|extmetadata")
+                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl");
+
+        String language = Locale.getDefault().getLanguage();
+        if (!StringUtils.isBlank(language)) {
+            builder.addQueryParameter("iiextmetadatalanguage", language);
+        }
+
+        return builder;
+    }
+
+    /**
      * This method takes the keyword and queryType as input and returns a list of  Media objects filtered using image generator query
      * It uses the generator query API to get the images searched using a query, 10 at a time.
      * @param queryType queryType can be "search" OR "category"
-     * @param keyword
+     * @param keyword the search keyword. Can be either category name or search query
      * @return
      */
     @Nullable
@@ -257,7 +297,8 @@ public class OkHttpJsonApiClient {
                 .parse(commonsBaseUrl)
                 .newBuilder()
                 .addQueryParameter("action", "query")
-                .addQueryParameter("format", "json");
+                .addQueryParameter("format", "json")
+                .addQueryParameter("formatversion", "2");
 
 
         if (queryType.equals("search")) {
@@ -278,10 +319,13 @@ public class OkHttpJsonApiClient {
             if (response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
                 MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
-                putContinueValues(keyword, mwQueryResponse.continuation());
-                if (mwQueryResponse.query() == null) {
+                if (null == mwQueryResponse
+                    || null == mwQueryResponse.query()
+                    || null == mwQueryResponse.query().pages()) {
                     return mediaList;
                 }
+                putContinueValues(keyword, mwQueryResponse.continuation());
+
                 List<MwQueryPage> pages = mwQueryResponse.query().pages();
                 for (MwQueryPage page : pages) {
                     Media media = Media.from(page);
@@ -295,28 +339,10 @@ public class OkHttpJsonApiClient {
     }
 
     /**
-     * Whenever imageInfo is fetched, these common properties can be specified for the API call
-     * https://www.mediawiki.org/wiki/API:Imageinfo
-     * @param builder
-     * @return
-     */
-    private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
-        builder.addQueryParameter("prop", "imageinfo")
-                .addQueryParameter("iiprop", "url|extmetadata")
-                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName");
-
-        String language = Locale.getDefault().getLanguage();
-        if (!StringUtils.isNullOrWhiteSpace(language)) {
-            builder.addQueryParameter("iiextmetadatalanguage", language);
-        }
-
-        return builder;
-    }
-
-    /**
      * Append params for search query.
-     * @param query
-     * @param urlBuilder
+     *
+     * @param query      the search query to be sent to the API
+     * @param urlBuilder builder for HttpUrl
      */
     private void appendSearchParam(String query, HttpUrl.Builder urlBuilder) {
         urlBuilder.addQueryParameter("generator", "search")
@@ -328,6 +354,7 @@ public class OkHttpJsonApiClient {
 
     /**
      * It takes a urlBuilder and appends all the continue values as query parameters
+     *
      * @param query
      * @param urlBuilder
      */
@@ -340,6 +367,12 @@ public class OkHttpJsonApiClient {
         }
     }
 
+    /**
+     * Append parameters for category image generator
+     *
+     * @param categoryName name of the category
+     * @param urlBuilder   HttpUrl builder
+     */
     private void appendCategoryParams(String categoryName, HttpUrl.Builder urlBuilder) {
         urlBuilder.addQueryParameter("generator", "categorymembers")
                 .addQueryParameter("gcmtype", "file")
@@ -352,6 +385,7 @@ public class OkHttpJsonApiClient {
     /**
      * Stores the continue values for action=query
      * These values are sent to the server in the subsequent call to fetch results after this point
+     *
      * @param keyword
      * @param values
      */
@@ -362,6 +396,7 @@ public class OkHttpJsonApiClient {
     /**
      * Retrieves a map of continue values from shared preferences.
      * These values are appended to the next API call
+     *
      * @param keyword
      * @return
      */
@@ -371,6 +406,7 @@ public class OkHttpJsonApiClient {
 
     /**
      * Returns recent changes on commons
+     *
      * @return list of recent changes made
      */
     @Nullable
@@ -381,13 +417,15 @@ public class OkHttpJsonApiClient {
         Date now = new Date();
         Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
 
+        String rcStart = DateUtil.getIso8601DateFormat().format(startDate);
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(commonsBaseUrl)
                 .newBuilder()
                 .addQueryParameter("action", "query")
                 .addQueryParameter("format", "json")
+                .addQueryParameter("formatversion", "2")
                 .addQueryParameter("list", "recentchanges")
-                .addQueryParameter("rcstart", DateUtils.formatMWDate(startDate))
+                .addQueryParameter("rcstart", rcStart)
                 .addQueryParameter("rcnamespace", FILE_NAMESPACE)
                 .addQueryParameter("rcprop", "title|ids")
                 .addQueryParameter("rctype", "new|log")
@@ -402,7 +440,7 @@ public class OkHttpJsonApiClient {
             if (response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
                 MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
-                return mwQueryPage.query().getRecentchanges();
+                return mwQueryPage.query().getRecentChanges();
             }
             return new ArrayList<>();
         });
@@ -420,6 +458,7 @@ public class OkHttpJsonApiClient {
                 .newBuilder()
                 .addQueryParameter("action", "query")
                 .addQueryParameter("format", "json")
+                .addQueryParameter("formatversion", "2")
                 .addQueryParameter("prop", "revisions")
                 .addQueryParameter("rvprop", "timestamp|ids|user")
                 .addQueryParameter("titles", filename)

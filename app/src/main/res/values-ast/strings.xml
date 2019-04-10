@@ -159,7 +159,7 @@
   <string name="detail_license_empty">Llicencia desconocida</string>
   <string name="menu_refresh">Refrescar</string>
   <string name="read_storage_permission_rationale">Permisu riquíu: llectura d\'almacenamientu esternu. L\'aplicación nun puede entrar na to galería ensin él.</string>
-  <string name="write_storage_permission_rationale">Permisu necesariu: Escritura n\'almacenamientu esternu. L\'aplicación nun puede aportar a la cámara ensin él.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Permisu necesariu: Escritura n\'almacenamientu esternu. L\'aplicación nun puede aportar a la cámara ensin él.</string>
   <string name="location_permission_rationale">Permisu opcional: llograr l\'allugamientu actual pa suxerir categoríes</string>
   <string name="ok">Aceutar</string>
   <string name="title_activity_nearby">Llugares cercanos</string>

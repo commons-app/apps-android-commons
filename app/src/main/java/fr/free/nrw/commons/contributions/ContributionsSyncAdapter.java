@@ -11,20 +11,18 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
+import org.wikipedia.util.DateUtil;
+
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.LogEventResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -151,13 +149,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 done = true;
             }
         }
-        defaultKvStore.putString("lastSyncTimestamp", toMWDate(curTime));
+        defaultKvStore.putString("lastSyncTimestamp", DateUtil.getIso8601DateFormat().format(curTime));
         Timber.d("Oh hai, everyone! Look, a kitty!");
-    }
-
-    private String toMWDate(Date date) {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
-        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return isoFormat.format(date);
     }
 }
