@@ -289,4 +289,11 @@
   <string name="desc_language_Middle_East">Bliski Wschód</string>
   <string name="desc_language_Africa">Afryka</string>
   <string name="desc_language_Asia">Azja</string>
+
+  <string name="check_category_edit_summary">Sprawdzanie kategorii</string>
+  <string name="check_category_success_title">Zażądano sprawdzenia kategorii</string>
+  <string name="check_category_failure_title">Nie udało się zażądać sprawdzenia kategorii</string>
+  <string name="check_category_success_message">Udało się zażądać sprawdzenia kategorii dla %1$s</string>
+  <string name="check_category_failure_message">Nie udało się zażądać sprawdzenia kategorii dla %1$s</string>
+  <string name="check_category_toast">Sprawdzanie kategorii dla %1$s</string>
 </resources>
