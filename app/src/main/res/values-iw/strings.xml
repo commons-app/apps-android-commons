@@ -176,7 +176,7 @@
   <string name="menu_refresh">רענון</string>
   <string name="storage_permission_title">בקשת הרשאה לאחסון</string>
   <string name="read_storage_permission_rationale">נדרשת הרשאה: קריאת אחסון חיצוני. היישום לא יכול לגשת לגלריה שלך בלי זה.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לגשת למצלמה שלך בלי זה.</string>
+  <string name="write_storage_permission_rationale">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לגשת למצלמה או לגלריה שלך בלי זה.</string>
   <string name="location_permission_rationale">הרשאה לא מחייבת: קבלת מיקום נוכחי בשביל הצעות קטגוריות</string>
   <string name="ok">אישור</string>
   <string name="title_activity_nearby">מקומות בסביבה</string>
@@ -269,6 +269,7 @@
   <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה</string>
   <string name="nominated_see_more">&lt;u&gt;ר\' את האתר לפרטים&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">העלאה של %1$s להצבעה למחיקה.</string>
+  <string name="nominating_for_deletion_status">העמדת קובץ למחיקה: %1$s</string>
   <string name="view_browser">הצגה בדפדפן</string>
   <string name="skip_login">לדלג</string>
   <string name="navigation_item_login">כניסה לחשבון</string>
@@ -297,6 +298,8 @@
   <string name="no_internet">האינטרנט אינו זמין</string>
   <string name="internet_established">האינטרנט זמין</string>
   <string name="error_notifications">שגיאה באחזור התראות</string>
+  <string name="error_review">שגיאת באחזור התמונה לסקירה. נא לרענן כדי לנסות שוב.</string>
+  <string name="error_review_categories">שגיאה באחזור קטגוריות תמונות לסקירה. נא לרענן כדי לנסות שוב.</string>
   <string name="no_notifications">לא נמצאו התראות</string>
   <string name="about_translate">תרגום</string>
   <string name="about_translate_title">שפות</string>
@@ -305,7 +308,7 @@
   <string name="about_translate_cancel">ביטול</string>
   <string name="retry">לנסות שוב</string>
   <string name="showcase_view_got_it_button">הבנתי!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">אלה המקומות בסביבתך שזקוקים לתמונות כדי להמחיש את הערכים שלהם בוויקיפדיה</string>
+  <string name="showcase_view_whole_nearby_activity">אלה המקומות בסביבתך שזקוקים לתמונות כדי להמחיש את הערכים שלהם בוויקיפדיה.\n\nלחיצה על חיפוש באזור הזה נועלת את המפה ומתחילה חיפוש סביב המיקום הזה.</string>
   <string name="showcase_view_list_icon">ניתן ללחוץ על כפתור זה כדי להציג רשימה של המקומות האלה</string>
   <string name="showcase_view_plus_fab">באפשרותך להעלות תמונה של כל מקום מהגלריה או מהמצלמה שלך</string>
   <string name="no_images_found">לא נמצאו תמונות!</string>
@@ -441,11 +444,15 @@
   <string name="achievements_fetch_failed">משהו השתבש, לא הצלחנו לקבל את ההישגים שלך</string>
   <string name="ends_on">מסתיים ב־:</string>
   <string name="display_campaigns">הצגת מסעי פרסום</string>
-  <string name="display_campaigns_explanation" fuzzy="true">יש לגעת כאן כדי לצפות במסעי פרסום שמתרחשים כרגע</string>
+  <string name="display_campaigns_explanation">ר\' את מסעי פרסום שמתרחשים כרגע</string>
   <string name="nearby_campaign_dismiss_message">מסעי הפרסום לא יופיעו עוד. עם זאת, ניתן להפעיל את ההתראות האלה מחדש בהגדרות בהתאם לרצונך.</string>
   <string name="this_function_needs_network_connection">תכונה זו דורשת חיבור לרשת, נא לבדוק את הגדרות החיבור שלך.</string>
   <string name="bad_token_error_proposed_solution">ההעלאה נכשלה עקב תקלות עם אסימון עריכה. נא לנסות לצאת ולהיכנס שוב.</string>
   <string name="error_processing_image">אירעה שגיאה בעת עיבוד התמונה. נא לנסות שוב!</string>
+  <string name="getting_edit_token">קבלת אסימון לעריכה</string>
+  <string name="check_category_adding_template">הוספת תבנית לבדיקת קטגוריה</string>
+  <string name="check_category_notification_title">בקשת בדיקת קטגוריה עבור %1$s</string>
+  <string name="check_category_edit_summary">בקשת בדיקת קטגוריה</string>
   <string name="notsure">לא בטוח</string>
   <string name="send_thank_success_title">שליחת תודה: הצלחה</string>
   <string name="send_thank_success_message">נשלחה תודה בהצלחה אל %1$s</string>

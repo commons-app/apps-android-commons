@@ -145,6 +145,7 @@
   <string name="about_translate_title">{{Identical|Language}}</string>
   <string name="about_translate_cancel">{{Identical|Cancel}}</string>
   <string name="retry">{{Identical|Retry}}</string>
+  <string name="showcase_view_whole_nearby_activity">\"Search this area\" refers to {{msg-wm|Commons-android-strings-search this area}}.</string>
   <string name="menu_search_button">{{Identical|Search}}</string>
   <string name="title_activity_search">{{Identical|Search}}</string>
   <string name="successful_wikidata_edit">Message shown in a dialog (\"success toast\") after a contribution by the user.\n\nParameter:\n* %1$s - title of the target page on Wikidata</string>

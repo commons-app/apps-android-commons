@@ -133,6 +133,7 @@
   <string name="title_activity_nearby">အနီးအနား နေရာများ</string>
   <string name="no_nearby">အနီးအနား နေရာများ မတွေ့ပါ</string>
   <string name="warning">သတိပေးချက်</string>
+  <string name="upload_image_duplicate">ဤဖိုင်သည် ကွန်မွန်းစ်ပေါ်တွင် ရှိနှင့်ပြီးဖြစ်သည်။ ဆက်လုပ်ရန် သေချာပါသလား။</string>
   <string name="yes">မှန်</string>
   <string name="no">မလုပ်ပါ</string>
   <string name="media_detail_title">ခေါင်းစဉ်</string>
@@ -145,7 +146,10 @@
   <string name="media_detail_coordinates_empty">မဖြည့်ထားပါ</string>
   <string name="number_of_uploads">မိမိ၏ လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက်</string>
   <string name="maximum_limit">အများဆုံး ကန့်သတ်ချက်</string>
+  <string name="invalid_zero">သုညသည် မကိုက်ညီပါ</string>
+  <string name="invalid_input">မကိုက်ညီသော ထည့်သွင်းမှု</string>
   <string name="maximum_limit_alert">၅၀၀ ထက်ပို၍ မပြသနိုင်ပါ</string>
+  <string name="enter_valid">ကိုက်ညီသောနံပါတ်တစ်ခု ရိုက်ထည့်ပါ</string>
   <string name="set_limit" fuzzy="true">လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက် သတ်မှတ်ရန်</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
   <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>

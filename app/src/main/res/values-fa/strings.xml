@@ -308,6 +308,7 @@
   <string name="search_tab_title_media">رسانه</string>
   <string name="search_tab_title_categories">دسته بندی</string>
   <string name="explore_tab_title_featured">برگزیده</string>
+  <string name="explore_tab_title_mobile">بارگذاری‌شده با تلفن همراه</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
   <string name="wallpaper_set_successfully">تصویر پس زمینه به طور موفقیت آمیز تنظیم شد!</string>
   <string name="quiz">امتحان</string>
@@ -385,6 +386,7 @@
   <string name="error_processing_image">هنگام پردازش این تصویر خطایی رخ داد. لطفا دوباره سعی کنید!</string>
   <string name="nominate_for_deletion_done">انجام شد</string>
   <string name="notsure">مطمئن نیستم</string>
+  <string name="send_thank_success_title">ارسال تشکر: موفق</string>
   <string name="send_thank_send">ارسال تشکر</string>
   <string name="send_thank_notification_title">ارسال تشکر</string>
   <string name="review_category">آیا این به درستی رده‌بندی شده‌است؟</string>
