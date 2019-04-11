@@ -7,35 +7,42 @@
     android:background="?attr/contributionsListBackground"
     >
 
-    <TextView
-        android:id="@+id/noContributionsYet"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/no_uploads"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:layout_marginRight="@dimen/tiny_gap"
-        android:layout_marginEnd="@dimen/tiny_gap"
-        />
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/loadingContributionsProgressBar"
-        />
-    <GridView
-        android:id="@+id/contributionsList"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:stretchMode="columnWidth"
-        android:columnWidth="240dp"
-        android:numColumns="auto_fit"
-        android:listSelector="@null"
-        android:fadingEdge="none"
-        android:fastScrollEnabled="true"
-        />
+        android:id="@+id/contributions_parent_view">
+
+        <TextView
+            android:id="@+id/noContributionsYet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_uploads"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/tiny_gap"
+            android:layout_marginEnd="@dimen/tiny_gap"
+            />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/loadingContributionsProgressBar"
+            />
+        <GridView
+            android:id="@+id/contributionsList"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:stretchMode="columnWidth"
+            android:columnWidth="240dp"
+            android:numColumns="auto_fit"
+            android:listSelector="@null"
+            android:fadingEdge="none"
+            android:fastScrollEnabled="true"
+            />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/fab_layout"

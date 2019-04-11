@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.content.res.Configuration;
 import android.widget.LinearLayout;
@@ -50,6 +51,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     TextView noContributionsYet;
     @BindView(R.id.fab_layout)
     LinearLayout fab_layout;
+    @BindView(R.id.contributions_parent_view)
+    RelativeLayout contributionsParentView;
 
     @Inject @Named("default_preferences") JsonKvStore kvStore;
     @Inject ContributionController controller;
@@ -111,12 +114,14 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
             if (isFabOpen) {
+                contributionsParentView.setAlpha((float) 1);
                 fabPlus.startAnimation(rotate_backward);
                 fabCamera.startAnimation(fab_close);
                 fabGallery.startAnimation(fab_close);
                 fabCamera.hide();
                 fabGallery.hide();
             } else {
+                contributionsParentView.setAlpha((float) 0.2);
                 fabPlus.startAnimation(rotate_forward);
                 fabCamera.startAnimation(fab_open);
                 fabGallery.startAnimation(fab_open);
