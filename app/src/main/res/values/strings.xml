@@ -468,7 +468,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="check_category_adding_template">Adding template for category check</string>
   <string name="check_category_notification_title">Requesting category check for %1$s</string>
     <string name="check_category_edit_summary">Requesting category check</string>
-  <string name="check_category_success_title">Requesting category check: Success</string>
+  <string name="check_category_success_title">Category check requested</string>
   <string name="check_category_failure_title">Requesting category check: Failed</string>
   <string name="check_category_success_message">Successfully requested category check for %1$s</string>
   <string name="check_category_failure_message">Could not request category check for %1$s</string>
