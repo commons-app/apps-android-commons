@@ -127,7 +127,7 @@ public class UploadPresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageResult -> handleImage(title, descriptions, imageResult),
-                        throwable -> Timber.e(throwable, "Error occurred while handling image")));
+                        throwable -> handleError(throwable)));
     }
 
     private void handleImage(Title title, List<Description> descriptions, Integer imageResult) {
