@@ -171,7 +171,7 @@
   <string name="menu_refresh">Uppdatera</string>
   <string name="storage_permission_title">Begär lagringsbehörighet</string>
   <string name="read_storage_permission_rationale">Nödvändig behörighet: Läs extern lagring. Appen kan inte komma åt ditt galleri utan detta.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera utan detta.</string>
+  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera/galleri utan detta.</string>
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Platser i närheten</string>
@@ -508,4 +508,5 @@
   <string name="images_via_nearby_explanation">Bilder som har laddats upp via \"Platser i närheten\" är bilderna som laddas upp genom att upptäcka platser på kartan.</string>
   <string name="thanks_received_explanation">Denna funktion låter redigerare skicka en tackavisering till användare som gör användbara redigeringar – genom att använda en liten tacklänk på historik- eller diff-sidor.</string>
   <string name="skip_image">HOPPA ÖVER DENNA BILD</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Nedladdning misslyckades!! Vi kan inte ladda ned filen utan behörighet för extern lagring.</string>
 </resources>

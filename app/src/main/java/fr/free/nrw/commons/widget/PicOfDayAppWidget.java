@@ -25,6 +25,7 @@ import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -45,6 +46,13 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pic_of_day_app_widget);
+
+        // Launch App on Button Click
+        Intent viewIntent = new Intent(context, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, 0);
+        views.setOnClickPendingIntent(R.id.camera_button, pendingIntent);
+        appWidgetManager.updateAppWidget(appWidgetId, views);
+
         loadPictureOfTheDay(context, views, appWidgetManager, appWidgetId);
     }
 

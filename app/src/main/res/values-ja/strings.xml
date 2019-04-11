@@ -11,6 +11,7 @@
 * Takot
 * Whym
 * Yusuke1109
+* Yuukin0248
 -->
 <resources>
   <string name="preference_category_appearance">表示</string>
@@ -20,6 +21,7 @@
   <string name="app_name">コモンズ</string>
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
+  <string name="intent_share_upload_label">コモンズにアップロード</string>
   <string name="username">利用者名</string>
   <string name="password">パスワード</string>
   <string name="login_credential">コモンズのベータ版アカウントにログイン</string>
@@ -162,7 +164,7 @@
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
   <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリはギャラリーを開けません。</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">必要な権限:外部ストレージに入力します。これがないとアプリはカメラにアクセスできません。</string>
+  <string name="write_storage_permission_rationale">必要な権限: 外部ストレージに入力します。これがないとアプリはカメラ/ギャラリーにアクセスできません。</string>
   <string name="location_permission_rationale">オプションの権限：カテゴリ候補のため現在の位置を取得する</string>
   <string name="ok">承認</string>
   <string name="title_activity_nearby">近くの場所</string>
@@ -286,13 +288,21 @@
   <string name="share_app_title">アプリをシェアする</string>
   <string name="share_coordinates_not_present">画像の選択中に位置情報を特定できませんでした</string>
   <string name="error_fetching_nearby_places">付近の場所を取得しようとしてエラーが発生しました。</string>
+  <string name="add_description">説明を追加</string>
+  <string name="no_recent_searches">最近の検索はまだありません</string>
+  <string name="delete_recent_searches_dialog">本当に検索履歴を消去しますか?</string>
   <string name="delete_search_dialog">この検索を削除しますか?</string>
+  <string name="search_history_deleted">検索履歴を削除しました</string>
+  <string name="nominate_delete">削除候補</string>
   <string name="delete">削除</string>
   <string name="statistics">統計</string>
   <string name="submit">送信</string>
   <plurals name="upload_count_title">
     <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
+  <string name="navigation_item_bookmarks">ブックマーク</string>
+  <string name="title_activity_bookmarks">ブックマーク</string>
+  <string name="provider_bookmarks_location">ブックマーク</string>
   <string name="desc_language_Worldwide">全世界</string>
   <string name="desc_language_America">アメリカ</string>
   <string name="desc_language_Europe">ヨーロッパ</string>
@@ -300,5 +310,7 @@
   <string name="desc_language_Africa">アフリカ</string>
   <string name="desc_language_Asia">アジア</string>
   <string name="desc_language_Pacific">太平洋地域</string>
+  <string name="nominate_for_deletion_done">完了</string>
+  <string name="review_thanks_no_button_text">次の画像</string>
   <string name="please_wait">お待ちください…</string>
 </resources>
