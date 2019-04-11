@@ -104,12 +104,18 @@ public class SettingsFragment extends PreferenceFragment {
             checkPermissionsAndSendLogs();
             return true;
         });
-        // Disable "useExternalStorage", "Recent upload limit" and "Use custom author name" when not logged in.
+        // Disable some settings when not logged in.
         if (defaultKvStore.getBoolean("login_skipped", false)){
             SwitchPreference useExternalStorage = (SwitchPreference) findPreference("useExternalStorage");
+            SwitchPreference displayNearbyCardView = (SwitchPreference) findPreference("displayNearbyCardView");
+            SwitchPreference displayLocationPermissionForCardView = (SwitchPreference) findPreference("displayLocationPermissionForCardView");
+            SwitchPreference displayCampaignsCardView = (SwitchPreference) findPreference("displayCampaignsCardView");
             useExternalStorage.setEnabled(false);
             uploadLimit.setEnabled(false);
             useAuthorName.setEnabled(false);
+            displayNearbyCardView.setEnabled(false);
+            displayLocationPermissionForCardView.setEnabled(false);
+            displayCampaignsCardView.setEnabled(false);
         }
     }
 
