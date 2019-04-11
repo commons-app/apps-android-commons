@@ -62,12 +62,6 @@
     <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
         android:title="@string/preference_category_privacy">
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
-            android:entries="@array/pref_locationAccuracy_entries"
-            android:entryValues="@array/pref_locationAccuracy_values"
-            android:key="locationAccuracy"
-            android:title="@string/location_accuracy"
-            android:defaultValue="0"/>
         <MultiSelectListPreference
             android:entries="@array/pref_exifTag_entries"
             android:entryValues="@array/pref_exifTag_values"

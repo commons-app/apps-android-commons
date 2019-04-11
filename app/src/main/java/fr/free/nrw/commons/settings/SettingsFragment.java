@@ -4,7 +4,6 @@ import android.Manifest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
@@ -93,14 +92,6 @@ public class SettingsFragment extends PreferenceFragment {
                 uploadLimit.setText(Integer.toString(value));
                 uploadLimit.setSummary(Integer.toString(value));
             }
-        });
-
-        final ListPreference locationAccuracy = (ListPreference) findPreference("locationAccuracy");
-        locationAccuracy.setSummary(locationAccuracy.getEntry());
-        locationAccuracy.setOnPreferenceChangeListener((preference, newValue) -> {
-            locationAccuracy.setValue(newValue.toString());
-            locationAccuracy.setSummary(locationAccuracy.getEntry());
-            return true;
         });
 
         Preference betaTesterPreference = findPreference("becomeBetaTester");

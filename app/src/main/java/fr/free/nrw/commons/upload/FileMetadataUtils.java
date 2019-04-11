@@ -20,6 +20,9 @@ public class FileMetadataUtils {
                 return Observable.fromArray(TAG_ARTIST, TAG_CAMARA_OWNER_NAME);
             case "Copyright":
                 return Observable.fromArray(TAG_COPYRIGHT);
+            case "Location":
+                return Observable.fromArray(TAG_GPS_LATITUDE, TAG_GPS_ALTITUDE_REF,
+                        TAG_GPS_LONGITUDE, TAG_GPS_LONGITUDE_REF);
             case "Camera Model":
                 return Observable.fromArray(TAG_MAKE, TAG_MODEL);
             case "Lens Model":

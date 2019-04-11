@@ -539,17 +539,10 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="manage_exif_tags">Manage EXIF Tags</string>
   <string name="manage_exif_tags_summary">Select which EXIF tags to keep in uploads</string>
-  <string name="location_accuracy">Set Location Accuracy</string>
-  <string name="location_accuracy_pref_remove">Remove all location data</string>
-  <string name="location_accuracy_pref_20km">Reduce accuracy to 20km</string>
-  <string name="location_accuracy_pref_10km">Reduce accuracy to 10km</string>
-  <string name="location_accuracy_pref_5km">Reduce accuracy to 5km</string>
-  <string name="location_accuracy_pref_1km">Reduce accuracy to 1km</string>
-  <string name="location_accuracy_pref_100m">Reduce accuracy to 100m</string>
-  <string name="location_accuracy_pref_do_nothing">Do nothing</string>
 
   <string name="exif_tag_name_author">Author</string>
   <string name="exif_tag_name_copyright">Copyright</string>
+  <string name="exif_tag_name_location">Location</string>
   <string name="exif_tag_name_cameraModel">Camera Model</string>
   <string name="exif_tag_name_lensModel">Lens Model</string>
   <string name="exif_tag_name_serialNumbers">Serial Numbers</string>

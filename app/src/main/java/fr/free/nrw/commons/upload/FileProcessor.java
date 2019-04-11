@@ -105,8 +105,6 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     @SuppressLint("CheckResult")
     private void redactMetadata(Context context) {
         Set<String> prefManageEXIFTags = defaultKvStore.getStringSet("manageExifTags");
-        double prefLocationAccuracy = Double.valueOf(defaultKvStore.getString("locationAccuracy", "0"))
-                / 111300; // About 111300 meters in one degree.
         boolean prefKeepXmp = defaultKvStore.getBoolean("keepXmp", true);
 
         try {
@@ -135,7 +133,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
             Timber.d(redactTags.toString());
             redactTags.removeAll(prefManageEXIFTags);
 
-            if (!redactTags.isEmpty() || prefLocationAccuracy != 0) {
+            if (!redactTags.isEmpty()) {
                 //noinspection ResultOfMethodCallIgnored
                 Observable.fromIterable(redactTags)
                         .flatMap(FileMetadataUtils::getTagsFromPref)
@@ -147,39 +145,12 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                                 exifInterface.setAttribute(tag, null);
                             }
                         });
-
-                if (prefLocationAccuracy < 0d) {
-                    Timber.d("Setting EXIF coordinates to 0.");
-                    exifInterface.setLatLong(0d, 0d);
-                } else if (prefLocationAccuracy != 0d) {
-                    Timber.d("Reducing location accuracy by k = %s", prefLocationAccuracy);
-                    String latitudeStr = exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
-                    double latitude = latitudeStr == null ? 0d : GPSExtractor.convertToDegree(latitudeStr);
-
-                    String longitudeStr = exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
-                    double longitude = longitudeStr == null ? 0d : GPSExtractor.convertToDegree(longitudeStr);
-
-                    exifInterface.setLatLong(
-                            anonymizeCoord(latitude, prefLocationAccuracy),
-                            anonymizeCoord(longitude, prefLocationAccuracy));
-                }
                 exifInterface.saveAttributes();
             }
         } catch (IOException e) {
             Timber.w(e);
-            throw new RuntimeException("EXIF redaction failed.");
+            throw new RuntimeException("EXIF/XMP redaction failed.");
         }
-    }
-
-    /**
-     * Reduces the accuracy of the coordinate according to location accuracy preference.
-     *
-     * @param input
-     * @return The coordinate with reduced accuracy.
-     */
-    private double anonymizeCoord(double input, double prefLocationAccuracy){
-        double intermediate = Math.round(input / prefLocationAccuracy) * prefLocationAccuracy;
-        return Math.round(intermediate * 100000.0) / 100000.0; // Round to 5th decimal place.
     }
 
     /**
