@@ -114,6 +114,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
             if (isFabOpen) {
+                // clears the background when FAB is closed by setting the alpha back to 1
                 contributionsParentView.setAlpha((float) 1);
                 fabPlus.startAnimation(rotate_backward);
                 fabCamera.startAnimation(fab_close);
@@ -121,7 +122,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
                 fabCamera.hide();
                 fabGallery.hide();
             } else {
+                // fades the background when FAB is open by setting the alpha to 0.2
                 contributionsParentView.setAlpha((float) 0.2);
+                
                 fabPlus.startAnimation(rotate_forward);
                 fabCamera.startAnimation(fab_open);
                 fabGallery.startAnimation(fab_open);
