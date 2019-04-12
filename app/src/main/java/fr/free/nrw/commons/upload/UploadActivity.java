@@ -2,9 +2,12 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +20,7 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -238,7 +242,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                                         UploadModel.UploadItem uploadItem,
                                         boolean isShowingItem) {
         boolean multipleUpload = false;
-        prevTitleDecs.setText(getResources().getString(R.string.previous_upload_title_description));
         s_count = stepCount;
         String cardTitle = getResources().getString(R.string.step_count, currentStep, stepCount);
         String cardSubTitle = getResources().getString(R.string.image_in_set_label, currentStep);
@@ -251,7 +254,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         }
         if (s_count > 3 && currentStep != 1) {
             multipleUpload = true;
-            prevTitleDecs.setText(getResources().getString(R.string.prprevious_image_title_description));
         }
         configurePrevButton(multipleUpload);
         if(isShowingItem) {
@@ -538,9 +540,12 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         rightCardMapButton.setOnClickListener(v -> presenter.openCoordinateMap());
     }
 
+    @SuppressLint({"NewApi", "ClickableViewAccessibility"})
     public void configurePrevButton(Boolean b){
+        prevTitleDecs.setCompoundDrawablesWithIntrinsicBounds(null, null, getDrawable(R.drawable.mapbox_info_icon_default), null);
+
         String name = "prev_";
-        if (b){
+        if (b) {
             name = name + "image_";
         } else {
             name = name + "upload_";
@@ -559,6 +564,19 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
             int position = directKvStore.getInt(name + "spinnerPosition_<"+Integer.toString(i)+">");
             description.setSelectedLanguageIndex(position);
         }
+        prevTitleDecs.setOnTouchListener((v, event) -> {
+            // Check this is a touch up event
+            if(event.getAction() != MotionEvent.ACTION_UP) return false;
+            // Check we are tapping within 15px of the info icon
+            int extraTapArea = 15;
+            Drawable info = prevTitleDecs.getCompoundDrawables()[2];
+            int infoHintbox = prevTitleDecs.getWidth() - info.getBounds().width();
+            if (event.getX() + extraTapArea < infoHintbox) return false;
+
+            DialogUtil.showAlertDialog(this, null, getString(R.string.previous_button_tooltip_message), "okay", null, null, null);
+
+            return true;
+        });
         prevTitleDecs.setOnClickListener((View v) -> {
             descriptionsAdapter.setItems(t, finalDesc);
             rvDescriptions.setAdapter(descriptionsAdapter);
