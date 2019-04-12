@@ -1,10 +1,13 @@
 package fr.free.nrw.commons
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.rule.ActivityTestRule
 import fr.free.nrw.commons.utils.StringUtils
 import timber.log.Timber
 
@@ -22,12 +25,12 @@ class UITestHelper {
         fun loginUser() {
             try {
                 //Perform Login
-                onView(ViewMatchers.withId(R.id.loginUsername))
+                onView(ViewMatchers.withId(R.id.login_username))
                         .perform(ViewActions.clearText(), ViewActions.typeText(getTestUsername()))
-                onView(ViewMatchers.withId(R.id.loginPassword))
+                onView(ViewMatchers.withId(R.id.login_password))
                         .perform(ViewActions.clearText(), ViewActions.typeText(getTestUserPassword()))
                 closeSoftKeyboard()
-                onView(ViewMatchers.withId(R.id.loginButton))
+                onView(ViewMatchers.withId(R.id.login_button))
                         .perform(ViewActions.click())
                 sleep(5000)
             } catch (ignored: NoMatchingViewException) {
@@ -56,6 +59,12 @@ class UITestHelper {
             if (StringUtils.isNullOrWhiteSpace(password) || password == "null") {
                 throw NotImplementedError("Configure your beta account's password")
             } else return password
+        }
+        fun <T: Activity> changeOrientation(activityRule: ActivityTestRule<T>){
+            activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            assert(activityRule.activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+            activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            assert(activityRule.activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
         }
     }
 }

@@ -174,8 +174,8 @@
   <string name="detail_license_empty">Licenza sconosciuta</string>
   <string name="menu_refresh">Aggiorna</string>
   <string name="storage_permission_title">Richiesta di autorizzazione di archiviazione</string>
-  <string name="read_storage_permission_rationale">Autorizzazione richiesta: leggere la memoria esterna. L\'app non può accedere alla tua galleria senza questo.</string>
-  <string name="write_storage_permission_rationale">Autorizzazione richiesta: scrivere memoria esterna. L\'app non può accedere alla tua videocamera senza questa.</string>
+  <string name="read_storage_permission_rationale">Autorizzazione richiesta: leggere la memoria esterna. L\'applicazione non può accedere alla tua galleria senza questo.</string>
+  <string name="write_storage_permission_rationale">Autorizzazione richiesta: scrivere memoria esterna. L\'applicazione non può accedere alla tua videocamera/galleria senza questa.</string>
   <string name="location_permission_rationale">Autorizzazione facoltativa: ottieni la posizione corrente per i suggerimenti di categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Luoghi nelle vicinanze</string>
@@ -434,7 +434,7 @@
   <string name="achievements_fetch_failed">Qualcosa è andato storto, non siamo riusciti a recuperare i tuoi risultati</string>
   <string name="ends_on">Termina il:</string>
   <string name="display_campaigns">Visualizza campagne</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Tocca qui per vedere le campagne in corso</string>
+  <string name="display_campaigns_explanation">Vedi le campagne in corso</string>
   <string name="nearby_campaign_dismiss_message">Non vedrai più le campagne. Tuttavia, puoi riattivare questa notifica in Impostazioni, se lo desideri.</string>
   <string name="this_function_needs_network_connection">Questa funzione richiede una connessione di rete, controlla le impostazioni di connessione.</string>
   <string name="bad_token_error_proposed_solution">Caricamento non riuscito a causa di problemi con il token di modifica. Si prega di provare a disconnettersi e riconnettersi nuovamente.</string>
@@ -455,4 +455,5 @@
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="image_chooser_title">Scegli le immagini da caricare</string>
   <string name="please_wait">Attendi per favore…</string>
+  <string name="skip_image">SALTA QUESTA IMMAGINE</string>
 </resources>

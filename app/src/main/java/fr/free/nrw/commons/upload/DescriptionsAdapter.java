@@ -229,7 +229,21 @@ class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewH
                     int defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(context);
                     spinnerDescriptionLanguages.setSelection(defaultLocaleIndex);
                 } else {
-                    spinnerDescriptionLanguages.setSelection(0);
+                    // availableLangIndex gives the index of first non-selected language
+                    int availableLangIndex = -1;
+
+                    // loops over the languagesAdapter and finds the index of first non-selected language
+                    for (int i = 0; i < languagesAdapter.getCount(); i++) {
+                        if (!selectedLanguages.containsKey(languagesAdapter.getLanguageCode(i))) {
+                            availableLangIndex = i;
+                            break;
+                        }
+                    }
+                    if (availableLangIndex >= 0) {
+                        // sets the spinner value to the index of first non-selected language
+                        spinnerDescriptionLanguages.setSelection(availableLangIndex);
+                        selectedLanguages.put(spinnerDescriptionLanguages, languagesAdapter.getLanguageCode(position));
+                    }
                 }
             } else {
                 spinnerDescriptionLanguages.setSelection(description.getSelectedLanguageIndex());

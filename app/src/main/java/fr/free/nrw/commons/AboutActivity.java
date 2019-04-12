@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.Menu;
@@ -16,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import org.wikipedia.util.StringUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,16 +32,6 @@ public class AboutActivity extends NavigationBaseActivity {
     @BindView(R.id.about_version) TextView versionText;
     @BindView(R.id.about_license) HtmlTextView aboutLicenseText;
     @BindView(R.id.about_faq) TextView faqText;
-
-    String language[] = { "Kazakh", "Afrikaans", "Arabic", "Bengali", "Asturianu", "azərbaycanca", "Bikol Central",
-    "Bulgarain", "বাংলা", "Bosanski", "Brezhoneg","català","کوردی", " čeština", " kaszëbsczi", "Cymraeg", "dansk", "Deutsch"
-    ,"Zazaki", "डोटेली","Ελληνικά","euskara","español","فارسی","suomi", "français" ,"Nordfriisk", "galego", "Hawaiʻi"
-    ,"हिन्दी","Hunsrik","עברית","hornjoserbsce","magyar","interlingua","Bahasa Indonesia", "íslenska","Italian","japanese",
-    "Basa Jawa", "ქართული", " ភាសាខ្មែរ","ಕನ್ನಡ", "한국어","къарачай-малкъар","Кыргызча", "latina", "Lëtzebuergesch", "lietuvių",
-    "latviešu", "Malagasy", "македонски"," മലയാളം","монгол","मराठी","Bahasa Melayu","Malti", "नेपाली",  "norsk bokmål",
-    " Nederlands","occitan","ଓଡ଼ିଆ","ਪੰਜਾਬੀ","polsk","Piemontèis","پښتو","português","română","русский"," سنڌي", " සිංහල",
-    "slovenčina"," سرائیکی", "svenska", "தமிழ்", "ತುಳು"," తెలుగు"," ไทย", "Türkçe","українська", "اردو", "Tiếng Việt",
-    " მარგალური","ייִדיש",};
 
     /**
      * This method helps in the creation About screen
@@ -66,11 +57,11 @@ public class AboutActivity extends NavigationBaseActivity {
         TextView credits = findViewById(R.id.about_credits);
         TextView faq = findViewById(R.id.about_faq);
 
-        rate_us.setText(Html.fromHtml(getString(R.string.about_rate_us)));
-        privacy_policy.setText(Html.fromHtml(getString(R.string.about_privacy_policy)));
-        translate.setText(Html.fromHtml(getString(R.string.about_translate)));
-        credits.setText(Html.fromHtml(getString(R.string.about_credits)));
-        faq.setText(Html.fromHtml(getString(R.string.about_faq)));
+        rate_us.setText(StringUtil.fromHtml(getString(R.string.about_rate_us)));
+        privacy_policy.setText(StringUtil.fromHtml(getString(R.string.about_privacy_policy)));
+        translate.setText(StringUtil.fromHtml(getString(R.string.about_translate)));
+        credits.setText(StringUtil.fromHtml(getString(R.string.about_credits)));
+        faq.setText(StringUtil.fromHtml(getString(R.string.about_faq)));
 
         initDrawer();
     }
@@ -144,7 +135,7 @@ public class AboutActivity extends NavigationBaseActivity {
     @OnClick(R.id.about_translate)
     public void launchTranslate(View view) {
         final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(AboutActivity.this,
-                android.R.layout.simple_spinner_dropdown_item, language);
+                android.R.layout.simple_spinner_dropdown_item, CommonsApplication.getInstance().getLanguageLookUpTable().getLocalizedNames());
         final Spinner spinner = new Spinner(AboutActivity.this);
         spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         spinner.setAdapter(languageAdapter);
@@ -156,11 +147,9 @@ public class AboutActivity extends NavigationBaseActivity {
         builder.setTitle(R.string.about_translate_title)
                 .setMessage(R.string.about_translate_message)
                 .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
-                    String languageSelected = spinner.getSelectedItem().toString();
-                    TokensTranslations tokensTranslations = new TokensTranslations();
-                    tokensTranslations.initailize();
-                    String token = tokensTranslations.getTranslationToken(languageSelected);
-                    Utils.handleWebUrl(AboutActivity.this,Uri.parse("https://translatewiki.net/w/i.php?title=Special:Translate&language="+token+"&group=commons-android-strings&filter=%21translated&action=translate ?"));
+                    String langCode = CommonsApplication.getInstance().getLanguageLookUpTable().getCodes().get(spinner.getSelectedItemPosition());
+                    Utils.handleWebUrl(AboutActivity.this,Uri.parse("https://translatewiki.net/w/i.php?title=Special:Translate&language="
+                            + langCode + "&group=commons-android-strings&filter=%21translated&action=translate ?"));
                 });
         builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> finish());
         builder.create().show();

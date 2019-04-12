@@ -1,182 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/coordinator_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/status_bar_blue">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/status_bar_blue"
-            >
+            android:layout_below="@id/toolbar"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <ProgressBar
+                android:id="@+id/progressBar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/toolbar"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    />
-
-                <FrameLayout
-                    android:id="@+id/container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/transparentView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/toolbar"
-                android:background="#aa969696"
-                android:elevation="6dp">
-
-            </View>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_recenter"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/toolbar"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="6dp"
-                android:clickable="true"
-                android:visibility="invisible"
-                app:backgroundTint="@color/main_background_light"
-                app:elevation="6dp"
-                app:fabSize="normal"
-                app:layout_anchorGravity="top|right|end"
-                app:srcCompat="@drawable/ic_my_location_black_24dp" />
 
+                />
 
-        </RelativeLayout>
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
-        <include layout="@layout/bottom_sheet_nearby" />
-
-        <include
-            android:id="@+id/bottom_sheet_details"
-            layout="@layout/bottom_sheet_details" />
-
-        <Button
-            android:id="@+id/search_this_area_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/white"
-            android:singleLine="true"
-            android:visibility="gone"
-            app:elevation="6dp"
-            android:layout_margin="8dp"
-            android:padding="8dp"
-            android:textColor="@color/status_bar_blue"
-            android:text="@string/search_this_area" />
-
-        <ProgressBar
-            android:id="@+id/search_this_area_button_progress_bar"
+        <View
+            android:id="@+id/transparentView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            />
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_alignParentLeft="true"
+            android:background="#aa969696"
+            android:elevation="6dp">
+
+        </View>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_plus"
+            android:id="@+id/fab_recenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/toolbar"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
             android:clickable="true"
             android:visibility="invisible"
-            app:backgroundTint="@color/button_blue"
+            app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
             app:fabSize="normal"
-            app:layout_anchor="@id/bottom_sheet_details"
             app:layout_anchorGravity="top|right|end"
-            app:pressedTranslationZ="12dp"
-            app:srcCompat="@drawable/ic_add_white_24dp" />
+            app:srcCompat="@drawable/ic_my_location_black_24dp"
+            app:useCompatPadding="true" />
 
-        <View
-            android:id="@+id/empty_view2"
-            android:layout_width="56dp"
-            android:layout_height="306dip"
-            android:visibility="invisible"
-            app:layout_anchor="@id/fab_plus"
-            app:layout_anchorGravity="center_horizontal" />
 
-        <View
-            android:id="@+id/empty_view1"
-            android:layout_width="56dp"
-            android:layout_height="186dip"
-            android:visibility="invisible"
-            app:layout_anchor="@id/fab_plus"
-            app:layout_anchorGravity="center_horizontal" />
+    </RelativeLayout>
 
-        <View
-            android:id="@+id/empty_view"
-            android:layout_width="56dp"
-            android:layout_height="66dip"
-            android:visibility="invisible"
-            app:layout_anchor="@id/fab_plus"
-            app:layout_anchorGravity="center_horizontal" />
+    <include layout="@layout/bottom_sheet_nearby" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:tint="@color/button_blue"
-            android:visibility="invisible"
-            app:backgroundTint="@color/main_background_light"
-            app:elevation="6dp"
-            app:fabSize="mini"
-            app:layout_anchor="@id/empty_view1"
-            app:layout_anchorGravity="center_horizontal"
-            app:pressedTranslationZ="12dp"
-            app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
+    <include
+        android:id="@+id/bottom_sheet_details"
+        layout="@layout/bottom_sheet_details" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:tint="@color/button_blue"
-            android:visibility="invisible"
-            app:backgroundTint="@color/main_background_light"
-            app:elevation="6dp"
-            app:fabSize="mini"
-            app:layout_anchor="@id/empty_view"
-            app:layout_anchorGravity="center_horizontal"
-            app:pressedTranslationZ="12dp"
-            app:srcCompat="@drawable/ic_photo_white_24dp" />
+    <Button
+        android:id="@+id/search_this_area_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        android:padding="8dp"
+        android:singleLine="true"
+        android:text="@string/search_this_area"
+        android:textColor="@color/status_bar_blue"
+        android:visibility="gone"
+        app:elevation="6dp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_commons_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:visibility="invisible"
-            app:backgroundTint="@color/main_background_light"
-            app:elevation="6dp"
-            app:fabSize="mini"
-            app:layout_anchor="@id/empty_view2"
-            app:layout_anchorGravity="center_horizontal"
-            app:pressedTranslationZ="12dp"
-            app:srcCompat="@drawable/ic_commons_icon_vector" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <ProgressBar
+        android:id="@+id/search_this_area_button_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:backgroundTint="@color/button_blue"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:layout_anchor="@id/bottom_sheet_details"
+        app:layout_anchorGravity="top|right|end"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_add_white_24dp"
+        app:useCompatPadding="true" />
+
+    <View
+        android:id="@+id/empty_view1"
+        android:layout_width="56dp"
+        android:layout_height="174dp"
+        android:visibility="invisible"
+        app:layout_anchor="@id/fab_plus"
+        app:layout_anchorGravity="center_horizontal" />
+
+    <View
+        android:id="@+id/empty_view"
+        android:layout_width="56dp"
+        android:layout_height="46dp"
+        android:visibility="invisible"
+        app:layout_anchor="@id/fab_plus"
+        app:layout_anchorGravity="center_horizontal" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:tint="@color/button_blue"
+        android:visibility="invisible"
+        app:backgroundTint="@color/main_background_light"
+        app:elevation="6dp"
+        app:fabSize="mini"
+        app:layout_anchor="@id/empty_view1"
+        app:layout_anchorGravity="center_horizontal"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:tint="@color/button_blue"
+        android:visibility="invisible"
+        app:backgroundTint="@color/main_background_light"
+        app:elevation="6dp"
+        app:fabSize="mini"
+        app:layout_anchor="@id/empty_view"
+        app:layout_anchorGravity="center_horizontal"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_photo_white_24dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -9,16 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.core.app.NavUtils;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,17 +20,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.io.IOException;
 import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.NavUtils;
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
+import butterknife.OnFocusChange;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -47,7 +50,6 @@ import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -63,23 +65,39 @@ import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
-    @Inject MediaWikiApi mwApi;
-    @Inject SessionManager sessionManager;
+    @Inject
+    MediaWikiApi mwApi;
+
+    @Inject
+    SessionManager sessionManager;
+
     @Inject
     @Named("default_preferences")
     JsonKvStore applicationKvStore;
 
-    @BindView(R.id.loginButton) Button loginButton;
-    @BindView(R.id.signupButton) Button signupButton;
-    @BindView(R.id.loginUsername) EditText usernameEdit;
-    @BindView(R.id.loginPassword) EditText passwordEdit;
-    @BindView(R.id.loginTwoFactor) EditText twoFactorEdit;
-    @BindView(R.id.error_message_container) ViewGroup errorMessageContainer;
-    @BindView(R.id.error_message) TextView errorMessage;
-    @BindView(R.id.login_credentials) TextView loginCredentials;
-    @BindView(R.id.two_factor_container) TextInputLayout twoFactorContainer;
-    @BindView(R.id.forgotPassword) HtmlTextView forgotPasswordText;
-    @BindView(R.id.skipLogin) HtmlTextView skipLoginText;
+    @BindView(R.id.login_button)
+    Button loginButton;
+
+    @BindView(R.id.login_username)
+    EditText usernameEdit;
+
+    @BindView(R.id.login_password)
+    EditText passwordEdit;
+
+    @BindView(R.id.login_two_factor)
+    EditText twoFactorEdit;
+
+    @BindView(R.id.error_message_container)
+    ViewGroup errorMessageContainer;
+
+    @BindView(R.id.error_message)
+    TextView errorMessage;
+
+    @BindView(R.id.login_credentials)
+    TextView loginCredentials;
+
+    @BindView(R.id.two_factor_container)
+    TextInputLayout twoFactorContainer;
 
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
@@ -88,7 +106,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     private Boolean loginCurrentlyInProgress = false;
     private Boolean errorMessageShown = false;
-    private String  resultantError;
+    private String resultantError;
     private static final String RESULTANT_ERROR = "resultantError";
     private static final String ERROR_MESSAGE_SHOWN = "errorMessageShown";
     private static final String LOGGING_IN = "loggingIn";
@@ -111,35 +129,50 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         ButterKnife.bind(this);
 
         usernameEdit.addTextChangedListener(textWatcher);
-        usernameEdit.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                ViewUtil.hideKeyboard(v);
-            }
-        });
-
         passwordEdit.addTextChangedListener(textWatcher);
-        passwordEdit.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                ViewUtil.hideKeyboard(v);
-            }
-        });
-
         twoFactorEdit.addTextChangedListener(textWatcher);
-        passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
+    }
 
-        loginButton.setOnClickListener(view -> performLogin());
-        signupButton.setOnClickListener(view -> signUp());
+    @OnFocusChange(R.id.login_username)
+    void onUsernameFocusChanged(View view, boolean hasFocus) {
+        if (!hasFocus) {
+            ViewUtil.hideKeyboard(view);
+        }
+    }
 
-        forgotPasswordText.setOnClickListener(view -> forgotPassword());
-        skipLoginText.setOnClickListener(view -> new AlertDialog.Builder(this).setTitle(R.string.skip_login_title)
+    @OnFocusChange(R.id.login_password)
+    void onPasswordFocusChanged(View view, boolean hasFocus) {
+        if (!hasFocus) {
+            ViewUtil.hideKeyboard(view);
+        }
+    }
+
+    @OnEditorAction(R.id.login_password)
+    boolean onEditorAction(int actionId, KeyEvent keyEvent) {
+        if (loginButton.isEnabled()) {
+            if (actionId == IME_ACTION_DONE) {
+                performLogin();
+                return true;
+            } else if ((keyEvent != null) && keyEvent.getKeyCode() == KEYCODE_ENTER) {
+                performLogin();
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    @OnClick(R.id.skip_login)
+    void skipLogin() {
+        new AlertDialog.Builder(this).setTitle(R.string.skip_login_title)
                 .setMessage(R.string.skip_login_message)
                 .setCancelable(false)
                 .setPositiveButton(R.string.yes, (dialog, which) -> {
                     dialog.cancel();
-                    skipLogin();
+                    performSkipLogin();
                 })
                 .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
-                .show());
+                .show();
 
         if (ConfigUtils.isBetaFlavour()) {
             loginCredentials.setText(getString(R.string.login_credential));
@@ -148,24 +181,20 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
-    /**
-     * This function is called when user skips the login.
-     * It redirects the user to Explore Activity.
-     */
-    private void skipLogin() {
-        applicationKvStore.putBoolean("login_skipped", true);
-        ExploreActivity.startYourself(this);
-        finish();
-
-    }
-
-    private void forgotPassword() {
+    @OnClick(R.id.forgot_password)
+    void forgotPassword() {
         Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
     }
 
     @OnClick(R.id.about_privacy_policy)
     void onPrivacyPolicyClicked() {
-        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+        Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL));
+    }
+
+    @OnClick(R.id.sign_up_button)
+    void signUp() {
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -190,7 +219,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
 
         if (applicationKvStore.getBoolean("login_skipped", false)) {
-            skipLogin();
+            performSkipLogin();
         }
 
     }
@@ -213,11 +242,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onDestroy();
     }
 
-    private void performLogin() {
+    @OnClick(R.id.login_button)
+    public void performLogin() {
         loginCurrentlyInProgress = true;
         Timber.d("Login to start!");
-        final String username = canonicializeUsername(usernameEdit.getText().toString());
-        final String rawUsername = Utils.capitalize(usernameEdit.getText().toString().trim());
+        final String username = usernameEdit.getText().toString();
+        final String rawUsername = usernameEdit.getText().toString().trim();
         final String password = passwordEdit.getText().toString();
         String twoFactorCode = twoFactorEdit.getText().toString();
 
@@ -241,10 +271,20 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
+    /**
+     * This function is called when user skips the login.
+     * It redirects the user to Explore Activity.
+     */
+    private void performSkipLogin() {
+        applicationKvStore.putBoolean("login_skipped", true);
+        ExploreActivity.startYourself(this);
+        finish();
+    }
+
     private void handleLogin(String username, String rawUsername, String password, String result) {
         Timber.d("Login done!");
         if (result.equals("PASS")) {
-            handlePassResult(username, rawUsername , password);
+            handlePassResult(username, rawUsername, password);
         } else {
             loginCurrentlyInProgress = false;
             errorMessageShown = true;
@@ -323,15 +363,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
-    /**
-     * Because Mediawiki is upercase-first-char-then-case-sensitive :)
-     * @param username String
-     * @return String canonicial username
-     */
-    private String canonicializeUsername(String username) {
-        return new PageTitle(username).getText();
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -389,7 +420,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
         if (errorMessageShown) {
             resultantError = savedInstanceState.getString(RESULTANT_ERROR);
-            handleOtherResults(resultantError);
+            if (resultantError != null) {
+                handleOtherResults(resultantError);
+            }
         }
     }
 
@@ -402,7 +435,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public void showMessageAndCancelDialog(@StringRes int resId) {
         showMessage(resId, R.color.secondaryDarkColor);
-        if (progressDialog != null){
+        if (progressDialog != null) {
             progressDialog.cancel();
         }
     }
@@ -420,26 +453,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public void startMainActivity() {
         NavigationBaseActivity.startActivityWithFlags(this, MainActivity.class, Intent.FLAG_ACTIVITY_SINGLE_TOP);
         finish();
-    }
-
-    private void signUp() {
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
-    }
-
-    private TextView.OnEditorActionListener newLoginInputActionListener() {
-        return (textView, actionId, keyEvent) -> {
-            if (loginButton.isEnabled()) {
-                if (actionId == IME_ACTION_DONE) {
-                    performLogin();
-                    return true;
-                } else if ((keyEvent != null) && keyEvent.getKeyCode() == KEYCODE_ENTER) {
-                    performLogin();
-                    return true;
-                }
-            }
-            return false;
-        };
     }
 
     private void showMessage(@StringRes int resId, @ColorRes int colorResId) {

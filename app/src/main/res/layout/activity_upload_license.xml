@@ -52,7 +52,7 @@
         android:layout_below="@id/license_subtitle"
         tools:visibility="gone"/>
 
-    <TextView
+    <fr.free.nrw.commons.ui.widget.HtmlTextView
         android:id="@+id/share_license_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
