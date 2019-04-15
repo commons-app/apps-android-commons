@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Vlad5250
+-->
+<resources>
+  <string name="crash_dialog_title">Commons se srušio</string>
+  <string name="crash_dialog_text">Ups. Nešto nije u redu!</string>
+  <string name="crash_dialog_comment_prompt">Recite nam šta radite, pa podijelite s nama putem e-pošte. Pomoći će nam da ih popravimo!</string>
+  <string name="crash_dialog_ok_toast">Hvala vam!</string>
+</resources>

@@ -452,8 +452,8 @@
   <string name="check_category_adding_template">添加用於分類檢查的模板</string>
   <string name="check_category_notification_title">請求%1$s的分類檢查</string>
   <string name="check_category_edit_summary">請求分類檢查</string>
-  <string name="check_category_success_title">請求分類檢查：成功</string>
-  <string name="check_category_failure_title">請求分類檢查：失敗</string>
+  <string name="check_category_success_title" fuzzy="true">請求分類檢查：成功</string>
+  <string name="check_category_failure_title" fuzzy="true">請求分類檢查：失敗</string>
   <string name="check_category_success_message">成功請求%1$s的分類檢查</string>
   <string name="check_category_failure_message">無法請求%1$s的分類檢查</string>
   <string name="check_category_toast">請求%1$s的分類檢查</string>

@@ -455,7 +455,7 @@
   <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
   <string name="getting_edit_token">Получение токена редактирования</string>
   <string name="check_category_notification_title">Проверка категории %1$s</string>
-  <string name="check_category_success_title">Проверка категории: Успешно</string>
+  <string name="check_category_success_title" fuzzy="true">Проверка категории: Успешно</string>
   <string name="check_category_success_message">Успешно отправлена на проверку категория %1$s</string>
   <string name="check_category_toast">Проверка категории %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Добавление файлу сообщения об удалении</string>

@@ -461,8 +461,8 @@
   <string name="check_category_adding_template">Añadiendo plantilla para control de categoría</string>
   <string name="check_category_notification_title">Pidiendo control de categoría para %1$s</string>
   <string name="check_category_edit_summary">Pidiendo control de categoría</string>
-  <string name="check_category_success_title">Pidiendo control de categoría: Éxitoso</string>
-  <string name="check_category_failure_title">Pidiendo control de categoría: Falló</string>
+  <string name="check_category_success_title" fuzzy="true">Pidiendo control de categoría: Éxitoso</string>
+  <string name="check_category_failure_title" fuzzy="true">Pidiendo control de categoría: Falló</string>
   <string name="check_category_success_message">Pedido exitoso de control de categoría para %1$s</string>
   <string name="check_category_failure_message">No se puede pedir el control de categoría para %1$s</string>
   <string name="check_category_toast">Pidiendo control de categoría para %1$s</string>

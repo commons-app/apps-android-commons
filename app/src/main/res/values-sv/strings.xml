@@ -448,8 +448,8 @@
   <string name="check_category_adding_template">Lägger till mall för kategorikontroll</string>
   <string name="check_category_notification_title">Begär kategorikontroll för %1$s</string>
   <string name="check_category_edit_summary">Begär kategorikontroll</string>
-  <string name="check_category_success_title">Begär kategorikontroll: Färdig</string>
-  <string name="check_category_failure_title">Begär kategorikontroll: Misslyckades</string>
+  <string name="check_category_success_title" fuzzy="true">Begär kategorikontroll: Färdig</string>
+  <string name="check_category_failure_title" fuzzy="true">Begär kategorikontroll: Misslyckades</string>
   <string name="check_category_success_message">Begärde kategorikontroll för %1$s</string>
   <string name="check_category_failure_message">Kunde inte begära kategorikontroll för %1$s</string>
   <string name="check_category_toast">Begär kategorikontroll för %1$s</string>

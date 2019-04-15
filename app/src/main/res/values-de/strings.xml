@@ -448,8 +448,8 @@
   <string name="check_category_adding_template">Vorlage zur Kategorieprüfung hinzufügen</string>
   <string name="check_category_notification_title">Kategorieprüfung für %1$s anfordern</string>
   <string name="check_category_edit_summary">Kategorieprüfung anfordern</string>
-  <string name="check_category_success_title">Kategorieprüfung anfordern: Erfolgreich</string>
-  <string name="check_category_failure_title">Kategorieprüfung anfordern: Fehlgeschlagen</string>
+  <string name="check_category_success_title" fuzzy="true">Kategorieprüfung anfordern: Erfolgreich</string>
+  <string name="check_category_failure_title" fuzzy="true">Kategorieprüfung anfordern: Fehlgeschlagen</string>
   <string name="check_category_success_message">Kategorieprüfung für %1$s erfolgreich angefordert</string>
   <string name="check_category_failure_message">Eine Kategorieprüfung für %1$s konnte nicht angefordert werden</string>
   <string name="check_category_toast">Kategorieprüfung für %1$s anfordern</string>

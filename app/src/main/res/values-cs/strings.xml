@@ -178,7 +178,7 @@
   <string name="menu_refresh">Obnovit</string>
   <string name="storage_permission_title">Požadavek na oprávnění k úložišti</string>
   <string name="read_storage_permission_rationale">Požadované oprávnění: Čtení externího úložiště. Bez něj nemůže aplikace číst vaši galerii.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Požadované oprávnění: Zapisování do externího úložiště. Bez něj nemůže aplikace používat vaši kameru.</string>
+  <string name="write_storage_permission_rationale">Požadované oprávnění: Zapisování do externího úložiště. Bez něj nemůže aplikace používat vaši kameru/galerii.</string>
   <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Místa v okolí</string>
