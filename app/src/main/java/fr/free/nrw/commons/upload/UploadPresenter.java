@@ -1,5 +1,12 @@
 package fr.free.nrw.commons.upload;
 
+import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
+import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import fr.free.nrw.commons.R;
@@ -23,28 +30,21 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
-import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
-import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
-
 /**
  * The MVP pattern presenter of Upload GUI
  */
 @Singleton
-public class UploadPresenter {
+public class UploadPresenter implements IUpload.UserActionListener {
 
-    private static final UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
-            new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
-    private UploadView view = DUMMY;
+    private static final IUpload.View DUMMY = (IUpload.View) Proxy.newProxyInstance(IUpload.View.class.getClassLoader(),
+            new Class[]{IUpload.View.class}, (proxy, method, methodArgs) -> null);
+    private IUpload.View view = DUMMY;
 
     private static final SimilarImageInterface SIMILAR_IMAGE = (SimilarImageInterface) Proxy.newProxyInstance(SimilarImageInterface.class.getClassLoader(),
             new Class[]{SimilarImageInterface.class}, (proxy, method, methodArgs) -> null);
     private SimilarImageInterface similarImageInterface = SIMILAR_IMAGE;
 
-    @UploadView.UploadPage
+    @IUpload.View.UploadPage
     private int currentPage = UploadView.PLEASE_WAIT;
 
     private final UploadModel uploadModel;
@@ -66,136 +66,9 @@ public class UploadPresenter {
         this.directKvStore = directKvStore;
     }
 
-   /**
-     * Passes the items received to {@link #uploadModel} and displays the items.
-     *
-     * @param media    The Uri's of the media being uploaded.
-     * @param source   File source from {@link Contribution.FileSource}
-     */
-    @SuppressLint("CheckResult")
-    void receive(List<UploadableFile> media,
-                 @Contribution.FileSource String source,
-                 Place place) {
-        Observable<UploadItem> uploadItemObservable = uploadModel
-                .preProcessImages(media, place, source, similarImageInterface);
-
-        uploadItemObservable
-                .toList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(uploadItems -> onImagesProcessed(uploadItems, place),
-                        throwable -> Timber.e(throwable, "Error occurred in processing images"));
-    }
-
-    private void onImagesProcessed(List<UploadItem> uploadItems, Place place) {
-        uploadModel.onItemsProcessed(place, uploadItems);
-        updateCards();
-        updateLicenses();
-        updateContent();
-        uploadModel.subscribeBadPicture(this::handleBadImage, false);
-    }
-
-    /**
-     * Sets the license to parameter and updates {@link UploadActivity}
-     *
-     * @param licenseName license name
-     */
-    void selectLicense(String licenseName) {
-        uploadModel.setSelectedLicense(licenseName);
-        view.updateLicenseSummary(uploadModel.getSelectedLicense(), uploadModel.getCount());
-    }
-
-    //region Wizard step management
-
-    /**
-     * Called by the next button in {@link UploadActivity}
-     */
-    @SuppressLint("CheckResult")
-    void handleNext(Title title,
-                    List<Description> descriptions) {
-        Timber.e("Inside handleNext");
-        view.showProgressDialog();
-        uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(imageResult -> handleImage(title, descriptions, imageResult),
-                        throwable -> Timber.e(throwable, "Error occurred while handling image"));
-    }
-
-    private void handleImage(Title title, List<Description> descriptions, Integer imageResult) {
-        view.hideProgressDialog();
-        if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
-            Timber.d("Set title and desc; Show next uploaded item");
-            setTitleAndDescription(title, descriptions);
-            nextUploadedItem();
-        } else {
-            handleBadImage(imageResult);
-        }
-    }
-
-    /**
-     * Called by the next button in {@link UploadActivity}
-     */
-    @SuppressLint("CheckResult")
-    void handleCategoryNext(CategoriesModel categoriesModel,
-                    boolean noCategoryWarningShown) {
-        if (categoriesModel.selectedCategoriesCount() < 1 && !noCategoryWarningShown) {
-            view.showNoCategorySelectedWarning();
-        } else {
-            nextUploadedItem();
-        }
-    }
-
-    private void handleBadImage(Integer errorCode) {
-        Timber.d("Handle bad picture with error code %d", errorCode);
-        if (errorCode >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
-            directKvStore.putBoolean("Picture_Has_Correct_Location", false);
-        }
-
-        switch (errorCode) {
-            case EMPTY_TITLE:
-                Timber.d("Title is empty. Showing toast");
-                view.showErrorMessage(R.string.add_title_toast);
-                break;
-            case FILE_NAME_EXISTS:
-                Timber.d("Trying to show duplicate picture popup");
-                view.showDuplicatePicturePopup();
-                break;
-            default:
-                String errorMessageForResult = getErrorMessageForResult(context, errorCode);
-                if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
-                    return;
-                }
-                view.showBadPicturePopup(errorMessageForResult);
-        }
-    }
-
-    private void nextUploadedItem() {
-        Timber.d("Trying to show next uploaded item");
-        uploadModel.next();
-        updateContent();
-        uploadModel.subscribeBadPicture(this::handleBadImage, false);
-        view.dismissKeyboard();
-    }
-
-    private void setTitleAndDescription(Title title, List<Description> descriptions) {
-        Timber.d("setTitleAndDescription: Setting title and desc");
-        uploadModel.setCurrentTitleAndDescriptions(title, descriptions);
-    }
-
     String getCurrentImageFileName() {
         UploadItem currentItem = getCurrentItem();
         return currentItem.getFileName();
-    }
-
-    /**
-     * Called by the previous button in {@link UploadActivity}
-     */
-    void handlePrevious() {
-        uploadModel.previous();
-        updateContent();
-        uploadModel.subscribeBadPicture(this::handleBadImage, false);
-        view.dismissKeyboard();
     }
 
     /**
@@ -210,11 +83,15 @@ public class UploadPresenter {
      * Called by the submit button in {@link UploadActivity}
      */
     @SuppressLint("CheckResult")
-    void handleSubmit(CategoriesModel categoriesModel) {
-        if (view.checkIfLoggedIn())
-            uploadModel.buildContributions(categoriesModel.getCategoryStringList())
+    @Override
+    public void handleSubmit() {
+        if (view.checkIfLoggedIn()) {
+            uploadModel.buildContributions()
                     .observeOn(Schedulers.io())
                     .subscribe(uploadController::startUpload);
+        }else{
+            view.askUserToLogIn();
+        }
     }
 
     /**
@@ -236,10 +113,10 @@ public class UploadPresenter {
             view.finish();
         else {
             uploadModel.deletePicture();
-            updateCards();
+           /* updateCards();
             updateContent();
             uploadModel.subscribeBadPicture(this::handleBadImage, false);
-            view.dismissKeyboard();
+            view.dismissKeyboard();*/
         }
     }
     //endregion
@@ -287,58 +164,6 @@ public class UploadPresenter {
             uploadModel.setBottomCardState(false);
             view.setBottomCardState(false);
         }
-    }
-    //endregion
-
-    //region View / Lifecycle management
-    public void init() {
-        uploadController.prepareService();
-    }
-
-    void cleanup() {
-        uploadController.cleanup();
-    }
-
-    void removeView() {
-        this.view = DUMMY;
-    }
-
-    void addView(UploadView view) {
-        this.view = view;
-
-        updateCards();
-        updateLicenses();
-        updateContent();
-    }
-
-
-    /**
-     * Updates the cards for when there is a change to the amount of items being uploaded.
-     */
-    private void updateCards() {
-        Timber.i("uploadModel.getCount():" + uploadModel.getCount());
-        view.updateThumbnails(uploadModel.getUploads());
-        view.setTopCardVisibility(uploadModel.getCount() > 1);
-        view.setBottomCardVisibility(uploadModel.getCount() > 0);
-        view.setTopCardState(uploadModel.isTopCardState());
-        view.setBottomCardState(uploadModel.isBottomCardState());
-    }
-
-    /**
-     * Sets the list of licences and the default license.
-     */
-    private void updateLicenses() {
-        String selectedLicense = defaultKvStore.getString(Prefs.DEFAULT_LICENSE,
-            Prefs.Licenses.CC_BY_SA_4);//CC_BY_SA_4 is the default one used by the commons web app
-        try {//I have to make sure that the stored default license was not one of the deprecated one's
-            Utils.licenseNameFor(selectedLicense);
-        } catch (IllegalStateException exception) {
-            Timber.e(exception.getMessage());
-            selectedLicense = Prefs.Licenses.CC_BY_SA_4;
-            defaultKvStore.putString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_4);
-        }
-        view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
-        view.updateLicenseSummary(selectedLicense, uploadModel.getCount());
     }
 
     /**
@@ -389,10 +214,8 @@ public class UploadPresenter {
             view.setTopCardVisibility(false);
             view.setRightCardVisibility(false);
         }
-        view.setBottomCardVisibility(currentPage, uploadCount);
+//        view.setBottomCardVisibility(currentPage, uploadCount);
     }
-
-    //endregion
 
     /**
      * @return the item currently being displayed
@@ -401,7 +224,7 @@ public class UploadPresenter {
         return uploadModel.getCurrentItem();
     }
 
-    List<String> getImageTitleList() {
+    public List<String> getImageTitleList() {
         List<String> titleList = new ArrayList<>();
         for (UploadItem item : uploadModel.getUploads()) {
             if (item.getTitle().isSet()) {
@@ -409,6 +232,24 @@ public class UploadPresenter {
             }
         }
         return titleList;
+    }
+
+    @Override public void onAttachView(IUpload.View view) {
+        this.view=view;
+        uploadController.prepareService();
+    }
+
+    @Override public void onDetachView() {
+        this.view=DUMMY;
+        uploadController.cleanup();
+    }
+
+    public BasicKvStore getDefaultKvStore() {
+        return defaultKvStore;
+    }
+
+    public UploadModel getUploadModel() {
+        return uploadModel;
     }
 
 }

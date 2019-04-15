@@ -10,18 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.BiMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
@@ -83,26 +80,27 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
     @Override
     public View getDropDownView(int position, @Nullable View convertView,
                                 @NonNull ViewGroup parent) {
-        View view = layoutInflater.inflate(resource, parent, false);
-        ViewHolder holder = new ViewHolder(view);
+        if (convertView == null) {
+            convertView = layoutInflater.inflate(resource, parent, false);
+        }
+        ViewHolder holder = new ViewHolder(convertView);
         holder.init(position, true);
-        return view;
+        return convertView;
     }
 
     @Override
     public @NonNull
     View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View view = layoutInflater.inflate(resource, parent, false);
-        ViewHolder holder = new ViewHolder(view);
+        if (convertView == null) {
+            convertView = layoutInflater.inflate(resource, parent, false);
+        }
+        ViewHolder holder = new ViewHolder(convertView);
         holder.init(position, false);
-        return view;
+        return convertView;
     }
 
 
     public class ViewHolder {
-
-        @BindView(R.id.ll_container_description_language)
-        LinearLayout llContainerDescriptionLanguage;
 
         @BindView(R.id.tv_language)
         TextView tvLanguage;

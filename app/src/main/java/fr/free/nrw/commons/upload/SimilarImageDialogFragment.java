@@ -52,6 +52,10 @@ public class SimilarImageDialogFragment extends DialogFragment {
         public void onNegativeResponse();
     }
 
+    public void setmOnResponse(onResponse mOnResponse) {
+        this.mOnResponse = mOnResponse;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_similar_image_dialog, container, false);
@@ -83,7 +87,6 @@ public class SimilarImageDialogFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mOnResponse = (onResponse) getActivity();//Interface Implementation
     }
 
     @Override

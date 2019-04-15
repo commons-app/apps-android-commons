@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
 
+import fr.free.nrw.commons.upload.SimilarImageDialogFragment.onResponse;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,7 +28,7 @@ import timber.log.Timber;
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
  */
 @Singleton
-public class FileProcessor implements SimilarImageDialogFragment.onResponse {
+public class FileProcessor implements onResponse {
 
     @Inject
     CacheController cacheController;
@@ -47,7 +48,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     private GPSExtractor tempImageObj;
 
     @Inject
-    FileProcessor() {
+    public FileProcessor() {
     }
 
     void initFileDetails(@NonNull String filePath, ContentResolver contentResolver) {

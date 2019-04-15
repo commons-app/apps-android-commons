@@ -1,34 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/upload_root_layout"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/upload_root_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  >
+  <android.support.v4.view.ViewPager
+    android:id="@+id/vp_upload"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    />
+  <android.support.v7.widget.CardView
+    android:id="@+id/cv_container_top_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:elevation="10dp"
+    >
+    <LinearLayout
+      android:id="@+id/ll_container_top_card"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/standard_gap"
+      android:orientation="vertical">
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/backgroundImage"
+      <RelativeLayout
+        android:id="@+id/rl_container_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:background="@color/commons_app_blue_dark"
-        app:actualImageScaleType="fitCenter" />
+        android:layout_height="wrap_content"
+        >
+        <TextView
+          android:id="@+id/tv_top_card_title"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="24dp"
+          android:layout_marginTop="@dimen/small_gap"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true"
+          android:gravity="center_vertical"
+          android:textSize="@dimen/normal_text"
+          tools:text="4 Uploads"
+          />
+        <ImageButton
+          android:id="@+id/ib_toggle_top_card"
+          style="@style/Widget.AppCompat.Button.Borderless"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:layout_marginBottom="@dimen/small_gap"
+          android:layout_marginStart="@dimen/small_gap"
+          android:layout_marginEnd="@dimen/small_gap"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentTop="true"
+          android:padding="12dp"
+          android:clickable="false"
+          android:focusable="false"
+          app:srcCompat="@drawable/ic_expand_less_black_24dp"/>
 
-    <ViewFlipper
-        android:id="@+id/view_flipper"
+      </RelativeLayout>
+
+      <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_thumbnails"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:measureAllChildren="false">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_gap"
+        android:layout_below="@id/top_card_title"
+        />
 
-        <include
-            layout="@layout/activity_upload_bottom_card"
-            android:visibility="visible" />
-
-        <include layout="@layout/activity_upload_categories" />
-
-        <include layout="@layout/activity_upload_license" />
-
-        <include layout="@layout/activity_upload_please_wait" />
-
-    </ViewFlipper>
+    </LinearLayout>
+  </android.support.v7.widget.CardView>
 </RelativeLayout>

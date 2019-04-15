@@ -5,16 +5,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -32,6 +22,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 
@@ -60,6 +57,7 @@ public class UploadModel {
     private SessionManager sessionManager;
     private FileProcessor fileProcessor;
     private final ImageProcessingService imageProcessingService;
+    private List<String> selectedCategories;
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
@@ -79,6 +77,10 @@ public class UploadModel {
         this.imageProcessingService = imageProcessingService;
     }
 
+    public void setSelectedCategories(List<String> selectedCategories) {
+        this.selectedCategories = selectedCategories;
+    }
+
     @SuppressLint("CheckResult")
     Observable<UploadItem> preProcessImages(List<UploadableFile> uploadableFiles,
                                             Place place,
@@ -89,7 +91,16 @@ public class UploadModel {
                 .map(uploadableFile -> getUploadItem(uploadableFile, place, source, similarImageInterface));
     }
 
-    Single<Integer> getImageQuality(UploadItem uploadItem, boolean checkTitle) {
+    @SuppressLint("CheckResult")
+    public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile,
+            Place place,
+            String source,
+            SimilarImageInterface similarImageInterface) {
+        initDefaultValues();
+        return Observable.just(getUploadItem(uploadableFile, place, source, similarImageInterface));
+    }
+
+    public Single<Integer> getImageQuality(UploadItem uploadItem, boolean checkTitle) {
         return imageProcessingService.validateImage(uploadItem, checkTitle);
     }
 
@@ -237,7 +248,7 @@ public class UploadModel {
         updateItemState();
     }
 
-    UploadItem getCurrentItem() {
+    public UploadItem getCurrentItem() {
         return isShowingItem() ? items.get(currentStepIndex) : DUMMY;
     }
 
@@ -266,16 +277,16 @@ public class UploadModel {
         return licenses;
     }
 
-    String getSelectedLicense() {
+    public String getSelectedLicense() {
         return license;
     }
 
-    void setSelectedLicense(String licenseName) {
+    public void setSelectedLicense(String licenseName) {
         this.license = licensesByName.get(licenseName);
         basicKvStore.putString(Prefs.DEFAULT_LICENSE, license);
     }
 
-    Observable<Contribution> buildContributions(List<String> categoryStringList) {
+    public Observable<Contribution> buildContributions() {
         return Observable.fromIterable(items).map(item ->
         {
             Contribution contribution = new Contribution(item.mediaUri, null,
@@ -286,7 +297,7 @@ public class UploadModel {
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
             }
-            contribution.setCategories(categoryStringList);
+            contribution.setCategories(selectedCategories);
             contribution.setTag("mimeType", item.mimeType);
             contribution.setSource(item.source);
             contribution.setContentProviderUri(item.mediaUri);
@@ -325,8 +336,12 @@ public class UploadModel {
         return items;
     }
 
+    public void updateUploadItem(UploadItem uploadItem) {
+        //TODO
+    }
+
     @SuppressWarnings("WeakerAccess")
-    static class UploadItem {
+    public static class UploadItem {
         private final Uri mediaUri;
         private final String mimeType;
         private final String source;
@@ -427,6 +442,14 @@ public class UploadModel {
 
         public Place getPlace() {
             return place;
+        }
+
+        public void setTitle(Title title) {
+            this.title = title;
+        }
+
+        public void setDescriptions(List<Description> descriptions) {
+            this.descriptions = descriptions;
         }
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Holds a description of an item being uploaded by {@link UploadActivity}
  */
-class Description {
+public class Description {
 
     private String languageCode;
     private String descriptionText;

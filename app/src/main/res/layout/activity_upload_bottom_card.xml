@@ -18,8 +18,7 @@
         android:elevation="@dimen/cardview_default_elevation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnusedAttribute"
-        tools:showIn="@layout/activity_upload">
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -77,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_card"
         tools:ignore="UnusedAttribute"
-        tools:showIn="@layout/activity_upload">
+        >
 
         <LinearLayout
             android:id="@+id/right_card_content"
@@ -118,7 +117,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="UnusedAttribute"
-        tools:showIn="@layout/activity_upload">
+        >
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/relativeLayout"

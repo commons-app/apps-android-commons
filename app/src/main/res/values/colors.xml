@@ -59,4 +59,5 @@
     <color name="black">#000000</color>
 
     <color name="swipe_red" tools:ignore="MissingDefaultResource">#FF0000</color>
+  <color name="color_error">#FF0000</color>
 </resources>

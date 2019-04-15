@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.di;
 
-import javax.inject.Singleton;
-
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
@@ -9,14 +7,18 @@ import dagger.android.support.AndroidSupportInjectionModule;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.auth.LoginActivity;
-import fr.free.nrw.commons.campaigns.CampaignsPresenter;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.FileProcessor;
+import fr.free.nrw.commons.upload.UploadModule;
+import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
+import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
+import javax.inject.Singleton;
 
 
 @Singleton
@@ -28,7 +30,7 @@ import fr.free.nrw.commons.widget.PicOfDayAppWidget;
         ActivityBuilderModule.class,
         FragmentBuilderModule.class,
         ServiceBuilderModule.class,
-        ContentProviderBuilderModule.class
+        ContentProviderBuilderModule.class, UploadModule.class
 })
 public interface CommonsApplicationComponent extends AndroidInjector<ApplicationlessInjection> {
     void inject(CommonsApplication application);
@@ -53,6 +55,12 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(FileProcessor fileProcessor);
 
     void inject(PicOfDayAppWidget picOfDayAppWidget);
+
+    void inject(UploadCategoriesFragment uploadCategoriesFragment);
+
+    void inject(MediaLicenseFragment mediaLicenseFragment);
+
+    void inject(UploadMediaDetailFragment uploadMediaDetailFragment);
 
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})

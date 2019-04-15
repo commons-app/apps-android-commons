@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:id="@+id/fl_container_thumbnail"
+  android:background="@drawable/drawable_thumbnail_image"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_margin="2dp"
+  >
 
     <LinearLayout xmlns:fresco="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
@@ -12,6 +17,7 @@
         <android.support.v4.widget.Space
             android:id="@+id/left_space"
             android:layout_width="8dp"
+            android:visibility="gone"
             android:layout_height="90dp" />
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -23,6 +29,7 @@
         <android.support.v4.widget.Space
             android:id="@+id/right_space"
             android:layout_width="8dp"
+            android:visibility="gone"
             android:layout_height="90dp" />
 
     </LinearLayout>
@@ -32,6 +39,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="end"
+        tools:visibility="visible"
         android:visibility="gone"
         app:srcCompat="@drawable/ic_error_red_24dp" />
 </FrameLayout>

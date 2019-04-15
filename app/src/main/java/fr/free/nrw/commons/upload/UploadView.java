@@ -16,7 +16,6 @@ public interface UploadView {
 //    UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
 //    new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
 
-    List<Description> getDescriptions();
 
     @Retention(SOURCE)
     @IntDef({PLEASE_WAIT, TITLE_CARD, CATEGORIES, LICENSE})
@@ -85,4 +84,6 @@ public interface UploadView {
     void showProgressDialog();
 
     void hideProgressDialog();
+
+    void askUserToLogIn();
 }
