@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   >
-  <android.support.v4.view.ViewPager
+  <fr.free.nrw.commons.upload.NonSwipeableViewPager
     android:id="@+id/vp_upload"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -43,7 +43,7 @@
           android:layout_marginTop="@dimen/small_gap"
           android:layout_alignParentLeft="true"
           android:layout_alignParentStart="true"
-          android:gravity="center_vertical"
+          android:layout_centerVertical="true"
           android:textSize="@dimen/normal_text"
           tools:text="4 Uploads"
           />
@@ -57,8 +57,7 @@
           android:layout_marginEnd="@dimen/small_gap"
           android:layout_alignParentEnd="true"
           android:layout_alignParentRight="true"
-          android:layout_alignParentTop="true"
-          android:padding="12dp"
+          android:layout_centerVertical="true"
           android:clickable="false"
           android:focusable="false"
           app:srcCompat="@drawable/ic_expand_less_black_24dp"/>

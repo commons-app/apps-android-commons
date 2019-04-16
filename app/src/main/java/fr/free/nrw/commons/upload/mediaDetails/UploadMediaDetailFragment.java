@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,8 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -36,6 +38,7 @@ import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +52,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     RelativeLayout rlContainerTitle;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.ib_expand_collapse)
+    ImageButton ibExpandCollapse;
     @BindView(R.id.ll_container_media_detail)
     LinearLayout llContainerMediaDetail;
     @BindView(R.id.til_container_title)
@@ -65,8 +70,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatButton btnNext;
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
-    @BindView(R.id.pb_upload_media_details)
-    ProgressBar pbUploadMediaDetails;
     private DescriptionsAdapter descriptionsAdapter;
 
     int indexInViewFlipper = 0;
@@ -82,6 +85,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     private Title title;
     private boolean isExpanded = true;
+
+    private UploadMediaDetailFragmentCallback callback;
+
+    public void setCallback(UploadMediaDetailFragmentCallback callback) {
+        this.callback = callback;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,10 +133,16 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         initPresenter();
         RxTextView.textChanges(etTitle)
                 .subscribe(text -> {
-                    btnNext.setEnabled(!TextUtils.isEmpty(text));
                     if (!TextUtils.isEmpty(text)) {
+                        btnNext.setEnabled(true);
+                        btnNext.setClickable(true);
+                        btnNext.setAlpha(1.0f);
                         title.setTitleText(text.toString());
                         uploadItem.setTitle(title);
+                    } else {
+                        btnNext.setAlpha(0.5f);
+                        btnNext.setEnabled(false);
+                        btnNext.setClickable(false);
                     }
                 });
         presenter.receiveImage(uploadableFile, source, place);
@@ -220,25 +235,23 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void showProgress(boolean shouldShow) {
-        pbUploadMediaDetails.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+        callback.showProgress(shouldShow);
     }
 
     @Override
     public void onImageValidationSuccess() {
-        presenter.setUploadItem(uploadItem);
+        presenter.setUploadItem(indexInViewFlipper, uploadItem);
         callback.onNextButtonClicked(indexInViewFlipper);
     }
 
     @Override
     public void showMessage(int stringResourceId, int colorResourceId) {
         ViewUtil.showLongToast(getContext(), stringResourceId);
-        //TODO, add a proper view with retry
     }
 
     @Override
     public void showMessage(String message, int colorResourceId) {
         ViewUtil.showLongToast(getContext(), message);
-        //TODO, add a proper view with retry
     }
 
     @Override
@@ -247,11 +260,34 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.warning),
                 String.format(getString(R.string.upload_title_duplicate),
                         uploadItem.getFileName()),
-                null,
                 () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     onNextButtonClicked();
+                },
+                () -> {
+                    handleNegativeResponseForDuplicateImage();
                 });
+    }
+
+    private void handleNegativeResponseForDuplicateImage() {
+
+    }
+
+    @Override
+    public void showBadImagePopup(Integer errorCode) {
+        String errorMessageForResult = getErrorMessageForResult(getContext(), errorCode);
+        if (!StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
+            DialogUtil.showAlertDialog(getActivity(),
+                    getString(R.string.warning),
+                    errorMessageForResult,
+                    () -> deleteThisPicture(),
+                    () -> uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP));
+        }
+        //If the error message is null, we will probably not show anything
+    }
+
+    private void deleteThisPicture() {
+        callback.deletePictureAtIndex(indexInViewFlipper);
     }
 
     @Override
@@ -264,6 +300,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onRlContainerTitleClicked() {
         llContainerMediaDetail.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
         isExpanded = !isExpanded;
+        ibExpandCollapse.setRotation(ibExpandCollapse.getRotation() + 180);
+    }
+
+
+    public interface UploadMediaDetailFragmentCallback extends Callback {
+
+        void deletePictureAtIndex(int index);
     }
 
 }

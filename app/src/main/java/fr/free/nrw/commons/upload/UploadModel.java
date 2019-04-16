@@ -29,9 +29,10 @@ import java.util.Map;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 import timber.log.Timber;
 
-
+@Singleton
 public class UploadModel {
 
     private static UploadItem DUMMY = new UploadItem(
@@ -86,7 +87,6 @@ public class UploadModel {
                                             Place place,
                                             String source,
                                             SimilarImageInterface similarImageInterface) {
-        initDefaultValues();
         return Observable.fromIterable(uploadableFiles)
                 .map(uploadableFile -> getUploadItem(uploadableFile, place, source, similarImageInterface));
     }
@@ -96,7 +96,6 @@ public class UploadModel {
             Place place,
             String source,
             SimilarImageInterface similarImageInterface) {
-        initDefaultValues();
         return Observable.just(getUploadItem(uploadableFile, place, source, similarImageInterface));
     }
 
@@ -119,33 +118,16 @@ public class UploadModel {
         }
         Timber.d("File created date is %d", fileCreatedDate);
         GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
-        return new UploadItem(Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate, createdTimestampSource);
-    }
-
-    void onItemsProcessed(Place place, List<UploadItem> uploadItems) {
-        items = uploadItems;
-        if (items.isEmpty()) {
-            return;
-        }
-
-        UploadItem uploadItem = items.get(0);
-        uploadItem.selected = true;
-        uploadItem.first = true;
-
-        if (place != null) {
-            uploadItem.title.setTitleText(place.getName());
+        UploadItem uploadItem = new UploadItem(Uri.parse(uploadableFile.getFilePath()),
+                uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate,
+                createdTimestampSource);
+        if(place!=null){
+            uploadItem.title.setTitleText(place.name);
             uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
-            //TODO figure out if default descriptions in other languages exist
             uploadItem.descriptions.get(0).setLanguageCode("en");
         }
-    }
-
-    private void initDefaultValues() {
-        currentStepIndex = 0;
-        topCardState = true;
-        bottomCardState = true;
-        rightCardState = true;
-        items = new ArrayList<>();
+        items.add(uploadItem);
+        return uploadItem;
     }
 
     boolean isPreviousAvailable() {
@@ -336,8 +318,10 @@ public class UploadModel {
         return items;
     }
 
-    public void updateUploadItem(UploadItem uploadItem) {
-        //TODO
+    public void updateUploadItem(int index,UploadItem uploadItem) {
+        UploadItem uploadItem1 = items.get(index);
+        uploadItem1.setDescriptions(uploadItem.descriptions);
+        uploadItem1.setTitle(uploadItem.title);
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -437,7 +421,8 @@ public class UploadModel {
         }
 
         public String getFileName() {
-            return Utils.fixExtension(title.toString(), getFileExt());
+            return title
+                    != null ? Utils.fixExtension(title.toString(), getFileExt()) : null;
         }
 
         public Place getPlace() {

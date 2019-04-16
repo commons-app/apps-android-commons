@@ -86,8 +86,8 @@ public class UploadMediaPresenter implements UserActionListener {
     }
 
     @Override
-    public void setUploadItem(UploadItem uploadItem) {
-        uploadModel.updateUploadItem(uploadItem);
+    public void setUploadItem(int index,UploadItem uploadItem) {
+        uploadModel.updateUploadItem(index,uploadItem);
     }
 
     private void handleImageResult(Integer imageResult) {
@@ -115,7 +115,7 @@ public class UploadMediaPresenter implements UserActionListener {
                 view.showDuplicatePicturePopup();
                 break;
             default:
-                //TODO, handle this with some generic dialog
+                view.showBadImagePopup(errorCode);
         }
     }
 }

@@ -8,8 +8,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,24 +18,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.SpannableStringBuilder;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.text.style.URLSpan;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -50,10 +38,10 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
@@ -64,7 +52,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
-public class UploadActivity extends BaseActivity implements SimilarImageInterface, IUpload.View ,UploadBaseFragment.Callback{
+public class UploadActivity extends BaseActivity implements IUpload.View ,UploadBaseFragment.Callback{
     @Inject
     ContributionController contributionController;
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
@@ -100,14 +88,13 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
     private List<Fragment> fragments;
     private UploadCategoriesFragment uploadCategoriesFragment;
     private MediaLicenseFragment mediaLicenseFragment;
-    private List<UploadItem> uploadItems;
-    private RVRendererAdapter<UploadableFile> thumbnailsAdapter;
+    private ThumbnailsAdapter thumbnailsAdapter;
 
 
     private String source;
     private Place place;
     private List<UploadableFile> uploadableFiles= Collections.emptyList();
-    private int baseHeight;
+    private int currentSelectedPosition=0;
 
     @SuppressLint("CheckResult")
     @Override
@@ -118,7 +105,6 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
 
         ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
-        baseHeight=llContainerTopCard.getMeasuredHeight();
         init();
 
         PermissionUtils.checkPermissionsAndPerformAction(this,
@@ -129,18 +115,21 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
     }
 
     private void init() {
-        uploadItems=new ArrayList<>();
+        initProgressDialog();
         initViewPager();
         initThumbnailsRecyclerView();
         //And init other things you need to
     }
 
+    private void initProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.please_wait));
+    }
+
     private void initThumbnailsRecyclerView() {
         rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
-        thumbnailsAdapter=new UploadThumbnailsAdapterFactory(content -> {
-
-        }).create(uploadableFiles);
+        thumbnailsAdapter=new ThumbnailsAdapter(() -> currentSelectedPosition);
         rvThumbnails.setAdapter(thumbnailsAdapter);
 
     }
@@ -158,9 +147,11 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
 
             @Override
             public void onPageSelected(int position) {
+                currentSelectedPosition=position;
                 if (position >= uploadableFiles.size()) {
                     cvContainerTopCard.setVisibility(View.GONE);
                 } else {
+                    thumbnailsAdapter.notifyDataSetChanged();
                     cvContainerTopCard.setVisibility(View.VISIBLE);
                 }
 
@@ -174,22 +165,17 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
     }
 
     @Override
-    public boolean checkIfLoggedIn() {
-        if (!sessionManager.isUserLoggedIn()) {
-            Timber.d("Current account is null");
-            ViewUtil.showLongToast(this, getString(R.string.user_not_logged_in));
-            Intent loginIntent = new Intent(UploadActivity.this, LoginActivity.class);
-            startActivity(loginIntent);
-            return false;
-        }
-        return true;
+    public boolean isLoggedIn() {
+        return sessionManager.isUserLoggedIn();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        checkIfLoggedIn();
         presenter.onAttachView(this);
+        if (!isLoggedIn()) {
+            askUserToLogIn();
+        }
         checkStoragePermissions();
     }
 
@@ -211,187 +197,33 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
         compositeDisposable.clear();
     }
 
-    @Override
-    public void updateRightCardContent(boolean gpsPresent) {
-        /*if(gpsPresent){
-            rightCardMapButton.setVisibility(View.VISIBLE);
-        }else{
-            rightCardMapButton.setVisibility(View.GONE);
-        }*/
-        //The card should be disabled if it has no buttons.
-        setRightCardVisibility(gpsPresent);
-    }
-
-    @Override
-    public void updateBottomCardContent(int currentStep,
-                                        int stepCount,
-                                        UploadModel.UploadItem uploadItem,
-                                        boolean isShowingItem) {
-        String cardTitle = getResources().getString(R.string.step_count, currentStep, stepCount);
-        String cardSubTitle = getResources().getString(R.string.image_in_set_label, currentStep);
-        /*bottomCardTitle.setText(cardTitle);
-        bottomCardSubtitle.setText(cardSubTitle);
-        categoryTitle.setText(cardTitle);
-        licenseTitle.setText(cardTitle);*/
-        if (currentStep == stepCount) {
-            dismissKeyboard();
-        }
-    }
-
-    @Override
-    public void updateLicenses(List<String> licenses, String selectedLicense) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, licenses);
-        /*licenseSpinner.setAdapter(adapter);
-
-        int position = licenses.indexOf(getString(Utils.licenseNameFor(selectedLicense)));
-
-        // Check position is valid
-        if (position < 0) {
-            Timber.d("Invalid position: %d. Using default license", position);
-            position = licenses.size() - 1;
-        }
-
-        Timber.d("Position: %d %s", position, getString(Utils.licenseNameFor(selectedLicense)));
-        licenseSpinner.setSelection(position);*/
-    }
-
-    @SuppressLint("StringFormatInvalid")
-    @Override
-    public void updateLicenseSummary(String selectedLicense, int imageCount) {
-        String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense) + "'>" +
-                getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>";
-
-    }
-
-    @Override
-    public void updateTopCardContent() {
-        tvTopCardTitle.setText(getResources().getQuantityString(R.plurals.upload_count_title,uploadItems.size()));
-    }
-
-    @Override
-    public void setNextEnabled(boolean available) {
-       /* next.setEnabled(available);
-        categoryNext.setEnabled(available);*/
-    }
-
-    @Override
-    public void setSubmitEnabled(boolean available) {
-//        submit.setEnabled(available);
-    }
-
-    @Override
-    public void setPreviousEnabled(boolean available) {
-       /* previous.setEnabled(available);
-        categoryPrevious.setEnabled(available);
-        licensePrevious.setEnabled(available);*/
-    }
-
-    @Override
-    public void setTopCardState(boolean state) {
-//        updateCardState(state, topCardExpandButton, topCardThumbnails);
-    }
-
-    @Override
-    public void setTopCardVisibility(boolean visible) {
-//        topCard.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void setRightCardVisibility(boolean visible) {
-//        rightCard.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
-
-    public void setBottomCardVisibility(@UploadPage int page, int uploadCount) {
-        /*if (page == TITLE_CARD) {
-            viewFlipper.setDisplayedChild(0);
-        } else if (page == CATEGORIES) {
-            viewFlipper.setDisplayedChild(1);
-        } else if (page == LICENSE) {
-            viewFlipper.setDisplayedChild(2);
-            dismissKeyboard();
-        } else if (page == PLEASE_WAIT) {
-            viewFlipper.setDisplayedChild(3);
-            pleaseWaitTextView.setText(getResources().getQuantityText(R.plurals.receiving_shared_content, uploadCount));
-        }*/
-    }
-
     /**
-     * Only show the subtitle ("For all images in set") if multiple images being uploaded
-     * @param imageCount Number of images being uploaded
+     * Show/Hide the progress dialog
      */
     @Override
-    public void updateSubtitleVisibility(int imageCount) {
-        /*categoriesSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);
-        licenseSubtitle.setVisibility(imageCount > 1 ? View.VISIBLE : View.GONE);*/
-    }
-
-    @Override
-    public void setBottomCardState(boolean state) {
-//        updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next, bottomCardAddDescription);
-    }
-
-    @Override
-    public void setRightCardState(boolean state) {
-       /* rightCardExpandButton.animate().rotation(rightCardExpandButton.getRotation() + (state ? -180 : 180)).start();
-        //Add all items in rightCard here
-        rightCardMapButton.setVisibility(state ? View.VISIBLE : View.GONE);*/
-    }
-
-    @Override
-    public void setBackground(Uri mediaUri) {
-        /*background.setImageURI(mediaUri);*/
-    }
-
-
-    @Override
-    public void dismissKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-
-        // verify if the soft keyboard is open
-        if (imm != null && imm.isAcceptingText() && getCurrentFocus() != null) {
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    public void showProgress(boolean shouldShow) {
+        if (shouldShow) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.show();
+            }
+        } else {
+            if (progressDialog != null && !isFinishing()) {
+                progressDialog.dismiss();
+            }
         }
     }
 
     @Override
-    public void showBadPicturePopup(String errorMessage) {
-        /*DialogUtil.showAlertDialog(this,
-                getString(R.string.warning),
-                errorMessage,
-                () -> presenter.deletePicture(),
-                () -> presenter.keepPicture());*/
-    }
-
-    @Override
-    public void showDuplicatePicturePopup() {
-        /*DialogUtil.showAlertDialog(this,
-                getString(R.string.warning),
-                String.format(getString(R.string.upload_title_duplicate), presenter.getCurrentImageFileName()),
-                null,
-                () -> {
-                    presenter.keepPicture();
-                });*/
-    }
-
-    @Override
-    public void showProgressDialog() {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(this);
-        }
-        progressDialog.setMessage(getString(R.string.please_wait));
-        progressDialog.show();
-    }
-
-    @Override
-    public void hideProgressDialog() {
-        if (progressDialog != null && !isFinishing()) {
-            progressDialog.dismiss();
-        }
+    public void showMessage(int messageResourceId) {
+        ViewUtil.showLongToast(this, messageResourceId);
     }
 
     @Override
     public void askUserToLogIn() {
-        //TODO, perform login
+        Timber.d("current session is null, asking user to login");
+        ViewUtil.showLongToast(this, getString(R.string.user_not_logged_in));
+        Intent loginIntent = new Intent(UploadActivity.this, LoginActivity.class);
+        startActivity(loginIntent);
     }
 
     @Override
@@ -400,137 +232,11 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
     }
 
     @Override
-    public void showErrorMessage(int resourceId) {
-        ViewUtil.showShortToast(this, resourceId);
-    }
-
-    @Override
-    public void initDefaultCategories() {
-        updateCategoryList("");
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
             //TODO: Confirm if handling manual permission enabled is required
         }
-    }
-
-    /**
-     * Parses links from HTML string, and makes the links clickable in the specified TextView.<br>
-     * Uses {@link #makeLinkClickable(SpannableStringBuilder, URLSpan)}.
-     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
-     */
-    private void setTextViewHTML(TextView text, String html)
-    {
-        CharSequence sequence = Html.fromHtml(html);
-        SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
-        URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
-        for (URLSpan span : urls) {
-            makeLinkClickable(strBuilder, span);
-        }
-        text.setText(strBuilder);
-        text.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
-    /**
-     * Sets onClick handler to launch browser for the specified URLSpan.
-     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
-     */
-    private void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span)
-    {
-        int start = strBuilder.getSpanStart(span);
-        int end = strBuilder.getSpanEnd(span);
-        int flags = strBuilder.getSpanFlags(span);
-        ClickableSpan clickable = new ClickableSpan() {
-            public void onClick(View view) {
-                // Handle hyperlink click
-                String hyperLink = span.getURL();
-                launchBrowser(hyperLink);
-            }
-        };
-        strBuilder.setSpan(clickable, start, end, flags);
-        strBuilder.removeSpan(span);
-    }
-
-    private void launchBrowser(String hyperLink) {
-        Utils.handleWebUrl(this, Uri.parse(hyperLink));
-    }
-
-    private void configureLicenses() {
-        /*licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String licenseName = parent.getItemAtPosition(position).toString();
-                presenter.selectLicense(licenseName);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                presenter.selectLicense(null);
-            }
-        });*/
-    }
-
-    private void configureLayout() {
-       /* background.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        background.setOnScaleChangeListener((scaleFactor, x, y) -> presenter.closeAllCards());*/
-    }
-
-    private void configureTopCard() {
-       /* topCardExpandButton.setOnClickListener(v -> presenter.toggleTopCardState());
-        topCardThumbnails.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false));*/
-    }
-
-    private void configureBottomCard() {
-//        bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
-    }
-
-    private void configureRightCard() {
-       /* rightCardExpandButton.setOnClickListener(v -> presenter.toggleRightCardState());
-        rightCardMapButton.setOnClickListener(v -> presenter.openCoordinateMap());*/
-    }
-
-    private void configureNavigationButtons() {
-        // Navigation next / previous for each image as we're collecting title + description
-        /*next.setOnClickListener(v -> {
-            if (!NetworkUtils.isInternetConnectionEstablished(this)) {
-                ViewUtil.showShortSnackbar(rootLayout, R.string.no_internet);
-                return;
-            }
-            setTitleAndDescriptions();
-        });
-        previous.setOnClickListener(v -> presenter.handlePrevious());
-
-        // Next / previous for the category selection currentPage
-        categoryNext.setOnClickListener(v -> presenter.handleCategoryNext(categoriesModel, false));
-        categoryPrevious.setOnClickListener(v -> presenter.handlePrevious());
-
-        // Finally, the previous / submit buttons on the final currentPage of the wizard
-        licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
-        submit.setOnClickListener(v -> {
-            Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG).show();
-            presenter.handleSubmit(categoriesModel);
-            finish();
-        });*/
-
-    }
-
-    private void setTitleAndDescriptions() {
-    }
-
-    private void configureCategories() {
-    }
-
-    private void configurePolicy() {
-//        setTextViewHTML(licensePolicy, getString(R.string.media_upload_policy));
-    }
-
-    @SuppressLint("CheckResult")
-    private void updateCategoryList(String filter) {
-
     }
 
     private void receiveSharedItems() {
@@ -546,19 +252,46 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
             handleNullMedia();
         } else {
             //Show thumbnails
-            thumbnailsAdapter.clear();
-            thumbnailsAdapter.addAll(uploadableFiles);
-            thumbnailsAdapter.notifyDataSetChanged();
-
+            if(uploadableFiles.size()>1) {//If there is only file, no need to show the image thumbnails
+                thumbnailsAdapter.setUploadableFiles(uploadableFiles);
+            }
             tvTopCardTitle.setText(getResources()
-                    .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size()));
+                    .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(),uploadableFiles.size()));
 
             fragments = new ArrayList<>();
             int indexOfChild=0;
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
                 uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, source, place);
-                uploadMediaDetailFragment.setCallback(this);
+                uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback(){
+                    @Override
+                    public void deletePictureAtIndex(int index) {
+                        if(uploadableFiles.size()==1){
+                            showMessage(R.string.upload_cancelled);
+                            finish();
+                        }else {
+                            fragments.remove(index);
+                            uploadableFiles.remove(index);
+                            thumbnailsAdapter.notifyItemRemoved(index);
+                            uploadImagesAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onNextButtonClicked(int index) {
+                        UploadActivity.this.onNextButtonClicked(index);
+                    }
+
+                    @Override
+                    public void onPreviousButtonClicked(int index) {
+                        UploadActivity.this.onPreviousButtonClicked(index);
+                    }
+
+                    @Override
+                    public void showProgress(boolean shouldShow) {
+                        UploadActivity.this.showProgress(shouldShow);
+                    }
+                });
                 uploadMediaDetailFragment.setIndexInViewFlipper(indexOfChild++);
                 uploadMediaDetailFragment.totalNumberOfSteps=uploadableFiles.size()+2;
                 fragments.add(uploadMediaDetailFragment);
@@ -621,16 +354,6 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
         finish();
     }
 
-    private void updateCardState(boolean state, ImageView button, View... content) {
-        button.animate().rotation(button.getRotation() + (state ? 180 : -180)).start();
-        if (content != null) {
-            for (View view : content) {
-                view.setVisibility(state ? View.VISIBLE : View.GONE);
-            }
-        }
-    }
-
-
     private void showInfoAlert(int titleStringID, int messageStringId, String... formatArgs) {
         new AlertDialog.Builder(this)
                 .setTitle(titleStringID)
@@ -642,38 +365,8 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
     }
 
     @Override
-    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
-        /*SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
-        Bundle args = new Bundle();
-        args.putString("originalImagePath", originalFilePath);
-        args.putString("possibleImagePath", possibleFilePath);
-        newFragment.setArguments(args);
-        newFragment.show(getSupportFragmentManager(), "dialog");*/
-    }
-
-    @Override public void setUploadItems(List<UploadModel.UploadItem> uploadItems) {
-        this.uploadItems=uploadItems;
-    }
-
-    private void setUpTopCardView() {
-        if(null!=uploadableFiles){
-            tvTopCardTitle.setText(getResources().getQuantityString(R.plurals.upload_count_title,uploadableFiles.size(),uploadableFiles.size()));
-        }
-    }
-
-    @OnClick(R.id.ll_container_top_card)
-    public void onLLContainerTopCardClicked(){
-
-    }
-
-    @OnClick(R.id.ib_toggle_top_card)
-    public void onImageButtonTopCardClicked(){
-
-    }
-
-    @Override
     public void onNextButtonClicked(int index) {
-        if (index != vpUpload.getChildCount()) {
+        if (index < vpUpload.getChildCount()) {
             vpUpload.setCurrentItem(index + 1, true);
         } else {
             presenter.handleSubmit();
@@ -684,15 +377,6 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
     public void onPreviousButtonClicked(int index) {
         if (index != 0) {
             vpUpload.setCurrentItem(index - 1, true);
-        }
-    }
-
-    @Override
-    public int getMarginTop(int index) {
-        if (index < uploadableFiles.size()) {
-            return 0;
-        } else {
-            return baseHeight;
         }
     }
 
@@ -725,7 +409,8 @@ public class UploadActivity extends BaseActivity implements SimilarImageInterfac
 
     @OnClick(R.id.rl_container_title)
     public void onRlContainerTitleClicked(){
-        rvThumbnails.setVisibility(isTitleExpanded?View.GONE:View.VISIBLE);
-        isTitleExpanded=!isTitleExpanded;
+        rvThumbnails.setVisibility(isTitleExpanded ? View.GONE : View.VISIBLE);
+        isTitleExpanded = !isTitleExpanded;
+        ibToggleTopCard.setRotation(ibToggleTopCard.getRotation() + 180);
     }
 }

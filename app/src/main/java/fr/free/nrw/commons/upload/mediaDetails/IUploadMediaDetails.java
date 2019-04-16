@@ -22,6 +22,8 @@ public interface IUploadMediaDetails {
         void showMessage(String message, int colorResourceId);
 
         void showDuplicatePicturePopup();
+
+        void showBadImagePopup(Integer errorCode);
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -31,8 +33,7 @@ public interface IUploadMediaDetails {
 
         void verifyImageQuality(UploadItem uploadItem, boolean validateTitle);
 
-
-        void setUploadItem(UploadItem uploadItem);
+        void setUploadItem(int index, UploadItem uploadItem);
     }
 
 }

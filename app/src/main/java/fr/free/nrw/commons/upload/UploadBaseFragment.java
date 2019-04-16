@@ -26,6 +26,6 @@ public class UploadBaseFragment extends Fragment {
 
         void onPreviousButtonClicked(int index);
 
-        int getMarginTop(int index);
+        void showProgress(boolean shouldShow);
     }
 }
