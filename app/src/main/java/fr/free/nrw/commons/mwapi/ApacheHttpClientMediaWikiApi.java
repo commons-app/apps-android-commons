@@ -88,6 +88,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         this.gson = gson;
     }
 
+    /**
+     * Get socket factory for SSL connections
+     * @return Returns unsecure SSL socket factory for debug builds and returns existing SSL socket for release builds
+     */
     private SSLSocketFactory getSocketFactory() {
         if (BuildConfig.DEBUG) {
             try {

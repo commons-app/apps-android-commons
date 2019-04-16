@@ -47,15 +47,19 @@ public class NetworkingModule {
                                             HttpLoggingInterceptor httpLoggingInterceptor,
                                             SSLSocketFactory sslSocketFactory) {
         File dir = new File(context.getCacheDir(), "okHttpCache");
-        return new OkHttpClient.Builder()
-                .sslSocketFactory(sslSocketFactory)
-                .hostnameVerifier((hostname, session) -> true)
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .addInterceptor(httpLoggingInterceptor)
                 .readTimeout(60, TimeUnit.SECONDS)
-                .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
-                .build();
+                .cache(new Cache(dir, OK_HTTP_CACHE_SIZE));
+
+        if (BuildConfig.DEBUG) {
+            builder.sslSocketFactory(sslSocketFactory)
+                    .hostnameVerifier((hostname, session) -> true);
+        }
+
+        return builder.build();
     }
 
     @Provides

@@ -14,6 +14,9 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 
 
+/**
+ * Extends SSLSocketFactory to return an unsecure instance
+ */
 public class UnsecureApacheSSLSocketFactory extends SSLSocketFactory {
     SSLContext sslContext = SSLContext.getInstance("TLS");
 

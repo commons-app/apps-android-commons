@@ -10,12 +10,14 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
+/**
+ * Class to get an instance of unsecure key store trust manager
+ */
 public class UnsecureKeyStoresTrustManager implements X509TrustManager {
 
-    protected ArrayList<X509TrustManager> x509TrustManagers = new ArrayList<X509TrustManager>();
+    private ArrayList<X509TrustManager> x509TrustManagers = new ArrayList<X509TrustManager>();
 
-
-    public UnsecureKeyStoresTrustManager(KeyStore... additionalkeyStores) {
+    UnsecureKeyStoresTrustManager(KeyStore... additionalkeyStores) {
         final ArrayList<TrustManagerFactory> factories = new ArrayList<TrustManagerFactory>();
 
         try {
@@ -51,7 +53,7 @@ public class UnsecureKeyStoresTrustManager implements X509TrustManager {
 
     }
 
-    /*
+    /**
      * Delegate to the default trust manager.
      */
     public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
@@ -59,7 +61,7 @@ public class UnsecureKeyStoresTrustManager implements X509TrustManager {
         defaultX509TrustManager.checkClientTrusted(chain, authType);
     }
 
-    /*
+    /**
      * Loop over the trustmanagers until we find one that accepts our server
      */
     public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
