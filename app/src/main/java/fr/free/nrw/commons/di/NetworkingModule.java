@@ -1,18 +1,21 @@
 package fr.free.nrw.commons.di;
 
 import android.content.Context;
-import android.net.Uri;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.wikipedia.json.GsonUtil;
 
 import java.io.File;
+import java.security.cert.CertificateException;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import androidx.annotation.NonNull;
 import dagger.Module;
@@ -41,14 +44,53 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public OkHttpClient provideOkHttpClient(Context context,
-                                            HttpLoggingInterceptor httpLoggingInterceptor) {
+                                            HttpLoggingInterceptor httpLoggingInterceptor,
+                                            SSLSocketFactory sslSocketFactory) {
         File dir = new File(context.getCacheDir(), "okHttpCache");
-        return new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
+        return new OkHttpClient.Builder()
+                .sslSocketFactory(sslSocketFactory)
+                .hostnameVerifier((hostname, session) -> true)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
                 .addInterceptor(httpLoggingInterceptor)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
-            .build();
+                .readTimeout(60, TimeUnit.SECONDS)
+                .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    public SSLSocketFactory getSocketFactory() {
+        if (BuildConfig.DEBUG) {
+            try {
+                final TrustManager[] trustAllCerts = new TrustManager[]{
+                        new X509TrustManager() {
+                            @Override
+                            public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                            }
+
+                            @Override
+                            public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                            }
+
+                            @Override
+                            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                                return new java.security.cert.X509Certificate[0];
+                            }
+                        }
+                };
+
+                // Install the all-trusting trust manager
+                final SSLContext sslContext = SSLContext.getInstance("SSL");
+                sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+                // Create an ssl socket factory with our all-trusting manager
+                return sslContext.getSocketFactory();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return null;
+        }
     }
 
     @Provides

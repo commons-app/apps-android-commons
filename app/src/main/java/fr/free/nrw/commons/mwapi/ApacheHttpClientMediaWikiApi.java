@@ -24,6 +24,7 @@ import org.wikipedia.util.DateUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.KeyStore;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,15 +68,17 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                                         String wikidatApiURL,
                                         JsonKvStore defaultKvStore,
                                         Gson gson) {
+
         this.context = context;
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-        final SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
+        final SSLSocketFactory sslSocketFactory = getSocketFactory();
         schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
         params.setParameter(CoreProtocolPNames.USER_AGENT, CommonsApplication.getInstance().getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
+
         if (BuildConfig.DEBUG) {
             httpClient.addRequestInterceptor(NetworkInterceptors.getHttpRequestInterceptor());
         }
@@ -83,6 +86,22 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         wikidataApi = new CustomMwApi(wikidatApiURL, httpClient);
         this.defaultKvStore = defaultKvStore;
         this.gson = gson;
+    }
+
+    private SSLSocketFactory getSocketFactory() {
+        if (BuildConfig.DEBUG) {
+            try {
+                KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+                trustStore.load(null, null);
+                UnsecureApacheSSLSocketFactory sf = new UnsecureApacheSSLSocketFactory(trustStore);
+                sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+                return sf;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return SSLSocketFactory.getSocketFactory();
+        }
     }
 
     /**
