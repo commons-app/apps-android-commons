@@ -51,7 +51,7 @@ public class AboutActivity extends NavigationBaseActivity {
         aboutLicenseText.setHtmlText(aboutText);
 
         @SuppressLint("StringFormatMatches")
-        String improveText = String.format(getString(R.string.about_improve), BuildConfig.NEW_ISSUE_URL);
+        String improveText = String.format(getString(R.string.about_improve), Urls.NEW_ISSUE_URL);
         improve.setHtmlText(improveText);
 
         SpannableString content = new SpannableString(getString(R.string.about_faq));
@@ -78,22 +78,22 @@ public class AboutActivity extends NavigationBaseActivity {
     public void launchFacebook(View view) {
         Intent intent;
         try {
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.FACEBOOK_APP_URL));
-            intent.setPackage(BuildConfig.FACEBOOK_PACKAGE_NAME);
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Urls.FACEBOOK_APP_URL));
+            intent.setPackage(Urls.FACEBOOK_PACKAGE_NAME);
             startActivity(intent);
         } catch (Exception e) {
-            Utils.handleWebUrl(this, Uri.parse(BuildConfig.FACEBOOK_WEB_URL));
+            Utils.handleWebUrl(this, Uri.parse(Urls.FACEBOOK_WEB_URL));
         }
     }
 
     @OnClick(R.id.github_launch_icon)
     public void launchGithub(View view) {
-        Utils.handleWebUrl(this, Uri.parse(BuildConfig.GITHUB_REPO_URL));
+        Utils.handleWebUrl(this, Uri.parse(Urls.GITHUB_REPO_URL));
     }
 
     @OnClick(R.id.website_launch_icon)
     public void launchWebsite(View view) {
-        Utils.handleWebUrl(this, Uri.parse(BuildConfig.WEBSITE_URL));
+        Utils.handleWebUrl(this, Uri.parse(Urls.WEBSITE_URL));
     }
 
     @OnClick(R.id.about_rate_us)
@@ -103,7 +103,7 @@ public class AboutActivity extends NavigationBaseActivity {
 
     @OnClick(R.id.about_credits)
     public void launchCredits(View view) {
-        Utils.handleWebUrl(this, Uri.parse(BuildConfig.CREDITS_URL));
+        Utils.handleWebUrl(this, Uri.parse(Urls.CREDITS_URL));
     }
 
     @OnClick(R.id.about_privacy_policy)
@@ -114,7 +114,7 @@ public class AboutActivity extends NavigationBaseActivity {
 
     @OnClick(R.id.about_faq)
     public void launchFrequentlyAskedQuesions(View view) {
-        Utils.handleWebUrl(this, Uri.parse(BuildConfig.FAQ_URL));
+        Utils.handleWebUrl(this, Uri.parse(Urls.FAQ_URL));
     }
 
     @Override
@@ -128,7 +128,7 @@ public class AboutActivity extends NavigationBaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.share_app_icon:
-                String shareText = String.format(getString(R.string.share_text), BuildConfig.PLAY_STORE_URL);
+                String shareText = String.format(getString(R.string.share_text), Urls.PLAY_STORE_URL);
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
@@ -156,7 +156,7 @@ public class AboutActivity extends NavigationBaseActivity {
                 .setMessage(R.string.about_translate_message)
                 .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
                     String langCode = CommonsApplication.getInstance().getLanguageLookUpTable().getCodes().get(spinner.getSelectedItemPosition());
-                    Utils.handleWebUrl(AboutActivity.this, Uri.parse(BuildConfig.TRANSLATE_WIKI_URL + langCode));
+                    Utils.handleWebUrl(AboutActivity.this, Uri.parse(Urls.TRANSLATE_WIKI_URL + langCode));
                 });
         builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> finish());
         builder.create().show();
