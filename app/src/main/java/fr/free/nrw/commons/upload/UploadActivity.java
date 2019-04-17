@@ -2,12 +2,10 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.appcompat.app.AlertDialog;
@@ -139,7 +137,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private ProgressDialog progressDialog;
-    private int flag = 0, s_count = 0;
+    private boolean multipleUpload = false, flagForSubmit = false;
 
 
     @SuppressLint("CheckResult")
@@ -241,8 +239,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                                         int stepCount,
                                         UploadModel.UploadItem uploadItem,
                                         boolean isShowingItem) {
-        boolean multipleUpload = false;
-        s_count = stepCount;
+        boolean saveForPrevImage = false;
+        int singleUploadStepCount = 3;
+
         String cardTitle = getResources().getString(R.string.step_count, currentStep, stepCount);
         String cardSubTitle = getResources().getString(R.string.image_in_set_label, currentStep);
         bottomCardTitle.setText(cardTitle);
@@ -252,10 +251,13 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         if (currentStep == stepCount) {
             dismissKeyboard();
         }
-        if (s_count > 3 && currentStep != 1) {
+        if (stepCount > singleUploadStepCount) {
             multipleUpload = true;
         }
-        configurePrevButton(multipleUpload);
+        if (multipleUpload && currentStep != 1) {
+            saveForPrevImage = true;
+        }
+        configurePrevButton(saveForPrevImage);
         if(isShowingItem) {
             descriptionsAdapter.setItems(uploadItem.getTitle(), uploadItem.getDescriptions());
             rvDescriptions.setAdapter(descriptionsAdapter);
@@ -361,7 +363,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     @Override
     public void setBottomCardState(boolean state) {
-        updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next, bottomCardAddDescription);
+        updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next, prevTitleDecs, bottomCardAddDescription);
     }
 
 
@@ -519,12 +521,12 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureBottomCard() {
-        int flagVal = directKvStore.getInt("flag");
-        if(flagVal == 0){
-            prevTitleDecs.setVisibility(View.INVISIBLE);
+        boolean flagVal = directKvStore.getBoolean("flagForSubmit");
+        if(flagVal){
+            prevTitleDecs.setVisibility(View.VISIBLE);
         }
         else {
-            prevTitleDecs.setVisibility(View.VISIBLE);
+            prevTitleDecs.setVisibility(View.INVISIBLE);
         }
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
         bottomCard.setOnClickListener(v -> presenter.toggleBottomCardState());
@@ -540,12 +542,12 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         rightCardMapButton.setOnClickListener(v -> presenter.openCoordinateMap());
     }
 
-    @SuppressLint({"NewApi", "ClickableViewAccessibility"})
-    public void configurePrevButton(Boolean b){
-        prevTitleDecs.setCompoundDrawablesWithIntrinsicBounds(null, null, getDrawable(R.drawable.mapbox_info_icon_default), null);
+    @SuppressLint("ClickableViewAccessibility")
+    public void configurePrevButton(Boolean saveForPrevImage){
+        prevTitleDecs.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.mapbox_info_icon_default), null);
 
         String name = "prev_";
-        if (b) {
+        if (saveForPrevImage) {
             name = name + "image_";
         } else {
             name = name + "upload_";
@@ -591,7 +593,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                 return;
             }
             setTitleAndDescriptions();
-            if (s_count > 3) {
+            if (multipleUpload) {
                 savePrevTitleDesc("prev_image_");
             }
             presenter.handleNext(descriptionsAdapter.getTitle(),
@@ -606,8 +608,8 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         // Finally, the previous / submit buttons on the final currentPage of the wizard
         licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
         submit.setOnClickListener(v -> {
-            flag++;
-            directKvStore.putInt("flag", flag);
+            flagForSubmit = true;
+            directKvStore.putBoolean("flagForSubmit", flagForSubmit);
             savePrevTitleDesc("prev_upload_");
             Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG).show();
             presenter.handleSubmit(categoriesModel);
