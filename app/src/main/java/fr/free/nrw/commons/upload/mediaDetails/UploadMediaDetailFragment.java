@@ -261,16 +261,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 String.format(getString(R.string.upload_title_duplicate),
                         uploadItem.getFileName()),
                 () -> {
-                    uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                    onNextButtonClicked();
+
                 },
                 () -> {
-                    handleNegativeResponseForDuplicateImage();
+                    uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+                    onNextButtonClicked();
                 });
-    }
-
-    private void handleNegativeResponseForDuplicateImage() {
-        //Do nothing, let him change the title if he wishes to
     }
 
     @Override
