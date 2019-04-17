@@ -127,7 +127,7 @@
   <string name="menu_refresh">Обновяване</string>
   <string name="storage_permission_title">Изисква се разрешение за съхранение</string>
   <string name="read_storage_permission_rationale">Изисква се разрешение: Трябва да се прочита от външен склад. Приложението без това няма достъп до вашата галерия.</string>
-  <string name="write_storage_permission_rationale">Изисква се разрешение: Трябва да се запише на външен склад. Приложението без това няма достъп до вашата камера.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Изисква се разрешение: Трябва да се запише на външен склад. Приложението без това няма достъп до вашата камера.</string>
   <string name="ok">Добре</string>
   <string name="title_activity_nearby">Близки места</string>
   <string name="no_nearby">Не са намерени близки места</string>

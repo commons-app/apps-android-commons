@@ -15,7 +15,7 @@
         android:paddingTop="@dimen/standard_gap"
         android:paddingRight="@dimen/standard_gap"
         android:paddingBottom="@dimen/small_gap"
-        android:src="@drawable/commons_logo_large"/>
+        app:srcCompat="@drawable/commons_logo"/>
 
     <TextView
         android:id="@+id/username"

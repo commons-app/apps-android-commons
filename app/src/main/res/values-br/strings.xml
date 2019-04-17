@@ -164,7 +164,7 @@
   <string name="detail_license_empty">Aotre-implijout dizanv</string>
   <string name="menu_refresh">Freskaat</string>
   <string name="read_storage_permission_rationale">Aotre rekis : lenn ur stokañ diavaez. N\'hall ket an arload tizhout ho palier hep an dra-se.</string>
-  <string name="write_storage_permission_rationale">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload tizhout ho kamera hep an dra-se.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload tizhout ho kamera hep an dra-se.</string>
   <string name="location_permission_rationale">Aotre diret : kaout al lec\'hiadur red evit kinnig rummadoù</string>
   <string name="ok">Mat eo</string>
   <string name="title_activity_nearby">Lec\'hioù nes</string>

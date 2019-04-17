@@ -155,7 +155,7 @@
   <string name="menu_refresh">გოახალაფა</string>
   <string name="storage_permission_title">თხილუაშ ოჸიაშ მოთხირი</string>
   <string name="read_storage_permission_rationale">ოჸია: გალენი შვენაშ კითხირი. აპლიკაციას ვემიაჭირინე თქვან გალერეაშა თეშ უმუშო.</string>
-  <string name="write_storage_permission_rationale">ოჸია: გალენი შვენაშ გიმორინაფა. აპლიკაციას ვემიახუჯინე თქვან კამერაშა თეშ უმუშო.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">ოჸია: გალენი შვენაშ გიმორინაფა. აპლიკაციას ვემიახუჯინე თქვან კამერაშა თეშ უმუშო.</string>
   <string name="location_permission_rationale">გეძინელი ოჸია: მიმალი ორენიშ გოთანჯუა კატეგორიაშ მიორზიებელო</string>
   <string name="ok">ჯგირი</string>
   <string name="title_activity_nearby">გოხოლუაშ აბანეფი</string>

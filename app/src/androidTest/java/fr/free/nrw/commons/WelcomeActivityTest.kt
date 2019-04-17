@@ -98,4 +98,9 @@ class WelcomeActivityTest {
                     assert(activityRule.activity.isDestroyed)
                 }}
     }
+
+    @Test
+    fun orientationChange() {
+        UITestHelper.changeOrientation(activityRule)
+    }
 }

@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.net.Uri;
 import androidx.annotation.IntDef;
+import fr.free.nrw.commons.location.LatLng;
 
 import java.lang.annotation.Retention;
 import java.util.List;
@@ -70,7 +71,7 @@ public interface UploadView {
 
     void finish();
 
-    void launchMapActivity(String decCoords);
+    void launchMapActivity(LatLng decCoords);
 
     void showErrorMessage(int resourceId);
 

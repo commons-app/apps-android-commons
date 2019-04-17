@@ -21,7 +21,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -105,6 +104,19 @@ public class SettingsFragment extends PreferenceFragment {
             checkPermissionsAndSendLogs();
             return true;
         });
+        // Disable some settings when not logged in.
+        if (defaultKvStore.getBoolean("login_skipped", false)){
+            SwitchPreference useExternalStorage = (SwitchPreference) findPreference("useExternalStorage");
+            SwitchPreference displayNearbyCardView = (SwitchPreference) findPreference("displayNearbyCardView");
+            SwitchPreference displayLocationPermissionForCardView = (SwitchPreference) findPreference("displayLocationPermissionForCardView");
+            SwitchPreference displayCampaignsCardView = (SwitchPreference) findPreference("displayCampaignsCardView");
+            useExternalStorage.setEnabled(false);
+            uploadLimit.setEnabled(false);
+            useAuthorName.setEnabled(false);
+            displayNearbyCardView.setEnabled(false);
+            displayLocationPermissionForCardView.setEnabled(false);
+            displayCampaignsCardView.setEnabled(false);
+        }
     }
 
     /**

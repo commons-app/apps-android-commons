@@ -153,7 +153,7 @@
   <string name="detail_license_empty">Nepoznata licencija</string>
   <string name="menu_refresh">Osvježi</string>
   <string name="read_storage_permission_rationale">Potrebno dopuštenje čitanja vanjske pohrane. Bez toga aplikacija ne može pristupiti Vašoj galeriji.</string>
-  <string name="write_storage_permission_rationale">Potrebno dopuštenje spremanja na vanjsku pohranu. Bez toga aplikacija ne može pristupiti Vašoj kameri.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Potrebno dopuštenje spremanja na vanjsku pohranu. Bez toga aplikacija ne može pristupiti Vašoj kameri.</string>
   <string name="location_permission_rationale">Potrebno dopuštenje za određivanje trenutačne lokacije za prijedloge kategorija (nije obvezno)</string>
   <string name="ok">U redu</string>
   <string name="title_activity_nearby">Mjesta u blizini</string>
