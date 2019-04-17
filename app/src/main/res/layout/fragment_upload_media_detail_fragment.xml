@@ -18,7 +18,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:layout_alignParentBottom="true"
-    android:elevation="10dp"
+    android:elevation="@dimen/cardview_default_elevation"
     >
     <LinearLayout
       android:layout_width="match_parent"

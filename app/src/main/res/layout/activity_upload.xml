@@ -21,7 +21,7 @@
     android:layout_marginEnd="8dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    android:elevation="10dp"
+    android:elevation="@dimen/cardview_default_elevation"
     >
     <LinearLayout
       android:id="@+id/ll_container_top_card"
