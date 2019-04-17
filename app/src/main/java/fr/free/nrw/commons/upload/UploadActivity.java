@@ -370,7 +370,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     @Override
     public void onNextButtonClicked(int index) {
         if (index < vpUpload.getChildCount()) {
-            vpUpload.setCurrentItem(index + 1, true);
+            vpUpload.setCurrentItem(index + 1, false);
         } else {
             presenter.handleSubmit();
         }

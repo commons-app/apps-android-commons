@@ -10,6 +10,7 @@
     android:id="@+id/vp_upload"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/commons_app_blue_dark"
     />
   <android.support.v7.widget.CardView
     android:id="@+id/cv_container_top_card"
