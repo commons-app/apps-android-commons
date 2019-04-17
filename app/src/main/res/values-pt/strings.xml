@@ -456,8 +456,8 @@
   <string name="check_category_adding_template">A adicionar predefinição para verificação da categoria</string>
   <string name="check_category_notification_title">A pedir verificação de categoria para %1$s</string>
   <string name="check_category_edit_summary">A pedir verificação de categoria</string>
-  <string name="check_category_success_title">A pedir verificação de categoria: Êxito</string>
-  <string name="check_category_failure_title">A pedir verificação de categoria: Falhou</string>
+  <string name="check_category_success_title" fuzzy="true">A pedir verificação de categoria: Êxito</string>
+  <string name="check_category_failure_title" fuzzy="true">A pedir verificação de categoria: Falhou</string>
   <string name="check_category_success_message">Foi pedida verificação de categoria para %1$s</string>
   <string name="check_category_failure_message">Não foi possível pedir verificação de categoria para %1$s</string>
   <string name="check_category_toast">A pedir verificação de categoria para %1$s</string>

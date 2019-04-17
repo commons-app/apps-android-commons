@@ -468,8 +468,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="check_category_adding_template">Adding template for category check</string>
   <string name="check_category_notification_title">Requesting category check for %1$s</string>
     <string name="check_category_edit_summary">Requesting category check</string>
-  <string name="check_category_success_title">Requesting category check: Success</string>
-  <string name="check_category_failure_title">Requesting category check: Failed</string>
+  <string name="check_category_success_title">Category check requested</string>
+  <string name="check_category_failure_title">Category check request didn\'t work</string>
   <string name="check_category_success_message">Successfully requested category check for %1$s</string>
   <string name="check_category_failure_message">Could not request category check for %1$s</string>
   <string name="check_category_toast">Requesting category check for %1$s</string>
@@ -535,6 +535,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="thanks_received_explanation" >This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
   <string name="previous_image_title_description">Copy previous title &amp; description</string>
   <string name="previous_button_tooltip_message">Click to reuse the title and description you entered in your previous picture and modify it to fit your current one</string>
+  <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>
+  <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
   <string name="skip_image">SKIP THIS IMAGE</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
 </resources>

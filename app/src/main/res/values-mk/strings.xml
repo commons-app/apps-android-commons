@@ -443,8 +443,8 @@
   <string name="check_category_adding_template">Додавање на шаблон за категориска проверка</string>
   <string name="check_category_notification_title">Барање на категориска проверка за %1$s</string>
   <string name="check_category_edit_summary">Барање на категориска проверка</string>
-  <string name="check_category_success_title">Барање на категориска проверка: Успешно</string>
-  <string name="check_category_failure_title">Барање на категориска проверка: Неуспешно</string>
+  <string name="check_category_success_title" fuzzy="true">Барање на категориска проверка: Успешно</string>
+  <string name="check_category_failure_title" fuzzy="true">Барање на категориска проверка: Неуспешно</string>
   <string name="check_category_success_message">Успешно побарана категориска проверка за %1$s</string>
   <string name="check_category_failure_message">Не можев да побарам категориска проверка за %1$s</string>
   <string name="check_category_toast">Барање на категориска проверка за %1$s</string>

@@ -104,6 +104,7 @@
   <string name="title_activity_signup">注册</string>
   <string name="title_activity_featured_images">特色图片</string>
   <string name="title_activity_category_details">分类</string>
+  <string name="title_activity_review">同行评审</string>
   <string name="menu_about">关于</string>
   <string name="about_license">维基共享资源应用是由维基媒体社区的受助者和志愿者创建和维护的开源应用。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
   <string name="about_improve">创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
@@ -174,11 +175,12 @@
   <string name="detail_panel_cats_loading">正在载入…</string>
   <string name="detail_panel_cats_none">未选择</string>
   <string name="detail_description_empty">没有说明</string>
+  <string name="detail_discussion_empty">没有讨论</string>
   <string name="detail_license_empty">未知许可协议</string>
   <string name="menu_refresh">刷新</string>
   <string name="storage_permission_title">请求存储权限</string>
   <string name="read_storage_permission_rationale">需要权限：读取外部存储。应用不能在没有它的情况下访问您的图册。</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">需要权限：写入外部存储。应用不能在没有它的情况下访问您的图册。</string>
+  <string name="write_storage_permission_rationale">需要权限：写入外部存储。应用不能在没有它的情况下访问您的相机/图册。</string>
   <string name="location_permission_rationale">可选权限：获取当前位置以提供分类建议</string>
   <string name="ok">确定</string>
   <string name="title_activity_nearby">附近地点</string>
@@ -189,6 +191,7 @@
   <string name="no">否</string>
   <string name="media_detail_title">标题</string>
   <string name="media_detail_description">描述</string>
+  <string name="media_detail_discussion">讨论</string>
   <string name="media_detail_author">作者</string>
   <string name="media_detail_uploaded_date">上传日期</string>
   <string name="media_detail_license">许可协议</string>
@@ -204,7 +207,7 @@
   <string name="maximum_limit_alert">无法显示超过500张</string>
   <string name="enter_valid">输入有效数字</string>
   <string name="cannot_be_zero">上传数量限制不能是 0</string>
-  <string name="set_limit" fuzzy="true">设置最近上传限制</string>
+  <string name="set_limit">设置上传限制</string>
   <string name="login_failed_2fa_not_supported">目前不支持双因素验证。</string>
   <string name="logout_verification">您真的想要退出么？</string>
   <string name="commons_logo">共享资源标志</string>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Vlad5250
+-->
+<resources>
+  <string name="title_activity_explore">Istraži</string>
+  <string name="navigation_item_explore">Istraži</string>
+  <string name="preference_category_appearance">Izgled</string>
+  <string name="preference_category_general">Opšte</string>
+  <string name="preference_category_feedback">Povratna informacija</string>
+  <string name="preference_category_location">Lokacija</string>
+  <string name="app_name">Ostava</string>
+  <string name="menu_settings">Postavke</string>
+  <string name="intent_share_upload_label">Otpremi na Ostavu</string>
+  <string name="username">Korisničko ime</string>
+  <string name="password">Lozinka</string>
+  <string name="login_credential">Prijavite se na svoj Commons Beta račun</string>
+  <string name="login">Prijavi se</string>
+  <string name="forgot_password">Zaboravili ste lozinku?</string>
+  <string name="signup">Otvori račun</string>
+  <string name="logging_in_title">Prijava</string>
+  <string name="logging_in_message">Sačekajte…</string>
+  <string name="login_success">Prijava uspješna!</string>
+  <string name="login_failed">Prijava neuspješna!</string>
+  <string name="upload_failed">Nisam pronašao datoteku. Pokušajte sa drugom.</string>
+  <string name="authentication_failed">Potvrda identiteta nije uspela. Prijavite se ponovo.</string>
+  <string name="uploading_started">Otpremanje je započeto!</string>
+  <string name="upload_completed_notification_title">Datoteka „%1$s” je otpremljena!</string>
+  <string name="upload_completed_notification_text">Dodirnite da biste pogledali datoteku</string>
+  <string name="upload_progress_notification_title_start">Počinje otpremanje „%1$s”</string>
+  <string name="upload_progress_notification_title_in_progress">Otpremanje „%1$s”</string>
+  <string name="upload_progress_notification_title_finishing">Završavanje otpremanja „%1$s”</string>
+  <string name="upload_failed_notification_title">Otpremanje „%1$s” nije uspelo</string>
+  <string name="upload_failed_notification_subtitle">Dodirnite da biste pogledali</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Otprema se %1$d datoteka</item>
+    <item quantity="other">Otpremaju se %1$d datoteke</item>
+  </plurals>
+  <string name="title_activity_contributions">Moja nedavna otpremanja</string>
+  <string name="contribution_state_queued">Na čekanju</string>
+  <string name="contribution_state_failed">Nije uspelo</string>
+  <string name="contribution_state_in_progress">%1$d%% otpremljeno</string>
+  <string name="contribution_state_starting">Otpremanje</string>
+  <string name="menu_from_gallery">Iz galerije</string>
+  <string name="menu_from_camera">Napravi sliku</string>
+  <string name="menu_nearby">U blizini</string>
+  <string name="provider_contributions">Moja otpremanja</string>
+  <string name="menu_share">Podijeli</string>
+  <string name="menu_open_in_browser">Pogledaj u pregledniku</string>
+  <string name="share_title_hint">Naslov (obavez.)</string>
+  <string name="add_title_toast">Stavite naslov datoteci</string>
+  <string name="share_description_hint">Opis</string>
+  <string name="login_failed_network">Ne mogu Vas prijaviti — mreža ne radi</string>
+  <string name="login_failed_wrong_credentials">Nisam mogao vas prijaviti. Proverite korisničko ime i lozinku</string>
+  <string name="login_failed_throttled">Napraveni su previše neuspješnih pokušaja. Pokušajte pak za neku minutu.</string>
+  <string name="login_failed_blocked">Žao nam je, korisnik je blokiran na Ostavi</string>
+  <string name="login_failed_2fa_needed">Morate upisati svoj kôd za dvočiniteljsku potvrdu identiteta.</string>
+  <string name="login_failed_generic">Prijava nije uspjela</string>
+  <string name="share_upload_button">Otpremi</string>
+  <string name="multiple_share_base_title">Dajte ime ovom kompletu</string>
+  <string name="add_set_name_toast">Dajte ime zbiru</string>
+  <string name="provider_modifications">Preinačivanja</string>
+  <string name="menu_upload_single">Otpremi</string>
+  <string name="categories_search_text_hint">Pretraži kategorije</string>
+  <string name="menu_save_categories">Snimi</string>
+  <string name="refresh_button">Preučitaj</string>
+  <string name="display_list_button">Popis</string>
+  <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
+  <string name="enable_gps">Omogući GPS</string>
+  <string name="contributions_subtitle_zero">Još uvijek nema otpremanja</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Počinje %1$d otpremanje</item>
+    <item quantity="other">Počinju %1$d otpremanja</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d otpremanje</item>
+    <item quantity="other">%1$d otpremanja</item>
+  </plurals>
+  <string name="categories_not_found">Nema kategorija što odgovoraju %1$s</string>
+  <string name="categories_skip_explanation">Stavite kategorije slikama kako biste olakšali korisnicima njihovo pronalaženje na Ostavi.\n\nDa biste stavili kategoriju, počnite sa pisanjem njenog imena.</string>
+  <string name="categories_activity_title">Kategorije</string>
+  <string name="title_activity_settings">Podešavanja</string>
+  <string name="title_activity_signup">Registracija</string>
+  <string name="title_activity_featured_images">Izabrane slike</string>
+  <string name="title_activity_category_details">Kategorija</string>
+  <string name="title_activity_review">Ocjenivanje</string>
+  <string name="menu_about">O izvršniku</string>
+  <string name="about_license">Prilog Ostave ima otvoreni izvor. Njegovi kreatori i održavatelji su primatelji namjenskih resursa Wikimedijine zajednice kao i članovi zajednice. Zaklada Wikimedija nema sudjelovanja u njenom stvaranju, razvoju i održavanju.</string>
+  <string name="about_improve">Stvorite novi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;problem na GitHubu&lt;/a&gt; da biste prijavili greške ili dali predloge.</string>
+  <string name="about_privacy_policy">&lt;u&gt;Politika privatnosti&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Zasluge&lt;/u&gt;</string>
+  <string name="title_activity_about">O izvršniku</string>
+  <string name="menu_feedback">Pošaljite Vašu povratnu informaciju (putem e-pošte)</string>
+  <string name="no_email_client">Nemate uspostavljen klijent za e-poštu</string>
+  <string name="provider_categories">Nedavno korištene kategorije</string>
+  <string name="waiting_first_sync">Čekam prvo usklađivanje...</string>
+  <string name="no_uploads_yet">Još uvijek niste otpremili nijednu sliku.</string>
+  <string name="menu_retry_upload">Pokušaj ponovo</string>
+  <string name="menu_cancel_upload">Otkaži</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Ova slika će se izvoditi pod licencom %1$s</item>
+    <item quantity="other">Ove slike će se izvoditi pod licencama %1$s</item>
+  </plurals>
+  <string name="media_upload_policy">Slanjem ove slike izjavljujem da je ona moje djelo, da ne sadrži nikakav materijal zaštićen autorskim pravom, ne sadrži selfije, te da je na bilo koji drugi način u skladu s &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smjernicama Ostave&lt;/a&gt;.</string>
+  <string name="menu_download">Preuzmi</string>
+  <string name="preference_license">Standardna licenca</string>
+  <string name="use_previous">Koristi prethodan naslov/opis</string>
+  <string name="allow_gps">Automatski dobavljaj trenutnu lokaciju</string>
+  <string name="allow_gps_summary">Stavlja geooznaku s trenutne lokacije (ako je nema). Upozorenje: to će vam otkriti nalazište.</string>
+  <string name="preference_theme">Noćni režim</string>
+  <string name="preference_theme_summary">Koristiti tamnu temu</string>
+  <string name="license_name_cc_by_sa_four">Autorstvo-Dijeliti pod istim uslovima 4.0</string>
+  <string name="license_name_cc_by_four"> Autorstvo 4.0</string>
+  <string name="license_name_cc_by_sa"> Autorstvo-Dijeliti pod istim uslovima 3.0</string>
+  <string name="license_name_cc_by"> Autorstvo 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austrija)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Njemačka)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonija)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Španija)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Hrvatska)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Holandija)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norveška)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poljska)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunija)</string>
+  <string name="tutorial_1_text">Ostava je udomljač najvećine slika što se koriste na Wikipediji.</string>
+  <string name="tutorial_1_subtext">Vaše slike pomažu u obrazovanju ljudi širom svijeta!</string>
+  <string name="tutorial_2_text">Postavljajte slike koje su u potpunosti Vaše djelo:</string>
+  <string name="tutorial_2_subtext_1">Objekti iz prirode (cvijeće, životinje, planine)</string>
+  <string name="tutorial_2_subtext_2">Korisni objekti (bicikli, željezničke stanice)</string>
+  <string name="tutorial_2_subtext_3">Poznate osobe (vaš gradonačelnik, olimpijci koje ste sreli)</string>
+  <string name="tutorial_3_text">NE otpremajte:</string>
+  <string name="tutorial_3_subtext_1">Selfije ili slike od vaših prijatelja</string>
+  <string name="tutorial_3_subtext_2">Slike što ste preuzeli sa svemrežja</string>
+  <string name="tutorial_3_subtext_3">Snimke ekrana vlasničkih priloga</string>
+</resources>

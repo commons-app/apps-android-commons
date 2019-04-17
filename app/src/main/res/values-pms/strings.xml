@@ -442,8 +442,8 @@
   <string name="check_category_adding_template">Gionté në stamp për ël contròl ëd categorìa</string>
   <string name="check_category_notification_title">Arcesta an cors dël contròl ëd la categorìa për %1$s</string>
   <string name="check_category_edit_summary">Arcesta ëd contròl ëd categorìa</string>
-  <string name="check_category_success_title">Arcesta ëd contròl ëd categorìa: Riussì</string>
-  <string name="check_category_failure_title">Arcesta ëd contròl ëd categorìa: Falì</string>
+  <string name="check_category_success_title" fuzzy="true">Arcesta ëd contròl ëd categorìa: Riussì</string>
+  <string name="check_category_failure_title" fuzzy="true">Arcesta ëd contròl ëd categorìa: Falì</string>
   <string name="check_category_success_message">Contròl ëd categorìa ciamà con sucess për %1$s</string>
   <string name="check_category_failure_message">Impossìbil ciamé un contròl ëd categorìa për %1$s</string>
   <string name="check_category_toast">Arcesta an cors dël contròl ëd la categorìa për %1$s</string>

@@ -12,15 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/welcome_do_upload_content_description"
-        android:src="@drawable/welcome_do_upload" />
+        android:contentDescription="@string/welcome_image_sydney_opera_house"
+        android:src="@drawable/welcome_image_example" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/standard_gap"
         android:layout_marginBottom="@dimen/standard_gap"
-        android:text="@string/tutorial_2_text"
+        android:text="@string/tutorial_4_text"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="@dimen/normal_text"
@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tutorial_2_subtext_1"
+            android:text="@string/tutorial_4_subtext_1"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
@@ -51,7 +51,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tutorial_2_subtext_2"
+            android:text="@string/tutorial_4_subtext_2"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
@@ -65,7 +65,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tutorial_2_subtext_3"
+            android:text="@string/tutorial_4_subtext_3"
             android:textColor="@android:color/white" />
     </LinearLayout>
 

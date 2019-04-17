@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:layout_below="@+id/toolbar"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <Button
                     android:id="@+id/skip_image"
@@ -39,8 +40,7 @@
                     android:background="@android:color/transparent"
                     android:text="@string/skip_image"
                     android:textColor="@color/button_blue_dark"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="120dp"/>
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:layout_width="15dp"

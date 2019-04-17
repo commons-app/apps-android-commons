@@ -463,8 +463,8 @@
   <string name="check_category_adding_template">Ajouter un modèle pour le contrôle de catégorie</string>
   <string name="check_category_notification_title">Demande en cours du contrôle de la catégorie pour %1$s</string>
   <string name="check_category_edit_summary">Demande de contrôle de catégorie</string>
-  <string name="check_category_success_title">Demande de contrôle de catégorie: Succès</string>
-  <string name="check_category_failure_title">Demande de contrôle de catégorie: Echec</string>
+  <string name="check_category_success_title" fuzzy="true">Demande de contrôle de catégorie: Succès</string>
+  <string name="check_category_failure_title" fuzzy="true">Demande de contrôle de catégorie: Echec</string>
   <string name="check_category_success_message">Contrôle de catégorie demandé avec succès pour %1$s</string>
   <string name="check_category_failure_message">Impossible de demander un contrôle de catégorie pour %1$s</string>
   <string name="check_category_toast">Demande en cours du contrôle de la catégorie pour %1$s</string>
