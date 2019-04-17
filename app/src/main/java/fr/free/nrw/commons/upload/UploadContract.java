@@ -3,7 +3,7 @@ package fr.free.nrw.commons.upload;
 import fr.free.nrw.commons.BasePresenter;
 import java.util.List;
 
-public interface IUpload {
+public interface UploadContract {
 
     public interface View {
 

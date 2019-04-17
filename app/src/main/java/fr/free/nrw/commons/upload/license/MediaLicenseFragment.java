@@ -29,7 +29,7 @@ import java.util.List;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class MediaLicenseFragment extends UploadBaseFragment implements IMediaLicense.View {
+public class MediaLicenseFragment extends UploadBaseFragment implements MediaLicenseContract.View {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -45,7 +45,7 @@ public class MediaLicenseFragment extends UploadBaseFragment implements IMediaLi
     AppCompatButton btnPrevious;
 
     @Inject
-    IMediaLicense.UserActionListener presenter;
+    MediaLicenseContract.UserActionListener presenter;
 
     private ArrayAdapter<String> adapter;
     private List<String> licenses;

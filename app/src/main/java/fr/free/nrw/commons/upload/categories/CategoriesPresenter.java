@@ -2,13 +2,14 @@ package fr.free.nrw.commons.upload.categories;
 
 import android.text.TextUtils;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.CategoriesModel;
-import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
-import fr.free.nrw.commons.upload.UploadModel;
+import fr.free.nrw.commons.repository.UploadRepository;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -16,32 +17,41 @@ import javax.inject.Singleton;
 import timber.log.Timber;
 
 @Singleton
-public class CategoriesPresenter implements ICategories.UserActionListener {
+public class CategoriesPresenter implements CategoriesContract.UserActionListener {
 
-    private final CategoriesModel categoriesModel;
-    private final UploadModel uploadModel;
-    ICategories.View view;
+    private static final CategoriesContract.View DUMMY = (CategoriesContract.View) Proxy
+            .newProxyInstance(
+                    CategoriesContract.View.class.getClassLoader(),
+                    new Class[]{CategoriesContract.View.class},
+                    (proxy, method, methodArgs) -> null);
+
+    CategoriesContract.View view = DUMMY;
+    private UploadRepository repository;
+
+    private CompositeDisposable compositeDisposable;
 
     @Inject
-    public CategoriesPresenter(CategoriesModel categoriesModel, UploadModel uploadModel) {
-        this.categoriesModel = categoriesModel;
-        this.uploadModel = uploadModel;
+    public CategoriesPresenter(UploadRepository repository) {
+        this.repository = repository;
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
-    public void onAttachView(ICategories.View view) {
+    public void onAttachView(CategoriesContract.View view) {
         this.view = view;
     }
 
     @Override
     public void onDetachView() {
-        this.view = null;
+        this.view = DUMMY;
+        compositeDisposable.clear();
     }
 
     @Override
     public void searchForCategories(String query, List<String> imageTitleList) {
         List<CategoryItem> categoryItems = new ArrayList<>();
-        Observable.fromIterable(categoriesModel.getSelectedCategories())
+        Disposable searchCategoriesDisposable = Observable
+                .fromIterable(repository.getSelectedCategories())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
@@ -51,15 +61,15 @@ public class CategoriesPresenter implements ICategories.UserActionListener {
                 })
                 .observeOn(Schedulers.io())
                 .concatWith(
-                        categoriesModel.searchAll(query, imageTitleList)
-                                .mergeWith(categoriesModel.searchCategories(query, imageTitleList))
+                        repository.searchAll(query, imageTitleList)
+                                .mergeWith(repository.searchCategories(query, imageTitleList))
                                 .concatWith(TextUtils.isEmpty(query)
-                                        ? categoriesModel.defaultCategories(imageTitleList)
+                                        ? repository.defaultCategories(imageTitleList)
                                         : Observable.empty())
                 )
-                .filter(categoryItem -> !categoriesModel.containsYear(categoryItem.getName()))
+                .filter(categoryItem -> !repository.containsYear(categoryItem.getName()))
                 .distinct()
-                .sorted(categoriesModel.sortBySimilarity(query))
+                .sorted(repository.sortBySimilarity(query))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoryItems.add(s),
@@ -73,13 +83,15 @@ public class CategoriesPresenter implements ICategories.UserActionListener {
                             }
                         }
                 );
+
+        compositeDisposable.add(searchCategoriesDisposable);
     }
 
     @Override
     public void verifyCategories() {
-        List<CategoryItem> selectedCategories = categoriesModel.getSelectedCategories();
+        List<CategoryItem> selectedCategories = repository.getSelectedCategories();
         if (selectedCategories != null && !selectedCategories.isEmpty()) {
-            uploadModel.setSelectedCategories(categoriesModel.getCategoryStringList());
+            repository.setSelectedCategories(repository.getCategoryStringList());
             view.goToNextScreen();
         } else {
             view.showNoCategorySelected();
@@ -87,7 +99,7 @@ public class CategoriesPresenter implements ICategories.UserActionListener {
     }
 
     @Override
-    public CategoryClickedListener getCategoriesModel() {
-        return categoriesModel;
+    public void onCategoryItemClicked(CategoryItem categoryItem) {
+        repository.onCategoryClicked(categoryItem);
     }
 }

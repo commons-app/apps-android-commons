@@ -2,8 +2,7 @@ package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockito_kotlin.verify
 import fr.free.nrw.commons.contributions.Contribution
-import fr.free.nrw.commons.filepicker.UploadableFile
-import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.repository.UploadRepository
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -11,18 +10,15 @@ import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 
 
 class UploadPresenterTest {
 
     @Mock
-    internal var uploadModel: UploadModel? = null
+    internal var repository: UploadRepository? = null
     @Mock
-    internal var uploadController: UploadController? = null
-    @Mock
-    internal var view: IUpload.View? = null
+    internal var view: UploadContract.View? = null
     @Mock
     var contribution: Contribution? = null
 
@@ -34,13 +30,13 @@ class UploadPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         uploadPresenter!!.onAttachView(view)
-        `when`(uploadModel!!.preProcessImages(ArgumentMatchers.anyListOf(UploadableFile::class.java),
+        /*`when`(repository!!.preProcessImage(ArgumentMatchers.anyListOf(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
                 ArgumentMatchers.anyString(),
                 ArgumentMatchers.any(SimilarImageInterface::class.java)))
-                .thenReturn(Observable.just(mock(UploadModel.UploadItem::class.java)))
+                .thenReturn(Observable.just(mock(UploadModel.UploadItem::class.java)))*/
 
-        `when`(uploadModel!!.buildContributions()).thenReturn(Observable.just(contribution))
+        `when`(repository!!.buildContributions()).thenReturn(Observable.just(contribution))
         `when`(view!!.isLoggedIn).thenReturn(true)
     }
 
@@ -57,10 +53,10 @@ class UploadPresenterTest {
         uploadPresenter!!.handleSubmit()
         verify(view!!).isLoggedIn
         verify(view!!).showProgress(true)
-        verify(uploadModel!!).buildContributions()
-        val buildContributions = uploadModel!!.buildContributions()
+        verify(repository!!).buildContributions()
+        val buildContributions = repository!!.buildContributions()
         buildContributions.test().assertNoErrors().assertValue {
-            verify(uploadController!!).prepareService()
+            verify(repository!!).prepareService()
             verify(view!!).showProgress(false)
             verify(view!!).showMessage(ArgumentMatchers.any(Int::class.java))
             verify(view!!).finish()

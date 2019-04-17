@@ -46,7 +46,7 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
-        IUploadMediaDetails.View {
+        UploadMediaDetailsContract.View {
 
     @BindView(R.id.rl_container_title)
     RelativeLayout rlContainerTitle;
@@ -78,7 +78,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private List<Description> descriptions;
 
     @Inject
-    IUploadMediaDetails.UserActionListener presenter;
+    UploadMediaDetailsContract.UserActionListener presenter;
     private UploadableFile uploadableFile;
     private String source;
     private Place place;
@@ -270,7 +270,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     private void handleNegativeResponseForDuplicateImage() {
-
+        //Do nothing, let him change the title if he wishes to
     }
 
     @Override
@@ -281,7 +281,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     getString(R.string.warning),
                     errorMessageForResult,
                     () -> deleteThisPicture(),
-                    () -> uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP));
+                    () -> {
+                        uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+                        onNextButtonClicked();
+                    });
         }
         //If the error message is null, we will probably not show anything
     }

@@ -3,7 +3,7 @@ package fr.free.nrw.commons.upload.license;
 import fr.free.nrw.commons.BasePresenter;
 import java.util.List;
 
-public interface IMediaLicense {
+public interface MediaLicenseContract {
 
     interface View {
         void setLicenses(List<String> licenses);

@@ -19,7 +19,7 @@ import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
 import timber.log.Timber;
 
-public class CategoriesModel implements CategoryClickedListener {
+public class CategoriesModel{
     private static final int SEARCH_CATS_LIMIT = 25;
 
     private final MediaWikiApi mwApi;
@@ -186,8 +186,7 @@ public class CategoriesModel implements CategoryClickedListener {
     //endregion
 
     //region Category Selection
-    @Override
-    public void categoryClicked(CategoryItem item) {
+    public void onCategoryItemClicked(CategoryItem item) {
         if (item.isSelected()) {
             selectCategory(item);
             updateCategoryCount(item);

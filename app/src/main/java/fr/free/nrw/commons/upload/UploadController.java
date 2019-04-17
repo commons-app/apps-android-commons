@@ -74,7 +74,7 @@ public class UploadController {
     /**
      * Prepares the upload service.
      */
-    void prepareService() {
+    public void prepareService() {
         Intent uploadServiceIntent = new Intent(context, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         context.startService(uploadServiceIntent);
@@ -84,7 +84,7 @@ public class UploadController {
     /**
      * Disconnects the upload service.
      */
-    void cleanup() {
+    public void cleanup() {
         if (isUploadServiceConnected) {
             context.unbindService(uploadServiceConnection);
         }
@@ -95,7 +95,7 @@ public class UploadController {
      *
      * @param contribution the contribution object
      */
-    void startUpload(Contribution contribution) {
+    public void startUpload(Contribution contribution) {
         startUpload(contribution, c -> {});
     }
 

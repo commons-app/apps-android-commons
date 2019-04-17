@@ -7,37 +7,37 @@ import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.repository.LocalDataSource;
-import fr.free.nrw.commons.upload.UploadModel;
+import fr.free.nrw.commons.repository.UploadRepository;
+import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
-import fr.free.nrw.commons.upload.mediaDetails.IUploadMediaDetails.UserActionListener;
-import fr.free.nrw.commons.upload.mediaDetails.IUploadMediaDetails.View;
-import io.reactivex.Observable;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.View;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.lang.reflect.Proxy;
 import javax.inject.Inject;
-import javax.inject.Named;
 import timber.log.Timber;
 
-public class UploadMediaPresenter implements UserActionListener {
+public class UploadMediaPresenter implements UserActionListener, SimilarImageInterface {
 
-    private final UploadModel uploadModel;
-    private IUploadMediaDetails.View view;
-    private LocalDataSource localDataSource;
+    private static final UploadMediaDetailsContract.View DUMMY = (UploadMediaDetailsContract.View) Proxy
+            .newProxyInstance(
+                    UploadMediaDetailsContract.View.class.getClassLoader(),
+                    new Class[]{UploadMediaDetailsContract.View.class},
+                    (proxy, method, methodArgs) -> null);
 
-    private BasicKvStore defaultKvStore;
-    private JsonKvStore directKvStore;
+    private final UploadRepository repository;
+    private UploadMediaDetailsContract.View view = DUMMY;
+
+    private CompositeDisposable compositeDisposable;
 
     @Inject
-    public UploadMediaPresenter(UploadModel uploadModel,
-            @Named("default_preferences") BasicKvStore defaultKvStore,
-            @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
-        this.defaultKvStore = defaultKvStore;
-        this.directKvStore = directKvStore;
-        this.uploadModel = uploadModel;
+    public UploadMediaPresenter(UploadRepository uploadRepository) {
+        this.repository = uploadRepository;
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -47,16 +47,16 @@ public class UploadMediaPresenter implements UserActionListener {
 
     @Override
     public void onDetachView() {
-        this.view = null;
+        this.view = DUMMY;
+        compositeDisposable.clear();
     }
 
     @Override
     public void receiveImage(UploadableFile uploadableFile, String source, Place place) {
         view.showProgress(true);
-        Observable<UploadItem> uploadItemObservable = uploadModel
-                .preProcessImage(uploadableFile, place, source, view);
 
-        uploadItemObservable
+        Disposable uploadItemDisposable = repository
+                .preProcessImage(uploadableFile, place, source, this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(uploadItem ->
@@ -65,12 +65,14 @@ public class UploadMediaPresenter implements UserActionListener {
                             view.showProgress(false);
                         },
                         throwable -> Timber.e(throwable, "Error occurred in processing images"));
+        compositeDisposable.add(uploadItemDisposable);
     }
 
     @Override
     public void verifyImageQuality(UploadItem uploadItem, boolean validateTitle) {
         view.showProgress(true);
-        uploadModel.getImageQuality(uploadItem, true)
+        Disposable imageQualityDisposable = repository
+                .getImageQuality(uploadItem, true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageResult -> {
@@ -83,11 +85,13 @@ public class UploadMediaPresenter implements UserActionListener {
                                     R.color.color_error);
                             Timber.e(throwable, "Error occurred while handling image");
                         });
+
+        compositeDisposable.add(imageQualityDisposable);
     }
 
     @Override
-    public void setUploadItem(int index,UploadItem uploadItem) {
-        uploadModel.updateUploadItem(index,uploadItem);
+    public void setUploadItem(int index, UploadItem uploadItem) {
+        repository.updateUploadItem(index, uploadItem);
     }
 
     private void handleImageResult(Integer imageResult) {
@@ -102,7 +106,7 @@ public class UploadMediaPresenter implements UserActionListener {
         Timber.d("Handle bad picture with error code %d", errorCode);
         if (errorCode
                 >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
-            directKvStore.putBoolean("Picture_Has_Correct_Location", false);
+            repository.saveInDirectKvStore("Picture_Has_Correct_Location", false);
         }
 
         switch (errorCode) {
@@ -117,5 +121,10 @@ public class UploadMediaPresenter implements UserActionListener {
             default:
                 view.showBadImagePopup(errorCode);
         }
+    }
+
+    @Override
+    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
+        view.showSimilarImageFragment(originalFilePath, possibleFilePath);
     }
 }

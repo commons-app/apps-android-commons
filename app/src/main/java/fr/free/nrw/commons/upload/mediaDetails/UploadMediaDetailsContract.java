@@ -7,7 +7,7 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 
-public interface IUploadMediaDetails {
+public interface UploadMediaDetailsContract {
 
     interface View extends SimilarImageInterface {
 

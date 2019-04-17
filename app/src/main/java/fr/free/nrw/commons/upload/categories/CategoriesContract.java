@@ -5,7 +5,7 @@ import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
 import java.util.List;
 
-public interface ICategories {
+public interface CategoriesContract {
 
     public interface View {
 
@@ -32,7 +32,7 @@ public interface ICategories {
 
         void verifyCategories();
 
-        CategoryClickedListener getCategoriesModel();
+        void onCategoryItemClicked(CategoryItem categoryItem);
     }
 
 

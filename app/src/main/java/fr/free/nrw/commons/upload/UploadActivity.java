@@ -52,11 +52,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
-public class UploadActivity extends BaseActivity implements IUpload.View ,UploadBaseFragment.Callback{
+public class UploadActivity extends BaseActivity implements UploadContract.View ,UploadBaseFragment.Callback{
     @Inject
     ContributionController contributionController;
     @Inject @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore;
-    @Inject IUpload.UserActionListener presenter;
+    @Inject UploadContract.UserActionListener presenter;
     @Inject CategoriesModel categoriesModel;
     @Inject SessionManager sessionManager;
 
@@ -252,8 +252,11 @@ public class UploadActivity extends BaseActivity implements IUpload.View ,Upload
             handleNullMedia();
         } else {
             //Show thumbnails
-            if(uploadableFiles.size()>1) {//If there is only file, no need to show the image thumbnails
+            if (uploadableFiles.size()
+                    > 1) {//If there is only file, no need to show the image thumbnails
                 thumbnailsAdapter.setUploadableFiles(uploadableFiles);
+            } else {
+                llContainerTopCard.setVisibility(View.GONE);
             }
             tvTopCardTitle.setText(getResources()
                     .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(),uploadableFiles.size()));

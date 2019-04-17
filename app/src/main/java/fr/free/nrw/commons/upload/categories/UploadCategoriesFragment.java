@@ -22,6 +22,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
@@ -35,7 +36,8 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class UploadCategoriesFragment extends UploadBaseFragment implements ICategories.View {
+public class UploadCategoriesFragment extends UploadBaseFragment implements CategoriesContract.View,
+        CategoryClickedListener {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -55,7 +57,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements ICat
     Button btnPrevious;
 
     @Inject
-    ICategories.UserActionListener presenter;
+    CategoriesContract.UserActionListener presenter;
     private RVRendererAdapter<CategoryItem> adapter;
     private List<String> mediaTitleList;
     private Disposable subscribe;
@@ -111,7 +113,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements ICat
     }
 
     private void initRecyclerView() {
-        adapter = new UploadCategoriesAdapterFactory(presenter.getCategoriesModel())
+        adapter = new UploadCategoriesAdapterFactory(this)
                 .create(new ArrayList<>());
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCategories.setAdapter(adapter);
@@ -184,5 +186,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements ICat
     @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
         callback.onPreviousButtonClicked(indexInViewFlipper);
+    }
+
+    @Override
+    public void categoryClicked(CategoryItem item) {
+        presenter.onCategoryItemClicked(item);
     }
 }

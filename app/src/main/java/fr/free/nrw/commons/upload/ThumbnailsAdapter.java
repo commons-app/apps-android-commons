@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload;
 
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -62,7 +64,7 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
 
         public void bind(int position) {
@@ -71,11 +73,19 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
             background.setImageURI(Uri.fromFile(new File(String.valueOf(uri))));
 
             if (position == callback.getCurrentSelectedFilePosition()) {
-                rlContainer.setBackgroundDrawable(rlContainer.getContext().getResources()
-                        .getDrawable(R.drawable.thumbnail_selected));
+                rlContainer.setEnabled(true);
+                rlContainer.setClickable(true);
+                rlContainer.setAlpha(1.0f);
+                if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+                    rlContainer.setElevation(10);
+                }
             } else {
-                rlContainer.setBackgroundDrawable(rlContainer.getContext().getResources()
-                        .getDrawable(R.drawable.thumbnail_not_selected));
+                rlContainer.setEnabled(false);
+                rlContainer.setClickable(false);
+                rlContainer.setAlpha(0.5f);
+                if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+                    rlContainer.setElevation(0);
+                }
             }
         }
     }
