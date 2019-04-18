@@ -1,68 +1,18 @@
 package fr.free.nrw.commons.mwapi;
 
-import android.net.Uri;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import fr.free.nrw.commons.notification.Notification;
-import io.reactivex.Observable;
+
+import java.io.IOException;
+
 import io.reactivex.Single;
 
 public interface MediaWikiApi {
-
-    String getAuthCookie();
-
-    void setAuthCookie(String authCookie);
-
-    String login(String username, String password) throws IOException;
-
-    String login(String username, String password, String twoFactorCode) throws IOException;
-
-    boolean validateLogin() throws IOException;
-
-    String getEditToken() throws IOException;
-
-    String getWikidataCsrfToken() throws IOException;
-
-    String getCentralAuthToken() throws IOException;
-
-    @NonNull
-    Single<UploadStash> uploadFile(String filename, InputStream file,
-                                   long dataLength, Uri fileUri, Uri contentProviderUri,
-                                   final ProgressListener progressListener);
-
-    @NonNull
-    Single<UploadResult> uploadFileFinalize(String filename, String filekey,
-                                            String pageContents, String editSummary) throws IOException;
-    @Nullable
-    String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
-
-    @Nullable
-    String prependEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
-
-    @Nullable
-    String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
-
-    @Nullable
-    String wikidataCreateClaim(String entityId, String property, String snaktype, String value) throws IOException;
-
-    @Nullable
-    boolean addWikidataEditTag(String revisionId) throws IOException;
 
     Single<String> parseWikicode(String source);
 
     @NonNull
     Single<MediaResult> fetchMediaByFilename(String filename);
-
-    @NonNull
-    List<Notification> getNotifications(boolean archived) throws IOException;
-
-    @NonNull
-    boolean markNotificationAsRead(Notification notification) throws IOException;
 
     @Nullable
     String revisionsByFilename(String filename) throws IOException;
@@ -75,8 +25,6 @@ public interface MediaWikiApi {
     void logout();
 
 //    Single<CampaignResponseDTO> getCampaigns();
-
-    boolean thank(String editToken, long revision) throws IOException;
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

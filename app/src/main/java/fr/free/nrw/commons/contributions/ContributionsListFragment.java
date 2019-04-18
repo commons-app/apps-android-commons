@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.content.res.Configuration;
 import android.widget.LinearLayout;
 
+import java.util.concurrent.Callable;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,6 +28,12 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.wikidata.WikidataClient;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.Scheduler;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -53,6 +61,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @Inject @Named("default_preferences") JsonKvStore kvStore;
     @Inject ContributionController controller;
+    @Inject
+    WikidataClient wikidataClient;
 
     private Animation fab_close;
     private Animation fab_open;

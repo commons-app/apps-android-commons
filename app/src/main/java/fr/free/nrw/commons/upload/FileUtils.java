@@ -142,7 +142,7 @@ public class FileUtils {
         return mimeType;
     }
 
-    public static String getFileExt(String fileName) {
+    static String getFileExt(String fileName) {
         //Default filePath extension
         String extension = ".jpg";
 
@@ -153,7 +153,7 @@ public class FileUtils {
         return extension;
     }
 
-    public static FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
+    static FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
         return new FileInputStream(filePath);
     }
 
