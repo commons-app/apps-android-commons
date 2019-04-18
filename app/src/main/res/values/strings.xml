@@ -533,6 +533,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="images_featured_explanation">Featured pictures are images from highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
   <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
   <string name="thanks_received_explanation" >This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
+  <string name="previous_image_title_description">Copy previous title &amp; description</string>
+  <string name="previous_button_tooltip_message">Click to reuse the title and description you entered in your previous picture and modify it to fit your current one</string>
   <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
   <string name="skip_image">SKIP THIS IMAGE</string>
