@@ -193,7 +193,7 @@
   <string name="media_detail_coordinates">座標</string>
   <string name="media_detail_coordinates_empty">未提供</string>
   <string name="become_a_tester_title">成為測試人員</string>
-  <string name="become_a_tester_description">選擇加入我們在 Google Play 的 beta channel，以提早取用新功能及程式修正</string>
+  <string name="become_a_tester_description">選擇加入我們在 Google Play 上的 beta 測試版本，以提早取用新功能及程式修正</string>
   <string name="_2fa_code">雙重驗證代碼</string>
   <string name="number_of_uploads">我的最近上傳限制</string>
   <string name="maximum_limit">最大限制</string>
@@ -339,7 +339,7 @@
   <string name="quiz_back_button">如果您持續上傳需要刪除的圖片，您的帳號可能會被封禁。你確定要結束測驗嗎？</string>
   <string name="quiz_alert_message">超過 %1$s 由您上傳的圖片都遭到刪除了。如果你持續上傳需要刪除的圖片，您的帳號可能會遭到封禁。\n\n您要不要重新閱覽教程，然後再做一次測驗，好讓您學習分辨哪些類型的圖片你可以上傳、哪些不可以？</string>
   <string name="selfie_answer">自拍照沒有什麼百科價值。除非已經有維基百科的條目介紹您，否則請不要上傳拍攝您自己的照片。</string>
-  <string name="taj_mahal_answer">在大多數的國家，上傳古蹟或室外景的照片是沒有問題的。請留意，臨時性的戶外藝術裝置常常是有著作權保護的，不可上傳。</string>
+  <string name="taj_mahal_answer">在大多數的國家，上傳古蹟或室外景的照片是沒有問題的。請留意，臨時性的戶外裝置藝術常常是有著作權保護的，不可上傳。</string>
   <string name="screenshot_answer">網站的螢幕截圖被視為衍生作品，受到該網站本身所有著作權保護。這些截圖可以在獲得原作者許可之後使用。若未經許可，您根據他們的作品而創作的任何藝術品，在法律上均會被視為未經原作者許可的複製品。</string>
   <string name="blurry_image_answer">收錄高畫質圖像是維基共享資源的目標之一，所以不應該上傳模糊的圖片。儘量試著只上傳光線良好的優良圖片。</string>
   <string name="construction_event_answer">在維基共享資源上，展現科技或文化的圖片很受到歡迎。</string>
@@ -452,8 +452,8 @@
   <string name="check_category_adding_template">添加用於分類檢查的模板</string>
   <string name="check_category_notification_title">請求%1$s的分類檢查</string>
   <string name="check_category_edit_summary">請求分類檢查</string>
-  <string name="check_category_success_title" fuzzy="true">請求分類檢查：成功</string>
-  <string name="check_category_failure_title" fuzzy="true">請求分類檢查：失敗</string>
+  <string name="check_category_success_title">分類檢查已請求</string>
+  <string name="check_category_failure_title">分類檢查請求無效</string>
   <string name="check_category_success_message">成功請求%1$s的分類檢查</string>
   <string name="check_category_failure_message">無法請求%1$s的分類檢查</string>
   <string name="check_category_toast">請求%1$s的分類檢查</string>
@@ -511,6 +511,8 @@
   <string name="images_featured_explanation">特色圖片是出自於高水準技巧的攝影師或繪圖師，且被維基共享資源社群挑選為在站台上的最高品質圖片。</string>
   <string name="images_via_nearby_explanation">以「附近地點」所上傳的圖片，是透過找出在地圖上地點來上傳的。</string>
   <string name="thanks_received_explanation">此功能允許編輯者透過利用在歷史頁面或是差異頁面上的感謝連結，來發送感謝通知給做出有用編輯的使用者。</string>
+  <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
+  <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
   <string name="skip_image">忽略此圖片</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">下載失敗！因為缺少外部存儲裝置權限緣故，我們無法下載檔案。</string>
 </resources>

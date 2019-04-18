@@ -456,8 +456,8 @@
   <string name="check_category_adding_template">A adicionar predefinição para verificação da categoria</string>
   <string name="check_category_notification_title">A pedir verificação de categoria para %1$s</string>
   <string name="check_category_edit_summary">A pedir verificação de categoria</string>
-  <string name="check_category_success_title" fuzzy="true">A pedir verificação de categoria: Êxito</string>
-  <string name="check_category_failure_title" fuzzy="true">A pedir verificação de categoria: Falhou</string>
+  <string name="check_category_success_title">Verificação de categoria foi pedida</string>
+  <string name="check_category_failure_title">O pedido de verificação de categoria não funcionou</string>
   <string name="check_category_success_message">Foi pedida verificação de categoria para %1$s</string>
   <string name="check_category_failure_message">Não foi possível pedir verificação de categoria para %1$s</string>
   <string name="check_category_toast">A pedir verificação de categoria para %1$s</string>
@@ -515,6 +515,8 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
+  <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
+  <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">SALTAR ESTA IMAGEM</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">O descarregamento falhou! Não podemos descarregar o ficheiro sem permissão de armazenagem externa.</string>
 </resources>
