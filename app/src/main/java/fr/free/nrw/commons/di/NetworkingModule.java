@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.di;
 
 import android.content.Context;
-import android.net.Uri;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.wikipedia.json.GsonUtil;
 
@@ -55,7 +53,7 @@ public class NetworkingModule {
     @Singleton
     public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
-            Timber.tag("OkHttp").d(message);
+            Timber.tag("OkHttp").v(message);
         });
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return httpLoggingInterceptor;
