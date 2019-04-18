@@ -1,19 +1,12 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
-import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
-import org.apache.http.HttpResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -24,104 +17,72 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.wikipedia.util.DateUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
 import java.util.concurrent.Callable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.PageTitle;
-import fr.free.nrw.commons.achievements.FeaturedImages;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
-import fr.free.nrw.commons.utils.ContributionUtils;
-import fr.free.nrw.commons.utils.DateUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import timber.log.Timber;
-import static fr.free.nrw.commons.utils.ContinueUtils.getQueryContinue;
 
 /**
  * @author Addshore
  */
 public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
-    private String wikiMediaToolforgeUrl = "https://tools.wmflabs.org/";
-
     private static final String THUMB_SIZE = "640";
     private AbstractHttpClient httpClient;
     private CustomMwApi api;
     private CustomMwApi wikidataApi;
     private Context context;
-    private SharedPreferences defaultPreferences;
-    private SharedPreferences categoryPreferences;
+    private JsonKvStore defaultKvStore;
     private Gson gson;
-    private final OkHttpClient okHttpClient;
-    private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
-        "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
 
     private final String ERROR_CODE_BAD_TOKEN = "badtoken";
 
     public ApacheHttpClientMediaWikiApi(Context context,
                                         String apiURL,
                                         String wikidatApiURL,
-                                        SharedPreferences defaultPreferences,
-                                        SharedPreferences categoryPreferences,
-                                        Gson gson,
-                                        OkHttpClient okHttpClient) {
+                                        JsonKvStore defaultKvStore,
+                                        Gson gson) {
         this.context = context;
-        this.okHttpClient = okHttpClient;
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
         final SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
         schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-        params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
+        params.setParameter(CoreProtocolPNames.USER_AGENT, CommonsApplication.getInstance().getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
         if (BuildConfig.DEBUG) {
             httpClient.addRequestInterceptor(NetworkInterceptors.getHttpRequestInterceptor());
         }
         api = new CustomMwApi(apiURL, httpClient);
         wikidataApi = new CustomMwApi(wikidatApiURL, httpClient);
-        this.defaultPreferences = defaultPreferences;
-        this.categoryPreferences = categoryPreferences;
+        this.defaultKvStore = defaultKvStore;
         this.gson = gson;
-    }
-
-    @Override
-    @NonNull
-    public String getUserAgent() {
-        return "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
-    }
-
-    @VisibleForTesting
-    public void setWikiMediaToolforgeUrl(String wikiMediaToolforgeUrl) {
-        this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
     }
 
     /**
@@ -201,15 +162,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     private void setAuthCookieOnLogin(boolean isLoggedIn) {
-        SharedPreferences.Editor editor = defaultPreferences.edit();
         if (isLoggedIn) {
-            editor.putBoolean("isUserLoggedIn", true);
-            editor.putString("getAuthCookie", api.getAuthCookie());
+            defaultKvStore.putBoolean("isUserLoggedIn", true);
+            defaultKvStore.putString("getAuthCookie", api.getAuthCookie());
         } else {
-            editor.putBoolean("isUserLoggedIn", false);
-            editor.remove("getAuthCookie");
+            defaultKvStore.putBoolean("isUserLoggedIn", false);
+            defaultKvStore.remove("getAuthCookie");
         }
-        editor.apply();
     }
 
     @Override
@@ -232,7 +191,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     public String getEditToken() throws IOException {
         String editToken = api.action("query")
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("meta", "tokens")
                 .post()
                 .getString("/api/query/tokens/@csrftoken");
@@ -277,11 +235,24 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    public boolean pageExists(String pageName) throws IOException {
-        return Double.parseDouble( api.action("query")
+    public Single<Boolean> pageExists(String pageName) {
+        return Single.fromCallable(() -> Double.parseDouble(api.action("query")
                 .param("titles", pageName)
                 .get()
-                .getString("/api/query/pages/page/@_idx")) != -1;
+                .getString("/api/query/pages/page/@_idx")) != -1);
+    }
+
+    @Override
+    public boolean thank(String editToken, long revision) throws IOException {
+        CustomApiResult res = api.action("thank")
+                .param("rev", revision)
+                .param("token", editToken)
+                .param("source", CommonsApplication.getInstance().getUserAgent())
+                .post();
+        String r = res.getString("/api/result/@success");
+        // Does this correctly check the success/failure?
+        // The docs https://www.mediawiki.org/wiki/Extension:Thanks seems unclear about that.
+        return r.equals("success");
     }
 
     @Override
@@ -290,12 +261,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", getEditToken())
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("text", processedPageContent)
                 .param("summary", summary)
                 .post()
                 .getString("/api/edit/@result");
     }
+
 
 
     @Override
@@ -304,7 +275,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", getEditToken())
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("appendtext", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -317,7 +287,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return api.action("edit")
                 .param("title", filename)
                 .param("token", getEditToken())
-                .param("centralauthtoken", getCentralAuthToken())
                 .param("prependtext", processedPageContent)
                 .param("summary", summary)
                 .post()
@@ -325,31 +294,44 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    public String findThumbnailByFilename(String filename) throws IOException {
-        return api.action("query")
+    public Single<String> findThumbnailByFilename(String filename) {
+        return Single.fromCallable(() -> api.action("query")
                 .param("format", "xml")
                 .param("prop", "imageinfo")
                 .param("iiprop", "url")
                 .param("iiurlwidth", THUMB_SIZE)
                 .param("titles", filename)
                 .get()
-                .getString("/api/query/pages/page/imageinfo/ii/@thumburl");
+                .getString("/api/query/pages/page/imageinfo/ii/@thumburl"));
+    }
+
+    @Override
+    public Single<String> parseWikicode(String source) {
+        return Single.fromCallable(() -> api.action("flow-parsoid-utils")
+                .param("from", "wikitext")
+                .param("to", "html")
+                .param("content", source)
+                .param("title", "Main_page")
+                .get()
+                .getString("/api/flow-parsoid-utils/@content"));
     }
 
     @Override
     @NonNull
-    public MediaResult fetchMediaByFilename(String filename) throws IOException {
-        CustomApiResult apiResult = api.action("query")
-                .param("prop", "revisions")
-                .param("titles", filename)
-                .param("rvprop", "content")
-                .param("rvlimit", 1)
-                .param("rvgeneratexml", 1)
-                .get();
+    public Single<MediaResult> fetchMediaByFilename(String filename) {
+        return Single.fromCallable(() -> {
+            CustomApiResult apiResult = api.action("query")
+                    .param("prop", "revisions")
+                    .param("titles", filename)
+                    .param("rvprop", "content")
+                    .param("rvlimit", 1)
+                    .param("rvgeneratexml", 1)
+                    .get();
 
-        return new MediaResult(
-                apiResult.getString("/api/query/pages/page/revisions/rev"),
-                apiResult.getString("/api/query/pages/page/revisions/rev/@parsetree"));
+            return new MediaResult(
+                    apiResult.getString("/api/query/pages/page/revisions/rev"),
+                    apiResult.getString("/api/query/pages/page/revisions/rev/@parsetree"));
+        });
     }
 
     @Override
@@ -369,7 +351,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                         .get()
                         .getNodes("/api/query/search/p/@title");
             } catch (IOException e) {
-                Timber.e("Failed to obtain searchCategories", e);
+                Timber.e(e, "Failed to obtain searchCategories");
             }
 
             if (categoryNodes == null) {
@@ -401,7 +383,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                         .get()
                         .getNodes("/api/query/allcategories/c");
             } catch (IOException e) {
-                Timber.e("Failed to obtain allCategories", e);
+                Timber.e(e, "Failed to obtain allCategories");
             }
 
             if (categoryNodes == null) {
@@ -515,7 +497,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                         .get()
                         .getNodes("/api/query/search/p/@title");
             } catch (IOException e) {
-                Timber.e("Failed to obtain searchTitles", e);
+                Timber.e(e, "Failed to obtain searchTitles");
                 return Collections.emptyList();
             }
 
@@ -584,19 +566,32 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     @NonNull
-    public List<Notification> getNotifications() {
+    public List<Notification> getNotifications(boolean archived) {
         CustomApiResult notificationNode = null;
+        String notfilter;
         try {
+            if (archived) {
+                notfilter = "read";
+            }else {
+                notfilter = "!read";
+            }
+            String language=Locale.getDefault().getLanguage();
+            if(StringUtils.isBlank(language)){
+                //if no language is set we use the default user language defined on wikipedia
+                language="user";
+            }
             notificationNode = api.action("query")
                     .param("notprop", "list")
                     .param("format", "xml")
                     .param("meta", "notifications")
                     .param("notformat", "model")
                     .param("notwikis", "wikidatawiki|commonswiki|enwiki")
+                    .param("notfilter", notfilter)
+                    .param("uselang", language)
                     .get()
                     .getNode("/api/query/notifications/list");
         } catch (IOException e) {
-            Timber.e("Failed to obtain searchCategories", e);
+            Timber.e(e, "Failed to obtain searchCategories");
         }
 
         if (notificationNode == null
@@ -605,9 +600,24 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 || notificationNode.getDocument().getChildNodes().getLength() == 0) {
             return new ArrayList<>();
         }
-
         NodeList childNodes = notificationNode.getDocument().getChildNodes();
         return NotificationUtils.getNotificationsFromList(context, childNodes);
+    }
+
+    @Override
+    public boolean markNotificationAsRead(Notification notification) throws IOException {
+        Timber.d("Trying to mark notification as read: %s", notification.toString());
+        String result = api.action("echomarkread")
+                .param("token", getEditToken())
+                .param("list", notification.notificationId)
+                .post()
+                .getString("/api/query/echomarkread/@result");
+
+        if (StringUtils.isBlank(result)) {
+            return false;
+        }
+
+        return result.equals("success");
     }
 
     /**
@@ -633,7 +643,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
             apiResult = requestBuilder.get();
         } catch (IOException e) {
-            Timber.e("Failed to obtain searchCategories", e);
+            Timber.e(e, "Failed to obtain searchCategories");
         }
 
         if (apiResult == null) {
@@ -673,7 +683,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
             apiResult = requestBuilder.get();
         } catch (IOException e) {
-            Timber.e("Failed to obtain parent Categories", e);
+            Timber.e(e, "Failed to obtain parent Categories");
         }
 
         if (apiResult == null) {
@@ -690,107 +700,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
         return CategoryImageUtils.getSubCategoryList(childNodes);
-    }
-
-
-    /**
-     * The method takes categoryName as input and returns a List of Media objects
-     * It uses the generator query API to get the images in a category, 10 at a time.
-     * Uses the query continue values for fetching paginated responses
-     * @param categoryName Category name as defined on commons
-     * @return
-     */
-    @Override
-    @NonNull
-    public List<Media> getCategoryImages(String categoryName) {
-        CustomApiResult apiResult = null;
-        try {
-            CustomMwApi.RequestBuilder requestBuilder = api.action("query")
-                    .param("generator", "categorymembers")
-                    .param("format", "xml")
-                    .param("gcmtype", "file")
-                    .param("gcmtitle", categoryName)
-                    .param("gcmsort", "timestamp")//property to sort by;timestamp
-                    .param("gcmdir", "desc")//in which direction to sort;descending
-                    .param("prop", "imageinfo")
-                    .param("gcmlimit", "10")
-                    .param("iiprop", "url|extmetadata");
-
-            QueryContinue queryContinueValues = getQueryContinueValues(categoryName);
-            if (queryContinueValues != null) {
-                requestBuilder.param("continue", queryContinueValues.getContinueParam());
-                requestBuilder.param("gcmcontinue", queryContinueValues.getGcmContinueParam());
-            }
-            apiResult = requestBuilder.get();
-        } catch (IOException e) {
-            Timber.e("Failed to obtain searchCategories", e);
-        }
-
-        if (apiResult == null) {
-            return new ArrayList<>();
-        }
-
-        CustomApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
-        if (categoryImagesNode == null
-                || categoryImagesNode.getDocument() == null
-                || categoryImagesNode.getDocument().getChildNodes() == null
-                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
-            return new ArrayList<>();
-        }
-
-        if (apiResult.getNode("/api/continue").getDocument()==null){
-            setQueryContinueValues(categoryName, null);
-        }else {
-            QueryContinue queryContinue = getQueryContinue(apiResult.getNode("/api/continue").getDocument());
-            setQueryContinueValues(categoryName, queryContinue);
-        }
-
-        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
-        return CategoryImageUtils.getMediaList(childNodes);
-    }
-
-    /**
-     * This method takes search keyword as input and returns a list of  Media objects filtered using search query
-     * It uses the generator query API to get the images searched using a query, 25 at a time.
-     * @param query keyword to search images on commons
-     * @return
-     */
-    @Override
-    @NonNull
-    public List<Media> searchImages(String query, int offset) {
-        List<CustomApiResult> imageNodes = null;
-        List<CustomApiResult> authorNodes = null;
-        CustomApiResult customApiResult;
-        try {
-            customApiResult= api.action("query")
-                    .param("format", "xml")
-                    .param("generator", "search")
-                    .param("gsrwhat", "text")
-                    .param("gsrnamespace", "6")
-                    .param("gsrlimit", "25")
-                    .param("gsroffset",offset)
-                    .param("gsrsearch", query)
-                    .param("prop", "imageinfo")
-                    .get();
-            imageNodes= customApiResult.getNodes("/api/query/pages/page/@title");
-            authorNodes= customApiResult.getNodes("/api/query/pages/page/imageinfo/ii/@user");
-        } catch (IOException e) {
-            Timber.e("Failed to obtain searchImages", e);
-        }
-
-        if (imageNodes == null) {
-            return new ArrayList<>();
-        }
-
-        List<Media> images = new ArrayList<>();
-
-        for (int i=0; i< imageNodes.size();i++){
-            String imgName = imageNodes.get(i).getDocument().getTextContent();
-            Media media = new Media(imgName);
-            media.setCreator(authorNodes.get(i).getDocument().getTextContent());
-            images.add(media);
-        }
-        return images;
     }
 
     /**
@@ -815,7 +724,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .get()
                     .getNodes("/api/query/search/p/@title");
         } catch (IOException e) {
-            Timber.e("Failed to obtain searchCategories", e);
+            Timber.e(e, "Failed to obtain searchCategories");
         }
 
         if (categoryNodes == null) {
@@ -834,14 +743,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     /**
      * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
      * https://www.mediawiki.org/wiki/API:Raw_query_continue
-     * After fetching images a page of image for a particular category, shared prefs are updated with the latest QueryContinue Values
+     * After fetching images a page of image for a particular category, shared defaultKvStore are updated with the latest QueryContinue Values
      * @param keyword
      * @param queryContinue
      */
     private void setQueryContinueValues(String keyword, QueryContinue queryContinue) {
-        SharedPreferences.Editor editor = categoryPreferences.edit();
-        editor.putString(keyword, gson.toJson(queryContinue));
-        editor.apply();
+        defaultKvStore.putString(keyword, gson.toJson(queryContinue));
     }
 
     /**
@@ -851,7 +758,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      */
     @Nullable
     private QueryContinue getQueryContinueValues(String keyword) {
-        String queryContinueString = categoryPreferences.getString(keyword, null);
+        String queryContinueString = defaultKvStore.getString(keyword, null);
         return gson.fromJson(queryContinueString, QueryContinue.class);
     }
 
@@ -866,79 +773,65 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    public boolean logEvents(LogBuilder[] logBuilders) {
-        boolean allSuccess = true;
-        // Not using the default URL connection, since that seems to have different behavior than the rest of the code
-        for (LogBuilder logBuilder : logBuilders) {
-            try {
-                URL url = logBuilder.toUrl();
-                HttpResponse response = Http.get(url.toString()).use(httpClient).asResponse();
-
-                if (response.getStatusLine().getStatusCode() != 204) {
-                    allSuccess = false;
-                }
-                Timber.d("EventLog hit %s", url);
-
-            } catch (IOException e) {
-                // Probably just ignore for now. Can be much more robust with a service, etc later on.
-                Timber.d("IO Error, EventLog hit skipped");
-            }
-        }
-
-        return allSuccess;
-    }
-
-    @Override
     @NonNull
-    public UploadResult uploadFile(String filename,
-                                   @NonNull InputStream file,
-                                   long dataLength,
-                                   String pageContents,
-                                   String editSummary,
-                                   Uri fileUri,
-                                   Uri contentProviderUri,
-                                   final ProgressListener progressListener) throws IOException {
-
-        CustomApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, getCentralAuthToken(), getEditToken(), progressListener::onProgress);
-
-        Timber.wtf("Result: " + result.toString());
-
-        String resultStatus = result.getString("/api/upload/@result");
-
-        if (!resultStatus.equals("Success")) {
-            String errorCode = result.getString("/api/error/@code");
-            Timber.e(errorCode);
-
-            if (errorCode.equals(ERROR_CODE_BAD_TOKEN)) {
-                ViewUtil.showLongToast(context, R.string.bad_token_error_proposed_solution);
-            }
-            return new UploadResult(resultStatus, errorCode);
-        } else {
-            // If success we have to remove file from temp directory
-            ContributionUtils.removeTemporaryFile(fileUri);
-            Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
-            String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
-            String imageUrl = result.getString("/api/upload/imageinfo/@url");
-            return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
-        }
-    }
-
-    @Override
-    @NonNull
-    public Single<Integer> getUploadCount(String userName) {
-        final String uploadCountUrlTemplate =
-                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/uploadsbyuser.py";
-
+    public Single<UploadStash> uploadFile(
+            String filename,
+            @NonNull InputStream file,
+            long dataLength,
+            Uri fileUri,
+            Uri contentProviderUri,
+            ProgressListener progressListener) {
         return Single.fromCallable(() -> {
-            String url = String.format(
-                    Locale.ENGLISH,
-                    uploadCountUrlTemplate,
-                    new PageTitle(userName).getText());
-            HttpResponse response = Http.get(url).use(httpClient)
-                    .data("user", userName)
-                    .asResponse();
-            String uploadCount = EntityUtils.toString(response.getEntity()).trim();
-            return Integer.parseInt(uploadCount);
+            CustomApiResult result = api.uploadToStash(filename, file, dataLength, getEditToken(), progressListener::onProgress);
+
+            Timber.wtf("Result: " + result.toString());
+
+            String resultStatus = result.getString("/api/upload/@result");
+            if (!resultStatus.equals("Success")) {
+                String errorCode = result.getString("/api/error/@code");
+                Timber.e(errorCode);
+                
+                if (errorCode.equals(ERROR_CODE_BAD_TOKEN)) {
+                    ViewUtil.showLongToast(context, R.string.bad_token_error_proposed_solution);
+                }
+                return new UploadStash(errorCode, resultStatus, filename, "");
+            } else {
+                String filekey = result.getString("/api/upload/@filekey");
+                return new UploadStash("", resultStatus, filename, filekey);
+            }
+        });
+    }
+
+
+    @Override
+    @NonNull
+    public Single<UploadResult> uploadFileFinalize(
+            String filename,
+            String filekey,
+            String pageContents,
+            String editSummary) throws IOException {
+        return Single.fromCallable(() -> {
+            CustomApiResult result = api.uploadFromStash(
+                    filename, filekey, pageContents, editSummary,
+                    getEditToken());
+
+            Timber.d("Result: %s", result.toString());
+
+            String resultStatus = result.getString("/api/upload/@result");
+            if (!resultStatus.equals("Success")) {
+                String errorCode = result.getString("/api/error/@code");
+                Timber.e(errorCode);
+
+                if (errorCode.equals(ERROR_CODE_BAD_TOKEN)) {
+                    ViewUtil.showLongToast(context, R.string.bad_token_error_proposed_solution);
+                }
+                return new UploadResult(resultStatus, errorCode);
+            } else {
+                Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
+                String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
+                String imageUrl = result.getString("/api/upload/imageinfo/@url");
+                return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
+            }
         });
     }
 
@@ -975,91 +868,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return userBlocked;
     }
 
-    /**
-     * This takes userName as input, which is then used to fetch the feedback/achievements
-     * statistics using OkHttp and JavaRx. This function return JSONObject
-     * @param userName MediaWiki user name
-     * @return
-     */
-    @Override
-    public Single<FeedbackResponse> getAchievements(String userName) {
-        final String fetchAchievementUrlTemplate =
-                wikiMediaToolforgeUrl + "urbanecmbot/commonsmisc/feedback.py";
-        return Single.fromCallable(() -> {
-            String url = String.format(
-                    Locale.ENGLISH,
-                    fetchAchievementUrlTemplate,
-                    new PageTitle(userName).getText());
-            HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-            urlBuilder.addQueryParameter("user", userName);
-            Timber.i("Url %s", urlBuilder.toString());
-            Request request = new Request.Builder()
-                    .url(urlBuilder.toString())
-                    .build();
-            Response response = okHttpClient.newCall(request).execute();
-            if (response != null && response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                if (json == null) {
-                    return null;
-                }
-                Timber.d(json);
-                try {
-                    return gson.fromJson(String.valueOf(response.body()), FeedbackResponse.class);
-                }
-                catch (Exception e){
-                    return new FeedbackResponse("",0,0,0,new FeaturedImages(0,0),0,"",0);
-                }
-
-
-            }
-            return null;
-        });
-
-    }
-
-    /**
-     * The method returns the picture of the day
-     *
-     * @return Media object corresponding to the picture of the day
-     */
-    @Override
-    @Nullable
-    public Single<Media> getPictureOfTheDay() {
-        return Single.fromCallable(() -> {
-            CustomApiResult apiResult = null;
-            try {
-                String template = "Template:Potd/" + DateUtils.getCurrentDate();
-                CustomMwApi.RequestBuilder requestBuilder = api.action("query")
-                        .param("generator", "images")
-                        .param("format", "xml")
-                        .param("titles", template)
-                        .param("prop", "imageinfo")
-                        .param("iiprop", "url|extmetadata");
-
-                apiResult = requestBuilder.get();
-            } catch (IOException e) {
-                Timber.e("Failed to obtain searchCategories", e);
-            }
-
-            if (apiResult == null) {
-                return null;
-            }
-
-            CustomApiResult imageNode = apiResult.getNode("/api/query/pages/page");
-            if (imageNode == null
-                    || imageNode.getDocument() == null) {
-                return null;
-            }
-
-            return CategoryImageUtils.getMediaFromPage(imageNode.getDocument());
-        });
-    }
-
     private Date parseMWDate(String mwDate) {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
-        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         try {
-            return isoFormat.parse(mwDate);
+            return DateUtil.getIso8601DateFormat().parse(mwDate);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -1076,18 +887,4 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
     }
 
-    @Override public Single<CampaignResponseDTO> getCampaigns() {
-        return Single.fromCallable(() -> {
-            Request request = new Request.Builder().url(WIKIMEDIA_CAMPAIGNS_BASE_URL).build();
-            Response response = okHttpClient.newCall(request).execute();
-            if (response != null && response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                if (json == null) {
-                    return null;
-                }
-                return gson.fromJson(json, CampaignResponseDTO.class);
-            }
-            return null;
-        });
-    }
 }

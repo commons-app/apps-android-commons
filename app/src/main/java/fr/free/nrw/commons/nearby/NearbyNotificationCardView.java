@@ -1,14 +1,14 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import fr.free.nrw.commons.R;
@@ -21,11 +21,8 @@ import timber.log.Timber;
  * Custom card view for nearby notification card view on main screen, above contributions list
  */
 public class NearbyNotificationCardView extends SwipableCardView {
-
-    private Context context;
-
     private Button permissionRequestButton;
-    private RelativeLayout contentLayout;
+    private LinearLayout contentLayout;
     private TextView notificationTitle;
     private TextView notificationDistance;
     private ImageView notificationIcon;
@@ -37,21 +34,18 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
     public NearbyNotificationCardView(@NonNull Context context) {
         super(context);
-        this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
     public NearbyNotificationCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
 
     public NearbyNotificationCardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context = context;
         cardViewVisibilityState = CardViewVisibilityState.INVISIBLE;
         init();
     }
@@ -60,7 +54,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
      * Initializes views and action listeners
      */
     private void init() {
-        View rootView = inflate(context, R.layout.nearby_card_view, this);
+        View rootView = inflate(getContext(), R.layout.nearby_card_view, this);
 
         permissionRequestButton = rootView.findViewById(R.id.permission_request_button);
         contentLayout = rootView.findViewById(R.id.content_layout);
@@ -79,7 +73,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         // If you don't setVisibility after getting layout params, then you will se an empty space in place of nearby NotificationCardView
-        if (((MainActivity)context).prefs.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+        if (((MainActivity)getContext()).defaultKvStore.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
             this.setVisibility(VISIBLE);
         } else {
             this.setVisibility(GONE);
@@ -88,14 +82,14 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
 
     private void setActionListeners() {
-        this.setOnClickListener(view -> ((MainActivity)context).viewPager.setCurrentItem(1));
+        this.setOnClickListener(view -> ((MainActivity)getContext()).viewPager.setCurrentItem(1));
     }
 
     @Override public boolean onSwipe(View view) {
         view.setVisibility(GONE);
         // Save shared preference for nearby card view accordingly
-        ((MainActivity) context).prefs.edit().putBoolean("displayNearbyCardView", false).apply();
-        ViewUtil.showLongToast(context,
+        ((MainActivity) getContext()).defaultKvStore.putBoolean("displayNearbyCardView", false);
+        ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_notification_dismiss_message));
         return true;
     }
@@ -116,10 +110,9 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
     /**
      * Pass place information to views.
-     * @param isClosestNearbyPlaceFound false if there are no close place
      * @param place Closes place where we will get information from
      */
-    public void updateContent(boolean isClosestNearbyPlaceFound, Place place) {
+    public void updateContent(Place place) {
         Timber.d("Update nearby card notification content");
         this.setVisibility(VISIBLE);
         cardViewVisibilityState = CardViewVisibilityState.READY;
@@ -131,14 +124,9 @@ public class NearbyNotificationCardView extends SwipableCardView {
         notificationTitle.setVisibility(VISIBLE);
         notificationDistance.setVisibility(VISIBLE);
         notificationIcon.setVisibility(VISIBLE);
+        notificationTitle.setText(place.name);
+        notificationDistance.setText(place.distance);
 
-        if (isClosestNearbyPlaceFound) {
-            notificationTitle.setText(place.name);
-            notificationDistance.setText(place.distance);
-        } else {
-            notificationDistance.setText("");
-            notificationTitle.setText(R.string.no_close_nearby);
-        }
     }
 
     @Override

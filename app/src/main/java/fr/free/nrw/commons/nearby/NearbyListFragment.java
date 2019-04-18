@@ -1,20 +1,12 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -23,39 +15,28 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
-import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
-import static android.app.Activity.RESULT_OK;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
-
-public class NearbyListFragment extends DaggerFragment {
+public class NearbyListFragment extends CommonsDaggerSupportFragment {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
 
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
     }.getType();
     private static final Type CUR_LAT_LNG_TYPE = new TypeToken<LatLng>() {
     }.getType();
-    private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Uri.class, new UriDeserializer())
-            .create();
 
     private NearbyAdapterFactory adapterFactory;
     private RecyclerView recyclerView;
-    private ContributionController controller;
 
-
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject ContributionController controller;
+    @Inject Gson gson;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +46,6 @@ public class NearbyListFragment extends DaggerFragment {
 
     @Override
     public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 
@@ -77,8 +57,6 @@ public class NearbyListFragment extends DaggerFragment {
         View view = inflater.inflate(R.layout.fragment_nearby_list, container, false);
         recyclerView = view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        controller = new ContributionController(this, defaultPrefs);
         adapterFactory = new NearbyAdapterFactory(this, controller);
         return view;
     }
@@ -136,28 +114,6 @@ public class NearbyListFragment extends DaggerFragment {
         }
 
         return placeList;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-            String wikidataEntityId = directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null);
-            String wikidataItemLocation = directPrefs.getString(WIKIDATA_ITEM_LOCATION, null);
-            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
-                // If coming from camera, pass null as uri. Because camera photos get saved to a
-                // fixed directory
-                controller.handleImagePicked(requestCode, null, true, wikidataEntityId, wikidataItemLocation);
-            } else {
-                controller.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId, wikidataItemLocation);
-            }
-        } else {
-            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-        }
     }
 
     /**

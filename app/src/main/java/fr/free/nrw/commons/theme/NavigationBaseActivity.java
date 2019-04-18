@@ -6,16 +6,15 @@ import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,17 +34,19 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
-import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.bookmarks.BookmarksActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.notification.NotificationActivity;
+import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String FEATURED_IMAGES_CATEGORY = "Category:Featured_pictures_on_Wikimedia_Commons";
     private boolean isRestoredToTop;
 
     @BindView(R.id.toolbar)
@@ -54,7 +55,10 @@ public abstract class NavigationBaseActivity extends BaseActivity
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-    @Inject @Named("application_preferences") SharedPreferences prefs;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore applicationKvStore;
+    @Inject CommonsLogSender commonsLogSender;
 
 
     private ActionBarDrawerToggle toggle;
@@ -74,19 +78,17 @@ public abstract class NavigationBaseActivity extends BaseActivity
         Menu nav_Menu = navigationView.getMenu();
         View headerLayout = navigationView.getHeaderView(0);
         ImageView userIcon = headerLayout.findViewById(R.id.user_icon);
-        if (prefs.getBoolean("login_skipped", false)) {
+        if (applicationKvStore.getBoolean("login_skipped", false)) {
             userIcon.setVisibility(View.GONE);
             nav_Menu.findItem(R.id.action_login).setVisible(true);
             nav_Menu.findItem(R.id.action_home).setVisible(false);
-            nav_Menu.findItem(R.id.action_notifications).setVisible(false);
-            nav_Menu.findItem(R.id.action_settings).setVisible(false);
+            nav_Menu.findItem(R.id.action_settings).setVisible(true);
             nav_Menu.findItem(R.id.action_logout).setVisible(false);
             nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
         }else {
             userIcon.setVisibility(View.VISIBLE);
             nav_Menu.findItem(R.id.action_login).setVisible(false);
             nav_Menu.findItem(R.id.action_home).setVisible(true);
-            nav_Menu.findItem(R.id.action_notifications).setVisible(true);
             nav_Menu.findItem(R.id.action_settings).setVisible(true);
             nav_Menu.findItem(R.id.action_logout).setVisible(true);
             nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
@@ -164,7 +166,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 startActivityWithFlags(
                         this, LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                         Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                prefs.edit().putBoolean("login_skipped", false).apply();
+                applicationKvStore.putBoolean("login_skipped", false);
                 finish();
                 return true;
             case R.id.action_home:
@@ -189,14 +191,18 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_feedback:
                 drawerLayout.closeDrawer(navigationView);
+
+                String technicalInfo = commonsLogSender.getExtraInfo();
+
                 Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
                 feedbackIntent.setType("message/rfc822");
                 feedbackIntent.setData(Uri.parse("mailto:"));
                 feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
                         new String[]{CommonsApplication.FEEDBACK_EMAIL});
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
-                        String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
-                                BuildConfig.VERSION_NAME));
+                        CommonsApplication.FEEDBACK_EMAIL_SUBJECT);
+                feedbackIntent.putExtra(Intent.EXTRA_TEXT, String.format(
+                        "\n\n%s\n%s", CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER, technicalInfo));
                 try {
                     startActivity(feedbackIntent);
                 } catch (ActivityNotFoundException e) {
@@ -215,17 +221,18 @@ public abstract class NavigationBaseActivity extends BaseActivity
                         .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
                 return true;
-            case R.id.action_notifications:
-                drawerLayout.closeDrawer(navigationView);
-                NotificationActivity.startYourself(this);
-                return true;
             case R.id.action_explore:
                 drawerLayout.closeDrawer(navigationView);
-                CategoryImagesActivity.startYourself(this, getString(R.string.title_activity_explore), FEATURED_IMAGES_CATEGORY);
+                ExploreActivity.startYourself(this);
                 return true;
             case R.id.action_bookmarks:
                 drawerLayout.closeDrawer(navigationView);
                 BookmarksActivity.startYourself(this);
+                return true;
+
+            case R.id.action_review:
+                drawerLayout.closeDrawer(navigationView);
+                ReviewActivity.startYourself(this, getString(R.string.title_activity_review));
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
@@ -288,6 +295,16 @@ public abstract class NavigationBaseActivity extends BaseActivity
             toolbar.setVisibility(View.VISIBLE);
         }else {
             toolbar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
     }
 }

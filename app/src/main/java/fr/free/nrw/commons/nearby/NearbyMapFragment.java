@@ -4,17 +4,10 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -27,9 +20,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
@@ -44,7 +39,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -53,6 +48,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -60,25 +60,22 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.LocationUtils;
-import fr.free.nrw.commons.utils.PlaceUtils;
-import fr.free.nrw.commons.utils.UriDeserializer;
+import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import static android.app.Activity.RESULT_OK;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class NearbyMapFragment extends DaggerFragment {
 
-    @Inject
-    @Named("application_preferences") SharedPreferences applicationPrefs;
     public MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
     public fr.free.nrw.commons.location.LatLng[] boundaryCoordinates;
+    private List<Place> bookmarkedplaces;
 
     private View bottomSheetList;
     private View bottomSheetDetails;
@@ -111,7 +108,6 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
-    public ContributionController controller;
 
     private Place place;
     private Marker selected;
@@ -132,17 +128,10 @@ public class NearbyMapFragment extends DaggerFragment {
     private Bundle bundleForUpdates;// Carry information from activity about changed nearby places and current location
     private boolean searchedAroundCurrentLocation = true;
 
-    @Inject
-    @Named("prefs")
-    SharedPreferences prefs;
-    @Inject
-    @Named("default_preferences")
-    SharedPreferences defaultPrefs;
-    @Inject
-    @Named("direct_nearby_upload_prefs")
-    SharedPreferences directPrefs;
-    @Inject
-    BookmarkLocationsDao bookmarkLocationDao;
+    @Inject @Named("default_preferences") JsonKvStore applicationKvStore;
+    @Inject BookmarkLocationsDao bookmarkLocationDao;
+    @Inject ContributionController controller;
+    @Inject Gson gson;
 
     private static final double ZOOM_LEVEL = 14f;
 
@@ -154,11 +143,7 @@ public class NearbyMapFragment extends DaggerFragment {
         super.onCreate(savedInstanceState);
         Timber.d("Nearby map fragment created");
 
-        controller = new ContributionController(this, defaultPrefs);
         Bundle bundle = this.getArguments();
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriDeserializer())
-                .create();
         if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList");
             String gsonLatLng = bundle.getString("CurLatLng");
@@ -173,7 +158,8 @@ public class NearbyMapFragment extends DaggerFragment {
             baseMarkerOptions = NearbyController
                     .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
                             placeList,
-                            getActivity());
+                            getActivity(),
+                            bookmarkLocationDao.getAllBookmarksLocations());
             boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
         }
         if (curLatLng != null) {
@@ -228,9 +214,6 @@ public class NearbyMapFragment extends DaggerFragment {
     public void updateMapSlightly() {
         Timber.d("updateMapSlightly called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(Uri.class, new UriDeserializer())
-                    .create();
             if (bundleForUpdates != null) {
                 String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
@@ -250,10 +233,6 @@ public class NearbyMapFragment extends DaggerFragment {
         Timber.d("updateMapSignificantlyForCurrentLocation called, bundle is:"+ bundleForUpdates);
         if (mapboxMap != null) {
             if (bundleForUpdates != null) {
-                Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(Uri.class, new UriDeserializer())
-                        .create();
-
                 String gsonPlaceList = bundleForUpdates.getString("PlaceList");
                 String gsonLatLng = bundleForUpdates.getString("CurLatLng");
                 String gsonBoundaryCoordinates = bundleForUpdates.getString("BoundaryCoord");
@@ -265,7 +244,8 @@ public class NearbyMapFragment extends DaggerFragment {
                 baseMarkerOptions = NearbyController
                         .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
                                 placeList,
-                                getActivity());
+                                getActivity(),
+                                bookmarkLocationDao.getAllBookmarksLocations());
                 boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
             }
             mapboxMap.clear();
@@ -287,7 +267,8 @@ public class NearbyMapFragment extends DaggerFragment {
         List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng, // Curlatlang will be used to calculate distances
                         placeList,
-                        getActivity());
+                        getActivity(),
+                        bookmarkLocationDao.getAllBookmarksLocations());
         mapboxMap.clear();
         // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
         addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
@@ -391,8 +372,8 @@ public class NearbyMapFragment extends DaggerFragment {
         directionsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.directionsButtonText);
         commonsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.commonsButtonText);
 
-        bookmarkButton = getActivity().findViewById(R.id.bookmarkButton);
-        bookmarkButtonImage = getActivity().findViewById(R.id.bookmarkButtonImage);
+        bookmarkButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bookmarkButton);
+        bookmarkButtonImage = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bookmarkButtonImage);
 
         searchThisAreaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button);
         searchThisAreaButtonProgressBar = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button_progress_bar);
@@ -404,7 +385,7 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void setListeners() {
         fabPlus.setOnClickListener(view -> {
-            if (applicationPrefs.getBoolean("login_skipped", false)) {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.login_alert_message)
@@ -506,6 +487,19 @@ public class NearbyMapFragment extends DaggerFragment {
             commonsButtonText.setVisibility(View.GONE);
             directionsButtonText.setVisibility(View.GONE);
         }
+        title.setOnLongClickListener(view -> {
+                    Utils.copy("place",title.getText().toString(),getContext());
+                    Toast.makeText(getContext(),"Text copied to clipboard",Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+        );
+        title.setOnClickListener(view -> {
+            if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            } else {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
     }
 
     /**
@@ -514,10 +508,11 @@ public class NearbyMapFragment extends DaggerFragment {
      */
     private void setupMapView(Bundle savedInstanceState) {
         Timber.d("setupMapView called");
+        boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
         MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                 .compassMargins(new int[]{12, 0, 0, 24})
-                .styleUrl(Style.OUTDOORS)
+                .styleUrl(isDarkTheme ? Style.DARK : Style.OUTDOORS)
                 .logoEnabled(false)
                 .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
@@ -530,11 +525,18 @@ public class NearbyMapFragment extends DaggerFragment {
             // create map
             mapView.onCreate(savedInstanceState);
             mapView.getMapAsync(mapboxMap -> {
+                LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
+
+                try {
+                    localizationPlugin.matchMapLanguageWithDeviceDefault();
+                } catch (RuntimeException exception) {
+                    Timber.d(exception.toString());
+                }
+
                 NearbyMapFragment.this.mapboxMap = mapboxMap;
                 addMapMovementListeners();
                 updateMapSignificantlyForCurrentLocation();
             });
-            mapView.setStyleUrl("asset://mapstyle.json");
         }
     }
 
@@ -825,54 +827,40 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /**
-     * Same botom sheet carries information for all nearby places, so we need to pass information
+     * Same bottom sheet carries information for all nearby places, so we need to pass information
      * (title, description, distance and links) to view on nearby marker click
      * @param place Place of clicked nearby marker
      */
     private void passInfoToSheet(Place place) {
         this.place = place;
+        updateBookmarkButtonImage(this.place);
 
-        int bookmarkIcon;
-        if (bookmarkLocationDao.findBookmarkLocation(place)) {
-            bookmarkIcon = R.drawable.ic_round_star_filled_24px;
-        } else {
-            bookmarkIcon = R.drawable.ic_round_star_border_24px;
-        }
-        bookmarkButtonImage.setImageResource(bookmarkIcon);
         bookmarkButton.setOnClickListener(view -> {
-            boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
-            int updatedIcon = isBookmarked ? R.drawable.ic_round_star_filled_24px : R.drawable.ic_round_star_border_24px;
-            bookmarkButtonImage.setImageResource(updatedIcon);
+            boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(this.place);
+            updateBookmarkButtonImage(this.place);
+            updateMarker(isBookmarked, this.place);
         });
 
-        wikipediaButton.setEnabled(place.hasWikipediaLink());
-        wikipediaButton.setOnClickListener(view -> openWebView(place.siteLinks.getWikipediaLink()));
+        wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
+        wikipediaButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getWikipediaLink()));
 
-        wikidataButton.setEnabled(place.hasWikidataLink());
-        wikidataButton.setOnClickListener(view -> openWebView(place.siteLinks.getWikidataLink()));
+        wikidataButton.setVisibility(place.hasWikidataLink()?View.VISIBLE:View.GONE);
+        wikidataButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getWikidataLink()));
 
-        directionsButton.setOnClickListener(view -> {
-            //Open map app at given position
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, this.place.location.getGmmIntentUri());
-            if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                startActivity(mapIntent);
-            }
-        });
+        directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(), this.place.getLocation()));
 
-        commonsButton.setEnabled(place.hasCommonsLink());
-        commonsButton.setOnClickListener(view -> openWebView(place.siteLinks.getCommonsLink()));
+        commonsButton.setVisibility(this.place.hasCommonsLink()?View.VISIBLE:View.GONE);
+        commonsButton.setOnClickListener(view -> openWebView(this.place.siteLinks.getCommonsLink()));
 
-        icon.setImageResource(place.getLabel().getIcon());
+        icon.setImageResource(this.place.getLabel().getIcon());
 
-        title.setText(place.name);
-        distance.setText(place.distance);
-        description.setText(place.getLongDescription());
-        title.setText(place.name.toString());
-        distance.setText(place.distance.toString());
+        title.setText(this.place.name);
+        distance.setText(this.place.distance);
+        description.setText(this.place.getLongDescription());
 
         fabCamera.setOnClickListener(view -> {
             if (fabCamera.isShown()) {
-                Timber.d("Camera button tapped. Place: %s", place.toString());
+                Timber.d("Camera button tapped. Place: %s", this.place.toString());
                 storeSharedPrefs();
                 controller.initiateCameraPick(getActivity());
             }
@@ -880,44 +868,28 @@ public class NearbyMapFragment extends DaggerFragment {
 
         fabGallery.setOnClickListener(view -> {
             if (fabGallery.isShown()) {
-                Timber.d("Gallery button tapped. Place: %s", place.toString());
+                Timber.d("Gallery button tapped. Place: %s", this.place.toString());
                 storeSharedPrefs();
-                controller.initiateGalleryPick(getActivity());
+                controller.initiateGalleryPick(getActivity(), false);
             }
         });
     }
 
-    void storeSharedPrefs() {
-        SharedPreferences.Editor editor = directPrefs.edit();
-        editor.putString("Title", place.getName());
-        editor.putString("Desc", place.getLongDescription());
-        editor.putString("Category", place.getCategory());
-        editor.putString(WIKIDATA_ENTITY_ID_PREF, place.getWikiDataEntityId());
-        editor.putString(WIKIDATA_ITEM_LOCATION, PlaceUtils.latLangToString(place.location));
-        editor.apply();
+    public void updateBookmarkButtonImage(Place place) {
+        int bookmarkIcon;
+        if (bookmarkLocationDao.findBookmarkLocation(place)) {
+            bookmarkIcon = R.drawable.ic_round_star_filled_24px;
+        } else {
+            bookmarkIcon = R.drawable.ic_round_star_border_24px;
+        }
+        if (bookmarkButtonImage != null) {
+            bookmarkButtonImage.setImageResource(bookmarkIcon);
+        }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-
-        if (resultCode == RESULT_OK) {
-            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-            String wikidataEntityId = directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null);
-            String wikidataItemLocation = directPrefs.getString(WIKIDATA_ITEM_LOCATION, null);
-            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
-                // If coming from camera, pass null as uri. Because camera photos get saved to a
-                // fixed directory
-                controller.handleImagePicked(requestCode, null, true, wikidataEntityId, wikidataItemLocation);
-            } else {
-                controller.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId, wikidataItemLocation);
-            }
-        } else {
-            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-        }
+    void storeSharedPrefs() {
+        Timber.d("Store place object %s", place.toString());
+        applicationKvStore.putJson(PLACE_OBJECT, place);
     }
 
     private void openWebView(Uri link) {
@@ -983,6 +955,7 @@ public class NearbyMapFragment extends DaggerFragment {
         if (mapView != null) {
             mapView.onPause();
         }
+        bookmarkedplaces = bookmarkLocationDao.getAllBookmarksLocations();
         super.onPause();
     }
 
@@ -1003,6 +976,13 @@ public class NearbyMapFragment extends DaggerFragment {
         setListeners();
         transparentView.setClickable(false);
         transparentView.setAlpha(0);
+        if (bookmarkedplaces != null) {
+            for (Place place : bookmarkedplaces) {
+                if (!bookmarkLocationDao.findBookmarkLocation(place)) {
+                    updateMarker(false, place);
+                }
+            }
+        }
     }
 
     @Override
@@ -1037,4 +1017,43 @@ public class NearbyMapFragment extends DaggerFragment {
             return latLng;
         }
     }
+
+
+    public void updateMarker(boolean isBookmarked, Place place) {
+
+        VectorDrawableCompat vectorDrawable;
+        if (isBookmarked) {
+            vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_bookmark_marker, getContext().getTheme()
+            );
+        }
+        else {
+            vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_map_marker, getContext().getTheme()
+            );
+        }
+        for(Marker marker: mapboxMap.getMarkers()){
+            if(marker.getTitle()!=null && marker.getTitle().equals(place.getName())){
+
+                Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+
+                String distance = formatDistanceBetween(curLatLng, place.location);
+                place.setDistance(distance);
+
+                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
+                nearbyBaseMarker.title(place.name);
+                nearbyBaseMarker.position(
+                        new com.mapbox.mapboxsdk.geometry.LatLng(
+                                place.location.getLatitude(),
+                                place.location.getLongitude()));
+                nearbyBaseMarker.place(place);
+                nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
+                        .fromBitmap(icon));
+                marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+            }
+        }
+
+    }
+
 }
+

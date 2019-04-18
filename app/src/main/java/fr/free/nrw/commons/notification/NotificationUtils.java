@@ -2,7 +2,7 @@ package fr.free.nrw.commons.notification;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -72,6 +72,11 @@ public class NotificationUtils {
         Element element = (Element) document;
         String type = element.getAttribute("type");
         return NotificationType.handledValueOf(type);
+    }
+
+    public static String getNotificationId(Node document) {
+        Element element = (Element) document;
+        return element.getAttribute("id");
     }
 
     public static List<Notification> getNotificationsFromBundle(Context context, Node document) {
@@ -154,7 +159,8 @@ public class NotificationUtils {
                 notificationText = getWelcomeMessage(context, document);
                 break;
         }
-        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl, getTimestampWithYear(document));
+        return new Notification(type, notificationText, getTimestamp(document), description, link, iconUrl, getTimestampWithYear(document),
+                getNotificationId(document));
     }
 
     private static String getNotificationText(Node document) {

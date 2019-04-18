@@ -3,11 +3,10 @@ package fr.free.nrw.commons.logging;
 import android.content.Context;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DeviceInfoUtil;
 
 /**
@@ -24,12 +23,12 @@ public class CommonsLogSender extends LogsSender {
 
     @Inject
     public CommonsLogSender(SessionManager sessionManager,
-                            Context context,
-                            @Named("isBeta") boolean isBeta) {
-        super(sessionManager, isBeta);
+                            Context context) {
+        super(sessionManager);
 
         this.sessionManager = sessionManager;
         this.context = context;
+        boolean isBeta = ConfigUtils.isBetaFlavour();
         this.logFileName = isBeta ? "CommonsBetaAppLogs.zip" : "CommonsAppLogs.zip";
         String emailSubjectFormat = isBeta ? BETA_LOGS_PRIVATE_EMAIL_SUBJECT : LOGS_PRIVATE_EMAIL_SUBJECT;
         this.emailSubject = String.format(emailSubjectFormat, sessionManager.getUserName());
@@ -42,31 +41,49 @@ public class CommonsLogSender extends LogsSender {
      * @return String with extra meta information useful for debugging
      */
     @Override
-    protected String getExtraInfo() {
+    public String getExtraInfo() {
         StringBuilder builder = new StringBuilder();
-        builder.append("App Version Name: ")
-                .append(BuildConfig.VERSION_NAME)
+
+        // Getting API Level
+        builder.append("API level: ")
+                .append(DeviceInfoUtil.getAPILevel())
                 .append("\n");
 
-        builder.append("User Name: ")
-                .append(sessionManager.getUserName())
+        // Getting Android Version
+        builder.append("Android version: ")
+                .append(DeviceInfoUtil.getAndroidVersion())
                 .append("\n");
 
-        builder.append("Network Type: ")
-                .append(DeviceInfoUtil.getConnectionType(context))
-                .append("\n");
-
+        // Getting Device Manufacturer
         builder.append("Device manufacturer: ")
                 .append(DeviceInfoUtil.getDeviceManufacturer())
                 .append("\n");
 
+        // Getting Device Model
         builder.append("Device model: ")
                 .append(DeviceInfoUtil.getDeviceModel())
                 .append("\n");
 
-        builder.append("Android Version: ")
-                .append(DeviceInfoUtil.getAndroidVersion())
+        // Getting Device Name
+        builder.append("Device: ")
+                .append(DeviceInfoUtil.getDevice())
                 .append("\n");
+
+        // Getting Network Type
+        builder.append("Network type: ")
+                .append(DeviceInfoUtil.getConnectionType(context))
+                .append("\n");
+
+        // Getting App Version
+        builder.append("App version name: ")
+                .append(ConfigUtils.getVersionNameWithSha(context))
+                .append("\n");
+
+        // Getting Username
+        builder.append("User name: ")
+                .append(sessionManager.getUserName())
+                .append("\n");
+
 
         return builder.toString();
     }

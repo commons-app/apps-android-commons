@@ -66,7 +66,6 @@
   <string name="yes">Sìne</string>
   <string name="no">None</string>
   <string name="media_detail_title">Titole</string>
-  <string name="media_detail_media_title">Titole d\'u file multimediale</string>
   <string name="media_detail_description">Descrizione</string>
   <string name="media_detail_author">Autore</string>
   <string name="media_detail_uploaded_date">Date de carecamende</string>
@@ -96,9 +95,7 @@
   <string name="menu_bookmark">Aggiungi/Live le signalibbre</string>
   <string name="provider_bookmarks">Signalibbre</string>
   <string name="provider_bookmarks_location">Signalibbre</string>
-  <string name="used_by">, ausate jndr\'à</string>
-  <string name="articles">vôsce</string>
-  <string name="no_uploads">Bovègne jndr\'à Commons!\n\nCareche \'u prime media cazzanne l\'icone d\'a maghena fotografeche o d\'a gallerie, aqquà sus.</string>
+  <string name="no_uploads" fuzzy="true">Bovègne jndr\'à Commons!\n\nCareche \'u prime media cazzanne l\'icone d\'a maghena fotografeche o d\'a gallerie, aqquà sus.</string>
   <string name="desc_language_Worldwide">Tutte \'u munne</string>
   <string name="desc_language_America">Americhe</string>
   <string name="desc_language_Europe">Europe</string>
@@ -112,4 +109,8 @@
   <string name="upload_flow_all_images_in_set">(Pe tutte le immaggine jndr\'à \'u \'nzieme)</string>
   <string name="search_this_area">Cirche jndr\'à sta arèe</string>
   <string name="nearby_card_permission_title">Permesse richieste</string>
+  <string name="no_notification" fuzzy="true">Non ge tìne notifeche non lette</string>
+  <string name="error_occurred_in_picking_images">Errore assute mendre ca ste pigghiave le immaggine</string>
+  <string name="image_chooser_title">Scacchie le immaggine da carecà</string>
+  <string name="please_wait">Aspitte...</string>
 </resources>

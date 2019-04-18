@@ -119,11 +119,12 @@
   <string name="title_activity_bookmarks">Grāmatzīmes</string>
   <string name="provider_bookmarks">Grāmatzīmes</string>
   <string name="provider_bookmarks_location">Grāmatzīmes</string>
-  <string name="articles">raksti</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Middle_East">Vidējie Austrumi</string>
   <string name="desc_language_Asia">Āzija</string>
   <string name="yes_submit">Jā, iesniegt</string>
   <string name="nearby_card_permission_title">Atļaujas pieprasījums</string>
   <string name="never_ask_again">Nekad vairs šo nejautāt</string>
+  <string name="menu_option_archived">Skatīt arhivētos</string>
+  <string name="menu_option_unread">Skatīt nelasītos</string>
 </resources>

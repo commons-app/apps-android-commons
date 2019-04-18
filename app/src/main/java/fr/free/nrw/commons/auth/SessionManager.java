@@ -5,12 +5,15 @@ import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -23,21 +26,23 @@ import static android.accounts.AccountManager.KEY_ACCOUNT_TYPE;
 /**
  * Manage the current logged in user session.
  */
+@Singleton
 public class SessionManager {
     private final Context context;
     private final MediaWikiApi mediaWikiApi;
     private Account currentAccount; // Unlike a savings account...  ;-)
-    private SharedPreferences sharedPreferences;
+    private JsonKvStore defaultKvStore;
     private static final String KEY_RAWUSERNAME = "rawusername";
     private Bundle userdata = new Bundle();
 
+    @Inject
     public SessionManager(Context context,
                           MediaWikiApi mediaWikiApi,
-                          SharedPreferences sharedPreferences) {
+                          @Named("default_preferences") JsonKvStore defaultKvStore) {
         this.context = context;
         this.mediaWikiApi = mediaWikiApi;
         this.currentAccount = null;
-        this.sharedPreferences = sharedPreferences;
+        this.defaultKvStore = defaultKvStore;
     }
 
     /**
@@ -154,11 +159,11 @@ public class SessionManager {
     }
 
     public String getCachedAuthCookie() {
-        return sharedPreferences.getString("getAuthCookie", null);
+        return defaultKvStore.getString("getAuthCookie", null);
     }
 
     public boolean isUserLoggedIn() {
-        return sharedPreferences.getBoolean("isUserLoggedIn", false);
+        return defaultKvStore.getBoolean("isUserLoggedIn", false);
     }
 
     public void forceLogin(Context context) {

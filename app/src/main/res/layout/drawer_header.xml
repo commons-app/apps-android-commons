@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@android:color/darker_gray">
+    android:background="?attr/drawerHeaderBackground">
 
     <ImageView
         android:id="@+id/pictureOfTheDay"
         android:layout_width="match_parent"
         android:layout_height="172dp"
-        android:background="@android:color/darker_gray"
+        android:background="?attr/drawerHeaderBackground"
         android:paddingLeft="@dimen/standard_gap"
         android:paddingTop="@dimen/standard_gap"
         android:paddingRight="@dimen/standard_gap"
         android:paddingBottom="@dimen/small_gap"
-        android:src="@drawable/commons_logo_large"/>
+        app:srcCompat="@drawable/commons_logo"/>
 
     <TextView
         android:id="@+id/username"

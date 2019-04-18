@@ -1,13 +1,11 @@
 package fr.free.nrw.commons.bookmarks.locations;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,12 +27,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
 import fr.free.nrw.commons.nearby.Place;
-import timber.log.Timber;
-
-import static android.app.Activity.RESULT_OK;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ENTITY_ID_PREF;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.WIKIDATA_ITEM_LOCATION;
 
 public class BookmarkLocationsFragment extends DaggerFragment {
 
@@ -44,12 +35,9 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     @BindView(R.id.listView) RecyclerView recyclerView;
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
 
-    @Inject
-    BookmarkLocationsController controller;
-    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject BookmarkLocationsController controller;
     private NearbyAdapterFactory adapterFactory;
-    private ContributionController contributionController;
+    @Inject ContributionController contributionController;
 
     /**
      * Create an instance of the fragment with the right bundle parameters
@@ -67,7 +55,6 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     ) {
         View v = inflater.inflate(R.layout.fragment_bookmarks_locations, container, false);
         ButterKnife.bind(this, v);
-        contributionController = new ContributionController(this, defaultPrefs);
         adapterFactory = new NearbyAdapterFactory(this, contributionController);
         return v;
     }
@@ -103,23 +90,6 @@ public class BookmarkLocationsFragment extends DaggerFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-            String wikidataEntityId = directPrefs.getString(WIKIDATA_ENTITY_ID_PREF, null);
-            String wikidataItemLocation = directPrefs.getString(WIKIDATA_ITEM_LOCATION, null);
-            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
-                // If coming from camera, pass null as uri. Because camera photos get saved to a
-                // fixed directory
-                contributionController.handleImagePicked(requestCode, null, true, wikidataEntityId, wikidataItemLocation);
-            } else {
-                contributionController.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId, wikidataItemLocation);
-            }
-        } else {
-            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-        }
+        contributionController.handleActivityResult(getActivity(), requestCode, resultCode, data);
     }
 }
