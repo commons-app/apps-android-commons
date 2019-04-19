@@ -518,5 +518,7 @@
   <string name="images_featured_explanation">Las imágenes destacadas son creaciones de talentosos fotógrafos e ilustradores que la comunidad de Wikimedia Commons ha reconocido como las de mayor calidad del sitio.</string>
   <string name="images_via_nearby_explanation">Las imágenes subidas via Lugares Cercanos son las imágenes que han sido cargadas al descubrir lugares en el mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidad permite a los editores enviar una notificación de agradecimiento a aquellos usuarios que realicen ediciones útiles mediante un pequeño enlace en la página de historial o de diferencias.</string>
+  <string name="welcome_do_upload_content_description">Ejemplos de imágenes adecuadas para Commons</string>
+  <string name="welcome_dont_upload_content_description">Ejemplos de imágenes que no deben cargarse</string>
   <string name="skip_image">OMITIR ESTA IMAGEN</string>
 </resources>

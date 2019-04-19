@@ -443,8 +443,8 @@
   <string name="check_category_adding_template">Додавање на шаблон за категориска проверка</string>
   <string name="check_category_notification_title">Барање на категориска проверка за %1$s</string>
   <string name="check_category_edit_summary">Барање на категориска проверка</string>
-  <string name="check_category_success_title" fuzzy="true">Барање на категориска проверка: Успешно</string>
-  <string name="check_category_failure_title" fuzzy="true">Барање на категориска проверка: Неуспешно</string>
+  <string name="check_category_success_title">Побарана категориска проверка</string>
+  <string name="check_category_failure_title">Барањето за категориска проверка не успеа</string>
   <string name="check_category_success_message">Успешно побарана категориска проверка за %1$s</string>
   <string name="check_category_failure_message">Не можев да побарам категориска проверка за %1$s</string>
   <string name="check_category_toast">Барање на категориска проверка за %1$s</string>
@@ -502,6 +502,8 @@
   <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
   <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
   <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
+  <string name="welcome_do_upload_content_description">Примери — Добри слики за подигање</string>
+  <string name="welcome_dont_upload_content_description">Примери — Слики што не се за подигање</string>
   <string name="skip_image">ПРЕСКОКНИ ЈА ПОРАКАВА</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преземањето не успеа!!! Не можеме да ја преземеме податотеката без дозвола од надворешен склад.</string>
 </resources>

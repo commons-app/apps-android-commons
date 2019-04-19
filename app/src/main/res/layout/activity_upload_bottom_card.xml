@@ -137,12 +137,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/bottom_card_previous"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/prev_title_desc"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bottom_card_subtitle"
                 tools:visibility="gone" />
+
+            <Button
+                android:id="@+id/prev_title_desc"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/white"
+                android:text="@string/previous_image_title_description"
+                android:textColor="@color/button_blue"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="3.5dp"
+                android:gravity="center"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                app:layout_constraintBottom_toTopOf="@id/bottom_card_previous"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_descriptions" />
 
             <Button
                 android:id="@+id/bottom_card_next"
