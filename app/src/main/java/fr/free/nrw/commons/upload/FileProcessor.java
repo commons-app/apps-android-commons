@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.channels.FileChannel;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,10 +25,14 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import androidx.exifinterface.media.ExifInterface;
+
+import com.google.gson.reflect.TypeToken;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
+import fr.free.nrw.commons.settings.Prefs;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -104,7 +109,8 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      */
     @SuppressLint("CheckResult")
     private void redactMetadata(Context context) {
-        Set<String> prefManageEXIFTags = defaultKvStore.getStringSet("manageExifTags");
+        Type setType = new TypeToken<Set<String>>() {}.getType();
+        Set<String> prefManageEXIFTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
         boolean prefKeepXmp = defaultKvStore.getBoolean("keepXmp", true);
 
         try {

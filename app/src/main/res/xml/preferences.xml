@@ -62,7 +62,7 @@
     <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
         android:title="@string/preference_category_privacy">
 
-        <MultiSelectListPreference
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleMultiSelectListPreference
             android:entries="@array/pref_exifTag_entries"
             android:entryValues="@array/pref_exifTag_values"
             android:key="manageExifTags"

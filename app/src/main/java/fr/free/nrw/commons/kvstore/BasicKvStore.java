@@ -76,11 +76,6 @@ public class BasicKvStore implements KeyValueStore {
     }
 
     @Override
-    public Set<String> getStringSet(String key) {
-        return getStringSet(key, null);
-    }
-
-    @Override
     public boolean getBoolean(String key) {
         return getBoolean(key, false);
     }
@@ -98,11 +93,6 @@ public class BasicKvStore implements KeyValueStore {
     @Override
     public String getString(String key, String defaultValue) {
         return _store.getString(key, defaultValue);
-    }
-
-    @Override
-    public Set<String> getStringSet(String key, Set<String> defaultValue) {
-        return _store.getStringSet(key, defaultValue);
     }
 
     @Override
