@@ -154,8 +154,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 exifInterface.saveAttributes();
             }
         } catch (IOException e) {
-            Timber.w(e);
-            throw new RuntimeException("EXIF/XMP redaction failed.");
+            Timber.w("EXIF/XMP redaction failed: %s", e.toString());
         }
     }
 
