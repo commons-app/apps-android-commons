@@ -162,6 +162,12 @@ public class ReviewActivity extends AuthenticatedActivity {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
+    }
+
     public void showSkipImageInfo(){
         DialogUtil.showAlertDialog(ReviewActivity.this,
                 getString(R.string.skip_image),
