@@ -10,8 +10,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.RecentChange
@@ -51,6 +50,10 @@ class ReviewHelperTest {
 
         `when`(mediaWikiApi?.pageExists(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(false))
+        `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
+                .thenReturn(Single.just(mock(Media::class.java)))
+
+
         val randomMedia = reviewHelper?.randomMedia?.blockingGet()
 
         assertTrue(randomMedia is Media)

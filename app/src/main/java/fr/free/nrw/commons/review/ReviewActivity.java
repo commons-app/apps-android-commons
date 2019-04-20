@@ -18,27 +18,20 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class ReviewActivity extends AuthenticatedActivity {
 
@@ -125,7 +118,6 @@ public class ReviewActivity extends AuthenticatedActivity {
         progressBar.setVisibility(View.VISIBLE);
         reviewPager.setCurrentItem(0);
         compositeDisposable.add(reviewHelper.getRandomMedia()
-                .map(Media::getFilename)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::updateImage));
@@ -133,37 +125,27 @@ public class ReviewActivity extends AuthenticatedActivity {
     }
 
     @SuppressLint("CheckResult")
-    private void updateImage(String fileName) {
+    private void updateImage(Media media) {
+        String fileName = media.getFilename();
         if (fileName.length() == 0) {
             ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review);
             return;
         }
-        simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
+
+        simpleDraweeView.setImageURI(media.getImageUrl());
+
         reviewController.onImageRefreshed(fileName); //file name is updated
-        compositeDisposable.add(reviewHelper.getFirstRevisionOfFile("File:" + fileName)
+        compositeDisposable.add(reviewHelper.getFirstRevisionOfFile(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revision -> {
                     reviewController.firstRevision = revision;
                     reviewPagerAdapter.updateFileInformation(fileName);
-                    ((TextView) imageCaption).setText(fileName + " is uploaded by: " + revision.getUser());
+                    imageCaption.setText(fileName + " is uploaded by: " + revision.getUser());
                     progressBar.setVisibility(View.GONE);
                 }));
         reviewPager.setCurrentItem(0);
-
-        Disposable disposable = mwApi.fetchMediaByFilename("File:" + fileName)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mediaResult -> {
-                    ArrayList<String> categories = MediaDataExtractorUtil.extractCategories(mediaResult.getWikiSource());
-                    updateCategories(categories);
-                }, this::categoryFetchError);
-        compositeDisposable.add(disposable);
-    }
-
-    private void categoryFetchError(Throwable throwable) {
-        Timber.e(throwable, "Error fetching categories");
-        ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review_categories);
+        updateCategories(media.getCategories());
     }
 
     private void updateCategories(ArrayList<String> categories) {
@@ -178,6 +160,12 @@ public class ReviewActivity extends AuthenticatedActivity {
         } else {
             runRandomizer();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
     }
 
     public void showSkipImageInfo(){
