@@ -56,6 +56,22 @@ class ReviewHelperTest {
         assertTrue(randomMedia is Media)
     }
 
+    /**
+     * Test scenario when all media is already nominated for deletion
+     */
+    @Test(expected = Exception::class)
+    fun getRandomMediaWithWithAllMediaNominatedForDeletion() {
+        val recentChange = getMockRecentChange("test", "File:Test1.jpeg", 0)
+        val recentChange1 = getMockRecentChange("test", "File:Test2.png", 0)
+        val recentChange2 = getMockRecentChange("test", "File:Test3.jpg", 0)
+        `when`(okHttpJsonApiClient?.recentFileChanges)
+                .thenReturn(Single.just(listOf(recentChange, recentChange1, recentChange2)))
+
+        `when`(mediaWikiApi?.pageExists(ArgumentMatchers.anyString()))
+                .thenReturn(Single.just(true))
+        reviewHelper?.randomMedia?.blockingGet()
+    }
+
     fun getMockRecentChange(type: String, title: String, oldRevisionId: Long): RecentChange {
         val recentChange = mock(RecentChange::class.java)
         `when`(recentChange!!.type).thenReturn(type)
