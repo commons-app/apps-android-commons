@@ -9,11 +9,8 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.Toast;
 
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.page.PageTitle;
-import org.wikipedia.util.UriUtil;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -32,18 +29,6 @@ public class Utils {
 
     public static PageTitle getPageTitle(@NonNull String title) {
         return new PageTitle(title, new WikiSite(BuildConfig.COMMONS_URL));
-    }
-
-    /**
-     * Creates an URL for thumbnail
-     *
-     * @param filename Thumbnail file name
-     * @return URL of thumbnail
-     */
-    public static String makeThumbBaseUrl(@NonNull String filename) {
-        String name = getPageTitle(filename).getPrefixedText();
-        String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
-        return String.format("%s/%s/%s/%s", BuildConfig.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), UriUtil.encodeURL(name));
     }
 
     /**

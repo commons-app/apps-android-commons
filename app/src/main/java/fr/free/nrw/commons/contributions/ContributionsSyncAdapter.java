@@ -118,9 +118,8 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                     Timber.d("Skipping %s", filename);
                     continue;
                 }
-                String thumbUrl = Utils.makeThumbBaseUrl(filename);
                 Date dateUpdated = image.getDateUpdated();
-                Contribution contrib = new Contribution(null, thumbUrl, filename,
+                Contribution contrib = new Contribution(null, null, filename,
                         "", -1, dateUpdated, dateUpdated, user,
                         "", "");
                 contrib.setState(STATE_COMPLETED);
