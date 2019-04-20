@@ -107,7 +107,6 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      * Redacts EXIF and XMP metadata as indicated in preferences.
      *
      */
-    @SuppressLint("CheckResult")
     private void redactMetadata(Context context) {
         Type setType = new TypeToken<Set<String>>() {}.getType();
         Set<String> prefManageEXIFTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
@@ -137,20 +136,20 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                     context.getResources().getStringArray(R.array.pref_exifTag_values)));
 
             Timber.d(redactTags.toString());
-            redactTags.removeAll(prefManageEXIFTags);
+            if (prefManageEXIFTags != null) redactTags.removeAll(prefManageEXIFTags);
 
             if (!redactTags.isEmpty()) {
-                //noinspection ResultOfMethodCallIgnored
+
                 Observable.fromIterable(redactTags)
                         .flatMap(FileMetadataUtils::getTagsFromPref)
                         .forEach(tag -> {
-                            Timber.d("Checking for tag:%s", tag);
+                            Timber.d("Checking for tag: %s", tag);
                             String oldValue = exifInterface.getAttribute(tag);
                             if (oldValue != null && !oldValue.isEmpty()) {
                                 Timber.d("Exif tag %s with value %s redacted.", tag, oldValue);
                                 exifInterface.setAttribute(tag, null);
                             }
-                        });
+                        }).dispose();
                 exifInterface.saveAttributes();
             }
         } catch (IOException e) {

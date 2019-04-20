@@ -11,8 +11,18 @@ import timber.log.Timber;
 
 import static androidx.exifinterface.media.ExifInterface.*;
 
+/**
+ * Support utils for EXIF and XMP metadata handling
+ *
+ */
 public class FileMetadataUtils {
 
+    /**
+     * Takes EXIF label from sharedPreferences as input and returns relevant EXIF tags
+     *
+     * @param pref EXIF sharedPreference label
+     * @return EXIF tags
+     */
     public static Observable<String> getTagsFromPref(String pref) {
         Timber.d("Retuning tags for pref:%s", pref);
         switch (pref) {
