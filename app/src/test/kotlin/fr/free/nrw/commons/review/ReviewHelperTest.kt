@@ -50,7 +50,7 @@ class ReviewHelperTest {
                 .thenReturn(Single.just(listOf(recentChange, recentChange1, recentChange2)))
 
         `when`(mediaWikiApi?.pageExists(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(true))
+                .thenReturn(Single.just(false))
         val randomMedia = reviewHelper?.randomMedia?.blockingGet()
 
         assertTrue(randomMedia is Media)

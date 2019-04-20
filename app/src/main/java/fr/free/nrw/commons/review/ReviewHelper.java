@@ -46,10 +46,10 @@ public class ReviewHelper {
                 .flatMap(title -> mediaWikiApi.pageExists("Commons:Deletion_requests/" + title)
                         .map(pageExists -> new Pair<>(title, pageExists)))
                 .map((Pair<String, Boolean> pair) -> {
-                    if (pair.second) {
+                    if (!pair.second) {
                         return new Media(pair.first.replace("File:", ""));
                     }
-                    throw new Exception("Page does not exist");
+                    throw new Exception("Already nominated for deletion");
                 }).retry(MAX_RANDOM_TRIES);
     }
 
@@ -58,7 +58,7 @@ public class ReviewHelper {
     }
 
     @Nullable
-    public String findImageInRecentChanges(List<RecentChange> recentChanges) {
+    private String findImageInRecentChanges(List<RecentChange> recentChanges) {
         String imageTitle;
         Random r = new Random();
         int count = recentChanges.size();
