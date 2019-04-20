@@ -53,6 +53,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -77,31 +79,77 @@ public class NearbyMapFragment extends DaggerFragment {
     public fr.free.nrw.commons.location.LatLng[] boundaryCoordinates;
     private List<Place> bookmarkedplaces;
 
-    private View bottomSheetList;
-    private View bottomSheetDetails;
+    @BindView(R.id.bottom_sheet)
+    View bottomSheetList;
+
+    @BindView(R.id.bottom_sheet_details)
+    View bottomSheetDetails;
+
+    @BindView(R.id.wikipediaButton)
+    LinearLayout wikipediaButton;
+
+    @BindView(R.id.wikidataButton)
+    LinearLayout wikidataButton;
+
+    @BindView(R.id.directionsButton)
+    LinearLayout directionsButton;
+
+    @BindView(R.id.commonsButton)
+    LinearLayout commonsButton;
+
+    @BindView(R.id.bookmarkButton)
+    LinearLayout bookmarkButton;
+
+    @BindView(R.id.fab_plus)
+    FloatingActionButton fabPlus;
+
+    @BindView(R.id.fab_camera)
+    FloatingActionButton fabCamera;
+
+    @BindView(R.id.fab_gallery)
+    FloatingActionButton fabGallery;
+
+    @BindView(R.id.fab_recenter)
+    FloatingActionButton fabRecenter;
+
+    @BindView(R.id.transparentView)
+    View transparentView;
+
+    @BindView(R.id.description)
+    TextView description;
+
+    @BindView(R.id.title)
+    TextView title;
+
+    @BindView(R.id.category)
+    TextView distance;
+
+    @BindView(R.id.icon)
+    ImageView icon;
+
+    @BindView(R.id.bookmarkButtonImage)
+    ImageView bookmarkButtonImage;
+
+    @BindView(R.id.wikidataButtonText)
+    TextView wikidataButtonText;
+
+    @BindView(R.id.wikipediaButtonText)
+    TextView wikipediaButtonText;
+
+    @BindView(R.id.commonsButtonText)
+    TextView commonsButtonText;
+
+    @BindView(R.id.directionsButtonText)
+    TextView directionsButtonText;
+
+    @BindView(R.id.search_this_area_button)
+    Button searchThisAreaButton;
+
+    @BindView(R.id.search_this_area_button_progress_bar)
+    ProgressBar searchThisAreaButtonProgressBar;
 
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
-    private LinearLayout wikipediaButton;
-    private LinearLayout wikidataButton;
-    private LinearLayout directionsButton;
-    private LinearLayout commonsButton;
-    private LinearLayout bookmarkButton;
-    private FloatingActionButton fabPlus;
-    private FloatingActionButton fabCamera;
-    private FloatingActionButton fabGallery;
-    private FloatingActionButton fabRecenter;
-    private View transparentView;
-    private TextView description;
-    private TextView title;
-    private TextView distance;
-    private ImageView icon;
-    private ImageView bookmarkButtonImage;
-
-    private TextView wikipediaButtonText;
-    private TextView wikidataButtonText;
-    private TextView commonsButtonText;
-    private TextView directionsButtonText;
 
     private boolean isFabOpen = false;
     private Animation rotate_backward;
@@ -115,8 +163,6 @@ public class NearbyMapFragment extends DaggerFragment {
     public MapboxMap mapboxMap;
     private PolygonOptions currentLocationPolygonOptions;
 
-    public Button searchThisAreaButton;
-    public ProgressBar searchThisAreaButtonProgressBar;
 
     private boolean isBottomListSheetExpanded;
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
@@ -257,6 +303,28 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     /**
+     * Initialize all views.
+     * TODO: View elements that are part of NearbyFragment should ideally be not accessed directly in NearbyMapFragment.
+     */
+    private void initViews() {
+        Timber.d("initViews called");
+        View view = ((NearbyFragment)getParentFragment()).view;
+        ButterKnife.bind(this, view);
+
+        bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
+        bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetDetails.setVisibility(View.VISIBLE);
+
+        fab_open = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_close);
+        rotate_forward = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.rotate_backward);
+
+
+    }
+
+    /**
      * Will be used for map vew updates for custom locations (ie. with search this area method).
      * Clears the map, adds current location marker, adds nearby markers around custom location,
      * re-enables map gestures which was locked during place load, remove progress bar.
@@ -277,8 +345,8 @@ public class NearbyMapFragment extends DaggerFragment {
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
         searchThisAreaButtonProgressBar.setVisibility(View.GONE);
     }
-
     // Only update current position marker and camera view
+
     private void updateMapToTrackPosition() {
 
         if (currentLocationMarker != null) {
@@ -331,53 +399,6 @@ public class NearbyMapFragment extends DaggerFragment {
                         .newCameraPosition(position), 1000);
             }
         }
-    }
-
-    /**
-     * Initialize all views. TODO: Use bind view instead.
-     */
-    private void initViews() {
-        Timber.d("initViews called");
-        bottomSheetList = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet);
-        bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
-        bottomSheetDetails = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bottom_sheet_details);
-        bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
-        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        bottomSheetDetails.setVisibility(View.VISIBLE);
-
-        fabPlus = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_plus);
-        fabCamera = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_camera);
-        fabGallery = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_gallery);
-        fabRecenter = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.fab_recenter);
-
-        fab_open = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.rotate_forward);
-        rotate_backward = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.rotate_backward);
-
-        transparentView = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.transparentView);
-
-        description = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.description);
-        title = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.title);
-        distance = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.category);
-        icon = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.icon);
-
-        wikidataButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikidataButton);
-        wikipediaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikipediaButton);
-        directionsButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.directionsButton);
-        commonsButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.commonsButton);
-
-        wikidataButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikidataButtonText);
-        wikipediaButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.wikipediaButtonText);
-        directionsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.directionsButtonText);
-        commonsButtonText = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.commonsButtonText);
-
-        bookmarkButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bookmarkButton);
-        bookmarkButtonImage = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.bookmarkButtonImage);
-
-        searchThisAreaButton = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button);
-        searchThisAreaButtonProgressBar = ((NearbyFragment)getParentFragment()).view.findViewById(R.id.search_this_area_button_progress_bar);
-
     }
 
     /**
