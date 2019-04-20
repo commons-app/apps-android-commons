@@ -135,7 +135,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         simpleDraweeView.setImageURI(media.getImageUrl());
 
         reviewController.onImageRefreshed(fileName); //file name is updated
-        compositeDisposable.add(reviewHelper.getFirstRevisionOfFile("File:" + fileName)
+        compositeDisposable.add(reviewHelper.getFirstRevisionOfFile(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revision -> {

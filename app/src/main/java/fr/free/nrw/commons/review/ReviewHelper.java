@@ -31,8 +31,13 @@ public class ReviewHelper {
         this.mediaWikiApi = mediaWikiApi;
     }
 
+    Single<Media> getRandomMedia() {
+        return getRandomFileChange()
+                .flatMap(fileName -> okHttpJsonApiClient.getMedia(fileName, false));
+    }
+
     /**
-     * Gets a random media file for review.
+     * Gets a random file change for review.
      * - Picks the most recent changes in the last 30 day window
      * - Picks a random file from those changes
      * - Checks if the file is nominated for deletion
@@ -40,14 +45,14 @@ public class ReviewHelper {
      *
      * @return
      */
-    Single<Media> getRandomMedia() {
+    private Single<String> getRandomFileChange() {
         return okHttpJsonApiClient.getRecentFileChanges()
                 .map(this::findImageInRecentChanges)
                 .flatMap(title -> mediaWikiApi.pageExists("Commons:Deletion_requests/" + title)
                         .map(pageExists -> new Pair<>(title, pageExists)))
                 .map((Pair<String, Boolean> pair) -> {
                     if (!pair.second) {
-                        return new Media(pair.first.replace("File:", ""));
+                        return pair.first;
                     }
                     throw new Exception("Already nominated for deletion");
                 }).retry(MAX_RANDOM_TRIES);
