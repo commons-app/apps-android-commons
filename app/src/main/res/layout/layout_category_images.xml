@@ -18,7 +18,7 @@
         android:layout_gravity="end|bottom"
         />
 
-    <fr.free.nrw.commons.MediaWikiImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/categoryImageView"
         android:layout_width="match_parent"
         android:layout_height="240dp"

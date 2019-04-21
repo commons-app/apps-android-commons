@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 
 /**
@@ -82,12 +83,12 @@ public class GridViewAdapter extends ArrayAdapter {
         }
 
         Media item = data.get(position);
-        MediaWikiImageView imageView = convertView.findViewById(R.id.categoryImageView);
+        SimpleDraweeView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
         TextView author = convertView.findViewById(R.id.categoryImageAuthor);
         fileName.setText(item.getDisplayTitle());
         setAuthorView(item, author);
-        imageView.setMedia(item);
+        imageView.setImageURI(item.getThumbUrl());
         return convertView;
     }
 

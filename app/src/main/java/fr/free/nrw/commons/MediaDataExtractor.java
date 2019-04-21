@@ -1,7 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.text.Html;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -36,7 +34,7 @@ public class MediaDataExtractor {
      * @return full Media object with all details including deletion status and talk page
      */
     public Single<Media> fetchMediaDetails(String filename) {
-        Single<Media> mediaSingle = okHttpJsonApiClient.getMedia(filename, false);
+        Single<Media> mediaSingle = getMediaFromFileName(filename);
         Single<Boolean> pageExistsSingle = mediaWikiApi.pageExists("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
         return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, (media, deletionStatus, discussion) -> {
@@ -46,6 +44,15 @@ public class MediaDataExtractor {
             }
             return media;
         });
+    }
+
+    /**
+     * Method can be used to fetch media for a given filename
+     * @param filename Eg. File:Test.jpg
+     * @return return data rich Media object
+     */
+    public Single<Media> getMediaFromFileName(String filename) {
+        return okHttpJsonApiClient.getMedia(filename, false);
     }
 
     /**

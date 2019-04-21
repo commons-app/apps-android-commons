@@ -34,8 +34,6 @@ public interface MediaWikiApi {
 
     Single<Boolean> pageExists(String pageName);
 
-    Single<String> findThumbnailByFilename(String filename);
-
     List<String> getSubCategoryList(String categoryName);
 
     List<String> getParentCategoryList(String categoryName);

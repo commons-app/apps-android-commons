@@ -18,11 +18,11 @@
         android:contentDescription="@string/mediaimage_failed"
         />
 
-    <fr.free.nrw.commons.MediaWikiImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/mediaDetailImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:actualImageScaleType="fitCenter"
+        app:actualImageScaleType="fitXY"
         />
 
     <ScrollView
