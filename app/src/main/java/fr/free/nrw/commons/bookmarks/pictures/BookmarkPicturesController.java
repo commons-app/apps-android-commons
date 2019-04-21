@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.bookmarks.pictures;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +40,17 @@ public class BookmarkPicturesController {
         List<Bookmark> bookmarks = bookmarkDao.getAllBookmarks();
         currentBookmarks = bookmarks;
         return Observable.fromIterable(bookmarks)
-                .flatMap((Function<Bookmark, ObservableSource<Media>>) bookmark ->
-                        okHttpJsonApiClient.getMedia(bookmark.getMediaName(), false).toObservable())
+                .flatMap((Function<Bookmark, ObservableSource<Media>>) this::getMediaFromBookmark)
+                .filter(media -> media != null && !StringUtils.isBlank(media.getFilename()))
                 .toList();
+    }
+
+    private Observable<Media> getMediaFromBookmark(Bookmark bookmark) {
+        Media dummyMedia = new Media("");
+        return okHttpJsonApiClient.getMedia(bookmark.getMediaName(), false)
+                .map(media -> media == null ? dummyMedia : media)
+                .onErrorReturn(throwable -> dummyMedia)
+                .toObservable();
     }
 
     /**
