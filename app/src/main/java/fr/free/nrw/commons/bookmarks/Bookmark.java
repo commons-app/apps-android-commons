@@ -9,8 +9,8 @@ public class Bookmark {
     private String mediaName;
     private String mediaCreator;
 
-    public Bookmark(String mediaName, String mediaCreator) {
-        this.contentUri = BookmarkPicturesContentProvider.uriForName(mediaName);
+    public Bookmark(String mediaName, String mediaCreator, Uri contentUri) {
+        this.contentUri = contentUri;
         this.mediaName = mediaName == null ? "" : mediaName;
         this.mediaCreator = mediaCreator == null ? "" : mediaCreator;
     }

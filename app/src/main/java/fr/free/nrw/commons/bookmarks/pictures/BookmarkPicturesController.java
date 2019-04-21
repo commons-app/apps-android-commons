@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.bookmarks.pictures;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,10 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 
 @Singleton
 public class BookmarkPicturesController {
@@ -30,22 +36,21 @@ public class BookmarkPicturesController {
      * Loads the Media objects from the raw data stored in DB and the API.
      * @return a list of bookmarked Media object
      */
-    List<Media> loadBookmarkedPictures() {
+    Single<List<Media>> loadBookmarkedPictures() {
         List<Bookmark> bookmarks = bookmarkDao.getAllBookmarks();
         currentBookmarks = bookmarks;
-        ArrayList<Media> medias = new ArrayList<>();
-        for (Bookmark bookmark : bookmarks) {
-            List<Media> tmpMedias = okHttpJsonApiClient
-                    .getMediaList("search", bookmark.getMediaName())
-                    .blockingGet();
-            for (Media m : tmpMedias) {
-                if (m.getCreator().trim().equals(bookmark.getMediaCreator().trim())) {
-                    medias.add(m);
-                    break;
-                }
-            }
-        }
-        return medias;
+        return Observable.fromIterable(bookmarks)
+                .flatMap((Function<Bookmark, ObservableSource<Media>>) this::getMediaFromBookmark)
+                .filter(media -> media != null && !StringUtils.isBlank(media.getFilename()))
+                .toList();
+    }
+
+    private Observable<Media> getMediaFromBookmark(Bookmark bookmark) {
+        Media dummyMedia = new Media("");
+        return okHttpJsonApiClient.getMedia(bookmark.getMediaName(), false)
+                .map(media -> media == null ? dummyMedia : media)
+                .onErrorReturn(throwable -> dummyMedia)
+                .toObservable();
     }
 
     /**
@@ -54,10 +59,7 @@ public class BookmarkPicturesController {
      */
     boolean needRefreshBookmarkedPictures() {
         List<Bookmark> bookmarks = bookmarkDao.getAllBookmarks();
-        if (bookmarks.size() == currentBookmarks.size()) {
-            return false;
-        }
-        return true;
+        return bookmarks.size() != currentBookmarks.size();
     }
 
     /**
