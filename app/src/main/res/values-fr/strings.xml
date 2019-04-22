@@ -463,8 +463,8 @@
   <string name="check_category_adding_template">Ajouter un modèle pour le contrôle de catégorie</string>
   <string name="check_category_notification_title">Demande en cours du contrôle de la catégorie pour %1$s</string>
   <string name="check_category_edit_summary">Demande de contrôle de catégorie</string>
-  <string name="check_category_success_title" fuzzy="true">Demande de contrôle de catégorie: Succès</string>
-  <string name="check_category_failure_title" fuzzy="true">Demande de contrôle de catégorie: Echec</string>
+  <string name="check_category_success_title">Contrôle de catégorie démandé</string>
+  <string name="check_category_failure_title">La requête du contrôle de catégorie n\'a pas abouti</string>
   <string name="check_category_success_message">Contrôle de catégorie demandé avec succès pour %1$s</string>
   <string name="check_category_failure_message">Impossible de demander un contrôle de catégorie pour %1$s</string>
   <string name="check_category_toast">Demande en cours du contrôle de la catégorie pour %1$s</string>
@@ -522,6 +522,8 @@
   <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Communs a choisi comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par les lieux de proximité sont les images téléversées par la découverte des lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionalité permet aux contributeurs d\'envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles – en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
+  <string name="welcome_do_upload_content_description">Bons exemples d\'images à téléverser sur Commons</string>
+  <string name="welcome_dont_upload_content_description">Exemples d\'images à ne pas téléverser</string>
   <string name="skip_image">SAUTER CETTE IMAGE</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Échec du téléchargement ! Nous ne pouvons pas télécharger le fichier sans droit de stockage externe.</string>
 </resources>

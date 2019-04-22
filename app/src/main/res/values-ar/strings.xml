@@ -452,8 +452,8 @@
   <string name="check_category_adding_template">تجري إضافة قالب لفخص التصنيف</string>
   <string name="check_category_notification_title">جارٍ طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_edit_summary">جارٍ طلب التحقق من التصنيف</string>
-  <string name="check_category_success_title" fuzzy="true">طلب التحقق من التصنيف: نجاح</string>
-  <string name="check_category_failure_title" fuzzy="true">طلب التحقق من التصنيف: فشل</string>
+  <string name="check_category_success_title">تم طلب التحقق من التصنيف</string>
+  <string name="check_category_failure_title">طلب التحقق من التصنيف لم ينجح</string>
   <string name="check_category_success_message">تم طلب التحقق بنجاح من التصنيف %1$s</string>
   <string name="check_category_failure_message">لا يمكن طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_toast">جارٍ طلب التحقق من التصنيف %1$s</string>
@@ -511,6 +511,8 @@
   <string name="images_featured_explanation">الصور المختارة هي صور من مصورين ورسامين ذوي مهارات عالية اختارها مجتمع ويكيميديا ​​كومنز كبعض الأفضل جودة على الموقع.</string>
   <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
   <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
+  <string name="welcome_do_upload_content_description">أمثلة على صور جيدة لرفعها إلى كومنز</string>
+  <string name="welcome_dont_upload_content_description">أمثلة على صور لعدم رفعها</string>
   <string name="skip_image">تخطي هذه الصورة</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">التنزيل فشل!!. لا يمكننا تنزيل الملف دون إذن تخزين خارجي.</string>
 </resources>

@@ -455,7 +455,7 @@
   <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
   <string name="getting_edit_token">Получение токена редактирования</string>
   <string name="check_category_notification_title">Проверка категории %1$s</string>
-  <string name="check_category_success_title" fuzzy="true">Проверка категории: Успешно</string>
+  <string name="check_category_success_title">Запрошена проверка категории</string>
   <string name="check_category_success_message">Успешно отправлена на проверку категория %1$s</string>
   <string name="check_category_toast">Проверка категории %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Добавление файлу сообщения об удалении</string>
@@ -467,6 +467,7 @@
   <string name="send_thank_failure_title">Отправка благодарности: Неуспешно</string>
   <string name="send_thank_send">Отправка благодарности</string>
   <string name="send_thank_notification_title">Отправка благодарности</string>
+  <string name="send_thank_toast">Отправка благодарности %1$s</string>
   <string name="review_category">Правильно ли указаны категории?</string>
   <string name="review_thanks">Хотите отблагодарить участника?</string>
   <string name="review_spam_explanation">Нажмите НЕТ, чтобы номинировать это изображение к удалению.</string>
@@ -494,5 +495,7 @@
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
   <string name="image_chooser_title">Выберите изображения для загрузки</string>
   <string name="please_wait">Пожалуйста, подождите…</string>
+  <string name="thanks_received_explanation">Это функция позволяет участникам послать благодарность другим участникам за их полезные правки с помощью маленькой ссылки на странице истории страницы или странице разницы версий.</string>
   <string name="skip_image">ПРОПУСТИТЬ ЭТО ИЗОБРАЖЕНИЕ</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Скачивание файла не удалось! Это невозможно выполнить без предоставленного разрешения по использованию  внешнего носителя.</string>
 </resources>

@@ -448,8 +448,8 @@
   <string name="check_category_adding_template">Vorlage zur Kategorieprüfung hinzufügen</string>
   <string name="check_category_notification_title">Kategorieprüfung für %1$s anfordern</string>
   <string name="check_category_edit_summary">Kategorieprüfung anfordern</string>
-  <string name="check_category_success_title" fuzzy="true">Kategorieprüfung anfordern: Erfolgreich</string>
-  <string name="check_category_failure_title" fuzzy="true">Kategorieprüfung anfordern: Fehlgeschlagen</string>
+  <string name="check_category_success_title">Kategorieprüfung angefordert</string>
+  <string name="check_category_failure_title">Die Anfrage zur Kategorieprüfung funktionierte nicht</string>
   <string name="check_category_success_message">Kategorieprüfung für %1$s erfolgreich angefordert</string>
   <string name="check_category_failure_message">Eine Kategorieprüfung für %1$s konnte nicht angefordert werden</string>
   <string name="check_category_toast">Kategorieprüfung für %1$s anfordern</string>
@@ -507,6 +507,9 @@
   <string name="images_featured_explanation">Vorgestellte Bilder sind Bilder von professionellen Fotografen und Zeichnern, die die Gemeinschaft von Wikimedia Commons als diejenigen mit der höchsten Qualität auf der Website ausgewählt hat.</string>
   <string name="images_via_nearby_explanation">Über Orte in der Nähe hochgeladene Bilder sind die Bilder, die von entdeckten Orten auf der Karte hochgeladen wurden.</string>
   <string name="thanks_received_explanation">Diese Funktion erlaubt es Autoren, eine Dankeschön-Benachrichtigung an Benutzer zu senden, die nützliche Bearbeitungen durchgeführt haben – durch die Benutzung eines kleinen Dankeschön-Links in der Versionsgeschichte oder Unterschiedsseite.</string>
+  <string name="previous_image_title_description">Vorherigen Titel und vorherige Beschreibung kopieren</string>
+  <string name="welcome_do_upload_content_description">Beispiele guter Bilder zum Hochladen auf Commons</string>
+  <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
   <string name="skip_image">DIESES BILD ÜBERSPRINGEN</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fehlgeschlagen! Wir konnten die Datei nicht ohne externe Speicherberechtigung herunterladen!</string>
 </resources>

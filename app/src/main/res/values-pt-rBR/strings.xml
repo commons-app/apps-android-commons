@@ -455,8 +455,8 @@
   <string name="check_category_adding_template">Adicionando predefinição para verificação de categoria</string>
   <string name="check_category_notification_title">Solicitando verificação de categoria para %1$s</string>
   <string name="check_category_edit_summary">Solicitando verificação de categoria</string>
-  <string name="check_category_success_title" fuzzy="true">Solicitação de verificação de categoria: Sucesso</string>
-  <string name="check_category_failure_title" fuzzy="true">Solicitar verificação de categoria: falha</string>
+  <string name="check_category_success_title">Verificação de categoria solicitada</string>
+  <string name="check_category_failure_title">A solicitação de verificação de categoria não funcionou</string>
   <string name="check_category_success_message">Verificação de categoria solicitada com êxito para %1$s</string>
   <string name="check_category_failure_message">Não foi possível solicitar a verificação de categoria para %1$s</string>
   <string name="check_category_toast">Solicitando verificação de categoria para %1$s</string>
@@ -514,6 +514,8 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos usuários que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
+  <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
+  <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">PULAR ESTA IMAGEM</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Falha no Download!!. Não podemos fazer o download do arquivo sem permissão de armazenamento externo.</string>
 </resources>

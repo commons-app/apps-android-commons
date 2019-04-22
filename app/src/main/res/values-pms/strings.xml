@@ -442,8 +442,8 @@
   <string name="check_category_adding_template">Gionté në stamp për ël contròl ëd categorìa</string>
   <string name="check_category_notification_title">Arcesta an cors dël contròl ëd la categorìa për %1$s</string>
   <string name="check_category_edit_summary">Arcesta ëd contròl ëd categorìa</string>
-  <string name="check_category_success_title" fuzzy="true">Arcesta ëd contròl ëd categorìa: Riussì</string>
-  <string name="check_category_failure_title" fuzzy="true">Arcesta ëd contròl ëd categorìa: Falì</string>
+  <string name="check_category_success_title">Contròl ëd categorìa ciamà</string>
+  <string name="check_category_failure_title">L\'arcesta dël contròl ëd categorìa a l\'ha nen marcià bin</string>
   <string name="check_category_success_message">Contròl ëd categorìa ciamà con sucess për %1$s</string>
   <string name="check_category_failure_message">Impossìbil ciamé un contròl ëd categorìa për %1$s</string>
   <string name="check_category_toast">Arcesta an cors dël contròl ëd la categorìa për %1$s</string>
@@ -501,6 +501,8 @@
   <string name="images_featured_explanation">Le fòto an evidensa a son ëd plance fàite da dij fotògraf e ilustrator motobin àbij che la comunità ëd Wikipedia Commons a l\'ha sernù tra cole ëd qualità pi àuta an sël sit.</string>
   <string name="images_via_nearby_explanation">Le plance carià dai pòst ëd prossimità a son le plance carià con la dëscuverta dij pòst an sla carta.</string>
   <string name="thanks_received_explanation">Costa fonsionalità a përmet ai contributor ëd mandé na notìfica d\'aringrassiament a j\'utent ch\'a fan dle modìfiche ùtij -  an dovrand na cita liura d\'aringrassiament an sla pàgina dla stòria o cola dle diferense.</string>
+  <string name="welcome_do_upload_content_description">Esempi ëd plance bon-e da carié su Commons</string>
+  <string name="welcome_dont_upload_content_description">Esempi ëd plance da nen carié</string>
   <string name="skip_image">SAUTÉ COSTA PLANCIA</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Dëscariament falì! I podoma nen dëscarié l\'archivi sensa ël përmess dël depòsit estern.</string>
 </resources>
