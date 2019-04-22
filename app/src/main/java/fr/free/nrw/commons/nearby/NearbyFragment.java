@@ -41,8 +41,6 @@ import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -604,13 +602,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      */
     private void requestLocationPermissions() {
         if (!getActivity().isFinishing()) {
-            new Single<Object>(){
-                @Override
-                protected void subscribeActual(SingleObserver<? super Object> observer) {
-                    locationManager.requestPermissions(getActivity());
-                }
-            }.subscribeOn(Schedulers.newThread())
-            .subscribe();
+            locationManager.requestPermissions(getActivity());
         }
     }
 

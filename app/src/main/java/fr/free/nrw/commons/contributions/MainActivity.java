@@ -479,8 +479,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     Timber.d("Location permission given");
                     ((ContributionsFragment)contributionsActivityPagerAdapter
                             .getItem(0)).locationManager.registerLocationManager();
-                    ((NearbyFragment)contributionsActivityPagerAdapter
-                            .getItem(1)).onTabSelected(onOrientationChanged);
                 } else {
                     // If nearby fragment is visible and location permission is not given, send user back to contrib fragment
                     if (!isContributionsFragmentVisible) {
