@@ -112,7 +112,8 @@
                 <fr.free.nrw.commons.review.ReviewViewPager
                     android:id="@+id/reviewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true"
                     android:fadingEdge="none" />
 
             </LinearLayout>
