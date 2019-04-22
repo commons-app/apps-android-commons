@@ -44,6 +44,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -99,6 +100,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private boolean onOrientationChanged = false;
     private boolean populateForCurrentLocation = false;
     private boolean isNetworkErrorOccured = false;
+    private Disposable disposable;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -604,13 +606,13 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      */
     private void requestLocationPermissions() {
         if (!getActivity().isFinishing()) {
-            new Single<Object>(){
+             disposable = new Single<Object>() {
                 @Override
                 protected void subscribeActual(SingleObserver<? super Object> observer) {
                     locationManager.requestPermissions(getActivity());
                 }
             }.subscribeOn(Schedulers.newThread())
-            .subscribe();
+                    .subscribe();
         }
     }
 
@@ -803,6 +805,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onPause();
         // this means that this activity will not be recreated now, user is leaving it
         // or the activity is otherwise finishing
+        if (disposable!=null) {
+            disposable.dispose();
+        }
         if(getActivity().isFinishing()) {
             // we will not need this fragment anymore, this may also be a good place to signal
             // to the retained fragment object to perform its own cleanup.
