@@ -30,12 +30,6 @@ class UploadPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         uploadPresenter!!.onAttachView(view)
-        /*`when`(repository!!.preProcessImage(ArgumentMatchers.anyListOf(UploadableFile::class.java),
-                ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.anyString(),
-                ArgumentMatchers.any(SimilarImageInterface::class.java)))
-                .thenReturn(Observable.just(mock(UploadModel.UploadItem::class.java)))*/
-
         `when`(repository!!.buildContributions()).thenReturn(Observable.just(contribution))
         `when`(view!!.isLoggedIn).thenReturn(true)
     }

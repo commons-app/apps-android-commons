@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
@@ -13,12 +15,14 @@ import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.View;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.lang.reflect.Proxy;
 import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 public class UploadMediaPresenter implements UserActionListener, SimilarImageInterface {
@@ -34,9 +38,16 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     private CompositeDisposable compositeDisposable;
 
+    private Scheduler ioScheduler;
+    private Scheduler mainThreadScheduler;
+
     @Inject
-    public UploadMediaPresenter(UploadRepository uploadRepository) {
+    public UploadMediaPresenter(UploadRepository uploadRepository,
+            @Named(IO_THREAD) Scheduler ioScheduler,
+            @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
         this.repository = uploadRepository;
+        this.ioScheduler = ioScheduler;
+        this.mainThreadScheduler = mainThreadScheduler;
         compositeDisposable = new CompositeDisposable();
     }
 
@@ -57,8 +68,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
         Disposable uploadItemDisposable = repository
                 .preProcessImage(uploadableFile, place, source, this)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
                 .subscribe(uploadItem ->
                         {
                             view.onImageProcessed(uploadItem, place);
@@ -73,8 +84,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         view.showProgress(true);
         Disposable imageQualityDisposable = repository
                 .getImageQuality(uploadItem, true)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
                 .subscribe(imageResult -> {
                             view.showProgress(false);
                             handleImageResult(imageResult);
@@ -94,7 +105,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         repository.updateUploadItem(index, uploadItem);
     }
 
-    private void handleImageResult(Integer imageResult) {
+    public void handleImageResult(Integer imageResult) {
         if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
             view.onImageValidationSuccess();
         } else {
