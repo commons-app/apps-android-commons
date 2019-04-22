@@ -209,7 +209,6 @@ public class UploadModel {
     void setCurrentTitleAndDescriptions(Title title, List<Description> descriptions) {
         setCurrentUploadTitle(title);
         setCurrentUploadDescriptions(descriptions);
-        store.putString("Title", title.toString());
     }
 
     private void setCurrentUploadTitle(Title title) {
