@@ -522,6 +522,8 @@
   <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Communs a choisi comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par les lieux de proximité sont les images téléversées par la découverte des lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionalité permet aux contributeurs d\'envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles – en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
+  <string name="previous_image_title_description">Copier le titre et la description précédente</string>
+  <string name="previous_button_tooltip_message">Cliquer pour réutiliser le titre et la description que vous avez saisis dans votre image précédente et les modifier pour qu\'ils correspondent à l’actuelle</string>
   <string name="welcome_do_upload_content_description">Bons exemples d\'images à téléverser sur Commons</string>
   <string name="welcome_dont_upload_content_description">Exemples d\'images à ne pas téléverser</string>
   <string name="skip_image">SAUTER CETTE IMAGE</string>

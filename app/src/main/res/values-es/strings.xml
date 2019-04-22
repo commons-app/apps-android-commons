@@ -5,6 +5,7 @@
 * Astroemi
 * Benfutbol10
 * Carlosmg.dg
+* Ciencia Al Poder
 * Fitoschido
 * JO777
 * Jduranboger
@@ -252,7 +253,7 @@
   <string name="nearby_info_menu_commons_article">Página del archivo en Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elemento de Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Artículo de Wikipedia</string>
-  <string name="error_while_cache">Error al almacenar imágenes en la antememoria</string>
+  <string name="error_while_cache">Error al almacenar imágenes en la caché</string>
   <string name="title_info">Un título único descriptivo para el archivo, que servirá como un nombre de archivo. Puede usar un lenguaje claro con espacios. No incluya la extensión del archivo.</string>
   <string name="description_info">Por favor, describe el elemento multimedia tanto como sea posible: ¿dónde fue tomado?, ¿qué muestra?, ¿cuál es el contexto? Por favor, describe los objetos o personas. Ofrece la información que no puede ser inferida tan fácilmente, por ejemplo el momento del día si es un paisaje. Si el medio muestra algo inusual, explica qué lo hace inusual.</string>
   <string name="upload_image_too_dark">La imagen está demasiado oscura, ¿seguro que quieres subirla? Wikimedia Commons solo acepta imágenes con valor enciclopédico.</string>

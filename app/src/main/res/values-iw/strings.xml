@@ -453,6 +453,8 @@
   <string name="check_category_adding_template">הוספת תבנית לבדיקת קטגוריה</string>
   <string name="check_category_notification_title">בקשת בדיקת קטגוריה עבור %1$s</string>
   <string name="check_category_edit_summary">בקשת בדיקת קטגוריה</string>
+  <string name="check_category_success_title">התבקשה בדיקת קטגוריה</string>
+  <string name="check_category_failure_title">בקשת בדיקת קטגוריה לא עבדה</string>
   <string name="notsure">לא בטוח</string>
   <string name="send_thank_success_title">שליחת תודה: הצלחה</string>
   <string name="send_thank_success_message">נשלחה תודה בהצלחה אל %1$s</string>

@@ -511,6 +511,8 @@
   <string name="images_featured_explanation">特色圖片是出自於高水準技巧的攝影師或繪圖師，且被維基共享資源社群挑選為在站台上的最高品質圖片。</string>
   <string name="images_via_nearby_explanation">以「附近地點」所上傳的圖片，是透過找出在地圖上地點來上傳的。</string>
   <string name="thanks_received_explanation">此功能允許編輯者透過利用在歷史頁面或是差異頁面上的感謝連結，來發送感謝通知給做出有用編輯的使用者。</string>
+  <string name="previous_image_title_description">複製先前標題與說明</string>
+  <string name="previous_button_tooltip_message">點擊來重新使用您在您的先前圖片所輸入之標題與描述，並修改來配合目前的圖片</string>
   <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
   <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
   <string name="skip_image">忽略此圖片</string>

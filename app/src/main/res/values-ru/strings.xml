@@ -302,6 +302,7 @@
   <string name="no_internet">Интернет недоступен</string>
   <string name="internet_established">Интернет доступен</string>
   <string name="error_notifications">Ошибка при получении уведомления</string>
+  <string name="error_review">Ошибка при получении изображения на проверку. Пожалуйста, нажмите \"Обновить\", чтобы попробовать снова.</string>
   <string name="error_review_categories">Ошибка при получении категорий изображения для проверки. Пожалуйста нажмите \"Обновить\", чтобы попробовать снова.</string>
   <string name="no_notifications">Уведомлений нет</string>
   <string name="about_translate">&lt;u&gt;Перевести&lt;/u&gt;</string>
@@ -376,7 +377,7 @@
   <string name="image_reverts">Изображения, которые не откатывались</string>
   <string name="images_used_by_wiki">Использовано изображений</string>
   <string name="achievements_share_message">Поделитесь своими достижениями с друзьями!</string>
-  <string name="achievements_info_message">Ваш уровень будет увеличиваться, если вы будете придерживаться этих требований. Числа в разделе \"Статистика\" не влияют на ваш уровень.</string>
+  <string name="achievements_info_message">Ваш уровень будет расти при выполнении условий с числами в кружках. Числа в разделе \"Статистика\" на уровень не влияют.</string>
   <string name="achievements_revert_limit_message">требуется минимум:</string>
   <string name="images_uploaded_explanation">Число изображений, загруженных на Викисклад любыми приложениями</string>
   <string name="images_reverted_explanation">Число изображений, загруженных на Викисклад и не удалённых</string>
@@ -454,10 +455,14 @@
   <string name="bad_token_error_proposed_solution">Загрузка прервана из-за проблем с токеном редактирования. Пожалуйста, выйдите из учётной записи и зайдите заново.</string>
   <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
   <string name="getting_edit_token">Получение токена редактирования</string>
+  <string name="check_category_adding_template">Добавление шаблона о проверке категорий</string>
   <string name="check_category_notification_title">Проверка категории %1$s</string>
+  <string name="check_category_edit_summary">Запрос о проверке категорий</string>
   <string name="check_category_success_title">Запрошена проверка категории</string>
-  <string name="check_category_success_message">Успешно отправлена на проверку категория %1$s</string>
-  <string name="check_category_toast">Проверка категории %1$s</string>
+  <string name="check_category_failure_title">Запрос о проверке категорий не сработал</string>
+  <string name="check_category_success_message">Успешно оставлен запрос о проверке категорий файла %1$s</string>
+  <string name="check_category_failure_message">Не удаётся сделать запрос о проверке категорий для файла %1$s</string>
+  <string name="check_category_toast">Проверка категорий файла %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Добавление файлу сообщения об удалении</string>
   <string name="nominate_for_deletion_done">Готово</string>
   <string name="nominate_for_deletion_edit_deletion_request_log">Добавление файла в журнал запросов на удаление</string>
@@ -468,11 +473,12 @@
   <string name="send_thank_send">Отправка благодарности</string>
   <string name="send_thank_notification_title">Отправка благодарности</string>
   <string name="send_thank_toast">Отправка благодарности %1$s</string>
+  <string name="review_copyright">Соответствует правилам об авторском праве?</string>
   <string name="review_category">Правильно ли указаны категории?</string>
   <string name="review_thanks">Хотите отблагодарить участника?</string>
   <string name="review_spam_explanation">Нажмите НЕТ, чтобы номинировать это изображение к удалению.</string>
   <string name="review_copyright_explanation">Логотипы, снимки экрана, постеры фильмов часто нарушают копирайт.\n Нажмите НЕТ, чтобы номинировать это изображение к удалению.</string>
-  <string name="review_no_category">Йоу, да тут даже категорий нет!</string>
+  <string name="review_no_category">Эй, да тут даже категорий нет!</string>
   <string name="review_category_explanation">Это изображение отнесено к %1$s {{PLURAL:%1$s|категории|категориям}}.</string>
   <string name="review_spam_report_problem">спам</string>
   <string name="review_category_yes_button_text">НЕВЕРНО КАТЕГОРИЗИРОВАНО</string>
@@ -480,6 +486,7 @@
   <string name="review_spam_no_button_text">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
   <string name="review_copyright_no_button_text">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
   <string name="review_thanks_no_button_text">СЛЕДУЮЩЕЕ ИЗОБРАЖЕНИЕ</string>
+  <string name="review_image_explanation">Вы можете проверить изображения, и, таким образом, улучшить их качество на Викискладе.\n Есть четыре проверки:\n - Уместно ли изображение на Викискладе? \n - Соответствует ли оно правилам об авторском праве? \n - Правильно ли оно категоризировано? \n - Если всё хорошо, можете поблагодарить загрузившего изображение.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Получение общего содержимого. Обработка изображения может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
     <item quantity="other">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
@@ -496,6 +503,10 @@
   <string name="image_chooser_title">Выберите изображения для загрузки</string>
   <string name="please_wait">Пожалуйста, подождите…</string>
   <string name="thanks_received_explanation">Это функция позволяет участникам послать благодарность другим участникам за их полезные правки с помощью маленькой ссылки на странице истории страницы или странице разницы версий.</string>
+  <string name="previous_image_title_description">Скопировать предыдущие название и описание</string>
+  <string name="previous_button_tooltip_message">Нажмите, чтобы использовать название и описание, которые вы ввели для предыдущего изображения, а потом потом модифицировать их</string>
+  <string name="welcome_do_upload_content_description">Примеры изображений, подходящих для загрузки на Викисклад</string>
+  <string name="welcome_dont_upload_content_description">Примеры изображений, которые не следует загружать на Викисклад</string>
   <string name="skip_image">ПРОПУСТИТЬ ЭТО ИЗОБРАЖЕНИЕ</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Скачивание файла не удалось! Это невозможно выполнить без предоставленного разрешения по использованию  внешнего носителя.</string>
 </resources>

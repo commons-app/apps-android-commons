@@ -502,6 +502,8 @@
   <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
   <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
   <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
+  <string name="previous_image_title_description">Прекопирај претходен наслов и опис</string>
+  <string name="previous_button_tooltip_message">Стиснете за да ги употребите насловот и описот што ги внесовте за претходната слика, па прилагодете ги за да одговараат на тековната.</string>
   <string name="welcome_do_upload_content_description">Примери — Добри слики за подигање</string>
   <string name="welcome_dont_upload_content_description">Примери — Слики што не се за подигање</string>
   <string name="skip_image">ПРЕСКОКНИ ЈА ПОРАКАВА</string>

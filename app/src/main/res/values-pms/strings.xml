@@ -501,6 +501,8 @@
   <string name="images_featured_explanation">Le fòto an evidensa a son ëd plance fàite da dij fotògraf e ilustrator motobin àbij che la comunità ëd Wikipedia Commons a l\'ha sernù tra cole ëd qualità pi àuta an sël sit.</string>
   <string name="images_via_nearby_explanation">Le plance carià dai pòst ëd prossimità a son le plance carià con la dëscuverta dij pòst an sla carta.</string>
   <string name="thanks_received_explanation">Costa fonsionalità a përmet ai contributor ëd mandé na notìfica d\'aringrassiament a j\'utent ch\'a fan dle modìfiche ùtij -  an dovrand na cita liura d\'aringrassiament an sla pàgina dla stòria o cola dle diferense.</string>
+  <string name="previous_image_title_description">Copié ël tìtol e la descrission precedent</string>
+  <string name="previous_button_tooltip_message">Ch\'a sgnaca për dovré torna ël tìtol e la descrission ch\'a l\'ha butà an soa plancia precedenta e modificheje për ch\'a corëspondo a cola atual</string>
   <string name="welcome_do_upload_content_description">Esempi ëd plance bon-e da carié su Commons</string>
   <string name="welcome_dont_upload_content_description">Esempi ëd plance da nen carié</string>
   <string name="skip_image">SAUTÉ COSTA PLANCIA</string>

@@ -457,4 +457,6 @@
   <string name="error_occurred_in_picking_images">选择图片时出错</string>
   <string name="image_chooser_title">选择要上传的图片</string>
   <string name="please_wait">请稍候……</string>
+  <string name="previous_image_title_description">复制先前的标题及描述</string>
+  <string name="previous_button_tooltip_message">点击复用您在先前图片中填写的标题及描述并稍加修改来匹配当前图像。</string>
 </resources>

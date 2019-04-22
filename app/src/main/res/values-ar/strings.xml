@@ -511,6 +511,8 @@
   <string name="images_featured_explanation">الصور المختارة هي صور من مصورين ورسامين ذوي مهارات عالية اختارها مجتمع ويكيميديا ​​كومنز كبعض الأفضل جودة على الموقع.</string>
   <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
   <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
+  <string name="previous_image_title_description">نسخ العنوان/الوصف السابق</string>
+  <string name="previous_button_tooltip_message">انقر لإعادة استخدام العنوان والوصف الذي أدخلته في صورتك السابقة وتعديله ليناسب الحالي</string>
   <string name="welcome_do_upload_content_description">أمثلة على صور جيدة لرفعها إلى كومنز</string>
   <string name="welcome_dont_upload_content_description">أمثلة على صور لعدم رفعها</string>
   <string name="skip_image">تخطي هذه الصورة</string>
