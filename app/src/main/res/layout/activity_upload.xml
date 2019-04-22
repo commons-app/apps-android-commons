@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   >
-  <fr.free.nrw.commons.upload.NonSwipeableViewPager
+  <fr.free.nrw.commons.contributions.UnswipableViewPager
     android:id="@+id/vp_upload"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
