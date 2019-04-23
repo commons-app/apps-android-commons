@@ -539,4 +539,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
   <string name="skip_image">SKIP THIS IMAGE</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
+  <string name="image_info">Image Info</string>
 </resources>
