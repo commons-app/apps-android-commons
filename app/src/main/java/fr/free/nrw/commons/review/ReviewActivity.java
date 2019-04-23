@@ -107,12 +107,11 @@ public class ReviewActivity extends AuthenticatedActivity {
         btnSkipImage.setOnClickListener(view -> runRandomizer());
 
         btnSkipImage.setOnTouchListener((view, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (event.getRawX() >= (btnSkipImage.getRight() - btnSkipImage
-                        .getCompoundDrawables()[2].getBounds().width())) {
-                    showSkipImageInfo();
-                    return true;
-                }
+            if (event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (
+                    btnSkipImage.getRight() - btnSkipImage
+                            .getCompoundDrawables()[2].getBounds().width())) {
+                showSkipImageInfo();
+                return true;
             }
             return false;
         });
