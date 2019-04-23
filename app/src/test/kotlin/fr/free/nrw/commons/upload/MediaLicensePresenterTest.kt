@@ -47,7 +47,7 @@ class MediaLicensePresenterTest {
 
     @Test
     fun selectLicenseTest() {
-        mediaLicensePresenter!!.selectLicense("test")
+        mediaLicensePresenter!!.selectLicense(ArgumentMatchers.anyString())
         verify(view!!).updateLicenseSummary(ArgumentMatchers.any(), ArgumentMatchers.anyInt())
     }
 }

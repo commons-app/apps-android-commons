@@ -1,18 +1,21 @@
 package fr.free.nrw.commons.upload.categories;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
+
 import android.text.TextUtils;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.repository.UploadRepository;
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import timber.log.Timber;
 
@@ -24,6 +27,8 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                     CategoriesContract.View.class.getClassLoader(),
                     new Class[]{CategoriesContract.View.class},
                     (proxy, method, methodArgs) -> null);
+    private final Scheduler ioScheduler;
+    private final Scheduler mainThreadScheduler;
 
     CategoriesContract.View view = DUMMY;
     private UploadRepository repository;
@@ -31,8 +36,11 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
     private CompositeDisposable compositeDisposable;
 
     @Inject
-    public CategoriesPresenter(UploadRepository repository) {
+    public CategoriesPresenter(UploadRepository repository, @Named(IO_THREAD) Scheduler ioScheduler,
+            @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
         this.repository = repository;
+        this.ioScheduler = ioScheduler;
+        this.mainThreadScheduler = mainThreadScheduler;
         compositeDisposable = new CompositeDisposable();
     }
 
@@ -52,14 +60,14 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
         List<CategoryItem> categoryItems = new ArrayList<>();
         Disposable searchCategoriesDisposable = Observable
                 .fromIterable(repository.getSelectedCategories())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
                 .doOnSubscribe(disposable -> {
                     view.showProgress(true);
                     view.showError(null);
                     view.setCategories(null);
                 })
-                .observeOn(Schedulers.io())
+                .observeOn(ioScheduler)
                 .concatWith(
                         repository.searchAll(query, imageTitleList)
                                 .mergeWith(repository.searchCategories(query, imageTitleList))
@@ -70,7 +78,7 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                 .filter(categoryItem -> !repository.containsYear(categoryItem.getName()))
                 .distinct()
                 .sorted(repository.sortBySimilarity(query))
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(mainThreadScheduler)
                 .subscribe(
                         s -> categoryItems.add(s),
                         Timber::e,
