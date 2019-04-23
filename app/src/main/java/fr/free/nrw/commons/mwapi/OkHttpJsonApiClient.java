@@ -47,6 +47,7 @@ import timber.log.Timber;
  */
 @Singleton
 public class OkHttpJsonApiClient {
+    private static final String THUMB_SIZE = "640";
 
     public static final Type mapType = new TypeToken<Map<String, String>>() {
     }.getType();
@@ -274,6 +275,7 @@ public class OkHttpJsonApiClient {
     private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
         builder.addQueryParameter("prop", "imageinfo")
                 .addQueryParameter("iiprop", "url|extmetadata")
+                .addQueryParameter("iiurlwidth", THUMB_SIZE)
                 .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl");
 
         String language = Locale.getDefault().getLanguage();

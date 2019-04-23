@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="2dp"
-    android:paddingBottom="0dp"
-    >
+    android:paddingBottom="0dp">
 
     <TextView
         android:id="@+id/contributionSequenceNumber"
@@ -18,11 +18,12 @@
         android:layout_gravity="end|bottom"
         />
 
-    <fr.free.nrw.commons.MediaWikiImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/contributionImage"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        app:actualImageScaleType="fitCenter"
+        app:actualImageScaleType="fitXY"
+        fresco:placeholderImage="@drawable/ic_image_black_24dp"
         />
 
     <LinearLayout

@@ -52,7 +52,6 @@ import timber.log.Timber;
  * @author Addshore
  */
 public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
-    private static final String THUMB_SIZE = "640";
     private AbstractHttpClient httpClient;
     private CustomMwApi api;
     private CustomMwApi wikidataApi;
@@ -291,18 +290,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("summary", summary)
                 .post()
                 .getString("/api/edit/@result");
-    }
-
-    @Override
-    public Single<String> findThumbnailByFilename(String filename) {
-        return Single.fromCallable(() -> api.action("query")
-                .param("format", "xml")
-                .param("prop", "imageinfo")
-                .param("iiprop", "url")
-                .param("iiurlwidth", THUMB_SIZE)
-                .param("titles", filename)
-                .get()
-                .getString("/api/query/pages/page/imageinfo/ii/@thumburl"));
     }
 
     @Override
