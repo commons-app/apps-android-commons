@@ -492,7 +492,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_spam">Is this in-scope?</string>
   <string name="review_thanks">Would you like to thank the contributor?</string>
   <string name="review_spam_explanation">Click NO to nominate this image for deletion if it is not useful at all.</string>
-  <string name="review_copyright_explanation">Logos, screenshots, movie posters are often copyright violations.\n Click NO to nominate this image for deletion</string>
+  <string name="review_copyright_explanation">Logos, screenshots, movie posters are often copyright violations.\nClick NO to nominate this image for deletion</string>
   <string name="review_thanks_explanation">%1$s will be encouraged by your appreciation</string>
   <string name="review_no_category">Oh, this is not even categorized!</string>
   <string name="review_category_explanation">This image is under %1$s categories.</string>
