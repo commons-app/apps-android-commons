@@ -58,10 +58,12 @@
       android:layout_margin="@dimen/activity_margin_horizontal"
       android:background="@android:color/transparent"
       android:text="@string/yes"
+      android:textAllCaps="true"
       android:textAlignment="center"
       android:textColor="@color/yes_button_color"/>
 
     <Button
+      android:textAllCaps="true"
       android:id="@+id/button_no"
       android:layout_width="0dp"
       android:layout_height="48dp"
