@@ -22,7 +22,7 @@
         android:id="@+id/contributionImage"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        app:actualImageScaleType="fitXY"
+        app:actualImageScaleType="centerCrop"
         fresco:placeholderImage="@drawable/ic_image_black_24dp"
         />
 
