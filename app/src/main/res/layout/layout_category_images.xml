@@ -22,6 +22,7 @@
         android:id="@+id/categoryImageView"
         android:layout_width="match_parent"
         android:layout_height="240dp"
+        app:actualImageScaleType="centerCrop"
         />
 
     <LinearLayout

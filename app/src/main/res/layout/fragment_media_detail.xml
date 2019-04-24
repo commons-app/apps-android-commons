@@ -22,7 +22,7 @@
         android:id="@+id/mediaDetailImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:actualImageScaleType="fitXY"
+        app:actualImageScaleType="centerCrop"
         />
 
     <ScrollView
