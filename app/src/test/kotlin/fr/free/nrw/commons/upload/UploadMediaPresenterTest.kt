@@ -24,7 +24,7 @@ class UploadMediaPresenterTest {
     @Mock
     internal var view: UploadMediaDetailsContract.View? = null
 
-    var uploadMediaPresenter: UploadMediaPresenter? = null
+    private var uploadMediaPresenter: UploadMediaPresenter? = null
 
     @Mock
     private var uploadableFile: UploadableFile? = null
