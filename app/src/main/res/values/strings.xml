@@ -500,14 +500,14 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">It is copyright violation because it is </string>
   <string name="review_c_violation_report_problem">copyRightViolation</string>
-    <string name="review_category_yes_button_text">NO, MIS-CATEGORIZED</string>
-    <string name="review_category_no_button_text">SEEMS FINE</string>
-    <string name="review_spam_yes_button_text">NO, OUT OF SCOPE</string>
-    <string name="review_spam_no_button_text">SEEMS FINE</string>
-    <string name="review_copyright_yes_button_text">NO, COPYRIGHT VIOLATION</string>
-    <string name="review_copyright_no_button_text">SEEMS FINE</string>
-    <string name="review_thanks_yes_button_text">YES, WHY NOT</string>
-    <string name="review_thanks_no_button_text">NEXT IMAGE</string>
+    <string name="review_category_yes_button_text">No, mis-categorized</string>
+    <string name="review_category_no_button_text">Seems fine</string>
+    <string name="review_spam_yes_button_text">No, out of scope</string>
+    <string name="review_spam_no_button_text">Seems fine</string>
+    <string name="review_copyright_yes_button_text">No, copyright violation</string>
+    <string name="review_copyright_no_button_text">Seems fine</string>
+    <string name="review_thanks_yes_button_text">Yes, why not</string>
+    <string name="review_thanks_no_button_text">Next image</string>
     <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
     <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commoms.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
 
@@ -539,4 +539,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
   <string name="skip_image">SKIP THIS IMAGE</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
+  <string name="image_info">Image Info</string>
 </resources>
