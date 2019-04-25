@@ -7,8 +7,8 @@ import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.contributions.ContributionViewHolder;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
@@ -36,8 +36,6 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
 
     void inject(ModificationsSyncAdapter syncAdapter);
 
-    void inject(MediaWikiImageView mediaWikiImageView);
-
     void inject(LoginActivity activity);
 
     void inject(SettingsFragment fragment);
@@ -52,6 +50,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(FileProcessor fileProcessor);
 
     void inject(PicOfDayAppWidget picOfDayAppWidget);
+
+    void inject(ContributionViewHolder viewHolder);
 
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})

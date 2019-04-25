@@ -82,7 +82,7 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, 0);
                                 views.setOnClickPendingIntent(R.id.appwidget_image, pendingIntent);
 
-                                loadImageFromUrl(response.getImageUrl(), context, views, appWidgetManager, appWidgetId);
+                                loadImageFromUrl(response.getThumbUrl(), context, views, appWidgetManager, appWidgetId);
                             }
                         },
                         t -> Timber.e(t, "Fetching picture of the day failed")

@@ -68,11 +68,6 @@
             android:key="manageExifTags"
             android:title="@string/manage_exif_tags"
             android:summary="@string/manage_exif_tags_summary"/>
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
-            android:key="keepXmp"
-            android:title="@string/keep_xmp"
-            android:summary="@string/keep_xmp_summary"
-            android:defaultValue="true" />
 
     </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 

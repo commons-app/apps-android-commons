@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
 
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
@@ -27,15 +28,17 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     private String fileName;
     private String catString;
 
-    private View textViewQuestionContext;
-    private View textViewQuestion;
-
-    private Button yesButton;
-    private Button noButton;
-
-
     public ProgressBar progressBar;
     private MwQueryPage.Revision revision;
+
+    @BindView(R.id.tv_review_question)
+    TextView textViewQuestion;
+    @BindView(R.id.tv_review_question_context)
+    TextView textViewQuestionContext;
+    @BindView(R.id.button_yes)
+    Button yesButton;
+    @BindView(R.id.button_no)
+    Button noButton;
 
 
     public void update(int position, String fileName) {
@@ -50,9 +53,9 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             if (catString != null && !catString.equals("") && textViewQuestionContext != null) {
                 catString = "<b>" + catString + "</b>";
                 String stringToConvertHtml = String.format(getResources().getString(R.string.review_category_explanation), catString);
-                ((TextView) textViewQuestionContext).setText(Html.fromHtml(stringToConvertHtml));
+                textViewQuestionContext.setText(Html.fromHtml(stringToConvertHtml));
             } else if (textViewQuestionContext != null) {
-                ((TextView) textViewQuestionContext).setText(getResources().getString(R.string.review_no_category));
+                textViewQuestionContext.setText(getResources().getString(R.string.review_no_category));
             }
         }
     }
@@ -68,10 +71,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         position = getArguments().getInt("position");
         View layoutView = inflater.inflate(R.layout.fragment_review_image, container,
                 false);
-        textViewQuestion = layoutView.findViewById(R.id.reviewQuestion);
-        textViewQuestionContext = layoutView.findViewById(R.id.reviewQuestionContext);
-        yesButton = layoutView.findViewById(R.id.yesButton);
-        noButton = layoutView.findViewById(R.id.noButton);
+        ButterKnife.bind(this,layoutView);
 
         String question, explanation, yesButtonText, noButtonText;
         switch (position) {
@@ -118,10 +118,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 noButtonText = "no";
         }
 
-        noButton.setOnClickListener(view -> getReviewActivity().swipeToNext());
-
-        ((TextView) textViewQuestion).setText(question);
-        ((TextView) textViewQuestionContext).setText(explanation);
+        textViewQuestion.setText(question);
+        textViewQuestionContext.setText(explanation);
         yesButton.setText(yesButtonText);
         noButton.setText(noButtonText);
 
@@ -130,6 +128,11 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         }
 
         return layoutView;
+    }
+
+    @OnClick(R.id.button_no)
+    public void onNoButtonClicked() {
+        getReviewActivity().swipeToNext();
     }
 
     private ReviewActivity getReviewActivity() {

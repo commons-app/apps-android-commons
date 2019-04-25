@@ -4,21 +4,16 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
-import android.webkit.MimeTypeMap;
 
 import androidx.annotation.NonNull;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.nio.channels.FileChannel;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,8 +32,6 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.filepicker.Constants.DEFAULT_FOLDER_NAME;
 
 /**
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
@@ -104,34 +97,14 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     }
 
     /**
-     * Redacts EXIF and XMP metadata as indicated in preferences.
+     * Redacts EXIF metadata as indicated in preferences.
      *
      */
     private void redactMetadata(Context context) {
         Type setType = new TypeToken<Set<String>>() {}.getType();
         Set<String> prefManageEXIFTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
-        boolean prefKeepXmp = defaultKvStore.getBoolean("keepXmp", true);
 
         try {
-            if (!prefKeepXmp) {
-                String extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(filePath)).toString());
-                String newFilePath = context.getCacheDir().getAbsolutePath() + "/"
-                        + DEFAULT_FOLDER_NAME + "/"
-                        + UUID.randomUUID().toString() + "." + extension;
-
-                FileInputStream inStream = new FileInputStream(filePath);
-                FileOutputStream outStream = new FileOutputStream(newFilePath);
-                FileChannel inChannel = inStream.getChannel();
-                FileChannel outChannel = outStream.getChannel();
-                inChannel.transferTo(0, inChannel.size(), outChannel);
-                inStream.close();
-                outStream.close();
-                // Overwrites original file while removing XMP data.
-                // inputPath - newFilePath, the copy of FilePath
-                // outputPath - original FilePath
-                FileMetadataUtils.removeXmpAndWriteToFile(newFilePath, filePath);
-            }
-
             Set<String> redactTags = new HashSet<>(Arrays.asList(
                     context.getResources().getStringArray(R.array.pref_exifTag_values)));
 
@@ -153,7 +126,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 exifInterface.saveAttributes();
             }
         } catch (IOException e) {
-            Timber.w("EXIF/XMP redaction failed: %s", e.toString());
+            Timber.w("EXIF redaction failed: %s", e.toString());
         }
     }
 

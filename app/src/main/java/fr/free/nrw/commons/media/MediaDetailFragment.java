@@ -22,6 +22,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
 import org.wikipedia.util.StringUtil;
@@ -37,7 +42,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
@@ -52,12 +56,6 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import javax.inject.Inject;
-import javax.inject.Provider;
 import timber.log.Timber;
 
 import static android.view.View.GONE;
@@ -100,7 +98,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private int initialListTop = 0;
 
     @BindView(R.id.mediaDetailImage)
-    MediaWikiImageView image;
+    SimpleDraweeView image;
     @BindView(R.id.mediaDetailSpacer)
     MediaDetailSpacer spacer;
     @BindView(R.id.mediaDetailTitle)
@@ -265,7 +263,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void displayMediaDetails() {
         //Always load image from Internet to allow viewing the desc, license, and cats
-        image.setMedia(media);
+        setupImageView();
         title.setText(media.getDisplayTitle());
         desc.setHtmlText(media.getDescription());
         license.setText(media.getLicense());
@@ -275,6 +273,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setTextFields);
         compositeDisposable.add(disposable);
+    }
+
+    /**
+     * Uses two image sources.
+     * - low resolution thumbnail is shown initially
+     * - when the high resolution image is available, it replaces the low resolution image
+     */
+    private void setupImageView() {
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
+                .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+                .setOldController(image.getController())
+                .build();
+        image.setController(controller);
     }
 
     @Override
@@ -297,6 +309,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void setTextFields(Media media) {
         this.media = media;
+        setupImageView();
         desc.setHtmlText(prettyDescription(media));
         license.setText(prettyLicense(media));
         coordinates.setText(prettyCoordinates(media));

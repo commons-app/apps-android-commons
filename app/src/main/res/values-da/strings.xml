@@ -354,6 +354,7 @@
   <string name="display_location_permission_title">Vis placeringstilladelse</string>
   <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
+  <string name="nominate_for_deletion_done">Udført</string>
   <string name="notsure">Ikke sikker</string>
   <string name="send_thank_notification_title">Sender tak</string>
   <string name="review_spam_report_problem">spam</string>

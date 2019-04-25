@@ -11,24 +11,21 @@
         android:fadingEdge="none" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/overflow_button_dimen"
-        android:layout_marginTop="@dimen/standard_gap"
-        android:layout_marginRight="@dimen/standard_gap"
-        android:text="@string/welcome_skip_button"
         android:id="@+id/finishTutorialButton"
-        android:textSize="@dimen/normal_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_alignParentRight="true"
-        android:textColor="#fff"
+        android:padding="@dimen/standard_gap"
+        android:text="@string/welcome_skip_button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/normal_text"
         android:textStyle="bold"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <com.viewpagerindicator.CirclePageIndicator
         android:id="@+id/welcomePagerIndicator"
-        android:layout_height="@dimen/half_standard_height"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/half_standard_height"
         android:layout_gravity="bottom"
         android:padding="5dp" />
 

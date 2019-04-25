@@ -33,6 +33,7 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -47,6 +48,7 @@ import timber.log.Timber;
  */
 @Singleton
 public class OkHttpJsonApiClient {
+    private static final String THUMB_SIZE = "640";
 
     public static final Type mapType = new TypeToken<Map<String, String>>() {
     }.getType();
@@ -221,7 +223,7 @@ public class OkHttpJsonApiClient {
      */
     @Nullable
     public Single<Media> getPictureOfTheDay() {
-        String date = DateUtil.getIso8601DateFormatShort().format(new Date());
+        String date = CommonsDateUtil.getIso8601DateFormatShort().format(new Date());
         Timber.d("Current date is %s", date);
         String template = "Template:Potd/" + date;
         return getMedia(template, true);
@@ -274,6 +276,7 @@ public class OkHttpJsonApiClient {
     private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
         builder.addQueryParameter("prop", "imageinfo")
                 .addQueryParameter("iiprop", "url|extmetadata")
+                .addQueryParameter("iiurlwidth", THUMB_SIZE)
                 .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl");
 
         String language = Locale.getDefault().getLanguage();
@@ -417,7 +420,7 @@ public class OkHttpJsonApiClient {
         Date now = new Date();
         Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
 
-        String rcStart = DateUtil.getIso8601DateFormat().format(startDate);
+        String rcStart = DateUtil.iso8601DateFormat(startDate);
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(commonsBaseUrl)
                 .newBuilder()
