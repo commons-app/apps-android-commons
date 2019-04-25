@@ -262,7 +262,7 @@ class ApacheHttpClientMediaWikiApiTest {
     fun isUserBlockedFromCommonsForTimeBlockedUser() {
         val currentDate = Date()
         val expiredDate = Date(currentDate.time + 10000)
-        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + DateUtil.getIso8601DateFormat().format(expiredDate) + "\"></userinfo></query></api>"))
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + DateUtil.iso8601DateFormat(expiredDate) + "\"></userinfo></query></api>"))
 
         val result = testObject.isUserBlockedFromCommons()
 
@@ -282,7 +282,7 @@ class ApacheHttpClientMediaWikiApiTest {
     fun isUserBlockedFromCommonsForExpiredBlockedUser() {
         val currentDate = Date()
         val expiredDate = Date(currentDate.time - 10000)
-        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + DateUtil.getIso8601DateFormat().format(expiredDate) + "\"></userinfo></query></api>"))
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + DateUtil.iso8601DateFormat(expiredDate) + "\"></userinfo></query></api>"))
 
         val result = testObject.isUserBlockedFromCommons()
 
