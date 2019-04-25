@@ -9,7 +9,6 @@ import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.gallery.ExtMetadata;
 import org.wikipedia.gallery.ImageInfo;
 import org.wikipedia.page.PageTitle;
-import org.wikipedia.util.DateUtil;
 import org.wikipedia.util.StringUtil;
 
 import java.text.ParseException;
@@ -24,6 +23,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 
 public class Media implements Parcelable {
@@ -477,7 +477,7 @@ public class Media implements Parcelable {
 
     @Nullable private static Date safeParseDate(String dateStr) {
         try {
-            return DateUtil.getIso8601DateFormatShort().parse(dateStr);
+            return CommonsDateUtil.getIso8601DateFormatShort().parse(dateStr);
         } catch (ParseException e) {
             return null;
         }

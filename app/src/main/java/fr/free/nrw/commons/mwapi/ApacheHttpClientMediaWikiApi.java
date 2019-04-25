@@ -857,7 +857,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     private Date parseMWDate(String mwDate) {
         try {
-            return DateUtil.getIso8601DateFormat().parse(mwDate);
+            return DateUtil.iso8601DateParse(mwDate);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

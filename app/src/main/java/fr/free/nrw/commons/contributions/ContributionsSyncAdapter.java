@@ -148,7 +148,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 done = true;
             }
         }
-        defaultKvStore.putString("lastSyncTimestamp", DateUtil.getIso8601DateFormat().format(curTime));
+        defaultKvStore.putString("lastSyncTimestamp", DateUtil.iso8601DateFormat(curTime));
         Timber.d("Oh hai, everyone! Look, a kitty!");
     }
 }

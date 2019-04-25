@@ -7,15 +7,14 @@ import android.os.Parcel;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.StringDef;
-
 import java.lang.annotation.Retention;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.StringDef;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -203,7 +202,7 @@ public class  Contribution extends Media {
     private String getTemplatizedCreatedDate() {
         if (dateCreated != null) {
             if (UploadableFile.DateTimeWithSource.EXIF_SOURCE.equals(dateCreatedSource)) {
-                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, DateUtil.getIso8601DateFormatShort().format(dateCreated)) + "\n";
+                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, DateUtil.getDateStringWithSkeletonPattern(dateCreated, "yyyy-MM-dd")) + "\n";
             } else {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(dateCreated);
