@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.BiMap;
+import fr.free.nrw.commons.utils.StringUtils;
 
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
@@ -114,8 +115,8 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         }
 
         public void init(int position, boolean isDropDownView) {
-            String languageCode = fixLanguageCode(languageCodesList.get(position));
-            String languageName = languageNamesList.get(position).substring(0,1).toUpperCase() +
+            final String languageCode = StringUtils.fixLanguageCode(languageCodesList.get(position));
+            final String languageName = languageNamesList.get(position).substring(0,1).toUpperCase() +
                     languageNamesList.get(position).substring(1);
             if (!isDropDownView) {
                 view.setVisibility(View.GONE);
@@ -137,18 +138,6 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
                         tvLanguage.setTextColor(Color.GRAY);
                     }
                 }
-            }
-        }
-
-        private String fixLanguageCode(String code) {
-            if (code.equalsIgnoreCase("iw")) {
-                return "he";
-            } else if (code.equalsIgnoreCase("in")) {
-                return "id";
-            } else if (code.equalsIgnoreCase("ji")) {
-                return "yi";
-            } else {
-                return code;
             }
         }
     }
