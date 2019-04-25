@@ -8,6 +8,9 @@ import java.util.*
 
 class FileMetadataUtilsTest {
 
+    /**
+     * Test method to verify EXIF tags
+     */
     @Test
     fun getTagsFromPref() {
         val author: Observable<String>? = FileMetadataUtils.getTagsFromPref("Author")
