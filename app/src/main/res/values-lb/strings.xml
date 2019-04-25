@@ -220,7 +220,7 @@
   <string name="upload_problem_image_duplicate">Bild ass schonn op Commons.</string>
   <string name="upload_problem_different_geolocation">Dëst Bild gouf op enger anerer Plaz gemaach.</string>
   <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
-  <string name="internet_downloaded" fuzzy="true">Lued w.e.g. nëmme Biller erop déi Dir selwer opgeholl hutt. Lued keng Biller erop déi Dir aus dem Internet erofgelueden hutt.</string>
+  <string name="internet_downloaded">Lued w.e.g. nëmme Biller erop déi Dir selwer opgeholl hutt. Lued keng Biller erop déi Dir aus dem Internet erofgelueden hutt.</string>
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
@@ -322,6 +322,7 @@
   <string name="notsure">Net sécher</string>
   <string name="send_thank_send">Merci schécken</string>
   <string name="send_thank_notification_title">Merci schécken</string>
+  <string name="review_category">Ass dëst richteg kategoriséiert?</string>
   <string name="review_thanks_no_button_text">NÄCHST BILD</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>

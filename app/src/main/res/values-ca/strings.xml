@@ -201,4 +201,6 @@
   <string name="review_copyright_yes_button_text">NO, VIOLACIÓ DE DRETS D’AUTOR</string>
   <string name="no_notification">No teniu cap notificació sense llegir</string>
   <string name="no_archived_notification">No teniu cap notificació arxivada</string>
+  <string name="welcome_do_upload_content_description">Exemples d’imatges adequades per a Commons</string>
+  <string name="welcome_dont_upload_content_description">Exemples d’imatges que no s’han de pujar</string>
 </resources>

@@ -172,7 +172,7 @@
   <string name="detail_license_empty">Ismeretlen licenc</string>
   <string name="menu_refresh">Frissítés</string>
   <string name="read_storage_permission_rationale">Szükséges engedély: Külső tárhely olvasása. Az alkalmazás nem működik enélkül.</string>
-  <string name="write_storage_permission_rationale">Szükséges engedély: Külső tárhely írása. Az alkalmazás nem tudja használni a kamerát enélkül.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Szükséges engedély: Külső tárhely írása. Az alkalmazás nem tudja használni a kamerát enélkül.</string>
   <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Közeli helyek</string>
