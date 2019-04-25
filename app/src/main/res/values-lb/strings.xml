@@ -323,7 +323,7 @@
   <string name="send_thank_send">Merci schécken</string>
   <string name="send_thank_notification_title">Merci schécken</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>
-  <string name="review_thanks_no_button_text">NÄCHST BILD</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">NÄCHST BILD</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
   <string name="no_archived_notification">Dir hutt keng archivéier Notifikatiounen</string>

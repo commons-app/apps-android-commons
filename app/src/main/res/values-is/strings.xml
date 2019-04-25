@@ -433,14 +433,14 @@
   <string name="review_spam">Kemur þetta umfjöllunarefninu við?</string>
   <string name="review_spam_report_problem">ruslsending</string>
   <string name="review_c_violation_report_question">Það brýtur á móti höfundarrétti því það er</string>
-  <string name="review_category_yes_button_text">NEI, RANGT FLOKKAÐ</string>
-  <string name="review_category_no_button_text">LÍTUR VEL ÚT</string>
-  <string name="review_spam_yes_button_text">NEI, KEMUR EFNINU EKKI VIÐ</string>
-  <string name="review_spam_no_button_text">LÍTUR VEL ÚT</string>
-  <string name="review_copyright_yes_button_text">NEI, HÖFUNDARRÉTTARBROT</string>
-  <string name="review_copyright_no_button_text">LÍTUR VEL ÚT</string>
-  <string name="review_thanks_yes_button_text">JÁ, ÞVÍ EKKI</string>
-  <string name="review_thanks_no_button_text">NÆSTA MYND</string>
+  <string name="review_category_yes_button_text" fuzzy="true">NEI, RANGT FLOKKAÐ</string>
+  <string name="review_category_no_button_text" fuzzy="true">LÍTUR VEL ÚT</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">NEI, KEMUR EFNINU EKKI VIÐ</string>
+  <string name="review_spam_no_button_text" fuzzy="true">LÍTUR VEL ÚT</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">NEI, HÖFUNDARRÉTTARBROT</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">LÍTUR VEL ÚT</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">JÁ, ÞVÍ EKKI</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">NÆSTA MYND</string>
   <string name="no_image">Enagar myndir notaðar</string>
   <string name="no_image_reverted">Engar myndir endurstilltar</string>
   <string name="no_image_uploaded">Engar myndir sendar inn</string>

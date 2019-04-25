@@ -479,14 +479,14 @@
   <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">Den bryter mot upphovsrätten eftersom den är</string>
   <string name="review_c_violation_report_problem">upphovsrättsbrott</string>
-  <string name="review_category_yes_button_text">NEJ, FELKATEGORISERAD</string>
-  <string name="review_category_no_button_text">VERKAR OKEJ</string>
-  <string name="review_spam_yes_button_text">NEJ, IRRELEVANT</string>
-  <string name="review_spam_no_button_text">VERKAR OKEJ</string>
-  <string name="review_copyright_yes_button_text">NEJ, UPPHOVSBROTT</string>
-  <string name="review_copyright_no_button_text">VERKAR OKEJ</string>
-  <string name="review_thanks_yes_button_text">VISST, VARFÖR INTE</string>
-  <string name="review_thanks_no_button_text">NÄSTA BILD</string>
+  <string name="review_category_yes_button_text" fuzzy="true">NEJ, FELKATEGORISERAD</string>
+  <string name="review_category_no_button_text" fuzzy="true">VERKAR OKEJ</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">NEJ, IRRELEVANT</string>
+  <string name="review_spam_no_button_text" fuzzy="true">VERKAR OKEJ</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">NEJ, UPPHOVSBROTT</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">VERKAR OKEJ</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">VISST, VARFÖR INTE</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">NÄSTA BILD</string>
   <string name="skip_image_explanation">När du klickar på knappen får du en annan bild som laddades upp nyligen från Wikimedia Commons</string>
   <string name="review_image_explanation">Du kan granska bilder och förbättra kvaliteten för Wikimedia Commons.\n De fyra granskningsparametrarna är: \n - Är denna bild relevant \n - Följer denna bild upphovsrättsreglerna? \n - Är denna bild riktigt kategoriserad? \n - Om allting får bra kan du också tacka bidragsgivaren.</string>
   <plurals name="receiving_shared_content">

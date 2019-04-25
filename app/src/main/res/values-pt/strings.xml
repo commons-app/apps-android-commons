@@ -487,14 +487,14 @@
   <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">Constitui uma infringência de direitos de autor porque é</string>
   <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text">NÃO, MAL CATEGORIZADO</string>
-  <string name="review_category_no_button_text">PARECE BEM</string>
-  <string name="review_spam_yes_button_text">NÃO, FORA DO ÂMBITO</string>
-  <string name="review_spam_no_button_text">PARECE BEM</string>
-  <string name="review_copyright_yes_button_text">NÃO, INFRINGIMENTO DE DIREITOS DE AUTOR</string>
-  <string name="review_copyright_no_button_text">PARECE BEM</string>
-  <string name="review_thanks_yes_button_text">SIM, POR QUE NÃO?</string>
-  <string name="review_thanks_no_button_text">IMAGEM SEGUINTE</string>
+  <string name="review_category_yes_button_text" fuzzy="true">NÃO, MAL CATEGORIZADO</string>
+  <string name="review_category_no_button_text" fuzzy="true">PARECE BEM</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">NÃO, FORA DO ÂMBITO</string>
+  <string name="review_spam_no_button_text" fuzzy="true">PARECE BEM</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">NÃO, INFRINGIMENTO DE DIREITOS DE AUTOR</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">PARECE BEM</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">SIM, POR QUE NÃO?</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">IMAGEM SEGUINTE</string>
   <string name="skip_image_explanation">Clicar este botão dá-lhe outra imagem carregada recentemente da wiki Wikimedia Commons</string>
   <string name="review_image_explanation">Pode rever imagens e melhorar a qualidade da wiki Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está enquadrada no nosso âmbito?\n- Esta imagem respeita as regras dos direitos de autor?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, também poderá agradecer ao contribuidor.</string>
   <plurals name="receiving_shared_content">
@@ -515,6 +515,8 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
+  <string name="previous_image_title_description">Copiar título e descrição anteriores</string>
+  <string name="previous_button_tooltip_message">Clique para reutilizar o título e a descrição que inseriu na sua fotografia anterior e adequá-los à atual</string>
   <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">SALTAR ESTA IMAGEM</string>

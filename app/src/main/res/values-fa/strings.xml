@@ -393,11 +393,11 @@
   <string name="send_thank_toast">در حال ارسال تشکر برای %1$s</string>
   <string name="review_category">آیا این به درستی رده‌بندی شده‌است؟</string>
   <string name="review_spam_report_problem">هرزنامه</string>
-  <string name="review_category_no_button_text">خوب به نظر می‌رسد</string>
-  <string name="review_spam_no_button_text">خوب به نظر می‌رسد</string>
-  <string name="review_copyright_no_button_text">خوب به نظر می‌رسد</string>
-  <string name="review_thanks_yes_button_text">بله، چرا که نه</string>
-  <string name="review_thanks_no_button_text">تصویر بعدی</string>
+  <string name="review_category_no_button_text" fuzzy="true">خوب به نظر می‌رسد</string>
+  <string name="review_spam_no_button_text" fuzzy="true">خوب به نظر می‌رسد</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">خوب به نظر می‌رسد</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">بله، چرا که نه</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">تصویر بعدی</string>
   <string name="no_image_reverted">تصویر برگردانده نشد</string>
   <string name="no_image_uploaded">هیچ تصویری بارگذاری نشد</string>
   <string name="menu_option_archived">نمایش بایگانی‌شده</string>

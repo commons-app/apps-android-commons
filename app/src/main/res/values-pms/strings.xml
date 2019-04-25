@@ -473,14 +473,14 @@
   <string name="review_spam_report_problem">rumenta</string>
   <string name="review_c_violation_report_question">A l\'é na violassion dij drit d\'autor përché a l\'é</string>
   <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text">NÒ, EROR ËD CATEGORÌA</string>
-  <string name="review_category_no_button_text">A SMIJA GIUST</string>
-  <string name="review_spam_yes_button_text">NÒ, FÒRA ARGOMENT</string>
-  <string name="review_spam_no_button_text">A SMIJA GIUST</string>
-  <string name="review_copyright_yes_button_text">NÒ, VIOLASSION DIJ DRIT D\'AUTOR</string>
-  <string name="review_copyright_no_button_text">A SMIJA CH\'A VADA BIN</string>
-  <string name="review_thanks_yes_button_text">É, PËRCHÉ NÒ</string>
-  <string name="review_thanks_no_button_text">PLANCIA APRESS</string>
+  <string name="review_category_yes_button_text" fuzzy="true">NÒ, EROR ËD CATEGORÌA</string>
+  <string name="review_category_no_button_text" fuzzy="true">A SMIJA GIUST</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">NÒ, FÒRA ARGOMENT</string>
+  <string name="review_spam_no_button_text" fuzzy="true">A SMIJA GIUST</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">NÒ, VIOLASSION DIJ DRIT D\'AUTOR</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">A SMIJA CH\'A VADA BIN</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">É, PËRCHÉ NÒ</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">PLANCIA APRESS</string>
   <string name="skip_image_explanation">Sgnaché ansima a \'s boton a-j darà n\'àutra plancia carià ëd recent ëd Wikimedia Comun</string>
   <string name="review_image_explanation">A peul revisioné le plance e amelioré la qualità ëd Wikimedia Comun.\nIj quatr paràmeter dla revision a son:\n- Costa plancia a l\'é an argoment?\n- Costa plancia a rëspeta le régole ëd drit d\'autor?\n- Costa plancia a l\'é categorisà për da bin?\n- Si tut a va bin, a peul ëdcò aringrassié ël contributor.</string>
   <plurals name="receiving_shared_content">

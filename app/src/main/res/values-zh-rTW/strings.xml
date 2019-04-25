@@ -483,14 +483,14 @@
   <string name="review_spam_report_problem">垃圾內容</string>
   <string name="review_c_violation_report_question">這侵犯版權是因為</string>
   <string name="review_c_violation_report_problem">侵犯版權</string>
-  <string name="review_category_yes_button_text">不，缺少分類</string>
-  <string name="review_category_no_button_text">看起來沒問題</string>
-  <string name="review_spam_yes_button_text">不，超出範圍</string>
-  <string name="review_spam_no_button_text">看起來沒問題</string>
-  <string name="review_copyright_yes_button_text">不，侵犯版權</string>
-  <string name="review_copyright_no_button_text">看起來沒問題</string>
-  <string name="review_thanks_yes_button_text">是的，為何不</string>
-  <string name="review_thanks_no_button_text">下一張圖片</string>
+  <string name="review_category_yes_button_text" fuzzy="true">不，缺少分類</string>
+  <string name="review_category_no_button_text" fuzzy="true">看起來沒問題</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">不，超出範圍</string>
+  <string name="review_spam_no_button_text" fuzzy="true">看起來沒問題</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">不，侵犯版權</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">看起來沒問題</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">是的，為何不</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">下一張圖片</string>
   <string name="skip_image_explanation">點擊此按鈕會提供給您其它近期從維基共享資源上傳的圖片</string>
   <string name="review_image_explanation">您可以檢閱和改善維基共享資源的品質。\n檢閱的四個項目有：\n - 此圖片是否符合範圍？\n - 此圖片是否遵守版權規範？\n - 此圖片是否有分類正確？\n - 如果一切沒問題，您可以感謝貢獻者。</string>
   <plurals name="receiving_shared_content">
