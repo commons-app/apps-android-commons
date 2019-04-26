@@ -3,7 +3,7 @@ package fr.free.nrw.commons.utils;
 /**
  * Utilities class for miscellaneous strings
  */
-public class StringUtils {
+public class LangCodeUtils {
     /**
      * Replaces the deprecated ISO-639 language codes used by Android with the updated ISO-639-1.
      * @param code Language code you want to update.
