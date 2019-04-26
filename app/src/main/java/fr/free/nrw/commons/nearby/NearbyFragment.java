@@ -729,6 +729,9 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                     } else {
                         if (snackbar == null) {
                             snackbar = Snackbar.make(view, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
+                            if (nearbyMapFragment != null && nearbyMapFragment.searchThisAreaButton != null) {
+                                nearbyMapFragment.searchThisAreaButton.setVisibility(View.GONE);
+                            }
                         }
 
                         isNetworkErrorOccured = true;
