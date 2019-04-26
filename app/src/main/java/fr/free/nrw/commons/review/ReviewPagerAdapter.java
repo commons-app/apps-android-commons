@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import fr.free.nrw.commons.media.model.MwQueryPage;
 
 public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
     ReviewImageFragment[] reviewImageFragments;

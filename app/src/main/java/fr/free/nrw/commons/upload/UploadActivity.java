@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import com.google.android.material.textfield.TextInputLayout;
@@ -11,12 +12,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.text.Html;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -38,6 +38,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -61,6 +62,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -104,6 +106,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     @BindView(R.id.bottom_card_next) Button next;
     @BindView(R.id.bottom_card_previous) Button previous;
     @BindView(R.id.bottom_card_add_desc) Button bottomCardAddDescription;
+    @BindView(R.id.prev_title_desc) Button prevTitleDecs;
     @BindView(R.id.categories_subtitle) TextView categoriesSubtitle;
     @BindView(R.id.license_subtitle) TextView licenseSubtitle;
     @BindView(R.id.please_wait_text_view) TextView pleaseWaitTextView;
@@ -124,8 +127,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     // Final Submission
     @BindView(R.id.license_title) TextView licenseTitle;
-    @BindView(R.id.share_license_summary) TextView licenseSummary;
-    @BindView(R.id.media_upload_policy) TextView licensePolicy;
+    @BindView(R.id.share_license_summary) HtmlTextView licenseSummary;
     @BindView(R.id.license_list) Spinner licenseSpinner;
     @BindView(R.id.submit) Button submit;
     @BindView(R.id.license_previous) Button licensePrevious;
@@ -134,6 +136,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     private DescriptionsAdapter descriptionsAdapter;
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private ProgressDialog progressDialog;
+    private boolean multipleUpload = false, flagForSubmit = false;
 
 
     @SuppressLint("CheckResult")
@@ -152,7 +155,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         configureNavigationButtons();
         configureCategories();
         configureLicenses();
-        configurePolicy();
 
         presenter.init();
 
@@ -220,9 +222,10 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     @Override
     public void updateRightCardContent(boolean gpsPresent) {
-        if(gpsPresent){
+        if (gpsPresent) {
             rightCardMapButton.setVisibility(View.VISIBLE);
-        }else{
+        }
+        else {
             rightCardMapButton.setVisibility(View.GONE);
         }
         //The card should be disabled if it has no buttons.
@@ -234,6 +237,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                                         int stepCount,
                                         UploadModel.UploadItem uploadItem,
                                         boolean isShowingItem) {
+        boolean saveForPrevImage = false;
+        int singleUploadStepCount = 3;
+
         String cardTitle = getResources().getString(R.string.step_count, currentStep, stepCount);
         String cardSubTitle = getResources().getString(R.string.image_in_set_label, currentStep);
         bottomCardTitle.setText(cardTitle);
@@ -243,6 +249,13 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         if (currentStep == stepCount) {
             dismissKeyboard();
         }
+        if (stepCount > singleUploadStepCount) {
+            multipleUpload = true;
+        }
+        if (multipleUpload && currentStep != 1) {
+            saveForPrevImage = true;
+        }
+        configurePrevButton(saveForPrevImage);
         if(isShowingItem) {
             descriptionsAdapter.setItems(uploadItem.getTitle(), uploadItem.getDescriptions());
             rvDescriptions.setAdapter(descriptionsAdapter);
@@ -271,8 +284,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     public void updateLicenseSummary(String selectedLicense, int imageCount) {
         String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense) + "'>" +
                 getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>";
-
-          setTextViewHTML(licenseSummary, getResources().getQuantityString(R.plurals.share_license_summary, imageCount, licenseHyperLink));
+        licenseSummary.setHtmlText(getResources().getQuantityString(R.plurals.share_license_summary, imageCount, licenseHyperLink));
     }
 
     @Override
@@ -348,7 +360,7 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
 
     @Override
     public void setBottomCardState(boolean state) {
-        updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next, bottomCardAddDescription);
+        updateCardState(state, bottomCardExpandButton, rvDescriptions, previous, next, prevTitleDecs, bottomCardAddDescription);
     }
 
 
@@ -438,47 +450,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         }
     }
 
-    /**
-     * Parses links from HTML string, and makes the links clickable in the specified TextView.<br>
-     * Uses {@link #makeLinkClickable(SpannableStringBuilder, URLSpan)}.
-     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
-     */
-    private void setTextViewHTML(TextView text, String html)
-    {
-        CharSequence sequence = Html.fromHtml(html);
-        SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
-        URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
-        for (URLSpan span : urls) {
-            makeLinkClickable(strBuilder, span);
-        }
-        text.setText(strBuilder);
-        text.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
-    /**
-     * Sets onClick handler to launch browser for the specified URLSpan.
-     * @see <a href="https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks">Source</a>
-     */
-    private void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span)
-    {
-        int start = strBuilder.getSpanStart(span);
-        int end = strBuilder.getSpanEnd(span);
-        int flags = strBuilder.getSpanFlags(span);
-        ClickableSpan clickable = new ClickableSpan() {
-            public void onClick(View view) {
-                // Handle hyperlink click
-                String hyperLink = span.getURL();
-                launchBrowser(hyperLink);
-            }
-        };
-        strBuilder.setSpan(clickable, start, end, flags);
-        strBuilder.removeSpan(span);
-    }
-
-    private void launchBrowser(String hyperLink) {
-        Utils.handleWebUrl(this, Uri.parse(hyperLink));
-    }
-
     private void configureLicenses() {
         licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -506,6 +477,13 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
     }
 
     private void configureBottomCard() {
+        boolean flagVal = directKvStore.getBoolean("flagForSubmit");
+        if(flagVal){
+            prevTitleDecs.setVisibility(View.VISIBLE);
+        }
+        else {
+            prevTitleDecs.setVisibility(View.INVISIBLE);
+        }
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
         bottomCard.setOnClickListener(v -> presenter.toggleBottomCardState());
         bottomCardAddDescription.setOnClickListener(v -> addNewDescription());
@@ -520,6 +498,49 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         rightCardMapButton.setOnClickListener(v -> presenter.openCoordinateMap());
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    public void configurePrevButton(Boolean saveForPrevImage){
+        prevTitleDecs.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.mapbox_info_icon_default), null);
+
+        String name = "prev_";
+        if (saveForPrevImage) {
+            name = name + "image_";
+        } else {
+            name = name + "upload_";
+        }
+        String title = directKvStore.getString(name + "title");
+        Title t = new Title();
+        t.setTitleText(title);
+
+        List<Description> finalDesc = new LinkedList<>();
+        int descCount = directKvStore.getInt(name + "descCount");
+        for (int i = 0; i < descCount; i++) {
+            Description description= new Description();
+            String desc = directKvStore.getString(name + "description_<"+Integer.toString(i)+">");
+            description.setDescriptionText(desc);
+            finalDesc.add(description);
+            int position = directKvStore.getInt(name + "spinnerPosition_<"+Integer.toString(i)+">");
+            description.setSelectedLanguageIndex(position);
+        }
+        prevTitleDecs.setOnTouchListener((v, event) -> {
+            // Check this is a touch up event
+            if(event.getAction() != MotionEvent.ACTION_UP) return false;
+            // Check we are tapping within 15px of the info icon
+            int extraTapArea = 15;
+            Drawable info = prevTitleDecs.getCompoundDrawables()[2];
+            int infoHintbox = prevTitleDecs.getWidth() - info.getBounds().width();
+            if (event.getX() + extraTapArea < infoHintbox) return false;
+
+            DialogUtil.showAlertDialog(this, null, getString(R.string.previous_button_tooltip_message), "okay", null, null, null);
+
+            return true;
+        });
+        prevTitleDecs.setOnClickListener((View v) -> {
+            descriptionsAdapter.setItems(t, finalDesc);
+            rvDescriptions.setAdapter(descriptionsAdapter);
+        });
+    }
+
     private void configureNavigationButtons() {
         // Navigation next / previous for each image as we're collecting title + description
         next.setOnClickListener(v -> {
@@ -528,6 +549,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
                 return;
             }
             setTitleAndDescriptions();
+            if (multipleUpload) {
+                savePrevTitleDesc("prev_image_");
+            }
             presenter.handleNext(descriptionsAdapter.getTitle(),
                     descriptionsAdapter.getDescriptions());
         });
@@ -540,6 +564,9 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         // Finally, the previous / submit buttons on the final currentPage of the wizard
         licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
         submit.setOnClickListener(v -> {
+            flagForSubmit = true;
+            directKvStore.putBoolean("flagForSubmit", flagForSubmit);
+            savePrevTitleDesc("prev_upload_");
             Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG).show();
             presenter.handleSubmit(categoriesModel);
             finish();
@@ -557,10 +584,6 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         categoriesAdapter = new UploadCategoriesAdapterFactory(categoriesModel).create(new ArrayList<>());
         categoriesList.setLayoutManager(new LinearLayoutManager(this));
         categoriesList.setAdapter(categoriesAdapter);
-    }
-
-    private void configurePolicy() {
-        setTextViewHTML(licensePolicy, getString(R.string.media_upload_policy));
     }
 
     @SuppressLint("CheckResult")
@@ -713,5 +736,16 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         args.putString("possibleImagePath", possibleFilePath);
         newFragment.setArguments(args);
         newFragment.show(getSupportFragmentManager(), "dialog");
+    }
+
+    public void savePrevTitleDesc(String name){
+
+        directKvStore.putString(name + "title", descriptionsAdapter.getTitle().toString());
+        int n = descriptionsAdapter.getItemCount() - 1;
+        directKvStore.putInt(name + "descCount", n);
+        for (int i = 0; i < n; i++) {
+            directKvStore.putString(name + "description_<"+Integer.toString(i)+">", descriptionsAdapter.getDescriptions().get(i).getDescriptionText());
+            directKvStore.putInt(name + "spinnerPosition_<" + Integer.toString(i) + ">", descriptionsAdapter.getDescriptions().get(i).getSelectedLanguageIndex());
+        }
     }
 }

@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v2.10.2
+- Fixed remaining issues with date image taken
+- Fixed database crash
+
 ## v2.10.1
 - Fixed "stuck before category selection screen" bug
 - Fixed notification taps

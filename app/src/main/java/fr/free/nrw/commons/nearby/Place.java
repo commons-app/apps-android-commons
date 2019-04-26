@@ -3,12 +3,14 @@ package fr.free.nrw.commons.nearby;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import org.apache.commons.lang3.StringUtils;
+
 import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.utils.PlaceUtils;
-import fr.free.nrw.commons.utils.StringUtils;
 import timber.log.Timber;
 
 /**
@@ -47,7 +49,7 @@ public class Place implements Parcelable {
     public static Place from(NearbyResultItem item) {
         String itemClass = item.getClassName().getValue();
         String classEntityId = "";
-        if(!StringUtils.isNullOrWhiteSpace(itemClass)) {
+        if(!StringUtils.isBlank(itemClass)) {
             classEntityId = itemClass.replace("http://www.wikidata.org/entity/", "");
         }
         return new Place(

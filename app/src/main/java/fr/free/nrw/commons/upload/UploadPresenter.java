@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -11,7 +12,6 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.CustomProxy;
-import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -21,6 +21,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
@@ -117,6 +118,7 @@ public class UploadPresenter {
                     List<Description> descriptions) {
         Timber.e("Inside handleNext");
         view.showProgressDialog();
+        setTitleAndDescription(title, descriptions);
         compositeDisposable.add(uploadModel.getImageQuality(uploadModel.getCurrentItem(), true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -166,7 +168,7 @@ public class UploadPresenter {
                 break;
             default:
                 String errorMessageForResult = getErrorMessageForResult(context, errorCode);
-                if (StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
+                if (StringUtils.isBlank(errorMessageForResult)) {
                     return;
                 }
                 view.showBadPicturePopup(errorMessageForResult);
@@ -324,7 +326,15 @@ public class UploadPresenter {
      * Sets the list of licences and the default license.
      */
     private void updateLicenses() {
-        String selectedLicense = directKvStore.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        String selectedLicense = directKvStore.getString(Prefs.DEFAULT_LICENSE,
+            Prefs.Licenses.CC_BY_SA_4);//CC_BY_SA_4 is the default one used by the commons web app
+        try {//I have to make sure that the stored default license was not one of the deprecated one's
+            Utils.licenseNameFor(selectedLicense);
+        } catch (IllegalStateException exception) {
+            Timber.e(exception.getMessage());
+            selectedLicense = Prefs.Licenses.CC_BY_SA_4;
+            directKvStore.putString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_4);
+        }
         view.updateLicenses(uploadModel.getLicenses(), selectedLicense);
         view.updateLicenseSummary(selectedLicense, uploadModel.getCount());
     }

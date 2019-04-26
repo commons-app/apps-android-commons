@@ -161,7 +161,7 @@
   <string name="detail_license_empty">Nieznana licencja</string>
   <string name="menu_refresh">Odśwież</string>
   <string name="read_storage_permission_rationale" fuzzy="true">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
-  <string name="write_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Pobliskie miejsca</string>

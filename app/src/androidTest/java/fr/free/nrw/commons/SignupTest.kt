@@ -8,7 +8,6 @@ import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.filters.MediumTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import fr.free.nrw.commons.auth.LoginActivity
@@ -18,7 +17,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@MediumTest
 @RunWith(AndroidJUnit4::class)
 class SignupTest {
     @get:Rule
@@ -42,5 +40,10 @@ class SignupTest {
                 .perform(click())
         intended(hasComponent(SignupActivity::class.java.name))
         Intents.release()
+    }
+
+    @Test
+    fun orientationChange() {
+        UITestHelper.changeOrientation(activityRule)
     }
 }

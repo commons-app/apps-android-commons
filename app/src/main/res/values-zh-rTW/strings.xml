@@ -88,11 +88,9 @@
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">開始 %1$d 次上傳</item>
-    <item quantity="other">開始 %1$d 次上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d 次上傳</item>
-    <item quantity="other">%1$d 次上傳</item>
   </plurals>
   <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
   <string name="categories_skip_explanation">為您的圖片添加分類，使別人在維基共享資源更容易找到。\n\n開始輸入以添加分類。</string>
@@ -177,7 +175,7 @@
   <string name="menu_refresh">重新整理</string>
   <string name="storage_permission_title">請求存儲裝置權限</string>
   <string name="read_storage_permission_rationale">必要權限：讀取外部存儲裝置。否則應用程式無法存取您的圖庫。</string>
-  <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。否則應用程式無法取用您的相機。</string>
+  <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。否則應用程式無法取用您的相機/圖庫。</string>
   <string name="location_permission_rationale">可有可無的權限：獲取目前的地理位置，以用於分類建議</string>
   <string name="ok">好</string>
   <string name="title_activity_nearby">附近地點</string>
@@ -195,7 +193,7 @@
   <string name="media_detail_coordinates">座標</string>
   <string name="media_detail_coordinates_empty">未提供</string>
   <string name="become_a_tester_title">成為測試人員</string>
-  <string name="become_a_tester_description">選擇加入我們在 Google Play 的 beta channel，以提早取用新功能及程式修正</string>
+  <string name="become_a_tester_description">選擇加入我們在 Google Play 上的 beta 測試版本，以提早取用新功能及程式修正</string>
   <string name="_2fa_code">雙重驗證代碼</string>
   <string name="number_of_uploads">我的最近上傳限制</string>
   <string name="maximum_limit">最大限制</string>
@@ -257,7 +255,7 @@
   <string name="upload_problem_different_geolocation">此圖片是在不同的地點拍攝。</string>
   <string name="upload_problem_fbmd">請僅上傳您自己拍攝的圖片。不要上傳您從別人臉書帳號裡所找到的圖片。</string>
   <string name="upload_problem_do_you_continue">您仍要上傳此圖片嗎？</string>
-  <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路裡下載來的圖片。</string>
+  <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
   <string name="give_permission">給予權限</string>
   <string name="use_external_storage">使用外部存儲裝置</string>
   <string name="use_external_storage_summary">在您的裝置上使用照相機應用程式來儲存照片</string>
@@ -341,7 +339,7 @@
   <string name="quiz_back_button">如果您持續上傳需要刪除的圖片，您的帳號可能會被封禁。你確定要結束測驗嗎？</string>
   <string name="quiz_alert_message">超過 %1$s 由您上傳的圖片都遭到刪除了。如果你持續上傳需要刪除的圖片，您的帳號可能會遭到封禁。\n\n您要不要重新閱覽教程，然後再做一次測驗，好讓您學習分辨哪些類型的圖片你可以上傳、哪些不可以？</string>
   <string name="selfie_answer">自拍照沒有什麼百科價值。除非已經有維基百科的條目介紹您，否則請不要上傳拍攝您自己的照片。</string>
-  <string name="taj_mahal_answer">在大多數的國家，上傳古蹟或室外景的照片是沒有問題的。請留意，臨時性的戶外藝術裝置常常是有著作權保護的，不可上傳。</string>
+  <string name="taj_mahal_answer">在大多數的國家，上傳古蹟或室外景的照片是沒有問題的。請留意，臨時性的戶外裝置藝術常常是有著作權保護的，不可上傳。</string>
   <string name="screenshot_answer">網站的螢幕截圖被視為衍生作品，受到該網站本身所有著作權保護。這些截圖可以在獲得原作者許可之後使用。若未經許可，您根據他們的作品而創作的任何藝術品，在法律上均會被視為未經原作者許可的複製品。</string>
   <string name="blurry_image_answer">收錄高畫質圖像是維基共享資源的目標之一，所以不應該上傳模糊的圖片。儘量試著只上傳光線良好的優良圖片。</string>
   <string name="construction_event_answer">在維基共享資源上，展現科技或文化的圖片很受到歡迎。</string>
@@ -454,8 +452,8 @@
   <string name="check_category_adding_template">添加用於分類檢查的模板</string>
   <string name="check_category_notification_title">請求%1$s的分類檢查</string>
   <string name="check_category_edit_summary">請求分類檢查</string>
-  <string name="check_category_success_title">請求分類檢查：成功</string>
-  <string name="check_category_failure_title">請求分類檢查：失敗</string>
+  <string name="check_category_success_title">分類檢查已請求</string>
+  <string name="check_category_failure_title">分類檢查請求無效</string>
   <string name="check_category_success_message">成功請求%1$s的分類檢查</string>
   <string name="check_category_failure_message">無法請求%1$s的分類檢查</string>
   <string name="check_category_toast">請求%1$s的分類檢查</string>
@@ -474,7 +472,7 @@
   <string name="send_thank_toast">為%1$s發送感謝</string>
   <string name="review_copyright">這是否遵守版權規範？</string>
   <string name="review_category">這有分類正確嗎？</string>
-  <string name="review_spam">這有在範圍內嗎？</string>
+  <string name="review_spam">這有符合範圍嗎？</string>
   <string name="review_thanks">您想要向貢獻者感謝嗎？</string>
   <string name="review_spam_explanation">若此圖片沒有被利用到，點擊「否」來提名刪除。</string>
   <string name="review_copyright_explanation">商標、螢幕截圖、電影海報通常都會違反版權。\n點擊「否」來提名刪除此圖片。</string>
@@ -485,14 +483,16 @@
   <string name="review_spam_report_problem">垃圾內容</string>
   <string name="review_c_violation_report_question">這侵犯版權是因為</string>
   <string name="review_c_violation_report_problem">侵犯版權</string>
-  <string name="review_category_yes_button_text">不，缺少分類</string>
-  <string name="review_category_no_button_text">看起來沒問題</string>
-  <string name="review_spam_yes_button_text">不，超出範圍</string>
-  <string name="review_spam_no_button_text">看起來沒問題</string>
-  <string name="review_copyright_yes_button_text">不，侵犯版權</string>
-  <string name="review_copyright_no_button_text">看起來沒問題</string>
-  <string name="review_thanks_yes_button_text">是的，為何不</string>
-  <string name="review_thanks_no_button_text">下一張圖片</string>
+  <string name="review_category_yes_button_text" fuzzy="true">不，缺少分類</string>
+  <string name="review_category_no_button_text" fuzzy="true">看起來沒問題</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">不，超出範圍</string>
+  <string name="review_spam_no_button_text" fuzzy="true">看起來沒問題</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">不，侵犯版權</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">看起來沒問題</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">是的，為何不</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">下一張圖片</string>
+  <string name="skip_image_explanation">點擊此按鈕會提供給您其它近期從維基共享資源上傳的圖片</string>
+  <string name="review_image_explanation">您可以檢閱和改善維基共享資源的品質。\n檢閱的四個項目有：\n - 此圖片是否符合範圍？\n - 此圖片是否遵守版權規範？\n - 此圖片是否有分類正確？\n - 如果一切沒問題，您可以感謝貢獻者。</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
     <item quantity="other">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
@@ -511,5 +511,10 @@
   <string name="images_featured_explanation">特色圖片是出自於高水準技巧的攝影師或繪圖師，且被維基共享資源社群挑選為在站台上的最高品質圖片。</string>
   <string name="images_via_nearby_explanation">以「附近地點」所上傳的圖片，是透過找出在地圖上地點來上傳的。</string>
   <string name="thanks_received_explanation">此功能允許編輯者透過利用在歷史頁面或是差異頁面上的感謝連結，來發送感謝通知給做出有用編輯的使用者。</string>
+  <string name="previous_image_title_description">複製先前標題與說明</string>
+  <string name="previous_button_tooltip_message">點擊來重新使用您在您的先前圖片所輸入之標題與描述，並修改來配合目前的圖片</string>
+  <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
+  <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
   <string name="skip_image">忽略此圖片</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">下載失敗！因為缺少外部存儲裝置權限緣故，我們無法下載檔案。</string>
 </resources>

@@ -50,6 +50,7 @@ class ContributionsListAdapter extends CursorAdapter {
         final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
         final Contribution contribution = contributionDao.fromCursor(cursor);
 
+        Timber.d("Cursor position is %d", cursor.getPosition());
         DisplayableContribution displayableContribution = new DisplayableContribution(contribution,
                 cursor.getPosition(),
                 new DisplayableContribution.ContributionActions() {

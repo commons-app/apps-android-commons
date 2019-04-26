@@ -157,7 +157,7 @@
   <string name="detail_license_empty">Giấy phép không rõ</string>
   <string name="menu_refresh">Làm tươi</string>
   <string name="read_storage_permission_rationale">Yêu cầu cấp phép: Đọc thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép đọc thiết bị lưu trữ bên ngoài để truy cập kho ảnh của bạn.</string>
-  <string name="write_storage_permission_rationale">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để truy cập máy chụp hình của bạn.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để truy cập máy chụp hình của bạn.</string>
   <string name="location_permission_rationale">Tùy chọn cấp phép: Định vị hiện tại để nhận gợi ý thể loại</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nơi Lân cận</string>

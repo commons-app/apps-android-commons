@@ -46,7 +46,7 @@
   <string name="provider_contributions">မိမိ တင်ထားသည်များ</string>
   <string name="menu_share">မျှဝေ</string>
   <string name="menu_open_in_browser">ဘရောက်ဆာတွင် ကြည့်ရန်</string>
-  <string name="share_title_hint" fuzzy="true">ခေါင်းစဉ်</string>
+  <string name="share_title_hint">ခေါင်းစဉ် (လိုအပ်သည်)</string>
   <string name="add_title_toast">ခေါင်းစဉ်</string>
   <string name="share_description_hint">ဖော်ပြချက်</string>
   <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
@@ -126,23 +126,30 @@
   <string name="detail_panel_cats_loading">ဝန်ဆွဲတင်နေသည်...</string>
   <string name="detail_panel_cats_none">ဘာမှရွေးချယ်မထားပါ</string>
   <string name="detail_description_empty">ဖော်ပြချက် မရှိ</string>
+  <string name="detail_discussion_empty">ဆွေးနွေးချက် မရှိပါ</string>
   <string name="detail_license_empty">အမည်မသိရသော လိုင်စင်</string>
   <string name="menu_refresh">ပြန်လည်ဆန်းသစ်ရန်</string>
   <string name="ok">အိုကေ</string>
   <string name="title_activity_nearby">အနီးအနား နေရာများ</string>
   <string name="no_nearby">အနီးအနား နေရာများ မတွေ့ပါ</string>
   <string name="warning">သတိပေးချက်</string>
+  <string name="upload_image_duplicate">ဤဖိုင်သည် ကွန်မွန်းစ်ပေါ်တွင် ရှိနှင့်ပြီးဖြစ်သည်။ ဆက်လုပ်ရန် သေချာပါသလား။</string>
   <string name="yes">မှန်</string>
   <string name="no">မလုပ်ပါ</string>
   <string name="media_detail_title">ခေါင်းစဉ်</string>
   <string name="media_detail_description">ဖော်ပြချက်</string>
+  <string name="media_detail_discussion">ဆွေးနွေးချက်</string>
   <string name="media_detail_author">စာရေးသူ</string>
   <string name="media_detail_uploaded_date">တင်ခဲ့သည် ရက်စွဲ</string>
   <string name="media_detail_license">လိုင်စင်</string>
   <string name="media_detail_coordinates">ကိုဩဒိနိတ်</string>
+  <string name="media_detail_coordinates_empty">မဖြည့်ထားပါ</string>
   <string name="number_of_uploads">မိမိ၏ လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက်</string>
   <string name="maximum_limit">အများဆုံး ကန့်သတ်ချက်</string>
+  <string name="invalid_zero">သုညသည် မကိုက်ညီပါ</string>
+  <string name="invalid_input">မကိုက်ညီသော ထည့်သွင်းမှု</string>
   <string name="maximum_limit_alert">၅၀၀ ထက်ပို၍ မပြသနိုင်ပါ</string>
+  <string name="enter_valid">ကိုက်ညီသောနံပါတ်တစ်ခု ရိုက်ထည့်ပါ</string>
   <string name="set_limit" fuzzy="true">လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက် သတ်မှတ်ရန်</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
   <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
@@ -152,6 +159,7 @@
   <string name="no_image_found">ပုံ မတွေ့ပါ</string>
   <string name="no_subcategory_found">ကဏ္ဍခွဲများ မတွေ့ရှိပါ</string>
   <string name="upload_image">ရုပ်ပုံ အက်ပလုတ်တင်ရန်</string>
+  <string name="welcome_image_tulip">ခတ္တာပန်း</string>
   <string name="welcome_image_welcome_wikipedia">ဝီကီပီးဒီးယားမှ ကြိုဆိုပါသည်။</string>
   <string name="welcome_image_welcome_copyright">မူပိုင်ခွင့်မှ ကြိုဆိုပါသည်</string>
   <string name="cancel">မလုပ်တော့ပါ</string>
@@ -167,11 +175,13 @@
   <string name="navigation_item_info">ကစားနည်းသင်ကြားရန်</string>
   <string name="navigation_item_notification">အသိပေးချက်များ</string>
   <string name="navigation_item_featured_images">အထူး</string>
+  <string name="navigation_item_review">ပြန်လည်ဆန်းစစ်</string>
   <string name="nearby_needs_permissions">တည်နေရာ ခွင့်ပြုချက်မရှိဘဲ အနီးအနားနေရာများကို မပြနိုင်ပါ</string>
   <string name="no_description_found">ဖော်ပြချက် မတွေ့ပါ</string>
   <string name="nearby_info_menu_commons_article">ကွန်မွန်းစ် ဖိုင်စာမျက်နှာ</string>
   <string name="nearby_info_menu_wikidata_article">ဝီကီးဒေတာ item</string>
   <string name="nearby_info_menu_wikipedia_article">ဝီကီပီးဒီးယား ဆောင်းပါး</string>
+  <string name="upload_problem_image_dark">ရုပ်ပုံမှာ မှောင်လွန်းသည်။</string>
   <string name="give_permission">ခွင့်ပြုချက် ပေးမည်</string>
   <string name="use_external_storage">ပြင်ပြသိုလှောင်ခန်းကို သုံးမည်</string>
   <string name="login_to_your_account">သင်၏အကောင့်သို့ ဝင်ရန်</string>
@@ -195,6 +205,7 @@
   <string name="nearby_wikidata">ဝီကီးဒေတာ</string>
   <string name="nearby_wikipedia">ဝီကီပီးဒီးယား</string>
   <string name="nearby_commons">ကွန်မွန်းစ်</string>
+  <string name="about_faq">&lt;u&gt;မေးလေ့ရှိသည့် မေးခွန်းများ&lt;/u&gt;</string>
   <string name="welcome_skip_button">သင်ခန်းစာကို ကျော်သွားရန်</string>
   <string name="no_internet">အင်တာနက် မရရှိပါ</string>
   <string name="internet_established">အင်တာနက် ရရှိ</string>
@@ -218,6 +229,8 @@
   <string name="error_loading_subcategories">ကဏ္ဍခွဲများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="search_tab_title_media">မီဒီယာ</string>
   <string name="search_tab_title_categories">ကဏ္ဍများ</string>
+  <string name="explore_tab_title_featured">အထူး</string>
+  <string name="explore_tab_title_mobile">မိုလ်ဘိုင်းမှတဆင့် တင်ခဲ့သည်</string>
   <string name="quiz">ထွက်</string>
   <string name="quiz_question_string">ဤရုပ်ပုံကို တင်ရန် အဆင်ပြေပါ့မလား?</string>
   <string name="question">မေးခွန်း</string>
@@ -232,6 +245,8 @@
   <string name="add_description">+ ဖော်ပြချက် ထည့်ရန်</string>
   <string name="delete_recent_searches_dialog">သင့်ရှာဖွေမှု ရာဇဝင်ကို ရှင်းလင်းမည်မှာ သေချာပါသလား?</string>
   <string name="search_history_deleted">ရှာဖွေမှု ရာဇဝင်အား ဖျက်လိုက်ပါပြီ</string>
+  <string name="nominate_delete">ဖျက်ပစ်ရန် အဆိုပြုပါ</string>
+  <string name="delete">ဖျက်ပါ</string>
   <string name="Achievements">အောင်မြင်မှုပန်းတိုင်များ</string>
   <string name="statistics">စာရင်းအင်း</string>
   <string name="statistics_thanks">ကျေးဇူးစကား လက်ခံရရှိ</string>
@@ -242,5 +257,28 @@
   <string name="images_reverted_explanation">ဖျက်ဆီးခြင်းမခံရသည့် ကွန်မွန်းစ်သို့ သင် အက်ပလုတ်တင်ထားသော ရုပ်ပုံများ၏ ရာခိုင်နှုန်း</string>
   <string name="error_occurred">အမှား ဖြစ်ပွားခဲ့သည်</string>
   <string name="notifications_channel_name_all">ကွန်မွန်းစ် အသိပေးချက်</string>
+  <string name="contributions_fragment">ဆောင်ရွက်ချက်များ</string>
+  <string name="nearby_fragment">အနီးအနား</string>
+  <string name="notifications">အသိပေးချက်များ</string>
+  <string name="archived_notifications">အသိပေးချက်များ (မော်ကွန်းတင်ပြီး)</string>
+  <string name="display_nearby_notification">အနီးအနားအသိပေးချက်ကို ပြသရန်</string>
+  <string name="list_sheet">စာရင်း</string>
   <string name="storage_permission">သိုလှောင်ခန်း ခွင်ပြုချက်</string>
+  <string name="next">ရှေ့</string>
+  <string name="previous">နောက်</string>
+  <string name="submit">ထည့်သွင်းရန်</string>
+  <string name="title_page_bookmarks_pictures">ရုပ်ပုံများ</string>
+  <string name="title_page_bookmarks_locations">တည်နေရာများ</string>
+  <string name="desc_language_Worldwide">တစ်ကမ္ဘာလုံး</string>
+  <string name="desc_language_America">အမေရိက</string>
+  <string name="desc_language_Europe">ဥရောပ</string>
+  <string name="desc_language_Middle_East">အရှေ့အလယ်ပိုင်း</string>
+  <string name="desc_language_Africa">အာဖရိက</string>
+  <string name="desc_language_Asia">အာရှ</string>
+  <string name="desc_language_Pacific">ပစိဖိတ်</string>
+  <string name="search_this_area">ဤဧရိယာကို ရှာဖွေပါ</string>
+  <string name="nearby_card_permission_title">ခွင့်ပြုချက် တောင်းခံရန်</string>
+  <string name="nominate_for_deletion_done">ပြီးပြီ</string>
+  <string name="notsure">မသေချာပါ</string>
+  <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
 </resources>

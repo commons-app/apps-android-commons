@@ -13,7 +13,6 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface MediaWikiApi {
-    String getUserAgent();
 
     String getAuthCookie();
 
@@ -34,10 +33,6 @@ public interface MediaWikiApi {
     boolean fileExistsWithName(String fileName) throws IOException;
 
     Single<Boolean> pageExists(String pageName);
-
-    Single<String> findThumbnailByFilename(String filename);
-
-    boolean logEvents(LogBuilder[] logBuilders);
 
     List<String> getSubCategoryList(String categoryName);
 
@@ -103,7 +98,7 @@ public interface MediaWikiApi {
 
 //    Single<CampaignResponseDTO> getCampaigns();
 
-    boolean thank(String editToken, String revision) throws IOException;
+    boolean thank(String editToken, long revision) throws IOException;
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

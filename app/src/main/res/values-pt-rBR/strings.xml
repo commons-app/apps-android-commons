@@ -178,7 +178,7 @@
   <string name="menu_refresh">Atualizar</string>
   <string name="storage_permission_title">Solicitando permissão de armazenamento</string>
   <string name="read_storage_permission_rationale">Permissão necessária: leia o armazenamento externo. App não pode acessar sua galeria sem isso.</string>
-  <string name="write_storage_permission_rationale">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera sem isso.</string>
+  <string name="write_storage_permission_rationale">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera/galeria sem isso.</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual de sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lugares próximos</string>
@@ -455,8 +455,8 @@
   <string name="check_category_adding_template">Adicionando predefinição para verificação de categoria</string>
   <string name="check_category_notification_title">Solicitando verificação de categoria para %1$s</string>
   <string name="check_category_edit_summary">Solicitando verificação de categoria</string>
-  <string name="check_category_success_title">Solicitação de verificação de categoria: Sucesso</string>
-  <string name="check_category_failure_title">Solicitar verificação de categoria: falha</string>
+  <string name="check_category_success_title">Verificação de categoria solicitada</string>
+  <string name="check_category_failure_title">A solicitação de verificação de categoria não funcionou</string>
   <string name="check_category_success_message">Verificação de categoria solicitada com êxito para %1$s</string>
   <string name="check_category_failure_message">Não foi possível solicitar a verificação de categoria para %1$s</string>
   <string name="check_category_toast">Solicitando verificação de categoria para %1$s</string>
@@ -486,14 +486,16 @@
   <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">É violação de direitos autorais porque é</string>
   <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text">NÃO, MIS-CATEGORIZADO</string>
-  <string name="review_category_no_button_text">PARECE BEM</string>
-  <string name="review_spam_yes_button_text">NÃO, FORA DE ESCOPO</string>
-  <string name="review_spam_no_button_text">PARECE BEM</string>
-  <string name="review_copyright_yes_button_text">NÃO, VIOLAÇÃO DE DIREITOS AUTORAIS</string>
-  <string name="review_copyright_no_button_text">PARECE BEM</string>
-  <string name="review_thanks_yes_button_text">SIM, PORQUE NÃO</string>
-  <string name="review_thanks_no_button_text">PRÓXIMA IMAGEM</string>
+  <string name="review_category_yes_button_text" fuzzy="true">NÃO, MIS-CATEGORIZADO</string>
+  <string name="review_category_no_button_text" fuzzy="true">PARECE BEM</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">NÃO, FORA DE ESCOPO</string>
+  <string name="review_spam_no_button_text" fuzzy="true">PARECE BEM</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">NÃO, VIOLAÇÃO DE DIREITOS AUTORAIS</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">PARECE BEM</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">SIM, PORQUE NÃO</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">PRÓXIMA IMAGEM</string>
+  <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>
+  <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commoms.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
     <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>
@@ -512,5 +514,10 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos usuários que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
+  <string name="previous_image_title_description">Copiar título e descrição anterior</string>
+  <string name="previous_button_tooltip_message">Clique para reutilizar o título e a descrição inseridos em sua foto anterior e modificá-lo para se adequar ao seu atual</string>
+  <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
+  <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">PULAR ESTA IMAGEM</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Falha no Download!!. Não podemos fazer o download do arquivo sem permissão de armazenamento externo.</string>
 </resources>

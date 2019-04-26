@@ -186,7 +186,7 @@
   <string name="menu_refresh">Rafraîchir</string>
   <string name="storage_permission_title">Demande d\'autorisation d\'accès au stockage</string>
   <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
-  <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo sans cela.</string>
+  <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo/galerie sans cela.</string>
   <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Endroits à proximité</string>
@@ -463,8 +463,8 @@
   <string name="check_category_adding_template">Ajouter un modèle pour le contrôle de catégorie</string>
   <string name="check_category_notification_title">Demande en cours du contrôle de la catégorie pour %1$s</string>
   <string name="check_category_edit_summary">Demande de contrôle de catégorie</string>
-  <string name="check_category_success_title">Demande de contrôle de catégorie: Succès</string>
-  <string name="check_category_failure_title">Demande de contrôle de catégorie: Echec</string>
+  <string name="check_category_success_title">Contrôle de catégorie démandé</string>
+  <string name="check_category_failure_title">La requête du contrôle de catégorie n\'a pas abouti</string>
   <string name="check_category_success_message">Contrôle de catégorie demandé avec succès pour %1$s</string>
   <string name="check_category_failure_message">Impossible de demander un contrôle de catégorie pour %1$s</string>
   <string name="check_category_toast">Demande en cours du contrôle de la catégorie pour %1$s</string>
@@ -494,14 +494,16 @@
   <string name="review_spam_report_problem">pourriel</string>
   <string name="review_c_violation_report_question">Ceci est une violation des droits d\'auteur parce que c\'est</string>
   <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text">NON, ERREUR DE CATEGORIE</string>
-  <string name="review_category_no_button_text">SEMBLE CORRECT</string>
-  <string name="review_spam_yes_button_text">NON, HORS SUJET</string>
-  <string name="review_spam_no_button_text">SEMBLE CORRECT</string>
-  <string name="review_copyright_yes_button_text">NON, VIOLATION DES DROITS D\'AUTEUR</string>
-  <string name="review_copyright_no_button_text">SEMBLE CORRECT</string>
-  <string name="review_thanks_yes_button_text">OUI, POURQUOI PAS</string>
-  <string name="review_thanks_no_button_text">IMAGE SUIVANTE</string>
+  <string name="review_category_yes_button_text" fuzzy="true">NON, ERREUR DE CATEGORIE</string>
+  <string name="review_category_no_button_text" fuzzy="true">SEMBLE CORRECT</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">NON, HORS SUJET</string>
+  <string name="review_spam_no_button_text" fuzzy="true">SEMBLE CORRECT</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">NON, VIOLATION DES DROITS D\'AUTEUR</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">SEMBLE CORRECT</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">OUI, POURQUOI PAS</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">IMAGE SUIVANTE</string>
+  <string name="skip_image_explanation">Cliquer sur ce bouton vous fournira une autre image récemment téléversée de Wikimédia Communs.</string>
+  <string name="review_image_explanation">Vous pouvez revoir les images et améliorer la qualité de Wikimédia Communs.\n Les quatre paramètres à revoir sont : \n - Cette image est-elle à propos ? \n - Cette image respecte-t-elle les règles de droit d’auteur ? \n - Cette image est-elle bien catégorisée ? \n - Si tout va bien, vous pouvez aussi remercier le contributeur.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Réception de contenu partagé. Le traitement de l\'image peut prendre un certain temps en fonction de la taille de l\'image et de votre matériel</item>
     <item quantity="other">Réception de contenu partagé. Le traitement des images peut prendre un certain temps en fonction de la taille des images et de votre matériel</item>
@@ -517,8 +519,13 @@
   <string name="error_occurred_in_picking_images">Erreur lors de la sélection des images</string>
   <string name="image_chooser_title">Choisir les images à téléverser</string>
   <string name="please_wait">Veuillez patienter…</string>
-  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Communs a choisi comme quelques-unes de la meilleure qualité sur le site.</string>
+  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Communs a choisi comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par les lieux de proximité sont les images téléversées par la découverte des lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionalité permet aux contributeurs d\'envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles – en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
+  <string name="previous_image_title_description">Copier le titre et la description précédente</string>
+  <string name="previous_button_tooltip_message">Cliquer pour réutiliser le titre et la description que vous avez saisis dans votre image précédente et les modifier pour qu\'ils correspondent à l’actuelle</string>
+  <string name="welcome_do_upload_content_description">Bons exemples d\'images à téléverser sur Commons</string>
+  <string name="welcome_dont_upload_content_description">Exemples d\'images à ne pas téléverser</string>
   <string name="skip_image">SAUTER CETTE IMAGE</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Échec du téléchargement ! Nous ne pouvons pas télécharger le fichier sans droit de stockage externe.</string>
 </resources>

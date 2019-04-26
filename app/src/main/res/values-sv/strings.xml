@@ -95,6 +95,7 @@
   <string name="title_activity_signup">Registrera</string>
   <string name="title_activity_featured_images">Utvalda bilder</string>
   <string name="title_activity_category_details">Kategori</string>
+  <string name="title_activity_review">Granskning</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen är en app med öppen källkod som skapas och underhålls av frivilliga från Wikimedias gemenskap. Wikimedia Foundation är inte involverad i skapandet, utvecklingen eller underhållet av appen.</string>
   <string name="about_improve">Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
@@ -170,7 +171,7 @@
   <string name="menu_refresh">Uppdatera</string>
   <string name="storage_permission_title">Begär lagringsbehörighet</string>
   <string name="read_storage_permission_rationale">Nödvändig behörighet: Läs extern lagring. Appen kan inte komma åt ditt galleri utan detta.</string>
-  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera utan detta.</string>
+  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera/galleri utan detta.</string>
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Platser i närheten</string>
@@ -447,8 +448,8 @@
   <string name="check_category_adding_template">Lägger till mall för kategorikontroll</string>
   <string name="check_category_notification_title">Begär kategorikontroll för %1$s</string>
   <string name="check_category_edit_summary">Begär kategorikontroll</string>
-  <string name="check_category_success_title">Begär kategorikontroll: Färdig</string>
-  <string name="check_category_failure_title">Begär kategorikontroll: Misslyckades</string>
+  <string name="check_category_success_title">Begärde kategorikontroll</string>
+  <string name="check_category_failure_title">Begäran av kategorikontroll fungerade inte</string>
   <string name="check_category_success_message">Begärde kategorikontroll för %1$s</string>
   <string name="check_category_failure_message">Kunde inte begära kategorikontroll för %1$s</string>
   <string name="check_category_toast">Begär kategorikontroll för %1$s</string>
@@ -478,14 +479,16 @@
   <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">Den bryter mot upphovsrätten eftersom den är</string>
   <string name="review_c_violation_report_problem">upphovsrättsbrott</string>
-  <string name="review_category_yes_button_text">NEJ, FELKATEGORISERAD</string>
-  <string name="review_category_no_button_text">VERKAR OKEJ</string>
-  <string name="review_spam_yes_button_text">NEJ, IRRELEVANT</string>
-  <string name="review_spam_no_button_text">VERKAR OKEJ</string>
-  <string name="review_copyright_yes_button_text">NEJ, UPPHOVSBROTT</string>
-  <string name="review_copyright_no_button_text">VERKAR OKEJ</string>
-  <string name="review_thanks_yes_button_text">VISST, VARFÖR INTE</string>
-  <string name="review_thanks_no_button_text">NÄSTA BILD</string>
+  <string name="review_category_yes_button_text" fuzzy="true">NEJ, FELKATEGORISERAD</string>
+  <string name="review_category_no_button_text" fuzzy="true">VERKAR OKEJ</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">NEJ, IRRELEVANT</string>
+  <string name="review_spam_no_button_text" fuzzy="true">VERKAR OKEJ</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">NEJ, UPPHOVSBROTT</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">VERKAR OKEJ</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">VISST, VARFÖR INTE</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">NÄSTA BILD</string>
+  <string name="skip_image_explanation">När du klickar på knappen får du en annan bild som laddades upp nyligen från Wikimedia Commons</string>
+  <string name="review_image_explanation">Du kan granska bilder och förbättra kvaliteten för Wikimedia Commons.\n De fyra granskningsparametrarna är: \n - Är denna bild relevant \n - Följer denna bild upphovsrättsreglerna? \n - Är denna bild riktigt kategoriserad? \n - Om allting får bra kan du också tacka bidragsgivaren.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Hämtar delat innehåll. Det kan ta en stund att behandla bilden beroende på bildens storlek och din enhet</item>
     <item quantity="other">Hämtar delat innehåll. Det kan ta en stund att behandla bilderna beroende på bildens storlek och din enhet</item>
@@ -501,7 +504,13 @@
   <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
   <string name="image_chooser_title">Välj bilder att ladda upp</string>
   <string name="please_wait">Var god vänta…</string>
+  <string name="images_featured_explanation">Utmärkta bilder är bilder från skickliga fotografer och illustratörer som gemenskapen på Wikimedia Commons har valt ut som bilder med den högsta kvalitetet på webbplatsen.</string>
   <string name="images_via_nearby_explanation">Bilder som har laddats upp via \"Platser i närheten\" är bilderna som laddas upp genom att upptäcka platser på kartan.</string>
   <string name="thanks_received_explanation">Denna funktion låter redigerare skicka en tackavisering till användare som gör användbara redigeringar – genom att använda en liten tacklänk på historik- eller diff-sidor.</string>
+  <string name="previous_image_title_description">Kopiera föregående titel och beskrivning</string>
+  <string name="previous_button_tooltip_message">Klicka för att återanvända titeln och beskrivningen du använde i din föregående bild och ändra det för att passa din nuvarande</string>
+  <string name="welcome_do_upload_content_description">Exempel på bra bilder att ladda upp på Commons</string>
+  <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
   <string name="skip_image">HOPPA ÖVER DENNA BILD</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Nedladdning misslyckades!! Vi kan inte ladda ned filen utan behörighet för extern lagring.</string>
 </resources>

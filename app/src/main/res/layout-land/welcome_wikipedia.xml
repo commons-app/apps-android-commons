@@ -1,47 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/tutorialBackground">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/center_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.50" />
-
+    android:background="?attr/tutorialBackground"
+    android:gravity="center"
+    android:paddingLeft="@dimen/huge_gap"
+    android:paddingRight="@dimen/huge_gap">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/standard_gap"
-        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/large_gap"
+        android:layout_weight="0.5"
         android:adjustViewBounds="true"
         android:contentDescription="@string/welcome_image_welcome_wikipedia"
-        android:src="@drawable/welcome_wikipedia"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/center_guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/welcome_wikipedia" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/standard_gap"
-        android:layout_marginStart="@dimen/standard_gap"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/center_guideline"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_weight="0.5"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:maxWidth="240dp"
+            android:layout_marginTop="@dimen/standard_gap"
+            android:layout_marginBottom="@dimen/standard_gap"
             android:text="@string/tutorial_1_text"
             android:textAlignment="center"
             android:textColor="@android:color/white"
@@ -51,11 +36,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:maxWidth="240dp"
-            android:paddingTop="@dimen/standard_gap"
             android:text="@string/tutorial_1_subtext"
             android:textAlignment="center"
             android:textColor="@android:color/white" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

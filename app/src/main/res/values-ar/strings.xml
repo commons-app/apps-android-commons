@@ -175,7 +175,7 @@
   <string name="menu_refresh">تحديث</string>
   <string name="storage_permission_title">طلب إذن التخزين</string>
   <string name="read_storage_permission_rationale">صلاحية مطلوبة: قراءة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
-  <string name="write_storage_permission_rationale">صلاحية مطلوبة: كتابة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
+  <string name="write_storage_permission_rationale">صلاحية مطلوبة: اكتب وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور/الكاميرا الخاصة بك بدونها.</string>
   <string name="location_permission_rationale">صلاحية اختيارية: احصل على الموقع الحالي لاقتراحات التصنيفات</string>
   <string name="ok">موافق</string>
   <string name="title_activity_nearby">الأماكن القريبة</string>
@@ -452,8 +452,8 @@
   <string name="check_category_adding_template">تجري إضافة قالب لفخص التصنيف</string>
   <string name="check_category_notification_title">جارٍ طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_edit_summary">جارٍ طلب التحقق من التصنيف</string>
-  <string name="check_category_success_title">طلب التحقق من التصنيف: نجاح</string>
-  <string name="check_category_failure_title">طلب التحقق من التصنيف: فشل</string>
+  <string name="check_category_success_title">تم طلب التحقق من التصنيف</string>
+  <string name="check_category_failure_title">طلب التحقق من التصنيف لم ينجح</string>
   <string name="check_category_success_message">تم طلب التحقق بنجاح من التصنيف %1$s</string>
   <string name="check_category_failure_message">لا يمكن طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_toast">جارٍ طلب التحقق من التصنيف %1$s</string>
@@ -483,14 +483,16 @@
   <string name="review_spam_report_problem">سخام</string>
   <string name="review_c_violation_report_question">إنه انتهاك لحقوق الطبع والنشر لأنه</string>
   <string name="review_c_violation_report_problem">انتهاك حقوق الطبع والنشر</string>
-  <string name="review_category_yes_button_text">لا، مصنف بشكل خاطئ</string>
-  <string name="review_category_no_button_text">يبدو جيدا</string>
-  <string name="review_spam_yes_button_text">لا، خارج النطاق</string>
-  <string name="review_spam_no_button_text">يبدو جيدا</string>
-  <string name="review_copyright_yes_button_text">لا، انتهاك حقوق النشر</string>
-  <string name="review_copyright_no_button_text">يبدو جيدا</string>
-  <string name="review_thanks_yes_button_text">نعم، لم لا</string>
-  <string name="review_thanks_no_button_text">الصورة التالية</string>
+  <string name="review_category_yes_button_text" fuzzy="true">لا، مصنف بشكل خاطئ</string>
+  <string name="review_category_no_button_text" fuzzy="true">يبدو جيدا</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">لا، خارج النطاق</string>
+  <string name="review_spam_no_button_text" fuzzy="true">يبدو جيدا</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">لا، انتهاك حقوق النشر</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">يبدو جيدا</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">نعم، لم لا</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">الصورة التالية</string>
+  <string name="skip_image_explanation">النقر فوق هذا الزر سيمنحك صورة أخرى مرفوعة مؤخرا من ويكيميديا ​​كومنز</string>
+  <string name="review_image_explanation">يمكنك مراجعة الصور وتحسين جودة ويكيميديا ​​كومنز.\n وسائط اللمراجعة الأربعة هي:\n - هل هذه الصورة في النطاق؟\n - هل تتبع هذه الصورة قواعد حقوق النشر؟\n - هل هذه الصورة مصنفة بشكل صحيح؟\n - إذا سارت الأمور على ما يرام يمكنك أيضا شكر المساهم.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصورة بعض الوقت بناءً على حجم الصور وجهازك</item>
     <item quantity="other">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
@@ -509,5 +511,10 @@
   <string name="images_featured_explanation">الصور المختارة هي صور من مصورين ورسامين ذوي مهارات عالية اختارها مجتمع ويكيميديا ​​كومنز كبعض الأفضل جودة على الموقع.</string>
   <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
   <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
+  <string name="previous_image_title_description">نسخ العنوان/الوصف السابق</string>
+  <string name="previous_button_tooltip_message">انقر لإعادة استخدام العنوان والوصف الذي أدخلته في صورتك السابقة وتعديله ليناسب الحالي</string>
+  <string name="welcome_do_upload_content_description">أمثلة على صور جيدة لرفعها إلى كومنز</string>
+  <string name="welcome_dont_upload_content_description">أمثلة على صور لعدم رفعها</string>
   <string name="skip_image">تخطي هذه الصورة</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">التنزيل فشل!!. لا يمكننا تنزيل الملف دون إذن تخزين خارجي.</string>
 </resources>

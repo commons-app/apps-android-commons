@@ -172,7 +172,7 @@
   <string name="menu_refresh">Gjenoppfrisk</string>
   <string name="storage_permission_title">Ber om lagringstillatelse</string>
   <string name="read_storage_permission_rationale">Nødvendig tillatelse: Lese ekstern lagring. Appen kan ikke få tilgang til galleriet ditt uten dette.</string>
-  <string name="write_storage_permission_rationale">Nødvendig tillatelse: Skriv til ekstern lagring. Appen får ikke tilgang til kameraet ditt uten dette.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Nødvendig tillatelse: Skriv til ekstern lagring. Appen får ikke tilgang til kameraet ditt uten dette.</string>
   <string name="location_permission_rationale">Valgfri tillatelse: Hent nåværende posisjon for kategoriforslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plasser i nærheten</string>

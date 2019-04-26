@@ -160,7 +160,7 @@
   <string name="detail_license_empty">უცნობი ლიცენზია</string>
   <string name="menu_refresh">განახლება</string>
   <string name="read_storage_permission_rationale">ნებართვა: გარე მეხსიერების წაკითხვა. აპლიკაცია ვერ მიწვდება თქვენს გალერეას ამის გარეშე.</string>
-  <string name="write_storage_permission_rationale">ნებართვა: გარე მეხსიერების გამოყენება. აპლიკაცია ვერ მიწვდება თქვენს კამერამდე ამის გარეშე.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">ნებართვა: გარე მეხსიერების გამოყენება. აპლიკაცია ვერ მიწვდება თქვენს კამერამდე ამის გარეშე.</string>
   <string name="location_permission_rationale">დამატებითი ნებართვა: მიმდინარე ადგილმდებარეობის განსაზღვრა კატეგორიის შემოთავაზებისთვის</string>
   <string name="ok">კარგი</string>
   <string name="title_activity_nearby">ახლომდებარე ადგილები</string>

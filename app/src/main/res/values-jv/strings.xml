@@ -49,7 +49,7 @@
   <string name="provider_contributions">Unggahanku</string>
   <string name="menu_share">Dum</string>
   <string name="menu_open_in_browser">Deleng ing Pangluru</string>
-  <string name="share_title_hint" fuzzy="true">Sesirah</string>
+  <string name="share_title_hint">Sesirah (Kudu)</string>
   <string name="add_title_toast">Wènèhi barkas iki sesirah</string>
   <string name="share_description_hint">Wedharan</string>
   <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
@@ -70,10 +70,10 @@
   <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
   <string name="enable_gps">Urubaké GPS</string>
   <string name="contributions_subtitle_zero">Durung ana unggahan</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d unggahan</item>
-    <item quantity="other">%1$d unggahan</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Miwiti %1$d unggahan</item>
@@ -205,8 +205,17 @@
   <string name="nominate_deletion">Usulaké supaya binusek</string>
   <string name="nominated_for_deletion">Gambar iki kausulaké supaya binusek.</string>
   <string name="nominated_see_more">&lt;u&gt;Deleng kaca wèb bab rerincèné&lt;/u&gt;</string>
-  <string name="skip_login">Langkahi</string>
+  <string name="skip_login">Lumpati</string>
   <string name="navigation_item_login">Mlebu log</string>
   <string name="skip_login_title">Apa panjenengan temen ora péngin mlebu log?</string>
+  <string name="about_translate_proceed">Banjuraké</string>
+  <string name="about_translate_cancel">Wurung</string>
+  <string name="retry">Jajal manèh</string>
+  <string name="showcase_view_got_it_button">Mudheng!</string>
+  <string name="menu_search_button">Golèk</string>
+  <string name="search_commons">Golèk ing Commons</string>
+  <string name="title_activity_search">Golèk</string>
+  <string name="search_recent_header">Golèkan mentas waé:</string>
   <string name="question">Pitakon</string>
+  <string name="continue_message">Banjuraké</string>
 </resources>

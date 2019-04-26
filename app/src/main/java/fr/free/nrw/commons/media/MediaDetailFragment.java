@@ -7,7 +7,6 @@ import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -23,6 +22,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
+import org.wikipedia.util.StringUtil;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -34,7 +42,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
@@ -44,9 +51,6 @@ import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
-import fr.free.nrw.commons.utils.DateUtils;
-import fr.free.nrw.commons.utils.StringUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -94,7 +98,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private int initialListTop = 0;
 
     @BindView(R.id.mediaDetailImage)
-    MediaWikiImageView image;
+    SimpleDraweeView image;
     @BindView(R.id.mediaDetailSpacer)
     MediaDetailSpacer spacer;
     @BindView(R.id.mediaDetailTitle)
@@ -183,7 +187,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
         ButterKnife.bind(this,view);
-        seeMore.setText(Html.fromHtml(getString(R.string.nominated_see_more)));
+        seeMore.setText(StringUtil.fromHtml(getString(R.string.nominated_see_more)));
 
         if (isCategoryImage){
             authorLayout.setVisibility(VISIBLE);
@@ -259,7 +263,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void displayMediaDetails() {
         //Always load image from Internet to allow viewing the desc, license, and cats
-        image.setMedia(media);
+        setupImageView();
         title.setText(media.getDisplayTitle());
         desc.setHtmlText(media.getDescription());
         license.setText(media.getLicense());
@@ -269,6 +273,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setTextFields);
         compositeDisposable.add(disposable);
+    }
+
+    /**
+     * Uses two image sources.
+     * - low resolution thumbnail is shown initially
+     * - when the high resolution image is available, it replaces the low resolution image
+     */
+    private void setupImageView() {
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
+                .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+                .setOldController(image.getController())
+                .build();
+        image.setController(controller);
     }
 
     @Override
@@ -285,11 +303,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             detailProvider.unregisterDataSetObserver(dataObserver);
             dataObserver = null;
         }
+        compositeDisposable.clear();
         super.onDestroyView();
     }
 
     private void setTextFields(Media media) {
         this.media = media;
+        setupImageView();
         desc.setHtmlText(prettyDescription(media));
         license.setText(prettyLicense(media));
         coordinates.setText(prettyCoordinates(media));
@@ -319,7 +339,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @OnClick(R.id.mediaDetailLicense)
     public void onMediaDetailLicenceClicked(){
         String url = media.getLicenseUrl();
-        if (!StringUtils.isNullOrWhiteSpace(url) && getActivity() != null) {
+        if (!StringUtils.isBlank(url) && getActivity() != null) {
             Utils.handleWebUrl(getActivity(), Uri.parse(url));
         } else {
             viewUtil.showShortToast(getActivity(), getString(R.string.null_url));
@@ -414,15 +434,18 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    isDeleted = true;
-                    enableDeleteButton(false);
+                    if (getActivity() != null) {
+                        isDeleted = true;
+                        enableDeleteButton(false);
+                    }
                 }));
+
     }
 
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
         if (nominatedForDeletion.getVisibility() == VISIBLE && getActivity() != null) {
-            Utils.handleWebUrl(getActivity(), media.getFilePageTitle().getMobileUri());
+            Utils.handleWebUrl(getActivity(), Uri.parse(media.getPageTitle().getMobileUri()));
         }
     }
 
@@ -516,7 +539,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
-        return DateUtils.dateInLocaleFormat(date);
+        return DateUtil.getDateStringWithSkeletonPattern(date, "dd MMM yyyy");
     }
 
     /**
@@ -540,4 +563,5 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             nominatedForDeletion.setVisibility(GONE);
         }
     }
+
 }

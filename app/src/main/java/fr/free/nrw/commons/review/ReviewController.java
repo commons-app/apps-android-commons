@@ -7,6 +7,8 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -21,7 +23,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,21 +32,19 @@ import timber.log.Timber;
 @Singleton
 public class ReviewController {
     private String fileName;
+    public static final int NOTIFICATION_SEND_THANK = 0x102;
+    protected static ArrayList<String> categories;
+    public static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
+    private final DeleteHelper deleteHelper;
     @Nullable
     public MwQueryPage.Revision firstRevision; // TODO: maybe we can expand this class to include fileName
-    protected static ArrayList<String> categories;
-    public static final int NOTIFICATION_SEND_THANK = 0x102;
-    public static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
-    private NotificationManager notificationManager;
-    private NotificationCompat.Builder notificationBuilder;
-    private Media media;
-
     @Inject
     MediaWikiApi mwApi;
     @Inject
     SessionManager sessionManager;
-
-    private final DeleteHelper deleteHelper;
+    private NotificationManager notificationManager;
+    private NotificationCompat.Builder notificationBuilder;
+    private Media media;
 
     private ViewPager viewPager;
     private ReviewActivity reviewActivity;
@@ -201,7 +200,7 @@ public class ReviewController {
                 }
                 publishProgress(context, 1);
                 assert firstRevision != null;
-                mwApi.thank(editToken, firstRevision.getRevid());
+                mwApi.thank(editToken, firstRevision.getRevisionId());
                 publishProgress(context, 2);
             } catch (Exception e) {
                 Timber.d(e);

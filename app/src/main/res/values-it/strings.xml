@@ -10,6 +10,7 @@
 * Nemo bis
 * S4b1nuz E.656
 * Sarah Bernabei
+* Senpremì
 * Una giornata uggiosa '94
 * Wim b
 -->
@@ -174,8 +175,8 @@
   <string name="detail_license_empty">Licenza sconosciuta</string>
   <string name="menu_refresh">Aggiorna</string>
   <string name="storage_permission_title">Richiesta di autorizzazione di archiviazione</string>
-  <string name="read_storage_permission_rationale">Autorizzazione richiesta: leggere la memoria esterna. L\'app non può accedere alla tua galleria senza questo.</string>
-  <string name="write_storage_permission_rationale">Autorizzazione richiesta: scrivere memoria esterna. L\'app non può accedere alla tua videocamera senza questa.</string>
+  <string name="read_storage_permission_rationale">Autorizzazione richiesta: leggere la memoria esterna. L\'applicazione non può accedere alla tua galleria senza questo.</string>
+  <string name="write_storage_permission_rationale">Autorizzazione richiesta: scrivere memoria esterna. L\'applicazione non può accedere alla tua videocamera/galleria senza questa.</string>
   <string name="location_permission_rationale">Autorizzazione facoltativa: ottieni la posizione corrente per i suggerimenti di categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Luoghi nelle vicinanze</string>
@@ -455,5 +456,7 @@
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="image_chooser_title">Scegli le immagini da caricare</string>
   <string name="please_wait">Attendi per favore…</string>
+  <string name="previous_image_title_description">Copia titolo/descrizione precedente</string>
+  <string name="previous_button_tooltip_message">Clicca per riusare il titolo e la descrizione dell\'immagine precedente e adattarli all\'immagine attuale.</string>
   <string name="skip_image">SALTA QUESTA IMMAGINE</string>
 </resources>

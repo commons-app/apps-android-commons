@@ -159,7 +159,7 @@
   <string name="detail_license_empty">알수 없는 허가권</string>
   <string name="menu_refresh">재생</string>
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장고 읽기. 이것이 없으면 응용프로그람은 화랑에 접속할수 없습니다.</string>
-  <string name="write_storage_permission_rationale">권한 필요: 외부 저장고 쓰기. 이것이 없으면 응용프로그람은 촬영장치에 접속할수 없습니다.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">권한 필요: 외부 저장고 쓰기. 이것이 없으면 응용프로그람은 촬영장치에 접속할수 없습니다.</string>
   <string name="location_permission_rationale">선택적 허가: 분류 추천을 위해 현재 위치를 가져옵니다.</string>
   <string name="ok">확인</string>
   <string name="title_activity_nearby">근처의 장소</string>

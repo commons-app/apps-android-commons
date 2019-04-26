@@ -3,6 +3,8 @@ package fr.free.nrw.commons.upload;
 import android.content.Context;
 import android.net.Uri;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -12,7 +14,6 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
-import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Single;
 import timber.log.Timber;
 
@@ -172,13 +173,13 @@ public class ImageProcessingService {
      */
     private Single<Integer> checkImageGeoLocation(Place place, String filePath) {
         Timber.d("Checking for image geolocation %s", filePath);
-        if (place == null || StringUtils.isNullOrWhiteSpace(place.getWikiDataEntityId())) {
+        if (place == null || StringUtils.isBlank(place.getWikiDataEntityId())) {
             return Single.just(ImageUtils.IMAGE_OK);
         }
         return Single.fromCallable(() -> filePath)
                 .map(fileUtilsWrapper::getGeolocationOfFile)
                 .flatMap(geoLocation -> {
-                    if (StringUtils.isNullOrWhiteSpace(geoLocation)) {
+                    if (StringUtils.isBlank(geoLocation)) {
                         return Single.just(ImageUtils.IMAGE_OK);
                     }
                     return imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation());

@@ -181,7 +181,7 @@
   <string name="menu_refresh">Оновити</string>
   <string name="storage_permission_title">Запит дозволу на зберігання</string>
   <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Без цього дозволу програма не зможе отримати доступ до вашої галереї.</string>
-  <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери без цього дозволу.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери без цього дозволу.</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -207,7 +207,7 @@
   <string name="maximum_limit_alert">Неможливо показати понад 500</string>
   <string name="enter_valid">Вкажіть коректне значення</string>
   <string name="cannot_be_zero">Ліміт завантажень не може бути нульовим</string>
-  <string name="set_limit" fuzzy="true">Встановити ліміт останніх завантажень</string>
+  <string name="set_limit">Ліміт останніх завантажень</string>
   <string name="login_failed_2fa_not_supported">Двофакторна автентифікація наразі не підтримується.</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
   <string name="commons_logo">Логотип Вікісховища</string>
@@ -415,8 +415,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Мені стало зрозуміло, що це шкодить моїй приватності</string>
   <string name="deletion_reason_no_longer_want_public">Моя думка змінилась, я не хочу, щоб це було доступно публічно</string>
   <string name="deletion_reason_not_interesting">Перепрошую, це зображення нецікаве для енциклопедії</string>
-  <string name="uploaded_by_myself" fuzzy="true">Завантажено мною на</string>
-  <string name="no_uploads" fuzzy="true">Ласкаво просимо до Вікісховища!\n\nЗавантажте Ваш перший медіафайл, торкнувшись іконки камери чи галереї вгорі.</string>
+  <string name="uploaded_by_myself">Завантажено мною на сайт «%1$s» та використано у {{PLURAL:%2$d|one=одній статті|%2$d статтях}}.</string>
+  <string name="no_uploads">Ласкаво просимо до Вікісховища!\n\nЗавантажте Ваш перший медіафайл, натиснувши кнопку додавання.</string>
   <string name="desc_language_Worldwide">У всьому світі</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Європа</string>
@@ -439,7 +439,7 @@
   <string name="achievements_fetch_failed">Щось пішло не так. Нам не вдалося отримати Ваші досягнення</string>
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Торкніться тут, щоб побачити чинні кампанії</string>
+  <string name="display_campaigns_explanation">Чинні кампанії</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
   <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
   <string name="bad_token_error_proposed_solution">Завантаження було невдалим через проблему з токеном редагування. Будь ласка, спробуйте вийти з системи й увійти повторно.</string>
@@ -452,8 +452,8 @@
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
-  <string name="no_notification" fuzzy="true">У вас немає непрочитаних сповіщень</string>
-  <string name="no_archived_notification" fuzzy="true">Немає архівованих сповіщень</string>
+  <string name="no_notification">У вас немає непрочитаних сповіщень</string>
+  <string name="no_archived_notification">Немає архівованих сповіщень</string>
   <string name="share_logs_using">Поширення журналів</string>
   <string name="menu_option_archived">Перегляд архівованих</string>
   <string name="menu_option_unread">Перегляд непрочитаних</string>

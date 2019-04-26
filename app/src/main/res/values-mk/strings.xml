@@ -166,7 +166,7 @@
   <string name="menu_refresh">Превчитај</string>
   <string name="storage_permission_title">Се бара дозвола за складирање</string>
   <string name="read_storage_permission_rationale">Потребна дозвола: Треба да се прочита од надворешен склад. Прилогот без ова нема пристап до вашата галерија.</string>
-  <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера.</string>
+  <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера/галерија.</string>
   <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
   <string name="ok">ОК</string>
   <string name="title_activity_nearby">Околни места</string>
@@ -443,8 +443,8 @@
   <string name="check_category_adding_template">Додавање на шаблон за категориска проверка</string>
   <string name="check_category_notification_title">Барање на категориска проверка за %1$s</string>
   <string name="check_category_edit_summary">Барање на категориска проверка</string>
-  <string name="check_category_success_title">Барање на категориска проверка: Успешно</string>
-  <string name="check_category_failure_title">Барање на категориска проверка: Неуспешно</string>
+  <string name="check_category_success_title">Побарана категориска проверка</string>
+  <string name="check_category_failure_title">Барањето за категориска проверка не успеа</string>
   <string name="check_category_success_message">Успешно побарана категориска проверка за %1$s</string>
   <string name="check_category_failure_message">Не можев да побарам категориска проверка за %1$s</string>
   <string name="check_category_toast">Барање на категориска проверка за %1$s</string>
@@ -474,14 +474,16 @@
   <string name="review_spam_report_problem">спам</string>
   <string name="review_c_violation_report_question">Нарушува авторски права бидејќи е</string>
   <string name="review_c_violation_report_problem">Авторскоправно нарушување</string>
-  <string name="review_category_yes_button_text">НЕ, ПОГРЕШНО КАТЕГОРИЗИРАНО</string>
-  <string name="review_category_no_button_text">ДЕЛУВА ВО РЕД</string>
-  <string name="review_spam_yes_button_text">НЕ, ВОН ДЕЛОКРУГ</string>
-  <string name="review_spam_no_button_text">ДЕЛУВА ВО РЕД</string>
-  <string name="review_copyright_yes_button_text">НЕ, АВТОРСКОПРАВНО НАРУШУВАЊЕ</string>
-  <string name="review_copyright_no_button_text">ДЕЛУВА ВО РЕД</string>
-  <string name="review_thanks_yes_button_text">ДА, ШТО ДА НЕ</string>
-  <string name="review_thanks_no_button_text">СЛЕДНА СЛИКА</string>
+  <string name="review_category_yes_button_text" fuzzy="true">НЕ, ПОГРЕШНО КАТЕГОРИЗИРАНО</string>
+  <string name="review_category_no_button_text" fuzzy="true">ДЕЛУВА ВО РЕД</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">НЕ, ВОН ДЕЛОКРУГ</string>
+  <string name="review_spam_no_button_text" fuzzy="true">ДЕЛУВА ВО РЕД</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">НЕ, АВТОРСКОПРАВНО НАРУШУВАЊЕ</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">ДЕЛУВА ВО РЕД</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">ДА, ШТО ДА НЕ</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">СЛЕДНА СЛИКА</string>
+  <string name="skip_image_explanation">Копчево ќе ви даде друга неодамна подигната слика од Ризницата</string>
+  <string name="review_image_explanation">Можете да оценувате слики и да го подобрувате квалитетот на Ризницата.\n Четирите мерила за оценка се следниве: \n - Дали сликата е во делокругот? \n - Дали сликата ги следи правилата за авторски права? \n - Дали сликата е исправно категоризирана? \n - Ако сè е во ред, можете и да му се заблагодарите на подигачот.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликата и вашиот уред</item>
     <item quantity="other">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликите и вашиот уред</item>
@@ -500,5 +502,10 @@
   <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
   <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
   <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
+  <string name="previous_image_title_description">Прекопирај претходен наслов и опис</string>
+  <string name="previous_button_tooltip_message">Стиснете за да ги употребите насловот и описот што ги внесовте за претходната слика, па прилагодете ги за да одговараат на тековната.</string>
+  <string name="welcome_do_upload_content_description">Примери — Добри слики за подигање</string>
+  <string name="welcome_dont_upload_content_description">Примери — Слики што не се за подигање</string>
   <string name="skip_image">ПРЕСКОКНИ ЈА ПОРАКАВА</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преземањето не успеа!!! Не можеме да ја преземеме податотеката без дозвола од надворешен склад.</string>
 </resources>
