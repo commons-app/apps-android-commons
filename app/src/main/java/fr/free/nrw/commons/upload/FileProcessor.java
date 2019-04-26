@@ -113,9 +113,8 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
             if (prefManageEXIFTags != null) redactTags.removeAll(prefManageEXIFTags);
 
             if (!redactTags.isEmpty()) {
-
                 Disposable disposable = Observable.fromIterable(redactTags)
-                        .flatMap(FileMetadataUtils::getTagsFromPref)
+                        .flatMap(tag -> Observable.fromArray(FileMetadataUtils.getTagsFromPref(tag)))
                         .forEach(tag -> {
                             Timber.d("Checking for tag: %s", tag);
                             String oldValue = exifInterface.getAttribute(tag);
