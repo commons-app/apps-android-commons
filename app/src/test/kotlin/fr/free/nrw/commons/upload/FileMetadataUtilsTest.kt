@@ -6,6 +6,9 @@ import junit.framework.Assert.assertTrue
 import org.junit.Test
 import java.util.*
 
+/**
+ * Test cases for FileMetadataUtils
+ */
 class FileMetadataUtilsTest {
 
     /**
