@@ -30,6 +30,7 @@ import fr.free.nrw.commons.mwapi.CategoryApi;
 import fr.free.nrw.commons.settings.Prefs;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -113,7 +114,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
 
             if (!redactTags.isEmpty()) {
 
-                Observable.fromIterable(redactTags)
+                Disposable disposable = Observable.fromIterable(redactTags)
                         .flatMap(FileMetadataUtils::getTagsFromPref)
                         .forEach(tag -> {
                             Timber.d("Checking for tag: %s", tag);
@@ -122,7 +123,11 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                                 Timber.d("Exif tag %s with value %s redacted.", tag, oldValue);
                                 exifInterface.setAttribute(tag, null);
                             }
-                        }).dispose();
+                        });
+                CompositeDisposable disposables = new CompositeDisposable();
+                disposables.add(disposable);
+                disposables.clear();
+
                 exifInterface.saveAttributes();
             }
         } catch (IOException e) {
