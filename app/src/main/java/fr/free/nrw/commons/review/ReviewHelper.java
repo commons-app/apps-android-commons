@@ -1,19 +1,22 @@
 package fr.free.nrw.commons.review;
 
+
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.RecentChange;
+import org.wikipedia.util.DateUtil;
 
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 @Singleton
@@ -24,16 +27,29 @@ public class ReviewHelper {
 
     private final OkHttpJsonApiClient okHttpJsonApiClient;
     private final MediaWikiApi mediaWikiApi;
+    private final ReviewInterface reviewInterface;
 
     @Inject
-    public ReviewHelper(OkHttpJsonApiClient okHttpJsonApiClient, MediaWikiApi mediaWikiApi) {
+    public ReviewHelper(OkHttpJsonApiClient okHttpJsonApiClient,
+                        MediaWikiApi mediaWikiApi,
+                        ReviewInterface reviewInterface) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.mediaWikiApi = mediaWikiApi;
+        this.reviewInterface = reviewInterface;
     }
 
-    Single<Media> getRandomMedia() {
-        return getRandomFileChange()
-                .flatMap(fileName -> okHttpJsonApiClient.getMedia(fileName, false));
+    private Observable<List<RecentChange>> getRecentChanges() {
+        final int RANDOM_SECONDS = 60 * 60 * 24 * 30;
+        Random r = new Random();
+        Date now = new Date();
+        Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
+
+        String rcStart = DateUtil.iso8601DateFormat(startDate);
+        return reviewInterface.getRecentChanges(rcStart).map(mwQueryResponse -> mwQueryResponse.query().getRecentChanges())
+                .map(recentChanges -> {
+                    Collections.shuffle(recentChanges);
+                    return recentChanges;
+                });
     }
 
     /**
@@ -43,57 +59,46 @@ public class ReviewHelper {
      * - Checks if the file is nominated for deletion
      * - Retries upto 5 times for getting a file which is not nominated for deletion
      *
-     * @return
+     * @return Random file change
      */
-    private Single<String> getRandomFileChange() {
-        return okHttpJsonApiClient.getRecentFileChanges()
-                .map(this::findImageInRecentChanges)
-                .flatMap(title -> mediaWikiApi.pageExists("Commons:Deletion_requests/" + title)
-                        .map(pageExists -> new Pair<>(title, pageExists)))
-                .map((Pair<String, Boolean> pair) -> {
-                    if (!pair.second) {
-                        return pair.first;
-                    }
-                    throw new Exception("Already nominated for deletion");
-                }).retry(MAX_RANDOM_TRIES);
+    public Single<Media> getRandomMedia() {
+        return getRecentChanges()
+                .flatMapIterable(changes -> changes)
+                .filter(this::isChangeReviewable)
+                .flatMapSingle(change -> mediaWikiApi.pageExists("Commons:Deletion_requests/" + change.getTitle())
+                        .map(exists -> {
+                            if (exists) {
+                                throw new RuntimeException("Already nominated for deletion");
+                            }
+                            return change.getTitle();
+                        }))
+                .flatMapSingle(fileName -> okHttpJsonApiClient.getMedia(fileName, false)
+                        .map(media -> {
+                            if (media == null) {
+                                throw new NullPointerException("Media is null");
+                            }
+                            return media;
+                        }))
+                .retry(MAX_RANDOM_TRIES)
+                .firstOrError();
     }
 
-    Single<MwQueryPage.Revision> getFirstRevisionOfFile(String fileName) {
-        return okHttpJsonApiClient.getFirstRevisionOfFile(fileName);
+    Observable<MwQueryPage.Revision> getFirstRevisionOfFile(String filename) {
+        return reviewInterface.getFirstRevisionOfFile(filename)
+                .map(response -> response.query().firstPage().revisions().get(0));
     }
 
-    @Nullable
-    private String findImageInRecentChanges(List<RecentChange> recentChanges) {
-        String imageTitle;
-        Random r = new Random();
-        int count = recentChanges.size();
-        // Build a range array
-        int[] randomIndexes = new int[count];
-        for (int i = 0; i < count; i++) {
-            randomIndexes[i] = i;
+    private boolean isChangeReviewable(RecentChange recentChange) {
+        if (recentChange.getType().equals("log") && !(recentChange.getOldRevisionId() == 0)) {
+            return false;
         }
-        // Then shuffle it
-        for (int i = 0; i < count; i++) {
-            int swapIndex = r.nextInt(count);
-            int temp = randomIndexes[i];
-            randomIndexes[i] = randomIndexes[swapIndex];
-            randomIndexes[swapIndex] = temp;
-        }
-        for (int i = 0; i < count; i++) {
-            int randomIndex = randomIndexes[i];
-            RecentChange recentChange = recentChanges.get(randomIndex);
-            if (recentChange.getType().equals("log") && !(recentChange.getOldRevisionId() == 0)) {
-                // For log entries, we only want ones where old_revid is zero, indicating a new file
-                continue;
-            }
-            imageTitle = recentChange.getTitle();
 
-            for (String imageExtension : imageExtensions) {
-                if (imageTitle.toLowerCase().endsWith(imageExtension)) {
-                    return imageTitle;
-                }
+        for (String extension : imageExtensions) {
+            if (recentChange.getTitle().endsWith(extension)) {
+                return true;
             }
         }
-        return null;
+
+        return false;
     }
 }
