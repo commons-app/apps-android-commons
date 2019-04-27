@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.BiMap;
+import fr.free.nrw.commons.utils.LangCodeUtils;
 
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
@@ -114,21 +115,24 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         }
 
         public void init(int position, boolean isDropDownView) {
+            final String languageCode = LangCodeUtils.fixLanguageCode(languageCodesList.get(position));
+            final String languageName = String.format("%s%s", languageNamesList.get(position)
+                    .substring(0, 1).toUpperCase(), languageNamesList.get(position).substring(1));
             if (!isDropDownView) {
                 view.setVisibility(View.GONE);
-                if(languageCodesList.get(position).length()>2)
-                    tvLanguage.setText(languageCodesList.get(position).subSequence(0,2));
+                if(languageCode.length()>2)
+                    tvLanguage.setText(languageCode.subSequence(0,2));
                 else
-                    tvLanguage.setText(languageCodesList.get(position));
+                    tvLanguage.setText(languageCode);
 
             } else {
                 view.setVisibility(View.VISIBLE);
                 if (languageCodesList.get(position).isEmpty()) {
-                    tvLanguage.setText(languageNamesList.get(position));
+                    tvLanguage.setText(languageName);
                     tvLanguage.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 } else {
                     tvLanguage.setText(
-                            String.format("%s [%s]", languageNamesList.get(position), languageCodesList.get(position)));
+                            String.format("%s [%s]", languageName, languageCode));
                     if(selectedLanguages.containsKey(languageCodesList.get(position))&&
                             !languageCodesList.get(position).equals(selectedLangCode)) {
                         tvLanguage.setTextColor(Color.GRAY);
