@@ -66,6 +66,8 @@ public interface MediaWikiApi {
 
     Single<String> parseWikicode(String source);
 
+    Single<String> fetchCaptionByFilename(String filename);
+
     @NonNull
     Single<MediaResult> fetchMediaByFilename(String filename);
 

@@ -241,6 +241,27 @@ class ApacheHttpClientMediaWikiApiTest {
     }
 
     @Test
+    fun fetchCaptionByFilename() {
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api success=\"1\"><entities><entity type=\"mediainfo\" id=\"M77157483\"><labels><label language=\"it\" value=\"Test\" /></labels><statements /></entity></entities></api>"))
+
+        val result = testObject.fetchCaptionByFilename("File:foo")
+
+        assertBasicRequestParameters(server, "GET").let { request ->
+            parseQueryParams(request).let { params ->
+                assertEquals("xml", params["format"])
+                assertEquals("wbgetentities", params["action"])
+                assertEquals("commonswiki", params["sites"])
+                assertEquals("File:foo", params["titles"])
+                assertEquals("labels", params["props"])
+                assertEquals(Locale.getDefault().getLanguage(), params["languages"])
+                assertEquals("1", params["languagefallback"])
+            }
+        }
+
+        assertEquals("Test", result)
+    }
+
+    @Test
     fun isUserBlockedFromCommonsForInfinitelyBlockedUser() {
         server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"infinite\"></userinfo></query></api>"))
 
