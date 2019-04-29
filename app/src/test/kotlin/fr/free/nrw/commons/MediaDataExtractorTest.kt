@@ -7,12 +7,9 @@ import io.reactivex.Single
 import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
-import org.mockito.InjectMocks
-import org.mockito.Mock
+import org.mockito.*
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
-import org.mockito.MockitoAnnotations
 
 /**
  * Test methods in media data extractor
@@ -41,9 +38,11 @@ class MediaDataExtractorTest {
      * test method to fetch media details
      */
     @Test
-    fun fetchMediaDetails() {
+    fun fetchMediafDetails() {
         `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
                 .thenReturn(Single.just(mock(Media::class.java)))
+
+        Mockito.`when`(mwApi!!.fetchCaptionByFilename(ArgumentMatchers.anyString())).thenReturn(Single.just("test caption"))
 
         `when`(mwApi?.pageExists(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
