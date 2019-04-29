@@ -246,7 +246,7 @@
   <string name="no_go_back">Nê, Peyser Şo</string>
   <string name="nominate_for_deletion_done">Temam</string>
   <string name="review_spam_report_problem">reklam</string>
-  <string name="review_thanks_yes_button_text">EYA, ÇIRA MEBO</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">EYA, ÇIRA MEBO</string>
   <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
   <string name="no_archived_notification">Beyanatên şımayê arçivkerdeyi çıniyê</string>
   <string name="menu_option_archived">Arşivkerdeyan bıvêne</string>

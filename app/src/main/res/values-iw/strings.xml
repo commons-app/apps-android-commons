@@ -455,6 +455,14 @@
   <string name="check_category_edit_summary">בקשת בדיקת קטגוריה</string>
   <string name="check_category_success_title">התבקשה בדיקת קטגוריה</string>
   <string name="check_category_failure_title">בקשת בדיקת קטגוריה לא עבדה</string>
+  <string name="check_category_success_message">התבקשה בדיקת קטגוריה עבור %1$s בהצלחה</string>
+  <string name="check_category_failure_message">בקשת בדיקת הקטגוריה עבור %1$s לא הצליחה</string>
+  <string name="check_category_toast">מוגשת בקשה לבדיקת קטגוריה עבור %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">הוספת הודעת מחיקה לקובץ</string>
+  <string name="nominate_for_deletion_done">סיום</string>
+  <string name="nominate_for_deletion_notify_user">יידוע משתמש בדף שיחה</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">הוספת קובץ ליומן בקשות מחיקה</string>
+  <string name="nominate_for_deletion_create_deletion_request">יצירת דף־משנה בבקשות מחיקה</string>
   <string name="notsure">לא בטוח</string>
   <string name="send_thank_success_title">שליחת תודה: הצלחה</string>
   <string name="send_thank_success_message">נשלחה תודה בהצלחה אל %1$s</string>
@@ -465,7 +473,26 @@
   <string name="send_thank_toast">נשלחת תודה עבור %1$s</string>
   <string name="review_copyright">האם זה עומד בתנאי זכויות היוצרים?</string>
   <string name="review_category">האם הקטגוריה נכונה?</string>
+  <string name="review_spam">האם זה בתחום?</string>
   <string name="review_thanks">ברצונך להודות לתורם?</string>
+  <string name="review_spam_explanation">נא ללחוץ על \"לא\" כדי להציע את התמונה הזאת למחיקה אם היא בכלל לא שימושית.</string>
+  <string name="review_copyright_explanation">סמלים, צילומי מסך, כרזות של סרטים, הם לעיתים קרובות הפרות זכויות יוצרים.\nנא ללחוץ \"לא\" כדי להציע את התמונה הזאת למחיקה.</string>
+  <string name="review_thanks_explanation">ההערכה שלך תעודד את %1$s</string>
+  <string name="review_no_category">אבוי, זה לא משויך לשום קטגוריה!</string>
+  <string name="review_category_explanation">התמונה הזאת משויכת ל־%1$s קטגוריות.</string>
+  <string name="review_spam_report_question">זה פשוט מחוץ לתחום כי ככה</string>
+  <string name="review_spam_report_problem">ספאם</string>
+  <string name="review_c_violation_report_question">זאת הפרת זכויות יוצרים כי ככה</string>
+  <string name="review_category_yes_button_text" fuzzy="true">לא, טעות בקטגוריה</string>
+  <string name="review_category_no_button_text" fuzzy="true">נראה בסדר</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">לא, אין שום קשר</string>
+  <string name="review_spam_no_button_text" fuzzy="true">נראה בסדר</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">לא, הפרת זכויות יוצרים</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">נראה בסדר</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">כן, למה לא</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">התמונה הבאה</string>
+  <string name="skip_image_explanation">לחיצה על הכפתור הזה תציג בפניך תמונה נוספת שנוספה לאחרונה לוויקישיתוף</string>
+  <string name="review_image_explanation">ניתן לסקור את התמונות ולשפר את האיכות של ויקישיתוף.\nארבע יסודות הסקירה הם:\n- האם התמונה קשורה לנושא?\n- האם התמונה תואמת לכללי זכויות היוצרים?\n- האם התמונה נמצאת בקטגוריה הנכונה?\n- אם הכול בסדר, ניתן גם להודות למי שתרם אותה.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">מתקבל תוכן שיתופי. עיבוד התמונה עשוי לארוך זמן מה כתלות בגודל התמונה והמכשיר שלך</item>
     <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
@@ -481,4 +508,13 @@
   <string name="error_occurred_in_picking_images">אירעה שגיאה בעת בחירת תמונות</string>
   <string name="image_chooser_title">נא לבחור תמונות להעלאה</string>
   <string name="please_wait">נא להמתין…</string>
+  <string name="images_featured_explanation">תמונות מובילות הן תמונות של צלמים ומאיירים מיומנים אותם בחרה קהילת ויקישיתוף בזכות איכות התוצר שהם תורמים לאתר.</string>
+  <string name="images_via_nearby_explanation">תמונות שהועלו דרך מקומות בסביבה הן התמונות שנשלחות על ידי גילוי מקומות במפה.</string>
+  <string name="thanks_received_explanation">תכונה זו מאפשרת לעורכים לשלוח מסרי תודה למשתמשים שביצעו עריכות מועילות - על ידי שימוש בקישור תודה בעמוד ההיסטוריה או עמוד ההבדלים.</string>
+  <string name="previous_image_title_description">העתקת הכותרת והתיאור הקודמים</string>
+  <string name="previous_button_tooltip_message">יש ללחוץ כדי להשתמש מחדש בכותרת ובתיאור שהקלדת בתמונה הקודמת ולשנות אותה כדי להתאים לנוכחית</string>
+  <string name="welcome_do_upload_content_description">דוגמאות של תמונות טובות להעלאה לוויקישיתוף</string>
+  <string name="welcome_dont_upload_content_description">דוגמאות של תמונות שאין להעלות</string>
+  <string name="skip_image">דילוג על התמונה הזאת</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ההורדה נכשלה!! אין לנו אפשרות להוריד את הקובץ ללא הרשאות גישה לאחסון חיצוני.</string>
 </resources>

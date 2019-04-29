@@ -483,14 +483,14 @@
   <string name="review_spam_report_problem">سخام</string>
   <string name="review_c_violation_report_question">إنه انتهاك لحقوق الطبع والنشر لأنه</string>
   <string name="review_c_violation_report_problem">انتهاك حقوق الطبع والنشر</string>
-  <string name="review_category_yes_button_text">لا، مصنف بشكل خاطئ</string>
-  <string name="review_category_no_button_text">يبدو جيدا</string>
-  <string name="review_spam_yes_button_text">لا، خارج النطاق</string>
-  <string name="review_spam_no_button_text">يبدو جيدا</string>
-  <string name="review_copyright_yes_button_text">لا، انتهاك حقوق النشر</string>
-  <string name="review_copyright_no_button_text">يبدو جيدا</string>
-  <string name="review_thanks_yes_button_text">نعم، لم لا</string>
-  <string name="review_thanks_no_button_text">الصورة التالية</string>
+  <string name="review_category_yes_button_text" fuzzy="true">لا، مصنف بشكل خاطئ</string>
+  <string name="review_category_no_button_text" fuzzy="true">يبدو جيدا</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">لا، خارج النطاق</string>
+  <string name="review_spam_no_button_text" fuzzy="true">يبدو جيدا</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">لا، انتهاك حقوق النشر</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">يبدو جيدا</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">نعم، لم لا</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">الصورة التالية</string>
   <string name="skip_image_explanation">النقر فوق هذا الزر سيمنحك صورة أخرى مرفوعة مؤخرا من ويكيميديا ​​كومنز</string>
   <string name="review_image_explanation">يمكنك مراجعة الصور وتحسين جودة ويكيميديا ​​كومنز.\n وسائط اللمراجعة الأربعة هي:\n - هل هذه الصورة في النطاق؟\n - هل تتبع هذه الصورة قواعد حقوق النشر؟\n - هل هذه الصورة مصنفة بشكل صحيح؟\n - إذا سارت الأمور على ما يرام يمكنك أيضا شكر المساهم.</string>
   <plurals name="receiving_shared_content">

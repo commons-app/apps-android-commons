@@ -479,14 +479,14 @@
   <string name="review_spam_report_problem">Werbung</string>
   <string name="review_c_violation_report_question">Sie ist eine Urheberrechtsverletzung, da sie</string>
   <string name="review_c_violation_report_problem">Urheberrechtsverletzung</string>
-  <string name="review_category_yes_button_text">NEIN, FALSCH KATEGORISIERT</string>
-  <string name="review_category_no_button_text">SIEHT GUT AUS</string>
-  <string name="review_spam_yes_button_text">NEIN, AUßERHALB DES GELTUNGSBEREICHS</string>
-  <string name="review_spam_no_button_text">SIEHT GUT AUS</string>
-  <string name="review_copyright_yes_button_text">NEIN, URHEBERRECHTSVERLETZUNG</string>
-  <string name="review_copyright_no_button_text">SIEHT GUT AUS</string>
-  <string name="review_thanks_yes_button_text">JA, WARUM NICHT</string>
-  <string name="review_thanks_no_button_text">NÄCHSTES BILD</string>
+  <string name="review_category_yes_button_text" fuzzy="true">NEIN, FALSCH KATEGORISIERT</string>
+  <string name="review_category_no_button_text" fuzzy="true">SIEHT GUT AUS</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">NEIN, AUßERHALB DES GELTUNGSBEREICHS</string>
+  <string name="review_spam_no_button_text" fuzzy="true">SIEHT GUT AUS</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">NEIN, URHEBERRECHTSVERLETZUNG</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">SIEHT GUT AUS</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">JA, WARUM NICHT</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">NÄCHSTES BILD</string>
   <string name="skip_image_explanation">Das Anklicken dieser Schaltfläche gibt dir ein anderes kürzlich hochgeladenes Bild von Wikimedia Commons</string>
   <string name="review_image_explanation">Du kannst Bilder überprüfen und die Qualität von Wikimedia Commons verbessern.\nDie vier Parameter der Überprüfung sind: \n- Ist dieses Bild im Geltungsbereich? \n- Folgt dieses Bild den Regeln des Urheberrechts? \n- Ist dieses Bild korrekt kategorisiert? \n- Falls alles gut geht, kannst du auch dem Beitrager danken.</string>
   <plurals name="receiving_shared_content">

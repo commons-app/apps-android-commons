@@ -494,14 +494,14 @@
   <string name="review_spam_report_problem">pourriel</string>
   <string name="review_c_violation_report_question">Ceci est une violation des droits d\'auteur parce que c\'est</string>
   <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text">NON, ERREUR DE CATEGORIE</string>
-  <string name="review_category_no_button_text">SEMBLE CORRECT</string>
-  <string name="review_spam_yes_button_text">NON, HORS SUJET</string>
-  <string name="review_spam_no_button_text">SEMBLE CORRECT</string>
-  <string name="review_copyright_yes_button_text">NON, VIOLATION DES DROITS D\'AUTEUR</string>
-  <string name="review_copyright_no_button_text">SEMBLE CORRECT</string>
-  <string name="review_thanks_yes_button_text">OUI, POURQUOI PAS</string>
-  <string name="review_thanks_no_button_text">IMAGE SUIVANTE</string>
+  <string name="review_category_yes_button_text" fuzzy="true">NON, ERREUR DE CATEGORIE</string>
+  <string name="review_category_no_button_text" fuzzy="true">SEMBLE CORRECT</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">NON, HORS SUJET</string>
+  <string name="review_spam_no_button_text" fuzzy="true">SEMBLE CORRECT</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">NON, VIOLATION DES DROITS D\'AUTEUR</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">SEMBLE CORRECT</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">OUI, POURQUOI PAS</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">IMAGE SUIVANTE</string>
   <string name="skip_image_explanation">Cliquer sur ce bouton vous fournira une autre image récemment téléversée de Wikimédia Communs.</string>
   <string name="review_image_explanation">Vous pouvez revoir les images et améliorer la qualité de Wikimédia Communs.\n Les quatre paramètres à revoir sont : \n - Cette image est-elle à propos ? \n - Cette image respecte-t-elle les règles de droit d’auteur ? \n - Cette image est-elle bien catégorisée ? \n - Si tout va bien, vous pouvez aussi remercier le contributeur.</string>
   <plurals name="receiving_shared_content">

@@ -83,11 +83,11 @@ public class NetworkingModule {
     }
 
     @Provides
-    @Named("commons_mediawiki_url")
+    @Named("wikimedia_api_host")
     @NonNull
     @SuppressWarnings("ConstantConditions")
-    public HttpUrl provideMwUrl() {
-        return HttpUrl.parse(BuildConfig.COMMONS_URL);
+    public String provideMwApiUrl() {
+        return BuildConfig.WIKIMEDIA_API_HOST;
     }
 
     @Provides

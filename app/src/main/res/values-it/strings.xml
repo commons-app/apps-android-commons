@@ -457,6 +457,6 @@
   <string name="image_chooser_title">Scegli le immagini da caricare</string>
   <string name="please_wait">Attendi per favore…</string>
   <string name="previous_image_title_description">Copia titolo/descrizione precedente</string>
-  <string name="previous_button_tooltip_message">Clicca per riusare il titolo e la descrizione dell\'immagine precedente e adattarlo all\'immagine attuale.</string>
+  <string name="previous_button_tooltip_message">Clicca per riusare il titolo e la descrizione dell\'immagine precedente e adattarli all\'immagine attuale.</string>
   <string name="skip_image">SALTA QUESTA IMMAGINE</string>
 </resources>

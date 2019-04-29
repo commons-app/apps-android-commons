@@ -64,6 +64,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.LocationUtils;
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
@@ -571,7 +572,7 @@ public class NearbyMapFragment extends DaggerFragment {
 
             if (NearbyController.currentLocation != null) { // If our nearby markers are calculated at least once
 
-                if (searchThisAreaButton.getVisibility() == View.GONE) {
+                if (searchThisAreaButton.getVisibility() == View.GONE && NetworkUtils.isInternetConnectionEstablished(getContext())) {
                     searchThisAreaButton.setVisibility(View.VISIBLE);
                 }
                 double distance = mapboxMap.getCameraPosition().target

@@ -31,14 +31,14 @@ import timber.log.Timber;
 public class CategoryApi {
 
     private final OkHttpClient okHttpClient;
-    private final HttpUrl mwUrl;
+    private final String commonsBaseUrl;
     private final Gson gson;
 
     @Inject
     public CategoryApi(OkHttpClient okHttpClient, Gson gson,
-                       @Named("commons_mediawiki_url") HttpUrl mwUrl) {
+                       @Named("wikimedia_api_host") String commonsBaseUrl) {
         this.okHttpClient = okHttpClient;
-        this.mwUrl = mwUrl;
+        this.commonsBaseUrl = commonsBaseUrl;
         this.gson = gson;
     }
 
@@ -77,9 +77,9 @@ public class CategoryApi {
      * @return URL for API query
      */
     private HttpUrl buildUrl(String coords) {
-        return mwUrl.newBuilder()
-                .addPathSegment("w")
-                .addPathSegment("api.php")
+        return HttpUrl
+                .parse(commonsBaseUrl)
+                .newBuilder()
                 .addQueryParameter("action", "query")
                 .addQueryParameter("prop", "categories|coordinates|pageprops")
                 .addQueryParameter("format", "json")

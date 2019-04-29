@@ -311,6 +311,6 @@
   <string name="desc_language_Asia">アジア</string>
   <string name="desc_language_Pacific">太平洋地域</string>
   <string name="nominate_for_deletion_done">完了</string>
-  <string name="review_thanks_no_button_text">次の画像</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">次の画像</string>
   <string name="please_wait">お待ちください…</string>
 </resources>

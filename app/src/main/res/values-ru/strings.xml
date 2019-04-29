@@ -108,6 +108,7 @@
   <string name="title_activity_signup">Регистрация</string>
   <string name="title_activity_featured_images">Избранные изображения</string>
   <string name="title_activity_category_details">Категория</string>
+  <string name="title_activity_review">Проверка</string>
   <string name="menu_about">О приложении</string>
   <string name="about_license">Приложение «Викисклад» - это программа с открытым кодом, которую создали волонтёры и участники грантов Викимедиа. Фонд Викимедиа не участвует в создании, разработке или обслуживании этого приложения.</string>
   <string name="about_improve">Вы можете создать &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запрос на GitHub&lt;/a&gt;, чтобы сообщить об ошибке или внести предложение.</string>
@@ -245,6 +246,7 @@
   <string name="navigation_item_info">Руководство</string>
   <string name="navigation_item_notification">Уведомления</string>
   <string name="navigation_item_featured_images">Избранное</string>
+  <string name="navigation_item_review">Проверка</string>
   <string name="nearby_needs_permissions">Места поблизости не могут быть отображены без разрешения на геолокацию</string>
   <string name="no_description_found">описание не найдено</string>
   <string name="nearby_info_menu_commons_article">Страница файла на Викискладе</string>
@@ -262,6 +264,7 @@
   <string name="upload_problem_different_geolocation">Это изображение было сделано в другом месте.</string>
   <string name="upload_problem_fbmd">Пожалуйста, загружайте только те изображения, которые были сделаны вами. Не загружайте изображений, которые вы нашли в Фейсбуке.</string>
   <string name="upload_problem_do_you_continue">Всё равно желаете загрузить это изображение?</string>
+  <string name="internet_downloaded">Пожалуйста, загружайте только те изображения, которые были сделаны вами. Не загружайте изображений, которые вы скачали из Интернета.</string>
   <string name="give_permission">Разрешить</string>
   <string name="use_external_storage">Использовать внешний носитель</string>
   <string name="use_external_storage_summary">Сохранять изображения, сделанные с помощью встроенной камеры на устройстве</string>
@@ -274,6 +277,7 @@
   <string name="nominated_for_deletion">Этот файл был вынесен на удаление.</string>
   <string name="nominated_see_more"/>
   <string name="nominating_file_for_deletion">Номинирование %1$s к удалению.</string>
+  <string name="nominating_for_deletion_status">Номинирование файла к удалению: %1$s</string>
   <string name="view_browser">Просмотреть в браузере</string>
   <string name="skip_login">Пропустить</string>
   <string name="navigation_item_login">Войти</string>
@@ -465,7 +469,10 @@
   <string name="check_category_toast">Проверка категорий файла %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Добавление файлу сообщения об удалении</string>
   <string name="nominate_for_deletion_done">Готово</string>
+  <string name="nominate_for_deletion_notify_user">Оповещение участника на его странице обсуждения</string>
   <string name="nominate_for_deletion_edit_deletion_request_log">Добавление файла в журнал запросов на удаление</string>
+  <string name="nominate_for_deletion_create_deletion_request">Создание подстраницы запроса об удалении</string>
+  <string name="notsure">Не знаю</string>
   <string name="send_thank_success_title">Отправка благодарности: Успешно</string>
   <string name="send_thank_success_message">Благодарности успешно отправлены %1$s</string>
   <string name="send_thank_failure_message">Не удалось отправить благодарности %1$s</string>
@@ -475,18 +482,25 @@
   <string name="send_thank_toast">Отправка благодарности %1$s</string>
   <string name="review_copyright">Соответствует правилам об авторском праве?</string>
   <string name="review_category">Правильно ли указаны категории?</string>
+  <string name="review_spam">Уместен ли файл на Викискладе?</string>
   <string name="review_thanks">Хотите отблагодарить участника?</string>
   <string name="review_spam_explanation">Нажмите НЕТ, чтобы номинировать это изображение к удалению.</string>
   <string name="review_copyright_explanation">Логотипы, снимки экрана, постеры фильмов часто нарушают копирайт.\n Нажмите НЕТ, чтобы номинировать это изображение к удалению.</string>
   <string name="review_no_category">Эй, да тут даже категорий нет!</string>
   <string name="review_category_explanation">Это изображение отнесено к %1$s {{PLURAL:%1$s|категории|категориям}}.</string>
+  <string name="review_spam_report_question">Файл не уместен на Викискладе, поскольку</string>
   <string name="review_spam_report_problem">спам</string>
-  <string name="review_category_yes_button_text">НЕВЕРНО КАТЕГОРИЗИРОВАНО</string>
-  <string name="review_category_no_button_text">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
-  <string name="review_spam_no_button_text">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
-  <string name="review_copyright_no_button_text">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
-  <string name="review_thanks_no_button_text">СЛЕДУЮЩЕЕ ИЗОБРАЖЕНИЕ</string>
-  <string name="review_image_explanation">Вы можете проверить изображения, и, таким образом, улучшить их качество на Викискладе.\n Есть четыре проверки:\n - Уместно ли изображение на Викискладе? \n - Соответствует ли оно правилам об авторском праве? \n - Правильно ли оно категоризировано? \n - Если всё хорошо, можете поблагодарить загрузившего изображение.</string>
+  <string name="review_c_violation_report_question">Это нарушение авторских прав, поскольку</string>
+  <string name="review_c_violation_report_problem">copyRightViolation</string>
+  <string name="review_category_yes_button_text" fuzzy="true">НЕВЕРНО КАТЕГОРИЗИРОВАНО</string>
+  <string name="review_category_no_button_text" fuzzy="true">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
+  <string name="review_spam_yes_button_text" fuzzy="true">НЕТ, НЕ УМЕСТЕН</string>
+  <string name="review_spam_no_button_text" fuzzy="true">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">НЕТ, ЭТО НАРУШЕНИЕ АВТОРСКОГО ПРАВА</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">АГА. ПОЧЕМУ БЫ И НЕТ?</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">СЛЕДУЮЩЕЕ ИЗОБРАЖЕНИЕ</string>
+  <string name="review_image_explanation">Вы можете проверить файлы, и, таким образом, улучшить их качество на Викискладе.\n Есть четыре проверки:\n - Уместен ли файл на Викискладе?\n - Соответствует ли файл правилам об авторском праве?\n - Правильно ли файл категоризирован?\n - Если всё хорошо, можете поблагодарить загрузившего этот файл.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Получение общего содержимого. Обработка изображения может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
     <item quantity="other">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>

@@ -61,6 +61,17 @@ public class ReviewActivity extends AuthenticatedActivity {
     @Inject
     DeleteHelper deleteHelper;
 
+    final String SAVED_MEDIA = "saved_media";
+    private Media media;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (media != null) {
+            outState.putParcelable(SAVED_MEDIA, media);
+        }
+    }
+
     /**
      * Consumers should be simply using this method to use this activity.
      *
@@ -102,7 +113,11 @@ public class ReviewActivity extends AuthenticatedActivity {
         pagerIndicator.setViewPager(reviewPager);
         progressBar.setVisibility(View.VISIBLE);
 
-        runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
+        if (savedInstanceState != null) {
+            updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)); // Use existing media if we have one
+        } else {
+            runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
+        }
 
         btnSkipImage.setOnClickListener(view -> runRandomizer());
 
@@ -130,6 +145,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     @SuppressLint("CheckResult")
     private void updateImage(Media media) {
+        this.media = media;
         String fileName = media.getFilename();
         if (fileName.length() == 0) {
             ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review);

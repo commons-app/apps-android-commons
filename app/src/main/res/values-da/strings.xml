@@ -358,11 +358,11 @@
   <string name="notsure">Ikke sikker</string>
   <string name="send_thank_notification_title">Sender tak</string>
   <string name="review_spam_report_problem">spam</string>
-  <string name="review_category_no_button_text">SER FINT UD</string>
-  <string name="review_spam_no_button_text">SER FINT UD</string>
-  <string name="review_copyright_no_button_text">SER FINT UD</string>
-  <string name="review_thanks_yes_button_text">JA, HVORFOR IKKE</string>
-  <string name="review_thanks_no_button_text">NÆSTE BILLEDE</string>
+  <string name="review_category_no_button_text" fuzzy="true">SER FINT UD</string>
+  <string name="review_spam_no_button_text" fuzzy="true">SER FINT UD</string>
+  <string name="review_copyright_no_button_text" fuzzy="true">SER FINT UD</string>
+  <string name="review_thanks_yes_button_text" fuzzy="true">JA, HVORFOR IKKE</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">NÆSTE BILLEDE</string>
   <string name="no_image">Ingen billeder brugt</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
   <string name="menu_option_archived">Vis arkiverede</string>

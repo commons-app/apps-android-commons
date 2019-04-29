@@ -430,4 +430,5 @@
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>
   <string name="image_chooser_title">업로드할 이미지 선택</string>
   <string name="please_wait">기다려 주십시오...</string>
+  <string name="previous_image_title_description">이전의 제목 및 설명 복사</string>
 </resources>
