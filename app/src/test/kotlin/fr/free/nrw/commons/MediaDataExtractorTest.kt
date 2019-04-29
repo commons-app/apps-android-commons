@@ -38,7 +38,7 @@ class MediaDataExtractorTest {
      * test method to fetch media details
      */
     @Test
-    fun fetchMediafDetails() {
+    fun fetchMediaDetails() {
         `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
                 .thenReturn(Single.just(mock(Media::class.java)))
 
