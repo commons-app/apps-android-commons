@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
-
 import androidx.annotation.NonNull;
 
 import java.io.File;
@@ -81,7 +80,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      */
     GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface, Context context) {
         // Redact EXIF data as indicated in preferences.
-        redactMetadata(context);
+        redactExifTags(exifInterface, getExifTagsToRedact(context));
 
         Timber.d("Calling GPSExtractor");
         imageObj = new GPSExtractor(exifInterface);
@@ -98,37 +97,49 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     }
 
     /**
-     * Redacts EXIF metadata as indicated in preferences.
+     * Gets EXIF Tags from preferences to be redacted.
      *
+     * @param context application context
+     * @return        tags to be redacted
      */
-    private void redactMetadata(Context context) {
+    private Set<String> getExifTagsToRedact(Context context) {
         Type setType = new TypeToken<Set<String>>() {}.getType();
         Set<String> prefManageEXIFTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
 
-        try {
-            Set<String> redactTags = new HashSet<>(Arrays.asList(
-                    context.getResources().getStringArray(R.array.pref_exifTag_values)));
+        Set<String> redactTags = new HashSet<>(Arrays.asList(
+                context.getResources().getStringArray(R.array.pref_exifTag_values)));
+        Timber.d(redactTags.toString());
 
-            Timber.d(redactTags.toString());
-            if (prefManageEXIFTags != null) redactTags.removeAll(prefManageEXIFTags);
+        if (prefManageEXIFTags != null) redactTags.removeAll(prefManageEXIFTags);
 
-            if (!redactTags.isEmpty()) {
-                Disposable disposable = Observable.fromIterable(redactTags)
-                        .flatMap(tag -> Observable.fromArray(FileMetadataUtils.getTagsFromPref(tag)))
-                        .forEach(tag -> {
-                            Timber.d("Checking for tag: %s", tag);
-                            String oldValue = exifInterface.getAttribute(tag);
-                            if (oldValue != null && !oldValue.isEmpty()) {
-                                Timber.d("Exif tag %s with value %s redacted.", tag, oldValue);
-                                exifInterface.setAttribute(tag, null);
-                            }
-                        });
-                CompositeDisposable disposables = new CompositeDisposable();
-                disposables.add(disposable);
-                disposables.clear();
+        return redactTags;
+    }
 
-                exifInterface.saveAttributes();
-            }
+    /**
+     * Redacts EXIF metadata as indicated in preferences.
+     *
+     * @param exifInterface  ExifInterface object
+     * @param redactTags     tags to be redacted
+     */
+    public static void redactExifTags(ExifInterface exifInterface, Set<String> redactTags) {
+        if(redactTags.isEmpty()) return;
+
+         Disposable disposable = Observable.fromIterable(redactTags)
+                 .flatMap(tag -> Observable.fromArray(FileMetadataUtils.getTagsFromPref(tag)))
+                 .forEach(tag -> {
+                     Timber.d("Checking for tag: %s", tag);
+                     String oldValue = exifInterface.getAttribute(tag);
+                     if (oldValue != null && !oldValue.isEmpty()) {
+                         Timber.d("Exif tag %s with value %s redacted.", tag, oldValue);
+                         exifInterface.setAttribute(tag, null);
+                     }
+                 });
+         CompositeDisposable disposables = new CompositeDisposable();
+         disposables.add(disposable);
+         disposables.clear();
+
+         try {
+             exifInterface.saveAttributes();
         } catch (IOException e) {
             Timber.w("EXIF redaction failed: %s", e.toString());
         }
