@@ -199,6 +199,8 @@
   <string name="delete">SUPRIMEIX</string>
   <string name="nominate_for_deletion_done">Fet</string>
   <string name="review_copyright_yes_button_text" fuzzy="true">NO, VIOLACIÓ DE DRETS D’AUTOR</string>
+  <string name="review_thanks_yes_button_text">I tant</string>
+  <string name="review_thanks_no_button_text">Imatge següent</string>
   <string name="no_notification">No teniu cap notificació sense llegir</string>
   <string name="no_archived_notification">No teniu cap notificació arxivada</string>
   <string name="welcome_do_upload_content_description">Exemples d’imatges adequades per a Commons</string>

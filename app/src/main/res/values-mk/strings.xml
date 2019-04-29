@@ -474,14 +474,14 @@
   <string name="review_spam_report_problem">спам</string>
   <string name="review_c_violation_report_question">Нарушува авторски права бидејќи е</string>
   <string name="review_c_violation_report_problem">Авторскоправно нарушување</string>
-  <string name="review_category_yes_button_text" fuzzy="true">НЕ, ПОГРЕШНО КАТЕГОРИЗИРАНО</string>
-  <string name="review_category_no_button_text" fuzzy="true">ДЕЛУВА ВО РЕД</string>
-  <string name="review_spam_yes_button_text" fuzzy="true">НЕ, ВОН ДЕЛОКРУГ</string>
-  <string name="review_spam_no_button_text" fuzzy="true">ДЕЛУВА ВО РЕД</string>
-  <string name="review_copyright_yes_button_text" fuzzy="true">НЕ, АВТОРСКОПРАВНО НАРУШУВАЊЕ</string>
-  <string name="review_copyright_no_button_text" fuzzy="true">ДЕЛУВА ВО РЕД</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">ДА, ШТО ДА НЕ</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">СЛЕДНА СЛИКА</string>
+  <string name="review_category_yes_button_text">Не, погрешно категоризирано</string>
+  <string name="review_category_no_button_text">Делува во ред</string>
+  <string name="review_spam_yes_button_text">Не, вон делокруг</string>
+  <string name="review_spam_no_button_text">Делува во ред</string>
+  <string name="review_copyright_yes_button_text">Не, авторскоправно нарушување</string>
+  <string name="review_copyright_no_button_text">Делува во ред</string>
+  <string name="review_thanks_yes_button_text">Да, што да не</string>
+  <string name="review_thanks_no_button_text">Следна слика</string>
   <string name="skip_image_explanation">Копчево ќе ви даде друга неодамна подигната слика од Ризницата</string>
   <string name="review_image_explanation">Можете да оценувате слики и да го подобрувате квалитетот на Ризницата.\n Четирите мерила за оценка се следниве: \n - Дали сликата е во делокругот? \n - Дали сликата ги следи правилата за авторски права? \n - Дали сликата е исправно категоризирана? \n - Ако сè е во ред, можете и да му се заблагодарите на подигачот.</string>
   <plurals name="receiving_shared_content">
@@ -508,4 +508,5 @@
   <string name="welcome_dont_upload_content_description">Примери — Слики што не се за подигање</string>
   <string name="skip_image">ПРЕСКОКНИ ЈА ПОРАКАВА</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преземањето не успеа!!! Не можеме да ја преземеме податотеката без дозвола од надворешен склад.</string>
+  <string name="image_info">Инфо за сликата</string>
 </resources>

@@ -483,14 +483,14 @@
   <string name="review_spam_report_question">זה פשוט מחוץ לתחום כי ככה</string>
   <string name="review_spam_report_problem">ספאם</string>
   <string name="review_c_violation_report_question">זאת הפרת זכויות יוצרים כי ככה</string>
-  <string name="review_category_yes_button_text" fuzzy="true">לא, טעות בקטגוריה</string>
-  <string name="review_category_no_button_text" fuzzy="true">נראה בסדר</string>
-  <string name="review_spam_yes_button_text" fuzzy="true">לא, אין שום קשר</string>
-  <string name="review_spam_no_button_text" fuzzy="true">נראה בסדר</string>
-  <string name="review_copyright_yes_button_text" fuzzy="true">לא, הפרת זכויות יוצרים</string>
-  <string name="review_copyright_no_button_text" fuzzy="true">נראה בסדר</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">כן, למה לא</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">התמונה הבאה</string>
+  <string name="review_category_yes_button_text">לא, טעות בקטגוריה</string>
+  <string name="review_category_no_button_text">נראה בסדר</string>
+  <string name="review_spam_yes_button_text">לא, אין שום קשר</string>
+  <string name="review_spam_no_button_text">נראה בסדר</string>
+  <string name="review_copyright_yes_button_text">לא, הפרת זכויות יוצרים</string>
+  <string name="review_copyright_no_button_text">נראה בסדר</string>
+  <string name="review_thanks_yes_button_text">כן, למה לא</string>
+  <string name="review_thanks_no_button_text">התמונה הבאה</string>
   <string name="skip_image_explanation">לחיצה על הכפתור הזה תציג בפניך תמונה נוספת שנוספה לאחרונה לוויקישיתוף</string>
   <string name="review_image_explanation">ניתן לסקור את התמונות ולשפר את האיכות של ויקישיתוף.\nארבע יסודות הסקירה הם:\n- האם התמונה קשורה לנושא?\n- האם התמונה תואמת לכללי זכויות היוצרים?\n- האם התמונה נמצאת בקטגוריה הנכונה?\n- אם הכול בסדר, ניתן גם להודות למי שתרם אותה.</string>
   <plurals name="receiving_shared_content">
@@ -517,4 +517,5 @@
   <string name="welcome_dont_upload_content_description">דוגמאות של תמונות שאין להעלות</string>
   <string name="skip_image">דילוג על התמונה הזאת</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ההורדה נכשלה!! אין לנו אפשרות להוריד את הקובץ ללא הרשאות גישה לאחסון חיצוני.</string>
+  <string name="image_info">פרטי תמונה</string>
 </resources>

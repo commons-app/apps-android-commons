@@ -473,7 +473,7 @@
   <string name="review_spam_report_problem">rumenta</string>
   <string name="review_c_violation_report_question">A l\'é na violassion dij drit d\'autor përché a l\'é</string>
   <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text" fuzzy="true">NÒ, EROR ËD CATEGORÌA</string>
+  <string name="review_category_yes_button_text">Nò, eror ëd categorìa</string>
   <string name="review_category_no_button_text" fuzzy="true">A SMIJA GIUST</string>
   <string name="review_spam_yes_button_text" fuzzy="true">NÒ, FÒRA ARGOMENT</string>
   <string name="review_spam_no_button_text" fuzzy="true">A SMIJA GIUST</string>

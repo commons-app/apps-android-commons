@@ -487,14 +487,14 @@
   <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">Constitui uma infringência de direitos de autor porque é</string>
   <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text" fuzzy="true">NÃO, MAL CATEGORIZADO</string>
-  <string name="review_category_no_button_text" fuzzy="true">PARECE BEM</string>
-  <string name="review_spam_yes_button_text" fuzzy="true">NÃO, FORA DO ÂMBITO</string>
-  <string name="review_spam_no_button_text" fuzzy="true">PARECE BEM</string>
-  <string name="review_copyright_yes_button_text" fuzzy="true">NÃO, INFRINGIMENTO DE DIREITOS DE AUTOR</string>
-  <string name="review_copyright_no_button_text" fuzzy="true">PARECE BEM</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">SIM, POR QUE NÃO?</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">IMAGEM SEGUINTE</string>
+  <string name="review_category_yes_button_text">Não, mal categorizado</string>
+  <string name="review_category_no_button_text">Parece bem</string>
+  <string name="review_spam_yes_button_text">Não, fora do âmbito</string>
+  <string name="review_spam_no_button_text">Parece bem</string>
+  <string name="review_copyright_yes_button_text">Não, infringência de direitos de autor</string>
+  <string name="review_copyright_no_button_text">Parece bem</string>
+  <string name="review_thanks_yes_button_text">Sim, porque não?</string>
+  <string name="review_thanks_no_button_text">Imagem seguinte</string>
   <string name="skip_image_explanation">Clicar este botão dá-lhe outra imagem carregada recentemente da wiki Wikimedia Commons</string>
   <string name="review_image_explanation">Pode rever imagens e melhorar a qualidade da wiki Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está enquadrada no nosso âmbito?\n- Esta imagem respeita as regras dos direitos de autor?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, também poderá agradecer ao contribuidor.</string>
   <plurals name="receiving_shared_content">
@@ -521,4 +521,5 @@
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">SALTAR ESTA IMAGEM</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">O descarregamento falhou! Não podemos descarregar o ficheiro sem permissão de armazenagem externa.</string>
+  <string name="image_info">Informação da imagem</string>
 </resources>

@@ -419,9 +419,13 @@
   <string name="display_location_permission_title">위치 권한 표시</string>
   <string name="bad_token_error_proposed_solution">편집 토큰에 문제가 있어서 업로드를 실패했습니다. 로그아웃한 다음 다시 로그인해 보십시오.</string>
   <string name="error_processing_image">이미지를 처리하는 동안 오류가 발생했습니다. 다시 시도해 주십시오!</string>
+  <string name="check_category_success_title">분류 검사 요청됨</string>
+  <string name="check_category_failure_title">분류 검사 요청이 동작하지 못했습니다</string>
   <string name="nominate_for_deletion_done">완료</string>
   <string name="notsure">확실치 않음</string>
   <string name="review_spam_report_problem">스팸</string>
+  <string name="review_thanks_yes_button_text">예</string>
+  <string name="review_thanks_no_button_text">다음 이미지</string>
   <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
   <string name="no_notification">읽지 않은 알림이 없습니다</string>
   <string name="no_archived_notification">보관된 알림이 없습니다</string>
@@ -431,4 +435,5 @@
   <string name="image_chooser_title">업로드할 이미지 선택</string>
   <string name="please_wait">기다려 주십시오...</string>
   <string name="previous_image_title_description">이전의 제목 및 설명 복사</string>
+  <string name="image_info">이미지 정보</string>
 </resources>
