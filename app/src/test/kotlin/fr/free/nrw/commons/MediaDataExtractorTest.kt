@@ -42,7 +42,7 @@ class MediaDataExtractorTest {
         `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
                 .thenReturn(Single.just(mock(Media::class.java)))
 
-        Mockito.`when`(mwApi!!.fetchCaptionByFilename(ArgumentMatchers.anyString())).thenReturn(Single.just("test caption"))
+        Mockito.`when`(mwApi?.fetchCaptionByFilename(ArgumentMatchers.anyString())).thenReturn(Single.just("test caption"))
 
         `when`(mwApi?.pageExists(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
