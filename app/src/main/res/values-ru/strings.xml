@@ -169,7 +169,7 @@
   <string name="tutorial_4_subtext_2">Описание: Сиднейский оперный театр, вид через залив</string>
   <string name="tutorial_4_subtext_3">Категории: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
-  <string name="welcome_wikipedia_subtext">Изображения в Википедии хранятся на Викискладе.</string>
+  <string name="welcome_wikipedia_subtext">Изображения, используемые в Википедии хранятся на Викискладе.</string>
   <string name="welcome_copyright_text">Ваши изображения могут помочь образованию людей во всём мире.</string>
   <string name="welcome_copyright_subtext">Избегайте материалов, защищённых авторским правом, например, найденных в Интернете, изображений плакатов, книжных обложек и т.п.</string>
   <string name="welcome_final_text">Вам это понятно?</string>
@@ -486,20 +486,22 @@
   <string name="review_thanks">Хотите отблагодарить участника?</string>
   <string name="review_spam_explanation">Нажмите НЕТ, чтобы номинировать это изображение к удалению.</string>
   <string name="review_copyright_explanation">Логотипы, снимки экрана, постеры фильмов часто нарушают копирайт.\n Нажмите НЕТ, чтобы номинировать это изображение к удалению.</string>
+  <string name="review_thanks_explanation">%1$s получит от вас благодарность</string>
   <string name="review_no_category">Эй, да тут даже категорий нет!</string>
   <string name="review_category_explanation">Это изображение отнесено к %1$s {{PLURAL:%1$s|категории|категориям}}.</string>
   <string name="review_spam_report_question">Файл не уместен на Викискладе, поскольку</string>
   <string name="review_spam_report_problem">спам</string>
   <string name="review_c_violation_report_question">Это нарушение авторских прав, поскольку</string>
   <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text" fuzzy="true">НЕВЕРНО КАТЕГОРИЗИРОВАНО</string>
-  <string name="review_category_no_button_text" fuzzy="true">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
-  <string name="review_spam_yes_button_text" fuzzy="true">НЕТ, НЕ УМЕСТЕН</string>
-  <string name="review_spam_no_button_text" fuzzy="true">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
-  <string name="review_copyright_yes_button_text" fuzzy="true">НЕТ, ЭТО НАРУШЕНИЕ АВТОРСКОГО ПРАВА</string>
-  <string name="review_copyright_no_button_text" fuzzy="true">ВЫГЛЯДИТ ПОДХОДЯЩЕ</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">АГА. ПОЧЕМУ БЫ И НЕТ?</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">СЛЕДУЮЩЕЕ ИЗОБРАЖЕНИЕ</string>
+  <string name="review_category_yes_button_text">Неверно категоризировано</string>
+  <string name="review_category_no_button_text">Выглядит подходяще</string>
+  <string name="review_spam_yes_button_text">Не уместно</string>
+  <string name="review_spam_no_button_text">Выглядит подходяще</string>
+  <string name="review_copyright_yes_button_text">Нет, это нарушение авторского права</string>
+  <string name="review_copyright_no_button_text">Выглядит подходяще</string>
+  <string name="review_thanks_yes_button_text">Да, подходит</string>
+  <string name="review_thanks_no_button_text">Следующее изображение</string>
+  <string name="skip_image_explanation">Нажатие этой кнопки приводит к показу следующего недавно загруженного изображения с Викисклада</string>
   <string name="review_image_explanation">Вы можете проверить файлы, и, таким образом, улучшить их качество на Викискладе.\n Есть четыре проверки:\n - Уместен ли файл на Викискладе?\n - Соответствует ли файл правилам об авторском праве?\n - Правильно ли файл категоризирован?\n - Если всё хорошо, можете поблагодарить загрузившего этот файл.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Получение общего содержимого. Обработка изображения может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
@@ -516,6 +518,8 @@
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
   <string name="image_chooser_title">Выберите изображения для загрузки</string>
   <string name="please_wait">Пожалуйста, подождите…</string>
+  <string name="images_featured_explanation">Избранные изображения обычно сделаны профессиональными фотографами и иллюстраторами. Такие изображения отмечены сообществом участников Викисклада как имеющие высшее качество на этом вебсайте.</string>
+  <string name="images_via_nearby_explanation">Изображения, загруженные участниками, которые находили места с помощью функционала \"Места поблизости\".</string>
   <string name="thanks_received_explanation">Это функция позволяет участникам послать благодарность другим участникам за их полезные правки с помощью маленькой ссылки на странице истории страницы или странице разницы версий.</string>
   <string name="previous_image_title_description">Скопировать предыдущие название и описание</string>
   <string name="previous_button_tooltip_message">Нажмите, чтобы использовать название и описание, которые вы ввели для предыдущего изображения, а потом потом модифицировать их</string>
@@ -523,4 +527,5 @@
   <string name="welcome_dont_upload_content_description">Примеры изображений, которые не следует загружать на Викисклад</string>
   <string name="skip_image">ПРОПУСТИТЬ ЭТО ИЗОБРАЖЕНИЕ</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Скачивание файла не удалось! Это невозможно выполнить без предоставленного разрешения по использованию  внешнего носителя.</string>
+  <string name="image_info">Информация об изображении</string>
 </resources>
