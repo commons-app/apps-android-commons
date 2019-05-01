@@ -47,6 +47,7 @@ public class Media implements Parcelable {
     protected String filename;
     protected String description; // monolingual description on input...
     protected String discussion;
+    protected String caption;
     protected long dataLength;
     protected Date dateCreated;
     protected @Nullable Date dateUploaded;
@@ -238,6 +239,22 @@ public class Media implements Parcelable {
     @Nullable
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    /**
+     * Sets the Caption of the file.
+     * @param caption
+     */
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    /**
+     * Gets the file Caption as a string.
+     * @return file Caption as a string
+     */
+    public String getCaption() {
+        return caption;
     }
 
     /**
