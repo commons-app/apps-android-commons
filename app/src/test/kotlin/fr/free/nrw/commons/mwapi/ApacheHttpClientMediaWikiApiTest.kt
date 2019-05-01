@@ -6,7 +6,6 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.utils.ConfigUtils
-import io.reactivex.observers.TestObserver
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -23,7 +22,6 @@ import org.robolectric.annotation.Config
 import org.wikipedia.util.DateUtil
 import java.net.URLDecoder
 import java.util.*
-
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, sdk = intArrayOf(21), application = TestCommonsApplication::class)
@@ -240,30 +238,6 @@ class ApacheHttpClientMediaWikiApiTest {
         }
 
         assertFalse(result)
-    }
-
-    @Test
-    fun fetchCaptionByFilename() {
-        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api success=\"1\"><entities><entity type=\"mediainfo\" id=\"M77157483\"><labels><label language=\"it\" value=\"Test\" /></labels><statements /></entity></entities></api>"))
-
-        val result = testObject.fetchCaptionByFilename("File:foo")
-        val testObserver = TestObserver<String>()
-        result.subscribe(testObserver)
-        assertBasicRequestParameters(server, "GET").let { request ->
-            parseQueryParams(request).let { params ->
-                assertEquals("xml", params["format"])
-                assertEquals("wbgetentities", params["action"])
-                assertEquals("commonswiki", params["sites"])
-                assertEquals("File:foo", params["titles"])
-                assertEquals("labels", params["props"])
-                assertEquals(Locale.getDefault().getLanguage(), params["languages"])
-                assertEquals("1", params["languagefallback"])
-            }
-        }
-
-        testObserver.assertResult("Test")
-        testObserver.assertNoErrors()
-
     }
 
     @Test
