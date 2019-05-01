@@ -9,6 +9,7 @@
 * Jkjk
 * Leanes
 * Matěj Suchánek
+* Michaelbrabec
 * Mormegil
 * Patriccck
 * Spotter
@@ -177,7 +178,7 @@
   <string name="menu_refresh">Obnovit</string>
   <string name="storage_permission_title">Požadavek na oprávnění k úložišti</string>
   <string name="read_storage_permission_rationale">Požadované oprávnění: Čtení externího úložiště. Bez něj nemůže aplikace číst vaši galerii.</string>
-  <string name="write_storage_permission_rationale">Požadované oprávnění: Zapisování do externího úložiště. Bez něj nemůže aplikace používat vaši kameru.</string>
+  <string name="write_storage_permission_rationale">Požadované oprávnění: Zapisování do externího úložiště. Bez něj nemůže aplikace používat vaši kameru/galerii.</string>
   <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Místa v okolí</string>
@@ -253,6 +254,7 @@
   <string name="upload_problem_image_blurry">Obrázek je rozmazaný.</string>
   <string name="upload_problem_image_duplicate">Obrázek je již v Commons.</string>
   <string name="upload_problem_different_geolocation">Tento obrázek byl pořízen na jiném místě.</string>
+  <string name="upload_problem_fbmd">Prosíme, nahrávejte pouze obrázky, které jste sami pořídili. Nenahrávejte obrázky, které jste našli na něčím Facebookovém profilu.</string>
   <string name="upload_problem_do_you_continue">Pořád chcete tento obrázek nahrát?</string>
   <string name="give_permission">Dát povolení</string>
   <string name="use_external_storage">Použít externí úložiště</string>
@@ -301,7 +303,7 @@
   <string name="about_translate_cancel">Zrušit</string>
   <string name="retry">Zkusit znovu</string>
   <string name="showcase_view_got_it_button">Jasně!</string>
-  <string name="showcase_view_whole_nearby_activity">Toto jsou místa poblíž vaší současné polohy, které potřebují fotografie k ilustraci příslušných článků na Wikipedii</string>
+  <string name="showcase_view_whole_nearby_activity">Toto jsou místa poblíž vaší současné polohy, které potřebují fotografie k ilustraci příslušných článků na Wikipedii.\n\nKlepnutím na \'PROHLEDAT TUTO OBLAST\' se zamkne mapa a spustí se prohledávání okolí daného místa.</string>
   <string name="showcase_view_list_icon">Klíknutím na toto tlačítko otevřete seznam těchto míst</string>
   <string name="showcase_view_plus_fab">Můžete nahrát obrázek jakéhokoliv z těchto míst z vaší galerie nebo přímo z fotoaparátu.</string>
   <string name="no_images_found">Nebyly nalezeny žádné obrázky!</string>
@@ -350,8 +352,10 @@
   <string name="add_description">+ Přidat popisek</string>
   <string name="no_recent_searches">Zatím žádné vyhledávání</string>
   <string name="delete_recent_searches_dialog">Opravdu chcete vyčistit historii vašeho hledání?</string>
+  <string name="delete_search_dialog">Chcete odstranit toto hledání?</string>
   <string name="search_history_deleted">Historie hledání byla odstraněna</string>
   <string name="nominate_delete">Navrhnout na smazání</string>
+  <string name="delete">SMAZAT</string>
   <string name="Achievements">Dosažené úspěchy</string>
   <string name="statistics">STATISTIKA</string>
   <string name="statistics_thanks">Obdržená poděkování</string>
@@ -409,10 +413,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Uvědomil/a jsem si, že je to špatné pro mé soukromí</string>
   <string name="deletion_reason_no_longer_want_public">Změnil/a jsem názor, nechci, aby to bylo veřejně viditelné</string>
   <string name="deletion_reason_not_interesting">Omlouváme se, že tento obrázek není zajímavý pro encyklopedii</string>
-  <string name="uploaded_by_myself">Náhráno mnou</string>
-  <string name="used_by">,použito v</string>
-  <string name="articles">články</string>
-  <string name="no_uploads">Vítejte na Commons!\n\nNahrajte svá první média pomocí tlačítek fotoaparátu nebo galerie nahoře.</string>
+  <string name="uploaded_by_myself">Náhráno mnou %1$s, použito v(e) %2$d článku/článcích.</string>
+  <string name="no_uploads">Vítejte na Commons!\n\nNahrajte svá první média klepnutím na tlačítko přidat.</string>
   <string name="desc_language_Worldwide">Celosvětově</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Evropa</string>
@@ -435,7 +437,7 @@
   <string name="achievements_fetch_failed">Nastala neočekávaná chyba. Nemohli jsme dokončit akci</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobrazovat kampaně</string>
-  <string name="display_campaigns_explanation">Klepnutím sem zobrazíte probíhající kampaně</string>
+  <string name="display_campaigns_explanation">Podívejte se na probíhající kampaně</string>
   <string name="nearby_campaign_dismiss_message">Kampaně již neuvidíte. Toto oznámení však můžete znovu zapnout v Nastavení.</string>
   <string name="this_function_needs_network_connection">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
   <string name="bad_token_error_proposed_solution">Nahrávání se nezdařilo kvůli problémům s editačním tokenem. Zkuste se prosím odhlásit a zkuste to znovu.</string>
@@ -447,8 +449,8 @@
   <string name="no_image">Nejsou použity žádné obrázky</string>
   <string name="no_image_reverted">Žádné revertované obrázky</string>
   <string name="no_image_uploaded">Žádné nahrané obrázky</string>
-  <string name="no_notification">Nemáte žádné nepřečtené upozornění</string>
-  <string name="no_archived_notification">Nemáte nepřečtené upozornění</string>
+  <string name="no_notification">Nemáte žádná nepřečtená upozornění</string>
+  <string name="no_archived_notification">Nemáte nepřečtená upozornění</string>
   <string name="share_logs_using">Sdílet logy pomocí</string>
   <string name="menu_option_archived">Zobrazit přečtené</string>
   <string name="menu_option_unread">Zobrazit nepřečtené</string>

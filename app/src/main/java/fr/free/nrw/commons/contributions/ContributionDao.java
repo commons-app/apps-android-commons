@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.RemoteException;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -169,7 +169,7 @@ public class ContributionDao {
             );
 
             String wikidataEntityId = cursor.getString(cursor.getColumnIndex(COLUMN_WIKI_DATA_ENTITY_ID));
-            if (!StringUtils.isNullOrWhiteSpace(wikidataEntityId)) {
+            if (!StringUtils.isBlank(wikidataEntityId)) {
                 contribution.setWikiDataEntityId(wikidataEntityId);
             }
 

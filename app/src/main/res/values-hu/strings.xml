@@ -8,6 +8,7 @@
 * MeskoBalazs
 * Misibacsi
 * Máté
+* R-Joe
 * Tacsipacsi
 * Urbalazs
 * ViDam
@@ -69,6 +70,7 @@
   <string name="login_failed_generic">Bejelentkezési hiba</string>
   <string name="share_upload_button">Feltöltés</string>
   <string name="multiple_share_base_title">Nevezd el a gyűjteményt</string>
+  <string name="add_set_name_toast">Kérlek, adj címet ennek a gyűjteménynek</string>
   <string name="provider_modifications">Változtatások</string>
   <string name="menu_upload_single">Feltöltés</string>
   <string name="categories_search_text_hint">Keresés a kategóriák között</string>
@@ -78,7 +80,7 @@
   <string name="gps_disabled">A GPS le van tiltva az eszközén. Szeretné engedélyezni?</string>
   <string name="enable_gps">GPS engedélyezése</string>
   <string name="contributions_subtitle_zero">Még nincsenek feltöltések</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d feltöltés</item>
     <item quantity="other">%1$d feltöltés</item>
@@ -111,7 +113,10 @@
   <string name="no_uploads_yet">Még nem töltöttél fel fotókat.</string>
   <string name="menu_retry_upload">Újra</string>
   <string name="menu_cancel_upload">Mégse</string>
-  <string name="share_license_summary" fuzzy="true">Ez a kép %1$s licenc alatt kerül feltöltésre</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Ez a kép %1$s licenc alatt lesz feltöltve</item>
+    <item quantity="other">Ezek a képek %1$s licenc alatt lesznek feltöltve</item>
+  </plurals>
   <string name="media_upload_policy">A kép feltöltésével kijelentem, hogy ez a saját munkám és nem tartalmaz jogvédett anyagot, nem szelfi és megfelel a&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons irányelveinek&lt;/a&gt;.</string>
   <string name="menu_download">Letöltés</string>
   <string name="preference_license">Alapértelmezett licenc</string>
@@ -147,15 +152,19 @@
   <string name="tutorial_2_subtext_2">Hasznos tárgyak (kerékpárok, vasútállomások)</string>
   <string name="tutorial_2_subtext_3">Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
   <string name="tutorial_3_text">Kérjük, NE tölts fel:</string>
+  <string name="tutorial_3_subtext_1">Szelfit vagy a barátaidról készült képet</string>
   <string name="tutorial_3_subtext_2">Az Internetről letöltött képek</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
   <string name="tutorial_4_subtext_1">Cím: Sydney-i Operaház</string>
+  <string name="tutorial_4_subtext_2">Leírás: A Sydney-i Operaház az öböl túloldaláról</string>
+  <string name="tutorial_4_subtext_3">Kategóriák: Sydney-i Operaház nyugatról, Sydney-i Operaház távoli nézet</string>
   <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts életre kelteni a Wikipédia-szócikkeket!</string>
   <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
   <string name="welcome_copyright_text">A képeid segítenek a világ minden táján élő emberek oktatásában.</string>
   <string name="welcome_copyright_subtext">Kerüld az internetről származó szerzői joggal védett anyagokat, valamint a posztereket, könyvborítókat stb.</string>
   <string name="welcome_final_text">Megértetted?</string>
   <string name="welcome_final_button_text">Igen!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;További információ&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategóriák</string>
   <string name="detail_panel_cats_loading">Betöltés…</string>
   <string name="detail_panel_cats_none">Nincs kijelölés</string>
@@ -163,7 +172,7 @@
   <string name="detail_license_empty">Ismeretlen licenc</string>
   <string name="menu_refresh">Frissítés</string>
   <string name="read_storage_permission_rationale">Szükséges engedély: Külső tárhely olvasása. Az alkalmazás nem működik enélkül.</string>
-  <string name="write_storage_permission_rationale">Szükséges engedély: Külső tárhely írása. Az alkalmazás nem tudja használni a kamerát enélkül.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Szükséges engedély: Külső tárhely írása. Az alkalmazás nem tudja használni a kamerát enélkül.</string>
   <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Közeli helyek</string>
@@ -183,8 +192,12 @@
   <string name="_2fa_code">2LH kód</string>
   <string name="number_of_uploads">Legutóbbi feltöltéseim korlátja</string>
   <string name="maximum_limit">Legnagyobb korlát</string>
+  <string name="invalid_zero">Nulla nem lehet</string>
+  <string name="invalid_input">Érvénytelen adat</string>
   <string name="maximum_limit_alert">Nem lehet 500-nál többet megjeleníteni</string>
-  <string name="set_limit">Legutóbbi feltöltési korlát beállítása</string>
+  <string name="enter_valid">Írj be egy rendes számot</string>
+  <string name="cannot_be_zero">Feltöltési limit nem lehet 0</string>
+  <string name="set_limit">Legutóbbi feltöltési korlát</string>
   <string name="login_failed_2fa_not_supported">A kétlépcsős hitelesítés jelenleg nem támogatott.</string>
   <string name="logout_verification">Kilépsz?</string>
   <string name="commons_logo">Commons Logo</string>
@@ -223,6 +236,11 @@
   <string name="error_while_cache">Hiba a képek gyorsítótárazásakor</string>
   <string name="title_info">Egy egyedi, leíró cím a fájlnak, ami fájlnévként fog szolgálni. Egyszerű nyelvezetet használhatsz szóközökkel. Ne tedd bele a kiterjesztést.</string>
   <string name="description_info">Kérlek a lehető legteljesebb módon írd le a fájlt: hol készült, mit ábrázol, mi a kontextus? Kérlek add meg az objektumokat vagy személyeket a képen, valamint a nehezen kitalálható információkat (például a kép készítésének dátumát, ha az egy tájkép). Amennyiben a média valami szokatlant ábrázol, kérlek fejtsd ki, hogy mi teszi szokatlanná.</string>
+  <string name="upload_problem_exist">Lehetséges problémák ezzel a képpel:</string>
+  <string name="upload_problem_image_dark">A kép túl sötét.</string>
+  <string name="upload_problem_image_blurry">A kép homályos.</string>
+  <string name="upload_problem_image_duplicate">A kép már megtalálható a Commons-ban.</string>
+  <string name="upload_problem_different_geolocation">A kép máshol készült.</string>
   <string name="upload_problem_do_you_continue">Biztosan fel akarod tölteni ezt a képet?</string>
   <string name="give_permission">Engedély adása</string>
   <string name="use_external_storage">Külső tárhely használata</string>
@@ -263,7 +281,7 @@
   <string name="about_translate_cancel">Mégse</string>
   <string name="retry">Újra</string>
   <string name="showcase_view_got_it_button">Értettem!</string>
-  <string name="showcase_view_whole_nearby_activity">Ezek a helyek vannak a közeledben, amikről van Wikipédia szócikk és nincs bennük kép.</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Ezek a helyek vannak a közeledben, amikről van Wikipédia szócikk és nincs bennük kép.</string>
   <string name="showcase_view_list_icon">A gombra koppintva bejön egy lista, ami ezeket a helyeket mutatja.</string>
   <string name="showcase_view_plus_fab">Bármelyik helyhez feltölthetsz képet a galériádból vagy készíthetsz újat a kamerával.</string>
   <string name="no_images_found">Nem található kép!</string>

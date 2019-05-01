@@ -167,7 +167,7 @@
   <string name="menu_refresh">ರಿಫ್ರೆಶ್ ಮಲ್ಪುಲೆ</string>
   <string name="storage_permission_title">ಶೇಖರಣ ಅನುಮತಿ ಕೇಣುನು</string>
   <string name="read_storage_permission_rationale">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಓದಿ. ಇದೆಂಡ್ತ್ ಇರ್ ಗ್ಯಾಲರಿಗ್ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರವೇಶಗ್ ಸಾಧ್ಯ ಇಜ್ಜಿ.</string>
-  <string name="write_storage_permission_rationale">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಬರೆಲೆ. ಇದೆಂಡ್ತ್ ಅಪ್ಲಿಕೇಶನ್ ಇರೆನ ಕ್ಯಾಮರೊನ್ ಪ್ರವೇಶ ಮಾಲ್ಪಯರ ಸಾಧ್ಯಿಜ್ಜಿ.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಬರೆಲೆ. ಇದೆಂಡ್ತ್ ಅಪ್ಲಿಕೇಶನ್ ಇರೆನ ಕ್ಯಾಮರೊನ್ ಪ್ರವೇಶ ಮಾಲ್ಪಯರ ಸಾಧ್ಯಿಜ್ಜಿ.</string>
   <string name="location_permission_rationale">ಐಚ್ಛಿಕ ಅನುಮತಿ: ವರ್ಗೊ ಸಲಹೆಗ್ ಇತ್ತೆತ ಸ್ಥಳೊನ್ ಪಡೆಲೆ.</string>
   <string name="ok">ಅವು</string>
   <string name="title_activity_nearby">ಕೈದಲ್ತಾ ಜಾಗೆಲು</string>
@@ -193,7 +193,7 @@
   <string name="maximum_limit_alert">500 ಮಿತ್ತ್ ತೊಜಾಯರ ಸಾದ್ಯ ಇಜ್ಜಿ.</string>
   <string name="enter_valid">ಒಂಜಿ ಮಾನ್ಯ ಸಂಖ್ಯೆನ್ ಸೇರಾಲೆ</string>
   <string name="cannot_be_zero">ಮಿತೆರಾವುನ ಮಿತಿ ೦ (ಸೊನ್ನೆ) ಆವರೆ ಬಲ್ಲಿ</string>
-  <string name="set_limit">ಇಂಚಿಪೋದ ಅಪ್ಲೋಡ್ ಮಿತಿ.</string>
+  <string name="set_limit" fuzzy="true">ಇಂಚಿಪೋದ ಅಪ್ಲೋಡ್ ಮಿತಿ.</string>
   <string name="login_failed_2fa_not_supported">ರಡ್ಡ್ ಅಂಶೊತ ದೃಢೀಕರಣ ಇತ್ತೆ ತಿಕ್ಕುಜ್ಜಿ.</string>
   <string name="logout_verification">ಇರ್ ನಿಜವಾತ್ ಲಾಗ್ಔಟ್ ಮಾಲ್ಪಿಯರ ಬಯಸುವರಾ?</string>
   <string name="commons_logo">\nಕಾಮನ್ಸ್ ಲೋಗೋ.</string>
@@ -291,7 +291,7 @@
   <string name="about_translate_cancel">ವಜಾ ಮಲ್ಪುಲೆ</string>
   <string name="retry">ನನೊರ ಪ್ರಯತ್ನ ಮಾನ್ಪುಲೇ</string>
   <string name="showcase_view_got_it_button">ಗೊತ್ತಂಡಾ!</string>
-  <string name="showcase_view_whole_nearby_activity">ವಿಕಿಪೀಡಿಯ ಲೇಕನೊಲೆನ್ ಸಚಿತ್ರ ಮಲ್ಪರೆ  ಚಿತ್ರೊಲು ಬೋಡಾಯಿನ,  ಇರೆನ ಕೈತಲ್ದ ಜಾಗೊಲು ಮೂಲುಂಡು.</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">ವಿಕಿಪೀಡಿಯ ಲೇಕನೊಲೆನ್ ಸಚಿತ್ರ ಮಲ್ಪರೆ  ಚಿತ್ರೊಲು ಬೋಡಾಯಿನ,  ಇರೆನ ಕೈತಲ್ದ ಜಾಗೊಲು ಮೂಲುಂಡು.</string>
   <string name="showcase_view_list_icon">ಈ ಗುಬ್ಬಿನ್ ತಟಿಂಡ ಈ ಜಾಗೊಲೆನ ಒಂಜಿ ಪಟ್ಟಿ ಬರ್ಪುಂಡು.</string>
   <string name="showcase_view_plus_fab">ಈರ್ ಇರೆನ ಚಿತ್ರದರ್ಶಿನಿ ಇಜಿಂಡ ಕೆಮಾರೊರ್ದು ಒವ್ವೆ ಜಾಗೊದ ಒಂಜಿ ಚಿತ್ರೊನು ಮಿತೇರಾವೊಲಿ.</string>
   <string name="no_images_found">ಒವ್ವೆ ಆಕೃತಿಲು ತಿಕ್ಕುಜಾ!</string>
@@ -396,7 +396,7 @@
   <string name="deletion_reason_uploaded_by_mistake">ಯಾನ್ ಅವೆನ್ ತತ್ತ್\'ದ್ ಮಿತೇರಾಯೆ.</string>
   <string name="deletion_reason_publicly_visible">ಅವು ಸಾರ್ವತ್ರಿಕವಾದ್ ತೋಜುಂಡು ಇಂದ್ ಎಂಕ್ ಗೊತ್ತಿತ್ತಿಜಿ.</string>
   <string name="deletion_reason_bad_for_my_privacy">ಅವು ಎನ್ನ ಖಾಸಗಿತೆನೊಕು ಹಾಳ್ಂದ್ ಎಂಕ್ ತೆರಿಂಡ್.</string>
-  <string name="no_archived_notification">ಇರೆಗ್ ಅನುರಕ್ಷಿತ ಅಧಿಸೂಚನೆ ಇಜ್ಜಿ</string>
+  <string name="no_archived_notification" fuzzy="true">ಇರೆಗ್ ಅನುರಕ್ಷಿತ ಅಧಿಸೂಚನೆ ಇಜ್ಜಿ</string>
   <string name="menu_option_archived">ಅನುರಕ್ಷಿತ ತೂಲೆ</string>
   <string name="menu_option_unread">ಓದಂದಿನ ತೂಲೆ</string>
   <string name="error_occurred_in_picking_images">ಆಕೃತಿಲೆನ್ ಪೆಜ್ಜಿನಗ ದೋಷ ಆಂಡ್</string>

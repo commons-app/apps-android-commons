@@ -5,17 +5,9 @@ import android.app.DownloadManager;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,39 +16,45 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
-import static android.content.Intent.ACTION_VIEW;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static android.widget.Toast.LENGTH_SHORT;
+import static fr.free.nrw.commons.Utils.handleWebUrl;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
-    @Inject @Named("default_preferences") BasicKvStore basicKvStore;
+    @Inject @Named("default_preferences") JsonKvStore store;
     @Inject BookmarkPicturesDao bookmarkDao;
 
     @BindView(R.id.mediaDetailsPager) ViewPager pager;
@@ -159,22 +157,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCanonicalUri());
+                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getPageTitle().getCanonicalUri());
                 startActivity(Intent.createChooser(shareIntent, "Share image via..."));
                 return true;
             case R.id.menu_browser_current_image:
                 // View in browser
-                Intent viewIntent = new Intent();
-                viewIntent.setAction(ACTION_VIEW);
-                viewIntent.setData(m.getFilePageTitle().getMobileUri());
-                //check if web browser available
-                if (viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
-                    startActivity(viewIntent);
-                } else {
-                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
-                    toast.show();
-                }
-
+                handleWebUrl(requireContext(), Uri.parse(m.getPageTitle().getMobileUri()));
                 return true;
             case R.id.menu_download_current_image:
                 // Download
@@ -237,20 +225,19 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         // Modern Android updates the gallery automatically. Yay!
         req.allowScanningByMediaScanner();
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        PermissionUtils.checkPermissionsAndPerformAction(getActivity(), WRITE_EXTERNAL_STORAGE,
+            () -> enqueueRequest(req), () -> Toast.makeText(getContext(),
+                R.string.download_failed_we_cannot_download_the_file_without_storage_permission,
+                Toast.LENGTH_SHORT).show(), R.string.storage_permission,
+            R.string.write_storage_permission_rationale);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE)
-                        != PERMISSION_GRANTED
-                && getView() != null) {
-            Snackbar.make(getView(), R.string.read_storage_permission_rationale,
-                    Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
-                    view -> ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{READ_EXTERNAL_STORAGE}, 1)).show();
-        } else {
-            DownloadManager systemService = (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
-            if (systemService != null) {
-                systemService.enqueue(req);
-            }
+    }
+
+    private void enqueueRequest(DownloadManager.Request req) {
+        DownloadManager systemService =
+            (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
+        if (systemService != null) {
+            systemService.enqueue(req);
         }
     }
 
@@ -276,7 +263,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     // Initialize bookmark object
                     bookmark = new Bookmark(
                             m.getFilename(),
-                            m.getCreator()
+                            m.getCreator(),
+                            BookmarkPicturesContentProvider.uriForName(m.getFilename())
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
@@ -343,6 +331,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             }
             try{
                 ((SearchActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                ((ExploreActivity) getContext()).requestMoreImages();
             }catch (Exception e){
                 e.printStackTrace();
             }

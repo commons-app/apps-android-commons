@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.utils;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 public class FragmentUtils {
 
@@ -10,6 +10,6 @@ public class FragmentUtils {
      * @return
      */
     public static boolean isFragmentUIActive(Fragment fragment) {
-        return fragment.getActivity() != null && fragment.isAdded() && !fragment.isDetached() && !fragment.isRemoving();
+        return fragment!=null && fragment.getActivity() != null && fragment.isAdded() && !fragment.isDetached() && !fragment.isRemoving();
     }
 }

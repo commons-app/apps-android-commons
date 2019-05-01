@@ -10,6 +10,7 @@
 * Nemo bis
 * S4b1nuz E.656
 * Sarah Bernabei
+* Senpremì
 * Una giornata uggiosa '94
 * Wim b
 -->
@@ -170,11 +171,12 @@
   <string name="detail_panel_cats_loading">Caricamento…</string>
   <string name="detail_panel_cats_none">Nessuna selezione</string>
   <string name="detail_description_empty">Nessuna descrizione</string>
+  <string name="detail_discussion_empty">Nessuna discussione</string>
   <string name="detail_license_empty">Licenza sconosciuta</string>
   <string name="menu_refresh">Aggiorna</string>
   <string name="storage_permission_title">Richiesta di autorizzazione di archiviazione</string>
-  <string name="read_storage_permission_rationale">Autorizzazione richiesta: leggere la memoria esterna. L\'app non può accedere alla tua galleria senza questo.</string>
-  <string name="write_storage_permission_rationale">Autorizzazione richiesta: scrivere memoria esterna. L\'app non può accedere alla tua videocamera senza questa.</string>
+  <string name="read_storage_permission_rationale">Autorizzazione richiesta: leggere la memoria esterna. L\'applicazione non può accedere alla tua galleria senza questo.</string>
+  <string name="write_storage_permission_rationale">Autorizzazione richiesta: scrivere memoria esterna. L\'applicazione non può accedere alla tua videocamera/galleria senza questa.</string>
   <string name="location_permission_rationale">Autorizzazione facoltativa: ottieni la posizione corrente per i suggerimenti di categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Luoghi nelle vicinanze</string>
@@ -185,6 +187,7 @@
   <string name="no">No</string>
   <string name="media_detail_title">Titolo</string>
   <string name="media_detail_description">Descrizione</string>
+  <string name="media_detail_discussion">Discussione</string>
   <string name="media_detail_author">Autore</string>
   <string name="media_detail_uploaded_date">Data di caricamento</string>
   <string name="media_detail_license">Licenza</string>
@@ -200,7 +203,7 @@
   <string name="maximum_limit_alert">Non è possibile mostrarne più di 500</string>
   <string name="enter_valid">Inserisci un numero valido</string>
   <string name="cannot_be_zero">Il limite di caricamento non può essere 0</string>
-  <string name="set_limit">Imposta limite caricamento recente</string>
+  <string name="set_limit">Limite caricamento recente</string>
   <string name="login_failed_2fa_not_supported">L\'autenticazione a due fattori non è attualmente supportata.</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
   <string name="commons_logo">Logo di Commons</string>
@@ -250,6 +253,7 @@
   <string name="upload_problem_image_blurry">L\'immagine è sfocata.</string>
   <string name="upload_problem_image_duplicate">L\'immagine è già su Commons.</string>
   <string name="upload_problem_different_geolocation">Questa foto è stata scattata in una posizione diversa.</string>
+  <string name="upload_problem_fbmd">Carica solo le foto che hai scattato tu stesso. Non caricare immagini che hai trovato negli account Facebook di altre persone.</string>
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
   <string name="give_permission">Dai autorizzazione</string>
   <string name="use_external_storage">Usa memoria esterna</string>
@@ -298,7 +302,7 @@
   <string name="about_translate_cancel">Annulla</string>
   <string name="retry">Riprova</string>
   <string name="showcase_view_got_it_button">Capito!</string>
-  <string name="showcase_view_whole_nearby_activity">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity">Questi sono i luoghi vicino a te che necessitano di immagini per illustrare le loro voci di Wikipedia.\n\nCliccando su \"CERCA QUESTA AREA\" si blocca la mappa e si avvia una ricerca nelle vicinanze intorno a quella posizione.</string>
   <string name="showcase_view_list_icon">Toccando questo pulsante viene visualizzato un elenco di questi luoghi</string>
   <string name="showcase_view_plus_fab">Puoi caricare un\'immagine per ogni luogo dalla tua galleria o fotocamera</string>
   <string name="no_images_found">Nessuna immagine trovata!</string>
@@ -349,6 +353,7 @@
   <string name="delete_recent_searches_dialog">Sei sicuro di voler cancellare la tua cronologia di ricerca?</string>
   <string name="search_history_deleted">Cronologia di ricerca cancellata</string>
   <string name="nominate_delete">Proponi per la cancellazione</string>
+  <string name="delete">CANCELLA</string>
   <string name="Achievements">Risultati</string>
   <string name="statistics">STATISTICHE</string>
   <string name="statistics_thanks">Ringraziamenti ricevuti</string>
@@ -406,10 +411,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi sono reso conto che è un male per la mia privacy</string>
   <string name="deletion_reason_no_longer_want_public">Ho cambiato idea, non voglio più che sia pubblicamente visibile</string>
   <string name="deletion_reason_not_interesting">Spiacente, questa immagine non è interessante per un\'enciclopedia</string>
-  <string name="uploaded_by_myself">Caricato da me stesso il</string>
-  <string name="used_by">, usato in</string>
-  <string name="articles">voci</string>
-  <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando l\'icona della fotocamera o della galleria sopra.</string>
+  <string name="uploaded_by_myself">Caricato da me stesso il %1$s, utilizzato in %2$d voce/i.</string>
+  <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando il pulsante aggiungi.</string>
   <string name="desc_language_Worldwide">Tutto il mondo</string>
   <string name="desc_language_America">America</string>
   <string name="desc_language_Europe">Europa</string>
@@ -432,11 +435,21 @@
   <string name="achievements_fetch_failed">Qualcosa è andato storto, non siamo riusciti a recuperare i tuoi risultati</string>
   <string name="ends_on">Termina il:</string>
   <string name="display_campaigns">Visualizza campagne</string>
-  <string name="display_campaigns_explanation">Tocca qui per vedere le campagne in corso</string>
+  <string name="display_campaigns_explanation">Vedi le campagne in corso</string>
   <string name="nearby_campaign_dismiss_message">Non vedrai più le campagne. Tuttavia, puoi riattivare questa notifica in Impostazioni, se lo desideri.</string>
   <string name="this_function_needs_network_connection">Questa funzione richiede una connessione di rete, controlla le impostazioni di connessione.</string>
   <string name="bad_token_error_proposed_solution">Caricamento non riuscito a causa di problemi con il token di modifica. Si prega di provare a disconnettersi e riconnettersi nuovamente.</string>
   <string name="error_processing_image">Si è verificato un errore durante l\'elaborazione dell\'immagine. Per favore riprova!</string>
+  <string name="nominate_for_deletion_done">Fatto</string>
+  <string name="review_copyright_explanation">I loghi, gli screenshot e le locandine di film sono solitamente violazioni del copyright.\nClicca NO per proporre l\'eliminazione di questa immagine</string>
+  <string name="review_category_yes_button_text">No, la categoria è sbagliata</string>
+  <string name="review_category_no_button_text">Sembra tutto ok</string>
+  <string name="review_spam_yes_button_text">No, è fuori tema</string>
+  <string name="review_spam_no_button_text">Sembra tutto ok</string>
+  <string name="review_copyright_yes_button_text">No, è una violazione di copyright</string>
+  <string name="review_copyright_no_button_text">Sembra tutto ok</string>
+  <string name="review_thanks_yes_button_text">Certo, perché no</string>
+  <string name="review_thanks_no_button_text">Immagine successiva</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Ricezione di contenuti condivisi. L\'elaborazione dell\'immagine potrebbe richiedere del tempo a seconda delle dimensioni dell\'immagine e del dispositivo</item>
     <item quantity="other">Ricezione di contenuti condivisi. L\'elaborazione delle immagini potrebbe richiedere del tempo a seconda delle dimensioni delle immagini e del dispositivo</item>
@@ -452,4 +465,8 @@
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="image_chooser_title">Scegli le immagini da caricare</string>
   <string name="please_wait">Attendi per favore…</string>
+  <string name="previous_image_title_description">Copia titolo/descrizione precedente</string>
+  <string name="previous_button_tooltip_message">Clicca per riusare il titolo e la descrizione dell\'immagine precedente e adattarli all\'immagine attuale.</string>
+  <string name="skip_image">SALTA QUESTA IMMAGINE</string>
+  <string name="image_info">Informazioni sull\'immagine</string>
 </resources>

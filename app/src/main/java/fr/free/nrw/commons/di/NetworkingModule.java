@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.di;
 
 import android.content.Context;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
+import org.wikipedia.json.GsonUtil;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -13,15 +12,14 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import androidx.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
-import fr.free.nrw.commons.utils.UriDeserializer;
-import fr.free.nrw.commons.utils.UriSerializer;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -32,8 +30,6 @@ import timber.log.Timber;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class NetworkingModule {
     private static final String WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql";
-    private final String WIKIMEDIA_CAMPAIGNS_BASE_URL =
-            "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json";
     private static final String TOOLS_FORGE_URL = "https://tools.wmflabs.org/urbanecmbot/commonsmisc";
 
     private static final String TEST_TOOLS_FORGE_URL = "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app";
@@ -57,7 +53,7 @@ public class NetworkingModule {
     @Singleton
     public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
-            Timber.tag("OkHttp").d(message);
+            Timber.tag("OkHttp").v(message);
         });
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return httpLoggingInterceptor;
@@ -66,31 +62,32 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public MediaWikiApi provideMediaWikiApi(Context context,
-                                            @Named("default_preferences") BasicKvStore defaultKvStore,
-                                            @Named("category_prefs") BasicKvStore categoryKvStore,
+                                            @Named("default_preferences") JsonKvStore defaultKvStore,
                                             Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, categoryKvStore, gson);
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, gson);
     }
 
     @Provides
     @Singleton
     public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
                                                           @Named("tools_force") HttpUrl toolsForgeUrl,
+                                                          @Named("default_preferences") JsonKvStore defaultKvStore,
                                                           Gson gson) {
         return new OkHttpJsonApiClient(okHttpClient,
                 toolsForgeUrl,
                 WIKIDATA_SPARQL_QUERY_URL,
-                WIKIMEDIA_CAMPAIGNS_BASE_URL,
+                BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
                 BuildConfig.WIKIMEDIA_API_HOST,
+                defaultKvStore,
                 gson);
     }
 
     @Provides
-    @Named("commons_mediawiki_url")
+    @Named("wikimedia_api_host")
     @NonNull
     @SuppressWarnings("ConstantConditions")
-    public HttpUrl provideMwUrl() {
-        return HttpUrl.parse(BuildConfig.COMMONS_URL);
+    public String provideMwApiUrl() {
+        return BuildConfig.WIKIMEDIA_API_HOST;
     }
 
     @Provides
@@ -108,10 +105,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public Gson provideGson() {
-        return new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriSerializer())
-                .registerTypeAdapter(Uri.class, new UriDeserializer())
-                .create();
+        return GsonUtil.getDefaultGson();
     }
 
 }

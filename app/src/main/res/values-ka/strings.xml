@@ -160,7 +160,7 @@
   <string name="detail_license_empty">უცნობი ლიცენზია</string>
   <string name="menu_refresh">განახლება</string>
   <string name="read_storage_permission_rationale">ნებართვა: გარე მეხსიერების წაკითხვა. აპლიკაცია ვერ მიწვდება თქვენს გალერეას ამის გარეშე.</string>
-  <string name="write_storage_permission_rationale">ნებართვა: გარე მეხსიერების გამოყენება. აპლიკაცია ვერ მიწვდება თქვენს კამერამდე ამის გარეშე.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">ნებართვა: გარე მეხსიერების გამოყენება. აპლიკაცია ვერ მიწვდება თქვენს კამერამდე ამის გარეშე.</string>
   <string name="location_permission_rationale">დამატებითი ნებართვა: მიმდინარე ადგილმდებარეობის განსაზღვრა კატეგორიის შემოთავაზებისთვის</string>
   <string name="ok">კარგი</string>
   <string name="title_activity_nearby">ახლომდებარე ადგილები</string>
@@ -179,7 +179,7 @@
   <string name="number_of_uploads">ჩემი ბოლო ატვირთვების ლიმიტი</string>
   <string name="maximum_limit">მაქსიმალური ლიმიტი</string>
   <string name="maximum_limit_alert">500-ზე მეტის ჩვენება შეუძლებელია</string>
-  <string name="set_limit">ბოლო ატვირთვების ლიმიტის დაყენება</string>
+  <string name="set_limit" fuzzy="true">ბოლო ატვირთვების ლიმიტის დაყენება</string>
   <string name="login_failed_2fa_not_supported">ორფაქტორიანი ავტორიზაცია ამჟამად მიუწვდომელია.</string>
   <string name="logout_verification">ნამდვილად გსურთ გასვლა?</string>
   <string name="commons_logo">ვიკისაწყობის ლოგო</string>

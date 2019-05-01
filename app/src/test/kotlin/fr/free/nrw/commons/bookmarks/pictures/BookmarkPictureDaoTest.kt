@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
+import android.net.Uri
 import android.os.RemoteException
 import com.nhaarman.mockito_kotlin.*
 import fr.free.nrw.commons.BuildConfig
@@ -33,7 +34,7 @@ class BookmarkPictureDaoTest {
 
     @Before
     fun setUp() {
-        exampleBookmark = Bookmark("mediaName", "creatorName")
+        exampleBookmark = Bookmark("mediaName", "creatorName", Uri.EMPTY)
         testObject = BookmarkPicturesDao { client }
     }
 

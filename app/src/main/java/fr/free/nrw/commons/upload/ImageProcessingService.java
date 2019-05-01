@@ -1,5 +1,10 @@
 package fr.free.nrw.commons.upload;
 
+import android.content.Context;
+import android.net.Uri;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -7,10 +12,8 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.utils.BitmapRegionDecoderWrapper;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
-import fr.free.nrw.commons.utils.StringUtils;
 import io.reactivex.Single;
 import timber.log.Timber;
 
@@ -20,25 +23,30 @@ import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 /**
  * Methods for pre-processing images to be uploaded
- */
+ *//*if (dataInBytes[0] == 70 && dataInBytes[1] == 66 && dataInBytes[2] == 77 && dataInBytes[3] == 68) {
+                Timber.d("Contains FBMD");
+                return Single.just(ImageUtils.FILE_FBMD);
+            }*/
 @Singleton
 public class ImageProcessingService {
     private final FileUtilsWrapper fileUtilsWrapper;
-    private final BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper;
     private final ImageUtilsWrapper imageUtilsWrapper;
     private final MediaWikiApi mwApi;
     private final ReadFBMD readFBMD;
+    private final EXIFReader EXIFReader;
+    private final Context context;
 
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
-                                  BitmapRegionDecoderWrapper bitmapRegionDecoderWrapper,
                                   ImageUtilsWrapper imageUtilsWrapper,
-                                  MediaWikiApi mwApi, ReadFBMD readFBMD) {
+                                  MediaWikiApi mwApi, ReadFBMD readFBMD, EXIFReader EXIFReader,
+                                  Context context) {
         this.fileUtilsWrapper = fileUtilsWrapper;
-        this.bitmapRegionDecoderWrapper = bitmapRegionDecoderWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.mwApi = mwApi;
         this.readFBMD = readFBMD;
+        this.EXIFReader = EXIFReader;
+        this.context = context;
     }
 
     /**
@@ -56,22 +64,23 @@ public class ImageProcessingService {
         }
         Timber.d("Checking the validity of image");
         String filePath = uploadItem.getMediaUri().getPath();
+        Uri contentUri=uploadItem.getContentUri();
         Single<Integer> duplicateImage = checkDuplicateImage(filePath);
         Single<Integer> wrongGeoLocation = checkImageGeoLocation(uploadItem.getPlace(), filePath);
         Single<Integer> darkImage = checkDarkImage(filePath);
         Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
-        Single<Integer> checkFBMD = checkFBMD(filePath);
+        Single<Integer> checkFBMD = checkFBMD(context,contentUri);
+        Single<Integer> checkEXIF = checkEXIF(filePath);
 
         Single<Integer> zipResult = Single.zip(duplicateImage, wrongGeoLocation, darkImage, itemTitle,
                 (duplicate, wrongGeo, dark, title) -> {
                     Timber.d("Result for duplicate: %d, geo: %d, dark: %d, title: %d", duplicate, wrongGeo, dark, title);
                     return duplicate | wrongGeo | dark | title;
                 });
-
-        return Single.zip(zipResult, checkFBMD, (zip, fbmd) -> {
-            Timber.d("zip:" + zip + "fbmd:" + fbmd);
-            return zip | fbmd;
-        });
+        return Single.zip(zipResult, checkFBMD , checkEXIF , (zip , fbmd , exif)->{
+            Timber.d("zip:" + zip + "fbmd:" + fbmd + "exif:" + exif);
+            return zip | fbmd | exif;
+                });
     }
 
     /**
@@ -84,12 +93,23 @@ public class ImageProcessingService {
      * Thus we successfully protect common's from Facebook's copyright violation
      */
 
-    public Single<Integer> checkFBMD(String filePath) {
+    public Single<Integer> checkFBMD(Context context,Uri contentUri) {
         try {
-            return readFBMD.processMetadata(filePath);
+            return readFBMD.processMetadata(context,contentUri);
         } catch (IOException e) {
             return Single.just(ImageUtils.FILE_FBMD);
         }
+    }
+
+    /**
+    * To avoid copyright we check for EXIF data in any image.
+     * Images that are downloaded from internet generally don't have any EXIF data in them
+     * while images taken via camera or screenshots in phone have EXIF data with them.
+     * So we check if the image has no EXIF data then we display a warning to the user
+     * * */
+
+    public Single<Integer> checkEXIF(String filepath){
+        return EXIFReader.processMetadata(filepath);
     }
 
 
@@ -141,10 +161,7 @@ public class ImageProcessingService {
      */
     private Single<Integer> checkDarkImage(String filePath) {
         Timber.d("Checking for dark image %s", filePath);
-        return Single.fromCallable(() ->
-                fileUtilsWrapper.getFileInputStream(filePath))
-                .map(file -> bitmapRegionDecoderWrapper.newInstance(file, false))
-                .flatMap(imageUtilsWrapper::checkIfImageIsTooDark);
+        return imageUtilsWrapper.checkIfImageIsTooDark(filePath);
     }
 
     /**
@@ -156,13 +173,13 @@ public class ImageProcessingService {
      */
     private Single<Integer> checkImageGeoLocation(Place place, String filePath) {
         Timber.d("Checking for image geolocation %s", filePath);
-        if (place == null || StringUtils.isNullOrWhiteSpace(place.getWikiDataEntityId())) {
+        if (place == null || StringUtils.isBlank(place.getWikiDataEntityId())) {
             return Single.just(ImageUtils.IMAGE_OK);
         }
         return Single.fromCallable(() -> filePath)
                 .map(fileUtilsWrapper::getGeolocationOfFile)
                 .flatMap(geoLocation -> {
-                    if (StringUtils.isNullOrWhiteSpace(geoLocation)) {
+                    if (StringUtils.isBlank(geoLocation)) {
                         return Single.just(ImageUtils.IMAGE_OK);
                     }
                     return imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation());

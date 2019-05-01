@@ -174,7 +174,7 @@
   <string name="detail_license_empty">Bilinmeyen lisans</string>
   <string name="menu_refresh">Yenile</string>
   <string name="read_storage_permission_rationale">Gerekli izin: Harici belleği oku. Uygulama, galerinize bu olmadan erişemez.</string>
-  <string name="write_storage_permission_rationale">Gerekli izin: Harici depolama yazın. Uygulama kameranıza bu olmadan erişemez.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Gerekli izin: Harici depolama yazın. Uygulama kameranıza bu olmadan erişemez.</string>
   <string name="location_permission_rationale">İsteğe bağlı izin: Kategori önerileri için geçerli konum alma</string>
   <string name="ok">Tamam</string>
   <string name="title_activity_nearby">Yakındaki yerler</string>
@@ -196,7 +196,7 @@
   <string name="number_of_uploads">Son Yükleme Limitim</string>
   <string name="maximum_limit">Maksimum Limit</string>
   <string name="maximum_limit_alert">500\'den fazla görüntülenemiyor</string>
-  <string name="set_limit">Yeni Yükleme Sınırı Ayarla</string>
+  <string name="set_limit" fuzzy="true">Yeni Yükleme Sınırı Ayarla</string>
   <string name="login_failed_2fa_not_supported">İki faktörlü kimlik doğrulama şu anda desteklenmiyor.</string>
   <string name="logout_verification">Gerçekten çıkış yapmak istiyor musunuz?</string>
   <string name="commons_logo">Commons Logo</string>
@@ -288,7 +288,7 @@
   <string name="about_translate_cancel">Vazgeç</string>
   <string name="retry">Tekrar Deneyin</string>
   <string name="showcase_view_got_it_button">Anladım!</string>
-  <string name="showcase_view_whole_nearby_activity">Vikipedi maddelerine eklemek için fotoğrafa ihtiyaç duyan size yakın yerler</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Vikipedi maddelerine eklemek için fotoğrafa ihtiyaç duyan size yakın yerler</string>
   <string name="showcase_view_list_icon">Bu tuşa dokunmak bu yerlerin bir listesini getirir</string>
   <string name="showcase_view_plus_fab">Galerinizden veya kameranızla herhangi bir yer için resim yükleyebilirsiniz.</string>
   <string name="no_images_found">Resim bulunamadı!</string>
@@ -336,8 +336,10 @@
   <string name="add_description">+ Açıklama ekle</string>
   <string name="no_recent_searches">Son arama yok</string>
   <string name="delete_recent_searches_dialog">Arama geçmişinizi silmek istediğinize emin misiniz?</string>
+  <string name="delete_search_dialog">Bu aramayı silmek istiyor musunuz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
   <string name="nominate_delete">Silinmeye aday göster</string>
+  <string name="delete">SİL</string>
   <string name="Achievements">Başarılar</string>
   <string name="statistics">İSTATİSTİKLER</string>
   <string name="statistics_thanks">Alınan Teşekkürler</string>
@@ -390,10 +392,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Gizliliğim açısından kötü olduğunu fark ettim</string>
   <string name="deletion_reason_no_longer_want_public">Fikrimi değiştirdim, bunun herkese görünür olmasını istemiyorum</string>
   <string name="deletion_reason_not_interesting">Ansiklopedi için gerekli olmayan bir resim</string>
-  <string name="uploaded_by_myself">Kendi tarafımdan yüklendi</string>
-  <string name="used_by">,kullanılan</string>
-  <string name="articles">maddeler</string>
-  <string name="no_uploads">Commons\'a Hoş Geldiniz!\n\nYukarıdaki kamera ya da galeri simgesine dokunarak ilk medyanızı yükleyin.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Kendi tarafımdan yüklendi</string>
+  <string name="no_uploads" fuzzy="true">Commons\'a Hoş Geldiniz!\n\nYukarıdaki kamera ya da galeri simgesine dokunarak ilk medyanızı yükleyin.</string>
   <string name="desc_language_Worldwide">Dünya çapında</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Avrupa</string>
@@ -415,9 +415,9 @@
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görünümü özelliği için gerektiğinde konum izni isteyin.</string>
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
-  <string name="display_campaigns_explanation">Devam eden kampanyaları görmek için buraya dokunun</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Devam eden kampanyaları görmek için buraya dokunun</string>
   <string name="nearby_campaign_dismiss_message">Artık kampanyaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'da yeniden etkinleştirebilirsiniz.</string>
-  <string name="no_archived_notification">Arşivlenmiş bildiriminiz yok</string>
+  <string name="no_archived_notification" fuzzy="true">Arşivlenmiş bildiriminiz yok</string>
   <string name="menu_option_archived">Arşivlenmişleri görüntüle</string>
   <string name="menu_option_unread">Okunmamışları görüntüle</string>
   <string name="please_wait">Lütfen bekleyin…</string>

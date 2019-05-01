@@ -170,7 +170,7 @@
   <string name="menu_refresh">Reîncarcă</string>
   <string name="storage_permission_title">Solicitarea Permisiunilor de Stocare</string>
   <string name="read_storage_permission_rationale">Necesită permisiune: Citiți spațiul de stocare extern. Aplicația nu poate accesa galeria dvs. fără aceasta.</string>
-  <string name="write_storage_permission_rationale">Necesită permisiune: Scrieți un spațiu de stocare extern. Aplicația nu poate accesa camera fără acest lucru.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Necesită permisiune: Scrieți un spațiu de stocare extern. Aplicația nu poate accesa camera fără acest lucru.</string>
   <string name="location_permission_rationale">Permisiune opțională: Obțineți locația curentă pentru sugestiile de categorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Locurile din Apropiere</string>
@@ -192,7 +192,7 @@
   <string name="number_of_uploads">Limita mea de încărcare recentă</string>
   <string name="maximum_limit">Limită maximă</string>
   <string name="maximum_limit_alert">Nu pot afișa mai mult de 500</string>
-  <string name="set_limit">Setați limita de încărcări recente</string>
+  <string name="set_limit" fuzzy="true">Setați limita de încărcări recente</string>
   <string name="login_failed_2fa_not_supported">Autentificare cu doi factori nu este acceptată în prezent.</string>
   <string name="logout_verification">Chiar vrei să te deconectezi?</string>
   <string name="commons_logo">Logoul Commons</string>
@@ -290,7 +290,7 @@
   <string name="about_translate_cancel">Anulare</string>
   <string name="retry">Reîncercare</string>
   <string name="showcase_view_got_it_button">Am înțeles!</string>
-  <string name="showcase_view_whole_nearby_activity">Acestea sunt locurile din apropierea ta care au nevoie de imagini pentru a ilustra articolele lor Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Acestea sunt locurile din apropierea ta care au nevoie de imagini pentru a ilustra articolele lor Wikipedia</string>
   <string name="showcase_view_list_icon">Atingând acest buton, se afișează o listă a acestor locuri</string>
   <string name="showcase_view_plus_fab">Puteți încărca o imagine pentru orice loc din galerie sau camera foto</string>
   <string name="no_images_found">Nu s-au gasit imagini!</string>
@@ -396,10 +396,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi-am dat seama că este rău pentru intimitatea mea</string>
   <string name="deletion_reason_no_longer_want_public">M-am răzgândit, nu mai vreau să fie publică</string>
   <string name="deletion_reason_not_interesting">Ne pare rău că această imagine nu este interesantă pentru o enciclopedie</string>
-  <string name="uploaded_by_myself">Încărcat de mine însumi</string>
-  <string name="used_by">,folosită în</string>
-  <string name="articles">articole</string>
-  <string name="no_uploads">Bun venit la Commons!\n\nÎncărcați primul dvs. suport media atingând pictograma camerei sau galeria de mai sus.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Încărcat de mine însumi</string>
+  <string name="no_uploads" fuzzy="true">Bun venit la Commons!\n\nÎncărcați primul dvs. suport media atingând pictograma camerei sau galeria de mai sus.</string>
   <string name="desc_language_Worldwide">La nivel mondial</string>
   <string name="desc_language_America">America</string>
   <string name="desc_language_Europe">Europa</string>
@@ -422,7 +420,7 @@
   <string name="achievements_fetch_failed">Ceva a mers prost, nu am reușit să ne aducem realizările</string>
   <string name="ends_on">Se încheie la:</string>
   <string name="display_campaigns">Campaniile de afișare</string>
-  <string name="display_campaigns_explanation">Atingeți aici pentru a vedea campaniile în desfășurare</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Atingeți aici pentru a vedea campaniile în desfășurare</string>
   <string name="nearby_campaign_dismiss_message">Nu veți mai vedea campaniile. Cu toate acestea, puteți reactiva această notificare în Setări, dacă doriți.</string>
   <string name="this_function_needs_network_connection">Această funcție necesită conectare la rețea, verificați setările de conectare.</string>
   <string name="bad_token_error_proposed_solution">Încărcarea a eșuat din cauza problemelor cu Edit token. Încearcă să te deconectezi și să intri din nou.</string>

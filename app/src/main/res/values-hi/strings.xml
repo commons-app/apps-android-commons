@@ -198,7 +198,7 @@
   <string name="number_of_uploads">मेरी हाल ही की अपलोड सीमा</string>
   <string name="maximum_limit">अधिकतम सीमा</string>
   <string name="maximum_limit_alert">500 से अधिक प्रदर्शित करने में असमर्थ</string>
-  <string name="set_limit">हाल ही में अपलोड सीमा सेट करें</string>
+  <string name="set_limit" fuzzy="true">हाल ही में अपलोड सीमा सेट करें</string>
   <string name="login_failed_2fa_not_supported">दो कारक प्रमाणीकरण वर्तमान में समर्थित नहीं है</string>
   <string name="logout_verification">क्या आप वास्तव में निकास करना चाहते हैं?</string>
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
@@ -368,9 +368,8 @@
   <string name="deletion_reason_bad_for_my_privacy">मुझे ज्ञात हुआ कि यह मेरी गोपनीयता के लिये सही नहीं है</string>
   <string name="deletion_reason_no_longer_want_public">मैंने अपना मन बदल लिया है, मैं इसे और अधिक सार्वजनिक रूप से दृश्य नहीं रखना चाहता</string>
   <string name="deletion_reason_not_interesting">क्षमा करें, यह चित्र ज्ञानकोष के लिये दिलचस्प नहीं है</string>
-  <string name="uploaded_by_myself">मेरे द्वारा अपलोड किया गया</string>
-  <string name="articles">लेख</string>
-  <string name="no_uploads">कॉमन्स पर आपका स्वागत है!</string>
+  <string name="uploaded_by_myself" fuzzy="true">मेरे द्वारा अपलोड किया गया</string>
+  <string name="no_uploads" fuzzy="true">कॉमन्स पर आपका स्वागत है!</string>
   <string name="desc_language_Worldwide">वैश्विक</string>
   <string name="desc_language_America">अमेरिका</string>
   <string name="desc_language_Europe">यूरोप</string>
@@ -388,13 +387,13 @@
   <string name="never_ask_again">फिर कभी न पूछें</string>
   <string name="ends_on">खत्म होगा:</string>
   <string name="display_campaigns">दृश्य अभियान</string>
-  <string name="display_campaigns_explanation">वर्तमान में चल रहे अभियानों को जानने के लिये यहाँ दबायें</string>
+  <string name="display_campaigns_explanation" fuzzy="true">वर्तमान में चल रहे अभियानों को जानने के लिये यहाँ दबायें</string>
   <string name="error_processing_image">छवि संसाधित करते समय त्रुटि आई। कृपया पुन: प्रयास करें!</string>
   <string name="no_image">कोई चित्र उपयोग नहीं हुआ</string>
   <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>
   <string name="no_image_uploaded">कोई चित्र अपलोड नहीं किया</string>
-  <string name="no_notification">आपके पास कोई अपठित सूचना नहीं है</string>
-  <string name="no_archived_notification">आपकी कोई सूचना पुरालेखित नहीं है</string>
+  <string name="no_notification" fuzzy="true">आपके पास कोई अपठित सूचना नहीं है</string>
+  <string name="no_archived_notification" fuzzy="true">आपकी कोई सूचना पुरालेखित नहीं है</string>
   <string name="menu_option_archived">पुरालेखित देखें</string>
   <string name="menu_option_unread">अपठित देखें</string>
 </resources>

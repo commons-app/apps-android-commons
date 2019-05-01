@@ -164,7 +164,7 @@
   <string name="detail_license_empty">Lizentzia ezezaguna</string>
   <string name="menu_refresh">Eguneratu</string>
   <string name="read_storage_permission_rationale">Nahitaezko baimena: kanpo-biltegiaren irakurketa. Aplikazioa ezin da zure galeriara sartu hau gabe.</string>
-  <string name="write_storage_permission_rationale">Nahitaezko baimena: kanpo-biltegiaren idazketa. Aplikazioa ezin da zure kamerara sartu hau gabe.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Nahitaezko baimena: kanpo-biltegiaren idazketa. Aplikazioa ezin da zure kamerara sartu hau gabe.</string>
   <string name="location_permission_rationale">Aukerako baimena: momentuko kokapena zehaztu kategoriak iradokitzeko</string>
   <string name="ok">Ados</string>
   <string name="title_activity_nearby">Gertuko lekuak</string>
@@ -268,7 +268,7 @@
   <string name="about_translate_cancel">Utzi</string>
   <string name="retry">Saiatu berriro</string>
   <string name="showcase_view_got_it_button">Ulertu dut!</string>
-  <string name="showcase_view_whole_nearby_activity">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko</string>
   <string name="showcase_view_list_icon">Botoi hau sakatzeak leku hauetako zerrenda eskeiniko dizu</string>
   <string name="showcase_view_plus_fab">Edozein lekutako irudi bat igo dezakezu zure kamera edo galeriatik</string>
   <string name="no_images_found">Ez da irudirik aurkitu!</string>

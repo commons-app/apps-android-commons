@@ -5,13 +5,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/toolbar"/>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         app:cardCornerRadius="8dp"
@@ -91,5 +87,5 @@
 
             </RelativeLayout>
         </ScrollView>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

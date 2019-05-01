@@ -14,7 +14,7 @@
   <string name="navigation_item_explore">Keşf kerê</string>
   <string name="preference_category_appearance">Asayış</string>
   <string name="preference_category_general">Bıngeh</string>
-  <string name="preference_category_feedback">Peydrışten</string>
+  <string name="preference_category_feedback">Peyderıştış</string>
   <string name="preference_category_location">Lokasyon</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -137,6 +137,7 @@
   <string name="detail_panel_cats_loading">Bar beno…</string>
   <string name="detail_panel_cats_none">Theba nêweçineya</string>
   <string name="detail_description_empty">Akerdenayış çıniyo</string>
+  <string name="detail_discussion_empty">Mışewre çıniyo</string>
   <string name="detail_license_empty">Lisans nizaneyeno</string>
   <string name="menu_refresh">Newe ke</string>
   <string name="ok">TEMAM</string>
@@ -146,6 +147,7 @@
   <string name="no">Nê</string>
   <string name="media_detail_title">Sername</string>
   <string name="media_detail_description">Şınasnayış</string>
+  <string name="media_detail_discussion">Werênayış</string>
   <string name="media_detail_author">Nuştekar</string>
   <string name="media_detail_uploaded_date">Tarixê barkerdışi</string>
   <string name="media_detail_license">Lisans</string>
@@ -171,11 +173,12 @@
   <string name="navigation_item_nearby">Nezdıra</string>
   <string name="navigation_item_about">Heqa</string>
   <string name="navigation_item_settings">Eyari</string>
-  <string name="navigation_item_feedback">Peydrışten</string>
+  <string name="navigation_item_feedback">Peyderıştış</string>
   <string name="navigation_item_logout">Veciyayış</string>
   <string name="navigation_item_info">Musnayış</string>
   <string name="navigation_item_notification">Tebliği</string>
   <string name="navigation_item_featured_images">Weçinaye</string>
+  <string name="navigation_item_review">Çım berze cı</string>
   <string name="nearby_needs_permissions">Cayê nezdiy, bêicazetê lokasyoni nêmocneyêno</string>
   <string name="nearby_info_menu_commons_article">Pela dosyay commonsi</string>
   <string name="nearby_info_menu_wikidata_article">Pbcey Wikidata</string>
@@ -201,6 +204,8 @@
   <string name="about_translate_cancel">Bıtexelne</string>
   <string name="retry">Anciya bıcerrebne</string>
   <string name="showcase_view_got_it_button">Mı fehm kerd!</string>
+  <string name="appwidget_img">Resmê roce</string>
+  <string name="app_widget_heading">Resmê roce</string>
   <string name="menu_search_button">Cıgeyrayış</string>
   <string name="title_activity_search">Cıgeyrayış</string>
   <string name="search_tab_title_media">MEDYA</string>
@@ -211,6 +216,7 @@
   <string name="continue_message">Dewam kerê</string>
   <string name="correct">Cewabo raşt</string>
   <string name="wrong">Cewabo ğelet</string>
+  <string name="delete">BESTERE</string>
   <string name="statistics">İSTATİSTİKİ</string>
   <string name="statistics_thanks">Teşekurê gêriyayi</string>
   <string name="level">SEWİYA</string>
@@ -229,7 +235,6 @@
   <string name="menu_bookmark">Nişanan cı kerê/wedarê</string>
   <string name="provider_bookmarks">Nişan</string>
   <string name="provider_bookmarks_location">Nişani</string>
-  <string name="articles">meqaleyi</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Ewropa</string>
   <string name="desc_language_Middle_East">Rocvetışê Miyani</string>
@@ -239,8 +244,14 @@
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
   <string name="yes_submit">Eya, bırışe</string>
   <string name="no_go_back">Nê, Peyser Şo</string>
-  <string name="no_archived_notification">Xeberê şımayê arşivkerdeyi çıniyê</string>
+  <string name="nominate_for_deletion_done">Temam</string>
+  <string name="review_spam_report_problem">reklam</string>
+  <string name="review_thanks_yes_button_text">Eya, çıra mebo</string>
+  <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
+  <string name="no_archived_notification">Beyanatên şımayê arçivkerdeyi çıniyê</string>
   <string name="menu_option_archived">Arşivkerdeyan bıvêne</string>
   <string name="menu_option_unread">Nêwendeyan bıvêne</string>
   <string name="please_wait">Kerem kerên, bıpawên...</string>
+  <string name="skip_image">NÊ RESIMİ RAVİYARNE</string>
+  <string name="image_info">Melumatê resımi</string>
 </resources>

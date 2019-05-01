@@ -163,7 +163,7 @@
   <string name="detail_license_empty">Lisénsi teu dipikanyaho</string>
   <string name="menu_refresh">Segerkeun</string>
   <string name="read_storage_permission_rationale">Merlukeun idin: Baca teundeunan éksternal. Aplikasi teu bisa muka galeri anjeun lamun teu diidinan.</string>
-  <string name="write_storage_permission_rationale">Merlukeun idin: Nulis teundeunan éksternal. Aplikasi teu bisa muka kaméra lamun teu diidinan.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Merlukeun idin: Nulis teundeunan éksternal. Aplikasi teu bisa muka kaméra lamun teu diidinan.</string>
   <string name="location_permission_rationale">Idin pilihan: Paké lokasi kiwari pikeun usulan kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Tempat Sabudeureun</string>
@@ -184,7 +184,7 @@
   <string name="number_of_uploads">Wates Unjalan Kami Panungtung</string>
   <string name="maximum_limit">Wates Maksimum</string>
   <string name="maximum_limit_alert">Teu bisa midangkeun leuwih ti 500</string>
-  <string name="set_limit">Atur Wates Unjal Panungtung</string>
+  <string name="set_limit" fuzzy="true">Atur Wates Unjal Panungtung</string>
   <string name="login_failed_2fa_not_supported">Oténtikasi dua faktor kiwari teu dirojong.</string>
   <string name="logout_verification">Yakin anjeun rék kaluar?</string>
   <string name="commons_logo">Logo Commons</string>

@@ -10,8 +10,8 @@ public class NearbyResultItem {
     private final ResultTuple label;
     private final ResultTuple icon;
     @SerializedName("class") private final ResultTuple className;
-    @SerializedName("class_label") private final ResultTuple classLabel;
-    @SerializedName("Commons_category") private final ResultTuple commonsCategory;
+    @SerializedName("classLabel") private final ResultTuple classLabel;
+    @SerializedName("commonsCategory") private final ResultTuple commonsCategory;
 
     public NearbyResultItem(ResultTuple item,
                             ResultTuple wikipediaArticle,

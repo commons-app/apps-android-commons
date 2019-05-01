@@ -4,9 +4,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v4.app.DialogFragment;
+import androidx.annotation.Nullable;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,9 +47,9 @@ public class SimilarImageDialogFragment extends DialogFragment {
     public SimilarImageDialogFragment() {
     }
     public interface onResponse{
-        public void onPositiveResponse();
+        void onPositiveResponse();
 
-        public void onNegativeResponse();
+        void onNegativeResponse();
     }
 
     @Override

@@ -155,7 +155,7 @@
   <string name="menu_refresh">გოახალაფა</string>
   <string name="storage_permission_title">თხილუაშ ოჸიაშ მოთხირი</string>
   <string name="read_storage_permission_rationale">ოჸია: გალენი შვენაშ კითხირი. აპლიკაციას ვემიაჭირინე თქვან გალერეაშა თეშ უმუშო.</string>
-  <string name="write_storage_permission_rationale">ოჸია: გალენი შვენაშ გიმორინაფა. აპლიკაციას ვემიახუჯინე თქვან კამერაშა თეშ უმუშო.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">ოჸია: გალენი შვენაშ გიმორინაფა. აპლიკაციას ვემიახუჯინე თქვან კამერაშა თეშ უმუშო.</string>
   <string name="location_permission_rationale">გეძინელი ოჸია: მიმალი ორენიშ გოთანჯუა კატეგორიაშ მიორზიებელო</string>
   <string name="ok">ჯგირი</string>
   <string name="title_activity_nearby">გოხოლუაშ აბანეფი</string>
@@ -176,7 +176,7 @@
   <string name="number_of_uploads">ჩქიმი ბოლო ეხარგუეფიშ ლიმიტი</string>
   <string name="maximum_limit">მაქსიმალური ლიმიტი</string>
   <string name="maximum_limit_alert">500-შე უმოსიშ ძირაფა ვეშილებე</string>
-  <string name="set_limit">ბოლო ეხარგუეფიშ ლიმიტიშ გერინაფა</string>
+  <string name="set_limit" fuzzy="true">ბოლო ეხარგუეფიშ ლიმიტიშ გერინაფა</string>
   <string name="login_failed_2fa_not_supported">ჟირფაქტორამი აუთენტიფიკაცია ასეიან ბორჯიშო ვამიხუჯინე.</string>
   <string name="logout_verification">გოკონანო გიშულა?</string>
   <string name="commons_logo">ვიკიოწკარუეშ ლოგო</string>

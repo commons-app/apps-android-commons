@@ -159,7 +159,7 @@
   <string name="detail_license_empty">알수 없는 허가권</string>
   <string name="menu_refresh">재생</string>
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장고 읽기. 이것이 없으면 응용프로그람은 화랑에 접속할수 없습니다.</string>
-  <string name="write_storage_permission_rationale">권한 필요: 외부 저장고 쓰기. 이것이 없으면 응용프로그람은 촬영장치에 접속할수 없습니다.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">권한 필요: 외부 저장고 쓰기. 이것이 없으면 응용프로그람은 촬영장치에 접속할수 없습니다.</string>
   <string name="location_permission_rationale">선택적 허가: 분류 추천을 위해 현재 위치를 가져옵니다.</string>
   <string name="ok">확인</string>
   <string name="title_activity_nearby">근처의 장소</string>
@@ -180,7 +180,7 @@
   <string name="number_of_uploads">내 최근 올리적재 제한</string>
   <string name="maximum_limit">최대한</string>
   <string name="maximum_limit_alert">500개를 초과하여 표시할수 없습니다</string>
-  <string name="set_limit">최근 올리적재 제한 설정</string>
+  <string name="set_limit" fuzzy="true">최근 올리적재 제한 설정</string>
   <string name="login_failed_2fa_not_supported">2요소인증은 현재 지원하지 않습니다.</string>
   <string name="logout_verification">정말 탈퇴하시겠습니까?</string>
   <string name="commons_logo">공용 로고</string>
@@ -269,7 +269,7 @@
   <string name="about_translate_cancel">취소</string>
   <string name="retry">다시 시도</string>
   <string name="showcase_view_got_it_button">알겠습니다!</string>
-  <string name="showcase_view_whole_nearby_activity">이들은 위키백과 글에 화상을 넣을 필요가 있는 당신 주위의 장소들입니다</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">이들은 위키백과 글에 화상을 넣을 필요가 있는 당신 주위의 장소들입니다</string>
   <string name="no_images_found">그림이 없습니다!</string>
   <string name="error_loading_images">그림을 불러오는 동안 오유가 생겼습니다.</string>
   <string name="image_uploaded_by">올리적재자: %1$s</string>
@@ -342,8 +342,7 @@
   <string name="deletion_reason_publicly_visible">공개가 되는줄 몰랐습니다</string>
   <string name="deletion_reason_no_longer_want_public">생각이 바뀌여서 더이상 공개하고싶지 않습니다</string>
   <string name="deletion_reason_not_interesting">죄송합니다. 이 화상은 백과사전의 관심 대상이 아닙니다</string>
-  <string name="uploaded_by_myself">나자신이 올리적재하였음</string>
-  <string name="articles">문서</string>
+  <string name="uploaded_by_myself" fuzzy="true">나자신이 올리적재하였음</string>
   <string name="desc_language_Worldwide">전세계</string>
   <string name="desc_language_Europe">구주</string>
   <string name="desc_language_Asia">아시아</string>

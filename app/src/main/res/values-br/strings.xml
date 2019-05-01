@@ -164,7 +164,7 @@
   <string name="detail_license_empty">Aotre-implijout dizanv</string>
   <string name="menu_refresh">Freskaat</string>
   <string name="read_storage_permission_rationale">Aotre rekis : lenn ur stokañ diavaez. N\'hall ket an arload tizhout ho palier hep an dra-se.</string>
-  <string name="write_storage_permission_rationale">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload tizhout ho kamera hep an dra-se.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload tizhout ho kamera hep an dra-se.</string>
   <string name="location_permission_rationale">Aotre diret : kaout al lec\'hiadur red evit kinnig rummadoù</string>
   <string name="ok">Mat eo</string>
   <string name="title_activity_nearby">Lec\'hioù nes</string>
@@ -188,7 +188,7 @@
   <string name="invalid_zero">Zero n\'eo ket un talvoud reizh</string>
   <string name="maximum_limit_alert">Ne c\'haller ket diskwel ouzhpenn 500</string>
   <string name="enter_valid">Ebarzhiñ un niver reizh</string>
-  <string name="set_limit">Lakaat ar vevenn bellgargañ nevez</string>
+  <string name="set_limit" fuzzy="true">Lakaat ar vevenn bellgargañ nevez</string>
   <string name="login_failed_2fa_not_supported">Ne vez ket embreget an dilesadur gant daou faktor evit ar mare.</string>
   <string name="logout_verification">Sur oc\'h e fell deoc\'h digevreañ ?</string>
   <string name="commons_logo">Logo Commons</string>
@@ -239,13 +239,20 @@
   <string name="use_external_storage">Implijout ar stokañ diavaez</string>
   <string name="use_external_storage_summary">Enrollit ar skeudennoù tennet gant luc\'hskeudennerez ho penveg</string>
   <string name="login_to_your_account">Kevreit ouzh ho kont</string>
+  <string name="send_log_file">Kas ar renabl</string>
   <string name="send_log_file_description">Kas ar renabl dre bostel d\'an diorroerien evit sikour reizhañ kudennoù an arload. Notenn : er renabl e c\'hall bezañ titouroù anaout enno</string>
+  <string name="no_web_browser">Diskweler web ebet evit digeriñ an URL</string>
   <string name="null_url">Fazi ! N\'eo ket bet kavet an URL</string>
   <string name="nominate_deletion">Kinnig evit lemel</string>
   <string name="nominated_for_deletion">Meneget eo bet ar skeudenn evit lemel.</string>
   <string name="view_browser">Diskwel er merdeer</string>
   <string name="skip_login">Lezel a-gostez</string>
   <string name="navigation_item_login">Kevreañ</string>
+  <string name="skip_login_title">Ha c\'hoant ho peus, evit gwir, da gevreañ ?</string>
+  <string name="skip_login_message">Da gevreañ ho po en amzer-da-zont evit pellgargañ skeudennoù.</string>
+  <string name="login_alert_message">Kevreit, mar plij, evit implijout an arc\'hwel-mañ</string>
+  <string name="copy_wikicode">Eilañ an destenn wiki er golver</string>
+  <string name="wikicode_copied">Testenn wiki eilet er golver</string>
   <string name="nearby_location_has_not_changed">N\'eo ket cheñchet al lec\'hiadur.</string>
   <string name="get_directions">Kaout urzhioù</string>
   <string name="read_article">Lenn ar pennad</string>
@@ -259,12 +266,20 @@
   <string name="about_rate_us">&lt;u&gt;Ho priziadur&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;FAG&lt;/u&gt;</string>
   <string name="welcome_skip_button">Lezel an tutorial a-gostez</string>
+  <string name="no_internet">Kenrouedad dihegerz</string>
+  <string name="internet_established">Kenrouedad hegerz</string>
+  <string name="error_notifications">Fazi war enklask kemennoù</string>
+  <string name="no_notifications">Kemenn ebet kavet</string>
   <string name="about_translate">&lt;u&gt;Treiñ&lt;/u&gt;</string>
   <string name="about_translate_title">Yezhoù</string>
+  <string name="about_translate_message">Dibab e peseurt yezh ho peus c\'hoant da gas troidigezhioù</string>
   <string name="about_translate_proceed">Kenderc\'hel</string>
   <string name="about_translate_cancel">Nullañ</string>
   <string name="retry">Klask en-dro</string>
   <string name="showcase_view_got_it_button">Mat eo !</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Lec\'hioù zo en-dro deoc\'h zo ezhomm skeudennoù anezho evit skeudennaouiñ pennadoù Wikipedia</string>
+  <string name="showcase_view_list_icon">En ur glikañ war ar bouton-se e tiskwelot ur roll eus al lec\'hioù-se</string>
+  <string name="showcase_view_plus_fab">Gallout a reot ezporzhiañ ur skeudenn eus n\'eus forzh lec\'h eus ho palier pe eus ho luc\'hskeudennerez</string>
   <string name="no_images_found">N\'eus bet kavet skeudenn ebet !</string>
   <string name="error_loading_images">Ur fazi zo c\'hoarvezet p\'eo bet karget ar skeudennoù.</string>
   <string name="image_uploaded_by">Enporzhiet gant:%1$s</string>
@@ -277,9 +292,11 @@
   <string name="title_activity_search">Klask</string>
   <string name="search_recent_header">Enklaskoù nevez :</string>
   <string name="provider_searches">Rekedoù enklask diwezhañ</string>
+  <string name="error_loading_categories">Ur fazi zo bet pa\'z oc\'h bet o pellgargañ rummadoù</string>
   <string name="search_tab_title_media">MEDIA</string>
   <string name="search_tab_title_categories">RUMMADOÙ</string>
   <string name="successful_wikidata_edit">Skeudenn ouzhpennet mat da %1$s e Wikidata !</string>
+  <string name="menu_set_wallpaper">Spisaat evel drekleur</string>
   <string name="quiz">Kwiz</string>
   <string name="question">Goulenn</string>
   <string name="result">Disoc\'h</string>
@@ -314,8 +331,6 @@
   <string name="menu_bookmark">Ouzhpennañ/Dilemel sinedoù</string>
   <string name="provider_bookmarks">Sinedoù</string>
   <string name="provider_bookmarks_location">Sinedoù</string>
-  <string name="used_by">, implijet e</string>
-  <string name="articles">pennadoù</string>
   <string name="desc_language_Worldwide">Bed a-bezh</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>

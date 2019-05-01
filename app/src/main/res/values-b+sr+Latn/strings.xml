@@ -160,7 +160,7 @@
   <string name="detail_license_empty">Nepoznata licenca</string>
   <string name="menu_refresh">Osveži</string>
   <string name="read_storage_permission_rationale">Potrebna dozvola: Čitanje spoljašnje memorije. Aplikacija ne može da pristupi Vaših galeriji bez ovoga.</string>
-  <string name="write_storage_permission_rationale">Potrebna dozvola: Pisanje spoljašnje memorije. Aplikacija ne može da pristupi Vašoj kameri bez ovoga.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Potrebna dozvola: Pisanje spoljašnje memorije. Aplikacija ne može da pristupi Vašoj kameri bez ovoga.</string>
   <string name="location_permission_rationale">Neobavezna dozvola: preuzmi trenutnu lokaciju za predloge kategorija</string>
   <string name="ok">U redu</string>
   <string name="title_activity_nearby">Mesta u blizini</string>
@@ -181,7 +181,7 @@
   <string name="number_of_uploads">Moj limit za skorašnja otpremanja</string>
   <string name="maximum_limit">Maksimalni limit</string>
   <string name="maximum_limit_alert">Nije moguće prikazati više od 500</string>
-  <string name="set_limit">Postavi limit za skorašnja otpremanja</string>
+  <string name="set_limit" fuzzy="true">Postavi limit za skorašnja otpremanja</string>
   <string name="login_failed_2fa_not_supported">Dvofaktorska autentifikacija trenutno nije podržana.</string>
   <string name="logout_verification">Zaista želite da se odjavite?</string>
   <string name="commons_logo">Logo Ostave</string>
@@ -272,7 +272,7 @@
   <string name="about_translate_cancel">Otkaži</string>
   <string name="retry">Pokušaj ponovo</string>
   <string name="showcase_view_got_it_button">Razumem</string>
-  <string name="showcase_view_whole_nearby_activity">Ovo su mesta u Vašoj blizini kojima je potrebna slika da ilustruje njihove vikipedijske članke</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Ovo su mesta u Vašoj blizini kojima je potrebna slika da ilustruje njihove vikipedijske članke</string>
   <string name="showcase_view_list_icon">Dodir ovog dugmeta daće vam listu ovih mesta</string>
   <string name="showcase_view_plus_fab">Možete da otpremite sliku za bilo koje mesto iz svoje galerije ili kamere</string>
   <string name="no_images_found">Slike nisu pronađene.</string>
@@ -339,5 +339,5 @@
   <string name="provider_bookmarks">Obeleživači</string>
   <string name="bookmark_empty">Niste dodali nijedan obeleživač</string>
   <string name="provider_bookmarks_location">Obeleživači</string>
-  <string name="no_uploads">Dobro došli na Ostavu!\n\nOtpremite prve medije dodirom gorenavedene ikonice kamere ili galerije.</string>
+  <string name="no_uploads" fuzzy="true">Dobro došli na Ostavu!\n\nOtpremite prve medije dodirom gorenavedene ikonice kamere ili galerije.</string>
 </resources>

@@ -181,7 +181,7 @@
   <string name="menu_refresh">Оновити</string>
   <string name="storage_permission_title">Запит дозволу на зберігання</string>
   <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Без цього дозволу програма не зможе отримати доступ до вашої галереї.</string>
-  <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери без цього дозволу.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери без цього дозволу.</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -207,7 +207,7 @@
   <string name="maximum_limit_alert">Неможливо показати понад 500</string>
   <string name="enter_valid">Вкажіть коректне значення</string>
   <string name="cannot_be_zero">Ліміт завантажень не може бути нульовим</string>
-  <string name="set_limit">Встановити ліміт останніх завантажень</string>
+  <string name="set_limit">Ліміт останніх завантажень</string>
   <string name="login_failed_2fa_not_supported">Двофакторна автентифікація наразі не підтримується.</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
   <string name="commons_logo">Логотип Вікісховища</string>
@@ -257,6 +257,7 @@
   <string name="upload_problem_image_blurry">Зображення розмите.</string>
   <string name="upload_problem_image_duplicate">Зображення вже існує на Вікісховищі.</string>
   <string name="upload_problem_different_geolocation">Зображення виконано в іншому місці.</string>
+  <string name="upload_problem_fbmd">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли у Фейсбуці.</string>
   <string name="upload_problem_do_you_continue">Ви все одно хочете завантажити це зображення?</string>
   <string name="give_permission">Надати дозвіл</string>
   <string name="use_external_storage">Використовувати зовнішнє сховище</string>
@@ -305,7 +306,7 @@
   <string name="about_translate_cancel">Скасувати</string>
   <string name="retry">Повторити</string>
   <string name="showcase_view_got_it_button">Зрозуміло</string>
-  <string name="showcase_view_whole_nearby_activity">Це місця поблизу, про які є статті Вікіпедії, але які потребують ілюстрацій</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Це місця поблизу, про які є статті Вікіпедії, але які потребують ілюстрацій</string>
   <string name="showcase_view_list_icon">Натискання цієї кнопки згенерує список таких місць</string>
   <string name="showcase_view_plus_fab">Ви можете завантажити зображення для любого з цих місць, зробивши знімок камерою або вибравши зображення з галереї</string>
   <string name="no_images_found">Зображень не знайдено!</string>
@@ -414,10 +415,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Мені стало зрозуміло, що це шкодить моїй приватності</string>
   <string name="deletion_reason_no_longer_want_public">Моя думка змінилась, я не хочу, щоб це було доступно публічно</string>
   <string name="deletion_reason_not_interesting">Перепрошую, це зображення нецікаве для енциклопедії</string>
-  <string name="uploaded_by_myself">Завантажено мною на</string>
-  <string name="used_by">, використано у</string>
-  <string name="articles">статті</string>
-  <string name="no_uploads">Ласкаво просимо до Вікісховища!\n\nЗавантажте Ваш перший медіафайл, торкнувшись іконки камери чи галереї вгорі.</string>
+  <string name="uploaded_by_myself">Завантажено мною на сайт «%1$s» та використано у {{PLURAL:%2$d|one=одній статті|%2$d статтях}}.</string>
+  <string name="no_uploads">Ласкаво просимо до Вікісховища!\n\nЗавантажте Ваш перший медіафайл, натиснувши кнопку додавання.</string>
   <string name="desc_language_Worldwide">У всьому світі</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Європа</string>
@@ -440,7 +439,7 @@
   <string name="achievements_fetch_failed">Щось пішло не так. Нам не вдалося отримати Ваші досягнення</string>
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
-  <string name="display_campaigns_explanation">Торкніться тут, щоб побачити чинні кампанії</string>
+  <string name="display_campaigns_explanation">Чинні кампанії</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
   <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
   <string name="bad_token_error_proposed_solution">Завантаження було невдалим через проблему з токеном редагування. Будь ласка, спробуйте вийти з системи й увійти повторно.</string>

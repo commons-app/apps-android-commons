@@ -23,8 +23,8 @@
     />
 
   <View
-    android:id="@+id/view"
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="@color/item_white_background"></View>
+      android:id="@+id/view"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/item_white_background" />
 </LinearLayout>

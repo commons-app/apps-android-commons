@@ -154,7 +154,7 @@
   <string name="number_of_uploads">Talast-iw n usali n melmi kan</string>
   <string name="maximum_limit">Talast tafellayt</string>
   <string name="maximum_limit_alert">Ur izmir ara ad d-yesken ugar n 500</string>
-  <string name="set_limit">Sbadu talast n usali n melmi kan</string>
+  <string name="set_limit" fuzzy="true">Sbadu talast n usali n melmi kan</string>
   <string name="login_failed_2fa_not_supported">Asesteb s snat n tarrayin ur yettusefrak ara akka tura.</string>
   <string name="logout_verification">Tabɣiḍ ad teffɣeḍ?</string>
   <string name="commons_logo">Alugu Commons</string>

@@ -161,7 +161,7 @@
   <string name="detail_license_empty">Nieznana licencja</string>
   <string name="menu_refresh">Odśwież</string>
   <string name="read_storage_permission_rationale" fuzzy="true">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
-  <string name="write_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Pobliskie miejsca</string>
@@ -241,7 +241,7 @@
   <string name="showcase_view_got_it_button">Wszystko jasne!</string>
   <string name="no_images_found">Nie znaleziono grafik!</string>
   <string name="error_loading_images">Wystąpił błąd podczas ładowania grafik.</string>
-  <string name="image_uploaded_by">Przesłano przez $1</string>
+  <string name="image_uploaded_by">Przesłano przez %1$s</string>
   <string name="menu_search_button">Szukaj</string>
   <string name="search_recent_header">Ostatnie wyszukiwania:</string>
   <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
@@ -289,4 +289,7 @@
   <string name="desc_language_Middle_East">Bliski Wschód</string>
   <string name="desc_language_Africa">Afryka</string>
   <string name="desc_language_Asia">Azja</string>
+  <string name="review_thanks_yes_button_text">Tak, czemu nie</string>
+  <string name="review_thanks_no_button_text">Następny obraz</string>
+  <string name="image_info">Informacje o obrazie</string>
 </resources>
