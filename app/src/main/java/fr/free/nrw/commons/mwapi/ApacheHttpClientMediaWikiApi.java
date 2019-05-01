@@ -3,7 +3,6 @@ package fr.free.nrw.commons.mwapi;
 import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -302,26 +301,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("title", "Main_page")
                 .get()
                 .getString("/api/flow-parsoid-utils/@content"));
-    }
-
-    /**
-     * fetches the Caption of the file with a given name.
-     * @param filename title of the file
-     * @return a single with media caption
-     */
-    @Override
-    public Single<String> fetchCaptionByFilename(String filename) {
-        return Single.fromCallable(() -> {
-            CustomApiResult apiResult = api.action("wbgetentities")
-                    .param("sites", "commonswiki")
-                    .param("titles", filename)
-                    .param("props", "labels")
-                    .param("format", "xml")
-                    .param("languages", Locale.getDefault().getLanguage())
-                    .param("languagefallback", "1")
-                    .get();
-            return apiResult.getString("/api/entities/entity/labels/label/@value");
-        });
     }
 
     @Override

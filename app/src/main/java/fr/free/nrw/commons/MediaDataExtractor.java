@@ -1,9 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.util.Log;
-
-import java.io.IOException;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -24,18 +20,16 @@ public class MediaDataExtractor {
     private final MediaWikiApi mediaWikiApi;
     private final OkHttpJsonApiClient okHttpJsonApiClient;
 
-
     @Inject
     public MediaDataExtractor(MediaWikiApi mwApi,
                               OkHttpJsonApiClient okHttpJsonApiClient) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.mediaWikiApi = mwApi;
-
     }
 
     /**
      * Simplified method to extract all details required to show media details.
-     * It fetches media object, deletion status, talk page and caption for the filename
+     * It fetches media object, deletion status and talk page for the filename
      * @param filename for which the details are to be fetched
      * @return full Media object with all details including deletion status and talk page
      */
@@ -43,11 +37,8 @@ public class MediaDataExtractor {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
         Single<Boolean> pageExistsSingle = mediaWikiApi.pageExists("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
-        Single<String> captionSingle = getCaption(filename);
-
-        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionSingle, (media, deletionStatus, discussion, caption) -> {
+        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, (media, deletionStatus, discussion) -> {
             media.setDiscussion(discussion);
-            media.setCaption(caption);
             if (deletionStatus) {
                 media.setRequestedDeletion();
             }
@@ -75,20 +66,6 @@ public class MediaDataExtractor {
                 .map(discussion -> HtmlCompat.fromHtml(discussion, HtmlCompat.FROM_HTML_MODE_LEGACY).toString())
                 .onErrorReturn(throwable -> {
                     Timber.e(throwable, "Error occurred while fetching discussion");
-                    return "";
-                });
-
-    }
-
-    /**
-     * Fetch caption from the MediaWiki API
-     * @param filename the filename we will return the caption for
-     * @return a single with caption string (an empty string if no caption)
-     */
-    private Single<String> getCaption(String filename)  {
-        return mediaWikiApi.fetchCaptionByFilename(filename)
-                .onErrorReturn(throwable -> {
-                    Timber.e(throwable, "Error occurred while fetching caption");
                     return "";
                 });
     }

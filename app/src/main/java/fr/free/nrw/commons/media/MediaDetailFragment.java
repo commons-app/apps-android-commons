@@ -101,8 +101,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     SimpleDraweeView image;
     @BindView(R.id.mediaDetailSpacer)
     MediaDetailSpacer spacer;
-    @BindView(R.id.mediaDetailCaption)
-    TextView mediaCaption;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
     @BindView(R.id.mediaDetailDesc)
@@ -317,7 +315,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
         mediaDiscussion.setText(prettyDiscussion(media));
-        mediaCaption.setText(prettyCaption(media));
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
@@ -519,16 +516,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             return desc;
         }
     }
-
-    private String prettyCaption(Media media) {
-        String caption = media.getCaption().trim();
-        if (caption.equals("")) {
-            return getString(R.string.detail_caption_empty);
-        } else {
-            return caption;
-        }
-    }
-
     private String prettyDiscussion(Media media) {
         String disc = media.getDiscussion().trim();
         if (disc.equals("")) {
