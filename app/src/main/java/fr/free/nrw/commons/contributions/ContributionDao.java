@@ -12,8 +12,9 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
+import org.apache.commons.lang3.StringUtils;
+
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -174,17 +175,17 @@ public class ContributionDao {
             }
 
             String dateCreatedSource = cursor.getString(cursor.getColumnIndex(COLUMN_DATE_CREATED_SOURCE));
-            if (!StringUtils.isNullOrWhiteSpace(dateCreatedSource)) {
+            if (!StringUtils.isBlank(dateCreatedSource)) {
                 contribution.setDateCreatedSource(dateCreatedSource);
             }
 
             String decimalCoords = cursor.getString(cursor.getColumnIndex(COLUMN_DECIMAL_COORDS));
-            if (!StringUtils.isNullOrWhiteSpace(decimalCoords)) {
+            if (!StringUtils.isBlank(decimalCoords)) {
                 contribution.setDecimalCoords(decimalCoords);
             }
 
             String categoriesJson = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORIES));
-            if (!StringUtils.isNullOrWhiteSpace(categoriesJson)) {
+            if (!StringUtils.isBlank(categoriesJson)) {
                 ArrayList<String> categories = gson.fromJson(categoriesJson, ArrayList.class);
                 contribution.setCategories(categories);
             }
