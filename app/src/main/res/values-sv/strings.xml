@@ -479,14 +479,14 @@
   <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">Den bryter mot upphovsrätten eftersom den är</string>
   <string name="review_c_violation_report_problem">upphovsrättsbrott</string>
-  <string name="review_category_yes_button_text" fuzzy="true">NEJ, FELKATEGORISERAD</string>
-  <string name="review_category_no_button_text" fuzzy="true">VERKAR OKEJ</string>
-  <string name="review_spam_yes_button_text" fuzzy="true">NEJ, IRRELEVANT</string>
-  <string name="review_spam_no_button_text" fuzzy="true">VERKAR OKEJ</string>
-  <string name="review_copyright_yes_button_text" fuzzy="true">NEJ, UPPHOVSBROTT</string>
-  <string name="review_copyright_no_button_text" fuzzy="true">VERKAR OKEJ</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">VISST, VARFÖR INTE</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">NÄSTA BILD</string>
+  <string name="review_category_yes_button_text">Nej, felkategoriserad</string>
+  <string name="review_category_no_button_text">Verkar okej</string>
+  <string name="review_spam_yes_button_text">Nej, irrelevant</string>
+  <string name="review_spam_no_button_text">Verkar okej</string>
+  <string name="review_copyright_yes_button_text">Nej, upphovsbrott</string>
+  <string name="review_copyright_no_button_text">Verkar okej</string>
+  <string name="review_thanks_yes_button_text">Visst, varför inte</string>
+  <string name="review_thanks_no_button_text">Nästa bild</string>
   <string name="skip_image_explanation">När du klickar på knappen får du en annan bild som laddades upp nyligen från Wikimedia Commons</string>
   <string name="review_image_explanation">Du kan granska bilder och förbättra kvaliteten för Wikimedia Commons.\n De fyra granskningsparametrarna är: \n - Är denna bild relevant \n - Följer denna bild upphovsrättsreglerna? \n - Är denna bild riktigt kategoriserad? \n - Om allting får bra kan du också tacka bidragsgivaren.</string>
   <plurals name="receiving_shared_content">
@@ -513,4 +513,5 @@
   <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
   <string name="skip_image">HOPPA ÖVER DENNA BILD</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Nedladdning misslyckades!! Vi kan inte ladda ned filen utan behörighet för extern lagring.</string>
+  <string name="image_info">Bildinfo</string>
 </resources>

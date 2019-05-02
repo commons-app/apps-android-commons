@@ -62,7 +62,7 @@
   <string name="menu_open_in_browser">於瀏覽器檢視</string>
   <string name="share_title_hint">標題（需要）</string>
   <string name="add_title_toast">請提供此檔案的標題</string>
-  <string name="share_description_hint">說明</string>
+  <string name="share_description_hint">描述</string>
   <string name="login_failed_network">無法登入－網路故障</string>
   <string name="login_failed_wrong_credentials">無法登入 - 請檢查您的使用者名稱與密碼</string>
   <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
@@ -120,7 +120,7 @@
   <string name="media_upload_policy">透過提交此圖片，我宣佈這是我個人創作的成品，且不包含受版權保護或自拍內容，並除此之外遵守&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;維基媒體共享資源方針&lt;/a&gt;。</string>
   <string name="menu_download">下載</string>
   <string name="preference_license">預設授權條款</string>
-  <string name="use_previous">使用先前標題、說明</string>
+  <string name="use_previous">使用先前標題、描述</string>
   <string name="allow_gps">自動獲取目前位置</string>
   <string name="allow_gps_summary">如果圖片沒有地理標記，就索取目前位置的地理資訊來標記在圖片上。注意：這會透露出您目前所在的位置。</string>
   <string name="preference_theme">夜間模式</string>
@@ -169,7 +169,7 @@
   <string name="detail_panel_cats_label">分類</string>
   <string name="detail_panel_cats_loading">載入中…</string>
   <string name="detail_panel_cats_none">未選擇</string>
-  <string name="detail_description_empty">無說明</string>
+  <string name="detail_description_empty">無描述</string>
   <string name="detail_discussion_empty">沒有討論</string>
   <string name="detail_license_empty">不明授權</string>
   <string name="menu_refresh">重新整理</string>
@@ -185,7 +185,7 @@
   <string name="yes">是</string>
   <string name="no">否</string>
   <string name="media_detail_title">標題</string>
-  <string name="media_detail_description">說明</string>
+  <string name="media_detail_description">描述</string>
   <string name="media_detail_discussion">討論</string>
   <string name="media_detail_author">作者</string>
   <string name="media_detail_uploaded_date">上傳日期</string>
@@ -239,13 +239,13 @@
   <string name="navigation_item_featured_images">特色</string>
   <string name="navigation_item_review">評審</string>
   <string name="nearby_needs_permissions">附近地點需要位置權限才可顯示</string>
-  <string name="no_description_found">找不到說明</string>
+  <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">維基共享資源檔案頁面</string>
   <string name="nearby_info_menu_wikidata_article">維基數據項目</string>
   <string name="nearby_info_menu_wikipedia_article">維基百科條目</string>
   <string name="error_while_cache">在快取圖片時發生錯誤</string>
   <string name="title_info">用於本檔案的唯一描述性標題。您可以使用帶有空格的簡明語言，另外請不要包含副檔名。</string>
-  <string name="description_info">請盡可能說明媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
+  <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
   <string name="upload_image_too_dark">此圖片太暗，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_image_blurry">此圖片太模糊，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
   <string name="upload_problem_exist">此圖片有以下潛在問題：</string>
@@ -511,7 +511,7 @@
   <string name="images_featured_explanation">特色圖片是出自於高水準技巧的攝影師或繪圖師，且被維基共享資源社群挑選為在站台上的最高品質圖片。</string>
   <string name="images_via_nearby_explanation">以「附近地點」所上傳的圖片，是透過找出在地圖上地點來上傳的。</string>
   <string name="thanks_received_explanation">此功能允許編輯者透過利用在歷史頁面或是差異頁面上的感謝連結，來發送感謝通知給做出有用編輯的使用者。</string>
-  <string name="previous_image_title_description">複製先前標題與說明</string>
+  <string name="previous_image_title_description">複製先前標題與描述</string>
   <string name="previous_button_tooltip_message">點擊來重新使用您在您的先前圖片所輸入之標題與描述，並修改來配合目前的圖片</string>
   <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
   <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>

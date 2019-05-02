@@ -443,6 +443,7 @@
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
   <string name="bad_token_error_proposed_solution">因为编辑令牌失效上传失败。请尝试登出后重新登录。</string>
   <string name="error_processing_image">处理图像时出错。请再试一次！</string>
+  <string name="review_thanks_yes_button_text">是，为什么不呢</string>
   <plurals name="receiving_shared_content">
     <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
   </plurals>
@@ -459,4 +460,5 @@
   <string name="please_wait">请稍候……</string>
   <string name="previous_image_title_description">复制先前的标题及描述</string>
   <string name="previous_button_tooltip_message">点击复用您在先前图片中填写的标题及描述并稍加修改来匹配当前图像。</string>
+  <string name="image_info">图像信息</string>
 </resources>

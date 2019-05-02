@@ -10,6 +10,7 @@
 * ManosHacker
 * Nikosgranturismogt
 * Nikosguard
+* Protnet
 * Tgkarounos
 -->
 <resources>
@@ -328,7 +329,7 @@
   <string name="warning_for_image_reverts">Προειδοποίηση: Πάνω από το %1$s των εικόνων που ανεβάσατε έχουν διαγραφεί. Εάν συνεχίσετε να ανεβάζετε εικόνες που απαιτούν διαγραφή, ο λογαριασμός σας πιθανώς θα φραγεί.</string>
   <string name="congratulatory_message_quiz">Είχατε το %1$s των απαντήσεων σωστό. Συγχαρητήρια!</string>
   <string name="warning_for_no_answer">Επιλέξτε μια από τις δύο επιλογές για να απαντήσετε στην ερώτηση</string>
-  <string name="user_not_logged_in">Η συνεδρία σύνδεσης έληξε, παρακαλώ συνδεθείτε ξανά.</string>
+  <string name="user_not_logged_in">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά.</string>
   <string name="quiz_result_share_message">Μοιραστείτε το κουίζ με τους φίλους σας!</string>
   <string name="continue_message">Συνέχεια</string>
   <string name="correct">Σωστή απάντηση</string>
