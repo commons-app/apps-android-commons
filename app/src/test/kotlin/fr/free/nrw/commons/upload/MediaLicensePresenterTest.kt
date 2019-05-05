@@ -16,38 +16,51 @@ import org.powermock.api.mockito.PowerMockito
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.powermock.modules.junit4.PowerMockRunner
 
+/**
+ * The class contains unit test cases for MediaLicensePresenter
+ */
 
 @RunWith(PowerMockRunner::class)
 @PrepareForTest(Utils::class)
 class MediaLicensePresenterTest {
     @Mock
     internal var repository: UploadRepository? = null
+
     @Mock
     internal var view: MediaLicenseContract.View? = null
 
     @InjectMocks
     var mediaLicensePresenter: MediaLicensePresenter? = null
 
+    /**
+     * initial setup test environemnt
+     */
     @Before
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        mediaLicensePresenter!!.onAttachView(view)
+        mediaLicensePresenter?.onAttachView(view)
         PowerMockito.mockStatic(Utils::class.java)
         PowerMockito.`when`(Utils.licenseNameFor(ArgumentMatchers.anyString())).thenReturn(1)
     }
 
 
+    /**
+     * unit test case for method MediaLicensePresenter.getLicense
+     */
     @Test
     fun getLicenseTest() {
-        mediaLicensePresenter!!.getLicenses()
-        verify(view!!).setLicenses(ArgumentMatchers.anyList())
-        verify(view!!).setSelectedLicense(ArgumentMatchers.any())
+        mediaLicensePresenter?.getLicenses()
+        verify(view)?.setLicenses(ArgumentMatchers.anyList())
+        verify(view)?.setSelectedLicense(ArgumentMatchers.any())
     }
 
+    /**
+     * unit test case for method MediaLicensePresenter.selectLicense
+     */
     @Test
     fun selectLicenseTest() {
-        mediaLicensePresenter!!.selectLicense(ArgumentMatchers.anyString())
-        verify(view!!).updateLicenseSummary(ArgumentMatchers.any(), ArgumentMatchers.anyInt())
+        mediaLicensePresenter?.selectLicense(ArgumentMatchers.anyString())
+        verify(view)?.updateLicenseSummary(ArgumentMatchers.any(), ArgumentMatchers.anyInt())
     }
 }

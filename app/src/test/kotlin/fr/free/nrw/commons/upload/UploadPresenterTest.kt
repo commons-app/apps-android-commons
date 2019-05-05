@@ -13,6 +13,9 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 
+/**
+ * The clas contains unit test cases for UploadPresenter
+ */
 class UploadPresenterTest {
 
     @Mock
@@ -25,35 +28,33 @@ class UploadPresenterTest {
     @InjectMocks
     var uploadPresenter: UploadPresenter? = null
 
+    /**
+     * initial setup, test environment
+     */
     @Before
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        uploadPresenter!!.onAttachView(view)
-        `when`(repository!!.buildContributions()).thenReturn(Observable.just(contribution))
-        `when`(view!!.isLoggedIn).thenReturn(true)
+        uploadPresenter?.onAttachView(view)
+        `when`(repository?.buildContributions()).thenReturn(Observable.just(contribution))
+        `when`(view?.isLoggedIn).thenReturn(true)
     }
 
-    /*@Test
-    fun receiveMultipleItems() {
-        val element = Mockito.mock(UploadableFile::class.java)
-        val element2 = Mockito.mock(UploadableFile::class.java)
-        var uriList: List<UploadableFile> = mutableListOf<UploadableFile>(element, element2)
-        uploadPresenter!!.receive(uriList, "external", mock(Place::class.java))
-    }
-*/
+    /**
+     * unit test case for method UploadPresenter.handleSubmit
+     */
     @Test
     fun handleSubmitTest() {
-        uploadPresenter!!.handleSubmit()
-        verify(view!!).isLoggedIn
-        verify(view!!).showProgress(true)
-        verify(repository!!).buildContributions()
-        val buildContributions = repository!!.buildContributions()
-        buildContributions.test().assertNoErrors().assertValue {
-            verify(repository!!).prepareService()
-            verify(view!!).showProgress(false)
-            verify(view!!).showMessage(ArgumentMatchers.any(Int::class.java))
-            verify(view!!).finish()
+        uploadPresenter?.handleSubmit()
+        verify(view)?.isLoggedIn
+        verify(view)?.showProgress(true)
+        verify(repository)?.buildContributions()
+        val buildContributions = repository?.buildContributions()
+        buildContributions?.test()?.assertNoErrors()?.assertValue {
+            verify(repository)?.prepareService()
+            verify(view)?.showProgress(false)
+            verify(view)?.showMessage(ArgumentMatchers.any(Int::class.java))
+            verify(view)?.finish()
             true
         }
     }

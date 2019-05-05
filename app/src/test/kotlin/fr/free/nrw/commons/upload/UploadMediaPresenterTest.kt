@@ -18,6 +18,9 @@ import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 
+/**
+ * The class contains unit test cases for UploadMediaPresenter
+ */
 class UploadMediaPresenterTest {
     @Mock
     internal var repository: UploadRepository? = null
@@ -40,6 +43,9 @@ class UploadMediaPresenterTest {
 
     private var testScheduler: TestScheduler? = null
 
+    /**
+     * initial setup unit test environment
+     */
     @Before
     @Throws(Exception::class)
     fun setUp() {
@@ -48,47 +54,56 @@ class UploadMediaPresenterTest {
         testSingleImageResult = Single.just(1)
         testScheduler = TestScheduler()
         uploadMediaPresenter = UploadMediaPresenter(repository, testScheduler, testScheduler)
-        uploadMediaPresenter!!.onAttachView(view)
+        uploadMediaPresenter?.onAttachView(view)
     }
 
+    /**
+     * unit test for method UploadMediaPresenter.receiveImage
+     */
     @Test
     fun receiveImageTest() {
-        Mockito.`when`(repository!!.preProcessImage(ArgumentMatchers.any(UploadableFile::class.java), ArgumentMatchers.any(Place::class.java), ArgumentMatchers.anyString(), ArgumentMatchers.any(UploadMediaPresenter::class.java))).thenReturn(testObservableUploadItem)
-        uploadMediaPresenter!!.receiveImage(uploadableFile, ArgumentMatchers.anyString(), place)
-        verify(view!!).showProgress(true)
-        testScheduler!!.triggerActions()
-        verify(view!!).onImageProcessed(ArgumentMatchers.any(UploadModel.UploadItem::class.java), ArgumentMatchers.any(Place::class.java))
-        verify(view!!).showProgress(false)
+        Mockito.`when`(repository?.preProcessImage(ArgumentMatchers.any(UploadableFile::class.java), ArgumentMatchers.any(Place::class.java), ArgumentMatchers.anyString(), ArgumentMatchers.any(UploadMediaPresenter::class.java))).thenReturn(testObservableUploadItem)
+        uploadMediaPresenter?.receiveImage(uploadableFile, ArgumentMatchers.anyString(), place)
+        verify(view)?.showProgress(true)
+        testScheduler?.triggerActions()
+        verify(view)?.onImageProcessed(ArgumentMatchers.any(UploadModel.UploadItem::class.java), ArgumentMatchers.any(Place::class.java))
+        verify(view)?.showProgress(false)
     }
 
+    /**
+     * unit test for method UploadMediaPresenter.verifyImageQuality
+     */
     @Test
     fun verifyImageQualityTest() {
-        Mockito.`when`(repository!!.getImageQuality(ArgumentMatchers.any(UploadModel.UploadItem::class.java), ArgumentMatchers.any(Boolean::class.java))).thenReturn(testSingleImageResult)
-        Mockito.`when`(uploadItem!!.imageQuality).thenReturn(ArgumentMatchers.anyInt())
-        uploadMediaPresenter!!.verifyImageQuality(uploadItem, true)
-        verify(view!!).showProgress(true)
-        testScheduler!!.triggerActions()
-        verify(view!!).showProgress(false)
+        Mockito.`when`(repository?.getImageQuality(ArgumentMatchers.any(UploadModel.UploadItem::class.java), ArgumentMatchers.any(Boolean::class.java))).thenReturn(testSingleImageResult)
+        Mockito.`when`(uploadItem?.imageQuality).thenReturn(ArgumentMatchers.anyInt())
+        uploadMediaPresenter?.verifyImageQuality(uploadItem, true)
+        verify(view)?.showProgress(true)
+        testScheduler?.triggerActions()
+        verify(view)?.showProgress(false)
     }
 
+    /**
+     * unit test for method UploadMediaPresenter.handleImageResult
+     */
     @Test
     fun handleImageResult() {
         //Positive case test
-        uploadMediaPresenter!!.handleImageResult(IMAGE_KEEP)
-        verify(view!!).onImageValidationSuccess()
+        uploadMediaPresenter?.handleImageResult(IMAGE_KEEP)
+        verify(view)?.onImageValidationSuccess()
 
         //Duplicate file name
-        uploadMediaPresenter!!.handleImageResult(FILE_NAME_EXISTS)
-        verify(view!!).showDuplicatePicturePopup()
+        uploadMediaPresenter?.handleImageResult(FILE_NAME_EXISTS)
+        verify(view)?.showDuplicatePicturePopup()
 
         //Empty Title test
-        uploadMediaPresenter!!.handleImageResult(EMPTY_TITLE)
-        verify(view)!!.showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
+        uploadMediaPresenter?.handleImageResult(EMPTY_TITLE)
+        verify(view)?.showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
 
         //Bad Picture test
         //Empty Title test
-        uploadMediaPresenter!!.handleImageResult(-7)
-        verify(view)!!.showBadImagePopup(ArgumentMatchers.anyInt())
+        uploadMediaPresenter?.handleImageResult(-7)
+        verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt())
 
     }
 

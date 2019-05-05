@@ -14,7 +14,9 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-
+/**
+ * The class contains unit test cases for CategoriesPresenter
+ */
 class CategoriesPresenterTest {
     @Mock
     internal var repository: UploadRepository? = null
@@ -28,44 +30,53 @@ class CategoriesPresenterTest {
     val categoryItems: ArrayList<CategoryItem> = ArrayList()
 
     @Mock
-    var categoryItem: CategoryItem? = null
+    lateinit var categoryItem: CategoryItem
 
     var testObservable: Observable<CategoryItem>? = null
 
     private val imageTitleList = ArrayList<String>()
 
+    /**
+     * initial setup
+     */
     @Before
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         testScheduler = TestScheduler()
-        categoryItems.add(categoryItem!!)
+        categoryItems.add(categoryItem)
         testObservable = Observable.just(categoryItem)
         categoriesPresenter = CategoriesPresenter(repository, testScheduler, testScheduler)
-        categoriesPresenter!!.onAttachView(view)
+        categoriesPresenter?.onAttachView(view)
     }
 
+    /**
+     * unit test case for method CategoriesPresenter.searchForCategories
+     */
     @Test
     fun searchForCategoriesTest() {
-        Mockito.`when`(repository!!.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        Mockito.`when`(repository!!.selectedCategories).thenReturn(categoryItems)
-        Mockito.`when`(repository!!.searchCategories(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
-        Mockito.`when`(repository!!.searchAll(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
-        Mockito.`when`(repository!!.defaultCategories(ArgumentMatchers.anyList())).thenReturn(Observable.empty())
-        categoriesPresenter!!.searchForCategories("test", imageTitleList)
-        verify(view!!).showProgress(true)
-        verify(view!!).showError(null)
-        verify(view!!).setCategories(null)
-        testScheduler!!.triggerActions()
-        verify(view!!).setCategories(categoryItems)
-        verify(view!!).showProgress(false)
+        Mockito.`when`(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
+        Mockito.`when`(repository?.selectedCategories).thenReturn(categoryItems)
+        Mockito.`when`(repository?.searchCategories(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        Mockito.`when`(repository?.searchAll(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        Mockito.`when`(repository?.defaultCategories(ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        categoriesPresenter?.searchForCategories("test", imageTitleList)
+        verify(view)?.showProgress(true)
+        verify(view)?.showError(null)
+        verify(view)?.setCategories(null)
+        testScheduler?.triggerActions()
+        verify(view)?.setCategories(categoryItems)
+        verify(view)?.showProgress(false)
     }
 
+    /**
+     * unit test for method CategoriesPresenter.verifyCategories
+     */
     @Test
     fun verifyCategoriesTest() {
-        Mockito.`when`(repository!!.selectedCategories).thenReturn(categoryItems)
-        categoriesPresenter!!.verifyCategories()
-        verify(repository!!).setSelectedCategories(ArgumentMatchers.anyList())
-        verify(view!!).goToNextScreen()
+        Mockito.`when`(repository?.selectedCategories).thenReturn(categoryItems)
+        categoriesPresenter?.verifyCategories()
+        verify(repository)?.setSelectedCategories(ArgumentMatchers.anyList())
+        verify(view)?.goToNextScreen()
     }
 }
