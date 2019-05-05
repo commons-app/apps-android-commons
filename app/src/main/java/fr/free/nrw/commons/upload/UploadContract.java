@@ -11,8 +11,6 @@ public interface UploadContract {
 
         void finish();
 
-        void launchMapActivity(String decCoords);
-
         void askUserToLogIn();
 
         void showProgress(boolean shouldShow);

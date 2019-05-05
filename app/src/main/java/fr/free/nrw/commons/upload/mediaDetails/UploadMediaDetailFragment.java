@@ -25,8 +25,10 @@ import butterknife.OnClick;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.Description;
 import fr.free.nrw.commons.upload.DescriptionsAdapter;
@@ -52,6 +54,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     RelativeLayout rlContainerTitle;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.ib_map)
+    ImageButton ibMap;
     @BindView(R.id.ib_expand_collapse)
     ImageButton ibExpandCollapse;
     @BindView(R.id.ll_container_media_detail)
@@ -285,6 +289,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         //If the error message is null, we will probably not show anything
     }
 
+    @Override public void showMapWithImageCoordinates(boolean shouldShow) {
+        ibMap.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+    }
+
     private void deleteThisPicture() {
         callback.deletePictureAtIndex(indexInViewFlipper);
     }
@@ -300,6 +308,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         llContainerMediaDetail.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
         isExpanded = !isExpanded;
         ibExpandCollapse.setRotation(ibExpandCollapse.getRotation() + 180);
+    }
+
+    @OnClick(R.id.ib_map) public void onIbMapClicked() {
+        Utils.handleGeoCoordinates(getContext(),
+            new LatLng(uploadItem.getGpsCoords().getDecLatitude(),
+                uploadItem.getGpsCoords().getDecLongitude(), 0.0f));
     }
 
 

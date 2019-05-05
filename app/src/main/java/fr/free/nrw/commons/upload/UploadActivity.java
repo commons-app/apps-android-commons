@@ -226,10 +226,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         startActivity(loginIntent);
     }
 
-    @Override
-    public void launchMapActivity(String decCoords) {
-        Utils.handleGeoCoordinates(this, decCoords);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

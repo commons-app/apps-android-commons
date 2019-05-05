@@ -11,6 +11,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.repository.UploadRepository;
+import fr.free.nrw.commons.upload.GPSExtractor;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
@@ -73,6 +74,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 .subscribe(uploadItem ->
                         {
                             view.onImageProcessed(uploadItem, place);
+                            GPSExtractor gpsCoords = uploadItem.getGpsCoords();
+                            view.showMapWithImageCoordinates((gpsCoords!=null && gpsCoords.imageCoordsExists)?true: false);
                             view.showProgress(false);
                         },
                         throwable -> Timber.e(throwable, "Error occurred in processing images"));

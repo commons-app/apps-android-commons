@@ -55,16 +55,6 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         }
     }
 
-    /**
-     * Called by the map button on the right card in {@link UploadActivity}
-     */
-    void openCoordinateMap() {
-        GPSExtractor gpsObj = repository.getCurrentItem().getGpsCoords();
-        if (gpsObj != null && gpsObj.imageCoordsExists) {
-            view.launchMapActivity(gpsObj.getDecLatitude() + "," + gpsObj.getDecLongitude());
-        }
-    }
-
     public List<String> getImageTitleList() {
         List<String> titleList = new ArrayList<>();
         for (UploadItem item : repository.getUploads()) {

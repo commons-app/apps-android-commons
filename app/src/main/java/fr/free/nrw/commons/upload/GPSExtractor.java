@@ -14,12 +14,12 @@ import timber.log.Timber;
  * Extracts geolocation to be passed to API for category suggestions. If a picture with geolocation
  * is uploaded, extract latitude and longitude from EXIF data of image.
  */
-class GPSExtractor {
+public class GPSExtractor {
 
     static final GPSExtractor DUMMY= new GPSExtractor();
     private double decLatitude;
     private double decLongitude;
-    boolean imageCoordsExists;
+    public boolean imageCoordsExists;
     private String latitude;
     private String longitude;
     private String latitudeRef;
@@ -103,11 +103,11 @@ class GPSExtractor {
         }
     }
 
-    double getDecLatitude() {
+    public double getDecLatitude() {
         return decLatitude;
     }
 
-    double getDecLongitude() {
+    public double getDecLongitude() {
         return decLongitude;
     }
 

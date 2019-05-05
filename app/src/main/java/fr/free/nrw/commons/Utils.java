@@ -13,6 +13,8 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
 
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.ViewUtil;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -200,15 +202,17 @@ public class Utils {
         customTabsIntent.launchUrl(context, url);
     }
 
-    public static void handleGeoCoordinates(Context context, String coords) {
-        try {
-            Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + coords);
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");
+    /***
+     * Opens the system default/user choosen map application with the coordinates in the object latlng
+     * @param context
+     * @param latLng
+     */
+    public static void handleGeoCoordinates(Context context, LatLng latLng) {
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, latLng.getGmmIntentUri());
+        if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(mapIntent);
-        } catch (ActivityNotFoundException ex) {
-            Toast toast = Toast.makeText(context, context.getString(R.string.map_application_missing), LENGTH_SHORT);
-            toast.show();
+        } else {
+            ViewUtil.showShortToast(context, context.getString(R.string.map_application_missing));
         }
     }
 

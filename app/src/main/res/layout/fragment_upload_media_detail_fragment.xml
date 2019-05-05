@@ -41,6 +41,19 @@
           tools:text="Step 1 of 15"/>
 
         <ImageButton
+            android:id="@+id/ib_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@id/ib_expand_collapse"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_map_white_24dp"
+            tools:visibility="visible"
+            />
+
+        <ImageButton
           android:id="@+id/ib_expand_collapse"
           style="@style/Widget.AppCompat.Button.Borderless"
           android:layout_width="24dp"

@@ -24,6 +24,8 @@ public interface UploadMediaDetailsContract {
         void showDuplicatePicturePopup();
 
         void showBadImagePopup(Integer errorCode);
+
+        void showMapWithImageCoordinates(boolean shouldShow);
     }
 
     interface UserActionListener extends BasePresenter<View> {
