@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,7 +38,6 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.Description;
 import fr.free.nrw.commons.upload.DescriptionsAdapter;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
-import fr.free.nrw.commons.upload.SimilarImageDialogFragment.onResponse;
 import fr.free.nrw.commons.upload.Title;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadModel;
@@ -208,7 +206,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
-        newFragment.setmOnResponse(new onResponse() {
+        newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
             @Override
             public void onPositiveResponse() {
                 Timber.d("positive response from similar image fragment");
