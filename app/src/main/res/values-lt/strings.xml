@@ -112,12 +112,10 @@
   <string name="tutorial_1_text">Vikimedija Commons talpina daugumą paveikslėlių, kurie yra naudojami Vikipedijoje.</string>
   <string name="tutorial_1_subtext">Jūsų paveikslėliai padeda šviesti žmones visame pasaulyje!</string>
   <string name="tutorial_2_text">Prašome kelti nuotraukos, kurios yra padarytos ar sukurtos tik jūsų:</string>
-  <string name="tutorial_2_subtext">Gamtos objektai (gėlės, gyvūnai, kalnai)\n• Naudingi objektai (dviračiai, traukinių stotys)\n• Įžymūs žmonės (jūsų meras, Olimpiniai atletai, kurios sutikote)</string>
   <string name="tutorial_2_subtext_1">Gamtos objektai (gėlės, gyvūnai, kalnai)</string>
   <string name="tutorial_2_subtext_2">Naudingi objektai (dviračiai, traukinių stotys)</string>
   <string name="tutorial_2_subtext_3">Įžymūs žmonės (jūsų meras, Olimpiniai atletai, kurios sutikote)</string>
   <string name="tutorial_3_text">Prašome NEkelti:</string>
-  <string name="tutorial_3_subtext">- Asmenukės ar jūsų draugų nuotraukos\n- Nuotraukos, kurias atsisiuntėte iš interneto\n- Patentuotų programėlių nuotraukos</string>
   <string name="tutorial_3_subtext_1">Asmenukės ar jūsų draugų nuotraukos</string>
   <string name="tutorial_3_subtext_2">Nuotraukos, kurias atsisiuntėte iš interneto</string>
   <string name="tutorial_3_subtext_3">Patentuotų programėlių nuotraukos</string>

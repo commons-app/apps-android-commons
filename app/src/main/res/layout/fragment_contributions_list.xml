@@ -8,7 +8,7 @@
     >
 
     <TextView
-        android:id="@+id/noDataYet"
+        android:id="@+id/noContributionsYet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/no_uploads"
@@ -19,15 +19,6 @@
         android:layout_marginEnd="@dimen/tiny_gap"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/waiting_first_sync"
-        android:id="@+id/waitingMessage"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        />
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,6 +38,7 @@
         />
 
     <LinearLayout
+        android:id="@+id/fab_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -58,47 +50,39 @@
         android:gravity="center"
         >
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="center"
             android:tint="@color/button_blue"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:backgroundTint="@color/main_background_light"
-            app:elevation="6dp"
+            app:useCompatPadding="true"
+            app:elevation="4dp"
             app:fabSize="mini"
-            android:layout_margin="8dp"
-            app:pressedTranslationZ="12dp"
             app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="center"
             android:tint="@color/button_blue"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:backgroundTint="@color/main_background_light"
-            app:elevation="6dp"
+            app:useCompatPadding="true"
+            app:elevation="4dp"
             app:fabSize="mini"
-            android:layout_margin="8dp"
-            app:pressedTranslationZ="12dp"
             app:srcCompat="@drawable/ic_photo_white_24dp" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:gravity="center_vertical"
-            android:clickable="true"
             android:visibility="visible"
             app:backgroundTint="@color/status_bar_blue"
-            app:elevation="12dp"
-            app:fabSize="normal"
-            android:layout_margin="8dp"
-            app:pressedTranslationZ="12dp"
+            app:useCompatPadding="true"
+            app:elevation="4dp"
             app:srcCompat="@drawable/ic_add_white_24dp" />
 
     </LinearLayout>

@@ -2,8 +2,10 @@
 <!-- Authors:
 * Amire80
 * Liuxinyu970226
+* Madhurgupta10
 * Minh Nguyen
 * Nemo bis
+* Nicolas Raoul
 * Robby
 * Shirayuki
 * Siebrand
@@ -100,7 +102,7 @@
   <string name="welcome_copyright_subtext">Message explaining what kind of images not to submit.</string>
   <string name="welcome_final_text">Message asking user if they understand what kinds of images to upload.</string>
   <string name="welcome_final_button_text">Button text for confirming the user understands what kinds of images to upload.\n{{Identical|Yes}}</string>
-  <string name="welcome_help_button_text">\'\'\'\'\'This message is empty, and it\'s probably invalid\'\'\'. See bug report: https://github.com/commons-app/apps-android-commons/issues/1333 .\'\'</string>
+  <string name="welcome_help_button_text">NEEDS DOCUMENTATION</string>
   <string name="detail_panel_cats_label">Label for categories list in media detail panel.\n{{Identical|Category}}</string>
   <string name="detail_panel_cats_loading">Placeholder for categories list in media detail panel, while loading from network.\n{{Identical|Loading}}</string>
   <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.\n{{Identical|None selected}}</string>
@@ -112,6 +114,7 @@
   <string name="no">{{Identical|No}}</string>
   <string name="media_detail_title">{{Identical|Title}}</string>
   <string name="media_detail_description">{{Identical|Description}}</string>
+  <string name="media_detail_discussion">{{Identical|Discussion}}</string>
   <string name="media_detail_author">{{Identical|Author}}</string>
   <string name="media_detail_license">{{Identical|License}}</string>
   <string name="media_detail_coordinates">{{Identical|Coordinate}}</string>
@@ -131,7 +134,8 @@
   <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
   <string name="navigation_item_notification">{{Identical|Notification}}</string>
-  <string name="nominated_see_more">\'\'This message is empty, and it\'s probably invalid. See bug report: https://github.com/commons-app/apps-android-commons/issues/1333 .\'\'</string>
+  <string name="navigation_item_review">{{Identical|Review}}</string>
+  <string name="nominated_see_more">&lt;u&gt;See webpage for details&lt;/u&gt;</string>
   <string name="skip_login">{{Identical|Skip}}</string>
   <string name="navigation_item_login">{{Identical|Log in}}</string>
   <string name="nearby_wikidata">{{Identical|Wikidata}}</string>
@@ -141,12 +145,15 @@
   <string name="about_translate_title">{{Identical|Language}}</string>
   <string name="about_translate_cancel">{{Identical|Cancel}}</string>
   <string name="retry">{{Identical|Retry}}</string>
+  <string name="showcase_view_whole_nearby_activity">\"Search this area\" refers to {{msg-wm|Commons-android-strings-search this area}}.</string>
   <string name="menu_search_button">{{Identical|Search}}</string>
   <string name="title_activity_search">{{Identical|Search}}</string>
   <string name="successful_wikidata_edit">Message shown in a dialog (\"success toast\") after a contribution by the user.\n\nParameter:\n* %1$s - title of the target page on Wikidata</string>
   <string name="question">{{Identical|Question}}</string>
   <string name="result">{{Identical|Result}}</string>
+  <string name="statistics_featured">To see the correct translation for your language, please go to https://commons.wikimedia.org/wiki/Commons:Featured_pictures and select your language in \"This project page in other languages\".</string>
   <string name="nearby_fragment">{{Identical|Nearby}}</string>
   <string name="submit">{{Identical|Submit}}</string>
   <string name="log_collection_started">\"Send log file\" is {{msg-wm|Commons-android-strings-send log file}}.</string>
+  <string name="nominate_for_deletion_done">{{Identical|Done}}</string>
 </resources>

@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.filepicker.UploadableFile
-import fr.free.nrw.commons.kvstore.BasicKvStore
+import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
@@ -34,7 +34,7 @@ class UploadModelTest {
     internal var licenses: List<String>? = null
     @Mock
     @field:[Inject Named("default_preferences")]
-    internal var prefs: BasicKvStore? = null
+    internal var prefs: JsonKvStore? = null
     @Mock
     @field:[Inject Named("licenses_by_name")]
     internal var licensesByName: Map<String, String>? = null
@@ -70,7 +70,7 @@ class UploadModelTest {
         `when`(fileUtilsWrapper!!.getGeolocationOfFile(anyString()))
                 .thenReturn("")
         `when`(imageProcessingService!!.validateImage(any(UploadModel.UploadItem::class.java), anyBoolean()))
-                .thenReturn(Single.just(IMAGE_OK));
+                .thenReturn(Single.just(IMAGE_OK))
 
     }
 

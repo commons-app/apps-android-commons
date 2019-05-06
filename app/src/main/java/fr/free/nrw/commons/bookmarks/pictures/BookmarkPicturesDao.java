@@ -5,8 +5,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.RemoteException;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import fr.free.nrw.commons.bookmarks.Bookmark;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -148,9 +149,11 @@ public class BookmarkPicturesDao {
 
     @NonNull
     Bookmark fromCursor(Cursor cursor) {
+        String fileName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_NAME));
         return new Bookmark(
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_NAME)),
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR))
+                fileName,
+                cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR)),
+                BookmarkPicturesContentProvider.uriForName(fileName)
         );
     }
 

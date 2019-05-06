@@ -118,11 +118,8 @@
   <string name="tutorial_1_text">A miast bilen uun Wikipedia lei bi Wikimedia Commons.</string>
   <string name="tutorial_1_subtext">Mä din bilen halepst dü minsken üüb a hialer welt.</string>
   <string name="tutorial_2_text">Wees so gud an schüür bilen huuch, diar dü salew maaget heest:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- Natüürelk objekten (bluumen, diarten, berger)\n- Natelk objekten (welen, boonhoofer)\n- Uunsen minsken (dan bürgermääster, olympisk atleeten, diar dü määt heest)</string>
   <string name="tutorial_3_text">Oober schüür EI huuch:</string>
-  <string name="tutorial_3_subtext">- Selfies of bilen faan din frinjer\n- Bilen, diar dü ütj at internet deellooset heest\n- Bilskirembilen faan ünfrei software</string>
   <string name="tutorial_4_text">Bispal:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">- Tiitel: Sydney Opernhüs\n- Beskriiwang: Opernhüs fan Sydney, faan\'t bocht ütj sen\n- Kategoriin: Sydney Opernhüs, Sydney Opernhüs faan waasten, Sydney Opernhüs faan widj wech</string>
   <string name="welcome_wikipedia_text">Skaft din bilen. Halep mä an maage artiikler üüb Wikipedia labener!</string>
   <string name="welcome_wikipedia_subtext">A bilen üüb Wikipedia kem faan Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Mä din bilen halepst dü minsken üüb a hialer welt.</string>
@@ -144,9 +141,7 @@
   <string name="yes">Ja</string>
   <string name="no">Naan</string>
   <string name="media_detail_title">Tiitel</string>
-  <string name="media_detail_media_title">Tiitel faan\'t meedium</string>
   <string name="media_detail_description">Beskriiwang</string>
-  <string name="media_detail_description_explanation">Beskriiwang faan\'t meedium.</string>
   <string name="media_detail_uploaded_date">Dai faan\'t huuchschüüren</string>
   <string name="become_a_tester_title">Beta-Tester wurd</string>
   <string name="become_a_tester_description">Melde di bi üüs beta-kanool üüb Google Play uun, an fu ääder tugang tu nei funktjuunen.</string>
@@ -154,7 +149,7 @@
   <string name="number_of_uploads">Min grens för huuchschüürd datein</string>
   <string name="maximum_limit">Boowergrens</string>
   <string name="maximum_limit_alert">Muar üs 500 iindracher kön ei uunwiset wurd</string>
-  <string name="set_limit">Grens för huuchschüürd datein fäästlei</string>
+  <string name="set_limit" fuzzy="true">Grens för huuchschüürd datein fäästlei</string>
   <string name="login_failed_2fa_not_supported">Tau-straal-gudkäänen (2FA) wal uun uugenblak ei.</string>
   <string name="logout_verification">Wel dü di würelk ufmelde?</string>
   <string name="cancel">Ufbreeg</string>

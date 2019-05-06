@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
 
@@ -17,6 +16,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import androidx.exifinterface.media.ExifInterface;
 import timber.log.Timber;
 
 public class FileUtils {

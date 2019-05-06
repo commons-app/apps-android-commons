@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Bouman4
 * Elroy
 * Festina90
 * KlaasZ4usV
@@ -10,6 +11,7 @@
 * Siebrand
 * Sjoerddebruin
 * Smile4ever
+* Xbaked potatox
 -->
 <resources>
   <string name="title_activity_explore">Verkennen</string>
@@ -133,12 +135,9 @@
   <string name="tutorial_1_text">Op Wikimedia Commons staan de meeste afbeeldingen die worden gebruikt in Wikipedia.</string>
   <string name="tutorial_1_subtext">Uw afbeeldingen helpen mensen over de hele wereld met kennis opdoen!</string>
   <string name="tutorial_2_text">Upload alstublieft alleen afbeeldingen die volledig door uzelf gemaakt zijn:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- Natuurlijke objecten (bloemen, dieren, bergen)\n- Nuttige objecten (fietsen, treinstations)\n- Beroemde mensen (uw burgemeester, Olympische atleten u hebt ontmoet)</string>
   <string name="tutorial_3_text">Gelieve NIET te uploaden:</string>
-  <string name="tutorial_3_subtext">- Selfies of foto\'s van uw vrienden\n- Foto\'s die u hebt gedownload van het Internet\n- Screenshots van eigen apps</string>
   <string name="tutorial_3_subtext_3">Schermfoto\'s van oorspronkelijke toepassingen</string>
   <string name="tutorial_4_text">Voorbeeld van een upload:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">- Titel: Sydney Opera House\n- Beschrijving: het Sydney Opera House gezien vanaf de overkant van de baai\n- Categorieën: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Draag uw afbeelding bij. Help pagina\'s in Wikipedia tot leven te laten komen!</string>
   <string name="welcome_wikipedia_subtext">Afbeeldingen op Wikipedia komen van Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Uw afbeeldingen helpen mensen van over de hele wereld te leren.</string>
@@ -159,11 +158,13 @@
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <string name="media_detail_title">Titel</string>
-  <string name="media_detail_media_title">Titel van het bestand</string>
   <string name="media_detail_description">Beschrijving</string>
   <string name="media_detail_author">Auteur</string>
   <string name="media_detail_uploaded_date">Uploaddatum</string>
   <string name="_2fa_code">2FA-code</string>
+  <string name="invalid_zero">Kan niet nul zijn</string>
+  <string name="invalid_input">Ongeldige invoer</string>
+  <string name="enter_valid">Geldig cijfer invoeren</string>
   <string name="upload_image">Afbeelding plaatsen</string>
   <string name="welcome_image_no_selfies">Geen selfies</string>
   <string name="cancel">Annuleren</string>
@@ -223,6 +224,7 @@
   <string name="contributions_fragment">Bijdragen</string>
   <string name="nearby_fragment">Dichtbij</string>
   <string name="notifications">Meldingen</string>
+  <string name="archived_notifications">Meldingen (in het archief)</string>
   <string name="display_nearby_notification">Meldingen dichtbij weergeven</string>
   <string name="list_sheet">Lijst</string>
   <string name="storage_permission">Toestemming om op te slaan</string>
@@ -230,6 +232,7 @@
   <string name="next">Volgende</string>
   <string name="previous">Vorige</string>
   <string name="submit">Verzenden</string>
+  <string name="uploaded_by_myself" fuzzy="true">Geüpload van mij op %1$s, gebruikt in %2$d artikel(s).</string>
   <string name="desc_language_Worldwide">Wereldwijd</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>
@@ -237,5 +240,10 @@
   <string name="never_ask_again">Niet meer vragen</string>
   <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
   <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
+  <string name="no_archived_notification" fuzzy="true">U hebt geen gearchiveerde melding</string>
   <string name="share_logs_using">Logboeken delen via</string>
+  <string name="menu_option_archived">Gearchiveerd bekijken</string>
+  <string name="menu_option_unread">Ongelezen bekijken</string>
+  <string name="image_chooser_title">Kies de afbeeldingen die u wilt plaatsen</string>
+  <string name="please_wait">Een ogenblik geduld…</string>
 </resources>

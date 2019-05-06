@@ -19,19 +19,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
+import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -43,6 +50,7 @@ import timber.log.Timber;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
+import static fr.free.nrw.commons.Utils.handleWebUrl;
 import static android.content.Intent.ACTION_VIEW;
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -50,7 +58,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
-    @Inject @Named("default_preferences") BasicKvStore basicKvStore;
+    @Inject @Named("default_preferences") JsonKvStore store;
     @Inject BookmarkPicturesDao bookmarkDao;
 
     @BindView(R.id.mediaDetailsPager) ViewPager pager;
@@ -153,22 +161,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCanonicalUri());
+                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getPageTitle().getCanonicalUri());
                 startActivity(Intent.createChooser(shareIntent, "Share image via..."));
                 return true;
             case R.id.menu_browser_current_image:
                 // View in browser
-                Intent viewIntent = new Intent();
-                viewIntent.setAction(ACTION_VIEW);
-                viewIntent.setData(m.getFilePageTitle().getMobileUri());
-                //check if web browser available
-                if (viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
-                    startActivity(viewIntent);
-                } else {
-                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
-                    toast.show();
-                }
-
+                handleWebUrl(requireContext(), Uri.parse(m.getPageTitle().getMobileUri()));
                 return true;
             case R.id.menu_download_current_image:
                 // Download
@@ -269,7 +267,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     // Initialize bookmark object
                     bookmark = new Bookmark(
                             m.getFilename(),
-                            m.getCreator()
+                            m.getCreator(),
+                            BookmarkPicturesContentProvider.uriForName(m.getFilename())
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
@@ -336,6 +335,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             }
             try{
                 ((SearchActivity) getContext()).requestMoreImages();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                ((ExploreActivity) getContext()).requestMoreImages();
             }catch (Exception e){
                 e.printStackTrace();
             }

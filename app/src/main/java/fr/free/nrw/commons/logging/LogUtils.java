@@ -2,8 +2,6 @@ package fr.free.nrw.commons.logging;
 
 import android.os.Environment;
 
-import java.io.File;
-
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
 

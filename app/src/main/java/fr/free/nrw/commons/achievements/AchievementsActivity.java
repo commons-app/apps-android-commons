@@ -3,16 +3,15 @@ package fr.free.nrw.commons.achievements;
 import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -27,7 +26,7 @@ import android.widget.TextView;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
-import org.w3c.dom.Text;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,17 +35,16 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -64,8 +62,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private LevelController.LevelInfo levelInfo;
 
-    @BindView(R.id.achievement_badge)
+    @BindView(R.id.achievement_badge_image)
     ImageView imageView;
+    @BindView(R.id.achievement_badge_text)
+    TextView badgeText;
     @BindView(R.id.achievement_level)
     TextView levelNumber;
     @BindView(R.id.toolbar)
@@ -98,6 +98,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
     TextView imageRevertedText;
     @BindView(R.id.images_upload_text_param)
     TextView imageUploadedText;
+    @BindView(R.id.wikidata_edits)
+    TextView wikidataEditsText;
+
+
     @Inject
     SessionManager sessionManager;
     @Inject
@@ -126,11 +130,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
         int width = displayMetrics.widthPixels;
 
         // Used for the setting the size of imageView at runtime
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
-        imageView.setImageResource(R.drawable.badge);
         imageView.requestLayout();
 
         setSupportActionBar(toolbar);
@@ -138,7 +141,14 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
         hideLayouts();
         setAchievements();
+        setWikidataEditCount();
         initDrawer();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
     }
 
     /**
@@ -183,13 +193,15 @@ public class AchievementsActivity extends NavigationBaseActivity {
             fOut.flush();
             fOut.close();
             file.setReadable(true, false);
+            Uri fileUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName()+".provider", file);
+            grantUriPermission(getPackageName(), fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            intent.putExtra(Intent.EXTRA_STREAM, fileUri);
             intent.setType("image/png");
             startActivity(Intent.createChooser(intent, "Share image via"));
         } catch (IOException e) {
-            //Do Nothing
+            e.printStackTrace();
         }
     }
 
@@ -227,6 +239,20 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 Timber.d(e+"success");
             }
         }
+    }
+
+    @SuppressLint("CheckResult")
+    private void setWikidataEditCount() {
+        String userName = sessionManager.getUserName();
+        if (StringUtils.isBlank(userName)) {
+            return;
+        }
+        compositeDisposable.add(okHttpJsonApiClient.getWikidataEdits(userName)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)), e -> {
+                    Timber.e("Error:" + e);
+                }));
     }
 
     private void showSnackBarWithRetry() {
@@ -323,20 +349,18 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
-        thanksReceived.setText(Integer.toString(achievements.getThanksReceived()));
+        thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
                 (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
-        imagesFeatured.setText(Integer.toString(achievements.getFeaturedImages()));
+        imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         String levelUpInfoString = getString(R.string.level);
         levelUpInfoString += " " + Integer.toString(levelInfo.getLevelNumber());
         levelNumber.setText(levelUpInfoString);
-        final ContextThemeWrapper wrapper = new ContextThemeWrapper(this, levelInfo.getLevelStyle());
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.badge, wrapper.getTheme());
-        Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);
-        BitmapDrawable bitmapImage = BitmapUtils.writeOnDrawable(bitmap, Integer.toString(levelInfo.getLevelNumber()),this);
-        imageView.setImageDrawable(bitmapImage);
+        imageView.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
+                new ContextThemeWrapper(this, levelInfo.getLevelStyle()).getTheme()));
+        badgeText.setText(Integer.toString(levelInfo.getLevelNumber()));
     }
 
     /**
@@ -345,8 +369,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      */
     public static void startYourself(Context context) {
         Intent intent = new Intent(context, AchievementsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
 
@@ -418,6 +441,24 @@ public class AchievementsActivity extends NavigationBaseActivity {
     public void showUsedByWikiInfo(){
         launchAlert(getResources().getString(R.string.images_used_by_wiki)
                 ,getResources().getString(R.string.images_used_explanation));
+    }
+
+    @OnClick(R.id.images_nearby_info)
+    public void showImagesViaNearbyInfo(){
+        launchAlert(getResources().getString(R.string.statistics_wikidata_edits)
+                ,getResources().getString(R.string.images_via_nearby_explanation));
+    }
+
+    @OnClick(R.id.images_featured_info)
+    public void showFeaturedImagesInfo(){
+        launchAlert(getResources().getString(R.string.statistics_featured)
+                ,getResources().getString(R.string.images_featured_explanation));
+    }
+
+    @OnClick(R.id.thanks_received_info)
+    public void showThanksReceivedInfo(){
+        launchAlert(getResources().getString(R.string.statistics_thanks)
+                ,getResources().getString(R.string.thanks_received_explanation));
     }
 
     /**

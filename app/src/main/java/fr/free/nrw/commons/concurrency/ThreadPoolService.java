@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.concurrency;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
