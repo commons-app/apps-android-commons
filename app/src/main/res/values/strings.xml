@@ -497,9 +497,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_no_category">Oh, this is not even categorized!</string>
   <string name="review_category_explanation">This image is under %1$s categories.</string>
   <string name="review_spam_report_question">It is out of scope because it is</string>
-  <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">It is copyright violation because it is </string>
-  <string name="review_c_violation_report_problem">copyRightViolation</string>
     <string name="review_category_yes_button_text">No, mis-categorized</string>
     <string name="review_category_no_button_text">Seems fine</string>
     <string name="review_spam_yes_button_text">No, out of scope</string>
