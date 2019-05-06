@@ -27,10 +27,6 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.util.DateUtil;
-import org.wikipedia.util.StringUtil;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -56,12 +52,9 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
+import org.wikipedia.util.StringUtil;
 import timber.log.Timber;
 
 import static android.view.View.GONE;

@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
 
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -111,6 +113,7 @@ public class PermissionUtils {
                             onPermissionDenied.run();
                         }
                     }
+                }
 
                 @Override
                 public void onPermissionRationaleShouldBeShown(PermissionRequest permission,

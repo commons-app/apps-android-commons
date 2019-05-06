@@ -540,5 +540,4 @@ Upload your first media by tapping on the add button.</string>
   <string name="skip_image">SKIP THIS IMAGE</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
   <string name="image_info">Image Info</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
 </resources>
