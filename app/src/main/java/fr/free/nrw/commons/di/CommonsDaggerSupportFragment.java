@@ -3,17 +3,18 @@ package fr.free.nrw.commons.di;
 import android.app.Activity;
 import android.content.Context;
 
+import javax.inject.Inject;
+
 import androidx.fragment.app.Fragment;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
-import javax.inject.Inject;
-
 import dagger.android.support.HasSupportFragmentInjector;
 import io.reactivex.disposables.CompositeDisposable;
 
 public abstract class CommonsDaggerSupportFragment extends Fragment implements HasSupportFragmentInjector {
 
-    @Inject DispatchingAndroidInjector<Fragment> childFragmentInjector;
+    @Inject
+    DispatchingAndroidInjector<Fragment> childFragmentInjector;
 
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
 

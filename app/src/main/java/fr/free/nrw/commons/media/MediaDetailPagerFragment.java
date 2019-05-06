@@ -16,13 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;

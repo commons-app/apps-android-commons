@@ -27,6 +27,10 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
+import org.wikipedia.util.StringUtil;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;

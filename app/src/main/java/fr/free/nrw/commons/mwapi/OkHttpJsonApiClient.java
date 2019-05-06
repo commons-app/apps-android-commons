@@ -5,7 +5,11 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import org.wikipedia.dataclient.mwapi.RecentChange;
+import org.wikipedia.util.DateUtil;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -36,11 +40,6 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.dataclient.mwapi.RecentChange;
-import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
 
 /**
@@ -328,13 +327,6 @@ public class OkHttpJsonApiClient {
                     return mediaList;
                 }
                 putContinueValues(keyword, mwQueryResponse.continuation());
-
-
-                if (null == mwQueryResponse
-                    || null == mwQueryResponse.query()
-                    || null == mwQueryResponse.query().pages()) {
-                    return mediaList;
-                }
 
                 List<MwQueryPage> pages = mwQueryResponse.query().pages();
                 for (MwQueryPage page : pages) {
