@@ -127,6 +127,15 @@ class ContributionDaoTest {
     }
 
     @Test
+    fun migrateTableVersionFrom_v9_to_v10() {
+        Table.onUpdate(database, 8, 9)
+        // Table changed in version 9
+        inOrder(database) {
+            verify<SQLiteDatabase>(database).execSQL(Table.ADD_WIKI_DATA_ENTITY_ID_FIELD)
+        }
+    }
+
+    @Test
     fun saveNewContribution_nonNullFields() {
         whenever(client.insert(isA(), isA())).thenReturn(contentUri)
         val contribution = createContribution(true, null, null, null, null)
@@ -168,23 +177,6 @@ class ContributionDaoTest {
             assertFalse(it.containsKey(Table.COLUMN_LOCAL_URI))
             assertFalse(it.containsKey(Table.COLUMN_IMAGE_URL))
             assertFalse(it.containsKey(Table.COLUMN_UPLOADED))
-        }
-    }
-
-    @Test
-    fun saveNewContribution_nullableImageUrlUsesFileAsBackup() {
-        whenever(client.insert(isA(), isA())).thenReturn(contentUri)
-        val contribution = createContribution(true, null, null, null, "filePath")
-
-        testObject.save(contribution)
-
-        assertEquals(contentUri, contribution.contentUri)
-        verify(client).insert(eq(BASE_URI), captor.capture())
-        captor.firstValue.let {
-            // Nullable fields are absent if null
-            assertFalse(it.containsKey(Table.COLUMN_LOCAL_URI))
-            assertFalse(it.containsKey(Table.COLUMN_UPLOADED))
-            assertEquals(Utils.makeThumbBaseUrl("filePath"), it.getAsString(Table.COLUMN_IMAGE_URL))
         }
     }
 

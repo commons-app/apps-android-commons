@@ -39,12 +39,12 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/standard_gap"
       >
-      <android.support.design.widget.TextInputLayout
+      <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_container_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/et_search"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
           android:imeOptions="actionSearch"
           android:inputType="text"
           android:maxLines="1"/>
-      </android.support.design.widget.TextInputLayout>
+      </com.google.android.material.textfield.TextInputLayout>
 
       <ProgressBar
         android:id="@+id/pb_categories"
@@ -68,7 +68,7 @@
         tools:visibility="visible"/>
     </FrameLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rv_categories"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -92,7 +92,7 @@
     android:padding="16dp"
     android:orientation="horizontal"
     >
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_previous"
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
       android:layout_weight="1"
       android:text="@string/previous"/>
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_next"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

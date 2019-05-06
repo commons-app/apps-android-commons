@@ -3,12 +3,12 @@ package fr.free.nrw.commons.utils;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapRegionDecoder;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.net.Uri;
-import android.support.annotation.IntDef;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
 
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import androidx.exifinterface.media.ExifInterface;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
@@ -34,10 +35,32 @@ import timber.log.Timber;
 
 public class ImageUtils {
 
-    public static final int IMAGE_DARK = 1;
-    static final int IMAGE_BLURRY = 1 << 1;
+    /**
+     * Set 0th bit as 1 for dark image ie. 0001
+     */
+    public static final int IMAGE_DARK = 1 << 0; // 1
+    /**
+     * Set 1st bit as 1 for blurry image ie. 0010
+     */
+    static final int IMAGE_BLURRY = 1 << 1; // 2
+    /**
+     * Set 2nd bit as 1 for duplicate image ie. 0100
+     */
     public static final int IMAGE_DUPLICATE = 1 << 2; //4
-    public static final int IMAGE_GEOLOCATION_DIFFERENT = 1 << 3;
+    /**
+     * Set 3rd bit as 1 for image with different geo location ie. 1000
+     */
+    public static final int IMAGE_GEOLOCATION_DIFFERENT = 1 << 3; //8
+    /**
+     * The parameter FILE_FBMD is returned from the class ReadFBMD if the uploaded image contains FBMD data else returns IMAGE_OK
+     * ie. 10000
+     */
+    public static final int FILE_FBMD = 1 << 4;
+    /**
+    * The parameter FILE_NO_EXIF is returned from the class EXIFReader if the uploaded image does not contains EXIF data else returns IMAGE_OK
+    * ie. 100000
+    */
+    public static final int FILE_NO_EXIF = 1 << 5;
     public static final int IMAGE_OK = 0;
     public static final int IMAGE_KEEP = -1;
     public static final int IMAGE_WAIT = -2;
@@ -65,33 +88,26 @@ public class ImageUtils {
     }
 
     /**
-     * @param bitmapRegionDecoder BitmapRegionDecoder for the image we wish to process
-     * @return IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
+     * @return IMAGE_OK if image is not too dark
      * IMAGE_DARK if image is too dark
      */
-    static @Result
-    int checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
-        if (bitmapRegionDecoder == null) {
-            Timber.e("Expected bitmapRegionDecoder was null");
-            return IMAGE_OK;
+    static @Result int checkIfImageIsTooDark(String imagePath) {
+        long millis = System.currentTimeMillis();
+        try {
+            Bitmap bmp = new ExifInterface(imagePath).getThumbnailBitmap();
+            if (bmp == null) {
+                bmp = BitmapFactory.decodeFile(imagePath);
+            }
+
+            if (checkIfImageIsDark(bmp)) {
+                return IMAGE_DARK;
+            }
+
+        } catch (Exception e) {
+            Timber.d(e, "Error while checking image darkness.");
+        } finally {
+            Timber.d("Checking image darkness took " + (System.currentTimeMillis() - millis) + " ms.");
         }
-
-        int loadImageHeight = bitmapRegionDecoder.getHeight();
-        int loadImageWidth = bitmapRegionDecoder.getWidth();
-
-        int checkImageTopPosition = 0;
-        int checkImageLeftPosition = 0;
-
-        Timber.v("left: " + checkImageLeftPosition + " right: " + loadImageWidth + " top: " + checkImageTopPosition + " bottom: " + loadImageHeight);
-
-        Rect rect = new Rect(checkImageLeftPosition,checkImageTopPosition, loadImageWidth, loadImageHeight);
-
-        Bitmap processBitmap = bitmapRegionDecoder.decodeRegion(rect,null);
-
-        if (checkIfImageIsDark(processBitmap)) {
-            return IMAGE_DARK;
-        }
-
         return IMAGE_OK;
     }
 
@@ -125,7 +141,6 @@ public class ImageUtils {
         int bitmapHeight = bitmap.getHeight();
 
         int allPixelsCount = bitmapWidth * bitmapHeight;
-        Timber.d("total %s", Integer.toString(allPixelsCount));
         int numberOfBrightPixels = 0;
         int numberOfMediumBrightnessPixels = 0;
         double brightPixelThreshold = 0.025 * allPixelsCount;
@@ -214,11 +229,12 @@ public class ImageUtils {
         }
     }
 
+    /**
+     * Result variable is a result of an or operation of all possible problems. Ie. if result
+     * is 0001 means IMAGE_DARK
+     * if result is 1100 IMAGE_DUPLICATE and IMAGE_GEOLOCATION_DIFFERENT
+     */
     public static String getErrorMessageForResult(Context context, @Result int result) {
-        /**
-         * Result variable is a result of an or operation of all possible problems. Ie. if result
-         * is 0001 means IMAGE_DARK, if result is 1100 IMAGE_DUPLICATE and IMAGE_GEOLOCATION_DIFFERENT
-         */
         StringBuilder errorMessage = new StringBuilder();
         if (result <= 0 ) {
             Timber.d("No issues to warn user is found");
@@ -241,6 +257,14 @@ public class ImageUtils {
 
             if ((IMAGE_GEOLOCATION_DIFFERENT & result) != 0 ) {
                 errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_different_geolocation));
+            }
+
+            if ((FILE_FBMD & result) != 0) {
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.upload_problem_fbmd));
+            }
+
+            if ((FILE_NO_EXIF & result) != 0){
+                errorMessage.append("\n - ").append(context.getResources().getString(R.string.internet_downloaded));
             }
 
             errorMessage.append("\n\n").append(context.getResources().getString(R.string.upload_problem_do_you_continue));

@@ -3,22 +3,23 @@ package fr.free.nrw.commons.contributions;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringDef;
+
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
 
 import java.lang.annotation.Retention;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.StringDef;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ConfigUtils;
-import fr.free.nrw.commons.utils.StringUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -168,7 +169,7 @@ public class  Contribution extends Media {
                 .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");
 
         String templatizedCreatedDate = getTemplatizedCreatedDate();
-        if (!StringUtils.isNullOrWhiteSpace(templatizedCreatedDate)) {
+        if (!StringUtils.isBlank(templatizedCreatedDate)) {
             buffer.append("|date=").append(templatizedCreatedDate);
         }
 
@@ -201,8 +202,7 @@ public class  Contribution extends Media {
     private String getTemplatizedCreatedDate() {
         if (dateCreated != null) {
             if (UploadableFile.DateTimeWithSource.EXIF_SOURCE.equals(dateCreatedSource)) {
-                SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, isoFormat.format(dateCreated)) + "\n";
+                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, DateUtil.getDateStringWithSkeletonPattern(dateCreated, "yyyy-MM-dd")) + "\n";
             } else {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(dateCreated);

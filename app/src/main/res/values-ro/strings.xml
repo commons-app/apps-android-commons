@@ -144,17 +144,14 @@
   <string name="tutorial_1_text">Wikimedia Commons găzduiește majoritatea imaginilor folosite în Wikipedia.</string>
   <string name="tutorial_1_subtext">Imaginile dumneavoastră ajută la educarea oamenilor\ndin întreaga lume!</string>
   <string name="tutorial_2_text">Vă rugăm să încărcați imagini care sunt făcute sau create în totalitate de dumneavoastră:</string>
-  <string name="tutorial_2_subtext">Obiecte naturale (flori, animale, munți)\n• Obiecte folositoare (biciclete, stații de tren)\n• Oameni faimoși (primarul dumneavoastră, atleți olimpici pe care i-ați întâlnit)</string>
   <string name="tutorial_2_subtext_1">Obiecte naturale (flori, animale, munți)</string>
   <string name="tutorial_2_subtext_2">Obiecte utile (biciclete, gări)</string>
   <string name="tutorial_2_subtext_3">Persoane celebre (primarul, sportivii olimpici pe care i-ați întâlnit)</string>
   <string name="tutorial_3_text">Vă rugăm să NU încărcați:</string>
-  <string name="tutorial_3_subtext">— Selfies sau poze cu prietenii\n— Fotografii descărcate de pe Internet\n— Capturi de ecran din programe sau aplicații proprietare</string>
   <string name="tutorial_3_subtext_1">Selfies sau imagini ale prietenilor tăi</string>
   <string name="tutorial_3_subtext_2">Fotografiile pe care le-ați descărcat de pe Internet</string>
   <string name="tutorial_3_subtext_3">Capturi de ecran ale aplicațiilor proprietare</string>
   <string name="tutorial_4_text">Exemplu de încărcare:</string>
-  <string name="tutorial_4_subtext">- Titlu: Opera din Sydney\n- Descriere: Opera din Sydney, vizionată de-a lungul golfului\n- Categorii: Opera din Sydney de la vest, vederi de la distanță de la Opera din Sydney</string>
   <string name="tutorial_4_subtext_1">Titlu: Opera din Sydney</string>
   <string name="tutorial_4_subtext_2">Descriere: Opera din Sydney, vizionată de-a lungul golfului</string>
   <string name="tutorial_4_subtext_3">Categorii: Opera din Sydney de la vest, vederi de la distanță de la Opera din Sydney</string>
@@ -173,7 +170,7 @@
   <string name="menu_refresh">Reîncarcă</string>
   <string name="storage_permission_title">Solicitarea Permisiunilor de Stocare</string>
   <string name="read_storage_permission_rationale">Necesită permisiune: Citiți spațiul de stocare extern. Aplicația nu poate accesa galeria dvs. fără aceasta.</string>
-  <string name="write_storage_permission_rationale">Necesită permisiune: Scrieți un spațiu de stocare extern. Aplicația nu poate accesa camera fără acest lucru.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Necesită permisiune: Scrieți un spațiu de stocare extern. Aplicația nu poate accesa camera fără acest lucru.</string>
   <string name="location_permission_rationale">Permisiune opțională: Obțineți locația curentă pentru sugestiile de categorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Locurile din Apropiere</string>
@@ -183,11 +180,8 @@
   <string name="yes">Da</string>
   <string name="no">Nu</string>
   <string name="media_detail_title">Titlu</string>
-  <string name="media_detail_media_title">Titlul fișierului</string>
   <string name="media_detail_description">Descriere</string>
-  <string name="media_detail_description_explanation">Descrierea fișierului vine aici. Aceasta poate fi destul de lungă și va trebuie distribuită pe mai multe linii. Sperăm totuși că arată bine.</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_author_explanation">Numele de utilizator al autorului imaginii se pune aici.</string>
   <string name="media_detail_uploaded_date">Data încărcării</string>
   <string name="media_detail_license">Licență</string>
   <string name="media_detail_coordinates">Coordonate</string>
@@ -198,7 +192,7 @@
   <string name="number_of_uploads">Limita mea de încărcare recentă</string>
   <string name="maximum_limit">Limită maximă</string>
   <string name="maximum_limit_alert">Nu pot afișa mai mult de 500</string>
-  <string name="set_limit">Setați limita de încărcări recente</string>
+  <string name="set_limit" fuzzy="true">Setați limita de încărcări recente</string>
   <string name="login_failed_2fa_not_supported">Autentificare cu doi factori nu este acceptată în prezent.</string>
   <string name="logout_verification">Chiar vrei să te deconectezi?</string>
   <string name="commons_logo">Logoul Commons</string>
@@ -296,7 +290,7 @@
   <string name="about_translate_cancel">Anulare</string>
   <string name="retry">Reîncercare</string>
   <string name="showcase_view_got_it_button">Am înțeles!</string>
-  <string name="showcase_view_whole_nearby_activity">Acestea sunt locurile din apropierea ta care au nevoie de imagini pentru a ilustra articolele lor Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Acestea sunt locurile din apropierea ta care au nevoie de imagini pentru a ilustra articolele lor Wikipedia</string>
   <string name="showcase_view_list_icon">Atingând acest buton, se afișează o listă a acestor locuri</string>
   <string name="showcase_view_plus_fab">Puteți încărca o imagine pentru orice loc din galerie sau camera foto</string>
   <string name="no_images_found">Nu s-au gasit imagini!</string>
@@ -402,10 +396,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi-am dat seama că este rău pentru intimitatea mea</string>
   <string name="deletion_reason_no_longer_want_public">M-am răzgândit, nu mai vreau să fie publică</string>
   <string name="deletion_reason_not_interesting">Ne pare rău că această imagine nu este interesantă pentru o enciclopedie</string>
-  <string name="uploaded_by_myself">Încărcat de mine însumi</string>
-  <string name="used_by">,folosită în</string>
-  <string name="articles">articole</string>
-  <string name="no_uploads">Bun venit la Commons!\n\nÎncărcați primul dvs. suport media atingând pictograma camerei sau galeria de mai sus.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Încărcat de mine însumi</string>
+  <string name="no_uploads" fuzzy="true">Bun venit la Commons!\n\nÎncărcați primul dvs. suport media atingând pictograma camerei sau galeria de mai sus.</string>
   <string name="desc_language_Worldwide">La nivel mondial</string>
   <string name="desc_language_America">America</string>
   <string name="desc_language_Europe">Europa</string>
@@ -428,7 +420,7 @@
   <string name="achievements_fetch_failed">Ceva a mers prost, nu am reușit să ne aducem realizările</string>
   <string name="ends_on">Se încheie la:</string>
   <string name="display_campaigns">Campaniile de afișare</string>
-  <string name="display_campaigns_explanation">Atingeți aici pentru a vedea campaniile în desfășurare</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Atingeți aici pentru a vedea campaniile în desfășurare</string>
   <string name="nearby_campaign_dismiss_message">Nu veți mai vedea campaniile. Cu toate acestea, puteți reactiva această notificare în Setări, dacă doriți.</string>
   <string name="this_function_needs_network_connection">Această funcție necesită conectare la rețea, verificați setările de conectare.</string>
   <string name="bad_token_error_proposed_solution">Încărcarea a eșuat din cauza problemelor cu Edit token. Încearcă să te deconectezi și să intri din nou.</string>

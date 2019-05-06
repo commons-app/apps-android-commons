@@ -3,14 +3,13 @@ package fr.free.nrw.commons.logging;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 
-import org.acra.collector.CrashReportData;
+import org.acra.data.CrashReportData;
 import org.acra.sender.ReportSender;
 import org.apache.commons.codec.Charsets;
-import org.apache.http.protocol.HTTP;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -23,7 +22,6 @@ import java.util.zip.ZipOutputStream;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.utils.ConfigUtils;
 import timber.log.Timber;
 
 /**

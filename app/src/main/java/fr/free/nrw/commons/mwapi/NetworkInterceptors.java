@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.apache.http.Header;
 import org.apache.http.HttpRequest;

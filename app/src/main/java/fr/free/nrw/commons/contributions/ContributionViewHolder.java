@@ -2,28 +2,51 @@ package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.collection.LruCache;
+
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.apache.commons.lang3.StringUtils;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.free.nrw.commons.MediaWikiImageView;
+import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewHolder;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
-class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
-    @BindView(R.id.contributionImage) MediaWikiImageView imageView;
+public class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
+    @BindView(R.id.contributionImage)
+    SimpleDraweeView imageView;
     @BindView(R.id.contributionTitle) TextView titleView;
     @BindView(R.id.contributionState) TextView stateView;
     @BindView(R.id.contributionSequenceNumber) TextView seqNumView;
     @BindView(R.id.contributionProgress) ProgressBar progressView;
     @BindView(R.id.failed_image_options) LinearLayout failedImageOptions;
 
+    @Inject
+    MediaDataExtractor mediaDataExtractor;
+
+    @Inject
+    @Named("thumbnail-cache")
+    LruCache<String, String> thumbnailCache;
+
     private DisplayableContribution contribution;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     ContributionViewHolder(View parent) {
         ButterKnife.bind(this, parent);
@@ -31,8 +54,10 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
 
     @Override
     public void bindModel(Context context, DisplayableContribution contribution) {
+        ApplicationlessInjection.getInstance(context)
+                .getCommonsApplicationComponent().inject(this);
         this.contribution = contribution;
-        imageView.setMedia(contribution);
+        fetchAndDisplayThumbnail(contribution);
         titleView.setText(contribution.getDisplayTitle());
 
         seqNumView.setText(String.valueOf(contribution.getPosition() + 1));
@@ -73,6 +98,32 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
     }
 
     /**
+     * This method fetches the thumbnail url from file name
+     * If the thumbnail url is present in cache, then it is used otherwise API call is made to fetch the thumbnail
+     * This can be removed once #2904 is in place and contribution contains all metadata beforehand
+     * @param contribution
+     */
+    private void fetchAndDisplayThumbnail(DisplayableContribution contribution) {
+        if (!StringUtils.isBlank(thumbnailCache.get(contribution.getFilename()))) {
+            imageView.setImageURI(thumbnailCache.get(contribution.getFilename()));
+            return;
+        }
+        Timber.d("Fetching thumbnail for %s", contribution.getFilename());
+        Disposable disposable = mediaDataExtractor.getMediaFromFileName(contribution.getFilename())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(media -> {
+                    thumbnailCache.put(contribution.getFilename(), media.getThumbUrl());
+                    imageView.setImageURI(media.getThumbUrl());
+                });
+        compositeDisposable.add(disposable);
+    }
+
+    public void clear() {
+        compositeDisposable.clear();
+    }
+
+    /**
      * Retry upload when it is failed
      */
     @OnClick(R.id.retryButton)
@@ -91,6 +142,14 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
         DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
         if (actions != null) {
             actions.deleteUpload();
+        }
+    }
+
+    @OnClick(R.id.contributionImage)
+    public void imageClicked(){
+        DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
+        if (actions != null) {
+            actions.onClick();
         }
     }
 }

@@ -1,12 +1,11 @@
 package fr.free.nrw.commons.upload;
 
 import android.net.Uri;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
+import fr.free.nrw.commons.location.LatLng;
 
 import java.lang.annotation.Retention;
 import java.util.List;
-
-import fr.free.nrw.commons.utils.ImageUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -43,8 +42,6 @@ public interface UploadView {
 
     void setBottomCardState(boolean state);
 
-    void setRightCardState(boolean bottomCardState);
-
     void setBackground(Uri mediaUri);
 
     void setTopCardVisibility(boolean visible);
@@ -73,7 +70,7 @@ public interface UploadView {
 
     void finish();
 
-    void launchMapActivity(String decCoords);
+    void launchMapActivity(LatLng decCoords);
 
     void showErrorMessage(int resourceId);
 

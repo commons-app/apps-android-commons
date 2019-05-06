@@ -110,7 +110,10 @@
   <string name="no_uploads_yet">Још увек нисте отпремили ниједну фотографију.</string>
   <string name="menu_retry_upload">Покушај поново</string>
   <string name="menu_cancel_upload">Откажи</string>
-  <string name="share_license_summary" fuzzy="true">Слика ће се водити под лиценцом %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Слика ће се водити под лиценцом %1$s</item>
+    <item quantity="other">Слике ће се водити под лиценцом %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Слањем ове слике, ја тврдим да је у питању мој рад, да не садржи материјал или селфије заштићене ауторским правима, те да је на остале начине у складу са &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;смерницама Викимедијине оставе&lt;/a&gt;.</string>
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Подразумевана лиценца</string>
@@ -142,17 +145,14 @@
   <string name="tutorial_1_text">Викимедијина остава садржи већину слика које се користе на Википедији.</string>
   <string name="tutorial_1_subtext">Ваше слике помажу у образовању људи широм света.</string>
   <string name="tutorial_2_text">Отпремајте слике које сте снимили или направили у потпуности сами:</string>
-  <string name="tutorial_2_subtext">Природне објекте (цвеће, животиње, планине)\n• Корисне објекте (бицикле, железничке станице)\n• Познате људе (ваш градоначелник, олимпијци које сте срели)</string>
   <string name="tutorial_2_subtext_1">природне објекте (цвеће, животиње, планине);</string>
   <string name="tutorial_2_subtext_2">корисне објекте (бицикле, железничке станице);</string>
   <string name="tutorial_2_subtext_3">познате људе (ваш градоначелник, олимпијци које сте срели).</string>
   <string name="tutorial_3_text">НЕ отпремајте:</string>
-  <string name="tutorial_3_subtext">— селфије и слике ваших пријатеља\n— слике које сте преузели са интернета\n— снимке екрана неслободних апликација</string>
   <string name="tutorial_3_subtext_1">селфије или слике ваших пријатеља;</string>
   <string name="tutorial_3_subtext_2">слике које сте преузели са интернета;</string>
   <string name="tutorial_3_subtext_3">снимке екрана власничких апликација.</string>
   <string name="tutorial_4_text">Пример отпремања:</string>
-  <string name="tutorial_4_subtext">— Наслов: Сиднејска опера\n— Опис: Сиднејска опера, поглед преко залива\n— Категорије: Сиднејска опера са запада, погледи на Сиднејксу оперу из даљине</string>
   <string name="tutorial_4_subtext_1">Наслов: Сиднејска опера</string>
   <string name="tutorial_4_subtext_2">Опис: Сиднејска опера гледана преко залива</string>
   <string name="tutorial_4_subtext_3">Категорије: Sydney Opera House from the west, Sydney Opera House remote views</string>
@@ -167,10 +167,12 @@
   <string name="detail_panel_cats_loading">Учитавање…</string>
   <string name="detail_panel_cats_none">Ништа није изабрано</string>
   <string name="detail_description_empty">Нема описа</string>
+  <string name="detail_discussion_empty">Нема расправе</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Освежи</string>
+  <string name="storage_permission_title">Захтевање дозволе за складиштење</string>
   <string name="read_storage_permission_rationale">Потребна дозвола: Читање спољашње меморије. Апликација не може да приступи Ваших галерији без овога.</string>
-  <string name="write_storage_permission_rationale">Потребна дозвола: Писање спољашње меморије. Апликација не може да приступи Вашој камери без овога.</string>
+  <string name="write_storage_permission_rationale">Потребна дозвола: Писање у спољашњој меморији. Апликација не може да приступи Вашој камери/галерији без ове дозволе.</string>
   <string name="location_permission_rationale">Необавезна дозвола: преузми тренутну локацију за предлоге категорија</string>
   <string name="ok">У реду</string>
   <string name="title_activity_nearby">Места у близини</string>
@@ -180,11 +182,9 @@
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>
-  <string name="media_detail_media_title">Наслов медија</string>
   <string name="media_detail_description">Опис</string>
-  <string name="media_detail_description_explanation">Опис датотеке иде овде. Може да буде поприлично дуг и приказиваће се у више редова. Надамо се да ће изгледати лепо.</string>
+  <string name="media_detail_discussion">Дискусија</string>
   <string name="media_detail_author">Аутор</string>
-  <string name="media_detail_author_explanation">Корисничко име аутора изабране слике иде овде.</string>
   <string name="media_detail_uploaded_date">Датум отпремања</string>
   <string name="media_detail_license">Лиценца</string>
   <string name="media_detail_coordinates">Координате</string>
@@ -194,8 +194,12 @@
   <string name="_2fa_code">2FA код</string>
   <string name="number_of_uploads">Мој лимит за скорашња отпремања</string>
   <string name="maximum_limit">Максимални лимит</string>
+  <string name="invalid_zero">Нула није важећа</string>
+  <string name="invalid_input">Неважећи унос</string>
   <string name="maximum_limit_alert">Није могуће приказати више од 500</string>
-  <string name="set_limit">Постави ограничење за недавна отпремања</string>
+  <string name="enter_valid">Унесите важећи број</string>
+  <string name="cannot_be_zero">Граница отпремања не може бити 0</string>
+  <string name="set_limit">Ограничење за недавна отпремања</string>
   <string name="login_failed_2fa_not_supported">Двофакторска аутентификација тренутно није подржана.</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
   <string name="commons_logo">Лого Оставе</string>
@@ -230,6 +234,7 @@
   <string name="navigation_item_info">Упутство</string>
   <string name="navigation_item_notification">Обавештења</string>
   <string name="navigation_item_featured_images">Изабрана</string>
+  <string name="navigation_item_review">Прегледај</string>
   <string name="nearby_needs_permissions">Оближња места не могу да се приказују без дозволе за локацију</string>
   <string name="no_description_found">опис није пронађен</string>
   <string name="nearby_info_menu_commons_article">Страница датотеке на Остави</string>
@@ -293,7 +298,7 @@
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Покушај поново</string>
   <string name="showcase_view_got_it_button">Разумем</string>
-  <string name="showcase_view_whole_nearby_activity">Ово су места у Вашој близини којима је потребна слика да илуструје њихове википедијске чланке</string>
+  <string name="showcase_view_whole_nearby_activity">Ово су места у Вашој близини којима је потребна слика да илуструје њихове чланке на Википедији.\n\nКликом на \"ПРЕТРАЖИТЕ ОВУ ОБЛАСТ\" закључава се мапа и покреће претрагу у близини те локације.</string>
   <string name="showcase_view_list_icon">Додир овог дугмета даће вам листу ових места</string>
   <string name="showcase_view_plus_fab">Можете да отпремите слику за било које место из своје галерије или камере</string>
   <string name="no_images_found">Слике нису пронађене.</string>
@@ -392,10 +397,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Схватио/ла сам да је лоша за моју приватност</string>
   <string name="deletion_reason_no_longer_want_public">Променио/ла сам мишљење, не желим да више јавно буду видљиве</string>
   <string name="deletion_reason_not_interesting">Ова слика није занимљива за енциклопедију</string>
-  <string name="uploaded_by_myself">Отпремио/ла сам на</string>
-  <string name="used_by">, користи се у</string>
-  <string name="articles">чланци</string>
-  <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром горенаведене иконице камере или галерије.</string>
+  <string name="uploaded_by_myself">Отпремио/ла сам на %1$s, користи се у чланку/цима — %2$d.</string>
+  <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром дугмета за додавање.</string>
   <string name="desc_language_Worldwide">Светски</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>
@@ -417,7 +420,7 @@
   <string name="display_location_permission_explanation">Тражи дозволу за локацију када је то потребно за функцију приказа картице обавештења у близини.</string>
   <string name="achievements_fetch_failed">Нешто није у реду. Није могуће добавити достигнућа.</string>
   <string name="display_campaigns">Прикажи кампање</string>
-  <string name="display_campaigns_explanation">Додирните ове да бисте видели кампање у току</string>
+  <string name="display_campaigns_explanation">Погледајте текуће кампање</string>
   <string name="this_function_needs_network_connection">Ова функција захтева мрежну везу. Проверите подешавања везе.</string>
   <string name="bad_token_error_proposed_solution">Отпремање није успело због проблема са токеном за уређивање. Покушајте да се пријавите поново.</string>
   <string name="no_image">Нема коришћених датотека</string>

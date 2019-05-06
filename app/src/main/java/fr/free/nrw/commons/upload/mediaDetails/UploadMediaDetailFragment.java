@@ -3,13 +3,6 @@ package fr.free.nrw.commons.upload.mediaDetails;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +12,24 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import org.apache.commons.lang3.StringUtils;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
@@ -40,7 +46,6 @@ import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +60,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ib_map)
-    ImageButton ibMap;
+    AppCompatImageButton ibMap;
     @BindView(R.id.ib_expand_collapse)
-    ImageButton ibExpandCollapse;
+    AppCompatImageButton ibExpandCollapse;
     @BindView(R.id.ll_container_media_detail)
     LinearLayout llContainerMediaDetail;
     @BindView(R.id.til_container_title)
@@ -118,7 +123,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_upload_media_detail_fragment, container, false);
     }
 
@@ -276,7 +281,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void showBadImagePopup(Integer errorCode) {
         String errorMessageForResult = getErrorMessageForResult(getContext(), errorCode);
-        if (!StringUtils.isNullOrWhiteSpace(errorMessageForResult)) {
+        if (!StringUtils.isBlank(errorMessageForResult)) {
             DialogUtil.showAlertDialog(getActivity(),
                     getString(R.string.warning),
                     errorMessageForResult,

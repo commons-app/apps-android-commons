@@ -3,7 +3,7 @@ package fr.free.nrw.commons.auth;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.BuildConfig;
 import timber.log.Timber;

@@ -2,8 +2,8 @@
     <dimen name="bottom_peak_height">240dp</dimen>
 
     <!-- Standard margin / padding for the containing activity -->
-    <dimen name="activity_margin_horizontal">16dp</dimen>
-    <dimen name="activity_margin_vertical">16dp</dimen>
+    <dimen name="activity_margin_horizontal">8dp</dimen>
+    <dimen name="activity_margin_vertical">8dp</dimen>
     <dimen name="achievements_activity_margin_vertical">8dp</dimen>
 
     <!-- Standard margins / padding -->
@@ -28,9 +28,6 @@
     <dimen name="second_fab">25dp</dimen>
     <dimen name="subtitle_text">12sp</dimen>
 
-    <!--
-Refer to App Widget Documentation for margin information
-http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
-    -->
-    <dimen name="widget_margin">8dp</dimen>
+    <!-- App widget margin -->
+    <dimen name="widget_margin">0dp</dimen>
 </resources>

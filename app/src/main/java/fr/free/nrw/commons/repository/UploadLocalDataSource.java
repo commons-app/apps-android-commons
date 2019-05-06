@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.repository;
 
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
@@ -13,15 +12,13 @@ import javax.inject.Singleton;
 public class UploadLocalDataSource {
 
     private final UploadModel uploadModel;
-    private BasicKvStore defaultKvStore;
-    private JsonKvStore directKvStore;
+    private JsonKvStore defaultKVStore;
 
     @Inject
-    public UploadLocalDataSource(@Named("default_preferences") BasicKvStore defaultKvStore,
-            @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore,
+    public UploadLocalDataSource(
+            @Named("default_preferences") JsonKvStore defaultKVStore,
             UploadModel uploadModel) {
-        this.defaultKvStore = defaultKvStore;
-        this.directKvStore = directKvStore;
+        this.defaultKVStore = defaultKVStore;
         this.uploadModel = uploadModel;
     }
 
@@ -31,11 +28,11 @@ public class UploadLocalDataSource {
     }
 
     public String getFromDefaultKvStore(String key, String defaultValue) {
-        return defaultKvStore.getString(key, defaultValue);
+        return defaultKVStore.getString(key, defaultValue);
     }
 
     public void saveInDefaultKvStore(String key, String value) {
-        defaultKvStore.putString(key, value);
+        defaultKVStore.putString(key, value);
     }
 
     public int getCount() {
@@ -55,6 +52,6 @@ public class UploadLocalDataSource {
     }
 
     public void saveInDirectKvStore(String key, boolean value) {
-        directKvStore.putBoolean(key, value);
+        defaultKVStore.putBoolean(key, value);
     }
 }

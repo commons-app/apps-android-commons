@@ -29,6 +29,9 @@ app/gradlew
 app/gradlew.bat
 app/gradle/wrapper/gradle-wrapper.properties
 
+# related to release notes
+app/src/prodRelease/play/release-notes/*
+
 #related to OpenCV
 /libraries/opencv/build
 app/src/main/jniLibs

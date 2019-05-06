@@ -33,7 +33,7 @@ public class CategoriesModel{
     @Inject
     public CategoriesModel(MediaWikiApi mwApi,
                            CategoryDao categoryDao,
-                           @Named("direct_nearby_upload_prefs") JsonKvStore directKvStore) {
+                           @Named("default_preferences") JsonKvStore directKvStore) {
         this.mwApi = mwApi;
         this.categoryDao = categoryDao;
         this.directKvStore = directKvStore;

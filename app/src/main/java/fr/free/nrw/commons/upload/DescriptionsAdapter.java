@@ -1,24 +1,27 @@
 package fr.free.nrw.commons.upload;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.ui.widget.CustomEditText;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import fr.free.nrw.commons.utils.BiMap;
-import java.util.ArrayList;
-import java.util.List;
 import timber.log.Timber;
 
 public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
@@ -81,7 +84,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         AppCompatSpinner spinnerDescriptionLanguages;
 
         @BindView(R.id.description_item_edit_text)
-        CustomEditText descItemEditText;
+        AppCompatEditText descItemEditText;
 
         private View view;
 
@@ -110,17 +113,19 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
             descItemEditText.addTextChangedListener(new AbstractTextWatcher(
                     descriptionText -> descriptions.get(position)
                             .setDescriptionText(descriptionText)));
-            descItemEditText.setDrawableClickListener(target -> {
-                switch (target) {
-                    case RIGHT:
+
+            descItemEditText.setOnTouchListener((v, event) -> {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    //2 is for drawable right
+                    if (event.getRawX() >= (descItemEditText.getRight() - descItemEditText.getCompoundDrawables()[2].getBounds().width())) {
                         if (getAdapterPosition() == 0) {
                             callback.showAlert(R.string.media_detail_description,
                                     R.string.description_info);
                         }
-                        break;
-                    default:
-                        break;
+                        return true;
+                    }
                 }
+                return false;
             });
 
             initLanguageSpinner(position, description);
@@ -131,8 +136,9 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         }
 
         /**
-         * Extracted out the function to init the language spinner with different system supported
-         * languages
+         * Extracted out the function to init the language spinner with different system supported languages
+         * @param position
+         * @param description
          */
         private void initLanguageSpinner(int position, Description description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(

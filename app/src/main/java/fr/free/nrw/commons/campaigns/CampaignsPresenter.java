@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.campaigns;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.util.Log;
+
+import org.wikipedia.util.DateUtil;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -15,13 +14,14 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.MvpView;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on
@@ -31,7 +31,6 @@ import io.reactivex.schedulers.Schedulers;
 public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
     private final OkHttpJsonApiClient okHttpJsonApiClient;
 
-    private final String TAG = "#CampaignsPresenter#";
     private ICampaignsView view;
     private Disposable disposable;
     private Campaign campaign;
@@ -75,16 +74,16 @@ public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
 
                     @Override public void onSuccess(CampaignResponseDTO campaignResponseDTO) {
                         List<Campaign> campaigns = campaignResponseDTO.getCampaigns();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         if (campaigns == null || campaigns.isEmpty()) {
-                            Log.e(TAG, "The campaigns list is empty");
+                            Timber.e("The campaigns list is empty");
                             view.showCampaigns(null);
                         }
                         Collections.sort(campaigns, (campaign, t1) -> {
                             Date date1, date2;
                             try {
-                                date1 = dateFormat.parse(campaign.getStartDate());
-                                date2 = dateFormat.parse(t1.getStartDate());
+
+                                date1 = CommonsDateUtil.getIso8601DateFormatShort().parse(campaign.getStartDate());
+                                date2 = CommonsDateUtil.getIso8601DateFormatShort().parse(t1.getStartDate());
                             } catch (ParseException e) {
                                 e.printStackTrace();
                                 return -1;
@@ -95,9 +94,8 @@ public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
                         Date currentDate = new Date();
                         try {
                             for (Campaign aCampaign : campaigns) {
-                                campaignEndDate = dateFormat.parse(aCampaign.getEndDate());
-                                campaignStartDate =
-                                    dateFormat.parse(aCampaign.getStartDate());
+                                campaignEndDate = CommonsDateUtil.getIso8601DateFormatShort().parse(aCampaign.getEndDate());
+                                campaignStartDate = CommonsDateUtil.getIso8601DateFormatShort().parse(aCampaign.getStartDate());
                                 if (campaignEndDate.compareTo(currentDate) >= 0
                                     && campaignStartDate.compareTo(currentDate) <= 0) {
                                     campaign = aCampaign;
@@ -111,7 +109,7 @@ public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
                     }
 
                     @Override public void onError(Throwable e) {
-                        Log.e(TAG, "could not fetch campaigns: " + e.getMessage());
+                        Timber.e(e, "could not fetch campaigns");
                     }
                 });
         }

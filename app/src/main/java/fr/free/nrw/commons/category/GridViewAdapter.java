@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,12 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 
 /**
@@ -22,12 +22,10 @@ import fr.free.nrw.commons.R;
  */
 
 public class GridViewAdapter extends ArrayAdapter {
-    private Context context;
     private List<Media> data;
 
     public GridViewAdapter(Context context, int layoutResourceId, List<Media> data) {
         super(context, layoutResourceId, data);
-        this.context = context;
         this.data = data;
     }
 
@@ -81,17 +79,16 @@ public class GridViewAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            convertView = inflater.inflate(R.layout.layout_category_images, null);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_category_images, null);
         }
 
         Media item = data.get(position);
-        MediaWikiImageView imageView = convertView.findViewById(R.id.categoryImageView);
+        SimpleDraweeView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
         TextView author = convertView.findViewById(R.id.categoryImageAuthor);
         fileName.setText(item.getDisplayTitle());
         setAuthorView(item, author);
-        imageView.setMedia(item);
+        imageView.setImageURI(item.getThumbUrl());
         return convertView;
     }
 
@@ -102,7 +99,7 @@ public class GridViewAdapter extends ArrayAdapter {
      */
     private void setAuthorView(Media item, TextView author) {
         if (!TextUtils.isEmpty(item.getCreator())) {
-            String uploadedByTemplate = context.getString(R.string.image_uploaded_by);
+            String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
 
             String uploadedBy = String.format(Locale.getDefault(), uploadedByTemplate, item.getCreator());
             author.setText(uploadedBy);

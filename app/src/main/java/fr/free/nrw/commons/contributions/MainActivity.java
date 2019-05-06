@@ -5,14 +5,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,24 +13,31 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -60,10 +59,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     @Inject
     public LocationServiceManager locationManager;
     @Inject
-    @Named("default_preferences")
-    public BasicKvStore defaultKvStore;
-    @Inject
     NotificationController notificationController;
+    @Inject
+    QuizChecker quizChecker;
 
 
     public Intent uploadServiceIntent;
@@ -270,9 +268,16 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 finish();
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
-            // Meas that nearby fragment is visible (not contributions fragment)
-            // Set current item to contributions activity instead of closing the activity
-            viewPager.setCurrentItem(0);
+            // Means that nearby fragment is visible (not contributions fragment)
+            NearbyFragment nearbyFragment = (NearbyFragment) contributionsActivityPagerAdapter.getItem(1);
+
+            if(nearbyFragment.isBottomSheetExpanded()) {
+                // Back should first hide the bottom sheet if it is expanded
+                nearbyFragment.listOptionMenuItemClicked();
+            } else {
+                // Otherwise go back to contributions fragment
+                viewPager.setCurrentItem(0);
+            }
         } else {
             super.onBackPressed();
         }
@@ -302,11 +307,11 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
-        Observable.fromCallable(() -> notificationController.getNotifications(false))
+        compositeDisposable.add(Observable.fromCallable(() -> notificationController.getNotifications(false))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::initNotificationViews,
-                        throwable -> Timber.e(throwable, "Error occurred while loading notifications"));
+                        throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
     }
 
     private void initNotificationViews(List<Notification> notificationList) {
@@ -348,7 +353,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 return true;
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
-                    ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuIteClicked();
+                    ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
                 }
                 return true;
             default:
@@ -458,6 +463,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Timber.d(data!=null?data.toString():"onActivityResult data is null");
         super.onActivityResult(requestCode, resultCode, data);
         controller.handleActivityResult(this, requestCode, resultCode, data);
     }
@@ -495,10 +501,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     protected void onResume() {
         super.onResume();
         setNotificationCount();
+        quizChecker.initQuizCheck(this);
     }
 
     @Override
     protected void onDestroy() {
+        quizChecker.cleanup();
         locationManager.unregisterLocationManager();
         // Remove ourself from hashmap to prevent memory leaks
         locationManager = null;

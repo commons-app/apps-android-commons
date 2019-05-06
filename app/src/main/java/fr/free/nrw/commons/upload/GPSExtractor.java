@@ -1,13 +1,12 @@
 package fr.free.nrw.commons.upload;
 
-import android.media.ExifInterface;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import java.io.FileDescriptor;
 import java.io.IOException;
+import java.io.InputStream;
 
+import androidx.exifinterface.media.ExifInterface;
 import timber.log.Timber;
 
 /**
@@ -33,17 +32,11 @@ public class GPSExtractor {
 
     }
     /**
-     * Construct from the file descriptor of the image (only for API 24 or newer).
-     * @param fileDescriptor the file descriptor of the image
+     * Construct from a stream.
      */
-    @RequiresApi(24)
-    GPSExtractor(@NonNull FileDescriptor fileDescriptor) {
-        try {
-            ExifInterface exif = new ExifInterface(fileDescriptor);
-            processCoords(exif);
-        } catch (IOException | IllegalArgumentException e) {
-            Timber.w(e);
-        }
+    GPSExtractor(@NonNull InputStream stream) throws IOException {
+        ExifInterface exif = new ExifInterface(stream);
+        processCoords(exif);
     }
 
     /**

@@ -10,6 +10,7 @@
 * ManosHacker
 * Nikosgranturismogt
 * Nikosguard
+* Protnet
 * Tgkarounos
 -->
 <resources>
@@ -112,7 +113,10 @@
   <string name="no_uploads_yet">Ακόμα δεν έχετε ανεβάσει φωτογραφίες.</string>
   <string name="menu_retry_upload">Ξαναπροσπαθήστε</string>
   <string name="menu_cancel_upload">Ακύρωση</string>
-  <string name="share_license_summary" fuzzy="true">Αυτή η εικόνα θα έχει άδεια στα πλαίσια του %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Αυτή η εικόνα θα αδειοδοτηθεί υπό την %1$s</item>
+    <item quantity="other">Αυτές οι εικόνες θα αδειοδοτηθούν υπό την %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Αποστέλλοντας αυτήν την εικόνα, δηλώνω πως αυτή η εργασία είναι δική μου, και δεν περιέχει υλικό άλλου συγγραφέα, και εκτός αυτού πρόσκειται στο , thathref=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Κοινές πολιτικές της Wikipedia&lt;/a&gt;.</string>
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
@@ -144,17 +148,14 @@
   <string name="tutorial_1_text">Το Wikimedia Commons φιλοξενεί τις περισσότερες από τις εικόνες που χρησιμοποιούνται στη Wikipedia.</string>
   <string name="tutorial_1_subtext">Οι εικόνες σας βοηθούν να μορφωθούν άνθρωποι σε όλο τον κόσμο!</string>
   <string name="tutorial_2_text">Παρακαλούμε ανεβάστε εικόνες που έχουν ληφθεί ή δημιουργηθεί εξ ολοκλήρου από τον εαυτό σας:</string>
-  <string name="tutorial_2_subtext">Φυσικά αντικείμενα (λουλούδια, ζώα, βουνά)\n• Χρήσιμα αντικείμενα (ποδήλατα, σταθμοί τρένων)\n• Διάσημοι άνθρωποι (ο δήμαρχος, αθλητές Ολυμπιακών αγώνων που συναντήσατε)</string>
   <string name="tutorial_2_subtext_1">Φυσικά αντικείμενα (λουλούδια, ζώα, βουνά)</string>
   <string name="tutorial_2_subtext_2">Χρήσιμα αντικείμενα (ποδήλατα, σταθμοί τρένων)</string>
   <string name="tutorial_2_subtext_3">Διάσημοι άνθρωποι (ο δήμαρχος, αθλητές Ολυμπιακών αγώνων που συναντήσατε)</string>
   <string name="tutorial_3_text">Παρακαλούμε ΜΗΝ ανεβάσετε:</string>
-  <string name="tutorial_3_subtext">- Selfies ή φωτογραφίες των φίλων σας\n- Εικόνες που έχετε κατεβάσει από το Internet\n- Στιγμιότυπα από ιδιοταγείς εφαρμογές</string>
   <string name="tutorial_3_subtext_1">Σέλφι ή φωτογραφίες των φίλων σας</string>
   <string name="tutorial_3_subtext_2">Φωτογραφίες που κατεβάσατε από το διαδίκτυο</string>
   <string name="tutorial_3_subtext_3">Στιγμιότυπα ιδιόκτητων εφαρμογών</string>
   <string name="tutorial_4_text">Παράδειγμα ανεβάσματος:</string>
-  <string name="tutorial_4_subtext">- Τίτλος: Όπερα Του Σίδνεϊ\n- Περιγραφή: Η Όπερα του Σίδνεϊ όπως φαίνεται απέναντι από τον κόλπο\n- Κατηγορίες: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">Τίτλος: Όπερα του Σίδνεϋ</string>
   <string name="tutorial_4_subtext_2">Περιγραφή: Η Όπερα του Σίδνεϋ όπως φαίνεται κατά μήκος του κόλπου</string>
   <string name="tutorial_4_subtext_3">Κατηγορία: η Όπερα του Σίδνεϋ από τα δυτικά, απομακρυσμένες προβολές της Όπερας του Σίδνεϋ</string>
@@ -171,8 +172,9 @@
   <string name="detail_description_empty">Καμία περιγραφή</string>
   <string name="detail_license_empty">Άγνωστη άδεια</string>
   <string name="menu_refresh">Ανανέωση</string>
+  <string name="storage_permission_title">Αιτείται Άδεια Αποθήκευσης</string>
   <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να έχει πρόσβαση στην συλλογή σας χωρίς αυτή.</string>
-  <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
   <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
   <string name="ok">Εντάξει</string>
   <string name="title_activity_nearby">Κοντινοί Τόποι</string>
@@ -182,11 +184,8 @@
   <string name="yes">Ναι</string>
   <string name="no">Όχι</string>
   <string name="media_detail_title">Τίτλος</string>
-  <string name="media_detail_media_title">Τίτλος πολυμέσου</string>
   <string name="media_detail_description">Περιγραφή</string>
-  <string name="media_detail_description_explanation">Η περιγραφή του πολυμέσου μπαίνει εδώ. Αυτή μπορεί να είναι σχετικά μεγάλη, και θα χρειαστεί να αναδιπλωθεί σε πολλές γραμμές. Ελπίζουμε ωστόσο ότι θα φαίνεται όμορφα.</string>
   <string name="media_detail_author">Συγγραφέας</string>
-  <string name="media_detail_author_explanation">Το όνομα χρήστη του συγγραφέα της επιλεγμένης εικόνας πάει εδώ.</string>
   <string name="media_detail_uploaded_date">Ημερομηνία φόρτωσης</string>
   <string name="media_detail_license">Άδεια</string>
   <string name="media_detail_coordinates">Συντεταγμένες</string>
@@ -197,7 +196,8 @@
   <string name="number_of_uploads">To Όριο του Πρόσφατα Φορτωμένου Αρχείου μου</string>
   <string name="maximum_limit">Μέγιστο Όριο</string>
   <string name="maximum_limit_alert">Δεν μπορεί να προβάλλει περισσότερα από 500 αρχεία</string>
-  <string name="set_limit">Ορίσετε το Όριο της Πρόσφατης Επιφόρτωσης</string>
+  <string name="enter_valid">Εισαγάγετε έγκυρο αριθμό</string>
+  <string name="set_limit" fuzzy="true">Ορίσετε το Όριο της Πρόσφατης Επιφόρτωσης</string>
   <string name="login_failed_2fa_not_supported">Πιστοποίηση με δύο παράγοντες δεν υποστηρίζεται προς το παρόν.</string>
   <string name="logout_verification">Θέλετε πράγματι να αποσυνδεθείτε;</string>
   <string name="commons_logo">Κοινό Λογότυπο</string>
@@ -242,12 +242,17 @@
   <string name="description_info">\nΠαρακαλώ περιγράψετε τα μέσα το δυνατό περισσότερο : Πού οδηγήθηκε αυτό; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν μπορούν εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστά μη συνηθισμένα.</string>
   <string name="upload_image_too_dark">Αυτή η εικόνα είναι πολύ σκούρα, θέλετε πράγματι να την φορτώσετε? Το Wikipedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
   <string name="upload_image_blurry">Αυτή η εικόνα είναι θολή , θέλετε όντως να την ανεβάσετε? \n Το Wikimedia Commons είναι μόνο για εικόνες εγκυκλοπαίδειας.</string>
+  <string name="upload_problem_image_dark">Η εικόνα είναι πολύ σκοτεινή.</string>
+  <string name="upload_problem_image_blurry">Η εικόνα είναι θολή.</string>
+  <string name="upload_problem_image_duplicate">Η εικόνα βρίσκεται ήδη στα Commons.</string>
+  <string name="upload_problem_different_geolocation">Η εικόνα λήφθηκε σε διαφορετική τοποθεσία.</string>
+  <string name="upload_problem_do_you_continue">Θέλετε ακόμη να ανεβάσετε αυτή την εικόνα;</string>
   <string name="give_permission">Χορηγήστε άδεια</string>
   <string name="use_external_storage">Χρησιμοποιήσετε την εξωτερική αποθήκευση</string>
   <string name="use_external_storage_summary">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
   <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
-  <string name="send_log_file_description" fuzzy="true">Στείλατε τον φάκελλο σύνδεσης στους δημιουργούς μέσω email</string>
+  <string name="send_log_file_description">Στείλτε το αρχείο καταγραφής στους προγραμματιστές μέσω email για να βοηθήσετε τη διόρθωση σφαλμάτων της εφαρμογής. Σημείωση: οι καταγραφές ενδέχεται να περιλαμβάνουν αναγνωριστικές πληροφορίες</string>
   <string name="no_web_browser">Δεν βρέθηκε φυλλομετρητής για το άνοιγμα της διευθύνσεως URL</string>
   <string name="null_url">Σφάλμα! Η διεύθυνση URL δεν βρέθηκε</string>
   <string name="nominate_deletion">Προτείνετε για διαγραφή</string>
@@ -257,7 +262,7 @@
   <string name="skip_login">Παράβλεψη</string>
   <string name="navigation_item_login">Είσοδος</string>
   <string name="skip_login_title">Θέλετε πραγματικά να παραβλέψετε τη σύνδεση;</string>
-  <string name="skip_login_message" fuzzy="true">Δεν θα έχετε τη δυνατότητα να ανεβάζετε εικόνες.</string>
+  <string name="skip_login_message">Θα χρειάζεται να συνδεθείτε για να ανεβάζετε εικόνες στο μέλλον.</string>
   <string name="login_alert_message">Παρακαλούμε συνδεθείτε για να χρησιμοποιήσετε αυτό το χαρακτηριστικό</string>
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
@@ -287,7 +292,7 @@
   <string name="about_translate_cancel">Ακύρωση</string>
   <string name="retry">Ξαναπροσπαθήστε</string>
   <string name="showcase_view_got_it_button">Κατάλαβα!</string>
-  <string name="showcase_view_whole_nearby_activity">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
+  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
   <string name="showcase_view_list_icon">Πατώντας αυτό το κουμπί φέρνει μια λίστα αυτών των μερών</string>
   <string name="showcase_view_plus_fab">Μπορείτε να ανεβάσετε μια εικόνα για οποιοδήποτε μέρος από την γκαλερί ή την κάμερά σας</string>
   <string name="no_images_found">Δεν βρέθηκαν εικόνες!</string>
@@ -324,7 +329,7 @@
   <string name="warning_for_image_reverts">Προειδοποίηση: Πάνω από το %1$s των εικόνων που ανεβάσατε έχουν διαγραφεί. Εάν συνεχίσετε να ανεβάζετε εικόνες που απαιτούν διαγραφή, ο λογαριασμός σας πιθανώς θα φραγεί.</string>
   <string name="congratulatory_message_quiz">Είχατε το %1$s των απαντήσεων σωστό. Συγχαρητήρια!</string>
   <string name="warning_for_no_answer">Επιλέξτε μια από τις δύο επιλογές για να απαντήσετε στην ερώτηση</string>
-  <string name="user_not_logged_in">Η συνεδρία σύνδεσης έληξε, παρακαλώ συνδεθείτε ξανά.</string>
+  <string name="user_not_logged_in">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά.</string>
   <string name="quiz_result_share_message">Μοιραστείτε το κουίζ με τους φίλους σας!</string>
   <string name="continue_message">Συνέχεια</string>
   <string name="correct">Σωστή απάντηση</string>
@@ -381,9 +386,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Κατάλαβα πως δεν προστατεύονται τα ατομικά μου στοιχεία</string>
   <string name="deletion_reason_no_longer_want_public">Άλλαξα γνώμη, δεν θέλω να προβάλλεται πλέον δημόσια</string>
   <string name="deletion_reason_not_interesting">Λυπάμαι αυτή η εικόνα δεν έχει ενδιαφέρον για εγκυκλοπαίδεια</string>
-  <string name="uploaded_by_myself">Φορτώθηκε από μένα σε</string>
-  <string name="used_by">χρησιμοποιήθηκε στο</string>
-  <string name="articles">άρθρα</string>
+  <string name="uploaded_by_myself" fuzzy="true">Φορτώθηκε από μένα σε</string>
   <string name="desc_language_Worldwide">Παγκόσμιες</string>
   <string name="desc_language_America">Αμερική</string>
   <string name="desc_language_Europe">Ευρώπη</string>
@@ -394,4 +397,9 @@
   <string name="no_categories_selected_warning_desc">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
   <string name="yes_submit">Ναι, υποβολή</string>
   <string name="no_go_back">Όχι, Επιστροφή</string>
+  <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
+  <string name="no_image_uploaded">Δεν έχουν ανεβεί εικόνες</string>
+  <string name="no_notification" fuzzy="true">Δεν έχετε αδιάβαστες Ενημερώσεις.</string>
+  <string name="no_archived_notification" fuzzy="true">Δεν έχετε αρχειοθετημένες Ενημερώσεις.</string>
+  <string name="please_wait">Παρακαλούμε περιμένετε…</string>
 </resources>
