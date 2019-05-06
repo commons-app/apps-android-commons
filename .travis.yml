@@ -26,7 +26,7 @@ android:
 before_script:
 - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
 - emulator -avd test -no-audio -no-window -no-boot-anim &
-- android-wait-for-emulator
+- travis_wait android-wait-for-emulator
 script:
 - "./gradlew clean check connectedCheck jacocoTestReport"
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
