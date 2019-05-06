@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.mwapi;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -8,7 +10,6 @@ import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.dataclient.mwapi.RecentChange;
 import org.wikipedia.util.DateUtil;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -21,8 +22,6 @@ import java.util.Random;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
