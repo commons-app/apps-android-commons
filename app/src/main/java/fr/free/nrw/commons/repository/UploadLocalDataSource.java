@@ -54,4 +54,12 @@ public class UploadLocalDataSource {
     public void saveInDirectKvStore(String key, boolean value) {
         defaultKVStore.putBoolean(key, value);
     }
+
+    public void cleanUp() {
+        uploadModel.cleanUp();
+    }
+
+    public void deletePicture(String filePath) {
+        uploadModel.deletePicture(filePath);
+    }
 }

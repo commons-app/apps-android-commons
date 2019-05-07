@@ -33,8 +33,7 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
 
     public void setUploadableFiles(
             List<UploadableFile> uploadableFiles) {
-        this.uploadableFiles.clear();
-        this.uploadableFiles.addAll(uploadableFiles);
+        this.uploadableFiles=uploadableFiles;
         notifyDataSetChanged();
     }
 

@@ -4,8 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -30,13 +33,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import javax.inject.Inject;
-import javax.inject.Named;
+
 import javax.inject.Singleton;
 import timber.log.Timber;
 
@@ -57,9 +54,6 @@ public class UploadModel {
     private String license;
     private final Map<String, String> licensesByName;
     private List<UploadItem> items = new ArrayList<>();
-    private boolean topCardState = true;
-    private boolean bottomCardState = true;
-    private boolean rightCardState = true;
     private int currentStepIndex = 0;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -86,13 +80,19 @@ public class UploadModel {
         this.imageProcessingService = imageProcessingService;
     }
 
-    void cleanup() {
+    public void cleanUp() {
         compositeDisposable.clear();
         fileProcessor.cleanup();
+        this.items.clear();
+        if(this.selectedCategories!=null) {
+            this.selectedCategories.clear();
+        }
     }
 
     public void setSelectedCategories(List<String> selectedCategories) {
-        this.selectedCategories = selectedCategories;
+        if (null != selectedCategories) {
+            this.selectedCategories = selectedCategories;
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -138,26 +138,10 @@ public class UploadModel {
             uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
             uploadItem.descriptions.get(0).setLanguageCode("en");
         }
-        items.add(uploadItem);
-        return uploadItem;
-    }
-
-    boolean isPreviousAvailable() {
-        return currentStepIndex > 0;
-    }
-
-    boolean isNextAvailable() {
-        return currentStepIndex < (items.size() + 1);
-    }
-
-    boolean isSubmitAvailable() {
-        int count = items.size();
-        boolean hasError = license == null;
-        for (int i = 0; i < count; i++) {
-            UploadItem item = items.get(i);
-            hasError |= item.error;
+        if(!items.contains(uploadItem)) {
+            items.add(uploadItem);
         }
-        return !hasError;
+        return uploadItem;
     }
 
     int getCurrentStep() {
@@ -174,96 +158,6 @@ public class UploadModel {
 
     public List<UploadItem> getUploads() {
         return items;
-    }
-
-    boolean isTopCardState() {
-        return topCardState;
-    }
-
-    void setTopCardState(boolean topCardState) {
-        this.topCardState = topCardState;
-    }
-
-    boolean isBottomCardState() {
-        return bottomCardState;
-    }
-
-    void setRightCardState(boolean rightCardState) {
-        this.rightCardState = rightCardState;
-    }
-
-    boolean isRightCardState() {
-        return rightCardState;
-    }
-
-    void setBottomCardState(boolean bottomCardState) {
-        this.bottomCardState = bottomCardState;
-    }
-
-    @SuppressLint("CheckResult")
-    public void next() {
-        markCurrentUploadVisited();
-        if (currentStepIndex < items.size() + 1) {
-            currentStepIndex++;
-        }
-        updateItemState();
-    }
-
-    void setCurrentTitleAndDescriptions(Title title, List<Description> descriptions) {
-        setCurrentUploadTitle(title);
-        setCurrentUploadDescriptions(descriptions);
-    }
-
-    private void setCurrentUploadTitle(Title title) {
-        if (currentStepIndex < items.size() && currentStepIndex >= 0) {
-            items.get(currentStepIndex).title = title;
-        }
-    }
-
-    private void setCurrentUploadDescriptions(List<Description> descriptions) {
-        if (currentStepIndex < items.size() && currentStepIndex >= 0) {
-            items.get(currentStepIndex).descriptions = descriptions;
-        }
-    }
-
-    public void previous() {
-        cleanup();
-        markCurrentUploadVisited();
-        if (currentStepIndex > 0) {
-            currentStepIndex--;
-        }
-        updateItemState();
-    }
-
-    void jumpTo(UploadItem item) {
-        currentStepIndex = items.indexOf(item);
-        item.visited = true;
-        updateItemState();
-    }
-
-    public UploadItem getCurrentItem() {
-        return isShowingItem() ? items.get(currentStepIndex) : DUMMY;
-    }
-
-    boolean isShowingItem() {
-        return currentStepIndex < items.size();
-    }
-
-    private void updateItemState() {
-        Timber.d("Updating item state");
-        int count = items.size();
-        for (int i = 0; i < count; i++) {
-            UploadItem item = items.get(i);
-            item.selected = (currentStepIndex >= count || i == currentStepIndex);
-            item.error = item.title == null || item.title.isEmpty();
-        }
-    }
-
-    private void markCurrentUploadVisited() {
-        Timber.d("Marking current upload visited");
-        if (currentStepIndex < items.size() && currentStepIndex >= 0) {
-            items.get(currentStepIndex).visited = true;
-        }
     }
 
     public List<String> getLicenses() {
@@ -307,21 +201,15 @@ public class UploadModel {
         });
     }
 
-    void keepPicture() {
-        items.get(currentStepIndex).setImageQuality(ImageUtils.IMAGE_KEEP);
-    }
-
-    void deletePicture() {
-        cleanup();
-        updateItemState();
-    }
-
-    void subscribeBadPicture(Consumer<Integer> consumer, boolean checkTitle) {
-        if (isShowingItem()) {
-            compositeDisposable.add(getImageQuality(getCurrentItem(), checkTitle)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(consumer, Timber::e));
+    public void deletePicture(String filePath) {
+        Iterator<UploadItem> iterator = items.iterator();
+        while (iterator.hasNext())
+            if (iterator.next().mediaUri.toString().contains(filePath)) {
+                iterator.remove();
+                break;
+            }
+        if (items.isEmpty()) {
+            cleanUp();
         }
     }
 
@@ -453,6 +341,15 @@ public class UploadModel {
 
         public Uri getContentUri() {
             return originalContentUri;
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            if (!(obj instanceof UploadItem)) {
+                return false;
+            }
+            return this.mediaUri.toString().contains(((UploadItem) (obj)).mediaUri.toString());
+
         }
     }
 

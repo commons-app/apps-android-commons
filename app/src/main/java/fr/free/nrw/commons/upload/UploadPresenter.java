@@ -3,12 +3,20 @@ package fr.free.nrw.commons.upload;
 import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
 
 import android.annotation.SuppressLint;
+
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.repository.UploadRepository;
+import io.reactivex.Observer;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
+
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -27,10 +35,12 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     private static final SimilarImageInterface SIMILAR_IMAGE = (SimilarImageInterface) Proxy.newProxyInstance(SimilarImageInterface.class.getClassLoader(),
             new Class[]{SimilarImageInterface.class}, (proxy, method, methodArgs) -> null);
 
+    private CompositeDisposable compositeDisposable;
 
     @Inject
     UploadPresenter(UploadRepository uploadRepository) {
         this.repository = uploadRepository;
+        compositeDisposable=new CompositeDisposable();
     }
 
 
@@ -44,13 +54,32 @@ public class UploadPresenter implements UploadContract.UserActionListener {
             view.showProgress(true);
             repository.buildContributions()
                     .observeOn(Schedulers.io())
-                    .subscribe(contribution -> {
-                        repository.startUpload(contribution);
-                        view.showProgress(false);
-                        view.showMessage(R.string.uploading_started);
-                        view.finish();
+                    .subscribe(new Observer<Contribution>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                            view.showProgress(false);
+                            view.showMessage(R.string.uploading_started);
+                            compositeDisposable.add(d);
+                        }
+
+                        @Override
+                        public void onNext(Contribution contribution) {
+                            repository.startUpload(contribution);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Timber.e("failed to upload: "+e.getMessage());
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            repository.cleanup();
+                            view.finish();
+                            compositeDisposable.clear();
+                        }
                     });
-        }else{
+        } else {
             view.askUserToLogIn();
         }
     }
@@ -65,13 +94,21 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         return titleList;
     }
 
-    @Override public void onAttachView(UploadContract.View view) {
-        this.view=view;
+    @Override
+    public void deletePicture(String filePath) {
+        repository.deletePicture(filePath);
+    }
+
+    @Override
+    public void onAttachView(UploadContract.View view) {
+        this.view = view;
         repository.prepareService();
     }
 
-    @Override public void onDetachView() {
-        this.view=DUMMY;
+    @Override
+    public void onDetachView() {
+        this.view = DUMMY;
+        compositeDisposable.clear();
         repository.cleanup();
     }
 

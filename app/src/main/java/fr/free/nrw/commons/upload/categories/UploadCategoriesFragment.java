@@ -94,8 +94,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     private void init() {
-        tvTitle.setText(getString(R.string.step_count, indexInViewFlipper + 1,
-                totalNumberOfSteps));
+        tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                callback.getTotalNumberOfSteps()));
         presenter.onAttachView(this);
         initRecyclerView();
         addTextChangeListenerToEtSearch();
@@ -163,7 +163,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Override
     public void goToNextScreen() {
-        callback.onNextButtonClicked(indexInViewFlipper);
+        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
     @Override
@@ -189,7 +189,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(indexInViewFlipper);
+        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
     @Override

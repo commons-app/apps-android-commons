@@ -23,5 +23,7 @@ public interface UploadContract {
         void handleSubmit();
 
         List<String> getImageTitleList();
+
+        void deletePicture(String filePath);
     }
 }

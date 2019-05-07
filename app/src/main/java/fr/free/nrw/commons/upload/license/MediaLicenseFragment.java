@@ -76,8 +76,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     }
 
     private void init() {
-        tvTitle.setText(getString(R.string.step_count, indexInViewFlipper + 1,
-                totalNumberOfSteps));
+        tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                callback.getTotalNumberOfSteps()));
         initPresenter();
         initLicenseSpinner();
         presenter.getLicenses();
@@ -175,12 +175,12 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
 
     @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(indexInViewFlipper);
+        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
     @OnClick(R.id.btn_submit)
     public void onSubmitButtonClicked() {
-        callback.onNextButtonClicked(indexInViewFlipper);
+        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
 }

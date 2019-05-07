@@ -19,8 +19,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.os.Handler;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -235,8 +237,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     @Override
     protected void onStop() {
         super.onStop();
-        presenter.onDetachView();
-        compositeDisposable.clear();
     }
 
     /**
@@ -253,6 +253,16 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
                 progressDialog.dismiss();
             }
         }
+    }
+
+    @Override
+    public int getIndexInViewFlipper(UploadBaseFragment fragment) {
+        return fragments.indexOf(fragment);
+    }
+
+    @Override
+    public int getTotalNumberOfSteps() {
+        return fragments.size();
     }
 
     @Override
@@ -300,22 +310,33 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
                     .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(),uploadableFiles.size()));
 
             fragments = new ArrayList<>();
-            int indexOfChild=0;
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
                 uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, source, place);
                 uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback(){
                     @Override
                     public void deletePictureAtIndex(int index) {
+                        if(index==uploadableFiles.size()-1){
+                            llContainerTopCard.setVisibility(View.GONE);
+                        }
+                        presenter.deletePicture(uploadableFile.getFilePath());
                         if(uploadableFiles.size()==1){
                             showMessage(R.string.upload_cancelled);
                             finish();
+                            return;
                         }else {
                             fragments.remove(index);
                             uploadableFiles.remove(index);
                             thumbnailsAdapter.notifyItemRemoved(index);
                             uploadImagesAdapter.notifyDataSetChanged();
                         }
+                        if(uploadableFiles.size()<2){
+                            llContainerTopCard.setVisibility(View.GONE);
+                        }
+
+                        //Iny case lets update the number of uloadables
+                        tvTopCardTitle.setText(getResources()
+                                .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(),uploadableFiles.size()));
                     }
 
                     @Override
@@ -332,22 +353,26 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
                     public void showProgress(boolean shouldShow) {
                         UploadActivity.this.showProgress(shouldShow);
                     }
+
+                    @Override
+                    public int getIndexInViewFlipper(UploadBaseFragment fragment) {
+                        return fragments.indexOf(fragment);
+                    }
+
+                    @Override
+                    public int getTotalNumberOfSteps() {
+                        return fragments.size();
+                    }
                 });
-                uploadMediaDetailFragment.setIndexInViewFlipper(indexOfChild++);
-                uploadMediaDetailFragment.totalNumberOfSteps=uploadableFiles.size()+2;
                 fragments.add(uploadMediaDetailFragment);
             }
 
             uploadCategoriesFragment = new UploadCategoriesFragment();
             uploadCategoriesFragment.setMediaTitleList(presenter.getImageTitleList());
-            uploadCategoriesFragment.setIndexInViewFlipper(indexOfChild++);
-            uploadCategoriesFragment.totalNumberOfSteps=uploadableFiles.size()+2;
             uploadCategoriesFragment.setCallback(this);
 
             mediaLicenseFragment = new MediaLicenseFragment();
-            mediaLicenseFragment.setIndexInViewFlipper(indexOfChild);
             mediaLicenseFragment.setCallback(this);
-            mediaLicenseFragment.totalNumberOfSteps=uploadableFiles.size()+2;
 
 
             fragments.add(uploadCategoriesFragment);
@@ -407,7 +432,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
 
     @Override
     public void onNextButtonClicked(int index) {
-        if (index < vpUpload.getChildCount()) {
+        if (index < fragments.size()-1) {
             vpUpload.setCurrentItem(index + 1, false);
         } else {
             presenter.handleSubmit();
@@ -445,6 +470,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         @Override public int getCount() {
             return fragments.size();
         }
+
+        @Override
+        public int getItemPosition(Object object){
+            return PagerAdapter.POSITION_NONE;
+        }
     }
 
 
@@ -453,5 +483,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         rvThumbnails.setVisibility(isTitleExpanded ? View.GONE : View.VISIBLE);
         isTitleExpanded = !isTitleExpanded;
         ibToggleTopCard.setRotation(ibToggleTopCard.getRotation() + 180);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onDetachView();
+        compositeDisposable.clear();
     }
 }

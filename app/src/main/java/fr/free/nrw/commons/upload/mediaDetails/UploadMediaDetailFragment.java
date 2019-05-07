@@ -79,8 +79,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatButton btnPrevious;
     private DescriptionsAdapter descriptionsAdapter;
 
-    int indexInViewFlipper = 0;
-
     private UploadModel.UploadItem uploadItem;
     private List<Description> descriptions;
 
@@ -114,10 +112,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         this.place = place;
     }
 
-    public void setIndexInViewFlipper(int indexInViewFlipper) {
-        this.indexInViewFlipper = indexInViewFlipper;
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -133,8 +127,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     private void init() {
-        tvTitle.setText(getString(R.string.step_count, indexInViewFlipper + 1,
-                totalNumberOfSteps));
+        tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                callback.getTotalNumberOfSteps()));
         title = new Title();
         initRecyclerView();
         initPresenter();
@@ -154,7 +148,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 });
         presenter.receiveImage(uploadableFile, source, place);
 
-        if (indexInViewFlipper == 0) {
+        if (callback.getIndexInViewFlipper(this) == 0) {
             btnPrevious.setEnabled(false);
             btnPrevious.setAlpha(0.5f);
         } else {
@@ -195,7 +189,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(indexInViewFlipper);
+        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
     @OnClick(R.id.btn_add_description)
@@ -247,8 +241,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void onImageValidationSuccess() {
-        presenter.setUploadItem(indexInViewFlipper, uploadItem);
-        callback.onNextButtonClicked(indexInViewFlipper);
+        presenter.setUploadItem(callback.getIndexInViewFlipper(this), uploadItem);
+        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
     @Override
@@ -297,7 +291,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     private void deleteThisPicture() {
-        callback.deletePictureAtIndex(indexInViewFlipper);
+        callback.deletePictureAtIndex(callback.getIndexInViewFlipper(this));
     }
 
     @Override

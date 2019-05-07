@@ -47,7 +47,7 @@ public class UploadRepository {
     }
 
     public void cleanup() {
-        remoteDataSource.cleanup();
+        localDataSource.cleanUp();
     }
 
     public List<CategoryItem> getSelectedCategories() {
@@ -126,5 +126,9 @@ public class UploadRepository {
 
     public void saveInDirectKvStore(String key, boolean value) {
         localDataSource.saveInDirectKvStore(key, value);
+    }
+
+    public void deletePicture(String filePath) {
+        localDataSource.deletePicture(filePath);
     }
 }

@@ -5,11 +5,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
+
 public class UploadBaseFragment extends Fragment {
 
-    public int indexInViewFlipper;
     public Callback callback;
-    public int totalNumberOfSteps = 0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,14 +21,6 @@ public class UploadBaseFragment extends Fragment {
         this.callback = callback;
     }
 
-    public void setIndexInViewFlipper(int indexInViewFlipper) {
-        this.indexInViewFlipper = indexInViewFlipper;
-    }
-
-    public void setTotalNumberOfSteps(int totalNumberOfSteps) {
-        this.totalNumberOfSteps = totalNumberOfSteps;
-    }
-
     public interface Callback {
 
         void onNextButtonClicked(int index);
@@ -36,5 +28,10 @@ public class UploadBaseFragment extends Fragment {
         void onPreviousButtonClicked(int index);
 
         void showProgress(boolean shouldShow);
+
+        int getIndexInViewFlipper(UploadBaseFragment fragment);
+
+        int getTotalNumberOfSteps();
+
     }
 }
