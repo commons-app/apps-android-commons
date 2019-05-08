@@ -62,4 +62,11 @@ public class UploadLocalDataSource {
     public void deletePicture(String filePath) {
         uploadModel.deletePicture(filePath);
     }
+
+    public UploadItem getPreviousUploadItem(int index) {
+        if(index-1>=0){
+            return uploadModel.getItems().get(index-1);
+        }
+        return null; //There is no previous item to copy details
+    }
 }

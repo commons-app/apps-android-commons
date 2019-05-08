@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
-import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,15 +18,20 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
@@ -45,10 +48,9 @@ import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Inject;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetailsContract.View {
@@ -78,6 +80,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
     private DescriptionsAdapter descriptionsAdapter;
+    @BindView(R.id.btn_copy_prev_title_desc)
+    AppCompatButton btnCopyPreviousTitleDesc;
 
     private UploadModel.UploadItem uploadItem;
     private List<Description> descriptions;
@@ -155,6 +159,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             btnPrevious.setEnabled(true);
             btnPrevious.setAlpha(1.0f);
         }
+
+        //If this is the first media, we have nothing to copy, lets not show the button
+        if (callback.getIndexInViewFlipper(this) == 0) {
+            btnCopyPreviousTitleDesc.setVisibility(View.GONE);
+        } else {
+            btnCopyPreviousTitleDesc.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initPresenter() {
@@ -166,10 +177,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         descriptionsAdapter.setCallback(this::showInfoAlert);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);
-    }
-
-    private void addNewDescription() {
-        rvDescriptions.scrollToPosition(descriptionsAdapter.getItemCount() - 1);
     }
 
     private void showInfoAlert(int titleStringID, int messageStringId, String... formatArgs) {
@@ -226,12 +233,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         descriptions = uploadItem.getDescriptions();
-        if (descriptions == null) {
-            descriptions = new ArrayList<>();
-        }
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
-        descriptionsAdapter.setItems(descriptions);
-        addNewDescription();
+        setDescriptionsInAdapter(descriptions);
     }
 
     @Override
@@ -290,6 +293,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         ibMap.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
     }
 
+    @Override
+    public void setTitleAndDescription(String title, List<Description> descriptions) {
+        etTitle.setText(title);
+        setDescriptionsInAdapter(descriptions);
+    }
+
     private void deleteThisPicture() {
         callback.deletePictureAtIndex(callback.getIndexInViewFlipper(this));
     }
@@ -317,6 +326,24 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public interface UploadMediaDetailFragmentCallback extends Callback {
 
         void deletePictureAtIndex(int index);
+    }
+
+
+    @OnClick(R.id.btn_copy_prev_title_desc)
+    public void onButtonCopyPreviousTitleDesc(){
+        presenter.fetchPreviousTitleAndDescription(callback.getIndexInViewFlipper(this));
+    }
+
+    private void setDescriptionsInAdapter(List<Description> descriptions){
+        if(descriptions==null){
+            descriptions=new ArrayList<>();
+        }
+
+        if(descriptions.size()==0){
+            descriptions.add(new Description());
+        }
+
+        descriptionsAdapter.setItems(descriptions);
     }
 
 }

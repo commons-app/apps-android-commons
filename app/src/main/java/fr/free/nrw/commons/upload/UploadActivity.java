@@ -271,6 +271,30 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     }
 
     @Override
+    public List<UploadableFile> getUploadableFiles() {
+        return uploadableFiles;
+    }
+
+    @Override
+    public void showHideTopCard(boolean shouldShow) {
+        llContainerTopCard.setVisibility(shouldShow?View.VISIBLE:View.GONE);
+    }
+
+    @Override
+    public void onUploadMediaDeleted(int index) {
+        fragments.remove(index);//Remove the corresponding fragment
+        uploadableFiles.remove(index);//Remove the files from the list
+        thumbnailsAdapter.notifyItemRemoved(index); //Notify the thumbnails adapter
+        uploadImagesAdapter.notifyDataSetChanged(); //Notify the ViewPager
+    }
+
+    @Override
+    public void updateTopCardTitle() {
+        tvTopCardTitle.setText(getResources()
+                .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
+    }
+
+    @Override
     public void askUserToLogIn() {
         Timber.d("current session is null, asking user to login");
         ViewUtil.showLongToast(this, getString(R.string.user_not_logged_in));
@@ -316,27 +340,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
                 uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback(){
                     @Override
                     public void deletePictureAtIndex(int index) {
-                        if(index==uploadableFiles.size()-1){
-                            llContainerTopCard.setVisibility(View.GONE);
-                        }
-                        presenter.deletePicture(uploadableFile.getFilePath());
-                        if(uploadableFiles.size()==1){
-                            showMessage(R.string.upload_cancelled);
-                            finish();
-                            return;
-                        }else {
-                            fragments.remove(index);
-                            uploadableFiles.remove(index);
-                            thumbnailsAdapter.notifyItemRemoved(index);
-                            uploadImagesAdapter.notifyDataSetChanged();
-                        }
-                        if(uploadableFiles.size()<2){
-                            llContainerTopCard.setVisibility(View.GONE);
-                        }
-
-                        //Iny case lets update the number of uloadables
-                        tvTopCardTitle.setText(getResources()
-                                .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(),uploadableFiles.size()));
+                        presenter.deletePictureAtIndex(index);
                     }
 
                     @Override

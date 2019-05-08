@@ -66,7 +66,6 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     @Override
     public void receiveImage(UploadableFile uploadableFile, String source, Place place) {
         view.showProgress(true);
-
         Disposable uploadItemDisposable = repository
                 .preProcessImage(uploadableFile, place, source, this)
                 .subscribeOn(ioScheduler)
@@ -106,6 +105,16 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     @Override
     public void setUploadItem(int index, UploadItem uploadItem) {
         repository.updateUploadItem(index, uploadItem);
+    }
+
+    @Override
+    public void fetchPreviousTitleAndDescription(int indexInViewFlipper) {
+        UploadItem previousUploadItem = repository.getPreviousUploadItem(indexInViewFlipper);
+        if (null != previousUploadItem) {
+            view.setTitleAndDescription(previousUploadItem.getTitle().getTitleText(), previousUploadItem.getDescriptions());
+        } else {
+            view.showMessage(R.string.previous_image_title_description_not_found, R.color.color_error);
+        }
     }
 
     public void handleImageResult(Integer imageResult) {

@@ -20,6 +20,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -27,8 +31,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
-import java.util.List;
-import javax.inject.Inject;
 import timber.log.Timber;
 
 public class MediaLicenseFragment extends UploadBaseFragment implements MediaLicenseContract.View {
@@ -93,7 +95,7 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         spinnerLicenseList.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position,
-                    long l) {
+                                       long l) {
                 String licenseName = adapterView.getItemAtPosition(position).toString();
                 presenter.selectLicense(licenseName);
             }

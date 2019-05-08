@@ -1,10 +1,14 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import java.util.List;
+
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.upload.Description;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
+import fr.free.nrw.commons.upload.Title;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 
 public interface UploadMediaDetailsContract {
@@ -26,6 +30,8 @@ public interface UploadMediaDetailsContract {
         void showBadImagePopup(Integer errorCode);
 
         void showMapWithImageCoordinates(boolean shouldShow);
+
+        void setTitleAndDescription(String title, List<Description> descriptions);
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -36,6 +42,8 @@ public interface UploadMediaDetailsContract {
         void verifyImageQuality(UploadItem uploadItem, boolean validateTitle);
 
         void setUploadItem(int index, UploadItem uploadItem);
+
+        void fetchPreviousTitleAndDescription(int indexInViewFlipper);
     }
 
 }

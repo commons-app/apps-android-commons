@@ -86,12 +86,9 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         @BindView(R.id.description_item_edit_text)
         AppCompatEditText descItemEditText;
 
-        private View view;
-
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            this.view = itemView;
             Timber.i("descItemEditText:" + descItemEditText);
         }
 
@@ -106,6 +103,18 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
             if (position == 0) {
                 descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
                         null);
+                descItemEditText.setOnTouchListener((v, event) -> {
+                    //2 is for drawable right
+                    if (event.getAction() == MotionEvent.ACTION_UP && (event.getRawX() >= (descItemEditText.getRight() - descItemEditText.getCompoundDrawables()[2].getBounds().width()))) {
+                        if (getAdapterPosition() == 0) {
+                            callback.showAlert(R.string.media_detail_description,
+                                    R.string.description_info);
+                        }
+                        return true;
+                    }
+                    return false;
+                });
+
             } else {
                 descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             }
@@ -113,21 +122,6 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
             descItemEditText.addTextChangedListener(new AbstractTextWatcher(
                     descriptionText -> descriptions.get(position)
                             .setDescriptionText(descriptionText)));
-
-            descItemEditText.setOnTouchListener((v, event) -> {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    //2 is for drawable right
-                    if (event.getRawX() >= (descItemEditText.getRight() - descItemEditText.getCompoundDrawables()[2].getBounds().width())) {
-                        if (getAdapterPosition() == 0) {
-                            callback.showAlert(R.string.media_detail_description,
-                                    R.string.description_info);
-                        }
-                        return true;
-                    }
-                }
-                return false;
-            });
-
             initLanguageSpinner(position, description);
 
             if (position == descriptions.size() - 1) {

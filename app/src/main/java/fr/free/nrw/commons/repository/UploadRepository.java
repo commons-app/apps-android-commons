@@ -131,4 +131,8 @@ public class UploadRepository {
     public void deletePicture(String filePath) {
         localDataSource.deletePicture(filePath);
     }
+
+    public UploadItem getPreviousUploadItem(int index) {
+        return localDataSource.getPreviousUploadItem(index);
+    }
 }

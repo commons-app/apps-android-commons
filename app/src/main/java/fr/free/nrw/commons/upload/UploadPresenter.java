@@ -1,17 +1,6 @@
 package fr.free.nrw.commons.upload;
 
-import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
-
 import android.annotation.SuppressLint;
-
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.repository.UploadRepository;
-import io.reactivex.Observer;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -19,6 +8,18 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.repository.UploadRepository;
+import io.reactivex.Observer;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
+
+import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
 
 /**
  * The MVP pattern presenter of Upload GUI
@@ -32,15 +33,12 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     private final UploadRepository repository;
     private UploadContract.View view = DUMMY;
 
-    private static final SimilarImageInterface SIMILAR_IMAGE = (SimilarImageInterface) Proxy.newProxyInstance(SimilarImageInterface.class.getClassLoader(),
-            new Class[]{SimilarImageInterface.class}, (proxy, method, methodArgs) -> null);
-
     private CompositeDisposable compositeDisposable;
 
     @Inject
     UploadPresenter(UploadRepository uploadRepository) {
         this.repository = uploadRepository;
-        compositeDisposable=new CompositeDisposable();
+        compositeDisposable = new CompositeDisposable();
     }
 
 
@@ -69,7 +67,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
 
                         @Override
                         public void onError(Throwable e) {
-                            Timber.e("failed to upload: "+e.getMessage());
+                            Timber.e("failed to upload: " + e.getMessage());
                         }
 
                         @Override
@@ -95,8 +93,27 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     }
 
     @Override
-    public void deletePicture(String filePath) {
-        repository.deletePicture(filePath);
+    public void deletePictureAtIndex(int index) {
+        List<UploadableFile> uploadableFiles = view.getUploadableFiles();
+        if (index == uploadableFiles.size() - 1) {//If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
+            view.showHideTopCard(false);
+        }
+        //Ask the repository to delete the picture
+        repository.deletePicture(uploadableFiles.get(index).getFilePath());
+        if (uploadableFiles.size() == 1) {
+            view.showMessage(R.string.upload_cancelled);
+            view.finish();
+            return;
+        } else {
+            view.onUploadMediaDeleted(index);
+        }
+        if (uploadableFiles.size() < 2) {
+            view.showHideTopCard(false);
+        }
+
+        //In case lets update the number of uploadable media
+        view.updateTopCardTitle();
+
     }
 
     @Override

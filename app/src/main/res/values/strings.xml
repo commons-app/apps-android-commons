@@ -542,4 +542,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
   <string name="no_categories_found">No Categories found</string>
   <string name="upload_cancelled">Cancelled Upload</string>
+    <string name="previous_image_title_description_not_found">There is no data for previous image\'s title or description</string>
 </resources>

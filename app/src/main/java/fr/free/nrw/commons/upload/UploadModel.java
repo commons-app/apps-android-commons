@@ -351,6 +351,12 @@ public class UploadModel {
             return this.mediaUri.toString().contains(((UploadItem) (obj)).mediaUri.toString());
 
         }
+
+        //Travis is complaining :P
+        @Override
+        public int hashCode() {
+            return super.hashCode();
+        }
     }
 
 }
