@@ -67,6 +67,10 @@ public class UploadPresenter implements UploadContract.UserActionListener {
 
                         @Override
                         public void onError(Throwable e) {
+                            view.showMessage(R.string.upload_failed);
+                            repository.cleanup();
+                            view.finish();
+                            compositeDisposable.clear();
                             Timber.e("failed to upload: " + e.getMessage());
                         }
 

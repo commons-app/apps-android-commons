@@ -201,7 +201,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_add_description)
     public void onButtonAddDescriptionClicked() {
-        descriptionsAdapter.addDescription(new Description());
+        Description description = new Description();
+        description.setManuallyAdded(true);//This was manually added by the user
+        descriptionsAdapter.addDescription(description);
     }
 
     @Override

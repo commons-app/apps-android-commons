@@ -90,9 +90,10 @@ public class UploadModel {
     }
 
     public void setSelectedCategories(List<String> selectedCategories) {
-        if (null != selectedCategories) {
-            this.selectedCategories = selectedCategories;
+        if (null == selectedCategories) {
+            selectedCategories = new ArrayList<>();
         }
+        this.selectedCategories = selectedCategories;
     }
 
     @SuppressLint("CheckResult")
@@ -183,6 +184,9 @@ public class UploadModel {
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
+            }
+            if(null==selectedCategories){//Just a fail safe, this should never be null
+                selectedCategories=new ArrayList<>();
             }
             contribution.setCategories(selectedCategories);
             contribution.setTag("mimeType", item.mimeType);

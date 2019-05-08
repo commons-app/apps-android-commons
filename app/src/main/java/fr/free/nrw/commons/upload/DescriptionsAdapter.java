@@ -124,8 +124,11 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
                             .setDescriptionText(descriptionText)));
             initLanguageSpinner(position, description);
 
-            if (position == descriptions.size() - 1) {
+            //If the description was manually added by the user, it deserves focus, if not, let the user decide
+            if (description.isManuallyAdded()) {
                 descItemEditText.requestFocus();
+            } else {
+                descItemEditText.clearFocus();
             }
         }
 
