@@ -1,4 +1,6 @@
-# Wikimedia Commons Android app [![Build status](https://api.travis-ci.org/commons-app/apps-android-commons.svg?branch=master)](https://travis-ci.org/commons-app/apps-android-commons)
+# Wikimedia Commons Android app
+[![Build status](https://api.travis-ci.org/commons-app/apps-android-commons.svg?branch=master)](https://travis-ci.org/commons-app/apps-android-commons)
+[![Preview the app](https://img.shields.io/badge/Preview-Appetize.io-orange.svg)](https://appetize.io/app/8ywtpe9f8tb8h6bey11c92vkcw)
 
 The Wikimedia Commons Android app allows users to upload pictures from their Android phone/tablet to Wikimedia Commons. Download the app [here][1], or view our [website][2].
 
