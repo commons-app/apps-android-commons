@@ -476,9 +476,7 @@
   <string name="review_no_category">Oj, den är inte ens kategoriserad!</string>
   <string name="review_category_explanation">Denna bild finns i %1$s kategorier.</string>
   <string name="review_spam_report_question">Det är irrelevant eftersom det är</string>
-  <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">Den bryter mot upphovsrätten eftersom den är</string>
-  <string name="review_c_violation_report_problem">upphovsrättsbrott</string>
   <string name="review_category_yes_button_text">Nej, felkategoriserad</string>
   <string name="review_category_no_button_text">Verkar okej</string>
   <string name="review_spam_yes_button_text">Nej, irrelevant</string>

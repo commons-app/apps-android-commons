@@ -431,7 +431,6 @@
   <string name="notsure">Ekki viss</string>
   <string name="review_category">Er þetta rétt flokkað?</string>
   <string name="review_spam">Kemur þetta umfjöllunarefninu við?</string>
-  <string name="review_spam_report_problem">ruslsending</string>
   <string name="review_c_violation_report_question">Það brýtur á móti höfundarrétti því það er</string>
   <string name="review_category_yes_button_text" fuzzy="true">NEI, RANGT FLOKKAÐ</string>
   <string name="review_category_no_button_text" fuzzy="true">LÍTUR VEL ÚT</string>

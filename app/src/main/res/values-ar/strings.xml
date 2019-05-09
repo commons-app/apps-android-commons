@@ -480,9 +480,7 @@
   <string name="review_no_category">أوه، هذا ليس حتى تصنيفها!</string>
   <string name="review_category_explanation">هذه الصورة تحت %1$s تصنيفات.</string>
   <string name="review_spam_report_question">إنه خارج النطاق لأنه</string>
-  <string name="review_spam_report_problem">سخام</string>
   <string name="review_c_violation_report_question">إنه انتهاك لحقوق الطبع والنشر لأنه</string>
-  <string name="review_c_violation_report_problem">انتهاك حقوق الطبع والنشر</string>
   <string name="review_category_yes_button_text">لا، مصنف بشكل خاطئ</string>
   <string name="review_category_no_button_text">يبدو جيدا</string>
   <string name="review_spam_yes_button_text">لا، خارج النطاق</string>
