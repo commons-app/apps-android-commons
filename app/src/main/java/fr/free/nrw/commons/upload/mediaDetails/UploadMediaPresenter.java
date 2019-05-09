@@ -17,13 +17,14 @@ import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.View;
 import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+
 import java.lang.reflect.Proxy;
+
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import timber.log.Timber;
 
 public class UploadMediaPresenter implements UserActionListener, SimilarImageInterface {
@@ -44,8 +45,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     @Inject
     public UploadMediaPresenter(UploadRepository uploadRepository,
-            @Named(IO_THREAD) Scheduler ioScheduler,
-            @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
+                                @Named(IO_THREAD) Scheduler ioScheduler,
+                                @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
         this.repository = uploadRepository;
         this.ioScheduler = ioScheduler;
         this.mainThreadScheduler = mainThreadScheduler;
@@ -63,6 +64,13 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         compositeDisposable.clear();
     }
 
+    /**
+     * Receives the corresponding uploadable file, processes it and return the view with and uplaod item
+     *
+     * @param uploadableFile
+     * @param source
+     * @param place
+     */
     @Override
     public void receiveImage(UploadableFile uploadableFile, String source, Place place) {
         view.showProgress(true);
@@ -74,13 +82,19 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         {
                             view.onImageProcessed(uploadItem, place);
                             GPSExtractor gpsCoords = uploadItem.getGpsCoords();
-                            view.showMapWithImageCoordinates((gpsCoords!=null && gpsCoords.imageCoordsExists)?true: false);
+                            view.showMapWithImageCoordinates((gpsCoords != null && gpsCoords.imageCoordsExists) ? true : false);
                             view.showProgress(false);
                         },
                         throwable -> Timber.e(throwable, "Error occurred in processing images"));
         compositeDisposable.add(uploadItemDisposable);
     }
 
+    /**
+     * asks the repository to verify image quality
+     *
+     * @param uploadItem
+     * @param validateTitle
+     */
     @Override
     public void verifyImageQuality(UploadItem uploadItem, boolean validateTitle) {
         view.showProgress(true);
@@ -102,11 +116,22 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         compositeDisposable.add(imageQualityDisposable);
     }
 
+    /**
+     * Adds the corresponding upload item to the repository
+     *
+     * @param index
+     * @param uploadItem
+     */
     @Override
     public void setUploadItem(int index, UploadItem uploadItem) {
         repository.updateUploadItem(index, uploadItem);
     }
 
+    /**
+     * Fetches and sets the title and desctiption of the previous item
+     *
+     * @param indexInViewFlipper
+     */
     @Override
     public void fetchPreviousTitleAndDescription(int indexInViewFlipper) {
         UploadItem previousUploadItem = repository.getPreviousUploadItem(indexInViewFlipper);
@@ -117,6 +142,11 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         }
     }
 
+    /**
+     * handles image quality verifications
+     *
+     * @param imageResult
+     */
     public void handleImageResult(Integer imageResult) {
         if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
             view.onImageValidationSuccess();
@@ -125,11 +155,16 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         }
     }
 
+    /**
+     * Handle  images, say empty title, duplicate file name, bad picture(in all other cases)
+     *
+     * @param errorCode
+     */
     private void handleBadImage(Integer errorCode) {
         Timber.d("Handle bad picture with error code %d", errorCode);
         if (errorCode
                 >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
-            repository.saveInDirectKvStore("Picture_Has_Correct_Location", false);
+            repository.saveValue("Picture_Has_Correct_Location", false);
         }
 
         switch (errorCode) {
@@ -146,6 +181,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         }
     }
 
+    /**
+     * notifies the user that a similar image exists
+     *
+     * @param originalFilePath
+     * @param possibleFilePath
+     */
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
         view.showSimilarImageFragment(originalFilePath, possibleFilePath);

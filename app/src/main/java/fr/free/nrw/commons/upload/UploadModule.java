@@ -9,16 +9,19 @@ import fr.free.nrw.commons.upload.license.MediaLicensePresenter;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter;
 
+/**
+ * The Dagger Module for upload related presenters and (some other objects maybe in future)
+ */
 @Module
 public abstract class UploadModule {
 
     @Binds
     public abstract UploadContract.UserActionListener bindHomePresenter(UploadPresenter
-            presenter);
+                                                                                presenter);
 
     @Binds
     public abstract CategoriesContract.UserActionListener bindsCategoriesPresenter(CategoriesPresenter
-            presenter);
+                                                                                           presenter);
 
     @Binds
     public abstract MediaLicenseContract.UserActionListener bindsMediaLicensePresenter(

@@ -9,6 +9,9 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 
+/**
+ * The base fragment of the fragments in upload
+ */
 public class UploadBaseFragment extends Fragment {
 
     public Callback callback;

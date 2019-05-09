@@ -4,9 +4,12 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.repository.UploadRepository;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.license.MediaLicenseContract.View;
+
 import java.lang.reflect.Proxy;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import timber.log.Timber;
 
 public class MediaLicensePresenter implements MediaLicenseContract.UserActionListener {
@@ -35,24 +38,32 @@ public class MediaLicensePresenter implements MediaLicenseContract.UserActionLis
         this.view = DUMMY;
     }
 
+    /**
+     * asks the repository for the available licenses, and informs the view on the same
+     */
     @Override
     public void getLicenses() {
         List<String> licenses = repository.getLicenses();
         view.setLicenses(licenses);
 
-        String selectedLicense = repository.getFromDefaultKvStore(Prefs.DEFAULT_LICENSE,
+        String selectedLicense = repository.getValue(Prefs.DEFAULT_LICENSE,
                 Prefs.Licenses.CC_BY_SA_4);//CC_BY_SA_4 is the default one used by the commons web app
         try {//I have to make sure that the stored default license was not one of the deprecated one's
             Utils.licenseNameFor(selectedLicense);
         } catch (IllegalStateException exception) {
             Timber.e(exception.getMessage());
             selectedLicense = Prefs.Licenses.CC_BY_SA_4;
-            repository.saveInDefaultKvStore(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_4);
+            repository.saveValue(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_4);
         }
         view.setSelectedLicense(selectedLicense);
 
     }
 
+    /**
+     * ask the repository to select a license for the current upload
+     *
+     * @param licenseName
+     */
     @Override
     public void selectLicense(String licenseName) {
         repository.setSelectedLicense(licenseName);

@@ -11,6 +11,9 @@ import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.Title;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 
+/**
+ * The contract with with UploadMediaDetails and its presenter would talk to each other
+ */
 public interface UploadMediaDetailsContract {
 
     interface View extends SimilarImageInterface {

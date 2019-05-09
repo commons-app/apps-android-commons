@@ -44,15 +44,11 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import javax.inject.Inject;
-import javax.inject.Named;
 import timber.log.Timber;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
 import static fr.free.nrw.commons.Utils.handleWebUrl;
-import static android.content.Intent.ACTION_VIEW;
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 

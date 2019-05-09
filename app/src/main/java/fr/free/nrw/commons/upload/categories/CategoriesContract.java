@@ -3,8 +3,12 @@ package fr.free.nrw.commons.upload.categories;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
+
 import java.util.List;
 
+/**
+ * The contract with with UploadCategoriesFragment and its presenter would talk to each other
+ */
 public interface CategoriesContract {
 
     public interface View {

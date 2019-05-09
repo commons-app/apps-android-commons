@@ -80,6 +80,9 @@ public class UploadModel {
         this.imageProcessingService = imageProcessingService;
     }
 
+    /**
+     * cleanup the resources, I am Singleton, preparing for fresh upload
+     */
     public void cleanUp() {
         compositeDisposable.clear();
         fileProcessor.cleanup();
@@ -96,6 +99,14 @@ public class UploadModel {
         this.selectedCategories = selectedCategories;
     }
 
+    /**
+     * pre process a list of items
+     * @param uploadableFiles
+     * @param place
+     * @param source
+     * @param similarImageInterface
+     * @return
+     */
     @SuppressLint("CheckResult")
     Observable<UploadItem> preProcessImages(List<UploadableFile> uploadableFiles,
                                             Place place,
@@ -105,7 +116,15 @@ public class UploadModel {
                 .map(uploadableFile -> getUploadItem(uploadableFile, place, source, similarImageInterface));
     }
 
-    @SuppressLint("CheckResult")
+
+    /**
+     * pre process a one item at a time
+     * @param uploadableFile
+     * @param place
+     * @param source
+     * @param similarImageInterface
+     * @return
+     */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile,
             Place place,
             String source,

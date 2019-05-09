@@ -4,6 +4,7 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 import android.text.TextUtils;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.repository.UploadRepository;
@@ -11,12 +12,15 @@ import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+
 import timber.log.Timber;
 
 @Singleton
@@ -37,7 +41,7 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
 
     @Inject
     public CategoriesPresenter(UploadRepository repository, @Named(IO_THREAD) Scheduler ioScheduler,
-            @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
+                               @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
         this.repository = repository;
         this.ioScheduler = ioScheduler;
         this.mainThreadScheduler = mainThreadScheduler;
@@ -55,6 +59,12 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
         compositeDisposable.clear();
     }
 
+    /**
+     * asks the repository to fetch categories for the query
+     *
+     * @param query
+     * @param imageTitleList
+     */
     @Override
     public void searchForCategories(String query, List<String> imageTitleList) {
         List<CategoryItem> categoryItems = new ArrayList<>();
@@ -95,6 +105,9 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
         compositeDisposable.add(searchCategoriesDisposable);
     }
 
+    /**
+     * Verifies the number of categories selected, prompts the user if none selected
+     */
     @Override
     public void verifyCategories() {
         List<CategoryItem> selectedCategories = repository.getSelectedCategories();
@@ -106,6 +119,11 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
         }
     }
 
+    /**
+     * ask repository to handle category clicked
+     *
+     * @param categoryItem
+     */
     @Override
     public void onCategoryItemClicked(CategoryItem categoryItem) {
         repository.onCategoryClicked(categoryItem);

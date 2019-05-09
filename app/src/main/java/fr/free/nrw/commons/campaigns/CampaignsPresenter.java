@@ -42,7 +42,7 @@ public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
 
     @Override
     public void onAttachView(ICampaignsView view) {
-        this.view=view;
+        this.view = view;
     }
 
     @Override public void onDetachView() {

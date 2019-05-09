@@ -13,8 +13,6 @@ import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.page.PageTitle;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.ViewUtil;
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -22,9 +20,7 @@ import java.util.regex.Pattern;
 import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
-import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.widget.Toast.LENGTH_SHORT;
