@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -226,16 +227,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         req.allowScanningByMediaScanner();
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(), WRITE_EXTERNAL_STORAGE,
-            () -> enqueueRequest(req), () -> Toast.makeText(getContext(),
-                R.string.download_failed_we_cannot_download_the_file_without_storage_permission,
-                Toast.LENGTH_SHORT).show(), R.string.storage_permission,
-            R.string.write_storage_permission_rationale);
+                () -> enqueueRequest(req), () -> Toast.makeText(getContext(),
+                        R.string.download_failed_we_cannot_download_the_file_without_storage_permission,
+                        Toast.LENGTH_SHORT).show(), R.string.storage_permission,
+                R.string.write_storage_permission_rationale);
 
     }
 
     private void enqueueRequest(DownloadManager.Request req) {
         DownloadManager systemService =
-            (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
+                (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
         if (systemService != null) {
             systemService.enqueue(req);
         }
@@ -243,53 +244,60 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (!editable) { // Disable menu options for editable views
-            menu.clear(); // see http://stackoverflow.com/a/8495697/17865
-            inflater.inflate(R.menu.fragment_image_detail, menu);
-            if (pager != null) {
-                MediaDetailProvider provider = getMediaDetailProvider();
-                if(provider == null) {
-                    return;
-                }
+        if (!editable ) {// Disable menu options for editable views
+            if ( provider.getTotalMediaCount()!=0)
+            {
+                menu.clear(); // see http://stackoverflow.com/a/8495697/17865
+                inflater.inflate(R.menu.fragment_image_detail, menu);
+                if (pager != null) {
+                    MediaDetailProvider provider = getMediaDetailProvider();
+                    if(provider == null) {
+                        return;
+                    }
 
-                Media m = provider.getMediaAtPosition(pager.getCurrentItem());
-                if (m != null) {
-                    // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
-                    menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
-                    menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
-                    menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
-                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
+                    Media m = provider.getMediaAtPosition(pager.getCurrentItem());
+                    if (m != null) {
+                        // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
+                        menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
+                        menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
+                        menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
+                        menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
 
-                    // Initialize bookmark object
-                    bookmark = new Bookmark(
-                            m.getFilename(),
-                            m.getCreator(),
-                            BookmarkPicturesContentProvider.uriForName(m.getFilename())
-                    );
-                    updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
+                        // Initialize bookmark object
+                        bookmark = new Bookmark(
+                                m.getFilename(),
+                                m.getCreator(),
+                                BookmarkPicturesContentProvider.uriForName(m.getFilename())
+                        );
+                        updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
-                    if (m instanceof Contribution ) {
-                        Contribution c = (Contribution) m;
-                        switch (c.getState()) {
-                            case Contribution.STATE_FAILED:
-                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
-                                break;
-                            case Contribution.STATE_IN_PROGRESS:
-                            case Contribution.STATE_QUEUED:
-                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
-                                break;
-                            case Contribution.STATE_COMPLETED:
-                                // Default set of menu items works fine. Treat same as regular media object
-                                break;
+                        if (m instanceof Contribution ) {
+                            Contribution c = (Contribution) m;
+                            switch (c.getState()) {
+                                case Contribution.STATE_FAILED:
+                                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
+                                    menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
+                                    menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
+                                    break;
+                                case Contribution.STATE_IN_PROGRESS:
+                                case Contribution.STATE_QUEUED:
+                                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
+                                    menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
+                                    menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
+                                    break;
+                                case Contribution.STATE_COMPLETED:
+                                    // Default set of menu items works fine. Treat same as regular media object
+                                    break;
+                            }
                         }
                     }
-                }
+                }}
+            else
+            {
+                getActivity().startActivity(getActivity().getIntent());
+                getActivity().finish();
             }
         }
     }
