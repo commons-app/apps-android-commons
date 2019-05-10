@@ -186,7 +186,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * @param messageStringId
      */
     private void showInfoAlert(int titleStringID, int messageStringId) {
-        DialogUtil.showAlertDialog(this, getString(titleStringID), getString(messageStringId), getString(android.R.string.ok), null, true);
+        DialogUtil.showAlertDialog(getActivity(), getString(titleStringID), getString(messageStringId), getString(android.R.string.ok), null, true);
     }
 
     @OnClick(R.id.btn_next)
