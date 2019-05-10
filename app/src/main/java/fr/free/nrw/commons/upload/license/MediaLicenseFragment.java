@@ -40,12 +40,6 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     Spinner spinnerLicenseList;
     @BindView(R.id.tv_share_license_summary)
     TextView tvShareLicenseSummary;
-    @BindView(R.id.tv_media_upload_policy)
-    TextView tvMediaUploadPolicy;
-    @BindView(R.id.btn_submit)
-    AppCompatButton btnSubmit;
-    @BindView(R.id.btn_previous)
-    AppCompatButton btnPrevious;
 
     @Inject
     MediaLicenseContract.UserActionListener presenter;

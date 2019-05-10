@@ -45,8 +45,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.category_search_layout)
-    FrameLayout flContainerCategoriesSearch;
     @BindView(R.id.til_container_search)
     TextInputLayout tilContainerEtSearch;
     @BindView(R.id.et_search)
@@ -55,10 +53,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     ProgressBar pbCategories;
     @BindView(R.id.rv_categories)
     RecyclerView rvCategories;
-    @BindView(R.id.btn_next)
-    AppCompatButton btnNext;
-    @BindView(R.id.btn_previous)
-    AppCompatButton btnPrevious;
 
     @Inject
     CategoriesContract.UserActionListener presenter;
