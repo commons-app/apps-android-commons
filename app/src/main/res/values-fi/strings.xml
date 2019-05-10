@@ -403,7 +403,6 @@
   <string name="review_category">Onko tämä luokiteltu oikein?</string>
   <string name="review_thanks">Haluaisitko kiittää muokkaajaa?</string>
   <string name="review_no_category">Oh, tämä ei ole edes luokiteltu!</string>
-  <string name="review_c_violation_report_problem">Tekijänoikeusloukkaus</string>
   <string name="review_category_no_button_text">Näyttää hyvälle</string>
   <string name="review_spam_no_button_text">Näyttää hyvälle</string>
   <string name="review_copyright_yes_button_text">Ei, tekijänoikeusloukkaus</string>

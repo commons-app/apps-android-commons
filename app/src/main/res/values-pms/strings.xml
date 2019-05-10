@@ -470,9 +470,7 @@
   <string name="review_no_category">Contacc, sòn a l\'ha gnanca na categorìa!</string>
   <string name="review_category_explanation">Costa plancia a l\'é ant le categorìe %1$s .</string>
   <string name="review_spam_report_question">A l\'é fòra argoment përché a l\'é</string>
-  <string name="review_spam_report_problem">rumenta</string>
   <string name="review_c_violation_report_question">A l\'é na violassion dij drit d\'autor përché a l\'é</string>
-  <string name="review_c_violation_report_problem">copyRightViolation</string>
   <string name="review_category_yes_button_text">Nò, eror ëd categorìa</string>
   <string name="review_category_no_button_text">A smija giust</string>
   <string name="review_spam_yes_button_text">Nò, fòra argoment</string>

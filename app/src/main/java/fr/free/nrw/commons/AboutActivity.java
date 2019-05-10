@@ -32,6 +32,7 @@ public class AboutActivity extends NavigationBaseActivity {
     @BindView(R.id.about_version) TextView versionText;
     @BindView(R.id.about_license) HtmlTextView aboutLicenseText;
     @BindView(R.id.about_faq) TextView faqText;
+    @BindView(R.id.about_improve) HtmlTextView improve;
 
     /**
      * This method helps in the creation About screen
@@ -45,18 +46,25 @@ public class AboutActivity extends NavigationBaseActivity {
         setContentView(R.layout.activity_about);
 
         ButterKnife.bind(this);
+
         String aboutText = getString(R.string.about_license);
         aboutLicenseText.setHtmlText(aboutText);
+
+        @SuppressLint("StringFormatMatches")
+        String improveText = String.format(getString(R.string.about_improve), Urls.NEW_ISSUE_URL);
+        improve.setHtmlText(improveText);
+
         SpannableString content = new SpannableString(getString(R.string.about_faq));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         faqText.setText(content);
+
         versionText.setText(ConfigUtils.getVersionNameWithSha(getApplicationContext()));
+
         TextView rate_us = findViewById(R.id.about_rate_us);
         TextView privacy_policy = findViewById(R.id.about_privacy_policy);
         TextView translate = findViewById(R.id.about_translate);
         TextView credits = findViewById(R.id.about_credits);
         TextView faq = findViewById(R.id.about_faq);
-
         rate_us.setText(StringUtil.fromHtml(getString(R.string.about_rate_us)));
         privacy_policy.setText(StringUtil.fromHtml(getString(R.string.about_privacy_policy)));
         translate.setText(StringUtil.fromHtml(getString(R.string.about_translate)));
@@ -70,22 +78,22 @@ public class AboutActivity extends NavigationBaseActivity {
     public void launchFacebook(View view) {
         Intent intent;
         try {
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/" + "1921335171459985"));
-            intent.setPackage("com.facebook.katana");
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Urls.FACEBOOK_APP_URL));
+            intent.setPackage(Urls.FACEBOOK_PACKAGE_NAME);
             startActivity(intent);
         } catch (Exception e) {
-            Utils.handleWebUrl(this,Uri.parse("https://www.facebook.com/" + "1921335171459985"));
+            Utils.handleWebUrl(this, Uri.parse(Urls.FACEBOOK_WEB_URL));
         }
     }
 
     @OnClick(R.id.github_launch_icon)
     public void launchGithub(View view) {
-        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons\\"));
+        Utils.handleWebUrl(this, Uri.parse(Urls.GITHUB_REPO_URL));
     }
 
     @OnClick(R.id.website_launch_icon)
     public void launchWebsite(View view) {
-        Utils.handleWebUrl(this,Uri.parse("https://commons-app.github.io/\\"));
+        Utils.handleWebUrl(this, Uri.parse(Urls.WEBSITE_URL));
     }
 
     @OnClick(R.id.about_rate_us)
@@ -95,18 +103,18 @@ public class AboutActivity extends NavigationBaseActivity {
 
     @OnClick(R.id.about_credits)
     public void launchCredits(View view) {
-        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/blob/master/CREDITS/\\"));
+        Utils.handleWebUrl(this, Uri.parse(Urls.CREDITS_URL));
     }
 
     @OnClick(R.id.about_privacy_policy)
     public void launchPrivacyPolicy(View view) {
-        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+        Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL));
     }
 
 
     @OnClick(R.id.about_faq)
     public void launchFrequentlyAskedQuesions(View view) {
-        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Frequently-Asked-Questions\\"));
+        Utils.handleWebUrl(this, Uri.parse(Urls.FAQ_URL));
     }
 
     @Override
@@ -120,12 +128,12 @@ public class AboutActivity extends NavigationBaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.share_app_icon:
-                String shareText = "Upload photos to Wikimedia Commons on your phone\nDownload the Commons app: http://play.google.com/store/apps/details?id=fr.free.nrw.commons";
+                String shareText = String.format(getString(R.string.share_text), Urls.PLAY_STORE_URL);
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
                 sendIntent.setType("text/plain");
-                startActivity(Intent.createChooser(sendIntent, "Share app via..."));
+                startActivity(Intent.createChooser(sendIntent, getString(R.string.share_via)));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -148,8 +156,7 @@ public class AboutActivity extends NavigationBaseActivity {
                 .setMessage(R.string.about_translate_message)
                 .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
                     String langCode = CommonsApplication.getInstance().getLanguageLookUpTable().getCodes().get(spinner.getSelectedItemPosition());
-                    Utils.handleWebUrl(AboutActivity.this,Uri.parse("https://translatewiki.net/w/i.php?title=Special:Translate&language="
-                            + langCode + "&group=commons-android-strings&filter=%21translated&action=translate ?"));
+                    Utils.handleWebUrl(AboutActivity.this, Uri.parse(Urls.TRANSLATE_WIKI_URL + langCode));
                 });
         builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> finish());
         builder.create().show();
