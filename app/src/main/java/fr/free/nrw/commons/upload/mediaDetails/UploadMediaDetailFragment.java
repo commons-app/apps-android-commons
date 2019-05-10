@@ -34,7 +34,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
@@ -104,10 +103,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ApplicationlessInjection
-                .getInstance(getActivity().getApplicationContext())
-                .getCommonsApplicationComponent()
-                .inject(this);
     }
 
     public void setImageTobeUploaded(UploadableFile uploadableFile, String source, Place place) {

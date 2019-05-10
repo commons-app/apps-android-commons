@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.di;
 
+import javax.inject.Singleton;
+
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
@@ -14,11 +16,7 @@ import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.FileProcessor;
 import fr.free.nrw.commons.upload.UploadModule;
-import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
-import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
-import javax.inject.Singleton;
 
 
 @Singleton
@@ -53,12 +51,6 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(FileProcessor fileProcessor);
 
     void inject(PicOfDayAppWidget picOfDayAppWidget);
-
-    void inject(UploadCategoriesFragment uploadCategoriesFragment);
-
-    void inject(MediaLicenseFragment mediaLicenseFragment);
-
-    void inject(UploadMediaDetailFragment uploadMediaDetailFragment);
 
     void inject(ContributionViewHolder viewHolder);
 

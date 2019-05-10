@@ -33,7 +33,6 @@ import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadCategoriesAdapterFactory;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -70,10 +69,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ApplicationlessInjection
-                .getInstance(getActivity().getApplicationContext())
-                .getCommonsApplicationComponent()
-                .inject(this);
     }
 
     public void setMediaTitleList(List<String> mediaTitleList) {

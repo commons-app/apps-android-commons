@@ -12,7 +12,7 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 /**
  * The base fragment of the fragments in upload
  */
-public class UploadBaseFragment extends Fragment {
+public class UploadBaseFragment extends CommonsDaggerSupportFragment {
 
     public Callback callback;
 
