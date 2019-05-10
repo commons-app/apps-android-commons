@@ -483,9 +483,7 @@
   <string name="review_no_category">Ah, isso nem é categorizado!</string>
   <string name="review_category_explanation">Esta imagem está abaixo das %1$s categorias</string>
   <string name="review_spam_report_question">Está fora do escopo porque é</string>
-  <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">É violação de direitos autorais porque é</string>
-  <string name="review_c_violation_report_problem">copyRightViolation</string>
   <string name="review_category_yes_button_text">Não, mal categorizado</string>
   <string name="review_category_no_button_text">Parece bem</string>
   <string name="review_spam_yes_button_text">Não, fora do escopo</string>

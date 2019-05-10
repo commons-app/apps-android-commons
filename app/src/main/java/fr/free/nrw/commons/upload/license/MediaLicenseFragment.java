@@ -29,7 +29,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import timber.log.Timber;
 
@@ -57,10 +56,6 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ApplicationlessInjection
-                .getInstance(getActivity().getApplicationContext())
-                .getCommonsApplicationComponent()
-                .inject(this);
     }
 
     @Nullable

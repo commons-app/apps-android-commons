@@ -20,6 +20,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import timber.log.Timber;
@@ -142,7 +143,7 @@ public class DeleteHelper {
      * @param question
      * @param problem
      */
-    public void askReasonAndExecute(Media media, Context context, String question, String problem) {
+    public void askReasonAndExecute(Media media, Context context, String question, ReviewController.DeleteReason problem) {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle(question);
 
@@ -152,12 +153,12 @@ public class DeleteHelper {
         String[] reasonList = {"Reason 1", "Reason 2", "Reason 3", "Reason 4"};
 
 
-        if (problem.equals("spam")) {
+        if (problem == ReviewController.DeleteReason.SPAM) {
             reasonList[0] = "A selfie";
             reasonList[1] = "Blurry";
             reasonList[2] = "Nonsense";
             reasonList[3] = "Other";
-        } else if (problem.equals("copyRightViolation")) {
+        } else if (problem == ReviewController.DeleteReason.COPYRIGHT_VIOLATION) {
             reasonList[0] = "Press photo";
             reasonList[1] = "Random photo from internet";
             reasonList[2] = "Logo";

@@ -491,9 +491,7 @@
   <string name="review_no_category">Oh, ceci n\'est même pas catégorisé !</string>
   <string name="review_category_explanation">Cette image est dans les catégories %1$s .</string>
   <string name="review_spam_report_question">Ceci est hors sujet parce que c\'est</string>
-  <string name="review_spam_report_problem">pourriel</string>
   <string name="review_c_violation_report_question">Ceci est une violation des droits d\'auteur parce que c\'est</string>
-  <string name="review_c_violation_report_problem">copyRightViolation</string>
   <string name="review_category_yes_button_text">Non, mal catégorisé</string>
   <string name="review_category_no_button_text">Semble correct</string>
   <string name="review_spam_yes_button_text">Non, hors sujet</string>

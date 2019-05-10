@@ -73,7 +73,7 @@
   <string name="categories_search_text_hint">Претражи категорије</string>
   <string name="menu_save_categories">Сачувај</string>
   <string name="refresh_button">Освежи</string>
-  <string name="display_list_button">Листа</string>
+  <string name="display_list_button">Списак</string>
   <string name="gps_disabled">GPS је онемогућен на вашем уређају. Желите ли да га омогућите?</string>
   <string name="enable_gps">Омогући GPS</string>
   <string name="contributions_subtitle_zero">Још увек нема отпремања</string>

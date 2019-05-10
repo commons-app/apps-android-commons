@@ -480,9 +480,7 @@
   <string name="review_no_category">喔，這甚至沒有分類！</string>
   <string name="review_category_explanation">此圖片屬於%1$s分類。</string>
   <string name="review_spam_report_question">這超出範圍是因為</string>
-  <string name="review_spam_report_problem">垃圾內容</string>
   <string name="review_c_violation_report_question">這侵犯版權是因為</string>
-  <string name="review_c_violation_report_problem">侵犯版權</string>
   <string name="review_category_yes_button_text">不，缺少分類</string>
   <string name="review_category_no_button_text">看起來沒問題</string>
   <string name="review_spam_yes_button_text">不，超出範圍</string>

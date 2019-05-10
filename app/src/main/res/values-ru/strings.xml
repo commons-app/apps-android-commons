@@ -490,9 +490,7 @@
   <string name="review_no_category">Эй, да тут даже категорий нет!</string>
   <string name="review_category_explanation">Это изображение отнесено к %1$s {{PLURAL:%1$s|категории|категориям}}.</string>
   <string name="review_spam_report_question">Файл не уместен на Викискладе, поскольку</string>
-  <string name="review_spam_report_problem">спам</string>
   <string name="review_c_violation_report_question">Это нарушение авторских прав, поскольку</string>
-  <string name="review_c_violation_report_problem">copyRightViolation</string>
   <string name="review_category_yes_button_text">Неверно категоризировано</string>
   <string name="review_category_no_button_text">Выглядит подходяще</string>
   <string name="review_spam_yes_button_text">Не уместно</string>
