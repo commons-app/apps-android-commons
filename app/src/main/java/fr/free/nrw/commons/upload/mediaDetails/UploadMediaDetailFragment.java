@@ -168,10 +168,16 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
     }
 
+    /**
+     * attach the presenter with the view
+     */
     private void initPresenter() {
         presenter.onAttachView(this);
     }
 
+    /**
+     * init the recycler veiw
+     */
     private void initRecyclerView() {
         descriptionsAdapter = new DescriptionsAdapter();
         descriptionsAdapter.setCallback(this::showInfoAlert);
@@ -179,13 +185,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         rvDescriptions.setAdapter(descriptionsAdapter);
     }
 
-    private void showInfoAlert(int titleStringID, int messageStringId, String... formatArgs) {
-        new AlertDialog.Builder(getContext()).setTitle(titleStringID)
-                .setMessage(getString(messageStringId, (Object[]) formatArgs))
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                .create()
-                .show();
+    /**
+     * show dialog with info
+     * @param titleStringID
+     * @param messageStringId
+     */
+    private void showInfoAlert(int titleStringID, int messageStringId) {
+        DialogUtil.showAlertDialog(this, getString(titleStringID), getString(messageStringId), getString(android.R.string.ok), null, true);
     }
 
     @OnClick(R.id.btn_next)
