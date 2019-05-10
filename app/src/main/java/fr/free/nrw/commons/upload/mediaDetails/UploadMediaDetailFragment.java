@@ -7,25 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.chrisbanes.photoview.PhotoView;
-import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -47,6 +45,7 @@ import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
@@ -54,8 +53,6 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetailsContract.View {
 
-    @BindView(R.id.rl_container_title)
-    RelativeLayout rlContainerTitle;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ib_map)
@@ -64,14 +61,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatImageButton ibExpandCollapse;
     @BindView(R.id.ll_container_media_detail)
     LinearLayout llContainerMediaDetail;
-    @BindView(R.id.til_container_title)
-    TextInputLayout tilContainerTitle;
     @BindView(R.id.et_title)
     EditText etTitle;
     @BindView(R.id.rv_descriptions)
     RecyclerView rvDescriptions;
-    @BindView(R.id.btn_add_description)
-    AppCompatButton btnAddDescription;
     @BindView(R.id.backgroundImage)
     PhotoView photoViewBackgroundImage;
     @BindView(R.id.btn_next)
@@ -131,7 +124,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         title = new Title();
         initRecyclerView();
         initPresenter();
-        RxTextView.textChanges(etTitle)
+        Disposable disposable = RxTextView.textChanges(etTitle)
                 .subscribe(text -> {
                     if (!TextUtils.isEmpty(text)) {
                         btnNext.setEnabled(true);
@@ -145,6 +138,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         btnNext.setClickable(false);
                     }
                 });
+        compositeDisposable.add(disposable);
         presenter.receiveImage(uploadableFile, source, place);
 
         if (callback.getIndexInViewFlipper(this) == 0) {
@@ -263,9 +257,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void showDuplicatePicturePopup() {
+        String uploadTitleFormat = getString(R.string.upload_title_duplicate);
         DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.warning),
-                String.format(getString(R.string.upload_title_duplicate),
+                String.format(Locale.getDefault(),
+                        uploadTitleFormat,
                         uploadItem.getFileName()),
                 () -> {
 
