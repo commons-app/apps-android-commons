@@ -23,26 +23,22 @@ class FileUtilsTest {
 
         assertEquals(
                 "907d14fb3af2b0d4f18c2d46abe8aedce17367bd",
-                fileUtilsWrapper.getSHA1(toInputStream("Hello, World"))
+                fileUtilsWrapper.getSHA1("Hello, World".byteInputStream())
         )
 
         assertEquals(
                 "8b971da6347bd126872ea2f4f8d394e70c74073a",
-                fileUtilsWrapper.getSHA1(toInputStream("apps-android-commons"))
+                fileUtilsWrapper.getSHA1("apps-android-commons".byteInputStream())
         )
 
         assertEquals(
                 "e9d30f5a3a82792b9d79c258366bd53207ceaeb3",
-                fileUtilsWrapper.getSHA1(toInputStream("domdomegg was here"))
+                fileUtilsWrapper.getSHA1("domdomegg was here".byteInputStream())
         )
 
         assertEquals(
                 "96e733a3e59261c0621ba99be5bd10bb21abe53e",
-                fileUtilsWrapper.getSHA1(toInputStream("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="))
+                fileUtilsWrapper.getSHA1("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=".byteInputStream())
         )
-    }
-
-    private fun toInputStream(str: String) : InputStream {
-        return ByteArrayInputStream(str.toByteArray(Charsets.UTF_8))
     }
 }
