@@ -10,7 +10,7 @@ class FileUtilsTest {
     @Test
     fun deleteFile() {
         val file = File.createTempFile("testfile", "")
-        writeToFile(file, "Hello, World")
+        file.writeText("Hello, World")
 
         assertEquals(true, file.exists())
         assertEquals(true, FileUtils.deleteFile(file))
@@ -40,12 +40,6 @@ class FileUtilsTest {
                 "96e733a3e59261c0621ba99be5bd10bb21abe53e",
                 fileUtilsWrapper.getSHA1(toInputStream("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="))
         )
-    }
-
-    private fun writeToFile(file: File, s: String) {
-        val buf = BufferedOutputStream(FileOutputStream(file))
-        buf.write(s.toByteArray())
-        buf.close()
     }
 
     private fun getString(file: File): String {
