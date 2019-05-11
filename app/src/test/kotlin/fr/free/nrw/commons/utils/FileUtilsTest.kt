@@ -42,14 +42,6 @@ class FileUtilsTest {
         )
     }
 
-    private fun getString(file: File): String {
-        val bytes = ByteArray(file.length().toInt())
-        val buf = BufferedInputStream(FileInputStream(file))
-        buf.read(bytes, 0, bytes.size)
-        buf.close()
-        return String(bytes)
-    }
-
     private fun toInputStream(str: String) : InputStream {
         return ByteArrayInputStream(str.toByteArray(Charsets.UTF_8))
     }
