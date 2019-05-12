@@ -9,7 +9,7 @@ package fr.free.nrw.commons.nearby.mvp;
 public interface NearbyListContract {
 
     interface View extends NearbyContract.View {
-
+        // Even if this is empty for now, I keep this one for code consistency
     }
 
     interface UserActions extends NearbyContract.UserActions {
