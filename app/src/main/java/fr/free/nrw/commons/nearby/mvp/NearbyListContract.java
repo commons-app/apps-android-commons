@@ -13,7 +13,6 @@ public interface NearbyListContract {
     }
 
     interface UserActions extends NearbyContract.UserActions {
-        void openCommonsFilePage();
         void expandItem();
     }
 }
