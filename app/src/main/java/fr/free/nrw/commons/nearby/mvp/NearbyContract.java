@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby.mvp;
 
 public interface NearbyContract {
+
     interface View {
         void showPlaces();
     }
@@ -10,7 +11,8 @@ public interface NearbyContract {
         void uploadImageCamera();
         void bookmarkItem();
         void getDirections();
-        void openWikidata();
+        void seeWikidataItem();
+        void seeWikipediaArticle();
         void rotateScreen();
     }
 }
