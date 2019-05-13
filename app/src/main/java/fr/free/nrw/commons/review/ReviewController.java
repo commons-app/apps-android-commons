@@ -74,18 +74,23 @@ public class ReviewController {
         }
     }
 
+    public enum DeleteReason {
+        SPAM,
+        COPYRIGHT_VIOLATION
+    }
+
     public void reportSpam(@NonNull Activity activity) {
         deleteHelper.askReasonAndExecute(new Media("File:" + fileName),
                 activity,
                 activity.getResources().getString(R.string.review_spam_report_question),
-                activity.getResources().getString(R.string.review_spam_report_problem));
+                DeleteReason.SPAM);
     }
 
     public void reportPossibleCopyRightViolation(@NonNull Activity activity) {
         deleteHelper.askReasonAndExecute(new Media("File:" + fileName),
                 activity,
                 activity.getResources().getString(R.string.review_c_violation_report_question),
-                activity.getResources().getString(R.string.review_c_violation_report_problem));
+                DeleteReason.COPYRIGHT_VIOLATION);
     }
 
     @SuppressLint("CheckResult")
