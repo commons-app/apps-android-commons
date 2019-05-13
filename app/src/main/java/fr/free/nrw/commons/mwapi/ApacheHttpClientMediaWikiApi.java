@@ -815,7 +815,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 return new UploadResult(resultStatus, errorCode);
             } else {
                 Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
-                String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
+                String canonicalFilename = "File:" + result.getString("/api/upload/@filename"); //.replace("_", " "); // Title vs Filename
                 String imageUrl = result.getString("/api/upload/imageinfo/@url");
                 return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
             }
