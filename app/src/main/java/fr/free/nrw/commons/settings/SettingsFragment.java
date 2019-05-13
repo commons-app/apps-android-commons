@@ -4,6 +4,7 @@ import android.Manifest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
@@ -14,6 +15,11 @@ import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -22,6 +28,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
+import fr.free.nrw.commons.upload.Language;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 
@@ -32,6 +39,10 @@ public class SettingsFragment extends PreferenceFragment {
     JsonKvStore defaultKvStore;
     @Inject
     CommonsLogSender commonsLogSender;
+
+    private List<String> languageNamesList;
+    private List<String> languageCodesList;
+    ListPreference listPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,6 +128,49 @@ public class SettingsFragment extends PreferenceFragment {
             displayLocationPermissionForCardView.setEnabled(false);
             displayCampaignsCardView.setEnabled(false);
         }
+
+       listPreference = (ListPreference) findPreference("language");
+
+        languageNamesList = new ArrayList<>();
+        languageCodesList = new ArrayList<>();
+        prepareLanguages();
+
+
+
+
+
+    }
+
+    private void prepareLanguages() {
+
+            List<Language> languages = getLocaleSupportedByDevice();
+
+            for(Language language: languages) {
+                if(!languageCodesList.contains(language.getLocale().getLanguage())) {
+                    languageNamesList.add(language.getLocale().getDisplayName());
+                    languageCodesList.add(language.getLocale().getLanguage());
+                }
+            }
+
+        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[languageNamesList.size()]);
+        CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[languageCodesList.size()]);
+
+        listPreference.setEntries(languageNames);
+        listPreference.setEntryValues(languageCodes);
+
+    }
+
+    private List<Language> getLocaleSupportedByDevice() {
+            List<Language> languages = new ArrayList<>();
+            Locale[] localesArray = Locale.getAvailableLocales();
+            for (Locale locale : localesArray) {
+                languages.add(new Language(locale));
+            }
+
+            Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
+                    .compareTo(t1.getLocale().getDisplayName()));
+            return languages;
+
     }
 
     /**
