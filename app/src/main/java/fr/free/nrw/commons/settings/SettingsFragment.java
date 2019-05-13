@@ -1,15 +1,19 @@
 package fr.free.nrw.commons.settings;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
@@ -34,6 +38,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
 
+    public static final String KEY_LANGUAGE_VALUE = "LANGUAGE_DESCRIPTION";
     @Inject
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
@@ -66,7 +71,7 @@ public class SettingsFragment extends PreferenceFragment {
         EditTextPreference authorName = (EditTextPreference) findPreference("authorName");
         authorName.setEnabled(defaultKvStore.getBoolean("useAuthorName", false));
         useAuthorName.setOnPreferenceChangeListener((preference, newValue) -> {
-            authorName.setEnabled((Boolean)newValue);
+            authorName.setEnabled((Boolean) newValue);
             return true;
         });
 
@@ -116,7 +121,7 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
         // Disable some settings when not logged in.
-        if (defaultKvStore.getBoolean("login_skipped", false)){
+        if (defaultKvStore.getBoolean("login_skipped", false)) {
             SwitchPreference useExternalStorage = (SwitchPreference) findPreference("useExternalStorage");
             SwitchPreference displayNearbyCardView = (SwitchPreference) findPreference("displayNearbyCardView");
             SwitchPreference displayLocationPermissionForCardView = (SwitchPreference) findPreference("displayLocationPermissionForCardView");
@@ -129,28 +134,20 @@ public class SettingsFragment extends PreferenceFragment {
             displayCampaignsCardView.setEnabled(false);
         }
 
-       listPreference = (ListPreference) findPreference("language");
-
+        listPreference = (ListPreference) findPreference("language");
         languageNamesList = new ArrayList<>();
         languageCodesList = new ArrayList<>();
         prepareLanguages();
-
-
-
-
-
     }
 
     private void prepareLanguages() {
-
-            List<Language> languages = getLocaleSupportedByDevice();
-
-            for(Language language: languages) {
-                if(!languageCodesList.contains(language.getLocale().getLanguage())) {
-                    languageNamesList.add(language.getLocale().getDisplayName());
-                    languageCodesList.add(language.getLocale().getLanguage());
-                }
+        List<Language> languages = getLocaleSupportedByDevice();
+        for (Language language : languages) {
+            if (!languageCodesList.contains(language.getLocale().getLanguage())) {
+                languageNamesList.add(language.getLocale().getDisplayName());
+                languageCodesList.add(language.getLocale().getLanguage());
             }
+        }
 
         CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[languageNamesList.size()]);
         CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[languageCodesList.size()]);
@@ -158,20 +155,49 @@ public class SettingsFragment extends PreferenceFragment {
         listPreference.setEntries(languageNames);
         listPreference.setEntryValues(languageCodes);
 
+        String languageCode = getLanguageDescription();
+        if (languageCode != null) {
+            int prefIndex = listPreference.findIndexOfValue(languageCode);
+            listPreference.setSummary(listPreference.getEntries()[prefIndex]);
+        }
+        listPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                String userSelectedValue = (String) newValue;
+                int prefIndex = listPreference.findIndexOfValue(userSelectedValue);
+                listPreference.setSummary(listPreference.getEntries()[prefIndex]);
+                saveValue(userSelectedValue);
+                return true;
+            }
+        });
+
+    }
+
+    private String getLanguageDescription() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
+        return valuelang;
+    }
+
+    private void saveValue(String userSelectedValue) {
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
+        editor.putString(KEY_LANGUAGE_VALUE, userSelectedValue);
+        editor.apply();
     }
 
     private List<Language> getLocaleSupportedByDevice() {
-            List<Language> languages = new ArrayList<>();
-            Locale[] localesArray = Locale.getAvailableLocales();
-            for (Locale locale : localesArray) {
-                languages.add(new Language(locale));
-            }
+        List<Language> languages = new ArrayList<>();
+        Locale[] localesArray = Locale.getAvailableLocales();
+        for (Locale locale : localesArray) {
+            languages.add(new Language(locale));
+        }
 
-            Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
-                    .compareTo(t1.getLocale().getDisplayName()));
-            return languages;
+        Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
+                .compareTo(t1.getLocale().getDisplayName()));
+        return languages;
 
     }
+
 
     /**
      * First checks for external storage permissions and then sends logs via email
@@ -197,4 +223,5 @@ public class SettingsFragment extends PreferenceFragment {
                     }
                 }).check();
     }
+
 }

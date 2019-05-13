@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,11 +18,14 @@ import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.BiMap;
 import fr.free.nrw.commons.utils.LangCodeUtils;
+
+import static fr.free.nrw.commons.settings.SettingsFragment.KEY_LANGUAGE_VALUE;
 
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
@@ -30,8 +34,8 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
     private List<String> languageNamesList;
     private List<String> languageCodesList;
     private final BiMap<AdapterView, String> selectedLanguages;
-    public String selectedLangCode="";
-
+    public String selectedLangCode = "";
+    private Context context;
 
 
     public SpinnerLanguagesAdapter(@NonNull Context context,
@@ -43,13 +47,14 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         languageCodesList = new ArrayList<>();
         prepareLanguages();
         this.selectedLanguages = selectedLanguages;
+        this.context = context;
     }
 
     private void prepareLanguages() {
         List<Language> languages = getLocaleSupportedByDevice();
 
-        for(Language language: languages) {
-            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
+        for (Language language : languages) {
+            if (!languageCodesList.contains(language.getLocale().getLanguage())) {
                 languageNamesList.add(language.getLocale().getDisplayName());
                 languageCodesList.add(language.getLocale().getLanguage());
             }
@@ -70,7 +75,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        return !languageCodesList.get(position).isEmpty()&&
+        return !languageCodesList.get(position).isEmpty() &&
                 (!selectedLanguages.containsKey(languageCodesList.get(position)) ||
                         languageCodesList.get(position).equals(selectedLangCode));
     }
@@ -120,11 +125,17 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
                     .substring(0, 1).toUpperCase(), languageNamesList.get(position).substring(1));
             if (!isDropDownView) {
                 view.setVisibility(View.GONE);
-                if(languageCode.length()>2)
-                    tvLanguage.setText(languageCode.subSequence(0,2));
-                else
-                    tvLanguage.setText(languageCode);
-
+                if (languageCode.length() > 2)
+                    tvLanguage.setText(languageCode.subSequence(0, 2));
+                else {
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                    String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
+                    if (valuelang != null) {
+                        tvLanguage.setText(valuelang);
+                    } else {
+                        tvLanguage.setText(languageCode);
+                    }
+                }
             } else {
                 view.setVisibility(View.VISIBLE);
                 if (languageCodesList.get(position).isEmpty()) {
@@ -133,7 +144,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
                 } else {
                     tvLanguage.setText(
                             String.format("%s [%s]", languageName, languageCode));
-                    if(selectedLanguages.containsKey(languageCodesList.get(position))&&
+                    if (selectedLanguages.containsKey(languageCodesList.get(position)) &&
                             !languageCodesList.get(position).equals(selectedLangCode)) {
                         tvLanguage.setTextColor(Color.GRAY);
                     }
