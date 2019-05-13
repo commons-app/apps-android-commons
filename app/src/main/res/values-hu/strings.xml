@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * BanKris
 * Bencemac
 * Dj
@@ -102,7 +103,7 @@
   <string name="title_activity_category_details">Kategória</string>
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
-  <string name="about_improve">Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
+  <string name="about_improve">Nyiss egy új &lt;a href=\"%1$s\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
   <string name="about_privacy_policy">&lt;u&gt;Adatvédelmi irányelvek&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Köszönetnyilvánítás&lt;/u&gt;</string>
   <string name="title_activity_about">Névjegy</string>

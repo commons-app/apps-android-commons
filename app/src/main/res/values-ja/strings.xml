@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Aefgh39622
 * Dude1717
 * Hinaloe
@@ -96,7 +97,7 @@
   <string name="title_activity_category_details">カテゴリ</string>
   <string name="menu_about">このアプリについて</string>
   <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアが製作・管理しているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
-  <string name="about_improve">バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
+  <string name="about_improve">バグとアイディアは &lt;a href=\"%1$s\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;u&gt;プライバシー・ポリシー&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;クレジット&lt;/u&gt;</string>
   <string name="title_activity_about">このアプリについて</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Belkacem77
 * Hociben
 -->
@@ -76,7 +77,7 @@
   <string name="title_activity_signup">Jerred</string>
   <string name="menu_about">Ɣef</string>
   <string name="about_license">Asnas Wikipedia Commons d asnas n uɣbalu yeldin i d-yennulfan udiɣ yettwarfed sɣur iwiziwen d wid i t-iḍemnen n tmezdagnut Wikimedia. Tasbeddit Wikimedia ur tetteka ara deg usnulfu-is, tanfelit-is, neɣ aseggem n usnas.</string>
-  <string name="about_improve">Rnu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tummla tamaynut GitHub&lt;/a&gt; akken ad temmleḍ ibugen neɣ ad d-mudded isumar.</string>
+  <string name="about_improve">Rnu &lt;a href=\"%1$s\"&gt;tummla tamaynut GitHub&lt;/a&gt; akken ad temmleḍ ibugen neɣ ad d-mudded isumar.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Tasertit n tbaḍnit&lt;/a&gt;</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ismaden&lt;/a&gt;</string>
   <string name="title_activity_about">Ɣef</string>

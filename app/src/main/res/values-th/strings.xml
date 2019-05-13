@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Aefgh39622
 * B20180
 * Horus
@@ -83,7 +84,7 @@
   <string name="title_activity_signup">สมัครใช้งาน</string>
   <string name="menu_about">เกี่ยวกับ</string>
   <string name="about_license">แอปวิกิมีเดียคอมมอนส์เป็นแอปโอเพนซอร์สที่สร้างขึ้นและดูแลโดยผู้มีสิทธิและอาสาสมัครของชุมชนวิกิมีเดีย มูลนิธิวิกิมีเดียไม่มีส่วนเกี่ยวข้องในการสร้าง พัฒนา หรือการบำรุงรักษาแอปใดๆ ทั้งสิ้น</string>
-  <string name="about_improve">สร้าง &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; ใหม่เพื่อรายงานบั๊กและส่งข้อเสนอแนะ</string>
+  <string name="about_improve">สร้าง &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; ใหม่เพื่อรายงานบั๊กและส่งข้อเสนอแนะ</string>
   <string name="about_privacy_policy">&lt;u&gt;นโยบายความเป็นส่วนตัว&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;เครดิต&lt;/u&gt;</string>
   <string name="title_activity_about">เกี่ยวกับ</string>

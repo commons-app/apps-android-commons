@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abbedabb
+* Abijeet Patro
 * Ainali
 * Jopparn
 * Liuxinyu970226
@@ -98,7 +99,7 @@
   <string name="title_activity_review">Granskning</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen är en app med öppen källkod som skapas och underhålls av frivilliga från Wikimedias gemenskap. Wikimedia Foundation är inte involverad i skapandet, utvecklingen eller underhållet av appen.</string>
-  <string name="about_improve">Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
+  <string name="about_improve">Skapa ett nytt &lt;a href=\"%1$s\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
   <string name="about_privacy_policy">&lt;u&gt;Integritetspolicy&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Erkännande&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>

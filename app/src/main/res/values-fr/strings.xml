@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Cyclicus
 * Fitoschido
 * Friday83260
@@ -113,7 +114,7 @@
   <string name="title_activity_review">Relecture par pair</string>
   <string name="menu_about">À propos</string>
   <string name="about_license">L’application Wikimedia Commons est une application open source créée et tenue à jour par les bénéficiaires et volontaires de la communauté Wikimedia. La fondation Wikimedia n’est pas associée à la création, le développement ou l’entretien de l’application.</string>
-  <string name="about_improve">Créer un nouveau &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalement GitHub&lt;/a&gt; pour signaler des bogues ou des suggestions.</string>
+  <string name="about_improve">Créer un nouveau &lt;a href=\"%1$s\"&gt;signalement GitHub&lt;/a&gt; pour signaler des bogues ou des suggestions.</string>
   <string name="about_privacy_policy">&lt;u&gt;Règles de confidentialité&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Crédits&lt;/u&gt;</string>
   <string name="title_activity_about">À propos</string>
@@ -526,5 +527,7 @@
   <string name="welcome_dont_upload_content_description">Exemples d\'images à ne pas téléverser</string>
   <string name="skip_image">SAUTER CETTE IMAGE</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Échec du téléchargement ! Nous ne pouvons pas télécharger le fichier sans droit de stockage externe.</string>
+  <string name="share_text">Téléverser des photos vers Wikimédia Communs, sur votre téléphone Téléchargez l’application Communs : %1$s</string>
+  <string name="share_via">Partager l’application via…</string>
   <string name="image_info">Informations de l’image</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Ademo
 * Amire80
 * Barakolo
@@ -103,7 +104,7 @@
   <string name="title_activity_review">ביקורת עמיתים</string>
   <string name="menu_about">אודות</string>
   <string name="about_license">יישום ויקישיתוף (Wikimedia Commons app) הוא יישום קוד פתוח שמפותח ומתוחזק על־ידי מקבלי מלגות ומתנדבים של קהילת ויקימדיה. קרן ויקימדיה אינה מעורבת ביצירה, פיתוח, או תחזוקה של היישום.</string>
-  <string name="about_improve">נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
+  <string name="about_improve">נא ליצור &lt;a href=\"%1$s\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
   <string name="about_privacy_policy">&lt;u&gt;מדיניות פרטיות&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;יוצרים&lt;/u&gt;</string>
   <string name="title_activity_about">אודות</string>

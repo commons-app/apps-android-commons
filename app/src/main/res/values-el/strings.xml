@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Astralnet
 * Domdomegg
 * Evropi
@@ -102,7 +103,7 @@
   <string name="title_activity_category_details">Κατηγορία</string>
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
-  <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
+  <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"%1$s\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
   <string name="about_privacy_policy">&lt;u&gt;Πολιτική απορρήτου&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Συντελεστές&lt;/u&gt;</string>
   <string name="title_activity_about">Σχετικά</string>

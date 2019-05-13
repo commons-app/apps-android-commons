@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Envlh
 * FF11
 * Inkowik
@@ -98,7 +99,7 @@
   <string name="title_activity_review">Peer Review</string>
   <string name="menu_about">Über</string>
   <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
-  <string name="about_improve">Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
+  <string name="about_improve">Einen neuen &lt;a href=\"%1$s\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
   <string name="about_privacy_policy">&lt;u&gt;Datenschutzrichtlinie&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Danksagungen&lt;/u&gt;</string>
   <string name="title_activity_about">Über</string>
@@ -511,5 +512,7 @@
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
   <string name="skip_image">DIESES BILD ÜBERSPRINGEN</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fehlgeschlagen! Wir konnten die Datei nicht ohne externe Speicherberechtigung herunterladen!</string>
+  <string name="share_text">Lade Fotos von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App herunter: %1$s</string>
+  <string name="share_via">App teilen über …</string>
   <string name="image_info">Bildinformationen</string>
 </resources>

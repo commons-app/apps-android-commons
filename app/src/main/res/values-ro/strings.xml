@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * C1pr1an
 * Kyouko
 * MSClaudiu
@@ -98,7 +99,7 @@
   <string name="title_activity_category_details">Categorie</string>
   <string name="menu_about">Despre</string>
   <string name="about_license">Aplicația Wikimedia Commons este un software cu sursă deschisă creat și menținut de bursieri și voluntari ai comunității Wikimedia. Fundația Wikimedia nu este implicată în crearea, dezvoltarea sau mentenanța aplicației.</string>
-  <string name="about_improve">Creați un nou &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tichet pe GitHub&lt;/a&gt; pentru a raporta buguri sau sugestii.</string>
+  <string name="about_improve">Creați un nou &lt;a href=\"%1$s\"&gt;tichet pe GitHub&lt;/a&gt; pentru a raporta buguri sau sugestii.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politica de confidențialitate&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Autori&lt;/u&gt;</string>
   <string name="title_activity_about">Despre</string>

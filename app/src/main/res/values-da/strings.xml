@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Christian List
 * Envlh
 * Joedalton
@@ -97,7 +98,7 @@
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-programmet oprettet og udviklet af frivillige i Wikimediafællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af programmet.</string>
-  <string name="about_improve">Opret en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
+  <string name="about_improve">Opret en ny &lt;a href=\"%1$s\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;u&gt;Privatlivspolitik&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Bidragsydere&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>

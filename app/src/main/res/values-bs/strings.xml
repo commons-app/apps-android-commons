@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * CERminator
 * DzWiki
 * Srdjan m
@@ -77,7 +78,7 @@
   <string name="title_activity_signup">Registracija</string>
   <string name="menu_about">O</string>
   <string name="about_license" fuzzy="true">Program otvorenog kod objavljen pod licencom &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2&lt;/a&gt;. Wikimedia Commons i njen logo zaštitni su znaci Zadužbine Wikimedia i koriste se s njenom dozvolom. Nismo povezani niti nas podržava Zadužbina Wikimedia.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izvorni kod&lt;/a&gt; i &lt;a href=\"https://commons-app.github.io/\"&gt;veb-sajt&lt;/a&gt; na GitHubu. Započnite novi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;slučaj na GitHubu&lt;/a&gt; da biste prijavili greške i dali prijedloge.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izvorni kod&lt;/a&gt; i &lt;a href=\"https://commons-app.github.io/\"&gt;veb-sajt&lt;/a&gt; na GitHubu. Započnite novi &lt;a href=\"%1$s\"&gt;slučaj na GitHubu&lt;/a&gt; da biste prijavili greške i dali prijedloge.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika privatnosti&lt;/a&gt;</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Zasluge&lt;/a&gt;</string>
   <string name="title_activity_about">O</string>

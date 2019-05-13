@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 1917 Ekim Devrimi
+* Abijeet Patro
 * Envlh
 * Gambollar
 * Gorizon
@@ -97,7 +98,7 @@
   <string name="title_activity_featured_images">Resımê weçinıteyi</string>
   <string name="title_activity_category_details">Kategoriye</string>
   <string name="menu_about">Heq te cı</string>
-  <string name="about_improve">Qandê yew &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-cıkewtış&lt;/a&gt;ê neweyi rê rapor û teklifan bıaferne.</string>
+  <string name="about_improve">Qandê yew &lt;a href=\"%1$s\"&gt;GitHub-cıkewtış&lt;/a&gt;ê neweyi rê rapor û teklifan bıaferne.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politikaya nımıtışi&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;İştırakkerdoği&lt;/u&gt;</string>
   <string name="title_activity_about">Heq te cı</string>

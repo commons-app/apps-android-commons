@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Athena in Wonderland
 * Banjo
 * Chairego apc
@@ -98,7 +99,7 @@
   <string name="title_activity_category_details">Categoría</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">A aplicación Wikimedia Commons é unha aplicación de código aberto creada e mantida polos cesionarios e voluntarios da comunidade de Wikimedia. A Fundación Wikimedia non está involucrada na creación, desenvolvemento ou mantemento da aplicación.</string>
-  <string name="about_improve">Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
+  <string name="about_improve">Crear unha nova &lt;a href=\"%1$s\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
   <string name="about_privacy_policy">&lt;u&gt;Política de privacidade&lt;/u&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
