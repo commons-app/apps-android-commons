@@ -59,7 +59,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Inject
     Gson gson;
 
-    public fr.free.nrw.commons.nearby.NearbyMapFragment nearbyMapFragment;
+    private NearbyParentFragmentContract.UserActions userActions;
+
+    private fr.free.nrw.commons.nearby.NearbyMapFragment nearbyMapFragment;
     private fr.free.nrw.commons.nearby.NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();

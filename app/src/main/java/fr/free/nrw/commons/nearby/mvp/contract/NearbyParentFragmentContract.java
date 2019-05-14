@@ -9,8 +9,7 @@ public interface NearbyParentFragmentContract {
 
     interface UserActions {
         void displayListFragmentExpanded();
-        void locationChangedSlightly();
-        void locationChangedMedium();
-        void locationChangedSignificantly();
+        void onTabSelected();
+        void initializeNearbyOperations();
     }
 }
