@@ -79,6 +79,35 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        resumeFragment();
+    }
+
+    /**
+     * Resume fragments if they exists
+     */
+    private void resumeFragment() {
+        // Find the retained fragment on activity restarts
+        nearbyMapFragment = getMapFragment();
+        nearbyListFragment = getListFragment();
+    }
+
+    /**
+     * Returns the map fragment added to child fragment manager previously, if exists.
+     */
+    private NearbyMapFragment getMapFragment() {
+        return (NearbyMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
+    }
+
+    /**
+     * Returns the list fragment added to child fragment manager previously, if exists.
+     */
+    private NearbyListFragment getListFragment() {
+        return (NearbyListFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
+    }
+
+    @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
 
     }
