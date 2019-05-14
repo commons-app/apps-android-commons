@@ -2,7 +2,7 @@ package fr.free.nrw.commons.nearby.mvp.presenter;
 
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 
-public class NearbyParentFragmetPresenter implements NearbyParentFragmentContract.UserActions {
+public class NearbyParentFragmentPresenter implements NearbyParentFragmentContract.UserActions {
 
     @Override
     public void displayListFragmentExpanded() {
