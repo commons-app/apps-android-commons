@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,8 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.BiMap;
 import fr.free.nrw.commons.utils.LangCodeUtils;
 
+import static fr.free.nrw.commons.settings.SettingsFragment.KEY_LANGUAGE_VALUE;
+
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
     private final int resource;
@@ -31,6 +35,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
     private List<String> languageCodesList;
     private final BiMap<AdapterView, String> selectedLanguages;
     public String selectedLangCode="";
+    private Context context;
 
 
 
@@ -43,6 +48,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         languageCodesList = new ArrayList<>();
         prepareLanguages();
         this.selectedLanguages = selectedLanguages;
+        this.context = context;
     }
 
     private void prepareLanguages() {
@@ -122,8 +128,15 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
                 view.setVisibility(View.GONE);
                 if(languageCode.length()>2)
                     tvLanguage.setText(languageCode.subSequence(0,2));
-                else
-                    tvLanguage.setText(languageCode);
+                else{
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                    String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
+                    if (valuelang != null) {
+                        tvLanguage.setText(valuelang);
+                    } else {
+                        tvLanguage.setText(languageCode);
+                    }
+                }
 
             } else {
                 view.setVisibility(View.VISIBLE);

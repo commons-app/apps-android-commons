@@ -1,11 +1,14 @@
 package fr.free.nrw.commons.settings;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +16,11 @@ import android.text.TextWatcher;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,14 +32,20 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.upload.Language;
 
 public class SettingsFragment extends PreferenceFragment {
 
+    public static final String KEY_LANGUAGE_VALUE = "LANGUAGE_DESCRIPTION";
     @Inject
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
     @Inject
     CommonsLogSender commonsLogSender;
+
+    private List<String> languageNamesList;
+    private List<String> languageCodesList;
+    private ListPreference listPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,6 +108,11 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
+        listPreference = (ListPreference) findPreference("language");
+        languageNamesList = new ArrayList<>();
+        languageCodesList = new ArrayList<>();
+        prepareLanguages();
+
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
             Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
@@ -117,6 +136,63 @@ public class SettingsFragment extends PreferenceFragment {
             displayLocationPermissionForCardView.setEnabled(false);
             displayCampaignsCardView.setEnabled(false);
         }
+    }
+
+    private void prepareLanguages() {
+        List<Language> languages = getLocaleSupportedByDevice();
+
+        for(Language language: languages) {
+            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
+                languageNamesList.add(language.getLocale().getDisplayName());
+                languageCodesList.add(language.getLocale().getLanguage());
+            }
+        }
+
+        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[languageNamesList.size()]);
+        CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[languageCodesList.size()]);
+
+        listPreference.setEntries(languageNames);
+        listPreference.setEntryValues(languageCodes);
+
+        String languageCode = getLanguageDescription();
+        if (languageCode != null) {
+            int prefIndex = listPreference.findIndexOfValue(languageCode);
+            listPreference.setSummary(listPreference.getEntries()[prefIndex]);
+        }
+        listPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                String userSelectedValue = (String) newValue;
+                int prefIndex = listPreference.findIndexOfValue(userSelectedValue);
+                listPreference.setSummary(listPreference.getEntries()[prefIndex]);
+                saveValue(userSelectedValue);
+                return true;
+            }
+        });
+    }
+
+    private void saveValue(String userSelectedValue) {
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
+        editor.putString(KEY_LANGUAGE_VALUE, userSelectedValue);
+        editor.apply();
+    }
+
+    private String getLanguageDescription() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
+        return valuelang;
+    }
+
+    private List<Language> getLocaleSupportedByDevice() {
+        List<Language> languages = new ArrayList<>();
+        Locale[] localesArray = Locale.getAvailableLocales();
+        for (Locale locale : localesArray) {
+            languages.add(new Language(locale));
+        }
+
+        Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
+                .compareTo(t1.getLocale().getDisplayName()));
+        return languages;
     }
 
     /**
