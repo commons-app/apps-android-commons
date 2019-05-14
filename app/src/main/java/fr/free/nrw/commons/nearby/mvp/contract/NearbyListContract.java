@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.nearby.mvp.contract;
 
-import fr.free.nrw.commons.nearby.mvp.contract.NearbyContract;
-
 /**
  * This interface defines specific View and UserActions for list
  * part of the nearby. On the other hand both extends methods
@@ -10,11 +8,11 @@ import fr.free.nrw.commons.nearby.mvp.contract.NearbyContract;
  */
 public interface NearbyListContract {
 
-    interface View extends NearbyContract.View {
+    interface View extends NearbyElementContract.View {
         // Even if this is empty for now, I keep this one for code consistency
     }
 
-    interface UserActions extends NearbyContract.UserActions {
+    interface UserActions extends NearbyElementContract.UserActions {
         void expandItem();
     }
 }

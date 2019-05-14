@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby.mvp.presenter;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyListContract;
 
 public class NearbyListPresenter implements NearbyListContract.UserActions {
+
     @Override
     public void expandItem() {
 
