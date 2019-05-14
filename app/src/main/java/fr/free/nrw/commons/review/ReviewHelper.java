@@ -6,10 +6,10 @@ import org.wikipedia.dataclient.mwapi.RecentChange;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;

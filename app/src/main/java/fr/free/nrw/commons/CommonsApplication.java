@@ -12,7 +12,6 @@ import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -141,10 +140,6 @@ public class CommonsApplication extends Application {
         } catch (Exception e) {
             Timber.e(e);
             // TODO: Remove when we're able to initialize Fresco in test builds.
-        }
-
-        if (BuildConfig.DEBUG && !isRoboUnitTest()) {
-            Stetho.initializeWithDefaults(this);
         }
 
         createNotificationChannel(this);
