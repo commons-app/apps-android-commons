@@ -30,7 +30,7 @@
             android:maxLength="3" />
 
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
-            android:key="language"
+            android:key="descriptionDefaultLanguagePref"
             android:title= "@string/set_language"
             android:summary="English" />
 

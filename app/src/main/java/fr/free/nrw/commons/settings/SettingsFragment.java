@@ -42,9 +42,6 @@ public class SettingsFragment extends PreferenceFragment {
     JsonKvStore defaultKvStore;
     @Inject
     CommonsLogSender commonsLogSender;
-
-    private List<String> languageNamesList;
-    private List<String> languageCodesList;
     private ListPreference listPreference;
 
     @Override
@@ -108,11 +105,8 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
-        listPreference = (ListPreference) findPreference("language");
-        languageNamesList = new ArrayList<>();
-        languageCodesList = new ArrayList<>();
+        listPreference = (ListPreference) findPreference("descriptionDefaultLanguagePref");
         prepareLanguages();
-
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
             Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
@@ -139,6 +133,8 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private void prepareLanguages() {
+        List<String> languageNamesList = new ArrayList<>();
+        List<String> languageCodesList = new ArrayList<>();
         List<Language> languages = getLocaleSupportedByDevice();
 
         for(Language language: languages) {
@@ -150,12 +146,11 @@ public class SettingsFragment extends PreferenceFragment {
 
         CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[languageNamesList.size()]);
         CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[languageCodesList.size()]);
-
         listPreference.setEntries(languageNames);
         listPreference.setEntryValues(languageCodes);
 
         String languageCode = getLanguageDescription();
-        if (languageCode != null) {
+        if (!languageCode.equals("")) {
             int prefIndex = listPreference.findIndexOfValue(languageCode);
             listPreference.setSummary(listPreference.getEntries()[prefIndex]);
         }
