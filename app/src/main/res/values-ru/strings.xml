@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Alexandr Efremov
 * Av6
 * Eleferen
@@ -111,7 +112,7 @@
   <string name="title_activity_review">Проверка</string>
   <string name="menu_about">О приложении</string>
   <string name="about_license">Приложение «Викисклад» - это программа с открытым кодом, которую создали волонтёры и участники грантов Викимедиа. Фонд Викимедиа не участвует в создании, разработке или обслуживании этого приложения.</string>
-  <string name="about_improve">Вы можете создать &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запрос на GitHub&lt;/a&gt;, чтобы сообщить об ошибке или внести предложение.</string>
+  <string name="about_improve">Вы можете создать &lt;a href=\"%1$s\"&gt;запрос на GitHub&lt;/a&gt;, чтобы сообщить об ошибке или внести предложение.</string>
   <string name="about_privacy_policy">&lt;u&gt;Политика конфиденциальности&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Благодарности&lt;/u&gt;</string>
   <string name="title_activity_about">О приложении</string>
@@ -525,5 +526,7 @@
   <string name="welcome_dont_upload_content_description">Примеры изображений, которые не следует загружать на Викисклад</string>
   <string name="skip_image">ПРОПУСТИТЬ ЭТО ИЗОБРАЖЕНИЕ</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Скачивание файла не удалось! Это невозможно выполнить без предоставленного разрешения по использованию  внешнего носителя.</string>
+  <string name="share_text">Чтобы загружать фото на Викисклад (Wikimedia Commons), скачайте одноимённое приложение «Викисклад» (Commons): %1$s</string>
+  <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
 </resources>

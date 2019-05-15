@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 2axterix2
+* Abijeet Patro
 * Adjen
 * Astroemi
 * Benfutbol10
@@ -112,7 +113,7 @@
   <string name="title_activity_review">Revisión por pares</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">La aplicación de código abierto Wikimedia Commons fue creada por, y recibe mantenimiento de, cesionarios y voluntarios de la comunidad de Wikimedia. La Fundación Wikimedia no está involucrada en la creación, el desarrollo ni el mantenimiento de la aplicación.</string>
-  <string name="about_improve">Notifica de problemas y sugerencias en &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;.</string>
+  <string name="about_improve">Notifica de problemas y sugerencias en &lt;a href=\"%1$s\"&gt;GitHub&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;u&gt;Política de privacidad&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
   <string name="title_activity_about">Acerca de</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Ego and his own
 * Milicevic01
 * Zoranzoki21
@@ -93,7 +94,7 @@
   <string name="title_activity_category_details">Kategorija</string>
   <string name="menu_about">O aplikaciji</string>
   <string name="about_license">Softver otvorenog koda dostupan pod licencom &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache ver. 2&lt;/a&gt; Vikimedijina Ostava i njen logo su zaštitni znaci Vikimedijine Fondacije i koriste se sa dozvolom Vikimedijine Fondacine. Mi ne odobravamo ili podržavmo Vikimedijinu Fondaciju.\n\nAplikacija za Vikimedijinu ostavu je aplikacija otvorenog koda koja je napravljena i koja se održava pomoću grantova i volontera Vikimedijine zajednice. Zadužbina Vikimedija nije uključena u stvaranje, razvoj ili održavanje aplikacije.</string>
-  <string name="about_improve">Napravite novi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zahtev na GitHub-u&lt;/a&gt; da biste prijavili greške ili dali predloge.</string>
+  <string name="about_improve">Napravite novi &lt;a href=\"%1$s\"&gt;zahtev na GitHub-u&lt;/a&gt; da biste prijavili greške ili dali predloge.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politika privatnosti&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Zasluge&lt;/u&gt;</string>
   <string name="title_activity_about">O aplikaciji</string>

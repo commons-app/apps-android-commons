@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Dipusparaga
 * Kandar
 * Uchup19
@@ -93,7 +94,7 @@
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Ngeunaan</string>
   <string name="about_license">Aplikasi Wikimédia Commons mangrupa aplikasi sumber nembrak nu dijieun jeung dikokolakeun ku panampa hibah sarta rélawan komunitas Wikimédia. Wikimedia Foundation teu pépérodeun dina nyieun, ngamekarkeun, atawa mulasara ieu aplikasi.</string>
-  <string name="about_improve">Jieun &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;isu GitHub anyar&lt;/a&gt; pikeun laporan jeung kamandang bug.</string>
+  <string name="about_improve">Jieun &lt;a href=\"%1$s\"&gt;isu GitHub anyar&lt;/a&gt; pikeun laporan jeung kamandang bug.</string>
   <string name="about_privacy_policy">&lt;u&gt;Kawijakan privasi&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Pangajén&lt;/u&gt;</string>
   <string name="title_activity_about">Ngeunaan</string>

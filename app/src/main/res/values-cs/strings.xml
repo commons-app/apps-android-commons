@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Aktron
 * Chmee2
 * Clon
@@ -107,7 +108,7 @@
   <string name="title_activity_category_details">Kategorie</string>
   <string name="menu_about">O aplikaci</string>
   <string name="about_license">Aplikace Wikimedia Commons je open source software vytvářený a spravovaný členy komunity Wikimedia. Nadace Wikimedia se neúčastní tvorby, vývoje či správy aplikace.</string>
-  <string name="about_improve">Otevřete nové &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení na GitHubu&lt;/a&gt; pro nahlášení chyb a návrhů.</string>
+  <string name="about_improve">Otevřete nové &lt;a href=\"%1$s\"&gt;hlášení na GitHubu&lt;/a&gt; pro nahlášení chyb a návrhů.</string>
   <string name="about_privacy_policy">&lt;u&gt;Ochrana osobních údajů&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Autoři&lt;/u&gt;</string>
   <string name="title_activity_about">O aplikaci</string>

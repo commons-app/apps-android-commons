@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * DCLXVI
 * Datawiki30
 * MegaAlex
@@ -84,7 +85,7 @@
   <string name="title_activity_category_details">Категория</string>
   <string name="menu_about">За приложението</string>
   <string name="about_license">Приложението на Commons е с отворен код. Неговите създатели и поддръжници са получателите на ресурсите на общността на Уикимедия, както и на членовете на общността. Фондация Уикимедия не участва в създаването, развитието и поддръжката.</string>
-  <string name="about_improve">Създайте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;проблем на GitHub&lt;/a&gt; за заявяване на грешки и даване предложения.</string>
+  <string name="about_improve">Създайте нов &lt;a href=\"%1$s\"&gt;проблем на GitHub&lt;/a&gt; за заявяване на грешки и даване предложения.</string>
   <string name="title_activity_about">За приложението</string>
   <string name="no_email_client">Не е инсталирана програма за електронна поща</string>
   <string name="provider_categories">Последно използвани категории</string>
