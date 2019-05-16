@@ -43,6 +43,16 @@ public class NearbyParentFragmentPresenter
 
     }
 
+    /**
+     * This method should be the single point to update Map and List. Triggered by location
+     * changes
+     * @param locationChangeType defines if location changed significantly or slightly
+     */
+    @Override
+    public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType) {
+
+    }
+
     @Override
     public void onWikidataEditSuccessful() {
 
