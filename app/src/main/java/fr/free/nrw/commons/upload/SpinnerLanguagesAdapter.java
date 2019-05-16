@@ -121,23 +121,23 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         }
 
         public void init(int position, boolean isDropDownView) {
-            final String languageCode = LangCodeUtils.fixLanguageCode(languageCodesList.get(position));
+            String languageCode = LangCodeUtils.fixLanguageCode(languageCodesList.get(position));
             final String languageName = String.format("%s%s", languageNamesList.get(position)
                     .substring(0, 1).toUpperCase(), languageNamesList.get(position).substring(1));
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
+            if(!valuelang.equals("")){
+                languageCode = LangCodeUtils.fixLanguageCode(valuelang);
+
+            }
+
             if (!isDropDownView) {
                 view.setVisibility(View.GONE);
                 if(languageCode.length()>2)
                     tvLanguage.setText(languageCode.subSequence(0,2));
-                else{
-                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                    String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
-                    if (valuelang != null) {
-                        tvLanguage.setText(valuelang);
-                    } else {
-                        tvLanguage.setText(languageCode);
-                    }
-                }
-
+                else
+                    tvLanguage.setText(languageCode);
             } else {
                 view.setVisibility(View.VISIBLE);
                 if (languageCodesList.get(position).isEmpty()) {
