@@ -30,8 +30,11 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyListFragment;
 import fr.free.nrw.commons.nearby.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 
 /**
  * This fragment is under MainActivity at the came level with ContributionFragment and holds
@@ -68,11 +71,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private fr.free.nrw.commons.nearby.NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
+    private NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter(this);
     }
 
     @Nullable
@@ -233,14 +238,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                                 startActivityForResult(callGPSSettingIntent, 1);
                             })
                     .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                        showLocationPermissionDeniedErrorDialog();
+                        showLocationPermissionDeniedErrorDialog(locationServiceManager);
                         dialog.cancel();
                     })
                     .create()
                     .show();
         } else {
             Timber.d("GPS is enabled");
-            checkLocationPermission();
+            checkLocationPermission(locationServiceManager);
         }
     }
 
@@ -255,7 +260,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Timber.d("Checking location permission");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationServiceManager.isLocationPermissionGranted(requireContext())) {
-                refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+                nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
                 // Should we show an explanation?
                 if (locationServiceManager.isPermissionExplanationRequired(getActivity())) {
@@ -265,11 +270,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     new AlertDialog.Builder(getActivity())
                             .setMessage(getString(R.string.location_permission_rationale_nearby))
                             .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                requestLocationPermissions();
+                                requestLocationPermissions(locationServiceManager);
                                 dialog.dismiss();
                             })
                             .setNegativeButton(android.R.string.cancel, (dialog, id) -> {
-                                showLocationPermissionDeniedErrorDialog();
+                                showLocationPermissionDeniedErrorDialog(locationServiceManager);
                                 dialog.cancel();
                             })
                             .create()
@@ -281,7 +286,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }
             }
         } else {
-            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
+            nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 }
