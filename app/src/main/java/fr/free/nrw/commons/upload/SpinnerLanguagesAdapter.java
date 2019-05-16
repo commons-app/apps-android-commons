@@ -36,6 +36,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
     private final BiMap<AdapterView, String> selectedLanguages;
     public String selectedLangCode="";
     private Context context;
+    private boolean dropDownClicked;
 
 
 
@@ -49,6 +50,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         prepareLanguages();
         this.selectedLanguages = selectedLanguages;
         this.context = context;
+        this.dropDownClicked = false;
     }
 
     private void prepareLanguages() {
@@ -92,6 +94,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         View view = layoutInflater.inflate(resource, parent, false);
         ViewHolder holder = new ViewHolder(view);
         holder.init(position, true);
+        dropDownClicked = true;
         return view;
     }
 
@@ -126,13 +129,14 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
                     .substring(0, 1).toUpperCase(), languageNamesList.get(position).substring(1));
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
-            if(!valuelang.equals("")){
-                languageCode = LangCodeUtils.fixLanguageCode(valuelang);
 
-            }
 
             if (!isDropDownView) {
+                String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
+                if(!valuelang.equals("") && !dropDownClicked){
+                    languageCode = LangCodeUtils.fixLanguageCode(valuelang);
+
+                }
                 view.setVisibility(View.GONE);
                 if(languageCode.length()>2)
                     tvLanguage.setText(languageCode.subSequence(0,2));
