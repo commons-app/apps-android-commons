@@ -20,5 +20,6 @@ public interface NearbyParentFragmentContract {
         void onTabSelected();
         void initializeNearbyOperations();
         void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType);
+        void lockNearby(boolean isNearbyLocked);
     }
 }
