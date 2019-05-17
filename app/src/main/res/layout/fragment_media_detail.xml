@@ -8,6 +8,12 @@
     android:background="?attr/mainBackground"
     >
 
+    <fr.free.nrw.commons.media.MediaDetailSpacer
+        android:id="@+id/mediaDetailSpacer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_gap" />
+
+
     <ImageView
         android:id="@+id/mediaDetailImageFailed"
         android:layout_height="wrap_content"
@@ -18,12 +24,12 @@
         android:contentDescription="@string/mediaimage_failed"
         />
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/mediaDetailImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:actualImageScaleType="centerCrop"
-        />
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+        <!--android:id="@+id/mediaDetailImage"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:actualImageScaleType="centerCrop"-->
+        <!--/>-->
 
     <ScrollView
         android:id="@+id/mediaDetailScrollView"
@@ -38,318 +44,332 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
-                 the detail info offscreen until it's placed properly. May be a better way to do this. -->
-            <fr.free.nrw.commons.media.MediaDetailSpacer
-                android:id="@+id/mediaDetailSpacer"
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/mediaDetailImage"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/standard_gap" />
+                android:layout_height="200dp"
+                app:actualImageScaleType="fitXY"
+                />
+
+            <LinearLayout
+                android:padding="@dimen/standard_gap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primaryDarkColor"
+                >
+
+                <TextView
+                    android:id="@+id/mediaDetailTitle"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/white"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_title"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_bookmark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="@dimen/standard_gap"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/ic_star_border_primary_dark_24dp"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="BOOKMARK"
+                        android:textColor="@color/primaryDarkColor"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_download"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/ic_file_download_primary_dark_24dp"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DOWNLOAD"
+                        android:textColor="@color/primaryDarkColor"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_share"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/ic_share_primary_dark_24dp"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SHARE"
+                        android:textColor="@color/primaryDarkColor"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:weightSum="10"
+                android:padding="@dimen/small_gap"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_description"
+                    android:textColor="@color/primaryDarkColor"
+                    />
+
+
+                <fr.free.nrw.commons.ui.widget.HtmlTextView
+                    android:id="@+id/mediaDetailDesc"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:background="?attr/subBackground"
+                    android:textSize="@dimen/description_text_size"
+                    tools:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though." />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/authorLinearLayout"
+                android:layout_width="match_parent"
+                android:weightSum="10"
+                android:padding="@dimen/small_gap"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_author"
+                    android:textColor="@color/primaryDarkColor"
+                    />
+
+                <TextView
+                    android:id="@+id/mediaDetailAuthor"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_author"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="10"
+                android:padding="@dimen/small_gap"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_license"
+                    android:textColor="@color/primaryDarkColor"
+                    />
+
+                <TextView
+                    android:id="@+id/mediaDetailLicense"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_license"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="10"
+                android:padding="@dimen/small_gap"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_coordinates"
+                    android:textColor="@color/primaryDarkColor"
+                    />
+
+                <TextView
+                    android:id="@+id/mediaDetailCoordinates"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_coordinates"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="10"
+                android:padding="@dimen/small_gap"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_uploaded_date"
+                    android:textColor="@color/primaryDarkColor"
+                    />
+
+                <TextView
+                    android:id="@+id/mediaDetailuploadeddate"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_uploaded_date"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="10"
+                android:padding="@dimen/small_gap"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_discussion"
+                    android:textColor="@color/primaryDarkColor"
+                    />
+
+                <TextView
+                    android:id="@+id/mediaDetailDisc"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_detail_discussion"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="10"
+                android:padding="@dimen/small_gap"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="Categories: "
+                    android:textColor="@color/primaryDarkColor"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/mediaDetailCategoryContainer"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/nominatedDeletionBanner"
+                android:background="@color/deleteRed"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/fragmentCategorisationBackground"
                 android:orientation="vertical"
-                android:padding="@dimen/standard_gap">
-
-                <LinearLayout
+                android:padding="@dimen/standard_gap"
+                android:visibility="gone">
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_title"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/mediaDetailTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
-                        tools:text="Title of the media" />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
-                <LinearLayout
+                    android:gravity="center"
+                    android:text="@string/nominated_for_deletion"
+                    android:textSize="@dimen/normal_text"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/seeMore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/authorLinearLayout"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
+                    android:gravity="center"
+                    android:paddingTop="@dimen/standard_gap"
+                    android:textSize="@dimen/normal_text"
+                    android:textStyle="bold"/>
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_author"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/mediaDetailAuthor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
-                        tools:text="Media author user name goes here." />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_description"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
-
-                    <fr.free.nrw.commons.ui.widget.HtmlTextView
-                        android:id="@+id/mediaDetailDesc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
-                        tools:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though." />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_license"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
-
-                    <fr.free.nrw.commons.ui.widget.CompatTextView
-                        android:id="@+id/mediaDetailLicense"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
-                        app:drawablePadding="@dimen/tiny_gap"
-                        app:drawableStart="@drawable/ic_info_outline_24dp"
-                        tools:text="License link" />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_coordinates"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
-
-                    <fr.free.nrw.commons.ui.widget.CompatTextView
-                        android:id="@+id/mediaDetailCoordinates"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
-                        app:drawablePadding="@dimen/tiny_gap"
-                        app:drawableStart="@drawable/ic_map_white_24dp"
-                        tools:text="Coordinates link" />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap"
-                    android:textStyle="bold">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/detail_panel_cats_label"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:id="@+id/mediaDetailCategoryContainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_uploaded_date"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/mediaDetailuploadeddate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
-                        tools:text="Uploaded date" />
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
-                <LinearLayout
-                    android:id="@+id/nominatedDeletionBanner"
-                    android:background="@color/deleteRed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap"
-                    android:visibility="gone">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/nominated_for_deletion"
-                        android:textColor="@color/primaryTextColor"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/seeMore"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingTop="@dimen/standard_gap"
-                        android:textColor="@color/primaryTextColor"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-
-                <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/small_gap" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/subBackground"
-                    android:orientation="vertical"
-                    android:padding="@dimen/standard_gap">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_discussion"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/mediaDetailDisc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size" />
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
 
                 <Button
+                    android:layout_weight="1"
                     android:id="@+id/copyWikicode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/standard_gap"
                     android:background="@color/button_blue"
-                    android:text="@string/copy_wikicode"
+                    android:text="COPY WIKITEXT"
                     android:textColor="@color/primaryTextColor" />
 
                 <Button
+                    android:layout_weight="1"
                     android:id="@+id/nominateDeletion"
                     android:background="@drawable/bg_delete_button"
                     android:textColor="@color/primaryTextColor"
@@ -357,8 +377,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/nominate_deletion"/>
+
             </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
 </FrameLayout>

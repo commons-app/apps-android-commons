@@ -445,6 +445,22 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     }
 
+    @OnClick(R.id.ll_bookmark)
+    public void onBookMarkClick(){
+
+    }
+
+    @OnClick(R.id.ll_share)
+    public void onShareClick(){
+
+    }
+
+    @OnClick(R.id.ll_bookmark)
+    public void onDownloadClick(){
+
+    }
+
+
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
         if (nominatedForDeletion.getVisibility() == VISIBLE && getActivity() != null) {
