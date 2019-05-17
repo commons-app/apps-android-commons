@@ -74,6 +74,11 @@ public class NearbyParentFragmentPresenter
             return;
         }
 
+        if (!nearbyParentFragmentView.isNetworkConnectionEstablished()) {
+            Timber.d("Network connection is not established");
+            return;
+        }
+
 
 
     }

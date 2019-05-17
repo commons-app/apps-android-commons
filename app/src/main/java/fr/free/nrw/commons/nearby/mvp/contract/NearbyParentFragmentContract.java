@@ -13,6 +13,7 @@ public interface NearbyParentFragmentContract {
         void showLocationPermissionDeniedErrorDialog(LocationServiceManager locationServiceManager);
         void checkGps(LocationServiceManager locationServiceManager);
         void checkLocationPermission(LocationServiceManager locationServiceManager);
+        boolean isNetworkConnectionEstablished();
     }
 
     interface UserActions {

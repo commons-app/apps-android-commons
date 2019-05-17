@@ -31,6 +31,7 @@ import fr.free.nrw.commons.nearby.NearbyListFragment;
 import fr.free.nrw.commons.nearby.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
 
@@ -288,5 +289,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else {
             nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
         }
+    }
+
+    @Override
+    public boolean isNetworkConnectionEstablished() {
+        return NetworkUtils.isInternetConnectionEstablished(getActivity());
     }
 }
