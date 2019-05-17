@@ -78,6 +78,10 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d alŝuto</item>
+    <item quantity="other">%1$d alŝutoj</item>
+  </plurals>
   <string name="categories_activity_title">Kategorioj</string>
   <string name="title_activity_settings">Agordoj</string>
   <string name="title_activity_signup">Registriĝi</string>
@@ -101,6 +105,10 @@
   <string name="allow_gps">Aŭtomate akiri la nunan pozicion</string>
   <string name="preference_theme">Nokta reĝimo</string>
   <string name="preference_theme_summary">Uzi malluman etoson</string>
+  <string name="license_name_cc_by_sa_four">Atribuite-Samkondiĉe 4.0</string>
+  <string name="license_name_cc_by_four">Atribuite 4.0</string>
+  <string name="license_name_cc_by_sa">Atribuite-Samkondiĉe 3.0</string>
+  <string name="license_name_cc_by">Atribuite 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Aŭstrio)</string>
@@ -128,6 +136,8 @@
   <string name="tutorial_3_subtext_2">Fotoj kiujn vi elŝutis de interreto</string>
   <string name="tutorial_3_subtext_3">Ekrankopioj de komercaj aplikaĵoj</string>
   <string name="tutorial_4_text">Ekzemplo de alŝutaĵo:</string>
+  <string name="tutorial_4_subtext_1">Titolo: Sidneja Operejo</string>
+  <string name="welcome_final_text">Ĉu vi komprenis?</string>
   <string name="welcome_final_button_text">Jes!</string>
   <string name="welcome_help_button_text">&lt;u&gt;Ekscii pli&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorioj</string>
@@ -155,11 +165,18 @@
   <string name="commons_website">Retejo de Komunejo</string>
   <string name="commons_facebook">Facebook-Paĝo de Komunejo</string>
   <string name="background_image">Fona Bildo</string>
+  <string name="no_image_found">Neniu Bildo Trovita</string>
+  <string name="no_subcategory_found">Neniu subkategorio trovita</string>
+  <string name="no_parentcategory_found">Neniu superkategorio trovita</string>
   <string name="upload_image">Alŝuti Bildon</string>
   <string name="welcome_image_mount_zao">Monto Zao</string>
   <string name="welcome_image_llamas">Lamoj</string>
   <string name="welcome_image_rainbow_bridge">Ĉielarka Ponto</string>
   <string name="welcome_image_tulip">Tulipo</string>
+  <string name="welcome_image_no_selfies">Neniuj Memfotoj</string>
+  <string name="welcome_image_welcome_wikipedia">Bonvenon al Vikipedio</string>
+  <string name="welcome_image_welcome_copyright">Kopirajto</string>
+  <string name="welcome_image_sydney_opera_house">Sidneja Operejo</string>
   <string name="cancel">Nuligi</string>
   <string name="navigation_drawer_open">Malfermi</string>
   <string name="navigation_drawer_close">Fermi</string>
@@ -180,6 +197,7 @@
   <string name="nearby_info_menu_wikipedia_article">Vikipedia artikolo</string>
   <string name="upload_image_too_dark">La bildo estas tro malluma. Ĉu vi tamen volas alŝuti ĝin? La Komunejo (Wikimedia Commons) estas nur por bildoj kun enciklopedia valoro.</string>
   <string name="upload_image_blurry">La bildo estas malklara. Ĉu vi tamen volas alŝuti ĝin? La Komunejo (Wikimedia Commons) estas nur por bildoj kun enciklopedia valoro.</string>
+  <string name="upload_problem_image_dark">Bildo estas tro malluma.</string>
   <string name="give_permission">Doni permeson</string>
   <string name="login_to_your_account">Ensaluti en vian konton</string>
   <string name="send_log_file">Sendi la protokolan dosieron</string>
@@ -203,6 +221,7 @@
   <string name="nearby_wikidata">VIKIDATUMOJ</string>
   <string name="nearby_wikipedia">VIKIPEDIO</string>
   <string name="nearby_commons">KOMUNEJO</string>
+  <string name="about_rate_us">&lt;u&gt;Aprezi nin&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Oftaj demandoj&lt;/u&gt;</string>
   <string name="no_internet">Interreto ne disponas</string>
   <string name="internet_established">Interreto disponas</string>

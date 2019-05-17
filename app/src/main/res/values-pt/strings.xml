@@ -520,5 +520,7 @@
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">SALTAR ESTA IMAGEM</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">O descarregamento falhou! Não podemos descarregar o ficheiro sem permissão de armazenagem externa.</string>
+  <string name="share_text">Carregar fotografias na wiki Wikimedia Commons, do seu telemóvel Descarregar a aplicação Commons: %1$s</string>
+  <string name="share_via">Partilhar aplicação por...</string>
   <string name="image_info">Informação da imagem</string>
 </resources>
