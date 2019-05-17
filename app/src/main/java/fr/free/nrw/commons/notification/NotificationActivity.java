@@ -157,7 +157,6 @@ public class NotificationActivity extends NavigationBaseActivity {
                             no_notification.setVisibility(View.VISIBLE);
                         } else {
                             setAdapter(notificationList);
-                        } if (notificationMenuItem != null) {
                         }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
