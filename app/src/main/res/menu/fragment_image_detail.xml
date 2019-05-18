@@ -8,16 +8,6 @@
         android:title="@string/menu_bookmark"
         />
     <item
-        android:id="@+id/menu_share_current_image"
-        android:icon="@drawable/ic_share_black_24dp"
-        android:title="@string/menu_share"
-        />
-    <item
-        android:id="@+id/menu_download_current_image"
-        android:icon="@drawable/ic_download_white_24dp"
-        android:title="@string/menu_download"
-        />
-    <item
         android:id="@+id/menu_browser_current_image"
         android:title="@string/menu_open_in_browser"
         app:showAsAction="never" />

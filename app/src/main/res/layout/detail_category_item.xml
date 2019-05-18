@@ -13,6 +13,7 @@
         android:background="?attr/subBackground"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center_vertical"
+        android:textColor="@color/linkColor"
         android:paddingBottom="@dimen/small_gap"
         android:textSize="@dimen/description_text_size"
         />

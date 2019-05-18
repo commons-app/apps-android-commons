@@ -41,13 +41,8 @@ import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
-import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.content.Context.DOWNLOAD_SERVICE;
 import static fr.free.nrw.commons.Utils.handleWebUrl;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
@@ -154,23 +149,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 bookmarkDao.updateBookmark(bookmark);
                 updateBookmarkState(item);
                 return true;
-            case R.id.menu_share_current_image:
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getPageTitle().getCanonicalUri());
-                startActivity(Intent.createChooser(shareIntent, "Share image via..."));
-                return true;
             case R.id.menu_browser_current_image:
                 // View in browser
                 handleWebUrl(requireContext(), Uri.parse(m.getPageTitle().getMobileUri()));
-                return true;
-            case R.id.menu_download_current_image:
-                // Download
-                if (!NetworkUtils.isInternetConnectionEstablished(getActivity())) {
-                    ViewUtil.showShortSnackbar(getView(), R.string.no_internet);
-                    return false;
-                }
-                downloadMedia(m);
                 return true;
             case R.id.menu_set_as_wallpaper:
                 // Set wallpaper
@@ -194,52 +175,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         ImageUtils.setWallpaperFromImageUrl(getActivity(), Uri.parse(media.getImageUrl()));
     }
 
-    /**
-     * Start the media file downloading to the local SD card/storage.
-     * The file can then be opened in Gallery or other apps.
-     *
-     * @param m Media file to download
-     */
-    private void downloadMedia(Media m) {
-        String imageUrl = m.getImageUrl(), fileName = m.getFilename();
-
-        if (imageUrl == null
-                || fileName == null
-                || getContext() ==  null
-                || getActivity() == null) {
-            Timber.d("Skipping download media as either imageUrl %s or filename %s activity is null", imageUrl, fileName);
-            return;
-        }
-
-        // Strip 'File:' from beginning of filename, we really shouldn't store it
-        fileName = fileName.replaceFirst("^File:", "");
-
-        Uri imageUri = Uri.parse(imageUrl);
-
-        DownloadManager.Request req = new DownloadManager.Request(imageUri);
-        //These are not the image title and description fields, they are download descs for notifications
-        req.setDescription(getString(R.string.app_name));
-        req.setTitle(m.getDisplayTitle());
-        req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-
-        // Modern Android updates the gallery automatically. Yay!
-        req.allowScanningByMediaScanner();
-        req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        PermissionUtils.checkPermissionsAndPerformAction(getActivity(), WRITE_EXTERNAL_STORAGE,
-            () -> enqueueRequest(req), () -> Toast.makeText(getContext(),
-                R.string.download_failed_we_cannot_download_the_file_without_storage_permission,
-                Toast.LENGTH_SHORT).show(), R.string.storage_permission,
-            R.string.write_storage_permission_rationale);
-
-    }
-
-    private void enqueueRequest(DownloadManager.Request req) {
-        DownloadManager systemService =
-            (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
-        if (systemService != null) {
-            systemService.enqueue(req);
-        }
-    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -256,8 +191,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
-                    menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
-                    menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
 
                     // Initialize bookmark object
@@ -273,15 +206,11 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                         switch (c.getState()) {
                             case Contribution.STATE_FAILED:
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
                                 menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_COMPLETED:

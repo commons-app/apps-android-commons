@@ -174,7 +174,7 @@
   <string name="yes">Yes</string>
   <string name="no">No</string>
   <string name="media_detail_title">Title</string>
-  <string name="media_detail_description">Description:</string>
+  <string name="media_detail_description">Description</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Author</string>
   <string name="media_detail_uploaded_date">Uploaded date</string>

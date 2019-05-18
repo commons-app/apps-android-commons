@@ -23,8 +23,9 @@
     <color name="secondaryLightColor">#ffbc46</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
+    <color name="linkColor">#0c609c</color>
 
-    <color name="deleteRed">#90960a0a</color>
+    <color name="deleteRed">#d33</color>
     <color name="deleteButton">#44000000</color>
     <color name="deleteButtonDark">#88000000</color>
     <color name="deleteButtonLight">#44ffffff</color>
