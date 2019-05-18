@@ -9,6 +9,10 @@ import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED;
+
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
                     WikidataEditListener.WikidataP18EditListener,
@@ -18,6 +22,7 @@ public class NearbyParentFragmentPresenter
 
     private NearbyParentFragmentContract.View nearbyParentFragmentView;
     private boolean isNearbyLocked;
+    private LatLng curLatLng;
 
     public NearbyParentFragmentPresenter(NearbyParentFragmentContract.View nearbyParentFragmentView) {
         this.nearbyParentFragmentView = nearbyParentFragmentView;
@@ -78,6 +83,29 @@ public class NearbyParentFragmentPresenter
             Timber.d("Network connection is not established");
             return;
         }
+
+        //nearbyParentFragmentView.registerLocationUpdates(locationManager);
+        LatLng lastLocation = locationManager.getLastLocation();
+
+        if (curLatLng != null) {
+            // TODO figure out what is happening here about orientation change
+        }
+
+        curLatLng = lastLocation;
+
+        if (curLatLng == null) {
+            Timber.d("Skipping update of nearby places as location is unavailable");
+            return;
+        }
+
+        if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
+                || locationChangeType.equals(MAP_UPDATED)) {
+
+        }
+
+
+
+
 
 
 
