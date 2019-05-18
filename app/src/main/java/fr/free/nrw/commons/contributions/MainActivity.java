@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.List;
@@ -168,9 +167,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 // Otherwise go back to contributions fragment
                 viewPager.setCurrentItem(0);
             }
-        } else {
+        } else {*/
             super.onBackPressed();
-        }*/
+
     }
 
     @Override
