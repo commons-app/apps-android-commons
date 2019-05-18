@@ -7,7 +7,7 @@ apply from: 'quality.gradle'
 
 def isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file('../play.p12').exists()
 
-if(isRunningOnTravisAndIsNotPRBuild) {
+if (isRunningOnTravisAndIsNotPRBuild) {
     apply plugin: 'com.github.triplet.play'
 }
 
@@ -139,7 +139,7 @@ android {
         test.resources.srcDirs += 'src/main/resoures'
     }
 
-	signingConfigs {
+    signingConfigs {
         release
     }
 
@@ -148,7 +148,7 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
-            if(isRunningOnTravisAndIsNotPRBuild) {
+            if (isRunningOnTravisAndIsNotPRBuild) {
                 signingConfig signingConfigs.release
             }
         }
@@ -160,7 +160,7 @@ android {
             versionNameSuffix "-debug-" + getBranchName()
         }
     }
-	
+
     if (isRunningOnTravisAndIsNotPRBuild) {
         // configure keystore based on env vars in Travis for automated alpha builds
         signingConfigs.release.storeFile = file("../nr-commons.keystore")
@@ -177,7 +177,7 @@ android {
     productFlavors {
         prod {
 
-			applicationId 'fr.free.nrw.commons'
+            applicationId 'fr.free.nrw.commons'
 
             buildConfigField "String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\""
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\""
@@ -252,7 +252,7 @@ android {
     buildToolsVersion buildToolsVersion
 }
 
-if(isRunningOnTravisAndIsNotPRBuild) {
+if (isRunningOnTravisAndIsNotPRBuild) {
     play {
         track = "alpha"
         userFraction = 1

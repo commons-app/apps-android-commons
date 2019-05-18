@@ -9,6 +9,8 @@ import fr.free.nrw.commons.category.CategoryImagesListFragment;
 import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
+import fr.free.nrw.commons.contributions.ContributionsMainFragment;
+import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
@@ -26,6 +28,13 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract ContributionsListFragment bindContributionsListFragment();
+
+    @ContributesAndroidInjector
+    abstract ExploreFragment bindExploreFragment();
+
+    @ContributesAndroidInjector
+    abstract ContributionsMainFragment bindContributionsMainFragment();
+
 
     @ContributesAndroidInjector
     abstract MediaDetailFragment bindMediaDetailFragment();

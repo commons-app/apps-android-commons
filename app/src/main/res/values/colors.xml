@@ -69,4 +69,5 @@
     <color name="swipe_red" tools:ignore="MissingDefaultResource">#FF0000</color>
     <color name="yes_button_color">#B22222</color>
     <color name="no_button_color">#006400</color>
+    <color name="nav_tab_icon_unselected_color">#61000000</color>
 </resources>

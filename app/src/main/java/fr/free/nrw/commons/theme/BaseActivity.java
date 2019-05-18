@@ -15,7 +15,7 @@ public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
     @Named("default_preferences")
     public JsonKvStore defaultKvStore;
 
-    protected CompositeDisposable compositeDisposable = new CompositeDisposable();
+    public CompositeDisposable compositeDisposable = new CompositeDisposable();
     protected boolean wasPreviouslyDarkTheme;
 
     @Override

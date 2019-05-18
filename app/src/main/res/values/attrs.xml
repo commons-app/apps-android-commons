@@ -27,6 +27,7 @@
     <attr name="mainCardBackground" format="reference"/>
     <attr name="mainScreenNearbyPermissionbutton" format="reference"/>
     <attr name="icon" format="reference"/>
+    <attr name="nav_tab_item_color_state" format="reference" />
 
 
     <declare-styleable name="CompatTextView">
