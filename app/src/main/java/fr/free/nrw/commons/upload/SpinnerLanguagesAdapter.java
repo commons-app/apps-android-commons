@@ -129,13 +129,14 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
                     .substring(0, 1).toUpperCase(), languageNamesList.get(position).substring(1));
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
+            String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
+            if(valuelang.equals("")){
+                valuelang = Locale.getDefault().getLanguage();
+            }
 
             if (!isDropDownView) {
-                String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
-                if(!valuelang.equals("") && !dropDownClicked){
+                    if( !dropDownClicked){
                     languageCode = LangCodeUtils.fixLanguageCode(valuelang);
-
                 }
                 view.setVisibility(View.GONE);
                 if(languageCode.length()>2)

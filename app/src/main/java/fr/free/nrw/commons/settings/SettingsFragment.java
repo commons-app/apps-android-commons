@@ -148,8 +148,10 @@ public class SettingsFragment extends PreferenceFragment {
         CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[languageCodesList.size()]);
         listPreference.setEntries(languageNames);
         listPreference.setEntryValues(languageCodes);
-
         String languageCode = getLanguageDescription();
+        if(languageCode.equals("")){
+            listPreference.setSummary(Locale.getDefault().getDisplayLanguage());
+        }
         if (!languageCode.equals("")) {
             int prefIndex = listPreference.findIndexOfValue(languageCode);
             listPreference.setSummary(listPreference.getEntries()[prefIndex]);
