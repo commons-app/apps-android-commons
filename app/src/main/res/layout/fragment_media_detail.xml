@@ -24,13 +24,6 @@
         android:contentDescription="@string/mediaimage_failed"
         />
 
-    <!--<com.facebook.drawee.view.SimpleDraweeView-->
-        <!--android:id="@+id/mediaDetailImage"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--app:actualImageScaleType="centerCrop"-->
-        <!--/>-->
-
     <ScrollView
         android:id="@+id/mediaDetailScrollView"
         android:layout_width="match_parent"
@@ -293,13 +286,16 @@
                     android:text="@string/media_detail_license"
                     />
 
-                <TextView
+                <fr.free.nrw.commons.ui.widget.CompatTextView
                     android:id="@+id/mediaDetailLicense"
                     android:layout_width="0dp"
                     android:layout_weight="7"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    />
+                    android:layout_gravity="start"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/description_text_size"
+                    tools:text="License link" />
 
             </LinearLayout>
 
@@ -322,13 +318,16 @@
                     android:text="@string/media_detail_coordinates"
                     />
 
-                <TextView
+
+                <fr.free.nrw.commons.ui.widget.CompatTextView
                     android:id="@+id/mediaDetailCoordinates"
                     android:layout_width="0dp"
                     android:layout_weight="7"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:gravity="center_vertical"
                     android:textColor="@color/black"
-                    />
+                    tools:text="Coordinates link" />
 
             </LinearLayout>
 
@@ -392,31 +391,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/nominatedDeletionBanner"
-                android:background="@color/deleteRed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/standard_gap"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/nominated_for_deletion"
-                    android:textSize="@dimen/normal_text"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/seeMore"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingTop="@dimen/standard_gap"
-                    android:textSize="@dimen/normal_text"
-                    android:textStyle="bold"/>
-            </LinearLayout>
-
-            <LinearLayout
                 android:paddingTop="@dimen/standard_gap"
                 android:layout_width="match_parent"
                 android:weightSum="2"
@@ -442,6 +416,33 @@
                     android:text="@string/nominate_deletion"
                     android:textColor="@color/primaryTextColor" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/nominatedDeletionBanner"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/standard_gap"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/deleteRed"
+                    android:text="@string/nominated_for_deletion"
+                    android:textSize="@dimen/normal_text"
+                    />
+                <TextView
+                    android:id="@+id/seeMore"
+                    android:textColor="@color/deleteRed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/standard_gap"
+                    android:textSize="@dimen/normal_text"
+                    />
             </LinearLayout>
 
         </LinearLayout>
