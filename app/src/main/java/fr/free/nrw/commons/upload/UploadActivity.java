@@ -516,10 +516,10 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         int descCount = directKvStore.getInt(name + "descCount");
         for (int i = 0; i < descCount; i++) {
             Description description= new Description();
-            String desc = directKvStore.getString(name + "description_<"+Integer.toString(i)+">");
+            String desc = directKvStore.getString(name + "description_<" + i + ">");
             description.setDescriptionText(desc);
             finalDesc.add(description);
-            int position = directKvStore.getInt(name + "spinnerPosition_<"+Integer.toString(i)+">");
+            int position = directKvStore.getInt(name + "spinnerPosition_<" + i + ">");
             description.setSelectedLanguageIndex(position);
         }
         prevTitleDecs.setOnTouchListener((v, event) -> {
@@ -744,8 +744,8 @@ public class UploadActivity extends BaseActivity implements UploadView, SimilarI
         int n = descriptionsAdapter.getItemCount() - 1;
         directKvStore.putInt(name + "descCount", n);
         for (int i = 0; i < n; i++) {
-            directKvStore.putString(name + "description_<"+Integer.toString(i)+">", descriptionsAdapter.getDescriptions().get(i).getDescriptionText());
-            directKvStore.putInt(name + "spinnerPosition_<" + Integer.toString(i) + ">", descriptionsAdapter.getDescriptions().get(i).getSelectedLanguageIndex());
+            directKvStore.putString(name + "description_<" + i + ">", descriptionsAdapter.getDescriptions().get(i).getDescriptionText());
+            directKvStore.putInt(name + "spinnerPosition_<" + i + ">", descriptionsAdapter.getDescriptions().get(i).getSelectedLanguageIndex());
         }
     }
 }
