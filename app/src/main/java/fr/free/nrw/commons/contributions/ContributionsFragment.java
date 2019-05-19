@@ -1,5 +1,11 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
+import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
+import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,28 +17,26 @@ import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.CheckBox;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
-import androidx.cursoradapter.widget.CursorAdapter;
-import androidx.appcompat.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.CheckBox;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.HandlerService;
@@ -53,6 +57,9 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.notification.Notification;
+import fr.free.nrw.commons.notification.NotificationActivity;
+import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -62,13 +69,11 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
-import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
-import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
@@ -86,6 +91,8 @@ public class ContributionsFragment
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject CampaignsPresenter presenter;
     @Inject LocationServiceManager locationManager;
+    @Inject
+    NotificationController notificationController;
 
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private UploadService uploadService;
@@ -106,6 +113,13 @@ public class ContributionsFragment
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
+    private TextView notificationCount;
+
+    public static Fragment newInstance() {
+        ContributionsFragment contributionsFragment = new ContributionsFragment();
+        contributionsFragment.setRetainInstance(true);
+        return contributionsFragment;
+    }
 
     /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
@@ -129,9 +143,11 @@ public class ContributionsFragment
         }
     };
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         setRetainInstance(true);
     }
 
@@ -206,6 +222,59 @@ public class ContributionsFragment
             onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
             isFragmentAttachedBefore = true;
 
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_item_notifications, menu);
+        final View notification = menu.findItem(R.id.notifications).getActionView();
+        notificationCount = notification.findViewById(R.id.notification_count_badge);
+        notificationCount.setOnClickListener(view -> {
+            onMenuItemNotificationClicked();
+        });
+        updateNotificationCount();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    /**
+     * Starts notification activity on click to notification icon
+     */
+    private void onMenuItemNotificationClicked() {
+        NotificationActivity
+                .startYourself(getActivity(), "unread");//TODO figure this out, why not constant
+    }
+
+    private void updateNotificationCount() {
+        compositeDisposable.add(Observable.fromCallable(() -> notificationController.getNotifications(false))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::initNotificationViews,
+                        throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
+    }
+
+    /**
+     * Update the menu item with the number of notifications
+     */
+    private void initNotificationViews(List<Notification> notifications) {
+        if (notifications == null || notifications.isEmpty()) {
+            notificationCount.setVisibility(View.GONE);
+        } else {
+            notificationCount.setVisibility(View.VISIBLE);
+            notificationCount.setText(String.valueOf(notifications.size()));
+        }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.notifications:
+                onMenuItemNotificationClicked();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

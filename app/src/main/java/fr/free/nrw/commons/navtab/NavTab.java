@@ -11,8 +11,12 @@ import org.wikipedia.model.EnumCodeMap;
 import fr.free.nrw.commons.MoreFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.BookmarksFragment;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsMainFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
+import fr.free.nrw.commons.nearby.NearbyFragment;
+import org.wikipedia.model.EnumCode;
+import org.wikipedia.model.EnumCodeMap;
 
 
 public enum NavTab implements EnumCode {
@@ -20,9 +24,17 @@ public enum NavTab implements EnumCode {
         @NonNull
         @Override
         public Fragment newInstance() {
-            return ContributionsMainFragment.newInstance();
+            return ContributionsFragment.newInstance();
         }
-    }, EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
+    },
+    NEARBY(R.string.nearby_fragment, R.drawable.round_icon_milestone){//TODO change this icon
+        @NonNull
+        @Override
+        public Fragment newInstance() {
+            return NearbyFragment.newInstance();
+        }
+    },
+    EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
         @NonNull
         @Override
         public Fragment newInstance() {

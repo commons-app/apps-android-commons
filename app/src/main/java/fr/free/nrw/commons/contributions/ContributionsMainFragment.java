@@ -99,6 +99,7 @@ public class ContributionsMainFragment extends CommonsDaggerSupportFragment impl
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
 
    /*Todo: after
@@ -178,7 +179,6 @@ public class ContributionsMainFragment extends CommonsDaggerSupportFragment impl
             // If auth cookie already acquired notify contrib fragment so that it san operate auth required actions
             ((ContributionsFragment) contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
         }
-        setTabAndViewPagerSynchronisation();
     }
 
     /**
@@ -193,10 +193,8 @@ public class ContributionsMainFragment extends CommonsDaggerSupportFragment impl
                         uploadCount, uploadCount));
     }
 
-    /**
-     * Normally tab layout and view pager has no relation, which means when you swipe view pager
-     * tab won't change and vice versa. So we have to notify each of them.
-     */
+    //This has become obsolete now
+    /*
     private void setTabAndViewPagerSynchronisation() {
         //viewPager.canScrollHorizontally(false);
         viewPager.setFocusableInTouchMode(true);
@@ -253,7 +251,7 @@ public class ContributionsMainFragment extends CommonsDaggerSupportFragment impl
 
             }
         });
-    }
+    }*/
 
     public void hideTabs() {
         //Todo: after changeDrawerIconToBackButton();
@@ -363,27 +361,9 @@ public class ContributionsMainFragment extends CommonsDaggerSupportFragment impl
         }
     }
 
-    /**
-     * Responsible with displaying required menu items according to displayed fragment.
-     * Notifications icon when contributions list is visible, list sheet icon when nearby is visible
-     */
-    private void updateMenuItem() {
-        if (menu != null) {
-            if (isContributionsFragmentVisible) {
-                // Display notifications menu item
-                menu.findItem(R.id.notifications).setVisible(true);
-                menu.findItem(R.id.list_sheet).setVisible(false);
-                Timber.d("Contributions activity notifications menu item is visible");
-            } else {
-                // Display bottom list menu item
-                menu.findItem(R.id.notifications).setVisible(false);
-                menu.findItem(R.id.list_sheet).setVisible(true);
-                Timber.d("Contributions activity list sheet menu item is visible");
-            }
-        }
-    }
+    //This is not required, in fact we can delete this fragment, keeping it for now for references
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.notifications:
@@ -398,7 +378,7 @@ public class ContributionsMainFragment extends CommonsDaggerSupportFragment impl
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     private boolean deviceHasCamera() {
         PackageManager pm = requireActivity().getPackageManager();

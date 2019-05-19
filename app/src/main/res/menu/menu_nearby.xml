@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"      tools:context=".MainActivity">
 
     <item
-        android:id="@+id/action_display_list"
+        android:id="@+id/item_list_nearby"
         android:title="@string/display_list_button"
         android:icon="@drawable/ic_list_white_24dp"
         android:orderInCategory="1"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         />
 
 </menu>

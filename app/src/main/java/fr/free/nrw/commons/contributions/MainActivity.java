@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.List;
@@ -42,6 +43,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     SessionManager sessionManager;
     @Inject
     ContributionController controller;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.pager)
     public UnswipableViewPager viewPager;
     @BindView(R.id.fragment_main_nav_tab_layout)
@@ -73,7 +76,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         ButterKnife.bind(this);
-
+        setSupportActionBar(toolbar);
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
