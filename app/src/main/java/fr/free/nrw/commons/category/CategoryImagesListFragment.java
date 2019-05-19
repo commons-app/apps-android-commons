@@ -13,13 +13,14 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
@@ -55,12 +56,20 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private boolean hasMoreImages = true;
     private boolean isLoading = true;
     private String categoryName = null;
+    private AdapterView.OnItemClickListener listener;
 
     @Inject CategoryImageController controller;
     @Inject
     @Named("default_preferences")
     JsonKvStore categoryKvStore;
 
+
+    public CategoryImagesListFragment(){
+    }
+
+    public CategoryImagesListFragment(AdapterView.OnItemClickListener listener){
+        this.listener = listener;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_category_images, container, false);
@@ -71,7 +80,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
+        gridView.setOnItemClickListener(listener==null?((AdapterView.OnItemClickListener) getActivity()):listener);
         initViews();
     }
 

@@ -91,7 +91,7 @@ public class ExploreFragment
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
 
-        featuredImagesListFragment = new CategoryImagesListFragment();
+        featuredImagesListFragment = new CategoryImagesListFragment(this);
         Bundle featuredArguments = new Bundle();
         featuredArguments.putString("categoryName", FEATURED_IMAGES_CATEGORY);
         featuredImagesListFragment.setArguments(featuredArguments);
@@ -217,7 +217,7 @@ public class ExploreFragment
         mediaContainer.setVisibility(View.VISIBLE);
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
-            mediaDetails = new MediaDetailPagerFragment(false, true);
+            mediaDetails = new MediaDetailPagerFragment(false, true, this);
             FragmentManager supportFragmentManager = requireActivity().getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
