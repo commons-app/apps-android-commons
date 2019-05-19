@@ -791,8 +791,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     public void onTabSelected(boolean onOrientationChanged) {
         Timber.d("On nearby tab selected");
         this.onOrientationChanged = onOrientationChanged;
-        performNearbyOperations();
-
     }
 
     /**
@@ -868,7 +866,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                             android.Manifest.permission.ACCESS_FINE_LOCATION},
                     LOCATION_REQUEST);
         }else{
-            locationManager.registerLocationManager();
+            performNearbyOperations();
         }
     }
 }
