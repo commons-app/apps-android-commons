@@ -25,40 +25,66 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="32dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <ProgressBar
-            android:id="@+id/categoryProgress"
-            style="@style/ProgressBar"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:indeterminateOnly="false"
-            android:max="100"
-            android:visibility="gone" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="32dp">
 
-        <TextView
-            android:id="@+id/categoryImageTitle"
-            style="?android:textAppearanceMedium"
+            <ProgressBar
+                android:id="@+id/categoryProgress"
+                style="@style/ProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/categoryImageTitle"
+                style="?android:textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/categoryImageAuthor"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/nav_tab_icon_unselected_color" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="@color/black" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@null"
+            android:tint="@color/nav_tab_icon_unselected_color"
+            app:srcCompat="@drawable/ic_round_star_filled_24px" />
 
-        <TextView
-            android:id="@+id/categoryImageAuthor"
-            style="?android:textAppearanceSmall"
+        <ImageView
+            android:id="@+id/download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="@color/nav_tab_icon_unselected_color" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@null"
+            android:tint="@color/nav_tab_icon_unselected_color"
+            app:srcCompat="@drawable/ic_download_white_24dp" />
     </LinearLayout>
-
 </LinearLayout>
