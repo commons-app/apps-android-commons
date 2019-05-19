@@ -5,18 +5,18 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.tabs.TabLayout;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -33,6 +33,12 @@ public class BookmarksFragment extends CommonsDaggerSupportFragment
     private FragmentManager supportFragmentManager;
     private BookmarksPagerAdapter adapter;
     private MediaDetailPagerFragment mediaDetails;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -57,6 +63,16 @@ public class BookmarksFragment extends CommonsDaggerSupportFragment
         super.onViewCreated(view, savedInstanceState);
         initViewPager();
     }
+
+    /**
+     * Inflate the toolbar menu options for this fragment
+     */
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
 
     private void initViewPager() {
         // Activity can call methods in the fragment by acquiring a

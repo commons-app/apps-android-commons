@@ -4,6 +4,9 @@ package fr.free.nrw.commons.explore;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,12 +80,43 @@ public class ExploreFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         //Todo: after setContentView(R.layout.activity_explore);
         ButterKnife.bind(requireActivity());
         //Todo:after setTitle(getString(R.string.title_activity_explore));
         supportFragmentManager = requireActivity().getSupportFragmentManager();
 
 
+    }
+
+
+    /**
+     * Inflate the toolbar menu options for this fragment
+     * @param menu
+     * @param inflater
+     */
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_search, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    /**
+     * This method handles the logic on ItemSelect in toolbar menu
+     * Currently only 1 choice is available to open search page of the app
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                NavigationBaseActivity.startActivityWithFlags(getActivity(), SearchActivity.class);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
@@ -232,34 +267,5 @@ public class ExploreFragment
         mediaDetails.showImage(i);
         //Todo: after forceInitBackButton();
     }
-
-    /*Todo: after
-     *//**
-     * This method inflates the menu in the toolbar
-     *//*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = requireActivity().getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    *//**
-     * This method handles the logic on ItemSelect in toolbar menu
-     * Currently only 1 choice is available to open search page of the app
-     *//*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                NavigationBaseActivity.startActivityWithFlags(this, SearchActivity.class);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }*/
-
 }
 

@@ -1,35 +1,41 @@
 package fr.free.nrw.commons.nearby;
 
+import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED;
+
+import android.Manifest.permission;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-
-import com.google.gson.Gson;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -43,12 +49,9 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
+import javax.inject.Inject;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED;
 
 public class NearbyFragment extends CommonsDaggerSupportFragment
         implements LocationUpdateListener,
@@ -98,9 +101,18 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private boolean populateForCurrentLocation = false;
     private boolean isNetworkErrorOccured = false;
 
+    @NonNull
+    public static Fragment newInstance() {
+        NearbyFragment fragment = new NearbyFragment();
+        fragment.setRetainInstance(true);
+        return fragment;
+
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         setRetainInstance(true);
     }
 
@@ -123,6 +135,24 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState != null) {
             onOrientationChanged = true;
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_nearby,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_list_nearby:
+                listOptionMenuItemClicked();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -749,7 +779,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onResume();
         // Resume the fragment if exist
         resumeFragment();
+        if(isVisible()){
+            secureLocationPermission();
         }
+    }
 
     /**
      * Perform nearby operations on nearby tab selected
@@ -758,8 +791,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     public void onTabSelected(boolean onOrientationChanged) {
         Timber.d("On nearby tab selected");
         this.onOrientationChanged = onOrientationChanged;
-        performNearbyOperations();
-
     }
 
     /**
@@ -817,6 +848,26 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     public boolean isBottomSheetExpanded() { return bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser && isResumed()){
+            secureLocationPermission();
+        }
+    }
+
+    private void secureLocationPermission() {
+        if (ContextCompat.checkSelfPermission(getContext(), permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(
+                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                            android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_REQUEST);
+        }else{
+            performNearbyOperations();
+        }
     }
 }
 
