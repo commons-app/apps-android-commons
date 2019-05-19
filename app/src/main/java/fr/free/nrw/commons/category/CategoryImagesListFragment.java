@@ -178,7 +178,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param mediaList List of new Media to be displayed
      */
     private void setAdapter(List<Media> mediaList) {
-        gridAdapter = new GridViewAdapter(this.getContext(), R.layout.layout_category_images, mediaList);
+        gridAdapter = new GridViewAdapter(this.getContext(), R.layout.layout_category_images, mediaList, true);
         gridView.setAdapter(gridAdapter);
     }
 

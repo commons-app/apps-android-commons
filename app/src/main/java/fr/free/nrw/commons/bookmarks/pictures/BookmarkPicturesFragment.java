@@ -209,7 +209,8 @@ public class BookmarkPicturesFragment extends DaggerFragment {
         gridAdapter = new GridViewAdapter(
                 this.getContext(),
                 R.layout.layout_category_images,
-                mediaList
+                mediaList,
+                false
         );
         gridView.setAdapter(gridAdapter);
     }
