@@ -79,7 +79,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         setSupportActionBar(toolbar);
         requestAuthToken();
         initDrawer();
-        setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
+        setTitle(getString(R.string.contributions_fragment)); // Should I create a new string variable with another name instead?
         setUpPager();
 
         if (savedInstanceState != null) {
@@ -96,6 +96,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         viewPager.setAdapter(new NavTabFragmentPagerAdapter(getSupportFragmentManager()));
         viewPager.setOffscreenPageLimit(4);
         tabLayout.setOnNavigationItemSelectedListener(item -> {
+            setTitle(item.getTitle());
             viewPager.setCurrentItem(item.getOrder());
             return true;
         });
