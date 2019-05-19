@@ -70,6 +70,7 @@
         android:drawablePadding="12dp"
         android:padding="8dp"
         android:text="@string/navigation_item_about"
+        android:drawableTint="@color/black"
         android:textSize="18sp" />
 
 

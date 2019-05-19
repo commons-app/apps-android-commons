@@ -27,7 +27,7 @@ public enum NavTab implements EnumCode {
             return ContributionsFragment.newInstance();
         }
     },
-    NEARBY(R.string.nearby_fragment, R.drawable.round_icon_milestone){//TODO change this icon
+    NEARBY(R.string.nearby_fragment, R.drawable.ic_location_on_black_24dp){
         @NonNull
         @Override
         public Fragment newInstance() {
