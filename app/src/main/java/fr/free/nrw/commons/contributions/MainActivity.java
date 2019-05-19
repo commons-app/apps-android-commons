@@ -94,7 +94,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     private void setUpPager() {
         viewPager.setAdapter(new NavTabFragmentPagerAdapter(getSupportFragmentManager()));
-        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOffscreenPageLimit(4);
         tabLayout.setOnNavigationItemSelectedListener(item -> {
             viewPager.setCurrentItem(item.getOrder());
             return true;
