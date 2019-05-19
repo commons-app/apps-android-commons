@@ -110,6 +110,38 @@ public class NotificationActivity extends NavigationBaseActivity {
                 }));
     }
 
+    /**
+     * notificationMarkAsRead method uses as input parameter a Notification
+     * and is responsible for marking the read notifications as read when the user has seen
+     * the notifications, so that the notification badge is removed. Also is checked the
+     * exception of not proper loading the notifications.
+     *
+     * @param notification
+     */
+    @SuppressLint("CheckResult")
+    public void notificationMarkAsRead(Notification notification) {
+        compositeDisposable.add(Observable.fromCallable(() -> controller.markAsRead(notification))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    if (result) {
+                        Snackbar snackbar = Snackbar
+                                .make(relativeLayout, "Notification marked as read", Snackbar.LENGTH_LONG);
+
+                        snackbar.show();
+                    } else {
+                        adapter.notifyDataSetChanged();
+                        setAdapter(notificationList);
+                        Toast.makeText(NotificationActivity.this, "There was some error!", Toast.LENGTH_SHORT).show();
+                    }
+                }, throwable -> {
+
+                    Timber.e(throwable, "Error occurred while loading notifications");
+                    throwable.printStackTrace();
+                    ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
+                    progressBar.setVisibility(View.GONE);
+                }));
+    }
 
 
     private void initListView() {
@@ -225,6 +257,8 @@ public class NotificationActivity extends NavigationBaseActivity {
             public void notificationClicked(Notification notification) {
                 Timber.d("Notification clicked %s", notification.link);
                 handleUrl(notification.link);
+                if (!isarchivedvisible)
+                    notificationMarkAsRead(notification);
             }
 
             @Override
