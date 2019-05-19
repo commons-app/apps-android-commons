@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -54,6 +55,8 @@ public class NotificationActivity extends NavigationBaseActivity {
     ConstraintLayout no_notification;
     @BindView(R.id.no_notification_text)
     TextView noNotificationText;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Inject
     NotificationController controller;
@@ -69,6 +72,7 @@ public class NotificationActivity extends NavigationBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         mNotificationWorkerFragment = (NotificationWorkerFragment) getFragmentManager()
                 .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
