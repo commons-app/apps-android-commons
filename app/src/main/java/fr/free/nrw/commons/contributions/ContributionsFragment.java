@@ -459,7 +459,7 @@ public class ContributionsFragment
             return;
         }
 
-        ((MainActivity)getActivity()).setNumOfUploads(uploadCount);
+       // ((MainActivity)getActivity()).setNumOfUploads(uploadCount);
 
     }
 

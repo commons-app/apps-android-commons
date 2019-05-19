@@ -1,45 +1,36 @@
 package fr.free.nrw.commons.theme;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.BindView;
 import fr.free.nrw.commons.AboutActivity;
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
-import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
@@ -51,47 +42,17 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.navigation_view)
-    NavigationView navigationView;
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
     @Inject
     @Named("default_preferences")
     JsonKvStore applicationKvStore;
-    @Inject CommonsLogSender commonsLogSender;
+    @Inject
+    CommonsLogSender commonsLogSender;
 
 
     private ActionBarDrawerToggle toggle;
 
     public void initDrawer() {
-        navigationView.setNavigationItemSelectedListener(this);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.setDrawerIndicatorEnabled(true);
-        toggle.syncState();
         setUserName();
-        Menu nav_Menu = navigationView.getMenu();
-        View headerLayout = navigationView.getHeaderView(0);
-        ImageView userIcon = headerLayout.findViewById(R.id.user_icon);
-        if (applicationKvStore.getBoolean("login_skipped", false)) {
-            userIcon.setVisibility(View.GONE);
-            nav_Menu.findItem(R.id.action_login).setVisible(true);
-            nav_Menu.findItem(R.id.action_home).setVisible(false);
-            nav_Menu.findItem(R.id.action_settings).setVisible(true);
-            nav_Menu.findItem(R.id.action_logout).setVisible(false);
-            nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
-        }else {
-            userIcon.setVisibility(View.VISIBLE);
-            nav_Menu.findItem(R.id.action_login).setVisible(false);
-            nav_Menu.findItem(R.id.action_home).setVisible(true);
-            nav_Menu.findItem(R.id.action_settings).setVisible(true);
-            nav_Menu.findItem(R.id.action_logout).setVisible(true);
-            nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
-        }
     }
 
     public void changeDrawerIconToBackButton() {
@@ -110,19 +71,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
      * Set the username in navigationHeader.
      */
     private void setUserName() {
-
-        View navHeaderView = navigationView.getHeaderView(0);
-        TextView username = navHeaderView.findViewById(R.id.username);
-        AccountManager accountManager = AccountManager.get(this);
-        Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
-        if (allAccounts.length != 0) {
-            username.setText(allAccounts[0].name);
-        }
-        ImageView userIcon = navHeaderView.findViewById(R.id.user_icon);
-        userIcon.setOnClickListener(v -> {
-            drawerLayout.closeDrawer(navigationView);
-            AchievementsActivity.startYourself(NavigationBaseActivity.this);
-        });
     }
 
     public void initBackButton() {
@@ -151,7 +99,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
         final int itemId = item.getItemId();
         switch (itemId) {
             case R.id.action_login:
-                drawerLayout.closeDrawer(navigationView);
                 startActivityWithFlags(
                         this, LoginActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                         Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -159,27 +106,22 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 finish();
                 return true;
             case R.id.action_home:
-                drawerLayout.closeDrawer(navigationView);
                 startActivityWithFlags(
                         this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                         Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return true;
             case R.id.action_about:
-                drawerLayout.closeDrawer(navigationView);
                 startActivityWithFlags(this, AboutActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT,
                         Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return true;
             case R.id.action_settings:
-                drawerLayout.closeDrawer(navigationView);
                 startActivityWithFlags(this, SettingsActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT,
                         Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return true;
             case R.id.action_introduction:
-                drawerLayout.closeDrawer(navigationView);
                 WelcomeActivity.startYourself(this);
                 return true;
             case R.id.action_feedback:
-                drawerLayout.closeDrawer(navigationView);
 
                 String technicalInfo = commonsLogSender.getExtraInfo();
 
@@ -211,16 +153,13 @@ public abstract class NavigationBaseActivity extends BaseActivity
                         .show();
                 return true;
             case R.id.action_explore:
-                drawerLayout.closeDrawer(navigationView);
                 ExploreActivity.startYourself(this);
                 return true;
             case R.id.action_bookmarks:
-                drawerLayout.closeDrawer(navigationView);
                 BookmarksActivity.startYourself(this);
                 return true;
 
             case R.id.action_review:
-                drawerLayout.closeDrawer(navigationView);
                 ReviewActivity.startYourself(this, getString(R.string.title_activity_review));
                 return true;
             default:
@@ -244,7 +183,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
     public static <T> void startActivityWithFlags(Context context, Class<T> cls, int... flags) {
         Intent intent = new Intent(context, cls);
-        for (int flag: flags) {
+        for (int flag : flags) {
             intent.addFlags(flag);
         }
         context.startActivity(intent);
@@ -257,7 +196,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if ((intent.getFlags() | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT) > 0) {
-            isRestoredToTop  = true;
+            isRestoredToTop = true;
         }
     }
 
@@ -277,23 +216,19 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
     /**
      * Handles visibility of navigation base toolbar
+     *
      * @param show : Used to handle visibility of toolbar
      */
-    public void setNavigationBaseToolbarVisibility(boolean show){
-        if (show){
+    public void setNavigationBaseToolbarVisibility(boolean show) {
+        if (show) {
             toolbar.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             toolbar.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        super.onBackPressed();
     }
 }

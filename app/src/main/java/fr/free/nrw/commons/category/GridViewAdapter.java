@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -23,15 +24,18 @@ import fr.free.nrw.commons.R;
 
 public class GridViewAdapter extends ArrayAdapter {
     private List<Media> data;
+    private boolean showSecondaryViews;
 
-    public GridViewAdapter(Context context, int layoutResourceId, List<Media> data) {
+    public GridViewAdapter(Context context, int layoutResourceId, List<Media> data, boolean showSecondaryViews) {
         super(context, layoutResourceId, data);
         this.data = data;
+        this.showSecondaryViews = showSecondaryViews;
     }
 
     /**
      * Adds more item to the list
      * Its triggered on scrolling down in the list
+     *
      * @param images
      */
     public void addItems(List<Media> images) {
@@ -45,9 +49,10 @@ public class GridViewAdapter extends ArrayAdapter {
     /**
      * Check the first item in the new list with old list and returns true if they are same
      * Its triggered on successful response of the fetch images API.
+     *
      * @param images
      */
-    public boolean containsAll(List<Media> images){
+    public boolean containsAll(List<Media> images) {
         if (images == null || images.isEmpty()) {
             return false;
         }
@@ -70,6 +75,7 @@ public class GridViewAdapter extends ArrayAdapter {
 
     /**
      * Sets up the UI for the category image item
+     *
      * @param position
      * @param convertView
      * @param parent
@@ -86,14 +92,20 @@ public class GridViewAdapter extends ArrayAdapter {
         SimpleDraweeView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
         TextView author = convertView.findViewById(R.id.categoryImageAuthor);
+        ImageView favoriteImage = convertView.findViewById(R.id.favorite);
+        ImageView downloadImage = convertView.findViewById(R.id.download);
+        favoriteImage.setVisibility(showSecondaryViews ? View.VISIBLE : View.GONE);
+        downloadImage.setVisibility(showSecondaryViews ? View.VISIBLE : View.GONE);
         fileName.setText(item.getDisplayTitle());
         setAuthorView(item, author);
         imageView.setImageURI(item.getThumbUrl());
+
         return convertView;
     }
 
     /**
      * Shows author information if its present
+     *
      * @param item
      * @param author
      */

@@ -1,30 +1,19 @@
 package fr.free.nrw.commons.contributions;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
-import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
@@ -32,10 +21,10 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.nearby.NearbyFragment;
-import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.navtab.NavTabFragmentPagerAdapter;
+import fr.free.nrw.commons.navtab.NavTabLayout;
 import fr.free.nrw.commons.notification.Notification;
-import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.upload.UploadService;
@@ -47,15 +36,20 @@ import timber.log.Timber;
 import static android.content.ContentResolver.requestSync;
 import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
 
-public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener , AdapterView.OnItemClickListener{
 
     @Inject
     SessionManager sessionManager;
-    @Inject ContributionController controller;
-    @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
+    @Inject
+    ContributionController controller;
     @BindView(R.id.pager)
     public UnswipableViewPager viewPager;
+    @BindView(R.id.fragment_main_nav_tab_layout)
+    NavTabLayout tabLayout;
+    private MediaDetailPagerFragment mediaDetails;
+
+
+
     @Inject
     public LocationServiceManager locationManager;
     @Inject
@@ -67,12 +61,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     public Intent uploadServiceIntent;
     public boolean isAuthCookieAcquired = false;
 
-    public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
     public final int CONTRIBUTIONS_TAB_POSITION = 0;
-    public final int NEARBY_TAB_POSITION = 1;
 
-    public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
-    private Menu menu;
 
     private boolean onOrientationChanged = false;
 
@@ -81,15 +71,15 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contributions);
+        setContentView(R.layout.main);
         ButterKnife.bind(this);
 
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
+        setUpPager();
 
-
-        if (savedInstanceState != null ) {
+        if (savedInstanceState != null) {
             onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
 
             //If nearby map was visible, call on Tab Selected to call all nearby operations
@@ -98,6 +88,17 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             }*/
         }
     }
+
+    private void setUpPager() {
+        viewPager.setAdapter(new NavTabFragmentPagerAdapter(getSupportFragmentManager()));
+        viewPager.setOffscreenPageLimit(2);
+        tabLayout.setOnNavigationItemSelectedListener(item -> {
+            viewPager.setCurrentItem(item.getOrder());
+            return true;
+        });
+    }
+
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -113,126 +114,13 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
 
-        addTabsAndFragments();
+        //Todo: after needs to happen at addTabsAndFragments();
         isAuthCookieAcquired = true;
-        if (contributionsActivityPagerAdapter.getItem(0) != null) {
+        /*if (contributionsActivityPagerAdapter.getItem(0) != null) {
             ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired(uploadServiceIntent);
-        }
+        }*/
     }
 
-    private void addTabsAndFragments() {
-        contributionsActivityPagerAdapter = new ContributionsActivityPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(contributionsActivityPagerAdapter);
-
-        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.contributions_fragment)));
-        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.nearby_fragment)));
-
-        // Set custom view to add nearby info icon next to text
-        View nearbyTabLinearLayout = LayoutInflater.from(this).inflate(R.layout.custom_nearby_tab_layout, null);
-        ImageView nearbyInfo = nearbyTabLinearLayout.findViewById(R.id.nearby_info_image);
-        tabLayout.getTabAt(1).setCustomView(nearbyTabLinearLayout);
-
-        nearbyInfo.setOnClickListener(view ->
-                new AlertDialog.Builder(MainActivity.this).setTitle(R.string.title_activity_nearby).setMessage(R.string.showcase_view_whole_nearby_activity)
-                        .setCancelable(true)
-                        .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                        .create()
-                        .show()
-        );
-
-        if (uploadServiceIntent != null) {
-            // If auth cookie already acquired notify contrib fragment so that it san operate auth required actions
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
-        }
-        setTabAndViewPagerSynchronisation();
-    }
-
-    /**
-     * Adds number of uploads next to tab text "Contributions" then it will look like
-     * "Contributions (NUMBER)"
-     * @param uploadCount
-     */
-    public void setNumOfUploads(int uploadCount) {
-        tabLayout.getTabAt(0).setText(getResources().getString(R.string.contributions_fragment) +" "+ getResources()
-                .getQuantityString(R.plurals.contributions_subtitle,
-                        uploadCount, uploadCount));
-    }
-
-    /**
-     * Normally tab layout and view pager has no relation, which means when you swipe view pager
-     * tab won't change and vice versa. So we have to notify each of them.
-     */
-    private void setTabAndViewPagerSynchronisation() {
-        //viewPager.canScrollHorizontally(false);
-        viewPager.setFocusableInTouchMode(true);
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                switch (position) {
-                    case CONTRIBUTIONS_TAB_POSITION:
-                        Timber.d("Contributions tab selected");
-                        tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
-                        isContributionsFragmentVisible = true;
-                        updateMenuItem();
-
-                        break;
-                    case NEARBY_TAB_POSITION:
-                        Timber.d("Nearby tab selected");
-                        tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
-                        isContributionsFragmentVisible = false;
-                        updateMenuItem();
-                        // Do all permission and GPS related tasks on tab selected, not on create
-                        ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
-                        break;
-                    default:
-                        tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-    }
-
-    public void hideTabs() {
-        changeDrawerIconToBackButton();
-        if (tabLayout != null) {
-            tabLayout.setVisibility(View.GONE);
-        }
-    }
-
-    public void showTabs() {
-        changeDrawerIconToDefault();
-        if (tabLayout != null) {
-            tabLayout.setVisibility(View.VISIBLE);
-        }
-    }
 
     @Override
     protected void onAuthFailure() {
@@ -241,7 +129,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       /* Todo: after stability
+       DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         String contributionsFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 0);
         String nearbyFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 1);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -278,9 +167,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 // Otherwise go back to contributions fragment
                 viewPager.setCurrentItem(0);
             }
-        } else {
+        } else {*/
             super.onBackPressed();
-        }
+
     }
 
     @Override
@@ -288,7 +177,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         initBackButton();
     }
 
-    @Override
+   /* Todo: after set up menu
+   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
@@ -300,10 +190,10 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             NotificationActivity.startYourself(MainActivity.this, "unread");
         });
         this.menu = menu;
-        updateMenuItem();
+        //updateMenuItem();
         setNotificationCount();
         return true;
-    }
+    }*/
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
@@ -315,19 +205,23 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     }
 
     private void initNotificationViews(List<Notification> notificationList) {
-        Timber.d("Number of notifications is %d", notificationList.size());
+     /*   Timber.d("Number of notifications is %d", notificationList.size());
         if (notificationList.isEmpty()) {
             notificationCount.setVisibility(View.GONE);
         } else {
-            notificationCount.setVisibility(View.VISIBLE);
+            //notificationCount.setVisibility(View.VISIBLE);
             notificationCount.setText(String.valueOf(notificationList.size()));
-        }
+        }*/
     }
+
+    /*Todo: after set up menu
+     */
 
     /**
      * Responsible with displaying required menu items according to displayed fragment.
      * Notifications icon when contributions list is visible, list sheet icon when nearby is visible
-     */
+     *//*
+
     private void updateMenuItem() {
         if (menu != null) {
             if (isContributionsFragmentVisible) {
@@ -360,110 +254,10 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    private boolean deviceHasCamera() {
-        PackageManager pm = getPackageManager();
-        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
-                pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
-    }
-
-    public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
-        FragmentManager fragmentManager;
-        private boolean isContributionsListFragment = true; // to know what to put in first tab, Contributions of Media Details
-
-
-        public ContributionsActivityPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
-            this.fragmentManager = fragmentManager;
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-
-        /*
-         * Do not use getItem method to access fragments on pager adapter. User reference variables
-         * instead.
-         * */
-        @Override
-        public Fragment getItem(int position) {
-            switch (position){
-                case 0:
-                    ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
-                    if (retainedContributionsFragment != null) {
-                        //  ContributionsFragment is parent of ContributionsListFragment and
-                        //  MediaDetailsFragment. If below decides which child will be visible.
-                        if (isContributionsListFragment) {
-                            retainedContributionsFragment.setContributionsListFragment();
-                        } else {
-                            retainedContributionsFragment.setMediaDetailPagerFragment();
-                        }
-                        return retainedContributionsFragment;
-                    } else {
-                        // If we reach here, retainedContributionsFragment is null
-                        return new ContributionsFragment();
-
-                    }
-
-                case 1:
-                    NearbyFragment retainedNearbyFragment = getNearbyFragment(1);
-                    if (retainedNearbyFragment != null) {
-                        return retainedNearbyFragment;
-                    } else {
-                        // If we reach here, retainedNearbyFragment is null
-                        return new NearbyFragment();
-                    }
-                default:
-                    return null;
-            }
-        }
-
-        /**
-         * Generates fragment tag with makeFragmentName method to get retained contributions fragment
-         * @param position index of tabs, in our case 0 or 1
-         * @return
-         */
-        private ContributionsFragment getContributionsFragment(int position) {
-            String tag = makeFragmentName(R.id.pager, position);
-            return (ContributionsFragment)fragmentManager.findFragmentByTag(tag);
-        }
-
-        /**
-         * Generates fragment tag with makeFragmentName method to get retained nearby fragment
-         * @param position index of tabs, in our case 0 or 1
-         * @return
-         */
-        private NearbyFragment getNearbyFragment(int position) {
-            String tag = makeFragmentName(R.id.pager, position);
-            return (NearbyFragment)fragmentManager.findFragmentByTag(tag);
-        }
-
-        /**
-         * A simple hack to use retained fragment when getID is called explicitly, if we don't use
-         * this method, a new fragment will be initialized on each explicit calls of getID
-         * @param viewId id of view pager
-         * @param index index of tabs, in our case 0 or 1
-         * @return
-         */
-        public String makeFragmentName(int viewId, int index) {
-            return "android:switcher:" + viewId + ":" + index;
-        }
-
-        /**
-         * In first tab we can have ContributionsFragment or Media details fragment. This method
-         * is responsible to update related boolean
-         * @param isContributionsListFragment true when contribution fragment should be visible, false
-         *                                means user clicked to MediaDetails
-         */
-        private void updateContributionFragmentTabContent(boolean isContributionsListFragment) {
-            this.isContributionsListFragment = isContributionsListFragment;
-        }
-    }
-
+*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Timber.d(data!=null?data.toString():"onActivityResult data is null");
+        Timber.d(data != null ? data.toString() : "onActivityResult data is null");
         super.onActivityResult(requestCode, resultCode, data);
         controller.handleActivityResult(this, requestCode, resultCode, data);
     }
@@ -473,8 +267,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case LOCATION_REQUEST: {
+                //Todo after set this right
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
+               /* if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission given");
                     ((ContributionsFragment)contributionsActivityPagerAdapter
@@ -486,7 +281,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
                         // TODO: If contrib fragment is visible and location permission is not given, display permission request button
                     }
-                }
+                }*/
                 return;
             }
 
@@ -494,6 +289,21 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 return;
         }
     }
+
+    public void hideTabs() {
+        changeDrawerIconToBackButton();
+        if (tabLayout != null) {
+            tabLayout.setVisibility(View.GONE);
+        }
+    }
+
+    public void showTabs() {
+        changeDrawerIconToDefault();
+        if (tabLayout != null) {
+            tabLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     @Override
     protected void onResume() {
@@ -509,5 +319,30 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         // Remove ourself from hashmap to prevent memory leaks
         locationManager = null;
         super.onDestroy();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+        if (mediaDetails == null || !mediaDetails.isVisible()) {
+            // set isFeaturedImage true for featured images, to include author field on media detail
+            mediaDetails = new MediaDetailPagerFragment(false, true);
+            FragmentManager supportFragmentManager = getSupportFragmentManager();
+            supportFragmentManager
+                    .beginTransaction()
+                    .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+                    .add(R.id.fragmentContainer, mediaDetails)
+                    .addToBackStack(null)
+                    .commit();
+            // Reason for using hide, add instead of replace is to maintain scroll position after
+            // coming back to the search activity. See https://github.com/commons-app/apps-android-commons/issues/1631
+            // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550            supportFragmentManager.executePendingTransactions();
+        }
+        mediaDetails.showImage(i);
+        forceInitBackButton();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
