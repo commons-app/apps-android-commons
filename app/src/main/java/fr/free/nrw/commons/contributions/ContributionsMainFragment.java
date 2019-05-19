@@ -155,7 +155,6 @@ public class ContributionsMainFragment extends CommonsDaggerSupportFragment impl
     }*/
 
     private void addTabsAndFragments() {
-        Log.e("####","here");
         contributionsActivityPagerAdapter = new ContributionsActivityPagerAdapter(requireActivity().getSupportFragmentManager());
         viewPager.setAdapter(contributionsActivityPagerAdapter);
 
