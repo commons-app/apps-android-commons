@@ -470,28 +470,22 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case LOCATION_REQUEST: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Location permission given");
-                    ((ContributionsFragment)contributionsActivityPagerAdapter
-                            .getItem(0)).locationManager.registerLocationManager();
-                } else {
-                    // If nearby fragment is visible and location permission is not given, send user back to contrib fragment
-                    if (!isContributionsFragmentVisible) {
-                        viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION);
+                                           String[] permissions, int[] grantResults) {
+        if (requestCode == LOCATION_REQUEST) {
+            // If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Timber.d("Location permission given");
+                ((ContributionsFragment)contributionsActivityPagerAdapter
+                        .getItem(0)).locationManager.registerLocationManager();
+            } else {
+                // If nearby fragment is visible and location permission is not given, send user back to contrib fragment
+                if (!isContributionsFragmentVisible) {
+                    viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION);
 
-                        // TODO: If contrib fragment is visible and location permission is not given, display permission request button
-                    }
+                    // TODO: If contrib fragment is visible and location permission is not given, display permission request button
                 }
-                return;
             }
-
-            default:
-                return;
         }
     }
 
