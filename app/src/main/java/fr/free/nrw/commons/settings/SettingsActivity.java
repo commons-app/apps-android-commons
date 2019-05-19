@@ -27,22 +27,22 @@ public class SettingsActivity extends NavigationBaseActivity {
         initDrawer();
     }
 
-    // Get an action bar
-    /**
-     * takes care of actions taken after the creation has happened
-     * @param savedInstanceState the saved state
-     */
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        if (settingsDelegate == null) {
-            settingsDelegate = AppCompatDelegate.create(this, null);
-        }
-        settingsDelegate.onPostCreate(savedInstanceState);
-
-        //Get an up button
-        //settingsDelegate.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+//    // Get an action bar
+//    /**
+//     * takes care of actions taken after the creation has happened
+//     * @param savedInstanceState the saved state
+//     */
+//    @Override
+//    protected void onPostCreate(Bundle savedInstanceState) {
+//        super.onPostCreate(savedInstanceState);
+//        if (settingsDelegate == null) {
+//            settingsDelegate = AppCompatDelegate.create(this, null);
+//        }
+//        settingsDelegate.onPostCreate(savedInstanceState);
+//
+//        //Get an up button
+//        //settingsDelegate.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//    }
     
     /**
      * Handle action-bar clicks

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import org.wikipedia.model.EnumCode;
 import org.wikipedia.model.EnumCodeMap;
 
+import fr.free.nrw.commons.MoreFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.BookmarksFragment;
 import fr.free.nrw.commons.contributions.ContributionsMainFragment;
@@ -39,7 +40,7 @@ public enum NavTab implements EnumCode {
         @NonNull
         @Override
         public Fragment newInstance() {
-            return ContributionsMainFragment.newInstance();
+            return MoreFragment.newInstance();
         }
     };
 
