@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
@@ -21,11 +22,14 @@ public class NearbyParentFragmentPresenter
     LocationServiceManager locationManager;
 
     private NearbyParentFragmentContract.View nearbyParentFragmentView;
+    private NearbyMapContract.View nearbyMapFragmentView;
     private boolean isNearbyLocked;
     private LatLng curLatLng;
 
-    public NearbyParentFragmentPresenter(NearbyParentFragmentContract.View nearbyParentFragmentView) {
+    public NearbyParentFragmentPresenter(NearbyParentFragmentContract.View nearbyParentFragmentView,
+                                         NearbyMapContract.View nearbyMapFragmentView) {
         this.nearbyParentFragmentView = nearbyParentFragmentView;
+        this.nearbyMapFragmentView = nearbyMapFragmentView;
     }
 
     @Override

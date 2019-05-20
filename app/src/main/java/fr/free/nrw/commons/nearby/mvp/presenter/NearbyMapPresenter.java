@@ -1,8 +1,15 @@
 package fr.free.nrw.commons.nearby.mvp.presenter;
 
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
+import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 
 public class NearbyMapPresenter implements NearbyMapContract.UserActions {
+    NearbyMapContract.View nearbyMapFragmentView;
+
+    void NearbyMapPresenter(NearbyMapContract.View nearbyMapFragmentView) {
+        this.nearbyMapFragmentView = nearbyMapFragmentView;
+    }
+
     @Override
     public void searchThisArea() {
 
