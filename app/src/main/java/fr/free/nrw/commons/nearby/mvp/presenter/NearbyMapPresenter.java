@@ -9,8 +9,33 @@ public class NearbyMapPresenter implements NearbyMapContract.UserActions {
     }
 
     @Override
+    public void storeSharedPrefs() {
+
+    }
+
+    @Override
     public void recenterMap() {
 
+    }
+
+    @Override
+    public void updateMapMarkers() {
+
+    }
+
+    @Override
+    public void updateMapToTrackPosition() {
+
+    }
+
+    @Override
+    public void getBundleContent() {
+
+    }
+
+    @Override
+    public boolean addMapMovementListener() {
+        return false;
     }
 
     @Override
