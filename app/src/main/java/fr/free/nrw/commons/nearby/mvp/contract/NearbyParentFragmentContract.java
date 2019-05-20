@@ -23,4 +23,8 @@ public interface NearbyParentFragmentContract {
         void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType);
         void lockNearby(boolean isNearbyLocked);
     }
+    
+    interface ViewsAreReadyCallback {
+        void nearbyFragmentAndMapViewReady();
+    }
 }

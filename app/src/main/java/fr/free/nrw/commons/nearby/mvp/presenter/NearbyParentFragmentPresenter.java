@@ -17,7 +17,8 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
                     WikidataEditListener.WikidataP18EditListener,
-                    LocationUpdateListener {
+                    LocationUpdateListener,
+                    NearbyParentFragmentContract.ViewsAreReadyCallback{
     @Inject
     LocationServiceManager locationManager;
 
@@ -26,10 +27,14 @@ public class NearbyParentFragmentPresenter
     private boolean isNearbyLocked;
     private LatLng curLatLng;
 
+    boolean nearbyViewsAreReady;
+    boolean onTabSelected;
+
     public NearbyParentFragmentPresenter(NearbyParentFragmentContract.View nearbyParentFragmentView,
                                          NearbyMapContract.View nearbyMapFragmentView) {
         this.nearbyParentFragmentView = nearbyParentFragmentView;
         this.nearbyMapFragmentView = nearbyMapFragmentView;
+        nearbyMapFragmentView.setViewsAreReady(this);
     }
 
     @Override
@@ -37,9 +42,28 @@ public class NearbyParentFragmentPresenter
 
     }
 
+    /**
+     * -To initialize nearby operations both views should be ready and tab is selected.
+     * Initializes nearby operations if nearby views are ready
+     */
     @Override
     public void onTabSelected() {
-        initializeNearbyOperations();
+        onTabSelected = true;
+        if (nearbyViewsAreReady) {
+            initializeNearbyOperations();
+        }
+    }
+
+    /**
+     * -To initialize nearby operations both views should be ready and tab is selected.
+     * Initializes nearby operations if tab selected, otherwise just sets nearby views are ready
+     */
+    @Override
+    public void nearbyFragmentAndMapViewReady() {
+        nearbyViewsAreReady = true;
+        if (onTabSelected) {
+            initializeNearbyOperations();
+        }
     }
 
     /**
@@ -48,10 +72,8 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void initializeNearbyOperations() {
-        locationManager.addLocationListener(this);
-        nearbyParentFragmentView.registerLocationUpdates(locationManager);
-
-
+            locationManager.addLocationListener(this);
+            nearbyParentFragmentView.registerLocationUpdates(locationManager);
     }
 
     /**
@@ -102,17 +124,17 @@ public class NearbyParentFragmentPresenter
             return;
         }
 
+        /**
+         * Significant changed - Markers and current location will be updated together
+         * Slightly changed - Only current position marker will be updated
+         */
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(MAP_UPDATED)) {
-
+            nearbyMapFragmentView.updateMapMarkers();
+            nearbyMapFragmentView.updateMapToTrackPosition();
+        } else {
+            nearbyMapFragmentView.updateMapToTrackPosition();
         }
-
-
-
-
-
-
-
     }
 
     @Override
@@ -134,4 +156,5 @@ public class NearbyParentFragmentPresenter
     public void onLocationChangedMedium(LatLng latLng) {
 
     }
+
 }

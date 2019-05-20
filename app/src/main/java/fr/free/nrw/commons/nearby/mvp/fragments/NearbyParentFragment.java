@@ -27,8 +27,6 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyController;
-import fr.free.nrw.commons.nearby.NearbyListFragment;
-import fr.free.nrw.commons.nearby.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -68,8 +66,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private NearbyParentFragmentContract.UserActions userActions;
 
-    private fr.free.nrw.commons.nearby.NearbyMapFragment nearbyMapFragment;
-    private fr.free.nrw.commons.nearby.NearbyListFragment nearbyListFragment;
+    private NearbyMapFragment nearbyMapFragment;
+    private NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
     private NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
@@ -78,7 +76,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter(this);
     }
 
     @Nullable
@@ -93,6 +90,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onResume() {
         super.onResume();
         resumeFragment();
+        nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter(this, nearbyMapFragment);
     }
 
     /**

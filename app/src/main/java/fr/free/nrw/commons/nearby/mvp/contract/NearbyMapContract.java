@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.nearby.mvp.contract;
 
 import android.net.Uri;
+import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mapbox.mapboxsdk.maps.MapView;
 
 import fr.free.nrw.commons.nearby.Place;
 
@@ -21,7 +23,7 @@ public interface NearbyMapContract {
         void updateMapMarkers();
         void updateMapToTrackPosition();
         void setListeners();
-        void setupMapView();
+        MapView setupMapView(Bundle savedInstanceState);
         void addCurrentLocationMarker();
         void setSearchThisAreaButtonVisibility(boolean visible);
         boolean isCurrentLocationMarkerVisible();
@@ -38,6 +40,7 @@ public interface NearbyMapContract {
         void animateFABs(boolean isFabOpen);
         void closeFabs ( boolean isFabOpen);
         void updateMarker(boolean isBookmarked, Place place);
+        void setViewsAreReady(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback);
     }
 
     interface UserActions extends NearbyElementContract.UserActions {
