@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.nearby.mvp.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -29,6 +33,7 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
@@ -72,6 +77,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
     private NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
 
+    // Variables for adding network broadcast receiver.
+    private Snackbar snackbar;
+    private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+    private BroadcastReceiver broadcastReceiver;
+    private boolean isNetworkErrorOccurred = false;
+    public View view;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +96,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         ButterKnife.bind(this, view);
+        this.view = view;
         return view;
     }
 
@@ -292,5 +306,50 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public boolean isNetworkConnectionEstablished() {
         return NetworkUtils.isInternetConnectionEstablished(getActivity());
+    }
+
+    /**
+     * Adds network broadcast receiver to recognize connection established
+     */
+    @Override
+    public void addNetworkBroadcastReceiver() {
+        if (!FragmentUtils.isFragmentUIActive(this)) {
+            return;
+        }
+
+        if (broadcastReceiver != null) {
+            return;
+        }
+
+        IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (getActivity() != null) {
+                    if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
+                        if (isNetworkErrorOccurred) {
+                            nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
+                            isNetworkErrorOccurred = false;
+                        }
+
+                        if (snackbar != null) {
+                            snackbar.dismiss();
+                            snackbar = null;
+                        }
+                    } else {
+                        if (snackbar == null) {
+                            snackbar = Snackbar.make(view, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
+                            // TODO make search this area button invisible
+                        }
+
+                        isNetworkErrorOccurred = true;
+                        snackbar.show();
+                    }
+                }
+            }
+        };
+
+        getActivity().registerReceiver(broadcastReceiver, intentFilter);
     }
 }

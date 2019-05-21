@@ -12,7 +12,6 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED;
 
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
@@ -72,8 +71,11 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void initializeNearbyOperations() {
-            locationManager.addLocationListener(this);
-            nearbyParentFragmentView.registerLocationUpdates(locationManager);
+        locationManager.addLocationListener(this);
+        nearbyParentFragmentView.registerLocationUpdates(locationManager);
+        lockNearby(false);
+        nearbyParentFragmentView.checkGps(locationManager);
+        nearbyParentFragmentView.addNetworkBroadcastReceiver();
     }
 
     /**

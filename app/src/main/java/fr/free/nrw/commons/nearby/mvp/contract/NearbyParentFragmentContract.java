@@ -14,6 +14,7 @@ public interface NearbyParentFragmentContract {
         void checkGps(LocationServiceManager locationServiceManager);
         void checkLocationPermission(LocationServiceManager locationServiceManager);
         boolean isNetworkConnectionEstablished();
+        void addNetworkBroadcastReceiver();
     }
 
     interface UserActions {
