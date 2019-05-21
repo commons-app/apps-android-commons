@@ -15,6 +15,8 @@ public interface NearbyParentFragmentContract {
         void checkLocationPermission(LocationServiceManager locationServiceManager);
         boolean isNetworkConnectionEstablished();
         void addNetworkBroadcastReceiver();
+        void listOptionMenuItemClicked();
+        boolean isBottomSheetExpanded();
     }
 
     interface UserActions {

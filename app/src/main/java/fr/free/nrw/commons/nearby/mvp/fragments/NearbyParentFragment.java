@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -75,7 +77,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
-    private NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
+    public NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
 
     // Variables for adding network broadcast receiver.
     private Snackbar snackbar;
@@ -83,6 +85,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private BroadcastReceiver broadcastReceiver;
     private boolean isNetworkErrorOccurred = false;
     public View view;
+
+    // Variables for bottom sheet behaviour management
+    private BottomSheetBehavior bottomSheetBehavior; // Behavior for list bottom sheet
+    private BottomSheetBehavior bottomSheetBehaviorForDetails; // Behavior for details bottom sheet
 
 
     @Override
@@ -105,6 +111,19 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         super.onResume();
         resumeFragment();
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter(this, nearbyMapFragment);
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        wikidataEditListener.setAuthenticationStateListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        wikidataEditListener.setAuthenticationStateListener(null);
     }
 
     /**
@@ -132,17 +151,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-
+        Log.d("deneme","location changed significantly");
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-
+        Log.d("deneme","location changed significantly");
     }
 
     @Override
     public void onLocationChangedMedium(LatLng latLng) {
-
+        Log.d("deneme","location changed significantly");
     }
 
     @Override
@@ -351,5 +370,23 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         };
 
         getActivity().registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    /**
+     * Hide or expand bottom sheet according to states of all sheets
+     */
+    @Override
+    public void listOptionMenuItemClicked() {
+        if(bottomSheetBehavior.getState()== BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
+            bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }else if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+    }
+
+    @Override
+    public boolean isBottomSheetExpanded() {
+        return bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
     }
 }
