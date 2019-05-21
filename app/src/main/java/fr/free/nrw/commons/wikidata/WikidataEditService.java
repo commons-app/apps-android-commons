@@ -64,6 +64,7 @@ public class WikidataEditService {
         }
 
         editWikidataProperty(wikidataEntityId, fileName);
+        editWikidataPropertyP180(wikidataEntityId, fileName);
     }
 
     /**
@@ -87,6 +88,46 @@ public class WikidataEditService {
                     Timber.e(throwable, "Error occurred while making claim");
                     ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
+    }
+
+    /**
+     * Edits the wikidata entity by adding the P180 property to it.
+     * Adding the P180 edit requires calling the wikidata API to create a claim against the entity
+     *
+     * @param wikidataEntityId
+     * @param fileName
+     */
+    @SuppressLint("CheckResult")
+    private void editWikidataPropertyP180(String wikidataEntityId, String fileName) {
+        Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(fileEntityId -> {
+                    if (fileEntityId != null) {
+                        addPropertyP180(wikidataEntityId, fileEntityId);
+                        Timber.d("EntityId for image was receive successfully");
+                    } else {
+                        Timber.d("Error acquiring EntityId for image");
+                    }
+                }, throwable -> Timber.e(throwable, "Error occurred while adding tag to the edit"));
+    }
+
+    @SuppressLint("CheckResult")
+    private void addPropertyP180(String wikidataEntityId, String fileEntityId) {
+        Observable.fromCallable(() -> mediaWikiApi.wikidataEditEntity(wikidataEntityId, fileEntityId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    if (result != null) {
+                        Timber.d("Property P180 was added successfully");
+                    } else {
+                        Timber.d("Error adding property P180");
+                    }
+                }, throwable -> Timber.e(throwable, "Error occurred while adding tag to the edit"));
     }
 
     private void handleClaimResult(String wikidataEntityId, String revisionId) {
