@@ -73,8 +73,11 @@ public class NearbyParentFragmentPresenter
     public void initializeNearbyOperations() {
         locationManager.addLocationListener(this);
         nearbyParentFragmentView.registerLocationUpdates(locationManager);
+        // Nearby buttons should be active, they should be deactive only during update
         lockNearby(false);
+        //This will start a consequence to check GPS depending on different API
         nearbyParentFragmentView.checkGps(locationManager);
+        //We will know when we went offline and online again
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
     }
 
