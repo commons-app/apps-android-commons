@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
@@ -70,6 +71,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     WikidataEditListener wikidataEditListener;
     @Inject
     Gson gson;
+    @Inject
+    LocationServiceManager locationManager;
 
     private NearbyParentFragmentContract.UserActions userActions;
 
@@ -95,6 +98,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        Log.d("deneme","onCreate");
+
     }
 
     @Nullable
@@ -103,6 +108,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         ButterKnife.bind(this, view);
         this.view = view;
+        Log.d("deneme","onCreateView");
         return view;
     }
 
@@ -118,7 +124,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * it is attached.
      */
     public void childMapFragmentAttached() {
-        nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter(this, nearbyMapFragment);
+        Log.d("deneme","childMapFragmentAttached");
+        nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
+                                (this, nearbyMapFragment, locationManager);
     }
 
 
@@ -138,6 +146,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Resume fragments if they exists
      */
     private void resumeFragment() {
+        Log.d("deneme","resumeFragment");
         // Find the retained fragment on activity restarts
         nearbyMapFragment = getMapFragment();
         nearbyListFragment = getListFragment();
@@ -147,7 +156,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Returns the map fragment added to child fragment manager previously, if exists.
      */
     private NearbyMapFragment getMapFragment() {
-        return (NearbyMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
+        NearbyMapFragment existingFragment = (NearbyMapFragment) getChildFragmentManager()
+                                                    .findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
+        if (existingFragment == null) {
+            existingFragment = setMapFragment();
+        }
+        return existingFragment;
+    }
+
+    private NearbyMapFragment setMapFragment() {
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        NearbyMapFragment nearbyMapFragment = new NearbyMapFragment();
+        fragmentTransaction.replace(R.id.container, nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT);
+        fragmentTransaction.commitAllowingStateLoss();
+        return nearbyMapFragment;
     }
 
     /**

@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.nearby.mvp.presenter;
 
-import javax.inject.Inject;
+import android.util.Log;
 
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -18,8 +18,7 @@ public class NearbyParentFragmentPresenter
                     WikidataEditListener.WikidataP18EditListener,
                     LocationUpdateListener,
                     NearbyParentFragmentContract.ViewsAreReadyCallback{
-    @Inject
-    LocationServiceManager locationManager;
+
 
     private NearbyParentFragmentContract.View nearbyParentFragmentView;
     private NearbyMapContract.View nearbyMapFragmentView;
@@ -29,11 +28,15 @@ public class NearbyParentFragmentPresenter
     boolean nearbyViewsAreReady;
     boolean onTabSelected;
 
+    private LocationServiceManager locationServiceManager;
+
     public NearbyParentFragmentPresenter(NearbyParentFragmentContract.View nearbyParentFragmentView,
-                                         NearbyMapContract.View nearbyMapFragmentView) {
+                                         NearbyMapContract.View nearbyMapFragmentView,
+                                         LocationServiceManager locationServiceManager) {
         this.nearbyParentFragmentView = nearbyParentFragmentView;
         this.nearbyMapFragmentView = nearbyMapFragmentView;
         nearbyMapFragmentView.setViewsAreReady(this);
+        this.locationServiceManager = locationServiceManager;
     }
 
     @Override
@@ -47,6 +50,7 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void onTabSelected() {
+        Log.d("deneme","onTabSelected");
         onTabSelected = true;
         if (nearbyViewsAreReady) {
             initializeNearbyOperations();
@@ -59,6 +63,7 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void nearbyFragmentAndMapViewReady() {
+        Log.d("deneme","nearbyFragmentAndMapViewReady");
         nearbyViewsAreReady = true;
         if (onTabSelected) {
             initializeNearbyOperations();
@@ -71,12 +76,13 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void initializeNearbyOperations() {
-        locationManager.addLocationListener(this);
-        nearbyParentFragmentView.registerLocationUpdates(locationManager);
+        Log.d("deneme","initializeNearbyOperations");
+        locationServiceManager.addLocationListener(this);
+        nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
         // Nearby buttons should be active, they should be deactive only during update
         lockNearby(false);
         //This will start a consequence to check GPS depending on different API
-        nearbyParentFragmentView.checkGps(locationManager);
+        nearbyParentFragmentView.checkGps(locationServiceManager);
         //We will know when we went offline and online again
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
     }
@@ -90,11 +96,11 @@ public class NearbyParentFragmentPresenter
     public void lockNearby(boolean isNearbyLocked) {
         this.isNearbyLocked = isNearbyLocked;
         if (isNearbyLocked) {
-            locationManager.unregisterLocationManager();
-            locationManager.removeLocationListener(this);
+            locationServiceManager.unregisterLocationManager();
+            locationServiceManager.removeLocationListener(this);
         } else {
-            nearbyParentFragmentView.registerLocationUpdates(locationManager);
-            locationManager.addLocationListener(this);
+            nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
+            locationServiceManager.addLocationListener(this);
         }
     }
 
@@ -115,8 +121,8 @@ public class NearbyParentFragmentPresenter
             return;
         }
 
-        //nearbyParentFragmentView.registerLocationUpdates(locationManager);
-        LatLng lastLocation = locationManager.getLastLocation();
+        //nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
+        LatLng lastLocation = locationServiceManager.getLastLocation();
 
         if (curLatLng != null) {
             // TODO figure out what is happening here about orientation change

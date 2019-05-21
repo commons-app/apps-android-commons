@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby.mvp.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
@@ -68,7 +68,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     @Override
     public void initViews() {
         Timber.d("init views called");
-        View view = ((NearbyFragment)getParentFragment()).view;
+        View view = ((NearbyParentFragment)getParentFragment()).view;
         ButterKnife.bind(this, view);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
@@ -223,7 +223,9 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     @Override
     public void setViewsAreReady(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback) {
+        Log.d("deneme","setViewsAreReady");
         this.viewsAreReadyCallback = viewsAreReadyCallback;
+        this.viewsAreReadyCallback.nearbyFragmentAndMapViewReady();
     }
 
     @Override
