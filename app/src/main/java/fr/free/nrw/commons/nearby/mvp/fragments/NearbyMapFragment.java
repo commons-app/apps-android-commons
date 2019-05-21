@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby.mvp.fragments;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -102,6 +103,12 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
             return false;
         });
         viewsAreReadyCallback.nearbyFragmentAndMapViewReady();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ((NearbyParentFragment)getParentFragment()).childMapFragmentAttached();
     }
 
     @Override

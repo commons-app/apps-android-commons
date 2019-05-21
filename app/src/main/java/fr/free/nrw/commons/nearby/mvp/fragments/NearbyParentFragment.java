@@ -110,6 +110,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onResume() {
         super.onResume();
         resumeFragment();
+    }
+
+    /**
+     * Thanks to this method we make sure NearbyMapFragment is ready and attached. So that we can
+     * prevent NPE caused by null child fragment. This method is called from child fragment when
+     * it is attached.
+     */
+    public void childMapFragmentAttached() {
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter(this, nearbyMapFragment);
     }
 
