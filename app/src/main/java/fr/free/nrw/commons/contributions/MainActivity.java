@@ -408,7 +408,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     }
 
                 case 1:
-                    Log.d("deneme","case 1");
+                    Log.d("deneme1","case 1");
                     NearbyParentFragment retainedNearbyFragment = getNearbyFragment(1);
                     if (retainedNearbyFragment != null) {
                         return retainedNearbyFragment;
@@ -480,7 +480,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission given");
                     ((ContributionsFragment)contributionsActivityPagerAdapter
-                            .getItem(0)).locationManager.registerLocationManager();
+                            .getItem(0)).locationManager.registerLocationManager(this);
                 } else {
                     // If nearby fragment is visible and location permission is not given, send user back to contrib fragment
                     if (!isContributionsFragmentVisible) {

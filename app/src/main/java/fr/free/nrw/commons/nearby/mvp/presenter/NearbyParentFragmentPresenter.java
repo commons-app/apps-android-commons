@@ -50,7 +50,7 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void onTabSelected() {
-        Log.d("deneme","onTabSelected");
+        Log.d("deneme1","onTabSelected");
         onTabSelected = true;
         if (nearbyViewsAreReady) {
             initializeNearbyOperations();
@@ -63,7 +63,7 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void nearbyFragmentAndMapViewReady() {
-        Log.d("deneme","nearbyFragmentAndMapViewReady");
+        Log.d("deneme1","nearbyFragmentAndMapViewReady");
         nearbyViewsAreReady = true;
         if (onTabSelected) {
             initializeNearbyOperations();
@@ -76,9 +76,11 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void initializeNearbyOperations() {
-        Log.d("deneme","initializeNearbyOperations");
+        Log.d("deneme1","initializeNearbyOperations");
         locationServiceManager.addLocationListener(this);
         nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
+        Log.d("deneme1","initializeNearbyOperations2");
+
         // Nearby buttons should be active, they should be deactive only during update
         lockNearby(false);
         //This will start a consequence to check GPS depending on different API
@@ -111,6 +113,7 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType) {
+        Log.d("deneme1","updateMapAndList");
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns");
             return;
@@ -123,6 +126,7 @@ public class NearbyParentFragmentPresenter
 
         //nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
         LatLng lastLocation = locationServiceManager.getLastLocation();
+        Log.d("deneme1","locationServiceManager.getLastLocation():"+locationServiceManager.getLastLocation().toString());
 
         if (curLatLng != null) {
             // TODO figure out what is happening here about orientation change
@@ -155,17 +159,19 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
+        Log.d("deneme1","onLocationChangedSignificantly");
 
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
+        Log.d("deneme1","onLocationChangedSlightly");
 
     }
 
     @Override
     public void onLocationChangedMedium(LatLng latLng) {
-
+        Log.d("deneme1","onLocationChangedMedium");
     }
 
 }

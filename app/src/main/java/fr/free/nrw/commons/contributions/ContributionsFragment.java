@@ -359,7 +359,7 @@ public class ContributionsFragment
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Location permission granted, refreshing view");
                     // No need to display permission request button anymore
-                    locationManager.registerLocationManager();
+                    locationManager.registerLocationManager(getActivity());
                 } else {
                     if (store.getBoolean("displayLocationPermissionForCardView", true)) {
                         // Still ask for permission
@@ -535,7 +535,7 @@ public class ContributionsFragment
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted(requireContext())) {
                 nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-                locationManager.registerLocationManager();
+                locationManager.registerLocationManager(getActivity());
             } else {
                 nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
                 // If user didn't selected Don't ask again
@@ -553,7 +553,7 @@ public class ContributionsFragment
         } else {
             // If device is under Marshmallow, we already checked for GPS
             nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-            locationManager.registerLocationManager();
+            locationManager.registerLocationManager(getActivity());
         }
     }
 

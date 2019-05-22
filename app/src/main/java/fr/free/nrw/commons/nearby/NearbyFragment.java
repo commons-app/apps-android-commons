@@ -570,7 +570,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     private void registerLocationUpdates() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted(requireContext())) {
-                locationManager.registerLocationManager();
+                locationManager.registerLocationManager(getActivity());
             } else {
                 // Should we show an explanation?
                 if (locationManager.isPermissionExplanationRequired(getActivity())) {
@@ -593,7 +593,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
                 }
             }
         } else {
-            locationManager.registerLocationManager();
+            locationManager.registerLocationManager(getActivity());
         }
     }
 
