@@ -91,7 +91,7 @@
   <string name="menu_about">About</string>
   <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app. </string>
   <string name="trademarked_name" translatable="false">Wikimedia Commons</string>
-  <string name="about_improve">Create a new &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; for bug reports and suggestions.</string>
+  <string name="about_improve">Create a new &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; for bug reports and suggestions.</string>
   <string name="about_privacy_policy"><![CDATA[<u>Privacy policy</u>]]></string>
   <string name="about_credits"><![CDATA[<u>Credits</u>]]></string>
   <string name="title_activity_about">About</string>
@@ -497,9 +497,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_no_category">Oh, this is not even categorized!</string>
   <string name="review_category_explanation">This image is under %1$s categories.</string>
   <string name="review_spam_report_question">It is out of scope because it is</string>
-  <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">It is copyright violation because it is </string>
-  <string name="review_c_violation_report_problem">copyRightViolation</string>
     <string name="review_category_yes_button_text">No, mis-categorized</string>
     <string name="review_category_no_button_text">Seems fine</string>
     <string name="review_spam_yes_button_text">No, out of scope</string>
@@ -539,5 +537,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
   <string name="skip_image">SKIP THIS IMAGE</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
+  <string name="share_text">Upload photos to Wikimedia Commons on your phone Download the Commons app: %1$s</string>
+  <string name="share_via">Share app via...</string>
   <string name="image_info">Image Info</string>
 </resources>

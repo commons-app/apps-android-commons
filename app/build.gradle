@@ -15,7 +15,6 @@ dependencies {
 
     // Utils
     implementation 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
-    implementation 'commons-codec:commons-codec:1.10'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'in.yuvi:http.fluent:1.3'
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
@@ -78,14 +77,11 @@ dependencies {
     androidTestUtil 'androidx.test:orchestrator:1.1.1'
 
     // Debugging
-    implementation 'com.facebook.stetho:stetho:1.5.0'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY_VERSION"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY_VERSION"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY_VERSION"
 
     // Support libraries
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation "androidx.appcompat:appcompat:1.0.2"
     implementation "com.google.android.material:material:1.1.0-alpha04"
     implementation "androidx.browser:browser:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"

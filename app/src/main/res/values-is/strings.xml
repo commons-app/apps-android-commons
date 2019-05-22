@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Sveinn í Felli
 -->
 <resources>
@@ -92,7 +93,7 @@
   <string name="title_activity_review">Yfirlestur jafningja</string>
   <string name="menu_about">Um</string>
   <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \</string>
-  <string name="about_improve">Útbúðu nýjar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
+  <string name="about_improve">Útbúðu nýjar &lt;a href=\"%1$s\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
   <string name="about_privacy_policy">&lt;u&gt;Meðferð persónuupplýsinga&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Framlög&lt;/u&gt;</string>
   <string name="title_activity_about">Um</string>
@@ -431,7 +432,6 @@
   <string name="notsure">Ekki viss</string>
   <string name="review_category">Er þetta rétt flokkað?</string>
   <string name="review_spam">Kemur þetta umfjöllunarefninu við?</string>
-  <string name="review_spam_report_problem">ruslsending</string>
   <string name="review_c_violation_report_question">Það brýtur á móti höfundarrétti því það er</string>
   <string name="review_category_yes_button_text" fuzzy="true">NEI, RANGT FLOKKAÐ</string>
   <string name="review_category_no_button_text" fuzzy="true">LÍTUR VEL ÚT</string>

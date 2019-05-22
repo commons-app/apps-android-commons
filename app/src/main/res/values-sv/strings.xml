@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abbedabb
+* Abijeet Patro
 * Ainali
 * Jopparn
 * Liuxinyu970226
@@ -98,7 +99,7 @@
   <string name="title_activity_review">Granskning</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen är en app med öppen källkod som skapas och underhålls av frivilliga från Wikimedias gemenskap. Wikimedia Foundation är inte involverad i skapandet, utvecklingen eller underhållet av appen.</string>
-  <string name="about_improve">Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
+  <string name="about_improve">Skapa ett nytt &lt;a href=\"%1$s\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
   <string name="about_privacy_policy">&lt;u&gt;Integritetspolicy&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Erkännande&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>
@@ -476,9 +477,7 @@
   <string name="review_no_category">Oj, den är inte ens kategoriserad!</string>
   <string name="review_category_explanation">Denna bild finns i %1$s kategorier.</string>
   <string name="review_spam_report_question">Det är irrelevant eftersom det är</string>
-  <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">Den bryter mot upphovsrätten eftersom den är</string>
-  <string name="review_c_violation_report_problem">upphovsrättsbrott</string>
   <string name="review_category_yes_button_text">Nej, felkategoriserad</string>
   <string name="review_category_no_button_text">Verkar okej</string>
   <string name="review_spam_yes_button_text">Nej, irrelevant</string>
@@ -513,5 +512,7 @@
   <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
   <string name="skip_image">HOPPA ÖVER DENNA BILD</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Nedladdning misslyckades!! Vi kan inte ladda ned filen utan behörighet för extern lagring.</string>
+  <string name="share_text">Ladda upp foton till Wikimedia Commons på din telefon Ladda ned Commons-appen: %1$s</string>
+  <string name="share_via">Dela appen via...</string>
   <string name="image_info">Bildinfo</string>
 </resources>

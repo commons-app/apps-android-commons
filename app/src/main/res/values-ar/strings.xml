@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Ali1
 * Antime
 * Azouz.anis
@@ -102,7 +103,7 @@
   <string name="title_activity_review">استعراض النظراء</string>
   <string name="menu_about">حول</string>
   <string name="about_license">تطبيق ويكيميديا ​​كومنز تطبيق مفتوح المصدر تم إنشاؤه وصيانته من قبل المستفيدين والمتطوعين من مجتمع ويكيميديا، لا تشارك مؤسسة ويكيميديا ​​في إنشاء التطبيق أو تطويره أو صيانته.</string>
-  <string name="about_improve">أنشئ &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;مشكلة غيت هب&lt;/a&gt; جديدة لتقارير الأخطاء والاقتراحات.</string>
+  <string name="about_improve">أنشئ &lt;a href=\"%1$s\"&gt;مشكلة غيت هب&lt;/a&gt; جديدة لتقارير الأخطاء والاقتراحات.</string>
   <string name="about_privacy_policy">&lt;u&gt;Pسياسة الخصوصية&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;الإحالات&lt;/u&gt;</string>
   <string name="title_activity_about">حول</string>
@@ -480,9 +481,7 @@
   <string name="review_no_category">أوه، هذا ليس حتى تصنيفها!</string>
   <string name="review_category_explanation">هذه الصورة تحت %1$s تصنيفات.</string>
   <string name="review_spam_report_question">إنه خارج النطاق لأنه</string>
-  <string name="review_spam_report_problem">سخام</string>
   <string name="review_c_violation_report_question">إنه انتهاك لحقوق الطبع والنشر لأنه</string>
-  <string name="review_c_violation_report_problem">انتهاك حقوق الطبع والنشر</string>
   <string name="review_category_yes_button_text">لا، مصنف بشكل خاطئ</string>
   <string name="review_category_no_button_text">يبدو جيدا</string>
   <string name="review_spam_yes_button_text">لا، خارج النطاق</string>
@@ -517,5 +516,7 @@
   <string name="welcome_dont_upload_content_description">أمثلة على صور لعدم رفعها</string>
   <string name="skip_image">تخطي هذه الصورة</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">التنزيل فشل!!. لا يمكننا تنزيل الملف دون إذن تخزين خارجي.</string>
+  <string name="share_text">ارفع الصور لويكيميديا ​​كومنز على هاتفك قم بتنزيل تطبيق كومنز: %1$s</string>
+  <string name="share_via">مشاركة التطبيق عبر...</string>
   <string name="image_info">معلومات الصورة</string>
 </resources>

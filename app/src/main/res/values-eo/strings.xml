@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Metraduk
+* Mirin
 * Robin van der Vliet
 * Surfo
 * YvesNevelsteen
@@ -77,6 +78,10 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d alŝuto</item>
+    <item quantity="other">%1$d alŝutoj</item>
+  </plurals>
   <string name="categories_activity_title">Kategorioj</string>
   <string name="title_activity_settings">Agordoj</string>
   <string name="title_activity_signup">Registriĝi</string>
@@ -99,6 +104,11 @@
   <string name="use_previous">Uzi la antaŭan titolon/priskribon</string>
   <string name="allow_gps">Aŭtomate akiri la nunan pozicion</string>
   <string name="preference_theme">Nokta reĝimo</string>
+  <string name="preference_theme_summary">Uzi malluman etoson</string>
+  <string name="license_name_cc_by_sa_four">Atribuite-Samkondiĉe 4.0</string>
+  <string name="license_name_cc_by_four">Atribuite 4.0</string>
+  <string name="license_name_cc_by_sa">Atribuite-Samkondiĉe 3.0</string>
+  <string name="license_name_cc_by">Atribuite 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Aŭstrio)</string>
@@ -126,25 +136,47 @@
   <string name="tutorial_3_subtext_2">Fotoj kiujn vi elŝutis de interreto</string>
   <string name="tutorial_3_subtext_3">Ekrankopioj de komercaj aplikaĵoj</string>
   <string name="tutorial_4_text">Ekzemplo de alŝutaĵo:</string>
+  <string name="tutorial_4_subtext_1">Titolo: Sidneja Operejo</string>
+  <string name="welcome_final_text">Ĉu vi komprenis?</string>
   <string name="welcome_final_button_text">Jes!</string>
   <string name="welcome_help_button_text">&lt;u&gt;Ekscii pli&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorioj</string>
   <string name="detail_panel_cats_loading">Ŝargado...</string>
   <string name="detail_panel_cats_none">Neniu elektita</string>
   <string name="detail_description_empty">Sen priskribo</string>
+  <string name="detail_discussion_empty">Neniu diskuto</string>
   <string name="detail_license_empty">Nekonata permesilo</string>
   <string name="menu_refresh">Aktualigi</string>
   <string name="ok">Bone</string>
+  <string name="title_activity_nearby">Apudaj Lokoj</string>
   <string name="warning">Averto</string>
   <string name="yes">Jes</string>
   <string name="no">Ne</string>
   <string name="media_detail_title">Titolo</string>
   <string name="media_detail_description">Priskribo</string>
+  <string name="media_detail_discussion">Diskuto</string>
   <string name="media_detail_author">Kreinto</string>
   <string name="media_detail_uploaded_date">Alŝutdato</string>
   <string name="media_detail_license">Permesilo</string>
   <string name="media_detail_coordinates">Koordinatoj</string>
   <string name="media_detail_coordinates_empty">Neniu provizita</string>
+  <string name="invalid_input">Ne valida enigaĵo</string>
+  <string name="commons_logo">Emblemo de Komunejo</string>
+  <string name="commons_website">Retejo de Komunejo</string>
+  <string name="commons_facebook">Facebook-Paĝo de Komunejo</string>
+  <string name="background_image">Fona Bildo</string>
+  <string name="no_image_found">Neniu Bildo Trovita</string>
+  <string name="no_subcategory_found">Neniu subkategorio trovita</string>
+  <string name="no_parentcategory_found">Neniu superkategorio trovita</string>
+  <string name="upload_image">Alŝuti Bildon</string>
+  <string name="welcome_image_mount_zao">Monto Zao</string>
+  <string name="welcome_image_llamas">Lamoj</string>
+  <string name="welcome_image_rainbow_bridge">Ĉielarka Ponto</string>
+  <string name="welcome_image_tulip">Tulipo</string>
+  <string name="welcome_image_no_selfies">Neniuj Memfotoj</string>
+  <string name="welcome_image_welcome_wikipedia">Bonvenon al Vikipedio</string>
+  <string name="welcome_image_welcome_copyright">Kopirajto</string>
+  <string name="welcome_image_sydney_opera_house">Sidneja Operejo</string>
   <string name="cancel">Nuligi</string>
   <string name="navigation_drawer_open">Malfermi</string>
   <string name="navigation_drawer_close">Fermi</string>
@@ -158,12 +190,14 @@
   <string name="navigation_item_info">Lernilo</string>
   <string name="navigation_item_notification">Sciigoj</string>
   <string name="navigation_item_featured_images">Elstarigita</string>
+  <string name="navigation_item_review">Revizii</string>
   <string name="no_description_found">neniu priskribo trovita</string>
   <string name="nearby_info_menu_commons_article">Dosiera paĝo de la Komunejo</string>
   <string name="nearby_info_menu_wikidata_article">Vikidatumero</string>
   <string name="nearby_info_menu_wikipedia_article">Vikipedia artikolo</string>
   <string name="upload_image_too_dark">La bildo estas tro malluma. Ĉu vi tamen volas alŝuti ĝin? La Komunejo (Wikimedia Commons) estas nur por bildoj kun enciklopedia valoro.</string>
   <string name="upload_image_blurry">La bildo estas malklara. Ĉu vi tamen volas alŝuti ĝin? La Komunejo (Wikimedia Commons) estas nur por bildoj kun enciklopedia valoro.</string>
+  <string name="upload_problem_image_dark">Bildo estas tro malluma.</string>
   <string name="give_permission">Doni permeson</string>
   <string name="login_to_your_account">Ensaluti en vian konton</string>
   <string name="send_log_file">Sendi la protokolan dosieron</string>
@@ -180,13 +214,17 @@
   <string name="login_alert_message">Bonvolu ensaluti por uzi ĉi tiun eblon</string>
   <string name="nearby_location_has_not_changed">La pozicio ne ŝanĝiĝis.</string>
   <string name="nearby_location_not_available">Pozicio ne havebla.</string>
+  <string name="read_article">LEGI ARTIKOLON</string>
   <string name="notifications_talk_page_message">%1$s lasis mesaĝon sur via diskutpaĝo</string>
   <string name="notifications_thank_you_edit">Dankon pro tio ke vi faris redakton</string>
   <string name="notifications_mention">%1$s menciis vin sur %2$s.</string>
   <string name="nearby_wikidata">VIKIDATUMOJ</string>
   <string name="nearby_wikipedia">VIKIPEDIO</string>
   <string name="nearby_commons">KOMUNEJO</string>
+  <string name="about_rate_us">&lt;u&gt;Aprezi nin&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Oftaj demandoj&lt;/u&gt;</string>
+  <string name="no_internet">Interreto ne disponas</string>
+  <string name="internet_established">Interreto disponas</string>
   <string name="about_translate">&lt;u&gt;Traduki&lt;/u&gt;</string>
   <string name="about_translate_title">Lingvoj</string>
   <string name="about_translate_proceed">Daŭrigi</string>
@@ -196,16 +234,63 @@
   <string name="no_images_found">Neniuj bildoj trovitaj!</string>
   <string name="error_loading_images">Okazis eraro ŝargante la bildojn.</string>
   <string name="image_uploaded_by">Alŝutita de: %1$s</string>
+  <string name="appwidget_img">Bildo de la Tago</string>
+  <string name="app_widget_heading">Bildo de la Tago</string>
+  <string name="menu_search_button">Serĉi</string>
+  <string name="search_commons">Serĉi Komunejon</string>
+  <string name="title_activity_search">Serĉi</string>
+  <string name="search_recent_header">Lastaj serĉoj:</string>
+  <string name="search_tab_title_categories">KATEGORIOJ</string>
+  <string name="explore_tab_title_mobile">ALŜUTITA PER POŜAPARATO</string>
+  <string name="quiz">Kvizo</string>
+  <string name="question">Demando</string>
+  <string name="result">Rezulto</string>
+  <string name="continue_message">Daŭrigi</string>
+  <string name="correct">Ĝusta Respondo</string>
+  <string name="wrong">Malĝusta Respondo</string>
+  <string name="share_app_title">Diskonigi Aplikaĵon</string>
+  <string name="add_description">+ Aldoni priskribon</string>
+  <string name="delete">FORIGI</string>
+  <string name="statistics">STATISTIKO</string>
+  <string name="level">NIVELO</string>
+  <string name="images_uploaded">Alŝutitaj Bildoj</string>
+  <string name="images_used_by_wiki">Uzataj Bildoj</string>
+  <string name="error_occurred">Eraro okazis!</string>
   <string name="contributions_fragment">Kontribuoj</string>
+  <string name="nearby_fragment">Apude</string>
   <string name="display_nearby_notification_summary">Tuŝetu ĉi tie por vidi apudan lokon kiu bezonas bildojn</string>
   <string name="no_close_nearby">Neniu proksima loko trovita ĉe vi.</string>
+  <string name="list_sheet">Listo</string>
   <string name="image_in_set_label">%1$d en bildaro</string>
   <string name="next">Sekva</string>
   <string name="previous">Antaŭa</string>
+  <string name="submit">Sendi</string>
   <string name="map_application_missing">Neniu kongrua aplikaĵo troveblas en via aparato. Bonvolu instali tian por uzo kun ĉi tiu funkcio.</string>
+  <string name="navigation_item_bookmarks">Legosignoj</string>
+  <string name="title_activity_bookmarks">Legosignoj</string>
+  <string name="title_page_bookmarks_pictures">Bildoj</string>
+  <string name="title_page_bookmarks_locations">Lokoj</string>
+  <string name="provider_bookmarks">Legosignoj</string>
+  <string name="provider_bookmarks_location">Legosignoj</string>
   <string name="desc_language_Worldwide">Tutmonda</string>
+  <string name="desc_language_America">Ameriko</string>
   <string name="desc_language_Europe">Eŭropo</string>
   <string name="desc_language_Middle_East">Meza Oriento</string>
+  <string name="desc_language_Africa">Afriko</string>
   <string name="desc_language_Asia">Azio</string>
+  <string name="desc_language_Pacific">Pacifiko</string>
+  <string name="no_categories_selected">Neniu Elektita Kategorio</string>
   <string name="no_categories_selected_warning_desc">Bildo sen kategorioj estas malofte uzebla. Ĉu vi nepre volas aldoni sen elekti kategoriojn?</string>
+  <string name="yes_submit">Jes, Sendi</string>
+  <string name="no_go_back">Ne, Reen</string>
+  <string name="nominate_for_deletion_done">Farite</string>
+  <string name="review_category_no_button_text">Ŝajne estas bona</string>
+  <string name="review_spam_no_button_text">Ŝajne estas bona</string>
+  <string name="review_copyright_no_button_text">Ŝajne estas bona</string>
+  <string name="review_thanks_no_button_text">Sekva bildo</string>
+  <string name="no_image">Neniu uzita bildo</string>
+  <string name="no_image_uploaded">Neniu alŝutita bildo</string>
+  <string name="please_wait">Bonvolu atendi...</string>
+  <string name="skip_image">PRETERPASI TIUN BILDON</string>
+  <string name="image_info">Informo pri Bildo</string>
 </resources>

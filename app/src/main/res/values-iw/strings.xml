@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Ademo
 * Amire80
 * Barakolo
 * Deborahjay
+* Erelon
 * ExampleTomer
 * Guycn2
 * Inkbug
@@ -103,7 +105,7 @@
   <string name="title_activity_review">ביקורת עמיתים</string>
   <string name="menu_about">אודות</string>
   <string name="about_license">יישום ויקישיתוף (Wikimedia Commons app) הוא יישום קוד פתוח שמפותח ומתוחזק על־ידי מקבלי מלגות ומתנדבים של קהילת ויקימדיה. קרן ויקימדיה אינה מעורבת ביצירה, פיתוח, או תחזוקה של היישום.</string>
-  <string name="about_improve">נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
+  <string name="about_improve">נא ליצור &lt;a href=\"%1$s\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
   <string name="about_privacy_policy">&lt;u&gt;מדיניות פרטיות&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;יוצרים&lt;/u&gt;</string>
   <string name="title_activity_about">אודות</string>
@@ -481,7 +483,6 @@
   <string name="review_no_category">אבוי, זה לא משויך לשום קטגוריה!</string>
   <string name="review_category_explanation">התמונה הזאת משויכת ל־%1$s קטגוריות.</string>
   <string name="review_spam_report_question">זה פשוט מחוץ לתחום כי ככה</string>
-  <string name="review_spam_report_problem">ספאם</string>
   <string name="review_c_violation_report_question">זאת הפרת זכויות יוצרים כי ככה</string>
   <string name="review_category_yes_button_text">לא, טעות בקטגוריה</string>
   <string name="review_category_no_button_text">נראה בסדר</string>
@@ -517,5 +518,6 @@
   <string name="welcome_dont_upload_content_description">דוגמאות של תמונות שאין להעלות</string>
   <string name="skip_image">דילוג על התמונה הזאת</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ההורדה נכשלה!! אין לנו אפשרות להוריד את הקובץ ללא הרשאות גישה לאחסון חיצוני.</string>
+  <string name="share_via">שיתוף אפליקציה דרך...</string>
   <string name="image_info">פרטי תמונה</string>
 </resources>

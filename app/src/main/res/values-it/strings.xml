@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Albe Albe 460
 * Albe Albe460
 * Ale.salmo
@@ -103,7 +104,7 @@
   <string name="title_activity_category_details">Categoria</string>
   <string name="menu_about">Informazioni</string>
   <string name="about_license">L\'app di Wikimedia Commons è un\'applicazione open source creata e mantenuta da beneficiari e volontari della comunità Wikimedia. La Fondazione Wikimedia non è coinvolta nella creazione, sviluppo o manutenzione dell\'applicazione.</string>
-  <string name="about_improve">Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
+  <string name="about_improve">Crea una nuova &lt;a href=\"%1$s\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politica sulla privacy&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Crediti&lt;/u&gt;</string>
   <string name="title_activity_about">Informazioni</string>
@@ -468,5 +469,6 @@
   <string name="previous_image_title_description">Copia titolo/descrizione precedente</string>
   <string name="previous_button_tooltip_message">Clicca per riusare il titolo e la descrizione dell\'immagine precedente e adattarli all\'immagine attuale.</string>
   <string name="skip_image">SALTA QUESTA IMMAGINE</string>
+  <string name="share_via">Condividi applicazione tramite...</string>
   <string name="image_info">Informazioni sull\'immagine</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Harriettruong3
 * Leducthn
 * Leduyquang753
@@ -89,7 +90,7 @@
   <string name="title_activity_featured_images">Hình ảnh chọn lọc</string>
   <string name="menu_about">Giới thiệu</string>
   <string name="about_license">Ứng dụng Wikimedia Commons là ứng dụng mã nguồn mở được sáng tạo và quản lý bởi các tình nguyện viên và những người được tin tưởng của cộng đồng Wikipedia. Wikimedia Foundation không tham gia vào sự tạo lập, phát triển cũng như quản lý của ứng dụng.</string>
-  <string name="about_improve">Báo cáo lỗi cũng như đưa ra các ý tưởng &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;trên GitHub&lt;/a&gt;.</string>
+  <string name="about_improve">Báo cáo lỗi cũng như đưa ra các ý tưởng &lt;a href=\"%1$s\"&gt;trên GitHub&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;u&gt;Chính sách riêng tư&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Công trạng&lt;/u&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>

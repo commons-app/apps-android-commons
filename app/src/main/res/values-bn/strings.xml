@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Aftabuzzaman
 * Bellayet
 * Elias Ahmmad
@@ -102,7 +103,7 @@
   <string name="title_activity_category_details">বিষয়শ্রেণী</string>
   <string name="menu_about">পরিচিতি</string>
   <string name="about_license">উইকিমিডিয়া কমন্স অ্যাপ হচ্ছে একটি উন্মুক্ত উৎস সম্বলিত অ্যাপ যা উইকিমিডিয়া সম্প্রদায়ের ব্যবহারকারী ও সেচ্ছাসেবকবৃন্দ কর্তৃক তৈরিকৃত এবং পরিচালিত। উইকিমিডিয়া ফাউন্ডেশন এই অ্যাপ তৈরি, উন্নয়ন বা রক্ষণাবেক্ষণে জড়িত নয়।</string>
-  <string name="about_improve">কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
+  <string name="about_improve">কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"%1$s\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
   <string name="about_privacy_policy">&lt;u&gt;গোপনীয়তার নীতি&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;কৃতিত্ব&lt;/u&gt;</string>
   <string name="title_activity_about">পরিচিতি</string>
@@ -320,6 +321,5 @@
   <string name="desc_language_Pacific">প্রশান্ত মহাসাগরীয়</string>
   <string name="yes_submit">হ্যাঁ, জমা দিন</string>
   <string name="no_go_back">না, ফিরে যান</string>
-  <string name="review_spam_report_problem">স্প্যাম</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
 </resources>

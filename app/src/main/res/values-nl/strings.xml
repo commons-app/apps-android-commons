@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Bouman4
 * Elroy
 * Festina90
@@ -94,7 +95,7 @@
   <string name="title_activity_signup">Registreren</string>
   <string name="menu_about">Over</string>
   <string name="about_license" fuzzy="true">Opensourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons en haar logo zijn handelsmerken van de Wikimedia Foundation en worden gebruikt met toestemming van de Wikimedia Foundation. We worden niet bekrachtigd door en zijn niet verbonden met de Wikimedia Foundation.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"%1$s\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacybeleid&lt;/a&gt;</string>
   <string name="title_activity_about">Over</string>
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>

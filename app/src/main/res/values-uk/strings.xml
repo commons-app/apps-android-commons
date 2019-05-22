@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Alex Khimich
 * Andriykopanytsia
 * Base
@@ -108,7 +109,7 @@
   <string name="title_activity_category_details">Категорія</string>
   <string name="menu_about">Про програму</string>
   <string name="about_license">Додаток «Вікісховище» — це програма з відкритим кодом, яку створили отримувачі грантів та волонтери спільноти Вікімедіа. Фонд Вікімедіа не брав участі у створенні, розробці чи обслуговуванні цього додатка.</string>
-  <string name="about_improve">Ви можете створити новий &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запит на GitHub&lt;/a&gt;, щоб повідомити про помилки, або висловити пропозиції.</string>
+  <string name="about_improve">Ви можете створити новий &lt;a href=\"%1$s\"&gt;запит на GitHub&lt;/a&gt;, щоб повідомити про помилки, або висловити пропозиції.</string>
   <string name="about_privacy_policy">&lt;u&gt;Політика конфіденційності&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Автори&lt;/u&gt;</string>
   <string name="title_activity_about">Про програму</string>
@@ -181,7 +182,7 @@
   <string name="menu_refresh">Оновити</string>
   <string name="storage_permission_title">Запит дозволу на зберігання</string>
   <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Без цього дозволу програма не зможе отримати доступ до вашої галереї.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери без цього дозволу.</string>
+  <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери/галереї без цього дозволу.</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -306,7 +307,7 @@
   <string name="about_translate_cancel">Скасувати</string>
   <string name="retry">Повторити</string>
   <string name="showcase_view_got_it_button">Зрозуміло</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Це місця поблизу, про які є статті Вікіпедії, але які потребують ілюстрацій</string>
+  <string name="showcase_view_whole_nearby_activity">Це місця поблизу, про які є статті Вікіпедії, але які потребують ілюстрацій.\n\nПісля натискання кнопки \"Шукати в цій зоні\" карта фіксується та відбувається пошук поблизу вказаного місця.</string>
   <string name="showcase_view_list_icon">Натискання цієї кнопки згенерує список таких місць</string>
   <string name="showcase_view_plus_fab">Ви можете завантажити зображення для любого з цих місць, зробивши знімок камерою або вибравши зображення з галереї</string>
   <string name="no_images_found">Зображень не знайдено!</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Borichèt
 -->
 <resources>
@@ -92,7 +93,7 @@
   <string name="title_activity_review">Revision da par</string>
   <string name="menu_about">A propòsit</string>
   <string name="about_license">L\'aplicassion Wikimedia Commons a l\'é n\'aplicassion a sorgiss duverta creà e mantnùa da \'d përson-e pagà e da \'d volontari ëd la comunità Wikimedia. La Fondassion Wikimedia a l\'é nen amplicà ant la creassion, ël dësvlup, o la manutension dl\'aplicassion.</string>
-  <string name="about_improve">Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
+  <string name="about_improve">Creé na neuva &lt;a href=\"%1$s\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
   <string name="about_privacy_policy">&lt;u&gt;Régole ëd confidensialità&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Aringrassiament&lt;/u&gt;</string>
   <string name="title_activity_about">A propòsit</string>
@@ -470,9 +471,7 @@
   <string name="review_no_category">Contacc, sòn a l\'ha gnanca na categorìa!</string>
   <string name="review_category_explanation">Costa plancia a l\'é ant le categorìe %1$s .</string>
   <string name="review_spam_report_question">A l\'é fòra argoment përché a l\'é</string>
-  <string name="review_spam_report_problem">rumenta</string>
   <string name="review_c_violation_report_question">A l\'é na violassion dij drit d\'autor përché a l\'é</string>
-  <string name="review_c_violation_report_problem">copyRightViolation</string>
   <string name="review_category_yes_button_text">Nò, eror ëd categorìa</string>
   <string name="review_category_no_button_text">A smija giust</string>
   <string name="review_spam_yes_button_text">Nò, fòra argoment</string>
@@ -507,5 +506,7 @@
   <string name="welcome_dont_upload_content_description">Esempi ëd plance da nen carié</string>
   <string name="skip_image">SAUTÉ COSTA PLANCIA</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Dëscariament falì! I podoma nen dëscarié l\'archivi sensa ël përmess dël depòsit estern.</string>
+  <string name="share_text">Carié dle fòto su Wikimedia Commons da sò teléfon Dëscarié l\'aplicassion Commons: %1$s</string>
+  <string name="share_via">Partagé l\'aplicassion via...</string>
   <string name="image_info">Anformassion an sla plancia</string>
 </resources>

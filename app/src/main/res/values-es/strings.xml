@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 2axterix2
+* Abijeet Patro
 * Adjen
 * Astroemi
 * Benfutbol10
@@ -42,7 +43,7 @@
   <string name="logging_in_title">Accediendo</string>
   <string name="logging_in_message">Espera un momento…</string>
   <string name="login_success">Inicio de sesión exitoso</string>
-  <string name="login_failed">Falló el inicio de sesión.</string>
+  <string name="login_failed">Falló el inicio de sesión</string>
   <string name="upload_failed">No se encontró el archivo. Prueba con otro.</string>
   <string name="authentication_failed">La autenticación ha fallado, prueba a acceder otra vez</string>
   <string name="uploading_started">¡Subiendo!</string>
@@ -112,7 +113,7 @@
   <string name="title_activity_review">Revisión por pares</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">La aplicación de código abierto Wikimedia Commons fue creada por, y recibe mantenimiento de, cesionarios y voluntarios de la comunidad de Wikimedia. La Fundación Wikimedia no está involucrada en la creación, el desarrollo ni el mantenimiento de la aplicación.</string>
-  <string name="about_improve">Notifica de problemas y sugerencias en &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;.</string>
+  <string name="about_improve">Notifica de problemas y sugerencias en &lt;a href=\"%1$s\"&gt;GitHub&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;u&gt;Política de privacidad&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
   <string name="title_activity_about">Acerca de</string>
@@ -185,7 +186,7 @@
   <string name="menu_refresh">Actualizar</string>
   <string name="storage_permission_title">Pidiendo permiso de almacenamiento</string>
   <string name="read_storage_permission_rationale">Permiso necesario: lectura de almacenamiento externo. La aplicación no puede acceder a la galería sin él.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Permiso necesario: Escribir en almacenamiento externo. La aplicación no puede acceder a la cámara sin él.</string>
+  <string name="write_storage_permission_rationale">Permiso necesario: escritura en almacenamiento externo. La aplicación no puede acceder a la cámara o la galería sin este.</string>
   <string name="location_permission_rationale">Permiso opcional: obtener la ubicación actual para sugerir categorías</string>
   <string name="ok">Aceptar</string>
   <string name="title_activity_nearby">Lugares cercanos</string>
@@ -462,8 +463,8 @@
   <string name="check_category_adding_template">Añadiendo plantilla para control de categoría</string>
   <string name="check_category_notification_title">Pidiendo control de categoría para %1$s</string>
   <string name="check_category_edit_summary">Pidiendo control de categoría</string>
-  <string name="check_category_success_title" fuzzy="true">Pidiendo control de categoría: Éxitoso</string>
-  <string name="check_category_failure_title" fuzzy="true">Pidiendo control de categoría: Falló</string>
+  <string name="check_category_success_title">Verificación de categoría requerida</string>
+  <string name="check_category_failure_title">La verificación de categoría falló</string>
   <string name="check_category_success_message">Pedido exitoso de control de categoría para %1$s</string>
   <string name="check_category_failure_message">No se puede pedir el control de categoría para %1$s</string>
   <string name="check_category_toast">Pidiendo control de categoría para %1$s</string>
@@ -490,17 +491,17 @@
   <string name="review_no_category">¡Oh, esto ni siquiera esta categorizado!</string>
   <string name="review_category_explanation">Esta imagen esta dentro de %1$s categorías.</string>
   <string name="review_spam_report_question">Esta fuera del alcance porque es</string>
-  <string name="review_spam_report_problem">publicidad no deseada</string>
   <string name="review_c_violation_report_question">Es una violación de derechos de autor porque es</string>
-  <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text" fuzzy="true">NO, MAL CATEGORIZADO</string>
-  <string name="review_category_no_button_text" fuzzy="true">PARECE BIEN</string>
-  <string name="review_spam_yes_button_text" fuzzy="true">NO, FUERA DE ALCANCE</string>
-  <string name="review_spam_no_button_text" fuzzy="true">PARECE CORRECTO</string>
-  <string name="review_copyright_yes_button_text" fuzzy="true">NO, INFRACCIÓN A LOS DERECHOS DE AUTOR</string>
-  <string name="review_copyright_no_button_text" fuzzy="true">PARECE BIEN</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">SÍ, POR QUÉ NO</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">IMAGEN SIGUIENTE</string>
+  <string name="review_category_yes_button_text">No, mal categorizado</string>
+  <string name="review_category_no_button_text">Parece bien</string>
+  <string name="review_spam_yes_button_text">No, fuera de alcance</string>
+  <string name="review_spam_no_button_text">Parece bien</string>
+  <string name="review_copyright_yes_button_text">No, vulneración de copyright</string>
+  <string name="review_copyright_no_button_text">Parece bien</string>
+  <string name="review_thanks_yes_button_text">Sí, por qué no</string>
+  <string name="review_thanks_no_button_text">Imagen siguiente</string>
+  <string name="skip_image_explanation">Haciendo clic a este botón obtendrá otra imagen de Wikimedia Commons subida recientemente</string>
+  <string name="review_image_explanation">Puedes revisar imágenes y mejorar la calidad de Wikimedia Commoms.\nLos cuatro parámetros de revisión son: \n - Ésta imagen está relacionada a algún campo o categoría? \n - La imagen cumple las reglas de copyright? \n - La imagen está correctamente categorizada? \n - Si todo está correcto, también puedes dar las gracias al colaborador.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recepción de contenido compartido. El procesamiento de la imagen puede tardar cierto tiempo, dependiendo del tamaño de la imagen y de tu dispositivo</item>
     <item quantity="other">Recepción de contenido compartido. El procesamiento de las imágenes puede tardar cierto tiempo, dependiendo del tamaño de las imágenes y de tu dispositivo</item>
@@ -519,7 +520,11 @@
   <string name="images_featured_explanation">Las imágenes destacadas son creaciones de talentosos fotógrafos e ilustradores que la comunidad de Wikimedia Commons ha reconocido como las de mayor calidad del sitio.</string>
   <string name="images_via_nearby_explanation">Las imágenes subidas via Lugares Cercanos son las imágenes que han sido cargadas al descubrir lugares en el mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidad permite a los editores enviar una notificación de agradecimiento a aquellos usuarios que realicen ediciones útiles mediante un pequeño enlace en la página de historial o de diferencias.</string>
+  <string name="previous_image_title_description">Copiar título y descripción anteriores</string>
+  <string name="previous_button_tooltip_message">Haz clic para reutilizar el título y descripción que introdujiste en la imagen anterior y modificarlos para la imagen actual</string>
   <string name="welcome_do_upload_content_description">Ejemplos de imágenes adecuadas para Commons</string>
   <string name="welcome_dont_upload_content_description">Ejemplos de imágenes que no deben cargarse</string>
   <string name="skip_image">OMITIR ESTA IMAGEN</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">La descarga falló!. No podemos descargar el archivo sin el permiso de almacenamiento externo.</string>
+  <string name="image_info">Información de la imagen</string>
 </resources>

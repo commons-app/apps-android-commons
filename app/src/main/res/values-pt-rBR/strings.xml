@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Anaclaudiaml
 * Caio1478
 * Eduardo Addad de Oliveira
@@ -105,7 +106,7 @@
   <string name="title_activity_review">Revisão por pares</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license">O Wikimedia Commons é um aplicativo de código aberto criado e mantido por beneficiários e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção do aplicativo.</string>
-  <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
+  <string name="about_improve">Criar uma nova &lt;a href=\"%1$s\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
   <string name="about_privacy_policy">&lt;u&gt;Política de Privacidade&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
   <string name="title_activity_about">Sobre</string>
@@ -483,9 +484,7 @@
   <string name="review_no_category">Ah, isso nem é categorizado!</string>
   <string name="review_category_explanation">Esta imagem está abaixo das %1$s categorias</string>
   <string name="review_spam_report_question">Está fora do escopo porque é</string>
-  <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">É violação de direitos autorais porque é</string>
-  <string name="review_c_violation_report_problem">copyRightViolation</string>
   <string name="review_category_yes_button_text">Não, mal categorizado</string>
   <string name="review_category_no_button_text">Parece bem</string>
   <string name="review_spam_yes_button_text">Não, fora do escopo</string>
@@ -520,5 +519,7 @@
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">PULAR ESTA IMAGEM</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Falha no Download!!. Não podemos fazer o download do arquivo sem permissão de armazenamento externo.</string>
+  <string name="share_text">Faça o carregamento de fotos para o Wikimedia Commons no seu telefone ou baixe o aplicativo Commons: %1$s</string>
+  <string name="share_via">Compartilhar aplicativo via...</string>
   <string name="image_info">Informação da imagem</string>
 </resources>

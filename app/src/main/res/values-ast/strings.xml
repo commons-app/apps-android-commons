@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Xuacu
 -->
 <resources>
@@ -48,7 +49,7 @@
   <string name="provider_contributions">Les mios xubes</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Ver nel navegador</string>
-  <string name="share_title_hint" fuzzy="true">Títulu</string>
+  <string name="share_title_hint">Títulu (Riquíu)</string>
   <string name="add_title_toast">Apurre un títulu pa esti ficheru</string>
   <string name="share_description_hint">Descripción</string>
   <string name="login_failed_network">Nun se pudo aniciar sesión – error de rede</string>
@@ -69,10 +70,10 @@
   <string name="gps_disabled">El GPS ta desactiváu nel preséu. ¿Quiés activalu?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d carga</item>
-    <item quantity="other">%1$d cargues</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Principiando %1$d carga</item>
@@ -89,9 +90,10 @@
   <string name="title_activity_signup">Date d\'alta</string>
   <string name="title_activity_featured_images">Imáxenes destacaes</string>
   <string name="title_activity_category_details">Categoría</string>
+  <string name="title_activity_review">Revisión por pares</string>
   <string name="menu_about">Tocante a</string>
   <string name="about_license">La app de Wikimedia Commons ye software de códigu abiertu, creáu y calteníu por becaos y voluntarios de la comunidá de Wikimedia. La Fundación Wikimedia nun participa na creación, desendolcu nin caltenimientu de la app.</string>
-  <string name="about_improve">Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
+  <string name="about_improve">Crea una nueva &lt;a href=\"%1$s\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
   <string name="about_privacy_policy">&lt;u&gt;Política d\'intimidá&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
   <string name="title_activity_about">Tocante a</string>
@@ -102,7 +104,10 @@
   <string name="no_uploads_yet">Inda nun xubió denguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Encaboxar</string>
-  <string name="share_license_summary" fuzzy="true">Esta imaxe quedará baxo la llicencia %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Esta imaxe quedará baxo la llicencia %1$s</item>
+    <item quantity="other">Estes imaxes quedarán baxo la llicencia %1$s</item>
+  </plurals>
   <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Llicencia predeterminada</string>
@@ -156,19 +161,23 @@
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Nenguna seleicionada</string>
   <string name="detail_description_empty">Ensin descripción</string>
+  <string name="detail_discussion_empty">Nun hai alderique</string>
   <string name="detail_license_empty">Llicencia desconocida</string>
   <string name="menu_refresh">Refrescar</string>
+  <string name="storage_permission_title">Pidiendo permisu d\'almacenamientu</string>
   <string name="read_storage_permission_rationale">Permisu riquíu: llectura d\'almacenamientu esternu. L\'aplicación nun puede entrar na to galería ensin él.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Permisu necesariu: Escritura n\'almacenamientu esternu. L\'aplicación nun puede aportar a la cámara ensin él.</string>
+  <string name="write_storage_permission_rationale">Permisu necesariu: Escritura n\'almacenamientu esternu. L\'aplicación nun puede aportar a la cámara/galería ensin él.</string>
   <string name="location_permission_rationale">Permisu opcional: llograr l\'allugamientu actual pa suxerir categoríes</string>
   <string name="ok">Aceutar</string>
   <string name="title_activity_nearby">Llugares cercanos</string>
   <string name="no_nearby">Nun s\'alcontraron llugares cercanos</string>
   <string name="warning">Avisu</string>
+  <string name="upload_image_duplicate">Esti ficheru yá esiste\'n Commons. ¿Confirmes que quies siguir?</string>
   <string name="yes">Sí</string>
   <string name="no">Non</string>
   <string name="media_detail_title">Títulu</string>
   <string name="media_detail_description">Descripción</string>
+  <string name="media_detail_discussion">Alderique</string>
   <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Data d\'unviu</string>
   <string name="media_detail_license">Llicencia</string>
@@ -179,8 +188,12 @@
   <string name="_2fa_code">Códigu I2F</string>
   <string name="number_of_uploads">Mio llende de xubes recién</string>
   <string name="maximum_limit">Llende máxima</string>
+  <string name="invalid_zero">El cero nun ye válidu</string>
+  <string name="invalid_input">Entrada inválida</string>
   <string name="maximum_limit_alert">Nun pueden vese más de 500</string>
-  <string name="set_limit" fuzzy="true">Configurar la llende de xubíes recién</string>
+  <string name="enter_valid">Escribi un númberu válidu</string>
+  <string name="cannot_be_zero">La llende de xubíes nun puede ser 0</string>
+  <string name="set_limit">Llende de xubíes recién</string>
   <string name="login_failed_2fa_not_supported">Anguaño nun hai encontu pa autenticación de dos factores.</string>
   <string name="logout_verification">¿Confirmes que quies salir?</string>
   <string name="commons_logo">Logo de Commons</string>
@@ -215,6 +228,7 @@
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Avisos</string>
   <string name="navigation_item_featured_images">Destacada</string>
+  <string name="navigation_item_review">Revisar</string>
   <string name="nearby_needs_permissions">Los sitios cercanos nun pueden amosase ensin los permisos d\'allugamientu</string>
   <string name="no_description_found">nun s\'atoparon descripciones</string>
   <string name="nearby_info_menu_commons_article">Páxina del ficheru en Commons</string>
@@ -223,22 +237,34 @@
   <string name="error_while_cache">Error al poner les fotos na caché</string>
   <string name="title_info">Un títulu descriptivu únicu pal ficheru, que sirvirá para da-y nome al mesmu. Puede usase llinguaxe normal con espacios. Nun incluyas la estensión del ficheru</string>
   <string name="description_info">Por favor, describi l\'elementu multimedia tantu como sía posible: ¿ónde se tomó?, ¿qué amuesa?, ¿cuál ye\'l contestu? Por favor, describi los oxetos o persones. Revela la información que nun pueda aldovinase de mou cenciellu, por casu el momentu del día si ye un paisaxe. Si\'l mediu amuesa daqué desacostumao, esplica qué lo fai raro.</string>
+  <string name="upload_image_too_dark">Esta imaxe ye escura enforma, ¿tas seguru de que quies xubila? Wikimedia Commons ye sólo pa imaxes con valor enciclopédicu.</string>
+  <string name="upload_image_blurry">Esta imaxe ta borrosa, ¿tas seguru de que quies xubila? Wikimedia Commons ye sólo pa imaxes con valor enciclopédicu.</string>
+  <string name="upload_problem_exist">Problemes potenciales con esta imaxe:</string>
+  <string name="upload_problem_image_dark">La imaxe ye enforma escura.</string>
+  <string name="upload_problem_image_blurry">La imaxe ta borrosa.</string>
+  <string name="upload_problem_image_duplicate">La imaxe yá ta en Commons.</string>
+  <string name="upload_problem_different_geolocation">Esta imaxe tomóse nun llugar distintu.</string>
+  <string name="upload_problem_fbmd">Por favor xube solo fotografies que tomasti tu mesmu. Nun xubas imaxes qu\'atopasti nes cuentes de Facebook d\'otres persones.</string>
+  <string name="upload_problem_do_you_continue">¿Inda quies xubir esta imaxe?</string>
+  <string name="internet_downloaded">Por favor xube solo fotografies que tomasti tu mesmu. Nun xubas imaxes que descargasti d\'Internet.</string>
   <string name="give_permission">Dar permisu</string>
   <string name="use_external_storage">Usar almacenamientu esternu</string>
   <string name="use_external_storage_summary">Guardar nel preséu les imaxes tomaes cola cámara de la app</string>
   <string name="login_to_your_account">Anicia sesión na to cuenta</string>
   <string name="send_log_file">Unviar ficheru de rexistru</string>
-  <string name="send_log_file_description" fuzzy="true">Unviar ficheru de rexistru a los desendolcadores per corréu electrónicu</string>
+  <string name="send_log_file_description">Unviar ficheru de rexistru a los desendolcadores per corréu electrónicu p\'ayudar a depurar problemes cola aplicación. Nota: los rexistros pueden contener potencialmente información que t\'identifique</string>
   <string name="no_web_browser">Nun s\'alcontró un restolador p\'abrir la URL</string>
   <string name="null_url">¡Error! Nun s\'alcontró la URL</string>
   <string name="nominate_deletion">Marcada pa desaniciar</string>
   <string name="nominated_for_deletion">Esta imaxe marcóse pa desaniciar.</string>
   <string name="nominated_see_more">&lt;u&gt;Ver la páxina web pa más detalles&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">Nomando %1$d pa desaniciu.</string>
+  <string name="nominating_for_deletion_status">Nomando ficheru pa desaniciu: %1$s</string>
   <string name="view_browser">Ver nel restolador</string>
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Aniciar sesión</string>
   <string name="skip_login_title">¿Realmente quiés saltar l\'aniciu de sesión?</string>
-  <string name="skip_login_message" fuzzy="true">Nun vas poder xubir imaxes.</string>
+  <string name="skip_login_message">Tendríes d\'aniciar sesión para xubir imaxes nel futuru.</string>
   <string name="login_alert_message">Anicia sesión pa usar esta función</string>
   <string name="copy_wikicode">Copiar el testu wiki al cartafueyu</string>
   <string name="wikicode_copied">Copióse\'l testu wiki al cartafueyu</string>
@@ -262,6 +288,8 @@
   <string name="no_internet">Internet nun ta disponible</string>
   <string name="internet_established">Internet ta disponible</string>
   <string name="error_notifications">Error al llograr les notificaciones</string>
+  <string name="error_review">Error al recuperar la imaxe a revisar. Primi refrescar pa tentar nuevamente.</string>
+  <string name="error_review_categories">Error al recuperar les categoríes d\'imaxe a revisar. Primi refrescar pa tentar nuevamente.</string>
   <string name="no_notifications">Nun s\'alcontraron notificaciones</string>
   <string name="about_translate">&lt;u&gt;Traducir&lt;/u&gt;</string>
   <string name="about_translate_title">Llingües</string>
@@ -270,7 +298,7 @@
   <string name="about_translate_cancel">Encaboxar</string>
   <string name="retry">Retentar</string>
   <string name="showcase_view_got_it_button">Entendílo</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Estos son sitios cercanos a ti que precisen imaxes para ilustrar los sos artículos de Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity">Estos son sitios cercanos que precisen imaxes para ilustrar los sos artículos de Wikipedia.\n\nAl pulsiar en \'BUSCAR NESTA ÁREA\' bloquiase\'l mapa y llánzase una busca cercana alredor d\'esi llugar.</string>
   <string name="showcase_view_list_icon">Tocando esti botón amuésase la llista d\'esos llugares</string>
   <string name="showcase_view_plus_fab">Puedes xubir una imaxe pa cualquier sitiu dende la galería o la cámara</string>
   <string name="no_images_found">Nun s\'alcontró nenguna imaxe</string>
@@ -287,6 +315,10 @@
   <string name="provider_searches">Consultes buscaes apocayá</string>
   <string name="error_loading_categories">Asocedió un error al cargar les categoríes.</string>
   <string name="error_loading_subcategories">Asocedió un error al cargar les subcategoríes.</string>
+  <string name="search_tab_title_media">MULTIMEDIA</string>
+  <string name="search_tab_title_categories">CATEGORÍES</string>
+  <string name="explore_tab_title_featured">DESTACADA</string>
+  <string name="explore_tab_title_mobile">XUBÍO DENDE\'L MÓVIL</string>
   <string name="successful_wikidata_edit">Añadióse correutamente la imaxe a %1$s en Wikidata.</string>
   <string name="wikidata_edit_failure">Nun pudo anovase la entidá de Wikidata correspondiente.</string>
   <string name="menu_set_wallpaper">Poner como fondu</string>
@@ -315,12 +347,17 @@
   <string name="share_coordinates_not_present">Nun s\'especificaron les coordenaes al escoyer la imaxe</string>
   <string name="error_fetching_nearby_places">Error al llograr los llugares cercanos.</string>
   <string name="add_description">+ Añadir descripción</string>
+  <string name="no_recent_searches">Nun hai guetes de recién</string>
   <string name="delete_recent_searches_dialog">¿Tas seguru de que quies llimpiar el to historial de guetes?</string>
+  <string name="delete_search_dialog">¿Quies desaniciar esta gueta?</string>
   <string name="search_history_deleted">Desanicióse l\'historial de guetes</string>
+  <string name="nominate_delete">Nomar pa desaniciar</string>
+  <string name="delete">DESANICIAR</string>
   <string name="Achievements">Llogros</string>
   <string name="statistics">ESTADÍSTIQUES</string>
   <string name="statistics_thanks">Agradecimientos recibíos</string>
   <string name="statistics_featured">Imáxenes destacaes</string>
+  <string name="statistics_wikidata_edits">Imaxes vía «Sitios Cercanos»</string>
   <string name="level">NIVEL</string>
   <string name="images_uploaded">Imáxenes xubíes</string>
   <string name="image_reverts">Imáxenes ensin revertir</string>
@@ -333,6 +370,65 @@
   <string name="images_used_explanation">El númberu d\'imáxenes que xubisti a Commons que s\'utilizaron n\'artículos de Wikimedia</string>
   <string name="error_occurred">¡Asocedió un error!</string>
   <string name="notifications_channel_name_all">Avisu de Commons</string>
+  <string name="preference_author_name_toggle">Usar nome d\'autor personalizáu</string>
+  <string name="preference_author_name_toggle_summary">Usar un nome d\'autor personalizáu en cuenta del to nome d\'usuariu al xubir semeyes</string>
+  <string name="preference_author_name">Nome d\'autor personalizáu</string>
+  <string name="preference_author_name_summary">El nome d\'autor personalizáu pa usar nes xubíes en cuenta del to nome d\'usuariu</string>
+  <string name="contributions_fragment">Collaboraciones</string>
+  <string name="nearby_fragment">Cercanu</string>
+  <string name="notifications">Avisos</string>
+  <string name="archived_notifications">Avisos (archivaos)</string>
+  <string name="display_nearby_notification">Amosar notificaciones de cercanía</string>
+  <string name="display_nearby_notification_summary">Toca equí para ver el llugar más cercanu que precisa semeyes</string>
+  <string name="no_close_nearby">Nun s\'atoparon llugares cercanos nos alredores</string>
+  <string name="list_sheet">Llista</string>
   <string name="storage_permission">Permisu d\'almacenamientu</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos el to permisu p\'aportar al almacenamientu esternu del to preséu pa poder xubir imaxes.</string>
+  <string name="nearby_notification_dismiss_message">Yá nun vas ver el llugar más cercanu que precisa semeyes. Sicasí, puedes reactivar esti avisu na configuración si lo desees.</string>
+  <string name="step_count">Pasu %1$d de %2$d</string>
+  <string name="image_in_set_label">Imaxe %1$d del conxuntu</string>
+  <string name="next">Siguiente</string>
+  <string name="previous">Anterior</string>
+  <string name="submit">Unviar</string>
+  <string name="upload_title_duplicate">Yá esiste un ficheru col nome %1$. ¿Tas seguru de que quies siguir?</string>
+  <string name="map_application_missing">Nun s\'atopó una aplicación de mapes compatible nel to preséu. Instala una pa usar esta carauterística.</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargues</item>
+  </plurals>
+  <string name="navigation_item_bookmarks">Marcadores</string>
+  <string name="title_activity_bookmarks">Marcadores</string>
+  <string name="title_page_bookmarks_pictures">Imaxes</string>
+  <string name="title_page_bookmarks_locations">Llugares</string>
+  <string name="menu_bookmark">Amestar o quitar de marcadores</string>
+  <string name="provider_bookmarks">Marcadores</string>
+  <string name="bookmark_empty">Nun añadisti nengún marcador</string>
+  <string name="provider_bookmarks_location">Marcadores</string>
+  <string name="desc_language_Worldwide">Mundial</string>
+  <string name="desc_language_America">América</string>
+  <string name="desc_language_Europe">Europa</string>
+  <string name="desc_language_Middle_East">Oriente mediu</string>
+  <string name="desc_language_Africa">África</string>
+  <string name="desc_language_Asia">Asia</string>
+  <string name="desc_language_Pacific">Pacíficu</string>
+  <string name="no_categories_selected">Nun hai categoríes seleicionaes</string>
+  <string name="no_categories_selected_warning_desc">Les imaxes ensin categoríes raramente puen usase. ¿Seguro que quies unviar ensin escoyer categoría dala?</string>
+  <string name="yes_submit">Sí, unviar</string>
+  <string name="no_go_back">Non, volver</string>
+  <string name="upload_flow_all_images_in_set">(Pa toles imaxes del conxuntu)</string>
+  <string name="search_this_area">Buscar nesta área</string>
+  <string name="nearby_card_permission_title">Solicitú de permisu</string>
+  <string name="nominate_for_deletion_done">Fecho</string>
+  <string name="nominate_for_deletion_notify_user">Avisando al usuariu na páxina d\'alderique</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Añadiendo ficheru al rexistru de solicitúes de desaniciu</string>
+  <string name="nominate_for_deletion_create_deletion_request">Creando subpágina de solicitúes de desaniciu</string>
+  <string name="notsure">Nun lo se</string>
+  <string name="send_thank_success_title">Unviar agradecimientu: Correuto</string>
+  <string name="send_thank_success_message">Unvióse correutamente l\'agradecimientu a %1$s</string>
+  <string name="send_thank_failure_message">Falló l\'unviar agradecimientu a %1$s</string>
+  <string name="send_thank_failure_title">Unviar agradecimientu: Fallu</string>
+  <string name="send_thank_send">Agradecer</string>
+  <string name="send_thank_notification_title">Agradecer</string>
+  <string name="send_thank_toast">Unviar agradecimientu por %1$s</string>
+  <string name="skip_image">SALTAR ESTA IMAXE</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Christian List
 * Envlh
 * Joedalton
@@ -97,7 +98,7 @@
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-programmet oprettet og udviklet af frivillige i Wikimediafællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af programmet.</string>
-  <string name="about_improve">Opret en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
+  <string name="about_improve">Opret en ny &lt;a href=\"%1$s\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;u&gt;Privatlivspolitik&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Bidragsydere&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>
@@ -357,7 +358,6 @@
   <string name="nominate_for_deletion_done">Udført</string>
   <string name="notsure">Ikke sikker</string>
   <string name="send_thank_notification_title">Sender tak</string>
-  <string name="review_spam_report_problem">spam</string>
   <string name="review_category_no_button_text">Ser fint ud</string>
   <string name="review_spam_no_button_text">Ser fint ud</string>
   <string name="review_copyright_no_button_text">Ser fint ud</string>
@@ -370,4 +370,5 @@
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
   <string name="skip_image">Spring over dette billede</string>
+  <string name="share_via">Del app via...</string>
 </resources>

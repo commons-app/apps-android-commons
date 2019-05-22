@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * BHARATHESHA ALASANDEMAJALU
 * Kiranpoojary
 * Lokesha kunchadka
@@ -95,7 +96,7 @@
   <string name="title_activity_category_details">ವರ್ಗೊ</string>
   <string name="menu_about">ಎಂಕ್ಲೆನ ಬಗ್ಗೆ</string>
   <string name="about_license">ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಅಪ್ಲಿಕೇಶನ್‌ನ್ ವಿಕಿಮೀಡಿಯ ಸಮುದಾಯೊತ ಅನುದಾನ, ಸ್ವಯಂಸೇವಕೆರ್ ರಚನೆ ಬುಕ್ಕೊ ನಿರ್ವಹಣೆ ಮುಕ್ತೊ-ಮೂಲತೊ ಅಪ್ಲಿಕೇಶನ್. ವಿಕಿಮೀಡಿಯ ಫೌಂಡೇಶನ್ ಅಪ್ಲಿಕೇಶನ್‌ನ್ ಸೃಷ್ಟಿ, ಅಭಿವೃದ್ಧಿ, ಅತ್ತಂದೆ ನಿರ್ವಹಣೆಟ್ ಇಜ್ಜಿ.</string>
-  <string name="about_improve">ಪೊಸತ್ತ್ ಸೃಷ್ಟಿ &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; ಇರೆನ ವರಿದಿ ಬುಕ್ಕ ಸಲಹೆ.</string>
+  <string name="about_improve">ಪೊಸತ್ತ್ ಸೃಷ್ಟಿ &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; ಇರೆನ ವರಿದಿ ಬುಕ್ಕ ಸಲಹೆ.</string>
   <string name="about_privacy_policy">&lt;u&gt;Privacy policy&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Credits&lt;/u&gt;</string>
   <string name="title_activity_about">ಎಂಕ್ಲೆನ ಬಗ್ಗೆ</string>
