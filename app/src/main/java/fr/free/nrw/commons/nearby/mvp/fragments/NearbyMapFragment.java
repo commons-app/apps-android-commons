@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -42,6 +43,7 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.utils.LocationUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -91,9 +93,9 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Timber.d("onCreateView called");
-        this.mapView = setupMapView(savedInstanceState);
         setHasOptionsMenu(false);
         initViews();
+        this.mapView = setupMapView(savedInstanceState);
         return mapView;
     }
 
@@ -192,13 +194,20 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     @Override
     public void updateMapMarkers(LatLng curLatLng,  List<Place> placeList) {
-        Log.d("deneme1","updateMapMarkers");
+        Log.d("deneme1","updateMapMarkers, curLatng:"+curLatLng);
         List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng, // Curlatlang will be used to calculate distances
                         placeList,
                         getActivity(),
                         bookmarkLocationDao.getAllBookmarksLocations());
         mapboxMap.clear();
+        // TODO: set search latlang here
+        CameraPosition cameraPosition = new CameraPosition.Builder().target
+                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
+        mapboxMap.setCameraPosition(cameraPosition);
+        mapboxMap.animateCamera(CameraUpdateFactory
+                .newCameraPosition(cameraPosition), 1000);
+        // TODO: set position depening to botom sheet position heere
         // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
         addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
         // Re-enable mapbox gestures on custom location markers load
