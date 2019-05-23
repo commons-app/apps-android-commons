@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby.mvp.presenter;
 
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 
@@ -26,6 +27,11 @@ public class NearbyMapPresenter implements NearbyMapContract.UserActions {
     }
 
     @Override
+    public void updateMapMarkers(LatLng latLng) {
+
+    }
+
+
     public void updateMapMarkers() {
 
     }

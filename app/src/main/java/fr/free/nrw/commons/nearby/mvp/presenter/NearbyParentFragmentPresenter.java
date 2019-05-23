@@ -1,13 +1,19 @@
 package fr.free.nrw.commons.nearby.mvp.presenter;
 
 import android.util.Log;
+import android.view.View;
 
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
@@ -35,7 +41,7 @@ public class NearbyParentFragmentPresenter
                                          LocationServiceManager locationServiceManager) {
         this.nearbyParentFragmentView = nearbyParentFragmentView;
         this.nearbyMapFragmentView = nearbyMapFragmentView;
-        nearbyMapFragmentView.setViewsAreReady(this);
+        nearbyMapFragmentView.viewsAreSet(this);
         this.locationServiceManager = locationServiceManager;
     }
 
@@ -145,11 +151,22 @@ public class NearbyParentFragmentPresenter
          */
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(MAP_UPDATED)) {
-            nearbyMapFragmentView.updateMapMarkers();
-            nearbyMapFragmentView.updateMapToTrackPosition();
+            nearbyParentFragmentView.populatePlaces(lastLocation, lastLocation);
+            // TODO add a search location here
+
         } else {
             nearbyMapFragmentView.updateMapToTrackPosition();
         }
+    }
+
+    /**
+     * Populates places for custom location, should be used for finding nearby places around a
+     * location where you are not at.
+     * @param nearbyPlacesInfo This variable has place list information and distances.
+     */
+    public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList);
+        nearbyMapFragmentView.updateMapToTrackPosition();
     }
 
     @Override

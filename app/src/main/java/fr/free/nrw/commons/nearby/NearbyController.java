@@ -41,21 +41,21 @@ public class NearbyController {
      * Prepares Place list to make their distance information update later.
      *
      * @param curLatLng current location for user
-     * @param latLangToSearchAround the location user wants to search around
+     * @param searchLatLng the location user wants to search around
      * @param returnClosestResult if this search is done to find closest result or all results
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng latLangToSearchAround, boolean returnClosestResult, boolean checkingAroundCurrentLocation) throws IOException {
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean returnClosestResult, boolean checkingAroundCurrentLocation) throws IOException {
 
-        Timber.d("Loading attractions near %s", latLangToSearchAround);
+        Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
-        if (latLangToSearchAround == null) {
+        if (searchLatLng == null) {
             Timber.d("Loading attractions nearby, but curLatLng is null");
             return null;
         }
-        List<Place> places = nearbyPlaces.radiusExpander(latLangToSearchAround, Locale.getDefault().getLanguage(), returnClosestResult);
+        List<Place> places = nearbyPlaces.radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
@@ -91,6 +91,8 @@ public class NearbyController {
                         }
                 );
             }
+            nearbyPlacesInfo.curLatLng = curLatLng;
+            nearbyPlacesInfo.searchLatLng = searchLatLng;
             nearbyPlacesInfo.placeList = places;
             nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
             if (!returnClosestResult && checkingAroundCurrentLocation) {
@@ -212,5 +214,7 @@ public class NearbyController {
     public class NearbyPlacesInfo {
         public List<Place> placeList; // List of nearby places
         public LatLng[] boundaryCoordinates; // Corners of nearby area
+        public LatLng curLatLng; // current location when this places are populated
+        public LatLng searchLatLng; //search location for finding this places
     }
 }

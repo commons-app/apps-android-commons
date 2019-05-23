@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,28 +15,54 @@ import android.view.animation.AnimationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.NearbyBaseMarker;
+import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class NearbyMapFragment extends CommonsDaggerSupportFragment implements NearbyMapContract.View {
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore applicationKvStore;
+
+    @Inject
+    BookmarkLocationsDao bookmarkLocationDao;
+
     @BindView(R.id.bottom_sheet)
     View bottomSheetList;
 
     @BindView(R.id.bottom_sheet_details)
     View bottomSheetDetails;
 
-    MapView mapView;
+    public MapView mapView;
+    public MapboxMap mapboxMap;
     public NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback;
 
     private BottomSheetBehavior bottomSheetListBehavior;
@@ -44,6 +71,11 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
+
+    private static final double ZOOM_LEVEL = 14f;
+
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,6 +145,38 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     @Override
     public MapView setupMapView(Bundle savedInstanceState) {
+        Log.d("deneme1","setupMapView");
+        Timber.d("setupMapView called");
+        boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
+        MapboxMapOptions options = new MapboxMapOptions()
+                .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
+                .compassMargins(new int[]{12, 0, 0, 24})
+                .styleUrl(isDarkTheme ? Style.DARK : Style.OUTDOORS)
+                .logoEnabled(false)
+                .attributionEnabled(false)
+                .camera(new CameraPosition.Builder()
+                        .zoom(ZOOM_LEVEL)
+                        .build());
+
+        if (!getParentFragment().getActivity().isFinishing()) {
+            MapView mapView = new MapView(getParentFragment().getActivity(), options);
+            // create map
+            mapView.onCreate(savedInstanceState);
+            mapView.getMapAsync(mapboxMap -> {
+                LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
+
+                try {
+                    localizationPlugin.matchMapLanguageWithDeviceDefault();
+                } catch (RuntimeException exception) {
+                    Timber.d(exception.toString());
+                }
+
+                this.mapboxMap = mapboxMap;
+                //addMapMovementListeners();
+                //updateMapSignificantlyForCurrentLocation();
+            });
+            return mapView;
+        }
         return null;
     }
 
@@ -127,12 +191,23 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     }
 
     @Override
-    public void updateMapMarkers() {
-
+    public void updateMapMarkers(LatLng curLatLng,  List<Place> placeList) {
+        Log.d("deneme1","updateMapMarkers");
+        List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
+                .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng, // Curlatlang will be used to calculate distances
+                        placeList,
+                        getActivity(),
+                        bookmarkLocationDao.getAllBookmarksLocations());
+        mapboxMap.clear();
+        // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
+        addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
+        // Re-enable mapbox gestures on custom location markers load
+        mapboxMap.getUiSettings().setAllGesturesEnabled(true);
     }
 
     @Override
     public void updateMapToTrackPosition() {
+        //addCurrentLocationMarker(mapboxMap);
 
     }
 
@@ -157,7 +232,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     }
 
     @Override
-    public void addNearbyMarkersToMapBoxMap() {
+    public void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> baseMarkerOptions) {
 
     }
 
@@ -221,10 +296,15 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     }
 
+    /**
+     * Means that views are set in presenter
+     * @param viewsAreReadyCallback
+     */
     @Override
     public void viewsAreSet(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback) {
         Log.d("deneme1","viewsAreSet");
         this.viewsAreReadyCallback = viewsAreReadyCallback;
+
         this.viewsAreReadyCallback.nearbyFragmentAndMapViewReady();
     }
 

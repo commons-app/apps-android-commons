@@ -4,8 +4,13 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.maps.MapView;
 
+import java.util.List;
+
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
 
 /**
@@ -20,14 +25,14 @@ public interface NearbyMapContract {
         void showSearchThisAreaButton();
         void showInformationBottomSheet();
         void initViews();
-        void updateMapMarkers();
+        void updateMapMarkers(LatLng latLng, List<Place> placeList);
         void updateMapToTrackPosition();
         void setListeners();
         MapView setupMapView(Bundle savedInstanceState);
         void addCurrentLocationMarker();
         void setSearchThisAreaButtonVisibility(boolean visible);
         boolean isCurrentLocationMarkerVisible();
-        void addNearbyMarkersToMapBoxMap();
+        void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> baseMarkerOptions);
         void prepareViewsForSheetPosition();
         void hideFABs();
         void showFABs();
@@ -47,7 +52,7 @@ public interface NearbyMapContract {
         void searchThisArea();
         void storeSharedPrefs();
         void recenterMap();
-        void updateMapMarkers();
+        void updateMapMarkers(LatLng latLng);
         void updateMapToTrackPosition();
         void getBundleContent();
         boolean addMapMovementListener();

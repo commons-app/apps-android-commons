@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby.mvp.contract;
 
 
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 
 public interface NearbyParentFragmentContract {
@@ -16,6 +17,7 @@ public interface NearbyParentFragmentContract {
         boolean isNetworkConnectionEstablished();
         void addNetworkBroadcastReceiver();
         void listOptionMenuItemClicked();
+        void  populatePlaces(LatLng curlatLng, LatLng searchLatLng);
         boolean isBottomSheetExpanded();
     }
 

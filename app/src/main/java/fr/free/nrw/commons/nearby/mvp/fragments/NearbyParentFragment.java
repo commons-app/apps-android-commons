@@ -39,6 +39,9 @@ import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
@@ -141,6 +144,30 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         super.onDestroy();
         wikidataEditListener.setAuthenticationStateListener(null);
     }
+
+    @Override
+    public void populatePlaces(LatLng curlatLng, LatLng searchLatLng){
+        compositeDisposable.add(Observable.fromCallable(() -> nearbyController
+                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, true))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::updateMapMarkers,
+                        throwable -> {
+                            Timber.d(throwable);
+                            //showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                            progressBar.setVisibility(View.GONE);
+                        }));
+    }
+
+    /**
+     * Populates places for custom location, should be used for finding nearby places around a
+     * location where you are not at.
+     * @param nearbyPlacesInfo This variable has place list information and distances.
+     */
+    private void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo);
+    }
+
 
     /**
      * Resume fragments if they exists
