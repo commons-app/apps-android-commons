@@ -102,7 +102,7 @@
   <string name="no_uploads_yet">아직 사진을 올리적재하지 않았습니다.</string>
   <string name="menu_retry_upload">다시 시도</string>
   <string name="menu_cancel_upload">취소</string>
-  <string name="share_license_summary" fuzzy="true">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
+  <string name="share_license_summary">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
   <string name="media_upload_policy">이 그림에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키매체공용정책&lt;/a&gt;에 위배되지 않는다는것에 동의합니다.</string>
   <string name="menu_download">내리적재</string>
   <string name="preference_license">기본 허가권</string>
@@ -156,6 +156,7 @@
   <string name="detail_panel_cats_loading">적재하는중…</string>
   <string name="detail_panel_cats_none">선택하지 않음</string>
   <string name="detail_description_empty">설명 없음</string>
+  <string name="detail_discussion_empty">토론 없음</string>
   <string name="detail_license_empty">알수 없는 허가권</string>
   <string name="menu_refresh">재생</string>
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장고 읽기. 이것이 없으면 응용프로그람은 화랑에 접속할수 없습니다.</string>
