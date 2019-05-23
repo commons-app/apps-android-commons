@@ -40,7 +40,7 @@ public interface NearbyMapContract {
         void animateFABs(boolean isFabOpen);
         void closeFabs ( boolean isFabOpen);
         void updateMarker(boolean isBookmarked, Place place);
-        void setViewsAreReady(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback);
+        void viewsAreSet(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback);
     }
 
     interface UserActions extends NearbyElementContract.UserActions {

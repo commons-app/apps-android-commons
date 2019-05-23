@@ -222,8 +222,8 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     }
 
     @Override
-    public void setViewsAreReady(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback) {
-        Log.d("deneme1","setViewsAreReady");
+    public void viewsAreSet(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback) {
+        Log.d("deneme1","viewsAreSet");
         this.viewsAreReadyCallback = viewsAreReadyCallback;
         this.viewsAreReadyCallback.nearbyFragmentAndMapViewReady();
     }
