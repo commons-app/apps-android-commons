@@ -155,7 +155,7 @@ public class NearbyParentFragmentPresenter
             // TODO add a search location here
 
         } else {
-            nearbyMapFragmentView.updateMapToTrackPosition();
+            nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
         }
     }
 
@@ -165,8 +165,9 @@ public class NearbyParentFragmentPresenter
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
     public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        Log.d("deneme","updateMapMarkers npfp");
         nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList);
-        nearbyMapFragmentView.updateMapToTrackPosition();
+        nearbyMapFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
     }
 
     @Override

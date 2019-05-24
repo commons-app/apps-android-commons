@@ -37,6 +37,7 @@
             android:layout_below="@id/toolbar"
             android:layout_alignParentLeft="true"
             android:background="#aa969696"
+            android:visibility="gone"
             android:elevation="6dp">
 
         </View>

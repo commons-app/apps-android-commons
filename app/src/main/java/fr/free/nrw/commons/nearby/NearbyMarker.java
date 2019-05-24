@@ -2,7 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import com.mapbox.mapboxsdk.annotations.Marker;
 
-class NearbyMarker extends Marker {
+public class NearbyMarker extends Marker {
     private final Place place;
     private NearbyBaseMarker nearbyBaseMarker;
 
@@ -11,13 +11,13 @@ class NearbyMarker extends Marker {
      *
      * @param baseMarkerOptions The builder used to construct the Marker.
      */
-    NearbyMarker(NearbyBaseMarker baseMarkerOptions, Place place) {
+    public NearbyMarker(NearbyBaseMarker baseMarkerOptions, Place place) {
         super(baseMarkerOptions);
         this.place = place;
         this.nearbyBaseMarker = baseMarkerOptions;
     }
 
-    NearbyBaseMarker getNearbyBaseMarker() {
+    public NearbyBaseMarker getNearbyBaseMarker() {
         return nearbyBaseMarker;
     }
 

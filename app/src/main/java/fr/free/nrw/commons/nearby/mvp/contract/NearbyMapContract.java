@@ -26,10 +26,10 @@ public interface NearbyMapContract {
         void showInformationBottomSheet();
         void initViews();
         void updateMapMarkers(LatLng latLng, List<Place> placeList);
-        void updateMapToTrackPosition();
+        void updateMapToTrackPosition(LatLng curLatLng);
         void setListeners();
         MapView setupMapView(Bundle savedInstanceState);
-        void addCurrentLocationMarker();
+        void addCurrentLocationMarker(LatLng curLatLng);
         void setSearchThisAreaButtonVisibility(boolean visible);
         boolean isCurrentLocationMarkerVisible();
         void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> baseMarkerOptions);
