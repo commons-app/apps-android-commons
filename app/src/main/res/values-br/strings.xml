@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Dishual
 * Fohanno
 * Fulup
@@ -95,7 +96,7 @@
   <string name="title_activity_category_details">Rummad</string>
   <string name="menu_about">Diwar-benn</string>
   <string name="about_license">An arload Wikimedia Commons zo un arload open source krouet ha hizivaet gant gounideien ha tud a-youl vat ar gumuniezh Wikimedia. Ne gemer ket perzh an diazezadur Wikimedia el labourioù evit krouiñ, diorren pe trezalc\'h an arload.</string>
-  <string name="about_improve">Krouiñ ur &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;gemennadenn GitHub nevez&lt;/a&gt; evit kelaouiñ a-zivout un draen bennak pe bet kinnigoù.</string>
+  <string name="about_improve">Krouiñ ur &lt;a href=\"%1$s\"&gt;gemennadenn GitHub nevez&lt;/a&gt; evit kelaouiñ a-zivout un draen bennak pe bet kinnigoù.</string>
   <string name="about_privacy_policy">&lt;u&gt;Reolennoù prevezded&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Kredadoù&lt;/u&gt;</string>
   <string name="title_activity_about">Diwar-benn</string>

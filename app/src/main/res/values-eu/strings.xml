@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Amaia
 * An13sa
 * EukeneFL
@@ -98,7 +99,7 @@
   <string name="title_activity_category_details">Kategoria</string>
   <string name="menu_about">Honi buruz</string>
   <string name="about_license">Wikimedia Commons iturri-irekiko aplikazioa da Wikimedia komunitateko bolondresek sortu eta mantendutakoa. Wikimedia Fundazioa ez dago aplikazioaren sorreran, garapenean, edota mantenuan ibili.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu errore eta iradokizunen berri emateko.</string>
+  <string name="about_improve">&lt;a href=\"%1$s\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu errore eta iradokizunen berri emateko.</string>
   <string name="about_privacy_policy">&lt;u&gt;Pribatutasun politika&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Kredituak&lt;/u&gt;</string>
   <string name="title_activity_about">Honi buruz</string>

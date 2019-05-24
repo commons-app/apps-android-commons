@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Liuxinyu970226
 * Sureshkhole
 * Susheelkasab
@@ -88,7 +89,7 @@
   <string name="title_activity_signup">नोंदणी करा</string>
   <string name="menu_about">आमच्याबद्दल</string>
   <string name="about_license">विकीमिडीया कॉमन्स अॅप हे एक मुक्तस्त्रोत अॅप असून ते विकीमिडीया समुदायातील स्वयंसेवकांनी आणि अनुदानित सदस्यांकडून निर्माण आणि सांभाळले जाते. विकीमिडीया फ़ांउंडेशनचा ह्या अॅपच्या निर्मिती,सांभाळामध्ये सहभाग नाही.</string>
-  <string name="about_improve">नव्याने तयार करा &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; त्रुटी अहवालांसाठी आणि सुचनांसाठी.</string>
+  <string name="about_improve">नव्याने तयार करा &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; त्रुटी अहवालांसाठी आणि सुचनांसाठी.</string>
   <string name="about_privacy_policy">&lt;u&gt;गोपनीयता धोरण&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;श्रेय&lt;/u&gt;</string>
   <string name="title_activity_about">च्या विषयी</string>

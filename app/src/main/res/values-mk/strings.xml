@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Bjankuloski06
 * Vlad5250
 -->
@@ -93,7 +94,7 @@
   <string name="title_activity_review">Оценување</string>
   <string name="menu_about">За извршникот</string>
   <string name="about_license">Прилогот на Ризницата има отворен код. Негови творци и одржувачи се примателите на наменските средства од Викимедиината заедница како и членовите на заедницата. Фондацијата Викимедија нема учество во нејзиното создавање, разработка и одржување.</string>
-  <string name="about_improve">Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;проблем на GitHub&lt;/a&gt; за пријавување на грешки и давање предлози.</string>
+  <string name="about_improve">Создајте нов &lt;a href=\"%1$s\"&gt;проблем на GitHub&lt;/a&gt; за пријавување на грешки и давање предлози.</string>
   <string name="about_privacy_policy">&lt;u&gt;Заштита на личните податоци&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Заслуги&lt;/u&gt;</string>
   <string name="title_activity_about">За извршникот</string>
@@ -506,5 +507,7 @@
   <string name="welcome_dont_upload_content_description">Примери — Слики што не се за подигање</string>
   <string name="skip_image">ПРЕСКОКНИ ЈА ПОРАКАВА</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преземањето не успеа!!! Не можеме да ја преземеме податотеката без дозвола од надворешен склад.</string>
+  <string name="share_text">Подигајте слики на Ризницата од телефон. Преземете го прилогот на Ризницата: %1$s</string>
+  <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
 </resources>

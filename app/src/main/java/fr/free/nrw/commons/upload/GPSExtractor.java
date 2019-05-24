@@ -122,7 +122,7 @@ public class GPSExtractor {
             decLongitude = 0 - convertToDegree(longitude);
         }
 
-        String decimalCoords = String.valueOf(decLatitude) + "|" + String.valueOf(decLongitude);
+        String decimalCoords = decLatitude + "|" + decLongitude;
         Timber.d("Latitude and Longitude are %s", decimalCoords);
         return decimalCoords;
     }

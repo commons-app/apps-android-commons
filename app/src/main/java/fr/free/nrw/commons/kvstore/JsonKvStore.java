@@ -2,14 +2,14 @@ package fr.free.nrw.commons.kvstore;
 
 import android.content.Context;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.annotation.Nullable;
 
 public class JsonKvStore extends BasicKvStore {
     private final Gson gson;

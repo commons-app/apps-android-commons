@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * David1010
 * Mehman97
 -->
@@ -92,7 +93,7 @@
   <string name="title_activity_category_details">კატეგორია</string>
   <string name="menu_about">პროგრამის შესახებ</string>
   <string name="about_license">ღია კოდის მქონე აპლიკაცია, ვრცელდება ლიცენზიით &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. ვიკისაწყობი და მისი ლოგო ფონდი ვიკიმედიის სავაჭრო ნიშნებია და ფონდი ვიკიმედიის ნებართვით გამოიყენება. ჩვენ არ ვართ დაკავშირებული ფონდ ვიკიმედიასთან.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყარო&lt;/a&gt; და &lt;a href=\"https://commons-app.github.io/\"&gt;საიტი&lt;/a&gt; GitHub-ზე. შეცდომის შესატყობინებლად ან წინადადებისათვის შექმენით ახალი &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;მოთხოვნა GitHub-ზე&lt;/a&gt;.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყარო&lt;/a&gt; და &lt;a href=\"https://commons-app.github.io/\"&gt;საიტი&lt;/a&gt; GitHub-ზე. შეცდომის შესატყობინებლად ან წინადადებისათვის შექმენით ახალი &lt;a href=\"%1$s\"&gt;მოთხოვნა GitHub-ზე&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;კონფიდენციალურობის პოლიტიკა&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;მადლობები&lt;/a&gt;</string>
   <string name="title_activity_about">პროგრამის შესახებ</string>

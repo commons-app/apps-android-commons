@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Chansey
 * Dual
 * Emperyan
@@ -106,7 +107,7 @@
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun imtiyaz sahibi ve gönüllüleri tarafından oluşturulmuş ve sürdürülmüş açık kaynak kodlu bir uygulamadır. Vikipedi Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımına dahil değildir.</string>
-  <string name="about_improve">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
+  <string name="about_improve">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"%1$s\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Katkıda bulunanlar&lt;/a&gt;</string>
   <string name="title_activity_about">Hakkında</string>

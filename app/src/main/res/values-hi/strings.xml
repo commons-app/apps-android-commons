@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 1997kB
+* Abijeet Patro
 * Anamdas
 * Anandra
 * Bhatakati aatma
@@ -107,7 +108,7 @@
   <string name="title_activity_category_details">श्रेणी</string>
   <string name="menu_about">परिचय</string>
   <string name="about_license">विकिमीडिया कॉमन्स एप्प एक मुक्त स्रोत एप्प है जो कि विकिमीडिया समुदाय के अनुदानप्राप्तकर्ताओं व स्वयंसेवकों द्वारा निर्मित एवं प्रबंधित है। विकिमीडिया फॉऊण्डेशन इस एप्प के निर्माण, विकास व प्रबंधन में किसी प्रकार से भी संलग्न नहीं है।</string>
-  <string name="about_improve">त्रुटि की सूचना और सुझावों के लिए &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; GitHub समस्या &lt;/a&gt; बनाएं</string>
+  <string name="about_improve">त्रुटि की सूचना और सुझावों के लिए &lt;a href=\"%1$s\"&gt; GitHub समस्या &lt;/a&gt; बनाएं</string>
   <string name="about_privacy_policy">&lt;u&gt;गोपनीयता नीति&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;श्रेय&lt;/u&gt;</string>
   <string name="title_activity_about">परिचय</string>

@@ -1,12 +1,12 @@
 package fr.free.nrw.commons.repository;
 
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;

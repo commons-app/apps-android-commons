@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * MaGa
 -->
 <resources>
@@ -86,7 +87,7 @@
   <string name="title_activity_featured_images">Izabrane slike</string>
   <string name="menu_about">O</string>
   <string name="about_license">Aplikacija The Wikimedia Commons je aplikacija otvorenog kôda koju razvijaju i održavaju volonteri Wikimedijine zajednice. Zaklada Wikimedija nije uključena u stvaranje, razvoj ili održavanje ove aplikacije.</string>
-  <string name="about_improve">Da biste prijavili poteškoću ili dali prijedlog, stvorite &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;novi zahtjev na GitHubu&lt;/a&gt;.</string>
+  <string name="about_improve">Da biste prijavili poteškoću ili dali prijedlog, stvorite &lt;a href=\"%1$s\"&gt;novi zahtjev na GitHubu&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politika privatnosti&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Zasluge&lt;/u&gt;</string>
   <string name="title_activity_about">O</string>

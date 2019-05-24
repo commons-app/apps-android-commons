@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Les Meloures
 * Robby
 * Soued031
@@ -89,7 +90,7 @@
   <string name="title_activity_category_details">Kategorie</string>
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
-  <string name="about_improve">Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
+  <string name="about_improve">Leet w.e.g. &lt;a href=\"%1$s\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">&lt;u&gt;Dateschutzrichtlinn&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Merci&lt;/u&gt;</string>
   <string name="title_activity_about">Iwwer</string>
@@ -324,6 +325,7 @@
   <string name="send_thank_notification_title">Merci schécken</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>
   <string name="review_category_yes_button_text">Neen, falsch kategoriséiert</string>
+  <string name="review_category_no_button_text">Gesäit gutt aus</string>
   <string name="review_spam_no_button_text">Gesäit gutt aus</string>
   <string name="review_copyright_yes_button_text">Keng Violatioun vum Copyright</string>
   <string name="review_copyright_no_button_text">Gesäit gutt aus</string>

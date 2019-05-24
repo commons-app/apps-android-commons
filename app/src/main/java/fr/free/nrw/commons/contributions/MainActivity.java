@@ -485,8 +485,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION);
 
                         // TODO: If contrib fragment is visible and location permission is not given, display permission request button
-                    } else {
-
                     }
                 }
                 return;
