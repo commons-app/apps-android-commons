@@ -4,7 +4,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.achievements.AchievementsActivity;
+import fr.free.nrw.commons.profile.achievements.ProfileAchievementFragmnent;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SignupActivity;
 import fr.free.nrw.commons.bookmarks.BookmarksActivity;
@@ -60,7 +60,7 @@ public abstract class ActivityBuilderModule {
     abstract ExploreActivity bindExploreActivity();
 
     @ContributesAndroidInjector
-    abstract AchievementsActivity bindAchievementsActivity();
+    abstract ProfileAchievementFragmnent bindAchievementsActivity();
 
     @ContributesAndroidInjector
     abstract BookmarksActivity bindBookmarksActivity();

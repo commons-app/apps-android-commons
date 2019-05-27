@@ -23,8 +23,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.achievements.FeaturedImages;
-import fr.free.nrw.commons.achievements.FeedbackResponse;
+import fr.free.nrw.commons.profile.achievements.FeaturedImages;
+import fr.free.nrw.commons.profile.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;

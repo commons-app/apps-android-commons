@@ -124,7 +124,7 @@
             />
 
         <activity
-            android:name=".achievements.AchievementsActivity"
+            android:name=".profile.achievements.ProfileAchievementFragmnent"
             android:label="@string/Achievements" />
 
         <activity

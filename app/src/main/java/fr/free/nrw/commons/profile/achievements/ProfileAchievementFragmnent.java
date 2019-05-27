@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.achievements;
+package fr.free.nrw.commons.profile.achievements;
 
 import android.accounts.Account;
 import android.annotation.SuppressLint;
@@ -55,7 +55,7 @@ import timber.log.Timber;
 /**
  * activity for sharing feedback on uploaded activity
  */
-public class AchievementsActivity extends NavigationBaseActivity {
+public class ProfileAchievementFragmnent extends NavigationBaseActivity {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
@@ -368,7 +368,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param context
      */
     public static void startYourself(Context context) {
-        Intent intent = new Intent(context, AchievementsActivity.class);
+        Intent intent = new Intent(context, ProfileAchievementFragmnent.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
@@ -412,8 +412,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param screenshot
      */
     public void showAlert(Bitmap screenshot){
-        AlertDialog.Builder alertadd = new AlertDialog.Builder(AchievementsActivity.this);
-        LayoutInflater factory = LayoutInflater.from(AchievementsActivity.this);
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(ProfileAchievementFragmnent.this);
+        LayoutInflater factory = LayoutInflater.from(ProfileAchievementFragmnent.this);
         final View view = factory.inflate(R.layout.image_alert_layout, null);
         ImageView screenShotImage = view.findViewById(R.id.alert_image);
         screenShotImage.setImageBitmap(screenshot);
@@ -467,7 +467,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param message
      */
     private void launchAlert(String title, String message){
-        new AlertDialog.Builder(AchievementsActivity.this)
+        new AlertDialog.Builder(ProfileAchievementFragmnent.this)
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(true)

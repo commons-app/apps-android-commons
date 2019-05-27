@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.achievements;
+package fr.free.nrw.commons.profile.achievements;
 
 /**
  * Represents Achievements class and stores all the parameters

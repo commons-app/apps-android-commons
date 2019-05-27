@@ -7,9 +7,8 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.filters.MediumTest
 import androidx.test.runner.AndroidJUnit4
-import fr.free.nrw.commons.achievements.AchievementsActivity
+import fr.free.nrw.commons.profile.achievements.ProfileAchievementFragmnent
 import fr.free.nrw.commons.auth.LoginActivity
 import org.junit.Before
 import org.junit.Rule
@@ -32,6 +31,6 @@ class AchievementsActivityTest {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
         onView(withId(R.id.user_icon)).perform(click())
 
-        Intents.intended(hasComponent(AchievementsActivity::class.java.name))
+        Intents.intended(hasComponent(ProfileAchievementFragmnent::class.java.name))
     }
 }
