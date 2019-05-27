@@ -51,8 +51,7 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
  * two nearby element fragments as NearbyMapFragment and NearbyListFragment
  */
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
-        implements LocationUpdateListener,
-                    WikidataEditListener.WikidataP18EditListener,
+        implements WikidataEditListener.WikidataP18EditListener,
                     NearbyParentFragmentContract.View {
 
     @BindView(R.id.progressBar)
@@ -202,21 +201,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private NearbyListFragment getListFragment() {
         return (NearbyListFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
-    }
-
-    @Override
-    public void onLocationChangedSignificantly(LatLng latLng) {
-        Log.d("deneme1","location changed significantly");
-    }
-
-    @Override
-    public void onLocationChangedSlightly(LatLng latLng) {
-        Log.d("deneme1","location changed significantly");
-    }
-
-    @Override
-    public void onLocationChangedMedium(LatLng latLng) {
-        Log.d("deneme1","location changed significantly");
     }
 
     @Override

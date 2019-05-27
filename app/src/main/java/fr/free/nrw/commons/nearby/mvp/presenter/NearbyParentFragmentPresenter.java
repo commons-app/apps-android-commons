@@ -17,6 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 
 public class NearbyParentFragmentPresenter
@@ -181,19 +182,20 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        Log.d("deneme1","onLocationChangedSignificantly");
+        Timber.d("Location significantly changed");
+        updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
 
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        Log.d("deneme1","onLocationChangedSlightly");
-
+        Timber.d("Location significantly changed");
+        updateMapAndList(LOCATION_SLIGHTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedMedium(LatLng latLng) {
-        Log.d("deneme1","onLocationChangedMedium");
+        Timber.d("Location changed medium");
     }
 
 }
