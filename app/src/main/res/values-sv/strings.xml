@@ -512,5 +512,7 @@
   <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
   <string name="skip_image">HOPPA ÖVER DENNA BILD</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Nedladdning misslyckades!! Vi kan inte ladda ned filen utan behörighet för extern lagring.</string>
+  <string name="share_text">Ladda upp foton till Wikimedia Commons på din telefon Ladda ned Commons-appen: %1$s</string>
+  <string name="share_via">Dela appen via...</string>
   <string name="image_info">Bildinfo</string>
 </resources>

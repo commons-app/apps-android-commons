@@ -331,4 +331,6 @@
   <string name="desc_language_Asia">Ázsia</string>
   <string name="desc_language_Pacific">Csendes-óceáni</string>
   <string name="never_ask_again">Ne kérdezd meg többször</string>
+  <string name="review_thanks_yes_button_text">Miért ne?</string>
+  <string name="review_thanks_no_button_text">Következő kép</string>
 </resources>
