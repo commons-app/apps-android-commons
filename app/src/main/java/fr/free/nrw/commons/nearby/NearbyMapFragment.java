@@ -189,9 +189,31 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Timber.d("Nearby map fragment created");
-        Mapbox.getInstance(getActivity(),
-                getString(R.string.mapbox_commons_app_token));
-        Mapbox.getTelemetry().setUserTelemetryRequestState(false);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            String gsonPlaceList = bundle.getString("PlaceList");
+            String gsonLatLng = bundle.getString("CurLatLng");
+            Type listType = new TypeToken<List<Place>>() {
+            }.getType();
+            String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
+            List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
+            Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {
+            }.getType();
+            Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {}.getType();
+            curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+            baseMarkerOptions = NearbyController
+                    .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
+                            placeList,
+                            getActivity(),
+                            bookmarkLocationDao.getAllBookmarksLocations());
+            boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
+        }
+        if (curLatLng != null) {
+            Mapbox.getInstance(getActivity(),
+                    getString(R.string.mapbox_commons_app_token));
+            Mapbox.getTelemetry().setUserTelemetryRequestState(false);
+        }
         setRetainInstance(true);
     }
 
