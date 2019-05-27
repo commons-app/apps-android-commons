@@ -366,7 +366,9 @@
   <string name="nominate_delete">Nominate For Deletion</string>
   <string name="delete">DELETE</string>
 
+  <string name="title_activity_profile">Profile</string>
   <string name="Achievements">Achievements</string>
+  <string name="Leaderboard">Leaderboard</string>
   <string name="statistics">STATISTICS</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
