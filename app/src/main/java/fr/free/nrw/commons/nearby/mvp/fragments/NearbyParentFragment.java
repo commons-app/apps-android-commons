@@ -101,8 +101,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        Log.d("deneme1","onCreate");
-
     }
 
     @Nullable
@@ -111,7 +109,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         ButterKnife.bind(this, view);
         this.view = view;
-        Log.d("deneme1","onCreateView");
+        Timber.d("OnViewCreated");
         return view;
     }
 
@@ -127,9 +125,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * it is attached.
      */
     public void childMapFragmentAttached() {
-        Log.d("deneme1","childMapFragmentAttached");
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
                                 (this, nearbyMapFragment, locationManager);
+        Timber.d("Child fragment attached");
     }
 
 
@@ -173,7 +171,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Resume fragments if they exists
      */
     private void resumeFragment() {
-        Log.d("deneme1","resumeFragment");
+        Timber.d("Resume existing fragments if there is any");
         // Find the retained fragment on activity restarts
         nearbyMapFragment = getMapFragment();
         nearbyListFragment = getListFragment();
@@ -244,7 +242,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void registerLocationUpdates(LocationServiceManager locationServiceManager) {
-        Log.d("deneme1","registerLocationUpdates");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationServiceManager.isLocationPermissionGranted(requireContext())) {
                 locationServiceManager.registerLocationManager(getActivity());
@@ -314,7 +311,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void checkGps(LocationServiceManager locationServiceManager) {
-        Log.d("deneme1","checkGPS");
         Timber.d("checking GPS");
         if (!locationServiceManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
@@ -348,7 +344,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void checkLocationPermission(LocationServiceManager locationServiceManager) {
-        Log.d("deneme1","checkLocationPermission");
         Timber.d("Checking location permission");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationServiceManager.isLocationPermissionGranted(requireContext())) {

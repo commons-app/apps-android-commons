@@ -41,23 +41,27 @@ public class NearbyParentFragmentPresenter
                                          LocationServiceManager locationServiceManager) {
         this.nearbyParentFragmentView = nearbyParentFragmentView;
         this.nearbyMapFragmentView = nearbyMapFragmentView;
-        nearbyMapFragmentView.viewsAreSet(this);
+        this.nearbyMapFragmentView.viewsAreSet(this);
         this.locationServiceManager = locationServiceManager;
     }
 
+    /**
+     * Will be called on list button click to expand list fragment at 9/16 rate
+     */
     @Override
     public void displayListFragmentExpanded() {
 
     }
 
     /**
-     * -To initialize nearby operations both views should be ready and tab is selected.
+     * Note: To initialize nearby operations both views should be ready and tab is selected.
      * Initializes nearby operations if nearby views are ready
      */
     @Override
     public void onTabSelected() {
-        Log.d("deneme1","onTabSelected");
+        Timber.d("Nearby tab selected");
         onTabSelected = true;
+        // The condition for initialize operations is both having views ready and tab is selected
         if (nearbyViewsAreReady) {
             initializeNearbyOperations();
         }
@@ -69,8 +73,9 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void nearbyFragmentAndMapViewReady() {
-        Log.d("deneme1","nearbyFragmentAndMapViewReady");
+        Timber.d("Nearby map view ready");
         nearbyViewsAreReady = true;
+        // The condition for initialize operations is both having views ready and tab is selected
         if (onTabSelected) {
             initializeNearbyOperations();
         }
@@ -79,19 +84,20 @@ public class NearbyParentFragmentPresenter
     /**
      * Initializes nearby operations by following these steps:
      * - Add this location listener to location manager
+     * - Registers location updates with parent fragment, this methods also checks permissions
+     * Note: Highly context dependent methods are handled in view and triggered from presenter
      */
     @Override
     public void initializeNearbyOperations() {
-        Log.d("deneme1","initializeNearbyOperations");
+        Timber.d("initializing nearby operations started");
+        // Add location listener to be notified about location changes
         locationServiceManager.addLocationListener(this);
         nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
-        Log.d("deneme1","initializeNearbyOperations2");
-
-        // Nearby buttons should be active, they should be deactive only during update
+        // Nearby buttons should be active, they should be inactive only during update
         lockNearby(false);
-        //This will start a consequence to check GPS depending on different API
+        // This will start a consequence to check GPS depending on different API
         nearbyParentFragmentView.checkGps(locationServiceManager);
-        //We will know when we went offline and online again
+        // We will know when we went offline and online again
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
     }
 
@@ -106,9 +112,11 @@ public class NearbyParentFragmentPresenter
         if (isNearbyLocked) {
             locationServiceManager.unregisterLocationManager();
             locationServiceManager.removeLocationListener(this);
+            Timber.d("Nearby locked");
         } else {
             nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
             locationServiceManager.addLocationListener(this);
+            Timber.d("Nearby unlocked");
         }
     }
 
@@ -119,7 +127,6 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType) {
-        Log.d("deneme1","updateMapAndList");
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns");
             return;
@@ -130,9 +137,7 @@ public class NearbyParentFragmentPresenter
             return;
         }
 
-        //nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
         LatLng lastLocation = locationServiceManager.getLastLocation();
-        Log.d("deneme1","locationServiceManager.getLastLocation():"+locationServiceManager.getLastLocation().toString());
 
         if (curLatLng != null) {
             // TODO figure out what is happening here about orientation change
@@ -165,7 +170,6 @@ public class NearbyParentFragmentPresenter
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
     public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        Log.d("deneme","updateMapMarkers npfp");
         nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList);
         nearbyMapFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
     }
