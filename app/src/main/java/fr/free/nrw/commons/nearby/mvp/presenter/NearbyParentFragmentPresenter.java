@@ -159,10 +159,13 @@ public class NearbyParentFragmentPresenter
                 || locationChangeType.equals(MAP_UPDATED)) {
             nearbyParentFragmentView.populatePlaces(lastLocation, lastLocation);
             // TODO add a search location here
+            // TODO dont forget map updated state after an wikidata item is updated
 
-        } else {
+        } else { // Means location changed slightly, ie user is walking or driving.
             nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
         }
+
+        // TODO: update camera angle accordingly here, 1- search this area mode, 2- following current location, 3- list sheet expanded, 4- landcaped
     }
 
     /**

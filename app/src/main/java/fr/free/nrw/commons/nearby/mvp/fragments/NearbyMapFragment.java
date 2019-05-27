@@ -144,7 +144,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
             }
             return false;
         });
-        //viewsAreReadyCallback.nearbyFragmentAndMapViewReady();
     }
 
     @Override
@@ -155,8 +154,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     @Override
     public MapView setupMapView(Bundle savedInstanceState) {
-        Log.d("deneme1","setupMapView");
-        Timber.d("setupMapView called");
+        Timber.d("setting up map view");
         boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
         MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
@@ -211,13 +209,13 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                         bookmarkLocationDao.getAllBookmarksLocations());
         mapboxMap.clear();
         // TODO: set search latlang here
+        // TODO: arrange camera positions according to all other parameters
         CameraPosition cameraPosition = new CameraPosition.Builder().target
                 (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
         mapboxMap.setCameraPosition(cameraPosition);
         /*mapboxMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition), 1000);*/
         // TODO: set position depening to botom sheet position heere
-        // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
         addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
         // Re-enable mapbox gestures on custom location markers load
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
@@ -226,8 +224,9 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
-        Log.d("deneme1","updateMapToTrackPosition");
+        Timber.d("updates map cuyrrent location marker to track user location");
         addCurrentLocationMarker(curLatLng);
+        // TODO change camera target here depending to several parameters
 
     }
 
@@ -247,7 +246,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
      */
     @Override
     public void addCurrentLocationMarker(LatLng curLatLng) {
-        Log.d("deneme1","addCurrentLocationMarker");
         Timber.d("addCurrentLocationMarker is called");
 
         Icon icon = IconFactory.getInstance(getContext()).fromResource(R.drawable.current_location_marker);
@@ -255,8 +253,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
         MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
                 .position(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
         currentLocationMarkerOptions.setIcon(icon); // Set custom icon
-
-        Marker currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
 
         List<com.mapbox.mapboxsdk.geometry.LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
                 curLatLng.getAccuracy() * 2, 100);
@@ -403,14 +399,13 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     }
 
     /**
-     * Means that views are set in presenter
+     * Means that views are set in presenter to reference variables
      * @param viewsAreReadyCallback
      */
     @Override
     public void viewsAreSet(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback) {
-        Log.d("deneme1","viewsAreSet");
+        Timber.d("Views are set");
         this.viewsAreReadyCallback = viewsAreReadyCallback;
-
         this.viewsAreReadyCallback.nearbyFragmentAndMapViewReady();
     }
 
