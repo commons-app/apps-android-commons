@@ -37,6 +37,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;

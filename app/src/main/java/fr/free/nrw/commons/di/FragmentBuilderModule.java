@@ -16,6 +16,8 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyListFragment;
 import fr.free.nrw.commons.nearby.NearbyMapFragment;
+import fr.free.nrw.commons.profile.achievements.ProfileAchievementsFragment;
+import fr.free.nrw.commons.profile.leaderboard.ProfileLeaderboardFragment;
 import fr.free.nrw.commons.review.ReviewImageFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
 
@@ -70,5 +72,11 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract ReviewImageFragment bindReviewOutOfContextFragment();
+
+    @ContributesAndroidInjector
+    abstract ProfileAchievementsFragment bindProfileAchievementFragment();
+
+    @ContributesAndroidInjector
+    abstract ProfileLeaderboardFragment bindProfileLeaderboardFragment();
 
 }
