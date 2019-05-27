@@ -8,16 +8,16 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -39,11 +39,11 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -55,10 +55,10 @@ import timber.log.Timber;
 /**
  * activity for sharing feedback on uploaded activity
  */
-public class ProfileAchievementFragmnent extends NavigationBaseActivity {
+public class ProfileAchievementsFragment extends DaggerFragment {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
-    private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
+    private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.27;
 
     private LevelController.LevelInfo levelInfo;
 
@@ -68,8 +68,6 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
     TextView badgeText;
     @BindView(R.id.achievement_level)
     TextView levelNumber;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.thanks_received)
     TextView thanksReceived;
     @BindView(R.id.images_uploaded_progressbar)
@@ -106,26 +104,33 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
     SessionManager sessionManager;
     @Inject
     OkHttpJsonApiClient okHttpJsonApiClient;
-    MenuItem item;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    /**
-     * This method helps in the creation Achievement screen and
-     * dynamically set the size of imageView
-     *
-     * @param savedInstanceState Data bundle
-     */
+
+    public static ProfileAchievementsFragment newInstance() {
+        return new ProfileAchievementsFragment();
+    }
+
     @Override
-    @SuppressLint("StringFormatInvalid")
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_achievements);
-        ButterKnife.bind(this);
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+        View v = inflater.inflate(R.layout.fragment_profile_achievements, container, false);
+        ButterKnife.bind(this, v);
+        setHasOptionsMenu(true);
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // DisplayMetrics used to fetch the size of the screen
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
@@ -136,13 +141,11 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
         imageView.requestLayout();
 
-        setSupportActionBar(toolbar);
         progressBar.setVisibility(View.VISIBLE);
 
         hideLayouts();
         setAchievements();
         setWikidataEditCount();
-        initDrawer();
     }
 
     @Override
@@ -160,41 +163,20 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
                 ,getResources().getString(R.string.achievements_info_message));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_about, menu);
-        item=menu.getItem(0);
-        item.setVisible(false);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.share_app_icon) {
-            View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
-            Bitmap screenShot = Utils.getScreenShot(rootView);
-            showAlert(screenShot);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /**
      * To take bitmap and store it temporary storage and share it
      * @param bitmap
      */
     void shareScreen(Bitmap bitmap) {
         try {
-            File file = new File(this.getExternalCacheDir(), "screen.png");
+            File file = new File(getActivity().getExternalCacheDir(), "screen.png");
             FileOutputStream fOut = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
             fOut.flush();
             fOut.close();
             file.setReadable(true, false);
-            Uri fileUri = FileProvider.getUriForFile(getApplicationContext(), getPackageName()+".provider", file);
-            grantUriPermission(getPackageName(), fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri fileUri = FileProvider.getUriForFile(getActivity().getApplicationContext(), getActivity().getPackageName()+".provider", file);
+            getActivity().grantUriPermission(getActivity().getPackageName(), fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
             final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, fileUri);
@@ -257,7 +239,7 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
 
     private void showSnackBarWithRetry() {
         progressBar.setVisibility(View.GONE);
-        ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
+        ViewUtil.showDismissibleSnackBar(getView().findViewById(android.R.id.content),
                 R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
     }
 
@@ -265,7 +247,7 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
      * Shows a generic error toast when error occurs while loading achievements or uploads
      */
     private void onError() {
-        ViewUtil.showLongToast(this, getResources().getString(R.string.error_occurred));
+        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.error_occurred));
         progressBar.setVisibility(View.GONE);
     }
 
@@ -315,7 +297,7 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
     }
 
     private void setZeroAchievements() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this)
+        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity())
                 .setMessage("You haven't made any contributions yet")
                 .setPositiveButton("Ok", (dialog, which) -> {
                 });
@@ -359,7 +341,7 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
         levelUpInfoString += " " + levelInfo.getLevelNumber();
         levelNumber.setText(levelUpInfoString);
         imageView.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
-                new ContextThemeWrapper(this, levelInfo.getLevelStyle()).getTheme()));
+                new ContextThemeWrapper(getActivity(), levelInfo.getLevelStyle()).getTheme()));
         badgeText.setText(Integer.toString(levelInfo.getLevelNumber()));
     }
 
@@ -368,7 +350,7 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
      * @param context
      */
     public static void startYourself(Context context) {
-        Intent intent = new Intent(context, ProfileAchievementFragmnent.class);
+        Intent intent = new Intent(context, ProfileAchievementsFragment.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
@@ -385,7 +367,6 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
             setUploadProgress(achievements.getImagesUploaded());
             setImageRevertPercentage(achievements.getNotRevertPercentage());
             progressBar.setVisibility(View.GONE);
-            item.setVisible(true);
             layoutImageReverts.setVisibility(View.VISIBLE);
             layoutImageUploaded.setVisibility(View.VISIBLE);
             layoutImageUsedByWiki.setVisibility(View.VISIBLE);
@@ -412,8 +393,8 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
      * @param screenshot
      */
     public void showAlert(Bitmap screenshot){
-        AlertDialog.Builder alertadd = new AlertDialog.Builder(ProfileAchievementFragmnent.this);
-        LayoutInflater factory = LayoutInflater.from(ProfileAchievementFragmnent.this);
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(getActivity());
+        LayoutInflater factory = LayoutInflater.from(getActivity());
         final View view = factory.inflate(R.layout.image_alert_layout, null);
         ImageView screenShotImage = view.findViewById(R.id.alert_image);
         screenShotImage.setImageBitmap(screenshot);
@@ -467,7 +448,7 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
      * @param message
      */
     private void launchAlert(String title, String message){
-        new AlertDialog.Builder(ProfileAchievementFragmnent.this)
+        new AlertDialog.Builder(getActivity())
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(true)
@@ -484,8 +465,8 @@ public class ProfileAchievementFragmnent extends NavigationBaseActivity {
         Account currentAccount = sessionManager.getCurrentAccount();
         if (currentAccount == null) {
             Timber.d("Current account is null");
-            ViewUtil.showLongToast(this, getResources().getString(R.string.user_not_logged_in));
-            sessionManager.forceLogin(this);
+            ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.user_not_logged_in));
+            sessionManager.forceLogin(getActivity());
             return false;
         }
         return true;
