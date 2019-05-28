@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
 
 import java.util.List;
 
@@ -47,6 +48,7 @@ public interface NearbyMapContract {
         void updateMarker(boolean isBookmarked, Place place);
         LatLng getCameraTarget();
         void viewsAreSet(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback);
+        void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
     }
 
     interface UserActions extends NearbyElementContract.UserActions {

@@ -410,6 +410,11 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     }
 
     @Override
+    public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
+        mapboxMap.addOnCameraMoveListener(onCameraMoveListener);
+    }
+
+    @Override
     public void showPlaces() {
 
     }

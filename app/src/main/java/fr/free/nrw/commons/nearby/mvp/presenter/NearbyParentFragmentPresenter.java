@@ -2,7 +2,11 @@ package fr.free.nrw.commons.nearby.mvp.presenter;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+
+import ch.qos.logback.core.util.LocationUtil;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -10,6 +14,8 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.utils.LocationUtils;
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -35,6 +41,7 @@ public class NearbyParentFragmentPresenter
 
     boolean nearbyViewsAreReady;
     boolean onTabSelected;
+    boolean searchingThisArea;
 
     private LocationServiceManager locationServiceManager;
 
@@ -45,6 +52,10 @@ public class NearbyParentFragmentPresenter
         this.nearbyMapFragmentView = nearbyMapFragmentView;
         this.nearbyMapFragmentView.viewsAreSet(this);
         this.locationServiceManager = locationServiceManager;
+
+        // Add on map camera moved listener after making sure presenter is ready
+        this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
+        this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getCameraTarget()));
     }
 
     /**
@@ -131,8 +142,55 @@ public class NearbyParentFragmentPresenter
      * this area button to search nearby places for other locations
      */
     @Override
-    public void addMapMovementListeners() {
-        
+    public MapboxMap.OnCameraMoveListener onCameraMove(LatLng cameraTarget) {
+        return new MapboxMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                // If our nearby markers are calculated at least once
+                if (NearbyController.currentLocation != null) {
+                    if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
+                        nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
+                    }
+                }
+            }
+        };
+    }
+
+    public View.OnClickListener onSearchThisAreaClicked() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Lock map operations during search this area operation
+                lockNearby(true);
+                nearbyParentFragmentView.setSearchThisAreaProgressVisibility(true);
+                // TODO: make this invisible at somewhere
+                nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
+
+                if (searchCloseToCurrentLocation()){
+                    updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED,
+                            null);
+                } else {
+                    updateMapAndList(SEARCH_CUSTOM_AREA,
+                            getCameraTarget());
+                }
+            }
+        };
+    }
+
+    /**
+     * Returns true if search this area button is used around our current location, so that
+     * we can continue following our current location again
+     * @return Returns true if search this area button is used around our current location
+     */
+    public boolean searchCloseToCurrentLocation() {
+        double distance = LocationUtils.commonsLatLngToMapBoxLatLng(getCameraTarget())
+                .distanceTo(new com.mapbox.mapboxsdk.geometry.LatLng(NearbyController.currentLocation.getLatitude()
+                        , NearbyController.currentLocation.getLongitude()));
+        if (distance > NearbyController.searchedRadius*1000*3/4) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 
@@ -180,6 +238,7 @@ public class NearbyParentFragmentPresenter
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
             nearbyParentFragmentView.populatePlaces(lastLocation, cameraTarget);
+            searchingThisArea = false;
         }
 
         else { // Means location changed slightly, ie user is walking or driving.
