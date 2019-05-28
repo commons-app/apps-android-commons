@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -65,7 +66,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.container_sheet)
     FrameLayout frameLayout;
     @BindView(R.id.loading_nearby_list)
-    ConstraintLayout loading_nearby_layout;
+    ConstraintLayout loadingNearbyLayout;
+    @BindView(R.id.search_this_area_button)
+    Button searchThisAreaButton;
 
     @Inject
     NearbyController nearbyController;
