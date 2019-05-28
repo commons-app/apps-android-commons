@@ -38,6 +38,7 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.FragmentUtils;
+import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
@@ -46,6 +47,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
 /**
  * This fragment is under MainActivity at the came level with ContributionFragment and holds
@@ -69,6 +71,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     ConstraintLayout loadingNearbyLayout;
     @BindView(R.id.search_this_area_button)
     Button searchThisAreaButton;
+    @BindView(R.id.search_this_area_button_progress_bar)
+    ProgressBar searchThisAreaButtonProgressBar;
 
     @Inject
     NearbyController nearbyController;
@@ -116,6 +120,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        addSearchThisAreaButtonAction();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         resumeFragment();
@@ -132,6 +142,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Timber.d("Child fragment attached");
     }
 
+    public void addSearchThisAreaButtonAction() {
+        searchThisAreaButton.setOnClickListener(view -> {
+            // Lock map operations during search this area operation
+            nearbyParentFragmentPresenter.lockNearby(true);
+            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+            searchThisAreaButton.setVisibility(View.GONE);
+            nearbyParentFragmentPresenter.updateMapAndList(SEARCH_CUSTOM_AREA,
+                    NearbyParentFragment.this.nearbyParentFragmentPresenter.getCameraTarget());
+        });
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -334,7 +354,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Timber.d("Checking location permission");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationServiceManager.isLocationPermissionGranted(requireContext())) {
-                nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
+                nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
             } else {
                 // Should we show an explanation?
                 if (locationServiceManager.isPermissionExplanationRequired(getActivity())) {
@@ -360,7 +380,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }
             }
         } else {
-            nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
+            nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
         }
     }
 
@@ -390,7 +410,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 if (getActivity() != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
                         if (isNetworkErrorOccurred) {
-                            nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
+                            nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
                             isNetworkErrorOccurred = false;
                         }
 

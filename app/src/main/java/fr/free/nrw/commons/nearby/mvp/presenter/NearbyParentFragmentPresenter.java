@@ -19,6 +19,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
@@ -121,13 +122,29 @@ public class NearbyParentFragmentPresenter
         }
     }
 
+    public LatLng getCameraTarget() {
+        return nearbyMapFragmentView.getCameraTarget();
+    }
+
+    /**
+     * Adds map movement listener to understand swiping with fingers. So that we can display search
+     * this area button to search nearby places for other locations
+     */
+    @Override
+    public void addMapMovementListeners() {
+        
+    }
+
+
     /**
      * This method should be the single point to update Map and List. Triggered by location
      * changes
      * @param locationChangeType defines if location changed significantly or slightly
+     * @param cameraTarget will be used for search this area mode, when searching around
+     *                    user's camera target
      */
     @Override
-    public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType) {
+    public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget) {
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns");
             return;
@@ -161,7 +178,11 @@ public class NearbyParentFragmentPresenter
             // TODO add a search location here
             // TODO dont forget map updated state after an wikidata item is updated
 
-        } else { // Means location changed slightly, ie user is walking or driving.
+        } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
+            nearbyParentFragmentView.populatePlaces(lastLocation, cameraTarget);
+        }
+
+        else { // Means location changed slightly, ie user is walking or driving.
             nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
         }
 
@@ -186,14 +207,14 @@ public class NearbyParentFragmentPresenter
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
         Timber.d("Location significantly changed");
-        updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
+        updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
 
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
         Timber.d("Location significantly changed");
-        updateMapAndList(LOCATION_SLIGHTLY_CHANGED);
+        updateMapAndList(LOCATION_SLIGHTLY_CHANGED, null);
     }
 
     @Override

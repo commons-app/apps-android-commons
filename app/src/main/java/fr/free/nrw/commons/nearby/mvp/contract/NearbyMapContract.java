@@ -45,6 +45,7 @@ public interface NearbyMapContract {
         void animateFABs(boolean isFabOpen);
         void closeFabs ( boolean isFabOpen);
         void updateMarker(boolean isBookmarked, Place place);
+        LatLng getCameraTarget();
         void viewsAreSet(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback);
     }
 

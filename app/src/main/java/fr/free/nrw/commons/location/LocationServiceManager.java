@@ -303,6 +303,7 @@ public class LocationServiceManager implements LocationListener {
         LOCATION_MEDIUM_CHANGED,      //Between slight and significant changes, will be used for nearby card view updates.
         LOCATION_NOT_CHANGED,
         PERMISSION_JUST_GRANTED,
-        MAP_UPDATED
+        MAP_UPDATED,
+        SEARCH_CUSTOM_AREA
     }
 }

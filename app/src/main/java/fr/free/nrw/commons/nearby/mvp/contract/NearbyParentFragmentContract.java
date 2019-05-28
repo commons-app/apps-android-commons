@@ -23,10 +23,16 @@ public interface NearbyParentFragmentContract {
 
     interface UserActions {
         void displayListFragmentExpanded();
+
         void onTabSelected();
+
         void initializeNearbyOperations();
-        void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType);
+
+        void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget);
+
         void lockNearby(boolean isNearbyLocked);
+
+        void addMapMovementListeners();
     }
     
     interface ViewsAreReadyCallback {

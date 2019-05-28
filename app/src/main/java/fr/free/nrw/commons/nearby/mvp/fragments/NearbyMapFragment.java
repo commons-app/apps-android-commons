@@ -413,4 +413,10 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     public void showPlaces() {
 
     }
+
+    @Override
+    public LatLng getCameraTarget() {
+        return LocationUtils
+                .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target);
+    }
 }
