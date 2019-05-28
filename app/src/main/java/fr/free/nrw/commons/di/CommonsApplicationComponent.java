@@ -15,6 +15,7 @@ import fr.free.nrw.commons.nearby.PlaceRenderer;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.FileProcessor;
+import fr.free.nrw.commons.upload.UploadModule;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
 
 
@@ -27,7 +28,7 @@ import fr.free.nrw.commons.widget.PicOfDayAppWidget;
         ActivityBuilderModule.class,
         FragmentBuilderModule.class,
         ServiceBuilderModule.class,
-        ContentProviderBuilderModule.class
+        ContentProviderBuilderModule.class, UploadModule.class
 })
 public interface CommonsApplicationComponent extends AndroidInjector<ApplicationlessInjection> {
     void inject(CommonsApplication application);

@@ -100,7 +100,7 @@ public class ContributionDao {
             cv.put(Table.COLUMN_UPLOADED, contribution.getDateUploaded().getTime());
         }
         cv.put(Table.COLUMN_LENGTH, contribution.getDataLength());
-        //This was always meant to store the date created..If somehow date created is not fetched while actually saving the contribution, lets save today's date
+        //This was always meant to store the date created..If somehow date created is not fetched while actually saving the contribution, lets saveValue today's date
         cv.put(Table.COLUMN_TIMESTAMP, contribution.getDateCreated()==null?System.currentTimeMillis():contribution.getDateCreated().getTime());
         cv.put(Table.COLUMN_STATE, contribution.getState());
         cv.put(Table.COLUMN_TRANSFERRED, contribution.getTransferred());
