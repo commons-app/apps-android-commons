@@ -199,7 +199,7 @@
   <string name="maximum_limit_alert">Kan ikke vise mer enn 500</string>
   <string name="enter_valid">Angi et gyldig tall</string>
   <string name="cannot_be_zero">Opplastingsgrensen kan ikke være 0</string>
-  <string name="set_limit" fuzzy="true">Sett grense for seneste opplastinger</string>
+  <string name="set_limit">Grense for siste opplastinger</string>
   <string name="login_failed_2fa_not_supported">Totrinns pålogging støttes ikke ennå.</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
   <string name="commons_logo">Commons-logo</string>

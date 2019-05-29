@@ -5,6 +5,7 @@
 * Amire80
 * Barakolo
 * Deborahjay
+* Erelon
 * ExampleTomer
 * Guycn2
 * Inkbug
@@ -517,5 +518,7 @@
   <string name="welcome_dont_upload_content_description">דוגמאות של תמונות שאין להעלות</string>
   <string name="skip_image">דילוג על התמונה הזאת</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ההורדה נכשלה!! אין לנו אפשרות להוריד את הקובץ ללא הרשאות גישה לאחסון חיצוני.</string>
+  <string name="share_text">כדי להעלות תמונות לוויקינתונים של ויקימדיה בעזרת הטלפון שלך יש להוריד את היישומון של ויקינתונים: %1$s</string>
+  <string name="share_via">שיתוף אפליקציה דרך...</string>
   <string name="image_info">פרטי תמונה</string>
 </resources>
