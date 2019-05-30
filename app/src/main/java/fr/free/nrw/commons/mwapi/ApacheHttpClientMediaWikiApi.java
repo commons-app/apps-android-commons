@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.ClientConnectionManager;
@@ -456,7 +458,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Nullable
     @Override
     public String wikidataEditEntity(String entityId, String fileEntityId) throws IOException {
-        String data = "{\"claims\":[{\n" +
+
+        /*
+         String data = "{\"claims\":[{\n" +
             "\"mainsnak\": {\n" +
                 "\"snaktype\": \"value\",\n" +
                         "\"property\": \"P180\",\n" +
@@ -471,8 +475,38 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             "},\n" +
             "\"type\": \"statement\",\n" +
                     "\"rank\": \"preferred\"\n" +
-        "}]}";
-        data = data.replace("$ENTITY_ID$", entityId.replace("Q", ""));
+                 "}]}";
+         data = data.replace("$ENTITY_ID$", entityId.replace("Q", ""));
+        */
+
+        JsonObject value = new JsonObject();
+        value.addProperty("entity-type", "item");
+        value.addProperty("numeric-id", "$ENTITY_ID$");
+        value.addProperty("id", "Q$ENTITY_ID$");
+
+        JsonObject dataValue = new JsonObject();
+        dataValue.add("value", value);
+        dataValue.addProperty("type", "wikibase-entityid");
+
+        JsonObject mainSnak = new JsonObject();
+        mainSnak.addProperty("snaktype", "value");
+        mainSnak.addProperty("property", "P180");
+        mainSnak.add("datavalue", dataValue);
+
+        JsonObject claim = new JsonObject();
+        claim.add("mainsnak", mainSnak);
+        claim.addProperty("type", "statement");
+        claim.addProperty("rank", "preferred");
+
+        JsonArray claims = new JsonArray();
+        claims.add(claim);
+
+        JsonObject jsonData = new JsonObject();
+        jsonData.add("claims", claims);
+
+        String data = jsonData
+                .toString()
+                .replace("$ENTITY_ID$", entityId.replace("Q", ""));
 
         CustomApiResult result = api.action("wbeditentity")
                 .param("id", fileEntityId)
