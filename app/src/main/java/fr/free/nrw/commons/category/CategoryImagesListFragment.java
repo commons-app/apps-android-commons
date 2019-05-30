@@ -1,9 +1,7 @@
 package fr.free.nrw.commons.category;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,15 +19,18 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -50,12 +51,15 @@ public class CategoryImagesListFragment extends DaggerFragment {
     @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
     @BindView(R.id.categoryImagesList) GridView gridView;
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private boolean hasMoreImages = true;
     private boolean isLoading = true;
     private String categoryName = null;
 
     @Inject CategoryImageController controller;
-    @Inject @Named("category_prefs") SharedPreferences categoryPreferences;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore categoryKvStore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +73,12 @@ public class CategoryImagesListFragment extends DaggerFragment {
         super.onViewCreated(view, savedInstanceState);
         gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
         initViews();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
     }
 
     /**
@@ -91,9 +101,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param keyword
      */
     private void resetQueryContinueValues(String keyword) {
-        SharedPreferences.Editor editor = categoryPreferences.edit();
-        editor.remove(keyword);
-        editor.apply();
+        categoryKvStore.remove("query_continue_" + keyword);
     }
 
     /**
@@ -108,11 +116,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
-        Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
+        compositeDisposable.add(controller.getCategoryImages(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handleSuccess, this::handleError);
+                .subscribe(this::handleSuccess, this::handleError));
     }
 
     /**
@@ -124,7 +132,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
             statusTextView.setVisibility(VISIBLE);
             statusTextView.setText(getString(R.string.no_internet));
         } else {
-            ViewUtil.showSnackbar(parentLayout, R.string.no_internet);
+            ViewUtil.showShortSnackbar(parentLayout, R.string.no_internet);
         }
     }
 
@@ -135,7 +143,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading images inside a category");
         try{
-            ViewUtil.showSnackbar(parentLayout, R.string.error_loading_images);
+            ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
             initErrorView();
         }catch (Exception e){
             e.printStackTrace();
@@ -214,11 +222,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
 
         progressBar.setVisibility(VISIBLE);
-        Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
+        compositeDisposable.add(controller.getCategoryImages(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handleSuccess, this::handleError);
+                .subscribe(this::handleSuccess, this::handleError));
     }
 
     /**
@@ -251,6 +259,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
             }catch (Exception e){
                 e.printStackTrace();
             }
+            try {
+                ((ExploreActivity) getContext()).viewPagerNotifyDataSetChanged();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         progressBar.setVisibility(GONE);
         isLoading = false;
@@ -263,10 +276,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @return  GridView Adapter
      */
     public ListAdapter getAdapter() {
-        if(gridView == null) {
-            return null;
-        }
-        return gridView.getAdapter();
+        return gridAdapter;
     }
 
 }

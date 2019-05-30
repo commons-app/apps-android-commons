@@ -1,12 +1,11 @@
 package fr.free.nrw.commons.upload;
 
 import android.net.Uri;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
+import fr.free.nrw.commons.location.LatLng;
 
 import java.lang.annotation.Retention;
 import java.util.List;
-
-import fr.free.nrw.commons.utils.ImageUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -16,7 +15,6 @@ public interface UploadView {
 //    UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
 //    new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
 
-    List<Description> getDescriptions();
 
     @Retention(SOURCE)
     @IntDef({PLEASE_WAIT, TITLE_CARD, CATEGORIES, LICENSE})
@@ -44,15 +42,13 @@ public interface UploadView {
 
     void setBottomCardState(boolean state);
 
-    void setRightCardState(boolean bottomCardState);
-
     void setBackground(Uri mediaUri);
 
     void setTopCardVisibility(boolean visible);
 
     void setBottomCardVisibility(boolean visible);
 
-    void setBottomCardVisibility(@UploadPage int page);
+    void setBottomCardVisibility(@UploadPage int page, int uploadCount);
 
     void updateRightCardContent(boolean gpsPresent);
 
@@ -60,23 +56,31 @@ public interface UploadView {
 
     void updateLicenses(List<String> licenses, String selectedLicense);
 
-    void updateLicenseSummary(String selectedLicense);
+    void updateLicenseSummary(String selectedLicense, int imageCount);
 
     void updateTopCardContent();
 
+    void updateSubtitleVisibility(int imageCount);
+
     void dismissKeyboard();
 
-    void showBadPicturePopup(@ImageUtils.Result int errorMessage);
+    void showBadPicturePopup(String errorMessage);
 
     void showDuplicatePicturePopup();
 
     void finish();
 
-    void launchMapActivity(String decCoords);
+    void launchMapActivity(LatLng decCoords);
 
     void showErrorMessage(int resourceId);
 
     void initDefaultCategories();
 
     void showNoCategorySelectedWarning();
+
+    void showProgressDialog();
+
+    void hideProgressDialog();
+
+    void askUserToLogIn();
 }

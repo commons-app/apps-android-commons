@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -128,19 +128,6 @@ public class CategoryImagesActivity
     }
 
     /**
-     * This method is called on backPressed when mediaDetailFragment is opened in the activity.
-     */
-    @Override
-    protected void onResume() {
-        if (supportFragmentManager.getBackStackEntryCount()==1){
-            //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
-            //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
-            onBackPressed();
-        }
-        super.onResume();
-    }
-
-    /**
      * Consumers should be simply using this method to use this activity.
      * @param context A Context of the application package implementing this class.
      * @param title Page title
@@ -148,7 +135,7 @@ public class CategoryImagesActivity
      */
     public static void startYourself(Context context, String title, String categoryName) {
         Intent intent = new Intent(context, CategoryImagesActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("title", title);
         intent.putExtra("categoryName", categoryName);
         context.startActivity(intent);

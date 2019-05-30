@@ -2,10 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.text.TextUtils;
 
-import io.reactivex.subjects.BehaviorSubject;
-import timber.log.Timber;
-
-class Title{
+public class Title{
 
     private String titleText;
     private boolean set;
@@ -33,5 +30,9 @@ class Title{
 
     public boolean isEmpty() {
         return titleText==null || titleText.isEmpty();
+    }
+
+    public String getTitleText() {
+        return titleText;
     }
 }

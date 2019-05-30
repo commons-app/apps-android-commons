@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import javax.inject.Inject;
@@ -150,8 +150,8 @@ public class ContributionsContentProvider extends CommonsDaggerContentProvider {
         /*
         SQL Injection warnings: First, note that we're not exposing this to the outside world (exported="false")
         Even then, we should make sure to sanitize all user input appropriately.
-        Input that passes through ContentValuesshould be fine. So only issues are those that pass
-        in via concating.
+        Input that passes through ContentValues should be fine. So only issues are those that pass
+        in via concatenating.
 
         In here, the only concat created argument is for id. It is cast to an int, and will
         error out otherwise.

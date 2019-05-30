@@ -2,8 +2,6 @@ package fr.free.nrw.commons.bookmarks.pictures;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
@@ -28,8 +28,8 @@ import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.GridViewAdapter;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -41,6 +41,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     private static final int TIMEOUT_SECONDS = 15;
 
     private GridViewAdapter gridAdapter;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @BindView(R.id.statusMessage) TextView statusTextView;
     @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
@@ -83,6 +84,12 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         if (controller.needRefreshBookmarkedPictures()) {
@@ -113,11 +120,11 @@ public class BookmarkPicturesFragment extends DaggerFragment {
         progressBar.setVisibility(VISIBLE);
         statusTextView.setVisibility(GONE);
 
-        Observable.fromCallable(() -> controller.loadBookmarkedPictures())
+        compositeDisposable.add(controller.loadBookmarkedPictures()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handleSuccess, this::handleError);
+                .subscribe(this::handleSuccess, this::handleError));
     }
 
     /**
@@ -129,7 +136,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             statusTextView.setVisibility(VISIBLE);
             statusTextView.setText(getString(R.string.no_internet));
         } else {
-            ViewUtil.showSnackbar(parentLayout, R.string.no_internet);
+            ViewUtil.showShortSnackbar(parentLayout, R.string.no_internet);
         }
     }
 
@@ -140,7 +147,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading images inside a category");
         try{
-            ViewUtil.showSnackbar(parentLayout, R.string.error_loading_images);
+            ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
             initErrorView();
         }catch (Exception e){
             e.printStackTrace();

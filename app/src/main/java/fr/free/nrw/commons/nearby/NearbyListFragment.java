@@ -1,20 +1,12 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -23,38 +15,28 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
-import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
-import static android.app.Activity.RESULT_OK;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-
-public class NearbyListFragment extends DaggerFragment {
+public class NearbyListFragment extends CommonsDaggerSupportFragment {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
 
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
     }.getType();
     private static final Type CUR_LAT_LNG_TYPE = new TypeToken<LatLng>() {
     }.getType();
-    private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Uri.class, new UriDeserializer())
-            .create();
 
     private NearbyAdapterFactory adapterFactory;
     private RecyclerView recyclerView;
-    private ContributionController controller;
 
-
-    @Inject
-    @Named("direct_nearby_upload_prefs")
-    SharedPreferences directPrefs;
+    @Inject ContributionController controller;
+    @Inject Gson gson;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +46,6 @@ public class NearbyListFragment extends DaggerFragment {
 
     @Override
     public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 
@@ -76,8 +57,6 @@ public class NearbyListFragment extends DaggerFragment {
         View view = inflater.inflate(R.layout.fragment_nearby_list, container, false);
         recyclerView = view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        controller = new ContributionController(this);
         adapterFactory = new NearbyAdapterFactory(this, controller);
         return view;
     }
@@ -90,6 +69,9 @@ public class NearbyListFragment extends DaggerFragment {
         recyclerView.setAdapter(adapterFactory.create(getPlaceListFromBundle(bundle)));
     }
 
+    /**
+     * Updates nearby list elements all together
+     */
     public void updateNearbyListSignificantly() {
         try {
             adapterFactory.updateAdapterData(getPlaceListFromBundle(bundleForUpdates), (RVRendererAdapter<Place>) recyclerView.getAdapter());
@@ -100,8 +82,8 @@ public class NearbyListFragment extends DaggerFragment {
 
     /**
      * While nearby updates for current location held with bundle, automatically, custom updates are
-     * done by calling this methods, triddered by search this are button input from user.
-     * @param placeList
+     * done by calling this method, triggered by search this are button input from user.
+     * @param placeList List of nearby places to be added list fragment
      */
     public void updateNearbyListSignificantlyForCustomLocation(List<Place> placeList) {
         try {
@@ -111,6 +93,13 @@ public class NearbyListFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * When user moved too much, we need to update nearby list too. This operation is made by passing
+     * a bundle from NearbyFragment to NearbyListFragment and NearbyMapFragment. This method extracts
+     * place list from bundle to a list variable.
+     * @param bundle Bundle passed from NearbyFragment on users significant moving
+     * @return List of new nearby places
+     */
     private List<Place> getPlaceListFromBundle(Bundle bundle) {
         List<Place> placeList = Collections.emptyList();
 
@@ -127,52 +116,10 @@ public class NearbyListFragment extends DaggerFragment {
         return placeList;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
-
-        switch (requestCode) {
-            // 4 = "Read external storage" allowed when gallery selected
-            case 4: {
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startGalleryPick()");
-                    controller.startGalleryPick();
-                }
-            }
-            break;
-
-            // 5 = "Write external storage" allowed when camera selected
-            case 5: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Call controller.startCameraCapture()");
-                    controller.startCameraCapture();
-                }
-            }
-        }
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-            String wikidataEntityId = directPrefs.getString("WikiDataEntityId", null);
-            if (requestCode == ContributionController.SELECT_FROM_CAMERA) {
-                // If coming from camera, pass null as uri. Because camera photos get saved to a
-                // fixed directory
-                controller.handleImagePicked(requestCode, null, true, wikidataEntityId);
-            } else {
-                controller.handleImagePicked(requestCode, data.getData(), true, wikidataEntityId);
-            }
-        } else {
-            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
-                    requestCode, resultCode, data);
-        }
-    }
-
+    /**
+     * Sets bundles for updates in map. Ie. user is moved too much so we need to update nearby markers.
+     * @param bundleForUpdates includes new calculated nearby places.
+     */
     public void setBundleForUpdates(Bundle bundleForUpdates) {
         this.bundleForUpdates = bundleForUpdates;
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abbedabb
+* Abijeet Patro
 * Ainali
 * Jopparn
 * Liuxinyu970226
@@ -95,9 +96,10 @@
   <string name="title_activity_signup">Registrera</string>
   <string name="title_activity_featured_images">Utvalda bilder</string>
   <string name="title_activity_category_details">Kategori</string>
+  <string name="title_activity_review">Granskning</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen är en app med öppen källkod som skapas och underhålls av frivilliga från Wikimedias gemenskap. Wikimedia Foundation är inte involverad i skapandet, utvecklingen eller underhållet av appen.</string>
-  <string name="about_improve">Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
+  <string name="about_improve">Skapa ett nytt &lt;a href=\"%1$s\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
   <string name="about_privacy_policy">&lt;u&gt;Integritetspolicy&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Erkännande&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>
@@ -108,7 +110,10 @@
   <string name="no_uploads_yet">Du har inte lagt upp några bilder ännu.</string>
   <string name="menu_retry_upload">Försök igen</string>
   <string name="menu_cancel_upload">Avbryt</string>
-  <string name="share_license_summary">Denna bild kommer att licensieras under %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Denna bild kommer att licensieras under %1$s</item>
+    <item quantity="other">Dessa bilder kommer att licensieras under %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Genom att skicka in denna bild intygar jag att detta är mitt eget verk, som inte innehåller upphovsrättsskyddat material eller selfies samt följer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-policys&lt;/a&gt;.</string>
   <string name="menu_download">Ladda ned</string>
   <string name="preference_license">Standardlicens</string>
@@ -140,17 +145,14 @@
   <string name="tutorial_1_text">Wikimedia Commons lagrar de flesta bilderna som används på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dina bilder hjälper till att utbilda\nmänniskor runt hela världen!</string>
   <string name="tutorial_2_text">Ladda endast upp bilder som du har tagit eller skapat själv:</string>
-  <string name="tutorial_2_subtext">Naturliga föremål (blommor, djur, berg)\n• Användbara föremål (cyklar, tågstationer)\n• Berömda personer (din borgmästare, olympiska atleter du har träffat)</string>
   <string name="tutorial_2_subtext_1">Naturliga föremål (blommor, djur, berg)</string>
   <string name="tutorial_2_subtext_2">Användbar föremål (cyklar, tågstationer)</string>
   <string name="tutorial_2_subtext_3">Berömda personer (din borgmästare, olympiska atleter du har träffat)</string>
   <string name="tutorial_3_text">Ladda INTE upp:</string>
-  <string name="tutorial_3_subtext">- Selfies eller bilder på dina vänner\n- Bilder som du har laddat ned från Internet\n- Skärmdumpar på proprietära appar</string>
   <string name="tutorial_3_subtext_1">Självporträtt eller bilder av dina vänner</string>
   <string name="tutorial_3_subtext_2">Bilder du har laddat ned från Internet</string>
   <string name="tutorial_3_subtext_3">Skärmdumpar av proprietära programvaror</string>
   <string name="tutorial_4_text">Uppladdningsexempel:</string>
-  <string name="tutorial_4_subtext">- Titel: Sydneys operahus\n- Beskrivning: Sydneys operahus sedd från andra sidan bukten\n- Kategorier: Sydneys operahus från väst, Sydneys operahus utifrån</string>
   <string name="tutorial_4_subtext_1">Titel: Operahuset i Sydney</string>
   <string name="tutorial_4_subtext_2">Beskrivning: Operahuset i Sydneys sett från andra sidan bukten</string>
   <string name="tutorial_4_subtext_3">Kategorier: Operahuset i Sydney från väst, avlägsna vyer av Operahuset i Sydney</string>
@@ -165,10 +167,12 @@
   <string name="detail_panel_cats_loading">Läser in…</string>
   <string name="detail_panel_cats_none">Ingen markerad</string>
   <string name="detail_description_empty">Ingen beskrivning</string>
+  <string name="detail_discussion_empty">Ingen diskussion</string>
   <string name="detail_license_empty">Okänd licens</string>
   <string name="menu_refresh">Uppdatera</string>
+  <string name="storage_permission_title">Begär lagringsbehörighet</string>
   <string name="read_storage_permission_rationale">Nödvändig behörighet: Läs extern lagring. Appen kan inte komma åt ditt galleri utan detta.</string>
-  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera utan detta.</string>
+  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera/galleri utan detta.</string>
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Platser i närheten</string>
@@ -178,11 +182,9 @@
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>
-  <string name="media_detail_media_title">Mediatitel</string>
   <string name="media_detail_description">Beskrivning</string>
-  <string name="media_detail_description_explanation">Beskrivningen för mediafilen ska vara här. Den kan vara riktig lång och kommer att behöva sträcka sig över flera rader. Vi hoppas i alla fall att det kommer se bra ut.</string>
+  <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Skapare</string>
-  <string name="media_detail_author_explanation">Användarnamnet för den utvalda bildens skapare ska stå här.</string>
   <string name="media_detail_uploaded_date">Uppladdningsdatum</string>
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -192,8 +194,12 @@
   <string name="_2fa_code">2-stegsverif.kod</string>
   <string name="number_of_uploads">Gräns för mina senaste uppladdningar</string>
   <string name="maximum_limit">Maxgräns</string>
+  <string name="invalid_zero">Noll är inte giltigt</string>
+  <string name="invalid_input">Ogiltig inmatning</string>
   <string name="maximum_limit_alert">Kan inte visa fler än 500</string>
-  <string name="set_limit">Ändra gräns för senaste uppladdningar</string>
+  <string name="enter_valid">Ange en giltig siffra</string>
+  <string name="cannot_be_zero">Uppladdningsgränsen kan inte vara 0</string>
+  <string name="set_limit">Gräns för senaste uppladdningar</string>
   <string name="login_failed_2fa_not_supported">Tvåstegsverifiering stöds för tillfället inte.</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
   <string name="commons_logo">Commons-logotyp</string>
@@ -228,6 +234,7 @@
   <string name="navigation_item_info">Guide</string>
   <string name="navigation_item_notification">Meddelanden</string>
   <string name="navigation_item_featured_images">Utvald</string>
+  <string name="navigation_item_review">Granska</string>
   <string name="nearby_needs_permissions">Platser i närheten kan inte visas utan platsbehörigheter</string>
   <string name="no_description_found">ingen beskrivning hittades</string>
   <string name="nearby_info_menu_commons_article">Commons-filsida</string>
@@ -238,13 +245,14 @@
   <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
   <string name="upload_image_too_dark">Denna bild är för mörk, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="upload_image_blurry">Denna bild är suddig, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_duplicate">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
-  <string name="upload_image_problem_dark">Denna bild är för mörk, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_blurry">Denna bild är suddig, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_dark_duplicate">Denna bild är för mörk och finns redan på Commons, är du säker på att du vill ladda upp den? Ladda endast upp bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_blurry_duplicate">Denna bild är suddig och finns redan på Commons, är du säker på att du vill ladda upp den? Ladda endast upp bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_dark_blurry">Denna bild är för mörk och suddig, är du säker på att du vill ladda upp den? Ladda endast upp bilder med encyklopediskt värde.</string>
-  <string name="upload_image_problem_dark_blurry_duplicate">Denna bild är för mörk och suddig samt finns redan på Commons, är du säker på att du vill ladda upp den? Ladda endast upp bilder med encyklopediskt värde.</string>
+  <string name="upload_problem_exist">Möjliga problem med denna bild:</string>
+  <string name="upload_problem_image_dark">Bilden är för mörk.</string>
+  <string name="upload_problem_image_blurry">Bilden är för suddig.</string>
+  <string name="upload_problem_image_duplicate">Bilden finns redan på Commons.</string>
+  <string name="upload_problem_different_geolocation">Bilden togs på en annan plats.</string>
+  <string name="upload_problem_fbmd">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har hittat på andra personers Facebook-konton.</string>
+  <string name="upload_problem_do_you_continue">Vill du fortfarande ladda upp denna bild?</string>
+  <string name="internet_downloaded">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har laddat ned från Internet.</string>
   <string name="give_permission">Ge behörighet</string>
   <string name="use_external_storage">Använd extern lagring</string>
   <string name="use_external_storage_summary">Spara bilder som tas med kameran i appen på din enhet</string>
@@ -256,11 +264,13 @@
   <string name="nominate_deletion">Nominera för radering</string>
   <string name="nominated_for_deletion">Denna bild har nominerats för radering.</string>
   <string name="nominated_see_more"/>
+  <string name="nominating_file_for_deletion">Nominerar %1$s för radering.</string>
+  <string name="nominating_for_deletion_status">Nominerar filen för radering: %1$s</string>
   <string name="view_browser">Visa i webbläsare</string>
   <string name="skip_login">Hoppa över</string>
   <string name="navigation_item_login">Logga in</string>
   <string name="skip_login_title">Vill du verkligen hoppa över inloggningen?</string>
-  <string name="skip_login_message">Du kommer inte kunna ladda upp bilder.</string>
+  <string name="skip_login_message">Du behöver logga ini för att ladda upp bilder i framtiden.</string>
   <string name="login_alert_message">Logga in för att använda denna funktion</string>
   <string name="copy_wikicode">Kopiera wikitexten till urklipp</string>
   <string name="wikicode_copied">Wikitexten kopierades till urklipp</string>
@@ -284,6 +294,8 @@
   <string name="no_internet">Uppkopplingen bröts</string>
   <string name="internet_established">Uppkopplingen återupprättades</string>
   <string name="error_notifications">Fel uppstod när aviseringar hämtades</string>
+  <string name="error_review">Fel uppstod när bilden hämtades för granskning. Tryck på uppdatera för att försöka igen.</string>
+  <string name="error_review_categories">Fel uppstod när bildkategorier hämtades för granskning. Tryck på uppdatera för att försöka igen.</string>
   <string name="no_notifications">Inga aviseringar hittades</string>
   <string name="about_translate">&lt;u&gt;Översätt&lt;/u&gt;</string>
   <string name="about_translate_title">Språk</string>
@@ -292,7 +304,7 @@
   <string name="about_translate_cancel">Avbryt</string>
   <string name="retry">Försök igen</string>
   <string name="showcase_view_got_it_button">Uppfattat!</string>
-  <string name="showcase_view_whole_nearby_activity">Detta är platserna nära dig som behöver bilder för att illustrera deras Wikipedia-artiklar</string>
+  <string name="showcase_view_whole_nearby_activity">Detta är platserna nära dig som behöver bilder för att illustrera deras Wikipedia-artiklar.\n\nNär du klickar på \"SÖK I DETTA OMRÅDE\" kommer kartan låsas och en sökning startas i närheten runt detta plats.</string>
   <string name="showcase_view_list_icon">Klicka på den här knappen för att få upp en lista med dessa platser</string>
   <string name="showcase_view_plus_fab">Du kan ladda upp en bild från vilken plats som helst från ditt galleri eller kamera</string>
   <string name="no_images_found">Inga bilder hittades!</string>
@@ -309,6 +321,10 @@
   <string name="provider_searches">Senaste sökfrågor</string>
   <string name="error_loading_categories">Fel uppstod när kategorier lästes in.</string>
   <string name="error_loading_subcategories">Fel uppstod när underkategorier lästes in.</string>
+  <string name="search_tab_title_media">MEDIA</string>
+  <string name="search_tab_title_categories">KATEGORIER</string>
+  <string name="explore_tab_title_featured">UTVALD</string>
+  <string name="explore_tab_title_mobile">LADDADES UPP VIA MOBIL</string>
   <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
   <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
@@ -337,13 +353,17 @@
   <string name="share_coordinates_not_present">Koordinater specificerades inte vid bildvalet</string>
   <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
   <string name="add_description">+ Lägg till beskrivning</string>
+  <string name="no_recent_searches">Inga senaste sökningar</string>
   <string name="delete_recent_searches_dialog">Är du säker på att du vill rensa din sökhistorik?</string>
+  <string name="delete_search_dialog">Vill du radera denna sökning?</string>
   <string name="search_history_deleted">Sökhistoriken raderades</string>
   <string name="nominate_delete">Nominera för radering</string>
+  <string name="delete">RADERA</string>
   <string name="Achievements">Prestationer</string>
   <string name="statistics">STATISTIK</string>
   <string name="statistics_thanks">Mottagna tack</string>
   <string name="statistics_featured">Utvalda bilder</string>
+  <string name="statistics_wikidata_edits">Bilder via \"Platser i närheten\"</string>
   <string name="level">NIVÅ</string>
   <string name="images_uploaded">Uppladdade bilder</string>
   <string name="image_reverts">Bilder som inte har återställts</string>
@@ -356,9 +376,14 @@
   <string name="images_used_explanation">Antalet bilder du har laddat upp till Commons som användes i Wikimedia-artiklar</string>
   <string name="error_occurred">Ett fel uppstod!</string>
   <string name="notifications_channel_name_all">Commons-aviseringar</string>
+  <string name="preference_author_name_toggle">Använd anpassat författarnamn</string>
+  <string name="preference_author_name_toggle_summary">Använd ett anpassat författarnamn istället för ditt användarnamn när du laddar upp foton</string>
+  <string name="preference_author_name">Anpassat författarnamn</string>
+  <string name="preference_author_name_summary">Det anpassade författarnamnet att använda istället för ditt användarnamn i uppladdningar</string>
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I närheten</string>
   <string name="notifications">Aviseringar</string>
+  <string name="archived_notifications">Aviseringar (arkiverade)</string>
   <string name="display_nearby_notification">Visa avisering för i närheten</string>
   <string name="display_nearby_notification_summary">Tryck här för att se den närmaste platsen som behöver bilder</string>
   <string name="no_close_nearby">Inga platser i närheten hittades som är nära dig</string>
@@ -391,10 +416,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Jag insåg att den är dålig för mitt privatliv</string>
   <string name="deletion_reason_no_longer_want_public">Jag ändrade mig, jag vill inte längre att den ska vara synlig offentligt</string>
   <string name="deletion_reason_not_interesting">Tyvärr, denna bild är inte intressant för en encyklopedi</string>
-  <string name="uploaded_by_myself">Laddades upp av mig den</string>
-  <string name="used_by">, används i</string>
-  <string name="articles">artiklar</string>
-  <string name="no_uploads">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på kameran eller galleriikonen ovan.</string>
+  <string name="uploaded_by_myself">Laddades upp av mig den %1$s och används i %2$d artiklar.</string>
+  <string name="no_uploads">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på knappen för att lägga till.</string>
   <string name="desc_language_Worldwide">Världsomfattande</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Europa</string>
@@ -407,10 +430,89 @@
   <string name="yes_submit">Ja, skicka in</string>
   <string name="no_go_back">Nej, gå tillbaka</string>
   <string name="upload_flow_all_images_in_set">(För alla bilder i uppsättningen)</string>
+  <string name="search_this_area">Sök i detta område</string>
   <string name="nearby_card_permission_title">Begäran om behörighet</string>
   <string name="nearby_card_permission_explanation">Vill du att vi ska använda din nuvarande plats för att visa den närmaste platsen som behöver bilder?</string>
   <string name="unable_to_display_nearest_place">Kunde inte visa den närmaste platsen som behöver bilder utan platsbehörigheter</string>
   <string name="never_ask_again">Fråga inte detta igen</string>
   <string name="display_location_permission_title">Visa platsbehörighet</string>
   <string name="display_location_permission_explanation">Fråga efter platsbehörighet vid behov för att visa aviseringskortet för i närheten.</string>
+  <string name="achievements_fetch_failed">Någonting gick fel. Vi kunde inte hämta dina prestationer</string>
+  <string name="ends_on">Slutar den:</string>
+  <string name="display_campaigns">Visa kampanjer</string>
+  <string name="display_campaigns_explanation">Se pågående kampanjer</string>
+  <string name="nearby_campaign_dismiss_message">Du kommer inte längre se kampanjerna. Om du vill kan du återaktivera denna avisering i inställningarna.</string>
+  <string name="this_function_needs_network_connection">Denna funktion kräver nätverksuppkoppling. Kontrollera dina anslutningsinställningar.</string>
+  <string name="bad_token_error_proposed_solution">Uppladdningen misslyckades p.g.a. problem med redigeringsnyckeln. Försök logga ut och in igen.</string>
+  <string name="error_processing_image">Fel uppstod när bilden behandlades. Försök igen!</string>
+  <string name="getting_edit_token">Hämtar nyckel för redigering</string>
+  <string name="check_category_adding_template">Lägger till mall för kategorikontroll</string>
+  <string name="check_category_notification_title">Begär kategorikontroll för %1$s</string>
+  <string name="check_category_edit_summary">Begär kategorikontroll</string>
+  <string name="check_category_success_title">Begärde kategorikontroll</string>
+  <string name="check_category_failure_title">Begäran av kategorikontroll fungerade inte</string>
+  <string name="check_category_success_message">Begärde kategorikontroll för %1$s</string>
+  <string name="check_category_failure_message">Kunde inte begära kategorikontroll för %1$s</string>
+  <string name="check_category_toast">Begär kategorikontroll för %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Lägger till raderingsmeddelande i filen</string>
+  <string name="nominate_for_deletion_done">Klar</string>
+  <string name="nominate_for_deletion_notify_user">Meddelar användaren på diskussionssidan</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Lägger till fil i loggen med raderingsbegäran</string>
+  <string name="nominate_for_deletion_create_deletion_request">Skapar undersida för raderingbegäran</string>
+  <string name="notsure">Osäker</string>
+  <string name="send_thank_success_title">Skickar tack: Färdig</string>
+  <string name="send_thank_success_message">Skickade tack till %1$s</string>
+  <string name="send_thank_failure_message">Misslyckades att skicka tack %1$s</string>
+  <string name="send_thank_failure_title">Skickar tack: Misslyckades</string>
+  <string name="send_thank_send">Skickar tack</string>
+  <string name="send_thank_notification_title">Skickar tack</string>
+  <string name="send_thank_toast">Skickar tack för %1$s</string>
+  <string name="review_copyright">Följer detta upphovsreglerna?</string>
+  <string name="review_category">Är detta riktigt kategoriserat?</string>
+  <string name="review_spam">Är detta relevant?</string>
+  <string name="review_thanks">Vill du tacka bidragsgivaren?</string>
+  <string name="review_spam_explanation">Klicka NEJ för att nominera denna bild för radering om den inte är användbar alls.</string>
+  <string name="review_copyright_explanation">Logotyper, skärmdumpar, filmaffischer är oftast upphovsbrott.\n Klicka NEJ för att nominera denna bild för radering</string>
+  <string name="review_thanks_explanation">%1$s kommer att uppmuntras av din uppskattning</string>
+  <string name="review_no_category">Oj, den är inte ens kategoriserad!</string>
+  <string name="review_category_explanation">Denna bild finns i %1$s kategorier.</string>
+  <string name="review_spam_report_question">Det är irrelevant eftersom det är</string>
+  <string name="review_c_violation_report_question">Den bryter mot upphovsrätten eftersom den är</string>
+  <string name="review_category_yes_button_text">Nej, felkategoriserad</string>
+  <string name="review_category_no_button_text">Verkar okej</string>
+  <string name="review_spam_yes_button_text">Nej, irrelevant</string>
+  <string name="review_spam_no_button_text">Verkar okej</string>
+  <string name="review_copyright_yes_button_text">Nej, upphovsbrott</string>
+  <string name="review_copyright_no_button_text">Verkar okej</string>
+  <string name="review_thanks_yes_button_text">Visst, varför inte</string>
+  <string name="review_thanks_no_button_text">Nästa bild</string>
+  <string name="skip_image_explanation">När du klickar på knappen får du en annan bild som laddades upp nyligen från Wikimedia Commons</string>
+  <string name="review_image_explanation">Du kan granska bilder och förbättra kvaliteten för Wikimedia Commons.\n De fyra granskningsparametrarna är: \n - Är denna bild relevant \n - Följer denna bild upphovsrättsreglerna? \n - Är denna bild riktigt kategoriserad? \n - Om allting får bra kan du också tacka bidragsgivaren.</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Hämtar delat innehåll. Det kan ta en stund att behandla bilden beroende på bildens storlek och din enhet</item>
+    <item quantity="other">Hämtar delat innehåll. Det kan ta en stund att behandla bilderna beroende på bildens storlek och din enhet</item>
+  </plurals>
+  <string name="no_image">Inga bilder används</string>
+  <string name="no_image_reverted">Inga bilder återställdes</string>
+  <string name="no_image_uploaded">Inga bilder laddades upp</string>
+  <string name="no_notification">Du har inga olästa aviseringar</string>
+  <string name="no_archived_notification">Du har inga arkiverade aviseringar</string>
+  <string name="share_logs_using">Dela loggar med</string>
+  <string name="menu_option_archived">Visa arkiverade</string>
+  <string name="menu_option_unread">Visa olästa</string>
+  <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
+  <string name="image_chooser_title">Välj bilder att ladda upp</string>
+  <string name="please_wait">Var god vänta…</string>
+  <string name="images_featured_explanation">Utmärkta bilder är bilder från skickliga fotografer och illustratörer som gemenskapen på Wikimedia Commons har valt ut som bilder med den högsta kvalitetet på webbplatsen.</string>
+  <string name="images_via_nearby_explanation">Bilder som har laddats upp via \"Platser i närheten\" är bilderna som laddas upp genom att upptäcka platser på kartan.</string>
+  <string name="thanks_received_explanation">Denna funktion låter redigerare skicka en tackavisering till användare som gör användbara redigeringar – genom att använda en liten tacklänk på historik- eller diff-sidor.</string>
+  <string name="previous_image_title_description">Kopiera föregående titel och beskrivning</string>
+  <string name="previous_button_tooltip_message">Klicka för att återanvända titeln och beskrivningen du använde i din föregående bild och ändra det för att passa din nuvarande</string>
+  <string name="welcome_do_upload_content_description">Exempel på bra bilder att ladda upp på Commons</string>
+  <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
+  <string name="skip_image">HOPPA ÖVER DENNA BILD</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Nedladdning misslyckades!! Vi kan inte ladda ned filen utan behörighet för extern lagring.</string>
+  <string name="share_text">Ladda upp foton till Wikimedia Commons på din telefon Ladda ned Commons-appen: %1$s</string>
+  <string name="share_via">Dela appen via...</string>
+  <string name="image_info">Bildinfo</string>
 </resources>

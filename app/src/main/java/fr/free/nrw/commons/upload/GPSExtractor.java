@@ -1,13 +1,12 @@
 package fr.free.nrw.commons.upload;
 
-import android.media.ExifInterface;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import java.io.FileDescriptor;
 import java.io.IOException;
+import java.io.InputStream;
 
+import androidx.exifinterface.media.ExifInterface;
 import timber.log.Timber;
 
 /**
@@ -16,7 +15,7 @@ import timber.log.Timber;
  */
 public class GPSExtractor {
 
-    public static final GPSExtractor DUMMY= new GPSExtractor();
+    static final GPSExtractor DUMMY= new GPSExtractor();
     private double decLatitude;
     private double decLongitude;
     public boolean imageCoordsExists;
@@ -33,17 +32,11 @@ public class GPSExtractor {
 
     }
     /**
-     * Construct from the file descriptor of the image (only for API 24 or newer).
-     * @param fileDescriptor the file descriptor of the image
+     * Construct from a stream.
      */
-    @RequiresApi(24)
-    public GPSExtractor(@NonNull FileDescriptor fileDescriptor) {
-        try {
-            ExifInterface exif = new ExifInterface(fileDescriptor);
-            processCoords(exif);
-        } catch (IOException | IllegalArgumentException e) {
-            Timber.w(e);
-        }
+    GPSExtractor(@NonNull InputStream stream) throws IOException {
+        ExifInterface exif = new ExifInterface(stream);
+        processCoords(exif);
     }
 
     /**
@@ -51,7 +44,7 @@ public class GPSExtractor {
      * @param path file path of the image
      *
      */
-    public GPSExtractor(@NonNull String path) {
+    GPSExtractor(@NonNull String path) {
         try {
             ExifInterface exif = new ExifInterface(path);
             processCoords(exif);
@@ -65,7 +58,7 @@ public class GPSExtractor {
      * @param exif exif interface of the image
      *
      */
-    public GPSExtractor(@NonNull ExifInterface exif){
+    GPSExtractor(@NonNull ExifInterface exif){
         processCoords(exif);
     }
 
@@ -89,7 +82,7 @@ public class GPSExtractor {
      * @return coordinates as string (needs to be passed as a String in API query)
      */
     @Nullable
-    public String getCoords() {
+    String getCoords() {
         if(decimalCoords!=null){
             return decimalCoords;
         }else if (latitude!=null && latitudeRef!=null && longitude!=null && longitudeRef!=null) {
@@ -129,7 +122,7 @@ public class GPSExtractor {
             decLongitude = 0 - convertToDegree(longitude);
         }
 
-        String decimalCoords = String.valueOf(decLatitude) + "|" + String.valueOf(decLongitude);
+        String decimalCoords = decLatitude + "|" + decLongitude;
         Timber.d("Latitude and Longitude are %s", decimalCoords);
         return decimalCoords;
     }

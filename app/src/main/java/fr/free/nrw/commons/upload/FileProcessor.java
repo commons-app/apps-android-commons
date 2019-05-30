@@ -2,38 +2,31 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
+import fr.free.nrw.commons.upload.SimilarImageDialogFragment.Callback;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 
+import androidx.exifinterface.media.ExifInterface;
 import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
-
 /**
- * Processing of the image file that is about to be uploaded via ShareActivity is done here
+ * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
  */
-public class FileProcessor implements SimilarImageDialogFragment.onResponse {
+@Singleton
+public class FileProcessor implements Callback {
 
     @Inject
     CacheController cacheController;
@@ -43,32 +36,36 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     CategoryApi apiCall;
     @Inject
     @Named("default_preferences")
-    SharedPreferences prefs;
+    JsonKvStore defaultKvStore;
     private String filePath;
     private ContentResolver contentResolver;
     private GPSExtractor imageObj;
-    private Context context;
     private String decimalCoords;
     private ExifInterface exifInterface;
-    private boolean useExtStorage;
     private boolean haveCheckedForOtherImages = false;
     private GPSExtractor tempImageObj;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    FileProcessor(@NonNull String filePath, ContentResolver contentResolver, Context context) {
+    @Inject
+    public FileProcessor() {
+    }
+
+    public void cleanup() {
+        compositeDisposable.clear();
+    }
+
+    void initFileDetails(@NonNull String filePath, ContentResolver contentResolver) {
         this.filePath = filePath;
         this.contentResolver = contentResolver;
-        this.context = context;
-        ApplicationlessInjection.getInstance(context.getApplicationContext()).getCommonsApplicationComponent().inject(this);
         try {
-            exifInterface=new ExifInterface(filePath);
+            exifInterface = new ExifInterface(filePath);
         } catch (IOException e) {
             Timber.e(e);
         }
-        useExtStorage = prefs.getBoolean("useExternalStorage", true);
     }
 
     /**
-     * Processes file coordinates, either from EXIF data or user location
+     * Processes filePath coordinates, either from EXIF data or user location
      */
     GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface) {
         Timber.d("Calling GPSExtractor");
@@ -83,10 +80,6 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
         }
 
         return imageObj;
-    }
-
-    String getDecimalCoords() {
-        return decimalCoords;
     }
 
     /**
@@ -107,27 +100,19 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                 //Make sure the photos were taken within 20seconds
                 Timber.d("fild date:" + file.lastModified() + " time of creation" + timeOfCreation);
                 tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
-                ParcelFileDescriptor descriptor = null;
                 try {
-                    descriptor = contentResolver.openFileDescriptor(Uri.fromFile(file), "r");
-                } catch (FileNotFoundException e) {
+                    tempImageObj = new GPSExtractor(contentResolver.openInputStream(Uri.fromFile(file)));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    if (descriptor != null) {
-                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor());
-                    }
-                } else {
-                    if (filePath != null) {
-                        tempImageObj = new GPSExtractor(file.getAbsolutePath());
-                    }
+                if (tempImageObj != null) {
+                    tempImageObj = new GPSExtractor(file.getAbsolutePath());
                 }
-
                 if (tempImageObj != null) {
                     Timber.d("not null fild EXIF" + tempImageObj.imageCoordsExists + " coords" + tempImageObj.getCoords());
                     if (tempImageObj.getCoords() != null && tempImageObj.imageCoordsExists) {
                         // Current image has gps coordinates and it's not current gps locaiton
-                        Timber.d("This file has image coords:" + file.getAbsolutePath());
+                        Timber.d("This filePath has image coords:" + file.getAbsolutePath());
                         similarImageInterface.showSimilarImageFragment(filePath, file.getAbsolutePath());
                         break;
                     }
@@ -142,7 +127,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
      * Then initiates the calls to MediaWiki API through an instance of CategoryApi.
      */
     @SuppressLint("CheckResult")
-    public void useImageCoords() {
+    private void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
             Timber.d("is EXIF data present:" + imageObj.imageCoordsExists + " from findOther image");
@@ -160,7 +145,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
             if (catListEmpty) {
-                apiCall.request(decimalCoords)
+                compositeDisposable.add(apiCall.request(decimalCoords)
                         .subscribeOn(Schedulers.io())
                         .observeOn(Schedulers.io())
                         .subscribe(
@@ -169,7 +154,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
                                     Timber.e(throwable);
                                     gpsCategoryModel.clear();
                                 }
-                        );
+                        ));
                 Timber.d("displayCatList size 0, calling MWAPI %s", displayCatList);
             } else {
                 Timber.d("Cache found, setting categoryList in model to %s", displayCatList);

@@ -1,183 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0c609c"
+    android:background="?attr/tutorialBackground"
     android:gravity="center"
-    android:weightSum="1"
-    android:layout_centerHorizontal="true">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/huge_gap"
+    android:paddingRight="@dimen/huge_gap">
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#0c609c"
-        android:gravity="center_vertical"
-        >
-
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="240dp"
-        android:layout_gravity="center_horizontal"
-        android:columnCount="2"
-        >
-
-        <ImageView
-            android:src="@drawable/mount_zao"
-            android:id="@+id/mount_zao"
-            android:layout_width="150dp"
-            android:layout_height="118dp"
-            android:scaleType="fitXY"
-            android:contentDescription="@string/welcome_image_mount_zao"
-            />
-
-        <ImageView
-            android:src="@drawable/llamas"
-            android:id="@+id/llamas"
-            android:layout_width="150dp"
-            android:layout_height="118dp"
-            android:scaleType="fitXY"
-            android:contentDescription="@string/welcome_image_llamas"
-            />
-
-        <ImageView
-            android:src="@drawable/rainbow_bridge"
-            android:id="@+id/rainbow_bridge"
-            android:layout_width="150dp"
-            android:layout_height="118dp"
-            android:scaleType="fitXY"
-            android:contentDescription="@string/welcome_image_rainbow_bridge"
-            />
-
-        <ImageView
-            android:src="@drawable/tulip"
-            android:id="@+id/tulip"
-            android:layout_width="150dp"
-            android:layout_height="118dp"
-            android:scaleType="fitXY"
-            android:contentDescription="@string/welcome_image_tulip"
-            />
-
-    </GridLayout>
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/welcome_do_upload_content_description"
+        android:src="@drawable/welcome_do_upload" />
 
     <TextView
-        android:layout_width="295dp"
-        android:layout_height="wrap_content"
-        android:maxWidth="240dp"
-        android:text="@string/tutorial_2_text"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:textSize="@dimen/normal_text"
-        android:textAlignment="center"
-        android:paddingTop="@dimen/standard_gap"
-        android:gravity="center_horizontal"
-        android:textColor="@android:color/white"
-        />
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bullet"
-            android:paddingRight="4dp"
-            android:textSize="16sp"
-            android:paddingTop="@dimen/standard_gap"
-            android:textColor="@android:color/white"/>
-
-        <TextView
-            android:layout_width="295dp"
-            android:layout_height="wrap_content"
-            android:maxWidth="240dp"
-            android:text="@string/tutorial_2_subtext_1"
-            android:layout_gravity="center"
-            android:textAlignment="textStart"
-            android:paddingTop="@dimen/standard_gap"
-            android:gravity="start"
-            android:textColor="@android:color/white"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bullet"
-            android:paddingRight="4dp"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"/>
-
-        <TextView
-            android:layout_width="295dp"
-            android:layout_height="wrap_content"
-            android:maxWidth="240dp"
-            android:text="@string/tutorial_2_subtext_2"
-            android:layout_gravity="center"
-            android:textAlignment="textStart"
-            android:gravity="start"
-            android:textColor="@android:color/white"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bullet"
-                android:paddingRight="4dp"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="295dp"
-            android:layout_height="wrap_content"
-            android:maxWidth="240dp"
-            android:text="@string/tutorial_2_subtext_3"
-            android:layout_gravity="center"
-            android:textAlignment="textStart"
-            android:gravity="start"
-            android:textColor="@android:color/white"
-            />
-
-    </LinearLayout>
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/overflow_button_dimen"
         android:layout_marginTop="@dimen/standard_gap"
-        android:layout_marginRight="@dimen/standard_gap"
-        android:text="@string/welcome_skip_button"
-        android:id="@+id/welcomeYesButton"
+        android:layout_marginBottom="@dimen/standard_gap"
+        android:text="@string/tutorial_2_text"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/normal_text"
-        android:visibility="gone"
-        android:layout_gravity="right"
-        android:layout_alignParentRight="true"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-</RelativeLayout>
+        <include layout="@layout/welcome_bullet" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tutorial_2_subtext_1"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include layout="@layout/welcome_bullet" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tutorial_2_subtext_2"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include layout="@layout/welcome_bullet" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tutorial_2_subtext_3"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</LinearLayout>

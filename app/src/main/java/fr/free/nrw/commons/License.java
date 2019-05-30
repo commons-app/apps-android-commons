@@ -1,6 +1,6 @@
 package fr.free.nrw.commons;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * represents Licence object
@@ -50,6 +50,10 @@ public class License {
         return template;
     }
 
+    /**
+     * Gets the license name. If name is null, return license key.
+     * @return license name as string. if name null, license key as String
+     */
     public String getName() {
         if (name == null) {
             // hack

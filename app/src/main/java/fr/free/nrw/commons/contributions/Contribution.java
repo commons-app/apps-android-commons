@@ -1,24 +1,35 @@
 package fr.free.nrw.commons.contributions;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
-import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringDef;
+
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
 
 import java.lang.annotation.Retention;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
-import fr.free.nrw.commons.BuildConfig;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringDef;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ConfigUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class  Contribution extends Media {
+
+    //{{According to EXIF data|2009-01-09}}
+    private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to EXIF data|%s}}";
+
+    //{{date|2009|1|9}} → 9 January 2009
+    private static final String TEMPLATE_DATA_OTHER_SOURCE = "{{date|%d|%d|%d}}";
 
     public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
         @Override
@@ -55,6 +66,7 @@ public class  Contribution extends Media {
     private boolean isMultiple;
     private String wikiDataEntityId;
     private Uri contentProviderUri;
+    private String dateCreatedSource;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
@@ -69,6 +81,7 @@ public class  Contribution extends Media {
         this.width = width;
         this.height = height;
         this.license = license;
+        this.dateCreatedSource = "";
     }
 
     public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
@@ -76,6 +89,7 @@ public class  Contribution extends Media {
         super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
+        this.dateCreatedSource = "";
     }
 
     public Contribution(Parcel in) {
@@ -97,7 +111,13 @@ public class  Contribution extends Media {
         parcel.writeInt(isMultiple ? 1 : 0);
     }
 
+    public String getDateCreatedSource() {
+        return dateCreatedSource;
+    }
 
+    public void setDateCreatedSource(String dateCreatedSource) {
+        this.dateCreatedSource = dateCreatedSource;
+    }
 
     public boolean getMultiple() {
         return isMultiple;
@@ -139,22 +159,21 @@ public class  Contribution extends Media {
         this.dateUploaded = date;
     }
 
-    public String getPageContents() {
+    public String getPageContents(Context applicationContext) {
         StringBuilder buffer = new StringBuilder();
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
         buffer
                 .append("== {{int:filedesc}} ==\n")
                 .append("{{Information\n")
                 .append("|description=").append(getDescription()).append("\n")
                 .append("|source=").append("{{own}}\n")
                 .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");
-        if (dateCreated != null) {
-            buffer
-                    .append("|date={{According to EXIF data|").append(isoFormat.format(dateCreated)).append("}}\n");
+
+        String templatizedCreatedDate = getTemplatizedCreatedDate();
+        if (!StringUtils.isBlank(templatizedCreatedDate)) {
+            buffer.append("|date=").append(templatizedCreatedDate);
         }
-        buffer
-                .append("}}").append("\n");
+
+        buffer.append("}}").append("\n");
 
         //Only add Location template (e.g. {{Location|37.51136|-77.602615}} ) if coords is not null
         if (decimalCoords != null) {
@@ -163,7 +182,8 @@ public class  Contribution extends Media {
 
         buffer.append("== {{int:license-header}} ==\n")
                 .append(licenseTemplateFor(getLicense())).append("\n\n")
-                .append("{{Uploaded from Mobile|platform=Android|version=").append(BuildConfig.VERSION_NAME).append("}}\n");
+                .append("{{Uploaded from Mobile|platform=Android|version=")
+                .append(ConfigUtils.getVersionNameWithSha(applicationContext)).append("}}\n");
         if(categories!=null&&categories.size()!=0) {
             for (int i = 0; i < categories.size(); i++) {
                 String category = categories.get(i);
@@ -173,6 +193,27 @@ public class  Contribution extends Media {
         else
             buffer.append("{{subst:unc}}");
         return buffer.toString();
+    }
+
+    /**
+     * Returns upload date in either TEMPLATE_DATE_ACC_TO_EXIF or TEMPLATE_DATA_OTHER_SOURCE
+     * @return
+     */
+    private String getTemplatizedCreatedDate() {
+        if (dateCreated != null) {
+            if (UploadableFile.DateTimeWithSource.EXIF_SOURCE.equals(dateCreatedSource)) {
+                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, DateUtil.getDateStringWithSkeletonPattern(dateCreated, "yyyy-MM-dd")) + "\n";
+            } else {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dateCreated);
+                calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return String.format(Locale.ENGLISH, TEMPLATE_DATA_OTHER_SOURCE,
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)) + "\n";
+            }
+        }
+        return "";
     }
 
     @Override
@@ -217,10 +258,6 @@ public class  Contribution extends Media {
                 return "{{self|cc-by-sa-4.0}}";
             case Prefs.Licenses.CC0:
                 return "{{self|cc-zero}}";
-            case Prefs.Licenses.CC_BY:
-                return "{{self|cc-by-3.0}}";
-            case Prefs.Licenses.CC_BY_SA:
-                return "{{self|cc-by-sa-3.0}}";
         }
 
         throw new RuntimeException("Unrecognized license value: " + license);

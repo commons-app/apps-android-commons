@@ -4,12 +4,13 @@
 * Babanwalia
 * Jimidar
 * Sony dandiwal
+* ਗੁਰਪ੍ਰੀਤ ਹੁੰਦਲ
 -->
 <resources>
   <string name="app_name" fuzzy="true">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼</string>
   <string name="menu_settings">ਸੈਟਿੰਗ</string>
   <string name="username">ਵਰਤੋਂਕਾਰ ਨਾਂ</string>
-  <string name="password">ਪਾਸਵਰਡ</string>
+  <string name="password">ਲੰਘ-ਸ਼ਬਦ</string>
   <string name="login">ਦਾਖ਼ਲ ਹੋਵੋ</string>
   <string name="logging_in_title">ਦਾਖ਼ਲਾ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="logging_in_message">ਉਡੀਕੋ ਜੀ…</string>
@@ -87,7 +88,7 @@
   <string name="no_uploads_yet">ਤੁਸੀਂ ਹਾਲੇ ਤੱਕ ਕੋਈ ਤਸਵੀਰਾਂ ਅੱਪਲੋਡ ਨਹੀਂ ਕੀਤੀਆਂ</string>
   <string name="menu_retry_upload">ਮੁੜ-ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
   <string name="menu_cancel_upload">ਰੱਦ ਕਰੋ</string>
-  <string name="share_license_summary">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
+  <string name="share_license_summary" fuzzy="true">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
   <string name="media_upload_policy">ਇਹ ਤਸਵੀਰ ਅੱਪਲੋਡ ਕਰਨ ਨਾਲ ਹੀ ਮੈਂ ਦਾਅਵਾ ਕਰਦਾ ਹਾਂ/ਕਰਦੀ ਹਾਂ ਕਿ ਇਹ ਮੇਰਾ ਆਪਣਾ ਕਾਰਜ ਹੈ, ਕਿ ਇਸ ਤਹਿਤ ਕੋਈ ਕਾਪੀਰਾਈਟ ਉਲੰਘਣਾ ਨਹੀਂ ਕੀਤੀ ਗਈ ਅਤੇ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਨੀਤੀਆਂ&lt;/a&gt; ਮੁਤਾਬਿਕ ਇਹ ਠੀਕ ਹੈ।</string>
   <string name="menu_download">ਡਾਊਨਲੋਡ</string>
   <string name="preference_license" fuzzy="true">ਲਸੰਸ</string>
@@ -118,11 +119,8 @@
   <string name="tutorial_1_text">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਜ਼ਿਆਦਾਤਰ ਉਹ ਤਸਵੀਰਾਂ ਦਾ ਭੰਡਾਰ ਹੈ ਜੋ ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਵਰਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
   <string name="tutorial_1_subtext">ਤੁਹਾਡੀਆਂ ਤਸਵੀਰਾਂ ਵਿਸ਼ਵ ਦੇ ਬਾਕੀ ਲੋਕਾਂ ਨੂੰ ਸਿੱਖਿਅਤ ਕਰਨ ਲਈ ਸਹਾਈ ਹਨ!</string>
   <string name="tutorial_2_text">ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਤਸਵੀਰਾਂ ਅਪਲੋਡ ਕਰੋ ਜੋ ਤੁਹਾਡੇ ਦੁਆਰਾ ਲਈਆਂ ਗਈਆਂ ਹਨ ਜਾਂ ਬਣਾਈਆਂ ਗਈਆਂ ਹਨ:</string>
-  <string name="tutorial_2_subtext" fuzzy="true">- ਕੁਦਰਤੀ ਇਕਾਈ (ਫੁੱਲ, ਜਾਨਵਰ, ਪਰਬਤ)\n- ਲਾਹੇਵੰਦ ਇਕਾਈਆਂ (ਸਾਇਕਲ, ਰੇਲਵੇ ਸਟੇਸ਼ਨ)\n- ਪ੍ਰਸਿੱਧ ਲੋਕ (ਤੁਹਾਡਾ ਮੇਅਰ, ਅਥਲੀਟ)</string>
   <string name="tutorial_3_text">ਕਿਰਪਾ ਕਰਕੇ ਅਪਲੋਡ ਨਾ ਕਰੋ:</string>
-  <string name="tutorial_3_subtext">- ਸੈਲਫ਼ੀਆਂ ਜਾਂ ਤੁਹਾਡੇ ਦੋਸਤਾਂ ਦੀਆਂ ਤਸਵੀਰਾਂ\n- ਜੋ ਤਸਵੀਰਾਂ ਤੁਸੀਂ ਇੰਟਰਨੈੱਟ ਤੋਂ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਹਨ\n- ਨਿੱਜੀ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੇ ਸਕਰੀਨਸ਼ੌਟ</string>
   <string name="tutorial_4_text">ਉਦਾਹਰਣ ਵਜੋਂ ਇਹ ਅਪਲੋਡ:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">- ਸਿਰਲੇਖ: Sydney Opera House\n- ਵੇਰਵਾ: ਸਿਡਨੀ ਓਪੇਰਾ ਹਾਊਸ ਦੀ ਤਸਵੀਰ\n- ਸ਼੍ਰੇਣੀਆਂ: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਓ। ਵਿਕੀਪੀਡੀਆ ਲੇਖਾਂ ਨੂੰ ਸੁਰਜੀਤ ਕਰ ਦਿਓ!</string>
   <string name="welcome_wikipedia_subtext">ਵਿਕੀਪੀਡੀਆ ਉਤਲੀਆਂ ਤਸਵੀਰਾਂ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਤੋਂ ਆਉਂਦੀਆਂ ਹਨ</string>
   <string name="welcome_copyright_text">ਤੁਹਾਡੀਆਂ ਤਸਵੀਰਾਂ ਦੁਨੀਆਂ ਭਰ ਦੇ ਲੋਕਾਂ ਨੂੰ ਪੜ੍ਹਨ ਵਿਚ ਮਦਦ ਕਰਦੀਆਂ ਹਨ।</string>
@@ -143,7 +141,6 @@
   <string name="yes">ਹਾਂ</string>
   <string name="no">ਨਹੀਂ</string>
   <string name="media_detail_title">ਸਿਰਲੇਖ</string>
-  <string name="media_detail_media_title">ਮੀਡੀਏ ਦਾ ਸਿਰਲੇਖ</string>
   <string name="media_detail_description">ਵੇਰਵਾ</string>
   <string name="media_detail_uploaded_date">ਅਪਲੋਡ ਦੀ ਮਿਤੀ</string>
   <string name="media_detail_license">ਲਸੰਸ</string>
@@ -151,6 +148,7 @@
   <string name="media_detail_coordinates_empty">ਕੋਈ ਉਪਲਬਧ ਨਹੀਂ</string>
   <string name="_2fa_code">2FA ਕੋਡ</string>
   <string name="maximum_limit">ਵੱਧ ਤੋਂ ਵੱਧ ਹੱਦ</string>
+  <string name="invalid_zero">ਸਿਫ਼ਰ ਮਨਜ਼ੂਰਸ਼ੁਦਾ ਨਹੀਂ ਹੈ</string>
   <string name="maximum_limit_alert">500 ਤੋਂ ਵੱਧ ਵਿਖਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ</string>
   <string name="logout_verification">ਕੀ ਤੁਸੀਂ ਸੱਚੀਂ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
   <string name="commons_logo">ਕਾਮਨਜ਼ ਲੋਗੋ</string>
@@ -170,5 +168,5 @@
   <string name="navigation_item_feedback">ਫ਼ੀਡਬੈਕ</string>
   <string name="navigation_item_logout">ਬਾਹਰ ਆਉ</string>
   <string name="navigation_item_info">ਟਿਊਟੋਰਿਅਲ</string>
-  <string name="upload_image_problem_duplicate">ਇਹ ਤਸਵੀਰ ਕਾਮਨਜ਼ \'ਤੇ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਕੀ ਤੁਸੀਂ ਫਿਰ ਵੀ ਚਾਹੋਂਗੇ?</string>
+  <string name="please_wait">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕੋ...</string>
 </resources>

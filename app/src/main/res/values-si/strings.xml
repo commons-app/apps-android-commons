@@ -85,7 +85,7 @@
   <string name="no_uploads_yet">ඔබ තවමත් කිසිදු ඡායාරුපයක් උඩුගත කර නැත.</string>
   <string name="menu_retry_upload">නැවත උත්සහ කරන්න</string>
   <string name="menu_cancel_upload">අවලංගු කරන්න</string>
-  <string name="share_license_summary">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
+  <string name="share_license_summary" fuzzy="true">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
   <string name="menu_download">බාගන්න</string>
   <string name="preference_license" fuzzy="true">බලපත්‍රය</string>
   <string name="use_previous">පෙර මාතෘකාව/විස්තරය භාවිතා කරන්න</string>
@@ -134,7 +134,6 @@
   <string name="yes">ඔව්</string>
   <string name="no">නැත</string>
   <string name="media_detail_title">මාතෘකාව</string>
-  <string name="media_detail_media_title">මෙම මාධ්‍ය අන්ගයේ මාතෘකාව</string>
   <string name="media_detail_description">විස්තරය</string>
   <string name="media_detail_uploaded_date">උඩුගත කර දිනය</string>
   <string name="media_detail_license">බලපත්‍රය</string>
@@ -144,7 +143,7 @@
   <string name="number_of_uploads">මගේ අලුත්ම උඩුගත කිරීම් පෙන්වීමේ සීමාව</string>
   <string name="maximum_limit">උපරිම සීමාව</string>
   <string name="maximum_limit_alert">500 කට වඩා පෙන්විය නොහැක</string>
-  <string name="set_limit">අලුත්ම උඩුගත කිරීම් පෙන්වීමට සීමාවක් දමන්න</string>
+  <string name="set_limit" fuzzy="true">අලුත්ම උඩුගත කිරීම් පෙන්වීමට සීමාවක් දමන්න</string>
   <string name="login_failed_2fa_not_supported">ද්විත්ව තහවුරු කිරීමේ ක්‍රියා මාර්ගය තවම ක්‍රියා කරන්නෙ නැත.</string>
   <string name="logout_verification">ඔබට ඇත්තටම නික්මීමට අවශ්‍යද?</string>
   <string name="commons_logo">කොමන්ස් ලාන්චනය</string>
@@ -170,7 +169,6 @@
   <string name="navigation_item_notification">නිවේදන</string>
   <string name="no_description_found">කිසිම තොරතුරක් සොයාගැනීමට නොමැත</string>
   <string name="nearby_info_menu_wikidata_article">විකිදත්ත අයිතමය</string>
-  <string name="upload_image_problem_duplicate">මෙම ගොනුව දැනටමත් කොමන්ස් හි ඇත. ඔබට ඉදිරියට ‍යෑම ගැන විශ්වාසද?</string>
   <string name="use_external_storage">භාහිර ගබඩාව භාවිතා කරන්න</string>
   <string name="login_to_your_account">ඔබගේ ගිණුමට පිවිසෙන්න</string>
   <string name="nearby_location_has_not_changed">ස්ථානය වෙනස් වී නොමැත</string>

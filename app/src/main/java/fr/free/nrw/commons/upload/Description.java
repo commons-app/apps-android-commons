@@ -5,11 +5,12 @@ import java.util.List;
 /**
  * Holds a description of an item being uploaded by {@link UploadActivity}
  */
-class Description {
+public class Description {
 
     private String languageCode;
     private String descriptionText;
     private int selectedLanguageIndex = -1;
+    private boolean isManuallyAdded=false;
 
     /**
      * @return The language code ie. "en" or "fr"
@@ -47,6 +48,21 @@ class Description {
         this.selectedLanguageIndex = selectedLanguageIndex;
     }
 
+    /**
+     * returns if the description was added manually (by the user, or we have added it programaticallly)
+     * @return
+     */
+    public boolean isManuallyAdded() {
+        return isManuallyAdded;
+    }
+
+    /**
+     * sets to true if the description was manually added by the user
+     * @param manuallyAdded
+     */
+    public void setManuallyAdded(boolean manuallyAdded) {
+        isManuallyAdded = manuallyAdded;
+    }
 
     /**
      * Formats the list of descriptions into the format Commons requires for uploads.

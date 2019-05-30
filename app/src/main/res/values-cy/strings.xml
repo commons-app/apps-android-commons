@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Cymrodor
 * Lloffiwr
 * Robin Owain
@@ -88,7 +89,7 @@
   <string name="title_activity_featured_images">Delweddau nodwedd</string>
   <string name="menu_about">Amdanom</string>
   <string name="about_license">Ap Cynnwys Agored a grewyd ac a gefnogir gan wirfoddolwyr cymuned Wicimedia yw ap Comin Wicimedia. Does a wnelo Sefydliad Wicimedia ddim byd ag e (ei greu, ei gynnal na\'i ddatblygu).</string>
-  <string name="about_improve">\n\nCrewch &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ymholiad GitHub&lt;/a&gt; os oes gennych fyg, broblem neu awgrym.</string>
+  <string name="about_improve">\n\nCrewch &lt;a href=\"%1$s\"&gt;ymholiad GitHub&lt;/a&gt; os oes gennych fyg, broblem neu awgrym.</string>
   <string name="about_privacy_policy">&lt;u&gt;Polisi preifatrwydd&lt;/u&gt;</string>
   <string name="about_credits">Clod a bri</string>
   <string name="title_activity_about">Amdanom</string>
@@ -99,7 +100,7 @@
   <string name="no_uploads_yet">Nid ydych wedi uwchlwytho ffotograffau eto.</string>
   <string name="menu_retry_upload">Ailgynnig</string>
   <string name="menu_cancel_upload">Diddymer</string>
-  <string name="share_license_summary">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
+  <string name="share_license_summary" fuzzy="true">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
   <string name="media_upload_policy">Wrth gynnig y llun yma, rwy\'n datgan mai fy ngwaith i ydyw ac nad yw\'n cynnwys unrhyw beth dan hawlfrain, na hunlun, a\'i fod yn cadw at &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Bolisiau Comin Wicimedia&lt;/a&gt;.</string>
   <string name="menu_download">Lawrlwytho</string>
   <string name="preference_license">Trwydded Ddiofyn (\'default\')</string>
@@ -131,12 +132,10 @@
   <string name="tutorial_1_text">Cyhelir llawer o luniau ar Gomin Wicimedia sy\'n cael eu defnyddio ar Wicipedia.</string>
   <string name="tutorial_1_subtext">Mae eich lluniau\'n gymorth i addysgu pobl drwy\'r byd mawr crwn!</string>
   <string name="tutorial_2_text">Uwchlwythwch lluniau a dynnoch eich hun:</string>
-  <string name="tutorial_2_subtext">Gwrthrychau byd natur (blodau, anifeiliaid, mynyddoedd)\n- Gwrthrychau defnyddiol (beics, trenau, gorsafoedd trenau)\n- Enwogion (beirdd, athletwyr, blogwyr)</string>
   <string name="tutorial_2_subtext_1">Gwrthrychau byd natur (blodau, anifeiliaid, mynyddoedd)</string>
   <string name="tutorial_2_subtext_2">Gwrthrychau defnyddiol (beics, trenau, gorsafoedd trenau)</string>
   <string name="tutorial_2_subtext_3">Enwogion (beirdd, athletwyr, blogwyr)</string>
   <string name="tutorial_3_text">Peidiwch ag uwchlwytho:</string>
-  <string name="tutorial_3_subtext">- hunanluniau ohonoch chi na\'ch ffrindiau\n- lluniau a gawsoch o\'r we\n- sgrinluniau o apiau masnachol</string>
   <string name="tutorial_3_subtext_1">Hunanluniau neu luniau o\'ch ffrindiau</string>
   <string name="tutorial_3_subtext_2">Lluniau a lawrlwythwyd o\'r we gennych</string>
   <string name="tutorial_3_subtext_3">Sgrinluniau o aps</string>
@@ -163,7 +162,6 @@
   <string name="yes">Ydw</string>
   <string name="no">Nac ydw</string>
   <string name="media_detail_title">Teitl</string>
-  <string name="media_detail_media_title">teitl y cyfrwng</string>
   <string name="media_detail_description">Disgrifiad</string>
   <string name="media_detail_author">Awdur</string>
   <string name="media_detail_uploaded_date">Dyddiad yr uwchlwythiad</string>

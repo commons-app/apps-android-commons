@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Adithyak1997
 * Akhilan
 * Praveenp
 * Santhosh.thottingal
@@ -95,7 +96,7 @@
   <string name="no_uploads_yet">താങ്കളിതുവരെ ചിത്രങ്ങളൊന്നും അപ്‌ലോഡ് ചെയ്തിട്ടില്ല.</string>
   <string name="menu_retry_upload">വീണ്ടും ശ്രമിക്കുക</string>
   <string name="menu_cancel_upload">റദ്ദാക്കുക</string>
-  <string name="share_license_summary">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
+  <string name="share_license_summary" fuzzy="true">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
   <string name="menu_download">ഡൗൺലോഡ്</string>
   <string name="preference_license">സ്വതേയുള്ള ഉപയോഗാനുമതി</string>
   <string name="license_name_cc_by_sa_four">ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക് 4.0</string>
@@ -136,7 +137,6 @@
   <string name="yes">അതെ</string>
   <string name="no">അല്ല</string>
   <string name="media_detail_title">ശീർഷകം</string>
-  <string name="media_detail_media_title">മീഡിയയുടെ തലക്കെട്ട്</string>
   <string name="media_detail_description">വിവരണം</string>
   <string name="media_detail_author">സ്രഷ്ടാവ്</string>
   <string name="media_detail_uploaded_date">അപ്‌ലോഡ് ചെയ്ത തീയതി</string>
@@ -171,7 +171,6 @@
   <string name="nearby_info_menu_commons_article">കോമൺസ് പ്രമാണ താൾ</string>
   <string name="nearby_info_menu_wikidata_article">വിക്കിഡേറ്റാ ഇനം</string>
   <string name="nearby_info_menu_wikipedia_article">വിക്കിപീഡിയ ലേഖനം</string>
-  <string name="upload_image_problem_duplicate">ഈ പ്രമാണം കോമൺസിൽ നിലവിലുണ്ട്. തുടരണം എന്ന് താങ്കൾക്കുറപ്പാണോ?</string>
   <string name="give_permission">അനുമതി നൽകുക</string>
   <string name="login_to_your_account">താങ്കളുടെ അംഗത്വത്തിൽ പ്രവേശിക്കുക</string>
   <string name="view_browser">ബ്രൗസറിൽ കാണുക</string>
@@ -184,4 +183,5 @@
   <string name="about_translate_proceed">തുടരുക</string>
   <string name="about_translate_cancel">റദ്ദാക്കുക</string>
   <string name="retry">വീണ്ടും ശ്രമിക്കുക</string>
+  <string name="ends_on">അവസാനിക്കുന്നത്:</string>
 </resources>

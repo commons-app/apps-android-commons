@@ -2,6 +2,9 @@ package fr.free.nrw.commons.mwapi;
 
 import com.google.gson.Gson;
 
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -11,9 +14,6 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.mwapi.model.ApiResponse;
-import fr.free.nrw.commons.mwapi.model.Page;
-import fr.free.nrw.commons.mwapi.model.PageCategory;
 import io.reactivex.Single;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -31,14 +31,14 @@ import timber.log.Timber;
 public class CategoryApi {
 
     private final OkHttpClient okHttpClient;
-    private final HttpUrl mwUrl;
+    private final String commonsBaseUrl;
     private final Gson gson;
 
     @Inject
     public CategoryApi(OkHttpClient okHttpClient, Gson gson,
-                       @Named("commons_mediawiki_url") HttpUrl mwUrl) {
+                       @Named("wikimedia_api_host") String commonsBaseUrl) {
         this.okHttpClient = okHttpClient;
-        this.mwUrl = mwUrl;
+        this.commonsBaseUrl = commonsBaseUrl;
         this.gson = gson;
     }
 
@@ -54,12 +54,14 @@ public class CategoryApi {
                 return Collections.emptyList();
             }
 
-            ApiResponse apiResponse = gson.fromJson(body.charStream(), ApiResponse.class);
+            MwQueryResponse apiResponse = gson.fromJson(body.charStream(), MwQueryResponse.class);
             Set<String> categories = new LinkedHashSet<>();
-            if (apiResponse != null && apiResponse.hasPages()) {
-                for (Page page : apiResponse.query.pages) {
-                    for (PageCategory category : page.getCategories()) {
-                        categories.add(category.withoutPrefix());
+            if (apiResponse != null && apiResponse.query() != null && apiResponse.query().pages() != null) {
+                for (MwQueryPage page : apiResponse.query().pages()) {
+                    if (page.categories() != null) {
+                        for (MwQueryPage.Category category : page.categories()) {
+                            categories.add(category.title().replace("Category:", ""));
+                        }
                     }
                 }
             }
@@ -75,9 +77,9 @@ public class CategoryApi {
      * @return URL for API query
      */
     private HttpUrl buildUrl(String coords) {
-        return mwUrl.newBuilder()
-                .addPathSegment("w")
-                .addPathSegment("api.php")
+        return HttpUrl
+                .parse(commonsBaseUrl)
+                .newBuilder()
                 .addQueryParameter("action", "query")
                 .addQueryParameter("prop", "categories|coordinates|pageprops")
                 .addQueryParameter("format", "json")

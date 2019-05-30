@@ -2,27 +2,34 @@ package fr.free.nrw.commons.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
 import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.PopupWindow;
 import android.widget.Toast;
+import timber.log.Timber;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.StringRes;
 
 public class ViewUtil {
-
-    public static final String SHOWCASE_VIEW_ID_1 = "SHOWCASE_VIEW_ID_1";
-    public static final String SHOWCASE_VIEW_ID_2 = "SHOWCASE_VIEW_ID_2";
-    public static final String SHOWCASE_VIEW_ID_3 = "SHOWCASE_VIEW_ID_3";
-
-    public static void showSnackbar(View view, int messageResourceId) {
+    /**
+     * Utility function to show short snack bar
+     * @param view
+     * @param messageResourceId
+     */
+    public static void showShortSnackbar(View view, int messageResourceId) {
         if (view.getContext() == null) {
             return;
         }
 
-        ExecutorUtils.uiExecutor().execute(() -> Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show());
+        ExecutorUtils.uiExecutor().execute(() -> {
+            try {
+                Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show();
+            }catch (IllegalStateException e){
+                Timber.e(e.getMessage());
+            }
+        });
     }
 
     public static void showLongToast(Context context, String text) {
@@ -76,15 +83,25 @@ public class ViewUtil {
         }
     }
 
-    public static void displayPopupWindow(View anchorView, Context context, View popupWindowLayout, String text) {
-
-        PopupWindow popup = new PopupWindow(context);
-        popup.setContentView(popupWindowLayout);
-        // Closes the popup window when touch outside of it - when looses focus
-        popup.setOutsideTouchable(true);
-        popup.setFocusable(true);
-        // Show anchored to button
-        popup.showAsDropDown(anchorView);
+    /**
+     * A snack bar which has an action button which on click dismisses the snackbar and invokes the
+     * listener passed
+     */
+    public static void showDismissibleSnackBar(View view,
+                                               int messageResourceId,
+                                               int actionButtonResourceId,
+                                               View.OnClickListener onClickListener) {
+        if (view.getContext() == null) {
+            return;
+        }
+        ExecutorUtils.uiExecutor().execute(() -> {
+            Snackbar snackbar = Snackbar.make(view, view.getContext().getString(messageResourceId),
+                    Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction(view.getContext().getString(actionButtonResourceId), v -> {
+                snackbar.dismiss();
+                onClickListener.onClick(v);
+            });
+            snackbar.show();
+        });
     }
-
 }

@@ -3,6 +3,7 @@
 *.iws
 *.ipr
 .idea
+app/src/main/gen/*
 
 # Gradle
 .gradle
@@ -27,6 +28,9 @@ app/gradle/wrapper/gradle-wrapper.jar
 app/gradlew
 app/gradlew.bat
 app/gradle/wrapper/gradle-wrapper.properties
+
+# related to release notes
+app/src/prodRelease/play/release-notes/*
 
 #related to OpenCV
 /libraries/opencv/build

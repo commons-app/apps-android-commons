@@ -5,26 +5,25 @@ import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.SyncResult;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
+import org.wikipedia.util.DateUtil;
+
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.LogEventResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
@@ -41,19 +40,18 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private static final ContentValues[] EMPTY = {};
     private static int COMMIT_THRESHOLD = 10;
 
+    // Arbitrary limit to cap the number of contributions to ever load. This is a maximum built
+    // into the app, rather than the user's setting. Also see Github issue #52.
+    public static final int ABSOLUTE_CONTRIBUTIONS_LOAD_LIMIT = 500;
+
     @SuppressWarnings("WeakerAccess")
     @Inject MediaWikiApi mwApi;
-    @Inject @Named("prefs") SharedPreferences prefs;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore defaultKvStore;
 
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
-    }
-
-    private int getLimit() {
-
-        int limit = 500;
-        Timber.d("Max number of uploads set to %d", limit);
-        return limit; // FIXME: Parameterize!
     }
 
     private boolean fileExists(ContentProviderClient client, String filename) {
@@ -88,7 +86,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 .inject(this);
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
-        String lastModified = prefs.getString("lastSyncTimestamp", "");
+        String lastModified = defaultKvStore.getString("lastSyncTimestamp", "");
         Date curTime = new Date();
         LogEventResult result;
         Boolean done = false;
@@ -97,7 +95,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         while (!done) {
 
             try {
-                result = mwApi.logEvents(user, lastModified, queryContinue, getLimit());
+                result = mwApi.logEvents(user, lastModified, queryContinue, ABSOLUTE_CONTRIBUTIONS_LOAD_LIMIT);
             } catch (IOException e) {
                 // There isn't really much we can do, eh?
                 // FIXME: Perhaps add EventLogging?
@@ -120,9 +118,8 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                     Timber.d("Skipping %s", filename);
                     continue;
                 }
-                String thumbUrl = Utils.makeThumbBaseUrl(filename);
                 Date dateUpdated = image.getDateUpdated();
-                Contribution contrib = new Contribution(null, thumbUrl, filename,
+                Contribution contrib = new Contribution(null, null, filename,
                         "", -1, dateUpdated, dateUpdated, user,
                         "", "");
                 contrib.setState(STATE_COMPLETED);
@@ -151,13 +148,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 done = true;
             }
         }
-        prefs.edit().putString("lastSyncTimestamp", toMWDate(curTime)).apply();
+        defaultKvStore.putString("lastSyncTimestamp", DateUtil.iso8601DateFormat(curTime));
         Timber.d("Oh hai, everyone! Look, a kitty!");
-    }
-
-    private String toMWDate(Date date) {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
-        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return isoFormat.format(date);
     }
 }

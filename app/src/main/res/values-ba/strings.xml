@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Lizalizaufa
 * Sagan
 * Рустам Нурыев
@@ -83,7 +84,7 @@
   <string name="title_activity_signup">Теркәл</string>
   <string name="menu_about">Ҡушымта тураһында</string>
   <string name="about_license">\"Викисклад\" ҡушылмаһы - асыҡ коды булған программа. Уны Викимедиала гранттарын алған ҡатнашыусы һәм ирекмәндәр эшләгән. Викимедиа Фонды был ҡушылманы булдырыу,яңыртыу йәки эшләтеүҙә ҡатнашмай.</string>
-  <string name="about_improve">Һеҙ ҙә &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; булдырып, хата йәки берәй тәҡдим тураһында ошонда GitHub&lt;/a&gt; яҙып ебәрә алаһығыҙ.</string>
+  <string name="about_improve">Һеҙ ҙә &lt;a href=\"%1$s\"&gt; булдырып, хата йәки берәй тәҡдим тураһында ошонда GitHub&lt;/a&gt; яҙып ебәрә алаһығыҙ.</string>
   <string name="about_privacy_policy">&lt;u&gt;Сер һаҡлау сәйәсәте&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Рәхмәттәр&lt;/u&gt;</string>
   <string name="title_activity_about">Аныҡлау</string>
@@ -94,7 +95,7 @@
   <string name="no_uploads_yet">Әлегә бер фото ла тейәмәгәнһең</string>
   <string name="menu_retry_upload">Йәнә бер тапҡыр</string>
   <string name="menu_cancel_upload">Кәрәкмәй</string>
-  <string name="share_license_summary">Был рәсем %1$s аҫтында лицензия аласаҡ</string>
+  <string name="share_license_summary" fuzzy="true">Был рәсем %1$s аҫтында лицензия аласаҡ</string>
   <string name="media_upload_policy">Был рәсемде ебәргәндә шуны раҫлайым: был минең шәхси эшем, автор хоҡуҡтарын һаҡлаған материал йәки селфи түгел, шулай уҡ Викискладтың &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;ҡағиҙәләренә тап килә&lt;/a&gt;.</string>
   <string name="menu_download">Тейәргә</string>
   <string name="preference_license">Нығытылған рөхсәтнамә</string>
@@ -126,17 +127,14 @@
   <string name="tutorial_1_text">Викисклад Википедияла ҡулланылғандан күберәк рәсемде һаҡлай.</string>
   <string name="tutorial_1_subtext">Һеҙ ҡуйған рәсемдәр ер шары халҡын мәғрифәтлерәк итә!</string>
   <string name="tutorial_2_text">Зинһар, тик үҙегеҙ төшөргән йәки үҙегеҙ эшләгән фотографияларҙы ғына тейәгеҙ:</string>
-  <string name="tutorial_2_subtext">- Тәбиғи объекттар (мәҫәлән, сәскәләр, хайуандар, тауҙар)\n- Файҙалы әйберҙәр (мәҫәлән, велосипедтар, вокзалдар)\n- Билдәле кешеләр (мәҫәлән, ҡалағыҙ мэры, һеҙ күргән олимпия спортсмендары)</string>
   <string name="tutorial_2_subtext_1">Тәбиғи объекттар (сәскәләр, хайуандар, тауҙар)</string>
   <string name="tutorial_2_subtext_2">Файҙалы объекттар (велосипедтар, вокзалдар)</string>
   <string name="tutorial_2_subtext_3">Билдәле шәхестәр (ҡала мэры, олимпия атлеттары һ.б.)</string>
   <string name="tutorial_3_text">Зинһар, ЙӨКЛӘМӘГЕҘ:</string>
-  <string name="tutorial_3_subtext">- Селфи йәки дуҫтарығыҙҙың фотоларын\n- Интернеттан күсереп алған фотоларҙы\n- Ирекһеҙ ҡушымталарҙан алынған скриншоттарҙы</string>
   <string name="tutorial_3_subtext_1">Селфи йәки дуҫтарығыҙҙың фотоһүрәттәре</string>
   <string name="tutorial_3_subtext_2">Интернеттан күсереп алынған һүрәттәр</string>
   <string name="tutorial_3_subtext_3">Патентлы ҡушылмаларҙан алынған скриншоттар</string>
   <string name="tutorial_4_text">Тейәү миҫалы:</string>
-  <string name="tutorial_4_subtext">- Атамаһы: Сидней опера театры\n- Һүрәтләмәһе: Сидней опера театры, ҡултыҡ яғынан күренеш\n- Категориялары:Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">Атама: Сидней опера театры</string>
   <string name="tutorial_4_subtext_2">Һүрәтләмә: Сидней опера театры ҡултыҡ яғынан ҡарағанда</string>
   <string name="tutorial_4_subtext_3">Категориялар: Сидней опера театры көнбайыштан ҡарағанда, Сидней опера театры</string>
@@ -158,8 +156,6 @@
   <string name="title_activity_nearby">Яҡындағы урындар</string>
   <string name="no_nearby">Яҡындағы урындар табылманы</string>
   <string name="media_detail_title">Атама</string>
-  <string name="media_detail_media_title">Мәғлүмәт йөрөтөүсенең атамаһы</string>
-  <string name="media_detail_description_explanation">Мәғлүмәт йөрөтөүсене һүрәтләү ошонда яҙыла.Уның ярайһы уҡ оҙон, хатта бер-нисә юлға һуҙылып китеүе лә бар. Шулай булһа ла ул бик матур күренер тип уйлайбыҙ.</string>
   <string name="media_detail_uploaded_date">Тейәү датаһы</string>
   <string name="media_detail_coordinates">Координаттар</string>
   <string name="media_detail_coordinates_empty">Бер ни ҙә бирелмәне</string>
@@ -203,9 +199,6 @@
   <string name="error_while_cache">Рәсемде кэшлағандағы хата</string>
   <string name="title_info">Файлдың исеме булараҡ һаҡланасаҡ үҙенсәлекле һәртәләү. Тәбиғи телегеҙҙе, һүҙҙәр араһын айырып, ҡулланырға була. Зинһар, файл киңәйтеүҙәрен күрһәтмәгеҙ.</string>
   <string name="description_info">Зинһар, тейәләсәк файлды тәфсирләп һүрәтлә:ҡайҙа төшөрөлгән? нимә һәрәтләнә? һүрәт нимәне аңлата? Рәсемдәге кешеләр йәки объекттарҙы ла һүрәтлә. Һүрәткә ҡарап ҡына белеп булмаған мәғлүмәттәрҙе өҫтә: мәҫәлән, тәүлектең ниндәй мәлендә, ҡасан төшөрөлгән был файл. Әгәр ғәҙәти булмаған әйбер төшөрөлһә, уның нимәһе шаҡ ҡатырғанын аңлат.</string>
-  <string name="upload_image_problem_duplicate">Был файл Викискладта бар. Дауам итергә ризаһыңмы?</string>
-  <string name="upload_image_problem_dark">Был рәсем бик ҡараңғы күренә. Тейәргәме? Викискладта энциклопедик йәһәттән ҡиммәте булған фоторәсемдәр генә ҡәҙерле.</string>
-  <string name="upload_image_problem_blurry">Был рәсем асыҡ түгел. Тейәргәме? Викискладта энциклопедик йәһәттән ҡиммәте булған фоторәсемдәр генә ҡәҙерле.</string>
   <string name="give_permission">Рөхсәт бирәм</string>
   <string name="use_external_storage">Тышҡы һаҡлағысты ҡуллан</string>
   <string name="use_external_storage_summary">Ҡулайламаның камераһы ярҙамында төшөрөлгән һүрәттәрҙе һаҡлау</string>

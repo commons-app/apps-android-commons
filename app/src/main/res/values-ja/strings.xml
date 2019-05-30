@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Aefgh39622
 * Dude1717
 * Hinaloe
@@ -11,6 +12,7 @@
 * Takot
 * Whym
 * Yusuke1109
+* Yuukin0248
 -->
 <resources>
   <string name="preference_category_appearance">表示</string>
@@ -20,6 +22,7 @@
   <string name="app_name">コモンズ</string>
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
+  <string name="intent_share_upload_label">コモンズにアップロード</string>
   <string name="username">利用者名</string>
   <string name="password">パスワード</string>
   <string name="login_credential">コモンズのベータ版アカウントにログイン</string>
@@ -41,8 +44,7 @@
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d file uploading</item>
-    <item quantity="other">%1$d件のファイルをアップロード中</item>
+    <item quantity="other">%1$d 件のファイルをアップロード中</item>
   </plurals>
   <string name="title_activity_contributions">自分の最近のアップロードファイル</string>
   <string name="contribution_state_queued">順番待ち中</string>
@@ -81,11 +83,9 @@
     <item quantity="other">(%1$d件のアップロード)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starting %1$d upload</item>
-    <item quantity="other">%1$d件のアップロードを開始中</item>
+    <item quantity="other">%1$d 件のアップロードを開始中</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
@@ -97,7 +97,7 @@
   <string name="title_activity_category_details">カテゴリ</string>
   <string name="menu_about">このアプリについて</string>
   <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアが製作・管理しているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
-  <string name="about_improve">バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
+  <string name="about_improve">バグとアイディアは &lt;a href=\"%1$s\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;u&gt;プライバシー・ポリシー&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;クレジット&lt;/u&gt;</string>
   <string name="title_activity_about">このアプリについて</string>
@@ -108,7 +108,7 @@
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
-  <string name="share_license_summary">この画像は%1$sライセンスのもとにアップロードされます。</string>
+  <string name="share_license_summary" fuzzy="true">この画像は%1$sライセンスのもとにアップロードされます。</string>
   <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれていないと宣言します。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">既定のライセンス</string>
@@ -140,17 +140,14 @@
   <string name="tutorial_1_text">ウィキメディア・コモンズにはウィキペディアで使用する画像のほぼすべてが保管されています。</string>
   <string name="tutorial_1_subtext">あなたの画像は世界中の人々が学習する助けになります!</string>
   <string name="tutorial_2_text">アップロードする画像はあなたご本人が撮影したものかあなたが単独で制作したものに限定します。</string>
-  <string name="tutorial_2_subtext">自然 (動植物、山)\n• 道具 (自転車、駅)\n• 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
   <string name="tutorial_2_subtext_1">自然物 (動植物、山)</string>
   <string name="tutorial_2_subtext_2">道具 (自転車、駅)</string>
   <string name="tutorial_2_subtext_3">著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
   <string name="tutorial_3_text">アップロードが《禁止》のもの:</string>
-  <string name="tutorial_3_subtext">- あなたの友人の自撮り写真や画像\n- インターネットからダウンロードした画像\n- 著作権のあるアプリのスクリーンショット</string>
   <string name="tutorial_3_subtext_1">自撮りもしくは友達を撮影した写真</string>
   <string name="tutorial_3_subtext_2">ウェブからダウンロードした画像</string>
   <string name="tutorial_3_subtext_3">独自のアプリケーションのスクリーンショット</string>
   <string name="tutorial_4_text">アップロードの例:</string>
-  <string name="tutorial_4_subtext">- 題名: シドニー・オペラハウス\n- 説明: 湾の向こうから見たシドニー・オペラハウス\n- カテゴリ: 西側から見たシドニー・オペラハウス、遠くから見たシドニー・オペラハウス</string>
   <string name="tutorial_4_subtext_1">題名: シドニーのオペラハウス</string>
   <string name="tutorial_4_subtext_2">説明: シドニーのオペラハウス。湾を挟んで撮影。</string>
   <string name="tutorial_4_subtext_3">カテゴリ: シドニーオペラハウスの西面、シドニーオペラ遠景</string>
@@ -160,6 +157,7 @@
   <string name="welcome_copyright_subtext">インターネットで見つけた画像、ポスター、書籍の表紙など著作権のある素材は避けてください。</string>
   <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>
+  <string name="welcome_help_button_text">&lt;u&gt;詳細情報&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">カテゴリ</string>
   <string name="detail_panel_cats_loading">読み込み中…</string>
   <string name="detail_panel_cats_none">ファイルを選択していません</string>
@@ -167,7 +165,7 @@
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
   <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリはギャラリーを開けません。</string>
-  <string name="write_storage_permission_rationale">必要な権限:外部ストレージに入力します。これがないとアプリはカメラにアクセスできません。</string>
+  <string name="write_storage_permission_rationale">必要な権限: 外部ストレージに入力します。これがないとアプリはカメラ/ギャラリーにアクセスできません。</string>
   <string name="location_permission_rationale">オプションの権限：カテゴリ候補のため現在の位置を取得する</string>
   <string name="ok">承認</string>
   <string name="title_activity_nearby">近くの場所</string>
@@ -176,11 +174,8 @@
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
   <string name="media_detail_title">タイトル</string>
-  <string name="media_detail_media_title">メディアのタイトル</string>
   <string name="media_detail_description">記述</string>
-  <string name="media_detail_description_explanation">ここにメディアの説明が入ります。かなり長文になる場合には数行にわたることがあります。それでも見栄えがよいと願っています。</string>
   <string name="media_detail_author">作者</string>
-  <string name="media_detail_author_explanation">秀逸な画像の作者名を記入します。</string>
   <string name="media_detail_uploaded_date">アップロード日時</string>
   <string name="media_detail_license">ライセンス</string>
   <string name="media_detail_coordinates">緯度経度</string>
@@ -191,7 +186,7 @@
   <string name="number_of_uploads">最近のアップロードファイルに表示する最大件数</string>
   <string name="maximum_limit">最大限</string>
   <string name="maximum_limit_alert">表示できるのは500件以下です</string>
-  <string name="set_limit">最近のアップロードファイルに表示する最大件数</string>
+  <string name="set_limit">最近のアップロード上限件数</string>
   <string name="login_failed_2fa_not_supported">2段階認証は現在サポートされていません。</string>
   <string name="logout_verification">ログアウトしてもよろしいですか？</string>
   <string name="commons_logo">コモンズの商標</string>
@@ -232,9 +227,6 @@
   <string name="error_while_cache">画像をキャッシュする際のエラー</string>
   <string name="title_info">ファイル固有の説明的な表題。ファイル名として使われます。平易な言葉を使い、空白を入れることができます。拡張子は含めないでください。</string>
   <string name="description_info">可能な限りメディアを説明してください: 撮影地はどこですか? それは何を示していますか? どんな文脈がありますか? 被写体の物や人を説明してください。容易に推測できない情報、例えば風景であれば時刻を明示します。特筆すべき物事が映っている場合は、何が珍しいのかを説明してください。</string>
-  <string name="upload_image_problem_duplicate">このファイルは既にコモンズにあります。本当にアップロードしますか？</string>
-  <string name="upload_image_problem_dark">この画像は暗すぎますがアップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
-  <string name="upload_image_problem_blurry">ピントが合っていませんが、アップロードしますか？ ウィキメディア・コモンズは百科事典に適した画像のみ受け付けます。</string>
   <string name="give_permission">権限を付与</string>
   <string name="use_external_storage">外部ストレージを使用</string>
   <string name="use_external_storage_summary">アプリ内のカメラで撮影した写真を端末に保存する</string>
@@ -257,7 +249,7 @@
   <string name="notifications_welcome">ウィキメディアコモンズにようこそ、%1$さん！ このサイトへ来てくれてありがとうございます。</string>
   <string name="notifications_talk_page_message">%1$さんからアナタのとーくぺ^字にメッセージが届いています</string>
   <string name="notifications_thank_you_edit">編集をしてくれてありがとうございます</string>
-  <string name="notifications_mention">%1$さんが%2$であなたに言及しています。</string>
+  <string name="notifications_mention">%1$sさんが%2$sであなたに言及しています。</string>
   <string name="toggle_view_button">表示の切り替え</string>
   <string name="nearby_directions">道順</string>
   <string name="nearby_wikidata">ウィキデータ</string>
@@ -277,16 +269,17 @@
   <string name="about_translate_cancel">キャンセル</string>
   <string name="retry">やり直す</string>
   <string name="showcase_view_got_it_button">了解</string>
-  <string name="showcase_view_whole_nearby_activity">近くでウィキペディアの記事に使う写真がない場所はこちら</string>
+  <string name="showcase_view_whole_nearby_activity">以下のとおり、近くにウィキペディアの記事に使う写真が足りない場所があります。\n\n\'この近くを検索\' ボタンを押すと、地図をロックしてその地点周辺の検索結果を表示します。</string>
   <string name="showcase_view_list_icon">このボタンをタップするとリストを表示します</string>
   <string name="showcase_view_plus_fab">場所の写真をアップロードするには、ギャラリーから選ぶことも撮影することもできます</string>
   <string name="no_images_found">画像がありません</string>
   <string name="error_loading_images">画像の読み込み中にエラーが発生しました</string>
-  <string name="image_uploaded_by">アップロードした人: %1$</string>
+  <string name="image_uploaded_by">アップロードした人: %1$s</string>
   <string name="appwidget_img">今日の一枚</string>
   <string name="app_widget_heading">今日の一枚</string>
   <string name="menu_search_button">検索</string>
   <string name="title_activity_search">検索</string>
+  <string name="search_tab_title_categories">カテゴリ</string>
   <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
   <string name="menu_set_wallpaper">壁紙として設定</string>
@@ -296,5 +289,29 @@
   <string name="share_app_title">アプリをシェアする</string>
   <string name="share_coordinates_not_present">画像の選択中に位置情報を特定できませんでした</string>
   <string name="error_fetching_nearby_places">付近の場所を取得しようとしてエラーが発生しました。</string>
+  <string name="add_description">説明を追加</string>
+  <string name="no_recent_searches">最近の検索はまだありません</string>
+  <string name="delete_recent_searches_dialog">本当に検索履歴を消去しますか?</string>
+  <string name="delete_search_dialog">この検索を削除しますか?</string>
+  <string name="search_history_deleted">検索履歴を削除しました</string>
+  <string name="nominate_delete">削除候補</string>
+  <string name="delete">削除</string>
   <string name="statistics">統計</string>
+  <string name="submit">送信</string>
+  <plurals name="upload_count_title">
+    <item quantity="other">%1$d 件のアップロード</item>
+  </plurals>
+  <string name="navigation_item_bookmarks">ブックマーク</string>
+  <string name="title_activity_bookmarks">ブックマーク</string>
+  <string name="provider_bookmarks_location">ブックマーク</string>
+  <string name="desc_language_Worldwide">全世界</string>
+  <string name="desc_language_America">アメリカ</string>
+  <string name="desc_language_Europe">ヨーロッパ</string>
+  <string name="desc_language_Middle_East">中東</string>
+  <string name="desc_language_Africa">アフリカ</string>
+  <string name="desc_language_Asia">アジア</string>
+  <string name="desc_language_Pacific">太平洋地域</string>
+  <string name="nominate_for_deletion_done">完了</string>
+  <string name="review_thanks_no_button_text" fuzzy="true">次の画像</string>
+  <string name="please_wait">お待ちください…</string>
 </resources>

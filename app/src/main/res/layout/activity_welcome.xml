@@ -4,16 +4,28 @@
     android:layout_height="match_parent"
     android:background="@color/primaryColor">
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/welcomePager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fadingEdge="none" />
 
+    <TextView
+        android:id="@+id/finishTutorialButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:padding="@dimen/standard_gap"
+        android:text="@string/welcome_skip_button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/normal_text"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
     <com.viewpagerindicator.CirclePageIndicator
         android:id="@+id/welcomePagerIndicator"
-        android:layout_height="@dimen/half_standard_height"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/half_standard_height"
         android:layout_gravity="bottom"
         android:padding="5dp" />
 

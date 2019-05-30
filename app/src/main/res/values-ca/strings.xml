@@ -94,7 +94,7 @@
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
   <string name="menu_retry_upload">Reintenta</string>
   <string name="menu_cancel_upload">Cancel·la</string>
-  <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
+  <string name="share_license_summary" fuzzy="true">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència per defecte</string>
   <string name="use_previous">Utilitza títol i descripció anteriors</string>
@@ -142,8 +142,8 @@
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Títol</string>
-  <string name="media_detail_media_title">Títol del fitxer multimèdia</string>
   <string name="media_detail_description">Descripció</string>
+  <string name="media_detail_discussion">Discussió</string>
   <string name="media_detail_uploaded_date">Data de càrrega</string>
   <string name="media_detail_license">Llicència</string>
   <string name="media_detail_coordinates">Coordenades</string>
@@ -177,7 +177,6 @@
   <string name="nearby_info_menu_commons_article">Article del fitxer a Commons</string>
   <string name="nearby_info_menu_wikidata_article">Element del Wikidata</string>
   <string name="error_while_cache">Error mentre es carregaven les fotografies</string>
-  <string name="upload_image_problem_duplicate">El fitxer ja existeix a Commons. Segur que voleu procedir?</string>
   <string name="give_permission">Dóna permís</string>
   <string name="use_external_storage">Utilitza l’emmagatzematge extern</string>
   <string name="login_to_your_account">Entreu en el vostre compte</string>
@@ -191,4 +190,19 @@
   <string name="notifications_mention" fuzzy="true">%1$s us ha mencionat a %2$s.</string>
   <string name="about_faq" fuzzy="true">Preguntes freqüents</string>
   <string name="no_images_found">No s’ha trobat cap imatge.</string>
+  <string name="search_tab_title_media">MULTIMÈDIA</string>
+  <string name="search_tab_title_categories">CATEGORIES</string>
+  <string name="explore_tab_title_featured">DESTACATS</string>
+  <string name="explore_tab_title_mobile">PUJATS MITJANÇANT EL MÒBIL</string>
+  <string name="no_recent_searches">No hi ha cap cerca recent</string>
+  <string name="delete_search_dialog">Voleu suprimir aquesta cerca?</string>
+  <string name="delete">SUPRIMEIX</string>
+  <string name="nominate_for_deletion_done">Fet</string>
+  <string name="review_copyright_yes_button_text" fuzzy="true">NO, VIOLACIÓ DE DRETS D’AUTOR</string>
+  <string name="review_thanks_yes_button_text">I tant</string>
+  <string name="review_thanks_no_button_text">Imatge següent</string>
+  <string name="no_notification">No teniu cap notificació sense llegir</string>
+  <string name="no_archived_notification">No teniu cap notificació arxivada</string>
+  <string name="welcome_do_upload_content_description">Exemples d’imatges adequades per a Commons</string>
+  <string name="welcome_dont_upload_content_description">Exemples d’imatges que no s’han de pujar</string>
 </resources>

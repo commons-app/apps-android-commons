@@ -21,7 +21,7 @@ public class CustomMwApi {
         private CustomMwApi api;
 
         RequestBuilder(CustomMwApi api) {
-            params = new HashMap<String, Object>();
+            params = new HashMap<>();
             this.api = api;
         }
 
@@ -69,6 +69,10 @@ public class CustomMwApi {
     }
 
     public void setAuthCookie(String authCookie) {
+        if (authCookie == null) {//If the authCookie is null, no need to proceed
+            return;
+        }
+
         this.authCookie = authCookie;
         this.isLoggedIn = true;
         String[] cookies = authCookie.split(";");
@@ -131,22 +135,13 @@ public class CustomMwApi {
         }
     }
 
-    public CustomApiResult upload(String filename, InputStream file, long length, String text, String comment, String centralAuthToken, String token) throws IOException {
-        return this.upload(filename, file, length, text, comment,centralAuthToken, token, null);
-    }
-
-    public CustomApiResult upload(String filename, InputStream file, String text, String comment, String centralAuthToken, String token) throws IOException {
-        return this.upload(filename, file, -1, text, comment,centralAuthToken, token, null);
-    }
-
-    public CustomApiResult upload(String filename, InputStream file, long length, String text, String comment, String centralAuthToken, String token, ProgressListener uploadProgressListener) throws IOException {
-        Http.HttpRequestBuilder builder = Http.multipart(apiURL)
+    public CustomApiResult uploadToStash(String filename, InputStream file, long length, String token, ProgressListener uploadProgressListener) throws IOException {
+            Timber.d("Initiating upload for file %s", filename);
+            Http.HttpRequestBuilder builder = Http.multipart(apiURL)
                 .data("action", "upload")
+                .data("stash", "1")
                 .data("token", token)
-                .data("centralauthtoken", centralAuthToken)
-                .data("text", text)
                 .data("ignorewarnings", "1")
-                .data("comment", comment)
                 .data("filename", filename)
                 .sendProgressListener(uploadProgressListener);
         if (length != -1) {
@@ -155,7 +150,20 @@ public class CustomMwApi {
             builder.file("file", filename, file);
         }
 
-        return CustomApiResult.fromRequestBuilder(builder, client);
+        return CustomApiResult.fromRequestBuilder("uploadToStash", builder, client);
+    }
+
+    public CustomApiResult uploadFromStash(String filename, String filekey, String text, String comment, String token) throws IOException {
+        Http.HttpRequestBuilder builder = Http.multipart(apiURL)
+                .data("action", "upload")
+                .data("token", token)
+                .data("ignorewarnings", "1")
+                .data("text", text)
+                .data("comment", comment)
+                .data("filename", filename)
+                .data("filekey", filekey);
+
+        return CustomApiResult.fromRequestBuilder("uploadFromStash", builder, client);
     }
 
     public void logout() throws IOException {
@@ -174,7 +182,7 @@ public class CustomMwApi {
             builder = Http.get(apiURL);
         }
         builder.data(params);
-        return CustomApiResult.fromRequestBuilder(builder, client);
+        return CustomApiResult.fromRequestBuilder(apiURL, builder, client);
     }
 }
 ;

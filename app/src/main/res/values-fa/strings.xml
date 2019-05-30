@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
+* Amirsara
 * Arash.pt
 * Ebraminio
 * Eshagh79
+* FarsiNevis
 * Fatemi127
+* Freshman404
 * Mehdi
 * Mjbmr
 * Omidh
 * Ommmmid
+* Physicsch
 * Reza1615
+* Vahedi
 * Yoosef Pooranvary
 * جواد
 -->
@@ -79,7 +85,7 @@
   <string name="gps_disabled">مکان‌یاب در دستگاه شما خاموش است. آیا دوست دارید فعال شود؟</string>
   <string name="enable_gps">فعال کردن مکان‌یاب</string>
   <string name="contributions_subtitle_zero">هنوز هیچ بارگذاری</string>
-  <string name="contributions_subtitle" fuzzy="true">{{%1$d|zero=@string/contributions_subtitle_zero|one=بارگذاری شد|%1$d بارگذاری شد}}</string>
+  <string name="contributions_subtitle">{{%1$d|zero=@string/contributions_subtitle_zero|one=(%1$d)|(%1$d)}}</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">شروع %1$d بارگذاری پرونده</item>
     <item quantity="other">شروع بارگذاری %1$d پرونده</item>
@@ -95,9 +101,10 @@
   <string name="title_activity_signup">ثبت نام</string>
   <string name="title_activity_featured_images">تصاویر برگزیده</string>
   <string name="title_activity_category_details">رده</string>
+  <string name="title_activity_review">بررسی هم رده</string>
   <string name="menu_about">درباره</string>
   <string name="about_license">اپلیکیشن ویکی‌انبار بنیاد ویکی‌مدیا یک نرم‌افزار آزاد است که توسط کاربران داوطلب و پاداش‌بگیر ایجاد و نگهداری می‌شود. بنیاد ویکی‌مدیا در ایجاد، نگهداری و توسعهٔ آن دخالتی ندارد.</string>
-  <string name="about_improve">ایجاد یک &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;درخواست در گیت‌هاب&lt;/a&gt; برای گزارش باگ و یا پیشنهاد یک خصوصیت جدید.</string>
+  <string name="about_improve">ایجاد یک &lt;a href=\"%1$s\"&gt;درخواست در گیت‌هاب&lt;/a&gt; برای گزارش باگ و یا پیشنهاد یک خصوصیت جدید.</string>
   <string name="about_privacy_policy">&lt;u&gt;سیاست حفظ حریم خصوصی&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;مجوز&lt;/u&gt;</string>
   <string name="title_activity_about">درباره</string>
@@ -108,7 +115,10 @@
   <string name="no_uploads_yet">شما هنوز نگاره‌ای بارگذاری نکرده‌اید.</string>
   <string name="menu_retry_upload">تلاش مجدد</string>
   <string name="menu_cancel_upload">لغو</string>
-  <string name="share_license_summary">این نگاره تحت مجوز %1$s است</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">این نگاره تحت مجوز %1$s است</item>
+    <item quantity="other">این نگاره تحت مجوز %1$s است</item>
+  </plurals>
   <string name="media_upload_policy">با بارگذاری این تصویر، تأیید می‌کنم که این اثر کار خودم است و از محتوای دارای حق تکثیر یا سلفی برای ایجاد آن استفاده نکرده‌ام و شرایط ذکر شده در By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;سیاست‌های ویکی‌انبار&lt;/a&gt; را رعایت می‌کند.</string>
   <string name="menu_download">دریافت</string>
   <string name="preference_license">مجوز پیش‌فرض</string>
@@ -140,17 +150,14 @@
   <string name="tutorial_1_text">ویکی‌انبار اکثر پرونده‌هایی که در ویکی‌پدیا استفاده می‌شوند را در خود نگه می‌دارد.</string>
   <string name="tutorial_1_subtext">تصاویر شما به مردم در اقصی نقاط دنیا کمک می‌کند!</string>
   <string name="tutorial_2_text">لطفاً تصاویری که توسط خودتان گرفته شده‌اند یا ایجاد شده‌اند را بارگذاری کنید:</string>
-  <string name="tutorial_2_subtext">•اجسام طبیعی (گیاه، جانور، کوه)\n•اجسام کاربردی (دوچرخه، ایستگاه قطار)\n•افراد مشهور (شهردار، قهرمانان المپیک)</string>
   <string name="tutorial_2_subtext_1">اشیاء طبیعی (گل ها، حیوانات، کوه ها)</string>
   <string name="tutorial_2_subtext_2">اشیاء مفید (دوچرخه، ایستگاه قطار)</string>
   <string name="tutorial_2_subtext_3">افراد معروف (شهردار، ورزشکاران المپیک که ملاقات کرده اید)</string>
   <string name="tutorial_3_text">لطفاً بارگذاری نکنید:</string>
-  <string name="tutorial_3_subtext">-سلفی خودتان یا تصویر دوستانتان\n-تصاویری که از اینترنت دانلود کردید\n-نماگرفت از دیگر اپلیکیشن‌‌ها</string>
   <string name="tutorial_3_subtext_1">سلفی یا تصویر از دوستانتان</string>
   <string name="tutorial_3_subtext_2">تصاویری که از اینترنت دانلود کرده اید</string>
   <string name="tutorial_3_subtext_3">عکس از صفحه از برنامه های اختصاصی</string>
   <string name="tutorial_4_text">نمونه بارگذاری:</string>
-  <string name="tutorial_4_subtext">-عنوان: خانهٔ اپرای سیدنی\n-توضیحات: خانهٔ اپرای سیدنی از آن طرف خلیج\n-رده‌ها: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="tutorial_4_subtext_1">عنوان: اپرای سیدنی</string>
   <string name="tutorial_4_subtext_2">توضیحات: خانه اپرای سیدنی از سراسر خلیج دیده شده است</string>
   <string name="tutorial_4_subtext_3">دسته بندی: خانه اپرای سیدنی از غرب، منظره دیدنی اپرای سیدنی</string>
@@ -165,10 +172,11 @@
   <string name="detail_panel_cats_loading">در حال بارگیری…</string>
   <string name="detail_panel_cats_none">هیچ‌کدام انتخاب‌نشده</string>
   <string name="detail_description_empty">بدون توضیحات</string>
+  <string name="detail_discussion_empty">بدون بحث</string>
   <string name="detail_license_empty">مجوز ناشناخته</string>
   <string name="menu_refresh">تازه‌کردن</string>
   <string name="read_storage_permission_rationale">اجازه‌های مورد نیاز: مطالعهٔ حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
-  <string name="write_storage_permission_rationale">اجازه‌های مورد نیاز: نوشتن در حافظهٔ خارجی. اپلیکیشن نمیتواند به دبین دسترسی داشته باشد.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">اجازه‌های مورد نیاز: نوشتن در حافظهٔ خارجی. اپلیکیشن نمیتواند به دبین دسترسی داشته باشد.</string>
   <string name="location_permission_rationale">اجازه‌های اختیاری: دریافت موقعیت برای پیشنهاد رده</string>
   <string name="ok">تأیید</string>
   <string name="title_activity_nearby">مکان‌‌های اطراف</string>
@@ -177,11 +185,9 @@
   <string name="yes">بله</string>
   <string name="no">خیر</string>
   <string name="media_detail_title">عنوان</string>
-  <string name="media_detail_media_title">عنوان رسانه</string>
   <string name="media_detail_description">توضیح</string>
-  <string name="media_detail_description_explanation">توضیحات رسانه اینجا می‌روند. امکان دارد طولانی باشد و نیاز به چند خط شدن داشته باشد. امیدواریم خوب دیده شود.</string>
+  <string name="media_detail_discussion">بحث</string>
   <string name="media_detail_author">نویسنده</string>
-  <string name="media_detail_author_explanation">تصویر نویسنده و نام کاربری در اینجا نمایش داده میشود.</string>
   <string name="media_detail_uploaded_date">تاریخ بارگذاری</string>
   <string name="media_detail_license">مجوز</string>
   <string name="media_detail_coordinates">مختصات‌ها</string>
@@ -191,8 +197,11 @@
   <string name="_2fa_code">کد 2FA</string>
   <string name="number_of_uploads">محدودیت بارگذاری اخیر من</string>
   <string name="maximum_limit">حداکثر محدودیت</string>
+  <string name="invalid_zero">صفر قابل قبول نیست</string>
+  <string name="invalid_input">ورودی نامعتبر</string>
   <string name="maximum_limit_alert">عدم توانایی در نمایش بیش از ۵۰۰ مورد</string>
-  <string name="set_limit">تنظیم محدودیت بارگذاری‌های اخیر</string>
+  <string name="enter_valid">عدد معتبر را وارد کنید</string>
+  <string name="set_limit" fuzzy="true">تنظیم محدودیت بارگذاری‌های اخیر</string>
   <string name="login_failed_2fa_not_supported">تأیید دومرحله‌ای الان پشتیبانی نمی‌شود.</string>
   <string name="logout_verification">آیا واقعاً قصد خروج از سامانه را دارید؟</string>
   <string name="commons_logo">نشان ویکی‌انبار</string>
@@ -227,6 +236,7 @@
   <string name="navigation_item_info">آموزش</string>
   <string name="navigation_item_notification">آگاه‌سازی‌ها</string>
   <string name="navigation_item_featured_images">برگزیده</string>
+  <string name="navigation_item_review">بازبینی</string>
   <string name="nearby_needs_permissions">مکان‌های اطراف بدون اجازه دادن به مکان‌یاب مقدور نیست</string>
   <string name="no_description_found">توضیحی یافت نشد</string>
   <string name="nearby_info_menu_commons_article">صفحهٔ دروند در ویکی‌انبار</string>
@@ -235,9 +245,11 @@
   <string name="error_while_cache">خطا در زمان دریافت تصاویر</string>
   <string name="title_info">عنوانی توصیفی و یکتا برای پرونده که به عنوان نام پرونده در نظر گرفته خواهد شد. ترجیحاً به زبان ساده باشد، می‌توانید فاصله هم به کار ببرید. پسوند پرونده را ننویسید.</string>
   <string name="description_info">لطفاً تصویر را تا حد توان شرح دهید. کجا گرفته شده‌است؟ شامل چه چیزی می‌شود؟ لطفاً اشیا یا افراد را شرح دهید. اطلاعاتی که به راحتی قابل مشاهده هستند را صرفه‌نظر کنید. اگر چیزی در تصویر غیر طبیعی به نظر می‌رسد آن را شرح دهید.</string>
-  <string name="upload_image_problem_duplicate">پرونده در ویکی‌انبار موجود است. آیا مطمئنید که می‌خواهید ادامه دهید؟</string>
-  <string name="upload_image_problem_dark">این تصویر خیلی تیره است آیا مطمئنید که می‌خواهید آن را بارگذاری کنید؟ ویکی‌انبار فقط برای نگهداری از تصاویری که ارزش دانشنامه‌ای داشته باشند، است.</string>
-  <string name="upload_image_problem_blurry">این تصویر خیلی تار است آیا مطمئنید که می‌خواهید آن را بارگذاری کنید؟ ویکی‌انبار فقط برای نگهداری از تصاویری که ارزش دانشنامه‌ای داشته باشند، است.</string>
+  <string name="upload_problem_image_dark">تصویر بیش از حد تاریک است.</string>
+  <string name="upload_problem_image_blurry">تصویر تار است.</string>
+  <string name="upload_problem_image_duplicate">تصویر اکنون در انبار موجود است.</string>
+  <string name="upload_problem_different_geolocation">این تصویر در مکان متفاوتی گرفته شده است.</string>
+  <string name="upload_problem_do_you_continue">هنوزم می خوای این عکس رو آپلود کنی؟</string>
   <string name="give_permission">اجازه بده</string>
   <string name="use_external_storage">استفاده از حافظهٔ خارجی</string>
   <string name="use_external_storage_summary">ذخیرهٔ تصویرهای گرفته شده توسط دوربین درونکار اپلیکیشن بر روی دستگاه شما</string>
@@ -253,7 +265,7 @@
   <string name="skip_login">رها کردن</string>
   <string name="navigation_item_login">ورود به سامانه</string>
   <string name="skip_login_title">آیا واقعا میخواهید وارد شوید؟</string>
-  <string name="skip_login_message">شما نمیتوانید تصاویر را آپلود کنید.</string>
+  <string name="skip_login_message">برای بارگذاری تصاویر در آینده شما باید وارد حساب کاربری خود شوید.</string>
   <string name="login_alert_message">لطفا برای استفاده از این ویژگی وارد شوید</string>
   <string name="copy_wikicode">از ویکی واژه به کلیپ برد کپی کنید.</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
@@ -275,6 +287,8 @@
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
   <string name="internet_established">اینترنت در دسترس است</string>
+  <string name="error_notifications">خطا در آوردن اطلاعیه</string>
+  <string name="no_notifications">هشداری پیدا نشد</string>
   <string name="about_translate">&lt;u&gt;ترجمه&lt;/u&gt;</string>
   <string name="about_translate_title">زبان‌ها</string>
   <string name="about_translate_proceed">ادامه</string>
@@ -291,16 +305,33 @@
   <string name="search_commons">جستجوی ویکی‌انبار</string>
   <string name="title_activity_search">جستجو</string>
   <string name="search_recent_header">جستجوهای اخیر:</string>
+  <string name="error_loading_categories">خطا هنگام بار کردن رده ها.</string>
+  <string name="search_tab_title_media">رسانه</string>
+  <string name="search_tab_title_categories">دسته بندی</string>
+  <string name="explore_tab_title_featured">برگزیده</string>
+  <string name="explore_tab_title_mobile">بارگذاری‌شده با تلفن همراه</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
+  <string name="wallpaper_set_successfully">تصویر پس زمینه به طور موفقیت آمیز تنظیم شد!</string>
   <string name="quiz">امتحان</string>
+  <string name="quiz_question_string">آیا این تصویر برای بارگذاری مناسب است؟</string>
   <string name="question">پرسش</string>
   <string name="result">نتیجه</string>
+  <string name="warning_for_no_answer">یکی از دو گزینه را انتخاب کنید تا به سوال پاسخ دهید</string>
+  <string name="user_not_logged_in">جلسه ورود به سیستم منقضی شد، لطفا دوباره وارد سیستم شوید.</string>
   <string name="continue_message">ادامه</string>
   <string name="correct">جواب درست</string>
   <string name="wrong">جواب نادرست</string>
+  <string name="quiz_screenshot_question">آیا این عکس از صفحه برای بارگذاری مناسب است؟</string>
   <string name="share_app_title">اشتراک اپلیکیشن</string>
+  <string name="share_coordinates_not_present">مختصات در طی انتخاب تصویر مشخص نشده است</string>
+  <string name="error_fetching_nearby_places">خطا در آوردن مکان‌های نزدیک.</string>
   <string name="add_description">+افزودن توضیحات</string>
+  <string name="no_recent_searches">جستجوهای اخیر وجود ندارد</string>
+  <string name="delete_recent_searches_dialog">آیا مطمئن هستید که می‌خواهید تاریخچه جستجو را حذف کنید؟</string>
+  <string name="delete_search_dialog">آیا می‌خواهید این جستجو را حذف کنید؟</string>
   <string name="search_history_deleted">جستجوی تاریخچهٔ حذف‌شده</string>
+  <string name="nominate_delete">نامزد کردن برای حذف</string>
+  <string name="delete">حذف</string>
   <string name="Achievements">دستاوردها</string>
   <string name="statistics">آمارها</string>
   <string name="statistics_thanks">تشکر دریافت‌شد</string>
@@ -309,14 +340,18 @@
   <string name="images_uploaded">تصاویر بارگذاری شده</string>
   <string name="image_reverts">تصاویر واگردانی نشده</string>
   <string name="images_used_by_wiki">تصویر استفاده شده</string>
+  <string name="achievements_share_message">موفقیت‌های خود را با دوستان خود به اشتراک بگذارید!</string>
   <string name="achievements_revert_limit_message">حداقل مورد نیاز:</string>
   <string name="error_occurred">خطا رخ‌داده!</string>
   <string name="notifications_channel_name_all">آگاه‌سازی ویکی‌انبار</string>
+  <string name="preference_author_name_toggle">استفاده از نام نویسنده سفارشی</string>
+  <string name="preference_author_name">نام مولف سفارشی</string>
   <string name="contributions_fragment">مشارکت‌ها</string>
   <string name="nearby_fragment">در نزدیکی</string>
   <string name="notifications">آگاه‌سازی‌ها</string>
   <string name="list_sheet">فهرست</string>
   <string name="storage_permission">اجازه ذخیره</string>
+  <string name="step_count">گام %1$d از %2$d</string>
   <string name="next">بعدی</string>
   <string name="previous">قبلی</string>
   <string name="submit">ارسال</string>
@@ -326,7 +361,14 @@
   <string name="title_page_bookmarks_locations">مکان‌ها</string>
   <string name="menu_bookmark">افزودن/حذف نشانک‌ها</string>
   <string name="provider_bookmarks">نشانک‌ها</string>
+  <string name="bookmark_empty">شما هیچ bookmarkی اضافه نکرده‌اید</string>
   <string name="provider_bookmarks_location">نشانک‌ها</string>
+  <string name="deletion_reason_uploaded_by_mistake">من آن را به اشتباه آپلود کردم</string>
+  <string name="deletion_reason_publicly_visible">نمی‌دانستم که آن را در ملا عام آشکار خواهند کرد.</string>
+  <string name="deletion_reason_bad_for_my_privacy">فهمیدم که این برای حریم خصوصی من بد است.</string>
+  <string name="deletion_reason_no_longer_want_public">من تغییر عقیده دادم، نمی‌خواهم دیگر برای همه قابل‌مشاهده باشد.</string>
+  <string name="deletion_reason_not_interesting">با پوزش، این تصویر برای یک دانشنامه مناسب نیست</string>
+  <string name="no_uploads">به کامانز خوش آمدید!\n\nاولین فایلتان را با فشردن کلید اضافه بارگذاری کنید.</string>
   <string name="desc_language_Worldwide">در سراسر جهان</string>
   <string name="desc_language_America">آمریکا</string>
   <string name="desc_language_Europe">اروپا</string>
@@ -335,7 +377,31 @@
   <string name="desc_language_Asia">آسیا</string>
   <string name="desc_language_Pacific">اقیانوس آرام</string>
   <string name="no_categories_selected">رده‌ای انتخاب نشده‌است</string>
+  <string name="no_categories_selected_warning_desc">تصاویر بدون رده به ندرت قابل‌استفاده هستند. آیا مطمئنید که می‌خواهید بدون انتخاب رده ادامه دهید؟</string>
   <string name="yes_submit">بله، ارسال شود</string>
   <string name="no_go_back">نه، به قبل بازگرد</string>
   <string name="upload_flow_all_images_in_set">(برای همهٔ تصاویر موجود در مجموعه)</string>
+  <string name="search_this_area">جستجوی این محدوده</string>
+  <string name="nearby_card_permission_title">درخواست اجازه</string>
+  <string name="never_ask_again">این را دیگر نپرس</string>
+  <string name="error_processing_image">هنگام پردازش این تصویر خطایی رخ داد. لطفا دوباره سعی کنید!</string>
+  <string name="nominate_for_deletion_done">انجام شد</string>
+  <string name="notsure">مطمئن نیستم</string>
+  <string name="send_thank_success_title">ارسال تشکر: موفق</string>
+  <string name="send_thank_failure_title">ارسال تشکر: ناموفق</string>
+  <string name="send_thank_send">ارسال تشکر</string>
+  <string name="send_thank_notification_title">ارسال تشکر</string>
+  <string name="send_thank_toast">در حال ارسال تشکر برای %1$s</string>
+  <string name="review_category">آیا این به درستی رده‌بندی شده‌است؟</string>
+  <string name="review_category_no_button_text">خوب به نظر می‌رسد</string>
+  <string name="review_spam_no_button_text">خوب به نظر می‌رسد</string>
+  <string name="review_copyright_no_button_text">خوب به نظر می‌رسد</string>
+  <string name="review_thanks_yes_button_text">بله، چرا که نه</string>
+  <string name="review_thanks_no_button_text">تصویر بعدی</string>
+  <string name="no_image_reverted">تصویر برگردانده نشد</string>
+  <string name="no_image_uploaded">هیچ تصویری بارگذاری نشد</string>
+  <string name="menu_option_archived">نمایش بایگانی‌شده</string>
+  <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
+  <string name="image_chooser_title">انتخاب تصویر برای بارگذاری</string>
+  <string name="please_wait">لطفاً صبر کنید...</string>
 </resources>
