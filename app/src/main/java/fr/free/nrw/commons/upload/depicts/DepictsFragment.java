@@ -1,24 +1,30 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import butterknife.BindView;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.upload.UploadView;
+import javax.inject.Inject;
 
-public class DepictsFragment extends CommonsDaggerSupportFragment implements DepictsView{
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.upload.UploadBaseFragment;
+import fr.free.nrw.commons.upload.UploadContract;
+
+public class DepictsFragment extends UploadBaseFragment implements  DepictsContract.View {
 
     @BindView(R.id.depicts_title)
     TextView depictsTitle;
@@ -36,21 +42,24 @@ public class DepictsFragment extends CommonsDaggerSupportFragment implements Dep
     Button depictsNext;
     @BindView(R.id.depicts_previous)
     Button depictsPrevious;
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+
+    @Inject
+    DepictsContract.UserActionListener presenter;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_upload_depicts, container, false);
-
-        return view;
+    public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                                          @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.upload_depicts_fragment, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+        initPresenter();
+    }
+    private void initPresenter() {
+        presenter.onAttachView(this);
     }
 }

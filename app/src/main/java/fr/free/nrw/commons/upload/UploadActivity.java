@@ -45,6 +45,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
+import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
@@ -90,6 +91,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     private UploadImageAdapter uploadImagesAdapter;
     private List<Fragment> fragments;
     private UploadCategoriesFragment uploadCategoriesFragment;
+    private DepictsFragment depictsFragment;
     private MediaLicenseFragment mediaLicenseFragment;
     private ThumbnailsAdapter thumbnailsAdapter;
 
@@ -334,11 +336,15 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
             uploadCategoriesFragment.setMediaTitleList(presenter.getImageTitleList());
             uploadCategoriesFragment.setCallback(this);
 
+            depictsFragment = new DepictsFragment();
+            depictsFragment.setCallback(this);
+
             mediaLicenseFragment = new MediaLicenseFragment();
             mediaLicenseFragment.setCallback(this);
 
 
             fragments.add(uploadCategoriesFragment);
+            fragments.add(depictsFragment);
             fragments.add(mediaLicenseFragment);
 
             uploadImagesAdapter.setFragments(fragments);

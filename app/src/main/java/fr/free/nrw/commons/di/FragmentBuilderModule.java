@@ -19,6 +19,7 @@ import fr.free.nrw.commons.nearby.NearbyMapFragment;
 import fr.free.nrw.commons.review.ReviewImageFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
+import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 
@@ -79,6 +80,9 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract UploadCategoriesFragment bindUploadCategoriesFragment();
+
+    @ContributesAndroidInjector
+    abstract DepictsFragment bindDepictsFragment();
 
     @ContributesAndroidInjector
     abstract MediaLicenseFragment bindMediaLicenseFragment();
