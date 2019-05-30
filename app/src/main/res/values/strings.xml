@@ -59,6 +59,7 @@
   <string name="add_set_name_toast">Please provide a name for this set</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Upload</string>
+  <string name="categories_search_text_hint">Search categories</string>
   <string name="depicts_search_text_hint">Search depicts</string>
   <string name="menu_save_categories">Save</string>
   <string name="refresh_button">Refresh</string>
