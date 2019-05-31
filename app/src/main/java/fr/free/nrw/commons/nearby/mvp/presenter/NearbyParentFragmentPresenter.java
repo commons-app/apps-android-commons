@@ -74,8 +74,8 @@ public class NearbyParentFragmentPresenter
      * Initializes nearby operations if tab selected, otherwise just sets nearby views are ready
      */
     @Override
-    public void nearbyFragmentAndMapViewReady1() {
-        Timber.d("Nearby map view ready");
+    public void nearbyFragmentsAreReady() {
+        Timber.d("Nearby fragments are ready to be used by presenter");
         nearbyViewsAreReady = true;
         // The condition for initialize operations is both having views ready and tab is selected
         if (onTabSelected) {
@@ -83,12 +83,14 @@ public class NearbyParentFragmentPresenter
         }
     }
 
+    /**
+     * Will be called when map view is created and ready to be used.
+     */
     @Override
-    public void nearbyFragmentAndMapViewReady2() {
+    public void nearbyMapViewReady() {
+        Timber.d("Nearby map view is created and ready");
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
-        //initializeNearbyOperations();
         // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends
-        // TODO: add search this area thing here
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
         this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getCameraTarget()));
     }

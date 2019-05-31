@@ -44,7 +44,7 @@ public interface NearbyParentFragmentContract {
     }
     
     interface ViewsAreReadyCallback {
-        void nearbyFragmentAndMapViewReady1();
-        void nearbyFragmentAndMapViewReady2();
+        void nearbyFragmentsAreReady();
+        void nearbyMapViewReady();
     }
 }

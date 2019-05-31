@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -174,7 +173,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                 }
 
                 this.mapboxMap = mapboxMap;
-                viewsAreReadyCallback.nearbyFragmentAndMapViewReady2();
+                viewsAreReadyCallback.nearbyMapViewReady();
                 //addMapMovementListeners();
                 //updateMapSignificantlyForCurrentLocation();
             });
@@ -399,7 +398,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     public void viewsAreAssignedToPresenter(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback) {
         Timber.d("Views are set");
         this.viewsAreReadyCallback = viewsAreReadyCallback;
-        this.viewsAreReadyCallback.nearbyFragmentAndMapViewReady1();
+        this.viewsAreReadyCallback.nearbyFragmentsAreReady();
 
     }
 
