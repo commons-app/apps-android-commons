@@ -58,6 +58,5 @@ public interface NearbyMapContract {
         void updateMapMarkers(LatLng latLng);
         void updateMapToTrackPosition();
         void getBundleContent();
-        boolean addMapMovementListener();
     }
 }

@@ -47,11 +47,6 @@ public class NearbyMapPresenter implements NearbyMapContract.UserActions {
     }
 
     @Override
-    public boolean addMapMovementListener() {
-        return false;
-    }
-
-    @Override
     public void uploadImageGallery() {
 
     }

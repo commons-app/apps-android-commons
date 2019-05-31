@@ -136,7 +136,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Timber.d("Child fragment attached");
     }
 
-
     @Override
     public void addSearchThisAreaButtonAction() {
         searchThisAreaButton.setOnClickListener(nearbyParentFragmentPresenter.onSearchThisAreaClicked());

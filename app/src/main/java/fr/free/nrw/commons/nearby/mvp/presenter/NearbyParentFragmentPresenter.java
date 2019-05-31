@@ -2,9 +2,12 @@ package fr.free.nrw.commons.nearby.mvp.presenter;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
+import ch.qos.logback.core.util.LocationUtil;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
@@ -12,6 +15,8 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
+
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
 
@@ -141,16 +146,6 @@ public class NearbyParentFragmentPresenter
     }
 
     /**
-     * Adds map movement listener to understand swiping with fingers. So that we can display search
-     * this area button to search nearby places for other locations
-     */
-    @Override
-    public void addMapMovementListeners() {
-        
-    }
-
-
-    /**
      * This method should be the single point to update Map and List. Triggered by location
      * changes
      * @param locationChangeType defines if location changed significantly or slightly
@@ -194,6 +189,7 @@ public class NearbyParentFragmentPresenter
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
             nearbyParentFragmentView.populatePlaces(lastLocation, cameraTarget);
+            searchingThisArea = false;
         }
 
         else { // Means location changed slightly, ie user is walking or driving.
