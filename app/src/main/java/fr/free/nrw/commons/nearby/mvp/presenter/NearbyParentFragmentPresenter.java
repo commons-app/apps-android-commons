@@ -3,17 +3,16 @@ package fr.free.nrw.commons.nearby.mvp.presenter;
 import android.util.Log;
 import android.view.View;
 
-import fr.free.nrw.commons.R;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
@@ -35,6 +34,7 @@ public class NearbyParentFragmentPresenter
 
     boolean nearbyViewsAreReady;
     boolean onTabSelected;
+    boolean searchingThisArea;
 
     private LocationServiceManager locationServiceManager;
 
@@ -43,7 +43,7 @@ public class NearbyParentFragmentPresenter
                                          LocationServiceManager locationServiceManager) {
         this.nearbyParentFragmentView = nearbyParentFragmentView;
         this.nearbyMapFragmentView = nearbyMapFragmentView;
-        this.nearbyMapFragmentView.viewsAreSet(this);
+        this.nearbyMapFragmentView.viewsAreAssignedToPresenter(this);
         this.locationServiceManager = locationServiceManager;
     }
 
@@ -74,7 +74,7 @@ public class NearbyParentFragmentPresenter
      * Initializes nearby operations if tab selected, otherwise just sets nearby views are ready
      */
     @Override
-    public void nearbyFragmentAndMapViewReady() {
+    public void nearbyFragmentAndMapViewReady1() {
         Timber.d("Nearby map view ready");
         nearbyViewsAreReady = true;
         // The condition for initialize operations is both having views ready and tab is selected
@@ -82,6 +82,18 @@ public class NearbyParentFragmentPresenter
             initializeNearbyOperations();
         }
     }
+
+    @Override
+    public void nearbyFragmentAndMapViewReady2() {
+        updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
+        //initializeNearbyOperations();
+        // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends
+        // TODO: add search this area thing here
+        this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
+        this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getCameraTarget()));
+    }
+
+
 
     /**
      * Initializes nearby operations by following these steps:
@@ -184,6 +196,7 @@ public class NearbyParentFragmentPresenter
 
         else { // Means location changed slightly, ie user is walking or driving.
             nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
+            searchingThisArea = false;
         }
 
         // TODO: update camera angle accordingly here, 1- search this area mode, 2- following current location, 3- list sheet expanded, 4- landcaped
@@ -222,4 +235,55 @@ public class NearbyParentFragmentPresenter
         Timber.d("Location changed medium");
     }
 
+    public MapboxMap.OnCameraMoveListener onCameraMove(LatLng cameraTarget) {
+
+        return new MapboxMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                // If our nearby markers are calculated at least once
+                if (NearbyController.currentLocation != null) {
+                    if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
+                        nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
+                    }
+                }
+            }
+        };
+    }
+
+    public View.OnClickListener onSearchThisAreaClicked() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Lock map operations during search this area operation
+                lockNearby(true);
+                nearbyParentFragmentView.setSearchThisAreaProgressVisibility(true);
+                // TODO: make this invisible at somewhere
+                nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
+
+                if (searchCloseToCurrentLocation()){
+                    updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED,
+                            null);
+                } else {
+                    updateMapAndList(SEARCH_CUSTOM_AREA,
+                            getCameraTarget());
+                }
+            }
+        };
+    }
+
+    /**
+     * Returns true if search this area button is used around our current location, so that
+     * we can continue following our current location again
+     * @return Returns true if search this area button is used around our current location
+     */
+    public boolean searchCloseToCurrentLocation() {
+        double distance = LocationUtils.commonsLatLngToMapBoxLatLng(getCameraTarget())
+                .distanceTo(new com.mapbox.mapboxsdk.geometry.LatLng(NearbyController.currentLocation.getLatitude()
+                        , NearbyController.currentLocation.getLongitude()));
+        if (distance > NearbyController.searchedRadius * 1000 * 3 / 4) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

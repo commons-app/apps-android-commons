@@ -16,14 +16,11 @@ import android.view.animation.AnimationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -52,9 +49,6 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class NearbyMapFragment extends CommonsDaggerSupportFragment implements NearbyMapContract.View {
@@ -180,7 +174,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                 }
 
                 this.mapboxMap = mapboxMap;
-                viewsAreReadyCallback.nearbyFragmentAndMapViewReady();
+                viewsAreReadyCallback.nearbyFragmentAndMapViewReady2();
                 //addMapMovementListeners();
                 //updateMapSignificantlyForCurrentLocation();
             });
@@ -201,7 +195,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     @Override
     public void updateMapMarkers(LatLng curLatLng,  List<Place> placeList) {
-        Log.d("deneme1","updateMapMarkers, curLatng:"+curLatLng);
         List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng, // Curlatlang will be used to calculate distances
                         placeList,
@@ -403,10 +396,11 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
      * @param viewsAreReadyCallback
      */
     @Override
-    public void viewsAreSet(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback) {
+    public void viewsAreAssignedToPresenter(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback) {
         Timber.d("Views are set");
         this.viewsAreReadyCallback = viewsAreReadyCallback;
-        this.viewsAreReadyCallback.nearbyFragmentAndMapViewReady();
+        this.viewsAreReadyCallback.nearbyFragmentAndMapViewReady1();
+
     }
 
     @Override
@@ -418,5 +412,10 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     public LatLng getCameraTarget() {
         return LocationUtils
                 .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target);
+    }
+
+    @Override
+    public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
+        mapboxMap.addOnCameraMoveListener(onCameraMoveListener);
     }
 }

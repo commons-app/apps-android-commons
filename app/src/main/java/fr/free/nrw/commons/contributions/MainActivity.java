@@ -408,7 +408,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     }
 
                 case 1:
-                    Log.d("deneme1","case 1");
                     NearbyParentFragment retainedNearbyFragment = getNearbyFragment(1);
                     if (retainedNearbyFragment != null) {
                         return retainedNearbyFragment;

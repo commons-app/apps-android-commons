@@ -115,14 +115,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         ButterKnife.bind(this, view);
         this.view = view;
-        Timber.d("OnViewCreated");
+        Timber.d("onCreateView");
         return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        addSearchThisAreaButtonAction();
     }
 
     @Override
@@ -142,15 +136,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Timber.d("Child fragment attached");
     }
 
+
+    @Override
     public void addSearchThisAreaButtonAction() {
-        searchThisAreaButton.setOnClickListener(view -> {
-            // Lock map operations during search this area operation
-            nearbyParentFragmentPresenter.lockNearby(true);
-            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+        searchThisAreaButton.setOnClickListener(nearbyParentFragmentPresenter.onSearchThisAreaClicked());
+    }
+
+    @Override
+    public void setSearchThisAreaButtonVisibility(boolean isVisible) {
+        if (isVisible) {
+            searchThisAreaButton.setVisibility(View.VISIBLE);
+        } else {
             searchThisAreaButton.setVisibility(View.GONE);
-            nearbyParentFragmentPresenter.updateMapAndList(SEARCH_CUSTOM_AREA,
-                    NearbyParentFragment.this.nearbyParentFragmentPresenter.getCameraTarget());
-        });
+        }
+    }
+
+    @Override
+    public void setSearchThisAreaProgressVisibility(boolean isVisible) {
+        if (isVisible) {
+            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            searchThisAreaButtonProgressBar.setVisibility(View.GONE);
+        }
     }
 
     @Override

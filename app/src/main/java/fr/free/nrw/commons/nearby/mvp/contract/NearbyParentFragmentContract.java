@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.nearby.mvp.contract;
 
 
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 
@@ -19,6 +21,10 @@ public interface NearbyParentFragmentContract {
         void listOptionMenuItemClicked();
         void  populatePlaces(LatLng curlatLng, LatLng searchLatLng);
         boolean isBottomSheetExpanded();
+
+        void addSearchThisAreaButtonAction();
+        void setSearchThisAreaButtonVisibility(boolean isVisible);
+        void setSearchThisAreaProgressVisibility(boolean isVisible);
     }
 
     interface UserActions {
@@ -33,9 +39,12 @@ public interface NearbyParentFragmentContract {
         void lockNearby(boolean isNearbyLocked);
 
         void addMapMovementListeners();
+
+        MapboxMap.OnCameraMoveListener onCameraMove(LatLng cameraTarget);
     }
     
     interface ViewsAreReadyCallback {
-        void nearbyFragmentAndMapViewReady();
+        void nearbyFragmentAndMapViewReady1();
+        void nearbyFragmentAndMapViewReady2();
     }
 }
