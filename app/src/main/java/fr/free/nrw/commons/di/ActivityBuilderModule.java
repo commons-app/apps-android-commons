@@ -14,6 +14,7 @@ import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.leaderboard.LeaderboardActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
@@ -67,4 +68,7 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract ReviewActivity bindReviewActivity();
+
+    @ContributesAndroidInjector
+    abstract LeaderboardActivity bindLeaderboardActivity();
 }

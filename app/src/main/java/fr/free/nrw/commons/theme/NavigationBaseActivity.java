@@ -38,6 +38,7 @@ import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.leaderboard.LeaderboardActivity;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
@@ -218,10 +219,14 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 drawerLayout.closeDrawer(navigationView);
                 BookmarksActivity.startYourself(this);
                 return true;
-
             case R.id.action_review:
                 drawerLayout.closeDrawer(navigationView);
                 ReviewActivity.startYourself(this, getString(R.string.title_activity_review));
+                return true;
+            case R.id.action_leaderboard:
+                drawerLayout.closeDrawer(navigationView);
+                startActivityWithFlags(this, LeaderboardActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT,
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);

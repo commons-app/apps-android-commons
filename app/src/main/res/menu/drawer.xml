@@ -27,6 +27,10 @@
             android:icon="@drawable/ic_check_black_24dp"
             android:title="@string/navigation_item_review"/>
 
+        <item
+            android:id="@+id/action_leaderboard"
+            android:icon="@drawable/ic_check_black_24dp"
+            android:title="@string/leaderboard_title"/>
     </group>
     <group android:id="@+id/drawer_account">
         <item

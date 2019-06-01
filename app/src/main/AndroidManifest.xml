@@ -79,6 +79,8 @@
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
+        <activity android:name=".leaderboard.LeaderboardActivity"
+            android:label="@string/leaderboard_title"/>
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
