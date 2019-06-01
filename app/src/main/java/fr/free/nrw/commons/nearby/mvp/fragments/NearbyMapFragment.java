@@ -245,15 +245,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
         MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
                 .position(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
         currentLocationMarkerOptions.setIcon(icon); // Set custom icon
-
-        List<com.mapbox.mapboxsdk.geometry.LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
-                curLatLng.getAccuracy() * 2, 100);
-
-        PolygonOptions currentLocationPolygonOptions = new PolygonOptions()
-                .addAll(circle)
-                .strokeColor(Color.parseColor("#55000000"))
-                .fillColor(Color.parseColor("#11000000"));
-        mapboxMap.addPolygon(currentLocationPolygonOptions);
+        mapboxMap.addMarker(currentLocationMarkerOptions);
     }
 
     //TODO: go to util
