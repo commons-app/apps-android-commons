@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby.mvp.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -18,7 +17,6 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -26,7 +24,6 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -248,32 +245,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
         mapboxMap.addMarker(currentLocationMarkerOptions);
     }
 
-    //TODO: go to util
-    /**
-     * Creates a series of points that create a circle on the map.
-     * Takes the center latitude, center longitude of the circle,
-     * the radius in meter and the number of nodes of the circle.
-     *
-     * @return List List of LatLng points of the circle.
-     */
-    private List<com.mapbox.mapboxsdk.geometry.LatLng> createCircleArray(
-            double centerLat, double centerLong, float radius, int nodes) {
-        List<com.mapbox.mapboxsdk.geometry.LatLng> circle = new ArrayList<>();
-        float radiusKilometer = radius / 1000;
-        double radiusLong = radiusKilometer
-                / (111.320 * Math.cos(centerLat * Math.PI / 180));
-        double radiusLat = radiusKilometer / 110.574;
-
-        for (int i = 0; i < nodes; i++) {
-            double theta = ((double) i / (double) nodes) * (2 * Math.PI);
-            double nodeLongitude = centerLong + radiusLong * Math.cos(theta);
-            double nodeLatitude = centerLat + radiusLat * Math.sin(theta);
-            circle.add(new com.mapbox.mapboxsdk.geometry.LatLng(nodeLatitude, nodeLongitude));
-        }
-        return circle;
-    }
-
-
     @Override
     public void setSearchThisAreaButtonVisibility(boolean visible) {
 
@@ -399,6 +370,10 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     }
 
+    /**
+     * Returns camera target of current map view
+     * @return camera target coordinate in terms of Commons LatLng
+     */
     @Override
     public LatLng getCameraTarget() {
         return LocationUtils
