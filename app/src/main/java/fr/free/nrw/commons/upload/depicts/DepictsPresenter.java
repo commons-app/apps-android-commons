@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.repository.UploadRepository;
 import fr.free.nrw.commons.upload.categories.CategoriesContract;
 
-@Singleton
+//@Singleton
 public class DepictsPresenter implements DepictsContract.UserActionListener {
 
     private static final DepictsContract.View DUMMY = (DepictsContract.View) Proxy
@@ -17,12 +17,12 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                     new Class[]{CategoriesContract.View.class},
                     (proxy, method, methodArgs) -> null);
 
-    private final UploadRepository repository;
+    //private final UploadRepository repository;
     private DepictsContract.View view = DUMMY;
 
     @Inject
     public DepictsPresenter(UploadRepository uploadRepository){
-        this.repository = uploadRepository;
+        //this.repository = uploadRepository;
     }
 
     @Override
