@@ -3,14 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <LinearLayout
-        android:id="@+id/toolbarLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="?attr/actionBarSize">
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <include layout="@layout/toolbar"/>
-    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/upper_part"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:gravity="center"
+            android:background="?attr/achievementBackground">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:contentDescription="@string/commons_logo"
+                android:src="@drawable/user_avtar" />
+
+            <TextView
+                style="?android:textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="user rank" />
+
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/tabBackground"
+            app:layout_constraintTop_toBottomOf="@id/upper_part"
+            app:tabIndicatorColor="?attr/tabIndicatorColor"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="?attr/tabSelectedTextColor"
+            app:tabTextColor="?attr/tabTextColor" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPagerLeaderboard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upper_part"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <include layout="@layout/drawer_view" />
 
