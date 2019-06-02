@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload.mediaDetails;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.chrisbanes.photoview.OnScaleChangedListener;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -155,6 +157,19 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         } else {
             btnCopyPreviousTitleDesc.setVisibility(View.VISIBLE);
         }
+
+        attachImageViewScaleChangeListener();
+    }
+
+    /**
+     * Attaches the scale change listener to the image view
+     */
+    private void attachImageViewScaleChangeListener() {
+        photoViewBackgroundImage.setOnScaleChangeListener(
+                (scaleFactor, focusX, focusY) -> {
+                    //Whenever the uses plays with the image, lets collapse the media detail container
+                    expandCollapseLlMediaDetail(false);
+                });
     }
 
     /**
@@ -310,7 +325,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.rl_container_title)
     public void onRlContainerTitleClicked() {
-        llContainerMediaDetail.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
+        expandCollapseLlMediaDetail(!isExpanded);
+    }
+
+    /**
+     * show hide media detail based on
+     * @param shouldExpand
+     */
+    private void expandCollapseLlMediaDetail(boolean shouldExpand){
+        llContainerMediaDetail.setVisibility(shouldExpand ? View.VISIBLE : View.GONE);
         isExpanded = !isExpanded;
         ibExpandCollapse.setRotation(ibExpandCollapse.getRotation() + 180);
     }
