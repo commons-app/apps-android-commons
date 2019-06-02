@@ -68,6 +68,11 @@ public class CaptionsAdapter extends RecyclerView.Adapter<CaptionsAdapter.ViewHo
         return captions;
     }
 
+    public void addCaptions(Caption caption){
+        this.captions.add(caption);
+        notifyItemInserted(captions.size());
+    }
+
     public interface Callback {
 
         void showAlert(int mediaDetailDescription, int descriptionInfo);

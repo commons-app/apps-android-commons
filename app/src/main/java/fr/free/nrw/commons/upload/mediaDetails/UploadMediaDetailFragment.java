@@ -209,6 +209,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         descriptionsAdapter.addDescription(description);
     }
 
+    @OnClick(R.id.btn_add_captions)
+    public void onButtonAddCaptionClicked(){
+        Caption caption = new Caption();
+        caption.setManuallyAdded(true);
+        captionsAdapter.addCaptions(caption);
+    }
+
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
