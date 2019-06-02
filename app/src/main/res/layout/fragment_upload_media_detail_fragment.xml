@@ -82,13 +82,13 @@
                     android:layout_marginTop="@dimen/standard_gap"
                     android:orientation="vertical">
 
-                    <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
+                    <!--<fr.free.nrw.commons.widget.HeightLimitedRecyclerView
                         android:id="@+id/rv_captions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        tools:visibility="visible" />
+                        tools:visibility="visible" />-->
 
                     <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
                         android:id="@+id/rv_descriptions"

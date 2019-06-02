@@ -457,7 +457,7 @@ public class Media implements Parcelable {
     /**
      * Gets media description in preferred language
      * @param preferredLanguage Language preferred
-     * @return Description in preferred language
+     * @return UploadMediaDetail in preferred language
      */
     public String getDescription(String preferredLanguage) {
         if (descriptions.containsKey(preferredLanguage)) {

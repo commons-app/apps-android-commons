@@ -5,9 +5,9 @@ import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.upload.Caption;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadController;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import io.reactivex.Observable;
@@ -91,7 +91,7 @@ public class UploadRemoteDataSource {
      * @param imageTitleList
      * @return
      */
-    public Observable<CategoryItem> searchAll(String query, List<Caption> imageTitleList) {
+    public Observable<CategoryItem> searchAll(String query, List<UploadMediaDetail> imageTitleList) {
         return categoriesModel.searchAll(query, imageTitleList);
     }
 
@@ -102,7 +102,7 @@ public class UploadRemoteDataSource {
      * @param imageCaptionList
      * @return
      */
-    public Observable<CategoryItem> searchCategories(String query, List<Caption> imageCaptionList) {
+    public Observable<CategoryItem> searchCategories(String query, List<UploadMediaDetail> imageCaptionList) {
         return categoriesModel.searchCategories(query, imageCaptionList);
     }
 
@@ -112,7 +112,7 @@ public class UploadRemoteDataSource {
      * @param imageCaptionList
      * @return
      */
-    public Observable<CategoryItem> defaultCategories(List<Caption> imageCaptionList) {
+    public Observable<CategoryItem> defaultCategories(List<UploadMediaDetail> imageCaptionList) {
         return categoriesModel.defaultCategories(imageCaptionList);
     }
 
