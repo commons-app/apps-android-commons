@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+    android:layout_marginRight="@dimen/activity_margin_horizontal"
+    android:layout_marginEnd="@dimen/activity_margin_horizontal"
+    android:layout_marginStart="@dimen/activity_margin_horizontal"
+    android:layout_marginTop="@dimen/activity_margin_horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toStartOf="@+id/score"
+        android:layout_toLeftOf="@+id/score"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="20dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginEnd="@dimen/activity_margin_horizontal"
+            android:layout_marginRight="@dimen/activity_margin_horizontal"/>
+
+        <ImageView
+            android:layout_width="@dimen/overflow_icon_dimen"
+            android:layout_height="@dimen/overflow_icon_dimen"
+            android:id="@+id/avtar"
+            app:srcCompat="@drawable/user_avtar"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginEnd="@dimen/activity_margin_horizontal"
+            android:layout_marginRight="@dimen/activity_margin_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:textAppearanceMedium"
+            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginEnd="@dimen/activity_margin_horizontal"
+            android:layout_marginRight="@dimen/activity_margin_horizontal"
+            android:text="@string/username"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:textAppearanceMedium"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/activity_margin_horizontal"
+        android:layout_marginStart="@dimen/activity_margin_horizontal"
+        android:layout_centerVertical="true"
+        tools:text="2"
+        android:textSize="20dp"
+        android:id="@+id/score"
+        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp" />
+
+</RelativeLayout>
