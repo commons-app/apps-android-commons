@@ -69,8 +69,18 @@ public class DepictsFragment extends UploadBaseFragment implements  DepictsContr
         callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
+    @Override
+    public void goToPreviousScreen() {
+        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+    }
+
     @OnClick(R.id.depicts_next)
     public void onNextButtonClicked(){
         presenter.onNextButtonPressed();
+    }
+
+    @OnClick(R.id.depicts_previous)
+    public void onPreviousButtonClicked(){
+        presenter.onPreviousButtonClicked();
     }
 }

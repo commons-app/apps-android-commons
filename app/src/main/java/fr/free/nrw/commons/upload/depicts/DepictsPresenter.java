@@ -39,4 +39,9 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
     public void onNextButtonPressed() {
         view.goToNextScreen();
     }
+
+    @Override
+    public void onPreviousButtonClicked() {
+        view.goToPreviousScreen();
+    }
 }
