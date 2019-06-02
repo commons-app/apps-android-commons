@@ -1,11 +1,9 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.chrisbanes.photoview.PhotoView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,9 +32,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.upload.Caption;
-import fr.free.nrw.commons.upload.CaptionsAdapter;
-import fr.free.nrw.commons.upload.Description;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.DescriptionsAdapter;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
@@ -46,7 +41,6 @@ import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
@@ -64,8 +58,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     LinearLayout llContainerMediaDetail;
     @BindView(R.id.rv_descriptions)
     RecyclerView rvDescriptions;
-    @BindView(R.id.rv_captions)
-    RecyclerView rvCaptions;
     @BindView(R.id.backgroundImage)
     PhotoView photoViewBackgroundImage;
     @BindView(R.id.btn_next)
@@ -73,12 +65,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
     private DescriptionsAdapter descriptionsAdapter;
-    private CaptionsAdapter captionsAdapter;
     @BindView(R.id.btn_copy_prev_title_desc)
     AppCompatButton btnCopyPreviousTitleDesc;
 
     private UploadModel.UploadItem uploadItem;
-    private List<Description> descriptions;
+    private List<UploadMediaDetail> descriptions;
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
@@ -86,7 +77,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private String source;
     private Place place;
 
-    private List<Caption> captions;
     private boolean isExpanded = true;
 
     private UploadMediaDetailFragmentCallback callback;
@@ -174,11 +164,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         descriptionsAdapter.setCallback(this::showInfoAlert);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);
-
-        captionsAdapter = new CaptionsAdapter();
-        captionsAdapter.setCallback(this::showInfoAlert);
-        rvCaptions.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvCaptions.setAdapter(captionsAdapter);
     }
 
     /**
@@ -192,8 +177,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        uploadItem.setDescriptions(descriptionsAdapter.getDescriptions());
-        uploadItem.setCaptions(captionsAdapter.getCaptions());
+        uploadItem.setMediaDetails(descriptionsAdapter.getUploadMediaDetails());
+        //uploadItem.setCaptions(captionsAdapter.getCaptions());
         presenter.verifyImageQuality(uploadItem, true);
     }
 
@@ -204,16 +189,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_add_description)
     public void onButtonAddDescriptionClicked() {
-        Description description = new Description();
-        description.setManuallyAdded(true);//This was manually added by the user
-        descriptionsAdapter.addDescription(description);
-    }
+        UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
+        uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
+        descriptionsAdapter.addDescription(uploadMediaDetail);
 
-    @OnClick(R.id.btn_add_captions)
-    public void onButtonAddCaptionClicked(){
-        Caption caption = new Caption();
-        caption.setManuallyAdded(true);
-        captionsAdapter.addCaptions(caption);
     }
 
     @Override
@@ -240,11 +219,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onImageProcessed(UploadItem uploadItem, Place place) {
         this.uploadItem = uploadItem;
-        if (uploadItem.getCaptions() != null) {
-            setCaptionsInAdapter(uploadItem.getCaptions());
+        if (uploadItem.getFileName() != null) {
+            setDescriptionsInAdapter(uploadItem.getUploadMediaDetails());
         }
 
-        descriptions = uploadItem.getDescriptions();
+        descriptions = uploadItem.getUploadMediaDetails();
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
         setDescriptionsInAdapter(descriptions);
     }
@@ -308,9 +287,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void setTitleAndDescription(List<Caption> captions, List<Description> descriptions) {
-        setCaptionsInAdapter(captions);
-        setDescriptionsInAdapter(descriptions);
+    public void setTitleAndDescription(List<UploadMediaDetail> uploadMediaDetails) {
+        setDescriptionsInAdapter(uploadMediaDetails);
     }
 
     private void deleteThisPicture() {
@@ -348,24 +326,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         presenter.fetchPreviousTitleAndDescription(callback.getIndexInViewFlipper(this));
     }
 
-    private void setDescriptionsInAdapter(List<Description> descriptions){
-        if(descriptions==null){
-            descriptions=new ArrayList<>();
+    private void setDescriptionsInAdapter(List<UploadMediaDetail> uploadMediaDetails){
+        if(uploadMediaDetails==null){
+            uploadMediaDetails=new ArrayList<>();
         }
 
-        if(descriptions.size()==0){
-            descriptions.add(new Description());
+        if(uploadMediaDetails.size()==0){
+            uploadMediaDetails.add(new UploadMediaDetail());
         }
-
         descriptionsAdapter.setItems(descriptions);
-    }
-    private void setCaptionsInAdapter(List<Caption> captions) {
-        if (captions == null){
-            captions = new ArrayList<>();
-        }
-        if (captions.size()==0) {
-            captions.add(new Caption());
-        }
-        captionsAdapter.setItems(captions);
     }
 }

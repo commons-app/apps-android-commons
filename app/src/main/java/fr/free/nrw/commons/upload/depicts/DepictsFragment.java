@@ -1,20 +1,18 @@
 package fr.free.nrw.commons.upload.depicts;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import javax.inject.Inject;
 
@@ -23,9 +21,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
-import fr.free.nrw.commons.upload.UploadContract;
 
-public class DepictsFragment extends UploadBaseFragment implements  DepictsContract.View {
+public class DepictsFragment extends UploadBaseFragment implements DepictsContract.View {
 
     @BindView(R.id.depicts_title)
     TextView depictsTitle;
@@ -60,6 +57,7 @@ public class DepictsFragment extends UploadBaseFragment implements  DepictsContr
         ButterKnife.bind(this, view);
         initPresenter();
     }
+
     private void initPresenter() {
         presenter.onAttachView(this);
     }
@@ -75,12 +73,12 @@ public class DepictsFragment extends UploadBaseFragment implements  DepictsContr
     }
 
     @OnClick(R.id.depicts_next)
-    public void onNextButtonClicked(){
+    public void onNextButtonClicked() {
         presenter.onNextButtonPressed();
     }
 
     @OnClick(R.id.depicts_previous)
-    public void onPreviousButtonClicked(){
+    public void onPreviousButtonClicked() {
         presenter.onPreviousButtonClicked();
     }
 }

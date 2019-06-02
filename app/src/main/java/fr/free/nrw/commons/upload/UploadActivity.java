@@ -333,7 +333,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
             }
 
             uploadCategoriesFragment = new UploadCategoriesFragment();
-            uploadCategoriesFragment.setMediaCaptionList(presenter.getImageCaptionList());
+            uploadCategoriesFragment.setMediaDetailList(presenter.getImageDetailList());
             uploadCategoriesFragment.setCallback(this);
 
             depictsFragment = new DepictsFragment();

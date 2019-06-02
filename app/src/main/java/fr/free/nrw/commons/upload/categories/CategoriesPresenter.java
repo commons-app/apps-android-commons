@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.repository.UploadRepository;
-import fr.free.nrw.commons.upload.Caption;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
@@ -67,7 +67,7 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
      * @param imageCaptionList
      */
     @Override
-    public void searchForCategories(String query, List<Caption> imageCaptionList) {
+    public void searchForCategories(String query, List<UploadMediaDetail> imageCaptionList) {
         List<CategoryItem> categoryItems = new ArrayList<>();
         Disposable searchCategoriesDisposable = Observable
                 .fromIterable(repository.getSelectedCategories())

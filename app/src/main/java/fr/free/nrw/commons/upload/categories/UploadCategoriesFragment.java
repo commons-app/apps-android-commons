@@ -33,9 +33,9 @@ import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
-import fr.free.nrw.commons.upload.Caption;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadCategoriesAdapterFactory;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -58,7 +58,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Inject
     CategoriesContract.UserActionListener presenter;
     private RVRendererAdapter<CategoryItem> adapter;
-    private List<Caption> mediaTitleList;
+    private List<UploadMediaDetail> mediaTitleList;
     private Disposable subscribe;
 
     @Override
@@ -66,7 +66,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         super.onCreate(savedInstanceState);
     }
 
-    public void setMediaCaptionList(List<Caption> mediaTitleList) {
+    public void setMediaDetailList(List<UploadMediaDetail> mediaTitleList) {
         this.mediaTitleList = mediaTitleList;
     }
 

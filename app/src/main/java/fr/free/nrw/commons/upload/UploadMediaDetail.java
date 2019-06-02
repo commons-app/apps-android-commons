@@ -5,12 +5,21 @@ import java.util.List;
 /**
  * Holds a description of an item being uploaded by {@link UploadActivity}
  */
-public class Description {
+public class UploadMediaDetail {
 
     private String languageCode;
     private String descriptionText;
+    public String captionText;
     private int selectedLanguageIndex = -1;
     private boolean isManuallyAdded=false;
+
+    public String getCaptionText() {
+        return captionText;
+    }
+
+    public void setCaptionText(String captionText) {
+        this.captionText = captionText;
+    }
 
     /**
      * @return The language code ie. "en" or "fr"
@@ -70,9 +79,9 @@ public class Description {
      * @param descriptions the list of descriptions, description is ignored if text is null.
      * @return a string with the pattern of {{en|1=descriptionText}}
      */
-    static String formatList(List<Description> descriptions) {
+    static String formatList(List<UploadMediaDetail> descriptions) {
         StringBuilder descListString = new StringBuilder();
-        for (Description description : descriptions) {
+        for (UploadMediaDetail description : descriptions) {
             if (!description.isEmpty()) {
                 String individualDescription = String.format("{{%s|1=%s}}", description.getLanguageCode(),
                         description.getDescriptionText());

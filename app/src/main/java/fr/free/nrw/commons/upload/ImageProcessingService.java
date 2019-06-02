@@ -69,7 +69,7 @@ public class ImageProcessingService {
         Single<Integer> duplicateImage = checkDuplicateImage(filePath);
         Single<Integer> wrongGeoLocation = checkImageGeoLocation(uploadItem.getPlace(), filePath);
         Single<Integer> darkImage = checkDarkImage(filePath);
-        Single<Integer> itemTitle = checkTitle ? validateItemCaption(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
+        Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
         Single<Integer> checkFBMD = checkFBMD(context,contentUri);
         Single<Integer> checkEXIF = checkEXIF(filePath);
 
@@ -122,9 +122,9 @@ public class ImageProcessingService {
      * @param uploadItem
      * @return
      */
-    private Single<Integer> validateItemCaption(UploadModel.UploadItem uploadItem) {
-        Timber.d("Checking for image title %s", uploadItem.getCaptions());
-        List<Caption> captions = uploadItem.getCaptions();
+    private Single<Integer> validateItemTitle(UploadModel.UploadItem uploadItem) {
+        Timber.d("Checking for image title %s", uploadItem.getUploadMediaDetails());
+        List<UploadMediaDetail> captions = uploadItem.getUploadMediaDetails();
         if (captions.isEmpty()) {
             return Single.just(EMPTY_CAPTION);
         }

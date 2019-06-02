@@ -3,10 +3,8 @@ package fr.free.nrw.commons.upload.depicts;
 import java.lang.reflect.Proxy;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import fr.free.nrw.commons.repository.UploadRepository;
-import fr.free.nrw.commons.upload.categories.CategoriesContract;
 
 //@Singleton
 public class DepictsPresenter implements DepictsContract.UserActionListener {

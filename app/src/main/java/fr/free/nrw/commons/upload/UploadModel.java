@@ -151,9 +151,8 @@ public class UploadModel {
                 uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate,
                 createdTimestampSource);
         if(place!=null){
-            uploadItem.captions.get(0).setCaptionText(place.name);
-            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
-            uploadItem.descriptions.get(0).setLanguageCode("en");
+            uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
+            uploadItem.uploadMediaDetails.get(0).setLanguageCode("en");
         }
         if(!items.contains(uploadItem)) {
             items.add(uploadItem);
@@ -195,7 +194,7 @@ public class UploadModel {
         {
             Contribution contribution = new Contribution(item.mediaUri, null,
                     item.getFileName(),
-                    Description.formatList(item.descriptions), -1,
+                    UploadMediaDetail.formatList(item.uploadMediaDetails), -1,
                     null, null, sessionManager.getAuthorName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
             if (item.place != null) {
@@ -239,8 +238,7 @@ public class UploadModel {
 
     public void updateUploadItem(int index,UploadItem uploadItem) {
         UploadItem uploadItem1 = items.get(index);
-        uploadItem1.setDescriptions(uploadItem.descriptions);
-        uploadItem1.setCaptions(uploadItem.captions);
+        uploadItem1.setMediaDetails(uploadItem.uploadMediaDetails);
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -253,8 +251,7 @@ public class UploadModel {
 
         private boolean selected = false;
         private boolean first = false;
-        private List<Caption> captions;
-        private List<Description> descriptions;
+        private List<UploadMediaDetail> uploadMediaDetails;
         private Place place;
         private boolean visited;
         private boolean error;
@@ -270,9 +267,8 @@ public class UploadModel {
                    String createdTimestampSource) {
             this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
-            captions = new ArrayList<>();
-            descriptions = new ArrayList<>();
-            descriptions.add(new Description());
+            uploadMediaDetails = new ArrayList<>();
+            uploadMediaDetails.add(new UploadMediaDetail());
             this.place = place;
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
@@ -306,8 +302,8 @@ public class UploadModel {
             return first;
         }
 
-        public List<Description> getDescriptions() {
-            return descriptions;
+        public List<UploadMediaDetail> getUploadMediaDetails() {
+            return uploadMediaDetails;
         }
 
         public boolean isVisited() {
@@ -320,10 +316,6 @@ public class UploadModel {
 
         public long getCreatedTimestamp() {
             return createdTimestamp;
-        }
-
-        public List<Caption> getCaptions() {
-            return captions;
         }
 
         public Uri getMediaUri() {
@@ -342,21 +334,14 @@ public class UploadModel {
             return MimeTypeMapWrapper.getExtensionFromMimeType(mimeType);
         }
 
-        public String getFileName() {
-            return captions
-                    != null ? Utils.fixExtension(captions.toString(), getFileExt()) : null;
-        }
 
         public Place getPlace() {
             return place;
         }
 
-        public void setCaptions(List<Caption> captions) {
-            this.captions = captions;
-        }
 
-        public void setDescriptions(List<Description> descriptions) {
-            this.descriptions = descriptions;
+        public void setMediaDetails(List<UploadMediaDetail> uploadMediaDetails) {
+            this.uploadMediaDetails = this.uploadMediaDetails;
         }
 
         public Uri getContentUri() {
@@ -376,6 +361,10 @@ public class UploadModel {
         @Override
         public int hashCode() {
             return super.hashCode();
+        }
+
+        public String getFileName() {
+            return uploadMediaDetails.get(0).getCaptionText();
         }
     }
 

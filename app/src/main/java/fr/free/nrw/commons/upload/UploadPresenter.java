@@ -86,11 +86,13 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         }
     }
 
-    public List<Caption> getImageCaptionList() {
-        List<Caption> titleList = new ArrayList<>();
+    public List<UploadMediaDetail> getImageDetailList() {
+        int titleListCount = 0;
+        List<UploadMediaDetail> titleList = new ArrayList<>();
         for (UploadItem item : repository.getUploads()) {
-            if (!item.getCaptions().isEmpty()) {
-                titleList.add(item.getCaptions().get(0));
+            if (!item.getUploadMediaDetails().isEmpty()) {
+                titleList.add(item.getUploadMediaDetails().get(titleListCount));
+                titleListCount++;
             }
         }
         return titleList;
