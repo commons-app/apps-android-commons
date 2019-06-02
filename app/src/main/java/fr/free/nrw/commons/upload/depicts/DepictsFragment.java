@@ -20,6 +20,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadContract;
@@ -61,5 +62,15 @@ public class DepictsFragment extends UploadBaseFragment implements  DepictsContr
     }
     private void initPresenter() {
         presenter.onAttachView(this);
+    }
+
+    @Override
+    public void goToNextScreen() {
+        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+    }
+
+    @OnClick(R.id.depicts_next)
+    public void onNextButtonClicked(){
+        presenter.onNextButtonPressed();
     }
 }

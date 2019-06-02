@@ -34,4 +34,9 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
     public void onDetachView() {
         this.view = DUMMY;
     }
+
+    @Override
+    public void onNextButtonPressed() {
+        view.goToNextScreen();
+    }
 }
