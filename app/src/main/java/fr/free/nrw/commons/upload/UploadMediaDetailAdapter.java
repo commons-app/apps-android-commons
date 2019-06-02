@@ -24,14 +24,14 @@ import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import fr.free.nrw.commons.utils.BiMap;
 import timber.log.Timber;
 
-public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
+public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDetailAdapter.ViewHolder> {
 
     private List<UploadMediaDetail> uploadMediaDetails;
     private Callback callback;
 
     private BiMap<AdapterView, String> selectedLanguages;
 
-    public DescriptionsAdapter() {
+    public UploadMediaDetailAdapter() {
         uploadMediaDetails = new ArrayList<>();
         selectedLanguages = new BiMap<>();
     }

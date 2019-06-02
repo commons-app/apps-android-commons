@@ -33,7 +33,7 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
-import fr.free.nrw.commons.upload.DescriptionsAdapter;
+import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadModel;
@@ -64,7 +64,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatButton btnNext;
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
-    private DescriptionsAdapter descriptionsAdapter;
+    private UploadMediaDetailAdapter uploadMediaDetailAdapter;
     @BindView(R.id.btn_copy_prev_title_desc)
     AppCompatButton btnCopyPreviousTitleDesc;
 
@@ -160,10 +160,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        descriptionsAdapter = new DescriptionsAdapter();
-        descriptionsAdapter.setCallback(this::showInfoAlert);
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter();
+        uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvDescriptions.setAdapter(descriptionsAdapter);
+        rvDescriptions.setAdapter(uploadMediaDetailAdapter);
     }
 
     /**
@@ -177,7 +177,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        uploadItem.setMediaDetails(descriptionsAdapter.getUploadMediaDetails());
+        uploadItem.setMediaDetails(uploadMediaDetailAdapter.getUploadMediaDetails());
         //uploadItem.setCaptions(captionsAdapter.getCaptions());
         presenter.verifyImageQuality(uploadItem, true);
     }
@@ -191,7 +191,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onButtonAddDescriptionClicked() {
         UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
         uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
-        descriptionsAdapter.addDescription(uploadMediaDetail);
+        uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
 
     }
 
@@ -334,6 +334,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if(uploadMediaDetails.size()==0){
             uploadMediaDetails.add(new UploadMediaDetail());
         }
-        descriptionsAdapter.setItems(descriptions);
+        uploadMediaDetailAdapter.setItems(descriptions);
     }
 }
