@@ -46,8 +46,9 @@
   <string name="menu_share">Share</string>
   <string name="menu_open_in_browser">View in Browser</string>
   <string name="share_title_hint">Caption (Required)</string>
-  <string name="add_title_toast">Please provide a title for this file</string>
+  <string name="add_caption_toast">Please provide a caption for this file</string>
   <string name="share_description_hint">Description</string>
+  <string name="share_caption_hint">Caption (limit 255 characters)</string>
   <string name="login_failed_network">Unable to login - network failure</string>
   <string name="login_failed_wrong_credentials">Unable to login - please check your username and password</string>
   <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
@@ -174,7 +175,7 @@
   <string name="upload_image_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
-  <string name="media_detail_title">Title</string>
+  <string name="media_detail_caption">Caption</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Author</string>
@@ -240,6 +241,7 @@
   <string name="error_while_cache">Error while caching pictures</string>
   <string name="title_info">A unique descriptive title for the file, which will serve as a filename. You may use plain language with spaces. Do not include the file extension</string>
   <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
+  <string name="caption_info">Please write a brief description of the image. (Limit to 255 characters)</string>
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 

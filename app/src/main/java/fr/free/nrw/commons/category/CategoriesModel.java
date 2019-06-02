@@ -14,6 +14,7 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.upload.Caption;
 import fr.free.nrw.commons.upload.GpsCategoryModel;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
@@ -95,7 +96,7 @@ public class CategoriesModel{
     //endregion
 
     //region Category searching
-    public Observable<CategoryItem> searchAll(String term, List<String> imageTitleList) {
+    public Observable<CategoryItem> searchAll(String term, List<Caption> imageTitleList) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if (TextUtils.isEmpty(term)) {
             return gpsCategories()
@@ -115,7 +116,7 @@ public class CategoriesModel{
                 .map(name -> new CategoryItem(name, false));
     }
 
-    public Observable<CategoryItem> searchCategories(String term, List<String> imageTitleList) {
+    public Observable<CategoryItem> searchCategories(String term, List<Caption> imageTitleList) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if (TextUtils.isEmpty(term)) {
             return gpsCategories()
@@ -132,7 +133,7 @@ public class CategoriesModel{
         return categoriesCache.get(term);
     }
 
-    public Observable<CategoryItem> defaultCategories(List<String> titleList) {
+    public Observable<CategoryItem> defaultCategories(List<Caption> titleList) {
         Observable<CategoryItem> directCat = directCategories();
         if (hasDirectCategories()) {
             Timber.d("Image has direct Cat");
@@ -169,13 +170,13 @@ public class CategoriesModel{
                 .map(name -> new CategoryItem(name, false));
     }
 
-    private Observable<CategoryItem> titleCategories(List<String> titleList) {
+    private Observable<CategoryItem> titleCategories(List<Caption> titleList) {
         return Observable.fromIterable(titleList)
                 .concatMap(this::getTitleCategories);
     }
 
-    private Observable<CategoryItem> getTitleCategories(String title) {
-        return mwApi.searchTitles(title, SEARCH_CATS_LIMIT)
+    private Observable<CategoryItem> getTitleCategories(Caption caption) {
+        return mwApi.searchTitles(caption.getCaptionText(), SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 

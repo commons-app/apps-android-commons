@@ -96,12 +96,12 @@ class UploadMediaPresenterTest {
         uploadMediaPresenter?.handleImageResult(FILE_NAME_EXISTS)
         verify(view)?.showDuplicatePicturePopup()
 
-        //Empty Title test
-        uploadMediaPresenter?.handleImageResult(EMPTY_TITLE)
+        //Empty Caption test
+        uploadMediaPresenter?.handleImageResult(EMPTY_CAPTION)
         verify(view)?.showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
 
         //Bad Picture test
-        //Empty Title test
+        //Empty Caption test
         uploadMediaPresenter?.handleImageResult(-7)
         verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt())
 

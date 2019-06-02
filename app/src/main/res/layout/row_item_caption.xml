@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="8">
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_caption_languages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:minWidth="1dp"
+        android:padding="0dp"
+        android:spinnerMode="dialog" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="217dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="8">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/caption_item_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/share_caption_hint"
+            android:imeOptions="actionNext|flagNoExtractUi"
+            android:inputType="textMultiLine" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</LinearLayout>

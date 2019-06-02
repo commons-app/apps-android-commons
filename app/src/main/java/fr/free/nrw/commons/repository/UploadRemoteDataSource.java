@@ -5,6 +5,7 @@ import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.upload.Caption;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.upload.UploadModel;
@@ -90,7 +91,7 @@ public class UploadRemoteDataSource {
      * @param imageTitleList
      * @return
      */
-    public Observable<CategoryItem> searchAll(String query, List<String> imageTitleList) {
+    public Observable<CategoryItem> searchAll(String query, List<Caption> imageTitleList) {
         return categoriesModel.searchAll(query, imageTitleList);
     }
 
@@ -98,21 +99,21 @@ public class UploadRemoteDataSource {
      * searchCategories from MWApi
      *
      * @param query
-     * @param imageTitleList
+     * @param imageCaptionList
      * @return
      */
-    public Observable<CategoryItem> searchCategories(String query, List<String> imageTitleList) {
-        return categoriesModel.searchCategories(query, imageTitleList);
+    public Observable<CategoryItem> searchCategories(String query, List<Caption> imageCaptionList) {
+        return categoriesModel.searchCategories(query, imageCaptionList);
     }
 
     /**
      * returns the list of default categoies
      *
-     * @param imageTitleList
+     * @param imageCaptionList
      * @return
      */
-    public Observable<CategoryItem> defaultCategories(List<String> imageTitleList) {
-        return categoriesModel.defaultCategories(imageTitleList);
+    public Observable<CategoryItem> defaultCategories(List<Caption> imageCaptionList) {
+        return categoriesModel.defaultCategories(imageCaptionList);
     }
 
     /**

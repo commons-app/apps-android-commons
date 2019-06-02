@@ -82,20 +82,13 @@
                     android:layout_marginTop="@dimen/standard_gap"
                     android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_container_title"
+                    <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
+                        android:id="@+id/rv_captions"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/et_title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/share_title_hint"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:maxLines="1" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        tools:visibility="visible" />
 
                     <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
                         android:id="@+id/rv_descriptions"

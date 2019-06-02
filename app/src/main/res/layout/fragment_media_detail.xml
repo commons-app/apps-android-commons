@@ -63,7 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/tiny_gap"
-                        android:text="@string/media_detail_title"
+                        android:text="@string/media_detail_caption"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />

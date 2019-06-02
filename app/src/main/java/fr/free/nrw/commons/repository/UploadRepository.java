@@ -4,6 +4,7 @@ import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.upload.Caption;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import io.reactivex.Observable;
@@ -85,7 +86,7 @@ public class UploadRepository {
      * @param imageTitleList
      * @return
      */
-    public Observable<CategoryItem> searchAll(String query, List<String> imageTitleList) {
+    public Observable<CategoryItem> searchAll(String query, List<Caption> imageTitleList) {
         return remoteDataSource.searchAll(query, imageTitleList);
     }
 
@@ -96,7 +97,7 @@ public class UploadRepository {
      * @param imageTitleList
      * @return
      */
-    public Observable<CategoryItem> searchCategories(String query, List<String> imageTitleList) {
+    public Observable<CategoryItem> searchCategories(String query, List<Caption> imageTitleList) {
         return remoteDataSource.searchCategories(query, imageTitleList);
     }
 
@@ -106,7 +107,7 @@ public class UploadRepository {
      * @param imageTitleList
      * @return
      */
-    public Observable<CategoryItem> defaultCategories(List<String> imageTitleList) {
+    public Observable<CategoryItem> defaultCategories(List<Caption> imageTitleList) {
         return remoteDataSource.defaultCategories(imageTitleList);
     }
 

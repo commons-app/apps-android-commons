@@ -124,9 +124,9 @@ public class WikidataEditService {
      * Show a success toast when the edit is made successfully
      */
     private void showSuccessToast() {
-        String title = directKvStore.getString("Title", "");
+        String caption = directKvStore.getString("Title", "");
         String successStringTemplate = context.getString(R.string.successful_wikidata_edit);
-        String successMessage = String.format(Locale.getDefault(), successStringTemplate, title);
+        @SuppressLint({"StringFormatInvalid", "LocalSuppress"}) String successMessage = String.format(Locale.getDefault(), successStringTemplate, caption);
         ViewUtil.showLongToast(context, successMessage);
     }
 
