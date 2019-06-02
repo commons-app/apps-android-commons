@@ -55,7 +55,13 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        init();
         initPresenter();
+    }
+
+    private void init() {
+        depictsTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                callback.getTotalNumberOfSteps()));
     }
 
     private void initPresenter() {
