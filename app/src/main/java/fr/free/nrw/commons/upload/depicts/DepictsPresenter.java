@@ -13,8 +13,8 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
 
     private static final DepictsContract.View DUMMY = (DepictsContract.View) Proxy
             .newProxyInstance(
-                    CategoriesContract.View.class.getClassLoader(),
-                    new Class[]{CategoriesContract.View.class},
+                    DepictsContract.View.class.getClassLoader(),
+                    new Class[]{DepictsContract.View.class},
                     (proxy, method, methodArgs) -> null);
 
     //private final UploadRepository repository;

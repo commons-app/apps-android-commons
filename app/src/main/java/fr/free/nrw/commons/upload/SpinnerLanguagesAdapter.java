@@ -111,7 +111,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
 
     public class ViewHolder {
-
+        @Nullable
         @BindView(R.id.tv_language)
         TextView tvLanguage;
 

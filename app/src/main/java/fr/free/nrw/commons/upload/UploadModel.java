@@ -28,10 +28,7 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 
 import javax.inject.Singleton;
@@ -154,7 +151,7 @@ public class UploadModel {
                 uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate,
                 createdTimestampSource);
         if(place!=null){
-            uploadItem.title.setTitleText(place.name);
+            uploadItem.captions.get(0).setCaptionText(place.name);
             uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
             uploadItem.descriptions.get(0).setLanguageCode("en");
         }
@@ -243,7 +240,7 @@ public class UploadModel {
     public void updateUploadItem(int index,UploadItem uploadItem) {
         UploadItem uploadItem1 = items.get(index);
         uploadItem1.setDescriptions(uploadItem.descriptions);
-        uploadItem1.setTitle(uploadItem.title);
+        uploadItem1.setCaptions(uploadItem.captions);
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -256,7 +253,7 @@ public class UploadModel {
 
         private boolean selected = false;
         private boolean first = false;
-        private Title title;
+        private List<Caption> captions;
         private List<Description> descriptions;
         private Place place;
         private boolean visited;
@@ -273,7 +270,7 @@ public class UploadModel {
                    String createdTimestampSource) {
             this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
-            title = new Title();
+            captions = new ArrayList<>();
             descriptions = new ArrayList<>();
             descriptions.add(new Description());
             this.place = place;
@@ -325,8 +322,8 @@ public class UploadModel {
             return createdTimestamp;
         }
 
-        public Title getTitle() {
-            return title;
+        public List<Caption> getCaptions() {
+            return captions;
         }
 
         public Uri getMediaUri() {
@@ -346,16 +343,16 @@ public class UploadModel {
         }
 
         public String getFileName() {
-            return title
-                    != null ? Utils.fixExtension(title.toString(), getFileExt()) : null;
+            return captions
+                    != null ? Utils.fixExtension(captions.toString(), getFileExt()) : null;
         }
 
         public Place getPlace() {
             return place;
         }
 
-        public void setTitle(Title title) {
-            this.title = title;
+        public void setCaptions(List<Caption> captions) {
+            this.captions = captions;
         }
 
         public void setDescriptions(List<Description> descriptions) {

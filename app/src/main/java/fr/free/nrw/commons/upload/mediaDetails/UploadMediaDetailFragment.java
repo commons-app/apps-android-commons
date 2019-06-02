@@ -35,10 +35,11 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.upload.Caption;
+import fr.free.nrw.commons.upload.CaptionsAdapter;
 import fr.free.nrw.commons.upload.Description;
 import fr.free.nrw.commons.upload.DescriptionsAdapter;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
-import fr.free.nrw.commons.upload.Title;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
@@ -61,10 +62,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatImageButton ibExpandCollapse;
     @BindView(R.id.ll_container_media_detail)
     LinearLayout llContainerMediaDetail;
-    @BindView(R.id.et_title)
-    EditText etTitle;
     @BindView(R.id.rv_descriptions)
     RecyclerView rvDescriptions;
+    @BindView(R.id.rv_captions)
+    RecyclerView rvCaptions;
     @BindView(R.id.backgroundImage)
     PhotoView photoViewBackgroundImage;
     @BindView(R.id.btn_next)
@@ -72,6 +73,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
     private DescriptionsAdapter descriptionsAdapter;
+    private CaptionsAdapter captionsAdapter;
     @BindView(R.id.btn_copy_prev_title_desc)
     AppCompatButton btnCopyPreviousTitleDesc;
 
@@ -84,7 +86,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private String source;
     private Place place;
 
-    private Title title;
+    private List<Caption> captions;
     private boolean isExpanded = true;
 
     private UploadMediaDetailFragmentCallback callback;
@@ -121,10 +123,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps()));
-        title = new Title();
+        //title = new Title();
         initRecyclerView();
         initPresenter();
-        Disposable disposable = RxTextView.textChanges(etTitle)
+        /*Disposable disposable = RxTextView.textChanges(etTitle)
                 .subscribe(text -> {
                     if (!TextUtils.isEmpty(text)) {
                         btnNext.setEnabled(true);
@@ -138,7 +140,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         btnNext.setClickable(false);
                     }
                 });
-        compositeDisposable.add(disposable);
+        compositeDisposable.add(disposable);*/
         presenter.receiveImage(uploadableFile, source, place);
 
         if (callback.getIndexInViewFlipper(this) == 0) {
@@ -165,13 +167,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * init the recycler veiw
+     * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
         descriptionsAdapter = new DescriptionsAdapter();
         descriptionsAdapter.setCallback(this::showInfoAlert);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);
+
+        captionsAdapter = new CaptionsAdapter();
+        captionsAdapter.setCallback(this::showInfoAlert);
+        rvCaptions.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvCaptions.setAdapter(captionsAdapter);
     }
 
     /**
@@ -186,6 +193,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
         uploadItem.setDescriptions(descriptionsAdapter.getDescriptions());
+        uploadItem.setCaptions(captionsAdapter.getCaptions());
         presenter.verifyImageQuality(uploadItem, true);
     }
 
@@ -225,8 +233,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onImageProcessed(UploadItem uploadItem, Place place) {
         this.uploadItem = uploadItem;
-        if (uploadItem.getTitle() != null) {
-            etTitle.setText(uploadItem.getTitle().toString());
+        if (uploadItem.getCaptions() != null) {
+            setCaptionsInAdapter(uploadItem.getCaptions());
         }
 
         descriptions = uploadItem.getDescriptions();
@@ -293,8 +301,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void setTitleAndDescription(String title, List<Description> descriptions) {
-        etTitle.setText(title);
+    public void setTitleAndDescription(List<Caption> captions, List<Description> descriptions) {
+        setCaptionsInAdapter(captions);
         setDescriptionsInAdapter(descriptions);
     }
 
@@ -344,5 +352,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         descriptionsAdapter.setItems(descriptions);
     }
-
+    private void setCaptionsInAdapter(List<Caption> captions) {
+        if (captions == null){
+            captions = new ArrayList<>();
+        }
+        if (captions.size()==0) {
+            captions.add(new Caption());
+        }
+        captionsAdapter.setItems(captions);
+    }
 }

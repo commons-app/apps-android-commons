@@ -86,11 +86,11 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         }
     }
 
-    public List<String> getImageTitleList() {
-        List<String> titleList = new ArrayList<>();
+    public List<Caption> getImageCaptionList() {
+        List<Caption> titleList = new ArrayList<>();
         for (UploadItem item : repository.getUploads()) {
-            if (item.getTitle().isSet()) {
-                titleList.add(item.getTitle().toString());
+            if (!item.getCaptions().isEmpty()) {
+                titleList.add(item.getCaptions().get(0));
             }
         }
         return titleList;

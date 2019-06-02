@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.repository.UploadRepository;
+import fr.free.nrw.commons.upload.Caption;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
@@ -63,10 +64,10 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
      * asks the repository to fetch categories for the query
      *
      * @param query
-     * @param imageTitleList
+     * @param imageCaptionList
      */
     @Override
-    public void searchForCategories(String query, List<String> imageTitleList) {
+    public void searchForCategories(String query, List<Caption> imageCaptionList) {
         List<CategoryItem> categoryItems = new ArrayList<>();
         Disposable searchCategoriesDisposable = Observable
                 .fromIterable(repository.getSelectedCategories())
@@ -79,10 +80,10 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                 })
                 .observeOn(ioScheduler)
                 .concatWith(
-                        repository.searchAll(query, imageTitleList)
-                                .mergeWith(repository.searchCategories(query, imageTitleList))
+                        repository.searchAll(query, imageCaptionList)
+                                .mergeWith(repository.searchCategories(query, imageCaptionList))
                                 .concatWith(TextUtils.isEmpty(query)
-                                        ? repository.defaultCategories(imageTitleList)
+                                        ? repository.defaultCategories(imageCaptionList)
                                         : Observable.empty())
                 )
                 .filter(categoryItem -> !repository.containsYear(categoryItem.getName()))

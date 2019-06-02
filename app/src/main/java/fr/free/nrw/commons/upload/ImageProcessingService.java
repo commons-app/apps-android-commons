@@ -6,6 +6,7 @@ import android.net.Uri;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -17,7 +18,7 @@ import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import io.reactivex.Single;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
@@ -54,7 +55,7 @@ public class ImageProcessingService {
      * - checks duplicate image
      * - checks dark image
      * - checks geolocation for image
-     * - check for valid title
+     * - check for valid caption
      */
     Single<Integer> validateImage(UploadModel.UploadItem uploadItem, boolean checkTitle) {
         int currentImageQuality = uploadItem.getImageQuality();
@@ -68,7 +69,7 @@ public class ImageProcessingService {
         Single<Integer> duplicateImage = checkDuplicateImage(filePath);
         Single<Integer> wrongGeoLocation = checkImageGeoLocation(uploadItem.getPlace(), filePath);
         Single<Integer> darkImage = checkDarkImage(filePath);
-        Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
+        Single<Integer> itemTitle = checkTitle ? validateItemCaption(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
         Single<Integer> checkFBMD = checkFBMD(context,contentUri);
         Single<Integer> checkEXIF = checkEXIF(filePath);
 
@@ -114,18 +115,18 @@ public class ImageProcessingService {
 
 
     /**
-     * Checks item title
-     * - empty title
-     * - existing title
+     * Checks item caption
+     * - empty caption
+     * - existing caption
      *
      * @param uploadItem
      * @return
      */
-    private Single<Integer> validateItemTitle(UploadModel.UploadItem uploadItem) {
-        Timber.d("Checking for image title %s", uploadItem.getTitle());
-        Title title = uploadItem.getTitle();
-        if (title.isEmpty()) {
-            return Single.just(EMPTY_TITLE);
+    private Single<Integer> validateItemCaption(UploadModel.UploadItem uploadItem) {
+        Timber.d("Checking for image title %s", uploadItem.getCaptions());
+        List<Caption> captions = uploadItem.getCaptions();
+        if (captions.isEmpty()) {
+            return Single.just(EMPTY_CAPTION);
         }
 
         return Single.fromCallable(() -> mwApi.fileExistsWithName(uploadItem.getFileName()))
