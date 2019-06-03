@@ -198,6 +198,12 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     }
 
+
+    @Override
+    public void setListeners() {
+
+    }
+
     /**
      * Clears all existing map markers
      * @param curLatLng
@@ -210,7 +216,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                         placeList,
                         getActivity(),
                         bookmarkLocationDao.getAllBookmarksLocations());
-        mapboxMap.clear();
         // TODO: set search latlang here
         // TODO: arrange camera positions according to all other parameters
 
@@ -226,6 +231,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
      */
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
+
         Timber.d("Updates map current location marker to track user location");
         // Remove existing blue current location marker and add again for new location
         addCurrentLocationMarker(curLatLng);
@@ -236,10 +242,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                 .newCameraPosition(cameraPosition), 1000);
     }
 
-    @Override
-    public void setListeners() {
-
-    }
     /**
      * Adds a marker for the user's current position. Removes previous current location marker
      * if exists.
@@ -262,21 +264,13 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
         currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
     }
 
-    @Override
-    public void setSearchThisAreaButtonVisibility(boolean visible) {
-
-    }
-
-    @Override
-    public boolean isCurrentLocationMarkerVisible() {
-        return false;
-    }
-
     /**
      * Adds markers for nearby places to mapbox map
      */
     public void addNearbyMarkersToMapBoxMap(@Nullable List<NearbyBaseMarker> baseMarkerList) {
         Timber.d("addNearbyMarkersToMapBoxMap is called");
+
+        mapboxMap.clear();
 
         mapboxMap.addMarkers(baseMarkerList);
         mapboxMap.setOnInfoWindowCloseListener(marker -> {
@@ -308,6 +302,17 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
             });
 
         });
+    }
+
+
+    @Override
+    public void setSearchThisAreaButtonVisibility(boolean visible) {
+
+    }
+
+    @Override
+    public boolean isCurrentLocationMarkerVisible() {
+        return false;
     }
 
     @Override
