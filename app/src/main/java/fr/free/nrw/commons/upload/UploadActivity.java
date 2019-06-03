@@ -342,9 +342,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
             mediaLicenseFragment = new MediaLicenseFragment();
             mediaLicenseFragment.setCallback(this);
 
-
-            fragments.add(uploadCategoriesFragment);
             fragments.add(depictsFragment);
+            fragments.add(uploadCategoriesFragment);
             fragments.add(mediaLicenseFragment);
 
             uploadImagesAdapter.setFragments(fragments);
