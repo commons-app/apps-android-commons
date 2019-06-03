@@ -1,8 +1,12 @@
 package fr.free.nrw.commons.nearby.mvp.fragments;
 
+import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -16,8 +20,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -74,8 +80,9 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     private static final double ZOOM_LEVEL = 14f;
 
-
-
+    // Variables for current location marker
+    Icon blueIconOfCurLatLng;
+    Marker currentLocationMarker;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,6 +118,8 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
         fab_close = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.rotate_forward);
         rotate_backward = AnimationUtils.loadAnimation(getParentFragment().getActivity(), R.anim.rotate_backward);
+
+        blueIconOfCurLatLng = IconFactory.getInstance(getContext()).fromResource(R.drawable.current_location_marker);
     }
 
     @Override
@@ -189,6 +198,11 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     }
 
+    /**
+     * Clears all existing map markers
+     * @param curLatLng
+     * @param placeList
+     */
     @Override
     public void updateMapMarkers(LatLng curLatLng,  List<Place> placeList) {
         List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
@@ -199,24 +213,27 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
         mapboxMap.clear();
         // TODO: set search latlang here
         // TODO: arrange camera positions according to all other parameters
-        CameraPosition cameraPosition = new CameraPosition.Builder().target
-                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
-        mapboxMap.setCameraPosition(cameraPosition);
-        /*mapboxMap.animateCamera(CameraUpdateFactory
-                .newCameraPosition(cameraPosition), 1000);*/
+
         // TODO: set position depening to botom sheet position heere
         addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
         // Re-enable mapbox gestures on custom location markers load
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
-        updateMapToTrackPosition(curLatLng);
     }
 
+    /**
+     * Adds current location marker for given location and makes camera follow users new location
+     * @param curLatLng given current location of user
+     */
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
-        Timber.d("updates map cuyrrent location marker to track user location");
+        Timber.d("Updates map current location marker to track user location");
+        // Remove existing blue current location marker and add again for new location
         addCurrentLocationMarker(curLatLng);
-        // TODO change camera target here depending to several parameters
-
+        // Make camera target follow current position
+        CameraPosition cameraPosition = new CameraPosition.Builder().target
+                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
+        mapboxMap.animateCamera(CameraUpdateFactory
+                .newCameraPosition(cameraPosition), 1000);
     }
 
     @Override
@@ -224,25 +241,25 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     }
     /**
-     * Adds a marker for the user's current position. Adds a
-     * circle which uses the accuracy * 2, to draw a circle
-     * which represents the user's position with an accuracy
-     * of 95%.
-     *
-     * Should be called only on creation of mapboxMap, there
-     * is other method to update markers location with users
-     * move.
+     * Adds a marker for the user's current position. Removes previous current location marker
+     * if exists.
      */
     @Override
     public void addCurrentLocationMarker(LatLng curLatLng) {
-        Timber.d("addCurrentLocationMarker is called");
-
-        Icon icon = IconFactory.getInstance(getContext()).fromResource(R.drawable.current_location_marker);
-
+        Timber.d("Adding current location marker");
         MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
-                .position(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
-        currentLocationMarkerOptions.setIcon(icon); // Set custom icon
-        mapboxMap.addMarker(currentLocationMarkerOptions);
+                .position(LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng));
+        currentLocationMarkerOptions.setIcon(blueIconOfCurLatLng); // Set custom icon
+        if (currentLocationMarker != null) { // Means that it is not our first current location
+            // We should remove previously added current location marker first
+            mapboxMap.removeMarker(currentLocationMarker);
+            ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker, "position",
+                    new LatLngEvaluator(), currentLocationMarker.getPosition(),
+                    LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng));
+            markerAnimator.setDuration(1000);
+            markerAnimator.start();
+        }
+        currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
     }
 
     @Override
@@ -383,5 +400,20 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     @Override
     public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
         mapboxMap.addOnCameraMoveListener(onCameraMoveListener);
+    }
+
+
+    private static class LatLngEvaluator implements TypeEvaluator<com.mapbox.mapboxsdk.geometry.LatLng> {
+        // Method is used to interpolate the marker animation.
+        private com.mapbox.mapboxsdk.geometry.LatLng latLng = new com.mapbox.mapboxsdk.geometry.LatLng();
+
+        @Override
+        public com.mapbox.mapboxsdk.geometry.LatLng evaluate(float fraction, com.mapbox.mapboxsdk.geometry.LatLng startValue, com.mapbox.mapboxsdk.geometry.LatLng endValue) {
+            latLng.setLatitude(startValue.getLatitude()
+                    + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+            latLng.setLongitude(startValue.getLongitude()
+                    + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+            return latLng;
+        }
     }
 }

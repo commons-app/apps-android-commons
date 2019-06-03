@@ -184,7 +184,8 @@ public class NearbyParentFragmentPresenter
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(MAP_UPDATED)) {
             nearbyParentFragmentView.populatePlaces(lastLocation, lastLocation);
-            // TODO add a search location here
+            //nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
+            // TODO: when unneeded populate places call problem is solved, open commented out line and remove it from update map markers method
             // TODO dont forget map updated state after an wikidata item is updated
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {

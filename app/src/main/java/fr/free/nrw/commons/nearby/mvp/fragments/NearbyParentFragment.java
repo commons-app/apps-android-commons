@@ -171,6 +171,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         wikidataEditListener.setAuthenticationStateListener(null);
     }
 
+    /**
+     * Populates places and calls update map markers method
+     * @param curlatLng current location that user is at
+     * @param searchLatLng the location user searches around
+     */
     @Override
     public void populatePlaces(LatLng curlatLng, LatLng searchLatLng){
         compositeDisposable.add(Observable.fromCallable(() -> nearbyController
@@ -181,6 +186,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         throwable -> {
                             Timber.d(throwable);
                             //showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                            // TODO solve first unneeded method call here
                             progressBar.setVisibility(View.GONE);
                         }));
     }
