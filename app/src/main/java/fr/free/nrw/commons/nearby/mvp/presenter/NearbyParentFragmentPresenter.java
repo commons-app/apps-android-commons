@@ -2,12 +2,9 @@ package fr.free.nrw.commons.nearby.mvp.presenter;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
-import ch.qos.logback.core.util.LocationUtil;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
@@ -16,7 +13,6 @@ import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 
-import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
 
@@ -97,7 +93,7 @@ public class NearbyParentFragmentPresenter
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
         // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
-        this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getCameraTarget()));
+        this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
     }
 
 
@@ -143,6 +139,9 @@ public class NearbyParentFragmentPresenter
 
     public LatLng getCameraTarget() {
         return nearbyMapFragmentView.getCameraTarget();
+    }
+    public MapboxMap getMapboxMap() {
+        return nearbyMapFragmentView.getMapboxMap();
     }
 
     /**
@@ -234,17 +233,26 @@ public class NearbyParentFragmentPresenter
         Timber.d("Location changed medium");
     }
 
-    public MapboxMap.OnCameraMoveListener onCameraMove(LatLng cameraTarget) {
+    public MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap) {
+        return () -> {
 
-        return new MapboxMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
-                // If our nearby markers are calculated at least once
-                if (NearbyController.currentLocation != null) {
-                    if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
+            // If our nearby markers are calculated at least once
+            if (NearbyController.currentLocation != null) {
+                double distance = mapboxMap.getCameraPosition().target.distanceTo
+                        (LocationUtils.commonsLatLngToMapBoxLatLng(NearbyController.latestSearchLocation));
+                Log.d("deneme2", "NearbyController.currentLocation != null");
+                if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
+                    if (distance > NearbyController.latestSearchRadius) {
+                        Log.d("deneme2", "distance:" + distance + " , searched rad:" + NearbyController.latestSearchRadius);
                         nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
+                    } else {
+                        Log.d("deneme2", "distance:" + distance + " , searched rad:" + NearbyController.latestSearchRadius);
+
+                        nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
                     }
                 }
+            } else {
+                nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
             }
         };
     }
@@ -279,7 +287,7 @@ public class NearbyParentFragmentPresenter
         double distance = LocationUtils.commonsLatLngToMapBoxLatLng(getCameraTarget())
                 .distanceTo(new com.mapbox.mapboxsdk.geometry.LatLng(NearbyController.currentLocation.getLatitude()
                         , NearbyController.currentLocation.getLongitude()));
-        if (distance > NearbyController.searchedRadius * 1000 * 3 / 4) {
+        if (distance > NearbyController.currentLocationSearchRadius * 1000 * 3 / 4) {
             return false;
         } else {
             return true;

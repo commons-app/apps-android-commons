@@ -579,7 +579,7 @@ public class NearbyMapFragment extends DaggerFragment {
                         .distanceTo(new LatLng(NearbyController.currentLocation.getLatitude()
                                 , NearbyController.currentLocation.getLongitude()));
 
-                if (distance > NearbyController.searchedRadius*1000*3/4) { //Convert to meter, and compare if our distance is bigger than 3/4 or our searched area
+                if (distance > NearbyController.currentLocationSearchRadius *1000*3/4) { //Convert to meter, and compare if our distance is bigger than 3/4 or our searched area
                     checkingAround = true;
                     if (!searchThisAreaModeOn) { // If we are changing mode, then change click action
                         searchThisAreaModeOn = true;

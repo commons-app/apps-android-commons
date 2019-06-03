@@ -28,8 +28,10 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
-    public static double searchedRadius = 10.0; //in kilometers
-    public static LatLng currentLocation;
+    public static double currentLocationSearchRadius = 10.0; //in kilometers
+    public static LatLng currentLocation; // Users latest fetched location
+    public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
+    public static double latestSearchRadius = 10.0; // Any last search radius except closest result search
 
     @Inject
     public NearbyController(NearbyPlaces nearbyPlaces) {
@@ -95,11 +97,18 @@ public class NearbyController {
             nearbyPlacesInfo.searchLatLng = searchLatLng;
             nearbyPlacesInfo.placeList = places;
             nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
-            if (!returnClosestResult && checkingAroundCurrentLocation) {
-                // Do not update searched radius, if controller is used for nearby card notification
-                searchedRadius = nearbyPlaces.radius;
-                currentLocation = curLatLng;
+
+            if (!returnClosestResult) {
+                latestSearchLocation = searchLatLng;
+                latestSearchRadius = nearbyPlaces.radius*1000; // to meter
+
+                if (checkingAroundCurrentLocation) {
+                    currentLocationSearchRadius = nearbyPlaces.radius;
+                    currentLocation = curLatLng;
+                }
             }
+
+
             return nearbyPlacesInfo;
         }
         else {

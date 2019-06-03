@@ -220,6 +220,8 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
         // TODO: arrange camera positions according to all other parameters
 
         // TODO: set position depening to botom sheet position heere
+        mapboxMap.clear();
+
         addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
         // Re-enable mapbox gestures on custom location markers load
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
@@ -269,9 +271,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
      */
     public void addNearbyMarkersToMapBoxMap(@Nullable List<NearbyBaseMarker> baseMarkerList) {
         Timber.d("addNearbyMarkersToMapBoxMap is called");
-
-        mapboxMap.clear();
-
         mapboxMap.addMarkers(baseMarkerList);
         mapboxMap.setOnInfoWindowCloseListener(marker -> {
             /*if (marker == selected) {
@@ -400,6 +399,15 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     public LatLng getCameraTarget() {
         return LocationUtils
                 .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target);
+    }
+
+    /**
+     * Returns mapbox map current map view
+     * @return mapbox map
+     */
+    @Override
+    public MapboxMap getMapboxMap() {
+        return mapboxMap;
     }
 
     @Override

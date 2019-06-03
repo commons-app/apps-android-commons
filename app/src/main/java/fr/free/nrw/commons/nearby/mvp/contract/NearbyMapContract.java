@@ -47,6 +47,7 @@ public interface NearbyMapContract {
         void closeFabs ( boolean isFabOpen);
         void updateMarker(boolean isBookmarked, Place place);
         LatLng getCameraTarget();
+        MapboxMap getMapboxMap();
         void viewsAreAssignedToPresenter(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback);
         void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
     }
