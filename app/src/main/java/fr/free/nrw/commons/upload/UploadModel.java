@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -193,7 +194,7 @@ public class UploadModel {
         return Observable.fromIterable(items).map(item ->
         {
             Contribution contribution = new Contribution(item.mediaUri, null,
-                    item.getFileName(),
+                    item.getFileName() + getCurrentTimeStamp(),
                     UploadMediaDetail.formatList(item.uploadMediaDetails), -1,
                     null, null, sessionManager.getAuthorName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
@@ -218,6 +219,21 @@ public class UploadModel {
             }
             return contribution;
         });
+    }
+
+    /*
+     * Get current timestamp in the format yyyy-MM-dd HH:mm:ss
+     * To be appended at the end of the filename
+     * */
+    public static String getCurrentTimeStamp(){
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentDateTime = dateFormat.format(new Date()); // Find todays date
+            return currentDateTime;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void deletePicture(String filePath) {
