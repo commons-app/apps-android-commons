@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
@@ -91,7 +92,9 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.isSuccessful()) {
-                return Integer.parseInt(response.body().string().trim());
+                if(!TextUtils.isEmpty(response.body().string().trim())){
+                    return Integer.parseInt(response.body().string().trim());
+                }
             }
             return 0;
         });
