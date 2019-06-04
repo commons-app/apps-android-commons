@@ -103,7 +103,7 @@ public class NearbyController {
                 latestSearchRadius = nearbyPlaces.radius*1000; // to meter
 
                 if (checkingAroundCurrentLocation) {
-                    currentLocationSearchRadius = nearbyPlaces.radius;
+                    currentLocationSearchRadius = nearbyPlaces.radius*1000; // to meter
                     currentLocation = curLatLng;
                 }
             }

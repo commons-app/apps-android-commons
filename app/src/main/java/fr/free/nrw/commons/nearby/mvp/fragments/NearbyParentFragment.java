@@ -188,6 +188,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             //showErrorMessage(getString(R.string.error_fetching_nearby_places));
                             // TODO solve first unneeded method call here
                             progressBar.setVisibility(View.GONE);
+                            //nearbyParentFragmentPresenter.lockNearby(false);
                         }));
     }
 
