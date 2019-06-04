@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.upload;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -131,7 +133,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 descItemEditText.setOnTouchListener((v, event) -> {
 
                     //2 is for drawable right
-                    if (event.getAction() == MotionEvent.ACTION_UP && (event.getRawX() >= (descItemEditText.getRight() - descItemEditText.getCompoundDrawables()[2].getBounds().width()))) {
+                    float twelveDpInPixels = convertDpToPixel(12, descItemEditText.getContext());
+                    if (event.getAction() == MotionEvent.ACTION_UP && descItemEditText.getCompoundDrawables()[2].getBounds().contains((int)(descItemEditText.getWidth()-(event.getX()+twelveDpInPixels)),(int)(event.getY()-twelveDpInPixels))){
                         if (getAdapterPosition() == 0) {
                             callback.showAlert(R.string.media_detail_description,
                                     R.string.description_info);
@@ -224,5 +227,15 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     public interface Callback {
 
         void showAlert(int mediaDetailDescription, int descriptionInfo);
+    }
+
+    /**
+     * converts dp to pixel
+     * @param dp
+     * @param context
+     * @return
+     */
+    private float convertDpToPixel(float dp, Context context) {
+        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 }
