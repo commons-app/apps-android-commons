@@ -70,7 +70,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
-                                                          @Named("tools_force") HttpUrl toolsForgeUrl,
+                                                          @Named("tools_forge") HttpUrl toolsForgeUrl,
                                                           @Named("default_preferences") JsonKvStore defaultKvStore,
                                                           Gson gson) {
         return new OkHttpJsonApiClient(okHttpClient,
@@ -91,7 +91,7 @@ public class NetworkingModule {
     }
 
     @Provides
-    @Named("tools_force")
+    @Named("tools_forge")
     @NonNull
     @SuppressWarnings("ConstantConditions")
     public HttpUrl provideToolsForgeUrl() {
