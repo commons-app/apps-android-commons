@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -10,6 +12,7 @@ import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.dataclient.mwapi.RecentChange;
 import org.wikipedia.util.DateUtil;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -33,6 +36,7 @@ import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -84,6 +88,11 @@ public class OkHttpJsonApiClient {
         urlBuilder
                 .addPathSegments("/uploadsbyuser.py")
                 .addQueryParameter("user", userName);
+
+        if (ConfigUtils.isBetaFlavour()) {
+            urlBuilder.addQueryParameter("labs", "commonswiki");
+        }
+
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
                 .build();
@@ -91,7 +100,9 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.isSuccessful()) {
-                return Integer.parseInt(response.body().string().trim());
+                if(!TextUtils.isEmpty(response.body().string().trim())){
+                    return Integer.parseInt(response.body().string().trim());
+                }
             }
             return 0;
         });
@@ -103,6 +114,11 @@ public class OkHttpJsonApiClient {
         urlBuilder
                 .addPathSegments("/wikidataedits.py")
                 .addQueryParameter("user", userName);
+
+        if (ConfigUtils.isBetaFlavour()) {
+            urlBuilder.addQueryParameter("labs", "commonswiki");
+        }
+
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
                 .build();
@@ -131,7 +147,7 @@ public class OkHttpJsonApiClient {
      */
     public Single<FeedbackResponse> getAchievements(String userName) {
         final String fetchAchievementUrlTemplate =
-                wikiMediaToolforgeUrl + "/feedback.py";
+                wikiMediaToolforgeUrl + (ConfigUtils.isBetaFlavour() ? "/feedback.py?labs=commonswiki" : "/feedback.py");
         return Single.fromCallable(() -> {
             String url = String.format(
                     Locale.ENGLISH,

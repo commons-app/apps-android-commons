@@ -4,7 +4,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.Single
-import junit.framework.Assert.assertTrue
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
