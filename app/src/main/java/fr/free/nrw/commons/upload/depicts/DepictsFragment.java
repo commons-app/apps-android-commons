@@ -1,18 +1,27 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.pedrogomez.renderers.RVRendererAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -21,8 +30,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
+import fr.free.nrw.commons.upload.UploadDepictsAdapterFactory;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depicts.DepictsClickedListener;
+import fr.free.nrw.commons.utils.DialogUtil;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import timber.log.Timber;
 
-public class DepictsFragment extends UploadBaseFragment implements DepictsContract.View {
+public class DepictsFragment extends UploadBaseFragment implements DepictsContract.View, DepictsClickedListener {
 
     @BindView(R.id.depicts_title)
     TextView depictsTitle;
@@ -36,13 +53,12 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     ProgressBar depictsSearchInProgress;
     @BindView(R.id.depicts_recycler_view)
     RecyclerView depictsRecyclerView;
-    @BindView(R.id.depicts_next)
-    Button depictsNext;
-    @BindView(R.id.depicts_previous)
-    Button depictsPrevious;
 
     @Inject
     DepictsContract.UserActionListener presenter;
+    private RVRendererAdapter<DepictedItem> adapter;
+    private List<UploadMediaDetail> mediaTitleList;
+    private Disposable subscribe;
 
     @Nullable
     @Override
@@ -56,16 +72,21 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         init();
-        initPresenter();
     }
 
     private void init() {
         depictsTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps()));
+        presenter.onAttachView(this);
+        initRecyclerView();
+        addTextChangeListenerToEtSearch();
     }
 
-    private void initPresenter() {
-        presenter.onAttachView(this);
+    private void initRecyclerView() {
+        adapter = new UploadDepictsAdapterFactory(this)
+                .create(new ArrayList<>());
+        depictsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        depictsRecyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -78,6 +99,38 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
+    @Override
+    public void noDepictionSelected() {
+        DialogUtil.showAlertDialog(getActivity(),
+                getString(R.string.no_categories_selected),
+                getString(R.string.no_categories_selected_warning_desc),
+                getString(R.string.no_go_back),
+                getString(R.string.yes_submit),
+                null,
+                () -> goToNextScreen());
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDetachView();
+        subscribe.dispose();
+    }
+
+    @Override
+    public void showProgress(boolean shouldShow) {
+        depictsSearchInProgress.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void setDepictsList(List<DepictedItem> depictedItemList) {
+        adapter.clear();
+        if (depictedItemList != null) {
+            adapter.addAll(depictedItemList);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
     @OnClick(R.id.depicts_next)
     public void onNextButtonClicked() {
         presenter.onNextButtonPressed();
@@ -85,6 +138,30 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @OnClick(R.id.depicts_previous)
     public void onPreviousButtonClicked() {
-        presenter.onPreviousButtonClicked();
+        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+    }
+
+    @Override
+    public void depictsClicked(DepictedItem item) {
+        presenter.onDepictItemClicked(item);
+    }
+
+    private void addTextChangeListenerToEtSearch() {
+        subscribe = RxTextView.textChanges(depictsSearch)
+                .doOnEach(v -> depictsSearchContainer.setError(null))
+                .takeUntil(RxView.detaches(depictsSearch))
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(filter -> searchForDepictions(filter.toString()), Timber::e);
+    }
+
+    private void searchForDepictions(String query) {
+        if (!TextUtils.isEmpty(query)) {
+            presenter.searchForDepictions(query, mediaTitleList);
+        }
+    }
+
+    public void setMediaDetailList(List<UploadMediaDetail> imageDetailList) {
+        this.mediaTitleList = imageDetailList;
     }
 }
