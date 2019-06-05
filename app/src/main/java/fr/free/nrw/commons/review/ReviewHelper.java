@@ -38,8 +38,15 @@ public class ReviewHelper {
         this.reviewInterface = reviewInterface;
     }
 
+    /**
+     * Fetches recent changes from MediaWiki API
+     * Calls the API to get 10 changes in the last 1 hour
+     * Earlier we were getting changes for the last 30 days but as the API returns just 10 results
+     * its best to fetch for just last 1 hour.
+     * @return
+     */
     private Observable<List<RecentChange>> getRecentChanges() {
-        final int RANDOM_SECONDS = 60 * 60 * 24 * 30;
+        final int RANDOM_SECONDS = 60 * 60;
         Random r = new Random();
         Date now = new Date();
         Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
@@ -83,11 +90,23 @@ public class ReviewHelper {
                 .firstOrError();
     }
 
+    /**
+     * Gets the first revision of the file from filename
+     * @param filename
+     * @return
+     */
     Observable<MwQueryPage.Revision> getFirstRevisionOfFile(String filename) {
         return reviewInterface.getFirstRevisionOfFile(filename)
                 .map(response -> response.query().firstPage().revisions().get(0));
     }
 
+    /**
+     * Checks if the change is reviewable or not.
+     * - checks the type and revisionId of the change
+     * - checks supported image extensions
+     * @param recentChange
+     * @return
+     */
     private boolean isChangeReviewable(RecentChange recentChange) {
         if (recentChange.getType().equals("log") && !(recentChange.getOldRevisionId() == 0)) {
             return false;

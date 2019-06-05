@@ -6,6 +6,9 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+/**
+ * Interface class for peer review calls
+ */
 public interface ReviewInterface {
     @GET("w/api.php?action=query&format=json&formatversion=2&list=recentchanges&rcprop=title|ids&rctype=new|log&rctoponly=1&rcnamespace=6")
     Observable<MwQueryResponse> getRecentChanges(@Query("rcstart") String rcStart);
