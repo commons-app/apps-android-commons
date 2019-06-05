@@ -63,8 +63,10 @@ class ReviewHelperTest {
         `when`(reviewInterface?.getFirstRevisionOfFile(ArgumentMatchers.anyString()))
                 .thenReturn(Observable.just(mockResponse))
 
+        val media = mock(Media::class.java)
+        `when`(media.filename).thenReturn("File:Test.jpg")
         `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
-                .thenReturn(Single.just(mock(Media::class.java)))
+                .thenReturn(Single.just(media))
     }
 
     /**

@@ -1,13 +1,12 @@
 package fr.free.nrw.commons.review;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.RecentChange;
 import org.wikipedia.util.DateUtil;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -21,7 +20,6 @@ import io.reactivex.Single;
 
 @Singleton
 public class ReviewHelper {
-    private static final int MAX_RANDOM_TRIES = 5;
 
     private static final String[] imageExtensions = new String[]{".jpg", ".jpeg", ".png"};
 
@@ -45,18 +43,21 @@ public class ReviewHelper {
      * its best to fetch for just last 1 hour.
      * @return
      */
-    private Observable<List<RecentChange>> getRecentChanges() {
+    private Observable<RecentChange> getRecentChanges() {
         final int RANDOM_SECONDS = 60 * 60;
         Random r = new Random();
         Date now = new Date();
         Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
 
         String rcStart = DateUtil.iso8601DateFormat(startDate);
-        return reviewInterface.getRecentChanges(rcStart).map(mwQueryResponse -> mwQueryResponse.query().getRecentChanges())
+        return reviewInterface.getRecentChanges(rcStart)
+                .map(mwQueryResponse -> mwQueryResponse.query().getRecentChanges())
                 .map(recentChanges -> {
-                    Collections.shuffle(recentChanges);
+                    //Collections.shuffle(recentChanges);
                     return recentChanges;
-                });
+                })
+                .flatMapIterable(changes -> changes)
+                .filter(recentChange -> isChangeReviewable(recentChange));
     }
 
     /**
@@ -70,24 +71,28 @@ public class ReviewHelper {
      */
     public Single<Media> getRandomMedia() {
         return getRecentChanges()
-                .flatMapIterable(changes -> changes)
-                .filter(this::isChangeReviewable)
-                .flatMapSingle(change -> mediaWikiApi.pageExists("Commons:Deletion_requests/" + change.getTitle())
-                        .map(exists -> {
-                            if (exists) {
-                                throw new RuntimeException("Already nominated for deletion");
-                            }
-                            return change.getTitle();
-                        }))
-                .flatMapSingle(fileName -> okHttpJsonApiClient.getMedia(fileName, false)
-                        .map(media -> {
-                            if (media == null) {
-                                throw new NullPointerException("Media is null");
-                            }
-                            return media;
-                        }))
-                .retry(MAX_RANDOM_TRIES)
+                .flatMapSingle(change -> getRandomMediaFromRecentChange(change))
+                .onExceptionResumeNext(Observable.just(new Media("")))
+                .filter(media -> !StringUtils.isBlank(media.getFilename()))
                 .firstOrError();
+    }
+
+    /**
+     * Returns a proper Media object if the file is not already nominated for deletion
+     * Else it returns an empty Media object
+     * @param recentChange
+     * @return
+     */
+    private Single<Media> getRandomMediaFromRecentChange(RecentChange recentChange) {
+        return Single.just(recentChange)
+                .flatMap(change -> mediaWikiApi.pageExists("Commons:Deletion_requests/" + change.getTitle()))
+                .flatMap(isDeleted -> {
+                    if (isDeleted) {
+                        return Single.just(new Media(""));
+                    }
+                    return okHttpJsonApiClient.getMedia(recentChange.getTitle(), false);
+                });
+
     }
 
     /**

@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.material.navigation.NavigationView;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -21,8 +24,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -143,7 +144,11 @@ public class ReviewActivity extends AuthenticatedActivity {
         compositeDisposable.add(reviewHelper.getRandomMedia()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateImage));
+                .subscribe(media -> {
+                    if (media != null) {
+                        updateImage(media);
+                    }
+                }));
         return true;
     }
 
