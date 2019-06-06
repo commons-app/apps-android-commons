@@ -50,6 +50,9 @@ public class PermissionUtils {
      * Checks for a particular permission and runs the runnable to perform an action when the permission is granted
      * Also, it shows a rationale if needed
      *
+     * rationaleTitle and rationaleMessage can be invalid @StringRes. If the value is -1 then no permission rationale
+     * will be displayed and permission would be requested
+     *
      * Sample usage:
      *
      * PermissionUtils.checkPermissionsAndPerformAction(activity,
@@ -58,12 +61,20 @@ public class PermissionUtils {
      *                 R.string.storage_permission_title,
      *                 R.string.write_storage_permission_rationale);
      *
+     * If you don't want the permission rationale to be shown then use:
+     *
+     * PermissionUtils.checkPermissionsAndPerformAction(activity,
+     *                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+     *                 () -> initiateCameraUpload(activity),
+     *                 - 1, -1);
+     *
+     *
      *
      * @param activity activity requesting permissions
      * @param permission the permission being requests
      * @param onPermissionGranted the runnable to be executed when the permission is granted
-     * @param rationaleTitle rationale title to be displayed when permission was denied
-     * @param rationaleMessage rationale message to be displayed when permission was denied
+     * @param rationaleTitle rationale title to be displayed when permission was denied. It can be an invalid @StringRes
+     * @param rationaleMessage rationale message to be displayed when permission was denied. It can be an invalid @StringRes
      */
     public static void checkPermissionsAndPerformAction(Activity activity, String permission,
         Runnable onPermissionGranted, @StringRes int rationaleTitle,

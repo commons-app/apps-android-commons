@@ -194,7 +194,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
 
             @Override
-            public void onStateChanged(View bottomSheet, int newState) {
+            public void onStateChanged(View bottomSheet, int unusedNewState) {
                 prepareViewsForSheetPosition();
             }
 
