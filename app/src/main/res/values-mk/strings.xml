@@ -10,6 +10,7 @@
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Општи</string>
   <string name="preference_category_feedback">Мислења</string>
+  <string name="preference_category_privacy">Лични податоци</string>
   <string name="preference_category_location">Место</string>
   <string name="app_name">Ризница</string>
   <string name="bullet">•</string>
@@ -507,6 +508,15 @@
   <string name="welcome_dont_upload_content_description">Примери — Слики што не се за подигање</string>
   <string name="skip_image">ПРЕСКОКНИ ЈА ПОРАКАВА</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преземањето не успеа!!! Не можеме да ја преземеме податотеката без дозвола од надворешен склад.</string>
+  <string name="manage_exif_tags">Раков. со EXIF-ознаки</string>
+  <string name="manage_exif_tags_summary">Изберете кои EXIF-ознаки да се задржат во подигањата</string>
+  <string name="exif_tag_name_author">Автор</string>
+  <string name="exif_tag_name_copyright">Авторски права</string>
+  <string name="exif_tag_name_location">Место</string>
+  <string name="exif_tag_name_cameraModel">Модел на камерата</string>
+  <string name="exif_tag_name_lensModel">Модел на објективот</string>
+  <string name="exif_tag_name_serialNumbers">Сериски броеви</string>
+  <string name="exif_tag_name_software">Програми</string>
   <string name="share_text">Подигајте слики на Ризницата од телефон. Преземете го прилогот на Ризницата: %1$s</string>
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
