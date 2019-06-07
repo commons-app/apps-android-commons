@@ -63,6 +63,8 @@ public class WikidataEditService {
             return;
         }
 
+        // TODO Wikidata Sandbox (Q4115189) for test purposes
+        //  wikidataEntityId = "Q4115189";
         editWikidataProperty(wikidataEntityId, fileName);
         editWikidataPropertyP180(wikidataEntityId, fileName);
     }
@@ -107,11 +109,14 @@ public class WikidataEditService {
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
                         addPropertyP180(wikidataEntityId, fileEntityId);
-                        Timber.d("EntityId for image was receive successfully");
+                        Timber.d("EntityId for image was received successfully");
                     } else {
                         Timber.d("Error acquiring EntityId for image");
                     }
-                }, throwable -> Timber.e(throwable, "Error occurred while adding tag to the edit"));
+                    }, throwable -> {
+                    Timber.e(throwable, "Error occurred while getting EntityID for P180 tag");
+                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                });
     }
 
     @SuppressLint("CheckResult")
@@ -121,13 +126,11 @@ public class WikidataEditService {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                    if (result != null) {
-                        Timber.d("Property P180 was added successfully");
-                    } else {
-                        Timber.d("Error adding property P180");
-                    }
-                }, throwable -> Timber.e(throwable, "Error occurred while adding tag to the edit"));
+                .subscribe(revisionId -> Timber.d("Property P180 set successfully for %s", revisionId),
+                        throwable -> {
+                    Timber.e(throwable, "Error occurred while setting P180 tag");
+                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                });
     }
 
     private void handleClaimResult(String wikidataEntityId, String revisionId) {
