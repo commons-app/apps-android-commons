@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
+import org.wikipedia.dataclient.ServiceFactory;
+import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonUtil;
 
 import java.io.File;
@@ -20,6 +22,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.review.ReviewInterface;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -108,4 +111,16 @@ public class NetworkingModule {
         return GsonUtil.getDefaultGson();
     }
 
+    @Provides
+    @Singleton
+    @Named("commons-wikisite")
+    public WikiSite provideCommonsWikiSite() {
+        return new WikiSite(BuildConfig.COMMONS_URL);
+    }
+
+    @Provides
+    @Singleton
+    public ReviewInterface provideReviewInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
+    }
 }
