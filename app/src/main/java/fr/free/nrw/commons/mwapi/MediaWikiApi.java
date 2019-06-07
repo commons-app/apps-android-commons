@@ -30,10 +30,6 @@ public interface MediaWikiApi {
 
     String getCentralAuthToken() throws IOException;
 
-    boolean fileExistsWithName(String fileName) throws IOException;
-
-    Single<Boolean> pageExists(String pageName);
-
     List<String> getSubCategoryList(String categoryName);
 
     List<String> getParentCategoryList(String categoryName);
@@ -86,8 +82,6 @@ public interface MediaWikiApi {
 
     @Nullable
     String revisionsByFilename(String filename) throws IOException;
-
-    boolean existingFile(String fileSha1) throws IOException;
 
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
