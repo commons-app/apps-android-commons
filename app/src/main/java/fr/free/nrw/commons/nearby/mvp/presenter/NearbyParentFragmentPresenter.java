@@ -153,16 +153,13 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget) {
-        Log.d("deneme2","update map and list is called");
         if (isNearbyLocked) {
-            Log.d("deneme2","isNearbyLocked");
 
             Timber.d("Nearby is locked, so updateMapAndList returns");
             return;
         }
 
         if (!nearbyParentFragmentView.isNetworkConnectionEstablished()) {
-            Log.d("deneme2","isNetworkConnectionEstablished");
             Timber.d("Network connection is not established");
             return;
         }
@@ -176,7 +173,6 @@ public class NearbyParentFragmentPresenter
         curLatLng = lastLocation;
 
         if (curLatLng == null) {
-            Log.d("deneme2","curLatLng == null");
 
             Timber.d("Skipping update of nearby places as location is unavailable");
             return;
@@ -188,7 +184,6 @@ public class NearbyParentFragmentPresenter
          */
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(MAP_UPDATED)) {
-            Log.d("deneme2","LOCATION_SIGNIFICANTLY_CHANGED");
             nearbyParentFragmentView.populatePlaces(lastLocation, lastLocation);
             nearbyParentFragmentView.setSearchThisAreaProgressVisibility(false);
             //nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
@@ -196,12 +191,10 @@ public class NearbyParentFragmentPresenter
             // TODO dont forget map updated state after an wikidata item is updated
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
-            Log.d("deneme2","SEARCH_CUSTOM_AREA");
             nearbyParentFragmentView.populatePlaces(lastLocation, cameraTarget);
             nearbyParentFragmentView.setSearchThisAreaProgressVisibility(false);
             searchingThisArea = false;
         } else { // Means location changed slightly, ie user is walking or driving.
-            Log.d("deneme2","SLIGHT");
             nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
             searchingThisArea = false;
         }
@@ -249,14 +242,10 @@ public class NearbyParentFragmentPresenter
             if (NearbyController.currentLocation != null) {
                 double distance = mapboxMap.getCameraPosition().target.distanceTo
                         (LocationUtils.commonsLatLngToMapBoxLatLng(NearbyController.latestSearchLocation));
-                Log.d("deneme2", "NearbyController.currentLocation != null");
                 if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
                     if (distance > NearbyController.latestSearchRadius) {
-                        Log.d("deneme2", "distance:" + distance + " , searched rad:" + NearbyController.latestSearchRadius);
                         nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
                     } else {
-                        Log.d("deneme2", "distance:" + distance + " , searched rad:" + NearbyController.latestSearchRadius);
-
                         nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
                     }
                 }
