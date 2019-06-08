@@ -45,6 +45,6 @@ public class DepictionRenderer extends Renderer<DepictedItem> {
     public void render() {
         DepictedItem item = getContent();
         checkedView.setChecked(item.isSelected());
-        checkedView.setText(item.getName());
+        checkedView.setText(item.getDepictsLabel());
     }
 }
