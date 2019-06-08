@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.pedrogomez.renderers.Renderer;
 
@@ -14,6 +16,12 @@ import fr.free.nrw.commons.R;
 public class DepictionRenderer extends Renderer<DepictedItem> {
     @BindView(R.id.tvName)
     CheckedTextView checkedView;
+    @BindView(R.id.thumbnail)
+    ImageView thumbnail;
+    @BindView(R.id.depicts_label)
+    TextView depictsLabel;
+    @BindView(R.id.description)
+    TextView description;
     private final DepictsClickedListener listener;
 
     public DepictionRenderer(DepictsClickedListener listener) {
@@ -45,6 +53,8 @@ public class DepictionRenderer extends Renderer<DepictedItem> {
     public void render() {
         DepictedItem item = getContent();
         checkedView.setChecked(item.isSelected());
-        checkedView.setText(item.getDepictsLabel());
+        depictsLabel.setText(item.getDepictsLabel());
+        description.setText(item.getDescription());
+        thumbnail.setImageResource(R.drawable.empty_photo);
     }
 }
