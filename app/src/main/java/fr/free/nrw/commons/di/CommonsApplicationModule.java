@@ -12,6 +12,8 @@ import org.wikipedia.dataclient.WikiSite;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import org.wikipedia.dataclient.WikiSite;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
