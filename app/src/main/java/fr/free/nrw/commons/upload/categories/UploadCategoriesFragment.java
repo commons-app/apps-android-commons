@@ -1,35 +1,23 @@
 package fr.free.nrw.commons.upload.categories;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
@@ -38,6 +26,10 @@ import fr.free.nrw.commons.upload.UploadCategoriesAdapterFactory;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
 import timber.log.Timber;
 
 public class UploadCategoriesFragment extends UploadBaseFragment implements CategoriesContract.View,
@@ -89,6 +81,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         presenter.onAttachView(this);
         initRecyclerView();
         addTextChangeListenerToEtSearch();
+        //get default categories for empty query
+        presenter.searchForCategories(null,mediaTitleList);
     }
 
     private void addTextChangeListenerToEtSearch() {
@@ -101,9 +95,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     private void searchForCategory(String query) {
-        if (!TextUtils.isEmpty(query)) {
-            presenter.searchForCategories(query, mediaTitleList);
-        }
+        presenter.searchForCategories(query, mediaTitleList);
     }
 
     private void initRecyclerView() {
