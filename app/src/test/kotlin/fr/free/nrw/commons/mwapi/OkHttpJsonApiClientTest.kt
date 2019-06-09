@@ -29,7 +29,7 @@ import kotlin.random.Random
  * Mock web server based tests for ok http json api client
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [23], application = TestCommonsApplication::class)
+@Config(sdk = [23], application = TestCommonsApplication::class)
 class OkHttpJsonApiClientTest {
 
     private lateinit var testObject: OkHttpJsonApiClient

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
@@ -13,6 +14,11 @@ import android.text.TextWatcher;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -58,6 +64,14 @@ public class SettingsFragment extends PreferenceFragment {
             authorName.setEnabled((Boolean)newValue);
             return true;
         });
+
+        MultiSelectListPreference multiSelectListPref = (MultiSelectListPreference) findPreference("manageExifTags");
+        if (multiSelectListPref != null) {
+            multiSelectListPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                defaultKvStore.putJson(Prefs.MANAGED_EXIF_TAGS, newValue);
+                return true;
+            });
+        }
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
         int currentUploadLimit = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100);

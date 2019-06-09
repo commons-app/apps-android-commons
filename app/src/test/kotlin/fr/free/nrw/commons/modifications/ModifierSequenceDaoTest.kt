@@ -20,7 +20,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [21], application = TestCommonsApplication::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class ModifierSequenceDaoTest {
 
     private val mediaUrl = "http://example.com/"

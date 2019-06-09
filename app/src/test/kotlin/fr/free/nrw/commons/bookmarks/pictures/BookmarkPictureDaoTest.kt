@@ -21,7 +21,7 @@ import org.junit.Before
 import org.junit.Test
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [21], application = TestCommonsApplication::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class BookmarkPictureDaoTest {
 
     private val columns = arrayOf(COLUMN_MEDIA_NAME, COLUMN_CREATOR)

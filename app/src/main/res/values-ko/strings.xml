@@ -19,6 +19,7 @@
   <string name="preference_category_appearance">보이기</string>
   <string name="preference_category_general">일반</string>
   <string name="preference_category_feedback">피드백</string>
+  <string name="preference_category_privacy">개인정보</string>
   <string name="preference_category_location">위치</string>
   <string name="app_name">공용</string>
   <string name="bullet">•</string>
@@ -452,6 +453,13 @@
   <string name="previous_image_title_description">이전의 제목 및 설명 복사</string>
   <string name="skip_image">이 이미지 건너뛰기</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">다운로드를 실패했습니다!! 외장 스토리지 권한 없이 파일을 다운로드할 수 없습니다.</string>
+  <string name="manage_exif_tags">EXIF 태그 관리</string>
+  <string name="exif_tag_name_author">만든이</string>
+  <string name="exif_tag_name_copyright">저작권</string>
+  <string name="exif_tag_name_location">위치</string>
+  <string name="exif_tag_name_cameraModel">카메라 모델</string>
+  <string name="exif_tag_name_serialNumbers">일련 번호</string>
+  <string name="exif_tag_name_software">소프트웨어</string>
   <string name="share_via">앱 공유...</string>
   <string name="image_info">이미지 정보</string>
 </resources>

@@ -3,7 +3,6 @@ package fr.free.nrw.commons.di;
 import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
-import androidx.collection.LruCache;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
@@ -11,6 +10,8 @@ import com.google.gson.Gson;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import org.wikipedia.dataclient.WikiSite;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Map;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import androidx.collection.LruCache;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
@@ -26,7 +28,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.settings.Prefs;
