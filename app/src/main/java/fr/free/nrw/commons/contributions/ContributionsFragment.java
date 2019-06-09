@@ -5,28 +5,26 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-import androidx.cursoradapter.widget.CursorAdapter;
-import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.CheckBox;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cursoradapter.widget.CursorAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import java.util.ArrayList;
 
@@ -57,6 +55,7 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -66,7 +65,7 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
-import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
@@ -351,35 +350,6 @@ public class ContributionsFragment
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult");
-        switch (requestCode) {
-            case LOCATION_REQUEST: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Location permission granted, refreshing view");
-                    // No need to display permission request button anymore
-                    locationManager.registerLocationManager();
-                } else {
-                    if (store.getBoolean("displayLocationPermissionForCardView", true)) {
-                        // Still ask for permission
-                        DialogUtil.showAlertDialog(getActivity(),
-                                getString(R.string.nearby_card_permission_title),
-                                getString(R.string.nearby_card_permission_explanation),
-                                this::displayYouWontSeeNearbyMessage,
-                                this::enableLocationPermission,
-                                checkBoxView,
-                                false);
-                    }
-                }
-            }
-            break;
-
-            default:
-                // This is needed to allow the request codes from the Fragments to be routed appropriately
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with
      * mediaDetailPagerFragment, and preserve previous state in back stack.
@@ -496,7 +466,7 @@ public class ContributionsFragment
 
 
         if (store.getBoolean("displayNearbyCardView", true)) {
-            checkGPS();
+            checkPermissionsAndShowNearbyCardView();
             if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                 nearbyNotificationCardView.setVisibility(View.VISIBLE);
             }
@@ -509,77 +479,39 @@ public class ContributionsFragment
         fetchCampaigns();
     }
 
-    /**
-     * Check GPS to decide displaying request permission button or not.
-     */
-    private void checkGPS() {
-        if (!locationManager.isProviderEnabled()) {
-            Timber.d("GPS is not enabled");
-            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_GPS;
-            if (store.getBoolean("displayLocationPermissionForCardView", true)) {
-                DialogUtil.showAlertDialog(getActivity(),
-                        getString(R.string.nearby_card_permission_title),
-                        getString(R.string.nearby_card_permission_explanation),
-                        this::displayYouWontSeeNearbyMessage,
-                        this::enableGPS,
-                        checkBoxView,
-                        false);
-            }
-        } else {
-            Timber.d("GPS is enabled");
-            checkLocationPermission();
+    private void checkPermissionsAndShowNearbyCardView() {
+        if (PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+            onLocationPermissionGranted();
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
+                && store.getBoolean("displayLocationPermissionForCardView", true)
+                && (((MainActivity) getActivity()).viewPager.getCurrentItem() == CONTRIBUTIONS_TAB_POSITION)) {
+            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
+            showNearbyCardPermissionRationale();
         }
     }
 
-    private void checkLocationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (locationManager.isLocationPermissionGranted(requireContext())) {
-                nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-                locationManager.registerLocationManager();
-            } else {
-                nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
-                // If user didn't selected Don't ask again
-                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
-                        && store.getBoolean("displayLocationPermissionForCardView", true)) {
-                        DialogUtil.showAlertDialog(getActivity(),
-                                getString(R.string.nearby_card_permission_title),
-                                getString(R.string.nearby_card_permission_explanation),
-                                this::displayYouWontSeeNearbyMessage,
-                                this::enableLocationPermission,
-                                checkBoxView,
-                                false);
-                }
-            }
-        } else {
-            // If device is under Marshmallow, we already checked for GPS
-            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-            locationManager.registerLocationManager();
-        }
+    private void requestLocationPermission() {
+        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                this::onLocationPermissionGranted,
+                this::displayYouWontSeeNearbyMessage,
+                -1,
+                -1);
     }
 
-    private void enableLocationPermission() {
-        if (!getActivity().isFinishing()) {
-            ((MainActivity) getActivity()).locationManager.requestPermissions(getActivity());
-        }
+    private void onLocationPermissionGranted() {
+        nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
+        locationManager.registerLocationManager();
     }
 
-    private void enableGPS() {
-        new AlertDialog.Builder(getActivity())
-                .setMessage(R.string.gps_disabled)
-                .setCancelable(false)
-                .setPositiveButton(R.string.enable_gps,
-                        (dialog, id) -> {
-                            Intent callGPSSettingIntent = new Intent(
-                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            Timber.d("Loaded settings page");
-                            ((MainActivity) getActivity()).startActivityForResult(callGPSSettingIntent, 1);
-                        })
-                .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                    dialog.cancel();
-                    displayYouWontSeeNearbyMessage();
-                })
-                .create()
-                .show();
+    private void showNearbyCardPermissionRationale() {
+        DialogUtil.showAlertDialog(getActivity(),
+                getString(R.string.nearby_card_permission_title),
+                getString(R.string.nearby_card_permission_explanation),
+                this::displayYouWontSeeNearbyMessage,
+                this::requestLocationPermission,
+                checkBoxView,
+                false);
     }
 
     private void displayYouWontSeeNearbyMessage() {
@@ -589,7 +521,6 @@ public class ContributionsFragment
 
     private void updateClosestNearbyCardViewInfo() {
         curLatLng = locationManager.getLastLocation();
-
         compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curLatLng, curLatLng, true, false)) // thanks to boolean, it will only return closest result
                 .subscribeOn(Schedulers.io())

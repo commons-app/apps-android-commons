@@ -23,7 +23,7 @@ import org.robolectric.annotation.Config
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [21], application = TestCommonsApplication::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class ContributionDaoTest {
     private val localUri = "http://example.com/"
     private val client: ContentProviderClient = mock()

@@ -22,6 +22,7 @@
   <string name="preference_category_appearance">Aparência</string>
   <string name="preference_category_general">Geral</string>
   <string name="preference_category_feedback">Comentário</string>
+  <string name="preference_category_privacy">Privacidade</string>
   <string name="preference_category_location">Localização</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -519,6 +520,15 @@
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">PULAR ESTA IMAGEM</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Falha no Download!!. Não podemos fazer o download do arquivo sem permissão de armazenamento externo.</string>
+  <string name="manage_exif_tags">Gerenciar etiquetas EXIF</string>
+  <string name="manage_exif_tags_summary">Selecione quais etiquetas EXIF para manter nos carregados</string>
+  <string name="exif_tag_name_author">Autor</string>
+  <string name="exif_tag_name_copyright">Direitos autorais</string>
+  <string name="exif_tag_name_location">Localização</string>
+  <string name="exif_tag_name_cameraModel">Modelo da câmera</string>
+  <string name="exif_tag_name_lensModel">Modelo de lente</string>
+  <string name="exif_tag_name_serialNumbers">Números de série</string>
+  <string name="exif_tag_name_software">Software</string>
   <string name="share_text">Faça o carregamento de fotos para o Wikimedia Commons no seu telefone ou baixe o aplicativo Commons: %1$s</string>
   <string name="share_via">Compartilhar aplicativo via...</string>
   <string name="image_info">Informação da imagem</string>
