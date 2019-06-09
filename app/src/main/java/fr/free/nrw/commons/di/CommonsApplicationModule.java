@@ -8,9 +8,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
 
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -175,17 +172,5 @@ public class CommonsApplicationModule {
     @Singleton
     public boolean provideIsBetaVariant() {
         return ConfigUtils.isBetaFlavour();
-    }
-
-    @Named(IO_THREAD)
-    @Provides
-    public Scheduler providesIoThread(){
-        return Schedulers.io();
-    }
-
-    @Named(MAIN_THREAD)
-    @Provides
-    public Scheduler providesMainThread(){
-        return AndroidSchedulers.mainThread();
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* 4nn1l2
 * Abijeet Patro
 * Amirsara
 * Arash.pt
@@ -175,13 +176,15 @@
   <string name="detail_discussion_empty">بدون بحث</string>
   <string name="detail_license_empty">مجوز ناشناخته</string>
   <string name="menu_refresh">تازه‌کردن</string>
+  <string name="storage_permission_title">درخواست اجازهٔ ذخیره‌سازی</string>
   <string name="read_storage_permission_rationale">اجازه‌های مورد نیاز: مطالعهٔ حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">اجازه‌های مورد نیاز: نوشتن در حافظهٔ خارجی. اپلیکیشن نمیتواند به دبین دسترسی داشته باشد.</string>
+  <string name="write_storage_permission_rationale">اجازه‌های مورد نیاز: نوشتن در حافظهٔ خارجی. اپلیکیشن نمی‌تواند به دوربین/گالری دسترسی داشته باشد.</string>
   <string name="location_permission_rationale">اجازه‌های اختیاری: دریافت موقعیت برای پیشنهاد رده</string>
   <string name="ok">تأیید</string>
   <string name="title_activity_nearby">مکان‌‌های اطراف</string>
   <string name="no_nearby">مکانی در نزدیکی یافت نشد</string>
   <string name="warning">هشدار</string>
+  <string name="upload_image_duplicate">پرونده در ویکی‌انبار موجود است. آیا مطمئنید که می‌خواهید ادامه دهید؟</string>
   <string name="yes">بله</string>
   <string name="no">خیر</string>
   <string name="media_detail_title">عنوان</string>
@@ -201,7 +204,8 @@
   <string name="invalid_input">ورودی نامعتبر</string>
   <string name="maximum_limit_alert">عدم توانایی در نمایش بیش از ۵۰۰ مورد</string>
   <string name="enter_valid">عدد معتبر را وارد کنید</string>
-  <string name="set_limit" fuzzy="true">تنظیم محدودیت بارگذاری‌های اخیر</string>
+  <string name="cannot_be_zero">حد بارگذاری نمی‌تواند ۰ باشد</string>
+  <string name="set_limit">محدودیت بارگذاری اخیر</string>
   <string name="login_failed_2fa_not_supported">تأیید دومرحله‌ای الان پشتیبانی نمی‌شود.</string>
   <string name="logout_verification">آیا واقعاً قصد خروج از سامانه را دارید؟</string>
   <string name="commons_logo">نشان ویکی‌انبار</string>
@@ -245,11 +249,16 @@
   <string name="error_while_cache">خطا در زمان دریافت تصاویر</string>
   <string name="title_info">عنوانی توصیفی و یکتا برای پرونده که به عنوان نام پرونده در نظر گرفته خواهد شد. ترجیحاً به زبان ساده باشد، می‌توانید فاصله هم به کار ببرید. پسوند پرونده را ننویسید.</string>
   <string name="description_info">لطفاً تصویر را تا حد توان شرح دهید. کجا گرفته شده‌است؟ شامل چه چیزی می‌شود؟ لطفاً اشیا یا افراد را شرح دهید. اطلاعاتی که به راحتی قابل مشاهده هستند را صرفه‌نظر کنید. اگر چیزی در تصویر غیر طبیعی به نظر می‌رسد آن را شرح دهید.</string>
+  <string name="upload_image_too_dark">این تصویر خیلی تار است. آیا مطمئنید که می‌خواهید آن را بارگذاری کنید؟ ویکی‌انبار فقط برای نگهداری از تصاویری است که ارزش دانشنامه‌ای داشته باشند.</string>
+  <string name="upload_image_blurry">این تصویر خیلی محو است. آیا مطمئنید که می‌خواهید آن را بارگذاری کنید؟ ویکی‌انبار فقط برای نگهداری از تصاویری است که ارزش دانشنامه‌ای داشته باشند.</string>
+  <string name="upload_problem_exist">مشکلات احتمالی با این تصویر :</string>
   <string name="upload_problem_image_dark">تصویر بیش از حد تاریک است.</string>
   <string name="upload_problem_image_blurry">تصویر تار است.</string>
   <string name="upload_problem_image_duplicate">تصویر اکنون در انبار موجود است.</string>
   <string name="upload_problem_different_geolocation">این تصویر در مکان متفاوتی گرفته شده است.</string>
+  <string name="upload_problem_fbmd">لطفاً فقط تصاویری را بارگذاری کنید که خودتان گرفته‌اید. تصاویری را که در فیس‌بوک دیگران پیدا کرده‌اید بارگذاری نکنید.</string>
   <string name="upload_problem_do_you_continue">هنوزم می خوای این عکس رو آپلود کنی؟</string>
+  <string name="internet_downloaded">لطفاً فقط تصاویری را بارگذاری کنید که خودتان گرفته‌اید. تصاویری را که از اینترنت بارگیری کرده‌اید بارگذاری نکنید.</string>
   <string name="give_permission">اجازه بده</string>
   <string name="use_external_storage">استفاده از حافظهٔ خارجی</string>
   <string name="use_external_storage_summary">ذخیرهٔ تصویرهای گرفته شده توسط دوربین درونکار اپلیکیشن بر روی دستگاه شما</string>
@@ -261,6 +270,8 @@
   <string name="nominate_deletion">نامزد شده برای حذف</string>
   <string name="nominated_for_deletion">این تصویر برای حذف شدن علامت گذاری شده.</string>
   <string name="nominated_see_more"> .</string>
+  <string name="nominating_file_for_deletion">نامزد حذف کردن %1$s.</string>
+  <string name="nominating_for_deletion_status">نامزد حذف کردن: %1$s</string>
   <string name="view_browser">مشاهده در مرورگر</string>
   <string name="skip_login">رها کردن</string>
   <string name="navigation_item_login">ورود به سامانه</string>
@@ -268,6 +279,7 @@
   <string name="skip_login_message">برای بارگذاری تصاویر در آینده شما باید وارد حساب کاربری خود شوید.</string>
   <string name="login_alert_message">لطفا برای استفاده از این ویژگی وارد شوید</string>
   <string name="copy_wikicode">از ویکی واژه به کلیپ برد کپی کنید.</string>
+  <string name="wikicode_copied">ویکی‌متن در کلیپ‌بورد کپی شد</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
   <string name="nearby_location_not_available">مکان موجود نیست.</string>
   <string name="location_permission_rationale_nearby">برای نمایش مکان‌ّای اطراف نیاز به اجازه است.</string>
@@ -404,4 +416,5 @@
   <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
   <string name="image_chooser_title">انتخاب تصویر برای بارگذاری</string>
   <string name="please_wait">لطفاً صبر کنید...</string>
+  <string name="image_info">اطلاعات عکس</string>
 </resources>

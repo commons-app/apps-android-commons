@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
@@ -43,7 +44,7 @@ public class DepictModel {
     public Comparator<DepictedItem> sortBySimilarity(final String filter) {
         Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
         return (firstItem, secondItem) -> stringSimilarityComparator
-                .compare(firstItem.getDepictsLabel(), secondItem.getDepictsLabel());
+                .compare(firstItem.getName(), secondItem.getName());
     }
 
     public boolean containsYear(String item) {
@@ -106,7 +107,7 @@ public class DepictModel {
 
         return mediaWikiApi
                 .searchCategories(term, SEARCH_DEPICTS_LIMIT)
-                .map(s -> new DepictedItem(s, "", null, false));
+                .map(s -> new DepictedItem(s, false));
     }
 
 
@@ -123,10 +124,10 @@ public class DepictModel {
     }
 
     private void updateDepictCount(DepictedItem depictedItem) {
-        Depiction depiction = depictDao.find(depictedItem.getDepictsLabel());
+        Depiction depiction = depictDao.find(depictedItem.getName());
 
         if (depictedItem == null) {
-            depiction = new Depiction(null, depictedItem.getDepictsLabel(), new Date(), 0);
+            depiction = new Depiction(null, depictedItem.getName(), new Date(), 0);
         }
 
         depiction.incTimesUsed();
@@ -139,7 +140,7 @@ public class DepictModel {
 
     Observable<DepictedItem> gpsDepicts() {
         return Observable.fromIterable(gpsDepictsModel.getCategoryList())
-                .map(name -> new DepictedItem(name, "", null,false));
+                .map(name -> new DepictedItem(name, false));
     }
 
     private Observable<DepictedItem> titleDepicts(List<UploadMediaDetail> titleList) {
@@ -149,11 +150,11 @@ public class DepictModel {
 
     private Observable<DepictedItem> getTitleDepicts(UploadMediaDetail uploadMediaDetail) {
         return mediaWikiApi.searchTitles(uploadMediaDetail.getCaptionText(), SEARCH_DEPICTS_LIMIT)
-                .map(name -> new DepictedItem(name, "", null,false));
+                .map(name -> new DepictedItem(name, false));
     }
 
     private Observable<DepictedItem> recentDepicts() {
         return Observable.fromIterable(depictDao.recentDepicts(SEARCH_DEPICTS_LIMIT))
-                .map(s -> new DepictedItem(s, "", null,false));
+                .map(s -> new DepictedItem(s, false));
     }
 }
