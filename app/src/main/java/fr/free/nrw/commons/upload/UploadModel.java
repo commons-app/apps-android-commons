@@ -3,19 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-
 import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -28,12 +16,16 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import timber.log.Timber;
 
@@ -64,12 +56,12 @@ public class UploadModel {
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
-                @Named("default_preferences") JsonKvStore store,
-                @Named("licenses_by_name") Map<String, String> licensesByName,
-                Context context,
-                SessionManager sessionManager,
-                FileProcessor fileProcessor,
-                ImageProcessingService imageProcessingService) {
+            @Named("default_preferences") JsonKvStore store,
+            @Named("licenses_by_name") Map<String, String> licensesByName,
+            Context context,
+            SessionManager sessionManager,
+            FileProcessor fileProcessor,
+            ImageProcessingService imageProcessingService) {
         this.licenses = licenses;
         this.store = store;
         this.license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
@@ -87,7 +79,7 @@ public class UploadModel {
         compositeDisposable.clear();
         fileProcessor.cleanup();
         this.items.clear();
-        if(this.selectedCategories!=null) {
+        if (this.selectedCategories != null) {
             this.selectedCategories.clear();
         }
     }
@@ -101,29 +93,20 @@ public class UploadModel {
 
     /**
      * pre process a list of items
-     * @param uploadableFiles
-     * @param place
-     * @param source
-     * @param similarImageInterface
-     * @return
      */
     @SuppressLint("CheckResult")
     Observable<UploadItem> preProcessImages(List<UploadableFile> uploadableFiles,
-                                            Place place,
-                                            String source,
-                                            SimilarImageInterface similarImageInterface) {
+            Place place,
+            String source,
+            SimilarImageInterface similarImageInterface) {
         return Observable.fromIterable(uploadableFiles)
-                .map(uploadableFile -> getUploadItem(uploadableFile, place, source, similarImageInterface));
+                .map(uploadableFile -> getUploadItem(uploadableFile, place, source,
+                        similarImageInterface));
     }
 
 
     /**
      * pre process a one item at a time
-     * @param uploadableFile
-     * @param place
-     * @param source
-     * @param similarImageInterface
-     * @return
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile,
             Place place,
@@ -137,11 +120,13 @@ public class UploadModel {
     }
 
     private UploadItem getUploadItem(UploadableFile uploadableFile,
-                                     Place place,
-                                     String source,
-                                     SimilarImageInterface similarImageInterface) {
-        fileProcessor.initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()), context.getContentResolver());
-        UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile.getFileCreatedDate(context);
+            Place place,
+            String source,
+            SimilarImageInterface similarImageInterface) {
+        fileProcessor.initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()),
+                context.getContentResolver());
+        UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile
+                .getFileCreatedDate(context);
         long fileCreatedDate = -1;
         String createdTimestampSource = "";
         if (dateTimeWithSource != null) {
@@ -149,16 +134,18 @@ public class UploadModel {
             createdTimestampSource = dateTimeWithSource.getSource();
         }
         Timber.d("File created date is %d", fileCreatedDate);
-        GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
-        UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(), Uri.parse(uploadableFile.getFilePath()),
+        GPSExtractor gpsExtractor = fileProcessor
+                .processFileCoordinates(similarImageInterface, context);
+        UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(),
+                Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate,
                 createdTimestampSource);
-        if(place!=null){
+        if (place != null) {
             uploadItem.title.setTitleText(place.name);
             uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
             uploadItem.descriptions.get(0).setLanguageCode("en");
         }
-        if(!items.contains(uploadItem)) {
+        if (!items.contains(uploadItem)) {
             items.add(uploadItem);
         }
         return uploadItem;
@@ -204,8 +191,8 @@ public class UploadModel {
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
             }
-            if(null==selectedCategories){//Just a fail safe, this should never be null
-                selectedCategories=new ArrayList<>();
+            if (null == selectedCategories) {//Just a fail safe, this should never be null
+                selectedCategories = new ArrayList<>();
             }
             contribution.setCategories(selectedCategories);
             contribution.setTag("mimeType", item.mimeType);
@@ -226,11 +213,12 @@ public class UploadModel {
 
     public void deletePicture(String filePath) {
         Iterator<UploadItem> iterator = items.iterator();
-        while (iterator.hasNext())
+        while (iterator.hasNext()) {
             if (iterator.next().mediaUri.toString().contains(filePath)) {
                 iterator.remove();
                 break;
             }
+        }
         if (items.isEmpty()) {
             cleanUp();
         }
@@ -240,7 +228,7 @@ public class UploadModel {
         return items;
     }
 
-    public void updateUploadItem(int index,UploadItem uploadItem) {
+    public void updateUploadItem(int index, UploadItem uploadItem) {
         UploadItem uploadItem1 = items.get(index);
         uploadItem1.setDescriptions(uploadItem.descriptions);
         uploadItem1.setTitle(uploadItem.title);
@@ -248,6 +236,7 @@ public class UploadModel {
 
     @SuppressWarnings("WeakerAccess")
     public static class UploadItem {
+
         private final Uri originalContentUri;
         private final Uri mediaUri;
         private final String mimeType;
@@ -267,10 +256,10 @@ public class UploadModel {
 
         @SuppressLint("CheckResult")
         UploadItem(Uri originalContentUri,
-                   Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
-                   Place place,
-                   long createdTimestamp,
-                   String createdTimestampSource) {
+                Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
+                Place place,
+                long createdTimestamp,
+                String createdTimestampSource) {
             this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
             title = new Title();

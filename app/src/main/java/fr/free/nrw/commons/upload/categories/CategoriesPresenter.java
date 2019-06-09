@@ -23,6 +23,9 @@ import javax.inject.Singleton;
 
 import timber.log.Timber;
 
+/**
+ * The presenter class for UploadCategoriesFragment
+ */
 @Singleton
 public class CategoriesPresenter implements CategoriesContract.UserActionListener {
 

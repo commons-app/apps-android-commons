@@ -7,6 +7,8 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
 
+import org.wikipedia.dataclient.WikiSite;
+
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;

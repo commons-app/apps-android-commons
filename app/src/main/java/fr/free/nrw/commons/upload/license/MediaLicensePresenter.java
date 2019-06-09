@@ -12,6 +12,9 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
+/**
+ * Added JavaDocs for MediaLicensePresenter
+ */
 public class MediaLicensePresenter implements MediaLicenseContract.UserActionListener {
 
     private static final MediaLicenseContract.View DUMMY = (MediaLicenseContract.View) Proxy

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -138,7 +139,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     }
 
     private void initViewPager() {
-        vpUpload.setOffscreenPageLimit(0);
         uploadImagesAdapter=new UploadImageAdapter(getSupportFragmentManager());
         vpUpload.setAdapter(uploadImagesAdapter);
         vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -431,6 +431,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         }
 
         @Override public int getCount() {
+            //I understand this is not the best way, I will think of something better than this
+            vpUpload.setOffscreenPageLimit(fragments.size());
             return fragments.size();
         }
 

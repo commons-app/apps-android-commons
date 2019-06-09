@@ -18,6 +18,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/**
+ * This class would act as the data source for remote operations for UploadActivity
+ */
 @Singleton
 public class UploadRemoteDataSource {
 
@@ -72,6 +75,14 @@ public class UploadRemoteDataSource {
      */
     public void cleanup() {
         uploadController.cleanup();
+    }
+
+    /**
+     * Clean up the selected categories
+     */
+    public void clearSelectedCategories(){
+        //This needs further refactoring, this should not be here, right now the structure wont suppoort rhis
+        categoriesModel.cleanUp();
     }
 
     /**
