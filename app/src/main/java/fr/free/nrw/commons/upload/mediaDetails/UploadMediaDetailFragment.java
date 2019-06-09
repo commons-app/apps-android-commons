@@ -1,9 +1,12 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -159,6 +162,33 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         attachImageViewScaleChangeListener();
+
+        addEtTitleTouchListener();
+    }
+
+    /**
+     * Handles the drawable click listener for Edit Text
+     */
+    private void addEtTitleTouchListener() {
+        etTitle.setOnTouchListener((v, event) -> {
+            //2 is for drawable right
+            float twelveDpInPixels = convertDpToPixel(12, getContext());
+            if (event.getAction() == MotionEvent.ACTION_UP && etTitle.getCompoundDrawables()[2].getBounds().contains((int)(etTitle.getWidth()-(event.getX()+twelveDpInPixels)),(int)(event.getY()-twelveDpInPixels))){
+                showInfoAlert(R.string.media_detail_title,R.string.title_info);
+                return true;
+            }
+            return false;
+        });
+    }
+
+    /**
+     * converts dp to pixel
+     * @param dp
+     * @param context
+     * @return
+     */
+    private float convertDpToPixel(float dp, Context context) {
+        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     /**
