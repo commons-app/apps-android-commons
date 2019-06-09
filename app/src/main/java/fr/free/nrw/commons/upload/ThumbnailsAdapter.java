@@ -21,6 +21,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The adapter class for image thumbnails to be shown while uploading.
+ */
 class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolder> {
 
     List<UploadableFile> uploadableFiles;
@@ -31,6 +34,10 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
         this.callback = callback;
     }
 
+    /**
+     * Sets the data, the media files
+     * @param uploadableFiles
+     */
     public void setUploadableFiles(
             List<UploadableFile> uploadableFiles) {
         this.uploadableFiles=uploadableFiles;
@@ -68,6 +75,10 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
             ButterKnife.bind(this, itemView);
         }
 
+        /**
+         * Binds a row item to the ViewHolder
+         * @param position
+         */
         public void bind(int position) {
             UploadableFile uploadableFile = uploadableFiles.get(position);
             Uri uri = uploadableFile.getMediaUri();
@@ -91,6 +102,9 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
         }
     }
 
+    /**
+     * Callback used to get the current selected file position
+     */
     interface Callback {
 
         int getCurrentSelectedFilePosition();
