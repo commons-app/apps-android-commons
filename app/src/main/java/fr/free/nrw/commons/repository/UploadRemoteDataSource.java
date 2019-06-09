@@ -18,6 +18,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/**
+ * This class would act as the data source for remote operations for UploadActivity
+ */
 @Singleton
 public class UploadRemoteDataSource {
 
