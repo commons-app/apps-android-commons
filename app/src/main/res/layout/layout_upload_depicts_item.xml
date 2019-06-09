@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/depicts_layout"
-    android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
-<CheckBox
-    android:id="@+id/tvName"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:checkMark="?android:attr/textCheckMark"
-    android:checked="false"
-    android:gravity="center_vertical"
-    android:padding="@dimen/tiny_gap"/>
+
+    <CheckBox
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkMark="?android:attr/textCheckMark"
+        android:checked="false"
+        android:gravity="center_vertical"
+        android:padding="@dimen/tiny_gap"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/depicts_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Label"/>
+        android:text="Label"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/tvName"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"/>
-</LinearLayout>
+        android:text="Description"
+        app:layout_constraintLeft_toRightOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/depicts_label" />
+</androidx.constraintlayout.widget.ConstraintLayout>

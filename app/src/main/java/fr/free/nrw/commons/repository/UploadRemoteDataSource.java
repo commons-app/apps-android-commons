@@ -10,6 +10,8 @@ import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.structure.depicts.DepictModel;
+import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -25,13 +27,15 @@ public class UploadRemoteDataSource {
     private UploadModel uploadModel;
     private UploadController uploadController;
     private CategoriesModel categoriesModel;
+    private DepictModel depictModel;
 
     @Inject
     public UploadRemoteDataSource(UploadModel uploadModel, UploadController uploadController,
-                                  CategoriesModel categoriesModel) {
+                                  CategoriesModel categoriesModel, DepictModel depictModel) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
         this.categoriesModel = categoriesModel;
+        this.depictModel = depictModel;
     }
 
     /**
@@ -186,5 +190,9 @@ public class UploadRemoteDataSource {
      */
     public Single<Integer> getImageQuality(UploadItem uploadItem, boolean shouldValidateTitle) {
         return uploadModel.getImageQuality(uploadItem, shouldValidateTitle);
+    }
+
+    public void onDepictedItemClicked(DepictedItem depictedItem) {
+        depictModel.onDepictItemClicked(depictedItem);
     }
 }

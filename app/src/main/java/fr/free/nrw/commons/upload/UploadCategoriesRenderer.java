@@ -55,6 +55,6 @@ public class UploadCategoriesRenderer extends Renderer<CategoryItem> {
     public void render() {
         CategoryItem item = getContent();
         checkedView.setChecked(item.isSelected());
-        checkedView.setText(item.getName());
+
     }
 }

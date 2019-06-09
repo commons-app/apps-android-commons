@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
@@ -21,30 +21,27 @@ import timber.log.Timber;
 
 public class DepictModel {
     private static final int SEARCH_DEPICTS_LIMIT = 25;
-
-    private List<DepictedItem> selectedDepictedItems;
     private final DepictDao depictDao;
     private final MediaWikiApi mediaWikiApi;
     private final JsonKvStore directKvStore;
-
+    @Inject
+    GpsDepictsModel gpsDepictsModel;
+    private List<DepictedItem> selectedDepictedItems;
     private HashMap<String, ArrayList<String>> depictsCache;
 
     @Inject
-    GpsDepictsModel gpsDepictsModel;
-
-    @Inject
-    public DepictModel(List<DepictedItem> selectedDepictedItems, DepictDao depictDao, MediaWikiApi mediaWikiApi, JsonKvStore directKvStore, HashMap<String, ArrayList<String>> depictsCache) {
-        this.selectedDepictedItems = selectedDepictedItems;
-        this.depictDao = depictDao;
+    public DepictModel(MediaWikiApi mediaWikiApi, DepictDao depictDao, @Named("default_preferences") JsonKvStore directKvStore) {
         this.mediaWikiApi = mediaWikiApi;
+        this.depictDao = depictDao;
         this.directKvStore = directKvStore;
-        this.depictsCache = depictsCache;
+        this.depictsCache = new HashMap<>();
+        this.selectedDepictedItems = new ArrayList<>();
     }
 
     public Comparator<DepictedItem> sortBySimilarity(final String filter) {
         Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
         return (firstItem, secondItem) -> stringSimilarityComparator
-                .compare(firstItem.getName(), secondItem.getName());
+                .compare(firstItem.getDepictsLabel(), secondItem.getDescription());
     }
 
     public boolean containsYear(String item) {
@@ -69,6 +66,7 @@ public class DepictModel {
     public void cacheAll(HashMap<String, ArrayList<String>> categories) {
         depictsCache.putAll(categories);
     }
+
     public HashMap<String, ArrayList<String>> getDepictsCache() {
         return depictsCache;
     }
@@ -107,12 +105,12 @@ public class DepictModel {
 
         return mediaWikiApi
                 .searchCategories(term, SEARCH_DEPICTS_LIMIT)
-                .map(s -> new DepictedItem(s, false));
+                .map(s -> new DepictedItem(s, "", null, false));
     }
 
 
-    public void onDepictItemClicked(DepictedItem depictedItem){
-        if (depictedItem.isSelected()){
+    public void onDepictItemClicked(DepictedItem depictedItem) {
+        if (depictedItem.isSelected()) {
             selectDepictItem(depictedItem);
             updateDepictCount(depictedItem);
         } else {
@@ -124,10 +122,10 @@ public class DepictModel {
     }
 
     private void updateDepictCount(DepictedItem depictedItem) {
-        Depiction depiction = depictDao.find(depictedItem.getName());
+        Depiction depiction = depictDao.find(depictedItem.getDepictsLabel());
 
         if (depictedItem == null) {
-            depiction = new Depiction(null, depictedItem.getName(), new Date(), 0);
+            depiction = new Depiction(null, depictedItem.getDepictsLabel(), new Date(), 0);
         }
 
         depiction.incTimesUsed();
@@ -140,7 +138,7 @@ public class DepictModel {
 
     Observable<DepictedItem> gpsDepicts() {
         return Observable.fromIterable(gpsDepictsModel.getCategoryList())
-                .map(name -> new DepictedItem(name, false));
+                .map(name -> new DepictedItem(name, "", null, false));
     }
 
     private Observable<DepictedItem> titleDepicts(List<UploadMediaDetail> titleList) {
@@ -150,11 +148,11 @@ public class DepictModel {
 
     private Observable<DepictedItem> getTitleDepicts(UploadMediaDetail uploadMediaDetail) {
         return mediaWikiApi.searchTitles(uploadMediaDetail.getCaptionText(), SEARCH_DEPICTS_LIMIT)
-                .map(name -> new DepictedItem(name, false));
+                .map(name -> new DepictedItem(name, "", null, false));
     }
 
     private Observable<DepictedItem> recentDepicts() {
         return Observable.fromIterable(depictDao.recentDepicts(SEARCH_DEPICTS_LIMIT))
-                .map(s -> new DepictedItem(s, false));
+                .map(s -> new DepictedItem(s, "", null, false));
     }
 }

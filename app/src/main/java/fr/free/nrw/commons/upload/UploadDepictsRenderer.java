@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.pedrogomez.renderers.Renderer;
 
@@ -17,6 +19,11 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
     private final DepictsClickedListener listener;
     @BindView(R.id.tvName)
     CheckBox checkedView;
+    @BindView(R.id.thumbnail)
+    ImageView thumbnail;
+    @BindView(R.id.depicts_label)
+    TextView depictsLabel;
+    @BindView(R.id.description) TextView description;
 
     public UploadDepictsRenderer(DepictsClickedListener listener) {
         this.listener = listener;
@@ -48,6 +55,8 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
     public void render() {
         DepictedItem item = getContent();
         checkedView.setChecked(item.isSelected());
-        checkedView.setText(item.getName());
+        depictsLabel.setText(item.getDepictsLabel());
+        description.setText(item.getDescription());
+        thumbnail.setImageResource(R.drawable.empty_photo);
     }
 }

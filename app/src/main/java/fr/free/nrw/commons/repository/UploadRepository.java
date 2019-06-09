@@ -7,6 +7,7 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -279,5 +280,9 @@ public class UploadRepository {
      */
     public void setSelectedLicense(String licenseName) {
         localDataSource.setSelectedLicense(licenseName);
+    }
+
+    public void onDepictItemClicked(DepictedItem depictedItem) {
+        remoteDataSource.onDepictedItemClicked(depictedItem);
     }
 }

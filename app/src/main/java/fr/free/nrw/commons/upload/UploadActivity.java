@@ -49,6 +49,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
+import fr.free.nrw.commons.upload.structure.depicts.DepictModel;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
@@ -61,6 +62,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     @Inject @Named("default_preferences") JsonKvStore directKvStore;
     @Inject UploadContract.UserActionListener presenter;
     @Inject CategoriesModel categoriesModel;
+    @Inject
+    DepictModel depictModel;
     @Inject SessionManager sessionManager;
 
     @BindView(R.id.cv_container_top_card)

@@ -14,15 +14,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Provider;
-
-import fr.free.nrw.commons.category.CategoryDao;
 
 public class DepictDao {
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject
-    public DepictDao(Provider<ContentProviderClient> clientProvider) {
+    public DepictDao(@Named("depicts") Provider<ContentProviderClient> clientProvider) {
         this.clientProvider = clientProvider;
     }
 
@@ -98,7 +97,7 @@ public class DepictDao {
     Depiction fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         return new Depiction(
-                DepictsContentProvider.uriForId(cursor.getInt(cursor.getColumnIndex(CategoryDao.Table.COLUMN_ID))),
+                DepictsContentProvider.uriForId(cursor.getInt(cursor.getColumnIndex(DepictDao.Table.COLUMN_ID))),
                 cursor.getString(cursor.getColumnIndex(DepictDao.Table.COLUMN_NAME)),
                 new Date(cursor.getLong(cursor.getColumnIndex(DepictDao.Table.COLUMN_LAST_USED))),
                 cursor.getInt(cursor.getColumnIndex(DepictDao.Table.COLUMN_TIMES_USED))

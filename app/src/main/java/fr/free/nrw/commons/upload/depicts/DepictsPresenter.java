@@ -55,8 +55,10 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
     @Override
     public void searchForDepictions(String query, List<UploadMediaDetail> mediaDetailList) {
         List<DepictedItem> depictedItemList = new ArrayList<>();
-        depictedItemList.add(new DepictedItem("monument",false));
-        depictedItemList.add(new DepictedItem("scultpture",false));
+        depictedItemList.add(new DepictedItem("monument", "desc", null, false));
+        depictedItemList.add(new DepictedItem("scultpture", "desc", null, false));
+        depictedItemList.add(new DepictedItem("monument", "desc", null, false));
+        depictedItemList.add(new DepictedItem("scultpture", "desc", null, false));
         view.setDepictsList(depictedItemList);
     }
 }

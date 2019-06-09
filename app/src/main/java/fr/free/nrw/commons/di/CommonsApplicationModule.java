@@ -31,6 +31,9 @@ import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -86,6 +89,12 @@ public class CommonsApplicationModule {
     @Named("category")
     public ContentProviderClient provideCategoryContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.CATEGORY_AUTHORITY);
+    }
+
+    @Provides
+    @Named("depicts")
+    public ContentProviderClient provideDepictsContentProviderClient(Context context) {
+        return context.getContentResolver().acquireContentProviderClient("fr.free.nrw.commons.beta.depicts.contentprovider");
     }
 
     /**
@@ -161,6 +170,17 @@ public class CommonsApplicationModule {
     @Singleton
     public WikidataEditListener provideWikidataEditListener() {
         return new WikidataEditListenerImpl();
+    }
+
+    @Named(IO_THREAD)
+    @Provides
+    public Scheduler providesIoThread(){
+        return Schedulers.io();
+    }
+    @Named(MAIN_THREAD)
+    @Provides
+    public Scheduler providesMainThread(){
+        return AndroidSchedulers.mainThread();
     }
 
     /**
