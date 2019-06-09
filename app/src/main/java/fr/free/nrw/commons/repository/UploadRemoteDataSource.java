@@ -75,6 +75,14 @@ public class UploadRemoteDataSource {
     }
 
     /**
+     * Clean up the selected categories
+     */
+    public void clearSelectedCategories(){
+        //This needs further refactoring, this should not be here, right now the structure wont suppoort rhis
+        categoriesModel.cleanUp();
+    }
+
+    /**
      * returnt the list of selected categories
      *
      * @return

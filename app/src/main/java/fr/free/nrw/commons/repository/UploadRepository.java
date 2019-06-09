@@ -63,10 +63,11 @@ public class UploadRepository {
     }
 
     /**
-     * asks the local data source to clean up its resources, prepare for a fresh upload
+     *Prepare for a fresh upload
      */
     public void cleanup() {
         localDataSource.cleanUp();
+        remoteDataSource.clearSelectedCategories();
     }
 
     /**
