@@ -4,23 +4,20 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 import android.text.TextUtils;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.repository.UploadRepository;
+import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-
 import timber.log.Timber;
 
 /**
@@ -64,14 +61,14 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
 
     /**
      * asks the repository to fetch categories for the query
+     *  @param query
      *
-     * @param query
-     * @param imageTitleList
      */
     @Override
-    public void searchForCategories(String query, List<String> imageTitleList) {
+    public void searchForCategories(String query) {
         List<CategoryItem> categoryItems = new ArrayList<>();
-        Disposable searchCategoriesDisposable = Observable
+        List<String> imageTitleList = getImageTitleList();
+        Observable<CategoryItem> distinctCategoriesObservable = Observable
                 .fromIterable(repository.getSelectedCategories())
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
@@ -83,14 +80,13 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                 .observeOn(ioScheduler)
                 .concatWith(
                         repository.searchAll(query, imageTitleList)
-                                .mergeWith(repository.searchCategories(query, imageTitleList))
-                                .concatWith(TextUtils.isEmpty(query)
-                                        ? repository.defaultCategories(imageTitleList)
-                                        : Observable.empty())
                 )
                 .filter(categoryItem -> !repository.containsYear(categoryItem.getName()))
-                .distinct()
-                .sorted(repository.sortBySimilarity(query))
+                .distinct();
+                if(!TextUtils.isEmpty(query)) {
+                distinctCategoriesObservable=distinctCategoriesObservable.sorted(repository.sortBySimilarity(query));
+                }
+        Disposable searchCategoriesDisposable = distinctCategoriesObservable
                 .observeOn(mainThreadScheduler)
                 .subscribe(
                         s -> categoryItems.add(s),
@@ -106,6 +102,20 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                 );
 
         compositeDisposable.add(searchCategoriesDisposable);
+    }
+
+    /**
+     * Returns image title list from UploadItem
+     * @return
+     */
+    private List<String> getImageTitleList() {
+        List<String> titleList = new ArrayList<>();
+        for (UploadItem item : repository.getUploads()) {
+            if (item.getTitle().isSet()) {
+                titleList.add(item.getTitle().toString());
+            }
+        }
+        return titleList;
     }
 
     /**

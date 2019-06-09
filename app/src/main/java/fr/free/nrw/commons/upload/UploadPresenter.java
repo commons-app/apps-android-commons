@@ -86,16 +86,6 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         }
     }
 
-    public List<String> getImageTitleList() {
-        List<String> titleList = new ArrayList<>();
-        for (UploadItem item : repository.getUploads()) {
-            if (item.getTitle().isSet()) {
-                titleList.add(item.getTitle().toString());
-            }
-        }
-        return titleList;
-    }
-
     @Override
     public void deletePictureAtIndex(int index) {
         List<UploadableFile> uploadableFiles = view.getUploadableFiles();

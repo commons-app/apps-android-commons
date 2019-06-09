@@ -1,22 +1,19 @@
 package fr.free.nrw.commons.category;
 
 import android.text.TextUtils;
-
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.upload.GpsCategoryModel;
+import fr.free.nrw.commons.utils.StringSortingUtils;
+import io.reactivex.Observable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.upload.GpsCategoryModel;
-import fr.free.nrw.commons.utils.StringSortingUtils;
-import io.reactivex.Observable;
 import timber.log.Timber;
 
 /**
@@ -107,11 +104,14 @@ public class CategoriesModel{
      * @return
      */
     public Observable<CategoryItem> searchAll(String term, List<String> imageTitleList) {
-        //If user hasn't typed anything in yet, get GPS and recent items
+        //If query text is empty, show him category based on gps and title and recent searches
         if (TextUtils.isEmpty(term)) {
-            return gpsCategories()
-                    .concatWith(titleCategories(imageTitleList))
-                    .concatWith(recentCategories());
+            Observable<CategoryItem> categoryItemObservable = gpsCategories()
+                    .concatWith(titleCategories(imageTitleList));
+            if (hasDirectCategories()) {
+                categoryItemObservable.concatWith(directCategories().concatWith(recentCategories()));
+            }
+            return categoryItemObservable;
         }
 
         //if user types in something that is in cache, return cached category
@@ -126,18 +126,6 @@ public class CategoriesModel{
                 .map(name -> new CategoryItem(name, false));
     }
 
-    public Observable<CategoryItem> searchCategories(String term, List<String> imageTitleList) {
-        //If user hasn't typed anything in yet, get GPS and recent items
-        if (TextUtils.isEmpty(term)) {
-            return gpsCategories()
-                    .concatWith(titleCategories(imageTitleList))
-                    .concatWith(recentCategories());
-        }
-
-        return mwApi
-                .searchCategories(term, SEARCH_CATS_LIMIT)
-                .map(s -> new CategoryItem(s, false));
-    }
 
     /**
      * Returns cached categories
@@ -146,27 +134,6 @@ public class CategoriesModel{
      */
     private ArrayList<String> getCachedCategories(String term) {
         return categoriesCache.get(term);
-    }
-
-    /**
-     * Returns default categories
-     * @param titleList
-     * @return
-     */
-    public Observable<CategoryItem> defaultCategories(List<String> titleList) {
-        Observable<CategoryItem> directCat = directCategories();
-        if (hasDirectCategories()) {
-            Timber.d("Image has direct Cat");
-            return directCat
-                    .concatWith(gpsCategories())
-                    .concatWith(titleCategories(titleList))
-                    .concatWith(recentCategories());
-        } else {
-            Timber.d("Image has no direct Cat");
-            return gpsCategories()
-                    .concatWith(titleCategories(titleList))
-                    .concatWith(recentCategories());
-        }
     }
 
     /**

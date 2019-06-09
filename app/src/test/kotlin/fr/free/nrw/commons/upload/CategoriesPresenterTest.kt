@@ -60,7 +60,7 @@ class CategoriesPresenterTest {
         Mockito.`when`(repository?.searchCategories(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
         Mockito.`when`(repository?.searchAll(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
         Mockito.`when`(repository?.defaultCategories(ArgumentMatchers.anyList())).thenReturn(Observable.empty())
-        categoriesPresenter?.searchForCategories("test", imageTitleList)
+        categoriesPresenter?.searchForCategories("test")
         verify(view)?.showProgress(true)
         verify(view)?.showError(null)
         verify(view)?.setCategories(null)
