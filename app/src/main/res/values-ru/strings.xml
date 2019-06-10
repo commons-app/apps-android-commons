@@ -187,6 +187,7 @@
   <string name="storage_permission_title">Запрос разрешения по использованию внешнего носителя</string>
   <string name="read_storage_permission_rationale">Требуемые разрешения: чтение с внешнего носителя. Приложение не сможет получить доступ к вашей галерее без этого разрешения.</string>
   <string name="write_storage_permission_rationale">Требуемые разрешения: запись на внешнее хранилище. Приложение не сможет получить доступ к галерее/камере без этого разрешения.</string>
+  <string name="location_permission_title">Запрос разрешения по определение местоположения</string>
   <string name="location_permission_rationale">Необязательное разрешение: получение текущего местоположения для предложения категорий</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Места поблизости</string>

@@ -156,4 +156,6 @@
   <string name="submit">{{Identical|Submit}}</string>
   <string name="log_collection_started">\"Send log file\" is {{msg-wm|Commons-android-strings-send log file}}.</string>
   <string name="nominate_for_deletion_done">{{Identical|Done}}</string>
+  <string name="exif_tag_name_author">{{Identical|Author}}</string>
+  <string name="exif_tag_name_location">{{Identical|Location}}</string>
 </resources>

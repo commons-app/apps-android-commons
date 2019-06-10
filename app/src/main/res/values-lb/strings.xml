@@ -338,4 +338,9 @@
   <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>
   <string name="please_wait">Waart w.e.g. ...</string>
   <string name="skip_image">DËST BILD IWWERWSPRANGEN</string>
+  <string name="exif_tag_name_author">Auteur</string>
+  <string name="exif_tag_name_copyright">Copyright</string>
+  <string name="exif_tag_name_location">Plaz</string>
+  <string name="exif_tag_name_serialNumbers">Seriennummeren</string>
+  <string name="exif_tag_name_software">Software</string>
 </resources>

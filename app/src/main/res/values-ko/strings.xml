@@ -176,6 +176,7 @@
   <string name="storage_permission_title">기억 장치 권한 요청 중</string>
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 갤러리에 접근할 수 없습니다.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라에 접근할 수 없습니다.</string>
+  <string name="location_permission_title">위치 권한 요청 중</string>
   <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
   <string name="ok">확인</string>
   <string name="title_activity_nearby">근처의 장소</string>
@@ -458,6 +459,7 @@
   <string name="exif_tag_name_copyright">저작권</string>
   <string name="exif_tag_name_location">위치</string>
   <string name="exif_tag_name_cameraModel">카메라 모델</string>
+  <string name="exif_tag_name_lensModel">렌즈 모델</string>
   <string name="exif_tag_name_serialNumbers">일련 번호</string>
   <string name="exif_tag_name_software">소프트웨어</string>
   <string name="share_via">앱 공유...</string>
