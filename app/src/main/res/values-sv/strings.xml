@@ -15,6 +15,7 @@
   <string name="preference_category_appearance">Utseende</string>
   <string name="preference_category_general">Allmänt</string>
   <string name="preference_category_feedback">Återkoppling</string>
+  <string name="preference_category_privacy">Integritet</string>
   <string name="preference_category_location">Plats</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -512,6 +513,15 @@
   <string name="welcome_dont_upload_content_description">Exempel på bilder att inte ladda upp</string>
   <string name="skip_image">HOPPA ÖVER DENNA BILD</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Nedladdning misslyckades!! Vi kan inte ladda ned filen utan behörighet för extern lagring.</string>
+  <string name="manage_exif_tags">Hantera EXIF-taggar</string>
+  <string name="manage_exif_tags_summary">Välj vilka EXIF-taggar att behålla i uppladdningar</string>
+  <string name="exif_tag_name_author">Skapare</string>
+  <string name="exif_tag_name_copyright">Upphovsrätt</string>
+  <string name="exif_tag_name_location">Plats</string>
+  <string name="exif_tag_name_cameraModel">Kameramodell</string>
+  <string name="exif_tag_name_lensModel">Linsmodell</string>
+  <string name="exif_tag_name_serialNumbers">Serienummer</string>
+  <string name="exif_tag_name_software">Programvara</string>
   <string name="share_text">Ladda upp foton till Wikimedia Commons på din telefon Ladda ned Commons-appen: %1$s</string>
   <string name="share_via">Dela appen via...</string>
   <string name="image_info">Bildinfo</string>

@@ -298,7 +298,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void requestLocationPermissions(LocationServiceManager locationServiceManager) {
         if (!getActivity().isFinishing()) {
-            locationServiceManager.requestPermissions(getActivity());
+            locationServiceManager.requestPermissions();
         }
     }
 

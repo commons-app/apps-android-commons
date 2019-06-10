@@ -166,6 +166,7 @@
   <string name="storage_permission_title">Requesting Storage Permission</string>
   <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot access your gallery without this.</string>
   <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera/gallery without this.</string>
+  <string name="location_permission_title">Requesting Location Permission</string>
   <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nearby Places</string>

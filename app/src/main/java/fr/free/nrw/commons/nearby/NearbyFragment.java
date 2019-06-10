@@ -1,20 +1,11 @@
 package fr.free.nrw.commons.nearby;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +13,19 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
@@ -38,6 +36,7 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
@@ -45,6 +44,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
@@ -193,8 +194,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
 
             @Override
-            public void onStateChanged(View bottomSheet, int newState) {
-                prepareViewsForSheetPosition(newState);
+            public void onStateChanged(View bottomSheet, int unusedNewState) {
+                prepareViewsForSheetPosition();
             }
 
             @Override
@@ -210,9 +211,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
     /**
      * Sets camera position, zoom level according to sheet positions
-     * @param bottomSheetState expanded, collapsed or hidden
      */
-    public void prepareViewsForSheetPosition(int bottomSheetState) {
+    private void prepareViewsForSheetPosition() {
         // TODO
     }
 
@@ -246,7 +246,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      *
      * @param locationChangeType defines if location changed significantly or slightly
      */
-    public void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
+    private void refreshView(LocationServiceManager.LocationChangeType locationChangeType) {
         Timber.d("Refreshing nearby places");
         if (lockNearbyView) {
             return;
@@ -324,7 +324,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * button. It populates places for custom location.
      * @param customLatLng Custom area which we will search around
      */
-    public void refreshViewForCustomLocation(LatLng customLatLng, boolean refreshForCurrentLocation) {
+    void refreshViewForCustomLocation(LatLng customLatLng, boolean refreshForCurrentLocation) {
         if (customLatLng == null) {
             // If null, return
             return;
@@ -568,130 +568,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * This method first checks if the location permissions has been granted and then register the location manager for updates.
      */
     private void registerLocationUpdates() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (locationManager.isLocationPermissionGranted(requireContext())) {
-                locationManager.registerLocationManager(getActivity());
-            } else {
-                // Should we show an explanation?
-                if (locationManager.isPermissionExplanationRequired(getActivity())) {
-                    new AlertDialog.Builder(getActivity())
-                            .setMessage(getString(R.string.location_permission_rationale_nearby))
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                requestLocationPermissions();
-                                dialog.dismiss();
-                            })
-                            .setNegativeButton(android.R.string.cancel, (dialog, id) -> {
-                                showLocationPermissionDeniedErrorDialog();
-                                dialog.cancel();
-                            })
-                            .create()
-                            .show();
 
-                } else {
-                    // No explanation needed, we can request the permission.
-                    requestLocationPermissions();
-                }
-            }
-        } else {
-            locationManager.registerLocationManager(getActivity());
-        }
-    }
-
-    /**
-     * Requests location permission if activity is not null
-     */
-    private void requestLocationPermissions() {
-        if (!getActivity().isFinishing()) {
-            locationManager.requestPermissions(getActivity());
-        }
-    }
-
-    /**
-     * Will warn user if location is denied
-     */
-    private void showLocationPermissionDeniedErrorDialog() {
-        new AlertDialog.Builder(getActivity())
-                .setMessage(R.string.nearby_needs_permissions)
-                .setCancelable(false)
-                .setPositiveButton(R.string.give_permission, (dialog, which) -> {
-                    //will ask for the location permission again
-                    checkGps();
-                })
-                .setNegativeButton(R.string.cancel, (dialog, which) -> {
-                    //dismiss dialog and send user to contributions tab instead
-                    dialog.cancel();
-                    ((MainActivity)getActivity()).viewPager.setCurrentItem(((MainActivity)getActivity()).CONTRIBUTIONS_TAB_POSITION);
-                })
-                .create()
-                .show();
-    }
-
-    /**
-     * Checks device GPS permission first for all API levels
-     */
-    private void checkGps() {
-        Timber.d("checking GPS");
-        if (!locationManager.isProviderEnabled()) {
-            Timber.d("GPS is not enabled");
-            new AlertDialog.Builder(getActivity())
-                    .setMessage(R.string.gps_disabled)
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.enable_gps,
-                            (dialog, id) -> {
-                                Intent callGPSSettingIntent = new Intent(
-                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                Timber.d("Loaded settings page");
-                                startActivityForResult(callGPSSettingIntent, 1);
-                            })
-                    .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                        showLocationPermissionDeniedErrorDialog();
-                        dialog.cancel();
-                    })
-                    .create()
-                    .show();
-        } else {
-            Timber.d("GPS is enabled");
-            checkLocationPermission();
-        }
-    }
-
-    /**
-     * This method ideally should be called from inside of CheckGPS method. If device GPS is enabled
-     * then we need to control app specific permissions for >=M devices. For other devices, enabled
-     * GPS is enough for nearby, so directly call refresh view.
-     */
-    private void checkLocationPermission() {
-        Timber.d("Checking location permission");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (locationManager.isLocationPermissionGranted(requireContext())) {
-                refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
-            } else {
-                // Should we show an explanation?
-                if (locationManager.isPermissionExplanationRequired(getActivity())) {
-                    // Show an explanation to the user *asynchronously* -- don't block
-                    // this thread waiting for the user's response! After the user
-                    // sees the explanation, try again to request the permission.
-                    new AlertDialog.Builder(getActivity())
-                            .setMessage(getString(R.string.location_permission_rationale_nearby))
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                requestLocationPermissions();
-                                dialog.dismiss();
-                            })
-                            .setNegativeButton(android.R.string.cancel, (dialog, id) -> {
-                                showLocationPermissionDeniedErrorDialog();
-                                dialog.cancel();
-                            })
-                            .create()
-                            .show();
-
-                } else {
-                    // No explanation needed, we can request the permission.
-                    requestLocationPermissions();
-                }
-            }
-        } else {
-            refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
-        }
+        locationManager.registerLocationManager(getActivity());
     }
 
     private void showErrorMessage(String message) {
@@ -748,8 +626,12 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     public void onResume() {
         super.onResume();
         // Resume the fragment if exist
-        resumeFragment();
+        if (((MainActivity) getActivity()).viewPager.getCurrentItem() == NEARBY_TAB_POSITION) {
+            checkPermissionsAndPerformAction(this::resumeFragment);
+        } else {
+            resumeFragment();
         }
+    }
 
     /**
      * Perform nearby operations on nearby tab selected
@@ -758,8 +640,16 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     public void onTabSelected(boolean onOrientationChanged) {
         Timber.d("On nearby tab selected");
         this.onOrientationChanged = onOrientationChanged;
-        performNearbyOperations();
+        checkPermissionsAndPerformAction(this::performNearbyOperations);
+    }
 
+    private void checkPermissionsAndPerformAction(Runnable runnable) {
+        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                runnable,
+                () -> ((MainActivity) getActivity()).viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION),
+                R.string.location_permission_title,
+                R.string.location_permission_rationale_nearby);
     }
 
     /**
@@ -769,8 +659,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         locationManager.addLocationListener(this);
         registerLocationUpdates();
         lockNearbyView = false;
-        checkGps();
         addNetworkBroadcastReceiver();
+        refreshView(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
