@@ -11,10 +11,6 @@ public interface NearbyParentFragmentContract {
         void setListFragmentExpanded();
         void refreshView();
         void registerLocationUpdates(LocationServiceManager locationServiceManager);
-        void requestLocationPermissions(LocationServiceManager locationServiceManager);
-        void showLocationPermissionDeniedErrorDialog(LocationServiceManager locationServiceManager);
-        void checkGps(LocationServiceManager locationServiceManager);
-        void checkLocationPermission(LocationServiceManager locationServiceManager);
         boolean isNetworkConnectionEstablished();
         void addNetworkBroadcastReceiver();
         void listOptionMenuItemClicked();
@@ -23,6 +19,8 @@ public interface NearbyParentFragmentContract {
         void addSearchThisAreaButtonAction();
         void setSearchThisAreaButtonVisibility(boolean isVisible);
         void setSearchThisAreaProgressVisibility(boolean isVisible);
+        void checkPermissionsAndPerformAction(Runnable runnable);
+        void resumeFragment();
     }
 
     interface UserActions {

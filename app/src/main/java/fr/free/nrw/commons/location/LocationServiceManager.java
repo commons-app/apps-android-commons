@@ -48,7 +48,7 @@ public class LocationServiceManager implements LocationListener {
     /**
      * Registers a LocationManager to listen for current location.
      */
-    public void registerLocationManager(Context context) {
+    public void registerLocationManager() {
         if (!isLocationManagerRegistered) {
             isLocationManagerRegistered = requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
                     && requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);

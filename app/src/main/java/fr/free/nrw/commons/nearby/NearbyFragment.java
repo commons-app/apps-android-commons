@@ -44,6 +44,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.snackbar.Snackbar;
+
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
@@ -104,6 +107,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
+
 
     @Nullable
     @Override
@@ -569,7 +573,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      */
     private void registerLocationUpdates() {
 
-        locationManager.registerLocationManager(getActivity());
+        locationManager.registerLocationManager();
     }
 
     private void showErrorMessage(String message) {

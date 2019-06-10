@@ -501,7 +501,7 @@ public class ContributionsFragment
 
     private void onLocationPermissionGranted() {
         nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-        locationManager.registerLocationManager(getActivity());
+        locationManager.registerLocationManager();
     }
 
     private void showNearbyCardPermissionRationale() {

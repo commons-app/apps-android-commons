@@ -11,6 +11,7 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.utils.LocationUtils;
 
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
@@ -109,11 +110,12 @@ public class NearbyParentFragmentPresenter
         Timber.d("initializing nearby operations started");
         // Add location listener to be notified about location changes
         locationServiceManager.addLocationListener(this);
+        nearbyParentFragmentView.checkPermissionsAndPerformAction(nearbyParentFragmentView::resumeFragment);
         nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
         // Nearby buttons should be active, they should be inactive only during update
         lockNearby(false);
         // This will start a consequence to check GPS depending on different API
-        nearbyParentFragmentView.checkGps(locationServiceManager);
+        //nearbyParentFragmentView.checkGps(locationServiceManager);
         // We will know when we went offline and online again
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
     }
