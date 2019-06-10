@@ -93,6 +93,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/share_title_hint"
                             android:imeOptions="actionNext"
+                            android:drawableEnd="@drawable/mapbox_info_icon_default"
                             android:inputType="text"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>

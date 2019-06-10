@@ -49,8 +49,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Inject
     CategoriesContract.UserActionListener presenter;
     private RVRendererAdapter<CategoryItem> adapter;
-    private List<String> mediaTitleList;
+    private List<String> mediaTitleList=new ArrayList<>();
     private Disposable subscribe;
+    private List<CategoryItem> categories;
+    private boolean isVisible;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,7 +84,14 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         initRecyclerView();
         addTextChangeListenerToEtSearch();
         //get default categories for empty query
-        presenter.searchForCategories(null,mediaTitleList);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (presenter != null && isVisible && (categories == null || categories.isEmpty())) {
+            presenter.searchForCategories(null);
+        }
     }
 
     private void addTextChangeListenerToEtSearch() {
@@ -95,7 +104,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     private void searchForCategory(String query) {
-        presenter.searchForCategories(query, mediaTitleList);
+        presenter.searchForCategories(query);
     }
 
     private void initRecyclerView() {
@@ -130,8 +139,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     public void setCategories(List<CategoryItem> categories) {
         adapter.clear();
-        if (categories == null) {
-        } else {
+        if (categories != null) {
+            this.categories = categories;
             adapter.addAll(categories);
             adapter.notifyDataSetChanged();
         }
@@ -177,5 +186,15 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     public void categoryClicked(CategoryItem item) {
         presenter.onCategoryItemClicked(item);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        isVisible = isVisibleToUser;
+
+        if (presenter != null && isResumed() && (categories == null || categories.isEmpty())) {
+            presenter.searchForCategories(null);
+        }
     }
 }

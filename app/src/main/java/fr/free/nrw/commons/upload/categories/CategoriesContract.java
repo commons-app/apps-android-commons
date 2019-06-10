@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload.categories;
 
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public interface CategoriesContract {
 
     public interface UserActionListener extends BasePresenter<View> {
 
-        void searchForCategories(String query, List<String> imageTitleList);
+        void searchForCategories(String query);
 
         void verifyCategories();
 

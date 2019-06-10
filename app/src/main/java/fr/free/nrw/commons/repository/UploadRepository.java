@@ -94,27 +94,6 @@ public class UploadRepository {
     }
 
     /**
-     * searchCategories from MWApi
-     *
-     * @param query
-     * @param imageTitleList
-     * @return
-     */
-    public Observable<CategoryItem> searchCategories(String query, List<String> imageTitleList) {
-        return remoteDataSource.searchCategories(query, imageTitleList);
-    }
-
-    /**
-     * returns the default categorories for the list of images based on their titles
-     *
-     * @param imageTitleList
-     * @return
-     */
-    public Observable<CategoryItem> defaultCategories(List<String> imageTitleList) {
-        return remoteDataSource.defaultCategories(imageTitleList);
-    }
-
-    /**
      * returns the string list of categories
      *
      * @return
