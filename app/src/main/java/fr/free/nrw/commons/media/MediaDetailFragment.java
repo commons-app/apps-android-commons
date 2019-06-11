@@ -448,9 +448,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     }
     private void onDeleteClickedOthers(String reason){
-        Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
+        Single<Boolean> resultSingles = reasonBuilder.getReason(media, reason)
                 .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
-        compositeDisposable.add(resultSingle
+        compositeDisposable.add(resultSingles
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
