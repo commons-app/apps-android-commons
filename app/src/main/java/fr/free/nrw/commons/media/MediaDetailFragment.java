@@ -398,9 +398,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             input.requestFocus();
             alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
                 String reason = input.getText().toString();
-
-                deleteHelper.makeDeletion(getContext(), media, reason);
-                enableDeleteButton(false);
+                onDeleteClickedOthers(reason);
             });
             alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
             });
@@ -436,6 +434,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
         String reason = spinner.getSelectedItem().toString();
+        Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
+                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+        compositeDisposable.add(resultSingle
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    if (getActivity() != null) {
+                        isDeleted = true;
+                        enableDeleteButton(false);
+                    }
+                }));
+
+    }
+    private void onDeleteClickedOthers(String reason){
         Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
                 .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
         compositeDisposable.add(resultSingle
