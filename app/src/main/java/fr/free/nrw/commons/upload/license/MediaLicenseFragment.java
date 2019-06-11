@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 
 import java.util.List;
 
@@ -164,6 +163,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     public void onDestroyView() {
         super.onDestroyView();
         presenter.onDetachView();
+        //Free the adapter to avoid memory leaks
+        adapter=null;
     }
 
 
