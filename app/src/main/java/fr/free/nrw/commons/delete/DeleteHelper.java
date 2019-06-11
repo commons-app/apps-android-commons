@@ -109,10 +109,9 @@ public class DeleteHelper {
                     "Commons:Deletion_requests/" + media.getFilename(), summary);
             mwApi.appendEdit(editToken, logPageString + "\n",
                     "Commons:Deletion_requests/" + date, summary);
-            if(!sessionManager.getCurrentAccount().name.equals(media.getCreator())) {
-                mwApi.appendEdit(editToken, userPageString + "\n",
+            mwApi.appendEdit(editToken, userPageString + "\n",
                         "User_Talk:" + media.getCreator(), summary);
-            }
+
         } catch (Exception e) {
             Timber.e(e);
             return false;
