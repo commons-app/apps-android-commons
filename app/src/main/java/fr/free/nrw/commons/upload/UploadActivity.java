@@ -341,6 +341,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
             fragments.add(mediaLicenseFragment);
 
             uploadImagesAdapter.setFragments(fragments);
+            vpUpload.setOffscreenPageLimit(fragments.size());
         }
     }
 
@@ -431,7 +432,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
 
         @Override public int getCount() {
             //I understand this is not the best way, I will think of something better than this
-            vpUpload.setOffscreenPageLimit(fragments.size());
             return fragments.size();
         }
 
