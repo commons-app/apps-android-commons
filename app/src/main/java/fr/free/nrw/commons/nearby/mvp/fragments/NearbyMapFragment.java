@@ -126,7 +126,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        Log.d("deneme2", "onViewCreated is called");
         super.onViewCreated(view, savedInstanceState);
         this.getView().setFocusableInTouchMode(true);
         this.getView().requestFocus();
@@ -151,13 +151,15 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     public void onAttach(Context context) {
         super.onAttach(context);
         ((NearbyParentFragment)getParentFragment()).childMapFragmentAttached();
+        Log.d("deneme2", ".childMapFragmentAttached() is fired");
     }
 
     @Override
     public MapView setupMapView(Bundle savedInstanceState) {
+        Log.d("deneme2", "setuo map view is called");
         Timber.d("setting up map view");
         boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
-        MapboxMapOptions options = new MapboxMapOptions()
+        /*MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                 .compassMargins(new int[]{12, 0, 0, 24})
                 .styleUrl(isDarkTheme ? Style.DARK : Style.OUTDOORS)
@@ -165,13 +167,14 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                 .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
                         .zoom(ZOOM_LEVEL)
-                        .build());
+                        .build());*/
 
         MapView mapView = getView().findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
                                 @Override
                                 public void onMapReady(MapboxMap mapboxMap) {
+                                    Log.d("deneme2","nearby map is ready");
                                     NearbyMapFragment.this.mapboxMap = mapboxMap;
                                     viewsAreReadyCallback.nearbyMapViewReady();
                                 }
