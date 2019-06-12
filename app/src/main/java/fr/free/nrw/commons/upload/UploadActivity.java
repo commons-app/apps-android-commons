@@ -431,7 +431,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         }
 
         @Override public int getCount() {
-            //I understand this is not the best way, I will think of something better than this
             return fragments.size();
         }
 
