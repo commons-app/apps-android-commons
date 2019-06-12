@@ -392,7 +392,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         //            enableDeleteButton(true);   makes sense ?
         else{
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setMessage("Why should "+ media.getDisplayTitle() +"  be deleted?");
+        alert.setMessage(getString(R.string.dialog_box_text_first)+" "+ media.getDisplayTitle()+ " " +getString(R.string.dialog_box_text_last));
         final EditText input = new EditText(getActivity());
         alert.setView(input);
         input.requestFocus();
