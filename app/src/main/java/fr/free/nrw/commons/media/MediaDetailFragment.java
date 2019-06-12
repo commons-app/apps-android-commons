@@ -44,6 +44,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
@@ -364,6 +365,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
+        if(AccountUtil.getUserName(getContext()).equals(media.getCreator())){
         final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.simple_spinner_dropdown_list, reasonList);
         final Spinner spinner = new Spinner(getActivity());
@@ -381,19 +383,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if(isDeleted) {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         }
+        }
         //Reviewer correct me if i have misunderstood something over here
         //But how does this  if (delete.getVisibility() == View.VISIBLE) {
         //            enableDeleteButton(true);   makes sense ?
+        else{
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setMessage("Why should this fileckathon-2018  be deleted?");
+        alert.setMessage(getString(R.string.dialog_box_text_nomination,media.getDisplayTitle()));
         final EditText input = new EditText(getActivity());
         alert.setView(input);
         input.requestFocus();
         alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
             String reason = input.getText().toString();
-
-            deleteHelper.makeDeletion(getContext(), media, reason);
-            enableDeleteButton(false);
+            onDeleteClickeddialogtext(reason);
         });
         alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
         });
@@ -424,6 +426,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         d.show();
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
+        }
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
@@ -431,6 +434,22 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
                 .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
         compositeDisposable.add(resultSingle
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    if (getActivity() != null) {
+                        isDeleted = true;
+                        enableDeleteButton(false);
+                    }
+                }));
+
+    }
+
+    @SuppressLint("CheckResult")
+    private void onDeleteClickeddialogtext(String reason) {
+        Single<Boolean> resultSingletext = reasonBuilder.getReason(media, reason)
+                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+        compositeDisposable.add(resultSingletext
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {

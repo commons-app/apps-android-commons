@@ -21,6 +21,7 @@
   <string name="preference_category_appearance">Aspetto</string>
   <string name="preference_category_general">Generale</string>
   <string name="preference_category_feedback">Commenti</string>
+  <string name="preference_category_privacy">Privacy</string>
   <string name="preference_category_location">Posizione</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -470,6 +471,9 @@
   <string name="previous_button_tooltip_message">Clicca per riusare il titolo e la descrizione dell\'immagine precedente e adattarli all\'immagine attuale.</string>
   <string name="skip_image">SALTA QUESTA IMMAGINE</string>
   <string name="exif_tag_name_author">Autore</string>
+  <string name="exif_tag_name_cameraModel">Modello fotocamera</string>
+  <string name="exif_tag_name_serialNumbers">Numeri seriali</string>
+  <string name="exif_tag_name_software">Software</string>
   <string name="share_via">Condividi applicazione tramite...</string>
   <string name="image_info">Informazioni sull\'immagine</string>
 </resources>
