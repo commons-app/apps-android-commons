@@ -181,6 +181,7 @@
   <string name="storage_permission_title">Solicitando permissão de armazenamento</string>
   <string name="read_storage_permission_rationale">Permissão necessária: leia o armazenamento externo. App não pode acessar sua galeria sem isso.</string>
   <string name="write_storage_permission_rationale">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera/galeria sem isso.</string>
+  <string name="location_permission_title">Autorização para identificar localização</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual de sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lugares próximos</string>
