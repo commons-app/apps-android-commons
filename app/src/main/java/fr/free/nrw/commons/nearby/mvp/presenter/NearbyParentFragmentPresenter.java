@@ -118,6 +118,7 @@ public class NearbyParentFragmentPresenter
         //nearbyParentFragmentView.checkGps(locationServiceManager);
         // We will know when we went offline and online again
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
+        nearbyMapFragmentView.setupMapView(null);
     }
 
     /**

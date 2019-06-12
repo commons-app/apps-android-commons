@@ -28,6 +28,7 @@ import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin;
 
 import java.util.List;
@@ -98,10 +99,11 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Timber.d("onCreateView called");
+        View view = inflater.inflate(R.layout.fragment_nearby_map, container, false);
         setHasOptionsMenu(false);
         initViews();
-        this.mapView = setupMapView(savedInstanceState);
-        return mapView;
+        // this.mapView = setupMapView(savedInstanceState);
+        return view;
     }
 
     @Override
@@ -165,7 +167,22 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                         .zoom(ZOOM_LEVEL)
                         .build());
 
-        if (!getParentFragment().getActivity().isFinishing()) {
+        MapView mapView = getView().findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+                                @Override
+                                public void onMapReady(MapboxMap mapboxMap) {
+                                    NearbyMapFragment.this.mapboxMap = mapboxMap;
+                                    viewsAreReadyCallback.nearbyMapViewReady();
+                                }
+                            }
+        );
+
+        return mapView;
+
+
+
+        /*if (!getParentFragment().getActivity().isFinishing()) {
             MapView mapView = new MapView(getParentFragment().getActivity(), options);
             // create map
             mapView.onCreate(savedInstanceState);
@@ -185,7 +202,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
             });
             return mapView;
         }
-        return null;
+        return null;*/
     }
 
     @Override
