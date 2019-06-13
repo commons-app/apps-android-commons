@@ -64,7 +64,7 @@ public class WikidataEditService {
         }
 
         // TODO Wikidata Sandbox (Q4115189) for test purposes
-        //  wikidataEntityId = "Q4115189";
+        //wikidataEntityId = "Q4115189";
         editWikidataProperty(wikidataEntityId, fileName);
         editWikidataPropertyP180(wikidataEntityId, fileName);
     }
@@ -104,8 +104,6 @@ public class WikidataEditService {
         Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
                         addPropertyP180(wikidataEntityId, fileEntityId);
@@ -122,8 +120,6 @@ public class WikidataEditService {
     @SuppressLint("CheckResult")
     private void addPropertyP180(String wikidataEntityId, String fileEntityId) {
         Observable.fromCallable(() -> mediaWikiApi.wikidataEditEntity(wikidataEntityId, fileEntityId))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revisionId -> Timber.d("Property P180 set successfully for %s", revisionId),
