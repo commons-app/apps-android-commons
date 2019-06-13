@@ -122,6 +122,31 @@ public class OkHttpJsonApiClient {
         });
     }
 
+    @NonNull
+    public Single<Integer> getUserRank(String userName) {
+        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
+        urlBuilder
+                .addPathSegments("/wikidataedits.py")
+                .addQueryParameter("user", userName);
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+
+        return Single.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null &&
+                    response.isSuccessful() && response.body() != null) {
+                String json = response.body().string();
+                if (json == null) {
+                    return 0;
+                }
+                GetWikidataEditCountResponse countResponse = gson.fromJson(json, GetWikidataEditCountResponse.class);
+                return countResponse.getWikidataEditCount();
+            }
+            return 0;
+        });
+    }
+
     /**
      * This takes userName as input, which is then used to fetch the feedback/achievements
      * statistics using OkHttp and JavaRx. This function return JSONObject

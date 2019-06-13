@@ -27,6 +27,7 @@
                 android:src="@drawable/user_avtar" />
 
             <TextView
+                android:id="@+id/user_rank"
                 style="?android:textAppearanceLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
