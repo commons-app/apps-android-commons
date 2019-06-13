@@ -152,7 +152,7 @@
   <string name="invalid_input">မကိုက်ညီသော ထည့်သွင်းမှု</string>
   <string name="maximum_limit_alert">၅၀၀ ထက်ပို၍ မပြသနိုင်ပါ</string>
   <string name="enter_valid">ကိုက်ညီသောနံပါတ်တစ်ခု ရိုက်ထည့်ပါ</string>
-  <string name="set_limit" fuzzy="true">လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက် သတ်မှတ်ရန်</string>
+  <string name="set_limit">လတ်တလော အပ်ပလုတ်ကန့်သတ်ချက်</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
   <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
   <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>
@@ -278,13 +278,24 @@
   <string name="desc_language_Africa">အာဖရိက</string>
   <string name="desc_language_Asia">အာရှ</string>
   <string name="desc_language_Pacific">ပစိဖိတ်</string>
+  <string name="yes_submit">ဟုတ်ကဲ့ ထည့်သွင်းမည်</string>
+  <string name="no_go_back">ဟင်းအင်း၊ ပြန်သွားမည်</string>
   <string name="search_this_area">ဤဧရိယာကို ရှာဖွေပါ</string>
   <string name="nearby_card_permission_title">ခွင့်ပြုချက် တောင်းခံရန်</string>
+  <string name="never_ask_again">နောက်တခါ ထပ်မမေးပါနှင့်</string>
   <string name="nominate_for_deletion_done">ပြီးပြီ</string>
   <string name="notsure">မသေချာပါ</string>
+  <string name="send_thank_send">ကျေးဇူးတင်မှု ပို့နေသည်</string>
+  <string name="send_thank_notification_title">ကျေးဇူးတင်မှု ပို့နေသည်</string>
+  <string name="send_thank_toast">%1$ အတွက် ကျေးဇူးတင်မှု ပို့နေသည်</string>
+  <string name="review_thanks_no_button_text">နောက်ရုပ်ပုံ</string>
+  <string name="no_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
   <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
+  <string name="exif_tag_name_author">ဖန်တီးသူ</string>
   <string name="exif_tag_name_copyright">မူပိုင်ခွင့်</string>
   <string name="exif_tag_name_location">တည်နေရာ</string>
   <string name="exif_tag_name_cameraModel">ကင်မရာ မော်ဒယ်</string>
   <string name="exif_tag_name_software">ဆော့ဝဲလ်</string>
+  <string name="image_info">ရုပ်ပုံ အချက်အလက်</string>
+  <string name="dialog_box_text_nomination">%1$ ဟာ ဘာကြောင့် ဖျက်သင့်သလဲ?</string>
 </resources>

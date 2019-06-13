@@ -533,4 +533,5 @@
   <string name="share_text">Faça o carregamento de fotos para o Wikimedia Commons no seu telefone ou baixe o aplicativo Commons: %1$s</string>
   <string name="share_via">Compartilhar aplicativo via...</string>
   <string name="image_info">Informação da imagem</string>
+  <string name="dialog_box_text_nomination">Por que %1$s deve ser excluído?</string>
 </resources>

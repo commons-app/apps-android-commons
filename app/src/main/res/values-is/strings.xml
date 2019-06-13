@@ -9,6 +9,7 @@
   <string name="preference_category_appearance">Útlit</string>
   <string name="preference_category_general">Almennt</string>
   <string name="preference_category_feedback">Umsagnir</string>
+  <string name="preference_category_privacy">Persónuvernd</string>
   <string name="preference_category_location">Staðsetning</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•  \</string>
@@ -167,6 +168,7 @@
   <string name="storage_permission_title">Biður um aðgang að geymslurými</string>
   <string name="read_storage_permission_rationale">Nauðsynlegar heimildir: Lesa ytri gagnageymslu. Forritið fær ekki aðgang að myndasafni ekki án þessa.</string>
   <string name="write_storage_permission_rationale">Nauðsynlegar heimildir: Skrifa í ytri gagnageymslu. Forritið nær ekki sambandi við myndavél/myndasafn ekki án þessa.</string>
+  <string name="location_permission_title">Biður um aðgang að staðsetningu</string>
   <string name="location_permission_rationale">Nauðsynlegar heimildir: Lesa núverandi staðsetningu til að geta stungið upp á flokkum</string>
   <string name="ok">Í lagi</string>
   <string name="title_activity_nearby">Staðir í nágrenninu</string>
@@ -430,6 +432,8 @@
   <string name="display_campaigns_explanation">Sjá yfirstandandi herferðir</string>
   <string name="nominate_for_deletion_done">Lokið</string>
   <string name="notsure">Ekki viss</string>
+  <string name="send_thank_send">Senda þakkarboð</string>
+  <string name="send_thank_notification_title">Sendi þakkarboð</string>
   <string name="review_category">Er þetta rétt flokkað?</string>
   <string name="review_spam">Kemur þetta umfjöllunarefninu við?</string>
   <string name="review_c_violation_report_question">Það brýtur á móti höfundarrétti því það er</string>
@@ -451,4 +455,13 @@
   <string name="image_chooser_title">Veldu myndir til að senda inn</string>
   <string name="please_wait">Bíddu aðeins…</string>
   <string name="skip_image">SLEPPA ÞESSARI MYND</string>
+  <string name="manage_exif_tags">Sýsla með EXIF-merki</string>
+  <string name="exif_tag_name_author">Höfundur</string>
+  <string name="exif_tag_name_copyright">Höfundarréttur</string>
+  <string name="exif_tag_name_location">Staðsetning</string>
+  <string name="exif_tag_name_cameraModel">Tegund myndavélar</string>
+  <string name="exif_tag_name_lensModel">Tegund linsu</string>
+  <string name="exif_tag_name_serialNumbers">Raðnúmer</string>
+  <string name="exif_tag_name_software">Hugbúnaður</string>
+  <string name="image_info">Upplýsingar í mynd</string>
 </resources>

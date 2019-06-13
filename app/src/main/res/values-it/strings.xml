@@ -476,4 +476,5 @@
   <string name="exif_tag_name_software">Software</string>
   <string name="share_via">Condividi applicazione tramite...</string>
   <string name="image_info">Informazioni sull\'immagine</string>
+  <string name="dialog_box_text_nomination">Perché %1$s dovrebbe essere cancellato?</string>
 </resources>
