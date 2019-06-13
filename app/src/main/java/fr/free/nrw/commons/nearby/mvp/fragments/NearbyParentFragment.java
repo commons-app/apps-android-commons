@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -114,12 +115,19 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         setRetainInstance(true);
     }
 
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Log.d("deneme3","oncongi changed fragmenr"+this);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         ButterKnife.bind(this, view);
         this.view = view;
+        initBottomSheetBehaviour();
         Timber.d("onCreateView");
         return view;
     }
@@ -336,6 +344,36 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         getActivity().registerReceiver(broadcastReceiver, intentFilter);
     }
+
+    /**
+     * Initialize bottom sheet behaviour (sheet for map list.) Set height 9/16 of all window.
+     * Add callback for bottom sheet changes, so that we can sync it with bottom sheet for details
+     * (sheet for nearby details)
+     */
+    private void initBottomSheetBehaviour() {
+
+        transparentView.setAlpha(0);
+        bottomSheet.getLayoutParams().height = getActivity().getWindowManager()
+                .getDefaultDisplay().getHeight() / 16 * 9;
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+
+            @Override
+            public void onStateChanged(View bottomSheet, int unusedNewState) {
+                //prepareViewsForSheetPosition();
+            }
+
+            @Override
+            public void onSlide(View bottomSheet, float slideOffset) {
+
+            }
+        });
+
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetBehaviorForDetails = BottomSheetBehavior.from(bottomSheetDetails);
+        bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
 
     /**
      * Hide or expand bottom sheet according to states of all sheets
