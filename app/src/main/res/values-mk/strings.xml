@@ -169,6 +169,7 @@
   <string name="storage_permission_title">Се бара дозвола за складирање</string>
   <string name="read_storage_permission_rationale">Потребна дозвола: Треба да се прочита од надворешен склад. Прилогот без ова нема пристап до вашата галерија.</string>
   <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера/галерија.</string>
+  <string name="location_permission_title">Се бара дозвола за утврдување на местоположбата</string>
   <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
   <string name="ok">ОК</string>
   <string name="title_activity_nearby">Околни места</string>
@@ -520,4 +521,5 @@
   <string name="share_text">Подигајте слики на Ризницата од телефон. Преземете го прилогот на Ризницата: %1$s</string>
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
+  <string name="dialog_box_text_nomination">Зошто сметате дека %1$s треба да се избрише?</string>
 </resources>

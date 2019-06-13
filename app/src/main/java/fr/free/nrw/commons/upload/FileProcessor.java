@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.Uri;
 import androidx.annotation.NonNull;
 
+import fr.free.nrw.commons.upload.SimilarImageDialogFragment.Callback;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -37,7 +38,7 @@ import timber.log.Timber;
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
  */
 @Singleton
-public class FileProcessor implements SimilarImageDialogFragment.onResponse {
+public class FileProcessor implements Callback {
 
     @Inject
     CacheController cacheController;
@@ -58,7 +59,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
-    FileProcessor() {
+    public FileProcessor() {
     }
 
     public void cleanup() {

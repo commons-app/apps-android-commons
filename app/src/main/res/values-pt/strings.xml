@@ -23,6 +23,7 @@
   <string name="preference_category_appearance">Aparência</string>
   <string name="preference_category_general">Geral</string>
   <string name="preference_category_feedback">Comentários</string>
+  <string name="preference_category_privacy">Privacidade</string>
   <string name="preference_category_location">Localização</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -181,6 +182,7 @@
   <string name="storage_permission_title">A pedir permissão de armazenamento</string>
   <string name="read_storage_permission_rationale">Permissão necessária: Ler a armazenagem externa. A aplicação não pode aceder à sua galeria sem isto.</string>
   <string name="write_storage_permission_rationale">Permissão necessária: Escrever na armazenagem externa. A aplicação não pode aceder à sua câmara/galeria sem isto.</string>
+  <string name="location_permission_title">Autorização para identificar localização</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual para sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Locais Próximos</string>
@@ -520,6 +522,15 @@
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
   <string name="skip_image">SALTAR ESTA IMAGEM</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">O descarregamento falhou! Não podemos descarregar o ficheiro sem permissão de armazenagem externa.</string>
+  <string name="manage_exif_tags">Gerir etiquetas EXIF</string>
+  <string name="manage_exif_tags_summary">Selecionar as etiquetas EXIF a manter nos carregamentos</string>
+  <string name="exif_tag_name_author">Autor</string>
+  <string name="exif_tag_name_copyright">Direitos de autor</string>
+  <string name="exif_tag_name_location">Localização</string>
+  <string name="exif_tag_name_cameraModel">Modelo da câmara</string>
+  <string name="exif_tag_name_lensModel">Modelo da lente</string>
+  <string name="exif_tag_name_serialNumbers">Números de série</string>
+  <string name="exif_tag_name_software">\'\'Software\'\'</string>
   <string name="share_text">Carregar fotografias na wiki Wikimedia Commons, do seu telemóvel Descarregar a aplicação Commons: %1$s</string>
   <string name="share_via">Partilhar aplicação por...</string>
   <string name="image_info">Informação da imagem</string>

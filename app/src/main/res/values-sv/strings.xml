@@ -174,6 +174,7 @@
   <string name="storage_permission_title">Begär lagringsbehörighet</string>
   <string name="read_storage_permission_rationale">Nödvändig behörighet: Läs extern lagring. Appen kan inte komma åt ditt galleri utan detta.</string>
   <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera/galleri utan detta.</string>
+  <string name="location_permission_title">Begär platsbehörighet</string>
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Platser i närheten</string>
@@ -525,4 +526,5 @@
   <string name="share_text">Ladda upp foton till Wikimedia Commons på din telefon Ladda ned Commons-appen: %1$s</string>
   <string name="share_via">Dela appen via...</string>
   <string name="image_info">Bildinfo</string>
+  <string name="dialog_box_text_nomination">Varför bör %1$s raderas?</string>
 </resources>

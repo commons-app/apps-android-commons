@@ -9,6 +9,11 @@ import com.google.gson.Gson;
 
 import org.wikipedia.dataclient.WikiSite;
 
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import org.wikipedia.dataclient.WikiSite;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +42,8 @@ import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
     private Context applicationContext;
+    public static final String IO_THREAD="io_thread";
+    public static final String MAIN_THREAD="main_thread";
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
@@ -171,5 +178,17 @@ public class CommonsApplicationModule {
     @Singleton
     public boolean provideIsBetaVariant() {
         return ConfigUtils.isBetaFlavour();
+    }
+
+    @Named(IO_THREAD)
+    @Provides
+    public Scheduler providesIoThread(){
+        return Schedulers.io();
+    }
+
+    @Named(MAIN_THREAD)
+    @Provides
+    public Scheduler providesMainThread(){
+        return AndroidSchedulers.mainThread();
     }
 }

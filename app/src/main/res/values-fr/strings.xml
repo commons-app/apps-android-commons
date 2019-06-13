@@ -189,6 +189,7 @@
   <string name="storage_permission_title">Demande d\'autorisation d\'accès au stockage</string>
   <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
   <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo/galerie sans cela.</string>
+  <string name="location_permission_title">Demande d\'autorisation d\'accès au stockage</string>
   <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Endroits à proximité</string>
@@ -502,8 +503,8 @@
   <string name="review_copyright_no_button_text">Semble correct</string>
   <string name="review_thanks_yes_button_text">Oui, pourquoi pas</string>
   <string name="review_thanks_no_button_text">Image suivante</string>
-  <string name="skip_image_explanation">Cliquer sur ce bouton vous fournira une autre image récemment téléversée de Wikimédia Communs.</string>
-  <string name="review_image_explanation">Vous pouvez revoir les images et améliorer la qualité de Wikimédia Communs.\n Les quatre paramètres à revoir sont : \n - Cette image est-elle à propos ? \n - Cette image respecte-t-elle les règles de droit d’auteur ? \n - Cette image est-elle bien catégorisée ? \n - Si tout va bien, vous pouvez aussi remercier le contributeur.</string>
+  <string name="skip_image_explanation">Cliquer sur ce bouton vous fournira une autre image récemment téléversée de Wikimédia Commons.</string>
+  <string name="review_image_explanation">Vous pouvez revoir les images et améliorer la qualité de Wikimédia Commons.\n Les quatre paramètres à revoir sont : \n - Cette image est-elle à propos ? \n - Cette image respecte-t-elle les règles de droit d’auteur ? \n - Cette image est-elle bien catégorisée ? \n - Si tout va bien, vous pouvez aussi remercier le contributeur.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Réception de contenu partagé. Le traitement de l\'image peut prendre un certain temps en fonction de la taille de l\'image et de votre matériel</item>
     <item quantity="other">Réception de contenu partagé. Le traitement des images peut prendre un certain temps en fonction de la taille des images et de votre matériel</item>
@@ -519,7 +520,7 @@
   <string name="error_occurred_in_picking_images">Erreur lors de la sélection des images</string>
   <string name="image_chooser_title">Choisir les images à téléverser</string>
   <string name="please_wait">Veuillez patienter…</string>
-  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Communs a choisi comme étant de la meilleure qualité pour le site.</string>
+  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Commons a choisi comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par les lieux de proximité sont les images téléversées par la découverte des lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionalité permet aux contributeurs d\'envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles – en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
   <string name="previous_image_title_description">Copier le titre et la description précédente</string>
@@ -529,7 +530,7 @@
   <string name="skip_image">SAUTER CETTE IMAGE</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Échec du téléchargement ! Nous ne pouvons pas télécharger le fichier sans droit de stockage externe.</string>
   <string name="manage_exif_tags">Gérer les balises EXIF</string>
-  <string name="manage_exif_tags_summary">Sélectionner quelles balises EXIF à conserver dans les téléchargements</string>
+  <string name="manage_exif_tags_summary">Sélectionner quelles balises EXIF à conserver dans les téléversements</string>
   <string name="exif_tag_name_author">Auteur</string>
   <string name="exif_tag_name_copyright">Droits d’auteur</string>
   <string name="exif_tag_name_location">Emplacement</string>
@@ -537,7 +538,8 @@
   <string name="exif_tag_name_lensModel">Modèle de lentille</string>
   <string name="exif_tag_name_serialNumbers">Numéros de série</string>
   <string name="exif_tag_name_software">Logiciel</string>
-  <string name="share_text">Téléverser des photos vers Wikimédia Communs, sur votre téléphone Téléchargez l’application Communs : %1$s</string>
+  <string name="share_text">Téléverser des photos vers Wikimédia Commons, sur votre téléphone Téléchargez l’application Commons : %1$s</string>
   <string name="share_via">Partager l’application via…</string>
   <string name="image_info">Informations de l’image</string>
+  <string name="dialog_box_text_nomination">Pourquoi %1$s devrait-il être supprimé ?</string>
 </resources>

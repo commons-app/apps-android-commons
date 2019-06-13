@@ -18,6 +18,9 @@ import fr.free.nrw.commons.nearby.mvp.fragments.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.review.ReviewImageFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
+import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
+import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -71,4 +74,12 @@ public abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
     abstract ReviewImageFragment bindReviewOutOfContextFragment();
 
+    @ContributesAndroidInjector
+    abstract UploadMediaDetailFragment bindUploadMediaDetailFragment();
+
+    @ContributesAndroidInjector
+    abstract UploadCategoriesFragment bindUploadCategoriesFragment();
+
+    @ContributesAndroidInjector
+    abstract MediaLicenseFragment bindMediaLicenseFragment();
 }
