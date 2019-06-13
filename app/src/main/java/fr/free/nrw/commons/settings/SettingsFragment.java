@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
@@ -147,7 +148,9 @@ public class SettingsFragment extends PreferenceFragment {
         List<Language> languages = getLocaleSupportedByDevice();
 
         for(Language language: languages) {
+            // Go through all languages and add them to lists
             if(!languageCodesList.contains(language.getLocale().getLanguage())) {
+                // This if prevents us from adding same language twice
                 languageNamesList.add(language.getLocale().getDisplayName());
                 languageCodesList.add(language.getLocale().getLanguage());
             }
@@ -155,25 +158,29 @@ public class SettingsFragment extends PreferenceFragment {
 
         CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[languageNamesList.size()]);
         CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[languageCodesList.size()]);
+        // Add all languages and languages codes to lists preference as pair
         listPreference.setEntries(languageNames);
         listPreference.setEntryValues(languageCodes);
-        String languageCode = getLanguageDescription();
+
+        // Gets current language code from shared preferences
+        String languageCode = getCurrentLanguageCode();
         if(languageCode.equals("")){
+            // If current language code is empty, means none selected by user yet so use phone local
             listPreference.setSummary(Locale.getDefault().getDisplayLanguage());
-        }
-        if (!languageCode.equals("")) {
+            Log.d("deneme3","listPreference.setSummary(Locale.getDefault().getDisplayLanguage());");
+        } else {
+            // If any language is selected by user previously, use it
             int prefIndex = listPreference.findIndexOfValue(languageCode);
             listPreference.setSummary(listPreference.getEntries()[prefIndex]);
+            Log.d("deneme3","listPreference.setSummary(listPreference.getEntries()[prefIndex]);");
         }
-        listPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                String userSelectedValue = (String) newValue;
-                int prefIndex = listPreference.findIndexOfValue(userSelectedValue);
-                listPreference.setSummary(listPreference.getEntries()[prefIndex]);
-                saveValue(userSelectedValue);
-                return true;
-            }
+        listPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            Log.d("deneme3","onPreferenceChanged");
+            String userSelectedValue = (String) newValue;
+            int prefIndex = listPreference.findIndexOfValue(userSelectedValue);
+            listPreference.setSummary(listPreference.getEntries()[prefIndex]);
+            saveValue(userSelectedValue);
+            return true;
         });
     }
 
@@ -183,7 +190,7 @@ public class SettingsFragment extends PreferenceFragment {
         editor.apply();
     }
 
-    private String getLanguageDescription() {
+    private String getCurrentLanguageCode() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
         return valuelang;
