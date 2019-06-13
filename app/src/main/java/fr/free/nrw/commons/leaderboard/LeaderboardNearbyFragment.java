@@ -12,9 +12,7 @@ import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 
 public class LeaderboardNearbyFragment extends DaggerFragment {
-    public static LeaderboardNearbyFragment newInstance() {
-        return new LeaderboardNearbyFragment();
-    }
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater,

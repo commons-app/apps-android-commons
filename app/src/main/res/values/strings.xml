@@ -242,10 +242,10 @@
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 
-  <string name="leaderboard_title">Leaderboard</string>
-  <string name="leaderboard_upload_title">Upload</string>
-  <string name="leaderboard_nearby_title">Nearby</string>
-  <string name="leaderboard_used_title">Used</string>
+  <string name="leaderBoard_title">Leaderboard</string>
+  <string name="leaderBoard_upload_title">Upload</string>
+  <string name="leaderBoard_nearby_title">Nearby</string>
+  <string name="leaderBoard_used_title">Used</string>
 
   <string name="upload_problem_exist">Potential problems with this image :</string>
   <string name="upload_problem_image_dark">Image is too dark.</string>

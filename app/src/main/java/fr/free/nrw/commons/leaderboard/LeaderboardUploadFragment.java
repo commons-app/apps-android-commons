@@ -13,9 +13,6 @@ import fr.free.nrw.commons.R;
 
 public class LeaderboardUploadFragment extends DaggerFragment {
 
-    public static LeaderboardUploadFragment newInstance() {
-        return new LeaderboardUploadFragment();
-    }
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater,
