@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import static fr.free.nrw.commons.settings.SettingsFragment.KEY_LANGUAGE_VALUE;
+
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
     private final int resource;
@@ -34,6 +38,8 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
     private List<String> languageCodesList;
     private final BiMap<AdapterView, String> selectedLanguages;
     public String selectedLangCode="";
+    private Context context;
+    private boolean dropDownClicked;
 
 
 
@@ -46,6 +52,8 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         languageCodesList = new ArrayList<>();
         prepareLanguages();
         this.selectedLanguages = selectedLanguages;
+        this.context = context;
+        this.dropDownClicked = false;
     }
 
     private void prepareLanguages() {
@@ -91,6 +99,8 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         }
         ViewHolder holder = new ViewHolder(convertView);
         holder.init(position, true);
+
+        dropDownClicked = true;
         return convertView;
     }
 
@@ -123,16 +133,25 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         }
 
         public void init(int position, boolean isDropDownView) {
-            final String languageCode = LangCodeUtils.fixLanguageCode(languageCodesList.get(position));
+            String languageCode = LangCodeUtils.fixLanguageCode(languageCodesList.get(position));
             final String languageName = String.format("%s%s", languageNamesList.get(position)
                     .substring(0, 1).toUpperCase(), languageNamesList.get(position).substring(1));
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
+            if(valuelang.equals("")){
+                valuelang = Locale.getDefault().getLanguage();
+            }
+
             if (!isDropDownView) {
+                    if( !dropDownClicked){
+                    languageCode = LangCodeUtils.fixLanguageCode(valuelang);
+                }
                 view.setVisibility(View.GONE);
                 if(languageCode.length()>2)
                     tvLanguage.setText(languageCode.subSequence(0,2));
                 else
                     tvLanguage.setText(languageCode);
-
             } else {
                 view.setVisibility(View.VISIBLE);
                 if (languageCodesList.get(position).isEmpty()) {
