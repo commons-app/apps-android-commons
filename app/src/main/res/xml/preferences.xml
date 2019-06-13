@@ -31,7 +31,7 @@
 
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
             android:key="descriptionDefaultLanguagePref"
-            android:title= "@string/set_language"
+            android:title= "@string/default_description_language"
             android:summary="English" />
 
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
