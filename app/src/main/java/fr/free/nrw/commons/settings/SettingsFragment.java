@@ -167,15 +167,14 @@ public class SettingsFragment extends PreferenceFragment {
         if(languageCode.equals("")){
             // If current language code is empty, means none selected by user yet so use phone local
             listPreference.setSummary(Locale.getDefault().getDisplayLanguage());
-            Log.d("deneme3","listPreference.setSummary(Locale.getDefault().getDisplayLanguage());");
+            listPreference.setValue(Locale.getDefault().getLanguage());
         } else {
             // If any language is selected by user previously, use it
             int prefIndex = listPreference.findIndexOfValue(languageCode);
             listPreference.setSummary(listPreference.getEntries()[prefIndex]);
-            Log.d("deneme3","listPreference.setSummary(listPreference.getEntries()[prefIndex]);");
+            listPreference.setValue(languageCode);
         }
         listPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            Log.d("deneme3","onPreferenceChanged");
             String userSelectedValue = (String) newValue;
             int prefIndex = listPreference.findIndexOfValue(userSelectedValue);
             listPreference.setSummary(listPreference.getEntries()[prefIndex]);
