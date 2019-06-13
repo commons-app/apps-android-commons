@@ -166,6 +166,7 @@
   <string name="storage_permission_title">Requesting Storage Permission</string>
   <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot access your gallery without this.</string>
   <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera/gallery without this.</string>
+  <string name="location_permission_title">Requesting Location Permission</string>
   <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nearby Places</string>
@@ -553,4 +554,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="share_text">Upload photos to Wikimedia Commons on your phone Download the Commons app: %1$s</string>
   <string name="share_via">Share app via...</string>
   <string name="image_info">Image Info</string>
+  <string name="dialog_box_text_nomination">Why should %1$s be deleted?</string>
 </resources>

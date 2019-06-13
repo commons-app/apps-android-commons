@@ -15,6 +15,7 @@
   <string name="preference_category_appearance">Udseende</string>
   <string name="preference_category_general">Generelt</string>
   <string name="preference_category_feedback">Tilbagemelding</string>
+  <string name="preference_category_privacy">Privatliv</string>
   <string name="preference_category_location">Sted</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -370,5 +371,8 @@
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
   <string name="skip_image">Spring over dette billede</string>
+  <string name="exif_tag_name_copyright">Ophavsret</string>
+  <string name="exif_tag_name_cameraModel">Kameramodel</string>
+  <string name="exif_tag_name_serialNumbers">Serienumre</string>
   <string name="share_via">Del app via...</string>
 </resources>

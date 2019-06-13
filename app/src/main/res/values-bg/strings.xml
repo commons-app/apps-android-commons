@@ -215,6 +215,7 @@
   <string name="preference_author_name_summary">Персонализираното авторско име, което ще се използва вместо потребителското ви име при качване</string>
   <string name="archived_notifications">Известия (архивирани)</string>
   <string name="list_sheet">Списък</string>
+  <string name="submit">Изпращане</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>
   <string name="desc_language_Africa">Африка</string>

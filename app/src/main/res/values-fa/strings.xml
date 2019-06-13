@@ -9,6 +9,8 @@
 * FarsiNevis
 * Fatemi127
 * Freshman404
+* Ladsgroup
+* Mardetanha
 * Mehdi
 * Mjbmr
 * Omidh
@@ -18,6 +20,7 @@
 * Vahedi
 * Yoosef Pooranvary
 * جواد
+* درفش کاویانی
 -->
 <resources>
   <string name="title_activity_explore">کاوش</string>
@@ -25,6 +28,7 @@
   <string name="preference_category_appearance">نمایش صفحه</string>
   <string name="preference_category_general">عمومی</string>
   <string name="preference_category_feedback">بازخورد</string>
+  <string name="preference_category_privacy">حریم خصوصی</string>
   <string name="preference_category_location">مکان</string>
   <string name="app_name">ویکی‌انبار</string>
   <string name="bullet">•</string>
@@ -300,9 +304,12 @@
   <string name="no_internet">اینترنت در دسترس نیست</string>
   <string name="internet_established">اینترنت در دسترس است</string>
   <string name="error_notifications">خطا در آوردن اطلاعیه</string>
+  <string name="error_review">در تلاش برای بدست‌آوردن تصویر جهت بازبینی خطایی پیش آمد. لطفا برای تلاش مجدد بر روی ریفرش کلیک کنید.</string>
+  <string name="error_review_categories">دریافت رده‌های تصویر برای بازبینی به مشکل برخورد کرد. لطفا برای تلاش مجدد صفحه را رفرش کنید.</string>
   <string name="no_notifications">هشداری پیدا نشد</string>
   <string name="about_translate">&lt;u&gt;ترجمه&lt;/u&gt;</string>
   <string name="about_translate_title">زبان‌ها</string>
+  <string name="about_translate_message">لطفا زبانی که مایلید در آنها ترجمه‌های خود را ثبت کنید انتخاب کنید.</string>
   <string name="about_translate_proceed">ادامه</string>
   <string name="about_translate_cancel">لغو</string>
   <string name="retry">سعى دوباره</string>
@@ -317,19 +324,25 @@
   <string name="search_commons">جستجوی ویکی‌انبار</string>
   <string name="title_activity_search">جستجو</string>
   <string name="search_recent_header">جستجوهای اخیر:</string>
+  <string name="provider_searches">کوئری‌های که اخیرا جستجو شده</string>
   <string name="error_loading_categories">خطا هنگام بار کردن رده ها.</string>
+  <string name="error_loading_subcategories">در هنگام بارگیری زیررده‌ها خطایی رخ داد.</string>
   <string name="search_tab_title_media">رسانه</string>
   <string name="search_tab_title_categories">دسته بندی</string>
   <string name="explore_tab_title_featured">برگزیده</string>
   <string name="explore_tab_title_mobile">بارگذاری‌شده با تلفن همراه</string>
+  <string name="successful_wikidata_edit">تصویر با موفقیت به %1$s در ویکی‌داده افزوده‌شد.</string>
+  <string name="wikidata_edit_failure">تلاش برای بروزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
   <string name="wallpaper_set_successfully">تصویر پس زمینه به طور موفقیت آمیز تنظیم شد!</string>
   <string name="quiz">امتحان</string>
   <string name="quiz_question_string">آیا این تصویر برای بارگذاری مناسب است؟</string>
   <string name="question">پرسش</string>
   <string name="result">نتیجه</string>
+  <string name="congratulatory_message_quiz">شما %1$s پاسخ درست دادید. آفرین!</string>
   <string name="warning_for_no_answer">یکی از دو گزینه را انتخاب کنید تا به سوال پاسخ دهید</string>
   <string name="user_not_logged_in">جلسه ورود به سیستم منقضی شد، لطفا دوباره وارد سیستم شوید.</string>
+  <string name="quiz_result_share_message">کویز خود را با دوستان خود به اشتراک بگذارید.</string>
   <string name="continue_message">ادامه</string>
   <string name="correct">جواب درست</string>
   <string name="wrong">جواب نادرست</string>
@@ -348,6 +361,7 @@
   <string name="statistics">آمارها</string>
   <string name="statistics_thanks">تشکر دریافت‌شد</string>
   <string name="statistics_featured">تصاویر برگزیده</string>
+  <string name="statistics_wikidata_edits">تصاویر بر اساس «مکان‌های اطراف»</string>
   <string name="level">سطح</string>
   <string name="images_uploaded">تصاویر بارگذاری شده</string>
   <string name="image_reverts">تصاویر واگردانی نشده</string>
@@ -361,12 +375,20 @@
   <string name="contributions_fragment">مشارکت‌ها</string>
   <string name="nearby_fragment">در نزدیکی</string>
   <string name="notifications">آگاه‌سازی‌ها</string>
+  <string name="archived_notifications">اعلان‌ها (بایگانی‌شده)</string>
+  <string name="display_nearby_notification">نمایش اعلان اطراف</string>
+  <string name="no_close_nearby">هیچ‌ مکان نزدیکی به شما یافته نشد</string>
   <string name="list_sheet">فهرست</string>
   <string name="storage_permission">اجازه ذخیره</string>
   <string name="step_count">گام %1$d از %2$d</string>
   <string name="next">بعدی</string>
   <string name="previous">قبلی</string>
   <string name="submit">ارسال</string>
+  <string name="upload_title_duplicate">پرونده‌ای با نام %1$s وجود دارد. آیا اطمینان دارید که می‌خواهید ادامه دهید؟</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d بارگذاری</item>
+    <item quantity="other">%1$d بارگذاری</item>
+  </plurals>
   <string name="navigation_item_bookmarks">نشانک‌ها</string>
   <string name="title_activity_bookmarks">نشانک‌ها</string>
   <string name="title_page_bookmarks_pictures">تصویرها</string>
@@ -380,6 +402,7 @@
   <string name="deletion_reason_bad_for_my_privacy">فهمیدم که این برای حریم خصوصی من بد است.</string>
   <string name="deletion_reason_no_longer_want_public">من تغییر عقیده دادم، نمی‌خواهم دیگر برای همه قابل‌مشاهده باشد.</string>
   <string name="deletion_reason_not_interesting">با پوزش، این تصویر برای یک دانشنامه مناسب نیست</string>
+  <string name="uploaded_by_myself">بارگذاری‌شده توسط خودم در %1$s؛ استفاده‌شده در %2$d مقاله.</string>
   <string name="no_uploads">به کامانز خوش آمدید!\n\nاولین فایلتان را با فشردن کلید اضافه بارگذاری کنید.</string>
   <string name="desc_language_Worldwide">در سراسر جهان</string>
   <string name="desc_language_America">آمریکا</string>
@@ -396,25 +419,56 @@
   <string name="search_this_area">جستجوی این محدوده</string>
   <string name="nearby_card_permission_title">درخواست اجازه</string>
   <string name="never_ask_again">این را دیگر نپرس</string>
+  <string name="display_campaigns">کمپین‌های نمایش</string>
   <string name="error_processing_image">هنگام پردازش این تصویر خطایی رخ داد. لطفا دوباره سعی کنید!</string>
+  <string name="getting_edit_token">دریافت توکن برای ویرایش</string>
+  <string name="check_category_edit_summary">درخواست بررسی رده</string>
+  <string name="check_category_success_title">بررسی رده درخواست شده</string>
+  <string name="check_category_failure_title">درخواست بررسی رده کار نکرد</string>
+  <string name="nominate_for_deletion_edit_file_page">افزودن پیام حذف‌شده به فایل</string>
   <string name="nominate_for_deletion_done">انجام شد</string>
+  <string name="nominate_for_deletion_notify_user">به کاربر در صفحه بحثش خبر بده</string>
   <string name="notsure">مطمئن نیستم</string>
   <string name="send_thank_success_title">ارسال تشکر: موفق</string>
+  <string name="send_thank_success_message">تشکر با موفقیت برای %1$s فرستاده شد</string>
+  <string name="send_thank_failure_message">تلاش برای فرستادن تشکر شکست خورد %1$s</string>
   <string name="send_thank_failure_title">ارسال تشکر: ناموفق</string>
   <string name="send_thank_send">ارسال تشکر</string>
   <string name="send_thank_notification_title">ارسال تشکر</string>
   <string name="send_thank_toast">در حال ارسال تشکر برای %1$s</string>
   <string name="review_category">آیا این به درستی رده‌بندی شده‌است؟</string>
+  <string name="review_spam">آیا این در محدوده قابل قبول است؟</string>
+  <string name="review_thanks">آیا مایلید که از مشارکت‌ کننده تشکر کنید؟</string>
+  <string name="review_no_category">عجب، این حتی رده‌بندی هم نشده!</string>
+  <string name="review_spam_report_question">این از محدوده خارج است زیرا که</string>
+  <string name="review_c_violation_report_question">این فایل ناقض حق تکثیر است به خاطر اینکه</string>
   <string name="review_category_no_button_text">خوب به نظر می‌رسد</string>
+  <string name="review_spam_yes_button_text">نه، این از محدوده خارج است</string>
   <string name="review_spam_no_button_text">خوب به نظر می‌رسد</string>
   <string name="review_copyright_no_button_text">خوب به نظر می‌رسد</string>
   <string name="review_thanks_yes_button_text">بله، چرا که نه</string>
   <string name="review_thanks_no_button_text">تصویر بعدی</string>
+  <string name="no_image">تصاویر استاده نشده</string>
   <string name="no_image_reverted">تصویر برگردانده نشد</string>
   <string name="no_image_uploaded">هیچ تصویری بارگذاری نشد</string>
+  <string name="no_notification">شما هیچ اعلان خوانده‌نشده‌ای ندارید</string>
+  <string name="no_archived_notification">شما هیچ پیغام بایگانی شده‌ای ندارید</string>
   <string name="menu_option_archived">نمایش بایگانی‌شده</string>
   <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
   <string name="image_chooser_title">انتخاب تصویر برای بارگذاری</string>
   <string name="please_wait">لطفاً صبر کنید...</string>
+  <string name="previous_image_title_description">از عنوان/توضیحات پیشین استفاده کنید</string>
+  <string name="welcome_dont_upload_content_description">نمونه تصاویری که برای بازگذاری مناسب نیستند</string>
+  <string name="skip_image">از این تصویر صرف نظر کن</string>
+  <string name="manage_exif_tags">مدیریت تگ‌های EXIF</string>
+  <string name="manage_exif_tags_summary">تگ‌های موردنظر خود در EXIF را برای آپلود انتخاب کنید</string>
+  <string name="exif_tag_name_author">پدیدآور</string>
+  <string name="exif_tag_name_copyright">حق تکثیر</string>
+  <string name="exif_tag_name_location">مکان</string>
+  <string name="exif_tag_name_cameraModel">مدل دوربین</string>
+  <string name="exif_tag_name_lensModel">مدل لنز</string>
+  <string name="exif_tag_name_serialNumbers">شماره سریال</string>
+  <string name="exif_tag_name_software">نرم‌افزار</string>
+  <string name="share_via">اشتراک از طریق...</string>
   <string name="image_info">اطلاعات عکس</string>
 </resources>

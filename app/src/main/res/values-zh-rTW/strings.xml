@@ -21,6 +21,7 @@
   <string name="preference_category_appearance">外觀</string>
   <string name="preference_category_general">一般</string>
   <string name="preference_category_feedback">意見回饋</string>
+  <string name="preference_category_privacy">隱私</string>
   <string name="preference_category_location">位置</string>
   <string name="app_name">維基共享資源</string>
   <string name="bullet">•</string>
@@ -516,6 +517,15 @@
   <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
   <string name="skip_image">忽略此圖片</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">下載失敗！因為缺少外部存儲裝置權限緣故，我們無法下載檔案。</string>
+  <string name="manage_exif_tags">管理 EXIF 標籤</string>
+  <string name="manage_exif_tags_summary">選擇要保持上傳的 EXIF 標籤</string>
+  <string name="exif_tag_name_author">作者</string>
+  <string name="exif_tag_name_copyright">版權</string>
+  <string name="exif_tag_name_location">位置</string>
+  <string name="exif_tag_name_cameraModel">相機模型</string>
+  <string name="exif_tag_name_lensModel">透鏡模型</string>
+  <string name="exif_tag_name_serialNumbers">序號</string>
+  <string name="exif_tag_name_software">軟體</string>
   <string name="share_text">在您的手機上更新照片到維基共享資源，下載共享資源應用程式：%1$s</string>
   <string name="share_via">分享應用程式透過…</string>
   <string name="image_info">圖片資訊</string>

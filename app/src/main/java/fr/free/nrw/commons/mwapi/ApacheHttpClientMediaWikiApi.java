@@ -421,7 +421,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      */
     @Nullable
     @Override
-    public String wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
+    public String wikidataCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
         Timber.d("Filename is %s", value);
         CustomApiResult result = wikidataApi.action("wbcreateclaim")
                 .param("entity", entityId)

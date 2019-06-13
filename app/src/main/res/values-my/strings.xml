@@ -9,6 +9,7 @@
   <string name="preference_category_appearance">ပုံပန်းသွင်ပြင်</string>
   <string name="preference_category_general">အထွေထွေ</string>
   <string name="preference_category_feedback">အကြံပေးရန်</string>
+  <string name="preference_category_privacy">ကိုယ်ရေးမူဝါဒ</string>
   <string name="preference_category_location">နေရာ</string>
   <string name="app_name">ကွန်မွန်းစ်</string>
   <string name="bullet">•</string>
@@ -129,6 +130,7 @@
   <string name="detail_discussion_empty">ဆွေးနွေးချက် မရှိပါ</string>
   <string name="detail_license_empty">အမည်မသိရသော လိုင်စင်</string>
   <string name="menu_refresh">ပြန်လည်ဆန်းသစ်ရန်</string>
+  <string name="location_permission_title">တည်နေရာ ခွင့်ပြုချက် တောင်းဆိုနေသည်</string>
   <string name="ok">အိုကေ</string>
   <string name="title_activity_nearby">အနီးအနား နေရာများ</string>
   <string name="no_nearby">အနီးအနား နေရာများ မတွေ့ပါ</string>
@@ -281,4 +283,8 @@
   <string name="nominate_for_deletion_done">ပြီးပြီ</string>
   <string name="notsure">မသေချာပါ</string>
   <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
+  <string name="exif_tag_name_copyright">မူပိုင်ခွင့်</string>
+  <string name="exif_tag_name_location">တည်နေရာ</string>
+  <string name="exif_tag_name_cameraModel">ကင်မရာ မော်ဒယ်</string>
+  <string name="exif_tag_name_software">ဆော့ဝဲလ်</string>
 </resources>

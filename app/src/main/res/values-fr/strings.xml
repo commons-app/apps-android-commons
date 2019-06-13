@@ -30,6 +30,7 @@
   <string name="preference_category_appearance">Apparence</string>
   <string name="preference_category_general">Général</string>
   <string name="preference_category_feedback">Donner son avis</string>
+  <string name="preference_category_privacy">Confidentialité</string>
   <string name="preference_category_location">Emplacement</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -188,6 +189,7 @@
   <string name="storage_permission_title">Demande d\'autorisation d\'accès au stockage</string>
   <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
   <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo/galerie sans cela.</string>
+  <string name="location_permission_title">Demande d\'autorisation d\'accès au stockage</string>
   <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Endroits à proximité</string>
@@ -527,6 +529,15 @@
   <string name="welcome_dont_upload_content_description">Exemples d\'images à ne pas téléverser</string>
   <string name="skip_image">SAUTER CETTE IMAGE</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Échec du téléchargement ! Nous ne pouvons pas télécharger le fichier sans droit de stockage externe.</string>
+  <string name="manage_exif_tags">Gérer les balises EXIF</string>
+  <string name="manage_exif_tags_summary">Sélectionner quelles balises EXIF à conserver dans les téléchargements</string>
+  <string name="exif_tag_name_author">Auteur</string>
+  <string name="exif_tag_name_copyright">Droits d’auteur</string>
+  <string name="exif_tag_name_location">Emplacement</string>
+  <string name="exif_tag_name_cameraModel">Modèle d’appareil photo</string>
+  <string name="exif_tag_name_lensModel">Modèle de lentille</string>
+  <string name="exif_tag_name_serialNumbers">Numéros de série</string>
+  <string name="exif_tag_name_software">Logiciel</string>
   <string name="share_text">Téléverser des photos vers Wikimédia Communs, sur votre téléphone Téléchargez l’application Communs : %1$s</string>
   <string name="share_via">Partager l’application via…</string>
   <string name="image_info">Informations de l’image</string>

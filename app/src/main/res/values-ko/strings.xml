@@ -19,6 +19,7 @@
   <string name="preference_category_appearance">보이기</string>
   <string name="preference_category_general">일반</string>
   <string name="preference_category_feedback">피드백</string>
+  <string name="preference_category_privacy">개인정보</string>
   <string name="preference_category_location">위치</string>
   <string name="app_name">공용</string>
   <string name="bullet">•</string>
@@ -175,6 +176,7 @@
   <string name="storage_permission_title">기억 장치 권한 요청 중</string>
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 갤러리에 접근할 수 없습니다.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라에 접근할 수 없습니다.</string>
+  <string name="location_permission_title">위치 권한 요청 중</string>
   <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
   <string name="ok">확인</string>
   <string name="title_activity_nearby">근처의 장소</string>
@@ -452,6 +454,14 @@
   <string name="previous_image_title_description">이전의 제목 및 설명 복사</string>
   <string name="skip_image">이 이미지 건너뛰기</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">다운로드를 실패했습니다!! 외장 스토리지 권한 없이 파일을 다운로드할 수 없습니다.</string>
+  <string name="manage_exif_tags">EXIF 태그 관리</string>
+  <string name="exif_tag_name_author">만든이</string>
+  <string name="exif_tag_name_copyright">저작권</string>
+  <string name="exif_tag_name_location">위치</string>
+  <string name="exif_tag_name_cameraModel">카메라 모델</string>
+  <string name="exif_tag_name_lensModel">렌즈 모델</string>
+  <string name="exif_tag_name_serialNumbers">일련 번호</string>
+  <string name="exif_tag_name_software">소프트웨어</string>
   <string name="share_via">앱 공유...</string>
   <string name="image_info">이미지 정보</string>
 </resources>

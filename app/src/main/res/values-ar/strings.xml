@@ -6,6 +6,7 @@
 * Azouz.anis
 * ButterflyOfFire
 * Claw eg
+* Kassem7899
 * Meno25
 * Mido
 * Monrokhoury
@@ -22,6 +23,7 @@
   <string name="preference_category_appearance">المظهر</string>
   <string name="preference_category_general">عام</string>
   <string name="preference_category_feedback">التعليقات</string>
+  <string name="preference_category_privacy">الخصوصية</string>
   <string name="preference_category_location">الموقع</string>
   <string name="app_name">كومنز</string>
   <string name="bullet">•</string>
@@ -177,6 +179,7 @@
   <string name="storage_permission_title">طلب إذن التخزين</string>
   <string name="read_storage_permission_rationale">صلاحية مطلوبة: قراءة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
   <string name="write_storage_permission_rationale">صلاحية مطلوبة: اكتب وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور/الكاميرا الخاصة بك بدونها.</string>
+  <string name="location_permission_title">جارٍ طلب إذن الموقع</string>
   <string name="location_permission_rationale">صلاحية اختيارية: احصل على الموقع الحالي لاقتراحات التصنيفات</string>
   <string name="ok">موافق</string>
   <string name="title_activity_nearby">الأماكن القريبة</string>
@@ -516,6 +519,15 @@
   <string name="welcome_dont_upload_content_description">أمثلة على صور لعدم رفعها</string>
   <string name="skip_image">تخطي هذه الصورة</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">التنزيل فشل!!. لا يمكننا تنزيل الملف دون إذن تخزين خارجي.</string>
+  <string name="manage_exif_tags">إدارة وسوم EXIF</string>
+  <string name="manage_exif_tags_summary">حدد أية وسوم EXIF ​​لتحتفظ بها في المرفوعات</string>
+  <string name="exif_tag_name_author">المؤلف</string>
+  <string name="exif_tag_name_copyright">حقوق نشر</string>
+  <string name="exif_tag_name_location">الموقع</string>
+  <string name="exif_tag_name_cameraModel">طراز الكاميرا</string>
+  <string name="exif_tag_name_lensModel">طراز العدسة</string>
+  <string name="exif_tag_name_serialNumbers">الأرقام التسلسلية</string>
+  <string name="exif_tag_name_software">برمجية</string>
   <string name="share_text">ارفع الصور لويكيميديا ​​كومنز على هاتفك قم بتنزيل تطبيق كومنز: %1$s</string>
   <string name="share_via">مشاركة التطبيق عبر...</string>
   <string name="image_info">معلومات الصورة</string>
