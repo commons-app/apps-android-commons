@@ -142,6 +142,12 @@ public class SettingsFragment extends PreferenceFragment {
         }
     }
 
+    /**
+     * Prepares language summary and language codes list and adds them to list preference as pairs.
+     * Uses previously saved language if there is any, if not uses phone local as initial language.
+     * Adds preference changed listener and saves value choosen by user to shared preferences
+     * to remember later
+     */
     private void prepareLanguages() {
         List<String> languageNamesList = new ArrayList<>();
         List<String> languageCodesList = new ArrayList<>();
