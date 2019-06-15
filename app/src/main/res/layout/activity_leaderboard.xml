@@ -24,7 +24,7 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:contentDescription="@string/commons_logo"
-                android:src="@drawable/user_avtar" />
+                app:srcCompat="@drawable/commons_logo"/>
 
             <TextView
                 style="?android:textAppearanceLarge"

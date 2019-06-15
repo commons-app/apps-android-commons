@@ -36,7 +36,7 @@
             android:layout_width="@dimen/overflow_icon_dimen"
             android:layout_height="@dimen/overflow_icon_dimen"
             android:id="@+id/avtar"
-            app:srcCompat="@drawable/user_avtar"
+            app:srcCompat="@drawable/commons_logo"
             android:scaleType="centerCrop"
             android:layout_marginStart="@dimen/activity_margin_horizontal"
             android:layout_marginLeft="@dimen/activity_margin_horizontal"
