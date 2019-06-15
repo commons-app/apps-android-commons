@@ -159,7 +159,6 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation rotate_forward;
 
     private Place place;
-    public static Place nearbyplace;
     private Marker selected;
     private Marker currentLocationMarker;
     public MapboxMap mapboxMap;
@@ -268,9 +267,6 @@ public class NearbyMapFragment extends DaggerFragment {
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             }
             updateMapToTrackPosition();
-            if (nearbyplace != null){
-                centerMapToPlace(nearbyplace);
-            }
         }
 
     }
@@ -1060,10 +1056,6 @@ public class NearbyMapFragment extends DaggerFragment {
                     .build();
             mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
         });
-
-        if (nearbyplace != null) {
-            nearbyplace = null;
-        }
     }
 
 

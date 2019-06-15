@@ -711,9 +711,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
      * @param place is new center of the map
      */
     public void centerMapToPlace(Place place) {
-        if (nearbyMapFragment == null) {
-            nearbyMapFragment.nearbyplace = place;
-        } else {
+        if (nearbyMapFragment != null) {
             nearbyMapFragment.centerMapToPlace(place);
         }
     }

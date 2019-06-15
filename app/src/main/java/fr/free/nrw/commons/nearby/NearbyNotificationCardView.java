@@ -17,6 +17,8 @@ import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
+
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
  */
@@ -82,8 +84,13 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
     private void setActionListeners(Place place) {
         this.setOnClickListener(view -> {
-            ((MainActivity)getContext()).viewPager.setCurrentItem(1);
-            ((NearbyFragment)((MainActivity) getContext()).contributionsActivityPagerAdapter.getItem(1)).centerMapToPlace(place);
+            MainActivity m = (MainActivity) getContext();
+
+            // Change to nearby tab
+            m.viewPager.setCurrentItem(NEARBY_TAB_POSITION);
+
+            // Center the map to the place
+            ((NearbyFragment) m.contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).centerMapToPlace(place);
         });
     }
 

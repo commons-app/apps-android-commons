@@ -117,7 +117,7 @@ public class PlaceRenderer extends Renderer<Place> {
                 }
             }
             if (onBookmarkClick == null) {
-                ((NearbyMapFragment) ((NearbyFragment) ((NearbyListFragment) fragment).getParentFragment()).getChildFragmentManager().findFragmentByTag(NearbyMapFragment.class.getSimpleName())).centerMapToPlace(place);
+                ((NearbyFragment) fragment.getParentFragment()).centerMapToPlace(place);
             }
         };
         view.setOnClickListener(listener);
