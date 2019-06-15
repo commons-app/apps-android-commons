@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
@@ -24,6 +26,8 @@ import android.widget.TextView;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,7 +44,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -127,7 +130,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         int width = displayMetrics.widthPixels;
 
         // Used for the setting the size of imageView at runtime
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
                 imageView.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
@@ -241,7 +244,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     @SuppressLint("CheckResult")
     private void setWikidataEditCount() {
         String userName = sessionManager.getUserName();
-        if (StringUtils.isNullOrWhiteSpace(userName)) {
+        if (StringUtils.isBlank(userName)) {
             return;
         }
         compositeDisposable.add(okHttpJsonApiClient.getWikidataEdits(userName)
@@ -353,7 +356,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         String levelUpInfoString = getString(R.string.level);
-        levelUpInfoString += " " + Integer.toString(levelInfo.getLevelNumber());
+        levelUpInfoString += " " + levelInfo.getLevelNumber();
         levelNumber.setText(levelUpInfoString);
         imageView.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
                 new ContextThemeWrapper(this, levelInfo.getLevelStyle()).getTheme()));

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Ademo
 * Amire80
 * Barakolo
 * Deborahjay
+* Erelon
 * ExampleTomer
 * Guycn2
 * Inkbug
@@ -100,9 +102,10 @@
   <string name="title_activity_signup">רישום</string>
   <string name="title_activity_featured_images">תמונות מומלצות</string>
   <string name="title_activity_category_details">קטגוריה</string>
+  <string name="title_activity_review">ביקורת עמיתים</string>
   <string name="menu_about">אודות</string>
   <string name="about_license">יישום ויקישיתוף (Wikimedia Commons app) הוא יישום קוד פתוח שמפותח ומתוחזק על־ידי מקבלי מלגות ומתנדבים של קהילת ויקימדיה. קרן ויקימדיה אינה מעורבת ביצירה, פיתוח, או תחזוקה של היישום.</string>
-  <string name="about_improve">נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
+  <string name="about_improve">נא ליצור &lt;a href=\"%1$s\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
   <string name="about_privacy_policy">&lt;u&gt;מדיניות פרטיות&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;יוצרים&lt;/u&gt;</string>
   <string name="title_activity_about">אודות</string>
@@ -170,11 +173,12 @@
   <string name="detail_panel_cats_loading">טעינה...</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
   <string name="detail_description_empty">אין תיאור</string>
+  <string name="detail_discussion_empty">אין דיון</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>
   <string name="menu_refresh">רענון</string>
   <string name="storage_permission_title">בקשת הרשאה לאחסון</string>
   <string name="read_storage_permission_rationale">נדרשת הרשאה: קריאת אחסון חיצוני. היישום לא יכול לגשת לגלריה שלך בלי זה.</string>
-  <string name="write_storage_permission_rationale">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לגשת למצלמה שלך בלי זה.</string>
+  <string name="write_storage_permission_rationale">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לגשת למצלמה או לגלריה שלך בלי זה.</string>
   <string name="location_permission_rationale">הרשאה לא מחייבת: קבלת מיקום נוכחי בשביל הצעות קטגוריות</string>
   <string name="ok">אישור</string>
   <string name="title_activity_nearby">מקומות בסביבה</string>
@@ -185,6 +189,7 @@
   <string name="no">לא</string>
   <string name="media_detail_title">כותרת</string>
   <string name="media_detail_description">תיאור</string>
+  <string name="media_detail_discussion">דיון</string>
   <string name="media_detail_author">יוצר</string>
   <string name="media_detail_uploaded_date">תאריך העלאה</string>
   <string name="media_detail_license">רישיון</string>
@@ -200,7 +205,7 @@
   <string name="maximum_limit_alert">לא ניתן להציג יותר מ־500</string>
   <string name="enter_valid">נא להכניס מספר תקף</string>
   <string name="cannot_be_zero">מגבלת ההעלאה לא יכולה להיות 0</string>
-  <string name="set_limit" fuzzy="true">הגדרת מגבלת העלאות אחרונות</string>
+  <string name="set_limit">מגבלת העלאות אחרונות</string>
   <string name="login_failed_2fa_not_supported">אימות דו־שלבי אינו נתמך כעת.</string>
   <string name="logout_verification">האם באמת לצאת מהחשבון?</string>
   <string name="commons_logo">סמל ויקישיתוף</string>
@@ -235,6 +240,7 @@
   <string name="navigation_item_info">מדריך</string>
   <string name="navigation_item_notification">התראות</string>
   <string name="navigation_item_featured_images">מומלץ</string>
+  <string name="navigation_item_review">סקירה</string>
   <string name="nearby_needs_permissions">אי־אפשר להציג מקומות בסביבה ללא הרשאות מיקום</string>
   <string name="no_description_found">לא נמצא תיאור</string>
   <string name="nearby_info_menu_commons_article">דף קובץ בוויקישיתוף</string>
@@ -252,6 +258,7 @@
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
   <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
   <string name="upload_problem_do_you_continue">האם ברצונך להעלות את התמונה הזאת עדיין?</string>
+  <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
@@ -263,6 +270,8 @@
   <string name="nominate_deletion">להציע מחיקה</string>
   <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה</string>
   <string name="nominated_see_more">&lt;u&gt;ר\' את האתר לפרטים&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">העלאה של %1$s להצבעה למחיקה.</string>
+  <string name="nominating_for_deletion_status">העמדת קובץ למחיקה: %1$s</string>
   <string name="view_browser">הצגה בדפדפן</string>
   <string name="skip_login">לדלג</string>
   <string name="navigation_item_login">כניסה לחשבון</string>
@@ -291,15 +300,17 @@
   <string name="no_internet">האינטרנט אינו זמין</string>
   <string name="internet_established">האינטרנט זמין</string>
   <string name="error_notifications">שגיאה באחזור התראות</string>
+  <string name="error_review">שגיאת באחזור התמונה לסקירה. נא לרענן כדי לנסות שוב.</string>
+  <string name="error_review_categories">שגיאה באחזור קטגוריות תמונות לסקירה. נא לרענן כדי לנסות שוב.</string>
   <string name="no_notifications">לא נמצאו התראות</string>
-  <string name="about_translate">&lt;u&gt;תרגום&lt;/u&gt;</string>
+  <string name="about_translate">תרגום</string>
   <string name="about_translate_title">שפות</string>
   <string name="about_translate_message">נא לבחור את השפה שבה תשלחו את התרגומים</string>
   <string name="about_translate_proceed">המשך</string>
   <string name="about_translate_cancel">ביטול</string>
   <string name="retry">לנסות שוב</string>
   <string name="showcase_view_got_it_button">הבנתי!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">אלה המקומות בסביבתך שזקוקים לתמונות כדי להמחיש את הערכים שלהם בוויקיפדיה</string>
+  <string name="showcase_view_whole_nearby_activity">אלה המקומות בסביבתך שזקוקים לתמונות כדי להמחיש את הערכים שלהם בוויקיפדיה.\n\nלחיצה על חיפוש באזור הזה נועלת את המפה ומתחילה חיפוש סביב המיקום הזה.</string>
   <string name="showcase_view_list_icon">ניתן ללחוץ על כפתור זה כדי להציג רשימה של המקומות האלה</string>
   <string name="showcase_view_plus_fab">באפשרותך להעלות תמונה של כל מקום מהגלריה או מהמצלמה שלך</string>
   <string name="no_images_found">לא נמצאו תמונות!</string>
@@ -318,6 +329,8 @@
   <string name="error_loading_subcategories">אירעה שגיאה בעת טעינת תת־קטגוריות.</string>
   <string name="search_tab_title_media">מדיה</string>
   <string name="search_tab_title_categories">קטגוריות</string>
+  <string name="explore_tab_title_featured">מומלץ</string>
+  <string name="explore_tab_title_mobile">העלאה דרך נייד</string>
   <string name="successful_wikidata_edit">התמונה נוספה בהצלחה לדף %1$s בוויקינתונים!</string>
   <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
   <string name="menu_set_wallpaper">הגדרה בתור טפט</string>
@@ -433,11 +446,54 @@
   <string name="achievements_fetch_failed">משהו השתבש, לא הצלחנו לקבל את ההישגים שלך</string>
   <string name="ends_on">מסתיים ב־:</string>
   <string name="display_campaigns">הצגת מסעי פרסום</string>
-  <string name="display_campaigns_explanation">יש לגעת כאן כדי לצפות במסעי פרסום שמתרחשים כרגע</string>
+  <string name="display_campaigns_explanation">ר\' את מסעי פרסום שמתרחשים כרגע</string>
   <string name="nearby_campaign_dismiss_message">מסעי הפרסום לא יופיעו עוד. עם זאת, ניתן להפעיל את ההתראות האלה מחדש בהגדרות בהתאם לרצונך.</string>
   <string name="this_function_needs_network_connection">תכונה זו דורשת חיבור לרשת, נא לבדוק את הגדרות החיבור שלך.</string>
   <string name="bad_token_error_proposed_solution">ההעלאה נכשלה עקב תקלות עם אסימון עריכה. נא לנסות לצאת ולהיכנס שוב.</string>
   <string name="error_processing_image">אירעה שגיאה בעת עיבוד התמונה. נא לנסות שוב!</string>
+  <string name="getting_edit_token">קבלת אסימון לעריכה</string>
+  <string name="check_category_adding_template">הוספת תבנית לבדיקת קטגוריה</string>
+  <string name="check_category_notification_title">בקשת בדיקת קטגוריה עבור %1$s</string>
+  <string name="check_category_edit_summary">בקשת בדיקת קטגוריה</string>
+  <string name="check_category_success_title">התבקשה בדיקת קטגוריה</string>
+  <string name="check_category_failure_title">בקשת בדיקת קטגוריה לא עבדה</string>
+  <string name="check_category_success_message">התבקשה בדיקת קטגוריה עבור %1$s בהצלחה</string>
+  <string name="check_category_failure_message">בקשת בדיקת הקטגוריה עבור %1$s לא הצליחה</string>
+  <string name="check_category_toast">מוגשת בקשה לבדיקת קטגוריה עבור %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">הוספת הודעת מחיקה לקובץ</string>
+  <string name="nominate_for_deletion_done">סיום</string>
+  <string name="nominate_for_deletion_notify_user">יידוע משתמש בדף שיחה</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">הוספת קובץ ליומן בקשות מחיקה</string>
+  <string name="nominate_for_deletion_create_deletion_request">יצירת דף־משנה בבקשות מחיקה</string>
+  <string name="notsure">לא בטוח</string>
+  <string name="send_thank_success_title">שליחת תודה: הצלחה</string>
+  <string name="send_thank_success_message">נשלחה תודה בהצלחה אל %1$s</string>
+  <string name="send_thank_failure_message">שליחת התודה נכשלה %1$s</string>
+  <string name="send_thank_failure_title">שליחת תודה: כשל</string>
+  <string name="send_thank_send">שליחת תודות</string>
+  <string name="send_thank_notification_title">שליחת תודות</string>
+  <string name="send_thank_toast">נשלחת תודה עבור %1$s</string>
+  <string name="review_copyright">האם זה עומד בתנאי זכויות היוצרים?</string>
+  <string name="review_category">האם הקטגוריה נכונה?</string>
+  <string name="review_spam">האם זה בתחום?</string>
+  <string name="review_thanks">ברצונך להודות לתורם?</string>
+  <string name="review_spam_explanation">נא ללחוץ על \"לא\" כדי להציע את התמונה הזאת למחיקה אם היא בכלל לא שימושית.</string>
+  <string name="review_copyright_explanation">סמלים, צילומי מסך, כרזות של סרטים, הם לעיתים קרובות הפרות זכויות יוצרים.\nנא ללחוץ \"לא\" כדי להציע את התמונה הזאת למחיקה.</string>
+  <string name="review_thanks_explanation">ההערכה שלך תעודד את %1$s</string>
+  <string name="review_no_category">אבוי, זה לא משויך לשום קטגוריה!</string>
+  <string name="review_category_explanation">התמונה הזאת משויכת ל־%1$s קטגוריות.</string>
+  <string name="review_spam_report_question">זה פשוט מחוץ לתחום כי ככה</string>
+  <string name="review_c_violation_report_question">זאת הפרת זכויות יוצרים כי ככה</string>
+  <string name="review_category_yes_button_text">לא, טעות בקטגוריה</string>
+  <string name="review_category_no_button_text">נראה בסדר</string>
+  <string name="review_spam_yes_button_text">לא, אין שום קשר</string>
+  <string name="review_spam_no_button_text">נראה בסדר</string>
+  <string name="review_copyright_yes_button_text">לא, הפרת זכויות יוצרים</string>
+  <string name="review_copyright_no_button_text">נראה בסדר</string>
+  <string name="review_thanks_yes_button_text">כן, למה לא</string>
+  <string name="review_thanks_no_button_text">התמונה הבאה</string>
+  <string name="skip_image_explanation">לחיצה על הכפתור הזה תציג בפניך תמונה נוספת שנוספה לאחרונה לוויקישיתוף</string>
+  <string name="review_image_explanation">ניתן לסקור את התמונות ולשפר את האיכות של ויקישיתוף.\nארבע יסודות הסקירה הם:\n- האם התמונה קשורה לנושא?\n- האם התמונה תואמת לכללי זכויות היוצרים?\n- האם התמונה נמצאת בקטגוריה הנכונה?\n- אם הכול בסדר, ניתן גם להודות למי שתרם אותה.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">מתקבל תוכן שיתופי. עיבוד התמונה עשוי לארוך זמן מה כתלות בגודל התמונה והמכשיר שלך</item>
     <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
@@ -445,12 +501,24 @@
   <string name="no_image">לא נעשה שימוש בתמונות</string>
   <string name="no_image_reverted">לא שוחזרו תמונות</string>
   <string name="no_image_uploaded">לא הועלו תמונות</string>
-  <string name="no_notification" fuzzy="true">אין לך התראות שלא נקראו</string>
-  <string name="no_archived_notification" fuzzy="true">יש לך התראות בארכיון</string>
+  <string name="no_notification">אין לך התראות שלא נקראו</string>
+  <string name="no_archived_notification">אין לך התראות בארכיון</string>
   <string name="share_logs_using">שיתוף יומנים בעזרת</string>
   <string name="menu_option_archived">הצגת ארכיון</string>
   <string name="menu_option_unread">הצגת התראות שלא נקראו</string>
   <string name="error_occurred_in_picking_images">אירעה שגיאה בעת בחירת תמונות</string>
   <string name="image_chooser_title">נא לבחור תמונות להעלאה</string>
   <string name="please_wait">נא להמתין…</string>
+  <string name="images_featured_explanation">תמונות מובילות הן תמונות של צלמים ומאיירים מיומנים אותם בחרה קהילת ויקישיתוף בזכות איכות התוצר שהם תורמים לאתר.</string>
+  <string name="images_via_nearby_explanation">תמונות שהועלו דרך מקומות בסביבה הן התמונות שנשלחות על ידי גילוי מקומות במפה.</string>
+  <string name="thanks_received_explanation">תכונה זו מאפשרת לעורכים לשלוח מסרי תודה למשתמשים שביצעו עריכות מועילות - על ידי שימוש בקישור תודה בעמוד ההיסטוריה או עמוד ההבדלים.</string>
+  <string name="previous_image_title_description">העתקת הכותרת והתיאור הקודמים</string>
+  <string name="previous_button_tooltip_message">יש ללחוץ כדי להשתמש מחדש בכותרת ובתיאור שהקלדת בתמונה הקודמת ולשנות אותה כדי להתאים לנוכחית</string>
+  <string name="welcome_do_upload_content_description">דוגמאות של תמונות טובות להעלאה לוויקישיתוף</string>
+  <string name="welcome_dont_upload_content_description">דוגמאות של תמונות שאין להעלות</string>
+  <string name="skip_image">דילוג על התמונה הזאת</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ההורדה נכשלה!! אין לנו אפשרות להוריד את הקובץ ללא הרשאות גישה לאחסון חיצוני.</string>
+  <string name="share_text">כדי להעלות תמונות לוויקינתונים של ויקימדיה בעזרת הטלפון שלך יש להוריד את היישומון של ויקינתונים: %1$s</string>
+  <string name="share_via">שיתוף אפליקציה דרך...</string>
+  <string name="image_info">פרטי תמונה</string>
 </resources>

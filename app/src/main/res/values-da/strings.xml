@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Christian List
 * Envlh
 * Joedalton
@@ -14,6 +15,7 @@
   <string name="preference_category_appearance">Udseende</string>
   <string name="preference_category_general">Generelt</string>
   <string name="preference_category_feedback">Tilbagemelding</string>
+  <string name="preference_category_privacy">Privatliv</string>
   <string name="preference_category_location">Sted</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -97,7 +99,7 @@
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-programmet oprettet og udviklet af frivillige i Wikimediafællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af programmet.</string>
-  <string name="about_improve">Opret en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
+  <string name="about_improve">Opret en ny &lt;a href=\"%1$s\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;u&gt;Privatlivspolitik&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Bidragsydere&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>
@@ -162,10 +164,11 @@
   <string name="detail_panel_cats_loading">Indlæser…</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
+  <string name="detail_discussion_empty">Ingen diskussion</string>
   <string name="detail_license_empty">Ukendt licens</string>
   <string name="menu_refresh">Opdater</string>
   <string name="read_storage_permission_rationale">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke tilgå dit galleri uden denne tilladelse.</string>
-  <string name="write_storage_permission_rationale">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke tilgå dit kamera uden denne funktion.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke tilgå dit kamera uden denne funktion.</string>
   <string name="location_permission_rationale">Valgfri tilladelse: Hent nuværende position for kategoriforslag</string>
   <string name="ok">O.k.</string>
   <string name="title_activity_nearby">Steder i nærheden</string>
@@ -176,6 +179,7 @@
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_description">Beskrivelse</string>
+  <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Forfatter</string>
   <string name="media_detail_uploaded_date">Overførselsdato</string>
   <string name="media_detail_license">Licens</string>
@@ -190,7 +194,7 @@
   <string name="invalid_input">Ugyldig indtastning</string>
   <string name="maximum_limit_alert">Kan ikke vise mere end 500</string>
   <string name="enter_valid">Angiv et gyldigt tal</string>
-  <string name="set_limit" fuzzy="true">Angiv grænse for seneste overførelser</string>
+  <string name="set_limit">Grænse for seneste overførelser</string>
   <string name="login_failed_2fa_not_supported">Tofaktorgodkendelse er ikke understøttet i øjeblikket.</string>
   <string name="logout_verification">Ønsker du at logge ud?</string>
   <string name="commons_logo">Commons-logo</string>
@@ -352,10 +356,23 @@
   <string name="display_location_permission_title">Vis placeringstilladelse</string>
   <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
+  <string name="nominate_for_deletion_done">Udført</string>
+  <string name="notsure">Ikke sikker</string>
+  <string name="send_thank_notification_title">Sender tak</string>
+  <string name="review_category_no_button_text">Ser fint ud</string>
+  <string name="review_spam_no_button_text">Ser fint ud</string>
+  <string name="review_copyright_no_button_text">Ser fint ud</string>
+  <string name="review_thanks_yes_button_text">Ja, hvorfor ikke</string>
+  <string name="review_thanks_no_button_text">Næste billede</string>
   <string name="no_image">Ingen billeder brugt</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
   <string name="menu_option_archived">Vis arkiverede</string>
   <string name="menu_option_unread">Vis ulæste</string>
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
+  <string name="skip_image">Spring over dette billede</string>
+  <string name="exif_tag_name_copyright">Ophavsret</string>
+  <string name="exif_tag_name_cameraModel">Kameramodel</string>
+  <string name="exif_tag_name_serialNumbers">Serienumre</string>
+  <string name="share_via">Del app via...</string>
 </resources>

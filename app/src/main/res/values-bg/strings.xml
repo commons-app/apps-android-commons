@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * DCLXVI
 * Datawiki30
 * MegaAlex
@@ -84,7 +85,7 @@
   <string name="title_activity_category_details">Категория</string>
   <string name="menu_about">За приложението</string>
   <string name="about_license">Приложението на Commons е с отворен код. Неговите създатели и поддръжници са получателите на ресурсите на общността на Уикимедия, както и на членовете на общността. Фондация Уикимедия не участва в създаването, развитието и поддръжката.</string>
-  <string name="about_improve">Създайте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;проблем на GitHub&lt;/a&gt; за заявяване на грешки и даване предложения.</string>
+  <string name="about_improve">Създайте нов &lt;a href=\"%1$s\"&gt;проблем на GitHub&lt;/a&gt; за заявяване на грешки и даване предложения.</string>
   <string name="title_activity_about">За приложението</string>
   <string name="no_email_client">Не е инсталирана програма за електронна поща</string>
   <string name="provider_categories">Последно използвани категории</string>
@@ -127,7 +128,7 @@
   <string name="menu_refresh">Обновяване</string>
   <string name="storage_permission_title">Изисква се разрешение за съхранение</string>
   <string name="read_storage_permission_rationale">Изисква се разрешение: Трябва да се прочита от външен склад. Приложението без това няма достъп до вашата галерия.</string>
-  <string name="write_storage_permission_rationale">Изисква се разрешение: Трябва да се запише на външен склад. Приложението без това няма достъп до вашата камера.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Изисква се разрешение: Трябва да се запише на външен склад. Приложението без това няма достъп до вашата камера.</string>
   <string name="ok">Добре</string>
   <string name="title_activity_nearby">Близки места</string>
   <string name="no_nearby">Не са намерени близки места</string>
@@ -206,6 +207,7 @@
   <string name="search_tab_title_media">ИЗОБРАЖЕНИЯ/ЗАПИСИ</string>
   <string name="search_tab_title_categories">КАТЕГОРИИ</string>
   <string name="no_recent_searches">Няма последни търсения</string>
+  <string name="nominate_delete">Предлагане за изтриване</string>
   <string name="statistics_wikidata_edits">Изображения чрез „Близки места“</string>
   <string name="preference_author_name_toggle">Използване на персонализирано авторско име</string>
   <string name="preference_author_name_toggle_summary">При качването използвайте персонализирано авторско име вместо потребителското си име</string>
@@ -213,6 +215,7 @@
   <string name="preference_author_name_summary">Персонализираното авторско име, което ще се използва вместо потребителското ви име при качване</string>
   <string name="archived_notifications">Известия (архивирани)</string>
   <string name="list_sheet">Списък</string>
+  <string name="submit">Изпращане</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>
   <string name="desc_language_Africa">Африка</string>
@@ -226,7 +229,7 @@
   <string name="display_location_permission_explanation">Потърсете разрешение за местоположение, когато трябва да уведомите за местоположението.</string>
   <string name="ends_on">Завършва:</string>
   <string name="display_campaigns">Показване на кампании</string>
-  <string name="display_campaigns_explanation">Кликнете тук, за да видите текущите кампании</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Кликнете тук, за да видите текущите кампании</string>
   <string name="nearby_campaign_dismiss_message">Вече няма да ви се показват кампаниите. Ако промените решението си, ще намерите тази настройка в Настройки.</string>
   <string name="this_function_needs_network_connection">Тази опция изисква да сте свързани към мрежата. Проверете настройките за връзка.</string>
   <string name="bad_token_error_proposed_solution">Качването не е успешно поради проблеми с редакторския шифър. Моля, излезете и отново влезете в системата.</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 1917 Ekim Devrimi
+* Abijeet Patro
 * Envlh
 * Gambollar
 * Gorizon
@@ -14,7 +15,7 @@
   <string name="navigation_item_explore">Keşf kerê</string>
   <string name="preference_category_appearance">Asayış</string>
   <string name="preference_category_general">Bıngeh</string>
-  <string name="preference_category_feedback">Peydrışten</string>
+  <string name="preference_category_feedback">Peyderıştış</string>
   <string name="preference_category_location">Lokasyon</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -97,7 +98,7 @@
   <string name="title_activity_featured_images">Resımê weçinıteyi</string>
   <string name="title_activity_category_details">Kategoriye</string>
   <string name="menu_about">Heq te cı</string>
-  <string name="about_improve">Qandê yew &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-cıkewtış&lt;/a&gt;ê neweyi rê rapor û teklifan bıaferne.</string>
+  <string name="about_improve">Qandê yew &lt;a href=\"%1$s\"&gt;GitHub-cıkewtış&lt;/a&gt;ê neweyi rê rapor û teklifan bıaferne.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politikaya nımıtışi&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;İştırakkerdoği&lt;/u&gt;</string>
   <string name="title_activity_about">Heq te cı</string>
@@ -137,6 +138,7 @@
   <string name="detail_panel_cats_loading">Bar beno…</string>
   <string name="detail_panel_cats_none">Theba nêweçineya</string>
   <string name="detail_description_empty">Akerdenayış çıniyo</string>
+  <string name="detail_discussion_empty">Mışewre çıniyo</string>
   <string name="detail_license_empty">Lisans nizaneyeno</string>
   <string name="menu_refresh">Newe ke</string>
   <string name="ok">TEMAM</string>
@@ -172,11 +174,12 @@
   <string name="navigation_item_nearby">Nezdıra</string>
   <string name="navigation_item_about">Heqa</string>
   <string name="navigation_item_settings">Eyari</string>
-  <string name="navigation_item_feedback">Peydrışten</string>
+  <string name="navigation_item_feedback">Peyderıştış</string>
   <string name="navigation_item_logout">Veciyayış</string>
   <string name="navigation_item_info">Musnayış</string>
   <string name="navigation_item_notification">Tebliği</string>
   <string name="navigation_item_featured_images">Weçinaye</string>
+  <string name="navigation_item_review">Çım berze cı</string>
   <string name="nearby_needs_permissions">Cayê nezdiy, bêicazetê lokasyoni nêmocneyêno</string>
   <string name="nearby_info_menu_commons_article">Pela dosyay commonsi</string>
   <string name="nearby_info_menu_wikidata_article">Pbcey Wikidata</string>
@@ -242,8 +245,13 @@
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
   <string name="yes_submit">Eya, bırışe</string>
   <string name="no_go_back">Nê, Peyser Şo</string>
-  <string name="no_archived_notification" fuzzy="true">Xeberê şımayê arşivkerdeyi çıniyê</string>
+  <string name="nominate_for_deletion_done">Temam</string>
+  <string name="review_thanks_yes_button_text">Eya, çıra mebo</string>
+  <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
+  <string name="no_archived_notification">Beyanatên şımayê arçivkerdeyi çıniyê</string>
   <string name="menu_option_archived">Arşivkerdeyan bıvêne</string>
   <string name="menu_option_unread">Nêwendeyan bıvêne</string>
   <string name="please_wait">Kerem kerên, bıpawên...</string>
+  <string name="skip_image">NÊ RESIMİ RAVİYARNE</string>
+  <string name="image_info">Melumatê resımi</string>
 </resources>

@@ -1,20 +1,18 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import fr.free.nrw.commons.Media;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface MediaWikiApi {
-    String getUserAgent();
 
     String getAuthCookie();
 
@@ -34,13 +32,7 @@ public interface MediaWikiApi {
 
     boolean fileExistsWithName(String fileName) throws IOException;
 
-    boolean pageExists(String pageName) throws IOException;
-
-    String findThumbnailByFilename(String filename) throws IOException;
-
-    boolean logEvents(LogBuilder[] logBuilders);
-
-    List<Media> getCategoryImages(String categoryName);
+    Single<Boolean> pageExists(String pageName);
 
     List<String> getSubCategoryList(String categoryName);
 
@@ -52,7 +44,7 @@ public interface MediaWikiApi {
     @NonNull
     Single<UploadStash> uploadFile(String filename, InputStream file,
                                    long dataLength, Uri fileUri, Uri contentProviderUri,
-                                   final ProgressListener progressListener) throws IOException;
+                                   final ProgressListener progressListener);
 
     @NonNull
     Single<UploadResult> uploadFileFinalize(String filename, String filekey,
@@ -67,15 +59,15 @@ public interface MediaWikiApi {
     String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
 
     @Nullable
-    String wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException;
+    String wikidataCreateClaim(String entityId, String property, String snaktype, String value) throws IOException;
 
     @Nullable
     boolean addWikidataEditTag(String revisionId) throws IOException;
 
-    String parseWikicode(String source) throws IOException;
+    Single<String> parseWikicode(String source);
 
     @NonNull
-    MediaResult fetchMediaByFilename(String filename) throws IOException;
+    Single<MediaResult> fetchMediaByFilename(String filename);
 
     @NonNull
     Observable<String> searchCategories(String filterValue, int searchCatsLimit);
@@ -103,6 +95,10 @@ public interface MediaWikiApi {
     boolean isUserBlockedFromCommons();
 
     void logout();
+
+//    Single<CampaignResponseDTO> getCampaigns();
+
+    boolean thank(String editToken, long revision) throws IOException;
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * MaGa
 -->
 <resources>
@@ -86,7 +87,7 @@
   <string name="title_activity_featured_images">Izabrane slike</string>
   <string name="menu_about">O</string>
   <string name="about_license">Aplikacija The Wikimedia Commons je aplikacija otvorenog kôda koju razvijaju i održavaju volonteri Wikimedijine zajednice. Zaklada Wikimedija nije uključena u stvaranje, razvoj ili održavanje ove aplikacije.</string>
-  <string name="about_improve">Da biste prijavili poteškoću ili dali prijedlog, stvorite &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;novi zahtjev na GitHubu&lt;/a&gt;.</string>
+  <string name="about_improve">Da biste prijavili poteškoću ili dali prijedlog, stvorite &lt;a href=\"%1$s\"&gt;novi zahtjev na GitHubu&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politika privatnosti&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Zasluge&lt;/u&gt;</string>
   <string name="title_activity_about">O</string>
@@ -153,7 +154,7 @@
   <string name="detail_license_empty">Nepoznata licencija</string>
   <string name="menu_refresh">Osvježi</string>
   <string name="read_storage_permission_rationale">Potrebno dopuštenje čitanja vanjske pohrane. Bez toga aplikacija ne može pristupiti Vašoj galeriji.</string>
-  <string name="write_storage_permission_rationale">Potrebno dopuštenje spremanja na vanjsku pohranu. Bez toga aplikacija ne može pristupiti Vašoj kameri.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Potrebno dopuštenje spremanja na vanjsku pohranu. Bez toga aplikacija ne može pristupiti Vašoj kameri.</string>
   <string name="location_permission_rationale">Potrebno dopuštenje za određivanje trenutačne lokacije za prijedloge kategorija (nije obvezno)</string>
   <string name="ok">U redu</string>
   <string name="title_activity_nearby">Mjesta u blizini</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Les Meloures
 * Robby
 * Soued031
@@ -89,7 +90,7 @@
   <string name="title_activity_category_details">Kategorie</string>
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
-  <string name="about_improve">Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
+  <string name="about_improve">Leet w.e.g. &lt;a href=\"%1$s\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">&lt;u&gt;Dateschutzrichtlinn&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Merci&lt;/u&gt;</string>
   <string name="title_activity_about">Iwwer</string>
@@ -208,6 +209,7 @@
   <string name="navigation_item_info">Uleedung</string>
   <string name="navigation_item_notification">Notifikatiounen</string>
   <string name="navigation_item_featured_images">Bemierkenswäert</string>
+  <string name="navigation_item_review">Nokucken</string>
   <string name="nearby_needs_permissions">Plazen nobäi kënnen net gewise ginn ouni Rechter fir d\'Lokalisatioun</string>
   <string name="no_description_found">keng Beschreiwung fonnt</string>
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
@@ -219,6 +221,7 @@
   <string name="upload_problem_image_duplicate">Bild ass schonn op Commons.</string>
   <string name="upload_problem_different_geolocation">Dëst Bild gouf op enger anerer Plaz gemaach.</string>
   <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
+  <string name="internet_downloaded">Lued w.e.g. nëmme Biller erop déi Dir selwer opgeholl hutt. Lued keng Biller erop déi Dir aus dem Internet erofgelueden hutt.</string>
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
@@ -265,6 +268,7 @@
   <string name="title_activity_search">Sichen</string>
   <string name="search_tab_title_media">MEDIEN</string>
   <string name="search_tab_title_categories">KATEGORIEN</string>
+  <string name="explore_tab_title_mobile">MOBIL EROPGELUEDEN</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
@@ -315,10 +319,28 @@
   <string name="yes_submit">Jo, schécken</string>
   <string name="no_go_back">Neen, zréck goen</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
+  <string name="nominate_for_deletion_done">Fäerdeg</string>
+  <string name="notsure">Net sécher</string>
+  <string name="send_thank_send">Merci schécken</string>
+  <string name="send_thank_notification_title">Merci schécken</string>
+  <string name="review_category">Ass dëst richteg kategoriséiert?</string>
+  <string name="review_category_yes_button_text">Neen, falsch kategoriséiert</string>
+  <string name="review_category_no_button_text">Gesäit gutt aus</string>
+  <string name="review_spam_no_button_text">Gesäit gutt aus</string>
+  <string name="review_copyright_yes_button_text">Keng Violatioun vum Copyright</string>
+  <string name="review_copyright_no_button_text">Gesäit gutt aus</string>
+  <string name="review_thanks_yes_button_text">Jo, firwat net</string>
+  <string name="review_thanks_no_button_text">Nächst BILD</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
   <string name="no_archived_notification">Dir hutt keng archivéier Notifikatiounen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
   <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>
   <string name="please_wait">Waart w.e.g. ...</string>
+  <string name="skip_image">DËST BILD IWWERWSPRANGEN</string>
+  <string name="exif_tag_name_author">Auteur</string>
+  <string name="exif_tag_name_copyright">Copyright</string>
+  <string name="exif_tag_name_location">Plaz</string>
+  <string name="exif_tag_name_serialNumbers">Seriennummeren</string>
+  <string name="exif_tag_name_software">Software</string>
 </resources>

@@ -7,7 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.utils.model.NetworkConnectionType;
 

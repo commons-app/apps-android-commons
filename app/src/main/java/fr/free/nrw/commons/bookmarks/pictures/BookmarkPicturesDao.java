@@ -6,16 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.RemoteException;
 import androidx.annotation.NonNull;
+import fr.free.nrw.commons.bookmarks.Bookmark;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 import javax.inject.Singleton;
-
-import fr.free.nrw.commons.bookmarks.Bookmark;
 
 import static fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI;
 
@@ -121,6 +119,10 @@ public class BookmarkPicturesDao {
      * @return boolean : is bookmark in database ?
      */
     public boolean findBookmark(Bookmark bookmark) {
+        if (bookmark == null) {//Avoiding NPE's
+            return false;
+        }
+
         Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
         try {
@@ -147,9 +149,11 @@ public class BookmarkPicturesDao {
 
     @NonNull
     Bookmark fromCursor(Cursor cursor) {
+        String fileName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_NAME));
         return new Bookmark(
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_NAME)),
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR))
+                fileName,
+                cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR)),
+                BookmarkPicturesContentProvider.uriForName(fileName)
         );
     }
 

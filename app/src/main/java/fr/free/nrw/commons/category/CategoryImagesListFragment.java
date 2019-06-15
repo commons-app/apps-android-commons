@@ -2,7 +2,6 @@ package fr.free.nrw.commons.category;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
@@ -29,7 +29,6 @@ import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -102,7 +101,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param keyword
      */
     private void resetQueryContinueValues(String keyword) {
-        categoryKvStore.remove(keyword);
+        categoryKvStore.remove("query_continue_" + keyword);
     }
 
     /**
@@ -117,7 +116,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
+        compositeDisposable.add(controller.getCategoryImages(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -223,7 +222,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
 
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
+        compositeDisposable.add(controller.getCategoryImages(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

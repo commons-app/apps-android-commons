@@ -4,6 +4,7 @@ import android.Manifest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
@@ -14,13 +15,17 @@ import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -59,6 +64,14 @@ public class SettingsFragment extends PreferenceFragment {
             authorName.setEnabled((Boolean)newValue);
             return true;
         });
+
+        MultiSelectListPreference multiSelectListPref = (MultiSelectListPreference) findPreference("manageExifTags");
+        if (multiSelectListPref != null) {
+            multiSelectListPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                defaultKvStore.putJson(Prefs.MANAGED_EXIF_TAGS, newValue);
+                return true;
+            });
+        }
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
         int currentUploadLimit = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100);
@@ -105,6 +118,19 @@ public class SettingsFragment extends PreferenceFragment {
             checkPermissionsAndSendLogs();
             return true;
         });
+        // Disable some settings when not logged in.
+        if (defaultKvStore.getBoolean("login_skipped", false)){
+            SwitchPreference useExternalStorage = (SwitchPreference) findPreference("useExternalStorage");
+            SwitchPreference displayNearbyCardView = (SwitchPreference) findPreference("displayNearbyCardView");
+            SwitchPreference displayLocationPermissionForCardView = (SwitchPreference) findPreference("displayLocationPermissionForCardView");
+            SwitchPreference displayCampaignsCardView = (SwitchPreference) findPreference("displayCampaignsCardView");
+            useExternalStorage.setEnabled(false);
+            uploadLimit.setEnabled(false);
+            useAuthorName.setEnabled(false);
+            displayNearbyCardView.setEnabled(false);
+            displayLocationPermissionForCardView.setEnabled(false);
+            displayCampaignsCardView.setEnabled(false);
+        }
     }
 
     /**

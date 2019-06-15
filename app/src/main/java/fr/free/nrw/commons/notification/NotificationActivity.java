@@ -78,7 +78,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     @SuppressLint("CheckResult")
     public void removeNotification(Notification notification) {
-        Observable.fromCallable(() -> controller.markAsRead(notification))
+        compositeDisposable.add(Observable.fromCallable(() -> controller.markAsRead(notification))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
@@ -107,7 +107,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                     throwable.printStackTrace();
                     ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
                     progressBar.setVisibility(View.GONE);
-                });
+                }));
     }
 
 
@@ -140,7 +140,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     private void addNotifications(boolean archived) {
         Timber.d("Add notifications");
         if (mNotificationWorkerFragment == null) {
-            Observable.fromCallable(() -> {
+            compositeDisposable.add(Observable.fromCallable(() -> {
                 progressBar.setVisibility(View.VISIBLE);
                 return controller.getNotifications(archived);
 
@@ -157,14 +157,13 @@ public class NotificationActivity extends NavigationBaseActivity {
                             no_notification.setVisibility(View.VISIBLE);
                         } else {
                             setAdapter(notificationList);
-                        } if (notificationMenuItem != null) {
                         }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
                         Timber.e(throwable, "Error occurred while loading notifications");
                         ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
                         progressBar.setVisibility(View.GONE);
-                    });
+                    }));
         } else {
             notificationList = mNotificationWorkerFragment.getNotificationList();
             setAdapter(notificationList);

@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
+
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Metadata;
@@ -14,8 +16,6 @@ import com.drew.metadata.exif.ExifSubIFDDirectory;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-
-import javax.annotation.Nullable;
 
 import fr.free.nrw.commons.upload.FileUtils;
 

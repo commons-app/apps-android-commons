@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Cymrodor
 * Lloffiwr
 * Robin Owain
@@ -88,7 +89,7 @@
   <string name="title_activity_featured_images">Delweddau nodwedd</string>
   <string name="menu_about">Amdanom</string>
   <string name="about_license">Ap Cynnwys Agored a grewyd ac a gefnogir gan wirfoddolwyr cymuned Wicimedia yw ap Comin Wicimedia. Does a wnelo Sefydliad Wicimedia ddim byd ag e (ei greu, ei gynnal na\'i ddatblygu).</string>
-  <string name="about_improve">\n\nCrewch &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ymholiad GitHub&lt;/a&gt; os oes gennych fyg, broblem neu awgrym.</string>
+  <string name="about_improve">\n\nCrewch &lt;a href=\"%1$s\"&gt;ymholiad GitHub&lt;/a&gt; os oes gennych fyg, broblem neu awgrym.</string>
   <string name="about_privacy_policy">&lt;u&gt;Polisi preifatrwydd&lt;/u&gt;</string>
   <string name="about_credits">Clod a bri</string>
   <string name="title_activity_about">Amdanom</string>

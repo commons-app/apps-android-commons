@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Mirin
+-->
+<resources>
+  <string name="crash_dialog_title">Komunejo fiaskis</string>
+  <string name="crash_dialog_text">Domaĝe, io estis misa!</string>
+  <string name="crash_dialog_comment_prompt">Rakontu al ni per retpoŝto pri kion vi estis faranta. Tio helpos nin korekti!</string>
+  <string name="crash_dialog_ok_toast">Dankon!</string>
+</resources>

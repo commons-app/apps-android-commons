@@ -45,7 +45,6 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
-import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
 
 public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -68,8 +67,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     public boolean isAuthCookieAcquired = false;
 
     public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
-    public final int CONTRIBUTIONS_TAB_POSITION = 0;
-    public final int NEARBY_TAB_POSITION = 1;
+    public static final int CONTRIBUTIONS_TAB_POSITION = 0;
+    public static final int NEARBY_TAB_POSITION = 1;
 
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     private Menu menu;
@@ -361,12 +360,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         }
     }
 
-    private boolean deviceHasCamera() {
-        PackageManager pm = getPackageManager();
-        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
-                pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
-    }
-
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
         FragmentManager fragmentManager;
         private boolean isContributionsListFragment = true; // to know what to put in first tab, Contributions of Media Details
@@ -450,51 +443,13 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             return "android:switcher:" + viewId + ":" + index;
         }
 
-        /**
-         * In first tab we can have ContributionsFragment or Media details fragment. This method
-         * is responsible to update related boolean
-         * @param isContributionsListFragment true when contribution fragment should be visible, false
-         *                                means user clicked to MediaDetails
-         */
-        private void updateContributionFragmentTabContent(boolean isContributionsListFragment) {
-            this.isContributionsListFragment = isContributionsListFragment;
-        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Timber.d(data.toString());
+        Timber.d(data!=null?data.toString():"onActivityResult data is null");
         super.onActivityResult(requestCode, resultCode, data);
         controller.handleActivityResult(this, requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case LOCATION_REQUEST: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Location permission given");
-                    ((ContributionsFragment)contributionsActivityPagerAdapter
-                            .getItem(0)).locationManager.registerLocationManager();
-                } else {
-                    // If nearby fragment is visible and location permission is not given, send user back to contrib fragment
-                    if (!isContributionsFragmentVisible) {
-                        viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION);
-
-                        // TODO: If contrib fragment is visible and location permission is not given, display permission request button
-                    } else {
-
-                    }
-                }
-                return;
-            }
-
-            default:
-                return;
-        }
     }
 
     @Override

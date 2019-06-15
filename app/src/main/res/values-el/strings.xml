@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Astralnet
 * Domdomegg
 * Evropi
@@ -10,6 +11,7 @@
 * ManosHacker
 * Nikosgranturismogt
 * Nikosguard
+* Protnet
 * Tgkarounos
 -->
 <resources>
@@ -101,7 +103,7 @@
   <string name="title_activity_category_details">Κατηγορία</string>
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
-  <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
+  <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"%1$s\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
   <string name="about_privacy_policy">&lt;u&gt;Πολιτική απορρήτου&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Συντελεστές&lt;/u&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
@@ -173,7 +175,7 @@
   <string name="menu_refresh">Ανανέωση</string>
   <string name="storage_permission_title">Αιτείται Άδεια Αποθήκευσης</string>
   <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να έχει πρόσβαση στην συλλογή σας χωρίς αυτή.</string>
-  <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
   <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
   <string name="ok">Εντάξει</string>
   <string name="title_activity_nearby">Κοντινοί Τόποι</string>
@@ -328,7 +330,7 @@
   <string name="warning_for_image_reverts">Προειδοποίηση: Πάνω από το %1$s των εικόνων που ανεβάσατε έχουν διαγραφεί. Εάν συνεχίσετε να ανεβάζετε εικόνες που απαιτούν διαγραφή, ο λογαριασμός σας πιθανώς θα φραγεί.</string>
   <string name="congratulatory_message_quiz">Είχατε το %1$s των απαντήσεων σωστό. Συγχαρητήρια!</string>
   <string name="warning_for_no_answer">Επιλέξτε μια από τις δύο επιλογές για να απαντήσετε στην ερώτηση</string>
-  <string name="user_not_logged_in">Η συνεδρία σύνδεσης έληξε, παρακαλώ συνδεθείτε ξανά.</string>
+  <string name="user_not_logged_in">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά.</string>
   <string name="quiz_result_share_message">Μοιραστείτε το κουίζ με τους φίλους σας!</string>
   <string name="continue_message">Συνέχεια</string>
   <string name="correct">Σωστή απάντηση</string>

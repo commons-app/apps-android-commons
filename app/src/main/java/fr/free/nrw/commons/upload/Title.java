@@ -31,4 +31,8 @@ public class Title{
     public boolean isEmpty() {
         return titleText==null || titleText.isEmpty();
     }
+
+    public String getTitleText() {
+        return titleText;
+    }
 }

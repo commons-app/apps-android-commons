@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Chansey
 * Dual
 * Emperyan
@@ -106,7 +107,7 @@
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun imtiyaz sahibi ve gönüllüleri tarafından oluşturulmuş ve sürdürülmüş açık kaynak kodlu bir uygulamadır. Vikipedi Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımına dahil değildir.</string>
-  <string name="about_improve">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
+  <string name="about_improve">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"%1$s\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Katkıda bulunanlar&lt;/a&gt;</string>
   <string name="title_activity_about">Hakkında</string>
@@ -174,7 +175,7 @@
   <string name="detail_license_empty">Bilinmeyen lisans</string>
   <string name="menu_refresh">Yenile</string>
   <string name="read_storage_permission_rationale">Gerekli izin: Harici belleği oku. Uygulama, galerinize bu olmadan erişemez.</string>
-  <string name="write_storage_permission_rationale">Gerekli izin: Harici depolama yazın. Uygulama kameranıza bu olmadan erişemez.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Gerekli izin: Harici depolama yazın. Uygulama kameranıza bu olmadan erişemez.</string>
   <string name="location_permission_rationale">İsteğe bağlı izin: Kategori önerileri için geçerli konum alma</string>
   <string name="ok">Tamam</string>
   <string name="title_activity_nearby">Yakındaki yerler</string>
@@ -415,7 +416,7 @@
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görünümü özelliği için gerektiğinde konum izni isteyin.</string>
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
-  <string name="display_campaigns_explanation">Devam eden kampanyaları görmek için buraya dokunun</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Devam eden kampanyaları görmek için buraya dokunun</string>
   <string name="nearby_campaign_dismiss_message">Artık kampanyaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'da yeniden etkinleştirebilirsiniz.</string>
   <string name="no_archived_notification" fuzzy="true">Arşivlenmiş bildiriminiz yok</string>
   <string name="menu_option_archived">Arşivlenmişleri görüntüle</string>
