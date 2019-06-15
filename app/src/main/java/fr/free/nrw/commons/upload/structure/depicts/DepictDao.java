@@ -40,6 +40,13 @@ public class DepictDao {
         }
     }
 
+    /**
+     * Find persisted depicts in database, based on its name.
+     *
+     * @param name Depiction name
+     * @return depiction from database, or null if not found
+     */
+
     @Nullable
     Depiction find(String name) {
         Cursor cursor = null;
@@ -66,6 +73,11 @@ public class DepictDao {
         return null;
     }
 
+    /**
+     * Retrieve recently-used depictions, ordered by descending date.
+     *
+     * @return a list containing recent depicts
+     */
     @NonNull
     List<String> recentDepicts(int limit) {
         List<String> items = new ArrayList<>();

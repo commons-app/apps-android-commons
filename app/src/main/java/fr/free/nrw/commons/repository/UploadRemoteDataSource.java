@@ -192,6 +192,11 @@ public class UploadRemoteDataSource {
         return uploadModel.getImageQuality(uploadItem, shouldValidateTitle);
     }
 
+    /**
+     * handles category selection/unselection
+     * @param depictedItem
+     */
+
     public void onDepictedItemClicked(DepictedItem depictedItem) {
         depictModel.onDepictItemClicked(depictedItem);
     }

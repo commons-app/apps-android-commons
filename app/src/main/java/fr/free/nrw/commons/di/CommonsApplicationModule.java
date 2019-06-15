@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
 import androidx.collection.LruCache;
+
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
@@ -90,6 +91,11 @@ public class CommonsApplicationModule {
     public ContentProviderClient provideCategoryContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.CATEGORY_AUTHORITY);
     }
+
+    /**
+     * This method is used to provide instance of DepictsContentProviderClient
+     * @param context context
+     * @return DepictsContentProviderClient*/
 
     @Provides
     @Named("depicts")

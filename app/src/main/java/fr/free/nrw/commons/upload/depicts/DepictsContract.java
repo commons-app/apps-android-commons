@@ -6,6 +6,10 @@ import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 
+/**
+ * The contract with with DepictsFragment and its presenter would talk to each other
+ */
+
 public interface DepictsContract {
 
     interface View {

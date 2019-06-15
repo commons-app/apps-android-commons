@@ -146,6 +146,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         presenter.onDepictItemClicked(item);
     }
 
+    /**
+     * Text change listener for the edit text view of depicts
+     */
+
     private void addTextChangeListenerToEtSearch() {
         subscribe = RxTextView.textChanges(depictsSearch)
                 .doOnEach(v -> depictsSearchContainer.setError(null))
@@ -154,6 +158,11 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(filter -> searchForDepictions(filter.toString()), Timber::e);
     }
+
+    /**
+     * Search for depictions for the following query
+     * @param query query string
+     */
 
     private void searchForDepictions(String query) {
         if (!TextUtils.isEmpty(query)) {
