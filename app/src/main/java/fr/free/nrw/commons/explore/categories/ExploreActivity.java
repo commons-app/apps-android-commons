@@ -142,7 +142,7 @@ public class ExploreActivity
     }
 
     /**
-     * This method is never called but it was in MediaDetailProvider Interface
+         * This method is never called but it was in MediaDetailProvider Interface
      * so it needs to be overrided.
      */
     @Override

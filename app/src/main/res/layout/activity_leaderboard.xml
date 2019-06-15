@@ -22,16 +22,22 @@
 
             <ImageView
                 android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:contentDescription="@string/commons_logo"
-                android:src="@drawable/user_avtar" />
+                app:srcCompat="@drawable/commons_logo" />
 
             <TextView
                 android:id="@+id/user_rank"
                 style="?android:textAppearanceLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="user rank" />
+                android:text="Your rank" />
+
+            <Spinner
+                android:id="@+id/duration_spinner"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_margin_horizontal"/>
 
         </LinearLayout>
 

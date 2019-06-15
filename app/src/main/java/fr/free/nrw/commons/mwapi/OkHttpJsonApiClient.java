@@ -123,7 +123,7 @@ public class OkHttpJsonApiClient {
     }
 
     @NonNull
-    public Single<Integer> getUserRank(String userName) {
+    public Single<Integer> getUserRank(String userName,String rank_type,String rank_duration) {
         HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
         urlBuilder
                 .addPathSegments("/wikidataedits.py")
