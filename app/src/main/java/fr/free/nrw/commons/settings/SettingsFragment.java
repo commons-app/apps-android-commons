@@ -150,7 +150,7 @@ public class SettingsFragment extends PreferenceFragment {
     private void prepareLanguages() {
         List<String> languageNamesList = new ArrayList<>();
         List<String> languageCodesList = new ArrayList<>();
-        List<Language> languages = getLocaleSupportedByDevice();
+        List<Language> languages = getLanguagesSupportedByDevice();
 
         for(Language language: languages) {
             // Go through all languages and add them to lists
@@ -184,12 +184,12 @@ public class SettingsFragment extends PreferenceFragment {
             String userSelectedValue = (String) newValue;
             int prefIndex = listPreference.findIndexOfValue(userSelectedValue);
             listPreference.setSummary(listPreference.getEntries()[prefIndex]);
-            saveValue(userSelectedValue);
+            saveLanguageValue(userSelectedValue);
             return true;
         });
     }
 
-    private void saveValue(String userSelectedValue) {
+    private void saveLanguageValue(String userSelectedValue) {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
         editor.putString(KEY_LANGUAGE_VALUE, userSelectedValue);
         editor.apply();
@@ -200,7 +200,7 @@ public class SettingsFragment extends PreferenceFragment {
         return sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
     }
 
-    private List<Language> getLocaleSupportedByDevice() {
+    private List<Language> getLanguagesSupportedByDevice() {
         List<Language> languages = new ArrayList<>();
         Locale[] localesArray = Locale.getAvailableLocales();
         for (Locale locale : localesArray) {
