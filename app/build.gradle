@@ -1,3 +1,7 @@
+plugins {
+    id 'com.github.triplet.play' version '2.2.1' apply false
+}
+
 apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
