@@ -34,7 +34,7 @@ class CategoriesPresenterTest {
 
     var testObservable: Observable<CategoryItem>? = null
 
-    private val imageTitleList = ArrayList<String>()
+    private val imageTitleList = ArrayList<UploadMediaDetail>()
 
     /**
      * initial setup
