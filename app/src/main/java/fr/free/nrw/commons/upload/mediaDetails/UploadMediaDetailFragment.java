@@ -334,6 +334,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if(uploadMediaDetails.size()==0){
             uploadMediaDetails.add(new UploadMediaDetail());
         }
-        uploadMediaDetailAdapter.setItems(descriptions);
+        uploadMediaDetailAdapter.setItems(uploadMediaDetails);
     }
 }

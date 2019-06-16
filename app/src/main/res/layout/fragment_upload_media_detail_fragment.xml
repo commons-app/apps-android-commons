@@ -105,7 +105,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        android:text="@string/previous_image_title_description"
+                        android:text="@string/previous_image_caption_description"
                         android:textAlignment="textEnd"
                         android:textColor="@color/button_blue"
                         android:visibility="gone"
