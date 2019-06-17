@@ -40,6 +40,8 @@ public class NetworkingModule {
 
     public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
+    private static final String NAMED_COMMONS_WIKI_SITE = "commons-wikisite";
+
     @Provides
     @Singleton
     public OkHttpClient provideOkHttpClient(Context context,
@@ -121,13 +123,13 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    public ReviewInterface provideReviewInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
+    public ReviewInterface provideReviewInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
     }
 
     @Provides
     @Singleton
-    public MediaInterface provideMediaInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
+    public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, MediaInterface.class);
     }
 }

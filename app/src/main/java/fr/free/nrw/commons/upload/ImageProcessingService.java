@@ -131,7 +131,7 @@ public class ImageProcessingService {
             return Single.just(EMPTY_TITLE);
         }
 
-        return mediaClient.doesPageExist(uploadItem.getFileName())
+        return mediaClient.checkPageExistsUsingTitle(uploadItem.getFileName())
                 .map(doesFileExist -> {
                     Timber.d("Result for valid title is %s", doesFileExist);
                     return doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK;
@@ -149,7 +149,7 @@ public class ImageProcessingService {
         return Single.fromCallable(() ->
                 fileUtilsWrapper.getFileInputStream(filePath))
                 .map(fileUtilsWrapper::getSHA1)
-                .flatMap(mediaClient::doesFileExist)
+                .flatMap(mediaClient::checkFileExistsUsingSha)
                 .map(b -> {
                     Timber.d("Result for duplicate image %s", b);
                     return b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK;

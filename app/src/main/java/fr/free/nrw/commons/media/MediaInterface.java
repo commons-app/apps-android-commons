@@ -6,10 +6,23 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+/**
+ * Interface for interacting with Commons media related APIs
+ */
 public interface MediaInterface {
+    /**
+     * Checks if a page exists or not.
+     * @param title the title of the page to be checked
+     * @return
+     */
     @GET("w/api.php?action=query")
-    Observable<MwQueryResponse> doesPageExist(@Query("titles") String title);
+    Observable<MwQueryResponse> checkPageExistsUsingTitle(@Query("titles") String title);
 
+    /**
+     * Check if file exists
+     * @param aisha1 the SHA of the media file to be checked
+     * @return
+     */
     @GET("w/api.php?action=query&list=allimages")
-    Observable<MwQueryResponse> doesFileExist(@Query("aisha1") String aisha1);
+    Observable<MwQueryResponse> checkFileExistsUsingSha(@Query("aisha1") String aisha1);
 }

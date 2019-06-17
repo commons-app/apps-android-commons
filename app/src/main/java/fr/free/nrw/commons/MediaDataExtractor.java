@@ -40,7 +40,7 @@ public class MediaDataExtractor {
      */
     public Single<Media> fetchMediaDetails(String filename) {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
-        Single<Boolean> pageExistsSingle = mediaClient.doesPageExist("Commons:Deletion_requests/" + filename);
+        Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
         return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, (media, deletionStatus, discussion) -> {
             media.setDiscussion(discussion);

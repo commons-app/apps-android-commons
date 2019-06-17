@@ -77,9 +77,9 @@ class u {
                 .thenReturn(mock(FileInputStream::class.java))
         `when`(fileUtilsWrapper!!.getSHA1(any(FileInputStream::class.java)))
                 .thenReturn("fileSha")
-        `when`(mediaClient!!.doesFileExist(ArgumentMatchers.anyString()))
+        `when`(mediaClient!!.checkFileExistsUsingSha(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(false))
-        `when`(mediaClient?.doesPageExist(ArgumentMatchers.anyString()))
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(false))
         `when`(readFBMD?.processMetadata(ArgumentMatchers.any(),ArgumentMatchers.any()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_OK))
@@ -96,7 +96,7 @@ class u {
 
     @Test
     fun validateImageForDuplicateImage() {
-        `when`(mediaClient!!.doesFileExist(ArgumentMatchers.anyString()))
+        `when`(mediaClient!!.checkFileExistsUsingSha(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, false)
         assertEquals(ImageUtils.IMAGE_DUPLICATE, validateImage.blockingGet())
@@ -126,7 +126,7 @@ class u {
 
     @Test
     fun validateImageForFileNameExistsWithCheckTitleOff() {
-        `when`(mediaClient?.doesPageExist(ArgumentMatchers.anyString()))
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, false)
         assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
@@ -134,7 +134,7 @@ class u {
 
     @Test
     fun validateImageForFileNameExistsWithCheckTitleOn() {
-        `when`(mediaClient?.doesPageExist(ArgumentMatchers.anyString()))
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, true)
         assertEquals(ImageUtils.FILE_NAME_EXISTS, validateImage.blockingGet())

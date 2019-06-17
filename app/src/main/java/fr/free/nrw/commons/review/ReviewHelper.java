@@ -88,7 +88,7 @@ public class ReviewHelper {
      */
     private Single<Media> getRandomMediaFromRecentChange(RecentChange recentChange) {
         return Single.just(recentChange)
-                .flatMap(change -> mediaClient.doesPageExist("Commons:Deletion_requests/" + change.getTitle()))
+                .flatMap(change -> mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + change.getTitle()))
                 .flatMap(isDeleted -> {
                     if (isDeleted) {
                         return Single.just(new Media(""));

@@ -49,7 +49,7 @@ class MediaDataExtractorTest {
         `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
                 .thenReturn(Single.just(mock(Media::class.java)))
 
-        `when`(mediaClient?.doesPageExist(ArgumentMatchers.anyString()))
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
 
         val mediaResult = mock(MediaResult::class.java)

@@ -77,7 +77,7 @@ class ReviewHelperTest {
      */
     @Test
     fun getRandomMedia() {
-        `when`(mediaClient?.doesPageExist(ArgumentMatchers.anyString()))
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(false))
 
         val randomMedia = reviewHelper?.randomMedia?.blockingGet()
@@ -92,7 +92,7 @@ class ReviewHelperTest {
      */
     @Test(expected = RuntimeException::class)
     fun getRandomMediaWithWithAllMediaNominatedForDeletion() {
-        `when`(mediaClient?.doesPageExist(ArgumentMatchers.anyString()))
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
         val media = reviewHelper?.randomMedia?.blockingGet()
         assertNull(media)
@@ -104,11 +104,11 @@ class ReviewHelperTest {
      */
     @Test
     fun getRandomMediaWithWithOneMediaNominatedForDeletion() {
-        `when`(mediaClient?.doesPageExist("Commons:Deletion_requests/File:Test1.jpeg"))
+        `when`(mediaClient?.checkPageExistsUsingTitle("Commons:Deletion_requests/File:Test1.jpeg"))
                 .thenReturn(Single.just(true))
-        `when`(mediaClient?.doesPageExist("Commons:Deletion_requests/File:Test2.png"))
+        `when`(mediaClient?.checkPageExistsUsingTitle("Commons:Deletion_requests/File:Test2.png"))
                 .thenReturn(Single.just(false))
-        `when`(mediaClient?.doesPageExist("Commons:Deletion_requests/File:Test3.jpg"))
+        `when`(mediaClient?.checkPageExistsUsingTitle("Commons:Deletion_requests/File:Test3.jpg"))
                 .thenReturn(Single.just(true))
 
         val media = reviewHelper?.randomMedia?.blockingGet()
