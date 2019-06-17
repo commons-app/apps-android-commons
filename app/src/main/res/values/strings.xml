@@ -409,7 +409,7 @@
   <string name="next">Next</string>
   <string name="previous">Previous</string>
   <string name="submit">Submit</string>
-  <string name="upload_title_duplicate">A file with the file name %1$s exists. Are you sure you want to proceed?</string>
+  <string name="upload_title_duplicate" formatted="true">A file with the file name %1$s exists. Are you sure you want to proceed?</string>
   <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
   <plurals name="upload_count_title">
         <item quantity="one">%1$d Upload</item>
@@ -554,5 +554,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="share_text">Upload photos to Wikimedia Commons on your phone Download the Commons app: %1$s</string>
   <string name="share_via">Share app via...</string>
   <string name="image_info">Image Info</string>
+  <string name="no_categories_found">No Categories found</string>
+  <string name="upload_cancelled">Cancelled Upload</string>
+  <string name="previous_image_title_description_not_found">There is no data for previous image\'s title or description</string>
   <string name="dialog_box_text_nomination">Why should %1$s be deleted?</string>
 </resources>

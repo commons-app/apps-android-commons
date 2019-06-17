@@ -44,7 +44,7 @@
   <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
   <string name="upload_progress_notification_title_start">開始上傳%1$s</string>
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
-  <string name="upload_progress_notification_title_finishing">即將完成上傳 %1$s</string>
+  <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
   <string name="upload_failed_notification_subtitle">輕觸檢視</string>
   <plurals name="uploads_pending_notification_indicator">
@@ -178,6 +178,7 @@
   <string name="storage_permission_title">請求存儲裝置權限</string>
   <string name="read_storage_permission_rationale">必要權限：讀取外部存儲裝置。否則應用程式無法存取您的圖庫。</string>
   <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。否則應用程式無法取用您的相機/圖庫。</string>
+  <string name="location_permission_title">請求位置權限</string>
   <string name="location_permission_rationale">可有可無的權限：獲取目前的地理位置，以用於分類建議</string>
   <string name="ok">好</string>
   <string name="title_activity_nearby">附近地點</string>
@@ -529,4 +530,5 @@
   <string name="share_text">在您的手機上更新照片到維基共享資源，下載共享資源應用程式：%1$s</string>
   <string name="share_via">分享應用程式透過…</string>
   <string name="image_info">圖片資訊</string>
+  <string name="dialog_box_text_nomination">為何應刪除%1$s？</string>
 </resources>

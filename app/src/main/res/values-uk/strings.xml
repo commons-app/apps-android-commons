@@ -186,6 +186,7 @@
   <string name="storage_permission_title">Запит дозволу на зберігання</string>
   <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Без цього дозволу програма не зможе отримати доступ до вашої галереї.</string>
   <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери/галереї без цього дозволу.</string>
+  <string name="location_permission_title">Запит на визначення місцезнаходження</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -539,4 +540,5 @@
   <string name="share_text">Вивантажуйте фото у Вікісховище зі свого телефона. Завантажте застосунок: %1$s</string>
   <string name="share_via">Поділитися програмкою через…</string>
   <string name="image_info">Інформація про зображення</string>
+  <string name="dialog_box_text_nomination">Чому %1$s має бути видалено?</string>
 </resources>
