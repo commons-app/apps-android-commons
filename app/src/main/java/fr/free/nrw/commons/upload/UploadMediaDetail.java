@@ -18,7 +18,7 @@ public class UploadMediaDetail {
         for (UploadMediaDetail uploadMediaDetail : uploadMediaDetails) {
             if (!uploadMediaDetail.isEmpty()) {
                 String individualDescription = String.format("{{%s|1=%s}}", uploadMediaDetail.getLanguageCode(),
-                        uploadMediaDetail.getDescriptionText());
+                        uploadMediaDetail.getCaptionText());
                 captionListString.append(individualDescription);
             }
         }

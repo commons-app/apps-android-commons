@@ -45,7 +45,7 @@ public class Media implements Parcelable {
     private String thumbUrl;
     protected String imageUrl;
     protected String filename;
-    private String captions;
+    private String caption;
     protected String description; // monolingual description on input...
     protected String discussion;
     protected long dataLength;
@@ -59,6 +59,7 @@ public class Media implements Parcelable {
     protected ArrayList<String> categories; // as loaded at runtime?
     protected boolean requestedDeletion;
     private Map<String, String> descriptions; // multilingual descriptions as loaded
+    private Map<String, String> captions;
     private HashMap<String, Object> tags = new HashMap<>();
     private @Nullable LatLng coordinates;
 
@@ -68,6 +69,7 @@ public class Media implements Parcelable {
     protected Media() {
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
+        this.captions = new HashMap<>();
     }
 
     /**
@@ -91,14 +93,14 @@ public class Media implements Parcelable {
      * @param dateUploaded Media date uploaded
      * @param creator Media creator
      */
-    public Media(Uri localUri, String imageUrl, String filename, String captions, String description,
+    public Media(Uri localUri, String imageUrl, String filename, String caption, String description,
                  long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this();
         this.localUri = localUri;
         this.thumbUrl = imageUrl;
         this.imageUrl = imageUrl;
         this.filename = filename;
-        this.captions = captions;
+        this.caption = caption;
         this.description = description;
         this.dataLength = dataLength;
         this.dateCreated = dateCreated;
@@ -106,6 +108,7 @@ public class Media implements Parcelable {
         this.creator = creator;
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
+        this.captions = new HashMap<>();
     }
 
     @SuppressWarnings("unchecked")
@@ -114,7 +117,7 @@ public class Media implements Parcelable {
         thumbUrl = in.readString();
         imageUrl = in.readString();
         filename = in.readString();
-        captions = in.readString();
+        caption = in.readString();
         description = in.readString();
         dataLength = in.readLong();
         dateCreated = (Date) in.readSerializable();
@@ -128,6 +131,7 @@ public class Media implements Parcelable {
             in.readStringList(categories);
         }
         descriptions = in.readHashMap(ClassLoader.getSystemClassLoader());
+        captions = in.readHashMap(ClassLoader.getSystemClassLoader());
     }
 
     /**
@@ -285,7 +289,7 @@ public class Media implements Parcelable {
     }
 
     public String getCaption() {
-        return captions;
+        return caption;
     }
 
     /**
@@ -462,6 +466,10 @@ public class Media implements Parcelable {
         this.descriptions.putAll(descriptions);
     }
 
+    void setCaptions(Map<String, String> captions) {
+        this.captions = captions;
+        this.captions.putAll(captions);
+    }
     /**
      * Gets media description in preferred language
      * @param preferredLanguage Language preferred
@@ -512,6 +520,7 @@ public class Media implements Parcelable {
         parcel.writeString(thumbUrl);
         parcel.writeString(imageUrl);
         parcel.writeString(filename);
+        parcel.writeString(caption);
         parcel.writeString(description);
         parcel.writeLong(dataLength);
         parcel.writeSerializable(dateCreated);
@@ -523,6 +532,7 @@ public class Media implements Parcelable {
         parcel.writeString(license);
         parcel.writeStringList(categories);
         parcel.writeMap(descriptions);
+        parcel.writeMap(captions);
     }
 
     /**
@@ -547,5 +557,9 @@ public class Media implements Parcelable {
      */
     public void setLicense(String license) {
         this.license = license;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 }
