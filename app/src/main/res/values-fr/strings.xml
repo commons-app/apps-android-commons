@@ -221,7 +221,7 @@
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Site web de Communs</string>
-  <string name="commons_facebook">Page Facebook de Communs</string>
+  <string name="commons_facebook">Page Facebook de Commons</string>
   <string name="commons_github">Code source Github de Communs</string>
   <string name="background_image">Image de fond</string>
   <string name="mediaimage_failed">Échec sur l’image du média</string>
@@ -541,5 +541,8 @@
   <string name="share_text">Téléverser des photos vers Wikimédia Commons, sur votre téléphone Téléchargez l’application Commons : %1$s</string>
   <string name="share_via">Partager l’application via…</string>
   <string name="image_info">Informations de l’image</string>
+  <string name="no_categories_found">Aucune catégorie trouvée</string>
+  <string name="upload_cancelled">Téléversement annulé</string>
+  <string name="previous_image_title_description_not_found">Il n’y a pas de données pour le titre ou la description de l’image précédente</string>
   <string name="dialog_box_text_nomination">Pourquoi %1$s devrait-il être supprimé ?</string>
 </resources>
