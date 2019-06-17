@@ -40,7 +40,7 @@ public class MediaClient {
     public Single<Boolean> checkFileExistsUsingSha(String fileSha) {
         return mediaInterface.checkFileExistsUsingSha(fileSha)
                 .map(mwQueryResponse -> mwQueryResponse
-                        .query().firstPage().allImages().size() > 0)
+                        .query().allImages().size() > 0)
                 .singleOrError();
     }
 }

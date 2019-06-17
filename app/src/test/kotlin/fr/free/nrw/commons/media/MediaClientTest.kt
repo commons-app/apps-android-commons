@@ -11,10 +11,10 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+import org.wikipedia.dataclient.mwapi.ImageDetails
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResult
-import org.wikipedia.gallery.ImageInfo
 
 class MediaClientTest {
 
@@ -64,8 +64,8 @@ class MediaClientTest {
     @Test
     fun checkFileExistsUsingSha() {
         val mwQueryPage = mock(MwQueryPage::class.java)
-        `when`(mwQueryPage.allImages()).thenReturn(listOf(mock(ImageInfo::class.java)))
         val mwQueryResult = mock(MwQueryResult::class.java)
+        `when`(mwQueryResult.allImages()).thenReturn(listOf(mock(ImageDetails::class.java)))
         `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
         `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
         val mockResponse = mock(MwQueryResponse::class.java)
@@ -81,8 +81,8 @@ class MediaClientTest {
     @Test
     fun checkFileNotExistsUsingSha() {
         val mwQueryPage = mock(MwQueryPage::class.java)
-        `when`(mwQueryPage.allImages()).thenReturn(listOf())
         val mwQueryResult = mock(MwQueryResult::class.java)
+        `when`(mwQueryResult.allImages()).thenReturn(listOf())
         `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
         `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
         val mockResponse = mock(MwQueryResponse::class.java)

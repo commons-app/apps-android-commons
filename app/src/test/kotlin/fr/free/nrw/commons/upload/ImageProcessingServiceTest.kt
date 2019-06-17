@@ -58,6 +58,7 @@ class u {
         `when`(uploadItem.title).thenReturn(mockTitle)
 
         `when`(uploadItem.place).thenReturn(mockPlace)
+        `when`(uploadItem.fileName).thenReturn("File:jpg")
 
         `when`(fileUtilsWrapper!!.getFileInputStream(ArgumentMatchers.anyString()))
                 .thenReturn(mock(FileInputStream::class.java))
