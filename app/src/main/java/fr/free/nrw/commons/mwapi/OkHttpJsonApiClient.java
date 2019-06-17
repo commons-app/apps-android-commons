@@ -27,6 +27,8 @@ import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.leaderboard.model.GetLeaderboardResponse;
+import fr.free.nrw.commons.leaderboard.model.GetUserRankResponse;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
@@ -126,8 +128,10 @@ public class OkHttpJsonApiClient {
     public Single<Integer> getUserRank(String userName,String rank_type,String rank_duration) {
         HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
         urlBuilder
-                .addPathSegments("/wikidataedits.py")
-                .addQueryParameter("user", userName);
+                .addPathSegments("/getUserRank.py")
+                .addQueryParameter("user", userName)
+                .addQueryParameter("type", rank_type)
+                .addQueryParameter("duration", rank_duration);
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
                 .build();
@@ -140,10 +144,42 @@ public class OkHttpJsonApiClient {
                 if (json == null) {
                     return 0;
                 }
-                GetWikidataEditCountResponse countResponse = gson.fromJson(json, GetWikidataEditCountResponse.class);
-                return countResponse.getWikidataEditCount();
+                GetUserRankResponse userRankResponse = gson.fromJson(json, GetUserRankResponse.class);
+                return userRankResponse.getUserRank();
             }
             return 0;
+        });
+    }
+
+    @Nullable
+    public Single<List<GetLeaderboardRespose>> GetLeaderboardResponse(String type, String duration) {
+        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
+        urlBuilder
+                .addPathSegments("/getLeaderboard.py")
+                .addQueryParameter("type", type)
+                .addQueryParameter("duration", duration);
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+
+        return Single.fromCallable(() -> {
+//            Response response = okHttpClient.newCall(request).execute();
+//            List<GetLeaderboardResponse> userList = new ArrayList<>();
+//            if (response.body() != null && response.isSuccessful()) {
+//                String json = response.body().string();
+//                GetLeaderboardResponse getLeaderboardResponse = gson.fromJson(json, GetLeaderboardResponse.class);
+//                if (null == getLeaderboardResponse) {
+//                    return userList;
+//                }
+//                List<MwQueryPage> pages = getLeaderboardResponse.pages();
+//                for (MwQueryPage page : pages) {
+//                    Media media = Media.from(page);
+//                    if (media != null) {
+//                        userList.add(getLeaderboardResponse);
+//                    }
+//                }
+//            }
+            return userList;
         });
     }
 

@@ -6,14 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -26,12 +31,10 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.CategoryDetailsActivity;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryImageController;
-import fr.free.nrw.commons.category.CategoryImagesActivity;
-import fr.free.nrw.commons.category.leaderboardAdapter;
-import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,10 +45,22 @@ import timber.log.Timber;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class LeaderboardFragment extends DaggerFragment {
+public class LeaderboardFragment extends DaggerFragment implements
+        AdapterView.OnItemSelectedListener{
 
     private static int TIMEOUT_SECONDS = 15;
     private leaderboardAdapter gridAdapter;
+
+
+    String[] duration_array = { "All-time", "Monthly", "Weekly", "Daily"};
+    private String duration = null;
+    @BindView(R.id.user_rank)
+    TextView user_rank;
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    OkHttpJsonApiClient okHttpJsonApiClient;
+
 
     @BindView(R.id.statusMessage)
     TextView statusTextView;
@@ -81,6 +96,42 @@ public class LeaderboardFragment extends DaggerFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
+
+        //Getting the instance of Spinner and applying OnItemSelectedListener on it
+        Spinner spin = (Spinner) view.findViewById(R.id.duration_spinner);
+        spin.setOnItemSelectedListener(this);
+
+        //Creating the ArrayAdapter instance having the duration array
+        ArrayAdapter aa = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,duration_array);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spin.setAdapter(aa);
+
+        setUserRank();
+    }
+
+    @SuppressLint("CheckResult")
+    private void setUserRank() {
+        String userName = sessionManager.getUserName();
+        if (StringUtils.isBlank(userName)) {
+            return;
+        }
+        compositeDisposable.add(okHttpJsonApiClient.getUserRank(userName,FragmentName,duration)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(edits -> user_rank.setText(user_rank.getText()+" : " + String.valueOf(edits)), e -> {
+                    Timber.e("Error:" + e);
+                }));
+    }
+
+    //Performing action onItemSelected and onNothing selected
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+        duration=duration_array[position];
+        //  Toast.makeText(getApplicationContext(),duration_array[position] , Toast.LENGTH_LONG).show();
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
     }
 
     @Override

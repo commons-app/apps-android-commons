@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.category;
+package fr.free.nrw.commons.leaderboard;
 
 import android.content.Context;
 import android.text.TextUtils;
