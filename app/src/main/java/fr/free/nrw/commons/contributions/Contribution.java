@@ -67,12 +67,13 @@ public class  Contribution extends Media {
     private String wikiDataEntityId;
     private Uri contentProviderUri;
     private String dateCreatedSource;
+    private String captions;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
-                        String source, String description, String creator, boolean isMultiple,
+                        String source, String captions, String description, String creator, boolean isMultiple,
                         int width, int height, String license) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
+        super(localUri, imageUrl, filename,captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.contentUri = contentUri;
         this.state = state;
         this.transferred = transferred;
@@ -84,9 +85,10 @@ public class  Contribution extends Media {
         this.dateCreatedSource = "";
     }
 
-    public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
+    public Contribution(Uri localUri, String imageUrl, String filename, String captions, String description, long dataLength,
                         Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
+        super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
+        this.captions = captions;
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
@@ -164,6 +166,7 @@ public class  Contribution extends Media {
         buffer
                 .append("== {{int:filedesc}} ==\n")
                 .append("{{Information\n")
+                .append("|labels=").append(getCaption()).append("\n")
                 .append("|description=").append(getDescription()).append("\n")
                 .append("|source=").append("{{own}}\n")
                 .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");

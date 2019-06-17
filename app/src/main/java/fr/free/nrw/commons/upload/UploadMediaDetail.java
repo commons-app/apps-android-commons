@@ -13,6 +13,18 @@ public class UploadMediaDetail {
     private int selectedLanguageIndex = -1;
     private boolean isManuallyAdded=false;
 
+    public static String formatCaptions(List<UploadMediaDetail> uploadMediaDetails) {
+        StringBuilder captionListString = new StringBuilder();
+        for (UploadMediaDetail uploadMediaDetail : uploadMediaDetails) {
+            if (!uploadMediaDetail.isEmpty()) {
+                String individualDescription = String.format("{{%s|1=%s}}", uploadMediaDetail.getLanguageCode(),
+                        uploadMediaDetail.getDescriptionText());
+                captionListString.append(individualDescription);
+            }
+        }
+        return captionListString.toString();
+    }
+
     public String getCaptionText() {
         return captionText;
     }

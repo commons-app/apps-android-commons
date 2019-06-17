@@ -120,7 +120,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
                 Date dateUpdated = image.getDateUpdated();
                 Contribution contrib = new Contribution(null, null, filename,
-                        "", -1, dateUpdated, dateUpdated, user,
+                        "", "",-1, dateUpdated, dateUpdated, user,
                         "", "");
                 contrib.setState(STATE_COMPLETED);
                 imageValues.add(contributionDao.toContentValues(contrib));

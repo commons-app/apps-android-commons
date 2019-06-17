@@ -136,6 +136,7 @@ public class ContributionDao {
                     parseTimestamp(cursor.getLong(cursor.getColumnIndex(Table.COLUMN_UPLOADED))),
                     cursor.getLong(cursor.getColumnIndex(Table.COLUMN_TRANSFERRED)),
                     cursor.getString(cursor.getColumnIndex(Table.COLUMN_SOURCE)),
+                    "",
                     cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
                     cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR)),
                     cursor.getInt(cursor.getColumnIndex(Table.COLUMN_MULTIPLE)) == 1,

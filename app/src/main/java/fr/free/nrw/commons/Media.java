@@ -45,6 +45,7 @@ public class Media implements Parcelable {
     private String thumbUrl;
     protected String imageUrl;
     protected String filename;
+    private String captions;
     protected String description; // monolingual description on input...
     protected String discussion;
     protected long dataLength;
@@ -90,13 +91,14 @@ public class Media implements Parcelable {
      * @param dateUploaded Media date uploaded
      * @param creator Media creator
      */
-    public Media(Uri localUri, String imageUrl, String filename, String description,
+    public Media(Uri localUri, String imageUrl, String filename, String captions, String description,
                  long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this();
         this.localUri = localUri;
         this.thumbUrl = imageUrl;
         this.imageUrl = imageUrl;
         this.filename = filename;
+        this.captions = captions;
         this.description = description;
         this.dataLength = dataLength;
         this.dateCreated = dateCreated;
@@ -112,6 +114,7 @@ public class Media implements Parcelable {
         thumbUrl = in.readString();
         imageUrl = in.readString();
         filename = in.readString();
+        captions = in.readString();
         description = in.readString();
         dataLength = in.readLong();
         dateCreated = (Date) in.readSerializable();
@@ -144,7 +147,7 @@ public class Media implements Parcelable {
         ExtMetadata metadata = imageInfo.getMetadata();
         if (metadata == null) {
             Media media = new Media(null, imageInfo.getOriginalUrl(),
-                    page.title(), "", 0, null, null, null);
+                    page.title(), "","", 0, null, null, null);
             if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
                 media.setThumbUrl(imageInfo.getThumbUrl());
             }
@@ -154,6 +157,7 @@ public class Media implements Parcelable {
         Media media = new Media(null,
                 imageInfo.getOriginalUrl(),
                 page.title(),
+                "",
                 "",
                 0,
                 safeParseDate(metadata.dateTimeOriginal().value()),
@@ -278,6 +282,10 @@ public class Media implements Parcelable {
      */
     public String getDescription() {
         return description;
+    }
+
+    public String getCaption() {
+        return captions;
     }
 
     /**
