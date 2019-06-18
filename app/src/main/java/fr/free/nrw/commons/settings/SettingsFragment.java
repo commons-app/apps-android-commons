@@ -13,7 +13,6 @@ import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
@@ -150,7 +149,7 @@ public class SettingsFragment extends PreferenceFragment {
     private void prepareLanguages() {
         List<String> languageNamesList = new ArrayList<>();
         List<String> languageCodesList = new ArrayList<>();
-        List<Language> languages = getLocaleSupportedByDevice();
+        List<Language> languages = getLanguagesSupportedByDevice();
 
         for(Language language: languages) {
             // Go through all languages and add them to lists
@@ -161,8 +160,8 @@ public class SettingsFragment extends PreferenceFragment {
             }
         }
 
-        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[languageNamesList.size()]);
-        CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[languageCodesList.size()]);
+        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
+        CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
         // Add all languages and languages codes to lists preference as pair
         listPreference.setEntries(languageNames);
         listPreference.setEntryValues(languageCodes);
@@ -179,16 +178,17 @@ public class SettingsFragment extends PreferenceFragment {
             listPreference.setSummary(listPreference.getEntries()[prefIndex]);
             listPreference.setValue(languageCode);
         }
+
         listPreference.setOnPreferenceChangeListener((preference, newValue) -> {
             String userSelectedValue = (String) newValue;
             int prefIndex = listPreference.findIndexOfValue(userSelectedValue);
             listPreference.setSummary(listPreference.getEntries()[prefIndex]);
-            saveValue(userSelectedValue);
+            saveLanguageValue(userSelectedValue);
             return true;
         });
     }
 
-    private void saveValue(String userSelectedValue) {
+    private void saveLanguageValue(String userSelectedValue) {
         defaultKvStore.putString(Prefs.KEY_LANGUAGE_VALUE, userSelectedValue);
     }
 
@@ -196,7 +196,7 @@ public class SettingsFragment extends PreferenceFragment {
         return defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, "");
     }
 
-    private List<Language> getLocaleSupportedByDevice() {
+    private List<Language> getLanguagesSupportedByDevice() {
         List<Language> languages = new ArrayList<>();
         Locale[] localesArray = Locale.getAvailableLocales();
         for (Locale locale : localesArray) {

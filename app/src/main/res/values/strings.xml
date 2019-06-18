@@ -558,5 +558,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="upload_cancelled">Cancelled Upload</string>
   <string name="previous_image_title_description_not_found">There is no data for previous image\'s title or description</string>
   <string name="dialog_box_text_nomination">Why should %1$s be deleted?</string>
-  <string name="default_description_language">Default Description Language</string>
+  <string name="default_description_language">Default description language</string>
 </resources>
