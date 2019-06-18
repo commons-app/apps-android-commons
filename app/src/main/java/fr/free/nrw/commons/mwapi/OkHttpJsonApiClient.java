@@ -124,64 +124,64 @@ public class OkHttpJsonApiClient {
         });
     }
 
-    @NonNull
-    public Single<Integer> getUserRank(String userName,String rank_type,String rank_duration) {
-        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
-        urlBuilder
-                .addPathSegments("/getUserRank.py")
-                .addQueryParameter("user", userName)
-                .addQueryParameter("type", rank_type)
-                .addQueryParameter("duration", rank_duration);
-        Request request = new Request.Builder()
-                .url(urlBuilder.build())
-                .build();
-
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response != null &&
-                    response.isSuccessful() && response.body() != null) {
-                String json = response.body().string();
-                if (json == null) {
-                    return 0;
-                }
-                GetUserRankResponse userRankResponse = gson.fromJson(json, GetUserRankResponse.class);
-                return userRankResponse.getUserRank();
-            }
-            return 0;
-        });
-    }
-
-    @Nullable
-    public Single<List<GetLeaderboardRespose>> GetLeaderboardResponse(String type, String duration) {
-        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
-        urlBuilder
-                .addPathSegments("/getLeaderboard.py")
-                .addQueryParameter("type", type)
-                .addQueryParameter("duration", duration);
-        Request request = new Request.Builder()
-                .url(urlBuilder.build())
-                .build();
-
-        return Single.fromCallable(() -> {
+//    @NonNull
+//    public Single<Integer> getUserRank(String userName,String rank_type,String rank_duration) {
+//        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
+//        urlBuilder
+//                .addPathSegments("/getUserRank.py")
+//                .addQueryParameter("user", userName)
+//                .addQueryParameter("type", rank_type)
+//                .addQueryParameter("duration", rank_duration);
+//        Request request = new Request.Builder()
+//                .url(urlBuilder.build())
+//                .build();
+//
+//        return Single.fromCallable(() -> {
 //            Response response = okHttpClient.newCall(request).execute();
-//            List<GetLeaderboardResponse> userList = new ArrayList<>();
-//            if (response.body() != null && response.isSuccessful()) {
+//            if (response != null &&
+//                    response.isSuccessful() && response.body() != null) {
 //                String json = response.body().string();
-//                GetLeaderboardResponse getLeaderboardResponse = gson.fromJson(json, GetLeaderboardResponse.class);
-//                if (null == getLeaderboardResponse) {
-//                    return userList;
+//                if (json == null) {
+//                    return 0;
 //                }
-//                List<MwQueryPage> pages = getLeaderboardResponse.pages();
-//                for (MwQueryPage page : pages) {
-//                    Media media = Media.from(page);
-//                    if (media != null) {
-//                        userList.add(getLeaderboardResponse);
-//                    }
-//                }
+//                GetUserRankResponse userRankResponse = gson.fromJson(json, GetUserRankResponse.class);
+//                return userRankResponse.getUserRank();
 //            }
-            return userList;
-        });
-    }
+//            return 0;
+//        });
+//    }
+//
+//    @Nullable
+//    public Single<List<GetLeaderboardRespose>> GetLeaderboardResponse(String type, String duration) {
+//        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
+//        urlBuilder
+//                .addPathSegments("/getLeaderboard.py")
+//                .addQueryParameter("type", type)
+//                .addQueryParameter("duration", duration);
+//        Request request = new Request.Builder()
+//                .url(urlBuilder.build())
+//                .build();
+//
+//        return Single.fromCallable(() -> {
+////            Response response = okHttpClient.newCall(request).execute();
+////            List<GetLeaderboardResponse> userList = new ArrayList<>();
+////            if (response.body() != null && response.isSuccessful()) {
+////                String json = response.body().string();
+////                GetLeaderboardResponse getLeaderboardResponse = gson.fromJson(json, GetLeaderboardResponse.class);
+////                if (null == getLeaderboardResponse) {
+////                    return userList;
+////                }
+////                List<MwQueryPage> pages = getLeaderboardResponse.pages();
+////                for (MwQueryPage page : pages) {
+////                    Media media = Media.from(page);
+////                    if (media != null) {
+////                        userList.add(getLeaderboardResponse);
+////                    }
+////                }
+////            }
+//            return userList;
+//        });
+//    }
 
     /**
      * This takes userName as input, which is then used to fetch the feedback/achievements

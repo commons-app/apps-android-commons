@@ -25,7 +25,6 @@ public class LeaderboardActivity extends NavigationBaseActivity {
     private LeaderboardFragment leaderboardNearbyFragment;
     private LeaderboardFragment leaderboardUsedFragment;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     @BindView(R.id.viewPagerLeaderboard)
     ViewPager viewPager;
     @BindView(R.id.tab_layout)

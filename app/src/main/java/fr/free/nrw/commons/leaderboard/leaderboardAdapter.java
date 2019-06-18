@@ -1,93 +1,65 @@
 package fr.free.nrw.commons.leaderboard;
 
-import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 
-/**
- * This is created to only display UI implementation. Needs to be changed in real implementation
- */
+public class leaderboardAdapter extends RecyclerView.Adapter<leaderboardAdapter.leaderboardViewHolder> {
 
-public class leaderboardAdapter extends ArrayAdapter {
-    private List<Media> data;
+    private String[] rank_array;
+ //   private List<Media> avatar_array;
+    private String[] userName_array;
+    private String[] score_array;
 
-    public leaderboardAdapter(Context context, int layoutResourceId, List<Media> data) {
-        super(context, layoutResourceId, data);
-        this.data = data;
+    public leaderboardAdapter(String[] rank_array, String[] userName_array, String[] score_array){
+        this.rank_array = rank_array;
+    //    this.avatar_array = avatar_array;
+        this.userName_array = userName_array;
+        this.score_array = score_array;
     }
 
-    /**
-     * Adds more item to the list
-     * Its triggered on scrolling down in the list
-     * @param images
-     */
-    public void addItems(List<Media> images) {
-        if (data == null) {
-            data = new ArrayList<>();
-        }
-        data.addAll(images);
-        notifyDataSetChanged();
-    }
-
-    /**
-     * Check the first item in the new list with old list and returns true if they are same
-     * Its triggered on successful response of the fetch images API.
-     * @param images
-     */
-    public boolean containsAll(List<Media> images){
-        if (images == null || images.isEmpty()) {
-            return false;
-        }
-        if (data == null) {
-            data = new ArrayList<>();
-            return false;
-        }
-        if (data.size() <= 0) {
-            return false;
-        }
-        String fileName = data.get(0).getFilename();
-        String imageName = images.get(0).getFilename();
-        return imageName.equals(fileName);
+    @NonNull
+    @Override
+    public leaderboardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.layout_leaderboard_item,parent,false);
+        return  new leaderboardViewHolder(view);
     }
 
     @Override
-    public boolean isEmpty() {
-        return data == null || data.isEmpty();
+    public void onBindViewHolder(@NonNull leaderboardViewHolder holder, int position) {
+        holder.rank.setText(rank_array[position]);
+       // holder.userImageView;
+        holder.user_name.setText(userName_array[position]);
+        holder.score.setText(score_array[position]);
+
     }
 
-    /**
-     * Sets up the UI for the category image item
-     * @param position
-     * @param convertView
-     * @param parent
-     * @return
-     */
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public int getItemCount() {
+        return rank_array.length;
+    }
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_leaderboard_item, null);
+    public class leaderboardViewHolder extends RecyclerView.ViewHolder{
+        TextView rank;
+      //  ImageView userImageView;
+        TextView user_name;
+        TextView score;
+        public leaderboardViewHolder(View itemView){
+            super(itemView);
+            rank = itemView.findViewById(R.id.rank);
+         //   userImageView = itemView.findViewById(R.id.userImageView);
+            user_name = itemView.findViewById(R.id.user_name);
+            score = itemView.findViewById(R.id.score);
         }
-        Media item = data.get(position);
-        SimpleDraweeView imageView = convertView.findViewById(R.id.userImageView);
-        TextView fileName = convertView.findViewById(R.id.user_name);
-        TextView author = convertView.findViewById(R.id.score);
-        fileName.setText(item.getDisplayTitle());
-        author.setText("score");
-        imageView.setImageURI(item.getThumbUrl());
-        return convertView;
     }
 }

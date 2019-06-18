@@ -60,7 +60,7 @@
         android:id="@+id/loadingImagesProgressBar"
         />
 
-    <GridView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userList"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
