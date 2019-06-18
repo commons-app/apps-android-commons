@@ -159,9 +159,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (getParentFragment() != null
-            && getParentFragment() instanceof MediaDetailPagerFragment) {
+                && getParentFragment() instanceof MediaDetailPagerFragment) {
             detailProvider =
-                ((MediaDetailPagerFragment) getParentFragment()).getMediaDetailProvider();
+                    ((MediaDetailPagerFragment) getParentFragment()).getMediaDetailProvider();
         }
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
@@ -187,10 +187,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         seeMore.setText(StringUtil.fromHtml(getString(R.string.nominated_see_more)));
 
-        if (isCategoryImage){
+        if (isCategoryImage) {
             authorLayout.setVisibility(VISIBLE);
         } else {
             authorLayout.setVisibility(GONE);
@@ -232,11 +232,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(getParentFragment()!=null && getParentFragment().getParentFragment()!=null) {
+        if (getParentFragment() != null && getParentFragment().getParentFragment() != null) {
             //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
             // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
             ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNotificationCardView
-                .setVisibility(View.GONE);
+                    .setVisibility(View.GONE);
         }
         media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
@@ -251,7 +251,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     Timber.d("MediaDetailFragment ready to display delayed details!");
                     detailProvider.unregisterDataSetObserver(dataObserver);
                     dataObserver = null;
-                    media=detailProvider.getMediaAtPosition(index);
+                    media = detailProvider.getMediaAtPosition(index);
                     displayMediaDetails();
                 }
             };
@@ -338,7 +338,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     @OnClick(R.id.mediaDetailLicense)
-    public void onMediaDetailLicenceClicked(){
+    public void onMediaDetailLicenceClicked() {
         String url = media.getLicenseUrl();
         if (!StringUtils.isBlank(url) && getActivity() != null) {
             Utils.handleWebUrl(getActivity(), Uri.parse(url));
@@ -348,85 +348,85 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     @OnClick(R.id.mediaDetailCoordinates)
-    public void onMediaDetailCoordinatesClicked(){
+    public void onMediaDetailCoordinatesClicked() {
         if (media.getCoordinates() != null && getActivity() != null) {
             Utils.handleGeoCoordinates(getActivity(), media.getCoordinates());
         }
     }
 
     @OnClick(R.id.copyWikicode)
-    public void onCopyWikicodeClicked(){
+    public void onCopyWikicodeClicked() {
         String data = "[[" + media.getFilename() + "|thumb|" + media.getDescription() + "]]";
-        Utils.copy("wikiCode",data,getContext());
+        Utils.copy("wikiCode", data, getContext());
         Timber.d("Generated wikidata copy code: %s", data);
 
         Toast.makeText(getContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.nominateDeletion)
-    public void onDeleteButtonClicked(){
-        if(AccountUtil.getUserName(getContext()).equals(media.getCreator())){
-        final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.simple_spinner_dropdown_list, reasonList);
-        final Spinner spinner = new Spinner(getActivity());
-        spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        spinner.setAdapter(languageAdapter);
-        spinner.setGravity(17);
+    public void onDeleteButtonClicked() {
+        if (AccountUtil.getUserName(getContext()).equals(media.getCreator())) {
+            final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
+                    R.layout.simple_spinner_dropdown_list, reasonList);
+            final Spinner spinner = new Spinner(getActivity());
+            spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            spinner.setAdapter(languageAdapter);
+            spinner.setGravity(17);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(spinner);
-        builder.setTitle(R.string.nominate_delete)
-                .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> onDeleteClicked(spinner));
-        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> dialog.dismiss());
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        if(isDeleted) {
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-        }
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setView(spinner);
+            builder.setTitle(R.string.nominate_delete)
+                    .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> onDeleteClicked(spinner));
+            builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> dialog.dismiss());
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            if (isDeleted) {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            }
         }
         //Reviewer correct me if i have misunderstood something over here
         //But how does this  if (delete.getVisibility() == View.VISIBLE) {
         //            enableDeleteButton(true);   makes sense ?
-        else{
-        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setMessage(getString(R.string.dialog_box_text_nomination,media.getDisplayTitle()));
-        final EditText input = new EditText(getActivity());
-        alert.setView(input);
-        input.requestFocus();
-        alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
-            String reason = input.getText().toString();
-            onDeleteClickeddialogtext(reason);
-        });
-        alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
-        });
-        AlertDialog d = alert.create();
-        input.addTextChangedListener(new TextWatcher() {
-            private void handleText() {
-                final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                if (input.getText().length() == 0) {
-                    okButton.setEnabled(false);
-                } else {
-                    okButton.setEnabled(true);
+        else {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+            alert.setMessage(getString(R.string.dialog_box_text_nomination, media.getDisplayTitle()));
+            final EditText input = new EditText(getActivity());
+            alert.setView(input);
+            input.requestFocus();
+            alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
+                String reason = input.getText().toString();
+                onDeleteClickeddialogtext(reason);
+            });
+            alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
+            });
+            AlertDialog d = alert.create();
+            input.addTextChangedListener(new TextWatcher() {
+                private void handleText() {
+                    final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                    if (input.getText().length() == 0) {
+                        okButton.setEnabled(false);
+                    } else {
+                        okButton.setEnabled(true);
+                    }
                 }
-            }
 
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                handleText();
-            }
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                    handleText();
+                }
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-        });
-        d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-    }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+            });
+            d.show();
+            d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         }
+    }
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
@@ -462,7 +462,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     @OnClick(R.id.seeMore)
-    public void onSeeMoreClicked(){
+    public void onSeeMoreClicked() {
         if (nominatedForDeletion.getVisibility() == VISIBLE && getActivity() != null) {
             Utils.handleWebUrl(getActivity(), Uri.parse(media.getPageTitle().getMobileUri()));
         }
@@ -535,6 +535,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             return desc;
         }
     }
+
     private String prettyDiscussion(Media media) {
         String disc = media.getDiscussion().trim();
         if (disc.equals("")) {
@@ -573,8 +574,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         return media.getCoordinates().getPrettyCoordinateString();
     }
 
-    private void checkDeletion(Media media){
-        if (media.getRequestedDeletion()){
+    private void checkDeletion(Media media) {
+        if (media.getRequestedDeletion()) {
             delete.setVisibility(GONE);
             nominatedForDeletion.setVisibility(VISIBLE);
         } else if (!isCategoryImage) {

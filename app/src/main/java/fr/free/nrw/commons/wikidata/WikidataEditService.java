@@ -44,6 +44,7 @@ public class WikidataEditService {
 
     /**
      * Create a P18 claim and log the edit with custom tag
+     *
      * @param wikidataEntityId
      * @param fileName
      */
@@ -104,6 +105,7 @@ public class WikidataEditService {
 
     /**
      * Log the Wikidata edit by adding Wikimedia Commons App tag to the edit
+     *
      * @param revisionId
      */
     @SuppressLint("CheckResult")

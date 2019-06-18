@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
 import com.nhaarman.mockito_kotlin.*
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.*
@@ -52,7 +51,7 @@ class BookMarkLocationDaoTest {
     fun setUp() {
         exampleLabel = Label.FOREST
         exampleUri = Uri.parse("wikimedia/uri")
-        exampleLocation = LatLng(40.0,51.4, 1f)
+        exampleLocation = LatLng(40.0, 51.4, 1f)
 
         builder = Sitelinks.Builder()
         builder.setWikipediaLink("wikipediaLink")
@@ -104,7 +103,7 @@ class BookMarkLocationDaoTest {
 
         var result = testObject.allBookmarksLocations
 
-        assertEquals(14,(result.size))
+        assertEquals(14, (result.size))
 
     }
 
@@ -254,7 +253,7 @@ class BookMarkLocationDaoTest {
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
 
         for (i in 0 until rowCount) {
-            addRow(listOf("placeName", "placeDescription","placeCategory", exampleLabel.text, exampleLabel.icon,
+            addRow(listOf("placeName", "placeDescription", "placeCategory", exampleLabel.text, exampleLabel.icon,
                     exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
                     exampleLocation.latitude, exampleLocation.longitude))
         }

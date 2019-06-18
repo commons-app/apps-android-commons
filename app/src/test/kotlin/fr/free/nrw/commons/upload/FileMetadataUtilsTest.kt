@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload
 
-import androidx.exifinterface.media.ExifInterface.*
+import androidx.exifinterface.media.ExifInterface.TAG_ARTIST
+import androidx.exifinterface.media.ExifInterface.TAG_CAMARA_OWNER_NAME
 import junit.framework.Assert.assertTrue
 import org.junit.Test
 import java.util.*

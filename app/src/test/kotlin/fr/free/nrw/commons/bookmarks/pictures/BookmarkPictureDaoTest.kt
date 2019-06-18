@@ -8,17 +8,16 @@ import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
 import com.nhaarman.mockito_kotlin.*
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.Bookmark
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -70,7 +69,7 @@ class BookmarkPictureDaoTest {
 
         var result = testObject.allBookmarks
 
-        assertEquals(14,(result.size))
+        assertEquals(14, (result.size))
 
     }
 

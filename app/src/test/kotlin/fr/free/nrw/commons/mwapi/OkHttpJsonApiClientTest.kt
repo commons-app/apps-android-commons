@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.mwapi
 
 import com.google.gson.Gson
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
