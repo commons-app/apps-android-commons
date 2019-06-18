@@ -17,6 +17,7 @@ import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -32,6 +33,17 @@ import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.BehaviorSubject;
 
+import javax.inject.Singleton;
+import timber.log.Timber;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import timber.log.Timber;
 
@@ -62,12 +74,12 @@ public class UploadModel {
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
-                @Named("default_preferences") JsonKvStore store,
-                @Named("licenses_by_name") Map<String, String> licensesByName,
-                Context context,
-                SessionManager sessionManager,
-                FileProcessor fileProcessor,
-                ImageProcessingService imageProcessingService) {
+            @Named("default_preferences") JsonKvStore store,
+            @Named("licenses_by_name") Map<String, String> licensesByName,
+            Context context,
+            SessionManager sessionManager,
+            FileProcessor fileProcessor,
+            ImageProcessingService imageProcessingService) {
         this.licenses = licenses;
         this.store = store;
         this.license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
@@ -85,7 +97,8 @@ public class UploadModel {
         compositeDisposable.clear();
         fileProcessor.cleanup();
         this.items.clear();
-        if(this.selectedCategories!=null) {
+
+        if (this.selectedCategories != null) {
             this.selectedCategories.clear();
         }
     }
@@ -111,9 +124,9 @@ public class UploadModel {
                                             String source,
                                             SimilarImageInterface similarImageInterface) {
         return Observable.fromIterable(uploadableFiles)
-                .map(uploadableFile -> getUploadItem(uploadableFile, place, source, similarImageInterface));
+                .map(uploadableFile -> getUploadItem(uploadableFile, place, source,
+                        similarImageInterface));
     }
-
 
     /**
      * pre process a one item at a time
@@ -135,11 +148,13 @@ public class UploadModel {
     }
 
     private UploadItem getUploadItem(UploadableFile uploadableFile,
-                                     Place place,
-                                     String source,
-                                     SimilarImageInterface similarImageInterface) {
-        fileProcessor.initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()), context.getContentResolver());
-        UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile.getFileCreatedDate(context);
+            Place place,
+            String source,
+            SimilarImageInterface similarImageInterface) {
+        fileProcessor.initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()),
+                context.getContentResolver());
+        UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile
+                .getFileCreatedDate(context);
         long fileCreatedDate = -1;
         String createdTimestampSource = "";
         if (dateTimeWithSource != null) {
@@ -147,11 +162,12 @@ public class UploadModel {
             createdTimestampSource = dateTimeWithSource.getSource();
         }
         Timber.d("File created date is %d", fileCreatedDate);
-        GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
+        GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface, context);
         UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(), Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate,
                 createdTimestampSource);
         if(place!=null){
+            uploadItem.title.setTitleText(place.name);
             uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
             uploadItem.uploadMediaDetails.get(0).setLanguageCode("en");
         }
@@ -201,8 +217,9 @@ public class UploadModel {
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
             }
-            if(null==selectedCategories){//Just a fail safe, this should never be null
-                selectedCategories=new ArrayList<>();
+
+            if (null == selectedCategories) {//Just a fail safe, this should never be null
+                selectedCategories = new ArrayList<>();
             }
             contribution.setCategories(selectedCategories);
             contribution.setTag("mimeType", item.mimeType);
@@ -221,28 +238,16 @@ public class UploadModel {
         });
     }
 
-    /*
-     * Get current timestamp in the format yyyy-MM-dd HH:mm:ss
-     * To be appended at the end of the filename
-     * */
-    public static String getCurrentTimeStamp(){
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String currentDateTime = dateFormat.format(new Date()); // Find todays date
-            return currentDateTime;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     public void deletePicture(String filePath) {
         Iterator<UploadItem> iterator = items.iterator();
-        while (iterator.hasNext())
+        while (iterator.hasNext()) {
             if (iterator.next().mediaUri.toString().contains(filePath)) {
                 iterator.remove();
                 break;
             }
+
+        }
         if (items.isEmpty()) {
             cleanUp();
         }
@@ -255,6 +260,7 @@ public class UploadModel {
     public void updateUploadItem(int index,UploadItem uploadItem) {
         UploadItem uploadItem1 = items.get(index);
         uploadItem1.setMediaDetails(uploadItem.uploadMediaDetails);
+        uploadItem1.setTitle(uploadItem.title);
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -267,6 +273,7 @@ public class UploadModel {
 
         private boolean selected = false;
         private boolean first = false;
+        private Title title;
         private List<UploadMediaDetail> uploadMediaDetails;
         private Place place;
         private boolean visited;
@@ -277,12 +284,13 @@ public class UploadModel {
 
         @SuppressLint("CheckResult")
         UploadItem(Uri originalContentUri,
-                   Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
-                   Place place,
-                   long createdTimestamp,
-                   String createdTimestampSource) {
+                Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
+                Place place,
+                long createdTimestamp,
+                String createdTimestampSource) {
             this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
+            title = new Title();
             uploadMediaDetails = new ArrayList<>();
             uploadMediaDetails.add(new UploadMediaDetail());
             this.place = place;
@@ -334,6 +342,10 @@ public class UploadModel {
             return createdTimestamp;
         }
 
+        public Title getTitle() {
+            return title;
+        }
+
         public Uri getMediaUri() {
             return mediaUri;
         }
@@ -350,9 +362,12 @@ public class UploadModel {
             return MimeTypeMapWrapper.getExtensionFromMimeType(mimeType);
         }
 
-
         public Place getPlace() {
             return place;
+        }
+
+        public void setTitle(Title title) {
+            this.title = title;
         }
 
 

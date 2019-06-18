@@ -32,7 +32,7 @@ public interface CategoriesContract {
 
     public interface UserActionListener extends BasePresenter<View> {
 
-        void searchForCategories(String query, List<UploadMediaDetail> imageTitleList);
+        void searchForCategories(String query);
 
         void verifyCategories();
 

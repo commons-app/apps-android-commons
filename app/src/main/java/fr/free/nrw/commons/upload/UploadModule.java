@@ -40,5 +40,4 @@ public abstract class UploadModule {
             DepictsPresenter
             presenter
     );
-
 }

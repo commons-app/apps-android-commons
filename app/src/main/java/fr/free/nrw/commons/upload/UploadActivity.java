@@ -13,6 +13,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,6 +52,9 @@ import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
 import fr.free.nrw.commons.upload.structure.depicts.DepictModel;
+import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
@@ -143,7 +148,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     }
 
     private void initViewPager() {
-        vpUpload.setOffscreenPageLimit(0);
         uploadImagesAdapter=new UploadImageAdapter(getSupportFragmentManager());
         vpUpload.setAdapter(uploadImagesAdapter);
         vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -267,6 +271,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     }
 
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -351,6 +356,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
             fragments.add(mediaLicenseFragment);
 
             uploadImagesAdapter.setFragments(fragments);
+
+            vpUpload.setOffscreenPageLimit(fragments.size());
         }
     }
 
@@ -462,5 +469,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         super.onDestroy();
         presenter.onDetachView();
         compositeDisposable.clear();
+
+        mediaLicenseFragment.setCallback(null);
+        uploadCategoriesFragment.setCallback(null);
     }
 }

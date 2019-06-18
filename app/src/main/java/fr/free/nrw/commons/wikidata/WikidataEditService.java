@@ -79,7 +79,7 @@ public class WikidataEditService {
         Timber.d("Attempting to edit Wikidata property %s", wikidataEntityId);
         Observable.fromCallable(() -> {
             String propertyValue = getFileName(fileName);
-            return mediaWikiApi.wikidatCreateClaim(wikidataEntityId, "P18", "value", propertyValue);
+            return mediaWikiApi.wikidataCreateClaim(wikidataEntityId, "P18", "value", propertyValue);
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

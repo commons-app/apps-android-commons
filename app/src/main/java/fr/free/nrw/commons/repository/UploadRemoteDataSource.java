@@ -12,6 +12,8 @@ import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.structure.depicts.DepictModel;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.UploadModel;
+import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -21,6 +23,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+
+/**
+ * This class would act as the data source for remote operations for UploadActivity
+ */
 @Singleton
 public class UploadRemoteDataSource {
 
@@ -80,6 +86,14 @@ public class UploadRemoteDataSource {
     }
 
     /**
+     * Clean up the selected categories
+     */
+    public void clearSelectedCategories(){
+        //This needs further refactoring, this should not be here, right now the structure wont suppoort rhis
+        categoriesModel.cleanUp();
+    }
+
+    /**
      * returnt the list of selected categories
      *
      * @return
@@ -95,7 +109,7 @@ public class UploadRemoteDataSource {
      * @param imageTitleList
      * @return
      */
-    public Observable<CategoryItem> searchAll(String query, List<UploadMediaDetail> imageTitleList) {
+    public Observable<CategoryItem> searchAll(String query, List<String> imageTitleList) {
         return categoriesModel.searchAll(query, imageTitleList);
     }
 
@@ -106,7 +120,7 @@ public class UploadRemoteDataSource {
      * @param imageCaptionList
      * @return
      */
-    public Observable<CategoryItem> searchCategories(String query, List<UploadMediaDetail> imageCaptionList) {
+    public Observable<CategoryItem> searchCategories(String query, List<String> imageCaptionList) {
         return categoriesModel.searchCategories(query, imageCaptionList);
     }
 
@@ -116,7 +130,7 @@ public class UploadRemoteDataSource {
      * @param imageCaptionList
      * @return
      */
-    public Observable<CategoryItem> defaultCategories(List<UploadMediaDetail> imageCaptionList) {
+    public Observable<CategoryItem> defaultCategories(List<String> imageCaptionList) {
         return categoriesModel.defaultCategories(imageCaptionList);
     }
 

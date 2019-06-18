@@ -166,7 +166,6 @@ public class  Contribution extends Media {
         buffer
                 .append("== {{int:filedesc}} ==\n")
                 .append("{{Information\n")
-                .append("|labels=").append(getCaption()).append("\n")
                 .append("|description=").append(getDescription()).append("\n")
                 .append("|source=").append("{{own}}\n")
                 .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");

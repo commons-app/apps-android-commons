@@ -7,7 +7,7 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.utils.ViewUtilWrapper
-import junit.framework.Assert.*
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks

@@ -41,6 +41,7 @@ import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
@@ -76,6 +77,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private UploadableFile uploadableFile;
     private String source;
     private Place place;
+
 
     private boolean isExpanded = true;
 
@@ -192,7 +194,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
         uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
-
     }
 
     @Override

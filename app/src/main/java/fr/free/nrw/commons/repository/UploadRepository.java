@@ -8,6 +8,7 @@ import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -17,6 +18,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+
+/**
+ * The repository class for UploadActivity
+ */
 @Singleton
 public class UploadRepository {
 
@@ -65,10 +70,11 @@ public class UploadRepository {
     }
 
     /**
-     * asks the local data source to clean up its resources, prepare for a fresh upload
+     *Prepare for a fresh upload
      */
     public void cleanup() {
         localDataSource.cleanUp();
+        remoteDataSource.clearSelectedCategories();
     }
 
     /**
@@ -87,29 +93,8 @@ public class UploadRepository {
      * @param imageTitleList
      * @return
      */
-    public Observable<CategoryItem> searchAll(String query, List<UploadMediaDetail> imageTitleList) {
+    public Observable<CategoryItem> searchAll(String query, List<String> imageTitleList) {
         return remoteDataSource.searchAll(query, imageTitleList);
-    }
-
-    /**
-     * searchCategories from MWApi
-     *
-     * @param query
-     * @param imageTitleList
-     * @return
-     */
-    public Observable<CategoryItem> searchCategories(String query, List<UploadMediaDetail> imageTitleList) {
-        return remoteDataSource.searchCategories(query, imageTitleList);
-    }
-
-    /**
-     * returns the default categorories for the list of images based on their titles
-     *
-     * @param imageTitleList
-     * @return
-     */
-    public Observable<CategoryItem> defaultCategories(List<UploadMediaDetail> imageTitleList) {
-        return remoteDataSource.defaultCategories(imageTitleList);
     }
 
     /**

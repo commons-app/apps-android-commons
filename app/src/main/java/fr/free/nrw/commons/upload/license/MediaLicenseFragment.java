@@ -164,6 +164,9 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     public void onDestroyView() {
         super.onDestroyView();
         presenter.onDetachView();
+
+        //Free the adapter to avoid memory leaks
+        adapter=null;
     }
 
 

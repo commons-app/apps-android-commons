@@ -1,14 +1,17 @@
 package fr.free.nrw.commons.category;
 
 import android.text.TextUtils;
-
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.upload.GpsCategoryModel;
+import fr.free.nrw.commons.utils.StringSortingUtils;
+import io.reactivex.Observable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,6 +23,11 @@ import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
 import timber.log.Timber;
 
+import timber.log.Timber;
+
+/**
+ * The model class for categories in upload
+ */
 public class CategoriesModel{
     private static final int SEARCH_CATS_LIMIT = 25;
 
@@ -42,13 +50,22 @@ public class CategoriesModel{
         this.selectedCategories = new ArrayList<>();
     }
 
-    //region Misc. utility methods
+    /**
+     * Sorts CategoryItem by similarity
+     * @param filter
+     * @return
+     */
     public Comparator<CategoryItem> sortBySimilarity(final String filter) {
         Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
         return (firstItem, secondItem) -> stringSimilarityComparator
                 .compare(firstItem.getName(), secondItem.getName());
     }
 
+    /**
+     * Returns if the item contains an year
+     * @param item
+     * @return
+     */
     public boolean containsYear(String item) {
         //Check for current and previous year to exclude these categories from removal
         Calendar now = Calendar.getInstance();
@@ -68,6 +85,10 @@ public class CategoriesModel{
                 || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*")));
     }
 
+    /**
+     * Updates category count in category dao
+     * @param item
+     */
     public void updateCategoryCount(CategoryItem item) {
         Category category = categoryDao.find(item.getName());
 
@@ -79,16 +100,6 @@ public class CategoriesModel{
         category.incTimesUsed();
         categoryDao.save(category);
     }
-    //endregion
-
-    //region Category Caching
-    public void cacheAll(HashMap<String, ArrayList<String>> categories) {
-        categoriesCache.putAll(categories);
-    }
-
-    public HashMap<String, ArrayList<String>> getCategoriesCache() {
-        return categoriesCache;
-    }
 
     boolean cacheContainsKey(String term) {
         return categoriesCache.containsKey(term);
@@ -96,12 +107,15 @@ public class CategoriesModel{
     //endregion
 
     //region Category searching
-    public Observable<CategoryItem> searchAll(String term, List<UploadMediaDetail> imageTitleList) {
+    public Observable<CategoryItem> searchAll(String term, List<String> imageTitleList) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if (TextUtils.isEmpty(term)) {
-            return gpsCategories()
-                    .concatWith(titleCategories(imageTitleList))
-                    .concatWith(recentCategories());
+            Observable<CategoryItem> categoryItemObservable = gpsCategories()
+                    .concatWith(titleCategories(imageTitleList));
+            if (hasDirectCategories()) {
+                categoryItemObservable.concatWith(directCategories().concatWith(recentCategories()));
+            }
+            return categoryItemObservable;
         }
 
         //if user types in something that is in cache, return cached category
@@ -116,7 +130,7 @@ public class CategoriesModel{
                 .map(name -> new CategoryItem(name, false));
     }
 
-    public Observable<CategoryItem> searchCategories(String term, List<UploadMediaDetail> imageTitleList) {
+    public Observable<CategoryItem> searchCategories(String term, List<String> imageTitleList) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if (TextUtils.isEmpty(term)) {
             return gpsCategories()
@@ -129,11 +143,16 @@ public class CategoriesModel{
                 .map(s -> new CategoryItem(s, false));
     }
 
+    /**
+     * Returns cached categories
+     * @param term
+     * @return
+     */
     private ArrayList<String> getCachedCategories(String term) {
         return categoriesCache.get(term);
     }
 
-    public Observable<CategoryItem> defaultCategories(List<UploadMediaDetail> titleList) {
+    public Observable<CategoryItem> defaultCategories(List<String> titleList) {
         Observable<CategoryItem> directCat = directCategories();
         if (hasDirectCategories()) {
             Timber.d("Image has direct Cat");
@@ -149,10 +168,15 @@ public class CategoriesModel{
         }
     }
 
+
     private boolean hasDirectCategories() {
         return !directKvStore.getString("Category", "").equals("");
     }
 
+    /**
+     * Returns categories in DirectKVStore
+     * @return
+     */
     private Observable<CategoryItem> directCategories() {
         String directCategory = directKvStore.getString("Category", "");
         List<String> categoryList = new ArrayList<>();
@@ -165,28 +189,49 @@ public class CategoriesModel{
         return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
     }
 
+    /**
+     * Returns GPS categories
+     * @return
+     */
     Observable<CategoryItem> gpsCategories() {
         return Observable.fromIterable(gpsCategoryModel.getCategoryList())
                 .map(name -> new CategoryItem(name, false));
     }
 
-    private Observable<CategoryItem> titleCategories(List<UploadMediaDetail> titleList) {
-        return Observable.fromIterable(titleList)
+    /**
+     * Returns title based categories
+     * @param titleList
+     * @return
+     */
+    private Observable<CategoryItem> titleCategories(List<String> titleList) {
+     return Observable.fromIterable(titleList)
                 .concatMap(this::getTitleCategories);
     }
 
-    private Observable<CategoryItem> getTitleCategories(UploadMediaDetail uploadMediaDetail) {
-        return mwApi.searchTitles(uploadMediaDetail.getCaptionText(), SEARCH_CATS_LIMIT)
+    /**
+     * Return category for single title
+     * @param title
+     * @return
+     */
+    private Observable<CategoryItem> getTitleCategories(String title) {
+        return mwApi.searchTitles(title, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 
+    /**
+     * Returns recent categories
+     * @return
+     */
     private Observable<CategoryItem> recentCategories() {
         return Observable.fromIterable(categoryDao.recentCategories(SEARCH_CATS_LIMIT))
                 .map(s -> new CategoryItem(s, false));
     }
-    //endregion
 
-    //region Category Selection
+
+    /**
+     * Handles category item selection
+     * @param item
+     */
     public void onCategoryItemClicked(CategoryItem item) {
         if (item.isSelected()) {
             selectCategory(item);
@@ -196,22 +241,35 @@ public class CategoriesModel{
         }
     }
 
+    /**
+     * Select's category
+     * @param item
+     */
     public void selectCategory(CategoryItem item) {
         selectedCategories.add(item);
     }
 
+    /**
+     * Unselect Category
+     * @param item
+     */
     public void unselectCategory(CategoryItem item) {
         selectedCategories.remove(item);
     }
 
-    public int selectedCategoriesCount() {
-        return selectedCategories.size();
-    }
 
+    /**
+     * Get Selected Categories
+     * @return
+     */
     public List<CategoryItem> getSelectedCategories() {
         return selectedCategories;
     }
 
+    /**
+     * Get Categories String List
+     * @return
+     */
     public List<String> getCategoryStringList() {
         List<String> output = new ArrayList<>();
         for (CategoryItem item : selectedCategories) {
@@ -219,6 +277,12 @@ public class CategoriesModel{
         }
         return output;
     }
-    //endregion
 
+    /**
+     * Cleanup the existing in memory cache's
+     */
+    public void cleanUp() {
+        this.categoriesCache.clear();
+        this.selectedCategories.clear();
+    }
 }

@@ -19,7 +19,6 @@ public class UploadBaseFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
     }
 
     public void setCallback(Callback callback) {
