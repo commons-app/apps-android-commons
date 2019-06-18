@@ -21,14 +21,10 @@ import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.BiMap;
 import fr.free.nrw.commons.utils.LangCodeUtils;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
 
-import static fr.free.nrw.commons.settings.SettingsFragment.KEY_LANGUAGE_VALUE;
 
 public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
@@ -40,11 +36,14 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
     public String selectedLangCode="";
     private Context context;
     private boolean dropDownClicked;
+    private String savedLanguageValue;
 
 
 
     public SpinnerLanguagesAdapter(@NonNull Context context,
-                                   int resource, BiMap<AdapterView, String> selectedLanguages) {
+                                   int resource,
+                                   BiMap<AdapterView, String> selectedLanguages,
+                                   String savedLanguageValue) {
         super(context, resource);
         this.resource = resource;
         this.layoutInflater = LayoutInflater.from(context);
@@ -54,6 +53,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         this.selectedLanguages = selectedLanguages;
         this.context = context;
         this.dropDownClicked = false;
+        this.savedLanguageValue = savedLanguageValue;
     }
 
     private void prepareLanguages() {
@@ -98,7 +98,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
             convertView = layoutInflater.inflate(resource, parent, false);
         }
         ViewHolder holder = new ViewHolder(convertView);
-        holder.init(position, true);
+        holder.init(position, true, savedLanguageValue);
 
         dropDownClicked = true;
         return convertView;
@@ -115,7 +115,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.init(position, false);
+        holder.init(position, false, savedLanguageValue);
         return convertView;
     }
 
@@ -132,20 +132,18 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
             ButterKnife.bind(this, itemView);
         }
 
-        public void init(int position, boolean isDropDownView) {
+        public void init(int position, boolean isDropDownView, String savedLanguageValue) {
             String languageCode = LangCodeUtils.fixLanguageCode(languageCodesList.get(position));
             final String languageName = String.format("%s%s", languageNamesList.get(position)
                     .substring(0, 1).toUpperCase(), languageNamesList.get(position).substring(1));
 
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
-            if(valuelang.equals("")){
-                valuelang = Locale.getDefault().getLanguage();
+            if(savedLanguageValue.equals("")){
+                savedLanguageValue = Locale.getDefault().getLanguage();
             }
 
             if (!isDropDownView) {
                     if( !dropDownClicked){
-                    languageCode = LangCodeUtils.fixLanguageCode(valuelang);
+                    languageCode = LangCodeUtils.fixLanguageCode(savedLanguageValue);
                 }
                 view.setVisibility(View.GONE);
                 if(languageCode.length()>2)
@@ -177,4 +175,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         return languageCodesList.indexOf(context.getResources().getConfiguration().locale.getLanguage());
     }
 
+    int getIndexOfLanguageCode(String languageCode) {
+        return languageCodesList.indexOf(languageCode);
+    }
 }

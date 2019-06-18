@@ -31,11 +31,13 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
     private List<Description> descriptions;
     private Callback callback;
 
-    private BiMap<AdapterView, String> selectedLanguages;
+    private BiMap<AdapterView, String> selectedLanguage;
+    private String savedLanguageValue;
 
-    public DescriptionsAdapter() {
+    public DescriptionsAdapter(String savedLanguageValue) {
         descriptions = new ArrayList<>();
-        selectedLanguages = new BiMap<>();
+        selectedLanguage = new BiMap<>();
+        this.savedLanguageValue = savedLanguageValue;
     }
 
     public void setCallback(Callback callback) {
@@ -44,7 +46,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
 
     public void setItems(List<Description> descriptions) {
         this.descriptions = descriptions;
-        selectedLanguages = new BiMap<>();
+        selectedLanguage = new BiMap<>();
         notifyDataSetChanged();
     }
 
@@ -143,7 +145,8 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         private void initLanguageSpinner(int position, Description description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(
                     spinnerDescriptionLanguages.getContext(),
-                    R.layout.row_item_languages_spinner, selectedLanguages);
+                    R.layout.row_item_languages_spinner, selectedLanguage,
+                    savedLanguageValue);
             languagesAdapter.notifyDataSetChanged();
             spinnerDescriptionLanguages.setAdapter(languagesAdapter);
 
@@ -155,8 +158,8 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
                     String languageCode = ((SpinnerLanguagesAdapter) adapterView.getAdapter())
                             .getLanguageCode(position);
                     description.setLanguageCode(languageCode);
-                    selectedLanguages.remove(adapterView);
-                    selectedLanguages.put(adapterView, languageCode);
+                    selectedLanguage.remove(adapterView);
+                    selectedLanguage.put(adapterView, languageCode);
                     ((SpinnerLanguagesAdapter) adapterView
                             .getAdapter()).selectedLangCode = languageCode;
                 }
@@ -177,7 +180,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
                 }
             } else {
                 spinnerDescriptionLanguages.setSelection(description.getSelectedLanguageIndex());
-                selectedLanguages.put(spinnerDescriptionLanguages, description.getLanguageCode());
+                selectedLanguage.put(spinnerDescriptionLanguages, description.getLanguageCode());
             }
         }
 

@@ -38,7 +38,6 @@ import fr.free.nrw.commons.upload.Language;
 
 public class SettingsFragment extends PreferenceFragment {
 
-    public static final String KEY_LANGUAGE_VALUE = "LANGUAGE_DESCRIPTION";
     @Inject
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
@@ -190,15 +189,11 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private void saveValue(String userSelectedValue) {
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
-        editor.putString(KEY_LANGUAGE_VALUE, userSelectedValue);
-        editor.apply();
+        defaultKvStore.putString(Prefs.KEY_LANGUAGE_VALUE, userSelectedValue);
     }
 
     private String getCurrentLanguageCode() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String valuelang = sharedPreferences.getString(KEY_LANGUAGE_VALUE, "");
-        return valuelang;
+        return defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, "");
     }
 
     private List<Language> getLocaleSupportedByDevice() {
