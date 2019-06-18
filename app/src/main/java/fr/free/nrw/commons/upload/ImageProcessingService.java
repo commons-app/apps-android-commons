@@ -131,7 +131,7 @@ public class ImageProcessingService {
             return Single.just(EMPTY_TITLE);
         }
 
-        return mediaClient.checkPageExistsUsingTitle(uploadItem.getFileName())
+        return mediaClient.checkPageExistsUsingTitle("File:" + uploadItem.getFileName())
                 .map(doesFileExist -> {
                     Timber.d("Result for valid title is %s", doesFileExist);
                     return doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK;

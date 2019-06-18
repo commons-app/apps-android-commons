@@ -172,9 +172,9 @@ public class Media implements Parcelable {
         }
 
         media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription()));
-        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories()));
-        String latitude = metadata.gpsLatitude().value();
-        String longitude = metadata.gpsLongitude().value();
+        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.getCategories()));
+        String latitude = metadata.getGpsLatitude();
+        String longitude = metadata.getGpsLongitude();
 
         if (!StringUtils.isBlank(latitude) && !StringUtils.isBlank(longitude)) {
             LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude), 0);

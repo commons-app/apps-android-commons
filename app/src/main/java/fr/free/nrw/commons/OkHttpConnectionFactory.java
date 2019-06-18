@@ -31,7 +31,7 @@ public final class OkHttpConnectionFactory {
         return new OkHttpClient.Builder()
                 .cookieJar(SharedPreferenceCookieManager.getInstance())
                 .cache(NET_CACHE)
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .addInterceptor(new UnsuccessfulResponseInterceptor())
                 .addInterceptor(new CommonHeaderRequestInterceptor())
                 .build();

@@ -28,7 +28,7 @@ public class MediaClient {
     public Single<Boolean> checkPageExistsUsingTitle(String title) {
         return mediaInterface.checkPageExistsUsingTitle(title)
                 .map(mwQueryResponse -> mwQueryResponse
-                        .query().firstPage() != null)
+                        .query().firstPage().pageId() > 0)
                 .singleOrError();
     }
 

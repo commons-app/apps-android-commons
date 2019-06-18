@@ -15,7 +15,7 @@ public interface MediaInterface {
      * @param title the title of the page to be checked
      * @return
      */
-    @GET("w/api.php?action=query")
+    @GET("w/api.php?action=query&format=json&formatversion=2")
     Observable<MwQueryResponse> checkPageExistsUsingTitle(@Query("titles") String title);
 
     /**
@@ -23,6 +23,6 @@ public interface MediaInterface {
      * @param aisha1 the SHA of the media file to be checked
      * @return
      */
-    @GET("w/api.php?action=query&list=allimages")
+    @GET("w/api.php?action=query&format=json&formatversion=2&list=allimages")
     Observable<MwQueryResponse> checkFileExistsUsingSha(@Query("aisha1") String aisha1);
 }
