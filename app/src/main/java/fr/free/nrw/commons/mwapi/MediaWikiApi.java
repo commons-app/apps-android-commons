@@ -64,7 +64,7 @@ public interface MediaWikiApi {
     String wikidataCreateClaim(String entityId, String property, String snaktype, String value) throws IOException;
 
     @Nullable
-    String wikidataEditEntity(String entityId, String fileName) throws IOException;
+    String wikiBaseEditEntity(String entityId, String fileName) throws IOException;
 
     @Nullable
     boolean addWikidataEditTag(String revisionId) throws IOException;

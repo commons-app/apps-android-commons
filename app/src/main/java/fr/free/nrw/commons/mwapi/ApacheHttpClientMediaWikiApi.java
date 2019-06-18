@@ -457,27 +457,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      */
     @Nullable
     @Override
-    public String wikidataEditEntity(String entityId, String fileEntityId) throws IOException {
-
-        /*
-         String data = "{\"claims\":[{\n" +
-            "\"mainsnak\": {\n" +
-                "\"snaktype\": \"value\",\n" +
-                        "\"property\": \"P180\",\n" +
-                        "\"datavalue\": {\n" +
-                    "\"value\": {\n" +
-                        "\"entity-type\": \"item\",\n" +
-                                "\"numeric-id\": $ENTITY_ID$,\n" +
-                                "\"id\": \"Q$ENTITY_ID$\"\n" +
-                    "},\n" +
-                    "\"type\": \"wikibase-entityid\"\n" +
-                "}\n" +
-            "},\n" +
-            "\"type\": \"statement\",\n" +
-                    "\"rank\": \"preferred\"\n" +
-                 "}]}";
-         data = data.replace("$ENTITY_ID$", entityId.replace("Q", ""));
-        */
+    public String wikiBaseEditEntity(String entityId, String fileEntityId) throws IOException {
 
         JsonObject value = new JsonObject();
         value.addProperty("entity-type", "item");
