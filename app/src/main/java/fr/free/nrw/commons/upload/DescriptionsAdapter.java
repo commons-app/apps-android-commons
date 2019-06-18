@@ -31,12 +31,12 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
     private List<Description> descriptions;
     private Callback callback;
 
-    private BiMap<AdapterView, String> selectedLanguage;
+    private BiMap<AdapterView, String> selectedLanguages;
     private String savedLanguageValue;
 
     public DescriptionsAdapter(String savedLanguageValue) {
         descriptions = new ArrayList<>();
-        selectedLanguage = new BiMap<>();
+        selectedLanguages = new BiMap<>();
         this.savedLanguageValue = savedLanguageValue;
     }
 
@@ -46,7 +46,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
 
     public void setItems(List<Description> descriptions) {
         this.descriptions = descriptions;
-        selectedLanguage = new BiMap<>();
+        selectedLanguages = new BiMap<>();
         notifyDataSetChanged();
     }
 
@@ -145,7 +145,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         private void initLanguageSpinner(int position, Description description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(
                     spinnerDescriptionLanguages.getContext(),
-                    R.layout.row_item_languages_spinner, selectedLanguage,
+                    R.layout.row_item_languages_spinner, selectedLanguages,
                     savedLanguageValue);
             languagesAdapter.notifyDataSetChanged();
             spinnerDescriptionLanguages.setAdapter(languagesAdapter);
@@ -153,34 +153,40 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
             spinnerDescriptionLanguages.setOnItemSelectedListener(new OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int position,
-                        long l) {
+                                           long l) {
                     description.setSelectedLanguageIndex(position);
                     String languageCode = ((SpinnerLanguagesAdapter) adapterView.getAdapter())
                             .getLanguageCode(position);
                     description.setLanguageCode(languageCode);
-                    selectedLanguage.remove(adapterView);
-                    selectedLanguage.put(adapterView, languageCode);
+                    selectedLanguages.remove(adapterView);
+                    selectedLanguages.put(adapterView, languageCode);
                     ((SpinnerLanguagesAdapter) adapterView
                             .getAdapter()).selectedLangCode = languageCode;
+                    Timber.d("Description language code is: "+languageCode);
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
-
                 }
             });
 
             if (description.getSelectedLanguageIndex() == -1) {
-                if (position == 0) {
-                    int defaultLocaleIndex = languagesAdapter
-                            .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages.getContext());
-                    spinnerDescriptionLanguages.setSelection(defaultLocaleIndex, true);
+                if (savedLanguageValue != null) {
+                    // If user has chosen a default language from settings activity savedLanguageValue is not null
+                    spinnerDescriptionLanguages.setSelection(languagesAdapter.getIndexOfLanguageCode(savedLanguageValue));
                 } else {
-                    spinnerDescriptionLanguages.setSelection(0);
+                    if (position == 0) {
+                        int defaultLocaleIndex = languagesAdapter
+                                .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages.getContext());
+                        spinnerDescriptionLanguages.setSelection(defaultLocaleIndex, true);
+                    } else {
+                        spinnerDescriptionLanguages.setSelection(0);
+                    }
                 }
+
             } else {
                 spinnerDescriptionLanguages.setSelection(description.getSelectedLanguageIndex());
-                selectedLanguage.put(spinnerDescriptionLanguages, description.getLanguageCode());
+                selectedLanguages.put(spinnerDescriptionLanguages, description.getLanguageCode());
             }
         }
 
