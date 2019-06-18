@@ -343,4 +343,6 @@
   <string name="exif_tag_name_location">Plaz</string>
   <string name="exif_tag_name_serialNumbers">Seriennummeren</string>
   <string name="exif_tag_name_software">Software</string>
+  <string name="no_categories_found">Keng Kategorie fonnt.</string>
+  <string name="upload_cancelled">Eroplueden ofgebrach</string>
 </resources>

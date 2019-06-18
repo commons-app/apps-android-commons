@@ -29,6 +29,7 @@
   <string name="preference_category_appearance">Apariencia</string>
   <string name="preference_category_general">General</string>
   <string name="preference_category_feedback">Sugerencias</string>
+  <string name="preference_category_privacy">Privacidad</string>
   <string name="preference_category_location">Ubicación</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -526,5 +527,17 @@
   <string name="welcome_dont_upload_content_description">Ejemplos de imágenes que no deben cargarse</string>
   <string name="skip_image">OMITIR ESTA IMAGEN</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">La descarga falló!. No podemos descargar el archivo sin el permiso de almacenamiento externo.</string>
+  <string name="manage_exif_tags">Gestionar etiquetas EXIF</string>
+  <string name="exif_tag_name_author">Autor</string>
+  <string name="exif_tag_name_copyright">Derechos de autor</string>
+  <string name="exif_tag_name_location">Ubicación</string>
+  <string name="exif_tag_name_cameraModel">Modelo de cámara</string>
+  <string name="exif_tag_name_lensModel">Modelo de lente</string>
+  <string name="exif_tag_name_serialNumbers">Números de serie</string>
+  <string name="exif_tag_name_software">Programa</string>
   <string name="image_info">Información de la imagen</string>
+  <string name="no_categories_found">No se encontró ninguna categoría</string>
+  <string name="upload_cancelled">Se canceló la carga</string>
+  <string name="previous_image_title_description_not_found">No hay datos sobre el título o la descripción anteriores de la imagen</string>
+  <string name="dialog_box_text_nomination">¿Por qué debe borrarse %1$s?</string>
 </resources>

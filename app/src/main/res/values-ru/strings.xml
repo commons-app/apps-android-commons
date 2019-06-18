@@ -540,5 +540,8 @@
   <string name="share_text">Чтобы загружать фото на Викисклад (Wikimedia Commons), скачайте одноимённое приложение «Викисклад» (Commons): %1$s</string>
   <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
+  <string name="no_categories_found">Категории не найдены.</string>
+  <string name="upload_cancelled">Загрузка отменена</string>
+  <string name="previous_image_title_description_not_found">Отсутствует заголовок или описание предыдущего изображения</string>
   <string name="dialog_box_text_nomination">Почему %1$s должно быть удалено?</string>
 </resources>

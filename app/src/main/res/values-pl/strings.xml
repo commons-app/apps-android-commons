@@ -293,4 +293,7 @@
   <string name="review_thanks_yes_button_text">Tak, czemu nie</string>
   <string name="review_thanks_no_button_text">Następny obraz</string>
   <string name="image_info">Informacje o obrazie</string>
+  <string name="no_categories_found">Nie znaleziono kategorii</string>
+  <string name="upload_cancelled">Anulowano przesyłanie</string>
+  <string name="previous_image_title_description_not_found">Brakuje danych co do poprzedniego tytułu lub opisu obrazu</string>
 </resources>

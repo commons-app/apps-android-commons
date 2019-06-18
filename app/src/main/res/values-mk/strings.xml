@@ -521,5 +521,8 @@
   <string name="share_text">Подигајте слики на Ризницата од телефон. Преземете го прилогот на Ризницата: %1$s</string>
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
+  <string name="no_categories_found">Не пронајдов ниедна категорија</string>
+  <string name="upload_cancelled">Откажено подигање</string>
+  <string name="previous_image_title_description_not_found">Нема податоци за наслов и описи од претх. слика</string>
   <string name="dialog_box_text_nomination">Зошто сметате дека %1$s треба да се избрише?</string>
 </resources>
