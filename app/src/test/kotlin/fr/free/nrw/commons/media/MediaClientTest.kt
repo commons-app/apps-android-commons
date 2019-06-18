@@ -33,6 +33,7 @@ class MediaClientTest {
     @Test
     fun checkPageExistsUsingTitle() {
         val mwQueryPage = mock(MwQueryPage::class.java)
+        `when`(mwQueryPage.pageId()).thenReturn(10)
         val mwQueryResult = mock(MwQueryResult::class.java)
         `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
         `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
@@ -48,8 +49,10 @@ class MediaClientTest {
 
     @Test
     fun checkPageNotExistsUsingTitle() {
+        val mwQueryPage = mock(MwQueryPage::class.java)
+        `when`(mwQueryPage.pageId()).thenReturn(0)
         val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.firstPage()).thenReturn(null)
+        `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
         `when`(mwQueryResult.pages()).thenReturn(listOf())
         val mockResponse = mock(MwQueryResponse::class.java)
         `when`(mockResponse.query()).thenReturn(mwQueryResult)
