@@ -64,7 +64,10 @@ public class WikidataEditService {
             return;
         }
 
+        // TODO Wikidata Sandbox (Q4115189) for test purposes
+        //wikidataEntityId = "Q4115189";
         editWikidataProperty(wikidataEntityId, fileName);
+        editWikidataPropertyP180(wikidataEntityId, fileName);
     }
 
     /**
@@ -86,6 +89,43 @@ public class WikidataEditService {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revisionId -> handleClaimResult(wikidataEntityId, revisionId), throwable -> {
                     Timber.e(throwable, "Error occurred while making claim");
+                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                });
+    }
+
+    /**
+     * Edits the wikidata entity by adding the P180 property to it.
+     * Adding the P180 edit requires calling the wikidata API to create a claim against the entity
+     *
+     * @param wikidataEntityId
+     * @param fileName
+     */
+    @SuppressLint("CheckResult")
+    private void editWikidataPropertyP180(String wikidataEntityId, String fileName) {
+        Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(fileEntityId -> {
+                    if (fileEntityId != null) {
+                        addPropertyP180(wikidataEntityId, fileEntityId);
+                        Timber.d("EntityId for image was received successfully");
+                    } else {
+                        Timber.d("Error acquiring EntityId for image");
+                    }
+                    }, throwable -> {
+                    Timber.e(throwable, "Error occurred while getting EntityID for P180 tag");
+                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    private void addPropertyP180(String wikidataEntityId, String fileEntityId) {
+        Observable.fromCallable(() -> mediaWikiApi.wikidataEditEntity(wikidataEntityId, fileEntityId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(revisionId -> Timber.d("Property P180 set successfully for %s", revisionId),
+                        throwable -> {
+                    Timber.e(throwable, "Error occurred while setting P180 tag");
                     ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
     }

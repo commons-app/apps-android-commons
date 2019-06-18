@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.conn.ClientConnectionManager;
@@ -235,6 +237,15 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
+    public String getFileEntityId(String fileName) throws IOException {
+        return "M" + api.action("query")
+                .param("prop", "info")
+                .param("titles", fileName)
+                .get()
+                .getString("/api/query/pages/page/@pageid");
+    }
+
+    @Override
     public Single<Boolean> pageExists(String pageName) {
         return Single.fromCallable(() -> Double.parseDouble(api.action("query")
                 .param("titles", pageName)
@@ -420,6 +431,88 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("snaktype", snaktype)
                 .param("property", property)
                 .param("value", value)
+                .post();
+
+        if (result == null || result.getNode("api") == null) {
+            return null;
+        }
+
+        Node node = result.getNode("api").getDocument();
+        Element element = (Element) node;
+
+        if (element != null && element.getAttribute("success").equals("1")) {
+            return result.getString("api/pageinfo/@lastrevid");
+        } else {
+            Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));
+        }
+        return null;
+    }
+
+    /**
+     * Edits claim using the commons API by adding P180 tag for an image
+     * https://commons.wikimedia.org/wiki/Wikibase/API
+     * @param entityId the commons api entity to be edited
+     * @param fileEntityId entity id for file, page id
+     * @return returns revisionId if the claim is successfully created else returns null
+     * @throws IOException
+     */
+    @Nullable
+    @Override
+    public String wikidataEditEntity(String entityId, String fileEntityId) throws IOException {
+
+        /*
+         String data = "{\"claims\":[{\n" +
+            "\"mainsnak\": {\n" +
+                "\"snaktype\": \"value\",\n" +
+                        "\"property\": \"P180\",\n" +
+                        "\"datavalue\": {\n" +
+                    "\"value\": {\n" +
+                        "\"entity-type\": \"item\",\n" +
+                                "\"numeric-id\": $ENTITY_ID$,\n" +
+                                "\"id\": \"Q$ENTITY_ID$\"\n" +
+                    "},\n" +
+                    "\"type\": \"wikibase-entityid\"\n" +
+                "}\n" +
+            "},\n" +
+            "\"type\": \"statement\",\n" +
+                    "\"rank\": \"preferred\"\n" +
+                 "}]}";
+         data = data.replace("$ENTITY_ID$", entityId.replace("Q", ""));
+        */
+
+        JsonObject value = new JsonObject();
+        value.addProperty("entity-type", "item");
+        value.addProperty("numeric-id", "$ENTITY_ID$");
+        value.addProperty("id", "Q$ENTITY_ID$");
+
+        JsonObject dataValue = new JsonObject();
+        dataValue.add("value", value);
+        dataValue.addProperty("type", "wikibase-entityid");
+
+        JsonObject mainSnak = new JsonObject();
+        mainSnak.addProperty("snaktype", "value");
+        mainSnak.addProperty("property", "P180");
+        mainSnak.add("datavalue", dataValue);
+
+        JsonObject claim = new JsonObject();
+        claim.add("mainsnak", mainSnak);
+        claim.addProperty("type", "statement");
+        claim.addProperty("rank", "preferred");
+
+        JsonArray claims = new JsonArray();
+        claims.add(claim);
+
+        JsonObject jsonData = new JsonObject();
+        jsonData.add("claims", claims);
+
+        String data = jsonData
+                .toString()
+                .replace("$ENTITY_ID$", entityId.replace("Q", ""));
+
+        CustomApiResult result = api.action("wbeditentity")
+                .param("id", fileEntityId)
+                .param("token", getEditToken())
+                .param("data", data)
                 .post();
 
         if (result == null || result.getNode("api") == null) {

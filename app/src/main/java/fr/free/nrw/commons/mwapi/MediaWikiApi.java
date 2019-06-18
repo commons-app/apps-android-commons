@@ -33,6 +33,8 @@ public interface MediaWikiApi {
 
     boolean fileExistsWithName(String fileName) throws IOException;
 
+    String getFileEntityId(String fileName) throws IOException;
+
     Single<Boolean> pageExists(String pageName);
 
     List<String> getSubCategoryList(String categoryName);
@@ -62,6 +64,9 @@ public interface MediaWikiApi {
 
     @Nullable
     String wikidataCreateClaim(String entityId, String property, String snaktype, String value) throws IOException;
+
+    @Nullable
+    String wikidataEditEntity(String entityId, String fileName) throws IOException;
 
     @Nullable
     boolean addWikidataEditTag(String revisionId) throws IOException;
