@@ -448,6 +448,29 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return null;
     }
 
+    @Nullable
+    @Override
+    public String wikidataAddLabels(String entityId, String fileEntityId, String caption) throws IOException {
+        CustomApiResult result = wikidataApi.action("wbeditentity")
+                .param("id", "Q42")
+                .param("token", getEditToken())
+                .param("data", caption)
+                .post();
+        if (result == null || result.getNode("api") == null) {
+            return null;
+        }
+
+        Node node = result.getNode("api").getDocument();
+        Element element = (Element) node;
+
+        if (element != null && element.getAttribute("success").equals("1")) {
+            return result.getString("api/pageinfo/@lastrevid");
+        } else {
+            Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));
+        }
+        return null;
+    }
+
     /**
      * Edits claim using the commons API by adding P180 tag for an image
      * https://commons.wikimedia.org/wiki/Wikibase/API

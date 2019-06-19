@@ -70,6 +70,8 @@ public class WikidataEditService {
         editWikidataPropertyP180(wikidataEntityId, fileName);
     }
 
+
+
     /**
      * Edits the wikidata entity by adding the P18 property to it.
      * Adding the P18 edit requires calling the wikidata API to create a claim against the entity
@@ -183,5 +185,33 @@ public class WikidataEditService {
         fileName = String.format("\"%s\"", fileName.replace("File:", ""));
         Timber.d("Wikidata property name is %s", fileName);
         return fileName;
+    }
+
+    public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, String caption) {
+        Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(fileEntityId -> {
+                    if (fileEntityId != null) {
+                        wikidataAddLabels(wikiDataEntityId, fileEntityId, caption);
+                        Timber.d("EntityId for image was received successfully");
+                    } else {
+                        Timber.d("Error acquiring EntityId for image");
+                    }
+                }, throwable -> {
+                    Timber.e(throwable, "Error occurred while getting EntityID for Q24 tag");
+                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                });
+    }
+
+    private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, String caption) {
+        Observable.fromCallable(() -> mediaWikiApi.wikidataAddLabels(wikiDataEntityId, fileEntityId, caption))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(revisionId -> Timber.d("Property Q24 set successfully for %s", revisionId),
+                        throwable -> {
+                            Timber.e(throwable, "Error occurred while setting Q24 tag");
+                            ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                        });
     }
 }

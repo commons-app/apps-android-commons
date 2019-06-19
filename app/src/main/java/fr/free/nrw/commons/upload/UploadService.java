@@ -295,6 +295,7 @@ public class UploadService extends HandlerService<Contribution> {
                         Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
                                 contribution.getWikiDataEntityId());
                         wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename);
+                        wikidataEditService.createLabelforWikidataEntity(contribution.getWikiDataEntityId(), canonicalFilename, contribution.getCaption());
                         contribution.setFilename(canonicalFilename);
                         contribution.setImageUrl(uploadResult.getImageUrl());
                         contribution.setState(Contribution.STATE_COMPLETED);
