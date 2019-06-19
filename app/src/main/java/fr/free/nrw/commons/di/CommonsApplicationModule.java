@@ -107,7 +107,7 @@ public class CommonsApplicationModule {
     @Provides
     @Named("depicts")
     public ContentProviderClient provideDepictsContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient("fr.free.nrw.commons.beta.depicts.contentprovider");
+        return context.getContentResolver().acquireContentProviderClient(applicationContext.getPackageName()+".depicts.contentprovider");
     }
 
     /**
