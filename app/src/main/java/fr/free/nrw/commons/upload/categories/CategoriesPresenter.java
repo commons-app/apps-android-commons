@@ -23,7 +23,6 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
-
 /**
  * The presenter class for UploadCategoriesFragment
  */
@@ -90,6 +89,7 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
         if (!TextUtils.isEmpty(query)) {
             distinctCategoriesObservable = distinctCategoriesObservable.sorted(repository.sortBySimilarity(query));
         }
+
         Disposable searchCategoriesDisposable = distinctCategoriesObservable
                 .observeOn(mainThreadScheduler)
                 .subscribe(

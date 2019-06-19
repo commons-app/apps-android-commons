@@ -23,7 +23,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-
 /**
  * This class would act as the data source for remote operations for UploadActivity
  */
@@ -111,27 +110,6 @@ public class UploadRemoteDataSource {
      */
     public Observable<CategoryItem> searchAll(String query, List<String> imageTitleList) {
         return categoriesModel.searchAll(query, imageTitleList);
-    }
-
-    /**
-     * searchCategories from MWApi
-     *
-     * @param query
-     * @param imageCaptionList
-     * @return
-     */
-    public Observable<CategoryItem> searchCategories(String query, List<String> imageCaptionList) {
-        return categoriesModel.searchCategories(query, imageCaptionList);
-    }
-
-    /**
-     * returns the list of default categoies
-     *
-     * @param imageCaptionList
-     * @return
-     */
-    public Observable<CategoryItem> defaultCategories(List<String> imageCaptionList) {
-        return categoriesModel.defaultCategories(imageCaptionList);
     }
 
     /**

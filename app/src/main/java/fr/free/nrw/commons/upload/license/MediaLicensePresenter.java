@@ -12,7 +12,6 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-
 /**
  * Added JavaDocs for MediaLicensePresenter
  */

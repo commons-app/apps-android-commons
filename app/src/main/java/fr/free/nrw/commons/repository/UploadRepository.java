@@ -18,7 +18,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-
 /**
  * The repository class for UploadActivity
  */

@@ -82,7 +82,6 @@
                     android:layout_marginTop="@dimen/standard_gap"
                     android:orientation="vertical">
 
-
                     <fr.free.nrw.commons.widget.HeightLimitedRecyclerView
                         android:id="@+id/rv_descriptions"
                         android:layout_width="match_parent"

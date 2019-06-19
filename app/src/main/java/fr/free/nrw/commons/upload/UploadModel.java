@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-
 import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
@@ -32,7 +31,14 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.BehaviorSubject;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import timber.log.Timber;
 
@@ -97,7 +103,6 @@ public class UploadModel {
         compositeDisposable.clear();
         fileProcessor.cleanup();
         this.items.clear();
-
         if (this.selectedCategories != null) {
             this.selectedCategories.clear();
         }
@@ -112,17 +117,12 @@ public class UploadModel {
 
     /**
      * pre process a list of items
-     * @param uploadableFiles
-     * @param place
-     * @param source
-     * @param similarImageInterface
-     * @return
      */
     @SuppressLint("CheckResult")
     Observable<UploadItem> preProcessImages(List<UploadableFile> uploadableFiles,
-                                            Place place,
-                                            String source,
-                                            SimilarImageInterface similarImageInterface) {
+            Place place,
+            String source,
+            SimilarImageInterface similarImageInterface) {
         return Observable.fromIterable(uploadableFiles)
                 .map(uploadableFile -> getUploadItem(uploadableFile, place, source,
                         similarImageInterface));
@@ -130,11 +130,6 @@ public class UploadModel {
 
     /**
      * pre process a one item at a time
-     * @param uploadableFile
-     * @param place
-     * @param source
-     * @param similarImageInterface
-     * @return
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile,
             Place place,
@@ -166,12 +161,12 @@ public class UploadModel {
         UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(), Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate,
                 createdTimestampSource);
-        if(place!=null){
+        if (place != null) {
             uploadItem.title.setTitleText(place.name);
             uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
             uploadItem.uploadMediaDetails.get(0).setLanguageCode("en");
         }
-        if(!items.contains(uploadItem)) {
+        if (!items.contains(uploadItem)) {
             items.add(uploadItem);
         }
         return uploadItem;
@@ -217,7 +212,6 @@ public class UploadModel {
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
             }
-
             if (null == selectedCategories) {//Just a fail safe, this should never be null
                 selectedCategories = new ArrayList<>();
             }
@@ -246,7 +240,6 @@ public class UploadModel {
                 iterator.remove();
                 break;
             }
-
         }
         if (items.isEmpty()) {
             cleanUp();
@@ -257,7 +250,7 @@ public class UploadModel {
         return items;
     }
 
-    public void updateUploadItem(int index,UploadItem uploadItem) {
+    public void updateUploadItem(int index, UploadItem uploadItem) {
         UploadItem uploadItem1 = items.get(index);
         uploadItem1.setMediaDetails(uploadItem.uploadMediaDetails);
         uploadItem1.setTitle(uploadItem.title);
@@ -265,6 +258,7 @@ public class UploadModel {
 
     @SuppressWarnings("WeakerAccess")
     public static class UploadItem {
+
         private final Uri originalContentUri;
         private final Uri mediaUri;
         private final String mimeType;
