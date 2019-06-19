@@ -237,7 +237,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     public String getFileEntityId(String fileName) throws IOException {
-        return "M" + api.action("query")
+        return  api.action("query")
                 .param("prop", "info")
                 .param("titles", fileName)
                 .get()
@@ -461,8 +461,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
         JsonObject value = new JsonObject();
         value.addProperty("entity-type", "item");
-        value.addProperty("numeric-id", "$ENTITY_ID$");
-        value.addProperty("id", "Q$ENTITY_ID$");
+        value.addProperty("numeric-id", entityId.replace("Q", ""));
+        value.addProperty("id", entityId);
 
         JsonObject dataValue = new JsonObject();
         dataValue.add("value", value);
@@ -484,12 +484,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         JsonObject jsonData = new JsonObject();
         jsonData.add("claims", claims);
 
-        String data = jsonData
-                .toString()
-                .replace("$ENTITY_ID$", entityId.replace("Q", ""));
+        String data = jsonData.toString();
 
         CustomApiResult result = api.action("wbeditentity")
-                .param("id", fileEntityId)
+                .param("id", "M" + fileEntityId) // "M" should prepend page id
                 .param("token", getEditToken())
                 .param("data", data)
                 .post();

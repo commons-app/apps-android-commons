@@ -63,8 +63,7 @@ public class WikidataEditService {
             return;
         }
 
-        // TODO Wikidata Sandbox (Q4115189) for test purposes
-        //wikidataEntityId = "Q4115189";
+        // Wikidata Sandbox (Q4115189) is for test purposes
         editWikidataProperty(wikidataEntityId, fileName);
         editWikiBasePropertyP180(wikidataEntityId, fileName);
     }
