@@ -19,6 +19,7 @@ import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaInterface;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
@@ -38,6 +39,8 @@ public class NetworkingModule {
     private static final String TEST_TOOLS_FORGE_URL = "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app";
 
     public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
+
+    private static final String NAMED_COMMONS_WIKI_SITE = "commons-wikisite";
 
     @Provides
     @Singleton
@@ -120,7 +123,13 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    public ReviewInterface provideReviewInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
+    public ReviewInterface provideReviewInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, MediaInterface.class);
     }
 }
