@@ -8,9 +8,10 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +34,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Single;
@@ -54,6 +56,8 @@ public class UploadService extends HandlerService<Contribution> {
     @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
     @Inject ContributionDao contributionDao;
+    @Inject
+    MediaClient mediaClient;
 
     private NotificationManagerCompat notificationManager;
     private NotificationCompat.Builder curNotification;
@@ -337,7 +341,7 @@ public class UploadService extends HandlerService<Contribution> {
                     sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
                 }
             }
-            if (!mwApi.fileExistsWithName(sequenceFileName)
+            if (!mediaClient.checkPageExistsUsingTitle(sequenceFileName).blockingGet()
                     && !unfinishedUploads.contains(sequenceFileName)) {
                 break;
             }
