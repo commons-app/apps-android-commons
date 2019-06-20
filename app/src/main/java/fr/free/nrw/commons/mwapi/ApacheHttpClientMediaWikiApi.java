@@ -4,6 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
@@ -32,8 +35,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -222,23 +223,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     result.getString("api/error/@info"));
         }
         return centralAuthToken;
-    }
-
-    @Override
-    public boolean fileExistsWithName(String fileName) throws IOException {
-        return api.action("query")
-                .param("prop", "imageinfo")
-                .param("titles", "File:" + fileName)
-                .get()
-                .getNodes("/api/query/pages/page/imageinfo").size() > 0;
-    }
-
-    @Override
-    public Single<Boolean> pageExists(String pageName) {
-        return Single.fromCallable(() -> Double.parseDouble(api.action("query")
-                .param("titles", pageName)
-                .get()
-                .getString("/api/query/pages/page/@_idx")) != -1);
     }
 
     @Override
@@ -747,16 +731,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private QueryContinue getQueryContinueValues(String keyword) {
         String queryContinueString = defaultKvStore.getString(keyword, null);
         return gson.fromJson(queryContinueString, QueryContinue.class);
-    }
-
-    @Override
-    public boolean existingFile(String fileSha1) throws IOException {
-        return api.action("query")
-                .param("format", "xml")
-                .param("list", "allimages")
-                .param("aisha1", fileSha1)
-                .get()
-                .getNodes("/api/query/allimages/img").size() > 0;
     }
 
     @Override

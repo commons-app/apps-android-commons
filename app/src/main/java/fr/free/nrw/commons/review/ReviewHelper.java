@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Observable;
@@ -26,14 +27,16 @@ public class ReviewHelper {
 
     private final OkHttpJsonApiClient okHttpJsonApiClient;
     private final MediaWikiApi mediaWikiApi;
+    private final MediaClient mediaClient;
     private final ReviewInterface reviewInterface;
 
     @Inject
     public ReviewHelper(OkHttpJsonApiClient okHttpJsonApiClient,
                         MediaWikiApi mediaWikiApi,
-                        ReviewInterface reviewInterface) {
+                        MediaClient mediaClient, ReviewInterface reviewInterface) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.mediaWikiApi = mediaWikiApi;
+        this.mediaClient = mediaClient;
         this.reviewInterface = reviewInterface;
     }
 
@@ -86,7 +89,7 @@ public class ReviewHelper {
      */
     private Single<Media> getRandomMediaFromRecentChange(RecentChange recentChange) {
         return Single.just(recentChange)
-                .flatMap(change -> mediaWikiApi.pageExists("Commons:Deletion_requests/" + change.getTitle()))
+                .flatMap(change -> mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + change.getTitle()))
                 .flatMap(isDeleted -> {
                     if (isDeleted) {
                         return Single.just(new Media(""));

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons
 
+import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.mwapi.MediaResult
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
@@ -25,6 +26,9 @@ class MediaDataExtractorTest {
     @Mock
     internal var okHttpJsonApiClient: OkHttpJsonApiClient? = null
 
+    @Mock
+    internal var mediaClient: MediaClient? = null
+
     @InjectMocks
     var mediaDataExtractor: MediaDataExtractor? = null
 
@@ -45,7 +49,7 @@ class MediaDataExtractorTest {
         `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
                 .thenReturn(Single.just(mock(Media::class.java)))
 
-        `when`(mwApi?.pageExists(ArgumentMatchers.anyString()))
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
 
         val mediaResult = mock(MediaResult::class.java)
