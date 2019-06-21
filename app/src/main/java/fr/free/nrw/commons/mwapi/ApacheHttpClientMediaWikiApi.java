@@ -451,7 +451,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     public String wikidataAddLabels(String entityId, String fileEntityId, String caption) throws IOException {
         CustomApiResult result = api.action("wbeditentity")
-                .param("id", "Q42")
+                .param("id", fileEntityId)
                 .param("token", getEditToken())
                 .param("data", caption)
                 .post();
