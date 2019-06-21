@@ -17,11 +17,9 @@ public class UploadMediaDetail {
         StringBuilder captionListString = new StringBuilder();
         captionListString.append("{labels\":[");
         for (UploadMediaDetail uploadMediaDetail : uploadMediaDetails) {
-            if (!uploadMediaDetail.isEmpty()) {
-                String individualDescription = String.format("{\"language\":\"", uploadMediaDetail.getLanguageCode(),"\",value\":\"" +
-                        uploadMediaDetail.getCaptionText() + "\",\"add\":\"\"},");
-                captionListString.append(individualDescription);
-            }
+            String individualDescription = "{\"language\":\"" + uploadMediaDetail.getLanguageCode() + "\",value\":\"" +
+                    uploadMediaDetail.getCaptionText() + "\",\"add\":\"\"},";
+            captionListString.append(individualDescription);
             captionListString.replace(captionListString.toString().length(), captionListString.toString().length()+1, "}]");
         }
         return captionListString.toString();

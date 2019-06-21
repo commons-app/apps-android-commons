@@ -150,8 +150,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             }
 
             captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
-                    descriptionText -> uploadMediaDetails.get(position)
-                            .setCaptionText(descriptionText)));
+                    captionText -> uploadMediaDetails.get(position)
+                            .setCaptionText(captionText)));
             initLanguageSpinner(position, uploadMediaDetail);
 
 
