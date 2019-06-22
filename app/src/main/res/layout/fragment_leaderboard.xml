@@ -1,12 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parentLayout"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:background="?attr/mainBackground">
+
+    <LinearLayout
+        android:id="@+id/upper_part"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="?attr/achievementBackground">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:contentDescription="@string/commons_logo"
+            app:srcCompat="@drawable/commons_logo"
+            android:layout_margin="@dimen/activity_margin_horizontal"
+            />
+
+        <TextView
+            android:id="@+id/user_rank"
+            style="?android:textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your rank"
+            android:layout_margin="@dimen/activity_margin_horizontal"/>
+
+        <Spinner
+            android:id="@+id/duration_spinner"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_margin_horizontal"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/waiting_first_sync"
+        android:id="@+id/statusMessage"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/loadingImagesProgressBar"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/topUserList"
-        android:layout_width="match_parent"
+        android:id="@+id/userList"
         android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:fastScrollEnabled="true"
+        android:layout_below="@+id/upper_part"
         />
+
 </RelativeLayout>

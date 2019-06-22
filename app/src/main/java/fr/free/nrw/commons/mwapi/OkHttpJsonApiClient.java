@@ -27,6 +27,7 @@ import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.leaderboard.model.GetLeaderboardUser;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
@@ -121,6 +122,59 @@ public class OkHttpJsonApiClient {
             return 0;
         });
     }
+
+    @NonNull
+    public Single<Integer> getUserRank(String userName,String rank_type,String rank_duration) {
+//        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
+//        urlBuilder
+//                .addPathSegments("/getUserRank.py")
+//                .addQueryParameter("user", userName)
+//                .addQueryParameter("type", rank_type)
+//                .addQueryParameter("duration", rank_duration);
+//        Request request = new Request.Builder()
+//                .url(urlBuilder.build())
+//                .build();
+//
+//        return Single.fromCallable(() -> {
+//            Response response = okHttpClient.newCall(request).execute();
+//            if (response != null &&
+//                    response.isSuccessful() && response.body() != null) {
+//                String json = response.body().string();
+//                if (json == null) {
+//                    return 0;
+//                }
+//                GetUserRankResponse userRankResponse = gson.fromJson(json, GetUserRankResponse.class);
+//                return userRankResponse.getUserRank();
+//            }
+//            return 0;
+//        });
+        return Single.fromCallable(() ->{return 11;});
+    }
+//
+//    @Nullable
+//    public Single<List<GetLeaderboardUser>> GetLeaderboard(String type, String duration, String page, int itemCount) {
+//        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
+//        urlBuilder
+//                .addPathSegments("/getLeaderboard.py")
+//                .addQueryParameter("type", type)
+//                .addQueryParameter("duration", duration);
+//        Request request = new Request.Builder()
+//                .url(urlBuilder.build())
+//                .build();
+//
+//        return Single.fromCallable(() -> {
+//            Response response = okHttpClient.newCall(request).execute();
+//            List<GetLeaderboardUser> userList = new ArrayList<>();
+//            if (response.body() != null && response.isSuccessful()) {
+//               String json = response.body().string();
+//                GetLeaderboardUser getLeaderboardResponse = gson.fromJson(json, GetLeaderboardUser.class);
+//                if (null == getLeaderboardResponse) {
+//                    return userList;
+//                }
+//            }
+//            return userList;
+//        });
+//    }
 
     /**
      * This takes userName as input, which is then used to fetch the feedback/achievements

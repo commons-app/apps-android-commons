@@ -11,9 +11,7 @@ import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
-import fr.free.nrw.commons.leaderboard.LeaderboardNearbyFragment;
-import fr.free.nrw.commons.leaderboard.LeaderboardUploadFragment;
-import fr.free.nrw.commons.leaderboard.LeaderboardUsedFragment;
+import fr.free.nrw.commons.leaderboard.LeaderboardFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.nearby.NearbyFragment;
@@ -75,11 +73,5 @@ public abstract class FragmentBuilderModule {
     abstract ReviewImageFragment bindReviewOutOfContextFragment();
 
     @ContributesAndroidInjector
-    abstract LeaderboardUploadFragment bindLeaderboardUploadFragment();
-
-    @ContributesAndroidInjector
-    abstract LeaderboardNearbyFragment bindLeaderboardNearbyFragment();
-
-    @ContributesAndroidInjector
-    abstract LeaderboardUsedFragment bindLeaderboardUsedFragment();
+    abstract LeaderboardFragment bindLeaderboardFragment();
 }
