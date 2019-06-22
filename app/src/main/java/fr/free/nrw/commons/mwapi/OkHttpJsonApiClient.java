@@ -27,8 +27,7 @@ import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.leaderboard.model.GetLeaderboardResponse;
-import fr.free.nrw.commons.leaderboard.model.GetUserRankResponse;
+import fr.free.nrw.commons.leaderboard.model.GetLeaderboardUser;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
@@ -124,8 +123,8 @@ public class OkHttpJsonApiClient {
         });
     }
 
-//    @NonNull
-//    public Single<Integer> getUserRank(String userName,String rank_type,String rank_duration) {
+    @NonNull
+    public Single<Integer> getUserRank(String userName,String rank_type,String rank_duration) {
 //        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
 //        urlBuilder
 //                .addPathSegments("/getUserRank.py")
@@ -149,10 +148,11 @@ public class OkHttpJsonApiClient {
 //            }
 //            return 0;
 //        });
-//    }
+        return Single.fromCallable(() ->{return 11;});
+    }
 //
 //    @Nullable
-//    public Single<List<GetLeaderboardRespose>> GetLeaderboardResponse(String type, String duration) {
+//    public Single<List<GetLeaderboardUser>> GetLeaderboard(String type, String duration, String page, int itemCount) {
 //        HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
 //        urlBuilder
 //                .addPathSegments("/getLeaderboard.py")
@@ -163,22 +163,15 @@ public class OkHttpJsonApiClient {
 //                .build();
 //
 //        return Single.fromCallable(() -> {
-////            Response response = okHttpClient.newCall(request).execute();
-////            List<GetLeaderboardResponse> userList = new ArrayList<>();
-////            if (response.body() != null && response.isSuccessful()) {
-////                String json = response.body().string();
-////                GetLeaderboardResponse getLeaderboardResponse = gson.fromJson(json, GetLeaderboardResponse.class);
-////                if (null == getLeaderboardResponse) {
-////                    return userList;
-////                }
-////                List<MwQueryPage> pages = getLeaderboardResponse.pages();
-////                for (MwQueryPage page : pages) {
-////                    Media media = Media.from(page);
-////                    if (media != null) {
-////                        userList.add(getLeaderboardResponse);
-////                    }
-////                }
-////            }
+//            Response response = okHttpClient.newCall(request).execute();
+//            List<GetLeaderboardUser> userList = new ArrayList<>();
+//            if (response.body() != null && response.isSuccessful()) {
+//               String json = response.body().string();
+//                GetLeaderboardUser getLeaderboardResponse = gson.fromJson(json, GetLeaderboardUser.class);
+//                if (null == getLeaderboardResponse) {
+//                    return userList;
+//                }
+//            }
 //            return userList;
 //        });
 //    }

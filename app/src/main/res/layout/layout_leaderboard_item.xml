@@ -25,20 +25,20 @@
             android:id="@+id/rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rank"
-            android:textSize="10dp"
+            android:text="11"
+            android:textSize="15dp"
             android:gravity="center_vertical"
             android:layout_marginStart="@dimen/activity_margin_horizontal"
             android:layout_marginLeft="@dimen/activity_margin_horizontal"
             android:layout_marginEnd="@dimen/activity_margin_horizontal"
             android:layout_marginRight="@dimen/activity_margin_horizontal"/>
 
-        <com.facebook.drawee.view.SimpleDraweeView
+        <ImageView
             android:id="@+id/userImageView"
             android:layout_width="@dimen/overflow_icon_dimen"
             android:layout_height="@dimen/overflow_icon_dimen"
-            app:actualImageScaleType="centerCrop"
             android:layout_margin="@dimen/activity_margin_horizontal"
+            app:srcCompat="@drawable/commons_logo"
             />
         <ProgressBar
             android:id="@+id/leaderboardProgress"
@@ -72,9 +72,8 @@
         android:layout_marginTop="@dimen/activity_margin_horizontal"
         android:layout_marginStart="@dimen/activity_margin_horizontal"
         android:layout_centerVertical="true"
-        tools:text="Score"
-        android:textColor="@color/black"
-        android:textSize="20dp"
+        android:text="Score"
+        android:textSize="15dp"
         android:layout_marginLeft="@dimen/activity_margin_horizontal"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp" />
