@@ -1,6 +1,10 @@
 package fr.free.nrw.commons.upload;
 
+import android.util.Log;
+
 import java.util.List;
+
+import timber.log.Timber;
 
 /**
  * Holds a description of an item being uploaded by {@link UploadActivity}
@@ -15,13 +19,16 @@ public class UploadMediaDetail {
 
     public static String formatCaptions(List<UploadMediaDetail> uploadMediaDetails) {
         StringBuilder captionListString = new StringBuilder();
-        captionListString.append("{labels\":[");
-        for (UploadMediaDetail uploadMediaDetail : uploadMediaDetails) {
-            String individualDescription = "{\"language\":\"" + uploadMediaDetail.getLanguageCode() + "\",value\":\"" +
-                    uploadMediaDetail.getCaptionText() + "\",\"add\":\"\"},";
+        captionListString.append("{\\\"labels\\\":{");
+        UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(0);
+        String individualDescription = "\\\""+uploadMediaDetail.getLanguageCode()+"\\\":{\\\"language\\\":\\\""+uploadMediaDetail.getLanguageCode()+"\\\",\\\"value\\\":\\\""+uploadMediaDetail.getLanguageCode()+"-"+uploadMediaDetail.getCaptionText()+"\\\"}";
+        captionListString.append(individualDescription);
+        for (int i = 1;i<= uploadMediaDetails.size() - 1; i++) {
+            uploadMediaDetail = uploadMediaDetails.get(i);
+            individualDescription = ",\\\""+uploadMediaDetail.getLanguageCode()+"\\\":{\\\"language\\\":\\\""+uploadMediaDetail.getLanguageCode()+"\\\",\\\"value\\\":\\\""+uploadMediaDetail.getLanguageCode()+"-"+uploadMediaDetail.getCaptionText()+"\\\"}";
             captionListString.append(individualDescription);
-            captionListString.replace(captionListString.toString().length(), captionListString.toString().length()+1, "}]");
         }
+        Timber.e(captionListString.toString());
         return captionListString.toString();
     }
 
