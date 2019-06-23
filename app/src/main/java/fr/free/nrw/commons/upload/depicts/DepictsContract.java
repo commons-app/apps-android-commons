@@ -21,6 +21,8 @@ public interface DepictsContract {
 
         void showProgress(boolean shouldShow);
 
+        void showError(String error);
+
         void setDepictsList(List<DepictedItem> depictedItemList);
     }
 

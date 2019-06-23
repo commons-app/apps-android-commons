@@ -447,9 +447,16 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return null;
     }
 
+    /**
+     * Send captions(Q42) to wikibase, using the wikibase entity obtained after uploading imageto commons
+     * https://commons.wikimedia.org/wiki/Wikibase/API
+     * @param fileEntityId entity id for file, page id
+     * @param caption(labels) item to be uploaded to wikibase
+     */
+
     @Nullable
     @Override
-    public String wikidataAddLabels(String entityId, String fileEntityId, String caption) throws IOException {
+    public String wikidataAddLabels(String fileEntityId, String caption) throws IOException {
         CustomApiResult result = api.action("wbeditentity")
                 .param("id", fileEntityId)
                 .param("token", getEditToken())

@@ -205,7 +205,7 @@ public class WikidataEditService {
     }
 
     private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, String caption) {
-        Observable.fromCallable(() -> mediaWikiApi.wikidataAddLabels(wikiDataEntityId, fileEntityId, caption))
+        Observable.fromCallable(() -> mediaWikiApi.wikidataAddLabels(fileEntityId, caption))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revisionId -> Timber.d("Property Q24 set successfully for %s", revisionId),

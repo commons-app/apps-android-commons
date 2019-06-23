@@ -17,6 +17,10 @@ public class UploadMediaDetail {
     private int selectedLanguageIndex = -1;
     private boolean isManuallyAdded=false;
 
+    /**
+     * Formatting captions to the Wikibase format for sending labels
+     * @param uploadMediaDetails list of media Details*/
+
     public static String formatCaptions(List<UploadMediaDetail> uploadMediaDetails) {
         StringBuilder captionListString = new StringBuilder();
         captionListString.append("{\\\"labels\\\":{");

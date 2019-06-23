@@ -330,7 +330,7 @@ class ContributionDaoTest {
             }
 
     private fun createContribution(isMultiple: Boolean, localUri: Uri?, imageUrl: String?, dateUploaded: Date?, filename: String?): Contribution {
-        val contribution = Contribution(localUri, imageUrl, filename, "desc", 222L, Date(321L), dateUploaded,
+        val contribution = Contribution(localUri, imageUrl, filename,"captions", "desc", 222L, Date(321L), dateUploaded,
                 "create", "edit", "coords").apply {
             state = STATE_COMPLETED
             transferred = 333L

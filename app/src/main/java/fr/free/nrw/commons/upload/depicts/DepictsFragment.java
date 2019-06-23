@@ -123,6 +123,11 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     }
 
     @Override
+    public void showError(String error) {
+        depictsSearchContainer.setError(error);
+    }
+
+    @Override
     public void setDepictsList(List<DepictedItem> depictedItemList) {
         adapter.clear();
         if (depictedItemList != null) {
