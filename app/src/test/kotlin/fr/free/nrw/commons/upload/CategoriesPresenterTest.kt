@@ -61,7 +61,6 @@ class CategoriesPresenterTest {
         categoriesPresenter?.searchForCategories("test")
         verify(view)?.showProgress(true)
         verify(view)?.showError(null)
-        verify(view)?.setCategories(null)
         testScheduler?.triggerActions()
         verify(view)?.setCategories(categoryItems)
         verify(view)?.showProgress(false)
