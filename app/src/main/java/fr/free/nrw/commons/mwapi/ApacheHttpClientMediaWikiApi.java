@@ -412,10 +412,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     /**
      * Creates a new claim using the wikidata API
      * https://www.mediawiki.org/wiki/Wikibase/API
+     *
      * @param entityId the wikidata entity to be edited
      * @param property the property to be edited, for eg P18 for images
      * @param snaktype the type of value stored for that property
-     * @param value the actual value to be stored for the property, for eg filename in case of P18
+     * @param value    the actual value to be stored for the property, for eg filename in case of P18
      * @return returns revisionId if the claim is successfully created else returns null
      * @throws IOException
      */
@@ -476,7 +477,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
         return null;
     }
-
     /**
      * Edits claim using the commons API by adding P180 tag for an image
      * https://commons.wikimedia.org/wiki/Wikibase/API
@@ -735,6 +735,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * The method takes categoryName as input and returns a List of Subcategories
      * It uses the generator query API to get the subcategories in a category, 500 at a time.
      * Uses the query continue values for fetching paginated responses
+     *
      * @param categoryName Category name as defined on commons
      * @return
      */
@@ -832,7 +833,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                     .param("srwhat", "text")
                     .param("srnamespace", "14")
                     .param("srlimit", "25")
-                    .param("sroffset",offset)
+                    .param("sroffset", offset)
                     .param("srsearch", query)
                     .get()
                     .getNodes("/api/query/search/p/@title");
@@ -857,6 +858,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
      * https://www.mediawiki.org/wiki/API:Raw_query_continue
      * After fetching images a page of image for a particular category, shared defaultKvStore are updated with the latest QueryContinue Values
+     *
      * @param keyword
      * @param queryContinue
      */
@@ -866,6 +868,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     /**
      * Before making a paginated API call, this method is called to get the latest query continue values to be used
+     *
      * @param keyword
      * @return
      */
@@ -934,6 +937,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             if (!resultStatus.equals("Success")) {
                 String errorCode = result.getString("/api/error/@code");
                 Timber.e(errorCode);
+
                 if (errorCode.equals(ERROR_CODE_BAD_TOKEN)) {
                     ViewUtil.showLongToast(context, R.string.bad_token_error_proposed_solution);
                 }

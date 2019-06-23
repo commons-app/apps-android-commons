@@ -3,8 +3,6 @@ package fr.free.nrw.commons.di;
 import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
-import androidx.collection.LruCache;
-
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
@@ -39,9 +37,6 @@ import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -185,17 +180,6 @@ public class CommonsApplicationModule {
         return new WikidataEditListenerImpl();
     }
 
-    @Named(IO_THREAD)
-    @Provides
-    public Scheduler providesIoThread(){
-        return Schedulers.io();
-    }
-    @Named(MAIN_THREAD)
-    @Provides
-    public Scheduler providesMainThread(){
-        return AndroidSchedulers.mainThread();
-    }
-
     /**
      * Provides app flavour. Can be used to alter flows in the app
      * @return
@@ -205,5 +189,17 @@ public class CommonsApplicationModule {
     @Singleton
     public boolean provideIsBetaVariant() {
         return ConfigUtils.isBetaFlavour();
+    }
+
+    @Named(IO_THREAD)
+    @Provides
+    public Scheduler providesIoThread(){
+        return Schedulers.io();
+    }
+
+    @Named(MAIN_THREAD)
+    @Provides
+    public Scheduler providesMainThread(){
+        return AndroidSchedulers.mainThread();
     }
 }

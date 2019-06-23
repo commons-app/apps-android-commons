@@ -4,12 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
-
 import androidx.annotation.NonNull;
-import androidx.exifinterface.media.ExifInterface;
 
-import com.google.gson.reflect.TypeToken;
-
+import fr.free.nrw.commons.upload.SimilarImageDialogFragment.Callback;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -22,12 +19,15 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import androidx.exifinterface.media.ExifInterface;
+
+import com.google.gson.reflect.TypeToken;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.upload.SimilarImageDialogFragment.Callback;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -101,11 +101,10 @@ public class FileProcessor implements Callback {
      * Gets EXIF Tags from preferences to be redacted.
      *
      * @param context application context
-     * @return tags to be redacted
+     * @return        tags to be redacted
      */
     private Set<String> getExifTagsToRedact(Context context) {
-        Type setType = new TypeToken<Set<String>>() {
-        }.getType();
+        Type setType = new TypeToken<Set<String>>() {}.getType();
         Set<String> prefManageEXIFTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
 
         Set<String> redactTags = new HashSet<>(Arrays.asList(
@@ -120,28 +119,28 @@ public class FileProcessor implements Callback {
     /**
      * Redacts EXIF metadata as indicated in preferences.
      *
-     * @param exifInterface ExifInterface object
-     * @param redactTags    tags to be redacted
+     * @param exifInterface  ExifInterface object
+     * @param redactTags     tags to be redacted
      */
     public static void redactExifTags(ExifInterface exifInterface, Set<String> redactTags) {
-        if (redactTags.isEmpty()) return;
+        if(redactTags.isEmpty()) return;
 
-        Disposable disposable = Observable.fromIterable(redactTags)
-                .flatMap(tag -> Observable.fromArray(FileMetadataUtils.getTagsFromPref(tag)))
-                .forEach(tag -> {
-                    Timber.d("Checking for tag: %s", tag);
-                    String oldValue = exifInterface.getAttribute(tag);
-                    if (oldValue != null && !oldValue.isEmpty()) {
-                        Timber.d("Exif tag %s with value %s redacted.", tag, oldValue);
-                        exifInterface.setAttribute(tag, null);
-                    }
-                });
-        CompositeDisposable disposables = new CompositeDisposable();
-        disposables.add(disposable);
-        disposables.clear();
+         Disposable disposable = Observable.fromIterable(redactTags)
+                 .flatMap(tag -> Observable.fromArray(FileMetadataUtils.getTagsFromPref(tag)))
+                 .forEach(tag -> {
+                     Timber.d("Checking for tag: %s", tag);
+                     String oldValue = exifInterface.getAttribute(tag);
+                     if (oldValue != null && !oldValue.isEmpty()) {
+                         Timber.d("Exif tag %s with value %s redacted.", tag, oldValue);
+                         exifInterface.setAttribute(tag, null);
+                     }
+                 });
+         CompositeDisposable disposables = new CompositeDisposable();
+         disposables.add(disposable);
+         disposables.clear();
 
-        try {
-            exifInterface.saveAttributes();
+         try {
+             exifInterface.saveAttributes();
         } catch (IOException e) {
             Timber.w("EXIF redaction failed: %s", e.toString());
         }
@@ -149,7 +148,6 @@ public class FileProcessor implements Callback {
 
     /**
      * Find other images around the same location that were taken within the last 20 sec
-     *
      * @param similarImageInterface
      */
     private void findOtherImages(SimilarImageInterface similarImageInterface) {

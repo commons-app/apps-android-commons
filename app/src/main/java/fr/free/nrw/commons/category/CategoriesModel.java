@@ -1,28 +1,25 @@
 package fr.free.nrw.commons.category;
 
 import android.text.TextUtils;
-
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.upload.GpsCategoryModel;
+import fr.free.nrw.commons.utils.StringSortingUtils;
+import io.reactivex.Observable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.upload.GpsCategoryModel;
-import fr.free.nrw.commons.utils.StringSortingUtils;
-import io.reactivex.Observable;
 import timber.log.Timber;
 
 /**
  * The model class for categories in upload
  */
-public class CategoriesModel {
+public class CategoriesModel{
     private static final int SEARCH_CATS_LIMIT = 25;
 
     private final MediaWikiApi mwApi;
@@ -32,9 +29,7 @@ public class CategoriesModel {
     private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories;
 
-    @Inject
-    GpsCategoryModel gpsCategoryModel;
-
+    @Inject GpsCategoryModel gpsCategoryModel;
     @Inject
     public CategoriesModel(MediaWikiApi mwApi,
                            CategoryDao categoryDao,
@@ -48,7 +43,6 @@ public class CategoriesModel {
 
     /**
      * Sorts CategoryItem by similarity
-     *
      * @param filter
      * @return
      */
@@ -60,7 +54,6 @@ public class CategoriesModel {
 
     /**
      * Returns if the item contains an year
-     *
      * @param item
      * @return
      */
@@ -85,7 +78,6 @@ public class CategoriesModel {
 
     /**
      * Updates category count in category dao
-     *
      * @param item
      */
     public void updateCategoryCount(CategoryItem item) {
@@ -107,7 +99,6 @@ public class CategoriesModel {
 
     /**
      * Regional category search
-     *
      * @param term
      * @param imageTitleList
      * @return
@@ -138,7 +129,6 @@ public class CategoriesModel {
 
     /**
      * Returns cached categories
-     *
      * @param term
      * @return
      */
@@ -152,7 +142,6 @@ public class CategoriesModel {
 
     /**
      * Returns categories in DirectKVStore
-     *
      * @return
      */
     private Observable<CategoryItem> directCategories() {
@@ -169,7 +158,6 @@ public class CategoriesModel {
 
     /**
      * Returns GPS categories
-     *
      * @return
      */
     Observable<CategoryItem> gpsCategories() {
@@ -179,7 +167,6 @@ public class CategoriesModel {
 
     /**
      * Returns title based categories
-     *
      * @param titleList
      * @return
      */
@@ -190,7 +177,6 @@ public class CategoriesModel {
 
     /**
      * Return category for single title
-     *
      * @param title
      * @return
      */
@@ -201,7 +187,6 @@ public class CategoriesModel {
 
     /**
      * Returns recent categories
-     *
      * @return
      */
     private Observable<CategoryItem> recentCategories() {
@@ -211,7 +196,6 @@ public class CategoriesModel {
 
     /**
      * Handles category item selection
-     *
      * @param item
      */
     public void onCategoryItemClicked(CategoryItem item) {
@@ -225,7 +209,6 @@ public class CategoriesModel {
 
     /**
      * Select's category
-     *
      * @param item
      */
     public void selectCategory(CategoryItem item) {
@@ -234,7 +217,6 @@ public class CategoriesModel {
 
     /**
      * Unselect Category
-     *
      * @param item
      */
     public void unselectCategory(CategoryItem item) {
@@ -244,7 +226,6 @@ public class CategoriesModel {
 
     /**
      * Get Selected Categories
-     *
      * @return
      */
     public List<CategoryItem> getSelectedCategories() {
@@ -253,7 +234,6 @@ public class CategoriesModel {
 
     /**
      * Get Categories String List
-     *
      * @return
      */
     public List<String> getCategoryStringList() {

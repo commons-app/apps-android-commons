@@ -4,9 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.StringDef;
-
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
 
@@ -16,6 +13,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.StringDef;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -24,7 +23,7 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
-public class Contribution extends Media {
+public class  Contribution extends Media {
 
     //{{According to EXIF data|2009-01-09}}
     private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to EXIF data|%s}}";
@@ -52,8 +51,7 @@ public class Contribution extends Media {
 
     @Retention(SOURCE)
     @StringDef({SOURCE_CAMERA, SOURCE_GALLERY, SOURCE_EXTERNAL})
-    public @interface FileSource {
-    }
+    public @interface FileSource {}
 
     public static final String SOURCE_CAMERA = "camera";
     public static final String SOURCE_GALLERY = "gallery";
@@ -188,19 +186,19 @@ public class Contribution extends Media {
                 .append(licenseTemplateFor(getLicense())).append("\n\n")
                 .append("{{Uploaded from Mobile|platform=Android|version=")
                 .append(ConfigUtils.getVersionNameWithSha(applicationContext)).append("}}\n");
-        if (categories != null && categories.size() != 0) {
+        if(categories != null && categories.size() != 0) {
             for (int i = 0; i < categories.size(); i++) {
                 String category = categories.get(i);
                 buffer.append("\n[[Category:").append(category).append("]]");
             }
-        } else
+        }
+        else
             buffer.append("{{subst:unc}}");
         return buffer.toString();
     }
 
     /**
      * Returns upload date in either TEMPLATE_DATE_ACC_TO_EXIF or TEMPLATE_DATA_OTHER_SOURCE
-     *
      * @return
      */
     private String getTemplatizedCreatedDate() {
@@ -274,7 +272,6 @@ public class Contribution extends Media {
     /**
      * When the corresponding wikidata entity is known as in case of nearby uploads, it can be set
      * using the setter method
-     *
      * @param wikiDataEntityId wikiDataEntityId
      */
     public void setWikiDataEntityId(String wikiDataEntityId) {

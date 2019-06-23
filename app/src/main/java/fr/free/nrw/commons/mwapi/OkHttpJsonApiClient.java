@@ -38,25 +38,10 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.dataclient.mwapi.RecentChange;
-import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
 
 /**

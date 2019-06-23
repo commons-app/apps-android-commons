@@ -2,13 +2,12 @@ package fr.free.nrw.commons.mwapi;
 
 import android.net.Uri;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -52,7 +51,6 @@ public interface MediaWikiApi {
     @NonNull
     Single<UploadResult> uploadFileFinalize(String filename, String filekey,
                                             String pageContents, String editSummary) throws IOException;
-
     @Nullable
     String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException;
 

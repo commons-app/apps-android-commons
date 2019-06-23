@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import androidx.appcompat.app.AlertDialog;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,12 +12,14 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.appcompat.app.AlertDialog;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.review.ReviewActivity;
+import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
@@ -50,7 +50,6 @@ public class DeleteHelper {
 
     /**
      * Public interface to nominate a particular media file for deletion
-     *
      * @param context
      * @param media
      * @param reason
@@ -66,7 +65,6 @@ public class DeleteHelper {
 
     /**
      * Makes several API calls to nominate the file for deletion
-     *
      * @param media
      * @param reason
      * @return
@@ -140,7 +138,6 @@ public class DeleteHelper {
 
     /**
      * Invoked when a reason needs to be asked before nominating for deletion
-     *
      * @param media
      * @param context
      * @param question
