@@ -1,8 +1,5 @@
 package fr.free.nrw.commons.upload.categories;
 
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
-
 import android.text.TextUtils;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
@@ -19,6 +16,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 /**
  * The presenter class for UploadCategoriesFragment
@@ -38,6 +38,8 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
     private UploadRepository repository;
 
     private CompositeDisposable compositeDisposable;
+
+    private List<CategoryItem> lastShownCategoryItems=new ArrayList<>();
 
     @Inject
     public CategoriesPresenter(UploadRepository repository, @Named(IO_THREAD) Scheduler ioScheduler,
@@ -75,7 +77,6 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                 .doOnSubscribe(disposable -> {
                     view.showProgress(true);
                     view.showError(null);
-                    view.setCategories(null);
                 })
                 .observeOn(ioScheduler)
                 .concatWith(
@@ -92,10 +93,14 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                         s -> categoryItems.add(s),
                         Timber::e,
                         () -> {
-                            view.setCategories(categoryItems);
+                            if (null != categoryItems && categoryItems.size() > 0) {
+                                view.setCategories(categoryItems);
+                                lastShownCategoryItems.clear();
+                                lastShownCategoryItems.addAll(categoryItems);
+                            }
                             view.showProgress(false);
 
-                            if (categoryItems.isEmpty()) {
+                            if (categoryItems.isEmpty() && lastShownCategoryItems.size() == 0) {
                                 view.showError(R.string.no_categories_found);
                             }
                         }
