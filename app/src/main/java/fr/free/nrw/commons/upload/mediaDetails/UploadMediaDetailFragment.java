@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,8 +40,10 @@ import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.Description;
 import fr.free.nrw.commons.upload.DescriptionsAdapter;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
@@ -86,6 +89,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
+
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore defaultKvStore;
+
     private UploadableFile uploadableFile;
     private String source;
     private Place place;
@@ -214,7 +222,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the recycler veiw
      */
     private void initRecyclerView() {
-        descriptionsAdapter = new DescriptionsAdapter();
+        descriptionsAdapter = new DescriptionsAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE,""));
         descriptionsAdapter.setCallback(this::showInfoAlert);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);
