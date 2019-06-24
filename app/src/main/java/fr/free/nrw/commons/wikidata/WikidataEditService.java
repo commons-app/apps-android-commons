@@ -3,6 +3,9 @@ package fr.free.nrw.commons.wikidata;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -14,6 +17,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -30,16 +34,19 @@ public class WikidataEditService {
     private final MediaWikiApi mediaWikiApi;
     private final WikidataEditListener wikidataEditListener;
     private final JsonKvStore directKvStore;
+    private final WikiBaseClient wikiBaseClient;
 
     @Inject
     public WikidataEditService(Context context,
                                MediaWikiApi mediaWikiApi,
                                WikidataEditListener wikidataEditListener,
-                               @Named("default_preferences") JsonKvStore directKvStore) {
+                               @Named("default_preferences") JsonKvStore directKvStore,
+                               WikiBaseClient wikiBaseClient) {
         this.context = context;
         this.mediaWikiApi = mediaWikiApi;
         this.wikidataEditListener = wikidataEditListener;
         this.directKvStore = directKvStore;
+        this.wikiBaseClient = wikiBaseClient;
     }
 
     /**
@@ -91,21 +98,22 @@ public class WikidataEditService {
                 });
     }
 
+
     /**
-     * Edits the wikidata entity by adding the P180 property to it.
-     * Adding the P180 edit requires calling the wikidata API to create a claim against the entity
+     * Edits the wikibase entity by adding the P180 property to it.
+     * Adding the P180 requires call to the wikibase API to set tag against the entity.
      *
      * @param wikidataEntityId
      * @param fileName
      */
     @SuppressLint("CheckResult")
     private void editWikiBasePropertyP180(String wikidataEntityId, String fileName) {
-        Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
+        wikiBaseClient.getFileEntityId(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
-                        addPropertyP180(wikidataEntityId, fileEntityId);
+                        addPropertyP180(wikidataEntityId, fileEntityId.toString());
                         Timber.d("EntityId for image was received successfully");
                     } else {
                         Timber.d("Error acquiring EntityId for image");
@@ -117,15 +125,49 @@ public class WikidataEditService {
     }
 
     @SuppressLint("CheckResult")
-    private void addPropertyP180(String wikidataEntityId, String fileEntityId) {
-        Observable.fromCallable(() -> mediaWikiApi.wikiBaseEditEntity(wikidataEntityId, fileEntityId))
+    private void addPropertyP180(String entityId, String fileEntityId) {
+
+        JsonObject value = new JsonObject();
+        value.addProperty("entity-type", "item");
+        value.addProperty("numeric-id", entityId.replace("Q", ""));
+        value.addProperty("id", entityId);
+
+        JsonObject dataValue = new JsonObject();
+        dataValue.add("value", value);
+        dataValue.addProperty("type", "wikibase-entityid");
+
+        JsonObject mainSnak = new JsonObject();
+        mainSnak.addProperty("snaktype", "value");
+        mainSnak.addProperty("property", "P180");
+        mainSnak.add("datavalue", dataValue);
+
+        JsonObject claim = new JsonObject();
+        claim.add("mainsnak", mainSnak);
+        claim.addProperty("type", "statement");
+        claim.addProperty("rank", "preferred");
+
+        JsonArray claims = new JsonArray();
+        claims.add(claim);
+
+        JsonObject jsonData = new JsonObject();
+        jsonData.add("claims", claims);
+
+        String data = jsonData.toString();
+
+        wikiBaseClient.getEditToken()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(revisionId -> Timber.d("Property P180 set successfully for %s", revisionId),
-                        throwable -> {
-                    Timber.e(throwable, "Error occurred while setting P180 tag");
-                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                .subscribe(editToken -> {
+                    wikiBaseClient.postEditEntity("M" + fileEntityId, data, editToken)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(revisionId -> Timber.d("Property P180 set successfully for %s", revisionId),
+                                throwable -> {
+                            Timber.e(throwable, "Error occurred while setting P180 tag");
+                            ViewUtil.showLongToast(context, throwable.toString());
+                        });
                 });
+
     }
 
     private void handleClaimResult(String wikidataEntityId, String revisionId) {
