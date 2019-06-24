@@ -456,6 +456,8 @@
   <string name="nominate_for_deletion_done">完成</string>
   <string name="nominate_for_deletion_notify_user">在讨论页上通知用户</string>
   <string name="notsure">不确定</string>
+  <string name="send_thank_success_title">发送感谢成功</string>
+  <string name="send_thank_failure_title">发送感谢失败</string>
   <string name="send_thank_send">发送感谢</string>
   <string name="send_thank_notification_title">发送感谢</string>
   <string name="send_thank_toast">向%1$s发送感谢</string>
@@ -493,6 +495,7 @@
   <string name="exif_tag_name_copyright">著作权</string>
   <string name="exif_tag_name_location">位置</string>
   <string name="exif_tag_name_cameraModel">相机型号</string>
+  <string name="exif_tag_name_serialNumbers">序列号</string>
   <string name="exif_tag_name_software">软件</string>
   <string name="share_via">分享到...</string>
   <string name="image_info">图像信息</string>
