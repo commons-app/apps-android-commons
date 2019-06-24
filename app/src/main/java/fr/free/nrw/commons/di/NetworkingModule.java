@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
+import org.wikipedia.csrf.CsrfTokenClient;
+import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonUtil;
@@ -23,6 +25,7 @@ import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.review.ReviewInterface;
+import fr.free.nrw.commons.upload.WikiBaseInterface;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -123,4 +126,27 @@ public class NetworkingModule {
     public ReviewInterface provideReviewInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
     }
+
+    @Provides
+    @Singleton
+    public WikiBaseInterface provideWikiBaseInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
+    }
+
+    @Named("commons-csrf")
+    @Provides
+    @Singleton
+    public CsrfTokenClient provideCommonsCsrfTokenClient() {
+        return new CsrfTokenClient(new WikiSite(Service.COMMONS_URL, ""),
+                new WikiSite(Service.COMMONS_URL, ""));
+    }
+
+    @Named("wikidata-csrf")
+    @Provides
+    @Singleton
+    public CsrfTokenClient provideWikidataCsrfTokenClient() {
+        return new CsrfTokenClient(new WikiSite(Service.WIKIDATA_URL, ""),
+                new WikiSite(Service.COMMONS_URL, ""));
+    }
+
 }
