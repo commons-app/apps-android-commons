@@ -11,6 +11,7 @@
 -->
 <resources>
   <string name="preference_category_appearance">Aparença</string>
+  <string name="preference_category_privacy">Privadesa</string>
   <string name="preference_category_location">Ubicació</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Configuració</string>
@@ -205,4 +206,12 @@
   <string name="no_archived_notification">No teniu cap notificació arxivada</string>
   <string name="welcome_do_upload_content_description">Exemples d’imatges adequades per a Commons</string>
   <string name="welcome_dont_upload_content_description">Exemples d’imatges que no s’han de pujar</string>
+  <string name="exif_tag_name_author">Autor</string>
+  <string name="exif_tag_name_copyright">Drets d’autor</string>
+  <string name="exif_tag_name_location">Ubicació</string>
+  <string name="exif_tag_name_cameraModel">Model de la càmera</string>
+  <string name="exif_tag_name_serialNumbers">Números de sèrie</string>
+  <string name="exif_tag_name_software">Programari</string>
+  <string name="no_categories_found">No s’ha trobat cap categoria</string>
+  <string name="upload_cancelled">S’ha cancel·lat la pujada</string>
 </resources>

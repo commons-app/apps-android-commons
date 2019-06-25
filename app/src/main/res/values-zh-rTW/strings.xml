@@ -530,5 +530,8 @@
   <string name="share_text">在您的手機上更新照片到維基共享資源，下載共享資源應用程式：%1$s</string>
   <string name="share_via">分享應用程式透過…</string>
   <string name="image_info">圖片資訊</string>
+  <string name="no_categories_found">找不到分類</string>
+  <string name="upload_cancelled">已取消上傳</string>
+  <string name="previous_image_title_description_not_found">前一張圖片的標題或描述沒有資料</string>
   <string name="dialog_box_text_nomination">為何應刪除%1$s？</string>
 </resources>
