@@ -123,6 +123,10 @@ public class ReviewController {
 
             try {
                 editToken = mwApi.getEditToken();
+
+                if (editToken == null) {
+                    return false;
+                }
                 publishProgress(context, 1);
 
                 mwApi.appendEdit(editToken, "\n{{subst:chc}}\n", media.getFilename(), summary);
@@ -198,6 +202,9 @@ public class ReviewController {
 
             try {
                 editToken = mwApi.getEditToken();
+                if (editToken == null) {
+                    return false;
+                }
                 publishProgress(context, 1);
                 assert firstRevision != null;
                 mwApi.thank(editToken, firstRevision.getRevisionId());
