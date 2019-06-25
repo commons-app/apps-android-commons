@@ -22,7 +22,12 @@ import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_DELETE;
@@ -57,8 +62,9 @@ public class DeleteHelper {
      */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
         viewUtil.showShortToast(context, "Trying to nominate " + media.getDisplayTitle() + " for deletion");
-
         return Single.fromCallable(() -> delete(media, reason))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(result -> Single.fromCallable(() ->
                         showDeletionNotification(context, media, result)));
     }
@@ -99,9 +105,6 @@ public class DeleteHelper {
 
         try {
             editToken = mwApi.getEditToken();
-            if (editToken.equals("+\\")) {
-                return false;
-            }
 
             mwApi.prependEdit(editToken, fileDeleteString + "\n",
                     media.getFilename(), summary);
@@ -183,10 +186,14 @@ public class DeleteHelper {
                 }
             }
 
-            ((ReviewActivity) context).reviewController.swipeToNext();
-            ((ReviewActivity) context).runRandomizer();
+            Disposable disposable = makeDeletion(context, media, reason)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(aBoolean -> {
+                        ((ReviewActivity) context).reviewController.swipeToNext();
+                        ((ReviewActivity) context).runRandomizer();
+                    });
 
-            makeDeletion(context, media, reason);
         });
         alert.setNegativeButton("Cancel", null);
         AlertDialog d = alert.create();
