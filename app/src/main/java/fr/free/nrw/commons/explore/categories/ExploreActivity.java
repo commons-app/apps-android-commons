@@ -100,7 +100,7 @@ public class ExploreActivity
         mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
         mobileImagesListFragment.setArguments(mobileArguments);
         fragmentList.add(mobileImagesListFragment);
-        titleList.add(getString(R.string.explore_tab_title_mobile));
+        titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();

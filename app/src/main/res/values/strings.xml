@@ -366,14 +366,14 @@
   <string name="delete_search_dialog">Do you want to delete this search?</string>
   <string name="search_history_deleted">Search history deleted</string>
   <string name="nominate_delete">Nominate For Deletion</string>
-  <string name="delete">DELETE</string>
+  <string name="delete">Delete</string>
 
   <string name="Achievements">Achievements</string>
-  <string name="statistics">STATISTICS</string>
+  <string name="statistics">Statistics</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
   <string name="statistics_wikidata_edits">Images via \"Nearby Places\"</string>
-  <string name="level">LEVEL</string>
+  <string name="level">Level</string>
   <string name="images_uploaded">Images Uploaded</string>
   <string name="image_reverts">Images Not Reverted</string>
   <string name="images_used_by_wiki">Images Used</string>
@@ -537,7 +537,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="previous_button_tooltip_message">Click to reuse the title and description you entered in your previous picture and modify it to fit your current one</string>
   <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
-  <string name="skip_image">SKIP THIS IMAGE</string>
+  <string name="skip_image">Skip this image</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download Failed!!. We cannot download the file without external storage permission.</string>
 
   <string name="manage_exif_tags">Manage EXIF Tags</string>

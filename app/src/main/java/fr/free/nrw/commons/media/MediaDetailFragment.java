@@ -393,7 +393,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final EditText input = new EditText(getActivity());
         alert.setView(input);
         input.requestFocus();
-        alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
+        alert.setPositiveButton((R.string.ok), (dialog1, whichButton) -> {
             String reason = input.getText().toString();
             onDeleteClickeddialogtext(reason);
         });
