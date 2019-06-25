@@ -31,6 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -355,7 +356,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
-        String levelUpInfoString = getString(R.string.level).toUpperCase();
+        String levelUpInfoString = getString(R.string.level).toUpperCase(Locale.getDefault());
         levelUpInfoString += " " + levelInfo.getLevelNumber();
         levelNumber.setText(levelUpInfoString);
         imageView.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,

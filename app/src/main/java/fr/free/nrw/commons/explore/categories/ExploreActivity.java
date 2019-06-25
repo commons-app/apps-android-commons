@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -93,14 +94,14 @@ public class ExploreActivity
         featuredArguments.putString("categoryName", FEATURED_IMAGES_CATEGORY);
         featuredImagesListFragment.setArguments(featuredArguments);
         fragmentList.add(featuredImagesListFragment);
-        titleList.add(getString(R.string.explore_tab_title_featured));
+        titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase(Locale.getDefault()));
 
         mobileImagesListFragment = new CategoryImagesListFragment();
         Bundle mobileArguments = new Bundle();
         mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
         mobileImagesListFragment.setArguments(mobileArguments);
         fragmentList.add(mobileImagesListFragment);
-        titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
+        titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase(Locale.getDefault()));
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();

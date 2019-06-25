@@ -28,6 +28,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -90,9 +91,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchImageFragment = new SearchImageFragment();
         searchCategoryFragment= new SearchCategoryFragment();
         fragmentList.add(searchImageFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_media));
+        titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase(Locale.getDefault()));
         fragmentList.add(searchCategoryFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_categories));
+        titleList.add(getResources().getString(R.string.search_tab_title_categories).toUpperCase(Locale.getDefault()));
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
