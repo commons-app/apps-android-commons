@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import java.util.List;
+
 public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
-    ReviewImageFragment[] reviewImageFragments;
+    private ReviewImageFragment[] reviewImageFragments;
 
 
-    public ReviewPagerAdapter(FragmentManager fm) {
+    ReviewPagerAdapter(FragmentManager fm) {
         super(fm);
         reviewImageFragments = new ReviewImageFragment[]{
                 new ReviewImageFragment(),
@@ -25,16 +27,16 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
         return reviewImageFragments.length;
     }
 
-    public void updateFileInformation(String fileName) {
+    void updateFileInformation() {
         for (int i = 0; i < getCount(); i++) {
             ReviewImageFragment fragment = reviewImageFragments[i];
-            fragment.update(i, fileName);
+            fragment.update(i);
         }
     }
 
-    public void updateCategories() {
+    void updateCategories(List<String> categories) {
         ReviewImageFragment categoryFragment = reviewImageFragments[ReviewImageFragment.CATEGORY];
-        categoryFragment.updateCategories(ReviewController.categories);
+        categoryFragment.updateCategories(categories);
     }
 
     @Override

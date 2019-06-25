@@ -14,8 +14,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -33,9 +31,7 @@ import timber.log.Timber;
 
 @Singleton
 public class ReviewController {
-    private String fileName;
     private static final int NOTIFICATION_SEND_THANK = 0x102;
-    protected static ArrayList<String> categories;
     private static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
     private final DeleteHelper deleteHelper;
     @Nullable
@@ -60,14 +56,8 @@ public class ReviewController {
         notificationBuilder = new NotificationCompat.Builder(context, CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
     }
 
-    void onImageRefreshed(String fileName) {
-        this.fileName = fileName;
-        media = new Media("File:" + fileName);
-        ReviewController.categories = new ArrayList<>();
-    }
-
-    void onCategoriesRefreshed(ArrayList<String> categories) {
-        ReviewController.categories = categories;
+    void onImageRefreshed(Media media) {
+        this.media = media;
     }
 
     public void swipeToNext() {
@@ -79,20 +69,26 @@ public class ReviewController {
         }
     }
 
+    public Media getMedia() {
+        return media;
+    }
+
     public enum DeleteReason {
         SPAM,
         COPYRIGHT_VIOLATION
     }
 
     void reportSpam(@NonNull Activity activity) {
-        deleteHelper.askReasonAndExecute(new Media("File:" + media.getFilename()),
+        Timber.d("Report spam for %s", media.getFilename());
+        deleteHelper.askReasonAndExecute(media,
                 activity,
                 activity.getResources().getString(R.string.review_spam_report_question),
                 DeleteReason.SPAM);
     }
 
     void reportPossibleCopyRightViolation(@NonNull Activity activity) {
-        deleteHelper.askReasonAndExecute(new Media("File:" + media.getFilename()),
+        Timber.d("Report spam for %s", media.getFilename());
+        deleteHelper.askReasonAndExecute(media,
                 activity,
                 activity.getResources().getString(R.string.review_c_violation_report_question),
                 DeleteReason.COPYRIGHT_VIOLATION);
@@ -180,7 +176,7 @@ public class ReviewController {
         notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
     }
 
-    @SuppressLint("CheckResult")
+    @SuppressLint({"CheckResult", "StringFormatInvalid"})
     void sendThanks(@NonNull Activity activity) {
         Context context = activity.getApplicationContext();
         ApplicationlessInjection
