@@ -13,11 +13,13 @@
 * Whym
 * Yusuke1109
 * Yuukin0248
+* 神樂坂秀吉
 -->
 <resources>
   <string name="preference_category_appearance">表示</string>
   <string name="preference_category_general">全般</string>
   <string name="preference_category_feedback">フィードバック</string>
+  <string name="preference_category_privacy">プライバシー</string>
   <string name="preference_category_location">場所</string>
   <string name="app_name">コモンズ</string>
   <string name="bullet">•</string>
@@ -108,7 +110,10 @@
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
-  <string name="share_license_summary" fuzzy="true">この画像は%1$sライセンスのもとにアップロードされます。</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">この画像は%1$sライセンスのもとにアップロードされます</item>
+    <item quantity="other">これらの画像は%1$sライセンスのもとにアップロードされます</item>
+  </plurals>
   <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれていないと宣言します。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">既定のライセンス</string>
@@ -162,6 +167,7 @@
   <string name="detail_panel_cats_loading">読み込み中…</string>
   <string name="detail_panel_cats_none">ファイルを選択していません</string>
   <string name="detail_description_empty">説明はありません。</string>
+  <string name="detail_discussion_empty">議論なし</string>
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
   <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリはギャラリーを開けません。</string>
@@ -175,6 +181,7 @@
   <string name="no">いいえ</string>
   <string name="media_detail_title">タイトル</string>
   <string name="media_detail_description">記述</string>
+  <string name="media_detail_discussion">議論</string>
   <string name="media_detail_author">作者</string>
   <string name="media_detail_uploaded_date">アップロード日時</string>
   <string name="media_detail_license">ライセンス</string>
@@ -185,6 +192,7 @@
   <string name="_2fa_code">2段階認証コード</string>
   <string name="number_of_uploads">最近のアップロードファイルに表示する最大件数</string>
   <string name="maximum_limit">最大限</string>
+  <string name="invalid_input">無効な入力</string>
   <string name="maximum_limit_alert">表示できるのは500件以下です</string>
   <string name="set_limit">最近のアップロード上限件数</string>
   <string name="login_failed_2fa_not_supported">2段階認証は現在サポートされていません。</string>
@@ -219,6 +227,7 @@
   <string name="navigation_item_info">チュートリアル</string>
   <string name="navigation_item_notification">通知</string>
   <string name="navigation_item_featured_images">秀逸</string>
+  <string name="navigation_item_review">査読</string>
   <string name="nearby_needs_permissions">場所の権限がないため、近くの場所を表示できません</string>
   <string name="no_description_found">説明がありません</string>
   <string name="nearby_info_menu_commons_article">コモンズのファイルページ</string>
@@ -279,11 +288,14 @@
   <string name="app_widget_heading">今日の一枚</string>
   <string name="menu_search_button">検索</string>
   <string name="title_activity_search">検索</string>
+  <string name="search_recent_header">最近の検索:</string>
   <string name="search_tab_title_categories">カテゴリ</string>
   <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
   <string name="menu_set_wallpaper">壁紙として設定</string>
   <string name="wallpaper_set_successfully">壁紙の設定ができました!</string>
+  <string name="quiz">終了</string>
+  <string name="question">質問</string>
   <string name="result">結果</string>
   <string name="continue_message">続行</string>
   <string name="share_app_title">アプリをシェアする</string>
@@ -297,12 +309,20 @@
   <string name="nominate_delete">削除候補</string>
   <string name="delete">削除</string>
   <string name="statistics">統計</string>
+  <string name="contributions_fragment">投稿記録</string>
+  <string name="nearby_fragment">付近</string>
+  <string name="list_sheet">一覧</string>
+  <string name="next">次へ</string>
+  <string name="previous">前へ</string>
   <string name="submit">送信</string>
   <plurals name="upload_count_title">
     <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
   <string name="navigation_item_bookmarks">ブックマーク</string>
   <string name="title_activity_bookmarks">ブックマーク</string>
+  <string name="title_page_bookmarks_pictures">画像</string>
+  <string name="title_page_bookmarks_locations">位置</string>
+  <string name="provider_bookmarks">ブックマーク</string>
   <string name="provider_bookmarks_location">ブックマーク</string>
   <string name="desc_language_Worldwide">全世界</string>
   <string name="desc_language_America">アメリカ</string>
@@ -311,7 +331,19 @@
   <string name="desc_language_Africa">アフリカ</string>
   <string name="desc_language_Asia">アジア</string>
   <string name="desc_language_Pacific">太平洋地域</string>
+  <string name="never_ask_again">以後、表示しない</string>
   <string name="nominate_for_deletion_done">完了</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">次の画像</string>
+  <string name="send_thank_send">感謝を示す</string>
+  <string name="send_thank_notification_title">感謝を示す</string>
+  <string name="review_thanks_no_button_text">次の画像</string>
+  <string name="menu_option_archived">アーカイブ済みを表示</string>
+  <string name="menu_option_unread">未読を見る</string>
   <string name="please_wait">お待ちください…</string>
+  <string name="exif_tag_name_author">作者</string>
+  <string name="exif_tag_name_copyright">著作権</string>
+  <string name="exif_tag_name_location">位置</string>
+  <string name="exif_tag_name_cameraModel">撮影機器のモデル名</string>
+  <string name="exif_tag_name_serialNumbers">シリアル番号</string>
+  <string name="exif_tag_name_software">ソフトウェア</string>
+  <string name="image_info">画像情報</string>
 </resources>
