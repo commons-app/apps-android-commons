@@ -1,8 +1,11 @@
 package fr.free.nrw.commons.delete;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,21 +15,15 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.appcompat.app.AlertDialog;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.notification.NotificationHelper;
-import fr.free.nrw.commons.review.ReviewActivity;
-import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
-import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -148,7 +145,12 @@ public class DeleteHelper {
      * @param question
      * @param problem
      */
-    public void askReasonAndExecute(Media media, Context context, String question, ReviewController.DeleteReason problem) {
+    @SuppressLint("CheckResult")
+    public void askReasonAndExecute(Media media,
+                                    Context context,
+                                    String question,
+                                    ReviewController.DeleteReason problem,
+                                    ReviewController.ReviewCallback reviewCallback) {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle(question);
 
@@ -188,16 +190,19 @@ public class DeleteHelper {
                 }
             }
 
-            Disposable disposable = makeDeletion(context, media, reason)
+            makeDeletion(context, media, reason)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(aBoolean -> {
-                        ((ReviewActivity) context).reviewController.swipeToNext();
-                        ((ReviewActivity) context).runRandomizer();
+                        if (aBoolean) {
+                            reviewCallback.onSuccess();
+                        } else {
+                            reviewCallback.onFailure();
+                        }
                     });
 
         });
-        alert.setNegativeButton("Cancel", null);
+        alert.setNegativeButton("Cancel", (dialog, which) -> reviewCallback.onFailure());
         AlertDialog d = alert.create();
         d.show();
     }

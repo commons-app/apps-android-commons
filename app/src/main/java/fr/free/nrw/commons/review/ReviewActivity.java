@@ -90,6 +90,9 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    public Media getMedia() {
+        return media;
+    }
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
@@ -173,7 +176,6 @@ public class ReviewActivity extends AuthenticatedActivity {
                     progressBar.setVisibility(View.GONE);
                 }));
         reviewPager.setCurrentItem(0);
-        reviewPagerAdapter.updateCategories(media.getCategories());
     }
 
     public void swipeToNext() {

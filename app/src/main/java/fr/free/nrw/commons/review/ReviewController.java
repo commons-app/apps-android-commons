@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import androidx.viewpager.widget.ViewPager;
 
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 
@@ -44,13 +43,8 @@ public class ReviewController {
     private NotificationCompat.Builder notificationBuilder;
     private Media media;
 
-    private ViewPager viewPager;
-    private ReviewActivity reviewActivity;
-
     ReviewController(DeleteHelper deleteHelper, Context context) {
         this.deleteHelper = deleteHelper;
-        reviewActivity = (ReviewActivity) context;
-        viewPager = ((ReviewActivity) context).reviewPager;
         CommonsApplication.createNotificationChannel(context.getApplicationContext());
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationBuilder = new NotificationCompat.Builder(context, CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
@@ -58,15 +52,6 @@ public class ReviewController {
 
     void onImageRefreshed(Media media) {
         this.media = media;
-    }
-
-    public void swipeToNext() {
-        int nextPos = viewPager.getCurrentItem() + 1;
-        if (nextPos <= 3) {
-            viewPager.setCurrentItem(nextPos);
-        } else {
-            reviewActivity.runRandomizer();
-        }
     }
 
     public Media getMedia() {
@@ -78,24 +63,26 @@ public class ReviewController {
         COPYRIGHT_VIOLATION
     }
 
-    void reportSpam(@NonNull Activity activity) {
+    void reportSpam(@NonNull Activity activity, ReviewCallback reviewCallback) {
         Timber.d("Report spam for %s", media.getFilename());
         deleteHelper.askReasonAndExecute(media,
                 activity,
                 activity.getResources().getString(R.string.review_spam_report_question),
-                DeleteReason.SPAM);
+                DeleteReason.SPAM,
+                reviewCallback);
     }
 
-    void reportPossibleCopyRightViolation(@NonNull Activity activity) {
+    void reportPossibleCopyRightViolation(@NonNull Activity activity, ReviewCallback reviewCallback) {
         Timber.d("Report spam for %s", media.getFilename());
         deleteHelper.askReasonAndExecute(media,
                 activity,
                 activity.getResources().getString(R.string.review_c_violation_report_question),
-                DeleteReason.COPYRIGHT_VIOLATION);
+                DeleteReason.COPYRIGHT_VIOLATION,
+                reviewCallback);
     }
 
     @SuppressLint("CheckResult")
-    void reportWrongCategory(@NonNull Activity activity) {
+    void reportWrongCategory(@NonNull Activity activity, ReviewCallback reviewCallback) {
         Context context = activity.getApplicationContext();
         ApplicationlessInjection
                 .getInstance(context)
@@ -136,15 +123,17 @@ public class ReviewController {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((result) -> {
-                    String message = "";
-                    String title = "";
+                    String message;
+                    String title;
 
                     if (result) {
                         title = context.getString(R.string.check_category_success_title);
                         message = context.getString(R.string.check_category_success_message, media.getDisplayTitle());
+                        reviewCallback.onSuccess();
                     } else {
                         title = context.getString(R.string.check_category_failure_title);
                         message = context.getString(R.string.check_category_failure_message, media.getDisplayTitle());
+                        reviewCallback.onFailure();
                     }
 
                     notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
@@ -235,5 +224,11 @@ public class ReviewController {
                     notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
 
                 }, Timber::e);
+    }
+
+    public interface ReviewCallback {
+        void onSuccess();
+
+        void onFailure();
     }
 }
