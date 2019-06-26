@@ -43,7 +43,8 @@
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
                         android:layout_marginTop="@dimen/activity_margin_horizontal"
                         android:text="@string/level"
-                        android:id="@+id/achievement_level" />
+                        android:id="@+id/achievement_level"
+                        android:textAllCaps="true"/>
 
                     <ImageView
                         android:id="@+id/achievement_info"
