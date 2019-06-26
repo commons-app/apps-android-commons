@@ -464,7 +464,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("id", fileEntityId)
                 .param("language",caption.keySet().toString().substring(1,caption.keySet().toString().length()-1))
                 .param("token", getEditToken())
-                .param("value", "Testcaptions")
+                .param("value", caption.values().toString().substring(1,caption.values().toString().length()-1))
                 .post();
         if (result == null || result.getNode("api") == null) {
             return null;
