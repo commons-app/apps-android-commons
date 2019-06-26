@@ -5,6 +5,7 @@ import android.net.Uri;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -67,7 +68,7 @@ public interface MediaWikiApi {
     String wikidataEditEntity(String entityId, String fileName) throws IOException;
 
     @Nullable
-    String wikidataAddLabels(String fileEntityId, String caption) throws IOException;
+    String wikidataAddLabels(String fileEntityId, Map<String, String> caption) throws IOException;
 
     @Nullable
     boolean addWikidataEditTag(String revisionId) throws IOException;

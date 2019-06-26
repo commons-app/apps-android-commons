@@ -16,6 +16,7 @@ import org.wikipedia.util.DateUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -120,7 +121,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
                 Date dateUpdated = image.getDateUpdated();
                 Contribution contrib = new Contribution(null, null, filename,
-                        "", "",-1, dateUpdated, dateUpdated, user,
+                        new ArrayList<>(), "",-1, dateUpdated, dateUpdated, user,
                         "", "");
                 contrib.setState(STATE_COMPLETED);
                 imageValues.add(contributionDao.toContentValues(contrib));

@@ -2,7 +2,10 @@ package fr.free.nrw.commons.upload;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -19,21 +22,17 @@ public class UploadMediaDetail {
 
     /**
      * Formatting captions to the Wikibase format for sending labels
-     * @param uploadMediaDetails list of media Details*/
+     * @param uploadMediaDetails list of media Details
+     */
 
-    public static String formatCaptions(List<UploadMediaDetail> uploadMediaDetails) {
-        StringBuilder captionListString = new StringBuilder();
-        captionListString.append("{\\\"labels\\\":{");
-        UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(0);
-        String individualDescription = "\\\""+uploadMediaDetail.getLanguageCode()+"\\\":{\\\"language\\\":\\\""+uploadMediaDetail.getLanguageCode()+"\\\",\\\"value\\\":\\\""+uploadMediaDetail.getLanguageCode()+"-"+uploadMediaDetail.getCaptionText()+"\\\"}";
-        captionListString.append(individualDescription);
-        for (int i = 1;i<= uploadMediaDetails.size() - 1; i++) {
-            uploadMediaDetail = uploadMediaDetails.get(i);
-            individualDescription = ",\\\""+uploadMediaDetail.getLanguageCode()+"\\\":{\\\"language\\\":\\\""+uploadMediaDetail.getLanguageCode()+"\\\",\\\"value\\\":\\\""+uploadMediaDetail.getLanguageCode()+"-"+uploadMediaDetail.getCaptionText()+"\\\"}";
-            captionListString.append(individualDescription);
+    public static List<HashMap<String, String>> formatCaptions(List<UploadMediaDetail> uploadMediaDetails) {
+        List<HashMap<String, String>> captionList = new ArrayList<HashMap<String, String>>();
+        for (UploadMediaDetail uploadMediaDetail : uploadMediaDetails) {
+            HashMap<String, String> caption = new HashMap<>();
+            caption.put(uploadMediaDetail.getLanguageCode(),uploadMediaDetail.getCaptionText());
+            captionList.add(caption);
         }
-        Timber.e(captionListString.toString());
-        return captionListString.toString();
+        return captionList;
     }
 
     public String getCaptionText() {

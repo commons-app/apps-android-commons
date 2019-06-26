@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
@@ -457,11 +458,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Nullable
     @Override
-    public String wikidataAddLabels(String fileEntityId, String caption) throws IOException {
-        CustomApiResult result = api.action("wbeditentity")
+    public String wikidataAddLabels(String fileEntityId, Map<String, String> caption) throws IOException {
+        CustomApiResult result = api.action("wbsetlabel")
+                .param("format","json")
                 .param("id", fileEntityId)
+                .param("language",caption.keySet().toString().substring(1,caption.keySet().toString().length()-1))
                 .param("token", getEditToken())
-                .param("data", caption)
+                .param("value", "Testcaptions")
                 .post();
         if (result == null || result.getNode("api") == null) {
             return null;

@@ -1,15 +1,9 @@
 package fr.free.nrw.commons.upload.categories;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
+
 import android.text.TextUtils;
-
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.repository.UploadRepository;
@@ -18,10 +12,13 @@ import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 /**
  * The presenter class for UploadCategoriesFragment
@@ -64,8 +61,8 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
 
     /**
      * asks the repository to fetch categories for the query
+     *  @param query
      *
-     * @param query
      */
     @Override
     public void searchForCategories(String query) {
@@ -86,10 +83,9 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                 )
                 .filter(categoryItem -> !repository.containsYear(categoryItem.getName()))
                 .distinct();
-        if (!TextUtils.isEmpty(query)) {
+        if(!TextUtils.isEmpty(query)) {
             distinctCategoriesObservable = distinctCategoriesObservable.sorted(repository.sortBySimilarity(query));
         }
-
         Disposable searchCategoriesDisposable = distinctCategoriesObservable
                 .observeOn(mainThreadScheduler)
                 .subscribe(
@@ -110,7 +106,6 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
 
     /**
      * Returns image title list from UploadItem
-     *
      * @return
      */
     private List<String> getImageTitleList() {

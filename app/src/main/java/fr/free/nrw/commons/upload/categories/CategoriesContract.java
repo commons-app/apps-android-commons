@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload.categories;
 
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.category.CategoryItem;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
 
 import java.util.List;
 

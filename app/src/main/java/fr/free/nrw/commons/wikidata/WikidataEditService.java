@@ -3,7 +3,10 @@ package fr.free.nrw.commons.wikidata;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -187,15 +190,21 @@ public class WikidataEditService {
         return fileName;
     }
 
-    public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, String caption) {
+    public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, List<HashMap<String, String>> captions) {
         Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
-                        wikidataAddLabels(wikiDataEntityId, fileEntityId, caption);
-                        Timber.d("EntityId for image was received successfully");
-                    } else {
+                        for (Map<String, String> entry : captions) {
+                            for (String key : entry.keySet()) {
+                                String value = entry.get(key);
+                                Map<String, String> caption = new HashMap<>();
+                                caption.put(key, value);
+                                wikidataAddLabels(wikiDataEntityId, fileEntityId, caption);
+                            }
+                        }
+                    }else {
                         Timber.d("Error acquiring EntityId for image");
                     }
                 }, throwable -> {
@@ -204,7 +213,7 @@ public class WikidataEditService {
                 });
     }
 
-    private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, String caption) {
+    private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, Map<String, String> caption) {
         Observable.fromCallable(() -> mediaWikiApi.wikidataAddLabels(fileEntityId, caption))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

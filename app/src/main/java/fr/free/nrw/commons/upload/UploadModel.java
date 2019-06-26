@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -205,7 +206,7 @@ public class UploadModel {
         return Observable.fromIterable(items).map(item ->
         {
             Contribution contribution = new Contribution(item.mediaUri, null,
-                    item.getFileName(), item.uploadMediaDetails.size()!=0? UploadMediaDetail.formatCaptions(item.uploadMediaDetails):"",
+                    item.getFileName(), item.uploadMediaDetails.size()!=0? UploadMediaDetail.formatCaptions(item.uploadMediaDetails):new ArrayList<>(),
                     UploadMediaDetail.formatList(item.uploadMediaDetails), -1,
                     null, null, sessionManager.getAuthorName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
