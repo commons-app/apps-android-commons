@@ -29,7 +29,8 @@
               android:drawablePadding="12dp"
               android:drawableTint="@color/button_blue_dark"
               android:text="@string/skip_image"
-              android:textColor="@color/button_blue_dark"/>
+              android:textColor="@color/button_blue_dark"
+              android:textAllCaps="true"/>
 
             <RelativeLayout
               android:layout_width="match_parent"

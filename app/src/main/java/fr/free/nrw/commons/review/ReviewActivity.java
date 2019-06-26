@@ -199,7 +199,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     public void showSkipImageInfo(){
         DialogUtil.showAlertDialog(ReviewActivity.this,
-                getString(R.string.skip_image),
+                getString(R.string.skip_image).toUpperCase(),
                 getString(R.string.skip_image_explanation),
                 getString(android.R.string.ok),
                 "",

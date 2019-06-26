@@ -74,7 +74,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         recentSearchesList.setOnItemLongClickListener((parent, view, position, id) -> {
             new AlertDialog.Builder(getContext())
             .setMessage(R.string.delete_search_dialog)
-            .setPositiveButton(R.string.delete,((dialog, which) -> {
+            .setPositiveButton(getString(R.string.delete).toUpperCase(),((dialog, which) -> {
                 recentSearchesDao.delete(recentSearchesDao.find(recentSearches.get(position)));
                 recentSearches = recentSearchesDao.recentSearches(10);
                 adapter = new ArrayAdapter<>(getContext(), R.layout.item_recent_searches, recentSearches);

@@ -280,7 +280,8 @@
                         style="?android:textAppearanceLarge"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginStart="@dimen/activity_margin_horizontal"
-                        android:layout_marginTop="@dimen/activity_margin_vertical" />
+                        android:layout_marginTop="@dimen/activity_margin_vertical"
+                        android:textAllCaps="true"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
