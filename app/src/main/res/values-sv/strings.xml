@@ -526,5 +526,8 @@
   <string name="share_text">Ladda upp foton till Wikimedia Commons på din telefon Ladda ned Commons-appen: %1$s</string>
   <string name="share_via">Dela appen via...</string>
   <string name="image_info">Bildinfo</string>
+  <string name="no_categories_found">Inga kategorier hittades</string>
+  <string name="upload_cancelled">Uppladdning avbröts</string>
+  <string name="previous_image_title_description_not_found">Det finns ingen data för den föregående bildens titel eller beskrivning</string>
   <string name="dialog_box_text_nomination">Varför bör %1$s raderas?</string>
 </resources>

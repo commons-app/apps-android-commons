@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,10 +38,12 @@ import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadModel;
@@ -81,6 +84,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
+
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore defaultKvStore;
+
     private UploadableFile uploadableFile;
     private String source;
     private Place place;

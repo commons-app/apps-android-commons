@@ -464,4 +464,6 @@
   <string name="exif_tag_name_software">소프트웨어</string>
   <string name="share_via">앱 공유...</string>
   <string name="image_info">이미지 정보</string>
+  <string name="no_categories_found">분류가 없습니다</string>
+  <string name="upload_cancelled">업로드 취소됨</string>
 </resources>

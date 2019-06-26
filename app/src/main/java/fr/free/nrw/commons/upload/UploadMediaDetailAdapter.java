@@ -32,10 +32,12 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     private Callback callback;
 
     private BiMap<AdapterView, String> selectedLanguages;
+    private String savedLanguageValue;
 
     public UploadMediaDetailAdapter() {
         uploadMediaDetails = new ArrayList<>();
         selectedLanguages = new BiMap<>();
+        this.savedLanguageValue = savedLanguageValue;
     }
 
     public void setCallback(Callback callback) {
@@ -176,14 +178,15 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         private void initLanguageSpinner(int position, UploadMediaDetail description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(
                     spinnerDescriptionLanguages.getContext(),
-                    R.layout.row_item_languages_spinner, selectedLanguages);
+                    R.layout.row_item_languages_spinner, selectedLanguages,
+                    savedLanguageValue);
             languagesAdapter.notifyDataSetChanged();
             spinnerDescriptionLanguages.setAdapter(languagesAdapter);
 
             spinnerDescriptionLanguages.setOnItemSelectedListener(new OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int position,
-                        long l) {
+                                           long l) {
                     description.setSelectedLanguageIndex(position);
                     String languageCode = ((SpinnerLanguagesAdapter) adapterView.getAdapter())
                             .getLanguageCode(position);
@@ -192,22 +195,28 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                     selectedLanguages.put(adapterView, languageCode);
                     ((SpinnerLanguagesAdapter) adapterView
                             .getAdapter()).selectedLangCode = languageCode;
+                    Timber.d("Description language code is: "+languageCode);
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
-
                 }
             });
 
             if (description.getSelectedLanguageIndex() == -1) {
-                if (position == 0) {
-                    int defaultLocaleIndex = languagesAdapter
-                            .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages.getContext());
-                    spinnerDescriptionLanguages.setSelection(defaultLocaleIndex, true);
+                if (savedLanguageValue != null) {
+                    // If user has chosen a default language from settings activity savedLanguageValue is not null
+                    spinnerDescriptionLanguages.setSelection(languagesAdapter.getIndexOfLanguageCode(savedLanguageValue));
                 } else {
-                    spinnerDescriptionLanguages.setSelection(0);
+                    if (position == 0) {
+                        int defaultLocaleIndex = languagesAdapter
+                                .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages.getContext());
+                        spinnerDescriptionLanguages.setSelection(defaultLocaleIndex, true);
+                    } else {
+                        spinnerDescriptionLanguages.setSelection(0);
+                    }
                 }
+
             } else {
                 spinnerDescriptionLanguages.setSelection(description.getSelectedLanguageIndex());
                 selectedLanguages.put(spinnerDescriptionLanguages, description.getLanguageCode());

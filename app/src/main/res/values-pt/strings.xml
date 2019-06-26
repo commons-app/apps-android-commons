@@ -534,4 +534,8 @@
   <string name="share_text">Carregar fotografias na wiki Wikimedia Commons, do seu telemóvel Descarregar a aplicação Commons: %1$s</string>
   <string name="share_via">Partilhar aplicação por...</string>
   <string name="image_info">Informação da imagem</string>
+  <string name="no_categories_found">Não foi encontrada nenhuma categoria</string>
+  <string name="upload_cancelled">Carregamento cancelado</string>
+  <string name="previous_image_title_description_not_found">Não há dados para o título ou descrição da imagem anterior</string>
+  <string name="dialog_box_text_nomination">Porque deve %1$s ser eliminado?</string>
 </resources>
