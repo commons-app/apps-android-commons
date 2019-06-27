@@ -200,12 +200,12 @@
   <string name="nearby_location_has_not_changed">Местоположението не е променено.</string>
   <string name="nearby_location_not_available">Местоположението не е налично.</string>
   <string name="toggle_view_button">Превключване на изгледа</string>
-  <string name="nearby_wikidata">УИКИДАННИ</string>
-  <string name="nearby_wikipedia">УИКИПЕДИЯ</string>
-  <string name="nearby_commons">ОБЩОМЕДИЯ</string>
+  <string name="nearby_wikidata" fuzzy="true">УИКИДАННИ</string>
+  <string name="nearby_wikipedia" fuzzy="true">УИКИПЕДИЯ</string>
+  <string name="nearby_commons" fuzzy="true">ОБЩОМЕДИЯ</string>
   <string name="about_translate_cancel">Отказ</string>
-  <string name="search_tab_title_media">ИЗОБРАЖЕНИЯ/ЗАПИСИ</string>
-  <string name="search_tab_title_categories">КАТЕГОРИИ</string>
+  <string name="search_tab_title_media" fuzzy="true">ИЗОБРАЖЕНИЯ/ЗАПИСИ</string>
+  <string name="search_tab_title_categories" fuzzy="true">КАТЕГОРИИ</string>
   <string name="no_recent_searches">Няма последни търсения</string>
   <string name="nominate_delete">Предлагане за изтриване</string>
   <string name="statistics_wikidata_edits">Изображения чрез „Близки места“</string>

@@ -174,9 +174,9 @@
   <string name="give_permission">അനുമതി നൽകുക</string>
   <string name="login_to_your_account">താങ്കളുടെ അംഗത്വത്തിൽ പ്രവേശിക്കുക</string>
   <string name="view_browser">ബ്രൗസറിൽ കാണുക</string>
-  <string name="nearby_wikidata">വിക്കിഡേറ്റാ</string>
-  <string name="nearby_wikipedia">വിക്കിപീഡിയ</string>
-  <string name="nearby_commons">കോമൺസ്</string>
+  <string name="nearby_wikidata" fuzzy="true">വിക്കിഡേറ്റാ</string>
+  <string name="nearby_wikipedia" fuzzy="true">വിക്കിപീഡിയ</string>
+  <string name="nearby_commons" fuzzy="true">കോമൺസ്</string>
   <string name="about_faq">&lt;u&gt;പതിവുചോദ്യങ്ങൾ&lt;/u&gt;</string>
   <string name="about_translate">&lt;u&gt;പരിഭാഷപ്പെടുത്തുക&lt;/u&gt;</string>
   <string name="about_translate_title">ഭാഷകൾ</string>

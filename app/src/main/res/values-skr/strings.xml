@@ -128,9 +128,9 @@
   <string name="send_log_file">لاگ فائل بھیڄو</string>
   <string name="skip_login">چھوڑو</string>
   <string name="navigation_item_login">لاگ ان تھیوو</string>
-  <string name="nearby_wikidata">وکی ڈیٹا</string>
-  <string name="nearby_wikipedia">وکی پیڈیا</string>
-  <string name="nearby_commons">عام</string>
+  <string name="nearby_wikidata" fuzzy="true">وکی ڈیٹا</string>
+  <string name="nearby_wikipedia" fuzzy="true">وکی پیڈیا</string>
+  <string name="nearby_commons" fuzzy="true">عام</string>
   <string name="about_faq">&lt;u&gt;عام طور تے پچھے ونڄݨ آلے سوال&lt;/u&gt;</string>
   <string name="about_translate">&lt;u&gt;ترجمہ کرو&lt;/u&gt;</string>
   <string name="about_translate_title">زباناں</string>
@@ -143,13 +143,13 @@
   <string name="menu_search_button">ڳولو</string>
   <string name="title_activity_search">ڳولو</string>
   <string name="search_recent_header">حالیہ ڳول:</string>
-  <string name="search_tab_title_media">میݙیا</string>
-  <string name="search_tab_title_categories">ونکیاں</string>
+  <string name="search_tab_title_media" fuzzy="true">میݙیا</string>
+  <string name="search_tab_title_categories" fuzzy="true">ونکیاں</string>
   <string name="question">سوال</string>
   <string name="result">نتیجہ</string>
   <string name="continue_message">جاری رکھو</string>
-  <string name="statistics">شماریات</string>
-  <string name="level">سطح</string>
+  <string name="statistics" fuzzy="true">شماریات</string>
+  <string name="level" fuzzy="true">سطح</string>
   <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
   <string name="navigation_item_bookmarks">کتاب نشان</string>
   <string name="title_activity_bookmarks">کتاب نشان</string>

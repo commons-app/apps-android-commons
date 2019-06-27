@@ -333,6 +333,7 @@
   <string name="error_loading_subcategories">加载子分类时发生错误。</string>
   <string name="search_tab_title_media">媒体</string>
   <string name="search_tab_title_categories">分类</string>
+  <string name="explore_tab_title_featured">特色</string>
   <string name="explore_tab_title_mobile">通过移动端上传</string>
   <string name="successful_wikidata_edit">图片已成功添加到维基数据上的%1$s！</string>
   <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
