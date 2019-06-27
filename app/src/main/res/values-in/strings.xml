@@ -231,16 +231,16 @@
   <string name="nearby_location_has_not_changed">Lokasi belum berubah</string>
   <string name="nearby_location_not_available">Lokasi tidak tersedia</string>
   <string name="location_permission_rationale_nearby">Izin diperlukan untuk menampilkan daftar tempat di sekitar</string>
-  <string name="get_directions">MINTA ARAHAN</string>
-  <string name="read_article">BACA ARTIKEL</string>
+  <string name="get_directions" fuzzy="true">MINTA ARAHAN</string>
+  <string name="read_article" fuzzy="true">BACA ARTIKEL</string>
   <string name="notifications_welcome">Selamat datang di Wikimedia Commons, %1$s! Kami senang Anda di sini.</string>
   <string name="notifications_talk_page_message">%1$s meninggalkan pesan di halaman pembicaraan Anda</string>
   <string name="notifications_thank_you_edit">Terima kasih telah membuat suntingan</string>
   <string name="notifications_mention">%1$s menyebut Anda di %2$s.</string>
-  <string name="nearby_directions">ARAHAN</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions" fuzzy="true">ARAHAN</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Beri rating&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;PSA&lt;/u&gt;</string>
   <string name="welcome_skip_button">Lewati Tutorial</string>
@@ -270,8 +270,8 @@
   <string name="provider_searches">Kueri pencarian terkini</string>
   <string name="error_loading_categories">Terjadi kesalah ketika memuat kategori-kategori.</string>
   <string name="error_loading_subcategories">Terjadi kesalahan ketika memuat subkategori-subkategori.</string>
-  <string name="search_tab_title_media">MEDIA</string>
-  <string name="search_tab_title_categories">KATEGORI</string>
+  <string name="search_tab_title_media" fuzzy="true">MEDIA</string>
+  <string name="search_tab_title_categories" fuzzy="true">KATEGORI</string>
   <string name="successful_wikidata_edit">Gambar berhasil ditambahkan ke %1$s di Wikidata!</string>
   <string name="wikidata_edit_failure">Gagal mengubah entitas Wikidata yang bersangkutan!</string>
   <string name="menu_set_wallpaper">Jadikan Wallpaper</string>

@@ -239,10 +239,10 @@
   <string name="search_history_deleted">ძიების ისტორია წაშლილია</string>
   <string name="nominate_delete">წაშლაზე ნომინირება</string>
   <string name="Achievements">მიღწევები</string>
-  <string name="statistics">სტატისტიკა</string>
+  <string name="statistics" fuzzy="true">სტატისტიკა</string>
   <string name="statistics_thanks">მადლობა მიღებულია</string>
   <string name="statistics_featured">რჩეული სურათები</string>
-  <string name="level">დონე</string>
+  <string name="level" fuzzy="true">დონე</string>
   <string name="images_uploaded">სურათები ატვირთულია</string>
   <string name="image_reverts">სურათები არ დაბრუნებულა</string>
   <string name="images_used_by_wiki">სურათები გამოიყენება</string>

@@ -153,8 +153,8 @@
   <string name="skip_login">چھوڑیں</string>
   <string name="navigation_item_login">داخل ہوں</string>
   <string name="notifications_welcome">%1$s، ویکیمیڈیا کامنز میں خوش آمدید! آپ کو یہاں پا کر ہمیں خوشی ہوئی۔</string>
-  <string name="nearby_directions">ہدایات</string>
-  <string name="nearby_commons">عام</string>
+  <string name="nearby_directions" fuzzy="true">ہدایات</string>
+  <string name="nearby_commons" fuzzy="true">عام</string>
   <string name="no_internet">انٹرنیٹ دستیاب نہیں</string>
   <string name="internet_established">انٹرنیٹ دستیاب</string>
   <string name="retry">دوبارہ کوشش کریں</string>
