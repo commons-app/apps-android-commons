@@ -141,12 +141,12 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
             String languageCode = LangCodeUtils.fixLanguageCode(languageCodesList.get(position));
             final String languageName = StringUtils.capitalize(languageNamesList.get(position));
 
-            if(savedLanguageValue.equals("")){
+            if(savedLanguageValue!=null && savedLanguageValue.equals("")){
                 savedLanguageValue = Locale.getDefault().getLanguage();
             }
 
             if (!isDropDownView) {
-                    if( !dropDownClicked){
+                    if( !dropDownClicked && savedLanguageValue !=null){
                     languageCode = LangCodeUtils.fixLanguageCode(savedLanguageValue);
                 }
                 view.setVisibility(View.GONE);

@@ -20,9 +20,12 @@ import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
+import fr.free.nrw.commons.mwapi.CustomApiResult;
+import fr.free.nrw.commons.mwapi.CustomMwApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.review.ReviewInterface;
+import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -122,5 +125,11 @@ public class NetworkingModule {
     @Singleton
     public ReviewInterface provideReviewInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public CaptionInterface provideCaptionInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, CaptionInterface.class);
     }
 }

@@ -15,6 +15,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -33,16 +34,18 @@ public class WikidataEditService {
     private final MediaWikiApi mediaWikiApi;
     private final WikidataEditListener wikidataEditListener;
     private final JsonKvStore directKvStore;
+    private final CaptionInterface captionInterface;
 
     @Inject
     public WikidataEditService(Context context,
                                MediaWikiApi mediaWikiApi,
                                WikidataEditListener wikidataEditListener,
-                               @Named("default_preferences") JsonKvStore directKvStore) {
+                               @Named("default_preferences") JsonKvStore directKvStore, CaptionInterface captionInterface) {
         this.context = context;
         this.mediaWikiApi = mediaWikiApi;
         this.wikidataEditListener = wikidataEditListener;
         this.directKvStore = directKvStore;
+        this.captionInterface = captionInterface;
     }
 
     /**
@@ -214,7 +217,7 @@ public class WikidataEditService {
     }
 
     private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, Map<String, String> caption) {
-        Observable.fromCallable(() -> mediaWikiApi.wikidataAddLabels(fileEntityId, caption))
+        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId,"", caption.keySet().toString().substring(1,caption.keySet().toString().length()-1), caption.values().toString().substring(1,caption.values().toString().length()-1)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revisionId -> Timber.d("Property Q24 set successfully for %s", revisionId),
