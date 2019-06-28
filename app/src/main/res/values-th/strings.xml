@@ -230,17 +230,17 @@
   <string name="nearby_location_has_not_changed">ไม่ได้เปลี่ยนตำแหน่งที่ตั้ง</string>
   <string name="nearby_location_not_available">ตำแหน่งที่ตั้งไม่พร้อมใช้งาน</string>
   <string name="location_permission_rationale_nearby">ต้องการสิทธิเพื่อแสดงรายการสถานที่ใกล้เคียง</string>
-  <string name="get_directions">สอบถามเส้นทาง</string>
-  <string name="read_article">อ่านบทความ</string>
+  <string name="get_directions" fuzzy="true">สอบถามเส้นทาง</string>
+  <string name="read_article" fuzzy="true">อ่านบทความ</string>
   <string name="notifications_welcome">ยินดีต้อนรับสู่วิกิมีเดียคอมมอนส์ %1$s! เราดีใจที่คุณอยู่ที่นี่</string>
   <string name="notifications_talk_page_message">%1$s ส่งสารบนหน้าคุยของคุณ</string>
   <string name="notifications_thank_you_edit">ขอบคุณที่ร่วมแก้ไข</string>
   <string name="notifications_mention">%1$s ได้กล่าวถึงคุณบน %2$s</string>
   <string name="toggle_view_button">สลับมุมมอง</string>
-  <string name="nearby_directions">เส้นทาง</string>
-  <string name="nearby_wikidata">วิกิสนเทศ</string>
-  <string name="nearby_wikipedia">วิกิพีเดีย</string>
-  <string name="nearby_commons">คอมมอนส์</string>
+  <string name="nearby_directions" fuzzy="true">เส้นทาง</string>
+  <string name="nearby_wikidata" fuzzy="true">วิกิสนเทศ</string>
+  <string name="nearby_wikipedia" fuzzy="true">วิกิพีเดีย</string>
+  <string name="nearby_commons" fuzzy="true">คอมมอนส์</string>
   <string name="about_rate_us">&lt;u&gt;ให้คะแนนเรา&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">ข้ามบทช่วยสอน</string>

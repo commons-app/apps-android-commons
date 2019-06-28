@@ -90,9 +90,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchImageFragment = new SearchImageFragment();
         searchCategoryFragment= new SearchCategoryFragment();
         fragmentList.add(searchImageFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_media));
+        titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase());
         fragmentList.add(searchCategoryFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_categories));
+        titleList.add(getResources().getString(R.string.search_tab_title_categories).toUpperCase());
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
