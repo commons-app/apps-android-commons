@@ -99,11 +99,12 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Timber.d("onCreateView called");
-        View view = inflater.inflate(R.layout.fragment_nearby_map, container, false);
+        //View view = inflater.inflate(R.layout.fragment_nearby_map, container, false);
         setHasOptionsMenu(false);
         initViews();
-        // this.mapView = setupMapView(savedInstanceState);
-        return view;
+        this.mapView = setupMapView(savedInstanceState);
+
+        return mapView;
     }
 
     @Override
@@ -159,7 +160,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
         Log.d("deneme2", "setuo map view is called");
         Timber.d("setting up map view");
         boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
-        /*MapboxMapOptions options = new MapboxMapOptions()
+        MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                 .compassMargins(new int[]{12, 0, 0, 24})
                 .styleUrl(isDarkTheme ? Style.DARK : Style.OUTDOORS)
@@ -167,9 +168,9 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                 .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
                         .zoom(ZOOM_LEVEL)
-                        .build());*/
-
-        MapView mapView = getView().findViewById(R.id.mapView);
+                        .build());
+/*
+        MapView mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
                                 @Override
@@ -182,15 +183,16 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
         );
 
         return mapView;
+*/
 
 
-
-        /*if (!getParentFragment().getActivity().isFinishing()) {
+        if (!getParentFragment().getActivity().isFinishing()) {
             MapView mapView = new MapView(getParentFragment().getActivity(), options);
             // create map
             mapView.onCreate(savedInstanceState);
             mapView.getMapAsync(mapboxMap -> {
-                LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
+                Log.d("deneme2","nearby map is ready");
+                /*LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
 
                 try {
                     localizationPlugin.matchMapLanguageWithDeviceDefault();
@@ -201,11 +203,11 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                 this.mapboxMap = mapboxMap;
                 viewsAreReadyCallback.nearbyMapViewReady();
                 //addMapMovementListeners();
-                //updateMapSignificantlyForCurrentLocation();
+                //updateMapSignificantlyForCurrentLocation();*/
             });
             return mapView;
         }
-        return null;*/
+        return null;
     }
 
     @Override

@@ -90,6 +90,7 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void nearbyMapViewReady() {
+        Log.d("deneme2","Nearby view ready method is called");
         Timber.d("Nearby map view is created and ready");
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
         // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends
@@ -118,7 +119,7 @@ public class NearbyParentFragmentPresenter
         //nearbyParentFragmentView.checkGps(locationServiceManager);
         // We will know when we went offline and online again
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
-        nearbyMapFragmentView.setupMapView(null);
+        //nearbyMapFragmentView.setupMapView(null);
     }
 
     /**

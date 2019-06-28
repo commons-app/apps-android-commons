@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby.mvp.contract;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
