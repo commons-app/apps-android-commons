@@ -206,7 +206,7 @@ public class UploadModel {
         return Observable.fromIterable(items).map(item ->
         {
             Contribution contribution = new Contribution(item.mediaUri, null,
-                    item.getFileName(), item.uploadMediaDetails.size()!=0? UploadMediaDetail.formatCaptions(item.uploadMediaDetails):new ArrayList<>(),
+                    item.getFileName(), item.uploadMediaDetails.size()!=0? UploadMediaDetail.formatCaptions(item.uploadMediaDetails):new HashMap<>(),
                     UploadMediaDetail.formatList(item.uploadMediaDetails), -1,
                     null, null, sessionManager.getAuthorName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());

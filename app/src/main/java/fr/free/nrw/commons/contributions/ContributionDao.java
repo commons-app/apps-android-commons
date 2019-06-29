@@ -16,6 +16,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -110,6 +112,7 @@ public class ContributionDao {
         cv.put(Table.COLUMN_TRANSFERRED, contribution.getTransferred());
         cv.put(Table.COLUMN_SOURCE, contribution.getSource());
         cv.put(Table.COLUMN_DESCRIPTION, contribution.getDescription());
+        cv.put(Table.COLUMN_CAPTION, convertMapToString(contribution.getCaptions()));
         cv.put(Table.COLUMN_CREATOR, contribution.getCreator());
         cv.put(Table.COLUMN_MULTIPLE, contribution.getMultiple() ? 1 : 0);
         cv.put(Table.COLUMN_WIDTH, contribution.getWidth());
@@ -117,6 +120,23 @@ public class ContributionDao {
         cv.put(Table.COLUMN_LICENSE, contribution.getLicense());
         cv.put(Table.COLUMN_WIKI_DATA_ENTITY_ID, contribution.getWikiDataEntityId());
         return cv;
+    }
+
+    /**
+     * Convert hashmap of captions to string to be stores in local database
+     * @param captions hashmap pf captions with language code and value
+     */
+
+    private String convertMapToString(HashMap<String, String> captions) {
+        Iterator iter = (Iterator) captions.keySet().iterator();
+        StringBuilder captionListString = new StringBuilder();
+        while(iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
+            String individualDescription = String.format("{{%s|1=%s}}", entry.getKey(),
+                    entry.getValue());
+            captionListString.append(individualDescription);
+        }
+        return String.valueOf(captionListString);
     }
 
     public Contribution fromCursor(Cursor cursor) {
@@ -140,7 +160,7 @@ public class ContributionDao {
                     parseTimestamp(cursor.getLong(cursor.getColumnIndex(Table.COLUMN_UPLOADED))),
                     cursor.getLong(cursor.getColumnIndex(Table.COLUMN_TRANSFERRED)),
                     cursor.getString(cursor.getColumnIndex(Table.COLUMN_SOURCE)),
-                    new ArrayList<>(),
+                    formatCaption(cursor.getColumnIndex(Table.COLUMN_CAPTION)),
                     cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
                     cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR)),
                     cursor.getInt(cursor.getColumnIndex(Table.COLUMN_MULTIPLE)) == 1,
@@ -158,6 +178,10 @@ public class ContributionDao {
         }
 
         return null;
+    }
+
+    private HashMap<String, String> formatCaption(int columnIndex) {
+        return new HashMap<>();
     }
 
     @Nullable
@@ -184,6 +208,7 @@ public class ContributionDao {
         public static final String COLUMN_TRANSFERRED = "transferred"; // Currently transferred number of bytes
         public static final String COLUMN_SOURCE = "source";
         public static final String COLUMN_DESCRIPTION = "description";
+        public static final String COLUMN_CAPTION = "caption";
         public static final String COLUMN_CREATOR = "creator"; // Initial uploader
         public static final String COLUMN_MULTIPLE = "multiple";
         public static final String COLUMN_WIDTH = "width";
@@ -204,6 +229,7 @@ public class ContributionDao {
                 COLUMN_TRANSFERRED,
                 COLUMN_SOURCE,
                 COLUMN_DESCRIPTION,
+                COLUMN_CAPTION,
                 COLUMN_CREATOR,
                 COLUMN_MULTIPLE,
                 COLUMN_WIDTH,
@@ -226,6 +252,7 @@ public class ContributionDao {
                 + "transferred INTEGER,"
                 + "source STRING,"
                 + "description STRING,"
+                + "caption STRING,"
                 + "creator STRING,"
                 + "multiple INTEGER,"
                 + "width INTEGER,"

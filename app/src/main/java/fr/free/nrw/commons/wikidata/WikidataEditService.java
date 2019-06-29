@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -193,19 +194,17 @@ public class WikidataEditService {
         return fileName;
     }
 
-    public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, List<HashMap<String, String>> captions) {
+    public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, HashMap<String, String> captions) {
         Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
-                        for (Map<String, String> entry : captions) {
-                            for (String key : entry.keySet()) {
-                                String value = entry.get(key);
-                                Map<String, String> caption = new HashMap<>();
-                                caption.put(key, value);
-                                wikidataAddLabels(wikiDataEntityId, fileEntityId, caption);
-                            }
+                        Iterator iter = (Iterator) captions.keySet().iterator();
+                        while(iter.hasNext()) {
+                            Map.Entry entry = (Map.Entry) iter.next();
+                            wikidataAddLabels(wikiDataEntityId, fileEntityId, entry.getKey().toString(), entry.getValue().toString());
+
                         }
                     }else {
                         Timber.d("Error acquiring EntityId for image");
@@ -216,8 +215,8 @@ public class WikidataEditService {
                 });
     }
 
-    private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, Map<String, String> caption) {
-        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId,"", caption.keySet().toString().substring(1,caption.keySet().toString().length()-1), caption.values().toString().substring(1,caption.values().toString().length()-1)))
+    private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, String key, String value) {
+        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId,"", key.substring(1,key.length()-1), value.substring(1,value.length()-1)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revisionId -> Timber.d("Property Q24 set successfully for %s", revisionId),

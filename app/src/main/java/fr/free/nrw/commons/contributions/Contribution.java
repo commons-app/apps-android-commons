@@ -70,11 +70,11 @@ public class  Contribution extends Media {
     private String wikiDataEntityId;
     private Uri contentProviderUri;
     private String dateCreatedSource;
-    private List<HashMap<String, String>> captions;
+    private HashMap<String, String> captions;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
-                        String source, List<HashMap<String, String>> caption, String description, String creator, boolean isMultiple,
+                        String source, HashMap<String, String> caption, String description, String creator, boolean isMultiple,
                         int width, int height, String license) {
         super(localUri, imageUrl, filename, caption, description, dataLength, dateCreated, dateUploaded, creator);
         this.contentUri = contentUri;
@@ -88,7 +88,7 @@ public class  Contribution extends Media {
         this.dateCreatedSource = "";
     }
 
-    public Contribution(Uri localUri, String imageUrl, String filename, List<HashMap<String, String>> captions, String description, long dataLength,
+    public Contribution(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description, long dataLength,
                         Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
         super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.captions = captions;

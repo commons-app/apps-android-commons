@@ -25,14 +25,12 @@ public class UploadMediaDetail {
      * @param uploadMediaDetails list of media Details
      */
 
-    public static List<HashMap<String, String>> formatCaptions(List<UploadMediaDetail> uploadMediaDetails) {
-        List<HashMap<String, String>> captionList = new ArrayList<HashMap<String, String>>();
+    public static HashMap<String, String> formatCaptions(List<UploadMediaDetail> uploadMediaDetails) {
+        HashMap<String, String> caption = new HashMap<>();
         for (UploadMediaDetail uploadMediaDetail : uploadMediaDetails) {
-            HashMap<String, String> caption = new HashMap<>();
             caption.put(uploadMediaDetail.getLanguageCode(),uploadMediaDetail.getCaptionText());
-            captionList.add(caption);
         }
-        return captionList;
+        return caption;
     }
 
     public String getCaptionText() {

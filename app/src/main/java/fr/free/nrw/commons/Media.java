@@ -59,7 +59,7 @@ public class Media implements Parcelable {
     protected ArrayList<String> categories; // as loaded at runtime?
     protected boolean requestedDeletion;
     private Map<String, String> descriptions; // multilingual descriptions as loaded
-    private List<HashMap<String, String>> captions;
+    private HashMap<String, String> captions;
     private HashMap<String, Object> tags = new HashMap<>();
     private @Nullable LatLng coordinates;
 
@@ -69,7 +69,7 @@ public class Media implements Parcelable {
     protected Media() {
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
-        this.captions = new ArrayList<>();
+        this.captions = new HashMap<>();
     }
 
     /**
@@ -93,7 +93,7 @@ public class Media implements Parcelable {
      * @param dateUploaded Media date uploaded
      * @param creator Media creator
      */
-    public Media(Uri localUri, String imageUrl, String filename, List<HashMap<String, String>> captions, String description,
+    public Media(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description,
                  long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this();
         this.localUri = localUri;
@@ -130,7 +130,7 @@ public class Media implements Parcelable {
             in.readStringList(categories);
         }
         descriptions = in.readHashMap(ClassLoader.getSystemClassLoader());
-        captions = in.readArrayList(ClassLoader.getSystemClassLoader());
+        captions = in.readHashMap(ClassLoader.getSystemClassLoader());
     }
 
     /**
@@ -150,7 +150,7 @@ public class Media implements Parcelable {
         ExtMetadata metadata = imageInfo.getMetadata();
         if (metadata == null) {
             Media media = new Media(null, imageInfo.getOriginalUrl(),
-                    page.title(), new ArrayList<>() , "", 0, null, null, null);
+                    page.title(), new HashMap<>() , "", 0, null, null, null);
             if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
                 media.setThumbUrl(imageInfo.getThumbUrl());
             }
@@ -160,7 +160,7 @@ public class Media implements Parcelable {
         Media media = new Media(null,
                 imageInfo.getOriginalUrl(),
                 page.title(),
-                new ArrayList<>(),
+                new HashMap<>(),
                 "",
                 0,
                 safeParseDate(metadata.dateTimeOriginal().value()),
@@ -291,7 +291,7 @@ public class Media implements Parcelable {
         return caption;
     }
 
-    public List<HashMap<String, String>> getCaptions() {
+    public HashMap<String, String> getCaptions() {
         return captions;
     }
 
@@ -535,7 +535,7 @@ public class Media implements Parcelable {
         parcel.writeString(license);
         parcel.writeStringList(categories);
         parcel.writeMap(descriptions);
-        parcel.writeList(captions);
+        parcel.writeMap(captions);
     }
 
     /**
