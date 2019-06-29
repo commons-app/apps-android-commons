@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
         ButterKnife.bind(this, rootView);
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void hookListeners(View rootView) {
         rootView.setOnClickListener(v -> {

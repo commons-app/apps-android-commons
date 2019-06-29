@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import androidx.annotation.Nullable;
 import androidx.collection.LruCache;
 import dagger.Module;
 import dagger.Provides;
@@ -99,10 +100,11 @@ public class CommonsApplicationModule {
      * @param context context
      * @return DepictsContentProviderClient*/
 
+    @Nullable
     @Provides
     @Named("depicts")
     public ContentProviderClient provideDepictsContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(applicationContext.getPackageName()+".depicts.contentprovider");
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.DEPICTS_AUTHORITY);
     }
 
     /**

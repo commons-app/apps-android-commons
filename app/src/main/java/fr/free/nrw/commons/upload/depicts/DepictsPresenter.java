@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import fr.free.nrw.commons.repository.UploadRepository;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 
-//@Singleton
+@Singleton
 public class DepictsPresenter implements DepictsContract.UserActionListener {
 
     private static final DepictsContract.View DUMMY = (DepictsContract.View) Proxy
