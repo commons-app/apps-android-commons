@@ -31,6 +31,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
+import fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleMultiSelectListPreference;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.upload.Language;
@@ -70,7 +71,7 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
-        MultiSelectListPreference multiSelectListPref = (MultiSelectListPreference) findPreference("manageExifTags");
+        LongTitleMultiSelectListPreference multiSelectListPref = (LongTitleMultiSelectListPreference) findPreference("manageExifTags");
         if (multiSelectListPref != null) {
             multiSelectListPref.setOnPreferenceChangeListener((preference, newValue) -> {
                 defaultKvStore.putJson(Prefs.MANAGED_EXIF_TAGS, newValue);

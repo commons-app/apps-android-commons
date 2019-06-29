@@ -3,7 +3,10 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
+
 import androidx.annotation.NonNull;
 
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment.Callback;
@@ -104,8 +107,10 @@ public class FileProcessor implements Callback {
      * @return        tags to be redacted
      */
     private Set<String> getExifTagsToRedact(Context context) {
-        Type setType = new TypeToken<Set<String>>() {}.getType();
-        Set<String> prefManageEXIFTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        Set<String> prefManageEXIFTags = sharedPreferences.getStringSet("manageExifTags", new HashSet<String>());
+        //Type setType = new TypeToken<Set<String>>() {}.getType();
+        //Set<String> prefManageEXIFTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
 
         Set<String> redactTags = new HashSet<>(Arrays.asList(
                 context.getResources().getStringArray(R.array.pref_exifTag_values)));

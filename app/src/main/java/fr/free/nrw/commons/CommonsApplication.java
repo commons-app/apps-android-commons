@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Process;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -119,6 +120,8 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
         INSTANCE = this;
         ACRA.init(this);
 
