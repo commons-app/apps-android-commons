@@ -367,7 +367,7 @@ public class UploadModel {
 
 
         public void setMediaDetails(List<UploadMediaDetail> uploadMediaDetails) {
-            this.uploadMediaDetails = this.uploadMediaDetails;
+            this.uploadMediaDetails = uploadMediaDetails;
         }
 
         public Uri getContentUri() {
