@@ -177,9 +177,9 @@
   <string name="navigation_item_notification">Upozornenia</string>
   <string name="no_description_found">nenašiel sa žiaden popis</string>
   <string name="view_browser">Otvoriť v prehliadači</string>
-  <string name="nearby_wikidata">WIKIÚDAJE</string>
-  <string name="nearby_wikipedia">WIKIPÉDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIÚDAJE</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPÉDIA</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Ohodnoťte nás&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="about_translate">&lt;u&gt;Preložiť&lt;/u&gt;</string>

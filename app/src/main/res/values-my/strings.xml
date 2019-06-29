@@ -214,14 +214,14 @@
   <string name="nearby_location_has_not_changed">တည်နေရာ မပြောင်းလဲပါ</string>
   <string name="nearby_location_not_available">တည်နေရာ မရရှိနိုင်ပါ</string>
   <string name="location_permission_rationale_nearby">အနီးအနားနေရာများစာရင်းကို ပြသပေးရန် ခွင့်ပြုချက် လိုအပ်ပါသည်</string>
-  <string name="get_directions">လမ်းညွှန်များ ရယူမည်</string>
-  <string name="read_article">ဆောင်းပါး ဖတ်ရန်</string>
+  <string name="get_directions">လမ်းညွှန်များ ရယူရန်</string>
+  <string name="read_article">ဆောင်းပါး ဖတ်ရှုရန်</string>
   <string name="notifications_welcome">ဝီကီမီဒီယာ ကွန်မွန်းစ်မှ ကြိုဆိုပါသည်၊ %1$s သင် ဤနေရာသို့ရောက်လာသည်ကို ကျွန်ုပ်တို့ ဝမ်းသာပါသည်။</string>
   <string name="notifications_talk_page_message">%1$sက သင်၏ဆွေးနွေးချက် စာမျက်နှာတွင် မက်ဆေ့တစ်ခု ချန်ခဲ့သည်။</string>
   <string name="notifications_thank_you_edit">တည်းဖြတ်မှုတစ်ခု လုပ်ဆောင်သည့်အတွက် ကျေးဇူးတင်ပါသည်</string>
   <string name="notifications_mention">%1$s က %2$s ပေါ်တွင် သင့်ကို ရည်ညွှန်းပြောဆိုခဲ့သည်။</string>
   <string name="nearby_directions">လမ်းညွှန်များ</string>
-  <string name="nearby_wikidata">ဝီကီးဒေတာ</string>
+  <string name="nearby_wikidata">ဝီကီဒေတာ</string>
   <string name="nearby_wikipedia">ဝီကီပီးဒီးယား</string>
   <string name="nearby_commons">ကွန်မွန်းစ်</string>
   <string name="about_faq">&lt;u&gt;မေးလေ့ရှိသည့် မေးခွန်းများ&lt;/u&gt;</string>
@@ -270,7 +270,7 @@
   <string name="delete_search_dialog">ဤရှာဖွေမှုကို ဖျက်လိုပါသလား</string>
   <string name="search_history_deleted">ရှာဖွေမှု ရာဇဝင်အား ဖျက်လိုက်ပါပြီ</string>
   <string name="nominate_delete">ဖျက်ပစ်ရန် အဆိုပြုပါ</string>
-  <string name="delete">ဖျက်ပါ</string>
+  <string name="delete">ဖျက်ရန်</string>
   <string name="Achievements">အောင်မြင်မှုပန်းတိုင်များ</string>
   <string name="statistics">စာရင်းအင်း</string>
   <string name="statistics_thanks">ကျေးဇူးစကား လက်ခံရရှိ</string>

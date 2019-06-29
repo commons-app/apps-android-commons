@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* Fitoschido
 * Xuacu
 -->
 <resources>
@@ -9,6 +10,7 @@
   <string name="preference_category_appearance">Aspeutu</string>
   <string name="preference_category_general">Xeneral</string>
   <string name="preference_category_feedback">La to opinión</string>
+  <string name="preference_category_privacy">Intimidá</string>
   <string name="preference_category_location">Allugamientu</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -271,17 +273,17 @@
   <string name="nearby_location_has_not_changed">L\'allugamientu nun camudó.</string>
   <string name="nearby_location_not_available">L\'allugamientu nun ta disponible.</string>
   <string name="location_permission_rationale_nearby">Ríquese permisu p\'amosar una llista de llugares cercanos</string>
-  <string name="get_directions">CÓMO LLEGAR</string>
-  <string name="read_article">LLEER L\'ARTÍCULU</string>
+  <string name="get_directions">Cómo llegar</string>
+  <string name="read_article">Lleer l\'artículu</string>
   <string name="notifications_welcome">¡Afáyate\'n Wikimedia Commons, %1$s! Préstanos que teas equí.</string>
   <string name="notifications_talk_page_message">%1$s dexó un mensaxe na to páxina d\'alderique</string>
   <string name="notifications_thank_you_edit">Gracies por facer una edición</string>
   <string name="notifications_mention">%1$s te mentó en %2$s.</string>
   <string name="toggle_view_button">Alternar vista</string>
-  <string name="nearby_directions">CÓMO LLEGAR</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions">Cómo llegar</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Puntúanos&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;EMF&lt;/u&gt;</string>
   <string name="welcome_skip_button">Saltar el tutorial</string>
@@ -315,10 +317,10 @@
   <string name="provider_searches">Consultes buscaes apocayá</string>
   <string name="error_loading_categories">Asocedió un error al cargar les categoríes.</string>
   <string name="error_loading_subcategories">Asocedió un error al cargar les subcategoríes.</string>
-  <string name="search_tab_title_media">MULTIMEDIA</string>
-  <string name="search_tab_title_categories">CATEGORÍES</string>
-  <string name="explore_tab_title_featured">DESTACADA</string>
-  <string name="explore_tab_title_mobile">XUBÍO DENDE\'L MÓVIL</string>
+  <string name="search_tab_title_media">Multimedia</string>
+  <string name="search_tab_title_categories">Categoríes</string>
+  <string name="explore_tab_title_featured" fuzzy="true">DESTACADA</string>
+  <string name="explore_tab_title_mobile" fuzzy="true">XUBÍO DENDE\'L MÓVIL</string>
   <string name="successful_wikidata_edit">Añadióse correutamente la imaxe a %1$s en Wikidata.</string>
   <string name="wikidata_edit_failure">Nun pudo anovase la entidá de Wikidata correspondiente.</string>
   <string name="menu_set_wallpaper">Poner como fondu</string>
@@ -352,13 +354,13 @@
   <string name="delete_search_dialog">¿Quies desaniciar esta gueta?</string>
   <string name="search_history_deleted">Desanicióse l\'historial de guetes</string>
   <string name="nominate_delete">Nomar pa desaniciar</string>
-  <string name="delete">DESANICIAR</string>
+  <string name="delete">Desaniciar</string>
   <string name="Achievements">Llogros</string>
-  <string name="statistics">ESTADÍSTIQUES</string>
+  <string name="statistics">Estadístiques</string>
   <string name="statistics_thanks">Agradecimientos recibíos</string>
   <string name="statistics_featured">Imáxenes destacaes</string>
   <string name="statistics_wikidata_edits">Imaxes vía «Sitios Cercanos»</string>
-  <string name="level">NIVEL</string>
+  <string name="level">Nivel</string>
   <string name="images_uploaded">Imáxenes xubíes</string>
   <string name="image_reverts">Imáxenes ensin revertir</string>
   <string name="images_used_by_wiki">Imáxenes utilizaes</string>
@@ -430,5 +432,5 @@
   <string name="send_thank_send">Agradecer</string>
   <string name="send_thank_notification_title">Agradecer</string>
   <string name="send_thank_toast">Unviar agradecimientu por %1$s</string>
-  <string name="skip_image">SALTAR ESTA IMAXE</string>
+  <string name="skip_image">Saltar esta imaxe</string>
 </resources>

@@ -264,17 +264,17 @@
   <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
   <string name="nearby_location_not_available">Konum kullanılamıyor.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
-  <string name="get_directions">TALİMATLAR</string>
-  <string name="read_article">MADDE OKU</string>
+  <string name="get_directions" fuzzy="true">TALİMATLAR</string>
+  <string name="read_article" fuzzy="true">MADDE OKU</string>
   <string name="notifications_welcome">Wikimedia Commons\'a hoşgedin %1$s! Burada olduğun için mutluyuz.</string>
   <string name="notifications_talk_page_message">%1$s mesaj sayfasınıza bir mesaj bıraktı.</string>
   <string name="notifications_thank_you_edit">Düzenlemeniz için teşekkürler</string>
   <string name="notifications_mention">%1$s , %2$s \'de senden bahsetti</string>
   <string name="toggle_view_button">Görünümü değiştir</string>
-  <string name="nearby_directions">YOL TARİFİ</string>
-  <string name="nearby_wikidata">VİKİVERİ</string>
-  <string name="nearby_wikipedia">VİKİPEDİ</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions" fuzzy="true">YOL TARİFİ</string>
+  <string name="nearby_wikidata" fuzzy="true">VİKİVERİ</string>
+  <string name="nearby_wikipedia" fuzzy="true">VİKİPEDİ</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Bizi oyla&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;SSS&lt;/u&gt;</string>
   <string name="welcome_skip_button">Eğiticiyi Atla</string>
@@ -306,7 +306,7 @@
   <string name="provider_searches">Son aranan sorgular</string>
   <string name="error_loading_categories">Kategoriler yüklenirken hata oluştu.</string>
   <string name="error_loading_subcategories">Alt kategoriler yüklenirken hata oluştu.</string>
-  <string name="search_tab_title_categories">KATEGORILER</string>
+  <string name="search_tab_title_categories" fuzzy="true">KATEGORILER</string>
   <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
   <string name="menu_set_wallpaper">Duvar kağıdı olarak ayarla</string>
@@ -340,12 +340,12 @@
   <string name="delete_search_dialog">Bu aramayı silmek istiyor musunuz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
   <string name="nominate_delete">Silinmeye aday göster</string>
-  <string name="delete">SİL</string>
+  <string name="delete" fuzzy="true">SİL</string>
   <string name="Achievements">Başarılar</string>
-  <string name="statistics">İSTATİSTİKLER</string>
+  <string name="statistics" fuzzy="true">İSTATİSTİKLER</string>
   <string name="statistics_thanks">Alınan Teşekkürler</string>
   <string name="statistics_featured">Öne Çıkan Görüntüler</string>
-  <string name="level">SEVİYE</string>
+  <string name="level" fuzzy="true">SEVİYE</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Görüntüler Geri Dönülmedi</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>

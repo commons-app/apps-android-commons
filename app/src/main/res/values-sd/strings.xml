@@ -214,16 +214,16 @@
   <string name="nearby_location_has_not_changed">مڪانيت تبديلي ناھي ٿي.</string>
   <string name="nearby_location_not_available">مڪانيت موجود ناھي.</string>
   <string name="location_permission_rationale_nearby">ويجھين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گھربل آھي</string>
-  <string name="get_directions">ھدايتون وٺو</string>
-  <string name="read_article">مضمون پڙھو</string>
+  <string name="get_directions" fuzzy="true">ھدايتون وٺو</string>
+  <string name="read_article" fuzzy="true">مضمون پڙھو</string>
   <string name="notifications_welcome">وڪيپيڊيا ڪامنز ۾ ڀليڪار، %1$s! اسان کي خوشي آهي ته اوهان هتي آهيو</string>
   <string name="notifications_talk_page_message">%1$s اوهان جي بحث واري صفحي تي پيغام ڇڏيو آهي.</string>
   <string name="notifications_thank_you_edit">سنوارڻ لاءِ مهرباني</string>
   <string name="notifications_mention">%1$s اوهان جو %2$s تي ذڪر ڪيو آهي.</string>
-  <string name="nearby_directions">طرف</string>
-  <string name="nearby_wikidata">وڪيڊيٽا</string>
-  <string name="nearby_wikipedia">وڪيپيڊيا</string>
-  <string name="nearby_commons">ڪامنز</string>
+  <string name="nearby_directions" fuzzy="true">طرف</string>
+  <string name="nearby_wikidata" fuzzy="true">وڪيڊيٽا</string>
+  <string name="nearby_wikipedia" fuzzy="true">وڪيپيڊيا</string>
+  <string name="nearby_commons" fuzzy="true">ڪامنز</string>
   <string name="about_rate_us">&lt;u&gt;پذيرائي ڏيو&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;عام سوال&lt;/u&gt;</string>
   <string name="welcome_skip_button">سبق کي ڇڏيو</string>
@@ -252,7 +252,7 @@
   <string name="continue_message">جاري رکو</string>
   <string name="share_app_title">ايپ ونڊيو</string>
   <string name="search_history_deleted">ڳولا سوانح ڊاٿي وئي</string>
-  <string name="statistics">انگ اکر</string>
+  <string name="statistics" fuzzy="true">انگ اکر</string>
   <string name="error_occurred">خلل ٿيو!</string>
   <string name="write_storage_permission_rationale_for_image_share">اسان کي اوهان جي ڊوائس جي اسٽورج جي اجازت گھرجي جيئن تصويرون چاڙهي سگھجن.</string>
 </resources>

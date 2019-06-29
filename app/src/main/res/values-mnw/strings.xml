@@ -114,13 +114,13 @@
   <string name="nominated_for_deletion">ဗီုရုပ်ဏအ် ဒးဒုၚ်ရုဲပတိုန်သမ္တီလတ် သ္ဂောအ် ပလီုရ.</string>
   <string name="skip_login">သလာ်</string>
   <string name="navigation_item_login">လုပ်လံက်အေန်</string>
-  <string name="read_article">ဗှ် လိက်ပရေၚ်</string>
+  <string name="read_article" fuzzy="true">ဗှ် လိက်ပရေၚ်</string>
   <string name="notifications_welcome">ဒုၚ်တၠုၚ်နူ ဝဳကဳမဳဒဳယာ Commons, %1$s! ပိုယ်တအ် မိပ်စိုပ် ဂွံဆဵုကေတ်မၞး ဒၞာဲဏအ်.</string>
   <string name="notifications_talk_page_message">%1$s စွံဏာ ပိုဒ်လိက် ပ္ဍဲမုက်လိက်ဓရီုကျာမၞး မွဲ</string>
   <string name="notifications_thank_you_edit">တၚ်ဂုဏ် ကုမၞး မသ္ပပလေဝ်ဒါန်</string>
-  <string name="nearby_wikidata">ဝဳကဳဒေတ</string>
-  <string name="nearby_wikipedia">ဝဳကဳပဳဒဳယာ</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_wikidata" fuzzy="true">ဝဳကဳဒေတ</string>
+  <string name="nearby_wikipedia" fuzzy="true">ဝဳကဳပဳဒဳယာ</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="about_translate">&lt;u&gt;တြာဲကၠာဲ&lt;/u&gt;</string>
   <string name="about_translate_title">အရေဝ်ဘာသာဂမၠိုင်</string>
@@ -139,6 +139,6 @@
   <string name="correct">သွဟ်မဍာံ</string>
   <string name="wrong">သွဟ် မဗၠေတ်</string>
   <string name="add_description">+ ထပ် မဗၟံက်ထ္ၜး</string>
-  <string name="level">ကဆံၚ်</string>
+  <string name="level" fuzzy="true">ကဆံၚ်</string>
   <string name="images_uploaded">ဗီုရုပ် မတိုန်လဝ်</string>
 </resources>

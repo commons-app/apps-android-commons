@@ -271,17 +271,17 @@
   <string name="nearby_location_has_not_changed">Ël leu a l\'é nen cangià.</string>
   <string name="nearby_location_not_available">Leu nen disponìbil.</string>
   <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
-  <string name="get_directions">OTEN-E D\'ANSTRUSSION</string>
-  <string name="read_article">LESE L\'ARTÌCOL</string>
+  <string name="get_directions" fuzzy="true">OTEN-E D\'ANSTRUSSION</string>
+  <string name="read_article" fuzzy="true">LESE L\'ARTÌCOL</string>
   <string name="notifications_welcome">Bin-ëvnù an Wikimedia Commons, %1$s! I soma content ëd vëdd-lo sì.</string>
   <string name="notifications_talk_page_message">%1$s a l\'ha lassà un mëssagi su soa pàgina ëd ciaciarade</string>
   <string name="notifications_thank_you_edit">Mersì d\'avèj fàit na modìfica</string>
   <string name="notifications_mention">%1$s a l\'ha massionalo su %2$s .</string>
   <string name="toggle_view_button">Cangé la visualisassion</string>
-  <string name="nearby_directions">DIRESSION</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMUN</string>
+  <string name="nearby_directions" fuzzy="true">DIRESSION</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
+  <string name="nearby_commons" fuzzy="true">COMUN</string>
   <string name="about_rate_us">&lt;u&gt;Ch\'an vàluta&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Chestion frequente&lt;/u&gt;</string>
   <string name="welcome_skip_button">Sauté lë spiegon</string>
@@ -315,10 +315,10 @@
   <string name="provider_searches">Domande arsercà ëd recent</string>
   <string name="error_loading_categories">A l\'é ancapitaje n\'eror antramentre ch\'as cariavo le categorìe.</string>
   <string name="error_loading_subcategories">A l\'é ancapitaje n\'eror antrametre ch\'as cariavo le sot-categorìe.</string>
-  <string name="search_tab_title_media">MOJEN</string>
-  <string name="search_tab_title_categories">CATEGORÌE</string>
-  <string name="explore_tab_title_featured">AN EVIDENSA</string>
-  <string name="explore_tab_title_mobile">CARIÀ DA SACOCIÀBIL</string>
+  <string name="search_tab_title_media" fuzzy="true">MOJEN</string>
+  <string name="search_tab_title_categories" fuzzy="true">CATEGORÌE</string>
+  <string name="explore_tab_title_featured" fuzzy="true">AN EVIDENSA</string>
+  <string name="explore_tab_title_mobile" fuzzy="true">CARIÀ DA SACOCIÀBIL</string>
   <string name="successful_wikidata_edit">Plancia giontà për da bin a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd Wikidata corëspondenta!</string>
   <string name="menu_set_wallpaper">Definì \'me tapissarìa</string>
@@ -352,13 +352,13 @@
   <string name="delete_search_dialog">Veul-lo dëscancelé costa arserca?</string>
   <string name="search_history_deleted">Lë stòrich ëd j\'arserche a l\'é stàit dëscancelà</string>
   <string name="nominate_delete">Propon-e për la scancelassion</string>
-  <string name="delete">DËSCANCELÉ</string>
+  <string name="delete" fuzzy="true">DËSCANCELÉ</string>
   <string name="Achievements">Realisassion</string>
-  <string name="statistics">STATÌSTICHE</string>
+  <string name="statistics" fuzzy="true">STATÌSTICHE</string>
   <string name="statistics_thanks">Aringrassiament arseivù</string>
   <string name="statistics_featured">Plance an evidensa</string>
   <string name="statistics_wikidata_edits">Plance për \"Pòst davzin\"</string>
-  <string name="level">LIVEL</string>
+  <string name="level" fuzzy="true">LIVEL</string>
   <string name="images_uploaded">Plance carià</string>
   <string name="image_reverts">Plance nen anulà</string>
   <string name="images_used_by_wiki">Plance dovrà</string>
@@ -504,7 +504,7 @@
   <string name="previous_button_tooltip_message">Ch\'a sgnaca për dovré torna ël tìtol e la descrission ch\'a l\'ha butà an soa plancia precedenta e modificheje për ch\'a corëspondo a cola atual</string>
   <string name="welcome_do_upload_content_description">Esempi ëd plance bon-e da carié su Commons</string>
   <string name="welcome_dont_upload_content_description">Esempi ëd plance da nen carié</string>
-  <string name="skip_image">SAUTÉ COSTA PLANCIA</string>
+  <string name="skip_image" fuzzy="true">SAUTÉ COSTA PLANCIA</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Dëscariament falì! I podoma nen dëscarié l\'archivi sensa ël përmess dël depòsit estern.</string>
   <string name="share_text">Carié dle fòto su Wikimedia Commons da sò teléfon Dëscarié l\'aplicassion Commons: %1$s</string>
   <string name="share_via">Partagé l\'aplicassion via...</string>
