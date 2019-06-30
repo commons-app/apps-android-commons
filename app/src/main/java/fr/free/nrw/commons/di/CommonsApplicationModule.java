@@ -100,7 +100,6 @@ public class CommonsApplicationModule {
      * @param context context
      * @return DepictsContentProviderClient*/
 
-    @Nullable
     @Provides
     @Named("depicts")
     public ContentProviderClient provideDepictsContentProviderClient(Context context) {

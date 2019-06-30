@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
-import java.util.Observable;
 
 import fr.free.nrw.commons.mwapi.CustomApiResult;
 import retrofit2.Call;

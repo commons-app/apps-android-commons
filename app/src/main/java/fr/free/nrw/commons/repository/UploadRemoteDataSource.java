@@ -192,4 +192,25 @@ public class UploadRemoteDataSource {
     public void onDepictedItemClicked(DepictedItem depictedItem) {
         depictModel.onDepictItemClicked(depictedItem);
     }
+
+    /**
+     * returns the list of selected depictions
+     * @return
+     */
+
+    public List<DepictedItem> getSelectedDepictions() {
+        return depictModel.getSelectedDepictions();
+    }
+
+    /**
+     * get all depictions
+     *
+     * @param query
+     * @param imageTitleList
+     * @return
+     */
+
+    public Observable<DepictedItem> searchAllEntities(String query, List<String> imageTitleList) {
+        return depictModel.searchAllEntities(query, imageTitleList);
+    }
 }

@@ -109,6 +109,8 @@ public interface MediaWikiApi {
 
     boolean thank(String editToken, long revision) throws IOException;
 
+    Observable<String> searchDepictions(String query, int searchDepictsLimit);
+
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }

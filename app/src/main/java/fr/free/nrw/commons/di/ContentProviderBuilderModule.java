@@ -8,7 +8,6 @@ import fr.free.nrw.commons.category.CategoryContentProvider;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
-import fr.free.nrw.commons.upload.structure.depicts.DepictsContentProvider;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -22,9 +21,6 @@ public abstract class ContentProviderBuilderModule {
 
     @ContributesAndroidInjector
     abstract CategoryContentProvider bindCategoryContentProvider();
-
-    @ContributesAndroidInjector
-    abstract DepictsContentProvider bindDepictsContentProvider();
 
     @ContributesAndroidInjector
     abstract RecentSearchesContentProvider bindRecentSearchesContentProvider();

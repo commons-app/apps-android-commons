@@ -398,6 +398,38 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }).flatMapObservable(Observable::fromIterable);
     }
 
+    @NonNull
+    @Override
+    public Observable<String> searchDepictions (String query, int searchDepictsLimit) {
+        return Single.fromCallable(() -> {
+            ArrayList<CustomApiResult> depictionNodes = null;
+            try {
+                depictionNodes = wikidataApi.action("wbsearchentities")
+                        .param("search", "allcategories")
+                        .param("format", "json")
+                        .param("language", "en")
+                        .param("uselang","en")
+                        .param("type","item")
+                        .param("limit", searchDepictsLimit)
+                        .get()
+                        .getNodes("/api/query/allcategories/c");
+            } catch (IOException e) {
+                Timber.e(e, "Failed to obtain allCategories");
+            }
+
+            if (depictionNodes == null) {
+                return new ArrayList<String>();
+            }
+
+            List<String> categories = new ArrayList<>();
+            for (CustomApiResult categoryNode : depictionNodes) {
+                categories.add(categoryNode.getDocument().getTextContent());
+            }
+
+            return categories;
+        }).flatMapObservable(Observable::fromIterable);
+    }
+
     @Override
     public String getWikidataCsrfToken() throws IOException {
         String wikidataCsrfToken = wikidataApi.action("query")

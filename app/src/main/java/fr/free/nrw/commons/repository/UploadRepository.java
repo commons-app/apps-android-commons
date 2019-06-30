@@ -269,4 +269,26 @@ public class UploadRepository {
     public void onDepictItemClicked(DepictedItem depictedItem) {
         remoteDataSource.onDepictedItemClicked(depictedItem);
     }
+
+    /**
+     * Fetches and returns the selected depictions for the current upload
+     *
+     * @return
+     */
+
+    public List<DepictedItem> getSelectedDepictions() {
+        return remoteDataSource.getSelectedDepictions();
+    }
+
+    /**
+     * earch all depictions from
+     *
+     * @param query
+     * @param imageTitleList
+     * @return
+     */
+
+    public Observable<DepictedItem> searchAllEntities(String query, List<String> imageTitleList) {
+        return remoteDataSource.searchAllEntities(query, imageTitleList);
+    }
 }
