@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.media;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -21,25 +24,13 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
-
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.util.DateUtil;
-import org.wikipedia.util.StringUtil;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -57,10 +48,14 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import javax.inject.Inject;
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
+import org.wikipedia.util.StringUtil;
 import timber.log.Timber;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
@@ -134,7 +129,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
-    private DataSetObserver dataObserver;
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
@@ -232,34 +226,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(getParentFragment()!=null && getParentFragment().getParentFragment()!=null) {
+        if (getParentFragment() != null && getParentFragment().getParentFragment() != null) {
             //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
             // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
-            ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNotificationCardView
-                .setVisibility(View.GONE);
+            ((ContributionsFragment) (getParentFragment()
+                    .getParentFragment())).nearbyNotificationCardView
+                    .setVisibility(View.GONE);
         }
         media = detailProvider.getMediaAtPosition(index);
-        if (media == null) {
-            // Ask the detail provider to ping us when we're ready
-            Timber.d("MediaDetailFragment not yet ready to display details; registering observer");
-            dataObserver = new DataSetObserver() {
-                @Override
-                public void onChanged() {
-                    if (!isAdded()) {
-                        return;
-                    }
-                    Timber.d("MediaDetailFragment ready to display delayed details!");
-                    detailProvider.unregisterDataSetObserver(dataObserver);
-                    dataObserver = null;
-                    media=detailProvider.getMediaAtPosition(index);
-                    displayMediaDetails();
-                }
-            };
-            detailProvider.registerDataSetObserver(dataObserver);
-        } else {
-            Timber.d("MediaDetailFragment ready to display details");
-            displayMediaDetails();
-        }
+        displayMediaDetails();
     }
 
     private void displayMediaDetails() {
@@ -300,10 +275,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
             scrollListener = null;
         }
-        if (dataObserver != null) {
-            detailProvider.unregisterDataSetObserver(dataObserver);
-            dataObserver = null;
-        }
+
         compositeDisposable.clear();
         super.onDestroyView();
     }

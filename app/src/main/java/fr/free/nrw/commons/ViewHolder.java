@@ -1,7 +1,8 @@
 package fr.free.nrw.commons;
 
-import android.content.Context;
+import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 
 public interface ViewHolder<T> {
-    void bindModel(Context context, T model);
+    void init(int position,
+            DisplayableContribution contribution);
 }

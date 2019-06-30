@@ -113,6 +113,8 @@ public class CommonsApplication extends Application {
         return languageLookUpTable;
     }
 
+    private static Context context;
+
     /**
      * Used to declare and initialize various components and dependencies
      */
@@ -120,6 +122,7 @@ public class CommonsApplication extends Application {
     public void onCreate() {
         super.onCreate();
         INSTANCE = this;
+        context=getApplicationContext();
         ACRA.init(this);
 
         ApplicationlessInjection
@@ -155,6 +158,15 @@ public class CommonsApplication extends Application {
         }
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
+    }
+
+
+    /**
+     * Returns application context
+     * @return
+     */
+    public static Context getContext() {
+        return context;
     }
 
     /**
