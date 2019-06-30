@@ -127,7 +127,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         init();
     }
 
-    private void init() {
+    public void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps()));
         //title = new Title();
@@ -265,6 +265,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         descriptions = uploadItem.getUploadMediaDetails();
+        if (place != null) {
+            String languageCode = Locale.getDefault().getLanguage();
+            uploadItem.getUploadMediaDetails().get(0).setLanguageCode(languageCode);
+            uploadItem.getUploadMediaDetails().get(0).setCaptionText(place.name);
+        }
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
         setDescriptionsInAdapter(descriptions);
     }

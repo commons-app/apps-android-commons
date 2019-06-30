@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -164,8 +165,10 @@ public class UploadModel {
                 createdTimestampSource);
         if (place != null) {
             uploadItem.title.setTitleText(place.name);
-            uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
-            uploadItem.uploadMediaDetails.get(0).setLanguageCode("en");
+            String languageCode = Locale.getDefault().getLanguage();
+                        uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
+            uploadItem.uploadMediaDetails.get(0).setLanguageCode(languageCode);
+            uploadItem.uploadMediaDetails.get(0).setCaptionText(place.name);
         }
         if (!items.contains(uploadItem)) {
             items.add(uploadItem);

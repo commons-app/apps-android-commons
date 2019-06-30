@@ -51,7 +51,7 @@ public class UploadMediaDetail {
     /**
      * @param languageCode The language code ie. "en" or "fr"
      */
-    void setLanguageCode(String languageCode) {
+    public void setLanguageCode(String languageCode) {
         this.languageCode = languageCode;
     }
 

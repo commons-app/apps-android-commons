@@ -61,7 +61,6 @@ public class DepictDao {
             if (cursor != null && cursor.moveToFirst()) {
                 return fromCursor(cursor);
             }
-            db.release();
         } catch (RemoteException e) {
             // This feels lazy, but to hell with checked exceptions. :)
             throw new RuntimeException(e);
@@ -69,6 +68,7 @@ public class DepictDao {
             if (cursor != null) {
                 cursor.close();
             }
+            db.release();
         }
         return null;
     }

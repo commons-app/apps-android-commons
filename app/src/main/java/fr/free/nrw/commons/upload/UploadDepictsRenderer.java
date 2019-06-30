@@ -35,6 +35,7 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
         ButterKnife.bind(this, rootView);
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void hookListeners(View rootView) {
         rootView.setOnClickListener(v -> {
