@@ -114,22 +114,17 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder implements V
             return;
         }
 
-        if (contribution.getState() != Contribution.STATE_COMPLETED) {
-            thumbnailCache.put(keyForLRUCache, contribution.getLocalUri().toString());
-            imageView.setImageURI(contribution.getLocalUri());
-        } else {
-            imageView.setImageResource(-1);
-            Timber.d("Fetching thumbnail for %s", contribution.getFilename());
-            Disposable disposable = mediaDataExtractor
-                    .getMediaFromFileName(contribution.getFilename())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(media -> {
-                        thumbnailCache.put(keyForLRUCache, media.getThumbUrl());
-                        imageView.setImageURI(media.getThumbUrl());
-                    });
-            compositeDisposable.add(disposable);
-        }
+        imageView.setImageRequest(null);
+        Timber.d("Fetching thumbnail for %s", contribution.getFilename());
+        Disposable disposable = mediaDataExtractor
+                .getMediaFromFileName(contribution.getFilename())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(media -> {
+                    thumbnailCache.put(keyForLRUCache, media.getThumbUrl());
+                    imageView.setImageURI(media.getThumbUrl());
+                });
+        compositeDisposable.add(disposable);
 
     }
 
