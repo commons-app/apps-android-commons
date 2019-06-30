@@ -2,7 +2,9 @@ package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
+import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
@@ -24,6 +26,9 @@ public class ContributionsPresenter extends DataSetObserver implements UserActio
     private final ContributionsRepository repository;
     private ContributionsContract.View view;
     private Cursor cursor;
+
+    @Inject
+    Context context;
 
     @Inject
     ContributionsPresenter(ContributionsRepository uploadRepository) {
@@ -57,10 +62,11 @@ public class ContributionsPresenter extends DataSetObserver implements UserActio
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new CursorLoader(CommonsApplication.getContext(), BASE_URI,
+        int preferredNumberOfUploads = repository.get(UPLOADS_SHOWING);
+        return new CursorLoader(context, BASE_URI,
                 ALL_FIELDS, "", null,
                 ContributionDao.CONTRIBUTION_SORT + "LIMIT "
-                        + /*repository.get(UPLOADS_SHOWING)*/100);
+                        + (preferredNumberOfUploads>0?preferredNumberOfUploads:100));
     }
 
     @Override
