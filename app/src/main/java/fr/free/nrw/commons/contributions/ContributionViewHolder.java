@@ -21,6 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
@@ -114,18 +115,38 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder implements V
             return;
         }
 
-        imageView.setImageRequest(null);
-        Timber.d("Fetching thumbnail for %s", contribution.getFilename());
-        Disposable disposable = mediaDataExtractor
-                .getMediaFromFileName(contribution.getFilename())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(media -> {
-                    thumbnailCache.put(keyForLRUCache, media.getThumbUrl());
-                    imageView.setImageURI(media.getThumbUrl());
-                });
-        compositeDisposable.add(disposable);
+        imageView.setBackground(null);
+        if ((contribution.getState() != Contribution.STATE_COMPLETED) && fileExists(
+                contribution.getLocalUri())) {
+            imageView.setImageURI(contribution.getLocalUri());
+        }else {
+            Timber.d("Fetching thumbnail for %s", contribution.getFilename());
+            Disposable disposable = mediaDataExtractor
+                    .getMediaFromFileName(contribution.getFilename())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(media -> {
+                        thumbnailCache.put(keyForLRUCache, media.getThumbUrl());
+                        imageView.setImageURI(media.getThumbUrl());
+                    });
+            compositeDisposable.add(disposable);
+        }
 
+    }
+
+    /**
+     * Check if file exists in local dirs
+     * @param localUri
+     * @return
+     */
+    private boolean fileExists(Uri localUri) {
+        try {
+            File file = new File(localUri.getPath());
+            return file.exists();
+        } catch (Exception e) {
+            Timber.d(e);
+            return false;
+        }
     }
 
     /**
