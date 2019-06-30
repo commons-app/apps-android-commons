@@ -273,17 +273,17 @@
   <string name="nearby_location_has_not_changed">Lokasi can robah</string>
   <string name="nearby_location_not_available">Lokasi teu sayaga</string>
   <string name="location_permission_rationale_nearby">Idin diperlukeun pikeun midangkeun daptar tempat disabudeureun</string>
-  <string name="get_directions">MUNDUT ARAH</string>
-  <string name="read_article">BACA ARTIKEL</string>
+  <string name="get_directions" fuzzy="true">MUNDUT ARAH</string>
+  <string name="read_article" fuzzy="true">BACA ARTIKEL</string>
   <string name="notifications_welcome">Wilujeng Sumping di Wikimedia Commons, %1$s! Bungah pisan ku ayana anjeun.</string>
   <string name="notifications_talk_page_message">%1$s ninggalkeun talatah di kaca obrolan anjeun</string>
   <string name="notifications_thank_you_edit">Hatur nuhun geus ngédit</string>
   <string name="notifications_mention">%1$s ngagero anjeun di %2$s.</string>
   <string name="toggle_view_button">Pidangan tugel</string>
-  <string name="nearby_directions">ARAH</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions" fuzzy="true">ARAH</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Béré peunteun&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;NLD&lt;/u&gt;</string>
   <string name="welcome_skip_button">Liwatan Tutorial</string>
@@ -315,10 +315,10 @@
   <string name="provider_searches">Kuéri pamaluran kiwari</string>
   <string name="error_loading_categories">Éror pas muat kategori.</string>
   <string name="error_loading_subcategories">Éror pas muat subkategori.</string>
-  <string name="search_tab_title_media">MÉDIA</string>
-  <string name="search_tab_title_categories">KATEGORI</string>
-  <string name="explore_tab_title_featured">PETINGAN</string>
-  <string name="explore_tab_title_mobile">DIUNJAL LIWAT MOBILE</string>
+  <string name="search_tab_title_media" fuzzy="true">MÉDIA</string>
+  <string name="search_tab_title_categories" fuzzy="true">KATEGORI</string>
+  <string name="explore_tab_title_featured" fuzzy="true">PETINGAN</string>
+  <string name="explore_tab_title_mobile" fuzzy="true">DIUNJAL LIWAT MOBILE</string>
   <string name="successful_wikidata_edit">Gambar ngahasil ditambahkeun ka %1$s di Wikidata!</string>
   <string name="wikidata_edit_failure">Gagal ngarobah éntitas Wikidata nu patali!</string>
   <string name="menu_set_wallpaper">Jadikeun Wallpaper</string>
@@ -346,13 +346,13 @@
   <string name="delete_search_dialog">Yakin rék miceun ieu pamaluruhan?</string>
   <string name="search_history_deleted">Jujutan pamaluruhan dipiceun</string>
   <string name="nominate_delete">Nominasi Pikeun Dipupus</string>
-  <string name="delete">PUPUS</string>
+  <string name="delete" fuzzy="true">PUPUS</string>
   <string name="Achievements">Préstasi</string>
-  <string name="statistics">STATISTIK</string>
+  <string name="statistics" fuzzy="true">STATISTIK</string>
   <string name="statistics_thanks">Panuhun Katampa</string>
   <string name="statistics_featured">Gambar petingan</string>
   <string name="statistics_wikidata_edits">Gambar liwat \"Tempat Sabudeureun\"</string>
-  <string name="level">UNDAK</string>
+  <string name="level" fuzzy="true">UNDAK</string>
   <string name="images_uploaded">Gambar Diunjal</string>
   <string name="image_reverts">Gambar Teu Dibalikkeun</string>
   <string name="images_used_by_wiki">Gambar Dipaké</string>
@@ -449,6 +449,7 @@
   <string name="please_wait">Mangga tungguan...</string>
   <string name="previous_image_caption_description">Tiron judul &amp; pedaran saméméhna</string>
   <string name="skip_image">LIWATAN IEU GAMBAR</string>
+  <string name="previous_image_title_description">Tiron judul &amp; pedaran saméméhna</string>
   <string name="share_via">Bagikeun app liwat...</string>
   <string name="image_info">Info Gambar</string>
 </resources>

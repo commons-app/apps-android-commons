@@ -277,17 +277,17 @@
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
-  <string name="get_directions">RICHTUNGEN ABRUFEN</string>
-  <string name="read_article">ARTIKEL LESEN</string>
+  <string name="get_directions" fuzzy="true">RICHTUNGEN ABRUFEN</string>
+  <string name="read_article" fuzzy="true">ARTIKEL LESEN</string>
   <string name="notifications_welcome">Willkommen auf Wikimedia Commons, %1$s! Wir sind froh, dass du hier bist.</string>
   <string name="notifications_talk_page_message">%1$s hinterließ eine Nachricht auf deiner Diskussionsseite</string>
   <string name="notifications_thank_you_edit">Vielen Dank für deine Bearbeitung</string>
   <string name="notifications_mention">%1$s erwähnte dich auf %2$s.</string>
   <string name="toggle_view_button">Ansicht wechseln</string>
-  <string name="nearby_directions">RICHTUNGEN</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions" fuzzy="true">RICHTUNGEN</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Bewerte uns&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Häufig gestellte Fragen&lt;/u&gt;</string>
   <string name="welcome_skip_button">Tutorial überspringen</string>
@@ -321,10 +321,10 @@
   <string name="provider_searches">Letzte Suchanfragen</string>
   <string name="error_loading_categories">Beim Laden der Kategorien ist ein Fehler aufgetreten.</string>
   <string name="error_loading_subcategories">Beim Laden der Unterkategorien ist ein Fehler aufgetreten.</string>
-  <string name="search_tab_title_media">MEDIEN</string>
-  <string name="search_tab_title_categories">KATEGORIEN</string>
-  <string name="explore_tab_title_featured">VORGESTELLT</string>
-  <string name="explore_tab_title_mobile">ÜBER MOBIL HOCHGELADEN</string>
+  <string name="search_tab_title_media" fuzzy="true">MEDIEN</string>
+  <string name="search_tab_title_categories" fuzzy="true">KATEGORIEN</string>
+  <string name="explore_tab_title_featured" fuzzy="true">VORGESTELLT</string>
+  <string name="explore_tab_title_mobile" fuzzy="true">ÜBER MOBIL HOCHGELADEN</string>
   <string name="successful_wikidata_edit">Bild erfolgreich nach %1$s auf Wikidata hinzugefügt!</string>
   <string name="wikidata_edit_failure">Fehler bei der Aktualisierung des dazugehörigen Wikidata-Objekts!</string>
   <string name="menu_set_wallpaper">Als Hintergrundbild festlegen</string>
@@ -358,13 +358,13 @@
   <string name="delete_search_dialog">Möchtest du diese Suche löschen?</string>
   <string name="search_history_deleted">Suchverlauf gelöscht</string>
   <string name="nominate_delete">Zur Löschung vorschlagen</string>
-  <string name="delete">LÖSCHEN</string>
+  <string name="delete" fuzzy="true">LÖSCHEN</string>
   <string name="Achievements">Errungenschaften</string>
-  <string name="statistics">STATISTIKEN</string>
+  <string name="statistics" fuzzy="true">STATISTIKEN</string>
   <string name="statistics_thanks">Erhaltene Dankeschöns</string>
   <string name="statistics_featured">Vorgestellte Bilder</string>
   <string name="statistics_wikidata_edits">Bilder über „Orte in der Nähe“</string>
-  <string name="level">NIVEAU</string>
+  <string name="level" fuzzy="true">NIVEAU</string>
   <string name="images_uploaded">Hochgeladene Bilder</string>
   <string name="image_reverts">Bilder nicht zurückgesetzt</string>
   <string name="images_used_by_wiki">Verwendete Bilder</string>
@@ -510,7 +510,7 @@
   <string name="previous_button_tooltip_message">Klicke, um den Titel und die Beschreibung des vorherigen Bildes wieder zu verwenden und verändere sie, damit dein aktuelles Bild passt.</string>
   <string name="welcome_do_upload_content_description">Beispiele guter Bilder zum Hochladen auf Commons</string>
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
-  <string name="skip_image">DIESES BILD ÜBERSPRINGEN</string>
+  <string name="skip_image" fuzzy="true">DIESES BILD ÜBERSPRINGEN</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fehlgeschlagen! Wir konnten die Datei nicht ohne externe Speicherberechtigung herunterladen!</string>
   <string name="share_text">Lade Fotos von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App herunter: %1$s</string>
   <string name="share_via">App teilen über …</string>

@@ -185,19 +185,24 @@
   <string name="send_log_file_description" fuzzy="true">Envia el registre als desenvolupadors per correu</string>
   <string name="nearby_location_has_not_changed">La ubicació no ha canviat.</string>
   <string name="nearby_location_not_available">La ubicació no és disponible.</string>
-  <string name="get_directions">COM ANAR-HI</string>
-  <string name="read_article">LLEGIU L’ARTICLE</string>
+  <string name="get_directions">Com anar-hi</string>
+  <string name="read_article">Llegeix l’article</string>
   <string name="notifications_thank_you_edit">Gràcies per fer una modificació</string>
   <string name="notifications_mention" fuzzy="true">%1$s us ha mencionat a %2$s.</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Viquipèdia</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_faq" fuzzy="true">Preguntes freqüents</string>
   <string name="no_images_found">No s’ha trobat cap imatge.</string>
-  <string name="search_tab_title_media">MULTIMÈDIA</string>
-  <string name="search_tab_title_categories">CATEGORIES</string>
-  <string name="explore_tab_title_featured">DESTACATS</string>
-  <string name="explore_tab_title_mobile">PUJATS MITJANÇANT EL MÒBIL</string>
+  <string name="search_tab_title_media">Multimèdia</string>
+  <string name="search_tab_title_categories">Categories</string>
+  <string name="explore_tab_title_featured">Destacats</string>
+  <string name="explore_tab_title_mobile">Penjats mitjançant el mòbil</string>
   <string name="no_recent_searches">No hi ha cap cerca recent</string>
   <string name="delete_search_dialog">Voleu suprimir aquesta cerca?</string>
-  <string name="delete">SUPRIMEIX</string>
+  <string name="delete">Suprimeix</string>
+  <string name="statistics">Estadístiques</string>
+  <string name="level">Nivell</string>
   <string name="nominate_for_deletion_done">Fet</string>
   <string name="review_copyright_yes_button_text" fuzzy="true">NO, VIOLACIÓ DE DRETS D’AUTOR</string>
   <string name="review_thanks_yes_button_text">I tant</string>

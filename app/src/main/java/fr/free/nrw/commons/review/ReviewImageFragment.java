@@ -10,26 +10,26 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
 
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
-    public static final int SPAM = 0;
-    public static final int COPYRIGHT = 1;
-    public static final int CATEGORY = 2;
-    public static final int THANKS = 3;
+    static final int CATEGORY = 2;
+    private static final int SPAM = 0;
+    private static final int COPYRIGHT = 1;
+    private static final int THANKS = 3;
 
     private int position;
-    private String fileName;
-    private String catString;
 
     public ProgressBar progressBar;
-    private MwQueryPage.Revision revision;
 
     @BindView(R.id.tv_review_question)
     TextView textViewQuestion;
@@ -40,24 +40,21 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.button_no)
     Button noButton;
 
-
-    public void update(int position, String fileName) {
+    public void update(int position) {
         this.position = position;
-        this.fileName = fileName;
-
     }
 
-    public void updateCategories(Iterable<String> categories) {
-        if (categories != null && isAdded()) {
-            catString = TextUtils.join(", ", categories);
+    private String updateCategoriesQuestion() {
+        Media media = getReviewActivity().getMedia();
+        if (media != null && media.getCategories() != null && isAdded()) {
+            String catString = TextUtils.join(", ", media.getCategories());
             if (catString != null && !catString.equals("") && textViewQuestionContext != null) {
                 catString = "<b>" + catString + "</b>";
                 String stringToConvertHtml = String.format(getResources().getString(R.string.review_category_explanation), catString);
-                textViewQuestionContext.setText(Html.fromHtml(stringToConvertHtml));
-            } else if (textViewQuestionContext != null) {
-                textViewQuestionContext.setText(getResources().getString(R.string.review_no_category));
+                return Html.fromHtml(stringToConvertHtml).toString();
             }
         }
+        return getResources().getString(R.string.review_no_category);
     }
 
     @Override
@@ -75,29 +72,34 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
         String question, explanation, yesButtonText, noButtonText;
         switch (position) {
-            case COPYRIGHT:
-                question = getString(R.string.review_copyright);
-                explanation = getString(R.string.review_copyright_explanation);
-                yesButtonText = getString(R.string.review_copyright_yes_button_text);
-                noButtonText = getString(R.string.review_copyright_no_button_text);
-                yesButton.setOnClickListener(view -> getReviewActivity().reviewController.reportPossibleCopyRightViolation(requireActivity()));
-                break;
-            case CATEGORY:
-                question = getString(R.string.review_category);
-                explanation = getString(R.string.review_no_category);
-                yesButtonText = getString(R.string.review_category_yes_button_text);
-                noButtonText = getString(R.string.review_category_no_button_text);
-                yesButton.setOnClickListener(view -> {
-                    getReviewActivity().reviewController.reportWrongCategory(requireActivity());
-                    getReviewActivity().swipeToNext();
-                });
-                break;
             case SPAM:
                 question = getString(R.string.review_spam);
                 explanation = getString(R.string.review_spam_explanation);
                 yesButtonText = getString(R.string.review_spam_yes_button_text);
                 noButtonText = getString(R.string.review_spam_no_button_text);
-                yesButton.setOnClickListener(view -> getReviewActivity().reviewController.reportSpam(requireActivity()));
+                yesButton.setOnClickListener(view -> getReviewActivity()
+                        .reviewController.reportSpam(requireActivity(), getReviewCallback()));
+                break;
+            case COPYRIGHT:
+                question = getString(R.string.review_copyright);
+                explanation = getString(R.string.review_copyright_explanation);
+                yesButtonText = getString(R.string.review_copyright_yes_button_text);
+                noButtonText = getString(R.string.review_copyright_no_button_text);
+                yesButton.setOnClickListener(view -> getReviewActivity()
+                        .reviewController
+                        .reportPossibleCopyRightViolation(requireActivity(), getReviewCallback()));
+                break;
+            case CATEGORY:
+                question = getString(R.string.review_category);
+                explanation = updateCategoriesQuestion();
+                yesButtonText = getString(R.string.review_category_yes_button_text);
+                noButtonText = getString(R.string.review_category_no_button_text);
+                yesButton.setOnClickListener(view -> {
+                    getReviewActivity()
+                            .reviewController
+                            .reportWrongCategory(requireActivity(), getReviewCallback());
+                    getReviewActivity().swipeToNext();
+                });
                 break;
             case THANKS:
                 question = getString(R.string.review_thanks);
@@ -122,16 +124,26 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         textViewQuestionContext.setText(explanation);
         yesButton.setText(yesButtonText);
         noButton.setText(noButtonText);
-
-        if (position == CATEGORY) {
-            updateCategories(ReviewController.categories);
-        }
-
         return layoutView;
     }
 
+    private ReviewController.ReviewCallback getReviewCallback() {
+        return new ReviewController
+                .ReviewCallback() {
+            @Override
+            public void onSuccess() {
+                getReviewActivity().runRandomizer();
+            }
+
+            @Override
+            public void onFailure() {
+                //do nothing
+            }
+        };
+    }
+
     @OnClick(R.id.button_no)
-    public void onNoButtonClicked() {
+    void onNoButtonClicked() {
         getReviewActivity().swipeToNext();
     }
 
