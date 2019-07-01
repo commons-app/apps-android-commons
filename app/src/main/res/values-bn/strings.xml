@@ -254,16 +254,16 @@
   <string name="nearby_location_has_not_changed">অবস্থান পরিবর্তন হয়নি।</string>
   <string name="nearby_location_not_available">অবস্থান উপলব্ধ নয়।</string>
   <string name="location_permission_rationale_nearby">কাছাকাছি স্থানসমূহের একটি তালিকা প্রদর্শন করতে অনুমতি প্রয়োজন</string>
-  <string name="get_directions" fuzzy="true">নির্দেশনা পান</string>
-  <string name="read_article" fuzzy="true">নিবন্ধ পড়ুন</string>
+  <string name="get_directions">নির্দেশনা পান</string>
+  <string name="read_article">নিবন্ধ পড়ুন</string>
   <string name="notifications_welcome">উইকিমিডিয়া কমন্সে স্বাগতম, %1$s! আপনাকে এখানে পেয়ে আমরা আনন্দিত।</string>
   <string name="notifications_talk_page_message">%1$s আপনার আলাপ পাতায় একটি বার্তা দিয়েছেন</string>
   <string name="notifications_thank_you_edit">একটি সম্পাদনা করার জন্য আপনাকে ধন্যবাদ</string>
   <string name="notifications_mention">%1$s আপনাকে %2$s-এ উল্লেখ করেছেন।</string>
-  <string name="nearby_directions" fuzzy="true">দিকনির্দেশ</string>
-  <string name="nearby_wikidata" fuzzy="true">উইকিউপাত্ত</string>
-  <string name="nearby_wikipedia" fuzzy="true">উইকিপিডিয়া</string>
-  <string name="nearby_commons" fuzzy="true">কমন্স</string>
+  <string name="nearby_directions">দিকনির্দেশ</string>
+  <string name="nearby_wikidata">উইকিউপাত্ত</string>
+  <string name="nearby_wikipedia">উইকিপিডিয়া</string>
+  <string name="nearby_commons">কমন্স</string>
   <string name="about_faq" fuzzy="true">প্রায়শই জিজ্ঞাসিত প্রশ্নসমূহ</string>
   <string name="welcome_skip_button">টিউটোরিয়াল এড়ান</string>
   <string name="no_internet">ইন্টারনেট অনুপলব্ধ</string>
@@ -280,6 +280,7 @@
   <string name="menu_search_button">অনুসন্ধান</string>
   <string name="search_commons">কমন্সে অনুসন্ধান করুন</string>
   <string name="title_activity_search">অনুসন্ধান</string>
+  <string name="search_tab_title_media">মিডিয়া</string>
   <string name="quiz">কুইজ</string>
   <string name="question">প্রশ্ন</string>
   <string name="result">ফলাফল</string>
@@ -289,10 +290,11 @@
   <string name="error_fetching_nearby_places">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
   <string name="add_description">+ বিবরণ যোগ করুন</string>
   <string name="nominate_delete">অপসারণের জন্য মনোনীত করুন</string>
+  <string name="delete">অপসারণ</string>
   <string name="Achievements">কৃতিত্বগুলি</string>
-  <string name="statistics" fuzzy="true">পরিসংখ্যান</string>
+  <string name="statistics">পরিসংখ্যান</string>
   <string name="statistics_featured">নির্বাচিত ছবি</string>
-  <string name="level" fuzzy="true">স্তর</string>
+  <string name="level">স্তর</string>
   <string name="notifications_channel_name_all">কমন্স বিজ্ঞপ্তি</string>
   <string name="contributions_fragment">অবদান</string>
   <string name="nearby_fragment">কাছাকাছি</string>

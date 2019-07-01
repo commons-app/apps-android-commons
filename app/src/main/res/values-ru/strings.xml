@@ -20,6 +20,7 @@
 * Vlad5250
 * Wirbel78
 * Евгения
+* ЛингвоЧел
 * ОйЛ
 -->
 <resources>
@@ -292,17 +293,17 @@
   <string name="nearby_location_has_not_changed">Местоположение не изменено.</string>
   <string name="nearby_location_not_available">Местоположение недоступно.</string>
   <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка мест поблизости</string>
-  <string name="get_directions" fuzzy="true">Показать на карте во внешней программе</string>
-  <string name="read_article" fuzzy="true">ЧИТАТЬ СТАТЬЮ</string>
+  <string name="get_directions">Проложить маршрут</string>
+  <string name="read_article">Читать статью</string>
   <string name="notifications_welcome">Добро пожаловать на Викисклад, %1$s! Рады вас здесь видеть.</string>
   <string name="notifications_talk_page_message">%1$s оставил сообщение на вашей странице обсуждения</string>
   <string name="notifications_thank_you_edit">Спасибо за правку</string>
   <string name="notifications_mention">%1$s упомянул вас на %2$s.</string>
   <string name="toggle_view_button">Переключить режим просмотра</string>
-  <string name="nearby_directions" fuzzy="true">НАПРАВЛЕНИЯ</string>
-  <string name="nearby_wikidata" fuzzy="true">ВИКИДАННЫЕ</string>
-  <string name="nearby_wikipedia" fuzzy="true">ВИКИПЕДИЯ</string>
-  <string name="nearby_commons" fuzzy="true">ВИКИСКЛАД</string>
+  <string name="nearby_directions">Направления</string>
+  <string name="nearby_wikidata">Викиданные</string>
+  <string name="nearby_wikipedia">Википедия</string>
+  <string name="nearby_commons">Викисклад</string>
   <string name="about_rate_us">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Часто задаваемые вопросы&lt;/u&gt;</string>
   <string name="welcome_skip_button">Пропустить руководство</string>
@@ -336,10 +337,10 @@
   <string name="provider_searches">Последние запросы</string>
   <string name="error_loading_categories">При загрузке категорий произошла ошибка.</string>
   <string name="error_loading_subcategories">При загрузке подкатегорий произошла ошибка.</string>
-  <string name="search_tab_title_media" fuzzy="true">МЕДИАФАЙЛЫ</string>
-  <string name="search_tab_title_categories" fuzzy="true">КАТЕГОРИИ</string>
-  <string name="explore_tab_title_featured" fuzzy="true">ИЗБРАННОЕ</string>
-  <string name="explore_tab_title_mobile" fuzzy="true">ЗАГРУЖЕНО ТЕКУЩИМ ПРИЛОЖЕНИЕМ</string>
+  <string name="search_tab_title_media">Мультимедиа</string>
+  <string name="search_tab_title_categories">Категории</string>
+  <string name="explore_tab_title_featured">Избранное</string>
+  <string name="explore_tab_title_mobile">Загружено текущим приложением</string>
   <string name="successful_wikidata_edit">Изображение успешно добавлено на страницу викиданных!</string>
   <string name="wikidata_edit_failure">Не удалось обновить соответствующую страницу викиданных!</string>
   <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
@@ -373,13 +374,13 @@
   <string name="delete_search_dialog">Удалить этот поиск?</string>
   <string name="search_history_deleted">История поиска очищена</string>
   <string name="nominate_delete">Номинировать к удалению</string>
-  <string name="delete" fuzzy="true">УДАЛИТЬ</string>
+  <string name="delete">Удалить</string>
   <string name="Achievements">Достижения</string>
-  <string name="statistics" fuzzy="true">СТАТИСТИКА</string>
+  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Получены благодарности</string>
   <string name="statistics_featured">Избранные изображения</string>
   <string name="statistics_wikidata_edits">Изображения мест поблизости</string>
-  <string name="level" fuzzy="true">УРОВЕНЬ</string>
+  <string name="level">Уровень</string>
   <string name="images_uploaded">Загружено изображений</string>
   <string name="image_reverts">Изображения, которые не откатывались</string>
   <string name="images_used_by_wiki">Использовано изображений</string>
@@ -526,7 +527,7 @@
   <string name="previous_button_tooltip_message">Нажмите, чтобы использовать название и описание, которые вы ввели для предыдущего изображения, а потом потом модифицировать их</string>
   <string name="welcome_do_upload_content_description">Примеры изображений, подходящих для загрузки на Викисклад</string>
   <string name="welcome_dont_upload_content_description">Примеры изображений, которые не следует загружать на Викисклад</string>
-  <string name="skip_image" fuzzy="true">ПРОПУСТИТЬ ЭТО ИЗОБРАЖЕНИЕ</string>
+  <string name="skip_image">Пропустить это изображение</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Скачивание файла не удалось! Это невозможно выполнить без предоставленного разрешения по использованию  внешнего носителя.</string>
   <string name="manage_exif_tags">Работа с EXIF-тегами</string>
   <string name="manage_exif_tags_summary">Укажите, какие EXIF-теги следует сохранить при загрузке файлов</string>
@@ -544,5 +545,6 @@
   <string name="upload_cancelled">Загрузка отменена</string>
   <string name="previous_image_title_description_not_found">Отсутствует заголовок или описание предыдущего изображения</string>
   <string name="dialog_box_text_nomination">Почему %1$s должно быть удалено?</string>
+  <string name="review_is_uploaded_by">%1$s загружено с помощью: %2$s</string>
   <string name="default_description_language">Язык описаний по умолчанию</string>
 </resources>

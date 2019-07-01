@@ -48,7 +48,7 @@
   <string name="provider_contributions">Fy uwchlwythiadau</string>
   <string name="menu_share">Rhannu</string>
   <string name="menu_open_in_browser">Agor yn y Porwr</string>
-  <string name="share_title_hint" fuzzy="true">Teitl</string>
+  <string name="share_title_hint">Teitl (angenrheidiol)</string>
   <string name="add_title_toast">Rhowch deitl i\'r ffeil</string>
   <string name="share_description_hint">Disgrifiad</string>
   <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
@@ -59,6 +59,7 @@
   <string name="login_failed_generic">Methodd y mewngofnodi</string>
   <string name="share_upload_button">Uwchlwyther</string>
   <string name="multiple_share_base_title">Enwch y set hwn</string>
+  <string name="add_set_name_toast">Rhowch enw i\'r set yma</string>
   <string name="provider_modifications">Newidiadau</string>
   <string name="menu_upload_single">Uwchlwytho</string>
   <string name="categories_search_text_hint">Archwilio\'r categorïau</string>
@@ -68,10 +69,10 @@
   <string name="gps_disabled">Ataliwyd GPS ar eich dyfais. Ydych chi am ei droi\'n weithredol?</string>
   <string name="enable_gps">Gweithredu\'r GPS</string>
   <string name="contributions_subtitle_zero">Heb uwchlwytho eto</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uwchlwythiad</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Cychwyn %1$d uwchlwythiad</item>
@@ -87,6 +88,7 @@
   <string name="title_activity_settings">Gosodiadau</string>
   <string name="title_activity_signup">Cofrestru</string>
   <string name="title_activity_featured_images">Delweddau nodwedd</string>
+  <string name="title_activity_category_details">Categori</string>
   <string name="menu_about">Amdanom</string>
   <string name="about_license">Ap Cynnwys Agored a grewyd ac a gefnogir gan wirfoddolwyr cymuned Wicimedia yw ap Comin Wicimedia. Does a wnelo Sefydliad Wicimedia ddim byd ag e (ei greu, ei gynnal na\'i ddatblygu).</string>
   <string name="about_improve">\n\nCrewch &lt;a href=\"%1$s\"&gt;ymholiad GitHub&lt;/a&gt; os oes gennych fyg, broblem neu awgrym.</string>
@@ -100,7 +102,10 @@
   <string name="no_uploads_yet">Nid ydych wedi uwchlwytho ffotograffau eto.</string>
   <string name="menu_retry_upload">Ailgynnig</string>
   <string name="menu_cancel_upload">Diddymer</string>
-  <string name="share_license_summary" fuzzy="true">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s</item>
+    <item quantity="other">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Wrth gynnig y llun yma, rwy\'n datgan mai fy ngwaith i ydyw ac nad yw\'n cynnwys unrhyw beth dan hawlfrain, na hunlun, a\'i fod yn cadw at &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Bolisiau Comin Wicimedia&lt;/a&gt;.</string>
   <string name="menu_download">Lawrlwytho</string>
   <string name="preference_license">Trwydded Ddiofyn (\'default\')</string>
@@ -149,10 +154,12 @@
   <string name="welcome_copyright_subtext">Cadwch yn glir o ddeunydd a hawlfraint arno a ganfyddwch ar y we, ac hefyd lluniau o bosteri, cloriau llyfrau, ayb.</string>
   <string name="welcome_final_text">Ydych chi wedi deall?</string>
   <string name="welcome_final_button_text">Do!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Rhagor o wybodaeth&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorïau</string>
   <string name="detail_panel_cats_loading">Wrthi\'n llwytho…</string>
   <string name="detail_panel_cats_none">Dim categorïau wedi eu dewis</string>
   <string name="detail_description_empty">Dim disgrifiad</string>
+  <string name="detail_discussion_empty">Dim trafodaeth</string>
   <string name="detail_license_empty">Trwydded anhysbys</string>
   <string name="menu_refresh">Adnewyddu</string>
   <string name="ok">Iawn</string>
@@ -163,23 +170,63 @@
   <string name="no">Nac ydw</string>
   <string name="media_detail_title">Teitl</string>
   <string name="media_detail_description">Disgrifiad</string>
+  <string name="media_detail_discussion">Trafodaeth</string>
   <string name="media_detail_author">Awdur</string>
   <string name="media_detail_uploaded_date">Dyddiad yr uwchlwythiad</string>
   <string name="media_detail_license">Trwydded</string>
   <string name="media_detail_coordinates">Cyfesurynnau</string>
   <string name="media_detail_coordinates_empty">Dim</string>
+  <string name="commons_logo">Logo Comin</string>
+  <string name="commons_website">Gwefan Comin</string>
+  <string name="commons_facebook">Tudalen Adborth Comin</string>
+  <string name="background_image">Delwedd y cefndir</string>
+  <string name="no_image_found">Ni chafwyd hyd i ddelwedd</string>
+  <string name="no_subcategory_found">Ni chafwyd hyd i is-gategoriau</string>
+  <string name="upload_image">Uwchlwytho ffeil</string>
+  <string name="welcome_image_mount_zao">Mount Zao</string>
+  <string name="welcome_image_llamas">Lamas</string>
+  <string name="welcome_image_rainbow_bridge">Pont yr Enfys</string>
+  <string name="welcome_image_tulip">Tiwlip</string>
+  <string name="welcome_image_no_selfies">Dim Hunanlyniau</string>
+  <string name="welcome_image_welcome_wikipedia">Croeso Wicipedia</string>
+  <string name="welcome_image_welcome_copyright">Croeso Hawlfraint</string>
+  <string name="welcome_image_sydney_opera_house">Ty Opera Sydney</string>
+  <string name="cancel">Diddymu</string>
+  <string name="navigation_drawer_open">Agor</string>
+  <string name="navigation_drawer_close">Cau</string>
+  <string name="navigation_item_home">Adref</string>
+  <string name="navigation_item_upload">Uwchlwytho</string>
+  <string name="navigation_item_nearby">Gerllaw</string>
+  <string name="navigation_item_about">Obeutu</string>
+  <string name="navigation_item_settings">Gosodiadau</string>
+  <string name="navigation_item_feedback">Adborth</string>
+  <string name="navigation_item_logout">Allgofnodi</string>
+  <string name="navigation_item_info">Tiwtorial</string>
+  <string name="navigation_item_notification">Hysbysiadau</string>
+  <string name="navigation_item_featured_images">Ar y llwyfan</string>
   <string name="nearby_info_menu_wikidata_article">Eitem Wicidata</string>
   <string name="nearby_info_menu_wikipedia_article">Erthygl Wicipedia</string>
+  <string name="give_permission">Rhoi hawl</string>
   <string name="login_to_your_account">Mewngofnodwch i\'ch cyfri</string>
   <string name="send_log_file">Danfonwch y ffeil log</string>
   <string name="view_browser">Gweld yn y porwr</string>
+  <string name="navigation_item_login">Mewngofnodi</string>
+  <string name="login_alert_message">Er mwyn defnyddio\'r nodwedd yma, mewngofnodwch!</string>
   <string name="nearby_location_has_not_changed">Nid yw\'r lleoliad wedi newid.</string>
   <string name="nearby_location_not_available">Nid yw\'r lleoliad ar gael.</string>
+  <string name="nearby_wikidata">Wicidata</string>
+  <string name="nearby_wikipedia">Wicipedia</string>
+  <string name="nearby_commons">Comin</string>
+  <string name="about_translate_title">Ieithoedd</string>
   <string name="about_translate_proceed">Parhau</string>
   <string name="about_translate_cancel">Canslo</string>
   <string name="retry">Ailgeisio</string>
   <string name="showcase_view_got_it_button">Gwnaed!</string>
+  <string name="no_images_found">Dim delweddau!</string>
   <string name="appwidget_img">Llun y Dydd</string>
   <string name="app_widget_heading">Llun y Dydd</string>
+  <string name="menu_search_button">Chwilio</string>
+  <string name="search_commons">Chwilio o fewn Comin</string>
+  <string name="title_activity_search">Chwilio</string>
   <string name="successful_wikidata_edit">Mae %1$s o luniau wedi\'u hychwanegu ar Wicidata!</string>
 </resources>
