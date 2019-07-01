@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* Anarhistička Maca
+* Astrind
 * MaGa
 -->
 <resources>
@@ -230,17 +232,17 @@
   <string name="nearby_location_has_not_changed">Lokacija nepromijenjena.</string>
   <string name="nearby_location_not_available">Lokacija nedostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebno je dopuštenje za popis mjesta u blizini</string>
-  <string name="get_directions" fuzzy="true">PRIBAVI UPUTE</string>
-  <string name="read_article" fuzzy="true">PROČITAJ ČLANAK</string>
+  <string name="get_directions">Nabavi upute</string>
+  <string name="read_article">Pročitaj članak</string>
   <string name="notifications_welcome">%1$s, dobro došli na Zajednički poslužitelj! Drago nam je da ste tu.</string>
   <string name="notifications_talk_page_message">%1$s Vam je ostavio poruku na Vašoj razgovornoj stranici</string>
   <string name="notifications_thank_you_edit">Hvala Vam na uređivanju</string>
   <string name="notifications_mention">%1$s Vas je spomenuo na %2$s.</string>
   <string name="toggle_view_button">Prebaci prikaz</string>
-  <string name="nearby_directions" fuzzy="true">UPUTE</string>
-  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
-  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIJA</string>
-  <string name="nearby_commons" fuzzy="true">ZAJEDNIČKI POSLUŽITELJ</string>
+  <string name="nearby_directions">Upute</string>
+  <string name="nearby_wikidata">Wikipodatci</string>
+  <string name="nearby_wikipedia">Wikipedija</string>
+  <string name="nearby_commons">Zajednički poslužitelj</string>
   <string name="about_rate_us">&lt;u&gt;Ocijenite nas&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;ČPP&lt;/u&gt;</string>
   <string name="welcome_skip_button">Preskoči upute</string>
@@ -261,7 +263,16 @@
   <string name="no_images_found">Slike nisu pronađene!</string>
   <string name="error_loading_images">Pogrješka prilikom učitavanja slika.</string>
   <string name="image_uploaded_by">Postavio: %1$s</string>
+  <string name="search_tab_title_media">Medija</string>
+  <string name="search_tab_title_categories">Kategorije</string>
+  <string name="explore_tab_title_featured">Istaknuto</string>
+  <string name="explore_tab_title_mobile">Učitaj pomoću mobitela</string>
   <string name="share_app_title">Aplikacija za dijeljenje</string>
   <string name="share_coordinates_not_present">Prilikom označavanja slike koordinate nisu navedene</string>
   <string name="error_fetching_nearby_places">Pogrješka prilikom dohvaćanja mjesta u blizini.</string>
+  <string name="delete">Izbriši</string>
+  <string name="statistics">Statistike</string>
+  <string name="level">Razina</string>
+  <string name="skip_image">Preskoči ovu sliku</string>
+  <string name="default_description_language">Zadani jezik za opis</string>
 </resources>

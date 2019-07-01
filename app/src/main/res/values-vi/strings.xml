@@ -8,6 +8,7 @@
 * Nhatminh01
 * Thanhtai2009
 * Tuankiet65
+* Vinhtantran
 -->
 <resources>
   <string name="preference_category_appearance">Giao diện</string>
@@ -234,16 +235,16 @@
   <string name="nearby_location_has_not_changed">Vị trí không thay đổi.</string>
   <string name="nearby_location_not_available">Vị trí không có sẵn.</string>
   <string name="location_permission_rationale_nearby">Bạn cần cho phép để hiển thị danh sách nơi lân cận</string>
-  <string name="get_directions" fuzzy="true">HƯỚNG DẪN</string>
-  <string name="read_article" fuzzy="true">ĐỌC BÀI</string>
+  <string name="get_directions">Hướng dẫn</string>
+  <string name="read_article">Đọc bài</string>
   <string name="notifications_welcome">Hoan nghênh %1$s đã đến Wikimedia Commons! Chúng tôi rất mừng bạn đến đây.</string>
   <string name="notifications_talk_page_message">%1$s đã nhắn tin tại trang thảo luận của bạn</string>
   <string name="notifications_thank_you_edit">Cảm ơn vì bạn đã thực hiện sửa đổi</string>
   <string name="notifications_mention">%1$s đã nhắc đến bạn tại %2$s.</string>
-  <string name="nearby_directions" fuzzy="true">HƯỚNG DẪN</string>
-  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
-  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
+  <string name="nearby_directions">Hướng dẫn</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Đánh giá chúng tôi&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Câu thường hỏi&lt;/u&gt;</string>
   <string name="welcome_skip_button">Bỏ qua Hướng dẫn</string>
