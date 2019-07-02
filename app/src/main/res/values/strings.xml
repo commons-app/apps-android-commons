@@ -560,12 +560,35 @@ Upload your first media by tapping on the add button.</string>
   <string name="dialog_box_text_nomination">Why should %1$s be deleted?</string>
   <string name="review_is_uploaded_by">%1$s is uploaded by: %2$s</string>
   <string name="default_description_language">Default description language</string>
-  <string name="delete_reason_spam_selfie">A selfie</string>
-  <string name="delete_reason_spam_blurry">Blurry</string>
-  <string name="delete_reason_spam_nonsense">Nonsense</string>
-  <string name="delete_reason_spam_other">Other</string>
-  <string name="delete_reason_copyright_pressphoto">Press photo</string>
-  <string name="delete_reason_copyright_internetphoto">Random photo from internet</string>
-  <string name="delete_reason_copyright_logo">Logo</string>
-  <string name="delete_reason_copyright_other">Other</string>
+  <string name="delete_helper_make_deletion_toast_1">Trying to nominate\u0020</string>
+  <string name="delete_helper_make_deletion_toast_2">\u0020for deletion </string>
+  <string name="delete_helper_delete_summary_1">Nominating\u0020</string>
+  <string name="delete_helper_delete_summary_2">\u0020for deletion.</string>
+  <string name="delete_helper_delete_file_delete_string_1">{{delete|reason=</string>
+  <string name="delete_helper_delete_file_delete_string_2">|subpage=</string>
+  <string name="delete_helper_delete_file_delete_string_3">|day=</string>
+  <string name="delete_helper_delete_file_delete_string_4">|month=</string>
+  <string name="delete_helper_delete_file_delete_string_5">|year=</string>
+  <string name="delete_helper_delete_log_page_string">{{Commons:Deletion requests/</string>
+  <string name="delete_helper_delete_user_page_string">{{subst:idw|</string>
+  <string name="delete_helper_delete_try_commons">Commons:Deletion_requests/</string>
+  <string name="delete_helper_delete_try_talk">User_Talk:</string>
+  <string name="delete_helper_show_deletion_notification_title">Nominating for Deletion</string>
+  <string name="delete_helper_show_deletion_notification_title_if">: Success</string>
+  <string name="delete_helper_show_deletion_notification_message_if_1">Successfully nominated\u0020</string>
+  <string name="delete_helper_show_deletion_notification_message_if_2">: deletion.</string>
+  <string name="delete_helper_show_deletion_notification_title_else">: Failed</string>
+  <string name="delete_helper_show_deletion_notification_message_else">Could not request deletion.</string>
+  <string name="delete_helper_show_deletion_notification_url_for_delete">/wiki/Commons:Deletion_requests/</string>
+  <string name="delete_helper_ask_reason_and_execute_reason_spam_selfie">A selfie</string>
+  <string name="delete_helper_ask_reason_and_execute_reason_spam_blurry">Blurry</string>
+  <string name="delete_helper_ask_reason_and_execute_reason_spam_nonsense">Nonsense</string>
+  <string name="delete_helper_ask_reason_and_execute_reason_spam_other">Other</string>
+  <string name="delete_helper_ask_reason_and_execute_reason_copyright_press_photo">Press photo</string>
+  <string name="delete_helper_ask_reason_and_execute_reason_copyright_internet_photo">Random photo from internet</string>
+  <string name="delete_helper_ask_reason_and_execute_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_and_execute_reason_copyright_other">Other</string>
+  <string name="delete_helper_ask_reason_and_execute_alert_set_positive_button">Ok</string>
+  <string name="delete_helper_ask_reason_and_execute_alert_set_positive_button_reason">Because it is\u0020</string>
+  <string name="delete_helper_ask_reason_and_execute_alert_set_negative_button">Cancel</string>
 </resources>
