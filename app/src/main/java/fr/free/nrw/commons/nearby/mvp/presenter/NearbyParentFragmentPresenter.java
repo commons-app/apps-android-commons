@@ -99,7 +99,12 @@ public class NearbyParentFragmentPresenter
         Timber.d("initializing nearby operations started");
         // Add location listener to be notified about location changes
         locationServiceManager.addLocationListener(this);
-        nearbyParentFragmentView.checkPermissionsAndPerformAction(nearbyParentFragmentView::resumeFragment);
+        nearbyParentFragmentView.checkPermissionsAndPerformAction(this::performNearbyOperationsIfPermissionGiven);
+
+    }
+
+    public void performNearbyOperationsIfPermissionGiven() {
+        Timber.d("performNearbyOperationsIfPermissionGiven");
         nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
         // Nearby buttons should be active, they should be inactive only during update
         lockNearby(false);

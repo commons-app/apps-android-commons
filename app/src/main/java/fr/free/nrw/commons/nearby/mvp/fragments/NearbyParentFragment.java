@@ -138,9 +138,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         // Resume the fragment if exist
         resumeFragment();
         if (!((MainActivity) getActivity()).isContributionsFragmentVisible) {
-            checkPermissionsAndPerformAction(this::resumeFragment);
-        } else {
-            resumeFragment();
+            checkPermissionsAndPerformAction(nearbyParentFragmentPresenter::performNearbyOperationsIfPermissionGiven);
         }
     }
 
@@ -153,7 +151,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 R.string.location_permission_title,
                 R.string.location_permission_rationale_nearby);
     }
-
 
     /**
      * Thanks to this method we make sure NearbyMapFragment is ready and attached. So that we can
