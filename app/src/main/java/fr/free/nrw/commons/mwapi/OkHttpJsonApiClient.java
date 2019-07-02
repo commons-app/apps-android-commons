@@ -98,8 +98,9 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.isSuccessful()) {
-                if(!TextUtils.isEmpty(response.body().string().trim())){
-                    return Integer.parseInt(response.body().string().trim());
+                String responseBody = response.body().string();
+                if(!TextUtils.isEmpty(responseBody.trim())){
+                    return Integer.parseInt(responseBody.trim());
                 }
             }
             return 0;
