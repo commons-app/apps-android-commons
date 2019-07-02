@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import okhttp3.ResponseBody;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
@@ -98,9 +99,12 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.isSuccessful()) {
-                String responseBody = response.body().string();
-                if(!TextUtils.isEmpty(responseBody.trim())){
-                    return Integer.parseInt(responseBody.trim());
+                ResponseBody responseBody = response.body();
+                if(null!=responseBody) {
+                    String responseBodyString = responseBody.toString();
+                    if (!TextUtils.isEmpty(responseBodyString.trim())) {
+                        return Integer.parseInt(responseBodyString.trim());
+                    }
                 }
             }
             return 0;
