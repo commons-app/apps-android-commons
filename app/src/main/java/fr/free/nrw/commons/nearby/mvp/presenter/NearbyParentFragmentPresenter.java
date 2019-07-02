@@ -37,6 +37,9 @@ public class NearbyParentFragmentPresenter
     boolean nearbyViewsAreReady;
     boolean onTabSelected;
     boolean searchingThisArea;
+    boolean nearbyMapViewReady;
+    boolean nearbyOperationsInitialized;
+
 
     private LocationServiceManager locationServiceManager;
 
@@ -86,21 +89,6 @@ public class NearbyParentFragmentPresenter
     }
 
     /**
-     * Will be called when map view is created and ready to be used.
-     */
-    @Override
-    public void nearbyMapViewReady() {
-        Log.d("deneme2","Nearby view ready method is called");
-        Timber.d("Nearby map view is created and ready");
-        updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
-        // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends
-        this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
-        this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
-    }
-
-
-
-    /**
      * Initializes nearby operations by following these steps:
      * - Add this location listener to location manager
      * - Registers location updates with parent fragment, this methods also checks permissions
@@ -120,7 +108,39 @@ public class NearbyParentFragmentPresenter
         // We will know when we went offline and online again
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
         //nearbyMapFragmentView.setupMapView(null);
+        nearbyOperationsInitialized();
     }
+
+
+    /**
+     * Will be called when map view is created and ready to be used.
+     */
+    @Override
+    public void nearbyMapViewReady() {
+        Log.d("deneme2","nearbyMapViewReady");
+        nearbyMapViewReady = true;
+        if (nearbyOperationsInitialized) {
+            initializeMapOperations();
+        }
+    }
+
+    public void nearbyOperationsInitialized() {
+        Log.d("deneme2","nearbyOperationsInitialized");
+        nearbyOperationsInitialized = true;
+        if (nearbyMapViewReady) {
+            initializeMapOperations();
+        }
+    }
+
+    public void initializeMapOperations() {
+        Log.d("deneme2","initializeMapOperations");
+        Timber.d("Nearby map view is created and ready");
+        updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
+        // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends
+        this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
+        this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
+    }
+
 
     /**
      * Nearby updates takes time, since they are network operations. During update time, we don't

@@ -192,6 +192,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
             mapView.onCreate(savedInstanceState);
             mapView.getMapAsync(mapboxMap -> {
                 Log.d("deneme2","nearby map is ready");
+                viewsAreReadyCallback.nearbyMapViewReady();
                 /*LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
 
                 try {
