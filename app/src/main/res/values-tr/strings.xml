@@ -24,6 +24,7 @@
   <string name="preference_category_appearance">Görünüm</string>
   <string name="preference_category_general">Genel</string>
   <string name="preference_category_feedback">Geri bildirim</string>
+  <string name="preference_category_privacy">Gizlilik</string>
   <string name="preference_category_location">Konum</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -105,6 +106,7 @@
   <string name="title_activity_signup">Kaydol</string>
   <string name="title_activity_featured_images">Seçkin Resimler</string>
   <string name="title_activity_category_details">Kategori</string>
+  <string name="title_activity_review">Hakem Denetimi</string>
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun imtiyaz sahibi ve gönüllüleri tarafından oluşturulmuş ve sürdürülmüş açık kaynak kodlu bir uygulamadır. Vikipedi Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımına dahil değildir.</string>
   <string name="about_improve">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"%1$s\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
@@ -118,7 +120,10 @@
   <string name="no_uploads_yet">Henüz yüklenmiş hiç fotoğrafınız yok.</string>
   <string name="menu_retry_upload">Tekrar dene</string>
   <string name="menu_cancel_upload">İptal</string>
-  <string name="share_license_summary" fuzzy="true">Bu resmi %1$s lisansı altında olacak.</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Bu görüntü, %1$s lisansı altında olacak</item>
+    <item quantity="other">Bu görüntüler, %1$s lisansı altında olacak</item>
+  </plurals>
   <string name="media_upload_policy">Bu resmi göndererek bunun kendi eserim olduğumu, telif hakkıyla korunan materyal veya selfie içermediğini ve aksi takdirde &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Varsayılan lisans</string>
@@ -172,10 +177,13 @@
   <string name="detail_panel_cats_loading">Yükleniyor...</string>
   <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
   <string name="detail_description_empty">Açıklama yok</string>
+  <string name="detail_discussion_empty">Tartışma yok</string>
   <string name="detail_license_empty">Bilinmeyen lisans</string>
   <string name="menu_refresh">Yenile</string>
+  <string name="storage_permission_title">Depolama İzni İsteği</string>
   <string name="read_storage_permission_rationale">Gerekli izin: Harici belleği oku. Uygulama, galerinize bu olmadan erişemez.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Gerekli izin: Harici depolama yazın. Uygulama kameranıza bu olmadan erişemez.</string>
+  <string name="write_storage_permission_rationale">Gerekli izin: Harici depolama birimini yazın. Uygulama, bu olmadan kameranıza/galerinize erişemez.</string>
+  <string name="location_permission_title">Konum İzni İsteği</string>
   <string name="location_permission_rationale">İsteğe bağlı izin: Kategori önerileri için geçerli konum alma</string>
   <string name="ok">Tamam</string>
   <string name="title_activity_nearby">Yakındaki yerler</string>
@@ -186,6 +194,7 @@
   <string name="no">Hayır</string>
   <string name="media_detail_title">Başlık</string>
   <string name="media_detail_description">Açıklama</string>
+  <string name="media_detail_discussion">Tartışma</string>
   <string name="media_detail_author">Yazar</string>
   <string name="media_detail_uploaded_date">Yükleme tarihi</string>
   <string name="media_detail_license">Lisans</string>
@@ -196,8 +205,12 @@
   <string name="_2fa_code">2 Faktörlü Kimlik Doğrulama (2FA) Kodu</string>
   <string name="number_of_uploads">Son Yükleme Limitim</string>
   <string name="maximum_limit">Maksimum Limit</string>
+  <string name="invalid_zero">Sıfır geçerli değil</string>
+  <string name="invalid_input">Geçersiz Giriş</string>
   <string name="maximum_limit_alert">500\'den fazla görüntülenemiyor</string>
-  <string name="set_limit" fuzzy="true">Yeni Yükleme Sınırı Ayarla</string>
+  <string name="enter_valid">Geçerli bir numara girin</string>
+  <string name="cannot_be_zero">Yükleme sınırı 0 olamaz</string>
+  <string name="set_limit">Son yükleme sınırı</string>
   <string name="login_failed_2fa_not_supported">İki faktörlü kimlik doğrulama şu anda desteklenmiyor.</string>
   <string name="logout_verification">Gerçekten çıkış yapmak istiyor musunuz?</string>
   <string name="commons_logo">Commons Logo</string>
@@ -232,6 +245,7 @@
   <string name="navigation_item_info">Eğitim</string>
   <string name="navigation_item_notification">Bildirimler</string>
   <string name="navigation_item_featured_images">Seçkin</string>
+  <string name="navigation_item_review">İncele</string>
   <string name="nearby_needs_permissions">Yakındaki yerler, konum izinleri olmadan görüntülenemez</string>
   <string name="no_description_found">hiçbir açıklama bulunamadı</string>
   <string name="nearby_info_menu_commons_article">Commons dosya sayfası</string>
@@ -242,6 +256,14 @@
   <string name="description_info">Lütfen medyayı mümkün olduğunca açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolay tahmin edilemeyen bilgileri açıklayın, örneğin bir manzara ise günün saatini belirtin. Medya alışılmadık bir şey gösteriyorsa lütfen olağandışı yapan şeyleri açıklayın.</string>
   <string name="upload_image_too_dark">Bu fotoğraf çok karanlık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
   <string name="upload_image_blurry">Bu fotoğraf bulanık, yine de yüklemek istiyor musunuz? Wikimedia Commons yalnızca ansiklopedik değeri olan fotoğraflar içindir.</string>
+  <string name="upload_problem_exist">Bu görüntü ile ilgili olası sorunlar:</string>
+  <string name="upload_problem_image_dark">Görüntü çok karanlık.</string>
+  <string name="upload_problem_image_blurry">Görüntü bulanık.</string>
+  <string name="upload_problem_image_duplicate">Görüntü zaten Commons\'ta mevcut.</string>
+  <string name="upload_problem_different_geolocation">Bu resim farklı bir yerde çekilmiş.</string>
+  <string name="upload_problem_fbmd">Lütfen yalnızca kendi çektiğiniz resimleri yükleyin. Başkalarının Facebook hesaplarında bulduğunuz resimleri yüklemeyin.</string>
+  <string name="upload_problem_do_you_continue">Hâlâ bu resmi yüklemek istiyor musunuz?</string>
+  <string name="internet_downloaded">Lütfen yalnızca kendi çektiğiniz resimleri yükleyin. İnternetten indirdiğiniz resimleri yüklemeyin.</string>
   <string name="give_permission">İzin ver</string>
   <string name="use_external_storage">Harici depolamayı kullanın</string>
   <string name="use_external_storage_summary">Uygulama kamerası kullanıldığında çekilen fotoğrafları cihazına kaydedin</string>
@@ -253,34 +275,38 @@
   <string name="nominate_deletion">Silinmeye aday göster</string>
   <string name="nominated_for_deletion">Bu görsel silinmesi için aday gösterildi.</string>
   <string name="nominated_see_more">&lt;u&gt;Web sayfasının detaylarını gör&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">%1$s, silme için aday gösteriliyor.</string>
+  <string name="nominating_for_deletion_status">Silme işlemi için aday gösterilen dosya: %1$s</string>
   <string name="view_browser">Tarayıcıda görüntüle</string>
   <string name="skip_login">Geç</string>
   <string name="navigation_item_login">Oturum aç</string>
   <string name="skip_login_title">Giriş işlemini gerçekten atlamak istiyor musunuz?</string>
-  <string name="skip_login_message" fuzzy="true">Resim yükleyemeyeceksiniz.</string>
+  <string name="skip_login_message">İleride resim yüklemek için giriş yapmalısınız.</string>
   <string name="login_alert_message">Bu özelliği kullanmak için lütfen giriş yapın</string>
   <string name="copy_wikicode">Vikimetini panoya kopyala</string>
   <string name="wikicode_copied">Vikikod panoya kopyalandı</string>
   <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
   <string name="nearby_location_not_available">Konum kullanılamıyor.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
-  <string name="get_directions" fuzzy="true">TALİMATLAR</string>
-  <string name="read_article" fuzzy="true">MADDE OKU</string>
+  <string name="get_directions">Talimatlar</string>
+  <string name="read_article">Maddeyi oku</string>
   <string name="notifications_welcome">Wikimedia Commons\'a hoşgedin %1$s! Burada olduğun için mutluyuz.</string>
   <string name="notifications_talk_page_message">%1$s mesaj sayfasınıza bir mesaj bıraktı.</string>
   <string name="notifications_thank_you_edit">Düzenlemeniz için teşekkürler</string>
   <string name="notifications_mention">%1$s , %2$s \'de senden bahsetti</string>
   <string name="toggle_view_button">Görünümü değiştir</string>
-  <string name="nearby_directions" fuzzy="true">YOL TARİFİ</string>
-  <string name="nearby_wikidata" fuzzy="true">VİKİVERİ</string>
-  <string name="nearby_wikipedia" fuzzy="true">VİKİPEDİ</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
+  <string name="nearby_directions">Talimatlar</string>
+  <string name="nearby_wikidata">Vikiveri</string>
+  <string name="nearby_wikipedia">Vikipedi</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Bizi oyla&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;SSS&lt;/u&gt;</string>
   <string name="welcome_skip_button">Eğiticiyi Atla</string>
   <string name="no_internet">İnternet kullanılamıyor</string>
   <string name="internet_established">İnternet kullanılabilir</string>
   <string name="error_notifications">Bildirim alınırken hata oluştu</string>
+  <string name="error_review">Resim incelenmeye alınırken hata oluştu. Tekrar denemek için yenileme düğmesine basın.</string>
+  <string name="error_review_categories">Resim kategorileri incelenmek için getirilirken hata oluştu. Tekrar denemek için yenileme düğmesine basın.</string>
   <string name="no_notifications">Bildirim bulunamadı</string>
   <string name="about_translate">&lt;u&gt;Çevir&lt;/u&gt;</string>
   <string name="about_translate_title">Diller</string>
