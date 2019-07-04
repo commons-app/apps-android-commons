@@ -73,6 +73,7 @@ public class SettingsFragment extends PreferenceFragment {
 
         LongTitleMultiSelectListPreference multiSelectListPref = (LongTitleMultiSelectListPreference) findPreference("manageExifTags");
         if (multiSelectListPref != null) {
+            defaultKvStore.putJson(Prefs.MANAGED_EXIF_TAGS, multiSelectListPref.getValues());
             multiSelectListPref.setOnPreferenceChangeListener((preference, newValue) -> {
                 defaultKvStore.putJson(Prefs.MANAGED_EXIF_TAGS, newValue);
                 return true;
