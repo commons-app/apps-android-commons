@@ -128,12 +128,9 @@ public class ContributionDao {
      */
 
     private String convertMapToString(HashMap<String, String> captions) {
-        Iterator iter = (Iterator) captions.keySet().iterator();
         StringBuilder captionListString = new StringBuilder();
-        while(iter.hasNext()) {
-            Map.Entry entry = (Map.Entry) iter.next();
-            String individualDescription = String.format("{{%s|1=%s}}", entry.getKey(),
-                    entry.getValue());
+        for (Map.Entry<String, String> entry : captions.entrySet()) {
+            String individualDescription = String.format("{{%s|1=%s}}", entry.getKey(), entry.getValue());
             captionListString.append(individualDescription);
         }
         return String.valueOf(captionListString);
