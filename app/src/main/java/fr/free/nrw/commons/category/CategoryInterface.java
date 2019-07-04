@@ -11,6 +11,15 @@ import retrofit2.http.Query;
  */
 public interface CategoryInterface {
 
-    @GET("w/api.php?action=query&format=json&formatversion=2")
-    Observable<MwQueryResponse> searchCategories(@Query("srsearch") String filterValue, @Query("srlimit") int searchCatsLimit);
+    /**
+     * Searches for categories with the specified name.
+     * Replaces ApacheHttpClientMediaWikiApi#allCategories
+     *
+     * @param filter    The string to be searched
+     * @param itemLimit How many results are returned
+     * @return
+     */
+    @GET("w/api.php?action=query&format=json&formatversion=2"
+            + "&generator=search&gsrnamespace=14")
+    Observable<MwQueryResponse> searchCategories(@Query("gsrsearch") String filter, @Query("gsrlimit") int itemLimit);
 }
