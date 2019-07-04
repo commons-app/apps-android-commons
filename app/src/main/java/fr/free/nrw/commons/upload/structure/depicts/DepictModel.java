@@ -196,8 +196,7 @@ public class DepictModel {
         }
 
         return depictsInterface.searchForDepicts(query, String.valueOf(SEARCH_DEPICTS_LIMIT))
-                .map(mwQueryResponse -> {
-                      return new DepictedItem(mwQueryResponse.query(),"", null, false);
+                .map(mwQueryResponse -> { new DepictedItem(mwQueryResponse.query().toString(),"", null, false);
                         });
 
                //.map(name -> new DepictedItem(name,"",null, false));
