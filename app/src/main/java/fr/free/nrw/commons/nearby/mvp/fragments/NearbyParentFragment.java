@@ -118,7 +118,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Log.d("deneme3","oncongi changed fragmenr"+this);
     }
 
     @Nullable

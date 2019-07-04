@@ -122,7 +122,6 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void nearbyMapViewReady() {
-        Log.d("deneme2","nearbyMapViewReady");
         nearbyMapViewReady = true;
         if (nearbyOperationsInitialized) {
             initializeMapOperations();
@@ -130,7 +129,6 @@ public class NearbyParentFragmentPresenter
     }
 
     public void nearbyOperationsInitialized() {
-        Log.d("deneme2","nearbyOperationsInitialized");
         nearbyOperationsInitialized = true;
         if (nearbyMapViewReady) {
             initializeMapOperations();
@@ -138,7 +136,6 @@ public class NearbyParentFragmentPresenter
     }
 
     public void initializeMapOperations() {
-        Log.d("deneme2","initializeMapOperations");
         Timber.d("Nearby map view is created and ready");
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
         // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends

@@ -127,7 +127,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.d("deneme2", "onViewCreated is called");
         super.onViewCreated(view, savedInstanceState);
         this.getView().setFocusableInTouchMode(true);
         this.getView().requestFocus();
@@ -152,12 +151,10 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     public void onAttach(Context context) {
         super.onAttach(context);
         ((NearbyParentFragment)getParentFragment()).childMapFragmentAttached();
-        Log.d("deneme2", ".childMapFragmentAttached() is fired");
     }
 
     @Override
     public MapView setupMapView(Bundle savedInstanceState) {
-        Log.d("deneme2", "setuo map view is called");
         Timber.d("setting up map view");
         boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
         MapboxMapOptions options = new MapboxMapOptions()
@@ -191,7 +188,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
             // create map
             mapView.onCreate(savedInstanceState);
             mapView.getMapAsync(mapboxMap -> {
-                Log.d("deneme2","nearby map is ready");
                 viewsAreReadyCallback.nearbyMapViewReady();
                 /*LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
 
