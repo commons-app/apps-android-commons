@@ -21,5 +21,11 @@ public interface CategoryInterface {
      */
     @GET("w/api.php?action=query&format=json&formatversion=2"
             + "&generator=search&gsrnamespace=14")
-    Observable<MwQueryResponse> searchCategories(@Query("gsrsearch") String filter, @Query("gsrlimit") int itemLimit);
+    Observable<MwQueryResponse> searchCategories(@Query("gsrsearch") String filter,
+                                                 @Query("gsrlimit") int itemLimit, @Query("gsroffset") int offset);
+
+    @GET("w/api.php?action=query&format=json&formatversion=2"
+            + "&generator=allcategories")
+    Observable<MwQueryResponse> searchCategoriesForPrefix(@Query("gacprefix") String prefix,
+                                                          @Query("gaclimit") int itemLimit, @Query("gacoffset") int offset);
 }

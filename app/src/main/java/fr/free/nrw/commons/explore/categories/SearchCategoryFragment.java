@@ -59,6 +59,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     String query;
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
+    boolean isLoadingCategories;
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
@@ -138,7 +139,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         progressBar.setVisibility(GONE);
         queryList.clear();
         categoriesAdapter.clear();
-        compositeDisposable.add(categoryClient.searchCategories(query,queryList.size())
+        compositeDisposable.add(categoryClient.searchCategories(query,25)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -149,13 +150,15 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
 
     /**
-     * Adds more results to existing search results
+     * Adds 25 more results to existing search results
      */
     public void addCategoriesToList(String query) {
+        if(isLoadingCategories) return;
+        isLoadingCategories=true;
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        compositeDisposable.add(categoryClient.searchCategories(query,queryList.size())
+        compositeDisposable.add(categoryClient.searchCategories(query,25, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -166,7 +169,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     /**
      * Handles the success scenario
      * it initializes the recycler view by adding items to the adapter
-     * @param mediaList
      */
     private void handlePaginationSuccess(List<String> mediaList) {
         queryList.addAll(mediaList);
@@ -174,6 +176,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         bottomProgressBar.setVisibility(GONE);
         categoriesAdapter.addAll(mediaList);
         categoriesAdapter.notifyDataSetChanged();
+        isLoadingCategories=false;
     }
 
 
@@ -181,7 +184,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     /**
      * Handles the success scenario
      * it initializes the recycler view by adding items to the adapter
-     * @param mediaList
      */
     private void handleSuccess(List<String> mediaList) {
         queryList = mediaList;
@@ -199,7 +201,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
     /**
      * Logs and handles API error scenario
-     * @param throwable
      */
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried categories");

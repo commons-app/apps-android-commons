@@ -125,7 +125,7 @@ public class CategoriesModel{
 
         //otherwise, search API for matching categories
         return categoryClient
-                .searchCategories(term, SEARCH_CATS_LIMIT)
+                .searchCategoriesForPrefix(term, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 
