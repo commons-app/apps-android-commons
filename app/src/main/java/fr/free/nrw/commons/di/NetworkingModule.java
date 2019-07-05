@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
-import org.wikipedia.csrf.CsrfTokenClient;
-import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonUtil;
@@ -131,22 +129,6 @@ public class NetworkingModule {
     @Singleton
     public WikiBaseInterface provideWikiBaseInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
-    }
-
-    @Named("commons-csrf")
-    @Provides
-    @Singleton
-    public CsrfTokenClient provideCommonsCsrfTokenClient() {
-        return new CsrfTokenClient(new WikiSite(Service.COMMONS_URL, ""),
-                new WikiSite(Service.COMMONS_URL, ""));
-    }
-
-    @Named("wikidata-csrf")
-    @Provides
-    @Singleton
-    public CsrfTokenClient provideWikidataCsrfTokenClient() {
-        return new CsrfTokenClient(new WikiSite(Service.WIKIDATA_URL, ""),
-                new WikiSite(Service.COMMONS_URL, ""));
     }
 
 }

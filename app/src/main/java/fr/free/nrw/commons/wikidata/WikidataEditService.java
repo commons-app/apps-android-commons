@@ -17,7 +17,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -154,7 +153,6 @@ public class WikidataEditService {
 
         String data = jsonData.toString();
 
-
         Observable.fromCallable(mediaWikiApi::getEditToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -168,21 +166,6 @@ public class WikidataEditService {
                                         ViewUtil.showLongToast(context, throwable.toString());
                                     });
                 });
-
-        /*wikiBaseClient.getEditToken()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(editToken -> {
-                    wikiBaseClient.postEditEntity("M" + fileEntityId, data, editToken)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(revisionId -> Timber.d("Property P180 set successfully for %s", revisionId),
-                                throwable -> {
-                            Timber.e(throwable, "Error occurred while setting P180 tag");
-                            ViewUtil.showLongToast(context, throwable.toString());
-                        });
-                });*/
-
     }
 
     private void handleClaimResult(String wikidataEntityId, String revisionId) {
