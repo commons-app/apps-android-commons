@@ -567,7 +567,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_show_deletion_title">Nominating for Deletion</string>
   <string name="delete_helper_show_deletion_title_if">Success</string>
   <string name="delete_helper_show_deletion_message_if_1">Successfully nominated</string>
-  <string name="delete_helper_show_deletion_message_if_2">deletion</string>
+  <string name="delete_helper_show_deletion_message_if_2">for deletion</string>
   <string name="delete_helper_show_deletion_title_else">Failed</string>
   <string name="delete_helper_show_deletion_message_else">Could not request deletion</string>
   <string name="delete_helper_ask_spam_selfie">A selfie</string>

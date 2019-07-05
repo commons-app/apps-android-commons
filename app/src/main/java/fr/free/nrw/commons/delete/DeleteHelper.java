@@ -129,7 +129,7 @@ public class DeleteHelper {
         if (result) {
             title += ": " + context.getString(R.string.delete_helper_show_deletion_title_if);
             message = context.getString(R.string.delete_helper_show_deletion_message_if_1)+ " "
-                    + media.getDisplayTitle() + ": "
+                    + media.getDisplayTitle() + " "
                     + context.getString(R.string.delete_helper_show_deletion_message_if_2) + ".";
         } else {
             title += ": " + context.getString(R.string.delete_helper_show_deletion_title_else);
