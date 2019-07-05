@@ -160,7 +160,12 @@ public class WikidataEditService {
                     wikiBaseClient.postEditEntity("M" + fileEntityId, data, editToken)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(revisionId -> Timber.d("Property P180 set successfully for %s", revisionId),
+                            .subscribe(success -> {
+                                        if (success)
+                                            Timber.d("Property P180 set successfully for %s", fileEntityId);
+                                        else
+                                            Timber.d("Unable to set property P180 for %s", fileEntityId);
+                                    },
                                     throwable -> {
                                         Timber.e(throwable, "Error occurred while setting P180 tag");
                                         ViewUtil.showLongToast(context, throwable.toString());
