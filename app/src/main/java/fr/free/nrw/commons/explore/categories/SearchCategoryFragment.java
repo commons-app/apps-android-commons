@@ -25,6 +25,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
@@ -61,6 +62,8 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
+    @Inject CategoryClient categoryClient;
+
     @Inject
     @Named("default_preferences")
     JsonKvStore basicKvStore;
@@ -135,11 +138,12 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         progressBar.setVisibility(GONE);
         queryList.clear();
         categoriesAdapter.clear();
-        compositeDisposable.add(Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
+        compositeDisposable.add(categoryClient.searchCategories(query,queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .doOnSubscribe(disposable -> saveQuery(query))
+                .collect(ArrayList<String>::new, ArrayList::add)
                 .subscribe(this::handleSuccess, this::handleError));
     }
 
@@ -151,10 +155,11 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        compositeDisposable.add(Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
+        compositeDisposable.add(categoryClient.searchCategories(query,queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .collect(ArrayList<String>::new, ArrayList::add)
                 .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
@@ -213,7 +218,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private void initErrorView() {
         progressBar.setVisibility(GONE);
         categoriesNotFoundView.setVisibility(VISIBLE);
-        categoriesNotFoundView.setText(getString(R.string.categories_not_found, query));
+        categoriesNotFoundView.setText(getString(R.string.categories_not_found));
     }
 
     /**
