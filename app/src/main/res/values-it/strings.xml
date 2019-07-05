@@ -481,4 +481,7 @@
   <string name="dialog_box_text_nomination">Perché %1$s dovrebbe essere cancellato?</string>
   <string name="review_is_uploaded_by">%1$s è stato caricato da: %2$s</string>
   <string name="default_description_language">Lingua predefinita descrizione</string>
+  <string name="delete_reason_spam_other">Altro</string>
+  <string name="delete_reason_copyright_logo">Logo</string>
+  <string name="delete_reason_copyright_other">Altro</string>
 </resources>

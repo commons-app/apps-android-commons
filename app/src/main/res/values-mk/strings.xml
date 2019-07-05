@@ -527,4 +527,12 @@
   <string name="dialog_box_text_nomination">Зошто сметате дека %1$s треба да се избрише?</string>
   <string name="review_is_uploaded_by">%1$s е подигната од: %2$s</string>
   <string name="default_description_language">Стандарден јазик на описот</string>
+  <string name="delete_reason_spam_selfie">Самослик</string>
+  <string name="delete_reason_spam_blurry">Матно</string>
+  <string name="delete_reason_spam_nonsense">Бесмислено</string>
+  <string name="delete_reason_spam_other">Друго</string>
+  <string name="delete_reason_copyright_pressphoto">Новинарска слика</string>
+  <string name="delete_reason_copyright_internetphoto">Произволна слика од семрежјето</string>
+  <string name="delete_reason_copyright_logo">Лого</string>
+  <string name="delete_reason_copyright_other">Друго</string>
 </resources>

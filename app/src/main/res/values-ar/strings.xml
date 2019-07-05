@@ -537,4 +537,12 @@
   <string name="dialog_box_text_nomination">لماذا يجب حذف %1$s؟</string>
   <string name="review_is_uploaded_by">%1$s رُفِع بواسطة: %2$s</string>
   <string name="default_description_language">لغة الوصف الافتراضية</string>
+  <string name="delete_reason_spam_selfie">سيلفي</string>
+  <string name="delete_reason_spam_blurry">ضبابية</string>
+  <string name="delete_reason_spam_nonsense">كلام فارغ</string>
+  <string name="delete_reason_spam_other">أخرى</string>
+  <string name="delete_reason_copyright_pressphoto">اضغط على الصورة</string>
+  <string name="delete_reason_copyright_internetphoto">صورة عشوائية من الإنترنت</string>
+  <string name="delete_reason_copyright_logo">شعار</string>
+  <string name="delete_reason_copyright_other">أخرى</string>
 </resources>

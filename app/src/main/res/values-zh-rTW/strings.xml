@@ -536,4 +536,12 @@
   <string name="dialog_box_text_nomination">為何應刪除%1$s？</string>
   <string name="review_is_uploaded_by">%1$s 是由 %2$s 所上傳</string>
   <string name="default_description_language">預設描述語言</string>
+  <string name="delete_reason_spam_selfie">自拍</string>
+  <string name="delete_reason_spam_blurry">糢糊</string>
+  <string name="delete_reason_spam_nonsense">無意義</string>
+  <string name="delete_reason_spam_other">其它</string>
+  <string name="delete_reason_copyright_pressphoto">攝影作品</string>
+  <string name="delete_reason_copyright_internetphoto">來自網路的隨意照片</string>
+  <string name="delete_reason_copyright_logo">標誌</string>
+  <string name="delete_reason_copyright_other">其它</string>
 </resources>

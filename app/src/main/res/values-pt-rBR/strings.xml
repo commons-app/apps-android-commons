@@ -540,4 +540,12 @@
   <string name="dialog_box_text_nomination">Por que %1$s deve ser excluído?</string>
   <string name="review_is_uploaded_by">%1$s é carregado por: %2$s</string>
   <string name="default_description_language">Idioma de descrição padrão</string>
+  <string name="delete_reason_spam_selfie">Uma selfie</string>
+  <string name="delete_reason_spam_blurry">Embaçado</string>
+  <string name="delete_reason_spam_nonsense">Absurdo</string>
+  <string name="delete_reason_spam_other">Outro</string>
+  <string name="delete_reason_copyright_pressphoto">Divulgação</string>
+  <string name="delete_reason_copyright_internetphoto">Foto aleatória da internet</string>
+  <string name="delete_reason_copyright_logo">Logótipo</string>
+  <string name="delete_reason_copyright_other">Outro</string>
 </resources>

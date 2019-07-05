@@ -241,9 +241,9 @@
   <string name="notifications_thank_you_edit">Merci datt Dir eng Ännerung gemaach hutt</string>
   <string name="notifications_mention">%1$s huet Iech op %2$s ernimmt.</string>
   <string name="nearby_directions" fuzzy="true">RICHTUNGEN</string>
-  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
-  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Bewäert eis&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="no_internet">Internet net disponibel</string>
@@ -267,7 +267,7 @@
   <string name="search_commons">Op Commons sichen</string>
   <string name="title_activity_search">Sichen</string>
   <string name="search_tab_title_media" fuzzy="true">MEDIEN</string>
-  <string name="search_tab_title_categories" fuzzy="true">KATEGORIEN</string>
+  <string name="search_tab_title_categories">Kategorien</string>
   <string name="explore_tab_title_mobile" fuzzy="true">MOBIL EROPGELUEDEN</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
@@ -280,9 +280,9 @@
   <string name="wrong">Falsch Äntwert</string>
   <string name="add_description">+ Beschreiwung derbäisetzen</string>
   <string name="nominate_delete">Nominéiere fir ze Läschen</string>
-  <string name="delete" fuzzy="true">LÄSCHEN</string>
+  <string name="delete">Läschen</string>
   <string name="Achievements">Realisatiounen</string>
-  <string name="statistics" fuzzy="true">STATISTIKEN</string>
+  <string name="statistics">Statistiken</string>
   <string name="statistics_thanks">Merci\'e kritt</string>
   <string name="statistics_featured">Bemierkenswäert Biller</string>
   <string name="level" fuzzy="true">NIVEAU</string>
@@ -345,4 +345,5 @@
   <string name="exif_tag_name_software">Software</string>
   <string name="no_categories_found">Keng Kategorie fonnt.</string>
   <string name="upload_cancelled">Eroplueden ofgebrach</string>
+  <string name="delete_reason_copyright_logo">Logo</string>
 </resources>

@@ -291,17 +291,17 @@
   <string name="nearby_location_has_not_changed">Розташування не змінено</string>
   <string name="nearby_location_not_available">Місцезнаходження недоступне</string>
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
-  <string name="get_directions" fuzzy="true">Показати на мапі у зовнішній програмі</string>
-  <string name="read_article" fuzzy="true">ЧИТАТИ СТАТТЮ</string>
+  <string name="get_directions">Показати на мапі у зовнішній програмі</string>
+  <string name="read_article">Читати статтю</string>
   <string name="notifications_welcome">Вітаємо у Вікісховищі, %1$s! Раді вас бачити.</string>
   <string name="notifications_talk_page_message">%1$s залишив повідомлення на вашій сторінці обговорення</string>
   <string name="notifications_thank_you_edit">Дякуємо за редагування</string>
   <string name="notifications_mention">%1$s згадав вас на %2$s.</string>
   <string name="toggle_view_button">Перемкнути режим перегляду</string>
-  <string name="nearby_directions" fuzzy="true">НАПРЯМКИ</string>
-  <string name="nearby_wikidata" fuzzy="true">ВІКІДАНІ</string>
-  <string name="nearby_wikipedia" fuzzy="true">ВІКІПЕДІЯ</string>
-  <string name="nearby_commons" fuzzy="true">ВІКІСХОВИЩЕ</string>
+  <string name="nearby_directions">Напрямки</string>
+  <string name="nearby_wikidata">Вікідані</string>
+  <string name="nearby_wikipedia">Вікіпедія</string>
+  <string name="nearby_commons">Вікісховище</string>
   <string name="about_rate_us">&lt;u&gt;Оцініть нас&lt;/u&gt;</string>
   <string name="about_faq">Часті запитання</string>
   <string name="welcome_skip_button">Пропустити інструкцію</string>
@@ -335,10 +335,10 @@
   <string name="provider_searches">Недавні запити пошуку</string>
   <string name="error_loading_categories">Сталася помилка під час завантаження категорій.</string>
   <string name="error_loading_subcategories">Сталася помилка під час завантаження підкатегорій.</string>
-  <string name="search_tab_title_media" fuzzy="true">МЕДІАФАЙЛИ</string>
-  <string name="search_tab_title_categories" fuzzy="true">КАТЕГОРІЇ</string>
-  <string name="explore_tab_title_featured" fuzzy="true">ОБРАНЕ</string>
-  <string name="explore_tab_title_mobile" fuzzy="true">ЗАВАНТАЖЕННЯ З МОБІЛЬНОГО</string>
+  <string name="search_tab_title_media">Медіафайли</string>
+  <string name="search_tab_title_categories">Категорії</string>
+  <string name="explore_tab_title_featured">Обране</string>
+  <string name="explore_tab_title_mobile">Завантаження з мобільного</string>
   <string name="successful_wikidata_edit">Зображення успішно додано до сторінки %1$s у Вікіданих!</string>
   <string name="wikidata_edit_failure">Не вдалось оновити відповідну сторінку Вікіданих!</string>
   <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
@@ -372,13 +372,13 @@
   <string name="delete_search_dialog">Вилучити цей пошук?</string>
   <string name="search_history_deleted">Історія пошуку очищена</string>
   <string name="nominate_delete">Номінувати на вилучення</string>
-  <string name="delete" fuzzy="true">ВИЛУЧИТИ</string>
+  <string name="delete">Вилучити</string>
   <string name="Achievements">Досягнення</string>
-  <string name="statistics" fuzzy="true">СТАТИСТИКА</string>
+  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Отримані подяки</string>
   <string name="statistics_featured">Вибрані зображення</string>
   <string name="statistics_wikidata_edits">Зображення місць поблизу</string>
-  <string name="level" fuzzy="true">РІВЕНЬ</string>
+  <string name="level">Рівень</string>
   <string name="images_uploaded">Завантажені зображення</string>
   <string name="image_reverts">Не відхилені зображення</string>
   <string name="images_used_by_wiki">Використані зображення</string>
@@ -526,7 +526,7 @@
   <string name="previous_button_tooltip_message">Натисніть, щоб використати назву та опис, які ви вводили для свого попереднього зображення, і змінити їх під поточне</string>
   <string name="welcome_do_upload_content_description">Приклади добрих зображень для завантаження у Вікісховище</string>
   <string name="welcome_dont_upload_content_description">Приклади зображень, які не слід завантажувати</string>
-  <string name="skip_image" fuzzy="true">ПРОПУСТИТИ ЦЕ ЗОБРАЖЕННЯ</string>
+  <string name="skip_image">Пропустити це зображення</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Завантаження не вдалося. Ми не змогли завантажити файл без доступу до зовнішнього носія.</string>
   <string name="manage_exif_tags">Робота з EXIF-тегами</string>
   <string name="manage_exif_tags_summary">Вкажіть, які EXIF-теги мають бути збережені при завантаженні файлів</string>
@@ -544,5 +544,14 @@
   <string name="upload_cancelled">Завантаження скасовано</string>
   <string name="previous_image_title_description_not_found">Відсутній заголовок або опис попереднього зображення</string>
   <string name="dialog_box_text_nomination">Чому %1$s має бути видалено?</string>
+  <string name="review_is_uploaded_by">%1$s завантажено з допомогою: %2$s</string>
   <string name="default_description_language">Усталена мова описів</string>
+  <string name="delete_reason_spam_selfie">Селфі</string>
+  <string name="delete_reason_spam_blurry">Розмито</string>
+  <string name="delete_reason_spam_nonsense">Безглуздя</string>
+  <string name="delete_reason_spam_other">Інше</string>
+  <string name="delete_reason_copyright_pressphoto">Фото з новин</string>
+  <string name="delete_reason_copyright_internetphoto">Випадкове фото з інтернет</string>
+  <string name="delete_reason_copyright_logo">Логотип</string>
+  <string name="delete_reason_copyright_other">Інше</string>
 </resources>

@@ -287,14 +287,14 @@
   <string name="nearby_location_has_not_changed">A localização não foi alterada.</string>
   <string name="nearby_location_not_available">A localização não está disponível.</string>
   <string name="location_permission_rationale_nearby">É necessária a permissão para mostrar uma lista dos sítios aqui perto</string>
-  <string name="get_directions" fuzzy="true">OBTER INDICAÇÕES</string>
+  <string name="get_directions">Obter indicações</string>
   <string name="read_article">Ler artigo</string>
   <string name="notifications_welcome">Bem-vindo à wiki Wikimedia Commons, %1$s! É um prazer tê-lo aqui.</string>
   <string name="notifications_talk_page_message">%1$s deixou uma mensagem na sua página de discussão</string>
   <string name="notifications_thank_you_edit">Obrigado por ter realizado uma edição</string>
   <string name="notifications_mention">%1$s fez menção a si em %2$s.</string>
   <string name="toggle_view_button">Alternar modo de visionamento</string>
-  <string name="nearby_directions" fuzzy="true">INDICAÇÕES</string>
+  <string name="nearby_directions">Indicações</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
   <string name="nearby_commons">Commons</string>
@@ -334,7 +334,7 @@
   <string name="search_tab_title_media">Multimédia</string>
   <string name="search_tab_title_categories">Categorias</string>
   <string name="explore_tab_title_featured">Destacadas</string>
-  <string name="explore_tab_title_mobile" fuzzy="true">CARREGADA VIA TELEMÓVEL</string>
+  <string name="explore_tab_title_mobile">Carregada via telemóvel</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
@@ -520,7 +520,7 @@
   <string name="previous_button_tooltip_message">Clique para reutilizar o título e a descrição que inseriu na sua fotografia anterior e adequá-los à atual</string>
   <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
-  <string name="skip_image" fuzzy="true">SALTAR ESTA IMAGEM</string>
+  <string name="skip_image">Saltar esta imagem</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">O descarregamento falhou! Não podemos descarregar o ficheiro sem permissão de armazenagem externa.</string>
   <string name="manage_exif_tags">Gerir etiquetas EXIF</string>
   <string name="manage_exif_tags_summary">Selecionar as etiquetas EXIF a manter nos carregamentos</string>
@@ -538,5 +538,14 @@
   <string name="upload_cancelled">Carregamento cancelado</string>
   <string name="previous_image_title_description_not_found">Não há dados para o título ou descrição da imagem anterior</string>
   <string name="dialog_box_text_nomination">Porque deve %1$s ser eliminado?</string>
+  <string name="review_is_uploaded_by">%1$s é carregada por: %2$s</string>
   <string name="default_description_language">Língua de descrição padrão</string>
+  <string name="delete_reason_spam_selfie">Um autorretrato</string>
+  <string name="delete_reason_spam_blurry">Desfocada</string>
+  <string name="delete_reason_spam_nonsense">Sem sentido</string>
+  <string name="delete_reason_spam_other">Outro</string>
+  <string name="delete_reason_copyright_pressphoto">Fotografia de imprensa</string>
+  <string name="delete_reason_copyright_internetphoto">Fotografia aleatória da Internet</string>
+  <string name="delete_reason_copyright_logo">Logótipo</string>
+  <string name="delete_reason_copyright_other">Outro</string>
 </resources>

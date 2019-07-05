@@ -22,6 +22,7 @@
 * Mirzali
 * Tiberius1701
 * Vivaelcelta
+* Wizardeck
 -->
 <resources>
   <string name="title_activity_explore">Explorar</string>
@@ -188,6 +189,7 @@
   <string name="storage_permission_title">Pidiendo permiso de almacenamiento</string>
   <string name="read_storage_permission_rationale">Permiso necesario: lectura de almacenamiento externo. La aplicación no puede acceder a la galería sin él.</string>
   <string name="write_storage_permission_rationale">Permiso necesario: escritura en almacenamiento externo. La aplicación no puede acceder a la cámara o la galería sin este.</string>
+  <string name="location_permission_title">Pidiendo Permiso de Ubicación</string>
   <string name="location_permission_rationale">Permiso opcional: obtener la ubicación actual para sugerir categorías</string>
   <string name="ok">Aceptar</string>
   <string name="title_activity_nearby">Lugares cercanos</string>
@@ -528,6 +530,7 @@
   <string name="skip_image">Omitir esta imagen</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">La descarga falló!. No podemos descargar el archivo sin el permiso de almacenamiento externo.</string>
   <string name="manage_exif_tags">Gestionar etiquetas EXIF</string>
+  <string name="manage_exif_tags_summary">Seleccionar qué etiquetas EXIF se mantendrán en la subida</string>
   <string name="exif_tag_name_author">Autor</string>
   <string name="exif_tag_name_copyright">Derechos de autor</string>
   <string name="exif_tag_name_location">Ubicación</string>
@@ -535,9 +538,21 @@
   <string name="exif_tag_name_lensModel">Modelo de lente</string>
   <string name="exif_tag_name_serialNumbers">Números de serie</string>
   <string name="exif_tag_name_software">Programa</string>
+  <string name="share_text">Sube fotos a Wikimedia Commons desde tu celular, descarga la aplicación de Commons: %1$s</string>
+  <string name="share_via">Compartir la aplicación vía...</string>
   <string name="image_info">Información de la imagen</string>
   <string name="no_categories_found">No se encontró ninguna categoría</string>
   <string name="upload_cancelled">Se canceló la carga</string>
   <string name="previous_image_title_description_not_found">No hay datos sobre el título o la descripción anteriores de la imagen</string>
   <string name="dialog_box_text_nomination">¿Por qué debe borrarse %1$s?</string>
+  <string name="review_is_uploaded_by">%1$s fue subida por: %2$s</string>
+  <string name="default_description_language">Idioma por defecto de la descripción</string>
+  <string name="delete_reason_spam_selfie">Un autorretrato</string>
+  <string name="delete_reason_spam_blurry">Borrosa</string>
+  <string name="delete_reason_spam_nonsense">Sinsentido</string>
+  <string name="delete_reason_spam_other">Otra</string>
+  <string name="delete_reason_copyright_pressphoto">Fotografía para prensa</string>
+  <string name="delete_reason_copyright_internetphoto">Foto cualquiera tomada de internet</string>
+  <string name="delete_reason_copyright_logo">Logo</string>
+  <string name="delete_reason_copyright_other">Otra</string>
 </resources>

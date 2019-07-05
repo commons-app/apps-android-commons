@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Admresdeserv.
 * Papuass
 * Silraks
@@ -48,7 +49,7 @@
   <string name="title_activity_settings">Iestatījumi</string>
   <string name="title_activity_signup">Reģistrēties</string>
   <string name="menu_about">Par</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izejas kods&lt;/a&gt; un &lt;a href=\"https://commons-app.github.io/\"&gt;tīmekļa vietne&lt;/a&gt; GitHub. Izveido jaunu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub pieteikumu&lt;/a&gt; kļūdas ziņojumam vai ieteikumam.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izejas kods&lt;/a&gt; un &lt;a href=\"https://commons-app.github.io/\"&gt;tīmekļa vietne&lt;/a&gt; GitHub. Izveido jaunu &lt;a href=\"%1$s\"&gt;GitHub pieteikumu&lt;/a&gt; kļūdas ziņojumam vai ieteikumam.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Privātuma politika&lt;/a&gt;</string>
   <string name="title_activity_about">Par</string>
   <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
@@ -105,15 +106,20 @@
   <string name="give_permission">Atļaut</string>
   <string name="use_external_storage">Izmantot ārējo krātuvi</string>
   <string name="skip_login">Izlaist</string>
-  <string name="read_article">LASĪT RAKSTU</string>
+  <string name="get_directions">Saņemt norādes</string>
+  <string name="read_article">Lasīt rakstu</string>
   <string name="notifications_thank_you_edit">Paldies par labojumu</string>
   <string name="toggle_view_button">Pārslēgt skatu</string>
+  <string name="nearby_directions">Norādes</string>
   <string name="about_translate_title">Valodas</string>
   <string name="about_translate_proceed">Turpināt</string>
   <string name="about_translate_cancel">Atcelt</string>
   <string name="showcase_view_got_it_button">Sapratu!</string>
+  <string name="search_tab_title_categories">Kategorijas</string>
   <string name="question">Jautājums</string>
   <string name="add_description">+ Pievienot aprakstu</string>
+  <string name="delete">Dzēst</string>
+  <string name="statistics">Statistika</string>
   <string name="submit">Iesniegt</string>
   <string name="navigation_item_bookmarks">Grāmatzīmes</string>
   <string name="title_activity_bookmarks">Grāmatzīmes</string>
@@ -125,6 +131,22 @@
   <string name="yes_submit">Jā, iesniegt</string>
   <string name="nearby_card_permission_title">Atļaujas pieprasījums</string>
   <string name="never_ask_again">Nekad vairs šo nejautāt</string>
+  <string name="nominate_for_deletion_done">Pabeigts</string>
+  <string name="send_thank_send">Sūta pateicību</string>
+  <string name="send_thank_notification_title">Sūta pateicību</string>
   <string name="menu_option_archived">Skatīt arhivētos</string>
   <string name="menu_option_unread">Skatīt nelasītos</string>
+  <string name="skip_image">Izlaist šo attēlu</string>
+  <string name="exif_tag_name_author">Autors</string>
+  <string name="exif_tag_name_copyright">Autortiesības</string>
+  <string name="exif_tag_name_location">Atrašanās vieta</string>
+  <string name="exif_tag_name_cameraModel">Fotoaparāta modelis</string>
+  <string name="exif_tag_name_lensModel">Objektīva modelis</string>
+  <string name="exif_tag_name_serialNumbers">Sērijas numuri</string>
+  <string name="exif_tag_name_software">Programmatūra</string>
+  <string name="delete_reason_spam_selfie">Pašbilde</string>
+  <string name="delete_reason_spam_blurry">Miglains</string>
+  <string name="delete_reason_spam_other">Cits</string>
+  <string name="delete_reason_copyright_internetphoto">Nejaušs foto no interneta</string>
+  <string name="delete_reason_copyright_logo">Logotips</string>
 </resources>
