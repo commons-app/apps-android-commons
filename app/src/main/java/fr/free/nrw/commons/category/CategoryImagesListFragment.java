@@ -117,7 +117,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(mediaClient.getCategoryImages(categoryName)
+        compositeDisposable.add(mediaClient.getMediaListFromCategory(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -223,7 +223,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
 
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(mediaClient.getCategoryImages(categoryName)
+        compositeDisposable.add(mediaClient.getMediaListFromCategory(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
