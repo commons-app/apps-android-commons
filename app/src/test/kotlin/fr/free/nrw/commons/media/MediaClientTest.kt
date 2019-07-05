@@ -1,20 +1,24 @@
 package fr.free.nrw.commons.media
 
+import fr.free.nrw.commons.Media
 import io.reactivex.Observable
-import junit.framework.Assert.assertFalse
-import junit.framework.Assert.assertTrue
+import junit.framework.Assert.*
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
-import org.mockito.InjectMocks
-import org.mockito.Mock
+import org.mockito.*
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
-import org.mockito.MockitoAnnotations
 import org.wikipedia.dataclient.mwapi.ImageDetails
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResult
+import org.wikipedia.gallery.ImageInfo
+import org.mockito.ArgumentCaptor
+import java.util.*
+import org.mockito.Captor
+
+
+
 
 class MediaClientTest {
 
@@ -96,5 +100,37 @@ class MediaClientTest {
 
         val checkFileExistsUsingSha = mediaClient!!.checkFileExistsUsingSha("abcde").blockingGet()
         assertFalse(checkFileExistsUsingSha)
+    }
+
+    @Captor
+    private val continuationCaptor: ArgumentCaptor<Map<String, String>>? = null
+
+    @Test
+    fun getMediaListFromCategoryTwice() {
+        val mockContinuation= mapOf(Pair("gcmcontinue", "test"))
+        val imageInfo = ImageInfo()
+
+        val mwQueryPage = mock(MwQueryPage::class.java)
+        `when`(mwQueryPage.title()).thenReturn("Test")
+        `when`(mwQueryPage.imageInfo()).thenReturn(imageInfo)
+
+        val mwQueryResult = mock(MwQueryResult::class.java)
+        `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
+
+        val mockResponse = mock(MwQueryResponse::class.java)
+        `when`(mockResponse.query()).thenReturn(mwQueryResult)
+        `when`(mockResponse.continuation()).thenReturn(mockContinuation)
+
+        `when`(mediaInterface!!.getMediaListFromCategory(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(),
+                continuationCaptor!!.capture()))
+                .thenReturn(Observable.just(mockResponse))
+        val media1 = mediaClient!!.getMediaListFromCategory("abcde").blockingGet().get(0)
+        val media2 = mediaClient!!.getMediaListFromCategory("abcde").blockingGet().get(0)
+
+        assertEquals(continuationCaptor.allValues[0], emptyMap<String, String>())
+        assertEquals(continuationCaptor.allValues[1], mockContinuation)
+
+        assertEquals(media1.filename, "Test")
+        assertEquals(media2.filename, "Test")
     }
 }
