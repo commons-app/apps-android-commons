@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import io.reactivex.Observable;
 
@@ -16,7 +15,6 @@ public class WikiBaseClient {
     private final WikiBaseInterface wikiBaseInterface;
     private final CsrfTokenClient csrfTokenClient;
 
-    //@Inject MediaWikiApi mwApi;
 
     @Inject
     public WikiBaseClient(WikiBaseInterface wikiBaseInterface,

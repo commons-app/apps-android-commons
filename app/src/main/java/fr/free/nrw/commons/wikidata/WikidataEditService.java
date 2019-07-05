@@ -154,7 +154,22 @@ public class WikidataEditService {
 
         String data = jsonData.toString();
 
-        wikiBaseClient.getEditToken()
+
+        Observable.fromCallable(mediaWikiApi::getEditToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(editToken -> {
+                    wikiBaseClient.postEditEntity("M" + fileEntityId, data, editToken)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(revisionId -> Timber.d("Property P180 set successfully for %s", revisionId),
+                                    throwable -> {
+                                        Timber.e(throwable, "Error occurred while setting P180 tag");
+                                        ViewUtil.showLongToast(context, throwable.toString());
+                                    });
+                });
+
+        /*wikiBaseClient.getEditToken()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(editToken -> {
@@ -166,7 +181,7 @@ public class WikidataEditService {
                             Timber.e(throwable, "Error occurred while setting P180 tag");
                             ViewUtil.showLongToast(context, throwable.toString());
                         });
-                });
+                });*/
 
     }
 

@@ -31,12 +31,13 @@ public interface WikiBaseInterface {
 
 
     @Headers("Cache-Control: no-cache")
-    @GET(MW_API_PREFIX + "action=query&meta=tokens&type=login")
+    @GET(MW_API_PREFIX + "action=query&meta=tokens")
     @NonNull Observable<MwQueryResponse> getEditToken();
 
+    /*
     @Headers("Cache-Control: no-cache")
     @GET(MW_API_PREFIX + "action=query&meta=tokens&type=login")
     @NonNull Call<MwQueryResponse> getLoginToken();
-
+    */
 }
 
