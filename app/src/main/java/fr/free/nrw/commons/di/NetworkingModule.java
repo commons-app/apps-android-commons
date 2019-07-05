@@ -84,7 +84,6 @@ public class NetworkingModule {
                 WIKIDATA_SPARQL_QUERY_URL,
                 BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
                 BuildConfig.WIKIMEDIA_API_HOST,
-                defaultKvStore,
                 gson);
     }
 
