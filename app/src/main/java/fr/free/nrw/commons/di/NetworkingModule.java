@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaInterface;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
@@ -131,5 +132,11 @@ public class NetworkingModule {
     @Singleton
     public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, MediaInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public CategoryInterface provideCategoryInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, CategoryInterface.class);
     }
 }
