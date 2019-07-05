@@ -152,7 +152,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 status.equals("UI")
                         && loginCustomApiResult.getString("/api/clientlogin/requests/_v/@id").equals("TOTPAuthenticationRequest")
                         && loginCustomApiResult.getString("/api/clientlogin/requests/_v/@provider").equals("Two-factor authentication (OATH).")
-                ) {
+        ) {
             setAuthCookieOnLogin(false);
             return "2FA";
         }
@@ -251,7 +251,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
 
-
     @Override
     @Nullable
     public String appendEdit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
@@ -306,71 +305,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    @NonNull
-    public Observable<String> searchCategories(String filterValue, int searchCatsLimit) {
-        List<String> categories = new ArrayList<>();
-        return Single.fromCallable(() -> {
-            List<CustomApiResult> categoryNodes = null;
-            try {
-                categoryNodes = api.action("query")
-                        .param("format", "xml")
-                        .param("list", "search")
-                        .param("srwhat", "text")
-                        .param("srnamespace", "14")
-                        .param("srlimit", searchCatsLimit)
-                        .param("srsearch", filterValue)
-                        .get()
-                        .getNodes("/api/query/search/p/@title");
-            } catch (IOException e) {
-                Timber.e(e, "Failed to obtain searchCategories");
-            }
-
-            if (categoryNodes == null) {
-                return new ArrayList<String>();
-            }
-
-            for (CustomApiResult categoryNode : categoryNodes) {
-                String cat = categoryNode.getDocument().getTextContent();
-                String catString = cat.replace("Category:", "");
-                if (!categories.contains(catString)) {
-                    categories.add(catString);
-                }
-            }
-
-            return categories;
-        }).flatMapObservable(Observable::fromIterable);
-    }
-
-    @Override
-    @NonNull
-    public Observable<String> allCategories(String filterValue, int searchCatsLimit) {
-        return Single.fromCallable(() -> {
-            ArrayList<CustomApiResult> categoryNodes = null;
-            try {
-                categoryNodes = api.action("query")
-                        .param("list", "allcategories")
-                        .param("acprefix", filterValue)
-                        .param("aclimit", searchCatsLimit)
-                        .get()
-                        .getNodes("/api/query/allcategories/c");
-            } catch (IOException e) {
-                Timber.e(e, "Failed to obtain allCategories");
-            }
-
-            if (categoryNodes == null) {
-                return new ArrayList<String>();
-            }
-
-            List<String> categories = new ArrayList<>();
-            for (CustomApiResult categoryNode : categoryNodes) {
-                categories.add(categoryNode.getDocument().getTextContent());
-            }
-
-            return categories;
-        }).flatMapObservable(Observable::fromIterable);
-    }
-
-    @Override
     public String getWikidataCsrfToken() throws IOException {
         String wikidataCsrfToken = wikidataApi.action("query")
                 .param("action", "query")
@@ -385,10 +319,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     /**
      * Creates a new claim using the wikidata API
      * https://www.mediawiki.org/wiki/Wikibase/API
+     *
      * @param entityId the wikidata entity to be edited
      * @param property the property to be edited, for eg P18 for images
      * @param snaktype the type of value stored for that property
-     * @param value the actual value to be stored for the property, for eg filename in case of P18
+     * @param value    the actual value to be stored for the property, for eg filename in case of P18
      * @return returns revisionId if the claim is successfully created else returns null
      * @throws IOException
      */
@@ -422,6 +357,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     /**
      * Adds the wikimedia-commons-app tag to the edits made on wikidata
+     *
      * @param revisionId
      * @return
      * @throws IOException
@@ -543,13 +479,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         try {
             if (archived) {
                 notfilter = "read";
-            }else {
+            } else {
                 notfilter = "!read";
             }
-            String language=Locale.getDefault().getLanguage();
-            if(StringUtils.isBlank(language)){
+            String language = Locale.getDefault().getLanguage();
+            if (StringUtils.isBlank(language)) {
                 //if no language is set we use the default user language defined on wikipedia
-                language="user";
+                language = "user";
             }
             notificationNode = api.action("query")
                     .param("notprop", "list")
@@ -595,6 +531,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * The method takes categoryName as input and returns a List of Subcategories
      * It uses the generator query API to get the subcategories in a category, 500 at a time.
      * Uses the query continue values for fetching paginated responses
+     *
      * @param categoryName Category name as defined on commons
      * @return
      */
@@ -606,7 +543,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             CustomMwApi.RequestBuilder requestBuilder = api.action("query")
                     .param("generator", "categorymembers")
                     .param("format", "xml")
-                    .param("gcmtype","subcat")
+                    .param("gcmtype", "subcat")
                     .param("gcmtitle", categoryName)
                     .param("prop", "info")
                     .param("gcmlimit", "500")
@@ -636,6 +573,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     /**
      * The method takes categoryName as input and returns a List of parent categories
      * It uses the generator query API to get the parent categories of a category, 500 at a time.
+     *
      * @param categoryName Category name as defined on commons
      * @return
      */
@@ -673,48 +611,12 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return CategoryImageUtils.getSubCategoryList(childNodes);
     }
 
-    /**
-     * This method takes search keyword as input and returns a list of categories objects filtered using search query
-     * It uses the generator query API to get the categories searched using a query, 25 at a time.
-     * @param query keyword to search categories on commons
-     * @return
-     */
-    @Override
-    @NonNull
-    public List<String> searchCategory(String query, int offset) {
-        List<CustomApiResult> categoryNodes = null;
-        try {
-            categoryNodes = api.action("query")
-                    .param("format", "xml")
-                    .param("list", "search")
-                    .param("srwhat", "text")
-                    .param("srnamespace", "14")
-                    .param("srlimit", "25")
-                    .param("sroffset",offset)
-                    .param("srsearch", query)
-                    .get()
-                    .getNodes("/api/query/search/p/@title");
-        } catch (IOException e) {
-            Timber.e(e, "Failed to obtain searchCategories");
-        }
-
-        if (categoryNodes == null) {
-            return new ArrayList<>();
-        }
-
-        List<String> categories = new ArrayList<>();
-        for (CustomApiResult categoryNode : categoryNodes) {
-            String catName = categoryNode.getDocument().getTextContent();
-            categories.add(catName);
-        }
-        return categories;
-    }
-
 
     /**
      * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
      * https://www.mediawiki.org/wiki/API:Raw_query_continue
      * After fetching images a page of image for a particular category, shared defaultKvStore are updated with the latest QueryContinue Values
+     *
      * @param keyword
      * @param queryContinue
      */
@@ -724,6 +626,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     /**
      * Before making a paginated API call, this method is called to get the latest query continue values to be used
+     *
      * @param keyword
      * @return
      */
@@ -751,7 +654,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             if (!resultStatus.equals("Success")) {
                 String errorCode = result.getString("/api/error/@code");
                 Timber.e(errorCode);
-                
+
                 if (errorCode.equals(ERROR_CODE_BAD_TOKEN)) {
                     ViewUtil.showLongToast(context, R.string.bad_token_error_proposed_solution);
                 }
@@ -799,8 +702,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-
      * Checks to see if a user is currently blocked from Commons
+     *
      * @return whether or not the user is blocked from Commons
      */
     @Override
