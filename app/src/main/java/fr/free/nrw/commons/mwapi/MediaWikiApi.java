@@ -35,9 +35,6 @@ public interface MediaWikiApi {
     List<String> getParentCategoryList(String categoryName);
 
     @NonNull
-    List<String> searchCategory(String title, int offset);
-
-    @NonNull
     Single<UploadStash> uploadFile(String filename, InputStream file,
                                    long dataLength, Uri fileUri, Uri contentProviderUri,
                                    final ProgressListener progressListener);
@@ -66,19 +63,10 @@ public interface MediaWikiApi {
     Single<MediaResult> fetchMediaByFilename(String filename);
 
     @NonNull
-    Observable<String> searchCategories(String filterValue, int searchCatsLimit);
-
-    @NonNull
-    Observable<String> allCategories(String filter, int searchCatsLimit);
-
-    @NonNull
     List<Notification> getNotifications(boolean archived) throws IOException;
 
     @NonNull
     boolean markNotificationAsRead(Notification notification) throws IOException;
-
-    @NonNull
-    Observable<String> searchTitles(String title, int searchCatsLimit);
 
     @Nullable
     String revisionsByFilename(String filename) throws IOException;
