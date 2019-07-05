@@ -68,9 +68,6 @@ public interface MediaWikiApi {
     @NonNull
     boolean markNotificationAsRead(Notification notification) throws IOException;
 
-    @NonNull
-    Observable<String> searchTitles(String title, int searchCatsLimit);
-
     @Nullable
     String revisionsByFilename(String filename) throws IOException;
 

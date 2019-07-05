@@ -188,7 +188,7 @@ public class CategoriesModel{
      * @return
      */
     private Observable<CategoryItem> getTitleCategories(String title) {
-        return mwApi.searchTitles(title, SEARCH_CATS_LIMIT)
+        return categoryClient.searchCategories(title, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 
