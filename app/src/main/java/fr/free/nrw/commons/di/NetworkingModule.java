@@ -71,7 +71,7 @@ public class NetworkingModule {
     public MediaWikiApi provideMediaWikiApi(Context context,
                                             @Named("default_preferences") JsonKvStore defaultKvStore,
                                             Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, gson);
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore);
     }
 
     @Provides
