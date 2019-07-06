@@ -38,7 +38,7 @@ class ApacheHttpClientMediaWikiApiTest {
         wikidataServer = MockWebServer()
         okHttpClient = OkHttpClient()
         sharedPreferences = mock(JsonKvStore::class.java)
-        testObject = ApacheHttpClientMediaWikiApi(ApplicationProvider.getApplicationContext(), "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, Gson())
+        testObject = ApacheHttpClientMediaWikiApi(ApplicationProvider.getApplicationContext(), "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences)
     }
 
     @After
