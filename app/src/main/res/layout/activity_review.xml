@@ -25,7 +25,7 @@
               android:layout_gravity="center_horizontal"
               android:paddingLeft="12dp"
               android:paddingRight="12dp"
-              android:drawableEnd="@drawable/ic_info_outline_blue_24dp"
+              android:drawableEnd="@drawable/ic_info_outline_24dp"
               android:drawablePadding="12dp"
               android:drawableTint="@color/button_blue_dark"
               android:text="@string/skip_image"
