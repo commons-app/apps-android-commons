@@ -484,10 +484,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return result.equals("success");
     }
 
-     *
-     *
-     *
-     *
     @NonNull
     public Single<UploadStash> uploadFile(
             String filename,

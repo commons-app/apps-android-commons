@@ -26,7 +26,6 @@ public class ReviewHelper {
     private static final String[] imageExtensions = new String[]{".jpg", ".jpeg", ".png"};
 
     private final MediaClient mediaClient;
-    private final MediaClient mediaClient;
     private final ReviewInterface reviewInterface;
 
     @Inject
