@@ -59,7 +59,7 @@ public class DeleteHelper {
      * @return
      */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
-        viewUtil.showShortToast(context, String.format(context.getString(R.string.delete_helper_make_deletion_toast), media.getDisplayTitle()));
+        viewUtil.showShortToast(context, context.getString((R.string.delete_helper_make_deletion_toast), media.getDisplayTitle()));
         return Single.fromCallable(() -> delete(media, reason))
                 .flatMap(result -> Single.fromCallable(() ->
                         showDeletionNotification(context, media, result)));
@@ -127,7 +127,7 @@ public class DeleteHelper {
 
         if (result) {
             title += ": " + context.getString(R.string.delete_helper_show_deletion_title_success);
-            message = String.format(context.getString(R.string.delete_helper_show_deletion_message_if), media.getDisplayTitle());
+            message = context.getString((R.string.delete_helper_show_deletion_message_if),media.getDisplayTitle());
         } else {
             title += ": " + context.getString(R.string.delete_helper_show_deletion_title_failed);
             message = context.getString(R.string.delete_helper_show_deletion_message_else) ;
