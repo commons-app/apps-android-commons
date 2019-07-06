@@ -3,6 +3,7 @@ package fr.free.nrw.commons.category;
 
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import org.wikipedia.dataclient.mwapi.MwQueryResult;
 
 import java.util.List;
 
@@ -75,6 +76,18 @@ public class CategoryClient {
 
 
     /**
+     * The method takes categoryName as input and returns a List of Subcategories
+     * It uses the generator query API to get the subcategories in a category, 500 at a time.
+     *
+     * @param categoryName Category name as defined on commons
+     * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
+     */
+    public Observable<String> getSubCategoryList(String categoryName) {
+        return responseToCategoryName(CategoryInterface.getSubCategoryList(categoryName));
+    }
+
+
+    /**
      * Internal function to reduce code reuse. Extracts the categories returned from MwQueryResponse.
      *
      * @param responseObservable The query response observable
@@ -83,12 +96,14 @@ public class CategoryClient {
     private Observable<String> responseToCategoryName(Observable<MwQueryResponse> responseObservable) {
         return responseObservable
                 .flatMap(mwQueryResponse -> {
-                    List<MwQueryPage> pages = mwQueryResponse.query().pages();
-                    if (pages != null)
-                        return Observable.fromIterable(pages);
-                    else
+                    MwQueryResult query;
+                    List<MwQueryPage> pages;
+                    if ((query = mwQueryResponse.query()) == null ||
+                            (pages = query.pages()) == null) {
                         Timber.d("No categories returned.");
-                    return Observable.empty();
+                        return Observable.empty();
+                    } else
+                        return Observable.fromIterable(pages);
                 })
                 .map(MwQueryPage::title)
                 .doOnEach(s -> Timber.d("Category returned: %s", s))

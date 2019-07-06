@@ -54,6 +54,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
 
     private String categoryName = null;
     @Inject MediaWikiApi mwApi;
+    @Inject CategoryClient categoryClient;
 
     private RVRendererAdapter<String> categoriesAdapter;
     private boolean isParentCategory = true;
@@ -96,17 +97,18 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        if (!isParentCategory){
-            compositeDisposable.add(Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                    .subscribe(this::handleSuccess, this::handleError));
-        }else {
+        if (isParentCategory) {
             compositeDisposable.add(Observable.fromCallable(() -> mwApi.getParentCategoryList(categoryName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .subscribe(this::handleSuccess, this::handleError));
+        } else {
+            compositeDisposable.add(categoryClient.getSubCategoryList("Category:"+categoryName)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .collect(ArrayList<String>::new, ArrayList::add)
                     .subscribe(this::handleSuccess, this::handleError));
         }
     }
