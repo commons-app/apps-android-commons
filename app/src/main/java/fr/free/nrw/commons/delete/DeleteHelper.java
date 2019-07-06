@@ -59,8 +59,7 @@ public class DeleteHelper {
      * @return
      */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
-        viewUtil.showShortToast(context, context.getString(R.string.delete_helper_make_deletion_toast_1)
-                + " " + media.getDisplayTitle() + " " + context.getString(R.string.delete_helper_make_deletion_toast_2));
+        viewUtil.showShortToast(context, context.getString((R.string.delete_helper_make_deletion_toast), media.getDisplayTitle()));
         return Single.fromCallable(() -> delete(media, reason))
                 .flatMap(result -> Single.fromCallable(() ->
                         showDeletionNotification(context, media, result)));
@@ -92,12 +91,12 @@ public class DeleteHelper {
                 reason +
                 " ~~~~";
 
-        String logPageString = "\n{{Commons:Deletion requests" + media.getFilename() +
+        String logPageString = "\n{{Commons:Deletion requests/" + media.getFilename() +
                 "}}\n";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         String date = sdf.format(calendar.getTime());
 
-        String userPageString = "\n" + "{{subst:idw|" + media.getFilename() +
+        String userPageString = "\n{{subst:idw|" + media.getFilename() +
                 "}} ~~~~";
 
         try {
@@ -127,13 +126,11 @@ public class DeleteHelper {
         String title = context.getString(R.string.delete_helper_show_deletion_title);
 
         if (result) {
-            title += ": " + context.getString(R.string.delete_helper_show_deletion_title_if);
-            message = context.getString(R.string.delete_helper_show_deletion_message_if_1)+ " "
-                    + media.getDisplayTitle() + " "
-                    + context.getString(R.string.delete_helper_show_deletion_message_if_2) + ".";
+            title += ": " + context.getString(R.string.delete_helper_show_deletion_title_success);
+            message = context.getString((R.string.delete_helper_show_deletion_message_if),media.getDisplayTitle());
         } else {
-            title += ": " + context.getString(R.string.delete_helper_show_deletion_title_else);
-            message = context.getString(R.string.delete_helper_show_deletion_message_else) + ".";
+            title += ": " + context.getString(R.string.delete_helper_show_deletion_title_failed);
+            message = context.getString(R.string.delete_helper_show_deletion_message_else) ;
         }
 
         String urlForDelete = BuildConfig.COMMONS_URL + "/wiki/Commons:Deletion_requests/" + media.getFilename();
