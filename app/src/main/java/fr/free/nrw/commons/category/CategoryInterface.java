@@ -40,4 +40,8 @@ public interface CategoryInterface {
             + "&prop=info&gcmlimit=500")
     Observable<MwQueryResponse> getSubCategoryList(@Query("gcmtitle") String categoryName);
 
+    @GET("w/api.php?action=query&format=json&formatversion=2"
+            + "&generator=categories&prop=info&gcllimit=500")
+    Observable<MwQueryResponse> getParentCategoryList(@Query("titles") String categoryName);
+
 }

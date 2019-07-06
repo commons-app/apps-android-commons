@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.category;
 
 
+import androidx.annotation.NonNull;
+
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.dataclient.mwapi.MwQueryResult;
@@ -86,6 +88,17 @@ public class CategoryClient {
         return responseToCategoryName(CategoryInterface.getSubCategoryList(categoryName));
     }
 
+    /**
+     * The method takes categoryName as input and returns a List of parent categories
+     * It uses the generator query API to get the parent categories of a category, 500 at a time.
+     *
+     * @param categoryName Category name as defined on commons
+     * @return
+     */
+    @NonNull
+    public Observable<String> getParentCategoryList(String categoryName) {
+        return responseToCategoryName(CategoryInterface.getParentCategoryList(categoryName));
+    }
 
     /**
      * Internal function to reduce code reuse. Extracts the categories returned from MwQueryResponse.
