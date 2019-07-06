@@ -29,6 +29,7 @@ import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 
 public class Media implements Parcelable {
 
+    public static final Media EMPTY = new Media("");
     public static Creator<Media> CREATOR = new Creator<Media>() {
         @Override
         public Media createFromParcel(Parcel parcel) {

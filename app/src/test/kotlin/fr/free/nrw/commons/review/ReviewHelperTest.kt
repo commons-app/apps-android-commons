@@ -29,10 +29,6 @@ class ReviewHelperTest {
     @Mock
     internal var reviewInterface: ReviewInterface? = null
     @Mock
-    internal var okHttpJsonApiClient: OkHttpJsonApiClient? = null
-    @Mock
-    internal var mediaWikiApi: MediaWikiApi? = null
-    @Mock
     internal var mediaClient: MediaClient? = null
 
     @InjectMocks
@@ -68,7 +64,7 @@ class ReviewHelperTest {
 
         val media = mock(Media::class.java)
         `when`(media.filename).thenReturn("File:Test.jpg")
-        `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
+        `when`(mediaClient?.getMedia(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(media))
     }
 

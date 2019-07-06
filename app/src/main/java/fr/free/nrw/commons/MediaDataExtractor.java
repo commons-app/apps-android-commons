@@ -57,7 +57,7 @@ public class MediaDataExtractor {
      * @return return data rich Media object
      */
     public Single<Media> getMediaFromFileName(String filename) {
-        return okHttpJsonApiClient.getMedia(filename, false);
+        return mediaClient.getMedia(filename);
     }
 
     /**
