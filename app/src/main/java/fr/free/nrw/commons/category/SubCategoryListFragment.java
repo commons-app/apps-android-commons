@@ -53,7 +53,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     TextView categoriesNotFoundView;
 
     private String categoryName = null;
-    @Inject MediaWikiApi mwApi;
+    @Inject CategoryClient categoryClient;
 
     private RVRendererAdapter<String> categoriesAdapter;
     private boolean isParentCategory = true;
@@ -86,7 +86,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * Checks for internet connection and then initializes the recycler view with 25 categories of the searched query
+     * Checks for internet connection and then initializes the recycler view with all(max 500) categories of the searched query
      * Clearing categoryAdapter every time new keyword is searched so that user can see only new results
      */
     public void initSubCategoryList() {
@@ -96,17 +96,19 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        if (!isParentCategory){
-            compositeDisposable.add(Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
+        if (isParentCategory) {
+            compositeDisposable.add(categoryClient.getParentCategoryList("Category:"+categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .collect(ArrayList<String>::new, ArrayList::add)
                     .subscribe(this::handleSuccess, this::handleError));
-        }else {
-            compositeDisposable.add(Observable.fromCallable(() -> mwApi.getParentCategoryList(categoryName))
+        } else {
+            compositeDisposable.add(categoryClient.getSubCategoryList("Category:"+categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .collect(ArrayList<String>::new, ArrayList::add)
                     .subscribe(this::handleSuccess, this::handleError));
         }
     }
