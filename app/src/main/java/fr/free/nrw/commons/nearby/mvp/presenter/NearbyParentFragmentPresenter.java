@@ -98,20 +98,20 @@ public class NearbyParentFragmentPresenter
     public void initializeNearbyOperations() {
         Timber.d("initializing nearby operations started");
         // Add location listener to be notified about location changes
-        locationServiceManager.addLocationListener(this);
+        //locationServiceManager.addLocationListener(this);
         nearbyParentFragmentView.checkPermissionsAndPerformAction(this::performNearbyOperationsIfPermissionGiven);
 
     }
 
     public void performNearbyOperationsIfPermissionGiven() {
         Timber.d("performNearbyOperationsIfPermissionGiven");
-        nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
+        //nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
         // Nearby buttons should be active, they should be inactive only during update
-        lockNearby(false);
+        //lockNearby(false);
         // This will start a consequence to check GPS depending on different API
         //nearbyParentFragmentView.checkGps(locationServiceManager);
         // We will know when we went offline and online again
-        nearbyParentFragmentView.addNetworkBroadcastReceiver();
+        //nearbyParentFragmentView.addNetworkBroadcastReceiver();
         //nearbyMapFragmentView.setupMapView(null);
         nearbyOperationsInitialized();
     }
@@ -129,6 +129,7 @@ public class NearbyParentFragmentPresenter
     }
 
     public void nearbyOperationsInitialized() {
+        Log.d("deneme2","nearbyOperationsinitialized");
         nearbyOperationsInitialized = true;
         if (nearbyMapViewReady) {
             initializeMapOperations();
@@ -136,6 +137,11 @@ public class NearbyParentFragmentPresenter
     }
 
     public void initializeMapOperations() {
+        Log.d("deneme2","initializeMapOperations");
+
+        lockNearby(false);
+        nearbyParentFragmentView.addNetworkBroadcastReceiver();
+
         Timber.d("Nearby map view is created and ready");
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
         // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends
@@ -157,8 +163,8 @@ public class NearbyParentFragmentPresenter
             locationServiceManager.removeLocationListener(this);
             Timber.d("Nearby locked");
         } else {
-            nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
             locationServiceManager.addLocationListener(this);
+            nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
             Timber.d("Nearby unlocked");
         }
     }

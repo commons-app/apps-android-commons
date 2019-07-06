@@ -21,6 +21,13 @@ import android.widget.ProgressBar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.constants.Style;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
 import javax.inject.Inject;
 
@@ -91,9 +98,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private NearbyParentFragmentContract.UserActions userActions;
 
-    private NearbyMapFragment nearbyMapFragment;
+    private NearbyMapFragment2 nearbyMapFragment;
     private NearbyListFragment nearbyListFragment;
-    private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
+    private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment2.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
     public NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
 
@@ -113,6 +120,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        Mapbox.getInstance(getActivity(),
+                getString(R.string.mapbox_commons_app_token));
+        Mapbox.getTelemetry().setUserTelemetryRequestState(false);
     }
 
     @Override
@@ -230,8 +240,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Returns the map fragment added to child fragment manager previously, if exists.
      */
-    private NearbyMapFragment getMapFragment() {
-        NearbyMapFragment existingFragment = (NearbyMapFragment) getChildFragmentManager()
+    private NearbyMapFragment2 getMapFragment() {
+        NearbyMapFragment2 existingFragment = (NearbyMapFragment2) getChildFragmentManager()
                                                     .findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
         if (existingFragment == null) {
             existingFragment = setMapFragment();
@@ -239,11 +249,32 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return existingFragment;
     }
 
-    private NearbyMapFragment setMapFragment() {
+    private NearbyMapFragment2 setMapFragment() {
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-        NearbyMapFragment nearbyMapFragment = new NearbyMapFragment();
+        // Build mapboxMap
+        MapboxMapOptions options = new MapboxMapOptions();
+        options.camera(new CameraPosition.Builder()
+                .target(new com.mapbox.mapboxsdk.geometry.LatLng(-52.6885, -70.1395))
+                .zoom(9)
+                .build());
+
+        // Create map fragment
+        NearbyMapFragment2 nearbyMapFragment = NearbyMapFragment2.newInstance(options);
+
+        //NearbyMapFragment2 nearbyMapFragment = new NearbyMapFragment2();
         fragmentTransaction.replace(R.id.container, nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT);
         fragmentTransaction.commitAllowingStateLoss();
+
+        nearbyMapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+                Log.d("deneme2","onMapReady");
+                nearbyMapFragment.viewsAreReadyCallback.nearbyMapViewReady();
+            }
+        });
+        if (nearbyMapFragment.getMapboxMap()!=null){
+
+        }
         return nearbyMapFragment;
     }
 
@@ -289,6 +320,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         nearbyMapFragment = getMapFragment();
         nearbyListFragment = getListFragment();
         addNetworkBroadcastReceiver();
+
+
     }
 
     @Override
