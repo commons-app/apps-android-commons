@@ -232,56 +232,6 @@ public class OkHttpJsonApiClient {
     }
 
     /**
-     * The method returns the picture of the day
-     *
-     * @return Media object corresponding to the picture of the day
-     */
-    @Nullable
-    public Single<Media> getPictureOfTheDay() {
-        String date = CommonsDateUtil.getIso8601DateFormatShort().format(new Date());
-        Timber.d("Current date is %s", date);
-        String template = "Template:Potd/" + date;
-        return getMedia(template, true);
-    }
-
-    /**
-     * Fetches Media object from the imageInfo API
-     *
-     * @param titles       the tiles to be searched for. Can be filename or template name
-     * @param useGenerator specifies if a image generator parameter needs to be passed or not
-     * @return
-     */
-    public Single<Media> getMedia(String titles, boolean useGenerator) {
-        HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(commonsBaseUrl)
-                .newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("format", "json")
-                .addQueryParameter("formatversion", "2")
-                .addQueryParameter("titles", titles);
-
-        if (useGenerator) {
-            urlBuilder.addQueryParameter("generator", "images");
-        }
-
-        Request request = new Request.Builder()
-                .url(appendMediaProperties(urlBuilder).build())
-                .build();
-
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
-                if (mwQueryPage.success() && mwQueryPage.query().firstPage() != null) {
-                    return Media.from(mwQueryPage.query().firstPage());
-                }
-            }
-            return null;
-        });
-    }
-
-    /**
      * Whenever imageInfo is fetched, these common properties can be specified for the API call
      * https://www.mediawiki.org/wiki/API:Imageinfo
      *

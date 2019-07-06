@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.media;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.dataclient.mwapi.MwQueryResult;
 
@@ -13,6 +15,7 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -65,8 +68,14 @@ public class MediaClient {
      */
     public Single<Media> getMedia(String titles) {
         return mediaInterface.getMedia(titles)
-                .map(MwQueryResponse::query)
-                .map(MwQueryResult::firstPage)
+                .flatMap(mwQueryResponse -> {
+                    if (null == mwQueryResponse
+                            || null == mwQueryResponse.query()
+                            || null == mwQueryResponse.query().firstPage()) {
+                        return Observable.empty();
+                    }
+                    return Observable.just(mwQueryResponse.query().firstPage());
+                })
                 .map(Media::from)
                 .single(Media.EMPTY);
     }
@@ -76,14 +85,20 @@ public class MediaClient {
      *
      * @return Media object corresponding to the picture of the day
      */
-    @Nullable
+    @NonNull
     public Single<Media> getPictureOfTheDay() {
         String date = CommonsDateUtil.getIso8601DateFormatShort().format(new Date());
         Timber.d("Current date is %s", date);
         String template = "Template:Potd/" + date;
         return mediaInterface.getMediaWithGenerator(template)
-                .map(MwQueryResponse::query)
-                .map(MwQueryResult::firstPage)
+                .flatMap(mwQueryResponse -> {
+                    if (null == mwQueryResponse
+                            || null == mwQueryResponse.query()
+                            || null == mwQueryResponse.query().firstPage()) {
+                        return Observable.empty();
+                    }
+                    return Observable.just(mwQueryResponse.query().firstPage());
+                })
                 .map(Media::from)
                 .single(Media.EMPTY);
     }
