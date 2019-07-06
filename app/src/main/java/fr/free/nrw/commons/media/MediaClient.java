@@ -9,6 +9,11 @@ import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.dataclient.mwapi.MwQueryResult;
 
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -30,9 +35,13 @@ public class MediaClient {
 
     private final MediaInterface mediaInterface;
 
+    //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
+    private Map<String, Map<String, String>> continuationStore;
+
     @Inject
     public MediaClient(MediaInterface mediaInterface) {
         this.mediaInterface = mediaInterface;
+        this.continuationStore = new HashMap<>();
     }
 
     /**
@@ -60,7 +69,53 @@ public class MediaClient {
                 .singleOrError();
     }
 
+        /**
+     * This method takes the category as input and returns a list of  Media objects filtered using image generator query
+     * It uses the generator query API to get the images searched using a query, 10 at a time.
+     *
+     * @param category the search category. Must start with "Category:"
+     * @return
+     */
+    public Single<List<Media>> getMediaListFromCategory(String category) {
+        return responseToMediaList(
+                continuationStore.containsKey("category_" + category) ?
+                        mediaInterface.getMediaListFromCategory(category, 10, continuationStore.get("category_" + category)) : //if true
+                        mediaInterface.getMediaListFromCategory(category, 10, Collections.emptyMap()),
+                "category_" + category); //if false
+
+    }
+
     /**
+     * This method takes a keyword as input and returns a list of  Media objects filtered using image generator query
+     * It uses the generator query API to get the images searched using a query, 10 at a time.
+     *
+     * @param keyword the search keyword
+     * @return
+     */
+    public Single<List<Media>> getMediaListFromSearch(String keyword) {
+        return responseToMediaList(
+                continuationStore.containsKey("search_" + keyword) ?
+                        mediaInterface.getMediaListFromSearch(keyword, 10, continuationStore.get("search_" + keyword)) : //if true
+                        mediaInterface.getMediaListFromSearch(keyword, 10, Collections.emptyMap()), //if false
+                "search_" + keyword);
+
+    }
+
+    private Single<List<Media>> responseToMediaList(Observable<MwQueryResponse> response, String key) {
+        return response.flatMap(mwQueryResponse -> {
+            if (null == mwQueryResponse
+                    || null == mwQueryResponse.query()
+                    || null == mwQueryResponse.query().pages()) {
+                return Observable.empty();
+            }
+            continuationStore.put(key, mwQueryResponse.continuation());
+            return Observable.fromIterable(mwQueryResponse.query().pages());
+        })
+                .map(Media::from)
+                .collect(ArrayList<Media>::new, List::add);
+    }
+    
+        /**
      * Fetches Media object from the imageInfo API
      *
      * @param titles the tiles to be searched for. Can be filename or template name
@@ -102,4 +157,5 @@ public class MediaClient {
                 .map(Media::from)
                 .single(Media.EMPTY);
     }
+
 }

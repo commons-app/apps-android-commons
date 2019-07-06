@@ -30,6 +30,8 @@ class ReviewHelperTest {
     internal var reviewInterface: ReviewInterface? = null
     @Mock
     internal var mediaClient: MediaClient? = null
+    @Mock
+    internal var mediaClient: MediaClient? = null
 
     @InjectMocks
     var reviewHelper: ReviewHelper? = null
@@ -47,9 +49,9 @@ class ReviewHelperTest {
         `when`(mockRevision.user).thenReturn("TestUser")
         `when`(mwQueryPage.revisions()).thenReturn(listOf(mockRevision))
 
-        val recentChange = getMockRecentChange("test", "File:Test1.jpeg", 0)
-        val recentChange1 = getMockRecentChange("test", "File:Test2.png", 0)
-        val recentChange2 = getMockRecentChange("test", "File:Test3.jpg", 0)
+        val recentChange = getMockRecentChange("log", "File:Test1.jpeg", 0)
+        val recentChange1 = getMockRecentChange("log", "File:Test2.png", 0)
+        val recentChange2 = getMockRecentChange("log", "File:Test3.jpg", 0)
         val mwQueryResult = mock(MwQueryResult::class.java)
         `when`(mwQueryResult.recentChanges).thenReturn(listOf(recentChange, recentChange1, recentChange2))
         `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)

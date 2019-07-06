@@ -268,17 +268,17 @@
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
   <string name="location_permission_rationale_nearby">Απαιτείται άδεια για την εμφάνιση λίστας κοντινών σημείων</string>
-  <string name="get_directions">Λάβετε κατευθύνσεις</string>
-  <string name="read_article">Ανάγνωση άρθρου</string>
+  <string name="get_directions" fuzzy="true">Λάβετε κατευθύνσεις</string>
+  <string name="read_article" fuzzy="true">Ανάγνωση άρθρου</string>
   <string name="notifications_welcome">Καλωσήρθατε στο Wikimedia Commons, %1$s! Είμαστε χαρούμενοι που είστε εδώ.</string>
   <string name="notifications_talk_page_message">Ο %1$s άφησε ένα μήνυμα στην σελίδα συζήτησής σας</string>
   <string name="notifications_thank_you_edit">Ευχαριστούμε που κάνατε μια επεξεργασία</string>
   <string name="notifications_mention">Ο %1$s σας ανέφερε στο %2$s.</string>
   <string name="toggle_view_button">Μεταβολή προβολής</string>
-  <string name="nearby_directions">Κατευθύνσεις</string>
-  <string name="nearby_wikidata">Βικιδεδομένα</string>
-  <string name="nearby_wikipedia">Βικιπαίδεια</string>
-  <string name="nearby_commons">Κοινά</string>
+  <string name="nearby_directions" fuzzy="true">Κατευθύνσεις</string>
+  <string name="nearby_wikidata" fuzzy="true">Βικιδεδομένα</string>
+  <string name="nearby_wikipedia" fuzzy="true">Βικιπαίδεια</string>
+  <string name="nearby_commons" fuzzy="true">Κοινά</string>
   <string name="about_rate_us">&lt;u&gt;Βαθμολογήστε μας&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Συχνές ερωτήσεις&lt;/u&gt;</string>
   <string name="welcome_skip_button">Παράβλεψη εισαγωγής</string>
@@ -310,8 +310,8 @@
   <string name="provider_searches">Πρόσφατα αναζητημένα ερωτήματα</string>
   <string name="error_loading_categories">Συνέβη σφάλμα κατά τη φόρτωση κατηγοριών.</string>
   <string name="error_loading_subcategories">Συνέβη σφάλμα κατά τη φόρτωση υποκατηγοριών.</string>
-  <string name="search_tab_title_media">Μέσα ενημέρωσης</string>
-  <string name="search_tab_title_categories">Κατηγορίες</string>
+  <string name="search_tab_title_media" fuzzy="true">Μέσα ενημέρωσης</string>
+  <string name="search_tab_title_categories" fuzzy="true">Κατηγορίες</string>
   <string name="successful_wikidata_edit">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
   <string name="menu_set_wallpaper">Ρύθμιση ως ταπετσαρία</string>
@@ -344,10 +344,10 @@
   <string name="search_history_deleted">Το ιστορικό αναζήτησης διεγράφη</string>
   <string name="nominate_delete">Ορίστε για Αφαίρεση</string>
   <string name="Achievements">Κατορθώματα</string>
-  <string name="statistics">Στατιστικά</string>
+  <string name="statistics" fuzzy="true">Στατιστικά</string>
   <string name="statistics_thanks">Ευχαριστίες που έχουν ληφθεί</string>
   <string name="statistics_featured">Προβεβλημμένες εικόνες</string>
-  <string name="level">Επίπεδο</string>
+  <string name="level" fuzzy="true">Επίπεδο</string>
   <string name="images_uploaded">Εικόνες που ανέβηκαν</string>
   <string name="image_reverts">Εικόνες που δεν ανεστράφησαν</string>
   <string name="images_used_by_wiki">Εικόνες που χρησιμοποιήθηκαν</string>

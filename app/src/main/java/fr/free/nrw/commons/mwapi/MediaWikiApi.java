@@ -30,10 +30,6 @@ public interface MediaWikiApi {
 
     String getCentralAuthToken() throws IOException;
 
-    List<String> getSubCategoryList(String categoryName);
-
-    List<String> getParentCategoryList(String categoryName);
-
     @NonNull
     Single<UploadStash> uploadFile(String filename, InputStream file,
                                    long dataLength, Uri fileUri, Uri contentProviderUri,

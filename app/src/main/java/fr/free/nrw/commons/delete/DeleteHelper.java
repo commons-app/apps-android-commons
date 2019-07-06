@@ -1,8 +1,11 @@
 package fr.free.nrw.commons.delete;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,17 +15,17 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.appcompat.app.AlertDialog;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.notification.NotificationHelper;
-import fr.free.nrw.commons.review.ReviewActivity;
-import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_DELETE;
@@ -57,7 +60,6 @@ public class DeleteHelper {
      */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
         viewUtil.showShortToast(context, "Trying to nominate " + media.getDisplayTitle() + " for deletion");
-
         return Single.fromCallable(() -> delete(media, reason))
                 .flatMap(result -> Single.fromCallable(() ->
                         showDeletionNotification(context, media, result)));
@@ -99,7 +101,8 @@ public class DeleteHelper {
 
         try {
             editToken = mwApi.getEditToken();
-            if (editToken.equals("+\\")) {
+
+            if(editToken == null) {
                 return false;
             }
 
@@ -143,7 +146,12 @@ public class DeleteHelper {
      * @param question
      * @param problem
      */
-    public void askReasonAndExecute(Media media, Context context, String question, ReviewController.DeleteReason problem) {
+    @SuppressLint("CheckResult")
+    public void askReasonAndExecute(Media media,
+                                    Context context,
+                                    String question,
+                                    ReviewController.DeleteReason problem,
+                                    ReviewController.ReviewCallback reviewCallback) {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle(question);
 
@@ -154,15 +162,15 @@ public class DeleteHelper {
 
 
         if (problem == ReviewController.DeleteReason.SPAM) {
-            reasonList[0] = "A selfie";
-            reasonList[1] = "Blurry";
-            reasonList[2] = "Nonsense";
-            reasonList[3] = "Other";
+            reasonList[0] = context.getResources().getString(R.string.delete_reason_spam_selfie);
+            reasonList[1] = context.getResources().getString(R.string.delete_reason_spam_blurry);
+            reasonList[2] = context.getResources().getString(R.string.delete_reason_spam_nonsense);
+            reasonList[3] = context.getResources().getString(R.string.delete_reason_spam_other);
         } else if (problem == ReviewController.DeleteReason.COPYRIGHT_VIOLATION) {
-            reasonList[0] = "Press photo";
-            reasonList[1] = "Random photo from internet";
-            reasonList[2] = "Logo";
-            reasonList[3] = "Other";
+            reasonList[0] = context.getResources().getString(R.string.delete_reason_copyright_pressphoto);
+            reasonList[1] = context.getResources().getString(R.string.delete_reason_copyright_internetphoto);
+            reasonList[2] = context.getResources().getString(R.string.delete_reason_copyright_logo);
+            reasonList[3] = context.getResources().getString(R.string.delete_reason_copyright_other);
         }
 
         alert.setMultiChoiceItems(reasonList, checkedItems, (dialogInterface, position, isChecked) -> {
@@ -183,12 +191,19 @@ public class DeleteHelper {
                 }
             }
 
-            ((ReviewActivity) context).reviewController.swipeToNext();
-            ((ReviewActivity) context).runRandomizer();
+            makeDeletion(context, media, reason)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(aBoolean -> {
+                        if (aBoolean) {
+                            reviewCallback.onSuccess();
+                        } else {
+                            reviewCallback.onFailure();
+                        }
+                    });
 
-            makeDeletion(context, media, reason);
         });
-        alert.setNegativeButton("Cancel", null);
+        alert.setNegativeButton("Cancel", (dialog, which) -> reviewCallback.onFailure());
         AlertDialog d = alert.create();
         d.show();
     }

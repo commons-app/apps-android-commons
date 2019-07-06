@@ -248,17 +248,17 @@
   <string name="nearby_location_has_not_changed">Lokacija nije promenjena.</string>
   <string name="nearby_location_not_available">Lokacija nije dostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebna je dozvola za prikazivanje liste lokacija u blizini</string>
-  <string name="get_directions">Dobiti uputstva</string>
-  <string name="read_article">Pročitaj članak</string>
+  <string name="get_directions" fuzzy="true">Dobiti uputstva</string>
+  <string name="read_article" fuzzy="true">Pročitaj članak</string>
   <string name="notifications_welcome">Dobro došli na Vikimedijinu ostavu, %1$s! Drago nam je što ste ovde.</string>
   <string name="notifications_talk_page_message">%1$s je ostavio poruku na vašoj stranici za razgovor</string>
   <string name="notifications_thank_you_edit">Hvala vam za pravljenje izmene</string>
   <string name="notifications_mention">%1$s Vas je pomenuo na stranici %2$s.</string>
   <string name="toggle_view_button">Prebaci prikaz</string>
-  <string name="nearby_directions">UPUTSTVA</string>
-  <string name="nearby_wikidata">VIKIPODACI</string>
-  <string name="nearby_wikipedia">VIKIPEDIJA</string>
-  <string name="nearby_commons">OSTAVA</string>
+  <string name="nearby_directions" fuzzy="true">UPUTSTVA</string>
+  <string name="nearby_wikidata" fuzzy="true">VIKIPODACI</string>
+  <string name="nearby_wikipedia" fuzzy="true">VIKIPEDIJA</string>
+  <string name="nearby_commons" fuzzy="true">OSTAVA</string>
   <string name="about_rate_us">&lt;u&gt;Ocenite nas&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;ČPP&lt;/u&gt;</string>
   <string name="welcome_skip_button">Preskoči tutorijal</string>
@@ -315,10 +315,10 @@
   <string name="delete_recent_searches_dialog">Da li ste sigurni da želite da očistite svoju istoriju pretrage?</string>
   <string name="search_history_deleted">Istorija pretrage je izbrisana</string>
   <string name="Achievements">Dostignuća</string>
-  <string name="statistics">STATISTIKE</string>
+  <string name="statistics" fuzzy="true">STATISTIKE</string>
   <string name="statistics_thanks">Primljene zahvale</string>
   <string name="statistics_featured">Izabrane slike</string>
-  <string name="level">NIVO</string>
+  <string name="level" fuzzy="true">NIVO</string>
   <string name="images_uploaded">Otpremljene slike</string>
   <string name="image_reverts">Slike koje nisu opozvane</string>
   <string name="images_used_by_wiki">Iskorišćene slike</string>

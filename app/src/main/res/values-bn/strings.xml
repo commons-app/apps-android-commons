@@ -280,6 +280,7 @@
   <string name="menu_search_button">অনুসন্ধান</string>
   <string name="search_commons">কমন্সে অনুসন্ধান করুন</string>
   <string name="title_activity_search">অনুসন্ধান</string>
+  <string name="search_tab_title_media">মিডিয়া</string>
   <string name="quiz">কুইজ</string>
   <string name="question">প্রশ্ন</string>
   <string name="result">ফলাফল</string>
@@ -289,6 +290,7 @@
   <string name="error_fetching_nearby_places">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
   <string name="add_description">+ বিবরণ যোগ করুন</string>
   <string name="nominate_delete">অপসারণের জন্য মনোনীত করুন</string>
+  <string name="delete">অপসারণ</string>
   <string name="Achievements">কৃতিত্বগুলি</string>
   <string name="statistics">পরিসংখ্যান</string>
   <string name="statistics_featured">নির্বাচিত ছবি</string>

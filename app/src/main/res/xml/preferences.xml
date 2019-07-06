@@ -29,6 +29,11 @@
             android:inputType="number"
             android:maxLength="3" />
 
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
+            android:key="descriptionDefaultLanguagePref"
+            android:title= "@string/default_description_language"
+            android:summary="English" />
+
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
             android:key="useAuthorName"
             android:title="@string/preference_author_name_toggle"

@@ -20,8 +20,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.material.navigation.NavigationView;
 import com.viewpagerindicator.CirclePageIndicator;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -92,6 +90,9 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    public Media getMedia() {
+        return media;
+    }
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
@@ -163,23 +164,18 @@ public class ReviewActivity extends AuthenticatedActivity {
 
         simpleDraweeView.setImageURI(media.getImageUrl());
 
-        reviewController.onImageRefreshed(fileName); //file name is updated
+        reviewController.onImageRefreshed(media); //file name is updated
         compositeDisposable.add(reviewHelper.getFirstRevisionOfFile(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revision -> {
                     reviewController.firstRevision = revision;
-                    reviewPagerAdapter.updateFileInformation(fileName);
-                    imageCaption.setText(fileName + " is uploaded by: " + revision.getUser());
+                    reviewPagerAdapter.updateFileInformation();
+                    String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
+                    imageCaption.setText(caption);
                     progressBar.setVisibility(View.GONE);
                 }));
         reviewPager.setCurrentItem(0);
-        updateCategories(media.getCategories());
-    }
-
-    private void updateCategories(ArrayList<String> categories) {
-        reviewController.onCategoriesRefreshed(categories);
-        reviewPagerAdapter.updateCategories();
     }
 
     public void swipeToNext() {
@@ -199,7 +195,7 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     public void showSkipImageInfo(){
         DialogUtil.showAlertDialog(ReviewActivity.this,
-                getString(R.string.skip_image),
+                getString(R.string.skip_image).toUpperCase(),
                 getString(R.string.skip_image_explanation),
                 getString(android.R.string.ok),
                 "",

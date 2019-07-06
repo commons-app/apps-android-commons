@@ -278,19 +278,19 @@
   <string name="skip_login_title">您確定要略過登入嗎？</string>
   <string name="skip_login_message">在功能裡您需要登入來上傳圖片。</string>
   <string name="login_alert_message">請登入來使用此功能</string>
-  <string name="copy_wikicode">複製 wiki 文字到剪貼簿</string>
+  <string name="copy_wikicode">複製 wiki 語法到剪貼簿</string>
   <string name="wikicode_copied">Wiki 文字已複製到剪貼簿</string>
   <string name="nearby_location_has_not_changed">位置無法更改。</string>
   <string name="nearby_location_not_available">位置無效。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
-  <string name="get_directions">取得導向</string>
+  <string name="get_directions">取得方向</string>
   <string name="read_article">讀取條目</string>
   <string name="notifications_welcome">%1$s，歡迎來到維基共享資源！我們很高興您來到這裡。</string>
   <string name="notifications_talk_page_message">%1$s 留了訊息在您的對話頁</string>
   <string name="notifications_thank_you_edit">感謝您所做的編輯</string>
   <string name="notifications_mention">%1$s 在 %2$s 提到了您。</string>
   <string name="toggle_view_button">切換檢視</string>
-  <string name="nearby_directions">重新導向</string>
+  <string name="nearby_directions">方向</string>
   <string name="nearby_wikidata">維基數據</string>
   <string name="nearby_wikipedia">維基百科</string>
   <string name="nearby_commons">維基共享資源</string>
@@ -534,4 +534,14 @@
   <string name="upload_cancelled">已取消上傳</string>
   <string name="previous_image_title_description_not_found">前一張圖片的標題或描述沒有資料</string>
   <string name="dialog_box_text_nomination">為何應刪除%1$s？</string>
+  <string name="review_is_uploaded_by">%1$s 是由 %2$s 所上傳</string>
+  <string name="default_description_language">預設描述語言</string>
+  <string name="delete_reason_spam_selfie">自拍</string>
+  <string name="delete_reason_spam_blurry">糢糊</string>
+  <string name="delete_reason_spam_nonsense">無意義</string>
+  <string name="delete_reason_spam_other">其它</string>
+  <string name="delete_reason_copyright_pressphoto">攝影作品</string>
+  <string name="delete_reason_copyright_internetphoto">來自網路的隨意照片</string>
+  <string name="delete_reason_copyright_logo">標誌</string>
+  <string name="delete_reason_copyright_other">其它</string>
 </resources>

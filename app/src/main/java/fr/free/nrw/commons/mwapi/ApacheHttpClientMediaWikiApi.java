@@ -29,23 +29,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.category.CategoryImageUtils;
 import fr.free.nrw.commons.category.QueryContinue;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
 
@@ -58,15 +54,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private CustomMwApi wikidataApi;
     private Context context;
     private JsonKvStore defaultKvStore;
-    private Gson gson;
 
     private final String ERROR_CODE_BAD_TOKEN = "badtoken";
 
     public ApacheHttpClientMediaWikiApi(Context context,
                                         String apiURL,
                                         String wikidatApiURL,
-                                        JsonKvStore defaultKvStore,
-                                        Gson gson) {
+                                        JsonKvStore defaultKvStore) {
         this.context = context;
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
@@ -82,7 +76,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         api = new CustomMwApi(apiURL, httpClient);
         wikidataApi = new CustomMwApi(wikidatApiURL, httpClient);
         this.defaultKvStore = defaultKvStore;
-        this.gson = gson;
     }
 
     /**
@@ -491,116 +484,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return result.equals("success");
     }
 
-    /**
-     * The method takes categoryName as input and returns a List of Subcategories
-     * It uses the generator query API to get the subcategories in a category, 500 at a time.
-     * Uses the query continue values for fetching paginated responses
      *
-     * @param categoryName Category name as defined on commons
-     * @return
-     */
-    @Override
-    @NonNull
-    public List<String> getSubCategoryList(String categoryName) {
-        CustomApiResult apiResult = null;
-        try {
-            CustomMwApi.RequestBuilder requestBuilder = api.action("query")
-                    .param("generator", "categorymembers")
-                    .param("format", "xml")
-                    .param("gcmtype", "subcat")
-                    .param("gcmtitle", categoryName)
-                    .param("prop", "info")
-                    .param("gcmlimit", "500")
-                    .param("iiprop", "url|extmetadata");
-
-            apiResult = requestBuilder.get();
-        } catch (IOException e) {
-            Timber.e(e, "Failed to obtain searchCategories");
-        }
-
-        if (apiResult == null) {
-            return new ArrayList<>();
-        }
-
-        CustomApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
-        if (categoryImagesNode == null
-                || categoryImagesNode.getDocument() == null
-                || categoryImagesNode.getDocument().getChildNodes() == null
-                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
-            return new ArrayList<>();
-        }
-
-        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
-        return CategoryImageUtils.getSubCategoryList(childNodes);
-    }
-
-    /**
-     * The method takes categoryName as input and returns a List of parent categories
-     * It uses the generator query API to get the parent categories of a category, 500 at a time.
      *
-     * @param categoryName Category name as defined on commons
-     * @return
-     */
-    @Override
-    @NonNull
-    public List<String> getParentCategoryList(String categoryName) {
-        CustomApiResult apiResult = null;
-        try {
-            CustomMwApi.RequestBuilder requestBuilder = api.action("query")
-                    .param("generator", "categories")
-                    .param("format", "xml")
-                    .param("titles", categoryName)
-                    .param("prop", "info")
-                    .param("cllimit", "500")
-                    .param("iiprop", "url|extmetadata");
-
-            apiResult = requestBuilder.get();
-        } catch (IOException e) {
-            Timber.e(e, "Failed to obtain parent Categories");
-        }
-
-        if (apiResult == null) {
-            return new ArrayList<>();
-        }
-
-        CustomApiResult categoryImagesNode = apiResult.getNode("/api/query/pages");
-        if (categoryImagesNode == null
-                || categoryImagesNode.getDocument() == null
-                || categoryImagesNode.getDocument().getChildNodes() == null
-                || categoryImagesNode.getDocument().getChildNodes().getLength() == 0) {
-            return new ArrayList<>();
-        }
-
-        NodeList childNodes = categoryImagesNode.getDocument().getChildNodes();
-        return CategoryImageUtils.getSubCategoryList(childNodes);
-    }
-
-
-    /**
-     * For APIs that return paginated responses, MediaWiki APIs uses the QueryContinue to facilitate fetching of subsequent pages
-     * https://www.mediawiki.org/wiki/API:Raw_query_continue
-     * After fetching images a page of image for a particular category, shared defaultKvStore are updated with the latest QueryContinue Values
      *
-     * @param keyword
-     * @param queryContinue
-     */
-    private void setQueryContinueValues(String keyword, QueryContinue queryContinue) {
-        defaultKvStore.putString(keyword, gson.toJson(queryContinue));
-    }
-
-    /**
-     * Before making a paginated API call, this method is called to get the latest query continue values to be used
      *
-     * @param keyword
-     * @return
-     */
-    @Nullable
-    private QueryContinue getQueryContinueValues(String keyword) {
-        String queryContinueString = defaultKvStore.getString(keyword, null);
-        return gson.fromJson(queryContinueString, QueryContinue.class);
-    }
-
-    @Override
     @NonNull
     public Single<UploadStash> uploadFile(
             String filename,

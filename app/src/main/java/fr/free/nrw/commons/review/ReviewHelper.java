@@ -6,6 +6,7 @@ import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.RecentChange;
 import org.wikipedia.util.DateUtil;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.Random;
 
@@ -24,6 +25,7 @@ public class ReviewHelper {
 
     private static final String[] imageExtensions = new String[]{".jpg", ".jpeg", ".png"};
 
+    private final MediaClient mediaClient;
     private final MediaClient mediaClient;
     private final ReviewInterface reviewInterface;
 
@@ -51,7 +53,7 @@ public class ReviewHelper {
         return reviewInterface.getRecentChanges(rcStart)
                 .map(mwQueryResponse -> mwQueryResponse.query().getRecentChanges())
                 .map(recentChanges -> {
-                    //Collections.shuffle(recentChanges);
+                    Collections.shuffle(recentChanges);
                     return recentChanges;
                 })
                 .flatMapIterable(changes -> changes)
@@ -114,7 +116,8 @@ public class ReviewHelper {
      * @return
      */
     private boolean isChangeReviewable(RecentChange recentChange) {
-        if (recentChange.getType().equals("log") && !(recentChange.getOldRevisionId() == 0)) {
+        if ((recentChange.getType().equals("log") && !(recentChange.getOldRevisionId() == 0))
+                || !recentChange.getType().equals("log")) {
             return false;
         }
 
