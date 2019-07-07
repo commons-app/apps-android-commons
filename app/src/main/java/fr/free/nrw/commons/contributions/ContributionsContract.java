@@ -5,6 +5,9 @@ import androidx.loader.app.LoaderManager;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.Media;
 
+/**
+ * The contract for Contributions View & Presenter
+ */
 public class ContributionsContract {
 
     public interface View {

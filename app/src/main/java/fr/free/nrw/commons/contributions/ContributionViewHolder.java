@@ -16,17 +16,17 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.upload.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
-public class ContributionViewHolder extends RecyclerView.ViewHolder{
+public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     private final Callback callback;
     @BindView(R.id.contributionImage)
@@ -114,7 +114,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder{
         }
 
         imageView.setBackground(null);
-        if ((contribution.getState() != Contribution.STATE_COMPLETED) && fileExists(
+        if ((contribution.getState() != Contribution.STATE_COMPLETED) && FileUtils.fileExists(
                 contribution.getLocalUri())) {
             imageView.setImageURI(contribution.getLocalUri());
         } else {
@@ -130,21 +130,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder{
             compositeDisposable.add(disposable);
         }
 
-    }
-
-    /**
-     * Check if file exists in local dirs
-     * @param localUri
-     * @return
-     */
-    private boolean fileExists(Uri localUri) {
-        try {
-            File file = new File(localUri.getPath());
-            return file.exists();
-        } catch (Exception e) {
-            Timber.d(e);
-            return false;
-        }
     }
 
     /**

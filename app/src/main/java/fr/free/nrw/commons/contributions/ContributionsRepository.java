@@ -3,6 +3,9 @@ package fr.free.nrw.commons.contributions;
 import android.database.Cursor;
 import javax.inject.Inject;
 
+/**
+ * The repository class for contributions
+ */
 public class ContributionsRepository {
 
     private ContributionsLocalDataSource localDataSource;
