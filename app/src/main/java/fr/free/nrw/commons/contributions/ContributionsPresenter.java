@@ -30,8 +30,8 @@ public class ContributionsPresenter extends DataSetObserver implements UserActio
     Context context;
 
     @Inject
-    ContributionsPresenter(ContributionsRepository uploadRepository) {
-        this.repository = uploadRepository;
+    ContributionsPresenter(ContributionsRepository repository) {
+        this.repository = repository;
     }
 
     @Override
