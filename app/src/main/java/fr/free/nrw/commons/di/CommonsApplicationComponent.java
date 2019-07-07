@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.di;
 
+import fr.free.nrw.commons.contributions.ContributionsModule;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -28,7 +29,7 @@ import fr.free.nrw.commons.widget.PicOfDayAppWidget;
         ActivityBuilderModule.class,
         FragmentBuilderModule.class,
         ServiceBuilderModule.class,
-        ContentProviderBuilderModule.class, UploadModule.class
+        ContentProviderBuilderModule.class, UploadModule.class, ContributionsModule.class
 })
 public interface CommonsApplicationComponent extends AndroidInjector<ApplicationlessInjection> {
     void inject(CommonsApplication application);

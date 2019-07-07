@@ -1,121 +1,55 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.Context;
-import android.database.Cursor;
-
-import androidx.annotation.NonNull;
-import androidx.cursoradapter.widget.CursorAdapter;
+import android.database.DataSetObserver;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
-import fr.free.nrw.commons.upload.UploadService;
-import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
-import timber.log.Timber;
 
-import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionViewHolder> {
 
-class ContributionsListAdapter extends CursorAdapter {
+    private Callback callback;
 
-    private final ContributionDao contributionDao;
-    private UploadService uploadService;
-
-    public ContributionsListAdapter(Context context,
-                                    Cursor c,
-                                    int flags,
-                                    ContributionDao contributionDao, EventListener listener) {
-        super(context, c, flags);
-        this.contributionDao = contributionDao;
-        this.listener=listener;
+    public ContributionsListAdapter(Callback callback) {
+        this.callback = callback;
     }
 
-    public void setUploadService(UploadService uploadService) {
-        this.uploadService = uploadService;
+    @NonNull
+    @Override
+    public ContributionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ContributionViewHolder viewHolder = new ContributionViewHolder(
+                LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.layout_contribution, parent, false), callback);
+        return viewHolder;
     }
 
     @Override
-    public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        View parent = LayoutInflater.from(context)
-                .inflate(R.layout.layout_contribution, viewGroup, false);
-        parent.setTag(new ContributionViewHolder(parent));
-        return parent;
-    }
-
-    @Override
-    public void bindView(View view, Context context, Cursor cursor) {
-        final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
-        final Contribution contribution = contributionDao.fromCursor(cursor);
-
-        Timber.d("Cursor position is %d", cursor.getPosition());
+    public void onBindViewHolder(@NonNull ContributionViewHolder holder, int position) {
+        final Contribution contribution = callback.getContributionForPosition(position);
         DisplayableContribution displayableContribution = new DisplayableContribution(contribution,
-                cursor.getPosition(),
-                new DisplayableContribution.ContributionActions() {
-                    @Override
-                    public void retryUpload() {
-                        ContributionsListAdapter.this.retryUpload(view.getContext(), contribution);
-                    }
-
-                    @Override
-                    public void deleteUpload() {
-                        ContributionsListAdapter.this.deleteUpload(view.getContext(), contribution);
-                    }
-
-                    @Override
-                    public void onClick() {
-                        ContributionsListAdapter.this.openMediaDetail(contribution);
-                    }
-                });
-        views.bindModel(context, displayableContribution);
+                position);
+        holder.init(position, displayableContribution);
     }
 
-    /**
-     * Retry upload when it is failed
-     * @param contribution contribution to be retried
-     */
-    private void retryUpload(@NonNull Context context, Contribution contribution) {
-        if (NetworkUtils.isInternetConnectionEstablished(context)) {
-            if (contribution.getState() == STATE_FAILED
-                    && uploadService!= null) {
-                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
-                Timber.d("Restarting for %s", contribution.toString());
-            } else {
-                Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
-            }
-        } else {
-            ViewUtil.showLongToast(context, R.string.this_function_needs_network_connection);
-        }
-
+    @Override
+    public int getItemCount() {
+        return callback.getNumberOfContributions();
     }
 
-    /**
-     * Delete a failed upload attempt
-     * @param contribution contribution to be deleted
-     */
-    private void deleteUpload(@NonNull Context context, Contribution contribution) {
-        if (NetworkUtils.isInternetConnectionEstablished(context)) {
-            if (contribution.getState() == STATE_FAILED) {
-                Timber.d("Deleting failed contrib %s", contribution.toString());
-                contributionDao.delete(contribution);
-            } else {
-                Timber.d("Skipping deletion for non-failed contrib %s", contribution.toString());
-            }
-        } else {
-            ViewUtil.showLongToast(context, R.string.this_function_needs_network_connection);
-        }
+    public interface Callback {
 
-    }
+        void retryUpload(Contribution contribution);
 
-    private void openMediaDetail(Contribution contribution){
-        listener.onEvent(contribution.getFilename());
+        void deleteUpload(Contribution contribution);
 
-    }
-    EventListener listener;
+        void openMediaDetail(int contribution);
 
-    public interface EventListener {
-        void onEvent(String filename);
+        int getNumberOfContributions();
+
+        Contribution getContributionForPosition(int position);
+
+        int findItemPositionWithId(String lastVisibleItemID);
     }
 }
