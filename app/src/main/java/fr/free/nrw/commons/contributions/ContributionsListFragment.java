@@ -13,10 +13,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +35,7 @@ import javax.inject.Named;
 
 public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
+    private static final String VISIBLE_ITEM_POSITION = "visible_item_position";
     @BindView(R.id.contributionsList)
     RecyclerView rvContributionsList;
     @BindView(R.id.loadingContributionsProgressBar)
@@ -65,6 +68,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     private ContributionsListAdapter adapter;
 
     private Callback callback;
+    private int lastVisibleItemPosition;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
@@ -173,8 +177,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     public void onDataSetChanged() {
-        if(null!=adapter) {
+        if (null != adapter) {
             adapter.notifyDataSetChanged();
+            //Restoring last visible item position in cases of orientation change
+            if(lastVisibleItemPosition!=0 && adapter.getItemCount()>lastVisibleItemPosition){
+                rvContributionsList.scrollToPosition(lastVisibleItemPosition);
+                lastVisibleItemPosition=0;//Reset the lastVisiblePosition once we have used it
+            }
         }
     }
 
@@ -185,4 +194,25 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public interface SourceRefresher {
         void refreshSource();
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        LayoutManager layoutManager = rvContributionsList.getLayoutManager();
+        if(layoutManager instanceof  LinearLayoutManager){
+            lastVisibleItemPosition= ((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
+        }else if(layoutManager instanceof GridLayoutManager){
+            lastVisibleItemPosition=((GridLayoutManager)layoutManager).findLastCompletelyVisibleItemPosition();
+        }
+        outState.putInt(VISIBLE_ITEM_POSITION,lastVisibleItemPosition);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if(null!=savedInstanceState){
+            lastVisibleItemPosition=savedInstanceState.getInt(VISIBLE_ITEM_POSITION, 0);
+        }
+    }
+
 }

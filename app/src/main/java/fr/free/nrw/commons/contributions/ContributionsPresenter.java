@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.contributions.ContributionsContract.UserActionListener;
 import javax.inject.Inject;
@@ -41,7 +40,7 @@ public class ContributionsPresenter extends DataSetObserver implements UserActio
         if (null != cursor) {
             try {
                 cursor.registerDataSetObserver(this);
-            }catch (IllegalStateException e){//Cursor might be already registered
+            } catch (IllegalStateException e) {//Cursor might be already registered
                 Timber.d(e);
             }
         }
@@ -53,7 +52,7 @@ public class ContributionsPresenter extends DataSetObserver implements UserActio
         if (null != cursor) {
             try {
                 cursor.unregisterDataSetObserver(this);
-            }catch (Exception e){//Cursor might not be already registered
+            } catch (Exception e) {//Cursor might not be already registered
                 Timber.d(e);
             }
         }
@@ -86,6 +85,10 @@ public class ContributionsPresenter extends DataSetObserver implements UserActio
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         this.cursor = null;
+        //On LoadFinished is not guaranteed to be called
+        view.showProgress(false);
+        view.showWelcomeTip(true);
+        view.showNoContributionsUI(true);
         swapCursor(null);
     }
 

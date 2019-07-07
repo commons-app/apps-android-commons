@@ -113,7 +113,6 @@ public class CommonsApplication extends Application {
         return languageLookUpTable;
     }
 
-
     /**
      * Used to declare and initialize various components and dependencies
      */
