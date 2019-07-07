@@ -62,19 +62,16 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private boolean isFabOpen = false;
 
-    private LinearLayoutManager linearLayoutManager;
-    private GridLayoutManager gridLayoutManager;
-
     private ContributionsListAdapter adapter;
 
     private Callback callback;
     private String lastVisibleItemID;
 
+    private int SPAN_COUNT=3;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, view);
-        linearLayoutManager=new LinearLayoutManager(getContext());
-        gridLayoutManager=new GridLayoutManager(getContext(),3);
         initAdapter();
         return view;
     }
@@ -97,9 +94,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private void initRecyclerView() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            rvContributionsList.setLayoutManager(gridLayoutManager);
+            rvContributionsList.setLayoutManager(new GridLayoutManager(getContext(),SPAN_COUNT));
         } else {
-            rvContributionsList.setLayoutManager(linearLayoutManager);
+            rvContributionsList.setLayoutManager(new LinearLayoutManager(getContext()));
         }
 
         rvContributionsList.setAdapter(adapter);
@@ -111,10 +108,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         // check orientation
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             fab_layout.setOrientation(LinearLayout.HORIZONTAL);
-            rvContributionsList.setLayoutManager(gridLayoutManager);
+            rvContributionsList.setLayoutManager(new GridLayoutManager(getContext(),SPAN_COUNT));
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             fab_layout.setOrientation(LinearLayout.VERTICAL);
-            rvContributionsList.setLayoutManager(linearLayoutManager);
+            rvContributionsList.setLayoutManager(new LinearLayoutManager(getContext()));
         }
     }
 
@@ -186,10 +183,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
                 lastVisibleItemID = null;//Reset the lastVisibleItemID once we have used it
             }
         }
-    }
-
-    public void onDataSetInvalidated() {
-        //Doing nothing as of now
     }
 
     public interface SourceRefresher {
