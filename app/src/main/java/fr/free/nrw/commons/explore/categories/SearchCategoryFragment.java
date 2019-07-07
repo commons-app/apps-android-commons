@@ -56,10 +56,10 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     ProgressBar progressBar;
     @BindView(R.id.imagesNotFound)
     TextView categoriesNotFoundView;
-    String query;
+    private String query;
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
-    boolean isLoadingCategories;
+    private boolean isLoadingCategories;
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
@@ -152,7 +152,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     /**
      * Adds 25 more results to existing search results
      */
-    public void addCategoriesToList(String query) {
+    private void addCategoriesToList(String query) {
         if(isLoadingCategories) return;
         isLoadingCategories=true;
         this.query = query;

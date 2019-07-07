@@ -22,9 +22,10 @@ import io.reactivex.Single;
 @Singleton
 public class MediaClient {
 
+    private static final int PAGE_SIZE = 10;
+
     private final MediaInterface mediaInterface;
 
-    //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
     private Map<String, Map<String, String>> continuationStore;
 
     @Inject
@@ -66,10 +67,10 @@ public class MediaClient {
      * @return
      */
     public Single<List<Media>> getMediaListFromCategory(String category) {
-        return responseToMediaList(
-                continuationStore.containsKey("category_" + category) ?
-                        mediaInterface.getMediaListFromCategory(category, 10, continuationStore.get("category_" + category)) : //if true
-                        mediaInterface.getMediaListFromCategory(category, 10, Collections.emptyMap()),
+        return responseToMediaList(mediaInterface
+                        .getMediaListFromCategory(category,
+                                PAGE_SIZE,
+                                getContinuationMap("category_" + category)),
                 "category_" + category); //if false
 
     }
@@ -83,11 +84,16 @@ public class MediaClient {
      */
     public Single<List<Media>> getMediaListFromSearch(String keyword) {
         return responseToMediaList(
-                continuationStore.containsKey("search_" + keyword) ?
-                        mediaInterface.getMediaListFromSearch(keyword, 10, continuationStore.get("search_" + keyword)) : //if true
-                        mediaInterface.getMediaListFromSearch(keyword, 10, Collections.emptyMap()), //if false
+                mediaInterface
+                        .getMediaListFromSearch(keyword,
+                                PAGE_SIZE,
+                                getContinuationMap("search_" + keyword)), //if false
                 "search_" + keyword);
 
+    }
+
+    private Map<String, String> getContinuationMap(String keyword) {
+        return continuationStore.containsKey(keyword) ? continuationStore.get(keyword) : Collections.emptyMap();
     }
 
     private Single<List<Media>> responseToMediaList(Observable<MwQueryResponse> response, String key) {
@@ -101,7 +107,7 @@ public class MediaClient {
             return Observable.fromIterable(mwQueryResponse.query().pages());
         })
                 .map(Media::from)
-                .collect(ArrayList<Media>::new, List::add);
+                .collect(ArrayList::new, List::add);
     }
 
 }

@@ -47,17 +47,17 @@ public class Media implements Parcelable {
     protected String imageUrl;
     protected String filename;
     protected String description; // monolingual description on input...
-    protected String discussion;
-    protected long dataLength;
+    private String discussion;
+    private long dataLength;
     protected Date dateCreated;
     protected @Nullable Date dateUploaded;
     protected int width;
     protected int height;
     protected String license;
-    protected String licenseUrl;
+    private String licenseUrl;
     protected String creator;
     protected ArrayList<String> categories; // as loaded at runtime?
-    protected boolean requestedDeletion;
+    private boolean requestedDeletion;
     private Map<String, String> descriptions; // multilingual descriptions as loaded
     private HashMap<String, Object> tags = new HashMap<>();
     private @Nullable LatLng coordinates;
@@ -261,7 +261,7 @@ public class Media implements Parcelable {
      * Sets the discussion of the file.
      * @param discussion
      */
-    public void setDiscussion(String discussion) {
+    void setDiscussion(String discussion) {
         this.discussion = discussion;
     }
 
@@ -387,7 +387,7 @@ public class Media implements Parcelable {
         return license;
     }
 
-    public void setThumbUrl(String thumbUrl) {
+    private void setThumbUrl(String thumbUrl) {
         this.thumbUrl = thumbUrl;
     }
 
@@ -399,7 +399,7 @@ public class Media implements Parcelable {
      * Sets the license name of the file.
      * @param license license name as a String
      */
-    public void setLicenseInformation(String license, String licenseUrl) {
+    private void setLicenseInformation(String license, String licenseUrl) {
         this.license = license;
 
         if (!licenseUrl.startsWith("http://") && !licenseUrl.startsWith("https://")) {
@@ -450,7 +450,7 @@ public class Media implements Parcelable {
      * Modifies (or sets) media descriptions
      * @param descriptions Media descriptions
      */
-    void setDescriptions(Map<String, String> descriptions) {
+    private void setDescriptions(Map<String, String> descriptions) {
         this.descriptions.clear();
         this.descriptions.putAll(descriptions);
     }
@@ -521,7 +521,7 @@ public class Media implements Parcelable {
     /**
      * Set requested deletion to true
      */
-    public void setRequestedDeletion(){
+    void setRequestedDeletion(){
         requestedDeletion = true;
     }
 

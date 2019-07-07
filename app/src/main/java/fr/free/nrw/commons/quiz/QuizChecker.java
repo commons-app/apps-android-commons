@@ -10,7 +10,6 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -33,9 +32,12 @@ public class QuizChecker {
     private boolean isRevertCountFetched;
     private boolean isUploadCountFetched;
 
+    private String userName;
+    private boolean isFeedbackChecked;
+    private boolean isQuizDialogShown;
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private final SessionManager sessionManager;
     private final OkHttpJsonApiClient okHttpJsonApiClient;
     private final JsonKvStore revertKvStore;
 
@@ -46,19 +48,22 @@ public class QuizChecker {
 
     /**
      * constructor to set the parameters for quiz
-     * @param sessionManager
+     * @param userName
      * @param okHttpJsonApiClient instance of MediaWikiApi
      */
     @Inject
-    public QuizChecker(SessionManager sessionManager,
+    public QuizChecker(@Named("username") String userName,
                        OkHttpJsonApiClient okHttpJsonApiClient,
                        @Named("default_preferences") JsonKvStore revertKvStore) {
-        this.sessionManager = sessionManager;
+        this.userName = userName;
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.revertKvStore = revertKvStore;
     }
 
     public void initQuizCheck(Activity activity) {
+        if (isFeedbackChecked) {
+            return;
+        }
         setUploadCount(activity);
         setRevertCount(activity);
     }
@@ -72,7 +77,7 @@ public class QuizChecker {
      */
     private void setUploadCount(Activity activity) {
         compositeDisposable.add(okHttpJsonApiClient
-                .getUploadCount(sessionManager.getUserName())
+                .getUploadCount(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(uploadCount -> setTotalUploadCount(activity, uploadCount),
@@ -100,13 +105,14 @@ public class QuizChecker {
      */
     private void setRevertCount(Activity activity) {
         compositeDisposable.add(okHttpJsonApiClient
-                .getAchievements(sessionManager.getUserName())
+                .getAchievements(userName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             response -> {
                                 if (response != null) {
                                     setRevertParameter(activity, response.getDeletedUploads());
+                                    isFeedbackChecked = true;
                                 }
                             }, throwable -> Timber.e(throwable, "Fetching feedback failed"))
             );
@@ -147,6 +153,9 @@ public class QuizChecker {
      */
     @SuppressLint("StringFormatInvalid")
     private void callQuiz(Activity activity) {
+        if (isQuizDialogShown) {
+            return;
+        }
         DialogUtil.showAlertDialog(activity,
                 activity.getString(R.string.quiz),
                 activity.getString(R.string.quiz_alert_message, REVERT_PERCENTAGE_FOR_MESSAGE),

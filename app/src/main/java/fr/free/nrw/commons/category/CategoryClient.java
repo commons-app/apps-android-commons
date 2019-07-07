@@ -21,11 +21,11 @@ import timber.log.Timber;
 @Singleton
 public class CategoryClient {
 
-    private final CategoryInterface CategoryInterface;
+    private final CategoryInterface categoryInterface;
 
     @Inject
-    public CategoryClient(CategoryInterface CategoryInterface) {
-        this.CategoryInterface = CategoryInterface;
+    public CategoryClient(CategoryInterface categoryInterface) {
+        this.categoryInterface = categoryInterface;
     }
 
     /**
@@ -37,7 +37,7 @@ public class CategoryClient {
      * @return
      */
     public Observable<String> searchCategories(String filter, int itemLimit, int offset) {
-        return responseToCategoryName(CategoryInterface.searchCategories(filter, itemLimit, offset));
+        return responseToCategoryName(categoryInterface.searchCategories(filter, itemLimit, offset));
 
     }
 
@@ -58,24 +58,11 @@ public class CategoryClient {
      *
      * @param prefix    The prefix to be searched
      * @param itemLimit How many results are returned
-     * @param offset    Starts returning items from the nth result. If offset is 9, the response starts with the 9th item of the search result
-     * @return
-     */
-    public Observable<String> searchCategoriesForPrefix(String prefix, int itemLimit, int offset) {
-        return responseToCategoryName(CategoryInterface.searchCategoriesForPrefix(prefix, itemLimit, offset));
-    }
-
-    /**
-     * Searches for categories starting with the specified string.
-     *
-     * @param prefix    The prefix to be searched
-     * @param itemLimit How many results are returned
      * @return
      */
     public Observable<String> searchCategoriesForPrefix(String prefix, int itemLimit) {
-        return searchCategoriesForPrefix(prefix, itemLimit, 0);
+        return responseToCategoryName(categoryInterface.searchCategoriesForPrefix(prefix, itemLimit));
     }
-
 
     /**
      * The method takes categoryName as input and returns a List of Subcategories
@@ -85,7 +72,7 @@ public class CategoryClient {
      * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
      */
     public Observable<String> getSubCategoryList(String categoryName) {
-        return responseToCategoryName(CategoryInterface.getSubCategoryList(categoryName));
+        return responseToCategoryName(categoryInterface.getSubCategoryList(categoryName));
     }
 
     /**
@@ -97,7 +84,7 @@ public class CategoryClient {
      */
     @NonNull
     public Observable<String> getParentCategoryList(String categoryName) {
-        return responseToCategoryName(CategoryInterface.getParentCategoryList(categoryName));
+        return responseToCategoryName(categoryInterface.getParentCategoryList(categoryName));
     }
 
     /**
@@ -119,7 +106,6 @@ public class CategoryClient {
                         return Observable.fromIterable(pages);
                 })
                 .map(MwQueryPage::title)
-                .doOnEach(s -> Timber.d("Category returned: %s", s))
                 .map(cat -> cat.replace("Category:", ""));
     }
 }

@@ -13,13 +13,14 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
@@ -90,6 +91,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
         String categoryName = getArguments().getString("categoryName");
         if (getArguments() != null && categoryName != null) {
             this.categoryName = categoryName;
+            if (!this.categoryName.startsWith("Category:")) {
+                this.categoryName = "Category:" + categoryName;
+            }
             resetQueryContinueValues(categoryName);
             initList();
             setScrollListener();

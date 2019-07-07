@@ -1,16 +1,14 @@
 package fr.free.nrw.commons.category;
 
-import android.content.Context;
-import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -125,20 +123,6 @@ public class CategoryImagesActivity
         }
         mediaDetails.showImage(i);
         forceInitBackButton();
-    }
-
-    /**
-     * Consumers should be simply using this method to use this activity.
-     * @param context A Context of the application package implementing this class.
-     * @param title Page title
-     * @param categoryName Name of the category for displaying its images
-     */
-    public static void startYourself(Context context, String title, String categoryName) {
-        Intent intent = new Intent(context, CategoryImagesActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra("title", title);
-        intent.putExtra("categoryName", categoryName);
-        context.startActivity(intent);
     }
 
     /**
