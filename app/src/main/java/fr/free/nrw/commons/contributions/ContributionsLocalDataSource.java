@@ -5,13 +5,16 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-class ContributionsLocalDatSource {
+/**
+ * The LocalDataSource class for Contributions
+ */
+class ContributionsLocalDataSource {
 
     private final ContributionDao contributionsDao;
     private final JsonKvStore defaultKVStore;
 
     @Inject
-    public ContributionsLocalDatSource(
+    public ContributionsLocalDataSource(
             @Named("default_preferences") JsonKvStore defaultKVStore,
             ContributionDao contributionDao) {
         this.defaultKVStore = defaultKVStore;

@@ -5,10 +5,10 @@ import javax.inject.Inject;
 
 public class ContributionsRepository {
 
-    private ContributionsLocalDatSource localDataSource;
+    private ContributionsLocalDataSource localDataSource;
 
     @Inject
-    public ContributionsRepository(ContributionsLocalDatSource localDataSource) {
+    public ContributionsRepository(ContributionsLocalDataSource localDataSource) {
         this.localDataSource = localDataSource;
     }
 
