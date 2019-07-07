@@ -585,13 +585,6 @@ public class ContributionsFragment
         mediaDetailPagerFragment.onDataSetChanged();
     }
 
-    @Override
-    public void onDataSetInvalidated() {
-        contributionsListFragment.onDataSetInvalidated();
-        mediaDetailPagerFragment.onDataSetInvalidated();
-    }
-
-
     /**
      * Retry upload when it is failed
      *

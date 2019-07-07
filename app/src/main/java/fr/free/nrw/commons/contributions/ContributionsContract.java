@@ -18,8 +18,6 @@ public class ContributionsContract {
         void setUploadCount(int count);
 
         void onDataSetChanged();
-
-        void onDataSetInvalidated();
     }
 
     public interface UserActionListener extends BasePresenter<ContributionsContract.View>,

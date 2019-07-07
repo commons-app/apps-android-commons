@@ -353,10 +353,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
-    public void onDataSetInvalidated() {
-        //Doing nothing as of now
-    }
-
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);
 

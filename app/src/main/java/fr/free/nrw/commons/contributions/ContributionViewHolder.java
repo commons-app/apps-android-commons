@@ -13,7 +13,6 @@ import butterknife.OnClick;
 import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.ViewHolder;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
@@ -118,7 +117,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder{
         if ((contribution.getState() != Contribution.STATE_COMPLETED) && fileExists(
                 contribution.getLocalUri())) {
             imageView.setImageURI(contribution.getLocalUri());
-        }else {
+        } else {
             Timber.d("Fetching thumbnail for %s", contribution.getFilename());
             Disposable disposable = mediaDataExtractor
                     .getMediaFromFileName(contribution.getFilename())
@@ -154,8 +153,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder{
      * @return
      */
     private String getKeyForLRUCache(Uri contentUri) {
-        String[] split = contentUri.toString().split("/");
-        return split[split.length-1];
+        return contentUri.getLastPathSegment();
     }
 
     public void clear() {

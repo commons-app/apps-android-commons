@@ -148,7 +148,7 @@ public class ContributionsPresenter extends DataSetObserver implements UserActio
     @Override
     public void onInvalidated() {
         super.onInvalidated();
-        view.onDataSetInvalidated();
+        //Not letting the view know of this as of now, TODO discuss how to handle this and maybe show a proper ui for this
     }
 
     /**
