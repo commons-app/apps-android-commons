@@ -95,7 +95,7 @@ public class OkHttpJsonApiClient {
             if (response != null && response.isSuccessful()) {
                 ResponseBody responseBody = response.body();
                 if (null != responseBody) {
-                    String responseBodyString = responseBody.toString().trim();
+                    String responseBodyString = responseBody.string().trim();
                     if (!TextUtils.isEmpty(responseBodyString)) {
                         try {
                             return Integer.parseInt(responseBodyString);
