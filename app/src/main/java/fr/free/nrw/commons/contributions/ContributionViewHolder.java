@@ -27,7 +27,7 @@ import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
-public class ContributionViewHolder extends RecyclerView.ViewHolder implements ViewHolder<DisplayableContribution> {
+public class ContributionViewHolder extends RecyclerView.ViewHolder{
 
     private final Callback callback;
     @BindView(R.id.contributionImage)
@@ -55,7 +55,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder implements V
         this.callback=callback;
     }
 
-    @Override
     public void init(int position, DisplayableContribution contribution) {
         ApplicationlessInjection.getInstance(itemView.getContext())
                 .getCommonsApplicationComponent().inject(this);
