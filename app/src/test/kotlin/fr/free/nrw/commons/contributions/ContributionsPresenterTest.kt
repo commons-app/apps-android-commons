@@ -103,7 +103,7 @@ class ContributionsPresenterTest {
     @Test
     fun testOnChanged() {
         contributionsPresenter?.onChanged()
-        verify(view)?.onDataSetChanged();
+        verify(view)?.onDataSetChanged()
     }
 
 
