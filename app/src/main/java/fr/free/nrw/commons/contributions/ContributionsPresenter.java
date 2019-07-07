@@ -123,6 +123,22 @@ public class ContributionsPresenter extends DataSetObserver implements UserActio
         return null;
     }
 
+    /**
+     * Get contribution position  with id
+     */
+    public int getChildPositionWithId(String id) {
+        int position = 0;
+        cursor.moveToFirst();
+        while (null != cursor && cursor.moveToNext()) {
+            if (getContributionsFromCursor(cursor).getContentUri().getLastPathSegment()
+                    .equals(id)) {
+                position = cursor.getPosition();
+                break;
+            }
+        }
+        return position;
+    }
+
     @Override
     public void onChanged() {
         super.onChanged();

@@ -221,6 +221,11 @@ public class ContributionsFragment
             public Contribution getContributionForPosition(int position) {
                 return (Contribution) contributionsPresenter.getItemAtPosition(position);
             }
+
+            @Override
+            public int findItemPositionWithId(String id) {
+                return contributionsPresenter.getChildPositionWithId(id);
+            }
         });
 
         if(null==mediaDetailPagerFragment){

@@ -38,27 +38,6 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         return callback.getNumberOfContributions();
     }
 
-    private class NotifyingDataSetObserver extends DataSetObserver {
-
-        private ContributionsListAdapter adapter;
-
-        public NotifyingDataSetObserver(RecyclerView.Adapter adapter) {
-            this.adapter = (ContributionsListAdapter) adapter;
-        }
-
-        @Override
-        public void onChanged() {
-            super.onChanged();
-            adapter.notifyDataSetChanged();
-        }
-
-        @Override
-        public void onInvalidated() {
-            super.onInvalidated();
-        }
-    }
-
-
     public interface Callback {
 
         void retryUpload(Contribution contribution);
@@ -70,5 +49,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         int getNumberOfContributions();
 
         Contribution getContributionForPosition(int position);
+
+        int findItemPositionWithId(String lastVisibleItemID);
     }
 }

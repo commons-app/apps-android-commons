@@ -35,7 +35,7 @@ import javax.inject.Named;
 
 public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
-    private static final String VISIBLE_ITEM_POSITION = "visible_item_position";
+    private static final String VISIBLE_ITEM_ID = "visible_item_id";
     @BindView(R.id.contributionsList)
     RecyclerView rvContributionsList;
     @BindView(R.id.loadingContributionsProgressBar)
@@ -68,7 +68,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     private ContributionsListAdapter adapter;
 
     private Callback callback;
-    private int lastVisibleItemPosition;
+    private String lastVisibleItemID;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
@@ -180,9 +180,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         if (null != adapter) {
             adapter.notifyDataSetChanged();
             //Restoring last visible item position in cases of orientation change
-            if(lastVisibleItemPosition!=0 && adapter.getItemCount()>lastVisibleItemPosition){
-                rvContributionsList.scrollToPosition(lastVisibleItemPosition);
-                lastVisibleItemPosition=0;//Reset the lastVisiblePosition once we have used it
+            if (null != lastVisibleItemID) {
+                int itemPositionWithId = callback.findItemPositionWithId(lastVisibleItemID);
+                rvContributionsList.scrollToPosition(itemPositionWithId);
+                lastVisibleItemID = null;//Reset the lastVisibleItemID once we have used it
             }
         }
     }
@@ -199,20 +200,31 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         LayoutManager layoutManager = rvContributionsList.getLayoutManager();
+        int lastVisibleItemPosition=0;
         if(layoutManager instanceof  LinearLayoutManager){
             lastVisibleItemPosition= ((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
         }else if(layoutManager instanceof GridLayoutManager){
             lastVisibleItemPosition=((GridLayoutManager)layoutManager).findLastCompletelyVisibleItemPosition();
         }
-        outState.putInt(VISIBLE_ITEM_POSITION,lastVisibleItemPosition);
+        outState.putString(VISIBLE_ITEM_ID,findIdOfItemWithPosition(lastVisibleItemPosition));
     }
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if(null!=savedInstanceState){
-            lastVisibleItemPosition=savedInstanceState.getInt(VISIBLE_ITEM_POSITION, 0);
+            lastVisibleItemID =savedInstanceState.getString(VISIBLE_ITEM_ID, null);
         }
+    }
+
+
+    /**
+     * Gets the id of the contribution from the db
+     * @param position
+     * @return
+     */
+    private String findIdOfItemWithPosition(int position) {
+        return callback.getContributionForPosition(position).getContentUri().getLastPathSegment();
     }
 
 }
