@@ -546,12 +546,12 @@
   <string name="dialog_box_text_nomination">Чому %1$s має бути видалено?</string>
   <string name="review_is_uploaded_by">%1$s завантажено з допомогою: %2$s</string>
   <string name="default_description_language">Усталена мова описів</string>
-  <string name="delete_reason_spam_selfie">Селфі</string>
-  <string name="delete_reason_spam_blurry">Розмито</string>
-  <string name="delete_reason_spam_nonsense">Безглуздя</string>
-  <string name="delete_reason_spam_other">Інше</string>
-  <string name="delete_reason_copyright_pressphoto">Фото з новин</string>
-  <string name="delete_reason_copyright_internetphoto">Випадкове фото з інтернет</string>
-  <string name="delete_reason_copyright_logo">Логотип</string>
-  <string name="delete_reason_copyright_other">Інше</string>
+  <string name="delete_helper_ask_spam_selfie">Селфі</string>
+  <string name="delete_helper_ask_spam_blurry">Розмито</string>
+  <string name="delete_helper_ask_spam_nonsense">Безглуздя</string>
+  <string name="delete_helper_ask_spam_other">Інше</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Фото з новин</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Випадкове фото з інтернет</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
+  <string name="delete_helper_ask_reason_copyright_other">Інше</string>
 </resources>

@@ -376,10 +376,10 @@
   <string name="exif_tag_name_serialNumbers">Serienumre</string>
   <string name="share_via">Del app via...</string>
   <string name="no_categories_found">Ingen kategorier blev fundet</string>
-  <string name="delete_reason_spam_selfie">Et selvportræt</string>
-  <string name="delete_reason_spam_blurry">Sløret</string>
-  <string name="delete_reason_spam_nonsense">Vrøvl</string>
-  <string name="delete_reason_spam_other">Andet</string>
-  <string name="delete_reason_copyright_internetphoto">Vilkårligt billede fra internettet</string>
-  <string name="delete_reason_copyright_other">Andet</string>
+  <string name="delete_helper_ask_spam_selfie">Et selvportræt</string>
+  <string name="delete_helper_ask_spam_blurry">Sløret</string>
+  <string name="delete_helper_ask_spam_nonsense">Vrøvl</string>
+  <string name="delete_helper_ask_spam_other">Andet</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Vilkårligt billede fra internettet</string>
+  <string name="delete_helper_ask_reason_copyright_other">Andet</string>
 </resources>

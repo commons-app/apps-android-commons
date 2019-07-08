@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Metraduk
 * Mirin
 * Robin van der Vliet
@@ -529,4 +530,12 @@
   <string name="dialog_box_text_nomination">Kial %1$s foriĝu?</string>
   <string name="review_is_uploaded_by">%1$s estas alŝutita de: %2$s</string>
   <string name="default_description_language">Implicita priskriba lingvo</string>
+  <string name="delete_helper_ask_spam_selfie">Memfoto</string>
+  <string name="delete_helper_ask_spam_blurry">Malklara</string>
+  <string name="delete_helper_ask_spam_nonsense">Sensencaĵo</string>
+  <string name="delete_helper_ask_spam_other">Alia</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara foo</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda foto el Interreto</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Alia</string>
 </resources>

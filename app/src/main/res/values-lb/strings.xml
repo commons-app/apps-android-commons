@@ -345,5 +345,5 @@
   <string name="exif_tag_name_software">Software</string>
   <string name="no_categories_found">Keng Kategorie fonnt.</string>
   <string name="upload_cancelled">Eroplueden ofgebrach</string>
-  <string name="delete_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
 </resources>
