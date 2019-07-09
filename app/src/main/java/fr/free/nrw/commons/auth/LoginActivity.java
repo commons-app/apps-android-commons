@@ -1,9 +1,6 @@
 package fr.free.nrw.commons.auth;
 
-import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
-import android.accounts.AccountAuthenticatorResponse;
-import android.accounts.AccountManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,14 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.material.textfield.TextInputLayout;
-
-import java.io.IOException;
-import java.util.Locale;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -35,6 +24,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.material.textfield.TextInputLayout;
+
+import org.wikipedia.AppAdapter;
+import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.login.LoginClient;
+import org.wikipedia.login.LoginResult;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -52,16 +52,17 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
+import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.View.VISIBLE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
-import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_WIKI_SITE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
@@ -72,8 +73,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     SessionManager sessionManager;
 
     @Inject
+    @Named(NAMED_COMMONS_WIKI_SITE)
+    WikiSite commonsWikiSite;
+
+    @Inject
     @Named("default_preferences")
     JsonKvStore applicationKvStore;
+
+    @Inject
+    LoginClient loginClient;
 
     @BindView(R.id.login_button)
     Button loginButton;
@@ -103,13 +111,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
-    private Boolean loginCurrentlyInProgress = false;
-    private Boolean errorMessageShown = false;
-    private String resultantError;
-    private static final String RESULTANT_ERROR = "resultantError";
-    private static final String ERROR_MESSAGE_SHOWN = "errorMessageShown";
-    private static final String LOGGING_IN = "loggingIn";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -214,7 +215,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 && sessionManager.isUserLoggedIn()
                 && sessionManager.getCachedAuthCookie() != null) {
             applicationKvStore.putBoolean("login_skipped", false);
-            sessionManager.revalidateAuthToken();
             startMainActivity();
         }
 
@@ -244,7 +244,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     @OnClick(R.id.login_button)
     public void performLogin() {
-        loginCurrentlyInProgress = true;
         Timber.d("Login to start!");
         final String username = usernameEdit.getText().toString();
         final String rawUsername = usernameEdit.getText().toString().trim();
@@ -252,23 +251,37 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         String twoFactorCode = twoFactorEdit.getText().toString();
 
         showLoggingProgressBar();
-        compositeDisposable.add(Observable.fromCallable(() -> login(username, password, twoFactorCode))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> handleLogin(username, rawUsername, password, result)));
+        doLogin(username, password, twoFactorCode);
     }
 
-    private String login(String username, String password, String twoFactorCode) {
-        try {
-            if (twoFactorCode.isEmpty()) {
-                return mwApi.login(username, password);
-            } else {
-                return mwApi.login(username, password, twoFactorCode);
+    private void doLogin(String username, String password, String twoFactorCode) {
+        progressDialog.show();
+
+        Action action = () -> {
+            try {
+                loginClient.loginBlocking(commonsWikiSite, username, password, twoFactorCode);
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
             }
-        } catch (IOException e) {
-            // Do something better!
-            return "NetworkFailure";
-        }
+        };
+
+        compositeDisposable.add(Completable.fromAction(action)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> onLoginSuccess(username, password),
+                        error -> {
+                            if (error instanceof LoginClient.LoginFailedException) {
+                                LoginClient.LoginFailedException exception = (LoginClient.LoginFailedException) error;
+                                if (exception.getMessage().equals("2FA")) {
+                                    askUserForTwoFactorAuth();
+                                }
+                            }
+                            if (!progressDialog.isShowing()) {
+                                return;
+                            }
+                            progressDialog.dismiss();
+                            showMessageAndCancelDialog(R.string.error_occurred);
+                        }));
     }
 
     /**
@@ -281,18 +294,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         finish();
     }
 
-    private void handleLogin(String username, String rawUsername, String password, String result) {
-        Timber.d("Login done!");
-        if (result.equals("PASS")) {
-            handlePassResult(username, rawUsername, password);
-        } else {
-            loginCurrentlyInProgress = false;
-            errorMessageShown = true;
-            resultantError = result;
-            handleOtherResults(result);
-        }
-    }
-
     private void showLoggingProgressBar() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
@@ -302,65 +303,16 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         progressDialog.show();
     }
 
-    private void handlePassResult(String username, String rawUsername, String password) {
+    private void onLoginSuccess(String username, String password) {
+        if (!progressDialog.isShowing()) {
+            // no longer attached to activity!
+            return;
+        }
+        LoginResult loginResult = new LoginResult(commonsWikiSite, "PASS", username, password, "");
+        AppAdapter.get().updateAccount(loginResult);
+        progressDialog.dismiss();
         showSuccessAndDismissDialog();
-        requestAuthToken();
-        AccountAuthenticatorResponse response = null;
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            Timber.d("Bundle of extras: %s", extras);
-            response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
-            if (response != null) {
-                Bundle authResult = new Bundle();
-                authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
-                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, BuildConfig.ACCOUNT_TYPE);
-                response.onResult(authResult);
-            }
-        }
-
-        sessionManager.createAccount(response, username, rawUsername, password);
         startMainActivity();
-    }
-
-    protected void requestAuthToken() {
-        AccountManager accountManager = AccountManager.get(this);
-        Account curAccount = sessionManager.getCurrentAccount();
-        if (curAccount != null) {
-            accountManager.setAuthToken(curAccount, AUTH_TOKEN_TYPE, mwApi.getAuthCookie());
-        }
-    }
-
-    /**
-     * Match known failure message codes and provide messages.
-     *
-     * @param result String
-     */
-    private void handleOtherResults(String result) {
-        if (result.equals("NetworkFailure")) {
-            // Matches NetworkFailure which is created by the doInBackground method
-            showMessageAndCancelDialog(R.string.login_failed_network);
-        } else if (result.toLowerCase(Locale.getDefault()).contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
-            // Matches nosuchuser, nosuchusershort, noname
-            showMessageAndCancelDialog(R.string.login_failed_wrong_credentials);
-            emptySensitiveEditFields();
-        } else if (result.toLowerCase(Locale.getDefault()).contains("wrongpassword".toLowerCase())) {
-            // Matches wrongpassword, wrongpasswordempty
-            showMessageAndCancelDialog(R.string.login_failed_wrong_credentials);
-            emptySensitiveEditFields();
-        } else if (result.toLowerCase(Locale.getDefault()).contains("throttle".toLowerCase())) {
-            // Matches unknown throttle error codes
-            showMessageAndCancelDialog(R.string.login_failed_throttled);
-        } else if (result.toLowerCase(Locale.getDefault()).contains("userblocked".toLowerCase())) {
-            // Matches login-userblocked
-            showMessageAndCancelDialog(R.string.login_failed_blocked);
-        } else if (result.equals("2FA")) {
-            askUserForTwoFactorAuth();
-        } else {
-            // Occurs with unhandled login failure codes
-            Timber.d("Login failed with reason: %s", result);
-            showMessageAndCancelDialog(R.string.login_failed_generic);
-        }
     }
 
     @Override
@@ -402,30 +354,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         return getDelegate().getMenuInflater();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(LOGGING_IN, loginCurrentlyInProgress);
-        outState.putBoolean(ERROR_MESSAGE_SHOWN, errorMessageShown);
-        outState.putString(RESULTANT_ERROR, resultantError);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        loginCurrentlyInProgress = savedInstanceState.getBoolean(LOGGING_IN, false);
-        errorMessageShown = savedInstanceState.getBoolean(ERROR_MESSAGE_SHOWN, false);
-        if (loginCurrentlyInProgress) {
-            performLogin();
-        }
-        if (errorMessageShown) {
-            resultantError = savedInstanceState.getString(RESULTANT_ERROR);
-            if (resultantError != null) {
-                handleOtherResults(resultantError);
-            }
-        }
-    }
-
     public void askUserForTwoFactorAuth() {
         progressDialog.dismiss();
         twoFactorContainer.setVisibility(VISIBLE);
@@ -440,14 +368,16 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
+    public void showMessageAndCancelDialog(String error) {
+        showMessage(error, R.color.secondaryDarkColor);
+        if (progressDialog != null) {
+            progressDialog.cancel();
+        }
+    }
+
     public void showSuccessAndDismissDialog() {
         showMessage(R.string.login_success, R.color.primaryDarkColor);
         progressDialog.dismiss();
-    }
-
-    public void emptySensitiveEditFields() {
-        passwordEdit.setText("");
-        twoFactorEdit.setText("");
     }
 
     public void startMainActivity() {
@@ -457,6 +387,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     private void showMessage(@StringRes int resId, @ColorRes int colorResId) {
         errorMessage.setText(getString(resId));
+        errorMessage.setTextColor(ContextCompat.getColor(this, colorResId));
+        errorMessageContainer.setVisibility(VISIBLE);
+    }
+
+    private void showMessage(String message, @ColorRes int colorResId) {
+        errorMessage.setText(message);
         errorMessage.setTextColor(ContextCompat.getColor(this, colorResId));
         errorMessageContainer.setVisibility(VISIBLE);
     }

@@ -35,7 +35,7 @@ public class ReviewHelper {
     }
 
     /**
-     * Fetches recent changes from MediaWiki API
+     * Fetches recent changes from MediaWiki AP
      * Calls the API to get 10 changes in the last 1 hour
      * Earlier we were getting changes for the last 30 days but as the API returns just 10 results
      * its best to fetch for just last 1 hour.

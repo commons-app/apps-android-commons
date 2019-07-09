@@ -1,13 +1,15 @@
 package fr.free.nrw.commons.auth;
 
 import android.accounts.Account;
-import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.os.Bundle;
+import android.os.Build;
+import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import org.wikipedia.login.LoginResult;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,10 +22,6 @@ import io.reactivex.Completable;
 import io.reactivex.Observable;
 import timber.log.Timber;
 
-import static android.accounts.AccountManager.ERROR_CODE_REMOTE_EXCEPTION;
-import static android.accounts.AccountManager.KEY_ACCOUNT_NAME;
-import static android.accounts.AccountManager.KEY_ACCOUNT_TYPE;
-
 /**
  * Manage the current logged in user session.
  */
@@ -34,7 +32,6 @@ public class SessionManager {
     private Account currentAccount; // Unlike a savings account...  ;-)
     private JsonKvStore defaultKvStore;
     private static final String KEY_RAWUSERNAME = "rawusername";
-    private Bundle userdata = new Bundle();
 
     @Inject
     public SessionManager(Context context,
@@ -46,43 +43,40 @@ public class SessionManager {
         this.defaultKvStore = defaultKvStore;
     }
 
-    /**
-     * Creata a new account
-     *
-     * @param response
-     * @param username
-     * @param rawusername
-     * @param password
-     */
-    public void createAccount(@Nullable AccountAuthenticatorResponse response,
-                              String username, String rawusername, String password) {
-
-        Account account = new Account(username, BuildConfig.ACCOUNT_TYPE);
-        userdata.putString(KEY_RAWUSERNAME, rawusername);
-        boolean created = accountManager().addAccountExplicitly(account, password, userdata);
-
-        Timber.d("account creation " + (created ? "successful" : "failure"));
-
-        if (created) {
-            if (response != null) {
-                Bundle bundle = new Bundle();
-                bundle.putString(KEY_ACCOUNT_NAME, username);
-                bundle.putString(KEY_ACCOUNT_TYPE, BuildConfig.ACCOUNT_TYPE);
-
-
-                response.onResult(bundle);
-            }
-
-        } else {
-            if (response != null) {
-                response.onError(ERROR_CODE_REMOTE_EXCEPTION, "");
-            }
-            Timber.d("account creation failure");
+    private boolean createAccount(@NonNull String userName, @NonNull String password) {
+        Account account = getCurrentAccount();
+        if (account == null || TextUtils.isEmpty(account.name) || !account.name.equals(userName)) {
+            removeAccount();
+            account = new Account(userName, BuildConfig.ACCOUNT_TYPE);
+            return accountManager().addAccountExplicitly(account, password, null);
         }
+        return true;
+    }
 
-        // FIXME: If the user turns it off, it shouldn't be auto turned back on
-        ContentResolver.setSyncAutomatically(account, BuildConfig.CONTRIBUTION_AUTHORITY, true); // Enable sync by default!
-        ContentResolver.setSyncAutomatically(account, BuildConfig.MODIFICATION_AUTHORITY, true); // Enable sync by default!
+    public void removeAccount() {
+        Account account = getCurrentAccount();
+        if (account != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                accountManager().removeAccountExplicitly(account);
+            } else {
+                //noinspection deprecation
+                accountManager().removeAccount(account, null, null);
+            }
+        }
+    }
+
+    public void updateAccount(LoginResult result) {
+        boolean accountCreated = createAccount(result.getUserName(), result.getPassword());
+        if (accountCreated) {
+            setPassword(result.getPassword());
+        }
+    }
+
+    private void setPassword(@NonNull String password) {
+        Account account = getCurrentAccount();
+        if (account != null) {
+            accountManager().setPassword(account, password);
+        }
     }
 
     /**
@@ -125,25 +119,6 @@ public class SessionManager {
 
     private AccountManager accountManager() {
         return AccountManager.get(context);
-    }
-
-    public Boolean revalidateAuthToken() {
-        AccountManager accountManager = AccountManager.get(context);
-        Account curAccount = getCurrentAccount();
-
-        if (curAccount == null) {
-            return false; // This should never happen
-        }
-
-        accountManager.invalidateAuthToken(BuildConfig.ACCOUNT_TYPE, null);
-        String authCookie = getAuthCookie();
-
-        if (authCookie == null) {
-            return false;
-        }
-
-        mediaWikiApi.setAuthCookie(authCookie);
-        return true;
     }
 
     public String getAuthCookie() {

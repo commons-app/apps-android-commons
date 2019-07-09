@@ -1,35 +1,34 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.collection.LruCache;
-
-import com.facebook.drawee.view.SimpleDraweeView;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.ViewHolder;
+import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.upload.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import javax.inject.Inject;
+import javax.inject.Named;
+import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
-public class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
+public class ContributionViewHolder extends RecyclerView.ViewHolder {
+
+    private final Callback callback;
     @BindView(R.id.contributionImage)
     SimpleDraweeView imageView;
     @BindView(R.id.contributionTitle) TextView titleView;
@@ -47,15 +46,18 @@ public class ContributionViewHolder implements ViewHolder<DisplayableContributio
 
     private DisplayableContribution contribution;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private int position;
 
-    ContributionViewHolder(View parent) {
+    ContributionViewHolder(View parent, Callback callback) {
+        super(parent);
         ButterKnife.bind(this, parent);
+        this.callback=callback;
     }
 
-    @Override
-    public void bindModel(Context context, DisplayableContribution contribution) {
-        ApplicationlessInjection.getInstance(context)
+    public void init(int position, DisplayableContribution contribution) {
+        ApplicationlessInjection.getInstance(itemView.getContext())
                 .getCommonsApplicationComponent().inject(this);
+        this.position=position;
         this.contribution = contribution;
         fetchAndDisplayThumbnail(contribution);
         titleView.setText(contribution.getDisplayTitle());
@@ -104,19 +106,39 @@ public class ContributionViewHolder implements ViewHolder<DisplayableContributio
      * @param contribution
      */
     private void fetchAndDisplayThumbnail(DisplayableContribution contribution) {
-        if (!StringUtils.isBlank(thumbnailCache.get(contribution.getFilename()))) {
-            imageView.setImageURI(thumbnailCache.get(contribution.getFilename()));
+        String keyForLRUCache = getKeyForLRUCache(contribution.getContentUri());
+        String cacheUrl = thumbnailCache.get(keyForLRUCache);
+        if (!StringUtils.isBlank(cacheUrl)) {
+            imageView.setImageURI(cacheUrl);
             return;
         }
-        Timber.d("Fetching thumbnail for %s", contribution.getFilename());
-        Disposable disposable = mediaDataExtractor.getMediaFromFileName(contribution.getFilename())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(media -> {
-                    thumbnailCache.put(contribution.getFilename(), media.getThumbUrl());
-                    imageView.setImageURI(media.getThumbUrl());
-                });
-        compositeDisposable.add(disposable);
+
+        imageView.setBackground(null);
+        if ((contribution.getState() != Contribution.STATE_COMPLETED) && FileUtils.fileExists(
+                contribution.getLocalUri())) {
+            imageView.setImageURI(contribution.getLocalUri());
+        } else {
+            Timber.d("Fetching thumbnail for %s", contribution.getFilename());
+            Disposable disposable = mediaDataExtractor
+                    .getMediaFromFileName(contribution.getFilename())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(media -> {
+                        thumbnailCache.put(keyForLRUCache, media.getThumbUrl());
+                        imageView.setImageURI(media.getThumbUrl());
+                    });
+            compositeDisposable.add(disposable);
+        }
+
+    }
+
+    /**
+     * Returns image key for the LRU cache, basically the id of the image, (the content uri is the ""+/id)
+     * @param contentUri
+     * @return
+     */
+    private String getKeyForLRUCache(Uri contentUri) {
+        return contentUri.getLastPathSegment();
     }
 
     public void clear() {
@@ -128,10 +150,7 @@ public class ContributionViewHolder implements ViewHolder<DisplayableContributio
      */
     @OnClick(R.id.retryButton)
     public void retryUpload() {
-        DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
-        if (actions != null) {
-            actions.retryUpload();
-        }
+        callback.retryUpload(contribution);
     }
 
     /**
@@ -139,17 +158,11 @@ public class ContributionViewHolder implements ViewHolder<DisplayableContributio
      */
     @OnClick(R.id.cancelButton)
     public void deleteUpload() {
-        DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
-        if (actions != null) {
-            actions.deleteUpload();
-        }
+        callback.deleteUpload(contribution);
     }
 
     @OnClick(R.id.contributionImage)
     public void imageClicked(){
-        DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
-        if (actions != null) {
-            actions.onClick();
-        }
+        callback.openMediaDetail(position);
     }
 }

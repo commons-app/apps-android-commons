@@ -31,7 +31,7 @@ public interface MediaInterface {
      */
     @GET("w/api.php?action=query&format=json&formatversion=2&list=allimages")
     Observable<MwQueryResponse> checkFileExistsUsingSha(@Query("aisha1") String aisha1);
-    
+
     /**
      * This method retrieves a list of Media objects filtered using image generator query
      *

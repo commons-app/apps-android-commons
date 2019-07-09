@@ -9,6 +9,7 @@ import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.dataclient.mwapi.MwQueryResult;
 
 import java.util.Date;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -69,7 +70,7 @@ public class MediaClient {
                 .singleOrError();
     }
 
-        /**
+    /**
      * This method takes the category as input and returns a list of  Media objects filtered using image generator query
      * It uses the generator query API to get the images searched using a query, 10 at a time.
      *
@@ -157,5 +158,4 @@ public class MediaClient {
                 .map(Media::from)
                 .single(Media.EMPTY);
     }
-
 }

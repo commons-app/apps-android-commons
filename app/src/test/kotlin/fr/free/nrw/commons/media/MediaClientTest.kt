@@ -164,6 +164,7 @@ class MediaClientTest {
         assertEquals("Test", mediaClient!!.getPictureOfTheDay().blockingGet().filename)
         assertEquals(template, filenameCaptor.value);
     }
+  
     @Captor
     private val continuationCaptor: ArgumentCaptor<Map<String, String>>? = null
 

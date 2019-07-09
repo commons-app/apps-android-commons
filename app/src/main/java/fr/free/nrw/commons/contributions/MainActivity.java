@@ -3,7 +3,6 @@ package fr.free.nrw.commons.contributions;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,18 +12,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.material.tabs.TabLayout;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
@@ -39,7 +39,6 @@ import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.upload.UploadService;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -306,7 +305,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
-        compositeDisposable.add(Observable.fromCallable(() -> notificationController.getNotifications(false))
+        compositeDisposable.add(notificationController.getNotifications(false)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::initNotificationViews,
@@ -385,13 +384,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 case 0:
                     ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
                     if (retainedContributionsFragment != null) {
-                        //  ContributionsFragment is parent of ContributionsListFragment and
-                        //  MediaDetailsFragment. If below decides which child will be visible.
-                        if (isContributionsListFragment) {
-                            retainedContributionsFragment.setContributionsListFragment();
-                        } else {
-                            retainedContributionsFragment.setMediaDetailPagerFragment();
-                        }
                         return retainedContributionsFragment;
                     } else {
                         // If we reach here, retainedContributionsFragment is null
