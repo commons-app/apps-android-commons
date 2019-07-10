@@ -59,7 +59,7 @@ public class DeleteHelper {
      * @return
      */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
-        viewUtil.showShortToast(context, "Trying to nominate " + media.getDisplayTitle() + " for deletion");
+        viewUtil.showShortToast(context, context.getString((R.string.delete_helper_make_deletion_toast), media.getDisplayTitle()));
         return Single.fromCallable(() -> delete(media, reason))
                 .flatMap(result -> Single.fromCallable(() ->
                         showDeletionNotification(context, media, result)));
@@ -123,14 +123,14 @@ public class DeleteHelper {
 
     private boolean showDeletionNotification(Context context, Media media, boolean result) {
         String message;
-        String title = "Nominating for Deletion";
+        String title = context.getString(R.string.delete_helper_show_deletion_title);
 
         if (result) {
-            title += ": Success";
-            message = "Successfully nominated " + media.getDisplayTitle() + " deletion.";
+            title += ": " + context.getString(R.string.delete_helper_show_deletion_title_success);
+            message = context.getString((R.string.delete_helper_show_deletion_message_if),media.getDisplayTitle());
         } else {
-            title += ": Failed";
-            message = "Could not request deletion.";
+            title += ": " + context.getString(R.string.delete_helper_show_deletion_title_failed);
+            message = context.getString(R.string.delete_helper_show_deletion_message_else) ;
         }
 
         String urlForDelete = BuildConfig.COMMONS_URL + "/wiki/Commons:Deletion_requests/" + media.getFilename();
@@ -162,15 +162,15 @@ public class DeleteHelper {
 
 
         if (problem == ReviewController.DeleteReason.SPAM) {
-            reasonList[0] = context.getResources().getString(R.string.delete_reason_spam_selfie);
-            reasonList[1] = context.getResources().getString(R.string.delete_reason_spam_blurry);
-            reasonList[2] = context.getResources().getString(R.string.delete_reason_spam_nonsense);
-            reasonList[3] = context.getResources().getString(R.string.delete_reason_spam_other);
+            reasonList[0] = context.getString(R.string.delete_helper_ask_spam_selfie);
+            reasonList[1] = context.getString(R.string.delete_helper_ask_spam_blurry);
+            reasonList[2] = context.getString(R.string.delete_helper_ask_spam_nonsense);
+            reasonList[3] = context.getString(R.string.delete_helper_ask_spam_other);
         } else if (problem == ReviewController.DeleteReason.COPYRIGHT_VIOLATION) {
-            reasonList[0] = context.getResources().getString(R.string.delete_reason_copyright_pressphoto);
-            reasonList[1] = context.getResources().getString(R.string.delete_reason_copyright_internetphoto);
-            reasonList[2] = context.getResources().getString(R.string.delete_reason_copyright_logo);
-            reasonList[3] = context.getResources().getString(R.string.delete_reason_copyright_other);
+            reasonList[0] = context.getString(R.string.delete_helper_ask_reason_copyright_press_photo);
+            reasonList[1] = context.getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
+            reasonList[2] = context.getString(R.string.delete_helper_ask_reason_copyright_logo);
+            reasonList[3] = context.getString(R.string.delete_helper_ask_reason_copyright_other);
         }
 
         alert.setMultiChoiceItems(reasonList, checkedItems, (dialogInterface, position, isChecked) -> {
@@ -181,9 +181,9 @@ public class DeleteHelper {
             }
         });
 
-        alert.setPositiveButton("OK", (dialogInterface, i) -> {
+        alert.setPositiveButton(context.getString(R.string.ok), (dialogInterface, i) -> {
 
-            String reason = "Because it is ";
+            String reason = context.getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
             for (int j = 0; j < mUserReason.size(); j++) {
                 reason = reason + reasonList[mUserReason.get(j)];
                 if (j != mUserReason.size() - 1) {
@@ -203,7 +203,7 @@ public class DeleteHelper {
                     });
 
         });
-        alert.setNegativeButton("Cancel", (dialog, which) -> reviewCallback.onFailure());
+        alert.setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> reviewCallback.onFailure());
         AlertDialog d = alert.create();
         d.show();
     }

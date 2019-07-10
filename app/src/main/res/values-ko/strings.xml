@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * CYAN
 * Dlsrks1021
 * Doyoon1995
@@ -468,4 +469,9 @@
   <string name="no_categories_found">분류가 없습니다</string>
   <string name="upload_cancelled">업로드 취소됨</string>
   <string name="default_description_language">기본 설명 언어</string>
+  <string name="delete_helper_ask_spam_selfie">셀카</string>
+  <string name="delete_helper_ask_spam_other">기타</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷의 임의 사진</string>
+  <string name="delete_helper_ask_reason_copyright_logo">로고</string>
+  <string name="delete_helper_ask_reason_copyright_other">기타</string>
 </resources>

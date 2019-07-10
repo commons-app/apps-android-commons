@@ -181,33 +181,6 @@ public class CategoryImagesActivity
     }
 
     /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void notifyDatasetChanged() {
-
-    }
-
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    /**
      * This method inflates the menu in the toolbar
      */
     @Override

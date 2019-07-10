@@ -547,4 +547,12 @@
   <string name="dialog_box_text_nomination">Почему %1$s должно быть удалено?</string>
   <string name="review_is_uploaded_by">%1$s загружено с помощью: %2$s</string>
   <string name="default_description_language">Язык описаний по умолчанию</string>
+  <string name="delete_helper_ask_spam_selfie">Селфи</string>
+  <string name="delete_helper_ask_spam_blurry">Размыто</string>
+  <string name="delete_helper_ask_spam_nonsense">Бессмыслица</string>
+  <string name="delete_helper_ask_spam_other">Другое</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Новостное фото</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Случайное фото из интернет</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
+  <string name="delete_helper_ask_reason_copyright_other">Другое</string>
 </resources>

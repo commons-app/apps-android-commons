@@ -4,7 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
-
+import androidx.exifinterface.media.ExifInterface;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,8 +15,6 @@ import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import androidx.exifinterface.media.ExifInterface;
 import timber.log.Timber;
 
 public class FileUtils {
@@ -163,5 +161,18 @@ public class FileUtils {
             return fileDir.mkdirs();
         }
         return true;
+    }
+
+    /**
+     * Check if file exists in local dirs
+     */
+    public static boolean fileExists(Uri localUri) {
+        try {
+            File file = new File(localUri.getPath());
+            return file.exists();
+        } catch (Exception e) {
+            Timber.d(e);
+            return false;
+        }
     }
 }

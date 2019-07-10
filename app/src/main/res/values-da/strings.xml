@@ -370,9 +370,16 @@
   <string name="menu_option_unread">Vis ulæste</string>
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
-  <string name="skip_image" fuzzy="true">Spring over dette billede</string>
+  <string name="skip_image">Spring over dette billede</string>
   <string name="exif_tag_name_copyright">Ophavsret</string>
   <string name="exif_tag_name_cameraModel">Kameramodel</string>
   <string name="exif_tag_name_serialNumbers">Serienumre</string>
   <string name="share_via">Del app via...</string>
+  <string name="no_categories_found">Ingen kategorier blev fundet</string>
+  <string name="delete_helper_ask_spam_selfie">Et selvportræt</string>
+  <string name="delete_helper_ask_spam_blurry">Sløret</string>
+  <string name="delete_helper_ask_spam_nonsense">Vrøvl</string>
+  <string name="delete_helper_ask_spam_other">Andet</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Vilkårligt billede fra internettet</string>
+  <string name="delete_helper_ask_reason_copyright_other">Andet</string>
 </resources>

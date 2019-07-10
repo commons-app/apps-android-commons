@@ -26,7 +26,7 @@
   <string name="preference_category_appearance">外观</string>
   <string name="preference_category_general">一般</string>
   <string name="preference_category_feedback">反馈</string>
-  <string name="preference_category_privacy">隐私政策</string>
+  <string name="preference_category_privacy">隐私</string>
   <string name="preference_category_location">位置</string>
   <string name="app_name">共享资源</string>
   <string name="bullet">•</string>
@@ -277,6 +277,7 @@
   <string name="nominate_deletion">提交删除</string>
   <string name="nominated_for_deletion">此图片已被提交删除。</string>
   <string name="nominated_see_more">&lt;u&gt;查看网页获取详情&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">提名%1$s删除。</string>
   <string name="nominating_for_deletion_status">提名删除：%1$s</string>
   <string name="view_browser">在浏览器中预览</string>
   <string name="skip_login">忽略</string>
@@ -425,8 +426,8 @@
   <string name="deletion_reason_bad_for_my_privacy">我意识到这对我的隐私不利</string>
   <string name="deletion_reason_no_longer_want_public">我改变了主意，我不想再让公众看到它了</string>
   <string name="deletion_reason_not_interesting">对不起，这幅图对百科全书没什么意思</string>
-  <string name="uploaded_by_myself" fuzzy="true">我自己上传的在</string>
-  <string name="no_uploads" fuzzy="true">欢迎使用共享资源！\n\n通过触摸相机或画廊图标以上来上传您的首个媒体。</string>
+  <string name="uploaded_by_myself">由我自己上传在%1$s，使用于%2$d个条目。</string>
+  <string name="no_uploads">欢迎使用共享资源！\n\n通过点击添加按钮以上传您的首个媒体。</string>
   <string name="desc_language_Worldwide">世界各地</string>
   <string name="desc_language_America">美洲</string>
   <string name="desc_language_Europe">欧洲</string>
@@ -471,8 +472,11 @@
   <string name="review_spam_report_question">该文件不在收录范围内，原因是</string>
   <string name="review_c_violation_report_question">该文件侵犯版权，原因是</string>
   <string name="review_category_yes_button_text">否，分类错误</string>
+  <string name="review_category_no_button_text">看起来没问题</string>
   <string name="review_spam_yes_button_text">否，不在收录范围内</string>
+  <string name="review_spam_no_button_text">看起来没问题</string>
   <string name="review_copyright_yes_button_text">否，侵犯版权</string>
+  <string name="review_copyright_no_button_text">看起来没问题</string>
   <string name="review_thanks_yes_button_text">是，为什么不呢</string>
   <string name="review_thanks_no_button_text">下一张图片</string>
   <plurals name="receiving_shared_content">
@@ -503,4 +507,10 @@
   <string name="no_categories_found">找不到分类</string>
   <string name="upload_cancelled">取消上传</string>
   <string name="dialog_box_text_nomination">%1$s为何应被删除？</string>
+  <string name="delete_helper_ask_spam_selfie">自拍</string>
+  <string name="delete_helper_ask_spam_blurry">模糊</string>
+  <string name="delete_helper_ask_spam_nonsense">无意义</string>
+  <string name="delete_helper_ask_spam_other">其他</string>
+  <string name="delete_helper_ask_reason_copyright_logo">标志</string>
+  <string name="delete_helper_ask_reason_copyright_other">其他</string>
 </resources>

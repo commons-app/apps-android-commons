@@ -3,7 +3,6 @@ package fr.free.nrw.commons.contributions;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -386,13 +385,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 case 0:
                     ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
                     if (retainedContributionsFragment != null) {
-                        //  ContributionsFragment is parent of ContributionsListFragment and
-                        //  MediaDetailsFragment. If below decides which child will be visible.
-                        if (isContributionsListFragment) {
-                            retainedContributionsFragment.setContributionsListFragment();
-                        } else {
-                            retainedContributionsFragment.setMediaDetailPagerFragment();
-                        }
                         return retainedContributionsFragment;
                     } else {
                         // If we reach here, retainedContributionsFragment is null
