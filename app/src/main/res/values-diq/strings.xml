@@ -191,10 +191,10 @@
   <string name="view_browser">Browser de bıvinê</string>
   <string name="skip_login">Ser çek</string>
   <string name="navigation_item_login">Cı kewe</string>
-  <string name="nearby_directions">TARİFÊ RAYER</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions" fuzzy="true">TARİFÊ RAYER</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Rey bıdê &lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;PZP&lt;/u&gt;</string>
   <string name="welcome_skip_button">Musnayoği ser çek</string>
@@ -209,18 +209,18 @@
   <string name="app_widget_heading">Resmê roce</string>
   <string name="menu_search_button">Cıgeyrayış</string>
   <string name="title_activity_search">Cıgeyrayış</string>
-  <string name="search_tab_title_media">MEDYA</string>
-  <string name="search_tab_title_categories">KATEGORİYİ</string>
+  <string name="search_tab_title_media" fuzzy="true">MEDYA</string>
+  <string name="search_tab_title_categories" fuzzy="true">KATEGORİYİ</string>
   <string name="quiz">Quiz</string>
   <string name="question">Pers</string>
   <string name="result">Netice</string>
   <string name="continue_message">Dewam kerê</string>
   <string name="correct">Cewabo raşt</string>
   <string name="wrong">Cewabo ğelet</string>
-  <string name="delete">BESTERE</string>
-  <string name="statistics">İSTATİSTİKİ</string>
+  <string name="delete" fuzzy="true">BESTERE</string>
+  <string name="statistics" fuzzy="true">İSTATİSTİKİ</string>
   <string name="statistics_thanks">Teşekurê gêriyayi</string>
-  <string name="level">SEWİYA</string>
+  <string name="level" fuzzy="true">SEWİYA</string>
   <string name="preference_author_name_toggle">Nameyê nuştekariyo xısusiyi bıgurene</string>
   <string name="preference_author_name">Nameyê nuştekariyo xısusi</string>
   <string name="contributions_fragment">İştıraki</string>
@@ -252,6 +252,6 @@
   <string name="menu_option_archived">Arşivkerdeyan bıvêne</string>
   <string name="menu_option_unread">Nêwendeyan bıvêne</string>
   <string name="please_wait">Kerem kerên, bıpawên...</string>
-  <string name="skip_image">NÊ RESIMİ RAVİYARNE</string>
+  <string name="skip_image" fuzzy="true">NÊ RESIMİ RAVİYARNE</string>
   <string name="image_info">Melumatê resımi</string>
 </resources>

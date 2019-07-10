@@ -11,6 +11,7 @@
 * ManosHacker
 * Nikosgranturismogt
 * Nikosguard
+* Panos78
 * Protnet
 * Tgkarounos
 -->
@@ -268,7 +269,7 @@
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
   <string name="location_permission_rationale_nearby">Απαιτείται άδεια για την εμφάνιση λίστας κοντινών σημείων</string>
-  <string name="get_directions">Λάβετε κατευθύνσεις</string>
+  <string name="get_directions">Λήψη κατευθύνσεων</string>
   <string name="read_article">Ανάγνωση άρθρου</string>
   <string name="notifications_welcome">Καλωσήρθατε στο Wikimedia Commons, %1$s! Είμαστε χαρούμενοι που είστε εδώ.</string>
   <string name="notifications_talk_page_message">Ο %1$s άφησε ένα μήνυμα στην σελίδα συζήτησής σας</string>
@@ -276,7 +277,7 @@
   <string name="notifications_mention">Ο %1$s σας ανέφερε στο %2$s.</string>
   <string name="toggle_view_button">Μεταβολή προβολής</string>
   <string name="nearby_directions">Κατευθύνσεις</string>
-  <string name="nearby_wikidata">Βικιδεδομένα</string>
+  <string name="nearby_wikidata">Δεδομένα wiki</string>
   <string name="nearby_wikipedia">Βικιπαίδεια</string>
   <string name="nearby_commons">Κοινά</string>
   <string name="about_rate_us">&lt;u&gt;Βαθμολογήστε μας&lt;/u&gt;</string>
@@ -310,7 +311,7 @@
   <string name="provider_searches">Πρόσφατα αναζητημένα ερωτήματα</string>
   <string name="error_loading_categories">Συνέβη σφάλμα κατά τη φόρτωση κατηγοριών.</string>
   <string name="error_loading_subcategories">Συνέβη σφάλμα κατά τη φόρτωση υποκατηγοριών.</string>
-  <string name="search_tab_title_media">Μέσα ενημέρωσης</string>
+  <string name="search_tab_title_media">Μέσα</string>
   <string name="search_tab_title_categories">Κατηγορίες</string>
   <string name="successful_wikidata_edit">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>

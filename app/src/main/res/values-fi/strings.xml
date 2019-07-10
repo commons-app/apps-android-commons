@@ -274,17 +274,17 @@
   <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
   <string name="nearby_location_not_available">Sijainti ei käytettävissä.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
-  <string name="get_directions">HANKI OHJEET</string>
-  <string name="read_article">LUE ARTIKKELI</string>
+  <string name="get_directions" fuzzy="true">HANKI OHJEET</string>
+  <string name="read_article" fuzzy="true">LUE ARTIKKELI</string>
   <string name="notifications_welcome">Tervetuloa Wikimedia Commonsiin, %1$s! Olemme iloisia että olet täällä.</string>
   <string name="notifications_talk_page_message">%1$s jätti viestin keskustelusivullesi</string>
   <string name="notifications_thank_you_edit">Kiitos muokkaamisestasi</string>
   <string name="notifications_mention">%1$s mainitsi sinut %2$s.</string>
   <string name="toggle_view_button">Vaihda näkymä</string>
-  <string name="nearby_directions">REITTI</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions" fuzzy="true">REITTI</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Arvostele meidät&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;UKK&lt;/u&gt;</string>
   <string name="welcome_skip_button">Ohita opetus</string>
@@ -314,10 +314,10 @@
   <string name="search_recent_header">Äskettäiset haut:</string>
   <string name="error_loading_categories">Luokkia ladattaessa tapahtui virhe.</string>
   <string name="error_loading_subcategories">Alaluokkia ladattaessa tapahtui virhe.</string>
-  <string name="search_tab_title_media">MEDIA</string>
-  <string name="search_tab_title_categories">LUOKAT</string>
-  <string name="explore_tab_title_featured">SUOSITELTU</string>
-  <string name="explore_tab_title_mobile">TALLENNETTU MOBIILIN KAUTTA</string>
+  <string name="search_tab_title_media" fuzzy="true">MEDIA</string>
+  <string name="search_tab_title_categories" fuzzy="true">LUOKAT</string>
+  <string name="explore_tab_title_featured" fuzzy="true">SUOSITELTU</string>
+  <string name="explore_tab_title_mobile" fuzzy="true">TALLENNETTU MOBIILIN KAUTTA</string>
   <string name="successful_wikidata_edit">Kuva onnistuneesti lisätty Wikidata-kohteeseen %1$s!</string>
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
   <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>
@@ -344,12 +344,12 @@
   <string name="delete_recent_searches_dialog">Haluatko varmasti tyhjentää hakuhistoriasi?</string>
   <string name="search_history_deleted">Hakuhistoria poistettu</string>
   <string name="nominate_delete">Ehdota poistettavaksi</string>
-  <string name="delete">POISTA</string>
+  <string name="delete" fuzzy="true">POISTA</string>
   <string name="Achievements">Saavutukset</string>
-  <string name="statistics">TILASTOT</string>
+  <string name="statistics" fuzzy="true">TILASTOT</string>
   <string name="statistics_thanks">Kiitos vastaanotettu</string>
   <string name="statistics_featured">Suositellut kuvat</string>
-  <string name="level">TASO</string>
+  <string name="level" fuzzy="true">TASO</string>
   <string name="images_uploaded">Kuvia tallennettu</string>
   <string name="images_used_by_wiki">Kuvia käytetty</string>
   <string name="achievements_share_message">Jaa saavutuksesi ystäviesi kanssa!</string>
@@ -414,5 +414,5 @@
   <string name="menu_option_unread">Näytä lukemattomat</string>
   <string name="image_chooser_title">Valitse tallennettavat tiedostot</string>
   <string name="please_wait">Odota…</string>
-  <string name="skip_image">OHITA TÄMÄ KUVA</string>
+  <string name="skip_image" fuzzy="true">OHITA TÄMÄ KUVA</string>
 </resources>

@@ -274,17 +274,17 @@
   <string name="nearby_location_has_not_changed">Локација није промењена.</string>
   <string name="nearby_location_not_available">Локација није доступна.</string>
   <string name="location_permission_rationale_nearby">Потребна је дозвола за приказивање листе локација у близини</string>
-  <string name="get_directions">Добити упутства</string>
+  <string name="get_directions" fuzzy="true">Добити упутства</string>
   <string name="read_article">Прочитај чланак</string>
   <string name="notifications_welcome">Добро дошли на Викимедијину оставу, %1$s! Драго нам је што сте овде.</string>
   <string name="notifications_talk_page_message">%1$s је оставио поруку на вашој страници за разговор</string>
   <string name="notifications_thank_you_edit">Хвала вам за прављење измене</string>
   <string name="notifications_mention">%1$s Вас је поменуо на страници %2$s.</string>
   <string name="toggle_view_button">Пребаци приказ</string>
-  <string name="nearby_directions">УПУТСТВА</string>
-  <string name="nearby_wikidata">ВИКИПОДАЦИ</string>
-  <string name="nearby_wikipedia">ВИКИПЕДИЈА</string>
-  <string name="nearby_commons">ОСТАВА</string>
+  <string name="nearby_directions" fuzzy="true">УПУТСТВА</string>
+  <string name="nearby_wikidata">Википодаци</string>
+  <string name="nearby_wikipedia" fuzzy="true">ВИКИПЕДИЈА</string>
+  <string name="nearby_commons" fuzzy="true">ОСТАВА</string>
   <string name="about_rate_us">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;ЧПП&lt;/u&gt;</string>
   <string name="welcome_skip_button">Прескочи упутство</string>
@@ -316,8 +316,8 @@
   <string name="provider_searches">Недавнo претражени упити</string>
   <string name="error_loading_categories">Дошло је до грешке при учитавању категорија.</string>
   <string name="error_loading_subcategories">Дошло је до грешке при учитавању поткатегорија.</string>
-  <string name="search_tab_title_media">МЕДИЈИ</string>
-  <string name="search_tab_title_categories">КАТЕГОРИЈЕ</string>
+  <string name="search_tab_title_media">Медији</string>
+  <string name="search_tab_title_categories">Категорије</string>
   <string name="successful_wikidata_edit">Слика је успешно додата у %1$s на Википодацима.</string>
   <string name="wikidata_edit_failure">Ажурирање одговарајућег ентитета на Википодацима није успело.</string>
   <string name="menu_set_wallpaper">Постави као позадину</string>
@@ -345,10 +345,10 @@
   <string name="search_history_deleted">Историја претраге је избрисана</string>
   <string name="nominate_delete">Номиновање за брисање</string>
   <string name="Achievements">Достигнућа</string>
-  <string name="statistics">СТАТИСТИКЕ</string>
+  <string name="statistics" fuzzy="true">СТАТИСТИКЕ</string>
   <string name="statistics_thanks">Примљене захвале</string>
   <string name="statistics_featured">Изабране слике</string>
-  <string name="level">НИВО</string>
+  <string name="level">Ниво</string>
   <string name="images_uploaded">Отпремљене слике</string>
   <string name="image_reverts">Слике које нису опозване</string>
   <string name="images_used_by_wiki">Искоришћене слике</string>
@@ -430,4 +430,5 @@
   <string name="error_occurred_in_picking_images">Дошло је до грешке при избору слика</string>
   <string name="image_chooser_title">Одабир слика за отпремање</string>
   <string name="please_wait">Сачекајте…</string>
+  <string name="skip_image">Прескочи ову слику</string>
 </resources>

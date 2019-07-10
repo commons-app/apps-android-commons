@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Metraduk
 * Mirin
 * Robin van der Vliet
@@ -12,6 +13,7 @@
   <string name="preference_category_appearance">Aspekto</string>
   <string name="preference_category_general">Ĝenerala</string>
   <string name="preference_category_feedback">Prikomentado</string>
+  <string name="preference_category_privacy">Privateco</string>
   <string name="preference_category_location">Pozicio</string>
   <string name="app_name">Komunejo</string>
   <string name="bullet">•</string>
@@ -170,6 +172,7 @@
   <string name="storage_permission_title">Petante Permeson Konservi</string>
   <string name="read_storage_permission_rationale">Postulata permeso: Legi eksteran konservejon. La aplikaĵo ne povas atingi vian galerion sen tio.</string>
   <string name="write_storage_permission_rationale">Postulata permeso: Skribi al ekstera konservejo. La aplikaĵo ne povas atingi viajn fotilon/galerion sen tio.</string>
+  <string name="location_permission_title">Petante Permeson por Lokado</string>
   <string name="location_permission_rationale">Laŭvola permeso: Akiri aktualan lokon por sugestoj pri kategorio</string>
   <string name="ok">Bone</string>
   <string name="title_activity_nearby">Apudaj Lokoj</string>
@@ -274,17 +277,17 @@
   <string name="nearby_location_has_not_changed">La pozicio ne ŝanĝiĝis.</string>
   <string name="nearby_location_not_available">Pozicio ne havebla.</string>
   <string name="location_permission_rationale_nearby">Permeso estas postulata por montri liston de apudaj lokoj</string>
-  <string name="get_directions">RICEVI INSTRUKCIOJN</string>
-  <string name="read_article">LEGI ARTIKOLON</string>
+  <string name="get_directions">Ricevi instrukcion</string>
+  <string name="read_article">Legi artikolon</string>
   <string name="notifications_welcome">Bonvenon al Vikimedia Komunejo, %1$s! Ni ĝojas ke vi ĉeestas.</string>
   <string name="notifications_talk_page_message">%1$s lasis mesaĝon sur via diskutpaĝo</string>
   <string name="notifications_thank_you_edit">Dankon pro tio ke vi faris redakton</string>
   <string name="notifications_mention">%1$s menciis vin sur %2$s.</string>
   <string name="toggle_view_button">Baskuligi vidon</string>
-  <string name="nearby_directions">INSTRUKCIO</string>
-  <string name="nearby_wikidata">VIKIDATUMOJ</string>
-  <string name="nearby_wikipedia">VIKIPEDIO</string>
-  <string name="nearby_commons">KOMUNEJO</string>
+  <string name="nearby_directions">Instrukcio</string>
+  <string name="nearby_wikidata">Vikidatumoj</string>
+  <string name="nearby_wikipedia">Vikipedio</string>
+  <string name="nearby_commons">Komunejo</string>
   <string name="about_rate_us">&lt;u&gt;Aprezi nin&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Oftaj demandoj&lt;/u&gt;</string>
   <string name="welcome_skip_button">Preterpasi Lernilon</string>
@@ -318,10 +321,10 @@
   <string name="provider_searches">Ĵusaj serĉoj</string>
   <string name="error_loading_categories">Eraro okazis dum ŝargado de kategorioj.</string>
   <string name="error_loading_subcategories">Eraro okazis dum ŝargado de subkategorioj.</string>
-  <string name="search_tab_title_media">AŬDVIDAĴO</string>
-  <string name="search_tab_title_categories">KATEGORIOJ</string>
-  <string name="explore_tab_title_featured">ELSTARAJ</string>
-  <string name="explore_tab_title_mobile">ALŜUTITA PER POŜAPARATO</string>
+  <string name="search_tab_title_media">Aŭdvidaĵo</string>
+  <string name="search_tab_title_categories">Kategorioj</string>
+  <string name="explore_tab_title_featured">Elstaraj</string>
+  <string name="explore_tab_title_mobile">Alŝutita per poŝaparato</string>
   <string name="successful_wikidata_edit">Bildo sukcese aldoniĝis al %1$s ĉe Vikidatumoj!</string>
   <string name="wikidata_edit_failure">Malsukcesis aktualigo de la respondanta Vikidatuma ero!</string>
   <string name="menu_set_wallpaper">Ekranfonigi</string>
@@ -355,13 +358,13 @@
   <string name="delete_search_dialog">Ĉu vi volas forigi ĉi tiun serĉon?</string>
   <string name="search_history_deleted">Forviŝis serĉadan historion</string>
   <string name="nominate_delete">Proponi Forigon</string>
-  <string name="delete">FORIGI</string>
+  <string name="delete">Forigi</string>
   <string name="Achievements">Atingoj</string>
-  <string name="statistics">STATISTIKO</string>
+  <string name="statistics">Statistiko</string>
   <string name="statistics_thanks">Ricevitaj dankoj</string>
   <string name="statistics_featured">Elstaraj Bildoj</string>
   <string name="statistics_wikidata_edits">Bildoj per \"Apudaj Lokoj\"</string>
-  <string name="level">NIVELO</string>
+  <string name="level">Nivelo</string>
   <string name="images_uploaded">Alŝutitaj Bildoj</string>
   <string name="image_reverts">Bildoj Ne Malfaritaj</string>
   <string name="images_used_by_wiki">Uzataj Bildoj</string>
@@ -507,9 +510,32 @@
   <string name="previous_button_tooltip_message">Alklaku por reuzi la titolon kaj priskribon vi enigis por via antaŭa bildo kaj modifi ĝin por via aktuala bildo</string>
   <string name="welcome_do_upload_content_description">Ekzemploj de alŝutindaj bildoj por Komunejo</string>
   <string name="welcome_dont_upload_content_description">Ekzemploj de ne alŝutindaj bildoj</string>
-  <string name="skip_image">PRETERPASI TIUN BILDON</string>
+  <string name="skip_image">Preterpasi ĉi tiun bildon</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Elŝuto malsukcesis!! Ni ne povas elŝuti la dosieron sen permeso konservi ekstere.</string>
+  <string name="manage_exif_tags">Mastrumi EXIF-Etikedojn</string>
+  <string name="manage_exif_tags_summary">Elekti EXIF-etikedojn tenotajn je alŝutoj</string>
+  <string name="exif_tag_name_author">Aŭtoro</string>
+  <string name="exif_tag_name_copyright">Aŭtorrajto</string>
+  <string name="exif_tag_name_location">Loko</string>
+  <string name="exif_tag_name_cameraModel">Speco de Fotilo</string>
+  <string name="exif_tag_name_lensModel">Speco de Lenso</string>
+  <string name="exif_tag_name_serialNumbers">Numero de Fotilo</string>
+  <string name="exif_tag_name_software">Programaro</string>
   <string name="share_text">Alŝutu fotojn al Vikimedia Komunejo telefone. Elŝutu la Komunejo-aplikaĵon: %1$s</string>
   <string name="share_via">Diskonigi aplikaĵon per...</string>
   <string name="image_info">Informo pri Bildo</string>
+  <string name="no_categories_found">Neniu Kategorio troviĝis</string>
+  <string name="upload_cancelled">Alŝutado Ĉesis</string>
+  <string name="previous_image_title_description_not_found">Mankas dateno pri titolo aŭ priskribo de antaŭa bildo</string>
+  <string name="dialog_box_text_nomination">Kial %1$s foriĝu?</string>
+  <string name="review_is_uploaded_by">%1$s estas alŝutita de: %2$s</string>
+  <string name="default_description_language">Implicita priskriba lingvo</string>
+  <string name="delete_helper_ask_spam_selfie">Memfoto</string>
+  <string name="delete_helper_ask_spam_blurry">Malklara</string>
+  <string name="delete_helper_ask_spam_nonsense">Sensencaĵo</string>
+  <string name="delete_helper_ask_spam_other">Alia</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara foo</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda foto el Interreto</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Alia</string>
 </resources>

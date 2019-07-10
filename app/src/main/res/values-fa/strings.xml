@@ -287,17 +287,17 @@
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
   <string name="nearby_location_not_available">مکان موجود نیست.</string>
   <string name="location_permission_rationale_nearby">برای نمایش مکان‌ّای اطراف نیاز به اجازه است.</string>
-  <string name="get_directions">دریافت جهت‌‌ها</string>
-  <string name="read_article">خواندن مقاله</string>
+  <string name="get_directions" fuzzy="true">دریافت جهت‌‌ها</string>
+  <string name="read_article" fuzzy="true">خواندن مقاله</string>
   <string name="notifications_welcome">%1$s، به ویکی‌انبار خوش آمدید! خوشحالیم که اینجا هستید.</string>
   <string name="notifications_talk_page_message">%1$s در صفحهٔ بحث شما پیامی گذاشته‌است</string>
   <string name="notifications_thank_you_edit">برای ویرایش ممنون</string>
   <string name="notifications_mention">%1$s در %2$s به شما اشاره کرده‌است.</string>
   <string name="toggle_view_button">دکمه نمایش</string>
-  <string name="nearby_directions">جهت‌ها</string>
-  <string name="nearby_wikidata">ویکی‌داده</string>
-  <string name="nearby_wikipedia">ویکی‌پدیا</string>
-  <string name="nearby_commons">ویکی‌انبار</string>
+  <string name="nearby_directions" fuzzy="true">جهت‌ها</string>
+  <string name="nearby_wikidata" fuzzy="true">ویکی‌داده</string>
+  <string name="nearby_wikipedia" fuzzy="true">ویکی‌پدیا</string>
+  <string name="nearby_commons" fuzzy="true">ویکی‌انبار</string>
   <string name="about_rate_us">&lt;u&gt;رتبه ما&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;سوال‌های متداول&lt;/u&gt;</string>
   <string name="welcome_skip_button">رهاکردن آموزش</string>
@@ -327,10 +327,10 @@
   <string name="provider_searches">کوئری‌های که اخیرا جستجو شده</string>
   <string name="error_loading_categories">خطا هنگام بار کردن رده ها.</string>
   <string name="error_loading_subcategories">در هنگام بارگیری زیررده‌ها خطایی رخ داد.</string>
-  <string name="search_tab_title_media">رسانه</string>
-  <string name="search_tab_title_categories">دسته بندی</string>
-  <string name="explore_tab_title_featured">برگزیده</string>
-  <string name="explore_tab_title_mobile">بارگذاری‌شده با تلفن همراه</string>
+  <string name="search_tab_title_media" fuzzy="true">رسانه</string>
+  <string name="search_tab_title_categories" fuzzy="true">دسته بندی</string>
+  <string name="explore_tab_title_featured" fuzzy="true">برگزیده</string>
+  <string name="explore_tab_title_mobile" fuzzy="true">بارگذاری‌شده با تلفن همراه</string>
   <string name="successful_wikidata_edit">تصویر با موفقیت به %1$s در ویکی‌داده افزوده‌شد.</string>
   <string name="wikidata_edit_failure">تلاش برای بروزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
@@ -356,13 +356,13 @@
   <string name="delete_search_dialog">آیا می‌خواهید این جستجو را حذف کنید؟</string>
   <string name="search_history_deleted">جستجوی تاریخچهٔ حذف‌شده</string>
   <string name="nominate_delete">نامزد کردن برای حذف</string>
-  <string name="delete">حذف</string>
+  <string name="delete" fuzzy="true">حذف</string>
   <string name="Achievements">دستاوردها</string>
-  <string name="statistics">آمارها</string>
+  <string name="statistics" fuzzy="true">آمارها</string>
   <string name="statistics_thanks">تشکر دریافت‌شد</string>
   <string name="statistics_featured">تصاویر برگزیده</string>
   <string name="statistics_wikidata_edits">تصاویر بر اساس «مکان‌های اطراف»</string>
-  <string name="level">سطح</string>
+  <string name="level" fuzzy="true">سطح</string>
   <string name="images_uploaded">تصاویر بارگذاری شده</string>
   <string name="image_reverts">تصاویر واگردانی نشده</string>
   <string name="images_used_by_wiki">تصویر استفاده شده</string>
@@ -448,7 +448,7 @@
   <string name="review_copyright_no_button_text">خوب به نظر می‌رسد</string>
   <string name="review_thanks_yes_button_text">بله، چرا که نه</string>
   <string name="review_thanks_no_button_text">تصویر بعدی</string>
-  <string name="no_image">تصاویر استاده نشده</string>
+  <string name="no_image">هیچ تصویری به کار نرفته است</string>
   <string name="no_image_reverted">تصویر برگردانده نشد</string>
   <string name="no_image_uploaded">هیچ تصویری بارگذاری نشد</string>
   <string name="no_notification">شما هیچ اعلان خوانده‌نشده‌ای ندارید</string>
@@ -459,7 +459,7 @@
   <string name="please_wait">لطفاً صبر کنید...</string>
   <string name="previous_image_title_description">از عنوان/توضیحات پیشین استفاده کنید</string>
   <string name="welcome_dont_upload_content_description">نمونه تصاویری که برای بازگذاری مناسب نیستند</string>
-  <string name="skip_image">از این تصویر صرف نظر کن</string>
+  <string name="skip_image" fuzzy="true">از این تصویر صرف نظر کن</string>
   <string name="manage_exif_tags">مدیریت تگ‌های EXIF</string>
   <string name="manage_exif_tags_summary">تگ‌های موردنظر خود در EXIF را برای آپلود انتخاب کنید</string>
   <string name="exif_tag_name_author">پدیدآور</string>
