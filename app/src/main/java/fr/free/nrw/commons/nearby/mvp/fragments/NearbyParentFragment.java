@@ -68,7 +68,7 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
  */
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
         implements WikidataEditListener.WikidataP18EditListener,
-                    NearbyParentFragmentContract.View {
+                    NearbyParentFragmentContract.View, OnMapReadyCallback {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -98,9 +98,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private NearbyParentFragmentContract.UserActions userActions;
 
-    private NearbyMapFragment2 nearbyMapFragment;
+    private SupportMapFragment nearbyMapFragment;
     private NearbyListFragment nearbyListFragment;
-    private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment2.class.getSimpleName();
+    private static final String TAG_RETAINED_MAP_FRAGMENT = SupportMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
     public NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
 
@@ -168,7 +168,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     public void childMapFragmentAttached() {
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
-                                (this, nearbyMapFragment, locationManager);
+                                (this, null, locationManager);
         Timber.d("Child fragment attached");
     }
 
@@ -240,8 +240,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Returns the map fragment added to child fragment manager previously, if exists.
      */
-    private NearbyMapFragment2 getMapFragment() {
-        NearbyMapFragment2 existingFragment = (NearbyMapFragment2) getChildFragmentManager()
+    private SupportMapFragment getMapFragment() {
+        SupportMapFragment existingFragment = (SupportMapFragment) getChildFragmentManager()
                                                     .findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
         if (existingFragment == null) {
             existingFragment = setMapFragment();
@@ -249,7 +249,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return existingFragment;
     }
 
-    private NearbyMapFragment2 setMapFragment() {
+    private SupportMapFragment setMapFragment() {
+        Log.d("deneme2","setMapFragment is called");
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
         // Build mapboxMap
         MapboxMapOptions options = new MapboxMapOptions();
@@ -259,22 +260,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .build());
 
         // Create map fragment
-        NearbyMapFragment2 nearbyMapFragment = NearbyMapFragment2.newInstance(options);
+        SupportMapFragment nearbyMapFragment = SupportMapFragment.newInstance(options);
 
         //NearbyMapFragment2 nearbyMapFragment = new NearbyMapFragment2();
         fragmentTransaction.replace(R.id.container, nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT);
         fragmentTransaction.commitAllowingStateLoss();
 
-        nearbyMapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull MapboxMap mapboxMap) {
-                Log.d("deneme2","onMapReady");
-                nearbyMapFragment.viewsAreReadyCallback.nearbyMapViewReady();
-            }
-        });
-        if (nearbyMapFragment.getMapboxMap()!=null){
+        nearbyMapFragment.getMapAsync(this);
+        /*if (nearbyMapFragment.getMapboxMap()!=null){
 
-        }
+        }*/
         return nearbyMapFragment;
     }
 
@@ -420,5 +415,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public boolean isBottomSheetExpanded() {
         return bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
+    }
+
+    @Override
+    public void onMapReady(MapboxMap mapboxMap) {
+        Log.d("deneme2","on map ready");
     }
 }
