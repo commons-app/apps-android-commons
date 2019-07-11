@@ -212,8 +212,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
 
         if (sessionManager.getCurrentAccount() != null
-                && sessionManager.isUserLoggedIn()
-                && sessionManager.getCachedAuthCookie() != null) {
+                && sessionManager.isUserLoggedIn()) {
             applicationKvStore.putBoolean("login_skipped", false);
             startMainActivity();
         }
@@ -308,6 +307,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             // no longer attached to activity!
             return;
         }
+        sessionManager.setUserLoggedIn(true);
         LoginResult loginResult = new LoginResult(commonsWikiSite, "PASS", username, password, "");
         AppAdapter.get().updateAccount(loginResult);
         progressDialog.dismiss();

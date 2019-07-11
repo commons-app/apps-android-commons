@@ -2,20 +2,19 @@ package fr.free.nrw.commons.category;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -28,7 +27,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
  */
 
 public class CategoryImagesActivity
-        extends AuthenticatedActivity
+        extends NavigationBaseActivity
         implements FragmentManager.OnBackStackChangedListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     AdapterView.OnItemClickListener{
@@ -37,16 +36,6 @@ public class CategoryImagesActivity
     private FragmentManager supportFragmentManager;
     private CategoryImagesListFragment categoryImagesListFragment;
     private MediaDetailPagerFragment mediaDetails;
-
-    @Override
-    protected void onAuthCookieAcquired(String authCookie) {
-
-    }
-
-    @Override
-    protected void onAuthFailure() {
-
-    }
 
     /**
      * This method is called on backPressed of anyFragment in the activity.
@@ -69,7 +58,6 @@ public class CategoryImagesActivity
         supportFragmentManager = getSupportFragmentManager();
         setCategoryImagesFragment();
         supportFragmentManager.addOnBackStackChangedListener(this);
-        requestAuthToken();
         initDrawer();
         setPageTitle();
     }
