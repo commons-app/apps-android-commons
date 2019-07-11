@@ -550,7 +550,11 @@
   <string name="review_is_uploaded_by">%1$s est téléversé par&amp;nbsp;: %2$s</string>
   <string name="default_description_language">Langue de description par défaut</string>
   <string name="delete_helper_make_deletion_toast">Tentative de signalement de %1$s pour la suppression</string>
+  <string name="delete_helper_show_deletion_title">Nominé pour suppression</string>
+  <string name="delete_helper_show_deletion_title_success">Succès</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s bien nominé pour suppression.</string>
   <string name="delete_helper_show_deletion_title_failed">Échec</string>
+  <string name="delete_helper_show_deletion_message_else">Impossible de requêter la suppression.</string>
   <string name="delete_helper_ask_spam_selfie">Un selfie</string>
   <string name="delete_helper_ask_spam_blurry">Flou</string>
   <string name="delete_helper_ask_spam_nonsense">Non-sens</string>
@@ -559,4 +563,5 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Photo aléatoire sur internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Autre</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Parce qu’elle est</string>
 </resources>

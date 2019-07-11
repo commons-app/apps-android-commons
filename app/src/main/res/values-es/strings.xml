@@ -547,6 +547,8 @@
   <string name="dialog_box_text_nomination">¿Por qué debe borrarse %1$s?</string>
   <string name="review_is_uploaded_by">%1$s fue subida por: %2$s</string>
   <string name="default_description_language">Idioma por defecto de la descripción</string>
+  <string name="delete_helper_make_deletion_toast">Intentando nominar %1$s para su borrado</string>
+  <string name="delete_helper_show_deletion_title_failed">Falló</string>
   <string name="delete_helper_ask_spam_selfie">Un autorretrato</string>
   <string name="delete_helper_ask_spam_blurry">Borrosa</string>
   <string name="delete_helper_ask_spam_nonsense">Sinsentido</string>
