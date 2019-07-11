@@ -8,12 +8,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
 
 import java.lang.annotation.Retention;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
@@ -70,7 +69,7 @@ public class  Contribution extends Media {
     private String wikiDataEntityId;
     private Uri contentProviderUri;
     private String dateCreatedSource;
-    private String depictionsString;
+    private ArrayList<String> depictionsEntityIds;
     private HashMap<String, String> captions;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
@@ -90,13 +89,13 @@ public class  Contribution extends Media {
     }
 
     public Contribution(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description, long dataLength,
-                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String depictions, String decimalCoords) {
+                        Date dateCreated, Date dateUploaded, String creator, String editSummary, ArrayList<String> depictionsEntityIds, String decimalCoords) {
         super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.captions = captions;
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
-        this.depictionsString = depictions;
+        this.depictionsEntityIds = depictionsEntityIds;
     }
 
     public Contribution(Parcel in) {
@@ -166,8 +165,8 @@ public class  Contribution extends Media {
         this.dateUploaded = date;
     }
 
-    public void setDepictions(String depictions) {
-        this.depictionsString = depictions;
+    public void setDepictions(ArrayList<String> depictionsEntityIds) {
+        this.depictionsEntityIds = depictionsEntityIds;
     }
 
     public String getPageContents(Context applicationContext) {

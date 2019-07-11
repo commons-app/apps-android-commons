@@ -212,7 +212,7 @@ public class UploadModel {
                     item.getFileName(), item.uploadMediaDetails.size()!=0? UploadMediaDetail.formatCaptions(item.uploadMediaDetails):new HashMap<>(),
                     UploadMediaDetail.formatList(item.uploadMediaDetails), -1,
                     null, null, sessionManager.getAuthorName(),
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY,"depiction", item.gpsCoords.getCoords());
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY,new ArrayList<>(), item.gpsCoords.getCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
             }

@@ -61,10 +61,10 @@ public class WikidataEditService {
      * @param fileName
      */
     public void createClaimWithLogging(String wikidataEntityId, String fileName) {
-        if (wikidataEntityId == null) {
+        /*if (wikidataEntityId == null) {
             Timber.d("Skipping creation of claim as Wikidata entity ID is null");
             return;
-        }
+        }*/
 
         if (fileName == null) {
             Timber.d("Skipping creation of claim as fileName entity ID is null");
@@ -77,9 +77,9 @@ public class WikidataEditService {
         }
 
         // TODO Wikidata Sandbox (Q4115189) for test purposes
-        //wikidataEntityId = "Q4115189";
+        wikidataEntityId = "Q4115189";
         editWikidataProperty(wikidataEntityId, fileName);
-        editWikiBasePropertyP180(wikidataEntityId, fileName, "depiction");
+        editWikiBasePropertyP180(wikidataEntityId, fileName);
     }
 
 
@@ -116,13 +116,13 @@ public class WikidataEditService {
      * @param fileName
      */
     @SuppressLint("CheckResult")
-    private void editWikiBasePropertyP180(String wikidataEntityId, String fileName, String data) {
+    private void editWikiBasePropertyP180(String wikidataEntityId, String fileName) {
         wikiBaseClient.getFileEntityId(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
-                        addPropertyP180(wikidataEntityId, fileEntityId.toString(), data);
+                        addPropertyP180(wikidataEntityId, fileEntityId.toString());
                         Timber.d("EntityId for image was received successfully");
                     } else {
                         Timber.d("Error acquiring EntityId for image");
@@ -134,7 +134,7 @@ public class WikidataEditService {
     }
 
     @SuppressLint("CheckResult")
-    private void addPropertyP180(String entityId, String fileEntityId, String data) {
+    private void addPropertyP180(String entityId, String fileEntityId) {
 
         JsonObject value = new JsonObject();
         value.addProperty("entity-type", "item");
