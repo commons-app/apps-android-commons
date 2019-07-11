@@ -62,13 +62,6 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        String authCookie = sessionManager.getAuthCookie();
-        if (isNullOrWhiteSpace(authCookie)) {
-            Timber.d("Could not authenticate :(");
-            return;
-        }
-
-
         allModifications.moveToFirst();
 
         Timber.d("Found %d modifications to execute", allModifications.getCount());
@@ -130,7 +123,4 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    private boolean isNullOrWhiteSpace(String value) {
-        return value == null || value.trim().isEmpty();
-    }
 }

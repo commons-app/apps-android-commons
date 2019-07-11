@@ -20,7 +20,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import timber.log.Timber;
 
 /**
  * Manage the current logged in user session.
@@ -53,7 +52,7 @@ public class SessionManager {
         return true;
     }
 
-    public void removeAccount() {
+    private void removeAccount() {
         Account account = getCurrentAccount();
         if (account != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
@@ -101,7 +100,7 @@ public class SessionManager {
     }
 
     @Nullable
-    public String getRawUserName() {
+    private String getRawUserName() {
         Account account = getCurrentAccount();
         return account == null ? null : accountManager().getUserData(account, KEY_RAWUSERNAME);
     }
@@ -121,25 +120,12 @@ public class SessionManager {
         return AccountManager.get(context);
     }
 
-    public String getAuthCookie() {
-        if (!isUserLoggedIn()) {
-            Timber.e("User is not logged in");
-            return null;
-        } else {
-            String authCookie = getCachedAuthCookie();
-            if (authCookie == null) {
-                Timber.e("Auth cookie is null even after login");
-            }
-            return authCookie;
-        }
-    }
-
-    public String getCachedAuthCookie() {
-        return defaultKvStore.getString("getAuthCookie", null);
-    }
-
     public boolean isUserLoggedIn() {
         return defaultKvStore.getBoolean("isUserLoggedIn", false);
+    }
+
+    void setUserLoggedIn(boolean isLoggedIn) {
+        defaultKvStore.putBoolean("isUserLoggedIn", isLoggedIn);
     }
 
     public void forceLogin(Context context) {
