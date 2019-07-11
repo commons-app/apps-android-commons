@@ -57,6 +57,7 @@ public class Media implements Parcelable {
     protected String licenseUrl;
     protected String creator;
     protected ArrayList<String> categories; // as loaded at runtime?
+    protected ArrayList<String> depictions;
     protected boolean requestedDeletion;
     private Map<String, String> descriptions; // multilingual descriptions as loaded
     private HashMap<String, String> captions;
@@ -68,6 +69,7 @@ public class Media implements Parcelable {
      */
     protected Media() {
         this.categories = new ArrayList<>();
+        this.depictions = new ArrayList<>();
         this.descriptions = new HashMap<>();
         this.captions = new HashMap<>();
     }
@@ -107,6 +109,7 @@ public class Media implements Parcelable {
         this.dateUploaded = dateUploaded;
         this.creator = creator;
         this.categories = new ArrayList<>();
+        this.depictions = new ArrayList<>();
         this.descriptions = new HashMap<>();
     }
 
@@ -128,6 +131,9 @@ public class Media implements Parcelable {
         license = in.readString();
         if (categories != null) {
             in.readStringList(categories);
+        }
+        if (depictions != null) {
+            in.readStringList(depictions);
         }
         descriptions = in.readHashMap(ClassLoader.getSystemClassLoader());
         captions = in.readHashMap(ClassLoader.getSystemClassLoader());
@@ -448,6 +454,10 @@ public class Media implements Parcelable {
         return (ArrayList<String>) categories.clone(); // feels dirty
     }
 
+    public ArrayList<String> getDepictions() {
+        return (ArrayList<String>) depictions.clone();
+    }
+
     /**
      * Sets the categories the file falls under.
      * </p>
@@ -458,6 +468,11 @@ public class Media implements Parcelable {
     public void setCategories(List<String> categories) {
         this.categories.clear();
         this.categories.addAll(categories);
+    }
+
+    public void setDepictions(List<String> depictions) {
+        this.depictions.clear();
+        this.depictions.addAll(depictions);
     }
 
     /**
@@ -534,6 +549,7 @@ public class Media implements Parcelable {
         parcel.writeInt(height);
         parcel.writeString(license);
         parcel.writeStringList(categories);
+        parcel.writeStringList(depictions);
         parcel.writeMap(descriptions);
         parcel.writeMap(captions);
     }

@@ -25,6 +25,7 @@ import fr.free.nrw.commons.mwapi.CustomMwApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.review.ReviewInterface;
+import fr.free.nrw.commons.upload.WikiBaseInterface;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
 import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
 import okhttp3.Cache;
@@ -138,5 +139,11 @@ public class NetworkingModule {
     @Singleton
     public DepictsInterface provideDepictsInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.WIKIDATA_URL, DepictsInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public WikiBaseInterface provideWikiBaseInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
     }
 }

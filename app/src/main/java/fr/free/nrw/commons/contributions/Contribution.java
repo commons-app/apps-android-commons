@@ -70,6 +70,7 @@ public class  Contribution extends Media {
     private String wikiDataEntityId;
     private Uri contentProviderUri;
     private String dateCreatedSource;
+    private String depictionsString;
     private HashMap<String, String> captions;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
@@ -89,12 +90,13 @@ public class  Contribution extends Media {
     }
 
     public Contribution(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description, long dataLength,
-                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
+                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String depictions, String decimalCoords) {
         super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.captions = captions;
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
+        this.depictionsString = depictions;
     }
 
     public Contribution(Parcel in) {
@@ -162,6 +164,10 @@ public class  Contribution extends Media {
 
     public void setDateUploaded(Date date) {
         this.dateUploaded = date;
+    }
+
+    public void setDepictions(String depictions) {
+        this.depictionsString = depictions;
     }
 
     public String getPageContents(Context applicationContext) {
