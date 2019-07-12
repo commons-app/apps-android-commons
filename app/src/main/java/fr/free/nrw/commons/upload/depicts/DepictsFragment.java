@@ -178,4 +178,14 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     public void setMediaDetailList(List<UploadMediaDetail> imageDetailList) {
         this.mediaTitleList = imageDetailList;
     }
+
+    @Override
+    public void goToNextScreen() {
+        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+    }
+
+    @OnClick(R.id.depicts_next)
+    public void onNextButtonClicked(){
+        presenter.onNextButtonPressed();
+    }
 }
