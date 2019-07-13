@@ -203,8 +203,8 @@
   <string name="nearby_location_has_not_changed">Adeg ur ibeddel ara.</string>
   <string name="nearby_location_not_available">Ulac adeg</string>
   <string name="location_permission_rationale_nearby">Ilaq usireg i uskan tabdart n wadigen iqerben</string>
-  <string name="get_directions">AWI IWELLIHEN</string>
-  <string name="read_article">ƔER AMAGRAD</string>
+  <string name="get_directions" fuzzy="true">AWI IWELLIHEN</string>
+  <string name="read_article" fuzzy="true">ƔER AMAGRAD</string>
   <string name="notifications_welcome">Anṣuf ar Wikimedia Commons, %1$s! Nefreḥ yes-k dagi.</string>
   <string name="notifications_talk_page_message">%1$syeǧǧa-d izen deg usenter n uskasi</string>
   <string name="notifications_thank_you_edit">Tanemmirt ɣef ubeddel</string>

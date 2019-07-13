@@ -8,12 +8,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.exifinterface.media.ExifInterface;
+import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-
-import javax.annotation.Nullable;
 
 import fr.free.nrw.commons.upload.FileUtils;
 

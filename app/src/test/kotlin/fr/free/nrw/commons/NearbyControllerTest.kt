@@ -2,15 +2,15 @@ package fr.free.nrw.commons
 
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.NearbyController.loadAttractionsFromLocationToBaseMarkerOptions
+import androidx.test.core.app.ApplicationProvider
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [21], application = TestCommonsApplication::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class NearbyControllerTest {
 
     @Test
@@ -18,7 +18,7 @@ class NearbyControllerTest {
         val location = LatLng(0.0, 0.0, 0f)
 
         val options = loadAttractionsFromLocationToBaseMarkerOptions(
-                location, null, RuntimeEnvironment.application, null)
+                location, null, ApplicationProvider.getApplicationContext(), null)
 
         assertEquals(0, options.size.toLong())
     }
@@ -28,7 +28,7 @@ class NearbyControllerTest {
         val location = LatLng(0.0, 0.0, 0f)
 
         val options = loadAttractionsFromLocationToBaseMarkerOptions(
-                location, emptyList(), RuntimeEnvironment.application, emptyList())
+                location, emptyList(), ApplicationProvider.getApplicationContext(), emptyList())
 
         assertEquals(0, options.size.toLong())
     }

@@ -12,7 +12,6 @@ import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -143,10 +142,6 @@ public class CommonsApplication extends Application {
             // TODO: Remove when we're able to initialize Fresco in test builds.
         }
 
-        if (BuildConfig.DEBUG && !isRoboUnitTest()) {
-            Stetho.initializeWithDefaults(this);
-        }
-
         createNotificationChannel(this);
 
         languageLookUpTable = new AppLanguageLookUpTable(this);
@@ -172,7 +167,7 @@ public class CommonsApplication extends Application {
         String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
         String logDirectory = LogUtils.getLogDirectory();
         FileLoggingTree tree = new FileLoggingTree(
-                Log.DEBUG,
+                Log.VERBOSE,
                 logFileName,
                 logDirectory,
                 1000,

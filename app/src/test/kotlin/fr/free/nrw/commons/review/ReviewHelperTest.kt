@@ -3,8 +3,11 @@ package fr.free.nrw.commons.review
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import io.reactivex.Observable
 import io.reactivex.Single
-import junit.framework.Assert.assertTrue
+import junit.framework.Assert.assertNotNull
+import junit.framework.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
@@ -13,6 +16,8 @@ import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.wikipedia.dataclient.mwapi.MwQueryPage
+import org.wikipedia.dataclient.mwapi.MwQueryResponse
+import org.wikipedia.dataclient.mwapi.MwQueryResult
 import org.wikipedia.dataclient.mwapi.RecentChange
 
 /**
@@ -20,6 +25,8 @@ import org.wikipedia.dataclient.mwapi.RecentChange
  */
 class ReviewHelperTest {
 
+    @Mock
+    internal var reviewInterface: ReviewInterface? = null
     @Mock
     internal var okHttpJsonApiClient: OkHttpJsonApiClient? = null
     @Mock
@@ -35,6 +42,31 @@ class ReviewHelperTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+
+        val mwQueryPage = mock(MwQueryPage::class.java)
+        val mockRevision = mock(MwQueryPage.Revision::class.java)
+        `when`(mockRevision.user).thenReturn("TestUser")
+        `when`(mwQueryPage.revisions()).thenReturn(listOf(mockRevision))
+
+        val recentChange = getMockRecentChange("log", "File:Test1.jpeg", 0)
+        val recentChange1 = getMockRecentChange("log", "File:Test2.png", 0)
+        val recentChange2 = getMockRecentChange("log", "File:Test3.jpg", 0)
+        val mwQueryResult = mock(MwQueryResult::class.java)
+        `when`(mwQueryResult.recentChanges).thenReturn(listOf(recentChange, recentChange1, recentChange2))
+        `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
+        `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
+        val mockResponse = mock(MwQueryResponse::class.java)
+        `when`(mockResponse.query()).thenReturn(mwQueryResult)
+        `when`(reviewInterface?.getRecentChanges(ArgumentMatchers.anyString()))
+                .thenReturn(Observable.just(mockResponse))
+
+        `when`(reviewInterface?.getFirstRevisionOfFile(ArgumentMatchers.anyString()))
+                .thenReturn(Observable.just(mockResponse))
+
+        val media = mock(Media::class.java)
+        `when`(media.filename).thenReturn("File:Test.jpg")
+        `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
+                .thenReturn(Single.just(media))
     }
 
     /**
@@ -42,40 +74,48 @@ class ReviewHelperTest {
      */
     @Test
     fun getRandomMedia() {
-        val recentChange = getMockRecentChange("test", "File:Test1.jpeg", 0)
-        val recentChange1 = getMockRecentChange("test", "File:Test2.png", 0)
-        val recentChange2 = getMockRecentChange("test", "File:Test3.jpg", 0)
-        `when`(okHttpJsonApiClient?.recentFileChanges)
-                .thenReturn(Single.just(listOf(recentChange, recentChange1, recentChange2)))
-
         `when`(mediaWikiApi?.pageExists(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(false))
-        `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
-                .thenReturn(Single.just(mock(Media::class.java)))
-
 
         val randomMedia = reviewHelper?.randomMedia?.blockingGet()
 
+        assertNotNull(randomMedia)
         assertTrue(randomMedia is Media)
+        verify(reviewInterface, times(1))!!.getRecentChanges(ArgumentMatchers.anyString())
     }
 
     /**
      * Test scenario when all media is already nominated for deletion
      */
-    @Test(expected = Exception::class)
+    @Test(expected = RuntimeException::class)
     fun getRandomMediaWithWithAllMediaNominatedForDeletion() {
-        val recentChange = getMockRecentChange("test", "File:Test1.jpeg", 0)
-        val recentChange1 = getMockRecentChange("test", "File:Test2.png", 0)
-        val recentChange2 = getMockRecentChange("test", "File:Test3.jpg", 0)
-        `when`(okHttpJsonApiClient?.recentFileChanges)
-                .thenReturn(Single.just(listOf(recentChange, recentChange1, recentChange2)))
-
         `when`(mediaWikiApi?.pageExists(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
-        reviewHelper?.randomMedia?.blockingGet()
+        val media = reviewHelper?.randomMedia?.blockingGet()
+        assertNull(media)
+        verify(reviewInterface, times(1))!!.getRecentChanges(ArgumentMatchers.anyString())
     }
 
-    fun getMockRecentChange(type: String, title: String, oldRevisionId: Long): RecentChange {
+    /**
+     * Test scenario when first media is already nominated for deletion
+     */
+    @Test
+    fun getRandomMediaWithWithOneMediaNominatedForDeletion() {
+        `when`(mediaWikiApi?.pageExists("Commons:Deletion_requests/File:Test1.jpeg"))
+                .thenReturn(Single.just(true))
+        `when`(mediaWikiApi?.pageExists("Commons:Deletion_requests/File:Test2.png"))
+                .thenReturn(Single.just(false))
+        `when`(mediaWikiApi?.pageExists("Commons:Deletion_requests/File:Test3.jpg"))
+                .thenReturn(Single.just(true))
+
+        val media = reviewHelper?.randomMedia?.blockingGet()
+
+        assertNotNull(media)
+        assertTrue(media is Media)
+        verify(reviewInterface, times(1))!!.getRecentChanges(ArgumentMatchers.anyString())
+    }
+
+    private fun getMockRecentChange(type: String, title: String, oldRevisionId: Long): RecentChange {
         val recentChange = mock(RecentChange::class.java)
         `when`(recentChange!!.type).thenReturn(type)
         `when`(recentChange.title).thenReturn(title)
@@ -88,9 +128,7 @@ class ReviewHelperTest {
      */
     @Test
     fun getFirstRevisionOfFile() {
-        `when`(okHttpJsonApiClient?.getFirstRevisionOfFile(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(mock(MwQueryPage.Revision::class.java)))
-        val firstRevisionOfFile = reviewHelper?.getFirstRevisionOfFile("Test.jpg")?.blockingGet()
+        val firstRevisionOfFile = reviewHelper?.getFirstRevisionOfFile("Test.jpg")?.blockingFirst()
 
         assertTrue(firstRevisionOfFile is MwQueryPage.Revision)
     }

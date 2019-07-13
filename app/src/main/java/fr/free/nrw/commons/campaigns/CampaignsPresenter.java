@@ -28,7 +28,7 @@ import timber.log.Timber;
  * success and error
  */
 @Singleton
-public class CampaignsPresenter implements BasePresenter {
+public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
     private final OkHttpJsonApiClient okHttpJsonApiClient;
 
     private ICampaignsView view;
@@ -40,8 +40,9 @@ public class CampaignsPresenter implements BasePresenter {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
     }
 
-    @Override public void onAttachView(MvpView view) {
-        this.view = (ICampaignsView) view;
+    @Override
+    public void onAttachView(ICampaignsView view) {
+        this.view = view;
     }
 
     @Override public void onDetachView() {

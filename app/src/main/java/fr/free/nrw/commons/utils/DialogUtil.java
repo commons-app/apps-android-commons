@@ -140,4 +140,31 @@ public class DialogUtil {
         showSafely(activity, dialog);
     }
 
+
+    /**
+     * show a dialog with just a positive button
+     * @param activity
+     * @param title
+     * @param message
+     * @param positiveButtonText
+     * @param positiveButtonClick
+     * @param cancellable
+     */
+    public static void showAlertDialog(Activity activity, String title, String message, String positiveButtonText, final Runnable positiveButtonClick, boolean cancellable) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setCancelable(cancellable);
+
+        builder.setPositiveButton(positiveButtonText, (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            if (positiveButtonClick != null) {
+                positiveButtonClick.run();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        showSafely(activity, dialog);
+    }
+
 }

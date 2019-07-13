@@ -410,7 +410,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      */
     @Nullable
     @Override
-    public String wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
+    public String wikidataCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
         Timber.d("Filename is %s", value);
         CustomApiResult result = wikidataApi.action("wbcreateclaim")
                 .param("entity", entityId)
@@ -815,7 +815,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 return new UploadResult(resultStatus, errorCode);
             } else {
                 Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
-                String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
+                String canonicalFilename = "File:" + result.getString("/api/upload/@filename")
+                        .replace("_", " ")
+                        .trim(); // Title vs Filename
                 String imageUrl = result.getString("/api/upload/imageinfo/@url");
                 return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
             }
