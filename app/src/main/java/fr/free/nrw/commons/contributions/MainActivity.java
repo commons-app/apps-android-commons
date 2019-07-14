@@ -2,6 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -103,6 +104,8 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     }
 
     private void initMain() {
+        //Do not remove this, this triggers the sync service
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(),BuildConfig.CONTRIBUTION_AUTHORITY,true);
         requestSync(sessionManager.getCurrentAccount(), BuildConfig.CONTRIBUTION_AUTHORITY, new Bundle());
         uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
