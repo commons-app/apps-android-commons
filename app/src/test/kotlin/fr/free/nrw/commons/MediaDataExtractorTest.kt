@@ -26,15 +26,6 @@ class MediaDataExtractorTest {
     @Mock
     internal var mediaClient: MediaClient? = null
 
-    @Mock
-    internal var mediaClient: MediaClient? = null
-
-    @Mock
-    internal var mediaClient: MediaClient? = null
-
-    @Mock
-    internal var mediaClient: MediaClient? = null
-
     @InjectMocks
     var mediaDataExtractor: MediaDataExtractor? = null
 
