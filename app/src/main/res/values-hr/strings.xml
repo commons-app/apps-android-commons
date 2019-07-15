@@ -3,6 +3,7 @@
 * Abijeet Patro
 * Anarhistička Maca
 * Astrind
+* Bugoslav
 * MaGa
 -->
 <resources>
@@ -263,7 +264,7 @@
   <string name="no_images_found">Slike nisu pronađene!</string>
   <string name="error_loading_images">Pogrješka prilikom učitavanja slika.</string>
   <string name="image_uploaded_by">Postavio: %1$s</string>
-  <string name="search_tab_title_media">Medija</string>
+  <string name="search_tab_title_media">Mediji</string>
   <string name="search_tab_title_categories">Kategorije</string>
   <string name="explore_tab_title_featured">Istaknuto</string>
   <string name="explore_tab_title_mobile">Učitaj pomoću mobitela</string>

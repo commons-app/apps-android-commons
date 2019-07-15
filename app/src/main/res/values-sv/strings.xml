@@ -532,6 +532,8 @@
   <string name="dialog_box_text_nomination">Varför bör %1$s raderas?</string>
   <string name="review_is_uploaded_by">%1$s laddas upp av: %2$s</string>
   <string name="default_description_language">Standardspråk för beskrivning</string>
+  <string name="delete_helper_make_deletion_toast">Försöker nominera %1$s för radering</string>
+  <string name="delete_helper_show_deletion_title_failed">Misslyckades</string>
   <string name="delete_helper_ask_spam_selfie">Ett självporträtt</string>
   <string name="delete_helper_ask_spam_blurry">Suddig</string>
   <string name="delete_helper_ask_spam_nonsense">Strunt</string>
