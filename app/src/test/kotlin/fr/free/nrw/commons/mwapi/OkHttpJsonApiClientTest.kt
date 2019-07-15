@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient.mapType
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import junit.framework.Assert.assertEquals
 import okhttp3.HttpUrl
@@ -18,7 +17,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.util.*
@@ -55,7 +53,7 @@ class OkHttpJsonApiClientTest {
         val sparqlUrl = "http://" + sparqlServer.hostName + ":" + sparqlServer.port + "/"
         val campaignsUrl = "http://" + campaignsServer.hostName + ":" + campaignsServer.port + "/"
         val serverUrl = "http://" + server.hostName + ":" + server.port + "/"
-        testObject = OkHttpJsonApiClient(okHttpClient, HttpUrl.get(toolsForgeUrl), sparqlUrl, campaignsUrl, serverUrl, sharedPreferences, Gson())
+        testObject = OkHttpJsonApiClient(okHttpClient, HttpUrl.get(toolsForgeUrl), sparqlUrl, campaignsUrl, serverUrl, Gson())
     }
 
     /**
@@ -67,96 +65,6 @@ class OkHttpJsonApiClientTest {
         toolsForgeServer.shutdown()
         sparqlServer.shutdown()
         campaignsServer.shutdown()
-    }
-
-    /**
-     * Test response for category images
-     */
-    @Test
-    fun getCategoryImages() {
-        server.enqueue(getFirstPageOfImages())
-        testFirstPageQuery()
-    }
-
-    /**
-     * test paginated response for category images
-     */
-    @Test
-    fun getCategoryImagesWithContinue() {
-        server.enqueue(getFirstPageOfImages())
-        server.enqueue(getSecondPageOfImages())
-        testFirstPageQuery()
-
-        `when`(sharedPreferences.getJson<HashMap<String, String>>("query_continue_Watercraft moored off shore", mapType))
-                .thenReturn(hashMapOf(Pair("gcmcontinue", "testvalue"), Pair("continue", "gcmcontinue||")))
-
-
-        val categoryImagesContinued = testObject.getMediaList("category", "Watercraft moored off shore")!!.blockingGet()
-
-        assertBasicRequestParameters(server, "GET").let { request ->
-            parseQueryParams(request).let { body ->
-                Assert.assertEquals("json", body["format"])
-                Assert.assertEquals("2", body["formatversion"])
-                Assert.assertEquals("query", body["action"])
-                Assert.assertEquals("categorymembers", body["generator"])
-                Assert.assertEquals("file", body["gcmtype"])
-                Assert.assertEquals("Watercraft moored off shore", body["gcmtitle"])
-                Assert.assertEquals("timestamp", body["gcmsort"])
-                Assert.assertEquals("desc", body["gcmdir"])
-                Assert.assertEquals("testvalue", body["gcmcontinue"])
-                Assert.assertEquals("gcmcontinue||", body["continue"])
-                Assert.assertEquals("imageinfo", body["prop"])
-                Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
-            }
-        }
-
-        assertEquals(categoryImagesContinued.size, 2)
-    }
-
-    /**
-     * Test response for search images
-     */
-    @Test
-    fun getSearchImages() {
-        server.enqueue(getFirstPageOfImages())
-        testFirstPageSearchQuery()
-    }
-
-    /**
-     * Test response for paginated search
-     */
-    @Test
-    fun getSearchImagesWithContinue() {
-        server.enqueue(getFirstPageOfSearchImages())
-        server.enqueue(getSecondPageOfSearchImages())
-        testFirstPageSearchQuery()
-
-        `when`(sharedPreferences.getJson<HashMap<String, String>>("query_continue_Watercraft moored off shore", mapType))
-                .thenReturn(hashMapOf(Pair("gsroffset", "25"), Pair("continue", "gsroffset||")))
-
-
-        val categoryImagesContinued = testObject.getMediaList("search", "Watercraft moored off shore")!!.blockingGet()
-
-        assertBasicRequestParameters(server, "GET").let { request ->
-            parseQueryParams(request).let { body ->
-                Assert.assertEquals("json", body["format"])
-                Assert.assertEquals("2", body["formatversion"])
-                Assert.assertEquals("query", body["action"])
-                Assert.assertEquals("search", body["generator"])
-                Assert.assertEquals("text", body["gsrwhat"])
-                Assert.assertEquals("6", body["gsrnamespace"])
-                Assert.assertEquals("25", body["gsrlimit"])
-                Assert.assertEquals("Watercraft moored off shore", body["gsrsearch"])
-                Assert.assertEquals("25", body["gsroffset"])
-                Assert.assertEquals("gsroffset||", body["continue"])
-                Assert.assertEquals("imageinfo", body["prop"])
-                Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
-            }
-        }
-
-        assertEquals(categoryImagesContinued.size, 2)
     }
 
     /**
@@ -234,64 +142,6 @@ class OkHttpJsonApiClientTest {
         }
 
         assert(media is Media)
-    }
-
-    private fun testFirstPageSearchQuery() {
-        val categoryImages = testObject.getMediaList("search", "Watercraft moored off shore")!!.blockingGet()
-
-        assertBasicRequestParameters(server, "GET").let { request ->
-            parseQueryParams(request).let { body ->
-                Assert.assertEquals("json", body["format"])
-                Assert.assertEquals("2", body["formatversion"])
-                Assert.assertEquals("query", body["action"])
-                Assert.assertEquals("search", body["generator"])
-                Assert.assertEquals("text", body["gsrwhat"])
-                Assert.assertEquals("6", body["gsrnamespace"])
-                Assert.assertEquals("25", body["gsrlimit"])
-                Assert.assertEquals("Watercraft moored off shore", body["gsrsearch"])
-                Assert.assertEquals("imageinfo", body["prop"])
-                Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
-            }
-        }
-        assertEquals(categoryImages.size, 2)
-    }
-
-    private fun testFirstPageQuery() {
-        val categoryImages = testObject.getMediaList("category", "Watercraft moored off shore")?.blockingGet()
-
-        assertBasicRequestParameters(server, "GET").let { request ->
-            parseQueryParams(request).let { body ->
-                Assert.assertEquals("json", body["format"])
-                Assert.assertEquals("2", body["formatversion"])
-                Assert.assertEquals("query", body["action"])
-                Assert.assertEquals("categorymembers", body["generator"])
-                Assert.assertEquals("file", body["gcmtype"])
-                Assert.assertEquals("Watercraft moored off shore", body["gcmtitle"])
-                Assert.assertEquals("timestamp", body["gcmsort"])
-                Assert.assertEquals("desc", body["gcmdir"])
-                Assert.assertEquals("imageinfo", body["prop"])
-                Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
-            }
-        }
-        assertEquals(categoryImages?.size, 2)
-    }
-
-    private fun getFirstPageOfImages(): MockResponse {
-        return getMediaList("gcmcontinue", "testvalue", "gcmcontinue||", 2)
-    }
-
-    private fun getSecondPageOfImages(): MockResponse {
-        return getMediaList("gcmcontinue", "testvalue2", "gcmcontinue||", 2)
-    }
-
-    private fun getFirstPageOfSearchImages(): MockResponse {
-        return getMediaList("gsroffset", "25", "gsroffset||", 2)
-    }
-
-    private fun getSecondPageOfSearchImages(): MockResponse {
-        return getMediaList("gsroffset", "25", "gsroffset||", 2)
     }
 
     /**

@@ -25,6 +25,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
@@ -58,9 +59,12 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     String query;
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
+    boolean isLoadingCategories;
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject MediaWikiApi mwApi;
+    @Inject CategoryClient categoryClient;
+
     @Inject
     @Named("default_preferences")
     JsonKvStore basicKvStore;
@@ -135,33 +139,36 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         progressBar.setVisibility(GONE);
         queryList.clear();
         categoriesAdapter.clear();
-        compositeDisposable.add(Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
+        compositeDisposable.add(categoryClient.searchCategories(query,25)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .doOnSubscribe(disposable -> saveQuery(query))
+                .collect(ArrayList<String>::new, ArrayList::add)
                 .subscribe(this::handleSuccess, this::handleError));
     }
 
 
     /**
-     * Adds more results to existing search results
+     * Adds 25 more results to existing search results
      */
     public void addCategoriesToList(String query) {
+        if(isLoadingCategories) return;
+        isLoadingCategories=true;
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        compositeDisposable.add(Observable.fromCallable(() -> mwApi.searchCategory(query,queryList.size()))
+        compositeDisposable.add(categoryClient.searchCategories(query,25, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .collect(ArrayList<String>::new, ArrayList::add)
                 .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
     /**
      * Handles the success scenario
      * it initializes the recycler view by adding items to the adapter
-     * @param mediaList
      */
     private void handlePaginationSuccess(List<String> mediaList) {
         queryList.addAll(mediaList);
@@ -169,6 +176,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         bottomProgressBar.setVisibility(GONE);
         categoriesAdapter.addAll(mediaList);
         categoriesAdapter.notifyDataSetChanged();
+        isLoadingCategories=false;
     }
 
 
@@ -176,7 +184,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     /**
      * Handles the success scenario
      * it initializes the recycler view by adding items to the adapter
-     * @param mediaList
      */
     private void handleSuccess(List<String> mediaList) {
         queryList = mediaList;
@@ -194,7 +201,6 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
     /**
      * Logs and handles API error scenario
-     * @param throwable
      */
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried categories");
@@ -213,7 +219,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private void initErrorView() {
         progressBar.setVisibility(GONE);
         categoriesNotFoundView.setVisibility(VISIBLE);
-        categoriesNotFoundView.setText(getString(R.string.categories_not_found, query));
+        categoriesNotFoundView.setText(getString(R.string.categories_not_found));
     }
 
     /**
