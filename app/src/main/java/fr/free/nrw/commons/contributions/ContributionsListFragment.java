@@ -207,7 +207,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         }else if(layoutManager instanceof GridLayoutManager){
             lastVisibleItemPosition=((GridLayoutManager)layoutManager).findLastCompletelyVisibleItemPosition();
         }
-        outState.putString(VISIBLE_ITEM_ID,findIdOfItemWithPosition(lastVisibleItemPosition));
+        String idOfItemWithPosition = findIdOfItemWithPosition(lastVisibleItemPosition);
+        if (null != idOfItemWithPosition) {
+            outState.putString(VISIBLE_ITEM_ID, idOfItemWithPosition);
+        }
     }
 
     @Override
@@ -224,8 +227,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
      * @param position
      * @return
      */
+    @Nullable
     private String findIdOfItemWithPosition(int position) {
-        return callback.getContributionForPosition(position).getContentUri().getLastPathSegment();
+        Contribution contributionForPosition = callback.getContributionForPosition(position);
+        if (null != contributionForPosition) {
+            return contributionForPosition.getContentUri().getLastPathSegment();
+        }
+        return null;
     }
 
 }

@@ -144,9 +144,10 @@
   <string name="exif_tag_name_lensModel">Objektīva modelis</string>
   <string name="exif_tag_name_serialNumbers">Sērijas numuri</string>
   <string name="exif_tag_name_software">Programmatūra</string>
-  <string name="delete_reason_spam_selfie">Pašbilde</string>
-  <string name="delete_reason_spam_blurry">Miglains</string>
-  <string name="delete_reason_spam_other">Cits</string>
-  <string name="delete_reason_copyright_internetphoto">Nejaušs foto no interneta</string>
-  <string name="delete_reason_copyright_logo">Logotips</string>
+  <string name="delete_helper_show_deletion_title_failed">Neizdevās</string>
+  <string name="delete_helper_ask_spam_selfie">Pašbilde</string>
+  <string name="delete_helper_ask_spam_blurry">Miglains</string>
+  <string name="delete_helper_ask_spam_other">Cits</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Nejaušs foto no interneta</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logotips</string>
 </resources>

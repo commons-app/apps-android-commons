@@ -547,12 +547,14 @@
   <string name="dialog_box_text_nomination">¿Por qué debe borrarse %1$s?</string>
   <string name="review_is_uploaded_by">%1$s fue subida por: %2$s</string>
   <string name="default_description_language">Idioma por defecto de la descripción</string>
-  <string name="delete_reason_spam_selfie">Un autorretrato</string>
-  <string name="delete_reason_spam_blurry">Borrosa</string>
-  <string name="delete_reason_spam_nonsense">Sinsentido</string>
-  <string name="delete_reason_spam_other">Otra</string>
-  <string name="delete_reason_copyright_pressphoto">Fotografía para prensa</string>
-  <string name="delete_reason_copyright_internetphoto">Foto cualquiera tomada de internet</string>
-  <string name="delete_reason_copyright_logo">Logo</string>
-  <string name="delete_reason_copyright_other">Otra</string>
+  <string name="delete_helper_make_deletion_toast">Intentando nominar %1$s para su borrado</string>
+  <string name="delete_helper_show_deletion_title_failed">Falló</string>
+  <string name="delete_helper_ask_spam_selfie">Un autorretrato</string>
+  <string name="delete_helper_ask_spam_blurry">Borrosa</string>
+  <string name="delete_helper_ask_spam_nonsense">Sinsentido</string>
+  <string name="delete_helper_ask_spam_other">Otra</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Fotografía para prensa</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Foto cualquiera tomada de internet</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Otra</string>
 </resources>

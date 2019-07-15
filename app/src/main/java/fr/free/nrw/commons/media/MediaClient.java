@@ -9,6 +9,7 @@ import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.dataclient.mwapi.MwQueryResult;
 
 import java.util.Date;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +28,8 @@ import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.Response;
 import timber.log.Timber;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * Media Client to handle custom calls to Commons MediaWiki APIs
@@ -115,8 +118,8 @@ public class MediaClient {
                 .map(Media::from)
                 .collect(ArrayList<Media>::new, List::add);
     }
-    
-        /**
+  
+     /**
      * Fetches Media object from the imageInfo API
      *
      * @param titles the tiles to be searched for. Can be filename or template name

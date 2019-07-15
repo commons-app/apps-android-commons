@@ -30,8 +30,6 @@ class ReviewHelperTest {
     internal var reviewInterface: ReviewInterface? = null
     @Mock
     internal var mediaClient: MediaClient? = null
-    @Mock
-    internal var mediaClient: MediaClient? = null
 
     @InjectMocks
     var reviewHelper: ReviewHelper? = null

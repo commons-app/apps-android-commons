@@ -22,22 +22,13 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.category.QueryContinue;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.notification.Notification;
-import fr.free.nrw.commons.notification.NotificationUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
-=======
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
+
 import io.reactivex.Single;
 import timber.log.Timber;
 
@@ -47,8 +38,8 @@ import timber.log.Timber;
 public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private AbstractHttpClient httpClient;
     private CustomMwApi api;
-  
-public ApacheHttpClientMediaWikiApi(String apiURL) {
+
+    public ApacheHttpClientMediaWikiApi(String apiURL) {
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));

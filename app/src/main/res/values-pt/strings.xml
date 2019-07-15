@@ -540,12 +540,19 @@
   <string name="dialog_box_text_nomination">Porque deve %1$s ser eliminado?</string>
   <string name="review_is_uploaded_by">%1$s é carregada por: %2$s</string>
   <string name="default_description_language">Língua de descrição padrão</string>
-  <string name="delete_reason_spam_selfie">Um autorretrato</string>
-  <string name="delete_reason_spam_blurry">Desfocada</string>
-  <string name="delete_reason_spam_nonsense">Sem sentido</string>
-  <string name="delete_reason_spam_other">Outro</string>
-  <string name="delete_reason_copyright_pressphoto">Fotografia de imprensa</string>
-  <string name="delete_reason_copyright_internetphoto">Fotografia aleatória da Internet</string>
-  <string name="delete_reason_copyright_logo">Logótipo</string>
-  <string name="delete_reason_copyright_other">Outro</string>
+  <string name="delete_helper_make_deletion_toast">A tentar nomear %1$s para eliminação</string>
+  <string name="delete_helper_show_deletion_title">A nomear para eliminação</string>
+  <string name="delete_helper_show_deletion_title_success">Sucesso</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s foi nomeado para eliminação.</string>
+  <string name="delete_helper_show_deletion_title_failed">Falhou</string>
+  <string name="delete_helper_show_deletion_message_else">Não foi possível pedir eliminação.</string>
+  <string name="delete_helper_ask_spam_selfie">Um autorretrato</string>
+  <string name="delete_helper_ask_spam_blurry">Desfocada</string>
+  <string name="delete_helper_ask_spam_nonsense">Sem sentido</string>
+  <string name="delete_helper_ask_spam_other">Outro</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Fotografia de imprensa</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Fotografia aleatória da Internet</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Outro</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
 </resources>

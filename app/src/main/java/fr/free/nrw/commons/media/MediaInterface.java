@@ -61,6 +61,7 @@ public interface MediaInterface {
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl")
     Observable<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword, @Query("gsrlimit") int itemLimit, @QueryMap Map<String, String> continuation);
+
     /**
      * Fetches Media object from the imageInfo API
      *
