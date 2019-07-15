@@ -24,7 +24,6 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
@@ -157,7 +156,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
     public MapView setupMapView(Bundle savedInstanceState) {
         Timber.d("setting up map view");
         boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
-        MapboxMapOptions options = new MapboxMapOptions()
+        /*MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                 .compassMargins(new int[]{12, 0, 0, 24})
                 .styleUrl(isDarkTheme ? Style.DARK : Style.OUTDOORS)
@@ -165,7 +164,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                 .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
                         .zoom(ZOOM_LEVEL)
-                        .build());
+                        .build());*/
 /*
         MapView mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -183,7 +182,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
 */
 
 
-        if (!getParentFragment().getActivity().isFinishing()) {
+        /*if (!getParentFragment().getActivity().isFinishing()) {
             MapView mapView = new MapView(getParentFragment().getActivity(), options);
             // create map
             mapView.onCreate(savedInstanceState);
@@ -200,10 +199,10 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment implements N
                 this.mapboxMap = mapboxMap;
                 viewsAreReadyCallback.nearbyMapViewReady();
                 //addMapMovementListeners();
-                //updateMapSignificantlyForCurrentLocation();*/
-            });
-            return mapView;
-        }
+                //updateMapSignificantlyForCurrentLocation();
+            });*/
+            //return mapView;
+        //}
         return null;
     }
 
