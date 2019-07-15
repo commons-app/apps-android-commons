@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.structure.depicts;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -195,8 +196,10 @@ public class DepictModel {
             return depictedItemObservable;
         }
 
-        return depictsInterface.searchForDepicts(query, String.valueOf(SEARCH_DEPICTS_LIMIT))
-                .map(mwQueryResponse -> { return new DepictedItem(mwQueryResponse.query().toString(),"", null, false);
+        return depictsInterface.searchForDepicts(query, SEARCH_DEPICTS_LIMIT+"")
+                .map(mwQueryResponse -> {
+                    Log.e("line201", mwQueryResponse.success()+", "+ mwQueryResponse.query().toString());
+                    return new DepictedItem(mwQueryResponse.toString(),"", null, false);
                         });
 
                //.map(name -> new DepictedItem(name,"",null, false));

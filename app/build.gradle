@@ -31,7 +31,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.1'
     implementation 'com.facebook.fresco:fresco:1.13.0'
     implementation 'com.drewnoakes:metadata-extractor:2.11.0'
-    implementation 'com.dmitrybrant:wikimedia-android-data-client:0.0.18'
+    implementation 'com.github.vanshikaarora:wikimedia-android-data-client:1b56e7fb8892513398a2d5b2726276e6aa05d8ae'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
 
     // UI

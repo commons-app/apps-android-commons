@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload.depicts;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,6 +157,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      */
 
     private void addTextChangeListenerToEtSearch() {
+        Log.e("listener160","listener havmv");
         subscribe = RxTextView.textChanges(depictsSearch)
                 .doOnEach(v -> depictsSearchContainer.setError(null))
                 .takeUntil(RxView.detaches(depictsSearch))
@@ -171,6 +173,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     private void searchForDepictions(String query) {
         if (!TextUtils.isEmpty(query)) {
+            Log.e("searchline175",query);
             presenter.searchForDepictions(query, mediaTitleList);
         }
     }

@@ -405,7 +405,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             ArrayList<CustomApiResult> depictionNodes = null;
             try {
                 depictionNodes = wikidataApi.action("wbsearchentities")
-                        .param("search", "allcategories")
+                        .param("search", query)
                         .param("format", "json")
                         .param("language", "en")
                         .param("uselang","en")

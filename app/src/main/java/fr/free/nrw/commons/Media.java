@@ -169,9 +169,9 @@ public class Media implements Parcelable {
                 new HashMap<>(),
                 "",
                 0,
-                safeParseDate(metadata.dateTimeOriginal().value()),
-                safeParseDate(metadata.dateTime().value()),
-                StringUtil.fromHtml(metadata.artist().value()).toString()
+                safeParseDate(metadata.dateTimeOriginal()),
+                safeParseDate(metadata.dateTimeOriginal()),
+                StringUtil.fromHtml(metadata.artist()).toString()
         );
 
         if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
@@ -183,17 +183,17 @@ public class Media implements Parcelable {
             language = "default";
         }
 
-        media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription().value()));
-        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories().value()));
-        String latitude = metadata.gpsLatitude().value();
-        String longitude = metadata.gpsLongitude().value();
+        media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription()));
+        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.getCategories()));
+        String latitude = metadata.getGpsLatitude();
+        String longitude = metadata.getGpsLongitude();
 
         if (!StringUtils.isBlank(latitude) && !StringUtils.isBlank(longitude)) {
             LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude), 0);
             media.setCoordinates(latLng);
         }
 
-        media.setLicenseInformation(metadata.licenseShortName().value(), metadata.licenseUrl().value());
+        media.setLicenseInformation(metadata.licenseShortName(), metadata.licenseUrl());
         return media;
     }
 
