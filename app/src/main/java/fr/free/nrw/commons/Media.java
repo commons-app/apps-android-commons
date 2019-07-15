@@ -65,6 +65,7 @@ public class Media implements Parcelable {
     private HashMap<String, String> captions;
     private HashMap<String, Object> tags = new HashMap<>();
     private @Nullable LatLng coordinates;
+    private String pageId;
 
     /**
      * Provides local constructor
@@ -176,6 +177,8 @@ public class Media implements Parcelable {
                 StringUtil.fromHtml(metadata.artist()).toString()
         );
 
+        media.setPageId(String.valueOf(page.pageId()));
+
         if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
             media.setThumbUrl(imageInfo.getThumbUrl());
         }
@@ -197,6 +200,10 @@ public class Media implements Parcelable {
 
         media.setLicenseInformation(metadata.licenseShortName(), metadata.licenseUrl());
         return media;
+    }
+
+    public String getPageId() {
+        return pageId;
     }
 
     public String getThumbUrl() {
@@ -484,6 +491,10 @@ public class Media implements Parcelable {
     void setDescriptions(Map<String, String> descriptions) {
         this.descriptions.clear();
         this.descriptions.putAll(descriptions);
+    }
+
+    public void setPageId(String pageId) {
+        this.pageId = pageId;
     }
 
     /*void setCaptions(Map<String, String> captions) {

@@ -198,7 +198,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public WikiBaseInterface provideWikiBaseInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
-        return ServiceFactory.get(wikidataWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
+        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, WikiBaseInterface.class);
     }
 
     @Provides
