@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
@@ -37,6 +38,9 @@ public class DepictModel {
     private final JsonKvStore directKvStore;
     @Inject
     GpsDepictsModel gpsDepictsModel;
+    @Inject
+    CategoryClient categoryClient;
+
     private List<DepictedItem> selectedDepictedItems;
     private HashMap<String, ArrayList<String>> depictsCache;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -160,7 +164,7 @@ public class DepictModel {
     }
 
     private Observable<DepictedItem> getTitleDepicts(String title) {
-        return mediaWikiApi.searchTitles(title, SEARCH_DEPICTS_LIMIT)
+        return categoryClient.searchCategories(title, SEARCH_DEPICTS_LIMIT)
                 .map(name -> new DepictedItem(name, "", null, false));
     }
 

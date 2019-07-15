@@ -203,6 +203,8 @@ public class NetworkingModule {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
     }
 
+    @Provides
+    @Singleton
     public UploadInterface provideUploadInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, UploadInterface.class);
     }
