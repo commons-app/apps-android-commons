@@ -34,7 +34,6 @@ import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -529,7 +528,7 @@ public class NearbyMapFragment extends DaggerFragment {
      * @param savedInstanceState bundle coming from Nearby Fragment
      */
     private void setupMapView(Bundle savedInstanceState) {
-        Timber.d("setupMapView called");
+        /*Timber.d("setupMapView called");
         boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
         MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
@@ -559,7 +558,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 addMapMovementListeners();
                 updateMapSignificantlyForCurrentLocation();
             });
-        }
+        }*/
     }
 
     /**
