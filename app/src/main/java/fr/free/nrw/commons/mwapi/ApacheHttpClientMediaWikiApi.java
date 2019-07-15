@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.google.gson.Gson;
 
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -24,6 +25,10 @@ import java.util.Date;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
+
+import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CommonsApplication;
+
 import io.reactivex.Single;
 import timber.log.Timber;
 
