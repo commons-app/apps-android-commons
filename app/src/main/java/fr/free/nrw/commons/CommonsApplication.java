@@ -168,7 +168,7 @@ public class CommonsApplication extends Application {
         String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
         String logDirectory = LogUtils.getLogDirectory();
         FileLoggingTree tree = new FileLoggingTree(
-                Log.DEBUG,
+                Log.VERBOSE,
                 logFileName,
                 logDirectory,
                 1000,

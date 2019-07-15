@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import android.net.Uri
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils
@@ -28,6 +29,8 @@ class u {
     internal var readFBMD: ReadFBMD?=null
     @Mock
     internal var readEXIF: EXIFReader?=null
+    @Mock
+    internal var mediaClient: MediaClient? = null
 
     @InjectMocks
     var imageProcessingService: ImageProcessingService? = null
@@ -55,6 +58,7 @@ class u {
         /*`when`(uploadItem.captions).thenReturn(mockTitle)*/
 
         `when`(uploadItem.place).thenReturn(mockPlace)
+        `when`(uploadItem.fileName).thenReturn("File:jpg")
 
         `when`(fileUtilsWrapper!!.getFileInputStream(ArgumentMatchers.anyString()))
                 .thenReturn(mock(FileInputStream::class.java))
@@ -74,10 +78,10 @@ class u {
                 .thenReturn(mock(FileInputStream::class.java))
         `when`(fileUtilsWrapper!!.getSHA1(any(FileInputStream::class.java)))
                 .thenReturn("fileSha")
-        `when`(mwApi!!.existingFile(ArgumentMatchers.anyString()))
-                .thenReturn(false)
-        `when`(mwApi!!.fileExistsWithName(ArgumentMatchers.anyString()))
-                .thenReturn(false)
+        `when`(mediaClient!!.checkFileExistsUsingSha(ArgumentMatchers.anyString()))
+                .thenReturn(Single.just(false))
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
+                .thenReturn(Single.just(false))
         `when`(readFBMD?.processMetadata(ArgumentMatchers.any(),ArgumentMatchers.any()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_OK))
         `when`(readEXIF?.processMetadata(ArgumentMatchers.anyString()))
@@ -93,8 +97,8 @@ class u {
 
     @Test
     fun validateImageForDuplicateImage() {
-        `when`(mwApi!!.existingFile(ArgumentMatchers.anyString()))
-                .thenReturn(true)
+        `when`(mediaClient!!.checkFileExistsUsingSha(ArgumentMatchers.anyString()))
+                .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, false)
         assertEquals(ImageUtils.IMAGE_DUPLICATE, validateImage.blockingGet())
     }
@@ -123,16 +127,16 @@ class u {
 
     @Test
     fun validateImageForFileNameExistsWithCheckTitleOff() {
-        `when`(mwApi!!.fileExistsWithName(ArgumentMatchers.anyString()))
-                .thenReturn(true)
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
+                .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, false)
         assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
     }
 
     @Test
     fun validateImageForFileNameExistsWithCheckTitleOn() {
-        `when`(mwApi!!.fileExistsWithName(ArgumentMatchers.nullable(String::class.java)))
-                .thenReturn(true)
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
+                .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, true)
         assertEquals(ImageUtils.FILE_NAME_EXISTS, validateImage.blockingGet())
     }

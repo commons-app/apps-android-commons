@@ -12,13 +12,17 @@ import android.os.RemoteException;
 import java.io.IOException;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
@@ -28,6 +32,9 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
     @Inject ModifierSequenceDao modifierSequenceDao;
     @Inject
     SessionManager sessionManager;
+    @Inject
+    @Named("commons-page-edit")
+    PageEditClient commonsPageEditClient;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -52,22 +59,6 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         // Exit early if nothing to do
         if (allModifications == null || allModifications.getCount() == 0) {
             Timber.d("No modifications to perform");
-            return;
-        }
-
-        String authCookie = sessionManager.getAuthCookie();
-        if (isNullOrWhiteSpace(authCookie)) {
-            Timber.d("Could not authenticate :(");
-            return;
-        }
-
-        mwApi.setAuthCookie(authCookie);
-        String editToken;
-
-        try {
-            editToken = mwApi.getEditToken();
-        } catch (IOException e) {
-            Timber.d("Can not retreive edit token!");
             return;
         }
 
@@ -113,22 +104,15 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     Timber.d("Page content is %s", pageContent);
                     String processedPageContent = sequence.executeModifications(contrib.getFilename(), pageContent);
 
-                    String editResult;
-                    try {
-                        editResult = mwApi.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
-                    } catch (IOException e) {
-                        Timber.d("Network messed up on modifications sync!");
-                        continue;
-                    }
-
-                    Timber.d("Response is %s", editResult);
-
-                    if (!"Success".equals(editResult)) {
-                        // FIXME: Log this somewhere else
-                        Timber.d("Non success result! %s", editResult);
-                    } else {
-                        modifierSequenceDao.delete(sequence);
-                    }
+                    Disposable disposable = commonsPageEditClient
+                            .edit(contrib.getFilename(), processedPageContent, sequence.getEditSummary())
+                            .subscribe(editResult -> {
+                                if (!editResult) {
+                                    Timber.d("Non success result!");
+                                } else {
+                                    modifierSequenceDao.delete(sequence);
+                                }
+                            });
                 }
                 allModifications.moveToNext();
             }
@@ -139,7 +123,4 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    private boolean isNullOrWhiteSpace(String value) {
-        return value == null || value.trim().isEmpty();
-    }
 }

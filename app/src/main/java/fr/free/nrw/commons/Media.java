@@ -4,6 +4,9 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.gallery.ExtMetadata;
@@ -20,8 +23,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
@@ -169,8 +170,8 @@ public class Media implements Parcelable {
                 new HashMap<>(),
                 "",
                 0,
-                safeParseDate(metadata.dateTimeOriginal()),
-                safeParseDate(metadata.dateTimeOriginal()),
+                safeParseDate(metadata.dateTime()),
+                safeParseDate(metadata.dateTime()),
                 StringUtil.fromHtml(metadata.artist()).toString()
         );
 

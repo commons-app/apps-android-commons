@@ -26,16 +26,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class ReviewActivity extends AuthenticatedActivity {
+public class ReviewActivity extends NavigationBaseActivity {
 
     @BindView(R.id.pager_indicator_review)
     public CirclePageIndicator pagerIndicator;
@@ -92,15 +92,6 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     public Media getMedia() {
         return media;
-    }
-
-    @Override
-    protected void onAuthCookieAcquired(String authCookie) {
-
-    }
-
-    @Override
-    protected void onAuthFailure() {
     }
 
     @Override

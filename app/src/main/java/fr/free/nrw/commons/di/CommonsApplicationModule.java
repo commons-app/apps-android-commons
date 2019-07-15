@@ -5,14 +5,11 @@ import android.content.ContentProviderClient;
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.collection.LruCache;
+
 import com.google.gson.Gson;
 
-import org.wikipedia.dataclient.WikiSite;
-
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.AppAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,8 +19,6 @@ import java.util.Map;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import androidx.annotation.Nullable;
-import androidx.collection.LruCache;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
@@ -38,6 +33,9 @@ import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -86,7 +84,7 @@ public class CommonsApplicationModule {
 
     @Provides
     public AccountUtil providesAccountUtil(Context context) {
-        return new AccountUtil(context);
+        return new AccountUtil();
     }
 
     @Provides
@@ -200,7 +198,13 @@ public class CommonsApplicationModule {
 
     @Named(MAIN_THREAD)
     @Provides
-    public Scheduler providesMainThread(){
+    public Scheduler providesMainThread() {
         return AndroidSchedulers.mainThread();
+    }
+
+    @Named("username")
+    @Provides
+    public String provideLoggedInUsername() {
+        return AppAdapter.get().getUserName();
     }
 }

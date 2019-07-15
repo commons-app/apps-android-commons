@@ -564,4 +564,19 @@ Upload your first media by tapping on the add button.</string>
   <string name="dialog_box_text_nomination">Why should %1$s be deleted?</string>
   <string name="review_is_uploaded_by">%1$s is uploaded by: %2$s</string>
   <string name="default_description_language">Default description language</string>
+  <string name="delete_helper_make_deletion_toast">Trying to nominate %1$s for deletion</string>
+  <string name="delete_helper_show_deletion_title">Nominating for deletion</string>
+  <string name="delete_helper_show_deletion_title_success">Success</string>
+  <string name="delete_helper_show_deletion_message_if">Successfully nominated %1$s for deletion.</string>
+  <string name="delete_helper_show_deletion_title_failed">Failed</string>
+  <string name="delete_helper_show_deletion_message_else">Could not request deletion.</string>
+  <string name="delete_helper_ask_spam_selfie">A selfie</string>
+  <string name="delete_helper_ask_spam_blurry">Blurry</string>
+  <string name="delete_helper_ask_spam_nonsense">Nonsense</string>
+  <string name="delete_helper_ask_spam_other">Other</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Press photo</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Random photo from internet</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Other</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Because it is</string>
 </resources>

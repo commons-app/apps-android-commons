@@ -2,6 +2,7 @@
 <!-- Authors:
 * AtonX
 * Kusavica
+* Luky001
 * Patriccck
 * Sudo77(new)
 -->
@@ -11,10 +12,12 @@
   <string name="preference_category_appearance">Vzhľad</string>
   <string name="preference_category_general">Všeobecné</string>
   <string name="preference_category_feedback">Spätná väzba</string>
+  <string name="preference_category_privacy">Súkromie</string>
   <string name="preference_category_location">Poloha</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Nastavenia</string>
+  <string name="intent_share_upload_label">Nahrať na Commons</string>
   <string name="username">Používateľské meno</string>
   <string name="password">Heslo</string>
   <string name="login_credential">Prihláste sa do svojho účtu Commons Beta</string>
@@ -26,7 +29,7 @@
   <string name="login_success">Prihlásenie úspešné</string>
   <string name="login_failed">Prihlásenie zlyhalo!</string>
   <string name="upload_failed">Súbor nebol nájdený. Skúste, prosím, iný súbor.</string>
-  <string name="authentication_failed" fuzzy="true">Overenie zlyhalo!</string>
+  <string name="authentication_failed">Overenie zlyhalo, prosím, prihláste sa znovu</string>
   <string name="uploading_started">Nahrávanie začalo!</string>
   <string name="upload_completed_notification_title">%1$s je nahraný!</string>
   <string name="upload_completed_notification_text">Kliknutím zobrazíte váš upload</string>
@@ -50,12 +53,14 @@
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Zdieľať</string>
   <string name="menu_open_in_browser">Otvoriť v prehliadači</string>
-  <string name="share_title_hint" fuzzy="true">Názov</string>
+  <string name="share_title_hint">Názov (povinné)</string>
   <string name="add_title_toast">Prosím, dajte tomuto súboru názov</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
+  <string name="login_failed_wrong_credentials">Nie je možné sa prihlásiť – skontrolujte, prosím, svoje používateľské meno a heslo</string>
   <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút.</string>
   <string name="login_failed_blocked">Ospravedlňujeme sa, tento užívateľ bol na Commons zablokovaný</string>
+  <string name="login_failed_2fa_needed">Musíte vložiť kód pre dvojfaktorovú autentifikáciu.</string>
   <string name="login_failed_generic">Prihlásenie zlyhalo</string>
   <string name="share_upload_button">Nahrať</string>
   <string name="multiple_share_base_title">Názov tejto sady</string>
@@ -64,12 +69,17 @@
   <string name="categories_search_text_hint">Vyhľadávanie kategórií</string>
   <string name="menu_save_categories">Uložiť</string>
   <string name="refresh_button">Obnoviť</string>
+  <string name="display_list_button">Zoznam</string>
+  <string name="gps_disabled">GPS nie je povolené vo vašom zariadení. Chceli by ste ho povoliť?</string>
   <string name="enable_gps">Povoliť GPS</string>
+  <string name="contributions_subtitle_zero">Žiadne nahrané súbory</string>
   <string name="categories_not_found">Žiadne kategórie nezodpovedajú „%1$s“</string>
   <string name="categories_skip_explanation">Pridajte kategórie, aby bolo vaše obrázky možné na Wikimedia Commons nájsť.\nPre pridanie kategórií začnite písať.</string>
   <string name="categories_activity_title">Kategórie</string>
   <string name="title_activity_settings">Nastavenia</string>
   <string name="title_activity_signup">Zaregistrovať sa</string>
+  <string name="title_activity_featured_images">Najlepšie obrázky</string>
+  <string name="title_activity_category_details">Kategória</string>
   <string name="menu_about">O aplikácii</string>
   <string name="about_license" fuzzy="true">Open Source softvér dostupný za podmienok &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Zdroj na &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
@@ -143,12 +153,18 @@
   <string name="no">Nie</string>
   <string name="media_detail_title">Názov</string>
   <string name="media_detail_description">Popis</string>
+  <string name="media_detail_discussion">Diskusia</string>
   <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Dátum nahrania</string>
   <string name="media_detail_license">Licencia</string>
   <string name="media_detail_coordinates">Súradnice</string>
   <string name="media_detail_coordinates_empty">neposkytnuté</string>
   <string name="become_a_tester_title">Staňte sa beta testerom</string>
+  <string name="invalid_zero">Nula nie je platná</string>
+  <string name="invalid_input">Neplatný vstup</string>
+  <string name="maximum_limit_alert">Nie je možné zobraziť viac ako 500</string>
+  <string name="enter_valid">Zadajte platné číslo</string>
+  <string name="cannot_be_zero">Limit nahrávania nemôže byť 0</string>
   <string name="logout_verification">Naozaj sa chcete odhlásiť?</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Webová stránka Commons</string>
