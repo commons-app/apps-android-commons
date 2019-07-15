@@ -1,39 +1,28 @@
 package fr.free.nrw.commons.upload.structure.depicts;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
 import fr.free.nrw.commons.utils.StringSortingUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class DepictModel {
     private static final int SEARCH_DEPICTS_LIMIT = 25;
     private final DepictDao depictDao;
-    private final MediaWikiApi mediaWikiApi;
     private final DepictsInterface depictsInterface;
     private final JsonKvStore directKvStore;
     @Inject
@@ -46,8 +35,7 @@ public class DepictModel {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
-    public DepictModel(MediaWikiApi mediaWikiApi, DepictDao depictDao, @Named("default_preferences") JsonKvStore directKvStore, DepictsInterface depictsInterface) {
-        this.mediaWikiApi = mediaWikiApi;
+    public DepictModel(DepictDao depictDao, @Named("default_preferences") JsonKvStore directKvStore, DepictsInterface depictsInterface) {
         this.depictDao = depictDao;
         this.directKvStore = directKvStore;
         this.depictsInterface = depictsInterface;
@@ -200,13 +188,9 @@ public class DepictModel {
             return depictedItemObservable;
         }
 
-        return depictsInterface.searchForDepicts(query, SEARCH_DEPICTS_LIMIT+"")
-                .map(mwQueryResponse -> {
-                    Log.e("line201", mwQueryResponse.success()+", "+ mwQueryResponse.query().toString());
-                    return new DepictedItem(mwQueryResponse.toString(),"", null, false);
-                        });
-
-               //.map(name -> new DepictedItem(name,"",null, false));
+        return depictsInterface.searchForDepicts(query, String.valueOf(SEARCH_DEPICTS_LIMIT))
+                .flatMap(depictSearchResponse -> Observable.fromIterable(depictSearchResponse.getSearch()))
+                .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), null, false));
     }
 
     private boolean hasDirectDepictions() {
