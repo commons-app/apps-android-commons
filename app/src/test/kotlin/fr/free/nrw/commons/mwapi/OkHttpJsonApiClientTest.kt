@@ -5,7 +5,6 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.utils.CommonsDateUtil
-import junit.framework.Assert.assertEquals
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
@@ -65,83 +64,6 @@ class OkHttpJsonApiClientTest {
         toolsForgeServer.shutdown()
         sparqlServer.shutdown()
         campaignsServer.shutdown()
-    }
-
-    /**
-     * Test response for getting media without generator
-     */
-    @Test
-    fun getMedia() {
-        server.enqueue(getMediaList("", "", "", 1))
-
-        val media = testObject.getMedia("Test.jpg", false)!!.blockingGet()
-
-        assertBasicRequestParameters(server, "GET").let { request ->
-            parseQueryParams(request).let { body ->
-                Assert.assertEquals("json", body["format"])
-                Assert.assertEquals("2", body["formatversion"])
-                Assert.assertEquals("query", body["action"])
-                Assert.assertEquals("Test.jpg", body["titles"])
-                Assert.assertEquals("imageinfo", body["prop"])
-                Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
-            }
-        }
-
-        assert(media is Media)
-    }
-
-    /**
-     * Test response for getting media with generator
-     * Equivalent of testing POTD
-     */
-    @Test
-    fun getImageWithGenerator() {
-        val template = "Template:Potd/" + CommonsDateUtil.getIso8601DateFormatShort().format(Date())
-        server.enqueue(getMediaList("", "", "", 1))
-
-        val media = testObject.getMedia(template, true)!!.blockingGet()
-
-        assertBasicRequestParameters(server, "GET").let { request ->
-            parseQueryParams(request).let { body ->
-                Assert.assertEquals("json", body["format"])
-                Assert.assertEquals("2", body["formatversion"])
-                Assert.assertEquals("query", body["action"])
-                Assert.assertEquals(template, body["titles"])
-                Assert.assertEquals("images", body["generator"])
-                Assert.assertEquals("imageinfo", body["prop"])
-                Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
-            }
-        }
-
-        assert(media is Media)
-    }
-
-    /**
-     * Test response for getting picture of the day
-     */
-    @Test
-    fun getPictureOfTheDay() {
-        val template = "Template:Potd/" + CommonsDateUtil.getIso8601DateFormatShort().format(Date())
-        server.enqueue(getMediaList("", "", "", 1))
-
-        val media = testObject.pictureOfTheDay?.blockingGet()
-
-        assertBasicRequestParameters(server, "GET").let { request ->
-            parseQueryParams(request).let { body ->
-                Assert.assertEquals("json", body["format"])
-                Assert.assertEquals("2", body["formatversion"])
-                Assert.assertEquals("query", body["action"])
-                Assert.assertEquals(template, body["titles"])
-                Assert.assertEquals("images", body["generator"])
-                Assert.assertEquals("imageinfo", body["prop"])
-                Assert.assertEquals("url|extmetadata", body["iiprop"])
-                Assert.assertEquals("DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl", body["iiextmetadatafilter"])
-            }
-        }
-
-        assert(media is Media)
     }
 
     /**

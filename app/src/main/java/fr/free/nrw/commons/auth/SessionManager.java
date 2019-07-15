@@ -20,6 +20,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 /**
  * Manage the current logged in user session.
