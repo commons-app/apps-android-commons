@@ -10,19 +10,28 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import io.reactivex.Observable;
 
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_WIKI_DATA_CSRF;
+
 @Singleton
 public class WikiBaseClient {
 
     private final WikiBaseInterface wikiBaseInterface;
+    private final CsrfTokenClient csrfTokenClient;
 
     @Inject
-    public WikiBaseClient(WikiBaseInterface wikiBaseInterface) {
+    public WikiBaseClient(WikiBaseInterface wikiBaseInterface,
+                          @Named(NAMED_WIKI_DATA_CSRF) CsrfTokenClient csrfTokenClient) {
         this.wikiBaseInterface = wikiBaseInterface;
+        this.csrfTokenClient = csrfTokenClient;
     }
 
-    public Observable<Boolean> postEditEntity(String fileEntityId, String data, String editToken) {
-        return wikiBaseInterface.postEditEntity(editToken, fileEntityId, data)
-                .map(MwQueryResponse::success);
+    public Observable<Boolean> postEditEntity(String fileEntityId, String data) {
+        try {
+            return wikiBaseInterface.postEditEntity(csrfTokenClient.getTokenBlocking(), fileEntityId, data)
+                    .map(MwQueryResponse::success);
+        } catch (Throwable throwable) {
+            return Observable.just(false);
+        }
     }
 
     public Observable<Long> getFileEntityId(String fileName) {

@@ -1,42 +1,36 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import fr.free.nrw.commons.Media;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 /**
@@ -226,78 +220,5 @@ public class OkHttpJsonApiClient {
             }
             return null;
         });
-    }
-
-    /**
-     * The method returns the picture of the day
-     *
-     * @return Media object corresponding to the picture of the day
-     */
-    @Nullable
-    public Single<Media> getPictureOfTheDay() {
-        String date = CommonsDateUtil.getIso8601DateFormatShort().format(new Date());
-        Timber.d("Current date is %s", date);
-        String template = "Template:Potd/" + date;
-        return getMedia(template, true);
-    }
-
-    /**
-     * Fetches Media object from the imageInfo API
-     *
-     * @param titles       the tiles to be searched for. Can be filename or template name
-     * @param useGenerator specifies if a image generator parameter needs to be passed or not
-     * @return
-     */
-    public Single<Media> getMedia(String titles, boolean useGenerator) {
-        HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(commonsBaseUrl)
-                .newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("format", "json")
-                .addQueryParameter("formatversion", "2")
-                .addQueryParameter("titles", titles);
-
-        if (useGenerator) {
-            urlBuilder.addQueryParameter("generator", "images");
-        }
-
-        Request request = new Request.Builder()
-                .url(appendMediaProperties(urlBuilder).build())
-                .build();
-
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
-                if (mwQueryPage.success() && mwQueryPage.query().firstPage() != null) {
-                    return Media.from(mwQueryPage.query().firstPage());
-                }
-            }
-            return null;
-        });
-    }
-
-
-
-    /**
-     * Whenever imageInfo is fetched, these common properties can be specified for the API call
-     * https://www.mediawiki.org/wiki/API:Imageinfo
-     *
-     * @param builder
-     * @return
-     */
-    private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
-        builder.addQueryParameter("prop", "imageinfo")
-                .addQueryParameter("iiprop", "url|extmetadata")
-                .addQueryParameter("iiurlwidth", THUMB_SIZE)
-                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl");
-
-        String language = Locale.getDefault().getLanguage();
-        if (!StringUtils.isBlank(language)) {
-            builder.addQueryParameter("iiextmetadatalanguage", language);
-        }
-
-        return builder;
     }
 }

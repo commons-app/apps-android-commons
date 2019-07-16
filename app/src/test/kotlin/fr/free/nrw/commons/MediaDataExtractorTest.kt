@@ -24,9 +24,6 @@ class MediaDataExtractorTest {
     internal var mwApi: MediaWikiApi? = null
 
     @Mock
-    internal var okHttpJsonApiClient: OkHttpJsonApiClient? = null
-
-    @Mock
     internal var mediaClient: MediaClient? = null
 
     @InjectMocks
@@ -46,7 +43,7 @@ class MediaDataExtractorTest {
      */
     @Test
     fun fetchMediaDetails() {
-        `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
+        `when`(mediaClient?.getMedia(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(mock(Media::class.java)))
 
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))

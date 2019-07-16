@@ -4,8 +4,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -17,20 +15,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.wikipedia.util.DateUtil;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
 
@@ -105,154 +98,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         });
     }
 
-    /*@NonNull
-    @Override
-    public Observable<String> searchDepictions (String query, int searchDepictsLimit) {
-        return Single.fromCallable(() -> {
-            ArrayList<CustomApiResult> depictionNodes = null;
-            try {
-                depictionNodes = wikidataApi.action("wbsearchentities")
-                        .param("search", query)
-                        .param("format", "json")
-                        .param("language", "en")
-                        .param("uselang","en")
-                        .param("type","item")
-                        .param("limit", searchDepictsLimit)
-                        .get()
-                        .getNodes("/api/query/allcategories/c");
-            } catch (IOException e) {
-                Timber.e(e, "Failed to obtain allCategories");
-            }
-
-            if (depictionNodes == null) {
-                return new ArrayList<String>();
-            }
-
-            List<String> categories = new ArrayList<>();
-            for (CustomApiResult categoryNode : depictionNodes) {
-                categories.add(categoryNode.getDocument().getTextContent());
-            }
-
-            return categories;
-        }).flatMapObservable(Observable::fromIterable);
-    }
-*/
-
-
-    /**
-     * Send captions(Q42) to wikibase, using the wikibase entity obtained after uploading imageto commons
-     * https://commons.wikimedia.org/wiki/Wikibase/API
-     * @param fileEntityId entity id for file, page id
-     * @param caption(labels) item to be uploaded to wikibase
-     */
-
-    @Nullable
-    @Override
-    public String wikidataAddLabels(String fileEntityId, Map<String, String> caption) throws IOException {
-        CustomApiResult result = api.action("wbsetlabel")
-                .param("format","json")
-                .param("id", fileEntityId)
-                .param("language",caption.keySet().toString().substring(1,caption.keySet().toString().length()-1))
-                .param("token", getEditToken())
-                .param("value", caption.values().toString().substring(1,caption.values().toString().length()-1))
-                .post();
-        if (result == null || result.getNode("api") == null) {
-            return null;
-        }
-
-        Node node = result.getNode("api").getDocument();
-        Element element = (Element) node;
-
-        if (element != null && element.getAttribute("success").equals("1")) {
-            return result.getString("api/pageinfo/@lastrevid");
-        } else {
-            Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));
-        }
-        return null;
-    }
-    /**
-     * Edits claim using the commons API by adding P180 tag for an image
-     * https://commons.wikimedia.org/wiki/Wikibase/API
-     * @param entityId the commons api entity to be edited
-     * @param fileEntityId entity id for file, page id
-     * @return returns revisionId if the claim is successfully created else returns null
-     * @throws IOException
-     */
-    @Nullable
-    @Override
-    public String wikidataEditEntity(String entityId, String fileEntityId) throws IOException {
-
-        /*
-         String data = "{\"claims\":[{\n" +
-            "\"mainsnak\": {\n" +
-                "\"snaktype\": \"value\",\n" +
-                        "\"property\": \"P180\",\n" +
-                        "\"datavalue\": {\n" +
-                    "\"value\": {\n" +
-                        "\"entity-type\": \"item\",\n" +
-                                "\"numeric-id\": $ENTITY_ID$,\n" +
-                                "\"id\": \"Q$ENTITY_ID$\"\n" +
-                    "},\n" +
-                    "\"type\": \"wikibase-entityid\"\n" +
-                "}\n" +
-            "},\n" +
-            "\"type\": \"statement\",\n" +
-                    "\"rank\": \"preferred\"\n" +
-                 "}]}";
-         data = data.replace("$ENTITY_ID$", entityId.replace("Q", ""));
-        */
-
-        JsonObject value = new JsonObject();
-        value.addProperty("entity-type", "item");
-        value.addProperty("numeric-id", "$ENTITY_ID$");
-        value.addProperty("id", "Q$ENTITY_ID$");
-
-        JsonObject dataValue = new JsonObject();
-        dataValue.add("value", value);
-        dataValue.addProperty("type", "wikibase-entityid");
-
-        JsonObject mainSnak = new JsonObject();
-        mainSnak.addProperty("snaktype", "value");
-        mainSnak.addProperty("property", "P180");
-        mainSnak.add("datavalue", dataValue);
-
-        JsonObject claim = new JsonObject();
-        claim.add("mainsnak", mainSnak);
-        claim.addProperty("type", "statement");
-        claim.addProperty("rank", "preferred");
-
-        JsonArray claims = new JsonArray();
-        claims.add(claim);
-
-        JsonObject jsonData = new JsonObject();
-        jsonData.add("claims", claims);
-
-        String data = jsonData
-                .toString()
-                .replace("$ENTITY_ID$", entityId.replace("Q", ""));
-
-        CustomApiResult result = api.action("wbeditentity")
-                .param("id", fileEntityId)
-                .param("token", getEditToken())
-                .param("data", data)
-                .post();
-
-        if (result == null || result.getNode("api") == null) {
-            return null;
-        }
-
-        Node node = result.getNode("api").getDocument();
-        Element element = (Element) node;
-
-        if (element != null && element.getAttribute("success").equals("1")) {
-            return result.getString("api/pageinfo/@lastrevid");
-        } else {
-            Timber.e(result.getString("api/error/@code") + " " + result.getString("api/error/@info"));
-        }
-        return null;
-    }
-
-        public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException {
+    public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException {
         CustomMwApi.RequestBuilder builder = api.action("query")
                 .param("list", "logevents")
                 .param("letype", "upload")

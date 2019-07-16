@@ -163,7 +163,8 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public DBOpenHelper provideDBOpenHelper(Context context) {
-        return new DBOpenHelper(context);
+        DBOpenHelper dbOpenHelper = new DBOpenHelper(context);
+        return dbOpenHelper;
     }
 
     @Provides

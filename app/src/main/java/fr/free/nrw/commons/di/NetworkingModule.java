@@ -28,15 +28,13 @@ import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaInterface;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
-import fr.free.nrw.commons.mwapi.CustomApiResult;
-import fr.free.nrw.commons.mwapi.CustomMwApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.review.ReviewInterface;
+import fr.free.nrw.commons.upload.UploadInterface;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
 import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
-import fr.free.nrw.commons.upload.UploadInterface;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -187,22 +185,24 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    public CaptionInterface provideCaptionInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, CaptionInterface.class);
+    public CaptionInterface provideCaptionInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
+        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, CaptionInterface.class);
     }
 
     @Provides
     @Singleton
-    public DepictsInterface provideDepictsInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.WIKIDATA_URL, DepictsInterface.class);
+    public DepictsInterface provideDepictsInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
+        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, DepictsInterface.class);
     }
 
     @Provides
     @Singleton
-    public WikiBaseInterface provideWikiBaseInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
+    public WikiBaseInterface provideWikiBaseInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
+        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, WikiBaseInterface.class);
     }
 
+    @Provides
+    @Singleton
     public UploadInterface provideUploadInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, UploadInterface.class);
     }

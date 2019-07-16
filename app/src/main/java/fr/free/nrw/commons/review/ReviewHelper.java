@@ -25,26 +25,21 @@ public class ReviewHelper {
 
     private static final String[] imageExtensions = new String[]{".jpg", ".jpeg", ".png"};
 
-    private final OkHttpJsonApiClient okHttpJsonApiClient;
-    private final MediaWikiApi mediaWikiApi;
     private final MediaClient mediaClient;
     private final ReviewInterface reviewInterface;
 
     @Inject
-    public ReviewHelper(OkHttpJsonApiClient okHttpJsonApiClient,
-                        MediaWikiApi mediaWikiApi,
-                        MediaClient mediaClient, ReviewInterface reviewInterface) {
-        this.okHttpJsonApiClient = okHttpJsonApiClient;
-        this.mediaWikiApi = mediaWikiApi;
+    public ReviewHelper(MediaClient mediaClient, ReviewInterface reviewInterface) {
         this.mediaClient = mediaClient;
         this.reviewInterface = reviewInterface;
     }
 
     /**
-     * Fetches recent changes from MediaWiki API
+     * Fetches recent changes from MediaWiki AP
      * Calls the API to get 10 changes in the last 1 hour
      * Earlier we were getting changes for the last 30 days but as the API returns just 10 results
      * its best to fetch for just last 1 hour.
+     *
      * @return
      */
     private Observable<RecentChange> getRecentChanges() {
@@ -84,6 +79,7 @@ public class ReviewHelper {
     /**
      * Returns a proper Media object if the file is not already nominated for deletion
      * Else it returns an empty Media object
+     *
      * @param recentChange
      * @return
      */
@@ -94,13 +90,14 @@ public class ReviewHelper {
                     if (isDeleted) {
                         return Single.just(new Media(""));
                     }
-                    return okHttpJsonApiClient.getMedia(recentChange.getTitle(), false);
+                    return mediaClient.getMedia(recentChange.getTitle());
                 });
 
     }
 
     /**
      * Gets the first revision of the file from filename
+     *
      * @param filename
      * @return
      */
@@ -113,6 +110,7 @@ public class ReviewHelper {
      * Checks if the change is reviewable or not.
      * - checks the type and revisionId of the change
      * - checks supported image extensions
+     *
      * @param recentChange
      * @return
      */

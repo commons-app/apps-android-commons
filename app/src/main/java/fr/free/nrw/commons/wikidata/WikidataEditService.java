@@ -8,9 +8,9 @@ import com.google.gson.JsonObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,10 +19,11 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -45,11 +46,11 @@ public class WikidataEditService {
     private final WikiBaseClient wikiBaseClient;
     private final WikidataClient wikidataClient;
     private final PageEditClient wikiDataPageEditClient;
-    private final MediaWikiApi mediaWikiApi;
+    private final MediaClient mediaClient;
 
     @Inject
     public WikidataEditService(Context context,
-                               WikidataEditListener wikidataEditListener, MediaWikiApi mediaWikiApi,
+                               WikidataEditListener wikidataEditListener, MediaClient mediaClient,
                                @Named("default_preferences") JsonKvStore directKvStore, WikiBaseClient wikiBaseClient, CaptionInterface captionInterface, WikidataClient wikidataClient, @Named("wikidata-page-edit") PageEditClient wikiDataPageEditClient) {
         this.context = context;
         this.wikidataEditListener = wikidataEditListener;
@@ -57,7 +58,7 @@ public class WikidataEditService {
         this.captionInterface = captionInterface;
         this.wikiBaseClient = wikiBaseClient;
         this.wikiDataPageEditClient = wikiDataPageEditClient;
-        this.mediaWikiApi = mediaWikiApi;
+        this.mediaClient = mediaClient;
         this.wikidataClient = wikidataClient;
     }
 
@@ -177,24 +178,20 @@ public class WikidataEditService {
 
         String data = jsonData.toString();
 
-        Observable.fromCallable(mediaWikiApi::getEditToken)
+        Observable.defer((Callable<ObservableSource<Boolean>>) () ->
+                wikiBaseClient.postEditEntity("M" + fileEntityId, data))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(editToken -> {
-                    wikiBaseClient.postEditEntity("M" + fileEntityId, data, editToken)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(success -> {
-                                        if (success)
-                                            Timber.d("Property P180 set successfully for %s", fileEntityId);
-                                        else
-                                            Timber.d("Unable to set property P180 for %s", fileEntityId);
-                                    },
-                                    throwable -> {
-                                        Timber.e(throwable, "Error occurred while setting P180 tag");
-                                        ViewUtil.showLongToast(context, throwable.toString());
-                                    });
-                });
+                .subscribe(success -> {
+                            if (success)
+                                Timber.d("Property P180 set successfully for %s", fileEntityId);
+                            else
+                                Timber.d("Unable to set property P180 for %s", fileEntityId);
+                        },
+                        throwable -> {
+                            Timber.e(throwable, "Error occurred while setting P180 tag");
+                            ViewUtil.showLongToast(context, throwable.toString());
+                        });
     }
 
     private void handleClaimResult(String wikidataEntityId, String revisionId) {
@@ -234,12 +231,13 @@ public class WikidataEditService {
     }
 
     public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, HashMap<String, String> captions) {
-        Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
+        mediaClient.getMedia(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map(media -> media.getPageId())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
-                        Iterator iter = (Iterator) captions.keySet().iterator();
+                        Iterator iter = captions.keySet().iterator();
                         while(iter.hasNext()) {
                             Map.Entry entry = (Map.Entry) iter.next();
                             wikidataAddLabels(wikiDataEntityId, fileEntityId, entry.getKey().toString(), entry.getValue().toString());

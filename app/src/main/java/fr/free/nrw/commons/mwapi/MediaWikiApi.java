@@ -15,14 +15,6 @@ public interface MediaWikiApi {
 
     String getFileEntityId(String fileName) throws IOException;
 
-    @Nullable
-    String wikidataEditEntity(String entityId, String fileName) throws IOException;
-
-    @Nullable
-    String wikidataAddLabels(String fileEntityId, Map<String, String> caption) throws IOException;
-
-    //public Observable<String> searchDepictions (String query, int searchDepictsLimit)
-
     Single<String> parseWikicode(String source);
 
     @NonNull
