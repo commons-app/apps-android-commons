@@ -10,6 +10,10 @@ import java.util.List;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.upload.structure.depicts.DepictsClickedListener;
 
+/**
+ * Adapter Factory for DepictsClicked Listener
+ */
+
 public class UploadDepictsAdapterFactory {
     private final DepictsClickedListener listener;
 

@@ -9,6 +9,9 @@ import android.net.Uri;
 import android.os.RemoteException;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
+
+import com.google.gson.Gson;
+
 import fr.free.nrw.commons.settings.Prefs;
 
 import org.apache.commons.lang3.StringUtils;
@@ -157,7 +160,7 @@ public class ContributionDao {
                     parseTimestamp(cursor.getLong(cursor.getColumnIndex(Table.COLUMN_UPLOADED))),
                     cursor.getLong(cursor.getColumnIndex(Table.COLUMN_TRANSFERRED)),
                     cursor.getString(cursor.getColumnIndex(Table.COLUMN_SOURCE)),
-                    formatCaption(cursor.getColumnIndex(Table.COLUMN_CAPTION)),
+                    formatCaption(cursor.getString(cursor.getColumnIndex(Table.COLUMN_CAPTION))),
                     cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
                     cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR)),
                     cursor.getInt(cursor.getColumnIndex(Table.COLUMN_MULTIPLE)) == 1,
@@ -177,8 +180,9 @@ public class ContributionDao {
         return null;
     }
 
-    private HashMap<String, String> formatCaption(int columnIndex) {
-        return new HashMap<>();
+    private HashMap<String, String> formatCaption(String jsonCaption) {
+        HashMap<String, String> captions = new Gson().fromJson(jsonCaption, HashMap.class);
+        return captions;
     }
 
     @Nullable

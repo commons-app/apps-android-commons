@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.repository.UploadRepository;
-import fr.free.nrw.commons.upload.UploadModel;
+import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
@@ -110,7 +110,7 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
      */
     private List<String> getImageTitleList() {
         List<String> titleList = new ArrayList<>();
-        for (UploadModel.UploadItem item : repository.getUploads()) {
+        for (UploadItem item : repository.getUploads()) {
             if (item.getTitle().isSet()) {
                 titleList.add(item.getTitle().toString());
             }

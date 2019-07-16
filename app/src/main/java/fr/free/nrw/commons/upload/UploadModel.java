@@ -163,8 +163,10 @@ public class UploadModel {
             createdTimestampSource = dateTimeWithSource.getSource();
         }
         Timber.d("File created date is %d", fileCreatedDate);
-        GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface, context);
-        UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(), Uri.parse(uploadableFile.getFilePath()),
+        GPSExtractor gpsExtractor = fileProcessor
+                .processFileCoordinates(similarImageInterface, context);
+        UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(),
+                Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate,
                 createdTimestampSource);
         if (place != null) {

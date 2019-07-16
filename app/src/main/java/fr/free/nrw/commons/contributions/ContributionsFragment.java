@@ -88,10 +88,8 @@ public class ContributionsFragment
     private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
-    @BindView(R.id.card_view_nearby)
-    public NearbyNotificationCardView nearbyNotificationCardView;
-    @BindView(R.id.campaigns_view)
-    CampaignView campaignView;
+    @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
+    @BindView(R.id.campaigns_view) CampaignView campaignView;
 
     @Inject ContributionsPresenter contributionsPresenter;
 
@@ -142,7 +140,7 @@ public class ContributionsFragment
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Do not ask for permission on activity start again
-                store.putBoolean("displayLocationPermissionForCardView", false);
+                store.putBoolean("displayLocationPermissionForCardView",false);
             }
         });
 
@@ -167,27 +165,25 @@ public class ContributionsFragment
         }
 
         getChildFragmentManager().registerFragmentLifecycleCallbacks(
-                new FragmentManager.FragmentLifecycleCallbacks() {
-                    @Override
-                    public void onFragmentResumed(FragmentManager fm, Fragment f) {
-                        super.onFragmentResumed(fm, f);
-                        //If media detail pager fragment is visible, hide the campaigns view [might not be the best way to do, this but yeah, this proves to work for now]
-                        Timber.e("onFragmentResumed %s", f.getClass().getName());
-                        if (f instanceof MediaDetailPagerFragment) {
-                            campaignView.setVisibility(View.GONE);
-                        }
+            new FragmentManager.FragmentLifecycleCallbacks() {
+                @Override public void onFragmentResumed(FragmentManager fm, Fragment f) {
+                    super.onFragmentResumed(fm, f);
+                    //If media detail pager fragment is visible, hide the campaigns view [might not be the best way to do, this but yeah, this proves to work for now]
+                    Timber.e("onFragmentResumed %s", f.getClass().getName());
+                    if (f instanceof MediaDetailPagerFragment) {
+                        campaignView.setVisibility(View.GONE);
                     }
+                }
 
-                    @Override
-                    public void onFragmentDetached(FragmentManager fm, Fragment f) {
-                        super.onFragmentDetached(fm, f);
-                        Timber.e("onFragmentDetached %s", f.getClass().getName());
-                        //If media detail pager fragment is detached, ContributionsList fragment is gonna be visible, [becomes tightly coupled though]
-                        if (f instanceof MediaDetailPagerFragment) {
-                            fetchCampaigns();
-                        }
+                @Override public void onFragmentDetached(FragmentManager fm, Fragment f) {
+                    super.onFragmentDetached(fm, f);
+                    Timber.e("onFragmentDetached %s", f.getClass().getName());
+                    //If media detail pager fragment is detached, ContributionsList fragment is gonna be visible, [becomes tightly coupled though]
+                    if (f instanceof MediaDetailPagerFragment) {
+                        fetchCampaigns();
                     }
-                }, true);
+                }
+            }, true);
 
         return view;
     }
@@ -295,21 +291,21 @@ public class ContributionsFragment
      */
     private void showMediaDetailPagerFragment() {
         // hide tabs on media detail view is visible
-        ((MainActivity) getActivity()).hideTabs();
+        ((MainActivity)getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
         nearbyNotificationCardView.setVisibility(View.GONE);
+
         showFragment(mediaDetailPagerFragment,MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
 
     }
 
     @Override
     public void onBackStackChanged() {
-        ((MainActivity) getActivity()).initBackButton();
+        ((MainActivity)getActivity()).initBackButton();
     }
 
     /**
      * Called when onAuthCookieAcquired is called on authenticated parent activity
-     *
      * @param uploadServiceIntent
      */
     void onAuthCookieAcquired(Intent uploadServiceIntent) {
@@ -355,7 +351,7 @@ public class ContributionsFragment
     private void setUploadCount() {
 
         compositeDisposable.add(okHttpJsonApiClient
-                .getUploadCount(((MainActivity) getActivity()).sessionManager.getCurrentAccount().name)
+                .getUploadCount(((MainActivity)getActivity()).sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::displayUploadCount,
@@ -369,7 +365,7 @@ public class ContributionsFragment
             return;
         }
 
-        ((MainActivity) getActivity()).setNumOfUploads(uploadCount);
+        ((MainActivity)getActivity()).setNumOfUploads(uploadCount);
 
     }
 
@@ -481,7 +477,7 @@ public class ContributionsFragment
             nearbyNotificationCardView.updateContent(closestNearbyPlace);
             if (mediaDetailPagerFragment != null && mediaDetailPagerFragment.isVisible()) {
                 nearbyNotificationCardView.setVisibility(View.GONE);
-            } else {
+            }else {
                 nearbyNotificationCardView.setVisibility(View.VISIBLE);
             }
         } else {
@@ -534,9 +530,8 @@ public class ContributionsFragment
         updateClosestNearbyCardViewInfo();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view,
-                              @Nullable Bundle savedInstanceState) {
+    @Override public void onViewCreated(@NonNull View view,
+        @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -549,20 +544,17 @@ public class ContributionsFragment
         }
     }
 
-    @Override
-    public void showMessage(String message) {
+    @Override public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void showCampaigns(Campaign campaign) {
+    @Override public void showCampaigns(Campaign campaign) {
         if (campaign != null) {
             campaignView.setCampaign(campaign);
         }
     }
 
-    @Override
-    public void onDestroyView() {
+    @Override public void onDestroyView() {
         super.onDestroyView();
         presenter.onDetachView();
     }
@@ -612,3 +604,4 @@ public class ContributionsFragment
 
     }
 }
+

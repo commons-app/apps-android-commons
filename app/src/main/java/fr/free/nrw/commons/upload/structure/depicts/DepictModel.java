@@ -80,40 +80,6 @@ public class DepictModel {
         return depictsCache.containsKey(term);
     }
 
-    /*public Observable<DepictedItem> searchAll(String term, List<UploadMediaDetail> imageTitleList) {
-        //If user hasn't typed anything in yet, get GPS and recent items
-        if (TextUtils.isEmpty(term)) {
-            return gpsDepicts()
-                    .concatWith(titleDepicts(imageTitleList))
-                    .concatWith(recentDepicts());
-        }
-
-        //if user types in something that is in cache, return cached category
-        if (cacheContainsKey(term)) {
-            return Observable.fromIterable(getDepictsCache(term))
-                    .map(name -> new DepictedItem(name, false));
-        }
-
-        //otherwise, search API for matching categories
-        return mediaWikiApi
-                .allCategories(term, SEARCH_DEPICTS_LIMIT)
-                .map(name -> new DepictedItem(name, false));
-    }*/
-
-    /*public Observable<DepictedItem> searchCategories(String term, List<UploadMediaDetail> imageTitleList) {
-        //If user hasn't typed anything in yet, get GPS and recent items
-        if (TextUtils.isEmpty(term)) {
-            return gpsDepicts()
-                    .concatWith(titleDepicts(imageTitleList))
-                    .concatWith(recentDepicts());
-        }
-
-        return mediaWikiApi
-                .searchCategories(term, SEARCH_DEPICTS_LIMIT)
-                .map(s -> new DepictedItem(s, "", null, false));
-    }
-*/
-
     public void onDepictItemClicked(DepictedItem depictedItem) {
         if (depictedItem.isSelected()) {
             selectDepictItem(depictedItem);

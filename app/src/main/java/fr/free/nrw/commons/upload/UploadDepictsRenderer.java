@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,11 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.upload.structure.depicts.DepictsClickedListener;
+
+/**
+ * Depicts Renderer for setting up inflating layout,
+ * and setting views for the layout of each depicted Item
+ */
 
 public class UploadDepictsRenderer extends Renderer<DepictedItem> {
     private final DepictsClickedListener listener;

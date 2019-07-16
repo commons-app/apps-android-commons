@@ -133,21 +133,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         //title = new Title();
         initRecyclerView();
         initPresenter();
-        /*Disposable disposable = RxTextView.textChanges(etTitle)
-                .subscribe(text -> {
-                    if (!TextUtils.isEmpty(text)) {
-                        btnNext.setEnabled(true);
-                        btnNext.setClickable(true);
-                        btnNext.setAlpha(1.0f);
-                        title.setTitleText(text.toString());
-                        uploadItem.setTitle(title);
-                    } else {
-                        btnNext.setAlpha(0.5f);
-                        btnNext.setEnabled(false);
-                        btnNext.setClickable(false);
-                    }
-                });
-        compositeDisposable.add(disposable);*/
         presenter.receiveImage(uploadableFile, source, place);
 
         if (callback.getIndexInViewFlipper(this) == 0) {
