@@ -7,12 +7,18 @@ public class DepictedItem {
     private final String description;
     private final ImageView imageView;
     private boolean selected;
+    private String entityId;
 
-    public DepictedItem(String depictsLabel, String description, ImageView imageView, boolean selected) {
+    public DepictedItem(String depictsLabel, String description, ImageView imageView, boolean selected, String entityId) {
         this.depictsLabel = depictsLabel;
         this.selected = selected;
         this.description = description;
         this.imageView = imageView;
+        this.entityId = entityId;
+    }
+
+    public String getEntityId() {
+        return entityId;
     }
 
     public String getDescription() {

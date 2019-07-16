@@ -79,6 +79,7 @@ public class UploadModel {
     private FileProcessor fileProcessor;
     private final ImageProcessingService imageProcessingService;
     private List<String> selectedCategories;
+    private ArrayList<String> selectedDepictions;
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
@@ -107,6 +108,9 @@ public class UploadModel {
         this.items.clear();
         if (this.selectedCategories != null) {
             this.selectedCategories.clear();
+        }
+        if (this.selectedDepictions != null) {
+            this.selectedDepictions.clear();
         }
     }
 
@@ -212,12 +216,15 @@ public class UploadModel {
                     item.getFileName(), item.uploadMediaDetails.size()!=0? UploadMediaDetail.formatCaptions(item.uploadMediaDetails):new HashMap<>(),
                     UploadMediaDetail.formatList(item.uploadMediaDetails), -1,
                     null, null, sessionManager.getAuthorName(),
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY,new ArrayList<>(), item.gpsCoords.getCoords());
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY, selectedDepictions, item.gpsCoords.getCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
             }
             if (null == selectedCategories) {//Just a fail safe, this should never be null
                 selectedCategories = new ArrayList<>();
+            }
+            if (selectedDepictions == null) {
+                selectedDepictions = new ArrayList<>();
             }
             contribution.setCategories(selectedCategories);
             contribution.setTag("mimeType", item.mimeType);
@@ -235,7 +242,6 @@ public class UploadModel {
             return contribution;
         });
     }
-
 
     public void deletePicture(String filePath) {
         Iterator<UploadItem> iterator = items.iterator();
@@ -258,6 +264,13 @@ public class UploadModel {
         UploadItem uploadItem1 = items.get(index);
         uploadItem1.setMediaDetails(uploadItem.uploadMediaDetails);
         uploadItem1.setTitle(uploadItem.title);
+    }
+
+    public void setSelectedDepictions(List<String> selectedDepictions) {
+        if (null == selectedDepictions) {
+            selectedDepictions = new ArrayList<>();
+        }
+        this.selectedDepictions = (ArrayList<String>) selectedDepictions;
     }
 
     @SuppressWarnings("WeakerAccess")

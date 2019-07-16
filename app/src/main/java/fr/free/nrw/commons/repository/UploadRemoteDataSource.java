@@ -213,4 +213,12 @@ public class UploadRemoteDataSource {
     public Observable<DepictedItem> searchAllEntities(String query, List<String> imageTitleList) {
         return depictModel.searchAllEntities(query, imageTitleList);
     }
+
+    public void setSelectedDepictions(List<String> selectedDepictions) {
+        uploadModel.setSelectedDepictions(selectedDepictions);
+    }
+
+    public List<String> depictionsEntityIdList() {
+        return depictModel.depictionsEntityIdList();
+    }
 }

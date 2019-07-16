@@ -119,11 +119,12 @@ public class DepictModel {
             selectDepictItem(depictedItem);
             updateDepictCount(depictedItem);
         } else {
-            unselectCategory(depictedItem);
+            unselectDepiction(depictedItem);
         }
     }
 
-    private void unselectCategory(DepictedItem depictedItem) {
+    private void unselectDepiction(DepictedItem depictedItem) {
+        selectedDepictedItems.remove(depictedItem);
     }
 
     private void updateDepictCount(DepictedItem depictedItem) {
@@ -143,7 +144,7 @@ public class DepictModel {
 
     Observable<DepictedItem> gpsDepicts() {
         return Observable.fromIterable(gpsDepictsModel.getCategoryList())
-                .map(name -> new DepictedItem(name, "", null, false));
+                .map(name -> new DepictedItem(name, "", null, false, ""));
     }
 
     private Observable<DepictedItem> titleDepicts(List<String> titleList) {
@@ -153,12 +154,12 @@ public class DepictModel {
 
     private Observable<DepictedItem> getTitleDepicts(String title) {
         return categoryClient.searchCategories(title, SEARCH_DEPICTS_LIMIT)
-                .map(name -> new DepictedItem(name, "", null, false));
+                .map(name -> new DepictedItem(name, "", null, false, ""));
     }
 
     private Observable<DepictedItem> recentDepicts() {
         return Observable.fromIterable(depictDao.recentDepicts(SEARCH_DEPICTS_LIMIT))
-                .map(s -> new DepictedItem(s, "", null, false));
+                .map(s -> new DepictedItem(s, "", null, false, ""));
     }
 
     /**
@@ -190,10 +191,18 @@ public class DepictModel {
 
         return depictsInterface.searchForDepicts(query, String.valueOf(SEARCH_DEPICTS_LIMIT))
                 .flatMap(depictSearchResponse -> Observable.fromIterable(depictSearchResponse.getSearch()))
-                .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), null, false));
+                .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), null, false, depictSearchItem.getId()));
     }
 
     private boolean hasDirectDepictions() {
         return false;
+    }
+
+    public List<String> depictionsEntityIdList() {
+        List<String> output = new ArrayList<>();
+        for (DepictedItem d : selectedDepictedItems) {
+            output.add(d.getEntityId());
+        }
+        return output;
     }
 }

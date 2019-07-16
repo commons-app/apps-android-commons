@@ -36,6 +36,7 @@ public class DepictionRenderer extends Renderer<DepictedItem> {
     protected void hookListeners(View rootView) {
         rootView.setOnClickListener( v -> {
             DepictedItem item = getContent();
+            item.setSelected(true);
             checkedView.setChecked(item.isSelected());
             if (listener != null) {
                 listener.depictsClicked(item);

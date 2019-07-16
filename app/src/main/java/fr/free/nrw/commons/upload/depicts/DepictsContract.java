@@ -27,12 +27,13 @@ public interface DepictsContract {
     }
 
     interface UserActionListener extends BasePresenter<View> {
-        void onNextButtonPressed();
 
         void onPreviousButtonClicked();
 
         void onDepictItemClicked(DepictedItem depictedItem);
 
         void searchForDepictions(String query, List<UploadMediaDetail> mediaDetailList);
+
+        void verifyDepictions();
     }
 }

@@ -450,6 +450,11 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_categories_selected">No Categories Selected</string>
   <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to submit without selecting categories?</string>
 
+
+  <string name="no_depictions_selected">No Depictions Selected</string>
+  <string name="no_depictions_selected_warning_desc">Depictions helps in Searching/Identifying Images. Are you sure you want to submit without selecting depictions?</string>
+
+
   <string name="yes_submit">Yes, Submit</string>
   <string name="no_go_back">No, Go Back</string>
 

@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import android.util.Log;
+
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,11 +62,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
     }
 
     @Override
-    public void onNextButtonPressed() {
-        view.goToNextScreen();
-    }
-
-    @Override
     public void onPreviousButtonClicked() {
         view.goToPreviousScreen();
     }
@@ -114,6 +111,18 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                 );
         compositeDisposable.add(searchDepictsDisposable);
         view.setDepictsList(depictedItemList);
+    }
+
+    @Override
+    public void verifyDepictions() {
+        List<DepictedItem> selectedDepictions = repository.getSelectedDepictions();
+        Log.e("depictsline118", selectedDepictions.size()+"");
+        if (selectedDepictions != null && !selectedDepictions.isEmpty()) {
+            repository.setSelectedDepictions(repository.getDepictionsEntityIdList());
+            view.goToNextScreen();
+        } else {
+            view.noDepictionSelected();
+        }
     }
 
     /**

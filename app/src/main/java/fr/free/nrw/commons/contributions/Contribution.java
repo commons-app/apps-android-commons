@@ -307,4 +307,8 @@ public class  Contribution extends Media {
     public Uri getContentProviderUri() {
         return contentProviderUri;
     }
+
+    public ArrayList<String> getDepictionsEntityIds() {
+        return depictionsEntityIds;
+    }
 }
