@@ -17,7 +17,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
+import dagger.Provides;
+
 public class DepictDao {
+
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject

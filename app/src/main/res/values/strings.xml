@@ -101,6 +101,7 @@
   <string name="menu_feedback">Send Feedback (via Email)</string>
   <string name="no_email_client">No email client installed</string>
   <string name="provider_categories">Recently used categories</string>
+  <string name="provider_depictions">Recently used depictions</string>
   <string name="waiting_first_sync">Waiting for first sync…</string>
   <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
   <string name="menu_retry_upload">Retry</string>
