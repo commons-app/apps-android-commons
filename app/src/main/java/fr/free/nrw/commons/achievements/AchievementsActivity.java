@@ -355,8 +355,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
-        String levelUpInfoString = getString(R.string.level);
-        levelUpInfoString += " " + Integer.toString(levelInfo.getLevelNumber());
+        String levelUpInfoString = getString(R.string.level).toUpperCase();
+        levelUpInfoString += " " + levelInfo.getLevelNumber();
         levelNumber.setText(levelUpInfoString);
         imageView.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
                 new ContextThemeWrapper(this, levelInfo.getLevelStyle()).getTheme()));

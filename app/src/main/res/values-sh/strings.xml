@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Vlad5250
 -->
 <resources>
@@ -91,7 +92,7 @@
   <string name="title_activity_review">Ocjenivanje</string>
   <string name="menu_about">O izvršniku</string>
   <string name="about_license">Prilog Ostave ima otvoreni izvor. Njegovi kreatori i održavatelji su primatelji namjenskih resursa Wikimedijine zajednice kao i članovi zajednice. Zaklada Wikimedija nema sudjelovanja u njenom stvaranju, razvoju i održavanju.</string>
-  <string name="about_improve">Stvorite novi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;problem na GitHubu&lt;/a&gt; da biste prijavili greške ili dali predloge.</string>
+  <string name="about_improve">Stvorite novi &lt;a href=\"%1$s\"&gt;problem na GitHubu&lt;/a&gt; da biste prijavili greške ili dali predloge.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politika privatnosti&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Zasluge&lt;/u&gt;</string>
   <string name="title_activity_about">O izvršniku</string>

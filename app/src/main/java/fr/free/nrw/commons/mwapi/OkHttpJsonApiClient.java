@@ -1,28 +1,10 @@
 package fr.free.nrw.commons.mwapi;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.dataclient.mwapi.RecentChange;
-import org.wikipedia.util.DateUtil;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
+import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
@@ -33,13 +15,28 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 /**
@@ -47,6 +44,7 @@ import timber.log.Timber;
  */
 @Singleton
 public class OkHttpJsonApiClient {
+    private static final String THUMB_SIZE = "640";
 
     public static final Type mapType = new TypeToken<Map<String, String>>() {
     }.getType();
@@ -81,8 +79,13 @@ public class OkHttpJsonApiClient {
     public Single<Integer> getUploadCount(String userName) {
         HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
         urlBuilder
-                .addPathSegments("/uploadsbyuser.py")
+                .addPathSegments("uploadsbyuser.py")
                 .addQueryParameter("user", userName);
+
+        if (ConfigUtils.isBetaFlavour()) {
+            urlBuilder.addQueryParameter("labs", "commonswiki");
+        }
+
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
                 .build();
@@ -90,7 +93,17 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.isSuccessful()) {
-                return Integer.parseInt(response.body().string().trim());
+                ResponseBody responseBody = response.body();
+                if (null != responseBody) {
+                    String responseBodyString = responseBody.string().trim();
+                    if (!TextUtils.isEmpty(responseBodyString)) {
+                        try {
+                            return Integer.parseInt(responseBodyString);
+                        } catch (NumberFormatException e) {
+                            Timber.e(e);
+                        }
+                    }
+                }
             }
             return 0;
         });
@@ -100,8 +113,13 @@ public class OkHttpJsonApiClient {
     public Single<Integer> getWikidataEdits(String userName) {
         HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
         urlBuilder
-                .addPathSegments("/wikidataedits.py")
+                .addPathSegments("wikidataedits.py")
                 .addQueryParameter("user", userName);
+
+        if (ConfigUtils.isBetaFlavour()) {
+            urlBuilder.addQueryParameter("labs", "commonswiki");
+        }
+
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
                 .build();
@@ -115,7 +133,9 @@ public class OkHttpJsonApiClient {
                     return 0;
                 }
                 GetWikidataEditCountResponse countResponse = gson.fromJson(json, GetWikidataEditCountResponse.class);
-                return countResponse.getWikidataEditCount();
+                if (null != countResponse) {
+                    return countResponse.getWikidataEditCount();
+                }
             }
             return 0;
         });
@@ -130,7 +150,7 @@ public class OkHttpJsonApiClient {
      */
     public Single<FeedbackResponse> getAchievements(String userName) {
         final String fetchAchievementUrlTemplate =
-                wikiMediaToolforgeUrl + "/feedback.py";
+                wikiMediaToolforgeUrl + (ConfigUtils.isBetaFlavour() ? "/feedback.py?labs=commonswiki" : "/feedback.py");
         return Single.fromCallable(() -> {
             String url = String.format(
                     Locale.ENGLISH,
@@ -221,7 +241,7 @@ public class OkHttpJsonApiClient {
      */
     @Nullable
     public Single<Media> getPictureOfTheDay() {
-        String date = DateUtil.getIso8601DateFormatShort().format(new Date());
+        String date = CommonsDateUtil.getIso8601DateFormatShort().format(new Date());
         Timber.d("Current date is %s", date);
         String template = "Template:Potd/" + date;
         return getMedia(template, true);
@@ -274,6 +294,7 @@ public class OkHttpJsonApiClient {
     private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
         builder.addQueryParameter("prop", "imageinfo")
                 .addQueryParameter("iiprop", "url|extmetadata")
+                .addQueryParameter("iiurlwidth", THUMB_SIZE)
                 .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl");
 
         String language = Locale.getDefault().getLanguage();
@@ -402,81 +423,5 @@ public class OkHttpJsonApiClient {
      */
     private Map<String, String> getContinueValues(String keyword) {
         return defaultKvStore.getJson("query_continue_" + keyword, mapType);
-    }
-
-    /**
-     * Returns recent changes on commons
-     *
-     * @return list of recent changes made
-     */
-    @Nullable
-    public Single<List<RecentChange>> getRecentFileChanges() {
-        final int RANDOM_SECONDS = 60 * 60 * 24 * 30;
-        final String FILE_NAMESPACE = "6";
-        Random r = new Random();
-        Date now = new Date();
-        Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
-
-        String rcStart = DateUtil.getIso8601DateFormat().format(startDate);
-        HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(commonsBaseUrl)
-                .newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("format", "json")
-                .addQueryParameter("formatversion", "2")
-                .addQueryParameter("list", "recentchanges")
-                .addQueryParameter("rcstart", rcStart)
-                .addQueryParameter("rcnamespace", FILE_NAMESPACE)
-                .addQueryParameter("rcprop", "title|ids")
-                .addQueryParameter("rctype", "new|log")
-                .addQueryParameter("rctoponly", "1");
-
-        Request request = new Request.Builder()
-                .url(urlBuilder.build())
-                .build();
-
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
-                return mwQueryPage.query().getRecentChanges();
-            }
-            return new ArrayList<>();
-        });
-    }
-
-    /**
-     * Returns the first revision of the file
-     *
-     * @return Revision object
-     */
-    @Nullable
-    public Single<MwQueryPage.Revision> getFirstRevisionOfFile(String filename) {
-        HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(commonsBaseUrl)
-                .newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("format", "json")
-                .addQueryParameter("formatversion", "2")
-                .addQueryParameter("prop", "revisions")
-                .addQueryParameter("rvprop", "timestamp|ids|user")
-                .addQueryParameter("titles", filename)
-                .addQueryParameter("rvdir", "newer")
-                .addQueryParameter("rvlimit", "1");
-
-        Request request = new Request.Builder()
-                .url(urlBuilder.build())
-                .build();
-
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
-                return mwQueryPage.query().firstPage().revisions().get(0);
-            }
-            return null;
-        });
     }
 }

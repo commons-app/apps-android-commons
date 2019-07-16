@@ -1,38 +1,28 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-import androidx.cursoradapter.widget.CursorAdapter;
-import androidx.appcompat.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.CheckBox;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.HandlerService;
@@ -42,12 +32,15 @@ import fr.free.nrw.commons.campaigns.Campaign;
 import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.campaigns.CampaignsPresenter;
 import fr.free.nrw.commons.campaigns.ICampaignsView;
+import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
+import fr.free.nrw.commons.contributions.ContributionsListFragment.SourceRefresher;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
@@ -57,28 +50,26 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
-import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
-import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
-        implements  LoaderManager.LoaderCallbacks<Cursor>,
-                    MediaDetailPagerFragment.MediaDetailProvider,
-                    FragmentManager.OnBackStackChangedListener,
-                    ContributionsListFragment.SourceRefresher,
-                    LocationUpdateListener,
-                    ICampaignsView,
-                    ContributionsListAdapter.EventListener{
+        implements
+        MediaDetailProvider,
+        OnBackStackChangedListener,
+        SourceRefresher,
+        LocationUpdateListener,
+        ICampaignsView, ContributionsContract.View {
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject ContributionDao contributionDao;
     @Inject MediaWikiApi mediaWikiApi;
@@ -100,6 +91,8 @@ public class ContributionsFragment
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
 
+    @Inject ContributionsPresenter contributionsPresenter;
+
     private LatLng curLatLng;
 
     private boolean firstLocationUpdate = true;
@@ -117,9 +110,6 @@ public class ContributionsFragment
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder)
                     .getService();
             isUploadServiceConnected = true;
-            if (contributionsListFragment.getAdapter() != null) {
-                ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
-            }
         }
 
         @Override
@@ -128,6 +118,8 @@ public class ContributionsFragment
             Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
         }
     };
+    private boolean shouldShowMediaDetailsFragment;
+    private int numberOfContributions;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -141,6 +133,7 @@ public class ContributionsFragment
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
         ButterKnife.bind(this, view);
         presenter.onAttachView(this);
+        contributionsPresenter.onAttachView(this);
         campaignView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
@@ -152,16 +145,19 @@ public class ContributionsFragment
         });
 
         if (savedInstanceState != null) {
-            mediaDetailPagerFragment = (MediaDetailPagerFragment)getChildFragmentManager().findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
-            contributionsListFragment = (ContributionsListFragment) getChildFragmentManager().findFragmentByTag(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            mediaDetailPagerFragment = (MediaDetailPagerFragment) getChildFragmentManager()
+                    .findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
+            contributionsListFragment = (ContributionsListFragment) getChildFragmentManager()
+                    .findFragmentByTag(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            shouldShowMediaDetailsFragment = savedInstanceState.getBoolean("mediaDetailsVisible");
+        }
 
-            if (savedInstanceState.getBoolean("mediaDetailsVisible")) {
-                setMediaDetailPagerFragment();
-            } else {
-                setContributionsListFragment();
-            }
-        } else {
-            setContributionsListFragment();
+        initFragments();
+
+        if(shouldShowMediaDetailsFragment){
+            showMediaDetailPagerFragment();
+        }else{
+            showContributionsListFragment();
         }
 
         if (!ConfigUtils.isBetaFlavour()) {
@@ -192,6 +188,65 @@ public class ContributionsFragment
         return view;
     }
 
+    /**
+     * Initialose the ContributionsListFragment and MediaDetailPagerFragment fragment
+     */
+    private void initFragments() {
+        if (null == contributionsListFragment) {
+            contributionsListFragment = new ContributionsListFragment();
+        }
+
+        contributionsListFragment.setCallback(new Callback() {
+            @Override
+            public void retryUpload(Contribution contribution) {
+                ContributionsFragment.this.retryUpload(contribution);
+            }
+
+            @Override
+            public void deleteUpload(Contribution contribution) {
+                contributionsPresenter.deleteUpload(contribution);
+            }
+
+            @Override
+            public void openMediaDetail(int position) {
+                showDetail(position);
+            }
+
+            @Override
+            public int getNumberOfContributions() {
+                return numberOfContributions;
+            }
+
+            @Override
+            public Contribution getContributionForPosition(int position) {
+                return (Contribution) contributionsPresenter.getItemAtPosition(position);
+            }
+
+            @Override
+            public int findItemPositionWithId(String id) {
+                return contributionsPresenter.getChildPositionWithId(id);
+            }
+        });
+
+        if(null==mediaDetailPagerFragment){
+            mediaDetailPagerFragment=new MediaDetailPagerFragment();
+        }
+    }
+
+
+    /**
+     * Replaces the root frame layout with the given fragment
+     * @param fragment
+     * @param tag
+     */
+    private void showFragment(Fragment fragment, String tag) {
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.root_frame, fragment, tag);
+        transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+        transaction.commit();
+        getChildFragmentManager().executePendingTransactions();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -210,130 +265,43 @@ public class ContributionsFragment
     }
 
     /**
-     * Replace FrameLayout with ContributionsListFragment, user will see contributions list.
-     * Creates new one if null.
+     * Replace FrameLayout with ContributionsListFragment, user will see contributions list. Creates
+     * new one if null.
      */
-    public void setContributionsListFragment() {
+    public void showContributionsListFragment() {
         // show tabs on contribution list is visible
-        ((MainActivity)getActivity()).showTabs();
+        ((MainActivity) getActivity()).showTabs();
         // show nearby card view on contributions list is visible
         if (nearbyNotificationCardView != null) {
             if (store.getBoolean("displayNearbyCardView", true)) {
-                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                if (nearbyNotificationCardView.cardViewVisibilityState
+                        == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);
                 }
             } else {
                 nearbyNotificationCardView.setVisibility(View.GONE);
             }
         }
-
-        // Create if null
-        if (getContributionsListFragment() == null) {
-            contributionsListFragment =  new ContributionsListFragment();
-        }
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        // When this container fragment is created, we fill it with our ContributionsListFragment
-        transaction.replace(R.id.root_frame, contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG);
-        transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
-        transaction.commit();
-        getChildFragmentManager().executePendingTransactions();
+        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG);
     }
 
     /**
      * Replace FrameLayout with MediaDetailPagerFragment, user will see details of selected media.
      * Creates new one if null.
      */
-    public void setMediaDetailPagerFragment() {
+    public void showMediaDetailPagerFragment() {
         // hide tabs on media detail view is visible
         ((MainActivity)getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
         nearbyNotificationCardView.setVisibility(View.GONE);
 
-        // Create if null
-        if (getMediaDetailPagerFragment() == null) {
-            mediaDetailPagerFragment =  new MediaDetailPagerFragment();
-        }
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        // When this container fragment is created, we fill it with our MediaDetailPagerFragment
-        //transaction.addToBackStack(null);
-        transaction.add(R.id.root_frame, mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
-        transaction.addToBackStack(MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
-        transaction.commit();
-        getChildFragmentManager().executePendingTransactions();
+        showFragment(mediaDetailPagerFragment,MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
 
-    }
-
-    /**
-     * Just getter method of ContributionsListFragment child of ContributionsFragment
-     * @return contributionsListFragment, if any created
-     */
-    public ContributionsListFragment getContributionsListFragment() {
-        return contributionsListFragment;
-    }
-
-    /**
-     * Just getter method of MediaDetailPagerFragment child of ContributionsFragment
-     * @return mediaDetailsFragment, if any created
-     */
-    public MediaDetailPagerFragment getMediaDetailPagerFragment() {
-        return mediaDetailPagerFragment;
     }
 
     @Override
     public void onBackStackChanged() {
         ((MainActivity)getActivity()).initBackButton();
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        int uploads = store.getInt(UPLOADS_SHOWING, 100);
-        return new CursorLoader(getActivity(), BASE_URI, //TODO find out the reason we pass activity here
-                ALL_FIELDS, "", null,
-                ContributionDao.CONTRIBUTION_SORT + "LIMIT " + uploads);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        if (contributionsListFragment != null) {
-            contributionsListFragment.changeProgressBarVisibility(false);
-
-            if (contributionsListFragment.getAdapter() == null) {
-                contributionsListFragment.setAdapter(new ContributionsListAdapter(getActivity().getApplicationContext(),
-                        cursor, 0, contributionDao, this));
-            } else {
-                ((CursorAdapter) contributionsListFragment.getAdapter()).swapCursor(cursor);
-            }
-
-            contributionsListFragment.showWelcomeTip(cursor.getCount() == 0);
-            notifyAndMigrateDataSetObservers();
-            ((ContributionsListAdapter)contributionsListFragment.getAdapter()).setUploadService(uploadService);
-        }
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        ((CursorAdapter) contributionsListFragment.getAdapter()).swapCursor(null);
-    }
-
-    private void notifyAndMigrateDataSetObservers() {
-        Adapter adapter = contributionsListFragment.getAdapter();
-
-        // First, move the observers over to the adapter now that we have it.
-        for (DataSetObserver observer : observersWaitingForLoad) {
-            adapter.registerDataSetObserver(observer);
-        }
-        observersWaitingForLoad.clear();
-
-        // Now fire off a first notification...
-        for (DataSetObserver observer : observersWaitingForLoad) {
-            observer.onChanged();
-        }
-
-        if (ConfigUtils.isBetaFlavour()) {
-            betaSetUploadCount(getTotalMediaCount());
-        } else {
-            setUploadCount();
-        }
     }
 
     /**
@@ -346,40 +314,11 @@ public class ContributionsFragment
         if (getActivity() != null) { // If fragment is attached to parent activity
             getActivity().bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
             isUploadServiceConnected = true;
-            getActivity().getSupportLoaderManager().initLoader(0, null, ContributionsFragment.this);
+            getActivity().getSupportLoaderManager().initLoader(0, null, contributionsPresenter);
         }
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult");
-        switch (requestCode) {
-            case LOCATION_REQUEST: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Location permission granted, refreshing view");
-                    // No need to display permission request button anymore
-                    locationManager.registerLocationManager();
-                } else {
-                    if (store.getBoolean("displayLocationPermissionForCardView", true)) {
-                        // Still ask for permission
-                        DialogUtil.showAlertDialog(getActivity(),
-                                getString(R.string.nearby_card_permission_title),
-                                getString(R.string.nearby_card_permission_explanation),
-                                this::displayYouWontSeeNearbyMessage,
-                                this::enableLocationPermission,
-                                checkBoxView,
-                                false);
-                    }
-                }
-            }
-            break;
-
-            default:
-                // This is needed to allow the request codes from the Fragments to be routed appropriately
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with
      * mediaDetailPagerFragment, and preserve previous state in back stack.
@@ -388,57 +327,24 @@ public class ContributionsFragment
     public void showDetail(int i) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             mediaDetailPagerFragment = new MediaDetailPagerFragment();
-            setMediaDetailPagerFragment();
+            showMediaDetailPagerFragment();
         }
         mediaDetailPagerFragment.showImage(i);
     }
 
     @Override
     public void refreshSource() {
-        getActivity().getSupportLoaderManager().restartLoader(0, null, this);
+        getActivity().getSupportLoaderManager().restartLoader(0, null, contributionsPresenter);
     }
 
     @Override
     public Media getMediaAtPosition(int i) {
-        if (contributionsListFragment.getAdapter() == null) {
-            // not yet ready to return data
-            return null;
-        } else {
-            return contributionDao.fromCursor((Cursor) contributionsListFragment.getAdapter().getItem(i));
-        }
+        return contributionsPresenter.getItemAtPosition(i);
     }
 
     @Override
     public int getTotalMediaCount() {
-        if (contributionsListFragment.getAdapter() == null) {
-            return 0;
-        }
-        return contributionsListFragment.getAdapter().getCount();
-    }
-
-    @Override
-    public void notifyDatasetChanged() {
-
-    }
-
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-        Adapter adapter = contributionsListFragment.getAdapter();
-        if (adapter == null) {
-            observersWaitingForLoad.add(observer);
-        } else {
-            adapter.registerDataSetObserver(observer);
-        }
-    }
-
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-        Adapter adapter = contributionsListFragment.getAdapter();
-        if (adapter == null) {
-            observersWaitingForLoad.remove(observer);
-        } else {
-            adapter.unregisterDataSetObserver(observer);
-        }
+        return numberOfContributions;
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -484,7 +390,7 @@ public class ContributionsFragment
     @Override
     public void onResume() {
         super.onResume();
-
+        contributionsPresenter.onAttachView(this);
         firstLocationUpdate = true;
         locationManager.addLocationListener(this);
 
@@ -496,7 +402,7 @@ public class ContributionsFragment
 
 
         if (store.getBoolean("displayNearbyCardView", true)) {
-            checkGPS();
+            checkPermissionsAndShowNearbyCardView();
             if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                 nearbyNotificationCardView.setVisibility(View.VISIBLE);
             }
@@ -509,77 +415,39 @@ public class ContributionsFragment
         fetchCampaigns();
     }
 
-    /**
-     * Check GPS to decide displaying request permission button or not.
-     */
-    private void checkGPS() {
-        if (!locationManager.isProviderEnabled()) {
-            Timber.d("GPS is not enabled");
-            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_GPS;
-            if (store.getBoolean("displayLocationPermissionForCardView", true)) {
-                DialogUtil.showAlertDialog(getActivity(),
-                        getString(R.string.nearby_card_permission_title),
-                        getString(R.string.nearby_card_permission_explanation),
-                        this::displayYouWontSeeNearbyMessage,
-                        this::enableGPS,
-                        checkBoxView,
-                        false);
-            }
-        } else {
-            Timber.d("GPS is enabled");
-            checkLocationPermission();
+    private void checkPermissionsAndShowNearbyCardView() {
+        if (PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+            onLocationPermissionGranted();
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
+                && store.getBoolean("displayLocationPermissionForCardView", true)
+                && (((MainActivity) getActivity()).viewPager.getCurrentItem() == CONTRIBUTIONS_TAB_POSITION)) {
+            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
+            showNearbyCardPermissionRationale();
         }
     }
 
-    private void checkLocationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (locationManager.isLocationPermissionGranted(requireContext())) {
-                nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-                locationManager.registerLocationManager();
-            } else {
-                nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
-                // If user didn't selected Don't ask again
-                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
-                        && store.getBoolean("displayLocationPermissionForCardView", true)) {
-                        DialogUtil.showAlertDialog(getActivity(),
-                                getString(R.string.nearby_card_permission_title),
-                                getString(R.string.nearby_card_permission_explanation),
-                                this::displayYouWontSeeNearbyMessage,
-                                this::enableLocationPermission,
-                                checkBoxView,
-                                false);
-                }
-            }
-        } else {
-            // If device is under Marshmallow, we already checked for GPS
-            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
-            locationManager.registerLocationManager();
-        }
+    private void requestLocationPermission() {
+        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                this::onLocationPermissionGranted,
+                this::displayYouWontSeeNearbyMessage,
+                -1,
+                -1);
     }
 
-    private void enableLocationPermission() {
-        if (!getActivity().isFinishing()) {
-            ((MainActivity) getActivity()).locationManager.requestPermissions(getActivity());
-        }
+    private void onLocationPermissionGranted() {
+        nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
+        locationManager.registerLocationManager();
     }
 
-    private void enableGPS() {
-        new AlertDialog.Builder(getActivity())
-                .setMessage(R.string.gps_disabled)
-                .setCancelable(false)
-                .setPositiveButton(R.string.enable_gps,
-                        (dialog, id) -> {
-                            Intent callGPSSettingIntent = new Intent(
-                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            Timber.d("Loaded settings page");
-                            ((MainActivity) getActivity()).startActivityForResult(callGPSSettingIntent, 1);
-                        })
-                .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
-                    dialog.cancel();
-                    displayYouWontSeeNearbyMessage();
-                })
-                .create()
-                .show();
+    private void showNearbyCardPermissionRationale() {
+        DialogUtil.showAlertDialog(getActivity(),
+                getString(R.string.nearby_card_permission_title),
+                getString(R.string.nearby_card_permission_explanation),
+                this::displayYouWontSeeNearbyMessage,
+                this::requestLocationPermission,
+                checkBoxView,
+                false);
     }
 
     private void displayYouWontSeeNearbyMessage() {
@@ -589,7 +457,6 @@ public class ContributionsFragment
 
     private void updateClosestNearbyCardViewInfo() {
         curLatLng = locationManager.getLastLocation();
-
         compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curLatLng, curLatLng, true, false)) // thanks to boolean, it will only return closest result
                 .subscribeOn(Schedulers.io())
@@ -693,11 +560,48 @@ public class ContributionsFragment
     }
 
     @Override
-    public void onEvent(String filename) {
-        for (int i=0;i<getTotalMediaCount();i++){
-            if (getMediaAtPosition(i).getFilename().equals(filename))
-                showDetail(i);
+    public void showWelcomeTip(boolean shouldShow) {
+        contributionsListFragment.showWelcomeTip(shouldShow);
+    }
+
+    @Override
+    public void showProgress(boolean shouldShow) {
+        contributionsListFragment.showProgress(shouldShow);
+    }
+
+    @Override
+    public void showNoContributionsUI(boolean shouldShow) {
+        contributionsListFragment.showNoContributionsUI(shouldShow);
+    }
+
+    @Override
+    public void setUploadCount(int count) {
+        this.numberOfContributions=count;
+    }
+
+    @Override
+    public void onDataSetChanged() {
+        contributionsListFragment.onDataSetChanged();
+        mediaDetailPagerFragment.onDataSetChanged();
+    }
+
+    /**
+     * Retry upload when it is failed
+     *
+     * @param contribution contribution to be retried
+     */
+    private void retryUpload(Contribution contribution) {
+        if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
+            if (contribution.getState() == STATE_FAILED && null != uploadService) {
+                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+                Timber.d("Restarting for %s", contribution.toString());
+            } else {
+                Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
+            }
+        } else {
+            ViewUtil.showLongToast(getContext(), R.string.this_function_needs_network_connection);
         }
+
     }
 }
 

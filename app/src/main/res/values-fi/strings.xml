@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Alluk.
 * Crt
 * Kyykaarme
@@ -102,7 +103,7 @@
   <string name="title_activity_review">Vertaisarviointi</string>
   <string name="menu_about">Tietoja</string>
   <string name="about_license">Wikimedia Commons -sovellus on vapaan lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ole sitoutunut sovelluksen luomiseen, kehittämiseen tai ylläpitoon.</string>
-  <string name="about_improve">Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
+  <string name="about_improve">Luo uusi &lt;a href=\"%1$s\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
   <string name="about_privacy_policy">&lt;u&gt;Yksityisyydensuoja&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Tekijät&lt;/u&gt;</string>
   <string name="title_activity_about">Tietoja</string>
@@ -273,17 +274,17 @@
   <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
   <string name="nearby_location_not_available">Sijainti ei käytettävissä.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
-  <string name="get_directions">HANKI OHJEET</string>
-  <string name="read_article">LUE ARTIKKELI</string>
+  <string name="get_directions" fuzzy="true">HANKI OHJEET</string>
+  <string name="read_article" fuzzy="true">LUE ARTIKKELI</string>
   <string name="notifications_welcome">Tervetuloa Wikimedia Commonsiin, %1$s! Olemme iloisia että olet täällä.</string>
   <string name="notifications_talk_page_message">%1$s jätti viestin keskustelusivullesi</string>
   <string name="notifications_thank_you_edit">Kiitos muokkaamisestasi</string>
   <string name="notifications_mention">%1$s mainitsi sinut %2$s.</string>
   <string name="toggle_view_button">Vaihda näkymä</string>
-  <string name="nearby_directions">REITTI</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions" fuzzy="true">REITTI</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Arvostele meidät&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;UKK&lt;/u&gt;</string>
   <string name="welcome_skip_button">Ohita opetus</string>
@@ -313,10 +314,10 @@
   <string name="search_recent_header">Äskettäiset haut:</string>
   <string name="error_loading_categories">Luokkia ladattaessa tapahtui virhe.</string>
   <string name="error_loading_subcategories">Alaluokkia ladattaessa tapahtui virhe.</string>
-  <string name="search_tab_title_media">MEDIA</string>
-  <string name="search_tab_title_categories">LUOKAT</string>
-  <string name="explore_tab_title_featured">SUOSITELTU</string>
-  <string name="explore_tab_title_mobile">TALLENNETTU MOBIILIN KAUTTA</string>
+  <string name="search_tab_title_media" fuzzy="true">MEDIA</string>
+  <string name="search_tab_title_categories" fuzzy="true">LUOKAT</string>
+  <string name="explore_tab_title_featured" fuzzy="true">SUOSITELTU</string>
+  <string name="explore_tab_title_mobile" fuzzy="true">TALLENNETTU MOBIILIN KAUTTA</string>
   <string name="successful_wikidata_edit">Kuva onnistuneesti lisätty Wikidata-kohteeseen %1$s!</string>
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
   <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>
@@ -343,22 +344,26 @@
   <string name="delete_recent_searches_dialog">Haluatko varmasti tyhjentää hakuhistoriasi?</string>
   <string name="search_history_deleted">Hakuhistoria poistettu</string>
   <string name="nominate_delete">Ehdota poistettavaksi</string>
-  <string name="delete">POISTA</string>
+  <string name="delete" fuzzy="true">POISTA</string>
   <string name="Achievements">Saavutukset</string>
-  <string name="statistics">TILASTOT</string>
+  <string name="statistics" fuzzy="true">TILASTOT</string>
   <string name="statistics_thanks">Kiitos vastaanotettu</string>
   <string name="statistics_featured">Suositellut kuvat</string>
-  <string name="level">TASO</string>
+  <string name="level" fuzzy="true">TASO</string>
   <string name="images_uploaded">Kuvia tallennettu</string>
   <string name="images_used_by_wiki">Kuvia käytetty</string>
   <string name="achievements_share_message">Jaa saavutuksesi ystäviesi kanssa!</string>
   <string name="error_occurred">Tapahtui virhe!</string>
   <string name="notifications_channel_name_all">Commons-ilmoitus</string>
+  <string name="preference_author_name_toggle">Käytä mukautettua tekijän nimeä</string>
+  <string name="preference_author_name_toggle_summary">Käytä mukautettua tekijän nimeä käyttäjänimesi sijaan kuvia tallentaessa</string>
+  <string name="preference_author_name">Mukautettu tekijän nimi</string>
   <string name="contributions_fragment">Muokkaukset</string>
   <string name="nearby_fragment">Lähistöllä</string>
   <string name="notifications">Ilmoitukset</string>
   <string name="archived_notifications">Ilmoitukset (arkistoidut)</string>
   <string name="list_sheet">Lista</string>
+  <string name="step_count">Vaihe %1$d/%2$d</string>
   <string name="next">Seuraava</string>
   <string name="previous">Edellinen</string>
   <string name="submit">Lähetä</string>
@@ -393,12 +398,21 @@
   <string name="nearby_card_permission_explanation">Haluaisitko, että käytämme nykyistä sijaintiasi näyttääksemme lähimmät paikat, jotka tarvitsevat kuvia?</string>
   <string name="never_ask_again">Älä kysy tätä uudelleen</string>
   <string name="this_function_needs_network_connection">Tämä toiminto tarvitsee verkkoyhteyden. Tarkista yhteysasetuksesi.</string>
+  <string name="nominate_for_deletion_done">Valmis</string>
+  <string name="notsure">Epävarma</string>
+  <string name="review_copyright">Noudattaako tämä tekijänoikeussääntöjä?</string>
+  <string name="review_category">Onko tämä luokiteltu oikein?</string>
+  <string name="review_thanks">Haluaisitko kiittää muokkaajaa?</string>
   <string name="review_no_category">Oh, tämä ei ole edes luokiteltu!</string>
-  <string name="review_thanks_yes_button_text">KYLLÄ, MIKSI EI</string>
-  <string name="review_thanks_no_button_text">SEURAAVA KUVA</string>
+  <string name="review_category_no_button_text">Näyttää hyvälle</string>
+  <string name="review_spam_no_button_text">Näyttää hyvälle</string>
+  <string name="review_copyright_yes_button_text">Ei, tekijänoikeusloukkaus</string>
+  <string name="review_copyright_no_button_text">Näyttää hyvälle</string>
+  <string name="review_thanks_yes_button_text">Kyllä, miksi ei</string>
+  <string name="review_thanks_no_button_text">Seuraava kuva</string>
   <string name="menu_option_archived">Näytä arkistoidut</string>
   <string name="menu_option_unread">Näytä lukemattomat</string>
   <string name="image_chooser_title">Valitse tallennettavat tiedostot</string>
   <string name="please_wait">Odota…</string>
-  <string name="skip_image">OHITA TÄMÄ KUVA</string>
+  <string name="skip_image" fuzzy="true">OHITA TÄMÄ KUVA</string>
 </resources>

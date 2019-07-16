@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Ooswesthoesbes
 * Pahles
 -->
@@ -86,7 +87,7 @@
   <string name="title_activity_featured_images">Oetgeleechde plaetjes</string>
   <string name="menu_about">Euver</string>
   <string name="about_license">De Wikimedia Commons-app is \'nen app op aope brónne, gemaak en óngerhaje door gerechtigde en vriewilligers vanne Wikimedia-gemeinsjap. De Wikimedia Foundation is neet betróch inne maak, óntwikkeling of \'t óngerhawd vannen app.</string>
-  <string name="about_improve">Maak e nuuj &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-perbleem&lt;/a&gt; veur fouteverslaag en veurstèlle.</string>
+  <string name="about_improve">Maak e nuuj &lt;a href=\"%1$s\"&gt;GitHub-perbleem&lt;/a&gt; veur fouteverslaag en veurstèlle.</string>
   <string name="about_privacy_policy">&lt;u&gt;Privaatbeleid&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Toesjrif&lt;/u&gt;</string>
   <string name="title_activity_about">Euver</string>

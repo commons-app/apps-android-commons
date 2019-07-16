@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.mwapi
 
 import com.google.gson.Gson
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient.mapType
+import fr.free.nrw.commons.utils.CommonsDateUtil
 import junit.framework.Assert.assertEquals
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -21,7 +21,6 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import org.wikipedia.util.DateUtil
 import java.util.*
 import kotlin.random.Random
 
@@ -29,7 +28,7 @@ import kotlin.random.Random
  * Mock web server based tests for ok http json api client
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [23], application = TestCommonsApplication::class)
+@Config(sdk = [23], application = TestCommonsApplication::class)
 class OkHttpJsonApiClientTest {
 
     private lateinit var testObject: OkHttpJsonApiClient
@@ -190,7 +189,7 @@ class OkHttpJsonApiClientTest {
      */
     @Test
     fun getImageWithGenerator() {
-        val template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort().format(Date())
+        val template = "Template:Potd/" + CommonsDateUtil.getIso8601DateFormatShort().format(Date())
         server.enqueue(getMediaList("", "", "", 1))
 
         val media = testObject.getMedia(template, true)!!.blockingGet()
@@ -216,7 +215,7 @@ class OkHttpJsonApiClientTest {
      */
     @Test
     fun getPictureOfTheDay() {
-        val template = "Template:Potd/" + DateUtil.getIso8601DateFormatShort().format(Date())
+        val template = "Template:Potd/" + CommonsDateUtil.getIso8601DateFormatShort().format(Date())
         server.enqueue(getMediaList("", "", "", 1))
 
         val media = testObject.pictureOfTheDay?.blockingGet()
@@ -344,6 +343,15 @@ class OkHttpJsonApiClientTest {
         return it
     }
 
+    /**
+     * Check request params with encoded path
+     */
+    private fun assertBasicRequestParameters(server: MockWebServer, method: String,encodedPath: String): RecordedRequest = server.takeRequest().let {
+        Assert.assertEquals(encodedPath, it.requestUrl.encodedPath())
+        Assert.assertEquals(method, it.method)
+        return it
+    }
+
 
     /**
      * Parse query params
@@ -352,6 +360,39 @@ class OkHttpJsonApiClientTest {
         request.requestUrl.let {
             it.queryParameterNames().forEach { name -> put(name, it.queryParameter(name)) }
         }
+    }
+
+
+    /**
+     * Test getUploadCount posititive and negative cases
+     */
+    @Test
+    fun testGetUploadCount(){
+        //Positive
+        assertEquals(testBaseCasesAndGetUploadCount(true), 20)
+        //Negative
+        assertEquals(testBaseCasesAndGetUploadCount(false), 0)
+    }
+
+    /**
+     * Test getUploadCount base cases
+     */
+    private fun testBaseCasesAndGetUploadCount(shouldAddResponse: Boolean): Int? {
+        val mockResponse = MockResponse()
+        mockResponse.setResponseCode(200)
+        if(shouldAddResponse) {
+            val responseBody = "20"
+            mockResponse.setBody(responseBody)
+        }
+        toolsForgeServer.enqueue(mockResponse)
+
+        val uploadCount=testObject.getUploadCount("ashishkumar294").blockingGet()
+        assertBasicRequestParameters(toolsForgeServer, "GET","/uploadsbyuser.py").let { request ->
+            parseQueryParams(request).let { body ->
+                Assert.assertEquals("ashishkumar294", body["user"])
+            }
+        }
+        return uploadCount
     }
 
 }

@@ -4,45 +4,40 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.material.navigation.NavigationView;
 import com.viewpagerindicator.CirclePageIndicator;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class ReviewActivity extends AuthenticatedActivity {
 
-    @BindView(R.id.reviewPagerIndicator)
+    @BindView(R.id.pager_indicator_review)
     public CirclePageIndicator pagerIndicator;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -50,20 +45,16 @@ public class ReviewActivity extends AuthenticatedActivity {
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-    @BindView(R.id.reviewPager)
+    @BindView(R.id.view_pager_review)
     ReviewViewPager reviewPager;
     @BindView(R.id.skip_image)
-    Button skip_image_button;
-    @BindView(R.id.imageView)
+    Button btnSkipImage;
+    @BindView(R.id.review_image_view)
     SimpleDraweeView simpleDraweeView;
-    @BindView(R.id.progressBar)
+    @BindView(R.id.pb_review_image)
     ProgressBar progressBar;
-    @BindView(R.id.imageCaption)
+    @BindView(R.id.tv_image_caption)
     TextView imageCaption;
-    @BindView(R.id.skip_image_info)
-    ImageView skipImageInfo;
-    @BindView(R.id.review_image_info)
-    ImageView reviewImageInfo;
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
     @Inject
@@ -72,6 +63,17 @@ public class ReviewActivity extends AuthenticatedActivity {
     ReviewHelper reviewHelper;
     @Inject
     DeleteHelper deleteHelper;
+
+    final String SAVED_MEDIA = "saved_media";
+    private Media media;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (media != null) {
+            outState.putParcelable(SAVED_MEDIA, media);
+        }
+    }
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -88,6 +90,9 @@ public class ReviewActivity extends AuthenticatedActivity {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    public Media getMedia() {
+        return media;
+    }
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
@@ -103,6 +108,7 @@ public class ReviewActivity extends AuthenticatedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         initDrawer();
 
         reviewController = new ReviewController(deleteHelper, this);
@@ -113,11 +119,23 @@ public class ReviewActivity extends AuthenticatedActivity {
         pagerIndicator.setViewPager(reviewPager);
         progressBar.setVisibility(View.VISIBLE);
 
-        runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
+        if (savedInstanceState != null) {
+            updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)); // Use existing media if we have one
+        } else {
+            runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
+        }
 
-        skip_image_button.setOnClickListener(view -> runRandomizer());
-        skipImageInfo.setOnClickListener(view -> showSkipImageInfo());
-        reviewImageInfo.setOnClickListener(view -> showReviewImageInfo());
+        btnSkipImage.setOnClickListener(view -> runRandomizer());
+
+        btnSkipImage.setOnTouchListener((view, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (
+                    btnSkipImage.getRight() - btnSkipImage
+                            .getCompoundDrawables()[2].getBounds().width())) {
+                showSkipImageInfo();
+                return true;
+            }
+            return false;
+        });
     }
 
     @SuppressLint("CheckResult")
@@ -125,50 +143,39 @@ public class ReviewActivity extends AuthenticatedActivity {
         progressBar.setVisibility(View.VISIBLE);
         reviewPager.setCurrentItem(0);
         compositeDisposable.add(reviewHelper.getRandomMedia()
-                .map(Media::getFilename)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateImage));
+                .subscribe(media -> {
+                    if (media != null) {
+                        updateImage(media);
+                    }
+                }));
         return true;
     }
 
     @SuppressLint("CheckResult")
-    private void updateImage(String fileName) {
+    private void updateImage(Media media) {
+        this.media = media;
+        String fileName = media.getFilename();
         if (fileName.length() == 0) {
             ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review);
             return;
         }
-        simpleDraweeView.setImageURI(Utils.makeThumbBaseUrl(fileName));
-        reviewController.onImageRefreshed(fileName); //file name is updated
-        compositeDisposable.add(reviewHelper.getFirstRevisionOfFile("File:" + fileName)
+
+        simpleDraweeView.setImageURI(media.getImageUrl());
+
+        reviewController.onImageRefreshed(media); //file name is updated
+        compositeDisposable.add(reviewHelper.getFirstRevisionOfFile(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revision -> {
                     reviewController.firstRevision = revision;
-                    reviewPagerAdapter.updateFileInformation(fileName);
-                    ((TextView) imageCaption).setText(fileName + " is uploaded by: " + revision.getUser());
+                    reviewPagerAdapter.updateFileInformation();
+                    String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
+                    imageCaption.setText(caption);
                     progressBar.setVisibility(View.GONE);
                 }));
         reviewPager.setCurrentItem(0);
-
-        Disposable disposable = mwApi.fetchMediaByFilename("File:" + fileName)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mediaResult -> {
-                    ArrayList<String> categories = MediaDataExtractorUtil.extractCategories(mediaResult.getWikiSource());
-                    updateCategories(categories);
-                }, this::categoryFetchError);
-        compositeDisposable.add(disposable);
-    }
-
-    private void categoryFetchError(Throwable throwable) {
-        Timber.e(throwable, "Error fetching categories");
-        ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review_categories);
-    }
-
-    private void updateCategories(ArrayList<String> categories) {
-        reviewController.onCategoriesRefreshed(categories);
-        reviewPagerAdapter.updateCategories();
     }
 
     public void swipeToNext() {
@@ -180,9 +187,15 @@ public class ReviewActivity extends AuthenticatedActivity {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
+    }
+
     public void showSkipImageInfo(){
         DialogUtil.showAlertDialog(ReviewActivity.this,
-                getString(R.string.skip_image),
+                getString(R.string.skip_image).toUpperCase(),
                 getString(R.string.skip_image_explanation),
                 getString(android.R.string.ok),
                 "",
@@ -198,5 +211,23 @@ public class ReviewActivity extends AuthenticatedActivity {
                 "",
                 null,
                 null);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_review_activty, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_image_info:
+                showReviewImageInfo();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

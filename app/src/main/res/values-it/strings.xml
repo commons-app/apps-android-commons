@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Albe Albe 460
 * Albe Albe460
 * Ale.salmo
@@ -10,6 +11,7 @@
 * Nemo bis
 * S4b1nuz E.656
 * Sarah Bernabei
+* Senpremì
 * Una giornata uggiosa '94
 * Wim b
 -->
@@ -19,6 +21,7 @@
   <string name="preference_category_appearance">Aspetto</string>
   <string name="preference_category_general">Generale</string>
   <string name="preference_category_feedback">Commenti</string>
+  <string name="preference_category_privacy">Privacy</string>
   <string name="preference_category_location">Posizione</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -102,7 +105,7 @@
   <string name="title_activity_category_details">Categoria</string>
   <string name="menu_about">Informazioni</string>
   <string name="about_license">L\'app di Wikimedia Commons è un\'applicazione open source creata e mantenuta da beneficiari e volontari della comunità Wikimedia. La Fondazione Wikimedia non è coinvolta nella creazione, sviluppo o manutenzione dell\'applicazione.</string>
-  <string name="about_improve">Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
+  <string name="about_improve">Crea una nuova &lt;a href=\"%1$s\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
   <string name="about_privacy_policy">&lt;u&gt;Politica sulla privacy&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Crediti&lt;/u&gt;</string>
   <string name="title_activity_about">Informazioni</string>
@@ -276,17 +279,17 @@
   <string name="nearby_location_has_not_changed">La posizione non è cambiata.</string>
   <string name="nearby_location_not_available">Posizione non disponibile.</string>
   <string name="location_permission_rationale_nearby">È richiesta l\'autorizzazione per visualizzare un elenco di luoghi nelle vicinanze</string>
-  <string name="get_directions">OTTIENI DIREZIONI</string>
-  <string name="read_article">LEGGI VOCE</string>
+  <string name="get_directions">Ottieni indicazioni</string>
+  <string name="read_article">Leggi voce</string>
   <string name="notifications_welcome">Benvenuto in Wikimedia Commons, %1$s! Siamo contenti che tu sia qui.</string>
   <string name="notifications_talk_page_message">%1$s ti ha lasciato un messaggio nella tua pagina di discussione</string>
   <string name="notifications_thank_you_edit">Grazie per aver fatto una modifica</string>
   <string name="notifications_mention">%1$s ti ha menzionato su %2$s.</string>
   <string name="toggle_view_button">Attiva / disattiva visualizzazione</string>
-  <string name="nearby_directions">INDICAZIONI</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions">Indicazioni</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Valutaci&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Domande frequenti&lt;/u&gt;</string>
   <string name="welcome_skip_button">Salta Tutorial</string>
@@ -318,8 +321,8 @@
   <string name="provider_searches">Query effettuate di recente</string>
   <string name="error_loading_categories">Si è verificato un errore durante il caricamento delle categorie.</string>
   <string name="error_loading_subcategories">Si è verificato un errore durante il caricamento delle sottocategorie.</string>
-  <string name="search_tab_title_media">MEDIA</string>
-  <string name="search_tab_title_categories">CATEGORIE</string>
+  <string name="search_tab_title_media">Media</string>
+  <string name="search_tab_title_categories">Categorie</string>
   <string name="successful_wikidata_edit">Immagine aggiunta correttamente a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Impossibile aggiornare l\'entità Wikidata corrispondente!</string>
   <string name="menu_set_wallpaper">Imposta come sfondo</string>
@@ -352,13 +355,13 @@
   <string name="delete_recent_searches_dialog">Sei sicuro di voler cancellare la tua cronologia di ricerca?</string>
   <string name="search_history_deleted">Cronologia di ricerca cancellata</string>
   <string name="nominate_delete">Proponi per la cancellazione</string>
-  <string name="delete">CANCELLA</string>
+  <string name="delete">Cancella</string>
   <string name="Achievements">Risultati</string>
-  <string name="statistics">STATISTICHE</string>
+  <string name="statistics">Statistiche</string>
   <string name="statistics_thanks">Ringraziamenti ricevuti</string>
   <string name="statistics_featured">Immagini in evidenza</string>
   <string name="statistics_wikidata_edits">Immagini tramite \"Luoghi nelle vicinanze\"</string>
-  <string name="level">LIVELLO</string>
+  <string name="level">Livello</string>
   <string name="images_uploaded">Immagini caricate</string>
   <string name="image_reverts">Immagini non ripristinate</string>
   <string name="images_used_by_wiki">Immagini utilizzate</string>
@@ -440,6 +443,15 @@
   <string name="bad_token_error_proposed_solution">Caricamento non riuscito a causa di problemi con il token di modifica. Si prega di provare a disconnettersi e riconnettersi nuovamente.</string>
   <string name="error_processing_image">Si è verificato un errore durante l\'elaborazione dell\'immagine. Per favore riprova!</string>
   <string name="nominate_for_deletion_done">Fatto</string>
+  <string name="review_copyright_explanation">I loghi, gli screenshot e le locandine di film sono solitamente violazioni del copyright.\nClicca NO per proporre l\'eliminazione di questa immagine</string>
+  <string name="review_category_yes_button_text">No, la categoria è sbagliata</string>
+  <string name="review_category_no_button_text">Sembra tutto ok</string>
+  <string name="review_spam_yes_button_text">No, è fuori tema</string>
+  <string name="review_spam_no_button_text">Sembra tutto ok</string>
+  <string name="review_copyright_yes_button_text">No, è una violazione di copyright</string>
+  <string name="review_copyright_no_button_text">Sembra tutto ok</string>
+  <string name="review_thanks_yes_button_text">Certo, perché no</string>
+  <string name="review_thanks_no_button_text">Immagine successiva</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Ricezione di contenuti condivisi. L\'elaborazione dell\'immagine potrebbe richiedere del tempo a seconda delle dimensioni dell\'immagine e del dispositivo</item>
     <item quantity="other">Ricezione di contenuti condivisi. L\'elaborazione delle immagini potrebbe richiedere del tempo a seconda delle dimensioni delle immagini e del dispositivo</item>
@@ -455,5 +467,21 @@
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="image_chooser_title">Scegli le immagini da caricare</string>
   <string name="please_wait">Attendi per favore…</string>
-  <string name="skip_image">SALTA QUESTA IMMAGINE</string>
+  <string name="previous_image_title_description">Copia titolo/descrizione precedente</string>
+  <string name="previous_button_tooltip_message">Clicca per riusare il titolo e la descrizione dell\'immagine precedente e adattarli all\'immagine attuale.</string>
+  <string name="skip_image">Salta questa immagine</string>
+  <string name="exif_tag_name_author">Autore</string>
+  <string name="exif_tag_name_cameraModel">Modello fotocamera</string>
+  <string name="exif_tag_name_serialNumbers">Numeri seriali</string>
+  <string name="exif_tag_name_software">Software</string>
+  <string name="share_via">Condividi applicazione tramite...</string>
+  <string name="image_info">Informazioni sull\'immagine</string>
+  <string name="no_categories_found">Nessuna categoria trovata</string>
+  <string name="upload_cancelled">Caricamento annullato</string>
+  <string name="dialog_box_text_nomination">Perché %1$s dovrebbe essere cancellato?</string>
+  <string name="review_is_uploaded_by">%1$s è stato caricato da: %2$s</string>
+  <string name="default_description_language">Lingua predefinita descrizione</string>
+  <string name="delete_helper_ask_spam_other">Altro</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Altro</string>
 </resources>

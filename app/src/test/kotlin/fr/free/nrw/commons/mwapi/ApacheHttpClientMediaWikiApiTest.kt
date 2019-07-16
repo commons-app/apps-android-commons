@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.mwapi
 
 import android.os.Build
+import androidx.test.core.app.ApplicationProvider
 import com.google.gson.Gson
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.utils.ConfigUtils
@@ -17,14 +17,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.wikipedia.util.DateUtil
 import java.net.URLDecoder
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(21), application = TestCommonsApplication::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class ApacheHttpClientMediaWikiApiTest {
 
     private lateinit var testObject: ApacheHttpClientMediaWikiApi
@@ -39,7 +38,7 @@ class ApacheHttpClientMediaWikiApiTest {
         wikidataServer = MockWebServer()
         okHttpClient = OkHttpClient()
         sharedPreferences = mock(JsonKvStore::class.java)
-        testObject = ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, Gson())
+        testObject = ApacheHttpClientMediaWikiApi(ApplicationProvider.getApplicationContext(), "http://" + server.hostName + ":" + server.port + "/", "http://" + wikidataServer.hostName + ":" + wikidataServer.port + "/", sharedPreferences, Gson())
     }
 
     @After
@@ -262,7 +261,7 @@ class ApacheHttpClientMediaWikiApiTest {
     fun isUserBlockedFromCommonsForTimeBlockedUser() {
         val currentDate = Date()
         val expiredDate = Date(currentDate.time + 10000)
-        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + DateUtil.getIso8601DateFormat().format(expiredDate) + "\"></userinfo></query></api>"))
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + DateUtil.iso8601DateFormat(expiredDate) + "\"></userinfo></query></api>"))
 
         val result = testObject.isUserBlockedFromCommons()
 
@@ -282,7 +281,7 @@ class ApacheHttpClientMediaWikiApiTest {
     fun isUserBlockedFromCommonsForExpiredBlockedUser() {
         val currentDate = Date()
         val expiredDate = Date(currentDate.time - 10000)
-        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + DateUtil.getIso8601DateFormat().format(expiredDate) + "\"></userinfo></query></api>"))
+        server.enqueue(MockResponse().setBody("<?xml version=\"1.0\"?><api><query><userinfo id=\"1000\" name=\"testusername\" blockid=\"3000\" blockedby=\"blockerusername\" blockedbyid=\"1001\" blockreason=\"testing\" blockedtimestamp=\"2018-05-24T15:32:09Z\" blockexpiry=\"" + DateUtil.iso8601DateFormat(expiredDate) + "\"></userinfo></query></api>"))
 
         val result = testObject.isUserBlockedFromCommons()
 
@@ -319,7 +318,7 @@ class ApacheHttpClientMediaWikiApiTest {
     private fun assertBasicRequestParameters(server: MockWebServer, method: String): RecordedRequest = server.takeRequest().let {
         assertEquals("/", it.requestUrl.encodedPath())
         assertEquals(method, it.method)
-        assertEquals("Commons/${ConfigUtils.getVersionNameWithSha(RuntimeEnvironment.application)} (https://mediawiki.org/wiki/Apps/Commons) Android/${Build.VERSION.RELEASE}",
+        assertEquals("Commons/${ConfigUtils.getVersionNameWithSha(ApplicationProvider.getApplicationContext())} (https://mediawiki.org/wiki/Apps/Commons) Android/${Build.VERSION.RELEASE}",
                 it.getHeader("User-Agent"))
         if ("POST" == method) {
             assertEquals("application/x-www-form-urlencoded", it.getHeader("Content-Type"))

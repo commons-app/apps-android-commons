@@ -149,9 +149,11 @@ public class BookmarkPicturesDao {
 
     @NonNull
     Bookmark fromCursor(Cursor cursor) {
+        String fileName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_NAME));
         return new Bookmark(
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_NAME)),
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR))
+                fileName,
+                cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR)),
+                BookmarkPicturesContentProvider.uriForName(fileName)
         );
     }
 

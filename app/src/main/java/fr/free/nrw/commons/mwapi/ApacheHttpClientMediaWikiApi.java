@@ -52,7 +52,6 @@ import timber.log.Timber;
  * @author Addshore
  */
 public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
-    private static final String THUMB_SIZE = "640";
     private AbstractHttpClient httpClient;
     private CustomMwApi api;
     private CustomMwApi wikidataApi;
@@ -294,18 +293,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    public Single<String> findThumbnailByFilename(String filename) {
-        return Single.fromCallable(() -> api.action("query")
-                .param("format", "xml")
-                .param("prop", "imageinfo")
-                .param("iiprop", "url")
-                .param("iiurlwidth", THUMB_SIZE)
-                .param("titles", filename)
-                .get()
-                .getString("/api/query/pages/page/imageinfo/ii/@thumburl"));
-    }
-
-    @Override
     public Single<String> parseWikicode(String source) {
         return Single.fromCallable(() -> api.action("flow-parsoid-utils")
                 .param("from", "wikitext")
@@ -423,7 +410,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      */
     @Nullable
     @Override
-    public String wikidatCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
+    public String wikidataCreateClaim(String entityId, String property, String snaktype, String value) throws IOException {
         Timber.d("Filename is %s", value);
         CustomApiResult result = wikidataApi.action("wbcreateclaim")
                 .param("entity", entityId)
@@ -828,7 +815,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 return new UploadResult(resultStatus, errorCode);
             } else {
                 Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
-                String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
+                String canonicalFilename = "File:" + result.getString("/api/upload/@filename")
+                        .replace("_", " ")
+                        .trim(); // Title vs Filename
                 String imageUrl = result.getString("/api/upload/imageinfo/@url");
                 return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
             }
@@ -870,7 +859,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     private Date parseMWDate(String mwDate) {
         try {
-            return DateUtil.getIso8601DateFormat().parse(mwDate);
+            return DateUtil.iso8601DateParse(mwDate);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

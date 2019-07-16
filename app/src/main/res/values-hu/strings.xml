@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * BanKris
 * Bencemac
 * Dj
@@ -19,6 +20,7 @@
   <string name="preference_category_appearance">Megjelenés</string>
   <string name="preference_category_general">Általános</string>
   <string name="preference_category_feedback">Visszajelzés</string>
+  <string name="preference_category_privacy">Adatvédelem</string>
   <string name="preference_category_location">Helyszín</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -102,7 +104,7 @@
   <string name="title_activity_category_details">Kategória</string>
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
-  <string name="about_improve">Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
+  <string name="about_improve">Nyiss egy új &lt;a href=\"%1$s\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
   <string name="about_privacy_policy">&lt;u&gt;Adatvédelmi irányelvek&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Köszönetnyilvánítás&lt;/u&gt;</string>
   <string name="title_activity_about">Névjegy</string>
@@ -182,6 +184,7 @@
   <string name="no">Nem</string>
   <string name="media_detail_title">Cím</string>
   <string name="media_detail_description">Leírás</string>
+  <string name="media_detail_discussion">Megbeszélés</string>
   <string name="media_detail_author">Szerző</string>
   <string name="media_detail_uploaded_date">Feltöltési dátum</string>
   <string name="media_detail_license">Licenc</string>
@@ -228,6 +231,7 @@
   <string name="navigation_item_info">Bevezető</string>
   <string name="navigation_item_notification">Értesítések</string>
   <string name="navigation_item_featured_images">Kiemelt</string>
+  <string name="navigation_item_review">Ellenőrzés</string>
   <string name="nearby_needs_permissions">Közeli helyek nem megjeleníthetőek a helyadatokhoz való hozzáférés engedélyezése nélkül</string>
   <string name="no_description_found">nincs leírás</string>
   <string name="nearby_info_menu_commons_article">Commons leírólap</string>
@@ -256,19 +260,20 @@
   <string name="skip_login">Kihagyás</string>
   <string name="navigation_item_login">Bejelentkezés</string>
   <string name="skip_login_title">Biztos ki akarod hagyni a bejelentkezést?</string>
+  <string name="skip_login_message">Fényképek feltöltéséhez a jövőben be kell jelentkezned.</string>
   <string name="login_alert_message">A funkció használatához kérlek jelentkezz be.</string>
   <string name="copy_wikicode">Wikiszöveg vágólapra másolása</string>
   <string name="wikicode_copied">A wikiszöveg a vágólapra lett másolva</string>
   <string name="nearby_location_has_not_changed">A hely nem változott.</string>
   <string name="nearby_location_not_available">A hely nem érhető el.</string>
   <string name="location_permission_rationale_nearby">Közeli helyek listájának megtekintéséhez engedély szükséges</string>
-  <string name="read_article">SZÓCIKK OLVASÁSA</string>
+  <string name="read_article" fuzzy="true">SZÓCIKK OLVASÁSA</string>
   <string name="notifications_welcome">Üdvözlünk a Wikimedia Commonson, %1$s! Örülünk, hogy itt vagy.</string>
   <string name="notifications_talk_page_message">%1$s üzenetet hagyott a vitalapodon</string>
   <string name="notifications_thank_you_edit">Köszönjük a szerkesztésedet!</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPÉDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPÉDIA</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Értékelj minket&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;GYIK&lt;/u&gt;</string>
   <string name="welcome_skip_button">Útmutató átugrása</string>
@@ -287,6 +292,7 @@
   <string name="no_images_found">Nem található kép!</string>
   <string name="error_loading_images">Képbetöltés közben hiba történt</string>
   <string name="image_uploaded_by">Feltöltötte: %1$s</string>
+  <string name="block_notification">Blokkolva vagy a Commons szerkesztésétől.</string>
   <string name="appwidget_img">A nap képe</string>
   <string name="app_widget_heading">A nap képe</string>
   <string name="menu_search_button">Keresés</string>
@@ -297,6 +303,7 @@
   <string name="wallpaper_set_successfully">Háttérkép sikeresen beállítva!</string>
   <string name="quiz">Kvíz</string>
   <string name="quiz_question_string">Ez a fénykép feltölthető?</string>
+  <string name="user_not_logged_in">A bejelentkezési munkamenet lejárt, kérlek jelentkezz be újra.</string>
   <string name="continue_message">Folytatás</string>
   <string name="correct">Helyes válasz</string>
   <string name="wrong">Rossz válasz</string>
@@ -304,13 +311,16 @@
   <string name="share_coordinates_not_present">A koordináták nem lettek megadva a kép kiválasztásakor.</string>
   <string name="error_fetching_nearby_places">Hiba a közeli helyek elérésekor.</string>
   <string name="delete_recent_searches_dialog">Biztosan törölni szeretnéd a keresési előzményeidet?</string>
+  <string name="delete_search_dialog">Biztos törölni szeretnéd ezt a keresést?</string>
   <string name="search_history_deleted">Keresési előzmények törölve</string>
   <string name="nominate_delete">Törlésre jelölés</string>
   <string name="Achievements">Eredmények</string>
-  <string name="statistics">Statisztikák</string>
+  <string name="statistics" fuzzy="true">Statisztikák</string>
   <string name="statistics_thanks">Kapott köszönetek</string>
   <string name="statistics_featured">Kiemelt képek</string>
+  <string name="images_uploaded">Feltöltött képek</string>
   <string name="achievements_share_message">Oszd meg eredményeidet a barátaiddal!</string>
+  <string name="images_uploaded_explanation">A Commonsra feltöltött képeid száma, bármilyen feltöltési programmal</string>
   <string name="nearby_fragment">Közelben</string>
   <string name="notifications">Értesítések</string>
   <string name="next">Következő</string>
@@ -329,5 +339,30 @@
   <string name="desc_language_Africa">Afrika</string>
   <string name="desc_language_Asia">Ázsia</string>
   <string name="desc_language_Pacific">Csendes-óceáni</string>
+  <string name="yes_submit">Igen, küldés</string>
+  <string name="no_go_back">Nem, visszalépés</string>
   <string name="never_ask_again">Ne kérdezd meg többször</string>
+  <string name="display_campaigns_explanation">Folyamatban lévő kampányok megjelenítése</string>
+  <string name="nominate_for_deletion_done">Kész</string>
+  <string name="notsure">Nem tudom biztosan</string>
+  <string name="send_thank_success_title">Köszönet küldése sikeres</string>
+  <string name="send_thank_success_message">Köszönet sikeresen elküldve %1$s-nak/nek</string>
+  <string name="send_thank_failure_message">Nem sikerült elküldeni %1$s-nak/nek a köszönetet</string>
+  <string name="send_thank_failure_title">Köszönet küldése sikertelen</string>
+  <string name="send_thank_send">Köszönet küldése</string>
+  <string name="send_thank_notification_title">Köszönet küldése</string>
+  <string name="review_category_no_button_text">Jónak tűnik</string>
+  <string name="review_spam_no_button_text">Jónak tűnik</string>
+  <string name="review_copyright_no_button_text">Jónak tűnik</string>
+  <string name="review_thanks_yes_button_text">Miért ne?</string>
+  <string name="review_thanks_no_button_text">Következő kép</string>
+  <string name="menu_option_archived">Archiváltak megtekintése</string>
+  <string name="menu_option_unread">Olvasatlanok megtekintése</string>
+  <string name="image_chooser_title">Feltöltendő képek kiválasztása</string>
+  <string name="please_wait">Kérlek várj…</string>
+  <string name="exif_tag_name_author">Szerző</string>
+  <string name="exif_tag_name_location">Helyszín</string>
+  <string name="exif_tag_name_cameraModel">Fényképezőgép típusa</string>
+  <string name="exif_tag_name_serialNumbers">Sorozatszámok</string>
+  <string name="exif_tag_name_software">Szoftver</string>
 </resources>

@@ -7,17 +7,16 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
-import java.util.ArrayList;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.viewpager.widget.ViewPager;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -31,13 +30,11 @@ import timber.log.Timber;
 
 @Singleton
 public class ReviewController {
-    private String fileName;
-    public static final int NOTIFICATION_SEND_THANK = 0x102;
-    protected static ArrayList<String> categories;
-    public static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
+    private static final int NOTIFICATION_SEND_THANK = 0x102;
+    private static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
     private final DeleteHelper deleteHelper;
     @Nullable
-    public MwQueryPage.Revision firstRevision; // TODO: maybe we can expand this class to include fileName
+    MwQueryPage.Revision firstRevision; // TODO: maybe we can expand this class to include fileName
     @Inject
     MediaWikiApi mwApi;
     @Inject
@@ -46,58 +43,52 @@ public class ReviewController {
     private NotificationCompat.Builder notificationBuilder;
     private Media media;
 
-    private ViewPager viewPager;
-    private ReviewActivity reviewActivity;
-
     ReviewController(DeleteHelper deleteHelper, Context context) {
         this.deleteHelper = deleteHelper;
-        reviewActivity = (ReviewActivity) context;
-        viewPager = ((ReviewActivity) context).reviewPager;
+        CommonsApplication.createNotificationChannel(context.getApplicationContext());
+        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationBuilder = new NotificationCompat.Builder(context, CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
     }
 
-    public void onImageRefreshed(String fileName) {
-        this.fileName = fileName;
-        media = new Media("File:" + fileName);
-        ReviewController.categories = new ArrayList<>();
+    void onImageRefreshed(Media media) {
+        this.media = media;
     }
 
-    public void onCategoriesRefreshed(ArrayList<String> categories) {
-        ReviewController.categories = categories;
+    public Media getMedia() {
+        return media;
     }
 
-    public void swipeToNext() {
-        int nextPos = viewPager.getCurrentItem() + 1;
-        if (nextPos <= 3) {
-            viewPager.setCurrentItem(nextPos);
-        } else {
-            reviewActivity.runRandomizer();
-        }
+    public enum DeleteReason {
+        SPAM,
+        COPYRIGHT_VIOLATION
     }
 
-    public void reportSpam(@NonNull Activity activity) {
-        deleteHelper.askReasonAndExecute(new Media("File:" + fileName),
+    void reportSpam(@NonNull Activity activity, ReviewCallback reviewCallback) {
+        Timber.d("Report spam for %s", media.getFilename());
+        deleteHelper.askReasonAndExecute(media,
                 activity,
                 activity.getResources().getString(R.string.review_spam_report_question),
-                activity.getResources().getString(R.string.review_spam_report_problem));
+                DeleteReason.SPAM,
+                reviewCallback);
     }
 
-    public void reportPossibleCopyRightViolation(@NonNull Activity activity) {
-        deleteHelper.askReasonAndExecute(new Media("File:" + fileName),
+    void reportPossibleCopyRightViolation(@NonNull Activity activity, ReviewCallback reviewCallback) {
+        Timber.d("Report spam for %s", media.getFilename());
+        deleteHelper.askReasonAndExecute(media,
                 activity,
                 activity.getResources().getString(R.string.review_c_violation_report_question),
-                activity.getResources().getString(R.string.review_c_violation_report_problem));
+                DeleteReason.COPYRIGHT_VIOLATION,
+                reviewCallback);
     }
 
     @SuppressLint("CheckResult")
-    public void reportWrongCategory(@NonNull Activity activity) {
+    void reportWrongCategory(@NonNull Activity activity, ReviewCallback reviewCallback) {
         Context context = activity.getApplicationContext();
         ApplicationlessInjection
                 .getInstance(context)
                 .getCommonsApplicationComponent()
                 .inject(this);
 
-        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationBuilder = new NotificationCompat.Builder(context);
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast = Toast.makeText(context, context.getString(R.string.check_category_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
@@ -115,7 +106,8 @@ public class ReviewController {
 
             try {
                 editToken = mwApi.getEditToken();
-                if (editToken.equals("+\\")) {
+
+                if (editToken == null) {
                     return false;
                 }
                 publishProgress(context, 1);
@@ -131,15 +123,17 @@ public class ReviewController {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((result) -> {
-                    String message = "";
-                    String title = "";
+                    String message;
+                    String title;
 
                     if (result) {
                         title = context.getString(R.string.check_category_success_title);
                         message = context.getString(R.string.check_category_success_message, media.getDisplayTitle());
+                        reviewCallback.onSuccess();
                     } else {
                         title = context.getString(R.string.check_category_failure_title);
                         message = context.getString(R.string.check_category_failure_message, media.getDisplayTitle());
+                        reviewCallback.onFailure();
                     }
 
                     notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
@@ -171,15 +165,13 @@ public class ReviewController {
         notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
     }
 
-    @SuppressLint("CheckResult")
-    public void sendThanks(@NonNull Activity activity) {
+    @SuppressLint({"CheckResult", "StringFormatInvalid"})
+    void sendThanks(@NonNull Activity activity) {
         Context context = activity.getApplicationContext();
         ApplicationlessInjection
                 .getInstance(context)
                 .getCommonsApplicationComponent()
                 .inject(this);
-        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationBuilder = new NotificationCompat.Builder(context);
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast = Toast.makeText(context, context.getString(R.string.send_thank_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
@@ -195,7 +187,7 @@ public class ReviewController {
 
             try {
                 editToken = mwApi.getEditToken();
-                if (editToken.equals("+\\")) {
+                if (editToken == null) {
                     return false;
                 }
                 publishProgress(context, 1);
@@ -232,5 +224,11 @@ public class ReviewController {
                     notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
 
                 }, Timber::e);
+    }
+
+    public interface ReviewCallback {
+        void onSuccess();
+
+        void onFailure();
     }
 }

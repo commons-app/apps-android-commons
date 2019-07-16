@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Alan ffm
 * Chrumps
 * CiaPan
@@ -99,7 +100,7 @@
   <string name="title_activity_category_details">Kategoria</string>
   <string name="menu_about">O aplikacji</string>
   <string name="about_license">Aplikacja Wikimedia Commons jest oprogramowaniem typu open-source tworzonym i rozwijanym przez stypendystów i wolontariuszy ze społeczności Wikimedii. Fundacja Wikimedia nie bierze udziału w tworzeniu, rozwijaniu ani utrzymywaniu aplikacji.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"%1$s\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;u&gt;Polityka prywatności&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Twórcy&lt;/u&gt;</string>
   <string name="title_activity_about">O aplikacji</string>
@@ -227,10 +228,10 @@
   <string name="notifications_thank_you_edit">Dziękujemy za dokonanie edycji</string>
   <string name="notifications_mention">%1$s wspomniał o Tobie w %2$s.</string>
   <string name="toggle_view_button">Przełącz widok</string>
-  <string name="nearby_directions">WSKAZÓWKI</string>
-  <string name="nearby_wikidata">WIKIDANE</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">POWSZECHNE</string>
+  <string name="nearby_directions" fuzzy="true">WSKAZÓWKI</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDANE</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
+  <string name="nearby_commons" fuzzy="true">POWSZECHNE</string>
   <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">Pomiń samouczek</string>
   <string name="no_notifications">Nie znaleziono powiadomień</string>
@@ -247,7 +248,7 @@
   <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
   <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
   <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
-  <string name="search_tab_title_categories">KATEGORIE</string>
+  <string name="search_tab_title_categories" fuzzy="true">KATEGORIE</string>
   <string name="menu_set_wallpaper">Ustaw jako tapetę</string>
   <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
   <string name="quiz">Quiz</string>
@@ -270,9 +271,9 @@
   <string name="search_history_deleted">Historia wyszukiwania została usunięta</string>
   <string name="nominate_delete">Zgłoś do usunięcia</string>
   <string name="Achievements">Osiągnięcia</string>
-  <string name="statistics">STATYSTYKA</string>
+  <string name="statistics" fuzzy="true">STATYSTYKA</string>
   <string name="statistics_featured">Wyróżnione ilustracje</string>
-  <string name="level">POZIOM</string>
+  <string name="level" fuzzy="true">POZIOM</string>
   <string name="images_uploaded_explanation">Liczba zdjęć przesłanych do Commons za pomocą dowolnego oprogramowania</string>
   <string name="images_reverted_explanation">Procent zdjęć przesłanych do Commons, które nie zostały usunięte</string>
   <string name="images_used_explanation">Liczba zdjęć przesłanych do Commons, które zostały wykorzystane w artykułach Wikimedia</string>
@@ -289,4 +290,10 @@
   <string name="desc_language_Middle_East">Bliski Wschód</string>
   <string name="desc_language_Africa">Afryka</string>
   <string name="desc_language_Asia">Azja</string>
+  <string name="review_thanks_yes_button_text">Tak, czemu nie</string>
+  <string name="review_thanks_no_button_text">Następny obraz</string>
+  <string name="image_info">Informacje o obrazie</string>
+  <string name="no_categories_found">Nie znaleziono kategorii</string>
+  <string name="upload_cancelled">Anulowano przesyłanie</string>
+  <string name="previous_image_title_description_not_found">Brakuje danych co do poprzedniego tytułu lub opisu obrazu</string>
 </resources>

@@ -1,9 +1,12 @@
 package fr.free.nrw.commons.media;
 
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.Context.DOWNLOAD_SERVICE;
+import static fr.free.nrw.commons.Utils.handleWebUrl;
+
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,11 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -30,6 +28,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
@@ -43,11 +42,9 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.content.Context.DOWNLOAD_SERVICE;
-import static fr.free.nrw.commons.Utils.handleWebUrl;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
@@ -262,7 +259,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     // Initialize bookmark object
                     bookmark = new Bookmark(
                             m.getFilename(),
-                            m.getCreator()
+                            m.getCreator(),
+                            BookmarkPicturesContentProvider.uriForName(m.getFilename())
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
@@ -349,16 +347,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     public void onPageScrollStateChanged(int i) {
     }
 
+    public void onDataSetChanged() {
+        if (null != adapter) {
+            adapter.notifyDataSetChanged();
+        }
+    }
+
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);
 
         int getTotalMediaCount();
-
-        void notifyDatasetChanged();
-
-        void registerDataSetObserver(DataSetObserver observer);
-
-        void unregisterDataSetObserver(DataSetObserver observer);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)

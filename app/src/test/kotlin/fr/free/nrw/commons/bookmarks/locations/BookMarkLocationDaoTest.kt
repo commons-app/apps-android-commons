@@ -24,7 +24,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [21], application = TestCommonsApplication::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class BookMarkLocationDaoTest {
     private val columns = arrayOf(COLUMN_NAME,
             COLUMN_DESCRIPTION,

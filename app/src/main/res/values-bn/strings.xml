@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Aftabuzzaman
 * Bellayet
 * Elias Ahmmad
@@ -102,7 +103,7 @@
   <string name="title_activity_category_details">বিষয়শ্রেণী</string>
   <string name="menu_about">পরিচিতি</string>
   <string name="about_license">উইকিমিডিয়া কমন্স অ্যাপ হচ্ছে একটি উন্মুক্ত উৎস সম্বলিত অ্যাপ যা উইকিমিডিয়া সম্প্রদায়ের ব্যবহারকারী ও সেচ্ছাসেবকবৃন্দ কর্তৃক তৈরিকৃত এবং পরিচালিত। উইকিমিডিয়া ফাউন্ডেশন এই অ্যাপ তৈরি, উন্নয়ন বা রক্ষণাবেক্ষণে জড়িত নয়।</string>
-  <string name="about_improve">কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
+  <string name="about_improve">কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"%1$s\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
   <string name="about_privacy_policy">&lt;u&gt;গোপনীয়তার নীতি&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;কৃতিত্ব&lt;/u&gt;</string>
   <string name="title_activity_about">পরিচিতি</string>
@@ -279,6 +280,7 @@
   <string name="menu_search_button">অনুসন্ধান</string>
   <string name="search_commons">কমন্সে অনুসন্ধান করুন</string>
   <string name="title_activity_search">অনুসন্ধান</string>
+  <string name="search_tab_title_media">মিডিয়া</string>
   <string name="quiz">কুইজ</string>
   <string name="question">প্রশ্ন</string>
   <string name="result">ফলাফল</string>
@@ -288,6 +290,7 @@
   <string name="error_fetching_nearby_places">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
   <string name="add_description">+ বিবরণ যোগ করুন</string>
   <string name="nominate_delete">অপসারণের জন্য মনোনীত করুন</string>
+  <string name="delete">অপসারণ</string>
   <string name="Achievements">কৃতিত্বগুলি</string>
   <string name="statistics">পরিসংখ্যান</string>
   <string name="statistics_featured">নির্বাচিত ছবি</string>
@@ -320,6 +323,6 @@
   <string name="desc_language_Pacific">প্রশান্ত মহাসাগরীয়</string>
   <string name="yes_submit">হ্যাঁ, জমা দিন</string>
   <string name="no_go_back">না, ফিরে যান</string>
-  <string name="review_spam_report_problem">স্প্যাম</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
+  <string name="exif_tag_name_location">অবস্থান</string>
 </resources>

@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
+import android.net.Uri
 import android.os.RemoteException
 import com.nhaarman.mockito_kotlin.*
 import fr.free.nrw.commons.BuildConfig
@@ -20,7 +21,7 @@ import org.junit.Before
 import org.junit.Test
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [21], application = TestCommonsApplication::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class BookmarkPictureDaoTest {
 
     private val columns = arrayOf(COLUMN_MEDIA_NAME, COLUMN_CREATOR)
@@ -33,7 +34,7 @@ class BookmarkPictureDaoTest {
 
     @Before
     fun setUp() {
-        exampleBookmark = Bookmark("mediaName", "creatorName")
+        exampleBookmark = Bookmark("mediaName", "creatorName", Uri.EMPTY)
         testObject = BookmarkPicturesDao { client }
     }
 

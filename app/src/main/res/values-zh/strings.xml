@@ -2,8 +2,10 @@
 <!-- Authors:
 * 94rain
 * A Chinese Wikipedian
+* Abijeet Patro
 * Aefgh39622
 * Angrydog001
+* D41D8CD98F
 * Deathkon
 * Hydra
 * Kuailong
@@ -15,6 +17,7 @@
 * ZhaoGang
 * 佛壁灯
 * 夢蝶葬花
+* 神樂坂秀吉
 * 阿pp
 -->
 <resources>
@@ -23,6 +26,7 @@
   <string name="preference_category_appearance">外观</string>
   <string name="preference_category_general">一般</string>
   <string name="preference_category_feedback">反馈</string>
+  <string name="preference_category_privacy">隐私</string>
   <string name="preference_category_location">位置</string>
   <string name="app_name">共享资源</string>
   <string name="bullet">•</string>
@@ -107,7 +111,7 @@
   <string name="title_activity_review">同行评审</string>
   <string name="menu_about">关于</string>
   <string name="about_license">维基共享资源应用是由维基媒体社区的受助者和志愿者创建和维护的开源应用。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
-  <string name="about_improve">创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
+  <string name="about_improve">创建新的&lt;a href=\"%1$s\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
   <string name="about_privacy_policy">&lt;u&gt;隐私政策&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;制作人员&lt;/u&gt;</string>
   <string name="title_activity_about">关于</string>
@@ -181,6 +185,7 @@
   <string name="storage_permission_title">请求存储权限</string>
   <string name="read_storage_permission_rationale">需要权限：读取外部存储。应用不能在没有它的情况下访问您的图册。</string>
   <string name="write_storage_permission_rationale">需要权限：写入外部存储。应用不能在没有它的情况下访问您的相机/图册。</string>
+  <string name="location_permission_title">请求位置权限</string>
   <string name="location_permission_rationale">可选权限：获取当前位置以提供分类建议</string>
   <string name="ok">确定</string>
   <string name="title_activity_nearby">附近地点</string>
@@ -242,6 +247,7 @@
   <string name="navigation_item_info">教程</string>
   <string name="navigation_item_notification">通知</string>
   <string name="navigation_item_featured_images">特色</string>
+  <string name="navigation_item_review">复核</string>
   <string name="nearby_needs_permissions">附近地点不能在没有位置权限的情况下显示</string>
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享资源文件页面</string>
@@ -259,6 +265,7 @@
   <string name="upload_problem_different_geolocation">这张图片是在不同的地点拍摄的。</string>
   <string name="upload_problem_fbmd">请仅上传由您自己拍摄的图像。请勿上传您在他人的Facebook账户上所发现的图像。</string>
   <string name="upload_problem_do_you_continue">仍然上传这张图片？</string>
+  <string name="internet_downloaded">请仅上传由您自己拍摄的图像。请勿上传您从互联网下载的图像。</string>
   <string name="give_permission">提供权限</string>
   <string name="use_external_storage">使用外部存储</string>
   <string name="use_external_storage_summary">在您的设备上，使用应用中的照相机保存照片</string>
@@ -270,6 +277,8 @@
   <string name="nominate_deletion">提交删除</string>
   <string name="nominated_for_deletion">此图片已被提交删除。</string>
   <string name="nominated_see_more">&lt;u&gt;查看网页获取详情&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">提名%1$s删除。</string>
+  <string name="nominating_for_deletion_status">提名删除：%1$s</string>
   <string name="view_browser">在浏览器中预览</string>
   <string name="skip_login">忽略</string>
   <string name="navigation_item_login">登录</string>
@@ -325,6 +334,8 @@
   <string name="error_loading_subcategories">加载子分类时发生错误。</string>
   <string name="search_tab_title_media">媒体</string>
   <string name="search_tab_title_categories">分类</string>
+  <string name="explore_tab_title_featured">特色</string>
+  <string name="explore_tab_title_mobile">通过移动端上传</string>
   <string name="successful_wikidata_edit">图片已成功添加到维基数据上的%1$s！</string>
   <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
   <string name="menu_set_wallpaper">设为壁纸</string>
@@ -357,6 +368,7 @@
   <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
   <string name="search_history_deleted">搜索历史已删除</string>
   <string name="nominate_delete">提名删除</string>
+  <string name="delete">删除</string>
   <string name="Achievements">成就</string>
   <string name="statistics">统计</string>
   <string name="statistics_thanks">已收到感谢</string>
@@ -414,8 +426,8 @@
   <string name="deletion_reason_bad_for_my_privacy">我意识到这对我的隐私不利</string>
   <string name="deletion_reason_no_longer_want_public">我改变了主意，我不想再让公众看到它了</string>
   <string name="deletion_reason_not_interesting">对不起，这幅图对百科全书没什么意思</string>
-  <string name="uploaded_by_myself" fuzzy="true">我自己上传的在</string>
-  <string name="no_uploads" fuzzy="true">欢迎使用共享资源！\n\n通过触摸相机或画廊图标以上来上传您的首个媒体。</string>
+  <string name="uploaded_by_myself">由我自己上传在%1$s，使用于%2$d个条目。</string>
+  <string name="no_uploads">欢迎使用共享资源！\n\n通过点击添加按钮以上传您的首个媒体。</string>
   <string name="desc_language_Worldwide">世界各地</string>
   <string name="desc_language_America">美洲</string>
   <string name="desc_language_Europe">欧洲</string>
@@ -438,11 +450,35 @@
   <string name="achievements_fetch_failed">有错误发生，无法获取你的成就</string>
   <string name="ends_on">结束于：</string>
   <string name="display_campaigns">显示活动</string>
-  <string name="display_campaigns_explanation" fuzzy="true">点击此处显示正在进行的活动</string>
+  <string name="display_campaigns_explanation">显示正在进行的活动</string>
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
   <string name="bad_token_error_proposed_solution">因为编辑令牌失效上传失败。请尝试登出后重新登录。</string>
   <string name="error_processing_image">处理图像时出错。请再试一次！</string>
+  <string name="nominate_for_deletion_done">完成</string>
+  <string name="nominate_for_deletion_notify_user">在讨论页上通知用户</string>
+  <string name="notsure">不确定</string>
+  <string name="send_thank_success_title">发送感谢成功</string>
+  <string name="send_thank_failure_title">发送感谢失败</string>
+  <string name="send_thank_send">发送感谢</string>
+  <string name="send_thank_notification_title">发送感谢</string>
+  <string name="send_thank_toast">向%1$s发送感谢</string>
+  <string name="review_copyright">它是否符合版权方针？</string>
+  <string name="review_category">它是否被正确分类？</string>
+  <string name="review_spam">它是否在维基共享资源的收录范围内？</string>
+  <string name="review_thanks">您是否要感谢贡献者？</string>
+  <string name="review_copyright_explanation">标志、屏幕截图和电影海报通常侵犯版权。\n提名删除候选请点击“否”。</string>
+  <string name="review_no_category">该文件未被分类！</string>
+  <string name="review_spam_report_question">该文件不在收录范围内，原因是</string>
+  <string name="review_c_violation_report_question">该文件侵犯版权，原因是</string>
+  <string name="review_category_yes_button_text">否，分类错误</string>
+  <string name="review_category_no_button_text">看起来没问题</string>
+  <string name="review_spam_yes_button_text">否，不在收录范围内</string>
+  <string name="review_spam_no_button_text">看起来没问题</string>
+  <string name="review_copyright_yes_button_text">否，侵犯版权</string>
+  <string name="review_copyright_no_button_text">看起来没问题</string>
+  <string name="review_thanks_yes_button_text">是，为什么不呢</string>
+  <string name="review_thanks_no_button_text">下一张图片</string>
   <plurals name="receiving_shared_content">
     <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
   </plurals>
@@ -457,4 +493,24 @@
   <string name="error_occurred_in_picking_images">选择图片时出错</string>
   <string name="image_chooser_title">选择要上传的图片</string>
   <string name="please_wait">请稍候……</string>
+  <string name="previous_image_title_description">复制先前的标题及描述</string>
+  <string name="previous_button_tooltip_message">点击复用您在先前图片中填写的标题及描述并稍加修改来匹配当前图像。</string>
+  <string name="skip_image">跳过该图片</string>
+  <string name="exif_tag_name_author">作者</string>
+  <string name="exif_tag_name_copyright">著作权</string>
+  <string name="exif_tag_name_location">位置</string>
+  <string name="exif_tag_name_cameraModel">相机型号</string>
+  <string name="exif_tag_name_serialNumbers">序列号</string>
+  <string name="exif_tag_name_software">软件</string>
+  <string name="share_via">分享到...</string>
+  <string name="image_info">图像信息</string>
+  <string name="no_categories_found">找不到分类</string>
+  <string name="upload_cancelled">取消上传</string>
+  <string name="dialog_box_text_nomination">%1$s为何应被删除？</string>
+  <string name="delete_helper_ask_spam_selfie">自拍</string>
+  <string name="delete_helper_ask_spam_blurry">模糊</string>
+  <string name="delete_helper_ask_spam_nonsense">无意义</string>
+  <string name="delete_helper_ask_spam_other">其他</string>
+  <string name="delete_helper_ask_reason_copyright_logo">标志</string>
+  <string name="delete_helper_ask_reason_copyright_other">其他</string>
 </resources>

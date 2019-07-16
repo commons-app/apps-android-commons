@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 
@@ -87,8 +88,8 @@ public class CampaignView extends SwipableCardView {
                 tvTitle.setText(campaign.getTitle());
                 tvDescription.setText(campaign.getDescription());
                 try {
-                    Date startDate = DateUtil.getIso8601DateFormatShort().parse(campaign.getStartDate());
-                    Date endDate = DateUtil.getIso8601DateFormatShort().parse(campaign.getEndDate());
+                    Date startDate = CommonsDateUtil.getIso8601DateFormatShort().parse(campaign.getStartDate());
+                    Date endDate = CommonsDateUtil.getIso8601DateFormatShort().parse(campaign.getEndDate());
                     tvDates.setText(String.format("%1s - %2s", DateUtil.getExtraShortDateString(startDate),
                             DateUtil.getExtraShortDateString(endDate)));
                 } catch (ParseException e) {

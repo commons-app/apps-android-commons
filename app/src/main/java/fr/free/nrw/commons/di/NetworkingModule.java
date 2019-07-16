@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.di;
 
 import android.content.Context;
-import android.net.Uri;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
+import org.wikipedia.dataclient.ServiceFactory;
+import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonUtil;
 
 import java.io.File;
@@ -22,6 +22,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.review.ReviewInterface;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -55,7 +56,7 @@ public class NetworkingModule {
     @Singleton
     public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
-            Timber.tag("OkHttp").d(message);
+            Timber.tag("OkHttp").v(message);
         });
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return httpLoggingInterceptor;
@@ -72,7 +73,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
-                                                          @Named("tools_force") HttpUrl toolsForgeUrl,
+                                                          @Named("tools_forge") HttpUrl toolsForgeUrl,
                                                           @Named("default_preferences") JsonKvStore defaultKvStore,
                                                           Gson gson) {
         return new OkHttpJsonApiClient(okHttpClient,
@@ -85,15 +86,15 @@ public class NetworkingModule {
     }
 
     @Provides
-    @Named("commons_mediawiki_url")
+    @Named("wikimedia_api_host")
     @NonNull
     @SuppressWarnings("ConstantConditions")
-    public HttpUrl provideMwUrl() {
-        return HttpUrl.parse(BuildConfig.COMMONS_URL);
+    public String provideMwApiUrl() {
+        return BuildConfig.WIKIMEDIA_API_HOST;
     }
 
     @Provides
-    @Named("tools_force")
+    @Named("tools_forge")
     @NonNull
     @SuppressWarnings("ConstantConditions")
     public HttpUrl provideToolsForgeUrl() {
@@ -110,4 +111,16 @@ public class NetworkingModule {
         return GsonUtil.getDefaultGson();
     }
 
+    @Provides
+    @Singleton
+    @Named("commons-wikisite")
+    public WikiSite provideCommonsWikiSite() {
+        return new WikiSite(BuildConfig.COMMONS_URL);
+    }
+
+    @Provides
+    @Singleton
+    public ReviewInterface provideReviewInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
+    }
 }

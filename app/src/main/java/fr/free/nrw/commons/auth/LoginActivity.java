@@ -131,6 +131,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit.addTextChangedListener(textWatcher);
         passwordEdit.addTextChangedListener(textWatcher);
         twoFactorEdit.addTextChangedListener(textWatcher);
+        
+        if (ConfigUtils.isBetaFlavour()) {
+            loginCredentials.setText(getString(R.string.login_credential));
+        } else {
+            loginCredentials.setVisibility(View.GONE);
+        }
     }
 
     @OnFocusChange(R.id.login_username)
@@ -173,12 +179,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 })
                 .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                 .show();
-
-        if (ConfigUtils.isBetaFlavour()) {
-            loginCredentials.setText(getString(R.string.login_credential));
-        } else {
-            loginCredentials.setVisibility(View.GONE);
-        }
     }
 
     @OnClick(R.id.forgot_password)

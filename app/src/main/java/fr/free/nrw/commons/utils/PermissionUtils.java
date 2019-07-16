@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
+
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
@@ -14,6 +15,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.BasePermissionListener;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 
@@ -25,7 +27,7 @@ public class PermissionUtils {
      It open the app settings from where the user can manually give us the required permission.
      * @param activity
      */
-    public static void askUserToManuallyEnablePermissionFromSettings(Activity activity) {
+    private static void askUserToManuallyEnablePermissionFromSettings(Activity activity) {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
         intent.setData(uri);
@@ -48,6 +50,9 @@ public class PermissionUtils {
      * Checks for a particular permission and runs the runnable to perform an action when the permission is granted
      * Also, it shows a rationale if needed
      *
+     * rationaleTitle and rationaleMessage can be invalid @StringRes. If the value is -1 then no permission rationale
+     * will be displayed and permission would be requested
+     *
      * Sample usage:
      *
      * PermissionUtils.checkPermissionsAndPerformAction(activity,
@@ -56,12 +61,20 @@ public class PermissionUtils {
      *                 R.string.storage_permission_title,
      *                 R.string.write_storage_permission_rationale);
      *
+     * If you don't want the permission rationale to be shown then use:
+     *
+     * PermissionUtils.checkPermissionsAndPerformAction(activity,
+     *                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+     *                 () -> initiateCameraUpload(activity),
+     *                 - 1, -1);
+     *
+     *
      *
      * @param activity activity requesting permissions
      * @param permission the permission being requests
      * @param onPermissionGranted the runnable to be executed when the permission is granted
-     * @param rationaleTitle rationale title to be displayed when permission was denied
-     * @param rationaleMessage rationale message to be displayed when permission was denied
+     * @param rationaleTitle rationale title to be displayed when permission was denied. It can be an invalid @StringRes
+     * @param rationaleMessage rationale message to be displayed when permission was denied. It can be an invalid @StringRes
      */
     public static void checkPermissionsAndPerformAction(Activity activity, String permission,
         Runnable onPermissionGranted, @StringRes int rationaleTitle,
@@ -91,7 +104,6 @@ public class PermissionUtils {
      * @param rationaleTitle rationale title to be displayed when permission was denied
      * @param rationaleMessage rationale message to be displayed when permission was denied
      */
-
     public static void checkPermissionsAndPerformAction(Activity activity, String permission,
         Runnable onPermissionGranted, Runnable onPermissionDenied, @StringRes int rationaleTitle,
         @StringRes int rationaleMessage) {
@@ -118,6 +130,10 @@ public class PermissionUtils {
                 @Override
                 public void onPermissionRationaleShouldBeShown(PermissionRequest permission,
                     PermissionToken token) {
+                    if (rationaleTitle == -1 && rationaleMessage == -1) {
+                        token.continuePermissionRequest();
+                        return;
+                    }
                     DialogUtil.showAlertDialog(activity, activity.getString(rationaleTitle),
                         activity.getString(rationaleMessage),
                         activity.getString(android.R.string.ok),
@@ -127,4 +143,5 @@ public class PermissionUtils {
             })
             .check();
     }
+
 }

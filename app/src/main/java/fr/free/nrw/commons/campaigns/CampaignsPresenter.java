@@ -15,6 +15,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.MvpView;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -27,7 +28,7 @@ import timber.log.Timber;
  * success and error
  */
 @Singleton
-public class CampaignsPresenter implements BasePresenter {
+public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
     private final OkHttpJsonApiClient okHttpJsonApiClient;
 
     private ICampaignsView view;
@@ -39,8 +40,9 @@ public class CampaignsPresenter implements BasePresenter {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
     }
 
-    @Override public void onAttachView(MvpView view) {
-        this.view = (ICampaignsView) view;
+    @Override
+    public void onAttachView(ICampaignsView view) {
+        this.view = view;
     }
 
     @Override public void onDetachView() {
@@ -79,8 +81,9 @@ public class CampaignsPresenter implements BasePresenter {
                         Collections.sort(campaigns, (campaign, t1) -> {
                             Date date1, date2;
                             try {
-                                date1 = DateUtil.getIso8601DateFormatShort().parse(campaign.getStartDate());
-                                date2 = DateUtil.getIso8601DateFormatShort().parse(t1.getStartDate());
+
+                                date1 = CommonsDateUtil.getIso8601DateFormatShort().parse(campaign.getStartDate());
+                                date2 = CommonsDateUtil.getIso8601DateFormatShort().parse(t1.getStartDate());
                             } catch (ParseException e) {
                                 e.printStackTrace();
                                 return -1;
@@ -91,8 +94,8 @@ public class CampaignsPresenter implements BasePresenter {
                         Date currentDate = new Date();
                         try {
                             for (Campaign aCampaign : campaigns) {
-                                campaignEndDate = DateUtil.getIso8601DateFormatShort().parse(aCampaign.getEndDate());
-                                campaignStartDate = DateUtil.getIso8601DateFormatShort().parse(aCampaign.getStartDate());
+                                campaignEndDate = CommonsDateUtil.getIso8601DateFormatShort().parse(aCampaign.getEndDate());
+                                campaignStartDate = CommonsDateUtil.getIso8601DateFormatShort().parse(aCampaign.getStartDate());
                                 if (campaignEndDate.compareTo(currentDate) >= 0
                                     && campaignStartDate.compareTo(currentDate) <= 0) {
                                     campaign = aCampaign;

@@ -93,14 +93,14 @@ public class ExploreActivity
         featuredArguments.putString("categoryName", FEATURED_IMAGES_CATEGORY);
         featuredImagesListFragment.setArguments(featuredArguments);
         fragmentList.add(featuredImagesListFragment);
-        titleList.add(getString(R.string.explore_tab_title_featured));
+        titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
 
         mobileImagesListFragment = new CategoryImagesListFragment();
         Bundle mobileArguments = new Bundle();
         mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
         mobileImagesListFragment.setArguments(mobileArguments);
         fragmentList.add(mobileImagesListFragment);
-        titleList.add(getString(R.string.explore_tab_title_mobile));
+        titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
@@ -142,14 +142,6 @@ public class ExploreActivity
     }
 
     /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void notifyDatasetChanged() {
-    }
-
-    /**
      * This method is called on success of API call for featured images or mobile uploads.
      * The viewpager will notified that number of items have changed.
      */
@@ -159,23 +151,6 @@ public class ExploreActivity
         }
     }
 
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
-    }
 
     /**
      * This method is called on backPressed of anyFragment in the activity.

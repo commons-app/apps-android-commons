@@ -20,21 +20,16 @@
         />
 
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/loadingContributionsProgressBar"
-        />
-    <GridView
+      android:id="@+id/loadingContributionsProgressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:visibility="gone"
+      />
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contributionsList"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:stretchMode="columnWidth"
-        android:columnWidth="240dp"
-        android:numColumns="auto_fit"
-        android:listSelector="@null"
-        android:fadingEdge="none"
-        android:fastScrollEnabled="true"
         />
 
     <LinearLayout

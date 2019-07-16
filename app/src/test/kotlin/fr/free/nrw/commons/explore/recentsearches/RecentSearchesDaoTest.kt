@@ -21,7 +21,7 @@ import org.robolectric.annotation.Config
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [21], application = TestCommonsApplication::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class RecentSearchesDaoTest {
 
     private val columns = arrayOf(COLUMN_ID, COLUMN_NAME, COLUMN_LAST_USED)
