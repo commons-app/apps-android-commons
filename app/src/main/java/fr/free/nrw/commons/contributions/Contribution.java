@@ -69,7 +69,21 @@ public class  Contribution extends Media {
     private String wikiDataEntityId;
     private Uri contentProviderUri;
     private String dateCreatedSource;
+
+    /**
+     * Each depiction loaded in depictions activity is associated with a wikidata entity id,
+     * this Id is in turn used to upload depictions to wikibase
+     */
     private ArrayList<String> depictionsEntityIds;
+    /**
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     * This hasmap stores the list of multilingual captions, where
+     * key of the HashMap is the language and value is the caption in the corresponding language
+     * Ex: key = "en", value: "<description in short in English>"
+     *     key = "de" , value: "<description in german>"
+     */
     private HashMap<String, String> captions;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,

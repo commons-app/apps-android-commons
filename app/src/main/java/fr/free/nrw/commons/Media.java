@@ -47,6 +47,11 @@ public class Media implements Parcelable {
     private String thumbUrl;
     protected String imageUrl;
     protected String filename;
+    /**
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     */
     private String caption;
     protected String description; // monolingual description on input...
     protected String discussion;
@@ -62,9 +67,19 @@ public class Media implements Parcelable {
     protected ArrayList<String> depictions;
     protected boolean requestedDeletion;
     private Map<String, String> descriptions; // multilingual descriptions as loaded
+    /**
+     * This hasmap stores the list of multilingual captions, where
+     * key of the HashMap is the language and value is the caption in the corresponding language
+     * Ex: key = "en", value: "<description in short in English>"
+     *     key = "de" , value: "<description in german>"
+     */
     private HashMap<String, String> captions;
     private HashMap<String, Object> tags = new HashMap<>();
     private @Nullable LatLng coordinates;
+
+    /**
+     * Attribute of standard page object as returned by the MediaWiki API.
+     */
     private String pageId;
 
     /**
@@ -92,6 +107,7 @@ public class Media implements Parcelable {
      * @param localUri Media URI
      * @param imageUrl Media image URL
      * @param filename Media filename
+     * @param captions Media captions
      * @param description Media description
      * @param dataLength Media date length
      * @param dateCreated Media creation date
@@ -302,9 +318,26 @@ public class Media implements Parcelable {
         return description;
     }
 
+    /**
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     *
+     * @return caption
+     */
+
     public String getCaption() {
         return caption;
     }
+
+    /**
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     *
+     * key of the HashMap is the language and value is the caption in the corresponding language
+     *
+     * returns list of captions stored in hashmap*/
 
     public HashMap<String, String> getCaptions() {
         return captions;
@@ -504,7 +537,7 @@ public class Media implements Parcelable {
     /**
      * Gets media description in preferred language
      * @param preferredLanguage Language preferred
-     * @return UploadMediaDetail in preferred language
+     * @return Description in preferred language
      */
     public String getDescription(String preferredLanguage) {
         if (descriptions.containsKey(preferredLanguage)) {
