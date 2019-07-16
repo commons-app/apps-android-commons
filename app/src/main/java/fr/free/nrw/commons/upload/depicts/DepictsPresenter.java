@@ -113,10 +113,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                         }
                 );
         compositeDisposable.add(searchDepictsDisposable);
-        depictedItemList.add(new DepictedItem("monument", "desc", null, false));
-        depictedItemList.add(new DepictedItem("scultpture", "desc", null, false));
-        depictedItemList.add(new DepictedItem("monument", "desc", null, false));
-        depictedItemList.add(new DepictedItem("scultpture", "desc", null, false));
         view.setDepictsList(depictedItemList);
     }
 
