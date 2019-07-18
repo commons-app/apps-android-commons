@@ -255,4 +255,38 @@ public class CategoriesModel{
         this.categoriesCache.clear();
         this.selectedCategories.clear();
     }
+
+    /**
+     * Search for categories
+     */
+    public Observable<CategoryItem> searchCategories(String query, List<String> imageTitleList) {
+        if (TextUtils.isEmpty(query)) {
+            return gpsCategories()
+                    .concatWith(titleCategories(imageTitleList))
+                    .concatWith(recentCategories());
+        }
+
+        return mwApi
+                .searchCategories(query, SEARCH_CATS_LIMIT)
+                .map(s -> new CategoryItem(s, false));
+    }
+
+    /**
+     * Returns default categories
+     */
+    public Observable<CategoryItem> getDefaultCategories(List<String> titleList) {
+        Observable<CategoryItem> directCategories = directCategories();
+        if (hasDirectCategories()) {
+            Timber.d("Image has direct Categories");
+            return directCategories
+                    .concatWith(gpsCategories())
+                    .concatWith(titleCategories(titleList))
+                    .concatWith(recentCategories());
+        } else {
+            Timber.d("Image has no direct Categories");
+            return gpsCategories()
+                    .concatWith(titleCategories(titleList))
+                    .concatWith(recentCategories());
+        }
+    }
 }
