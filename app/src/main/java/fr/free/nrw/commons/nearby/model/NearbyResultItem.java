@@ -72,6 +72,6 @@ public class NearbyResultItem {
     }
 
     public ResultTuple getPic() {
-        return pic;
+        return pic == null ? new ResultTuple():pic;
     }
 }
