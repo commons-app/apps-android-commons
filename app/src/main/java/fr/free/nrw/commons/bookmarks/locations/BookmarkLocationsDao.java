@@ -156,7 +156,8 @@ public class BookmarkLocationsDao {
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
                 location,
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORY)),
-                builder.build()
+                builder.build(),
+                null
         );
     }
 
@@ -189,6 +190,7 @@ public class BookmarkLocationsDao {
         static final String COLUMN_WIKIPEDIA_LINK = "location_wikipedia_link";
         static final String COLUMN_WIKIDATA_LINK = "location_wikidata_link";
         static final String COLUMN_COMMONS_LINK = "location_commons_link";
+        static final String COLUMN_PIC = "location_pic";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -202,7 +204,8 @@ public class BookmarkLocationsDao {
                 COLUMN_IMAGE_URL,
                 COLUMN_WIKIPEDIA_LINK,
                 COLUMN_WIKIDATA_LINK,
-                COLUMN_COMMONS_LINK
+                COLUMN_COMMONS_LINK,
+                COLUMN_PIC
         };
 
         static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -218,7 +221,8 @@ public class BookmarkLocationsDao {
                 + COLUMN_IMAGE_URL + " STRING,"
                 + COLUMN_WIKIPEDIA_LINK + " STRING,"
                 + COLUMN_WIKIDATA_LINK + " STRING,"
-                + COLUMN_COMMONS_LINK + " STRING"
+                + COLUMN_COMMONS_LINK + " STRING,"
+                + COLUMN_PIC + " STRING"
                 + ");";
 
         public static void onCreate(SQLiteDatabase db) {
