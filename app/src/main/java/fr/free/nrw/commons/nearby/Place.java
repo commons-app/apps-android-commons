@@ -177,6 +177,7 @@ public class Place implements Parcelable {
                 ", category='" + category + '\'' +
                 ", distance='" + distance + '\'' +
                 ", siteLinks='" + siteLinks.toString() + '\'' +
+                ", pic='" + pic + '\'' +
                 '}';
     }
 
