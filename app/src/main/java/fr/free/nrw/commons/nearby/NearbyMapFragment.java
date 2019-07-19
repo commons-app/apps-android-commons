@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -1042,14 +1043,19 @@ public class NearbyMapFragment extends DaggerFragment {
 
 
     public void updateMarker(boolean isBookmarked, Place place) {
+        Log.d("deneme4","burada2 update marker");
+
 
         VectorDrawableCompat vectorDrawable;
         if (isBookmarked) {
             vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_bookmark_marker, getContext().getTheme()
             );
-        }
-        else {
+        } else if (place.pic != "") {
+            vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_green, getContext().getTheme()
+            );
+        } else {
             vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_map_marker, getContext().getTheme()
             );
