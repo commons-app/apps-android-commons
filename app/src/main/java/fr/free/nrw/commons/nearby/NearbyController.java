@@ -3,6 +3,8 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.util.Log;
+
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -144,6 +146,7 @@ public class NearbyController {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
         VectorDrawableCompat vectorDrawable = null;
+        VectorDrawableCompat vectorDrawableGreen = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_bookmark_marker, context.getTheme()
@@ -179,11 +182,15 @@ public class NearbyController {
             vectorDrawable = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
             );
+            vectorDrawableGreen = VectorDrawableCompat.create(
+                    context.getResources(), R.drawable.ic_custom_map_marker_green, context.getTheme()
+            );
         } catch (Resources.NotFoundException e) {
             // ignore when running tests.
         }
         if (vectorDrawable != null) {
             Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+            Bitmap iconGreen = UiUtils.getBitmap(vectorDrawableGreen);
 
             for (Place place : placeList) {
                 String distance = formatDistanceBetween(curLatLng, place.location);
@@ -196,9 +203,15 @@ public class NearbyController {
                                 place.location.getLatitude(),
                                 place.location.getLongitude()));
                 nearbyBaseMarker.place(place);
-                nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                        .fromBitmap(icon));
-
+                if (place.pic != "") {
+                    if (iconGreen != null) {
+                        nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                                .fromBitmap(iconGreen));
+                    }
+                } else {
+                    nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                            .fromBitmap(icon));
+                }
                 baseMarkerOptions.add(nearbyBaseMarker);
             }
         }
