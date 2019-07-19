@@ -2,7 +2,9 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,6 +32,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
     private List<UploadMediaDetail> uploadMediaDetails;
     private Callback callback;
+    private EventListener eventListener;
 
     private BiMap<AdapterView, String> selectedLanguages;
     private String savedLanguageValue;
@@ -42,6 +45,10 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
     public void setCallback(Callback callback) {
         this.callback = callback;
+    }
+
+    public void setEventListener(EventListener eventListener) {
+        this.eventListener = eventListener;
     }
 
     public void setItems(List<UploadMediaDetail> uploadMediaDetails) {
@@ -78,7 +85,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
     public void addDescription(UploadMediaDetail uploadMediaDetail) {
         this.uploadMediaDetails.add(uploadMediaDetail);
-        notifyItemInserted(uploadMediaDetails.size());
+        //notifyItemInserted(uploadMediaDetails.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -114,6 +121,26 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             } else {
                 descItemEditText.setText("");
             }
+
+            captionItemEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (s.length() != 0) {
+                        eventListener.onEvent(true);
+                    } else eventListener.onEvent(false);
+                }
+            });
+
             if (position == 0) {
 
                 captionItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
@@ -236,6 +263,10 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     public interface Callback {
 
         void showAlert(int mediaDetailDescription, int descriptionInfo);
+    }
+
+    public interface EventListener {
+        void onEvent(Boolean data);
     }
 
     /**

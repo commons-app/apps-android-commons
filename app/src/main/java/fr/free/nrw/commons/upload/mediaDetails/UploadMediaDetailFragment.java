@@ -57,7 +57,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
-        UploadMediaDetailsContract.View {
+        UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -189,6 +189,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private void initRecyclerView() {
         uploadMediaDetailAdapter = new UploadMediaDetailAdapter();
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
+        uploadMediaDetailAdapter.setEventListener(this::onEvent);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(uploadMediaDetailAdapter);
     }
@@ -205,7 +206,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
         uploadItem.setMediaDetails(uploadMediaDetailAdapter.getUploadMediaDetails());
-        //uploadItem.setCaptions(captionsAdapter.getCaptions());
         presenter.verifyImageQuality(uploadItem, true);
     }
 
@@ -346,6 +346,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         Utils.handleGeoCoordinates(getContext(),
             new LatLng(uploadItem.getGpsCoords().getDecLatitude(),
                 uploadItem.getGpsCoords().getDecLongitude(), 0.0f));
+    }
+
+    @Override
+    public void onEvent(Boolean data) {
+        btnNext.setEnabled(data);
+        btnNext.setClickable(data);
+        btnNext.setAlpha(data ? 1.0f: 0.5f);
     }
 
 
