@@ -11,10 +11,12 @@ import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import fr.free.nrw.commons.settings.Prefs;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -131,12 +133,8 @@ public class ContributionDao {
      */
 
     private String convertMapToString(HashMap<String, String> captions) {
-        StringBuilder captionListString = new StringBuilder();
-        for (Map.Entry<String, String> entry : captions.entrySet()) {
-            String individualDescription = String.format("{{%s|1=%s}}", entry.getKey(), entry.getValue());
-            captionListString.append(individualDescription);
-        }
-        return String.valueOf(captionListString);
+        JSONObject json = new JSONObject(captions);
+        return json.toString();
     }
 
     public Contribution fromCursor(Cursor cursor) {
@@ -181,8 +179,10 @@ public class ContributionDao {
     }
 
     private HashMap<String, String> formatCaption(String jsonCaption) {
-        HashMap<String, String> captions = new Gson().fromJson(jsonCaption, HashMap.class);
-        return captions;
+        Map<String, String> captions = new Gson().fromJson(
+                jsonCaption, new TypeToken<HashMap<String, String>>() {}.getType()
+        );
+        return (HashMap<String, String>) captions;
     }
 
     @Nullable

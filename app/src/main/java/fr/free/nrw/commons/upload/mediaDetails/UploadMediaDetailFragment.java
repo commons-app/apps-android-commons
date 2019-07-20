@@ -130,7 +130,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps()));
-        //title = new Title();
         initRecyclerView();
         initPresenter();
         presenter.receiveImage(uploadableFile, source, place);

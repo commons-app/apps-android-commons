@@ -21,7 +21,7 @@ public interface DepictsContract {
 
         void showProgress(boolean shouldShow);
 
-        void showError(String error);
+        void showError();
 
         void setDepictsList(List<DepictedItem> depictedItemList);
     }
@@ -32,7 +32,7 @@ public interface DepictsContract {
 
         void onDepictItemClicked(DepictedItem depictedItem);
 
-        void searchForDepictions(String query, List<UploadMediaDetail> mediaDetailList);
+        void searchForDepictions(String query);
 
         void verifyDepictions();
     }

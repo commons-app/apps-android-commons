@@ -4,6 +4,7 @@ import com.nhaarman.mockito_kotlin.verify
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
+import fr.free.nrw.commons.upload.depicts.DepictsFragment
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem
 import io.reactivex.Observable
@@ -22,6 +23,8 @@ class DepictsPresenterTest {
     internal var view: DepictsContract.View? = null
 
     var depictsPresenter: DepictsPresenter? = null
+
+    var depictsFragment: DepictsFragment? = null
 
     var testScheduler: TestScheduler? = null
 
@@ -42,9 +45,11 @@ class DepictsPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         testScheduler = TestScheduler()
+        depictedItem = DepictedItem("label", "desc", null, false, "entityId")
         depictedItems.add(depictedItem)
         testObservable = Observable.just(depictedItem)
         depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler)
+        depictsFragment = DepictsFragment()
         depictsPresenter?.onAttachView(view)
     }
 
@@ -85,5 +90,27 @@ class DepictsPresenterTest {
         testScheduler?.triggerActions()
         verify(view)?.setDepictsList(null)
         verify(view)?.showProgress(false)
+    }
+
+    @Test
+    fun setSingleDepiction() {
+        Mockito.`when`(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
+        Mockito.`when`(repository?.selectedDepictions).thenReturn(depictedItems)
+        Mockito.`when`(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        depictsPresenter?.onDepictItemClicked(depictedItem)
+        depictsPresenter?.verifyDepictions()
+        verify(view)?.goToNextScreen()
+    }
+
+    @Test
+    fun setMultipleDepictions() {
+        Mockito.`when`(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
+        Mockito.`when`(repository?.selectedDepictions).thenReturn(depictedItems)
+        Mockito.`when`(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        depictsPresenter?.onDepictItemClicked(depictedItem)
+        val depictedItem2 = DepictedItem("label2", "desc2", null, false, "entityid2")
+        depictsPresenter?.onDepictItemClicked(depictedItem2)
+        depictsPresenter?.verifyDepictions()
+        verify(view)?.goToNextScreen()
     }
 }

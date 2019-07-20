@@ -77,7 +77,7 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
      */
 
     @Override
-    public void searchForDepictions(String query, List<UploadMediaDetail> mediaDetailList) {
+    public void searchForDepictions(String query) {
         List<DepictedItem> depictedItemList = new ArrayList<>();
         List<String> imageTitleList = getImageTitleList();
         Observable<DepictedItem> distinctDepictsObservable = Observable
@@ -85,7 +85,7 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
                 .doOnSubscribe(disposable -> {
-                    view.showError(null);
+                    view.showError();
                     view.showProgress(true);
                     view.setDepictsList(null);
                 })
@@ -105,7 +105,7 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                             view.showProgress(false);
 
                             if (depictedItemList.isEmpty()) {
-                                view.showError(String.valueOf(R.string.no_depiction_found));
+                                view.showError();
                             }
                         }
                 );

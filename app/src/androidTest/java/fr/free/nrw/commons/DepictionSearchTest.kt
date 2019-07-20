@@ -1,5 +1,10 @@
 package fr.free.nrw.commons
 
+import androidx.test.rule.GrantPermissionRule
+import androidx.test.runner.AndroidJUnit4
+import org.junit.Rule
+import org.junit.runner.RunWith
+import android.Manifest
 import android.net.Uri
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
@@ -7,28 +12,26 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.depicts.DepictsFragment
 import org.hamcrest.Matchers
 import org.hamcrest.core.AllOf
-import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class UploadActivityTest {
+class DepictionSearchTest {
     @get:Rule
     var activityRule = ActivityTestRule(UploadActivity::class.java)
-
- @Test
-    fun orientationChange() {
-        UITestHelper.changeOrientation(activityRule)
-    }
 
     @Test
     fun TestForCaptionsAndDepictions() {
         val imageUri = Uri.parse("file://mnt/sdcard/image.jpg")
+
+        // Build a result to return from the Camera app
+
+
+        // Stub out the File picker. When an intent is sent to the File picker, this tells
+        // Espresso to respond with the ActivityResult we just created
 
         Espresso.onView(ViewMatchers.withId(R.id.caption_item_edit_text))
                 .perform(ViewActions.typeText("caption in english"))

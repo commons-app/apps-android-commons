@@ -124,8 +124,8 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     }
 
     @Override
-    public void showError(String error) {
-        depictsSearchContainer.setError(error);
+    public void showError() {
+        depictsSearchContainer.setError(getString(R.string.no_depiction_found));
     }
 
     @Override
@@ -174,7 +174,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     private void searchForDepictions(String query) {
         if (!TextUtils.isEmpty(query)) {
             Log.e("searchline175",query);
-            presenter.searchForDepictions(query, mediaTitleList);
+            presenter.searchForDepictions(query);
         }
     }
 

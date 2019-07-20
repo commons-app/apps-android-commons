@@ -19,6 +19,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.util.*
+import kotlin.collections.HashMap
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -330,8 +331,8 @@ class ContributionDaoTest {
             }
 
     private fun createContribution(isMultiple: Boolean, localUri: Uri?, imageUrl: String?, dateUploaded: Date?, filename: String?): Contribution {
-        val contribution = Contribution(localUri, imageUrl, filename,"captions", "desc", 222L, Date(321L), dateUploaded,
-                "create", "edit", "coords").apply {
+        val contribution = Contribution(localUri, imageUrl, filename, HashMap<String, String>(), "desc",  222L, Date(321L),dateUploaded, "creator",
+                "edit summary", ArrayList<String>(), "coords").apply {
             state = STATE_COMPLETED
             transferred = 333L
             source = SOURCE_CAMERA
