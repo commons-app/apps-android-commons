@@ -48,8 +48,21 @@ public class CategoriesModel{
      */
     public Comparator<CategoryItem> sortBySimilarity(final String filter) {
         Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
-        return (firstItem, secondItem) -> stringSimilarityComparator
-                .compare(firstItem.getName(), secondItem.getName());
+        return (firstItem, secondItem) -> {
+            //if the category is selected, it should get precedence
+            if (null != firstItem && firstItem.isSelected()) {
+                if (null != secondItem && secondItem.isSelected()) {
+                    return stringSimilarityComparator
+                            .compare(firstItem.getName(), secondItem.getName());
+                }
+                return -1;
+            }
+            if (null != secondItem && secondItem.isSelected()) {
+                return 1;
+            }
+            return stringSimilarityComparator
+                    .compare(firstItem.getName(), secondItem.getName());
+        };
     }
 
     /**
