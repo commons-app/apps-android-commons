@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.notification;
 
 import android.graphics.Color;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,8 @@ import android.widget.TextView;
 import com.daimajia.swipe.SwipeLayout;
 import com.google.android.material.animation.ArgbEvaluatorCompat;
 import com.pedrogomez.renderers.Renderer;
+
+import org.wikipedia.util.StringUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -106,7 +107,7 @@ public class NotificationRenderer extends Renderer<Notification> {
      */
     private void setTitle(String notificationText) {
         notificationText = notificationText.trim().replaceAll("(^\\s*)|(\\s*$)", "");
-        notificationText = Html.fromHtml(notificationText).toString();
+        notificationText = StringUtil.fromHtml(notificationText).toString();
         if (notificationText.length() > 280) {
             notificationText = notificationText.substring(0, 279);
             notificationText = notificationText.concat("...");

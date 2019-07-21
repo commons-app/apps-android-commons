@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * DCLXVI
 * Datawiki30
 * MegaAlex
@@ -84,7 +85,7 @@
   <string name="title_activity_category_details">Категория</string>
   <string name="menu_about">За приложението</string>
   <string name="about_license">Приложението на Commons е с отворен код. Неговите създатели и поддръжници са получателите на ресурсите на общността на Уикимедия, както и на членовете на общността. Фондация Уикимедия не участва в създаването, развитието и поддръжката.</string>
-  <string name="about_improve">Създайте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;проблем на GitHub&lt;/a&gt; за заявяване на грешки и даване предложения.</string>
+  <string name="about_improve">Създайте нов &lt;a href=\"%1$s\"&gt;проблем на GitHub&lt;/a&gt; за заявяване на грешки и даване предложения.</string>
   <string name="title_activity_about">За приложението</string>
   <string name="no_email_client">Не е инсталирана програма за електронна поща</string>
   <string name="provider_categories">Последно използвани категории</string>
@@ -127,7 +128,7 @@
   <string name="menu_refresh">Обновяване</string>
   <string name="storage_permission_title">Изисква се разрешение за съхранение</string>
   <string name="read_storage_permission_rationale">Изисква се разрешение: Трябва да се прочита от външен склад. Приложението без това няма достъп до вашата галерия.</string>
-  <string name="write_storage_permission_rationale">Изисква се разрешение: Трябва да се запише на външен склад. Приложението без това няма достъп до вашата камера.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Изисква се разрешение: Трябва да се запише на външен склад. Приложението без това няма достъп до вашата камера.</string>
   <string name="ok">Добре</string>
   <string name="title_activity_nearby">Близки места</string>
   <string name="no_nearby">Не са намерени близки места</string>
@@ -199,12 +200,14 @@
   <string name="nearby_location_has_not_changed">Местоположението не е променено.</string>
   <string name="nearby_location_not_available">Местоположението не е налично.</string>
   <string name="toggle_view_button">Превключване на изгледа</string>
-  <string name="nearby_wikidata">УИКИДАННИ</string>
-  <string name="nearby_wikipedia">УИКИПЕДИЯ</string>
-  <string name="nearby_commons">ОБЩОМЕДИЯ</string>
+  <string name="nearby_wikidata" fuzzy="true">УИКИДАННИ</string>
+  <string name="nearby_wikipedia" fuzzy="true">УИКИПЕДИЯ</string>
+  <string name="nearby_commons" fuzzy="true">ОБЩОМЕДИЯ</string>
   <string name="about_translate_cancel">Отказ</string>
-  <string name="search_tab_title_media">ИЗОБРАЖЕНИЯ/ЗАПИСИ</string>
-  <string name="search_tab_title_categories">КАТЕГОРИИ</string>
+  <string name="menu_search_button">Търсене</string>
+  <string name="title_activity_search">Търсене</string>
+  <string name="search_tab_title_media" fuzzy="true">ИЗОБРАЖЕНИЯ/ЗАПИСИ</string>
+  <string name="search_tab_title_categories" fuzzy="true">КАТЕГОРИИ</string>
   <string name="no_recent_searches">Няма последни търсения</string>
   <string name="nominate_delete">Предлагане за изтриване</string>
   <string name="statistics_wikidata_edits">Изображения чрез „Близки места“</string>
@@ -214,6 +217,8 @@
   <string name="preference_author_name_summary">Персонализираното авторско име, което ще се използва вместо потребителското ви име при качване</string>
   <string name="archived_notifications">Известия (архивирани)</string>
   <string name="list_sheet">Списък</string>
+  <string name="next">Следваща</string>
+  <string name="submit">Изпращане</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>
   <string name="desc_language_Africa">Африка</string>

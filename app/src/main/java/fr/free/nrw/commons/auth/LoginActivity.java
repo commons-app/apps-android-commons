@@ -41,7 +41,6 @@ import butterknife.OnClick;
 import butterknife.OnEditorAction;
 import butterknife.OnFocusChange;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -132,6 +131,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit.addTextChangedListener(textWatcher);
         passwordEdit.addTextChangedListener(textWatcher);
         twoFactorEdit.addTextChangedListener(textWatcher);
+        
+        if (ConfigUtils.isBetaFlavour()) {
+            loginCredentials.setText(getString(R.string.login_credential));
+        } else {
+            loginCredentials.setVisibility(View.GONE);
+        }
     }
 
     @OnFocusChange(R.id.login_username)
@@ -174,12 +179,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 })
                 .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                 .show();
-
-        if (ConfigUtils.isBetaFlavour()) {
-            loginCredentials.setText(getString(R.string.login_credential));
-        } else {
-            loginCredentials.setVisibility(View.GONE);
-        }
     }
 
     @OnClick(R.id.forgot_password)
@@ -190,22 +189,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @OnClick(R.id.about_privacy_policy)
     void onPrivacyPolicyClicked() {
         Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL));
-    }
-
-    @OnClick(R.id.login_button)
-    void performLogin() {
-        loginCurrentlyInProgress = true;
-        Timber.d("Login to start!");
-        final String username = canonicializeUsername(usernameEdit.getText().toString());
-        final String rawUsername = Utils.capitalize(usernameEdit.getText().toString().trim());
-        final String password = passwordEdit.getText().toString();
-        String twoFactorCode = twoFactorEdit.getText().toString();
-
-        showLoggingProgressBar();
-        compositeDisposable.add(Observable.fromCallable(() -> login(username, password, twoFactorCode))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> handleLogin(username, rawUsername, password, result)));
     }
 
     @OnClick(R.id.sign_up_button)
@@ -257,6 +240,22 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         twoFactorEdit.removeTextChangedListener(textWatcher);
         delegate.onDestroy();
         super.onDestroy();
+    }
+
+    @OnClick(R.id.login_button)
+    public void performLogin() {
+        loginCurrentlyInProgress = true;
+        Timber.d("Login to start!");
+        final String username = usernameEdit.getText().toString();
+        final String rawUsername = usernameEdit.getText().toString().trim();
+        final String password = passwordEdit.getText().toString();
+        String twoFactorCode = twoFactorEdit.getText().toString();
+
+        showLoggingProgressBar();
+        compositeDisposable.add(Observable.fromCallable(() -> login(username, password, twoFactorCode))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> handleLogin(username, rawUsername, password, result)));
     }
 
     private String login(String username, String password, String twoFactorCode) {
@@ -362,16 +361,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             Timber.d("Login failed with reason: %s", result);
             showMessageAndCancelDialog(R.string.login_failed_generic);
         }
-    }
-
-    /**
-     * Because Mediawiki is upercase-first-char-then-case-sensitive :)
-     *
-     * @param username String
-     * @return String canonicial username
-     */
-    private String canonicializeUsername(String username) {
-        return new PageTitle(username).getText();
     }
 
     @Override

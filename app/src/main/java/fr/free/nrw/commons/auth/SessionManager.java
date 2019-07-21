@@ -7,13 +7,13 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;

@@ -1,12 +1,11 @@
 package fr.free.nrw.commons.mwapi
 
 import com.google.gson.Gson
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient.mapType
-import fr.free.nrw.commons.utils.DateUtils
+import fr.free.nrw.commons.utils.CommonsDateUtil
 import junit.framework.Assert.assertEquals
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -22,14 +21,14 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import java.net.URLDecoder
+import java.util.*
 import kotlin.random.Random
 
 /**
  * Mock web server based tests for ok http json api client
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [23], application = TestCommonsApplication::class)
+@Config(sdk = [23], application = TestCommonsApplication::class)
 class OkHttpJsonApiClientTest {
 
     private lateinit var testObject: OkHttpJsonApiClient
@@ -97,6 +96,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals("categorymembers", body["generator"])
                 Assert.assertEquals("file", body["gcmtype"])
@@ -141,6 +141,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals("search", body["generator"])
                 Assert.assertEquals("text", body["gsrwhat"])
@@ -170,6 +171,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals("Test.jpg", body["titles"])
                 Assert.assertEquals("imageinfo", body["prop"])
@@ -187,7 +189,7 @@ class OkHttpJsonApiClientTest {
      */
     @Test
     fun getImageWithGenerator() {
-        val template = "Template:Potd/" + DateUtils.getCurrentDate()
+        val template = "Template:Potd/" + CommonsDateUtil.getIso8601DateFormatShort().format(Date())
         server.enqueue(getMediaList("", "", "", 1))
 
         val media = testObject.getMedia(template, true)!!.blockingGet()
@@ -195,6 +197,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals(template, body["titles"])
                 Assert.assertEquals("images", body["generator"])
@@ -212,7 +215,7 @@ class OkHttpJsonApiClientTest {
      */
     @Test
     fun getPictureOfTheDay() {
-        val template = "Template:Potd/" + DateUtils.getCurrentDate()
+        val template = "Template:Potd/" + CommonsDateUtil.getIso8601DateFormatShort().format(Date())
         server.enqueue(getMediaList("", "", "", 1))
 
         val media = testObject.pictureOfTheDay?.blockingGet()
@@ -220,6 +223,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals(template, body["titles"])
                 Assert.assertEquals("images", body["generator"])
@@ -238,6 +242,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals("search", body["generator"])
                 Assert.assertEquals("text", body["gsrwhat"])
@@ -258,6 +263,7 @@ class OkHttpJsonApiClientTest {
         assertBasicRequestParameters(server, "GET").let { request ->
             parseQueryParams(request).let { body ->
                 Assert.assertEquals("json", body["format"])
+                Assert.assertEquals("2", body["formatversion"])
                 Assert.assertEquals("query", body["action"])
                 Assert.assertEquals("categorymembers", body["generator"])
                 Assert.assertEquals("file", body["gcmtype"])
@@ -310,7 +316,7 @@ class OkHttpJsonApiClientTest {
         }
 
         val pagesString = mediaList.joinToString()
-        val responseBody = "{\"batchcomplete\":\"\"$continueJson,\"query\":{\"pages\":{$pagesString}}}"
+        val responseBody = "{\"batchcomplete\":\"\"$continueJson,\"query\":{\"pages\":[$pagesString]}}"
         mockResponse.setBody(responseBody)
         return mockResponse
     }
@@ -325,7 +331,7 @@ class OkHttpJsonApiClientTest {
         val id1 = random.nextInt()
         val id2 = random.nextInt()
         val categories = "cat$id1|cat$id2"
-        return "\"$pageID\":{\"pageid\":$pageID,\"ns\":6,\"title\":\"File:$fileName\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/$fileName\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:$fileName\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"$categories\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]}"
+        return "{\"pageid\":$pageID,\"ns\":6,\"title\":\"File:$fileName\",\"imagerepository\":\"local\",\"imageinfo\":[{\"url\":\"https://upload.wikimedia.org/$fileName\",\"descriptionurl\":\"https://commons.wikimedia.org/wiki/File:$fileName\",\"descriptionshorturl\":\"https://commons.wikimedia.org/w/index.php?curid=4406048\",\"extmetadata\":{\"DateTime\":{\"value\":\"2013-04-13 15:12:11\",\"source\":\"mediawiki-metadata\",\"hidden\":\"\"},\"Categories\":{\"value\":\"$categories\",\"source\":\"commons-categories\",\"hidden\":\"\"},\"Artist\":{\"value\":\"<bdi><a href=\\\"https://en.wikipedia.org/wiki/en:Raphael\\\" class=\\\"extiw\\\" title=\\\"w:en:Raphael\\\">Raphael</a>\\n</bdi>\",\"source\":\"commons-desc-page\"},\"ImageDescription\":{\"value\":\"test desc\",\"source\":\"commons-desc-page\"},\"DateTimeOriginal\":{\"value\":\"1511<div style=\\\"display: none;\\\">date QS:P571,+1511-00-00T00:00:00Z/9</div>\",\"source\":\"commons-desc-page\"},\"LicenseShortName\":{\"value\":\"Public domain\",\"source\":\"commons-desc-page\",\"hidden\":\"\"}}}]}"
     }
 
     /**
@@ -333,6 +339,15 @@ class OkHttpJsonApiClientTest {
      */
     private fun assertBasicRequestParameters(server: MockWebServer, method: String): RecordedRequest = server.takeRequest().let {
         Assert.assertEquals("/", it.requestUrl.encodedPath())
+        Assert.assertEquals(method, it.method)
+        return it
+    }
+
+    /**
+     * Check request params with encoded path
+     */
+    private fun assertBasicRequestParameters(server: MockWebServer, method: String,encodedPath: String): RecordedRequest = server.takeRequest().let {
+        Assert.assertEquals(encodedPath, it.requestUrl.encodedPath())
         Assert.assertEquals(method, it.method)
         return it
     }
@@ -345,6 +360,39 @@ class OkHttpJsonApiClientTest {
         request.requestUrl.let {
             it.queryParameterNames().forEach { name -> put(name, it.queryParameter(name)) }
         }
+    }
+
+
+    /**
+     * Test getUploadCount posititive and negative cases
+     */
+    @Test
+    fun testGetUploadCount(){
+        //Positive
+        assertEquals(testBaseCasesAndGetUploadCount(true), 20)
+        //Negative
+        assertEquals(testBaseCasesAndGetUploadCount(false), 0)
+    }
+
+    /**
+     * Test getUploadCount base cases
+     */
+    private fun testBaseCasesAndGetUploadCount(shouldAddResponse: Boolean): Int? {
+        val mockResponse = MockResponse()
+        mockResponse.setResponseCode(200)
+        if(shouldAddResponse) {
+            val responseBody = "20"
+            mockResponse.setBody(responseBody)
+        }
+        toolsForgeServer.enqueue(mockResponse)
+
+        val uploadCount=testObject.getUploadCount("ashishkumar294").blockingGet()
+        assertBasicRequestParameters(toolsForgeServer, "GET","/uploadsbyuser.py").let { request ->
+            parseQueryParams(request).let { body ->
+                Assert.assertEquals("ashishkumar294", body["user"])
+            }
+        }
+        return uploadCount
     }
 
 }

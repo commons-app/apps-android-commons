@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.explore.images;
 
-
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -25,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -36,7 +36,14 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 import static android.view.View.GONE;
@@ -228,8 +235,15 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      * Handles the UI updates for no internet scenario
      */
     private void handleNoInternet() {
-        progressBar.setVisibility(GONE);
-        ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.no_internet);
+        if (null
+            != getView()) {//We have exposed public methods to update our ui, we will have to add null checks until we make this lifecycle aware
+            if (null != progressBar) {
+                progressBar.setVisibility(GONE);
+            }
+            ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.no_internet);
+        } else {
+            Timber.d("Attempt to update fragment ui after its view was destroyed");
+        }
     }
 
     /**
@@ -256,5 +270,10 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         else {
             return imagesAdapter.getItem(i);
         }
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        compositeDisposable.clear();
     }
 }

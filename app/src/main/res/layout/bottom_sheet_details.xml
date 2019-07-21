@@ -116,6 +116,7 @@
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_directions"
+                android:textAllCaps="true"
                 />
         </LinearLayout>
         <LinearLayout
@@ -144,6 +145,7 @@
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_wikidata"
+                android:textAllCaps="true"
                 />
         </LinearLayout>
 
@@ -174,7 +176,7 @@
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_wikipedia"
-
+                android:textAllCaps="true"
                 />
         </LinearLayout>
 
@@ -204,7 +206,7 @@
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_commons"
-
+                android:textAllCaps="true"
                 />
         </LinearLayout>
     </LinearLayout>

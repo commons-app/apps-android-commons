@@ -3,6 +3,7 @@ package fr.free.nrw.commons.category;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +23,6 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
@@ -174,32 +174,6 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     }
 
     /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void notifyDatasetChanged() {
-
-    }
-
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-    }
-
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    /**
      * This method inflates the menu in the toolbar
      */
     @Override
@@ -219,7 +193,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_browser_current_category:
-                Utils.handleWebUrl(this, new PageTitle(categoryName).getCanonicalUri());
+                Utils.handleWebUrl(this, Uri.parse(Utils.getPageTitle(categoryName).getCanonicalUri()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
