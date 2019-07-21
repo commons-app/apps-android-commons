@@ -8,10 +8,8 @@ import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-
 import java.util.Comparator;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -261,5 +259,19 @@ public class UploadRepository {
      */
     public void setSelectedLicense(String licenseName) {
         localDataSource.setSelectedLicense(licenseName);
+    }
+
+    /**
+     * Ask the RemoteDataSource to search for categories
+     */
+    public Observable<CategoryItem> searchCategories(String query, List<String> imageTitleList) {
+        return remoteDataSource.searchCategories(query, imageTitleList);
+    }
+
+    /**
+     * Ask the RemoteDataSource to get default categories
+     */
+    public Observable<CategoryItem> getDefaultCategories(List<String> imageTitleList) {
+        return remoteDataSource.getDefaultCategories(imageTitleList);
     }
 }
