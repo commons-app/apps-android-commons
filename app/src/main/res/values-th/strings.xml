@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Aefgh39622
 * B20180
 * Horus
@@ -83,7 +84,7 @@
   <string name="title_activity_signup">สมัครใช้งาน</string>
   <string name="menu_about">เกี่ยวกับ</string>
   <string name="about_license">แอปวิกิมีเดียคอมมอนส์เป็นแอปโอเพนซอร์สที่สร้างขึ้นและดูแลโดยผู้มีสิทธิและอาสาสมัครของชุมชนวิกิมีเดีย มูลนิธิวิกิมีเดียไม่มีส่วนเกี่ยวข้องในการสร้าง พัฒนา หรือการบำรุงรักษาแอปใดๆ ทั้งสิ้น</string>
-  <string name="about_improve">สร้าง &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; ใหม่เพื่อรายงานบั๊กและส่งข้อเสนอแนะ</string>
+  <string name="about_improve">สร้าง &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; ใหม่เพื่อรายงานบั๊กและส่งข้อเสนอแนะ</string>
   <string name="about_privacy_policy">&lt;u&gt;นโยบายความเป็นส่วนตัว&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;เครดิต&lt;/u&gt;</string>
   <string name="title_activity_about">เกี่ยวกับ</string>
@@ -100,7 +101,7 @@
   <string name="preference_license">สัญญาอนุญาตปริยาย</string>
   <string name="use_previous">ใช้ชื่อเรื่อง/คำอธิบายก่อนหน้านี้</string>
   <string name="allow_gps">รับข้อมูลตำแหน่งที่ตั้งปัจจุบันโดยอัตโนมัติ</string>
-  <string name="allow_gps_summary" fuzzy="true">ดึงข้อมูลตำแหน่งที่ตั้งปัจจุบันเพื่อรับข้อเสนอแนะเกี่ยวกับหมวดหมู่ถ้ารูปภาพไม่ได้ติดแท็กตำแหน่งที่ตั้งเอาไว้</string>
+  <string name="allow_gps_summary">ดึงข้อมูลตำแหน่งที่ตั้งปัจจุบันเพื่อรับข้อเสนอแนะเกี่ยวกับหมวดหมู่ถ้ารูปภาพไม่ได้ติดแท็กตำแหน่งที่ตั้งเอาไว้</string>
   <string name="preference_theme">โหมดกลางคืน</string>
   <string name="preference_theme_summary">ใช้ธีมสีเข้ม</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -151,7 +152,7 @@
   <string name="menu_refresh">รีเฟรช</string>
   <string name="storage_permission_title">การขอสิทธิ์ในการจัดเก็บข้อมูล</string>
   <string name="read_storage_permission_rationale">สิทธิที่ต้องการ: อ่านที่เก็บข้อมูลภายนอก แอปไม่สามารถเข้าถึงคลังภาพได้โดยไม่มีสิทธินี้</string>
-  <string name="write_storage_permission_rationale">สิทธิที่ต้องการ: เขียนที่เก็บข้อมูลภายนอก แอปไม่สามารถเข้าถึงกล้องของคุณได้โดยไม่มีสิทธินี้</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">สิทธิที่ต้องการ: เขียนที่เก็บข้อมูลภายนอก แอปไม่สามารถเข้าถึงกล้องของคุณได้โดยไม่มีสิทธินี้</string>
   <string name="location_permission_rationale">สิทธิทางเลือก: รับข้อมูลตำแหน่งที่ตั้งปัจจุบันสำหรับข้อเสนอแนะหมวดหมู่</string>
   <string name="ok">ตกลง</string>
   <string name="title_activity_nearby">สถานที่ใกล้เคียง</string>
@@ -229,17 +230,17 @@
   <string name="nearby_location_has_not_changed">ไม่ได้เปลี่ยนตำแหน่งที่ตั้ง</string>
   <string name="nearby_location_not_available">ตำแหน่งที่ตั้งไม่พร้อมใช้งาน</string>
   <string name="location_permission_rationale_nearby">ต้องการสิทธิเพื่อแสดงรายการสถานที่ใกล้เคียง</string>
-  <string name="get_directions">สอบถามเส้นทาง</string>
-  <string name="read_article">อ่านบทความ</string>
+  <string name="get_directions" fuzzy="true">สอบถามเส้นทาง</string>
+  <string name="read_article" fuzzy="true">อ่านบทความ</string>
   <string name="notifications_welcome">ยินดีต้อนรับสู่วิกิมีเดียคอมมอนส์ %1$s! เราดีใจที่คุณอยู่ที่นี่</string>
   <string name="notifications_talk_page_message">%1$s ส่งสารบนหน้าคุยของคุณ</string>
   <string name="notifications_thank_you_edit">ขอบคุณที่ร่วมแก้ไข</string>
   <string name="notifications_mention">%1$s ได้กล่าวถึงคุณบน %2$s</string>
   <string name="toggle_view_button">สลับมุมมอง</string>
-  <string name="nearby_directions">เส้นทาง</string>
-  <string name="nearby_wikidata">วิกิสนเทศ</string>
-  <string name="nearby_wikipedia">วิกิพีเดีย</string>
-  <string name="nearby_commons">คอมมอนส์</string>
+  <string name="nearby_directions" fuzzy="true">เส้นทาง</string>
+  <string name="nearby_wikidata" fuzzy="true">วิกิสนเทศ</string>
+  <string name="nearby_wikipedia" fuzzy="true">วิกิพีเดีย</string>
+  <string name="nearby_commons" fuzzy="true">คอมมอนส์</string>
   <string name="about_rate_us">&lt;u&gt;ให้คะแนนเรา&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">ข้ามบทช่วยสอน</string>

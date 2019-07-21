@@ -7,20 +7,21 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.delete.DeleteTask;
+import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.media.model.MwQueryPage;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -29,68 +30,72 @@ import timber.log.Timber;
 
 @Singleton
 public class ReviewController {
-    private String fileName;
+    private static final int NOTIFICATION_SEND_THANK = 0x102;
+    private static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
+    private final DeleteHelper deleteHelper;
     @Nullable
-    public MwQueryPage.Revision firstRevision; // TODO: maybe we can expand this class to include fileName
-    protected static ArrayList<String> categories;
-    public static final int NOTIFICATION_SEND_THANK = 0x102;
-    public static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
-    private NotificationManager notificationManager;
-    private NotificationCompat.Builder notificationBuilder;
-    private Media media;
-
+    MwQueryPage.Revision firstRevision; // TODO: maybe we can expand this class to include fileName
     @Inject
     MediaWikiApi mwApi;
     @Inject
     SessionManager sessionManager;
+    private NotificationManager notificationManager;
+    private NotificationCompat.Builder notificationBuilder;
+    private Media media;
 
-    public void onImageRefreshed(String fileName) {
-        this.fileName = fileName;
-        media = new Media("File:" + fileName);
-        ReviewController.categories = new ArrayList<>();
+    ReviewController(DeleteHelper deleteHelper, Context context) {
+        this.deleteHelper = deleteHelper;
+        CommonsApplication.createNotificationChannel(context.getApplicationContext());
+        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationBuilder = new NotificationCompat.Builder(context, CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
     }
 
-    public void onCategoriesRefreshed(ArrayList<String> categories) {
-        ReviewController.categories = categories;
+    void onImageRefreshed(Media media) {
+        this.media = media;
     }
 
-    public void reportSpam(@NonNull Activity activity) {
-        DeleteTask.askReasonAndExecute(new Media("File:" + fileName),
+    public Media getMedia() {
+        return media;
+    }
+
+    public enum DeleteReason {
+        SPAM,
+        COPYRIGHT_VIOLATION
+    }
+
+    void reportSpam(@NonNull Activity activity, ReviewCallback reviewCallback) {
+        Timber.d("Report spam for %s", media.getFilename());
+        deleteHelper.askReasonAndExecute(media,
                 activity,
-                activity.getString(R.string.review_spam_report_question),
-                activity.getString(R.string.review_spam_report_problem));
+                activity.getResources().getString(R.string.review_spam_report_question),
+                DeleteReason.SPAM,
+                reviewCallback);
     }
 
-    public void reportPossibleCopyRightViolation(@NonNull Activity activity) {
-        DeleteTask.askReasonAndExecute(new Media("File:" + fileName),
+    void reportPossibleCopyRightViolation(@NonNull Activity activity, ReviewCallback reviewCallback) {
+        Timber.d("Report spam for %s", media.getFilename());
+        deleteHelper.askReasonAndExecute(media,
                 activity,
                 activity.getResources().getString(R.string.review_c_violation_report_question),
-                activity.getResources().getString(R.string.review_c_violation_report_problem));
+                DeleteReason.COPYRIGHT_VIOLATION,
+                reviewCallback);
     }
 
-    /**
-    * @param activity
-     * @param fileName Name of the file for which "Wrong Category" report is to be sent
-     * Generating a notification for the current user for publishing progress of reporting wrong category and also completion of the network request*/
-
     @SuppressLint("CheckResult")
-    public void reportWrongCategory(@NonNull Activity activity, String fileName) {
-        media = new Media("File:" + fileName);
+    void reportWrongCategory(@NonNull Activity activity, ReviewCallback reviewCallback) {
         Context context = activity.getApplicationContext();
         ApplicationlessInjection
                 .getInstance(context)
                 .getCommonsApplicationComponent()
                 .inject(this);
 
-        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationBuilder = new NotificationCompat.Builder(context);
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast = Toast.makeText(context, context.getString(R.string.check_category_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
         toast.show();
 
         Observable.fromCallable(() -> {
-            publishProgressForWrongCategory(context, 0);
+            publishProgress(context, 0);
 
             String editToken;
             String authCookie;
@@ -101,13 +106,14 @@ public class ReviewController {
 
             try {
                 editToken = mwApi.getEditToken();
-                if (editToken.equals("+\\")) {
+
+                if (editToken == null) {
                     return false;
                 }
-                publishProgressForWrongCategory(context, 1);
+                publishProgress(context, 1);
 
                 mwApi.appendEdit(editToken, "\n{{subst:chc}}\n", media.getFilename(), summary);
-                publishProgressForWrongCategory(context, 2);
+                publishProgress(context, 2);
             } catch (Exception e) {
                 Timber.d(e);
                 return false;
@@ -117,15 +123,17 @@ public class ReviewController {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((result) -> {
-                    String message = "";
-                    String title = "";
+                    String message;
+                    String title;
 
                     if (result) {
                         title = context.getString(R.string.check_category_success_title);
                         message = context.getString(R.string.check_category_success_message, media.getDisplayTitle());
+                        reviewCallback.onSuccess();
                     } else {
                         title = context.getString(R.string.check_category_failure_title);
                         message = context.getString(R.string.check_category_failure_message, media.getDisplayTitle());
+                        reviewCallback.onFailure();
                     }
 
                     notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
@@ -141,72 +149,36 @@ public class ReviewController {
                 }, Timber::e);
     }
 
-    /**
-     * @param context
-     * @param i progress as an integer
-    * While reportWrongCategory() is in background notify the user about current progress in the newtwork request*/
-
-    private void publishProgressForWrongCategory(@NonNull Context context, int i) {
-        int[] idOfMessages = new int[]{R.string.getting_edit_token, R.string.check_category_adding_template};
+    private void publishProgress(@NonNull Context context, int i) {
+        int[] messages = new int[]{R.string.getting_edit_token, R.string.check_category_adding_template};
         String message = "";
-        if (0 < i && i < idOfMessages.length) {
-            message = context.getString(idOfMessages[i]);
+        if (0 < i && i < messages.length) {
+            message = context.getString(messages[i]);
         }
 
         notificationBuilder.setContentTitle(context.getString(R.string.check_category_notification_title, media.getDisplayTitle()))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setProgress(idOfMessages.length, i, false)
+                .setProgress(messages.length, i, false)
                 .setOngoing(true);
         notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
     }
 
-    /**
-     * @param context
-     * @param i progress as an integer
-     * While sending thanks is in progress notify the user about the current progress in network request*/
-
-    private void publishProgressForSendingThank(Context context, int i){
-        int[] idOfMessages = new int[]{R.string.getting_edit_token, R.string.send_thank_send};
-        String message = "";
-        if (0 < i && i < idOfMessages.length) {
-            message = context.getString(idOfMessages[i]);
-        }
-
-        notificationBuilder.setContentTitle(context.getString(R.string.send_thank_notification_title))
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(message))
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setProgress(idOfMessages.length, i, false)
-                .setOngoing(true);
-        notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
-    }
-
-    /**
-     * @param activity
-     * @param fileName Name of the file which recieves "thanks"
-     * Sending "Thanks" to the user for the particular contribution
-     * Generating a notification for the current user for publishing progress of sending thanks and also completion*/
-
-    @SuppressLint("CheckResult")
-    public void sendThank(@NonNull Activity activity, String fileName) {
+    @SuppressLint({"CheckResult", "StringFormatInvalid"})
+    void sendThanks(@NonNull Activity activity) {
         Context context = activity.getApplicationContext();
         ApplicationlessInjection
                 .getInstance(context)
                 .getCommonsApplicationComponent()
                 .inject(this);
-        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationBuilder = new NotificationCompat.Builder(context);
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast = Toast.makeText(context, context.getString(R.string.send_thank_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
         toast.show();
 
-        media = new Media("File:" + fileName);
-
         Observable.fromCallable(() -> {
-            publishProgressForSendingThank(context, 0);
+            publishProgress(context, 0);
 
             String editToken;
             String authCookie;
@@ -215,13 +187,13 @@ public class ReviewController {
 
             try {
                 editToken = mwApi.getEditToken();
-                if (editToken.equals("+\\")) {
+                if (editToken == null) {
                     return false;
                 }
-                publishProgressForSendingThank(context, 1);
+                publishProgress(context, 1);
                 assert firstRevision != null;
-                mwApi.thank(editToken, firstRevision.getRevid());
-                publishProgressForSendingThank(context, 2);
+                mwApi.thank(editToken, firstRevision.getRevisionId());
+                publishProgress(context, 2);
             } catch (Exception e) {
                 Timber.d(e);
                 return false;
@@ -252,5 +224,11 @@ public class ReviewController {
                     notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
 
                 }, Timber::e);
+    }
+
+    public interface ReviewCallback {
+        void onSuccess();
+
+        void onFailure();
     }
 }

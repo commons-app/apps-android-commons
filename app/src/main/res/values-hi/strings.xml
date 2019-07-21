@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * 1997kB
+* Abijeet Patro
 * Anamdas
 * Anandra
 * Bhatakati aatma
@@ -107,7 +108,7 @@
   <string name="title_activity_category_details">श्रेणी</string>
   <string name="menu_about">परिचय</string>
   <string name="about_license">विकिमीडिया कॉमन्स एप्प एक मुक्त स्रोत एप्प है जो कि विकिमीडिया समुदाय के अनुदानप्राप्तकर्ताओं व स्वयंसेवकों द्वारा निर्मित एवं प्रबंधित है। विकिमीडिया फॉऊण्डेशन इस एप्प के निर्माण, विकास व प्रबंधन में किसी प्रकार से भी संलग्न नहीं है।</string>
-  <string name="about_improve">त्रुटि की सूचना और सुझावों के लिए &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; GitHub समस्या &lt;/a&gt; बनाएं</string>
+  <string name="about_improve">त्रुटि की सूचना और सुझावों के लिए &lt;a href=\"%1$s\"&gt; GitHub समस्या &lt;/a&gt; बनाएं</string>
   <string name="about_privacy_policy">&lt;u&gt;गोपनीयता नीति&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;श्रेय&lt;/u&gt;</string>
   <string name="title_activity_about">परिचय</string>
@@ -271,17 +272,17 @@
   <string name="nearby_location_has_not_changed">स्थान परिवर्तन नहीं हुआ।</string>
   <string name="nearby_location_not_available">स्थान उपलब्ध नहीं।</string>
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
-  <string name="get_directions">दिशा - निर्देश प्राप्त करें</string>
-  <string name="read_article">लेख पढ़ें</string>
+  <string name="get_directions" fuzzy="true">दिशा - निर्देश प्राप्त करें</string>
+  <string name="read_article" fuzzy="true">लेख पढ़ें</string>
   <string name="notifications_welcome">विकिमीडिया कॉमन्स पर आपका स्वागत है, %1$s! हमें हर्ष है कि आप यहाँ हैं।</string>
   <string name="notifications_talk_page_message">%1$s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
   <string name="notifications_thank_you_edit">सम्पादन करने के लिए धन्यवाद</string>
   <string name="notifications_mention">%1$s ने %2$s में आपका उल्लेख किया है</string>
   <string name="toggle_view_button">टूगल दृश्य</string>
-  <string name="nearby_directions">दिशा-निर्देश</string>
-  <string name="nearby_wikidata">विकीडाटा</string>
-  <string name="nearby_wikipedia">विकीपीडिया</string>
-  <string name="nearby_commons">कॉमन्स</string>
+  <string name="nearby_directions" fuzzy="true">दिशा-निर्देश</string>
+  <string name="nearby_wikidata" fuzzy="true">विकीडाटा</string>
+  <string name="nearby_wikipedia" fuzzy="true">विकीपीडिया</string>
+  <string name="nearby_commons" fuzzy="true">कॉमन्स</string>
   <string name="about_rate_us">&lt;u&gt;हमें रेट करें&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;अक्सर पूछे जाने वाले प्रश्न&lt;/u&gt;</string>
   <string name="welcome_skip_button">प्रशिक्षण छोड़ें</string>
@@ -310,8 +311,8 @@
   <string name="provider_searches">हाल में खोजे गये प्रश्न</string>
   <string name="error_loading_categories">श्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="error_loading_subcategories">उपश्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
-  <string name="search_tab_title_media">मीडिया</string>
-  <string name="search_tab_title_categories">श्रेणियाँ</string>
+  <string name="search_tab_title_media" fuzzy="true">मीडिया</string>
+  <string name="search_tab_title_categories" fuzzy="true">श्रेणियाँ</string>
   <string name="successful_wikidata_edit">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
   <string name="menu_set_wallpaper">वॉलपेपर के रूप में लगायें</string>
   <string name="wallpaper_set_successfully">वॉलपेपर सफलतापूर्वक लग गया!</string>
@@ -336,10 +337,10 @@
   <string name="search_history_deleted">खोज इतिहास मिट गया</string>
   <string name="nominate_delete">हटाने के लिये नामांकन करें</string>
   <string name="Achievements">उपलब्धियाँ</string>
-  <string name="statistics">सांख्यिकी</string>
+  <string name="statistics" fuzzy="true">सांख्यिकी</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त किया</string>
   <string name="statistics_featured">निर्वाचित चित्र</string>
-  <string name="level">स्तर</string>
+  <string name="level" fuzzy="true">स्तर</string>
   <string name="images_uploaded">चित्र अपलोड हुआ</string>
   <string name="image_reverts">चित्रों को वापस नहीं किया गया</string>
   <string name="images_used_by_wiki">उपयोग हुए चित्र</string>
@@ -387,7 +388,7 @@
   <string name="never_ask_again">फिर कभी न पूछें</string>
   <string name="ends_on">खत्म होगा:</string>
   <string name="display_campaigns">दृश्य अभियान</string>
-  <string name="display_campaigns_explanation">वर्तमान में चल रहे अभियानों को जानने के लिये यहाँ दबायें</string>
+  <string name="display_campaigns_explanation" fuzzy="true">वर्तमान में चल रहे अभियानों को जानने के लिये यहाँ दबायें</string>
   <string name="error_processing_image">छवि संसाधित करते समय त्रुटि आई। कृपया पुन: प्रयास करें!</string>
   <string name="no_image">कोई चित्र उपयोग नहीं हुआ</string>
   <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>

@@ -7,6 +7,8 @@ public class Prefs {
     public static final String DEFAULT_LICENSE = "defaultLicense";
     public static final String UPLOADS_SHOWING = "uploadsshowing";
     public static final String IS_CONTRIBUTION_COUNT_CHANGED = "ccontributionCountChanged";
+    public static final String MANAGED_EXIF_TAGS = "managedExifTags";
+    public static final String KEY_LANGUAGE_VALUE = "languageDescription";
 
     public static class Licenses {
         public static final String CC_BY_SA_3 = "CC BY-SA 3.0";
@@ -14,9 +16,5 @@ public class Prefs {
         public static final String CC_BY_SA_4 = "CC BY-SA 4.0";
         public static final String CC_BY_4 = "CC BY 4.0";
         public static final String CC0 = "CC0";
-
-        // kept for backward compatibility to v2.1
-        @Deprecated public static final String CC_BY = "CC BY";
-        @Deprecated public static final String CC_BY_SA = "CC BY-SA";
     }
 }

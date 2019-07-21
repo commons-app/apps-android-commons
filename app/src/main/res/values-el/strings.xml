@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Astralnet
 * Domdomegg
 * Evropi
@@ -10,6 +11,8 @@
 * ManosHacker
 * Nikosgranturismogt
 * Nikosguard
+* Panos78
+* Protnet
 * Tgkarounos
 -->
 <resources>
@@ -101,7 +104,7 @@
   <string name="title_activity_category_details">Κατηγορία</string>
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
-  <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
+  <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"%1$s\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
   <string name="about_privacy_policy">&lt;u&gt;Πολιτική απορρήτου&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Συντελεστές&lt;/u&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
@@ -173,7 +176,7 @@
   <string name="menu_refresh">Ανανέωση</string>
   <string name="storage_permission_title">Αιτείται Άδεια Αποθήκευσης</string>
   <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να έχει πρόσβαση στην συλλογή σας χωρίς αυτή.</string>
-  <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
   <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
   <string name="ok">Εντάξει</string>
   <string name="title_activity_nearby">Κοντινοί Τόποι</string>
@@ -266,7 +269,7 @@
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
   <string name="location_permission_rationale_nearby">Απαιτείται άδεια για την εμφάνιση λίστας κοντινών σημείων</string>
-  <string name="get_directions">Λάβετε κατευθύνσεις</string>
+  <string name="get_directions">Λήψη κατευθύνσεων</string>
   <string name="read_article">Ανάγνωση άρθρου</string>
   <string name="notifications_welcome">Καλωσήρθατε στο Wikimedia Commons, %1$s! Είμαστε χαρούμενοι που είστε εδώ.</string>
   <string name="notifications_talk_page_message">Ο %1$s άφησε ένα μήνυμα στην σελίδα συζήτησής σας</string>
@@ -274,7 +277,7 @@
   <string name="notifications_mention">Ο %1$s σας ανέφερε στο %2$s.</string>
   <string name="toggle_view_button">Μεταβολή προβολής</string>
   <string name="nearby_directions">Κατευθύνσεις</string>
-  <string name="nearby_wikidata">Βικιδεδομένα</string>
+  <string name="nearby_wikidata">Δεδομένα wiki</string>
   <string name="nearby_wikipedia">Βικιπαίδεια</string>
   <string name="nearby_commons">Κοινά</string>
   <string name="about_rate_us">&lt;u&gt;Βαθμολογήστε μας&lt;/u&gt;</string>
@@ -308,7 +311,7 @@
   <string name="provider_searches">Πρόσφατα αναζητημένα ερωτήματα</string>
   <string name="error_loading_categories">Συνέβη σφάλμα κατά τη φόρτωση κατηγοριών.</string>
   <string name="error_loading_subcategories">Συνέβη σφάλμα κατά τη φόρτωση υποκατηγοριών.</string>
-  <string name="search_tab_title_media">Μέσα ενημέρωσης</string>
+  <string name="search_tab_title_media">Μέσα</string>
   <string name="search_tab_title_categories">Κατηγορίες</string>
   <string name="successful_wikidata_edit">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
@@ -328,7 +331,7 @@
   <string name="warning_for_image_reverts">Προειδοποίηση: Πάνω από το %1$s των εικόνων που ανεβάσατε έχουν διαγραφεί. Εάν συνεχίσετε να ανεβάζετε εικόνες που απαιτούν διαγραφή, ο λογαριασμός σας πιθανώς θα φραγεί.</string>
   <string name="congratulatory_message_quiz">Είχατε το %1$s των απαντήσεων σωστό. Συγχαρητήρια!</string>
   <string name="warning_for_no_answer">Επιλέξτε μια από τις δύο επιλογές για να απαντήσετε στην ερώτηση</string>
-  <string name="user_not_logged_in">Η συνεδρία σύνδεσης έληξε, παρακαλώ συνδεθείτε ξανά.</string>
+  <string name="user_not_logged_in">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά.</string>
   <string name="quiz_result_share_message">Μοιραστείτε το κουίζ με τους φίλους σας!</string>
   <string name="continue_message">Συνέχεια</string>
   <string name="correct">Σωστή απάντηση</string>

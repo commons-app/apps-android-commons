@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.di;
 
+import fr.free.nrw.commons.contributions.ContributionsModule;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -7,15 +8,15 @@ import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.contributions.ContributionViewHolder;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
-import fr.free.nrw.commons.delete.DeleteTask;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
+import fr.free.nrw.commons.nearby.PlaceRenderer;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.settings.SettingsFragment;
-import fr.free.nrw.commons.nearby.PlaceRenderer;
 import fr.free.nrw.commons.upload.FileProcessor;
+import fr.free.nrw.commons.upload.UploadModule;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
 
 
@@ -28,7 +29,7 @@ import fr.free.nrw.commons.widget.PicOfDayAppWidget;
         ActivityBuilderModule.class,
         FragmentBuilderModule.class,
         ServiceBuilderModule.class,
-        ContentProviderBuilderModule.class
+        ContentProviderBuilderModule.class, UploadModule.class, ContributionsModule.class
 })
 public interface CommonsApplicationComponent extends AndroidInjector<ApplicationlessInjection> {
     void inject(CommonsApplication application);
@@ -37,11 +38,7 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
 
     void inject(ModificationsSyncAdapter syncAdapter);
 
-    void inject(MediaWikiImageView mediaWikiImageView);
-
     void inject(LoginActivity activity);
-
-    void inject(DeleteTask deleteTask);
 
     void inject(SettingsFragment fragment);
 
@@ -55,6 +52,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(FileProcessor fileProcessor);
 
     void inject(PicOfDayAppWidget picOfDayAppWidget);
+
+    void inject(ContributionViewHolder viewHolder);
 
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})

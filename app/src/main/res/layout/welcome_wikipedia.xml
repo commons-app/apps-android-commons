@@ -1,53 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/tutorialBackground"
-    android:gravity="center_vertical"
-    >
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/tutorialBackground"
-        android:gravity="center_vertical"
-        >
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/huge_gap"
+    android:paddingRight="@dimen/huge_gap">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/welcome_wikipedia"
         android:adjustViewBounds="true"
         android:contentDescription="@string/welcome_image_welcome_wikipedia"
-        />
+        android:src="@drawable/welcome_wikipedia" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxWidth="240dp"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginBottom="@dimen/standard_gap"
         android:text="@string/tutorial_1_text"
-        android:layout_gravity="center"
-        android:textStyle="bold"
         android:textAlignment="center"
-        android:textSize="@dimen/normal_text"
-        android:paddingTop="@dimen/standard_gap"
-        android:gravity="center_horizontal"
         android:textColor="@android:color/white"
-        />
+        android:textSize="@dimen/normal_text"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="240dp"
         android:text="@string/tutorial_1_subtext"
-        android:layout_gravity="center"
         android:textAlignment="center"
-        android:paddingTop="@dimen/standard_gap"
-        android:gravity="center_horizontal"
-        android:textColor="@android:color/white"
-        />
-    </LinearLayout>
-    
-</RelativeLayout>
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

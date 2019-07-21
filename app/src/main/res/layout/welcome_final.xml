@@ -66,19 +66,14 @@
 
     </LinearLayout>
     <TextView
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="@dimen/standard_gap"
-        android:layout_marginRight="@dimen/standard_gap"
-        android:layout_marginEnd="@dimen/standard_gap"
         android:id="@+id/welcomeInfo"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:textSize="@dimen/normal_text"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="@dimen/large_gap"
-        android:paddingBottom="@dimen/large_gap"
-        />
+        android:padding="@dimen/standard_gap"
+        android:layout_marginBottom="@dimen/standard_gap"
+        android:text="@string/welcome_help_button_text" />
 </RelativeLayout>

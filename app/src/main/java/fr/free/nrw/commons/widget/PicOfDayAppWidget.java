@@ -1,13 +1,14 @@
 package fr.free.nrw.commons.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.net.Uri;
-import androidx.annotation.Nullable;
 import android.widget.RemoteViews;
 
 import com.facebook.common.executors.CallerThreadExecutor;
@@ -22,13 +23,17 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static android.content.Intent.ACTION_VIEW;
 
 /**
  * Implementation of App Widget functionality.
@@ -41,6 +46,13 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pic_of_day_app_widget);
+
+        // Launch App on Button Click
+        Intent viewIntent = new Intent(context, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, 0);
+        views.setOnClickPendingIntent(R.id.camera_button, pendingIntent);
+        appWidgetManager.updateAppWidget(appWidgetId, views);
+
         loadPictureOfTheDay(context, views, appWidgetManager, appWidgetId);
     }
 
@@ -61,7 +73,16 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                 .subscribe(
                         response -> {
                             if (response != null) {
-                                loadImageFromUrl(response.getImageUrl(), context, views, appWidgetManager, appWidgetId);
+                                views.setTextViewText(R.id.appwidget_title, response.getDisplayTitle());
+
+                                // View in browser
+                                Intent viewIntent = new Intent();
+                                viewIntent.setAction(ACTION_VIEW);
+                                viewIntent.setData(Uri.parse(response.getPageTitle().getMobileUri()));
+                                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, 0);
+                                views.setOnClickPendingIntent(R.id.appwidget_image, pendingIntent);
+
+                                loadImageFromUrl(response.getThumbUrl(), context, views, appWidgetManager, appWidgetId);
                             }
                         },
                         t -> Timber.e(t, "Fetching picture of the day failed")

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.notification;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -10,8 +11,6 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;

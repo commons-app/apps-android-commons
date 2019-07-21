@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.filepicker.UploadableFile
-import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
@@ -89,24 +88,6 @@ class UploadModelTest {
     }
 
     @Test
-    fun verifyPreviousNotAvailable() {
-        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
-        assertFalse(uploadModel!!.isPreviousAvailable)
-    }
-
-    @Test
-    fun verifyNextAvailable() {
-        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
-        assertTrue(uploadModel!!.isNextAvailable)
-    }
-
-    @Test
-    fun isSubmitAvailable() {
-        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
-        assertTrue(uploadModel!!.isNextAvailable)
-    }
-
-    @Test
     fun getCurrentStep() {
         uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         assertTrue(uploadModel!!.currentStep == 1)
@@ -133,38 +114,6 @@ class UploadModelTest {
         val preProcessImages = uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
         preProcessImages.doOnComplete {
             assertTrue(uploadModel!!.uploads.size == 2)
-        }
-    }
-
-    @Test
-    fun isTopCardState() {
-        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
-        assertTrue(uploadModel!!.isTopCardState)
-    }
-
-    @Test
-    fun next() {
-        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
-        assertTrue(uploadModel!!.currentStep == 1)
-        uploadModel!!.next()
-        assertTrue(uploadModel!!.currentStep == 2)
-    }
-
-    @Test
-    fun previous() {
-        uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
-        assertTrue(uploadModel!!.currentStep == 1)
-        uploadModel!!.next()
-        assertTrue(uploadModel!!.currentStep == 2)
-        uploadModel!!.previous()
-        assertTrue(uploadModel!!.currentStep == 1)
-    }
-
-    @Test
-    fun isShowingItem() {
-        val preProcessImages = uploadModel!!.preProcessImages(getMediaList(), mock(Place::class.java), "external") { _, _ -> }
-        preProcessImages.doOnComplete {
-            assertTrue(uploadModel!!.isShowingItem)
         }
     }
 

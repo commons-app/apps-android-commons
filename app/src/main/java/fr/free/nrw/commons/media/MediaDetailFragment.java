@@ -1,16 +1,15 @@
 package fr.free.nrw.commons.media;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -25,44 +24,38 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.free.nrw.commons.License;
-import fr.free.nrw.commons.LicenseList;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
-import fr.free.nrw.commons.delete.DeleteTask;
+import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
-import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import javax.inject.Inject;
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
+import org.wikipedia.util.StringUtil;
 import timber.log.Timber;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
@@ -90,24 +83,24 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     @Inject
-    Provider<MediaDataExtractor> mediaDataExtractorProvider;
-    @Inject
-    MediaWikiApi mwApi;
-    @Inject
-    SessionManager sessionManager;
+    MediaDataExtractor mediaDataExtractor;
     @Inject
     ReasonBuilder reasonBuilder;
+    @Inject
+    DeleteHelper deleteHelper;
+    @Inject
+    ViewUtilWrapper viewUtil;
 
     private int initialListTop = 0;
 
     @BindView(R.id.mediaDetailImage)
-    MediaWikiImageView image;
+    SimpleDraweeView image;
     @BindView(R.id.mediaDetailSpacer)
     MediaDetailSpacer spacer;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
     @BindView(R.id.mediaDetailDesc)
-    TextView desc;
+    HtmlTextView desc;
     @BindView(R.id.mediaDetailAuthor)
     TextView author;
     @BindView(R.id.mediaDetailLicense)
@@ -136,9 +129,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
-    private DataSetObserver dataObserver;
-    private AsyncTask<Void, Void, Boolean> detailFetchTask;
-    private LicenseList licenseList;
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
@@ -192,15 +182,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
         ButterKnife.bind(this,view);
-        seeMore.setText(Html.fromHtml(getString(R.string.nominated_see_more)));
+        seeMore.setText(StringUtil.fromHtml(getString(R.string.nominated_see_more)));
 
         if (isCategoryImage){
             authorLayout.setVisibility(VISIBLE);
         } else {
             authorLayout.setVisibility(GONE);
         }
-
-        licenseList = new LicenseList(getActivity());
 
         // Progressively darken the image in the background when we scroll detail pane up
         scrollListener = this::updateTheDarkness;
@@ -238,95 +226,47 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(getParentFragment()!=null && getParentFragment().getParentFragment()!=null) {
+        if (getParentFragment() != null && getParentFragment().getParentFragment() != null) {
             //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
             // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
-            ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNotificationCardView
-                .setVisibility(View.GONE);
+            ((ContributionsFragment) (getParentFragment()
+                    .getParentFragment())).nearbyNotificationCardView
+                    .setVisibility(View.GONE);
         }
         media = detailProvider.getMediaAtPosition(index);
-        if (media == null) {
-            // Ask the detail provider to ping us when we're ready
-            Timber.d("MediaDetailFragment not yet ready to display details; registering observer");
-            dataObserver = new DataSetObserver() {
-                @Override
-                public void onChanged() {
-                    if (!isAdded()) {
-                        return;
-                    }
-                    Timber.d("MediaDetailFragment ready to display delayed details!");
-                    detailProvider.unregisterDataSetObserver(dataObserver);
-                    dataObserver = null;
-                    media=detailProvider.getMediaAtPosition(index);
-                    displayMediaDetails();
-                }
-            };
-            detailProvider.registerDataSetObserver(dataObserver);
-        } else {
-            Timber.d("MediaDetailFragment ready to display details");
-            displayMediaDetails();
-        }
+        displayMediaDetails();
     }
 
     private void displayMediaDetails() {
         //Always load image from Internet to allow viewing the desc, license, and cats
-        image.setMedia(media);
-
-        // FIXME: For transparent images
-        // FIXME: keep the spinner going while we load data
-        // FIXME: cache this data
-        // Load image metadata: desc, license, categories
-        detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
-            private MediaDataExtractor extractor;
-
-            @Override
-            protected void onPreExecute() {
-                extractor = mediaDataExtractorProvider.get();
-            }
-
-            @Override
-            protected Boolean doInBackground(Void... voids) {
-                // Local files have no filename yet
-                if (media.getFilename() == null) {
-                    return Boolean.FALSE;
-                }
-                try {
-                    extractor.fetch(media.getFilename(), licenseList);
-                    return Boolean.TRUE;
-                } catch (IOException e) {
-                    Timber.d(e);
-                }
-                return Boolean.FALSE;
-            }
-
-            @Override
-            protected void onPostExecute(Boolean success) {
-                detailFetchTask = null;
-                if (!isAdded()) {
-                    return;
-                }
-
-                if (success) {
-                    extractor.fill(media);
-                    setTextFields(media);
-                } else {
-                    Timber.d("Failed to load photo details.");
-                }
-            }
-        };
-        detailFetchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
+        setupImageView();
         title.setText(media.getDisplayTitle());
-        desc.setText(""); // fill in from network...
-        license.setText(""); // fill in from network...
+        desc.setHtmlText(media.getDescription());
+        license.setText(media.getLicense());
+
+        Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::setTextFields);
+        compositeDisposable.add(disposable);
+    }
+
+    /**
+     * Uses two image sources.
+     * - low resolution thumbnail is shown initially
+     * - when the high resolution image is available, it replaces the low resolution image
+     */
+    private void setupImageView() {
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
+                .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+                .setOldController(image.getController())
+                .build();
+        image.setController(controller);
     }
 
     @Override
     public void onDestroyView() {
-        if (detailFetchTask != null) {
-            detailFetchTask.cancel(true);
-            detailFetchTask = null;
-        }
         if (layoutListener != null && getView() != null) {
             getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
             layoutListener = null;
@@ -335,15 +275,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
             scrollListener = null;
         }
-        if (dataObserver != null) {
-            detailProvider.unregisterDataSetObserver(dataObserver);
-            dataObserver = null;
-        }
+
+        compositeDisposable.clear();
         super.onDestroyView();
     }
 
     private void setTextFields(Media media) {
-        desc.setText(prettyDescription(media));
+        this.media = media;
+        setupImageView();
+        desc.setHtmlText(prettyDescription(media));
         license.setText(prettyLicense(media));
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
@@ -371,22 +311,18 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.mediaDetailLicense)
     public void onMediaDetailLicenceClicked(){
-        if (!TextUtils.isEmpty(licenseLink(media))) {
-            openWebBrowser(licenseLink(media));
+        String url = media.getLicenseUrl();
+        if (!StringUtils.isBlank(url) && getActivity() != null) {
+            Utils.handleWebUrl(getActivity(), Uri.parse(url));
         } else {
-            if (isCategoryImage) {
-                Timber.d("Unable to fetch license URL for %s", media.getLicense());
-            } else {
-                Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
-                toast.show();
-            }
+            viewUtil.showShortToast(getActivity(), getString(R.string.null_url));
         }
     }
 
     @OnClick(R.id.mediaDetailCoordinates)
     public void onMediaDetailCoordinatesClicked(){
-        if (media.getCoordinates() != null) {
-            openMap(media.getCoordinates());
+        if (media.getCoordinates() != null && getActivity() != null) {
+            Utils.handleGeoCoordinates(getActivity(), media.getCoordinates());
         }
     }
 
@@ -401,6 +337,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
+        if(AccountUtil.getUserName(getContext()).equals(media.getCreator())){
         final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.simple_spinner_dropdown_list, reasonList);
         final Spinner spinner = new Spinner(getActivity());
@@ -418,26 +355,21 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if(isDeleted) {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         }
+        }
         //Reviewer correct me if i have misunderstood something over here
         //But how does this  if (delete.getVisibility() == View.VISIBLE) {
         //            enableDeleteButton(true);   makes sense ?
+        else{
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setMessage("Why should this fileckathon-2018  be deleted?");
+        alert.setMessage(getString(R.string.dialog_box_text_nomination,media.getDisplayTitle()));
         final EditText input = new EditText(getActivity());
         alert.setView(input);
         input.requestFocus();
-        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String reason = input.getText().toString();
-
-                DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                deleteTask.execute();
-                enableDeleteButton(false);
-            }
+        alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
+            String reason = input.getText().toString();
+            onDeleteClickeddialogtext(reason);
         });
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
+        alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
         });
         AlertDialog d = alert.create();
         input.addTextChangedListener(new TextWatcher() {
@@ -466,26 +398,45 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         d.show();
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
+        }
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
         String reason = spinner.getSelectedItem().toString();
-        Single<String> deletionReason = reasonBuilder.getReason(media, reason);
-        compositeDisposable.add(deletionReason
+        Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
+                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+        compositeDisposable.add(resultSingle
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    DeleteTask deleteTask = new DeleteTask(getActivity(), media, reason);
-                    deleteTask.execute();
-                    isDeleted = true;
-                    enableDeleteButton(false);
+                    if (getActivity() != null) {
+                        isDeleted = true;
+                        enableDeleteButton(false);
+                    }
                 }));
+
+    }
+
+    @SuppressLint("CheckResult")
+    private void onDeleteClickeddialogtext(String reason) {
+        Single<Boolean> resultSingletext = reasonBuilder.getReason(media, reason)
+                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+        compositeDisposable.add(resultSingletext
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    if (getActivity() != null) {
+                        isDeleted = true;
+                        enableDeleteButton(false);
+                    }
+                }));
+
     }
 
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
-        if (nominatedForDeletion.getVisibility()== VISIBLE) {
-            openWebBrowser(media.getFilePageTitle().getMobileUri().toString());
+        if (nominatedForDeletion.getVisibility() == VISIBLE && getActivity() != null) {
+            Utils.handleWebUrl(getActivity(), Uri.parse(media.getPageTitle().getMobileUri()));
         }
     }
 
@@ -571,12 +522,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (licenseKey == null || licenseKey.equals("")) {
             return getString(R.string.detail_license_empty);
         }
-        License licenseObj = licenseList.get(licenseKey);
-        if (licenseObj == null) {
-            return licenseKey;
-        } else {
-            return licenseObj.getName();
-        }
+        return licenseKey;
     }
 
     private String prettyUploadedDate(Media media) {
@@ -584,7 +530,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
-        return DateUtils.dateInLocaleFormat(date);
+        return DateUtil.getDateStringWithSkeletonPattern(date, "dd MMM yyyy");
     }
 
     /**
@@ -609,40 +555,4 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-    private @Nullable
-    String licenseLink(Media media) {
-        String licenseKey = media.getLicense();
-        if (licenseKey == null || licenseKey.equals("")) {
-            return null;
-        }
-        License licenseObj = licenseList.get(licenseKey);
-        if (licenseObj == null) {
-            return null;
-        } else {
-            return licenseObj.getUrl(Locale.getDefault().getLanguage());
-        }
-    }
-
-    private void openWebBrowser(String url) {
-        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        //check if web browser available
-        if (browser.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(browser);
-        } else {
-            Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
-            toast.show();
-        }
-
-    }
-
-    private void openMap(LatLng coordinates) {
-        //Open map app at given position
-        Uri gmmIntentUri = Uri.parse(
-                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLongitude());
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-
-        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(mapIntent);
-        }
-    }
 }

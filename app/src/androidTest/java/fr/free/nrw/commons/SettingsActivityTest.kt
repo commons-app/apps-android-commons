@@ -150,4 +150,9 @@ class SettingsActivityTest {
                 .inAdapterView(withId(android.R.id.list))
                 .check(matches(not(isEnabled())))
     }
+
+    @Test
+    fun orientationChange() {
+        UITestHelper.changeOrientation(activityRule)
+    }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Envlh
 * Murma174
 -->
@@ -76,7 +77,7 @@
   <string name="title_activity_signup">Iinskriiw</string>
   <string name="menu_about">Auer</string>
   <string name="about_license" fuzzy="true">Open Source software ütjden oner det lisens &lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;.\nWikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimedia Foundation an wurd mä ferloof faan\'t Wikimedia Foundation brükt. Wi hiar ei tu\'t Wikimedia Foundation.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Code&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Wääbsteed&lt;/a&gt; üüb GitHub&lt;/a&gt;. En neien &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-iindrach&lt;/a&gt; för feelern of föörslacher maage.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Code&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Wääbsteed&lt;/a&gt; üüb GitHub&lt;/a&gt;. En neien &lt;a href=\"%1$s\"&gt;GitHub-iindrach&lt;/a&gt; för feelern of föörslacher maage.</string>
   <string name="about_privacy_policy" fuzzy="true">Brükerreegeln</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Soonk&lt;/a&gt;</string>
   <string name="title_activity_about">Auer</string>

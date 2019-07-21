@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Aktron
 * Chmee2
 * Clon
@@ -7,6 +8,7 @@
 * Frettie
 * Ilimanaq29
 * Jkjk
+* Ján Kepler
 * Leanes
 * Matěj Suchánek
 * Michaelbrabec
@@ -106,7 +108,7 @@
   <string name="title_activity_category_details">Kategorie</string>
   <string name="menu_about">O aplikaci</string>
   <string name="about_license">Aplikace Wikimedia Commons je open source software vytvářený a spravovaný členy komunity Wikimedia. Nadace Wikimedia se neúčastní tvorby, vývoje či správy aplikace.</string>
-  <string name="about_improve">Otevřete nové &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení na GitHubu&lt;/a&gt; pro nahlášení chyb a návrhů.</string>
+  <string name="about_improve">Otevřete nové &lt;a href=\"%1$s\"&gt;hlášení na GitHubu&lt;/a&gt; pro nahlášení chyb a návrhů.</string>
   <string name="about_privacy_policy">&lt;u&gt;Ochrana osobních údajů&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Autoři&lt;/u&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
@@ -178,7 +180,7 @@
   <string name="menu_refresh">Obnovit</string>
   <string name="storage_permission_title">Požadavek na oprávnění k úložišti</string>
   <string name="read_storage_permission_rationale">Požadované oprávnění: Čtení externího úložiště. Bez něj nemůže aplikace číst vaši galerii.</string>
-  <string name="write_storage_permission_rationale">Požadované oprávnění: Zapisování do externího úložiště. Bez něj nemůže aplikace používat vaši kameru.</string>
+  <string name="write_storage_permission_rationale">Požadované oprávnění: Zapisování do externího úložiště. Bez něj nemůže aplikace používat vaši kameru/galerii.</string>
   <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Místa v okolí</string>
@@ -204,7 +206,7 @@
   <string name="maximum_limit_alert">Není možné zobrazit více než 500</string>
   <string name="enter_valid">Zadejte platné číslo</string>
   <string name="cannot_be_zero">Limit nahrávání nemůže být 0</string>
-  <string name="set_limit" fuzzy="true">Počet nahraných souborů, které se zobrazí</string>
+  <string name="set_limit">Počet nahraných souborů, které se zobrazí</string>
   <string name="login_failed_2fa_not_supported">Tato aplikace zatím nepodporuje tzv. dvoufázové ověření.</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
   <string name="commons_logo">Logo Wikimedia Commons</string>
@@ -278,17 +280,17 @@
   <string name="nearby_location_has_not_changed">Vaše umístění se nezměnilo.</string>
   <string name="nearby_location_not_available">Umístění není dostupné.</string>
   <string name="location_permission_rationale_nearby">Vyžadováno povolení k zobrazení seznamu míst v okolí</string>
-  <string name="get_directions">NAVIGOVAT</string>
-  <string name="read_article">PŘEČÍST ČLÁNEK</string>
+  <string name="get_directions" fuzzy="true">NAVIGOVAT</string>
+  <string name="read_article" fuzzy="true">PŘEČÍST ČLÁNEK</string>
   <string name="notifications_welcome">Vítejte na Wikimedia Commons, %1$s! Jsme rádi, že jste zde.</string>
   <string name="notifications_talk_page_message">%2$s vám napsal na vaši diskusní stránku</string>
   <string name="notifications_thank_you_edit">Děkujeme za vaši editaci</string>
   <string name="notifications_mention">%1$s vás zmínil na %2$s.</string>
   <string name="toggle_view_button">Přepnout pohled</string>
-  <string name="nearby_directions">POKYNY</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIE</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions" fuzzy="true">POKYNY</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIE</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Ohodnoťte nás&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Často kladené otázky&lt;/u&gt;</string>
   <string name="welcome_skip_button">Přeskočit úvod</string>
@@ -303,7 +305,7 @@
   <string name="about_translate_cancel">Zrušit</string>
   <string name="retry">Zkusit znovu</string>
   <string name="showcase_view_got_it_button">Jasně!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Toto jsou místa poblíž vaší současné polohy, které potřebují fotografie k ilustraci příslušných článků na Wikipedii</string>
+  <string name="showcase_view_whole_nearby_activity">Toto jsou místa poblíž vaší současné polohy, které potřebují fotografie k ilustraci příslušných článků na Wikipedii.\n\nKlepnutím na \'PROHLEDAT TUTO OBLAST\' se zamkne mapa a spustí se prohledávání okolí daného místa.</string>
   <string name="showcase_view_list_icon">Klíknutím na toto tlačítko otevřete seznam těchto míst</string>
   <string name="showcase_view_plus_fab">Můžete nahrát obrázek jakéhokoliv z těchto míst z vaší galerie nebo přímo z fotoaparátu.</string>
   <string name="no_images_found">Nebyly nalezeny žádné obrázky!</string>
@@ -320,8 +322,8 @@
   <string name="provider_searches">Nedávno hledané dotazy</string>
   <string name="error_loading_categories">Chyba při načítání kategorií.</string>
   <string name="error_loading_subcategories">Chyba při načítání podkategorií.</string>
-  <string name="search_tab_title_media">MÉDIA</string>
-  <string name="search_tab_title_categories">KATEGORIE</string>
+  <string name="search_tab_title_media" fuzzy="true">MÉDIA</string>
+  <string name="search_tab_title_categories" fuzzy="true">KATEGORIE</string>
   <string name="successful_wikidata_edit">Obrázek byl úspěšně přidán do položky %1$s na Wikidatech!</string>
   <string name="wikidata_edit_failure">Nepodařilo se aktualizovat příslušnou položku na Wikidatech!</string>
   <string name="menu_set_wallpaper">Nastavit jako pozadí</string>
@@ -355,13 +357,13 @@
   <string name="delete_search_dialog">Chcete odstranit toto hledání?</string>
   <string name="search_history_deleted">Historie hledání byla odstraněna</string>
   <string name="nominate_delete">Navrhnout na smazání</string>
-  <string name="delete">SMAZAT</string>
+  <string name="delete" fuzzy="true">SMAZAT</string>
   <string name="Achievements">Dosažené úspěchy</string>
-  <string name="statistics">STATISTIKA</string>
+  <string name="statistics" fuzzy="true">STATISTIKA</string>
   <string name="statistics_thanks">Obdržená poděkování</string>
   <string name="statistics_featured">Nejlepší obrázky</string>
   <string name="statistics_wikidata_edits">Obrázky přes „Místa v okolí“</string>
-  <string name="level">ÚROVEŇ</string>
+  <string name="level" fuzzy="true">ÚROVEŇ</string>
   <string name="images_uploaded">Nahrané obrázky</string>
   <string name="image_reverts">Nerevertované obrázky</string>
   <string name="images_used_by_wiki">Použitých obrázků</string>
@@ -437,11 +439,14 @@
   <string name="achievements_fetch_failed">Nastala neočekávaná chyba. Nemohli jsme dokončit akci</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobrazovat kampaně</string>
-  <string name="display_campaigns_explanation">Klepnutím sem zobrazíte probíhající kampaně</string>
+  <string name="display_campaigns_explanation">Podívejte se na probíhající kampaně</string>
   <string name="nearby_campaign_dismiss_message">Kampaně již neuvidíte. Toto oznámení však můžete znovu zapnout v Nastavení.</string>
   <string name="this_function_needs_network_connection">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
   <string name="bad_token_error_proposed_solution">Nahrávání se nezdařilo kvůli problémům s editačním tokenem. Zkuste se prosím odhlásit a zkuste to znovu.</string>
   <string name="error_processing_image">Během zpracování obrázku došlo k chybě. Prosím zkuste to znovu!</string>
+  <string name="review_category_no_button_text">Vypadá to dobře</string>
+  <string name="review_thanks_yes_button_text">Ano, proč ne</string>
+  <string name="review_thanks_no_button_text">Další soubor</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Probíhá příjem sdíleného obsahu. Zpracování obrázku může chvíli trvat v závislosti na velikosti obrázku a vašem zařízení</item>
     <item quantity="other">Probíhá příjem sdíleného obsahu. Zpracování obrázků může chvíli trvat v závislosti na velikosti obrázků a vašem zařízení</item>
@@ -449,8 +454,8 @@
   <string name="no_image">Nejsou použity žádné obrázky</string>
   <string name="no_image_reverted">Žádné revertované obrázky</string>
   <string name="no_image_uploaded">Žádné nahrané obrázky</string>
-  <string name="no_notification" fuzzy="true">Nemáte žádné nepřečtené upozornění</string>
-  <string name="no_archived_notification" fuzzy="true">Nemáte nepřečtené upozornění</string>
+  <string name="no_notification">Nemáte žádná nepřečtená upozornění</string>
+  <string name="no_archived_notification">Nemáte nepřečtená upozornění</string>
   <string name="share_logs_using">Sdílet logy pomocí</string>
   <string name="menu_option_archived">Zobrazit přečtené</string>
   <string name="menu_option_unread">Zobrazit nepřečtené</string>

@@ -73,7 +73,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
         drawerLayout.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
-        setDrawerPaneWidth();
         setUserName();
         Menu nav_Menu = navigationView.getMenu();
         View headerLayout = navigationView.getHeaderView(0);
@@ -82,7 +81,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             userIcon.setVisibility(View.GONE);
             nav_Menu.findItem(R.id.action_login).setVisible(true);
             nav_Menu.findItem(R.id.action_home).setVisible(false);
-            nav_Menu.findItem(R.id.action_settings).setVisible(false);
+            nav_Menu.findItem(R.id.action_settings).setVisible(true);
             nav_Menu.findItem(R.id.action_logout).setVisible(false);
             nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
         }else {
@@ -145,16 +144,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-    }
-
-    private void setDrawerPaneWidth() {
-        ViewGroup.LayoutParams params = navigationView.getLayoutParams();
-        // set width to lowerBound of 70% of the screen size in portrait mode
-        // set width to lowerBound of 50% of the screen size in landscape mode
-        int percentageWidth = getResources().getInteger(R.integer.drawer_width);
-
-        params.width = (getResources().getDisplayMetrics().widthPixels * percentageWidth) / 100;
-        navigationView.setLayoutParams(params);
     }
 
     @Override

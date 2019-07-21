@@ -134,6 +134,7 @@
   <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
   <string name="navigation_item_notification">{{Identical|Notification}}</string>
+  <string name="navigation_item_review">{{Identical|Review}}</string>
   <string name="nominated_see_more">&lt;u&gt;See webpage for details&lt;/u&gt;</string>
   <string name="skip_login">{{Identical|Skip}}</string>
   <string name="navigation_item_login">{{Identical|Log in}}</string>
@@ -144,6 +145,7 @@
   <string name="about_translate_title">{{Identical|Language}}</string>
   <string name="about_translate_cancel">{{Identical|Cancel}}</string>
   <string name="retry">{{Identical|Retry}}</string>
+  <string name="showcase_view_whole_nearby_activity">\"Search this area\" refers to {{msg-wm|Commons-android-strings-search this area}}.</string>
   <string name="menu_search_button">{{Identical|Search}}</string>
   <string name="title_activity_search">{{Identical|Search}}</string>
   <string name="successful_wikidata_edit">Message shown in a dialog (\"success toast\") after a contribution by the user.\n\nParameter:\n* %1$s - title of the target page on Wikidata</string>
@@ -153,4 +155,7 @@
   <string name="nearby_fragment">{{Identical|Nearby}}</string>
   <string name="submit">{{Identical|Submit}}</string>
   <string name="log_collection_started">\"Send log file\" is {{msg-wm|Commons-android-strings-send log file}}.</string>
+  <string name="nominate_for_deletion_done">{{Identical|Done}}</string>
+  <string name="exif_tag_name_author">{{Identical|Author}}</string>
+  <string name="exif_tag_name_location">{{Identical|Location}}</string>
 </resources>

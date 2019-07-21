@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * AnB
 * Citadell
 * Danmichaelo
@@ -100,7 +101,7 @@
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen er åpen kildekode og er skapt og vedlikeholdt av stipendiater og frivillige fra Wikimedia-fellesskapet. Wikimedia Foundation er ikke involvert i utviklingen eller vedlikeholdet av appen.</string>
-  <string name="about_improve">Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
+  <string name="about_improve">Opprett en ny &lt;a href=\"%1$s\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;u&gt;Personvernpolicy&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Bidragsytere&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>
@@ -172,7 +173,7 @@
   <string name="menu_refresh">Gjenoppfrisk</string>
   <string name="storage_permission_title">Ber om lagringstillatelse</string>
   <string name="read_storage_permission_rationale">Nødvendig tillatelse: Lese ekstern lagring. Appen kan ikke få tilgang til galleriet ditt uten dette.</string>
-  <string name="write_storage_permission_rationale">Nødvendig tillatelse: Skriv til ekstern lagring. Appen får ikke tilgang til kameraet ditt uten dette.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Nødvendig tillatelse: Skriv til ekstern lagring. Appen får ikke tilgang til kameraet ditt uten dette.</string>
   <string name="location_permission_rationale">Valgfri tillatelse: Hent nåværende posisjon for kategoriforslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plasser i nærheten</string>
@@ -198,7 +199,7 @@
   <string name="maximum_limit_alert">Kan ikke vise mer enn 500</string>
   <string name="enter_valid">Angi et gyldig tall</string>
   <string name="cannot_be_zero">Opplastingsgrensen kan ikke være 0</string>
-  <string name="set_limit" fuzzy="true">Sett grense for seneste opplastinger</string>
+  <string name="set_limit">Grense for siste opplastinger</string>
   <string name="login_failed_2fa_not_supported">Totrinns pålogging støttes ikke ennå.</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
   <string name="commons_logo">Commons-logo</string>
@@ -271,17 +272,17 @@
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
-  <string name="get_directions">FÅ VEIBESKRIVELSE</string>
-  <string name="read_article">LES ARTIKKEL</string>
+  <string name="get_directions" fuzzy="true">FÅ VEIBESKRIVELSE</string>
+  <string name="read_article" fuzzy="true">LES ARTIKKEL</string>
   <string name="notifications_welcome">Velkommen til Wikimedia Commons, %1$s! Vi er glade for at du er her.</string>
   <string name="notifications_talk_page_message">%1$s la igjen en beskjed på diskusjonssiden din</string>
   <string name="notifications_thank_you_edit">Takk for at du har gjort en redigering</string>
   <string name="notifications_mention">%1$s nevnte deg på %2$s.</string>
   <string name="toggle_view_button">Skift visning</string>
-  <string name="nearby_directions">VEIBESKRIVELSE</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
+  <string name="nearby_directions" fuzzy="true">VEIBESKRIVELSE</string>
+  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
+  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
+  <string name="nearby_commons" fuzzy="true">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Vurder oss&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Ofte stilte spørsmål&lt;/u&gt;</string>
   <string name="welcome_skip_button">Hopp over innledning</string>
@@ -313,8 +314,8 @@
   <string name="provider_searches">Nylige søkeord</string>
   <string name="error_loading_categories">Feil oppsto under lasting av kategorier.</string>
   <string name="error_loading_subcategories">Feil oppsto under lasting av underkategorier.</string>
-  <string name="search_tab_title_media">MEDIA</string>
-  <string name="search_tab_title_categories">KATEGORIER</string>
+  <string name="search_tab_title_media" fuzzy="true">MEDIA</string>
+  <string name="search_tab_title_categories" fuzzy="true">KATEGORIER</string>
   <string name="successful_wikidata_edit">Bildet ble lagt til på %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Kunne ikke oppdatere tilsvarende Wikidata-element!</string>
   <string name="menu_set_wallpaper">Angi som bakgrunnsbilde</string>
@@ -348,10 +349,10 @@
   <string name="search_history_deleted">Søkehistorikk slettet</string>
   <string name="nominate_delete">Nominer for sletting</string>
   <string name="Achievements">Prestasjoner</string>
-  <string name="statistics">STATISTIKK</string>
+  <string name="statistics" fuzzy="true">STATISTIKK</string>
   <string name="statistics_thanks">Takk mottatt</string>
   <string name="statistics_featured">Utvalgte bilder</string>
-  <string name="level">NIVÅ</string>
+  <string name="level" fuzzy="true">NIVÅ</string>
   <string name="images_uploaded">Opplastede bilder</string>
   <string name="image_reverts">Bilder som ikke har blitt tilbakestilt</string>
   <string name="images_used_by_wiki">Bilder brukt</string>
@@ -425,7 +426,7 @@
   <string name="achievements_fetch_failed">Noe gikk galt. Vi kunne ikke hente prestasjonene dine.</string>
   <string name="ends_on">Slutter:</string>
   <string name="display_campaigns">Vis kampanjer</string>
-  <string name="display_campaigns_explanation">Trykk her for å se pågående kampanjer</string>
+  <string name="display_campaigns_explanation" fuzzy="true">Trykk her for å se pågående kampanjer</string>
   <string name="nearby_campaign_dismiss_message">Du vil ikke se kampanjer lenger. Du kan slå på dette igjen i innstillingene om du ønsker.</string>
   <string name="this_function_needs_network_connection">Denne funksjonen trenger nettverksforbindelse, sjekk tilkoblingsinnstillingene dine.</string>
   <string name="bad_token_error_proposed_solution">Opplastingen feilet på grunn av problemer med redigeringsnøkkelen. Prøv å logge ut og logge inn igjen.</string>
