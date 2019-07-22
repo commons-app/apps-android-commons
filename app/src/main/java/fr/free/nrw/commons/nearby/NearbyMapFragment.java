@@ -1043,15 +1043,13 @@ public class NearbyMapFragment extends DaggerFragment {
 
 
     public void updateMarker(boolean isBookmarked, Place place) {
-        Log.d("deneme4","burada2 update marker");
-
 
         VectorDrawableCompat vectorDrawable;
         if (isBookmarked) {
             vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_bookmark_marker, getContext().getTheme()
             );
-        } else if (place.pic != "") {
+        } else if (!place.pic.trim().isEmpty()) {
             vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_map_marker_green, getContext().getTheme()
             );

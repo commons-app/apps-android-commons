@@ -203,7 +203,8 @@ public class NearbyController {
                                 place.location.getLatitude(),
                                 place.location.getLongitude()));
                 nearbyBaseMarker.place(place);
-                if (place.pic != "") {
+                // Check if string is only spaces or empty, if so place doesn't have any picture
+                if (!place.pic.trim().isEmpty()) {
                     if (iconGreen != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
                                 .fromBitmap(iconGreen));

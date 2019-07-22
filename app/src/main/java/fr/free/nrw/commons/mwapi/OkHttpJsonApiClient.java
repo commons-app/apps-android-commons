@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.text.TextUtils;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
