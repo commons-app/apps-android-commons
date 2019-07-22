@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -38,13 +39,15 @@ import io.reactivex.Single;
 public class MediaClient {
 
     private final MediaInterface mediaInterface;
+    private final MediaDetailInterface mediaDetailInterface;
 
     //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
     private Map<String, Map<String, String>> continuationStore;
 
     @Inject
-    public MediaClient(MediaInterface mediaInterface) {
+    public MediaClient(MediaInterface mediaInterface, MediaDetailInterface mediaDetailInterface) {
         this.mediaInterface = mediaInterface;
+        this.mediaDetailInterface = mediaDetailInterface;
         this.continuationStore = new HashMap<>();
     }
 
@@ -160,5 +163,13 @@ public class MediaClient {
                 })
                 .map(Media::from)
                 .single(Media.EMPTY);
+    }
+
+    public Single<String> getCaption(String filename)  {
+        return mediaDetailInterface.fetchCaptionByFilename(Locale.getDefault().getLanguage(), filename)
+                .map(mwQueryResponse -> {
+                   return mwQueryResponse.toString();
+                })
+                .singleOrError();
     }
 }

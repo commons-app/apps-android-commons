@@ -26,6 +26,7 @@ import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaDetailInterface;
 import fr.free.nrw.commons.media.MediaInterface;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -53,6 +54,7 @@ public class NetworkingModule {
 
     public static final String NAMED_COMMONS_WIKI_SITE = "commons-wikisite";
     private static final String NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite";
+    private static final String NAMED_COMMONS_WIKI = "commonswiki";
 
     public static final String NAMED_COMMONS_CSRF = "commons-csrf";
     public static final String NAMED_WIKI_DATA_CSRF = "wikidata-csrf";
@@ -153,6 +155,13 @@ public class NetworkingModule {
         return new WikiSite(BuildConfig.WIKIDATA_URL);
     }
 
+    @Provides
+    @Singleton
+    @Named(NAMED_COMMONS_WIKI)
+    public WikiSite provideCommonsWiki() {
+        return new WikiSite(BuildConfig.COMMONS_URL);
+    }
+
     /**
      * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
      * @return returns a singleton Gson instance
@@ -244,6 +253,13 @@ public class NetworkingModule {
     public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, MediaInterface.class);
     }
+
+    @Provides
+    @Singleton
+    public MediaDetailInterface providesMediaDetailInterface(@Named(NAMED_COMMONS_WIKI) WikiSite commonsWikisite) {
+        return ServiceFactory.get(commonsWikisite, BuildConfig.COMMONS_URL, MediaDetailInterface.class);
+    }
+
 
     @Provides
     @Singleton

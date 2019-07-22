@@ -86,4 +86,12 @@ public interface MediaInterface {
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl")
     Observable<MwQueryResponse> getMediaWithGenerator(@Query("titles") String title);
+
+    /**
+     * Fetches caption using file name
+     *
+     * @param filename name of the file to be used for fetching captions
+     * */
+    @GET("w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1")
+    Observable<MwQueryResponse> fetchCaptionByFilename(@Query("language") String language, @Query("titles") String filename);
 }

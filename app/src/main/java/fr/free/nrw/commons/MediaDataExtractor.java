@@ -2,10 +2,12 @@ package fr.free.nrw.commons;
 
 import androidx.core.text.HtmlCompat;
 
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.media.MediaDetailInterface;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Single;
@@ -26,7 +28,7 @@ public class MediaDataExtractor {
     @Inject
     public MediaDataExtractor(MediaWikiApi mwApi,
                               OkHttpJsonApiClient okHttpJsonApiClient,
-                              MediaClient mediaClient) {
+                              MediaClient mediaClient, MediaDetailInterface mediaDetailInterface) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.mediaWikiApi = mwApi;
         this.mediaClient = mediaClient;
@@ -34,7 +36,7 @@ public class MediaDataExtractor {
 
     /**
      * Simplified method to extract all details required to show media details.
-     * It fetches media object, deletion status and talk page for the filename
+     * It fetches media object, deletion status and talk page and caption for the filename
      * @param filename for which the details are to be fetched
      * @return full Media object with all details including deletion status and talk page
      */
@@ -42,13 +44,31 @@ public class MediaDataExtractor {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
         Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
-        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, (media, deletionStatus, discussion) -> {
+        Single<String> captionSingle = getCaption(filename);
+        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionSingle, (media, deletionStatus, discussion, caption) -> {
             media.setDiscussion(discussion);
+            media.setCaption(caption);
             if (deletionStatus) {
                 media.setRequestedDeletion();
             }
             return media;
         });
+    }
+
+    /**
+     * Fetch caption from the MediaWiki API
+     * @param filename the filename we will return the caption for
+     * @return a single with caption string (an empty string if no caption)
+     */
+    private Single<String> getCaption(String filename)  {
+        return mediaClient.getCaption(filename)
+                .map(mwQueryResponse -> {
+                    return mwQueryResponse.toString();
+                })
+                .onErrorReturn(throwable -> {
+                    Timber.e(throwable, "Error occurred while fetching discussion");
+                    return "";
+                });
     }
 
     /**

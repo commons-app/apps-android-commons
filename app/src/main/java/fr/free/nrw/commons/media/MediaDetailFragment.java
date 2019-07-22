@@ -99,6 +99,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     MediaDetailSpacer spacer;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
+    @BindView(R.id.mediaDetailCaption)
+    TextView mediaCaption;
     @BindView(R.id.mediaDetailDesc)
     HtmlTextView desc;
     @BindView(R.id.mediaDetailAuthor)
@@ -288,6 +290,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
         mediaDiscussion.setText(prettyDiscussion(media));
+        mediaCaption.setText(prettyCaption(media));
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
@@ -497,6 +500,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         image.setAlpha(1.0f - scrollPercentage);
     }
+
+    private String prettyCaption(Media media) {
+        String caption = media.getCaption().trim();
+        if (caption.equals("")) {
+            return getString(R.string.detail_caption_empty);
+        } else {
+            return caption;
+        }
+    }
+
 
     private String prettyDescription(Media media) {
         // @todo use UI language when multilingual descs are available
