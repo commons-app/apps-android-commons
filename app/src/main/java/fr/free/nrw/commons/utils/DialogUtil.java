@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.View;
+import android.view.ViewGroup;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -116,6 +117,8 @@ public class DialogUtil {
                                         final Runnable onNegativeBtnClick,
                                         View customView,
                                         boolean cancelable) {
+        if (customView != null && customView.getParent() != null)
+            ((ViewGroup) customView.getParent()).removeAllViews();
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title);
         builder.setMessage(message);
