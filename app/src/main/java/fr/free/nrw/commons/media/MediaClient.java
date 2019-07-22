@@ -2,20 +2,17 @@ package fr.free.nrw.commons.media;
 
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import com.google.gson.internal.LinkedTreeMap;
+
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.dataclient.mwapi.MwQueryResult;
 
 import java.util.Date;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -25,12 +22,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import okhttp3.HttpUrl;
-import okhttp3.Request;
-import okhttp3.Response;
 import timber.log.Timber;
-import io.reactivex.Observable;
-import io.reactivex.Single;
 
 /**
  * Media Client to handle custom calls to Commons MediaWiki APIs
@@ -166,9 +158,25 @@ public class MediaClient {
     }
 
     public Single<String> getCaption(String filename)  {
-        return mediaDetailInterface.fetchCaptionByFilename(Locale.getDefault().getLanguage(), filename)
-                .map(mwQueryResponse -> {
-                   return mwQueryResponse.toString();
+        return mediaDetailInterface.fetchCaptionByFilename(filename)
+                .map(mediaDetailResponse -> {
+                    if(mediaDetailResponse.getSuccess() == 1) {
+                        Map<String, CaptionMetadata> entities = mediaDetailResponse.getEntities();
+                        if (entities != null) {
+                            Map.Entry<String,CaptionMetadata> entry = entities.entrySet().iterator().next();
+                            CaptionMetadata captionMetadata = entry.getValue();
+                            if (captionMetadata != null) {
+                                Labels labels = captionMetadata.getLabels();
+                                if (labels != null) {
+                                    CaptionObject captionObject = labels.getCaptionObject();
+                                    if (captionObject != null) {
+                                        return captionObject.getValue();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                   return "NO CAPTION";
                 })
                 .singleOrError();
     }

@@ -63,7 +63,7 @@ public class MediaDataExtractor {
     private Single<String> getCaption(String filename)  {
         return mediaClient.getCaption(filename)
                 .map(mwQueryResponse -> {
-                    return mwQueryResponse.toString();
+                    return mwQueryResponse;
                 })
                 .onErrorReturn(throwable -> {
                     Timber.e(throwable, "Error occurred while fetching discussion");
