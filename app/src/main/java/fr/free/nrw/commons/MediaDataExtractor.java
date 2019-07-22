@@ -66,8 +66,7 @@ public class MediaDataExtractor {
      * @return
      */
     private Single<String> getDiscussion(String filename) {
-        return mediaWikiApi.fetchMediaByFilename(filename.replace("File", "File talk"))
-                .flatMap(mediaResult -> mediaWikiApi.parseWikicode(mediaResult.getWikiSource()))
+        return mediaClient.getPageHtml(filename.replace("File", "File talk"))
                 .map(discussion -> HtmlCompat.fromHtml(discussion, HtmlCompat.FROM_HTML_MODE_LEGACY).toString())
                 .onErrorReturn(throwable -> {
                     Timber.e(throwable, "Error occurred while fetching discussion");

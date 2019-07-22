@@ -161,4 +161,12 @@ public class MediaClient {
                 .map(Media::from)
                 .single(Media.EMPTY);
     }
+
+    @NonNull
+    public Single<String> getPageHtml(String title){
+        return mediaInterface.getPageHtml(title)
+                .map(MwParseResponse::parse)
+                .map(MwParseResult::text)
+                .first("");
+    }
 }
