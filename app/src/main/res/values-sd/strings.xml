@@ -254,5 +254,6 @@
   <string name="search_history_deleted">ڳولا سوانح ڊاٿي وئي</string>
   <string name="statistics" fuzzy="true">انگ اکر</string>
   <string name="error_occurred">خلل ٿيو!</string>
+  <string name="contributions_fragment">ڀاڱيداريون</string>
   <string name="write_storage_permission_rationale_for_image_share">اسان کي اوهان جي ڊوائس جي اسٽورج جي اجازت گھرجي جيئن تصويرون چاڙهي سگھجن.</string>
 </resources>
