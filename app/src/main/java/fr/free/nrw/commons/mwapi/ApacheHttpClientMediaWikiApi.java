@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.gson.Gson;
 
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -26,10 +25,6 @@ import java.util.Date;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 
-import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
-
-import io.reactivex.Single;
 import timber.log.Timber;
 
 /**
@@ -52,35 +47,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             httpClient.addRequestInterceptor(NetworkInterceptors.getHttpRequestInterceptor());
         }
         api = new CustomMwApi(apiURL, httpClient);
-    }
-
-    @Override
-    public Single<String> parseWikicode(String source) {
-        return Single.fromCallable(() -> api.action("flow-parsoid-utils")
-                .param("from", "wikitext")
-                .param("to", "html")
-                .param("content", source)
-                .param("title", "Main_page")
-                .get()
-                .getString("/api/flow-parsoid-utils/@content"));
-    }
-
-    @Override
-    @NonNull
-    public Single<MediaResult> fetchMediaByFilename(String filename) {
-        return Single.fromCallable(() -> {
-            CustomApiResult apiResult = api.action("query")
-                    .param("prop", "revisions")
-                    .param("titles", filename)
-                    .param("rvprop", "content")
-                    .param("rvlimit", 1)
-                    .param("rvgeneratexml", 1)
-                    .get();
-
-            return new MediaResult(
-                    apiResult.getString("/api/query/pages/page/revisions/rev"),
-                    apiResult.getString("/api/query/pages/page/revisions/rev/@parsetree"));
-        });
     }
 
     @Override
