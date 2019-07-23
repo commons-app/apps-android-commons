@@ -6,7 +6,6 @@ import static android.view.View.VISIBLE;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -101,6 +100,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     TextView title;
     @BindView(R.id.media_detail_caption)
     TextView mediaCaption;
+    @BindView(R.id.media_detail_depiction)
+    TextView mediaDepiction;
     @BindView(R.id.mediaDetailDesc)
     HtmlTextView desc;
     @BindView(R.id.mediaDetailAuthor)
@@ -291,6 +292,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         uploadedDate.setText(prettyUploadedDate(media));
         mediaDiscussion.setText(prettyDiscussion(media));
         mediaCaption.setText(prettyCaption(media));
+        mediaDepiction.setText(prettyDepiction(media));
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
@@ -517,6 +519,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
+    private String prettyDepiction(Media media) {
+        String depiction = media.getDepiction().trim();
+        if (depiction.equals("")) {
+            return getString(R.string.detail_depiction_empty);
+        }
+        else {
+            return depiction;
+        }
+    }
 
     private String prettyDescription(Media media) {
         // @todo use UI language when multilingual descs are available

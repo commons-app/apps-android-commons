@@ -53,6 +53,7 @@ public class Media implements Parcelable {
      * Also now captions replace the previous convention of using title for filename
      */
     private String caption;
+    private String depiction;
     protected String description; // monolingual description on input...
     protected String discussion;
     protected long dataLength;
@@ -328,6 +329,10 @@ public class Media implements Parcelable {
 
     public String getCaption() {
         return caption;
+    }
+
+    public String getDepiction() {
+        return  depiction;
     }
 
     /**
@@ -626,5 +631,9 @@ public class Media implements Parcelable {
 
     public void setCaption(String caption) {
         this.caption = caption;
+    }
+
+    public void setDepiction(String depiction) {
+        this.depiction =depiction;
     }
 }

@@ -1,7 +1,11 @@
 package fr.free.nrw.commons.media;
 
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
+
+import com.google.gson.internal.LinkedTreeMap;
 
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
@@ -10,6 +14,7 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -156,28 +161,60 @@ public class MediaClient {
                 .single(Media.EMPTY);
     }
 
-    public Single<String> getCaption(String filename)  {
+    public Single<Map <String, String>> getCaption(String filename)  {
         return mediaDetailInterface.fetchCaptionByFilename(Locale.getDefault().getLanguage(), filename)
                 .map(mediaDetailResponse -> {
-                    if(mediaDetailResponse.getSuccess() == 1) {
-                        Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
-                        if (entities != null) {
-                            Map.Entry<String, CommonsWikibaseItem> entry = entities.entrySet().iterator().next();
-                            CommonsWikibaseItem commonsWikibaseItem = entry.getValue();
-                            if (commonsWikibaseItem != null) {
-                                Map<String, Caption> labels = commonsWikibaseItem.getLabels();
-                                if (labels != null) {
-                                    Map.Entry<String, Caption> captionEntry = labels.entrySet().iterator().next();
-                                    Caption caption = captionEntry.getValue();
-                                    if (caption != null) {
-                                        return caption.getValue();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                   return "NO CAPTION";
+                        return fetchCaptionsFromMediaDetailResponse(mediaDetailResponse);
                 })
                 .singleOrError();
     }
-}
+
+    public Map <String, String> fetchCaptionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
+        Map <String, String> mediaDetails = new HashMap<>();
+        if (mediaDetailResponse.getSuccess() == 1) {
+            Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
+            try {
+                Map.Entry<String, CommonsWikibaseItem> entry = entities.entrySet().iterator().next();
+                CommonsWikibaseItem commonsWikibaseItem = entry.getValue();
+                try {
+                    Map<String, Caption> labels = commonsWikibaseItem.getLabels();
+                    Map.Entry<String, Caption> captionEntry = labels.entrySet().iterator().next();
+                    Caption caption = captionEntry.getValue();
+                    mediaDetails.put("caption", caption.getValue());
+                } catch (NullPointerException e) {
+                    mediaDetails.put("caption", "NO CAPTION");
+                }
+
+                try {
+                    LinkedTreeMap statements = (LinkedTreeMap) commonsWikibaseItem.getStatements();
+                    ArrayList<LinkedTreeMap> listP245962 = (ArrayList<LinkedTreeMap>) statements.get("P245962");
+                    String depictions = null;
+                    for (int i = 0; i < listP245962.size(); i++) {
+                        LinkedTreeMap depictedItem = listP245962.get(i);
+                        LinkedTreeMap mainsnak = (LinkedTreeMap) depictedItem.get("mainsnak");
+                        Map<String, LinkedTreeMap> datavalue = (Map<String, LinkedTreeMap>) mainsnak.get("datavalue");
+                        LinkedTreeMap value = datavalue.get("value");
+                        String id = value.get("id").toString();
+                        depictions.concat(id+"\n");
+                    }
+                    depictions.substring(0,depictions.length()-1);
+                    mediaDetails.put("depiction", depictions);
+                } catch (NullPointerException e) {
+                    mediaDetails.put("depiction", "NO Depiction");
+                }
+            } catch (NullPointerException e) {
+                mediaDetails.put("caption", "NO CAPTION");
+                mediaDetails.put("depiction", "NO Depiction");
+            }
+        } else {
+            mediaDetails.put("caption", "NO CAPTION");
+            mediaDetails.put("depiction", "NO Depiction");
+        }
+
+        return mediaDetails;
+    }
+
+
+
+    }
+

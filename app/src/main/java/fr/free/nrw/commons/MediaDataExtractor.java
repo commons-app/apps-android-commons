@@ -3,6 +3,8 @@ package fr.free.nrw.commons;
 import androidx.core.text.HtmlCompat;
 
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -23,6 +25,7 @@ public class MediaDataExtractor {
     private final MediaWikiApi mediaWikiApi;
     private final OkHttpJsonApiClient okHttpJsonApiClient;
     private final MediaClient mediaClient;
+    private String depiction, caption;
 
     @Inject
     public MediaDataExtractor(MediaWikiApi mwApi,
@@ -43,10 +46,11 @@ public class MediaDataExtractor {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
         Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
-        Single<String> captionSingle = getCaption(filename);
-        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionSingle, (media, deletionStatus, discussion, caption) -> {
+        getCaption(filename);
+        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, (media, deletionStatus, discussion) -> {
             media.setDiscussion(discussion);
             media.setCaption(caption);
+            media.setDepiction(depiction);
             if (deletionStatus) {
                 media.setRequestedDeletion();
             }
@@ -59,15 +63,24 @@ public class MediaDataExtractor {
      * @param filename the filename we will return the caption for
      * @return a single with caption string (an empty string if no caption)
      */
-    private Single<String> getCaption(String filename)  {
-        return mediaClient.getCaption(filename)
-                .map(mwQueryResponse -> {
-                    return mwQueryResponse;
-                })
-                .onErrorReturn(throwable -> {
-                    Timber.e(throwable, "Error occurred while fetching discussion");
-                    return "";
-                });
+    private Single<Boolean> getCaption(String filename)  {
+         return mediaClient.getCaption(filename)
+                .map(mediaResponse -> {
+                    setCaption(mediaResponse.get("caption"));
+                    setDepiction(mediaResponse.get("depiction"));
+                    return true;
+                }).doOnError(throwable -> {
+                    Timber.e("eror while fetching captions");
+                 });
+
+    }
+
+    private void setDepiction(String depiction) {
+        this.depiction = depiction;
+    }
+
+    private void setCaption(String caption) {
+        this.caption = caption;
     }
 
     /**
