@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -17,7 +18,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     @Inject
     protected SessionManager sessionManager;
     @Inject
-    MediaWikiApi mediaWikiApi;
+    UserClient userClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
      * is created to notify the user
      */
     protected void showBlockStatus() {
-        compositeDisposable.add(Observable.fromCallable(() -> mediaWikiApi.isUserBlockedFromCommons())
+        compositeDisposable.add(userClient.isUserBlockedFromCommons()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter(result -> result)
