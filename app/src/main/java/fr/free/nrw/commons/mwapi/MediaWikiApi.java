@@ -20,8 +20,6 @@ public interface MediaWikiApi {
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
 
-    boolean isUserBlockedFromCommons();
-
     void logout();
 
 //    Single<CampaignResponseDTO> getCampaigns();

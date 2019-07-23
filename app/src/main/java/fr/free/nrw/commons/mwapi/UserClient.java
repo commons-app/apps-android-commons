@@ -30,9 +30,9 @@ public class UserClient {
                 .map(MwQueryResult::userInfo)
                 .map(UserInfo::blockexpiry)
                 .map(blockExpiry -> {
-                    if (blockExpiry.equals("infinite")) {
+                    if ("infinite".equals(blockExpiry)) {
                         return true;
-                    } else if (!blockExpiry.isEmpty()) {
+                    } else if (blockExpiry!=null&&!blockExpiry.isEmpty()) {
                         Date endDate = DateUtil.iso8601DateParse(blockExpiry);
                         Date current = new Date();
                         return endDate.after(current);
