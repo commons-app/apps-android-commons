@@ -30,18 +30,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:theme="@style/Theme.MaterialComponents.Light"
-                app:singleSelection="true"
+                app:singleSelection="false"
                 >
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/choice_chip"
+                    android:id="@+id/choice_chip_exists"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Exists"/>
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/choice_chip2"
+                    android:id="@+id/choice_chip_needs_photo"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

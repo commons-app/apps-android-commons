@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -67,6 +68,10 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     FrameLayout frameLayout;
     @BindView(R.id.loading_nearby_list)
     ConstraintLayout loading_nearby_layout;
+    @BindView(R.id.choice_chip_exists)
+    Chip chipExists;
+    @BindView(R.id.choice_chip_needs_photo)
+    Chip chipNeedsPhoto;
 
     @Inject
     LocationServiceManager locationManager;
