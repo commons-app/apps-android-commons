@@ -230,6 +230,10 @@ public class WikidataEditService {
         return fileName;
     }
 
+    /**
+     * Adding captions as labels after image is successfully uploaded
+     */
+
     public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, HashMap<String, String> captions) {
         mediaClient.getMedia(fileName)
                 .subscribeOn(Schedulers.io())

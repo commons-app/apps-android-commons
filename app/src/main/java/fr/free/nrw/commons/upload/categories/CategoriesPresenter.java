@@ -83,9 +83,9 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                 )
                 .filter(categoryItem -> !repository.containsYear(categoryItem.getName()))
                 .distinct();
-        if(!TextUtils.isEmpty(query)) {
-            distinctCategoriesObservable = distinctCategoriesObservable.sorted(repository.sortBySimilarity(query));
-        }
+                if(!TextUtils.isEmpty(query)) {
+                distinctCategoriesObservable=distinctCategoriesObservable.sorted(repository.sortBySimilarity(query));
+                }
         Disposable searchCategoriesDisposable = distinctCategoriesObservable
                 .observeOn(mainThreadScheduler)
                 .subscribe(

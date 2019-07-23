@@ -17,6 +17,10 @@ import retrofit2.http.Query;
 
 import static org.wikipedia.dataclient.Service.MW_API_PREFIX;
 
+/**
+ * Retrofit calls for managing responses network calls of entity ids required for uploading depictions
+ */
+
 public interface WikiBaseInterface {
 
     @Headers("Cache-Control: no-cache")

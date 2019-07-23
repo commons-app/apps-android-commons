@@ -20,6 +20,11 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
 
+
+/**
+ * The model class for depictions in upload
+ */
+
 public class DepictModel {
     private static final int SEARCH_DEPICTS_LIMIT = 25;
     private final DepictDao depictDao;

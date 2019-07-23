@@ -99,7 +99,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     MediaDetailSpacer spacer;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
-    @BindView(R.id.mediaDetailCaption)
+    @BindView(R.id.media_detail_caption)
     TextView mediaCaption;
     @BindView(R.id.mediaDetailDesc)
     HtmlTextView desc;
@@ -500,6 +500,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         image.setAlpha(1.0f - scrollPercentage);
     }
+
+    /**
+    * Returns captions for media details
+     *
+     * @param media object of class media
+     * @return caption as string
+     */
 
     private String prettyCaption(Media media) {
         String caption = media.getCaption().trim();

@@ -49,6 +49,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         api = new CustomMwApi(apiURL, httpClient);
     }
 
+    /**
+     * @return csrf token
+     */
+
     @Override
     public String getEditToken() throws IOException {
         String editToken = api.action("query")
@@ -59,7 +63,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         return editToken;
     }
 
-
+    /**
+     * File entity id obtained after uploading the image
+     *
+     * @param fileName title of the image uploaded
+     */
     @Override
     public String getFileEntityId(String fileName) throws IOException {
         return "M" + api.action("query")
@@ -98,6 +106,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         });
     }
 
+    @NonNull
     public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException {
         CustomMwApi.RequestBuilder builder = api.action("query")
                 .param("list", "logevents")

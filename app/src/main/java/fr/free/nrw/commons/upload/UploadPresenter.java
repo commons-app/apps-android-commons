@@ -86,6 +86,11 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         }
     }
 
+    /**
+     * Returns list of UploadMedia Details
+     * to be passed on to categories and depicts fragment
+     */
+
     public List<UploadMediaDetail> getImageDetailList() {
         int titleListCount = 0;
         List<UploadMediaDetail> titleList = new ArrayList<>();

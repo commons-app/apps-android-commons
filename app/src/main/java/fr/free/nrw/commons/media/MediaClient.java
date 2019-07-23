@@ -3,8 +3,6 @@ package fr.free.nrw.commons.media;
 
 import androidx.annotation.NonNull;
 
-import com.google.gson.internal.LinkedTreeMap;
-
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
 import java.util.Date;
@@ -13,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -158,19 +157,20 @@ public class MediaClient {
     }
 
     public Single<String> getCaption(String filename)  {
-        return mediaDetailInterface.fetchCaptionByFilename(filename)
+        return mediaDetailInterface.fetchCaptionByFilename(Locale.getDefault().getLanguage(), filename)
                 .map(mediaDetailResponse -> {
                     if(mediaDetailResponse.getSuccess() == 1) {
-                        Map<String, CaptionMetadata> entities = mediaDetailResponse.getEntities();
+                        Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
                         if (entities != null) {
-                            Map.Entry<String,CaptionMetadata> entry = entities.entrySet().iterator().next();
-                            CaptionMetadata captionMetadata = entry.getValue();
-                            if (captionMetadata != null) {
-                                Labels labels = captionMetadata.getLabels();
+                            Map.Entry<String, CommonsWikibaseItem> entry = entities.entrySet().iterator().next();
+                            CommonsWikibaseItem commonsWikibaseItem = entry.getValue();
+                            if (commonsWikibaseItem != null) {
+                                Map<String, Caption> labels = commonsWikibaseItem.getLabels();
                                 if (labels != null) {
-                                    CaptionObject captionObject = labels.getCaptionObject();
-                                    if (captionObject != null) {
-                                        return captionObject.getValue();
+                                    Map.Entry<String, Caption> captionEntry = labels.entrySet().iterator().next();
+                                    Caption caption = captionEntry.getValue();
+                                    if (caption != null) {
+                                        return caption.getValue();
                                     }
                                 }
                             }

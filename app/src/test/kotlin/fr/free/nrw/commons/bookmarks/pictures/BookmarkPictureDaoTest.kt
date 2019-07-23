@@ -69,7 +69,7 @@ class BookmarkPictureDaoTest {
 
         var result = testObject.allBookmarks
 
-        assertEquals(14, (result.size))
+        assertEquals(14,(result.size))
 
     }
 

@@ -140,10 +140,9 @@ public class CategoriesModel{
     }
 
     /**
-      * Returns if we have a category in DirectKV Store
-      * @return
+     * Returns if we have a category in DirectKV Store
+     * @return
      */
-
     private boolean hasDirectCategories() {
         return !directKvStore.getString("Category", "").equals("");
     }

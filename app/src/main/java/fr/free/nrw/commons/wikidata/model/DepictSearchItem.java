@@ -1,5 +1,10 @@
 package fr.free.nrw.commons.wikidata.model;
 
+
+/**
+ * Model class for Depiction item returned from API after calling searchForDepicts
+ */
+
 public class DepictSearchItem {
     private final String id;
     private final String pageid;

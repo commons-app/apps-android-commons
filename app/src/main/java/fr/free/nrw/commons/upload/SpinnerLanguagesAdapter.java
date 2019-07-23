@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,7 +142,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
             String languageCode = LangCodeUtils.fixLanguageCode(languageCodesList.get(position));
             final String languageName = StringUtils.capitalize(languageNamesList.get(position));
 
-            if(savedLanguageValue!=null && savedLanguageValue.equals("")){
+            if(TextUtils.isEmpty(savedLanguageValue)){
                 savedLanguageValue = Locale.getDefault().getLanguage();
             }
 

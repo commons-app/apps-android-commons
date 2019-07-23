@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.media.MediaDetailInterface;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Single;
@@ -28,7 +27,7 @@ public class MediaDataExtractor {
     @Inject
     public MediaDataExtractor(MediaWikiApi mwApi,
                               OkHttpJsonApiClient okHttpJsonApiClient,
-                              MediaClient mediaClient, MediaDetailInterface mediaDetailInterface) {
+                              MediaClient mediaClient) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.mediaWikiApi = mwApi;
         this.mediaClient = mediaClient;
