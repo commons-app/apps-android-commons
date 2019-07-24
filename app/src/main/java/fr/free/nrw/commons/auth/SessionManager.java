@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.wikipedia.csrf.CsrfTokenClient;
+import org.wikipedia.dataclient.Service;
 import org.wikipedia.login.LoginResult;
 
 import javax.inject.Inject;
@@ -17,10 +19,10 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import timber.log.Timber;
+
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
 
 /**
  * Manage the current logged in user session.
@@ -28,17 +30,20 @@ import timber.log.Timber;
 @Singleton
 public class SessionManager {
     private final Context context;
-    private final MediaWikiApi mediaWikiApi;
+    private final CsrfTokenClient csrfTokenClient;
+    private final Service service;
     private Account currentAccount; // Unlike a savings account...  ;-)
     private JsonKvStore defaultKvStore;
     private static final String KEY_RAWUSERNAME = "rawusername";
 
     @Inject
     public SessionManager(Context context,
-                          MediaWikiApi mediaWikiApi,
+                          @Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient,
+                          @Named("commons-service") Service service,
                           @Named("default_preferences") JsonKvStore defaultKvStore) {
         this.context = context;
-        this.mediaWikiApi = mediaWikiApi;
+        this.csrfTokenClient = csrfTokenClient;
+        this.service = service;
         this.currentAccount = null;
         this.defaultKvStore = defaultKvStore;
     }
@@ -59,7 +64,6 @@ public class SessionManager {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
                 accountManager().removeAccountExplicitly(account);
             } else {
-                //noinspection deprecation
                 accountManager().removeAccount(account, null, null);
             }
         }
@@ -106,7 +110,7 @@ public class SessionManager {
         return account == null ? null : accountManager().getUserData(account, KEY_RAWUSERNAME);
     }
 
-    public String getAuthorName(){
+    public String getAuthorName() {
         return getRawUserName() == null ? getUserName() : getRawUserName();
     }
 
@@ -137,7 +141,8 @@ public class SessionManager {
 
     /**
      * 1. Clears existing accounts from account manager
-     * 2. Calls MediaWikiApi's logout function to clear cookies
+     * 2. Calls wikimedia-android-data-client Service's logout function to clear cookies
+     *
      * @return
      */
     public Completable logout() {
@@ -146,7 +151,11 @@ public class SessionManager {
         return Completable.fromObservable(Observable.fromArray(allAccounts)
                 .map(a -> accountManager.removeAccount(a, null, null).getResult()))
                 .doOnComplete(() -> {
-                    mediaWikiApi.logout();
+                    try {
+                        service.postLogout(csrfTokenClient.getTokenBlocking());
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
                     currentAccount = null;
                 });
     }

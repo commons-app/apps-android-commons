@@ -156,15 +156,4 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
     }
 
-    /**
-     * Calls media wiki's logout API
-     */
-    public void logout() {
-        try {
-            api.logout();
-        } catch (IOException e) {
-            Timber.e(e, "Error occurred while logging out");
-        }
-    }
-
 }

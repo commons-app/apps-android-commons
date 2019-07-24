@@ -19,8 +19,6 @@ public interface MediaWikiApi {
 
     boolean isUserBlockedFromCommons();
 
-    void logout();
-
     interface ProgressListener {
         void onProgress(long transferred, long total);
     }
