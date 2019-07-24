@@ -187,7 +187,7 @@ public class MediaClient {
      * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
      */
 
-    /*@SuppressLint("CheckResult")
+    @SuppressLint("CheckResult")
     private JsonObject fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
         JsonObject mediaDetails = new JsonObject();
         if (mediaDetailResponse.getSuccess() == 1) {
@@ -243,8 +243,7 @@ public class MediaClient {
 
         return mediaDetails;
     }
-*/
-    @SuppressLint("CheckResult")
+    /*@SuppressLint("CheckResult")
     private JsonObject fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
         JsonObject mediaDetails = new JsonObject();
         if (mediaDetailResponse.getSuccess() == 1) {
@@ -304,7 +303,7 @@ public class MediaClient {
 
         return mediaDetails;
     }
-
+*/
     /**
      * Gets labels for Depictions using Entity Id from MediaWikiAPI
      *
