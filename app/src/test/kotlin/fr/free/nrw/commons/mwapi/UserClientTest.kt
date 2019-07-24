@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.mwapi
 
 import io.reactivex.Observable
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -61,7 +62,7 @@ class UserClientTest{
     @Test
     fun isUserBlockedFromCommonsForNeverBlockedUser() {
         val userInfo = Mockito.mock(UserInfo::class.java)
-        Mockito.`when`(userInfo.blockexpiry()).thenReturn(null)
+        Mockito.`when`(userInfo.blockexpiry()).thenReturn("")
         val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
         Mockito.`when`(mwQueryResult.userInfo()).thenReturn(userInfo)
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
@@ -70,7 +71,7 @@ class UserClientTest{
                 .thenReturn(Observable.just(mockResponse))
 
         val isBanned = userClient!!.isUserBlockedFromCommons.blockingGet()
-        assertTrue(isBanned)
+        assertFalse(isBanned)
     }
 
 }
