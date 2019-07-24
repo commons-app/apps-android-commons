@@ -25,7 +25,6 @@ public class MediaDataExtractor {
     private final MediaWikiApi mediaWikiApi;
     private final OkHttpJsonApiClient okHttpJsonApiClient;
     private final MediaClient mediaClient;
-    private String depiction, caption;
 
     @Inject
     public MediaDataExtractor(MediaWikiApi mwApi,
@@ -46,11 +45,13 @@ public class MediaDataExtractor {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
         Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
+        Single<String> depictSingle = getLabel();
         Single<Map<String, String>> captionAndDepictionMap = getCaptionAndDepictions(filename);
-        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionAndDepictionMap, (media, deletionStatus, discussion, caption) -> {
+        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionAndDepictionMap, depictSingle, (media, deletionStatus, discussion, caption, depict) -> {
             media.setDiscussion(discussion);
             media.setCaption(caption.get("Caption"));
-            media.setDepiction(caption.get("Depiction"));
+            media.setDepiction(depict);
+            //media.setDepiction(caption.get("Depiction"));
             if (deletionStatus) {
                 media.setRequestedDeletion();
             }
@@ -71,6 +72,13 @@ public class MediaDataExtractor {
                     Timber.e("eror while fetching captions");
                  });
 
+    }
+
+    private Single<String> getLabel() {
+        return mediaClient.getLabelForDepiction()
+                .map(mwQueryResponse -> {
+                    return mwQueryResponse;
+                });
     }
 
     /**

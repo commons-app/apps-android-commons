@@ -3,6 +3,8 @@ package fr.free.nrw.commons.media;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.internal.LinkedTreeMap;
 
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
@@ -223,7 +225,25 @@ public class MediaClient {
         return mediaDetails;
     }
 
-
+    public Single<String> getLabelForDepiction() {
+        return mediaDetailInterface.fetchLabelForWikidata("Q81566")
+                .map(jsonResponse -> {
+                    try {
+                        if (jsonResponse.get("success").toString().equals("1")) {
+                            JsonArray search = (JsonArray) jsonResponse.get("search");
+                            JsonObject searchElement = (JsonObject) search.get(0);
+                            String label = searchElement.get("label").toString();
+                            String url = searchElement.get("concepturi").toString();
+                            return label;
+                            //Log.e("line123456",search.size()+"")
+                        }
+                    } catch (NullPointerException e) {
+                        Timber.e("Label not found");
+                        return "NO LABEL";
+                    }return "NO LABEL";
+                })
+                .singleOrError();
+    }
 
     }
 
