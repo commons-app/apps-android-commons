@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.media;
 
+import com.google.gson.JsonElement;
 import com.google.gson.annotations.SerializedName;
 
 
@@ -32,7 +33,7 @@ public class Caption {
     }
 
     @SerializedName("value")
-    public String getValue() {
+    public String  getValue() {
         return value;
     }
 }

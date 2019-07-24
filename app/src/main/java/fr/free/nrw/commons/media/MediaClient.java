@@ -1,10 +1,15 @@
 package fr.free.nrw.commons.media;
 
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.internal.LinkedTreeMap;
 
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
@@ -25,6 +30,8 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -167,7 +174,7 @@ public class MediaClient {
      * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
      */
 
-    public Single<Map <String, String>> getCaptionAndDepictions(String filename)  {
+    public Single<JsonObject> getCaptionAndDepictions(String filename)  {
         return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), filename)
                 .map(mediaDetailResponse -> {
                         return fetchCaptionandDepictionsFromMediaDetailResponse(mediaDetailResponse);
@@ -180,8 +187,9 @@ public class MediaClient {
      * @param mediaDetailResponse Response obtained from API for Media Details
      * @return a map containing caption and depictions (empty string in the map if no caption/depictions)*/
 
-    public Map <String, String> fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
-        Map <String, String> mediaDetails = new HashMap<>();
+    @SuppressLint("CheckResult")
+    private JsonObject fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
+        JsonObject mediaDetails = new JsonObject();
         if (mediaDetailResponse.getSuccess() == 1) {
             Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
             try {
@@ -191,42 +199,53 @@ public class MediaClient {
                     Map<String, Caption> labels = commonsWikibaseItem.getLabels();
                     Map.Entry<String, Caption> captionEntry = labels.entrySet().iterator().next();
                     Caption caption = captionEntry.getValue();
-                    mediaDetails.put("Caption", caption.getValue());
+                    JsonElement jsonElement = new JsonPrimitive(caption.getValue());
+                    mediaDetails.add("Caption", jsonElement);
                 } catch (NullPointerException e) {
-                    mediaDetails.put("Caption", "No caption");
+                    JsonElement jsonElement = new JsonPrimitive("No caption");
+                    mediaDetails.add("Caption", jsonElement);
                 }
 
                 try {
                     LinkedTreeMap statements = (LinkedTreeMap) commonsWikibaseItem.getStatements();
                     ArrayList<LinkedTreeMap> listP245962 = (ArrayList<LinkedTreeMap>) statements.get("P245962");
                     String depictions = null;
+                    JsonArray jsonArray = new JsonArray();
                     for (int i = 0; i < listP245962.size(); i++) {
                         LinkedTreeMap depictedItem = listP245962.get(i);
                         LinkedTreeMap mainsnak = (LinkedTreeMap) depictedItem.get("mainsnak");
                         Map<String, LinkedTreeMap> datavalue = (Map<String, LinkedTreeMap>) mainsnak.get("datavalue");
                         LinkedTreeMap value = datavalue.get("value");
                         String id = value.get("id").toString();
-                        depictions.concat(id+"\n");
+                        getLabelForDepiction(id).subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(depictObject -> jsonArray.add(depictObject));
                     }
-                    depictions.substring(0,depictions.length()-1);
-                    mediaDetails.put("Depiction", depictions);
+                    mediaDetails.add("Depiction", jsonArray);
                 } catch (NullPointerException e) {
-                    mediaDetails.put("Depiction", "No depiction");
+                    JsonElement jsonElement = new JsonPrimitive("No depiction");
+                    mediaDetails.add("Depiction", jsonElement);
                 }
             } catch (NullPointerException e) {
-                mediaDetails.put("Caption", "No caption");
-                mediaDetails.put("Depiction", "No depiction");
+                JsonElement jsonElement = new JsonPrimitive("No caption");
+                mediaDetails.add("Caption", jsonElement);
+                jsonElement = null;
+                jsonElement = new JsonPrimitive("No depiction");
+                mediaDetails.add("Depiction", jsonElement);
             }
         } else {
-            mediaDetails.put("Caption", "No caption");
-            mediaDetails.put("Depiction", "No depiction");
+            JsonElement jsonElement = new JsonPrimitive("No caption");
+            mediaDetails.add("Caption", jsonElement);
+            jsonElement = null;
+            jsonElement = new JsonPrimitive("No depiction");
+            mediaDetails.add("Depiction", jsonElement);
         }
 
         return mediaDetails;
     }
 
-    public Single<String> getLabelForDepiction() {
-        return mediaDetailInterface.fetchLabelForWikidata("Q81566")
+    public Single<JsonObject> getLabelForDepiction(String entityId) {
+        return mediaDetailInterface.fetchLabelForWikidata(entityId)
                 .map(jsonResponse -> {
                     try {
                         if (jsonResponse.get("success").toString().equals("1")) {
@@ -234,13 +253,17 @@ public class MediaClient {
                             JsonObject searchElement = (JsonObject) search.get(0);
                             String label = searchElement.get("label").toString();
                             String url = searchElement.get("concepturi").toString();
-                            return label;
-                            //Log.e("line123456",search.size()+"")
+                            JsonElement labelJson = new JsonPrimitive(label);
+                            JsonElement urlJson = new JsonPrimitive(url);
+                            JsonObject jsonObject = new JsonObject();
+                            jsonObject.add("label", labelJson);
+                            jsonObject.add("url", urlJson);
+                            return jsonObject;
                         }
                     } catch (NullPointerException e) {
                         Timber.e("Label not found");
-                        return "NO LABEL";
-                    }return "NO LABEL";
+                        return new JsonObject();
+                    }return new JsonObject();
                 })
                 .singleOrError();
     }

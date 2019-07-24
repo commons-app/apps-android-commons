@@ -3,6 +3,8 @@ package fr.free.nrw.commons;
 import androidx.core.text.HtmlCompat;
 
 
+import com.google.gson.JsonObject;
+
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -45,12 +47,13 @@ public class MediaDataExtractor {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
         Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
-        Single<String> depictSingle = getLabel();
-        Single<Map<String, String>> captionAndDepictionMap = getCaptionAndDepictions(filename);
-        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionAndDepictionMap, depictSingle, (media, deletionStatus, discussion, caption, depict) -> {
+        //Single<String> depictSingle = getLabel();
+        Single<JsonObject> captionAndDepictionMap = getCaptionAndDepictions(filename);
+        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionAndDepictionMap, (media, deletionStatus, discussion, caption) -> {
             media.setDiscussion(discussion);
-            media.setCaption(caption.get("Caption"));
-            media.setDepiction(depict);
+            String captionString = caption.get("Caption").toString();
+            media.setCaption(captionString.substring(1, captionString.length() - 1));
+            media.setDepiction(captionAndDepictionMap.toString());
             //media.setDepiction(caption.get("Depiction"));
             if (deletionStatus) {
                 media.setRequestedDeletion();
@@ -64,7 +67,7 @@ public class MediaDataExtractor {
      * @param filename the filename we will return the caption for
      * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
      */
-    private Single<Map <String, String>> getCaptionAndDepictions(String filename)  {
+    private Single<JsonObject> getCaptionAndDepictions(String filename)  {
          return mediaClient.getCaptionAndDepictions(filename)
                 .map(mediaResponse -> {
                     return mediaResponse;
@@ -74,12 +77,12 @@ public class MediaDataExtractor {
 
     }
 
-    private Single<String> getLabel() {
+    /*private Single<String> getLabel() {
         return mediaClient.getLabelForDepiction()
                 .map(mwQueryResponse -> {
                     return mwQueryResponse;
                 });
-    }
+    }*/
 
     /**
      * Method can be used to fetch media for a given filename
