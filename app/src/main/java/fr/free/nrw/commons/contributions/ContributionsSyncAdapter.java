@@ -62,21 +62,15 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         if (filename == null) {
             return false;
         }
-        Cursor cursor = null;
-        try {
-            cursor = client.query(BASE_URI,
-                    existsQuery,
-                    existsSelection,
-                    new String[]{filename},
-                    ""
-            );
+        try (Cursor cursor = client.query(BASE_URI,
+                existsQuery,
+                existsSelection,
+                new String[]{filename},
+                ""
+        )) {
             return cursor != null && cursor.getCount() != 0;
         } catch (RemoteException e) {
             throw new RuntimeException(e);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
         }
     }
 
@@ -89,12 +83,9 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                         .getApplicationContext())
                 .getCommonsApplicationComponent()
                 .inject(this);
-        // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
+        // This code is(was?) fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
-        String lastSynced = defaultKvStore.getString("lastSyncTimestamp", "");
-        Date curTime = new Date();
         ContributionDao contributionDao = new ContributionDao(() -> contentProviderClient);
-        Timber.d("Last modified at %s", lastSynced);
         userClient.logEvents(user)
                 .doOnNext(mwQueryLogEvent->Timber.d("Received image %s", mwQueryLogEvent.title() ))
                 .filter(mwQueryLogEvent -> !mwQueryLogEvent.isDeleted())
@@ -106,7 +97,6 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 .map(contributionDao::toContentValues)
                 .buffer(10)
                 .subscribe(imageValues->contentProviderClient.bulkInsert(BASE_URI, imageValues.toArray(EMPTY)));
-        defaultKvStore.putString("lastSyncTimestamp", DateUtil.iso8601DateFormat(curTime));
         Timber.d("Oh hai, everyone! Look, a kitty!");
     }
 }
