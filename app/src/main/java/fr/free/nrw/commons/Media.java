@@ -53,6 +53,13 @@ public class Media implements Parcelable {
      * Also now captions replace the previous convention of using title for filename
      */
     private String caption;
+    /**
+     * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
+     * However unlike categories depictions is multi-lingual
+     * Some expected properties include
+     * location, depicted in background, clothing, formatting (e.g. monochrome images or daguerreotypes)
+     * season/date/time, photographer or artist
+     */
     private String depiction;
     protected String description; // monolingual description on input...
     protected String discussion;
@@ -330,6 +337,10 @@ public class Media implements Parcelable {
     public String getCaption() {
         return caption;
     }
+
+    /**
+     * @return depictions associated with the current media
+     */
 
     public String getDepiction() {
         return  depiction;
@@ -632,6 +643,10 @@ public class Media implements Parcelable {
     public void setCaption(String caption) {
         this.caption = caption;
     }
+
+    /**
+     * Sets depictions for the current media obtained fro  Wikibase API
+     */
 
     public void setDepiction(String depiction) {
         this.depiction =depiction;

@@ -158,6 +158,13 @@ public class MediaClient {
                 .single(Media.EMPTY);
     }
 
+    /**
+     * Fetches Structured data from API
+     *
+     * @param filename
+     * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
+     */
+
     public Single<Map <String, String>> getCaptionAndDepictions(String filename)  {
         return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), filename)
                 .map(mediaDetailResponse -> {
@@ -165,6 +172,11 @@ public class MediaClient {
                 })
                 .singleOrError();
     }
+
+    /**
+     * Parses the mediaDetailResponse from API to extract captions and depictions
+     * @param mediaDetailResponse Response obtained from API for Media Details
+     * @return a map containing caption and depictions (empty string in the map if no caption/depictions)*/
 
     public Map <String, String> fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
         Map <String, String> mediaDetails = new HashMap<>();

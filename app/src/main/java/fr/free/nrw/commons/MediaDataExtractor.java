@@ -59,9 +59,9 @@ public class MediaDataExtractor {
     }
 
     /**
-     * Fetch caption from the MediaWiki API
+     * Fetch caption and depictions from the MediaWiki API
      * @param filename the filename we will return the caption for
-     * @return a single with caption string (an empty string if no caption)
+     * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
      */
     private Single<Map <String, String>> getCaptionAndDepictions(String filename)  {
          return mediaClient.getCaptionAndDepictions(filename)
@@ -71,14 +71,6 @@ public class MediaDataExtractor {
                     Timber.e("eror while fetching captions");
                  });
 
-    }
-
-    private void setDepiction(String depiction) {
-        this.depiction = depiction;
-    }
-
-    private void setCaption(String caption) {
-        this.caption = caption;
     }
 
     /**
