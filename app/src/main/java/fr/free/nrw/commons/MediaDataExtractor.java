@@ -46,11 +46,11 @@ public class MediaDataExtractor {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
         Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
-        getCaption(filename);
-        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, (media, deletionStatus, discussion) -> {
+        Single<Map<String, String>> captionAndDepictionMap = getCaptionAndDepictions(filename);
+        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionAndDepictionMap, (media, deletionStatus, discussion, caption) -> {
             media.setDiscussion(discussion);
-            media.setCaption(caption);
-            media.setDepiction(depiction);
+            media.setCaption(caption.get("Caption"));
+            media.setDepiction(caption.get("Depiction"));
             if (deletionStatus) {
                 media.setRequestedDeletion();
             }
@@ -63,12 +63,10 @@ public class MediaDataExtractor {
      * @param filename the filename we will return the caption for
      * @return a single with caption string (an empty string if no caption)
      */
-    private Single<Boolean> getCaption(String filename)  {
-         return mediaClient.getCaption(filename)
+    private Single<Map <String, String>> getCaptionAndDepictions(String filename)  {
+         return mediaClient.getCaptionAndDepictions(filename)
                 .map(mediaResponse -> {
-                    setCaption(mediaResponse.get("caption"));
-                    setDepiction(mediaResponse.get("depiction"));
-                    return true;
+                    return mediaResponse;
                 }).doOnError(throwable -> {
                     Timber.e("eror while fetching captions");
                  });

@@ -14,5 +14,5 @@ public interface MediaDetailInterface {
 
     //Please note that languages=en does not have an impact on the languages returned. All captions are returned for all languages.
     @GET("w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1&sites=commonswiki")
-    Observable<MediaDetailResponse> fetchCaptionByFilename(@Query("languages") String language, @Query("titles") String filename);
+    Observable<MediaDetailResponse> fetchStructuredDataByFilename(@Query("languages") String language, @Query("titles") String filename);
 }

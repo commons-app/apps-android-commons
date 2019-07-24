@@ -98,6 +98,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     MediaDetailSpacer spacer;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
+    @BindView(R.id.caption_layout)
+    LinearLayout captionLayout;
+    @BindView(R.id.depicts_layout)
+    LinearLayout depictsLayout;
     @BindView(R.id.media_detail_caption)
     TextView mediaCaption;
     @BindView(R.id.media_detail_depiction)
@@ -291,8 +295,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
         mediaDiscussion.setText(prettyDiscussion(media));
-        mediaCaption.setText(prettyCaption(media));
-        mediaDepiction.setText(prettyDepiction(media));
+        if (prettyCaption(media).equals(getContext().getString(R.string.detail_caption_empty))) {
+            captionLayout.setVisibility(GONE);
+        } else mediaCaption.setText(prettyCaption(media));
+
+        if (prettyDepiction(media).equals(getContext().getString(R.string.detail_depiction_empty))) {
+            depictsLayout.setVisibility(GONE);
+        } else mediaDepiction.setText(prettyDepiction(media));
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());

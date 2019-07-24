@@ -53,6 +53,7 @@
                 android:padding="@dimen/standard_gap">
 
                 <LinearLayout
+                    android:id="@+id/caption_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/subBackground"
@@ -109,6 +110,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/depicts_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/subBackground"

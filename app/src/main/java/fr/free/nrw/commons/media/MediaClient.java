@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.media;
 
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.gson.internal.LinkedTreeMap;
@@ -14,7 +12,6 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -161,15 +158,15 @@ public class MediaClient {
                 .single(Media.EMPTY);
     }
 
-    public Single<Map <String, String>> getCaption(String filename)  {
-        return mediaDetailInterface.fetchCaptionByFilename(Locale.getDefault().getLanguage(), filename)
+    public Single<Map <String, String>> getCaptionAndDepictions(String filename)  {
+        return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), filename)
                 .map(mediaDetailResponse -> {
-                        return fetchCaptionsFromMediaDetailResponse(mediaDetailResponse);
+                        return fetchCaptionandDepictionsFromMediaDetailResponse(mediaDetailResponse);
                 })
                 .singleOrError();
     }
 
-    public Map <String, String> fetchCaptionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
+    public Map <String, String> fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
         Map <String, String> mediaDetails = new HashMap<>();
         if (mediaDetailResponse.getSuccess() == 1) {
             Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
@@ -180,9 +177,9 @@ public class MediaClient {
                     Map<String, Caption> labels = commonsWikibaseItem.getLabels();
                     Map.Entry<String, Caption> captionEntry = labels.entrySet().iterator().next();
                     Caption caption = captionEntry.getValue();
-                    mediaDetails.put("caption", caption.getValue());
+                    mediaDetails.put("Caption", caption.getValue());
                 } catch (NullPointerException e) {
-                    mediaDetails.put("caption", "NO CAPTION");
+                    mediaDetails.put("Caption", "No caption");
                 }
 
                 try {
@@ -198,17 +195,17 @@ public class MediaClient {
                         depictions.concat(id+"\n");
                     }
                     depictions.substring(0,depictions.length()-1);
-                    mediaDetails.put("depiction", depictions);
+                    mediaDetails.put("Depiction", depictions);
                 } catch (NullPointerException e) {
-                    mediaDetails.put("depiction", "NO Depiction");
+                    mediaDetails.put("Depiction", "No depiction");
                 }
             } catch (NullPointerException e) {
-                mediaDetails.put("caption", "NO CAPTION");
-                mediaDetails.put("depiction", "NO Depiction");
+                mediaDetails.put("Caption", "No caption");
+                mediaDetails.put("Depiction", "No depiction");
             }
         } else {
-            mediaDetails.put("caption", "NO CAPTION");
-            mediaDetails.put("depiction", "NO Depiction");
+            mediaDetails.put("Caption", "No caption");
+            mediaDetails.put("Depiction", "No depiction");
         }
 
         return mediaDetails;
