@@ -3,8 +3,11 @@ package fr.free.nrw.commons;
 import androidx.core.text.HtmlCompat;
 
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -47,19 +50,45 @@ public class MediaDataExtractor {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
         Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
-        //Single<String> depictSingle = getLabel();
-        Single<JsonObject> captionAndDepictionMap = getCaptionAndDepictions(filename);
-        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionAndDepictionMap, (media, deletionStatus, discussion, caption) -> {
+        Single<JsonObject> captionAndDepictionJsonObjectSingle = getCaptionAndDepictions(filename);
+        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionAndDepictionJsonObjectSingle, (media, deletionStatus, discussion, captionAndDepictionJsonObject) -> {
             media.setDiscussion(discussion);
-            String captionString = caption.get("Caption").toString();
+            String captionString = captionAndDepictionJsonObject.get("Caption").toString();
             media.setCaption(captionString.substring(1, captionString.length() - 1));
-            media.setDepiction(captionAndDepictionMap.toString());
-            //media.setDepiction(caption.get("Depiction"));
+            media.setDepiction(formatDepictions(captionAndDepictionJsonObject));
             if (deletionStatus) {
                 media.setRequestedDeletion();
             }
             return media;
         });
+    }
+
+    /**
+     * From the Json Object extract depictions into an array list
+     * @param mediaResponse
+     * @return List containing map for depictions, the map has two keys,
+     *  first key is for the label and second is for the url of the item
+     */
+
+    private ArrayList<Map<String, String>> formatDepictions(JsonObject mediaResponse) {
+        try {
+            JsonArray depictionArray = (JsonArray) mediaResponse.get("Depiction");
+            ArrayList<Map<String, String>> depictedItemList = new ArrayList<>();
+            try {
+                for (int i = 0; i <depictionArray.size() ; i++) {
+                    JsonObject depictedItem = (JsonObject) depictionArray.get(i);
+                    Map <String, String> depictedObject = new HashMap<>();
+                    depictedObject.put("label", depictedItem.get("label").toString());
+                    depictedObject.put("url", depictedItem.get("url").toString());
+                    depictedItemList.add(depictedObject);
+                }
+                return depictedItemList;
+            } catch (NullPointerException e) {
+                return new ArrayList<>();
+            }
+        } catch (ClassCastException c) {
+            return new ArrayList<>();
+        }
     }
 
     /**
@@ -72,17 +101,10 @@ public class MediaDataExtractor {
                 .map(mediaResponse -> {
                     return mediaResponse;
                 }).doOnError(throwable -> {
-                    Timber.e("eror while fetching captions");
+                    Timber.e(throwable+"eror while fetching captions");
                  });
 
     }
-
-    /*private Single<String> getLabel() {
-        return mediaClient.getLabelForDepiction()
-                .map(mwQueryResponse -> {
-                    return mwQueryResponse;
-                });
-    }*/
 
     /**
      * Method can be used to fetch media for a given filename

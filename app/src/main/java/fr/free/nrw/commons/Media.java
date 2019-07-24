@@ -53,14 +53,6 @@ public class Media implements Parcelable {
      * Also now captions replace the previous convention of using title for filename
      */
     private String caption;
-    /**
-     * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
-     * However unlike categories depictions is multi-lingual
-     * Some expected properties include
-     * location, depicted in background, clothing, formatting (e.g. monochrome images or daguerreotypes)
-     * season/date/time, photographer or artist
-     */
-    private String depiction;
     protected String description; // monolingual description on input...
     protected String discussion;
     protected long dataLength;
@@ -72,6 +64,14 @@ public class Media implements Parcelable {
     protected String licenseUrl;
     protected String creator;
     protected ArrayList<String> categories; // as loaded at runtime?
+    /**
+     * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
+     * However unlike categories depictions is multi-lingual
+     * Some expected properties include
+     * location, depicted in background, clothing, formatting (e.g. monochrome images or daguerreotypes)
+     * season/date/time, photographer or artist
+     */
+    protected ArrayList<Map<String, String>> depictionList;
     protected ArrayList<String> depictions;
     protected boolean requestedDeletion;
     private Map<String, String> descriptions; // multilingual descriptions as loaded
@@ -342,8 +342,8 @@ public class Media implements Parcelable {
      * @return depictions associated with the current media
      */
 
-    public String getDepiction() {
-        return  depiction;
+    public ArrayList<Map<String, String>> getDepiction() {
+        return  depictionList;
     }
 
     /**
@@ -648,7 +648,7 @@ public class Media implements Parcelable {
      * Sets depictions for the current media obtained fro  Wikibase API
      */
 
-    public void setDepiction(String depiction) {
-        this.depiction =depiction;
+    public void setDepiction(ArrayList<Map<String, String>> depictions) {
+        this.depictionList =depictions;
     }
 }

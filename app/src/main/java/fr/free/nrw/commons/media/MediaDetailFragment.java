@@ -50,6 +50,8 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
+
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
@@ -104,8 +106,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     LinearLayout depictsLayout;
     @BindView(R.id.media_detail_caption)
     TextView mediaCaption;
-    @BindView(R.id.media_detail_depiction)
-    TextView mediaDepiction;
     @BindView(R.id.mediaDetailDesc)
     HtmlTextView desc;
     @BindView(R.id.mediaDetailAuthor)
@@ -124,6 +124,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     LinearLayout nominatedForDeletion;
     @BindView(R.id.mediaDetailCategoryContainer)
     LinearLayout categoryContainer;
+    @BindView(R.id.media_detail_depiction_container)
+    LinearLayout depictionContainer;
     @BindView(R.id.authorLinearLayout)
     LinearLayout authorLayout;
     @BindView(R.id.nominateDeletion)
@@ -132,8 +134,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     ScrollView scrollView;
 
     private ArrayList<String> categoryNames;
+    private ArrayList<Map<String, String>> depictions;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
+    private boolean depictionLoaded = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
 
@@ -185,6 +189,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
         categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
+
+        depictions = new ArrayList<>();
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
@@ -299,12 +305,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             captionLayout.setVisibility(GONE);
         } else mediaCaption.setText(prettyCaption(media));
 
-        if (prettyDepiction(media).equals(getContext().getString(R.string.detail_depiction_empty))) {
-            depictsLayout.setVisibility(GONE);
-        } else mediaDepiction.setText(prettyDepiction(media));
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
+
+        depictions.clear();
+        depictions.addAll(media.getDepiction());
+
+        depictionLoaded = true;
 
         categoriesLoaded = true;
         categoriesPresent = (categoryNames.size() > 0);
@@ -312,7 +320,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             // Stick in a filler element.
             categoryNames.add(getString(R.string.detail_panel_cats_none));
         }
+
         rebuildCatList();
+
+        if(depictions != null && depictions.size() != 0) {
+            rebuildDepictionList();
+        }
+        else depictsLayout.setVisibility(GONE);
 
         if (media.getCreator() == null || media.getCreator().equals("")) {
             authorLayout.setVisibility(GONE);
@@ -321,6 +335,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
 
         checkDeletion(media);
+    }
+
+    /**
+     * Populates media deatil fragment with depiction list
+     */
+
+    private void rebuildDepictionList() {
+        for (int i = 0; i<depictions.size(); i++) {
+            String depictionName = depictions.get(i).get("label");
+            String depictionUrl = depictions.get(i).get("url");
+            View depictLabel = buildDepictLabel(depictionName, depictionUrl, depictionContainer);
+            depictionContainer.addView(depictLabel);
+        }
     }
 
     @OnClick(R.id.mediaDetailLicense)
@@ -483,6 +510,24 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
+    /**
+     * Add view to depictions obtained also tapping on depictions should open the url
+     */
+
+    private View buildDepictLabel(String depictionName, String depictionUrl, LinearLayout depictionContainer) {
+        final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_depicts_item, depictionContainer, false);
+        final CompatTextView textView = item.findViewById(R.id.media_detail_depicted_item_text);
+
+        textView.setText(depictionName);
+        if (depictionLoaded) {
+            textView.setOnClickListener(view -> {
+                //String url = "https://"+depictionUrl+".com";
+                Utils.handleWebUrl(getActivity(), Uri.parse(depictionUrl));
+            });
+        }
+        return item;
+    }
+
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
         final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
@@ -528,10 +573,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-    private String prettyDepiction(Media media) {
-        String depiction = media.getDepiction().trim();
+    private ArrayList<Map<String, String>> getDepictions(Media media) {
+        ArrayList<Map<String, String>> depiction = media.getDepiction();
         if (depiction.equals("")) {
-            return getString(R.string.detail_depiction_empty);
+            return new ArrayList<>();
         }
         else {
             return depiction;

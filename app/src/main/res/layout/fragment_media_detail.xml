@@ -126,16 +126,11 @@
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/media_detail_depiction"
+                    <LinearLayout
+                        android:id="@+id/media_detail_depiction_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:background="?attr/subBackground"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
-                        tools:text="Depictions of the media" />
+                        android:orientation="vertical" />
                 </LinearLayout>
 
                 <fr.free.nrw.commons.media.MediaDetailSpacer
