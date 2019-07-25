@@ -50,6 +50,29 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:text="Place type:"/>
+
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                >
+
+            </androidx.appcompat.widget.SearchView>
+
+        </LinearLayout>
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
