@@ -6,19 +6,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxSearchView;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -72,6 +78,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     Chip chipExists;
     @BindView(R.id.choice_chip_needs_photo)
     Chip chipNeedsPhoto;
+    @BindView(R.id.search_view)
+    SearchView searchView;
 
     @Inject
     LocationServiceManager locationManager;
@@ -120,6 +128,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         resumeFragment();*/
         bundle = new Bundle();
         initBottomSheetBehaviour();
+        initNearbyFilter();
         this.view = view;
         return view;
     }
@@ -130,6 +139,17 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         if (savedInstanceState != null) {
             onOrientationChanged = true;
         }
+    }
+
+    public void initNearbyFilter() {
+        compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
+                .takeUntil(RxView.detaches(searchView))
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( query -> {
+                    Log.d("deneme4","query:"+query);
+                        }
+                ));
     }
 
     /**

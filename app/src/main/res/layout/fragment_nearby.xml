@@ -63,12 +63,12 @@
                 android:paddingStart="15dp"
                 android:text="Place type:"/>
 
-            <androidx.appcompat.widget.SearchView
+            <SearchView
+                android:id="@+id/search_view"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 >
-
-            </androidx.appcompat.widget.SearchView>
+            </SearchView>
 
         </LinearLayout>
 
