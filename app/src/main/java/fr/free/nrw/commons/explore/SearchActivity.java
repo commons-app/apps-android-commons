@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.explore;
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,6 +18,7 @@ import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
+import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -45,6 +45,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
 
     private SearchImageFragment searchImageFragment;
     private SearchCategoryFragment searchCategoryFragment;
+    private SearchDepictionsFragment searchDepictionsFragment;
     private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
@@ -89,10 +90,13 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         List<String> titleList = new ArrayList<>();
         searchImageFragment = new SearchImageFragment();
         searchCategoryFragment= new SearchCategoryFragment();
+        searchDepictionsFragment = new SearchDepictionsFragment();
         fragmentList.add(searchImageFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase());
         fragmentList.add(searchCategoryFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_categories).toUpperCase());
+        fragmentList.add(searchDepictionsFragment);
+        titleList.add(getResources().getString(R.string.search_tab_title_depictions).toUpperCase());
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
@@ -107,13 +111,19 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                                 viewPager.setVisibility(View.VISIBLE);
                                 tabLayout.setVisibility(View.VISIBLE);
                                 searchHistoryContainer.setVisibility(View.GONE);
-                                if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
-                                    searchImageFragment.updateImageList(query.toString());
+
+                                if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
+                                    searchDepictionsFragment.updateDepictionList(query.toString());
                                 }
+
+                               /* if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
+                                    searchImageFragment.updateImageList(query.toString());
+                                }*/
 
                                 if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
                                     searchCategoryFragment.updateCategoryList(query.toString());
                                 }
+
                             }else {
                                 //Open RecentSearchesFragment
                                 recentSearchesFragment.updateRecentSearches();

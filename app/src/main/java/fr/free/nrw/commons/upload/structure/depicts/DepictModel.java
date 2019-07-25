@@ -12,10 +12,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.category.CategoryClient;
+import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
 import fr.free.nrw.commons.utils.StringSortingUtils;
+import fr.free.nrw.commons.wikidata.model.DepictSearchItem;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
@@ -33,7 +34,7 @@ public class DepictModel {
     @Inject
     GpsDepictsModel gpsDepictsModel;
     @Inject
-    CategoryClient categoryClient;
+    DepictsClient depictsClient;
 
     private List<DepictedItem> selectedDepictedItems;
     private HashMap<String, ArrayList<String>> depictsCache;
@@ -73,8 +74,8 @@ public class DepictModel {
                 || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*")));
     }
 
-    public void cacheAll(HashMap<String, ArrayList<String>> categories) {
-        depictsCache.putAll(categories);
+    public void cacheAll(HashMap<String, ArrayList<String>> depictsCache) {
+        depictsCache.putAll(depictsCache);
     }
 
     public HashMap<String, ArrayList<String>> getDepictsCache() {
@@ -124,8 +125,11 @@ public class DepictModel {
     }
 
     private Observable<DepictedItem> getTitleDepicts(String title) {
-        return categoryClient.searchCategories(title, SEARCH_DEPICTS_LIMIT)
-                .map(name -> new DepictedItem(name, "", null, false, ""));
+        return depictsInterface.searchForDepicts(title, String.valueOf(SEARCH_DEPICTS_LIMIT))
+                .map(depictSearchResponse -> {
+                    DepictSearchItem depictedItem = depictSearchResponse.getSearch().get(0);
+                   return new DepictedItem(depictedItem.getLabel(), depictedItem.getDescription(), null, false, depictedItem.getId());
+                });
     }
 
     private Observable<DepictedItem> recentDepicts() {

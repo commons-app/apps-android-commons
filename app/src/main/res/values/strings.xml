@@ -84,6 +84,7 @@
     <item quantity="other">%1$d uploads</item>
   </plurals>
   <string name="categories_not_found">No categories matching %1$s found</string>
+  <string name="depictions_not_found">No Depictions matching %1$s found</string>
   <string name="categories_skip_explanation">Add categories to make your images more discoverable on Wikimedia Commons.\nStart typing to add categories.</string>
   <string name="categories_activity_title">Categories</string>
   <string name="title_activity_settings">Settings</string>
@@ -334,9 +335,11 @@
   <string name="search_recent_header">Recent searches:</string>
   <string name="provider_searches">Recently searched queries</string>
   <string name="error_loading_categories">Error occurred while loading categories.</string>
+  <string name="error_loading_depictions">Error occurred while loading depictions.</string>
   <string name="error_loading_subcategories">Error occurred while loading subcategories.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Categories</string>
+  <string name="search_tab_title_depictions">Items</string>
   <string name="explore_tab_title_featured">Featured</string>
   <string name="explore_tab_title_mobile">Uploaded via mobile</string>
 

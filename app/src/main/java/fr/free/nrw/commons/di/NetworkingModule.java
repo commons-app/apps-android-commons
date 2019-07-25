@@ -260,7 +260,6 @@ public class NetworkingModule {
         return ServiceFactory.get(commonsWikisite, BuildConfig.COMMONS_URL, MediaDetailInterface.class);
     }
 
-
     @Provides
     @Singleton
     public CategoryInterface provideCategoryInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {

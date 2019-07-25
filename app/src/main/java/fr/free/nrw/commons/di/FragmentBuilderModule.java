@@ -9,6 +9,7 @@ import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
+import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
@@ -56,6 +57,9 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract SearchCategoryFragment bindSearchCategoryListFragment();
+
+    @ContributesAndroidInjector
+    abstract SearchDepictionsFragment bindSearchDepictionListFragment();
 
     @ContributesAndroidInjector
     abstract RecentSearchesFragment bindRecentSearchesFragment();
