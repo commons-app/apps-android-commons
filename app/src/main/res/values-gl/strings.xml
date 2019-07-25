@@ -255,7 +255,7 @@
   <string name="upload_problem_different_geolocation">Esta imaxe foi realizada nunha localización diferente.</string>
   <string name="upload_problem_fbmd">Por favor sube so fotografías feitas por ti mesmo. Non subas imaxes ou fotografías que atopes nas contas de Facebook de outros.</string>
   <string name="upload_problem_do_you_continue">Aínda quere subir esta imaxe?</string>
-  <string name="internet_downloaded">Por favor sube so fotografías feitas por ti mesmo. Non subas imaxes ou fotografías que descargaras dende Internet.</string>
+  <string name="internet_downloaded">Por favor suba so fotografías feitas por vostede mesmo. Non suba imaxes ou fotografías que descargara da Internet.</string>
   <string name="give_permission">Outorgar permiso</string>
   <string name="use_external_storage">Usar o almacenamento externo</string>
   <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
@@ -297,8 +297,8 @@
   <string name="no_internet">Internet non dispoñible</string>
   <string name="internet_established">Internet dispoñible</string>
   <string name="error_notifications">Erro ó recuperar as notificacións</string>
-  <string name="error_review">Houbo un erro ó recuperar a imaxe a revisar. Preme en refrescar para tentalo de novo.</string>
-  <string name="error_review_categories">Houbo un erro ó obter as categorías de imaxes a revisar. Preme en refrescar para tentalo de novo.</string>
+  <string name="error_review">Houbo un erro ó recuperar a imaxe a revisar. Prema en refrescar para tentalo de novo.</string>
+  <string name="error_review_categories">Houbo un erro ó obter as categorías de imaxes a revisar. Prema en refrescar para tentalo de novo.</string>
   <string name="no_notifications">Non se atopou ningunha notificación</string>
   <string name="about_translate">&lt;u&gt;Traducir&lt;/u&gt;</string>
   <string name="about_translate_title">Linguas</string>
@@ -420,7 +420,7 @@
   <string name="deletion_reason_no_longer_want_public">Cambiei de idea, non quero que siga sendo visible de forma pública</string>
   <string name="deletion_reason_not_interesting">Desculpas, esta imaxe non é interesante para unha enciclopedia</string>
   <string name="uploaded_by_myself">Cargada por min o %1$s, usada en %2$d artigo(s).</string>
-  <string name="no_uploads">Benvido a Commonsǃ\n\nCargue o seu primeiro ficheiro premendo no botón Engadir.</string>
+  <string name="no_uploads">Dámoslle a benvida ó Commonsǃ\n\nCargue o seu primeiro ficheiro premendo no botón Engadir.</string>
   <string name="desc_language_Worldwide">Mundial</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>
@@ -447,10 +447,10 @@
   <string name="error_processing_image">Houbo un erro ó procesar a imaxe. Por favor, ténteo de novoǃ</string>
   <string name="nominate_for_deletion_done">Feito</string>
   <string name="notsure">Non seguro</string>
-  <string name="send_thank_success_title">Enviando Agradecementos: Éxito</string>
+  <string name="send_thank_success_title">Enviando agradecementos: Éxito</string>
   <string name="send_thank_send">Enviando agradecementos</string>
   <string name="send_thank_notification_title">Enviando agradecementos</string>
-  <string name="send_thank_toast">Enviando Agradecementos por %1$s</string>
+  <string name="send_thank_toast">Enviando agradecementos por %1$s</string>
   <string name="review_category_no_button_text">Parece ben</string>
   <string name="review_spam_yes_button_text">Non, fóra de alcance</string>
   <string name="review_spam_no_button_text">Parece ben</string>
