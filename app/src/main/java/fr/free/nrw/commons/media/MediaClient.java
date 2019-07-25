@@ -190,7 +190,7 @@ public class MediaClient {
     @SuppressLint("CheckResult")
     private JsonObject fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
         JsonObject mediaDetails = new JsonObject();
-        if (mediaDetailResponse.getSuccess() == 1) {
+        if (mediaDetailResponse != null && mediaDetailResponse.getSuccess() != null && mediaDetailResponse.getSuccess() == 1 && mediaDetailResponse.getEntities() != null) {
             Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
             try {
                 Map.Entry<String, CommonsWikibaseItem> entry = entities.entrySet().iterator().next();
