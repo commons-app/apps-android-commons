@@ -80,6 +80,9 @@ public class CategoriesPresenter implements CategoriesContract.UserActionListene
                 .observeOn(ioScheduler)
                 .concatWith(
                         repository.searchAll(query, imageTitleList)
+                                .mergeWith(repository.searchCategories(query, imageTitleList))
+                                .concatWith(TextUtils.isEmpty(query) ? repository
+                                        .getDefaultCategories(imageTitleList) : Observable.empty())
                 )
                 .filter(categoryItem -> !repository.containsYear(categoryItem.getName()))
                 .distinct();

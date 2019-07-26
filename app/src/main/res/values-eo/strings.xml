@@ -530,6 +530,12 @@
   <string name="dialog_box_text_nomination">Kial %1$s foriĝu?</string>
   <string name="review_is_uploaded_by">%1$s estas alŝutita de: %2$s</string>
   <string name="default_description_language">Implicita priskriba lingvo</string>
+  <string name="delete_helper_make_deletion_toast">Provante proponi la forigon de %1$s</string>
+  <string name="delete_helper_show_deletion_title">Proponi forigon</string>
+  <string name="delete_helper_show_deletion_title_success">Sukcesis</string>
+  <string name="delete_helper_show_deletion_message_if">Sukcese proponis la forigon de %1$s.</string>
+  <string name="delete_helper_show_deletion_title_failed">Malsukcesis</string>
+  <string name="delete_helper_show_deletion_message_else">Ne povis proponi forigon.</string>
   <string name="delete_helper_ask_spam_selfie">Memfoto</string>
   <string name="delete_helper_ask_spam_blurry">Malklara</string>
   <string name="delete_helper_ask_spam_nonsense">Sensencaĵo</string>
@@ -538,4 +544,5 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda foto el Interreto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
   <string name="delete_helper_ask_reason_copyright_other">Alia</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Ĉar ĝi estas</string>
 </resources>

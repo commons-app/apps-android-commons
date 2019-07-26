@@ -181,6 +181,7 @@
   <string name="storage_permission_title">בקשת הרשאה לאחסון</string>
   <string name="read_storage_permission_rationale">נדרשת הרשאה: קריאת אחסון חיצוני. היישום לא יכול לגשת לגלריה שלך בלי זה.</string>
   <string name="write_storage_permission_rationale">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לגשת למצלמה או לגלריה שלך בלי זה.</string>
+  <string name="location_permission_title">בקשת הרשאה למיקום</string>
   <string name="location_permission_rationale">הרשאה לא מחייבת: קבלת מיקום נוכחי בשביל הצעות קטגוריות</string>
   <string name="ok">אישור</string>
   <string name="title_activity_nearby">מקומות בסביבה</string>
@@ -285,17 +286,17 @@
   <string name="nearby_location_has_not_changed">המיקום לא השתנה.</string>
   <string name="nearby_location_not_available">המיקום אינו זמין.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
-  <string name="get_directions" fuzzy="true">קבלת כיוונים</string>
-  <string name="read_article" fuzzy="true">קריאה הערך</string>
+  <string name="get_directions">קבלת כיוונים</string>
+  <string name="read_article">קריאת הערך</string>
   <string name="notifications_welcome">ברוך בואך לוויקישיתוף של ויקימדיה, %1$s! שמחים לראות אותך כאן אצלנו.</string>
   <string name="notifications_talk_page_message">קיבלת הודעה מאת %1$s בדף השיחה שלך</string>
   <string name="notifications_thank_you_edit">תודה לך על העריכה</string>
   <string name="notifications_mention">אוזכרת על־ידי %2$s בדף %1$s.</string>
   <string name="toggle_view_button">החלפת מצב תצוגה</string>
-  <string name="nearby_directions" fuzzy="true">כיוונים</string>
-  <string name="nearby_wikidata" fuzzy="true">ויקינתונים</string>
-  <string name="nearby_wikipedia" fuzzy="true">ויקיפדיה</string>
-  <string name="nearby_commons" fuzzy="true">ויקישיתוף</string>
+  <string name="nearby_directions">כיוונים</string>
+  <string name="nearby_wikidata">ויקינתונים</string>
+  <string name="nearby_wikipedia">ויקיפדיה</string>
+  <string name="nearby_commons">ויקישיתוף</string>
   <string name="about_rate_us">&lt;u&gt;תנו לנו ציון&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;שאלות נפוצות&lt;/u&gt;</string>
   <string name="welcome_skip_button">לדלג על ההדרכה</string>
@@ -329,10 +330,10 @@
   <string name="provider_searches">דברים שחיפשת לאחרונה</string>
   <string name="error_loading_categories">אירעה שגיאה בעת טעינת קטגוריות.</string>
   <string name="error_loading_subcategories">אירעה שגיאה בעת טעינת תת־קטגוריות.</string>
-  <string name="search_tab_title_media" fuzzy="true">מדיה</string>
-  <string name="search_tab_title_categories" fuzzy="true">קטגוריות</string>
-  <string name="explore_tab_title_featured" fuzzy="true">מומלץ</string>
-  <string name="explore_tab_title_mobile" fuzzy="true">העלאה דרך נייד</string>
+  <string name="search_tab_title_media">מדיה</string>
+  <string name="search_tab_title_categories">קטגוריות</string>
+  <string name="explore_tab_title_featured">מומלץ</string>
+  <string name="explore_tab_title_mobile">העלאה דרך נייד</string>
   <string name="successful_wikidata_edit">התמונה נוספה בהצלחה לדף %1$s בוויקינתונים!</string>
   <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
   <string name="menu_set_wallpaper">הגדרה בתור טפט</string>
@@ -366,13 +367,13 @@
   <string name="delete_search_dialog">האם ברצונך למחוק חיפוש זה?</string>
   <string name="search_history_deleted">היסטוריית החיפוש נמחקה</string>
   <string name="nominate_delete">הגשה למועמדות למחיקה</string>
-  <string name="delete" fuzzy="true">מחיקה</string>
+  <string name="delete">מחיקה</string>
   <string name="Achievements">הישגים</string>
-  <string name="statistics" fuzzy="true">סטטיסטיקה</string>
+  <string name="statistics">סטטיסטיקה</string>
   <string name="statistics_thanks">התודה התקבלה</string>
   <string name="statistics_featured">תמונות מומלצות</string>
   <string name="statistics_wikidata_edits">תמונות דרך \"מקומות בסביבה\"</string>
-  <string name="level" fuzzy="true">רמה</string>
+  <string name="level">רמה</string>
   <string name="images_uploaded">תמונות שהועלו</string>
   <string name="image_reverts">תמונות שלא שוחזרו</string>
   <string name="images_used_by_wiki">תמונות בשימוש</string>
@@ -518,7 +519,7 @@
   <string name="previous_button_tooltip_message">יש ללחוץ כדי להשתמש מחדש בכותרת ובתיאור שהקלדת בתמונה הקודמת ולשנות אותה כדי להתאים לנוכחית</string>
   <string name="welcome_do_upload_content_description">דוגמאות של תמונות טובות להעלאה לוויקישיתוף</string>
   <string name="welcome_dont_upload_content_description">דוגמאות של תמונות שאין להעלות</string>
-  <string name="skip_image" fuzzy="true">דילוג על התמונה הזאת</string>
+  <string name="skip_image">דילוג על התמונה הזאת</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ההורדה נכשלה!! אין לנו אפשרות להוריד את הקובץ ללא הרשאות גישה לאחסון חיצוני.</string>
   <string name="manage_exif_tags">ניהול תגיות EXIF</string>
   <string name="manage_exif_tags_summary">לבחור אילו תגיות EXIF יישארו בהעלאות</string>
@@ -536,4 +537,21 @@
   <string name="upload_cancelled">ההעלאה בוטלה</string>
   <string name="previous_image_title_description_not_found">אין נתונים עבור הכותרת או התיאור התמונה הקודמת</string>
   <string name="dialog_box_text_nomination">למה %1$s צריך להימחק?</string>
+  <string name="review_is_uploaded_by">%1$s הועלה על ידי: %2$s</string>
+  <string name="default_description_language">שפת התיאור כבררת מחדל</string>
+  <string name="delete_helper_make_deletion_toast">מתבצע ניסיון להעמדת %1$s למחיקה</string>
+  <string name="delete_helper_show_deletion_title">העמדה למחיקה</string>
+  <string name="delete_helper_show_deletion_title_success">הצלחה</string>
+  <string name="delete_helper_show_deletion_message_if">ההעמדה של %1$s למחיקה הצליחה.</string>
+  <string name="delete_helper_show_deletion_title_failed">כשלון</string>
+  <string name="delete_helper_show_deletion_message_else">לא ניתן לבקש מחיקה</string>
+  <string name="delete_helper_ask_spam_selfie">סלפי</string>
+  <string name="delete_helper_ask_spam_blurry">מטושטש</string>
+  <string name="delete_helper_ask_spam_nonsense">חסר ערך</string>
+  <string name="delete_helper_ask_spam_other">אחר</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">תמונת יח״צ</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">תמונה אקראית מהאינטרנט</string>
+  <string name="delete_helper_ask_reason_copyright_logo">לוגו</string>
+  <string name="delete_helper_ask_reason_copyright_other">אחר</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">כיוון שזה</string>
 </resources>

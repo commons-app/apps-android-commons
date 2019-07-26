@@ -19,7 +19,7 @@
   <string name="preference_category_appearance">表示</string>
   <string name="preference_category_general">全般</string>
   <string name="preference_category_feedback">フィードバック</string>
-  <string name="preference_category_privacy">プライバシー</string>
+  <string name="preference_category_privacy" fuzzy="true">プライバシー</string>
   <string name="preference_category_location">場所</string>
   <string name="app_name">コモンズ</string>
   <string name="bullet">•</string>
@@ -169,7 +169,7 @@
   <string name="detail_panel_cats_loading">読み込み中…</string>
   <string name="detail_panel_cats_none">ファイルを選択していません</string>
   <string name="detail_description_empty">説明はありません。</string>
-  <string name="detail_discussion_empty">議論なし</string>
+  <string name="detail_discussion_empty" fuzzy="true">議論なし</string>
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
   <string name="storage_permission_title">ストレージ権限の申請</string>
@@ -186,7 +186,7 @@
   <string name="no">いいえ</string>
   <string name="media_detail_title">タイトル</string>
   <string name="media_detail_description">記述</string>
-  <string name="media_detail_discussion">議論</string>
+  <string name="media_detail_discussion" fuzzy="true">`議論</string>
   <string name="media_detail_author">作者</string>
   <string name="media_detail_uploaded_date">アップロード日時</string>
   <string name="media_detail_license">ライセンス</string>
@@ -198,7 +198,7 @@
   <string name="number_of_uploads">最近のアップロードファイルに表示する最大件数</string>
   <string name="maximum_limit">最大限</string>
   <string name="invalid_zero">ゼロは無効</string>
-  <string name="invalid_input">無効な入力</string>
+  <string name="invalid_input" fuzzy="true">無効な入力</string>
   <string name="maximum_limit_alert">表示できるのは500件以下です</string>
   <string name="enter_valid">有効な数字を入力してください</string>
   <string name="cannot_be_zero">アップロードの上限値はゼロにできません</string>
@@ -237,7 +237,7 @@
   <string name="navigation_item_info">チュートリアル</string>
   <string name="navigation_item_notification">通知</string>
   <string name="navigation_item_featured_images">秀逸</string>
-  <string name="navigation_item_review">査読</string>
+  <string name="navigation_item_review" fuzzy="true">査読</string>
   <string name="nearby_needs_permissions">場所の権限がないため、近くの場所を表示できません</string>
   <string name="no_description_found">説明がありません</string>
   <string name="nearby_info_menu_commons_article">コモンズのファイルページ</string>
@@ -320,9 +320,10 @@
   <string name="search_commons">コモンズを検索</string>
   <string name="images_not_found">%1$sにマッチする画像は見つかりません</string>
   <string name="title_activity_search">検索</string>
-  <string name="search_recent_header">最近の検索:</string>
+  <string name="search_recent_header" fuzzy="true">最近の検索:</string>
   <string name="provider_searches">最近、検索したクエリ</string>
   <string name="error_loading_categories">カテゴリの読み込み中にエラーが発生しました。</string>
+  <string name="error_loading_subcategories">下位カテゴリの読み込み中にエラーが発生しました。</string>
   <string name="search_tab_title_media">メデイア</string>
   <string name="search_tab_title_categories">カテゴリ</string>
   <string name="explore_tab_title_mobile">モバイル機器からアップロード</string>
@@ -330,9 +331,9 @@
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
   <string name="menu_set_wallpaper">壁紙として設定</string>
   <string name="wallpaper_set_successfully">壁紙の設定ができました!</string>
-  <string name="quiz">終了</string>
+  <string name="quiz" fuzzy="true">終了</string>
   <string name="quiz_question_string">この画像をアップロードしてよいですか？</string>
-  <string name="question">質問</string>
+  <string name="question" fuzzy="true">質問</string>
   <string name="result">結果</string>
   <string name="quiz_back_button">削除が必要な画像のアップロードを今後も続けると、あなたのアカウントは禁止されます。クイズの終了に同意しますか？</string>
   <string name="quiz_alert_message">あなたがアップロードした画像のうち、最低%1$s件がその後、削除されました。もし今後も削除が必要な画像のアップロードを続けるなら、あなたのアカウントは禁止される可能性があります。\n\nどんな画像をアップロードしてよいか禁止されているか覚えるため、もう一度チュートリアルを閲覧してクイズを受けますか？</string>
@@ -373,21 +374,21 @@
   <string name="preference_author_name_toggle_summary">画像の投稿にはユーザー名ではなく専用の投稿者名を使う</string>
   <string name="preference_author_name">投稿専用の名前</string>
   <string name="preference_author_name_summary">ユーザー名ではなく、投稿専用の投稿者名</string>
-  <string name="contributions_fragment">投稿記録</string>
-  <string name="nearby_fragment">付近</string>
+  <string name="contributions_fragment" fuzzy="true">投稿記録</string>
+  <string name="nearby_fragment" fuzzy="true">付近</string>
   <string name="notifications">お知らせ</string>
   <string name="archived_notifications">お知らせ（過去ログ）</string>
   <string name="display_nearby_notification">近くの場所のお知らせを表示する</string>
   <string name="display_nearby_notification_summary">ここをタップして、近くで画像を募集中の場所を表示</string>
   <string name="no_close_nearby">現在地の近くに該当する場所が見つかりません</string>
-  <string name="list_sheet">一覧</string>
+  <string name="list_sheet" fuzzy="true">一覧</string>
   <string name="storage_permission">ストレージの許可</string>
   <string name="write_storage_permission_rationale_for_image_share">画像の投稿には、外部ストレージへのアクセス権限を許可してください。</string>
   <string name="nearby_notification_dismiss_message">今後、画像募集中の近くの場所は表示されません。ただしこのお知らせ機能は、いつでも「設定」画面から有効にできます。</string>
   <string name="step_count">全部で%2$d件のうち%1$d件目の手順</string>
   <string name="image_in_set_label">%1$d 点を組み写真にする</string>
-  <string name="next">次へ</string>
-  <string name="previous">前へ</string>
+  <string name="next" fuzzy="true">次へ</string>
+  <string name="previous" fuzzy="true">前へ</string>
   <string name="submit">送信</string>
   <string name="upload_title_duplicate">%1$s という題名のファイルはすでに保存されています。処理をほんとうに続けますか？</string>
   <plurals name="upload_count_title">
@@ -395,10 +396,10 @@
   </plurals>
   <string name="navigation_item_bookmarks">ブックマーク</string>
   <string name="title_activity_bookmarks">ブックマーク</string>
-  <string name="title_page_bookmarks_pictures">画像</string>
-  <string name="title_page_bookmarks_locations">位置</string>
+  <string name="title_page_bookmarks_pictures" fuzzy="true">画像</string>
+  <string name="title_page_bookmarks_locations" fuzzy="true">位置</string>
   <string name="menu_bookmark">ブックマークに追加／から削除</string>
-  <string name="provider_bookmarks">ブックマーク</string>
+  <string name="provider_bookmarks" fuzzy="true">ブックマーク</string>
   <string name="bookmark_empty">ブックマークは追加されていません</string>
   <string name="provider_bookmarks_location">ブックマーク</string>
   <string name="log_collection_started">ログの収集を開始しました。まずアプリを再起動してからログを記録したい操作を行い、もう一度「ログファイルを送信」ボタンを押してください</string>
@@ -425,7 +426,7 @@
   <string name="nearby_card_permission_title">許可を申請</string>
   <string name="nearby_card_permission_explanation">画像を募集している近くの場所を表示するため、ご自分の現在の位置を提供してもよいですか？</string>
   <string name="unable_to_display_nearest_place">位置情報の使用を許可していないため、近くの画像募集中の場所を表示できません</string>
-  <string name="never_ask_again">以後、表示しない</string>
+  <string name="never_ask_again" fuzzy="true">以後、表示しない</string>
   <string name="display_location_permission_title">位置情報の許可の状態を表示</string>
   <string name="display_location_permission_explanation">通知カードで近くの場所を表示するたび、位置情報の使用を許可するかどうか尋ねる</string>
   <string name="achievements_fetch_failed">何か問題が発生し、あなたの貢献を表示できませんでした</string>
@@ -449,12 +450,14 @@
   <string name="nominate_for_deletion_done">完了</string>
   <string name="nominate_for_deletion_notify_user">ユーザーのトークページに連絡</string>
   <string name="nominate_for_deletion_edit_deletion_request_log">削除依頼ログにファイルを追加</string>
+  <string name="nominate_for_deletion_create_deletion_request">削除のリクエスト用に下位ページを作成する</string>
+  <string name="notsure">不確実</string>
   <string name="send_thank_success_title">感謝の送信：完了</string>
   <string name="send_thank_success_message">%1$sさんに感謝の送信が完了しました</string>
   <string name="send_thank_failure_message">%1$sさんへ感謝を送信できませんでした</string>
   <string name="send_thank_failure_title">感謝の送信：失敗</string>
-  <string name="send_thank_send">感謝を示す</string>
-  <string name="send_thank_notification_title">感謝を示す</string>
+  <string name="send_thank_send" fuzzy="true">感謝を示す</string>
+  <string name="send_thank_notification_title" fuzzy="true">感謝を示す</string>
   <string name="send_thank_toast">%1$sさんに感謝を送信中</string>
   <string name="review_copyright">著作権のルールを守っていますか？</string>
   <string name="review_category">カテゴリは正しいですか？</string>
@@ -487,8 +490,8 @@
   <string name="no_notification">未読のお知らせはありません</string>
   <string name="no_archived_notification">過去ログ化したお知らせはありません</string>
   <string name="share_logs_using">ログの共有に使うアプリ</string>
-  <string name="menu_option_archived">アーカイブ済みを表示</string>
-  <string name="menu_option_unread">未読を見る</string>
+  <string name="menu_option_archived" fuzzy="true">アーカイブ済みを表示</string>
+  <string name="menu_option_unread" fuzzy="true">未読を見る</string>
   <string name="error_occurred_in_picking_images">画像の選択中にエラーが発生しました</string>
   <string name="image_chooser_title">アップロードする画像を選ぶ</string>
   <string name="please_wait">お待ちください…</string>
@@ -502,19 +505,30 @@
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ダウンロードに失敗しました！ 外部ストレージの許可がないため、ファイルをダウンロードできませんでした</string>
   <string name="manage_exif_tags">EXIF タグの管理</string>
   <string name="manage_exif_tags_summary">アップロードに添付するEXIFタグを選択</string>
-  <string name="exif_tag_name_author">作者</string>
-  <string name="exif_tag_name_copyright">著作権</string>
-  <string name="exif_tag_name_location">位置</string>
-  <string name="exif_tag_name_cameraModel">撮影機器のモデル名</string>
+  <string name="exif_tag_name_author" fuzzy="true">作者</string>
+  <string name="exif_tag_name_copyright" fuzzy="true">著作権</string>
+  <string name="exif_tag_name_location" fuzzy="true">位置</string>
+  <string name="exif_tag_name_cameraModel" fuzzy="true">撮影機器のモデル名</string>
   <string name="exif_tag_name_lensModel">レンズモデル</string>
-  <string name="exif_tag_name_serialNumbers">シリアル番号</string>
-  <string name="exif_tag_name_software">ソフトウェア</string>
+  <string name="exif_tag_name_serialNumbers" fuzzy="true">シリアル番号</string>
+  <string name="exif_tag_name_software" fuzzy="true">ソフトウェア</string>
   <string name="share_text">スマホからウィキペディア・コモンズに画像を投稿する\nコモンズアプリをダウンロード：%1$s</string>
   <string name="share_via">アプリの共有に使うのは…</string>
-  <string name="image_info">画像情報</string>
+  <string name="image_info" fuzzy="true">画像情報</string>
   <string name="no_categories_found">カテゴリが見つかりません</string>
   <string name="upload_cancelled">アップロードを中止しました</string>
   <string name="previous_image_title_description_not_found">以前の題名もしくは説明文のデータが見つかりません</string>
   <string name="dialog_box_text_nomination">%1$sを削除しなければならないのはなぜですか？</string>
+  <string name="review_is_uploaded_by">%1$s のアップロード者：%2$sさん</string>
   <string name="default_description_language">既定の説明用言語</string>
+  <string name="delete_helper_show_deletion_title">削除の対象に指定する</string>
+  <string name="delete_helper_show_deletion_title_success">成功しました</string>
+  <string name="delete_helper_show_deletion_title_failed">失敗しました</string>
+  <string name="delete_helper_show_deletion_message_else">削除のリクエストができません。</string>
+  <string name="delete_helper_ask_spam_selfie">自撮り</string>
+  <string name="delete_helper_ask_spam_blurry">ぼやけている</string>
+  <string name="delete_helper_ask_spam_other">それ以外</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">広報用の写真</string>
+  <string name="delete_helper_ask_reason_copyright_other">その他</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">その根拠</string>
 </resources>
