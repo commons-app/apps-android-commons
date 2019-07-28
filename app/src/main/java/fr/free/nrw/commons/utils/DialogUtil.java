@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.View;
-import android.view.ViewGroup;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -142,10 +141,6 @@ public class DialogUtil {
             if (onNegativeBtnClick != null) {
                 onNegativeBtnClick.run();
             }
-        });
-
-        builder.setOnDismissListener((DialogInterface dialogInterface) -> {
-            dialogInterface.dismiss();
         });
 
         AlertDialog dialog = builder.create();
