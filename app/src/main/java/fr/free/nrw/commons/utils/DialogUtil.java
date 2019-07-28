@@ -117,8 +117,13 @@ public class DialogUtil {
                                         final Runnable onNegativeBtnClick,
                                         View customView,
                                         boolean cancelable) {
-        if (customView != null && customView.getParent() != null)
-            ((ViewGroup) customView.getParent()).removeAllViews();
+        // If the custom view already has a parent, there is already a dialog showing with the view
+        // This happens for on resume - return to avoid creating a second dialog - the first one
+        // will still show
+        if (customView != null && customView.getParent() != null) {
+            return;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title);
         builder.setMessage(message);
@@ -137,6 +142,10 @@ public class DialogUtil {
             if (onNegativeBtnClick != null) {
                 onNegativeBtnClick.run();
             }
+        });
+
+        builder.setOnDismissListener((DialogInterface dialogInterface) -> {
+            dialogInterface.dismiss();
         });
 
         AlertDialog dialog = builder.create();
