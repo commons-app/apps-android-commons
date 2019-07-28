@@ -37,27 +37,49 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
     private List<String> languageCodesList;
     private final BiMap<AdapterView, String> selectedLanguages;
     public String selectedLangCode="";
+    private Context context;
     private boolean dropDownClicked;
+    private String savedLanguageValue;
+
 
 
     public SpinnerLanguagesAdapter(@NonNull Context context,
                                    int resource,
-                                   BiMap<AdapterView, String> selectedLanguages) {
+                                   BiMap<AdapterView, String> selectedLanguages,
+                                   String savedLanguageValue) {
         super(context, resource);
         this.resource = resource;
         this.layoutInflater = LayoutInflater.from(context);
         languageNamesList = new ArrayList<>();
         languageCodesList = new ArrayList<>();
+        prepareLanguages();
         this.selectedLanguages = selectedLanguages;
+        this.context = context;
         this.dropDownClicked = false;
+        this.savedLanguageValue = savedLanguageValue;
     }
 
-    public void setLanguageCodes(List<String> languageCodesList) {
-        this.languageCodesList=languageCodesList;
+    private void prepareLanguages() {
+        List<Language> languages = getLocaleSupportedByDevice();
+
+        for(Language language: languages) {
+            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
+                languageNamesList.add(language.getLocale().getDisplayName());
+                languageCodesList.add(language.getLocale().getLanguage());
+            }
+        }
     }
 
-    public void setLanguageNames(List<String> languageNamesList) {
-        this.languageNamesList = languageNamesList;
+    private List<Language> getLocaleSupportedByDevice() {
+        List<Language> languages = new ArrayList<>();
+        Locale[] localesArray = Locale.getAvailableLocales();
+        for (Locale locale : localesArray) {
+            languages.add(new Language(locale));
+        }
+
+        Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
+                .compareTo(t1.getLocale().getDisplayName()));
+        return languages;
     }
 
     @Override
@@ -79,7 +101,7 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
             convertView = layoutInflater.inflate(resource, parent, false);
         }
         ViewHolder holder = new ViewHolder(convertView);
-        holder.init(position, true);
+        holder.init(position, true, savedLanguageValue);
 
         dropDownClicked = true;
         return convertView;
@@ -96,9 +118,10 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.init(position, false);
+        holder.init(position, false, savedLanguageValue);
         return convertView;
     }
+
 
     public class ViewHolder {
 
@@ -112,13 +135,11 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
             ButterKnife.bind(this, itemView);
         }
 
-        public void init(int position, boolean isDropDownView) {
+        public void init(int position, boolean isDropDownView, String savedLanguageValue) {
             String languageCode = LangCodeUtils.fixLanguageCode(languageCodesList.get(position));
             final String languageName = StringUtils.capitalize(languageNamesList.get(position));
+
             if (!isDropDownView) {
-                    if( !dropDownClicked){
-                    languageCode = LangCodeUtils.fixLanguageCode(languageCode);
-                }
                 view.setVisibility(View.GONE);
                 if (languageCode.length() > 2)
                     tvLanguage.setText(languageCode.substring(0, 2));
@@ -143,5 +164,13 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
     String getLanguageCode(int position) {
         return languageCodesList.get(position);
+    }
+
+    int getIndexOfUserDefaultLocale(Context context) {
+        return languageCodesList.indexOf(context.getResources().getConfiguration().locale.getLanguage());
+    }
+
+    int getIndexOfLanguageCode(String languageCode) {
+        return languageCodesList.indexOf(languageCode);
     }
 }
