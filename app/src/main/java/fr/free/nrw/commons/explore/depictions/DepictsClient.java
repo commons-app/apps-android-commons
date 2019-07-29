@@ -5,6 +5,9 @@ import androidx.annotation.Nullable;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.util.StringUtil;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,7 +54,7 @@ public class DepictsClient {
                     List<Media> mediaList =  new ArrayList<>();
                     for (Search s: mwQueryResponse.getQuery().getSearch()) {
                         Media media = new Media(null,
-                                "",
+                                getUrl(s.getTitle()),
                                 s.getTitle(),
                                 new HashMap<>(),
                                 "",
@@ -65,6 +68,40 @@ public class DepictsClient {
                     return mediaList;
                 });
 
+    }
+
+    private String getUrl(String title) {
+        String baseUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
+        String MD5Hash = getMd5(title);
+        return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/640px-" + title;
+    }
+
+    public String getMd5(String input)
+    {
+        try {
+
+            // Static getInstance method is called with hashing MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            // digest() method is called to calculate message digest
+            //  of an input digest() return array of byte
+            byte[] messageDigest = md.digest(input.getBytes());
+
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+
+        // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private Single<List<Media>> responseToMediaList(Observable<MwQueryResponse> response, String key) {

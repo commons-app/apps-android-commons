@@ -16,10 +16,8 @@ import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-
 import java.util.Comparator;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -174,7 +172,7 @@ public class UploadRemoteDataSource {
     }
 
     /**
-     * ask the UplaodModel for the image quality of the UploadItem
+     * ask the UploadModel for the image quality of the UploadItem
      *
      * @param uploadItem
      * @param shouldValidateTitle
@@ -204,10 +202,6 @@ public class UploadRemoteDataSource {
 
     /**
      * get all depictions
-     *
-     * @param query
-     * @param imageTitleList
-     * @return
      */
 
     public Observable<DepictedItem> searchAllEntities(String query, List<String> imageTitleList) {

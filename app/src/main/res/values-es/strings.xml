@@ -548,7 +548,11 @@
   <string name="review_is_uploaded_by">%1$s fue subida por: %2$s</string>
   <string name="default_description_language">Idioma por defecto de la descripción</string>
   <string name="delete_helper_make_deletion_toast">Intentando nominar %1$s para su borrado</string>
+  <string name="delete_helper_show_deletion_title">Nominar para borrado</string>
+  <string name="delete_helper_show_deletion_title_success">Éxito</string>
+  <string name="delete_helper_show_deletion_message_if">Se nominó exitosamente  %1$s para ser borrada.</string>
   <string name="delete_helper_show_deletion_title_failed">Falló</string>
+  <string name="delete_helper_show_deletion_message_else">No se pudo solicitar el borrado.</string>
   <string name="delete_helper_ask_spam_selfie">Un autorretrato</string>
   <string name="delete_helper_ask_spam_blurry">Borrosa</string>
   <string name="delete_helper_ask_spam_nonsense">Sinsentido</string>
@@ -557,4 +561,5 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto cualquiera tomada de internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Otra</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Porque sí</string>
 </resources>
