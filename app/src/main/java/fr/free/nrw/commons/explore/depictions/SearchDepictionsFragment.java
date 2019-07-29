@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.explore.depictions;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
