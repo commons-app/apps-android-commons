@@ -72,6 +72,8 @@ public class DepictsClient {
 
     private String getUrl(String title) {
         String baseUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
+        title = title.substring(title.indexOf(':')+1);
+        title = title.replace(" ", "_");
         String MD5Hash = getMd5(title);
         return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/640px-" + title;
     }

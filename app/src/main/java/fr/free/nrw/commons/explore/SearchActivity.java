@@ -117,9 +117,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                                     searchDepictionsFragment.updateDepictionList(query.toString());
                                 }
 
-                               /* if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
+                                if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
                                     searchImageFragment.updateImageList(query.toString());
-                                }*/
+                                }
 
                                 if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
                                     searchCategoryFragment.updateCategoryList(query.toString());

@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Adapter;
@@ -19,13 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -60,7 +50,6 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
 
     private GridViewAdapter gridAdapter;
 
-    private DepictionsImageListFragment depictionsImageListFragment;
     private MediaDetailPagerFragment mediaDetails;
     @BindView(R.id.mediaContainer)
     FrameLayout mediaContainer;
@@ -287,70 +276,14 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
         }
     }
 
-
-    /*@Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        tabLayout.setVisibility(View.GONE);
-        viewPager.setVisibility(View.GONE);
-        mediaContainer.setVisibility(View.VISIBLE);
-        if (mediaDetails == null || !mediaDetails.isVisible()) {
-            // set isFeaturedImage true for featured images, to include author field on media detail
-            mediaDetails = new MediaDetailPagerFragment(false, true);
-            FragmentManager supportFragmentManager = getSupportFragmentManager();
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.mediaContainer, mediaDetails)
-                    .addToBackStack(null)
-                    .commit();
-            supportFragmentManager.executePendingTransactions();
-        }
-        mediaDetails.showImage(position);
-        forceInitBackButton();
-    }*/
-
-    /**
-     * This method inflates the menu in the toolbar
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.drawer, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
     @Override
     public Media getMediaAtPosition(int i) {
-        if (depictionsImageListFragment.getAdapter() == null) {
-            // not yet ready to return data
-            return null;
-        } else {
-            return (Media) depictionsImageListFragment.getAdapter().getItem(i);
-        }
+        return null;
     }
 
     @Override
     public int getTotalMediaCount() {
-        if (depictionsImageListFragment.getAdapter() == null) {
-            return 0;
-        }
-        return depictionsImageListFragment.getAdapter().getCount();
-    }
-
-    /**
-     * This method handles the logic on ItemSelect in toolbar menu
-     * Currently only 1 choice is available to open category details page in browser
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // Handle item selection
-        /*switch (item.getItemId()) {
-            case R.id.menu_browser_current_category:
-                Utils.handleWebUrl(this, Uri.parse(Utils.getPageTitle(depictName).getCanonicalUri()));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }*/ return true;
+        return 0;
     }
 
     /**
@@ -374,16 +307,6 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
         intent.putExtra("depictsName", depictedItem.getDepictsLabel());
         intent.putExtra("entityId", depictedItem.getEntityId());
         context.startActivity(intent);
-    }
-
-    /**
-     * This method is called when viewPager has reached its end.
-     * Fetches more images using search query and adds it to the grid view and viewpager adapter
-     */
-    public void requestMoreImages() {
-        if (depictionsImageListFragment!=null){
-            depictionsImageListFragment.fetchMoreImagesViewPager();
-        }
     }
 
     /**
