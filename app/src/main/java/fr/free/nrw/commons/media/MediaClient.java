@@ -166,6 +166,30 @@ public class MediaClient {
                 .single(Media.EMPTY);
     }
 
+    public Single<String> getCaptionByFilename(String filename) {
+        return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), "File:"+filename+".jpg")
+                .map(mediaDetailResponse -> {
+                    if (mediaDetailResponse != null && mediaDetailResponse.getSuccess() != null && mediaDetailResponse.getSuccess() == 1 && mediaDetailResponse.getEntities() != null) {
+                        Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
+                        try {
+                            Map.Entry<String, CommonsWikibaseItem> entry = entities.entrySet().iterator().next();
+                            CommonsWikibaseItem commonsWikibaseItem = entry.getValue();
+                                Map<String, Caption> labels = commonsWikibaseItem.getLabels();
+                                Timber.e(filename);
+                                Map.Entry<String, Caption> captionEntry = labels.entrySet().iterator().next();
+                                Caption caption = captionEntry.getValue();
+                                return caption.getValue();
+
+                        } catch (NullPointerException e) {
+                            return "No caption";
+                        }
+                    }
+                        return "No caption";
+
+                })
+                .singleOrError();
+    }
+
     /**
      * Fetches Structured data from API
      *

@@ -47,6 +47,7 @@ public class Media implements Parcelable {
     private String thumbUrl;
     protected String imageUrl;
     protected String filename;
+    protected String thumbnailTitle;
     /**
      * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
      * This is a replacement of the previously used titles for images (titles were not multilingual)
@@ -258,6 +259,14 @@ public class Media implements Parcelable {
      */
     @NonNull public String getDisplayTitle() {
         return filename != null ? getPageTitle().getDisplayTextWithoutNamespace().replaceFirst("[.][^.]+$", "") : "";
+    }
+
+    public void setThumbnailTitle(String title) {
+        this.thumbnailTitle = title;
+    }
+
+    public String getThumbnailTitle() {
+        return thumbnailTitle != null? thumbnailTitle : filename;
     }
 
     /**

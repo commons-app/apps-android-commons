@@ -44,6 +44,7 @@ import static android.view.View.VISIBLE;
 public class CategoryImagesListFragment extends DaggerFragment {
 
     private static int TIMEOUT_SECONDS = 15;
+    private int mediaSize = 0;
 
     private GridViewAdapter gridAdapter;
 
@@ -269,6 +270,27 @@ public class CategoryImagesListFragment extends DaggerFragment {
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);
+        for (Media m : collection) {
+            replaceTitlesWithCaptions(m.getDisplayTitle(), mediaSize++);
+        }
+    }
+
+    public void replaceTitlesWithCaptions(String displayTitle, int i) {
+        compositeDisposable.add(mediaClient.getCaptionByFilename(displayTitle)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .subscribe(subscriber -> {
+                    handleLabelforImage(subscriber, i);
+                }));
+
+    }
+
+    private void handleLabelforImage(String s, int position) {
+        if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
+            gridAdapter.getItem(position).setThumbnailTitle(s);
+            gridAdapter.notifyDataSetChanged();
+        }
     }
 
     /**

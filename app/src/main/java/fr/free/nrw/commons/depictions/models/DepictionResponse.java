@@ -2,7 +2,7 @@ package fr.free.nrw.commons.depictions.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Example {
+public class DepictionResponse {
 
     @SerializedName("batchcomplete")
     @Expose
@@ -18,7 +18,7 @@ public class Example {
      * No args constructor for use in serialization
      *
      */
-    public Example() {
+    public DepictionResponse() {
     }
 
     /**
@@ -27,7 +27,7 @@ public class Example {
      * @param batchcomplete
      * @param _continue
      */
-    public Example(String batchcomplete, Continue _continue, Query query) {
+    public DepictionResponse(String batchcomplete, Continue _continue, Query query) {
         super();
         this.batchcomplete = batchcomplete;
         this._continue = _continue;
