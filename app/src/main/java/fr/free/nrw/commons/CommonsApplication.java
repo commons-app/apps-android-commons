@@ -10,6 +10,8 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.squareup.leakcanary.LeakCanary;
@@ -28,7 +30,6 @@ import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.annotation.NonNull;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
@@ -41,7 +42,6 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
-import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.upload.structure.depicts.DepictDao;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -266,7 +266,6 @@ public class CommonsApplication extends Application {
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
-        ModifierSequenceDao.Table.onDelete(db);
         CategoryDao.Table.onDelete(db);
         DepictDao.Table.onDelete(db);
         ContributionDao.Table.onDelete(db);
