@@ -261,9 +261,18 @@ public class Media implements Parcelable {
         return filename != null ? getPageTitle().getDisplayTextWithoutNamespace().replaceFirst("[.][^.]+$", "") : "";
     }
 
+    /**
+     * Set Caption(if available) as the thumbnail title of the image
+     */
+
     public void setThumbnailTitle(String title) {
         this.thumbnailTitle = title;
     }
+
+    /**
+     * @return title to be shown on image thumbnail
+     * If caption is available for the image then it returns caption else filename
+     */
 
     public String getThumbnailTitle() {
         return thumbnailTitle != null? thumbnailTitle : getDisplayTitle();

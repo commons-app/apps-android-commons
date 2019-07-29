@@ -3,11 +3,9 @@ package fr.free.nrw.commons.depictions;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
@@ -26,10 +24,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
@@ -79,7 +75,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_depict_images);
+        setContentView(R.layout.activity_depict_detail);
         ButterKnife.bind(this);
         gridView.setOnItemClickListener((AdapterView.OnItemClickListener) this);
         setPageTitle();
@@ -88,7 +84,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
     }
 
     /**
-     * Gets the passed categoryName from the intents and displays it as the page title
+     * Gets the passed depictsName from the intents and displays it as the page title
      */
     private void setPageTitle() {
         if (getIntent() != null && getIntent().getStringExtra("depictsName") != null) {
@@ -112,7 +108,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(depictsClient.fetchListofDepictions(entityId, 25)
+        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -137,7 +133,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
      * @param throwable
      */
     private void handleError(Throwable throwable) {
-        Timber.e(throwable, "Error occurred while loading images inside a category");
+        Timber.e(throwable, "Error occurred while loading images inside items");
         try{
             ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
             initErrorView();
@@ -181,7 +177,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
 
     /**
      * Sets the scroll listener for the grid view so that more images are fetched when the user scrolls down
-     * Checks if the category has more images before loading
+     * Checks if the item has more images before loading
      * Also checks whether images are currently being fetched before triggering another request
      */
     private void setScrollListener() {
@@ -204,7 +200,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
     }
 
     /**
-     * Fetches more images for the category and adds it to the grid view adapter
+     * Fetches more images for the item and adds it to the grid view adapter
      */
     @SuppressLint("CheckResult")
     private void fetchMoreImages() {
@@ -214,7 +210,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
         }
 
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(depictsClient.fetchListofDepictions(entityId, 25)
+        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -241,21 +237,12 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
                 return;
             }
             gridAdapter.addItems(collection);
-            /*try {
-                ((CategoryImagesListFragment) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }*/
+
             try {
                 viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
+            }catch (Exception e) {
                 e.printStackTrace();
             }
-            /*try {
-                ((ExploreActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }*/
         }
         progressBar.setVisibility(GONE);
         isLoading = false;
@@ -287,7 +274,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
     }
 
     /**
-     * This method is called on success of API call for Images inside a category.
+     * This method is called on success of API call for Images inside an item.
      * The viewpager will notified that number of items have changed.
      */
     public void viewPagerNotifyDataSetChanged() {

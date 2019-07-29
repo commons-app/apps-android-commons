@@ -3,7 +3,6 @@ package fr.free.nrw.commons.explore.depictions;
 import androidx.annotation.Nullable;
 
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.util.StringUtil;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -41,6 +40,11 @@ public class DepictsClient {
         this.continuationStore = new HashMap<>();
     }
 
+    /**
+     * Search for depictions using the search item
+     * @return list of depicted items
+     */
+
     public Observable<DepictedItem> searchForDepictions(String query, int limit) {
 
         return depictsInterface.searchForDepicts(query, String.valueOf(limit))
@@ -48,8 +52,12 @@ public class DepictsClient {
                 .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), null, false, depictSearchItem.getId()));
     }
 
-    public Observable<List<Media>> fetchListofDepictions(String query, int limit) {
-        return mediaInterface.fetchListofDepictions("haswbstatement:P180="+query)
+    /**
+     * @return list of images for a particular depict entity
+     */
+
+    public Observable<List<Media>> fetchImagesForDepictedItem(String query, int limit) {
+        return mediaInterface.fetchImagesForDepictedItem("haswbstatement:P180="+query)
                 .map(mwQueryResponse -> {
                     List<Media> mediaList =  new ArrayList<>();
                     for (Search s: mwQueryResponse.getQuery().getSearch()) {
@@ -70,6 +78,10 @@ public class DepictsClient {
 
     }
 
+    /**
+     * Get url for the image from media of depictions
+     */
+
     private String getUrl(String title) {
         String baseUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
         title = title.substring(title.indexOf(':')+1);
@@ -77,6 +89,10 @@ public class DepictsClient {
         String MD5Hash = getMd5(title);
         return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/640px-" + title;
     }
+
+    /**
+     * Generates MD5 hash for the filename
+     */
 
     public String getMd5(String input)
     {

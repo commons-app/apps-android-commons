@@ -68,6 +68,8 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
     private List<DepictedItem> queryList = new ArrayList<>();
 
     private final SearchDepictionsAdapterFactory adapterFactory = new SearchDepictionsAdapterFactory(item -> {
+        // Called on Click of a individual depicted Item
+        // Open Depiction Details activity
         DepictionsDetailActivity.startYourself(getContext(), item);
         saveQuery(query);
     });
@@ -96,6 +98,10 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
         });
         return rootView;
     }
+
+    /**
+     * Adds 25 more results to existing search results
+     */
 
     private void addDepictionsToList(String query) {
         if (isLoadingDepictions) return;
@@ -137,6 +143,11 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
                 .subscribe(this::handleSuccess, this::handleError));
     }
 
+    /**
+     * Handles the success scenario
+     * it initializes the recycler view by adding items to the adapter
+     */
+
     private void handleSuccess(List<DepictedItem> mediaList) {
         queryList = mediaList;
         if (mediaList == null || mediaList.isEmpty()) {
@@ -149,6 +160,11 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
         }
     }
 
+    /**
+     * Handles the success scenario
+     * it initializes the recycler view by adding items to the adapter
+     */
+
     private void handlePaginationSuccess(List<DepictedItem> mediaList) {
         queryList.addAll(mediaList);
         progressBar.setVisibility(View.GONE);
@@ -157,6 +173,10 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
         depictionsAdapter.notifyDataSetChanged();
         isLoadingDepictions = false;
     }
+
+    /**
+     * Logs and handles API error scenario
+     */
 
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried depictions");
@@ -169,11 +189,20 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
 
     }
 
+    /**
+     * Handles the UI updates for a error scenario
+     */
+
     private void initErrorView() {
         progressBar.setVisibility(GONE);
         depictionNotFound.setVisibility(VISIBLE);
         depictionNotFound.setText(getString(R.string.depictions_not_found));
     }
+
+    /**
+     * This method saves Search Query in the Recent Searches Database.
+     * @param query
+     */
 
     private void saveQuery(String query) {
         RecentSearch recentSearch = recentSearchesDao.find(query);

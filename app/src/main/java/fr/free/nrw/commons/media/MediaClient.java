@@ -166,6 +166,10 @@ public class MediaClient {
                 .single(Media.EMPTY);
     }
 
+    /**
+     * @return  caption for image using filename
+     */
+
     public Single<String> getCaptionByFilename(String filename) {
         return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), "File:"+filename+".jpg")
                 .map(mediaDetailResponse -> {
