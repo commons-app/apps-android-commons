@@ -39,6 +39,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -58,6 +59,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -83,6 +86,7 @@ public class ContributionsFragment
     private boolean isUploadServiceConnected;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    private static int TIMEOUT_SECONDS = 15;
     private ContributionsListFragment contributionsListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
     private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
@@ -92,6 +96,8 @@ public class ContributionsFragment
     @BindView(R.id.campaigns_view) CampaignView campaignView;
 
     @Inject ContributionsPresenter contributionsPresenter;
+    @Inject
+    MediaClient mediaClient;
 
     private LatLng curLatLng;
 
@@ -219,7 +225,15 @@ public class ContributionsFragment
 
             @Override
             public Contribution getContributionForPosition(int position) {
-                return (Contribution) contributionsPresenter.getItemAtPosition(position);
+                Contribution contribution = (Contribution) contributionsPresenter.getItemAtPosition(position);
+                compositeDisposable.add(mediaClient.getCaptionByFilename(contribution.getFilename())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                        .subscribe(subscriber -> {
+                            contribution.setThumbnailTitle(subscriber);
+                        }));
+                return contribution;
             }
 
             @Override

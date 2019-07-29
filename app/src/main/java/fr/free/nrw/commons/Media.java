@@ -266,7 +266,7 @@ public class Media implements Parcelable {
     }
 
     public String getThumbnailTitle() {
-        return thumbnailTitle != null? thumbnailTitle : filename;
+        return thumbnailTitle != null? thumbnailTitle : getDisplayTitle();
     }
 
     /**

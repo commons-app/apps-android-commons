@@ -60,7 +60,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         this.position=position;
         this.contribution = contribution;
         fetchAndDisplayThumbnail(contribution);
-        titleView.setText(contribution.getDisplayTitle());
+        titleView.setText(contribution.getThumbnailTitle());
 
         seqNumView.setText(String.valueOf(contribution.getPosition() + 1));
         seqNumView.setVisibility(View.VISIBLE);
