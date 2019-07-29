@@ -113,6 +113,11 @@
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
+            android:name=".depictions.DepictionsDetailActivity"
+            android:label="@string/title_activity_featured_images"
+            android:parentActivityName=".contributions.MainActivity" />
+
+        <activity
             android:name=".explore.categories.ExploreActivity"
             android:label="@string/title_activity_explore"
             android:parentActivityName=".contributions.MainActivity"

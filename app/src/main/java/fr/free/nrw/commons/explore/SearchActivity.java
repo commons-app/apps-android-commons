@@ -89,8 +89,8 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
         searchImageFragment = new SearchImageFragment();
-        searchCategoryFragment= new SearchCategoryFragment();
         searchDepictionsFragment = new SearchDepictionsFragment();
+        searchCategoryFragment= new SearchCategoryFragment();
         fragmentList.add(searchImageFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase());
         fragmentList.add(searchCategoryFragment);

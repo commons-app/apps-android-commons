@@ -1,0 +1,402 @@
+package fr.free.nrw.commons.depictions;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
+import android.widget.GridView;
+import android.widget.ListAdapter;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.explore.depictions.DepictsClient;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+public class DepictionsDetailActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider,
+        AdapterView.OnItemClickListener {
+
+    private static int TIMEOUT_SECONDS = 15;
+
+    private GridViewAdapter gridAdapter;
+
+    private DepictionsImageListFragment depictionsImageListFragment;
+    private MediaDetailPagerFragment mediaDetails;
+    @BindView(R.id.mediaContainer)
+    FrameLayout mediaContainer;
+
+    @BindView(R.id.statusMessage)
+    TextView statusTextView;
+    @BindView(R.id.loadingImagesProgressBar)
+    ProgressBar progressBar;
+    @BindView(R.id.depicts_image_list)
+    GridView gridView;
+    @BindView(R.id.parentLayout)
+    RelativeLayout parentLayout;
+
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private boolean hasMoreImages = true;
+    private boolean isLoading = true;
+    private String depictName = null;
+    private String entityId = null;
+    @Inject
+    DepictsClient depictsClient;
+
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore depictionKvStore;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_depict_images);
+        ButterKnife.bind(this);
+        gridView.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+        setPageTitle();
+        initDrawer();
+        forceInitBackButton();
+    }
+
+    /**
+     * Gets the passed categoryName from the intents and displays it as the page title
+     */
+    private void setPageTitle() {
+        if (getIntent() != null && getIntent().getStringExtra("depictsName") != null) {
+            setTitle(getIntent().getStringExtra("depictsName"));
+            entityId = getIntent().getStringExtra("entityId");
+            //resetQueryContinueValues(depictName);
+            initList();
+            setScrollListener();
+        }
+    }
+
+    /**
+     * Checks for internet connection and then initializes the grid view with first 10 images of that depiction
+     */
+    @SuppressLint("CheckResult")
+    private void initList() {
+        if (!NetworkUtils.isInternetConnectionEstablished(this)) {
+            handleNoInternet();
+            return;
+        }
+
+        isLoading = true;
+        progressBar.setVisibility(VISIBLE);
+        compositeDisposable.add(depictsClient.fetchListofDepictions(entityId, 25)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .subscribe(this::handleSuccess, this::handleError));
+    }
+
+    /**
+     * Handles the UI updates for no internet scenario
+     */
+    private void handleNoInternet() {
+        progressBar.setVisibility(GONE);
+        if (gridAdapter == null || gridAdapter.isEmpty()) {
+            statusTextView.setVisibility(VISIBLE);
+            statusTextView.setText(getString(R.string.no_internet));
+        } else {
+            ViewUtil.showShortSnackbar(parentLayout, R.string.no_internet);
+        }
+    }
+
+    /**
+     * Logs and handles API error scenario
+     * @param throwable
+     */
+    private void handleError(Throwable throwable) {
+        Timber.e(throwable, "Error occurred while loading images inside a category");
+        try{
+            ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
+            initErrorView();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Handles the UI updates for a error scenario
+     */
+    private void initErrorView() {
+        progressBar.setVisibility(GONE);
+        if (gridAdapter == null || gridAdapter.isEmpty()) {
+            statusTextView.setVisibility(VISIBLE);
+            statusTextView.setText(getString(R.string.no_images_found));
+        } else {
+            statusTextView.setVisibility(GONE);
+        }
+    }
+
+    /**
+     * Initializes the adapter with a list of Media objects
+     * @param mediaList List of new Media to be displayed
+     */
+    private void setAdapter(List<Media> mediaList) {
+        gridAdapter = new fr.free.nrw.commons.depictions.GridViewAdapter(this, R.layout.layout_depict_image, mediaList);
+        gridView.setAdapter(gridAdapter);
+    }
+
+
+    /**
+     * Query continue values determine the last page that was loaded for the particular keyword
+     * This method resets those values, so that the results can be queried from the first page itself
+     * @param keyword
+     */
+    private void resetQueryContinueValues(String keyword) {
+        depictionKvStore.remove("query_continue_" + keyword);
+    }
+
+    /**
+     * Sets the scroll listener for the grid view so that more images are fetched when the user scrolls down
+     * Checks if the category has more images before loading
+     * Also checks whether images are currently being fetched before triggering another request
+     */
+    private void setScrollListener() {
+        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount + 1 >= totalItemCount)) {
+                    isLoading = true;
+                    fetchMoreImages();
+                }
+                if (!hasMoreImages){
+                    progressBar.setVisibility(GONE);
+                }
+            }
+        });
+    }
+
+    /**
+     * Fetches more images for the category and adds it to the grid view adapter
+     */
+    @SuppressLint("CheckResult")
+    private void fetchMoreImages() {
+        if (!NetworkUtils.isInternetConnectionEstablished(this)) {
+            handleNoInternet();
+            return;
+        }
+
+        progressBar.setVisibility(VISIBLE);
+        compositeDisposable.add(depictsClient.fetchListofDepictions(entityId, 25)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .subscribe(this::handleSuccess, this::handleError));
+    }
+
+    /**
+     * Handles the success scenario
+     * On first load, it initializes the grid view. On subsequent loads, it adds items to the adapter
+     * @param collection List of new Media to be displayed
+     */
+    private void handleSuccess(List<Media> collection) {
+        if (collection == null || collection.isEmpty()) {
+            initErrorView();
+            hasMoreImages = false;
+            return;
+        }
+
+        if (gridAdapter == null) {
+            setAdapter(collection);
+        } else {
+            if (gridAdapter.containsAll(collection)) {
+                hasMoreImages = false;
+                return;
+            }
+            gridAdapter.addItems(collection);
+            /*try {
+                ((CategoryImagesListFragment) getContext()).viewPagerNotifyDataSetChanged();
+            }catch (Exception e){
+                e.printStackTrace();
+            }*/
+            try {
+                viewPagerNotifyDataSetChanged();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            /*try {
+                ((ExploreActivity) getContext()).viewPagerNotifyDataSetChanged();
+            }catch (Exception e){
+                e.printStackTrace();
+            }*/
+        }
+        progressBar.setVisibility(GONE);
+        isLoading = false;
+        statusTextView.setVisibility(GONE);
+    }
+
+    /**
+     * This method is called when viewPager has reached its end.
+     * Fetches more images for the depicts and adds it to the grid view and viewpager adapter
+     */
+    public void fetchMoreImagesViewPager(){
+        if (hasMoreImages && !isLoading) {
+            isLoading = true;
+            fetchMoreImages();
+        }
+        if (!hasMoreImages){
+            progressBar.setVisibility(GONE);
+        }
+    }
+
+
+    /*@Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        tabLayout.setVisibility(View.GONE);
+        viewPager.setVisibility(View.GONE);
+        mediaContainer.setVisibility(View.VISIBLE);
+        if (mediaDetails == null || !mediaDetails.isVisible()) {
+            // set isFeaturedImage true for featured images, to include author field on media detail
+            mediaDetails = new MediaDetailPagerFragment(false, true);
+            FragmentManager supportFragmentManager = getSupportFragmentManager();
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.mediaContainer, mediaDetails)
+                    .addToBackStack(null)
+                    .commit();
+            supportFragmentManager.executePendingTransactions();
+        }
+        mediaDetails.showImage(position);
+        forceInitBackButton();
+    }*/
+
+    /**
+     * This method inflates the menu in the toolbar
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.drawer, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public Media getMediaAtPosition(int i) {
+        if (depictionsImageListFragment.getAdapter() == null) {
+            // not yet ready to return data
+            return null;
+        } else {
+            return (Media) depictionsImageListFragment.getAdapter().getItem(i);
+        }
+    }
+
+    @Override
+    public int getTotalMediaCount() {
+        if (depictionsImageListFragment.getAdapter() == null) {
+            return 0;
+        }
+        return depictionsImageListFragment.getAdapter().getCount();
+    }
+
+    /**
+     * This method handles the logic on ItemSelect in toolbar menu
+     * Currently only 1 choice is available to open category details page in browser
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // Handle item selection
+        /*switch (item.getItemId()) {
+            case R.id.menu_browser_current_category:
+                Utils.handleWebUrl(this, Uri.parse(Utils.getPageTitle(depictName).getCanonicalUri()));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }*/ return true;
+    }
+
+    /**
+     * This method is called on success of API call for Images inside a category.
+     * The viewpager will notified that number of items have changed.
+     */
+    public void viewPagerNotifyDataSetChanged() {
+        if (mediaDetails!=null){
+            mediaDetails.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Consumers should be simply using this method to use this activity.
+     * @param context  A Context of the application package implementing this class.
+     * @param depictedItem Name of the depicts for displaying its details
+     */
+    public static void startYourself(Context context, DepictedItem depictedItem) {
+        Intent intent = new Intent(context, DepictionsDetailActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra("depictsName", depictedItem.getDepictsLabel());
+        intent.putExtra("entityId", depictedItem.getEntityId());
+        context.startActivity(intent);
+    }
+
+    /**
+     * This method is called when viewPager has reached its end.
+     * Fetches more images using search query and adds it to the grid view and viewpager adapter
+     */
+    public void requestMoreImages() {
+        if (depictionsImageListFragment!=null){
+            depictionsImageListFragment.fetchMoreImagesViewPager();
+        }
+    }
+
+    /**
+     * It return an instance of gridView adapter which helps in extracting media details
+     * used by the gridView
+     * @return  GridView Adapter
+     */
+    public ListAdapter getAdapter() {
+        return gridAdapter;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+}

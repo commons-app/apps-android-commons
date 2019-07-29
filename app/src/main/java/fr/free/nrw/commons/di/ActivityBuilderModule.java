@@ -11,6 +11,7 @@ import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
+import fr.free.nrw.commons.depictions.DepictionsDetailActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
@@ -55,6 +56,9 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract CategoryDetailsActivity bindCategoryDetailsActivity();
+
+    @ContributesAndroidInjector
+    abstract DepictionsDetailActivity bindDepictionsDetailActivity();
 
     @ContributesAndroidInjector
     abstract ExploreActivity bindExploreActivity();

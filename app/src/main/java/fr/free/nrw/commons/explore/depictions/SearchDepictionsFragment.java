@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.explore.depictions;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,12 +27,12 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.depictions.DepictionsDetailActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.upload.depicts.DepictsInterface;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -41,8 +43,10 @@ import timber.log.Timber;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class SearchDepictionsFragment  extends CommonsDaggerSupportFragment {
+public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
     private static int TIMEOUT_SECONDS = 15;
+
+    private Activity activity;
     @BindView(R.id.imagesListBox)
     RecyclerView depictionsRecyclerView;
     @BindView(R.id.imageSearchInProgress)
@@ -53,33 +57,30 @@ public class SearchDepictionsFragment  extends CommonsDaggerSupportFragment {
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
     boolean isLoadingDepictions;
-
     @Inject
     RecentSearchesDao recentSearchesDao;
     @Inject
     MediaWikiApi mwApi;
     @Inject
     DepictsClient depictsClient;
-
     @Inject
     @Named("default_preferences")
     JsonKvStore basicKvStore;
-
     private RVRendererAdapter<DepictedItem> depictionsAdapter;
     private List<DepictedItem> queryList = new ArrayList<>();
 
     private final SearchDepictionsAdapterFactory adapterFactory = new SearchDepictionsAdapterFactory(item -> {
-        //todo GSoC'19 this should open url of the depiction
+        DepictionsDetailActivity.startYourself(getContext(), item);
+        saveQuery(query);
     });
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
-        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             depictionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        }
-        else{
+        } else {
             depictionsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
         ArrayList<DepictedItem> items = new ArrayList<>();
@@ -99,12 +100,12 @@ public class SearchDepictionsFragment  extends CommonsDaggerSupportFragment {
     }
 
     private void addDepictionsToList(String query) {
-        if(isLoadingDepictions) return;
-        isLoadingDepictions=true;
+        if (isLoadingDepictions) return;
+        isLoadingDepictions = true;
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        compositeDisposable.add(depictsClient.searchForDepictions(query,25)
+        compositeDisposable.add(depictsClient.searchForDepictions(query, 25)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -112,9 +113,18 @@ public class SearchDepictionsFragment  extends CommonsDaggerSupportFragment {
                 .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof Activity) {
+            this.activity = (Activity) context;
+        }
+    }
+
     public void updateDepictionList(String query) {
         this.query = query;
-        depictionNotFound.setVisibility(GONE);
+        //depictionNotFound.setVisibility(GONE);
         if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
@@ -137,8 +147,7 @@ public class SearchDepictionsFragment  extends CommonsDaggerSupportFragment {
         queryList = mediaList;
         if (mediaList == null || mediaList.isEmpty()) {
             initErrorView();
-        }
-        else {
+        } else {
             bottomProgressBar.setVisibility(View.GONE);
             progressBar.setVisibility(GONE);
             depictionsAdapter.addAll(mediaList);
@@ -152,7 +161,7 @@ public class SearchDepictionsFragment  extends CommonsDaggerSupportFragment {
         bottomProgressBar.setVisibility(GONE);
         depictionsAdapter.addAll(mediaList);
         depictionsAdapter.notifyDataSetChanged();
-        isLoadingDepictions=false;
+        isLoadingDepictions = false;
     }
 
     private void handleError(Throwable throwable) {
@@ -160,7 +169,7 @@ public class SearchDepictionsFragment  extends CommonsDaggerSupportFragment {
         try {
             initErrorView();
             ViewUtil.showShortSnackbar(depictionsRecyclerView, R.string.error_loading_depictions);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -178,14 +187,16 @@ public class SearchDepictionsFragment  extends CommonsDaggerSupportFragment {
         // Newly searched query...
         if (recentSearch == null) {
             recentSearch = new RecentSearch(null, query, new Date());
-        }
-        else {
+        } else {
             recentSearch.setLastSearched(new Date());
         }
         recentSearchesDao.save(recentSearch);
 
     }
 
+    /**
+     * Handles the UI updates for no internet scenario
+     */
     private void handleNoInternet() {
         progressBar.setVisibility(GONE);
         ViewUtil.showShortSnackbar(depictionsRecyclerView, R.string.no_internet);

@@ -1,10 +1,13 @@
 package fr.free.nrw.commons.media;
 
+import com.google.gson.JsonObject;
+
 import org.jetbrains.annotations.NotNull;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
 import java.util.Map;
 
+import fr.free.nrw.commons.depictions.models.Example;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -94,4 +97,7 @@ public interface MediaInterface {
      * */
     @GET("w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1")
     Observable<MwQueryResponse> fetchCaptionByFilename(@Query("language") String language, @Query("titles") String filename);
+
+    @GET("w/api.php?action=query&list=search&format=json&srnamespace=6")
+    Observable<Example> fetchListofDepictions(@Query("srsearch") String query);
 }
