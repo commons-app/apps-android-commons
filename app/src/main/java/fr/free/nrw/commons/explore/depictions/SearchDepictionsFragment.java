@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.explore.depictions;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -46,7 +45,6 @@ import static android.view.View.VISIBLE;
 public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
     private static int TIMEOUT_SECONDS = 15;
 
-    private Activity activity;
     @BindView(R.id.imagesListBox)
     RecyclerView depictionsRecyclerView;
     @BindView(R.id.imageSearchInProgress)
@@ -116,10 +114,6 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        if (context instanceof Activity) {
-            this.activity = (Activity) context;
-        }
     }
 
     public void updateDepictionList(String query) {
