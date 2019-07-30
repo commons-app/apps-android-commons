@@ -45,9 +45,9 @@ public class DepictsClient {
      * @return list of depicted items
      */
 
-    public Observable<DepictedItem> searchForDepictions(String query, int limit) {
+    public Observable<DepictedItem> searchForDepictions(String query, int limit, int offset) {
 
-        return depictsInterface.searchForDepicts(query, String.valueOf(limit))
+        return depictsInterface.searchForDepicts(query, String.valueOf(limit), String.valueOf(offset))
                 .flatMap(depictSearchResponse -> Observable.fromIterable(depictSearchResponse.getSearch()))
                 .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), null, false, depictSearchItem.getId()));
     }

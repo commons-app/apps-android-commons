@@ -109,7 +109,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        compositeDisposable.add(depictsClient.searchForDepictions(query, 25)
+        compositeDisposable.add(depictsClient.searchForDepictions(query, 25, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -134,7 +134,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
         queryList.clear();
         depictionsAdapter.clear();
         saveQuery(query);
-        compositeDisposable.add(depictsClient.searchForDepictions(query, 25)
+        compositeDisposable.add(depictsClient.searchForDepictions(query, 25, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -148,7 +148,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
      * it initializes the recycler view by adding items to the adapter
      */
 
-    private void handleSuccess(List<DepictedItem> mediaList) {
+    public void handleSuccess(List<DepictedItem> mediaList) {
         queryList = mediaList;
         if (mediaList == null || mediaList.isEmpty()) {
             initErrorView();

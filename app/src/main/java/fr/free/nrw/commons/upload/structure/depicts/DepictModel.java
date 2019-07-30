@@ -125,7 +125,7 @@ public class DepictModel {
     }
 
     private Observable<DepictedItem> getTitleDepicts(String title) {
-        return depictsInterface.searchForDepicts(title, String.valueOf(SEARCH_DEPICTS_LIMIT))
+        return depictsInterface.searchForDepicts(title, String.valueOf(SEARCH_DEPICTS_LIMIT), "0")
                 .map(depictSearchResponse -> {
                     DepictSearchItem depictedItem = depictSearchResponse.getSearch().get(0);
                    return new DepictedItem(depictedItem.getLabel(), depictedItem.getDescription(), null, false, depictedItem.getId());
@@ -164,7 +164,7 @@ public class DepictModel {
             return depictedItemObservable;
         }
 
-        return depictsInterface.searchForDepicts(query, String.valueOf(SEARCH_DEPICTS_LIMIT))
+        return depictsInterface.searchForDepicts(query, String.valueOf(SEARCH_DEPICTS_LIMIT), "0")
                 .flatMap(depictSearchResponse -> Observable.fromIterable(depictSearchResponse.getSearch()))
                 .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), null, false, depictSearchItem.getId()));
     }
