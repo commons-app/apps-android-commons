@@ -48,6 +48,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.utils.FragmentUtils;
+import fr.free.nrw.commons.utils.LayoutUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -158,6 +159,16 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         ArrayAdapter adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,stringArrayList);
         searchListView.setAdapter(adapter);
+
+
+
+        searchListView.setLayoutParams(LayoutUtils.getLayoutParamsHeightByWindowRate(getActivity().getWindowManager(),
+                0.5625,
+                searchListView.getLayoutParams()));
+
+        searchListView.setLayoutParams(LayoutUtils.getLayoutParamsWidthByWindowRate(getActivity().getWindowManager(),
+                0.78,
+                searchListView.getLayoutParams()));
 
         compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
                 .takeUntil(RxView.detaches(searchView))
