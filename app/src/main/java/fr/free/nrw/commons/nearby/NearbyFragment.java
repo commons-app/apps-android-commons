@@ -11,8 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
@@ -23,6 +27,8 @@ import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -57,6 +63,7 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.PERMISSION_JUST_GRANTED;
+import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
 
 public class NearbyFragment extends CommonsDaggerSupportFragment
         implements LocationUpdateListener,
@@ -80,6 +87,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     Chip chipNeedsPhoto;
     @BindView(R.id.search_view)
     SearchView searchView;
+    @BindView(R.id.search_list_view)
+    ListView searchListView;
 
     @Inject
     LocationServiceManager locationManager;
@@ -142,6 +151,14 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     }
 
     public void initNearbyFilter() {
+
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        for(Label label : TEXT_TO_DESCRIPTION.values())
+            stringArrayList.add(label.toString());
+
+        ArrayAdapter adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,stringArrayList);
+        searchListView.setAdapter(adapter);
+
         compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
                 .takeUntil(RxView.detaches(searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)

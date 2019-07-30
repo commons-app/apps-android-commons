@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:orientation="vertical"
         >
 
@@ -53,6 +54,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/search_view_layout"
             android:paddingVertical="15dp"
             >
 
@@ -72,12 +74,18 @@
 
         </LinearLayout>
 
-
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/search_view_layout"
             android:background="@color/status_bar_blue">
+
+            <ListView
+                android:id="@+id/search_list_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="6dp"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
