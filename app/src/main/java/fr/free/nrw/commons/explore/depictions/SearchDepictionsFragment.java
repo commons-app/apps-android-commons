@@ -125,7 +125,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
 
     public void updateDepictionList(String query) {
         this.query = query;
-        //depictionNotFound.setVisibility(GONE);
+        depictionNotFound.setVisibility(GONE);
         if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
             return;
