@@ -96,5 +96,5 @@ public interface MediaInterface {
     Observable<MwQueryResponse> fetchCaptionByFilename(@Query("language") String language, @Query("titles") String filename);
 
     @GET("w/api.php?action=query&list=search&format=json&srnamespace=6")
-    Observable<DepictionResponse> fetchImagesForDepictedItem(@Query("srsearch") String query);
+    Observable<DepictionResponse> fetchImagesForDepictedItem(@Query("srsearch") String query, @Query("sroffset") String sroffset);
 }

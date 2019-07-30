@@ -226,14 +226,15 @@ public class ContributionsFragment
             @Override
             public Contribution getContributionForPosition(int position) {
                 Contribution contribution = (Contribution) contributionsPresenter.getItemAtPosition(position);
-                compositeDisposable.add(mediaClient.getCaptionByFilename(contribution.getFilename())
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                        .subscribe(subscriber -> {
-                            contribution.setThumbnailTitle(subscriber);
-                        }));
-                return contribution;
+                if (contribution != null) {
+                    compositeDisposable.add(mediaClient.getCaptionByFilename(contribution.getFilename())
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                            .subscribe(subscriber -> {
+                                contribution.setThumbnailTitle(subscriber);
+                            }));
+                } return contribution;
             }
 
             @Override

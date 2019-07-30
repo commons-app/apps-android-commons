@@ -56,8 +56,8 @@ public class DepictsClient {
      * @return list of images for a particular depict entity
      */
 
-    public Observable<List<Media>> fetchImagesForDepictedItem(String query, int limit) {
-        return mediaInterface.fetchImagesForDepictedItem("haswbstatement:P180="+query)
+    public Observable<List<Media>> fetchImagesForDepictedItem(String query, int limit, int sroffset) {
+        return mediaInterface.fetchImagesForDepictedItem("haswbstatement:P180="+query, String.valueOf(sroffset))
                 .map(mwQueryResponse -> {
                     List<Media> mediaList =  new ArrayList<>();
                     for (Search s: mwQueryResponse.getQuery().getSearch()) {

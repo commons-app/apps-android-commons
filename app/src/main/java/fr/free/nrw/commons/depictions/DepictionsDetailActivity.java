@@ -14,6 +14,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentManager;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -64,6 +67,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
     private boolean isLoading = true;
     private String depictName = null;
     private String entityId = null;
+    private List<Media> queryList = new ArrayList<>();
     @Inject
     DepictsClient depictsClient;
 
@@ -108,7 +112,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25)
+        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25, 0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -210,11 +214,19 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
         }
 
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25)
+        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25, queryList.size())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(this::handleSuccess, this::handleError));
+                .subscribe(this::handlePaginationSuccess, this::handleError));
+    }
+
+    private void handlePaginationSuccess(List<Media> media) {
+        queryList.addAll(media);
+        progressBar.setVisibility(View.GONE);
+        gridAdapter.addAll(media);
+        gridAdapter.notifyDataSetChanged();
+        isLoading = false;
     }
 
     /**
@@ -229,6 +241,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
             return;
         }
 
+        queryList.addAll(collection);
         if (gridAdapter == null) {
             setAdapter(collection);
         } else {
