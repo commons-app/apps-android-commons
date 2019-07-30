@@ -2,11 +2,16 @@ package fr.free.nrw.commons.di;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 
+import org.wikipedia.csrf.CsrfTokenClient;
+import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonUtil;
+import org.wikipedia.login.LoginClient;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -14,15 +19,19 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import androidx.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.actions.PageEditClient;
+import fr.free.nrw.commons.actions.PageEditInterface;
+import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaInterface;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.review.ReviewInterface;
+import fr.free.nrw.commons.upload.UploadInterface;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -38,6 +47,12 @@ public class NetworkingModule {
     private static final String TEST_TOOLS_FORGE_URL = "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app";
 
     public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
+
+    public static final String NAMED_COMMONS_WIKI_SITE = "commons-wikisite";
+    private static final String NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite";
+
+    public static final String NAMED_COMMONS_CSRF = "commons-csrf";
+    public static final String NAMED_WIKI_DATA_CSRF = "wikidata-csrf";
 
     @Provides
     @Singleton
@@ -67,7 +82,7 @@ public class NetworkingModule {
     public MediaWikiApi provideMediaWikiApi(Context context,
                                             @Named("default_preferences") JsonKvStore defaultKvStore,
                                             Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, BuildConfig.WIKIDATA_API_HOST, defaultKvStore, gson);
+        return new ApacheHttpClientMediaWikiApi(BuildConfig.WIKIMEDIA_API_HOST);
     }
 
     @Provides
@@ -81,8 +96,28 @@ public class NetworkingModule {
                 WIKIDATA_SPARQL_QUERY_URL,
                 BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
                 BuildConfig.WIKIMEDIA_API_HOST,
-                defaultKvStore,
                 gson);
+    }
+
+    @Named(NAMED_COMMONS_CSRF)
+    @Provides
+    @Singleton
+    public CsrfTokenClient provideCommonsCsrfTokenClient(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return new CsrfTokenClient(commonsWikiSite, commonsWikiSite);
+    }
+
+    @Named(NAMED_WIKI_DATA_CSRF)
+    @Provides
+    @Singleton
+    public CsrfTokenClient provideWikidataCsrfTokenClient(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite,
+                                                          @Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
+        return new CsrfTokenClient(wikidataWikiSite, commonsWikiSite);
+    }
+
+    @Provides
+    @Singleton
+    public LoginClient provideLoginClient() {
+        return new LoginClient();
     }
 
     @Provides
@@ -101,6 +136,20 @@ public class NetworkingModule {
         return HttpUrl.parse(TOOLS_FORGE_URL);
     }
 
+    @Provides
+    @Singleton
+    @Named(NAMED_COMMONS_WIKI_SITE)
+    public WikiSite provideCommonsWikiSite() {
+        return new WikiSite(BuildConfig.COMMONS_URL);
+    }
+
+    @Provides
+    @Singleton
+    @Named(NAMED_WIKI_DATA_WIKI_SITE)
+    public WikiSite provideWikidataWikiSite() {
+        return new WikiSite(BuildConfig.WIKIDATA_URL);
+    }
+
     /**
      * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
      * @return returns a singleton Gson instance
@@ -113,14 +162,71 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    @Named("commons-wikisite")
-    public WikiSite provideCommonsWikiSite() {
-        return new WikiSite(BuildConfig.COMMONS_URL);
+    @Named("commons-service")
+    public Service provideCommonsService(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite);
     }
 
     @Provides
     @Singleton
-    public ReviewInterface provideReviewInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
+    @Named("wikidata-service")
+    public Service provideWikidataService(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
+        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, Service.class);
+    }
+
+    @Provides
+    @Singleton
+    public ReviewInterface provideReviewInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public UploadInterface provideUploadInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, UploadInterface.class);
+    }
+
+    @Named("commons-page-edit-service")
+    @Provides
+    @Singleton
+    public PageEditInterface providePageEditService(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, PageEditInterface.class);
+    }
+
+    @Named("wikidata-page-edit-service")
+    @Provides
+    @Singleton
+    public PageEditInterface provideWikiDataPageEditService(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikiDataWikiSite) {
+        return ServiceFactory.get(wikiDataWikiSite, BuildConfig.WIKIDATA_URL, PageEditInterface.class);
+    }
+
+    @Named("commons-page-edit")
+    @Provides
+    @Singleton
+    public PageEditClient provideCommonsPageEditClient(@Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient,
+                                                       @Named("commons-page-edit-service") PageEditInterface pageEditInterface,
+                                                       @Named("commons-service") Service service) {
+        return new PageEditClient(csrfTokenClient, pageEditInterface, service);
+    }
+
+    @Named("wikidata-page-edit")
+    @Provides
+    @Singleton
+    public PageEditClient provideWikidataPageEditClient(@Named(NAMED_WIKI_DATA_CSRF) CsrfTokenClient csrfTokenClient,
+                                                        @Named("wikidata-page-edit-service") PageEditInterface pageEditInterface,
+                                                        @Named("wikidata-service") Service service) {
+        return new PageEditClient(csrfTokenClient, pageEditInterface, service);
+    }
+
+    @Provides
+    @Singleton
+    public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, MediaInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public CategoryInterface provideCategoryInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, CategoryInterface.class);
     }
 }

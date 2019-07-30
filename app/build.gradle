@@ -1,7 +1,6 @@
 plugins {
     id 'com.github.triplet.play' version '2.2.1' apply false
 }
-
 apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -31,8 +30,8 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.1'
     implementation 'com.facebook.fresco:fresco:1.13.0'
     implementation 'com.drewnoakes:metadata-extractor:2.11.0'
-    implementation 'com.dmitrybrant:wikimedia-android-data-client:0.0.18'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
+    implementation 'com.dmitrybrant:wikimedia-android-data-client:0.0.25'
 
     // UI
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
@@ -195,6 +194,7 @@ android {
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.wikimedia.org/wikipedia/commons\""
             buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.org/wiki/\""
             buildConfigField "String", "COMMONS_URL", "\"https://commons.wikimedia.org\""
+            buildConfigField "String", "WIKIDATA_URL", "\"https://wikidata.org\""
             buildConfigField "String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.org/wiki/\""
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes\""
@@ -226,6 +226,7 @@ android {
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.beta.wmflabs.org/wikipedia/commons\""
             buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/\""
             buildConfigField "String", "COMMONS_URL", "\"https://commons.wikimedia.beta.wmflabs.org\""
+            buildConfigField "String", "WIKIDATA_URL", "\"https://wikidata.org\""
             buildConfigField "String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/wiki/\""
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Main_Page&welcome=yes\""

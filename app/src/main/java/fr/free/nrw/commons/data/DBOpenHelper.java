@@ -9,7 +9,6 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
-import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 
 public class DBOpenHelper  extends SQLiteOpenHelper {
 
@@ -27,7 +26,6 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         ContributionDao.Table.onCreate(sqLiteDatabase);
-        ModifierSequenceDao.Table.onCreate(sqLiteDatabase);
         CategoryDao.Table.onCreate(sqLiteDatabase);
         BookmarkPicturesDao.Table.onCreate(sqLiteDatabase);
         BookmarkLocationsDao.Table.onCreate(sqLiteDatabase);
@@ -37,7 +35,6 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int from, int to) {
         ContributionDao.Table.onUpdate(sqLiteDatabase, from, to);
-        ModifierSequenceDao.Table.onUpdate(sqLiteDatabase, from, to);
         CategoryDao.Table.onUpdate(sqLiteDatabase, from, to);
         BookmarkPicturesDao.Table.onUpdate(sqLiteDatabase, from, to);
         BookmarkLocationsDao.Table.onUpdate(sqLiteDatabase, from, to);
