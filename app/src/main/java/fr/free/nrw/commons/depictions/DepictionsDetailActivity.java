@@ -103,6 +103,15 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (supportFragmentManager.getBackStackEntryCount() == 1){
+            // back to search so show search toolbar and hide navigation toolbar
+            mediaContainer.setVisibility(View.GONE);
+        }
+        super.onBackPressed();
+    }
+
     /**
      * Checks for internet connection and then initializes the grid view with first 10 images of that depiction
      */
