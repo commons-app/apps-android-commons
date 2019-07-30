@@ -42,12 +42,13 @@ import timber.log.Timber;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class DepictionsDetailActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider,
+public class DepictionsDetailActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener, MediaDetailPagerFragment.MediaDetailProvider,
         AdapterView.OnItemClickListener {
 
     private static int TIMEOUT_SECONDS = 15;
 
     private GridViewAdapter gridAdapter;
+    private FragmentManager supportFragmentManager;
 
     private MediaDetailPagerFragment mediaDetails;
     @BindView(R.id.mediaContainer)
@@ -82,6 +83,8 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
         setContentView(R.layout.activity_depict_detail);
         ButterKnife.bind(this);
         gridView.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+        supportFragmentManager = getSupportFragmentManager();
+        supportFragmentManager.addOnBackStackChangedListener(this);
         setPageTitle();
         initDrawer();
         forceInitBackButton();
@@ -278,12 +281,20 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
 
     @Override
     public Media getMediaAtPosition(int i) {
-        return null;
+        if (gridAdapter == null) {
+            // not yet ready to return data
+            return null;
+        } else {
+            return (Media) gridAdapter.getItem(i);
+        }
     }
 
     @Override
     public int getTotalMediaCount() {
-        return 0;
+        if (gridAdapter == null) {
+            return 0;
+        }
+        return gridAdapter.getCount();
     }
 
     /**
@@ -320,6 +331,24 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        mediaContainer.setVisibility(View.VISIBLE);
+        if (mediaDetails == null || !mediaDetails.isVisible()) {
+            mediaDetails = new MediaDetailPagerFragment(false, true);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.mediaContainer, mediaDetails)
+                    .addToBackStack(null)
+                    .commit();
 
+        }
+        mediaDetails.showImage(position);
+        forceInitBackButton();
+    }
+
+    @Override
+    public void onBackStackChanged() {
+        if (supportFragmentManager.getBackStackEntryCount() == 0) {
+            initDrawer();
+        }
     }
 }
