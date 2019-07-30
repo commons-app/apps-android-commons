@@ -1,27 +1,51 @@
 package fr.free.nrw.commons.utils;
 
-import android.graphics.Point;
 import android.util.Log;
-import android.view.Display;
+import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.view.ViewTreeObserver;
 
 public class LayoutUtils {
-    public static ViewGroup.LayoutParams getLayoutParamsHeightByWindowRate(WindowManager windowManager,
-                                                                               double rate,
-                                                                               ViewGroup.LayoutParams layoutParams) {
-        Display display = windowManager.getDefaultDisplay();
-        int height = display.getHeight();
-        layoutParams.height = (int) Math.round(height*rate);
-        return layoutParams;
+
+    /**
+     * Can be used for keeping aspect radios suggested by material guidelines. See:
+     * https://material.io/design/layout/spacing-methods.html#containers-aspect-ratios
+     * In some cases we don't know exact width, for such cases this method measures
+     * width and sets height by multiplying the width with height.
+     * @param rate Aspect ratios, ie 1 for 1:1. (width * rate = height)
+     * @param view view to change height
+     */
+    public static void setLayoutHeightAllignedToWidth(double rate, View view) {
+        ViewTreeObserver vto = view.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+                layoutParams.height = (int) (view.getWidth() * rate);
+                view.setLayoutParams(layoutParams);
+            }
+        });
     }
 
-    public static ViewGroup.LayoutParams getLayoutParamsWidthByWindowRate(WindowManager windowManager,
-                                                                           double rate,
-                                                                           ViewGroup.LayoutParams layoutParams) {
-        Display display = windowManager.getDefaultDisplay();
-        int width = display.getWidth();
-        layoutParams.width = (int) Math.round(width*rate);
-        return layoutParams;
+    /**
+     * Can be used for keeping aspect radios suggested by material guidelines. See:
+     * https://material.io/design/layout/spacing-methods.html#containers-aspect-ratios
+     * In some cases we don't know exact height, for such cases this method measures
+     * height and sets width by multiplying the width with height.
+     * @param rate Aspect ratios, ie 1 for 1:1. (height * rate = width)
+     * @param view view to change width
+     */
+    public static void setLayoutWidthAllignedToHeight(double rate, View view) {
+        ViewTreeObserver vto = view.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+                layoutParams.width = (int) (view.getHeight() * rate);
+                view.setLayoutParams(layoutParams);
+            }
+        });
     }
 }

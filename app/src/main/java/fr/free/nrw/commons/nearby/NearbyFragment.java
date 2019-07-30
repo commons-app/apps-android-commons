@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
@@ -138,7 +139,6 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         resumeFragment();*/
         bundle = new Bundle();
         initBottomSheetBehaviour();
-        initNearbyFilter();
         this.view = view;
         return view;
     }
@@ -146,6 +146,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initNearbyFilter();
         if (savedInstanceState != null) {
             onOrientationChanged = true;
         }
@@ -159,16 +160,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         ArrayAdapter adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,stringArrayList);
         searchListView.setAdapter(adapter);
-
-
-
-        searchListView.setLayoutParams(LayoutUtils.getLayoutParamsHeightByWindowRate(getActivity().getWindowManager(),
-                0.5625,
-                searchListView.getLayoutParams()));
-
-        searchListView.setLayoutParams(LayoutUtils.getLayoutParamsWidthByWindowRate(getActivity().getWindowManager(),
-                0.78,
-                searchListView.getLayoutParams()));
+        LayoutUtils.setLayoutHeightAllignedToWidth(1, searchListView);
 
         compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
                 .takeUntil(RxView.detaches(searchView))
