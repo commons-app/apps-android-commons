@@ -18,6 +18,7 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -195,8 +196,10 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
 
     private void initErrorView() {
         progressBar.setVisibility(GONE);
+        bottomProgressBar.setVisibility(GONE);
         depictionNotFound.setVisibility(VISIBLE);
-        depictionNotFound.setText(getString(R.string.depictions_not_found));
+        String no_depiction = getString(R.string.depictions_not_found);
+        depictionNotFound.setText(String.format(Locale.getDefault(), no_depiction, query));
     }
 
     /**
