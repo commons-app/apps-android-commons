@@ -29,7 +29,9 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -122,7 +124,7 @@ public class MediaClient {
                 .map(Media::from)
                 .collect(ArrayList<Media>::new, List::add);
     }
-  
+
      /**
      * Fetches Media object from the imageInfo API
      *
@@ -171,7 +173,7 @@ public class MediaClient {
      */
 
     public Single<String> getCaptionByFilename(String filename) {
-        return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), "File:"+filename+".jpg")
+        return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), filename)
                 .map(mediaDetailResponse -> {
                     if (mediaDetailResponse != null && mediaDetailResponse.getSuccess() != null && mediaDetailResponse.getSuccess() == 1 && mediaDetailResponse.getEntities() != null) {
                         Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
@@ -184,7 +186,7 @@ public class MediaClient {
                                 Caption caption = captionEntry.getValue();
                                 return caption.getValue();
 
-                        } catch (NullPointerException e) {
+                        } catch (Exception e) {
                             return "No caption";
                         }
                     }
@@ -229,14 +231,14 @@ public class MediaClient {
                     Caption caption = captionEntry.getValue();
                     JsonElement jsonElement = new JsonPrimitive(caption.getValue());
                     mediaDetails.add("Caption", jsonElement);
-                } catch (NullPointerException e) {
+                } catch (Exception e) {
                     JsonElement jsonElement = new JsonPrimitive("No caption");
                     mediaDetails.add("Caption", jsonElement);
                 }
 
                 try {
                     LinkedTreeMap statements = (LinkedTreeMap) commonsWikibaseItem.getStatements();
-                    ArrayList<LinkedTreeMap> listP245962 = (ArrayList<LinkedTreeMap>) statements.get("P245962");
+                    ArrayList<LinkedTreeMap> listP245962 = (ArrayList<LinkedTreeMap>) statements.get("P180");
                     String depictions = null;
                     JsonArray jsonArray = new JsonArray();
                     for (int i = 0; i < listP245962.size(); i++) {
@@ -247,14 +249,30 @@ public class MediaClient {
                         String id = value.get("id").toString();
                         getLabelForDepiction(id).subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(depictObject -> jsonArray.add(depictObject));
+                                .subscribe(new SingleObserver<JsonObject>() {
+                                    @Override
+                                    public void onSubscribe(Disposable d) {
+
+                                    }
+
+                                    @Override
+                                    public void onSuccess(JsonObject jsonObject) {
+                                        jsonArray.add(jsonObject);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+
+                                    }
+
+                                });
+                        mediaDetails.add("Depiction", jsonArray);
                     }
-                    mediaDetails.add("Depiction", jsonArray);
-                } catch (NullPointerException e) {
+                } catch (Exception e) {
                     JsonElement jsonElement = new JsonPrimitive("No depiction");
                     mediaDetails.add("Depiction", jsonElement);
                 }
-            } catch (NullPointerException e) {
+            } catch (Exception e) {
                 JsonElement jsonElement = new JsonPrimitive("No caption");
                 mediaDetails.add("Caption", jsonElement);
                 jsonElement = null;
@@ -355,7 +373,7 @@ public class MediaClient {
                             jsonObject.add("url", urlJson);
                             return jsonObject;
                         }
-                    } catch (NullPointerException e) {
+                    } catch (Exception e) {
                         Timber.e("Label not found");
                         return new JsonObject();
                     }return new JsonObject();

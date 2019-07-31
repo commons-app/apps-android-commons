@@ -86,7 +86,6 @@ public class ContributionsFragment
     private boolean isUploadServiceConnected;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private static int TIMEOUT_SECONDS = 15;
     private ContributionsListFragment contributionsListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
     private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
@@ -96,8 +95,6 @@ public class ContributionsFragment
     @BindView(R.id.campaigns_view) CampaignView campaignView;
 
     @Inject ContributionsPresenter contributionsPresenter;
-    @Inject
-    MediaClient mediaClient;
 
     private LatLng curLatLng;
 
@@ -226,15 +223,7 @@ public class ContributionsFragment
             @Override
             public Contribution getContributionForPosition(int position) {
                 Contribution contribution = (Contribution) contributionsPresenter.getItemAtPosition(position);
-                if (contribution != null) {
-                    compositeDisposable.add(mediaClient.getCaptionByFilename(contribution.getFilename())
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                            .subscribe(subscriber -> {
-                                contribution.setThumbnailTitle(subscriber);
-                            }));
-                } return contribution;
+                return contribution;
             }
 
             @Override

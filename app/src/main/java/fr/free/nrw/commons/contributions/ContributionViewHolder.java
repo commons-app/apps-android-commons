@@ -16,6 +16,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.upload.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -24,6 +25,9 @@ import io.reactivex.schedulers.Schedulers;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.concurrent.TimeUnit;
+
 import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
@@ -39,6 +43,9 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     @Inject
     MediaDataExtractor mediaDataExtractor;
+    @Inject
+    MediaClient mediaClient;
+
 
     @Inject
     @Named("thumbnail-cache")
@@ -47,6 +54,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private DisplayableContribution contribution;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private int position;
+    private static int TIMEOUT_SECONDS = 15;
 
     ContributionViewHolder(View parent, Callback callback) {
         super(parent);
@@ -60,7 +68,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         this.position=position;
         this.contribution = contribution;
         fetchAndDisplayThumbnail(contribution);
-        titleView.setText(contribution.getThumbnailTitle());
+        fetchAndDisplayCaption(contribution);
 
         seqNumView.setText(String.valueOf(contribution.getPosition() + 1));
         seqNumView.setVisibility(View.VISIBLE);
@@ -96,6 +104,23 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 progressView.setVisibility(View.GONE);
                 failedImageOptions.setVisibility(View.VISIBLE);
                 break;
+        }
+    }
+
+    private void fetchAndDisplayCaption(DisplayableContribution contribution) {
+        if ((contribution.getState() != Contribution.STATE_COMPLETED)) {
+            titleView.setText(contribution.getDisplayTitle());
+        } else {
+            Timber.d("Fetching caption for %s", contribution.getFilename());
+            compositeDisposable.add(mediaClient.getCaptionByFilename(contribution.getFilename())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .subscribe(subscriber -> {
+                        if (!subscriber.trim().equals("No caption")) {
+                            titleView.setText(subscriber);
+                        } else titleView.setText(contribution.getDisplayTitle());
+                    }));
         }
     }
 

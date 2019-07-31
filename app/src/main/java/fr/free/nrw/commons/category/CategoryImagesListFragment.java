@@ -281,7 +281,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      */
 
     public void replaceTitlesWithCaptions(String displayTitle, int i) {
-        compositeDisposable.add(mediaClient.getCaptionByFilename(displayTitle)
+        compositeDisposable.add(mediaClient.getCaptionByFilename("File:" + displayTitle+ ".jpg")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

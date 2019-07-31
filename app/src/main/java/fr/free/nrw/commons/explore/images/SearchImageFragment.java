@@ -66,6 +66,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
 
+    private int mediaSize = 0;
+
     private RVRendererAdapter<Media> imagesAdapter;
     private List<Media> queryList = new ArrayList<>();
 
@@ -198,8 +200,29 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
             ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
+            for (Media m : mediaList) {
+                replaceTitlesWithCaptions(m.getDisplayTitle(), mediaSize++);
+            }
         }
     }
+
+        public void replaceTitlesWithCaptions(String displayTitle, int i) {
+            compositeDisposable.add(mediaClient.getCaptionByFilename("File:"+displayTitle+".jpg")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .subscribe(subscriber -> {
+                        handleLabelforImage(subscriber, i);
+                    }));
+
+        }
+
+        private void handleLabelforImage(String s, int position) {
+            if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
+                imagesAdapter.getItem(position).setThumbnailTitle(s);
+                imagesAdapter.notifyDataSetChanged();
+            }
+        }
 
     /**
      * Logs and handles API error scenario
