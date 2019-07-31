@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
@@ -205,4 +206,17 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         }
     }
 
+    public String wikidataAddLabels(String fileEntityId, Map<String, String> caption) throws IOException {
+        CustomApiResult result = api.action("wbsetlabel")
+                .param("format", "json")
+                .param("id", fileEntityId)
+                .param("language", "en")
+                .param("token", getEditToken())
+                .param("data", caption)
+                .param("value", "Testcaptions")
+                .post();
+        if (result == null || result.getNode("api") == null) {
+            return null;
+        } return null;
+    }
 }

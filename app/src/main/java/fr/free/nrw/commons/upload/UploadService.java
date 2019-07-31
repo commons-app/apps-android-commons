@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -290,7 +291,7 @@ public class UploadService extends HandlerService<Contribution> {
                             }
                         }
                         wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename);
-                        wikidataEditService.createLabelforWikidataEntity(contribution.getWikiDataEntityId(), canonicalFilename, contribution.getCaptions());
+                        wikidataEditService.createLabelforWikidataEntity(contribution.getWikiDataEntityId(), canonicalFilename, (Map) contribution.getCaptions());
                         contribution.setFilename(canonicalFilename);
                         contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
                         contribution.setState(Contribution.STATE_COMPLETED);

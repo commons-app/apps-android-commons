@@ -29,6 +29,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
@@ -71,6 +72,10 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
     private List<Media> queryList = new ArrayList<>();
     @Inject
     DepictsClient depictsClient;
+    @Inject
+    MediaClient mediaClient;
+
+    private int mediaSize = 0;
 
     @Inject
     @Named("default_preferences")
@@ -272,6 +277,27 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);
+        for (Media m : collection) {
+            replaceTitlesWithCaptions(m.getDisplayTitle(), mediaSize++);
+        }
+    }
+
+    public void replaceTitlesWithCaptions(String displayTitle, int i) {
+        compositeDisposable.add(mediaClient.getCaptionByFilename("File:"+displayTitle+".jpg")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .subscribe(subscriber -> {
+                    handleLabelforImage(subscriber, i);
+                }));
+
+    }
+
+    private void handleLabelforImage(String s, int position) {
+        if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
+            gridAdapter.getItem(position).setThumbnailTitle(s);
+            gridAdapter.notifyDataSetChanged();
+        }
     }
 
     /**

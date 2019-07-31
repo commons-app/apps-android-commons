@@ -30,6 +30,8 @@ public interface MediaWikiApi {
 
     void logout();
 
+    String wikidataAddLabels(String fileEntityId, Map<String, String> caption) throws IOException;
+
 //    Single<CampaignResponseDTO> getCampaigns();
 
     interface ProgressListener {

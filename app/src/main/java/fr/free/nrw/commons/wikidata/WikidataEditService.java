@@ -6,6 +6,7 @@ import android.content.Context;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
@@ -20,12 +21,17 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.mwapi.CustomApiResult;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import timber.log.Timber;
 
 /**
@@ -47,11 +53,12 @@ public class WikidataEditService {
     private final WikidataClient wikidataClient;
     private final PageEditClient wikiDataPageEditClient;
     private final MediaClient mediaClient;
+    private final MediaWikiApi mediaWikiApi;
 
     @Inject
     public WikidataEditService(Context context,
                                WikidataEditListener wikidataEditListener, MediaClient mediaClient,
-                               @Named("default_preferences") JsonKvStore directKvStore, WikiBaseClient wikiBaseClient, CaptionInterface captionInterface, WikidataClient wikidataClient, @Named("wikidata-page-edit") PageEditClient wikiDataPageEditClient) {
+                               @Named("default_preferences") JsonKvStore directKvStore, WikiBaseClient wikiBaseClient, CaptionInterface captionInterface, WikidataClient wikidataClient, @Named("wikidata-page-edit") PageEditClient wikiDataPageEditClient, MediaWikiApi mediaWikiApi) {
         this.context = context;
         this.wikidataEditListener = wikidataEditListener;
         this.directKvStore = directKvStore;
@@ -60,6 +67,7 @@ public class WikidataEditService {
         this.wikiDataPageEditClient = wikiDataPageEditClient;
         this.mediaClient = mediaClient;
         this.wikidataClient = wikidataClient;
+        this.mediaWikiApi = mediaWikiApi;
     }
 
     /**
@@ -234,17 +242,16 @@ public class WikidataEditService {
      * Adding captions as labels after image is successfully uploaded
      */
 
-    public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, HashMap<String, String> captions) {
-        mediaClient.getMedia(fileName)
+    public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, Map<String, String> captions) {
+        Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(media -> media.getPageId())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
-                        Iterator iter = captions.keySet().iterator();
-                        while(iter.hasNext()) {
-                            Map.Entry entry = (Map.Entry) iter.next();
-                            wikidataAddLabels(wikiDataEntityId, fileEntityId, entry.getKey().toString(), entry.getValue().toString());
+                        for (Map.Entry<String, String> entry : captions.entrySet()) {
+                            Map<String, String> caption = new HashMap<>();
+                            caption.put(entry.getKey(), entry.getValue());
+                            wikidataAddLabels(wikiDataEntityId, fileEntityId, caption);
 
                         }
                     }else {
@@ -256,14 +263,49 @@ public class WikidataEditService {
                 });
     }
 
-    private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, String key, String value) {
-        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId,"", key.substring(1,key.length()-1), value.substring(1,value.length()-1)))
+    private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, Map<String, String> caption) throws IOException {
+        /*Observable.fromCallable(() -> mediaWikiApi.wikidataAddLabels(fileEntityId, caption))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(revisionId -> Timber.d("Property Q24 set successfully for %s", revisionId),
+                .subscribe(revisionId ->
+                                Timber.d("Property Q24 set successfully for %s", revisionId),
                         throwable -> {
                             Timber.e(throwable, "Error occurred while setting Q24 tag");
                             ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
-                        });
+                        });*/
+        Observable.fromCallable(() -> mediaWikiApi.getEditToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(editToken  -> {
+                    if (editToken  != null) {
+                        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId, "ae8f5793acc96372dcbedac23baeafe45d41a98d%2B%5C", caption))
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(revisionId ->
+                                {
+                                    revisionId.enqueue(new Callback<CustomApiResult>() {
+                                        @Override
+                                        public void onResponse(Call<CustomApiResult> call, Response<CustomApiResult> response) {
+                                            Timber.e(call.isExecuted()+"");
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<CustomApiResult> call, Throwable t) {
+                                            Timber.e(t.getMessage());
+                                        }
+                                    });
+                                },
+                                        throwable -> {
+                                            Timber.e(throwable, "Error occurred while setting Q24 tag");
+                                            ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                                        });
+                    }else {
+                        Timber.d("Error acquiring EntityId for image");
+                    }
+                }, throwable -> {
+                    Timber.e(throwable, "Error occurred while getting EntityID for Q24 tag");
+                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+                });
+
     }
 }

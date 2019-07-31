@@ -32,6 +32,7 @@ import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -249,25 +250,14 @@ public class MediaClient {
                         String id = value.get("id").toString();
                         getLabelForDepiction(id).subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new SingleObserver<JsonObject>() {
+                                .subscribe(new Consumer<JsonObject>() {
                                     @Override
-                                    public void onSubscribe(Disposable d) {
-
-                                    }
-
-                                    @Override
-                                    public void onSuccess(JsonObject jsonObject) {
+                                    public void accept(JsonObject jsonObject) throws Exception {
                                         jsonArray.add(jsonObject);
                                     }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-
-                                    }
-
                                 });
-                        mediaDetails.add("Depiction", jsonArray);
                     }
+                    mediaDetails.add("Depiction", jsonArray);
                 } catch (Exception e) {
                     JsonElement jsonElement = new JsonPrimitive("No depiction");
                     mediaDetails.add("Depiction", jsonElement);

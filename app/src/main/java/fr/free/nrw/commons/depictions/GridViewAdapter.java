@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -83,10 +85,16 @@ public class GridViewAdapter extends ArrayAdapter {
         SimpleDraweeView imageView = convertView.findViewById(R.id.depict_image_view);
         TextView fileName = convertView.findViewById(R.id.depict_image_title);
         TextView author = convertView.findViewById(R.id.depict_image_author);
-        fileName.setText(item.getDisplayTitle());
+        fileName.setText(item.getThumbnailTitle());
         setAuthorView(item, author);
         imageView.setImageURI(item.getThumbUrl());
         return convertView;
+    }
+
+    @Nullable
+    @Override
+    public Media getItem(int position) {
+        return data.get(position);
     }
 
     /**
