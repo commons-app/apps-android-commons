@@ -81,6 +81,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     View transparentView;
     @BindView(R.id.container_sheet)
     FrameLayout frameLayout;
+    @BindView(R.id.container)
+    FrameLayout mapContainer;
     @BindView(R.id.loading_nearby_list)
     ConstraintLayout loading_nearby_layout;
     @BindView(R.id.choice_chip_exists)
@@ -91,6 +93,8 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
     SearchView searchView;
     @BindView(R.id.search_list_view)
     ListView searchListView;
+    @BindView(R.id.nearby_filter_list_layout)
+    LinearLayout nearbyFilterListLayout;
 
     @Inject
     LocationServiceManager locationManager;
@@ -160,7 +164,7 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
 
         ArrayAdapter adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,stringArrayList);
         searchListView.setAdapter(adapter);
-        LayoutUtils.setLayoutHeightAllignedToWidth(1, searchListView);
+        LayoutUtils.setLayoutHeightAllignedToWidth(1, nearbyFilterListLayout);
 
         compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
                 .takeUntil(RxView.detaches(searchView))
