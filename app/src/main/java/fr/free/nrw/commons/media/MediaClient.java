@@ -13,6 +13,7 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
+import java.lang.reflect.Array;
 import java.util.Date;
 
 import java.util.ArrayList;
@@ -239,7 +240,7 @@ public class MediaClient {
 
                 try {
                     LinkedTreeMap statements = (LinkedTreeMap) commonsWikibaseItem.getStatements();
-                    ArrayList<LinkedTreeMap> listP245962 = (ArrayList<LinkedTreeMap>) statements.get("P180");
+                    ArrayList<LinkedTreeMap> listP245962 = (ArrayList<LinkedTreeMap>) statements.get("P245962");
                     String depictions = null;
                     JsonArray jsonArray = new JsonArray();
                     for (int i = 0; i < listP245962.size(); i++) {
@@ -248,14 +249,10 @@ public class MediaClient {
                         Map<String, LinkedTreeMap> datavalue = (Map<String, LinkedTreeMap>) mainsnak.get("datavalue");
                         LinkedTreeMap value = datavalue.get("value");
                         String id = value.get("id").toString();
-                        getLabelForDepiction(id).subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer<JsonObject>() {
-                                    @Override
-                                    public void accept(JsonObject jsonObject) throws Exception {
-                                        jsonArray.add(jsonObject);
-                                    }
-                                });
+                        JsonObject jsonObject = getLabelForDepiction(id)
+                                .subscribeOn(Schedulers.newThread())
+                                .blockingGet();
+                                jsonArray.add(jsonObject);
                     }
                     mediaDetails.add("Depiction", jsonArray);
                 } catch (Exception e) {

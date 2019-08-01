@@ -16,7 +16,9 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import timber.log.Timber;
 
 /**
@@ -50,17 +52,22 @@ public class MediaDataExtractor {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
         Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
+        Single<String> captionSingle = getCaption(filename);
         Single<JsonObject> captionAndDepictionJsonObjectSingle = getCaptionAndDepictions(filename);
-        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionAndDepictionJsonObjectSingle, (media, deletionStatus, discussion, captionAndDepictionJsonObject) -> {
+        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionSingle, captionAndDepictionJsonObjectSingle, (media, deletionStatus, discussion,caption, captionAndDepictionJsonObject) -> {
             media.setDiscussion(discussion);
             String captionString = captionAndDepictionJsonObject.get("Caption").toString();
-            media.setCaption(captionString.substring(1, captionString.length() - 1));
+            media.setCaption(caption);
             media.setDepiction(formatDepictions(captionAndDepictionJsonObject));
             if (deletionStatus) {
                 media.setRequestedDeletion();
             }
             return media;
         });
+    }
+
+    private Single<String> getCaption(String filename) {
+        return mediaClient.getCaptionByFilename(filename);
     }
 
     /**
@@ -78,8 +85,8 @@ public class MediaDataExtractor {
                 for (int i = 0; i <depictionArray.size() ; i++) {
                     JsonObject depictedItem = (JsonObject) depictionArray.get(i);
                     Map <String, String> depictedObject = new HashMap<>();
-                    depictedObject.put("label", depictedItem.get("label").toString());
-                    depictedObject.put("url", depictedItem.get("url").toString());
+                    depictedObject.put("label", depictedItem.get("label").toString().substring(3, depictedItem.get("label").toString().length()-3));
+                    depictedObject.put("url", depictedItem.get("url").toString().substring(3, depictedItem.get("url").toString().length() - 3));
                     depictedItemList.add(depictedObject);
                 }
                 return depictedItemList;
@@ -96,7 +103,7 @@ public class MediaDataExtractor {
      * @param filename the filename we will return the caption for
      * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
      */
-    private Single<JsonObject> getCaptionAndDepictions(String filename)  {
+ private Single<JsonObject> getCaptionAndDepictions(String filename)  {
          return mediaClient.getCaptionAndDepictions(filename)
                 .map(mediaResponse -> {
                     return mediaResponse;
