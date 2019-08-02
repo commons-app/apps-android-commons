@@ -342,6 +342,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      */
 
     private void rebuildDepictionList() {
+        depictionContainer.removeAllViews();
         for (int i = 0; i<depictions.size(); i++) {
             String depictionName = depictions.get(i).get("label");
             String depictionUrl = depictions.get(i).get("url");
