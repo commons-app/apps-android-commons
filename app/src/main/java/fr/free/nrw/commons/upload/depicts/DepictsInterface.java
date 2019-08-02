@@ -12,8 +12,8 @@ import retrofit2.http.Query;
 
 public interface DepictsInterface {
 
-    @GET("/w/api.php?action=wbsearchentities&format=json&type=item&language=en&uselang=en")
-    Observable<DepictSearchResponse> searchForDepicts(@Query("search") String query, @Query("limit") String limit, @Query("continue") String offset);
+    @GET("/w/api.php?action=wbsearchentities&format=json&type=item&uselang=en")
+    Observable<DepictSearchResponse> searchForDepicts(@Query("search") String query, @Query("limit") String limit, @Query("language") String language, @Query("continue") String offset);
 
     @GET("w/api.php?action=query&list=search&format=json&srnamespace=6")
     Observable<DepictionResponse> fetchListofDepictions(@Query("srsearch") String query);

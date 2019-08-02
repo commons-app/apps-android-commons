@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -47,7 +48,7 @@ public class DepictsClient {
 
     public Observable<DepictedItem> searchForDepictions(String query, int limit, int offset) {
 
-        return depictsInterface.searchForDepicts(query, String.valueOf(limit), String.valueOf(offset))
+        return depictsInterface.searchForDepicts(query, String.valueOf(limit), Locale.getDefault().getLanguage(), String.valueOf(offset))
                 .flatMap(depictSearchResponse -> Observable.fromIterable(depictSearchResponse.getSearch()))
                 .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), null, false, depictSearchItem.getId()));
     }

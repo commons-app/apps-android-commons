@@ -243,7 +243,6 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
         progressBar.setVisibility(View.GONE);
         gridAdapter.addAll(media);
         gridAdapter.notifyDataSetChanged();
-        isLoading = false;
     }
 
     /**
