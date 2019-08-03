@@ -196,7 +196,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      *
      * @param m Media file to download
      */
-    private void downloadMedia(Media m) {
+    public void downloadMedia(Media m) {
         String imageUrl = m.getImageUrl(), fileName = m.getFilename();
 
         if (imageUrl == null
