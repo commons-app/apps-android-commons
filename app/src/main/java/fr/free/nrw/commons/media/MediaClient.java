@@ -355,9 +355,11 @@ public class MediaClient {
                             String url = searchElement.get("concepturi").toString();
                             JsonElement labelJson = new JsonPrimitive(label);
                             JsonElement urlJson = new JsonPrimitive(url);
+                            JsonElement idJson = new JsonPrimitive(entityId);
                             JsonObject jsonObject = new JsonObject();
                             jsonObject.add("label", labelJson);
                             jsonObject.add("url", urlJson);
+                            jsonObject.add("id", idJson);
                             return jsonObject;
                         }
                     } catch (Exception e) {

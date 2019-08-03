@@ -6,9 +6,10 @@ import android.content.Context;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.io.IOException;
+import org.wikipedia.csrf.CsrfTokenClient;
+import org.wikipedia.dataclient.Service;
+
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -54,11 +55,14 @@ public class WikidataEditService {
     private final PageEditClient wikiDataPageEditClient;
     private final MediaClient mediaClient;
     private final MediaWikiApi mediaWikiApi;
+    private final CsrfTokenClient csrfTokenClient;
+    private final Service service;
 
     @Inject
     public WikidataEditService(Context context,
                                WikidataEditListener wikidataEditListener, MediaClient mediaClient,
-                               @Named("default_preferences") JsonKvStore directKvStore, WikiBaseClient wikiBaseClient, CaptionInterface captionInterface, WikidataClient wikidataClient, @Named("wikidata-page-edit") PageEditClient wikiDataPageEditClient, MediaWikiApi mediaWikiApi) {
+                               @Named("default_preferences") JsonKvStore directKvStore, WikiBaseClient wikiBaseClient, CaptionInterface captionInterface, WikidataClient wikidataClient, @Named("wikidata-page-edit") PageEditClient wikiDataPageEditClient, MediaWikiApi mediaWikiApi,@Named("commons-csrf") CsrfTokenClient csrfTokenClient,
+                               @Named("commons-service") Service service) {
         this.context = context;
         this.wikidataEditListener = wikidataEditListener;
         this.directKvStore = directKvStore;
@@ -68,6 +72,8 @@ public class WikidataEditService {
         this.mediaClient = mediaClient;
         this.wikidataClient = wikidataClient;
         this.mediaWikiApi = mediaWikiApi;
+        this.csrfTokenClient = csrfTokenClient;
+        this.service = service;
     }
 
     /**
@@ -251,7 +257,11 @@ public class WikidataEditService {
                         for (Map.Entry<String, String> entry : captions.entrySet()) {
                             Map<String, String> caption = new HashMap<>();
                             caption.put(entry.getKey(), entry.getValue());
-                            wikidataAddLabels(wikiDataEntityId, fileEntityId, caption);
+                            try {
+                                wikidataAddLabels(wikiDataEntityId, fileEntityId, caption);
+                            } catch (Throwable throwable) {
+                                throwable.printStackTrace();
+                            }
 
                         }
                     }else {
@@ -263,22 +273,20 @@ public class WikidataEditService {
                 });
     }
 
-    private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, Map<String, String> caption) throws IOException {
-        /*Observable.fromCallable(() -> mediaWikiApi.wikidataAddLabels(fileEntityId, caption))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(revisionId ->
-                                Timber.d("Property Q24 set successfully for %s", revisionId),
-                        throwable -> {
-                            Timber.e(throwable, "Error occurred while setting Q24 tag");
-                            ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
-                        });*/
-        Observable.fromCallable(() -> mediaWikiApi.getEditToken())
+    private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, Map<String, String> caption) throws Throwable {
+        Observable.fromCallable(() -> {
+            try {
+                return csrfTokenClient.getTokenBlocking();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+                return null;
+            }
+        })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(editToken  -> {
                     if (editToken  != null) {
-                        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId, "ae8f5793acc96372dcbedac23baeafe45d41a98d%2B%5C", caption))
+                        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId, editToken, caption))
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(revisionId ->
@@ -306,6 +314,5 @@ public class WikidataEditService {
                     Timber.e(throwable, "Error occurred while getting EntityID for Q24 tag");
                     ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
-
     }
 }

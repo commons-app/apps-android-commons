@@ -195,7 +195,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public CaptionInterface provideCaptionInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
-        return ServiceFactory.get(wikidataWikiSite, BuildConfig.COMMONS_URL, CaptionInterface.class);
+        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, CaptionInterface.class);
     }
 
     @Provides

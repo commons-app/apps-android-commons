@@ -39,9 +39,11 @@ import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
+import fr.free.nrw.commons.depictions.DepictionsDetailActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -346,7 +348,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         for (int i = 0; i<depictions.size(); i++) {
             String depictionName = depictions.get(i).get("label");
             String depictionUrl = depictions.get(i).get("url");
-            View depictLabel = buildDepictLabel(depictionName, depictionUrl, depictionContainer);
+            String entityId = depictions.get(i).get("id");
+            View depictLabel = buildDepictLabel(depictionName, depictionUrl, entityId, depictionContainer);
             depictionContainer.addView(depictLabel);
         }
     }
@@ -515,15 +518,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      * Add view to depictions obtained also tapping on depictions should open the url
      */
 
-    private View buildDepictLabel(String depictionName, String depictionUrl, LinearLayout depictionContainer) {
+    private View buildDepictLabel(String depictionName, String depictionUrl, String entityId, LinearLayout depictionContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_depicts_item, depictionContainer, false);
         final CompatTextView textView = item.findViewById(R.id.media_detail_depicted_item_text);
 
         textView.setText(depictionName);
         if (depictionLoaded) {
             textView.setOnClickListener(view -> {
-                //String url = "https://"+depictionUrl+".com";
-                Utils.handleWebUrl(getActivity(), Uri.parse(depictionUrl));
+                DepictedItem depictedItem = new DepictedItem(depictionName, "", null, false, entityId);
+                DepictionsDetailActivity.startYourself(this.getContext(), depictedItem);
             });
         }
         return item;
