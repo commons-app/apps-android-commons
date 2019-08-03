@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,10 +23,8 @@ import fr.free.nrw.commons.upload.structure.depicts.DepictsClickedListener;
 
 public class UploadDepictsRenderer extends Renderer<DepictedItem> {
     private final DepictsClickedListener listener;
-    @BindView(R.id.tvName)
+    @BindView(R.id.depict_checkbox)
     CheckBox checkedView;
-    @BindView(R.id.thumbnail)
-    ImageView thumbnail;
     @BindView(R.id.depicts_label)
     TextView depictsLabel;
     @BindView(R.id.description) TextView description;
@@ -49,6 +48,14 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
                 listener.depictsClicked(item);
             }
         });
+        checkedView.setOnClickListener(v -> {
+            DepictedItem item = getContent();
+            item.setSelected(!item.isSelected());
+            checkedView.setChecked(item.isSelected());
+            if (listener != null) {
+                listener.depictsClicked(item);
+            }
+        });
     }
 
     @Override
@@ -62,6 +69,5 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
         checkedView.setChecked(item.isSelected());
         depictsLabel.setText(item.getDepictsLabel());
         description.setText(item.getDescription());
-        thumbnail.setImageResource(R.drawable.empty_photo);
     }
 }

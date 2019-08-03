@@ -160,6 +160,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
         if (mediaList == null || mediaList.isEmpty()) {
             initErrorView();
         } else {
+            depictionNotFound.setVisibility(GONE);
             bottomProgressBar.setVisibility(View.GONE);
             progressBar.setVisibility(GONE);
             depictionsAdapter.addAll(mediaList);
@@ -175,6 +176,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
     private void handlePaginationSuccess(List<DepictedItem> mediaList) {
         queryList.addAll(mediaList);
         progressBar.setVisibility(View.GONE);
+        depictionNotFound.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
         depictionsAdapter.addAll(mediaList);
         depictionsAdapter.notifyDataSetChanged();

@@ -14,11 +14,9 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 
 public class DepictionRenderer extends Renderer<DepictedItem> {
-    @BindView(R.id.tvName)
+    @BindView(R.id.depict_checkbox)
     CheckedTextView checkedView;
     private final DepictsClickedListener listener;
-    @BindView(R.id.thumbnail)
-    ImageView thumbnail;
     @BindView(R.id.depicts_label)
     TextView depictsLabel;
     @BindView(R.id.description) TextView description;
@@ -55,6 +53,5 @@ public class DepictionRenderer extends Renderer<DepictedItem> {
         checkedView.setChecked(item.isSelected());
         depictsLabel.setText(item.getDepictsLabel());
         description.setText(item.getDescription());
-        thumbnail.setImageResource(R.drawable.empty_photo);
     }
 }

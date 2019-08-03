@@ -90,7 +90,7 @@ public class DepictModel {
     public void onDepictItemClicked(DepictedItem depictedItem) {
         if (depictedItem.isSelected()) {
             selectDepictItem(depictedItem);
-            updateDepictCount(depictedItem);
+//            updateDepictCount(depictedItem);
         } else {
             unselectDepiction(depictedItem);
         }

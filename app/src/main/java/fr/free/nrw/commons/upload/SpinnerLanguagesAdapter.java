@@ -150,7 +150,9 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
                     if( !dropDownClicked && savedLanguageValue !=null){
                     languageCode = LangCodeUtils.fixLanguageCode(savedLanguageValue);
                 }
-                view.setVisibility(View.GONE);
+                if (view != null) {
+                    view.setVisibility(View.GONE);
+                }
                 if (languageCode.length() > 2)
                     tvLanguage.setText(languageCode.substring(0, 2));
                 else
