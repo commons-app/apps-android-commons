@@ -123,19 +123,11 @@ public class DepictsClient {
         }
     }
 
-    private Single<List<Media>> responseToMediaList(Observable<MwQueryResponse> response, String key) {
-        return response.flatMap(mwQueryResponse -> {
-            if (null == mwQueryResponse
-                    || null == mwQueryResponse.query()
-                    || null == mwQueryResponse.query().pages()) {
-                return Observable.empty();
-            }
-            continuationStore.put(key, mwQueryResponse.continuation());
-            return Observable.fromIterable(mwQueryResponse.query().pages());
-        })
-                .map(Media::from)
-                .collect(ArrayList<Media>::new, List::add);
-    }
+    /**
+     * Parse the date string into the required format
+     * @param dateStr
+     * @return date in the required format
+     */
 
     @Nullable
     private static Date safeParseDate(String dateStr) {

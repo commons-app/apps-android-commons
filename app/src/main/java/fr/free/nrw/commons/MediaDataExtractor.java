@@ -16,9 +16,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 import timber.log.Timber;
 
 /**
@@ -53,18 +51,24 @@ public class MediaDataExtractor {
         Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
         Single<String> captionSingle = getCaption(filename);
-        Single<JsonObject> captionAndDepictionJsonObjectSingle = getCaptionAndDepictions(filename);
-        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionSingle, captionAndDepictionJsonObjectSingle, (media, deletionStatus, discussion,caption, captionAndDepictionJsonObject) -> {
+        Single<JsonObject> depictionSingle = getDepictions(filename);
+        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionSingle, depictionSingle, (media, deletionStatus, discussion, caption, depiction) -> {
             media.setDiscussion(discussion);
-            String captionString = captionAndDepictionJsonObject.get("Caption").toString();
             media.setCaption(caption);
-            media.setDepiction(formatDepictions(captionAndDepictionJsonObject));
+            media.setDepiction(formatDepictions(depiction));
             if (deletionStatus) {
                 media.setRequestedDeletion();
             }
             return media;
         });
     }
+
+    /**
+     * Obtains captions using filename
+     * @param filename
+     *
+     * @return caption for the image in user's locale
+     */
 
     private Single<String> getCaption(String filename) {
         return mediaClient.getCaptionByFilename(filename);
@@ -104,7 +108,7 @@ public class MediaDataExtractor {
      * @param filename the filename we will return the caption for
      * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
      */
- private Single<JsonObject> getCaptionAndDepictions(String filename)  {
+ private Single<JsonObject> getDepictions(String filename)  {
          return mediaClient.getCaptionAndDepictions(filename)
                 .map(mediaResponse -> {
                     return mediaResponse;

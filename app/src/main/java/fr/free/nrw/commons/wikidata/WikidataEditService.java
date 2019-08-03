@@ -273,6 +273,14 @@ public class WikidataEditService {
                 });
     }
 
+    /**
+     * Adds label to Wikidata using the fileEntityId and the edit token, obtained from csrfTokenClient
+     *
+     * @param wikiDataEntityId entityId for the current contribution
+     * @param fileEntityId
+     * @param caption
+     */
+
     private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, Map<String, String> caption) throws Throwable {
         Observable.fromCallable(() -> {
             try {

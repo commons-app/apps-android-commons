@@ -2,6 +2,10 @@ package fr.free.nrw.commons.depictions.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Model class for list of depicted images obtained by fetching using depiction entity
+ */
+
 public class DepictionResponse {
 
     @SerializedName("batchcomplete")

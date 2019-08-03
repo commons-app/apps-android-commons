@@ -27,7 +27,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.depictions.DepictionsDetailActivity;
+import fr.free.nrw.commons.depictions.DepictedImagesActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
@@ -71,7 +71,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
     private final SearchDepictionsAdapterFactory adapterFactory = new SearchDepictionsAdapterFactory(item -> {
         // Called on Click of a individual depicted Item
         // Open Depiction Details activity
-        DepictionsDetailActivity.startYourself(getContext(), item);
+        DepictedImagesActivity.startYourself(getContext(), item);
         saveQuery(query);
     });
 
@@ -122,6 +122,12 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
     }
+
+    /**
+     * Called when user selects "Items" from Search Activity
+     * to load the list of depictions from API
+     * @param query string searched in the Explore Activity
+     */
 
     public void updateDepictionList(String query) {
         this.query = query;

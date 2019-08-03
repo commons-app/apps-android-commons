@@ -11,8 +11,6 @@ import io.reactivex.Single;
 
 public interface MediaWikiApi {
 
-    String getEditToken() throws IOException;
-
     String getFileEntityId(String fileName) throws IOException;
 
     Single<String> parseWikicode(String source);
@@ -29,8 +27,6 @@ public interface MediaWikiApi {
     boolean isUserBlockedFromCommons();
 
     void logout();
-
-    String wikidataAddLabels(String fileEntityId, Map<String, String> caption) throws IOException;
 
 //    Single<CampaignResponseDTO> getCampaigns();
 

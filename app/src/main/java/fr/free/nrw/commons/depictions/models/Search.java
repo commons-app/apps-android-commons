@@ -3,6 +3,11 @@ package fr.free.nrw.commons.depictions.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Model class for object obtained while parsing depiction response
+ * this class contains all the details of for the media object
+ */
+
 public class Search {
 
     @SerializedName("ns")

@@ -276,67 +276,7 @@ public class MediaClient {
 
         return mediaDetails;
     }
-    /*@SuppressLint("CheckResult")
-    private JsonObject fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
-        JsonObject mediaDetails = new JsonObject();
-        if (mediaDetailResponse.getSuccess() == 1) {
-            Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
-            try {
-                Map.Entry<String, CommonsWikibaseItem> entry = entities.entrySet().iterator().next();
-                CommonsWikibaseItem commonsWikibaseItem = entry.getValue();
-                try {
-                    Map<String, Caption> labels = commonsWikibaseItem.getLabels();
-                    Map.Entry<String, Caption> captionEntry = labels.entrySet().iterator().next();
-                    Caption caption = captionEntry.getValue();
-                    JsonElement jsonElement = new JsonPrimitive(caption.getValue());
-                    mediaDetails.add("Caption", jsonElement);
-                } catch (NullPointerException e) {
-                    JsonElement jsonElement = new JsonPrimitive("No caption");
-                    mediaDetails.add("Caption", jsonElement);
-                }
 
-                try {
-                    LinkedTreeMap statements = (LinkedTreeMap) commonsWikibaseItem.getStatements();
-                    ArrayList<LinkedTreeMap> listP245962 = (ArrayList<LinkedTreeMap>) statements.get("P245962");
-                    JsonArray jsonArray = new JsonArray();
-                    JsonElement labelJson = new JsonPrimitive("label1");
-                    JsonElement urlJson = new JsonPrimitive("url1");
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.add("label", labelJson);
-                    jsonObject.add("url", urlJson);
-                    jsonArray.add(jsonObject);
-                    labelJson = null;
-                    urlJson = null;
-                    jsonObject = null;
-                    labelJson = new JsonPrimitive("label2");
-                    urlJson = new JsonPrimitive("url2");
-                    jsonObject = new JsonObject();
-                    jsonObject.add("label", labelJson);
-                    jsonObject.add("url", urlJson);
-                    jsonArray.add(jsonObject);
-                    mediaDetails.add("Depiction", jsonArray);
-                } catch (Exception e) {
-                    JsonElement jsonElement = new JsonPrimitive("No depiction");
-                    mediaDetails.add("Depiction", jsonElement);
-                }
-            } catch (Exception e) {
-                JsonElement jsonElement = new JsonPrimitive("No caption");
-                mediaDetails.add("Caption", jsonElement);
-                jsonElement = null;
-                jsonElement = new JsonPrimitive("No depiction");
-                mediaDetails.add("Depiction", jsonElement);
-            }
-        } else {
-            JsonElement jsonElement = new JsonPrimitive("No caption");
-            mediaDetails.add("Caption", jsonElement);
-            jsonElement = null;
-            jsonElement = new JsonPrimitive("No depiction");
-            mediaDetails.add("Depiction", jsonElement);
-        }
-
-        return mediaDetails;
-    }
-*/
     /**
      * Gets labels for Depictions using Entity Id from MediaWikiAPI
      *

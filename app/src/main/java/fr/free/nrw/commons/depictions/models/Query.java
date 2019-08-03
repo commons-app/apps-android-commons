@@ -3,6 +3,12 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Model class for object obtained while parsing depiction response
+ *
+ * the getSearch() function is used to parse media
+ */
+
 public class Query {
 
     @SerializedName("searchinfo")

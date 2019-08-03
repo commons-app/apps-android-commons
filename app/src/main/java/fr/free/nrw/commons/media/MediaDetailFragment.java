@@ -39,7 +39,7 @@ import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
-import fr.free.nrw.commons.depictions.DepictionsDetailActivity;
+import fr.free.nrw.commons.depictions.DepictedImagesActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -526,7 +526,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (depictionLoaded) {
             textView.setOnClickListener(view -> {
                 DepictedItem depictedItem = new DepictedItem(depictionName, "", null, false, entityId);
-                DepictionsDetailActivity.startYourself(this.getContext(), depictedItem);
+                DepictedImagesActivity.startYourself(this.getContext(), depictedItem);
             });
         }
         return item;

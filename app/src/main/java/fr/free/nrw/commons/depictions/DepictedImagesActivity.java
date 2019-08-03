@@ -43,7 +43,11 @@ import timber.log.Timber;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class DepictionsDetailActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener, MediaDetailPagerFragment.MediaDetailProvider,
+/**
+ * Actvity for shhowing image list after selected an item from SearchActivity In Explore
+ */
+
+public class DepictedImagesActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener, MediaDetailPagerFragment.MediaDetailProvider,
         AdapterView.OnItemClickListener {
 
     private static int TIMEOUT_SECONDS = 15;
@@ -347,7 +351,7 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
      * @param depictedItem Name of the depicts for displaying its details
      */
     public static void startYourself(Context context, DepictedItem depictedItem) {
-        Intent intent = new Intent(context, DepictionsDetailActivity.class);
+        Intent intent = new Intent(context, DepictedImagesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("depictsName", depictedItem.getDepictsLabel());
         intent.putExtra("entityId", depictedItem.getEntityId());
@@ -362,6 +366,10 @@ public class DepictionsDetailActivity extends NavigationBaseActivity implements 
     public ListAdapter getAdapter() {
         return gridAdapter;
     }
+
+    /**
+     * On clicking any image from this list it should show the mediaDetails
+     */
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

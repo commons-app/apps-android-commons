@@ -51,20 +51,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * @return csrf token
-     */
-
-    @Override
-    public String getEditToken() throws IOException {
-        String editToken = api.action("query")
-                .param("meta", "tokens")
-                .post()
-                .getString("/api/query/tokens/@csrftoken");
-        Timber.d("MediaWiki edit token is %s", editToken);
-        return editToken;
-    }
-
-    /**
      * File entity id obtained after uploading the image
      *
      * @param fileName title of the image uploaded
@@ -204,19 +190,5 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         } catch (IOException e) {
             Timber.e(e, "Error occurred while logging out");
         }
-    }
-
-    public String wikidataAddLabels(String fileEntityId, Map<String, String> caption) throws IOException {
-        CustomApiResult result = api.action("wbsetlabel")
-                .param("format", "json")
-                .param("id", fileEntityId)
-                .param("language", "en")
-                .param("token", getEditToken())
-                .param("data", caption)
-                .param("value", "Testcaptions")
-                .post();
-        if (result == null || result.getNode("api") == null) {
-            return null;
-        } return null;
     }
 }
