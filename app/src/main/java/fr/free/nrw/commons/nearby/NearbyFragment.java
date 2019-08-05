@@ -705,6 +705,17 @@ public class NearbyFragment extends CommonsDaggerSupportFragment
         }
     }
 
+                      
+    /**
+     * Centers the map in nearby fragment to a given place
+     * @param place is new center of the map
+     */
+    public void centerMapToPlace(Place place) {
+        if (nearbyMapFragment != null) {
+            nearbyMapFragment.centerMapToPlace(place);
+        }
+    }
+
     public boolean isBottomSheetExpanded() { return bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
     }
 }
