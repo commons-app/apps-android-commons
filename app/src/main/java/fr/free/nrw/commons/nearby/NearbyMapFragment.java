@@ -225,6 +225,7 @@ public class NearbyMapFragment extends DaggerFragment {
             Timber.d("curLatLng found, setting up map view...");
             setupMapView(savedInstanceState);
         }
+
         setHasOptionsMenu(false);
 
         return mapView;
@@ -252,7 +253,6 @@ public class NearbyMapFragment extends DaggerFragment {
             return false;
         });
     }
-
 
     /**
      * Updates map slightly means it doesn't updates all nearby markers around. It just updates
@@ -719,6 +719,7 @@ public class NearbyMapFragment extends DaggerFragment {
                     passInfoToSheet(place);
                     bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
                 }
                 return false;
             });
@@ -1039,25 +1040,6 @@ public class NearbyMapFragment extends DaggerFragment {
         }
     }
 
-    /**
-     * Centers the map in nearby fragment to a given place
-     * @param place is new center of the map
-     */
-    public void centerMapToPlace(Place place) {
-        mapView.getMapAsync(mapboxMap1 -> {
-            CameraPosition position = new CameraPosition.Builder()
-                    .target(isBottomListSheetExpanded ?
-                            new LatLng(place.location.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                    place.getLocation().getLongitude())
-                            : new LatLng(place.getLocation().getLatitude(), place.getLocation().getLongitude(), 0)) // Sets the new camera position
-                    .zoom(isBottomListSheetExpanded ?
-                            ZOOM_LEVEL
-                            :mapboxMap.getCameraPosition().zoom) // Same zoom level
-                    .build();
-            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
-        });
-    }
-
 
     public void updateMarker(boolean isBookmarked, Place place) {
 
@@ -1094,7 +1076,6 @@ public class NearbyMapFragment extends DaggerFragment {
         }
 
     }
-
 
 }
 

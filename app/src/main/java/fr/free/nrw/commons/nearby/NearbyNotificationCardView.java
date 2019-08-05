@@ -17,8 +17,6 @@ import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
-
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
  */
@@ -68,6 +66,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
         progressBar = rootView.findViewById(R.id.progressBar);
 
+        setActionListeners();
     }
 
     @Override
@@ -82,16 +81,8 @@ public class NearbyNotificationCardView extends SwipableCardView {
     }
 
 
-    private void setActionListeners(Place place) {
-        this.setOnClickListener(view -> {
-            MainActivity m = (MainActivity) getContext();
-
-            // Change to nearby tab
-            m.viewPager.setCurrentItem(NEARBY_TAB_POSITION);
-
-            // Center the map to the place
-            ((NearbyFragment) m.contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).centerMapToPlace(place);
-        });
+    private void setActionListeners() {
+        this.setOnClickListener(view -> ((MainActivity)getContext()).viewPager.setCurrentItem(1));
     }
 
     @Override public boolean onSwipe(View view) {
@@ -129,7 +120,6 @@ public class NearbyNotificationCardView extends SwipableCardView {
         contentLayout.setVisibility(VISIBLE);
         // Make progress bar invisible once data is ready
         progressBar.setVisibility(GONE);
-        setActionListeners(place);
         // And content views visible since they are ready
         notificationTitle.setVisibility(VISIBLE);
         notificationDistance.setVisibility(VISIBLE);

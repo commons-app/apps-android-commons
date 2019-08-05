@@ -116,12 +116,9 @@ public class PlaceRenderer extends Renderer<Place> {
                     ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(lastPosition, buttonLayout.getHeight());
                 }
             }
-            if (onBookmarkClick == null) {
-                ((NearbyFragment) fragment.getParentFragment()).centerMapToPlace(place);
-            }
+
         };
         view.setOnClickListener(listener);
-
         view.requestFocus();
         view.setOnFocusChangeListener((view1, hasFocus) -> {
             if (!hasFocus && buttonLayout.isShown()) {
