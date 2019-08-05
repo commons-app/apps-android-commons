@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Mohsin Ali
+-->
+<resources>
+  <string name="crash_dialog_title">ক\'ম\'ঞ্চ ক্রেশ্ব হৈছে</string>
+  <string name="crash_dialog_text">উস্। কিবা সমস্যা হ\'ল!</string>
+  <string name="crash_dialog_ok_toast">ধন্যবাদ!</string>
+</resources>
