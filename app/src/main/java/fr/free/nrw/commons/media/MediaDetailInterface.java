@@ -20,6 +20,6 @@ public interface MediaDetailInterface {
     @GET("w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1&sites=commonswiki")
     Observable<MediaDetailResponse> fetchStructuredDataByFilename(@Query("languages") String language, @Query("titles") String filename);
 
-    @GET("w/api.php?action=wbsearchentities&format=json&language=en")
-    Observable<JsonObject> fetchLabelForWikidata(@Query("search") String entityId);
+    @GET("/w/api.php?format=json&action=wbgetentities&props=labels&languagefallback=1")
+    Observable<JsonObject> getDepictions(@Query("ids") String entityId, @Query("languages") String language);
 }

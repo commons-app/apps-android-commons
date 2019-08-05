@@ -90,7 +90,6 @@ public class MediaDataExtractor {
                     JsonObject depictedItem = (JsonObject) depictionArray.get(i);
                     Map <String, String> depictedObject = new HashMap<>();
                     depictedObject.put("label", depictedItem.get("label").toString().substring(3, depictedItem.get("label").toString().length()-3));
-                    depictedObject.put("url", depictedItem.get("url").toString().substring(3, depictedItem.get("url").toString().length() - 3));
                     depictedObject.put("id", depictedItem.get("id").toString().substring(1, depictedItem.get("id").toString().length() - 1));
                     depictedItemList.add(depictedObject);
                 }

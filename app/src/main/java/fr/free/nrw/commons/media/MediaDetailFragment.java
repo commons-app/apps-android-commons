@@ -347,9 +347,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         depictionContainer.removeAllViews();
         for (int i = 0; i<depictions.size(); i++) {
             String depictionName = depictions.get(i).get("label");
-            String depictionUrl = depictions.get(i).get("url");
             String entityId = depictions.get(i).get("id");
-            View depictLabel = buildDepictLabel(depictionName, depictionUrl, entityId, depictionContainer);
+            View depictLabel = buildDepictLabel(depictionName, entityId, depictionContainer);
             depictionContainer.addView(depictLabel);
         }
     }
@@ -518,7 +517,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      * Add view to depictions obtained also tapping on depictions should open the url
      */
 
-    private View buildDepictLabel(String depictionName, String depictionUrl, String entityId, LinearLayout depictionContainer) {
+    private View buildDepictLabel(String depictionName, String entityId, LinearLayout depictionContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_depicts_item, depictionContainer, false);
         final CompatTextView textView = item.findViewById(R.id.media_detail_depicted_item_text);
 

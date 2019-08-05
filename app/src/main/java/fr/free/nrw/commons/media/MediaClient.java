@@ -249,7 +249,7 @@ public class MediaClient {
                         Map<String, LinkedTreeMap> datavalue = (Map<String, LinkedTreeMap>) mainsnak.get("datavalue");
                         LinkedTreeMap value = datavalue.get("value");
                         String id = value.get("id").toString();
-                        JsonObject jsonObject = getLabelForDepiction(id)
+                        JsonObject jsonObject = getLabelForDepiction(id, Locale.getDefault().getLanguage())
                                 .subscribeOn(Schedulers.newThread())
                                 .blockingGet();
                                 jsonArray.add(jsonObject);
@@ -284,21 +284,22 @@ public class MediaClient {
      * @return Json Object having label and wikidata url for the Depiction Entity
      */
 
-    public Single<JsonObject> getLabelForDepiction(String entityId) {
-        return mediaDetailInterface.fetchLabelForWikidata(entityId)
+    public Single<JsonObject> getLabelForDepiction(String entityId, String language) {
+        return mediaDetailInterface.getDepictions(entityId, language)
                 .map(jsonResponse -> {
                     try {
                         if (jsonResponse.get("success").toString().equals("1")) {
-                            JsonArray search = (JsonArray) jsonResponse.get("search");
-                            JsonObject searchElement = (JsonObject) search.get(0);
-                            String label = searchElement.get("label").toString();
-                            String url = searchElement.get("concepturi").toString();
+                            JsonObject entities = (JsonObject) jsonResponse.getAsJsonObject().get("entities");
+                            JsonObject responseObject = (JsonObject) entities.getAsJsonObject().get(entityId);
+                            JsonObject labels = responseObject.getAsJsonObject("labels");
+                            JsonObject languageObject = labels.getAsJsonObject(language);
+                            String label = String.valueOf(languageObject.get("value"));
+
+
                             JsonElement labelJson = new JsonPrimitive(label);
-                            JsonElement urlJson = new JsonPrimitive(url);
                             JsonElement idJson = new JsonPrimitive(entityId);
                             JsonObject jsonObject = new JsonObject();
                             jsonObject.add("label", labelJson);
-                            jsonObject.add("url", urlJson);
                             jsonObject.add("id", idJson);
                             return jsonObject;
                         }
