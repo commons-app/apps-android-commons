@@ -87,6 +87,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     ViewPager vpUpload;
 
     private boolean isTitleExpanded=true;
+    public final static int MAX_NO_OF_IMAGES = 5;
 
     private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
@@ -259,13 +260,22 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     public void onUploadMediaDeleted(int index) {
         fragments.remove(index);//Remove the corresponding fragment
         uploadableFiles.remove(index);//Remove the files from the list
+        if (fragments.size()<=MAX_NO_OF_IMAGES+2){
+            UploadMediaDetailFragment.setTooManyImages(false);
+        }
         if(mediaDeleteHandled){
             mediaDeleteHandled = false;
         }else{
             thumbnailsAdapter.notifyItemRemoved(index); //Notify the thumbnails adapter
             mediaDeleteHandled = true;
         }
+        int currentIndex = vpUpload.getCurrentItem();
         uploadImagesAdapter.notifyDataSetChanged(); //Notify the ViewPager
+
+        if(currentIndex>=fragments.size() - 2){
+            currentIndex-=3;
+        }
+        vpUpload.setCurrentItem(currentIndex);
     }
 
     @Override
@@ -307,6 +317,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
             if (uploadableFiles.size()
                     > 1) {//If there is only file, no need to show the image thumbnails
                 thumbnailsAdapter.setUploadableFiles(uploadableFiles);
+                if(uploadableFiles.size()>MAX_NO_OF_IMAGES){
+                    UploadMediaDetailFragment.setTooManyImages(true);
+                }
             } else {
                 llContainerTopCard.setVisibility(View.GONE);
             }
@@ -315,6 +328,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
 
             fragments = new ArrayList<>();
             for (UploadableFile uploadableFile : uploadableFiles) {
+                Timber.e("creating a new set of fragments");
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
                 uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, source, place);
                 uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback(){
@@ -350,6 +364,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
                 });
                 fragments.add(uploadMediaDetailFragment);
             }
+
 
             uploadCategoriesFragment = new UploadCategoriesFragment();
             uploadCategoriesFragment.setCallback(this);

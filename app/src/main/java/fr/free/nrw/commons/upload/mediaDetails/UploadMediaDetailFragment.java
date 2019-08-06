@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -86,6 +89,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     private UploadModel.UploadItem uploadItem;
     private List<Description> descriptions;
+    private static boolean tooManyImages = false;
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
@@ -110,6 +114,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState == null){
+            title = new Title();
+            presenter.receiveImage(uploadableFile, source, place);
+        }
     }
 
     public void setImageTobeUploaded(UploadableFile uploadableFile, String source, Place place) {
@@ -135,17 +143,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps()));
-        title = new Title();
         initRecyclerView();
         initPresenter();
         Disposable disposable = RxTextView.textChanges(etTitle)
                 .subscribe(text -> {
                     if (!TextUtils.isEmpty(text)) {
+                        if(!(tooManyImages && callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 3)){
+                            title.setTitleText(text.toString());
+                            uploadItem.setTitle(title);
+                        }
                         btnNext.setEnabled(true);
                         btnNext.setClickable(true);
                         btnNext.setAlpha(1.0f);
-                        title.setTitleText(text.toString());
-                        uploadItem.setTitle(title);
                     } else {
                         btnNext.setAlpha(0.5f);
                         btnNext.setEnabled(false);
@@ -153,8 +162,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     }
                 });
         compositeDisposable.add(disposable);
-        presenter.receiveImage(uploadableFile, source, place);
 
+        if(uploadItem!=null){
+            setDetailsInUI();
+        }
         if (callback.getIndexInViewFlipper(this) == 0) {
             btnPrevious.setEnabled(false);
             btnPrevious.setAlpha(0.5f);
@@ -171,7 +182,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         attachImageViewScaleChangeListener();
-
         addEtTitleTouchListener();
     }
 
@@ -237,10 +247,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         DialogUtil.showAlertDialog(getActivity(), getString(titleStringID), getString(messageStringId), getString(android.R.string.ok), null, true);
     }
 
+
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        uploadItem.setDescriptions(descriptionsAdapter.getDescriptions());
-        presenter.verifyImageQuality(uploadItem, true);
+        Timber.e("Current fragment index : "+ callback.getIndexInViewFlipper(this)+". Total number of steps : "+callback.getTotalNumberOfSteps());
+        if(tooManyImages && callback.getIndexInViewFlipper(this)==callback.getTotalNumberOfSteps()-3){
+            Toast.makeText(getActivity(),"Maximum Image Count is 5",Toast.LENGTH_LONG).show();
+        }else {
+            uploadItem.setDescriptions(descriptionsAdapter.getDescriptions());
+            presenter.verifyImageQuality(uploadItem, true);
+        }
+
     }
 
     @OnClick(R.id.btn_previous)
@@ -279,12 +296,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onImageProcessed(UploadItem uploadItem, Place place) {
         this.uploadItem = uploadItem;
-        if (uploadItem.getTitle() != null) {
-            etTitle.setText(uploadItem.getTitle().toString());
-        }
-
         descriptions = uploadItem.getDescriptions();
-        photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
+        setDetailsInUI();
+    }
+
+    private void setDetailsInUI(){
+        etTitle.setText(title.getTitleText());
+        photoViewBackgroundImage.setImageURI(uploadItem.getContentUri());
         setDescriptionsInAdapter(descriptions);
     }
 
@@ -309,6 +327,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         ViewUtil.showLongToast(getContext(), message);
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void showDuplicatePicturePopup() {
         String uploadTitleFormat = getString(R.string.upload_title_duplicate);
@@ -407,4 +426,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         descriptionsAdapter.setItems(descriptions);
     }
 
+    public static void setTooManyImages(boolean tooManyImages) {
+        UploadMediaDetailFragment.tooManyImages = tooManyImages;
+    }
 }
