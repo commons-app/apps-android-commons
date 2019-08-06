@@ -3,9 +3,11 @@ package fr.free.nrw.commons.upload;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -17,6 +19,8 @@ import butterknife.ButterKnife;
 import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import timber.log.Timber;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,18 +65,20 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
         return uploadableFiles.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.rl_container)
         RelativeLayout rlContainer;
         @BindView(R.id.iv_thumbnail)
         SimpleDraweeView background;
         @BindView(R.id.iv_error)
         ImageView ivError;
+        @BindView(R.id.iv_close)
+        ImageButton ivClose;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            ivClose.setOnClickListener(this);
         }
 
         /**
@@ -84,22 +90,37 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
             Uri uri = uploadableFile.getMediaUri();
             background.setImageURI(Uri.fromFile(new File(String.valueOf(uri))));
 
+//            Timber.e("Current position : "+position+" Current selected file position : "+callback.getCurrentSelectedFilePosition());
+
             if (position == callback.getCurrentSelectedFilePosition()) {
                 rlContainer.setEnabled(true);
                 rlContainer.setClickable(true);
-                rlContainer.setAlpha(1.0f);
+                background.setAlpha(1.0f);
                 if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
                     rlContainer.setElevation(10);
                 }
             } else {
                 rlContainer.setEnabled(false);
                 rlContainer.setClickable(false);
-                rlContainer.setAlpha(0.5f);
+                background.setAlpha(0.5f);
                 if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
                     rlContainer.setElevation(0);
                 }
             }
         }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.iv_close:
+                    removeImageAt(getAdapterPosition());
+                    break;
+            }
+        }
+    }
+
+    private void removeImageAt(int position) {
+        notifyItemRemoved(position);
     }
 
     /**
