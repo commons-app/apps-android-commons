@@ -101,6 +101,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     private Place place;
     private List<UploadableFile> uploadableFiles= Collections.emptyList();
     private int currentSelectedPosition=0;
+    private boolean mediaDeleteHandled = false;
 
     @SuppressLint("CheckResult")
     @Override
@@ -142,6 +143,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         thumbnailsAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeRemoved(int positionStart, int itemCount) {
+                if(mediaDeleteHandled){
+                    mediaDeleteHandled = false;
+                    return;
+                }
+                mediaDeleteHandled = true;
                 super.onItemRangeRemoved(positionStart, itemCount);
                 presenter.deletePictureAtIndex(positionStart);
             }
@@ -253,7 +259,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     public void onUploadMediaDeleted(int index) {
         fragments.remove(index);//Remove the corresponding fragment
         uploadableFiles.remove(index);//Remove the files from the list
-//        thumbnailsAdapter.notifyItemRemoved(index); //Notify the thumbnails adapter
+        if(mediaDeleteHandled){
+            mediaDeleteHandled = false;
+        }else{
+            thumbnailsAdapter.notifyItemRemoved(index); //Notify the thumbnails adapter
+            mediaDeleteHandled = true;
+        }
         uploadImagesAdapter.notifyDataSetChanged(); //Notify the ViewPager
     }
 
