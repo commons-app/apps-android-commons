@@ -117,7 +117,7 @@ public class DepictModel {
 
     Observable<DepictedItem> gpsDepicts() {
         return Observable.fromIterable(gpsDepictsModel.getCategoryList())
-                .map(name -> new DepictedItem(name, "", null, false, ""));
+                .map(name -> new DepictedItem(name, "", "", false, ""));
     }
 
     private Observable<DepictedItem> titleDepicts(List<String> titleList) {
@@ -129,13 +129,13 @@ public class DepictModel {
         return depictsInterface.searchForDepicts(title, String.valueOf(SEARCH_DEPICTS_LIMIT), Locale.getDefault().getLanguage(), Locale.getDefault().getLanguage(),"0")
                 .map(depictSearchResponse -> {
                     DepictSearchItem depictedItem = depictSearchResponse.getSearch().get(0);
-                   return new DepictedItem(depictedItem.getLabel(), depictedItem.getDescription(), null, false, depictedItem.getId());
+                   return new DepictedItem(depictedItem.getLabel(), depictedItem.getDescription(), "", false, depictedItem.getId());
                 });
     }
 
     private Observable<DepictedItem> recentDepicts() {
         return Observable.fromIterable(depictDao.recentDepicts(SEARCH_DEPICTS_LIMIT))
-                .map(s -> new DepictedItem(s, "", null, false, ""));
+                .map(s -> new DepictedItem(s, "", "", false, ""));
     }
 
     /**
@@ -167,7 +167,7 @@ public class DepictModel {
 
         return depictsInterface.searchForDepicts(query, String.valueOf(SEARCH_DEPICTS_LIMIT), Locale.getDefault().getLanguage(), Locale.getDefault().getLanguage(), "0")
                 .flatMap(depictSearchResponse -> Observable.fromIterable(depictSearchResponse.getSearch()))
-                .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), null, false, depictSearchItem.getId()));
+                .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), "", false, depictSearchItem.getId()));
     }
 
     private boolean hasDirectDepictions() {

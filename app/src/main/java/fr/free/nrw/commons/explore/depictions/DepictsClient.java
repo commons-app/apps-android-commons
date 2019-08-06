@@ -50,7 +50,19 @@ public class DepictsClient {
 
         return depictsInterface.searchForDepicts(query, String.valueOf(limit), Locale.getDefault().getLanguage(), Locale.getDefault().getLanguage(), String.valueOf(offset))
                 .flatMap(depictSearchResponse -> Observable.fromIterable(depictSearchResponse.getSearch()))
-                .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), null, false, depictSearchItem.getId()));
+                .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), getImageUrl(depictSearchItem.getLabel()), false, depictSearchItem.getId()));
+    }
+
+    /**
+     *Get url for image usig image name
+     */
+
+    private String getImageUrl(String title) {
+        String baseUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
+        title = title.replace(" ", "_");
+        title+=".jpg";
+        String MD5Hash =  getMd5(title);
+        return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/50px-" + title;
     }
 
     /**

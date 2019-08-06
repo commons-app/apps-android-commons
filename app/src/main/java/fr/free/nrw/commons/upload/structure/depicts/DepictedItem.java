@@ -5,11 +5,11 @@ import android.widget.ImageView;
 public class DepictedItem {
     private final String depictsLabel;
     private final String description;
-    private final ImageView imageView;
+    private final String imageView;
     private boolean selected;
     private String entityId;
 
-    public DepictedItem(String depictsLabel, String description, ImageView imageView, boolean selected, String entityId) {
+    public DepictedItem(String depictsLabel, String description, String imageView, boolean selected, String entityId) {
         this.depictsLabel = depictsLabel;
         this.selected = selected;
         this.description = description;
@@ -25,7 +25,7 @@ public class DepictedItem {
         return description;
     }
 
-    public ImageView getImageView() {
+    public String getImageView() {
         return imageView;
     }
 

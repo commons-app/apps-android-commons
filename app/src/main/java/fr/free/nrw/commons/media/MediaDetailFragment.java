@@ -524,7 +524,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         textView.setText(depictionName);
         if (depictionLoaded) {
             item.setOnClickListener(view -> {
-                DepictedItem depictedItem = new DepictedItem(depictionName, "", null, false, entityId);
+                DepictedItem depictedItem = new DepictedItem(depictionName, "", "", false, entityId);
                 getActivity().finish();
                 DepictedImagesActivity.startYourself(this.getContext(), depictedItem);
             });

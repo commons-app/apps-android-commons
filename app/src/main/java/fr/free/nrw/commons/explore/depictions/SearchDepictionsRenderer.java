@@ -3,14 +3,18 @@ package fr.free.nrw.commons.explore.depictions;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pedrogomez.renderers.Renderer;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.utils.ImageUtils;
 
 public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
 
@@ -19,6 +23,9 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
 
     @BindView(R.id.description)
     TextView tvDepictionDesc;
+
+    @BindView(R.id.depicts_image)
+    ImageView imageView;
 
     private final DepictsClickedListener listener;
 
@@ -51,6 +58,19 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
         DepictedItem item = getContent();
         tvDepictionLabel.setText(item.getDepictsLabel());
         tvDepictionDesc.setText(item.getDescription());
+        if (!item.getImageView().isEmpty()) {
+            Picasso.with(getContext()).load(item.getImageView()).into(imageView, new Callback() {
+                @Override
+                public void onSuccess() {
+
+                }
+
+                @Override
+                public void onError() {
+                    imageView.setVisibility(View.GONE);
+                }
+            });
+        } else imageView.setVisibility(View.GONE);
     }
 
     public interface DepictsClickedListener {
