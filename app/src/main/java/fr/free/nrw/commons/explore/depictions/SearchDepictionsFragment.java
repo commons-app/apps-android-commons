@@ -32,6 +32,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -42,6 +43,10 @@ import timber.log.Timber;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+
+/**
+ * Display depictions in search fragment
+ */
 
 public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
     private static int TIMEOUT_SECONDS = 15;
@@ -62,6 +67,8 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
     MediaWikiApi mwApi;
     @Inject
     DepictsClient depictsClient;
+    @Inject
+    MediaClient mediaClient;
     @Inject
     @Named("default_preferences")
     JsonKvStore basicKvStore;
@@ -165,7 +172,20 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(GONE);
             depictionsAdapter.addAll(mediaList);
             depictionsAdapter.notifyDataSetChanged();
+            for (DepictedItem depictedItem :mediaList) {
+                addThumbnailToDepiction(depictedItem.getEntityId());
+            }
         }
+    }
+
+    private void addThumbnailToDepiction(String entityId) {
+        compositeDisposable.add(depictsClient.getP18ForItem(entityId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .subscribe(subscriber -> {
+                    Timber.e("line155"+subscriber);
+                }));
     }
 
     /**

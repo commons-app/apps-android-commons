@@ -26,6 +26,7 @@ import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import timber.log.Timber;
 
 @Singleton
 public class DepictsClient {
@@ -65,11 +66,13 @@ public class DepictsClient {
         return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/7f0px-" + title;
     }
 
-    public Observable<String> getP18ForItem(String entityId) {
+    public Single<String> getP18ForItem(String entityId) {
         return depictsInterface.getLabelForEntity()
                 .map(response -> {
+                    Timber.e("line156"+response);
                     return response.toString();
-                });
+                })
+                .singleOrError();
     }
 
     /**

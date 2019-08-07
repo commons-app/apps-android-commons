@@ -124,8 +124,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     }
 
     @Override
-    public void showError() {
+    public void showError(Boolean value) {
+        if (value)
         depictsSearchContainer.setError(getString(R.string.no_depiction_found));
+        else depictsSearchContainer.setErrorEnabled(false);
     }
 
     @Override

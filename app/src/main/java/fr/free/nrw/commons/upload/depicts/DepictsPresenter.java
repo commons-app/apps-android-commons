@@ -85,7 +85,7 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
                 .doOnSubscribe(disposable -> {
-                    view.showError();
+                    view.showError(true);
                     view.showProgress(true);
                     view.setDepictsList(null);
                 })
@@ -105,8 +105,8 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                             view.showProgress(false);
 
                             if (depictedItemList.isEmpty()) {
-                                view.showError();
-                            }
+                                view.showError(true);
+                            } else view.showError(false);
                         }
                 );
         compositeDisposable.add(searchDepictsDisposable);
