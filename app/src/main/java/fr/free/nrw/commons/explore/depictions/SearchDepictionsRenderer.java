@@ -58,8 +58,8 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
         DepictedItem item = getContent();
         tvDepictionLabel.setText(item.getDepictsLabel());
         tvDepictionDesc.setText(item.getDescription());
-        if (!item.getImageView().isEmpty()) {
-            Picasso.with(getContext()).load(item.getImageView()).into(imageView, new Callback() {
+        if (!item.getImageUrl().isEmpty()) {
+            Picasso.with(getContext()).load(item.getImageUrl()).into(imageView, new Callback() {
                 @Override
                 public void onSuccess() {
 
