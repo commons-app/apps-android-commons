@@ -127,7 +127,6 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
      * Callback used to get the current selected file position
      */
     interface Callback {
-
         int getCurrentSelectedFilePosition();
     }
 }

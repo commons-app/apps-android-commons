@@ -148,13 +148,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         Disposable disposable = RxTextView.textChanges(etTitle)
                 .subscribe(text -> {
                     if (!TextUtils.isEmpty(text)) {
-                        if(!(tooManyImages && callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 3)){
-                            title.setTitleText(text.toString());
-                            uploadItem.setTitle(title);
+                        if(tooManyImages && callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 3){
+                            btnNext.setBackgroundColor(Color.GRAY);
+                            btnNext.setTextColor(Color.BLACK);
+                            btnNext.setAlpha(0.5f);
+                        }else {
+                            btnNext.setAlpha(1.0f);
                         }
+                        title.setTitleText(text.toString());
+                        uploadItem.setTitle(title);
                         btnNext.setEnabled(true);
                         btnNext.setClickable(true);
-                        btnNext.setAlpha(1.0f);
                     } else {
                         btnNext.setAlpha(0.5f);
                         btnNext.setEnabled(false);
@@ -250,7 +254,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        Timber.e("Current fragment index : "+ callback.getIndexInViewFlipper(this)+". Total number of steps : "+callback.getTotalNumberOfSteps());
         if(tooManyImages && callback.getIndexInViewFlipper(this)==callback.getTotalNumberOfSteps()-3){
             Toast.makeText(getActivity(),"Maximum Image Count is 5",Toast.LENGTH_LONG).show();
         }else {
@@ -301,7 +304,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     private void setDetailsInUI(){
-        etTitle.setText(title.getTitleText());
+        if(uploadItem.getTitle()!=null && uploadItem.getTitle().getTitleText()!=null){
+            etTitle.setText(this.uploadItem.getTitle().getTitleText());
+        }
         photoViewBackgroundImage.setImageURI(uploadItem.getContentUri());
         setDescriptionsInAdapter(descriptions);
     }

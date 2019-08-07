@@ -272,10 +272,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         int currentIndex = vpUpload.getCurrentItem();
         uploadImagesAdapter.notifyDataSetChanged(); //Notify the ViewPager
 
-        if(currentIndex>=fragments.size() - 2){
-            currentIndex-=3;
+        if(currentIndex == index){
+            if(currentIndex>=fragments.size() - 2){
+                currentIndex--;
+            }
+            vpUpload.setCurrentItem(currentIndex);
         }
-        vpUpload.setCurrentItem(currentIndex);
     }
 
     @Override
@@ -314,8 +316,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
             handleNullMedia();
         } else {
             //Show thumbnails
-            if (uploadableFiles.size()
-                    > 1) {//If there is only file, no need to show the image thumbnails
+            if (uploadableFiles.size() > 1) {//If there is only file, no need to show the image thumbnails
                 thumbnailsAdapter.setUploadableFiles(uploadableFiles);
                 if(uploadableFiles.size()>MAX_NO_OF_IMAGES){
                     UploadMediaDetailFragment.setTooManyImages(true);

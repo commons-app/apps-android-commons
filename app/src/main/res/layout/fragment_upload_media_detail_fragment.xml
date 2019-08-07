@@ -95,7 +95,8 @@
                             android:imeOptions="actionNext"
                             android:drawableEnd="@drawable/mapbox_info_icon_default"
                             android:inputType="text"
-                            android:maxLines="1" />
+                            android:maxLines="1"
+                            android:saveEnabled="false"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <fr.free.nrw.commons.widget.HeightLimitedRecyclerView

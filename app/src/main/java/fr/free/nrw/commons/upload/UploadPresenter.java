@@ -89,11 +89,13 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     @Override
     public void deletePictureAtIndex(int index) {
         List<UploadableFile> uploadableFiles = view.getUploadableFiles();
-        if (index == uploadableFiles.size() - 1) {//If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
-            view.showHideTopCard(false);
-        }
         //Ask the repository to delete the picture
-        repository.deletePicture(uploadableFiles.get(index).getFilePath());
+        try {
+            repository.deletePicture(uploadableFiles.get(index).getFilePath());
+        }catch (IndexOutOfBoundsException e){
+            Timber.e("Image index %d is out of bound",index);
+            return;
+        }
         if (uploadableFiles.size() == 1) {
             view.showMessage(R.string.upload_cancelled);
             view.finish();
