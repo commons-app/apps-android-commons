@@ -102,7 +102,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
-        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        if (getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         }
         else{
@@ -205,6 +205,11 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             }
         }
     }
+
+    /**
+     * In explore we first show title and simultaneously call the API to retrieve captions
+     * When captions are retrieved they replace title
+     */
 
         public void replaceTitlesWithCaptions(String displayTitle, int i) {
             compositeDisposable.add(mediaClient.getCaptionByFilename("File:"+displayTitle+".jpg")

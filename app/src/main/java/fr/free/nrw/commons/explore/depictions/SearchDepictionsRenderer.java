@@ -16,6 +16,10 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.ImageUtils;
 
+/**
+ * Renderer for DepictedItem
+ */
+
 public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
 
     @BindView(R.id.depicts_label)

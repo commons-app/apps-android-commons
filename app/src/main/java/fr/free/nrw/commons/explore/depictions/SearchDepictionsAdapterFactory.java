@@ -9,6 +9,10 @@ import java.util.List;
 
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 
+/**
+ * Adapter factory for Items in Explore
+ */
+
 public class SearchDepictionsAdapterFactory {
     private final SearchDepictionsRenderer.DepictsClickedListener listener;
 
