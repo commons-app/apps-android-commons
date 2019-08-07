@@ -97,6 +97,8 @@ public class DepictedImagesActivity extends NavigationBaseActivity implements Fr
         setPageTitle();
         initDrawer();
         forceInitBackButton();
+        initList();
+        setScrollListener();
     }
 
     /**
@@ -106,9 +108,6 @@ public class DepictedImagesActivity extends NavigationBaseActivity implements Fr
         if (getIntent() != null && getIntent().getStringExtra("depictsName") != null) {
             setTitle(getIntent().getStringExtra("depictsName"));
             entityId = getIntent().getStringExtra("entityId");
-            //resetQueryContinueValues(depictName);
-            initList();
-            setScrollListener();
         }
     }
 

@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.media;
 
-import com.google.gson.JsonElement;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Model class for parsing Captions when fetching captions using filename in MediaClient
+ */
 
 public class Caption {
 

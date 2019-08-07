@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import com.google.gson.JsonObject;
+
 import fr.free.nrw.commons.depictions.models.DepictionResponse;
 import fr.free.nrw.commons.wikidata.model.DepictSearchResponse;
 import io.reactivex.Observable;
@@ -23,4 +25,7 @@ public interface DepictsInterface {
 
     @GET("/w/api.php?action=wbsearchentities&format=json&type=item&uselang=en")
     Observable<DepictSearchResponse> searchForDepicts(@Query("search") String query, @Query("limit") String limit, @Query("language") String language, @Query("uselang") String uselang, @Query("continue") String offset);
+
+    @GET("/w/api.php?action=wbgetclaims&entity=Q528943&property=P18")
+    Observable<JsonObject> getLabelForEntity();
 }

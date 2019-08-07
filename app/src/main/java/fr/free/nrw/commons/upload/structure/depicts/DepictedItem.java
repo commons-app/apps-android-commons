@@ -5,15 +5,15 @@ import android.widget.ImageView;
 public class DepictedItem {
     private final String depictsLabel;
     private final String description;
-    private final String imageView;
+    private String imageUrl;
     private boolean selected;
     private String entityId;
 
-    public DepictedItem(String depictsLabel, String description, String imageView, boolean selected, String entityId) {
+    public DepictedItem(String depictsLabel, String description, String imageUrl, boolean selected, String entityId) {
         this.depictsLabel = depictsLabel;
         this.selected = selected;
         this.description = description;
-        this.imageView = imageView;
+        this.imageUrl = imageUrl;
         this.entityId = entityId;
     }
 
@@ -25,8 +25,12 @@ public class DepictedItem {
         return description;
     }
 
-    public String getImageView() {
-        return imageView;
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getDepictsLabel() {

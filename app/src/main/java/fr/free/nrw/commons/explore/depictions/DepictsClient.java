@@ -62,7 +62,14 @@ public class DepictsClient {
         title = title.replace(" ", "_");
         title+=".jpg";
         String MD5Hash =  getMd5(title);
-        return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/50px-" + title;
+        return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/7f0px-" + title;
+    }
+
+    public Observable<String> getP18ForItem(String entityId) {
+        return depictsInterface.getLabelForEntity()
+                .map(response -> {
+                    return response.toString();
+                });
     }
 
     /**

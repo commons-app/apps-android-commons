@@ -47,8 +47,5 @@ class DepictionSearchTest {
                 .perform(ViewActions.typeText("description in some other language"))
         Espresso.onView(ViewMatchers.withId(R.id.btn_next))
                 .perform(ViewActions.click())
-        Intents.intended(IntentMatchers.hasComponent(DepictsFragment::class.java.name))
-        /*onView(withId(R.id.depicts_search))
-                .perform(ViewActions.typeText("bridge"))*/
     }
 }

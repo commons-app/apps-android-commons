@@ -109,11 +109,11 @@ public class LocationServiceManager implements LocationListener {
 
         float[] results = new float[5];
         Location.distanceBetween(
-                currentBestLocation.getLatitude(),
-                currentBestLocation.getLongitude(),
-                location.getLatitude(),
-                location.getLongitude(),
-                results);
+                        currentBestLocation.getLatitude(),
+                        currentBestLocation.getLongitude(),
+                        location.getLatitude(),
+                        location.getLongitude(),
+                        results);
 
         // If it's been more than two minutes since the current location, use the new location
         // because the user has likely moved
