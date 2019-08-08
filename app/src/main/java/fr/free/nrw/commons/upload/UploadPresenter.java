@@ -32,6 +32,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
             new Class[]{UploadContract.View.class}, (proxy, method, methodArgs) -> null);
     private final UploadRepository repository;
     private UploadContract.View view = DUMMY;
+    public final static int MAX_NO_OF_IMAGES = 5;
 
     private CompositeDisposable compositeDisposable;
 

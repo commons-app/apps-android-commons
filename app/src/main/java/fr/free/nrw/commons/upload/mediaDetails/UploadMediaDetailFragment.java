@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.mediaDetails;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -54,6 +55,7 @@ import fr.free.nrw.commons.upload.Title;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.UploadPresenter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -145,14 +147,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 callback.getTotalNumberOfSteps()));
         initRecyclerView();
         initPresenter();
+        if(tooManyImages && callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 3){
+            btnNext.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+            btnNext.setAlpha(0.5f);
+        }
         Disposable disposable = RxTextView.textChanges(etTitle)
                 .subscribe(text -> {
                     if (!TextUtils.isEmpty(text)) {
-                        if(tooManyImages && callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 3){
-                            btnNext.setBackgroundColor(Color.GRAY);
-                            btnNext.setTextColor(Color.BLACK);
-                            btnNext.setAlpha(0.5f);
-                        }else {
+                        if(!(tooManyImages && callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 3)){
                             btnNext.setAlpha(1.0f);
                         }
                         title.setTitleText(text.toString());
@@ -255,7 +257,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
         if(tooManyImages && callback.getIndexInViewFlipper(this)==callback.getTotalNumberOfSteps()-3){
-            Toast.makeText(getActivity(),"Maximum Image Count is 5",Toast.LENGTH_LONG).show();
+            ViewUtil.showLongToast(getActivity(),getString(R.string.upload_too_many_images_toast, UploadPresenter.MAX_NO_OF_IMAGES));
         }else {
             uploadItem.setDescriptions(descriptionsAdapter.getDescriptions());
             presenter.verifyImageQuality(uploadItem, true);

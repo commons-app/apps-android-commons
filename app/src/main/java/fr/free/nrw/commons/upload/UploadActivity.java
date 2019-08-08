@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
+import static fr.free.nrw.commons.upload.UploadPresenter.MAX_NO_OF_IMAGES;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
@@ -90,7 +91,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     ImageButton tvErrorIcon;
 
     private boolean isTitleExpanded=true;
-    public final static int MAX_NO_OF_IMAGES = 5;
 
     private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
@@ -271,7 +271,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
             mediaDeleteHandled = true;
         }
 
-        if (fragments.size()<=MAX_NO_OF_IMAGES+2){                           //if number of images is less than or equal
+        if (fragments.size()<= MAX_NO_OF_IMAGES+2){                           //if number of images is less than or equal
             UploadMediaDetailFragment.setTooManyImages(false);               //to max no of images allowed hide error icon
              tvErrorIcon.setVisibility(View.GONE);                           //and set too nay images flag to false.
         }
@@ -337,7 +337,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
 
             fragments = new ArrayList<>();
             for (UploadableFile uploadableFile : uploadableFiles) {
-                Timber.e("creating a new set of fragments");
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
                 uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, source, place);
                 uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback(){
@@ -491,6 +490,15 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         rvThumbnails.setVisibility(isTitleExpanded ? View.GONE : View.VISIBLE);
         isTitleExpanded = !isTitleExpanded;
         ibToggleTopCard.setRotation(ibToggleTopCard.getRotation() + 180);
+    }
+
+    @OnClick(R.id.tv_err_icon)
+    public void onTvErrorIconClicked(){
+        new android.app.AlertDialog.Builder(UploadActivity.this).setTitle(R.string.upload_too_many_images_title).setMessage(getString(R.string.upload_too_many_images_message,MAX_NO_OF_IMAGES,uploadableFiles.size()-MAX_NO_OF_IMAGES))
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .create()
+                .show();
     }
 
     @Override

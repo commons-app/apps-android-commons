@@ -31,6 +31,9 @@
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Uploading %1$s failed</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
+  <string name="upload_too_many_images_title">Too many images</string>
+  <string name="upload_too_many_images_message">The maximum number of images allowed to upload per time is %1$d. Please remove at least %2$d images.</string>
+  <string name="upload_too_many_images_toast">The maximum number of images allowed to upload per time is %1$d.</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d file uploading</item>
     <item quantity="other">%1$d files uploading</item>
