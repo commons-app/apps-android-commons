@@ -26,8 +26,7 @@ public interface SearchDepictionsFragmentContract {
 
         RVRendererAdapter<DepictedItem> getAdapter();
 
-        void setImageView(String url, ImageView imageView);
-
+        void onImageUrlFetched(String response, int position);
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -42,6 +41,6 @@ public interface SearchDepictionsFragmentContract {
 
         String getQuery();
 
-        void addThumbnailToDepiction(String enityId, int position, ImageView imageView);
+        void fetchThumbnailForEntityId(String entityId,int position);
     }
 }

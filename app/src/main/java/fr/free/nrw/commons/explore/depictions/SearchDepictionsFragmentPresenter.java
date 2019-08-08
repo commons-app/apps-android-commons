@@ -42,7 +42,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     JsonKvStore basicKvStore;
     private SearchDepictionsFragmentContract.View view = DUMMY;
     private List<DepictedItem> queryList = new ArrayList<>();
-    private int mediaSize = 0;
 
     @Inject
     public SearchDepictionsFragmentPresenter(@Named("default_preferences") JsonKvStore basicKvStore, MediaWikiApi mwApi, RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, MediaClient mediaClient) {
@@ -170,15 +169,15 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     }
 
     @Override
-    public void addThumbnailToDepiction(String entityId , int position, ImageView imageView) {
+    public void fetchThumbnailForEntityId(String entityId,int position) {
          compositeDisposable.add(depictsClient.getP18ForItem(entityId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(subscriber -> {
-                    Timber.e("line155" + subscriber);
-                    if (subscriber != null)
-                    view.setImageView(subscriber, imageView);
+                .subscribe(response -> {
+                    Timber.e("line155" + response);
+                    if (response != null)
+                    view.onImageUrlFetched(response,position);
                 }));
     }
 

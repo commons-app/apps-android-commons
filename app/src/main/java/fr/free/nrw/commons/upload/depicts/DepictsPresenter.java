@@ -1,29 +1,23 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
+
 import android.util.Log;
-
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.List;
-
-import fr.free.nrw.commons.R;
-import io.reactivex.Observable;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.repository.UploadRepository;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 @Singleton
 public class DepictsPresenter implements DepictsContract.UserActionListener {
@@ -101,12 +95,19 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                         s -> depictedItemList.add(s),
                         Timber::e,
                         () -> {
-                            view.setDepictsList(depictedItemList);
                             view.showProgress(false);
 
-                            if (depictedItemList.isEmpty()) {
+                            if (null == depictedItemList || depictedItemList.isEmpty()) {
                                 view.showError(true);
-                            } else view.showError(false);
+                            } else {
+                                view.showError(false);
+                                //Understand this is shitty, but yes, doing it the other way is even worse and adapter positions can not be trusted
+                                for (int position = 0; position < depictedItemList.size();
+                                        position++) {
+                                    depictedItemList.get(position).setPosition(position);
+                                }
+                                view.setDepictsList(depictedItemList);
+                            }
                         }
                 );
         compositeDisposable.add(searchDepictsDisposable);

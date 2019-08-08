@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -15,8 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +29,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import timber.log.Timber;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -61,9 +57,10 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
         }
 
         @Override
-        public void showImageWithItem(String entityId, int position, ImageView imageView) {
-           presenter.addThumbnailToDepiction(entityId, position, imageView);
+        public void fetchThumbnailUrlForEntity(String entityId,int position) {
+            presenter.fetchThumbnailForEntityId(entityId,position);
         }
+
     });
     private RVRendererAdapter<DepictedItem> depictionsAdapter;
 
@@ -168,17 +165,8 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     }
 
     @Override
-    public void setImageView(String url, ImageView imageView) {
-        Picasso.with(getActivity()).load(url).into(imageView, new Callback() {
-            @Override
-            public void onSuccess() {
-                Timber.e("success");
-            }
-
-            @Override
-            public void onError() {
-                imageView.setVisibility(View.GONE);
-            }
-        });
+    public void onImageUrlFetched(String response, int position) {
+        depictionsAdapter.getItem(position).setImageUrl(response);
+        depictionsAdapter.notifyItemChanged(position);
     }
 }
