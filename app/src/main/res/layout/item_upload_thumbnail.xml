@@ -11,24 +11,30 @@
 
   <com.facebook.drawee.view.SimpleDraweeView
     android:id="@+id/iv_thumbnail"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    fresco:actualImageScaleType="fitCenter"/>
+    android:layout_width="78dp"
+    android:layout_height="78dp"
+    fresco:actualImageScaleType="fitCenter"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentStart="true"/>
 
   <ImageButton
       android:id="@+id/iv_close"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
+      android:layout_width="18dp"
+      android:layout_height="18dp"
       app:srcCompat="@drawable/ic_action_thumb_close"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentTop="true"
-      android:background="@color/white"/>
+      android:translationX="12dp"
+      android:translationY="-12dp"
+      android:layout_alignEnd="@id/iv_thumbnail"
+      android:layout_alignTop="@id/iv_thumbnail"
+      style="@style/borderless_dialog"
+      android:scaleType="centerInside"/>
+
   <ImageView
     android:id="@+id/iv_error"
     android:layout_width="24dp"
     android:layout_height="24dp"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true"
+    android:layout_alignBottom="@id/iv_thumbnail"
+      android:layout_alignEnd="@id/iv_thumbnail"
     android:layout_gravity="end"
     android:visibility="gone"
     app:srcCompat="@drawable/ic_error_red_24dp"

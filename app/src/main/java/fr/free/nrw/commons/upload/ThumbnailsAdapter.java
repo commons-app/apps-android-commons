@@ -96,15 +96,19 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
                 rlContainer.setEnabled(true);
                 rlContainer.setClickable(true);
                 background.setAlpha(1.0f);
+                ivError.setAlpha(1.0f);
+                ivClose.setAlpha(1.0f);
                 if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
-                    rlContainer.setElevation(10);
+                    background.setElevation(10);
                 }
             } else {
                 rlContainer.setEnabled(false);
                 rlContainer.setClickable(false);
-                background.setAlpha(0.5f);
+                background.setAlpha(0.5f); //once an image is deleted the newly bound image will not have faded effect if rlContainer is used
+                ivError.setAlpha(0.5f);
+                ivClose.setAlpha(0.5f);
                 if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
-                    rlContainer.setElevation(0);
+                    background.setElevation(0);
                 }
             }
         }
