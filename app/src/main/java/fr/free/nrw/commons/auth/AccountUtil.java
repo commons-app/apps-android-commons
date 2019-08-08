@@ -3,8 +3,8 @@ package fr.free.nrw.commons.auth;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
-import androidx.annotation.Nullable;
 
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.BuildConfig;
 import timber.log.Timber;
 
@@ -12,10 +12,8 @@ public class AccountUtil {
 
     public static final String AUTH_COOKIE = "authCookie";
     public static final String AUTH_TOKEN_TYPE = "CommonsAndroid";
-    private final Context context;
 
-    public AccountUtil(Context context) {
-        this.context = context;
+    public AccountUtil() {
     }
 
     /**
@@ -49,5 +47,4 @@ public class AccountUtil {
     private static AccountManager accountManager(Context context) {
         return AccountManager.get(context);
     }
-
 }

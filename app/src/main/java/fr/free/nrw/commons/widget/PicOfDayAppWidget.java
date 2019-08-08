@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -42,7 +43,7 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    @Inject OkHttpJsonApiClient okHttpJsonApiClient;
+    @Inject MediaClient mediaClient;
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pic_of_day_app_widget);
@@ -67,7 +68,7 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                                      RemoteViews views,
                                      AppWidgetManager appWidgetManager,
                                      int appWidgetId) {
-        compositeDisposable.add(okHttpJsonApiClient.getPictureOfTheDay()
+        compositeDisposable.add(mediaClient.getPictureOfTheDay()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

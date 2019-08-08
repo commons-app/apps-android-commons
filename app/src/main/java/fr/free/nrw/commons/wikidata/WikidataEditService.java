@@ -13,10 +13,10 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -29,23 +29,29 @@ import timber.log.Timber;
 @Singleton
 public class WikidataEditService {
 
+    private final static String COMMONS_APP_TAG = "wikimedia-commons-app";
+    private final static String COMMONS_APP_EDIT_REASON = "Add tag for edits made using Android Commons app";
+
     private final Context context;
-    private final MediaWikiApi mediaWikiApi;
     private final WikidataEditListener wikidataEditListener;
     private final JsonKvStore directKvStore;
     private final WikiBaseClient wikiBaseClient;
+    private final WikidataClient wikidataClient;
+    private final PageEditClient wikiDataPageEditClient;
 
     @Inject
     public WikidataEditService(Context context,
-                               MediaWikiApi mediaWikiApi,
                                WikidataEditListener wikidataEditListener,
                                @Named("default_preferences") JsonKvStore directKvStore,
-                               WikiBaseClient wikiBaseClient) {
+                               WikidataClient wikidataClient,
+                               WikiBaseClient wikiBaseClient,
+                               @Named("wikidata-page-edit") PageEditClient wikiDataPageEditClient) {
         this.context = context;
-        this.mediaWikiApi = mediaWikiApi;
         this.wikidataEditListener = wikidataEditListener;
         this.directKvStore = directKvStore;
+        this.wikidataClient = wikidataClient;
         this.wikiBaseClient = wikiBaseClient;
+        this.wikiDataPageEditClient = wikiDataPageEditClient;
     }
 
     /**
@@ -85,13 +91,20 @@ public class WikidataEditService {
     private void editWikidataProperty(String wikidataEntityId, String fileName) {
         Timber.d("Upload successful with wiki data entity id as %s", wikidataEntityId);
         Timber.d("Attempting to edit Wikidata property %s", wikidataEntityId);
-        Observable.fromCallable(() -> {
-            String propertyValue = getFileName(fileName);
-            return mediaWikiApi.wikidataCreateClaim(wikidataEntityId, "P18", "value", propertyValue);
-        })
+
+        String propertyValue = getFileName(fileName);
+
+        Timber.d(propertyValue);
+        wikidataClient.createClaim(wikidataEntityId, "P18", "value", propertyValue)
+                .flatMap(revisionId -> {
+                    if (revisionId != -1) {
+                        return wikiDataPageEditClient.addEditTag(revisionId, COMMONS_APP_TAG, COMMONS_APP_EDIT_REASON);
+                    }
+                    throw new RuntimeException("Unable to edit wikidata item");
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(revisionId -> handleClaimResult(wikidataEntityId, revisionId), throwable -> {
+                .subscribe(revisionId -> handleClaimResult(wikidataEntityId, String.valueOf(revisionId)), throwable -> {
                     Timber.e(throwable, "Error occurred while making claim");
                     ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
@@ -153,24 +166,19 @@ public class WikidataEditService {
 
         String data = jsonData.toString();
 
-        Observable.fromCallable(mediaWikiApi::getEditToken)
+        wikiBaseClient.postEditEntity("M" + fileEntityId, data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(editToken -> {
-                    wikiBaseClient.postEditEntity("M" + fileEntityId, data, editToken)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(success -> {
-                                if (success)
-                                    Timber.d("Property P180 set successfully for %s", fileEntityId);
-                                else
-                                    Timber.d("Unable to set property P180 for %s", fileEntityId);
-                                }, throwable -> {
-                                Timber.e(throwable, "Error occurred while setting P180 tag");
-                                ViewUtil.showLongToast(context, throwable.toString());
-                            });
+                .subscribe(success -> {
+                    if (success)
+                        Timber.d("Property P180 set successfully for %s", fileEntityId);
+                    else
+                        Timber.d("Unable to set property P180 for %s", fileEntityId);
+                    }, throwable -> {
+                    Timber.e(throwable, "Error occurred while setting P180 tag");
+                    ViewUtil.showLongToast(context, throwable.toString());
                 });
-    }
+}
 
     private void handleClaimResult(String wikidataEntityId, String revisionId) {
         if (revisionId != null) {
@@ -178,29 +186,10 @@ public class WikidataEditService {
                 wikidataEditListener.onSuccessfulWikidataEdit();
             }
             showSuccessToast();
-            logEdit(revisionId);
         } else {
             Timber.d("Unable to make wiki data edit for entity %s", wikidataEntityId);
             ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
         }
-    }
-
-    /**
-     * Log the Wikidata edit by adding Wikimedia Commons App tag to the edit
-     * @param revisionId
-     */
-    @SuppressLint("CheckResult")
-    private void logEdit(String revisionId) {
-        Observable.fromCallable(() -> mediaWikiApi.addWikidataEditTag(revisionId))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                    if (result) {
-                        Timber.d("Wikidata edit was tagged successfully");
-                    } else {
-                        Timber.d("Wikidata edit couldn't be tagged");
-                    }
-                }, throwable -> Timber.e(throwable, "Error occurred while adding tag to the edit"));
     }
 
     /**

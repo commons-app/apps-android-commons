@@ -11,6 +11,7 @@
   <string name="preference_category_appearance">Pidangan</string>
   <string name="preference_category_general">Umum</string>
   <string name="preference_category_feedback">Eupan balik</string>
+  <string name="preference_category_privacy">Privasi</string>
   <string name="preference_category_location">Lokasi</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>

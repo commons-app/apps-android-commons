@@ -5,6 +5,7 @@
 * Vashgird
 -->
 <resources>
+  <string name="preference_category_general">Умумӣ</string>
   <string name="preference_category_feedback">Пешниҳод</string>
   <string name="preference_category_privacy">Ҳарими хусусӣ</string>
   <string name="preference_category_location">Мавқеъ</string>
@@ -39,8 +40,11 @@
   <string name="menu_upload_single">Боркунӣ</string>
   <string name="categories_search_text_hint">Ҷустуҷӯи гурӯҳҳо</string>
   <string name="menu_save_categories">Захира</string>
+  <string name="refresh_button">Азнавкунӣ</string>
+  <string name="display_list_button">Рӯйхат</string>
   <string name="categories_activity_title">Гурӯҳҳо</string>
   <string name="title_activity_settings">Танзимот</string>
+  <string name="title_activity_category_details">Гурӯҳ</string>
   <string name="menu_about">Дар бораи</string>
   <string name="title_activity_about">Дар бораи</string>
   <string name="menu_feedback">Ирсоли Пешниҳод (тавассути Email)</string>
@@ -70,7 +74,12 @@
   <string name="detail_panel_cats_label">Гурӯҳҳо</string>
   <string name="detail_panel_cats_loading">Дар ҳоли кушодашавӣ…</string>
   <string name="detail_panel_cats_none">Ҳеҷ яке интихоб нашудааст</string>
+  <string name="detail_description_empty">Тавзеҳот нест</string>
+  <string name="detail_discussion_empty">Тавзеҳот нест</string>
   <string name="detail_license_empty">Иҷозатномаи ношинос</string>
+  <string name="menu_refresh">Азнавкунӣ</string>
+  <string name="ok">Бошад</string>
+  <string name="warning">Ҳушдор</string>
   <string name="yes">Бале</string>
   <string name="no">На</string>
   <string name="media_detail_title">Унвон</string>
@@ -119,6 +128,7 @@
   <string name="search_tab_title_media">Расона</string>
   <string name="search_tab_title_categories">Гурӯҳҳо</string>
   <string name="explore_tab_title_featured">Баргузида</string>
+  <string name="quiz">Пурсиш</string>
   <string name="question">Савол</string>
   <string name="result">Натиҷа</string>
   <string name="delete">Ҳазв</string>
