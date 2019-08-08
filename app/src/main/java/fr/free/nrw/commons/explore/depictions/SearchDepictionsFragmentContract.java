@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.explore.depictions;
 
+import android.widget.ImageView;
+
+import com.pedrogomez.renderers.RVRendererAdapter;
+
 import java.util.List;
 
 import fr.free.nrw.commons.BasePresenter;
@@ -19,6 +23,11 @@ public interface SearchDepictionsFragmentContract {
         void clearAdapter();
 
         void showSnackbar();
+
+        RVRendererAdapter<DepictedItem> getAdapter();
+
+        void setImageView(String url, ImageView imageView);
+
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -32,5 +41,7 @@ public interface SearchDepictionsFragmentContract {
         void initializeQuery(String query);
 
         String getQuery();
+
+        void addThumbnailToDepiction(String enityId, int position, ImageView imageView);
     }
 }

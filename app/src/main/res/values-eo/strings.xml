@@ -540,7 +540,7 @@
   <string name="delete_helper_ask_spam_blurry">Malklara</string>
   <string name="delete_helper_ask_spam_nonsense">Sensencaĵo</string>
   <string name="delete_helper_ask_spam_other">Alia</string>
-  <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara foo</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara showImageWithItem</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda foto el Interreto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
   <string name="delete_helper_ask_reason_copyright_other">Alia</string>

@@ -2,7 +2,9 @@ package fr.free.nrw.commons.explore.depictions;
 
 import androidx.annotation.Nullable;
 
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -26,7 +28,6 @@ import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import timber.log.Timber;
 
 @Singleton
 public class DepictsClient {
@@ -61,16 +62,31 @@ public class DepictsClient {
     private String getImageUrl(String title) {
         String baseUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
         title = title.replace(" ", "_");
-        title+=".jpg";
+        if (!title.endsWith(".jpg")){
+            title+=".jpg";
+        }
         String MD5Hash =  getMd5(title);
-        return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/7f0px-" + title;
+        return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/70px-" + title;
     }
 
     public Single<String> getP18ForItem(String entityId) {
-        return depictsInterface.getLabelForEntity()
+        return depictsInterface.getLabelForEntity(entityId)
                 .map(response -> {
-                    Timber.e("line156"+response);
-                    return response.toString();
+                    String name;
+                    try {
+                        JsonObject claims = response.getAsJsonObject("claims").getAsJsonObject();
+                        JsonObject P18 = claims.get("P18").getAsJsonArray().get(0).getAsJsonObject();
+                        JsonObject mainsnak = P18.get("mainsnak").getAsJsonObject();
+                        JsonObject datavalue = mainsnak.get("datavalue").getAsJsonObject();
+                        JsonPrimitive value = datavalue.get("value").getAsJsonPrimitive();
+                        name = value.toString();
+                        name = name.substring(1, name.length() - 1);
+                    } catch (Exception e) {
+                        name="";
+                    }
+                    if (!name.isEmpty()){
+                        return getImageUrl(name);
+                    } else return null;
                 })
                 .singleOrError();
     }

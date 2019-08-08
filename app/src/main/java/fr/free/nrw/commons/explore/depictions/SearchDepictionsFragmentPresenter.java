@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore.depictions;
 
+import android.widget.ImageView;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,9 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Singleton;
 
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
@@ -18,9 +17,9 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
-import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -32,6 +31,8 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
                     new Class[]{SearchDepictionsFragmentContract.View.class},
                     (proxy, method, methodArgs) -> null);
     private static int TIMEOUT_SECONDS = 15;
+    protected CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     boolean isLoadingDepictions;
     String query;
     RecentSearchesDao recentSearchesDao;
@@ -41,6 +42,7 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     JsonKvStore basicKvStore;
     private SearchDepictionsFragmentContract.View view = DUMMY;
     private List<DepictedItem> queryList = new ArrayList<>();
+    private int mediaSize = 0;
 
     @Inject
     public SearchDepictionsFragmentPresenter(@Named("default_preferences") JsonKvStore basicKvStore, MediaWikiApi mwApi, RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, MediaClient mediaClient) {
@@ -164,19 +166,19 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
             view.initErrorView();
         } else {
             view.onSuccess(mediaList);
-            for (DepictedItem depictedItem : mediaList) {
-                addThumbnailToDepiction(depictedItem.getEntityId());
-            }
         }
     }
 
-    private void addThumbnailToDepiction(String entityId) {
-        compositeDisposable.add(depictsClient.getP18ForItem(entityId)
+    @Override
+    public void addThumbnailToDepiction(String entityId , int position, ImageView imageView) {
+         compositeDisposable.add(depictsClient.getP18ForItem(entityId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(subscriber -> {
                     Timber.e("line155" + subscriber);
+                    if (subscriber != null)
+                    view.setImageView(subscriber, imageView);
                 }));
     }
 

@@ -15,7 +15,7 @@
 # unnecessarily. When castParam() is needed, it's not stripped. e.g.:
 #
 #  @OnItemSelected(value = R.id.history_entry_list)
-#  void foo(ListView bar) {
+#  void showImageWithItem(ListView bar) {
 #      L.d("baz");
 #  }
 

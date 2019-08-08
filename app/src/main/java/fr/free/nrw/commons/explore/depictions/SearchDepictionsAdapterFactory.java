@@ -14,9 +14,9 @@ import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
  */
 
 public class SearchDepictionsAdapterFactory {
-    private final SearchDepictionsRenderer.DepictsClickedListener listener;
+    private final SearchDepictionsRenderer.DepictCallback listener;
 
-    public SearchDepictionsAdapterFactory(SearchDepictionsRenderer.DepictsClickedListener listener) {
+    public SearchDepictionsAdapterFactory(SearchDepictionsRenderer.DepictCallback listener) {
         this.listener = listener;
     }
 

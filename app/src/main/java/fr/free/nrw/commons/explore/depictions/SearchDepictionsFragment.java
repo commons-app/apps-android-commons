@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import timber.log.Timber;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -46,14 +50,20 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     @BindView(R.id.imagesNotFound)
     TextView depictionNotFound;
     @BindView(R.id.bottomProgressBar)
-    ProgressBar bottomProgressBar;
+    ProgressBar bottomProgressBar; int i=0;
     @Inject
     SearchDepictionsFragmentPresenter presenter;
-    private final SearchDepictionsAdapterFactory adapterFactory = new SearchDepictionsAdapterFactory(item -> {
-        // Called on Click of a individual depicted Item
-        // Open Depiction Details activity
-        DepictedImagesActivity.startYourself(getContext(), item);
-        presenter.saveQuery();
+    private final SearchDepictionsAdapterFactory adapterFactory = new SearchDepictionsAdapterFactory(new SearchDepictionsRenderer.DepictCallback() {
+        @Override
+        public void depictsClicked(DepictedItem item) {
+            DepictedImagesActivity.startYourself(getContext(), item);
+            presenter.saveQuery();
+        }
+
+        @Override
+        public void showImageWithItem(String entityId, int position, ImageView imageView) {
+           presenter.addThumbnailToDepiction(entityId, position, imageView);
+        }
     });
     private RVRendererAdapter<DepictedItem> depictionsAdapter;
 
@@ -150,5 +160,25 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void showSnackbar() {
         ViewUtil.showShortSnackbar(depictionsRecyclerView, R.string.error_loading_depictions);
+    }
+
+    @Override
+    public RVRendererAdapter<DepictedItem> getAdapter() {
+        return depictionsAdapter;
+    }
+
+    @Override
+    public void setImageView(String url, ImageView imageView) {
+        Picasso.with(getActivity()).load(url).into(imageView, new Callback() {
+            @Override
+            public void onSuccess() {
+                Timber.e("success");
+            }
+
+            @Override
+            public void onError() {
+                imageView.setVisibility(View.GONE);
+            }
+        });
     }
 }

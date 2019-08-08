@@ -26,6 +26,6 @@ public interface DepictsInterface {
     @GET("/w/api.php?action=wbsearchentities&format=json&type=item&uselang=en")
     Observable<DepictSearchResponse> searchForDepicts(@Query("search") String query, @Query("limit") String limit, @Query("language") String language, @Query("uselang") String uselang, @Query("continue") String offset);
 
-    @GET("/w/api.php?action=wbgetclaims&entity=Q528943&property=P18")
-    Observable<JsonObject> getLabelForEntity();
+    @GET("/w/api.php?action=wbgetclaims&format=json&property=P18")
+    Observable<JsonObject> getLabelForEntity(@Query("entity") String entityId);
 }

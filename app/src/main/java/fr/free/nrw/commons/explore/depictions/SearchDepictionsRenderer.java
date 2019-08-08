@@ -7,14 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pedrogomez.renderers.Renderer;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
-import fr.free.nrw.commons.utils.ImageUtils;
 
 /**
  * Renderer for DepictedItem
@@ -31,9 +28,11 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
     @BindView(R.id.depicts_image)
     ImageView imageView;
 
-    private final DepictsClickedListener listener;
+    private DepictCallback listener;
 
-    public SearchDepictionsRenderer(DepictsClickedListener listener) {
+    int size = 0;
+
+    public SearchDepictionsRenderer(DepictCallback listener) {
         this.listener = listener;
     }
 
@@ -62,22 +61,12 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
         DepictedItem item = getContent();
         tvDepictionLabel.setText(item.getDepictsLabel());
         tvDepictionDesc.setText(item.getDescription());
-        if (!item.getImageUrl().isEmpty()) {
-            Picasso.with(getContext()).load(item.getImageUrl()).into(imageView, new Callback() {
-                @Override
-                public void onSuccess() {
-
-                }
-
-                @Override
-                public void onError() {
-                    imageView.setVisibility(View.GONE);
-                }
-            });
-        } else imageView.setVisibility(View.GONE);
+        listener.showImageWithItem(item.getImageUrl(), size++, imageView);
     }
 
-    public interface DepictsClickedListener {
+    public interface DepictCallback {
         void depictsClicked(DepictedItem item);
+
+        void showImageWithItem(String entityId, int position, ImageView imageView);
     }
 }
