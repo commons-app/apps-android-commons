@@ -105,7 +105,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     private Place place;
     private List<UploadableFile> uploadableFiles= Collections.emptyList();
     private int currentSelectedPosition=0;
-    private boolean mediaDeleteHandled = false;
+    private boolean mediaDeleteHandled = false; //this flag is used to avoid image delete loop
 
     @SuppressLint("CheckResult")
     @Override
@@ -263,24 +263,27 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     public void onUploadMediaDeleted(int index) {
         fragments.remove(index);//Remove the corresponding fragment
         uploadableFiles.remove(index);//Remove the files from the list
-        if (fragments.size()<=MAX_NO_OF_IMAGES+2){
-            UploadMediaDetailFragment.setTooManyImages(false);
-            tvErrorIcon.setVisibility(View.GONE);
-        }
+
         if(mediaDeleteHandled){
             mediaDeleteHandled = false;
         }else{
             thumbnailsAdapter.notifyItemRemoved(index); //Notify the thumbnails adapter
             mediaDeleteHandled = true;
         }
-        int currentIndex = vpUpload.getCurrentItem();
+
+        if (fragments.size()<=MAX_NO_OF_IMAGES+2){                           //if number of images is less than or equal
+            UploadMediaDetailFragment.setTooManyImages(false);               //to max no of images allowed hide error icon
+             tvErrorIcon.setVisibility(View.GONE);                           //and set too nay images flag to false.
+        }
+
         uploadImagesAdapter.notifyDataSetChanged(); //Notify the ViewPager
 
-        if(currentIndex == index){
-            if(currentIndex>=fragments.size() - 2){
-                currentIndex--;
-            }
-            vpUpload.setCurrentItem(currentIndex);
+        if(currentSelectedPosition == index || currentSelectedPosition == uploadableFiles.size()){ //if the current viewing image is deleted
+            if(currentSelectedPosition>=uploadableFiles.size()){                                   //or any image is deleted while viewing last
+                currentSelectedPosition--;                                                         //image the the current selected position should
+            }                                                                                      //be decremented.
+            vpUpload.setCurrentItem(currentSelectedPosition,true);
+            thumbnailsAdapter.notifyDataSetChanged();                         //this line is needed to set alpha to 1.0 of current thumbnail
         }
     }
 
