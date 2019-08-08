@@ -8,6 +8,7 @@ public class DepictedItem {
     private String imageUrl;
     private boolean selected;
     private String entityId;
+    private int position;
 
     public DepictedItem(String depictsLabel, String description, String imageUrl, boolean selected, String entityId) {
         this.depictsLabel = depictsLabel;
@@ -53,6 +54,14 @@ public class DepictedItem {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     @Override

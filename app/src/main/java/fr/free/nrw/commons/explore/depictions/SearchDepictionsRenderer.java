@@ -1,15 +1,15 @@
 package fr.free.nrw.commons.explore.depictions;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.pedrogomez.renderers.Renderer;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.pedrogomez.renderers.Renderer;
+import com.squareup.picasso.Picasso;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 
@@ -61,12 +61,17 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
         DepictedItem item = getContent();
         tvDepictionLabel.setText(item.getDepictsLabel());
         tvDepictionDesc.setText(item.getDescription());
-        listener.showImageWithItem(item.getImageUrl(), size++, imageView);
+
+        if (!TextUtils.isEmpty(item.getImageUrl())) {
+            Picasso.with(imageView.getContext()).load(item.getImageUrl()).into(imageView);
+        }else{
+            listener.fetchThumbnailUrlForEntity(item.getEntityId(),item.getPosition());
+        }
     }
 
     public interface DepictCallback {
         void depictsClicked(DepictedItem item);
 
-        void showImageWithItem(String entityId, int position, ImageView imageView);
+        void fetchThumbnailUrlForEntity(String entityId,int position);
     }
 }
