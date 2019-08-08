@@ -49,6 +49,19 @@
             android:textStyle="bold"
             tools:text="4 Uploads"
             />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/tv_err_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_toEndOf="@id/tv_top_card_title"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            app:srcCompat="@drawable/ic_error_red_24dp"
+            android:background="@color/white"
+            android:alpha="0.9"
+            android:visibility="gone"/>
+
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/ib_toggle_top_card"
             android:layout_width="24dp"

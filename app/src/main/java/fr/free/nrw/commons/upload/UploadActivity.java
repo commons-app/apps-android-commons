@@ -86,6 +86,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     @BindView(R.id.vp_upload)
     ViewPager vpUpload;
 
+    @BindView(R.id.tv_err_icon)
+    ImageButton tvErrorIcon;
+
     private boolean isTitleExpanded=true;
     public final static int MAX_NO_OF_IMAGES = 5;
 
@@ -262,6 +265,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         uploadableFiles.remove(index);//Remove the files from the list
         if (fragments.size()<=MAX_NO_OF_IMAGES+2){
             UploadMediaDetailFragment.setTooManyImages(false);
+            tvErrorIcon.setVisibility(View.GONE);
         }
         if(mediaDeleteHandled){
             mediaDeleteHandled = false;
@@ -320,6 +324,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
                 thumbnailsAdapter.setUploadableFiles(uploadableFiles);
                 if(uploadableFiles.size()>MAX_NO_OF_IMAGES){
                     UploadMediaDetailFragment.setTooManyImages(true);
+                    tvErrorIcon.setVisibility(View.VISIBLE);
                 }
             } else {
                 llContainerTopCard.setVisibility(View.GONE);
