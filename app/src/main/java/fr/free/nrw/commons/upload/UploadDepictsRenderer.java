@@ -1,20 +1,34 @@
 package fr.free.nrw.commons.upload;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
-import fr.free.nrw.commons.upload.structure.depicts.DepictsClickedListener;
+import fr.free.nrw.commons.upload.structure.depicts.UploadDepictsCallback;
+import timber.log.Timber;
 
 /**
  * Depicts Renderer for setting up inflating layout,
@@ -22,14 +36,16 @@ import fr.free.nrw.commons.upload.structure.depicts.DepictsClickedListener;
  */
 
 public class UploadDepictsRenderer extends Renderer<DepictedItem> {
-    private final DepictsClickedListener listener;
+    private final UploadDepictsCallback listener;
     @BindView(R.id.depict_checkbox)
     CheckBox checkedView;
     @BindView(R.id.depicts_label)
     TextView depictsLabel;
     @BindView(R.id.description) TextView description;
+    @BindView(R.id.depicted_image)
+    ImageView imageView;
 
-    public UploadDepictsRenderer(DepictsClickedListener listener) {
+    public UploadDepictsRenderer(UploadDepictsCallback listener) {
         this.listener = listener;
     }
 
@@ -69,5 +85,42 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
         checkedView.setChecked(item.isSelected());
         depictsLabel.setText(item.getDepictsLabel());
         description.setText(item.getDescription());
+        if (!TextUtils.isEmpty(item.getImageUrl())) {
+            if (!item.getImageUrl().equals(getContext().getString(R.string.depictions_image_not_found)))
+                setImageView(Uri.parse(item.getImageUrl()), imageView);
+        }else{
+            listener.fetchThumbnailUrlForEntity(item.getEntityId(),item.getPosition());
+        }
+    }
+
+    private void setImageView(Uri imageUrl, ImageView imageView) {
+        ImageRequest imageRequest = ImageRequestBuilder
+                .newBuilderWithSource(imageUrl)
+                .setAutoRotateEnabled(true)
+                .build();
+
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        final DataSource<CloseableReference<CloseableImage>>
+                dataSource = imagePipeline.fetchDecodedImage(imageRequest, getContext());
+
+        dataSource.subscribe(new BaseBitmapDataSubscriber() {
+
+            @Override
+            public void onNewResultImpl(@Nullable Bitmap bitmap) {
+                if (dataSource.isFinished() && bitmap != null) {
+                    Timber.d("Bitmap loaded from url %s", imageUrl.toString());
+                    imageView.setImageBitmap(Bitmap.createBitmap(bitmap));
+                    dataSource.close();
+                }
+            }
+
+            @Override
+            public void onFailureImpl(DataSource dataSource) {
+                Timber.d("Error getting bitmap from image url %s", imageUrl.toString());
+                if (dataSource != null) {
+                    dataSource.close();
+                }
+            }
+        }, CallerThreadExecutor.getInstance());
     }
 }

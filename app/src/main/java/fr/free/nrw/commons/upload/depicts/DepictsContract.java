@@ -24,6 +24,8 @@ public interface DepictsContract {
         void showError(Boolean value);
 
         void setDepictsList(List<DepictedItem> depictedItemList);
+
+        void onImageUrlFetched(String response, int position);
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -35,5 +37,7 @@ public interface DepictsContract {
         void searchForDepictions(String query);
 
         void verifyDepictions();
+
+        void fetchThumbnailForEntityId(String entityId, int position);
     }
 }

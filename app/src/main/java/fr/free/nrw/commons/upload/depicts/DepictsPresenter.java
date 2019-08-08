@@ -4,19 +4,26 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 import android.util.Log;
+
+import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.repository.UploadRepository;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 @Singleton
@@ -33,15 +40,18 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
     private final Scheduler mainThreadScheduler;
     private DepictsContract.View view = DUMMY;
     private UploadRepository repository;
+    private DepictsClient depictsClient;
+    private static int TIMEOUT_SECONDS = 15;
 
     private CompositeDisposable compositeDisposable;
 
     @Inject
     public DepictsPresenter(UploadRepository uploadRepository, @Named(IO_THREAD) Scheduler ioScheduler,
-                            @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
+                            @Named(MAIN_THREAD) Scheduler mainThreadScheduler, DepictsClient depictsClient) {
         this.repository = uploadRepository;
         this.ioScheduler = ioScheduler;
         this.mainThreadScheduler = mainThreadScheduler;
+        this.depictsClient = depictsClient;
         compositeDisposable = new CompositeDisposable();
     }
 
@@ -129,6 +139,18 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
         } else {
             view.noDepictionSelected();
         }
+    }
+
+    @Override
+    public void fetchThumbnailForEntityId(String entityId, int position) {
+        compositeDisposable.add(depictsClient.getP18ForItem(entityId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .subscribe(response -> {
+                    Timber.e("line155" + response);
+                    view.onImageUrlFetched(response,position);
+                }));
     }
 
     /**

@@ -1,19 +1,14 @@
 package fr.free.nrw.commons
 
-import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
 import org.junit.Rule
 import org.junit.runner.RunWith
-import android.Manifest
 import android.net.Uri
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.intent.Intents
-import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
 import fr.free.nrw.commons.upload.UploadActivity
-import fr.free.nrw.commons.upload.depicts.DepictsFragment
 import org.hamcrest.Matchers
 import org.hamcrest.core.AllOf
 import org.junit.Test

@@ -8,16 +8,16 @@ import java.util.Collections;
 import java.util.List;
 
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
-import fr.free.nrw.commons.upload.structure.depicts.DepictsClickedListener;
+import fr.free.nrw.commons.upload.structure.depicts.UploadDepictsCallback;
 
 /**
  * Adapter Factory for DepictsClicked Listener
  */
 
 public class UploadDepictsAdapterFactory {
-    private final DepictsClickedListener listener;
+    private final UploadDepictsCallback listener;
 
-    public UploadDepictsAdapterFactory(DepictsClickedListener listener) {
+    public UploadDepictsAdapterFactory(UploadDepictsCallback listener) {
         this.listener = listener;
     }
 

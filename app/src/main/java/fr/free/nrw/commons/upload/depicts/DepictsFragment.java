@@ -34,13 +34,13 @@ import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadDepictsAdapterFactory;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
-import fr.free.nrw.commons.upload.structure.depicts.DepictsClickedListener;
+import fr.free.nrw.commons.upload.structure.depicts.UploadDepictsCallback;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
-public class DepictsFragment extends UploadBaseFragment implements DepictsContract.View, DepictsClickedListener {
+public class DepictsFragment extends UploadBaseFragment implements DepictsContract.View, UploadDepictsCallback {
 
     @BindView(R.id.depicts_title)
     TextView depictsTitle;
@@ -139,6 +139,12 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         }
     }
 
+    @Override
+    public void onImageUrlFetched(String response, int position) {
+        adapter.getItem(position).setImageUrl(response);
+        adapter.notifyItemChanged(position);
+    }
+
     @OnClick(R.id.depicts_next)
     public void onNextButtonClicked() {
         presenter.verifyDepictions();
@@ -152,6 +158,11 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @Override
     public void depictsClicked(DepictedItem item) {
         presenter.onDepictItemClicked(item);
+    }
+
+    @Override
+    public void fetchThumbnailUrlForEntity(String entityId, int position) {
+        presenter.fetchThumbnailForEntityId(entityId,position);
     }
 
     /**

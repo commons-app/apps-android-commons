@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pedrogomez.renderers.Renderer;
@@ -16,12 +15,12 @@ import fr.free.nrw.commons.R;
 public class DepictionRenderer extends Renderer<DepictedItem> {
     @BindView(R.id.depict_checkbox)
     CheckedTextView checkedView;
-    private final DepictsClickedListener listener;
+    private final UploadDepictsCallback listener;
     @BindView(R.id.depicts_label)
     TextView depictsLabel;
     @BindView(R.id.description) TextView description;
 
-    public DepictionRenderer(DepictsClickedListener listener) {
+    public DepictionRenderer(UploadDepictsCallback listener) {
         this.listener = listener;
     }
 
