@@ -166,7 +166,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onImageUrlFetched(String response, int position) {
-        depictionsAdapter.getItem(position).setImageUrl(response);
+         depictionsAdapter.getItem(position).setImageUrl(response);
         depictionsAdapter.notifyItemChanged(position);
     }
 }

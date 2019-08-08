@@ -86,7 +86,7 @@ public class DepictsClient {
                     }
                     if (!name.isEmpty()){
                         return getImageUrl(name);
-                    } else return null;
+                    } else return "No Image for Depiction";
                 })
                 .singleOrError();
     }

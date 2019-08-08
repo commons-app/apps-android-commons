@@ -176,7 +176,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(response -> {
                     Timber.e("line155" + response);
-                    if (response != null)
                     view.onImageUrlFetched(response,position);
                 }));
     }
