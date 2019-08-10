@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.explore.depictions;
 
-import android.widget.ImageView;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +41,7 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     JsonKvStore basicKvStore;
     private SearchDepictionsFragmentContract.View view = DUMMY;
     private List<DepictedItem> queryList = new ArrayList<>();
+    int offset=0;
 
     @Inject
     public SearchDepictionsFragmentPresenter(@Named("default_preferences") JsonKvStore basicKvStore, MediaWikiApi mwApi, RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, MediaClient mediaClient) {
@@ -63,52 +63,23 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     }
 
     /**
-     * Adds 25 more results to existing search results
-     */
-    @Override
-    public void addDepictionsToList() {
-        if (isLoadingDepictions) return;
-        isLoadingDepictions = true;
-        view.loadingDepictions();
-        compositeDisposable.add(depictsClient.searchForDepictions(query, 25, queryList.size())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .collect(ArrayList<DepictedItem>::new, ArrayList::add)
-                .subscribe(this::handlePaginationSuccess, this::handleError));
-    }
-
-    /**
      * Called when user selects "Items" from Search Activity
      * to load the list of depictions from API
      *
      * @param query string searched in the Explore Activity
      */
     @Override
-    public void updateDepictionList(String query) {
+    public void updateDepictionList(String query,int pageSize) {
         this.query = query;
-        queryList.clear();
-        view.clearAdapter();
         view.loadingDepictions();
         saveQuery();
-        compositeDisposable.add(depictsClient.searchForDepictions(query, 25, queryList.size())
+        compositeDisposable.add(depictsClient.searchForDepictions(query, 25, offset)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .doOnSubscribe(disposable -> saveQuery())
                 .collect(ArrayList<DepictedItem>::new, ArrayList::add)
                 .subscribe(this::handleSuccess, this::handleError));
-    }
-
-    /**
-     * Handles the success scenario
-     * it initializes the recycler view by adding items to the adapter
-     */
-
-    private void handlePaginationSuccess(List<DepictedItem> mediaList) {
-        queryList.addAll(mediaList);
-        isLoadingDepictions = false;
-        view.onSuccess(mediaList);
     }
 
     /**
@@ -146,7 +117,10 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     @Override
     public void initializeQuery(String query) {
         this.query = query;
-
+        this.queryList.clear();
+        offset=0;//Reset the offset on query change
+        view.setIsLastPage(false);
+        view.clearAdapter();
     }
 
     @Override
@@ -160,11 +134,16 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
      */
 
     public void handleSuccess(List<DepictedItem> mediaList) {
-        queryList = mediaList;
         if (mediaList == null || mediaList.isEmpty()) {
-            view.initErrorView();
+            if(queryList.isEmpty()){
+                view.initErrorView();
+            }else{
+                view.setIsLastPage(true);
+            }
         } else {
+            this.queryList.addAll(mediaList);
             view.onSuccess(mediaList);
+            offset=queryList.size();
         }
     }
 
