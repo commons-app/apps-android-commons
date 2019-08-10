@@ -77,44 +77,43 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
         DepictedItem item = getContent();
         tvDepictionLabel.setText(item.getDepictsLabel());
         tvDepictionDesc.setText(item.getDescription());
+        imageView.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_wikidata_logo_24dp));
 
         if (!TextUtils.isEmpty(item.getImageUrl())) {
             if (!item.getImageUrl().equals(getContext().getString(R.string.depictions_image_not_found)))
-            setImageView(Uri.parse(item.getImageUrl()), imageView);
+            {
+                ImageRequest imageRequest = ImageRequestBuilder
+                        .newBuilderWithSource(Uri.parse(item.getImageUrl()))
+                        .setAutoRotateEnabled(true)
+                        .build();
+
+                ImagePipeline imagePipeline = Fresco.getImagePipeline();
+                final DataSource<CloseableReference<CloseableImage>>
+                        dataSource = imagePipeline.fetchDecodedImage(imageRequest, getContext());
+
+                dataSource.subscribe(new BaseBitmapDataSubscriber() {
+
+                    @Override
+                    public void onNewResultImpl(@Nullable Bitmap bitmap) {
+                        if (dataSource.isFinished() && bitmap != null) {
+                            Timber.d("Bitmap loaded from url %s", item.getImageUrl());
+                            imageView.setImageBitmap(Bitmap.createBitmap(bitmap));
+                            dataSource.close();
+                        }
+                    }
+
+                    @Override
+                    public void onFailureImpl(DataSource dataSource) {
+                        Timber.d("Error getting bitmap from image url %s", item.getImageUrl());
+                        if (dataSource != null) {
+                            dataSource.close();
+                        }
+                    }
+                }, CallerThreadExecutor.getInstance());
+            }
         }else{
             listener.fetchThumbnailUrlForEntity(item.getEntityId(),item.getPosition());
         }
-    }
-
-    private void setImageView(Uri imageUrl, ImageView imageView) {
-        ImageRequest imageRequest = ImageRequestBuilder
-                .newBuilderWithSource(imageUrl)
-                .setAutoRotateEnabled(true)
-                .build();
-
-        ImagePipeline imagePipeline = Fresco.getImagePipeline();
-        final DataSource<CloseableReference<CloseableImage>>
-                dataSource = imagePipeline.fetchDecodedImage(imageRequest, getContext());
-
-        dataSource.subscribe(new BaseBitmapDataSubscriber() {
-
-            @Override
-            public void onNewResultImpl(@Nullable Bitmap bitmap) {
-                if (dataSource.isFinished() && bitmap != null) {
-                    Timber.d("Bitmap loaded from url %s", imageUrl.toString());
-                    imageView.setImageBitmap(Bitmap.createBitmap(bitmap));
-                    dataSource.close();
-                }
-            }
-
-            @Override
-            public void onFailureImpl(DataSource dataSource) {
-                Timber.d("Error getting bitmap from image url %s", imageUrl.toString());
-                if (dataSource != null) {
-                    dataSource.close();
-                }
-            }
-        }, CallerThreadExecutor.getInstance());
     }
 
     public interface DepictCallback {
