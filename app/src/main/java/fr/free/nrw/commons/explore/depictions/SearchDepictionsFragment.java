@@ -215,5 +215,6 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void setIsLastPage(boolean isLastPage) {
         this.isLastPage=isLastPage;
+        progressBar.setVisibility(GONE);
     }
 }
