@@ -27,13 +27,13 @@ public interface SearchDepictionsFragmentContract {
         RVRendererAdapter<DepictedItem> getAdapter();
 
         void onImageUrlFetched(String response, int position);
+
+        void setIsLastPage(boolean isLastPage);
     }
 
     interface UserActionListener extends BasePresenter<View> {
 
-        void addDepictionsToList();
-
-        void updateDepictionList(String query);
+        void updateDepictionList(String query, int pageSize);
 
         void saveQuery();
 
