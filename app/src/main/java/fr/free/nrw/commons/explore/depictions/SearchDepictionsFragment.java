@@ -1,37 +1,34 @@
 package fr.free.nrw.commons.explore.depictions;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.depictions.DepictedImagesActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import javax.inject.Inject;
 
 /**
  * Display depictions in search fragment
@@ -47,6 +44,10 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     TextView depictionNotFound;
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar; int i=0;
+    RecyclerView.LayoutManager layoutManager;
+    private boolean hasMoreImages = true;
+    private boolean isLoading = true;
+    private int PAGE_SIZE = 25;
     @Inject
     SearchDepictionsFragmentPresenter presenter;
     private final SearchDepictionsAdapterFactory adapterFactory = new SearchDepictionsAdapterFactory(new SearchDepictionsRenderer.DepictCallback() {
@@ -63,16 +64,19 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
 
     });
     private RVRendererAdapter<DepictedItem> depictionsAdapter;
+    private boolean isLastPage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, rootView);
-        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            depictionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        if (getActivity().getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_PORTRAIT) {
+            layoutManager = new LinearLayoutManager(getContext());
         } else {
-            depictionsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            layoutManager = new GridLayoutManager(getContext(), 2);
         }
+        depictionsRecyclerView.setLayoutManager(layoutManager);
         ArrayList<DepictedItem> items = new ArrayList<>();
         depictionsAdapter = adapterFactory.create(items);
         depictionsRecyclerView.setAdapter(depictionsAdapter);
@@ -80,13 +84,38 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                // check if end of recycler view is reached, if yes then add more results to existing results
-                if (!recyclerView.canScrollVertically(1)) {
-                    presenter.addDepictionsToList();
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition=0;
+                if(layoutManager instanceof GridLayoutManager){
+                    firstVisibleItemPosition=((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
+                }else{
+                    firstVisibleItemPosition=((LinearLayoutManager)layoutManager).findFirstVisibleItemPosition();
+                }
+
+                if (!isLoading && !isLastPage) {
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                            && firstVisibleItemPosition >= 0
+                            && totalItemCount >= PAGE_SIZE) {
+                        loadMoreItems();
+                    }
                 }
             }
         });
         return rootView;
+    }
+
+    /**
+     * Fetch PAGE_SIZE number of items
+     */
+    private void loadMoreItems() {
+        presenter.updateDepictionList(presenter.getQuery(),PAGE_SIZE);
     }
 
     @Override
@@ -108,7 +137,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
             handleNoInternet();
             return;
         }
-        presenter.updateDepictionList(query);
+        loadMoreItems();
     }
 
     /**
@@ -116,6 +145,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
      */
     @Override
     public void initErrorView() {
+        hasMoreImages = false;
         progressBar.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
         depictionNotFound.setVisibility(VISIBLE);
@@ -135,11 +165,18 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onSuccess(List<DepictedItem> mediaList) {
+        isLoading = false;
+        hasMoreImages = false;
         progressBar.setVisibility(View.GONE);
         depictionNotFound.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
+        int itemCount=layoutManager.getItemCount();
         depictionsAdapter.addAll(mediaList);
-        depictionsAdapter.notifyDataSetChanged();
+        if(itemCount!=0) {
+            depictionsAdapter.notifyItemRangeInserted(itemCount, mediaList.size()-1);
+        }else{
+            depictionsAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -168,5 +205,16 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     public void onImageUrlFetched(String response, int position) {
          depictionsAdapter.getItem(position).setImageUrl(response);
         depictionsAdapter.notifyItemChanged(position);
+    }
+
+    /**
+     * Inform the view that there are no more items to be loaded for this search query
+     * or reset the isLastPage for the current query
+     * @param isLastPage
+     */
+    @Override
+    public void setIsLastPage(boolean isLastPage) {
+        this.isLastPage=isLastPage;
+        progressBar.setVisibility(GONE);
     }
 }
