@@ -1,19 +1,21 @@
-package fr.free.nrw.commons.depictions;
+package fr.free.nrw.commons.depictions.Media;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentManager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 
@@ -21,10 +23,11 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.depictions.DepictionDetailsActivity;
+import fr.free.nrw.commons.depictions.GridViewAdapter;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -36,11 +39,9 @@ import static android.view.View.VISIBLE;
  * Actvity for shhowing image list after selected an item from SearchActivity In Explore
  */
 
-public class DepictedImagesActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener, MediaDetailPagerFragment.MediaDetailProvider,
-        AdapterView.OnItemClickListener, DepictedImagesContract.View {
+public class DepictedImagesFragment extends DaggerFragment implements DepictedImagesContract.View {
 
-    @BindView(R.id.mediaContainer)
-    FrameLayout mediaContainer;
+
     @BindView(R.id.statusMessage)
     TextView statusTextView;
     @BindView(R.id.loadingImagesProgressBar)
@@ -52,67 +53,45 @@ public class DepictedImagesActivity extends NavigationBaseActivity implements Fr
     @Inject
     DepictedImagesPresenter presenter;
     private GridViewAdapter gridAdapter;
-    private FragmentManager supportFragmentManager;
-    private MediaDetailPagerFragment mediaDetails;
     private String entityId = null;
-    private boolean hasMoreImages = true;
+    private boolean isLastPage;
     private boolean isLoading = true;
     private int mediaSize = 0;
 
-    /**
-     * Consumers should be simply using this method to use this activity.
-     *
-     * @param context      A Context of the application package implementing this class.
-     * @param depictedItem Name of the depicts for displaying its details
-     */
-    public static void startYourself(Context context, DepictedItem depictedItem) {
-        Intent intent = new Intent(context, DepictedImagesActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra("depictsName", depictedItem.getDepictsLabel());
-        intent.putExtra("entityId", depictedItem.getEntityId());
-        context.startActivity(intent);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_depict_image, container, false);
+        ButterKnife.bind(this, v);
+        presenter.onAttachView(this);
+        return v;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_depict_detail);
-        ButterKnife.bind(this);
-        gridView.setOnItemClickListener(this);
-        supportFragmentManager = getSupportFragmentManager();
-        supportFragmentManager.addOnBackStackChangedListener(this);
-        setPageTitle();
-        initDrawer();
-        forceInitBackButton();
-        presenter.onAttachView(this);
-        initList();
-        setScrollListener();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
+        initViews();
+    }
+
+    /**
+     * Initializes the UI elements for the fragment
+     * Setup the grid view to and scroll listener for it
+     */
+    private void initViews() {
+        String depictsName = getArguments().getString("depictsName");
+        entityId = getArguments().getString("entityId");
+        if (getArguments() != null && depictsName != null) {
+            initList();
+            setScrollListener();
+        }
     }
 
     private void initList() {
         presenter.initList(entityId);
-        if (!NetworkUtils.isInternetConnectionEstablished(this)) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
         } else presenter.initList(entityId);
-    }
-
-    /**
-     * Gets the passed depictsName from the intents and displays it as the page title
-     */
-    private void setPageTitle() {
-        if (getIntent() != null && getIntent().getStringExtra("depictsName") != null) {
-            setTitle(getIntent().getStringExtra("depictsName"));
-            entityId = getIntent().getStringExtra("entityId");
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (supportFragmentManager.getBackStackEntryCount() == 1) {
-            // back to search so show search toolbar and hide navigation toolbar
-            mediaContainer.setVisibility(View.GONE);
-        }
-        super.onBackPressed();
     }
 
     /**
@@ -156,16 +135,15 @@ public class DepictedImagesActivity extends NavigationBaseActivity implements Fr
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (hasMoreImages && !isLoading && (firstVisibleItem + visibleItemCount + 1 >= totalItemCount)) {
+                if (!isLastPage && !isLoading && (firstVisibleItem + visibleItemCount >= totalItemCount)) {
                     isLoading = true;
-                    if (!NetworkUtils.isInternetConnectionEstablished(getBaseContext())) {
+                    if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
                         handleNoInternet();
-                        return;
                     } else {
                         presenter.fetchMoreImages();
                     }
                 }
-                if (!hasMoreImages) {
+                if (isLastPage) {
                     progressBar.setVisibility(GONE);
                 }
             }
@@ -183,36 +161,6 @@ public class DepictedImagesActivity extends NavigationBaseActivity implements Fr
     @Override
     public void showSnackBar() {
         ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
-    }
-
-
-    @Override
-    public Media getMediaAtPosition(int i) {
-        if (gridAdapter == null) {
-            // not yet ready to return data
-            return null;
-        } else {
-            return gridAdapter.getItem(i);
-        }
-    }
-
-    @Override
-    public int getTotalMediaCount() {
-        if (gridAdapter == null) {
-            return 0;
-        }
-        return gridAdapter.getCount();
-    }
-
-    /**
-     * This method is called on success of API call for Images inside an item.
-     * The viewpager will notified that number of items have changed.
-     */
-    @Override
-    public void viewPagerNotifyDataSetChanged() {
-        if (mediaDetails != null) {
-            mediaDetails.notifyDataSetChanged();
-        }
     }
 
     @Override
@@ -242,7 +190,7 @@ public class DepictedImagesActivity extends NavigationBaseActivity implements Fr
      */
     @Override
     public void setAdapter(List<Media> mediaList) {
-        gridAdapter = new fr.free.nrw.commons.depictions.GridViewAdapter(this, R.layout.layout_depict_image, mediaList);
+        gridAdapter = new fr.free.nrw.commons.depictions.GridViewAdapter(getContext(), R.layout.layout_depict_image, mediaList);
         gridView.setAdapter(gridAdapter);
     }
 
@@ -261,31 +209,16 @@ public class DepictedImagesActivity extends NavigationBaseActivity implements Fr
     }
 
     /**
-     * On clicking any image from this list it should show the mediaDetails
+     * Inform the view that there are no more items to be loaded for this search query
+     * or reset the isLastPage for the current query
+     * @param isLastPage
      */
-
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mediaContainer.setVisibility(View.VISIBLE);
-        if (mediaDetails == null || !mediaDetails.isVisible()) {
-            mediaDetails = new MediaDetailPagerFragment(false, true);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.mediaContainer, mediaDetails)
-                    .addToBackStack(null)
-                    .commit();
-
-        }
-        mediaDetails.showImage(position);
-        forceInitBackButton();
+    public void setIsLastPage(boolean isLastPage) {
+        this.isLastPage=isLastPage;
+        progressBar.setVisibility(GONE);
     }
 
-    @Override
-    public void onBackStackChanged() {
-        if (supportFragmentManager.getBackStackEntryCount() == 0) {
-            initDrawer();
-        }
-    }
 
     /**
      * Handles the success scenario
@@ -295,24 +228,17 @@ public class DepictedImagesActivity extends NavigationBaseActivity implements Fr
      */
     @Override
     public void handleSuccess(List<Media> collection) {
-        if (collection == null || collection.isEmpty()) {
-            initErrorView();
-            hasMoreImages = false;
-            return;
-        }
-
-        presenter.addItemsToQueryList(collection);
+       presenter.addItemsToQueryList(collection);
         if (gridAdapter == null) {
             setAdapter(collection);
         } else {
             if (gridAdapter.containsAll(collection)) {
-                hasMoreImages = false;
                 return;
             }
             gridAdapter.addItems(collection);
 
             try {
-                viewPagerNotifyDataSetChanged();
+                ((DepictionDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
             } catch (Exception e) {
                 e.printStackTrace();
             }

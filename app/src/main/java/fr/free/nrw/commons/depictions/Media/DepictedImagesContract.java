@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.depictions;
+package fr.free.nrw.commons.depictions.Media;
 
 import android.widget.ListAdapter;
 
@@ -21,7 +21,7 @@ public interface DepictedImagesContract {
 
         void showSnackBar();
 
-        void viewPagerNotifyDataSetChanged();
+        void setIsLastPage(boolean isLastPage);
 
         void progressBarVisible(Boolean value);
 

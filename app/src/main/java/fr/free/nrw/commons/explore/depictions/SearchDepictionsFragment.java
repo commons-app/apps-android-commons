@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -20,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.depictions.DepictedImagesActivity;
+import fr.free.nrw.commons.depictions.DepictionDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -43,7 +42,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     @BindView(R.id.imagesNotFound)
     TextView depictionNotFound;
     @BindView(R.id.bottomProgressBar)
-    ProgressBar bottomProgressBar; int i=0;
+    ProgressBar bottomProgressBar;
     RecyclerView.LayoutManager layoutManager;
     private boolean hasMoreImages = true;
     private boolean isLoading = true;
@@ -53,7 +52,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     private final SearchDepictionsAdapterFactory adapterFactory = new SearchDepictionsAdapterFactory(new SearchDepictionsRenderer.DepictCallback() {
         @Override
         public void depictsClicked(DepictedItem item) {
-            DepictedImagesActivity.startYourself(getContext(), item);
+            DepictionDetailsActivity.startYourself(getContext(), item);
             presenter.saveQuery();
         }
 

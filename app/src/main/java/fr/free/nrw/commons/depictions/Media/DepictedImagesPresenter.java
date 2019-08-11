@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.depictions;
+package fr.free.nrw.commons.depictions.Media;
 
 import android.annotation.SuppressLint;
 
@@ -62,6 +62,7 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     public void initList(String entityId) {
         view.setLoadingStatus(true);
         view.progressBarVisible(true);
+        view.setIsLastPage(false);
         compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25, 0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -106,7 +107,16 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     }
 
     private void handleSuccess(List<Media> collection) {
-        view.handleSuccess(collection);
+        if (collection == null || collection.isEmpty()) {
+            if (queryList.isEmpty()) {
+                view.initErrorView();
+            } else {
+                view.setIsLastPage(true);
+            }
+        } else {
+            this.queryList.addAll(collection);
+            view.handleSuccess(collection);
+        }
     }
 
     @Override

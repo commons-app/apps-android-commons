@@ -1,17 +1,15 @@
 package fr.free.nrw.commons.search
 
-import android.os.Build
-import android.widget.AdapterView
 import com.nhaarman.mockito_kotlin.verify
 import com.pedrogomez.renderers.RVRendererAdapter
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.depictions.DepictedImagesActivity
+import fr.free.nrw.commons.depictions.DepictionDetailsActivity
+import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.upload.UploadService
 import fr.free.nrw.commons.upload.structure.depicts.DepictedItem
 import io.reactivex.Observable
 import org.junit.Before
@@ -30,7 +28,7 @@ class SearchTest {
     internal var depictsClient: DepictsClient? = null
 
     @Mock
-    internal var depictedImagesActivity: DepictedImagesActivity? = null
+    internal var depictedImagesFragment: DepictedImagesFragment? = null
 
     internal var depictionsAdapter : RVRendererAdapter<DepictedItem>? = null
 
@@ -54,11 +52,11 @@ class SearchTest {
                 depictionsAdapter?.addAll(ArgumentMatchers.anyList<DepictedItem>())?.let { it1 -> assert(it1)
                 }
             }
-            DepictedImagesActivity.startYourself(ArgumentMatchers.any(), depictedItem)
+            DepictionDetailsActivity.startYourself(ArgumentMatchers.any(), depictedItem)
             val mediaDetails : MediaDetailPagerFragment = MediaDetailPagerFragment(false, true)
-            depictedImagesActivity?.onItemClick(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyLong())
+            depictedImagesFragment?.onItemClick(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyLong())
             mediaDetails.showImage(0)
-            val media: Media? = depictedImagesActivity?.getMediaAtPosition(0)
+            val media: Media? = depictedImagesFragment?.getMediaAtPosition(0)
             mediaDetails.downloadMedia(media)
         }
     }

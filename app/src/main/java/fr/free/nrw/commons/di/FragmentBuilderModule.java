@@ -8,6 +8,8 @@ import fr.free.nrw.commons.category.CategoryImagesListFragment;
 import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
+import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment;
+import fr.free.nrw.commons.depictions.SubClass.SubDepictionListFragment;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
@@ -48,6 +50,12 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract CategoryImagesListFragment bindFeaturedImagesListFragment();
+
+    @ContributesAndroidInjector
+    abstract DepictedImagesFragment bindDepictedImagesFragment();
+
+    @ContributesAndroidInjector
+    abstract SubDepictionListFragment bindSubDepictionListFragment();
 
     @ContributesAndroidInjector
     abstract SubCategoryListFragment bindSubCategoryListFragment();
