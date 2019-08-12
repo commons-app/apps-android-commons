@@ -5,6 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,17 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.snackbar.Snackbar;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
@@ -36,9 +34,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -82,25 +78,25 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     @SuppressLint("CheckResult")
     public void removeNotification(Notification notification) {
-        Disposable disposable = Observable.defer((Callable<ObservableSource<Boolean>>)
-                () -> controller.markAsRead(notification))
+        compositeDisposable.add(Observable.fromCallable(() -> controller.markAsRead(notification))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
-                    if (result) {
+                    if (result){
                         notificationList.remove(notification);
                         setAdapter(notificationList);
                         adapter.notifyDataSetChanged();
                         Snackbar snackbar = Snackbar
-                                .make(relativeLayout, "Notification marked as read", Snackbar.LENGTH_LONG);
+                                .make(relativeLayout,"Notification marked as read", Snackbar.LENGTH_LONG);
 
                         snackbar.show();
-                        if (notificationList.size() == 0) {
+                        if (notificationList.size()==0){
                             setEmptyView();
                             relativeLayout.setVisibility(View.GONE);
                             no_notification.setVisibility(View.VISIBLE);
                         }
-                    } else {
+                    }
+                    else {
                         adapter.notifyDataSetChanged();
                         setAdapter(notificationList);
                         Toast.makeText(NotificationActivity.this, "There was some error!", Toast.LENGTH_SHORT).show();
@@ -111,8 +107,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                     throwable.printStackTrace();
                     ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
                     progressBar.setVisibility(View.GONE);
-                });
-        compositeDisposable.add(disposable);
+                }));
     }
 
 
@@ -145,8 +140,11 @@ public class NotificationActivity extends NavigationBaseActivity {
     private void addNotifications(boolean archived) {
         Timber.d("Add notifications");
         if (mNotificationWorkerFragment == null) {
-            progressBar.setVisibility(View.VISIBLE);
-            compositeDisposable.add(controller.getNotifications(archived)
+            compositeDisposable.add(Observable.fromCallable(() -> {
+                progressBar.setVisibility(View.VISIBLE);
+                return controller.getNotifications(archived);
+
+            })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(notificationList -> {

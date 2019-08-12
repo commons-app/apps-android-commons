@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.review
 
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.Observable
@@ -29,7 +28,9 @@ class ReviewHelperTest {
     @Mock
     internal var reviewInterface: ReviewInterface? = null
     @Mock
-    internal var mediaClient: MediaClient? = null
+    internal var okHttpJsonApiClient: OkHttpJsonApiClient? = null
+    @Mock
+    internal var mediaWikiApi: MediaWikiApi? = null
 
     @InjectMocks
     var reviewHelper: ReviewHelper? = null
@@ -64,7 +65,7 @@ class ReviewHelperTest {
 
         val media = mock(Media::class.java)
         `when`(media.filename).thenReturn("File:Test.jpg")
-        `when`(mediaClient?.getMedia(ArgumentMatchers.anyString()))
+        `when`(okHttpJsonApiClient?.getMedia(ArgumentMatchers.anyString(), ArgumentMatchers.anyBoolean()))
                 .thenReturn(Single.just(media))
     }
 
@@ -73,7 +74,7 @@ class ReviewHelperTest {
      */
     @Test
     fun getRandomMedia() {
-        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
+        `when`(mediaWikiApi?.pageExists(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(false))
 
         val randomMedia = reviewHelper?.randomMedia?.blockingGet()
@@ -88,7 +89,7 @@ class ReviewHelperTest {
      */
     @Test(expected = RuntimeException::class)
     fun getRandomMediaWithWithAllMediaNominatedForDeletion() {
-        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
+        `when`(mediaWikiApi?.pageExists(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
         val media = reviewHelper?.randomMedia?.blockingGet()
         assertNull(media)
@@ -100,11 +101,11 @@ class ReviewHelperTest {
      */
     @Test
     fun getRandomMediaWithWithOneMediaNominatedForDeletion() {
-        `when`(mediaClient?.checkPageExistsUsingTitle("Commons:Deletion_requests/File:Test1.jpeg"))
+        `when`(mediaWikiApi?.pageExists("Commons:Deletion_requests/File:Test1.jpeg"))
                 .thenReturn(Single.just(true))
-        `when`(mediaClient?.checkPageExistsUsingTitle("Commons:Deletion_requests/File:Test2.png"))
+        `when`(mediaWikiApi?.pageExists("Commons:Deletion_requests/File:Test2.png"))
                 .thenReturn(Single.just(false))
-        `when`(mediaClient?.checkPageExistsUsingTitle("Commons:Deletion_requests/File:Test3.jpg"))
+        `when`(mediaWikiApi?.pageExists("Commons:Deletion_requests/File:Test3.jpg"))
                 .thenReturn(Single.just(true))
 
         val media = reviewHelper?.randomMedia?.blockingGet()

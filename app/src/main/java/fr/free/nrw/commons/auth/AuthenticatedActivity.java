@@ -12,18 +12,47 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+import static fr.free.nrw.commons.auth.AccountUtil.AUTH_COOKIE;
+
 public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
     @Inject
     protected SessionManager sessionManager;
     @Inject
     MediaWikiApi mediaWikiApi;
+    private String authCookie;
+
+    protected void requestAuthToken() {
+        if (authCookie != null) {
+            onAuthCookieAcquired(authCookie);
+            return;
+        }
+        authCookie = sessionManager.getAuthCookie();
+        if (authCookie != null) {
+            onAuthCookieAcquired(authCookie);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            authCookie = savedInstanceState.getString(AUTH_COOKIE);
+        }
+
         showBlockStatus();
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(AUTH_COOKIE, authCookie);
+    }
+
+    protected abstract void onAuthCookieAcquired(String authCookie);
+
+    protected abstract void onAuthFailure();
 
     /**
      * Makes API call to check if user is blocked from Commons. If the user is blocked, a snackbar

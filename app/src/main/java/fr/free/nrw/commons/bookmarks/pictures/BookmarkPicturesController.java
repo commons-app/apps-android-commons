@@ -10,7 +10,6 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.Bookmark;
-import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -20,14 +19,15 @@ import io.reactivex.functions.Function;
 @Singleton
 public class BookmarkPicturesController {
 
-    private final MediaClient mediaClient;
+    private final OkHttpJsonApiClient okHttpJsonApiClient;
     private final BookmarkPicturesDao bookmarkDao;
 
     private List<Bookmark> currentBookmarks;
 
     @Inject
-    public BookmarkPicturesController(MediaClient mediaClient, BookmarkPicturesDao bookmarkDao) {
-        this.mediaClient = mediaClient;
+    public BookmarkPicturesController(OkHttpJsonApiClient okHttpJsonApiClient,
+                                      BookmarkPicturesDao bookmarkDao) {
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.bookmarkDao = bookmarkDao;
         currentBookmarks = new ArrayList<>();
     }
@@ -47,7 +47,7 @@ public class BookmarkPicturesController {
 
     private Observable<Media> getMediaFromBookmark(Bookmark bookmark) {
         Media dummyMedia = new Media("");
-        return mediaClient.getMedia(bookmark.getMediaName())
+        return okHttpJsonApiClient.getMedia(bookmark.getMediaName(), false)
                 .map(media -> media == null ? dummyMedia : media)
                 .onErrorReturn(throwable -> dummyMedia)
                 .toObservable();

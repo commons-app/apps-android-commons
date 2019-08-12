@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.contributions;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,29 +13,21 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.wikidata.WikidataClient;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Created by root on 01.06.2018.
@@ -58,8 +53,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @Inject @Named("default_preferences") JsonKvStore kvStore;
     @Inject ContributionController controller;
-    @Inject
-    WikidataClient wikidataClient;
 
     private Animation fab_close;
     private Animation fab_open;
@@ -170,7 +163,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     /**
      * Responsible to set progress bar invisible and visible
-     *
      * @param shouldShow True when contributions list should be hidden.
      */
     public void showProgress(boolean shouldShow) {
@@ -178,7 +170,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     public void showNoContributionsUI(boolean shouldShow) {
-        noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
+        noContributionsYet.setVisibility(shouldShow?VISIBLE:GONE);
     }
 
     public void onDataSetChanged() {
