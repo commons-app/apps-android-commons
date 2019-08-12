@@ -20,7 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.SubCategoryListFragment;
 import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment;
 import fr.free.nrw.commons.depictions.SubClass.SubDepictionListFragment;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
@@ -102,9 +101,9 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
         fragmentList.add(depictionImagesListFragment);
         titleList.add("MEDIA");
         fragmentList.add(subDepictionListFragment);
-        titleList.add("SUB-WIKIDATA ITEMS");
+        titleList.add("CHILD ITEMS");
         fragmentList.add(parentDepictionListFragment);
-        titleList.add("PARENT WIKIDATA ITEMS");
+        titleList.add("PARENT ITEMS");
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
 
