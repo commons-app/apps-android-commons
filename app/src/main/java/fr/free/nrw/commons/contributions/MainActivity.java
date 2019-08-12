@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,23 +12,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyFragment;
@@ -38,15 +37,15 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
 
-public class MainActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
 
     @Inject
     SessionManager sessionManager;
@@ -64,6 +63,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
 
     public Intent uploadServiceIntent;
+    public boolean isAuthCookieAcquired = false;
 
     public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
     public static final int CONTRIBUTIONS_TAB_POSITION = 0;
@@ -82,10 +82,10 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
+        requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
 
-        initMain();
 
         if (savedInstanceState != null ) {
             onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
@@ -103,15 +103,16 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         outState.putInt("viewPagerCurrentItem", viewPager.getCurrentItem());
     }
 
-    private void initMain() {
-        //Do not remove this, this triggers the sync service
-        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(),BuildConfig.CONTRIBUTION_AUTHORITY,true);
+    @Override
+    protected void onAuthCookieAcquired(String authCookie) {
+        // Do a sync everytime we get here!
         requestSync(sessionManager.getCurrentAccount(), BuildConfig.CONTRIBUTION_AUTHORITY, new Bundle());
         uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
 
         addTabsAndFragments();
+        isAuthCookieAcquired = true;
         if (contributionsActivityPagerAdapter.getItem(0) != null) {
             ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired(uploadServiceIntent);
         }
@@ -232,8 +233,13 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     }
 
     @Override
+    protected void onAuthFailure() {
+
+    }
+
+    @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         String contributionsFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 0);
         String nearbyFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 1);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -299,7 +305,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
-        compositeDisposable.add(notificationController.getNotifications(false)
+        compositeDisposable.add(Observable.fromCallable(() -> notificationController.getNotifications(false))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::initNotificationViews,

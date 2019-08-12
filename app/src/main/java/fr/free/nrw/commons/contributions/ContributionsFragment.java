@@ -85,8 +85,8 @@ public class ContributionsFragment
 
     private ContributionsListFragment contributionsListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
-    private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
-    static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
+    public static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
+    public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
@@ -257,7 +257,7 @@ public class ContributionsFragment
         operations on first time fragment attached to an activity. Then they will be retained
         until fragment life time ends.
          */
-        if (!isFragmentAttachedBefore) {
+        if (((MainActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
             onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
             isFragmentAttachedBefore = true;
 
@@ -268,7 +268,7 @@ public class ContributionsFragment
      * Replace FrameLayout with ContributionsListFragment, user will see contributions list. Creates
      * new one if null.
      */
-    private void showContributionsListFragment() {
+    public void showContributionsListFragment() {
         // show tabs on contribution list is visible
         ((MainActivity) getActivity()).showTabs();
         // show nearby card view on contributions list is visible
@@ -289,7 +289,7 @@ public class ContributionsFragment
      * Replace FrameLayout with MediaDetailPagerFragment, user will see details of selected media.
      * Creates new one if null.
      */
-    private void showMediaDetailPagerFragment() {
+    public void showMediaDetailPagerFragment() {
         // hide tabs on media detail view is visible
         ((MainActivity)getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
@@ -308,7 +308,7 @@ public class ContributionsFragment
      * Called when onAuthCookieAcquired is called on authenticated parent activity
      * @param uploadServiceIntent
      */
-    void onAuthCookieAcquired(Intent uploadServiceIntent) {
+    public void onAuthCookieAcquired(Intent uploadServiceIntent) {
         // Since we call onAuthCookieAcquired method from onAttach, isAdded is still false. So don't use it
 
         if (getActivity() != null) { // If fragment is attached to parent activity
@@ -324,7 +324,7 @@ public class ContributionsFragment
      * mediaDetailPagerFragment, and preserve previous state in back stack.
      * Called when user selects a contribution.
      */
-    private void showDetail(int i) {
+    public void showDetail(int i) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             mediaDetailPagerFragment = new MediaDetailPagerFragment();
             showMediaDetailPagerFragment();

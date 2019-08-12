@@ -1,11 +1,9 @@
 package fr.free.nrw.commons;
 
-import androidx.core.text.HtmlCompat;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.media.MediaClient;
+import androidx.core.text.HtmlCompat;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Single;
@@ -21,15 +19,12 @@ import timber.log.Timber;
 public class MediaDataExtractor {
     private final MediaWikiApi mediaWikiApi;
     private final OkHttpJsonApiClient okHttpJsonApiClient;
-    private final MediaClient mediaClient;
 
     @Inject
     public MediaDataExtractor(MediaWikiApi mwApi,
-                              OkHttpJsonApiClient okHttpJsonApiClient,
-                              MediaClient mediaClient) {
+                              OkHttpJsonApiClient okHttpJsonApiClient) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
         this.mediaWikiApi = mwApi;
-        this.mediaClient = mediaClient;
     }
 
     /**
@@ -40,7 +35,7 @@ public class MediaDataExtractor {
      */
     public Single<Media> fetchMediaDetails(String filename) {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
-        Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
+        Single<Boolean> pageExistsSingle = mediaWikiApi.pageExists("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
         return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, (media, deletionStatus, discussion) -> {
             media.setDiscussion(discussion);
@@ -57,7 +52,7 @@ public class MediaDataExtractor {
      * @return return data rich Media object
      */
     public Single<Media> getMediaFromFileName(String filename) {
-        return mediaClient.getMedia(filename);
+        return okHttpJsonApiClient.getMedia(filename, false);
     }
 
     /**
