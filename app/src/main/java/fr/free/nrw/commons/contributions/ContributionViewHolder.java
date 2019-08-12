@@ -107,6 +107,13 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    /**
+     * In contributions first we show the title for the image stored in cache,
+     * then we fetch captions associated with the image and replace title on the thumbnail with caption
+     *
+     * @param contribution
+     */
+
     private void fetchAndDisplayCaption(DisplayableContribution contribution) {
         if ((contribution.getState() != Contribution.STATE_COMPLETED)) {
             titleView.setText(contribution.getDisplayTitle());
