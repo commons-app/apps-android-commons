@@ -13,7 +13,6 @@ import java.util.List;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.Bookmark;
-import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Single;
 
@@ -30,7 +29,7 @@ import static org.mockito.Mockito.when;
 public class BookmarkPicturesControllerTest {
 
     @Mock
-    MediaClient mediaClient;
+    OkHttpJsonApiClient okHttpJsonApiClient;
     @Mock
     BookmarkPicturesDao bookmarkDao;
 
@@ -47,7 +46,7 @@ public class BookmarkPicturesControllerTest {
         Media mockMedia = getMockMedia();
         when(bookmarkDao.getAllBookmarks())
                 .thenReturn(getMockBookmarkList());
-        when(mediaClient.getMedia(anyString()))
+        when(okHttpJsonApiClient.getMedia(anyString(), anyBoolean()))
                 .thenReturn(Single.just(mockMedia));
     }
 
@@ -76,9 +75,9 @@ public class BookmarkPicturesControllerTest {
      */
     @Test
     public void loadBookmarkedPicturesForNullMedia() {
-        when(mediaClient.getMedia("File:Test1.jpg"))
+        when(okHttpJsonApiClient.getMedia("File:Test1.jpg", false))
                 .thenReturn(Single.error(new NullPointerException("Error occurred")));
-        when(mediaClient.getMedia("File:Test2.jpg"))
+        when(okHttpJsonApiClient.getMedia("File:Test2.jpg", false))
                 .thenReturn(Single.just(getMockMedia()));
         List<Media> bookmarkedPictures = bookmarkPicturesController.loadBookmarkedPictures().blockingGet();
         assertEquals(1, bookmarkedPictures.size());

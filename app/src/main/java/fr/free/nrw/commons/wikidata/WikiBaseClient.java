@@ -1,32 +1,26 @@
 package fr.free.nrw.commons.wikidata;
 
-import org.wikipedia.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import io.reactivex.Observable;
 
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_WIKI_DATA_CSRF;
-
 @Singleton
 public class WikiBaseClient {
 
     private final WikiBaseInterface wikiBaseInterface;
-    private final CsrfTokenClient csrfTokenClient;
 
     @Inject
-    public WikiBaseClient(WikiBaseInterface wikiBaseInterface, @Named(NAMED_WIKI_DATA_CSRF) CsrfTokenClient csrfTokenClient) {
+    public WikiBaseClient(WikiBaseInterface wikiBaseInterface) {
         this.wikiBaseInterface = wikiBaseInterface;
-        this.csrfTokenClient = csrfTokenClient;
     }
 
-    public Observable<Boolean> postEditEntity(String fileEntityId, String data) {
+    public Observable<Boolean> postEditEntity(String fileEntityId, String data, String editToken) {
         try {
-            return wikiBaseInterface.postEditEntity(fileEntityId, data, csrfTokenClient.getTokenBlocking())
+            return wikiBaseInterface.postEditEntity(fileEntityId, data, editToken)
                     .map(MwQueryResponse::success);
         } catch (Throwable throwable) {
             return Observable.just(false);

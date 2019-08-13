@@ -27,7 +27,6 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -57,7 +56,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private boolean isLoading = true;
     private String categoryName = null;
 
-    @Inject MediaClient mediaClient;
+    @Inject CategoryImageController controller;
     @Inject
     @Named("default_preferences")
     JsonKvStore categoryKvStore;
@@ -117,7 +116,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(mediaClient.getMediaListFromCategory(categoryName)
+        compositeDisposable.add(controller.getCategoryImages(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -223,7 +222,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
 
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(mediaClient.getMediaListFromCategory(categoryName)
+        compositeDisposable.add(controller.getCategoryImages(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
