@@ -2,6 +2,7 @@
 <!-- Authors:
 * Abijeet Patro
 * Aefgh39622
+* Afaz
 * Dude1717
 * Hinaloe
 * Nicolas Raoul
@@ -331,9 +332,9 @@
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
   <string name="menu_set_wallpaper">壁紙として設定</string>
   <string name="wallpaper_set_successfully">壁紙の設定ができました!</string>
-  <string name="quiz">終了</string>
+  <string name="quiz" fuzzy="true">終了</string>
   <string name="quiz_question_string">この画像をアップロードしてよいですか？</string>
-  <string name="question">質問</string>
+  <string name="question" fuzzy="true">質問</string>
   <string name="result">結果</string>
   <string name="quiz_back_button">削除が必要な画像のアップロードを今後も続けると、あなたのアカウントは禁止されます。クイズの終了に同意しますか？</string>
   <string name="quiz_alert_message">あなたがアップロードした画像のうち、最低%1$s件がその後、削除されました。もし今後も削除が必要な画像のアップロードを続けるなら、あなたのアカウントは禁止される可能性があります。\n\nどんな画像をアップロードしてよいか禁止されているか覚えるため、もう一度チュートリアルを閲覧してクイズを受けますか？</string>
@@ -424,7 +425,7 @@
   <string name="upload_flow_all_images_in_set">（画像全点を組み写真にする場合）</string>
   <string name="search_this_area">この地域を検索</string>
   <string name="nearby_card_permission_title">許可を申請</string>
-  <string name="nearby_card_permission_explanation">画像を募集している近くの場所を表示するため、ご自分の現在の位置を提供してもよいですか？</string>
+  <string name="nearby_card_permission_explanation">画像を募集している近くの場所を表示するため、あなたの現在の位置情報を提供してもよいですか？</string>
   <string name="unable_to_display_nearest_place">位置情報の使用を許可していないため、近くの画像募集中の場所を表示できません</string>
   <string name="never_ask_again">以後、表示しない</string>
   <string name="display_location_permission_title">位置情報の許可の状態を表示</string>

@@ -4,8 +4,8 @@
 * XVEC
 -->
 <resources>
-  <string name="crash_dialog_title">El Commons s\'ha penjat</string>
-  <string name="crash_dialog_text">Uups ! Quelcom ha anat malament !</string>
-  <string name="crash_dialog_comment_prompt">Explica\'ns que estaves fent, després comparteix-ho mitjançant email amb nosaltres. Ens ajudaràs a arreglar-ho!</string>
+  <string name="crash_dialog_title">El Commons ha fallat</string>
+  <string name="crash_dialog_text">Ups! Quelcom ha anat malament!</string>
+  <string name="crash_dialog_comment_prompt">Expliqueu-nos què féieu, després compartiu-nos-ho per correu electrònic. Ens ajudareu a arreglar-ho!</string>
   <string name="crash_dialog_ok_toast">Gràcies!</string>
 </resources>

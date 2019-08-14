@@ -204,6 +204,8 @@
   <string name="nearby_wikipedia" fuzzy="true">УИКИПЕДИЯ</string>
   <string name="nearby_commons" fuzzy="true">ОБЩОМЕДИЯ</string>
   <string name="about_translate_cancel">Отказ</string>
+  <string name="menu_search_button">Търсене</string>
+  <string name="title_activity_search">Търсене</string>
   <string name="search_tab_title_media" fuzzy="true">ИЗОБРАЖЕНИЯ/ЗАПИСИ</string>
   <string name="search_tab_title_categories" fuzzy="true">КАТЕГОРИИ</string>
   <string name="no_recent_searches">Няма последни търсения</string>
@@ -215,6 +217,7 @@
   <string name="preference_author_name_summary">Персонализираното авторско име, което ще се използва вместо потребителското ви име при качване</string>
   <string name="archived_notifications">Известия (архивирани)</string>
   <string name="list_sheet">Списък</string>
+  <string name="next">Следваща</string>
   <string name="submit">Изпращане</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>

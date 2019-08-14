@@ -64,7 +64,6 @@ class UploadPresenterTest {
             verify(repository)?.prepareService()
             verify(view)?.showProgress(false)
             verify(view)?.showMessage(ArgumentMatchers.any(Int::class.java))
-            verify(view)?.finish()
             true
         }
     }

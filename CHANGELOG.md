@@ -1,5 +1,12 @@
 # Wikimedia Commons for Android
 
+## v2.11.0
+- Refactored upload process, explore/media details, and peer review to use MVP architecture
+- Refactored all AsyncTasks to use RxAndroid
+- Partial migration to Retrofit
+- Allow users to remove EXIF tags from their uploads if desired
+- Multiple crash and bug fixes
+
 ## v2.10.2
 - Fixed remaining issues with date image taken
 - Fixed database crash

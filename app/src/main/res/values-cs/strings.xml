@@ -32,7 +32,7 @@
   <string name="intent_share_upload_label">Nahrát na Commons</string>
   <string name="username">Uživatelské jméno</string>
   <string name="password">Heslo</string>
-  <string name="login_credential">Přihlásit se do svého Commons Beta účtu</string>
+  <string name="login_credential">Přihlásit se do svého Commons beta účtu</string>
   <string name="login">Přihlásit se</string>
   <string name="forgot_password">Zapomněli jste heslo?</string>
   <string name="signup">Zaregistrovat se</string>
