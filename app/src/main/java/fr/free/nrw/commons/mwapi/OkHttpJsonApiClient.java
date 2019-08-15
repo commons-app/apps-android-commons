@@ -216,7 +216,7 @@ public class OkHttpJsonApiClient {
         String queryString = FileUtils.readFromResource("/queries/subclasses_query.rq");
         String query = queryString.
                 replace("${QID}", qid)
-                .replace("${LANG}", "\"en\"");
+                .replace("${LANG}", "\""+Locale.getDefault().getLanguage()+"\"");
         Timber.e(query);
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(sparqlQueryUrl)
@@ -251,7 +251,7 @@ public class OkHttpJsonApiClient {
         String queryString = FileUtils.readFromResource("/queries/parentclasses_query.rq");
         String query = queryString.
                 replace("${QID}", qid)
-                .replace("${LANG}", "\"en\"");
+                .replace("${LANG}", "\""+Locale.getDefault().getLanguage()+"\"");
         Timber.e(query);
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(sparqlQueryUrl)
