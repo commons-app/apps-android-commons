@@ -1,22 +1,19 @@
 package fr.free.nrw.commons.delete
 
+import android.accounts.Account
 import android.content.Context
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.actions.PageEditClient
+import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.utils.ViewUtilWrapper
-import io.reactivex.Observable
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import org.wikipedia.AppAdapter
-import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * Tests for delete helper
@@ -24,14 +21,16 @@ import javax.inject.Named
 class DeleteHelperTest {
 
     @Mock
-    @field:[Inject Named("commons-page-edit")]
-    internal var pageEditClient: PageEditClient? = null
+    internal var mwApi: MediaWikiApi? = null
 
     @Mock
-    internal var context: Context? = null
+    internal var sessionManager: SessionManager? = null
 
     @Mock
     internal var notificationHelper: NotificationHelper? = null
+
+    @Mock
+    internal var context: Context? = null
 
     @Mock
     internal var viewUtil: ViewUtilWrapper? = null
@@ -55,13 +54,9 @@ class DeleteHelperTest {
      */
     @Test
     fun makeDeletion() {
-        `when`(pageEditClient?.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        `when`(pageEditClient?.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        `when`(pageEditClient?.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-
+        `when`(mwApi?.editToken).thenReturn("token")
+        `when`(sessionManager?.authCookie).thenReturn("Mock cookie")
+        `when`(sessionManager?.currentAccount).thenReturn(Account("TestUser", "Test"))
         `when`(media?.displayTitle).thenReturn("Test file")
         `when`(media?.filename).thenReturn("Test file.jpg")
 
@@ -73,45 +68,16 @@ class DeleteHelperTest {
     /**
      * Test a failed deletion
      */
-    @Test(expected = RuntimeException::class)
-    fun makeDeletionForPrependEditFailure() {
-        `when`(pageEditClient?.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(false))
-        `when`(pageEditClient?.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        `when`(pageEditClient?.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
+    @Test
+    fun makeDeletionForNullToken() {
+        `when`(mwApi?.editToken).thenReturn(null)
+        `when`(sessionManager?.authCookie).thenReturn("Mock cookie")
+        `when`(sessionManager?.currentAccount).thenReturn(Account("TestUser", "Test"))
         `when`(media?.displayTitle).thenReturn("Test file")
         `when`(media?.filename).thenReturn("Test file.jpg")
 
-        deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
-    }
-
-    @Test(expected = RuntimeException::class)
-    fun makeDeletionForEditFailure() {
-        `when`(pageEditClient?.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        `when`(pageEditClient?.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        `when`(pageEditClient?.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(false))
-        `when`(media?.displayTitle).thenReturn("Test file")
-        `when`(media?.filename).thenReturn("Test file.jpg")
-
-        deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
-    }
-
-    @Test(expected = RuntimeException::class)
-    fun makeDeletionForAppendEditFailure() {
-        `when`(pageEditClient?.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        `when`(pageEditClient?.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(false))
-        `when`(pageEditClient?.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(true))
-        `when`(media?.displayTitle).thenReturn("Test file")
-        `when`(media?.filename).thenReturn("Test file.jpg")
-
-        deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
+        val makeDeletion = deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
+        assertNotNull(makeDeletion)
+        assertFalse(makeDeletion!!)
     }
 }

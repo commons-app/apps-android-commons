@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,23 +13,17 @@ import androidx.core.app.NotificationCompat;
 
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 
-import java.util.ArrayList;
-import java.util.concurrent.Callable;
-
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.actions.PageEditClient;
-import fr.free.nrw.commons.actions.ThanksClient;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -36,15 +32,13 @@ import timber.log.Timber;
 public class ReviewController {
     private static final int NOTIFICATION_SEND_THANK = 0x102;
     private static final int NOTIFICATION_CHECK_CATEGORY = 0x101;
-    protected static ArrayList<String> categories;
-    @Inject
-    ThanksClient thanksClient;
     private final DeleteHelper deleteHelper;
     @Nullable
     MwQueryPage.Revision firstRevision; // TODO: maybe we can expand this class to include fileName
     @Inject
-    @Named("commons-page-edit")
-    PageEditClient pageEditClient;
+    MediaWikiApi mwApi;
+    @Inject
+    SessionManager sessionManager;
     private NotificationManager notificationManager;
     private NotificationCompat.Builder notificationBuilder;
     private Media media;
@@ -95,16 +89,40 @@ public class ReviewController {
                 .getCommonsApplicationComponent()
                 .inject(this);
 
-        ViewUtil.showShortToast(context, context.getString(R.string.check_category_toast, media.getDisplayTitle()));
+        Toast toast = new Toast(context);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast = Toast.makeText(context, context.getString(R.string.check_category_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
+        toast.show();
 
-        publishProgress(context, 0);
-        String summary = context.getString(R.string.check_category_edit_summary);
-        Observable.defer((Callable<ObservableSource<Boolean>>) () ->
-                pageEditClient.appendEdit(media.getFilename(), "\n{{subst:chc}}\n", summary))
+        Observable.fromCallable(() -> {
+            publishProgress(context, 0);
+
+            String editToken;
+            String authCookie;
+            String summary = context.getString(R.string.check_category_edit_summary);
+
+            authCookie = sessionManager.getAuthCookie();
+            mwApi.setAuthCookie(authCookie);
+
+            try {
+                editToken = mwApi.getEditToken();
+
+                if (editToken == null) {
+                    return false;
+                }
+                publishProgress(context, 1);
+
+                mwApi.appendEdit(editToken, "\n{{subst:chc}}\n", media.getFilename(), summary);
+                publishProgress(context, 2);
+            } catch (Exception e) {
+                Timber.d(e);
+                return false;
+            }
+            return true;
+        })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((result) -> {
-                    publishProgress(context, 2);
                     String message;
                     String title;
 
@@ -118,7 +136,15 @@ public class ReviewController {
                         reviewCallback.onFailure();
                     }
 
-                    showNotification(title, message);
+                    notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
+                            .setContentTitle(title)
+                            .setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText(message))
+                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setProgress(0, 0, false)
+                            .setOngoing(false)
+                            .setPriority(NotificationCompat.PRIORITY_HIGH);
+                    notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
 
                 }, Timber::e);
     }
@@ -146,20 +172,39 @@ public class ReviewController {
                 .getInstance(context)
                 .getCommonsApplicationComponent()
                 .inject(this);
-        ViewUtil.showShortToast(context, context.getString(R.string.send_thank_toast, media.getDisplayTitle()));
+        Toast toast = new Toast(context);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast = Toast.makeText(context, context.getString(R.string.send_thank_toast, media.getDisplayTitle()), Toast.LENGTH_SHORT);
+        toast.show();
 
-        publishProgress(context, 0);
-        if (firstRevision == null) {
-            return;
-        }
+        Observable.fromCallable(() -> {
+            publishProgress(context, 0);
 
-        Observable.defer((Callable<ObservableSource<Boolean>>) () -> thanksClient.thank(firstRevision.getRevisionId()))
+            String editToken;
+            String authCookie;
+            authCookie = sessionManager.getAuthCookie();
+            mwApi.setAuthCookie(authCookie);
+
+            try {
+                editToken = mwApi.getEditToken();
+                if (editToken == null) {
+                    return false;
+                }
+                publishProgress(context, 1);
+                assert firstRevision != null;
+                mwApi.thank(editToken, firstRevision.getRevisionId());
+                publishProgress(context, 2);
+            } catch (Exception e) {
+                Timber.d(e);
+                return false;
+            }
+            return true;
+        })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((result) -> {
-                    publishProgress(context, 2);
-                    String message;
-                    String title;
+                    String message = "";
+                    String title = "";
                     if (result) {
                         title = context.getString(R.string.send_thank_success_title);
                         message = context.getString(R.string.send_thank_success_message, media.getDisplayTitle());
@@ -168,21 +213,17 @@ public class ReviewController {
                         message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
                     }
 
-                    showNotification(title, message);
+                    notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
+                            .setContentTitle(title)
+                            .setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText(message))
+                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setProgress(0, 0, false)
+                            .setOngoing(false)
+                            .setPriority(NotificationCompat.PRIORITY_HIGH);
+                    notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
 
                 }, Timber::e);
-    }
-
-    private void showNotification(String title, String message) {
-        notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setContentTitle(title)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(message))
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setProgress(0, 0, false)
-                .setOngoing(false)
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
-        notificationManager.notify(NOTIFICATION_SEND_THANK, notificationBuilder.build());
     }
 
     public interface ReviewCallback {

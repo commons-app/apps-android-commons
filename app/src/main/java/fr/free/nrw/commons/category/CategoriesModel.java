@@ -23,7 +23,6 @@ public class CategoriesModel{
     private static final int SEARCH_CATS_LIMIT = 25;
 
     private final MediaWikiApi mwApi;
-    private final CategoryClient categoryClient;
     private final CategoryDao categoryDao;
     private final JsonKvStore directKvStore;
 
@@ -33,11 +32,9 @@ public class CategoriesModel{
     @Inject GpsCategoryModel gpsCategoryModel;
     @Inject
     public CategoriesModel(MediaWikiApi mwApi,
-                           CategoryClient categoryClient,
                            CategoryDao categoryDao,
                            @Named("default_preferences") JsonKvStore directKvStore) {
         this.mwApi = mwApi;
-        this.categoryClient = categoryClient;
         this.categoryDao = categoryDao;
         this.directKvStore = directKvStore;
         this.categoriesCache = new HashMap<>();
@@ -137,8 +134,8 @@ public class CategoriesModel{
         }
 
         //otherwise, search API for matching categories
-        return categoryClient
-                .searchCategoriesForPrefix(term, SEARCH_CATS_LIMIT)
+        return mwApi
+                .allCategories(term, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 
@@ -201,7 +198,7 @@ public class CategoriesModel{
      * @return
      */
     private Observable<CategoryItem> getTitleCategories(String title) {
-        return categoryClient.searchCategories(title, SEARCH_CATS_LIMIT)
+        return mwApi.searchTitles(title, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 
