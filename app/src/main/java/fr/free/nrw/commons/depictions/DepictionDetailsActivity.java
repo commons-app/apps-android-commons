@@ -93,10 +93,14 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
             Bundle arguments = new Bundle();
             arguments.putString("depictsName", depictsName);
             arguments.putString("entityId", entityId);
-            arguments.putBoolean("isParentDepiction", false);
+            arguments.putBoolean("isParentClass", false);
             depictionImagesListFragment.setArguments(arguments);
             subDepictionListFragment.setArguments(arguments);
-            subDepictionListFragment.setArguments(arguments);
+            Bundle parentClassArguments = new Bundle();
+            parentClassArguments.putString("depictsName", depictsName);
+            parentClassArguments.putString("entityId", entityId);
+            parentClassArguments.putBoolean("isParentClass", true);
+            parentDepictionListFragment.setArguments(parentClassArguments);
         }
         fragmentList.add(depictionImagesListFragment);
         titleList.add("MEDIA");
@@ -105,6 +109,7 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
         fragmentList.add(parentDepictionListFragment);
         titleList.add("PARENT CLASSES");
         viewPagerAdapter.setTabData(fragmentList, titleList);
+        viewPager.setOffscreenPageLimit(2);
         viewPagerAdapter.notifyDataSetChanged();
 
     }

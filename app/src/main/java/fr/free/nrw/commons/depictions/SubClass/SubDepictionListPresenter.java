@@ -78,11 +78,18 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     }
 
     @Override
-    public void initSubDepictionList() throws IOException {
-        compositeDisposable.add(okHttpJsonApiClient.getQIDs()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleSuccess, this::handleError));
+    public void initSubDepictionList(String qid, Boolean isParentClass) throws IOException {
+        if (isParentClass) {
+            compositeDisposable.add(okHttpJsonApiClient.getParentQIDs(qid)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::handleSuccess, this::handleError));
+        } else {
+            compositeDisposable.add(okHttpJsonApiClient.getChildQIDs(qid)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::handleSuccess, this::handleError));
+        }
 
     }
 

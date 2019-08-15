@@ -52,6 +52,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
     private boolean hasMoreImages = true;
     private boolean isLoading = true;
     RecyclerView.LayoutManager layoutManager;
+    String entityId, depictsName;
 
     @Inject SubDepictionListPresenter presenter;
 
@@ -75,6 +76,30 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         super.onViewCreated(view, savedInstanceState);
     }
 
+    private void initViews() {
+        if (getArguments() != null) {
+            depictsName = getArguments().getString("depictsName");
+            entityId = getArguments().getString("entityId");
+            Boolean isParentClass =  getArguments().getBoolean("isParentClass");
+            if (entityId != null) {
+                initList(entityId, isParentClass);
+            }
+        }
+    }
+
+    private void initList(String qid, Boolean isParentClass) {
+        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
+            handleNoInternet();
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
+            try {
+                presenter.initSubDepictionList(qid, isParentClass);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,22 +108,13 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         presenter.onAttachView(this);
         isParentDepiction = false;
         depictionNotFound.setVisibility(GONE);
-        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            handleNoInternet();
-        } else {
-            progressBar.setVisibility(View.VISIBLE);
-            try {
-                presenter.initSubDepictionList();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         if (getActivity().getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_PORTRAIT) {
             layoutManager = new LinearLayoutManager(getContext());
         } else {
             layoutManager = new GridLayoutManager(getContext(), 2);
         }
+        initViews();
         depictionsRecyclerView.setLayoutManager(layoutManager);
         ArrayList<DepictedItem> items = new ArrayList<>();
         depictionsAdapter = adapterFactory.create(items);
@@ -140,7 +156,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         bottomProgressBar.setVisibility(GONE);
         depictionNotFound.setVisibility(VISIBLE);
         String no_depiction = getString(R.string.depictions_not_found);
-        depictionNotFound.setText(String.format(Locale.getDefault(), no_depiction, presenter.getQuery()));
+        depictionNotFound.setText(String.format(Locale.getDefault(), no_depiction, depictsName));
 
     }
 

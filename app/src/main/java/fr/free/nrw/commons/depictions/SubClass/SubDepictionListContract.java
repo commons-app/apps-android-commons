@@ -29,7 +29,7 @@ public interface SubDepictionListContract {
 
         void fetchThumbnailForEntityId(String entityId, int position);
 
-        void initSubDepictionList() throws IOException;
+        void initSubDepictionList(String qid, Boolean isParentClass) throws IOException;
 
         String getQuery();
     }

@@ -6,6 +6,9 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -192,7 +195,6 @@ public class OkHttpJsonApiClient {
 
         return Observable.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
-            Timber.e("line192"+response.toString());
             if (response != null && response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
                 if (json == null) {
@@ -210,10 +212,10 @@ public class OkHttpJsonApiClient {
         });
     }
 
-    public Observable<ArrayList<DepictedItem>> getQIDs() throws IOException {
+    public Observable<ArrayList<DepictedItem>> getChildQIDs(String qid) throws IOException {
         String queryString = FileUtils.readFromResource("/queries/subclasses_query.rq");
         String query = queryString.
-                replace("${QID}", "Q12280")
+                replace("${QID}", qid)
                 .replace("${LANG}", "\"en\"");
         Timber.e(query);
         HttpUrl.Builder urlBuilder = HttpUrl
@@ -226,7 +228,6 @@ public class OkHttpJsonApiClient {
                 .build();
         return Observable.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
-            Timber.e("line55"+response.toString());
             String json = response.body().string();
             SparqlQueryResponse example  = gson.fromJson(json, SparqlQueryResponse.class);
             List<Binding> bindings = example.getResults().getBindings();
@@ -241,6 +242,51 @@ public class OkHttpJsonApiClient {
                 }
             }
             return subItems;
+        }).doOnError(throwable -> {
+            Timber.e(throwable.toString());
+        });
+    }
+
+    public Observable<ArrayList<DepictedItem>> getParentQIDs(String qid) throws IOException {
+        String queryString = FileUtils.readFromResource("/queries/parentclasses_query.rq");
+        String query = queryString.
+                replace("${QID}", qid)
+                .replace("${LANG}", "\"en\"");
+        Timber.e(query);
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(sparqlQueryUrl)
+                .newBuilder()
+                .addQueryParameter("query", query)
+                .addQueryParameter("format", "json");
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+        return Observable.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            try {
+                String json = response.body().string();
+                JSONObject jsonObject = new JSONObject(json);
+                ArrayList<DepictedItem> subItems = new ArrayList<>();
+                JSONObject results = (JSONObject) jsonObject.get("results");
+                JSONArray bindings = (JSONArray) results.get("bindings");
+                for (int i = 0; i < bindings.length(); i++) {
+                    Timber.e(bindings.get(i).getClass().toString());
+                    JSONObject object = (JSONObject) bindings.get(i);
+                    JSONObject parentClassLabel = (JSONObject) object.get("parentClassLabel");
+                    if (parentClassLabel.get("value") != null) {
+                        String labelString = parentClassLabel.getString("value");
+                        JSONObject parentClass = (JSONObject) object.get("parentClass");
+                        if (parentClass.get("value") != null) {
+                            String entityId = parentClass.getString("value");
+                            entityId = entityId.substring(entityId.lastIndexOf("/") + 1);
+                            subItems.add(new DepictedItem(labelString, "", "", false, entityId));
+                        }
+                    }
+                }
+                return subItems;
+            } catch (Exception e) {
+                return new ArrayList<DepictedItem>();
+            }
         }).doOnError(throwable -> {
             Timber.e("line578"+throwable.toString());
         });
