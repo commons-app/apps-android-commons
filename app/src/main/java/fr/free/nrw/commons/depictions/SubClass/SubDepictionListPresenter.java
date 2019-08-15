@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.depictions.SubClass;
 
+import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +12,8 @@ import javax.inject.Inject;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -32,11 +34,13 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     DepictsClient depictsClient;
     private static int TIMEOUT_SECONDS = 15;
     private List<DepictedItem> queryList = new ArrayList<>();
+    OkHttpJsonApiClient okHttpJsonApiClient;
 
     @Inject
-    public SubDepictionListPresenter(RecentSearchesDao recentSearchesDao, DepictsClient depictsClient) {
+    public SubDepictionListPresenter(RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, OkHttpJsonApiClient okHttpJsonApiClient) {
         this.recentSearchesDao = recentSearchesDao;
         this.depictsClient = depictsClient;
+        this.okHttpJsonApiClient = okHttpJsonApiClient;
     }
     @Override
     public void onAttachView(SubDepictionListContract.View view) {
@@ -74,24 +78,12 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     }
 
     @Override
-    public void initSubDepictionList() {
-        if (view.isParentDepiction()) {
-            compositeDisposable.add(depictsClient.searchForDepictions(query, 25, 0)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                    .doOnSubscribe(disposable -> saveQuery())
-                    .collect(ArrayList<DepictedItem>::new, ArrayList::add)
-                    .subscribe(this::handleSuccess, this::handleError));
-        } else {
-            compositeDisposable.add(depictsClient.searchForDepictions(query, 25, 0)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                    .doOnSubscribe(disposable -> saveQuery())
-                    .collect(ArrayList<DepictedItem>::new, ArrayList::add)
-                    .subscribe(this::handleSuccess, this::handleError));
-        }
+    public void initSubDepictionList() throws IOException {
+        compositeDisposable.add(okHttpJsonApiClient.getQIDs()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleSuccess, this::handleError));
+
     }
 
     @Override

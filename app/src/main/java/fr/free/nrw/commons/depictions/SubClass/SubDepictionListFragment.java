@@ -93,12 +93,13 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
                 e.printStackTrace();
             }
         }
-        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            depictionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        if (getActivity().getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_PORTRAIT) {
+            layoutManager = new LinearLayoutManager(getContext());
+        } else {
+            layoutManager = new GridLayoutManager(getContext(), 2);
         }
-        else{
-            depictionsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        }
+        depictionsRecyclerView.setLayoutManager(layoutManager);
         ArrayList<DepictedItem> items = new ArrayList<>();
         depictionsAdapter = adapterFactory.create(items);
         depictionsRecyclerView.setAdapter(depictionsAdapter);

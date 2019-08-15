@@ -101,9 +101,9 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
         fragmentList.add(depictionImagesListFragment);
         titleList.add("MEDIA");
         fragmentList.add(subDepictionListFragment);
-        titleList.add("CHILD ITEMS");
+        titleList.add("CHILD CLASSES");
         fragmentList.add(parentDepictionListFragment);
-        titleList.add("PARENT ITEMS");
+        titleList.add("PARENT CLASSES");
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
 

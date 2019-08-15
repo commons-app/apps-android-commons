@@ -17,11 +17,14 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
+import fr.free.nrw.commons.depictions.SubClass.models.Binding;
+import fr.free.nrw.commons.depictions.SubClass.models.SparqlQueryResponse;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
@@ -207,22 +210,37 @@ public class OkHttpJsonApiClient {
         });
     }
 
-    public Observable<String> getQIDs() throws IOException {
+    public Observable<ArrayList<DepictedItem>> getQIDs() throws IOException {
         String queryString = FileUtils.readFromResource("/queries/subclasses_query.rq");
         String query = queryString.
                 replace("${QID}", "Q12280")
-                .replace("{LANG}", "en");
+                .replace("${LANG}", "\"en\"");
         Timber.e(query);
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(sparqlQueryUrl)
-                .newBuilder();
+                .newBuilder()
+                .addQueryParameter("query", query)
+                .addQueryParameter("format", "json");
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
                 .build();
         return Observable.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             Timber.e("line55"+response.toString());
-            return response.toString();
+            String json = response.body().string();
+            SparqlQueryResponse example  = gson.fromJson(json, SparqlQueryResponse.class);
+            List<Binding> bindings = example.getResults().getBindings();
+            ArrayList<DepictedItem> subItems = new ArrayList<>();
+            for (Binding binding : bindings) {
+                if (binding.getSubclassLabel().getXmlLang() != null) {
+                    String label = binding.getSubclassLabel().getValue();
+                    String entityId = binding.getSubclass().getValue();
+                    entityId = entityId.substring(entityId.lastIndexOf("/") - 1);
+                    subItems.add(new DepictedItem(label, "", "", false,entityId ));
+                    Timber.e(label);
+                }
+            }
+            return subItems;
         }).doOnError(throwable -> {
             Timber.e("line578"+throwable.toString());
         });
