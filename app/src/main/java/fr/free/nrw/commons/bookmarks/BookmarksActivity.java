@@ -2,7 +2,6 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.FragmentManager;
@@ -16,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.RequestAndNotifyInterface;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -23,7 +23,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 public class BookmarksActivity extends NavigationBaseActivity
         implements FragmentManager.OnBackStackChangedListener,
         MediaDetailPagerFragment.MediaDetailProvider,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, RequestAndNotifyInterface {
 
     private FragmentManager supportFragmentManager;
     private BookmarksPagerAdapter adapter;
@@ -101,11 +101,13 @@ public class BookmarksActivity extends NavigationBaseActivity
      * This method is called on success of API call for featured Images.
      * The viewpager will notified that number of items have changed.
      */
+    @Override
     public void viewPagerNotifyDataSetChanged() {
         if (mediaDetails!=null){
             mediaDetails.notifyDataSetChanged();
         }
     }
+
 
     /**
      * This method is called mediaDetailPagerFragment. It returns the Media Object at that Index
@@ -135,4 +137,7 @@ public class BookmarksActivity extends NavigationBaseActivity
         }
         return adapter.getMediaAdapter().getCount();
     }
+
+    @Override
+    public void requestMoreImages() { }
 }

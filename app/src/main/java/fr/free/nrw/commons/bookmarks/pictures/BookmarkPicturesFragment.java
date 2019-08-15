@@ -12,19 +12,20 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.bookmarks.BookmarksActivity;
+import fr.free.nrw.commons.RequestAndNotifyInterface;
 import fr.free.nrw.commons.category.GridViewAdapter;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -96,11 +97,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             gridView.setVisibility(GONE);
             if (gridAdapter != null) {
                 gridAdapter.clear();
-                try {
-                    ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                ((RequestAndNotifyInterface) getContext()).viewPagerNotifyDataSetChanged();
             }
             initList();
         }
@@ -202,11 +199,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
                 return;
             }
             gridAdapter.addItems(collection);
-            try {
-                ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+            ((RequestAndNotifyInterface) getContext()).viewPagerNotifyDataSetChanged();
         }
         progressBar.setVisibility(GONE);
         statusTextView.setVisibility(GONE);

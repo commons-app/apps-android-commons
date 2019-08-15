@@ -26,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.RequestAndNotifyInterface;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
@@ -314,28 +315,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             Timber.d("Returning as activity is destroyed!");
             return;
         }
-        if (i+1 >= adapter.getCount()){
-            try{
-                ((CategoryImagesActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try{
-                ((CategoryDetailsActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try{
-                ((SearchActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try{
-                ((ExploreActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
+        if (i+1 >= adapter.getCount())
+            ((RequestAndNotifyInterface) getContext()).requestMoreImages();
+
         getActivity().invalidateOptionsMenu();
     }
 

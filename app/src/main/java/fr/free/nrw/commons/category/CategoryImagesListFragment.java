@@ -13,19 +13,20 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.explore.categories.ExploreActivity;
+import fr.free.nrw.commons.RequestAndNotifyInterface;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -250,22 +251,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 return;
             }
             gridAdapter.addItems(collection);
-            try {
-                ((CategoryImagesActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try {
-                ((CategoryDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try {
-                ((ExploreActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+            ((RequestAndNotifyInterface) getContext()).viewPagerNotifyDataSetChanged();
         }
+
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);

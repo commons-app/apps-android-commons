@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.explore;
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,6 +17,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.RequestAndNotifyInterface;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
@@ -34,7 +34,8 @@ import java.util.concurrent.TimeUnit;
  * Represents search screen of this app
  */
 
-public class SearchActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider{
+public class SearchActivity extends NavigationBaseActivity
+        implements MediaDetailPagerFragment.MediaDetailProvider, RequestAndNotifyInterface {
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
@@ -147,6 +148,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
      * This method is called on success of API call for image Search.
      * The viewpager will notified that number of items have changed.
      */
+    @Override
     public void viewPagerNotifyDataSetChanged() {
         if (mediaDetails!=null){
             mediaDetails.notifyDataSetChanged();
@@ -233,6 +235,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
      * This method is called when viewPager has reached its end.
      * Fetches more images using search query and adds it to the recycler view and viewpager adapter
      */
+    @Override
     public void requestMoreImages() {
         if (searchImageFragment!=null){
             searchImageFragment.addImagesToList(query);

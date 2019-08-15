@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.RequestAndNotifyInterface;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -30,7 +31,7 @@ public class CategoryImagesActivity
         extends NavigationBaseActivity
         implements FragmentManager.OnBackStackChangedListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
-                    AdapterView.OnItemClickListener{
+                    AdapterView.OnItemClickListener, RequestAndNotifyInterface {
 
 
     private FragmentManager supportFragmentManager;
@@ -149,6 +150,7 @@ public class CategoryImagesActivity
      * This method is called on success of API call for featured Images.
      * The viewpager will notified that number of items have changed.
      */
+    @Override
     public void viewPagerNotifyDataSetChanged() {
         if (mediaDetails!=null){
             mediaDetails.notifyDataSetChanged();
@@ -199,6 +201,7 @@ public class CategoryImagesActivity
      * This method is called when viewPager has reached its end.
      * Fetches more images using search query and adds it to the gridView and viewpager adapter
      */
+    @Override
     public void requestMoreImages() {
         if (categoryImagesListFragment!=null){
             categoryImagesListFragment.fetchMoreImagesViewPager();
