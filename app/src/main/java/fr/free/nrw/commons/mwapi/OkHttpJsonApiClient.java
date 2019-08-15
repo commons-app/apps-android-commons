@@ -189,6 +189,7 @@ public class OkHttpJsonApiClient {
 
         return Observable.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
+            Timber.e("line192"+response.toString());
             if (response != null && response.body() != null && response.isSuccessful()) {
                 String json = response.body().string();
                 if (json == null) {
@@ -203,6 +204,27 @@ public class OkHttpJsonApiClient {
                 return places;
             }
             return new ArrayList<>();
+        });
+    }
+
+    public Observable<String> getQIDs() throws IOException {
+        String queryString = FileUtils.readFromResource("/queries/subclasses_query.rq");
+        String query = queryString.
+                replace("${QID}", "Q12280")
+                .replace("{LANG}", "en");
+        Timber.e(query);
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(sparqlQueryUrl)
+                .newBuilder();
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+        return Observable.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            Timber.e("line55"+response.toString());
+            return response.toString();
+        }).doOnError(throwable -> {
+            Timber.e("line578"+throwable.toString());
         });
     }
 

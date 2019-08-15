@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -86,7 +87,11 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
             handleNoInternet();
         } else {
             progressBar.setVisibility(View.VISIBLE);
-            presenter.initSubDepictionList();
+            try {
+                presenter.initSubDepictionList();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             depictionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

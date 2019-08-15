@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.depictions.SubClass;
 
+import java.io.IOException;
 import java.util.List;
 
 import fr.free.nrw.commons.BasePresenter;
@@ -28,7 +29,7 @@ public interface SubDepictionListContract {
 
         void fetchThumbnailForEntityId(String entityId, int position);
 
-        void initSubDepictionList();
+        void initSubDepictionList() throws IOException;
 
         String getQuery();
     }
