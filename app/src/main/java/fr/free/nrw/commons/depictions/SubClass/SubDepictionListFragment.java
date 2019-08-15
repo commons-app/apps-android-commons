@@ -60,8 +60,9 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         @Override
         public void depictsClicked(DepictedItem item) {
             // Open SubDepiction Details page
+            getActivity().finish();
             DepictionDetailsActivity.startYourself(getContext(), item);
-            presenter.saveQuery();
+            //presenter.saveQuery();
         }
 
         @Override
