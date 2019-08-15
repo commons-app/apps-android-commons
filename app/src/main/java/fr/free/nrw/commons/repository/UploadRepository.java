@@ -5,9 +5,8 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;

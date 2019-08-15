@@ -3,8 +3,7 @@ package fr.free.nrw.commons.upload.depicts;
 import java.util.List;
 
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 
 /**
  * The contract with with DepictsFragment and its presenter would talk to each other

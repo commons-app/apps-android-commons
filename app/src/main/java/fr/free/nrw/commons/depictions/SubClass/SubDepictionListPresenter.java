@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -68,7 +68,6 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(response -> {
-                    Timber.e("line67" + response);
                     view.onImageUrlFetched(response,position);
                 }));
     }

@@ -15,12 +15,16 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+/**
+ * The presenter class for SearchDepictionsFragment
+ */
 
 public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragment implements SearchDepictionsFragmentContract.UserActionListener {
 
@@ -154,7 +158,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(response -> {
-                    Timber.e("line155" + response);
                     view.onImageUrlFetched(response,position);
                 }));
     }

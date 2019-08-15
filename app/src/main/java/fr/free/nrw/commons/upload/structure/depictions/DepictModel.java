@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload.structure.depicts;
+package fr.free.nrw.commons.upload.structure.depictions;
 
 import android.text.TextUtils;
 
@@ -29,7 +29,7 @@ import timber.log.Timber;
 
 public class DepictModel {
     private static final int SEARCH_DEPICTS_LIMIT = 25;
-    private final DepictDao depictDao;
+    private final DepictionDao depictDao;
     private final DepictsInterface depictsInterface;
     private final JsonKvStore directKvStore;
     @Inject
@@ -42,7 +42,7 @@ public class DepictModel {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
-    public DepictModel(DepictDao depictDao, @Named("default_preferences") JsonKvStore directKvStore, DepictsInterface depictsInterface) {
+    public DepictModel(DepictionDao depictDao, @Named("default_preferences") JsonKvStore directKvStore, DepictsInterface depictsInterface) {
         this.depictDao = depictDao;
         this.directKvStore = directKvStore;
         this.depictsInterface = depictsInterface;

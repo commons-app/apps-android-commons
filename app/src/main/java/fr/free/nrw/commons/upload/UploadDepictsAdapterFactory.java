@@ -7,8 +7,8 @@ import com.pedrogomez.renderers.RendererBuilder;
 import java.util.Collections;
 import java.util.List;
 
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
-import fr.free.nrw.commons.upload.structure.depicts.UploadDepictsCallback;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.UploadDepictsCallback;
 
 /**
  * Adapter Factory for DepictsClicked Listener

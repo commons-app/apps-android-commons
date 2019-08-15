@@ -27,10 +27,9 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.depictions.DepictionDetailsActivity;
-import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.SearchDepictionsAdapterFactory;
 import fr.free.nrw.commons.explore.depictions.SearchDepictionsRenderer;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 
@@ -47,7 +46,6 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
     TextView depictionNotFound;
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
-    private String depictsName = null;
     private boolean isParentDepiction = true;
     private RVRendererAdapter<DepictedItem> depictionsAdapter;
     private boolean hasMoreImages = true;
@@ -65,8 +63,8 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         }
 
         @Override
-        public void fetchThumbnailUrlForEntity(String entityId,int position) {
-            presenter.fetchThumbnailForEntityId(entityId,position);
+        public void fetchThumbnailUrlForEntity(String entityId, int position) {
+            presenter.fetchThumbnailForEntityId(entityId, position);
         }
 
     });
@@ -82,7 +80,6 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         View v = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, v);
         presenter.onAttachView(this);
-        depictsName = "Q9394";
         isParentDepiction = false;
         depictionNotFound.setVisibility(GONE);
         if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {

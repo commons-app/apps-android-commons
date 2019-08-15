@@ -24,7 +24,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.depictions.models.Search;
 import fr.free.nrw.commons.media.MediaInterface;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -56,7 +56,7 @@ public class DepictsClient {
     }
 
     /**
-     *Get url for image usig image name
+     *Get URL for image using image name
      */
 
     private String getImageUrl(String title) {
@@ -70,13 +70,13 @@ public class DepictsClient {
     }
 
     public Single<String> getP18ForItem(String entityId) {
-        return depictsInterface.getLabelForEntity(entityId)
-                .map(response -> {
+        return depictsInterface.getImageForEntity(entityId)
+                .map(commonsFilename -> {
                     String name;
                     try {
-                        JsonObject claims = response.getAsJsonObject("claims").getAsJsonObject();
-                        JsonObject P18 = claims.get("P18").getAsJsonArray().get(0).getAsJsonObject();
-                        JsonObject mainsnak = P18.get("mainsnak").getAsJsonObject();
+                        JsonObject claims = commonsFilename.getAsJsonObject("claims").getAsJsonObject();
+                        JsonObject p18 = claims.get("P18").getAsJsonArray().get(0).getAsJsonObject();
+                        JsonObject mainsnak = p18.get("mainsnak").getAsJsonObject();
                         JsonObject datavalue = mainsnak.get("datavalue").getAsJsonObject();
                         JsonPrimitive value = datavalue.get("value").getAsJsonPrimitive();
                         name = value.toString();

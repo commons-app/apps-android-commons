@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload.structure.depicts;
+package fr.free.nrw.commons.upload.structure.depictions;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -17,14 +17,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-import dagger.Provides;
-
-public class DepictDao {
+public class DepictionDao {
 
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject
-    public DepictDao(@Named("depicts") Provider<ContentProviderClient> clientProvider) {
+    public DepictionDao(@Named("depicts") Provider<ContentProviderClient> clientProvider) {
         this.clientProvider = clientProvider;
     }
 
@@ -112,18 +110,18 @@ public class DepictDao {
     Depiction fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         return new Depiction(
-                DepictsContentProvider.uriForId(cursor.getInt(cursor.getColumnIndex(DepictDao.Table.COLUMN_ID))),
-                cursor.getString(cursor.getColumnIndex(DepictDao.Table.COLUMN_NAME)),
-                new Date(cursor.getLong(cursor.getColumnIndex(DepictDao.Table.COLUMN_LAST_USED))),
-                cursor.getInt(cursor.getColumnIndex(DepictDao.Table.COLUMN_TIMES_USED))
+                DepictsContentProvider.uriForId(cursor.getInt(cursor.getColumnIndex(DepictionDao.Table.COLUMN_ID))),
+                cursor.getString(cursor.getColumnIndex(DepictionDao.Table.COLUMN_NAME)),
+                new Date(cursor.getLong(cursor.getColumnIndex(DepictionDao.Table.COLUMN_LAST_USED))),
+                cursor.getInt(cursor.getColumnIndex(DepictionDao.Table.COLUMN_TIMES_USED))
         );
     }
 
     private ContentValues toContentValues(Depiction depiction) {
         ContentValues cv = new ContentValues();
-        cv.put(DepictDao.Table.COLUMN_NAME, depiction.getName());
-        cv.put(DepictDao.Table.COLUMN_LAST_USED, depiction.getLastUsed().getTime());
-        cv.put(DepictDao.Table.COLUMN_TIMES_USED, depiction.getTimesUsed());
+        cv.put(DepictionDao.Table.COLUMN_NAME, depiction.getName());
+        cv.put(DepictionDao.Table.COLUMN_LAST_USED, depiction.getLastUsed().getTime());
+        cv.put(DepictionDao.Table.COLUMN_TIMES_USED, depiction.getTimesUsed());
         return cv;
     }
 

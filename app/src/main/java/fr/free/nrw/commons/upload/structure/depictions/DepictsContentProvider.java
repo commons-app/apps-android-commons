@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload.structure.depicts;
+package fr.free.nrw.commons.upload.structure.depictions;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -13,15 +13,14 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.BuildConfig.DEPICTS_AUTHORITY;
-import static fr.free.nrw.commons.upload.structure.depicts.DepictDao.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.upload.structure.depicts.DepictDao.Table.COLUMN_ID;
-import static fr.free.nrw.commons.upload.structure.depicts.DepictDao.Table.TABLE_NAME;
+import static fr.free.nrw.commons.upload.structure.depictions.DepictionDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.upload.structure.depictions.DepictionDao.Table.COLUMN_ID;
+import static fr.free.nrw.commons.upload.structure.depictions.DepictionDao.Table.TABLE_NAME;
 
 
 @SuppressLint("Registered")

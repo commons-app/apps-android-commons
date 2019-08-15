@@ -10,7 +10,7 @@ import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test

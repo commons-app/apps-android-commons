@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload.structure.depicts;
+package fr.free.nrw.commons.upload.structure.depictions;
 
 import android.view.LayoutInflater;
 import android.view.View;

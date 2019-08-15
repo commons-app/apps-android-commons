@@ -26,8 +26,8 @@ import com.pedrogomez.renderers.Renderer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
-import fr.free.nrw.commons.upload.structure.depicts.UploadDepictsCallback;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.UploadDepictsCallback;
 import timber.log.Timber;
 
 /**

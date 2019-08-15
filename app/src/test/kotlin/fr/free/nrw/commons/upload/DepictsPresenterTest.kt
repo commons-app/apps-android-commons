@@ -6,7 +6,7 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsFragment
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before

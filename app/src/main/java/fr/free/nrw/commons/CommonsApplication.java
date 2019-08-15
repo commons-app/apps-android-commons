@@ -43,7 +43,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.upload.structure.depicts.DepictDao;
+import fr.free.nrw.commons.upload.structure.depictions.DepictionDao;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.internal.functions.Functions;
@@ -267,7 +267,7 @@ public class CommonsApplication extends Application {
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
         CategoryDao.Table.onDelete(db);
-        DepictDao.Table.onDelete(db);
+        DepictionDao.Table.onDelete(db);
         ContributionDao.Table.onDelete(db);
         BookmarkPicturesDao.Table.onDelete(db);
         BookmarkLocationsDao.Table.onDelete(db);

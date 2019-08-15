@@ -203,7 +203,7 @@
 
         <provider
             android:authorities="{applicationId}.depicts.contentprovider"
-            android:name=".upload.structure.depicts.DepictsContentProvider"
+            android:name=".upload.structure.depictions.DepictsContentProvider"
             android:exported="false"
             android:label="@string/provider_depictions"
             android:syncable="false"/>

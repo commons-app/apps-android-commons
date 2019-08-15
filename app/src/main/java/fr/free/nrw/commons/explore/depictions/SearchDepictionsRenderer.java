@@ -24,9 +24,9 @@ import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.pedrogomez.renderers.Renderer;
-import com.squareup.picasso.Picasso;
+
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import timber.log.Timber;
 
 /**

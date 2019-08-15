@@ -8,7 +8,7 @@ import android.util.Log;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.repository.UploadRepository;
 import fr.free.nrw.commons.upload.UploadModel;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -148,7 +148,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(response -> {
-                    Timber.e("line155" + response);
                     view.onImageUrlFetched(response,position);
                 }));
     }

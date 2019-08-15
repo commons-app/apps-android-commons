@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload.structure.depicts;
+package fr.free.nrw.commons.upload.structure.depictions;
 
 import java.util.ArrayList;
 import java.util.HashSet;

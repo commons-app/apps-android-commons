@@ -3,7 +3,7 @@ package fr.free.nrw.commons.depictions.SubClass;
 import java.util.List;
 
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 
 public interface SubDepictionListContract {
 

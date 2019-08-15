@@ -7,7 +7,7 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.category.CategoryContentProvider;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider;
-import fr.free.nrw.commons.upload.structure.depicts.DepictsContentProvider;
+import fr.free.nrw.commons.upload.structure.depictions.DepictsContentProvider;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})

@@ -1,6 +1,4 @@
-package fr.free.nrw.commons.upload.structure.depicts;
-
-import android.widget.ImageView;
+package fr.free.nrw.commons.upload.structure.depictions;
 
 public class DepictedItem {
     private final String depictsLabel;

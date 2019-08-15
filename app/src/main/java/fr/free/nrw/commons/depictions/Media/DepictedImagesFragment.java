@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.depictions.Media;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +26,6 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.depictions.DepictionDetailsActivity;
 import fr.free.nrw.commons.depictions.GridViewAdapter;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 

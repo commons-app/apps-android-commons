@@ -21,7 +21,7 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.depictions.DepictionDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.ArrayList;

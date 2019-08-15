@@ -240,11 +240,11 @@ public class MediaClient {
 
                 try {
                     LinkedTreeMap statements = (LinkedTreeMap) commonsWikibaseItem.getStatements();
-                    ArrayList<LinkedTreeMap> listP245962 = (ArrayList<LinkedTreeMap>) statements.get("P180");
+                    ArrayList<LinkedTreeMap> p180ItemList = (ArrayList<LinkedTreeMap>) statements.get("P180");
                     String depictions = null;
                     JsonArray jsonArray = new JsonArray();
-                    for (int i = 0; i < listP245962.size(); i++) {
-                        LinkedTreeMap depictedItem = listP245962.get(i);
+                    for (int i = 0; i < p180ItemList.size(); i++) {
+                        LinkedTreeMap depictedItem = p180ItemList.get(i);
                         LinkedTreeMap mainsnak = (LinkedTreeMap) depictedItem.get("mainsnak");
                         Map<String, LinkedTreeMap> datavalue = (Map<String, LinkedTreeMap>) mainsnak.get("datavalue");
                         LinkedTreeMap value = datavalue.get("value");

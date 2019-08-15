@@ -25,7 +25,7 @@ import fr.free.nrw.commons.depictions.SubClass.SubDepictionListFragment;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-import fr.free.nrw.commons.upload.structure.depicts.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 
 public class DepictionDetailsActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider, AdapterView.OnItemClickListener {
     private FragmentManager supportFragmentManager;
