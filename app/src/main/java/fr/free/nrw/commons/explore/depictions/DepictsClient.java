@@ -52,7 +52,7 @@ public class DepictsClient {
 
         return depictsInterface.searchForDepicts(query, String.valueOf(limit), Locale.getDefault().getLanguage(), Locale.getDefault().getLanguage(), String.valueOf(offset))
                 .flatMap(depictSearchResponse -> Observable.fromIterable(depictSearchResponse.getSearch()))
-                .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), getImageUrl(depictSearchItem.getLabel()), false, depictSearchItem.getId()));
+                .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), "", false, depictSearchItem.getId()));
     }
 
     /**
