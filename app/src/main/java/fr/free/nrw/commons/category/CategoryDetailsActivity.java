@@ -23,7 +23,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.RequestAndNotifyInterface;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -37,7 +36,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 public class CategoryDetailsActivity extends NavigationBaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider,
-                    AdapterView.OnItemClickListener, RequestAndNotifyInterface {
+                    AdapterView.OnItemClickListener, CategoryImagesCallback {
 
 
     private FragmentManager supportFragmentManager;

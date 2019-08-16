@@ -26,17 +26,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.RequestAndNotifyInterface;
+import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
-import fr.free.nrw.commons.category.CategoryDetailsActivity;
-import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.explore.SearchActivity;
-import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -316,7 +312,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             return;
         }
         if (i+1 >= adapter.getCount())
-            ((RequestAndNotifyInterface) getContext()).requestMoreImages();
+            ((CategoryImagesCallback) getContext()).requestMoreImages();
 
         getActivity().invalidateOptionsMenu();
     }

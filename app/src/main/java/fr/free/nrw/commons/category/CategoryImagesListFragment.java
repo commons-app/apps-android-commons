@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.RequestAndNotifyInterface;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -250,7 +249,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 return;
             }
             gridAdapter.addItems(collection);
-            ((RequestAndNotifyInterface) getContext()).viewPagerNotifyDataSetChanged();
+            ((CategoryImagesCallback) getContext()).viewPagerNotifyDataSetChanged();
         }
 
         progressBar.setVisibility(GONE);

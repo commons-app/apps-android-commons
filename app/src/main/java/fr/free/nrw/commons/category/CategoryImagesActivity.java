@@ -2,7 +2,6 @@ package fr.free.nrw.commons.category;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,7 +14,6 @@ import android.widget.AdapterView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.RequestAndNotifyInterface;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -32,7 +30,7 @@ public class CategoryImagesActivity
         extends AuthenticatedActivity
         implements FragmentManager.OnBackStackChangedListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
-                    AdapterView.OnItemClickListener, RequestAndNotifyInterface {
+                    AdapterView.OnItemClickListener, CategoryImagesCallback {
 
 
     private FragmentManager supportFragmentManager;

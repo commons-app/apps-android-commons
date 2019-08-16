@@ -17,7 +17,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.RequestAndNotifyInterface;
+import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class SearchActivity extends NavigationBaseActivity
-        implements MediaDetailPagerFragment.MediaDetailProvider, RequestAndNotifyInterface {
+        implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;

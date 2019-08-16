@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.RequestAndNotifyInterface;
+import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -23,7 +23,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 public class BookmarksActivity extends NavigationBaseActivity
         implements FragmentManager.OnBackStackChangedListener,
         MediaDetailPagerFragment.MediaDetailProvider,
-        AdapterView.OnItemClickListener, RequestAndNotifyInterface {
+        AdapterView.OnItemClickListener, CategoryImagesCallback {
 
     private FragmentManager supportFragmentManager;
     private BookmarksPagerAdapter adapter;
