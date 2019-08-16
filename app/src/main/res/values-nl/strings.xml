@@ -49,7 +49,7 @@
     <item quantity="one">%1$d bestand aan het uploaden</item>
     <item quantity="other">%1$d bestanden aan het uploaden</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Mijn uploads</string>
+  <string name="title_activity_contributions">Mijn recente uploads</string>
   <string name="contribution_state_queued">In wachtrij</string>
   <string name="contribution_state_failed">Mislukt</string>
   <string name="contribution_state_in_progress">%1$d%% afgerond</string>
@@ -60,7 +60,7 @@
   <string name="provider_contributions">Mijn uploads</string>
   <string name="menu_share">Delen</string>
   <string name="menu_open_in_browser">In browser bekijken</string>
-  <string name="share_title_hint" fuzzy="true">Naam</string>
+  <string name="share_title_hint">Titel (verplicht)</string>
   <string name="share_description_hint">Beschrijving</string>
   <string name="login_failed_network">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>
   <string name="login_failed_throttled">U hebt te vaak geprobeerd aan te melden. Probeer het over een aantal minuten opnieuw.</string>
@@ -195,9 +195,9 @@
   <string name="skip_login_message" fuzzy="true">Je kunt dan geen afbeeldingen plaatsen.</string>
   <string name="login_alert_message">Meld je aan om deze functie te gebruiken</string>
   <string name="nearby_directions" fuzzy="true">VERWIJZINGEN</string>
-  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
-  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Waardeer ons&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Vraag en antwoord&lt;/u&gt;</string>
   <string name="welcome_skip_button">Zelfstudie overslaan</string>

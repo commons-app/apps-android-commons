@@ -131,7 +131,7 @@
   <string name="license_name_cc_zero">ڪڪ ٻڙي</string>
   <string name="tutorial_1_text">وڪيپيڊيا تي استعمال ٿيندڙ گھڻن عڪسن جي وڪيميڊيا العام ميزباني ڪري ٿو.</string>
   <string name="tutorial_1_subtext">توھان جا عڪس سڄي دنيا جي ماڻھن کي تعليم يافتا ڪرڻ ۾ مدد ڪن ٿا</string>
-  <string name="tutorial_2_text">براءِ مھرباني اھي تصويرون چاڙھيو مڪمل طور تي توھان پاران ڪڍيل يا تخليقيل آھن:</string>
+  <string name="tutorial_2_text">براءِ مھرباني اھي تصويرون چاڙھيو مڪمل طور تي توھان پاران ڪڍيل يا سرجيل آھن:</string>
   <string name="tutorial_2_subtext_1">قدرتي شيون (گل، جانور، جبل)</string>
   <string name="tutorial_2_subtext_2">استعمال جوڳيون شيون (سائيڪلون، ريل اسٽيشنون)</string>
   <string name="tutorial_2_subtext_3">مشھور شخصيتون (توھان جو ناظم، اولمپڪ رانديگر جنھن سان توھان مليو)</string>
@@ -254,5 +254,6 @@
   <string name="search_history_deleted">ڳولا سوانح ڊاٿي وئي</string>
   <string name="statistics" fuzzy="true">انگ اکر</string>
   <string name="error_occurred">خلل ٿيو!</string>
+  <string name="contributions_fragment">ڀاڱيداريون</string>
   <string name="write_storage_permission_rationale_for_image_share">اسان کي اوهان جي ڊوائس جي اسٽورج جي اجازت گھرجي جيئن تصويرون چاڙهي سگھجن.</string>
 </resources>
