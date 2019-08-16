@@ -47,7 +47,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
     TextView depictionNotFound;
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
-    private boolean isParentDepiction = true;
+    private boolean isParentClass = false;
     private RVRendererAdapter<DepictedItem> depictionsAdapter;
     private boolean hasMoreImages = true;
     private boolean isLoading = true;
@@ -81,7 +81,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         if (getArguments() != null) {
             depictsName = getArguments().getString("depictsName");
             entityId = getArguments().getString("entityId");
-            Boolean isParentClass =  getArguments().getBoolean("isParentClass");
+            isParentClass =  getArguments().getBoolean("isParentClass");
             if (entityId != null) {
                 initList(entityId, isParentClass);
             }
@@ -107,7 +107,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         View v = inflater.inflate(R.layout.fragment_browse_image, container, false);
         ButterKnife.bind(this, v);
         presenter.onAttachView(this);
-        isParentDepiction = false;
+        isParentClass = false;
         depictionNotFound.setVisibility(GONE);
         if (getActivity().getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_PORTRAIT) {
@@ -156,7 +156,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         progressBar.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
         depictionNotFound.setVisibility(VISIBLE);
-        String no_depiction = getString(R.string.depictions_not_found);
+        String no_depiction = getString(isParentClass? R.string.no_parent_classes: R.string.no_child_classes);
         depictionNotFound.setText(String.format(Locale.getDefault(), no_depiction, depictsName));
 
     }
@@ -172,7 +172,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
     }
 
     @Override
-    public boolean isParentDepiction() {
-        return isParentDepiction;
+    public boolean isParentClass() {
+        return isParentClass;
     }
 }

@@ -20,7 +20,7 @@ public interface SubDepictionListContract {
 
         void setIsLastPage(boolean b);
 
-        boolean isParentDepiction();
+        boolean isParentClass();
     }
 
     interface UserActionListener extends BasePresenter<View> {
