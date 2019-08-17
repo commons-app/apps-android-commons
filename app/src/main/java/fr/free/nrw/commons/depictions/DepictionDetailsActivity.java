@@ -27,6 +27,9 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 
+/**
+ * Activity to show depiction media, parent classes and child classes of depicted items in Explore
+ */
 public class DepictionDetailsActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider, AdapterView.OnItemClickListener {
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
@@ -103,11 +106,11 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
             parentDepictionListFragment.setArguments(parentClassArguments);
         }
         fragmentList.add(depictionImagesListFragment);
-        titleList.add("MEDIA");
+        titleList.add(getResources().getString(R.string.title_for_media));
         fragmentList.add(subDepictionListFragment);
-        titleList.add("CHILD CLASSES");
+        titleList.add(getResources().getString(R.string.title_for_child_classes));
         fragmentList.add(parentDepictionListFragment);
-        titleList.add("PARENT CLASSES");
+        titleList.add(getResources().getString(R.string.title_for_parent_classes));
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPager.setOffscreenPageLimit(2);
         viewPagerAdapter.notifyDataSetChanged();

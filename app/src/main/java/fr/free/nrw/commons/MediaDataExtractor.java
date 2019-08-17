@@ -69,7 +69,6 @@ public class MediaDataExtractor {
      *
      * @return caption for the image in user's locale
      */
-
     private Single<String> getCaption(String filename) {
         return mediaClient.getCaptionByFilename(filename);
     }
@@ -80,7 +79,6 @@ public class MediaDataExtractor {
      * @return List containing map for depictions, the map has two keys,
      *  first key is for the label and second is for the url of the item
      */
-
     private ArrayList<Map<String, String>> formatDepictions(JsonObject mediaResponse) {
         try {
             JsonArray depictionArray = (JsonArray) mediaResponse.get("Depiction");
@@ -89,7 +87,7 @@ public class MediaDataExtractor {
                 for (int i = 0; i <depictionArray.size() ; i++) {
                     JsonObject depictedItem = (JsonObject) depictionArray.get(i);
                     Map <String, String> depictedObject = new HashMap<>();
-                    depictedObject.put("label", depictedItem.get("label").toString().substring(3, depictedItem.get("label").toString().length()-3));
+                    depictedObject.put("label", depictedItem.get("label").toString().substring(3, depictedItem.get("label").toString().length()-3)); //remove the additional characters obtained in label and ID object to extract the relevant string
                     depictedObject.put("id", depictedItem.get("id").toString().substring(1, depictedItem.get("id").toString().length() - 1));
                     depictedItemList.add(depictedObject);
                 }
@@ -112,9 +110,8 @@ public class MediaDataExtractor {
                 .map(mediaResponse -> {
                     return mediaResponse;
                 }).doOnError(throwable -> {
-                    Timber.e(throwable+"eror while fetching captions");
+                    Timber.e(throwable+"error while fetching depictions");
                  });
-
     }
 
     /**

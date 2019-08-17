@@ -131,7 +131,6 @@ public class ContributionDao {
      * Convert hashmap of captions to string to be stores in local database
      * @param captions hashmap pf captions with language code and value
      */
-
     private String convertMapToString(HashMap<String, String> captions) {
         JSONObject json = new JSONObject(captions);
         return json.toString();
@@ -178,6 +177,10 @@ public class ContributionDao {
         return null;
     }
 
+    /**
+     * formats the json of captions to a hashmap containing
+     * caption as value of hashmap and language of caption as the key of the hashmap
+     */
     private HashMap<String, String> formatCaption(String jsonCaption) {
         Map<String, String> captions = new Gson().fromJson(
                 jsonCaption, new TypeToken<HashMap<String, String>>() {}.getType()

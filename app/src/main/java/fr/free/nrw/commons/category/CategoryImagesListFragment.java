@@ -44,7 +44,7 @@ import static android.view.View.VISIBLE;
 public class CategoryImagesListFragment extends DaggerFragment {
 
     private static int TIMEOUT_SECONDS = 15;
-    private int mediaSize = 0;
+    private int mediaSize = 0; // counts the total number of items loaded from the API
 
     private GridViewAdapter gridAdapter;
 
@@ -279,7 +279,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * fetch captions for the image using filename and replace title of on the image thumbnail(if captions are available)
      * else show filename
      */
-
     public void replaceTitlesWithCaptions(String displayTitle, int i) {
         compositeDisposable.add(mediaClient.getCaptionByFilename("File:" + displayTitle+ ".jpg")
                 .subscribeOn(Schedulers.io())
@@ -295,7 +294,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * If caption is available for the image, then modify grid adapter
      * to show captions
      */
-
     private void handleLabelforImage(String s, int position) {
         if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
             gridAdapter.getItem(position).setThumbnailTitle(s);

@@ -56,7 +56,7 @@ public class DepictsClient {
     }
 
     /**
-     *Get URL for image using image name
+     * Get URL for image using image name
      */
 
     private String getImageUrl(String title) {

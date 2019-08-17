@@ -113,7 +113,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      *
      * @param contribution
      */
-
     private void fetchAndDisplayCaption(DisplayableContribution contribution) {
         if ((contribution.getState() != Contribution.STATE_COMPLETED)) {
             titleView.setText(contribution.getDisplayTitle());

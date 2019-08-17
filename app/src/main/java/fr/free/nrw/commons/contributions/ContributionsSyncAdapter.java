@@ -22,7 +22,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.LogEventResult;
@@ -121,8 +120,8 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
                 Date dateUpdated = image.getDateUpdated();
                 Contribution contrib = new Contribution(null, null, filename,
-                        new HashMap<>(), "",-1, dateUpdated, dateUpdated, user,
-                        "", new ArrayList<>(),"");
+                        new HashMap<>(), "", -1, dateUpdated, dateUpdated, user,
+                        "", new ArrayList<>(), "");
                 contrib.setState(STATE_COMPLETED);
                 imageValues.add(contributionDao.toContentValues(contrib));
 

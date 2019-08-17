@@ -17,7 +17,7 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.BuildConfig.DEPICTS_AUTHORITY;
+import static fr.free.nrw.commons.BuildConfig.DEPICTION_AUTHORITY;
 import static fr.free.nrw.commons.upload.structure.depictions.DepictionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.upload.structure.depictions.DepictionDao.Table.COLUMN_ID;
 import static fr.free.nrw.commons.upload.structure.depictions.DepictionDao.Table.TABLE_NAME;
@@ -29,13 +29,13 @@ public class DepictsContentProvider extends CommonsDaggerContentProvider {
     private static final int DEPICTS = 1;
     private static final int DEPICTS_ID = 2;
     private static final String BASE_PATH = "depicts";
-    public static final Uri BASE_URI = Uri.parse("content://" + DEPICTS_AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + DEPICTION_AUTHORITY + "/" + BASE_PATH);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        uriMatcher.addURI(DEPICTS_AUTHORITY, BASE_PATH, DEPICTS);
-        uriMatcher.addURI(DEPICTS_AUTHORITY, BASE_PATH + "/#", DEPICTS_ID);
+        uriMatcher.addURI(DEPICTION_AUTHORITY, BASE_PATH, DEPICTS);
+        uriMatcher.addURI(DEPICTION_AUTHORITY, BASE_PATH + "/#", DEPICTS_ID);
     }
 
     @Inject

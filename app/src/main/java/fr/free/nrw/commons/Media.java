@@ -273,7 +273,6 @@ public class Media implements Parcelable {
      * @return title to be shown on image thumbnail
      * If caption is available for the image then it returns caption else filename
      */
-
     public String getThumbnailTitle() {
         return thumbnailTitle != null? thumbnailTitle : getDisplayTitle();
     }
@@ -359,9 +358,8 @@ public class Media implements Parcelable {
     /**
      * @return depictions associated with the current media
      */
-
     public ArrayList<Map<String, String>> getDepiction() {
-        return  depictionList;
+        return depictionList;
     }
 
     /**
@@ -371,8 +369,8 @@ public class Media implements Parcelable {
      *
      * key of the HashMap is the language and value is the caption in the corresponding language
      *
-     * returns list of captions stored in hashmap*/
-
+     * returns list of captions stored in hashmap
+     */
     public HashMap<String, String> getCaptions() {
         return captions;
     }
@@ -530,6 +528,9 @@ public class Media implements Parcelable {
         return (ArrayList<String>) categories.clone(); // feels dirty
     }
 
+    /**
+     * @return array list of depictions associated with the current media
+     */
     public ArrayList<String> getDepictions() {
         return (ArrayList<String>) depictions.clone();
     }
@@ -658,6 +659,14 @@ public class Media implements Parcelable {
         this.license = license;
     }
 
+    /**
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     *
+     * This function sets captions
+     * @param caption
+     */
     public void setCaption(String caption) {
         this.caption = caption;
     }
@@ -665,7 +674,6 @@ public class Media implements Parcelable {
     /**
      * Sets depictions for the current media obtained fro  Wikibase API
      */
-
     public void setDepiction(ArrayList<Map<String, String>> depictions) {
         this.depictionList =depictions;
     }

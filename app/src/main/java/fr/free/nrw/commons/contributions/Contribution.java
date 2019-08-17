@@ -179,6 +179,9 @@ public class  Contribution extends Media {
         this.dateUploaded = date;
     }
 
+    /**
+     * sets depiction entity ids for the given contribution
+     */
     public void setDepictions(ArrayList<String> depictionsEntityIds) {
         this.depictionsEntityIds = depictionsEntityIds;
     }
@@ -308,6 +311,9 @@ public class  Contribution extends Media {
         return contentProviderUri;
     }
 
+    /**
+     * @return array list of entityids for the depictions
+     */
     public ArrayList<String> getDepictionsEntityIds() {
         return depictionsEntityIds;
     }

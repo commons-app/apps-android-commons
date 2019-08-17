@@ -222,8 +222,7 @@ public class ContributionsFragment
 
             @Override
             public Contribution getContributionForPosition(int position) {
-                Contribution contribution = (Contribution) contributionsPresenter.getItemAtPosition(position);
-                return contribution;
+                return (Contribution) contributionsPresenter.getItemAtPosition(position);
             }
 
             @Override

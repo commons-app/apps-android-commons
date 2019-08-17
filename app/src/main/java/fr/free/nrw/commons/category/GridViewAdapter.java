@@ -94,6 +94,9 @@ public class GridViewAdapter extends ArrayAdapter {
         return convertView;
     }
 
+    /**
+     * @return the Media item at the given position
+     */
     @Nullable
     @Override
     public Media getItem(int position) {

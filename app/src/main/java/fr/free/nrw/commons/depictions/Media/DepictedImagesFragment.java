@@ -33,7 +33,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 /**
- * Actvity for shhowing image list after selected an item from SearchActivity In Explore
+ * Fragment for showing image list after selected an item from SearchActivity In Explore
  */
 
 public class DepictedImagesFragment extends DaggerFragment implements DepictedImagesContract.View {

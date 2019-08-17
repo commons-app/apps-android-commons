@@ -52,7 +52,7 @@ public class CategoriesModel{
     public Comparator<CategoryItem> sortBySimilarity(final String filter) {
         Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
         return (firstItem, secondItem) -> {
-            //if the category is selected, it should get precedence
+            // if the category is selected, it should get precedence
             if (null != firstItem && firstItem.isSelected()) {
                 if (null != secondItem && secondItem.isSelected()) {
                     return stringSimilarityComparator

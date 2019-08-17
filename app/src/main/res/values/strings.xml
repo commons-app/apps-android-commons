@@ -595,4 +595,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Other</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Because it is</string>
+
+  <string name="title_for_media">MEDIA</string>
+    <string name="title_for_child_classes">CHILD CLASSES</string>
+  <string name="title_for_parent_classes">PARENT CLASSES</string>
 </resources>

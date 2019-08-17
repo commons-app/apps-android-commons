@@ -44,8 +44,6 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
 
-    implementation 'com.squareup.picasso:picasso:2.5.2'
-
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
     // Logging
@@ -208,7 +206,7 @@ android {
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.contributions.contentprovider\""
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.modifications.contentprovider\""
             buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.categories.contentprovider\""
-            buildConfigField "String", "DEPICTS_AUTHORITY", "\"fr.free.nrw.commons.depicts.contentprovider\""
+            buildConfigField "String", "DEPICTION_AUTHORITY", "\"fr.free.nrw.commons.depicts.contentprovider\""
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.explore.recentsearches.contentprovider\""
             buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.contentprovider\""
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.locations.contentprovider\""
@@ -242,7 +240,7 @@ android {
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.beta.contributions.contentprovider\""
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.beta.modifications.contentprovider\""
             buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.beta.categories.contentprovider\""
-            buildConfigField "String", "DEPICTS_AUTHORITY", "\"fr.free.nrw.commons.beta.depicts.contentprovider\""
+            buildConfigField "String", "DEPICTION_AUTHORITY", "\"fr.free.nrw.commons.beta.depicts.contentprovider\""
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.beta.explore.recentsearches.contentprovider\""
             buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.contentprovider\""
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\""
