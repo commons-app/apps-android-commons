@@ -8,16 +8,21 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 public class SubDepictionListPresenter implements SubDepictionListContract.UserActionListener {
 
@@ -27,6 +32,8 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
                     new Class[]{SubDepictionListContract.View.class},
                     (proxy, method, methodArgs) -> null);
 
+    private final Scheduler ioScheduler;
+    private final Scheduler mainThreadScheduler;
     private  SubDepictionListContract.View view = DUMMY;
     RecentSearchesDao recentSearchesDao;
     String query;
@@ -37,8 +44,11 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     OkHttpJsonApiClient okHttpJsonApiClient;
 
     @Inject
-    public SubDepictionListPresenter(RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, OkHttpJsonApiClient okHttpJsonApiClient) {
+    public SubDepictionListPresenter(RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, OkHttpJsonApiClient okHttpJsonApiClient,  @Named(IO_THREAD) Scheduler ioScheduler,
+                                     @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
         this.recentSearchesDao = recentSearchesDao;
+        this.ioScheduler = ioScheduler;
+        this.mainThreadScheduler = mainThreadScheduler;
         this.depictsClient = depictsClient;
         this.okHttpJsonApiClient = okHttpJsonApiClient;
     }
@@ -68,8 +78,8 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     @Override
     public void fetchThumbnailForEntityId(String entityId, int position) {
         compositeDisposable.add(depictsClient.getP18ForItem(entityId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(response -> {
                     Timber.e("line67" + response);
@@ -81,13 +91,13 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     public void initSubDepictionList(String qid, Boolean isParentClass) throws IOException {
         if (isParentClass) {
             compositeDisposable.add(okHttpJsonApiClient.getParentQIDs(qid)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(ioScheduler)
+                    .observeOn(mainThreadScheduler)
                     .subscribe(this::handleSuccess, this::handleError));
         } else {
             compositeDisposable.add(okHttpJsonApiClient.getChildQIDs(qid)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(ioScheduler)
+                    .observeOn(mainThreadScheduler)
                     .subscribe(this::handleSuccess, this::handleError));
         }
 

@@ -69,6 +69,6 @@ class DepictedImagesPresenterTest {
        Mockito.`when`(mediaClient?.getCaptionByFilename(ArgumentMatchers.anyString()))?.thenReturn(stringObservable)
         depictedImagesPresenter?.replaceTitlesWithCaptions("File:rabbit.jpg", 0)
         testScheduler?.triggerActions()
-        view?.handleLabelforImage("label", 0)
+        verify(view)?.handleLabelforImage("", 0)
     }
 }
