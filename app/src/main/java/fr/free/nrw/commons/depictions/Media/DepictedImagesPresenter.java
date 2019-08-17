@@ -14,10 +14,12 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 public class DepictedImagesPresenter implements DepictedImagesContract.UserActionListener {
 
@@ -31,6 +33,8 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     MediaClient mediaClient;
     @Named("default_preferences")
     JsonKvStore depictionKvStore;
+    private final Scheduler ioScheduler;
+    private final Scheduler mainThreadScheduler;
     private DepictedImagesContract.View view = DUMMY;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private String depictName = null;
@@ -38,9 +42,12 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     private List<Media> queryList = new ArrayList<>();
 
     @Inject
-    public DepictedImagesPresenter(@Named("default_preferences") JsonKvStore depictionKvStore, DepictsClient depictsClient, MediaClient mediaClient) {
+    public DepictedImagesPresenter(@Named("default_preferences") JsonKvStore depictionKvStore, DepictsClient depictsClient, MediaClient mediaClient,  @Named(IO_THREAD) Scheduler ioScheduler,
+                                   @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
         this.depictionKvStore = depictionKvStore;
         this.depictsClient = depictsClient;
+        this.ioScheduler = ioScheduler;
+        this.mainThreadScheduler = mainThreadScheduler;
         this.mediaClient = mediaClient;
     }
 
@@ -64,8 +71,8 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
         view.progressBarVisible(true);
         view.setIsLastPage(false);
         compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25, 0)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(this::handleSuccess, this::handleError));
     }
@@ -78,8 +85,8 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     public void fetchMoreImages() {
         view.progressBarVisible(true);
         compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25, queryList.size())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(this::handlePaginationSuccess, this::handleError));
     }
@@ -106,7 +113,7 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
 
     }
 
-    private void handleSuccess(List<Media> collection) {
+    public void handleSuccess(List<Media> collection) {
         if (collection == null || collection.isEmpty()) {
             if (queryList.isEmpty()) {
                 view.initErrorView();
@@ -122,8 +129,8 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     @Override
     public void replaceTitlesWithCaptions(String displayTitle, int position) {
         compositeDisposable.add(mediaClient.getCaptionByFilename("File:" + displayTitle + ".jpg")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(subscriber -> {
                     view.handleLabelforImage(subscriber, position);
@@ -135,16 +142,4 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     public void addItemsToQueryList(List<Media> collection) {
         queryList.addAll(collection);
     }
-
-    /**
-     * Query continue values determine the last page that was loaded for the particular keyword
-     * This method resets those values, so that the results can be queried from the first page itself
-     *
-     * @param keyword
-     */
-    private void resetQueryContinueValues(String keyword) {
-        depictionKvStore.remove("query_continue_" + keyword);
-    }
-
-
 }
