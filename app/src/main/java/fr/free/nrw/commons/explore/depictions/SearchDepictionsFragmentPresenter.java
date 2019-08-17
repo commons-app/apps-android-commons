@@ -17,10 +17,14 @@ import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 /**
  * The presenter class for SearchDepictionsFragment
@@ -35,25 +39,28 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
                     (proxy, method, methodArgs) -> null);
     private static int TIMEOUT_SECONDS = 15;
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final Scheduler ioScheduler;
+    private final Scheduler mainThreadScheduler;
 
     boolean isLoadingDepictions;
     String query;
     RecentSearchesDao recentSearchesDao;
     MediaWikiApi mwApi;
     DepictsClient depictsClient;
-    MediaClient mediaClient;
     JsonKvStore basicKvStore;
     private SearchDepictionsFragmentContract.View view = DUMMY;
     private List<DepictedItem> queryList = new ArrayList<>();
     int offset=0;
 
     @Inject
-    public SearchDepictionsFragmentPresenter(@Named("default_preferences") JsonKvStore basicKvStore, MediaWikiApi mwApi, RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, MediaClient mediaClient) {
+    public SearchDepictionsFragmentPresenter(@Named("default_preferences") JsonKvStore basicKvStore, MediaWikiApi mwApi, RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, @Named(IO_THREAD) Scheduler ioScheduler,
+                                             @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
         this.basicKvStore = basicKvStore;
         this.mwApi = mwApi;
         this.recentSearchesDao = recentSearchesDao;
         this.depictsClient = depictsClient;
-        this.mediaClient = mediaClient;
+        this.ioScheduler = ioScheduler;
+        this.mainThreadScheduler = mainThreadScheduler;
     }
 
     @Override
@@ -78,8 +85,8 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
         view.loadingDepictions();
         saveQuery();
         compositeDisposable.add(depictsClient.searchForDepictions(query, 25, offset)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .doOnSubscribe(disposable -> saveQuery())
                 .collect(ArrayList<DepictedItem>::new, ArrayList::add)
@@ -154,8 +161,8 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     @Override
     public void fetchThumbnailForEntityId(String entityId,int position) {
          compositeDisposable.add(depictsClient.getP18ForItem(entityId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(response -> {
                     view.onImageUrlFetched(response,position);
