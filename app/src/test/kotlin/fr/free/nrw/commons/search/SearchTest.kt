@@ -47,7 +47,7 @@ class SearchTest {
 
             val depictedItem = DepictedItem("rabbit", "desc2", null, false, "Q9394")
             //checks whether the searchForDepictions method is called with the same searched item and it returs a non empty observable of depicted item
-            Mockito.`when`(depictsClient?.searchForDepictions("rabbit", 25, 0))?.thenReturn(Observable.just(depictedItem))?.then{
+            /*Mockito.`when`(depictsClient?.searchForDepictions("rabbit", 25, 0))?.thenReturn(Observable.just(depictedItem))?.then{
                 verify(searchDepictionsFragment, times(1))?.handleSuccess(ArgumentMatchers.anyList())
                 depictionsAdapter?.addAll(ArgumentMatchers.anyList<DepictedItem>())?.let { it1 -> assert(it1)
                 }
@@ -57,7 +57,7 @@ class SearchTest {
             depictedImagesFragment?.onItemClick(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyLong())
             mediaDetails.showImage(0)
             val media: Media? = depictedImagesFragment?.getMediaAtPosition(0)
-            mediaDetails.downloadMedia(media)
+            mediaDetails.downloadMedia(media)*/
         }
     }
 }

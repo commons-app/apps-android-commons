@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockito_kotlin.verify
 import fr.free.nrw.commons.category.CategoryItem
+import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsFragment
@@ -28,6 +29,8 @@ class DepictsPresenterTest {
 
     var testScheduler: TestScheduler? = null
 
+    var depictsClient : DepictsClient? = null
+
     val depictedItems: ArrayList<DepictedItem> = ArrayList()
 
     @Mock
@@ -48,7 +51,7 @@ class DepictsPresenterTest {
         depictedItem = DepictedItem("label", "desc", null, false, "entityId")
         depictedItems.add(depictedItem)
         testObservable = Observable.just(depictedItem)
-        depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler)
+        depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler, depictsClient)
         depictsFragment = DepictsFragment()
         depictsPresenter?.onAttachView(view)
     }
@@ -60,7 +63,7 @@ class DepictsPresenterTest {
         Mockito.`when`(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
         depictsPresenter?.searchForDepictions("test")
         verify(view)?.showProgress(true)
-        verify(view)?.showError()
+        verify(view)?.showError(false)
         verify(view)?.setDepictsList(null)
         testScheduler?.triggerActions()
         verify(view)?.showProgress(false)
@@ -73,7 +76,7 @@ class DepictsPresenterTest {
         Mockito.`when`(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
         depictsPresenter?.searchForDepictions("वी")
         verify(view)?.showProgress(true)
-        verify(view)?.showError()
+        verify(view)?.showError(false)
         verify(view)?.setDepictsList(null)
         testScheduler?.triggerActions()
         verify(view)?.showProgress(false)

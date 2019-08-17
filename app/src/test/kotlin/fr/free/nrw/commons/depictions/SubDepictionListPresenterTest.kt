@@ -2,7 +2,6 @@ package fr.free.nrw.commons.depictions
 
 import com.nhaarman.mockito_kotlin.verify
 import fr.free.nrw.commons.depictions.SubClass.SubDepictionListContract
-import fr.free.nrw.commons.depictions.SubClass.SubDepictionListFragment
 import fr.free.nrw.commons.depictions.SubClass.SubDepictionListPresenter
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
@@ -17,14 +16,13 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import java.lang.Exception
 
 class SubDepictionListPresenterTest {
 
     @Mock
     internal var view: SubDepictionListContract.View? = null
 
-    var subDepictionListPresenter : SubDepictionListPresenter? = null
+    var subDepictionListPresenter: SubDepictionListPresenter? = null
 
     var testScheduler: TestScheduler? = null
 
@@ -36,12 +34,12 @@ class SubDepictionListPresenterTest {
     @Mock
     internal var okHttpJsonApiClient: OkHttpJsonApiClient? = null
 
-    var testObservable : Observable<ArrayList<DepictedItem>> ? = null
+    var testObservable: Observable<ArrayList<DepictedItem>>? = null
 
     @Mock
     lateinit var depictedItem: DepictedItem
 
-    val depictedItems : ArrayList<DepictedItem> =  ArrayList()
+    val depictedItems: ArrayList<DepictedItem> = ArrayList()
 
     @Before
     @Throws(Exception::class)
@@ -50,13 +48,13 @@ class SubDepictionListPresenterTest {
         testScheduler = TestScheduler()
         depictedItems.add(depictedItem)
         testObservable = Observable.just(depictedItems)
-        subDepictionListPresenter =  SubDepictionListPresenter(recentSearchesDao, depictsClient, okHttpJsonApiClient, testScheduler, testScheduler)
+        subDepictionListPresenter = SubDepictionListPresenter(recentSearchesDao, depictsClient, okHttpJsonApiClient, testScheduler, testScheduler)
         subDepictionListPresenter?.onAttachView(view)
     }
 
     @Test
     fun fetchThumbnailForEntityId() {
-        val  singleString : Single<String> = Single.just(String())
+        val singleString: Single<String> = Single.just(String())
         Mockito.`when`(depictsClient?.getP18ForItem(ArgumentMatchers.anyString())).thenReturn(singleString)
         subDepictionListPresenter?.fetchThumbnailForEntityId("Q9394", 0)
         testScheduler?.triggerActions()
