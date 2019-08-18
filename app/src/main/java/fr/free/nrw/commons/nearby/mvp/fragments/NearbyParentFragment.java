@@ -26,7 +26,6 @@ import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
 import javax.inject.Inject;
@@ -270,16 +269,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         nearbyMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
-
-                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-
-                        // Map is set up and the style has loaded. Now you can add
-                        // data or make other map adjustments
-
-                    }
-                });
+                Log.d("deneme2","on map ready is finally called, problem is solved!");
             }
         });
         /*if (nearbyMapFragment.getMapboxMap()!=null){
