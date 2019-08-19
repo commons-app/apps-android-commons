@@ -32,7 +32,6 @@ import timber.log.Timber;
 /**
  * Renderer for DepictedItem
  */
-
 public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
 
     @BindView(R.id.depicts_label)

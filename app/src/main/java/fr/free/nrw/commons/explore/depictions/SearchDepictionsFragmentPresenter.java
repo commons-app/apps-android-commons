@@ -29,7 +29,6 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 /**
  * The presenter class for SearchDepictionsFragment
  */
-
 public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragment implements SearchDepictionsFragmentContract.UserActionListener {
 
     private static final SearchDepictionsFragmentContract.View DUMMY = (SearchDepictionsFragmentContract.View) Proxy
@@ -96,7 +95,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     /**
      * Logs and handles API error scenario
      */
-
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried depictions");
         try {
@@ -143,7 +141,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
      * Handles the success scenario
      * it initializes the recycler view by adding items to the adapter
      */
-
     public void handleSuccess(List<DepictedItem> mediaList) {
         if (mediaList == null || mediaList.isEmpty()) {
             if(queryList.isEmpty()){

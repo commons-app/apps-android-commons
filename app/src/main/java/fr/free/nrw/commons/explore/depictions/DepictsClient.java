@@ -50,7 +50,6 @@ public class DepictsClient {
      * Search for depictions using the search item
      * @return list of depicted items
      */
-
     public Observable<DepictedItem> searchForDepictions(String query, int limit, int offset) {
 
         return depictsInterface.searchForDepicts(query, String.valueOf(limit), Locale.getDefault().getLanguage(), Locale.getDefault().getLanguage(), String.valueOf(offset))
@@ -61,7 +60,6 @@ public class DepictsClient {
     /**
      * Get URL for image using image name
      */
-
     private String getImageUrl(String title) {
         String baseUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
         title = title.replace(" ", "_");
@@ -97,7 +95,6 @@ public class DepictsClient {
     /**
      * @return list of images for a particular depict entity
      */
-
     public Observable<List<Media>> fetchImagesForDepictedItem(String query, int limit, int sroffset) {
         return mediaInterface.fetchImagesForDepictedItem("haswbstatement:P180="+query, String.valueOf(sroffset))
                 .map(mwQueryResponse -> {
@@ -123,7 +120,6 @@ public class DepictsClient {
     /**
      * Get url for the image from media of depictions
      */
-
     private String getUrl(String title) {
         String baseUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
         title = title.substring(title.indexOf(':')+1);
@@ -135,7 +131,6 @@ public class DepictsClient {
     /**
      * Generates MD5 hash for the filename
      */
-
     public String getMd5(String input)
     {
         try {
@@ -169,7 +164,6 @@ public class DepictsClient {
      * @param dateStr
      * @return date in the required format
      */
-
     @Nullable
     private static Date safeParseDate(String dateStr) {
         try {

@@ -22,7 +22,6 @@ public interface DepictsInterface {
      * @param uselang current locale of the phone
      * @param offset number of depictions already fetched useful in implementing pagination
      */
-
     @GET("/w/api.php?action=wbsearchentities&format=json&type=item&uselang=en")
     Observable<DepictSearchResponse> searchForDepicts(@Query("search") String query, @Query("limit") String limit, @Query("language") String language, @Query("uselang") String uselang, @Query("continue") String offset);
 

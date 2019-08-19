@@ -131,7 +131,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
      * Check if depictions were selected
      * from the depiction list
      */
-
     @Override
     public void verifyDepictions() {
         List<DepictedItem> selectedDepictions = repository.getSelectedDepictions();

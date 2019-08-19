@@ -32,7 +32,6 @@ import javax.inject.Inject;
 /**
  * Display depictions in search fragment
  */
-
 public class SearchDepictionsFragment extends CommonsDaggerSupportFragment implements SearchDepictionsFragmentContract.View {
 
     @BindView(R.id.imagesListBox)
@@ -129,7 +128,6 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
      *
      * @param query string searched in the Explore Activity
      */
-
     public void updateDepictionList(String query) {
         presenter.initializeQuery(query);
          if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {

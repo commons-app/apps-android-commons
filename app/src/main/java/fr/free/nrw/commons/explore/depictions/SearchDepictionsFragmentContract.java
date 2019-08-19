@@ -10,7 +10,6 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 /**
  * The contract with with SearchDepictionsFragment and its presenter would talk to each other
  */
-
 public interface SearchDepictionsFragmentContract {
 
     interface View {

@@ -7,7 +7,6 @@ import java.util.Date;
 /**
  * Represents a Depiction
  */
-
 public class Depiction {
     private Uri contentUri;
     private String name;
@@ -29,7 +28,6 @@ public class Depiction {
      *
      * @return content URI
      */
-
     public Uri getContentUri() {
         return contentUri;
     }
@@ -39,7 +37,6 @@ public class Depiction {
      *
      * @param contentUri the content URI
      */
-
     public void setContentUri(Uri contentUri) {
         this.contentUri = contentUri;
     }
@@ -50,7 +47,6 @@ public class Depiction {
      *
      * @return name
      */
-
     public String getName() {
         return name;
     }
@@ -60,7 +56,6 @@ public class Depiction {
      *
      * @param name Depicts name
      */
-
     public void setName(String name) {
         this.name = name;
     }
@@ -70,7 +65,6 @@ public class Depiction {
      *
      * @return Last used date
      */
-
     public Date getLastUsed() {
         return lastUsed;
     }
@@ -90,7 +84,6 @@ public class Depiction {
      *
      * @return no. of times used
      */
-
     public int getTimesUsed() {
         return timesUsed;
     }
@@ -98,7 +91,6 @@ public class Depiction {
     /**
      * Increments timesUsed by 1 and sets last used date as now.
      */
-
     public void incTimesUsed() {
         timesUsed++;
         touch();
@@ -107,7 +99,6 @@ public class Depiction {
     /**
      * Generates new last used date
      */
-
     private void touch() {
         lastUsed = new Date();
     }

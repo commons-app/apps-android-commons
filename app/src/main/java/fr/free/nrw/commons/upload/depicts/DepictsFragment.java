@@ -172,7 +172,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     /**
      * Text change listener for the edit text view of depicts
      */
-
     private void addTextChangeListenerToEtSearch() {
         Log.e("listener160","listener havmv");
         subscribe = RxTextView.textChanges(depictsSearch)
@@ -187,7 +186,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Search for depictions for the following query
      * @param query query string
      */
-
     private void searchForDepictions(String query) {
         if (!TextUtils.isEmpty(query)) {
             Log.e("searchline175",query);

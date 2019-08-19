@@ -115,7 +115,6 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
      * Handles the success scenario
      * it initializes the recycler view by adding items to the adapter
      */
-
     public void handleSuccess(List<DepictedItem> mediaList) {
         if (mediaList == null || mediaList.isEmpty()) {
             if(queryList.isEmpty()){

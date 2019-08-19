@@ -26,14 +26,11 @@ import timber.log.Timber;
 /**
  * The model class for depictions in upload
  */
-
 public class DepictModel {
     private static final int SEARCH_DEPICTS_LIMIT = 25;
     private final DepictionDao depictDao;
     private final DepictsInterface depictsInterface;
     private final JsonKvStore directKvStore;
-    @Inject
-    GpsDepictsModel gpsDepictsModel;
     @Inject
     DepictsClient depictsClient;
 
@@ -54,25 +51,6 @@ public class DepictModel {
         Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
         return (firstItem, secondItem) -> stringSimilarityComparator
                 .compare(firstItem.getDepictsLabel(), secondItem.getDescription());
-    }
-
-    public boolean containsYear(String item) {
-        //Check for current and previous year to exclude these categories from removal
-        Calendar now = Calendar.getInstance();
-        int year = now.get(Calendar.YEAR);
-        String yearInString = String.valueOf(year);
-
-        int prevYear = year - 1;
-        String prevYearInString = String.valueOf(prevYear);
-        Timber.d("Previous year: %s", prevYearInString);
-
-        //Check if item contains a 4-digit word anywhere within the string (.* is wildcard)
-        //And that item does not equal the current year or previous year
-        //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
-        //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
-        return ((item.matches(".*(19|20)\\d{2}.*") && !item.contains(yearInString) && !item.contains(prevYearInString))
-                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)")
-                || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*")));
     }
 
     public void cacheAll(HashMap<String, ArrayList<String>> depictsCache) {
@@ -115,11 +93,6 @@ public class DepictModel {
         selectedDepictedItems.add(depictedItem);
     }
 
-    Observable<DepictedItem> gpsDepicts() {
-        return Observable.fromIterable(gpsDepictsModel.getCategoryList())
-                .map(name -> new DepictedItem(name, "", "", false, ""));
-    }
-
     private Observable<DepictedItem> titleDepicts(List<String> titleList) {
         return Observable.fromIterable(titleList)
                 .concatMap(this::getTitleDepicts);
@@ -142,7 +115,6 @@ public class DepictModel {
      * Get selected Depictions
      * @return selected depictions
      */
-
     public List<DepictedItem> getSelectedDepictions() {
         return selectedDepictedItems;
     }
@@ -153,25 +125,10 @@ public class DepictModel {
      * @param imageTitleList
      * @return
      */
-
     public Observable<DepictedItem> searchAllEntities(String query, List<String> imageTitleList) {
-        if (TextUtils.isEmpty(query)) {
-            Observable<DepictedItem> depictedItemObservable = gpsDepicts()
-                    .concatWith(titleDepicts(imageTitleList));
-
-            if (hasDirectDepictions()) {
-                return null;
-            }
-            return depictedItemObservable;
-        }
-
         return depictsInterface.searchForDepicts(query, String.valueOf(SEARCH_DEPICTS_LIMIT), Locale.getDefault().getLanguage(), Locale.getDefault().getLanguage(), "0")
                 .flatMap(depictSearchResponse -> Observable.fromIterable(depictSearchResponse.getSearch()))
                 .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), "", false, depictSearchItem.getId()));
-    }
-
-    private boolean hasDirectDepictions() {
-        return false;
     }
 
     public List<String> depictionsEntityIdList() {
