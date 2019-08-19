@@ -40,6 +40,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
+
+/**
+ * Fragment for showing depicted items list in Upload activity after media details
+ */
 public class DepictsFragment extends UploadBaseFragment implements DepictsContract.View, UploadDepictsCallback {
 
     @BindView(R.id.depicts_title)

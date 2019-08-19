@@ -37,8 +37,9 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-// Fragment for parent classes and child classes of Depicted items in Explore
-
+/**
+ * Fragment for parent classes and child classes of Depicted items in Explore
+ */
 public class SubDepictionListFragment extends DaggerFragment implements SubDepictionListContract.View {
 
     @BindView(R.id.imagesListBox)

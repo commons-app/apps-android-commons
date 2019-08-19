@@ -2,6 +2,9 @@ package fr.free.nrw.commons.depictions.SubClass.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Model class for parsing SparqlQueryResponse
+ */
 public class SubclassLabel {
 
     @SerializedName("type")

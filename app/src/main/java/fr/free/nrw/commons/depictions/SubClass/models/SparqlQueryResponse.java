@@ -3,6 +3,9 @@ package fr.free.nrw.commons.depictions.SubClass.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * SparqlQueryResponse obtained while fetching parent classes and sub classes for depicted items in explore
+ */
 public class SparqlQueryResponse {
 
     @SerializedName("head")

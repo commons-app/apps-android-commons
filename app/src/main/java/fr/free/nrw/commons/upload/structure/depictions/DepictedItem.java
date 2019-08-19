@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.upload.structure.depictions;
 
+/**
+ * Model class for Depicted Item in Upload and Explore
+ */
 public class DepictedItem {
     private final String depictsLabel;
     private final String description;

@@ -29,6 +29,9 @@ import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
+/**
+ * Depicts Client to handle custom calls to Commons Wikidata APIs
+ */
 @Singleton
 public class DepictsClient {
 
