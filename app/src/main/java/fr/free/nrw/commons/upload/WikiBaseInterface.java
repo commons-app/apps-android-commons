@@ -23,8 +23,8 @@ public interface WikiBaseInterface {
     @FormUrlEncoded
     @POST(MW_API_PREFIX + "action=wbeditentity")
     Observable<MwQueryResponse> postEditEntity(@NonNull @Field("id") String fileEntityId,
-                                              @NonNull @Field("data") String data,
-                                              @NonNull @Field("token") String token);
+                                               @NonNull @Field("token") String editToken,
+                                               @NonNull @Field("data") String data);
 
     @GET(MW_API_PREFIX + "action=query&prop=info")
     Observable<MwQueryResponse> getFileEntityId(@Query("titles") String fileName);

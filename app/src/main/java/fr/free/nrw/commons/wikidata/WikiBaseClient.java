@@ -18,9 +18,9 @@ public class WikiBaseClient {
         this.wikiBaseInterface = wikiBaseInterface;
     }
 
-    public Observable<Boolean> postEditEntity(String fileEntityId, String data, String editToken) {
+    public Observable<Boolean> postEditEntity(String fileEntityId, String editToken, String data) {
         try {
-            return wikiBaseInterface.postEditEntity(fileEntityId, data, editToken)
+            return wikiBaseInterface.postEditEntity(fileEntityId, editToken, data)
                     .map(MwQueryResponse::success);
         } catch (Throwable throwable) {
             return Observable.just(false);

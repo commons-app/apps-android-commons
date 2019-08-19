@@ -157,7 +157,7 @@ public class WikidataEditService {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(editToken -> {
-                    wikiBaseClient.postEditEntity("M" + fileEntityId, data, editToken)
+                    wikiBaseClient.postEditEntity("M" + fileEntityId, editToken, data)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(success -> {
