@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Model class for object obtained while parsing depiction response
  */
-
 public class Continue {
 
     @SerializedName("sroffset")
@@ -33,6 +32,9 @@ public class Continue {
         this._continue = _continue;
     }
 
+    /**
+     * gets sroffset from Continue object
+     */
     public Integer getSroffset() {
         return sroffset;
     }
@@ -41,6 +43,9 @@ public class Continue {
         this.sroffset = sroffset;
     }
 
+    /**
+     * gets continue string from Continue object
+     */
     public String getContinue() {
         return _continue;
     }

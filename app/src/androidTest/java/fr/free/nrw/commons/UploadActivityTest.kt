@@ -21,7 +21,7 @@ class UploadActivityTest {
     @get:Rule
     var activityRule = ActivityTestRule(UploadActivity::class.java)
 
- @Test
+    @Test
     fun orientationChange() {
         UITestHelper.changeOrientation(activityRule)
     }
@@ -45,7 +45,5 @@ class UploadActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.btn_next))
                 .perform(ViewActions.click())
         Intents.intended(IntentMatchers.hasComponent(DepictsFragment::class.java.name))
-        /*onView(withId(R.id.depicts_search))
-                .perform(ViewActions.typeText("bridge"))*/
     }
 }

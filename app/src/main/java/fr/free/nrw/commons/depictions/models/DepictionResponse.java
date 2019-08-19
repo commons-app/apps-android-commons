@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Model class for list of depicted images obtained by fetching using depiction entity
  */
-
 public class DepictionResponse {
 
     @SerializedName("batchcomplete")
@@ -38,6 +37,9 @@ public class DepictionResponse {
         this.query = query;
     }
 
+    /**
+     * returns batchcomplete string from DepictionResponse object
+     */
     public String getBatchcomplete() {
         return batchcomplete;
     }
@@ -46,6 +48,9 @@ public class DepictionResponse {
         this.batchcomplete = batchcomplete;
     }
 
+    /**
+     * returns continue object from DepictionResponse object
+     */
     public Continue getContinue() {
         return _continue;
     }
@@ -54,6 +59,9 @@ public class DepictionResponse {
         this._continue = _continue;
     }
 
+    /**
+     * returns query object from DepictionResponse object
+     */
     public Query getQuery() {
         return query;
     }

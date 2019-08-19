@@ -19,6 +19,9 @@ import java.util.Locale;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 
+/**
+ * Adapter for Items in DepictionDetailsActivity
+ */
 public class GridViewAdapter extends ArrayAdapter {
 
         private List<Media> data;

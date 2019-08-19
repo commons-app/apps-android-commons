@@ -26,6 +26,9 @@ import javax.inject.Singleton;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+/**
+ * presenter for DepictsFragment
+ */
 @Singleton
 public class DepictsPresenter implements DepictsContract.UserActionListener {
 

@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
  *
  * the getSearch() function is used to parse media
  */
-
 public class Query {
 
     @SerializedName("searchinfo")
@@ -36,6 +35,9 @@ public class Query {
         this.search = search;
     }
 
+    /**
+     * return searchInfo
+     */
     public Searchinfo getSearchinfo() {
         return searchinfo;
     }
@@ -44,6 +46,9 @@ public class Query {
         this.searchinfo = searchinfo;
     }
 
+    /**
+     * the getSearch() function is used to parse media
+     */
     public List<Search> getSearch() {
         return search;
     }

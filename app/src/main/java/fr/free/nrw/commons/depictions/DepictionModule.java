@@ -7,6 +7,9 @@ import fr.free.nrw.commons.depictions.Media.DepictedImagesPresenter;
 import fr.free.nrw.commons.depictions.SubClass.SubDepictionListContract;
 import fr.free.nrw.commons.depictions.SubClass.SubDepictionListPresenter;
 
+/**
+ * The Dagger Module for explore:depictions related presenters and (some other objects maybe in future)
+ */
 @Module
 public abstract class DepictionModule {
 

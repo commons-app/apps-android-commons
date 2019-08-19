@@ -21,6 +21,9 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
+/**
+ * Presenter for DepictedImagesFragment
+ */
 public class DepictedImagesPresenter implements DepictedImagesContract.UserActionListener {
 
     private static final DepictedImagesContract.View DUMMY = (DepictedImagesContract.View) Proxy

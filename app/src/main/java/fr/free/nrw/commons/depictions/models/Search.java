@@ -60,6 +60,9 @@ public class Search {
         this.timestamp = timestamp;
     }
 
+    /**
+     * returns ns int from Search object
+     */
     public Integer getNs() {
         return ns;
     }
@@ -68,6 +71,9 @@ public class Search {
         this.ns = ns;
     }
 
+    /**
+     * returns title string from Search object
+     */
     public String getTitle() {
         return title;
     }
@@ -76,6 +82,9 @@ public class Search {
         this.title = title;
     }
 
+    /**
+     * returns pageid int from Search object
+     */
     public Integer getPageid() {
         return pageid;
     }
@@ -84,6 +93,9 @@ public class Search {
         this.pageid = pageid;
     }
 
+    /**
+     * returns size int from Search object
+     */
     public Integer getSize() {
         return size;
     }
@@ -92,6 +104,9 @@ public class Search {
         this.size = size;
     }
 
+    /**
+     * returns wordcount int from Search object
+     */
     public Integer getWordcount() {
         return wordcount;
     }
@@ -100,6 +115,9 @@ public class Search {
         this.wordcount = wordcount;
     }
 
+    /**
+     * returns snippet String from Search object
+     */
     public String getSnippet() {
         return snippet;
     }
@@ -108,6 +126,9 @@ public class Search {
         this.snippet = snippet;
     }
 
+    /**
+     * returns ns int from Search object
+     */
     public String getTimestamp() {
         return timestamp;
     }

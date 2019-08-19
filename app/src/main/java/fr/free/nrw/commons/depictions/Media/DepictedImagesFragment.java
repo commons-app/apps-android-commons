@@ -147,6 +147,9 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
         });
     }
 
+    /**
+     * Seat caption to the image at the given position
+     */
     @Override
     public void handleLabelforImage(String s, int position) {
         if (!s.trim().equals(getString(R.string.detail_caption_empty))) {

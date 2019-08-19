@@ -24,8 +24,9 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
-// Presenter for parent classes and child classes of Depicted items in Explore
-
+/**
+* Presenter for parent classes and child classes of Depicted items in Explore
+ */
 public class SubDepictionListPresenter implements SubDepictionListContract.UserActionListener {
 
     private static final SubDepictionListContract.View DUMMY = (SubDepictionListContract.View) Proxy
@@ -131,7 +132,6 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     /**
      * Logs and handles API error scenario
      */
-
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried depictions");
         try {

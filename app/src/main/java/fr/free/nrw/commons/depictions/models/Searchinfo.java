@@ -28,6 +28,9 @@ public class Searchinfo {
         this.totalhits = totalhits;
     }
 
+    /**
+     * returns "totalhint" integer in SearchInfo object
+     */
     public Integer getTotalhits() {
         return totalhits;
     }
