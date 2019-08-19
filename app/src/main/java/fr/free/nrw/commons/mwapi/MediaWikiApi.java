@@ -11,6 +11,11 @@ import io.reactivex.Single;
 
 public interface MediaWikiApi {
 
+    /**
+     * @return File entity id obtained after uploading the image
+     *
+     * @param fileName title of the image uploaded
+     */
     String getFileEntityId(String fileName) throws IOException;
 
     Single<String> parseWikicode(String source);

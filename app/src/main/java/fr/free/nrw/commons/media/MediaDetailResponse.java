@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Map;
 
+/**
+ * Model class for object while fetching structured data
+ */
 public class MediaDetailResponse {
 
     @SerializedName("entities")

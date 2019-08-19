@@ -34,7 +34,6 @@ import timber.log.Timber;
  * Depicts Renderer for setting up inflating layout,
  * and setting views for the layout of each depicted Item
  */
-
 public class UploadDepictsRenderer extends Renderer<DepictedItem> {
     private final UploadDepictsCallback listener;
     @BindView(R.id.depict_checkbox)
@@ -44,6 +43,7 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
     @BindView(R.id.description) TextView description;
     @BindView(R.id.depicted_image)
     ImageView imageView;
+    private final static String NO_IMAGE_FOR_DEPICTION="No Image for Depiction";
 
     public UploadDepictsRenderer(UploadDepictsCallback listener) {
         this.listener = listener;
@@ -54,6 +54,9 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
         ButterKnife.bind(this, rootView);
     }
 
+    /**
+     * Setup OnClicklisteners on the views
+     */
     @Override
     protected void hookListeners(View rootView) {
         rootView.setOnClickListener(v -> {
@@ -79,6 +82,9 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
         return inflater.inflate(R.layout.layout_upload_depicts_item, parent, false);
     }
 
+    /**
+     * initialise views for every item in the adapter
+     */
     @Override
     public void render() {
         DepictedItem item = getContent();
@@ -86,13 +92,16 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
         depictsLabel.setText(item.getDepictsLabel());
         description.setText(item.getDescription());
         if (!TextUtils.isEmpty(item.getImageUrl())) {
-            if (!item.getImageUrl().equals(getContext().getString(R.string.depictions_image_not_found)))
+            if (!item.getImageUrl().equals(NO_IMAGE_FOR_DEPICTION))
                 setImageView(Uri.parse(item.getImageUrl()), imageView);
         }else{
             listener.fetchThumbnailUrlForEntity(item.getEntityId(),item.getPosition());
         }
     }
 
+    /**
+     * Set thumbnail for the depicted item
+     */
     private void setImageView(Uri imageUrl, ImageView imageView) {
         ImageRequest imageRequest = ImageRequestBuilder
                 .newBuilderWithSource(imageUrl)

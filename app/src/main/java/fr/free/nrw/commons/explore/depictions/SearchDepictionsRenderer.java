@@ -46,6 +46,7 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
     private DepictCallback listener;
 
     int size = 0;
+    private final static String NO_IMAGE_FOR_DEPICTION="No Image for Depiction";
 
     public SearchDepictionsRenderer(DepictCallback listener) {
         this.listener = listener;
@@ -79,7 +80,7 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
         imageView.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_wikidata_logo_24dp));
 
         if (!TextUtils.isEmpty(item.getImageUrl())) {
-            if (!item.getImageUrl().equals(getContext().getString(R.string.depictions_image_not_found)))
+            if (!item.getImageUrl().equals(NO_IMAGE_FOR_DEPICTION))
             {
                 ImageRequest imageRequest = ImageRequestBuilder
                         .newBuilderWithSource(Uri.parse(item.getImageUrl()))

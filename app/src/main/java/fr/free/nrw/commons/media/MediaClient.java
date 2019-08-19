@@ -204,7 +204,6 @@ public class MediaClient {
      * @param filename
      * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
      */
-
     public Single<JsonObject> getCaptionAndDepictions(String filename)  {
         return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), filename)
                 .map(mediaDetailResponse -> {
@@ -218,7 +217,6 @@ public class MediaClient {
      * @param mediaDetailResponse Response obtained from API for Media Details
      * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
      */
-
     @SuppressLint("CheckResult")
     private JsonObject fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
         JsonObject mediaDetails = new JsonObject();
@@ -280,10 +278,9 @@ public class MediaClient {
     /**
      * Gets labels for Depictions using Entity Id from MediaWikiAPI
      *
-     * @param entityId  EntityId (Ex: Q81566) od the depict entity
-     * @return Json Object having label and wikidata url for the Depiction Entity
+     * @param entityId  EntityId (Ex: Q81566) of the depict entity
+     * @return Json Object having label and Wikidata URL for the Depiction Entity
      */
-
     public Single<JsonObject> getLabelForDepiction(String entityId, String language) {
         return mediaDetailInterface.getDepictions(entityId, language)
                 .map(jsonResponse -> {

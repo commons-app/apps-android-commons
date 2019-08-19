@@ -62,7 +62,7 @@
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Upload</string>
   <string name="categories_search_text_hint">Search categories</string>
-  <string name="depicts_search_text_hint">Search depicts</string>
+  <string name="depicts_search_text_hint">Search for items that your media depicts (mountain, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Save</string>
   <string name="refresh_button">Refresh</string>
   <string name="display_list_button">List</string>
@@ -462,7 +462,7 @@ Upload your first media by tapping on the add button.</string>
 
 
   <string name="no_depictions_selected">No Depictions Selected</string>
-  <string name="no_depictions_selected_warning_desc">Depictions helps in Searching/Identifying Images. Are you sure you want to submit without selecting depictions?</string>
+  <string name="no_depictions_selected_warning_desc">Depictions help when searching for images. Are you sure you want to submit without selecting depictions?</string>
 
 
   <string name="yes_submit">Yes, Submit</string>
@@ -552,7 +552,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="images_featured_explanation">Featured pictures are images from highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
   <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
   <string name="thanks_received_explanation" >This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
-  <string name="previous_image_caption_description">Copy previous caption &amp; description</string>
+  <string name="previous_image_caption_description">Copy previous captions &amp; description</string>
   <string name="previous_button_tooltip_message">Click to reuse the title and description you entered in your previous picture and modify it to fit your current one</string>
   <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
@@ -574,7 +574,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="share_via">Share app via...</string>
   <string name="image_info">Image Info</string>
   <string name="no_categories_found">No Categories found</string>
-  <string name="no_depiction_found">No Depiction found</string>
+  <string name="no_depiction_found">No Depictions found</string>
   <string name="upload_cancelled">Cancelled Upload</string>
   <string name="previous_image_title_description_not_found">There is no data for previous image\'s title or description</string>
   <string name="dialog_box_text_nomination">Why should %1$s be deleted?</string>

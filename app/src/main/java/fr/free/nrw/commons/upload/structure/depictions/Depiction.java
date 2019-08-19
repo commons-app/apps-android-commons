@@ -5,7 +5,8 @@ import android.net.Uri;
 import java.util.Date;
 
 /**
- * Represents a Depiction
+ * Represents the fact that a given Commons picture depicts a given Wikidata item.
+ * Example: https://commons.wikimedia.org/wiki/File:Sorting_quicksort_anim.gif depicts https://www.wikidata.org/wiki/Q486598
  */
 public class Depiction {
     private Uri contentUri;

@@ -28,7 +28,7 @@ public class DepictsContentProvider extends CommonsDaggerContentProvider {
 
     private static final int DEPICTS = 1;
     private static final int DEPICTS_ID = 2;
-    private static final String BASE_PATH = "depicts";
+    private static final String BASE_PATH = "depictions";
     public static final Uri BASE_URI = Uri.parse("content://" + DEPICTION_AUTHORITY + "/" + BASE_PATH);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);

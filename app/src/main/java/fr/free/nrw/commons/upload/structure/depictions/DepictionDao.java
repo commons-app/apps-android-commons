@@ -22,7 +22,7 @@ public class DepictionDao {
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject
-    public DepictionDao(@Named("depicts") Provider<ContentProviderClient> clientProvider) {
+    public DepictionDao(@Named("depictions") Provider<ContentProviderClient> clientProvider) {
         this.clientProvider = clientProvider;
     }
 
@@ -125,9 +125,16 @@ public class DepictionDao {
         return cv;
     }
 
+    /**
+     * Example Table: TABLE_NAME: depictions
+     *                COLUMN_ID: unique id for the column
+     *                COLUMN_NAME: depiction name
+     *                COLUMN_LAST_USED: Time stamp for the previous usage of the depiction
+     *                COLUMN_TIMES_USED: Number of times the depiction was used previously
+     */
 
     public static class Table {
-        public static final String TABLE_NAME = "depicts";
+        public static final String TABLE_NAME = "depictions";
         public static final String COLUMN_ID = "_id";
         static final String COLUMN_NAME = "name";
         static final String COLUMN_LAST_USED = "last_used";
@@ -162,24 +169,6 @@ public class DepictionDao {
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
             if (from == to) {
-                return;
-            }
-            if (from < 4) {
-                // doesn't exist yet
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 4) {
-                // table added in version 5
-                onCreate(db);
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 5) {
-                from++;
-                onUpdate(db, from, to);
                 return;
             }
         }

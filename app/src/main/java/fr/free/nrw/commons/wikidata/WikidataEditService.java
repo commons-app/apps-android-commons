@@ -268,7 +268,7 @@ public class WikidataEditService {
                         Timber.d("Error acquiring EntityId for image");
                     }
                 }, throwable -> {
-                    Timber.e(throwable, "Error occurred while getting EntityID for Q24 tag");
+                    Timber.e(throwable, "Error occurred while getting EntityID for the file");
                     ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
     }
@@ -294,7 +294,7 @@ public class WikidataEditService {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(editToken  -> {
                     if (editToken  != null) {
-                        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId, editToken, caption))
+                        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId, editToken, caption.get(0), caption))
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(revisionId ->
@@ -312,14 +312,14 @@ public class WikidataEditService {
                                     });
                                 },
                                         throwable -> {
-                                            Timber.e(throwable, "Error occurred while setting Q24 tag");
+                                            Timber.e(throwable, "Error occurred while setting Captions");
                                             ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                                         });
                     }else {
                         Timber.d("Error acquiring EntityId for image");
                     }
                 }, throwable -> {
-                    Timber.e(throwable, "Error occurred while getting EntityID for Q24 tag");
+                    Timber.e(throwable, "Error occurred while getting EntityID for the File");
                     ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
     }

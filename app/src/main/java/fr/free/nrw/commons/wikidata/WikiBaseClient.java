@@ -12,6 +12,9 @@ import io.reactivex.Observable;
 
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_WIKI_DATA_CSRF;
 
+/**
+ * Wikibase Client for calling WikiBase APIs
+ */
 @Singleton
 public class WikiBaseClient {
 

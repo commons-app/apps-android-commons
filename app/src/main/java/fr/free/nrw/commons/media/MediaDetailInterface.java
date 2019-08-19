@@ -8,6 +8,9 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+/**
+ * Interface for interacting with Commons Structured Data related APIs
+ */
 public interface MediaDetailInterface {
 
     /**

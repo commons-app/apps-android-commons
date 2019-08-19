@@ -9,7 +9,6 @@ import java.util.Map;
  * Represents the Wikibase item associated with a Wikimedia Commons file.
  * For instance the Wikibase item M63996 represents the Commons file "Paul Cézanne - The Pigeon Tower at Bellevue - 1936.19 - Cleveland Museum of Art.jpg"
  */
-
 public class CommonsWikibaseItem {
 
     @SerializedName("type")

@@ -282,7 +282,7 @@ public class UploadRepository {
     }
 
     /**
-     * earch all depictions from
+     * Search all depictions from
      *
      * @param query
      * @param imageTitleList

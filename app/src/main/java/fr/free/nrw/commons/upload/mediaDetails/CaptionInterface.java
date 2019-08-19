@@ -12,8 +12,9 @@ import retrofit2.http.POST;
 public interface CaptionInterface {
 
     @FormUrlEncoded
-    @POST("/w/api.php?action=wbsetlabel&format=json&language=en&value=Testcaptions&&id=M80983832&token=8ff7c2311f05809103d2b74abda121a95d454621%2B%5C")
+    @POST("/w/api.php?action=wbsetlabel&format=json&language=en")
     Call<CustomApiResult> addLabelstoWikidata(@Field("id") String FileEntityId,
                                               @Field("token") String editToken,
+                                              @Field("value") String captionValue,
                                               @Field("data") Map<String, String> caption);
 }

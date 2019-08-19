@@ -82,7 +82,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
      * asks the repository to fetch depictions for the query
      *  @param query
      */
-
     @Override
     public void searchForDepictions(String query) {
         List<DepictedItem> depictedItemList = new ArrayList<>();
@@ -134,7 +133,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
     @Override
     public void verifyDepictions() {
         List<DepictedItem> selectedDepictions = repository.getSelectedDepictions();
-        Log.e("depictsline118", selectedDepictions.size()+"");
         if (selectedDepictions != null && !selectedDepictions.isEmpty()) {
             repository.setSelectedDepictions(repository.getDepictionsEntityIdList());
             view.goToNextScreen();
@@ -143,6 +141,11 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
         }
     }
 
+    /**
+     * Fetch thumbnail for the Wikidata Item
+     * @param entityId entityId of the item
+     * @param position position of the item
+     */
     @Override
     public void fetchThumbnailForEntityId(String entityId, int position) {
         compositeDisposable.add(depictsClient.getP18ForItem(entityId)

@@ -284,7 +284,7 @@ public class UploadService extends HandlerService<Contribution> {
                         String canonicalFilename = "File:" + uploadResult.getFilename();
                         Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
                                 contribution.getWikiDataEntityId());
-                        //to perfrom upload of depictions we pass on depiction is of each depiction selected to the wikidataEditService
+                        // to perfrom upload of depictions we pass on depiction enityId of the selected depictions to the wikidataEditService
                         if (contribution.getDepictionsEntityIds() != null) {
                             for (String s : contribution.getDepictionsEntityIds()) {
                                 wikidataEditService.createClaimWithLogging(s, canonicalFilename);

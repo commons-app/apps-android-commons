@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Model class for parsing Captions when fetching captions using filename in MediaClient
  */
-
 public class Caption {
 
     @SerializedName("language")

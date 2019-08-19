@@ -340,9 +340,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * Populates media deatil fragment with depiction list
+     * Populates media details fragment with depiction list
      */
-
     private void rebuildDepictionList() {
         depictionContainer.removeAllViews();
         for (int i = 0; i<depictions.size(); i++) {

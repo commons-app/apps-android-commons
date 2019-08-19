@@ -212,6 +212,10 @@ public class OkHttpJsonApiClient {
         });
     }
 
+    /**
+     * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item.
+     * Example: bridge -> suspended bridge, aqueduct, etc
+     */
     public Observable<ArrayList<DepictedItem>> getChildQIDs(String qid) throws IOException {
         String queryString = FileUtils.readFromResource("/queries/subclasses_query.rq");
         String query = queryString.
@@ -247,6 +251,10 @@ public class OkHttpJsonApiClient {
         });
     }
 
+    /**
+     * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item.
+     * Example: bridge -> suspended bridge, aqueduct, etc
+     */
     public Observable<ArrayList<DepictedItem>> getParentQIDs(String qid) throws IOException {
         String queryString = FileUtils.readFromResource("/queries/parentclasses_query.rq");
         String query = queryString.
