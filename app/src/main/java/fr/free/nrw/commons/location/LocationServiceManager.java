@@ -177,28 +177,28 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         Timber.d("on location changed");
-        if (isBetterLocation(location, lastLocation)
-                .equals(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
-            lastLocation = location;
-            //lastLocationDuplicate = location;
-            for (LocationUpdateListener listener : locationListeners) {
-                listener.onLocationChangedSignificantly(LatLng.from(lastLocation));
+            if (isBetterLocation(location, lastLocation)
+                    .equals(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
+                lastLocation = location;
+                //lastLocationDuplicate = location;
+                for (LocationUpdateListener listener : locationListeners) {
+                    listener.onLocationChangedSignificantly(LatLng.from(lastLocation));
+                }
+            } else if (location.distanceTo(lastLocation) >= 500) {
+                // Update nearby notification card at every 500 meters.
+                for (LocationUpdateListener listener : locationListeners) {
+                    listener.onLocationChangedMedium(LatLng.from(lastLocation));
+                }
             }
-        } else if (location.distanceTo(lastLocation) >= 500) {
-            // Update nearby notification card at every 500 meters.
-            for (LocationUpdateListener listener : locationListeners) {
-                listener.onLocationChangedMedium(LatLng.from(lastLocation));
-            }
-        }
 
-        else if (isBetterLocation(location, lastLocation)
-                .equals(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
-            lastLocation = location;
-            //lastLocationDuplicate = location;
-            for (LocationUpdateListener listener : locationListeners) {
-                listener.onLocationChangedSlightly(LatLng.from(lastLocation));
+            else if (isBetterLocation(location, lastLocation)
+                    .equals(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
+                lastLocation = location;
+                //lastLocationDuplicate = location;
+                for (LocationUpdateListener listener : locationListeners) {
+                    listener.onLocationChangedSlightly(LatLng.from(lastLocation));
+                }
             }
-        }
     }
 
     @Override

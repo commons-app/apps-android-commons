@@ -99,7 +99,7 @@ public class CommonsApplicationModule {
      * @return DepictsContentProviderClient*/
 
     @Provides
-    @Named("depicts")
+    @Named("depictions")
     public ContentProviderClient provideDepictsContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.DEPICTION_AUTHORITY);
     }
