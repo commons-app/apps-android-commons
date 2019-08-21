@@ -156,13 +156,14 @@ public class ReviewController {
             message = context.getString(messages[i]);
         }
 
-        notificationBuilder.setContentTitle(context.getString(R.string.check_category_notification_title, media.getDisplayTitle()))
+        if(i==2)// will build the notification for category check only if i==2
+        {notificationBuilder.setContentTitle(context.getString(R.string.check_category_notification_title, media.getDisplayTitle()))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(message))
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setProgress(messages.length, i, false)
                 .setOngoing(true);
-        notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());
+        notificationManager.notify(NOTIFICATION_CHECK_CATEGORY, notificationBuilder.build());}
     }
 
     @SuppressLint({"CheckResult", "StringFormatInvalid"})
@@ -193,7 +194,7 @@ public class ReviewController {
                 publishProgress(context, 1);
                 assert firstRevision != null;
                 mwApi.thank(editToken, firstRevision.getRevisionId());
-                publishProgress(context, 2);
+                publishProgress(context, 1); // i=2 sets  notification for categeory check
             } catch (Exception e) {
                 Timber.d(e);
                 return false;

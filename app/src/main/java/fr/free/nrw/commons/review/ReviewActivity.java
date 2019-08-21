@@ -122,9 +122,6 @@ public class ReviewActivity extends AuthenticatedActivity {
         pagerIndicator.setViewPager(reviewPager);
         progressBar.setVisibility(View.VISIBLE);
 
-        Drawable d[]=btnSkipImage.getCompoundDrawablesRelative();
-        d[2].setColorFilter(getApplicationContext().getResources().getColor(R.color.button_blue), PorterDuff.Mode.SRC_IN);
-
 
         if (savedInstanceState != null) {
             updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)); // Use existing media if we have one
