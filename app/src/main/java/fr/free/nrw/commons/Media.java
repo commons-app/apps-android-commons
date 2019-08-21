@@ -68,9 +68,6 @@ public class Media implements Parcelable {
     /**
      * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
      * However unlike categories depictions is multi-lingual
-     * Some expected properties include
-     * location, depicted in background, clothing, formatting (e.g. monochrome images or daguerreotypes)
-     * season/date/time, photographer or artist
      */
     protected ArrayList<Map<String, String>> depictionList;
     protected ArrayList<String> depictions;
@@ -79,8 +76,8 @@ public class Media implements Parcelable {
     /**
      * This hasmap stores the list of multilingual captions, where
      * key of the HashMap is the language and value is the caption in the corresponding language
-     * Ex: key = "en", value: "<description in short in English>"
-     *     key = "de" , value: "<description in german>"
+     * Ex: key = "en", value: "<caption in short in English>"
+     *     key = "de" , value: "<caption in german>"
      */
     private HashMap<String, String> captions;
     private HashMap<String, Object> tags = new HashMap<>();
@@ -565,10 +562,6 @@ public class Media implements Parcelable {
         this.pageId = pageId;
     }
 
-    /*void setCaptions(Map<String, String> captions) {
-        this.captions = captions;
-        this.captions.putAll(captions);
-    }*/
     /**
      * Gets media description in preferred language
      * @param preferredLanguage Language preferred

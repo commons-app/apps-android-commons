@@ -117,6 +117,9 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
 
     }
 
+    /**
+     * Shows media detail fragment when user clicks on any image in the list
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         tabLayout.setVisibility(View.GONE);

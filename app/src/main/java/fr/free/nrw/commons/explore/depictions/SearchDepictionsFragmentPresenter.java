@@ -31,6 +31,12 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
  */
 public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragment implements SearchDepictionsFragmentContract.UserActionListener {
 
+    /**
+     * This creates a dynamic proxy instance of the class,
+     * proxy is to control access to the target object
+     * here our target object is the view.
+     * Thus we when onDettach method of fragment is called we replace the binding of view to our object with the proxy instance
+     */
     private static final SearchDepictionsFragmentContract.View DUMMY = (SearchDepictionsFragmentContract.View) Proxy
             .newProxyInstance(
                     SearchDepictionsFragmentContract.View.class.getClassLoader(),
@@ -123,11 +129,15 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
 
     }
 
+    /**
+     * Whenever a new query is initiated from the search activity clear the previous adapter
+     * and add new value of the query
+     */
     @Override
     public void initializeQuery(String query) {
         this.query = query;
         this.queryList.clear();
-        offset=0;//Reset the offset on query change
+        offset = 0;//Reset the offset on query change
         view.setIsLastPage(false);
         view.clearAdapter();
     }
@@ -155,6 +165,9 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
         }
     }
 
+    /**
+     * After all the depicted items are loaded fetch thumbnail image for all the depicted items (if available)
+     */
     @Override
     public void fetchThumbnailForEntityId(String entityId,int position) {
          compositeDisposable.add(depictsClient.getP18ForItem(entityId)

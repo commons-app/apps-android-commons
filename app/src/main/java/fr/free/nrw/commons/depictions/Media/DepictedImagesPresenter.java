@@ -94,6 +94,10 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
                 .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
+    /**
+     * Handles the success scenario
+     * it initializes the recycler view by adding items to the adapter
+     */
     private void handlePaginationSuccess(List<Media> media) {
         queryList.addAll(media);
         view.progressBarVisible(false);
@@ -116,6 +120,11 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
 
     }
 
+    /**
+     * Handles the success scenario
+     * On first load, it initializes the grid view. On subsequent loads, it adds items to the adapter
+     * @param collection List of new Media to be displayed
+     */
     public void handleSuccess(List<Media> collection) {
         if (collection == null || collection.isEmpty()) {
             if (queryList.isEmpty()) {
@@ -129,6 +138,10 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
         }
     }
 
+    /**
+     * fetch captions for the image using filename and replace title of on the image thumbnail(if captions are available)
+     * else show filename
+     */
     @Override
     public void replaceTitlesWithCaptions(String displayTitle, int position) {
         compositeDisposable.add(mediaClient.getCaptionByFilename("File:" + displayTitle + ".jpg")

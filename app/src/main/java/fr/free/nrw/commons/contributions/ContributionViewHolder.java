@@ -55,6 +55,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private int position;
     private static int TIMEOUT_SECONDS = 15;
+    private static final String NO_CAPTION = "No caption";
 
     ContributionViewHolder(View parent, Callback callback) {
         super(parent);
@@ -123,7 +124,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     .subscribe(subscriber -> {
-                        if (!subscriber.trim().equals("No caption")) {
+                        if (!subscriber.trim().equals(NO_CAPTION)) {
                             titleView.setText(subscriber);
                         } else titleView.setText(contribution.getDisplayTitle());
                     }));

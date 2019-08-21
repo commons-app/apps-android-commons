@@ -48,6 +48,7 @@ public class MediaClient {
 
     //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
     private Map<String, Map<String, String>> continuationStore;
+    private static final String NO_CAPTION = "No caption";
 
     @Inject
     public MediaClient(MediaInterface mediaInterface, MediaDetailInterface mediaDetailInterface) {
@@ -173,7 +174,6 @@ public class MediaClient {
     /**
      * @return  caption for image using filename
      */
-
     public Single<String> getCaptionByFilename(String filename) {
         return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), filename)
                 .map(mediaDetailResponse -> {
@@ -189,10 +189,10 @@ public class MediaClient {
                                 return caption.getValue();
 
                         } catch (Exception e) {
-                            return "No caption";
+                            return NO_CAPTION;
                         }
                     }
-                        return "No caption";
+                        return NO_CAPTION;
 
                 })
                 .singleOrError();
@@ -232,7 +232,7 @@ public class MediaClient {
                     JsonElement jsonElement = new JsonPrimitive(caption.getValue());
                     mediaDetails.add("Caption", jsonElement);
                 } catch (Exception e) {
-                    JsonElement jsonElement = new JsonPrimitive("No caption");
+                    JsonElement jsonElement = new JsonPrimitive(NO_CAPTION);
                     mediaDetails.add("Caption", jsonElement);
                 }
 
@@ -258,14 +258,14 @@ public class MediaClient {
                     mediaDetails.add("Depiction", jsonElement);
                 }
             } catch (Exception e) {
-                JsonElement jsonElement = new JsonPrimitive("No caption");
+                JsonElement jsonElement = new JsonPrimitive(NO_CAPTION);
                 mediaDetails.add("Caption", jsonElement);
                 jsonElement = null;
                 jsonElement = new JsonPrimitive("No depiction");
                 mediaDetails.add("Depiction", jsonElement);
             }
         } else {
-            JsonElement jsonElement = new JsonPrimitive("No caption");
+            JsonElement jsonElement = new JsonPrimitive(NO_CAPTION);
             mediaDetails.add("Caption", jsonElement);
             jsonElement = null;
             jsonElement = new JsonPrimitive("No depiction");

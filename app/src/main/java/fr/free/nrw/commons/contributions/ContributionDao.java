@@ -129,7 +129,7 @@ public class ContributionDao {
 
     /**
      * Convert hashmap of captions to string to be stores in local database
-     * @param captions hashmap pf captions with language code and value
+     * @param captions hashmap of captions with language code and value
      */
     private String convertMapToString(HashMap<String, String> captions) {
         JSONObject json = new JSONObject(captions);

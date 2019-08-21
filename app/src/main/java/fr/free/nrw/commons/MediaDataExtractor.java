@@ -42,7 +42,7 @@ public class MediaDataExtractor {
 
     /**
      * Simplified method to extract all details required to show media details.
-     * It fetches media object, deletion status and talk page and caption for the filename
+     * It fetches media object, deletion status, talk page and captions for the filename
      * @param filename for which the details are to be fetched
      * @return full Media object with all details including deletion status and talk page
      */
@@ -68,6 +68,7 @@ public class MediaDataExtractor {
      * @param filename
      *
      * @return caption for the image in user's locale
+     * Ex: "a nice painting" (english locale) and "No Caption" in casec if caption is not available for the image
      */
     private Single<String> getCaption(String filename) {
         return mediaClient.getCaptionByFilename(filename);

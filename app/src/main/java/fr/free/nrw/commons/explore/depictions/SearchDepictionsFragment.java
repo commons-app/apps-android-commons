@@ -97,6 +97,10 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
                     firstVisibleItemPosition=((LinearLayoutManager)layoutManager).findFirstVisibleItemPosition();
                 }
 
+                /**
+                 * If the user isn't currently loading items and the last page hasn’t been reached,
+                 * then it checks against the current position in view to decide whether or not to load more items.
+                 */
                 if (!isLoading && !isLastPage) {
                     if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                             && firstVisibleItemPosition >= 0
@@ -160,6 +164,10 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
         ViewUtil.showShortSnackbar(depictionsRecyclerView, R.string.no_internet);
     }
 
+    /**
+     * If a non empty list is successfully returned from the api then modify the view
+     * like hiding empty labels, hiding progressbar and notifying the apdapter that list of items has been fetched from the API
+     */
     @Override
     public void onSuccess(List<DepictedItem> mediaList) {
         isLoading = false;
@@ -167,7 +175,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
         progressBar.setVisibility(View.GONE);
         depictionNotFound.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
-        int itemCount=layoutManager.getItemCount();
+        int itemCount = layoutManager.getItemCount();
         depictionsAdapter.addAll(mediaList);
         if(itemCount!=0) {
             depictionsAdapter.notifyItemRangeInserted(itemCount, mediaList.size()-1);

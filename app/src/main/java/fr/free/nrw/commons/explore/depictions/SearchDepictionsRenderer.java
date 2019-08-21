@@ -72,6 +72,9 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
         return inflater.inflate(R.layout.item_depictions, parent, false);
     }
 
+    /**
+     * Render value to all the items in the search depictions list
+     */
     @Override
     public void render() {
         DepictedItem item = getContent();

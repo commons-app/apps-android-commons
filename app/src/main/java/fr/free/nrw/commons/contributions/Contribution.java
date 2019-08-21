@@ -81,8 +81,8 @@ public class  Contribution extends Media {
      * Also now captions replace the previous convention of using title for filename
      * This hasmap stores the list of multilingual captions, where
      * key of the HashMap is the language and value is the caption in the corresponding language
-     * Ex: key = "en", value: "<description in short in English>"
-     *     key = "de" , value: "<description in german>"
+     * Ex: key = "en", value: "<caption in short in English>"
+     *     key = "de" , value: "<caption in german>"
      */
     private HashMap<String, String> captions;
 
