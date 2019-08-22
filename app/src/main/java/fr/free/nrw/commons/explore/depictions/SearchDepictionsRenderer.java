@@ -84,7 +84,7 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
 
         Timber.e("line86"+item.getImageUrl());
         if (!TextUtils.isEmpty(item.getImageUrl())) {
-            //if (!item.getImageUrl().equals(NO_IMAGE_FOR_DEPICTION) && !item.getImageUrl().equals(""))
+            if (!item.getImageUrl().equals(NO_IMAGE_FOR_DEPICTION) && !item.getImageUrl().equals(""))
             {
                 ImageRequest imageRequest = ImageRequestBuilder
                         .newBuilderWithSource(Uri.parse(item.getImageUrl()))
