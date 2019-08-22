@@ -45,6 +45,7 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     private static int TIMEOUT_SECONDS = 15;
     private List<DepictedItem> queryList = new ArrayList<>();
     OkHttpJsonApiClient okHttpJsonApiClient;
+    int size = 0;
 
     @Inject
     public SubDepictionListPresenter(RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, OkHttpJsonApiClient okHttpJsonApiClient,  @Named(IO_THREAD) Scheduler ioScheduler,
@@ -85,13 +86,13 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
                 .observeOn(mainThreadScheduler)
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(response -> {
-                    Timber.e("line67" + response);
                     view.onImageUrlFetched(response,position);
                 }));
     }
 
     @Override
     public void initSubDepictionList(String qid, Boolean isParentClass) throws IOException {
+        size = 0;
         if (isParentClass) {
             compositeDisposable.add(okHttpJsonApiClient.getParentQIDs(qid)
                     .subscribeOn(ioScheduler)
@@ -125,6 +126,9 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
         } else {
             this.queryList.addAll(mediaList);
             view.onSuccess(mediaList);
+            for (DepictedItem m : mediaList) {
+                fetchThumbnailForEntityId(m.getEntityId(), size++);
+            }
         }
     }
 

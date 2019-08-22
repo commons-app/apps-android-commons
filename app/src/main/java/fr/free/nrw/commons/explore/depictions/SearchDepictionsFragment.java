@@ -105,7 +105,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
                     if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                             && firstVisibleItemPosition >= 0
                             && totalItemCount >= PAGE_SIZE) {
-                        loadMoreItems();
+                        loadMoreItems(false);
                     }
                 }
             }
@@ -116,8 +116,8 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     /**
      * Fetch PAGE_SIZE number of items
      */
-    private void loadMoreItems() {
-        presenter.updateDepictionList(presenter.getQuery(),PAGE_SIZE);
+    private void loadMoreItems(boolean reInitialise) {
+        presenter.updateDepictionList(presenter.getQuery(),PAGE_SIZE, reInitialise);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
             handleNoInternet();
             return;
         }
-        loadMoreItems();
+        loadMoreItems(true);
     }
 
     /**
@@ -154,6 +154,17 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
         depictionNotFound.setText(String.format(Locale.getDefault(), no_depiction, presenter.getQuery()));
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        depictionsAdapter.clear();
+        depictionsRecyclerView.cancelPendingInputEvents();
+    }
 
     /**
      * Handles the UI updates for no internet scenario

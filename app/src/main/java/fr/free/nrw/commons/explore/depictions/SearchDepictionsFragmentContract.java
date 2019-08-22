@@ -34,7 +34,7 @@ public interface SearchDepictionsFragmentContract {
 
     interface UserActionListener extends BasePresenter<View> {
 
-        void updateDepictionList(String query, int pageSize);
+        void updateDepictionList(String query, int pageSize, boolean reInitialise);
 
         void saveQuery();
 

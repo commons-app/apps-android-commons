@@ -46,7 +46,7 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
     private DepictCallback listener;
 
     int size = 0;
-    private final static String NO_IMAGE_FOR_DEPICTION="No Image for Depiction";
+    private final static String NO_IMAGE_FOR_DEPICTION = "No Image for Depiction";
 
     public SearchDepictionsRenderer(DepictCallback listener) {
         this.listener = listener;
@@ -82,8 +82,9 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
         tvDepictionDesc.setText(item.getDescription());
         imageView.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_wikidata_logo_24dp));
 
+        Timber.e("line86"+item.getImageUrl());
         if (!TextUtils.isEmpty(item.getImageUrl())) {
-            if (!item.getImageUrl().equals(NO_IMAGE_FOR_DEPICTION))
+            //if (!item.getImageUrl().equals(NO_IMAGE_FOR_DEPICTION) && !item.getImageUrl().equals(""))
             {
                 ImageRequest imageRequest = ImageRequestBuilder
                         .newBuilderWithSource(Uri.parse(item.getImageUrl()))
@@ -114,8 +115,6 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
                     }
                 }, CallerThreadExecutor.getInstance());
             }
-        }else{
-            listener.fetchThumbnailUrlForEntity(item.getEntityId(),item.getPosition());
         }
     }
 

@@ -13,14 +13,11 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 
 import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
@@ -56,6 +53,7 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     private SearchDepictionsFragmentContract.View view = DUMMY;
     private List<DepictedItem> queryList = new ArrayList<>();
     int offset=0;
+    int size = 0;
 
     @Inject
     public SearchDepictionsFragmentPresenter(@Named("default_preferences") JsonKvStore basicKvStore, MediaWikiApi mwApi, RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, @Named(IO_THREAD) Scheduler ioScheduler,
@@ -83,11 +81,15 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
      * to load the list of depictions from API
      *
      * @param query string searched in the Explore Activity
+     * @param reInitialise
      */
     @Override
-    public void updateDepictionList(String query,int pageSize) {
+    public void updateDepictionList(String query, int pageSize, boolean reInitialise) {
         this.query = query;
         view.loadingDepictions();
+        if (reInitialise) {
+            size = 0;
+        }
         saveQuery();
         compositeDisposable.add(depictsClient.searchForDepictions(query, 25, offset)
                 .subscribeOn(ioScheduler)
@@ -138,6 +140,7 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
         this.query = query;
         this.queryList.clear();
         offset = 0;//Reset the offset on query change
+        compositeDisposable.clear();
         view.setIsLastPage(false);
         view.clearAdapter();
     }
@@ -162,6 +165,9 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
             this.queryList.addAll(mediaList);
             view.onSuccess(mediaList);
             offset=queryList.size();
+            for (DepictedItem m : mediaList) {
+                fetchThumbnailForEntityId(m.getEntityId(), size++);
+            }
         }
     }
 

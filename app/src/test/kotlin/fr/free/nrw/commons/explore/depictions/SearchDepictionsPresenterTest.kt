@@ -53,7 +53,7 @@ class SearchDepictionsPresenterTest {
     @Test
     fun updateDepictionList() {
         Mockito.`when`(depictsClient?.searchForDepictions(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())).thenReturn(testObservable)
-        searchDepictionsFragmentPresenter?.updateDepictionList("rabbit", 25)
+        searchDepictionsFragmentPresenter?.updateDepictionList("rabbit", 25, reInitialise)
         testScheduler?.triggerActions()
         verify(view)?.onSuccess(mediaList)
     }
