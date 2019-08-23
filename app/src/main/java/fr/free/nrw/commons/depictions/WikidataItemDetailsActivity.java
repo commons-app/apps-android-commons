@@ -34,7 +34,7 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
     private MediaDetailPagerFragment mediaDetails;
-    private String depictsName;
+    private String wikidataItemName;
     @BindView(R.id.mediaContainer)
     FrameLayout mediaContainer;
     @BindView(R.id.tab_layout)
@@ -61,11 +61,11 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
     }
 
     /**
-     * Gets the passed depictsName from the intents and displays it as the page title
+     * Gets the passed wikidataItemName from the intents and displays it as the page title
      */
     private void setPageTitle() {
-        if (getIntent() != null && getIntent().getStringExtra("depictsName") != null) {
-            setTitle(getIntent().getStringExtra("depictsName"));
+        if (getIntent() != null && getIntent().getStringExtra("wikidataItemName") != null) {
+            setTitle(getIntent().getStringExtra("wikidataItemName"));
         }
     }
 
@@ -90,17 +90,17 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
         depictionImagesListFragment = new DepictedImagesFragment();
         SubDepictionListFragment subDepictionListFragment = new SubDepictionListFragment();
         SubDepictionListFragment parentDepictionListFragment = new SubDepictionListFragment();
-        depictsName = getIntent().getStringExtra("depictsName");
+        wikidataItemName = getIntent().getStringExtra("wikidataItemName");
         String entityId = getIntent().getStringExtra("entityId");
-        if (getIntent() != null && depictsName != null) {
+        if (getIntent() != null && wikidataItemName != null) {
             Bundle arguments = new Bundle();
-            arguments.putString("depictsName", depictsName);
+            arguments.putString("wikidataItemName", wikidataItemName);
             arguments.putString("entityId", entityId);
             arguments.putBoolean("isParentClass", false);
             depictionImagesListFragment.setArguments(arguments);
             subDepictionListFragment.setArguments(arguments);
             Bundle parentClassArguments = new Bundle();
-            parentClassArguments.putString("depictsName", depictsName);
+            parentClassArguments.putString("wikidataItemName", wikidataItemName);
             parentClassArguments.putString("entityId", entityId);
             parentClassArguments.putBoolean("isParentClass", true);
             parentDepictionListFragment.setArguments(parentClassArguments);
@@ -193,7 +193,7 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
     public static void startYourself(Context context, DepictedItem depictedItem) {
         Intent intent = new Intent(context, DepictionDetailsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra("depictsName", depictedItem.getDepictsLabel());
+        intent.putExtra("wikidataItemName", depictedItem.getDepictsLabel());
         intent.putExtra("entityId", depictedItem.getEntityId());
         context.startActivity(intent);
     }
