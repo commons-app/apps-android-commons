@@ -9,6 +9,7 @@
   <string name="preference_category_appearance">Aparensa</string>
   <string name="preference_category_general">General</string>
   <string name="preference_category_feedback">Sugeriment</string>
+  <string name="preference_category_privacy">Confidensialità</string>
   <string name="preference_category_location">Locassion</string>
   <string name="app_name">Comun</string>
   <string name="bullet">•</string>
