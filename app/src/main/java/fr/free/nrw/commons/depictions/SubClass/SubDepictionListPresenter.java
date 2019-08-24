@@ -29,6 +29,12 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
  */
 public class SubDepictionListPresenter implements SubDepictionListContract.UserActionListener {
 
+    /**
+     * This creates a dynamic proxy instance of the class,
+     * proxy is to control access to the target object
+     * here our target object is the view.
+     * Thus we when onDettach method of fragment is called we replace the binding of view to our object with the proxy instance
+     */
     private static final SubDepictionListContract.View DUMMY = (SubDepictionListContract.View) Proxy
             .newProxyInstance(
                     SubDepictionListContract.View.class.getClassLoader(),
@@ -39,13 +45,19 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
     private final Scheduler mainThreadScheduler;
     private  SubDepictionListContract.View view = DUMMY;
     RecentSearchesDao recentSearchesDao;
-    String query;
+    /**
+     * Value of the search query
+     */
+    public String query;
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
     DepictsClient depictsClient;
     private static int TIMEOUT_SECONDS = 15;
     private List<DepictedItem> queryList = new ArrayList<>();
     OkHttpJsonApiClient okHttpJsonApiClient;
-    int size = 0;
+    /**
+     * variable used to record the number of API calls already made for fetching Thumbnails
+     */
+    private int size = 0;
 
     @Inject
     public SubDepictionListPresenter(RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, OkHttpJsonApiClient okHttpJsonApiClient,  @Named(IO_THREAD) Scheduler ioScheduler,
@@ -66,6 +78,9 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
         this.view = DUMMY;
     }
 
+    /**
+     * Store the current query in Recent searches
+     */
     @Override
     public void saveQuery() {
         RecentSearch recentSearch = recentSearchesDao.find(query);

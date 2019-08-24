@@ -41,10 +41,16 @@ public class SubclassLabel {
         return type;
     }
 
+    /**
+     * returns type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * gets value of the depiction
+     */
     public String getValue() {
         return value;
     }
@@ -53,12 +59,10 @@ public class SubclassLabel {
         this.value = value;
     }
 
+    /**
+     * get language in which the depiction was requested
+     */
     public String getXmlLang() {
         return xmlLang;
     }
-
-    public void setXmlLang(String xmlLang) {
-        this.xmlLang = xmlLang;
-    }
-
 }

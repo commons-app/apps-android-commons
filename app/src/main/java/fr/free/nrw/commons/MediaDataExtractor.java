@@ -68,7 +68,7 @@ public class MediaDataExtractor {
      * @param filename
      *
      * @return caption for the image in user's locale
-     * Ex: "a nice painting" (english locale) and "No Caption" in casec if caption is not available for the image
+     * Ex: "a nice painting" (english locale) and "No Caption" in case the caption is not available for the image
      */
     private Single<String> getCaption(String filename) {
         return mediaClient.getCaptionByFilename(filename);

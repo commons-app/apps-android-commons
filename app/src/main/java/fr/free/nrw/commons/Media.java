@@ -254,7 +254,6 @@ public class Media implements Parcelable {
     /**
      * Set Caption(if available) as the thumbnail title of the image
      */
-
     public void setThumbnailTitle(String title) {
         this.thumbnailTitle = title;
     }
@@ -340,7 +339,6 @@ public class Media implements Parcelable {
      *
      * @return caption
      */
-
     public String getCaption() {
         return caption;
     }

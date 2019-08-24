@@ -50,12 +50,24 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
     TextView depictionNotFound;
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
+    /**
+     * Keeps a record of whether current instance of the fragment if of SubClass or ParentClass
+     */
     private boolean isParentClass = false;
     private RVRendererAdapter<DepictedItem> depictionsAdapter;
+    /**
+     * Used by scroll state listener, when hasMoreImages is false scrolling does not fetches any more images
+     */
     private boolean hasMoreImages = true;
-    private boolean isLoading = true;
     RecyclerView.LayoutManager layoutManager;
-    String entityId, depictsName;
+    /**
+     * Stores entityId for the depiction
+     */
+    private String entityId;
+    /**
+     * Stores name of the depiction searched
+     */
+    private String depictsName;
 
     @Inject SubDepictionListPresenter presenter;
 
@@ -138,7 +150,6 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
 
     @Override
     public void onSuccess(List<DepictedItem> mediaList) {
-        isLoading = false;
         hasMoreImages = false;
         progressBar.setVisibility(View.GONE);
         depictionNotFound.setVisibility(GONE);

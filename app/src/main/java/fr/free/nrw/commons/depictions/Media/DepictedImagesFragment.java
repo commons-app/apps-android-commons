@@ -157,11 +157,17 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
         }
     }
 
+    /**
+     * Display snackbar
+     */
     @Override
     public void showSnackBar() {
         ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
     }
 
+    /**
+     * Set visibility of progressbar depending on the boolean value
+     */
     @Override
     public void progressBarVisible(Boolean value) {
         if (value) {
@@ -193,12 +199,18 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
         gridView.setAdapter(gridAdapter);
     }
 
+    /**
+     * adds list to adapter
+     */
     @Override
     public void addItemsToAdapter(List<Media> media) {
         gridAdapter.addAll(media);
         gridAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Sets loading status depending on the boolean value
+     */
     @Override
     public void setLoadingStatus(Boolean value) {
         if (!value) {

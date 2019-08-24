@@ -40,21 +40,32 @@ public class CommonsWikibaseItem {
         this.statements = statements;
     }
 
+    /**
+     * Ex: "mediainfo
+     */
     @SerializedName("type")
     public String getType() {
         return type;
     }
 
+    /**
+     * @return Wikibase Id*/
     @SerializedName("id")
     public String getId() {
         return id;
     }
 
+    /**
+     * @return value of captions
+     */
     @SerializedName("labels")
     public Map<String, Caption> getLabels() {
         return labels;
     }
 
+    /**
+     * Contains the P180 item
+     */
     @SerializedName("statements")
     public Object getStatements() {
         return statements;

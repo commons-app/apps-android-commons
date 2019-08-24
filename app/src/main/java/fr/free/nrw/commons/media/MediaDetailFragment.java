@@ -520,7 +520,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     /**
      * Add view to depictions obtained also tapping on depictions should open the url
      */
-
     private View buildDepictLabel(String depictionName, String entityId, LinearLayout depictionContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_depicts_item, depictionContainer, false);
         final CompatTextView textView = item.findViewById(R.id.media_detail_depicted_item_text);
@@ -573,23 +572,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
      * @param media object of class media
      * @return caption as string
      */
-
     private String prettyCaption(Media media) {
         String caption = media.getCaption().trim();
         if (caption.equals("")) {
             return getString(R.string.detail_caption_empty);
         } else {
             return caption;
-        }
-    }
-
-    private ArrayList<Map<String, String>> getDepictions(Media media) {
-        ArrayList<Map<String, String>> depiction = media.getDepiction();
-        if (depiction.equals("")) {
-            return new ArrayList<>();
-        }
-        else {
-            return depiction;
         }
     }
 

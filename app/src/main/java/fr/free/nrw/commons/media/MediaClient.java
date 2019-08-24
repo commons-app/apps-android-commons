@@ -13,7 +13,6 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
-import java.lang.reflect.Array;
 import java.util.Date;
 
 import java.util.ArrayList;
@@ -30,10 +29,6 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -49,6 +44,7 @@ public class MediaClient {
     //OkHttpJsonApiClient used JsonKvStore for this. I don't know why.
     private Map<String, Map<String, String>> continuationStore;
     private static final String NO_CAPTION = "No caption";
+    private static final String NO_DEPICTION = "No depiction";
 
     @Inject
     public MediaClient(MediaInterface mediaInterface, MediaDetailInterface mediaDetailInterface) {
@@ -254,21 +250,21 @@ public class MediaClient {
                     }
                     mediaDetails.add("Depiction", jsonArray);
                 } catch (Exception e) {
-                    JsonElement jsonElement = new JsonPrimitive("No depiction");
+                    JsonElement jsonElement = new JsonPrimitive(NO_DEPICTION);
                     mediaDetails.add("Depiction", jsonElement);
                 }
             } catch (Exception e) {
                 JsonElement jsonElement = new JsonPrimitive(NO_CAPTION);
                 mediaDetails.add("Caption", jsonElement);
                 jsonElement = null;
-                jsonElement = new JsonPrimitive("No depiction");
+                jsonElement = new JsonPrimitive(NO_DEPICTION);
                 mediaDetails.add("Depiction", jsonElement);
             }
         } else {
             JsonElement jsonElement = new JsonPrimitive(NO_CAPTION);
             mediaDetails.add("Caption", jsonElement);
             jsonElement = null;
-            jsonElement = new JsonPrimitive("No depiction");
+            jsonElement = new JsonPrimitive(NO_DEPICTION);
             mediaDetails.add("Depiction", jsonElement);
         }
 

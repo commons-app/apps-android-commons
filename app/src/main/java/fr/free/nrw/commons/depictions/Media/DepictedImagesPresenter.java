@@ -154,6 +154,9 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
 
     }
 
+    /**
+     * add items to query list
+     */
     @Override
     public void addItemsToQueryList(List<Media> collection) {
         queryList.addAll(collection);

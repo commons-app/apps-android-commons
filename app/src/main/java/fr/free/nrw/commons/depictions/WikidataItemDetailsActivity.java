@@ -34,6 +34,10 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
     private MediaDetailPagerFragment mediaDetails;
+    /**
+     * Name of the depicted item
+     * Ex: Rabbit
+     */
     private String wikidataItemName;
     @BindView(R.id.mediaContainer)
     FrameLayout mediaContainer;

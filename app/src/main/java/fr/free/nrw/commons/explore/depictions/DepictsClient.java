@@ -37,14 +37,12 @@ public class DepictsClient {
 
     private final DepictsInterface depictsInterface;
     private final MediaInterface mediaInterface;
-    private Map<String, Map<String, String>> continuationStore;
     private static final String NO_DEPICTED_IMAGE = "No Image for Depiction";
 
     @Inject
     public DepictsClient(DepictsInterface depictsInterface, MediaInterface mediaInterface) {
         this.depictsInterface = depictsInterface;
         this.mediaInterface = mediaInterface;
-        this.continuationStore = new HashMap<>();
     }
 
     /**
@@ -60,6 +58,8 @@ public class DepictsClient {
 
     /**
      * Get URL for image using image name
+     * Ex: title = Guion Bluford
+     * Url = https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Guion_Bluford.jpg/70px-Guion_Bluford.jpg
      */
     private String getImageUrl(String title) {
         String baseUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
@@ -71,6 +71,10 @@ public class DepictsClient {
         return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/70px-" + title;
     }
 
+    /**
+     * Ex: entityId = Q357458
+     * value returned = Elgin Baylor Night program.jpeg
+     */
     public Single<String> getP18ForItem(String entityId) {
         return depictsInterface.getImageForEntity(entityId)
                 .map(commonsFilename -> {
@@ -115,11 +119,12 @@ public class DepictsClient {
                     }
                     return mediaList;
                 });
-
     }
 
     /**
      * Get url for the image from media of depictions
+     * Ex: Tiger_Woods
+     * Value: https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Tiger_Woods.jpg/70px-Tiger_Woods.jpg
      */
     private String getUrl(String title) {
         String baseUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/";

@@ -245,7 +245,6 @@ public class WikidataEditService {
     /**
      * Adding captions as labels after image is successfully uploaded
      */
-
     public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, Map<String, String> captions) {
         Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
                 .subscribeOn(Schedulers.io())

@@ -43,7 +43,6 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
     RecyclerView.LayoutManager layoutManager;
-    private boolean hasMoreImages = true;
     private boolean isLoading = true;
     private int PAGE_SIZE = 25;
     @Inject
@@ -146,7 +145,6 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
      */
     @Override
     public void initErrorView() {
-        hasMoreImages = false;
         progressBar.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
         depictionNotFound.setVisibility(VISIBLE);
@@ -182,7 +180,6 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void onSuccess(List<DepictedItem> mediaList) {
         isLoading = false;
-        hasMoreImages = false;
         progressBar.setVisibility(View.GONE);
         depictionNotFound.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
