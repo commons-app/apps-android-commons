@@ -55,6 +55,10 @@
             android:icon="@drawable/ic_help_black_24dp"
             android:title="@string/navigation_item_nearby_test_activity" />
 
+        <item
+            android:id="@+id/action_nearby_test_fragment"
+            android:icon="@drawable/ic_help_black_24dp"
+            android:title="@string/navigation_item_nearby_test_fragment" />
 
     </group>
 

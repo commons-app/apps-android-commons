@@ -89,7 +89,8 @@
   <string name="title_activity_featured_images">Featured Images</string>
   <string name="title_activity_category_details">Category</string>
   <string name="title_activity_review">Peer Review</string>
-  <string name="title_activity_nearbytest">Nearby Test</string>
+  <string name="title_activity_nearby_test_activity">Nearby Test Activity</string>
+  <string name="title_activity_nearby_test_fragment">Nearby Test Fragment</string>
   <string name="menu_about">About</string>
   <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app. </string>
   <string name="trademarked_name" translatable="false">Wikimedia Commons</string>
@@ -235,6 +236,7 @@
   <string name="navigation_item_featured_images">Featured</string>
   <string name="navigation_item_review">Review</string>
   <string name="navigation_item_nearby_test_activity">Nearby Test Activity</string>
+  <string name="navigation_item_nearby_test_fragment">Nearby Test Fragment</string>
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>

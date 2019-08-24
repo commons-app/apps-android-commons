@@ -140,7 +140,12 @@
 
         <activity
             android:name=".nearby.NearbyTestActivity"
-            android:label="@string/title_activity_nearbytest" />
+            android:label="@string/title_activity_nearby_test_activity" />
+
+        <activity
+            android:name=".nearby.NearbyTestFragment"
+            android:label="@string/title_activity_nearby_test_fragment" />
+
 
         <service android:name=".upload.UploadService" />
         <service

@@ -40,6 +40,7 @@ import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.nearby.NearbyTestActivity;
+import fr.free.nrw.commons.nearby.NearbyTestFragment;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
@@ -182,7 +183,13 @@ public abstract class NavigationBaseActivity extends BaseActivity
             case R.id.action_nearby_test_activity:
                 drawerLayout.closeDrawer(navigationView);
                 startActivityWithFlags(this, NearbyTestActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT,
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP);                return true;
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                return true;
+            case R.id.action_nearby_test_fragment:
+                drawerLayout.closeDrawer(navigationView);
+                startActivityWithFlags(this, NearbyTestFragment.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT,
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                return true;
             case R.id.action_feedback:
                 drawerLayout.closeDrawer(navigationView);
 
