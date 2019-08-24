@@ -84,11 +84,6 @@ public class Media implements Parcelable {
     private @Nullable LatLng coordinates;
 
     /**
-     * Attribute of standard page object as returned by the MediaWiki API.
-     */
-    private String pageId;
-
-    /**
      * Provides local constructor
      */
     protected Media() {
@@ -199,8 +194,6 @@ public class Media implements Parcelable {
                 StringUtil.fromHtml(metadata.artist()).toString()
         );
 
-        media.setPageId(String.valueOf(page.pageId()));
-
         if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
             media.setThumbUrl(imageInfo.getThumbUrl());
         }
@@ -222,10 +215,6 @@ public class Media implements Parcelable {
 
         media.setLicenseInformation(metadata.licenseShortName(), metadata.licenseUrl());
         return media;
-    }
-
-    public String getPageId() {
-        return pageId;
     }
 
     public String getThumbUrl() {
@@ -556,10 +545,6 @@ public class Media implements Parcelable {
     void setDescriptions(Map<String, String> descriptions) {
         this.descriptions.clear();
         this.descriptions.putAll(descriptions);
-    }
-
-    public void setPageId(String pageId) {
-        this.pageId = pageId;
     }
 
     /**

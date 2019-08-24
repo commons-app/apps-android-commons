@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Caption {
 
+    /**
+     * users language in which caption is written
+     */
     @SerializedName("language")
     private String language;
     @SerializedName("value")

@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.depictions.DepictionDetailsActivity;
+import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.explore.depictions.SearchDepictionsAdapterFactory;
 import fr.free.nrw.commons.explore.depictions.SearchDepictionsRenderer;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -64,7 +64,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         public void depictsClicked(DepictedItem item) {
             // Open SubDepiction Details page
             getActivity().finish();
-            DepictionDetailsActivity.startYourself(getContext(), item);
+            WikidataItemDetailsActivity.startYourself(getContext(), item);
         }
 
         @Override

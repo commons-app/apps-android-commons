@@ -98,8 +98,6 @@ public class WikidataEditService {
             return;
         }
 
-        // TODO Wikidata Sandbox (Q4115189) for test purposes
-        //wikidataEntityId = "Q4115189";
         editWikidataProperty(wikidataEntityId, fileName);
         editWikiBasePropertyP180(wikidataEntityId, fileName);
     }
@@ -262,9 +260,8 @@ public class WikidataEditService {
                             } catch (Throwable throwable) {
                                 throwable.printStackTrace();
                             }
-
                         }
-                    }else {
+                    } else {
                         Timber.d("Error acquiring EntityId for image");
                     }
                 }, throwable -> {

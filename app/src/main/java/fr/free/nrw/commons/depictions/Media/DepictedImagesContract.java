@@ -8,7 +8,7 @@ import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.Media;
 
 /**
- * Contract with which DepictedImagesFragment and it's presenter will talk to each other
+ * Contract with which DepictedImagesFragment and its presenter will talk to each other
  */
 public interface DepictedImagesContract {
 

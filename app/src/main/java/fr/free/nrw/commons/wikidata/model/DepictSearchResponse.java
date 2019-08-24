@@ -9,10 +9,16 @@ import java.util.List;
 public class DepictSearchResponse {
     private final List<DepictSearchItem> search;
 
+    /**
+     * Constructor to initialise value of the search object
+     */
     public DepictSearchResponse(List<DepictSearchItem> search) {
         this.search = search;
     }
 
+    /**
+     * @return List<DepictSearchItem> for the DepictSearchResponse
+     */
     public List<DepictSearchItem> getSearch() {
         return search;
     }

@@ -407,6 +407,10 @@ public class UploadModel {
             return super.hashCode();
         }
 
+        /**
+         * Choose a filename for the media.
+         * Currently, the caption is used as a filename. If several languages have been entered, the first language is used.
+         */
         public String getFileName() {
             return uploadMediaDetails.get(0).getCaptionText();
         }

@@ -23,6 +23,12 @@ public interface MediaDetailInterface {
     @GET("w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1&sites=commonswiki")
     Observable<MediaDetailResponse> fetchStructuredDataByFilename(@Query("languages") String language, @Query("titles") String filename);
 
+    /**
+     * Gets labels for Depictions using Entity Id from MediaWikiAPI
+     *
+     * @param entityId  EntityId (Ex: Q81566) of the depict entity
+     * @param language user's locale
+     */
     @GET("/w/api.php?format=json&action=wbgetentities&props=labels&languagefallback=1")
     Observable<JsonObject> getDepictions(@Query("ids") String entityId, @Query("languages") String language);
 }

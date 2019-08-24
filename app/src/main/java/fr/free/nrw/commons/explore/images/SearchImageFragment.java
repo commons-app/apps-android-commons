@@ -66,6 +66,9 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
 
+    /**
+     * A variable to store number of list items for whom API has been called to fetch captions
+     */
     private int mediaSize = 0;
 
     private RVRendererAdapter<Media> imagesAdapter;

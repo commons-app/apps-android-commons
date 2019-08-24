@@ -118,7 +118,7 @@
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
-            android:name=".depictions.DepictionDetailsActivity"
+            android:name=".depictions.WikidataItemDetailsActivity"
             android:label="@string/title_activity_featured_images"
             android:parentActivityName=".contributions.MainActivity" />
 

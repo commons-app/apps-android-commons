@@ -30,7 +30,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
- * Depicts Client to handle custom calls to Commons Wikidata APIs
+ * Depicts Client to handle custom calls to Commons Wikibase APIs
  */
 @Singleton
 public class DepictsClient {
@@ -38,6 +38,7 @@ public class DepictsClient {
     private final DepictsInterface depictsInterface;
     private final MediaInterface mediaInterface;
     private Map<String, Map<String, String>> continuationStore;
+    private static final String NO_DEPICTED_IMAGE = "No Image for Depiction";
 
     @Inject
     public DepictsClient(DepictsInterface depictsInterface, MediaInterface mediaInterface) {
@@ -87,7 +88,7 @@ public class DepictsClient {
                     }
                     if (!name.isEmpty()){
                         return getImageUrl(name);
-                    } else return "No Image for Depiction";
+                    } else return NO_DEPICTED_IMAGE;
                 })
                 .singleOrError();
     }

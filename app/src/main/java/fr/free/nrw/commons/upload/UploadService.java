@@ -291,7 +291,8 @@ public class UploadService extends HandlerService<Contribution> {
                             }
                         }
                         wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename);
-                        wikidataEditService.createLabelforWikidataEntity(contribution.getWikiDataEntityId(), canonicalFilename, (Map) contribution.getCaptions());
+                        wikidataEditService.createLabelforWikidataEntity(contribution.getWikiDataEntityId(), canonicalFilename,
+                                (Map) contribution.getCaptions());
                         contribution.setFilename(canonicalFilename);
                         contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
                         contribution.setState(Contribution.STATE_COMPLETED);

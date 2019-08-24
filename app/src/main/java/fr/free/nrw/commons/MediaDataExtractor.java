@@ -111,7 +111,7 @@ public class MediaDataExtractor {
                 .map(mediaResponse -> {
                     return mediaResponse;
                 }).doOnError(throwable -> {
-                    Timber.e(throwable+"error while fetching depictions");
+                    Timber.e(throwable+ "error while fetching depictions");
                  });
     }
 

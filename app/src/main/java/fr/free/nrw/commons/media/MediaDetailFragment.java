@@ -39,7 +39,7 @@ import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
-import fr.free.nrw.commons.depictions.DepictionDetailsActivity;
+import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -136,6 +136,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     ScrollView scrollView;
 
     private ArrayList<String> categoryNames;
+    /**
+     * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
+     * However unlike categories depictions is multi-lingual
+     * Ex: key: en value: monument
+     */
     private ArrayList<Map<String, String>> depictions;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
@@ -524,8 +529,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (depictionLoaded) {
             item.setOnClickListener(view -> {
                 DepictedItem depictedItem = new DepictedItem(depictionName, "", "", false, entityId);
-                Intent intent = new Intent(getContext(), DepictionDetailsActivity.class);
-                intent.putExtra("depictsName", depictedItem.getDepictsLabel());
+                Intent intent = new Intent(getContext(), WikidataItemDetailsActivity.class);
+                intent.putExtra("wikidataItemName", depictedItem.getDepictsLabel());
                 intent.putExtra("entityId", depictedItem.getEntityId());
                 getContext().startActivity(intent);
             });

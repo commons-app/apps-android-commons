@@ -44,7 +44,10 @@ import static android.view.View.VISIBLE;
 public class CategoryImagesListFragment extends DaggerFragment {
 
     private static int TIMEOUT_SECONDS = 15;
-    private int mediaSize = 0; // counts the total number of items loaded from the API
+    /**
+     * counts the total number of items loaded from the API
+     */
+    private int mediaSize = 0;
 
     private GridViewAdapter gridAdapter;
 

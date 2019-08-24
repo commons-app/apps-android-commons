@@ -4,7 +4,7 @@ import com.nhaarman.mockito_kotlin.verify
 import com.pedrogomez.renderers.RVRendererAdapter
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.depictions.DepictionDetailsActivity
+import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity
 import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.explore.depictions.DepictsClient
@@ -31,7 +31,7 @@ class SearchTest {
     internal var depictsClient: DepictsClient? = null
 
     @Mock
-    internal var depictionDetailsActivity : DepictionDetailsActivity ? = null
+    internal var wikidataItemDetailsActivity : WikidataItemDetailsActivity? = null
 
     @Mock
     internal var depictedImagesFragment: DepictedImagesFragment? = null
@@ -59,11 +59,11 @@ class SearchTest {
                 depictionsAdapter?.addAll(ArgumentMatchers.anyList<DepictedItem>())?.let { it1 -> assert(it1)
                 }
             }
-            DepictionDetailsActivity.startYourself(ArgumentMatchers.any(), depictedItem)
+            WikidataItemDetailsActivity.startYourself(ArgumentMatchers.any(), depictedItem)
             val mediaDetails : MediaDetailPagerFragment = MediaDetailPagerFragment(false, true)
-            depictionDetailsActivity?.onItemClick(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyLong())
+            wikidataItemDetailsActivity?.onItemClick(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyLong())
             mediaDetails.showImage(0)
-            val media: Media? = depictionDetailsActivity?.getMediaAtPosition(0)
+            val media: Media? = wikidataItemDetailsActivity?.getMediaAtPosition(0)
             mediaDetails.downloadMedia(media)
         }
     }

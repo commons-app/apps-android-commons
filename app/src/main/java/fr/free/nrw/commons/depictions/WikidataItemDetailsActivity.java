@@ -30,7 +30,7 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 /**
  * Activity to show depiction media, parent classes and child classes of depicted items in Explore
  */
-public class DepictionDetailsActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider, AdapterView.OnItemClickListener {
+public class WikidataItemDetailsActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider, AdapterView.OnItemClickListener {
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
     private MediaDetailPagerFragment mediaDetails;
@@ -47,7 +47,7 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_depiction_details);
+        setContentView(R.layout.activity_wikidata_item_details);
         ButterKnife.bind(this);
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -191,7 +191,7 @@ public class DepictionDetailsActivity extends NavigationBaseActivity implements 
      * @param depictedItem Name of the depicts for displaying its details
      */
     public static void startYourself(Context context, DepictedItem depictedItem) {
-        Intent intent = new Intent(context, DepictionDetailsActivity.class);
+        Intent intent = new Intent(context, WikidataItemDetailsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("wikidataItemName", depictedItem.getDepictsLabel());
         intent.putExtra("entityId", depictedItem.getEntityId());

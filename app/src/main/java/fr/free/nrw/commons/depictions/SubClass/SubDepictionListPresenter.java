@@ -79,6 +79,9 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
         recentSearchesDao.save(recentSearch);
     }
 
+    /**
+     * Calls Wikibase APIs to fetch Thumbnail image for a given wikidata item
+     */
     @Override
     public void fetchThumbnailForEntityId(String entityId, int position) {
         compositeDisposable.add(depictsClient.getP18ForItem(entityId)

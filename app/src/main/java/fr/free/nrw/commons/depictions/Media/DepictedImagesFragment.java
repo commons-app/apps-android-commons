@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.depictions.DepictionDetailsActivity;
+import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.depictions.GridViewAdapter;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -75,7 +75,7 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
      * Setup the grid view to and scroll listener for it
      */
     private void initViews() {
-        String depictsName = getArguments().getString("depictsName");
+        String depictsName = getArguments().getString("wikidataItemName");
         entityId = getArguments().getString("entityId");
         if (getArguments() != null && depictsName != null) {
             initList();
@@ -237,7 +237,7 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
             gridAdapter.addItems(collection);
 
             try {
-                ((DepictionDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
+                ((WikidataItemDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
             } catch (Exception e) {
                 e.printStackTrace();
             }

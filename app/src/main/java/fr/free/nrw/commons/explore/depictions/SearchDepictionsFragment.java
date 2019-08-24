@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.depictions.DepictionDetailsActivity;
+import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -51,7 +51,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     private final SearchDepictionsAdapterFactory adapterFactory = new SearchDepictionsAdapterFactory(new SearchDepictionsRenderer.DepictCallback() {
         @Override
         public void depictsClicked(DepictedItem item) {
-            DepictionDetailsActivity.startYourself(getContext(), item);
+            WikidataItemDetailsActivity.startYourself(getContext(), item);
             presenter.saveQuery();
         }
 
