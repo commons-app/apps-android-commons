@@ -88,8 +88,10 @@ public class MediaDataExtractor {
                 for (int i = 0; i <depictionArray.size() ; i++) {
                     JsonObject depictedItem = (JsonObject) depictionArray.get(i);
                     Map <String, String> depictedObject = new HashMap<>();
-                    depictedObject.put("label", depictedItem.get("label").toString().substring(3, depictedItem.get("label").toString().length()-3)); //remove the additional characters obtained in label and ID object to extract the relevant string
-                    depictedObject.put("id", depictedItem.get("id").toString().substring(1, depictedItem.get("id").toString().length() - 1));
+                    String label = depictedItem.get("label").toString();
+                    String id =  depictedItem.get("id").toString();
+                    depictedObject.put("label", label.substring(3, label.length()-3)); //remove the additional characters obtained in label and ID object to extract the relevant string
+                    depictedObject.put("id", id.substring(1,id.length() - 1));
                     depictedItemList.add(depictedObject);
                 }
                 return depictedItemList;

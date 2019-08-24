@@ -70,6 +70,10 @@ public class Media implements Parcelable {
      * However unlike categories depictions is multi-lingual
      */
     protected ArrayList<Map<String, String>> depictionList;
+    /**
+     * The above hashmap is fetched from API and to diplay in Explore
+     * However this list of depictions is for storing and retrieving depictions from local storage or cache
+     */
     protected ArrayList<String> depictions;
     protected boolean requestedDeletion;
     private Map<String, String> descriptions; // multilingual descriptions as loaded
