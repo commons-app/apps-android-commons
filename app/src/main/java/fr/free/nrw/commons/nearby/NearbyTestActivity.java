@@ -42,7 +42,7 @@ public class NearbyTestActivity extends AppCompatActivity {
                 mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
-                        Log.d("NearbyTestActivity","onStyleLoaded");
+                        Log.d("NearbyTests","Map inside activity is ready, works");
                         // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
                     }
                 });

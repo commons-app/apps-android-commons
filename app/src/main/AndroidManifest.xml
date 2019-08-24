@@ -143,7 +143,7 @@
             android:label="@string/title_activity_nearby_test_activity" />
 
         <activity
-            android:name=".nearby.NearbyTestFragment"
+            android:name=".nearby.NearbyTestFragmentActivity"
             android:label="@string/title_activity_nearby_test_fragment" />
 
 
