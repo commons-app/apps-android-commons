@@ -46,11 +46,11 @@ public class MediaDataExtractor {
      * @param filename for which the details are to be fetched
      * @return full Media object with all details including deletion status and talk page
      */
-    public Single<Media> fetchMediaDetails(String filename) {
+    public Single<Media> fetchMediaDetails(String filename, String pageId) {
         Single<Media> mediaSingle = getMediaFromFileName(filename);
         Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
-        Single<String> captionSingle = getCaption(filename);
+        Single<String> captionSingle = getCaption("M"+pageId);
         Single<JsonObject> depictionSingle = getDepictions(filename);
         return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionSingle, depictionSingle, (media, deletionStatus, discussion, caption, depiction) -> {
             media.setDiscussion(discussion);
@@ -65,13 +65,13 @@ public class MediaDataExtractor {
 
     /**
      * Obtains captions using filename
-     * @param filename
+     * @param wikibaseIdentifier
      *
      * @return caption for the image in user's locale
      * Ex: "a nice painting" (english locale) and "No Caption" in case the caption is not available for the image
      */
-    private Single<String> getCaption(String filename) {
-        return mediaClient.getCaptionByFilename(filename);
+    private Single<String> getCaption(String wikibaseIdentifier) {
+        return mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier);
     }
 
     /**

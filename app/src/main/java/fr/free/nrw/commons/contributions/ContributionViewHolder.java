@@ -119,7 +119,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
             titleView.setText(contribution.getDisplayTitle());
         } else {
             Timber.d("Fetching caption for %s", contribution.getFilename());
-            compositeDisposable.add(mediaClient.getCaptionByFilename(contribution.getFilename())
+            compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier("M"+contribution.getPageId())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

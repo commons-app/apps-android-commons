@@ -168,10 +168,10 @@ public class MediaClient {
     }
 
     /**
-     * @return  caption for image using filename
+     * @return  caption for image using wikibaseIdentifier
      */
-    public Single<String> getCaptionByFilename(String filename) {
-        return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), filename)
+    public Single<String> getCaptionByWikibaseIdentifier(String wikibaseIdentifier) {
+        return mediaDetailInterface.getCaptionForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
                 .map(mediaDetailResponse -> {
                     if (mediaDetailResponse != null && mediaDetailResponse.getSuccess() != null && mediaDetailResponse.getSuccess() == 1 && mediaDetailResponse.getEntities() != null) {
                         Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
@@ -179,7 +179,6 @@ public class MediaClient {
                             Map.Entry<String, CommonsWikibaseItem> entry = entities.entrySet().iterator().next();
                             CommonsWikibaseItem commonsWikibaseItem = entry.getValue();
                                 Map<String, Caption> labels = commonsWikibaseItem.getLabels();
-                                Timber.e(filename);
                                 Map.Entry<String, Caption> captionEntry = labels.entrySet().iterator().next();
                                 Caption caption = captionEntry.getValue();
                                 return caption.getValue();

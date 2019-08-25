@@ -64,6 +64,7 @@ public class Media implements Parcelable {
     protected String license;
     protected String licenseUrl;
     protected String creator;
+    protected String pageId;
     protected ArrayList<String> categories; // as loaded at runtime?
     /**
      * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
@@ -202,6 +203,8 @@ public class Media implements Parcelable {
             media.setThumbUrl(imageInfo.getThumbUrl());
         }
 
+        media.setPageId(String.valueOf(page.pageId()));
+
         String language = Locale.getDefault().getLanguage();
         if (StringUtils.isBlank(language)) {
             language = "default";
@@ -221,6 +224,13 @@ public class Media implements Parcelable {
         return media;
     }
 
+    public String getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(String pageId) {
+        this.pageId = pageId;
+    }
     public String getThumbUrl() {
         return thumbUrl;
     }

@@ -204,7 +204,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             imagesAdapter.notifyDataSetChanged();
             ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
             for (Media m : mediaList) {
-                replaceTitlesWithCaptions(m.getDisplayTitle(), mediaSize++);
+                replaceTitlesWithCaptions("M"+m.getPageId(), mediaSize++);
             }
         }
     }
@@ -214,8 +214,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      * When captions are retrieved they replace title
      */
 
-        public void replaceTitlesWithCaptions(String displayTitle, int i) {
-            compositeDisposable.add(mediaClient.getCaptionByFilename("File:"+displayTitle+".jpg")
+        public void replaceTitlesWithCaptions(String wikibaseIdentifier, int i) {
+            compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

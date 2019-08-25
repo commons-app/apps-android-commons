@@ -258,7 +258,7 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
         isLoading = false;
         statusTextView.setVisibility(GONE);
         for (Media m : collection) {
-            presenter.replaceTitlesWithCaptions(m.getDisplayTitle(), mediaSize++);
+            presenter.replaceTitlesWithCaptions("M"+m.getPageId(), mediaSize++);
         }
     }
 }

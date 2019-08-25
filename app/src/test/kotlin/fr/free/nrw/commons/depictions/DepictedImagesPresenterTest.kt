@@ -64,7 +64,7 @@ class DepictedImagesPresenterTest {
     @Test
     fun replaceTitlesWithCaptions() {
         var stringObservable: Single<String>? = Single.just(String())
-        Mockito.`when`(mediaClient?.getCaptionByFilename(ArgumentMatchers.anyString()))?.thenReturn(stringObservable)
+        Mockito.`when`(mediaClient?.getCaptionByWikibaseIdentifier(ArgumentMatchers.anyString()))?.thenReturn(stringObservable)
         depictedImagesPresenter?.replaceTitlesWithCaptions("File:rabbit.jpg", 0)
         testScheduler?.triggerActions()
         verify(view)?.handleLabelforImage("", 0)

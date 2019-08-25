@@ -143,8 +143,8 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
      * else show filename
      */
     @Override
-    public void replaceTitlesWithCaptions(String displayTitle, int position) {
-        compositeDisposable.add(mediaClient.getCaptionByFilename("File:" + displayTitle + ".jpg")
+    public void replaceTitlesWithCaptions(String wikibaseIdentifier, int position) {
+        compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

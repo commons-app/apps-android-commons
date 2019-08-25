@@ -274,7 +274,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         isLoading = false;
         statusTextView.setVisibility(GONE);
         for (Media m : collection) {
-            replaceTitlesWithCaptions(m.getDisplayTitle(), mediaSize++);
+            replaceTitlesWithCaptions("M"+m.getPageId(), mediaSize++);
         }
     }
 
@@ -282,8 +282,8 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * fetch captions for the image using filename and replace title of on the image thumbnail(if captions are available)
      * else show filename
      */
-    public void replaceTitlesWithCaptions(String displayTitle, int i) {
-        compositeDisposable.add(mediaClient.getCaptionByFilename("File:" + displayTitle+ ".jpg")
+    public void replaceTitlesWithCaptions(String wikibaseIdentifier, int i) {
+        compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

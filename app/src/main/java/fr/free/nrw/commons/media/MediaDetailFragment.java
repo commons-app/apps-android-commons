@@ -264,7 +264,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         desc.setHtmlText(media.getDescription());
         license.setText(media.getLicense());
 
-        Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename())
+        Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename(), media.getPageId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setTextFields);

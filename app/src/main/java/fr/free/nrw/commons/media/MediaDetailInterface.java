@@ -30,4 +30,12 @@ public interface MediaDetailInterface {
      */
     @GET("/w/api.php?format=json&action=wbgetentities&props=labels&languagefallback=1")
     Observable<JsonObject> getDepictions(@Query("ids") String entityId, @Query("languages") String language);
+
+    /**
+     * Fetches caption using wikibaseIdentifier
+     *
+     * @param wikibaseIdentifier pageId for the media
+     */
+    @GET("/w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1&sites=commonswiki")
+    Observable<MediaDetailResponse> getCaptionForImage(@Query("languages") String language, @Query("ids") String wikibaseIdentifier);
 }
