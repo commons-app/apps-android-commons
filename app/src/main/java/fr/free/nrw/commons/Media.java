@@ -64,6 +64,9 @@ public class Media implements Parcelable {
     protected String license;
     protected String licenseUrl;
     protected String creator;
+    /**
+     * Wikibase Identifier associated with media files
+     */
     protected String pageId;
     protected ArrayList<String> categories; // as loaded at runtime?
     /**
@@ -224,11 +227,16 @@ public class Media implements Parcelable {
         return media;
     }
 
+    /**
+     * @return pageId for the current media object*/
     public String getPageId() {
         return pageId;
     }
 
-    public void setPageId(String pageId) {
+    /**
+     *sets pageId for the current media object
+     */
+    private void setPageId(String pageId) {
         this.pageId = pageId;
     }
     public String getThumbUrl() {
