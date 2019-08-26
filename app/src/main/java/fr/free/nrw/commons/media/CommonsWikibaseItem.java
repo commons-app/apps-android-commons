@@ -49,7 +49,8 @@ public class CommonsWikibaseItem {
     }
 
     /**
-     * @return Wikibase Id*/
+     * @return Wikibase Id
+     */
     @SerializedName("id")
     public String getId() {
         return id;

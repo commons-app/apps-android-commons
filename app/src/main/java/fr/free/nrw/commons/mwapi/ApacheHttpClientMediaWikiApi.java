@@ -52,7 +52,8 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     /**
      * File entity id obtained after uploading the image
-     *
+     * Create Wikibase media id from the page id.
+     * Example media id: M80618155 for https://commons.wikimedia.org/wiki/File:Tantanmen.jpeg with has the pageid 80618155
      * @param fileName title of the image uploaded
      */
     @Override

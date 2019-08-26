@@ -54,6 +54,9 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
             presenter.saveQuery();
         }
 
+        /**
+         *fetch thumbnail image for all the depicted items (if available)
+         */
         @Override
         public void fetchThumbnailUrlForEntity(String entityId,int position) {
             presenter.fetchThumbnailForEntityId(entityId,position);

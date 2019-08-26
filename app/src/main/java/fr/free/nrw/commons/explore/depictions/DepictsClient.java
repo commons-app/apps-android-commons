@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -50,7 +49,6 @@ public class DepictsClient {
      * @return list of depicted items
      */
     public Observable<DepictedItem> searchForDepictions(String query, int limit, int offset) {
-
         return depictsInterface.searchForDepicts(query, String.valueOf(limit), Locale.getDefault().getLanguage(), Locale.getDefault().getLanguage(), String.valueOf(offset))
                 .flatMap(depictSearchResponse -> Observable.fromIterable(depictSearchResponse.getSearch()))
                 .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), "", false, depictSearchItem.getId()));
@@ -61,13 +59,13 @@ public class DepictsClient {
      * Ex: title = Guion Bluford
      * Url = https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Guion_Bluford.jpg/70px-Guion_Bluford.jpg
      */
-    private String getImageUrl(String title) {
+    private String getThumbnailUrl(String title) {
         String baseUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
         title = title.replace(" ", "_");
-        if (!title.endsWith(".jpg")){
-            title+=".jpg";
-        }
         String MD5Hash =  getMd5(title);
+        /**
+         * We use 70 pixels as the size of our Thumbnail (as it is the perfect fits our UI)
+         */
         return baseUrl + MD5Hash.charAt(0) + '/' + MD5Hash.charAt(0) + MD5Hash.charAt(1) + '/' + title + "/70px-" + title;
     }
 
@@ -91,7 +89,7 @@ public class DepictsClient {
                         name="";
                     }
                     if (!name.isEmpty()){
-                        return getImageUrl(name);
+                        return getThumbnailUrl(name);
                     } else return NO_DEPICTED_IMAGE;
                 })
                 .singleOrError();

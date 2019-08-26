@@ -40,7 +40,10 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     private final Scheduler mainThreadScheduler;
     private DepictedImagesContract.View view = DUMMY;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private String depictName = null;
+    /**
+     * Wikibase enitityId for the depicted Item
+     * Ex: Q9394
+     */
     private String entityId = null;
     private List<Media> queryList = new ArrayList<>();
 
