@@ -16,6 +16,7 @@ import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.nearby.NearbyTestActivity;
 import fr.free.nrw.commons.nearby.NearbyTestFragmentActivity;
+import fr.free.nrw.commons.nearby.NearbyTestFragmentLayersActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
@@ -75,4 +76,7 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract NearbyTestFragmentActivity bindNearbyTestFragment();
+
+    @ContributesAndroidInjector
+    abstract NearbyTestFragmentLayersActivity bindNearbyTestFragmentLayersActivity();
 }
