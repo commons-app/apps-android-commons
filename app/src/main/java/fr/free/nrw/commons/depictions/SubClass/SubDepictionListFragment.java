@@ -93,7 +93,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
 
     private void initViews() {
         if (getArguments() != null) {
-            depictsName = getArguments().getString("depictsName");
+            depictsName = getArguments().getString("wikidataItemName");
             entityId = getArguments().getString("entityId");
             isParentClass =  getArguments().getBoolean("isParentClass");
             if (entityId != null) {
@@ -131,8 +131,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         }
         initViews();
         depictionsRecyclerView.setLayoutManager(layoutManager);
-        ArrayList<DepictedItem> items = new ArrayList<>();
-        depictionsAdapter = adapterFactory.create(items);
+        depictionsAdapter = adapterFactory.create();
         depictionsRecyclerView.setAdapter(depictionsAdapter);
         return v;
     }
@@ -156,6 +155,7 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         bottomProgressBar.setVisibility(GONE);
         int itemCount=layoutManager.getItemCount();
         depictionsAdapter.addAll(mediaList);
+        depictionsRecyclerView.getRecycledViewPool().clear();
         if(itemCount!=0) {
             depictionsAdapter.notifyItemRangeInserted(itemCount, mediaList.size()-1);
         }else{

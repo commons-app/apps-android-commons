@@ -58,7 +58,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
          *fetch thumbnail image for all the depicted items (if available)
          */
         @Override
-        public void fetchThumbnailUrlForEntity(String entityId,int position) {
+        public void fetchThumbnailUrlForEntity(String entityId, int position) {
             presenter.fetchThumbnailForEntityId(entityId,position);
         }
 
@@ -77,8 +77,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
             layoutManager = new GridLayoutManager(getContext(), 2);
         }
         depictionsRecyclerView.setLayoutManager(layoutManager);
-        ArrayList<DepictedItem> items = new ArrayList<>();
-        depictionsAdapter = adapterFactory.create(items);
+        depictionsAdapter = adapterFactory.create();
         depictionsRecyclerView.setAdapter(depictionsAdapter);
         depictionsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -95,7 +94,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
                 int firstVisibleItemPosition=0;
                 if(layoutManager instanceof GridLayoutManager){
                     firstVisibleItemPosition=((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
-                }else{
+                } else {
                     firstVisibleItemPosition=((LinearLayoutManager)layoutManager).findFirstVisibleItemPosition();
                 }
 

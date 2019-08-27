@@ -90,8 +90,10 @@ public class MediaDataExtractor {
                     Map <String, String> depictedObject = new HashMap<>();
                     String label = depictedItem.get("label").toString();
                     String id =  depictedItem.get("id").toString();
-                    depictedObject.put("label", label.substring(3, label.length()-3)); //remove the additional characters obtained in label and ID object to extract the relevant string
-                    depictedObject.put("id", id.substring(1,id.length() - 1));
+                    String transformedLabel = label.substring(3, label.length()-3);
+                    String transformedId = id.substring(1,id.length() - 1);
+                    depictedObject.put("label", transformedLabel); //remove the additional characters obtained in label and ID object to extract the relevant string (since the string also contains extra quites that are not required)
+                    depictedObject.put("id", transformedId);
                     depictedItemList.add(depictedObject);
                 }
                 return depictedItemList;
