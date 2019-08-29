@@ -30,7 +30,8 @@ public class WikiBaseClient {
 
     public Observable<Boolean> postEditEntity(String fileEntityId, String data) {
         try {
-            return wikiBaseInterface.postEditEntity(csrfTokenClient.getTokenBlocking(), fileEntityId, data)
+            String editToken = "+\\"; //csrfTokenClient.getTokenBlocking();
+            return wikiBaseInterface.postEditEntity(fileEntityId, editToken, data)
                     .map(MwQueryResponse::success);
         } catch (Throwable throwable) {
             return Observable.just(false);

@@ -213,6 +213,7 @@ android {
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
             buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
+            buildConfigField "String", "DEPICTS_PROPERTY", "\"P180\""
 
             dimension 'tier'
         }
@@ -247,6 +248,7 @@ android {
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
             buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
+            buildConfigField "String", "DEPICTS_PROPERTY", "\"P245962\""
 
             dimension 'tier'
         }

@@ -25,6 +25,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
@@ -233,11 +234,11 @@ public class MediaClient {
 
                 try {
                     LinkedTreeMap statements = (LinkedTreeMap) commonsWikibaseItem.getStatements();
-                    ArrayList<LinkedTreeMap> p180ItemList = (ArrayList<LinkedTreeMap>) statements.get("P180");
+                    ArrayList<LinkedTreeMap> depictsItemList = (ArrayList<LinkedTreeMap>) statements.get(BuildConfig.DEPICTS_PROPERTY);
                     String depictions = null;
                     JsonArray jsonArray = new JsonArray();
-                    for (int i = 0; i < p180ItemList.size(); i++) {
-                        LinkedTreeMap depictedItem = p180ItemList.get(i);
+                    for (int i = 0; i < depictsItemList.size(); i++) {
+                        LinkedTreeMap depictedItem = depictsItemList.get(i);
                         LinkedTreeMap mainsnak = (LinkedTreeMap) depictedItem.get("mainsnak");
                         Map<String, LinkedTreeMap> datavalue = (Map<String, LinkedTreeMap>) mainsnak.get("datavalue");
                         LinkedTreeMap value = datavalue.get("value");

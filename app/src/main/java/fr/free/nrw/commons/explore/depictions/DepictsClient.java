@@ -19,6 +19,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.depictions.models.Search;
 import fr.free.nrw.commons.media.MediaInterface;
@@ -99,7 +100,7 @@ public class DepictsClient {
      * @return list of images for a particular depict entity
      */
     public Observable<List<Media>> fetchImagesForDepictedItem(String query, int limit, int sroffset) {
-        return mediaInterface.fetchImagesForDepictedItem("haswbstatement:P180="+query, String.valueOf(sroffset))
+        return mediaInterface.fetchImagesForDepictedItem("haswbstatement:" + BuildConfig.DEPICTS_PROPERTY + "=" + query, String.valueOf(sroffset))
                 .map(mwQueryResponse -> {
                     List<Media> mediaList =  new ArrayList<>();
                     for (Search s: mwQueryResponse.getQuery().getSearch()) {

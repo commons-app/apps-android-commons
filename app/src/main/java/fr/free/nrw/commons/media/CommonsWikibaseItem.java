@@ -65,7 +65,7 @@ public class CommonsWikibaseItem {
     }
 
     /**
-     * Contains the P180 item
+     * Contains the Depicts item
      */
     @SerializedName("statements")
     public Object getStatements() {
