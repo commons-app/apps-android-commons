@@ -9,6 +9,7 @@
 * Mar(c)
 * Optilete
 * Patio
+* Rots61
 * Siebrand
 * Sjoerddebruin
 * Smile4ever
@@ -20,6 +21,7 @@
   <string name="preference_category_appearance">Uiterlijk</string>
   <string name="preference_category_general">Algemeen</string>
   <string name="preference_category_feedback">Terugkoppeling</string>
+  <string name="preference_category_privacy">Privacy</string>
   <string name="preference_category_location">Locatie</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -93,6 +95,7 @@
   <string name="categories_activity_title">Categorieën</string>
   <string name="title_activity_settings">Instellingen</string>
   <string name="title_activity_signup">Registreren</string>
+  <string name="title_activity_category_details">Categorie</string>
   <string name="menu_about">Over</string>
   <string name="about_license" fuzzy="true">Opensourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons en haar logo zijn handelsmerken van de Wikimedia Foundation en worden gebruikt met toestemming van de Wikimedia Foundation. We worden niet bekrachtigd door en zijn niet verbonden met de Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"%1$s\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
@@ -149,6 +152,7 @@
   <string name="detail_panel_cats_loading">Laden...</string>
   <string name="detail_panel_cats_none">Geen selectie</string>
   <string name="detail_description_empty">Geen beschrijving</string>
+  <string name="detail_discussion_empty">Geen overleg</string>
   <string name="detail_license_empty">Onbekende licentie</string>
   <string name="menu_refresh">Vernieuwen</string>
   <string name="read_storage_permission_rationale" fuzzy="true">Benodigde toestemming: Lees externe opslag. Zonder deze toestemming kan de app niet functioneren.</string>
@@ -160,12 +164,20 @@
   <string name="no">Nee</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_description">Beschrijving</string>
+  <string name="media_detail_discussion">Overleg</string>
   <string name="media_detail_author">Auteur</string>
   <string name="media_detail_uploaded_date">Uploaddatum</string>
+  <string name="media_detail_license">Licentie</string>
+  <string name="media_detail_coordinates">Coördinaten</string>
+  <string name="media_detail_coordinates_empty">Niet opgegeven</string>
   <string name="_2fa_code">2FA-code</string>
+  <string name="maximum_limit">Maximum limit</string>
   <string name="invalid_zero">Kan niet nul zijn</string>
   <string name="invalid_input">Ongeldige invoer</string>
   <string name="enter_valid">Geldig cijfer invoeren</string>
+  <string name="commons_logo">Commons logo</string>
+  <string name="commons_website">Commons website</string>
+  <string name="commons_facebook">Commons Facebookpagina</string>
   <string name="upload_image">Afbeelding plaatsen</string>
   <string name="welcome_image_no_selfies">Geen selfies</string>
   <string name="cancel">Annuleren</string>
