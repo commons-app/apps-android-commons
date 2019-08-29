@@ -73,34 +73,34 @@ public class NearbyNotificationCardView extends SwipableCardView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-      /*  // If you don't setVisibility after getting layout params, then you will se an empty space in place of nearby NotificationCardView
-        if (((MainActivity)getContext()).defaultKvStore.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+        // If you don't setVisibility after getting layout params, then you will se an empty space in place of nearby NotificationCardView
+        if (((NearbyTestFragmentLayersActivity)getContext()).defaultKvStore.getBoolean("displayNearbyCardView", true) && this.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
             this.setVisibility(VISIBLE);
         } else {
             this.setVisibility(GONE);
-        }*/
+        }
     }
 
 
     private void setActionListeners(Place place) {
-       /* this.setOnClickListener(view -> {
-            MainActivity m = (MainActivity) getContext();
+        this.setOnClickListener(view -> {
+            NearbyTestFragmentLayersActivity m = (NearbyTestFragmentLayersActivity) getContext();
 
             // Change to nearby tab
             m.viewPager.setCurrentItem(NEARBY_TAB_POSITION);
 
             // Center the map to the place
             //((NearbyFragment) m.contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).centerMapToPlace(place);
-        });*/
+        });
     }
 
     @Override public boolean onSwipe(View view) {
-       /* view.setVisibility(GONE);
+        view.setVisibility(GONE);
         // Save shared preference for nearby card view accordingly
-        ((MainActivity) getContext()).defaultKvStore.putBoolean("displayNearbyCardView", false);
+        ((NearbyTestFragmentLayersActivity) getContext()).defaultKvStore.putBoolean("displayNearbyCardView", false);
         ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_notification_dismiss_message));
-        */return true;
+        return true;
     }
 
     /**
