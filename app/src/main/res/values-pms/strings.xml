@@ -529,4 +529,16 @@
   <string name="delete_helper_make_deletion_toast">Tentativ ëd signalé %1$s për la dëscancelassion</string>
   <string name="delete_helper_show_deletion_title">Nominé për la dëscancelassion</string>
   <string name="delete_helper_show_deletion_title_success">Sucess</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s nominà për da bin për la dëscancelassion.</string>
+  <string name="delete_helper_show_deletion_title_failed">Falì</string>
+  <string name="delete_helper_show_deletion_message_else">Impossìbil ëd ciamé la dëscancelassion.</string>
+  <string name="delete_helper_ask_spam_selfie">N\'autoscat</string>
+  <string name="delete_helper_ask_spam_blurry">Tërbol</string>
+  <string name="delete_helper_ask_spam_nonsense">Gnun sust</string>
+  <string name="delete_helper_ask_spam_other">D\'àutr</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Fòto dë stampa</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Fòto a l\'ancàpit da \'n sl\'aragnà</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Marca</string>
+  <string name="delete_helper_ask_reason_copyright_other">D\'àutr</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Përchè a l\'é</string>
 </resources>
