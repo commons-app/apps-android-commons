@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,32 +12,71 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.UnswipableViewPager;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.upload.UploadService;
 import timber.log.Timber;
 
-public class NearbyTestFragmentLayersActivity extends NavigationBaseActivity {
+import static android.content.ContentResolver.requestSync;
+
+public class NearbyTestFragmentLayersActivity extends AuthenticatedActivity {
+
+    @Inject
+    public SessionManager sessionManager;
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.pager)
-    UnswipableViewPager viewPager;
+    public UnswipableViewPager viewPager;
     public static final int CONTRIBUTIONS_TAB_POSITION = 0;
     public static final int NEARBY_TAB_POSITION = 1;
+    public Intent uploadServiceIntent;
+    public boolean isAuthCookieAcquired = false;
+    public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_test_fragment_layers);
         ButterKnife.bind(this);
+        requestAuthToken();
+        initDrawer();
+        setTitle(getString(R.string.navigation_item_home)+"2"); // Should I create a new string variable with another name instead?
+
+    }
+
+    @Override
+    protected void onAuthCookieAcquired(String authCookie) {
+        // Do a sync everytime we get here!
+        requestSync(sessionManager.getCurrentAccount(), BuildConfig.CONTRIBUTION_AUTHORITY, new Bundle());
+        uploadServiceIntent = new Intent(this, UploadService.class);
+        uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
+        startService(uploadServiceIntent);
+
         addTabsAndFragments();
+        isAuthCookieAcquired = true;
+        if (contributionsActivityPagerAdapter.getItem(0) != null) {
+            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired(uploadServiceIntent);
+        }
+    }
+
+    @Override
+    protected void onAuthFailure() {
 
     }
 
     private void addTabsAndFragments() {
-        ContributionsActivityPagerAdapter contributionsActivityPagerAdapter = new ContributionsActivityPagerAdapter(getSupportFragmentManager());
+        contributionsActivityPagerAdapter = new ContributionsActivityPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(contributionsActivityPagerAdapter);
 
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.contributions_fragment)));
@@ -125,12 +165,12 @@ public class NearbyTestFragmentLayersActivity extends NavigationBaseActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    NearbyTestLayersFragment retainedContributionsFragment = getContributionsFragment(0);
+                    ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
                     if (retainedContributionsFragment != null) {
                         return retainedContributionsFragment;
                     } else {
                         // If we reach here, retainedContributionsFragment is null
-                        return new NearbyTestLayersFragment();
+                        return new ContributionsFragment();
 
                     }
 
@@ -152,9 +192,9 @@ public class NearbyTestFragmentLayersActivity extends NavigationBaseActivity {
          * @param position index of tabs, in our case 0 or 1
          * @return
          */
-        private NearbyTestLayersFragment getContributionsFragment(int position) {
+        private ContributionsFragment getContributionsFragment(int position) {
             String tag = makeFragmentName(R.id.pager, position);
-            return (NearbyTestLayersFragment)fragmentManager.findFragmentByTag(tag);
+            return (ContributionsFragment)fragmentManager.findFragmentByTag(tag);
         }
 
         /**
@@ -180,4 +220,28 @@ public class NearbyTestFragmentLayersActivity extends NavigationBaseActivity {
 
     }
 
+    public void hideTabs() {
+        changeDrawerIconToBackButton();
+        if (tabLayout != null) {
+            tabLayout.setVisibility(View.GONE);
+        }
+    }
+
+    public void showTabs() {
+        changeDrawerIconToDefault();
+        if (tabLayout != null) {
+            tabLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * Adds number of uploads next to tab text "Contributions" then it will look like
+     * "Contributions (NUMBER)"
+     * @param uploadCount
+     */
+    public void setNumOfUploads(int uploadCount) {
+        tabLayout.getTabAt(0).setText(getResources().getString(R.string.contributions_fragment) +" "+ getResources()
+                .getQuantityString(R.plurals.contributions_subtitle,
+                        uploadCount, uploadCount));
+    }
 }
