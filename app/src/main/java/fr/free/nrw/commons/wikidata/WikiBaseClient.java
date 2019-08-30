@@ -28,12 +28,12 @@ public class WikiBaseClient {
         this.csrfTokenClient = csrfTokenClient;
     }
 
-    public Observable<Boolean> postEditEntity(String fileEntityId, String editToken, String data) {
+    public Observable<Boolean> postEditEntity(String fileEntityId, String data) {
         try {
-            /*editToken = csrfTokenClient.getTokenBlocking();
+            String editToken = csrfTokenClient.getTokenBlocking();
             if (ConfigUtils.isBetaFlavour()) {
                 editToken = "+\\";
-            }*/
+            }
             return wikiBaseInterface.postEditEntity(fileEntityId, editToken, data)
                     .map(response -> (response.getSuccessVal() == 1));
         } catch (Throwable throwable) {
