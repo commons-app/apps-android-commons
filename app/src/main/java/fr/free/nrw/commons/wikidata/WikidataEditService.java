@@ -12,9 +12,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -71,7 +73,7 @@ public class WikidataEditService {
 
         // Wikidata Sandbox (Q4115189) is for test purposes
         editWikidataProperty(wikidataEntityId, fileName);
-        editWikiBasePropertyP180(wikidataEntityId, fileName);
+        editWikiBaseDepictsProperty(wikidataEntityId, fileName);
     }
 
     /**
@@ -99,32 +101,35 @@ public class WikidataEditService {
 
 
     /**
-     * Edits the wikibase entity by adding the P180 property to it.
-     * Adding the P180 requires call to the wikibase API to set tag against the entity.
+     * Edits the wikibase entity by adding DEPICTS property.
+     * Adding DEPICTS property requires call to the wikibase API to set tag against the entity.
      *
      * @param wikidataEntityId
      * @param fileName
      */
     @SuppressLint("CheckResult")
-    private void editWikiBasePropertyP180(String wikidataEntityId, String fileName) {
+    private void editWikiBaseDepictsProperty(String wikidataEntityId, String fileName) {
         wikiBaseClient.getFileEntityId(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
-                        addPropertyP180(wikidataEntityId, fileEntityId.toString());
-                        Timber.d("EntityId for image was received successfully");
+                        Timber.d("EntityId for image was received successfully: %s", fileEntityId);
+                        addDepictsProperty(wikidataEntityId, fileEntityId.toString());
                     } else {
-                        Timber.d("Error acquiring EntityId for image");
+                        Timber.d("Error acquiring EntityId for image: %s", fileName);
                     }
                     }, throwable -> {
-                    Timber.e(throwable, "Error occurred while getting EntityID for P180 tag");
+                    Timber.e(throwable, "Error occurred while getting EntityID to set DEPICTS property");
                     ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
     }
 
     @SuppressLint("CheckResult")
-    private void addPropertyP180(String entityId, String fileEntityId) {
+    private void addDepictsProperty(String entityId, String fileEntityId) {
+        if (ConfigUtils.isBetaFlavour()) {
+            entityId = "Q10"; // Wikipedia:Sandbox (Q10)
+        }
 
         JsonObject value = new JsonObject();
         value.addProperty("entity-type", "item");
@@ -137,7 +142,7 @@ public class WikidataEditService {
 
         JsonObject mainSnak = new JsonObject();
         mainSnak.addProperty("snaktype", "value");
-        mainSnak.addProperty("property", "P180");
+        mainSnak.addProperty("property", BuildConfig.DEPICTS_PROPERTY);
         mainSnak.add("datavalue", dataValue);
 
         JsonObject claim = new JsonObject();
@@ -162,11 +167,11 @@ public class WikidataEditService {
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(success -> {
                                 if (success)
-                                    Timber.d("Property P180 set successfully for %s", fileEntityId);
+                                    Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
                                 else
-                                    Timber.d("Unable to set property P180 for %s", fileEntityId);
+                                    Timber.d("Unable to set DEPICTS property for %s", fileEntityId);
                                 }, throwable -> {
-                                Timber.e(throwable, "Error occurred while setting P180 tag");
+                                Timber.e(throwable, "Error occurred while setting DEPICTS property");
                                 ViewUtil.showLongToast(context, throwable.toString());
                             });
                 }, Throwable::printStackTrace);
