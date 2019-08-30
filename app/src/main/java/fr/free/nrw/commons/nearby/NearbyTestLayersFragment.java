@@ -18,7 +18,6 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
 import javax.inject.Inject;
 
@@ -85,6 +84,8 @@ public class NearbyTestLayersFragment extends Fragment implements NearbyParentFr
                 mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
+                        //NearbyTestLayersFragment.this.childMapFragmentAttached();
+
                         Log.d("NearbyTests","Fragment inside fragment with map works");
                         // Map is set up and the style has loaded. Now you can add data or make other map adjustments
 
@@ -100,6 +101,7 @@ public class NearbyTestLayersFragment extends Fragment implements NearbyParentFr
      * it is attached.
      */
     public void childMapFragmentAttached() {
+        Log.d("denemeTest","this:"+this);
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
                 (this, null, locationManager);
         Timber.d("Child fragment attached");

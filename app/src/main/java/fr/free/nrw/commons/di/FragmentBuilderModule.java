@@ -14,6 +14,7 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.nearby.NearbyListFragment;
+import fr.free.nrw.commons.nearby.SupportMapFragment;
 import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.review.ReviewImageFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
@@ -57,6 +58,9 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract ContributionsFragment bindContributionsFragment();
+
+    @ContributesAndroidInjector
+    abstract SupportMapFragment bindSupportMapFragment();
 
     @ContributesAndroidInjector
     abstract NearbyParentFragment bindNearbyParentFragment();
