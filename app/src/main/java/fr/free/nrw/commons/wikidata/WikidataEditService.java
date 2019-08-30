@@ -26,6 +26,7 @@ import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.CustomApiResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -137,8 +138,8 @@ public class WikidataEditService {
 
 
     /**
-     * Edits the wikibase entity by adding the "Depicts" property to it.
-     * Adding the "Depicts" requires call to the wikibase API to set tag against the entity.
+     * Edits the wikibase entity by adding DEPICTS property.
+     * Adding DEPICTS property requires call to the wikibase API to set tag against the entity.
      *
      * @param wikidataEntityId
      * @param fileName
@@ -150,19 +151,22 @@ public class WikidataEditService {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
+                        Timber.d("EntityId for image was received successfully: %s", fileEntityId);
                         addDepictsProperty(wikidataEntityId, fileEntityId.toString());
-                        Timber.d("EntityId for image was received successfully");
                     } else {
-                        Timber.d("Error acquiring EntityId for image");
+                        Timber.d("Error acquiring EntityId for image: %s", fileName);
                     }
-                }, throwable -> {
-                    Timber.e(throwable, "Error occurred while getting EntityID for depicts tag");
+                    }, throwable -> {
+                    Timber.e(throwable, "Error occurred while getting EntityID to set DEPICTS property");
                     ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
     }
 
     @SuppressLint("CheckResult")
     private void addDepictsProperty(String entityId, String fileEntityId) {
+        if (ConfigUtils.isBetaFlavour()) {
+            entityId = "Q10"; // Wikipedia:Sandbox (Q10)
+        }
 
         JsonObject value = new JsonObject();
         value.addProperty("entity-type", "item");
@@ -192,7 +196,7 @@ public class WikidataEditService {
         String data = jsonData.toString();
 
         Observable.defer((Callable<ObservableSource<Boolean>>) () ->
-                wikiBaseClient.postEditEntity("M" + fileEntityId, data))
+                wikiBaseClient.postEditEntity("M" + fileEntityId, "+\\", data))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(success -> {
