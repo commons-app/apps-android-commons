@@ -20,11 +20,23 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
+import javax.inject.Inject;
+
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
+import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG;
 
-public class NearbyTestLayersFragment extends Fragment {
+
+public class NearbyTestLayersFragment extends Fragment implements NearbyParentFragmentContract.View {
+
+    @Inject
+    LocationServiceManager locationManager;
+    NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,5 +92,81 @@ public class NearbyTestLayersFragment extends Fragment {
                 });
             }
         });
+    }
+
+    /**
+     * Thanks to this method we make sure NearbyMapFragment is ready and attached. So that we can
+     * prevent NPE caused by null child fragment. This method is called from child fragment when
+     * it is attached.
+     */
+    public void childMapFragmentAttached() {
+        nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
+                (this, null, locationManager);
+        Timber.d("Child fragment attached");
+    }
+
+    @Override
+    public void setListFragmentExpanded() {
+
+    }
+
+    @Override
+    public void refreshView() {
+
+    }
+
+    @Override
+    public void registerLocationUpdates(LocationServiceManager locationServiceManager) {
+
+    }
+
+    @Override
+    public boolean isNetworkConnectionEstablished() {
+        return false;
+    }
+
+    @Override
+    public void addNetworkBroadcastReceiver() {
+
+    }
+
+    @Override
+    public void listOptionMenuItemClicked() {
+
+    }
+
+    @Override
+    public void populatePlaces(fr.free.nrw.commons.location.LatLng curlatLng, fr.free.nrw.commons.location.LatLng searchLatLng) {
+
+    }
+
+    @Override
+    public boolean isBottomSheetExpanded() {
+        return false;
+    }
+
+    @Override
+    public void addSearchThisAreaButtonAction() {
+
+    }
+
+    @Override
+    public void setSearchThisAreaButtonVisibility(boolean isVisible) {
+
+    }
+
+    @Override
+    public void setSearchThisAreaProgressVisibility(boolean isVisible) {
+
+    }
+
+    @Override
+    public void checkPermissionsAndPerformAction(Runnable runnable) {
+
+    }
+
+    @Override
+    public void resumeFragment() {
+
     }
 }
