@@ -204,10 +204,16 @@ public class NetworkingModule {
         return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, DepictsInterface.class);
     }
 
-    @Provides
+    /*@Provides
     @Singleton
     public WikiBaseInterface provideWikiBaseInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
         return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, WikiBaseInterface.class);
+    }*/
+
+    @Provides
+    @Singleton
+    public WikiBaseInterface provideWikiBaseInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
     }
 
     @Provides
