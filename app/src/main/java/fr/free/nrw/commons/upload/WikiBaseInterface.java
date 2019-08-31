@@ -15,6 +15,10 @@ import retrofit2.http.Query;
 
 import static org.wikipedia.dataclient.Service.MW_API_PREFIX;
 
+/**
+ * Retrofit calls for managing responses network calls of entity ids required for uploading depictions
+ */
+
 public interface WikiBaseInterface {
 
     @Headers("Cache-Control: no-cache")
@@ -26,5 +30,5 @@ public interface WikiBaseInterface {
 
     @GET(MW_API_PREFIX + "action=query&prop=info")
     Observable<MwQueryResponse> getFileEntityId(@Query("titles") String fileName);
-}
 
+}

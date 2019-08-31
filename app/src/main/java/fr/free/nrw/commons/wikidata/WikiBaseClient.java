@@ -29,7 +29,8 @@ public class WikiBaseClient {
 
     public Observable<Boolean> postEditEntity(String fileEntityId, String data) {
         try {
-            return wikiBaseInterface.postEditEntity(fileEntityId, csrfTokenClient.getTokenBlocking(), data)
+            String editToken = csrfTokenClient.getTokenBlocking();
+            return wikiBaseInterface.postEditEntity(fileEntityId, editToken, data)
                     .map(response -> (response.getSuccessVal() == 1));
         } catch (Throwable throwable) {
             return Observable.just(false);

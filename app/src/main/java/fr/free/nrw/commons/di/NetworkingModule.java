@@ -117,6 +117,13 @@ public class NetworkingModule {
         return HttpUrl.parse(TOOLS_FORGE_URL);
     }
 
+    @Provides
+    @Singleton
+    @Named(NAMED_COMMONS_WIKI_SITE)
+    public WikiSite provideCommonsWikiSite() {
+        return new WikiSite(BuildConfig.COMMONS_URL);
+    }
+
     /**
      * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
      * @return returns a singleton Gson instance
@@ -125,13 +132,6 @@ public class NetworkingModule {
     @Singleton
     public Gson provideGson() {
         return GsonUtil.getDefaultGson();
-    }
-
-    @Provides
-    @Singleton
-    @Named("commons-wikisite")
-    public WikiSite provideCommonsWikiSite() {
-        return new WikiSite(BuildConfig.COMMONS_URL);
     }
 
     @Provides
