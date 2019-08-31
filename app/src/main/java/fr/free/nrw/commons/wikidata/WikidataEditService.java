@@ -7,6 +7,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,6 +20,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -158,18 +160,20 @@ public class WikidataEditService {
 
         String data = jsonData.toString();
 
-        wikiBaseClient.postEditEntity("M" + fileEntityId, data)
+        Observable.defer((Callable<ObservableSource<Boolean>>) () ->
+                wikiBaseClient.postEditEntity("M" + fileEntityId, data))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(success -> {
-                    if (success)
-                        Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
-                    else
-                        Timber.d("Unable to set DEPICTS property for %s", fileEntityId);
-                    }, throwable -> {
-                    Timber.e(throwable, "Error occurred while setting DEPICTS property");
-                    ViewUtil.showLongToast(context, throwable.toString());
-                });
+                            if (success)
+                                Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
+                            else
+                                Timber.d("Unable to set DEPICTS property for %s", fileEntityId);
+                        },
+                        throwable -> {
+                            Timber.e(throwable, "Error occurred while setting DEPICTS property");
+                            ViewUtil.showLongToast(context, throwable.toString());
+                        });
     }
 
     private void handleClaimResult(String wikidataEntityId, String revisionId) {
