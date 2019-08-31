@@ -35,6 +35,7 @@ public class NearbyTestLayersFragment extends Fragment implements NearbyParentFr
     @Inject
     LocationServiceManager locationManager;
     NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
+    SupportMapFragment mapFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +54,6 @@ public class NearbyTestLayersFragment extends Fragment implements NearbyParentFr
         Mapbox.getInstance(getActivity(), getString(R.string.mapbox_commons_app_token));
 
         // Create supportMapFragment
-        SupportMapFragment mapFragment;
         if (savedInstanceState == null) {
 
             // Create fragment
@@ -84,7 +84,7 @@ public class NearbyTestLayersFragment extends Fragment implements NearbyParentFr
                 mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
-                        //NearbyTestLayersFragment.this.childMapFragmentAttached();
+                        NearbyTestLayersFragment.this.childMapFragmentAttached();
 
                         Log.d("NearbyTests","Fragment inside fragment with map works");
                         // Map is set up and the style has loaded. Now you can add data or make other map adjustments
@@ -103,7 +103,7 @@ public class NearbyTestLayersFragment extends Fragment implements NearbyParentFr
     public void childMapFragmentAttached() {
         Log.d("denemeTest","this:"+this);
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
-                (this, null, locationManager);
+                (this, mapFragment, locationManager);
         Timber.d("Child fragment attached");
     }
 

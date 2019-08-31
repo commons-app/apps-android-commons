@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.maps.MapFragment;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -22,6 +24,9 @@ import java.util.List;
 
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
+import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 
 /**
  * Support Fragment wrapper around a map view.
@@ -37,7 +42,9 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
  *
  * @see #getMapAsync(OnMapReadyCallback)
  */
-public class SupportMapFragment extends CommonsDaggerSupportFragment implements OnMapReadyCallback {
+public class SupportMapFragment extends CommonsDaggerSupportFragment
+                                implements OnMapReadyCallback,
+                                            NearbyMapContract.View{
 
     private final List<OnMapReadyCallback> mapReadyCallbackList = new ArrayList<>();
     private MapFragment.OnMapViewReadyCallback mapViewReadyCallback;
@@ -223,6 +230,146 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment implements 
         } else {
             onMapReadyCallback.onMapReady(mapboxMap);
         }
+    }
+
+    @Override
+    public void showSearchThisAreaButton() {
+
+    }
+
+    @Override
+    public void showInformationBottomSheet() {
+
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void updateMapMarkers(LatLng latLng, List<Place> placeList) {
+
+    }
+
+    @Override
+    public void updateMapToTrackPosition(LatLng curLatLng) {
+
+    }
+
+    @Override
+    public void setListeners() {
+
+    }
+
+    @Override
+    public MapView setupMapView(Bundle savedInstanceState) {
+        return null;
+    }
+
+    @Override
+    public void addCurrentLocationMarker(LatLng curLatLng) {
+
+    }
+
+    @Override
+    public void setSearchThisAreaButtonVisibility(boolean visible) {
+
+    }
+
+    @Override
+    public boolean isCurrentLocationMarkerVisible() {
+        return false;
+    }
+
+    @Override
+    public void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> baseMarkerOptions) {
+
+    }
+
+    @Override
+    public void prepareViewsForSheetPosition() {
+
+    }
+
+    @Override
+    public void hideFABs() {
+
+    }
+
+    @Override
+    public void showFABs() {
+
+    }
+
+    @Override
+    public void addAnchorToBigFABs(FloatingActionButton floatingActionButton, int anchorID) {
+
+    }
+
+    @Override
+    public void removeAnchorFromFABs(FloatingActionButton fab) {
+
+    }
+
+    @Override
+    public void addAnchorToSmallFABs(FloatingActionButton floatingActionButton, int anchorID) {
+
+    }
+
+    @Override
+    public void passInfoToSheet(Place place) {
+
+    }
+
+    @Override
+    public void updateBookmarkButtonImage(Place place) {
+
+    }
+
+    @Override
+    public void openWebView(Uri link) {
+
+    }
+
+    @Override
+    public void animateFABs(boolean isFabOpen) {
+
+    }
+
+    @Override
+    public void closeFabs(boolean isFabOpen) {
+
+    }
+
+    @Override
+    public void updateMarker(boolean isBookmarked, Place place) {
+
+    }
+
+    @Override
+    public LatLng getCameraTarget() {
+        return null;
+    }
+
+    @Override
+    public MapboxMap getMapboxMap() {
+        return null;
+    }
+
+    @Override
+    public void viewsAreAssignedToPresenter(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback) {
+
+    }
+
+    @Override
+    public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
+
+    }
+
+    @Override
+    public void showPlaces() {
+
     }
 }
 
