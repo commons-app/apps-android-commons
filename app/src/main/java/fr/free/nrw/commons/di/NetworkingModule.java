@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
+import org.wikipedia.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonUtil;
@@ -39,6 +40,13 @@ public class NetworkingModule {
     private static final String TEST_TOOLS_FORGE_URL = "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app";
 
     public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
+
+    public static final String NAMED_COMMONS_WIKI_SITE = "commons-wikisite";
+    private static final String NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite";
+    private static final String NAMED_COMMONS_WIKI = "commonswiki";
+
+    public static final String NAMED_COMMONS_CSRF = "commons-csrf";
+    public static final String NAMED_WIKI_DATA_CSRF = "wikidata-csrf";
 
     @Provides
     @Singleton
@@ -86,6 +94,13 @@ public class NetworkingModule {
                 gson);
     }
 
+    @Named(NAMED_COMMONS_CSRF)
+    @Provides
+    @Singleton
+    public CsrfTokenClient provideCommonsCsrfTokenClient(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return new CsrfTokenClient(commonsWikiSite, commonsWikiSite);
+    }
+
     @Provides
     @Named("wikimedia_api_host")
     @NonNull
@@ -127,7 +142,7 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    public WikiBaseInterface provideWikiBaseInterface(@Named("commons-wikisite") WikiSite commonsWikiSite) {
+    public WikiBaseInterface provideWikiBaseInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
     }
 

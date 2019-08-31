@@ -158,23 +158,18 @@ public class WikidataEditService {
 
         String data = jsonData.toString();
 
-        Observable.fromCallable(mediaWikiApi::getEditToken)
+        wikiBaseClient.postEditEntity("M" + fileEntityId, data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(editToken -> {
-                    wikiBaseClient.postEditEntity("M" + fileEntityId, editToken, data)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(success -> {
-                                if (success)
-                                    Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
-                                else
-                                    Timber.d("Unable to set DEPICTS property for %s", fileEntityId);
-                                }, throwable -> {
-                                Timber.e(throwable, "Error occurred while setting DEPICTS property");
-                                ViewUtil.showLongToast(context, throwable.toString());
-                            });
-                }, Throwable::printStackTrace);
+                .subscribe(success -> {
+                    if (success)
+                        Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
+                    else
+                        Timber.d("Unable to set DEPICTS property for %s", fileEntityId);
+                    }, throwable -> {
+                    Timber.e(throwable, "Error occurred while setting DEPICTS property");
+                    ViewUtil.showLongToast(context, throwable.toString());
+                });
     }
 
     private void handleClaimResult(String wikidataEntityId, String revisionId) {
