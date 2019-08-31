@@ -10,7 +10,7 @@ import fr.free.nrw.commons.upload.WikiBaseInterface;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import io.reactivex.Observable;
 
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_WIKI_DATA_CSRF;
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
 
 /**
  * Wikibase Client for calling WikiBase APIs
@@ -23,18 +23,14 @@ public class WikiBaseClient {
 
     @Inject
     public WikiBaseClient(WikiBaseInterface wikiBaseInterface,
-                          @Named(NAMED_WIKI_DATA_CSRF) CsrfTokenClient csrfTokenClient) {
+                          @Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient) {
         this.wikiBaseInterface = wikiBaseInterface;
         this.csrfTokenClient = csrfTokenClient;
     }
 
     public Observable<Boolean> postEditEntity(String fileEntityId, String data) {
         try {
-            String editToken = csrfTokenClient.getTokenBlocking();
-            if (ConfigUtils.isBetaFlavour()) {
-                editToken = "+\\";
-            }
-            return wikiBaseInterface.postEditEntity(fileEntityId, editToken, data)
+            return wikiBaseInterface.postEditEntity(fileEntityId, csrfTokenClient.getTokenBlocking(), data)
                     .map(response -> (response.getSuccessVal() == 1));
         } catch (Throwable throwable) {
             return Observable.just(false);
@@ -43,6 +39,6 @@ public class WikiBaseClient {
 
     public Observable<Long> getFileEntityId(String fileName) {
         return wikiBaseInterface.getFileEntityId(fileName)
-                .map(response -> (long)(response.query().pages().get(0).pageId()));
+                .map(response -> (long) (response.query().pages().get(0).pageId()));
     }
 }
