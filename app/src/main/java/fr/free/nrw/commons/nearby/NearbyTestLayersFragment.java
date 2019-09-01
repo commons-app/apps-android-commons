@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,12 +23,15 @@ import com.mapbox.mapboxsdk.maps.Style;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG;
+import static fr.free.nrw.commons.nearby.NearbyTestFragmentLayersActivity.CONTRIBUTIONS_TAB_POSITION;
 
 
 public class NearbyTestLayersFragment extends Fragment implements NearbyParentFragmentContract.View {
@@ -101,10 +105,12 @@ public class NearbyTestLayersFragment extends Fragment implements NearbyParentFr
      * it is attached.
      */
     public void childMapFragmentAttached() {
-        Log.d("denemeTest","this:"+this);
+        Log.d("denemeTest","this:"+this+", location manager is:"+locationManager);
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
                 (this, mapFragment, locationManager);
         Timber.d("Child fragment attached");
+        // TODO: find out why location manager is null
+        checkPermissionsAndPerformAction(this::registerLocationUpdates);
     }
 
     @Override
@@ -116,10 +122,13 @@ public class NearbyTestLayersFragment extends Fragment implements NearbyParentFr
     public void refreshView() {
 
     }
-
     @Override
-    public void registerLocationUpdates(LocationServiceManager locationServiceManager) {
+    public void registerLocationUpdates(LocationServiceManager locationManager) {
+        locationManager.registerLocationManager();
+    }
 
+    public void registerLocationUpdates() {
+        locationManager.registerLocationManager();
     }
 
     @Override
@@ -164,7 +173,12 @@ public class NearbyTestLayersFragment extends Fragment implements NearbyParentFr
 
     @Override
     public void checkPermissionsAndPerformAction(Runnable runnable) {
-
+        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                runnable,
+                () -> ((NearbyTestFragmentLayersActivity) getActivity()).viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION),
+                R.string.location_permission_title,
+                R.string.location_permission_rationale_nearby);
     }
 
     @Override
