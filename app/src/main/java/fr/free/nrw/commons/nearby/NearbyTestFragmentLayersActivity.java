@@ -110,6 +110,7 @@ public class NearbyTestFragmentLayersActivity extends AuthenticatedActivity {
                     case NEARBY_TAB_POSITION:
                         Timber.d("Nearby tab selected");
                         tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
+                        ((NearbyTestLayersFragment)contributionsActivityPagerAdapter.getItem(1)).nearbyParentFragmentPresenter.onTabSelected();
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();

@@ -67,6 +67,7 @@ public class NearbyParentFragmentPresenter
     @Override
     public void onTabSelected() {
         Timber.d("Nearby tab selected");
+        Log.d("denemeTest","Nearby tab selected");
         onTabSelected = true;
         // The condition for initialize operations is both having views ready and tab is selected
         if (nearbyViewsAreReady) {
@@ -81,6 +82,7 @@ public class NearbyParentFragmentPresenter
     @Override
     public void nearbyFragmentsAreReady() {
         Timber.d("Nearby fragments are ready to be used by presenter");
+        Log.d("denemeTest","nearbyFragmentsAreReady");
         nearbyViewsAreReady = true;
         // The condition for initialize operations is both having views ready and tab is selected
         if (onTabSelected) {

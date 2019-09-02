@@ -114,8 +114,8 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
                 (this, mapFragment, locationManager);
         Timber.d("Child fragment attached");
-        // TODO: find out why location manager is null
-        checkPermissionsAndPerformAction(this::registerLocationUpdates);
+        nearbyParentFragmentPresenter.nearbyFragmentsAreReady();
+        //checkPermissionsAndPerformAction(this::registerLocationUpdates);
     }
 
     @Override
@@ -178,6 +178,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void checkPermissionsAndPerformAction(Runnable runnable) {
+        Log.d("denemeTest","checkPermissionsAndPerformAction is called");
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 runnable,
