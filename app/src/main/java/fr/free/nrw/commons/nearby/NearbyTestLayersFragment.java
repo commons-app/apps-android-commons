@@ -22,8 +22,10 @@ import com.mapbox.mapboxsdk.maps.Style;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
@@ -34,18 +36,21 @@ import static fr.free.nrw.commons.contributions.ContributionsFragment.CONTRIBUTI
 import static fr.free.nrw.commons.nearby.NearbyTestFragmentLayersActivity.CONTRIBUTIONS_TAB_POSITION;
 
 
-public class NearbyTestLayersFragment extends Fragment implements NearbyParentFragmentContract.View {
+public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment implements NearbyParentFragmentContract.View {
 
     @Inject
     LocationServiceManager locationManager;
+
     NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
     SupportMapFragment mapFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_simple, container, false);
+        ButterKnife.bind(this, view);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_simple, container, false);
+        return view;
 
     }
 
