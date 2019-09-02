@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.annotations.PolygonOptions;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapFragment;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -22,11 +30,17 @@ import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import dagger.android.support.DaggerFragment;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.utils.LocationUtils;
+import timber.log.Timber;
 
 /**
  * Support Fragment wrapper around a map view.
@@ -45,6 +59,9 @@ import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 public class SupportMapFragment extends CommonsDaggerSupportFragment
                                 implements OnMapReadyCallback,
                                             NearbyMapContract.View{
+
+    @Inject
+    BookmarkLocationsDao bookmarkLocationDao;
 
     private final List<OnMapReadyCallback> mapReadyCallbackList = new ArrayList<>();
     private MapFragment.OnMapViewReadyCallback mapViewReadyCallback;
@@ -249,12 +266,30 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateMapMarkers(LatLng latLng, List<Place> placeList) {
-
+        Log.d("denemeTest","updateMapMarkers, curLatng:"+latLng);
+        List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
+                .loadAttractionsFromLocationToBaseMarkerOptions(latLng, // Curlatlang will be used to calculate distances
+                        placeList,
+                        getActivity(),
+                        bookmarkLocationDao.getAllBookmarksLocations());
+        mapboxMap.clear();
+        // TODO: set search latlang here
+        CameraPosition cameraPosition = new CameraPosition.Builder().target
+                (LocationUtils.commonsLatLngToMapBoxLatLng(latLng)).build();
+        mapboxMap.setCameraPosition(cameraPosition);
+        /*mapboxMap.animateCamera(CameraUpdateFactory
+                .newCameraPosition(cameraPosition), 1000);*/
+        // TODO: set position depening to botom sheet position heere
+        // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
+        addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
+        // Re-enable mapbox gestures on custom location markers load
+        mapboxMap.getUiSettings().setAllGesturesEnabled(true);
+        updateMapToTrackPosition(latLng);
     }
 
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
-
+        addCurrentLocationMarker(curLatLng);
     }
 
     @Override
@@ -267,10 +302,65 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
         return null;
     }
 
+    /**
+     * Adds a marker for the user's current position. Adds a
+     * circle which uses the accuracy * 2, to draw a circle
+     * which represents the user's position with an accuracy
+     * of 95%.
+     *
+     * Should be called only on creation of mapboxMap, there
+     * is other method to update markers location with users
+     * move.
+     */
     @Override
     public void addCurrentLocationMarker(LatLng curLatLng) {
+        Log.d("denemeTest","addCurrentLocationMarker");
+        Timber.d("addCurrentLocationMarker is called");
 
+        Icon icon = IconFactory.getInstance(getContext()).fromResource(R.drawable.current_location_marker);
+
+        MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
+                .position(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
+        currentLocationMarkerOptions.setIcon(icon); // Set custom icon
+
+        Marker currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
+
+        List<com.mapbox.mapboxsdk.geometry.LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
+                curLatLng.getAccuracy() * 2, 100);
+
+        PolygonOptions currentLocationPolygonOptions = new PolygonOptions()
+                .addAll(circle)
+                .strokeColor(Color.parseColor("#55000000"))
+                .fillColor(Color.parseColor("#11000000"));
+        mapboxMap.addPolygon(currentLocationPolygonOptions);
     }
+
+    //TODO: go to util
+    /**
+     * Creates a series of points that create a circle on the map.
+     * Takes the center latitude, center longitude of the circle,
+     * the radius in meter and the number of nodes of the circle.
+     *
+     * @return List List of LatLng points of the circle.
+     */
+    private List<com.mapbox.mapboxsdk.geometry.LatLng> createCircleArray(
+            double centerLat, double centerLong, float radius, int nodes) {
+        List<com.mapbox.mapboxsdk.geometry.LatLng> circle = new ArrayList<>();
+        float radiusKilometer = radius / 1000;
+        double radiusLong = radiusKilometer
+                / (111.320 * Math.cos(centerLat * Math.PI / 180));
+        double radiusLat = radiusKilometer / 110.574;
+
+        for (int i = 0; i < nodes; i++) {
+            double theta = ((double) i / (double) nodes) * (2 * Math.PI);
+            double nodeLongitude = centerLong + radiusLong * Math.cos(theta);
+            double nodeLatitude = centerLat + radiusLat * Math.sin(theta);
+            circle.add(new com.mapbox.mapboxsdk.geometry.LatLng(nodeLatitude, nodeLongitude));
+        }
+        return circle;
+    }
+
+
 
     @Override
     public void setSearchThisAreaButtonVisibility(boolean visible) {
@@ -283,8 +373,39 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> baseMarkerOptions) {
+    public void addNearbyMarkersToMapBoxMap(@Nullable List<NearbyBaseMarker> baseMarkerList) {
+        Log.d("denemeTest","add markers to map");
+        mapboxMap.addMarkers(baseMarkerList);
+        mapboxMap.setOnInfoWindowCloseListener(marker -> {
+            /*if (marker == selected) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }*/
+        });
+        map.getMapAsync(mapboxMap -> {
+            mapboxMap.addMarkers(baseMarkerList);
+            //fabRecenter.setVisibility(View.VISIBLE);
+            mapboxMap.setOnInfoWindowCloseListener(marker -> {
+                /*if (marker == selected) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }*/
+            });
 
+            mapboxMap.setOnMarkerClickListener(marker -> {
+
+
+                if (marker instanceof NearbyMarker) {
+                    //this.selected = marker;
+                    NearbyMarker nearbyMarker = (NearbyMarker) marker;
+                    Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+                    passInfoToSheet(place);
+                    //bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    //bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+                }
+                return false;
+            });
+
+        });
     }
 
     @Override

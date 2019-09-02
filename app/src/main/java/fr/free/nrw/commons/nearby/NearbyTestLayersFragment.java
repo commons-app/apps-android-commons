@@ -30,6 +30,9 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.PermissionUtils;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG;
@@ -40,6 +43,9 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     @Inject
     LocationServiceManager locationManager;
+
+    @Inject
+    NearbyController nearbyController;
 
     NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
     SupportMapFragment mapFragment;
@@ -153,7 +159,27 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void populatePlaces(fr.free.nrw.commons.location.LatLng curlatLng, fr.free.nrw.commons.location.LatLng searchLatLng) {
+        compositeDisposable.add(Observable.fromCallable(() -> nearbyController
+                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, true))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::updateMapMarkers,
+                        throwable -> {
+                            Timber.d(throwable);
+                            //showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                            // TODO solve first unneeded method call here
+                            //progressBar.setVisibility(View.GONE);
+                            //nearbyParentFragmentPresenter.lockNearby(false);
+                        }));
+    }
 
+    /**
+     * Populates places for custom location, should be used for finding nearby places around a
+     * location where you are not at.
+     * @param nearbyPlacesInfo This variable has place list information and distances.
+     */
+    private void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo);
     }
 
     @Override

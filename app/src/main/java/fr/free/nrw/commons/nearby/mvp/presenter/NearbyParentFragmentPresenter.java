@@ -115,7 +115,8 @@ public class NearbyParentFragmentPresenter
         // We will know when we went offline and online again
         //nearbyParentFragmentView.addNetworkBroadcastReceiver();
         //nearbyMapFragmentView.setupMapView(null);
-        nearbyOperationsInitialized();
+        //nearbyOperationsInitialized();
+        initializeMapOperations();
     }
 
 
@@ -139,10 +140,11 @@ public class NearbyParentFragmentPresenter
     }
 
     public void initializeMapOperations() {
-        Log.d("deneme2","initializeMapOperations");
+        Log.d("denemeTest","initializeMapOperations");
 
         lockNearby(false);
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
+        //TODO: NETWORK RECEIVER IS NOT ASSIGNED
 
         Timber.d("Nearby map view is created and ready");
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
@@ -187,14 +189,16 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget) {
+        Log.d("denemeTest","updateMapAndList");
         if (isNearbyLocked) {
-
+            Log.d("denemeTest","isNearbyLocked");
             Timber.d("Nearby is locked, so updateMapAndList returns");
             return;
         }
 
         if (!nearbyParentFragmentView.isNetworkConnectionEstablished()) {
             Timber.d("Network connection is not established");
+            Log.d("denemeTest","nearbyParentFragmentView.isNetworkConnectionEstablished()");
             return;
         }
 
@@ -218,6 +222,7 @@ public class NearbyParentFragmentPresenter
          */
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(MAP_UPDATED)) {
+            Log.d("denemeTest","1");
             nearbyParentFragmentView.populatePlaces(lastLocation, lastLocation);
             nearbyParentFragmentView.setSearchThisAreaProgressVisibility(false);
             //nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
@@ -225,10 +230,13 @@ public class NearbyParentFragmentPresenter
             // TODO dont forget map updated state after an wikidata item is updated
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
+            Log.d("denemeTest","2");
+
             nearbyParentFragmentView.populatePlaces(lastLocation, cameraTarget);
             nearbyParentFragmentView.setSearchThisAreaProgressVisibility(false);
             searchingThisArea = false;
         } else { // Means location changed slightly, ie user is walking or driving.
+            Log.d("denemeTest","3");
             nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
             searchingThisArea = false;
         }
