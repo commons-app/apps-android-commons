@@ -7,9 +7,11 @@
 -->
 <resources>
   <string name="preference_category_feedback">Atsauksmes</string>
+  <string name="preference_category_location">Atrašanās vieta</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Iestatījumi</string>
+  <string name="intent_share_upload_label">Augšupielādēt Commons</string>
   <string name="username">Lietotājvārds</string>
   <string name="password">Parole</string>
   <string name="login">Pieslēgties</string>
@@ -26,6 +28,7 @@
   <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
   <string name="upload_progress_notification_title_finishing">Pabeidz %1$s augšupielādi</string>
   <string name="upload_failed_notification_title">Neizdevās augšupielādēt %1$s</string>
+  <string name="upload_failed_notification_subtitle">Pieskarieties, lai skatītu</string>
   <string name="title_activity_contributions">Manas nesenās augšupielādes</string>
   <string name="contribution_state_queued">Rindā iekļauts</string>
   <string name="contribution_state_failed">Neizdevās</string>
@@ -64,8 +67,9 @@
   <string name="menu_retry_upload">Mēģināt vēlreiz</string>
   <string name="menu_cancel_upload">Atcelt</string>
   <string name="menu_download">Lejupielādēt</string>
-  <string name="preference_license" fuzzy="true">Licence</string>
+  <string name="preference_license">Noklusējuma licence</string>
   <string name="preference_theme">Nakts režīms</string>
+  <string name="preference_theme_summary">Lietot tumšo apdari</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -92,6 +96,9 @@
   <string name="media_detail_coordinates">Koordinātas</string>
   <string name="media_detail_coordinates_empty">Nav norādītas</string>
   <string name="_2fa_code">2FA kods</string>
+  <string name="maximum_limit">Maksimālais limits</string>
+  <string name="commons_logo">Commons logo</string>
+  <string name="commons_website">Commons mājaslapa</string>
   <string name="upload_image">Augšupielādēt attēlu</string>
   <string name="welcome_image_llamas">Lama</string>
   <string name="welcome_image_rainbow_bridge">Varavīksnes tilts</string>
@@ -118,6 +125,7 @@
   <string name="view_browser">Skatīt pārlūkā</string>
   <string name="skip_login">Izlaist</string>
   <string name="navigation_item_login">Pieslēgties</string>
+  <string name="nearby_location_not_available">Atrašanās vieta nav pieejama.</string>
   <string name="get_directions">Saņemt norādes</string>
   <string name="read_article">Lasīt rakstu</string>
   <string name="notifications_thank_you_edit">Paldies par labojumu</string>
@@ -144,6 +152,7 @@
   <string name="wrong">Nepareiza atbilde</string>
   <string name="share_app_title">Dalīties ar lietotni</string>
   <string name="add_description">+ Pievienot aprakstu</string>
+  <string name="search_history_deleted">Meklējumu vēsture izdzēsta</string>
   <string name="delete">Dzēst</string>
   <string name="statistics">Statistika</string>
   <string name="level">Līmenis</string>
@@ -159,6 +168,7 @@
   <string name="menu_bookmark">Pievienot/noņemt no grāmatzīmēm</string>
   <string name="provider_bookmarks">Grāmatzīmes</string>
   <string name="provider_bookmarks_location">Grāmatzīmes</string>
+  <string name="deletion_reason_uploaded_by_mistake">Es augšupielādēju kļūdas dēļ</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Eiropa</string>
   <string name="desc_language_Middle_East">Vidējie Austrumi</string>

@@ -473,4 +473,8 @@
   <string name="exif_tag_name_software">نرم‌افزار</string>
   <string name="share_via">اشتراک از طریق...</string>
   <string name="image_info">اطلاعات عکس</string>
+  <string name="no_categories_found">هیچ رده‌ای یافت نشد</string>
+  <string name="delete_helper_show_deletion_title_success">موفق</string>
+  <string name="delete_helper_show_deletion_title_failed">ناموفق</string>
+  <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
 </resources>
