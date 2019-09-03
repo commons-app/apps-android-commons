@@ -1,6 +1,10 @@
 package fr.free.nrw.commons.nearby;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -29,6 +34,8 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.utils.FragmentUtils;
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -36,6 +43,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.nearby.NearbyTestFragmentLayersActivity.CONTRIBUTIONS_TAB_POSITION;
 
 
@@ -47,13 +55,19 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @Inject
     NearbyController nearbyController;
 
+    private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+    private BroadcastReceiver broadcastReceiver;
+    private boolean isNetworkErrorOccurred = false;
+    private Snackbar snackbar;
+    View view;
+
     NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
     SupportMapFragment mapFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_simple, container, false);
+        view = inflater.inflate(R.layout.fragment_simple, container, false);
         ButterKnife.bind(this, view);
         // Inflate the layout for this fragment
         return view;
@@ -144,12 +158,58 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public boolean isNetworkConnectionEstablished() {
-        return false;
+        return NetworkUtils.isInternetConnectionEstablished(getActivity());
     }
 
+
+    /**
+     * Adds network broadcast receiver to recognize connection established
+     */
     @Override
     public void addNetworkBroadcastReceiver() {
+        Log.d("denemeTest","addNetworkBroadcastReceiver");
+        if (!FragmentUtils.isFragmentUIActive(this)) {
+            Log.d("denemeTest","!FragmentUtils.isFragmentUIActive(this)");
+            return;
+        }
 
+        if (broadcastReceiver != null) {
+            Log.d("denemeTest","broadcastReceiver != null");
+            return;
+        }
+
+        IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (getActivity() != null) {
+                    if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
+                        Log.d("denemeTest","NetworkUtils.isInternetConnectionEstablished(getActivity())");
+                        if (isNetworkErrorOccurred) {
+                            Log.d("denemeTest","isNetworkErrorOccurred");
+                            nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
+                            isNetworkErrorOccurred = false;
+                        }
+
+                        if (snackbar != null) {
+                            snackbar.dismiss();
+                            snackbar = null;
+                        }
+                    } else {
+                        if (snackbar == null) {
+                            snackbar = Snackbar.make(view, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
+                            // TODO make search this area button invisible
+                        }
+
+                        isNetworkErrorOccurred = true;
+                        snackbar.show();
+                    }
+                }
+            }
+        };
+
+        getActivity().registerReceiver(broadcastReceiver, intentFilter);
     }
 
     @Override

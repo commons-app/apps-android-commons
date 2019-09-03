@@ -198,7 +198,7 @@ public class NearbyParentFragmentPresenter
 
         if (!nearbyParentFragmentView.isNetworkConnectionEstablished()) {
             Timber.d("Network connection is not established");
-            Log.d("denemeTest","nearbyParentFragmentView.isNetworkConnectionEstablished()");
+            Log.d("denemeTest","!nearbyParentFragmentView.isNetworkConnectionEstablished()");
             return;
         }
 

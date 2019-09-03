@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -28,7 +31,7 @@ import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
 
-public class NearbyTestFragmentLayersActivity extends AuthenticatedActivity {
+public class NearbyTestFragmentLayersActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
 
     @Inject
     public SessionManager sessionManager;
@@ -54,6 +57,7 @@ public class NearbyTestFragmentLayersActivity extends AuthenticatedActivity {
         setTitle(getString(R.string.navigation_item_home)+"2"); // Should I create a new string variable with another name instead?
 
     }
+
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
@@ -142,6 +146,10 @@ public class NearbyTestFragmentLayersActivity extends AuthenticatedActivity {
         });
     }
 
+    @Override
+    public void onBackStackChanged() {
+
+    }
 
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
         FragmentManager fragmentManager;
