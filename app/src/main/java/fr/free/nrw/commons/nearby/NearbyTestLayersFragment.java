@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +27,13 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
@@ -55,6 +58,11 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @Inject
     NearbyController nearbyController;
 
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore applicationKvStore;
+    private static final double ZOOM_LEVEL = 14f;
+
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
     private boolean isNetworkErrorOccurred = false;
@@ -63,6 +71,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
     SupportMapFragment mapFragment;
+    boolean isDarkTheme;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,11 +98,17 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
             // Build mapboxMap
-            MapboxMapOptions options = MapboxMapOptions.createFromAttributes(getActivity(), null);
-            options.camera(new CameraPosition.Builder()
-                    .target(new LatLng(-52.6885, -70.1395))
-                    .zoom(9)
-                    .build());
+            isDarkTheme = applicationKvStore.getBoolean("theme", false);
+            MapboxMapOptions options = new MapboxMapOptions()
+                    .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
+                    .compassMargins(new int[]{12, 0, 0, 24})
+                    //.styleUrl(isDarkTheme ? Style.DARK : Style.OUTDOORS)
+                    .logoEnabled(false)
+                    .attributionEnabled(false)
+                    .camera(new CameraPosition.Builder()
+                            .zoom(ZOOM_LEVEL)
+                            .target(new com.mapbox.mapboxsdk.geometry.LatLng(-52.6885, -70.1395))
+                            .build());
 
             // Create map fragment
             mapFragment = SupportMapFragment.newInstance(options);
@@ -110,7 +125,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
             @Override
             public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
-                mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
+                mapboxMap.setStyle(NearbyTestLayersFragment.this.isDarkTheme ? Style.DARK : Style.OUTDOORS, new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
                         NearbyTestLayersFragment.this.childMapFragmentAttached();
