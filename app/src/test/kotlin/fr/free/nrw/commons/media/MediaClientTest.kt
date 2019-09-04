@@ -196,4 +196,30 @@ class MediaClientTest {
         assertEquals(media1.filename, "Test")
         assertEquals(media2.filename, "Test")
     }
+
+    @Test
+    fun getPageHtmlTest() {
+        val mwParseResult = mock(MwParseResult::class.java)
+
+        `when`(mwParseResult.text()).thenReturn("Test")
+
+        val mockResponse = MwParseResponse()
+        mockResponse.setParse(mwParseResult)
+
+        `when`(mediaInterface!!.getPageHtml(ArgumentMatchers.anyString()))
+                .thenReturn(Observable.just(mockResponse))
+
+        assertEquals("Test", mediaClient!!.getPageHtml("abcde").blockingGet())
+    }
+
+    @Test
+    fun getPageHtmlTestNull() {
+        val mockResponse = MwParseResponse()
+        mockResponse.setParse(null)
+
+        `when`(mediaInterface!!.getPageHtml(ArgumentMatchers.anyString()))
+                .thenReturn(Observable.just(mockResponse))
+
+        assertEquals("", mediaClient!!.getPageHtml("abcde").blockingGet())
+    }
 }

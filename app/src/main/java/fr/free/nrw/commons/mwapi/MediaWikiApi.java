@@ -9,11 +9,6 @@ import io.reactivex.Single;
 
 public interface MediaWikiApi {
 
-    Single<String> parseWikicode(String source);
-
-    @NonNull
-    Single<MediaResult> fetchMediaByFilename(String filename);
-
     boolean isUserBlockedFromCommons();
 
     void logout();

@@ -14,6 +14,9 @@ import retrofit2.http.QueryMap;
  * Interface for interacting with Commons media related APIs
  */
 public interface MediaInterface {
+    String MEDIA_PARAMS="&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" +
+            "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
+            "|Artist|LicenseShortName|LicenseUrl";
     /**
      * Checks if a page exists or not.
      *
@@ -42,9 +45,7 @@ public interface MediaInterface {
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
             "&generator=categorymembers&gcmtype=file&gcmsort=timestamp&gcmdir=desc" + //Category parameters
-            "&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" + //Media property parameters
-            "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
-            "|Artist|LicenseShortName|LicenseUrl")
+            MEDIA_PARAMS)
     Observable<MwQueryResponse> getMediaListFromCategory(@Query("gcmtitle") String category, @Query("gcmlimit") int itemLimit, @QueryMap Map<String, String> continuation);
 
     /**
@@ -57,9 +58,7 @@ public interface MediaInterface {
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
             "&generator=search&gsrwhat=text&gsrnamespace=6" + //Search parameters
-            "&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" + //Media property parameters
-            "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
-            "|Artist|LicenseShortName|LicenseUrl")
+            MEDIA_PARAMS)
     Observable<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword, @Query("gsrlimit") int itemLimit, @QueryMap Map<String, String> continuation);
 
     /**
@@ -69,9 +68,7 @@ public interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" +
-            "&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" +
-            "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
-            "|Artist|LicenseShortName|LicenseUrl")
+            MEDIA_PARAMS)
     Observable<MwQueryResponse> getMedia(@Query("titles") String title);
 
     /**
@@ -82,8 +79,9 @@ public interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2&generator=images" +
-            "&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" +
-            "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
-            "|Artist|LicenseShortName|LicenseUrl")
+            MEDIA_PARAMS)
     Observable<MwQueryResponse> getMediaWithGenerator(@Query("titles") String title);
+
+    @GET("w/api.php?format=json&action=parse&prop=text")
+    Observable<MwParseResponse> getPageHtml(@Query("page") String title);
 }

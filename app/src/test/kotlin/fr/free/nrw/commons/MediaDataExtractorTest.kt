@@ -1,9 +1,7 @@
 package fr.free.nrw.commons
 
 import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.mwapi.MediaResult
 import fr.free.nrw.commons.mwapi.MediaWikiApi
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.Single
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -49,13 +47,8 @@ class MediaDataExtractorTest {
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
 
-        val mediaResult = mock(MediaResult::class.java)
-        `when`(mediaResult.wikiSource).thenReturn("some wiki source")
-        `when`(mwApi?.fetchMediaByFilename(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(mediaResult))
-
-        `when`(mwApi?.parseWikicode(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just("discussion text"))
+        `when`(mediaClient?.getPageHtml(ArgumentMatchers.anyString()))
+                .thenReturn(Single.just("Test"))
 
         val fetchMediaDetails = mediaDataExtractor?.fetchMediaDetails("test.jpg")?.blockingGet()
 
