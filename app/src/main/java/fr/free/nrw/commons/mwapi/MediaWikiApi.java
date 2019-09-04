@@ -9,12 +9,6 @@ import io.reactivex.Single;
 
 public interface MediaWikiApi {
 
-    @Nullable
-    String revisionsByFilename(String filename) throws IOException;
-
-    @NonNull
-    LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
-
     boolean isUserBlockedFromCommons();
 
     void logout();

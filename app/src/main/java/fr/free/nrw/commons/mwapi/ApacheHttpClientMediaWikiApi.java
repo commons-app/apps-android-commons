@@ -49,54 +49,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         api = new CustomMwApi(apiURL, httpClient);
     }
 
-    @Override
-    @NonNull
-    public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException {
-        CustomMwApi.RequestBuilder builder = api.action("query")
-                .param("list", "logevents")
-                .param("letype", "upload")
-                .param("leprop", "title|timestamp|ids")
-                .param("leuser", user)
-                .param("lelimit", limit);
-        if (!TextUtils.isEmpty(lastModified)) {
-            builder.param("leend", lastModified);
-        }
-        if (!TextUtils.isEmpty(queryContinue)) {
-            builder.param("lestart", queryContinue);
-        }
-        CustomApiResult result = builder.get();
-
-        return new LogEventResult(
-                getLogEventsFromResult(result),
-                result.getString("/api/query-continue/logevents/@lestart"));
-    }
-
-    @NonNull
-    private ArrayList<LogEventResult.LogEvent> getLogEventsFromResult(CustomApiResult result) {
-        ArrayList<CustomApiResult> uploads = result.getNodes("/api/query/logevents/item");
-        Timber.d("%d results!", uploads.size());
-        ArrayList<LogEventResult.LogEvent> logEvents = new ArrayList<>();
-        for (CustomApiResult image : uploads) {
-            logEvents.add(new LogEventResult.LogEvent(
-                    image.getString("@pageid"),
-                    image.getString("@title"),
-                    parseMWDate(image.getString("@timestamp")))
-            );
-        }
-        return logEvents;
-    }
-
-    @Override
-    @Nullable
-    public String revisionsByFilename(String filename) throws IOException {
-        return api.action("query")
-                .param("prop", "revisions")
-                .param("rvprop", "timestamp|content")
-                .param("titles", filename)
-                .get()
-                .getString("/api/query/pages/page/revisions/rev");
-    }
-
     /**
      * Checks to see if a user is currently blocked from Commons
      *

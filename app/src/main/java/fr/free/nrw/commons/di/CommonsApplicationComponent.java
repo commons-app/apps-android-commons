@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.di;
 
-import fr.free.nrw.commons.contributions.ContributionsModule;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -10,8 +9,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionViewHolder;
+import fr.free.nrw.commons.contributions.ContributionsModule;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
-import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.settings.SettingsFragment;
@@ -35,8 +34,6 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(CommonsApplication application);
 
     void inject(ContributionsSyncAdapter syncAdapter);
-
-    void inject(ModificationsSyncAdapter syncAdapter);
 
     void inject(LoginActivity activity);
 
