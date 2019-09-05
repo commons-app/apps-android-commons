@@ -316,7 +316,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private void setZeroAchievements() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this)
-                .setMessage(getString(R.string.not_achievements_yet))
+                .setMessage(getString(R.string.no_achievements_yet))
                 .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
                 });
         AlertDialog dialog = builder.create();
