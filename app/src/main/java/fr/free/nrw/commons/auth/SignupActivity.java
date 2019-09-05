@@ -40,7 +40,7 @@ public class SignupActivity extends BaseActivity {
                 Timber.d("Overriding URL %s", url);
 
                 Toast toast = Toast.makeText(SignupActivity.this,
-                        R.string.sign_up_activity_account, Toast.LENGTH_LONG);
+                        R.string.account_created, Toast.LENGTH_LONG);
                 toast.show();
                 // terminate on task completion.
                 finish();
