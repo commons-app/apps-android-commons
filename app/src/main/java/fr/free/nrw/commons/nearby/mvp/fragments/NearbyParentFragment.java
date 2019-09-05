@@ -325,6 +325,31 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void displayLoginSkippedWarning() {
+
+    }
+
+    @Override
+    public void setFABPlusAction(View.OnClickListener onClickListener) {
+
+    }
+
+    @Override
+    public void setFABRecenterAction(View.OnClickListener onClickListener) {
+
+    }
+
+    @Override
+    public void animateFABs() {
+
+    }
+
+    @Override
+    public void recenterMap(LatLng curLatLng) {
+
+    }
+
+    @Override
     public boolean isNetworkConnectionEstablished() {
         return NetworkUtils.isInternetConnectionEstablished(getActivity());
     }

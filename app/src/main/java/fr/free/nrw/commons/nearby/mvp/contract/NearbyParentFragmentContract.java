@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.nearby.mvp.contract;
 
+import android.view.View;
+
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 
@@ -21,6 +24,11 @@ public interface NearbyParentFragmentContract {
         void setSearchThisAreaProgressVisibility(boolean isVisible);
         void checkPermissionsAndPerformAction(Runnable runnable);
         void resumeFragment();
+        void displayLoginSkippedWarning();
+        void setFABPlusAction(android.view.View.OnClickListener onClickListener);
+        void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
+        void animateFABs();
+        void recenterMap(LatLng curLatLng);
     }
 
     interface UserActions {
@@ -30,6 +38,7 @@ public interface NearbyParentFragmentContract {
         void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget);
         void lockNearby(boolean isNearbyLocked);
         MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
+        void setActionListeners(JsonKvStore applicationKvStore);
     }
     
     interface ViewsAreReadyCallback {

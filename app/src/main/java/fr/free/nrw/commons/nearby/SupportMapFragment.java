@@ -475,7 +475,7 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public MapboxMap getMapboxMap() {
-        return null;
+        return mapboxMap;
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
@@ -151,6 +152,25 @@ public class NearbyParentFragmentPresenter
         // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
         this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
+    }
+
+    /**
+     * Sets click listeners of FABs, and 2 bottom sheets
+     */
+    @Override
+    public void setActionListeners(JsonKvStore applicationKvStore) {
+        nearbyParentFragmentView.setFABPlusAction(v -> {
+            if (applicationKvStore.getBoolean("login_skipped", false)) {
+                // prompt the user to login
+                nearbyParentFragmentView.displayLoginSkippedWarning();
+            }else {
+                nearbyParentFragmentView.animateFABs();
+            }
+        });
+
+        nearbyParentFragmentView.setFABRecenterAction(v -> {
+             nearbyParentFragmentView.recenterMap(curLatLng);
+        });
     }
 
 
