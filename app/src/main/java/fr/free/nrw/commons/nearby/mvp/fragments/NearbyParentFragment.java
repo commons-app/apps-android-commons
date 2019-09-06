@@ -22,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
@@ -233,7 +234,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
     private void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo);
+        nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo, null);
     }
 
     /**
@@ -346,6 +347,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(LatLng curLatLng) {
+
+    }
+
+    @Override
+    public void initViewPositions() {
+
+    }
+
+    @Override
+    public void hideBottomSheet() {
+
+    }
+
+    @Override
+    public void displayBottomSheetWithInfo(Marker marker) {
 
     }
 

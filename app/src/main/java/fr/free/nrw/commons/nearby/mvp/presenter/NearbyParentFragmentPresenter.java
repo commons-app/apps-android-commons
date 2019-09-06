@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby.mvp.presenter;
 import android.util.Log;
 import android.view.View;
 
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -142,10 +143,10 @@ public class NearbyParentFragmentPresenter
 
     public void initializeMapOperations() {
         Log.d("denemeTest","initializeMapOperations");
+        nearbyParentFragmentView.initViewPositions();
 
         lockNearby(false);
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
-        //TODO: NETWORK RECEIVER IS NOT ASSIGNED
 
         Timber.d("Nearby map view is created and ready");
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
@@ -171,6 +172,16 @@ public class NearbyParentFragmentPresenter
         nearbyParentFragmentView.setFABRecenterAction(v -> {
              nearbyParentFragmentView.recenterMap(curLatLng);
         });
+
+    }
+
+    public void markerUnselected() {
+        nearbyParentFragmentView.hideBottomSheet();
+    }
+
+
+    public void markerSelected(Marker marker) {
+        nearbyParentFragmentView.displayBottomSheetWithInfo(marker);
     }
 
 
@@ -269,8 +280,8 @@ public class NearbyParentFragmentPresenter
      * location where you are not at.
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
-    public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList);
+    public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker) {
+        nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList, selectedMarker, this);
         nearbyMapFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
     }
 

@@ -14,7 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +28,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -40,6 +44,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
+import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -83,6 +90,36 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @BindView(R.id.bottom_sheet_details)
     View bottomSheetDetails;
 
+    @BindView(R.id.bookmarkButtonImage)
+    ImageView bookmarkButtonImage;
+
+    @BindView(R.id.bookmarkButton)
+    LinearLayout bookmarkButton;
+
+    @BindView(R.id.wikipediaButton)
+    LinearLayout wikipediaButton;
+
+    @BindView(R.id.wikidataButton)
+    LinearLayout wikidataButton;
+
+    @BindView(R.id.directionsButton)
+    LinearLayout directionsButton;
+
+    @BindView(R.id.commonsButton)
+    LinearLayout commonsButton;
+
+    @BindView(R.id.description)
+    TextView description;
+
+    @BindView(R.id.title)
+    TextView title;
+
+    @BindView(R.id.category)
+    TextView distance;
+
+    @BindView(R.id.icon)
+    ImageView icon;
+
     @Inject
     LocationServiceManager locationManager;
 
@@ -92,6 +129,12 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @Inject
     @Named("default_preferences")
     JsonKvStore applicationKvStore;
+
+    @Inject
+    BookmarkLocationsDao bookmarkLocationDao;
+
+    @Inject
+    ContributionController controller;
 
 
     private BottomSheetBehavior bottomSheetListBehavior;
@@ -115,6 +158,8 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     boolean isDarkTheme;
     boolean isFabOpen;
     boolean isBottomListSheetExpanded;
+    private Marker selectedMarker;
+    private Place selectedPlace;
 
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
@@ -321,7 +366,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
     private void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo);
+        nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker);
     }
 
     @Override
@@ -362,7 +407,6 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     /**
      * Starts animation of fab plus (turning on opening) and other FABs
-     * @param isFabOpen state of FAB buttons, open when clicked on fab button, closed on other click
      */
     @Override
     public void animateFABs() {
@@ -442,4 +486,86 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         mapFragment.getMapboxMap().animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
     }
 
+    @Override
+    public void initViewPositions() {
+
+    }
+
+    @Override
+    public void hideBottomSheet() {
+        bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    @Override
+    public void displayBottomSheetWithInfo(Marker marker) {
+        this.selectedMarker = marker;
+        NearbyMarker nearbyMarker = (NearbyMarker) marker;
+        Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+        passInfoToSheet(place);
+        bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    /**
+     * Same bottom sheet carries information for all nearby places, so we need to pass information
+     * (title, description, distance and links) to view on nearby marker click
+     * @param place Place of clicked nearby marker
+     */
+    private void passInfoToSheet(Place place) {
+        this.selectedPlace = place;
+        updateBookmarkButtonImage(this.selectedPlace);
+
+        bookmarkButton.setOnClickListener(view -> {
+            boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(this.selectedPlace);
+            updateBookmarkButtonImage(this.selectedPlace);
+            mapFragment.updateMarker(isBookmarked, this.selectedPlace, locationManager.getLastLocation());
+        });
+
+
+        //TODO move all this buttons into a custom bottom sheet
+        wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
+        wikipediaButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), this.selectedPlace.siteLinks.getWikipediaLink()));
+
+        wikidataButton.setVisibility(place.hasWikidataLink()?View.VISIBLE:View.GONE);
+        wikidataButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), this.selectedPlace.siteLinks.getWikidataLink()));
+
+        directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(), this.selectedPlace.getLocation()));
+
+        commonsButton.setVisibility(this.selectedPlace.hasCommonsLink()?View.VISIBLE:View.GONE);
+        commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), this.selectedPlace.siteLinks.getCommonsLink()));
+
+        icon.setImageResource(this.selectedPlace.getLabel().getIcon());
+
+        title.setText(this.selectedPlace.name);
+        distance.setText(this.selectedPlace.distance);
+        description.setText(this.selectedPlace.getLongDescription());
+
+        fabCamera.setOnClickListener(view -> {
+            if (fabCamera.isShown()) {
+                Timber.d("Camera button tapped. Place: %s", this.selectedPlace.toString());
+                // TODO storeSharedPrefs();
+                controller.initiateCameraPick(getActivity());
+            }
+        });
+
+        fabGallery.setOnClickListener(view -> {
+            if (fabGallery.isShown()) {
+                Timber.d("Gallery button tapped. Place: %s", this.selectedPlace.toString());
+                //TODO storeSharedPrefs();
+                controller.initiateGalleryPick(getActivity(), false);
+            }
+        });
+    }
+
+    private void updateBookmarkButtonImage(Place place) {
+        int bookmarkIcon;
+        if (bookmarkLocationDao.findBookmarkLocation(place)) {
+            bookmarkIcon = R.drawable.ic_round_star_filled_24px;
+        } else {
+            bookmarkIcon = R.drawable.ic_round_star_border_24px;
+        }
+        if (bookmarkButtonImage != null) {
+            bookmarkButtonImage.setImageResource(bookmarkIcon);
+        }
+    }
 }

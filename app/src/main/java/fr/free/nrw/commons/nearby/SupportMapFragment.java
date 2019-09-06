@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -39,8 +42,12 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.LocationUtils;
+import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 /**
  * Support Fragment wrapper around a map view.
@@ -265,7 +272,9 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void updateMapMarkers(LatLng latLng, List<Place> placeList) {
+    public void updateMapMarkers(LatLng latLng, List<Place> placeList
+                                                , Marker selectedMarker
+                                                , NearbyParentFragmentPresenter nearbyParentFragmentPresenter) {
         Log.d("denemeTest","updateMapMarkers, curLatng:"+latLng);
         List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(latLng, // Curlatlang will be used to calculate distances
@@ -281,7 +290,7 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
                 .newCameraPosition(cameraPosition), 1000);*/
         // TODO: set position depening to botom sheet position heere
         // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
-        addNearbyMarkersToMapBoxMap(customBaseMarkerOptions);
+        addNearbyMarkersToMapBoxMap(customBaseMarkerOptions, selectedMarker, nearbyParentFragmentPresenter);
         // Re-enable mapbox gestures on custom location markers load
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
         updateMapToTrackPosition(latLng);
@@ -373,7 +382,9 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void addNearbyMarkersToMapBoxMap(@Nullable List<NearbyBaseMarker> baseMarkerList) {
+    public void addNearbyMarkersToMapBoxMap(@Nullable List<NearbyBaseMarker> baseMarkerList
+                                                        , Marker selectedMarker
+                                                        , NearbyParentFragmentPresenter nearbyParentFragmentPresenter) {
         Log.d("denemeTest","add markers to map");
         mapboxMap.addMarkers(baseMarkerList);
         mapboxMap.setOnInfoWindowCloseListener(marker -> {
@@ -384,27 +395,7 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
         map.getMapAsync(mapboxMap -> {
             mapboxMap.addMarkers(baseMarkerList);
             //fabRecenter.setVisibility(View.VISIBLE);
-            mapboxMap.setOnInfoWindowCloseListener(marker -> {
-                /*if (marker == selected) {
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                }*/
-            });
-
-            mapboxMap.setOnMarkerClickListener(marker -> {
-
-
-                if (marker instanceof NearbyMarker) {
-                    //this.selected = marker;
-                    NearbyMarker nearbyMarker = (NearbyMarker) marker;
-                    Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-                    passInfoToSheet(place);
-                    //bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    //bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
-                }
-                return false;
-            });
-
+            setMapMarkerActions(selectedMarker, nearbyParentFragmentPresenter);
         });
     }
 
@@ -492,5 +483,55 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
     public void showPlaces() {
 
     }
+
+    void setMapMarkerActions(Marker selected, NearbyParentFragmentPresenter nearbyParentFragmentPresenter) {
+        getMapboxMap().setOnInfoWindowCloseListener(marker -> {
+            if (marker == selected) {
+                nearbyParentFragmentPresenter.markerUnselected();
+            }
+        });
+
+        getMapboxMap().setOnMarkerClickListener(marker -> {
+
+            if (marker instanceof NearbyMarker) {
+                nearbyParentFragmentPresenter.markerSelected(marker);
+            }
+            return false;
+        });
+    }
+
+    public void updateMarker(boolean isBookmarked, Place place, LatLng curLatLng) {
+
+        VectorDrawableCompat vectorDrawable;
+        if (isBookmarked) {
+            vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_bookmark_marker, getContext().getTheme()
+            );
+        } else {
+            vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_map_marker, getContext().getTheme()
+            );
+        }
+        for (Marker marker : mapboxMap.getMarkers()) {
+            if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
+
+                Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+                String distance = formatDistanceBetween(curLatLng, place.location);
+                place.setDistance(distance);
+
+                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
+                nearbyBaseMarker.title(place.name);
+                nearbyBaseMarker.position(
+                        new com.mapbox.mapboxsdk.geometry.LatLng(
+                                place.location.getLatitude(),
+                                place.location.getLongitude()));
+                nearbyBaseMarker.place(place);
+                nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
+                        .fromBitmap(icon));
+                marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+            }
+        }
+    }
+
 }
 

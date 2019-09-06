@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby.mvp.contract;
 
 import android.view.View;
 
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -29,6 +30,9 @@ public interface NearbyParentFragmentContract {
         void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
         void animateFABs();
         void recenterMap(LatLng curLatLng);
+        void initViewPositions();
+        void hideBottomSheet();
+        void displayBottomSheetWithInfo(Marker marker);
     }
 
     interface UserActions {

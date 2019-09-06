@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 
 /**
  * This interface defines specific View and UserActions for map
@@ -27,14 +29,14 @@ public interface NearbyMapContract {
         void showSearchThisAreaButton();
         void showInformationBottomSheet();
         void initViews();
-        void updateMapMarkers(LatLng latLng, List<Place> placeList);
+        void updateMapMarkers(LatLng latLng, List<Place> placeList, Marker selectedMarker, NearbyParentFragmentPresenter nearbyParentFragmentPresenter);
         void updateMapToTrackPosition(LatLng curLatLng);
         void setListeners();
         MapView setupMapView(Bundle savedInstanceState);
         void addCurrentLocationMarker(LatLng curLatLng);
         void setSearchThisAreaButtonVisibility(boolean visible);
         boolean isCurrentLocationMarkerVisible();
-        void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> baseMarkerOptions);
+        void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> baseMarkerOptions, Marker marker, NearbyParentFragmentPresenter nearbyParentFragmentPresenter);
         void prepareViewsForSheetPosition();
         void hideFABs();
         void showFABs();
