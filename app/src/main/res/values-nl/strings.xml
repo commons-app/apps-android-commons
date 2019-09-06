@@ -95,6 +95,7 @@
   <string name="categories_activity_title">Categorieën</string>
   <string name="title_activity_settings">Instellingen</string>
   <string name="title_activity_signup">Registreren</string>
+  <string name="title_activity_featured_images">Uitgelichte afbeelding</string>
   <string name="title_activity_category_details">Categorie</string>
   <string name="menu_about">Over</string>
   <string name="about_license" fuzzy="true">Opensourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons en haar logo zijn handelsmerken van de Wikimedia Foundation en worden gebruikt met toestemming van de Wikimedia Foundation. We worden niet bekrachtigd door en zijn niet verbonden met de Wikimedia Foundation.</string>
