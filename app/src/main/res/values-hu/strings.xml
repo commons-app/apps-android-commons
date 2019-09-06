@@ -256,6 +256,7 @@
   <string name="null_url">Hiba! URL nem található.</string>
   <string name="nominate_deletion">Törlésre jelölés</string>
   <string name="nominated_for_deletion">Ezt a képet törlésre jelölték.</string>
+  <string name="nominated_see_more">&lt;u&gt;Weboldal megtekintése további részletekért&lt;/u&gt;</string>
   <string name="view_browser">Megtekintés böngészőben</string>
   <string name="skip_login">Kihagyás</string>
   <string name="navigation_item_login">Bejelentkezés</string>
@@ -271,6 +272,7 @@
   <string name="notifications_welcome">Üdvözlünk a Wikimedia Commonson, %1$s! Örülünk, hogy itt vagy.</string>
   <string name="notifications_talk_page_message">%1$s üzenetet hagyott a vitalapodon</string>
   <string name="notifications_thank_you_edit">Köszönjük a szerkesztésedet!</string>
+  <string name="notifications_mention">%1$s megemlített a(z) %2$s lapon.</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
   <string name="nearby_commons">Commons</string>
@@ -315,6 +317,7 @@
   <string name="share_app_title">Alkalmazás megosztása</string>
   <string name="share_coordinates_not_present">A koordináták nem lettek megadva a kép kiválasztásakor.</string>
   <string name="error_fetching_nearby_places">Hiba a közeli helyek elérésekor.</string>
+  <string name="no_recent_searches">Nincs korábbi keresés</string>
   <string name="delete_recent_searches_dialog">Biztosan törölni szeretnéd a keresési előzményeidet?</string>
   <string name="delete_search_dialog">Biztos törölni szeretnéd ezt a keresést?</string>
   <string name="search_history_deleted">Keresési előzmények törölve</string>
@@ -376,14 +379,21 @@
   <string name="menu_option_unread">Olvasatlanok megtekintése</string>
   <string name="image_chooser_title">Feltöltendő képek kiválasztása</string>
   <string name="please_wait">Kérlek várj…</string>
+  <string name="skip_image">Kép átugrása</string>
+  <string name="manage_exif_tags">EXIF címkék kezelése</string>
   <string name="exif_tag_name_author">Szerző</string>
+  <string name="exif_tag_name_copyright">Szerzői jog</string>
   <string name="exif_tag_name_location">Helyszín</string>
   <string name="exif_tag_name_cameraModel">Fényképezőgép típusa</string>
+  <string name="exif_tag_name_lensModel">Lencsemodell</string>
   <string name="exif_tag_name_serialNumbers">Sorozatszámok</string>
   <string name="exif_tag_name_software">Szoftver</string>
   <string name="upload_cancelled">Feltöltés megszakítása</string>
   <string name="delete_helper_show_deletion_title">Törlésre jelölés</string>
+  <string name="delete_helper_show_deletion_title_success">Siker</string>
   <string name="delete_helper_show_deletion_title_failed">Sikertelen</string>
+  <string name="delete_helper_show_deletion_message_else">Nem sikerült a törlés kérése.</string>
+  <string name="delete_helper_ask_spam_selfie">Egy szelfi</string>
   <string name="delete_helper_ask_spam_nonsense">Nonszensz</string>
   <string name="delete_helper_ask_spam_other">Egyéb</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Sajtófotó</string>
