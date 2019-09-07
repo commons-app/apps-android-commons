@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,6 +57,7 @@ import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.FragmentUtils;
+import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -71,6 +73,27 @@ import static fr.free.nrw.commons.nearby.NearbyTestFragmentLayersActivity.CONTRI
 
 public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment implements NearbyParentFragmentContract.View {
 
+    @BindView(R.id.bottom_sheet)
+    View bottomSheetList;
+
+    @BindView(R.id.bottom_sheet_details)
+    View bottomSheetDetails;
+
+    @BindView(R.id.transparentView)
+    View transparentView;
+
+    @BindView(R.id.directionsButtonText)
+    TextView directionsButtonText;
+
+    @BindView(R.id.wikipediaButtonText)
+    TextView wikipediaButtonText;
+
+    @BindView(R.id.wikidataButtonText)
+    TextView wikidataButtonText;
+
+    @BindView(R.id.commonsButtonText)
+    TextView commonsButtonText;
+
     @BindView(R.id.fab_plus)
     FloatingActionButton fabPlus;
 
@@ -80,15 +103,8 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @BindView(R.id.fab_gallery)
     FloatingActionButton fabGallery;
 
-
     @BindView(R.id.fab_recenter)
     FloatingActionButton fabRecenter;
-
-    @BindView(R.id.bottom_sheet)
-    View bottomSheetList;
-
-    @BindView(R.id.bottom_sheet_details)
-    View bottomSheetDetails;
 
     @BindView(R.id.bookmarkButtonImage)
     ImageView bookmarkButtonImage;
@@ -192,6 +208,63 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         fab_close = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_forward);
         rotate_backward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_backward);
+
+        bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior
+                .BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                prepareViewsForSheetPosition(newState);
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                if (slideOffset >= 0) {
+                    transparentView.setAlpha(slideOffset);
+                    if (slideOffset == 1) {
+                        transparentView.setClickable(true);
+                    } else if (slideOffset == 0) {
+                        transparentView.setClickable(false);
+                    }
+                }
+            }
+        });
+
+        bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetBehavior
+                .BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
+        // Remove button text if they exceed 1 line or if internal layout has not been built
+        // Only need to check for directions button because it is the longest
+        if (directionsButtonText.getLineCount() > 1 || directionsButtonText.getLineCount() == 0) {
+            wikipediaButtonText.setVisibility(View.GONE);
+            wikidataButtonText.setVisibility(View.GONE);
+            commonsButtonText.setVisibility(View.GONE);
+            directionsButtonText.setVisibility(View.GONE);
+        }
+        title.setOnLongClickListener(view -> {
+                    Utils.copy("place", title.getText().toString(), getContext());
+                    Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+        );
+        title.setOnClickListener(view -> {
+            if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            } else {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
     }
 
     public void setMapFragment(Bundle savedInstanceState) {
@@ -259,7 +332,6 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
                 (this, mapFragment, locationManager);
         Timber.d("Child fragment attached");
         nearbyParentFragmentPresenter.nearbyFragmentsAreReady();
-        //checkPermissionsAndPerformAction(this::registerLocationUpdates);
         initViews();
         nearbyParentFragmentPresenter.setActionListeners(applicationKvStore);
 
@@ -429,6 +501,41 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
+    private void showFABs() {
+
+        NearbyFABUtils.addAnchorToBigFABs(fabPlus, bottomSheetDetails.getId());
+        fabPlus.show();
+        NearbyFABUtils.addAnchorToSmallFABs(fabGallery, getView().findViewById(R.id.empty_view).getId());
+        NearbyFABUtils.addAnchorToSmallFABs(fabCamera, getView().findViewById(R.id.empty_view1).getId());
+    }
+
+    /**
+     * Hides all fabs
+     */
+    private void hideFABs() {
+        NearbyFABUtils.removeAnchorFromFAB(fabPlus);
+        fabPlus.hide();
+        NearbyFABUtils.removeAnchorFromFAB(fabCamera);
+        fabCamera.hide();
+        NearbyFABUtils.removeAnchorFromFAB(fabGallery);
+        fabGallery.hide();
+    }
+
+    /**
+     * Hides camera and gallery FABs, turn back plus FAB
+     * @param isFabOpen
+     */
+    private void closeFABs( boolean isFabOpen){
+        if (isFabOpen) {
+            fabPlus.startAnimation(rotate_backward);
+            fabCamera.startAnimation(fab_close);
+            fabGallery.startAnimation(fab_close);
+            fabCamera.hide();
+            fabGallery.hide();
+            this.isFabOpen = !isFabOpen;
+        }
+    }
+
     @Override
     public void displayLoginSkippedWarning() {
         if (applicationKvStore.getBoolean("login_skipped", false)) {
@@ -504,6 +611,36 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         passInfoToSheet(place);
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    /**
+     * If nearby details bottom sheet state is collapsed: show fab plus
+     * If nearby details bottom sheet state is expanded: show fab plus
+     * If nearby details bottom sheet state is hidden: hide all fabs
+     * @param bottomSheetState
+     */
+    public void prepareViewsForSheetPosition(int bottomSheetState) {
+
+        switch (bottomSheetState) {
+            case (BottomSheetBehavior.STATE_COLLAPSED):
+                closeFABs(isFabOpen);
+                if (!fabPlus.isShown()) showFABs();
+                this.getView().requestFocus();
+                break;
+            case (BottomSheetBehavior.STATE_EXPANDED):
+                this.getView().requestFocus();
+                break;
+            case (BottomSheetBehavior.STATE_HIDDEN):
+                mapFragment.getMapboxMap().deselectMarkers();
+                transparentView.setClickable(false);
+                transparentView.setAlpha(0);
+                closeFABs(isFabOpen);
+                hideFABs();
+                if (this.getView() != null) {
+                    this.getView().requestFocus();
+                }
+                break;
+        }
     }
 
     /**
