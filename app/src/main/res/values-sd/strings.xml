@@ -50,7 +50,7 @@
   <string name="provider_contributions">منھنجا چاڙھ</string>
   <string name="menu_share">ونڊيو</string>
   <string name="menu_open_in_browser">جھانگوءَ ۾ ڏسو</string>
-  <string name="share_title_hint" fuzzy="true">عنوان</string>
+  <string name="share_title_hint">عنوان (گھربل)</string>
   <string name="add_title_toast">هن فائيل لاءِ ڪا سُرخي ڏيو</string>
   <string name="share_description_hint">تشريح</string>
   <string name="login_failed_network">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
@@ -71,10 +71,10 @@
   <string name="gps_disabled">اوهان جي ڊوائيس ۾ جي پي ايس بند آهي. ڇا اوهان ان کي کولڻ چاهيو ٿا؟</string>
   <string name="enable_gps">جي پي ايس چالو ڪيو (اين ايبل جي پي ايس)</string>
   <string name="contributions_subtitle_zero">اڃان تائين ڪو به ڄاڙهه (اَپلوڊ) نه ٿيو آهي</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d چاڙھ</item>
-    <item quantity="other">%1$d چاڙھَ</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">چاڙھ %1$d شروع ڪندي</item>
@@ -101,9 +101,12 @@
   <string name="no_uploads_yet">توھان اڃان تائين ڪي بہ فوٽو انہ چاڙھيا آھن.</string>
   <string name="menu_retry_upload">ٻيھر ڪوشش ڪريو</string>
   <string name="menu_cancel_upload">رد</string>
-  <string name="share_license_summary" fuzzy="true">ھن عڪس کي %1$s جي تحت لائسنس ٿيندو</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">ھن عڪس کي %1$s ھيٺ اجازتنامو ڏنو ويندو</item>
+    <item quantity="other">ھنن عڪسن کي %1$s ھيٺ اجازتنامو ڏنو ويندو</item>
+  </plurals>
   <string name="menu_download">لاھيو</string>
-  <string name="preference_license">رٿيل لائسنس</string>
+  <string name="preference_license">ڏنل اجازتنامو</string>
   <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>
   <string name="allow_gps">خوبخود ھاڻوڪي مڪانيت وٺو</string>
   <string name="allow_gps_summary">ھاڻوڪي مڪانيت ڏئي ٿو جيڪڏھن عڪس جيوٽيگ ناھي ٿيل، ۽ عڪس کي ان سان جيوٽيگ ڪري ٿو. چتاءُ: ھي توھان جي ھاڻوڪي مڪانيت ظاھر ڪندو.</string>
@@ -150,7 +153,7 @@
   <string name="detail_panel_cats_loading">لاهيندي...</string>
   <string name="detail_panel_cats_none">ڪوبہ چونڊيل ناھي</string>
   <string name="detail_description_empty">ڪا تشريح ناھي</string>
-  <string name="detail_license_empty">اڻڄاتل لائسنس</string>
+  <string name="detail_license_empty">اڻڄاتل اجازتنامو</string>
   <string name="menu_refresh">تازو ڪريو</string>
   <string name="read_storage_permission_rationale">گھربل اجازت: خارجي اسٽوريج پڙهو. ايپ ھن کانسواءِ تصوير گيليري نٿو ڏسي سگھي.</string>
   <string name="location_permission_rationale">چونڊ اجازت: زمرن جي تجويزن لاءِ ھاڻوڪي مڪانيت وٺو</string>
@@ -164,7 +167,7 @@
   <string name="media_detail_description">تشريح</string>
   <string name="media_detail_author">ليکڪ</string>
   <string name="media_detail_uploaded_date">چاڙھيل تاريخ</string>
-  <string name="media_detail_license">لائسنس (اجازت نامو)</string>
+  <string name="media_detail_license">اجازتنامو</string>
   <string name="media_detail_coordinates">مڪانيت</string>
   <string name="become_a_tester_title">آزمائشي آزمائيندڙ ٿيو</string>
   <string name="number_of_uploads">منهنجي تازي چاڙهڻ (اَپلوڊ) جي حد (لِمٽ)</string>
@@ -214,16 +217,16 @@
   <string name="nearby_location_has_not_changed">مڪانيت تبديلي ناھي ٿي.</string>
   <string name="nearby_location_not_available">مڪانيت موجود ناھي.</string>
   <string name="location_permission_rationale_nearby">ويجھين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گھربل آھي</string>
-  <string name="get_directions" fuzzy="true">ھدايتون وٺو</string>
-  <string name="read_article" fuzzy="true">مضمون پڙھو</string>
+  <string name="get_directions">ھدايتون وٺو</string>
+  <string name="read_article">مضمون پڙھو</string>
   <string name="notifications_welcome">وڪيپيڊيا ڪامنز ۾ ڀليڪار، %1$s! اسان کي خوشي آهي ته اوهان هتي آهيو</string>
   <string name="notifications_talk_page_message">%1$s اوهان جي بحث واري صفحي تي پيغام ڇڏيو آهي.</string>
   <string name="notifications_thank_you_edit">سنوارڻ لاءِ مهرباني</string>
   <string name="notifications_mention">%1$s اوهان جو %2$s تي ذڪر ڪيو آهي.</string>
-  <string name="nearby_directions" fuzzy="true">طرف</string>
-  <string name="nearby_wikidata" fuzzy="true">وڪيڊيٽا</string>
-  <string name="nearby_wikipedia" fuzzy="true">وڪيپيڊيا</string>
-  <string name="nearby_commons" fuzzy="true">ڪامنز</string>
+  <string name="nearby_directions">طرف</string>
+  <string name="nearby_wikidata">وڪيڊيٽا</string>
+  <string name="nearby_wikipedia">وڪيپيڊيا</string>
+  <string name="nearby_commons">العام</string>
   <string name="about_rate_us">&lt;u&gt;پذيرائي ڏيو&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;عام سوال&lt;/u&gt;</string>
   <string name="welcome_skip_button">سبق کي ڇڏيو</string>
@@ -243,7 +246,7 @@
   <string name="search_commons">ڪامنز ۾ ڳولا</string>
   <string name="title_activity_search">ڳوليو</string>
   <string name="search_recent_header">تازيون ڳولائون:</string>
-  <string name="provider_searches">تازه ڳوليل مسودا</string>
+  <string name="provider_searches">تازه ڳوليل فقرا</string>
   <string name="menu_set_wallpaper">وال پيپر طور لڳايو</string>
   <string name="wallpaper_set_successfully">وال پيپر ڪاميابيءَ سان لڳي ويو!</string>
   <string name="question">سوال</string>
@@ -252,7 +255,7 @@
   <string name="continue_message">جاري رکو</string>
   <string name="share_app_title">ايپ ونڊيو</string>
   <string name="search_history_deleted">ڳولا سوانح ڊاٿي وئي</string>
-  <string name="statistics" fuzzy="true">انگ اکر</string>
+  <string name="statistics">انگ-اکر</string>
   <string name="error_occurred">خلل ٿيو!</string>
   <string name="contributions_fragment">ڀاڱيداريون</string>
   <string name="write_storage_permission_rationale_for_image_share">اسان کي اوهان جي ڊوائس جي اسٽورج جي اجازت گھرجي جيئن تصويرون چاڙهي سگھجن.</string>

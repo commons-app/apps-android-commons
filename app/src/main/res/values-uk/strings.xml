@@ -332,7 +332,7 @@
   <string name="images_not_found">Не знайдено зображень, що відповідають %1$s</string>
   <string name="title_activity_search">Пошук</string>
   <string name="search_recent_header">Недавні пошуки:</string>
-  <string name="provider_searches">Недавні запити пошуку</string>
+  <string name="provider_searches">Недавні пошукові запити</string>
   <string name="error_loading_categories">Сталася помилка під час завантаження категорій.</string>
   <string name="error_loading_subcategories">Сталася помилка під час завантаження підкатегорій.</string>
   <string name="search_tab_title_media">Медіафайли</string>
@@ -441,7 +441,7 @@
   <string name="desc_language_Asia">Азія</string>
   <string name="desc_language_Pacific">Океанія</string>
   <string name="no_categories_selected">Жодної категорії не вибрано</string>
-  <string name="no_categories_selected_warning_desc">Зображення без категорії рідко використовуються. Ви впевнені, що хочете надіслати без вибору категорій?</string>
+  <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете надіслати без вибору категорій?</string>
   <string name="yes_submit">Так, надіслати</string>
   <string name="no_go_back">Ні, повернутись</string>
   <string name="upload_flow_all_images_in_set">(Для всіх зображень у наборі)</string>
@@ -490,14 +490,14 @@
   <string name="review_copyright_explanation">Логотипи, знімки екрану, плакати фільмів часто порушують авторське право. Натисніть НІ, щоб номінувати це зображення на вилучення</string>
   <string name="review_thanks_explanation">%1$s отримає заохочення від вашої подяки</string>
   <string name="review_no_category">Ох, та тут навіть категорій немає!</string>
-  <string name="review_category_explanation">Це зображення належить до %1$s категорій.</string>
+  <string name="review_category_explanation">Це зображення належить до наступних категорій: %1$s</string>
   <string name="review_spam_report_question">Файл недоречний для Вікісховища, тому що</string>
   <string name="review_c_violation_report_question">Це порушення авторських прав, тому що</string>
   <string name="review_category_yes_button_text">Ні, хибно категоризовано</string>
   <string name="review_category_no_button_text">Виглядає добре</string>
   <string name="review_spam_yes_button_text">Ні, не доречно</string>
   <string name="review_spam_no_button_text">Виглядає добре</string>
-  <string name="review_copyright_yes_button_text">Ні, порушення авторського права</string>
+  <string name="review_copyright_yes_button_text">Ні, це порушення авторського права</string>
   <string name="review_copyright_no_button_text">Виглядає добре</string>
   <string name="review_thanks_yes_button_text">Так, чому б і ні</string>
   <string name="review_thanks_no_button_text">Наступне зображення</string>
