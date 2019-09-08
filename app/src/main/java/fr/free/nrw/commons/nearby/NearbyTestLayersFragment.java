@@ -482,9 +482,8 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
      */
     @Override
     public void animateFABs() {
-        this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
-            if (isFabOpen) {
+            /*if (isFabOpen) {
                 fabPlus.startAnimation(rotate_backward);
                 fabCamera.startAnimation(fab_close);
                 fabGallery.startAnimation(fab_close);
@@ -497,16 +496,36 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
                 fabCamera.show();
                 fabGallery.show();
             }
-            this.isFabOpen=!isFabOpen;
+            this.isFabOpen=!isFabOpen;*/
+            if (isFabOpen) {
+                closeFABs(isFabOpen);
+            } else {
+                openFABs(isFabOpen);
+            }
         }
     }
 
     private void showFABs() {
+            NearbyFABUtils.addAnchorToBigFABs(fabPlus, bottomSheetDetails.getId());
+            fabPlus.show();
+            NearbyFABUtils.addAnchorToSmallFABs(fabGallery, getView().findViewById(R.id.empty_view).getId());
+            NearbyFABUtils.addAnchorToSmallFABs(fabCamera, getView().findViewById(R.id.empty_view1).getId());
+    }
 
-        NearbyFABUtils.addAnchorToBigFABs(fabPlus, bottomSheetDetails.getId());
-        fabPlus.show();
-        NearbyFABUtils.addAnchorToSmallFABs(fabGallery, getView().findViewById(R.id.empty_view).getId());
-        NearbyFABUtils.addAnchorToSmallFABs(fabCamera, getView().findViewById(R.id.empty_view1).getId());
+    /**
+     * Hides camera and gallery FABs, turn back plus FAB
+     * @param isFabOpen
+     */
+    private void openFABs( boolean isFabOpen){
+        if (!isFabOpen) {
+            showFABs();
+            fabPlus.startAnimation(rotate_forward);
+            fabCamera.startAnimation(fab_open);
+            fabGallery.startAnimation(fab_open);
+            fabCamera.show();
+            fabGallery.show();
+            this.isFabOpen = true;
+        }
     }
 
     /**
@@ -532,7 +551,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
             fabGallery.startAnimation(fab_close);
             fabCamera.hide();
             fabGallery.hide();
-            this.isFabOpen = !isFabOpen;
+            this.isFabOpen = false;
         }
     }
 
