@@ -191,7 +191,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_nearby_test_fragment_layers:
                 drawerLayout.closeDrawer(navigationView);
-                startActivityWithFlags(this, NearbyTestFragmentLayersActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT,
+                startActivityWithFlags(this, MainActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT,
                         Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return true;
             case R.id.action_feedback:
