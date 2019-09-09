@@ -202,4 +202,5 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Nejaušs foto no interneta</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotips</string>
   <string name="delete_helper_ask_reason_copyright_other">Cits</string>
+  <string name="account_created">Konts izveidots!</string>
 </resources>

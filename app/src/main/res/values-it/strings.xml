@@ -484,4 +484,8 @@
   <string name="delete_helper_ask_spam_other">Altro</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Altro</string>
+  <string name="share_image_via">Condividi immagine tramite</string>
+  <string name="account_created">Utenza creata!</string>
+  <string name="text_copy">Testo copiato negli appunti</string>
+  <string name="some_error">Si è verificato un errore!</string>
 </resources>
