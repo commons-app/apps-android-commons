@@ -561,4 +561,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Інше</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Оскільки</string>
+  <string name="share_image_via">Поширити зображення через</string>
+  <string name="no_achievements_yet">Поки що від вас немає вкладу</string>
+  <string name="account_created">Обліковий запис створено!</string>
+  <string name="text_copy">Текст скопійовано до буферу обміну</string>
+  <string name="notification_mark_read">Сповіщення позначено прочитаним</string>
+  <string name="some_error">Тут якась проблемка виникла :-(</string>
 </resources>

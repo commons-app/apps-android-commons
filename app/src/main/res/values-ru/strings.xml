@@ -562,4 +562,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Другое</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Поскольку</string>
+  <string name="share_image_via">Поделиться изображением с помощью</string>
+  <string name="no_achievements_yet">Пока что от вас нет вклада</string>
+  <string name="account_created">Учётная запись создана!</string>
+  <string name="text_copy">Текст скопирован в буфер обмена</string>
+  <string name="notification_mark_read">Оповещения маркированы как \"прочитанные\"</string>
+  <string name="some_error">Тут какая-то проблемка возникла :-(</string>
 </resources>

@@ -541,4 +541,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">Marca</string>
   <string name="delete_helper_ask_reason_copyright_other">D\'àutr</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Përchè a l\'é</string>
+  <string name="share_image_via">Partagé la plancia via</string>
+  <string name="no_achievements_yet">A l\'ha pa ancor fàit ëd contribussion</string>
+  <string name="account_created">Cont creà!</string>
+  <string name="text_copy">Test copià an sla taulëtta</string>
+  <string name="notification_mark_read">Notìfica marcà coma lesùa</string>
+  <string name="some_error">A-i é staje n\'eror!</string>
 </resources>
