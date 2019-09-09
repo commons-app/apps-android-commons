@@ -33,7 +33,7 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
-import fr.free.nrw.commons.nearby.NearbyTestLayersFragment;
+import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
@@ -73,6 +73,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     private Menu menu;
 
+    private boolean onOrientationChanged = false;
+
     private MenuItem notificationsMenuItem;
     private TextView notificationCount;
 
@@ -84,6 +86,16 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
+
+
+        if (savedInstanceState != null ) {
+            onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
+
+            //If nearby map was visible, call on Tab Selected to call all nearby operations
+            /*if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
+                ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
+            }*/
+        }
     }
 
     @Override
@@ -256,7 +268,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Means that nearby fragment is visible (not contributions fragment)
-            NearbyTestLayersFragment nearbyFragment = (NearbyTestLayersFragment) contributionsActivityPagerAdapter.getItem(1);
+            NearbyParentFragment nearbyFragment = (NearbyParentFragment) contributionsActivityPagerAdapter.getItem(1);
 
             if(nearbyFragment.isBottomSheetExpanded()) {
                 // Back should first hide the bottom sheet if it is expanded
@@ -340,7 +352,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 return true;
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
-                    ((NearbyTestLayersFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
+                    ((NearbyParentFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
                 }
                 return true;
             default:
@@ -381,12 +393,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     }
 
                 case 1:
-                    NearbyTestLayersFragment retainedNearbyFragment = getNearbyFragment(1);
+                    NearbyParentFragment retainedNearbyFragment = getNearbyFragment(1);
                     if (retainedNearbyFragment != null) {
                         return retainedNearbyFragment;
                     } else {
                         // If we reach here, retainedNearbyFragment is null
-                        return new NearbyTestLayersFragment();
+                        return new NearbyParentFragment();
                     }
                 default:
                     return null;
@@ -408,9 +420,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
          * @param position index of tabs, in our case 0 or 1
          * @return
          */
-        private NearbyTestLayersFragment getNearbyFragment(int position) {
+        private NearbyParentFragment getNearbyFragment(int position) {
             String tag = makeFragmentName(R.id.pager, position);
-            return (NearbyTestLayersFragment)fragmentManager.findFragmentByTag(tag);
+            return (NearbyParentFragment)fragmentManager.findFragmentByTag(tag);
         }
 
         /**

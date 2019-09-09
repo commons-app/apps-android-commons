@@ -183,7 +183,6 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("denemeTest","NearbyTestLayersFragment create view");
         view = inflater.inflate(R.layout.fragment_simple, container, false);
         ButterKnife.bind(this, view);
         // Inflate the layout for this fragment
@@ -269,7 +268,6 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     }
 
     public void setMapFragment(Bundle savedInstanceState) {
-        Log.d("denemeTest","this:"+this+", setMapFragment");
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.
         Mapbox.getInstance(getActivity(), getString(R.string.mapbox_commons_app_token));
@@ -469,7 +467,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 runnable,
-                () -> ((MainActivity) getActivity()).viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION),
+                () -> ((NearbyTestFragmentLayersActivity) getActivity()).viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION),
                 R.string.location_permission_title,
                 R.string.location_permission_rationale_nearby);
     }
@@ -485,6 +483,20 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void animateFABs() {
         if (fabPlus.isShown()){
+            /*if (isFabOpen) {
+                fabPlus.startAnimation(rotate_backward);
+                fabCamera.startAnimation(fab_close);
+                fabGallery.startAnimation(fab_close);
+                fabCamera.hide();
+                fabGallery.hide();
+            } else {
+                fabPlus.startAnimation(rotate_forward);
+                fabCamera.startAnimation(fab_open);
+                fabGallery.startAnimation(fab_open);
+                fabCamera.show();
+                fabGallery.show();
+            }
+            this.isFabOpen=!isFabOpen;*/
             if (isFabOpen) {
                 closeFABs(isFabOpen);
             } else {

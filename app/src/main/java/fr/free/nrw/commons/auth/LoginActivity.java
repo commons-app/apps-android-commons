@@ -452,7 +452,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void startMainActivity() {
-        NavigationBaseActivity.startActivityWithFlags(this, MainActivity.class, Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        NavigationBaseActivity.startActivityWithFlags(this, NearbyTestFragmentLayersActivity.class, Intent.FLAG_ACTIVITY_SINGLE_TOP);
         finish();
     }
 
