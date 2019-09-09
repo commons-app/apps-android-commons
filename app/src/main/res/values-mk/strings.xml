@@ -542,4 +542,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">Лого</string>
   <string name="delete_helper_ask_reason_copyright_other">Друго</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Бидејќи е</string>
+  <string name="share_image_via">Сподели ја сликата преку</string>
+  <string name="no_achievements_yet">Засега немате придонеси</string>
+  <string name="account_created">Сметката е создадена!</string>
+  <string name="text_copy">Текстот е ставен во меѓускладот</string>
+  <string name="notification_mark_read">Известувањето е означено како прочитано</string>
+  <string name="some_error">Се појави грешка!</string>
 </resources>
