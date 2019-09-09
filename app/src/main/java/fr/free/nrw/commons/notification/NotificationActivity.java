@@ -92,7 +92,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                         setAdapter(notificationList);
                         adapter.notifyDataSetChanged();
                         Snackbar snackbar = Snackbar
-                                .make(relativeLayout, "Notification marked as read", Snackbar.LENGTH_LONG);
+                                .make(relativeLayout, getString(R.string.notification_mark_read), Snackbar.LENGTH_LONG);
 
                         snackbar.show();
                         if (notificationList.size() == 0) {
@@ -103,7 +103,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                     } else {
                         adapter.notifyDataSetChanged();
                         setAdapter(notificationList);
-                        Toast.makeText(NotificationActivity.this, "There was some error!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NotificationActivity.this, getString(R.string.some_error), Toast.LENGTH_SHORT).show();
                     }
                 }, throwable -> {
 
