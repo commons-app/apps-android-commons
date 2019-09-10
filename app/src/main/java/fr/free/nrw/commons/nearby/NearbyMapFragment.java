@@ -511,7 +511,7 @@ public class NearbyMapFragment extends DaggerFragment {
         }
         title.setOnLongClickListener(view -> {
                     Utils.copy("place",title.getText().toString(),getContext());
-                    Toast.makeText(getContext(),"Text copied to clipboard",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),getString(R.string.text_copy),Toast.LENGTH_SHORT).show();
                     return true;
                 }
         );
