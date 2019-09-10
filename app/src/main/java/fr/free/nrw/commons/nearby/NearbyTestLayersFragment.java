@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -135,6 +136,12 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     @BindView(R.id.icon)
     ImageView icon;
+
+    @BindView(R.id.search_this_area_button)
+    Button searchThisAreaButton;
+
+    @BindView(R.id.search_this_area_button_progress_bar)
+    ProgressBar searchThisAreaButtonProgressBar;
 
     @Inject
     LocationServiceManager locationManager;
@@ -338,6 +345,11 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     }
 
     @Override
+    public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
+        mapFragment.getMapboxMap().addOnCameraMoveListener(onCameraMoveListener);
+    }
+
+    @Override
     public void setListFragmentExpanded() {
 
     }
@@ -448,17 +460,25 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void addSearchThisAreaButtonAction() {
-
+        searchThisAreaButton.setOnClickListener(nearbyParentFragmentPresenter.onSearchThisAreaClicked());
     }
 
     @Override
     public void setSearchThisAreaButtonVisibility(boolean isVisible) {
-
+        if (isVisible) {
+            searchThisAreaButton.setVisibility(View.VISIBLE);
+        } else {
+            searchThisAreaButton.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void setSearchThisAreaProgressVisibility(boolean isVisible) {
-
+        if (isVisible) {
+            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            searchThisAreaButtonProgressBar.setVisibility(View.GONE);
+        }
     }
 
     @Override

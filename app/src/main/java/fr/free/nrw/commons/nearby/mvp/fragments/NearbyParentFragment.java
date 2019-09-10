@@ -366,6 +366,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
+
+    }
+
+    @Override
     public boolean isNetworkConnectionEstablished() {
         return NetworkUtils.isInternetConnectionEstablished(getActivity());
     }

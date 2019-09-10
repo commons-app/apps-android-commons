@@ -461,7 +461,8 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public LatLng getCameraTarget() {
-        return null;
+        return LocationUtils
+                .mapBoxLatLngToCommonsLatLng(mapboxMap.getCameraPosition().target);
     }
 
     @Override

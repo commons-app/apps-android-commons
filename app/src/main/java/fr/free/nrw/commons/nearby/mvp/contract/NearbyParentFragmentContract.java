@@ -20,9 +20,7 @@ public interface NearbyParentFragmentContract {
         void listOptionMenuItemClicked();
         void  populatePlaces(LatLng curlatLng, LatLng searchLatLng);
         boolean isBottomSheetExpanded();
-        void addSearchThisAreaButtonAction();
-        void setSearchThisAreaButtonVisibility(boolean isVisible);
-        void setSearchThisAreaProgressVisibility(boolean isVisible);
+
         void checkPermissionsAndPerformAction(Runnable runnable);
         void resumeFragment();
         void displayLoginSkippedWarning();
@@ -33,6 +31,11 @@ public interface NearbyParentFragmentContract {
         void initViewPositions();
         void hideBottomSheet();
         void displayBottomSheetWithInfo(Marker marker);
+
+        void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
+        void addSearchThisAreaButtonAction();
+        void setSearchThisAreaButtonVisibility(boolean isVisible);
+        void setSearchThisAreaProgressVisibility(boolean isVisible);
     }
 
     interface UserActions {
@@ -43,6 +46,8 @@ public interface NearbyParentFragmentContract {
         void lockNearby(boolean isNearbyLocked);
         MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
         void setActionListeners(JsonKvStore applicationKvStore);
+
+        MapboxMap.OnCameraMoveListener onCameraMove(LatLng cameraTarget);
     }
     
     interface ViewsAreReadyCallback {

@@ -118,6 +118,8 @@ public class NearbyParentFragmentPresenter
         //nearbyParentFragmentView.addNetworkBroadcastReceiver();
         //nearbyMapFragmentView.setupMapView(null);
         //nearbyOperationsInitialized();
+        this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
+        this.nearbyParentFragmentView.addOnCameraMoveListener(onCameraMove(getCameraTarget()));
         initializeMapOperations();
     }
 
@@ -173,6 +175,21 @@ public class NearbyParentFragmentPresenter
              nearbyParentFragmentView.recenterMap(curLatLng);
         });
 
+    }
+
+    public MapboxMap.OnCameraMoveListener onCameraMove(LatLng cameraTarget) {
+
+        return new MapboxMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                // If our nearby markers are calculated at least once
+                if (NearbyController.currentLocation != null) {
+                    if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
+                        nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
+                    }
+                }
+            }
+        };
     }
 
     public void markerUnselected() {
