@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -194,6 +195,6 @@ public class CommonsApplicationModule {
     @Named("username")
     @Provides
     public String provideLoggedInUsername() {
-        return AppAdapter.get().getUserName();
+        return Objects.toString(AppAdapter.get().getUserName(), "");
     }
 }
