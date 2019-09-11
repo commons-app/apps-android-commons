@@ -346,6 +346,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
+        Log.d("denemeTestt","on camera move listener is set");
         mapFragment.getMapboxMap().addOnCameraMoveListener(onCameraMoveListener);
     }
 
@@ -430,8 +431,17 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void populatePlaces(fr.free.nrw.commons.location.LatLng curlatLng, fr.free.nrw.commons.location.LatLng searchLatLng) {
+        boolean checkingAroundCurretLocation;
+        if (curlatLng.equals(searchLatLng)) { // Means we are checking around current location
+            Log.d("denemeTestt","checking around current location1");
+            checkingAroundCurretLocation = true;
+        } else {
+            Log.d("denemeTestt","not checking around current location2");
+            checkingAroundCurretLocation = false;
+        }
+
         compositeDisposable.add(Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, true))
+                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurretLocation))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::updateMapMarkers,

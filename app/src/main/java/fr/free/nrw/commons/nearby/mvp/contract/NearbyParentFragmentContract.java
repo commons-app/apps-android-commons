@@ -44,10 +44,9 @@ public interface NearbyParentFragmentContract {
         void initializeNearbyOperations();
         void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget);
         void lockNearby(boolean isNearbyLocked);
-        MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
         void setActionListeners(JsonKvStore applicationKvStore);
 
-        MapboxMap.OnCameraMoveListener onCameraMove(LatLng cameraTarget);
+        MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
     }
     
     interface ViewsAreReadyCallback {

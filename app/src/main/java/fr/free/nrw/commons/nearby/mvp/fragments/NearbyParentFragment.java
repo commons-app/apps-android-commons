@@ -174,7 +174,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void addSearchThisAreaButtonAction() {
-        searchThisAreaButton.setOnClickListener(nearbyParentFragmentPresenter.onSearchThisAreaClicked());
+        //searchThisAreaButton.setOnClickListener(nearbyParentFragmentPresenter.onSearchThisAreaClicked());
     }
 
     @Override

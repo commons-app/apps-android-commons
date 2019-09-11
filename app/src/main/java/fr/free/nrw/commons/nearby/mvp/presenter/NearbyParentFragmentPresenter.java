@@ -119,7 +119,7 @@ public class NearbyParentFragmentPresenter
         //nearbyMapFragmentView.setupMapView(null);
         //nearbyOperationsInitialized();
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
-        this.nearbyParentFragmentView.addOnCameraMoveListener(onCameraMove(getCameraTarget()));
+        this.nearbyParentFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
         initializeMapOperations();
     }
 
@@ -175,21 +175,6 @@ public class NearbyParentFragmentPresenter
              nearbyParentFragmentView.recenterMap(curLatLng);
         });
 
-    }
-
-    public MapboxMap.OnCameraMoveListener onCameraMove(LatLng cameraTarget) {
-
-        return new MapboxMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
-                // If our nearby markers are calculated at least once
-                if (NearbyController.currentLocation != null) {
-                    if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
-                        nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
-                    }
-                }
-            }
-        };
     }
 
     public void markerUnselected() {
@@ -325,17 +310,24 @@ public class NearbyParentFragmentPresenter
         Timber.d("Location changed medium");
     }
 
+    @Override
     public MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap) {
+        Log.d("denemeTestt","cameramoving1");
+
         return () -> {
+            Log.d("denemeTestt","cameramoving2");
 
             // If our nearby markers are calculated at least once
             if (NearbyController.currentLocation != null) {
+                Log.d("denemeTestt","NearbyController.currentLocation != null");
                 double distance = mapboxMap.getCameraPosition().target.distanceTo
                         (LocationUtils.commonsLatLngToMapBoxLatLng(NearbyController.latestSearchLocation));
                 if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
                     if (distance > NearbyController.latestSearchRadius) {
+                        Log.d("denemeTestt","distance > NearbyController.latestSearchRadius");
                         nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
                     } else {
+                        Log.d("denemeTestt","distance < NearbyController.latestSearchRadius");
                         nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
                     }
                 }
@@ -349,6 +341,7 @@ public class NearbyParentFragmentPresenter
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("denemeTestt","onSearchThisAreaClicked");
                 // Lock map operations during search this area operation
                 lockNearby(true);
                 nearbyParentFragmentView.setSearchThisAreaProgressVisibility(true);
@@ -356,9 +349,11 @@ public class NearbyParentFragmentPresenter
                 nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
 
                 if (searchCloseToCurrentLocation()){
+                    Log.d("denemeTestt","searchCloseToCurrentLocation()");
                     updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED,
                             null);
                 } else {
+                    Log.d("denemeTestt","!searchCloseToCurrentLocation()");
                     updateMapAndList(SEARCH_CUSTOM_AREA,
                             getCameraTarget());
                 }
@@ -372,6 +367,7 @@ public class NearbyParentFragmentPresenter
      * @return Returns true if search this area button is used around our current location
      */
     public boolean searchCloseToCurrentLocation() {
+        Log.d("denemeTestt","searchCloseToCurrentLocation method");
         double distance = LocationUtils.commonsLatLngToMapBoxLatLng(getCameraTarget())
                 .distanceTo(new com.mapbox.mapboxsdk.geometry.LatLng(NearbyController.currentLocation.getLatitude()
                         , NearbyController.currentLocation.getLongitude()));
