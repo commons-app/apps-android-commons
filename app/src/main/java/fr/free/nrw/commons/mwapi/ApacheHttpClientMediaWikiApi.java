@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.gson.Gson;
 
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -26,10 +25,6 @@ import java.util.Date;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 
-import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
-
-import io.reactivex.Single;
 import timber.log.Timber;
 
 /**
@@ -52,91 +47,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             httpClient.addRequestInterceptor(NetworkInterceptors.getHttpRequestInterceptor());
         }
         api = new CustomMwApi(apiURL, httpClient);
-    }
-
-    @Override
-    public Single<String> parseWikicode(String source) {
-        return Single.fromCallable(() -> api.action("flow-parsoid-utils")
-                .param("from", "wikitext")
-                .param("to", "html")
-                .param("content", source)
-                .param("title", "Main_page")
-                .get()
-                .getString("/api/flow-parsoid-utils/@content"));
-    }
-
-    @Override
-    @NonNull
-    public Single<MediaResult> fetchMediaByFilename(String filename) {
-        return Single.fromCallable(() -> {
-            CustomApiResult apiResult = api.action("query")
-                    .param("prop", "revisions")
-                    .param("titles", filename)
-                    .param("rvprop", "content")
-                    .param("rvlimit", 1)
-                    .param("rvgeneratexml", 1)
-                    .get();
-
-            return new MediaResult(
-                    apiResult.getString("/api/query/pages/page/revisions/rev"),
-                    apiResult.getString("/api/query/pages/page/revisions/rev/@parsetree"));
-        });
-    }
-
-    @Override
-    @NonNull
-    public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException {
-        CustomMwApi.RequestBuilder builder = api.action("query")
-                .param("list", "logevents")
-                .param("letype", "upload")
-                .param("leprop", "title|timestamp|ids")
-                .param("leuser", user)
-                .param("lelimit", limit);
-        if (!TextUtils.isEmpty(lastModified)) {
-            builder.param("leend", lastModified);
-        }
-        if (!TextUtils.isEmpty(queryContinue)) {
-            builder.param("lestart", queryContinue);
-        }
-        CustomApiResult result = builder.get();
-
-        return new LogEventResult(
-                getLogEventsFromResult(result),
-                result.getString("/api/query-continue/logevents/@lestart"));
-    }
-
-    @NonNull
-    private ArrayList<LogEventResult.LogEvent> getLogEventsFromResult(CustomApiResult result) {
-        ArrayList<CustomApiResult> uploads = result.getNodes("/api/query/logevents/item");
-        Timber.d("%d results!", uploads.size());
-        ArrayList<LogEventResult.LogEvent> logEvents = new ArrayList<>();
-        for (CustomApiResult image : uploads) {
-            logEvents.add(new LogEventResult.LogEvent(
-                    image.getString("@pageid"),
-                    image.getString("@title"),
-                    parseMWDate(image.getString("@timestamp")))
-            );
-        }
-        return logEvents;
-    }
-
-    @Override
-    @Nullable
-    public String revisionsByFilename(String filename) throws IOException {
-        return api.action("query")
-                .param("prop", "revisions")
-                .param("rvprop", "timestamp|content")
-                .param("titles", filename)
-                .get()
-                .getString("/api/query/pages/page/revisions/rev");
-    }
-
-    private Date parseMWDate(String mwDate) {
-        try {
-            return DateUtil.iso8601DateParse(mwDate);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**

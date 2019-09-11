@@ -9,17 +9,6 @@ import io.reactivex.Single;
 
 public interface MediaWikiApi {
 
-    Single<String> parseWikicode(String source);
-
-    @NonNull
-    Single<MediaResult> fetchMediaByFilename(String filename);
-
-    @Nullable
-    String revisionsByFilename(String filename) throws IOException;
-
-    @NonNull
-    LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
-
     void logout();
 
 //    Single<CampaignResponseDTO> getCampaigns();

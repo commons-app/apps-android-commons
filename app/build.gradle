@@ -31,7 +31,7 @@ dependencies {
     implementation 'com.facebook.fresco:fresco:1.13.0'
     implementation 'com.drewnoakes:metadata-extractor:2.11.0'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
-    implementation 'com.github.ilgazer:wikimedia-android-data-client:f65809ee2c'
+    implementation 'com.github.maskaravivek:wikimedia-android-data-client:v0.0.26'
 
     // UI
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
