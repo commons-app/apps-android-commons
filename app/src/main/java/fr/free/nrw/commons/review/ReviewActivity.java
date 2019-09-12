@@ -27,7 +27,6 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.delete.DeleteHelper;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -57,8 +56,6 @@ public class ReviewActivity extends NavigationBaseActivity {
     TextView imageCaption;
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
-    @Inject
-    MediaWikiApi mwApi;
     @Inject
     ReviewHelper reviewHelper;
     @Inject

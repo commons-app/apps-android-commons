@@ -1,7 +1,6 @@
 package fr.free.nrw.commons
 
 import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.mwapi.MediaWikiApi
 import io.reactivex.Single
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -19,11 +18,7 @@ import org.mockito.MockitoAnnotations
 class MediaDataExtractorTest {
 
     @Mock
-    internal var mwApi: MediaWikiApi? = null
-
-    @Mock
     internal var mediaClient: MediaClient? = null
-
     @InjectMocks
     var mediaDataExtractor: MediaDataExtractor? = null
 

@@ -27,8 +27,6 @@ import fr.free.nrw.commons.actions.PageEditInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaInterface;
-import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
 import fr.free.nrw.commons.review.ReviewInterface;
@@ -76,14 +74,6 @@ public class NetworkingModule {
         });
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return httpLoggingInterceptor;
-    }
-
-    @Provides
-    @Singleton
-    public MediaWikiApi provideMediaWikiApi(Context context,
-                                            @Named("default_preferences") JsonKvStore defaultKvStore,
-                                            Gson gson) {
-        return new ApacheHttpClientMediaWikiApi(BuildConfig.WIKIMEDIA_API_HOST);
     }
 
     @Provides

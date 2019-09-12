@@ -12,7 +12,6 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -20,7 +19,7 @@ import timber.log.Timber;
 
 /**
  * This class is meant to handle the Wikidata edits made through the app
- * It will talk with MediaWikiApi to make necessary API calls, log the edits and fire listeners
+ * It will talk with MediaWiki Apis to make the necessary calls, log the edits and fire listeners
  * on successful edits
  */
 @Singleton

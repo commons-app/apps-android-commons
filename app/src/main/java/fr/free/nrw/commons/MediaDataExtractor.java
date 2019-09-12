@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Single;
 import timber.log.Timber;
@@ -19,16 +18,13 @@ import timber.log.Timber;
  */
 @Singleton
 public class MediaDataExtractor {
-    private final MediaWikiApi mediaWikiApi;
     private final OkHttpJsonApiClient okHttpJsonApiClient;
     private final MediaClient mediaClient;
 
     @Inject
-    public MediaDataExtractor(MediaWikiApi mwApi,
-                              OkHttpJsonApiClient okHttpJsonApiClient,
+    public MediaDataExtractor(OkHttpJsonApiClient okHttpJsonApiClient,
                               MediaClient mediaClient) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
-        this.mediaWikiApi = mwApi;
         this.mediaClient = mediaClient;
     }
 

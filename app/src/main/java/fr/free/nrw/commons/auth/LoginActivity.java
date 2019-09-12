@@ -48,7 +48,6 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -65,9 +64,6 @@ import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_WIKI_SITE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
-
-    @Inject
-    MediaWikiApi mwApi;
 
     @Inject
     SessionManager sessionManager;

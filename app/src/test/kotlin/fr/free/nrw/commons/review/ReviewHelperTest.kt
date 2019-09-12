@@ -2,8 +2,6 @@ package fr.free.nrw.commons.review
 
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.mwapi.MediaWikiApi
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.Observable
 import io.reactivex.Single
 import junit.framework.Assert.assertNotNull
