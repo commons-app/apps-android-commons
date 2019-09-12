@@ -532,6 +532,12 @@
   <string name="dialog_box_text_nomination">Varför bör %1$s raderas?</string>
   <string name="review_is_uploaded_by">%1$s laddas upp av: %2$s</string>
   <string name="default_description_language">Standardspråk för beskrivning</string>
+  <string name="delete_helper_make_deletion_toast">Försöker nominera %1$s för radering</string>
+  <string name="delete_helper_show_deletion_title">Nominerar för radering</string>
+  <string name="delete_helper_show_deletion_title_success">Genomfördes</string>
+  <string name="delete_helper_show_deletion_message_if">Nominaterades %1$s för radering.</string>
+  <string name="delete_helper_show_deletion_title_failed">Misslyckades</string>
+  <string name="delete_helper_show_deletion_message_else">Kunde inte begära radering.</string>
   <string name="delete_helper_ask_spam_selfie">Ett självporträtt</string>
   <string name="delete_helper_ask_spam_blurry">Suddig</string>
   <string name="delete_helper_ask_spam_nonsense">Strunt</string>
@@ -540,4 +546,11 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Slumpbild från Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotyp</string>
   <string name="delete_helper_ask_reason_copyright_other">Annat</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Eftersom den är</string>
+  <string name="share_image_via">Dela bild via</string>
+  <string name="no_achievements_yet">Du har ännu inte gjort några bidrag</string>
+  <string name="account_created">Konto har skapats!</string>
+  <string name="text_copy">Texten kopierades till urklipp</string>
+  <string name="notification_mark_read">Avisering markerades som läst</string>
+  <string name="some_error">Ett fel uppstod!</string>
 </resources>
