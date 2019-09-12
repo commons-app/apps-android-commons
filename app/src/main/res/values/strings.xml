@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY searcharea "Search this area">
+    ]>
+
 <resources>
   <string name="title_activity_explore">Explore</string>
   <string name="navigation_item_explore">Explore</string>
@@ -308,7 +312,7 @@
   <string name="retry">Retry</string>
 
   <string name="showcase_view_got_it_button">Got it!</string>
-  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles.\n\nClicking on \'SEARCH THIS AREA\' locks the map and launches a nearby search around that location.</string>
+  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles.\n\nClicking on '&searcharea;' locks the map and launches a nearby search around that location.</string>
   <string name="showcase_view_list_icon">Tapping this button brings up a list of these places</string>
   <string name="showcase_view_plus_fab">You can upload a picture for any place from your gallery or camera</string>
 
@@ -450,7 +454,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_go_back">No, Go Back</string>
 
   <string name="upload_flow_all_images_in_set">(For all images in set)</string>
-  <string name="search_this_area">Search this area</string>
+  <string name="search_this_area">&searcharea;</string>
   <string name="nearby_card_permission_title">Permission Request</string>
   <string name="nearby_card_permission_explanation">Would you like us to use your current location to display the nearest place that needs pictures?</string>
   <string name="unable_to_display_nearest_place">Unable to display nearest place that needs pictures without location permissions</string>
