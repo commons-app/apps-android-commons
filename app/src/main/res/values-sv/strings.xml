@@ -547,4 +547,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logotyp</string>
   <string name="delete_helper_ask_reason_copyright_other">Annat</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Eftersom den är</string>
+  <string name="share_image_via">Dela bild via</string>
+  <string name="no_achievements_yet">Du har ännu inte gjort några bidrag</string>
+  <string name="account_created">Konto har skapats!</string>
+  <string name="text_copy">Texten kopierades till urklipp</string>
+  <string name="notification_mark_read">Avisering markerades som läst</string>
+  <string name="some_error">Ett fel uppstod!</string>
 </resources>
