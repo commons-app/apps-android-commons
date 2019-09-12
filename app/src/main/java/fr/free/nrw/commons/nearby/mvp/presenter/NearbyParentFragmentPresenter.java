@@ -99,6 +99,7 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void initializeNearbyOperations() {
+        // TODO: do not update every time user selected tab
         Timber.d("initializing nearby operations started");
         // Add location listener to be notified about location changes
         //locationServiceManager.addLocationListener(this);
@@ -259,8 +260,8 @@ public class NearbyParentFragmentPresenter
                 || locationChangeType.equals(MAP_UPDATED)) {
             Log.d("denemeTest","1");
             lockUnlockNearby(true);
+            nearbyParentFragmentView.setProgressBarVisibility(true);
             nearbyParentFragmentView.populatePlaces(lastLocation, lastLocation);
-            nearbyParentFragmentView.setSearchThisAreaProgressVisibility(false);
             //nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
             // TODO: when unneeded populate places call problem is solved, open commented out line and remove it from update map markers method
             // TODO dont forget map updated state after an wikidata item is updated
@@ -268,8 +269,8 @@ public class NearbyParentFragmentPresenter
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
             Log.d("denemeTest","2");
             lockUnlockNearby(true);
+            nearbyParentFragmentView.setProgressBarVisibility(true);
             nearbyParentFragmentView.populatePlaces(lastLocation, cameraTarget);
-            nearbyParentFragmentView.setSearchThisAreaProgressVisibility(false);
             searchingThisArea = false;
         } else { // Means location changed slightly, ie user is walking or driving.
             Log.d("denemeTest","3");
@@ -290,6 +291,7 @@ public class NearbyParentFragmentPresenter
         nearbyMapFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
         nearbyMapFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
         lockUnlockNearby(false); // So that new location updates wont come
+        nearbyParentFragmentView.setProgressBarVisibility(false);
     }
 
     /**
@@ -301,6 +303,8 @@ public class NearbyParentFragmentPresenter
         nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList, selectedMarker, this);
         nearbyMapFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
         lockUnlockNearby(false); // So that new location updates wont come
+        nearbyParentFragmentView.setProgressBarVisibility(false);
+
     }
 
     @Override
@@ -336,7 +340,8 @@ public class NearbyParentFragmentPresenter
             // If our nearby markers are calculated at least once
             if (NearbyController.currentLocation != null) {
                 Log.d("denemeTestt","NearbyController.currentLocation != null");
-                double distance = mapboxMap.getCameraPosition().target.distanceTo
+               double distance = mapboxMap.getCameraPosition().target.distanceTo
+                        //TODO: test this distances
                         (LocationUtils.commonsLatLngToMapBoxLatLng(NearbyController.latestSearchLocation));
                 if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
                     if (distance > NearbyController.latestSearchRadius) {
@@ -359,9 +364,6 @@ public class NearbyParentFragmentPresenter
             public void onClick(View v) {
                 Log.d("denemeTestt","onSearchThisAreaClicked");
                 // Lock map operations during search this area operation
-                // TODO: test lock nearby
-                nearbyParentFragmentView.setSearchThisAreaProgressVisibility(true);
-                // TODO: make this invisible at somewhere
                 nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
 
                 if (searchCloseToCurrentLocation()){

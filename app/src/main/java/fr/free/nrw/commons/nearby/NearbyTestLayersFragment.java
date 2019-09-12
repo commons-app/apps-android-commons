@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -44,19 +43,15 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
-import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -67,7 +62,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.contributions.ContributionsFragment.CONTRIBUTION_LIST_FRAGMENT_TAG;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.nearby.NearbyTestFragmentLayersActivity.CONTRIBUTIONS_TAB_POSITION;
 
@@ -140,8 +134,8 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @BindView(R.id.search_this_area_button)
     Button searchThisAreaButton;
 
-    @BindView(R.id.search_this_area_button_progress_bar)
-    ProgressBar searchThisAreaButtonProgressBar;
+    @BindView(R.id.map_progress_bar)
+    ProgressBar progressBar;
 
     @Inject
     LocationServiceManager locationManager;
@@ -506,11 +500,11 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     }
 
     @Override
-    public void setSearchThisAreaProgressVisibility(boolean isVisible) {
+    public void setProgressBarVisibility(boolean isVisible) {
         if (isVisible) {
-            searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
         } else {
-            searchThisAreaButtonProgressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
         }
     }
 

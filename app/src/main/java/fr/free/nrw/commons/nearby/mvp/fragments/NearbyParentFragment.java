@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +32,6 @@ import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
@@ -43,12 +41,10 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.FragmentUtils;
-import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
@@ -58,9 +54,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
-import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
 /**
  * This fragment is under MainActivity at the came level with ContributionFragment and holds
@@ -84,7 +78,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     ConstraintLayout loadingNearbyLayout;
     @BindView(R.id.search_this_area_button)
     Button searchThisAreaButton;
-    @BindView(R.id.search_this_area_button_progress_bar)
+    @BindView(R.id.progress_bar)
     ProgressBar searchThisAreaButtonProgressBar;
 
     @Inject
@@ -187,7 +181,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void setSearchThisAreaProgressVisibility(boolean isVisible) {
+    public void setProgressBarVisibility(boolean isVisible) {
         if (isVisible) {
             searchThisAreaButtonProgressBar.setVisibility(View.VISIBLE);
         } else {

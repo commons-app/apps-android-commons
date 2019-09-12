@@ -83,7 +83,7 @@
         app:elevation="6dp" />
 
     <ProgressBar
-        android:id="@+id/search_this_area_button_progress_bar"
+        android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

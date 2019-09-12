@@ -35,7 +35,7 @@ public interface NearbyParentFragmentContract {
         void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
         void addSearchThisAreaButtonAction();
         void setSearchThisAreaButtonVisibility(boolean isVisible);
-        void setSearchThisAreaProgressVisibility(boolean isVisible);
+        void setProgressBarVisibility(boolean isVisible);
     }
 
     interface UserActions {
