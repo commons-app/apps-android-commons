@@ -435,23 +435,43 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         if (curlatLng.equals(searchLatLng)) { // Means we are checking around current location
             Log.d("denemeTestt","checking around current location1");
             checkingAroundCurretLocation = true;
+            compositeDisposable.add(Observable.fromCallable(() -> nearbyController
+                    .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurretLocation))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::updateMapMarkers,
+                            throwable -> {
+                                Timber.d(throwable);
+                                //showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                // TODO solve first unneeded method call here
+                                //progressBar.setVisibility(View.GONE);
+                                //nearbyParentFragmentPresenter.lockUnlockNearby(false);
+                            }));
         } else {
             Log.d("denemeTestt","not checking around current location2");
             checkingAroundCurretLocation = false;
+            compositeDisposable.add(Observable.fromCallable(() -> nearbyController
+                    .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurretLocation))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::updateMapMarkersForCustomLocation,
+                            throwable -> {
+                                Timber.d(throwable);
+                                //showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                // TODO solve first unneeded method call here
+                                //progressBar.setVisibility(View.GONE);
+                                //nearbyParentFragmentPresenter.lockUnlockNearby(false);
+                            }));
         }
+    }
 
-        compositeDisposable.add(Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurretLocation))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateMapMarkers,
-                        throwable -> {
-                            Timber.d(throwable);
-                            //showErrorMessage(getString(R.string.error_fetching_nearby_places));
-                            // TODO solve first unneeded method call here
-                            //progressBar.setVisibility(View.GONE);
-                            //nearbyParentFragmentPresenter.lockNearby(false);
-                        }));
+    /**
+     * Populates places for your location, should be used for finding nearby places around a
+     * location where you are.
+     * @param nearbyPlacesInfo This variable has place list information and distances.
+     */
+    private void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker);
     }
 
     /**
@@ -459,9 +479,12 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
      * location where you are not at.
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
-    private void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker);
+    private void updateMapMarkersForCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        nearbyParentFragmentPresenter.updateMapMarkersForCustomLocation(nearbyPlacesInfo, selectedMarker);
     }
+
+
+
 
     @Override
     public boolean isBottomSheetExpanded() {

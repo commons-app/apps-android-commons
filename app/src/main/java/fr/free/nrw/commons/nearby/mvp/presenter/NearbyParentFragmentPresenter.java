@@ -13,7 +13,6 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
-import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.utils.LocationUtils;
 
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
@@ -111,7 +110,6 @@ public class NearbyParentFragmentPresenter
         Timber.d("performNearbyOperationsIfPermissionGiven");
         //nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
         // Nearby buttons should be active, they should be inactive only during update
-        //lockNearby(false);
         // This will start a consequence to check GPS depending on different API
         //nearbyParentFragmentView.checkGps(locationServiceManager);
         // We will know when we went offline and online again
@@ -147,7 +145,8 @@ public class NearbyParentFragmentPresenter
         Log.d("denemeTest","initializeMapOperations");
         nearbyParentFragmentView.initViewPositions();
 
-        lockNearby(false);
+        lockUnlockNearby(false);
+        registerUnregisterLocationListener(false);
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
 
         Timber.d("Nearby map view is created and ready");
@@ -193,9 +192,12 @@ public class NearbyParentFragmentPresenter
      * @param isNearbyLocked true means lock, false means unlock
      */
     @Override
-    public void lockNearby(boolean isNearbyLocked) {
+    public void lockUnlockNearby(boolean isNearbyLocked) {
         this.isNearbyLocked = isNearbyLocked;
-        if (isNearbyLocked) {
+    }
+
+    public void registerUnregisterLocationListener(boolean removeLocationListener) {
+        if (removeLocationListener) {
             locationServiceManager.unregisterLocationManager();
             locationServiceManager.removeLocationListener(this);
             Timber.d("Nearby locked");
@@ -256,6 +258,7 @@ public class NearbyParentFragmentPresenter
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(MAP_UPDATED)) {
             Log.d("denemeTest","1");
+            lockUnlockNearby(true);
             nearbyParentFragmentView.populatePlaces(lastLocation, lastLocation);
             nearbyParentFragmentView.setSearchThisAreaProgressVisibility(false);
             //nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
@@ -264,7 +267,7 @@ public class NearbyParentFragmentPresenter
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
             Log.d("denemeTest","2");
-
+            lockUnlockNearby(true);
             nearbyParentFragmentView.populatePlaces(lastLocation, cameraTarget);
             nearbyParentFragmentView.setSearchThisAreaProgressVisibility(false);
             searchingThisArea = false;
@@ -284,7 +287,20 @@ public class NearbyParentFragmentPresenter
      */
     public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker) {
         nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList, selectedMarker, this);
+        nearbyMapFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
         nearbyMapFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
+        lockUnlockNearby(false); // So that new location updates wont come
+    }
+
+    /**
+     * Populates places for custom location, should be used for finding nearby places around a
+     * location where you are not at.
+     * @param nearbyPlacesInfo This variable has place list information and distances.
+     */
+    public void updateMapMarkersForCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker) {
+        nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList, selectedMarker, this);
+        nearbyMapFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
+        lockUnlockNearby(false); // So that new location updates wont come
     }
 
     @Override
@@ -343,7 +359,7 @@ public class NearbyParentFragmentPresenter
             public void onClick(View v) {
                 Log.d("denemeTestt","onSearchThisAreaClicked");
                 // Lock map operations during search this area operation
-                lockNearby(true);
+                // TODO: test lock nearby
                 nearbyParentFragmentView.setSearchThisAreaProgressVisibility(true);
                 // TODO: make this invisible at somewhere
                 nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
@@ -353,7 +369,7 @@ public class NearbyParentFragmentPresenter
                     updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED,
                             null);
                 } else {
-                    Log.d("denemeTestt","!searchCloseToCurrentLocation()");
+                    Log.d("denemeTestt","!searchCloseToCurrentLocation()+"+getCameraTarget());
                     updateMapAndList(SEARCH_CUSTOM_AREA,
                             getCameraTarget());
                 }

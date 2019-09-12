@@ -23,6 +23,7 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.maps.MapFragment;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -283,9 +284,7 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
                         bookmarkLocationDao.getAllBookmarksLocations());
         mapboxMap.clear();
         // TODO: set search latlang here
-        CameraPosition cameraPosition = new CameraPosition.Builder().target
-                (LocationUtils.commonsLatLngToMapBoxLatLng(latLng)).build();
-        mapboxMap.setCameraPosition(cameraPosition);
+
         /*mapboxMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition), 1000);*/
         // TODO: set position depening to botom sheet position heere
@@ -293,12 +292,15 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
         addNearbyMarkersToMapBoxMap(customBaseMarkerOptions, selectedMarker, nearbyParentFragmentPresenter);
         // Re-enable mapbox gestures on custom location markers load
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
-        updateMapToTrackPosition(latLng);
     }
 
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
-        addCurrentLocationMarker(curLatLng);
+        CameraPosition cameraPosition = new CameraPosition.Builder().target
+                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
+        mapboxMap.setCameraPosition(cameraPosition);
+        mapboxMap.animateCamera(CameraUpdateFactory
+                .newCameraPosition(cameraPosition), 1000);
     }
 
     @Override
