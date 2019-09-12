@@ -9,8 +9,6 @@ import io.reactivex.Single;
 
 public interface MediaWikiApi {
 
-    boolean isUserBlockedFromCommons();
-
     void logout();
 
 //    Single<CampaignResponseDTO> getCampaigns();

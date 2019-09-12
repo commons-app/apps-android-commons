@@ -50,47 +50,6 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     /**
-     * Checks to see if a user is currently blocked from Commons
-     *
-     * @return whether or not the user is blocked from Commons
-     */
-    @Override
-    public boolean isUserBlockedFromCommons() {
-        boolean userBlocked = false;
-        try {
-            CustomApiResult result = api.action("query")
-                    .param("action", "query")
-                    .param("format", "xml")
-                    .param("meta", "userinfo")
-                    .param("uiprop", "blockinfo")
-                    .get();
-            if (result != null) {
-                String blockEnd = result.getString("/api/query/userinfo/@blockexpiry");
-                if (blockEnd.equals("infinite")) {
-                    userBlocked = true;
-                } else if (!blockEnd.isEmpty()) {
-                    Date endDate = parseMWDate(blockEnd);
-                    Date current = new Date();
-                    userBlocked = endDate.after(current);
-                }
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return userBlocked;
-    }
-
-    private Date parseMWDate(String mwDate) {
-        try {
-            return DateUtil.iso8601DateParse(mwDate);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * Calls media wiki's logout API
      */
     public void logout() {
