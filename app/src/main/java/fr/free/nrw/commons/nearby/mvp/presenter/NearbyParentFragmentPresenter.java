@@ -40,6 +40,7 @@ public class NearbyParentFragmentPresenter
     boolean searchingThisArea;
     boolean nearbyMapViewReady;
     boolean nearbyOperationsInitialized;
+    boolean mapInitialized; // TODO reset this on fragment destroyed
 
 
     private LocationServiceManager locationServiceManager;
@@ -71,7 +72,7 @@ public class NearbyParentFragmentPresenter
         Log.d("denemeTest","Nearby tab selected");
         onTabSelected = true;
         // The condition for initialize operations is both having views ready and tab is selected
-        if (nearbyViewsAreReady) {
+        if (nearbyViewsAreReady && !mapInitialized) {
             initializeNearbyOperations();
         }
     }
@@ -128,6 +129,7 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void nearbyMapViewReady() {
+        // TODO: remove this
         nearbyMapViewReady = true;
         if (nearbyOperationsInitialized) {
             initializeMapOperations();
@@ -155,6 +157,7 @@ public class NearbyParentFragmentPresenter
         // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
         this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
+        mapInitialized = true;
     }
 
     /**
