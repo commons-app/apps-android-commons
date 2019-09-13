@@ -45,7 +45,6 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
-import fr.free.nrw.commons.nearby.NearbyTestFragmentLayersActivity;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
@@ -258,8 +257,8 @@ public class ContributionsFragment
         operations on first time fragment attached to an activity. Then they will be retained
         until fragment life time ends.
          */
-        if (((NearbyTestFragmentLayersActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
-            onAuthCookieAcquired(((NearbyTestFragmentLayersActivity)getActivity()).uploadServiceIntent);
+        if (((MainActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
+            onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
             isFragmentAttachedBefore = true;
 
         }
@@ -271,7 +270,7 @@ public class ContributionsFragment
      */
     public void showContributionsListFragment() {
         // show tabs on contribution list is visible
-        ((NearbyTestFragmentLayersActivity) getActivity()).showTabs();
+        ((MainActivity) getActivity()).showTabs();
         // show nearby card view on contributions list is visible
         if (nearbyNotificationCardView != null) {
             if (store.getBoolean("displayNearbyCardView", true)) {
@@ -292,7 +291,7 @@ public class ContributionsFragment
      */
     public void showMediaDetailPagerFragment() {
         // hide tabs on media detail view is visible
-        ((NearbyTestFragmentLayersActivity)getActivity()).hideTabs();
+        ((MainActivity)getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
         nearbyNotificationCardView.setVisibility(View.GONE);
 
@@ -302,7 +301,7 @@ public class ContributionsFragment
 
     @Override
     public void onBackStackChanged() {
-        ((NearbyTestFragmentLayersActivity)getActivity()).initBackButton();
+        ((MainActivity)getActivity()).initBackButton();
     }
 
     /**
@@ -352,7 +351,7 @@ public class ContributionsFragment
     private void setUploadCount() {
 
         compositeDisposable.add(okHttpJsonApiClient
-                .getUploadCount(((NearbyTestFragmentLayersActivity)getActivity()).sessionManager.getCurrentAccount().name)
+                .getUploadCount(((MainActivity)getActivity()).sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::displayUploadCount,
@@ -366,7 +365,7 @@ public class ContributionsFragment
             return;
         }
 
-        ((NearbyTestFragmentLayersActivity)getActivity()).setNumOfUploads(uploadCount);
+        ((MainActivity)getActivity()).setNumOfUploads(uploadCount);
 
     }
 
@@ -421,7 +420,7 @@ public class ContributionsFragment
             onLocationPermissionGranted();
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
                 && store.getBoolean("displayLocationPermissionForCardView", true)
-                && (((NearbyTestFragmentLayersActivity) getActivity()).viewPager.getCurrentItem() == CONTRIBUTIONS_TAB_POSITION)) {
+                && (((MainActivity) getActivity()).viewPager.getCurrentItem() == CONTRIBUTIONS_TAB_POSITION)) {
             nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
             showNearbyCardPermissionRationale();
         }

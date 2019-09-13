@@ -63,7 +63,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.nearby.NearbyTestFragmentLayersActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 
 
 public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment implements NearbyParentFragmentContract.View {
@@ -170,7 +170,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     FragmentTransaction transaction;
     View view;
 
-    NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
+    public NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
     SupportMapFragment mapFragment;
     boolean isDarkTheme;
     boolean isFabOpen;
