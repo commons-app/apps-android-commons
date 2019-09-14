@@ -192,7 +192,6 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
-    private com.mapbox.mapboxsdk.maps.SupportMapFragment nearbyMapFragment;
     private fr.free.nrw.commons.nearby.NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = com.mapbox.mapboxsdk.maps.SupportMapFragment.class.getSimpleName();
     private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
@@ -211,9 +210,16 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //initViews();
-        setMapFragment(savedInstanceState);
-        setListFragment(savedInstanceState);
+
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapFragment = getMapFragment();
+        nearbyListFragment = getListFragment();
+    }
+
 
     public void initViews() {
         Timber.d("init views called");
@@ -302,13 +308,37 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     }
 
-    public void setMapFragment(Bundle savedInstanceState) {
+    /**
+     * Returns the map fragment added to child fragment manager previously, if exists.
+     */
+    private NearbyListFragment getListFragment() {
+        NearbyListFragment existingFragment = (NearbyListFragment) getChildFragmentManager()
+                .findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
+        if (existingFragment == null) {
+            existingFragment = setListFragment();
+        }
+        return existingFragment;
+    }
+
+    /**
+     * Returns the map fragment added to child fragment manager previously, if exists.
+     */
+    private SupportMapFragment getMapFragment() {
+        SupportMapFragment existingFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
+        if (existingFragment == null) {
+            existingFragment = setMapFragment();
+        }
+        return existingFragment;
+    }
+
+    public SupportMapFragment setMapFragment() {
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.
         Mapbox.getInstance(getActivity(), getString(R.string.mapbox_commons_app_token));
-
+        SupportMapFragment mapFragment;
         // Create supportMapFragment
-        if (savedInstanceState == null) {
+        //if (savedInstanceState == null) {
 
             // Create fragment
             transaction = getChildFragmentManager().beginTransaction();
@@ -333,9 +363,9 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
             getChildFragmentManager().executePendingTransactions();
             transaction.add(R.id.container, mapFragment, TAG_RETAINED_MAP_FRAGMENT);
             transaction.commit();
-        } else {
+        /*} else {
             mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
-        }
+        }*/
 
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -353,22 +383,25 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
                 });
             }
         });
+        return mapFragment;
     }
 
-    void setListFragment(Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
+    NearbyListFragment setListFragment() {
+        ///if (savedInstanceState == null) {
+        NearbyListFragment nearbyListFragment;
             loadingNearbyLayout.setVisibility(View.GONE);
             frameLayout.setVisibility(View.VISIBLE);
             FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
             nearbyListFragment = new NearbyListFragment();
-            nearbyListFragment.setArguments(savedInstanceState);
+            nearbyListFragment.setArguments(null);
             fragmentTransaction.replace(R.id.container_sheet, nearbyListFragment, TAG_RETAINED_LIST_FRAGMENT);
             // initBottomSheetBehaviour();
             //bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             fragmentTransaction.commitAllowingStateLoss();
-        } else {
+        /*} else {
             nearbyListFragment = (NearbyListFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
-        }
+        }*/
+        return nearbyListFragment;
     }
 
     /**
