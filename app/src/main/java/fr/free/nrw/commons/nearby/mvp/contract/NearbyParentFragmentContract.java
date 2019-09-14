@@ -19,7 +19,7 @@ public interface NearbyParentFragmentContract {
         void addNetworkBroadcastReceiver();
         void listOptionMenuItemClicked();
         void  populatePlaces(LatLng curlatLng, LatLng searchLatLng);
-        boolean isBottomSheetExpanded();
+        boolean isListBottomSheetExpanded();
 
         void checkPermissionsAndPerformAction(Runnable runnable);
         void resumeFragment();
@@ -36,6 +36,9 @@ public interface NearbyParentFragmentContract {
         void addSearchThisAreaButtonAction();
         void setSearchThisAreaButtonVisibility(boolean isVisible);
         void setProgressBarVisibility(boolean isVisible);
+        void setTabItemContributions();
+        boolean isDetailsBottomSheetVisible();
+        void setBottomSheetDetailsSmaller();
     }
 
     interface UserActions {
@@ -45,6 +48,7 @@ public interface NearbyParentFragmentContract {
         void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget);
         void lockUnlockNearby(boolean isNearbyLocked);
         void setActionListeners(JsonKvStore applicationKvStore);
+        void backButtonClicked();
 
         MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
     }

@@ -180,6 +180,19 @@ public class NearbyParentFragmentPresenter
 
     }
 
+    @Override
+    public void backButtonClicked() {
+        if(nearbyParentFragmentView.isListBottomSheetExpanded()) {
+            // Back should first hide the bottom sheet if it is expanded
+            nearbyParentFragmentView.listOptionMenuItemClicked();
+        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible()) {
+            nearbyParentFragmentView.setBottomSheetDetailsSmaller();
+        } else {
+            // Otherwise go back to contributions fragment
+            nearbyParentFragmentView.setTabItemContributions();
+        }
+    }
+
     public void markerUnselected() {
         nearbyParentFragmentView.hideBottomSheet();
     }

@@ -47,6 +47,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -418,10 +419,19 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         getActivity().registerReceiver(broadcastReceiver, intentFilter);
     }
 
+    /**
+     * Hide or expand bottom sheet according to states of all sheets
+     */
     @Override
     public void listOptionMenuItemClicked() {
-
+        if(bottomSheetListBehavior.getState()== BottomSheetBehavior.STATE_COLLAPSED || bottomSheetListBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
+            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }else if(bottomSheetListBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
+            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
     }
+
 
     @Override
     public void populatePlaces(fr.free.nrw.commons.location.LatLng curlatLng, fr.free.nrw.commons.location.LatLng searchLatLng) {
@@ -478,11 +488,21 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     }
 
 
-
-
     @Override
-    public boolean isBottomSheetExpanded() {
-        return false;
+    public boolean isListBottomSheetExpanded() {
+        return bottomSheetListBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
+    }
+
+    public boolean isDetailsBottomSheetVisible() {
+        return !(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    public void setBottomSheetDetailsSmaller() {
+        if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        } else {
+            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        }
     }
 
     @Override
@@ -506,6 +526,11 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void setTabItemContributions() {
+        ((MainActivity)getActivity()).viewPager.setCurrentItem(0);
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -268,14 +267,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Means that nearby fragment is visible (not contributions fragment)
             NearbyTestLayersFragment nearbyFragment = (NearbyTestLayersFragment) contributionsActivityPagerAdapter.getItem(1);
-
-            if(nearbyFragment.isBottomSheetExpanded()) {
-                // Back should first hide the bottom sheet if it is expanded
-                nearbyFragment.listOptionMenuItemClicked();
-            } else {
-                // Otherwise go back to contributions fragment
-                viewPager.setCurrentItem(0);
-            }
+            nearbyFragment.nearbyParentFragmentPresenter.backButtonClicked();
         } else {
             super.onBackPressed();
         }

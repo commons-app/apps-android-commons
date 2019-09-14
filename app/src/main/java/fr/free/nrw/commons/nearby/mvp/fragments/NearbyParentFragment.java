@@ -190,6 +190,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void setTabItemContributions() {
+
+    }
+
+    @Override
+    public boolean isDetailsBottomSheetVisible() {
+        return false;
+    }
+
+    @Override
+    public void setBottomSheetDetailsSmaller() {
+
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         wikidataEditListener.setAuthenticationStateListener(this);
@@ -458,7 +473,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public boolean isBottomSheetExpanded() {
+    public boolean isListBottomSheetExpanded() {
         return bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
     }
 
