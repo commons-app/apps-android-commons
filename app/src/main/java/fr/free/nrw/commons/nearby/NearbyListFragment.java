@@ -22,9 +22,10 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import timber.log.Timber;
 
-public class NearbyListFragment extends CommonsDaggerSupportFragment {
+public class NearbyListFragment extends CommonsDaggerSupportFragment implements NearbyParentFragmentContract.ListView {
     private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
 
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
@@ -124,4 +125,8 @@ public class NearbyListFragment extends CommonsDaggerSupportFragment {
         this.bundleForUpdates = bundleForUpdates;
     }
 
+    @Override
+    public void updateListFragment(List<Place> placeList) {
+        adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) recyclerView.getAdapter());
+    }
 }

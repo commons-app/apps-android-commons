@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -37,6 +39,8 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -138,6 +142,12 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @BindView(R.id.map_progress_bar)
     ProgressBar progressBar;
 
+    @BindView(R.id.container_sheet)
+    FrameLayout frameLayout;
+
+    @BindView(R.id.loading_nearby_list)
+    ConstraintLayout loadingNearbyLayout;
+
     @Inject
     LocationServiceManager locationManager;
 
@@ -182,6 +192,11 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
+    private com.mapbox.mapboxsdk.maps.SupportMapFragment nearbyMapFragment;
+    private fr.free.nrw.commons.nearby.NearbyListFragment nearbyListFragment;
+    private static final String TAG_RETAINED_MAP_FRAGMENT = com.mapbox.mapboxsdk.maps.SupportMapFragment.class.getSimpleName();
+    private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -195,12 +210,14 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //initViews();
         setMapFragment(savedInstanceState);
+        setListFragment(savedInstanceState);
     }
 
     public void initViews() {
         Timber.d("init views called");
-        ButterKnife.bind(this, view);
+        //ButterKnife.bind(this, view);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -282,6 +299,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
+
     }
 
     public void setMapFragment(Bundle savedInstanceState) {
@@ -313,10 +331,10 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
             // Add map fragment to parent container
             getChildFragmentManager().executePendingTransactions();
-            transaction.add(R.id.container, mapFragment, "com.mapbox.map");
+            transaction.add(R.id.container, mapFragment, TAG_RETAINED_MAP_FRAGMENT);
             transaction.commit();
         } else {
-            mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentByTag("com.mapbox.map");
+            mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
         }
 
         mapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -337,6 +355,31 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         });
     }
 
+    void setListFragment(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            loadingNearbyLayout.setVisibility(View.GONE);
+            frameLayout.setVisibility(View.VISIBLE);
+            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+            nearbyListFragment = new NearbyListFragment();
+            nearbyListFragment.setArguments(savedInstanceState);
+            fragmentTransaction.replace(R.id.container_sheet, nearbyListFragment, TAG_RETAINED_LIST_FRAGMENT);
+            // initBottomSheetBehaviour();
+            //bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            fragmentTransaction.commitAllowingStateLoss();
+        } else {
+            nearbyListFragment = (NearbyListFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
+        }
+    }
+
+    /**
+     * Updates nearby list for custom location, will be used with search this area method. When you
+     * want to search for a place where you are not at.
+     * @param placeList List of places around your manually chosen target location from map.
+     */
+    private void updateListFragmentForCustomLocation(List<Place> placeList) {
+        nearbyListFragment.updateNearbyListSignificantlyForCustomLocation(placeList);
+    }
+
     /**
      * Thanks to this method we make sure NearbyMapFragment is ready and attached. So that we can
      * prevent NPE caused by null child fragment. This method is called from child fragment when
@@ -346,7 +389,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
         Log.d("denemeTest","this:"+this+", location manager is:"+locationManager);
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
-                (this, mapFragment, locationManager);
+                (nearbyListFragment,this, mapFragment, locationManager);
         Timber.d("Child fragment attached");
         nearbyParentFragmentPresenter.nearbyFragmentsAreReady();
         initViews();

@@ -5,9 +5,12 @@ import android.view.View;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
+import java.util.List;
+
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.Place;
 
 public interface NearbyParentFragmentContract {
 
@@ -39,6 +42,10 @@ public interface NearbyParentFragmentContract {
         void setTabItemContributions();
         boolean isDetailsBottomSheetVisible();
         void setBottomSheetDetailsSmaller();
+    }
+
+    interface ListView {
+        void updateListFragment(List<Place> placeList);
     }
 
     interface UserActions {

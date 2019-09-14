@@ -32,6 +32,7 @@ public class NearbyParentFragmentPresenter
 
     private NearbyParentFragmentContract.View nearbyParentFragmentView;
     private NearbyMapContract.View nearbyMapFragmentView;
+    private NearbyParentFragmentContract.ListView nearbyListFragmentView;
     private boolean isNearbyLocked;
     private LatLng curLatLng;
 
@@ -45,9 +46,11 @@ public class NearbyParentFragmentPresenter
 
     private LocationServiceManager locationServiceManager;
 
-    public NearbyParentFragmentPresenter(NearbyParentFragmentContract.View nearbyParentFragmentView,
+    public NearbyParentFragmentPresenter(NearbyParentFragmentContract.ListView nearbyListFragmentView,
+                                         NearbyParentFragmentContract.View nearbyParentFragmentView,
                                          NearbyMapContract.View nearbyMapFragmentView,
                                          LocationServiceManager locationServiceManager) {
+        this.nearbyListFragmentView = nearbyListFragmentView;
         this.nearbyParentFragmentView = nearbyParentFragmentView;
         this.nearbyMapFragmentView = nearbyMapFragmentView;
         this.nearbyMapFragmentView.viewsAreAssignedToPresenter(this);
@@ -308,6 +311,7 @@ public class NearbyParentFragmentPresenter
         nearbyMapFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
         lockUnlockNearby(false); // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false);
+        nearbyListFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
     }
 
     /**
@@ -320,6 +324,7 @@ public class NearbyParentFragmentPresenter
         nearbyMapFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
         lockUnlockNearby(false); // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false);
+        nearbyListFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
 
     }
 

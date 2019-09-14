@@ -162,7 +162,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     public void childMapFragmentAttached() {
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
-                                (this, null, locationManager);
+                                (null,this, null, locationManager);
         Timber.d("Child fragment attached");
     }
 
