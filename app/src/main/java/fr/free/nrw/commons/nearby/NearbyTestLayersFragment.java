@@ -231,6 +231,21 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
             }
         });
 
+        bottomSheetDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                } else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+            }
+        });
+
+        bottomSheetList.getLayoutParams().height = getActivity().getWindowManager()
+                .getDefaultDisplay().getHeight() / 16 * 9;
+        bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
+
         bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetBehavior
                 .BottomSheetCallback() {
             @Override
