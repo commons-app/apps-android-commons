@@ -146,12 +146,6 @@
             android:name=".nearby.NearbyTestFragmentActivity"
             android:label="@string/title_activity_nearby_test_fragment" />
 
-        <activity
-            android:name=".nearby.NearbyTestFragmentLayersActivity"
-            android:label="@string/title_activity_nearby_test_fragment_layers" />
-
-
-
 
         <service android:name=".upload.UploadService" />
         <service

@@ -182,7 +182,6 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     View view;
 
     public NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
-    SupportMapFragment mapFragment;
     boolean isDarkTheme;
     boolean isFabOpen;
     boolean isBottomListSheetExpanded;
@@ -191,6 +190,8 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
 
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
+
+    SupportMapFragment mapFragment;
 
     private fr.free.nrw.commons.nearby.NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = com.mapbox.mapboxsdk.maps.SupportMapFragment.class.getSimpleName();
@@ -630,7 +631,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 runnable,
-                () -> ((NearbyTestFragmentLayersActivity) getActivity()).viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION),
+                () -> ((MainActivity) getActivity()).viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION),
                 R.string.location_permission_title,
                 R.string.location_permission_rationale_nearby);
     }
