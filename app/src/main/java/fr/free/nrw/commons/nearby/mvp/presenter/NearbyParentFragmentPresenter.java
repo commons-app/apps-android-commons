@@ -58,14 +58,6 @@ public class NearbyParentFragmentPresenter
     }
 
     /**
-     * Will be called on list button click to expand list fragment at 9/16 rate
-     */
-    @Override
-    public void displayListFragmentExpanded() {
-
-    }
-
-    /**
      * Note: To initialize nearby operations both views should be ready and tab is selected.
      * Initializes nearby operations if nearby views are ready
      */
@@ -124,19 +116,6 @@ public class NearbyParentFragmentPresenter
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
         this.nearbyParentFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
         initializeMapOperations();
-    }
-
-
-    /**
-     * Will be called when map view is created and ready to be used.
-     */
-    @Override
-    public void nearbyMapViewReady() {
-        // TODO: remove this
-        nearbyMapViewReady = true;
-        if (nearbyOperationsInitialized) {
-            initializeMapOperations();
-        }
     }
 
     public void nearbyOperationsInitialized() {

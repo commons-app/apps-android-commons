@@ -25,42 +25,14 @@ import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
  */
 public interface NearbyMapContract {
 
-    interface View extends NearbyElementContract.View{
-        void showSearchThisAreaButton();
-        void showInformationBottomSheet();
-        void initViews();
+    interface View{
         void updateMapMarkers(LatLng latLng, List<Place> placeList, Marker selectedMarker, NearbyParentFragmentPresenter nearbyParentFragmentPresenter);
         void updateMapToTrackPosition(LatLng curLatLng);
-        void setListeners();
-        MapView setupMapView(Bundle savedInstanceState);
         void addCurrentLocationMarker(LatLng curLatLng);
-        void setSearchThisAreaButtonVisibility(boolean visible);
-        boolean isCurrentLocationMarkerVisible();
         void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> baseMarkerOptions, Marker marker, NearbyParentFragmentPresenter nearbyParentFragmentPresenter);
-        void prepareViewsForSheetPosition();
-        void hideFABs();
-        void showFABs();
-        void addAnchorToBigFABs(FloatingActionButton floatingActionButton, int anchorID);
-        void removeAnchorFromFABs(FloatingActionButton fab);
-        void  addAnchorToSmallFABs(FloatingActionButton floatingActionButton, int anchorID);
-        void passInfoToSheet(Place place);
-        void updateBookmarkButtonImage(Place place);
-        void openWebView(Uri link);
-        void animateFABs(boolean isFabOpen);
-        void closeFabs ( boolean isFabOpen);
-        void updateMarker(boolean isBookmarked, Place place);
         LatLng getCameraTarget();
         MapboxMap getMapboxMap();
         void viewsAreAssignedToPresenter(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback);
         void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
-    }
-
-    interface UserActions extends NearbyElementContract.UserActions {
-        void searchThisArea();
-        void storeSharedPrefs();
-        void recenterMap();
-        void updateMapMarkers(LatLng latLng);
-        void updateMapToTrackPosition();
-        void getBundleContent();
     }
 }

@@ -15,8 +15,6 @@ import fr.free.nrw.commons.nearby.Place;
 public interface NearbyParentFragmentContract {
 
     interface View {
-        void setListFragmentExpanded();
-        void refreshView();
         void registerLocationUpdates(LocationServiceManager locationServiceManager);
         boolean isNetworkConnectionEstablished();
         void addNetworkBroadcastReceiver();
@@ -49,19 +47,16 @@ public interface NearbyParentFragmentContract {
     }
 
     interface UserActions {
-        void displayListFragmentExpanded();
         void onTabSelected();
         void initializeNearbyOperations();
         void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget);
         void lockUnlockNearby(boolean isNearbyLocked);
         void setActionListeners(JsonKvStore applicationKvStore);
         void backButtonClicked();
-
         MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
     }
     
     interface ViewsAreReadyCallback {
         void nearbyFragmentsAreReady();
-        void nearbyMapViewReady();
     }
 }

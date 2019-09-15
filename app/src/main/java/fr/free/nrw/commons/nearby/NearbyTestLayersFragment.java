@@ -462,20 +462,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void setListFragmentExpanded() {
-
-    }
-
-    @Override
-    public void refreshView() {
-
-    }
-    @Override
     public void registerLocationUpdates(LocationServiceManager locationManager) {
-        locationManager.registerLocationManager();
-    }
-
-    public void registerLocationUpdates() {
         locationManager.registerLocationManager();
     }
 

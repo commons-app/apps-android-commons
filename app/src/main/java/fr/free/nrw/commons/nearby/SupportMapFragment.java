@@ -258,21 +258,6 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void showSearchThisAreaButton() {
-
-    }
-
-    @Override
-    public void showInformationBottomSheet() {
-
-    }
-
-    @Override
-    public void initViews() {
-
-    }
-
-    @Override
     public void updateMapMarkers(LatLng latLng, List<Place> placeList
                                                 , Marker selectedMarker
                                                 , NearbyParentFragmentPresenter nearbyParentFragmentPresenter) {
@@ -301,16 +286,6 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
         mapboxMap.setCameraPosition(cameraPosition);
         mapboxMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition), 1000);
-    }
-
-    @Override
-    public void setListeners() {
-
-    }
-
-    @Override
-    public MapView setupMapView(Bundle savedInstanceState) {
-        return null;
     }
 
     /**
@@ -371,18 +346,6 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
         return circle;
     }
 
-
-
-    @Override
-    public void setSearchThisAreaButtonVisibility(boolean visible) {
-
-    }
-
-    @Override
-    public boolean isCurrentLocationMarkerVisible() {
-        return false;
-    }
-
     @Override
     public void addNearbyMarkersToMapBoxMap(@Nullable List<NearbyBaseMarker> baseMarkerList
                                                         , Marker selectedMarker
@@ -401,65 +364,6 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
         });
     }
 
-    @Override
-    public void prepareViewsForSheetPosition() {
-
-    }
-
-    @Override
-    public void hideFABs() {
-
-    }
-
-    @Override
-    public void showFABs() {
-
-    }
-
-    @Override
-    public void addAnchorToBigFABs(FloatingActionButton floatingActionButton, int anchorID) {
-
-    }
-
-    @Override
-    public void removeAnchorFromFABs(FloatingActionButton fab) {
-
-    }
-
-    @Override
-    public void addAnchorToSmallFABs(FloatingActionButton floatingActionButton, int anchorID) {
-
-    }
-
-    @Override
-    public void passInfoToSheet(Place place) {
-
-    }
-
-    @Override
-    public void updateBookmarkButtonImage(Place place) {
-
-    }
-
-    @Override
-    public void openWebView(Uri link) {
-
-    }
-
-    @Override
-    public void animateFABs(boolean isFabOpen) {
-
-    }
-
-    @Override
-    public void closeFabs(boolean isFabOpen) {
-
-    }
-
-    @Override
-    public void updateMarker(boolean isBookmarked, Place place) {
-
-    }
 
     @Override
     public LatLng getCameraTarget() {
@@ -479,11 +383,6 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
-
-    }
-
-    @Override
-    public void showPlaces() {
 
     }
 
