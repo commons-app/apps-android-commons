@@ -25,6 +25,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -197,7 +198,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
-    SupportMapFragment mapFragment;
+    SupportMapFragment nearbyMapFragment;
 
     private fr.free.nrw.commons.nearby.NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = com.mapbox.mapboxsdk.maps.SupportMapFragment.class.getSimpleName();
@@ -223,7 +224,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
     @Override
     public void onResume() {
         super.onResume();
-        mapFragment = getMapFragment();
+        nearbyMapFragment = getNearbyMapFragment();
         nearbyListFragment = getListFragment();
     }
 
@@ -330,7 +331,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
     /**
      * Returns the map fragment added to child fragment manager previously, if exists.
      */
-    private SupportMapFragment getMapFragment() {
+    private SupportMapFragment getNearbyMapFragment() {
         SupportMapFragment existingFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
         if (existingFragment == null) {
@@ -371,7 +372,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
             transaction.add(R.id.container, mapFragment, TAG_RETAINED_MAP_FRAGMENT);
             transaction.commit();
         /*} else {
-            mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
+            nearbyMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
         }*/
 
         mapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -411,6 +412,23 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
         return nearbyListFragment;
     }
 
+    private void removeListFragment() {
+        if (nearbyListFragment != null) {
+            FragmentManager fm = getChildFragmentManager();
+            fm.beginTransaction().remove(nearbyListFragment).commit();
+            nearbyListFragment = null;
+        }
+    }
+
+    private void removeMapFragment() {
+        if (nearbyMapFragment != null) {
+            FragmentManager fm = getChildFragmentManager();
+            fm.beginTransaction().remove(nearbyMapFragment).commit();
+            nearbyMapFragment = null;
+        }
+    }
+
+
     /**
      * Updates nearby list for custom location, will be used with search this area method. When you
      * want to search for a place where you are not at.
@@ -429,7 +447,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
 
         Log.d("denemeTest","this:"+this+", location manager is:"+locationManager);
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
-                (nearbyListFragment,this, mapFragment, locationManager);
+                (nearbyListFragment,this, nearbyMapFragment, locationManager);
         Timber.d("Child fragment attached");
         nearbyParentFragmentPresenter.nearbyFragmentsAreReady();
         initViews();
@@ -440,7 +458,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
     @Override
     public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
         Log.d("denemeTestt","on camera move listener is set");
-        mapFragment.getMapboxMap().addOnCameraMoveListener(onCameraMoveListener);
+        nearbyMapFragment.getMapboxMap().addOnCameraMoveListener(onCameraMoveListener);
     }
 
     @Override
@@ -765,7 +783,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
                             : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
                     .zoom(isBottomListSheetExpanded ?
                             ZOOM_LEVEL
-                            :mapFragment.getMapboxMap().getCameraPosition().zoom) // Same zoom level
+                            : nearbyMapFragment.getMapboxMap().getCameraPosition().zoom) // Same zoom level
                     .build();
         }else {
             position = new CameraPosition.Builder()
@@ -775,11 +793,11 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
                             : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
                     .zoom(isBottomListSheetExpanded ?
                             ZOOM_LEVEL
-                            :mapFragment.getMapboxMap().getCameraPosition().zoom) // Same zoom level
+                            : nearbyMapFragment.getMapboxMap().getCameraPosition().zoom) // Same zoom level
                     .build();
         }
 
-        mapFragment.getMapboxMap().animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+        nearbyMapFragment.getMapboxMap().animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
     }
 
     @Override
@@ -820,7 +838,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
                 this.getView().requestFocus();
                 break;
             case (BottomSheetBehavior.STATE_HIDDEN):
-                mapFragment.getMapboxMap().deselectMarkers();
+                nearbyMapFragment.getMapboxMap().deselectMarkers();
                 transparentView.setClickable(false);
                 transparentView.setAlpha(0);
                 closeFABs(isFabOpen);
@@ -844,7 +862,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
         bookmarkButton.setOnClickListener(view -> {
             boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(this.selectedPlace);
             updateBookmarkButtonImage(this.selectedPlace);
-            mapFragment.updateMarker(isBookmarked, this.selectedPlace, locationManager.getLastLocation());
+            nearbyMapFragment.updateMarker(isBookmarked, this.selectedPlace, locationManager.getLastLocation());
         });
 
 
@@ -908,9 +926,33 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        // this means that this activity will not be recreated now, user is leaving it
+        // or the activity is otherwise finishing
+        if(getActivity().isFinishing()) {
+            // we will not need this fragment anymore, this may also be a good place to signal
+            // to the retained fragment object to perform its own cleanup.
+            removeMapFragment();
+            removeListFragment();
+
+        }
+        if (broadcastReceiver != null) {
+            getActivity().unregisterReceiver(broadcastReceiver);
+            broadcastReceiver = null;
+        }
+
+        if (locationManager != null && nearbyParentFragmentPresenter != null) {
+            locationManager.removeLocationListener(nearbyParentFragmentPresenter);
+            locationManager.unregisterLocationManager();
+        }
+    }
+
+    @Override
     public void onWikidataEditSuccessful() {
-        if (mapFragment != null && nearbyParentFragmentPresenter != null && locationManager != null) {
+        if (nearbyMapFragment != null && nearbyParentFragmentPresenter != null && locationManager != null) {
             nearbyParentFragmentPresenter.updateMapAndList(MAP_UPDATED, locationManager.getLastLocation());
         }
     }
+
 }
