@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.nearby;
+package fr.free.nrw.commons.nearby.mvp.fragments;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -56,6 +56,10 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.NearbyController;
+import fr.free.nrw.commons.nearby.NearbyListFragment;
+import fr.free.nrw.commons.nearby.NearbyMarker;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.FragmentUtils;
@@ -74,7 +78,7 @@ import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_P
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 
 
-public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
+public class NearbyParentFragment extends CommonsDaggerSupportFragment
         implements NearbyParentFragmentContract.View,
         WikidataEditListener.WikidataP18EditListener {
 
@@ -198,7 +202,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
 
-    SupportMapFragment nearbyMapFragment;
+    NearbyMapFragment nearbyMapFragment;
 
     private fr.free.nrw.commons.nearby.NearbyListFragment nearbyListFragment;
     private static final String TAG_RETAINED_MAP_FRAGMENT = com.mapbox.mapboxsdk.maps.SupportMapFragment.class.getSimpleName();
@@ -207,7 +211,7 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_simple, container, false);
+        view = inflater.inflate(R.layout.fragment_nearby_parent, container, false);
         ButterKnife.bind(this, view);
         // Inflate the layout for this fragment
         return view;
@@ -331,8 +335,8 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
     /**
      * Returns the map fragment added to child fragment manager previously, if exists.
      */
-    private SupportMapFragment getNearbyMapFragment() {
-        SupportMapFragment existingFragment = (SupportMapFragment) getChildFragmentManager()
+    private NearbyMapFragment getNearbyMapFragment() {
+        NearbyMapFragment existingFragment = (NearbyMapFragment) getChildFragmentManager()
                 .findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
         if (existingFragment == null) {
             existingFragment = setMapFragment();
@@ -340,11 +344,11 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
         return existingFragment;
     }
 
-    public SupportMapFragment setMapFragment() {
+    public NearbyMapFragment setMapFragment() {
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.
         Mapbox.getInstance(getActivity(), getString(R.string.mapbox_commons_app_token));
-        SupportMapFragment mapFragment;
+        NearbyMapFragment mapFragment;
         // Create supportMapFragment
         //if (savedInstanceState == null) {
 
@@ -365,24 +369,24 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
                             .build());
 
             // Create map fragment
-            mapFragment = SupportMapFragment.newInstance(options);
+            mapFragment = NearbyMapFragment.newInstance(options);
 
             // Add map fragment to parent container
             getChildFragmentManager().executePendingTransactions();
             transaction.add(R.id.container, mapFragment, TAG_RETAINED_MAP_FRAGMENT);
             transaction.commit();
         /*} else {
-            nearbyMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
+            nearbyMapFragment = (NearbyMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
         }*/
 
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
-                mapboxMap.setStyle(NearbyTestLayersFragment.this.isDarkTheme ? Style.DARK : Style.OUTDOORS, new Style.OnStyleLoaded() {
+                mapboxMap.setStyle(NearbyParentFragment.this.isDarkTheme ? Style.DARK : Style.OUTDOORS, new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
-                        NearbyTestLayersFragment.this.childMapFragmentAttached();
+                        NearbyParentFragment.this.childMapFragmentAttached();
 
                         Log.d("NearbyTests","Fragment inside fragment with map works");
                         // Map is set up and the style has loaded. Now you can add data or make other map adjustments

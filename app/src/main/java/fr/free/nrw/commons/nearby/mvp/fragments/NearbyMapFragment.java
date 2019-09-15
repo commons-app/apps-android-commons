@@ -1,9 +1,8 @@
-package fr.free.nrw.commons.nearby;
+package fr.free.nrw.commons.nearby.mvp.fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -15,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -36,11 +33,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.NearbyBaseMarker;
+import fr.free.nrw.commons.nearby.NearbyController;
+import fr.free.nrw.commons.nearby.NearbyMarker;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
@@ -64,7 +64,7 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
  *
  * @see #getMapAsync(OnMapReadyCallback)
  */
-public class SupportMapFragment extends CommonsDaggerSupportFragment
+public class NearbyMapFragment extends CommonsDaggerSupportFragment
                                 implements OnMapReadyCallback,
                                             NearbyMapContract.View{
 
@@ -81,8 +81,8 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
      *
      * @return MapFragment created
      */
-    public static SupportMapFragment newInstance() {
-        return new SupportMapFragment();
+    public static NearbyMapFragment newInstance() {
+        return new NearbyMapFragment();
     }
 
     /**
@@ -92,8 +92,8 @@ public class SupportMapFragment extends CommonsDaggerSupportFragment
      * @return MapFragment created.
      */
     @NonNull
-    public static SupportMapFragment newInstance(@Nullable MapboxMapOptions mapboxMapOptions) {
-        SupportMapFragment mapFragment = new SupportMapFragment();
+    public static NearbyMapFragment newInstance(@Nullable MapboxMapOptions mapboxMapOptions) {
+        NearbyMapFragment mapFragment = new NearbyMapFragment();
         mapFragment.setArguments(MapFragmentUtils.createFragmentArgs(mapboxMapOptions));
         return mapFragment;
     }

@@ -190,6 +190,7 @@ public class PlaceRenderer extends Renderer<Place> {
                     onBookmarkClick.onClick();
                 }
                 else {
+                    // TODO nesli
                     //((NearbyMapFragment)((NearbyFragment)((NearbyListFragment)fragment).getParentFragment()).getChildFragmentManager().findFragmentByTag(NearbyMapFragment.class.getSimpleName())).updateMarker(isBookmarked, place);
                 }
             }

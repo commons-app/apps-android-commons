@@ -32,7 +32,7 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
-import fr.free.nrw.commons.nearby.NearbyTestLayersFragment;
+import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
@@ -185,7 +185,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
                         // Do all permission and GPS related tasks on tab selected, not on create
-                        ((NearbyTestLayersFragment)contributionsActivityPagerAdapter.getItem(1)).nearbyParentFragmentPresenter.onTabSelected();
+                        ((NearbyParentFragment)contributionsActivityPagerAdapter.getItem(1)).nearbyParentFragmentPresenter.onTabSelected();
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -266,7 +266,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Means that nearby fragment is visible (not contributions fragment)
-            NearbyTestLayersFragment nearbyFragment = (NearbyTestLayersFragment) contributionsActivityPagerAdapter.getItem(1);
+            NearbyParentFragment nearbyFragment = (NearbyParentFragment) contributionsActivityPagerAdapter.getItem(1);
             nearbyFragment.nearbyParentFragmentPresenter.backButtonClicked();
         } else {
             super.onBackPressed();
@@ -343,7 +343,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 return true;
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
-                    ((NearbyTestLayersFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
+                    ((NearbyParentFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
                 }
                 return true;
             default:
@@ -384,12 +384,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     }
 
                 case 1:
-                    NearbyTestLayersFragment retainedNearbyFragment = getNearbyFragment(1);
+                    NearbyParentFragment retainedNearbyFragment = getNearbyFragment(1);
                     if (retainedNearbyFragment != null) {
                         return retainedNearbyFragment;
                     } else {
                         // If we reach here, retainedNearbyFragment is null
-                        return new NearbyTestLayersFragment();
+                        return new NearbyParentFragment();
                     }
                 default:
                     return null;
@@ -411,9 +411,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
          * @param position index of tabs, in our case 0 or 1
          * @return
          */
-        private NearbyTestLayersFragment getNearbyFragment(int position) {
+        private NearbyParentFragment getNearbyFragment(int position) {
             String tag = makeFragmentName(R.id.pager, position);
-            return (NearbyTestLayersFragment)fragmentManager.findFragmentByTag(tag);
+            return (NearbyParentFragment)fragmentManager.findFragmentByTag(tag);
         }
 
         /**

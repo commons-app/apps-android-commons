@@ -14,8 +14,8 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.nearby.NearbyListFragment;
-import fr.free.nrw.commons.nearby.NearbyTestLayersFragment;
-import fr.free.nrw.commons.nearby.SupportMapFragment;
+import fr.free.nrw.commons.nearby.mvp.fragments.NearbyMapFragment;
+import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.review.ReviewImageFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
@@ -60,10 +60,10 @@ public abstract class FragmentBuilderModule {
     abstract ContributionsFragment bindContributionsFragment();
 
     @ContributesAndroidInjector
-    abstract SupportMapFragment bindSupportMapFragment();
+    abstract NearbyMapFragment bindSupportMapFragment();
 
     @ContributesAndroidInjector
-    abstract NearbyTestLayersFragment bindNearbyTestLayersFragment();
+    abstract NearbyParentFragment bindNearbyTestLayersFragment();
 
     @ContributesAndroidInjector
     abstract BookmarkPicturesFragment bindBookmarkPictureListFragment();
