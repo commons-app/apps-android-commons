@@ -63,7 +63,7 @@ public abstract class FragmentBuilderModule {
     abstract NearbyMapFragment bindSupportMapFragment();
 
     @ContributesAndroidInjector
-    abstract NearbyParentFragment bindNearbyTestLayersFragment();
+    abstract NearbyParentFragment bindNearbyParentFragment();
 
     @ContributesAndroidInjector
     abstract BookmarkPicturesFragment bindBookmarkPictureListFragment();
