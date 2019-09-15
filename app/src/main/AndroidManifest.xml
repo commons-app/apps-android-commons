@@ -138,15 +138,6 @@
             android:name=".review.ReviewActivity"
             android:label="@string/title_activity_review" />
 
-        <activity
-            android:name=".nearby.NearbyTestActivity"
-            android:label="@string/title_activity_nearby_test_activity" />
-
-        <activity
-            android:name=".nearby.NearbyTestFragmentActivity"
-            android:label="@string/title_activity_nearby_test_fragment" />
-
-
         <service android:name=".upload.UploadService" />
         <service
             android:name=".auth.WikiAccountAuthenticatorService"
