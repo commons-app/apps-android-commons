@@ -75,6 +75,9 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
     private MapFragment.OnMapViewReadyCallback mapViewReadyCallback;
     private MapboxMap mapboxMap;
     private MapView map;
+    private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
+    private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
+    private static final double ZOOM_LEVEL = 14f;
 
     /**
      * Creates a default MapFragment instance
@@ -435,5 +438,26 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Centers the map in nearby fragment to a given place
+     * @param place is new center of the map
+     */
+    public void centerMapToPlace(Place place, boolean isPortraitMode) {
+        Log.d("denemeSon","isPortyrait:"+isPortraitMode);
+        double cameraShift;
+        if (isPortraitMode) {
+            cameraShift = CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT;
+        } else {
+            cameraShift = CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE;
+        }
+        CameraPosition position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(
+                        new LatLng(place.location.getLatitude()-cameraShift,
+                                place.getLocation().getLongitude(),
+                                0))) // Sets the new camera position
+                .zoom(ZOOM_LEVEL) // Same zoom level
+                .build();
+        mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+    }
 }
 

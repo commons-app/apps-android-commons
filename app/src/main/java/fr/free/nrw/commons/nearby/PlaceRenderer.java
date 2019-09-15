@@ -33,6 +33,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
@@ -117,7 +118,7 @@ public class PlaceRenderer extends Renderer<Place> {
                 }
             }
             if (onBookmarkClick == null) {
-                //((NearbyFragment) fragment.getParentFragment()).centerMapToPlace(place);
+                ((NearbyParentFragment) fragment.getParentFragment()).centerMapToPlace(place);
             }
         };
         view.setOnClickListener(listener);

@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -396,6 +397,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         });
         return mapFragment;
+    }
+
+    public void centerMapToPlace(Place place) {
+        Log.d("denemeson","place:"+place);
+        if (nearbyMapFragment != null) {
+            nearbyMapFragment.centerMapToPlace(
+                    place,
+                    getActivity().getResources().getConfiguration().orientation ==
+                            Configuration.ORIENTATION_PORTRAIT);
+        }
     }
 
     NearbyListFragment setListFragment() {
