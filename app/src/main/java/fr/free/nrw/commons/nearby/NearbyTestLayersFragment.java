@@ -62,6 +62,7 @@ import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -69,9 +70,12 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 
 
-public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment implements NearbyParentFragmentContract.View {
+public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment
+        implements NearbyParentFragmentContract.View,
+        WikidataEditListener.WikidataP18EditListener {
 
     @BindView(R.id.bottom_sheet)
     View bottomSheetList;
@@ -164,6 +168,8 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
     @Inject
     ContributionController controller;
 
+    @Inject
+    WikidataEditListener wikidataEditListener;
 
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
@@ -886,6 +892,25 @@ public class NearbyTestLayersFragment extends CommonsDaggerSupportFragment imple
         }
         if (bookmarkButtonImage != null) {
             bookmarkButtonImage.setImageResource(bookmarkIcon);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        wikidataEditListener.setAuthenticationStateListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        wikidataEditListener.setAuthenticationStateListener(null);
+    }
+
+    @Override
+    public void onWikidataEditSuccessful() {
+        if (mapFragment != null && nearbyParentFragmentPresenter != null && locationManager != null) {
+            nearbyParentFragmentPresenter.updateMapAndList(MAP_UPDATED, locationManager.getLastLocation());
         }
     }
 }
