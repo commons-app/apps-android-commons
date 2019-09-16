@@ -2,6 +2,7 @@
 <!-- Authors:
 * Abijeet Patro
 * C1pr1an
+* GabiBil
 * Kyouko
 * MSClaudiu
 * Minisarm
@@ -460,4 +461,5 @@
   <string name="exif_tag_name_copyright">Drepturi de autor</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Altul</string>
+  <string name="account_created">Cont creat!</string>
 </resources>

@@ -5,6 +5,7 @@
 * Hidayatsrf
 * Ilham151096
 * Iwan Novirion
+* Joseagush
 * Pebaryan
 * Rv77ax
 * William Surya Permana
@@ -430,6 +431,7 @@
   <string name="unable_to_display_nearest_place">Tidak dapat menampilkan tempat terdekat yang membutuhkan gambar tanpa izin lokasi</string>
   <string name="never_ask_again">Jangan pernah menanyakan ini lagi</string>
   <string name="display_location_permission_title">Tampilkan izin lokasi</string>
+  <string name="display_campaigns">Sinahang penyobyahan</string>
   <string name="menu_option_archived">Lihat arsip</string>
   <string name="menu_option_unread">Lihat yang belum terbaca</string>
   <string name="error_occurred_in_picking_images">Terjadi kesalahan ketika memilih gambar</string>
