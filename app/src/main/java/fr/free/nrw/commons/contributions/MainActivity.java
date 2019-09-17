@@ -47,13 +47,15 @@ import static android.content.ContentResolver.requestSync;
 
 public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
 
-    @Inject
-    SessionManager sessionManager;
-    @Inject ContributionController controller;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.pager)
     public UnswipableViewPager viewPager;
+
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    ContributionController controller;
     @Inject
     public LocationServiceManager locationManager;
     @Inject
@@ -72,8 +74,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
     private Menu menu;
 
-    private boolean onOrientationChanged = false;
-
     private MenuItem notificationsMenuItem;
     private TextView notificationCount;
 
@@ -84,16 +84,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
-
-
-        if (savedInstanceState != null ) {
-            onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
-
-            //If nearby map was visible, call on Tab Selected to call all nearby operations
-            /*if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
-                ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
-            }*/
-        }
     }
 
     @Override
@@ -160,9 +150,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
      * tab won't change and vice versa. So we have to notify each of them.
      */
     private void setTabAndViewPagerSynchronisation() {
-        //viewPager.canScrollHorizontally(false);
         viewPager.setFocusableInTouchMode(true);
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -177,7 +165,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
                         updateMenuItem();
-
                         break;
                     case NEARBY_TAB_POSITION:
                         Timber.d("Nearby tab selected");
@@ -324,12 +311,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 // Display notifications menu item
                 menu.findItem(R.id.notifications).setVisible(true);
                 menu.findItem(R.id.list_sheet).setVisible(false);
-                Timber.d("Contributions activity notifications menu item is visible");
+                Timber.d("Contributions fragment notifications menu item is visible");
             } else {
                 // Display bottom list menu item
                 menu.findItem(R.id.notifications).setVisible(false);
                 menu.findItem(R.id.list_sheet).setVisible(true);
-                Timber.d("Contributions activity list sheet menu item is visible");
+                Timber.d("Nearby fragment list sheet menu item is visible");
             }
         }
     }
@@ -353,8 +340,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
         FragmentManager fragmentManager;
-        private boolean isContributionsListFragment = true; // to know what to put in first tab, Contributions of Media Details
-
 
         public ContributionsActivityPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);

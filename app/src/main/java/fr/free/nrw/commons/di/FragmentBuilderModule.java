@@ -13,7 +13,7 @@ import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.nearby.NearbyListFragment;
+import fr.free.nrw.commons.nearby.mvp.fragments.NearbyListFragment;
 import fr.free.nrw.commons.nearby.mvp.fragments.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.review.ReviewImageFragment;
@@ -60,7 +60,7 @@ public abstract class FragmentBuilderModule {
     abstract ContributionsFragment bindContributionsFragment();
 
     @ContributesAndroidInjector
-    abstract NearbyMapFragment bindSupportMapFragment();
+    abstract NearbyMapFragment bindNearbyMapFragment();
 
     @ContributesAndroidInjector
     abstract NearbyParentFragment bindNearbyParentFragment();

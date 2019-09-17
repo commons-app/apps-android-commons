@@ -98,10 +98,13 @@ public class NearbyController {
             nearbyPlacesInfo.placeList = places;
             nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
 
+            // Returning closes result means we use the controller for nearby card. So no need to set search this area flags
             if (!returnClosestResult) {
+                // To remember latest search either around user or any point on map
                 latestSearchLocation = searchLatLng;
                 latestSearchRadius = nearbyPlaces.radius*1000; // to meter
 
+                // Our radius searched around us, will be used to understand when user search their own location, we will follow them
                 if (checkingAroundCurrentLocation) {
                     currentLocationSearchRadius = nearbyPlaces.radius*1000; // to meter
                     currentLocation = curLatLng;
@@ -123,7 +126,7 @@ public class NearbyController {
      * @param placeList list of nearby places in Place data type
      * @return Place list that holds nearby places
      */
-    static List<Place> loadAttractionsFromLocationToPlaces(
+    public static List<Place> loadAttractionsFromLocationToPlaces(
             LatLng curLatLng,
             List<Place> placeList) {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
@@ -223,7 +226,7 @@ public class NearbyController {
     public class NearbyPlacesInfo {
         public List<Place> placeList; // List of nearby places
         public LatLng[] boundaryCoordinates; // Corners of nearby area
-        public LatLng curLatLng; // current location when this places are populated
-        public LatLng searchLatLng; //search location for finding this places
+        public LatLng curLatLng; // Current location when this places are populated
+        public LatLng searchLatLng; // Search location for finding this places
     }
 }

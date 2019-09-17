@@ -42,8 +42,6 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -58,7 +56,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyController;
-import fr.free.nrw.commons.nearby.NearbyListFragment;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
@@ -205,7 +202,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     NearbyMapFragment nearbyMapFragment;
 
-    private fr.free.nrw.commons.nearby.NearbyListFragment nearbyListFragment;
+    private NearbyListFragment nearbyListFragment;
     public static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
     public static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
 
@@ -444,16 +441,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             fm.beginTransaction().remove(nearbyMapFragment).commit();
             nearbyMapFragment = null;
         }
-    }
-
-
-    /**
-     * Updates nearby list for custom location, will be used with search this area method. When you
-     * want to search for a place where you are not at.
-     * @param placeList List of places around your manually chosen target location from map.
-     */
-    private void updateListFragmentForCustomLocation(List<Place> placeList) {
-        nearbyListFragment.updateNearbyListSignificantlyForCustomLocation(placeList);
     }
 
     /**
