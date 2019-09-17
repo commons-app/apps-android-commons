@@ -34,5 +34,6 @@ public interface NearbyMapContract {
         MapboxMap getMapboxMap();
         void viewsAreAssignedToPresenter(NearbyParentFragmentContract.ViewsAreReadyCallback viewsAreReadyCallback);
         void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
+        void centerMapToPlace(Place place, boolean isPortraitMode);
     }
 }

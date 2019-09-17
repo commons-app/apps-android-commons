@@ -402,10 +402,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void centerMapToPlace(Place place) {
         Log.d("denemeson","place:"+place);
         if (nearbyMapFragment != null) {
-            nearbyMapFragment.centerMapToPlace(
-                    place,
+            nearbyParentFragmentPresenter.centerMapToPlace(place,
                     getActivity().getResources().getConfiguration().orientation ==
                             Configuration.ORIENTATION_PORTRAIT);
+            /*nearbyMapFragment.centerMapToPlace(
+                    place,
+                    getActivity().getResources().getConfiguration().orientation ==
+                            Configuration.ORIENTATION_PORTRAIT);*/
         }
     }
 

@@ -444,6 +444,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
      * Centers the map in nearby fragment to a given place
      * @param place is new center of the map
      */
+    @Override
     public void centerMapToPlace(Place place, boolean isPortraitMode) {
         Log.d("denemeSon","isPortyrait:"+isPortraitMode);
         double cameraShift;

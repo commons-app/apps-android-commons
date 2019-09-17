@@ -11,6 +11,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyController;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -42,6 +43,11 @@ public class NearbyParentFragmentPresenter
     boolean nearbyMapViewReady;
     boolean nearbyOperationsInitialized;
     boolean mapInitialized; // TODO reset this on fragment destroyed
+
+    Place placeToCenter;
+    boolean isPortraitMode;
+    boolean willMapBeCentered;
+    boolean placesLoadedOnce;
 
 
     private LocationServiceManager locationServiceManager;
@@ -282,7 +288,7 @@ public class NearbyParentFragmentPresenter
     /**
      * Populates places for custom location, should be used for finding nearby places around a
      * location where you are not at.
-     * @param nearbyPlacesInfo This variable has place list information and distances.
+     * @param nearbyPlacesInfo This variable has placeToCenter list information and distances.
      */
     public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker) {
         nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList, selectedMarker, this);
@@ -291,12 +297,13 @@ public class NearbyParentFragmentPresenter
         lockUnlockNearby(false); // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false);
         nearbyListFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
+        handleCenteringTaskIfAny();
     }
 
     /**
      * Populates places for custom location, should be used for finding nearby places around a
      * location where you are not at.
-     * @param nearbyPlacesInfo This variable has place list information and distances.
+     * @param nearbyPlacesInfo This variable has placeToCenter list information and distances.
      */
     public void updateMapMarkersForCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker) {
         nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList, selectedMarker, this);
@@ -304,7 +311,14 @@ public class NearbyParentFragmentPresenter
         lockUnlockNearby(false); // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false);
         nearbyListFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
+        handleCenteringTaskIfAny();
+    }
 
+    private void handleCenteringTaskIfAny() {
+        if (!placesLoadedOnce) {
+            placesLoadedOnce = true;
+            nearbyMapFragmentView.centerMapToPlace(placeToCenter, isPortraitMode);
+        }
     }
 
     @Override
@@ -393,6 +407,20 @@ public class NearbyParentFragmentPresenter
             return false;
         } else {
             return true;
+        }
+    }
+
+    /**
+     * Centers the map in nearby fragment to a given placeToCenter
+     * @param place is new center of the map
+     */
+    public void centerMapToPlace(Place place, boolean isPortraitMode) {
+        if (placesLoadedOnce) {
+            nearbyMapFragmentView.centerMapToPlace(place, isPortraitMode);
+        } else {
+            willMapBeCentered = true;
+            this.isPortraitMode = isPortraitMode;
+            this.placeToCenter = place;
         }
     }
 }
