@@ -13,9 +13,11 @@
 * Looong
 * Qiyue2001
 * Shizhao
+* VulpesVulpes825
 * Wxyveronica
 * Yfdyh000
 * ZhaoGang
+* 予弦
 * 佛壁灯
 * 夢蝶葬花
 * 神樂坂秀吉
@@ -558,4 +560,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">标志</string>
   <string name="delete_helper_ask_reason_copyright_other">其他</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">由于他是</string>
+  <string name="share_image_via">分享图片透过</string>
+  <string name="no_achievements_yet">您目前还没有作出任何贡献</string>
+  <string name="account_created">账户已创建！</string>
+  <string name="text_copy">文本已复制至剪贴板</string>
+  <string name="notification_mark_read">通知已标记为已读</string>
+  <string name="some_error">发生了些错误！</string>
 </resources>
