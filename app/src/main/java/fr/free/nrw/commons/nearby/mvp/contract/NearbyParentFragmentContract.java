@@ -21,9 +21,7 @@ public interface NearbyParentFragmentContract {
         void listOptionMenuItemClicked();
         void  populatePlaces(LatLng curlatLng, LatLng searchLatLng);
         boolean isListBottomSheetExpanded();
-
         void checkPermissionsAndPerformAction(Runnable runnable);
-        void resumeFragment();
         void displayLoginSkippedWarning();
         void setFABPlusAction(android.view.View.OnClickListener onClickListener);
         void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
@@ -32,7 +30,6 @@ public interface NearbyParentFragmentContract {
         void initViewPositions();
         void hideBottomSheet();
         void displayBottomSheetWithInfo(Marker marker);
-
         void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
         void addSearchThisAreaButtonAction();
         void setSearchThisAreaButtonVisibility(boolean isVisible);

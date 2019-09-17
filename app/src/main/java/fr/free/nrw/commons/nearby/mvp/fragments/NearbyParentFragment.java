@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -39,7 +37,6 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
 import javax.inject.Inject;
@@ -80,99 +77,38 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         implements NearbyParentFragmentContract.View,
         WikidataEditListener.WikidataP18EditListener {
 
-    @BindView(R.id.bottom_sheet)
-    View bottomSheetList;
+    @BindView(R.id.bottom_sheet) View bottomSheetList;
+    @BindView(R.id.bottom_sheet_details) View bottomSheetDetails;
+    @BindView(R.id.transparentView) View transparentView;
+    @BindView(R.id.directionsButtonText) TextView directionsButtonText;
+    @BindView(R.id.wikipediaButtonText) TextView wikipediaButtonText;
+    @BindView(R.id.wikidataButtonText) TextView wikidataButtonText;
+    @BindView(R.id.commonsButtonText) TextView commonsButtonText;
+    @BindView(R.id.fab_plus) FloatingActionButton fabPlus;
+    @BindView(R.id.fab_camera) FloatingActionButton fabCamera;
+    @BindView(R.id.fab_gallery) FloatingActionButton fabGallery;
+    @BindView(R.id.fab_recenter) FloatingActionButton fabRecenter;
+    @BindView(R.id.bookmarkButtonImage) ImageView bookmarkButtonImage;
+    @BindView(R.id.bookmarkButton) LinearLayout bookmarkButton;
+    @BindView(R.id.wikipediaButton) LinearLayout wikipediaButton;
+    @BindView(R.id.wikidataButton) LinearLayout wikidataButton;
+    @BindView(R.id.directionsButton) LinearLayout directionsButton;
+    @BindView(R.id.commonsButton) LinearLayout commonsButton;
+    @BindView(R.id.description) TextView description;
+    @BindView(R.id.title) TextView title;
+    @BindView(R.id.category) TextView distance;
+    @BindView(R.id.icon) ImageView icon;
+    @BindView(R.id.search_this_area_button) Button searchThisAreaButton;
+    @BindView(R.id.map_progress_bar) ProgressBar progressBar;
+    @BindView(R.id.container_sheet) FrameLayout frameLayout;
+    @BindView(R.id.loading_nearby_list) ConstraintLayout loadingNearbyLayout;
 
-    @BindView(R.id.bottom_sheet_details)
-    View bottomSheetDetails;
-
-    @BindView(R.id.transparentView)
-    View transparentView;
-
-    @BindView(R.id.directionsButtonText)
-    TextView directionsButtonText;
-
-    @BindView(R.id.wikipediaButtonText)
-    TextView wikipediaButtonText;
-
-    @BindView(R.id.wikidataButtonText)
-    TextView wikidataButtonText;
-
-    @BindView(R.id.commonsButtonText)
-    TextView commonsButtonText;
-
-    @BindView(R.id.fab_plus)
-    FloatingActionButton fabPlus;
-
-    @BindView(R.id.fab_camera)
-    FloatingActionButton fabCamera;
-
-    @BindView(R.id.fab_gallery)
-    FloatingActionButton fabGallery;
-
-    @BindView(R.id.fab_recenter)
-    FloatingActionButton fabRecenter;
-
-    @BindView(R.id.bookmarkButtonImage)
-    ImageView bookmarkButtonImage;
-
-    @BindView(R.id.bookmarkButton)
-    LinearLayout bookmarkButton;
-
-    @BindView(R.id.wikipediaButton)
-    LinearLayout wikipediaButton;
-
-    @BindView(R.id.wikidataButton)
-    LinearLayout wikidataButton;
-
-    @BindView(R.id.directionsButton)
-    LinearLayout directionsButton;
-
-    @BindView(R.id.commonsButton)
-    LinearLayout commonsButton;
-
-    @BindView(R.id.description)
-    TextView description;
-
-    @BindView(R.id.title)
-    TextView title;
-
-    @BindView(R.id.category)
-    TextView distance;
-
-    @BindView(R.id.icon)
-    ImageView icon;
-
-    @BindView(R.id.search_this_area_button)
-    Button searchThisAreaButton;
-
-    @BindView(R.id.map_progress_bar)
-    ProgressBar progressBar;
-
-    @BindView(R.id.container_sheet)
-    FrameLayout frameLayout;
-
-    @BindView(R.id.loading_nearby_list)
-    ConstraintLayout loadingNearbyLayout;
-
-    @Inject
-    LocationServiceManager locationManager;
-
-    @Inject
-    NearbyController nearbyController;
-
-    @Inject
-    @Named("default_preferences")
-    JsonKvStore applicationKvStore;
-
-    @Inject
-    BookmarkLocationsDao bookmarkLocationDao;
-
-    @Inject
-    ContributionController controller;
-
-    @Inject
-    WikidataEditListener wikidataEditListener;
+    @Inject LocationServiceManager locationManager;
+    @Inject NearbyController nearbyController;
+    @Inject @Named("default_preferences") JsonKvStore applicationKvStore;
+    @Inject BookmarkLocationsDao bookmarkLocationDao;
+    @Inject ContributionController controller;
+    @Inject WikidataEditListener wikidataEditListener;
 
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
@@ -182,43 +118,33 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Animation rotate_forward;
 
     private static final double ZOOM_LEVEL = 14f;
-
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
     private boolean isNetworkErrorOccurred = false;
     private Snackbar snackbar;
-    FragmentTransaction transaction;
     private View view;
-
     public NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
     private boolean isDarkTheme;
-    private boolean isFabOpen;
+    private boolean isFABsExpanded;
     private Marker selectedMarker;
     private Place selectedPlace;
 
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
 
-    NearbyMapFragment nearbyMapFragment;
-
+    private NearbyMapFragment nearbyMapFragment;
     private NearbyListFragment nearbyListFragment;
+
     public static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
-    public static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
+    private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_nearby_parent, container, false);
         ButterKnife.bind(this, view);
         // Inflate the layout for this fragment
         return view;
-
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //initViews();
 
     }
 
@@ -230,9 +156,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
 
-    public void initViews() {
+    private void initViews() {
         Timber.d("init views called");
-        //ButterKnife.bind(this, view);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -252,25 +177,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                if (slideOffset >= 0) {
-                    transparentView.setAlpha(slideOffset);
-                    if (slideOffset == 1) {
-                        transparentView.setClickable(true);
-                    } else if (slideOffset == 0) {
-                        transparentView.setClickable(false);
-                    }
-                }
+
             }
         });
 
-        bottomSheetDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                } else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
+        bottomSheetDetails.setOnClickListener(v -> {
+            if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            } else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
 
@@ -301,12 +216,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             commonsButtonText.setVisibility(View.GONE);
             directionsButtonText.setVisibility(View.GONE);
         }
+
         title.setOnLongClickListener(view -> {
                     Utils.copy("place", title.getText().toString(), getContext());
                     Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
                     return true;
                 }
         );
+
         title.setOnClickListener(view -> {
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -314,11 +231,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
-
     }
 
     /**
-     * Returns the map fragment added to child fragment manager previously, if exists.
+     * Returns the list fragment added to child fragment manager previously, if exists.
      */
     private NearbyListFragment getListFragment() {
         NearbyListFragment existingFragment = (NearbyListFragment) getChildFragmentManager()
@@ -341,88 +257,62 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return existingFragment;
     }
 
-    public NearbyMapFragment setMapFragment() {
+    /**
+     * Creates the map fragment and prepares map
+     * @return the map fragment created
+     */
+    private NearbyMapFragment setMapFragment() {
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.
         Mapbox.getInstance(getActivity(), getString(R.string.mapbox_commons_app_token));
         NearbyMapFragment mapFragment;
-        // Create supportMapFragment
-        //if (savedInstanceState == null) {
 
-            // Create fragment
-            transaction = getChildFragmentManager().beginTransaction();
+        // Create fragment
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
-            // Build mapboxMap
-            isDarkTheme = applicationKvStore.getBoolean("theme", false);
-            MapboxMapOptions options = new MapboxMapOptions()
-                    .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
-                    .compassMargins(new int[]{12, 0, 0, 24})
-                    //.styleUrl(isDarkTheme ? Style.DARK : Style.OUTDOORS)
-                    .logoEnabled(false)
-                    .attributionEnabled(false)
-                    .camera(new CameraPosition.Builder()
-                            .zoom(ZOOM_LEVEL)
-                            .target(new com.mapbox.mapboxsdk.geometry.LatLng(-52.6885, -70.1395))
-                            .build());
+        // Build mapboxMap
+        isDarkTheme = applicationKvStore.getBoolean("theme", false);
+        MapboxMapOptions options = new MapboxMapOptions()
+                .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
+                .compassMargins(new int[]{12, 0, 0, 24})
+                //.styleUrl(isDarkTheme ? Style.DARK : Style.OUTDOORS)
+                .logoEnabled(false)
+                .attributionEnabled(false)
+                .camera(new CameraPosition.Builder()
+                        .zoom(ZOOM_LEVEL)
+                        .target(new com.mapbox.mapboxsdk.geometry.LatLng(-52.6885, -70.1395))
+                        .build());
 
-            // Create map fragment
-            mapFragment = NearbyMapFragment.newInstance(options);
+        // Create map fragment
+        mapFragment = NearbyMapFragment.newInstance(options);
 
-            // Add map fragment to parent container
-            getChildFragmentManager().executePendingTransactions();
-            transaction.add(R.id.container, mapFragment, TAG_RETAINED_MAP_FRAGMENT);
-            transaction.commit();
-        /*} else {
-            nearbyMapFragment = (NearbyMapFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
-        }*/
+        // Add map fragment to parent container
+        getChildFragmentManager().executePendingTransactions();
+        transaction.add(R.id.container, mapFragment, TAG_RETAINED_MAP_FRAGMENT);
+        transaction.commit();
 
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull MapboxMap mapboxMap) {
-
-                mapboxMap.setStyle(NearbyParentFragment.this.isDarkTheme ? Style.DARK : Style.OUTDOORS, new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-                        NearbyParentFragment.this.childMapFragmentAttached();
-
-                        Log.d("NearbyTests","Fragment inside fragment with map works");
-                        // Map is set up and the style has loaded. Now you can add data or make other map adjustments
-
-                    }
-                });
-            }
-        });
+        mapFragment.getMapAsync(mapboxMap ->
+                mapboxMap.setStyle(
+                        NearbyParentFragment.this.isDarkTheme ? Style.DARK : Style.OUTDOORS, style -> {
+                            NearbyParentFragment.this.childMapFragmentAttached();
+                            // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+                        }));
         return mapFragment;
     }
 
-    public void centerMapToPlace(Place place) {
-        Log.d("denemeson","place:"+place);
-        if (nearbyMapFragment != null) {
-            nearbyParentFragmentPresenter.centerMapToPlace(place,
-                    getActivity().getResources().getConfiguration().orientation ==
-                            Configuration.ORIENTATION_PORTRAIT);
-            /*nearbyMapFragment.centerMapToPlace(
-                    place,
-                    getActivity().getResources().getConfiguration().orientation ==
-                            Configuration.ORIENTATION_PORTRAIT);*/
-        }
-    }
-
-    NearbyListFragment setListFragment() {
-        ///if (savedInstanceState == null) {
+    /**
+     * Creates the list fragment and put it into container
+     * @return the list fragment created
+     */
+    private NearbyListFragment setListFragment() {
         NearbyListFragment nearbyListFragment;
-            loadingNearbyLayout.setVisibility(View.GONE);
-            frameLayout.setVisibility(View.VISIBLE);
-            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-            nearbyListFragment = new NearbyListFragment();
-            nearbyListFragment.setArguments(null);
-            fragmentTransaction.replace(R.id.container_sheet, nearbyListFragment, TAG_RETAINED_LIST_FRAGMENT);
-            // initBottomSheetBehaviour();
-            //bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-            fragmentTransaction.commitAllowingStateLoss();
-        /*} else {
-            nearbyListFragment = (NearbyListFragment) getChildFragmentManager().findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
-        }*/
+        loadingNearbyLayout.setVisibility(View.GONE);
+        frameLayout.setVisibility(View.VISIBLE);
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        nearbyListFragment = new NearbyListFragment();
+        nearbyListFragment.setArguments(null);
+        fragmentTransaction.replace(R.id.container_sheet, nearbyListFragment, TAG_RETAINED_LIST_FRAGMENT);
+        fragmentTransaction.commitAllowingStateLoss();
         return nearbyListFragment;
     }
 
@@ -443,25 +333,34 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
+     * Calls presenter to center map to any place
+     * @param place the place we want to center map
+     */
+    public void centerMapToPlace(Place place) {
+        if (nearbyMapFragment != null) {
+            nearbyParentFragmentPresenter.centerMapToPlace(place,
+                    getActivity().getResources().getConfiguration().orientation ==
+                            Configuration.ORIENTATION_PORTRAIT);
+        }
+    }
+
+
+    /**
      * Thanks to this method we make sure NearbyMapFragment is ready and attached. So that we can
      * prevent NPE caused by null child fragment. This method is called from child fragment when
      * it is attached.
      */
-    public void childMapFragmentAttached() {
-
-        Log.d("denemeTest","this:"+this+", location manager is:"+locationManager);
+    private void childMapFragmentAttached() {
+        Timber.d("Child map fragment attached");
         nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
                 (nearbyListFragment,this, nearbyMapFragment, locationManager);
-        Timber.d("Child fragment attached");
         nearbyParentFragmentPresenter.nearbyFragmentsAreReady();
         initViews();
         nearbyParentFragmentPresenter.setActionListeners(applicationKvStore);
-
     }
 
     @Override
     public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
-        Log.d("denemeTestt","on camera move listener is set");
         nearbyMapFragment.getMapboxMap().addOnCameraMoveListener(onCameraMoveListener);
     }
 
@@ -475,20 +374,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return NetworkUtils.isInternetConnectionEstablished(getActivity());
     }
 
-
     /**
      * Adds network broadcast receiver to recognize connection established
      */
     @Override
     public void addNetworkBroadcastReceiver() {
-        Log.d("denemeTest","addNetworkBroadcastReceiver");
         if (!FragmentUtils.isFragmentUIActive(this)) {
-            Log.d("denemeTest","!FragmentUtils.isFragmentUIActive(this)");
             return;
         }
 
         if (broadcastReceiver != null) {
-            Log.d("denemeTest","broadcastReceiver != null");
             return;
         }
 
@@ -499,9 +394,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             public void onReceive(Context context, Intent intent) {
                 if (getActivity() != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
-                        Log.d("denemeTest","NetworkUtils.isInternetConnectionEstablished(getActivity())");
                         if (isNetworkErrorOccurred) {
-                            Log.d("denemeTest","isNetworkErrorOccurred");
                             nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
                             isNetworkErrorOccurred = false;
                         }
@@ -513,7 +406,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     } else {
                         if (snackbar == null) {
                             snackbar = Snackbar.make(view, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
-                            // TODO make search this area button invisible
+                            setSearchThisAreaButtonVisibility(false);
+                            setProgressBarVisibility(false);
                         }
 
                         isNetworkErrorOccurred = true;
@@ -544,7 +438,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void populatePlaces(fr.free.nrw.commons.location.LatLng curlatLng, fr.free.nrw.commons.location.LatLng searchLatLng) {
         boolean checkingAroundCurretLocation;
         if (curlatLng.equals(searchLatLng)) { // Means we are checking around current location
-            Log.d("denemeTestt","checking around current location1");
             checkingAroundCurretLocation = true;
             compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                     .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurretLocation))
@@ -553,13 +446,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     .subscribe(this::updateMapMarkers,
                             throwable -> {
                                 Timber.d(throwable);
-                                //showErrorMessage(getString(R.string.error_fetching_nearby_places));
-                                // TODO solve first unneeded method call here
-                                //progressBar.setVisibility(View.GONE);
-                                //nearbyParentFragmentPresenter.lockUnlockNearby(false);
+                                showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                setProgressBarVisibility(false);
+                                nearbyParentFragmentPresenter.lockUnlockNearby(false);
                             }));
         } else {
-            Log.d("denemeTestt","not checking around current location2");
             checkingAroundCurretLocation = false;
             compositeDisposable.add(Observable.fromCallable(() -> nearbyController
                     .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurretLocation))
@@ -568,10 +459,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     .subscribe(this::updateMapMarkersForCustomLocation,
                             throwable -> {
                                 Timber.d(throwable);
-                                //showErrorMessage(getString(R.string.error_fetching_nearby_places));
-                                // TODO solve first unneeded method call here
-                                //progressBar.setVisibility(View.GONE);
-                                //nearbyParentFragmentPresenter.lockUnlockNearby(false);
+                                showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                setProgressBarVisibility(false);
+                                nearbyParentFragmentPresenter.lockUnlockNearby(false);
                             }));
         }
     }
@@ -600,10 +490,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return bottomSheetListBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED;
     }
 
+    @Override
     public boolean isDetailsBottomSheetVisible() {
         return !(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN);
     }
 
+    @Override
     public void setBottomSheetDetailsSmaller() {
         if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -642,7 +534,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void checkPermissionsAndPerformAction(Runnable runnable) {
-        Log.d("denemeTest","checkPermissionsAndPerformAction is called");
+        Timber.d("Checking permission and perfoming action");
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 runnable,
@@ -651,35 +543,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 R.string.location_permission_rationale_nearby);
     }
 
-    @Override
-    public void resumeFragment() {
-
-    }
-
     /**
      * Starts animation of fab plus (turning on opening) and other FABs
      */
     @Override
     public void animateFABs() {
         if (fabPlus.isShown()){
-            /*if (isFabOpen) {
-                fabPlus.startAnimation(rotate_backward);
-                fabCamera.startAnimation(fab_close);
-                fabGallery.startAnimation(fab_close);
-                fabCamera.hide();
-                fabGallery.hide();
+            if (isFABsExpanded) {
+                collapseFABs(isFABsExpanded);
             } else {
-                fabPlus.startAnimation(rotate_forward);
-                fabCamera.startAnimation(fab_open);
-                fabGallery.startAnimation(fab_open);
-                fabCamera.show();
-                fabGallery.show();
-            }
-            this.isFabOpen=!isFabOpen;*/
-            if (isFabOpen) {
-                closeFABs(isFabOpen);
-            } else {
-                openFABs(isFabOpen);
+                expandFABs(isFABsExpanded);
             }
         }
     }
@@ -692,18 +565,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Hides camera and gallery FABs, turn back plus FAB
-     * @param isFabOpen
+     * Expands camera and gallery FABs, turn forward plus FAB
+     * @param isFABsExpanded true if they are already expanded
      */
-    private void openFABs( boolean isFabOpen){
-        if (!isFabOpen) {
+    private void expandFABs(boolean isFABsExpanded){
+        if (!isFABsExpanded) {
             showFABs();
             fabPlus.startAnimation(rotate_forward);
             fabCamera.startAnimation(fab_open);
             fabGallery.startAnimation(fab_open);
             fabCamera.show();
             fabGallery.show();
-            this.isFabOpen = true;
+            this.isFABsExpanded = true;
         }
     }
 
@@ -720,17 +593,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Hides camera and gallery FABs, turn back plus FAB
-     * @param isFabOpen
+     * Collapses camera and gallery FABs, turn back plus FAB
+     * @param isFABsExpanded
      */
-    private void closeFABs( boolean isFabOpen){
-        if (isFabOpen) {
+    private void collapseFABs(boolean isFABsExpanded){
+        if (isFABsExpanded) {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
             fabCamera.hide();
             fabGallery.hide();
-            this.isFabOpen = false;
+            this.isFABsExpanded = false;
         }
     }
 
@@ -821,7 +694,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         switch (bottomSheetState) {
             case (BottomSheetBehavior.STATE_COLLAPSED):
-                closeFABs(isFabOpen);
+                collapseFABs(isFABsExpanded);
                 if (!fabPlus.isShown()) showFABs();
                 this.getView().requestFocus();
                 break;
@@ -832,7 +705,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 nearbyMapFragment.getMapboxMap().deselectMarkers();
                 transparentView.setClickable(false);
                 transparentView.setAlpha(0);
-                closeFABs(isFabOpen);
+                collapseFABs(isFABsExpanded);
                 hideFABs();
                 if (this.getView() != null) {
                     this.getView().requestFocus();
@@ -944,6 +817,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (nearbyMapFragment != null && nearbyParentFragmentPresenter != null && locationManager != null) {
             nearbyParentFragmentPresenter.updateMapAndList(MAP_UPDATED, locationManager.getLastLocation());
         }
+    }
+
+    private void showErrorMessage(String message) {
+        ViewUtil.showLongToast(getActivity(), message);
     }
 
 }
