@@ -56,7 +56,7 @@ public class UiUtils {
      *
      * @return List List of LatLng points of the circle.
      */
-    public static List<LatLng> createCircleArray(
+    public static List<com.mapbox.mapboxsdk.geometry.LatLng> createCircleArray(
             double centerLat, double centerLong, float radius, int nodes) {
         List<com.mapbox.mapboxsdk.geometry.LatLng> circle = new ArrayList<>();
         float radiusKilometer = radius / 1000;

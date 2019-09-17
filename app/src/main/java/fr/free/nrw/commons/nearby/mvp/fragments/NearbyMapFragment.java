@@ -317,6 +317,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
                 .position(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
         currentLocationMarkerOptions.setIcon(icon); // Set custom icon
+        Marker currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
 
         List<com.mapbox.mapboxsdk.geometry.LatLng> circle = UiUtils.createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
                 curLatLng.getAccuracy() * 2, 100);

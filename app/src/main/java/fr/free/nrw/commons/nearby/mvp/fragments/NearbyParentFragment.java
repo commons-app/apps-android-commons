@@ -188,17 +188,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isNetworkErrorOccurred = false;
     private Snackbar snackbar;
     FragmentTransaction transaction;
-    View view;
+    private View view;
 
     public NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
-    boolean isDarkTheme;
-    boolean isFabOpen;
-    boolean isBottomListSheetExpanded;
+    private boolean isDarkTheme;
+    private boolean isFabOpen;
     private Marker selectedMarker;
     private Place selectedPlace;
 
-    private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.06;
-    private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.04;
+    private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
+    private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
 
     NearbyMapFragment nearbyMapFragment;
 
@@ -769,21 +768,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         if (ViewUtil.isPortrait(getActivity())){
             position = new CameraPosition.Builder()
-                    .target(isBottomListSheetExpanded ?
+                    .target(isListBottomSheetExpanded() ?
                             new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
                                     curLatLng.getLongitude())
                             : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                    .zoom(isBottomListSheetExpanded ?
+                    .zoom(isListBottomSheetExpanded() ?
                             ZOOM_LEVEL
                             : nearbyMapFragment.getMapboxMap().getCameraPosition().zoom) // Same zoom level
                     .build();
         }else {
             position = new CameraPosition.Builder()
-                    .target(isBottomListSheetExpanded ?
+                    .target(isListBottomSheetExpanded() ?
                             new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
                                     curLatLng.getLongitude())
                             : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                    .zoom(isBottomListSheetExpanded ?
+                    .zoom(isListBottomSheetExpanded() ?
                             ZOOM_LEVEL
                             : nearbyMapFragment.getMapboxMap().getCameraPosition().zoom) // Same zoom level
                     .build();
@@ -808,7 +807,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         NearbyMarker nearbyMarker = (NearbyMarker) marker;
         Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
         passInfoToSheet(place);
-        bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        hideBottomSheet();
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
