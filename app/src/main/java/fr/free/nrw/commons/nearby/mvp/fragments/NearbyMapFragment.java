@@ -65,8 +65,7 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
  * @see #getMapAsync(OnMapReadyCallback)
  */
 public class NearbyMapFragment extends CommonsDaggerSupportFragment
-                                implements OnMapReadyCallback,
-                                            NearbyMapContract.View{
+        implements OnMapReadyCallback, NearbyMapContract.View{
 
     @Inject
     BookmarkLocationsDao bookmarkLocationDao;
@@ -75,6 +74,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
     private MapFragment.OnMapViewReadyCallback mapViewReadyCallback;
     private MapboxMap mapboxMap;
     private MapView map;
+
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
     private static final double ZOOM_LEVEL = 14f;
@@ -260,30 +260,36 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Clears map, adds nearby markers to map
+     * @param latLng current location
+     * @param placeList all places will be displayed on the map
+     * @param selectedMarker clicked marker by user
+     * @param nearbyParentFragmentPresenter presenter
+     */
     @Override
     public void updateMapMarkers(LatLng latLng, List<Place> placeList
                                                 , Marker selectedMarker
                                                 , NearbyParentFragmentPresenter nearbyParentFragmentPresenter) {
-        Log.d("denemeTest","updateMapMarkers, curLatng:"+latLng);
+        Timber.d("Updates map markers");
         List<NearbyBaseMarker> customBaseMarkerOptions =  NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(latLng, // Curlatlang will be used to calculate distances
                         placeList,
                         getActivity(),
                         bookmarkLocationDao.getAllBookmarksLocations());
         mapboxMap.clear();
-        // TODO: set search latlang here
-
-        /*mapboxMap.animateCamera(CameraUpdateFactory
-                .newCameraPosition(cameraPosition), 1000);*/
-        // TODO: set position depening to botom sheet position heere
-        // We are trying to find nearby places around our custom searched area, thus custom parameter is nonnull
         addNearbyMarkersToMapBoxMap(customBaseMarkerOptions, selectedMarker, nearbyParentFragmentPresenter);
         // Re-enable mapbox gestures on custom location markers load
         mapboxMap.getUiSettings().setAllGesturesEnabled(true);
     }
 
+    /**
+     * Makes map camera follow users location with animation
+     * @param curLatLng current location of user
+     */
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
+        Timber.d("Updates map camera to track user position");
         CameraPosition cameraPosition = new CameraPosition.Builder().target
                 (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
         mapboxMap.setCameraPosition(cameraPosition);
@@ -300,11 +306,11 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
      * Should be called only on creation of mapboxMap, there
      * is other method to update markers location with users
      * move.
+     * @param curLatLng current location
      */
     @Override
     public void addCurrentLocationMarker(LatLng curLatLng) {
-        Log.d("denemeTest","addCurrentLocationMarker");
-        Timber.d("addCurrentLocationMarker is called");
+        Timber.d("Adds current location marker");
 
         Icon icon = IconFactory.getInstance(getContext()).fromResource(R.drawable.current_location_marker);
 
@@ -312,9 +318,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
                 .position(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
         currentLocationMarkerOptions.setIcon(icon); // Set custom icon
 
-        Marker currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
-
-        List<com.mapbox.mapboxsdk.geometry.LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
+        List<com.mapbox.mapboxsdk.geometry.LatLng> circle = UiUtils.createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
                 curLatLng.getAccuracy() * 2, 100);
 
         PolygonOptions currentLocationPolygonOptions = new PolygonOptions()
@@ -324,49 +328,23 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         mapboxMap.addPolygon(currentLocationPolygonOptions);
     }
 
-    //TODO: go to util
     /**
-     * Creates a series of points that create a circle on the map.
-     * Takes the center latitude, center longitude of the circle,
-     * the radius in meter and the number of nodes of the circle.
-     *
-     * @return List List of LatLng points of the circle.
+     * Adds markers to map
+     * @param baseMarkerList is markers will be added
+     * @param selectedMarker is selected marker by user
+     * @param nearbyParentFragmentPresenter presenter
      */
-    private List<com.mapbox.mapboxsdk.geometry.LatLng> createCircleArray(
-            double centerLat, double centerLong, float radius, int nodes) {
-        List<com.mapbox.mapboxsdk.geometry.LatLng> circle = new ArrayList<>();
-        float radiusKilometer = radius / 1000;
-        double radiusLong = radiusKilometer
-                / (111.320 * Math.cos(centerLat * Math.PI / 180));
-        double radiusLat = radiusKilometer / 110.574;
-
-        for (int i = 0; i < nodes; i++) {
-            double theta = ((double) i / (double) nodes) * (2 * Math.PI);
-            double nodeLongitude = centerLong + radiusLong * Math.cos(theta);
-            double nodeLatitude = centerLat + radiusLat * Math.sin(theta);
-            circle.add(new com.mapbox.mapboxsdk.geometry.LatLng(nodeLatitude, nodeLongitude));
-        }
-        return circle;
-    }
-
     @Override
     public void addNearbyMarkersToMapBoxMap(@Nullable List<NearbyBaseMarker> baseMarkerList
                                                         , Marker selectedMarker
                                                         , NearbyParentFragmentPresenter nearbyParentFragmentPresenter) {
         Log.d("denemeTest","add markers to map");
         mapboxMap.addMarkers(baseMarkerList);
-        mapboxMap.setOnInfoWindowCloseListener(marker -> {
-            /*if (marker == selected) {
-                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-            }*/
-        });
         map.getMapAsync(mapboxMap -> {
             mapboxMap.addMarkers(baseMarkerList);
-            //fabRecenter.setVisibility(View.VISIBLE);
             setMapMarkerActions(selectedMarker, nearbyParentFragmentPresenter);
         });
     }
-
 
     @Override
     public LatLng getCameraTarget() {
@@ -405,6 +383,12 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         });
     }
 
+    /**
+     * Sets marker icon according to marker status. Sets title and distance.
+     * @param isBookmarked true if place is bookmarked
+     * @param place
+     * @param curLatLng current location
+     */
     public void updateMarker(boolean isBookmarked, Place place, @Nullable LatLng curLatLng) {
 
         VectorDrawableCompat vectorDrawable;
@@ -446,7 +430,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void centerMapToPlace(Place place, boolean isPortraitMode) {
-        Log.d("denemeSon","isPortyrait:"+isPortraitMode);
+        Timber.d("Map is centered to place");
         double cameraShift;
         if (isPortraitMode) {
             cameraShift = CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT;
