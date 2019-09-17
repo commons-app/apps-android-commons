@@ -33,9 +33,11 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.nearby.mvp.fragments.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment.TAG_RETAINED_MAP_FRAGMENT;
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
@@ -191,8 +193,9 @@ public class PlaceRenderer extends Renderer<Place> {
                     onBookmarkClick.onClick();
                 }
                 else {
-                    // TODO nesli
-                    //((NearbyMapFragment)((NearbyFragment)((NearbyListFragment)fragment).getParentFragment()).getChildFragmentManager().findFragmentByTag(NearbyMapFragment.class.getSimpleName())).updateMarker(isBookmarked, place);
+                    ((NearbyMapFragment)(fragment.getParentFragment()).getChildFragmentManager().
+                            findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT)).
+                            updateMarker(isBookmarked, place, null);
                 }
             }
         });

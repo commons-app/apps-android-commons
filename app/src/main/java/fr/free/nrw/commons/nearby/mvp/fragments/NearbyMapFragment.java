@@ -405,7 +405,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         });
     }
 
-    public void updateMarker(boolean isBookmarked, Place place, LatLng curLatLng) {
+    public void updateMarker(boolean isBookmarked, Place place, @Nullable LatLng curLatLng) {
 
         VectorDrawableCompat vectorDrawable;
         if (isBookmarked) {
@@ -421,8 +421,10 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
             if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
 
                 Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-                String distance = formatDistanceBetween(curLatLng, place.location);
-                place.setDistance(distance);
+                if (curLatLng != null) {
+                    String distance = formatDistanceBetween(curLatLng, place.location);
+                    place.setDistance(distance);
+                }
 
                 NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
                 nearbyBaseMarker.title(place.name);
