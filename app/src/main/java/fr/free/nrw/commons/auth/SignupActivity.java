@@ -7,7 +7,6 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.theme.BaseActivity;
 import timber.log.Timber;
 
@@ -40,7 +39,7 @@ public class SignupActivity extends BaseActivity {
                 Timber.d("Overriding URL %s", url);
 
                 Toast toast = Toast.makeText(SignupActivity.this,
-                        R.string.account_created, Toast.LENGTH_LONG);
+                        "Account created!", Toast.LENGTH_LONG);
                 toast.show();
                 // terminate on task completion.
                 finish();

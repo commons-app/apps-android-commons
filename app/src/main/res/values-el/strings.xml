@@ -21,7 +21,6 @@
   <string name="preference_category_appearance">Εμφάνιση</string>
   <string name="preference_category_general">Γενικά</string>
   <string name="preference_category_feedback">Ανατροφοδότηση</string>
-  <string name="preference_category_privacy">Ιδιωτικότητα</string>
   <string name="preference_category_location">Τοποθεσία</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -177,7 +176,7 @@
   <string name="menu_refresh">Ανανέωση</string>
   <string name="storage_permission_title">Αιτείται Άδεια Αποθήκευσης</string>
   <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να έχει πρόσβαση στην συλλογή σας χωρίς αυτή.</string>
-  <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Εγγραφή σε εξωτερική αποθήκευση. Το πρόγραμμα δεν θα έχει πρόσβαση στην κάμερα/συλλογή σας χωρίς αυτήν.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
   <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
   <string name="ok">Εντάξει</string>
   <string name="title_activity_nearby">Κοντινοί Τόποι</string>
@@ -188,7 +187,6 @@
   <string name="no">Όχι</string>
   <string name="media_detail_title">Τίτλος</string>
   <string name="media_detail_description">Περιγραφή</string>
-  <string name="media_detail_discussion">Συζήτηση</string>
   <string name="media_detail_author">Συγγραφέας</string>
   <string name="media_detail_uploaded_date">Ημερομηνία φόρτωσης</string>
   <string name="media_detail_license">Άδεια</string>
@@ -346,7 +344,6 @@
   <string name="delete_recent_searches_dialog">Είστε σίγουρος ότι θέλετε να καθαρίσετε το ιστορικό αναζήτησης;</string>
   <string name="search_history_deleted">Το ιστορικό αναζήτησης διεγράφη</string>
   <string name="nominate_delete">Ορίστε για Αφαίρεση</string>
-  <string name="delete">Διαγραφή</string>
   <string name="Achievements">Κατορθώματα</string>
   <string name="statistics">Στατιστικά</string>
   <string name="statistics_thanks">Ευχαριστίες που έχουν ληφθεί</string>
@@ -402,17 +399,9 @@
   <string name="no_categories_selected_warning_desc">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
   <string name="yes_submit">Ναι, υποβολή</string>
   <string name="no_go_back">Όχι, Επιστροφή</string>
-  <string name="review_thanks_yes_button_text">Ναι, γιατί όχι</string>
-  <string name="review_thanks_no_button_text">Επόμενη εικόνα</string>
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
   <string name="no_image_uploaded">Δεν έχουν ανεβεί εικόνες</string>
-  <string name="no_notification">Δεν έχετε αδιάβαστες ενημερώσεις</string>
-  <string name="no_archived_notification">Δεν έχετε αρχειοθετημένες ενημερώσεις</string>
+  <string name="no_notification" fuzzy="true">Δεν έχετε αδιάβαστες Ενημερώσεις.</string>
+  <string name="no_archived_notification" fuzzy="true">Δεν έχετε αρχειοθετημένες Ενημερώσεις.</string>
   <string name="please_wait">Παρακαλούμε περιμένετε…</string>
-  <string name="exif_tag_name_author">Δημιουργός</string>
-  <string name="exif_tag_name_copyright">Πνευματικά δικαιώματα</string>
-  <string name="exif_tag_name_location">Τοποθεσία</string>
-  <string name="exif_tag_name_software">Λογισμικό</string>
-  <string name="image_info">Πληροφορίες Εικόνας</string>
-  <string name="delete_helper_show_deletion_title_failed">Απέτυχε</string>
 </resources>

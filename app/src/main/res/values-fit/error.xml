@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Authors:
-* Pyscowicz
--->
-<resources>
-  <string name="crash_dialog_ok_toast">Kiitos!</string>
-</resources>

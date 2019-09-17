@@ -564,10 +564,4 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Autre</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Parce qu’elle est</string>
-  <string name="share_image_via">Partager l’image via</string>
-  <string name="no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
-  <string name="account_created">Compte créé !</string>
-  <string name="text_copy">Texte copié dans le presse-papier</string>
-  <string name="notification_mark_read">Notification marquée comme lue</string>
-  <string name="some_error">Il y a eu une erreur !</string>
 </resources>

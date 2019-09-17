@@ -554,10 +554,4 @@
   <string name="delete_helper_ask_reason_copyright_logo">לוגו</string>
   <string name="delete_helper_ask_reason_copyright_other">אחר</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">כיוון שזה</string>
-  <string name="share_image_via">שיתוף תמונה דרך</string>
-  <string name="no_achievements_yet">לא תרמת שום דבר עדיין</string>
-  <string name="account_created">חשבון נוצר!</string>
-  <string name="text_copy">הטקסט הועתק ללוח</string>
-  <string name="notification_mark_read">התראה סומנה כנקראה</string>
-  <string name="some_error">אירעה שגיאה כלשהי!</string>
 </resources>

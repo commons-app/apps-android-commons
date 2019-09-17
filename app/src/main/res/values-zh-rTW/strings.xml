@@ -551,10 +551,4 @@
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>
   <string name="delete_helper_ask_reason_copyright_other">其它</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">因為這</string>
-  <string name="share_image_via">分享圖片透過</string>
-  <string name="no_achievements_yet">您還沒有做出任何貢獻</string>
-  <string name="account_created">已建立帳號！</string>
-  <string name="text_copy">文字已複製至剪貼簿</string>
-  <string name="notification_mark_read">通知標記為已讀</string>
-  <string name="some_error">發生一些錯誤！</string>
 </resources>
