@@ -37,17 +37,13 @@ public class NearbyParentFragmentPresenter
     private boolean isNearbyLocked;
     private LatLng curLatLng;
 
-    boolean nearbyViewsAreReady;
-    boolean onTabSelected;
-    boolean searchingThisArea;
-    boolean nearbyMapViewReady;
-    boolean nearbyOperationsInitialized;
-    boolean mapInitialized; // TODO reset this on fragment destroyed
+    private boolean nearbyViewsAreReady;
+    private boolean onTabSelected;
+    private boolean mapInitialized;
 
-    Place placeToCenter;
-    boolean isPortraitMode;
-    boolean willMapBeCentered;
-    boolean placesLoadedOnce;
+    private Place placeToCenter;
+    private boolean isPortraitMode;
+    private boolean placesLoadedOnce;
 
 
     private LocationServiceManager locationServiceManager;
@@ -70,11 +66,10 @@ public class NearbyParentFragmentPresenter
     @Override
     public void onTabSelected() {
         Timber.d("Nearby tab selected");
-        Log.d("denemeTest","Nearby tab selected");
         onTabSelected = true;
         // The condition for initialize operations is both having views ready and tab is selected
         if (nearbyViewsAreReady && !mapInitialized) {
-            initializeNearbyOperations();
+            checkForPermission();
         }
     }
 
@@ -85,64 +80,40 @@ public class NearbyParentFragmentPresenter
     @Override
     public void nearbyFragmentsAreReady() {
         Timber.d("Nearby fragments are ready to be used by presenter");
-        Log.d("denemeTest","nearbyFragmentsAreReady");
         nearbyViewsAreReady = true;
         // The condition for initialize operations is both having views ready and tab is selected
         if (onTabSelected) {
-            initializeNearbyOperations();
+            checkForPermission();
         }
     }
 
     /**
      * Initializes nearby operations by following these steps:
-     * - Add this location listener to location manager
-     * - Registers location updates with parent fragment, this methods also checks permissions
-     * Note: Highly context dependent methods are handled in view and triggered from presenter
+     * -Checks for permission and perform if given
      */
     @Override
-    public void initializeNearbyOperations() {
-        // TODO: do not update every time user selected tab
-        Timber.d("initializing nearby operations started");
-        // Add location listener to be notified about location changes
-        //locationServiceManager.addLocationListener(this);
+    public void checkForPermission() {
+        Timber.d("checking for permission");
         nearbyParentFragmentView.checkPermissionsAndPerformAction(this::performNearbyOperationsIfPermissionGiven);
-
     }
 
+    /**
+     * - Adds search this area button action
+     * - Adds camera move action listener
+     * - Initializes nearby operations, registers listeners, broadcast receivers etc.
+     */
     public void performNearbyOperationsIfPermissionGiven() {
-        Timber.d("performNearbyOperationsIfPermissionGiven");
-        //nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
-        // Nearby buttons should be active, they should be inactive only during update
-        // This will start a consequence to check GPS depending on different API
-        //nearbyParentFragmentView.checkGps(locationServiceManager);
-        // We will know when we went offline and online again
-        //nearbyParentFragmentView.addNetworkBroadcastReceiver();
-        //nearbyMapFragmentView.setupMapView(null);
-        //nearbyOperationsInitialized();
+        Timber.d("Permission is given, performing actions");
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
         this.nearbyParentFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
         initializeMapOperations();
     }
 
-    public void nearbyOperationsInitialized() {
-        Log.d("deneme2","nearbyOperationsinitialized");
-        nearbyOperationsInitialized = true;
-        if (nearbyMapViewReady) {
-            initializeMapOperations();
-        }
-    }
-
     public void initializeMapOperations() {
-        Log.d("denemeTest","initializeMapOperations");
-        nearbyParentFragmentView.initViewPositions();
-
         lockUnlockNearby(false);
         registerUnregisterLocationListener(false);
         nearbyParentFragmentView.addNetworkBroadcastReceiver();
-
-        Timber.d("Nearby map view is created and ready");
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
-        // TODO: document this prpoblem, if updateMapAndList is not called at checkGPS then this method never called, setup map view never ends
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
         this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
         mapInitialized = true;
@@ -205,11 +176,11 @@ public class NearbyParentFragmentPresenter
         if (removeLocationListener) {
             locationServiceManager.unregisterLocationManager();
             locationServiceManager.removeLocationListener(this);
-            Timber.d("Nearby locked");
+            Timber.d("Location service manager unregistered and removed");
         } else {
             locationServiceManager.addLocationListener(this);
             nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
-            Timber.d("Nearby unlocked");
+            Timber.d("Location service manager added and registered");
         }
     }
 
@@ -229,29 +200,21 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget) {
-        Log.d("denemeTest","updateMapAndList");
+        Timber.d("Presenter updates map and list");
         if (isNearbyLocked) {
-            Log.d("denemeTest","isNearbyLocked");
             Timber.d("Nearby is locked, so updateMapAndList returns");
             return;
         }
 
         if (!nearbyParentFragmentView.isNetworkConnectionEstablished()) {
             Timber.d("Network connection is not established");
-            Log.d("denemeTest","!nearbyParentFragmentView.isNetworkConnectionEstablished()");
             return;
         }
 
         LatLng lastLocation = locationServiceManager.getLastLocation();
-
-        if (curLatLng != null) {
-            // TODO figure out what is happening here about orientation change
-        }
-
         curLatLng = lastLocation;
 
         if (curLatLng == null) {
-
             Timber.d("Skipping update of nearby places as location is unavailable");
             return;
         }
@@ -262,27 +225,21 @@ public class NearbyParentFragmentPresenter
          */
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(MAP_UPDATED)) {
-            Log.d("denemeTest","1");
+            Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
             lockUnlockNearby(true);
             nearbyParentFragmentView.setProgressBarVisibility(true);
             nearbyParentFragmentView.populatePlaces(lastLocation, lastLocation);
-            //nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
-            // TODO: when unneeded populate places call problem is solved, open commented out line and remove it from update map markers method
-            // TODO dont forget map updated state after an wikidata item is updated
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
-            Log.d("denemeTest","2");
+            Timber.d("SEARCH_CUSTOM_AREA");
             lockUnlockNearby(true);
             nearbyParentFragmentView.setProgressBarVisibility(true);
             nearbyParentFragmentView.populatePlaces(lastLocation, cameraTarget);
-            searchingThisArea = false;
-        } else { // Means location changed slightly, ie user is walking or driving.
-            Log.d("denemeTest","3");
-            nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
-            searchingThisArea = false;
-        }
 
-        // TODO: update camera angle accordingly here, 1- search this area mode, 2- following current location, 3- list sheet expanded, 4- landcaped
+        } else { // Means location changed slightly, ie user is walking or driving.
+            Timber.d("Means location changed slightly");
+            nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
+        }
     }
 
     /**
@@ -314,6 +271,10 @@ public class NearbyParentFragmentPresenter
         handleCenteringTaskIfAny();
     }
 
+    /**
+     * Some centering task may need to wait for map to be ready, if they are requested before
+     * map is ready. So we will remember it when the map is ready
+     */
     private void handleCenteringTaskIfAny() {
         if (!placesLoadedOnce) {
             placesLoadedOnce = true;
@@ -323,14 +284,13 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void onWikidataEditSuccessful() {
-
+        // TODO
     }
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
         Timber.d("Location significantly changed");
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
-
     }
 
     @Override
@@ -346,23 +306,15 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap) {
-        Log.d("denemeTestt","cameramoving1");
-
         return () -> {
-            Log.d("denemeTestt","cameramoving2");
-
             // If our nearby markers are calculated at least once
             if (NearbyController.currentLocation != null) {
-                Log.d("denemeTestt","NearbyController.currentLocation != null");
                double distance = mapboxMap.getCameraPosition().target.distanceTo
-                        //TODO: test this distances
                         (LocationUtils.commonsLatLngToMapBoxLatLng(NearbyController.latestSearchLocation));
                 if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
                     if (distance > NearbyController.latestSearchRadius) {
-                        Log.d("denemeTestt","distance > NearbyController.latestSearchRadius");
                         nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
                     } else {
-                        Log.d("denemeTestt","distance < NearbyController.latestSearchRadius");
                         nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
                     }
                 }
@@ -373,22 +325,16 @@ public class NearbyParentFragmentPresenter
     }
 
     public View.OnClickListener onSearchThisAreaClicked() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("denemeTestt","onSearchThisAreaClicked");
-                // Lock map operations during search this area operation
-                nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
+        return v -> {
+            // Lock map operations during search this area operation
+            nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
 
-                if (searchCloseToCurrentLocation()){
-                    Log.d("denemeTestt","searchCloseToCurrentLocation()");
-                    updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED,
-                            null);
-                } else {
-                    Log.d("denemeTestt","!searchCloseToCurrentLocation()+"+getCameraTarget());
-                    updateMapAndList(SEARCH_CUSTOM_AREA,
-                            getCameraTarget());
-                }
+            if (searchCloseToCurrentLocation()){
+                updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED,
+                        null);
+            } else {
+                updateMapAndList(SEARCH_CUSTOM_AREA,
+                        getCameraTarget());
             }
         };
     }
@@ -399,7 +345,6 @@ public class NearbyParentFragmentPresenter
      * @return Returns true if search this area button is used around our current location
      */
     public boolean searchCloseToCurrentLocation() {
-        Log.d("denemeTestt","searchCloseToCurrentLocation method");
         double distance = LocationUtils.commonsLatLngToMapBoxLatLng(getCameraTarget())
                 .distanceTo(new com.mapbox.mapboxsdk.geometry.LatLng(NearbyController.currentLocation.getLatitude()
                         , NearbyController.currentLocation.getLongitude()));
@@ -418,7 +363,6 @@ public class NearbyParentFragmentPresenter
         if (placesLoadedOnce) {
             nearbyMapFragmentView.centerMapToPlace(place, isPortraitMode);
         } else {
-            willMapBeCentered = true;
             this.isPortraitMode = isPortraitMode;
             this.placeToCenter = place;
         }

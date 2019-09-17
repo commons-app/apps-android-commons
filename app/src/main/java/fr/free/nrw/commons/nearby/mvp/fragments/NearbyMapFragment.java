@@ -339,7 +339,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
     public void addNearbyMarkersToMapBoxMap(@Nullable List<NearbyBaseMarker> baseMarkerList
                                                         , Marker selectedMarker
                                                         , NearbyParentFragmentPresenter nearbyParentFragmentPresenter) {
-        Log.d("denemeTest","add markers to map");
         mapboxMap.addMarkers(baseMarkerList);
         map.getMapAsync(mapboxMap -> {
             mapboxMap.addMarkers(baseMarkerList);

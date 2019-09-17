@@ -27,7 +27,6 @@ public interface NearbyParentFragmentContract {
         void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
         void animateFABs();
         void recenterMap(LatLng curLatLng);
-        void initViewPositions();
         void hideBottomSheet();
         void displayBottomSheetWithInfo(Marker marker);
         void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
@@ -45,7 +44,7 @@ public interface NearbyParentFragmentContract {
 
     interface UserActions {
         void onTabSelected();
-        void initializeNearbyOperations();
+        void checkForPermission();
         void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget);
         void lockUnlockNearby(boolean isNearbyLocked);
         void setActionListeners(JsonKvStore applicationKvStore);

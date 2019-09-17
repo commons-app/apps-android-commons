@@ -44,8 +44,10 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
@@ -71,6 +73,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
@@ -436,11 +439,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void populatePlaces(fr.free.nrw.commons.location.LatLng curlatLng, fr.free.nrw.commons.location.LatLng searchLatLng) {
-        boolean checkingAroundCurretLocation;
+        boolean checkingAroundCurrentLocation;
         if (curlatLng.equals(searchLatLng)) { // Means we are checking around current location
-            checkingAroundCurretLocation = true;
+            checkingAroundCurrentLocation = true;
             compositeDisposable.add(Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurretLocation))
+                    .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurrentLocation))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::updateMapMarkers,
@@ -451,9 +454,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                                 nearbyParentFragmentPresenter.lockUnlockNearby(false);
                             }));
         } else {
-            checkingAroundCurretLocation = false;
+            checkingAroundCurrentLocation = false;
             compositeDisposable.add(Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurretLocation))
+                    .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurrentLocation))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::updateMapMarkersForCustomLocation,
@@ -615,13 +618,26 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     .setMessage(R.string.login_alert_message)
                     .setPositiveButton(R.string.login, (dialog, which) -> {
                         // logout of the app
-                        //TODO:
-                        // ((NavigationBaseActivity)getActivity()).BaseLogoutListener logoutListener = new ((NavigationBaseActivity)getActivity()).BaseLogoutListener();
-                        // CommonsApplication app = (CommonsApplication) getActivity().getApplication();
-                        // app.clearApplicationData(getContext(), logoutListener);
-
+                        BaseLogoutListener logoutListener = new BaseLogoutListener();
+                        CommonsApplication app = (CommonsApplication) getActivity().getApplication();
+                        app.clearApplicationData(getContext(), logoutListener);
                     })
                     .show();
+        }
+    }
+
+    /**
+     * onLogoutComplete is called after shared preferences and data stored in local database are cleared.
+     */
+    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
+        @Override
+        public void onLogoutComplete() {
+            Timber.d("Logout complete callback received.");
+            Intent nearbyIntent = new Intent( getActivity(), LoginActivity.class);
+            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(nearbyIntent);
+            getActivity().finish();
         }
     }
 
@@ -665,11 +681,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void initViewPositions() {
-
-    }
-
-    @Override
     public void hideBottomSheet() {
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
@@ -688,7 +699,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * If nearby details bottom sheet state is collapsed: show fab plus
      * If nearby details bottom sheet state is expanded: show fab plus
      * If nearby details bottom sheet state is hidden: hide all fabs
-     * @param bottomSheetState
+     * @param bottomSheetState see bottom sheet states
      */
     public void prepareViewsForSheetPosition(int bottomSheetState) {
 
@@ -729,8 +740,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             nearbyMapFragment.updateMarker(isBookmarked, this.selectedPlace, locationManager.getLastLocation());
         });
 
-
-        //TODO move all this buttons into a custom bottom sheet
         wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
         wikipediaButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), this.selectedPlace.siteLinks.getWikipediaLink()));
 
@@ -751,7 +760,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         fabCamera.setOnClickListener(view -> {
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", this.selectedPlace.toString());
-                // TODO storeSharedPrefs();
+                storeSharedPrefs(selectedPlace);
                 controller.initiateCameraPick(getActivity());
             }
         });
@@ -759,10 +768,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         fabGallery.setOnClickListener(view -> {
             if (fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", this.selectedPlace.toString());
-                //TODO storeSharedPrefs();
+                storeSharedPrefs(selectedPlace);
                 controller.initiateGalleryPick(getActivity(), false);
             }
         });
+    }
+
+    private void storeSharedPrefs(Place selectedPlace) {
+        Timber.d("Store place object %s", selectedPlace.toString());
+        applicationKvStore.putJson(PLACE_OBJECT, selectedPlace);
     }
 
     private void updateBookmarkButtonImage(Place place) {
@@ -820,6 +834,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void showErrorMessage(String message) {
+        // TODO
         ViewUtil.showLongToast(getActivity(), message);
     }
 
