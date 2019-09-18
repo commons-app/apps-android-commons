@@ -284,7 +284,7 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void onWikidataEditSuccessful() {
-        // TODO
+        updateMapAndList(MAP_UPDATED, null);
     }
 
     @Override
