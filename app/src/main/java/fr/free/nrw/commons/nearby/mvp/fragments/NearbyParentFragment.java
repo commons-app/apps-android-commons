@@ -449,7 +449,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     .subscribe(this::updateMapMarkers,
                             throwable -> {
                                 Timber.d(throwable);
-                                showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                // TODO: find out why NPE occurs here
+                                // showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                 setProgressBarVisibility(false);
                                 nearbyParentFragmentPresenter.lockUnlockNearby(false);
                             }));
@@ -462,7 +463,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     .subscribe(this::updateMapMarkersForCustomLocation,
                             throwable -> {
                                 Timber.d(throwable);
-                                showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                                // TODO: find out why NPE occurs here
+                                // showErrorMessage(getString(R.string.error_fetching_nearby_places));
                                 setProgressBarVisibility(false);
                                 nearbyParentFragmentPresenter.lockUnlockNearby(false);
                             }));
@@ -834,7 +836,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void showErrorMessage(String message) {
-        // TODO
         ViewUtil.showLongToast(getActivity(), message);
     }
 
