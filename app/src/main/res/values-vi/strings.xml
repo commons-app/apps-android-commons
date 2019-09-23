@@ -9,15 +9,20 @@
 * Thanhtai2009
 * Tuankiet65
 * Vinhtantran
+* Yuki Wulf
 -->
 <resources>
+  <string name="title_activity_explore">Khám phá</string>
+  <string name="navigation_item_explore">Khám phá</string>
   <string name="preference_category_appearance">Giao diện</string>
   <string name="preference_category_general">Tổng quát</string>
   <string name="preference_category_feedback">Phản hồi</string>
+  <string name="preference_category_privacy">Sự riêng tư</string>
   <string name="preference_category_location">Vị trí</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Thiết lập</string>
+  <string name="intent_share_upload_label">Đăng tải lên Commons</string>
   <string name="username">Tên người dùng</string>
   <string name="password">Mật khẩu</string>
   <string name="login_credential">Đăng nhập vào tài khoản Commons Beta của bạn</string>
@@ -29,7 +34,7 @@
   <string name="login_success">Đã đăng nhập thành công!</string>
   <string name="login_failed">Đăng nhập thất bại!</string>
   <string name="upload_failed">Không tìm thấy tập tin. Xin vui lòng thử tập tin khác.</string>
-  <string name="authentication_failed" fuzzy="true">Xác thực thất bại!</string>
+  <string name="authentication_failed">Xác thực thất bại, vui lòng đăng nhập lại</string>
   <string name="uploading_started">Đã bắt đầu tải lên!</string>
   <string name="upload_completed_notification_title">Đã tải lên %1$s!</string>
   <string name="upload_completed_notification_text">Chạm để xem những tập tin tải lên của bạn</string>
@@ -53,7 +58,7 @@
   <string name="provider_contributions">Tập tin tôi tải lên</string>
   <string name="menu_share">Chia sẻ</string>
   <string name="menu_open_in_browser">Mở trong Trình duyệt</string>
-  <string name="share_title_hint" fuzzy="true">Tên</string>
+  <string name="share_title_hint">Tựa đề (Yêu cầu)</string>
   <string name="add_title_toast">Xin hãy đặt tiêu đề cho tập tin này</string>
   <string name="share_description_hint">Miêu tả</string>
   <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
@@ -64,6 +69,7 @@
   <string name="login_failed_generic">Đăng nhập thất bại</string>
   <string name="share_upload_button">Tải lên</string>
   <string name="multiple_share_base_title">Đặt tên nhóm này</string>
+  <string name="add_set_name_toast">Vui lòng đặt tên cho tập tin này</string>
   <string name="provider_modifications">Các thay đổi</string>
   <string name="menu_upload_single">Tải lên</string>
   <string name="categories_search_text_hint">Tìm thể loại</string>
@@ -89,6 +95,7 @@
   <string name="title_activity_settings">Cài đặt</string>
   <string name="title_activity_signup">Mở tài khoản</string>
   <string name="title_activity_featured_images">Hình ảnh chọn lọc</string>
+  <string name="title_activity_category_details">Thể loại</string>
   <string name="menu_about">Giới thiệu</string>
   <string name="about_license">Ứng dụng Wikimedia Commons là ứng dụng mã nguồn mở được sáng tạo và quản lý bởi các tình nguyện viên và những người được tin tưởng của cộng đồng Wikipedia. Wikimedia Foundation không tham gia vào sự tạo lập, phát triển cũng như quản lý của ứng dụng.</string>
   <string name="about_improve">Báo cáo lỗi cũng như đưa ra các ý tưởng &lt;a href=\"%1$s\"&gt;trên GitHub&lt;/a&gt;.</string>
@@ -158,6 +165,7 @@
   <string name="detail_description_empty">Không miêu tả</string>
   <string name="detail_license_empty">Giấy phép không rõ</string>
   <string name="menu_refresh">Làm tươi</string>
+  <string name="storage_permission_title">Yêu cầu Quyền Lưu trữ</string>
   <string name="read_storage_permission_rationale">Yêu cầu cấp phép: Đọc thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép đọc thiết bị lưu trữ bên ngoài để truy cập kho ảnh của bạn.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để truy cập máy chụp hình của bạn.</string>
   <string name="location_permission_rationale">Tùy chọn cấp phép: Định vị hiện tại để nhận gợi ý thể loại</string>
@@ -165,10 +173,12 @@
   <string name="title_activity_nearby">Nơi Lân cận</string>
   <string name="no_nearby">Không tìm thấy nơi lân cận</string>
   <string name="warning">Cảnh báo</string>
+  <string name="upload_image_duplicate">Tập tin này đã tồn tại trên Commons. Bạn có chắc muốn tiếp tục</string>
   <string name="yes">Có</string>
   <string name="no">Không</string>
   <string name="media_detail_title">Tiêu đề</string>
   <string name="media_detail_description">Mô tả</string>
+  <string name="media_detail_discussion">Thảo luận</string>
   <string name="media_detail_author">Tác giả</string>
   <string name="media_detail_uploaded_date">Ngày tải lên</string>
   <string name="media_detail_license">Giấy phép</string>
@@ -179,8 +189,10 @@
   <string name="_2fa_code">Mã Hai Nhân tố</string>
   <string name="number_of_uploads">Giới hạn Tải lên Gần đây của Tôi</string>
   <string name="maximum_limit">Tối đa</string>
+  <string name="invalid_input">Thông tin không hợp lệ</string>
   <string name="maximum_limit_alert">Không thể hiển thị hơn 500 cái</string>
-  <string name="set_limit" fuzzy="true">Đặt Giới hạn Tải lên Gần đây</string>
+  <string name="cannot_be_zero">Giới hạn đăng tải không thể là 0</string>
+  <string name="set_limit">Giới hạn đăng tải gần đây</string>
   <string name="login_failed_2fa_not_supported">Hiện chưa hỗ trợ xác thực dùng hai nhân tố.</string>
   <string name="logout_verification">Bạn có chắc chắn muốn đăng xuất?</string>
   <string name="commons_logo">Biểu trưng Commons</string>
@@ -221,6 +233,12 @@
   <string name="error_while_cache">Xuất hiện lỗi khi đưa hình ảnh vào vùng nhớ đệm</string>
   <string name="title_info">Tên ngắn và duy nhất cho tập tin sẽ được dùng làm tên tập tin. Có thể dùng thuật ngữ bình thường với khoảng cách. Đừng bao gồm phần mở rộng tập tin.</string>
   <string name="description_info">Xin vui lòng miêu tả phương tiện càng đầy đủ càng tốt: Chụp ở đâu? Trong hình có gì? Bối cảnh làm sao? Xin vui lòng miêu tả các đối tượng và người trong hình. Cho biết những thông tin khó đoán ra, chẳng hạn giờ trong ngày nếu là phong cảnh. Nếu phương tiện có gì kỳ lạ, xin vui lòng giải thích tại sao nó kỳ lạ.</string>
+  <string name="upload_problem_image_dark">Hình ảnh quá tối.</string>
+  <string name="upload_problem_image_blurry">Hình ảnh bị nhòe.</string>
+  <string name="upload_problem_image_duplicate">Hình ảnh đã có trên Commons.</string>
+  <string name="upload_problem_different_geolocation">Bức ảnh này được chụp ở một địa điểm khác.</string>
+  <string name="upload_problem_fbmd">Vui lòng chỉ đăng tải hình ảnh bạn đã tự chụp. Xin đừng đăng tải hình ảnh bạn tìm thấy trên tài không Facebook của người khác.</string>
+  <string name="upload_problem_do_you_continue">Bạn vẫn muốn đăng tải bức ảnh này?</string>
   <string name="give_permission">Cho phép</string>
   <string name="use_external_storage">Sử dụng thiết bị lưu trữ bên ngoài</string>
   <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
