@@ -38,7 +38,7 @@ public interface NearbyParentFragmentContract {
         void setBottomSheetDetailsSmaller();
     }
 
-    interface ListView {
+    interface NearbyListView {
         void updateListFragment(List<Place> placeList);
     }
 

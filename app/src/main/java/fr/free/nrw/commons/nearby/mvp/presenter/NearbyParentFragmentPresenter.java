@@ -33,7 +33,7 @@ public class NearbyParentFragmentPresenter
 
     private NearbyParentFragmentContract.View nearbyParentFragmentView;
     private NearbyMapContract.View nearbyMapFragmentView;
-    private NearbyParentFragmentContract.ListView nearbyListFragmentView;
+    private NearbyParentFragmentContract.NearbyListView nearbyListFragmentView;
     private boolean isNearbyLocked;
     private LatLng curLatLng;
 
@@ -48,7 +48,7 @@ public class NearbyParentFragmentPresenter
 
     private LocationServiceManager locationServiceManager;
 
-    public NearbyParentFragmentPresenter(NearbyParentFragmentContract.ListView nearbyListFragmentView,
+    public NearbyParentFragmentPresenter(NearbyParentFragmentContract.NearbyListView nearbyListFragmentView,
                                          NearbyParentFragmentContract.View nearbyParentFragmentView,
                                          NearbyMapContract.View nearbyMapFragmentView,
                                          LocationServiceManager locationServiceManager) {

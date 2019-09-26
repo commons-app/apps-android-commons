@@ -28,7 +28,7 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
 import timber.log.Timber;
 
-public class NearbyListFragment extends CommonsDaggerSupportFragment implements NearbyParentFragmentContract.ListView {
+public class NearbyListFragment extends CommonsDaggerSupportFragment implements NearbyParentFragmentContract.NearbyListView {
 
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
     }.getType();
