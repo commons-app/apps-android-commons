@@ -55,12 +55,14 @@
   <string name="add_title_toast">กรุณาระบุชืิ่อเรื่องของไฟล์นี้</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
+  <string name="login_failed_wrong_credentials">เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบชื่อผู้ใช้และรหัสผ้านและลองอีกครั้ง</string>
   <string name="login_failed_throttled">จำนวนครั้งที่พยายามไม่สำเร็จมากเกินไป กรุณาลองอีกครั้งในอีกสักครู่</string>
   <string name="login_failed_blocked">ขออภัย ผู้ใช้นี้ถูกบล็อกบนคอมมอนส์อยู่</string>
   <string name="login_failed_2fa_needed">คุณต้องระบุโค้ดการตรวจสอบความถูกต้องสองปัจจัยของคุณ</string>
   <string name="login_failed_generic">การเข้าสู่ระบบล้มเหลว</string>
   <string name="share_upload_button">อัปโหลด</string>
   <string name="multiple_share_base_title">ตั้งชื่อชุดนี้</string>
+  <string name="add_set_name_toast">กรุณาเลือกชื่อสำหรับเซ็ตนี้</string>
   <string name="provider_modifications">การแก้ไข</string>
   <string name="menu_upload_single">อัปโหลด</string>
   <string name="categories_search_text_hint">ค้นหาหมวดหมู่</string>
@@ -239,6 +241,8 @@
   <string name="title_info">ชื่อเรื่องที่อธิบายลักษณะเฉพาะของไฟล์ ซึ่งจะใช้เป็นชื่อไฟล์ คุณอาจใช้ภาษาธรรมดาที่มีเว้นวรรคก็ได้ อย่ารวมนามสกุลไฟล์</string>
   <string name="description_info">โปรดอธิบายสื่อดังกล่าวให้มากที่สุดเท่าที่จะได้: สื่อนี้ถูกถ่ายที่ไหน? สื่อนี้แสดงถึงอะไร? บริบทคืออะไร? โปรดอธิบายถึงวัตถุหรือบุคคล เปิดเผยข้อมูลที่ไม่อาจคาดเดาได้อย่างง่ายดาย เช่น เวลาที่ถ่าย หากเป็นภาพทิวทัศน์ หากสื่อแสดงถึงสิ่งที่ไม่ธรรมดา โปรดอธิบายว่าอะไรทำให้สื่อดังกล่าวไม่ธรรมดา</string>
   <string name="upload_image_too_dark">ภาพนี้มืดเกินไป คุณต้องการที่จะอัพโหลดต่อไปหรือไม่? ทางคอมมอนส์อนุญาติเฉพาะภาพสำหรับใช้ในโครงการสารานุกรมเสรีเท่านั้น</string>
+  <string name="upload_image_blurry">ภาพนี้มัว คุณแน่ใจหรือว่าคุณต้องการอัปโหลดภาพนี้? วิกิมีเดียคอมมอนส์นั้นมีไว้สำหรับรูปภาพที่มีคุณค่าในทางสารานุกรมเท่านั้น</string>
+  <string name="upload_problem_exist">พบปัญหาบางประการกับรูปนี้</string>
   <string name="upload_problem_image_dark">ภาพมืดเกินไป</string>
   <string name="upload_problem_image_blurry">ภาพมัวมาก</string>
   <string name="upload_problem_image_duplicate">มีภาพอยู่แล้วบนคอมมอนส์</string>
@@ -288,6 +292,7 @@
   <string name="internet_established">อินเทอร์เน็ตพร้อมใช้งาน</string>
   <string name="error_notifications">เกิดข้อผิดพลาดในการดึงข้อมูลการแจ้งความ</string>
   <string name="error_review">เกิดข้อผิดพลาดสำหรับการแสดงตัวอย่าง กรุณาลองใหม่อีกครั้ง</string>
+  <string name="error_review_categories">เกิดข้อผิดพลาดสำหรับการแสดงตัวอย่าง กรุณาลองใหม่อีกครั้ง</string>
   <string name="no_notifications">ไม่พบการแจ้งความ</string>
   <string name="about_translate">&lt;u&gt;แปล&lt;/u&gt;</string>
   <string name="about_translate_title">ภาษา</string>
@@ -296,6 +301,7 @@
   <string name="about_translate_cancel">ยกเลิก</string>
   <string name="retry">ลองใหม่</string>
   <string name="showcase_view_got_it_button">ตกลง!</string>
+  <string name="showcase_view_whole_nearby_activity">สถานที่เหล่านี้คือสถานที่ที่อยู่ใกล้คุณ และต้องการภาพสำหรับเพิ่มเข้าไปในบทความบนวิกิพีเดีย\n\nกดที่\'{{Wikimedia:Commons-android-strings-search this area}}\'เพื่อดูแผนที่และสำรวจว่าสิ่งใดบ้างที่ต้องการภาพ และถ่ายมันมาหากคุณสะดวก</string>
   <string name="no_images_found">ไม่พบรูปภาพ!</string>
   <string name="error_loading_images">เกิดข้อผิดพลาดระหว่างการโหลดภาะ</string>
   <string name="image_uploaded_by">อัพโหลดโดย: %1$a</string>
