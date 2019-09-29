@@ -202,11 +202,11 @@ public class  Contribution extends Media {
     private String getTemplatizedCreatedDate() {
         if (dateCreated != null) {
             if (UploadableFile.DateTimeWithSource.EXIF_SOURCE.equals(dateCreatedSource)) {
-                java.text.SimpleDateFormat dateformat = new java.text.SimpleDateFormat("yyyy-MM-dd");
-                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, dateformat.format(dateCreated)) + "\n";
+                java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, dateFormat.format(dateCreated)) + "\n";
             } else {
-                java.text.SimpleDateFormat dateformat = new java.text.SimpleDateFormat("yyyy-MM-dd");
-                return String.format(Locale.ENGLISH, TEMPLATE_DATA_OTHER_SOURCE, dateformat.format(dateCreated)) + "\n";
+                java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                return String.format(Locale.ENGLISH, TEMPLATE_DATA_OTHER_SOURCE, dateFormat.format(dateCreated)) + "\n";
             }
         }
         return "";
