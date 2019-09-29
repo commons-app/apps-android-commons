@@ -53,6 +53,7 @@ dependencies {
     api('com.github.tony19:logback-android-classic:1.1.1-6') {
         exclude group: 'com.google.android', module: 'android'
     }
+    implementation "com.squareup.okhttp3:logging-interceptor:4.2.0"
 
     // Dependency injector
     implementation "com.google.dagger:dagger:$DAGGER_VERSION"
