@@ -3,6 +3,8 @@ package fr.free.nrw.commons.review;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -99,6 +101,7 @@ public class ReviewActivity extends NavigationBaseActivity {
         setSupportActionBar(toolbar);
         initDrawer();
 
+
         reviewController = new ReviewController(deleteHelper, this);
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
@@ -106,6 +109,10 @@ public class ReviewActivity extends NavigationBaseActivity {
         reviewPagerAdapter.getItem(0);
         pagerIndicator.setViewPager(reviewPager);
         progressBar.setVisibility(View.VISIBLE);
+
+        Drawable d[]=btnSkipImage.getCompoundDrawablesRelative();
+        d[2].setColorFilter(getApplicationContext().getResources().getColor(R.color.button_blue), PorterDuff.Mode.SRC_IN);
+
 
         if (savedInstanceState != null) {
             updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)); // Use existing media if we have one
