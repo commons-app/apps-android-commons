@@ -51,6 +51,18 @@ class UploadPresenterTest {
     }
 
     /**
+     * unit test case for method UploadPresenter.handleSubmit
+     */
+    @Test
+    fun handleSubmitTest() {
+        uploadPresenter?.handleSubmit()
+        verify(view)?.isLoggedIn
+        verify(view)?.showProgress(true)
+        verify(repository)?.buildContributions()
+        verify(repository)?.buildContributions()
+    }
+
+    /**
      * unit test for UploadMediaPresenter.deletePictureAtIndex
      */
     @Test
