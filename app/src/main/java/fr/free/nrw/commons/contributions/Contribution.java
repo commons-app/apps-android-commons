@@ -29,7 +29,7 @@ public class  Contribution extends Media {
     private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to EXIF data|%s}}";
 
     //{{date|2009|1|9}} → 9 January 2009
-    private static final String TEMPLATE_DATA_OTHER_SOURCE = "{{date|%d|%d|%d}}";
+    private static final String TEMPLATE_DATA_OTHER_SOURCE = "{{date|%s}}";
 
     public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
         @Override
@@ -201,16 +201,11 @@ public class  Contribution extends Media {
      */
     private String getTemplatizedCreatedDate() {
         if (dateCreated != null) {
+            java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
             if (UploadableFile.DateTimeWithSource.EXIF_SOURCE.equals(dateCreatedSource)) {
-                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, DateUtil.getDateStringWithSkeletonPattern(dateCreated, "yyyy-MM-dd")) + "\n";
+                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, dateFormat.format(dateCreated)) + "\n";
             } else {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dateCreated);
-                calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return String.format(Locale.ENGLISH, TEMPLATE_DATA_OTHER_SOURCE,
-                        calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH)) + "\n";
+                return String.format(Locale.ENGLISH, TEMPLATE_DATA_OTHER_SOURCE, dateFormat.format(dateCreated)) + "\n";
             }
         }
         return "";
