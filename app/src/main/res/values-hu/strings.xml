@@ -180,6 +180,7 @@
   <string name="title_activity_nearby">Közeli helyek</string>
   <string name="no_nearby">Nem találhatók közeli helyek</string>
   <string name="warning">Figyelmeztetés</string>
+  <string name="upload_image_duplicate">Ez a fájl már létezik a Commonson. Biztos, hogy folytatni akarod?</string>
   <string name="yes">Igen</string>
   <string name="no">Nem</string>
   <string name="media_detail_title">Cím</string>
@@ -257,6 +258,7 @@
   <string name="nominate_deletion">Törlésre jelölés</string>
   <string name="nominated_for_deletion">Ezt a képet törlésre jelölték.</string>
   <string name="nominated_see_more">&lt;u&gt;Weboldal megtekintése további részletekért&lt;/u&gt;</string>
+  <string name="nominating_for_deletion_status">Fájl törlésre jelölése: %1$s</string>
   <string name="view_browser">Megtekintés böngészőben</string>
   <string name="skip_login">Kihagyás</string>
   <string name="navigation_item_login">Bejelentkezés</string>
@@ -309,6 +311,7 @@
   <string name="wallpaper_set_successfully">Háttérkép sikeresen beállítva!</string>
   <string name="quiz">Kvíz</string>
   <string name="quiz_question_string">Ez a fénykép feltölthető?</string>
+  <string name="result">Eredmény</string>
   <string name="user_not_logged_in">A bejelentkezési munkamenet lejárt, kérlek jelentkezz be újra.</string>
   <string name="quiz_result_share_message">Oszd meg a kvízed a barátaiddal!</string>
   <string name="continue_message">Folytatás</string>
@@ -331,6 +334,10 @@
   <string name="images_uploaded">Feltöltött képek</string>
   <string name="achievements_share_message">Oszd meg eredményeidet a barátaiddal!</string>
   <string name="images_uploaded_explanation">A Commonsra feltöltött képeid száma, bármilyen feltöltési programmal</string>
+  <string name="notifications_channel_name_all">Commons értesítés</string>
+  <string name="preference_author_name_toggle">Egyedi szerzőnév használata</string>
+  <string name="preference_author_name_toggle_summary">Egyedi szerzőnév használata felhasználói neved helyett képek feltöltéskor</string>
+  <string name="preference_author_name">Egyedi szerzőnév</string>
   <string name="contributions_fragment">Közreműködések</string>
   <string name="nearby_fragment">Közelben</string>
   <string name="notifications">Értesítések</string>
@@ -344,6 +351,7 @@
   <string name="title_page_bookmarks_locations">Helyszínek</string>
   <string name="menu_bookmark">Könyvjelző hozzáadása/törlése</string>
   <string name="provider_bookmarks">Könyvjelzők</string>
+  <string name="bookmark_empty">Nem adtál meg egyetlen könyvjelzőt sem</string>
   <string name="provider_bookmarks_location">Könyvjelzők</string>
   <string name="deletion_reason_uploaded_by_mistake">Véletlenül töltöttem fel</string>
   <string name="deletion_reason_publicly_visible">Nem tudtam, hogy nyilvánosan látható lesz</string>
@@ -360,6 +368,7 @@
   <string name="no_go_back">Nem, visszalépés</string>
   <string name="never_ask_again">Ne kérdezd meg többször</string>
   <string name="display_campaigns_explanation">Folyamatban lévő kampányok megjelenítése</string>
+  <string name="this_function_needs_network_connection">Ehhez a funkcióz hálózati kapcsolat szükséges, kérlek ellenőrizd az internetbeállításaidat.</string>
   <string name="nominate_for_deletion_done">Kész</string>
   <string name="notsure">Nem tudom biztosan</string>
   <string name="send_thank_success_title">Köszönet küldése sikeres</string>

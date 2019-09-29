@@ -9,6 +9,7 @@
 * Mar(c)
 * Optilete
 * Patio
+* Robin van der Linde
 * Rots61
 * Siebrand
 * Sjoerddebruin
@@ -76,6 +77,8 @@
   <string name="menu_save_categories">Opslaan</string>
   <string name="refresh_button">Vernieuwen</string>
   <string name="display_list_button">Lijst</string>
+  <string name="gps_disabled">GPS is uitgezet in uw apparaat. Wilt u het aanzetten?</string>
+  <string name="enable_gps">GPS aanzetten</string>
   <string name="contributions_subtitle_zero">Nog geen uploads</string>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
@@ -260,4 +263,6 @@
   <string name="menu_option_unread">Ongelezen bekijken</string>
   <string name="image_chooser_title">Kies de afbeeldingen die u wilt plaatsen</string>
   <string name="please_wait">Een ogenblik geduld…</string>
+  <string name="share_image_via">Deel afbeelding via</string>
+  <string name="account_created">Profiel gemaakt!</string>
 </resources>

@@ -327,7 +327,7 @@
   <string name="search_tab_title_media">Медији</string>
   <string name="search_tab_title_categories">Категорије</string>
   <string name="explore_tab_title_featured">Изабрано</string>
-  <string name="explore_tab_title_mobile">Отпремљено путем мобилног</string>
+  <string name="explore_tab_title_mobile">Отпремљено путем мобилног уређаја</string>
   <string name="successful_wikidata_edit">Слика је успешно додата у %1$s на Википодацима.</string>
   <string name="wikidata_edit_failure">Ажурирање одговарајућег ентитета на Википодацима није успело.</string>
   <string name="menu_set_wallpaper">Постави као позадину</string>
@@ -352,12 +352,12 @@
   <string name="add_description">+ Додај опис</string>
   <string name="no_recent_searches">Нема недавних претрага</string>
   <string name="delete_recent_searches_dialog">Да ли сте сигурни да желите да очистите своју историју претраге?</string>
-  <string name="delete_search_dialog">Да ли желите да обришете ову претрагу?</string>
+  <string name="delete_search_dialog">Да ли желите да избришете ову претрагу?</string>
   <string name="search_history_deleted">Историја претраге је избрисана</string>
   <string name="nominate_delete">Номиновање за брисање</string>
-  <string name="delete">Обриши</string>
+  <string name="delete">Избриши</string>
   <string name="Achievements">Достигнућа</string>
-  <string name="statistics">Статистике</string>
+  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Примљене захвале</string>
   <string name="statistics_featured">Изабране слике</string>
   <string name="level">Ниво</string>
@@ -506,7 +506,7 @@
   <string name="review_is_uploaded_by">Датотека %1$s је отпремљена од стране: %2$s</string>
   <string name="default_description_language">Подразумевани језик отписа</string>
   <string name="delete_helper_make_deletion_toast">Покушавање предлагања %1$s за брисање</string>
-  <string name="delete_helper_show_deletion_title">Номиновање за брисање</string>
+  <string name="delete_helper_show_deletion_title">Предлагање за брисање</string>
   <string name="delete_helper_show_deletion_title_success">Успешно</string>
   <string name="delete_helper_show_deletion_message_if">Успешно номинован %1$s за брисање.</string>
   <string name="delete_helper_show_deletion_title_failed">Није успело</string>
@@ -516,7 +516,7 @@
   <string name="delete_helper_ask_spam_nonsense">Бесмислено</string>
   <string name="delete_helper_ask_spam_other">Остало</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Фото репортажа</string>
-  <string name="delete_helper_ask_reason_copyright_internet_photo">Случајна фотографија са интерната</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Насумична фотографија са интерната</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Остало</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
