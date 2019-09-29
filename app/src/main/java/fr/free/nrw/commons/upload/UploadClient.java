@@ -3,6 +3,8 @@ package fr.free.nrw.commons.upload;
 import android.content.Context;
 import android.net.Uri;
 
+import fr.free.nrw.commons.upload.CountingRequestBody.Listener;
+import fr.free.nrw.commons.upload.UploadService.NotificationUpdateProgressListener;
 import org.wikipedia.csrf.CsrfTokenClient;
 
 import java.io.File;
@@ -31,11 +33,15 @@ public class UploadClient {
         this.csrfTokenClient = csrfTokenClient;
     }
 
-    Observable<UploadResult> uploadFileToStash(Context context, String filename, File file) {
-        RequestBody requestFile = RequestBody
+    Observable<UploadResult> uploadFileToStash(Context context, String filename, File file,
+            NotificationUpdateProgressListener notificationUpdater) {
+        RequestBody requestBody = RequestBody
                 .create(MediaType.parse(FileUtils.getMimeType(context, Uri.parse(file.getPath()))), file);
 
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", filename, requestFile);
+        CountingRequestBody countingRequestBody=new CountingRequestBody(requestBody,
+                (bytesWritten, contentLength) -> notificationUpdater.onProgress(bytesWritten,contentLength));
+
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", filename, countingRequestBody);
         RequestBody fileNameRequestBody = RequestBody.create(okhttp3.MultipartBody.FORM, filename);
         RequestBody tokenRequestBody;
         try {

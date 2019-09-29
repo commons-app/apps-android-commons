@@ -80,7 +80,7 @@ public class UploadService extends HandlerService<Contribution> {
         super("UploadService");
     }
 
-    private class NotificationUpdateProgressListener implements MediaWikiApi.ProgressListener {
+    protected class NotificationUpdateProgressListener implements MediaWikiApi.ProgressListener {
 
         String notificationTag;
         boolean notificationTitleChanged;
@@ -202,23 +202,13 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("CheckResult")
     private void uploadContribution(Contribution contribution) {
-        InputStream fileInputStream;
         Uri localUri = contribution.getLocalUri();
         if (localUri == null || localUri.getPath() == null) {
             Timber.d("localUri/path is null");
             return;
         }
         String notificationTag = localUri.toString();
-        File file1;
-        try {
-            file1 = new File(localUri.getPath());
-            fileInputStream = new FileInputStream(file1);
-        } catch (FileNotFoundException e) {
-            Timber.d("File not found");
-            Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
-            fileNotFound.show();
-            return;
-        }
+        File file1 =new File(localUri.getPath());
 
         Timber.d("Before execution!");
         curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
@@ -235,7 +225,7 @@ public class UploadService extends HandlerService<Contribution> {
         );
 
         Observable.fromCallable(() -> "Temp_" + contribution.hashCode() + filename)
-                .flatMap(stashFilename -> uploadClient.uploadFileToStash(getApplicationContext(), stashFilename, file1))
+                .flatMap(stashFilename -> uploadClient.uploadFileToStash(getApplicationContext(), stashFilename, file1, notificationUpdater))
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .doFinally(() -> {
@@ -250,7 +240,7 @@ public class UploadService extends HandlerService<Contribution> {
                     }
                 })
                 .flatMap(uploadStash -> {
-                    notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    notificationManager.cancel(notificationTag,NOTIFICATION_UPLOAD_IN_PROGRESS);
 
                     Timber.d("Stash upload response 1 is %s", uploadStash.toString());
 
@@ -293,7 +283,7 @@ public class UploadService extends HandlerService<Contribution> {
                     }
                 }, throwable -> {
                     Timber.w(throwable, "Exception during upload");
-                    notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    notificationManager.cancel(notificationTag,NOTIFICATION_UPLOAD_IN_PROGRESS);
                     showFailedNotification(contribution);
                 });
     }
