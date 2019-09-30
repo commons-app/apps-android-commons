@@ -1,23 +1,20 @@
 package fr.free.nrw.commons.upload;
 
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
+
 import android.content.Context;
 import android.net.Uri;
-
-import org.wikipedia.csrf.CsrfTokenClient;
-
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.upload.UploadService.NotificationUpdateProgressListener;
+import io.reactivex.Observable;
 import java.io.File;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-
-import fr.free.nrw.commons.contributions.Contribution;
-import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
+import org.wikipedia.csrf.CsrfTokenClient;
 
 @Singleton
 public class UploadClient {
@@ -31,11 +28,16 @@ public class UploadClient {
         this.csrfTokenClient = csrfTokenClient;
     }
 
-    Observable<UploadResult> uploadFileToStash(Context context, String filename, File file) {
-        RequestBody requestFile = RequestBody
+    Observable<UploadResult> uploadFileToStash(Context context, String filename, File file,
+            NotificationUpdateProgressListener notificationUpdater) {
+        RequestBody requestBody = RequestBody
                 .create(MediaType.parse(FileUtils.getMimeType(context, Uri.parse(file.getPath()))), file);
 
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", filename, requestFile);
+        CountingRequestBody countingRequestBody = new CountingRequestBody(requestBody,
+                (bytesWritten, contentLength) -> notificationUpdater
+                        .onProgress(bytesWritten, contentLength));
+
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", filename, countingRequestBody);
         RequestBody fileNameRequestBody = RequestBody.create(okhttp3.MultipartBody.FORM, filename);
         RequestBody tokenRequestBody;
         try {
