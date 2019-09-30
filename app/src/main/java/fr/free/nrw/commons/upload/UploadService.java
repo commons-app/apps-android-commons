@@ -8,23 +8,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Toast;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.inject.Inject;
-
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
@@ -40,6 +25,13 @@ import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.inject.Inject;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -208,13 +200,14 @@ public class UploadService extends HandlerService<Contribution> {
             return;
         }
         String notificationTag = localUri.toString();
-        File file1 =new File(localUri.getPath());
+        File localFile = new File(localUri.getPath());
 
         Timber.d("Before execution!");
         curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
-        notificationManager.notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
+        notificationManager
+                .notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
         String filename = contribution.getFilename();
 
@@ -225,7 +218,9 @@ public class UploadService extends HandlerService<Contribution> {
         );
 
         Observable.fromCallable(() -> "Temp_" + contribution.hashCode() + filename)
-                .flatMap(stashFilename -> uploadClient.uploadFileToStash(getApplicationContext(), stashFilename, file1, notificationUpdater))
+                .flatMap(stashFilename -> uploadClient
+                        .uploadFileToStash(getApplicationContext(), stashFilename, localFile,
+                                notificationUpdater))
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .doFinally(() -> {
@@ -240,7 +235,7 @@ public class UploadService extends HandlerService<Contribution> {
                     }
                 })
                 .flatMap(uploadStash -> {
-                    notificationManager.cancel(notificationTag,NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
 
                     Timber.d("Stash upload response 1 is %s", uploadStash.toString());
 
@@ -283,7 +278,7 @@ public class UploadService extends HandlerService<Contribution> {
                     }
                 }, throwable -> {
                     Timber.w(throwable, "Exception during upload");
-                    notificationManager.cancel(notificationTag,NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
                     showFailedNotification(contribution);
                 });
     }
