@@ -126,7 +126,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isNetworkErrorOccurred = false;
     private Snackbar snackbar;
     private View view;
-    public NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
+    private NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
     private boolean isDarkTheme;
     private boolean isFABsExpanded;
     private Marker selectedMarker;
@@ -355,7 +355,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void childMapFragmentAttached() {
         Timber.d("Child map fragment attached");
-        nearbyParentFragmentPresenter = new NearbyParentFragmentPresenter
+        nearbyParentFragmentPresenter = NearbyParentFragmentPresenter.getInstance
                 (nearbyListFragment,this, nearbyMapFragment, locationManager);
         nearbyParentFragmentPresenter.nearbyFragmentsAreReady();
         initViews();

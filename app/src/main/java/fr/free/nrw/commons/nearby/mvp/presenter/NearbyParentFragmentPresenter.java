@@ -45,10 +45,11 @@ public class NearbyParentFragmentPresenter
     private boolean isPortraitMode;
     private boolean placesLoadedOnce;
 
-
     private LocationServiceManager locationServiceManager;
 
-    public NearbyParentFragmentPresenter(NearbyParentFragmentContract.NearbyListView nearbyListFragmentView,
+    public static NearbyParentFragmentPresenter presenterInstance;
+
+    private NearbyParentFragmentPresenter(NearbyParentFragmentContract.NearbyListView nearbyListFragmentView,
                                          NearbyParentFragmentContract.View nearbyParentFragmentView,
                                          NearbyMapContract.View nearbyMapFragmentView,
                                          LocationServiceManager locationServiceManager) {
@@ -57,6 +58,25 @@ public class NearbyParentFragmentPresenter
         this.nearbyMapFragmentView = nearbyMapFragmentView;
         this.nearbyMapFragmentView.viewsAreAssignedToPresenter(this);
         this.locationServiceManager = locationServiceManager;
+    }
+
+    // static method to create instance of Singleton class
+    public static NearbyParentFragmentPresenter getInstance(NearbyParentFragmentContract.NearbyListView nearbyListFragmentView,
+                                                            NearbyParentFragmentContract.View nearbyParentFragmentView,
+                                                            NearbyMapContract.View nearbyMapFragmentView,
+                                                            LocationServiceManager locationServiceManager) {
+        if (presenterInstance == null) {
+            presenterInstance = new NearbyParentFragmentPresenter(nearbyListFragmentView,
+                    nearbyParentFragmentView,
+                    nearbyMapFragmentView,
+                    locationServiceManager);
+        }
+        return presenterInstance;
+    }
+
+    // We call this method when we are sure presenterInstance is not null
+    public static NearbyParentFragmentPresenter getInstance() {
+        return presenterInstance;
     }
 
     /**

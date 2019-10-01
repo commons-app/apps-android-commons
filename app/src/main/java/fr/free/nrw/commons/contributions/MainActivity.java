@@ -33,6 +33,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
+import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
@@ -172,7 +173,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
                         // Do all permission and GPS related tasks on tab selected, not on create
-                        ((NearbyParentFragment)contributionsActivityPagerAdapter.getItem(1)).nearbyParentFragmentPresenter.onTabSelected();
+                        NearbyParentFragmentPresenter.getInstance().onTabSelected();
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -254,7 +255,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Means that nearby fragment is visible (not contributions fragment)
             NearbyParentFragment nearbyFragment = (NearbyParentFragment) contributionsActivityPagerAdapter.getItem(1);
-            nearbyFragment.nearbyParentFragmentPresenter.backButtonClicked();
+            NearbyParentFragmentPresenter.getInstance().backButtonClicked();
         } else {
             super.onBackPressed();
         }
