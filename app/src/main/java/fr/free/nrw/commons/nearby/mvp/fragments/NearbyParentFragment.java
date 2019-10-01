@@ -278,7 +278,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         MapboxMapOptions options = new MapboxMapOptions()
                 .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
                 .compassMargins(new int[]{12, 0, 0, 24})
-                //.styleUrl(isDarkTheme ? Style.DARK : Style.OUTDOORS)
                 .logoEnabled(false)
                 .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()

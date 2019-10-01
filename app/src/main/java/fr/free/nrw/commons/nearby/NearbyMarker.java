@@ -11,7 +11,7 @@ public class NearbyMarker extends Marker {
      *
      * @param baseMarkerOptions The builder used to construct the Marker.
      */
-    public NearbyMarker(NearbyBaseMarker baseMarkerOptions, Place place) {
+    NearbyMarker(NearbyBaseMarker baseMarkerOptions, Place place) {
         super(baseMarkerOptions);
         this.place = place;
         this.nearbyBaseMarker = baseMarkerOptions;
