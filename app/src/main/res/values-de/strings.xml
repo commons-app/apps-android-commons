@@ -8,6 +8,7 @@
 * Metalhead64
 * Sujan
 * Sushi
+* Tobi 406
 -->
 <resources>
   <string name="title_activity_explore">Entdecken</string>
@@ -15,6 +16,7 @@
   <string name="preference_category_appearance">Erscheinung</string>
   <string name="preference_category_general">Allgemein</string>
   <string name="preference_category_feedback">Rückmeldung</string>
+  <string name="preference_category_privacy">Datenschutz</string>
   <string name="preference_category_location">Standort</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -278,7 +280,7 @@
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
   <string name="get_directions" fuzzy="true">RICHTUNGEN ABRUFEN</string>
-  <string name="read_article" fuzzy="true">ARTIKEL LESEN</string>
+  <string name="read_article">Artikel lesen</string>
   <string name="notifications_welcome">Willkommen auf Wikimedia Commons, %1$s! Wir sind froh, dass du hier bist.</string>
   <string name="notifications_talk_page_message">%1$s hinterließ eine Nachricht auf deiner Diskussionsseite</string>
   <string name="notifications_thank_you_edit">Vielen Dank für deine Bearbeitung</string>
@@ -287,7 +289,7 @@
   <string name="nearby_directions" fuzzy="true">RICHTUNGEN</string>
   <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
   <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Bewerte uns&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Häufig gestellte Fragen&lt;/u&gt;</string>
   <string name="welcome_skip_button">Tutorial überspringen</string>
