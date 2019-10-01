@@ -161,16 +161,27 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void initViews() {
         Timber.d("init views called");
+        initBottomSheets();
+        loadAnimations();
+        setBottomSheetCallbacks();
+        decideButtonVisibilities();
+        addActionToTitle();
+    }
+
+    /**
+     * Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
+     */
+    private void initBottomSheets() {
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
+    }
 
-        fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_forward);
-        rotate_backward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_backward);
-
+    /**
+     * Defines how bottom sheets will act on click
+     */
+    private void setBottomSheetCallbacks() {
         bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior
                 .BottomSheetCallback() {
             @Override
@@ -210,7 +221,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
             }
         });
+    }
 
+    /**
+     * Loads animations will be used for FABs
+     */
+    private void loadAnimations() {
+        fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_close);
+        rotate_forward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_backward);
+    }
+
+    /**
+     * Fits buttons according to our layout
+     */
+    private void decideButtonVisibilities() {
         // Remove button text if they exceed 1 line or if internal layout has not been built
         // Only need to check for directions button because it is the longest
         if (directionsButtonText.getLineCount() > 1 || directionsButtonText.getLineCount() == 0) {
@@ -219,15 +245,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             commonsButtonText.setVisibility(View.GONE);
             directionsButtonText.setVisibility(View.GONE);
         }
+    }
 
-        title.setOnLongClickListener(view -> {
-                    Utils.copy("place", title.getText().toString(), getContext());
-                    Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-        );
-
+    /**
+     *
+     */
+    private void addActionToTitle() {
         title.setOnClickListener(view -> {
+            Utils.copy("place", title.getText().toString(), getContext());
+            Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             } else {
@@ -435,39 +461,45 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
-
     @Override
     public void populatePlaces(fr.free.nrw.commons.location.LatLng curlatLng, fr.free.nrw.commons.location.LatLng searchLatLng) {
-        boolean checkingAroundCurrentLocation;
         if (curlatLng.equals(searchLatLng)) { // Means we are checking around current location
-            checkingAroundCurrentLocation = true;
-            compositeDisposable.add(Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurrentLocation))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::updateMapMarkers,
-                            throwable -> {
-                                Timber.d(throwable);
-                                // TODO: find out why NPE occurs here
-                                // showErrorMessage(getString(R.string.error_fetching_nearby_places));
-                                setProgressBarVisibility(false);
-                                nearbyParentFragmentPresenter.lockUnlockNearby(false);
-                            }));
+            populatePlacesForCurrentLocation(curlatLng, searchLatLng);
         } else {
-            checkingAroundCurrentLocation = false;
-            compositeDisposable.add(Observable.fromCallable(() -> nearbyController
-                    .loadAttractionsFromLocation(curlatLng, searchLatLng, false, checkingAroundCurrentLocation))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::updateMapMarkersForCustomLocation,
-                            throwable -> {
-                                Timber.d(throwable);
-                                // TODO: find out why NPE occurs here
-                                // showErrorMessage(getString(R.string.error_fetching_nearby_places));
-                                setProgressBarVisibility(false);
-                                nearbyParentFragmentPresenter.lockUnlockNearby(false);
-                            }));
+            populatePlacesForAnotherLocation(curlatLng, searchLatLng);
         }
+    }
+
+    private void populatePlacesForCurrentLocation(fr.free.nrw.commons.location.LatLng curlatLng,
+                                                  fr.free.nrw.commons.location.LatLng searchLatLng) {
+        compositeDisposable.add(Observable.fromCallable(() -> nearbyController
+                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, true))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::updateMapMarkers,
+                        throwable -> {
+                            Timber.d(throwable);
+                            // TODO: find out why NPE occurs here
+                            // showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                            setProgressBarVisibility(false);
+                            nearbyParentFragmentPresenter.lockUnlockNearby(false);
+                        }));
+    }
+
+    private void populatePlacesForAnotherLocation(fr.free.nrw.commons.location.LatLng curlatLng,
+                                                  fr.free.nrw.commons.location.LatLng searchLatLng) {
+        compositeDisposable.add(Observable.fromCallable(() -> nearbyController
+                .loadAttractionsFromLocation(curlatLng, searchLatLng, false, false))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::updateMapMarkersForCustomLocation,
+                        throwable -> {
+                            Timber.d(throwable);
+                            // TODO: find out why NPE occurs here
+                            // showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                            setProgressBarVisibility(false);
+                            nearbyParentFragmentPresenter.lockUnlockNearby(false);
+                        }));
     }
 
     /**
