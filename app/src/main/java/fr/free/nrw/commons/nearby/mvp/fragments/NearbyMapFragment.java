@@ -324,8 +324,8 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
 
         PolygonOptions currentLocationPolygonOptions = new PolygonOptions()
                 .addAll(circle)
-                .strokeColor(Color.parseColor("#55000000"))
-                .fillColor(Color.parseColor("#11000000"));
+                .strokeColor(getResources().getColor(R.color.current_marker_stroke))
+                .fillColor(getResources().getColor(R.color.current_marker_fill));
         mapboxMap.addPolygon(currentLocationPolygonOptions);
     }
 
