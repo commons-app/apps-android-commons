@@ -2,10 +2,8 @@ package fr.free.nrw.commons.nearby.mvp.fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +16,7 @@ import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.annotations.Polygon;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -74,6 +73,8 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
     private MapFragment.OnMapViewReadyCallback mapViewReadyCallback;
     private MapboxMap mapboxMap;
     private MapView map;
+    private Marker currentLocationMarker;
+    private Polygon currentLocationPolygon;
 
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
@@ -317,7 +318,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
                 .position(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
         currentLocationMarkerOptions.setIcon(icon); // Set custom icon
-        Marker currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
+        currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
 
         List<com.mapbox.mapboxsdk.geometry.LatLng> circle = UiUtils.createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
                 curLatLng.getAccuracy() * 2, 100);
@@ -326,7 +327,13 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
                 .addAll(circle)
                 .strokeColor(getResources().getColor(R.color.current_marker_stroke))
                 .fillColor(getResources().getColor(R.color.current_marker_fill));
-        mapboxMap.addPolygon(currentLocationPolygonOptions);
+        currentLocationPolygon = mapboxMap.addPolygon(currentLocationPolygonOptions);
+    }
+
+    @Override
+    public void removeCurrentLocationMarker() {
+        mapboxMap.removeMarker(currentLocationMarker);
+        mapboxMap.removePolygon(currentLocationPolygon);
     }
 
     /**

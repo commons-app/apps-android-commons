@@ -258,7 +258,7 @@ public class NearbyParentFragmentPresenter
 
         } else { // Means location changed slightly, ie user is walking or driving.
             Timber.d("Means location changed slightly");
-            nearbyMapFragmentView.updateMapToTrackPosition(curLatLng);
+            nearbyParentFragmentView.recenterMap(curLatLng);
         }
     }
 
