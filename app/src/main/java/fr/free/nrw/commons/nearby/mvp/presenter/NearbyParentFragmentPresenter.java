@@ -258,7 +258,9 @@ public class NearbyParentFragmentPresenter
 
         } else { // Means location changed slightly, ie user is walking or driving.
             Timber.d("Means location changed slightly");
-            nearbyParentFragmentView.recenterMap(curLatLng);
+            if (!nearbyParentFragmentView.isSearchThisAreaButtonVisible()) { // Do not track users position if the user is checking around
+                nearbyParentFragmentView.recenterMap(curLatLng);
+            }
         }
     }
 

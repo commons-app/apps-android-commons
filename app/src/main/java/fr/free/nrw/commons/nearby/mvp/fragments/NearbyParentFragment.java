@@ -555,6 +555,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public boolean isSearchThisAreaButtonVisible() {
+        if (searchThisAreaButton.getVisibility() == View.VISIBLE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public void setProgressBarVisibility(boolean isVisible) {
         if (isVisible) {
             progressBar.setVisibility(View.VISIBLE);

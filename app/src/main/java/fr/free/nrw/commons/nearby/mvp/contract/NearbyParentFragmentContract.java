@@ -36,6 +36,7 @@ public interface NearbyParentFragmentContract {
         void setTabItemContributions();
         boolean isDetailsBottomSheetVisible();
         void setBottomSheetDetailsSmaller();
+        boolean isSearchThisAreaButtonVisible();
     }
 
     interface NearbyListView {
