@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.nearby.mvp.fragments;
+package fr.free.nrw.commons.nearby.fragments;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -57,8 +57,8 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
-import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;

@@ -1,6 +1,5 @@
-package fr.free.nrw.commons.nearby.mvp.presenter;
+package fr.free.nrw.commons.nearby.presenter;
 
-import android.util.Log;
 import android.view.View;
 
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -12,8 +11,8 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
-import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.nearby.contract.NearbyMapContract;
+import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 
 import fr.free.nrw.commons.wikidata.WikidataEditListener;

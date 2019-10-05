@@ -1,13 +1,6 @@
-package fr.free.nrw.commons.nearby.mvp.contract;
+package fr.free.nrw.commons.nearby.contract;
 
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
 import java.util.List;
@@ -15,7 +8,7 @@ import java.util.List;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 
 /**
  * This interface defines specific View and UserActions for map

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.nearby.mvp.fragments;
+package fr.free.nrw.commons.nearby.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import timber.log.Timber;
 
 public class NearbyListFragment extends CommonsDaggerSupportFragment implements NearbyParentFragmentContract.NearbyListView {

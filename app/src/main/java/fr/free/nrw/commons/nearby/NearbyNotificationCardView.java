@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.nearby.mvp.fragments.NearbyParentFragment;
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;

@@ -1,6 +1,4 @@
-package fr.free.nrw.commons.nearby.mvp.contract;
-
-import android.view.View;
+package fr.free.nrw.commons.nearby.contract;
 
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.maps.MapboxMap;

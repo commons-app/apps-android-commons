@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.nearby.mvp.fragments;
+package fr.free.nrw.commons.nearby.fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -40,9 +40,9 @@ import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.mvp.contract.NearbyMapContract;
-import fr.free.nrw.commons.nearby.mvp.contract.NearbyParentFragmentContract;
-import fr.free.nrw.commons.nearby.mvp.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.nearby.contract.NearbyMapContract;
+import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
