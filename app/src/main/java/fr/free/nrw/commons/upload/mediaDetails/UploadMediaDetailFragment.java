@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,30 +13,17 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.github.chrisbanes.photoview.OnScaleChangedListener;
-import com.github.chrisbanes.photoview.PhotoView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.github.chrisbanes.photoview.PhotoView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -55,9 +42,13 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import javax.inject.Inject;
+import javax.inject.Named;
+import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetailsContract.View {
@@ -222,10 +213,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the recycler veiw
      */
     private void initRecyclerView() {
-        descriptionsAdapter = new DescriptionsAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE,""));
+        descriptionsAdapter = new DescriptionsAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE,""),getUserDefaultLocale());
         descriptionsAdapter.setCallback(this::showInfoAlert);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);
+    }
+
+    /**
+     * returns the default locale value of the user's device
+     * @return
+     */
+    private String getUserDefaultLocale() {
+        return getContext().getResources().getConfiguration().locale.getLanguage();
     }
 
     /**
@@ -395,16 +394,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         presenter.fetchPreviousTitleAndDescription(callback.getIndexInViewFlipper(this));
     }
 
-    private void setDescriptionsInAdapter(List<Description> descriptions){
-        if(descriptions==null){
-            descriptions=new ArrayList<>();
+    private void setDescriptionsInAdapter(List<Description> descriptions) {
+        if (descriptions == null) {
+            descriptions = new ArrayList<>();
         }
-
-        if(descriptions.size()==0){
-            descriptions.add(new Description());
+        if (descriptions.size() == 0) {
+            descriptionsAdapter.addDescription(new Description());
+        } else {
+            descriptionsAdapter.setItems(descriptions);
         }
-
-        descriptionsAdapter.setItems(descriptions);
     }
 
 }
