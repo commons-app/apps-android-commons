@@ -254,7 +254,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Means that nearby fragment is visible (not contributions fragment)
-            NearbyParentFragment nearbyFragment = (NearbyParentFragment) contributionsActivityPagerAdapter.getItem(1);
             NearbyParentFragmentPresenter.getInstance().backButtonClicked();
         } else {
             super.onBackPressed();
