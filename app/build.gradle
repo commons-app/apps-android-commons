@@ -138,7 +138,7 @@ android {
         test.resources.srcDirs += 'src/main/resoures'
     }
 
-    signingConfigs {
+	signingConfigs {
         release
     }
 
@@ -176,7 +176,7 @@ android {
     productFlavors {
         prod {
 
-            applicationId 'fr.free.nrw.commons'
+			applicationId 'fr.free.nrw.commons'
 
             buildConfigField "String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\""
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\""
