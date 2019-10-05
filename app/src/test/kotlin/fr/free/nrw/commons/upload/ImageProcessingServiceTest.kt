@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload
 import android.net.Uri
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils
 import fr.free.nrw.commons.utils.ImageUtilsWrapper
@@ -23,8 +22,6 @@ class u {
     internal var fileUtilsWrapper: FileUtilsWrapper? = null
     @Mock
     internal var imageUtilsWrapper: ImageUtilsWrapper? = null
-    @Mock
-    internal var mwApi: MediaWikiApi? = null
     @Mock
     internal var readFBMD: ReadFBMD?=null
     @Mock

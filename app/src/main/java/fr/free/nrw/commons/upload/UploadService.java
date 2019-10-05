@@ -20,7 +20,6 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
@@ -45,7 +44,6 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
-    @Inject MediaWikiApi mwApi;
     @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
     @Inject ContributionDao contributionDao;
@@ -88,7 +86,6 @@ public class UploadService extends HandlerService<Contribution> {
             this.contribution = contribution;
         }
 
-        @Override
         public void onProgress(long transferred, long total) {
             Timber.d("Uploaded %d of %d", transferred, total);
             if (!notificationTitleChanged) {

@@ -10,25 +10,12 @@ import android.content.SyncResult;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.text.TextUtils;
-
-import org.wikipedia.dataclient.mwapi.MwQueryLogEvent;
-import org.wikipedia.dataclient.mwapi.MwQueryResult;
-import org.wikipedia.util.DateUtil;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.LogEventResult;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UserClient;
 import timber.log.Timber;
 

@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
@@ -32,7 +31,6 @@ import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 public class ImageProcessingService {
     private final FileUtilsWrapper fileUtilsWrapper;
     private final ImageUtilsWrapper imageUtilsWrapper;
-    private final MediaWikiApi mwApi;
     private final ReadFBMD readFBMD;
     private final EXIFReader EXIFReader;
     private final MediaClient mediaClient;
@@ -41,11 +39,10 @@ public class ImageProcessingService {
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
                                   ImageUtilsWrapper imageUtilsWrapper,
-                                  MediaWikiApi mwApi, ReadFBMD readFBMD, EXIFReader EXIFReader,
+                                  ReadFBMD readFBMD, EXIFReader EXIFReader,
                                   MediaClient mediaClient, Context context) {
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
-        this.mwApi = mwApi;
         this.readFBMD = readFBMD;
         this.EXIFReader = EXIFReader;
         this.mediaClient = mediaClient;

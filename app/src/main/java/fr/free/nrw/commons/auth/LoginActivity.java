@@ -43,7 +43,6 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -63,9 +62,6 @@ import retrofit2.Response;
 import timber.log.Timber;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
-
-    @Inject
-    MediaWikiApi mwApi;
 
     @Inject
     SessionManager sessionManager;

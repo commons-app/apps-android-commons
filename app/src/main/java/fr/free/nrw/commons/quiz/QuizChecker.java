@@ -47,7 +47,7 @@ public class QuizChecker {
     /**
      * constructor to set the parameters for quiz
      * @param sessionManager
-     * @param okHttpJsonApiClient instance of MediaWikiApi
+     * @param okHttpJsonApiClient
      */
     @Inject
     public QuizChecker(SessionManager sessionManager,
