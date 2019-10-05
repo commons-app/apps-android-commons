@@ -23,7 +23,7 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
 
     private Place place;
 
-    public NearbyBaseMarker() {
+    NearbyBaseMarker() {
     }
 
     private NearbyBaseMarker(Parcel in) {
