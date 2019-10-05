@@ -70,7 +70,7 @@ public class UploadService extends HandlerService<Contribution> {
         super("UploadService");
     }
 
-    protected class NotificationUpdateProgressListener implements MediaWikiApi.ProgressListener {
+    protected class NotificationUpdateProgressListener{
 
         String notificationTag;
         boolean notificationTitleChanged;
