@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -95,6 +97,12 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                 ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
             }*/
         }
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        quizChecker.initQuizCheck(this);
     }
 
     @Override
@@ -442,7 +450,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     protected void onResume() {
         super.onResume();
         setNotificationCount();
-        quizChecker.initQuizCheck(this);
     }
 
     @Override
