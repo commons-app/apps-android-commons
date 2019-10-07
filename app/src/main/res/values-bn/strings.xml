@@ -325,4 +325,5 @@
   <string name="no_go_back">না, ফিরে যান</string>
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="exif_tag_name_location">অবস্থান</string>
+  <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>
 </resources>

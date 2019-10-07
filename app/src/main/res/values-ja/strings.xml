@@ -344,6 +344,12 @@
   <string name="selfie_answer">自撮り写真には百科事典に使う意味がほとんどありません。あなた自身に関する記事が現時点でウィキペディアに載っていない場合、あなた自身が被写体の画像のアップロードはやめてください。</string>
   <string name="taj_mahal_answer">屋外の記念物と風景はほとんどの国でアップロードが認められています。ただし期間限定で屋外に展示された作品は、しばしば著作権の対象であり、アップロードは禁止されています。</string>
   <string name="screenshot_answer">ウェブサイトのスクリーンショットは二次的製作物と見なされ、当該のウェブサイトに認められる著作権すべてが適用されます。著作者の許諾を得た後で利用することは可能です。そのような許諾のない場合、他人の作品を利用したあなたの製作物は法的に原著作者に所属する未認可の複製物と見なされます。</string>
+  <string name="blurry_image_answer">コモンズが目指すもののひとつに、質の高い画像の収集があります。そのためピンぼけ画像はアップロードしてはいけません。明るさに注意して画質の良い写真の撮影を心がけましょう。</string>
+  <string name="construction_event_answer">コモンズでは技術や文化を表す画像をいつでも募集中です。</string>
+  <string name="warning_for_image_reverts">警告: あなたがこれまでにアップロードした画像の少なくとも %1$s は削除されています。今後、削除対象の画像をアップロードした場合、利用者アカウントは追放される可能性があります。</string>
+  <string name="congratulatory_message_quiz">正解は %1$s でした。おめでとうございます！</string>
+  <string name="warning_for_no_answer">回答するには2件のどちらかを選択</string>
+  <string name="user_not_logged_in">ログインセッションが時間切れになりました。もう一度ログインしてください。</string>
   <string name="quiz_result_share_message">友だちとクイズを共有！</string>
   <string name="continue_message">続行</string>
   <string name="correct">正解</string>
@@ -368,6 +374,7 @@
   <string name="images_uploaded">アップロードした画像</string>
   <string name="image_reverts">却下されなかった画像</string>
   <string name="images_used_by_wiki">使用された画像</string>
+  <string name="achievements_share_message">成果を友だちとシェアしましょう！</string>
   <string name="achievements_info_message">これらの条件を満たすとレベルがアップします。「統計」欄の項目はレベル計算とは無関係です。</string>
   <string name="achievements_revert_limit_message">最低条件：</string>
   <string name="images_uploaded_explanation">コモンズへの投稿画像数。アップロードに使用したアプリは問いません</string>
@@ -396,6 +403,7 @@
   <string name="previous">前へ</string>
   <string name="submit">送信</string>
   <string name="upload_title_duplicate">%1$s という題名のファイルはすでに保存されています。処理をほんとうに続けますか？</string>
+  <string name="map_application_missing">お使いの機器に適したアプリが見つかりませんでした。この機能を使用できる地図アプリをインストールしてください。</string>
   <plurals name="upload_count_title">
     <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
@@ -542,4 +550,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">ロゴ</string>
   <string name="delete_helper_ask_reason_copyright_other">その他</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">その根拠</string>
+  <string name="share_image_via">画像をシェア</string>
+  <string name="no_achievements_yet">まだ投稿をしたことがありません</string>
+  <string name="account_created">アカウントを作成しました</string>
+  <string name="text_copy">テキストをクリップボードにコピー済み</string>
+  <string name="notification_mark_read">通知を既読にしました</string>
+  <string name="some_error">エラーが発生しました</string>
 </resources>

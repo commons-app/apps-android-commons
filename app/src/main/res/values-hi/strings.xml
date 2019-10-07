@@ -6,6 +6,7 @@
 * Anandra
 * Bhatakati aatma
 * Gopalindians
+* Nilesh shukla
 * Nitin1485
 * Prong$31
 * Rajatkatiyar10
@@ -282,7 +283,7 @@
   <string name="nearby_directions" fuzzy="true">दिशा-निर्देश</string>
   <string name="nearby_wikidata" fuzzy="true">विकीडाटा</string>
   <string name="nearby_wikipedia" fuzzy="true">विकीपीडिया</string>
-  <string name="nearby_commons" fuzzy="true">कॉमन्स</string>
+  <string name="nearby_commons">कॉमन्स</string>
   <string name="about_rate_us">&lt;u&gt;हमें रेट करें&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;अक्सर पूछे जाने वाले प्रश्न&lt;/u&gt;</string>
   <string name="welcome_skip_button">प्रशिक्षण छोड़ें</string>
@@ -312,7 +313,8 @@
   <string name="error_loading_categories">श्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="error_loading_subcategories">उपश्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="search_tab_title_media" fuzzy="true">मीडिया</string>
-  <string name="search_tab_title_categories" fuzzy="true">श्रेणियाँ</string>
+  <string name="search_tab_title_categories">श्रेणियाँ</string>
+  <string name="explore_tab_title_featured">निर्वाचित</string>
   <string name="successful_wikidata_edit">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
   <string name="menu_set_wallpaper">वॉलपेपर के रूप में लगायें</string>
   <string name="wallpaper_set_successfully">वॉलपेपर सफलतापूर्वक लग गया!</string>
@@ -337,7 +339,7 @@
   <string name="search_history_deleted">खोज इतिहास मिट गया</string>
   <string name="nominate_delete">हटाने के लिये नामांकन करें</string>
   <string name="Achievements">उपलब्धियाँ</string>
-  <string name="statistics" fuzzy="true">सांख्यिकी</string>
+  <string name="statistics">सांख्यिकी</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त किया</string>
   <string name="statistics_featured">निर्वाचित चित्र</string>
   <string name="level" fuzzy="true">स्तर</string>
