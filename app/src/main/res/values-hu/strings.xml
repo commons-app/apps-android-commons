@@ -124,7 +124,7 @@
   <string name="preference_license">Alapértelmezett licenc</string>
   <string name="use_previous">Előző cím/leírás használata</string>
   <string name="allow_gps">Automatikusan megkapja a jelenlegi helyet</string>
-  <string name="allow_gps_summary" fuzzy="true">Lekéri a jelenlegi helyet, hogy lehetőség legyen kategóriajavaslatokra a nem földrajzi címkézett képeknél.</string>
+  <string name="allow_gps_summary">Ha a a kép nem földrajzi címkézett, lekéri a jelenlegi helyet és ellátja a képet földrajzi címkével. Figyelem: ez felfedheti a tartózkodási helyedet.</string>
   <string name="preference_theme">Éjszakai mód</string>
   <string name="preference_theme_summary">Sötét téma használata</string>
   <string name="license_name_cc_by_sa_four">Nevezd meg! – Így add tovább! 4.0</string>
