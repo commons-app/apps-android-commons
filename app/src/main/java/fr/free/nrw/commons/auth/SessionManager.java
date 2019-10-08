@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import org.wikipedia.login.LoginResult;
 
 import javax.inject.Inject;
@@ -142,6 +144,15 @@ public class SessionManager {
                 .map(a -> accountManager.removeAccount(a, null, null).getResult()))
                 .doOnComplete(() -> {
                     currentAccount = null;
+                    clearImageCache();
                 });
+    }
+
+    /**
+     * Clear all images cache held by Fresco
+     */
+    private void clearImageCache(){
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        imagePipeline.clearCaches();
     }
 }
