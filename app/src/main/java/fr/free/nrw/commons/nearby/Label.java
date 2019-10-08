@@ -42,7 +42,7 @@ public enum Label {
     TEMPLE("Q44539", R.drawable.round_icon_church),
     UNKNOWN("?", R.drawable.round_icon_unknown);
 
-    private static final Map<String, Label> TEXT_TO_DESCRIPTION
+    public static final Map<String, Label> TEXT_TO_DESCRIPTION
             = new HashMap<>(Label.values().length);
 
     static {
