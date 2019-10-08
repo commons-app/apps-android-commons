@@ -403,6 +403,10 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
             vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_bookmark_marker, getContext().getTheme()
             );
+        } else if (!place.pic.trim().isEmpty()) {
+            vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_green, getContext().getTheme()
+            );
         } else {
             vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_map_marker, getContext().getTheme()
