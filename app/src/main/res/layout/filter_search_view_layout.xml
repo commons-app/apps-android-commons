@@ -1,0 +1,21 @@
+<LinearLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/search_view_layout"
+    android:paddingVertical="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingStart="15dp"
+        android:text="Place type:"/>
+
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
+    </SearchView>
+
+</LinearLayout>
