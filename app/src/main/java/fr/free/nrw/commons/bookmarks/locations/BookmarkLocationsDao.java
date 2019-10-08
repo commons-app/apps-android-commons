@@ -156,7 +156,8 @@ public class BookmarkLocationsDao {
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
                 location,
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORY)),
-                builder.build()
+                builder.build(),
+                null
         );
     }
 

@@ -8,17 +8,21 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +32,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxSearchView;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -38,6 +45,9 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.Style;
+
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -54,12 +64,14 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.FragmentUtils;
+import fr.free.nrw.commons.utils.LayoutUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -73,6 +85,7 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
+import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 
@@ -105,6 +118,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.map_progress_bar) ProgressBar progressBar;
     @BindView(R.id.container_sheet) FrameLayout frameLayout;
     @BindView(R.id.loading_nearby_list) ConstraintLayout loadingNearbyLayout;
+
+    @BindView(R.id.choice_chip_exists)
+    Chip chipExists;
+    @BindView(R.id.choice_chip_needs_photo)
+    Chip chipNeedsPhoto;
+    @BindView(R.id.search_view)
+    SearchView searchView;
+    @BindView(R.id.search_list_view)
+    ListView searchListView;
+    @BindView(R.id.nearby_filter_list_layout)
+    LinearLayout nearbyFilterListLayout;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -156,6 +180,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         super.onResume();
         nearbyMapFragment = getNearbyMapFragment();
         nearbyListFragment = getListFragment();
+        initNearbyFilter();
     }
 
 
@@ -176,6 +201,26 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
+    }
+
+    public void initNearbyFilter() {
+
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        for(Label label : TEXT_TO_DESCRIPTION.values())
+            stringArrayList.add(label.toString());
+
+        ArrayAdapter adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,stringArrayList);
+        searchListView.setAdapter(adapter);
+        LayoutUtils.setLayoutHeightAllignedToWidth(1, nearbyFilterListLayout);
+
+        compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
+                .takeUntil(RxView.detaches(searchView))
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( query -> {
+                            Log.d("deneme4","query:"+query);
+                        }
+                ));
     }
 
     /**
