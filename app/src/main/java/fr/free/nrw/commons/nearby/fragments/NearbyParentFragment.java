@@ -66,6 +66,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyController;
+import fr.free.nrw.commons.nearby.NearbyFilterSearchListViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
@@ -119,16 +120,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.container_sheet) FrameLayout frameLayout;
     @BindView(R.id.loading_nearby_list) ConstraintLayout loadingNearbyLayout;
 
-    @BindView(R.id.choice_chip_exists)
-    Chip chipExists;
-    @BindView(R.id.choice_chip_needs_photo)
-    Chip chipNeedsPhoto;
-    @BindView(R.id.search_view)
-    SearchView searchView;
-    @BindView(R.id.search_list_view)
-    ListView searchListView;
-    @BindView(R.id.nearby_filter_list_layout)
-    LinearLayout nearbyFilterListLayout;
+    @BindView(R.id.choice_chip_exists) Chip chipExists;
+    @BindView(R.id.choice_chip_needs_photo) Chip chipNeedsPhoto;
+    @BindView(R.id.search_view) SearchView searchView;
+    @BindView(R.id.search_list_view) ListView searchListView;
+    @BindView(R.id.nearby_filter_list_layout) LinearLayout nearbyFilterListLayout;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -205,12 +201,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     public void initNearbyFilter() {
 
-        ArrayList<String> stringArrayList = new ArrayList<>();
-        for(Label label : TEXT_TO_DESCRIPTION.values())
-            stringArrayList.add(label.toString());
-
-        ArrayAdapter adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,stringArrayList);
-        searchListView.setAdapter(adapter);
+        NearbyFilterSearchListViewAdapter nearbyFilterSearchListViewAdapter
+                = new NearbyFilterSearchListViewAdapter(getContext(),new ArrayList<>(TEXT_TO_DESCRIPTION.values()));
+        searchListView.setAdapter(nearbyFilterSearchListViewAdapter);
         LayoutUtils.setLayoutHeightAllignedToWidth(1, nearbyFilterListLayout);
 
         compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
@@ -219,6 +212,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe( query -> {
                             Log.d("deneme4","query:"+query);
+                            if (!query.equals("")) {
+                                Log.d("deneme4","query if:"+query);
+                                nearbyFilterListLayout.setVisibility(View.VISIBLE);
+                            } else {
+                                nearbyFilterListLayout.setVisibility(View.GONE);
+                            }
                         }
                 ));
     }

@@ -19,6 +19,4 @@
         android:background="@color/status_bar_blue">
     </RelativeLayout>
 
-    <include layout="@layout/nearby_filter_list" />
-
 </LinearLayout>

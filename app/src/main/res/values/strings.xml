@@ -582,8 +582,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="notification_mark_read">Notification marked as read</string>
   <string name="some_error">There was some error!</string>
   <string name="place_state">Place state:</string>
-  <string name="place_state_exists">Exists:</string>
-  <string name="place_state_needs_photo">Needs photo:</string>
+  <string name="place_state_exists">Exists</string>
+  <string name="place_state_needs_photo">Needs photo</string>
   <string name="place_type">Place type:</string>
   <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
 </resources>
