@@ -4,13 +4,14 @@
     android:orientation="horizontal"
     android:layout_gravity="center_vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingStart="15dp"
-        android:text="@string/place_state"/>
+        android:text="@string/place_state"
+        android:textColor="@color/white"/>
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/choice_chip_group"

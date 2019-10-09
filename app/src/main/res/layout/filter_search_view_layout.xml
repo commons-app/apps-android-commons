@@ -9,13 +9,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingStart="15dp"
-        android:text="Place type:"/>
+        android:text="@string/place_type"
+        android:textColor="@color/white"/>
 
     <SearchView
         android:id="@+id/search_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        >
+        android:tint="@color/white"
+        android:queryHint="@string/nearby_search_hint"
+        android:searchIcon="@drawable/ic_search_white_24dp">
     </SearchView>
 
 </LinearLayout>
