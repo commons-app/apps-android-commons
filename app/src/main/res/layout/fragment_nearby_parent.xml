@@ -5,40 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:orientation="vertical"
-        >
-
-        <include
-            android:id="@+id/chip_view"
-            layout="@layout/filter_chip_view"
-            android:background="@color/deleteRed"
-            />
-
-        <include android:id="@+id/search_view_layout" layout="@layout/filter_search_view_layout" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/search_view_layout"
-            android:background="@color/status_bar_blue">
-        </RelativeLayout>
-
-        <include layout="@layout/nearby_filter_list" />
-
-    </LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/status_bar_blue">
+        android:background="@color/status_bar_blue"
+        android:id="@+id/map_layout">
 
         <LinearLayout
             android:orientation="vertical" android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <include layout="@layout/nearby_filter_all_items" />
 
             <FrameLayout
                 android:id="@+id/container"
