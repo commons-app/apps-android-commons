@@ -10,10 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -24,21 +20,81 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import fr.free.nrw.commons.utils.BiMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 import timber.log.Timber;
 
 public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
 
+    private final String userDefaultLocale;
     private List<Description> descriptions;
     private Callback callback;
 
     private BiMap<AdapterView, String> selectedLanguages;
     private String savedLanguageValue;
+    private List<String> languageCodesList=new ArrayList<>();
+    private List<String> languageNamesList=new ArrayList<>();
 
-    public DescriptionsAdapter(String savedLanguageValue) {
+    public DescriptionsAdapter(String savedLanguageValue, String userDefaultLocale) {
         descriptions = new ArrayList<>();
         selectedLanguages = new BiMap<>();
+        prepareLanguages();
+        this.userDefaultLocale=userDefaultLocale;
         this.savedLanguageValue = savedLanguageValue;
     }
+
+    private void prepareLanguages() {
+        List<Language> languages = getLocaleSupportedByDevice();
+
+        for(Language language: languages) {
+            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
+                languageNamesList.add(language.getLocale().getDisplayName());
+                languageCodesList.add(language.getLocale().getLanguage());
+            }
+        }
+    }
+
+    private List<Language> getLocaleSupportedByDevice() {
+        List<Language> languages = new ArrayList<>();
+        Locale[] localesArray = Locale.getAvailableLocales();
+        for (Locale locale : localesArray) {
+            languages.add(new Language(locale));
+        }
+
+        Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
+                .compareTo(t1.getLocale().getDisplayName()));
+        return languages;
+    }
+
+    int getIndexOfLanguageCode(String languageCode) {
+        return languageCodesList.indexOf(languageCode);
+    }
+
+    public void addDescription(Description description) {
+        if (description.getSelectedLanguageIndex() == -1) {
+            int localeIndex = 0;
+            String languageValue;
+            if (!TextUtils.isEmpty(savedLanguageValue)) {
+                // If user has chosen a default language from settings activity savedLanguageValue is not null
+                localeIndex = getIndexOfLanguageCode(savedLanguageValue);
+                languageValue = savedLanguageValue;
+            } else {
+                if (descriptions.isEmpty()) {//If this is the first description, lets let him add the description of his locale
+                    localeIndex =
+                            getIndexOfLanguageCode(
+                                    userDefaultLocale);
+                }
+                languageValue = languageCodesList.get(localeIndex);
+            }
+            description.setSelectedLanguageIndex(localeIndex);
+            description.setLanguageCode(languageValue);
+        }
+        this.descriptions.add(description);
+        notifyItemInserted(descriptions.size());
+    }
+
 
     public void setCallback(Callback callback) {
         this.callback = callback;
@@ -74,11 +130,6 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
      */
     public List<Description> getDescriptions() {
         return descriptions;
-    }
-
-    public void addDescription(Description description) {
-        this.descriptions.add(description);
-        notifyItemInserted(descriptions.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -127,7 +178,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
             descItemEditText.addTextChangedListener(new AbstractTextWatcher(
                     descriptionText -> descriptions.get(position)
                             .setDescriptionText(descriptionText)));
-            initLanguageSpinner(position, description);
+            initLanguageSpinner(description);
 
             //If the description was manually added by the user, it deserves focus, if not, let the user decide
             if (description.isManuallyAdded()) {
@@ -139,14 +190,14 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
 
         /**
          * Extracted out the function to init the language spinner with different system supported languages
-         * @param position
          * @param description
          */
-        private void initLanguageSpinner(int position, Description description) {
+        private void initLanguageSpinner(Description description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(
                     spinnerDescriptionLanguages.getContext(),
-                    R.layout.row_item_languages_spinner, selectedLanguages,
-                    savedLanguageValue);
+                    R.layout.row_item_languages_spinner, selectedLanguages);
+            languagesAdapter.setLanguageCodes(languageCodesList);
+            languagesAdapter.setLanguageNames(languageNamesList);
             languagesAdapter.notifyDataSetChanged();
             spinnerDescriptionLanguages.setAdapter(languagesAdapter);
 
@@ -169,25 +220,8 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
                 public void onNothingSelected(AdapterView<?> adapterView) {
                 }
             });
-
-            if (description.getSelectedLanguageIndex() == -1) {
-                if (savedLanguageValue != null) {
-                    // If user has chosen a default language from settings activity savedLanguageValue is not null
-                    spinnerDescriptionLanguages.setSelection(languagesAdapter.getIndexOfLanguageCode(savedLanguageValue));
-                } else {
-                    if (position == 0) {
-                        int defaultLocaleIndex = languagesAdapter
-                                .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages.getContext());
-                        spinnerDescriptionLanguages.setSelection(defaultLocaleIndex, true);
-                    } else {
-                        spinnerDescriptionLanguages.setSelection(0);
-                    }
-                }
-
-            } else {
-                spinnerDescriptionLanguages.setSelection(description.getSelectedLanguageIndex());
-                selectedLanguages.put(spinnerDescriptionLanguages, description.getLanguageCode());
-            }
+            spinnerDescriptionLanguages.setSelection(description.getSelectedLanguageIndex());
+            selectedLanguages.put(spinnerDescriptionLanguages, description.getLanguageCode());
         }
 
         /**
