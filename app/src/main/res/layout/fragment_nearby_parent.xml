@@ -15,6 +15,11 @@
             layout="@layout/nearby_filter_all_items"
             android:id="@+id/nearby_filter"/>
 
+        <include layout="@layout/nearby_filter_list"
+            android:layout_below="@id/nearby_filter"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
