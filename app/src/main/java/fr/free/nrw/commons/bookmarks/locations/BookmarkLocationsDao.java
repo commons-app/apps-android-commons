@@ -174,6 +174,7 @@ public class BookmarkLocationsDao {
         cv.put(BookmarkLocationsDao.Table.COLUMN_COMMONS_LINK, bookmarkLocation.siteLinks.getCommonsLink().toString());
         cv.put(BookmarkLocationsDao.Table.COLUMN_LAT, bookmarkLocation.location.getLatitude());
         cv.put(BookmarkLocationsDao.Table.COLUMN_LONG, bookmarkLocation.location.getLongitude());
+        cv.put(BookmarkLocationsDao.Table.COLUMN_PIC, bookmarkLocation.pic);
         return cv;
     }
 
