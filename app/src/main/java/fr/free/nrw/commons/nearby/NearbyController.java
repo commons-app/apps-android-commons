@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +33,10 @@ public class NearbyController {
     public static LatLng currentLocation; // Users latest fetched location
     public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
     public static double latestSearchRadius = 10.0; // Any last search radius except closest result search
+
+    public static Map<String, Marker> markerLabelMap;
+    public static Map<Boolean, Marker> markerExistsMap;
+    public static Map<Boolean, Marker> markerNeedPicMap;
 
     @Inject
     public NearbyController(NearbyPlaces nearbyPlaces) {

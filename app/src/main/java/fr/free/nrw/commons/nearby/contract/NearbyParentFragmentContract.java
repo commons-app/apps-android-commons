@@ -49,6 +49,7 @@ public interface NearbyParentFragmentContract {
         void setActionListeners(JsonKvStore applicationKvStore);
         void backButtonClicked();
         MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
+        void filterByMarkerType(String placeType);
     }
     
     interface ViewsAreReadyCallback {
