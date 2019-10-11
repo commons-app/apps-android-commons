@@ -1,14 +1,18 @@
 package fr.free.nrw.commons.nearby.presenter;
 
+import android.util.Log;
 import android.view.View;
 
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
+import java.util.List;
+
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyMapContract;
@@ -343,6 +347,18 @@ public class NearbyParentFragmentPresenter
                 nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
             }
         };
+    }
+
+    @Override
+    public void filterByMarkerType(String placeType) {
+        List<NearbyBaseMarker> nearbyBaseMarkerList = nearbyMapFragmentView.getBaseMarkerOptions();
+        for (NearbyBaseMarker nearbyBaseMarker : nearbyBaseMarkerList) {
+            // filter from existing markers
+            if (!nearbyBaseMarker.getPlace().getLabel().toString().equals(placeType)) {
+                Log.d("deneme44",nearbyBaseMarker.getPlace().name);
+                nearbyMapFragmentView.filterMarkersByLabels(nearbyBaseMarker);
+            }
+        }
     }
 
     public View.OnClickListener onSearchThisAreaClicked() {

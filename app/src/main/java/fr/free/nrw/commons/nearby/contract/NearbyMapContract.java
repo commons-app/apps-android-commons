@@ -27,5 +27,7 @@ public interface NearbyMapContract {
         void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
         void centerMapToPlace(Place place, boolean isPortraitMode);
         void removeCurrentLocationMarker();
+        List<NearbyBaseMarker> getBaseMarkerOptions();
+        void filterMarkersByLabels(NearbyBaseMarker nearbyBaseMarker);
     }
 }

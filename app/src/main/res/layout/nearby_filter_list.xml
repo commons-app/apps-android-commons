@@ -3,23 +3,12 @@
     android:id="@+id/nearby_filter_list_layout"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
-    android:layout_marginStart="72dp"
-    android:elevation="6dp">
+    android:elevation="8dp"
+    android:background="@color/white">
 
-    <ListView
-        android:id="@+id/selected_items_list_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_list_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
