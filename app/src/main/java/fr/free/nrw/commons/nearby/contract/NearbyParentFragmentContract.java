@@ -8,6 +8,7 @@ import java.util.List;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.Place;
 
 public interface NearbyParentFragmentContract {
@@ -49,7 +50,7 @@ public interface NearbyParentFragmentContract {
         void setActionListeners(JsonKvStore applicationKvStore);
         void backButtonClicked();
         MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
-        void filterByMarkerType(String placeType);
+        void filterByMarkerType(List<Label> selectedLabels);
     }
     
     interface ViewsAreReadyCallback {

@@ -12,6 +12,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.Place;
@@ -350,15 +351,15 @@ public class NearbyParentFragmentPresenter
     }
 
     @Override
-    public void filterByMarkerType(String placeType) {
-        List<NearbyBaseMarker> nearbyBaseMarkerList = nearbyMapFragmentView.getBaseMarkerOptions();
-        for (NearbyBaseMarker nearbyBaseMarker : nearbyBaseMarkerList) {
+    public void filterByMarkerType(List<Label> selectedLabels) {
+        //List<NearbyBaseMarker> nearbyBaseMarkerList = nearbyMapFragmentView.getBaseMarkerOptions();
+        //for (NearbyBaseMarker nearbyBaseMarker : nearbyBaseMarkerList) {
             // filter from existing markers
-            if (!nearbyBaseMarker.getPlace().getLabel().toString().equals(placeType)) {
-                Log.d("deneme44",nearbyBaseMarker.getPlace().name);
-                nearbyMapFragmentView.filterMarkersByLabels(nearbyBaseMarker);
-            }
-        }
+             //if (!nearbyBaseMarker.getPlace().getLabel().toString().equals(placeType)) {
+                //Log.d("deneme44",nearbyBaseMarker.getPlace().name);
+                nearbyMapFragmentView.filterMarkersByLabels(selectedLabels);
+            //}
+        //}
     }
 
     public View.OnClickListener onSearchThisAreaClicked() {

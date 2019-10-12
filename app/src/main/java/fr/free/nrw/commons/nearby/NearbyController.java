@@ -34,7 +34,7 @@ public class NearbyController {
     public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
     public static double latestSearchRadius = 10.0; // Any last search radius except closest result search
 
-    public static Map<String, Marker> markerLabelMap;
+    public static List<MarkerPlaceGroup> markerLabelList = new ArrayList<>();
     public static Map<Boolean, Marker> markerExistsMap;
     public static Map<Boolean, Marker> markerNeedPicMap;
 

@@ -2,8 +2,6 @@ package fr.free.nrw.commons.nearby.fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -15,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
-import com.mapbox.geojson.Feature;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -29,7 +26,6 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 
 import java.util.ArrayList;
@@ -43,6 +39,8 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyMarker;
@@ -345,14 +343,30 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void filterMarkersByLabels(NearbyBaseMarker nearbyBaseMarker) {
-        Log.d("deneme55","name:"+nearbyBaseMarker.getPlace().getLabel().toString());
+    public void filterMarkersByLabels(List<Label> selectedLabels) {
+        /*Log.d("deneme55","name:"+nearbyBaseMarker.getPlace().getLabel().toString());
         VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
                 getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
         Bitmap icon = UiUtils.getBitmap(vectorDrawable);
 
-        NearbyController.markerLabelMap.get(nearbyBaseMarker.getPlace().getLabel().toString()).setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+        NearbyController.markerLabelList.get(nearbyBaseMarker.getPlace().getLabel().toString()).setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+        */
 
+        if (selectedLabels.size() == 0 ) { // If nothing is selected, display all
+            for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
+                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+            }
+        } else {
+            // First greyed out all markers
+            greyOutAllMarkers();
+            for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
+                for (Label label : selectedLabels) {
+                    if (markerPlaceGroup.getPlace().getLabel().toString().equals(label.toString())) {
+                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -374,13 +388,17 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         Log.d("deneme66","markers:"+markers.get(0).getTitle()+", baseMarkers:"+baseMarkerList.get(0).getPlace().getName());
         Log.d("deneme66","markers:"+markers.get(1).getTitle()+", baseMarkers:"+baseMarkerList.get(1).getPlace().getName());
 
-        NearbyController.markerLabelMap = new HashMap<String, Marker>();
+        //NearbyController.markerLabelList = new HashMap<String, MarkerPlaceGroup>();
         NearbyController.markerExistsMap = new HashMap<Boolean, Marker>();
         NearbyController.markerNeedPicMap = new HashMap<Boolean, Marker>();
 
         for (int i = 0; i < baseMarkerList.size(); i++) {
             // An example item: <Park, marker of that park>
-            NearbyController.markerLabelMap.put(baseMarkerList.get(i).getPlace().getLabel().toString(), markers.get(i));
+            //NearbyController.markerLabelList.put(baseMarkerList.get(i).getPlace().getLabel().toString(), markers.get(i));
+            NearbyBaseMarker nearbyBaseMarker = baseMarkerList.get(i);
+            NearbyController.markerLabelList.add(
+                    new MarkerPlaceGroup(markers.get(i), false, nearbyBaseMarker.getPlace()));
+            //TODO: fix bookmark location
             NearbyController.markerExistsMap.put((baseMarkerList.get(i).getPlace().hasWikidataLink()), markers.get(i));
             NearbyController.markerNeedPicMap.put(((baseMarkerList.get(i).getPlace().pic == null) ? true : false), markers.get(i));
         }
@@ -473,6 +491,16 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    public void greyOutAllMarkers() {
+        VectorDrawableCompat vectorDrawable;
+            vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
+        Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+        for (Marker marker : mapboxMap.getMarkers()) {
+            marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+        }
+    }
+
     /**
      * Centers the map in nearby fragment to a given place
      * @param place is new center of the map
@@ -495,7 +523,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
                 .build();
         mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
     }
-
 
 }
 
