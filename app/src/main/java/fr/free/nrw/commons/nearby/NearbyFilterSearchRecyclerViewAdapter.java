@@ -1,12 +1,14 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 
 public class NearbyFilterSearchRecyclerViewAdapter
         extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>
@@ -24,6 +27,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
     private Context context;
     private ArrayList<Label> labels;
     private ArrayList<Label> displayedLabels;
+    private ArrayList<Label> selectedLabels = new ArrayList<>();
 
     public NearbyFilterSearchRecyclerViewAdapter(Context context, ArrayList<Label> labels) {
         this.context = context;
@@ -33,13 +37,15 @@ public class NearbyFilterSearchRecyclerViewAdapter
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        public TextView placeLabel;
-        public ImageView placeIcon;
+        public TextView placeTypeLabel;
+        public ImageView placeTypeIcon;
+        public LinearLayout placeTypeLayout;
 
         public RecyclerViewHolder(View view) {
             super(view);
-            placeLabel = view.findViewById(R.id.place_text);
-            placeIcon = view.findViewById(R.id.place_icon);
+            placeTypeLabel = view.findViewById(R.id.place_text);
+            placeTypeIcon = view.findViewById(R.id.place_icon);
+            placeTypeLayout = view.findViewById(R.id.search_list_item);
         }
     }
 
@@ -53,8 +59,20 @@ public class NearbyFilterSearchRecyclerViewAdapter
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         Label label = displayedLabels.get(position);
-        holder.placeIcon.setImageResource(label.getIcon());
-        holder.placeLabel.setText(label.toString());
+        holder.placeTypeIcon.setImageResource(label.getIcon());
+        holder.placeTypeLabel.setText(label.toString());
+
+        holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? Color.BLUE : Color.WHITE);
+        holder.placeTypeLayout.setOnClickListener(view -> {
+            if (label.isSelected()) {
+                selectedLabels.remove(label);
+            } else {
+                selectedLabels.add(label);
+            }
+            label.setSelected(!label.isSelected());
+            holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? Color.BLUE : Color.WHITE);
+            NearbyParentFragmentPresenter.getInstance().filterByMarkerType(selectedLabels);
+        });
     }
 
     @Override
@@ -116,8 +134,8 @@ public class NearbyFilterSearchRecyclerViewAdapter
             convertView = inflater.inflate(R.layout.nearby_search_list_item, null);
 
             viewHolder = new RecyclerViewHolder();
-            viewHolder.placeLabel = convertView.findViewById(R.id.place_text);
-            viewHolder.placeIcon = convertView.findViewById(R.id.place_icon);
+            viewHolder.placeTypeLabel = convertView.findViewById(R.id.place_text);
+            viewHolder.placeTypeIcon = convertView.findViewById(R.id.place_icon);
             convertView.setTag(viewHolder);
 
         }
@@ -128,8 +146,8 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
         Label label = displayedLabels.get(position);
         if(label != null){
-            viewHolder.placeIcon.setImageResource(label.getIcon());
-            viewHolder.placeLabel.setText(label.toString());
+            viewHolder.placeTypeIcon.setImageResource(label.getIcon());
+            viewHolder.placeTypeLabel.setText(label.toString());
         }
         return convertView;
     }

@@ -54,6 +54,7 @@ public enum Label {
     private final String text;
     @DrawableRes
     private final int icon;
+    private boolean selected;
 
     Label(String text, @DrawableRes int icon) {
         this.text = text;
@@ -63,6 +64,14 @@ public enum Label {
     Label(Parcel in) {
         this.text = in.readString();
         this.icon = in.readInt();
+    }
+
+    public void setSelected(boolean isSelected) {
+        this.selected = isSelected;
+    }
+
+    public boolean isSelected() {
+        return selected;
     }
 
     public String getText() {
