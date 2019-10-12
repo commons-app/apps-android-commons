@@ -29,7 +29,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.wikidata.WikidataClient;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -58,8 +57,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @Inject @Named("default_preferences") JsonKvStore kvStore;
     @Inject ContributionController controller;
-    @Inject
-    WikidataClient wikidataClient;
 
     private Animation fab_close;
     private Animation fab_open;
