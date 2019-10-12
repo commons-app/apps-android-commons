@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import androidx.exifinterface.media.ExifInterface.*
-import junit.framework.Assert.assertTrue
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.*
 

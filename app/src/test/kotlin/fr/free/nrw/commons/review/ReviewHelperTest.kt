@@ -4,8 +4,8 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Observable
 import io.reactivex.Single
-import junit.framework.Assert.assertNotNull
-import junit.framework.Assert.assertNull
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
