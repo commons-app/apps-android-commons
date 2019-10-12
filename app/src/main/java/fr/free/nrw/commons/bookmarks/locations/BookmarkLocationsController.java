@@ -8,19 +8,21 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.nearby.Place;
 
 @Singleton
-public class BookmarkLocationsController {
+class BookmarkLocationsController {
 
     @Inject
     BookmarkLocationsDao bookmarkLocationDao;
 
     @Inject
-    public BookmarkLocationsController() {}
+    public BookmarkLocationsController() {
+        // for injector
+    }
 
     /**
      * Load from DB the bookmarked locations
      * @return a list of Place objects.
      */
-    public List<Place> loadFavoritesLocations() {
+    List<Place> loadFavoritesLocations() {
         return bookmarkLocationDao.getAllBookmarksLocations();
     }
 }

@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.bookmarks;
 
 import android.content.Context;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,9 +14,9 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 
-public class BookmarksPagerAdapter extends FragmentPagerAdapter {
+class BookmarksPagerAdapter extends FragmentPagerAdapter {
 
-    private ArrayList<BookmarkPages> pages;
+    private final ArrayList<BookmarkPages> pages;
 
     BookmarksPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
@@ -32,6 +33,7 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    @NonNull
     public Fragment getItem(int position) {
         return pages.get(position).getPage();
     }
@@ -51,7 +53,7 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
      * Return the Adapter used to display the picture gridview
      * @return adapter
      */
-    public ListAdapter getMediaAdapter() {
+    ListAdapter getMediaAdapter() {
         BookmarkPicturesFragment fragment = (BookmarkPicturesFragment)(pages.get(0).getPage());
         return fragment.getAdapter();
     }
@@ -59,7 +61,7 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
     /**
      * Update the pictures list for the bookmark fragment
      */
-    public void requestPictureListUpdate() {
+    void requestPictureListUpdate() {
         BookmarkPicturesFragment fragment = (BookmarkPicturesFragment)(pages.get(0).getPage());
         fragment.onResume();
     }

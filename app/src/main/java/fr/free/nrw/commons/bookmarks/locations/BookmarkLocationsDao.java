@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
+import fr.free.nrw.commons.data.DAOException;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.Place;
@@ -38,24 +39,20 @@ public class BookmarkLocationsDao {
     @NonNull
     public List<Place> getAllBookmarksLocations() {
         List<Place> items = new ArrayList<>();
-        Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
-        try {
-            cursor = db.query(
+        try (Cursor cursor = db.query(
                     BookmarkLocationsContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     null,
                     new String[]{},
-                    null);
+                    null)) {
+
             while (cursor != null && cursor.moveToNext()) {
                 items.add(fromCursor(cursor));
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
             db.release();
         }
         return items;
@@ -87,7 +84,7 @@ public class BookmarkLocationsDao {
         try {
             db.insert(BASE_URI, toContentValues(bookmarkLocation));
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             db.release();
         }
@@ -103,7 +100,7 @@ public class BookmarkLocationsDao {
         try {
             db.delete(BookmarkLocationsContentProvider.uriForName(bookmarkLocation.name), null, null);
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             db.release();
         }
@@ -116,25 +113,21 @@ public class BookmarkLocationsDao {
      * @return boolean : is Place in database ?
      */
     public boolean findBookmarkLocation(Place bookmarkLocation) {
-        Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
-        try {
-            cursor = db.query(
+        try (Cursor cursor = db.query(
                     BookmarkLocationsContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     Table.COLUMN_NAME + "=?",
                     new String[]{bookmarkLocation.name},
-                    null);
+                    null)) {
+
             if (cursor != null && cursor.moveToFirst()) {
                 return true;
             }
         } catch (RemoteException e) {
             // This feels lazy, but to hell with checked exceptions. :)
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
             db.release();
         }
         return false;
@@ -191,7 +184,7 @@ public class BookmarkLocationsDao {
         static final String COLUMN_COMMONS_LINK = "location_commons_link";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-        public static final String[] ALL_FIELDS = {
+        static final String[] ALL_FIELDS = {
                 COLUMN_NAME,
                 COLUMN_DESCRIPTION,
                 COLUMN_CATEGORY,
@@ -208,18 +201,21 @@ public class BookmarkLocationsDao {
         static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
         static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
-                + COLUMN_NAME + " STRING PRIMARY KEY,"
-                + COLUMN_DESCRIPTION + " STRING,"
-                + COLUMN_CATEGORY + " STRING,"
-                + COLUMN_LABEL_TEXT + " STRING,"
+                + COLUMN_NAME + " TEXT PRIMARY KEY,"
+                + COLUMN_DESCRIPTION + " TEXT,"
+                + COLUMN_CATEGORY + " TEXT,"
+                + COLUMN_LABEL_TEXT + " TEXT,"
                 + COLUMN_LABEL_ICON + " INTEGER,"
                 + COLUMN_LAT + " DOUBLE,"
                 + COLUMN_LONG + " DOUBLE,"
-                + COLUMN_IMAGE_URL + " STRING,"
-                + COLUMN_WIKIPEDIA_LINK + " STRING,"
-                + COLUMN_WIKIDATA_LINK + " STRING,"
-                + COLUMN_COMMONS_LINK + " STRING"
+                + COLUMN_IMAGE_URL + " TEXT,"
+                + COLUMN_WIKIPEDIA_LINK + " TEXT,"
+                + COLUMN_WIKIDATA_LINK + " TEXT,"
+                + COLUMN_COMMONS_LINK + " TEXT"
                 + ");";
+
+        private Table() {
+        }
 
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);
@@ -250,7 +246,6 @@ public class BookmarkLocationsDao {
             if (from == 8) {
                 from++;
                 onUpdate(db, from, to);
-                return;
             }
         }
     }

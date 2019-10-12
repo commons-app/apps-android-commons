@@ -2,12 +2,10 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.net.Uri;
 
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
-
 public class Bookmark {
     private Uri contentUri;
-    private String mediaName;
-    private String mediaCreator;
+    private final String mediaName;
+    private final String mediaCreator;
 
     public Bookmark(String mediaName, String mediaCreator, Uri contentUri) {
         this.contentUri = contentUri;

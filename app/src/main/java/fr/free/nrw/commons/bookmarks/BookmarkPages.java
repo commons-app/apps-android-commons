@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 /**
  * Data class for handling a bookmark fragment and it title
  */
-public class BookmarkPages {
-    private Fragment page;
-    private String title;
+class BookmarkPages {
+    private final Fragment page;
+    private final String title;
 
     BookmarkPages(Fragment fragment, String title) {
         this.title = title;

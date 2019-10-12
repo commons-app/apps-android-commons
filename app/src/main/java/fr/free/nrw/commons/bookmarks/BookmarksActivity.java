@@ -2,7 +2,6 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.FragmentManager;

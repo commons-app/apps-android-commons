@@ -41,7 +41,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     private static final int TIMEOUT_SECONDS = 15;
 
     private GridViewAdapter gridAdapter;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @BindView(R.id.statusMessage) TextView statusTextView;
     @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
@@ -71,7 +71,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
         initList();
@@ -99,7 +99,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
                 try {
                     ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
                 }catch (Exception e){
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
             }
             initList();
@@ -150,7 +150,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
             initErrorView();
         }catch (Exception e){
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
@@ -204,8 +204,8 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             gridAdapter.addItems(collection);
             try {
                 ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
+            } catch (Exception e){
+                Timber.e(e);
             }
         }
         progressBar.setVisibility(GONE);

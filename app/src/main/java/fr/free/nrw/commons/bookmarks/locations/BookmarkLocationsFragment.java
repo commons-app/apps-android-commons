@@ -60,7 +60,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -80,7 +80,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
         List<Place> places = controller.loadFavoritesLocations();
         adapterFactory.updateAdapterData(places, (RVRendererAdapter<Place>) recyclerView.getAdapter());
         progressBar.setVisibility(View.GONE);
-        if (places.size() <= 0) {
+        if (places.isEmpty()) {
             statusTextView.setText(R.string.bookmark_empty);
             statusTextView.setVisibility(View.VISIBLE);
         } else {
