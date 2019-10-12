@@ -2,7 +2,6 @@ package fr.free.nrw.commons.category;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,6 +38,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider,
                     AdapterView.OnItemClickListener{
 
+    private static final String CATEGORY_NAME = "categoryName";
 
     private FragmentManager supportFragmentManager;
     private CategoryImagesListFragment categoryImagesListFragment;
@@ -48,7 +48,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
 
-    ViewPagerAdapter viewPagerAdapter;
+    private ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,15 +76,15 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         categoryImagesListFragment = new CategoryImagesListFragment();
         SubCategoryListFragment subCategoryListFragment = new SubCategoryListFragment();
         SubCategoryListFragment parentCategoryListFragment = new SubCategoryListFragment();
-        categoryName = getIntent().getStringExtra("categoryName");
+        categoryName = getIntent().getStringExtra(CATEGORY_NAME);
         if (getIntent() != null && categoryName != null) {
             Bundle arguments = new Bundle();
-            arguments.putString("categoryName", categoryName);
+            arguments.putString(CATEGORY_NAME, categoryName);
             arguments.putBoolean("isParentCategory", false);
             categoryImagesListFragment.setArguments(arguments);
             subCategoryListFragment.setArguments(arguments);
             Bundle parentCategoryArguments = new Bundle();
-            parentCategoryArguments.putString("categoryName", categoryName);
+            parentCategoryArguments.putString(CATEGORY_NAME, categoryName);
             parentCategoryArguments.putBoolean("isParentCategory", true);
             parentCategoryListFragment.setArguments(parentCategoryArguments);
         }
@@ -103,8 +103,8 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
      * Gets the passed categoryName from the intents and displays it as the page title
      */
     private void setPageTitle() {
-        if (getIntent() != null && getIntent().getStringExtra("categoryName") != null) {
-            setTitle(getIntent().getStringExtra("categoryName"));
+        if (getIntent() != null && getIntent().getStringExtra(CATEGORY_NAME) != null) {
+            setTitle(getIntent().getStringExtra(CATEGORY_NAME));
         }
     }
 
@@ -119,13 +119,13 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
-            FragmentManager supportFragmentManager = getSupportFragmentManager();
-            supportFragmentManager
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager
                     .beginTransaction()
                     .replace(R.id.mediaContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
-            supportFragmentManager.executePendingTransactions();
+            fragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(i);
         forceInitBackButton();
@@ -140,7 +140,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     public static void startYourself(Context context, String categoryName) {
         Intent intent = new Intent(context, CategoryDetailsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra("categoryName", categoryName);
+        intent.putExtra(CATEGORY_NAME, categoryName);
         context.startActivity(intent);
     }
 
@@ -191,12 +191,11 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.menu_browser_current_category:
-                Utils.handleWebUrl(this, Uri.parse(Utils.getPageTitle(categoryName).getCanonicalUri()));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.menu_browser_current_category) {
+            Utils.handleWebUrl(this, Uri.parse(Utils.getPageTitle(categoryName).getCanonicalUri()));
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 

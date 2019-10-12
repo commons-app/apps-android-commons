@@ -8,6 +8,7 @@ import android.os.RemoteException;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.data.DAOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +35,7 @@ public class CategoryDao {
                 db.update(category.getContentUri(), toContentValues(category), null, null);
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             db.release();
         }
@@ -48,25 +49,21 @@ public class CategoryDao {
      */
     @Nullable
     Category find(String name) {
-        Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
-        try {
-            cursor = db.query(
+        try (Cursor cursor = db.query(
                     CategoryContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     Table.COLUMN_NAME + "=?",
                     new String[]{name},
-                    null);
+                    null)) {
+
             if (cursor != null && cursor.moveToFirst()) {
                 return fromCursor(cursor);
             }
         } catch (RemoteException e) {
             // This feels lazy, but to hell with checked exceptions. :)
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
             db.release();
         }
         return null;
@@ -80,26 +77,22 @@ public class CategoryDao {
     @NonNull
     List<String> recentCategories(int limit) {
         List<String> items = new ArrayList<>();
-        Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
-        try {
-            cursor = db.query(
+        try (Cursor cursor = db.query(
                     CategoryContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     null,
                     new String[]{},
-                    Table.COLUMN_LAST_USED + " DESC");
+                    Table.COLUMN_LAST_USED + " DESC")){
+
             // fixme add a limit on the original query instead of falling out of the loop?
             while (cursor != null && cursor.moveToNext()
                     && cursor.getPosition() < limit) {
                 items.add(fromCursor(cursor).getName());
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
             db.release();
         }
         return items;
@@ -133,7 +126,7 @@ public class CategoryDao {
         static final String COLUMN_TIMES_USED = "times_used";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-        public static final String[] ALL_FIELDS = {
+        protected static final String[] ALL_FIELDS = {
                 COLUMN_ID,
                 COLUMN_NAME,
                 COLUMN_LAST_USED,
@@ -144,10 +137,13 @@ public class CategoryDao {
 
         static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY,"
-                + COLUMN_NAME + " STRING,"
+                + COLUMN_NAME + " TEXT,"
                 + COLUMN_LAST_USED + " INTEGER,"
                 + COLUMN_TIMES_USED + " INTEGER"
                 + ");";
+
+        private Table() {
+        }
 
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);
@@ -178,7 +174,6 @@ public class CategoryDao {
             if (from == 5) {
                 from++;
                 onUpdate(db, from, to);
-                return;
             }
         }
     }

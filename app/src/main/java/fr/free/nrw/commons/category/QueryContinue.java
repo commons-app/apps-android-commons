@@ -5,8 +5,8 @@ package fr.free.nrw.commons.category;
  * https://www.mediawiki.org/wiki/API:Raw_query_continue
  */
 public class QueryContinue {
-    private String continueParam;
-    private String gcmContinueParam;
+    private final String continueParam;
+    private final String gcmContinueParam;
 
     public QueryContinue(String continueParam, String gcmContinueParam) {
         this.continueParam = continueParam;

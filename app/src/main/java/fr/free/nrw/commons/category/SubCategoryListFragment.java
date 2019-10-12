@@ -42,7 +42,7 @@ import static android.view.View.VISIBLE;
 
 public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
 
-    private static int TIMEOUT_SECONDS = 15;
+    private static final int TIMEOUT_SECONDS = 15;
 
     @BindView(R.id.imagesListBox)
     RecyclerView categoriesRecyclerView;
@@ -88,7 +88,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
      * Checks for internet connection and then initializes the recycler view with all(max 500) categories of the searched query
      * Clearing categoryAdapter every time new keyword is searched so that user can see only new results
      */
-    public void initSubCategoryList() {
+    private void initSubCategoryList() {
         categoriesNotFoundView.setVisibility(GONE);
         if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();

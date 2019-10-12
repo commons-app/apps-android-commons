@@ -3,11 +3,13 @@ package fr.free.nrw.commons.category;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 public class CategoryItem implements Parcelable {
     private final String name;
     private boolean selected;
 
-    public static Creator<CategoryItem> CREATOR = new Creator<CategoryItem>() {
+    public static final Creator<CategoryItem> CREATOR = new Creator<CategoryItem>() {
         @Override
         public CategoryItem createFromParcel(Parcel parcel) {
             return new CategoryItem(parcel);
@@ -73,6 +75,7 @@ public class CategoryItem implements Parcelable {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return "CategoryItem: '" + name + '\'';
     }

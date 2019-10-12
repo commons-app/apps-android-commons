@@ -32,6 +32,8 @@ public class CategoryImagesActivity
                     MediaDetailPagerFragment.MediaDetailProvider,
                     AdapterView.OnItemClickListener{
 
+    private static final String CATEGORY_NAME = "categoryName";
+    private static final String TITLE = "title";
 
     private FragmentManager supportFragmentManager;
     private CategoryImagesListFragment categoryImagesListFragment;
@@ -67,10 +69,10 @@ public class CategoryImagesActivity
      */
     private void setCategoryImagesFragment() {
         categoryImagesListFragment = new CategoryImagesListFragment();
-        String categoryName = getIntent().getStringExtra("categoryName");
+        String categoryName = getIntent().getStringExtra(CATEGORY_NAME);
         if (getIntent() != null && categoryName != null) {
             Bundle arguments = new Bundle();
-            arguments.putString("categoryName", categoryName);
+            arguments.putString(CATEGORY_NAME, categoryName);
             categoryImagesListFragment.setArguments(arguments);
             FragmentTransaction transaction = supportFragmentManager.beginTransaction();
             transaction
@@ -83,13 +85,14 @@ public class CategoryImagesActivity
      * Gets the passed title from the intents and displays it as the page title
      */
     private void setPageTitle() {
-        if (getIntent() != null && getIntent().getStringExtra("title") != null) {
-            setTitle(getIntent().getStringExtra("title"));
+        if (getIntent() != null && getIntent().getStringExtra(TITLE) != null) {
+            setTitle(getIntent().getStringExtra(TITLE));
         }
     }
 
     @Override
     public void onBackStackChanged() {
+        // do nothing
     }
 
     /**
@@ -100,10 +103,10 @@ public class CategoryImagesActivity
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
-            FragmentManager supportFragmentManager = getSupportFragmentManager();
-            supportFragmentManager
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager
                     .beginTransaction()
-                    .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+                    .hide(fragmentManager.getFragments().get(fragmentManager.getBackStackEntryCount()))
                     .add(R.id.fragmentContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
@@ -124,8 +127,8 @@ public class CategoryImagesActivity
     public static void startYourself(Context context, String title, String categoryName) {
         Intent intent = new Intent(context, CategoryImagesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra("title", title);
-        intent.putExtra("categoryName", categoryName);
+        intent.putExtra(TITLE, title);
+        intent.putExtra(CATEGORY_NAME, categoryName);
         context.startActivity(intent);
     }
 
@@ -186,12 +189,11 @@ public class CategoryImagesActivity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                NavigationBaseActivity.startActivityWithFlags(this, SearchActivity.class);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_search) {
+            NavigationBaseActivity.startActivityWithFlags(this, SearchActivity.class);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 

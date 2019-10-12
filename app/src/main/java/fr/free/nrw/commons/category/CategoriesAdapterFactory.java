@@ -6,7 +6,7 @@ import com.pedrogomez.renderers.RendererBuilder;
 import java.util.Collections;
 import java.util.List;
 
-public class CategoriesAdapterFactory {
+class CategoriesAdapterFactory {
     private final CategoryClickedListener listener;
 
     public CategoriesAdapterFactory(CategoryClickedListener listener) {
@@ -17,7 +17,7 @@ public class CategoriesAdapterFactory {
         RendererBuilder<CategoryItem> builder = new RendererBuilder<CategoryItem>()
                 .bind(CategoryItem.class, new CategoriesRenderer(listener));
         ListAdapteeCollection<CategoryItem> collection = new ListAdapteeCollection<>(
-                placeList != null ? placeList : Collections.<CategoryItem>emptyList());
+                placeList != null ? placeList : Collections.emptyList());
         return new CategoryRendererAdapter(builder, collection);
     }
 }

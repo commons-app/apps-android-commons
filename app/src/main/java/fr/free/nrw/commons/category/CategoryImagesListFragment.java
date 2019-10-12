@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +44,7 @@ import static android.view.View.VISIBLE;
  */
 public class CategoryImagesListFragment extends DaggerFragment {
 
-    private static int TIMEOUT_SECONDS = 15;
+    private static final int TIMEOUT_SECONDS = 15;
 
     private GridViewAdapter gridAdapter;
 
@@ -52,7 +53,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
     @BindView(R.id.categoryImagesList) GridView gridView;
     @BindView(R.id.parentLayout) RelativeLayout parentLayout;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private boolean hasMoreImages = true;
     private boolean isLoading = true;
     private String categoryName = null;
@@ -70,7 +71,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
         initViews();
@@ -143,11 +144,11 @@ public class CategoryImagesListFragment extends DaggerFragment {
      */
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading images inside a category");
-        try{
+        try {
             ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
             initErrorView();
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e){
+            Timber.e(e);
         }
 
     }
@@ -183,6 +184,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
+                // do nothing
             }
 
             @Override
@@ -252,18 +254,18 @@ public class CategoryImagesListFragment extends DaggerFragment {
             gridAdapter.addItems(collection);
             try {
                 ((CategoryImagesActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
+            } catch (Exception e) {
+                Timber.e(e);
             }
             try {
                 ((CategoryDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
+            } catch (Exception e) {
+                Timber.e(e);
             }
             try {
                 ((ExploreActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
+            } catch (Exception e) {
+                Timber.e(e);
             }
         }
         progressBar.setVisibility(GONE);

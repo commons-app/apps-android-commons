@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -21,15 +21,15 @@ import timber.log.Timber;
 /**
  * The model class for categories in upload
  */
-public class CategoriesModel{
+public class CategoriesModel {
     private static final int SEARCH_CATS_LIMIT = 25;
 
     private final CategoryClient categoryClient;
     private final CategoryDao categoryDao;
     private final JsonKvStore directKvStore;
 
-    private HashMap<String, ArrayList<String>> categoriesCache;
-    private List<CategoryItem> selectedCategories;
+    private final Map<String, ArrayList<String>> categoriesCache;
+    private final List<CategoryItem> selectedCategories;
 
     @Inject GpsCategoryModel gpsCategoryModel;
     @Inject
@@ -82,7 +82,7 @@ public class CategoriesModel{
      * Updates category count in category dao
      * @param item
      */
-    public void updateCategoryCount(CategoryItem item) {
+    private void updateCategoryCount(CategoryItem item) {
         Category category = categoryDao.find(item.getName());
 
         // Newly used category...
@@ -94,7 +94,7 @@ public class CategoriesModel{
         categoryDao.save(category);
     }
 
-    boolean cacheContainsKey(String term) {
+    private boolean cacheContainsKey(String term) {
         return categoriesCache.containsKey(term);
     }
     //endregion
@@ -111,7 +111,7 @@ public class CategoriesModel{
             Observable<CategoryItem> categoryItemObservable = gpsCategories()
                     .concatWith(titleCategories(imageTitleList));
             if (hasDirectCategories()) {
-                categoryItemObservable.concatWith(directCategories().concatWith(recentCategories()));
+                categoryItemObservable = categoryItemObservable.concatWith(directCategories().concatWith(recentCategories()));
             }
             return categoryItemObservable;
         }
@@ -153,11 +153,11 @@ public class CategoriesModel{
     private Observable<CategoryItem> directCategories() {
         String directCategory = directKvStore.getString("Category", "");
         List<String> categoryList = new ArrayList<>();
-        Timber.d("Direct category found: " + directCategory);
+        Timber.d("Direct category found: %s", directCategory);
 
         if (!directCategory.equals("")) {
             categoryList.add(directCategory);
-            Timber.d("DirectCat does not equal emptyString. Direct Cat list has " + categoryList);
+            Timber.d("DirectCat does not equal emptyString. Direct Cat list has %s", categoryList);
         }
         return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
     }
@@ -166,7 +166,7 @@ public class CategoriesModel{
      * Returns GPS categories
      * @return
      */
-    Observable<CategoryItem> gpsCategories() {
+    private Observable<CategoryItem> gpsCategories() {
         return Observable.fromIterable(gpsCategoryModel.getCategoryList())
                 .map(name -> new CategoryItem(name, false));
     }
@@ -217,7 +217,7 @@ public class CategoriesModel{
      * Select's category
      * @param item
      */
-    public void selectCategory(CategoryItem item) {
+    private void selectCategory(CategoryItem item) {
         selectedCategories.add(item);
     }
 
@@ -225,7 +225,7 @@ public class CategoriesModel{
      * Unselect Category
      * @param item
      */
-    public void unselectCategory(CategoryItem item) {
+    private void unselectCategory(CategoryItem item) {
         selectedCategories.remove(item);
     }
 

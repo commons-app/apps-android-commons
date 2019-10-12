@@ -32,6 +32,8 @@ public class CategoryContentProvider extends CommonsDaggerContentProvider {
 
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
 
+    private static final String UNKNOWN_URL = "Unknown URI: ";
+
     static {
         uriMatcher.addURI(BuildConfig.CATEGORY_AUTHORITY, BASE_PATH, CATEGORIES);
         uriMatcher.addURI(BuildConfig.CATEGORY_AUTHORITY, BASE_PATH + "/#", CATEGORIES_ID);
@@ -71,7 +73,7 @@ public class CategoryContentProvider extends CommonsDaggerContentProvider {
                 );
                 break;
             default:
-                throw new IllegalArgumentException("Unknown URI" + uri);
+                throw new IllegalArgumentException(UNKNOWN_URL + uri);
         }
 
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -90,12 +92,10 @@ public class CategoryContentProvider extends CommonsDaggerContentProvider {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         long id;
-        switch (uriType) {
-            case CATEGORIES:
-                id = sqlDB.insert(TABLE_NAME, null, contentValues);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI: " + uri);
+        if (uriType == CATEGORIES) {
+            id = sqlDB.insert(TABLE_NAME, null, contentValues);
+        } else {
+            throw new IllegalArgumentException(UNKNOWN_URL + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return Uri.parse(BASE_URI + "/" + id);
@@ -113,15 +113,13 @@ public class CategoryContentProvider extends CommonsDaggerContentProvider {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
-        switch (uriType) {
-            case CATEGORIES:
-                for (ContentValues value : values) {
-                    Timber.d("Inserting! %s", value);
-                    sqlDB.insert(TABLE_NAME, null, value);
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI: " + uri);
+        if (uriType == CATEGORIES) {
+            for (ContentValues value : values) {
+                Timber.d("Inserting! %s", value);
+                sqlDB.insert(TABLE_NAME, null, value);
+            }
+        } else {
+            throw new IllegalArgumentException(UNKNOWN_URL + uri);
         }
         sqlDB.setTransactionSuccessful();
         sqlDB.endTransaction();
@@ -145,21 +143,19 @@ public class CategoryContentProvider extends CommonsDaggerContentProvider {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated;
-        switch (uriType) {
-            case CATEGORIES_ID:
-                if (TextUtils.isEmpty(selection)) {
-                    int id = Integer.valueOf(uri.getLastPathSegment());
-                    rowsUpdated = sqlDB.update(TABLE_NAME,
-                            contentValues,
-                            COLUMN_ID + " = ?",
-                            new String[]{String.valueOf(id)});
-                } else {
-                    throw new IllegalArgumentException(
-                            "Parameter `selection` should be empty when updating an ID");
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI: " + uri + " with type " + uriType);
+        if (uriType == CATEGORIES_ID) {
+            if (TextUtils.isEmpty(selection)) {
+                int id = Integer.valueOf(uri.getLastPathSegment());
+                rowsUpdated = sqlDB.update(TABLE_NAME,
+                        contentValues,
+                        COLUMN_ID + " = ?",
+                        new String[]{String.valueOf(id)});
+            } else {
+                throw new IllegalArgumentException(
+                        "Parameter `selection` should be empty when updating an ID");
+            }
+        } else {
+            throw new IllegalArgumentException(UNKNOWN_URL + uri + " with type " + uriType);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return rowsUpdated;

@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -21,7 +24,7 @@ import fr.free.nrw.commons.R;
  * This is created to only display UI implementation. Needs to be changed in real implementation
  */
 
-public class GridViewAdapter extends ArrayAdapter {
+public class GridViewAdapter extends ArrayAdapter<Media> {
     private List<Media> data;
 
     public GridViewAdapter(Context context, int layoutResourceId, List<Media> data) {
@@ -55,7 +58,7 @@ public class GridViewAdapter extends ArrayAdapter {
             data = new ArrayList<>();
             return false;
         }
-        if (data.size() <= 0) {
+        if (data.isEmpty()) {
             return false;
         }
         String fileName = data.get(0).getFilename();
@@ -75,8 +78,9 @@ public class GridViewAdapter extends ArrayAdapter {
      * @param parent
      * @return
      */
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @Nullable ViewGroup parent) {
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_category_images, null);
