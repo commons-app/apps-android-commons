@@ -4,6 +4,7 @@
 * Chansey
 * Dual
 * Emperyan
+* Grkn gll
 * Hedda
 * Incelemeelemani
 * Joseph
@@ -333,7 +334,10 @@
   <string name="provider_searches">Son aranan sorgular</string>
   <string name="error_loading_categories">Kategoriler yüklenirken hata oluştu.</string>
   <string name="error_loading_subcategories">Alt kategoriler yüklenirken hata oluştu.</string>
-  <string name="search_tab_title_categories" fuzzy="true">KATEGORILER</string>
+  <string name="search_tab_title_media">Medya</string>
+  <string name="search_tab_title_categories">Kategoriler</string>
+  <string name="explore_tab_title_featured">Öne çıkan</string>
+  <string name="explore_tab_title_mobile">Mobil yoluyla yüklendi</string>
   <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
   <string name="menu_set_wallpaper">Duvar kağıdı olarak ayarla</string>
@@ -367,12 +371,13 @@
   <string name="delete_search_dialog">Bu aramayı silmek istiyor musunuz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
   <string name="nominate_delete">Silinmeye aday göster</string>
-  <string name="delete" fuzzy="true">SİL</string>
+  <string name="delete">Sil</string>
   <string name="Achievements">Başarılar</string>
-  <string name="statistics" fuzzy="true">İSTATİSTİKLER</string>
+  <string name="statistics">İstatistikler</string>
   <string name="statistics_thanks">Alınan Teşekkürler</string>
   <string name="statistics_featured">Öne Çıkan Görüntüler</string>
-  <string name="level" fuzzy="true">SEVİYE</string>
+  <string name="statistics_wikidata_edits">\"Yakın Yerler\"\'den resimler.</string>
+  <string name="level">Seviye</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Görüntüler Geri Dönülmedi</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>
@@ -384,10 +389,13 @@
   <string name="images_used_explanation">Wikimedia makalelerinde kullanılan Commons\'a yüklediğiniz görüntü sayısı</string>
   <string name="error_occurred">Hata oluştu!</string>
   <string name="notifications_channel_name_all">Commons Bildirimi</string>
+  <string name="preference_author_name_toggle">Özel yazar adı kullan</string>
+  <string name="preference_author_name_toggle_summary">Fotoğrafları yüklerken kullanıcı adınız yerine özel bir yazar adı kullanınız.</string>
+  <string name="preference_author_name">Özel yazar adı</string>
   <string name="contributions_fragment">Katkılar</string>
   <string name="nearby_fragment">Yakınındakiler</string>
   <string name="notifications">Bildirimler</string>
-  <string name="archived_notifications" fuzzy="true">Bildirimler (arşivlenmiş)</string>
+  <string name="archived_notifications">Bildirimler (arşivlenmiş)</string>
   <string name="display_nearby_notification">Yakındaki bildirimi görüntüle</string>
   <string name="display_nearby_notification_summary">Resimlere en yakın yeri görmek için buraya dokunun</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
@@ -445,6 +453,10 @@
   <string name="display_campaigns">Kampanyaları göster</string>
   <string name="display_campaigns_explanation" fuzzy="true">Devam eden kampanyaları görmek için buraya dokunun</string>
   <string name="nearby_campaign_dismiss_message">Artık kampanyaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'da yeniden etkinleştirebilirsiniz.</string>
+  <string name="this_function_needs_network_connection">Bu fonksiyon ağ bağlantısı gerektirir, lütfen bağlantı ayarlarınızı kontrol edin.</string>
+  <string name="error_processing_image">Görüntü işlenirken oluştu. Lütfen tekrar deneyin!</string>
+  <string name="check_category_adding_template">Kategori kontrolü için şablon ekleme</string>
+  <string name="check_category_edit_summary">Kategori kontrolü isteniyor</string>
   <string name="no_archived_notification" fuzzy="true">Arşivlenmiş bildiriminiz yok</string>
   <string name="menu_option_archived">Arşivlenmişleri görüntüle</string>
   <string name="menu_option_unread">Okunmamışları görüntüle</string>
