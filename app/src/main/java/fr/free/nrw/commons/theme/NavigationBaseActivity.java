@@ -1,32 +1,30 @@
 package fr.free.nrw.commons.theme;
 
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_WIKI_SITE;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.ActivityManager;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import butterknife.BindView;
+import com.google.android.material.navigation.NavigationView;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
@@ -39,9 +37,17 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
-import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import javax.inject.Inject;
+import javax.inject.Named;
+import org.wikipedia.dataclient.Service;
+import org.wikipedia.dataclient.ServiceFactory;
+import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity
@@ -60,8 +66,16 @@ public abstract class NavigationBaseActivity extends BaseActivity
     JsonKvStore applicationKvStore;
     @Inject CommonsLogSender commonsLogSender;
 
+    @Inject
+    @Named(NAMED_COMMONS_WIKI_SITE)
+    WikiSite commonsWikiSite;
+
 
     private ActionBarDrawerToggle toggle;
+    private CompositeDisposable disposable = new CompositeDisposable();
+    private Service service;
+
+    private ProgressDialog progressDialog;
 
     public void initDrawer() {
         navigationView.setNavigationItemSelectedListener(this);
@@ -203,9 +217,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                         .setMessage(R.string.logout_verification)
                         .setCancelable(false)
                         .setPositiveButton(R.string.yes, (dialog, which) -> {
-                            BaseLogoutListener logoutListener = new BaseLogoutListener();
-                            CommonsApplication app = (CommonsApplication) getApplication();
-                            app.clearApplicationData(this, logoutListener);
+                            handleLogout();
                         })
                         .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
@@ -227,6 +239,59 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
                 return false;
         }
+    }
+
+    /**
+     * Fetch the CSRF token to logout
+     */
+    private void handleLogout() {
+        service = ServiceFactory.get(commonsWikiSite);
+        //First fetch the csrf token
+        if (null == progressDialog) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage(getString(R.string.please_wait));
+        }
+
+        progressDialog.show();
+        disposable.add(
+                service.getCsrfToken()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(mwQueryResponse -> postLogoutApi(mwQueryResponse),
+                                t -> {
+                                    //On error show a toast
+                                    progressDialog.cancel();
+                                    Toast.makeText(NavigationBaseActivity.this,
+                                            t.getLocalizedMessage(), Toast.LENGTH_SHORT);
+                                    Timber.e(t,
+                                            "CSRF token fetch failed: " + t.getLocalizedMessage());
+                                }
+                        ));
+    }
+
+    /**
+     * Make the logout post call with the CSRF token fetched
+     */
+    private void postLogoutApi(MwQueryResponse response) {
+        disposable.add(
+                service.postLogout(response.query().csrfToken())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(mwQueryResponse -> {
+                                    BaseLogoutListener logoutListener = new BaseLogoutListener();
+                                    CommonsApplication app = (CommonsApplication) getApplication();
+                                    app.clearApplicationData(this, logoutListener);
+                                    progressDialog.cancel();
+                                },
+                                t -> {
+                                    progressDialog.cancel();
+                                    Toast.makeText(NavigationBaseActivity.this,
+                                            t.getLocalizedMessage(), Toast.LENGTH_SHORT);
+                                    Timber.e(t, "Something went wrong with post logout api: " + t
+                                            .getLocalizedMessage());
+                                }
+                        ));
+
     }
 
     private class BaseLogoutListener implements CommonsApplication.LogoutListener {
@@ -294,6 +359,15 @@ public abstract class NavigationBaseActivity extends BaseActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        disposable.clear();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
         }
     }
 }
