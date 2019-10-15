@@ -79,7 +79,7 @@ class u {
                 .thenReturn(Single.just(false))
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(false))
-        `when`(readFBMD?.processMetadata(ArgumentMatchers.any(),ArgumentMatchers.any()))
+        `when`(readFBMD?.processMetadata(ArgumentMatchers.any()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_OK))
         `when`(readEXIF?.processMetadata(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_OK))

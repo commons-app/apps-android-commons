@@ -34,8 +34,9 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
+import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
@@ -50,13 +51,15 @@ import static android.content.ContentResolver.requestSync;
 
 public class MainActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener {
 
-    @Inject
-    SessionManager sessionManager;
-    @Inject ContributionController controller;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.pager)
     public UnswipableViewPager viewPager;
+
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    ContributionController controller;
     @Inject
     public LocationServiceManager locationManager;
     @Inject
@@ -72,9 +75,8 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     public static final int NEARBY_TAB_POSITION = 1;
 
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
+    public boolean onOrientationChanged;
     private Menu menu;
-
-    private boolean onOrientationChanged = false;
 
     private MenuItem notificationsMenuItem;
     private TextView notificationCount;
@@ -168,9 +170,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
      * tab won't change and vice versa. So we have to notify each of them.
      */
     private void setTabAndViewPagerSynchronisation() {
-        //viewPager.canScrollHorizontally(false);
         viewPager.setFocusableInTouchMode(true);
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -185,7 +185,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
                         updateMenuItem();
-
                         break;
                     case NEARBY_TAB_POSITION:
                         Timber.d("Nearby tab selected");
@@ -193,7 +192,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
                         // Do all permission and GPS related tasks on tab selected, not on create
-                        ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
+                        NearbyParentFragmentPresenter.getInstance().onTabSelected();
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -269,15 +268,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Means that nearby fragment is visible (not contributions fragment)
-            NearbyFragment nearbyFragment = (NearbyFragment) contributionsActivityPagerAdapter.getItem(1);
-
-            if(nearbyFragment.isBottomSheetExpanded()) {
-                // Back should first hide the bottom sheet if it is expanded
-                nearbyFragment.listOptionMenuItemClicked();
-            } else {
-                // Otherwise go back to contributions fragment
-                viewPager.setCurrentItem(0);
-            }
+            NearbyParentFragmentPresenter.getInstance().backButtonClicked();
         } else {
             super.onBackPressed();
         }
@@ -334,12 +325,12 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                 // Display notifications menu item
                 menu.findItem(R.id.notifications).setVisible(true);
                 menu.findItem(R.id.list_sheet).setVisible(false);
-                Timber.d("Contributions activity notifications menu item is visible");
+                Timber.d("Contributions fragment notifications menu item is visible");
             } else {
                 // Display bottom list menu item
                 menu.findItem(R.id.notifications).setVisible(false);
                 menu.findItem(R.id.list_sheet).setVisible(true);
-                Timber.d("Contributions activity list sheet menu item is visible");
+                Timber.d("Nearby fragment list sheet menu item is visible");
             }
         }
     }
@@ -353,7 +344,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                 return true;
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
-                    ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
+                    ((NearbyParentFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
                 }
                 return true;
             default:
@@ -363,8 +354,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
         FragmentManager fragmentManager;
-        private boolean isContributionsListFragment = true; // to know what to put in first tab, Contributions of Media Details
-
 
         public ContributionsActivityPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -394,12 +383,12 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                     }
 
                 case 1:
-                    NearbyFragment retainedNearbyFragment = getNearbyFragment(1);
+                    NearbyParentFragment retainedNearbyFragment = getNearbyFragment(1);
                     if (retainedNearbyFragment != null) {
                         return retainedNearbyFragment;
                     } else {
                         // If we reach here, retainedNearbyFragment is null
-                        return new NearbyFragment();
+                        return new NearbyParentFragment();
                     }
                 default:
                     return null;
@@ -421,9 +410,9 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
          * @param position index of tabs, in our case 0 or 1
          * @return
          */
-        private NearbyFragment getNearbyFragment(int position) {
+        private NearbyParentFragment getNearbyFragment(int position) {
             String tag = makeFragmentName(R.id.pager, position);
-            return (NearbyFragment)fragmentManager.findFragmentByTag(tag);
+            return (NearbyParentFragment)fragmentManager.findFragmentByTag(tag);
         }
 
         /**
@@ -446,7 +435,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         controller.handleActivityResult(this, requestCode, resultCode, data);
     }
 
-    @Override
     protected void onResume() {
         super.onResume();
         setNotificationCount();
