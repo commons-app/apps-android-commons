@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -25,14 +27,24 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
     private final LayoutInflater inflater;
     private Context context;
+    private RecyclerView recyclerView;
     private ArrayList<Label> labels;
     private ArrayList<Label> displayedLabels;
     private ArrayList<Label> selectedLabels = new ArrayList<>();
 
-    public NearbyFilterSearchRecyclerViewAdapter(Context context, ArrayList<Label> labels) {
+    RecyclerView.SmoothScroller smoothScroller;
+
+    public NearbyFilterSearchRecyclerViewAdapter(Context context, ArrayList<Label> labels, RecyclerView recyclerView) {
         this.context = context;
         this.labels = labels;
         this.displayedLabels = labels;
+        this.recyclerView = recyclerView;
+        smoothScroller = new
+                LinearSmoothScroller(context) {
+                    @Override protected int getVerticalSnapPreference() {
+                        return LinearSmoothScroller.SNAP_TO_START;
+                    }
+                };
         inflater = LayoutInflater.from(context);
     }
 
@@ -62,17 +74,24 @@ public class NearbyFilterSearchRecyclerViewAdapter
         holder.placeTypeIcon.setImageResource(label.getIcon());
         holder.placeTypeLabel.setText(label.toString());
 
-        holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? Color.BLUE : Color.WHITE);
+        holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : Color.WHITE);
         holder.placeTypeLayout.setOnClickListener(view -> {
             if (label.isSelected()) {
                 selectedLabels.remove(label);
             } else {
                 selectedLabels.add(label);
+                displayedLabels.remove(label);
+                displayedLabels.add(selectedLabels.size()-1, label);
+                notifyDataSetChanged();
+                smoothScroller.setTargetPosition(0);
+                recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
             }
             label.setSelected(!label.isSelected());
-            holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? Color.BLUE : Color.WHITE);
+            holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : Color.WHITE);
             NearbyParentFragmentPresenter.getInstance().filterByMarkerType(selectedLabels);
         });
+
+        //TODO: recover current location marker if selection is empty
     }
 
     @Override
@@ -125,33 +144,4 @@ public class NearbyFilterSearchRecyclerViewAdapter
             }
         };
     }
-/*
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        if (convertView == null) {
-
-            convertView = inflater.inflate(R.layout.nearby_search_list_item, null);
-
-            viewHolder = new RecyclerViewHolder();
-            viewHolder.placeTypeLabel = convertView.findViewById(R.id.place_text);
-            viewHolder.placeTypeIcon = convertView.findViewById(R.id.place_icon);
-            convertView.setTag(viewHolder);
-
-        }
-        else{
-            //Get viewholder we already created
-            viewHolder = (RecyclerViewHolder)convertView.getTag();
-        }
-
-        Label label = displayedLabels.get(position);
-        if(label != null){
-            viewHolder.placeTypeIcon.setImageResource(label.getIcon());
-            viewHolder.placeTypeLabel.setText(label.toString());
-        }
-        return convertView;
-    }
-
-*/
-
 }
