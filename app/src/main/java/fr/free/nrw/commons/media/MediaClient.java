@@ -104,7 +104,7 @@ public class MediaClient {
      */
     public Single<List<Media>> getMediaListFromSearch(String keyword) {
         return responseToMediaList(
-                continuationStore.containsKey("search_" + keyword) ?
+                continuationStore.containsKey("search_" + keyword) && (continuationStore.get("search_" + keyword)  != null) ?
                         mediaInterface.getMediaListFromSearch(keyword, 10, continuationStore.get("search_" + keyword)) : //if true
                         mediaInterface.getMediaListFromSearch(keyword, 10, Collections.emptyMap()), //if false
                 "search_" + keyword);
