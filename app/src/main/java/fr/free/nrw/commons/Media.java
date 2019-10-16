@@ -179,7 +179,7 @@ public class Media implements Parcelable {
     public static Media from(MwQueryPage page) {
         ImageInfo imageInfo = page.imageInfo();
         if (imageInfo == null) {
-            return null;
+            return new Media(); // null is not allowed
         }
         ExtMetadata metadata = imageInfo.getMetadata();
         if (metadata == null) {
