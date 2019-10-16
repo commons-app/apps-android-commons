@@ -27,6 +27,7 @@ public interface NearbyParentFragmentContract {
         void animateFABs();
         void recenterMap(LatLng curLatLng);
         void hideBottomSheet();
+        void hideBottomDetailsSheet();
         void displayBottomSheetWithInfo(Marker marker);
         void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
         void addSearchThisAreaButtonAction();
@@ -51,6 +52,7 @@ public interface NearbyParentFragmentContract {
         void backButtonClicked();
         MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
         void filterByMarkerType(List<Label> selectedLabels);
+        void searchViewGainedFocus();
     }
     
     interface ViewsAreReadyCallback {

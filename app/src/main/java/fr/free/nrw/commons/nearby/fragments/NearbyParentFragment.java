@@ -203,6 +203,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
                 //Log.d("deneme33","11-"+recyclerView.getAdapter().getCount());
+                nearbyParentFragmentPresenter.searchViewGainedFocus();
                 nearbyFilterList.setVisibility(View.VISIBLE);
             } else {
                // Log.d("deneme33","22-"+recyclerView.getAdapter().getCount());
@@ -787,6 +788,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void hideBottomSheet() {
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    @Override
+    public void hideBottomDetailsSheet() {
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     @Override
