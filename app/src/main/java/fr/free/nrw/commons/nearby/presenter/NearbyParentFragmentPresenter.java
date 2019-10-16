@@ -362,6 +362,16 @@ public class NearbyParentFragmentPresenter
         //}
     }
 
+    @Override
+    public void searchViewGainedFocus() {
+        if(nearbyParentFragmentView.isListBottomSheetExpanded()) {
+            // Back should first hide the bottom sheet if it is expanded
+            nearbyParentFragmentView.hideBottomSheet();
+        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible()) {
+            nearbyParentFragmentView.hideBottomDetailsSheet();
+        }
+    }
+
     public View.OnClickListener onSearchThisAreaClicked() {
         return v -> {
             // Lock map operations during search this area operation
