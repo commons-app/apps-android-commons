@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,7 +121,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.choice_chip_exists) Chip chipExists;
     @BindView(R.id.choice_chip_needs_photo) Chip chipNeedsPhoto;
     @BindView(R.id.search_view) SearchView searchView;
-    @BindView(R.id.search_list_view) RecyclerView searchListView;
+    @BindView(R.id.search_list_view) RecyclerView recyclerView;
     @BindView(R.id.nearby_filter_list) View nearbyFilterList;
 
     @Inject LocationServiceManager locationManager;
@@ -202,26 +201,26 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                //Log.d("deneme33","11-"+searchListView.getAdapter().getCount());
+                //Log.d("deneme33","11-"+recyclerView.getAdapter().getCount());
                 nearbyFilterList.setVisibility(View.VISIBLE);
             } else {
-               // Log.d("deneme33","22-"+searchListView.getAdapter().getCount());
+               // Log.d("deneme33","22-"+recyclerView.getAdapter().getCount());
                 nearbyFilterList.setVisibility(View.GONE);
             }
         });
 
-        searchListView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        searchListView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         NearbyFilterSearchRecyclerViewAdapter nearbyFilterSearchRecyclerViewAdapter
-                = new NearbyFilterSearchRecyclerViewAdapter(getContext(),new ArrayList<>(TEXT_TO_DESCRIPTION.values()));
+                = new NearbyFilterSearchRecyclerViewAdapter(getContext(),new ArrayList<>(TEXT_TO_DESCRIPTION.values()), recyclerView);
         nearbyFilterList.getLayoutParams().width = (int) LayoutUtils.getScreenWidth(getActivity(), 0.75);
-        searchListView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
+        recyclerView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
         LayoutUtils.setLayoutHeightAllignedToWidth(1, nearbyFilterList);
-        /*searchListView.setOnItemClickListener((parent, view, position, id) -> {
+        /*recyclerView.setOnItemClickListener((parent, view, position, id) -> {
             Log.d("deneme33","item clicked:"+ nearbyFilterSearchRecyclerViewAdapter.get(position).toString());
             nearbyParentFragmentPresenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.getItem(position).toString());
         });*/
@@ -231,7 +230,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe( query -> {
-                    ((NearbyFilterSearchRecyclerViewAdapter)searchListView.getAdapter()).getFilter().filter(query.toString());
+                    ((NearbyFilterSearchRecyclerViewAdapter) recyclerView.getAdapter()).getFilter().filter(query.toString());
                 }));
     }
 
