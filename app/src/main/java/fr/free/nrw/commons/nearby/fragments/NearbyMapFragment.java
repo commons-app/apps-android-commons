@@ -397,7 +397,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
             //NearbyController.markerLabelList.put(baseMarkerList.get(i).getPlace().getLabel().toString(), markers.get(i));
             NearbyBaseMarker nearbyBaseMarker = baseMarkerList.get(i);
             NearbyController.markerLabelList.add(
-                    new MarkerPlaceGroup(markers.get(i), false, nearbyBaseMarker.getPlace()));
+                    new MarkerPlaceGroup(markers.get(i), bookmarkLocationDao.findBookmarkLocation(baseMarkerList.get(i).getPlace()), nearbyBaseMarker.getPlace()));
             //TODO: fix bookmark location
             NearbyController.markerExistsMap.put((baseMarkerList.get(i).getPlace().hasWikidataLink()), markers.get(i));
             NearbyController.markerNeedPicMap.put(((baseMarkerList.get(i).getPlace().pic == null) ? true : false), markers.get(i));
