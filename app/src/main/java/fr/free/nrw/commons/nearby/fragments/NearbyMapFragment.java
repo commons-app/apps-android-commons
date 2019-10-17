@@ -385,16 +385,11 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
                                                         , Marker selectedMarker
                                                         , NearbyParentFragmentPresenter nearbyParentFragmentPresenter) {
         List<Marker> markers = mapboxMap.addMarkers(baseMarkerList);
-        Log.d("deneme66","markers:"+markers.get(0).getTitle()+", baseMarkers:"+baseMarkerList.get(0).getPlace().getName());
-        Log.d("deneme66","markers:"+markers.get(1).getTitle()+", baseMarkers:"+baseMarkerList.get(1).getPlace().getName());
-
-        //NearbyController.markerLabelList = new HashMap<String, MarkerPlaceGroup>();
         NearbyController.markerExistsMap = new HashMap<Boolean, Marker>();
         NearbyController.markerNeedPicMap = new HashMap<Boolean, Marker>();
 
         for (int i = 0; i < baseMarkerList.size(); i++) {
-            // An example item: <Park, marker of that park>
-            //NearbyController.markerLabelList.put(baseMarkerList.get(i).getPlace().getLabel().toString(), markers.get(i));
+
             NearbyBaseMarker nearbyBaseMarker = baseMarkerList.get(i);
             NearbyController.markerLabelList.add(
                     new MarkerPlaceGroup(markers.get(i), bookmarkLocationDao.findBookmarkLocation(baseMarkerList.get(i).getPlace()), nearbyBaseMarker.getPlace()));

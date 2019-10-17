@@ -202,11 +202,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                //Log.d("deneme33","11-"+recyclerView.getAdapter().getCount());
                 nearbyParentFragmentPresenter.searchViewGainedFocus();
                 nearbyFilterList.setVisibility(View.VISIBLE);
             } else {
-               // Log.d("deneme33","22-"+recyclerView.getAdapter().getCount());
                 nearbyFilterList.setVisibility(View.GONE);
             }
         });
@@ -224,10 +222,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         nearbyFilterList.getLayoutParams().width = (int) LayoutUtils.getScreenWidth(getActivity(), 0.75);
         recyclerView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
         LayoutUtils.setLayoutHeightAllignedToWidth(1, nearbyFilterList);
-        /*recyclerView.setOnItemClickListener((parent, view, position, id) -> {
-            Log.d("deneme33","item clicked:"+ nearbyFilterSearchRecyclerViewAdapter.get(position).toString());
-            nearbyParentFragmentPresenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.getItem(position).toString());
-        });*/
 
         compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
                 .takeUntil(RxView.detaches(searchView))
