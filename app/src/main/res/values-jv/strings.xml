@@ -25,7 +25,7 @@
   <string name="logging_in_message">Entènana sadhela…</string>
   <string name="login_success">Kasil mlebu log!</string>
   <string name="login_failed">Wurung mlebu log!</string>
-  <string name="upload_failed">Barkas ora katemu. Jajalana barkas liyané.</string>
+  <string name="upload_failed">Berkas ora tinemu. Jajal berkas liyané.</string>
   <string name="authentication_failed">Otèntikasi ora dadi, sumangga mlebu log manèh</string>
   <string name="uploading_started">Wiwit ngunggah!</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>

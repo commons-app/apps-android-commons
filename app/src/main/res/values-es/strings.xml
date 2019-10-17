@@ -16,6 +16,7 @@
 * Ktranz
 * Luisangelrg
 * Macofe
+* Madamebiblio
 * MarcoAurelio
 * MarionaDSR
 * Miguel2706
@@ -562,4 +563,8 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Otra</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque sí</string>
+  <string name="account_created">Cuenta creada</string>
+  <string name="text_copy">Texto copiado en el portapapeles.</string>
+  <string name="notification_mark_read">Notificación: marcar como leída</string>
+  <string name="some_error">Hubo un error</string>
 </resources>

@@ -11,23 +11,14 @@
         android:background="@color/status_bar_blue">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                />
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <FrameLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
         </LinearLayout>
 
         <View
@@ -37,6 +28,7 @@
             android:layout_below="@id/toolbar"
             android:layout_alignParentLeft="true"
             android:background="#aa969696"
+            android:visibility="gone"
             android:elevation="6dp">
 
         </View>
@@ -49,7 +41,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:clickable="true"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
             app:fabSize="normal"
@@ -82,10 +74,11 @@
         app:elevation="6dp" />
 
     <ProgressBar
-        android:id="@+id/search_this_area_button_progress_bar"
+        android:id="@+id/map_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        app:elevation="6dp"
         android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -100,7 +93,7 @@
         android:clickable="true"
         android:visibility="invisible"
         app:backgroundTint="@color/button_blue"
-        app:elevation="6dp"
+        app:elevation="8dp"
         app:fabSize="normal"
         app:layout_anchor="@id/bottom_sheet_details"
         app:layout_anchorGravity="top|right|end"
@@ -155,4 +148,3 @@
         app:srcCompat="@drawable/ic_photo_white_24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-

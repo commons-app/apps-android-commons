@@ -123,7 +123,7 @@ public class Place implements Parcelable {
      * Checks if the Wikidata item has a Wikipedia page associated with it
      * @return true if there is a Wikipedia link
      */
-    boolean hasWikipediaLink() {
+    public boolean hasWikipediaLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikipediaLink()));
     }
 
@@ -131,7 +131,7 @@ public class Place implements Parcelable {
      * Checks if the Wikidata item has a Wikidata page associated with it
      * @return true if there is a Wikidata link
      */
-    boolean hasWikidataLink() {
+    public boolean hasWikidataLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikidataLink()));
     }
 
@@ -139,7 +139,7 @@ public class Place implements Parcelable {
      * Checks if the Wikidata item has a Commons page associated with it
      * @return true if there is a Commons link
      */
-    boolean hasCommonsLink() {
+    public boolean hasCommonsLink() {
         return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getCommonsLink()));
     }
 

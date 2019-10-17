@@ -6,7 +6,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -222,6 +221,7 @@ public class LocationServiceManager implements LocationListener {
         LOCATION_MEDIUM_CHANGED,      //Between slight and significant changes, will be used for nearby card view updates.
         LOCATION_NOT_CHANGED,
         PERMISSION_JUST_GRANTED,
-        MAP_UPDATED
+        MAP_UPDATED,
+        SEARCH_CUSTOM_AREA
     }
 }
