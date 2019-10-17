@@ -25,7 +25,6 @@ public class LayoutUtils {
             public void onGlobalLayout() {
                 view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-                Log.d("deneme7","heig:"+layoutParams.height+"weig:"+view.getWidth() * rate);
                 layoutParams.height = (int) (view.getWidth() * rate);
                 view.setLayoutParams(layoutParams);
             }
