@@ -49,6 +49,9 @@ public class NearbyParentFragmentPresenter
     private boolean isPortraitMode;
     private boolean placesLoadedOnce;
 
+    public boolean displayNeedsPhoto;
+    public boolean displayExists;
+
     private LocationServiceManager locationServiceManager;
 
     public static NearbyParentFragmentPresenter presenterInstance;
@@ -352,14 +355,8 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void filterByMarkerType(List<Label> selectedLabels) {
-        //List<NearbyBaseMarker> nearbyBaseMarkerList = nearbyMapFragmentView.getBaseMarkerOptions();
-        //for (NearbyBaseMarker nearbyBaseMarker : nearbyBaseMarkerList) {
-            // filter from existing markers
-             //if (!nearbyBaseMarker.getPlace().getLabel().toString().equals(placeType)) {
-                //Log.d("deneme44",nearbyBaseMarker.getPlace().name);
-                nearbyMapFragmentView.filterMarkersByLabels(selectedLabels);
-            //}
-        //}
+        nearbyMapFragmentView.filterMarkersByLabels(selectedLabels, displayExists, displayNeedsPhoto);
+
     }
 
     @Override

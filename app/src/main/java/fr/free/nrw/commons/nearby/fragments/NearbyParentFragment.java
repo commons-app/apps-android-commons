@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +35,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -121,6 +124,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @BindView(R.id.choice_chip_exists) Chip chipExists;
     @BindView(R.id.choice_chip_needs_photo) Chip chipNeedsPhoto;
+    @BindView(R.id.choice_chip_group) ChipGroup choiceChipGroup;
     @BindView(R.id.search_view) SearchView searchView;
     @BindView(R.id.search_list_view) RecyclerView recyclerView;
     @BindView(R.id.nearby_filter_list) View nearbyFilterList;
@@ -198,6 +202,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     public void initNearbyFilter() {
+        initFilterChips();
         nearbyFilterList.setVisibility(View.GONE);
 
         searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
@@ -230,6 +235,31 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .subscribe( query -> {
                     ((NearbyFilterSearchRecyclerViewAdapter) recyclerView.getAdapter()).getFilter().filter(query.toString());
                 }));
+    }
+
+    private void initFilterChips() {
+
+        chipNeedsPhoto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    NearbyParentFragmentPresenter.getInstance().displayNeedsPhoto = true;
+                } else {
+                    NearbyParentFragmentPresenter.getInstance().displayNeedsPhoto = false;
+                }
+            }
+        });
+
+        chipExists.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    NearbyParentFragmentPresenter.getInstance().displayExists = true;
+                } else {
+                    NearbyParentFragmentPresenter.getInstance().displayExists = false;
+                }
+            }
+        });
     }
 
     /**

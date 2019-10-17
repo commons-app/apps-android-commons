@@ -343,17 +343,14 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void filterMarkersByLabels(List<Label> selectedLabels) {
-        /*Log.d("deneme55","name:"+nearbyBaseMarker.getPlace().getLabel().toString());
-        VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
-                getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
-        Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-
-        NearbyController.markerLabelList.get(nearbyBaseMarker.getPlace().getLabel().toString()).setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
-        */
+    public void filterMarkersByLabels(List<Label> selectedLabels, boolean displayExists, boolean displayNeedsPhoto) {
 
         if (selectedLabels.size() == 0 ) { // If nothing is selected, display all
             for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
+                if (markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
+                    // place needs photo
+                    
+                }
                 updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
             }
         } else {
@@ -486,14 +483,20 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Greys out all markers except current location marker
+     */
     public void greyOutAllMarkers() {
         VectorDrawableCompat vectorDrawable;
             vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
         Bitmap icon = UiUtils.getBitmap(vectorDrawable);
         for (Marker marker : mapboxMap.getMarkers()) {
-            marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+            if (currentLocationMarker.getTitle() != marker.getTitle()) {
+                marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+            }
         }
+        addCurrentLocationMarker(NearbyController.currentLocation);
     }
 
     /**
@@ -518,6 +521,5 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
                 .build();
         mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
     }
-
 }
 

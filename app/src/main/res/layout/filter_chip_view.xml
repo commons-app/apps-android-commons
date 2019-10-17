@@ -23,16 +23,18 @@
 
         <com.google.android.material.chip.Chip
             android:id="@+id/choice_chip_exists"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:chipBackgroundColor="@color/bg_chip_state"
             android:text="@string/place_state_exists"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/choice_chip_needs_photo"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:chipBackgroundColor="@color/bg_chip_state"
             android:text="@string/place_state_needs_photo"/>
 
     </com.google.android.material.chip.ChipGroup>

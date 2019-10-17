@@ -29,6 +29,6 @@ public interface NearbyMapContract {
         void centerMapToPlace(Place place, boolean isPortraitMode);
         void removeCurrentLocationMarker();
         List<NearbyBaseMarker> getBaseMarkerOptions();
-        void filterMarkersByLabels(List<Label> labelList);
+        void filterMarkersByLabels(List<Label> labelList, boolean displayExists, boolean displayNeeds);
     }
 }
