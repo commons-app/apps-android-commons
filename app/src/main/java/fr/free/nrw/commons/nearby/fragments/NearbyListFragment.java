@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.nearby;
+package fr.free.nrw.commons.nearby.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,10 +22,13 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
+import fr.free.nrw.commons.nearby.NearbyController;
+import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import timber.log.Timber;
 
-public class NearbyListFragment extends CommonsDaggerSupportFragment {
-    private Bundle bundleForUpdates; // Carry information from activity about changed nearby places and current location
+public class NearbyListFragment extends CommonsDaggerSupportFragment implements NearbyParentFragmentContract.NearbyListView {
 
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
     }.getType();
@@ -70,30 +73,6 @@ public class NearbyListFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * Updates nearby list elements all together
-     */
-    public void updateNearbyListSignificantly() {
-        try {
-            adapterFactory.updateAdapterData(getPlaceListFromBundle(bundleForUpdates), (RVRendererAdapter<Place>) recyclerView.getAdapter());
-        } catch (NullPointerException e) {
-            Timber.e("Null pointer exception from calling recyclerView.getAdapter()");
-        }
-    }
-
-    /**
-     * While nearby updates for current location held with bundle, automatically, custom updates are
-     * done by calling this method, triggered by search this are button input from user.
-     * @param placeList List of nearby places to be added list fragment
-     */
-    public void updateNearbyListSignificantlyForCustomLocation(List<Place> placeList) {
-        try {
-            adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) recyclerView.getAdapter());
-        } catch (NullPointerException e) {
-            Timber.e("Null pointer exception from calling recyclerView.getAdapter()");
-        }
-    }
-
-    /**
      * When user moved too much, we need to update nearby list too. This operation is made by passing
      * a bundle from NearbyFragment to NearbyListFragment and NearbyMapFragment. This method extracts
      * place list from bundle to a list variable.
@@ -116,12 +95,9 @@ public class NearbyListFragment extends CommonsDaggerSupportFragment {
         return placeList;
     }
 
-    /**
-     * Sets bundles for updates in map. Ie. user is moved too much so we need to update nearby markers.
-     * @param bundleForUpdates includes new calculated nearby places.
-     */
-    public void setBundleForUpdates(Bundle bundleForUpdates) {
-        this.bundleForUpdates = bundleForUpdates;
+    @Override
+    public void updateListFragment(List<Place> placeList) {
+        Timber.d("Update list fragment");
+        adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) recyclerView.getAdapter());
     }
-
 }
