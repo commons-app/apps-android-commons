@@ -158,8 +158,10 @@ public class BookmarkLocationsDao {
                 location,
                 cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORY)),
                 builder.build(),
+                null,
                 null
         );
+        // TODO: add pic and exists to bookmark location dao
     }
 
     private ContentValues toContentValues(Place bookmarkLocation) {

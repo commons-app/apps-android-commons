@@ -24,18 +24,20 @@ public class Place implements Parcelable {
     public final LatLng location;
     private final String category;
     public final String pic;
+    public final String exists;
 
     public String distance;
     public final Sitelinks siteLinks;
 
 
-    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic) {        this.name = name;
+    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String exists) {        this.name = name;
         this.label = label;
         this.longDescription = longDescription;
         this.location = location;
         this.category = category;
         this.siteLinks = siteLinks;
         this.pic = pic;
+        this.exists = exists;
     }
 
     public Place(Parcel in) {
@@ -46,6 +48,7 @@ public class Place implements Parcelable {
         this.category = in.readString();
         this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
         this.pic = in.readString();
+        this.exists = in.readString();
     }
 
     public static Place from(NearbyResultItem item) {
@@ -64,7 +67,9 @@ public class Place implements Parcelable {
                         .setWikipediaLink(item.getWikipediaArticle().getValue())
                         .setCommonsLink(item.getCommonsArticle().getValue())
                         .setWikidataLink(item.getItem().getValue())
-                        .build(), item.getPic().getValue());
+                        .build(),
+                item.getPic().getValue(),
+                item.getExists().getValue());
     }
 
     /**
@@ -176,6 +181,7 @@ public class Place implements Parcelable {
                 ", distance='" + distance + '\'' +
                 ", siteLinks='" + siteLinks.toString() + '\'' +
                 ", pic='" + pic + '\'' +
+                ", exists='" + exists + '\'' +
                 '}';
     }
 

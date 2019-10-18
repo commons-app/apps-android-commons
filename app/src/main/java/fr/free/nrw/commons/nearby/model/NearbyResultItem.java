@@ -13,6 +13,7 @@ public class NearbyResultItem {
     @SerializedName("classLabel") private final ResultTuple classLabel;
     @SerializedName("commonsCategory") private final ResultTuple commonsCategory;
     @SerializedName("pic") private final ResultTuple pic;
+    @SerializedName("exists") private final ResultTuple exists;
 
     public NearbyResultItem(ResultTuple item,
                             ResultTuple wikipediaArticle,
@@ -22,7 +23,8 @@ public class NearbyResultItem {
                             ResultTuple icon, ResultTuple className,
                             ResultTuple classLabel,
                             ResultTuple commonsCategory,
-                            ResultTuple pic) {
+                            ResultTuple pic,
+                            ResultTuple exists) {
         this.item = item;
         this.wikipediaArticle = wikipediaArticle;
         this.commonsArticle = commonsArticle;
@@ -33,6 +35,7 @@ public class NearbyResultItem {
         this.classLabel = classLabel;
         this.commonsCategory = commonsCategory;
         this.pic = pic;
+        this.exists = exists;
     }
 
     public ResultTuple getItem() {
@@ -72,5 +75,8 @@ public class NearbyResultItem {
     }
     public ResultTuple getPic() {
         return pic == null ? new ResultTuple():pic;
+    }
+    public ResultTuple getExists() {
+        return exists == null ? new ResultTuple():exists;
     }
 }

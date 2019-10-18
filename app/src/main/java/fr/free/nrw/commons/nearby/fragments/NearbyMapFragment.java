@@ -347,10 +347,11 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
 
         if (selectedLabels.size() == 0 ) { // If nothing is selected, display all
             for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-                if (markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
-                    // place needs photo
-                    
-                }
+                //if (displayExists && displayNeedsPhoto) {
+                    //markerPlaceGroup.getPlace().
+                Log.d("deneme6","pic name:"+markerPlaceGroup.getPlace().getName() +"pic.exists:"+markerPlaceGroup.getPlace().exists);
+                //}
+
                 updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
             }
         } else {
@@ -384,6 +385,8 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         List<Marker> markers = mapboxMap.addMarkers(baseMarkerList);
         NearbyController.markerExistsMap = new HashMap<Boolean, Marker>();
         NearbyController.markerNeedPicMap = new HashMap<Boolean, Marker>();
+
+        NearbyController.markerLabelList.clear();
 
         for (int i = 0; i < baseMarkerList.size(); i++) {
 

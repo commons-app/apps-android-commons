@@ -9,6 +9,7 @@ SELECT
      ?commonsArticle
      (SAMPLE(?commonsCategory) as ?commonsCategory)
      (SAMPLE(?pic) as ?pic)
+     (SAMPLE(?exists) as ?exists)
    WHERE {
      # Around given location...
      SERVICE wikibase:around {
@@ -26,6 +27,9 @@ SELECT
 
      # Get (P18)
      OPTIONAL { ?item wdt:P18 ?pic. }
+
+     # Get (P576)
+     OPTIONAL { ?item wdt:P576 ?exists. }
 
      # Get the class label in the preferred language of the user, or any other language if no label is available in that language.
      OPTIONAL {
