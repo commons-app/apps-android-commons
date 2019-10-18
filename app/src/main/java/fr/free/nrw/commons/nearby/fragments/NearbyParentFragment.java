@@ -136,6 +136,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Inject ContributionController controller;
     @Inject WikidataEditListener wikidataEditListener;
 
+    private NearbyFilterSearchRecyclerViewAdapter nearbyFilterSearchRecyclerViewAdapter;
+
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
     private Animation rotate_backward;
@@ -202,7 +204,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     public void initNearbyFilter() {
-        initFilterChips();
         nearbyFilterList.setVisibility(View.GONE);
 
         searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
@@ -222,8 +223,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        NearbyFilterSearchRecyclerViewAdapter nearbyFilterSearchRecyclerViewAdapter
-                = new NearbyFilterSearchRecyclerViewAdapter(getContext(),new ArrayList<>(TEXT_TO_DESCRIPTION.values()), recyclerView);
+        nearbyFilterSearchRecyclerViewAdapter = new NearbyFilterSearchRecyclerViewAdapter(getContext(),new ArrayList<>(TEXT_TO_DESCRIPTION.values()), recyclerView);
         nearbyFilterList.getLayoutParams().width = (int) LayoutUtils.getScreenWidth(getActivity(), 0.75);
         recyclerView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
         LayoutUtils.setLayoutHeightAllignedToWidth(1, nearbyFilterList);
@@ -235,6 +235,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .subscribe( query -> {
                     ((NearbyFilterSearchRecyclerViewAdapter) recyclerView.getAdapter()).getFilter().filter(query.toString());
                 }));
+        initFilterChips();
     }
 
     private void initFilterChips() {
@@ -244,8 +245,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     NearbyParentFragmentPresenter.getInstance().displayNeedsPhoto = true;
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
                 } else {
                     NearbyParentFragmentPresenter.getInstance().displayNeedsPhoto = false;
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
                 }
             }
         });
@@ -255,8 +258,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     NearbyParentFragmentPresenter.getInstance().displayExists = true;
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
                 } else {
                     NearbyParentFragmentPresenter.getInstance().displayExists = false;
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
                 }
             }
         });

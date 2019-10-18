@@ -345,13 +345,29 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
     public void filterMarkersByLabels(List<Label> selectedLabels, boolean displayExists, boolean displayNeedsPhoto) {
 
         if (selectedLabels.size() == 0 ) { // If nothing is selected, display all
+            greyOutAllMarkers();
             for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-                //if (displayExists && displayNeedsPhoto) {
-                    //markerPlaceGroup.getPlace().
-                Log.d("deneme6","pic name:"+markerPlaceGroup.getPlace().getName() +"pic.destroyed:"+markerPlaceGroup.getPlace().destroyed);
-                //}
+                if (displayExists && displayNeedsPhoto) {
+                    // Exists and needs photo
+                    if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty() && markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
+                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                    }
+                } else if (displayExists && !displayNeedsPhoto) {
+                    // Exists and all included needs and doesn't needs photo
+                    if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty()) {
+                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                    }
+                } else if (!displayExists && displayNeedsPhoto) {
+                    // All and only needs photo
+                    if (markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
+                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                    }
+                } else if (!displayExists && !displayNeedsPhoto) {
+                    // all
+                    updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                }
 
-                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                //updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
             }
         } else {
             // First greyed out all markers
@@ -359,7 +375,26 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
             for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
                 for (Label label : selectedLabels) {
                     if (markerPlaceGroup.getPlace().getLabel().toString().equals(label.toString())) {
-                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+
+                        if (displayExists && displayNeedsPhoto) {
+                            // Exists and needs photo
+                            if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty() && markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
+                                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                            }
+                        } else if (displayExists && !displayNeedsPhoto) {
+                            // Exists and all included needs and doesn't needs photo
+                            if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty()) {
+                                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                            }
+                        } else if (!displayExists && displayNeedsPhoto) {
+                            // All and only needs photo
+                            if (markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
+                                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                            }
+                        } else if (!displayExists && !displayNeedsPhoto) {
+                            // all
+                            updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                        }
                     }
                 }
             }

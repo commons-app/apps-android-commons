@@ -30,7 +30,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
     private RecyclerView recyclerView;
     private ArrayList<Label> labels;
     private ArrayList<Label> displayedLabels;
-    private ArrayList<Label> selectedLabels = new ArrayList<>();
+    public ArrayList<Label> selectedLabels = new ArrayList<>();
 
     RecyclerView.SmoothScroller smoothScroller;
 

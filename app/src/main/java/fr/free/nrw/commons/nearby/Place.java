@@ -36,8 +36,8 @@ public class Place implements Parcelable {
         this.location = location;
         this.category = category;
         this.siteLinks = siteLinks;
-        this.pic = pic;
-        this.destroyed = destroyed;
+        this.pic = (pic == null) ? "":pic;
+        this.destroyed = (destroyed == null) ? "":destroyed;
     }
 
     public Place(Parcel in) {
@@ -47,8 +47,10 @@ public class Place implements Parcelable {
         this.location = in.readParcelable(LatLng.class.getClassLoader());
         this.category = in.readString();
         this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
-        this.pic = in.readString();
-        this.destroyed = in.readString();
+        String picString = in.readString();
+        this.pic = (picString == null) ? "":picString;
+        String destroyedString = in.readString();
+        this.destroyed = (destroyedString == null) ? "":destroyedString;
     }
 
     public static Place from(NearbyResultItem item) {
