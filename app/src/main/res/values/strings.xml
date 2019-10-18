@@ -172,7 +172,7 @@
   <string name="title_activity_nearby">Nearby Places</string>
   <string name="no_nearby">No nearby places found</string>
   <string name="warning">Warning</string>
-  <string name="upload_image_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
+  <string name="upload_image_duplicate">This file already destroyed on Commons. Are you sure you want to proceed?</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
   <string name="media_detail_title">Title</string>
@@ -409,7 +409,7 @@
   <string name="next">Next</string>
   <string name="previous">Previous</string>
   <string name="submit">Submit</string>
-  <string name="upload_title_duplicate" formatted="true">A file with the file name %1$s exists. Are you sure you want to proceed?</string>
+  <string name="upload_title_duplicate" formatted="true">A file with the file name %1$s destroyed. Are you sure you want to proceed?</string>
   <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
   <plurals name="upload_count_title">
         <item quantity="one">%1$d Upload</item>

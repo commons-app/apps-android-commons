@@ -31,7 +31,6 @@ import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -349,7 +348,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
             for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
                 //if (displayExists && displayNeedsPhoto) {
                     //markerPlaceGroup.getPlace().
-                Log.d("deneme6","pic name:"+markerPlaceGroup.getPlace().getName() +"pic.exists:"+markerPlaceGroup.getPlace().exists);
+                Log.d("deneme6","pic name:"+markerPlaceGroup.getPlace().getName() +"pic.destroyed:"+markerPlaceGroup.getPlace().destroyed);
                 //}
 
                 updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
@@ -455,8 +454,12 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
                     getContext().getResources(), R.drawable.ic_custom_bookmark_marker, getContext().getTheme()
             );
         } else if (!place.pic.trim().isEmpty()) {
-            vectorDrawable = VectorDrawableCompat.create(
+            vectorDrawable = VectorDrawableCompat.create( // Means place has picture
                     getContext().getResources(), R.drawable.ic_custom_map_marker_green, getContext().getTheme()
+            );
+        } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+            vectorDrawable = VectorDrawableCompat.create( // Means place has picture
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_grey, getContext().getTheme()
             );
         } else {
             vectorDrawable = VectorDrawableCompat.create(

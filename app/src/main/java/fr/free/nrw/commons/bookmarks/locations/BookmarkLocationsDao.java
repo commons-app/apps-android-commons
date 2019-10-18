@@ -161,7 +161,7 @@ public class BookmarkLocationsDao {
                 null,
                 null
         );
-        // TODO: add pic and exists to bookmark location dao
+        // TODO: add pic and destroyed to bookmark location dao
     }
 
     private ContentValues toContentValues(Place bookmarkLocation) {

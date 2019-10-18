@@ -182,7 +182,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
-     * notifies the user that a similar image exists
+     * notifies the user that a similar image destroyed
      *
      * @param originalFilePath
      * @param possibleFilePath

@@ -24,20 +24,20 @@ public class Place implements Parcelable {
     public final LatLng location;
     private final String category;
     public final String pic;
-    public final String exists;
+    public final String destroyed;
 
     public String distance;
     public final Sitelinks siteLinks;
 
 
-    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String exists) {        this.name = name;
+    public Place(String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String destroyed) {        this.name = name;
         this.label = label;
         this.longDescription = longDescription;
         this.location = location;
         this.category = category;
         this.siteLinks = siteLinks;
         this.pic = pic;
-        this.exists = exists;
+        this.destroyed = destroyed;
     }
 
     public Place(Parcel in) {
@@ -48,7 +48,7 @@ public class Place implements Parcelable {
         this.category = in.readString();
         this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
         this.pic = in.readString();
-        this.exists = in.readString();
+        this.destroyed = in.readString();
     }
 
     public static Place from(NearbyResultItem item) {
@@ -69,7 +69,7 @@ public class Place implements Parcelable {
                         .setWikidataLink(item.getItem().getValue())
                         .build(),
                 item.getPic().getValue(),
-                item.getExists().getValue());
+                item.getDestroyed().getValue());
     }
 
     /**
@@ -112,7 +112,7 @@ public class Place implements Parcelable {
 
     /**
      * Extracts the entity id from the wikidata link
-     * @return returns the entity id if wikidata link exists
+     * @return returns the entity id if wikidata link destroyed
      */
     @Nullable
     public String getWikiDataEntityId() {
@@ -181,7 +181,7 @@ public class Place implements Parcelable {
                 ", distance='" + distance + '\'' +
                 ", siteLinks='" + siteLinks.toString() + '\'' +
                 ", pic='" + pic + '\'' +
-                ", exists='" + exists + '\'' +
+                ", destroyed='" + destroyed + '\'' +
                 '}';
     }
 

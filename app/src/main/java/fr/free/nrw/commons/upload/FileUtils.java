@@ -164,7 +164,7 @@ public class FileUtils {
     }
 
     /**
-     * Check if file exists in local dirs
+     * Check if file destroyed in local dirs
      */
     public static boolean fileExists(Uri localUri) {
         try {

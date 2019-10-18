@@ -347,7 +347,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Returns the list fragment added to child fragment manager previously, if exists.
+     * Returns the list fragment added to child fragment manager previously, if destroyed.
      */
     private NearbyListFragment getListFragment() {
         NearbyListFragment existingFragment = (NearbyListFragment) getChildFragmentManager()
@@ -359,7 +359,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Returns the map fragment added to child fragment manager previously, if exists.
+     * Returns the map fragment added to child fragment manager previously, if destroyed.
      */
     private NearbyMapFragment getNearbyMapFragment() {
         NearbyMapFragment existingFragment = (NearbyMapFragment) getChildFragmentManager()

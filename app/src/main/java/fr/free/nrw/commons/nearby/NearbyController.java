@@ -164,6 +164,7 @@ public class NearbyController {
 
         VectorDrawableCompat vectorDrawable = null;
         VectorDrawableCompat vectorDrawableGreen = null;
+        VectorDrawableCompat vectorDrawableGrey = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_bookmark_marker, context.getTheme()
@@ -200,12 +201,15 @@ public class NearbyController {
                     context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme());
             vectorDrawableGreen = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_map_marker_green, context.getTheme());
+            vectorDrawableGrey = VectorDrawableCompat.create(
+                    context.getResources(), R.drawable.ic_custom_map_marker_grey, context.getTheme());
         } catch (Resources.NotFoundException e) {
             // ignore when running tests.
         }
         if (vectorDrawable != null) {
             Bitmap icon = UiUtils.getBitmap(vectorDrawable);
             Bitmap iconGreen = UiUtils.getBitmap(vectorDrawableGreen);
+            Bitmap iconGrey = UiUtils.getBitmap(vectorDrawableGrey);
 
             for (Place place : placeList) {
                 String distance = formatDistanceBetween(curLatLng, place.location);
@@ -220,10 +224,14 @@ public class NearbyController {
                 nearbyBaseMarker.place(place);
                 // Check if string is only spaces or empty, if so place doesn't have any picture
                 if (!place.pic.trim().isEmpty()) {
-
                     if (iconGreen != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
                                 .fromBitmap(iconGreen));
+                    }
+                } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+                    if (iconGrey != null) {
+                        nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                                .fromBitmap(iconGrey));
                     }
                 } else {
                     nearbyBaseMarker.icon(IconFactory.getInstance(context)
