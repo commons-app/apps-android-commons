@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby.presenter;
 
-import android.util.Log;
 import android.view.View;
 
 import com.mapbox.mapboxsdk.annotations.Marker;

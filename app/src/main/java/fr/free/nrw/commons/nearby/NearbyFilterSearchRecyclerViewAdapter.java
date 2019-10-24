@@ -90,8 +90,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
             holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : Color.WHITE);
             NearbyParentFragmentPresenter.getInstance().filterByMarkerType(selectedLabels);
         });
-
-        //TODO: recover current location marker if selection is empty
     }
 
     @Override
