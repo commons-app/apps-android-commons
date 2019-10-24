@@ -112,7 +112,7 @@ public class ImageUtils {
     }
 
     /**
-     * @param geolocationOfFileString Geolocation of image. If geotag doesn't destroyed, then this will be an empty string
+     * @param geolocationOfFileString Geolocation of image. If geotag doesn't exists, then this will be an empty string
      * @param latLng Location of wikidata item will be edited after upload
      * @return false if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
      * true if geolocation of the image and wikidata item are different
