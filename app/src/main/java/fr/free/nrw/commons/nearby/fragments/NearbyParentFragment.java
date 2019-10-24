@@ -239,9 +239,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void initFilterChips() {
 
-        chipNeedsPhoto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        chipNeedsPhoto.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (NearbyController.currentLocation != null) {
                 if (isChecked) {
                     NearbyParentFragmentPresenter.getInstance().displayNeedsPhoto = true;
                     NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
@@ -249,12 +248,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     NearbyParentFragmentPresenter.getInstance().displayNeedsPhoto = false;
                     NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
                 }
+            } else {
+                chipNeedsPhoto.setChecked(!isChecked);
             }
         });
 
-        chipExists.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        chipExists.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (NearbyController.currentLocation != null) {
                 if (isChecked) {
                     NearbyParentFragmentPresenter.getInstance().displayExists = true;
                     NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
@@ -262,6 +262,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     NearbyParentFragmentPresenter.getInstance().displayExists = false;
                     NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
                 }
+            } else {
+                chipExists.setChecked(!isChecked);
             }
         });
     }
