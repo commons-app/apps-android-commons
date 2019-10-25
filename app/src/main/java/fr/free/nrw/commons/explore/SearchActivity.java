@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.explore;
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -48,7 +47,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
-    ViewPagerAdapter viewPagerAdapter;
+    private ViewPagerAdapter viewPagerAdapter;
     private String query;
 
     @Override
@@ -84,7 +83,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     /**
      * Sets the titles in the tabLayout and fragments in the viewPager
      */
-    public void setTabs() {
+    private void setTabs() {
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
         searchImageFragment = new SearchImageFragment();
@@ -167,17 +166,17 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
-            FragmentManager supportFragmentManager = getSupportFragmentManager();
-            supportFragmentManager
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager
                     .beginTransaction()
-                    .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+                    .hide(fragmentManager.getFragments().get(fragmentManager.getBackStackEntryCount()))
                     .add(R.id.mediaContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             // Reason for using hide, add instead of replace is to maintain scroll position after
             // coming back to the search activity. See https://github.com/commons-app/apps-android-commons/issues/1631
             // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550
-            supportFragmentManager.executePendingTransactions();
+            fragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(index);
         forceInitBackButton();

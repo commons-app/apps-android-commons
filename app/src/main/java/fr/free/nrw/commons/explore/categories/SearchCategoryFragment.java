@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,7 +48,7 @@ import static android.view.View.VISIBLE;
 
 public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
 
-    private static int TIMEOUT_SECONDS = 15;
+    private static final int TIMEOUT_SECONDS = 15;
 
     @BindView(R.id.imagesListBox)
     RecyclerView categoriesRecyclerView;
@@ -55,10 +56,10 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     ProgressBar progressBar;
     @BindView(R.id.imagesNotFound)
     TextView categoriesNotFoundView;
-    String query;
+    private String query;
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
-    boolean isLoadingCategories;
+    private boolean isLoadingCategories;
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject CategoryClient categoryClient;
@@ -111,7 +112,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
         categoriesRecyclerView.setAdapter(categoriesAdapter);
         categoriesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 // check if end of recycler view is reached, if yes then add more results to existing results
                 if (!recyclerView.canScrollVertically(1)) {
@@ -150,7 +151,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     /**
      * Adds 25 more results to existing search results
      */
-    public void addCategoriesToList(String query) {
+    private void addCategoriesToList(String query) {
         if(isLoadingCategories) return;
         isLoadingCategories=true;
         this.query = query;
@@ -206,7 +207,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
             initErrorView();
             ViewUtil.showShortSnackbar(categoriesRecyclerView, R.string.error_loading_categories);
         }catch (Exception e){
-            e.printStackTrace();
+            Timber.e(e);
         }
 
     }

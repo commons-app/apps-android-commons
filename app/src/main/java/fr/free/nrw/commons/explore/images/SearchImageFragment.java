@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,7 +48,7 @@ import static android.view.View.VISIBLE;
 
 public class SearchImageFragment extends CommonsDaggerSupportFragment {
 
-    private static int TIMEOUT_SECONDS = 15;
+    private static final int TIMEOUT_SECONDS = 15;
 
     @BindView(R.id.imagesListBox)
     RecyclerView imagesRecyclerView;
@@ -55,7 +56,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     ProgressBar progressBar;
     @BindView(R.id.imagesNotFound)
     TextView imagesNotFoundView;
-    String query;
+    private String query;
     @BindView(R.id.bottomProgressBar)
     ProgressBar bottomProgressBar;
 
@@ -111,7 +112,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         imagesRecyclerView.setAdapter(imagesAdapter);
         imagesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 // check if end of recycler view is reached, if yes then add more results to existing results
                 if (!recyclerView.canScrollVertically(1)) {
@@ -172,7 +173,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void handlePaginationSuccess(List<Media> mediaList) {
         progressBar.setVisibility(View.GONE);
         bottomProgressBar.setVisibility(GONE);
-        if (mediaList.size() != 0 && !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
+        if (!mediaList.isEmpty() && !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
             queryList.addAll(mediaList);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
@@ -210,7 +211,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         try {
             ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.error_loading_images);
         }catch (Exception e){
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
@@ -264,7 +265,8 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         compositeDisposable.clear();
     }

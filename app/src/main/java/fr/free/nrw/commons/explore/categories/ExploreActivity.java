@@ -2,7 +2,6 @@ package fr.free.nrw.commons.explore.categories;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,8 +31,6 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 /**
  * This activity displays featured images and images uploaded via mobile
  */
-
-
 public class ExploreActivity
         extends NavigationBaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider,
@@ -49,7 +46,7 @@ public class ExploreActivity
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
+    private ViewPagerAdapter viewPagerAdapter;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
     private CategoryImagesListFragment mobileImagesListFragment;
@@ -84,7 +81,7 @@ public class ExploreActivity
     /**
      * Sets the titles in the tabLayout and fragments in the viewPager
      */
-    public void setTabs() {
+    private void setTabs() {
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
 
@@ -191,10 +188,10 @@ public class ExploreActivity
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
-            FragmentManager supportFragmentManager = getSupportFragmentManager();
-            supportFragmentManager
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager
                     .beginTransaction()
-                    .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+                    .hide(fragmentManager.getFragments().get(fragmentManager.getBackStackEntryCount()))
                     .add(R.id.mediaContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
@@ -224,12 +221,11 @@ public class ExploreActivity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                NavigationBaseActivity.startActivityWithFlags(this, SearchActivity.class);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_search) {
+            NavigationBaseActivity.startActivityWithFlags(this, SearchActivity.class);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 

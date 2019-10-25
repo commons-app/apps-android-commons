@@ -29,7 +29,7 @@ class SearchImagesAdapterFactory {
         RendererBuilder<Media> builder = new RendererBuilder<Media>()
                 .bind(Media.class, new SearchImagesRenderer(listener));
         ListAdapteeCollection<Media> collection = new ListAdapteeCollection<>(
-                searchImageItemList != null ? searchImageItemList : Collections.<Media>emptyList());
+                searchImageItemList != null ? searchImageItemList : Collections.emptyList());
         return new RVRendererAdapter<>(builder, collection);
     }
 }

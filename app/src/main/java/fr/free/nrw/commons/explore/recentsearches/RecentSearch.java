@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class RecentSearch {
     private Uri contentUri;
-    private String query;
+    private final String query;
     private Date lastSearched;
 
     /**

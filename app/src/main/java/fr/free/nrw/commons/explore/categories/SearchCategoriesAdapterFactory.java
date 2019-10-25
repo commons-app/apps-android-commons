@@ -26,7 +26,7 @@ public class SearchCategoriesAdapterFactory {
     public RVRendererAdapter<String> create(List<String> searchImageItemList) {
         RendererBuilder<String> builder = new RendererBuilder<String>().bind(String.class, new SearchCategoriesRenderer(listener));
         ListAdapteeCollection<String> collection = new ListAdapteeCollection<>(
-                searchImageItemList != null ? searchImageItemList : Collections.<String>emptyList());
+                searchImageItemList != null ? searchImageItemList : Collections.emptyList());
         return new RVRendererAdapter<>(builder, collection);
     }
 }

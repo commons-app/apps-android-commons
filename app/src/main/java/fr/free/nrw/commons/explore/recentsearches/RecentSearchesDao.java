@@ -8,6 +8,8 @@ import android.os.RemoteException;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.data.DAOException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +46,7 @@ public class RecentSearchesDao {
                 db.update(recentSearch.getContentUri(), toContentValues(recentSearch), null, null);
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             db.release();
         }
@@ -54,22 +56,20 @@ public class RecentSearchesDao {
      * This method is called on confirmation of delete recent searches.
      * It deletes all recent searches from the database
      */
-    public void deleteAll() {
-        Cursor cursor = null;
+    void deleteAll() {
         ContentProviderClient db = clientProvider.get();
-        try {
-            cursor = db.query(
+        try (Cursor cursor = db.query(
                     RecentSearchesContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     null,
                     new String[]{},
-                    Table.COLUMN_LAST_USED + " DESC"
-            );
+                    Table.COLUMN_LAST_USED + " DESC")) {
+
             while (cursor != null && cursor.moveToNext()) {
                 try {
                     RecentSearch recentSearch = find(fromCursor(cursor).getQuery());
                     if (recentSearch.getContentUri() == null) {
-                        throw new RuntimeException("tried to delete item with no content URI");
+                        throw new DAOException("tried to delete item with no content URI");
                     } else {
                         Timber.d("QUERY_NAME %s - delete tried", recentSearch.getContentUri());
                         db.delete(recentSearch.getContentUri(), null, null);
@@ -77,17 +77,13 @@ public class RecentSearchesDao {
                     }
                 } catch (RemoteException e) {
                     Timber.e(e, "query deleted");
-                    throw new RuntimeException(e);
+                    throw new DAOException(e);
                 } finally {
                     db.release();
                 }
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+            throw new DAOException(e);
         }
     }
 
@@ -99,12 +95,12 @@ public class RecentSearchesDao {
         ContentProviderClient db = clientProvider.get();
         try {
             if (recentSearch.getContentUri() == null) {
-                throw new RuntimeException("tried to delete item with no content URI");
+                throw new DAOException("tried to delete item with no content URI");
             } else {
                 db.delete(recentSearch.getContentUri(), null, null);
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             db.release();
         }
@@ -118,25 +114,21 @@ public class RecentSearchesDao {
      */
     @Nullable
     public RecentSearch find(String name) {
-        Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
-        try {
-            cursor = db.query(
+        try (Cursor cursor = db.query(
                     RecentSearchesContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     Table.COLUMN_NAME + "=?",
                     new String[]{name},
-                    null);
+                    null)) {
+
             if (cursor != null && cursor.moveToFirst()) {
                 return fromCursor(cursor);
             }
         } catch (RemoteException e) {
             // This feels lazy, but to hell with checked exceptions. :)
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
             db.release();
         }
         return null;
@@ -149,21 +141,17 @@ public class RecentSearchesDao {
     @NonNull
     public List<String> recentSearches(int limit) {
         List<String> items = new ArrayList<>();
-        Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
-        try {
-            cursor = db.query( RecentSearchesContentProvider.BASE_URI, Table.ALL_FIELDS,
-                    null, new String[]{}, Table.COLUMN_LAST_USED + " DESC");
+        try (Cursor cursor = db.query( RecentSearchesContentProvider.BASE_URI, Table.ALL_FIELDS,
+                null, new String[]{}, Table.COLUMN_LAST_USED + " DESC")) {
+
             // fixme add a limit on the original query instead of falling out of the loop?
             while (cursor != null && cursor.moveToNext() && cursor.getPosition() < limit) {
                 items.add(fromCursor(cursor).getQuery());
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
             db.release();
         }
         return items;
@@ -207,7 +195,7 @@ public class RecentSearchesDao {
         static final String COLUMN_LAST_USED = "last_used";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-        public static final String[] ALL_FIELDS = {
+        protected static final String[] ALL_FIELDS = {
                 COLUMN_ID,
                 COLUMN_NAME,
                 COLUMN_LAST_USED,
@@ -217,9 +205,12 @@ public class RecentSearchesDao {
 
         static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY,"
-                + COLUMN_NAME + " STRING,"
+                + COLUMN_NAME + " TEXT,"
                 + COLUMN_LAST_USED + " INTEGER"
                 + ");";
+
+        private Table() {
+        }
 
         /**
          * This method creates a RecentSearchesTable in SQLiteDatabase
@@ -264,7 +255,6 @@ public class RecentSearchesDao {
             if (from == 7) {
                 from++;
                 onUpdate(db, from, to);
-                return;
             }
         }
     }

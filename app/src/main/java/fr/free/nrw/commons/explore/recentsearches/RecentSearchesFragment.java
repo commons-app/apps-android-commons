@@ -5,7 +5,6 @@ import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -29,8 +28,8 @@ import fr.free.nrw.commons.explore.SearchActivity;
 public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
     @Inject RecentSearchesDao recentSearchesDao;
     @BindView(R.id.recent_searches_list) ListView recentSearchesList;
-    List<String> recentSearches;
-    ArrayAdapter adapter;
+    private List<String> recentSearches;
+    private ArrayAdapter adapter;
     @BindView(R.id.recent_searches_delete_button)
     ImageView recent_searches_delete_button;
     @BindView(R.id.recent_searches_text_view)
@@ -48,7 +47,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
             recent_searches_text_view.setText(R.string.no_recent_searches);
         }
   
-        recent_searches_delete_button.setOnClickListener(v -> {
+        recent_searches_delete_button.setOnClickListener(v ->
             new AlertDialog.Builder(getContext())
                 .setMessage(getString(R.string.delete_recent_searches_dialog))
                 .setPositiveButton(android.R.string.yes, (dialog, which) -> {
@@ -64,8 +63,8 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
                 })
                 .setNegativeButton(android.R.string.no, null)
                 .create()
-                .show();
-        });
+                .show()
+        );
 
         adapter = new ArrayAdapter<>(requireContext(), R.layout.item_recent_searches, recentSearches);
         recentSearchesList.setAdapter(adapter);

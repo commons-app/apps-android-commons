@@ -32,6 +32,7 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
     private static final int RECENT_SEARCHES = 1;
     private static final int RECENT_SEARCHES_ID = 2;
     private static final String BASE_PATH = "recent_searches";
+    private static final String UNKNOWN_URL = "Unknown URI: ";
     public static final Uri BASE_URI = Uri.parse("content://" + BuildConfig.RECENT_SEARCH_AUTHORITY + "/" + BASE_PATH);
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
 
@@ -77,7 +78,7 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
                 );
                 break;
             default:
-                throw new IllegalArgumentException("Unknown URI" + uri);
+                throw new IllegalArgumentException(UNKNOWN_URL + uri);
         }
 
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -99,12 +100,10 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         long id;
-        switch (uriType) {
-            case RECENT_SEARCHES:
-                id = sqlDB.insert(TABLE_NAME, null, contentValues);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI: " + uri);
+        if (uriType == RECENT_SEARCHES) {
+            id = sqlDB.insert(TABLE_NAME, null, contentValues);
+        } else {
+            throw new IllegalArgumentException(UNKNOWN_URL + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return Uri.parse(BASE_URI + "/" + id);
@@ -118,16 +117,14 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         int rows;
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
-        switch (uriType) {
-            case RECENT_SEARCHES_ID:
-                Timber.d("Deleting recent searches id %s", uri.getLastPathSegment());
-                rows = db.delete(RecentSearchesDao.Table.TABLE_NAME,
-                        "_id = ?",
-                        new String[]{uri.getLastPathSegment()}
-                );
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI" + uri);
+        if (uriType == RECENT_SEARCHES_ID) {
+            Timber.d("Deleting recent searches id %s", uri.getLastPathSegment());
+            rows = db.delete(RecentSearchesDao.Table.TABLE_NAME,
+                    "_id = ?",
+                    new String[]{uri.getLastPathSegment()}
+            );
+        } else {
+            throw new IllegalArgumentException(UNKNOWN_URL + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return rows;
@@ -143,15 +140,13 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
-        switch (uriType) {
-            case RECENT_SEARCHES:
-                for (ContentValues value : values) {
-                    Timber.d("Inserting! %s", value);
-                    sqlDB.insert(TABLE_NAME, null, value);
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI: " + uri);
+        if (uriType == RECENT_SEARCHES) {
+            for (ContentValues value : values) {
+                Timber.d("Inserting! %s", value);
+                sqlDB.insert(TABLE_NAME, null, value);
+            }
+        } else {
+            throw new IllegalArgumentException(UNKNOWN_URL + uri);
         }
         sqlDB.setTransactionSuccessful();
         sqlDB.endTransaction();
@@ -178,21 +173,19 @@ public class RecentSearchesContentProvider extends CommonsDaggerContentProvider 
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated;
-        switch (uriType) {
-            case RECENT_SEARCHES_ID:
-                if (TextUtils.isEmpty(selection)) {
-                    int id = Integer.valueOf(uri.getLastPathSegment());
-                    rowsUpdated = sqlDB.update(TABLE_NAME,
-                            contentValues,
-                            COLUMN_ID + " = ?",
-                            new String[]{String.valueOf(id)});
-                } else {
-                    throw new IllegalArgumentException(
-                            "Parameter `selection` should be empty when updating an ID");
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI: " + uri + " with type " + uriType);
+        if (uriType == RECENT_SEARCHES_ID) {
+            if (TextUtils.isEmpty(selection)) {
+                int id = Integer.valueOf(uri.getLastPathSegment());
+                rowsUpdated = sqlDB.update(TABLE_NAME,
+                        contentValues,
+                        COLUMN_ID + " = ?",
+                        new String[]{String.valueOf(id)});
+            } else {
+                throw new IllegalArgumentException(
+                        "Parameter `selection` should be empty when updating an ID");
+            }
+        } else {
+            throw new IllegalArgumentException(UNKNOWN_URL + uri + " with type " + uriType);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return rowsUpdated;
