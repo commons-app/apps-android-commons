@@ -144,15 +144,6 @@ public class SessionManager {
                 .map(a -> accountManager.removeAccount(a, null, null).getResult()))
                 .doOnComplete(() -> {
                     currentAccount = null;
-                    clearImageCache();
                 });
-    }
-
-    /**
-     * Clear all images cache held by Fresco
-     */
-    private void clearImageCache(){
-        ImagePipeline imagePipeline = Fresco.getImagePipeline();
-        imagePipeline.clearCaches();
     }
 }
