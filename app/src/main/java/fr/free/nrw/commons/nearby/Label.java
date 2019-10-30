@@ -66,6 +66,10 @@ public enum Label {
         this.icon = in.readInt();
     }
 
+    /**
+     * Will be used for nearby filter, to determine if place type is selected or not
+     * @param isSelected true if user selected the place type
+     */
     public void setSelected(boolean isSelected) {
         this.selected = isSelected;
     }

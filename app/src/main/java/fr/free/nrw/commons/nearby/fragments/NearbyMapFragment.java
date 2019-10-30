@@ -340,6 +340,14 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         mapboxMap.removePolygon(currentLocationPolygon);
     }
 
+    /**
+     * Filters markers based on selectedLabels and chips
+     * @param selectedLabels label list that user clicked
+     * @param displayExists chip for displaying only existing places
+     * @param displayNeedsPhoto chip for displaying only places need photos
+     * @param filterForPlaceState true if we filter places for place state
+     * @param filterForAllNoneType true if we filter places with all none button
+     */
     @Override
     public void filterMarkersByLabels(List<Label> selectedLabels,
                                       boolean displayExists,
@@ -404,11 +412,17 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Greys out all markers
+     */
     @Override
     public void filterOutAllMarkers() {
         greyOutAllMarkers();
     }
 
+    /**
+     * Displays all markers
+     */
     @Override
     public void displayAllMarkers() {
         for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
