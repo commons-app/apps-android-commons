@@ -10,17 +10,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatCheckBox;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 
 /**
  * Base on https://stackoverflow.com/a/40939367/3950497 answer.
  */
 public class CheckBoxTriStates extends AppCompatCheckBox {
 
-    static private final int UNKNOW = -1;
+    static public final int UNKNOWN = -1;
 
-    static private final int UNCHECKED = 0;
+    static public final int UNCHECKED = 0;
 
-    static private final int CHECKED = 1;
+    static public final int CHECKED = 1;
 
     private int state;
 
@@ -33,14 +34,14 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
         // checkbox status is changed from uncheck to checked.
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             switch (state) {
-                case UNKNOW:
+                case UNKNOWN:
                     setState(UNCHECKED);;
                     break;
                 case UNCHECKED:
                     setState(CHECKED);
                     break;
                 case CHECKED:
-                    setState(UNKNOW);
+                    setState(UNKNOWN);
                     break;
             }
         }
@@ -85,6 +86,9 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
                 this.clientListener.onCheckedChanged(this, this.isChecked());
             }
 
+            if (NearbyController.currentLocation != null) {
+                NearbyParentFragmentPresenter.getInstance().filterByMarkerType(null, state, false, true);
+            }
             updateBtn();
         }
     }
@@ -124,15 +128,18 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
     }
 
     private void init() {
-        state = UNKNOW;
+        state = UNKNOWN;
         updateBtn();
+    }
+
+    public void addAction() {
         setOnCheckedChangeListener(this.privateListener);
     }
 
     private void updateBtn() {
         int btnDrawable = R.drawable.ic_indeterminate_check_box_black_24dp;
         switch (state) {
-            case UNKNOW:
+            case UNKNOWN:
                 btnDrawable = R.drawable.ic_indeterminate_check_box_black_24dp;
                 break;
             case UNCHECKED:

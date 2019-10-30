@@ -11,8 +11,8 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyMapContract;
@@ -26,6 +26,9 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNKNOWN;
 
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
@@ -142,6 +145,7 @@ public class NearbyParentFragmentPresenter
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
         this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
+        nearbyParentFragmentView.setCheckBoxAction();
         mapInitialized = true;
     }
 
@@ -353,9 +357,29 @@ public class NearbyParentFragmentPresenter
     }
 
     @Override
-    public void filterByMarkerType(List<Label> selectedLabels) {
-        nearbyMapFragmentView.filterMarkersByLabels(selectedLabels, displayExists, displayNeedsPhoto);
+    public void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState, boolean filterForAllNoneType) {
+        if (filterForAllNoneType) { // Means we will set labels based on states
+            switch (state) {
+                case UNKNOWN:
+                    // Do nothing
+                    break;
+                case UNCHECKED:
+                    nearbyMapFragmentView.filterOutAllMarkers();
+                    nearbyParentFragmentView.setRecyclerViewAdapterItemsGreyedOut();
+                    break;
+                case CHECKED:
+                    nearbyMapFragmentView.displayAllMarkers();
+                    nearbyParentFragmentView.setRecyclerViewAdapterAllSelected();
+                    break;
+            }
+        } else {
+            nearbyMapFragmentView.filterMarkersByLabels(selectedLabels, displayExists, displayNeedsPhoto, filterForPlaceState, filterForAllNoneType);
+        }
+    }
 
+    @Override
+    public void setCheckboxUnknown() {
+        nearbyParentFragmentView.setCheckBoxState(CheckBoxTriStates.UNKNOWN);
     }
 
     @Override

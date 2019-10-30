@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ public class NearbyFilterSearchRecyclerViewAdapter
     private ArrayList<Label> labels;
     private ArrayList<Label> displayedLabels;
     public ArrayList<Label> selectedLabels = new ArrayList<>();
+
+    private int state;
 
     RecyclerView.SmoothScroller smoothScroller;
 
@@ -76,6 +79,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
         holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : Color.WHITE);
         holder.placeTypeLayout.setOnClickListener(view -> {
+            NearbyParentFragmentPresenter.getInstance().setCheckboxUnknown();
             if (label.isSelected()) {
                 selectedLabels.remove(label);
             } else {
@@ -88,7 +92,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
             }
             label.setSelected(!label.isSelected());
             holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : Color.WHITE);
-            NearbyParentFragmentPresenter.getInstance().filterByMarkerType(selectedLabels);
+            NearbyParentFragmentPresenter.getInstance().filterByMarkerType(selectedLabels, 0, false, false);
         });
     }
 
@@ -142,4 +146,29 @@ public class NearbyFilterSearchRecyclerViewAdapter
             }
         };
     }
+
+    public void setRecyclerViewAdapterItemsGreyedOut() {
+        state = CheckBoxTriStates.UNCHECKED;
+        for (Label label : labels) {
+            label.setSelected(false);
+            selectedLabels.remove(label);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void setRecyclerViewAdapterAllSelected() {
+        state = CheckBoxTriStates.CHECKED;
+        for (Label label : labels) {
+            label.setSelected(true);
+            if (!selectedLabels.contains(label)) {
+                selectedLabels.add(label);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void setRecyclerViewAdapterNeutral() {
+        state = CheckBoxTriStates.UNKNOWN;
+    }
+
 }

@@ -66,6 +66,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyMarker;
@@ -127,6 +128,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.search_view) SearchView searchView;
     @BindView(R.id.search_list_view) RecyclerView recyclerView;
     @BindView(R.id.nearby_filter_list) View nearbyFilterList;
+    @BindView(R.id.checkbox_tri_states) CheckBoxTriStates checkBoxTriStates;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -237,16 +239,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         initFilterChips();
     }
 
+    @Override
+    public void setCheckBoxAction() {
+        checkBoxTriStates.addAction();
+        checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
+    }
+
+    @Override
+    public void setCheckBoxState(int state) {
+        checkBoxTriStates.setState(state);
+    }
+
     private void initFilterChips() {
 
         chipNeedsPhoto.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (NearbyController.currentLocation != null) {
+                checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 if (isChecked) {
                     NearbyParentFragmentPresenter.getInstance().displayNeedsPhoto = true;
-                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 } else {
                     NearbyParentFragmentPresenter.getInstance().displayNeedsPhoto = false;
-                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 }
             } else {
                 chipNeedsPhoto.setChecked(!isChecked);
@@ -255,12 +269,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         chipExists.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (NearbyController.currentLocation != null) {
+                checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 if (isChecked) {
                     NearbyParentFragmentPresenter.getInstance().displayExists = true;
-                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 } else {
                     NearbyParentFragmentPresenter.getInstance().displayExists = false;
-                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels);
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 }
             } else {
                 chipExists.setChecked(!isChecked);
@@ -651,6 +666,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return true;
         } else {
             return false;
+        }
+    }
+
+    @Override
+    public void setRecyclerViewAdapterAllSelected() {
+        if (nearbyFilterSearchRecyclerViewAdapter != null && NearbyController.currentLocation != null) {
+            nearbyFilterSearchRecyclerViewAdapter.setRecyclerViewAdapterAllSelected();
+        }
+    }
+
+    @Override
+    public void setRecyclerViewAdapterItemsGreyedOut() {
+        if (nearbyFilterSearchRecyclerViewAdapter != null && NearbyController.currentLocation != null) {
+            nearbyFilterSearchRecyclerViewAdapter.setRecyclerViewAdapterItemsGreyedOut();
         }
     }
 

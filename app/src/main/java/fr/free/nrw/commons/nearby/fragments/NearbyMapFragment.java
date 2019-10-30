@@ -341,9 +341,13 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void filterMarkersByLabels(List<Label> selectedLabels, boolean displayExists, boolean displayNeedsPhoto) {
+    public void filterMarkersByLabels(List<Label> selectedLabels,
+                                      boolean displayExists,
+                                      boolean displayNeedsPhoto,
+                                      boolean filterForPlaceState,
+                                      boolean filterForAllNoneType) {
 
-        if (selectedLabels.size() == 0 ) { // If nothing is selected, display all
+        if (selectedLabels.size() == 0 && filterForPlaceState) { // If nothing is selected, display all
             greyOutAllMarkers();
             for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
                 if (displayExists && displayNeedsPhoto) {
@@ -397,6 +401,18 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
                     }
                 }
             }
+        }
+    }
+
+    @Override
+    public void filterOutAllMarkers() {
+        greyOutAllMarkers();
+    }
+
+    @Override
+    public void displayAllMarkers() {
+        for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
+            updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
         }
     }
 

@@ -37,6 +37,10 @@ public interface NearbyParentFragmentContract {
         boolean isDetailsBottomSheetVisible();
         void setBottomSheetDetailsSmaller();
         boolean isSearchThisAreaButtonVisible();
+        void setRecyclerViewAdapterAllSelected();
+        void setRecyclerViewAdapterItemsGreyedOut();
+        void setCheckBoxAction();
+        void setCheckBoxState(int state);
     }
 
     interface NearbyListView {
@@ -51,8 +55,9 @@ public interface NearbyParentFragmentContract {
         void setActionListeners(JsonKvStore applicationKvStore);
         void backButtonClicked();
         MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
-        void filterByMarkerType(List<Label> selectedLabels);
+        void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState, boolean filterForAllNoneType);
         void searchViewGainedFocus();
+        void setCheckboxUnknown();
     }
     
     interface ViewsAreReadyCallback {
