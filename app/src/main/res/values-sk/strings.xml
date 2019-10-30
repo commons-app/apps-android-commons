@@ -64,6 +64,7 @@
   <string name="login_failed_generic">Prihlásenie zlyhalo</string>
   <string name="share_upload_button">Nahrať</string>
   <string name="multiple_share_base_title">Názov tejto sady</string>
+  <string name="add_set_name_toast">Prosím, zadajte názov pre túto sadu</string>
   <string name="provider_modifications">Úpravy</string>
   <string name="menu_upload_single">Nahrať</string>
   <string name="categories_search_text_hint">Vyhľadávanie kategórií</string>
