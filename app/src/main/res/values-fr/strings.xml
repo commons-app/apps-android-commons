@@ -392,7 +392,7 @@
   <string name="achievements_revert_limit_message">minimum requis :</string>
   <string name="images_uploaded_explanation">Le nombre d’images que vous avez téléchargé de Communs, via un logiciel de téléchargement quelconque</string>
   <string name="images_reverted_explanation">Le pourcentage d’images que vous avez téléchargé sur Communs et qui n’ont pas été supprimées</string>
-  <string name="images_used_explanation">Le nombre d’images que vous avez téléchargé sur Communs qui sont utilisées dans des articles de Wikimédia</string>
+  <string name="images_used_explanation">Le nombre d’images que vous avez téléchargé sur Commons qui sont utilisées dans des articles de Wikimédia</string>
   <string name="error_occurred">Une erreur s’est produite !</string>
   <string name="notifications_channel_name_all">Notification de Commons</string>
   <string name="preference_author_name_toggle">Utilisez un nom d\'auteur personnalisé</string>
