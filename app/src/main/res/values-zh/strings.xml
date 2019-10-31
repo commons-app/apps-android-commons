@@ -2,6 +2,7 @@
 <!-- Authors:
 * 94rain
 * A Chinese Wikipedian
+* A Retired User
 * Abijeet Patro
 * Aefgh39622
 * Angrydog001
@@ -10,11 +11,14 @@
 * Hydra
 * Kuailong
 * Liuxinyu970226
+* Looong
 * Qiyue2001
 * Shizhao
+* VulpesVulpes825
 * Wxyveronica
 * Yfdyh000
 * ZhaoGang
+* 予弦
 * 佛壁灯
 * 夢蝶葬花
 * 神樂坂秀吉
@@ -49,7 +53,7 @@
   <string name="upload_completed_notification_text">点击查看您的上传</string>
   <string name="upload_progress_notification_title_start">开始%1$s的上传</string>
   <string name="upload_progress_notification_title_in_progress">%1$s正在上传</string>
-  <string name="upload_progress_notification_title_finishing">完成上传%1$s</string>
+  <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
   <plurals name="uploads_pending_notification_indicator">
@@ -113,7 +117,7 @@
   <string name="about_license">维基共享资源应用是由维基媒体社区的受助者和志愿者创建和维护的开源应用。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
   <string name="about_improve">创建新的&lt;a href=\"%1$s\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
   <string name="about_privacy_policy">&lt;u&gt;隐私政策&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;制作人员&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;信用&lt;/u&gt;</string>
   <string name="title_activity_about">关于</string>
   <string name="menu_feedback">发送反馈（通过电子邮件）</string>
   <string name="no_email_client">未安装电子邮件客户端</string>
@@ -134,9 +138,9 @@
   <string name="allow_gps_summary">如果图片没有地理标记，以及地理标签图片的话，就取得当前位置。警告：这将暴露您的当前位置。</string>
   <string name="preference_theme">夜间模式</string>
   <string name="preference_theme_summary">使用黑暗主题</string>
-  <string name="license_name_cc_by_sa_four">署名-相同方式共享4.0</string>
+  <string name="license_name_cc_by_sa_four">署名-ShareAlike4.0</string>
   <string name="license_name_cc_by_four">署名4.0</string>
-  <string name="license_name_cc_by_sa">署名-相同方式共享3.0</string>
+  <string name="license_name_cc_by_sa">署名-ShareAlike3.0</string>
   <string name="license_name_cc_by">署名3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -154,20 +158,20 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC0</string>
-  <string name="tutorial_1_text">维基共享资源存储大量用于维基百科的图片。</string>
+  <string name="tutorial_1_text">维基共享资源存储大部分用于维基百科的图片。</string>
   <string name="tutorial_1_subtext">您的图像会帮助教育全世界的人！</string>
   <string name="tutorial_2_text">请上传完全由您拍摄或创作的图片：</string>
   <string name="tutorial_2_subtext_1">自然物（花、动物、山峰）</string>
   <string name="tutorial_2_subtext_2">实用对象（自行车、火车站）</string>
-  <string name="tutorial_2_subtext_3">著名人物（您会见的市长、奥运运动员）</string>
+  <string name="tutorial_2_subtext_3">著名人物（您见过的市长、奥运会运动员）</string>
   <string name="tutorial_3_text">请不要上传：</string>
   <string name="tutorial_3_subtext_1">您朋友的自拍照或图片</string>
   <string name="tutorial_3_subtext_2">您从互联网下载的图片</string>
-  <string name="tutorial_3_subtext_3">专利应用的截图</string>
+  <string name="tutorial_3_subtext_3">专门应用的截图</string>
   <string name="tutorial_4_text">示例上传：</string>
   <string name="tutorial_4_subtext_1">标题：悉尼歌剧院</string>
   <string name="tutorial_4_subtext_2">说明：穿过海湾看到的悉尼歌剧院</string>
-  <string name="tutorial_4_subtext_3">分类：来自西侧的悉尼歌剧院、悉尼歌剧院外观</string>
+  <string name="tutorial_4_subtext_3">分类：尼歌剧院西侧、悉尼歌剧院远景</string>
   <string name="welcome_wikipedia_text">贡献您的图像。使维基百科的条目更加生动！</string>
   <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
   <string name="welcome_copyright_text">您的图像可以帮助教育世界各地的人。</string>
@@ -212,7 +216,7 @@
   <string name="maximum_limit_alert">无法显示超过500张</string>
   <string name="enter_valid">输入有效数字</string>
   <string name="cannot_be_zero">上传数量限制不能是 0</string>
-  <string name="set_limit">设置上传限制</string>
+  <string name="set_limit">最近上传限制</string>
   <string name="login_failed_2fa_not_supported">目前不支持双因素验证。</string>
   <string name="logout_verification">您真的想要退出么？</string>
   <string name="commons_logo">共享资源标志</string>
@@ -246,9 +250,9 @@
   <string name="navigation_item_logout">退出</string>
   <string name="navigation_item_info">教程</string>
   <string name="navigation_item_notification">通知</string>
-  <string name="navigation_item_featured_images">特色</string>
+  <string name="navigation_item_featured_images">特色的</string>
   <string name="navigation_item_review">复核</string>
-  <string name="nearby_needs_permissions">附近地点不能在没有位置权限的情况下显示</string>
+  <string name="nearby_needs_permissions">没有位置权限的情况下不能显示附近地点</string>
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享资源文件页面</string>
   <string name="nearby_info_menu_wikidata_article">维基数据项</string>
@@ -268,7 +272,7 @@
   <string name="internet_downloaded">请仅上传由您自己拍摄的图像。请勿上传您从互联网下载的图像。</string>
   <string name="give_permission">提供权限</string>
   <string name="use_external_storage">使用外部存储</string>
-  <string name="use_external_storage_summary">在您的设备上，使用应用中的照相机保存照片</string>
+  <string name="use_external_storage_summary">保存有您的设备的内部照相机应用拍摄的照片</string>
   <string name="login_to_your_account">登录您的账户</string>
   <string name="send_log_file">发送日志文件</string>
   <string name="send_log_file_description">通过电子邮件发送日志文件给开发人员，以帮助调试应用程序的问题。注意：日志可能包含标识信息。</string>
@@ -307,6 +311,8 @@
   <string name="no_internet">互联网不可用</string>
   <string name="internet_established">互联网可用</string>
   <string name="error_notifications">检索通知时出错</string>
+  <string name="error_review">获取审查图片错误。按刷新键重试。</string>
+  <string name="error_review_categories">获取审查图片类别错误。按刷新按键重试。</string>
   <string name="no_notifications">找不到通知</string>
   <string name="about_translate">&lt;u&gt;翻译&lt;/u&gt;</string>
   <string name="about_translate_title">语言</string>
@@ -315,7 +321,7 @@
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重试</string>
   <string name="showcase_view_got_it_button">明白了！</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">这些是您附近需要图片以阐明维基百科条目的地方</string>
+  <string name="showcase_view_whole_nearby_activity">这些是您附近需要图片以阐明维基百科条目的地方。\n点击“检索这个区域”来锁定地图并启动定位功能来检索附近位置。</string>
   <string name="showcase_view_list_icon">点按此按钮会出现这些地点的列表</string>
   <string name="showcase_view_plus_fab">您可以从您的图库或照相机中上传任意地点的图片</string>
   <string name="no_images_found">找不到图片！</string>
@@ -366,6 +372,7 @@
   <string name="add_description">+ 添加描述</string>
   <string name="no_recent_searches">还没有最近搜索</string>
   <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
+  <string name="delete_search_dialog">你想删除本次检索吗？</string>
   <string name="search_history_deleted">搜索历史已删除</string>
   <string name="nominate_delete">提名删除</string>
   <string name="delete">删除</string>
@@ -455,10 +462,24 @@
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
   <string name="bad_token_error_proposed_solution">因为编辑令牌失效上传失败。请尝试登出后重新登录。</string>
   <string name="error_processing_image">处理图像时出错。请再试一次！</string>
+  <string name="getting_edit_token">获取编辑标记</string>
+  <string name="check_category_adding_template">添加类别检查模板</string>
+  <string name="check_category_notification_title">请求对%1$s进行类别检查</string>
+  <string name="check_category_edit_summary">请求类别检查</string>
+  <string name="check_category_success_title">已请求类别检查</string>
+  <string name="check_category_failure_title">类别检查请求不起作用</string>
+  <string name="check_category_success_message">%1$成功请求类别检查</string>
+  <string name="check_category_failure_message">%1$不能请求类别检查</string>
+  <string name="check_category_toast">正在请求对%1$进行类别检查</string>
+  <string name="nominate_for_deletion_edit_file_page">添加文件的删除信息</string>
   <string name="nominate_for_deletion_done">完成</string>
   <string name="nominate_for_deletion_notify_user">在讨论页上通知用户</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">正在添加文件到删除请求的日志文件中。</string>
+  <string name="nominate_for_deletion_create_deletion_request">创建删除请求子页面</string>
   <string name="notsure">不确定</string>
   <string name="send_thank_success_title">发送感谢成功</string>
+  <string name="send_thank_success_message">成功的给%1$发送感谢</string>
+  <string name="send_thank_failure_message">给%1$发送感谢失败</string>
   <string name="send_thank_failure_title">发送感谢失败</string>
   <string name="send_thank_send">发送感谢</string>
   <string name="send_thank_notification_title">发送感谢</string>
@@ -467,8 +488,11 @@
   <string name="review_category">它是否被正确分类？</string>
   <string name="review_spam">它是否在维基共享资源的收录范围内？</string>
   <string name="review_thanks">您是否要感谢贡献者？</string>
+  <string name="review_spam_explanation">如果该图片无用，点击否来提议删除该文件。</string>
   <string name="review_copyright_explanation">标志、屏幕截图和电影海报通常侵犯版权。\n提名删除候选请点击“否”。</string>
+  <string name="review_thanks_explanation">你的感谢会鼓励%1</string>
   <string name="review_no_category">该文件未被分类！</string>
+  <string name="review_category_explanation">该图片是在%1类别下</string>
   <string name="review_spam_report_question">该文件不在收录范围内，原因是</string>
   <string name="review_c_violation_report_question">该文件侵犯版权，原因是</string>
   <string name="review_category_yes_button_text">否，分类错误</string>
@@ -479,38 +503,68 @@
   <string name="review_copyright_no_button_text">看起来没问题</string>
   <string name="review_thanks_yes_button_text">是，为什么不呢</string>
   <string name="review_thanks_no_button_text">下一张图片</string>
+  <string name="skip_image_explanation">点击这个按钮会给你另外一个来自于Wikimedia Common上传的图片</string>
+  <string name="review_image_explanation">你可以审查图片病提高Wikimedia Commoms的质量。\n审查的四个参数是：\n-图片尺寸是否在规定的范围\n-图片是否遵循版权规则\n-图片是否正确分类\n-如果一切正常你是否也可以感谢贡献者</string>
   <plurals name="receiving_shared_content">
     <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
   </plurals>
   <string name="no_image">没有被使用的图片</string>
   <string name="no_image_reverted">没有被撤回的图片</string>
   <string name="no_image_uploaded">还没有上传图片</string>
-  <string name="no_notification" fuzzy="true">您没有未读通知</string>
-  <string name="no_archived_notification" fuzzy="true">您没有已存档的通知</string>
+  <string name="no_notification">您没有任何未读通知</string>
+  <string name="no_archived_notification">您没有已存档的通知</string>
   <string name="share_logs_using">分享日志于</string>
   <string name="menu_option_archived">查看已存档</string>
   <string name="menu_option_unread">查看未读</string>
   <string name="error_occurred_in_picking_images">选择图片时出错</string>
   <string name="image_chooser_title">选择要上传的图片</string>
   <string name="please_wait">请稍候……</string>
+  <string name="images_featured_explanation">特征图片是Wikimedia Commons社区选出的网站上的最高质量的图片中的一部分，是来自于技术高超的摄影师和绘画师。</string>
+  <string name="images_via_nearby_explanation">通过附近位置上传的图片是指那些使用地图上发现位置功能上传的图片</string>
+  <string name="thanks_received_explanation">这些功能允许编辑人员给那些做出了有用编辑的用户发送感谢通知-感谢通知通过使用在历史页面或差分页面上的一个小的感谢链接实现的。</string>
   <string name="previous_image_title_description">复制先前的标题及描述</string>
   <string name="previous_button_tooltip_message">点击复用您在先前图片中填写的标题及描述并稍加修改来匹配当前图像。</string>
+  <string name="welcome_do_upload_content_description">上传好图片到Commons的例子</string>
+  <string name="welcome_dont_upload_content_description">不能上传图片的例子</string>
   <string name="skip_image">跳过该图片</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">下载失败！！在没有外部存储权限时我们不能下载该文件。</string>
+  <string name="manage_exif_tags">管理EXIF标签</string>
+  <string name="manage_exif_tags_summary">选择保存在上传中的EXIF标签</string>
   <string name="exif_tag_name_author">作者</string>
   <string name="exif_tag_name_copyright">著作权</string>
   <string name="exif_tag_name_location">位置</string>
   <string name="exif_tag_name_cameraModel">相机型号</string>
+  <string name="exif_tag_name_lensModel">镜面模型</string>
   <string name="exif_tag_name_serialNumbers">序列号</string>
   <string name="exif_tag_name_software">软件</string>
+  <string name="share_text">上传照片到手机上的Wikimedia Commons应用 下载Commons应用：%1</string>
   <string name="share_via">分享到...</string>
   <string name="image_info">图像信息</string>
   <string name="no_categories_found">找不到分类</string>
   <string name="upload_cancelled">取消上传</string>
+  <string name="previous_image_title_description_not_found">没有之前图片的标题或描述对应的数据</string>
   <string name="dialog_box_text_nomination">%1$s为何应被删除？</string>
+  <string name="review_is_uploaded_by">%1通过%2上传</string>
+  <string name="default_description_language">默认描述语言</string>
+  <string name="delete_helper_make_deletion_toast">尝试将%1作为删除的提案</string>
+  <string name="delete_helper_show_deletion_title">正在提出删除准备</string>
+  <string name="delete_helper_show_deletion_title_success">成功</string>
+  <string name="delete_helper_show_deletion_message_if">成功提出将%1删除</string>
+  <string name="delete_helper_show_deletion_title_failed">失败了</string>
+  <string name="delete_helper_show_deletion_message_else">不能请求删除</string>
   <string name="delete_helper_ask_spam_selfie">自拍</string>
   <string name="delete_helper_ask_spam_blurry">模糊</string>
   <string name="delete_helper_ask_spam_nonsense">无意义</string>
   <string name="delete_helper_ask_spam_other">其他</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">按压图片</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">来自网络的随机图片</string>
   <string name="delete_helper_ask_reason_copyright_logo">标志</string>
   <string name="delete_helper_ask_reason_copyright_other">其他</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">由于他是</string>
+  <string name="share_image_via">分享图片透过</string>
+  <string name="no_achievements_yet">您目前还没有作出任何贡献</string>
+  <string name="account_created">账户已创建！</string>
+  <string name="text_copy">文本已复制至剪贴板</string>
+  <string name="notification_mark_read">通知已标记为已读</string>
+  <string name="some_error">发生了些错误！</string>
 </resources>

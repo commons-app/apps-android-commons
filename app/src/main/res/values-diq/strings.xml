@@ -254,4 +254,7 @@
   <string name="please_wait">Kerem kerên, bıpawên...</string>
   <string name="skip_image" fuzzy="true">NÊ RESIMİ RAVİYARNE</string>
   <string name="image_info">Melumatê resımi</string>
+  <string name="account_created">Hesab vıraziya!</string>
+  <string name="text_copy">Metın kopyayê panoyi biyo</string>
+  <string name="some_error">Yew xeta biye!</string>
 </resources>

@@ -5,6 +5,7 @@
 * Banjo
 * Chairego apc
 * Elisardojm
+* Iváns
 * Maria zaos
 * Navhy
 * Toliño
@@ -16,6 +17,7 @@
   <string name="preference_category_appearance">Aparencia</string>
   <string name="preference_category_general">Xeral</string>
   <string name="preference_category_feedback">Comentarios</string>
+  <string name="preference_category_privacy">Privacidade</string>
   <string name="preference_category_location">Localización</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -97,6 +99,7 @@
   <string name="title_activity_signup">Rexistrarse</string>
   <string name="title_activity_featured_images">Imaxes destacadas</string>
   <string name="title_activity_category_details">Categoría</string>
+  <string name="title_activity_review">Revisión por pares</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">A aplicación Wikimedia Commons é unha aplicación de código aberto creada e mantida polos cesionarios e voluntarios da comunidade de Wikimedia. A Fundación Wikimedia non está involucrada na creación, desenvolvemento ou mantemento da aplicación.</string>
   <string name="about_improve">Crear unha nova &lt;a href=\"%1$s\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
@@ -167,11 +170,13 @@
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Ningunha seleccionada</string>
   <string name="detail_description_empty">Sen descrición</string>
+  <string name="detail_discussion_empty">Sen conversas</string>
   <string name="detail_license_empty">Licenza descoñecida</string>
   <string name="menu_refresh">Refrescar</string>
   <string name="storage_permission_title">Pedindo permiso de almacenamento</string>
   <string name="read_storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode acceder á súa galería sen isto.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Permiso necesario: Escribir en almacenamento externo. A aplicación non pode acceder á súa cámara sen el.</string>
+  <string name="write_storage_permission_rationale">Permiso necesario: Escribir en almacenamento externo. A aplicación non pode acceder á súa cámara/galería sen el.</string>
+  <string name="location_permission_title">Pedindo Permiso de Localización</string>
   <string name="location_permission_rationale">Permiso opcionalː obter a localización actual para suxerir categorías</string>
   <string name="ok">Aceptar</string>
   <string name="title_activity_nearby">Lugares próximos</string>
@@ -182,6 +187,7 @@
   <string name="no">Non</string>
   <string name="media_detail_title">Título</string>
   <string name="media_detail_description">Descrición</string>
+  <string name="media_detail_discussion">Conversa</string>
   <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Data de suba</string>
   <string name="media_detail_license">Licenza</string>
@@ -197,7 +203,7 @@
   <string name="maximum_limit_alert">Non se poden amosar máis de 500</string>
   <string name="enter_valid">Indique un número válido</string>
   <string name="cannot_be_zero">O límite de subas non pode ser 0</string>
-  <string name="set_limit" fuzzy="true">Establecer o límite de subas recentes</string>
+  <string name="set_limit">Establecer o límite de subas recentes</string>
   <string name="login_failed_2fa_not_supported">Actualmente non se permite a autenticación de dous factores.</string>
   <string name="logout_verification">Está seguro de querer saír?</string>
   <string name="commons_logo">Logo de Commons</string>
@@ -232,6 +238,7 @@
   <string name="navigation_item_info">Titorial</string>
   <string name="navigation_item_notification">Notificacións</string>
   <string name="navigation_item_featured_images">Destacados</string>
+  <string name="navigation_item_review">Revisar</string>
   <string name="nearby_needs_permissions">Os sitios situados preto non poden visualizarse sen permisos de localización</string>
   <string name="no_description_found">non se atopou descrición</string>
   <string name="nearby_info_menu_commons_article">Páxina do ficheiro en Commons</string>
@@ -247,7 +254,9 @@
   <string name="upload_problem_image_blurry">A imaxe está borrosa.</string>
   <string name="upload_problem_image_duplicate">A imaxe xa está en Commons.</string>
   <string name="upload_problem_different_geolocation">Esta imaxe foi realizada nunha localización diferente.</string>
+  <string name="upload_problem_fbmd">Por favor sube so fotografías feitas por ti mesmo. Non subas imaxes ou fotografías que atopes nas contas de Facebook de outros.</string>
   <string name="upload_problem_do_you_continue">Aínda quere subir esta imaxe?</string>
+  <string name="internet_downloaded">Por favor suba so fotografías feitas por vostede mesmo. Non suba imaxes ou fotografías que descargara da Internet.</string>
   <string name="give_permission">Outorgar permiso</string>
   <string name="use_external_storage">Usar o almacenamento externo</string>
   <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
@@ -259,6 +268,8 @@
   <string name="nominate_deletion">Nomear para borrado</string>
   <string name="nominated_for_deletion">Esta imaxe foi nomeada para borrar.</string>
   <string name="nominated_see_more">&lt;u&gt;Consulte a páxina web para ter máis para detalles&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">Nomeando %1$d para borrado.</string>
+  <string name="nominating_for_deletion_status">Nomeando ficheiro para borradoː %1$s</string>
   <string name="view_browser">Ver en navegador</string>
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder ao sistema</string>
@@ -270,23 +281,25 @@
   <string name="nearby_location_has_not_changed">A localización non cambiou.</string>
   <string name="nearby_location_not_available">A localización non está dispoñible.</string>
   <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
-  <string name="get_directions" fuzzy="true">OBTER DIRECCIÓNS</string>
-  <string name="read_article" fuzzy="true">LER ARTIGO</string>
+  <string name="get_directions">Obter direccións</string>
+  <string name="read_article">Ler artigo</string>
   <string name="notifications_welcome">Benvido a Wikimedia Commons, %1$s! Alegrámonos de que estea aquí.</string>
   <string name="notifications_talk_page_message">%1$s deixoulle unha mensaxe na súa páxina de conversa</string>
   <string name="notifications_thank_you_edit">Grazas por realizar unha edición</string>
   <string name="notifications_mention">%1$s mencionouno en %2$s.</string>
   <string name="toggle_view_button">Cambiar modo de visualización</string>
-  <string name="nearby_directions" fuzzy="true">COMO CHEGAR</string>
-  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
-  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
+  <string name="nearby_directions">Como chegar</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Avalíenos&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">Saltar titorial</string>
   <string name="no_internet">Internet non dispoñible</string>
   <string name="internet_established">Internet dispoñible</string>
   <string name="error_notifications">Erro ó recuperar as notificacións</string>
+  <string name="error_review">Houbo un erro ó recuperar a imaxe a revisar. Prema en refrescar para tentalo de novo.</string>
+  <string name="error_review_categories">Houbo un erro ó obter as categorías de imaxes a revisar. Prema en refrescar para tentalo de novo.</string>
   <string name="no_notifications">Non se atopou ningunha notificación</string>
   <string name="about_translate">&lt;u&gt;Traducir&lt;/u&gt;</string>
   <string name="about_translate_title">Linguas</string>
@@ -295,7 +308,7 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Hai sitios preto de vostede que precisan fotos para ilustrar os seus artigos de Wikipedia</string>
+  <string name="showcase_view_whole_nearby_activity">Hai sitios preto de vostede que precisan fotos para ilustrar os seus artigos de Wikipedia.\n\nPremendo en \"Procurar nesta área\" bloquea a localización do mapa e comeza unha procura de lugares na área circundante.</string>
   <string name="showcase_view_list_icon">Premendo neste botón aparecerá unha lista destes lugares</string>
   <string name="showcase_view_plus_fab">Pode cargar unha imaxe de calquera lugar dende a galería ou a cámara</string>
   <string name="no_images_found">Non se atopou ningunha imaxeǃ</string>
@@ -312,8 +325,10 @@
   <string name="provider_searches">Consultas buscadas recentemente</string>
   <string name="error_loading_categories">Houbo un erro ó cargar categorías.</string>
   <string name="error_loading_subcategories">Houbo un erro ó cargar subcategorías.</string>
-  <string name="search_tab_title_media" fuzzy="true">MULTIMEDIA</string>
-  <string name="search_tab_title_categories" fuzzy="true">CATEGORÍAS</string>
+  <string name="search_tab_title_media">Multimedia</string>
+  <string name="search_tab_title_categories">Categorías</string>
+  <string name="explore_tab_title_featured">Destacadas</string>
+  <string name="explore_tab_title_mobile">Cargada vía móbil</string>
   <string name="successful_wikidata_edit">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Poñer como imaxe de fondo</string>
@@ -344,14 +359,16 @@
   <string name="add_description">+ Engadir descrición</string>
   <string name="no_recent_searches">Non hai procuras recentes</string>
   <string name="delete_recent_searches_dialog">Está seguro de querer borrar o seu historial de procuras?</string>
+  <string name="delete_search_dialog">Queres borrar esta procura?</string>
   <string name="search_history_deleted">Eliminouse o historial de procuras</string>
   <string name="nominate_delete">Nomear para borrado</string>
+  <string name="delete">Borrar</string>
   <string name="Achievements">Logros</string>
-  <string name="statistics" fuzzy="true">ESTATÍSTICAS</string>
+  <string name="statistics">Estatísticas</string>
   <string name="statistics_thanks">Agradecementos recibidos</string>
   <string name="statistics_featured">Imaxes destacadas</string>
   <string name="statistics_wikidata_edits">Imaxes vía \"Lugares próximos\"</string>
-  <string name="level" fuzzy="true">NIVEL</string>
+  <string name="level">Nivel</string>
   <string name="images_uploaded">Imaxes cargadas</string>
   <string name="image_reverts">Imaxes non revertidas</string>
   <string name="images_used_by_wiki">Imaxes usadas</string>
@@ -403,8 +420,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Decateime de que prexudica a miña privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Cambiei de idea, non quero que siga sendo visible de forma pública</string>
   <string name="deletion_reason_not_interesting">Desculpas, esta imaxe non é interesante para unha enciclopedia</string>
-  <string name="uploaded_by_myself" fuzzy="true">Cargada por min o</string>
-  <string name="no_uploads" fuzzy="true">Benvido a Commonsǃ\n\nCargue o seu primeiro ficheiro premendo na icona da cámara ou da galería enriba.</string>
+  <string name="uploaded_by_myself">Cargada por min o %1$s, usada en %2$d artigo(s).</string>
+  <string name="no_uploads">Dámoslle a benvida ó Commonsǃ\n\nCargue o seu primeiro ficheiro premendo no botón Engadir.</string>
   <string name="desc_language_Worldwide">Mundial</string>
   <string name="desc_language_America">América</string>
   <string name="desc_language_Europe">Europa</string>
@@ -429,6 +446,19 @@
   <string name="this_function_needs_network_connection">Esta función require conexión de rede, verifique a súa configuración de conexión.</string>
   <string name="bad_token_error_proposed_solution">Erro na suba debido a problemas co identificador de edición. Peche a sesión e volva a entrar.</string>
   <string name="error_processing_image">Houbo un erro ó procesar a imaxe. Por favor, ténteo de novoǃ</string>
+  <string name="nominate_for_deletion_done">Feito</string>
+  <string name="notsure">Non seguro</string>
+  <string name="send_thank_success_title">Enviando agradecementos: Éxito</string>
+  <string name="send_thank_send">Enviando agradecementos</string>
+  <string name="send_thank_notification_title">Enviando agradecementos</string>
+  <string name="send_thank_toast">Enviando agradecementos por %1$s</string>
+  <string name="review_category_no_button_text">Parece ben</string>
+  <string name="review_spam_yes_button_text">Non, fóra de alcance</string>
+  <string name="review_spam_no_button_text">Parece ben</string>
+  <string name="review_copyright_yes_button_text">Non, violación de copyright</string>
+  <string name="review_copyright_no_button_text">Parece ben</string>
+  <string name="review_thanks_yes_button_text">Si, por que non</string>
+  <string name="review_thanks_no_button_text">Seguinte imaxe</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recepción de contido compartido. O procesamento da imaxe pode tardar certo tempo, dependendo do tamaño da imaxe e do seu dispositivo</item>
     <item quantity="other">Recepción de contido compartido. O procesamento das imaxes pode tardar certo tempo, dependendo do tamaño das imaxes e do seu dispositivo</item>
@@ -436,12 +466,35 @@
   <string name="no_image">Ningunha imaxe usada</string>
   <string name="no_image_reverted">Ningunha imaxe revertida</string>
   <string name="no_image_uploaded">Ningunha imaxe subida</string>
-  <string name="no_notification" fuzzy="true">Non ten ningunha notificación sen ler</string>
-  <string name="no_archived_notification" fuzzy="true">Non ten notificacións arquivadas</string>
+  <string name="no_notification">Non ten ningunha notificación sen ler</string>
+  <string name="no_archived_notification">Non ten notificacións arquivadas</string>
   <string name="share_logs_using">Compartir os rexistros usando</string>
   <string name="menu_option_archived">Ver arquivadas</string>
   <string name="menu_option_unread">Ver as non lidas</string>
   <string name="error_occurred_in_picking_images">Houbo un erro ó escoller as imaxes</string>
   <string name="image_chooser_title">Escoller imaxes a subir</string>
   <string name="please_wait">Por favor, agarde…</string>
+  <string name="skip_image">Saltar esta imaxe</string>
+  <string name="exif_tag_name_author">Autor</string>
+  <string name="exif_tag_name_copyright">Dereitos de autoría</string>
+  <string name="exif_tag_name_location">Localización</string>
+  <string name="exif_tag_name_cameraModel">Modelo da cámara</string>
+  <string name="exif_tag_name_lensModel">Modelo de lente</string>
+  <string name="exif_tag_name_serialNumbers">Números de serie</string>
+  <string name="exif_tag_name_software">Software</string>
+  <string name="share_via">Compartir a aplicación vía...</string>
+  <string name="image_info">Información da imaxe</string>
+  <string name="no_categories_found">Non se atoparon categorías</string>
+  <string name="upload_cancelled">Cancelouse a carga</string>
+  <string name="delete_helper_show_deletion_title_success">Todo correcto</string>
+  <string name="delete_helper_show_deletion_title_failed">Fallou</string>
+  <string name="delete_helper_ask_spam_selfie">Un autorretrato</string>
+  <string name="delete_helper_ask_spam_blurry">Borrosa</string>
+  <string name="delete_helper_ask_spam_nonsense">Sen sentido</string>
+  <string name="delete_helper_ask_spam_other">Outro</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Foto de prensa</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatoria de internet</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Outro</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
 </resources>

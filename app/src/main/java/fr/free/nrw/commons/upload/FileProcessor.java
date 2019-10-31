@@ -105,13 +105,13 @@ public class FileProcessor implements Callback {
      */
     private Set<String> getExifTagsToRedact(Context context) {
         Type setType = new TypeToken<Set<String>>() {}.getType();
-        Set<String> prefManageEXIFTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
+        Set<String> selectedExifTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
 
         Set<String> redactTags = new HashSet<>(Arrays.asList(
                 context.getResources().getStringArray(R.array.pref_exifTag_values)));
-        Timber.d(redactTags.toString());
 
-        if (prefManageEXIFTags != null) redactTags.removeAll(prefManageEXIFTags);
+        if (selectedExifTags != null) redactTags.removeAll(selectedExifTags);
+        else redactTags.clear();
 
         return redactTags;
     }

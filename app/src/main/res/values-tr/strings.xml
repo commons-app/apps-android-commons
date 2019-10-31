@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* BaRaN6161 TURK
 * Chansey
 * Dual
 * Emperyan
+* Grkn gll
 * Hedda
 * Incelemeelemani
 * Joseph
@@ -316,7 +318,7 @@
   <string name="about_translate_cancel">Vazgeç</string>
   <string name="retry">Tekrar Deneyin</string>
   <string name="showcase_view_got_it_button">Anladım!</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Vikipedi maddelerine eklemek için fotoğrafa ihtiyaç duyan size yakın yerler</string>
+  <string name="showcase_view_whole_nearby_activity">Bunlar, Vikpedi makalelerini açıklamak için resimlere ihtiyaç duyan yakınlarınız.\n\n\'BU ALANI ARA\' düğmesine tıklamak haritayı kilitler ve o konumun yakınında yakındaki bir aramayı başlatır.</string>
   <string name="showcase_view_list_icon">Bu tuşa dokunmak bu yerlerin bir listesini getirir</string>
   <string name="showcase_view_plus_fab">Galerinizden veya kameranızla herhangi bir yer için resim yükleyebilirsiniz.</string>
   <string name="no_images_found">Resim bulunamadı!</string>
@@ -333,7 +335,10 @@
   <string name="provider_searches">Son aranan sorgular</string>
   <string name="error_loading_categories">Kategoriler yüklenirken hata oluştu.</string>
   <string name="error_loading_subcategories">Alt kategoriler yüklenirken hata oluştu.</string>
-  <string name="search_tab_title_categories" fuzzy="true">KATEGORILER</string>
+  <string name="search_tab_title_media">Medya</string>
+  <string name="search_tab_title_categories">Kategoriler</string>
+  <string name="explore_tab_title_featured">Öne çıkan</string>
+  <string name="explore_tab_title_mobile">Mobil yoluyla yüklendi</string>
   <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
   <string name="menu_set_wallpaper">Duvar kağıdı olarak ayarla</string>
@@ -367,12 +372,13 @@
   <string name="delete_search_dialog">Bu aramayı silmek istiyor musunuz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
   <string name="nominate_delete">Silinmeye aday göster</string>
-  <string name="delete" fuzzy="true">SİL</string>
+  <string name="delete">Sil</string>
   <string name="Achievements">Başarılar</string>
-  <string name="statistics" fuzzy="true">İSTATİSTİKLER</string>
+  <string name="statistics">İstatistikler</string>
   <string name="statistics_thanks">Alınan Teşekkürler</string>
   <string name="statistics_featured">Öne Çıkan Görüntüler</string>
-  <string name="level" fuzzy="true">SEVİYE</string>
+  <string name="statistics_wikidata_edits">\"Yakın Yerler\"\'den resimler.</string>
+  <string name="level">Seviye</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Görüntüler Geri Dönülmedi</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>
@@ -384,10 +390,14 @@
   <string name="images_used_explanation">Wikimedia makalelerinde kullanılan Commons\'a yüklediğiniz görüntü sayısı</string>
   <string name="error_occurred">Hata oluştu!</string>
   <string name="notifications_channel_name_all">Commons Bildirimi</string>
+  <string name="preference_author_name_toggle">Özel yazar adı kullan</string>
+  <string name="preference_author_name_toggle_summary">Fotoğrafları yüklerken kullanıcı adınız yerine özel bir yazar adı kullanınız.</string>
+  <string name="preference_author_name">Özel yazar adı</string>
+  <string name="preference_author_name_summary">Yüklemelerde kullanıcı adınız yerine kullanılacak özel yazar adı</string>
   <string name="contributions_fragment">Katkılar</string>
   <string name="nearby_fragment">Yakınındakiler</string>
   <string name="notifications">Bildirimler</string>
-  <string name="archived_notifications" fuzzy="true">Bildirimler (arşivlenmiş)</string>
+  <string name="archived_notifications">Bildirimler (arşivlenmiş)</string>
   <string name="display_nearby_notification">Yakındaki bildirimi görüntüle</string>
   <string name="display_nearby_notification_summary">Resimlere en yakın yeri görmek için buraya dokunun</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
@@ -420,8 +430,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Gizliliğim açısından kötü olduğunu fark ettim</string>
   <string name="deletion_reason_no_longer_want_public">Fikrimi değiştirdim, bunun herkese görünür olmasını istemiyorum</string>
   <string name="deletion_reason_not_interesting">Ansiklopedi için gerekli olmayan bir resim</string>
-  <string name="uploaded_by_myself" fuzzy="true">Kendi tarafımdan yüklendi</string>
-  <string name="no_uploads" fuzzy="true">Commons\'a Hoş Geldiniz!\n\nYukarıdaki kamera ya da galeri simgesine dokunarak ilk medyanızı yükleyin.</string>
+  <string name="uploaded_by_myself">Kendi başıma %1$s üzerine yüklendi, %2$d makalede kullanıldı.</string>
+  <string name="no_uploads">Commons\'a Hoşgeldiniz!\n\nEkle düğmesine dokunarak ilk medyanızı yükleyin.</string>
   <string name="desc_language_Worldwide">Dünya çapında</string>
   <string name="desc_language_America">Amerika</string>
   <string name="desc_language_Europe">Avrupa</string>
@@ -441,12 +451,71 @@
   <string name="never_ask_again">Bunu bir daha sorma</string>
   <string name="display_location_permission_title">Yerleşim iznini görüntüle</string>
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görünümü özelliği için gerektiğinde konum izni isteyin.</string>
+  <string name="achievements_fetch_failed">Bir şeyler ters gitti, başarılarınızı elde edemedik</string>
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Devam eden kampanyaları görmek için buraya dokunun</string>
+  <string name="display_campaigns_explanation">Devam eden kampanyaları görün</string>
   <string name="nearby_campaign_dismiss_message">Artık kampanyaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'da yeniden etkinleştirebilirsiniz.</string>
-  <string name="no_archived_notification" fuzzy="true">Arşivlenmiş bildiriminiz yok</string>
+  <string name="this_function_needs_network_connection">Bu fonksiyon ağ bağlantısı gerektirir, lütfen bağlantı ayarlarınızı kontrol edin.</string>
+  <string name="bad_token_error_proposed_solution">Düzenleme belirteciyle ilgili sorunlar nedeniyle yükleme başarısız oldu. Lütfen çıkış yapıp tekrar giriş yapmayı deneyin.</string>
+  <string name="error_processing_image">Görüntü işlenirken oluştu. Lütfen tekrar deneyin!</string>
+  <string name="getting_edit_token">Düzenleme için belirteç alma</string>
+  <string name="check_category_adding_template">Kategori kontrolü için şablon ekleme</string>
+  <string name="check_category_notification_title">%1$s için kategori kontrolü isteniyor</string>
+  <string name="check_category_edit_summary">Kategori kontrolü isteniyor</string>
+  <string name="check_category_success_title">Kategori kontrolü istendi</string>
+  <string name="check_category_failure_title">Kategori kontrol isteği işe yaramadı</string>
+  <string name="check_category_success_message">%1$s için başarıyla kategori kontrolü istendi</string>
+  <string name="check_category_failure_message">%1$s için kategori kontrolü istenemedi</string>
+  <string name="check_category_toast">%1$s için kategori kontrolü isteniyor</string>
+  <string name="nominate_for_deletion_edit_file_page">Dosyaya silme mesajı ekleme</string>
+  <string name="nominate_for_deletion_done">Yapıldı</string>
+  <string name="nominate_for_deletion_notify_user">Konuşan Kullanıcıya Haber Verme</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Silme isteklerine dosya ekleme</string>
+  <string name="nominate_for_deletion_create_deletion_request">İstekleri sil alt sayfası oluşturma</string>
+  <string name="notsure">Emin değil</string>
+  <string name="send_thank_success_title">Teşekkür Gönderi: Başarılı</string>
+  <string name="send_thank_success_message">%1$s sayesinde başarıyla gönderildi</string>
+  <string name="send_thank_failure_message">%1$s teşekkür gönderilemedi</string>
+  <string name="send_thank_failure_title">Teşekkür Gönderme: Başarısızlık</string>
+  <string name="send_thank_send">Teşekkür gönderme</string>
+  <string name="send_thank_notification_title">Teşekkür gönderme</string>
+  <string name="send_thank_toast">%1$s için teşekkürler gönderisi</string>
+  <string name="review_copyright">Bu telif hakkı kurallarına uyuyor mu?</string>
+  <string name="review_category">Bu doğru sınıflandırılmış mı?</string>
+  <string name="review_spam">Bu kapsamda mı?</string>
+  <string name="review_thanks">Katkıda bulunan teşekkür etmek ister misiniz?</string>
+  <string name="review_spam_explanation">Hiç yararlı değilse, bu resmi silmek üzere aday göstermek için HAYIR\'ı tıklayın.</string>
+  <string name="review_copyright_explanation">Logolar, ekran görüntüleri, film afişleri genellikle telif hakkı ihlalleridir.\nBu resmi silmek için aday göstermek için HAYIR\'a tıklayın</string>
+  <string name="review_thanks_explanation">%1$s takdiriniz tarafından teşvik edilecek</string>
+  <string name="review_no_category">Bu kategorize bile değil!</string>
+  <string name="review_category_explanation">Bu resim %1$s kategorisinde.</string>
+  <string name="review_spam_report_question">Kapsam dışında çünkü öyle</string>
+  <string name="review_c_violation_report_question">Telif hakkı ihlalidir, çünkü öyle</string>
+  <string name="review_category_yes_button_text">Hayır, yanlış kategorize</string>
+  <string name="review_category_no_button_text">İyi görünüyor</string>
+  <string name="review_spam_yes_button_text">Hayır, kapsam dışı</string>
+  <string name="review_spam_no_button_text">İyi görünüyor</string>
+  <string name="review_copyright_yes_button_text">Hayır, telif hakkı ihlali</string>
+  <string name="review_copyright_no_button_text">İyi görünüyor</string>
+  <string name="review_thanks_yes_button_text">Evet neden olmasın</string>
+  <string name="review_thanks_no_button_text">Sonraki resim</string>
+  <string name="skip_image_explanation">Bu düğmeyi tıkladığınızda, yakın zamanda Wikimedia Commons’a yüklenen bir resim daha gönderilecektir.</string>
+  <string name="review_image_explanation">Görüntüleri inceleyebilir ve Wikimedia Commoms\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse, katılımcıya da teşekkür edebilirsiniz.</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Paylaşılan içeriği alma. Resmin işlenmesi, resmin boyutuna ve cihazınıza bağlı olarak biraz zaman alabilir.</item>
+    <item quantity="other">Paylaşılan içeriği alma. Resmin işlenmesi, resmin boyutuna ve cihazınıza bağlı olarak biraz zaman alabilir.</item>
+  </plurals>
+  <string name="no_image">Resim kullanılmadı</string>
+  <string name="no_image_reverted">Resim döndürülmedi</string>
+  <string name="no_image_uploaded">Resim yüklenmedi</string>
+  <string name="no_notification">Okunmamış bildirimleriniz yok</string>
+  <string name="no_archived_notification">Arşivlenmiş bildiriminiz yok</string>
+  <string name="share_logs_using">Kullanarak günlükleri paylaş</string>
   <string name="menu_option_archived">Arşivlenmişleri görüntüle</string>
   <string name="menu_option_unread">Okunmamışları görüntüle</string>
+  <string name="error_occurred_in_picking_images">Resimler toplanırken hata oluştu</string>
+  <string name="image_chooser_title">Yüklenecek Görüntüleri Seçin</string>
   <string name="please_wait">Lütfen bekleyin…</string>
+  <string name="images_featured_explanation">Öne çıkan resimler, çok yetenekli fotoğrafçıların ve Wikimedia Commons topluluğunun sitedeki en yüksek kalitedeki bazılarını seçtiği illüstratörlerdir.</string>
 </resources>

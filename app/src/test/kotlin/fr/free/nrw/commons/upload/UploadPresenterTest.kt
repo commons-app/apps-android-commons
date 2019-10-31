@@ -59,14 +59,7 @@ class UploadPresenterTest {
         verify(view)?.isLoggedIn
         verify(view)?.showProgress(true)
         verify(repository)?.buildContributions()
-        val buildContributions = repository?.buildContributions()
-        buildContributions?.test()?.assertNoErrors()?.assertValue {
-            verify(repository)?.prepareService()
-            verify(view)?.showProgress(false)
-            verify(view)?.showMessage(ArgumentMatchers.any(Int::class.java))
-            verify(view)?.finish()
-            true
-        }
+        verify(repository)?.buildContributions()
     }
 
     /**

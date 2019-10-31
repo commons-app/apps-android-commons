@@ -69,7 +69,7 @@
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_network">Não foi possível iniciar sessão - falha de rede</string>
   <string name="login_failed_wrong_credentials">Não foi possível iniciar sessão - verifique o seu nome de utilizador e a palavra-passe</string>
-  <string name="login_failed_throttled">Demasiadas tentativas malsucedidas. Por favor, tente de novo dentro de alguns minutos.</string>
+  <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente novamente dentro de minutos.</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado na wiki Commons</string>
   <string name="login_failed_2fa_needed">Tem de fornecer o seu código de autenticação de dois fatores.</string>
   <string name="login_failed_generic">Falha ao iniciar sessão</string>
@@ -178,12 +178,12 @@
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_discussion_empty">Não há nenhuma discussão</string>
   <string name="detail_license_empty">Licença desconhecida</string>
-  <string name="menu_refresh">Actualizar</string>
+  <string name="menu_refresh">Atualizar</string>
   <string name="storage_permission_title">A pedir permissão de armazenamento</string>
-  <string name="read_storage_permission_rationale">Permissão necessária: Ler a armazenagem externa. A aplicação não pode aceder à sua galeria sem isto.</string>
-  <string name="write_storage_permission_rationale">Permissão necessária: Escrever na armazenagem externa. A aplicação não pode aceder à sua câmara/galeria sem isto.</string>
+  <string name="read_storage_permission_rationale">Permissão necessária: ler o armazenamento externo. A aplicação não pode aceder à sua galeria sem isto.</string>
+  <string name="write_storage_permission_rationale">Permissão necessária: escrever no armazenamento externo. A aplicação não pode aceder à sua câmara/galeria sem isto.</string>
   <string name="location_permission_title">Autorização para identificar localização</string>
-  <string name="location_permission_rationale">Permissão opcional: Obter a localização atual para sugestões de categoria</string>
+  <string name="location_permission_rationale">Permissão opcional: obter a localização atual para sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Locais Próximos</string>
   <string name="no_nearby">Não foi encontrado nenhum local próximo</string>
@@ -200,7 +200,7 @@
   <string name="media_detail_coordinates">Coordenadas</string>
   <string name="media_detail_coordinates_empty">Não fornecido</string>
   <string name="become_a_tester_title">Torne-se um Testador Beta</string>
-  <string name="become_a_tester_description">Opte pelo nosso canal beta no Google Play e obtenha acesso antecipado a novas funcionalidades e a correções de erros</string>
+  <string name="become_a_tester_description">Opte pelo nosso canal beta no Google Play e obtenha acesso antecipado às novas funcionalidades e às correções de erros</string>
   <string name="_2fa_code">Código de autenticação de dois fatores</string>
   <string name="number_of_uploads">O meu limite de carregamentos recentes</string>
   <string name="maximum_limit">Limite máximo</string>
@@ -264,7 +264,7 @@
   <string name="upload_problem_do_you_continue">Quer, mesmo assim, carregar esta fotografia?</string>
   <string name="internet_downloaded">Carregue só fotografias tiradas por si, por favor. Não carregue fotografias que tenha descarregado da Internet.</string>
   <string name="give_permission">Permitir</string>
-  <string name="use_external_storage">Utilizar a armazenagem externa</string>
+  <string name="use_external_storage">Utilizar armazenamento externo</string>
   <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>
   <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="send_log_file">Enviar ficheiro de registos</string>
@@ -555,4 +555,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
   <string name="delete_helper_ask_reason_copyright_other">Outro</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
+  <string name="share_image_via">Partilhar imagem via</string>
+  <string name="no_achievements_yet">Ainda não fez nenhuma contribuição</string>
+  <string name="account_created">Conta criada!</string>
+  <string name="text_copy">Texto copiado para a área de transferência</string>
+  <string name="notification_mark_read">Notificação marcada como lida</string>
+  <string name="some_error">Ocorreu um erro!</string>
 </resources>

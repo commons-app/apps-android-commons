@@ -8,12 +8,14 @@
 * InternerowyGołąb
 * Krottyianock
 * Mazab IZW
+* Rail
 * Railfail536
 * Rezonansowy
 * Rzuwig
 * Sp5uhe
 * Ty221
 * Vesihiisi
+* WaldiSt
 * Wojtas
 * Woytecr
 -->
@@ -25,6 +27,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Ustawienia</string>
+  <string name="intent_share_upload_label">Prześlij do Commons</string>
   <string name="username">Nazwa użytkownika</string>
   <string name="password">Hasło</string>
   <string name="login">Zaloguj się</string>
@@ -60,6 +63,7 @@
   <string name="menu_share">Udostępnij</string>
   <string name="menu_open_in_browser">Zobacz w przeglądarce</string>
   <string name="share_title_hint">Tytuł (wymagany)</string>
+  <string name="add_title_toast">Podaj tytuł tego pliku</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
   <string name="login_failed_wrong_credentials">Nie można się zalogować - sprawdź swoją nazwę użytkownika i hasło</string>
@@ -296,4 +300,10 @@
   <string name="no_categories_found">Nie znaleziono kategorii</string>
   <string name="upload_cancelled">Anulowano przesyłanie</string>
   <string name="previous_image_title_description_not_found">Brakuje danych co do poprzedniego tytułu lub opisu obrazu</string>
+  <string name="share_image_via">Udostępnij obraz przez</string>
+  <string name="no_achievements_yet">Nie wykonałeś jeszcze żadnej edycji</string>
+  <string name="account_created">Konto zostało utworzone!</string>
+  <string name="text_copy">Skopiowano tekst do schowka</string>
+  <string name="notification_mark_read">Oznaczono powiadomienia jako przeczytane</string>
+  <string name="some_error">Wystąpił błąd!</string>
 </resources>
