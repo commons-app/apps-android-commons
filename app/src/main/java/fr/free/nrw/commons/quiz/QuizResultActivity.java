@@ -163,7 +163,7 @@ public class QuizResultActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
             intent.setType("image/png");
-            startActivity(Intent.createChooser(intent, "Share image via"));
+            startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)));
         } catch (Exception e) {
             e.printStackTrace();
         }

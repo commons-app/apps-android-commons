@@ -1,11 +1,6 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.Context;
-import android.net.Uri;
-
 import org.apache.commons.lang3.StringUtils;
-
-import java.io.IOException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -23,10 +18,7 @@ import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 /**
  * Methods for pre-processing images to be uploaded
- *//*if (dataInBytes[0] == 70 && dataInBytes[1] == 66 && dataInBytes[2] == 77 && dataInBytes[3] == 68) {
-                Timber.d("Contains FBMD");
-                return Single.just(ImageUtils.FILE_FBMD);
-            }*/
+ */
 @Singleton
 public class ImageProcessingService {
     private final FileUtilsWrapper fileUtilsWrapper;
@@ -34,19 +26,16 @@ public class ImageProcessingService {
     private final MediaWikiApi mwApi;
     private final ReadFBMD readFBMD;
     private final EXIFReader EXIFReader;
-    private final Context context;
 
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
                                   ImageUtilsWrapper imageUtilsWrapper,
-                                  MediaWikiApi mwApi, ReadFBMD readFBMD, EXIFReader EXIFReader,
-                                  Context context) {
+                                  MediaWikiApi mwApi, ReadFBMD readFBMD, EXIFReader EXIFReader) {
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.imageUtilsWrapper = imageUtilsWrapper;
         this.mwApi = mwApi;
         this.readFBMD = readFBMD;
         this.EXIFReader = EXIFReader;
-        this.context = context;
     }
 
     /**
@@ -64,12 +53,11 @@ public class ImageProcessingService {
         }
         Timber.d("Checking the validity of image");
         String filePath = uploadItem.getMediaUri().getPath();
-        Uri contentUri=uploadItem.getContentUri();
         Single<Integer> duplicateImage = checkDuplicateImage(filePath);
         Single<Integer> wrongGeoLocation = checkImageGeoLocation(uploadItem.getPlace(), filePath);
         Single<Integer> darkImage = checkDarkImage(filePath);
         Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
-        Single<Integer> checkFBMD = checkFBMD(context,contentUri);
+        Single<Integer> checkFBMD = checkFBMD(filePath);
         Single<Integer> checkEXIF = checkEXIF(filePath);
 
         Single<Integer> zipResult = Single.zip(duplicateImage, wrongGeoLocation, darkImage, itemTitle,
@@ -84,31 +72,21 @@ public class ImageProcessingService {
     }
 
     /**
-     * Other than the Image quality we need to check that using this Image doesn't violate's facebook's copyright's.
-     * Whenever a user tries to upload an image that was downloaded from Facebook then we warn the user with a message to stop the upload
-     * To know whether the Image is downloaded from facebook:
-     * -We read the metadata of any Image and check for FBMD
-     * -Facebook downloaded image's contains metadata of the type IPTC
-     * - From this IPTC metadata we extract a byte array that contains FBMD as it's initials. If the image was downloaded from facebook
-     * Thus we successfully protect common's from Facebook's copyright violation
+     * We want to discourage users from uploading images to Commons that were taken from Facebook.
+     * This attempts to detect whether an image was downloaded from Facebook by heuristically
+     * searching for metadata that is specific to images that come from Facebook.
      */
-
-    public Single<Integer> checkFBMD(Context context,Uri contentUri) {
-        try {
-            return readFBMD.processMetadata(context,contentUri);
-        } catch (IOException e) {
-            return Single.just(ImageUtils.FILE_FBMD);
-        }
+    private Single<Integer> checkFBMD(String filepath) {
+        return readFBMD.processMetadata(filepath);
     }
 
     /**
-    * To avoid copyright we check for EXIF data in any image.
-     * Images that are downloaded from internet generally don't have any EXIF data in them
-     * while images taken via camera or screenshots in phone have EXIF data with them.
-     * So we check if the image has no EXIF data then we display a warning to the user
-     * * */
-
-    public Single<Integer> checkEXIF(String filepath){
+     * We try to minimize uploads from the Commons app that might be copyright violations.
+     * If an image does not have any Exif metadata, then it was likely downloaded from the internet,
+     * and is probably not an original work by the user. We detect these kinds of images by looking
+     * for the presence of some basic Exif metadata.
+     */
+    private Single<Integer> checkEXIF(String filepath) {
         return EXIFReader.processMetadata(filepath);
     }
 

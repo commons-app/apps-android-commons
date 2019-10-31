@@ -492,17 +492,17 @@
   <string name="review_copyright_explanation">Логотипы, снимки экрана, постеры фильмов часто нарушают копирайт.\n Нажмите НЕТ, чтобы номинировать это изображение к удалению.</string>
   <string name="review_thanks_explanation">%1$s получит от вас благодарность</string>
   <string name="review_no_category">Эй, да тут даже категорий нет!</string>
-  <string name="review_category_explanation">Это изображение отнесено к %1$s {{PLURAL:%1$s|категории|категориям}}.</string>
+  <string name="review_category_explanation">Это изображение отнесено к следующим категориям: %1$s</string>
   <string name="review_spam_report_question">Файл не уместен на Викискладе, поскольку</string>
   <string name="review_c_violation_report_question">Это нарушение авторских прав, поскольку</string>
   <string name="review_category_yes_button_text">Неверно категоризировано</string>
-  <string name="review_category_no_button_text">Выглядит подходяще</string>
-  <string name="review_spam_yes_button_text">Не уместно</string>
-  <string name="review_spam_no_button_text">Выглядит подходяще</string>
+  <string name="review_category_no_button_text">Уместен</string>
+  <string name="review_spam_yes_button_text">Нет</string>
+  <string name="review_spam_no_button_text">Уместен</string>
   <string name="review_copyright_yes_button_text">Нет, это нарушение авторского права</string>
-  <string name="review_copyright_no_button_text">Выглядит подходяще</string>
-  <string name="review_thanks_yes_button_text">Да, подходит</string>
-  <string name="review_thanks_no_button_text">Следующее изображение</string>
+  <string name="review_copyright_no_button_text">Уместен</string>
+  <string name="review_thanks_yes_button_text">Да</string>
+  <string name="review_thanks_no_button_text">Следующий файл</string>
   <string name="skip_image_explanation">Нажатие этой кнопки приводит к показу следующего недавно загруженного изображения с Викисклада</string>
   <string name="review_image_explanation">Вы можете проверить файлы, и, таким образом, улучшить их качество на Викискладе.\n Есть четыре проверки:\n - Уместен ли файл на Викискладе?\n - Соответствует ли файл правилам об авторском праве?\n - Правильно ли файл категоризирован?\n - Если всё хорошо, можете поблагодарить загрузившего этот файл.</string>
   <plurals name="receiving_shared_content">
@@ -562,4 +562,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Другое</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Поскольку</string>
+  <string name="share_image_via">Поделиться изображением с помощью</string>
+  <string name="no_achievements_yet">Пока что от вас нет вклада</string>
+  <string name="account_created">Учётная запись создана!</string>
+  <string name="text_copy">Текст скопирован в буфер обмена</string>
+  <string name="notification_mark_read">Оповещения маркированы как \"прочитанные\"</string>
+  <string name="some_error">Тут какая-то проблемка возникла :-(</string>
 </resources>

@@ -48,8 +48,21 @@ public class CategoriesModel{
      */
     public Comparator<CategoryItem> sortBySimilarity(final String filter) {
         Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
-        return (firstItem, secondItem) -> stringSimilarityComparator
-                .compare(firstItem.getName(), secondItem.getName());
+        return (firstItem, secondItem) -> {
+            //if the category is selected, it should get precedence
+            if (null != firstItem && firstItem.isSelected()) {
+                if (null != secondItem && secondItem.isSelected()) {
+                    return stringSimilarityComparator
+                            .compare(firstItem.getName(), secondItem.getName());
+                }
+                return -1;
+            }
+            if (null != secondItem && secondItem.isSelected()) {
+                return 1;
+            }
+            return stringSimilarityComparator
+                    .compare(firstItem.getName(), secondItem.getName());
+        };
     }
 
     /**
@@ -254,5 +267,39 @@ public class CategoriesModel{
     public void cleanUp() {
         this.categoriesCache.clear();
         this.selectedCategories.clear();
+    }
+
+    /**
+     * Search for categories
+     */
+    public Observable<CategoryItem> searchCategories(String query, List<String> imageTitleList) {
+        if (TextUtils.isEmpty(query)) {
+            return gpsCategories()
+                    .concatWith(titleCategories(imageTitleList))
+                    .concatWith(recentCategories());
+        }
+
+        return mwApi
+                .searchCategories(query, SEARCH_CATS_LIMIT)
+                .map(s -> new CategoryItem(s, false));
+    }
+
+    /**
+     * Returns default categories
+     */
+    public Observable<CategoryItem> getDefaultCategories(List<String> titleList) {
+        Observable<CategoryItem> directCategories = directCategories();
+        if (hasDirectCategories()) {
+            Timber.d("Image has direct Categories");
+            return directCategories
+                    .concatWith(gpsCategories())
+                    .concatWith(titleCategories(titleList))
+                    .concatWith(recentCategories());
+        } else {
+            Timber.d("Image has no direct Categories");
+            return gpsCategories()
+                    .concatWith(titleCategories(titleList))
+                    .concatWith(recentCategories());
+        }
     }
 }

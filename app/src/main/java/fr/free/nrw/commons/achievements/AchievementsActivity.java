@@ -199,7 +199,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, fileUri);
             intent.setType("image/png");
-            startActivity(Intent.createChooser(intent, "Share image via"));
+            startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -316,8 +316,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private void setZeroAchievements() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this)
-                .setMessage("You haven't made any contributions yet")
-                .setPositiveButton("Ok", (dialog, which) -> {
+                .setMessage(getString(R.string.no_achievements_yet))
+                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
