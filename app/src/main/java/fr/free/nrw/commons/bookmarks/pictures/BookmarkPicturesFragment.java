@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
+import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.GridViewAdapter;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -97,7 +97,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             gridView.setVisibility(GONE);
             if (gridAdapter != null) {
                 gridAdapter.clear();
-                ((CategoryImagesCallback) getContext()).viewPagerNotifyDataSetChanged();
+                ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
             }
             initList();
         }
@@ -199,7 +199,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
                 return;
             }
             gridAdapter.addItems(collection);
-            ((CategoryImagesCallback) getContext()).viewPagerNotifyDataSetChanged();
+            ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
         }
         progressBar.setVisibility(GONE);
         statusTextView.setVisibility(GONE);
