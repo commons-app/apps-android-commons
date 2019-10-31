@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.LayoutInflater;
@@ -20,8 +19,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-
-import java.util.ArrayList;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -80,10 +77,9 @@ public class ContributionsFragment
     @Inject CampaignsPresenter presenter;
     @Inject LocationServiceManager locationManager;
 
-    private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private ContributionsListFragment contributionsListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
@@ -93,20 +89,20 @@ public class ContributionsFragment
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
 
-    @Inject ContributionsPresenter contributionsPresenter;
+    @Inject
+    ContributionsPresenter contributionsPresenter;
 
     private LatLng curLatLng;
 
     private boolean firstLocationUpdate = true;
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
-    private CheckBox checkBox;
 
     /**
      * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
      * fragment to be attached. Latch will be responsible for this sync.
      */
-    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
+    private final ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder)
@@ -138,11 +134,11 @@ public class ContributionsFragment
         contributionsPresenter.onAttachView(this);
         campaignView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
-        checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
+        CheckBox checkBox = checkBoxView.findViewById(R.id.never_ask_again);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Do not ask for permission on activity start again
-                store.putBoolean("displayLocationPermissionForCardView",false);
+                store.putBoolean("displayLocationPermissionForCardView", false);
             }
         });
 
@@ -168,7 +164,8 @@ public class ContributionsFragment
 
         getChildFragmentManager().registerFragmentLifecycleCallbacks(
             new FragmentManager.FragmentLifecycleCallbacks() {
-                @Override public void onFragmentResumed(FragmentManager fm, Fragment f) {
+                @Override
+                public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
                     super.onFragmentResumed(fm, f);
                     //If media detail pager fragment is visible, hide the campaigns view [might not be the best way to do, this but yeah, this proves to work for now]
                     Timber.e("onFragmentResumed %s", f.getClass().getName());
@@ -177,7 +174,8 @@ public class ContributionsFragment
                     }
                 }
 
-                @Override public void onFragmentDetached(FragmentManager fm, Fragment f) {
+                @Override
+                public void onFragmentDetached(@NonNull FragmentManager fm, @NonNull Fragment f) {
                     super.onFragmentDetached(fm, f);
                     Timber.e("onFragmentDetached %s", f.getClass().getName());
                     //If media detail pager fragment is detached, ContributionsList fragment is gonna be visible, [becomes tightly coupled though]
@@ -383,7 +381,7 @@ public class ContributionsFragment
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         boolean mediaDetailsVisible = mediaDetailPagerFragment != null && mediaDetailPagerFragment.isVisible();
         outState.putBoolean("mediaDetailsVisible", mediaDetailsVisible);
@@ -472,7 +470,7 @@ public class ContributionsFragment
 
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
 
-        if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
+        if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && !nearbyPlacesInfo.placeList.isEmpty()) {
             Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
@@ -496,11 +494,9 @@ public class ContributionsFragment
         locationManager.removeLocationListener(this);
         super.onDestroy();
 
-        if (isUploadServiceConnected) {
-            if (getActivity() != null) {
-                getActivity().unbindService(uploadServiceConnection);
-                isUploadServiceConnected = false;
-            }
+        if (isUploadServiceConnected && getActivity() != null) {
+            getActivity().unbindService(uploadServiceConnection);
+            isUploadServiceConnected = false;
         }
     }
 
@@ -532,11 +528,6 @@ public class ContributionsFragment
         updateClosestNearbyCardViewInfo();
     }
 
-    @Override public void onViewCreated(@NonNull View view,
-        @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     /**
      * ask the presenter to fetch the campaigns only if user has not manually disabled it
      */
@@ -546,17 +537,20 @@ public class ContributionsFragment
         }
     }
 
-    @Override public void showMessage(String message) {
+    @Override
+    public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override public void showCampaigns(Campaign campaign) {
+    @Override
+    public void showCampaigns(Campaign campaign) {
         if (campaign != null) {
             campaignView.setCampaign(campaign);
         }
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         presenter.onDetachView();
     }
@@ -606,4 +600,3 @@ public class ContributionsFragment
 
     }
 }
-

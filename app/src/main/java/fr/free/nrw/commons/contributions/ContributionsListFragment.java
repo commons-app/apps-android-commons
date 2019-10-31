@@ -41,6 +41,8 @@ import static android.view.View.VISIBLE;
 public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private static final String VISIBLE_ITEM_ID = "visible_item_id";
+    private static final int SPAN_COUNT = 3;
+
     @BindView(R.id.contributionsList)
     RecyclerView rvContributionsList;
     @BindView(R.id.loadingContributionsProgressBar)
@@ -61,10 +63,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     @Inject
     WikidataClient wikidataClient;
 
-    private Animation fab_close;
-    private Animation fab_open;
-    private Animation rotate_forward;
-    private Animation rotate_backward;
+    private Animation fabClose;
+    private Animation fabOpen;
+    private Animation rotateForward;
+    private Animation rotateBackward;
 
 
     private boolean isFabOpen = false;
@@ -73,8 +75,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private Callback callback;
     private String lastVisibleItemID;
-
-    private int SPAN_COUNT=3;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
@@ -92,7 +92,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initRecyclerView();
         initializeAnimations();
@@ -110,7 +110,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // check orientation
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -123,10 +123,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     private void initializeAnimations() {
-        fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_forward);
-        rotate_backward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_backward);
+        fabOpen = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
+        fabClose = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_close);
+        rotateForward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_forward);
+        rotateBackward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_backward);
     }
 
     private void setListeners() {
@@ -145,15 +145,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()){
             if (isFabOpen) {
-                fabPlus.startAnimation(rotate_backward);
-                fabCamera.startAnimation(fab_close);
-                fabGallery.startAnimation(fab_close);
+                fabPlus.startAnimation(rotateBackward);
+                fabCamera.startAnimation(fabClose);
+                fabGallery.startAnimation(fabClose);
                 fabCamera.hide();
                 fabGallery.hide();
             } else {
-                fabPlus.startAnimation(rotate_forward);
-                fabCamera.startAnimation(fab_open);
-                fabGallery.startAnimation(fab_open);
+                fabPlus.startAnimation(rotateForward);
+                fabCamera.startAnimation(fabOpen);
+                fabGallery.startAnimation(fabOpen);
                 fabCamera.show();
                 fabGallery.show();
             }
@@ -164,7 +164,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     /**
      * Shows welcome message if user has no contributions yet i.e. new user.
      */
-    public void showWelcomeTip(boolean shouldShow) {
+    void showWelcomeTip(boolean shouldShow) {
         noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
@@ -177,11 +177,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         progressBar.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
-    public void showNoContributionsUI(boolean shouldShow) {
+    void showNoContributionsUI(boolean shouldShow) {
         noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
-    public void onDataSetChanged() {
+    void onDataSetChanged() {
         if (null != adapter) {
             adapter.notifyDataSetChanged();
             //Restoring last visible item position in cases of orientation change
@@ -201,11 +201,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         LayoutManager layoutManager = rvContributionsList.getLayoutManager();
-        int lastVisibleItemPosition=0;
-        if(layoutManager instanceof  LinearLayoutManager){
-            lastVisibleItemPosition= ((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
+        int lastVisibleItemPosition = 0;
+        if(layoutManager instanceof LinearLayoutManager){
+            lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
         }else if(layoutManager instanceof GridLayoutManager){
-            lastVisibleItemPosition=((GridLayoutManager)layoutManager).findLastCompletelyVisibleItemPosition();
+            lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
         }
         String idOfItemWithPosition = findIdOfItemWithPosition(lastVisibleItemPosition);
         if (null != idOfItemWithPosition) {
@@ -217,7 +217,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if(null!=savedInstanceState){
-            lastVisibleItemID =savedInstanceState.getString(VISIBLE_ITEM_ID, null);
+            lastVisibleItemID = savedInstanceState.getString(VISIBLE_ITEM_ID, null);
         }
     }
 

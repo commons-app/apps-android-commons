@@ -5,13 +5,10 @@ import android.net.Uri;
 import android.os.Parcel;
 
 import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.util.DateUtil;
 
 import java.lang.annotation.Retention;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
@@ -23,7 +20,7 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
-public class  Contribution extends Media {
+public class Contribution extends Media {
 
     //{{According to EXIF data|2009-01-09}}
     private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to EXIF data|%s}}";
@@ -31,7 +28,7 @@ public class  Contribution extends Media {
     //{{date|2009|1|9}} → 9 January 2009
     private static final String TEMPLATE_DATA_OTHER_SOURCE = "{{date|%s}}";
 
-    public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
+    public static final Creator<Contribution> CREATOR = new Creator<Contribution>() {
         @Override
         public Contribution createFromParcel(Parcel parcel) {
             return new Contribution(parcel);
@@ -101,7 +98,7 @@ public class  Contribution extends Media {
         this.state=state;
     }
 
-    public Contribution(Parcel in) {
+    private Contribution(Parcel in) {
         super(in);
         contentUri = in.readParcelable(Uri.class.getClassLoader());
         source = in.readString();
@@ -193,7 +190,7 @@ public class  Contribution extends Media {
                 .append(licenseTemplateFor(getLicense())).append("\n\n")
                 .append("{{Uploaded from Mobile|platform=Android|version=")
                 .append(ConfigUtils.getVersionNameWithSha(applicationContext)).append("}}\n");
-        if(categories!=null&&categories.size()!=0) {
+        if (categories != null && !categories.isEmpty()) {
             for (int i = 0; i < categories.size(); i++) {
                 String category = categories.get(i);
                 buffer.append("\n[[Category:").append(category).append("]]");
@@ -229,7 +226,7 @@ public class  Contribution extends Media {
         this.imageUrl = imageUrl;
     }
 
-    public Contribution() {
+    protected Contribution() {
 
     }
 
@@ -262,9 +259,9 @@ public class  Contribution extends Media {
                 return "{{self|cc-by-sa-4.0}}";
             case Prefs.Licenses.CC0:
                 return "{{self|cc-zero}}";
+            default:
+                throw new RuntimeException("Unrecognized license value: " + license);
         }
-
-        throw new RuntimeException("Unrecognized license value: " + license);
     }
 
     public String getWikiDataEntityId() {

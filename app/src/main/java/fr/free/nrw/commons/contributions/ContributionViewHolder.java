@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.net.Uri;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -45,13 +44,13 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     LruCache<String, String> thumbnailCache;
 
     private DisplayableContribution contribution;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private int position;
 
     ContributionViewHolder(View parent, Callback callback) {
         super(parent);
         ButterKnife.bind(this, parent);
-        this.callback=callback;
+        this.callback = callback;
     }
 
     public void init(int position, DisplayableContribution contribution) {

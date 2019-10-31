@@ -27,6 +27,8 @@ public class ContributionsContentProvider extends CommonsDaggerContentProvider {
     private static final String BASE_PATH = "contributions";
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
 
+    private static final String UNKNOWN_URI_MESSAGE = "Unknown URI: ";
+
     public static final Uri BASE_URI = Uri.parse("content://" + BuildConfig.CONTRIBUTION_AUTHORITY + "/" + BASE_PATH);
 
     static {
@@ -38,7 +40,8 @@ public class ContributionsContentProvider extends CommonsDaggerContentProvider {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    @Inject DBOpenHelper dbOpenHelper;
+    @Inject
+    DBOpenHelper dbOpenHelper;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -68,7 +71,7 @@ public class ContributionsContentProvider extends CommonsDaggerContentProvider {
                 );
                 break;
             default:
-                throw new IllegalArgumentException("Unknown URI" + uri);
+                throw new IllegalArgumentException(UNKNOWN_URI_MESSAGE + uri);
         }
 
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -87,12 +90,10 @@ public class ContributionsContentProvider extends CommonsDaggerContentProvider {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         long id;
-        switch (uriType) {
-            case CONTRIBUTIONS:
-                id = sqlDB.insert(TABLE_NAME, null, contentValues);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI: " + uri);
+        if (uriType == CONTRIBUTIONS) {
+            id = sqlDB.insert(TABLE_NAME, null, contentValues);
+        } else {
+            throw new IllegalArgumentException(UNKNOWN_URI_MESSAGE + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return Uri.parse(BASE_URI + "/" + id);
@@ -106,16 +107,14 @@ public class ContributionsContentProvider extends CommonsDaggerContentProvider {
 
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 
-        switch (uriType) {
-            case CONTRIBUTIONS_ID:
-                Timber.d("Deleting contribution id %s", uri.getLastPathSegment());
-                rows = db.delete(TABLE_NAME,
-                        "_id = ?",
-                        new String[]{uri.getLastPathSegment()}
-                );
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI" + uri);
+        if (uriType == CONTRIBUTIONS_ID) {
+            Timber.d("Deleting contribution id %s", uri.getLastPathSegment());
+            rows = db.delete(TABLE_NAME,
+                "_id = ?",
+                new String[]{uri.getLastPathSegment()}
+            );
+        } else {
+            throw new IllegalArgumentException(UNKNOWN_URI_MESSAGE + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return rows;
@@ -128,15 +127,13 @@ public class ContributionsContentProvider extends CommonsDaggerContentProvider {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
-        switch (uriType) {
-            case CONTRIBUTIONS:
-                for (ContentValues value : values) {
-                    Timber.d("Inserting! %s", value);
-                    sqlDB.insert(TABLE_NAME, null, value);
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI: " + uri);
+        if (uriType == CONTRIBUTIONS) {
+            for (ContentValues value : values) {
+                Timber.d("Inserting! %s", value);
+                sqlDB.insert(TABLE_NAME, null, value);
+            }
+        } else {
+            throw new IllegalArgumentException(UNKNOWN_URI_MESSAGE + uri);
         }
         sqlDB.setTransactionSuccessful();
         sqlDB.endTransaction();
@@ -177,7 +174,7 @@ public class ContributionsContentProvider extends CommonsDaggerContentProvider {
                 }
                 break;
             default:
-                throw new IllegalArgumentException("Unknown URI: " + uri + " with type " + uriType);
+                throw new IllegalArgumentException(UNKNOWN_URI_MESSAGE + uri + " with type " + uriType);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return rowsUpdated;

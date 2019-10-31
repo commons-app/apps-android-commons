@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 
+import fr.free.nrw.commons.data.DAOException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,14 +27,9 @@ import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BAS
 @SuppressWarnings("WeakerAccess")
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
 
-    private static final String[] existsQuery = {COLUMN_FILENAME};
-    private static final String existsSelection = COLUMN_FILENAME + " = ?";
+    private static final String[] EXISTS_QUERY = {COLUMN_FILENAME};
+    private static final String EXISTS_SELECTION = COLUMN_FILENAME + " = ?";
     private static final ContentValues[] EMPTY = {};
-    private static int COMMIT_THRESHOLD = 10;
-
-    // Arbitrary limit to cap the number of contributions to ever load. This is a maximum built
-    // into the app, rather than the user's setting. Also see Github issue #52.
-    public static final int ABSOLUTE_CONTRIBUTIONS_LOAD_LIMIT = 500;
 
     @Inject
     UserClient userClient;
@@ -50,14 +46,14 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
             return false;
         }
         try (Cursor cursor = client.query(BASE_URI,
-                existsQuery,
-                existsSelection,
+                EXISTS_QUERY,
+                EXISTS_SELECTION,
                 new String[]{filename},
                 ""
         )) {
             return cursor != null && cursor.getCount() != 0;
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         }
     }
 

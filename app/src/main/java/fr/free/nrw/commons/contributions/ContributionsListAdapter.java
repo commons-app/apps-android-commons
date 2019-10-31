@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
@@ -8,21 +7,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 
-public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionViewHolder> {
+class ContributionsListAdapter extends RecyclerView.Adapter<ContributionViewHolder> {
 
-    private Callback callback;
+    private final Callback callback;
 
-    public ContributionsListAdapter(Callback callback) {
+    ContributionsListAdapter(Callback callback) {
         this.callback = callback;
     }
 
     @NonNull
     @Override
     public ContributionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ContributionViewHolder viewHolder = new ContributionViewHolder(
+        return new ContributionViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.layout_contribution, parent, false), callback);
-        return viewHolder;
     }
 
     @Override

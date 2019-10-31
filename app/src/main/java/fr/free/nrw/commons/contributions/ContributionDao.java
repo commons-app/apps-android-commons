@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.RemoteException;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
+import fr.free.nrw.commons.data.DAOException;
 import fr.free.nrw.commons.settings.Prefs;
 
 import org.apache.commons.lang3.StringUtils;
@@ -65,7 +66,7 @@ public class ContributionDao {
                 db.update(contribution.getContentUri(), toContentValues(contribution), null, null);
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             db.release();
         }
@@ -76,12 +77,12 @@ public class ContributionDao {
         try {
             if (contribution.getContentUri() == null) {
                 // noooo
-                throw new RuntimeException("tried to delete item with no content URI");
+                throw new DAOException("tried to delete item with no content URI");
             } else {
                 db.delete(contribution.getContentUri(), null, null);
             }
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             db.release();
         }
@@ -169,7 +170,7 @@ public class ContributionDao {
         public static final String TABLE_NAME = "contributions";
 
         public static final String COLUMN_ID = "_id";
-        public static final String COLUMN_FILENAME = "filename";
+        static final String COLUMN_FILENAME = "filename";
         public static final String COLUMN_LOCAL_URI = "local_uri";
         public static final String COLUMN_IMAGE_URL = "image_url";
         public static final String COLUMN_TIMESTAMP = "timestamp";
@@ -184,10 +185,10 @@ public class ContributionDao {
         public static final String COLUMN_WIDTH = "width";
         public static final String COLUMN_HEIGHT = "height";
         public static final String COLUMN_LICENSE = "license";
-        public static final String COLUMN_WIKI_DATA_ENTITY_ID = "wikidataEntityID";
+        static final String COLUMN_WIKI_DATA_ENTITY_ID = "wikidataEntityID";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-        public static final String[] ALL_FIELDS = {
+        protected static final String[] ALL_FIELDS = {
                 COLUMN_ID,
                 COLUMN_FILENAME,
                 COLUMN_LOCAL_URI,
@@ -211,27 +212,27 @@ public class ContributionDao {
 
         public static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + "_id INTEGER PRIMARY KEY,"
-                + "filename STRING,"
-                + "local_uri STRING,"
-                + "image_url STRING,"
+                + "filename TEXT,"
+                + "local_uri TEXT,"
+                + "image_url TEXT,"
                 + "uploaded INTEGER,"
                 + "timestamp INTEGER,"
                 + "state INTEGER,"
                 + "length INTEGER,"
                 + "transferred INTEGER,"
-                + "source STRING,"
-                + "description STRING,"
-                + "creator STRING,"
+                + "source TEXT,"
+                + "description TEXT,"
+                + "creator TEXT,"
                 + "multiple INTEGER,"
                 + "width INTEGER,"
                 + "height INTEGER,"
-                + "LICENSE STRING,"
-                + "wikidataEntityID STRING"
+                + "LICENSE TEXT,"
+                + "wikidataEntityID TEXT"
                 + ");";
 
         // Upgrade from version 1 ->
-        static final String ADD_CREATOR_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN creator STRING;";
-        static final String ADD_DESCRIPTION_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN description STRING;";
+        static final String ADD_CREATOR_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN creator TEXT;";
+        static final String ADD_DESCRIPTION_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN description TEXT;";
 
         // Upgrade from version 2 ->
         static final String ADD_MULTIPLE_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN multiple INTEGER;";
@@ -242,12 +243,14 @@ public class ContributionDao {
         static final String SET_DEFAULT_WIDTH = "UPDATE " + TABLE_NAME + " SET width = 0";
         static final String ADD_HEIGHT_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN height INTEGER;";
         static final String SET_DEFAULT_HEIGHT = "UPDATE " + TABLE_NAME + " SET height = 0";
-        static final String ADD_LICENSE_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN license STRING;";
+        static final String ADD_LICENSE_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN license TEXT;";
         static final String SET_DEFAULT_LICENSE = "UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA_3 + "';";
 
         // Upgrade from version 8 ->
-        static final String ADD_WIKI_DATA_ENTITY_ID_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN wikidataEntityID STRING;";
+        static final String ADD_WIKI_DATA_ENTITY_ID_FIELD = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN wikidataEntityID TEXT;";
 
+        private Table() {
+        }
 
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);
@@ -308,7 +311,6 @@ public class ContributionDao {
                 // Added place field
                 from=to;
                 onUpdate(db, from, to);
-                return;
             }
         }
 

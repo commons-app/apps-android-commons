@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -68,17 +68,16 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     QuizChecker quizChecker;
 
 
-    public Intent uploadServiceIntent;
+    Intent uploadServiceIntent;
 
     public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
     public static final int CONTRIBUTIONS_TAB_POSITION = 0;
     public static final int NEARBY_TAB_POSITION = 1;
 
-    public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
-    public boolean onOrientationChanged;
+    private boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
+    private boolean onOrientationChanged;
     private Menu menu;
 
-    private MenuItem notificationsMenuItem;
     private TextView notificationCount;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -108,7 +107,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("viewPagerCurrentItem", viewPager.getCurrentItem());
     }
@@ -174,7 +173,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                // no-op
             }
 
             @Override
@@ -202,7 +201,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                // no-op
             }
         });
 
@@ -214,12 +213,12 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                // no-op
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                // no-op
             }
         });
     }
@@ -284,12 +283,12 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
 
-        notificationsMenuItem = menu.findItem(R.id.notifications);
+        MenuItem notificationsMenuItem = menu.findItem(R.id.notifications);
         final View notification = notificationsMenuItem.getActionView();
         notificationCount = notification.findViewById(R.id.notification_count_badge);
-        notification.setOnClickListener(view -> {
-            NotificationActivity.startYourself(MainActivity.this, "unread");
-        });
+        notification.setOnClickListener(view ->
+            NotificationActivity.startYourself(MainActivity.this, "unread")
+        );
         this.menu = menu;
         updateMenuItem();
         setNotificationCount();
@@ -343,9 +342,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                 NotificationActivity.startYourself(this, "unread");
                 return true;
             case R.id.list_sheet:
-                if (contributionsActivityPagerAdapter.getItem(1) != null) {
-                    ((NearbyParentFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
-                }
+                ((NearbyParentFragment) contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -353,9 +350,9 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     }
 
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
-        FragmentManager fragmentManager;
+        final FragmentManager fragmentManager;
 
-        public ContributionsActivityPagerAdapter(FragmentManager fragmentManager) {
+        ContributionsActivityPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
             this.fragmentManager = fragmentManager;
         }
@@ -422,7 +419,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
          * @param index index of tabs, in our case 0 or 1
          * @return
          */
-        public String makeFragmentName(int viewId, int index) {
+        String makeFragmentName(int viewId, int index) {
             return "android:switcher:" + viewId + ":" + index;
         }
 
@@ -435,6 +432,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         controller.handleActivityResult(this, requestCode, resultCode, data);
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         setNotificationCount();
@@ -447,5 +445,9 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         // Remove ourself from hashmap to prevent memory leaks
         locationManager = null;
         super.onDestroy();
+    }
+
+    Intent getUploadServiceIntent() {
+        return uploadServiceIntent;
     }
 }

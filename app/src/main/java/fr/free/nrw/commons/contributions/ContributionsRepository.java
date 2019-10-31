@@ -8,7 +8,7 @@ import javax.inject.Inject;
  */
 public class ContributionsRepository {
 
-    private ContributionsLocalDataSource localDataSource;
+    private final ContributionsLocalDataSource localDataSource;
 
     @Inject
     public ContributionsRepository(ContributionsLocalDataSource localDataSource) {

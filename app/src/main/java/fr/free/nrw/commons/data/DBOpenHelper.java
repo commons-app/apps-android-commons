@@ -10,7 +10,7 @@ import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 
-public class DBOpenHelper  extends SQLiteOpenHelper {
+public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "commons.db";
     private static final int DATABASE_VERSION = 10;

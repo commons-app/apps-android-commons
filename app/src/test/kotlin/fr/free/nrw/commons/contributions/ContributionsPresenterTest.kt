@@ -23,9 +23,9 @@ class ContributionsPresenterTest {
 
     private lateinit var cursor: Cursor
 
-    lateinit var contribution: Contribution
+    private lateinit var contribution: Contribution
 
-    lateinit var loader: Loader<Cursor>
+    private lateinit var loader: Loader<Cursor>
 
     /**
      * initial setup
