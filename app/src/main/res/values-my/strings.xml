@@ -363,4 +363,5 @@
   <string name="dialog_box_text_nomination">%1$ ဟာ ဘာကြောင့် ဖျက်သင့်သလဲ?</string>
   <string name="delete_helper_show_deletion_title_success">အောင်မြင်</string>
   <string name="no_achievements_yet">မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
+  <string name="account_created">အကောင့်ဖန်တီးပြီးပါပြီ</string>
 </resources>

@@ -81,7 +81,7 @@
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
   <string name="title_activity_signup">Регистриране</string>
-  <string name="title_activity_featured_images">Избрани картини</string>
+  <string name="title_activity_featured_images">Избрани изображения</string>
   <string name="title_activity_category_details">Категория</string>
   <string name="menu_about">За приложението</string>
   <string name="about_license">Приложението на Commons е с отворен код. Неговите създатели и поддръжници са получателите на ресурсите на общността на Уикимедия, както и на членовете на общността. Фондация Уикимедия не участва в създаването, развитието и поддръжката.</string>
@@ -128,7 +128,7 @@
   <string name="menu_refresh">Обновяване</string>
   <string name="storage_permission_title">Изисква се разрешение за съхранение</string>
   <string name="read_storage_permission_rationale">Изисква се разрешение: Трябва да се прочита от външен склад. Приложението без това няма достъп до вашата галерия.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Изисква се разрешение: Трябва да се запише на външен склад. Приложението без това няма достъп до вашата камера.</string>
+  <string name="write_storage_permission_rationale">Изисква се разрешение: Трябва да се запише на външен склад. Приложението без това няма достъп до вашата камера/галерия.</string>
   <string name="ok">Добре</string>
   <string name="title_activity_nearby">Близки места</string>
   <string name="no_nearby">Не са намерени близки места</string>
@@ -149,7 +149,7 @@
   <string name="invalid_input">Недопустим вход</string>
   <string name="enter_valid">Внесете валиден брой</string>
   <string name="cannot_be_zero">Границата на качвания не може да е 0</string>
-  <string name="set_limit" fuzzy="true">Задайте ограничение на последните качвания</string>
+  <string name="set_limit">Ограничение на последните качвания</string>
   <string name="commons_logo">Лого на Общомедия</string>
   <string name="commons_website">Общомедия</string>
   <string name="commons_facebook">Общомедия на Facebook</string>
@@ -200,14 +200,14 @@
   <string name="nearby_location_has_not_changed">Местоположението не е променено.</string>
   <string name="nearby_location_not_available">Местоположението не е налично.</string>
   <string name="toggle_view_button">Превключване на изгледа</string>
-  <string name="nearby_wikidata" fuzzy="true">УИКИДАННИ</string>
-  <string name="nearby_wikipedia" fuzzy="true">УИКИПЕДИЯ</string>
-  <string name="nearby_commons" fuzzy="true">ОБЩОМЕДИЯ</string>
+  <string name="nearby_wikidata">Уикиданни</string>
+  <string name="nearby_wikipedia">Уикипедия</string>
+  <string name="nearby_commons">Общомедия</string>
   <string name="about_translate_cancel">Отказ</string>
   <string name="menu_search_button">Търсене</string>
   <string name="title_activity_search">Търсене</string>
-  <string name="search_tab_title_media" fuzzy="true">ИЗОБРАЖЕНИЯ/ЗАПИСИ</string>
-  <string name="search_tab_title_categories" fuzzy="true">КАТЕГОРИИ</string>
+  <string name="search_tab_title_media">Мултимедия</string>
+  <string name="search_tab_title_categories">Категории</string>
   <string name="no_recent_searches">Няма последни търсения</string>
   <string name="nominate_delete">Предлагане за изтриване</string>
   <string name="statistics_wikidata_edits">Изображения чрез „Близки места“</string>
@@ -232,7 +232,7 @@
   <string name="display_location_permission_explanation">Потърсете разрешение за местоположение, когато трябва да уведомите за местоположението.</string>
   <string name="ends_on">Завършва:</string>
   <string name="display_campaigns">Показване на кампании</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Кликнете тук, за да видите текущите кампании</string>
+  <string name="display_campaigns_explanation">Вижте текущите кампании</string>
   <string name="nearby_campaign_dismiss_message">Вече няма да ви се показват кампаниите. Ако промените решението си, ще намерите тази настройка в Настройки.</string>
   <string name="this_function_needs_network_connection">Тази опция изисква да сте свързани към мрежата. Проверете настройките за връзка.</string>
   <string name="bad_token_error_proposed_solution">Качването не е успешно поради проблеми с редакторския шифър. Моля, излезете и отново влезете в системата.</string>
@@ -244,8 +244,8 @@
   <string name="no_image">Няма използвани изображения</string>
   <string name="no_image_reverted">Няма върнати изображения</string>
   <string name="no_image_uploaded">Няма качени изображения</string>
-  <string name="no_notification" fuzzy="true">Нямате непрочетени известия</string>
-  <string name="no_archived_notification" fuzzy="true">Нямате архивирани известия</string>
+  <string name="no_notification">Нямате непрочетени известия</string>
+  <string name="no_archived_notification">Нямате архивирани известия</string>
   <string name="share_logs_using">Споделяне на дневници, използвайки</string>
   <string name="menu_option_archived">Преглеждане на архивирани</string>
   <string name="menu_option_unread">Преглеждане на непрочетени</string>

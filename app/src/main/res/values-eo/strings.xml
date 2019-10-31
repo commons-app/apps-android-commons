@@ -95,7 +95,7 @@
   <string name="title_activity_signup">Registriĝi</string>
   <string name="title_activity_featured_images">Elstarigitaj bildoj</string>
   <string name="title_activity_category_details">Kategorio</string>
-  <string name="title_activity_review">Reviziado far Kolegoj</string>
+  <string name="title_activity_review">Reviziado de kolegoj</string>
   <string name="menu_about">Pri</string>
   <string name="about_license">La aplikaĵo de Vikimedia Komunejo estas malfermitkoda aplijaĵo kreita kaj subtenata de la gratifikitoj kaj voluntuloj de la Vikimedia komunumo. La Vikimedia Fondaĵo ne partoprenas en la kreado, evoluigado, aŭ subtenado de la aplikaĵo.</string>
   <string name="about_improve">Krei novan &lt;a href=\"%1$s\"&gt;problemon ĉe GitHub&lt;/a&gt; por raportoj pri cimoj kaj sugestoj.</string>

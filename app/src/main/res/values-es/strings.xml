@@ -16,6 +16,7 @@
 * Ktranz
 * Luisangelrg
 * Macofe
+* Madamebiblio
 * MarcoAurelio
 * MarionaDSR
 * Miguel2706
@@ -269,7 +270,7 @@
   <string name="upload_problem_different_geolocation">Esta imagen fue tomada en una ubicación diferente.</string>
   <string name="upload_problem_fbmd">Por favor sube solo fotografías que tu mismo hayas tomado. No subas imágenes o fotografías que hayas encontrado en las cuentas de Facebook de otros.</string>
   <string name="upload_problem_do_you_continue">¿Todavía quieres cargar esta imagen?</string>
-  <string name="internet_downloaded">Por favor sube solo fotografías que tu mismo hayas tomado. No subas imágenes o fotografías que hayas descargado desde Internet.</string>
+  <string name="internet_downloaded">Carga únicamente fotografías que hayas creado tú. No cargues imágenes o fotografías que hayas descargado de Internet.</string>
   <string name="give_permission">Otorgar permiso</string>
   <string name="use_external_storage">Utilizar almacenamiento externo</string>
   <string name="use_external_storage_summary">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
@@ -562,4 +563,8 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Otra</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque sí</string>
+  <string name="account_created">Cuenta creada</string>
+  <string name="text_copy">Texto copiado en el portapapeles.</string>
+  <string name="notification_mark_read">Notificación: marcar como leída</string>
+  <string name="some_error">Hubo un error</string>
 </resources>
