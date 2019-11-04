@@ -344,7 +344,7 @@
   <string name="delete_helper_make_deletion_toast">%1$s کي ڊاھ لاءِ اميدوار ڪرڻ جي جي ڪوشش ڪندي</string>
   <string name="delete_helper_show_deletion_title">ڊاھ لاءِ اميدوار ڪندي</string>
   <string name="delete_helper_show_deletion_title_success">ڪاميابي</string>
-  <string name="delete_helper_show_deletion_message_if">%1$s ڪاميابيءَ سان ڊاھ لاءِ اميدوار ڪيو ويو.</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">%1$s ڪاميابيءَ سان ڊاھ لاءِ اميدوار ڪيو ويو.</string>
   <string name="delete_helper_show_deletion_title_failed">ناڪام</string>
   <string name="delete_helper_show_deletion_message_else">ڊاھ جي درخواست نہ ٿي سگھي.</string>
   <string name="delete_helper_ask_spam_selfie">ھڪ سيلفي</string>

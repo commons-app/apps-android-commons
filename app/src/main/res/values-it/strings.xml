@@ -328,7 +328,7 @@
   <string name="error_loading_subcategories">Si è verificato un errore durante il caricamento delle sottocategorie.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Categorie</string>
-  <string name="successful_wikidata_edit">Immagine aggiunta correttamente a %1$s su Wikidata!</string>
+  <string name="successful_wikidata_edit">Immagine aggiunta a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Impossibile aggiornare l\'entità Wikidata corrispondente!</string>
   <string name="menu_set_wallpaper">Imposta come sfondo</string>
   <string name="wallpaper_set_successfully">Sfondo impostato correttamente!</string>
