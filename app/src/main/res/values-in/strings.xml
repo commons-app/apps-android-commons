@@ -321,7 +321,7 @@
   <string name="search_tab_title_categories">Kategori</string>
   <string name="explore_tab_title_featured">Terpilih</string>
   <string name="explore_tab_title_mobile">Diunggah melalui ponsel</string>
-  <string name="successful_wikidata_edit">Gambar berhasil ditambahkan ke %1$s di Wikidata!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Gambar berhasil ditambahkan ke %1$s di Wikidata!</string>
   <string name="wikidata_edit_failure">Gagal mengubah entitas Wikidata yang bersangkutan!</string>
   <string name="menu_set_wallpaper">Jadikan Wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper berhasil dipasang!</string>
@@ -438,7 +438,7 @@
   <string name="image_chooser_title">Pilih Gambar untuk diunggah</string>
   <string name="please_wait">Silakan tunggu…</string>
   <string name="delete_helper_show_deletion_title_success">Sukses</string>
-  <string name="delete_helper_show_deletion_message_if">Berhasil dinominasikan %1$ untuk dihapus.</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Berhasil dinominasikan %1$ untuk dihapus.</string>
   <string name="delete_helper_show_deletion_title_failed">Gagal</string>
   <string name="delete_helper_show_deletion_message_else">Tidak dapat meminta penghapusan.</string>
   <string name="delete_helper_ask_spam_selfie">Foto selfi</string>

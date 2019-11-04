@@ -23,6 +23,7 @@
   <string name="preference_category_appearance">Wygląd</string>
   <string name="preference_category_general">Ogólne</string>
   <string name="preference_category_feedback">Opinia</string>
+  <string name="preference_category_privacy">Prywatność</string>
   <string name="preference_category_location">Lokalizacja</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>

@@ -339,7 +339,7 @@
   <string name="search_tab_title_categories">Kategoriler</string>
   <string name="explore_tab_title_featured">Öne çıkan</string>
   <string name="explore_tab_title_mobile">Mobil yoluyla yüklendi</string>
-  <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
   <string name="menu_set_wallpaper">Duvar kağıdı olarak ayarla</string>
   <string name="wallpaper_set_successfully">Duvar kağıdı başarıyla ayarlandı!</string>
@@ -465,7 +465,7 @@
   <string name="check_category_edit_summary">Kategori kontrolü isteniyor</string>
   <string name="check_category_success_title">Kategori kontrolü istendi</string>
   <string name="check_category_failure_title">Kategori kontrol isteği işe yaramadı</string>
-  <string name="check_category_success_message">%1$s için başarıyla kategori kontrolü istendi</string>
+  <string name="check_category_success_message" fuzzy="true">%1$s için başarıyla kategori kontrolü istendi</string>
   <string name="check_category_failure_message">%1$s için kategori kontrolü istenemedi</string>
   <string name="check_category_toast">%1$s için kategori kontrolü isteniyor</string>
   <string name="nominate_for_deletion_edit_file_page">Dosyaya silme mesajı ekleme</string>
@@ -518,4 +518,51 @@
   <string name="image_chooser_title">Yüklenecek Görüntüleri Seçin</string>
   <string name="please_wait">Lütfen bekleyin…</string>
   <string name="images_featured_explanation">Öne çıkan resimler, çok yetenekli fotoğrafçıların ve Wikimedia Commons topluluğunun sitedeki en yüksek kalitedeki bazılarını seçtiği illüstratörlerdir.</string>
+  <string name="images_via_nearby_explanation">Yakındaki yerler üzerinden yüklenen resimler, haritadaki yerleri keşfederek yüklenen resimlerdir.</string>
+  <string name="thanks_received_explanation">Bu özellik, editörlerin yararlı düzenlemeler yapan kullanıcılara bir teşekkür bildirimi göndermelerini sağlar - geçmiş sayfasındaki veya fark sayfasındaki küçük bir teşekkür bağlantısını kullanarak.</string>
+  <string name="previous_image_title_description">Önceki başlığı ve açıklamayı kopyala</string>
+  <string name="previous_button_tooltip_message">Önceki resminize girdiğiniz başlığı ve açıklamayı yeniden kullanmak ve mevcut resminize uygun şekilde değiştirmek için tıklayın</string>
+  <string name="welcome_do_upload_content_description">Commons\'a yüklenecek iyi görüntülere örnekler</string>
+  <string name="welcome_dont_upload_content_description">Yüklenemeyen görüntülere örnekler</string>
+  <string name="skip_image">Bu resmi atla</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Yükleme başarısız!! Harici depolama izni olmadan dosyayı indiremiyoruz.</string>
+  <string name="manage_exif_tags">EXIF Etiketlerini Yönet</string>
+  <string name="manage_exif_tags_summary">Yüklemelerde hangi EXIF etiketlerinin tutulacağını seçin</string>
+  <string name="exif_tag_name_author">Yazar</string>
+  <string name="exif_tag_name_copyright">Telif Hakkı</string>
+  <string name="exif_tag_name_location">Konum</string>
+  <string name="exif_tag_name_cameraModel">Kamera Modeli</string>
+  <string name="exif_tag_name_lensModel">Lens Modeli</string>
+  <string name="exif_tag_name_serialNumbers">Seri Numaraları</string>
+  <string name="exif_tag_name_software">Yazılım</string>
+  <string name="share_text">Fotoğrafları telefonunuzda Wikimedia Commons\'a yükleyin Commons uygulamasını indirin: %1$s</string>
+  <string name="share_via">Uygulamayı üzerinden paylaş...</string>
+  <string name="image_info">Resim Bilgisi</string>
+  <string name="no_categories_found">Kategori bulunamadı</string>
+  <string name="upload_cancelled">İptal Edilen Yükleme</string>
+  <string name="previous_image_title_description_not_found">Önceki görüntünün başlığı veya açıklaması için veri yok.</string>
+  <string name="dialog_box_text_nomination">%1$s neden silinmeli?</string>
+  <string name="review_is_uploaded_by">%1$s tarafından yükleyen: %2$s</string>
+  <string name="default_description_language">Varsayılan açıklama dili</string>
+  <string name="delete_helper_make_deletion_toast">Silme işlemi için %1$s aday gösterilmeye çalışılıyor</string>
+  <string name="delete_helper_show_deletion_title">Silme için aday gösterme</string>
+  <string name="delete_helper_show_deletion_title_success">Başarılı</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Silme için başarıyla %1$s aday gösterildi.</string>
+  <string name="delete_helper_show_deletion_title_failed">Başarısız</string>
+  <string name="delete_helper_show_deletion_message_else">Silme işlemi istenemedi.</string>
+  <string name="delete_helper_ask_spam_selfie">Özçekim</string>
+  <string name="delete_helper_ask_spam_blurry">Bulanık</string>
+  <string name="delete_helper_ask_spam_nonsense">Saçmalık</string>
+  <string name="delete_helper_ask_spam_other">Diğer</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Fotoğraf basın</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetten rastgele fotoğraf</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Diğer</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Çünkü o</string>
+  <string name="share_image_via">Resmi paylaş</string>
+  <string name="no_achievements_yet">Henüz bir katkı yapmadınız</string>
+  <string name="account_created">Hesap oluşturuldu!</string>
+  <string name="text_copy">Metin panoya kopyalandı</string>
+  <string name="notification_mark_read">Bildirim okundu olarak işaretlendi</string>
+  <string name="some_error">Bazı hatalar oldu!</string>
 </resources>
