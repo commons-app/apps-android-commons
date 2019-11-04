@@ -344,7 +344,7 @@
   <string name="search_tab_title_categories">Catégories</string>
   <string name="explore_tab_title_featured">Mis en avant</string>
   <string name="explore_tab_title_mobile">Téléversé via mobile</string>
-  <string name="successful_wikidata_edit">Image bien ajoutée à %1$s sur Wikidata !</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Image bien ajoutée à %1$s sur Wikidata !</string>
   <string name="wikidata_edit_failure">Échec de la mise à jour de l\'entité Wikidata correspondante !</string>
   <string name="menu_set_wallpaper">Définir comme fond d\'écran</string>
   <string name="wallpaper_set_successfully">Papier-peint configuré avec succès!</string>
@@ -470,7 +470,7 @@
   <string name="check_category_edit_summary">Demande de contrôle de catégorie</string>
   <string name="check_category_success_title">Contrôle de catégorie démandé</string>
   <string name="check_category_failure_title">La requête du contrôle de catégorie n\'a pas abouti</string>
-  <string name="check_category_success_message">Contrôle de catégorie demandé avec succès pour %1$s</string>
+  <string name="check_category_success_message" fuzzy="true">Contrôle de catégorie demandé avec succès pour %1$s</string>
   <string name="check_category_failure_message">Impossible de demander un contrôle de catégorie pour %1$s</string>
   <string name="check_category_toast">Demande en cours du contrôle de la catégorie pour %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Ajouter un message de suppression au fichier</string>
@@ -552,7 +552,7 @@
   <string name="delete_helper_make_deletion_toast">Tentative de signalement de %1$s pour la suppression</string>
   <string name="delete_helper_show_deletion_title">Nominé pour suppression</string>
   <string name="delete_helper_show_deletion_title_success">Succès</string>
-  <string name="delete_helper_show_deletion_message_if">%1$s bien nominé pour suppression.</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">%1$s bien nominé pour suppression.</string>
   <string name="delete_helper_show_deletion_title_failed">Échec</string>
   <string name="delete_helper_show_deletion_message_else">Impossible de requêter la suppression.</string>
   <string name="delete_helper_ask_spam_selfie">Un selfie</string>

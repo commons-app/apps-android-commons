@@ -323,7 +323,7 @@
   <string name="search_tab_title_categories">Categorii</string>
   <string name="explore_tab_title_featured">Recomandate</string>
   <string name="explore_tab_title_mobile">Încărcat de pe telefon</string>
-  <string name="successful_wikidata_edit">Imaginea a fost adăugată cu succes la %1$s pe Wikidata!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Imaginea a fost adăugată cu succes la %1$s pe Wikidata!</string>
   <string name="wikidata_edit_failure">Nu s-a actualizat entitatea corespunzătoare Wikidata!</string>
   <string name="menu_set_wallpaper">Setează ca Imagine de fundal</string>
   <string name="wallpaper_set_successfully">Wallpaper setat cu succes!</string>

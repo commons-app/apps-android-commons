@@ -322,7 +322,7 @@
   <string name="search_tab_title_categories">Categoríes</string>
   <string name="explore_tab_title_featured">Destacada</string>
   <string name="explore_tab_title_mobile">Xubío dende\'l móvil</string>
-  <string name="successful_wikidata_edit">Añadióse correutamente la imaxe a %1$s en Wikidata.</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Añadióse correutamente la imaxe a %1$s en Wikidata.</string>
   <string name="wikidata_edit_failure">Nun pudo anovase la entidá de Wikidata correspondiente.</string>
   <string name="menu_set_wallpaper">Poner como fondu</string>
   <string name="wallpaper_set_successfully">Fondu definíu correutamente</string>
@@ -506,7 +506,7 @@
   <string name="delete_helper_make_deletion_toast">Tentando marcar %1$s pal so desaniciu</string>
   <string name="delete_helper_show_deletion_title">Marcando pa desaniciar</string>
   <string name="delete_helper_show_deletion_title_success">Correuto</string>
-  <string name="delete_helper_show_deletion_message_if">Marcóse correutamente %1$s pa desaniciar.</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Marcóse correutamente %1$s pa desaniciar.</string>
   <string name="delete_helper_show_deletion_title_failed">Falló</string>
   <string name="delete_helper_show_deletion_message_else">Non pudo pidise\'l desaniciu.</string>
   <string name="delete_helper_ask_spam_selfie">Un autorretratu</string>

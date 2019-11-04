@@ -382,7 +382,7 @@
   <string name="delete_helper_make_deletion_toast">Pokus o nomináciu %1$s na zmazanie</string>
   <string name="delete_helper_show_deletion_title">Nominácia na zmazanie</string>
   <string name="delete_helper_show_deletion_title_success">Úspech</string>
-  <string name="delete_helper_show_deletion_message_if">%1$s úspešne nominované na zmazanie.</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">%1$s úspešne nominované na zmazanie.</string>
   <string name="delete_helper_show_deletion_title_failed">Chyba</string>
   <string name="delete_helper_show_deletion_message_else">Nepodarilo sa požiadať o zmazanie.</string>
   <string name="delete_helper_ask_spam_selfie">Selfie</string>

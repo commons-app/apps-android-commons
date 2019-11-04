@@ -331,7 +331,7 @@
   <string name="search_tab_title_categories">カテゴリ</string>
   <string name="explore_tab_title_featured">秀逸</string>
   <string name="explore_tab_title_mobile">モバイル機器からアップロード</string>
-  <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
+  <string name="successful_wikidata_edit" fuzzy="true">ウィキデータの%1$sに画像を追加しました !</string>
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
   <string name="menu_set_wallpaper">壁紙として設定</string>
   <string name="wallpaper_set_successfully">壁紙の設定ができました!</string>
@@ -456,7 +456,7 @@
   <string name="check_category_edit_summary">カテゴリ確認を申請中です</string>
   <string name="check_category_success_title">カテゴリ確認を申請しました</string>
   <string name="check_category_failure_title">カテゴリ確認の申請が無効です</string>
-  <string name="check_category_success_message">%1$sのカテゴリ確認の申請が完了しました</string>
+  <string name="check_category_success_message" fuzzy="true">%1$sのカテゴリ確認の申請が完了しました</string>
   <string name="check_category_failure_message">%1$sのカテゴリ確認を申請できませんでした</string>
   <string name="check_category_toast"> %1$sのカテゴリ確認を申請中です</string>
   <string name="nominate_for_deletion_edit_file_page">削除されるファイルにメッセージを添付中です</string>
@@ -538,7 +538,7 @@
   <string name="delete_helper_make_deletion_toast">%1$sの削除を提案中です</string>
   <string name="delete_helper_show_deletion_title">削除の対象に指定する</string>
   <string name="delete_helper_show_deletion_title_success">成功しました</string>
-  <string name="delete_helper_show_deletion_message_if">%1$sの削除依頼が成功しました。</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">%1$sの削除依頼が成功しました。</string>
   <string name="delete_helper_show_deletion_title_failed">失敗しました</string>
   <string name="delete_helper_show_deletion_message_else">削除のリクエストができません。</string>
   <string name="delete_helper_ask_spam_selfie">自撮り</string>

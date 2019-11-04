@@ -331,7 +331,7 @@
   <string name="search_tab_title_categories">Kategóriák</string>
   <string name="explore_tab_title_featured">Kiemelt</string>
   <string name="explore_tab_title_mobile">Feltöltés mobillal</string>
-  <string name="successful_wikidata_edit">A kép sikeresen hozzáadva a következő Wikidata-elemhez: „%1$s”!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">A kép sikeresen hozzáadva a következő Wikidata-elemhez: „%1$s”!</string>
   <string name="wikidata_edit_failure">Nem sikerült a kapcsolódó Wikidata bejegyzés feltöltése.</string>
   <string name="menu_set_wallpaper">Beállítás háttérképként</string>
   <string name="wallpaper_set_successfully">Háttérkép sikeresen beállítva!</string>
@@ -482,7 +482,7 @@
   <string name="delete_helper_make_deletion_toast">%1$s jelölése törlésre...</string>
   <string name="delete_helper_show_deletion_title">Törlésre jelölés</string>
   <string name="delete_helper_show_deletion_title_success">Siker</string>
-  <string name="delete_helper_show_deletion_message_if">Sikeresen törlésre jelölve: %1$s.</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Sikeresen törlésre jelölve: %1$s.</string>
   <string name="delete_helper_show_deletion_title_failed">Sikertelen</string>
   <string name="delete_helper_show_deletion_message_else">Nem sikerült a törlés kérése.</string>
   <string name="delete_helper_ask_spam_selfie">Egy szelfi</string>

@@ -339,7 +339,7 @@
   <string name="search_tab_title_categories">Kategoriler</string>
   <string name="explore_tab_title_featured">Öne çıkan</string>
   <string name="explore_tab_title_mobile">Mobil yoluyla yüklendi</string>
-  <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Resim, Vikiveri\'de %1$s içine başarıyla eklendi.</string>
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
   <string name="menu_set_wallpaper">Duvar kağıdı olarak ayarla</string>
   <string name="wallpaper_set_successfully">Duvar kağıdı başarıyla ayarlandı!</string>
@@ -465,7 +465,7 @@
   <string name="check_category_edit_summary">Kategori kontrolü isteniyor</string>
   <string name="check_category_success_title">Kategori kontrolü istendi</string>
   <string name="check_category_failure_title">Kategori kontrol isteği işe yaramadı</string>
-  <string name="check_category_success_message">%1$s için başarıyla kategori kontrolü istendi</string>
+  <string name="check_category_success_message" fuzzy="true">%1$s için başarıyla kategori kontrolü istendi</string>
   <string name="check_category_failure_message">%1$s için kategori kontrolü istenemedi</string>
   <string name="check_category_toast">%1$s için kategori kontrolü isteniyor</string>
   <string name="nominate_for_deletion_edit_file_page">Dosyaya silme mesajı ekleme</string>
@@ -547,7 +547,7 @@
   <string name="delete_helper_make_deletion_toast">Silme işlemi için %1$s aday gösterilmeye çalışılıyor</string>
   <string name="delete_helper_show_deletion_title">Silme için aday gösterme</string>
   <string name="delete_helper_show_deletion_title_success">Başarılı</string>
-  <string name="delete_helper_show_deletion_message_if">Silme için başarıyla %1$s aday gösterildi.</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Silme için başarıyla %1$s aday gösterildi.</string>
   <string name="delete_helper_show_deletion_title_failed">Başarısız</string>
   <string name="delete_helper_show_deletion_message_else">Silme işlemi istenemedi.</string>
   <string name="delete_helper_ask_spam_selfie">Özçekim</string>

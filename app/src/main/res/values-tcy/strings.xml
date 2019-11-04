@@ -311,7 +311,7 @@
   <string name="error_loading_subcategories">ಉಪವರ್ಗೊಲೆನ್ ಏರಾನಗ ದೋಷ ಆಂಡ್.</string>
   <string name="search_tab_title_media" fuzzy="true">ಮಾಧ್ಯಮ</string>
   <string name="search_tab_title_categories" fuzzy="true">ವರ್ಗೊಲು</string>
-  <string name="successful_wikidata_edit">ವಿಕಿಡೇಟೊಡು ಆಕೃತಿನ್ ಸಫಲವಾದ್ %1$ ಗು ಸೇರಾಂಡ್!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">ವಿಕಿಡೇಟೊಡು ಆಕೃತಿನ್ ಸಫಲವಾದ್ %1$ ಗು ಸೇರಾಂಡ್!</string>
   <string name="wikidata_edit_failure">ಹೊಂದಿಕೆ ಆಪಿನ ವಿಕಿಡೇಟಾ ವಸ್ತುನು ಕಾಲನವಿ ಮಲ್ಪುನ ವಿಫಲವಾಂಡ್.</string>
   <string name="menu_set_wallpaper">ಗೋಡೆಕಾಕಜಿ ಆದ್ ಗೋಡಿಸಾಲೆ.</string>
   <string name="wallpaper_set_successfully">ಗೋಡೆಕಾಕಜಿ  ಸಫಲವಾದ್ ಗೋಡಣೆಯಾಂಡ್!</string>

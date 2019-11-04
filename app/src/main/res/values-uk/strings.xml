@@ -339,7 +339,7 @@
   <string name="search_tab_title_categories">Категорії</string>
   <string name="explore_tab_title_featured">Обране</string>
   <string name="explore_tab_title_mobile">Завантаження з мобільного</string>
-  <string name="successful_wikidata_edit">Зображення успішно додано до сторінки %1$s у Вікіданих!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Зображення успішно додано до сторінки %1$s у Вікіданих!</string>
   <string name="wikidata_edit_failure">Не вдалось оновити відповідну сторінку Вікіданих!</string>
   <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
   <string name="wallpaper_set_successfully">Шпалери екрану виставлено успішно!</string>
@@ -466,7 +466,7 @@
   <string name="check_category_edit_summary">Запит на перевірку категорій</string>
   <string name="check_category_success_title">Зроблено запит на перевірку категорій</string>
   <string name="check_category_failure_title">Запит на перевірку категорій не спрацював</string>
-  <string name="check_category_success_message">Успішно зроблено запит на перевірку категорій для %1$s</string>
+  <string name="check_category_success_message" fuzzy="true">Успішно зроблено запит на перевірку категорій для %1$s</string>
   <string name="check_category_failure_message">Не вдалося зробити запит на перевірку категорій для %1$s</string>
   <string name="check_category_toast">Запит на перевірку категорій для %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Додавання до файлу повідомлення про вилучення</string>
@@ -549,7 +549,7 @@
   <string name="delete_helper_make_deletion_toast">Номінування %1$s до вилучення</string>
   <string name="delete_helper_show_deletion_title">Номінування до вилучення</string>
   <string name="delete_helper_show_deletion_title_success">Успішно</string>
-  <string name="delete_helper_show_deletion_message_if">Успішно номіновано %1$s до вилучення.</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Успішно номіновано %1$s до вилучення.</string>
   <string name="delete_helper_show_deletion_title_failed">Не вдалося</string>
   <string name="delete_helper_show_deletion_message_else">Неможливо запитати видалення.</string>
   <string name="delete_helper_ask_spam_selfie">Селфі</string>
