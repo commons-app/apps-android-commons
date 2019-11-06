@@ -34,6 +34,26 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
         }
     }
 
+    /**
+     * This function is called when an image has
+     * been loaded to enable the review buttons.
+     */
+    public void enableButtons() {
+        if (reviewImageFragments != null){
+            reviewImageFragments[0].enableButtons();
+        }
+    }
+
+    /**
+     * This function is called when an image is being loaded
+     * to disable the review buttons
+     */
+    public void disableButtons() {
+        if (reviewImageFragments != null){
+            reviewImageFragments[0].disableButtons();
+        }
+    }
+
     @Override
     public Fragment getItem(int position) {
         Bundle bundle = new Bundle();
