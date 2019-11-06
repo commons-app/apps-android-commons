@@ -146,6 +146,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         };
     }
 
+    /**
+     * This function is called when an image has
+     * been loaded to enable the review buttons.
+     */
     public void enableButtons() {
         yesButton.setEnabled(true);
         yesButton.setAlpha(1);
@@ -153,6 +157,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         noButton.setAlpha(1);
     }
 
+    /**
+     * This function is called when an image is being loaded
+     * to disable the review buttons
+     */
     public void disableButtons() {
         yesButton.setEnabled(false);
         yesButton.setAlpha(0.5f);
