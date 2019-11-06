@@ -10,20 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.inject.Inject;
-
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
@@ -33,10 +19,18 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
-import io.reactivex.Single;
+import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.inject.Inject;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -50,10 +44,11 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
-    @Inject MediaWikiApi mwApi;
     @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
     @Inject ContributionDao contributionDao;
+    @Inject UploadClient uploadClient;
+    @Inject MediaClient mediaClient;
 
     private NotificationManagerCompat notificationManager;
     private NotificationCompat.Builder curNotification;
@@ -75,7 +70,7 @@ public class UploadService extends HandlerService<Contribution> {
         super("UploadService");
     }
 
-    private class NotificationUpdateProgressListener implements MediaWikiApi.ProgressListener {
+    protected class NotificationUpdateProgressListener{
 
         String notificationTag;
         boolean notificationTitleChanged;
@@ -91,7 +86,6 @@ public class UploadService extends HandlerService<Contribution> {
             this.contribution = contribution;
         }
 
-        @Override
         public void onProgress(long transferred, long total) {
             Timber.d("Uploaded %d of %d", transferred, total);
             if (!notificationTitleChanged) {
@@ -197,29 +191,20 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("CheckResult")
     private void uploadContribution(Contribution contribution) {
-        InputStream fileInputStream;
         Uri localUri = contribution.getLocalUri();
         if (localUri == null || localUri.getPath() == null) {
             Timber.d("localUri/path is null");
             return;
         }
         String notificationTag = localUri.toString();
-
-        try {
-            File file1 = new File(localUri.getPath());
-            fileInputStream = new FileInputStream(file1);
-        } catch (FileNotFoundException e) {
-            Timber.d("File not found");
-            Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
-            fileNotFound.show();
-            return;
-        }
+        File localFile = new File(localUri.getPath());
 
         Timber.d("Before execution!");
         curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
-        notificationManager.notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
+        notificationManager
+                .notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
         String filename = contribution.getFilename();
 
@@ -229,22 +214,10 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution
         );
 
-        Single.fromCallable(() -> {
-            if (!mwApi.validateLogin()) {
-                // Need to revalidate!
-                if (sessionManager.revalidateAuthToken()) {
-                    Timber.d("Successfully revalidated token!");
-                } else {
-                    Timber.d("Unable to revalidate :(");
-                    stopForeground(true);
-                    sessionManager.forceLogin(UploadService.this);
-                    throw new RuntimeException(getString(R.string.authentication_failed));
-                }
-            }
-            return "Temp_" + contribution.hashCode() + filename;
-        }).flatMap(stashFilename -> mwApi.uploadFile(
-                stashFilename, fileInputStream, contribution.getDataLength(),
-                localUri, contribution.getContentProviderUri(), notificationUpdater))
+        Observable.fromCallable(() -> "Temp_" + contribution.hashCode() + filename)
+                .flatMap(stashFilename -> uploadClient
+                        .uploadFileToStash(getApplicationContext(), stashFilename, localFile,
+                                notificationUpdater))
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .doFinally(() -> {
@@ -259,26 +232,24 @@ public class UploadService extends HandlerService<Contribution> {
                     }
                 })
                 .flatMap(uploadStash -> {
-                    notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
 
                     Timber.d("Stash upload response 1 is %s", uploadStash.toString());
 
-                    String resultStatus = uploadStash.getResultStatus();
+                    String resultStatus = uploadStash.getResult();
                     if (!resultStatus.equals("Success")) {
                         Timber.d("Contribution upload failed. Wikidata entity won't be edited");
                         showFailedNotification(contribution);
-                        return Single.never();
+                        return Observable.never();
                     } else {
-                        synchronized (unfinishedUploads) {
-                            Timber.d("making sure of uniqueness of name: %s", filename);
-                            String uniqueFilename = findUniqueFilename(filename);
-                            unfinishedUploads.add(uniqueFilename);
-                            return mwApi.uploadFileFinalize(
-                                    uniqueFilename,
-                                    uploadStash.getFilekey(),
-                                    contribution.getPageContents(getApplicationContext()),
-                                    contribution.getEditSummary());
-                        }
+                        Timber.d("making sure of uniqueness of name: %s", filename);
+                        String uniqueFilename = findUniqueFilename(filename);
+                        unfinishedUploads.add(uniqueFilename);
+                        return uploadClient.uploadFileFromStash(
+                                getApplicationContext(),
+                                contribution,
+                                uniqueFilename,
+                                uploadStash.getFilekey());
                     }
                 })
                 .subscribe(uploadResult -> {
@@ -286,24 +257,25 @@ public class UploadService extends HandlerService<Contribution> {
 
                     notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
 
-                    String resultStatus = uploadResult.getResultStatus();
+                    String resultStatus = uploadResult.getResult();
                     if (!resultStatus.equals("Success")) {
                         Timber.d("Contribution upload failed. Wikidata entity won't be edited");
                         showFailedNotification(contribution);
                     } else {
-                        String canonicalFilename = uploadResult.getCanonicalFilename();
+                        String canonicalFilename = "File:" + uploadResult.getFilename();
                         Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
                                 contribution.getWikiDataEntityId());
                         wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename);
                         contribution.setFilename(canonicalFilename);
-                        contribution.setImageUrl(uploadResult.getImageUrl());
+                        contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
                         contribution.setState(Contribution.STATE_COMPLETED);
-                        contribution.setDateUploaded(uploadResult.getDateUploaded());
+                        contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatShort()
+                                .parse(uploadResult.getImageinfo().getTimestamp()));
                         contributionDao.save(contribution);
                     }
                 }, throwable -> {
                     Timber.w(throwable, "Exception during upload");
-                    notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
                     showFailedNotification(contribution);
                 });
     }
@@ -337,7 +309,7 @@ public class UploadService extends HandlerService<Contribution> {
                     sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
                 }
             }
-            if (!mwApi.fileExistsWithName(sequenceFileName)
+            if (!mediaClient.checkPageExistsUsingTitle(String.format("File:%s",sequenceFileName)).blockingGet()
                     && !unfinishedUploads.contains(sequenceFileName)) {
                 break;
             }

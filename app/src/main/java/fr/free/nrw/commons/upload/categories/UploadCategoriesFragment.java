@@ -89,7 +89,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     public void onResume() {
         super.onResume();
-        if (presenter != null && isVisible) {
+        if (presenter != null && isVisible && (categories == null || categories.isEmpty())) {
             presenter.searchForCategories(null);
         }
     }
@@ -193,7 +193,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         super.setUserVisibleHint(isVisibleToUser);
         isVisible = isVisibleToUser;
 
-        if (presenter != null && isResumed()) {
+        if (presenter != null && isResumed() && (categories == null || categories.isEmpty())) {
             presenter.searchForCategories(null);
         }
     }

@@ -106,7 +106,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      * @param contribution
      */
     private void fetchAndDisplayThumbnail(DisplayableContribution contribution) {
-        String keyForLRUCache = getKeyForLRUCache(contribution.getContentUri());
+        String keyForLRUCache = contribution.getFilename();
         String cacheUrl = thumbnailCache.get(keyForLRUCache);
         if (!StringUtils.isBlank(cacheUrl)) {
             imageView.setImageURI(cacheUrl);
@@ -130,15 +130,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
             compositeDisposable.add(disposable);
         }
 
-    }
-
-    /**
-     * Returns image key for the LRU cache, basically the id of the image, (the content uri is the ""+/id)
-     * @param contentUri
-     * @return
-     */
-    private String getKeyForLRUCache(Uri contentUri) {
-        return contentUri.getLastPathSegment();
     }
 
     public void clear() {

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Ibrahim
-* ToJack
 -->
 <resources>
-  <string name="crash_dialog_title">Хаиогии Викианбор</string>
-  <string name="crash_dialog_text">Упс. Чизе хато пеш рафт!</string>
-  <string name="crash_dialog_comment_prompt">Ба мо бигуед, ки шумо чӣ кор кардед, ба мо дар имайл нависед. Мо ба шумо кӯмак мерасонем.</string>
   <string name="crash_dialog_ok_toast">Ташаккур!</string>
 </resources>
