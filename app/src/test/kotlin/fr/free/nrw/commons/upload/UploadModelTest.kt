@@ -5,12 +5,10 @@ import android.content.Context
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.reactivex.Single
 import org.junit.After
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -40,8 +38,6 @@ class UploadModelTest {
     internal var licensesByName: Map<String, String>? = null
     @Mock
     internal var context: Context? = null
-    @Mock
-    internal var mwApi: MediaWikiApi? = null
     @Mock
     internal var sessionManage: SessionManager? = null
     @Mock

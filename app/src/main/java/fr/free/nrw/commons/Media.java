@@ -4,6 +4,9 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.gallery.ExtMetadata;
@@ -20,14 +23,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 
 public class Media implements Parcelable {
 
+    public static final Media EMPTY = new Media("");
     public static Creator<Media> CREATOR = new Creator<Media>() {
         @Override
         public Media createFromParcel(Parcel parcel) {
@@ -156,9 +158,9 @@ public class Media implements Parcelable {
                 page.title(),
                 "",
                 0,
-                safeParseDate(metadata.dateTimeOriginal().value()),
-                safeParseDate(metadata.dateTime().value()),
-                StringUtil.fromHtml(metadata.artist().value()).toString()
+                safeParseDate(metadata.dateTime()),
+                safeParseDate(metadata.dateTime()),
+                StringUtil.fromHtml(metadata.artist()).toString()
         );
 
         if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
@@ -170,17 +172,17 @@ public class Media implements Parcelable {
             language = "default";
         }
 
-        media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription().value()));
-        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories().value()));
-        String latitude = metadata.gpsLatitude().value();
-        String longitude = metadata.gpsLongitude().value();
+        media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription()));
+        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.getCategories()));
+        String latitude = metadata.getGpsLatitude();
+        String longitude = metadata.getGpsLongitude();
 
         if (!StringUtils.isBlank(latitude) && !StringUtils.isBlank(longitude)) {
             LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude), 0);
             media.setCoordinates(latLng);
         }
 
-        media.setLicenseInformation(metadata.licenseShortName().value(), metadata.licenseUrl().value());
+        media.setLicenseInformation(metadata.licenseShortName(), metadata.licenseUrl());
         return media;
     }
 
