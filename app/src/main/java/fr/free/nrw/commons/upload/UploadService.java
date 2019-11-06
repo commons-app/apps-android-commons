@@ -309,7 +309,7 @@ public class UploadService extends HandlerService<Contribution> {
                     sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
                 }
             }
-            if (!mediaClient.checkPageExistsUsingTitle(sequenceFileName).blockingGet()
+            if (!mediaClient.checkPageExistsUsingTitle(String.format("File:%s",sequenceFileName)).blockingGet()
                     && !unfinishedUploads.contains(sequenceFileName)) {
                 break;
             }
