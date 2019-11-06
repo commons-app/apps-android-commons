@@ -270,7 +270,7 @@
   <string name="upload_problem_different_geolocation">Esta imagen fue tomada en una ubicación diferente.</string>
   <string name="upload_problem_fbmd">Por favor sube solo fotografías que tu mismo hayas tomado. No subas imágenes o fotografías que hayas encontrado en las cuentas de Facebook de otros.</string>
   <string name="upload_problem_do_you_continue">¿Todavía quieres cargar esta imagen?</string>
-  <string name="internet_downloaded">Por favor sube solo fotografías que tu mismo hayas tomado. No subas imágenes o fotografías que hayas descargado desde Internet.</string>
+  <string name="internet_downloaded">Carga únicamente fotografías que hayas creado tú. No cargues imágenes o fotografías que hayas descargado de Internet.</string>
   <string name="give_permission">Otorgar permiso</string>
   <string name="use_external_storage">Utilizar almacenamiento externo</string>
   <string name="use_external_storage_summary">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
@@ -343,7 +343,7 @@
   <string name="search_tab_title_categories">Categorías</string>
   <string name="explore_tab_title_featured">En destaque</string>
   <string name="explore_tab_title_mobile">Cargados vía móvil</string>
-  <string name="successful_wikidata_edit">¡La imagen ha sido añadida exitosamente a %1$s en Wikidata!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">¡La imagen ha sido añadida exitosamente a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">¡Fallo la actualización de la entrada de Wikidata correspondiente!</string>
   <string name="menu_set_wallpaper">Poner como papel tapiz</string>
   <string name="wallpaper_set_successfully">¡El papel tapiz se aplicó correctamente!</string>
@@ -469,7 +469,7 @@
   <string name="check_category_edit_summary">Pidiendo control de categoría</string>
   <string name="check_category_success_title">Verificación de categoría requerida</string>
   <string name="check_category_failure_title">La verificación de categoría falló</string>
-  <string name="check_category_success_message">Pedido exitoso de control de categoría para %1$s</string>
+  <string name="check_category_success_message" fuzzy="true">Pedido exitoso de control de categoría para %1$s</string>
   <string name="check_category_failure_message">No se puede pedir el control de categoría para %1$s</string>
   <string name="check_category_toast">Pidiendo control de categoría para %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Añadiendo mensaje eliminado al archivo</string>
@@ -549,6 +549,9 @@
   <string name="review_is_uploaded_by">%1$s fue subida por: %2$s</string>
   <string name="default_description_language">Idioma por defecto de la descripción</string>
   <string name="delete_helper_make_deletion_toast">Intentando nominar %1$s para su borrado</string>
+  <string name="delete_helper_show_deletion_title">Nominar para borrado</string>
+  <string name="delete_helper_show_deletion_title_success">Éxito</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Se nominó exitosamente  %1$s para ser borrada.</string>
   <string name="delete_helper_show_deletion_title_failed">Falló</string>
   <string name="delete_helper_ask_spam_selfie">Un autorretrato</string>
   <string name="delete_helper_ask_spam_blurry">Borrosa</string>

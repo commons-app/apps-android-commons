@@ -328,7 +328,7 @@
   <string name="search_tab_title_categories">Kategorien</string>
   <string name="explore_tab_title_featured">Vorgestellt</string>
   <string name="explore_tab_title_mobile">Über mobil hochgeladen</string>
-  <string name="successful_wikidata_edit">Bild erfolgreich nach %1$s auf Wikidata hinzugefügt!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Bild erfolgreich nach %1$s auf Wikidata hinzugefügt!</string>
   <string name="wikidata_edit_failure">Fehler bei der Aktualisierung des dazugehörigen Wikidata-Objekts!</string>
   <string name="menu_set_wallpaper">Als Hintergrundbild festlegen</string>
   <string name="wallpaper_set_successfully">Hintergrundbild erfolgreich festgelegt!</string>
@@ -454,7 +454,7 @@
   <string name="check_category_edit_summary">Kategorieprüfung anfordern</string>
   <string name="check_category_success_title">Kategorieprüfung angefordert</string>
   <string name="check_category_failure_title">Die Anfrage zur Kategorieprüfung funktionierte nicht</string>
-  <string name="check_category_success_message">Kategorieprüfung für %1$s erfolgreich angefordert</string>
+  <string name="check_category_success_message" fuzzy="true">Kategorieprüfung für %1$s erfolgreich angefordert</string>
   <string name="check_category_failure_message">Eine Kategorieprüfung für %1$s konnte nicht angefordert werden</string>
   <string name="check_category_toast">Kategorieprüfung für %1$s anfordern</string>
   <string name="nominate_for_deletion_edit_file_page">Löschnachricht zur Datei hinzufügen</string>

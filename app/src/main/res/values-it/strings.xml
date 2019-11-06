@@ -103,6 +103,7 @@
   <string name="title_activity_signup">Registrati</string>
   <string name="title_activity_featured_images">Immagini in evidenza</string>
   <string name="title_activity_category_details">Categoria</string>
+  <string name="title_activity_review">Revisione tra pari</string>
   <string name="menu_about">Informazioni</string>
   <string name="about_license">L\'app di Wikimedia Commons è un\'applicazione open source creata e mantenuta da beneficiari e volontari della comunità Wikimedia. La Fondazione Wikimedia non è coinvolta nella creazione, sviluppo o manutenzione dell\'applicazione.</string>
   <string name="about_improve">Crea una nuova &lt;a href=\"%1$s\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
@@ -179,6 +180,7 @@
   <string name="storage_permission_title">Richiesta di autorizzazione di archiviazione</string>
   <string name="read_storage_permission_rationale">Autorizzazione richiesta: leggere la memoria esterna. L\'applicazione non può accedere alla tua galleria senza questo.</string>
   <string name="write_storage_permission_rationale">Autorizzazione richiesta: scrivere memoria esterna. L\'applicazione non può accedere alla tua videocamera/galleria senza questa.</string>
+  <string name="location_permission_title">Richiesta dell\'autorizzazione di posizione</string>
   <string name="location_permission_rationale">Autorizzazione facoltativa: ottieni la posizione corrente per i suggerimenti di categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Luoghi nelle vicinanze</string>
@@ -240,6 +242,7 @@
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notifiche</string>
   <string name="navigation_item_featured_images">In evidenza</string>
+  <string name="navigation_item_review">Revisiona</string>
   <string name="nearby_needs_permissions">I luoghi nelle vicinanze non possono essere visualizzati senza le autorizzazioni di posizione</string>
   <string name="no_description_found">nessuna descrizione trovata</string>
   <string name="nearby_info_menu_commons_article">Pagina di Commons del file</string>
@@ -257,6 +260,7 @@
   <string name="upload_problem_different_geolocation">Questa foto è stata scattata in una posizione diversa.</string>
   <string name="upload_problem_fbmd">Carica solo le foto che hai scattato tu stesso. Non caricare immagini che hai trovato negli account Facebook di altre persone.</string>
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
+  <string name="internet_downloaded">Carica solo le foto che hai scattato da solo. Non caricare immagini scaricate da Internet.</string>
   <string name="give_permission">Dai autorizzazione</string>
   <string name="use_external_storage">Usa memoria esterna</string>
   <string name="use_external_storage_summary">Salva le foto scattate con la fotocamera in-app sul dispositivo</string>
@@ -265,9 +269,10 @@
   <string name="send_log_file_description">Invia il file di registro agli sviluppatori tramite email per aiutarli a risolvere i problemi con l\'applicazione. Nota: i log potrebbero contenere informazioni di identificazione</string>
   <string name="no_web_browser">Nessun browser web trovato per aprire l\'URL</string>
   <string name="null_url">Errore! URL non trovato</string>
-  <string name="nominate_deletion">Proposta per la cancellazione</string>
+  <string name="nominate_deletion">Proponi per la Cancellazione</string>
   <string name="nominated_for_deletion">Questa immagine è stata proposta per la cancellazione.</string>
   <string name="nominated_see_more">&lt;u&gt;Vedi la pagina web per i dettagli&lt;/u&gt;</string>
+  <string name="nominating_file_for_deletion">Nomina %1$s per la cancellazione.</string>
   <string name="view_browser">Visualizza nel Browser</string>
   <string name="skip_login">Salta</string>
   <string name="navigation_item_login">Accedi</string>
@@ -323,7 +328,7 @@
   <string name="error_loading_subcategories">Si è verificato un errore durante il caricamento delle sottocategorie.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Categorie</string>
-  <string name="successful_wikidata_edit">Immagine aggiunta correttamente a %1$s su Wikidata!</string>
+  <string name="successful_wikidata_edit">Immagine aggiunta a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Impossibile aggiornare l\'entità Wikidata corrispondente!</string>
   <string name="menu_set_wallpaper">Imposta come sfondo</string>
   <string name="wallpaper_set_successfully">Sfondo impostato correttamente!</string>
@@ -481,7 +486,11 @@
   <string name="dialog_box_text_nomination">Perché %1$s dovrebbe essere cancellato?</string>
   <string name="review_is_uploaded_by">%1$s è stato caricato da: %2$s</string>
   <string name="default_description_language">Lingua predefinita descrizione</string>
+  <string name="delete_helper_show_deletion_title_failed">Fallito</string>
+  <string name="delete_helper_ask_spam_blurry">Sfocato</string>
+  <string name="delete_helper_ask_spam_nonsense">Senza senso</string>
   <string name="delete_helper_ask_spam_other">Altro</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Stampa foto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Altro</string>
   <string name="share_image_via">Condividi immagine tramite</string>

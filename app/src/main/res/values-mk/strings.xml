@@ -322,7 +322,7 @@
   <string name="search_tab_title_categories">Категории</string>
   <string name="explore_tab_title_featured">Избрани</string>
   <string name="explore_tab_title_mobile">Подигнато преку мобилен уред</string>
-  <string name="successful_wikidata_edit">Сликата е успешно додадена кон %1$s на Википодатоците!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Сликата е успешно додадена кон %1$s на Википодатоците!</string>
   <string name="wikidata_edit_failure">Не успеав да ја изменам соодветната единица на Википодатоците!</string>
   <string name="menu_set_wallpaper">Задај како позадина</string>
   <string name="wallpaper_set_successfully">Позадината е успешно зададена!</string>
@@ -448,7 +448,7 @@
   <string name="check_category_edit_summary">Барање на категориска проверка</string>
   <string name="check_category_success_title">Побарана категориска проверка</string>
   <string name="check_category_failure_title">Барањето за категориска проверка не успеа</string>
-  <string name="check_category_success_message">Успешно побарана категориска проверка за %1$s</string>
+  <string name="check_category_success_message">Побарана категориска проверка за %1$s</string>
   <string name="check_category_failure_message">Не можев да побарам категориска проверка за %1$s</string>
   <string name="check_category_toast">Барање на категориска проверка за %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Додавање на порака за бришење во податотека</string>
@@ -530,7 +530,7 @@
   <string name="delete_helper_make_deletion_toast">Се обидувам да ја предложам %1$s за бришење</string>
   <string name="delete_helper_show_deletion_title">Предлагам за бришење</string>
   <string name="delete_helper_show_deletion_title_success">Успеа</string>
-  <string name="delete_helper_show_deletion_message_if">Успешно предложена %1$s за бришење.</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s е предложена за бришење.</string>
   <string name="delete_helper_show_deletion_title_failed">Не успеа</string>
   <string name="delete_helper_show_deletion_message_else">Не можев да побарам бришење.</string>
   <string name="delete_helper_ask_spam_selfie">Самослик</string>

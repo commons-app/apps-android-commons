@@ -120,7 +120,10 @@ public class ReviewActivity extends NavigationBaseActivity {
             runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
         }
 
-        btnSkipImage.setOnClickListener(view -> runRandomizer());
+        btnSkipImage.setOnClickListener(view -> {
+            reviewPagerAdapter.disableButtons();
+            runRandomizer();
+        });
 
         btnSkipImage.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (
@@ -142,6 +145,7 @@ public class ReviewActivity extends NavigationBaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
                     if (media != null) {
+                        reviewPagerAdapter.disableButtons();
                         updateImage(media);
                     }
                 }));
@@ -169,6 +173,7 @@ public class ReviewActivity extends NavigationBaseActivity {
                     String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
                     imageCaption.setText(caption);
                     progressBar.setVisibility(View.GONE);
+                    reviewPagerAdapter.enableButtons();
                 }));
         reviewPager.setCurrentItem(0);
     }

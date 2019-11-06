@@ -335,7 +335,7 @@
   <string name="search_tab_title_categories">Categorias</string>
   <string name="explore_tab_title_featured">Destacadas</string>
   <string name="explore_tab_title_mobile">Carregado via celular</string>
-  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
+  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
   <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
@@ -461,7 +461,7 @@
   <string name="check_category_edit_summary">Solicitando verificação de categoria</string>
   <string name="check_category_success_title">Verificação de categoria solicitada</string>
   <string name="check_category_failure_title">A solicitação de verificação de categoria não funcionou</string>
-  <string name="check_category_success_message">Verificação de categoria solicitada com êxito para %1$s</string>
+  <string name="check_category_success_message">Verificação de categoria solicitada para %1$s</string>
   <string name="check_category_failure_message">Não foi possível solicitar a verificação de categoria para %1$s</string>
   <string name="check_category_toast">Solicitando verificação de categoria para %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Acionando mensagem de exclusão ao arquivo</string>
@@ -543,7 +543,7 @@
   <string name="delete_helper_make_deletion_toast">Tentando nomear %1$s para exclusão</string>
   <string name="delete_helper_show_deletion_title">Nomeação para exclusão</string>
   <string name="delete_helper_show_deletion_title_success">Sucesso</string>
-  <string name="delete_helper_show_deletion_message_if">%1$s foi nomeado para eliminação.</string>
+  <string name="delete_helper_show_deletion_message_if">Nomeado %1$s para exclusão.</string>
   <string name="delete_helper_show_deletion_title_failed">Falhou</string>
   <string name="delete_helper_show_deletion_message_else">Não foi possível pedir eliminação.</string>
   <string name="delete_helper_ask_spam_selfie">Uma selfie</string>

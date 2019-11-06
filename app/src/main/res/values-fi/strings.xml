@@ -320,7 +320,7 @@
   <string name="search_tab_title_categories">Luokat</string>
   <string name="explore_tab_title_featured">Suositeltu</string>
   <string name="explore_tab_title_mobile">Tallennettu mobiilin kautta</string>
-  <string name="successful_wikidata_edit">Kuva onnistuneesti lisätty Wikidata-kohteeseen %1$s!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Kuva onnistuneesti lisätty Wikidata-kohteeseen %1$s!</string>
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
   <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>
   <string name="wallpaper_set_successfully">Taustakuva asetettu!</string>

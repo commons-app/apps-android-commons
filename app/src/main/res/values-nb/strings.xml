@@ -330,7 +330,7 @@
   <string name="search_tab_title_categories">Kategorier</string>
   <string name="explore_tab_title_featured">Fremhevet</string>
   <string name="explore_tab_title_mobile">Lastet opp med mobil</string>
-  <string name="successful_wikidata_edit">Bildet ble lagt til på %1$s på Wikidata!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Bildet ble lagt til på %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Kunne ikke oppdatere tilsvarende Wikidata-element!</string>
   <string name="menu_set_wallpaper">Angi som bakgrunnsbilde</string>
   <string name="wallpaper_set_successfully">Bakgrunnsbildet ble endret!</string>
@@ -456,7 +456,7 @@
   <string name="check_category_edit_summary">Ber om kategorisjekk</string>
   <string name="check_category_success_title">Kategorisjekk forespurt</string>
   <string name="check_category_failure_title">Forespørsel om kategorisjekk virket ikke</string>
-  <string name="check_category_success_message">Ba om kategorisjekk for %1$s</string>
+  <string name="check_category_success_message" fuzzy="true">Ba om kategorisjekk for %1$s</string>
   <string name="check_category_failure_message">Kunne ikke be om kategorisjekk for %1$s</string>
   <string name="check_category_toast">Ber om kategorisjekk for %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Legger til slettebeskjed i fila</string>
@@ -538,7 +538,7 @@
   <string name="delete_helper_make_deletion_toast">Prøver å nominere %1$s for sletting</string>
   <string name="delete_helper_show_deletion_title">Nominerer for sletting</string>
   <string name="delete_helper_show_deletion_title_success">Gjennomført</string>
-  <string name="delete_helper_show_deletion_message_if">Nominerte %1$s for sletting</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Nominerte %1$s for sletting</string>
   <string name="delete_helper_show_deletion_title_failed">Mislyktes</string>
   <string name="delete_helper_show_deletion_message_else">Kunne ikke be om sletting.</string>
   <string name="delete_helper_ask_spam_selfie">En selfie</string>

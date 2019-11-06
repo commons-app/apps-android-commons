@@ -320,7 +320,7 @@
   <string name="search_tab_title_categories" fuzzy="true">KATEGORI</string>
   <string name="explore_tab_title_featured" fuzzy="true">PETINGAN</string>
   <string name="explore_tab_title_mobile" fuzzy="true">DIUNJAL LIWAT MOBILE</string>
-  <string name="successful_wikidata_edit">Gambar ngahasil ditambahkeun ka %1$s di Wikidata!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Gambar ngahasil ditambahkeun ka %1$s di Wikidata!</string>
   <string name="wikidata_edit_failure">Gagal ngarobah éntitas Wikidata nu patali!</string>
   <string name="menu_set_wallpaper">Jadikeun Wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper ngahasil dipasang!</string>
@@ -405,7 +405,7 @@
   <string name="check_category_edit_summary">Pamundutan ngecék kategori</string>
   <string name="check_category_success_title">Ngecék kategori dipundut</string>
   <string name="check_category_failure_title">Pamundut ngecék kategori teu jalan</string>
-  <string name="check_category_success_message">Pamundutan ngecék kategori ngahasil pikeun %1$s</string>
+  <string name="check_category_success_message" fuzzy="true">Pamundutan ngecék kategori ngahasil pikeun %1$s</string>
   <string name="check_category_failure_message">Teu bisa mundut ngecék kategori pikeun %1$s</string>
   <string name="check_category_toast">Mundut ngecék kategori pikeun %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Nambahan talatah pupusan kana koropak</string>

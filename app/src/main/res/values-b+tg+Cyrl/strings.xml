@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" fuzzy="true">Анбори Викимедиа</string>
+  <string name="title_activity_explore">Омӯзиш</string>
+  <string name="navigation_item_explore">Омӯзиш</string>
+  <string name="preference_category_appearance">Намуд</string>
   <string name="preference_category_general">Умумӣ</string>
   <string name="preference_category_feedback">Пешниҳод</string>
   <string name="preference_category_privacy">Ҳарими хусусӣ</string>
@@ -8,11 +10,16 @@
   <string name="menu_settings">Танзимот</string>
   <string name="username">Номи корбар</string>
   <string name="password">Гузарвожа</string>
+  <string name="login_credential">Вурудшавӣ ба ҳисоби Commons Beta</string>
   <string name="login">Вуруд</string>
+  <string name="forgot_password">Гузарвожаро фаромӯш кардед?</string>
+  <string name="signup">Номнависӣ</string>
   <string name="logging_in_title">Дар ҳоли вуруд</string>
   <string name="logging_in_message">Лутфан мунтазир шавед…</string>
   <string name="login_success">Вуруд бо муваффақият!</string>
   <string name="login_failed">Вуруд номуваффақ шуд!</string>
+  <string name="upload_failed">Парванда ёфта нашуд. Лутфан парвандаи дигареро интихоб кунед.</string>
+  <string name="uploading_started">Боркунӣ оғоз шуд.</string>
   <string name="upload_failed_notification_subtitle">Барои дидан нохун занед</string>
   <string name="title_activity_contributions" fuzzy="true">Боргузориҳои ман</string>
   <string name="contribution_state_queued">Дар саф</string>
@@ -36,6 +43,7 @@
   <string name="display_list_button">Рӯйхат</string>
   <string name="categories_activity_title">Гурӯҳҳо</string>
   <string name="title_activity_settings">Танзимот</string>
+  <string name="title_activity_signup">Номнависӣ</string>
   <string name="title_activity_category_details">Гурӯҳ</string>
   <string name="menu_about">Дар бораи</string>
   <string name="title_activity_about">Дар бораи</string>
@@ -103,6 +111,14 @@
   <string name="quiz">Пурсиш</string>
   <string name="question">Савол</string>
   <string name="result">Натиҷа</string>
+  <string name="continue_message">Идома</string>
+  <string name="correct">Ҷавоби дуруст</string>
+  <string name="wrong">Ҷавоби хато</string>
+  <string name="add_description">+ Иловаи тавзеҳот</string>
+  <string name="no_recent_searches">Ҷустаниҳои охире нест</string>
+  <string name="delete_search_dialog">Шумо аниқ мехоҳед ин ҷустаниро ҳазф кунед?</string>
+  <string name="search_history_deleted">Таърихи ҷустуҷӯҳо ҳазф шуд</string>
+  <string name="nominate_delete">Номзад барои ҳазф</string>
   <string name="delete">Ҳазв</string>
   <string name="statistics">Омор</string>
   <string name="level">Сатҳ</string>

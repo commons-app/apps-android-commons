@@ -333,7 +333,7 @@
   <string name="search_tab_title_categories" fuzzy="true">دسته بندی</string>
   <string name="explore_tab_title_featured" fuzzy="true">برگزیده</string>
   <string name="explore_tab_title_mobile" fuzzy="true">بارگذاری‌شده با تلفن همراه</string>
-  <string name="successful_wikidata_edit">تصویر با موفقیت به %1$s در ویکی‌داده افزوده‌شد.</string>
+  <string name="successful_wikidata_edit" fuzzy="true">تصویر با موفقیت به %1$s در ویکی‌داده افزوده‌شد.</string>
   <string name="wikidata_edit_failure">تلاش برای بروزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
   <string name="wallpaper_set_successfully">تصویر پس زمینه به طور موفقیت آمیز تنظیم شد!</string>

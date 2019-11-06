@@ -81,6 +81,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                         .reviewController.reportSpam(requireActivity(), getReviewCallback()));
                 break;
             case COPYRIGHT:
+                enableButtons();
                 question = getString(R.string.review_copyright);
                 explanation = getString(R.string.review_copyright_explanation);
                 yesButtonText = getString(R.string.review_copyright_yes_button_text);
@@ -90,6 +91,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                         .reportPossibleCopyRightViolation(requireActivity(), getReviewCallback()));
                 break;
             case CATEGORY:
+                enableButtons();
                 question = getString(R.string.review_category);
                 explanation = updateCategoriesQuestion();
                 yesButtonText = getString(R.string.review_category_yes_button_text);
@@ -102,6 +104,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 });
                 break;
             case THANKS:
+                enableButtons();
                 question = getString(R.string.review_thanks);
                 explanation = getString(R.string.review_thanks_explanation, getReviewActivity().reviewController.firstRevision.getUser());
                 yesButtonText = getString(R.string.review_thanks_yes_button_text);
@@ -114,6 +117,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 });
                 break;
             default:
+                enableButtons();
                 question = "How did we get here?";
                 explanation = "No idea.";
                 yesButtonText = "yes";
@@ -140,6 +144,28 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 //do nothing
             }
         };
+    }
+
+    /**
+     * This function is called when an image has
+     * been loaded to enable the review buttons.
+     */
+    public void enableButtons() {
+        yesButton.setEnabled(true);
+        yesButton.setAlpha(1);
+        noButton.setEnabled(true);
+        noButton.setAlpha(1);
+    }
+
+    /**
+     * This function is called when an image is being loaded
+     * to disable the review buttons
+     */
+    public void disableButtons() {
+        yesButton.setEnabled(false);
+        yesButton.setAlpha(0.5f);
+        noButton.setEnabled(false);
+        noButton.setAlpha(0.5f);
     }
 
     @OnClick(R.id.button_no)

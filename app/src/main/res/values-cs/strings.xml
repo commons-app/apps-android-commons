@@ -324,7 +324,7 @@
   <string name="error_loading_subcategories">Chyba při načítání podkategorií.</string>
   <string name="search_tab_title_media" fuzzy="true">MÉDIA</string>
   <string name="search_tab_title_categories" fuzzy="true">KATEGORIE</string>
-  <string name="successful_wikidata_edit">Obrázek byl úspěšně přidán do položky %1$s na Wikidatech!</string>
+  <string name="successful_wikidata_edit">Obrázek byl přidán do položky %1$s na Wikidatech!</string>
   <string name="wikidata_edit_failure">Nepodařilo se aktualizovat příslušnou položku na Wikidatech!</string>
   <string name="menu_set_wallpaper">Nastavit jako pozadí</string>
   <string name="wallpaper_set_successfully">Pozadí bylo úspěšně nastaveno!</string>
