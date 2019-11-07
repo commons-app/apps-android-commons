@@ -317,6 +317,7 @@
   <string name="no_images_found">لم يتم العثور على صور!</string>
   <string name="error_loading_images">حدث خطأ أثناء تحميل الصور.</string>
   <string name="image_uploaded_by">%1$s :تم الرفع بواسطة</string>
+  <string name="block_notification_title">ممنوع</string>
   <string name="block_notification">أنت ممنوع من تحرير كومنز</string>
   <string name="appwidget_img">صورة اليوم</string>
   <string name="app_widget_heading">صورة اليوم</string>
@@ -558,4 +559,5 @@
   <string name="text_copy">تم نسخ النص  إلى الحافظة.</string>
   <string name="notification_mark_read">تم تعليم الإخطار كمقروء</string>
   <string name="some_error">ثمة خطأ ما!</string>
+  <string name="you_must_reset_your_passsword">حدث خطأ ما عند الدخول، يجب عليك إعادة تعيين كلمة المرور!!</string>
 </resources>

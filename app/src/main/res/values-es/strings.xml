@@ -553,6 +553,7 @@
   <string name="delete_helper_show_deletion_title_success">Éxito</string>
   <string name="delete_helper_show_deletion_message_if" fuzzy="true">Se nominó exitosamente  %1$s para ser borrada.</string>
   <string name="delete_helper_show_deletion_title_failed">Falló</string>
+  <string name="delete_helper_show_deletion_message_else">No se pudo solicitar el borrado.</string>
   <string name="delete_helper_ask_spam_selfie">Un autorretrato</string>
   <string name="delete_helper_ask_spam_blurry">Borrosa</string>
   <string name="delete_helper_ask_spam_nonsense">Sinsentido</string>

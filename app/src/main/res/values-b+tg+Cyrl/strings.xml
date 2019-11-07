@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Ibrahim
+* ToJack
+* Vashgird
+-->
 <resources>
   <string name="title_activity_explore">Омӯзиш</string>
   <string name="navigation_item_explore">Омӯзиш</string>
@@ -7,7 +12,9 @@
   <string name="preference_category_feedback">Пешниҳод</string>
   <string name="preference_category_privacy">Ҳарими хусусӣ</string>
   <string name="preference_category_location">Мавқеъ</string>
+  <string name="app_name">Викианбор</string>
   <string name="menu_settings">Танзимот</string>
+  <string name="intent_share_upload_label">Ирсолнамоӣ ба Викианбор</string>
   <string name="username">Номи корбар</string>
   <string name="password">Гузарвожа</string>
   <string name="login_credential">Вурудшавӣ ба ҳисоби Commons Beta</string>
@@ -28,10 +35,11 @@
   <string name="contribution_state_starting">Дар ҳоли боркунӣ</string>
   <string name="menu_from_gallery">Аз Нигористон</string>
   <string name="menu_from_camera">Гирифтани акс</string>
+  <string name="menu_nearby">Наздикӣ</string>
   <string name="provider_contributions">Боргузориҳои ман</string>
   <string name="menu_share">Бо ҳам дидан</string>
   <string name="menu_open_in_browser">Дидан дар Мурургар</string>
-  <string name="share_title_hint">Унвон</string>
+  <string name="share_title_hint" fuzzy="true">Унвон</string>
   <string name="share_description_hint">Тавзеҳот</string>
   <string name="login_failed_generic">Вуруд номуваффақ шуд</string>
   <string name="share_upload_button">Боркунӣ</string>
@@ -89,6 +97,26 @@
   <string name="media_detail_uploaded_date">Рӯзи боркунӣ</string>
   <string name="media_detail_license">Иҷозатнома</string>
   <string name="media_detail_coordinates">Координатҳо</string>
+  <string name="media_detail_coordinates_empty">Пешниҳод нашудааст</string>
+  <string name="commons_logo">Логотипи Викианбор</string>
+  <string name="commons_website">Сомонаи Викианбор</string>
+  <string name="commons_facebook">Викианбор дар Фейсбук</string>
+  <string name="no_image_found">Аксе пайдо нашуд</string>
+  <string name="no_subcategory_found">Ягон зергурӯҳе пайдо нашуд</string>
+  <string name="welcome_image_welcome_wikipedia">Ба Википедиа хуш омадед.</string>
+  <string name="cancel">Пӯшидан</string>
+  <string name="navigation_drawer_open">Кушодан</string>
+  <string name="navigation_drawer_close">Пӯшидан</string>
+  <string name="navigation_item_home">Хона</string>
+  <string name="navigation_item_upload">Боркунӣ</string>
+  <string name="navigation_item_nearby">Наздикӣ</string>
+  <string name="navigation_item_about">Дар бораи</string>
+  <string name="navigation_item_settings">Танзимот</string>
+  <string name="navigation_item_feedback">Пешниҳод</string>
+  <string name="navigation_item_logout">Баромад</string>
+  <string name="navigation_item_notification">Огоҳиҳо</string>
+  <string name="navigation_item_featured_images">Баргузида</string>
+  <string name="navigation_item_review">Тафтиш</string>
   <string name="nearby_info_menu_wikidata_article">Унсури Викидода</string>
   <string name="error_while_cache">Хатогӣ ҳангоми кэшкунии тасвир</string>
   <string name="navigation_item_login">Вуруд</string>

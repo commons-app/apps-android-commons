@@ -187,7 +187,7 @@
   <string name="upload_image">عڪس چاڙهيو</string>
   <string name="welcome_image_rainbow_bridge">انڊلٺ پل</string>
   <string name="welcome_image_tulip">گل لالا (ٽيولپ)</string>
-  <string name="welcome_image_no_selfies">ڪي به پاڻفيون نه (نو سيلفيز)</string>
+  <string name="welcome_image_no_selfies">سيلفيون نہ ھجن</string>
   <string name="welcome_image_proprietary">سڃاڻپ واري تصوير (پروپرائٽري اميج)</string>
   <string name="welcome_image_welcome_wikipedia">وڪيپيڊيا تي ڀليڪار</string>
   <string name="welcome_image_welcome_copyright">حقن ۽ واسطن جي آجيان (ويلڪم ڪاپي رائيٽ)</string>
@@ -207,7 +207,7 @@
   <string name="navigation_item_featured_images">چونڊ ڪيل</string>
   <string name="navigation_item_review">جائزو</string>
   <string name="nearby_needs_permissions">ويجھيو جڳھون بغير مڪانيت اجازت جي نٿيون ڏيکاري سگھجن</string>
-  <string name="no_description_found">ڪا به وضاحت نه ملي</string>
+  <string name="no_description_found">ڪابہ تشريح نہ لڌي</string>
   <string name="nearby_info_menu_commons_article">ڪامن فائيل جو ورق</string>
   <string name="nearby_info_menu_wikidata_article">وڪيڊيٽا جزو (وڪيڊيٽا آئيٽم)</string>
   <string name="nearby_info_menu_wikipedia_article">وڪيپيڊيا مضمون</string>

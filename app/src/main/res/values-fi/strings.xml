@@ -307,6 +307,7 @@
   <string name="no_images_found">Kuvia ei löytynyt!</string>
   <string name="error_loading_images">Virhe ladattaessa kuvia.</string>
   <string name="image_uploaded_by">Tallentanut: %1$s</string>
+  <string name="block_notification_title">Estetty</string>
   <string name="block_notification">Sinut on estetty muokkaamasta Commonsia</string>
   <string name="appwidget_img">Päivän kuva</string>
   <string name="app_widget_heading">Päivän kuva</string>
