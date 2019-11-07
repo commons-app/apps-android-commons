@@ -77,6 +77,11 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private RVRendererAdapter<Media> imagesAdapter;
     private List<Media> queryList = new ArrayList<>();
 
+    //This variable is used to check whether data fetching started or not
+    private boolean isProgressBarVisible = false;
+    //This variable is used to store recent query value
+    private String recentQuery;
+
     private final SearchImagesAdapterFactory adapterFactory = new SearchImagesAdapterFactory(item -> {
         // Called on Click of a individual media Item
         int index = queryList.indexOf(item);
@@ -145,7 +150,12 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+
+        // Set the variable value to true to indicate that data fetching for passed query has started
+        isProgressBarVisible = true;
+
         bottomProgressBar.setVisibility(GONE);
+
         queryList.clear();
         imagesAdapter.clear();
         compositeDisposable.add(okHttpJsonApiClient.getMediaList("search", query)
@@ -165,6 +175,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
+        isProgressBarVisible = false;
         compositeDisposable.add(okHttpJsonApiClient.getMediaList("search", query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -179,6 +190,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void handlePaginationSuccess(List<Media> mediaList) {
         progressBar.setVisibility(View.GONE);
+        isProgressBarVisible = false;
         bottomProgressBar.setVisibility(GONE);
         if (mediaList.size() != 0 && !queryList.get(queryList.size() - 1).getFilename().equals(mediaList.get(mediaList.size() - 1).getFilename())) {
             queryList.addAll(mediaList);
@@ -201,11 +213,18 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             initErrorView();
         }
         else {
-            bottomProgressBar.setVisibility(View.GONE);
-            progressBar.setVisibility(GONE);
-            imagesAdapter.addAll(mediaList);
-            imagesAdapter.notifyDataSetChanged();
-            ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
+
+            //Fetch the results for recent query if recent query is different from previous passed query
+            if(recentQuery != null && !query.equals(recentQuery))
+                updateImageList(recentQuery);
+            else {
+                bottomProgressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(GONE);
+                isProgressBarVisible = false;
+                imagesAdapter.addAll(mediaList);
+                imagesAdapter.notifyDataSetChanged();
+                ((SearchActivity) getContext()).viewPagerNotifyDataSetChanged();
+            }
         }
     }
 
@@ -227,6 +246,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      */
     private void initErrorView() {
         progressBar.setVisibility(GONE);
+        isProgressBarVisible = false;
         imagesNotFoundView.setVisibility(VISIBLE);
         imagesNotFoundView.setText(getString(R.string.images_not_found, query));
     }
@@ -239,6 +259,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             != getView()) {//We have exposed public methods to update our ui, we will have to add null checks until we make this lifecycle aware
             if (null != progressBar) {
                 progressBar.setVisibility(GONE);
+                isProgressBarVisible = false;
             }
             ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.no_internet);
         } else {
@@ -275,5 +296,14 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     @Override public void onDestroyView() {
         super.onDestroyView();
         compositeDisposable.clear();
+    }
+
+    //This method returns the value whether data data fetching is going on or it's done
+    public boolean checkProgressBar(){
+        return isProgressBarVisible;
+    }
+    //This method set the recent query value
+    public void setRecentQuery(String query){
+        recentQuery = query;
     }
 }
