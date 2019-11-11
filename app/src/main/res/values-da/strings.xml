@@ -287,6 +287,7 @@
   <string name="no_images_found">Ingen billeder fundet!</string>
   <string name="error_loading_images">Der opstod en fejl under indlæsningen af billeder.</string>
   <string name="image_uploaded_by">Lagt op af: %1$s</string>
+  <string name="block_notification_title">Blokeret</string>
   <string name="block_notification">Du er blokeret fra at redigere Commons</string>
   <string name="appwidget_img">Dagens billede</string>
   <string name="app_widget_heading">Dagens billede</string>
