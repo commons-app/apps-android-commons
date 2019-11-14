@@ -312,6 +312,7 @@
   <string name="no_images_found">Inga bilder hittades!</string>
   <string name="error_loading_images">Ett fel uppstod vid inläsning av bilder.</string>
   <string name="image_uploaded_by">Uppladdad av: %1$s</string>
+  <string name="block_notification_title">Blockerad</string>
   <string name="block_notification">Du har blockerats från att redigera på Commons</string>
   <string name="appwidget_img">Dagens bild</string>
   <string name="app_widget_heading">Dagens bild</string>
@@ -327,7 +328,7 @@
   <string name="search_tab_title_categories">Kategorier</string>
   <string name="explore_tab_title_featured">Utvald</string>
   <string name="explore_tab_title_mobile">Laddades upp via mobil</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Bilden lades till i %1$s på Wikidata!</string>
+  <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
   <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
   <string name="wallpaper_set_successfully">Bakgrundsbilden ändrades!</string>
@@ -453,7 +454,7 @@
   <string name="check_category_edit_summary">Begär kategorikontroll</string>
   <string name="check_category_success_title">Begärde kategorikontroll</string>
   <string name="check_category_failure_title">Begäran av kategorikontroll fungerade inte</string>
-  <string name="check_category_success_message" fuzzy="true">Begärde kategorikontroll för %1$s</string>
+  <string name="check_category_success_message">Begärde kategorikontroll för %1$s</string>
   <string name="check_category_failure_message">Kunde inte begära kategorikontroll för %1$s</string>
   <string name="check_category_toast">Begär kategorikontroll för %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Lägger till raderingsmeddelande i filen</string>
@@ -535,7 +536,7 @@
   <string name="delete_helper_make_deletion_toast">Försöker nominera %1$s för radering</string>
   <string name="delete_helper_show_deletion_title">Nominerar för radering</string>
   <string name="delete_helper_show_deletion_title_success">Genomfördes</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Nominaterades %1$s för radering.</string>
+  <string name="delete_helper_show_deletion_message_if">Nominerade %1$s för radering.</string>
   <string name="delete_helper_show_deletion_title_failed">Misslyckades</string>
   <string name="delete_helper_show_deletion_message_else">Kunde inte begära radering.</string>
   <string name="delete_helper_ask_spam_selfie">Ett självporträtt</string>
@@ -553,4 +554,5 @@
   <string name="text_copy">Texten kopierades till urklipp</string>
   <string name="notification_mark_read">Avisering markerades som läst</string>
   <string name="some_error">Ett fel uppstod!</string>
+  <string name="you_must_reset_your_passsword">Någonting gick fel med inloggningen, du måste återställa ditt lösenord!</string>
 </resources>
