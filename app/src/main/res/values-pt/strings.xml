@@ -336,7 +336,7 @@
   <string name="search_tab_title_categories">Categorias</string>
   <string name="explore_tab_title_featured">Destacadas</string>
   <string name="explore_tab_title_mobile">Carregada via telemóvel</string>
-  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na Wikidados!</string>
+  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
   <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
@@ -462,7 +462,7 @@
   <string name="check_category_edit_summary">A pedir verificação de categoria</string>
   <string name="check_category_success_title">Verificação de categoria foi pedida</string>
   <string name="check_category_failure_title">O pedido de verificação de categoria não funcionou</string>
-  <string name="check_category_success_message">A verificação de categoria solicitada para %1$s</string>
+  <string name="check_category_success_message">Foi pedida verificação de categoria para %1$s</string>
   <string name="check_category_failure_message">Não foi possível pedir verificação de categoria para %1$s</string>
   <string name="check_category_toast">A pedir verificação de categoria para %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">A adicionar mensagem de eliminação ao ficheiro</string>
