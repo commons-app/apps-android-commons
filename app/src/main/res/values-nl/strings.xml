@@ -27,7 +27,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Instellingen</string>
-  <string name="intent_share_upload_label">Naar Commons versturen</string>
+  <string name="intent_share_upload_label">Uploaden naar Commons</string>
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
   <string name="login_credential">Aanmelden bij je Commons Beta-profiel</string>
@@ -48,7 +48,7 @@
   <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s is afgerond</string>
   <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>
   <string name="upload_failed_notification_subtitle">Wijs aan om te bekijken</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+  <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d bestand aan het uploaden</item>
     <item quantity="other">%1$d bestanden aan het uploaden</item>
   </plurals>
@@ -257,12 +257,20 @@
   <string name="never_ask_again">Niet meer vragen</string>
   <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
   <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
+  <string name="no_image_uploaded">Geen afbeeldingen geüpload</string>
   <string name="no_archived_notification" fuzzy="true">U hebt geen gearchiveerde melding</string>
   <string name="share_logs_using">Logboeken delen via</string>
   <string name="menu_option_archived">Gearchiveerd bekijken</string>
   <string name="menu_option_unread">Ongelezen bekijken</string>
   <string name="image_chooser_title">Kies de afbeeldingen die u wilt plaatsen</string>
   <string name="please_wait">Een ogenblik geduld…</string>
+  <string name="exif_tag_name_author">Auteur</string>
+  <string name="exif_tag_name_copyright">Auteursrechten</string>
+  <string name="exif_tag_name_location">Locatie</string>
+  <string name="exif_tag_name_cameraModel">Cameramodel</string>
+  <string name="review_is_uploaded_by">%1$s is geüpload door %2$s</string>
+  <string name="delete_helper_ask_spam_other">Overige</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="share_image_via">Deel afbeelding via</string>
   <string name="account_created">Profiel gemaakt!</string>
 </resources>
