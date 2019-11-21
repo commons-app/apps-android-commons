@@ -142,6 +142,9 @@ public class UploadModel {
                 createdTimestampSource);
         if (place != null) {
             uploadItem.title.setTitleText(place.name);
+            if(uploadItem.descriptions.isEmpty()) {
+                uploadItem.descriptions.add(new Description());
+            }
             uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
             uploadItem.descriptions.get(0).setLanguageCode("en");
         }
