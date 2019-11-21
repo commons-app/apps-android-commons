@@ -319,6 +319,7 @@
   <string name="no_images_found">לא נמצאו תמונות!</string>
   <string name="error_loading_images">אירעה שגיאה בטעינת התמונות.</string>
   <string name="image_uploaded_by">הועלתה על־ידי: %1$s</string>
+  <string name="block_notification_title">חסום</string>
   <string name="block_notification">נחסמת מעריכת ויקישיתוף</string>
   <string name="appwidget_img">תמונת היום</string>
   <string name="app_widget_heading">תמונת היום</string>
@@ -334,7 +335,7 @@
   <string name="search_tab_title_categories">קטגוריות</string>
   <string name="explore_tab_title_featured">מומלץ</string>
   <string name="explore_tab_title_mobile">העלאה דרך נייד</string>
-  <string name="successful_wikidata_edit">התמונה נוספה בהצלחה לדף %1$s בוויקינתונים!</string>
+  <string name="successful_wikidata_edit">התמונה נוספה לדף %1$s בוויקינתונים!</string>
   <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
   <string name="menu_set_wallpaper">הגדרה בתור טפט</string>
   <string name="wallpaper_set_successfully">הרקע הוגדר בהצלחה!</string>
@@ -531,7 +532,7 @@
   <string name="exif_tag_name_serialNumbers">מספרים סידוריים</string>
   <string name="exif_tag_name_software">תוכנה</string>
   <string name="share_text">כדי להעלות תמונות לוויקינתונים של ויקימדיה בעזרת הטלפון שלך יש להוריד את היישומון של ויקינתונים: %1$s</string>
-  <string name="share_via">שיתוף אפליקציה דרך...</string>
+  <string name="share_via">שיתוף היישום דרך...</string>
   <string name="image_info">פרטי תמונה</string>
   <string name="no_categories_found">לא נמצאו קטגוריות</string>
   <string name="upload_cancelled">ההעלאה בוטלה</string>
@@ -542,7 +543,7 @@
   <string name="delete_helper_make_deletion_toast">מתבצע ניסיון להעמדת %1$s למחיקה</string>
   <string name="delete_helper_show_deletion_title">העמדה למחיקה</string>
   <string name="delete_helper_show_deletion_title_success">הצלחה</string>
-  <string name="delete_helper_show_deletion_message_if">ההעמדה של %1$s למחיקה הצליחה.</string>
+  <string name="delete_helper_show_deletion_message_if">הקובץ %1$s הועמד למחיקה.</string>
   <string name="delete_helper_show_deletion_title_failed">כשלון</string>
   <string name="delete_helper_show_deletion_message_else">לא ניתן לבקש מחיקה</string>
   <string name="delete_helper_ask_spam_selfie">סלפי</string>
@@ -560,4 +561,5 @@
   <string name="text_copy">הטקסט הועתק ללוח</string>
   <string name="notification_mark_read">התראה סומנה כנקראה</string>
   <string name="some_error">אירעה שגיאה כלשהי!</string>
+  <string name="you_must_reset_your_passsword">משהו השתבש בכניסה למערכת, עליך לאפס את הססמה שלך!</string>
 </resources>

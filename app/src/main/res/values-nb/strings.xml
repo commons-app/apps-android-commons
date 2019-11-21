@@ -315,6 +315,7 @@
   <string name="no_images_found">Ingen bilder funnet!</string>
   <string name="error_loading_images">Feil oppsto under lasting av bilder.</string>
   <string name="image_uploaded_by">Lastet opp av: %1$s</string>
+  <string name="block_notification_title">Blokkert</string>
   <string name="block_notification">Du er blokkert fra å redigere Commons</string>
   <string name="appwidget_img">Dagens bilde</string>
   <string name="app_widget_heading">Dagens bilde</string>
@@ -556,4 +557,5 @@
   <string name="text_copy">Tekst kopiert til utklippstavlen</string>
   <string name="notification_mark_read">Varsel merket som lest</string>
   <string name="some_error">En feil oppsto!</string>
+  <string name="you_must_reset_your_passsword">Noe gikk galt under innloggingen, du må tilbakestille passordet ditt!</string>
 </resources>

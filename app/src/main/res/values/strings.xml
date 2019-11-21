@@ -316,6 +316,7 @@
   <string name="error_loading_images">Error occurred while loading images.</string>
   <string name="image_uploaded_by">Uploaded by: %1$s</string>
 
+  <string name="block_notification_title">Blocked</string>
   <string name="block_notification">You are blocked from editing Commons</string>
   <string name="appwidget_img">Pic of the Day</string>
   <string name="app_widget_heading">Pic of the Day</string>
@@ -332,7 +333,7 @@
   <string name="explore_tab_title_featured">Featured</string>
   <string name="explore_tab_title_mobile">Uploaded via mobile</string>
 
-  <string name="successful_wikidata_edit">Image successfully added to %1$s on Wikidata!</string>
+  <string name="successful_wikidata_edit">Image added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set as wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
@@ -472,7 +473,7 @@ Upload your first media by tapping on the add button.</string>
     <string name="check_category_edit_summary">Requesting category check</string>
   <string name="check_category_success_title">Category check requested</string>
   <string name="check_category_failure_title">Category check request didn\'t work</string>
-  <string name="check_category_success_message">Successfully requested category check for %1$s</string>
+  <string name="check_category_success_message">Requested category check for %1$s</string>
   <string name="check_category_failure_message">Could not request category check for %1$s</string>
   <string name="check_category_toast">Requesting category check for %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Adding delete message to file</string>
@@ -563,7 +564,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_make_deletion_toast">Trying to nominate %1$s for deletion</string>
   <string name="delete_helper_show_deletion_title">Nominating for deletion</string>
   <string name="delete_helper_show_deletion_title_success">Success</string>
-  <string name="delete_helper_show_deletion_message_if">Successfully nominated %1$s for deletion.</string>
+  <string name="delete_helper_show_deletion_message_if">Nominated %1$s for deletion.</string>
   <string name="delete_helper_show_deletion_title_failed">Failed</string>
   <string name="delete_helper_show_deletion_message_else">Could not request deletion.</string>
   <string name="delete_helper_ask_spam_selfie">A selfie</string>
@@ -586,4 +587,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="place_state_needs_photo">Needs Photo</string>
   <string name="place_type">Place type:</string>
   <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
+  <string name="you_must_reset_your_passsword">Something went wrong with login, you must reset your password !!</string>
 </resources>

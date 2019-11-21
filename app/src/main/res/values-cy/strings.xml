@@ -228,5 +228,5 @@
   <string name="menu_search_button">Chwilio</string>
   <string name="search_commons">Chwilio o fewn Comin</string>
   <string name="title_activity_search">Chwilio</string>
-  <string name="successful_wikidata_edit">Mae %1$s o luniau wedi\'u hychwanegu ar Wicidata!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Mae %1$s o luniau wedi\'u hychwanegu ar Wicidata!</string>
 </resources>

@@ -264,7 +264,6 @@ public class UploadModel {
             this.createdTimestampSource = createdTimestampSource;
             title = new Title();
             descriptions = new ArrayList<>();
-            descriptions.add(new Description());
             this.place = place;
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;

@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"
             android:orientation="vertical"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:padding="@dimen/small_gap"
             >
             <ProgressBar
@@ -78,7 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:visibility="gone"
             android:padding="@dimen/small_gap"
             >
@@ -91,6 +91,7 @@
                 android:text="@string/menu_cancel_upload"
                 android:background="@android:color/transparent"
                 android:padding="8dp"
+                android:layout_marginRight="5dp"
                 />
 
             <ImageButton

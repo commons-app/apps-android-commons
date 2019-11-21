@@ -5,6 +5,7 @@
 * Manvydasz
 * Naktis
 * Nersip
+* Tomasdd
 * Zygimantus
 -->
 <resources>
@@ -162,5 +163,6 @@
   <string name="notifications_talk_page_message">%1$s paliko žinutę jūsų aptarimo puslapyje</string>
   <string name="notifications_thank_you_edit">Dėkoja jums už atliktą pakeitimą</string>
   <string name="notifications_mention">%1$s jus paminėjo %2$s.</string>
+  <string name="block_notification_title">Užblokuota</string>
   <string name="share_via">Dalintis programą per ...</string>
 </resources>

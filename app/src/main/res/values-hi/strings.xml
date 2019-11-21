@@ -315,7 +315,7 @@
   <string name="search_tab_title_media" fuzzy="true">मीडिया</string>
   <string name="search_tab_title_categories">श्रेणियाँ</string>
   <string name="explore_tab_title_featured">निर्वाचित</string>
-  <string name="successful_wikidata_edit">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
+  <string name="successful_wikidata_edit" fuzzy="true">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
   <string name="menu_set_wallpaper">वॉलपेपर के रूप में लगायें</string>
   <string name="wallpaper_set_successfully">वॉलपेपर सफलतापूर्वक लग गया!</string>
   <string name="quiz">प्रश्नोत्तरी</string>

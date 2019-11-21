@@ -140,6 +140,7 @@
   <string name="about_translate_cancel">Atcelt</string>
   <string name="retry">Mēģināt vēlreiz</string>
   <string name="showcase_view_got_it_button">Sapratu!</string>
+  <string name="block_notification_title">Bloķēts</string>
   <string name="appwidget_img">Dienas attēls</string>
   <string name="app_widget_heading">Dienas attēls</string>
   <string name="menu_search_button">Meklēt</string>

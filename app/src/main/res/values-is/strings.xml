@@ -315,7 +315,7 @@
   <string name="search_tab_title_categories" fuzzy="true">FLOKKAR</string>
   <string name="explore_tab_title_featured" fuzzy="true">ÚRVAL</string>
   <string name="explore_tab_title_mobile" fuzzy="true">SENT INN ÚR SNJALLTÆKI</string>
-  <string name="successful_wikidata_edit">Tókst að hlaða mynd inn í %1$s á Wikidata!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Tókst að hlaða mynd inn í %1$s á Wikidata!</string>
   <string name="wikidata_edit_failure">Mistókst að uppfæra samsvarandi Wikidata-einindi!</string>
   <string name="menu_set_wallpaper">Setja sem bakgrunnsmynd</string>
   <string name="wallpaper_set_successfully">Tókst að stilla bakgrunnsmynd!</string>

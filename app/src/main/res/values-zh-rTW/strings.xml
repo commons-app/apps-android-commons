@@ -316,6 +316,7 @@
   <string name="no_images_found">找不到圖片！</string>
   <string name="error_loading_images">當載入圖片時發生錯誤。</string>
   <string name="image_uploaded_by">由：%1$s 上傳</string>
+  <string name="block_notification_title">已封鎖</string>
   <string name="block_notification">您被禁止編輯維基共享資源</string>
   <string name="appwidget_img">每日圖片</string>
   <string name="app_widget_heading">每日圖片</string>
@@ -331,7 +332,7 @@
   <string name="search_tab_title_categories">分類</string>
   <string name="explore_tab_title_featured">特色</string>
   <string name="explore_tab_title_mobile">透過行動設備上傳</string>
-  <string name="successful_wikidata_edit">圖片已成功添加到維基數據上的 %1$s！</string>
+  <string name="successful_wikidata_edit">圖片已添加到維基數據上的%1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定為桌布</string>
   <string name="wallpaper_set_successfully">桌布設定成功！</string>
@@ -457,7 +458,7 @@
   <string name="check_category_edit_summary">請求分類檢查</string>
   <string name="check_category_success_title">分類檢查已請求</string>
   <string name="check_category_failure_title">分類檢查請求無效</string>
-  <string name="check_category_success_message">成功請求%1$s的分類檢查</string>
+  <string name="check_category_success_message">已請求%1$s的分類檢查</string>
   <string name="check_category_failure_message">無法請求%1$s的分類檢查</string>
   <string name="check_category_toast">請求%1$s的分類檢查</string>
   <string name="nominate_for_deletion_edit_file_page">添加刪除訊息至檔案</string>
@@ -539,7 +540,7 @@
   <string name="delete_helper_make_deletion_toast">嘗試向%1$s提名刪除</string>
   <string name="delete_helper_show_deletion_title">提名刪除</string>
   <string name="delete_helper_show_deletion_title_success">成功</string>
-  <string name="delete_helper_show_deletion_message_if">成功向%1$s提名刪除。</string>
+  <string name="delete_helper_show_deletion_message_if">已提名%1$s刪除。</string>
   <string name="delete_helper_show_deletion_title_failed">失敗</string>
   <string name="delete_helper_show_deletion_message_else">無法請求刪除。</string>
   <string name="delete_helper_ask_spam_selfie">自拍</string>
@@ -557,4 +558,5 @@
   <string name="text_copy">文字已複製至剪貼簿</string>
   <string name="notification_mark_read">通知標記為已讀</string>
   <string name="some_error">發生一些錯誤！</string>
+  <string name="you_must_reset_your_passsword">登入時發生一些問題，您必須重新設定您的密碼！！</string>
 </resources>
