@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,6 +41,9 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     Button yesButton;
     @BindView(R.id.button_no)
     Button noButton;
+
+    private final String SAVED_USER = "saved_user";
+    private String user;
 
     public void update(int position) {
         this.position = position;
@@ -103,7 +108,15 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 break;
             case THANKS:
                 question = getString(R.string.review_thanks);
-                explanation = getString(R.string.review_thanks_explanation, getReviewActivity().reviewController.firstRevision.getUser());
+
+                //Get existing user name if it is already saved using savedInstanceState else get from reviewController
+                if(savedInstanceState == null)
+                    user = getReviewActivity().reviewController.firstRevision.getUser();
+                else
+                    user = savedInstanceState.getString(SAVED_USER);
+
+                explanation = getString(R.string.review_thanks_explanation, user);
+
                 yesButtonText = getString(R.string.review_thanks_yes_button_text);
                 noButtonText = getString(R.string.review_thanks_no_button_text);
                 yesButton.setTextColor(Color.parseColor("#228b22"));
@@ -125,6 +138,14 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         yesButton.setText(yesButtonText);
         noButton.setText(noButtonText);
         return layoutView;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Save user name when configuration changes happen
+        outState.putString(SAVED_USER,user);
     }
 
     private ReviewController.ReviewCallback getReviewCallback() {
