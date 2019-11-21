@@ -13,7 +13,7 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 public class DBOpenHelper  extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "commons.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
 
     /**
      * Do not use directly - @Inject an instance where it's needed and let
