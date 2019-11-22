@@ -33,6 +33,23 @@
             android:layout_height="match_parent"
             android:layout_below="@id/nearby_filter"/>
 
+
+        <Button
+            android:id="@+id/search_this_area_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="8dp"
+            android:background="@color/white"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:text="@string/search_this_area"
+            android:textColor="@color/status_bar_blue"
+            android:visibility="gone"
+            app:elevation="6dp"
+            android:layout_below="@id/nearby_filter"/>
+
         <View
             android:id="@+id/transparentView"
             android:layout_width="match_parent"
@@ -68,21 +85,6 @@
     <include
         android:id="@+id/bottom_sheet_details"
         layout="@layout/bottom_sheet_details" />
-
-    <Button
-        android:id="@+id/search_this_area_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="8dp"
-        android:background="@color/white"
-        android:padding="8dp"
-        android:singleLine="true"
-        android:text="@string/search_this_area"
-        android:textColor="@color/status_bar_blue"
-        android:visibility="gone"
-        app:elevation="6dp" />
 
     <ProgressBar
         android:id="@+id/map_progress_bar"
