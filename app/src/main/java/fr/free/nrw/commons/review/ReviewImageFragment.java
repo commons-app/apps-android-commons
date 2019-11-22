@@ -42,7 +42,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.button_no)
     Button noButton;
 
+    // Constant variable used to store user's key name for onSaveInstanceState method
     private final String SAVED_USER = "saved_user";
+
+    //Variable that stores the value of user
     private String user;
 
     public void update(int position) {
@@ -140,6 +143,12 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         return layoutView;
     }
 
+
+
+    /**
+     * This method will be called when configuration changes happen
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
