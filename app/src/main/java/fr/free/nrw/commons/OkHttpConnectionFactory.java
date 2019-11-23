@@ -1,12 +1,13 @@
 package fr.free.nrw.commons;
 
+import androidx.annotation.NonNull;
+
 import org.wikipedia.dataclient.SharedPreferenceCookieManager;
 import org.wikipedia.dataclient.okhttp.HttpStatusException;
 
 import java.io.File;
 import java.io.IOException;
 
-import androidx.annotation.NonNull;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;

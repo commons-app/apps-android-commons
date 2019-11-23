@@ -87,7 +87,6 @@ public class UploadService extends HandlerService<Contribution> {
         }
 
         public void onProgress(long transferred, long total) {
-            Timber.d("Uploaded %d of %d", transferred, total);
             if (!notificationTitleChanged) {
                 curNotification.setContentTitle(notificationProgressTitle);
                 notificationTitleChanged = true;
