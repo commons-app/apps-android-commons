@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,19 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-
-import java.util.ArrayList;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.HandlerService;
@@ -59,11 +56,10 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
-import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
@@ -259,10 +255,9 @@ public class ContributionsFragment
         operations on first time fragment attached to an activity. Then they will be retained
         until fragment life time ends.
          */
-        if (!isFragmentAttachedBefore) {
-            onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
+        if (!isFragmentAttachedBefore && getActivity() != null) {
+            onAuthCookieAcquired();
             isFragmentAttachedBefore = true;
-
         }
     }
 
@@ -308,17 +303,22 @@ public class ContributionsFragment
 
     /**
      * Called when onAuthCookieAcquired is called on authenticated parent activity
-     * @param uploadServiceIntent
      */
-    void onAuthCookieAcquired(Intent uploadServiceIntent) {
+    void onAuthCookieAcquired() {
         // Since we call onAuthCookieAcquired method from onAttach, isAdded is still false. So don't use it
 
         if (getActivity() != null) { // If fragment is attached to parent activity
-            getActivity().bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+            getActivity().bindService(getUploadServiceIntent(), uploadServiceConnection, Context.BIND_AUTO_CREATE);
             isUploadServiceConnected = true;
             getActivity().getSupportLoaderManager().initLoader(0, null, contributionsPresenter);
         }
 
+    }
+
+    public Intent getUploadServiceIntent(){
+        Intent intent = new Intent(getActivity(), UploadService.class);
+        intent.setAction(UploadService.ACTION_START_SERVICE);
+        return intent;
     }
 
     /**

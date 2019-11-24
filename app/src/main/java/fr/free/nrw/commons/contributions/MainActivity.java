@@ -1,11 +1,12 @@
 package fr.free.nrw.commons.contributions;
 
+import static android.content.ContentResolver.requestSync;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -21,15 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.tabs.TabLayout;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -45,9 +39,9 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
+import javax.inject.Inject;
 import timber.log.Timber;
-
-import static android.content.ContentResolver.requestSync;
 
 public class MainActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -67,8 +61,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     @Inject
     QuizChecker quizChecker;
 
-
-    public Intent uploadServiceIntent;
 
     public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
     public static final int CONTRIBUTIONS_TAB_POSITION = 0;
@@ -117,13 +109,13 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         //Do not remove this, this triggers the sync service
         ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(),BuildConfig.CONTRIBUTION_AUTHORITY,true);
         requestSync(sessionManager.getCurrentAccount(), BuildConfig.CONTRIBUTION_AUTHORITY, new Bundle());
-        uploadServiceIntent = new Intent(this, UploadService.class);
+        Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
 
         addTabsAndFragments();
         if (contributionsActivityPagerAdapter.getItem(0) != null) {
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired(uploadServiceIntent);
+            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired();
         }
     }
 
@@ -147,10 +139,8 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                         .show()
         );
 
-        if (uploadServiceIntent != null) {
-            // If auth cookie already acquired notify contrib fragment so that it san operate auth required actions
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
-        }
+        ((ContributionsFragment) contributionsActivityPagerAdapter
+                .getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired();
         setTabAndViewPagerSynchronisation();
     }
 
