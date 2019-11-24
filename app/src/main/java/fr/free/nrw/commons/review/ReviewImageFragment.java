@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -76,7 +74,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         position = getArguments().getInt("position");
         View layoutView = inflater.inflate(R.layout.fragment_review_image, container,
                 false);
-        ButterKnife.bind(this,layoutView);
+        ButterKnife.bind(this, layoutView);
 
         String question, explanation, yesButtonText, noButtonText;
         switch (position) {
@@ -113,10 +111,11 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 question = getString(R.string.review_thanks);
 
                 //Get existing user name if it is already saved using savedInstanceState else get from reviewController
-                if(savedInstanceState == null)
+                if (savedInstanceState == null) {
                     user = getReviewActivity().reviewController.firstRevision.getUser();
-                else
+                } else {
                     user = savedInstanceState.getString(SAVED_USER);
+                }
 
                 explanation = getString(R.string.review_thanks_explanation, user);
 
@@ -144,9 +143,9 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     }
 
 
-
     /**
      * This method will be called when configuration changes happen
+     *
      * @param outState
      */
     @Override
@@ -154,7 +153,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         super.onSaveInstanceState(outState);
 
         //Save user name when configuration changes happen
-        outState.putString(SAVED_USER,user);
+        outState.putString(SAVED_USER, user);
     }
 
     private ReviewController.ReviewCallback getReviewCallback() {
