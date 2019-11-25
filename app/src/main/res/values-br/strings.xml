@@ -296,7 +296,7 @@
   <string name="error_loading_categories">Ur fazi zo bet pa\'z oc\'h bet o pellgargañ rummadoù</string>
   <string name="search_tab_title_media" fuzzy="true">MEDIA</string>
   <string name="search_tab_title_categories" fuzzy="true">RUMMADOÙ</string>
-  <string name="successful_wikidata_edit">Skeudenn ouzhpennet mat da %1$s e Wikidata !</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Skeudenn ouzhpennet mat da %1$s e Wikidata !</string>
   <string name="menu_set_wallpaper">Spisaat evel drekleur</string>
   <string name="quiz">Kwiz</string>
   <string name="question">Goulenn</string>

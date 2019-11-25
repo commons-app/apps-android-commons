@@ -20,7 +20,6 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.CustomApiResult;
@@ -39,7 +38,7 @@ import timber.log.Timber;
 
 /**
  * This class is meant to handle the Wikidata edits made through the app
- * It will talk with MediaWikiApi to make necessary API calls, log the edits and fire listeners
+ * It will talk with MediaWiki Apis to make the necessary calls, log the edits and fire listeners
  * on successful edits
  */
 @Singleton
@@ -120,11 +119,11 @@ public class WikidataEditService {
 
         String propertyValue = getFileName(fileName);
 
-        Timber.d(propertyValue);
-        wikidataClient.createClaim(wikidataEntityId, "P18", "value", propertyValue)
+        Timber.d("Entity id is %s and property value is %s", wikidataEntityId, propertyValue);
+        wikidataClient.createClaim(wikidataEntityId, propertyValue)
                 .flatMap(revisionId -> {
                     if (revisionId != -1) {
-                        return wikiDataPageEditClient.addEditTag(revisionId, COMMONS_APP_TAG, COMMONS_APP_EDIT_REASON);
+                        return wikidataClient.addEditTag(revisionId, COMMONS_APP_TAG, COMMONS_APP_EDIT_REASON);
                     }
                     throw new RuntimeException("Unable to edit wikidata item");
                 })

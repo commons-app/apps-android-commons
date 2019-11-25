@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.List;
+import androidx.annotation.NonNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +39,12 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     Button yesButton;
     @BindView(R.id.button_no)
     Button noButton;
+
+    // Constant variable used to store user's key name for onSaveInstanceState method
+    private final String SAVED_USER = "saved_user";
+
+    //Variable that stores the value of user
+    private String user;
 
     public void update(int position) {
         this.position = position;
@@ -68,7 +74,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         position = getArguments().getInt("position");
         View layoutView = inflater.inflate(R.layout.fragment_review_image, container,
                 false);
-        ButterKnife.bind(this,layoutView);
+        ButterKnife.bind(this, layoutView);
 
         String question, explanation, yesButtonText, noButtonText;
         switch (position) {
@@ -81,6 +87,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                         .reviewController.reportSpam(requireActivity(), getReviewCallback()));
                 break;
             case COPYRIGHT:
+                enableButtons();
                 question = getString(R.string.review_copyright);
                 explanation = getString(R.string.review_copyright_explanation);
                 yesButtonText = getString(R.string.review_copyright_yes_button_text);
@@ -90,6 +97,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                         .reportPossibleCopyRightViolation(requireActivity(), getReviewCallback()));
                 break;
             case CATEGORY:
+                enableButtons();
                 question = getString(R.string.review_category);
                 explanation = updateCategoriesQuestion();
                 yesButtonText = getString(R.string.review_category_yes_button_text);
@@ -102,8 +110,18 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 });
                 break;
             case THANKS:
+                enableButtons();
                 question = getString(R.string.review_thanks);
-                explanation = getString(R.string.review_thanks_explanation, getReviewActivity().reviewController.firstRevision.getUser());
+
+                //Get existing user name if it is already saved using savedInstanceState else get from reviewController
+                if (savedInstanceState == null) {
+                    user = getReviewActivity().reviewController.firstRevision.getUser();
+                } else {
+                    user = savedInstanceState.getString(SAVED_USER);
+                }
+
+                explanation = getString(R.string.review_thanks_explanation, user);
+
                 yesButtonText = getString(R.string.review_thanks_yes_button_text);
                 noButtonText = getString(R.string.review_thanks_no_button_text);
                 yesButton.setTextColor(Color.parseColor("#228b22"));
@@ -114,6 +132,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 });
                 break;
             default:
+                enableButtons();
                 question = "How did we get here?";
                 explanation = "No idea.";
                 yesButtonText = "yes";
@@ -125,6 +144,20 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         yesButton.setText(yesButtonText);
         noButton.setText(noButtonText);
         return layoutView;
+    }
+
+
+    /**
+     * This method will be called when configuration changes happen
+     *
+     * @param outState
+     */
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Save user name when configuration changes happen
+        outState.putString(SAVED_USER, user);
     }
 
     private ReviewController.ReviewCallback getReviewCallback() {
@@ -140,6 +173,28 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 //do nothing
             }
         };
+    }
+
+    /**
+     * This function is called when an image has
+     * been loaded to enable the review buttons.
+     */
+    public void enableButtons() {
+        yesButton.setEnabled(true);
+        yesButton.setAlpha(1);
+        noButton.setEnabled(true);
+        noButton.setAlpha(1);
+    }
+
+    /**
+     * This function is called when an image is being loaded
+     * to disable the review buttons
+     */
+    public void disableButtons() {
+        yesButton.setEnabled(false);
+        yesButton.setAlpha(0.5f);
+        noButton.setEnabled(false);
+        noButton.setAlpha(0.5f);
     }
 
     @OnClick(R.id.button_no)

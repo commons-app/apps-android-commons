@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Toast;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -36,11 +34,17 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.inject.Inject;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -54,7 +58,6 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
-    @Inject MediaWikiApi mwApi;
     @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
     @Inject ContributionDao contributionDao;
@@ -81,7 +84,7 @@ public class UploadService extends HandlerService<Contribution> {
         super("UploadService");
     }
 
-    private class NotificationUpdateProgressListener implements MediaWikiApi.ProgressListener {
+    protected class NotificationUpdateProgressListener{
 
         String notificationTag;
         boolean notificationTitleChanged;
@@ -97,9 +100,7 @@ public class UploadService extends HandlerService<Contribution> {
             this.contribution = contribution;
         }
 
-        @Override
         public void onProgress(long transferred, long total) {
-            Timber.d("Uploaded %d of %d", transferred, total);
             if (!notificationTitleChanged) {
                 curNotification.setContentTitle(notificationProgressTitle);
                 notificationTitleChanged = true;
@@ -203,29 +204,20 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("CheckResult")
     private void uploadContribution(Contribution contribution) {
-        InputStream fileInputStream;
         Uri localUri = contribution.getLocalUri();
         if (localUri == null || localUri.getPath() == null) {
             Timber.d("localUri/path is null");
             return;
         }
         String notificationTag = localUri.toString();
-        File file1;
-        try {
-            file1 = new File(localUri.getPath());
-            fileInputStream = new FileInputStream(file1);
-        } catch (FileNotFoundException e) {
-            Timber.d("File not found");
-            Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
-            fileNotFound.show();
-            return;
-        }
+        File localFile = new File(localUri.getPath());
 
         Timber.d("Before execution!");
         curNotification.setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
-        notificationManager.notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
+        notificationManager
+                .notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
         String filename = contribution.getFilename();
 
@@ -236,7 +228,9 @@ public class UploadService extends HandlerService<Contribution> {
         );
 
         Observable.fromCallable(() -> "Temp_" + contribution.hashCode() + filename)
-                .flatMap(stashFilename -> uploadClient.uploadFileToStash(getApplicationContext(), stashFilename, file1))
+                .flatMap(stashFilename -> uploadClient
+                        .uploadFileToStash(getApplicationContext(), stashFilename, localFile,
+                                notificationUpdater))
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .doFinally(() -> {
@@ -251,7 +245,7 @@ public class UploadService extends HandlerService<Contribution> {
                     }
                 })
                 .flatMap(uploadStash -> {
-                    notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
 
                     Timber.d("Stash upload response 1 is %s", uploadStash.toString());
 
@@ -302,7 +296,7 @@ public class UploadService extends HandlerService<Contribution> {
                     }
                 }, throwable -> {
                     Timber.w(throwable, "Exception during upload");
-                    notificationManager.cancel(NOTIFICATION_UPLOAD_IN_PROGRESS);
+                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
                     showFailedNotification(contribution);
                 });
     }
@@ -336,7 +330,7 @@ public class UploadService extends HandlerService<Contribution> {
                     sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
                 }
             }
-            if (!mediaClient.checkPageExistsUsingTitle(sequenceFileName).blockingGet()
+            if (!mediaClient.checkPageExistsUsingTitle(String.format("File:%s",sequenceFileName)).blockingGet()
                     && !unfinishedUploads.contains(sequenceFileName)) {
                 break;
             }

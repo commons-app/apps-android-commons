@@ -289,7 +289,7 @@
   <string name="provider_searches">Bilatutako azken galderak</string>
   <string name="error_loading_categories">Arazo bat egon da kategoriak kargatzerakoan.</string>
   <string name="error_loading_subcategories">Arazo bat egon da azpikategoriak kargatzerakoan.</string>
-  <string name="successful_wikidata_edit">Irudia arazorik gabe gehitu da %1$s-(e)ra Wikidatan!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Irudia arazorik gabe gehitu da %1$s-(e)ra Wikidatan!</string>
   <string name="wikidata_edit_failure">Ezin izan da dagokion Wikidata entitatea eguneratu!</string>
   <string name="menu_set_wallpaper">Horma-paper gisa ezarri</string>
   <string name="wallpaper_set_successfully">Horma papera ezarri da!</string>

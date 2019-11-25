@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import org.wikipedia.login.LoginResult;
 
 import javax.inject.Inject;
@@ -17,10 +19,8 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import timber.log.Timber;
 
 /**
  * Manage the current logged in user session.
@@ -28,17 +28,14 @@ import timber.log.Timber;
 @Singleton
 public class SessionManager {
     private final Context context;
-    private final MediaWikiApi mediaWikiApi;
     private Account currentAccount; // Unlike a savings account...  ;-)
     private JsonKvStore defaultKvStore;
     private static final String KEY_RAWUSERNAME = "rawusername";
 
     @Inject
     public SessionManager(Context context,
-                          MediaWikiApi mediaWikiApi,
                           @Named("default_preferences") JsonKvStore defaultKvStore) {
         this.context = context;
-        this.mediaWikiApi = mediaWikiApi;
         this.currentAccount = null;
         this.defaultKvStore = defaultKvStore;
     }
@@ -146,7 +143,6 @@ public class SessionManager {
         return Completable.fromObservable(Observable.fromArray(allAccounts)
                 .map(a -> accountManager.removeAccount(a, null, null).getResult()))
                 .doOnComplete(() -> {
-                    mediaWikiApi.logout();
                     currentAccount = null;
                 });
     }

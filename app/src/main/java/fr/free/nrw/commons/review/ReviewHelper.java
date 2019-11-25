@@ -15,8 +15,6 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -35,7 +33,7 @@ public class ReviewHelper {
     }
 
     /**
-     * Fetches recent changes from MediaWiki AP
+     * Fetches recent changes from MediaWiki API
      * Calls the API to get 10 changes in the last 1 hour
      * Earlier we were getting changes for the last 30 days but as the API returns just 10 results
      * its best to fetch for just last 1 hour.

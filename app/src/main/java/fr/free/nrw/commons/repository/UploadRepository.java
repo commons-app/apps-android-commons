@@ -10,8 +10,10 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
+
 import java.util.Comparator;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 

@@ -207,7 +207,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                     spinnerDescriptionLanguages.getContext(),
                     R.layout.row_item_languages_spinner, selectedLanguages,
                     savedLanguageValue);
-            languagesAdapter.notifyDataSetChanged();
             spinnerDescriptionLanguages.setAdapter(languagesAdapter);
 
             spinnerDescriptionLanguages.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -222,6 +221,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                     selectedLanguages.put(adapterView, languageCode);
                     ((SpinnerLanguagesAdapter) adapterView
                             .getAdapter()).selectedLangCode = languageCode;
+                    spinnerDescriptionLanguages.setSelection(position);
                     Timber.d("Description language code is: "+languageCode);
                 }
 
@@ -231,7 +231,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             });
 
             if (description.getSelectedLanguageIndex() == -1) {
-                if (savedLanguageValue != null) {
+                if (!TextUtils.isEmpty(savedLanguageValue)) {
                     // If user has chosen a default language from settings activity savedLanguageValue is not null
                     spinnerDescriptionLanguages.setSelection(languagesAdapter.getIndexOfLanguageCode(savedLanguageValue));
                 } else {
@@ -240,7 +240,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                                 .getIndexOfUserDefaultLocale(spinnerDescriptionLanguages.getContext());
                         spinnerDescriptionLanguages.setSelection(defaultLocaleIndex, true);
                     } else {
-                        spinnerDescriptionLanguages.setSelection(0);
+                        spinnerDescriptionLanguages.setSelection(0,true);
                     }
                 }
 

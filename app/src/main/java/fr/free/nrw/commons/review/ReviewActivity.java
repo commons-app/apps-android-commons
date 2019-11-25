@@ -3,6 +3,8 @@ package fr.free.nrw.commons.review;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +29,6 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.delete.DeleteHelper;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -57,8 +58,6 @@ public class ReviewActivity extends NavigationBaseActivity {
     TextView imageCaption;
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
-    @Inject
-    MediaWikiApi mwApi;
     @Inject
     ReviewHelper reviewHelper;
     @Inject
@@ -102,6 +101,7 @@ public class ReviewActivity extends NavigationBaseActivity {
         setSupportActionBar(toolbar);
         initDrawer();
 
+
         reviewController = new ReviewController(deleteHelper, this);
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
@@ -110,13 +110,20 @@ public class ReviewActivity extends NavigationBaseActivity {
         pagerIndicator.setViewPager(reviewPager);
         progressBar.setVisibility(View.VISIBLE);
 
+        Drawable d[]=btnSkipImage.getCompoundDrawablesRelative();
+        d[2].setColorFilter(getApplicationContext().getResources().getColor(R.color.button_blue), PorterDuff.Mode.SRC_IN);
+
+
         if (savedInstanceState != null) {
             updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)); // Use existing media if we have one
         } else {
             runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
         }
 
-        btnSkipImage.setOnClickListener(view -> runRandomizer());
+        btnSkipImage.setOnClickListener(view -> {
+            reviewPagerAdapter.disableButtons();
+            runRandomizer();
+        });
 
         btnSkipImage.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (
@@ -138,6 +145,7 @@ public class ReviewActivity extends NavigationBaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
                     if (media != null) {
+                        reviewPagerAdapter.disableButtons();
                         updateImage(media);
                     }
                 }));
@@ -165,6 +173,7 @@ public class ReviewActivity extends NavigationBaseActivity {
                     String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
                     imageCaption.setText(caption);
                     progressBar.setVisibility(View.GONE);
+                    reviewPagerAdapter.enableButtons();
                 }));
         reviewPager.setCurrentItem(0);
     }

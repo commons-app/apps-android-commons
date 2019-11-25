@@ -57,8 +57,8 @@ class CategoriesPresenterTest {
     fun searchForCategoriesTest() {
         Mockito.`when`(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         Mockito.`when`(repository?.selectedCategories).thenReturn(categoryItems)
-        Mockito.`when`(repository?.searchAll(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(testObservable)
-                categoriesPresenter?.searchForCategories("test")
+        Mockito.`when`(repository?.searchAll(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        categoriesPresenter?.searchForCategories("test")
         verify(view)?.showProgress(true)
         verify(view)?.showError(null)
         verify(view)?.setCategories(null)

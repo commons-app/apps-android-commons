@@ -3,22 +3,29 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+
 import androidx.annotation.Nullable;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
+
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Locale;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import androidx.annotation.Nullable;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -33,26 +40,6 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.BehaviorSubject;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-import timber.log.Timber;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 import timber.log.Timber;
 
 @Singleton
@@ -171,6 +158,11 @@ public class UploadModel {
                 createdTimestampSource);
         if (place != null) {
             uploadItem.title.setTitleText(place.name);
+            if(uploadItem.descriptions.isEmpty()) {
+                uploadItem.descriptions.add(new Description());
+            }
+            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
+            uploadItem.descriptions.get(0).setLanguageCode("en");
             String languageCode = Locale.getDefault().getLanguage();
                         uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
             uploadItem.uploadMediaDetails.get(0).setLanguageCode(languageCode);

@@ -13,6 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -120,6 +121,7 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         INSTANCE = this;
         ACRA.init(this);
 
@@ -251,12 +253,21 @@ public class CommonsApplication extends Application {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
                     Timber.d("All accounts have been removed");
+                    clearImageCache();
                     //TODO: fix preference manager
                     defaultPrefs.clearAll();
                     defaultPrefs.putBoolean("firstrun", false);
                     updateAllDatabases();
                     logoutListener.onLogoutComplete();
                 });
+    }
+
+    /**
+     * Clear all images cache held by Fresco
+     */
+    private void clearImageCache() {
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        imagePipeline.clearCaches();
     }
 
     /**

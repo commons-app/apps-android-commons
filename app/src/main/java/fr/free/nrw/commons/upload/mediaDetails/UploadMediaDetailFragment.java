@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,7 +18,6 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.chrisbanes.photoview.OnScaleChangedListener;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import org.apache.commons.lang3.StringUtils;
@@ -191,6 +188,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         uploadMediaDetailAdapter.setEventListener(this::onEvent);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(uploadMediaDetailAdapter);
+    }
+
+    /**
+     * returns the default locale value of the user's device
+     * @return
+     */
+    private String getUserDefaultLocale() {
+        return getContext().getResources().getConfiguration().locale.getLanguage();
     }
 
     /**

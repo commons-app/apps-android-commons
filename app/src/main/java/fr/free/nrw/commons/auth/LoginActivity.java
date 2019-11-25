@@ -13,12 +13,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -28,8 +30,11 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.wikipedia.AppAdapter;
+import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.login.LoginClient;
+import org.wikipedia.login.LoginClient.LoginCallback;
 import org.wikipedia.login.LoginResult;
 
 import javax.inject.Inject;
@@ -48,15 +53,13 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Completable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Action;
-import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -65,9 +68,6 @@ import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_WIKI_SITE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
-
-    @Inject
-    MediaWikiApi mwApi;
 
     @Inject
     SessionManager sessionManager;
@@ -111,6 +111,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private Call<MwQueryResponse> loginToken;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -238,6 +239,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         passwordEdit.removeTextChangedListener(textWatcher);
         twoFactorEdit.removeTextChangedListener(textWatcher);
         delegate.onDestroy();
+        if(null!=loginClient) {
+            loginClient.cancel();
+        }
         super.onDestroy();
     }
 
@@ -255,33 +259,61 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     private void doLogin(String username, String password, String twoFactorCode) {
         progressDialog.show();
+        loginToken = ServiceFactory.get(commonsWikiSite).getLoginToken();
+        loginToken.enqueue(
+                new Callback<MwQueryResponse>() {
+                    @Override
+                    public void onResponse(Call<MwQueryResponse> call,
+                            Response<MwQueryResponse> response) {
+                        loginClient.login(commonsWikiSite, username, password, null, twoFactorCode,
+                                response.body().query().loginToken(), new LoginCallback() {
+                                    @Override
+                                    public void success(@NonNull LoginResult result) {
+                                        Timber.d("Login Success");
+                                        onLoginSuccess(result);
+                                    }
 
-        Action action = () -> {
-            try {
-                loginClient.loginBlocking(commonsWikiSite, username, password, twoFactorCode);
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
-        };
+                                    @Override
+                                    public void twoFactorPrompt(@NonNull Throwable caught,
+                                            @Nullable String token) {
+                                        Timber.d("Requesting 2FA prompt");
+                                        hideProgress();
+                                        askUserForTwoFactorAuth();
+                                    }
 
-        compositeDisposable.add(Completable.fromAction(action)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> onLoginSuccess(username, password),
-                        error -> {
-                            if (error instanceof LoginClient.LoginFailedException) {
-                                LoginClient.LoginFailedException exception = (LoginClient.LoginFailedException) error;
-                                if (exception.getMessage().equals("2FA")) {
-                                    askUserForTwoFactorAuth();
-                                }
-                            }
-                            if (!progressDialog.isShowing()) {
-                                return;
-                            }
-                            progressDialog.dismiss();
-                            showMessageAndCancelDialog(R.string.error_occurred);
-                        }));
+                                    @Override
+                                    public void passwordResetPrompt(@Nullable String token) {
+                                        Timber.d("Showing password reset prompt");
+                                        hideProgress();
+                                        showPasswordResetPrompt();
+                                    }
+
+                                    @Override
+                                    public void error(@NonNull Throwable caught) {
+                                        Timber.e(caught);
+                                        hideProgress();
+                                        showMessageAndCancelDialog(caught.getLocalizedMessage());
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onFailure(Call<MwQueryResponse> call, Throwable t) {
+                        Timber.e(t);
+                        showMessageAndCancelDialog(t.getLocalizedMessage());
+                    }
+                });
+
     }
+
+    private void hideProgress() {
+        progressDialog.dismiss();
+    }
+
+    private void showPasswordResetPrompt() {
+        showMessageAndCancelDialog(getString(R.string.you_must_reset_your_passsword));
+    }
+
 
     /**
      * This function is called when user skips the login.
@@ -302,13 +334,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         progressDialog.show();
     }
 
-    private void onLoginSuccess(String username, String password) {
+    private void onLoginSuccess(LoginResult loginResult) {
         if (!progressDialog.isShowing()) {
             // no longer attached to activity!
             return;
         }
         sessionManager.setUserLoggedIn(true);
-        LoginResult loginResult = new LoginResult(commonsWikiSite, "PASS", username, password, "");
         AppAdapter.get().updateAccount(loginResult);
         progressDialog.dismiss();
         showSuccessAndDismissDialog();
@@ -358,6 +389,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         progressDialog.dismiss();
         twoFactorContainer.setVisibility(VISIBLE);
         twoFactorEdit.setVisibility(VISIBLE);
+        twoFactorEdit.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         showMessageAndCancelDialog(R.string.login_failed_2fa_needed);
     }
 

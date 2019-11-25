@@ -1,8 +1,11 @@
 package fr.free.nrw.commons.theme;
 
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_WIKI_SITE;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.ActivityManager;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -18,11 +21,14 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import fr.free.nrw.commons.auth.LogoutClient;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -39,9 +45,10 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
-import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import org.wikipedia.dataclient.Service;
+import org.wikipedia.dataclient.WikiSite;
 import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity
@@ -62,6 +69,15 @@ public abstract class NavigationBaseActivity extends BaseActivity
 
 
     private ActionBarDrawerToggle toggle;
+
+    @Inject
+    LogoutClient logoutClient;
+
+
+    private CompositeDisposable disposable = new CompositeDisposable();
+    private Service service;
+
+    private ProgressDialog progressDialog;
 
     public void initDrawer() {
         navigationView.setNavigationItemSelectedListener(this);
@@ -203,9 +219,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                         .setMessage(R.string.logout_verification)
                         .setCancelable(false)
                         .setPositiveButton(R.string.yes, (dialog, which) -> {
-                            BaseLogoutListener logoutListener = new BaseLogoutListener();
-                            CommonsApplication app = (CommonsApplication) getApplication();
-                            app.clearApplicationData(this, logoutListener);
+                            handleLogout();
                         })
                         .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
@@ -227,6 +241,36 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
                 return false;
         }
+    }
+
+    /**
+     * Ask the logout client to post the logout api
+     */
+    private void handleLogout() {
+        if (null == progressDialog) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage(getString(R.string.please_wait));
+        }
+
+        progressDialog.show();
+
+        disposable.add(logoutClient.postLogout()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mwQueryResponse -> {
+                            BaseLogoutListener logoutListener = new BaseLogoutListener();
+                            CommonsApplication app = (CommonsApplication) getApplication();
+                            app.clearApplicationData(this, logoutListener);
+                            progressDialog.cancel();
+                        },
+                        t -> {
+                            progressDialog.cancel();
+                            Toast.makeText(NavigationBaseActivity.this,
+                                    t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Timber.e(t, "Something went wrong with post logout api: %s", t
+                                    .getLocalizedMessage());
+                        }
+                ));
     }
 
     private class BaseLogoutListener implements CommonsApplication.LogoutListener {
@@ -294,6 +338,15 @@ public abstract class NavigationBaseActivity extends BaseActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        disposable.clear();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
         }
     }
 }

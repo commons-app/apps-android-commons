@@ -13,8 +13,10 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+
 import java.util.Comparator;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -169,7 +171,7 @@ public class UploadRemoteDataSource {
     }
 
     /**
-     * ask the UploadModel for the image quality of the UploadItem
+     * ask the UplaodModel for the image quality of the UploadItem
      *
      * @param uploadItem
      * @param shouldValidateTitle

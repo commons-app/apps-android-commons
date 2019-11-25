@@ -42,7 +42,6 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
@@ -75,7 +74,6 @@ public class ContributionsFragment
         ICampaignsView, ContributionsContract.View {
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject ContributionDao contributionDao;
-    @Inject MediaWikiApi mediaWikiApi;
     @Inject NearbyController nearbyController;
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject CampaignsPresenter presenter;
@@ -260,10 +258,9 @@ public class ContributionsFragment
         operations on first time fragment attached to an activity. Then they will be retained
         until fragment life time ends.
          */
-        if (!isFragmentAttachedBefore) {
-            onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
+        if (!isFragmentAttachedBefore && getActivity() != null) {
+            onAuthCookieAcquired();
             isFragmentAttachedBefore = true;
-
         }
     }
 
@@ -309,17 +306,22 @@ public class ContributionsFragment
 
     /**
      * Called when onAuthCookieAcquired is called on authenticated parent activity
-     * @param uploadServiceIntent
      */
-    void onAuthCookieAcquired(Intent uploadServiceIntent) {
+    void onAuthCookieAcquired() {
         // Since we call onAuthCookieAcquired method from onAttach, isAdded is still false. So don't use it
 
         if (getActivity() != null) { // If fragment is attached to parent activity
-            getActivity().bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+            getActivity().bindService(getUploadServiceIntent(), uploadServiceConnection, Context.BIND_AUTO_CREATE);
             isUploadServiceConnected = true;
             getActivity().getSupportLoaderManager().initLoader(0, null, contributionsPresenter);
         }
 
+    }
+
+    public Intent getUploadServiceIntent(){
+        Intent intent = new Intent(getActivity(), UploadService.class);
+        intent.setAction(UploadService.ACTION_START_SERVICE);
+        return intent;
     }
 
     /**
