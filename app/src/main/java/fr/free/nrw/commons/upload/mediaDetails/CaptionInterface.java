@@ -1,13 +1,16 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
 
+import org.wikipedia.dataclient.mwapi.MwPostResponse;
+
 import java.util.Map;
 
-import fr.free.nrw.commons.mwapi.CustomApiResult;
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+
+import static org.wikipedia.dataclient.Service.MW_API_PREFIX;
 
 public interface CaptionInterface {
 
@@ -20,9 +23,9 @@ public interface CaptionInterface {
      * @param caption additional data associated with caption
      */
     @FormUrlEncoded
-    @POST("/w/api.php?action=wbsetlabel&format=json&language=en")
-    Call<CustomApiResult> addLabelstoWikidata(@Field("id") String FileEntityId,
-                                              @Field("token") String editToken,
-                                              @Field("value") String captionValue,
-                                              @Field("data") Map<String, String> caption);
+    @POST(MW_API_PREFIX + "action=wbsetlabel&language=en")
+    Observable<MwPostResponse> addLabelstoWikidata(@Field("id") String FileEntityId,
+                                                   @Field("token") String editToken,
+                                                   @Field("value") String captionValue,
+                                                   @Field("data") Map<String, String> caption);
 }

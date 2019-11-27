@@ -82,6 +82,9 @@ public interface MediaInterface {
             MEDIA_PARAMS)
     Observable<MwQueryResponse> getMediaWithGenerator(@Query("titles") String title);
 
+    @GET("w/api.php?format=json&action=parse&prop=text")
+    Observable<MwParseResponse> getPageHtml(@Query("page") String title);
+
     /**
      * Fetches caption using file name
      *
@@ -99,4 +102,5 @@ public interface MediaInterface {
 
     @GET("w/api.php?action=query&list=search&format=json&srnamespace=6")
     Observable<DepictionResponse> fetchImagesForDepictedItem(@Query("srsearch") String query, @Query("sroffset") String sroffset);
+
 }

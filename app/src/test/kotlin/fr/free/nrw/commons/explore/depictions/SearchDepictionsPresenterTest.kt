@@ -3,7 +3,7 @@ package fr.free.nrw.commons.explore.depictions
 import com.nhaarman.mockito_kotlin.verify
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.mwapi.MediaWikiApi
+//import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -26,7 +26,7 @@ class SearchDepictionsPresenterTest {
 
     var jsonKvStore: JsonKvStore? = null
 
-    var mediaWikiApi: MediaWikiApi? = null
+    //var mediaWikiApi: MediaWikiApi? = null
 
     @Mock
     var recentSearchesDao: RecentSearchesDao? = null
@@ -46,14 +46,14 @@ class SearchDepictionsPresenterTest {
         val depictedItem: DepictedItem = DepictedItem("label", "description", "url", false, "Q9394")
         mediaList.add(depictedItem)
         testObservable = Observable.just(depictedItem)
-        searchDepictionsFragmentPresenter = SearchDepictionsFragmentPresenter(jsonKvStore, mediaWikiApi, recentSearchesDao, depictsClient, testScheduler, testScheduler)
+        searchDepictionsFragmentPresenter = SearchDepictionsFragmentPresenter(jsonKvStore, recentSearchesDao, depictsClient, testScheduler, testScheduler)
         searchDepictionsFragmentPresenter?.onAttachView(view)
     }
 
     @Test
     fun updateDepictionList() {
         Mockito.`when`(depictsClient?.searchForDepictions(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())).thenReturn(testObservable)
-        searchDepictionsFragmentPresenter?.updateDepictionList("rabbit", 25, reInitialise)
+        searchDepictionsFragmentPresenter?.updateDepictionList("rabbit", 25, false)
         testScheduler?.triggerActions()
         verify(view)?.onSuccess(mediaList)
     }

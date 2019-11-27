@@ -11,6 +11,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -79,7 +81,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 .filter(mwQueryLogEvent -> !fileExists(contentProviderClient, mwQueryLogEvent.title()))
                 .doOnNext(mwQueryLogEvent->Timber.d("Image %s passed filters", mwQueryLogEvent.title() ))
                 .map(image -> new Contribution(null, null, image.title(),
-                        "", -1, image.date(), image.date(), user,
+                        new HashMap<>(), "", -1, image.date(), image.date(), user,
                         "", "", STATE_COMPLETED))
                 .map(contributionDao::toContentValues)
                 .buffer(10)

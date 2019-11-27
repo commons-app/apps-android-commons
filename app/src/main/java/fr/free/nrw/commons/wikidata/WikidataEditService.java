@@ -22,8 +22,6 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.mwapi.CustomApiResult;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -31,9 +29,6 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import timber.log.Timber;
 
 /**
@@ -53,26 +48,27 @@ public class WikidataEditService {
     private final CaptionInterface captionInterface;
     private final WikiBaseClient wikiBaseClient;
     private final WikidataClient wikidataClient;
-    private final PageEditClient wikiDataPageEditClient;
     private final MediaClient mediaClient;
-    private final MediaWikiApi mediaWikiApi;
     private final CsrfTokenClient csrfTokenClient;
     private final Service service;
 
     @Inject
     public WikidataEditService(Context context,
-                               WikidataEditListener wikidataEditListener, MediaClient mediaClient,
-                               @Named("default_preferences") JsonKvStore directKvStore, WikiBaseClient wikiBaseClient, CaptionInterface captionInterface, WikidataClient wikidataClient, @Named("wikidata-page-edit") PageEditClient wikiDataPageEditClient, MediaWikiApi mediaWikiApi,@Named("commons-csrf") CsrfTokenClient csrfTokenClient,
+                               WikidataEditListener wikidataEditListener,
+                               MediaClient mediaClient,
+                               @Named("default_preferences") JsonKvStore directKvStore,
+                               WikiBaseClient wikiBaseClient,
+                               CaptionInterface captionInterface,
+                               WikidataClient wikidataClient,
+                               @Named("commons-csrf") CsrfTokenClient csrfTokenClient,
                                @Named("commons-service") Service service) {
         this.context = context;
         this.wikidataEditListener = wikidataEditListener;
         this.directKvStore = directKvStore;
         this.captionInterface = captionInterface;
         this.wikiBaseClient = wikiBaseClient;
-        this.wikiDataPageEditClient = wikiDataPageEditClient;
         this.mediaClient = mediaClient;
         this.wikidataClient = wikidataClient;
-        this.mediaWikiApi = mediaWikiApi;
         this.csrfTokenClient = csrfTokenClient;
         this.service = service;
     }
@@ -249,8 +245,9 @@ public class WikidataEditService {
     /**
      * Adding captions as labels after image is successfully uploaded
      */
+    @SuppressLint("CheckResult")
     public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, Map<String, String> captions) {
-        Observable.fromCallable(() -> mediaWikiApi.getFileEntityId(fileName))
+        Observable.fromCallable(() -> wikiBaseClient.getFileEntityId(fileName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
@@ -259,7 +256,7 @@ public class WikidataEditService {
                             Map<String, String> caption = new HashMap<>();
                             caption.put(entry.getKey(), entry.getValue());
                             try {
-                                wikidataAddLabels(wikiDataEntityId, fileEntityId, caption);
+                                wikidataAddLabels(wikiDataEntityId, fileEntityId.toString(), caption);
                             } catch (Throwable throwable) {
                                 throwable.printStackTrace();
                             }
@@ -281,6 +278,7 @@ public class WikidataEditService {
      * @param caption
      */
 
+    @SuppressLint("CheckResult")
     private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, Map<String, String> caption) throws Throwable {
         Observable.fromCallable(() -> {
             try {
@@ -299,17 +297,12 @@ public class WikidataEditService {
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(revisionId ->
                                 {
-                                    revisionId.enqueue(new Callback<CustomApiResult>() {
-                                        @Override
-                                        public void onResponse(Call<CustomApiResult> call, Response<CustomApiResult> response) {
-                                            Timber.e(call.isExecuted()+"");
-                                        }
+                                    if (revisionId != null) {
+                                        Timber.d("Caption successfully set, revision id = %s", revisionId);
+                                    } else {
+                                        Timber.d("Error occurred while setting Captions, fileEntityId = %s", fileEntityId);
+                                    }
 
-                                        @Override
-                                        public void onFailure(Call<CustomApiResult> call, Throwable t) {
-                                            Timber.e(t.getMessage());
-                                        }
-                                    });
                                 },
                                         throwable -> {
                                             Timber.e(throwable, "Error occurred while setting Captions");

@@ -158,11 +158,11 @@ public class UploadModel {
                 createdTimestampSource);
         if (place != null) {
             uploadItem.title.setTitleText(place.name);
-            if(uploadItem.descriptions.isEmpty()) {
-                uploadItem.descriptions.add(new Description());
+            if(uploadItem.uploadMediaDetails.isEmpty()) {
+                uploadItem.uploadMediaDetails.add(new UploadMediaDetail());
             }
-            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
-            uploadItem.descriptions.get(0).setLanguageCode("en");
+            uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
+            uploadItem.uploadMediaDetails.get(0).setLanguageCode("en");
             String languageCode = Locale.getDefault().getLanguage();
                         uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
             uploadItem.uploadMediaDetails.get(0).setLanguageCode(languageCode);

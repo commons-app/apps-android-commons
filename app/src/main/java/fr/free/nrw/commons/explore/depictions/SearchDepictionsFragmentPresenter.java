@@ -13,7 +13,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 
 import io.reactivex.Scheduler;
@@ -47,7 +46,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     boolean isLoadingDepictions;
     String query;
     RecentSearchesDao recentSearchesDao;
-    MediaWikiApi mwApi;
     DepictsClient depictsClient;
     JsonKvStore basicKvStore;
     private SearchDepictionsFragmentContract.View view = DUMMY;
@@ -56,10 +54,12 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
     int size = 0;
 
     @Inject
-    public SearchDepictionsFragmentPresenter(@Named("default_preferences") JsonKvStore basicKvStore, MediaWikiApi mwApi, RecentSearchesDao recentSearchesDao, DepictsClient depictsClient, @Named(IO_THREAD) Scheduler ioScheduler,
+    public SearchDepictionsFragmentPresenter(@Named("default_preferences") JsonKvStore basicKvStore,
+                                             RecentSearchesDao recentSearchesDao,
+                                             DepictsClient depictsClient,
+                                             @Named(IO_THREAD) Scheduler ioScheduler,
                                              @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
         this.basicKvStore = basicKvStore;
-        this.mwApi = mwApi;
         this.recentSearchesDao = recentSearchesDao;
         this.depictsClient = depictsClient;
         this.ioScheduler = ioScheduler;

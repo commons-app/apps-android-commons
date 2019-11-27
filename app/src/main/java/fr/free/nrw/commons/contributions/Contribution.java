@@ -112,9 +112,9 @@ public class  Contribution extends Media {
         this.depictionsEntityIds = depictionsEntityIds;
     }
 
-    public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
+    public Contribution(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description, long dataLength,
                         Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords, int state) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
+        super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";

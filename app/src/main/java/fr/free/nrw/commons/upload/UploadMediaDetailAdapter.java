@@ -109,7 +109,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         public void init(int position) {
             UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(position);
             Timber.d("UploadMediaDetail is " + uploadMediaDetail);
-
             if (!TextUtils.isEmpty(uploadMediaDetail.getCaptionText())) {
                 captionItemEditText.setText(uploadMediaDetail.getCaptionText());
             } else {
@@ -142,7 +141,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             });
 
             if (position == 0) {
-
                 captionItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
                         null);
                 captionItemEditText.setOnTouchListener((v, event) -> {
@@ -160,7 +158,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
                         null);
                 descItemEditText.setOnTouchListener((v, event) -> {
-
                     //2 is for drawable right
                     float twelveDpInPixels = convertDpToPixel(12, descItemEditText.getContext());
                     if (event.getAction() == MotionEvent.ACTION_UP && descItemEditText.getCompoundDrawables()[2].getBounds().contains((int)(descItemEditText.getWidth()-(event.getX()+twelveDpInPixels)),(int)(event.getY()-twelveDpInPixels))){
@@ -182,7 +179,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                     captionText -> uploadMediaDetails.get(position)
                             .setCaptionText(captionText)));
             initLanguageSpinner(position, uploadMediaDetail);
-
 
             descItemEditText.addTextChangedListener(new AbstractTextWatcher(
                     descriptionText -> uploadMediaDetails.get(position)
