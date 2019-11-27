@@ -322,7 +322,7 @@
   <string name="search_tab_title_media">미디어</string>
   <string name="search_tab_title_categories">분류</string>
   <string name="explore_tab_title_mobile">모바일을 통해 업로드됨</string>
-  <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 성공적으로 추가했습니다!</string>
+  <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 추가했습니다!</string>
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
   <string name="menu_set_wallpaper">배경화면으로 설정</string>
   <string name="wallpaper_set_successfully">배경화면을 성공적으로 설정했습니다!</string>
@@ -435,7 +435,7 @@
   <string name="check_category_edit_summary">분류 검사를 요청합니다</string>
   <string name="check_category_success_title">분류 검사 요청됨</string>
   <string name="check_category_failure_title">분류 검사 요청이 동작하지 못했습니다</string>
-  <string name="check_category_success_message">%1$s을(를) 위한 분류 검사 요청을 성공했습니다</string>
+  <string name="check_category_success_message" fuzzy="true">%1$s을(를) 위한 분류 검사 요청을 성공했습니다</string>
   <string name="check_category_failure_message">%1$s을(를) 위한 분류 검사를 요청하지 못했습니다</string>
   <string name="check_category_toast">%1$s을(를) 위한 분류 검사를 요청합니다</string>
   <string name="nominate_for_deletion_edit_file_page">파일에 삭제 메시지를 추가합니다</string>
@@ -476,4 +476,10 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷의 임의 사진</string>
   <string name="delete_helper_ask_reason_copyright_logo">로고</string>
   <string name="delete_helper_ask_reason_copyright_other">기타</string>
+  <string name="share_image_via">다음을 통해 이미지 공유</string>
+  <string name="no_achievements_yet">아직 기여가 없습니다</string>
+  <string name="account_created">계정을 만들었습니다!</string>
+  <string name="text_copy">텍스트가 클립보드에 복사되었습니다</string>
+  <string name="notification_mark_read">알림을 읽은 것으로 표시</string>
+  <string name="some_error">오류가 있었습니다!</string>
 </resources>

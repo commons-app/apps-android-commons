@@ -290,7 +290,7 @@
   <string name="provider_searches">Nedavno pretraženi upiti</string>
   <string name="error_loading_categories">Došlo je do greške pri učitavanju kategorija.</string>
   <string name="error_loading_subcategories">Došlo je do greške pri učitavanju potkategorija.</string>
-  <string name="successful_wikidata_edit">Slika je uspešno dodata u %1$s na Vikipodacima.</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Slika je uspešno dodata u %1$s na Vikipodacima.</string>
   <string name="wikidata_edit_failure">Ažuriranje odgovarajućeg entiteta na Vikipodacima nije uspelo.</string>
   <string name="menu_set_wallpaper">Postavi kao pozadinu</string>
   <string name="wallpaper_set_successfully">Pozadina je uspešno postavljena.</string>

@@ -20,6 +20,7 @@
   <string name="preference_category_appearance">Ulkoasu</string>
   <string name="preference_category_general">Yleinen</string>
   <string name="preference_category_feedback">Palaute</string>
+  <string name="preference_category_privacy">Yksityisyys</string>
   <string name="preference_category_location">Sijainti</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -236,6 +237,7 @@
   <string name="navigation_item_info">Opas</string>
   <string name="navigation_item_notification">Ilmoitukset</string>
   <string name="navigation_item_featured_images">Suositeltu</string>
+  <string name="navigation_item_review">Tarkasta</string>
   <string name="nearby_needs_permissions">Lähellä olevia paikkoja ei voida näyttää ilman sijaintilupaa</string>
   <string name="no_description_found">kuvausta ei löytynyt</string>
   <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>
@@ -261,7 +263,7 @@
   <string name="send_log_file_description">Lähetä lokitiedosto kehittäjille sähköpostin välityksellä auttaaksesi sovelluksen ongelmien korjaamisessa. Huomautus: lokit saattavat mahdollisesti sisältää tunnistettavaa tietoa</string>
   <string name="no_web_browser">Ei verkkoselainta jolla avata URL-osoite</string>
   <string name="null_url">Virhe! URL-osoitetta ei löytynyt</string>
-  <string name="nominate_deletion">Ehdotettu poistettavaksi</string>
+  <string name="nominate_deletion">Ehdota poistettavaksi</string>
   <string name="nominated_for_deletion">Tätä kuvaa on ehdotettu poistettavaksi.</string>
   <string name="view_browser">Näytä selaimessa</string>
   <string name="skip_login">Ohita</string>
@@ -274,17 +276,17 @@
   <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
   <string name="nearby_location_not_available">Sijainti ei käytettävissä.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
-  <string name="get_directions" fuzzy="true">HANKI OHJEET</string>
-  <string name="read_article" fuzzy="true">LUE ARTIKKELI</string>
+  <string name="get_directions">Hanki ohjeet</string>
+  <string name="read_article">Lue artikkeli</string>
   <string name="notifications_welcome">Tervetuloa Wikimedia Commonsiin, %1$s! Olemme iloisia että olet täällä.</string>
   <string name="notifications_talk_page_message">%1$s jätti viestin keskustelusivullesi</string>
   <string name="notifications_thank_you_edit">Kiitos muokkaamisestasi</string>
   <string name="notifications_mention">%1$s mainitsi sinut %2$s.</string>
   <string name="toggle_view_button">Vaihda näkymä</string>
-  <string name="nearby_directions" fuzzy="true">REITTI</string>
-  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
-  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
+  <string name="nearby_directions">Reitit</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Arvostele meidät&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;UKK&lt;/u&gt;</string>
   <string name="welcome_skip_button">Ohita opetus</string>
@@ -305,6 +307,7 @@
   <string name="no_images_found">Kuvia ei löytynyt!</string>
   <string name="error_loading_images">Virhe ladattaessa kuvia.</string>
   <string name="image_uploaded_by">Tallentanut: %1$s</string>
+  <string name="block_notification_title">Estetty</string>
   <string name="block_notification">Sinut on estetty muokkaamasta Commonsia</string>
   <string name="appwidget_img">Päivän kuva</string>
   <string name="app_widget_heading">Päivän kuva</string>
@@ -314,11 +317,11 @@
   <string name="search_recent_header">Äskettäiset haut:</string>
   <string name="error_loading_categories">Luokkia ladattaessa tapahtui virhe.</string>
   <string name="error_loading_subcategories">Alaluokkia ladattaessa tapahtui virhe.</string>
-  <string name="search_tab_title_media" fuzzy="true">MEDIA</string>
-  <string name="search_tab_title_categories" fuzzy="true">LUOKAT</string>
-  <string name="explore_tab_title_featured" fuzzy="true">SUOSITELTU</string>
-  <string name="explore_tab_title_mobile" fuzzy="true">TALLENNETTU MOBIILIN KAUTTA</string>
-  <string name="successful_wikidata_edit">Kuva onnistuneesti lisätty Wikidata-kohteeseen %1$s!</string>
+  <string name="search_tab_title_media">Media</string>
+  <string name="search_tab_title_categories">Luokat</string>
+  <string name="explore_tab_title_featured">Suositeltu</string>
+  <string name="explore_tab_title_mobile">Tallennettu mobiilin kautta</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Kuva onnistuneesti lisätty Wikidata-kohteeseen %1$s!</string>
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
   <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>
   <string name="wallpaper_set_successfully">Taustakuva asetettu!</string>
@@ -341,15 +344,17 @@
   <string name="share_coordinates_not_present">Koordinaatteja ei annettu kuvaa valittaessa</string>
   <string name="error_fetching_nearby_places">Virhe paikkoja haettaessa.</string>
   <string name="add_description">+ Lisää kuvaus</string>
+  <string name="no_recent_searches">Ei viimeaikaisia hakuja</string>
   <string name="delete_recent_searches_dialog">Haluatko varmasti tyhjentää hakuhistoriasi?</string>
+  <string name="delete_search_dialog">Haluatko poistaa tämän haun?</string>
   <string name="search_history_deleted">Hakuhistoria poistettu</string>
   <string name="nominate_delete">Ehdota poistettavaksi</string>
-  <string name="delete" fuzzy="true">POISTA</string>
+  <string name="delete">Poista</string>
   <string name="Achievements">Saavutukset</string>
-  <string name="statistics" fuzzy="true">TILASTOT</string>
+  <string name="statistics">Tilastot</string>
   <string name="statistics_thanks">Kiitos vastaanotettu</string>
   <string name="statistics_featured">Suositellut kuvat</string>
-  <string name="level" fuzzy="true">TASO</string>
+  <string name="level">Taso</string>
   <string name="images_uploaded">Kuvia tallennettu</string>
   <string name="images_used_by_wiki">Kuvia käytetty</string>
   <string name="achievements_share_message">Jaa saavutuksesi ystäviesi kanssa!</string>
@@ -362,6 +367,7 @@
   <string name="nearby_fragment">Lähistöllä</string>
   <string name="notifications">Ilmoitukset</string>
   <string name="archived_notifications">Ilmoitukset (arkistoidut)</string>
+  <string name="display_nearby_notification">Näytä lähistöllä-ilmoitus</string>
   <string name="list_sheet">Lista</string>
   <string name="step_count">Vaihe %1$d/%2$d</string>
   <string name="next">Seuraava</string>
@@ -394,9 +400,13 @@
   <string name="desc_language_Africa">Afrikka</string>
   <string name="desc_language_Asia">Aasia</string>
   <string name="desc_language_Pacific">Tyynenmeren alue</string>
+  <string name="no_categories_selected">Luokkia ei valittu</string>
   <string name="no_go_back">Ei, palaa takaisin</string>
+  <string name="search_this_area">Hae tältä alueelta</string>
   <string name="nearby_card_permission_explanation">Haluaisitko, että käytämme nykyistä sijaintiasi näyttääksemme lähimmät paikat, jotka tarvitsevat kuvia?</string>
   <string name="never_ask_again">Älä kysy tätä uudelleen</string>
+  <string name="display_campaigns">Näytä kilpailut</string>
+  <string name="display_campaigns_explanation">Näe meneillään olevat kilpailut</string>
   <string name="this_function_needs_network_connection">Tämä toiminto tarvitsee verkkoyhteyden. Tarkista yhteysasetuksesi.</string>
   <string name="nominate_for_deletion_done">Valmis</string>
   <string name="notsure">Epävarma</string>
@@ -414,5 +424,24 @@
   <string name="menu_option_unread">Näytä lukemattomat</string>
   <string name="image_chooser_title">Valitse tallennettavat tiedostot</string>
   <string name="please_wait">Odota…</string>
-  <string name="skip_image" fuzzy="true">OHITA TÄMÄ KUVA</string>
+  <string name="skip_image">Ohita tämä kuva</string>
+  <string name="exif_tag_name_author">Tekijä</string>
+  <string name="exif_tag_name_copyright">Tekijänoikeus</string>
+  <string name="exif_tag_name_location">Sijainti</string>
+  <string name="exif_tag_name_cameraModel">Kameran malli</string>
+  <string name="exif_tag_name_lensModel">Linssin malli</string>
+  <string name="exif_tag_name_serialNumbers">Sarjanumerot</string>
+  <string name="exif_tag_name_software">Ohjelmisto</string>
+  <string name="no_categories_found">Luokkia ei löytynyt</string>
+  <string name="upload_cancelled">Peruutettu tallennus</string>
+  <string name="dialog_box_text_nomination">Miksi %1$s tulisi poistaa?</string>
+  <string name="default_description_language">Kuvauksen oletuskieli</string>
+  <string name="delete_helper_ask_spam_selfie">Selfie</string>
+  <string name="delete_helper_ask_spam_blurry">Sumea</string>
+  <string name="delete_helper_ask_spam_other">Muu</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Lehdistökuva</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Satunnainen kuva internetistä</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Muu</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Koska se on</string>
 </resources>

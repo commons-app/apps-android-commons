@@ -324,6 +324,7 @@
   <string name="no_images_found">Зображень не знайдено!</string>
   <string name="error_loading_images">Сталася помилка при завантаженні зображень.</string>
   <string name="image_uploaded_by">Завантажено: %1$s</string>
+  <string name="block_notification_title">Заблоковано</string>
   <string name="block_notification">Вам було заблоковано редагування у Вікісховищі</string>
   <string name="appwidget_img">Зображення дня</string>
   <string name="app_widget_heading">Зображення дня</string>
@@ -332,14 +333,14 @@
   <string name="images_not_found">Не знайдено зображень, що відповідають %1$s</string>
   <string name="title_activity_search">Пошук</string>
   <string name="search_recent_header">Недавні пошуки:</string>
-  <string name="provider_searches">Недавні запити пошуку</string>
+  <string name="provider_searches">Недавні пошукові запити</string>
   <string name="error_loading_categories">Сталася помилка під час завантаження категорій.</string>
   <string name="error_loading_subcategories">Сталася помилка під час завантаження підкатегорій.</string>
   <string name="search_tab_title_media">Медіафайли</string>
   <string name="search_tab_title_categories">Категорії</string>
   <string name="explore_tab_title_featured">Обране</string>
   <string name="explore_tab_title_mobile">Завантаження з мобільного</string>
-  <string name="successful_wikidata_edit">Зображення успішно додано до сторінки %1$s у Вікіданих!</string>
+  <string name="successful_wikidata_edit">Зображення додано до сторінки %1$s у Вікіданих!</string>
   <string name="wikidata_edit_failure">Не вдалось оновити відповідну сторінку Вікіданих!</string>
   <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
   <string name="wallpaper_set_successfully">Шпалери екрану виставлено успішно!</string>
@@ -441,7 +442,7 @@
   <string name="desc_language_Asia">Азія</string>
   <string name="desc_language_Pacific">Океанія</string>
   <string name="no_categories_selected">Жодної категорії не вибрано</string>
-  <string name="no_categories_selected_warning_desc">Зображення без категорії рідко використовуються. Ви впевнені, що хочете надіслати без вибору категорій?</string>
+  <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете надіслати без вибору категорій?</string>
   <string name="yes_submit">Так, надіслати</string>
   <string name="no_go_back">Ні, повернутись</string>
   <string name="upload_flow_all_images_in_set">(Для всіх зображень у наборі)</string>
@@ -466,7 +467,7 @@
   <string name="check_category_edit_summary">Запит на перевірку категорій</string>
   <string name="check_category_success_title">Зроблено запит на перевірку категорій</string>
   <string name="check_category_failure_title">Запит на перевірку категорій не спрацював</string>
-  <string name="check_category_success_message">Успішно зроблено запит на перевірку категорій для %1$s</string>
+  <string name="check_category_success_message">Зроблено запит на перевірку категорій для %1$s</string>
   <string name="check_category_failure_message">Не вдалося зробити запит на перевірку категорій для %1$s</string>
   <string name="check_category_toast">Запит на перевірку категорій для %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Додавання до файлу повідомлення про вилучення</string>
@@ -490,14 +491,14 @@
   <string name="review_copyright_explanation">Логотипи, знімки екрану, плакати фільмів часто порушують авторське право. Натисніть НІ, щоб номінувати це зображення на вилучення</string>
   <string name="review_thanks_explanation">%1$s отримає заохочення від вашої подяки</string>
   <string name="review_no_category">Ох, та тут навіть категорій немає!</string>
-  <string name="review_category_explanation">Це зображення належить до %1$s категорій.</string>
+  <string name="review_category_explanation">Це зображення належить до наступних категорій: %1$s</string>
   <string name="review_spam_report_question">Файл недоречний для Вікісховища, тому що</string>
   <string name="review_c_violation_report_question">Це порушення авторських прав, тому що</string>
   <string name="review_category_yes_button_text">Ні, хибно категоризовано</string>
   <string name="review_category_no_button_text">Виглядає добре</string>
   <string name="review_spam_yes_button_text">Ні, не доречно</string>
   <string name="review_spam_no_button_text">Виглядає добре</string>
-  <string name="review_copyright_yes_button_text">Ні, порушення авторського права</string>
+  <string name="review_copyright_yes_button_text">Ні, це порушення авторського права</string>
   <string name="review_copyright_no_button_text">Виглядає добре</string>
   <string name="review_thanks_yes_button_text">Так, чому б і ні</string>
   <string name="review_thanks_no_button_text">Наступне зображення</string>
@@ -549,7 +550,7 @@
   <string name="delete_helper_make_deletion_toast">Номінування %1$s до вилучення</string>
   <string name="delete_helper_show_deletion_title">Номінування до вилучення</string>
   <string name="delete_helper_show_deletion_title_success">Успішно</string>
-  <string name="delete_helper_show_deletion_message_if">Успішно номіновано %1$s до вилучення.</string>
+  <string name="delete_helper_show_deletion_message_if">Номіновано %1$s до вилучення.</string>
   <string name="delete_helper_show_deletion_title_failed">Не вдалося</string>
   <string name="delete_helper_show_deletion_message_else">Неможливо запитати видалення.</string>
   <string name="delete_helper_ask_spam_selfie">Селфі</string>
@@ -561,4 +562,11 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Інше</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Оскільки</string>
+  <string name="share_image_via">Поширити зображення через</string>
+  <string name="no_achievements_yet">Поки що від вас немає вкладу</string>
+  <string name="account_created">Обліковий запис створено!</string>
+  <string name="text_copy">Текст скопійовано до буферу обміну</string>
+  <string name="notification_mark_read">Сповіщення позначено прочитаним</string>
+  <string name="some_error">Тут якась проблемка виникла :-(</string>
+  <string name="you_must_reset_your_passsword">Щось пішло не так із процесом входу, ви маєте скинути пароль !</string>
 </resources>

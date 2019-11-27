@@ -61,7 +61,7 @@ public class CommonsAppAdapter extends AppAdapter {
 
     @Override
     public void updateAccount(@NonNull LoginResult result) {
-        // TODO:  sessionManager.updateAccount(result);
+        sessionManager.updateAccount(result);
     }
 
     @Override
@@ -69,7 +69,8 @@ public class CommonsAppAdapter extends AppAdapter {
         if (!preferences.contains(COOKIE_STORE_NAME)) {
             return null;
         }
-        return GsonUnmarshaller.unmarshal(SharedPreferenceCookieManager.class, preferences.getString(COOKIE_STORE_NAME, null));
+        return GsonUnmarshaller.unmarshal(SharedPreferenceCookieManager.class,
+                preferences.getString(COOKIE_STORE_NAME, null));
     }
 
     @Override

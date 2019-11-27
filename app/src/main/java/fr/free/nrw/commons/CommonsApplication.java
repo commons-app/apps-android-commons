@@ -10,7 +10,10 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -28,7 +31,6 @@ import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.annotation.NonNull;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
@@ -41,7 +43,6 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
-import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -119,6 +120,7 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         INSTANCE = this;
         ACRA.init(this);
 
@@ -250,6 +252,7 @@ public class CommonsApplication extends Application {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
                     Timber.d("All accounts have been removed");
+                    clearImageCache();
                     //TODO: fix preference manager
                     defaultPrefs.clearAll();
                     defaultPrefs.putBoolean("firstrun", false);
@@ -259,13 +262,20 @@ public class CommonsApplication extends Application {
     }
 
     /**
+     * Clear all images cache held by Fresco
+     */
+    private void clearImageCache() {
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        imagePipeline.clearCaches();
+    }
+
+    /**
      * Deletes all tables and re-creates them.
      */
     private void updateAllDatabases() {
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
-        ModifierSequenceDao.Table.onDelete(db);
         CategoryDao.Table.onDelete(db);
         ContributionDao.Table.onDelete(db);
         BookmarkPicturesDao.Table.onDelete(db);
