@@ -28,8 +28,8 @@ public class  Contribution extends Media {
     //{{According to EXIF data|2009-01-09}}
     private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to EXIF data|%s}}";
 
-    //{{date|2009|1|9}} → 9 January 2009
-    private static final String TEMPLATE_DATA_OTHER_SOURCE = "{{date|%s}}";
+    //2009-01-09 → 9 January 2009
+    private static final String TEMPLATE_DATA_OTHER_SOURCE = "%s";
 
     public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
         @Override
