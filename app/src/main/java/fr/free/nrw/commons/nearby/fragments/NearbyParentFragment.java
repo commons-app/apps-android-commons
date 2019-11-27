@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -69,6 +69,7 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
+import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
@@ -250,16 +251,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         checkBoxTriStates.setState(state);
     }
 
+    @Override
+    public void setFilterState() {
+        Log.d("deneme5","setfilterState");
+        chipNeedsPhoto.setChecked(NearbyFilterState.getInstance().isNeedPhotoSelected());
+        chipExists.setChecked(NearbyFilterState.getInstance().isExistsSelected());
+
+        if (NearbyController.currentLocation != null) {
+            NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+        }
+
+    }
+
     private void initFilterChips() {
 
         chipNeedsPhoto.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (NearbyController.currentLocation != null) {
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 if (isChecked) {
-                    NearbyParentFragmentPresenter.getInstance().displayNeedsPhoto = true;
+                    NearbyFilterState.getInstance().setNeedPhotoSelected(true);
                     NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 } else {
-                    NearbyParentFragmentPresenter.getInstance().displayNeedsPhoto = false;
+                    NearbyFilterState.getInstance().setNeedPhotoSelected(false);
                     NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 }
             } else {
@@ -267,14 +280,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         });
 
+
         chipExists.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (NearbyController.currentLocation != null) {
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 if (isChecked) {
-                    NearbyParentFragmentPresenter.getInstance().displayExists = true;
+                    NearbyFilterState.getInstance().setExistsSelected(true);
                     NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 } else {
-                    NearbyParentFragmentPresenter.getInstance().displayExists = false;
+                    NearbyFilterState.getInstance().setExistsSelected(false);
                     NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 }
             } else {
@@ -589,6 +603,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             // showErrorMessage(getString(R.string.error_fetching_nearby_places));
                             setProgressBarVisibility(false);
                             nearbyParentFragmentPresenter.lockUnlockNearby(false);
+                            setFilterState();
                         }));
     }
 
@@ -615,6 +630,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker);
+        setFilterState();
     }
 
     /**
@@ -624,6 +640,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkersForCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         nearbyParentFragmentPresenter.updateMapMarkersForCustomLocation(nearbyPlacesInfo, selectedMarker);
+        setFilterState();
     }
 
 

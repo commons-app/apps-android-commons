@@ -14,6 +14,7 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyController;
+import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
@@ -50,9 +51,6 @@ public class NearbyParentFragmentPresenter
     private Place placeToCenter;
     private boolean isPortraitMode;
     private boolean placesLoadedOnce;
-
-    public boolean displayNeedsPhoto;
-    public boolean displayExists;
 
     private LocationServiceManager locationServiceManager;
 
@@ -373,7 +371,10 @@ public class NearbyParentFragmentPresenter
                     break;
             }
         } else {
-            nearbyMapFragmentView.filterMarkersByLabels(selectedLabels, displayExists, displayNeedsPhoto, filterForPlaceState, filterForAllNoneType);
+            nearbyMapFragmentView.filterMarkersByLabels(selectedLabels,
+                    NearbyFilterState.getInstance().isExistsSelected(),
+                    NearbyFilterState.getInstance().isNeedPhotoSelected(),
+                    filterForPlaceState, filterForAllNoneType);
         }
     }
 

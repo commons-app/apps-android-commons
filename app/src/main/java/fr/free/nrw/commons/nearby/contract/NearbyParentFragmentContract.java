@@ -41,6 +41,7 @@ public interface NearbyParentFragmentContract {
         void setRecyclerViewAdapterItemsGreyedOut();
         void setCheckBoxAction();
         void setCheckBoxState(int state);
+        void setFilterState();
     }
 
     interface NearbyListView {
