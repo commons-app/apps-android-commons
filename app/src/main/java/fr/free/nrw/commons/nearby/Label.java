@@ -42,7 +42,7 @@ public enum Label {
     TEMPLE("Q44539", R.drawable.round_icon_church),
     UNKNOWN("?", R.drawable.round_icon_unknown);
 
-    private static final Map<String, Label> TEXT_TO_DESCRIPTION
+    public static final Map<String, Label> TEXT_TO_DESCRIPTION
             = new HashMap<>(Label.values().length);
 
     static {
@@ -54,6 +54,7 @@ public enum Label {
     private final String text;
     @DrawableRes
     private final int icon;
+    private boolean selected;
 
     Label(String text, @DrawableRes int icon) {
         this.text = text;
@@ -63,6 +64,18 @@ public enum Label {
     Label(Parcel in) {
         this.text = in.readString();
         this.icon = in.readInt();
+    }
+
+    /**
+     * Will be used for nearby filter, to determine if place type is selected or not
+     * @param isSelected true if user selected the place type
+     */
+    public void setSelected(boolean isSelected) {
+        this.selected = isSelected;
+    }
+
+    public boolean isSelected() {
+        return selected;
     }
 
     public String getText() {
