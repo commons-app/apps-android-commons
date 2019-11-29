@@ -198,6 +198,11 @@ public class NearbyParentFragmentPresenter
     @Override
     public void lockUnlockNearby(boolean isNearbyLocked) {
         this.isNearbyLocked = isNearbyLocked;
+        if (isNearbyLocked) {
+            nearbyParentFragmentView.disableFABRecenter();
+        } else {
+            nearbyParentFragmentView.enableFABRecenter();
+        }
     }
 
     public void registerUnregisterLocationListener(boolean removeLocationListener) {

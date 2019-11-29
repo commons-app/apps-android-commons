@@ -831,6 +831,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void disableFABRecenter() {
+        fabRecenter.setEnabled(false);
+    }
+
+    @Override
+    public void enableFABRecenter() {
+        fabRecenter.setEnabled(true);
+    }
+
+    @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
         nearbyMapFragment.removeCurrentLocationMarker();
         nearbyMapFragment.addCurrentLocationMarker(curLatLng);
