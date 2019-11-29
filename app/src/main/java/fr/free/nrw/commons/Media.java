@@ -12,7 +12,6 @@ import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.gallery.ExtMetadata;
 import org.wikipedia.gallery.ImageInfo;
 import org.wikipedia.page.PageTitle;
-import org.wikipedia.util.StringUtil;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -160,7 +159,7 @@ public class Media implements Parcelable {
                 0,
                 safeParseDate(metadata.dateTime()),
                 safeParseDate(metadata.dateTime()),
-                StringUtil.fromHtml(metadata.artist()).toString()
+                getArtist(metadata)
         );
 
         if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
@@ -184,6 +183,21 @@ public class Media implements Parcelable {
 
         media.setLicenseInformation(metadata.licenseShortName(), metadata.licenseUrl());
         return media;
+    }
+
+    /**
+     * This method extracts the Commons Username from the artist HTML information
+     * @param metadata
+     * @return
+     */
+    private static String getArtist(ExtMetadata metadata) {
+        try {
+            String artistHtml = metadata.artist();
+            return artistHtml.substring(artistHtml.indexOf("title=\""), artistHtml.indexOf("\">"))
+                    .replace("title=\"User:", "");
+        } catch (Exception ex) {
+            return "";
+        }
     }
 
     public String getThumbUrl() {
