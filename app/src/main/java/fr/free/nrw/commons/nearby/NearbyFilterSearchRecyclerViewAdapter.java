@@ -84,11 +84,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
                 selectedLabels.remove(label);
             } else {
                 selectedLabels.add(label);
-                displayedLabels.remove(label);
-                displayedLabels.add(selectedLabels.size()-1, label);
-                notifyDataSetChanged();
-                smoothScroller.setTargetPosition(0);
-                recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
             }
             label.setSelected(!label.isSelected());
             holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : Color.WHITE);
