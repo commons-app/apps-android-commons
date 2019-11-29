@@ -832,7 +832,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
-        nearbyMapFragment.removeCurrentLocationMarker();
         nearbyMapFragment.addCurrentLocationMarker(curLatLng);
         CameraPosition position;
 

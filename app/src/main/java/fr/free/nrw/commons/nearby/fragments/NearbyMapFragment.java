@@ -315,6 +315,7 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void addCurrentLocationMarker(LatLng curLatLng) {
+        removeCurrentLocationMarker();
         Timber.d("Adds current location marker");
 
         Icon icon = IconFactory.getInstance(getContext()).fromResource(R.drawable.current_location_marker);
@@ -336,8 +337,10 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void removeCurrentLocationMarker() {
-        mapboxMap.removeMarker(currentLocationMarker);
-        mapboxMap.removePolygon(currentLocationPolygon);
+        if (currentLocationMarker != null) {
+            mapboxMap.removeMarker(currentLocationMarker);
+            mapboxMap.removePolygon(currentLocationPolygon);
+        }
     }
 
     /**
