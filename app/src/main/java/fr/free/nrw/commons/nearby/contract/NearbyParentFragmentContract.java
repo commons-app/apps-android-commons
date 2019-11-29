@@ -42,6 +42,8 @@ public interface NearbyParentFragmentContract {
         void setCheckBoxAction();
         void setCheckBoxState(int state);
         void setFilterState();
+        void disableFABRecenter();
+        void enableFABRecenter();
     }
 
     interface NearbyListView {
