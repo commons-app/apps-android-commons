@@ -200,6 +200,8 @@ public class Place implements Parcelable {
         dest.writeParcelable(location, 0);
         dest.writeString(category);
         dest.writeParcelable(siteLinks, 0);
+        dest.writeString(pic);
+        dest.writeString(destroyed);
     }
 
     public static final Creator<Place> CREATOR = new Creator<Place>() {
