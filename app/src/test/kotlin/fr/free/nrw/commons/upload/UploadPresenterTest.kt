@@ -93,6 +93,9 @@ class UploadPresenterTest {
         verify(repository)?.deletePicture(ArgumentMatchers.anyString())
     }
 
+    /**
+     * Test media deletion during single upload
+     */
     @Test
     fun testDeleteWhenSingleUpload(){
         deletePictureBaseTest()
@@ -104,6 +107,9 @@ class UploadPresenterTest {
         verify(view)?.finish()
     }
 
+    /**
+     * Test media deletion during multiple upload
+     */
     @Test
     fun testDeleteWhenMultipleFilesUpload(){
         deletePictureBaseTest()
