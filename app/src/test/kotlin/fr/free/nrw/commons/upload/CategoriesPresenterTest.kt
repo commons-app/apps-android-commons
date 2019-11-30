@@ -77,4 +77,13 @@ class CategoriesPresenterTest {
         verify(repository)?.setSelectedCategories(ArgumentMatchers.anyList())
         verify(view)?.goToNextScreen()
     }
+
+    /**
+     * Test onCategory Item clicked
+     */
+    @Test
+    fun onCategoryItemClickedTest() {
+        categoriesPresenter?.onCategoryItemClicked(categoryItem)
+        verify(repository)?.onCategoryClicked(categoryItem)
+    }
 }
