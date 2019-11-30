@@ -160,7 +160,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      *
      * @param errorCode
      */
-    private void handleBadImage(Integer errorCode) {
+    public void handleBadImage(Integer errorCode) {
         Timber.d("Handle bad picture with error code %d", errorCode);
         if (errorCode
                 >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
