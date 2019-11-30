@@ -2,20 +2,24 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -44,6 +48,9 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
@@ -51,6 +58,9 @@ import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.PermissionUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -61,6 +71,8 @@ import org.wikipedia.util.DateUtil;
 import org.wikipedia.util.StringUtil;
 import timber.log.Timber;
 
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -97,8 +109,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     DeleteHelper deleteHelper;
     @Inject
     ViewUtilWrapper viewUtil;
+    @Inject
+    BookmarkPicturesDao bookmarkDao;
+
 
     private int initialListTop = 0;
+    private Bookmark bookmark;
 
     @BindView(R.id.mediaDetailImage)
     SimpleDraweeView image;
@@ -130,6 +146,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     Button delete;
     @BindView(R.id.mediaDetailScrollView)
     ScrollView scrollView;
+    @BindView(R.id.iv_bookmark_icon)
+    ImageView ivBookmarkIcon;
 
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
@@ -276,6 +294,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setTextFields);
         compositeDisposable.add(disposable);
+
+        // Initialize bookmark object
+        bookmark = new Bookmark(
+                media.getFilename(),
+                media.getCreator(),
+                BookmarkPicturesContentProvider.uriForName(media.getFilename())
+        );
+        updateBookmarkState();
+
     }
 
     /**
@@ -443,6 +470,82 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     }
                 }));
 
+    }
+
+    @OnClick(R.id.ll_bookmark)
+    public void onBookMarkClick(){
+        bookmarkDao.updateBookmark(bookmark);
+        updateBookmarkState();
+    }
+
+    private void updateBookmarkState() {
+        boolean isBookmarked = bookmarkDao.findBookmark(bookmark);
+        int icon = isBookmarked ? R.drawable.ic_star_filled_primary_dark_24dp : R.drawable.ic_star_border_primary_dark_24dp;
+        ivBookmarkIcon.setImageResource(icon);
+    }
+
+    @OnClick(R.id.ll_share)
+    public void onShareClick(){
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, media.getDisplayTitle() + " \n" + media.getPageTitle().getCanonicalUri());
+        startActivity(Intent.createChooser(shareIntent, "Share image via..."));
+    }
+
+    @OnClick(R.id.ll_download)
+    public void onDownloadClick(){
+        if (!NetworkUtils.isInternetConnectionEstablished(getActivity())) {
+            ViewUtil.showShortSnackbar(getView(), R.string.no_internet);
+            return;
+        }
+        downloadMedia(media);
+    }
+
+    /**
+     * Start the media file downloading to the local SD card/storage.
+     * The file can then be opened in Gallery or other apps.
+     *
+     * @param m Media file to download
+     */
+    private void downloadMedia(Media m) {
+        String imageUrl = m.getImageUrl(), fileName = m.getFilename();
+
+        if (imageUrl == null
+                || fileName == null
+                || getContext() ==  null
+                || getActivity() == null) {
+            Timber.d("Skipping download media as either imageUrl %s or filename %s activity is null", imageUrl, fileName);
+            return;
+        }
+
+        // Strip 'File:' from beginning of filename, we really shouldn't store it
+        fileName = fileName.replaceFirst("^File:", "");
+
+        Uri imageUri = Uri.parse(imageUrl);
+
+        DownloadManager.Request req = new DownloadManager.Request(imageUri);
+        //These are not the image title and description fields, they are download descs for notifications
+        req.setDescription(getString(R.string.app_name));
+        req.setTitle(m.getDisplayTitle());
+        req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+
+        // Modern Android updates the gallery automatically. Yay!
+        req.allowScanningByMediaScanner();
+        req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        PermissionUtils.checkPermissionsAndPerformAction(getActivity(), WRITE_EXTERNAL_STORAGE,
+                () -> enqueueRequest(req), () -> Toast.makeText(getContext(),
+                        R.string.download_failed_we_cannot_download_the_file_without_storage_permission,
+                        Toast.LENGTH_SHORT).show(), R.string.storage_permission,
+                R.string.write_storage_permission_rationale);
+
+    }
+
+    private void enqueueRequest(DownloadManager.Request req) {
+        DownloadManager systemService =
+                (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
+        if (systemService != null) {
+            systemService.enqueue(req);
+        }
     }
 
     @OnClick(R.id.seeMore)
