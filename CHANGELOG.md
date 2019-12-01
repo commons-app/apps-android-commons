@@ -1,5 +1,12 @@
 # Wikimedia Commons for Android
 
+## v2.12.0
+- Completed codebase overhaul 
+- Added filters for place type and place state to Nearby
+- Switched to using new data client library, aimed at fixing failed uploads
+- Fixed 2FA not working
+- Fixed issues with upload date and deletion notifications
+
 ## v2.11.0
 - Refactored upload process, explore/media details, and peer review to use MVP architecture
 - Refactored all AsyncTasks to use RxAndroid
