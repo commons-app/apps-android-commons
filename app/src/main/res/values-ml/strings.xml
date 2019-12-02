@@ -186,4 +186,9 @@
   <string name="about_translate_cancel">റദ്ദാക്കുക</string>
   <string name="retry">വീണ്ടും ശ്രമിക്കുക</string>
   <string name="ends_on">അവസാനിക്കുന്നത്:</string>
+  <string name="place_state">സ്ഥലത്തിന്റെ സ്ഥിതി:</string>
+  <string name="place_state_exists">നിലവിലുണ്ട്</string>
+  <string name="place_state_needs_photo">ചിത്രം വേണം</string>
+  <string name="place_type">സ്ഥലത്തിന്റെ തരം:</string>
+  <string name="nearby_search_hint">പാലം, മ്യൂസിയം, ഹോട്ടൽ തുടങ്ങിയവ</string>
 </resources>

@@ -549,5 +549,10 @@
   <string name="text_copy">Testu copiáu al cartafueyu</string>
   <string name="notification_mark_read">Notificación marcada como lleida</string>
   <string name="some_error">Hebo dalgún error</string>
+  <string name="place_state">Estáu del llugar:</string>
+  <string name="place_state_exists">Existe</string>
+  <string name="place_state_needs_photo">Precisa foto</string>
+  <string name="place_type">Tipu de llugar:</string>
+  <string name="nearby_search_hint">Ponte, muséu, hotel etc.</string>
   <string name="you_must_reset_your_passsword">¡¡Falló daqué al aniciar sesión, tienes de reaniciar la contraseña!!</string>
 </resources>

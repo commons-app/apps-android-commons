@@ -482,4 +482,5 @@
   <string name="text_copy">텍스트가 클립보드에 복사되었습니다</string>
   <string name="notification_mark_read">알림을 읽은 것으로 표시</string>
   <string name="some_error">오류가 있었습니다!</string>
+  <string name="place_state_needs_photo">사진 필요</string>
 </resources>

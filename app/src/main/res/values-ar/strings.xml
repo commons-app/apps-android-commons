@@ -559,5 +559,10 @@
   <string name="text_copy">تم نسخ النص  إلى الحافظة.</string>
   <string name="notification_mark_read">تم تعليم الإخطار كمقروء</string>
   <string name="some_error">ثمة خطأ ما!</string>
+  <string name="place_state">حالة المكان:</string>
+  <string name="place_state_exists">موجود</string>
+  <string name="place_state_needs_photo">يحتاج صورة</string>
+  <string name="place_type">نوع المكان:</string>
+  <string name="nearby_search_hint">جسر، متحف، فندق، إلخ</string>
   <string name="you_must_reset_your_passsword">حدث خطأ ما عند الدخول، يجب عليك إعادة تعيين كلمة المرور!!</string>
 </resources>
