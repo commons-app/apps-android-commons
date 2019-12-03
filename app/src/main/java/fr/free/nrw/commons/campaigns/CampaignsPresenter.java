@@ -1,7 +1,12 @@
 package fr.free.nrw.commons.campaigns;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
+
 import android.annotation.SuppressLint;
 
+import io.reactivex.Scheduler;
+import javax.inject.Named;
 import org.wikipedia.util.DateUtil;
 
 import java.text.ParseException;
@@ -30,14 +35,18 @@ import timber.log.Timber;
 @Singleton
 public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
     private final OkHttpJsonApiClient okHttpJsonApiClient;
+    private final Scheduler mainThreadScheduler;
+    private final Scheduler ioScheduler;
 
     private ICampaignsView view;
     private Disposable disposable;
     private Campaign campaign;
 
     @Inject
-    public CampaignsPresenter(OkHttpJsonApiClient okHttpJsonApiClient) {
+    public CampaignsPresenter(OkHttpJsonApiClient okHttpJsonApiClient, @Named(IO_THREAD)Scheduler ioScheduler, @Named(MAIN_THREAD)Scheduler mainThreadScheduler) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
+        this.mainThreadScheduler=mainThreadScheduler;
+        this.ioScheduler=ioScheduler;
     }
 
     @Override
@@ -64,8 +73,8 @@ public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
                 return;
             }
             Single<CampaignResponseDTO> campaigns = okHttpJsonApiClient.getCampaigns();
-            campaigns.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+            campaigns.observeOn(mainThreadScheduler)
+                .subscribeOn(ioScheduler)
                 .subscribeWith(new SingleObserver<CampaignResponseDTO>() {
 
                     @Override public void onSubscribe(Disposable d) {
@@ -77,6 +86,7 @@ public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
                         if (campaigns == null || campaigns.isEmpty()) {
                             Timber.e("The campaigns list is empty");
                             view.showCampaigns(null);
+                            return;
                         }
                         Collections.sort(campaigns, (campaign, t1) -> {
                             Date date1, date2;
