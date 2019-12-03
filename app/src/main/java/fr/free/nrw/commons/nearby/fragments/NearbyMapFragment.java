@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.nearby.fragments;
 
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -7,11 +9,9 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -26,13 +26,6 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -48,9 +41,11 @@ import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import javax.inject.Inject;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 /**
  * Support Fragment wrapper around a map view.
@@ -315,24 +310,31 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void addCurrentLocationMarker(LatLng curLatLng) {
-        removeCurrentLocationMarker();
-        Timber.d("Adds current location marker");
+        if (null != curLatLng) {
+            removeCurrentLocationMarker();
+            Timber.d("Adds current location marker");
 
-        Icon icon = IconFactory.getInstance(getContext()).fromResource(R.drawable.current_location_marker);
+            Icon icon = IconFactory.getInstance(getContext())
+                    .fromResource(R.drawable.current_location_marker);
 
-        MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
-                .position(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
-        currentLocationMarkerOptions.setIcon(icon); // Set custom icon
-        currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
+            MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
+                    .position(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(),
+                            curLatLng.getLongitude()));
+            currentLocationMarkerOptions.setIcon(icon); // Set custom icon
+            currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
 
-        List<com.mapbox.mapboxsdk.geometry.LatLng> circle = UiUtils.createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
-                curLatLng.getAccuracy() * 2, 100);
+            List<com.mapbox.mapboxsdk.geometry.LatLng> circle = UiUtils
+                    .createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
+                            curLatLng.getAccuracy() * 2, 100);
 
-        PolygonOptions currentLocationPolygonOptions = new PolygonOptions()
-                .addAll(circle)
-                .strokeColor(getResources().getColor(R.color.current_marker_stroke))
-                .fillColor(getResources().getColor(R.color.current_marker_fill));
-        currentLocationPolygon = mapboxMap.addPolygon(currentLocationPolygonOptions);
+            PolygonOptions currentLocationPolygonOptions = new PolygonOptions()
+                    .addAll(circle)
+                    .strokeColor(getResources().getColor(R.color.current_marker_stroke))
+                    .fillColor(getResources().getColor(R.color.current_marker_fill));
+            currentLocationPolygon = mapboxMap.addPolygon(currentLocationPolygonOptions);
+        } else {
+            Timber.d("not adding current location marker..current location is null");
+        }
     }
 
     @Override
