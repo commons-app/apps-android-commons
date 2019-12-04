@@ -336,6 +336,7 @@
   <string name="successful_wikidata_edit">Image added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set as wallpaper</string>
+  <string name="menu_set_background_color">Change Background color</string>
   <string name="wallpaper_set_successfully">Wallpaper set successfully!</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Is this picture OK to upload?</string>

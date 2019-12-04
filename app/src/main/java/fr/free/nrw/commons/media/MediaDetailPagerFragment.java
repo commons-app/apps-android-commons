@@ -3,6 +3,7 @@ package fr.free.nrw.commons.media;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -173,11 +174,21 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 // Set wallpaper
                 setWallpaper(m);
                 return true;
+            case R.id.menu_change_color_background:
+                //change the background color
+                changeBackGroundColor();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    /**
+     * Set the background color to white
+     */
+    private void changeBackGroundColor(){
+        this.getView().setBackgroundColor(Color.argb(255,255,255,255));
+    }
     /**
      * Set the media as the device's wallpaper if the imageUrl is not null
      * Fails silently if setting the wallpaper fails

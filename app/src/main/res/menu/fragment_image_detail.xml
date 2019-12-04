@@ -26,4 +26,9 @@
         android:title="@string/menu_set_wallpaper"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/menu_change_color_background"
+        android:title="@string/menu_set_background_color"
+        app:showAsAction="never"/>
+
 </menu>
