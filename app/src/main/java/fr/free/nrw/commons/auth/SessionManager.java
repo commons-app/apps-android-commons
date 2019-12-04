@@ -89,6 +89,10 @@ public class SessionManager {
         return currentAccount;
     }
 
+    public boolean doesAccountExist() {
+        return getCurrentAccount() != null;
+    }
+
     @Nullable
     public String getUserName() {
         Account account = getCurrentAccount();

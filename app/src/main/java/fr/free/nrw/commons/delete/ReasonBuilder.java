@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.delete;
 
-import android.accounts.Account;
 import android.content.Context;
 
 import org.wikipedia.util.DateUtil;
@@ -16,7 +15,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
-import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import timber.log.Timber;
 
@@ -26,14 +25,21 @@ public class ReasonBuilder {
     private SessionManager sessionManager;
     private OkHttpJsonApiClient okHttpJsonApiClient;
     private Context context;
+    private ViewUtilWrapper viewUtilWrapper;
 
     @Inject
     public ReasonBuilder(Context context,
                          SessionManager sessionManager,
-                         OkHttpJsonApiClient okHttpJsonApiClient) {
+                         OkHttpJsonApiClient okHttpJsonApiClient,
+                         ViewUtilWrapper viewUtilWrapper) {
         this.context = context;
         this.sessionManager = sessionManager;
         this.okHttpJsonApiClient = okHttpJsonApiClient;
+        this.viewUtilWrapper = viewUtilWrapper;
+    }
+
+    public Single<String> getReason(Media media, String reason) {
+        return fetchArticleNumber(media, reason);
     }
 
     private String prettyUploadedDate(Media media) {
@@ -47,7 +53,7 @@ public class ReasonBuilder {
     private Single<String> fetchArticleNumber(Media media, String reason) {
         if (checkAccount()) {
             return okHttpJsonApiClient
-                    .getAchievements(sessionManager.getCurrentAccount().name)
+                    .getAchievements(sessionManager.getUserName())
                     .map(feedbackResponse -> appendArticlesUsed(feedbackResponse, media, reason));
         }
         return Single.just("");
@@ -60,20 +66,14 @@ public class ReasonBuilder {
         return reason;
     }
 
-
-    public Single<String> getReason(Media media, String reason) {
-        return fetchArticleNumber(media, reason);
-    }
-
     /**
      * check to ensure that user is logged in
      * @return
      */
     private boolean checkAccount(){
-        Account currentAccount = sessionManager.getCurrentAccount();
-        if(currentAccount == null) {
+        if (!sessionManager.doesAccountExist()) {
             Timber.d("Current account is null");
-            ViewUtil.showLongToast(context, context.getResources().getString(R.string.user_not_logged_in));
+            viewUtilWrapper.showLongToast(context, context.getResources().getString(R.string.user_not_logged_in));
             sessionManager.forceLogin(context);
             return false;
         }
