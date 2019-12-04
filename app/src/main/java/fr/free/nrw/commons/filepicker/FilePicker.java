@@ -12,10 +12,11 @@ import android.net.Uri;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import android.text.TextUtils;
 
 import java.io.File;
 import java.io.IOException;

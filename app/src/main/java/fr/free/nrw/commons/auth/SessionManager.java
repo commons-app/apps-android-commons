@@ -9,8 +9,6 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipeline;
 import org.wikipedia.login.LoginResult;
 
 import javax.inject.Inject;

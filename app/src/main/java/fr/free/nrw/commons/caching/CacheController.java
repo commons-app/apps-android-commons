@@ -10,7 +10,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.upload.GpsCategoryModel;
 import timber.log.Timber;
 
 @Singleton

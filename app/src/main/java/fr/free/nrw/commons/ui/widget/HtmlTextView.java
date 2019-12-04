@@ -1,9 +1,10 @@
 package fr.free.nrw.commons.ui.widget;
 
 import android.content.Context;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 import org.wikipedia.util.StringUtil;
 

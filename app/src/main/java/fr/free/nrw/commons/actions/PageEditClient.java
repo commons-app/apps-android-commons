@@ -4,7 +4,6 @@ import org.wikipedia.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.Service;
 
 import io.reactivex.Observable;
-import timber.log.Timber;
 
 public class PageEditClient {
 

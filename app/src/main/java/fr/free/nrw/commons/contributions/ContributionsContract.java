@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
 import android.database.Cursor;
+
 import androidx.loader.app.LoaderManager;
+
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.Media;
 

@@ -3,10 +3,9 @@ package fr.free.nrw.commons.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import android.util.DisplayMetrics;
 
-import com.mapbox.mapboxsdk.geometry.LatLng;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import java.util.ArrayList;
 import java.util.List;

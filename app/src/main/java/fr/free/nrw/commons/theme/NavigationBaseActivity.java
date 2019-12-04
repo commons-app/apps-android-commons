@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.theme;
 
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_WIKI_SITE;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.ActivityManager;
@@ -11,13 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,10 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import fr.free.nrw.commons.auth.LogoutClient;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
+
+import org.wikipedia.dataclient.Service;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -40,6 +38,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.achievements.AchievementsActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.auth.LogoutClient;
 import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
@@ -47,8 +46,9 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
-import org.wikipedia.dataclient.Service;
-import org.wikipedia.dataclient.WikiSite;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public abstract class NavigationBaseActivity extends BaseActivity

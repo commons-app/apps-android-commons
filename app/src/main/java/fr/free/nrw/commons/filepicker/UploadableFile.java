@@ -7,8 +7,8 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.exifinterface.media.ExifInterface;
 import androidx.annotation.Nullable;
+import androidx.exifinterface.media.ExifInterface;
 
 import java.io.File;
 import java.io.IOException;

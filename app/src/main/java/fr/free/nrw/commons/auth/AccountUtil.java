@@ -5,6 +5,7 @@ import android.accounts.AccountManager;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
+
 import fr.free.nrw.commons.BuildConfig;
 import timber.log.Timber;
 
