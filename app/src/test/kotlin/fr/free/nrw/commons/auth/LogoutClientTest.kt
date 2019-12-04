@@ -1,13 +1,12 @@
 package fr.free.nrw.commons.auth
 
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockitokotlin2.verify
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.wikipedia.dataclient.Service
@@ -29,8 +28,8 @@ class LogoutClientTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        val mwQueryResponse = Mockito.mock(MwQueryResponse::class.java)
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
+        val mwQueryResponse = mock(MwQueryResponse::class.java)
+        val mwQueryResult = mock(MwQueryResult::class.java)
         `when`(mwQueryResult!!.csrfToken()).thenReturn("test_token")
         `when`(mwQueryResponse.query()).thenReturn(mwQueryResult)
         `when`(service!!.csrfToken)

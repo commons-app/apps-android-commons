@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.wikidata
 
 import android.content.Context
-import com.nhaarman.mockito_kotlin.verifyZeroInteractions
+import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.wikidata.model.AddEditTagResponse
 import io.reactivex.Observable
