@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -104,6 +105,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         return view;
     }
 
+
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -175,7 +178,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 setWallpaper(m);
                 return true;
             case R.id.menu_change_color_background:
-                //change the background color
+                //Toast.makeText(getActivity(), getActivity().toString(), Toast.LENGTH_SHORT).show();
                 changeBackGroundColor();
                 return true;
             default:
@@ -187,8 +190,19 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * Set the background color to white
      */
     private void changeBackGroundColor(){
-        this.getView().setBackgroundColor(Color.argb(255,255,255,255));
+        FrameLayout fl = findViewById(R.id.layout_image);
+
+        //Fragment frag = getFragmentManager().findFragmentById(R.id.fragment_media_detail);
+        //frag.getView().setBackgroundColor(Color.WHITE);
+
+        //getActivity().get
+        //pager.setBackgroundColor(Color.WHITE);
+        //getActivity().setContentView(getActivity().getWindow().getDecorView().setBackgroundColor(Color.WHITE));
+        //getParentFragment().getView().setBackgroundColor(Color.WHITE);
+        //getActivity().getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+        //this.getView().setBackgroundColor();
     }
+
     /**
      * Set the media as the device's wallpaper if the imageUrl is not null
      * Fails silently if setting the wallpaper fails
