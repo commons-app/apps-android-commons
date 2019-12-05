@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.nearby.fragments;
 
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,9 +7,11 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -26,6 +26,13 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.inject.Inject;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -41,11 +48,9 @@ import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import javax.inject.Inject;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 /**
  * Support Fragment wrapper around a map view.
@@ -78,15 +83,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
     private static final double ZOOM_LEVEL = 14f;
-
-    /**
-     * Creates a default MapFragment instance
-     *
-     * @return MapFragment created
-     */
-    public static NearbyMapFragment newInstance() {
-        return new NearbyMapFragment();
-    }
 
     /**
      * Creates a MapFragment instance

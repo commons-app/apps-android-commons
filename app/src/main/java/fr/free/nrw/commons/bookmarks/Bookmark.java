@@ -40,11 +40,4 @@ public class Bookmark {
         return contentUri;
     }
 
-    /**
-     * Modifies the content URI - marking this bookmark as already saved in the database
-     * @param contentUri the content URI
-     */
-    public void setContentUri(Uri contentUri) {
-        this.contentUri = contentUri;
-    }
 }

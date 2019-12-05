@@ -2,36 +2,26 @@ package fr.free.nrw.commons.achievements;
 
 public class FeedbackResponse {
 
-    private final String status;
     private final int uniqueUsedImages;
     private final int articlesUsingImages;
     private final int deletedUploads;
     private final FeaturedImages featuredImages;
     private final int thanksReceived;
     private final String user;
-    private final int imagesEditedBySomeoneElse;
 
 
-    public FeedbackResponse(String status,
-                            int uniqueUsedImages,
+    public FeedbackResponse(int uniqueUsedImages,
                             int articlesUsingImages,
                             int deletedUploads,
                             FeaturedImages featuredImages,
                             int thanksReceived,
-                            String user,
-                            int imagesEditedBySomeoneElse) {
-        this.status = status;
+                            String user) {
         this.uniqueUsedImages = uniqueUsedImages;
         this.articlesUsingImages = articlesUsingImages;
         this.deletedUploads = deletedUploads;
         this.featuredImages = featuredImages;
         this.thanksReceived = thanksReceived;
         this.user = user;
-        this.imagesEditedBySomeoneElse = imagesEditedBySomeoneElse;
-    }
-
-    public String getStatus() {
-        return status;
     }
 
     public int getUniqueUsedImages() {
@@ -58,7 +48,4 @@ public class FeedbackResponse {
         return user;
     }
 
-    public int getImagesEditedBySomeoneElse() {
-        return imagesEditedBySomeoneElse;
-    }
 }
