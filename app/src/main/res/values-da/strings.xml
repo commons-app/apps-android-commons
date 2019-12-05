@@ -383,4 +383,6 @@
   <string name="delete_helper_ask_spam_other">Andet</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Vilkårligt billede fra internettet</string>
   <string name="delete_helper_ask_reason_copyright_other">Andet</string>
+  <string name="place_state_exists">Findes</string>
+  <string name="nearby_search_hint">Bro, museum, hotel, osv.</string>
 </resources>

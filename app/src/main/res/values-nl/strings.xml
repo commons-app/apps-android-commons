@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* A67-A67
 * Abijeet Patro
 * Bouman4
 * Elroy
@@ -200,17 +201,37 @@
   <string name="no_description_found">geen beschrijving gevonden</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artikel</string>
   <string name="error_while_cache">Error tijdens het laden van de afbeeldingen</string>
+  <string name="upload_problem_image_dark">Afbeelding is te donker.</string>
+  <string name="upload_problem_image_blurry">Afbeelding is onscherp.</string>
+  <string name="upload_problem_image_duplicate">Afbeelding staat al in Commons.</string>
+  <string name="upload_problem_different_geolocation">Deze foto is op een andere locatie genomen.</string>
+  <string name="upload_problem_fbmd">Upload alleen foto\'s die je zelf hebt genomen. Upload geen foto\'s die je op Facebookaccounts van anderen hebt gevonden.</string>
+  <string name="upload_problem_do_you_continue">Wil je deze afbeelding nog steeds uploaden?</string>
+  <string name="internet_downloaded">Upload alleen foto\'s die je zelf hebt genomen. Upload geen foto\'s die je van internet hebt gedownload.</string>
+  <string name="give_permission">Geef toestemming</string>
+  <string name="use_external_storage">Gebruik externe opslag</string>
   <string name="login_to_your_account">Aanmelden bij je profiel</string>
   <string name="send_log_file">Logboekbestand verzenden</string>
+  <string name="no_web_browser">Geen webbrowser gevonden om URL te openen</string>
+  <string name="null_url">Fout! URL niet gevonden</string>
   <string name="nominate_deletion">Nomineer voor Verwijdering</string>
   <string name="nominated_for_deletion">Deze afbeelding is genomineerd voor verwijdering.</string>
+  <string name="nominated_see_more">&lt;u&gt;Zie webpagina voor details&lt;/u&gt;</string>
   <string name="view_browser">Bekijk in Browser</string>
   <string name="skip_login">Overslaan</string>
   <string name="navigation_item_login">Aanmelden</string>
   <string name="skip_login_title">Weet je zeker dat je het aanmelden wilt overslaan?</string>
   <string name="skip_login_message" fuzzy="true">Je kunt dan geen afbeeldingen plaatsen.</string>
   <string name="login_alert_message">Meld je aan om deze functie te gebruiken</string>
-  <string name="nearby_directions" fuzzy="true">VERWIJZINGEN</string>
+  <string name="copy_wikicode">Kopieer de wikitekst naar het klembord</string>
+  <string name="wikicode_copied">De wikitekst is gekopieerd naar het klembord</string>
+  <string name="nearby_location_has_not_changed">Locatie is niet veranderd.</string>
+  <string name="nearby_location_not_available">Locatie niet beschikbaar.</string>
+  <string name="location_permission_rationale_nearby">Toestemming vereist om een lijst van nabije plaatsen weer te geven</string>
+  <string name="read_article">Lees artikel</string>
+  <string name="notifications_welcome">Welkom bij Wikimedia Commons, %1$s! We zijn blij dat je hier bent.</string>
+  <string name="notifications_talk_page_message">%1$s heeft een bericht op je overlegpagina achtergelaten</string>
+  <string name="nearby_directions">VERWIJZINGEN</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>

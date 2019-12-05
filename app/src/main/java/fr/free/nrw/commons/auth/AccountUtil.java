@@ -11,7 +11,6 @@ import timber.log.Timber;
 
 public class AccountUtil {
 
-    public static final String AUTH_COOKIE = "authCookie";
     public static final String AUTH_TOKEN_TYPE = "CommonsAndroid";
 
     public AccountUtil() {
@@ -37,12 +36,6 @@ public class AccountUtil {
     public static String getUserName(Context context) {
         Account account = account(context);
         return account == null ? null : account.name;
-    }
-
-    @Nullable
-    public static String getPassword(Context context) {
-        Account account = account(context);
-        return account == null ? null : accountManager(context).getPassword(account);
     }
 
     private static AccountManager accountManager(Context context) {

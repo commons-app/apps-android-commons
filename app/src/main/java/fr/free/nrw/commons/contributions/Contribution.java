@@ -118,10 +118,6 @@ public class  Contribution extends Media {
         parcel.writeInt(isMultiple ? 1 : 0);
     }
 
-    public String getDateCreatedSource() {
-        return dateCreatedSource;
-    }
-
     public void setDateCreatedSource(String dateCreatedSource) {
         this.dateCreatedSource = dateCreatedSource;
     }
@@ -239,14 +235,6 @@ public class  Contribution extends Media {
         this.source = source;
     }
 
-    public void setLocalUri(Uri localUri) {
-        this.localUri = localUri;
-    }
-
-    public void setDecimalCoords(String decimalCoords) {
-        this.decimalCoords = decimalCoords;
-    }
-
     @NonNull
     private String licenseTemplateFor(String license) {
         switch (license) {
@@ -282,7 +270,4 @@ public class  Contribution extends Media {
         this.contentProviderUri = contentProviderUri;
     }
 
-    public Uri getContentProviderUri() {
-        return contentProviderUri;
-    }
 }

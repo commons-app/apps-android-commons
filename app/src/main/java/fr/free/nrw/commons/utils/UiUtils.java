@@ -38,17 +38,6 @@ public class UiUtils {
     }
 
     /**
-     * Converts device specific pixels to dp.
-     * @param px pixels
-     * @param context Context to access display metrics
-     * @return dp equivalent to px value
-     */
-    public static float convertPixelsToDp(float px, Context context) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return px / ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-    }
-
-    /**
      * Creates a series of points that create a circle on the map.
      * Takes the center latitude, center longitude of the circle,
      * the radius in meter and the number of nodes of the circle.

@@ -110,16 +110,6 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
         return bundle;
     }
 
-    private Bundle unsupportedOperation() {
-        Bundle bundle = new Bundle();
-        bundle.putInt(AccountManager.KEY_ERROR_CODE, AccountManager.ERROR_CODE_UNSUPPORTED_OPERATION);
-
-        // HACK: the docs indicate that this is a required key bit it's not displayed to the user.
-        bundle.putString(AccountManager.KEY_ERROR_MESSAGE, "");
-
-        return bundle;
-    }
-
     @Override
     public Bundle getAccountRemovalAllowed(AccountAuthenticatorResponse response,
                                            Account account) throws NetworkErrorException {

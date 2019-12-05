@@ -85,15 +85,6 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
     private static final double ZOOM_LEVEL = 14f;
 
     /**
-     * Creates a default MapFragment instance
-     *
-     * @return MapFragment created
-     */
-    public static NearbyMapFragment newInstance() {
-        return new NearbyMapFragment();
-    }
-
-    /**
      * Creates a MapFragment instance
      *
      * @param mapboxMapOptions The configuration options to be used.

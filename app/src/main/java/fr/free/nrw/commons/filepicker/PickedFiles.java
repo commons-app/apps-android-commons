@@ -101,11 +101,9 @@ class PickedFiles implements Constants {
 
         MediaScannerConnection.scanFile(context,
                 paths, null,
-                new MediaScannerConnection.OnScanCompletedListener() {
-                    public void onScanCompleted(String path, Uri uri) {
-                        Timber.d("Scanned " + path + ":");
-                        Timber.d("-> uri=%s", uri);
-                    }
+                (path, uri) -> {
+                    Timber.d("Scanned " + path + ":");
+                    Timber.d("-> uri=%s", uri);
                 });
     }
 
@@ -121,11 +119,6 @@ class PickedFiles implements Constants {
     static File getCameraPicturesLocation(@NonNull Context context) throws IOException {
         File dir = tempImageDirectory(context);
         return File.createTempFile(UUID.randomUUID().toString(), ".jpg", dir);
-    }
-
-    static File getCameraVideoLocation(@NonNull Context context) throws IOException {
-        File dir = tempImageDirectory(context);
-        return File.createTempFile(UUID.randomUUID().toString(), ".mp4", dir);
     }
 
     /**

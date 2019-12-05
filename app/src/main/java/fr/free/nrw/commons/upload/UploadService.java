@@ -46,7 +46,6 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
     public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
     public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
-    public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
     @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
@@ -67,7 +66,6 @@ public class UploadService extends HandlerService<Contribution> {
     // See http://stackoverflow.com/questions/8725909/startforeground-does-not-show-my-notification
     // Seriously, Android?
     public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
-    public static final int NOTIFICATION_UPLOAD_COMPLETE = 2;
     public static final int NOTIFICATION_UPLOAD_FAILED = 3;
 
     public UploadService() {

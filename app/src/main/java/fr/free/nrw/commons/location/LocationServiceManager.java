@@ -15,7 +15,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
-    public static final int LOCATION_REQUEST = 1;
 
     // Maybe these values can be improved for efficiency
     private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 100;
@@ -94,7 +93,6 @@ public class LocationServiceManager implements LocationListener {
         // Check whether the new location fix is newer or older
         long timeDelta = location.getTime() - currentBestLocation.getTime();
         boolean isSignificantlyNewer = timeDelta > MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
-        boolean isSignificantlyOlder = timeDelta < -MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
         boolean isNewer = timeDelta > 0;
 
         // Check whether the new location fix is more or less accurate
