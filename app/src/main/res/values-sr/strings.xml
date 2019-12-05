@@ -9,6 +9,7 @@
 * Rancher
 * Vukasin005
 * Zoranzoki21
+* Вукан Ц
 * Милан Јелисавчић
 -->
 <resources>
@@ -520,4 +521,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Остало</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
+  <string name="place_state_exists">Постоји</string>
+  <string name="place_state_needs_photo">Потребна слика</string>
+  <string name="nearby_search_hint">Мост, музеј, хотел итд.</string>
 </resources>
