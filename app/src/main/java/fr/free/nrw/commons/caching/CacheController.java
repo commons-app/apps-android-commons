@@ -23,8 +23,8 @@ public class CacheController {
     private static final int EARTH_RADIUS = 6378137;
 
     @Inject
-    CacheController() {
-        quadTree = new QuadTree<>(-180, -90, +180, +90);
+    public CacheController(QuadTree quadTree) {
+        this.quadTree = quadTree;
     }
 
     public void setQtPoint(double decLongitude, double decLatitude) {

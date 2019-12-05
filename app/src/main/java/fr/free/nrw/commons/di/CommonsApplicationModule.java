@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.collection.LruCache;
 
+import com.github.varunpant.quadtree.QuadTree;
 import com.google.gson.Gson;
 
 import org.wikipedia.AppAdapter;
@@ -26,6 +27,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -196,5 +198,15 @@ public class CommonsApplicationModule {
     @Provides
     public String provideLoggedInUsername() {
         return Objects.toString(AppAdapter.get().getUserName(), "");
+    }
+
+    /**
+     * Provides quad tree
+     *
+     * @return
+     */
+    @Provides
+    public QuadTree providesQuadTres() {
+        return new QuadTree<>(-180, -90, +180, +90);
     }
 }
