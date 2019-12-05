@@ -5,9 +5,10 @@ import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
+import android.webkit.MimeTypeMap;
+
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
-import android.webkit.MimeTypeMap;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -100,11 +101,9 @@ class PickedFiles implements Constants {
 
         MediaScannerConnection.scanFile(context,
                 paths, null,
-                new MediaScannerConnection.OnScanCompletedListener() {
-                    public void onScanCompleted(String path, Uri uri) {
-                        Timber.d("Scanned " + path + ":");
-                        Timber.d("-> uri=%s", uri);
-                    }
+                (path, uri) -> {
+                    Timber.d("Scanned " + path + ":");
+                    Timber.d("-> uri=%s", uri);
                 });
     }
 
@@ -120,11 +119,6 @@ class PickedFiles implements Constants {
     static File getCameraPicturesLocation(@NonNull Context context) throws IOException {
         File dir = tempImageDirectory(context);
         return File.createTempFile(UUID.randomUUID().toString(), ".jpg", dir);
-    }
-
-    static File getCameraVideoLocation(@NonNull Context context) throws IOException {
-        File dir = tempImageDirectory(context);
-        return File.createTempFile(UUID.randomUUID().toString(), ".mp4", dir);
     }
 
     /**

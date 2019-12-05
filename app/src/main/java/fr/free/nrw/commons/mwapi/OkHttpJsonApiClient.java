@@ -2,31 +2,26 @@ package fr.free.nrw.commons.mwapi;
 
 import android.text.TextUtils;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import fr.free.nrw.commons.Media;
+
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import okhttp3.HttpUrl;
@@ -35,8 +30,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+
 import timber.log.Timber;
 
 /**
@@ -166,7 +160,7 @@ public class OkHttpJsonApiClient {
                 try {
                     return gson.fromJson(json, FeedbackResponse.class);
                 } catch (Exception e) {
-                    return new FeedbackResponse("", 0, 0, 0, new FeaturedImages(0, 0), 0, "", 0);
+                    return new FeedbackResponse(0, 0, 0, new FeaturedImages(0, 0), 0, "");
                 }
 
 
