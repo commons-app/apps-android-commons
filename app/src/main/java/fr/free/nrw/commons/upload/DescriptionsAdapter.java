@@ -126,8 +126,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
             }
 
             descItemEditText.addTextChangedListener(new AbstractTextWatcher(
-                    descriptionText -> descriptions.get(position)
-                            .setDescriptionText(descriptionText)));
+                    descriptionText -> descriptions.get(position).setDescriptionText(descriptionText)));
             initLanguageSpinner(position, description);
 
             //If the description was manually added by the user, it deserves focus, if not, let the user decide

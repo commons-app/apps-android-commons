@@ -4,7 +4,7 @@ import android.content.ContentProviderClient
 import android.content.Context
 import androidx.collection.LruCache
 import com.google.gson.Gson
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.mock
 import com.squareup.leakcanary.RefWatcher
 import fr.free.nrw.commons.auth.AccountUtil
 import fr.free.nrw.commons.data.DBOpenHelper

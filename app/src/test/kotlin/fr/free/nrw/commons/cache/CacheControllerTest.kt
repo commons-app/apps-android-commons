@@ -2,13 +2,13 @@ package fr.free.nrw.commons.cache
 
 import com.github.varunpant.quadtree.Point
 import com.github.varunpant.quadtree.QuadTree
-import com.nhaarman.mockito_kotlin.verify
 import fr.free.nrw.commons.caching.CacheController
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 class CacheControllerTest {

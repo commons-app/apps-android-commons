@@ -122,7 +122,7 @@ class UploadMediaPresenterTest {
         Mockito.`when`(repository?.getPreviousUploadItem(ArgumentMatchers.anyInt())).thenReturn(uploadItem)
         Mockito.`when`(uploadItem?.descriptions).thenReturn(descriptions)
         Mockito.`when`(uploadItem?.title).thenReturn(title)
-        Mockito.`when`(title?.titleText).thenReturn(ArgumentMatchers.anyString())
+        Mockito.`when`(title?.getTitleText()).thenReturn(ArgumentMatchers.anyString())
 
         uploadMediaPresenter?.fetchPreviousTitleAndDescription(0)
         verify(view)?.setTitleAndDescription(ArgumentMatchers.anyString(),ArgumentMatchers.any())

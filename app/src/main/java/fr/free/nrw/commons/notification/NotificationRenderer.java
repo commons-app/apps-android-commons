@@ -63,8 +63,8 @@ public class NotificationRenderer extends Renderer<Notification> {
     @Override
     public void render() {
         Notification notification = getContent();
-        setTitle(notification.notificationText);
-        time.setText(notification.date);
+        setTitle(notification.getNotificationText());
+        time.setText(notification.getDate());
     }
 
     /**
