@@ -4,7 +4,7 @@
   android:id="@+id/rl_container_categories"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:padding="16dp"
+  android:padding="@dimen/standard_gap"
   >
   <LinearLayout
     android:layout_width="match_parent"
@@ -89,7 +89,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:padding="16dp"
+    android:padding="@dimen/standard_gap"
     android:orientation="horizontal"
     >
     <androidx.appcompat.widget.AppCompatButton

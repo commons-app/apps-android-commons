@@ -17,8 +17,8 @@
 
   <ImageView
     android:id="@+id/iv_error"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
+    android:layout_width="@dimen/iv_error_size"
+    android:layout_height="@dimen/iv_error_size"
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
     android:layout_gravity="end"

@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="2dp"
+    android:padding="@dimen/gap"
     android:paddingBottom="0dp"
     >
 
@@ -12,7 +12,7 @@
         android:id="@+id/categoryImagesSequenceNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="98sp"
+        android:textSize="@dimen/category_images_sequence_number_text_size"
         android:textColor="#33FFFFFF"
         android:typeface="serif"
         android:layout_gravity="end|bottom"

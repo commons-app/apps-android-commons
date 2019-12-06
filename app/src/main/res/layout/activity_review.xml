@@ -23,10 +23,10 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_gravity="center_horizontal"
-              android:paddingLeft="12dp"
-              android:paddingRight="12dp"
+              android:paddingLeft="@dimen/medium_gap"
+              android:paddingRight="@dimen/medium_gap"
               android:drawableEnd="@drawable/ic_info_outline_24dp"
-              android:drawablePadding="12dp"
+              android:drawablePadding="@dimen/medium_gap"
               android:drawableTint="@color/button_blue_dark"
               android:text="@string/skip_image"
               android:textColor="@color/button_blue_dark"
@@ -47,7 +47,7 @@
                       android:layout_width="match_parent"
                       android:layout_height="0dp"
                       android:layout_weight="1"
-                      android:layout_marginTop="5dp"
+                      android:layout_marginTop="@dimen/small_gap"
                       >
 
                     <com.facebook.drawee.view.SimpleDraweeView
@@ -100,10 +100,10 @@
                   android:id="@+id/rl_container_bottom_view"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:padding="12dp"
+                  android:padding="@dimen/medium_gap"
                   android:layout_alignParentBottom="true"
                   android:background="?attr/colorPrimaryDark"
-                  android:elevation="2dp">
+                  android:elevation="@dimen/elevation">
                     <com.viewpagerindicator.CirclePageIndicator
                       android:id="@+id/pager_indicator_review"
                       android:layout_width="match_parent"

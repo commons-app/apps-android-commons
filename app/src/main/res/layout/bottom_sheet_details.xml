@@ -21,23 +21,23 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="16dp">
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginLeft="@dimen/standard_gap">
         </ImageView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginLeft="@dimen/standard_gap"
+            android:layout_marginRight="@dimen/standard_gap">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/normal_text"
                 android:layout_marginRight="50dp"
                 android:maxLines="2"
                 android:ellipsize="end"
@@ -46,14 +46,14 @@
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp" />
+                android:textSize="@dimen/description_text_size" />
         </LinearLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="7dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="@dimen/small_gap"
         android:background="@android:color/darker_gray"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,7 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="@dimen/standard_gap"
             android:clickable="true"
             android:orientation="vertical"
             android:background="@drawable/button_background_selector"
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bookmarkButtonText"
-                android:paddingTop="8dp"
+                android:paddingTop="@dimen/small_gap"
                 android:layout_gravity="center_horizontal"
                 android:text="CAMERA"
                 android:visibility="gone"
@@ -94,7 +94,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="@dimen/standard_gap"
             android:clickable="true"
             android:background="@drawable/button_background_selector"
             android:orientation="vertical"
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/directionsButtonText"
-                android:paddingTop="8dp"
+                android:paddingTop="@dimen/small_gap"
                 android:duplicateParentState="true"
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
@@ -124,7 +124,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="@dimen/standard_gap"
             android:clickable="true"
             android:background="@drawable/button_background_selector"
             android:orientation="vertical"
@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/wikidataButtonText"
-                android:paddingTop="8dp"
+                android:paddingTop="@dimen/small_gap"
                 android:duplicateParentState="true"
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
@@ -154,7 +154,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="@dimen/standard_gap"
             android:clickable="true"
             android:background="@drawable/button_background_selector"
             android:orientation="vertical"
@@ -171,7 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/wikipediaButtonText"
-                android:paddingTop="8dp"
+                android:paddingTop="@dimen/small_gap"
                 android:duplicateParentState="true"
                 android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
@@ -185,7 +185,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="@dimen/standard_gap"
             android:clickable="true"
             android:background="@drawable/button_background_selector"
             android:orientation="vertical"

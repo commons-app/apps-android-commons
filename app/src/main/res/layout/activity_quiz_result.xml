@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="@dimen/corner_radius_large"
         android:layout_marginBottom="@dimen/activity_margin_vertical"
         android:layout_marginLeft="@dimen/activity_margin_horizontal"
         android:layout_marginRight="@dimen/activity_margin_horizontal"
@@ -40,7 +40,7 @@
                         android:layout_gravity="center_horizontal"
                         android:text="@string/result"
                         style="?android:textAppearanceLarge"
-                        android:textSize="32sp"
+                        android:textSize="@dimen/result_text_size"
                         android:layout_marginTop="@dimen/activity_margin_vertical" />
 
                     <com.dinuscxj.progressbar.CircleProgressBar
@@ -53,7 +53,7 @@
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
                         app:progress_stroke_width="15dp"
-                        app:progress_text_size="32dp"
+                        app:progress_text_size="@dimen/result_text_size"
                         app:progress_text_format_pattern="4/5"
                         app:style="solid_line"
                         android:id="@+id/result_progress_bar"/>
@@ -73,7 +73,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:layout_width="150dp"
+                    android:layout_width="@dimen/quiz_result_next_width"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/activity_margin_horizontal"

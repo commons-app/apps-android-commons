@@ -13,69 +13,70 @@
 
             <include layout="@layout/toolbar"/>
 
-            <androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/small_gap"
+            android:layout_marginTop="@dimen/small_gap"
+            android:layout_marginRight="@dimen/small_gap"
+            android:layout_marginBottom="@dimen/small_gap"
+            app:cardCornerRadius="@dimen/small_gap"
+            app:cardElevation="@dimen/elevation"
+            app:cardUseCompatPadding="true">
+
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:cardCornerRadius="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                app:cardUseCompatPadding="true">
+                android:layout_height="match_parent">
 
-                <ScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:isScrollContainer="true"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/question_title"
+                        style="?android:textAppearanceLarge"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:isScrollContainer="true">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_margin_vertical"
+                        android:layout_marginBottom="@dimen/activity_margin_vertical"
+                        android:gravity="center_horizontal"
+                        android:text="@string/question" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/question_title"
-                            android:text="@string/question"
-                            style="?android:textAppearanceLarge"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/activity_margin_vertical"
-                            android:layout_marginBottom="@dimen/activity_margin_vertical" />
+                    <include
+                        android:id="@+id/question"
+                        layout="@layout/question_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_margin_vertical"
+                        android:layout_marginBottom="@dimen/activity_margin_vertical" />
 
-                        <include
-                            android:id="@+id/question"
-                            layout="@layout/question_layout"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:layout_marginTop="@dimen/activity_margin_vertical"
-                            android:layout_marginBottom="@dimen/activity_margin_vertical" />
-
-                        <include
-                            android:id="@+id/answer"
-                            layout="@layout/answer_layout"
-                            android:layout_marginTop="@dimen/activity_margin_vertical"
-                            android:layout_marginBottom="@dimen/activity_margin_vertical"
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content" />
+                    <include
+                        android:id="@+id/answer"
+                        layout="@layout/answer_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_margin_vertical"
+                        android:layout_marginBottom="@dimen/activity_margin_vertical" />
 
 
                     <Button
+                        android:id="@+id/next_button"
+                        style="?android:textAppearanceMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/next_button"
-                        android:layout_gravity="right"
-                        style="?android:textAppearanceMedium"
-                        android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="right"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginRight="@dimen/activity_margin_horizontal"
-                        android:text="NEXT"
+                        android:layout_marginBottom="@dimen/activity_margin_vertical"
                         android:backgroundTint="#D6DCE0"
-                        android:layout_marginBottom="@dimen/activity_margin_vertical" />
+                        android:text="NEXT" />
 
-                    </LinearLayout>
-                </ScrollView>
-            </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
         </LinearLayout>
 </RelativeLayout>

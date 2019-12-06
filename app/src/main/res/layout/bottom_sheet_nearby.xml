@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
+        android:layout_marginTop="@dimen/small_gap"
+        android:textSize="@dimen/subheading_text_size"
         app:layout_constraintTop_toBottomOf="@+id/progress_bar"
         android:text="Loading..."
         />
@@ -42,10 +42,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusableInTouchMode="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginBottom="@dimen/small_gap"
+        android:layout_marginTop="@dimen/small_gap"
         android:visibility="gone" />
 
 </LinearLayout>
