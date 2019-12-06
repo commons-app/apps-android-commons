@@ -2,8 +2,6 @@ package fr.free.nrw.commons.notification;
 
 import org.wikipedia.util.DateUtil;
 
-import fr.free.nrw.commons.utils.CommonsDateUtil;
-
 /**
  * Created by root on 18.12.2017.
  */

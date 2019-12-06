@@ -8,7 +8,6 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.Description;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
-import fr.free.nrw.commons.upload.Title;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 
 /**

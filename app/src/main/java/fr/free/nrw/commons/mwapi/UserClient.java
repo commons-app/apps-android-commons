@@ -1,21 +1,17 @@
 package fr.free.nrw.commons.mwapi;
 
-import java.util.Collections;
-
-import javax.inject.Inject;
-
-import io.reactivex.Observable;
-
 import org.wikipedia.dataclient.mwapi.MwQueryLogEvent;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import org.wikipedia.dataclient.mwapi.MwQueryResult;
 import org.wikipedia.dataclient.mwapi.UserInfo;
 import org.wikipedia.util.DateUtil;
 
+import java.util.Collections;
 import java.util.Date;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public class UserClient {

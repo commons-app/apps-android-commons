@@ -4,9 +4,9 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.apache.commons.lang3.StringUtils;
-
 import androidx.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;

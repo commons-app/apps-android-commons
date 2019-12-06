@@ -4,17 +4,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
 
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.util.DateUtil;
-
-import java.lang.annotation.Retention;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.annotation.Retention;
+import java.util.Date;
+import java.util.Locale;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.filepicker.UploadableFile;

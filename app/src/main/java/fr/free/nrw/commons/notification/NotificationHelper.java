@@ -5,10 +5,11 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.core.app.NotificationCompat;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.core.app.NotificationCompat;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 

@@ -2,7 +2,23 @@ package fr.free.nrw.commons.upload;
 
 import timber.log.Timber;
 
-import static androidx.exifinterface.media.ExifInterface.*;
+import static androidx.exifinterface.media.ExifInterface.TAG_ARTIST;
+import static androidx.exifinterface.media.ExifInterface.TAG_BODY_SERIAL_NUMBER;
+import static androidx.exifinterface.media.ExifInterface.TAG_CAMARA_OWNER_NAME;
+import static androidx.exifinterface.media.ExifInterface.TAG_COPYRIGHT;
+import static androidx.exifinterface.media.ExifInterface.TAG_GPS_ALTITUDE;
+import static androidx.exifinterface.media.ExifInterface.TAG_GPS_ALTITUDE_REF;
+import static androidx.exifinterface.media.ExifInterface.TAG_GPS_LATITUDE;
+import static androidx.exifinterface.media.ExifInterface.TAG_GPS_LATITUDE_REF;
+import static androidx.exifinterface.media.ExifInterface.TAG_GPS_LONGITUDE;
+import static androidx.exifinterface.media.ExifInterface.TAG_GPS_LONGITUDE_REF;
+import static androidx.exifinterface.media.ExifInterface.TAG_LENS_MAKE;
+import static androidx.exifinterface.media.ExifInterface.TAG_LENS_MODEL;
+import static androidx.exifinterface.media.ExifInterface.TAG_LENS_SERIAL_NUMBER;
+import static androidx.exifinterface.media.ExifInterface.TAG_LENS_SPECIFICATION;
+import static androidx.exifinterface.media.ExifInterface.TAG_MAKE;
+import static androidx.exifinterface.media.ExifInterface.TAG_MODEL;
+import static androidx.exifinterface.media.ExifInterface.TAG_SOFTWARE;
 
 /**
  * Support utils for EXIF metadata handling

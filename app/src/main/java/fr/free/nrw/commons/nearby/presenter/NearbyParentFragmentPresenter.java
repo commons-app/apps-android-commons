@@ -19,7 +19,6 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
-
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
 

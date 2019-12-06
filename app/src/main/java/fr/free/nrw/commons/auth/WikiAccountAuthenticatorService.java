@@ -3,6 +3,7 @@ package fr.free.nrw.commons.auth;
 import android.accounts.AbstractAccountAuthenticator;
 import android.content.Intent;
 import android.os.IBinder;
+
 import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.di.CommonsDaggerService;

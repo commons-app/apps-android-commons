@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.campaigns;
 
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
