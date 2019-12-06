@@ -90,8 +90,8 @@
                 android:src="@drawable/ic_cancel_white"
                 android:text="@string/menu_cancel_upload"
                 android:background="@android:color/transparent"
-                android:padding="8dp"
-                android:layout_marginRight="5dp"
+                android:padding="@dimen/small_gap"
+                android:layout_marginRight="@dimen/tiny_gap"
                 />
 
             <ImageButton
@@ -101,7 +101,7 @@
                 android:src="@drawable/ic_retry_white"
                 android:text="@string/menu_retry_upload"
                 android:background="@android:color/transparent"
-                android:padding="8dp"
+                android:padding="@dimen/small_gap"
                 />
 
         </LinearLayout>

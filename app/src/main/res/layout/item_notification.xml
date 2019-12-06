@@ -9,11 +9,11 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/standard_gap"
         android:background="@android:color/white"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_message_black_24dp"
@@ -26,9 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/standard_gap"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         />
 
@@ -37,8 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/time"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginStart="@dimen/standard_gap"
         android:layout_toEndOf="@id/icon"
         android:layout_toLeftOf="@id/time"
         android:layout_toRightOf="@id/icon"
@@ -46,6 +46,6 @@
         android:ellipsize="end"
         android:layout_alignParentTop="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:padding="12dp"
+        android:padding="@dimen/medium_gap"
         />
 </RelativeLayout>

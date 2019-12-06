@@ -32,7 +32,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:stretchMode="columnWidth"
-        android:columnWidth="240dp"
+        android:columnWidth="@dimen/category_images_list_column_width"
         android:numColumns="auto_fit"
         android:listSelector="@null"
         android:fadingEdge="none"

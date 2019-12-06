@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:paddingStart="15dp"
+        android:paddingStart="@dimen/standard_gap"
         android:text="@string/place_state"
         android:textColor="@color/white"/>
 
@@ -17,7 +17,7 @@
         android:id="@+id/choice_chip_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="@dimen/standard_gap"
         android:theme="@style/Theme.MaterialComponents.Light"
         app:singleSelection="false">
 
