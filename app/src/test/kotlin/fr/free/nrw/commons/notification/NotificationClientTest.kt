@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.notification
 
-import com.nhaarman.mockito_kotlin.eq
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
+import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify

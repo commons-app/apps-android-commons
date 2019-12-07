@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload
 
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.repository.UploadRepository

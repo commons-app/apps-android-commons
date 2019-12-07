@@ -351,7 +351,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private void inflateAchievements(Achievements achievements) {
         thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
-                (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
+                (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));

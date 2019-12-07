@@ -1,11 +1,12 @@
 package fr.free.nrw.commons.notification
 
-import com.nhaarman.mockito_kotlin.verify
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 class NotificationControllerTest {
@@ -40,7 +41,7 @@ class NotificationControllerTest {
      */
     @Test
     fun testMarkNotificationsAsRead() {
-        notification.notificationId = "test"
+        `when`(notification.notificationId).thenReturn("test")
         notificationController.markAsRead(notification)
         verify(notificationClient).markNotificationAsRead(eq("test"))
     }
