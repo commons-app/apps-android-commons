@@ -7,8 +7,8 @@
 
     <ImageView
         android:layout_margin="@dimen/activity_margin_horizontal"
-        android:layout_width="140dp"
-        android:layout_height="200dp"
+        android:layout_width="@dimen/alert_image_width"
+        android:layout_height="@dimen/alert_image_height"
         android:id="@+id/alert_image" />
 
     <TextView

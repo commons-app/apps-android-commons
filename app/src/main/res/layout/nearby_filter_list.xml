@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
-    android:elevation="8dp"
+    android:elevation="@dimen/elevation_huge"
     android:background="@color/white">
 
     <fr.free.nrw.commons.nearby.CheckBoxTriStates

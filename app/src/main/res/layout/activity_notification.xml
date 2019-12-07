@@ -41,8 +41,8 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="110dp"
-                android:layout_height="160dp"
+                android:layout_width="@dimen/image_view_width"
+                android:layout_height="@dimen/image_view_height"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -58,7 +58,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:gravity="center"
                 android:text="@string/no_notification"
-                android:textSize="20sp" />
+                android:textSize="@dimen/no_notification_text_size" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>

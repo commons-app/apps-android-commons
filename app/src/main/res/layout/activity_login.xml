@@ -26,8 +26,8 @@
             android:layout_marginTop="@dimen/large_gap"
             android:clickable="true"
             android:focusableInTouchMode="true"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="4dp">
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="@dimen/elevation_medium">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -222,19 +222,19 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="@dimen/commons_logo_background_size"
+            android:layout_height="@dimen/commons_logo_background_size"
             android:layout_gravity="center_horizontal"
-            android:elevation="8dp"
+            android:elevation="@dimen/elevation_huge"
             app:srcCompat="@drawable/blue_rinse_circle"
             tools:ignore="UnusedAttribute" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="@dimen/commons_logo_size"
+            android:layout_height="@dimen/commons_logo_size"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:elevation="8dp"
+            android:layout_marginTop="@dimen/small_gap"
+            android:elevation="@dimen/small_gap"
             app:srcCompat="@drawable/commons_logo"
             tools:ignore="UnusedAttribute" />
     </FrameLayout>

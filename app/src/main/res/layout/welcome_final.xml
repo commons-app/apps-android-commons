@@ -15,21 +15,21 @@
         android:gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_height="180dp"
+        android:layout_height="@dimen/welcome_wikipedia_image_height"
         >
 
         <ImageView
             android:src="@drawable/welcome_wikipedia"
             android:id="@+id/welcome_wikipedia"
-            android:layout_width="150dp"
-            android:layout_height="180dp"
+            android:layout_width="@dimen/welcome_wikipedia_image_width"
+            android:layout_height="@dimen/welcome_wikipedia_image_height"
             android:contentDescription="@string/welcome_image_welcome_wikipedia"
             />
 
         <ImageView
             android:src="@drawable/welcome_copyright"
-            android:layout_width="160dp"
-            android:layout_height="120dp"
+            android:layout_width="@dimen/welcome_copyright_image_width"
+            android:layout_height="@dimen/welcome_copyright_image_height"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/standard_gap"
             android:layout_marginStart="@dimen/standard_gap"
@@ -41,7 +41,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="240dp"
+        android:maxWidth="@dimen/welcome_text_max_width"
         android:text="@string/welcome_final_text"
         android:layout_gravity="center"
         android:textStyle="bold"

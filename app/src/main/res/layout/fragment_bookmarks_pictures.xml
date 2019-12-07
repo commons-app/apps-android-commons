@@ -27,7 +27,7 @@
         android:id="@+id/bookmarkedPicturesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnWidth="240dp"
+        android:columnWidth="@dimen/bookmarked_pictures_list_column_width"
         android:fadingEdge="none"
         android:fastScrollEnabled="true"
         android:listSelector="@null"

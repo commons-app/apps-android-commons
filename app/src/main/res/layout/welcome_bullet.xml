@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="4dp"
+        android:paddingRight="@dimen/tiny_gap"
         android:text="@string/bullet"
         android:textColor="@android:color/white"
         android:textSize="@dimen/normal_text" />

@@ -10,8 +10,10 @@
     <dimen name="huge_gap">48dp</dimen>
     <dimen name="large_gap">32dp</dimen>
     <dimen name="standard_gap">16dp</dimen>
+    <dimen name="medium_gap">12dp</dimen>
     <dimen name="small_gap">8dp</dimen>
     <dimen name="tiny_gap">4dp</dimen>
+    <dimen name="gap">2dp</dimen>
 
     <!-- Component sizes -->
     <dimen name="overflow_icon_dimen">56dp</dimen>
@@ -27,7 +29,45 @@
     <dimen name="first_fab">15dp</dimen>
     <dimen name="second_fab">25dp</dimen>
     <dimen name="subtitle_text">12sp</dimen>
+    <dimen name="notification_count_badge_text_size">7sp</dimen>
 
     <!-- App widget margin -->
     <dimen name="widget_margin">0dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation">2dp</dimen>
+    <dimen name="elevation_medium">4dp</dimen>
+    <dimen name="elevation_large">6dp</dimen>
+    <dimen name="elevation_huge">8dp</dimen>
+
+    <dimen name="welcome_wikipedia_image_height">180dp</dimen>
+    <dimen name="welcome_wikipedia_image_width">150dp</dimen>
+    <dimen name="welcome_copyright_image_width">160dp</dimen>
+    <dimen name="welcome_copyright_image_height">120dp</dimen>
+    <dimen name="welcome_text_max_width">240dp</dimen>
+    <dimen name="image_view_width">110dp</dimen>
+    <dimen name="image_view_height">160dp</dimen>
+    <dimen name="no_notification_text_size">20sp</dimen>
+    <dimen name="achievement_badge_text_size">75sp</dimen>
+    <dimen name="image_info_size">12dp</dimen>
+    <dimen name="progressbar_size">40dp</dimen>
+    <dimen name="progressbar_stroke_width">3dp</dimen>
+    <dimen name="progressbar_text_size">9dp</dimen>
+    <dimen name="statistics_text_margin_right">24dp</dimen>
+    <dimen name="corner_radius">4dp</dimen>
+    <dimen name="commons_logo_size">42dp</dimen>
+    <dimen name="commons_logo_background_size">64dp</dimen>
+    <dimen name="activity_login_width">400sp</dimen>
+    <dimen name="corner_radius_large">8dp</dimen>
+    <dimen name="result_text_size">32sp</dimen>
+    <dimen name="quiz_result_next_width">150dp</dimen>
+    <dimen name="icon_size">40dp</dimen>
+    <dimen name="nearby_info_image_size">18dp</dimen>
+    <dimen name="user_icon_size">25dp</dimen>
+    <dimen name="bookmarked_pictures_list_column_width">240dp</dimen>
+    <dimen name="category_images_list_column_width">240dp</dimen>
+    <dimen name="alert_image_width">140dp</dimen>
+    <dimen name="alert_image_height">200dp</dimen>
+    <dimen name="iv_error_size">24dp</dimen>
+    <dimen name="category_images_sequence_number_text_size">98sp</dimen>
 </resources>
