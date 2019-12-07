@@ -139,6 +139,11 @@ public abstract class NavigationBaseActivity extends BaseActivity
             drawerLayout.closeDrawer(navigationView);
             AchievementsActivity.startYourself(NavigationBaseActivity.this);
         });
+        TextView userName = navHeaderView.findViewById(R.id.username);
+        userName.setOnClickListener(v -> {
+            drawerLayout.closeDrawer(navigationView);
+            AchievementsActivity.startYourself(NavigationBaseActivity.this);
+        });
     }
 
     public void initBackButton() {
