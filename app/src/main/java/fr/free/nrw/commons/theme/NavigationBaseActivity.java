@@ -135,12 +135,13 @@ public abstract class NavigationBaseActivity extends BaseActivity
             username.setText(allAccounts[0].name);
         }
         ImageView userIcon = navHeaderView.findViewById(R.id.user_icon);
-        userIcon.setOnClickListener(v -> {
-            drawerLayout.closeDrawer(navigationView);
-            AchievementsActivity.startYourself(NavigationBaseActivity.this);
-        });
+        makeClickable(userIcon);
         TextView userName = navHeaderView.findViewById(R.id.username);
-        userName.setOnClickListener(v -> {
+        makeClickable(userName);
+    }
+
+    public void makeClickable(View view){
+        view.setOnClickListener(v -> {
             drawerLayout.closeDrawer(navigationView);
             AchievementsActivity.startYourself(NavigationBaseActivity.this);
         });
