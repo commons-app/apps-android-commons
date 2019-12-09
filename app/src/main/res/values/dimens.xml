@@ -13,7 +13,7 @@
     <dimen name="medium_gap">12dp</dimen>
     <dimen name="small_gap">8dp</dimen>
     <dimen name="tiny_gap">4dp</dimen>
-    <dimen name="gap">2dp</dimen>
+    <dimen name="minuscule_gap">2dp</dimen>
 
     <!-- Component sizes -->
     <dimen name="overflow_icon_dimen">56dp</dimen>

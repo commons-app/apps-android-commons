@@ -16,14 +16,14 @@
       android:id="@+id/campaigns_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/gap"
+      android:layout_marginTop="@dimen/minuscule_gap"
       app:cardBackgroundColor="?attr/mainCardBackground" />
 
   <FrameLayout
       android:id="@+id/root_frame"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginTop="@dimen/gap"
+      android:layout_marginTop="@dimen/minuscule_gap"
       android:background="#000"
       >
   </FrameLayout>

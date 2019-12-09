@@ -47,7 +47,7 @@
     android:layout_height="70dp"
     android:layout_alignParentBottom="true"
     android:orientation="horizontal"
-    android:padding="@dimen/gap"
+    android:padding="@dimen/minuscule_gap"
     android:weightSum="2">
 
     <Button

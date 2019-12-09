@@ -28,7 +28,7 @@
         android:layout_alignRight="@id/cart_icon_image_view"
         android:background="@drawable/notification_badge"
         android:gravity="center"
-        android:padding="@dimen/gap"
+        android:padding="@dimen/minuscule_gap"
         android:textColor="#ffffffff"
         android:textSize="@dimen/notification_count_badge_text_size"
         android:textStyle="bold"
