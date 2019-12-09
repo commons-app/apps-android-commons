@@ -1,15 +1,16 @@
 package fr.free.nrw.commons.auth;
 
 
-import io.reactivex.Observable;
+import org.wikipedia.dataclient.Service;
+import org.wikipedia.dataclient.mwapi.MwPostResponse;
+
 import java.util.Objects;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import org.wikipedia.dataclient.Service;
-import org.wikipedia.dataclient.ServiceFactory;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.dataclient.mwapi.MwPostResponse;
+
+import io.reactivex.Observable;
 
 /**
  * Handler for logout
@@ -20,9 +21,8 @@ public class LogoutClient {
     private final Service service;
 
     @Inject
-    public LogoutClient(@Named("commons-wikisite")
-            WikiSite commonsWikiSite) {
-        service = ServiceFactory.get(commonsWikiSite);
+    public LogoutClient(@Named("commons-service") Service service) {
+        this.service = service;
     }
 
     /**

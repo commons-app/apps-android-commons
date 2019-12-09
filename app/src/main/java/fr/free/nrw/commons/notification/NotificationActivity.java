@@ -225,14 +225,14 @@ public class NotificationActivity extends NavigationBaseActivity {
         notificationAdapterFactory = new NotificationAdapterFactory(new NotificationRenderer.NotificationClicked() {
             @Override
             public void notificationClicked(Notification notification) {
-                Timber.d("Notification clicked %s", notification.link);
-                handleUrl(notification.link);
+                Timber.d("Notification clicked %s", notification.getLink());
+                handleUrl(notification.getLink());
                 removeNotification(notification);
             }
 
             @Override
             public void markNotificationAsRead(Notification notification) {
-                Timber.d("Notification to mark as read %s", notification.notificationId);
+                Timber.d("Notification to mark as read %s", notification.getNotificationId());
                 removeNotification(notification);
             }
         }, isarchivedvisible);

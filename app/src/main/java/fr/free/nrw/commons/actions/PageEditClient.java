@@ -4,7 +4,6 @@ import org.wikipedia.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.Service;
 
 import io.reactivex.Observable;
-import timber.log.Timber;
 
 public class PageEditClient {
 
@@ -47,12 +46,4 @@ public class PageEditClient {
         }
     }
 
-    public Observable<Integer> addEditTag(long revisionId, String tagName, String reason) {
-        try {
-            return service.addEditTag(String.valueOf(revisionId), tagName, reason, csrfTokenClient.getTokenBlocking())
-                    .map(mwPostResponse -> mwPostResponse.getSuccessVal());
-        } catch (Throwable throwable) {
-            return Observable.just(-1);
-        }
-    }
 }

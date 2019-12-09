@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.media;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.annotations.SerializedName;
 
 public class MwParseResult {

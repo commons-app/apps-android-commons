@@ -1,12 +1,5 @@
 package fr.free.nrw.commons;
 
-import static org.acra.ReportField.ANDROID_VERSION;
-import static org.acra.ReportField.APP_VERSION_CODE;
-import static org.acra.ReportField.APP_VERSION_NAME;
-import static org.acra.ReportField.PHONE_MODEL;
-import static org.acra.ReportField.STACK_TRACE;
-import static org.acra.ReportField.USER_COMMENT;
-
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.NotificationChannel;
@@ -16,12 +9,28 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Process;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+
+import org.acra.ACRA;
+import org.acra.annotation.AcraCore;
+import org.acra.annotation.AcraDialog;
+import org.acra.annotation.AcraMailSender;
+import org.acra.data.StringFormat;
+import org.wikipedia.AppAdapter;
+import org.wikipedia.language.AppLanguageLookUpTable;
+
+import java.io.File;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
@@ -40,17 +49,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.internal.functions.Functions;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
-import java.io.File;
-import javax.inject.Inject;
-import javax.inject.Named;
-import org.acra.ACRA;
-import org.acra.annotation.AcraCore;
-import org.acra.annotation.AcraDialog;
-import org.acra.annotation.AcraMailSender;
-import org.acra.data.StringFormat;
-import org.wikipedia.AppAdapter;
-import org.wikipedia.language.AppLanguageLookUpTable;
 import timber.log.Timber;
+
+import static org.acra.ReportField.ANDROID_VERSION;
+import static org.acra.ReportField.APP_VERSION_CODE;
+import static org.acra.ReportField.APP_VERSION_NAME;
+import static org.acra.ReportField.PHONE_MODEL;
+import static org.acra.ReportField.STACK_TRACE;
+import static org.acra.ReportField.USER_COMMENT;
 
 @AcraCore(
         buildConfigClass = BuildConfig.class,
@@ -114,6 +120,7 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         INSTANCE = this;
         ACRA.init(this);
 

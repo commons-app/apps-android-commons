@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -68,8 +67,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     QuizChecker quizChecker;
 
 
-    public Intent uploadServiceIntent;
-
     public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
     public static final int CONTRIBUTIONS_TAB_POSITION = 0;
     public static final int NEARBY_TAB_POSITION = 1;
@@ -117,13 +114,13 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         //Do not remove this, this triggers the sync service
         ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(),BuildConfig.CONTRIBUTION_AUTHORITY,true);
         requestSync(sessionManager.getCurrentAccount(), BuildConfig.CONTRIBUTION_AUTHORITY, new Bundle());
-        uploadServiceIntent = new Intent(this, UploadService.class);
+        Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
 
         addTabsAndFragments();
         if (contributionsActivityPagerAdapter.getItem(0) != null) {
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired(uploadServiceIntent);
+            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired();
         }
     }
 
@@ -147,10 +144,8 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                         .show()
         );
 
-        if (uploadServiceIntent != null) {
-            // If auth cookie already acquired notify contrib fragment so that it san operate auth required actions
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
-        }
+        ((ContributionsFragment) contributionsActivityPagerAdapter
+                .getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired();
         setTabAndViewPagerSynchronisation();
     }
 

@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload
 
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.repository.UploadRepository
@@ -30,6 +30,9 @@ class UploadPresenterTest {
     @Mock
     private lateinit var uploadableFile: UploadableFile
 
+    @Mock
+    private lateinit var anotherUploadableFile: UploadableFile
+
     @InjectMocks
     var uploadPresenter: UploadPresenter? = null
 
@@ -44,7 +47,6 @@ class UploadPresenterTest {
         MockitoAnnotations.initMocks(this)
         uploadPresenter?.onAttachView(view)
         `when`(repository?.buildContributions()).thenReturn(Observable.just(contribution))
-        `when`(view?.isLoggedIn).thenReturn(true)
         uploadableFiles.add(uploadableFile)
         `when`(view?.uploadableFiles).thenReturn(uploadableFiles)
         `when`(uploadableFile?.filePath).thenReturn("data://test")
@@ -54,7 +56,8 @@ class UploadPresenterTest {
      * unit test case for method UploadPresenter.handleSubmit
      */
     @Test
-    fun handleSubmitTest() {
+    fun handleSubmitTestUserLoggedIn() {
+        `when`(view?.isLoggedIn).thenReturn(true)
         uploadPresenter?.handleSubmit()
         verify(view)?.isLoggedIn
         verify(view)?.showProgress(true)
@@ -63,13 +66,57 @@ class UploadPresenterTest {
     }
 
     /**
-     * unit test for UploadMediaPresenter.deletePictureAtIndex
+     * unit test case for method UploadPresenter.handleSubmit
      */
     @Test
-    fun deletePictureAtIndexTest() {
+    fun handleSubmitTestUserNotLoggedIn() {
+        `when`(view?.isLoggedIn).thenReturn(false)
+        uploadPresenter?.handleSubmit()
+        verify(view)?.isLoggedIn
+        verify(view)?.askUserToLogIn()
+
+    }
+
+    private fun deletePictureBaseTest(){
+        uploadableFiles.clear()
+    }
+
+    /**
+     * Test which asserts If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
+     */
+    @Test
+    fun hideTopCardWhenReachedTheLastFile(){
+        deletePictureBaseTest()
+        uploadableFiles.add(uploadableFile)
         uploadPresenter?.deletePictureAtIndex(0)
+        verify(view)?.showHideTopCard(false)
+        verify(repository)?.deletePicture(ArgumentMatchers.anyString())
+    }
+
+    /**
+     * Test media deletion during single upload
+     */
+    @Test
+    fun testDeleteWhenSingleUpload(){
+        deletePictureBaseTest()
+        uploadableFiles.add(uploadableFile)
+        uploadPresenter?.deletePictureAtIndex(0)
+        verify(view)?.showHideTopCard(false)
         verify(repository)?.deletePicture(ArgumentMatchers.anyString())
         verify(view)?.showMessage(ArgumentMatchers.anyInt())//As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered
         verify(view)?.finish()
+    }
+
+    /**
+     * Test media deletion during multiple upload
+     */
+    @Test
+    fun testDeleteWhenMultipleFilesUpload(){
+        deletePictureBaseTest()
+        uploadableFiles.add(uploadableFile)
+        uploadableFiles.add(anotherUploadableFile)
+        uploadPresenter?.deletePictureAtIndex(0)
+        verify(view)?.onUploadMediaDeleted(0)
+        verify(view)?.updateTopCardTitle()
     }
 }

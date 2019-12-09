@@ -9,10 +9,9 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SignupActivity;
 import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
-
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.review.ReviewActivity;

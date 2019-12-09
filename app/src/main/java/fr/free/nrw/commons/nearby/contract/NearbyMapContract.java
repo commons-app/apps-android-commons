@@ -6,6 +6,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import java.util.List;
 
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
@@ -27,5 +28,9 @@ public interface NearbyMapContract {
         void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
         void centerMapToPlace(Place place, boolean isPortraitMode);
         void removeCurrentLocationMarker();
+        List<NearbyBaseMarker> getBaseMarkerOptions();
+        void filterMarkersByLabels(List<Label> labelList, boolean displayExists, boolean displayNeeds, boolean filterForPlaceState, boolean filterForAllNoneType);
+        void filterOutAllMarkers();
+        void displayAllMarkers();
     }
 }

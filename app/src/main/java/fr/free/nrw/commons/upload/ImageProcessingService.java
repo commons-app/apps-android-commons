@@ -28,7 +28,6 @@ public class ImageProcessingService {
     private final ReadFBMD readFBMD;
     private final EXIFReader EXIFReader;
     private final MediaClient mediaClient;
-    private final Context context;
 
     @Inject
     public ImageProcessingService(FileUtilsWrapper fileUtilsWrapper,
@@ -40,7 +39,6 @@ public class ImageProcessingService {
         this.readFBMD = readFBMD;
         this.EXIFReader = EXIFReader;
         this.mediaClient = mediaClient;
-        this.context = context;
     }
 
     /**

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Amire80
+* LeGuyanaisPure
 * Liuxinyu970226
 * Madhurgupta10
 * Minh Nguyen
@@ -151,6 +152,7 @@
   <string name="successful_wikidata_edit">Message shown in a dialog (\"success toast\") after a contribution by the user.\n\nParameter:\n* %1$s - title of the target page on Wikidata</string>
   <string name="question">{{Identical|Question}}</string>
   <string name="result">{{Identical|Result}}</string>
+  <string name="statistics">Èstatistik</string>
   <string name="statistics_featured">To see the correct translation for your language, please go to https://commons.wikimedia.org/wiki/Commons:Featured_pictures and select your language in \"This project page in other languages\".</string>
   <string name="nearby_fragment">{{Identical|Nearby}}</string>
   <string name="submit">{{Identical|Submit}}</string>

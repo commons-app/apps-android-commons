@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,8 +17,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
 
 /**
  * The MVP pattern presenter of Upload GUI

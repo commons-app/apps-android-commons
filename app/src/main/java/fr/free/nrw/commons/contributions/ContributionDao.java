@@ -7,15 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.RemoteException;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
-import fr.free.nrw.commons.settings.Prefs;
+
+import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
+
 import java.util.Date;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
+
+import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;

@@ -8,6 +8,7 @@ import java.util.List;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.Place;
 
 public interface NearbyParentFragmentContract {
@@ -26,6 +27,7 @@ public interface NearbyParentFragmentContract {
         void animateFABs();
         void recenterMap(LatLng curLatLng);
         void hideBottomSheet();
+        void hideBottomDetailsSheet();
         void displayBottomSheetWithInfo(Marker marker);
         void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
         void addSearchThisAreaButtonAction();
@@ -35,6 +37,13 @@ public interface NearbyParentFragmentContract {
         boolean isDetailsBottomSheetVisible();
         void setBottomSheetDetailsSmaller();
         boolean isSearchThisAreaButtonVisible();
+        void setRecyclerViewAdapterAllSelected();
+        void setRecyclerViewAdapterItemsGreyedOut();
+        void setCheckBoxAction();
+        void setCheckBoxState(int state);
+        void setFilterState();
+        void disableFABRecenter();
+        void enableFABRecenter();
     }
 
     interface NearbyListView {
@@ -49,6 +58,9 @@ public interface NearbyParentFragmentContract {
         void setActionListeners(JsonKvStore applicationKvStore);
         void backButtonClicked();
         MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
+        void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState, boolean filterForAllNoneType);
+        void searchViewGainedFocus();
+        void setCheckboxUnknown();
     }
     
     interface ViewsAreReadyCallback {

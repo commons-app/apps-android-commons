@@ -273,6 +273,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(true).setVisible(true);
 
                     // Initialize bookmark object
                     bookmark = new Bookmark(
@@ -282,27 +283,39 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
-                    if (m instanceof Contribution ) {
+                    if (m instanceof Contribution) {
                         Contribution c = (Contribution) m;
                         switch (c.getState()) {
                             case Contribution.STATE_FAILED:
-                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
-                                break;
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
-                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_share_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_download_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
+                                        .setVisible(false);
                                 break;
                             case Contribution.STATE_COMPLETED:
                                 // Default set of menu items works fine. Treat same as regular media object
                                 break;
                         }
                     }
+                } else {
+                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_share_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_download_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
+                            .setVisible(false);
                 }
             }
         }

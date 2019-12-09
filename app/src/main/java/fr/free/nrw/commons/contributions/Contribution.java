@@ -4,17 +4,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
 
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.util.DateUtil;
-
-import java.lang.annotation.Retention;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.annotation.Retention;
+import java.util.Date;
+import java.util.Locale;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -28,8 +26,8 @@ public class  Contribution extends Media {
     //{{According to EXIF data|2009-01-09}}
     private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to EXIF data|%s}}";
 
-    //{{date|2009|1|9}} → 9 January 2009
-    private static final String TEMPLATE_DATA_OTHER_SOURCE = "{{date|%s}}";
+    //2009-01-09 → 9 January 2009
+    private static final String TEMPLATE_DATA_OTHER_SOURCE = "%s";
 
     public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
         @Override
@@ -118,10 +116,6 @@ public class  Contribution extends Media {
         parcel.writeInt(state);
         parcel.writeLong(transferred);
         parcel.writeInt(isMultiple ? 1 : 0);
-    }
-
-    public String getDateCreatedSource() {
-        return dateCreatedSource;
     }
 
     public void setDateCreatedSource(String dateCreatedSource) {
@@ -241,14 +235,6 @@ public class  Contribution extends Media {
         this.source = source;
     }
 
-    public void setLocalUri(Uri localUri) {
-        this.localUri = localUri;
-    }
-
-    public void setDecimalCoords(String decimalCoords) {
-        this.decimalCoords = decimalCoords;
-    }
-
     @NonNull
     private String licenseTemplateFor(String license) {
         switch (license) {
@@ -284,7 +270,4 @@ public class  Contribution extends Media {
         this.contentProviderUri = contentProviderUri;
     }
 
-    public Uri getContentProviderUri() {
-        return contentProviderUri;
-    }
 }
