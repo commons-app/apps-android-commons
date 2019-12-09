@@ -7,8 +7,7 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
-import com.nhaarman.mockito_kotlin.*
-import fr.free.nrw.commons.BuildConfig
+import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.*
@@ -61,7 +60,7 @@ class BookMarkLocationDaoTest {
 
 
         examplePlaceBookmark = Place("placeName", exampleLabel, "placeDescription"
-                , exampleLocation, "placeCategory", builder.build())
+                , exampleLocation, "placeCategory", builder.build(),"picName","placeDestroyed")
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -146,7 +145,7 @@ class BookMarkLocationDaoTest {
         assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(10, cv.size())
+            assertEquals(11, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
             assertEquals(examplePlaceBookmark.label.text, cv.getAsString(COLUMN_LABEL_TEXT))
@@ -156,6 +155,7 @@ class BookMarkLocationDaoTest {
             assertEquals(examplePlaceBookmark.siteLinks.wikipediaLink.toString(), cv.getAsString(COLUMN_WIKIPEDIA_LINK))
             assertEquals(examplePlaceBookmark.siteLinks.wikidataLink.toString(), cv.getAsString(COLUMN_WIKIDATA_LINK))
             assertEquals(examplePlaceBookmark.siteLinks.commonsLink.toString(), cv.getAsString(COLUMN_COMMONS_LINK))
+            assertEquals(examplePlaceBookmark.pic.toString(), cv.getAsString(COLUMN_PIC))
         }
     }
 

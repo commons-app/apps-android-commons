@@ -326,6 +326,7 @@
   <string name="no_images_found">Изображений не найдено!</string>
   <string name="error_loading_images">Произошла ошибка при загрузке изображений.</string>
   <string name="image_uploaded_by">Загружено участником %1$s</string>
+  <string name="block_notification_title">Блокировка</string>
   <string name="block_notification">Редактирование на Викискладе вам было заблокировано</string>
   <string name="appwidget_img">Изображение дня</string>
   <string name="app_widget_heading">Изображение дня</string>

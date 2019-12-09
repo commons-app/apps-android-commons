@@ -3,11 +3,8 @@ package fr.free.nrw.commons.upload;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 
 /**
  * The base fragment of the fragments in upload

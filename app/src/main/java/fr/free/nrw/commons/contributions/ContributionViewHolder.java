@@ -1,16 +1,23 @@
 package fr.free.nrw.commons.contributions;
 
-import android.net.Uri;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.collection.LruCache;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.apache.commons.lang3.StringUtils;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
@@ -21,9 +28,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import javax.inject.Inject;
-import javax.inject.Named;
-import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {

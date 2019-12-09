@@ -1,11 +1,13 @@
 package fr.free.nrw.commons.upload;
 
 import android.net.Uri;
+
 import androidx.annotation.IntDef;
-import fr.free.nrw.commons.location.LatLng;
 
 import java.lang.annotation.Retention;
 import java.util.List;
+
+import fr.free.nrw.commons.location.LatLng;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 

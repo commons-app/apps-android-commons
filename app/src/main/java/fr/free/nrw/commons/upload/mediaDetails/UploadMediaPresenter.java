@@ -1,11 +1,9 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
-import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
+import java.lang.reflect.Proxy;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -19,13 +17,14 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.View;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-
-import java.lang.reflect.Proxy;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 public class UploadMediaPresenter implements UserActionListener, SimilarImageInterface {
 
@@ -160,7 +159,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      *
      * @param errorCode
      */
-    private void handleBadImage(Integer errorCode) {
+    public void handleBadImage(Integer errorCode) {
         Timber.d("Handle bad picture with error code %d", errorCode);
         if (errorCode
                 >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits

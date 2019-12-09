@@ -172,7 +172,7 @@
   <string name="title_activity_nearby">Nearby Places</string>
   <string name="no_nearby">No nearby places found</string>
   <string name="warning">Warning</string>
-  <string name="upload_image_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
+  <string name="upload_image_duplicate">This file already destroyed on Commons. Are you sure you want to proceed?</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
   <string name="media_detail_title">Title</string>
@@ -582,5 +582,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="text_copy">Text copied to clipboard</string>
   <string name="notification_mark_read">Notification marked as read</string>
   <string name="some_error">There was some error!</string>
+  <string name="place_state">Place state:</string>
+  <string name="place_state_exists">Exists</string>
+  <string name="place_state_needs_photo">Needs Photo</string>
+  <string name="place_type">Place type:</string>
+  <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
   <string name="you_must_reset_your_passsword">Something went wrong with login, you must reset your password !!</string>
 </resources>

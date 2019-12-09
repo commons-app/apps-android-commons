@@ -31,6 +31,7 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
 import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
+import fr.free.nrw.commons.wikidata.WikidataInterface;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -51,7 +52,6 @@ public class NetworkingModule {
     private static final String NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite";
 
     public static final String NAMED_COMMONS_CSRF = "commons-csrf";
-    public static final String NAMED_WIKI_DATA_CSRF = "wikidata-csrf";
 
     @Provides
     @Singleton
@@ -95,14 +95,6 @@ public class NetworkingModule {
     @Singleton
     public CsrfTokenClient provideCommonsCsrfTokenClient(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return new CsrfTokenClient(commonsWikiSite, commonsWikiSite);
-    }
-
-    @Named(NAMED_WIKI_DATA_CSRF)
-    @Provides
-    @Singleton
-    public CsrfTokenClient provideWikidataCsrfTokenClient(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite,
-                                                          @Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
-        return new CsrfTokenClient(wikidataWikiSite, commonsWikiSite);
     }
 
     @Provides
@@ -200,15 +192,6 @@ public class NetworkingModule {
         return new PageEditClient(csrfTokenClient, pageEditInterface, service);
     }
 
-    @Named("wikidata-page-edit")
-    @Provides
-    @Singleton
-    public PageEditClient provideWikidataPageEditClient(@Named(NAMED_WIKI_DATA_CSRF) CsrfTokenClient csrfTokenClient,
-                                                        @Named("wikidata-page-edit-service") PageEditInterface pageEditInterface,
-                                                        @Named("wikidata-service") Service service) {
-        return new PageEditClient(csrfTokenClient, pageEditInterface, service);
-    }
-
     @Provides
     @Singleton
     public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
@@ -225,5 +208,11 @@ public class NetworkingModule {
     @Singleton
     public UserInterface provideUserInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, UserInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public WikidataInterface provideWikidataInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikiDataWikiSite) {
+        return ServiceFactory.get(wikiDataWikiSite, BuildConfig.WIKIDATA_URL, WikidataInterface.class);
     }
 }

@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload
 
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.categories.CategoriesContract
@@ -76,5 +76,14 @@ class CategoriesPresenterTest {
         categoriesPresenter?.verifyCategories()
         verify(repository)?.setSelectedCategories(ArgumentMatchers.anyList())
         verify(view)?.goToNextScreen()
+    }
+
+    /**
+     * Test onCategory Item clicked
+     */
+    @Test
+    fun onCategoryItemClickedTest() {
+        categoriesPresenter?.onCategoryItemClicked(categoryItem)
+        verify(repository)?.onCategoryClicked(categoryItem)
     }
 }

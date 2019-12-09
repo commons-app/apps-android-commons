@@ -11,13 +11,6 @@ public class FilePickerConfiguration implements Constants {
         this.context = context;
     }
 
-    public FilePickerConfiguration setImagesFolderName(String folderName) {
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit().putString(BundleKeys.FOLDER_NAME, folderName)
-                .apply();
-        return this;
-    }
-
     public FilePickerConfiguration setAllowMultiplePickInGallery(boolean allowMultiple) {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
                 .putBoolean(BundleKeys.ALLOW_MULTIPLE, allowMultiple)
@@ -28,13 +21,6 @@ public class FilePickerConfiguration implements Constants {
     public FilePickerConfiguration setCopyTakenPhotosToPublicGalleryAppFolder(boolean copy) {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
                 .putBoolean(BundleKeys.COPY_TAKEN_PHOTOS, copy)
-                .apply();
-        return this;
-    }
-
-    public FilePickerConfiguration setCopyPickedImagesToPublicGalleryAppFolder(boolean copy) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit()
-                .putBoolean(BundleKeys.COPY_PICKED_IMAGES, copy)
                 .apply();
         return this;
     }

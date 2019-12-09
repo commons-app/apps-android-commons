@@ -1,15 +1,11 @@
 package fr.free.nrw.commons.notification;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.material.animation.ArgbEvaluatorCompat;
 import com.pedrogomez.renderers.Renderer;
 
 import org.wikipedia.util.StringUtil;
@@ -18,7 +14,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
-import timber.log.Timber;
 
 /**
  * Created by root on 19.12.2017.
@@ -68,8 +63,8 @@ public class NotificationRenderer extends Renderer<Notification> {
     @Override
     public void render() {
         Notification notification = getContent();
-        setTitle(notification.notificationText);
-        time.setText(notification.date);
+        setTitle(notification.getNotificationText());
+        time.setText(notification.getDate());
     }
 
     /**

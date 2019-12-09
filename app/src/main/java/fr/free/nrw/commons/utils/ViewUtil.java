@@ -6,11 +6,12 @@ import android.view.Display;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-import timber.log.Timber;
+
+import androidx.annotation.StringRes;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import androidx.annotation.StringRes;
+import timber.log.Timber;
 
 public class ViewUtil {
     /**

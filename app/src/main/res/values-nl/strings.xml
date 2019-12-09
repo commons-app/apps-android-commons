@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* A67-A67
 * Abijeet Patro
 * Bouman4
 * Elroy
@@ -27,7 +28,7 @@
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Instellingen</string>
-  <string name="intent_share_upload_label">Naar Commons versturen</string>
+  <string name="intent_share_upload_label">Uploaden naar Commons</string>
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
   <string name="login_credential">Aanmelden bij je Commons Beta-profiel</string>
@@ -48,7 +49,7 @@
   <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s is afgerond</string>
   <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>
   <string name="upload_failed_notification_subtitle">Wijs aan om te bekijken</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+  <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d bestand aan het uploaden</item>
     <item quantity="other">%1$d bestanden aan het uploaden</item>
   </plurals>
@@ -200,17 +201,37 @@
   <string name="no_description_found">geen beschrijving gevonden</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artikel</string>
   <string name="error_while_cache">Error tijdens het laden van de afbeeldingen</string>
+  <string name="upload_problem_image_dark">Afbeelding is te donker.</string>
+  <string name="upload_problem_image_blurry">Afbeelding is onscherp.</string>
+  <string name="upload_problem_image_duplicate">Afbeelding staat al in Commons.</string>
+  <string name="upload_problem_different_geolocation">Deze foto is op een andere locatie genomen.</string>
+  <string name="upload_problem_fbmd">Upload alleen foto\'s die je zelf hebt genomen. Upload geen foto\'s die je op Facebookaccounts van anderen hebt gevonden.</string>
+  <string name="upload_problem_do_you_continue">Wil je deze afbeelding nog steeds uploaden?</string>
+  <string name="internet_downloaded">Upload alleen foto\'s die je zelf hebt genomen. Upload geen foto\'s die je van internet hebt gedownload.</string>
+  <string name="give_permission">Geef toestemming</string>
+  <string name="use_external_storage">Gebruik externe opslag</string>
   <string name="login_to_your_account">Aanmelden bij je profiel</string>
   <string name="send_log_file">Logboekbestand verzenden</string>
+  <string name="no_web_browser">Geen webbrowser gevonden om URL te openen</string>
+  <string name="null_url">Fout! URL niet gevonden</string>
   <string name="nominate_deletion">Nomineer voor Verwijdering</string>
   <string name="nominated_for_deletion">Deze afbeelding is genomineerd voor verwijdering.</string>
+  <string name="nominated_see_more">&lt;u&gt;Zie webpagina voor details&lt;/u&gt;</string>
   <string name="view_browser">Bekijk in Browser</string>
   <string name="skip_login">Overslaan</string>
   <string name="navigation_item_login">Aanmelden</string>
   <string name="skip_login_title">Weet je zeker dat je het aanmelden wilt overslaan?</string>
   <string name="skip_login_message" fuzzy="true">Je kunt dan geen afbeeldingen plaatsen.</string>
   <string name="login_alert_message">Meld je aan om deze functie te gebruiken</string>
-  <string name="nearby_directions" fuzzy="true">VERWIJZINGEN</string>
+  <string name="copy_wikicode">Kopieer de wikitekst naar het klembord</string>
+  <string name="wikicode_copied">De wikitekst is gekopieerd naar het klembord</string>
+  <string name="nearby_location_has_not_changed">Locatie is niet veranderd.</string>
+  <string name="nearby_location_not_available">Locatie niet beschikbaar.</string>
+  <string name="location_permission_rationale_nearby">Toestemming vereist om een lijst van nabije plaatsen weer te geven</string>
+  <string name="read_article">Lees artikel</string>
+  <string name="notifications_welcome">Welkom bij Wikimedia Commons, %1$s! We zijn blij dat je hier bent.</string>
+  <string name="notifications_talk_page_message">%1$s heeft een bericht op je overlegpagina achtergelaten</string>
+  <string name="nearby_directions">VERWIJZINGEN</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
@@ -257,12 +278,20 @@
   <string name="never_ask_again">Niet meer vragen</string>
   <string name="display_location_permission_title">Machtiging voor locatie weergeven</string>
   <string name="display_location_permission_explanation">Naar machtiging voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
+  <string name="no_image_uploaded">Geen afbeeldingen geüpload</string>
   <string name="no_archived_notification" fuzzy="true">U hebt geen gearchiveerde melding</string>
   <string name="share_logs_using">Logboeken delen via</string>
   <string name="menu_option_archived">Gearchiveerd bekijken</string>
   <string name="menu_option_unread">Ongelezen bekijken</string>
   <string name="image_chooser_title">Kies de afbeeldingen die u wilt plaatsen</string>
   <string name="please_wait">Een ogenblik geduld…</string>
+  <string name="exif_tag_name_author">Auteur</string>
+  <string name="exif_tag_name_copyright">Auteursrechten</string>
+  <string name="exif_tag_name_location">Locatie</string>
+  <string name="exif_tag_name_cameraModel">Cameramodel</string>
+  <string name="review_is_uploaded_by">%1$s is geüpload door %2$s</string>
+  <string name="delete_helper_ask_spam_other">Overige</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="share_image_via">Deel afbeelding via</string>
   <string name="account_created">Profiel gemaakt!</string>
 </resources>

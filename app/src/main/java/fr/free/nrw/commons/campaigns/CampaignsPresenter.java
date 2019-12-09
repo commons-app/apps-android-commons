@@ -2,26 +2,26 @@ package fr.free.nrw.commons.campaigns;
 
 import android.annotation.SuppressLint;
 
-import org.wikipedia.util.DateUtil;
-
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.MvpView;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 /**
  * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on
@@ -30,14 +30,18 @@ import timber.log.Timber;
 @Singleton
 public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
     private final OkHttpJsonApiClient okHttpJsonApiClient;
+    private final Scheduler mainThreadScheduler;
+    private final Scheduler ioScheduler;
 
     private ICampaignsView view;
     private Disposable disposable;
     private Campaign campaign;
 
     @Inject
-    public CampaignsPresenter(OkHttpJsonApiClient okHttpJsonApiClient) {
+    public CampaignsPresenter(OkHttpJsonApiClient okHttpJsonApiClient, @Named(IO_THREAD)Scheduler ioScheduler, @Named(MAIN_THREAD)Scheduler mainThreadScheduler) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
+        this.mainThreadScheduler=mainThreadScheduler;
+        this.ioScheduler=ioScheduler;
     }
 
     @Override
@@ -64,8 +68,8 @@ public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
                 return;
             }
             Single<CampaignResponseDTO> campaigns = okHttpJsonApiClient.getCampaigns();
-            campaigns.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+            campaigns.observeOn(mainThreadScheduler)
+                .subscribeOn(ioScheduler)
                 .subscribeWith(new SingleObserver<CampaignResponseDTO>() {
 
                     @Override public void onSubscribe(Disposable d) {
@@ -77,6 +81,7 @@ public class CampaignsPresenter implements BasePresenter<ICampaignsView> {
                         if (campaigns == null || campaigns.isEmpty()) {
                             Timber.e("The campaigns list is empty");
                             view.showCampaigns(null);
+                            return;
                         }
                         Collections.sort(campaigns, (campaign, t1) -> {
                             Date date1, date2;

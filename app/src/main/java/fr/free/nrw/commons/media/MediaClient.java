@@ -2,17 +2,12 @@ package fr.free.nrw.commons.media;
 
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.dataclient.mwapi.MwQueryResult;
-
-import java.util.Date;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,12 +19,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import okhttp3.HttpUrl;
-import okhttp3.Request;
-import okhttp3.Response;
 import timber.log.Timber;
-import io.reactivex.Observable;
-import io.reactivex.Single;
 
 /**
  * Media Client to handle custom calls to Commons MediaWiki APIs
