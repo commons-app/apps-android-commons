@@ -190,17 +190,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * Set the background color to white
      */
     private void changeBackGroundColor(){
-        FrameLayout fl = findViewById(R.id.layout_image);
+        FrameLayout fl = this.getView().findViewById(R.id.layout_image);
+        fl.setBackgroundColor(Color.WHITE);
 
-        //Fragment frag = getFragmentManager().findFragmentById(R.id.fragment_media_detail);
-        //frag.getView().setBackgroundColor(Color.WHITE);
-
-        //getActivity().get
-        //pager.setBackgroundColor(Color.WHITE);
-        //getActivity().setContentView(getActivity().getWindow().getDecorView().setBackgroundColor(Color.WHITE));
-        //getParentFragment().getView().setBackgroundColor(Color.WHITE);
-        //getActivity().getWindow().getDecorView().setBackgroundColor(Color.WHITE);
-        //this.getView().setBackgroundColor();
     }
 
     /**
