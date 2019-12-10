@@ -552,7 +552,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="exif_tag_name_serialNumbers">Serial Numbers</string>
   <string name="exif_tag_name_software">Software</string>
 
-  <string name="share_text">Upload photos to Wikimedia Commons on your phone Download the Commons app: %1$s</string>
+  <string name="share_text">Upload photos to Wikimedia Commons directly from your phone. Download the Commons App now: %1$s</string>
   <string name="share_via">Share app via...</string>
   <string name="image_info">Image Info</string>
   <string name="no_categories_found">No Categories found</string>
