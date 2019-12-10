@@ -3,17 +3,23 @@ package fr.free.nrw.commons.media;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -40,6 +46,8 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.settings.SettingsFragment;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -190,8 +198,17 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * Set the background color to white
      */
     private void changeBackGroundColor(){
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Boolean theme = prefs.getBoolean("theme", true);
+        // true == dark theme       et false == light theme
         FrameLayout fl = this.getView().findViewById(R.id.layout_image);
-        fl.setBackgroundColor(Color.WHITE);
+        if (theme){
+            fl.setBackgroundColor(Color.WHITE);
+        } else {
+            fl.setBackgroundColor(Color.DKGRAY);
+        }
 
     }
 
