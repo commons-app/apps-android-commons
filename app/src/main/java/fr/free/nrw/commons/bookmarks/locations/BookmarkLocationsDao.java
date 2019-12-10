@@ -19,6 +19,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.Sitelinks;
+import timber.log.Timber;
 
 import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI;
 
@@ -239,6 +240,7 @@ public class BookmarkLocationsDao {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
+            Timber.d("bookmarksLocations db is updated from:"+from+", to:"+to);
             if (from == to) {
                 return;
             }
@@ -258,6 +260,11 @@ public class BookmarkLocationsDao {
             if (from == 8) {
                 from++;
                 onUpdate(db, from, to);
+                return;
+            }
+            if (from == 10 && to == 11) {
+                from++;
+                db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_pic STRING;");
                 return;
             }
         }
