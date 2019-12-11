@@ -63,6 +63,7 @@ public class Place implements Parcelable {
                         .setCommonsLink(item.getCommonsArticle().getValue())
                         .setWikidataLink(item.getItem().getValue())
                         .build());
+        Place..setHintTextColor(Color.white);
     }
 
     /**
