@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -24,6 +25,9 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+import com.actionbarsherlock.widget.SearchView;
+import com.actionbarsherlock.widget.SearchView.SearchAutoComplete;
+
 
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
@@ -119,7 +123,7 @@ public class NearbyController {
         for (Place place : placeList) {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
-            place.setHintTextColor(Color.white);
+            placeList.setHintTextColor(Color.white);
         }
         return placeList;
     }
@@ -143,6 +147,7 @@ public class NearbyController {
         }
 
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
+       
 
         VectorDrawableCompat vectorDrawable = null;
         try {
