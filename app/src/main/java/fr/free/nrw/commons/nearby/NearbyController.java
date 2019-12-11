@@ -119,6 +119,7 @@ public class NearbyController {
         for (Place place : placeList) {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
+            place.setHintTextColor(Color.white);
         }
         return placeList;
     }
