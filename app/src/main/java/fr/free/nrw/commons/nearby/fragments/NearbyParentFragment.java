@@ -974,6 +974,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         applicationKvStore.putJson(PLACE_OBJECT, selectedPlace);
     }
 
+    /**
+     * This function clears the place data from the application, so that when the user leaves the app and
+     * tries to upload an other image the data is not kept (see #2803)
+     */
+    public void removeSharedPrefs() {
+        Timber.d("Remove place objects");
+        applicationKvStore.remove(PLACE_OBJECT);
+    }
+
     private void updateBookmarkButtonImage(Place place) {
         int bookmarkIcon;
         if (bookmarkLocationDao.findBookmarkLocation(place)) {
