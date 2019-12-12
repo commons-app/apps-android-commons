@@ -482,5 +482,9 @@
   <string name="text_copy">텍스트가 클립보드에 복사되었습니다</string>
   <string name="notification_mark_read">알림을 읽은 것으로 표시</string>
   <string name="some_error">오류가 있었습니다!</string>
+  <string name="place_state">장소 상태:</string>
+  <string name="place_state_exists">존재함</string>
   <string name="place_state_needs_photo">사진 필요</string>
+  <string name="place_type">장소 유형:</string>
+  <string name="nearby_search_hint">다리, 박물관, 호텔 등.</string>
 </resources>

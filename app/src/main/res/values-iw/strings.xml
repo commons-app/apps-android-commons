@@ -531,7 +531,7 @@
   <string name="exif_tag_name_lensModel">דגם העדשה</string>
   <string name="exif_tag_name_serialNumbers">מספרים סידוריים</string>
   <string name="exif_tag_name_software">תוכנה</string>
-  <string name="share_text">כדי להעלות תמונות לוויקינתונים של ויקימדיה בעזרת הטלפון שלך יש להוריד את היישומון של ויקינתונים: %1$s</string>
+  <string name="share_text">כדי להעלות תמונות לוויקינתונים של ויקימדיה ישר מהטלפון שלך. אתם מוזמנים להוריד את היישום של ויקינתונים עכשיו: %1$s</string>
   <string name="share_via">שיתוף היישום דרך...</string>
   <string name="image_info">פרטי תמונה</string>
   <string name="no_categories_found">לא נמצאו קטגוריות</string>

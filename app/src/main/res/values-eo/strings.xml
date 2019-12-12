@@ -521,7 +521,7 @@
   <string name="exif_tag_name_lensModel">Speco de Lenso</string>
   <string name="exif_tag_name_serialNumbers">Numero de Fotilo</string>
   <string name="exif_tag_name_software">Programaro</string>
-  <string name="share_text">Alŝutu fotojn al Vikimedia Komunejo telefone. Elŝutu la Komunejo-aplikaĵon: %1$s</string>
+  <string name="share_text" fuzzy="true">Alŝutu fotojn al Vikimedia Komunejo telefone. Elŝutu la Komunejo-aplikaĵon: %1$s</string>
   <string name="share_via">Diskonigi aplikaĵon per...</string>
   <string name="image_info">Informo pri Bildo</string>
   <string name="no_categories_found">Neniu Kategorio troviĝis</string>

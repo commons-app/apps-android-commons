@@ -538,7 +538,7 @@
   <string name="exif_tag_name_lensModel">Модель об\'єктиву</string>
   <string name="exif_tag_name_serialNumbers">Серійний номер</string>
   <string name="exif_tag_name_software">Програмне забезпечення</string>
-  <string name="share_text">Вивантажуйте фото у Вікісховище зі свого телефона. Завантажте застосунок: %1$s</string>
+  <string name="share_text" fuzzy="true">Вивантажуйте фото у Вікісховище зі свого телефона. Завантажте застосунок: %1$s</string>
   <string name="share_via">Поділитися програмкою через…</string>
   <string name="image_info">Інформація про зображення</string>
   <string name="no_categories_found">Категорії не знайдені</string>

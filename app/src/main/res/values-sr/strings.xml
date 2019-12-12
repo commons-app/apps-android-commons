@@ -497,7 +497,7 @@
   <string name="exif_tag_name_lensModel">Модел објектива</string>
   <string name="exif_tag_name_serialNumbers">Серијски бројеви</string>
   <string name="exif_tag_name_software">Софтвер</string>
-  <string name="share_text">Отпреми фотографије на Викимедијину Оставу са свог телефона. Преузми апликацију Оставе: %1$s</string>
+  <string name="share_text" fuzzy="true">Отпреми фотографије на Викимедијину Оставу са свог телефона. Преузми апликацију Оставе: %1$s</string>
   <string name="share_via">Подели апликацију преко...</string>
   <string name="image_info">Информације о слици</string>
   <string name="no_categories_found">Нису пронађене категорије</string>

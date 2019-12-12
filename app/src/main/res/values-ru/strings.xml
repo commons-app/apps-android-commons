@@ -539,7 +539,7 @@
   <string name="exif_tag_name_lensModel">Модель объектива</string>
   <string name="exif_tag_name_serialNumbers">Серийный номер</string>
   <string name="exif_tag_name_software">Программное обеспечение</string>
-  <string name="share_text">Чтобы загружать фото на Викисклад (Wikimedia Commons), скачайте одноимённое приложение «Викисклад» (Commons): %1$s</string>
+  <string name="share_text" fuzzy="true">Чтобы загружать фото на Викисклад (Wikimedia Commons), скачайте одноимённое приложение «Викисклад» (Commons): %1$s</string>
   <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
   <string name="no_categories_found">Категории не найдены.</string>

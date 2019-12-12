@@ -471,7 +471,7 @@
   <string name="check_category_edit_summary">Pidiendo control de categoría</string>
   <string name="check_category_success_title">Verificación de categoría requerida</string>
   <string name="check_category_failure_title">La verificación de categoría falló</string>
-  <string name="check_category_success_message" fuzzy="true">Pedido exitoso de control de categoría para %1$s</string>
+  <string name="check_category_success_message">Pedido de control de categoría para %1$s</string>
   <string name="check_category_failure_message">No se puede pedir el control de categoría para %1$s</string>
   <string name="check_category_toast">Pidiendo control de categoría para %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Añadiendo mensaje eliminado al archivo</string>
@@ -541,7 +541,7 @@
   <string name="exif_tag_name_lensModel">Modelo de lente</string>
   <string name="exif_tag_name_serialNumbers">Números de serie</string>
   <string name="exif_tag_name_software">Programa</string>
-  <string name="share_text">Sube fotos a Wikimedia Commons desde tu celular, descarga la aplicación de Commons: %1$s</string>
+  <string name="share_text" fuzzy="true">Sube fotos a Wikimedia Commons desde tu celular, descarga la aplicación de Commons: %1$s</string>
   <string name="share_via">Compartir la aplicación vía...</string>
   <string name="image_info">Información de la imagen</string>
   <string name="no_categories_found">No se encontró ninguna categoría</string>

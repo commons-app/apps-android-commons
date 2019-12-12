@@ -529,7 +529,7 @@
   <string name="exif_tag_name_lensModel">طراز العدسة</string>
   <string name="exif_tag_name_serialNumbers">الأرقام التسلسلية</string>
   <string name="exif_tag_name_software">برمجية</string>
-  <string name="share_text">ارفع الصور لويكيميديا ​​كومنز على هاتفك قم بتنزيل تطبيق كومنز: %1$s</string>
+  <string name="share_text" fuzzy="true">ارفع الصور لويكيميديا ​​كومنز على هاتفك قم بتنزيل تطبيق كومنز: %1$s</string>
   <string name="share_via">مشاركة التطبيق عبر...</string>
   <string name="image_info">معلومات الصورة</string>
   <string name="no_categories_found">لم يتم العثور على تصنيفات</string>

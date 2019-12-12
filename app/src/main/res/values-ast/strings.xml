@@ -519,7 +519,7 @@
   <string name="exif_tag_name_lensModel">Modelu de la lente</string>
   <string name="exif_tag_name_serialNumbers">Númberos de serie</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="share_text">Xubi semeyes a Wikimedia Commons nel to móvil, descarga l\'aplicación de Commons: %1$s</string>
+  <string name="share_text" fuzzy="true">Xubi semeyes a Wikimedia Commons nel to móvil, descarga l\'aplicación de Commons: %1$s</string>
   <string name="share_via">Compartir l\'aplicación per...</string>
   <string name="image_info">Información de la imaxe</string>
   <string name="no_categories_found">Nun s\'alcontró nenguna categoría</string>

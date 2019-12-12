@@ -165,4 +165,9 @@
   <string name="notifications_mention">%1$s jus paminėjo %2$s.</string>
   <string name="block_notification_title">Užblokuota</string>
   <string name="share_via">Dalintis programą per ...</string>
+  <string name="place_state">Vietos būsena:</string>
+  <string name="place_state_exists">Egzistuoja</string>
+  <string name="place_state_needs_photo">Reikia Nuotraukos</string>
+  <string name="place_type">Vietos tipas:</string>
+  <string name="nearby_search_hint">Tiltas, muziejus, viešbutis ir t.t.</string>
 </resources>

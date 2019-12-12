@@ -528,7 +528,7 @@
   <string name="exif_tag_name_lensModel">透鏡模型</string>
   <string name="exif_tag_name_serialNumbers">序號</string>
   <string name="exif_tag_name_software">軟體</string>
-  <string name="share_text">在您的手機上更新照片到維基共享資源，下載共享資源應用程式：%1$s</string>
+  <string name="share_text">從您的手機上直接更新照片到維基共享資源，請現在下載共享資源應用程式：%1$s</string>
   <string name="share_via">分享應用程式透過…</string>
   <string name="image_info">圖片資訊</string>
   <string name="no_categories_found">找不到分類</string>

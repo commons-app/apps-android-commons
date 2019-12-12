@@ -532,7 +532,7 @@
   <string name="exif_tag_name_lensModel">Modelo da lente</string>
   <string name="exif_tag_name_serialNumbers">Números de série</string>
   <string name="exif_tag_name_software">\'\'Software\'\'</string>
-  <string name="share_text">Carregar fotografias na wiki Wikimedia Commons, do seu telemóvel Descarregar a aplicação Commons: %1$s</string>
+  <string name="share_text" fuzzy="true">Carregar fotografias na wiki Wikimedia Commons, do seu telemóvel Descarregar a aplicação Commons: %1$s</string>
   <string name="share_via">Partilhar aplicação por...</string>
   <string name="image_info">Informação da imagem</string>
   <string name="no_categories_found">Não foi encontrada nenhuma categoria</string>

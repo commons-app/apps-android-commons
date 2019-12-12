@@ -536,7 +536,7 @@
   <string name="exif_tag_name_lensModel">Lens Modeli</string>
   <string name="exif_tag_name_serialNumbers">Seri Numaraları</string>
   <string name="exif_tag_name_software">Yazılım</string>
-  <string name="share_text">Fotoğrafları telefonunuzda Wikimedia Commons\'a yükleyin Commons uygulamasını indirin: %1$s</string>
+  <string name="share_text" fuzzy="true">Fotoğrafları telefonunuzda Wikimedia Commons\'a yükleyin Commons uygulamasını indirin: %1$s</string>
   <string name="share_via">Uygulamayı üzerinden paylaş...</string>
   <string name="image_info">Resim Bilgisi</string>
   <string name="no_categories_found">Kategori bulunamadı</string>

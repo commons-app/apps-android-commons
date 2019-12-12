@@ -521,7 +521,7 @@
   <string name="exif_tag_name_lensModel">Model objektívu</string>
   <string name="exif_tag_name_serialNumbers">Sériové čísla</string>
   <string name="exif_tag_name_software">Softvér</string>
-  <string name="share_text">Nahrávajte fotky na Wikimedia Commons na vašom mobile. Stiahnite si aplikáciu Wikimedia Commons: %1$s</string>
+  <string name="share_text" fuzzy="true">Nahrávajte fotky na Wikimedia Commons na vašom mobile. Stiahnite si aplikáciu Wikimedia Commons: %1$s</string>
   <string name="share_via">Zdieľať aplikáciu cez...</string>
   <string name="image_info">Informácie o obrázku</string>
   <string name="no_categories_found">Nenájdené žiadne kategórie</string>

@@ -524,7 +524,7 @@
   <string name="exif_tag_name_lensModel">Linsmodell</string>
   <string name="exif_tag_name_serialNumbers">Serienummer</string>
   <string name="exif_tag_name_software">Programvara</string>
-  <string name="share_text">Ladda upp foton till Wikimedia Commons på din telefon Ladda ned Commons-appen: %1$s</string>
+  <string name="share_text" fuzzy="true">Ladda upp foton till Wikimedia Commons på din telefon Ladda ned Commons-appen: %1$s</string>
   <string name="share_via">Dela appen via...</string>
   <string name="image_info">Bildinfo</string>
   <string name="no_categories_found">Inga kategorier hittades</string>

@@ -493,7 +493,7 @@
   <string name="exif_tag_name_lensModel">Lencsemodell</string>
   <string name="exif_tag_name_serialNumbers">Sorozatszámok</string>
   <string name="exif_tag_name_software">Szoftver</string>
-  <string name="share_text">A Wikimedia Commons-ba való képfeltöltéshez szükséged lesz  a Commons applikációra: %1$s</string>
+  <string name="share_text" fuzzy="true">A Wikimedia Commons-ba való képfeltöltéshez szükséged lesz  a Commons applikációra: %1$s</string>
   <string name="share_via">Alkalmazás megosztása ezzel...</string>
   <string name="image_info">Képinformáció</string>
   <string name="no_categories_found">Nem található kategória</string>
