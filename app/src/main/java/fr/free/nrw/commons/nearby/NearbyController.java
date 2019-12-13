@@ -20,6 +20,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
@@ -244,6 +245,14 @@ public class NearbyController {
         }
 
         return baseMarkerOptions;
+    }
+    /**
+     * A function which clears the shared preferences
+     * Used to fix #3202
+     */
+    public void removeSharedPrefs(JsonKvStore applicationKvStore, String PLACE_OBJECT) {
+        Timber.d("Remove place objects");
+        applicationKvStore.remove(PLACE_OBJECT);
     }
 
     /**

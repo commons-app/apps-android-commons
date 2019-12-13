@@ -979,8 +979,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * tries to upload an other image the data is not kept (see #2803)
      */
     public void removeSharedPrefs() {
-        Timber.d("Remove place objects");
-        applicationKvStore.remove(PLACE_OBJECT);
+        nearbyController.removeSharedPrefs(applicationKvStore, PLACE_OBJECT);
     }
 
     private void updateBookmarkButtonImage(Place place) {
