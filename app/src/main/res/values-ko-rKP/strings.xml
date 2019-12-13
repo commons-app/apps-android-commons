@@ -287,7 +287,7 @@
   <string name="error_loading_subcategories">하위 분류를 불러오는 동안 오유가 생겼습니다.</string>
   <string name="search_tab_title_media" fuzzy="true">매체</string>
   <string name="search_tab_title_categories" fuzzy="true">분류</string>
-  <string name="successful_wikidata_edit">위키자료의 %1$s에 그림을 성공적으로 추가했습니다!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">위키자료의 %1$s에 그림을 성공적으로 추가했습니다!</string>
   <string name="menu_set_wallpaper">배경화면으로 설정</string>
   <string name="wallpaper_set_successfully">배경화면을 성공적으로 설정했습니다!</string>
   <string name="quiz_question_string">이 화상을 올리적재하시겠습니까?</string>

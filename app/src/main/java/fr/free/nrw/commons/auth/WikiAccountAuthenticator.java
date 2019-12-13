@@ -9,6 +9,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -105,16 +106,6 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
         Bundle bundle = new Bundle();
         bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-
-        return bundle;
-    }
-
-    private Bundle unsupportedOperation() {
-        Bundle bundle = new Bundle();
-        bundle.putInt(AccountManager.KEY_ERROR_CODE, AccountManager.ERROR_CODE_UNSUPPORTED_OPERATION);
-
-        // HACK: the docs indicate that this is a required key bit it's not displayed to the user.
-        bundle.putString(AccountManager.KEY_ERROR_MESSAGE, "");
 
         return bundle;
     }

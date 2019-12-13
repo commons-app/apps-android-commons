@@ -3,7 +3,20 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -18,15 +31,6 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.BehaviorSubject;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 import timber.log.Timber;
 
 @Singleton
@@ -142,6 +146,9 @@ public class UploadModel {
                 createdTimestampSource);
         if (place != null) {
             uploadItem.title.setTitleText(place.name);
+            if(uploadItem.descriptions.isEmpty()) {
+                uploadItem.descriptions.add(new Description());
+            }
             uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
             uploadItem.descriptions.get(0).setLanguageCode("en");
         }
@@ -264,7 +271,6 @@ public class UploadModel {
             this.createdTimestampSource = createdTimestampSource;
             title = new Title();
             descriptions = new ArrayList<>();
-            descriptions.add(new Description());
             this.place = place;
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;

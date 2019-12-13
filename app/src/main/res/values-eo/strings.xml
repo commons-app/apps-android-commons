@@ -95,7 +95,7 @@
   <string name="title_activity_signup">Registriĝi</string>
   <string name="title_activity_featured_images">Elstarigitaj bildoj</string>
   <string name="title_activity_category_details">Kategorio</string>
-  <string name="title_activity_review">Reviziado far Kolegoj</string>
+  <string name="title_activity_review">Reviziado de kolegoj</string>
   <string name="menu_about">Pri</string>
   <string name="about_license">La aplikaĵo de Vikimedia Komunejo estas malfermitkoda aplijaĵo kreita kaj subtenata de la gratifikitoj kaj voluntuloj de la Vikimedia komunumo. La Vikimedia Fondaĵo ne partoprenas en la kreado, evoluigado, aŭ subtenado de la aplikaĵo.</string>
   <string name="about_improve">Krei novan &lt;a href=\"%1$s\"&gt;problemon ĉe GitHub&lt;/a&gt; por raportoj pri cimoj kaj sugestoj.</string>
@@ -325,7 +325,7 @@
   <string name="search_tab_title_categories">Kategorioj</string>
   <string name="explore_tab_title_featured">Elstaraj</string>
   <string name="explore_tab_title_mobile">Alŝutita per poŝaparato</string>
-  <string name="successful_wikidata_edit">Bildo sukcese aldoniĝis al %1$s ĉe Vikidatumoj!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Bildo sukcese aldoniĝis al %1$s ĉe Vikidatumoj!</string>
   <string name="wikidata_edit_failure">Malsukcesis aktualigo de la respondanta Vikidatuma ero!</string>
   <string name="menu_set_wallpaper">Ekranfonigi</string>
   <string name="wallpaper_set_successfully">Sukcese ŝanĝis ekranfonon!</string>
@@ -451,7 +451,7 @@
   <string name="check_category_edit_summary">Petante kontrolon de kategorio</string>
   <string name="check_category_success_title">Petis kontrolon de kategorio</string>
   <string name="check_category_failure_title">Misfunkciis kontrolo de kategorio pri %1$s</string>
-  <string name="check_category_success_message">Sukcese petis kontrolon de kategorio pri %1$s</string>
+  <string name="check_category_success_message" fuzzy="true">Sukcese petis kontrolon de kategorio pri %1$s</string>
   <string name="check_category_failure_message">Ne povis peti kontrolon de kategorio pri %1$s</string>
   <string name="check_category_toast">Petante kontrolon de kategorio pri %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Aldonante forigan mesaĝon al dosiero</string>
@@ -521,7 +521,7 @@
   <string name="exif_tag_name_lensModel">Speco de Lenso</string>
   <string name="exif_tag_name_serialNumbers">Numero de Fotilo</string>
   <string name="exif_tag_name_software">Programaro</string>
-  <string name="share_text">Alŝutu fotojn al Vikimedia Komunejo telefone. Elŝutu la Komunejo-aplikaĵon: %1$s</string>
+  <string name="share_text" fuzzy="true">Alŝutu fotojn al Vikimedia Komunejo telefone. Elŝutu la Komunejo-aplikaĵon: %1$s</string>
   <string name="share_via">Diskonigi aplikaĵon per...</string>
   <string name="image_info">Informo pri Bildo</string>
   <string name="no_categories_found">Neniu Kategorio troviĝis</string>
@@ -533,7 +533,7 @@
   <string name="delete_helper_make_deletion_toast">Provante proponi la forigon de %1$s</string>
   <string name="delete_helper_show_deletion_title">Proponi forigon</string>
   <string name="delete_helper_show_deletion_title_success">Sukcesis</string>
-  <string name="delete_helper_show_deletion_message_if">Sukcese proponis la forigon de %1$s.</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Sukcese proponis la forigon de %1$s.</string>
   <string name="delete_helper_show_deletion_title_failed">Malsukcesis</string>
   <string name="delete_helper_show_deletion_message_else">Ne povis proponi forigon.</string>
   <string name="delete_helper_ask_spam_selfie">Memfoto</string>

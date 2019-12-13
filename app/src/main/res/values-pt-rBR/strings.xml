@@ -320,6 +320,7 @@
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
   <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
   <string name="image_uploaded_by">Carregada por: %1$s</string>
+  <string name="block_notification_title">Bloqueado</string>
   <string name="block_notification">Está impedido de editar no Commons</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <string name="app_widget_heading">Imagem do Dia</string>
@@ -335,7 +336,7 @@
   <string name="search_tab_title_categories">Categorias</string>
   <string name="explore_tab_title_featured">Destacadas</string>
   <string name="explore_tab_title_mobile">Carregado via celular</string>
-  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
+  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
   <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
@@ -461,7 +462,7 @@
   <string name="check_category_edit_summary">Solicitando verificação de categoria</string>
   <string name="check_category_success_title">Verificação de categoria solicitada</string>
   <string name="check_category_failure_title">A solicitação de verificação de categoria não funcionou</string>
-  <string name="check_category_success_message">Verificação de categoria solicitada com êxito para %1$s</string>
+  <string name="check_category_success_message">Verificação de categoria solicitada para %1$s</string>
   <string name="check_category_failure_message">Não foi possível solicitar a verificação de categoria para %1$s</string>
   <string name="check_category_toast">Solicitando verificação de categoria para %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Acionando mensagem de exclusão ao arquivo</string>
@@ -531,7 +532,7 @@
   <string name="exif_tag_name_lensModel">Modelo de lente</string>
   <string name="exif_tag_name_serialNumbers">Números de série</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="share_text">Faça o carregamento de fotos para o Wikimedia Commons no seu telefone ou baixe o aplicativo Commons: %1$s</string>
+  <string name="share_text" fuzzy="true">Faça o carregamento de fotos para o Wikimedia Commons no seu telefone ou baixe o aplicativo Commons: %1$s</string>
   <string name="share_via">Compartilhar aplicativo via...</string>
   <string name="image_info">Informação da imagem</string>
   <string name="no_categories_found">Nenhuma categoria encontrada</string>
@@ -543,7 +544,7 @@
   <string name="delete_helper_make_deletion_toast">Tentando nomear %1$s para exclusão</string>
   <string name="delete_helper_show_deletion_title">Nomeação para exclusão</string>
   <string name="delete_helper_show_deletion_title_success">Sucesso</string>
-  <string name="delete_helper_show_deletion_message_if">%1$s foi nomeado para eliminação.</string>
+  <string name="delete_helper_show_deletion_message_if">Nomeado %1$s para exclusão.</string>
   <string name="delete_helper_show_deletion_title_failed">Falhou</string>
   <string name="delete_helper_show_deletion_message_else">Não foi possível pedir eliminação.</string>
   <string name="delete_helper_ask_spam_selfie">Uma selfie</string>
@@ -555,4 +556,16 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
   <string name="delete_helper_ask_reason_copyright_other">Outro</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
+  <string name="share_image_via">Compartilhar imagem via</string>
+  <string name="no_achievements_yet">Você ainda não fez nenhuma contribuição</string>
+  <string name="account_created">Conta criada!</string>
+  <string name="text_copy">Texto copiado para a área de transferência</string>
+  <string name="notification_mark_read">Notificação marcada como lida</string>
+  <string name="some_error">Ocorreu algum erro!</string>
+  <string name="place_state">Estado do local:</string>
+  <string name="place_state_exists">Existe</string>
+  <string name="place_state_needs_photo">Precisa de foto</string>
+  <string name="place_type">Tipo de local:</string>
+  <string name="nearby_search_hint">Ponte, museu, hotel etc.</string>
+  <string name="you_must_reset_your_passsword">Algo deu errado com a entrada, você deve redefinir sua senha!</string>
 </resources>

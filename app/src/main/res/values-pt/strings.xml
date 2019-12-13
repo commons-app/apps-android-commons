@@ -31,7 +31,7 @@
   <string name="intent_share_upload_label">Carregar na wiki Commons</string>
   <string name="username">Nome de utilizador</string>
   <string name="password">Palavra-passe</string>
-  <string name="login_credential">Entre com a sua conta da wiki Commons Beta</string>
+  <string name="login_credential">Entrar na sua conta da wiki Commons Beta</string>
   <string name="login">Entrar</string>
   <string name="forgot_password">Esqueceu-se da palavra-passe?</string>
   <string name="signup">Registar-se</string>
@@ -40,8 +40,8 @@
   <string name="login_success">Sessão iniciada!</string>
   <string name="login_failed">O início de sessão falhou!</string>
   <string name="upload_failed">O ficheiro não foi encontrado. Tente outro, por favor.</string>
-  <string name="authentication_failed">A autenticação falhou, inicie uma nova sessão, por favor</string>
-  <string name="uploading_started">O carregamento foi iniciado!</string>
+  <string name="authentication_failed">A autenticação falhou; inicie novamente a sessão, por favor</string>
+  <string name="uploading_started">Carregamento iniciado!</string>
   <string name="upload_completed_notification_title">%1$s carregado!</string>
   <string name="upload_completed_notification_text">Toque para ver o seu carregamento</string>
   <string name="upload_progress_notification_title_start">A iniciar o carregamento de %1$s</string>
@@ -56,7 +56,7 @@
   <string name="title_activity_contributions">Carregamentos recentes</string>
   <string name="contribution_state_queued">Em espera</string>
   <string name="contribution_state_failed">Falhado</string>
-  <string name="contribution_state_in_progress">%1$d%% efetuado</string>
+  <string name="contribution_state_in_progress">%1$d%% transferido</string>
   <string name="contribution_state_starting">A carregar</string>
   <string name="menu_from_gallery">Da galeria</string>
   <string name="menu_from_camera">Tirar foto</string>
@@ -67,9 +67,9 @@
   <string name="share_title_hint">Título (obrigatório)</string>
   <string name="add_title_toast">Forneça um título para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
-  <string name="login_failed_network">Não foi possível iniciar sessão - falha de rede</string>
-  <string name="login_failed_wrong_credentials">Não foi possível iniciar sessão - verifique o seu nome de utilizador e a palavra-passe</string>
-  <string name="login_failed_throttled">Demasiadas tentativas malsucedidas. Por favor, tente de novo dentro de alguns minutos.</string>
+  <string name="login_failed_network">Não é possível iniciar uma sessão - falha de rede</string>
+  <string name="login_failed_wrong_credentials">Não é possível iniciar uma sessão - verifique o seu nome de utilizador e a palavra-passe, por favor</string>
+  <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente novamente dentro de minutos.</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado na wiki Commons</string>
   <string name="login_failed_2fa_needed">Tem de fornecer o seu código de autenticação de dois fatores.</string>
   <string name="login_failed_generic">Falha ao iniciar sessão</string>
@@ -110,7 +110,7 @@
   <string name="about_license">A aplicação da wiki Wikimedia Commons é uma aplicação de código aberto criada e mantida por bolseiros e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção da aplicação.</string>
   <string name="about_improve">Criar uma nova &lt;a href=\"%1$s\"&gt;incidência no GitHub&lt;/a&gt; para reportar erros e sugestões.</string>
   <string name="about_privacy_policy">&lt;u&gt;Política de privacidade&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Ficha técnica&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por correio eletrónico)</string>
   <string name="no_email_client">Não foi instalado nenhum cliente de correio eletrónico</string>
@@ -178,12 +178,12 @@
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_discussion_empty">Não há nenhuma discussão</string>
   <string name="detail_license_empty">Licença desconhecida</string>
-  <string name="menu_refresh">Actualizar</string>
+  <string name="menu_refresh">Atualizar</string>
   <string name="storage_permission_title">A pedir permissão de armazenamento</string>
-  <string name="read_storage_permission_rationale">Permissão necessária: Ler a armazenagem externa. A aplicação não pode aceder à sua galeria sem isto.</string>
-  <string name="write_storage_permission_rationale">Permissão necessária: Escrever na armazenagem externa. A aplicação não pode aceder à sua câmara/galeria sem isto.</string>
+  <string name="read_storage_permission_rationale">Permissão necessária: ler o armazenamento externo. A aplicação não pode aceder à sua galeria sem isto.</string>
+  <string name="write_storage_permission_rationale">Permissão necessária: escrever no armazenamento externo. A aplicação não pode aceder à sua câmara/galeria sem isto.</string>
   <string name="location_permission_title">Autorização para identificar localização</string>
-  <string name="location_permission_rationale">Permissão opcional: Obter a localização atual para sugestões de categoria</string>
+  <string name="location_permission_rationale">Permissão opcional: obter a localização atual para sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Locais Próximos</string>
   <string name="no_nearby">Não foi encontrado nenhum local próximo</string>
@@ -200,7 +200,7 @@
   <string name="media_detail_coordinates">Coordenadas</string>
   <string name="media_detail_coordinates_empty">Não fornecido</string>
   <string name="become_a_tester_title">Torne-se um Testador Beta</string>
-  <string name="become_a_tester_description">Opte pelo nosso canal beta no Google Play e obtenha acesso antecipado a novas funcionalidades e a correções de erros</string>
+  <string name="become_a_tester_description">Opte pelo nosso canal beta no Google Play e obtenha acesso antecipado às novas funcionalidades e às correções de erros</string>
   <string name="_2fa_code">Código de autenticação de dois fatores</string>
   <string name="number_of_uploads">O meu limite de carregamentos recentes</string>
   <string name="maximum_limit">Limite máximo</string>
@@ -264,7 +264,7 @@
   <string name="upload_problem_do_you_continue">Quer, mesmo assim, carregar esta fotografia?</string>
   <string name="internet_downloaded">Carregue só fotografias tiradas por si, por favor. Não carregue fotografias que tenha descarregado da Internet.</string>
   <string name="give_permission">Permitir</string>
-  <string name="use_external_storage">Utilizar a armazenagem externa</string>
+  <string name="use_external_storage">Utilizar armazenamento externo</string>
   <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>
   <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="send_log_file">Enviar ficheiro de registos</string>
@@ -320,7 +320,8 @@
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
   <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
   <string name="image_uploaded_by">Carregada por: %1$s</string>
-  <string name="block_notification">Está impedido de editar a wiki Commons</string>
+  <string name="block_notification_title">Bloqueado</string>
+  <string name="block_notification">Está bloqueado e impedido de editar a wiki Commons</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <string name="app_widget_heading">Imagem do Dia</string>
   <string name="menu_search_button">Pesquisar</string>
@@ -531,7 +532,7 @@
   <string name="exif_tag_name_lensModel">Modelo da lente</string>
   <string name="exif_tag_name_serialNumbers">Números de série</string>
   <string name="exif_tag_name_software">\'\'Software\'\'</string>
-  <string name="share_text">Carregar fotografias na wiki Wikimedia Commons, do seu telemóvel Descarregar a aplicação Commons: %1$s</string>
+  <string name="share_text" fuzzy="true">Carregar fotografias na wiki Wikimedia Commons, do seu telemóvel Descarregar a aplicação Commons: %1$s</string>
   <string name="share_via">Partilhar aplicação por...</string>
   <string name="image_info">Informação da imagem</string>
   <string name="no_categories_found">Não foi encontrada nenhuma categoria</string>
@@ -555,4 +556,11 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
   <string name="delete_helper_ask_reason_copyright_other">Outro</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
+  <string name="share_image_via">Partilhar imagem via</string>
+  <string name="no_achievements_yet">Ainda não fez nenhuma contribuição</string>
+  <string name="account_created">Conta criada!</string>
+  <string name="text_copy">Texto copiado para a área de transferência</string>
+  <string name="notification_mark_read">Notificação marcada como lida</string>
+  <string name="some_error">Ocorreu um erro!</string>
+  <string name="you_must_reset_your_passsword">Ocorreu algo de errado com a sessão, tem de redefinir a sua palavra-passe!</string>
 </resources>

@@ -4,9 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
-import androidx.annotation.NonNull;
 
-import fr.free.nrw.commons.upload.SimilarImageDialogFragment.Callback;
+import androidx.annotation.NonNull;
+import androidx.exifinterface.media.ExifInterface;
+
+import com.google.gson.reflect.TypeToken;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -19,15 +22,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import androidx.exifinterface.media.ExifInterface;
-
-import com.google.gson.reflect.TypeToken;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.upload.SimilarImageDialogFragment.Callback;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -105,13 +105,13 @@ public class FileProcessor implements Callback {
      */
     private Set<String> getExifTagsToRedact(Context context) {
         Type setType = new TypeToken<Set<String>>() {}.getType();
-        Set<String> selectedExifTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
+        Set<String> prefManageEXIFTags = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
 
         Set<String> redactTags = new HashSet<>(Arrays.asList(
                 context.getResources().getStringArray(R.array.pref_exifTag_values)));
+        Timber.d(redactTags.toString());
 
-        if (selectedExifTags != null) redactTags.removeAll(selectedExifTags);
-        else redactTags.clear();
+        if (prefManageEXIFTags != null) redactTags.removeAll(prefManageEXIFTags);
 
         return redactTags;
     }

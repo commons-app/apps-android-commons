@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -156,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/_2fa_code"
                         android:imeOptions="flagNoExtractUi"
-                        android:inputType="textNoSuggestions"
+                        android:inputType="number"
                         android:visibility="gone"
                         tools:visibility="visible" />
 
@@ -252,4 +252,4 @@
 
     </RelativeLayout>
 
-</ScrollView>
+</LinearLayout>

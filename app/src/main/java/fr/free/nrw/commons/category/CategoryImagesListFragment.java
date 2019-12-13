@@ -13,13 +13,14 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
@@ -27,6 +28,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -56,7 +58,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private boolean isLoading = true;
     private String categoryName = null;
 
-    @Inject CategoryImageController controller;
+    @Inject MediaClient mediaClient;
     @Inject
     @Named("default_preferences")
     JsonKvStore categoryKvStore;
@@ -116,7 +118,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(controller.getCategoryImages(categoryName)
+        compositeDisposable.add(mediaClient.getMediaListFromCategory(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -222,7 +224,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
 
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(controller.getCategoryImages(categoryName)
+        compositeDisposable.add(mediaClient.getMediaListFromCategory(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

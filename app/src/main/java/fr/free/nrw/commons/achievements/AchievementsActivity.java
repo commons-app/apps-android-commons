@@ -7,11 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.FileProvider;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -24,6 +19,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
 import com.dinuscxj.progressbar.CircleProgressBar;
 
 import org.apache.commons.lang3.StringUtils;
@@ -35,7 +36,6 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -199,7 +199,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, fileUri);
             intent.setType("image/png");
-            startActivity(Intent.createChooser(intent, "Share image via"));
+            startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -316,8 +316,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private void setZeroAchievements() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this)
-                .setMessage("You haven't made any contributions yet")
-                .setPositiveButton("Ok", (dialog, which) -> {
+                .setMessage(getString(R.string.no_achievements_yet))
+                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -351,7 +351,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private void inflateAchievements(Achievements achievements) {
         thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
-                (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
+                (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));

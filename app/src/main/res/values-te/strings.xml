@@ -8,12 +8,15 @@
   <string name="preference_category_appearance">రూపురేఖలు</string>
   <string name="preference_category_general">సాధారణం</string>
   <string name="preference_category_feedback">ప్రతిస్పందన</string>
+  <string name="preference_category_privacy">అంతరంగికత</string>
   <string name="preference_category_location">ప్రాంతం</string>
   <string name="app_name">కామన్స్</string>
   <string name="bullet">•</string>
   <string name="menu_settings">అమరికలు</string>
+  <string name="intent_share_upload_label">కామన్స్&amp;zwnj;కి ఎక్కించు</string>
   <string name="username">వాడుకరిపేరు</string>
   <string name="password">సంకేతపదం</string>
+  <string name="login_credential">మీ కామన్స్ బీటా ఖాతా లోనికి ప్రవేశించండి</string>
   <string name="login">లాగినవండి</string>
   <string name="forgot_password">సంకేతపదం మర్చిపోయారా?</string>
   <string name="signup">నమోదవ్వండి</string>
@@ -21,7 +24,8 @@
   <string name="logging_in_message">వేచివుండండి…</string>
   <string name="login_success">లాగిన్ విజయవంతమైంది!</string>
   <string name="login_failed">లాగిన్ విఫలమైంది!</string>
-  <string name="authentication_failed" fuzzy="true">ఆథెంటికేషను విఫలమైంది!</string>
+  <string name="upload_failed">ఫైలు కనబడలేదు. దయచేసి మరో ఫైలును ప్రయత్నించండి.</string>
+  <string name="authentication_failed">అథీకరణ విఫలమైంది, దయచేసి మళ్ళీ ప్రయత్నించండి</string>
   <string name="uploading_started">ఎక్కింపు మొదలైంది!</string>
   <string name="upload_completed_notification_title">%1$s ను ఎక్కించాం!</string>
   <string name="upload_completed_notification_text">మీ ఎక్కింపును చూసేందుకు నొక్కండి</string>
@@ -41,7 +45,8 @@
   <string name="provider_contributions">నా ఎక్కింపులు</string>
   <string name="menu_share">పంచుకోండి</string>
   <string name="menu_open_in_browser">విహారిణిలో చూపు</string>
-  <string name="share_title_hint" fuzzy="true">శీర్షిక</string>
+  <string name="share_title_hint">శీర్షిక (తప్పనిసరి)</string>
+  <string name="add_title_toast">ఈ ఫైలుకి ఒక శీర్షిక ఇవ్వండి</string>
   <string name="share_description_hint">వివరణ</string>
   <string name="login_failed_network">లాగిన్ చెయ్యలేకపోయాం - నెట్‍వర్కు విఫలం</string>
   <string name="login_failed_throttled">మరీ ఎక్కువ విఫల యత్నాలు చేసారు. కొద్ది నిముషాలాగి ప్రయత్నించండి</string>
@@ -54,14 +59,20 @@
   <string name="categories_search_text_hint">వర్గాల్లో వెతకండి</string>
   <string name="menu_save_categories">భద్రపరచు</string>
   <string name="display_list_button">జాబితా</string>
+  <string name="contributions_subtitle_zero">ఇంకా ఎక్కింపులు ఏమీ లేవు</string>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d ఎక్కింపు</item>
+    <item quantity="other">%1$d ఎక్కింపులు</item>
+  </plurals>
   <string name="categories_not_found">%1$s తో సరిపోలే వర్గాలేమీ లేవు</string>
   <string name="categories_skip_explanation" fuzzy="true">వికీమీడియా కామన్స్ లో వెతికేటపుడు మీ బొమ్మలు మరింత సులువుగా కనబడేందుకు వాటికి వర్గాలను చేర్చండి.\n\nవర్గాలను చేర్చేందుకు టైపండి.\nఈ అంగను దాటేసి ముందుకు పోయేందుకు, ఈ సందేశాన్ని నొక్కండి (లేదా ’బ్యాక్’ నొక్కండి)</string>
   <string name="categories_activity_title">వర్గాలు</string>
   <string name="title_activity_settings">అమరికలు</string>
   <string name="title_activity_signup">నమోదవ్వండి</string>
+  <string name="title_activity_category_details">వర్గం</string>
   <string name="menu_about">గురించి</string>
   <string name="about_license" fuzzy="true">ఓపెన్ సోర్సు సాఫ్టువేరు &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; కు లోబడి విడుదలైంది</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;గోప్యతా విధానం&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;గోప్యతా విధానం&lt;/u&gt;</string>
   <string name="title_activity_about">గురించి</string>
   <string name="menu_feedback">ఫీడుబ్యాకును పంపండి (ఈమెయిలు ద్వారా)</string>
   <string name="provider_categories">ఇటీవల వాడిన వర్గాలు</string>
@@ -70,7 +81,8 @@
   <string name="menu_cancel_upload">రద్దుచేయి</string>
   <string name="share_license_summary" fuzzy="true">ఈ బొమ్మ %1$s లైసెన్సు కు లోబడి ఉంటుంది.</string>
   <string name="menu_download">దింపుకోండి</string>
-  <string name="preference_license" fuzzy="true">లైసెన్సు</string>
+  <string name="preference_license">అప్రమేయ లైసెన్సు</string>
+  <string name="use_previous">మునుపటి శీర్షిక/వివరణను వాడు</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -87,26 +99,39 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (రొమేనియా)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="tutorial_3_text">దయచేసి వీటిని ఎక్కించవద్దు:</string>
+  <string name="tutorial_3_subtext_1">స్వీయచిత్రాలు లేదా మీ స్నేహితుల చిత్రాలు</string>
+  <string name="tutorial_3_subtext_2">మీరు అంతర్జాలం నుండి దించుకున్న బొమ్మలు</string>
+  <string name="tutorial_3_subtext_3">ప్రొప్రయిటరీ అనువర్తనాల తెరపట్లు</string>
+  <string name="tutorial_4_text">ఉదాహరణ ఎక్కింపు:</string>
   <string name="welcome_wikipedia_text">మీ వద్ద ఉన్న బొమ్మలను ఇవ్వండి. వికీపీడియా వ్యాసాలకు జీవం పోయండి!</string>
   <string name="welcome_wikipedia_subtext">వికీపీడియా లోని బొమ్మలు వికీమీడియా కామన్స్ నుండి వస్తాయి.</string>
   <string name="welcome_copyright_text">ప్రపంచవ్యాప్తంగా ప్రజలు విజ్ఞానం పొందడానికి మీ బొమ్మలు తోడ్పడతాయి.</string>
   <string name="welcome_copyright_subtext">అంతర్జాలంలో దొరికే కాపీహక్కులు కలిగిన వస్తువులు, పోస్టర్లు, పుస్తకాల అట్టల బొమ్మలు మొదలైనవాటిని పెట్టకండి.</string>
   <string name="welcome_final_text">అర్థమైందనుకుంటున్నారా?</string>
   <string name="welcome_final_button_text">అయింది!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;మరింత సమాచారం&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">వర్గాలు</string>
   <string name="detail_panel_cats_loading">లోడవుతోంది…</string>
   <string name="detail_panel_cats_none">దేన్నీ ఎంచుకోలేదు</string>
   <string name="detail_description_empty">వివరణ లేదు</string>
+  <string name="detail_discussion_empty">చర్చ లేదు</string>
   <string name="detail_license_empty">తెలియని లైసెన్సు</string>
   <string name="menu_refresh">తాజాకరించు</string>
   <string name="ok">సరే</string>
+  <string name="title_activity_nearby">చుట్టుపక్కల ప్రదేశాలు</string>
   <string name="warning">హెచ్చరిక</string>
   <string name="yes">అవును</string>
   <string name="no">కాదు</string>
   <string name="media_detail_title">శీర్షిక</string>
   <string name="media_detail_description">వివరణ</string>
+  <string name="media_detail_discussion">చర్చ</string>
+  <string name="media_detail_author">రచయిత</string>
+  <string name="media_detail_uploaded_date">ఎక్కించిన తేదీ</string>
   <string name="media_detail_license">లైసెన్సు</string>
   <string name="maximum_limit">గరిష్ఠ పరిమితి</string>
+  <string name="invalid_zero">సున్నా చెల్లదు</string>
+  <string name="commons_logo">కామన్స్ చిహ్నం</string>
   <string name="cancel">రద్దుచేయి</string>
   <string name="navigation_drawer_close">మూసివేయి</string>
   <string name="navigation_item_home">ముంగిలి</string>
@@ -115,4 +140,45 @@
   <string name="navigation_item_settings">అమరికలు</string>
   <string name="navigation_item_feedback">ప్రతిస్పందన</string>
   <string name="navigation_item_notification">గమనింపులు</string>
+  <string name="nearby_info_menu_wikipedia_article">వికీపీడియా వ్యాసం</string>
+  <string name="nearby_directions">దిశలు</string>
+  <string name="nearby_wikidata">వికీడేటా</string>
+  <string name="nearby_wikipedia">వికీపీడియా</string>
+  <string name="nearby_commons">కామన్స్</string>
+  <string name="no_internet">అంతర్జాలం అందుబాటులో లేదు</string>
+  <string name="internet_established">అంతర్జాలం అందుబాటులో ఉంది</string>
+  <string name="about_translate_title">భాషలు</string>
+  <string name="about_translate_cancel">రద్దుచేయి</string>
+  <string name="search_recent_header">ఇటీవల వెతికినవి:</string>
+  <string name="search_tab_title_categories">వర్గాలు</string>
+  <string name="question">ప్రశ్న</string>
+  <string name="result">ఫలితం</string>
+  <string name="continue_message">కొనసాగించు</string>
+  <string name="correct">సరైన సమాధానం</string>
+  <string name="wrong">తప్పు సమాధానం</string>
+  <string name="add_description">+వివరణని చేర్చు</string>
+  <string name="no_recent_searches">ఇటీవలి వెతుకులాటలేమీ లేవు</string>
+  <string name="delete_recent_searches_dialog">మీ వెతుకులాట చరిత్రను నిజంగానే తుడిచివేయాలనుకుంటున్నారా?</string>
+  <string name="delete">తొలగించు</string>
+  <string name="statistics">గణాంకాలు</string>
+  <string name="level">స్థాయి</string>
+  <string name="nearby_fragment">చుట్టుపక్కల</string>
+  <string name="notifications">గమనింపులు</string>
+  <string name="list_sheet">జాబితా</string>
+  <string name="next">తదుపరి</string>
+  <string name="previous">మునుపటి</string>
+  <string name="title_page_bookmarks_locations">ప్రాంతాలు</string>
+  <string name="deletion_reason_uploaded_by_mistake">నేను పొరపాటున ఎక్కించాను</string>
+  <string name="deletion_reason_publicly_visible">ఇది అందరికీ కనిపించగలదని నాకు తెలియదు</string>
+  <string name="deletion_reason_bad_for_my_privacy">నా అంతరంగికతకు ఇది చేటు అని గుర్తించాను</string>
+  <string name="desc_language_Worldwide">ప్రపంచవ్యాప్తం</string>
+  <string name="desc_language_America">అమెరికా</string>
+  <string name="desc_language_Europe">ఐరోపా</string>
+  <string name="desc_language_Middle_East">మధ్యప్రాచ్యం</string>
+  <string name="desc_language_Africa">ఆఫ్రికా</string>
+  <string name="desc_language_Asia">ఆసియా</string>
+  <string name="desc_language_Pacific">పసిఫిక్</string>
+  <string name="never_ask_again">దీన్ని ఇంకెప్పుడూ అడగకు</string>
+  <string name="nominate_for_deletion_done">పూర్తయింది</string>
+  <string name="exif_tag_name_location">ప్రాంతం</string>
 </resources>

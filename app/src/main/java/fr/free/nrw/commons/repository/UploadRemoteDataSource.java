@@ -1,5 +1,11 @@
 package fr.free.nrw.commons.repository;
 
+import java.util.Comparator;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -11,10 +17,6 @@ import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import java.util.Comparator;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * This class would act as the data source for remote operations for UploadActivity
@@ -165,7 +167,7 @@ public class UploadRemoteDataSource {
     }
 
     /**
-     * ask the UploadModel for the image quality of the UploadItem
+     * ask the UplaodModel for the image quality of the UploadItem
      *
      * @param uploadItem
      * @param shouldValidateTitle
@@ -173,22 +175,5 @@ public class UploadRemoteDataSource {
      */
     public Single<Integer> getImageQuality(UploadItem uploadItem, boolean shouldValidateTitle) {
         return uploadModel.getImageQuality(uploadItem, shouldValidateTitle);
-    }
-
-    /**
-     * Ask the CategoriesModel to search categories
-     * @param query
-     * @param imageTitleList
-     * @return
-     */
-    public Observable<CategoryItem> searchCategories(String query, List<String> imageTitleList) {
-        return categoriesModel.searchCategories(query, imageTitleList);
-    }
-
-    /**
-     * Ask the CategoriesModel for default categories
-     */
-    public Observable<CategoryItem> getDefaultCategories(List<String> imageTitleList) {
-        return categoriesModel.getDefaultCategories(imageTitleList);
     }
 }

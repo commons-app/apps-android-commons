@@ -13,6 +13,7 @@
 * Mardetanha
 * Mehdi
 * Mjbmr
+* Mobin2008
 * Omidh
 * Ommmmid
 * Physicsch
@@ -183,6 +184,7 @@
   <string name="storage_permission_title">درخواست اجازهٔ ذخیره‌سازی</string>
   <string name="read_storage_permission_rationale">اجازه‌های مورد نیاز: مطالعهٔ حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
   <string name="write_storage_permission_rationale">اجازه‌های مورد نیاز: نوشتن در حافظهٔ خارجی. اپلیکیشن نمی‌تواند به دوربین/گالری دسترسی داشته باشد.</string>
+  <string name="location_permission_title">درخواست مجوز موقعیت مکانی</string>
   <string name="location_permission_rationale">اجازه‌های اختیاری: دریافت موقعیت برای پیشنهاد رده</string>
   <string name="ok">تأیید</string>
   <string name="title_activity_nearby">مکان‌‌های اطراف</string>
@@ -287,17 +289,17 @@
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
   <string name="nearby_location_not_available">مکان موجود نیست.</string>
   <string name="location_permission_rationale_nearby">برای نمایش مکان‌ّای اطراف نیاز به اجازه است.</string>
-  <string name="get_directions" fuzzy="true">دریافت جهت‌‌ها</string>
-  <string name="read_article" fuzzy="true">خواندن مقاله</string>
+  <string name="get_directions">دریافت جهت‌‌ها</string>
+  <string name="read_article">خواندن مقاله</string>
   <string name="notifications_welcome">%1$s، به ویکی‌انبار خوش آمدید! خوشحالیم که اینجا هستید.</string>
   <string name="notifications_talk_page_message">%1$s در صفحهٔ بحث شما پیامی گذاشته‌است</string>
   <string name="notifications_thank_you_edit">برای ویرایش ممنون</string>
   <string name="notifications_mention">%1$s در %2$s به شما اشاره کرده‌است.</string>
   <string name="toggle_view_button">دکمه نمایش</string>
-  <string name="nearby_directions" fuzzy="true">جهت‌ها</string>
-  <string name="nearby_wikidata" fuzzy="true">ویکی‌داده</string>
-  <string name="nearby_wikipedia" fuzzy="true">ویکی‌پدیا</string>
-  <string name="nearby_commons" fuzzy="true">ویکی‌انبار</string>
+  <string name="nearby_directions">جهت‌ها</string>
+  <string name="nearby_wikidata">ویکی‌داده</string>
+  <string name="nearby_wikipedia">ویکی‌پدیا</string>
+  <string name="nearby_commons">ویکی‌انبار</string>
   <string name="about_rate_us">&lt;u&gt;رتبه ما&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;سوال‌های متداول&lt;/u&gt;</string>
   <string name="welcome_skip_button">رهاکردن آموزش</string>
@@ -331,7 +333,7 @@
   <string name="search_tab_title_categories" fuzzy="true">دسته بندی</string>
   <string name="explore_tab_title_featured" fuzzy="true">برگزیده</string>
   <string name="explore_tab_title_mobile" fuzzy="true">بارگذاری‌شده با تلفن همراه</string>
-  <string name="successful_wikidata_edit">تصویر با موفقیت به %1$s در ویکی‌داده افزوده‌شد.</string>
+  <string name="successful_wikidata_edit" fuzzy="true">تصویر با موفقیت به %1$s در ویکی‌داده افزوده‌شد.</string>
   <string name="wikidata_edit_failure">تلاش برای بروزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
   <string name="wallpaper_set_successfully">تصویر پس زمینه به طور موفقیت آمیز تنظیم شد!</string>
@@ -471,4 +473,8 @@
   <string name="exif_tag_name_software">نرم‌افزار</string>
   <string name="share_via">اشتراک از طریق...</string>
   <string name="image_info">اطلاعات عکس</string>
+  <string name="no_categories_found">هیچ رده‌ای یافت نشد</string>
+  <string name="delete_helper_show_deletion_title_success">موفق</string>
+  <string name="delete_helper_show_deletion_title_failed">ناموفق</string>
+  <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
 </resources>

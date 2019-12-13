@@ -240,7 +240,7 @@
   <string name="navigation_item_info">教程</string>
   <string name="navigation_item_notification">通知</string>
   <string name="navigation_item_featured_images">特色</string>
-  <string name="navigation_item_review">評審</string>
+  <string name="navigation_item_review">檢閱</string>
   <string name="nearby_needs_permissions">附近地點需要位置權限才可顯示</string>
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">維基共享資源檔案頁面</string>
@@ -316,6 +316,7 @@
   <string name="no_images_found">找不到圖片！</string>
   <string name="error_loading_images">當載入圖片時發生錯誤。</string>
   <string name="image_uploaded_by">由：%1$s 上傳</string>
+  <string name="block_notification_title">已封鎖</string>
   <string name="block_notification">您被禁止編輯維基共享資源</string>
   <string name="appwidget_img">每日圖片</string>
   <string name="app_widget_heading">每日圖片</string>
@@ -331,7 +332,7 @@
   <string name="search_tab_title_categories">分類</string>
   <string name="explore_tab_title_featured">特色</string>
   <string name="explore_tab_title_mobile">透過行動設備上傳</string>
-  <string name="successful_wikidata_edit">圖片已成功添加到維基數據上的 %1$s！</string>
+  <string name="successful_wikidata_edit">圖片已添加到維基數據上的%1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定為桌布</string>
   <string name="wallpaper_set_successfully">桌布設定成功！</string>
@@ -457,7 +458,7 @@
   <string name="check_category_edit_summary">請求分類檢查</string>
   <string name="check_category_success_title">分類檢查已請求</string>
   <string name="check_category_failure_title">分類檢查請求無效</string>
-  <string name="check_category_success_message">成功請求%1$s的分類檢查</string>
+  <string name="check_category_success_message">已請求%1$s的分類檢查</string>
   <string name="check_category_failure_message">無法請求%1$s的分類檢查</string>
   <string name="check_category_toast">請求%1$s的分類檢查</string>
   <string name="nominate_for_deletion_edit_file_page">添加刪除訊息至檔案</string>
@@ -475,9 +476,9 @@
   <string name="send_thank_toast">為%1$s發送感謝</string>
   <string name="review_copyright">這是否遵守版權規範？</string>
   <string name="review_category">這有分類正確嗎？</string>
-  <string name="review_spam">這有符合範圍嗎？</string>
+  <string name="review_spam">這有符合收錄範圍嗎？</string>
   <string name="review_thanks">您想要向貢獻者感謝嗎？</string>
-  <string name="review_spam_explanation">若此圖片沒有被利用到，點擊「否」來提名刪除。</string>
+  <string name="review_spam_explanation">若此圖片無用，點擊「否」來提名刪除。</string>
   <string name="review_copyright_explanation">商標、螢幕截圖、電影海報通常都會違反版權。\n點擊「否」來提名刪除此圖片。</string>
   <string name="review_thanks_explanation">%1$s會被您的肯定給鼓舞</string>
   <string name="review_no_category">喔，這甚至沒有分類！</string>
@@ -516,7 +517,7 @@
   <string name="previous_button_tooltip_message">點擊來重新使用您在您的先前圖片所輸入之標題與描述，並修改來配合目前的圖片</string>
   <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
   <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
-  <string name="skip_image">忽略此圖片</string>
+  <string name="skip_image">略過此圖片</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">下載失敗！因為缺少外部存儲裝置權限緣故，我們無法下載檔案。</string>
   <string name="manage_exif_tags">管理 EXIF 標籤</string>
   <string name="manage_exif_tags_summary">選擇要保持上傳的 EXIF 標籤</string>
@@ -527,7 +528,7 @@
   <string name="exif_tag_name_lensModel">透鏡模型</string>
   <string name="exif_tag_name_serialNumbers">序號</string>
   <string name="exif_tag_name_software">軟體</string>
-  <string name="share_text">在您的手機上更新照片到維基共享資源，下載共享資源應用程式：%1$s</string>
+  <string name="share_text">從您的手機上直接更新照片到維基共享資源，請現在下載共享資源應用程式：%1$s</string>
   <string name="share_via">分享應用程式透過…</string>
   <string name="image_info">圖片資訊</string>
   <string name="no_categories_found">找不到分類</string>
@@ -539,7 +540,7 @@
   <string name="delete_helper_make_deletion_toast">嘗試向%1$s提名刪除</string>
   <string name="delete_helper_show_deletion_title">提名刪除</string>
   <string name="delete_helper_show_deletion_title_success">成功</string>
-  <string name="delete_helper_show_deletion_message_if">成功向%1$s提名刪除。</string>
+  <string name="delete_helper_show_deletion_message_if">已提名%1$s刪除。</string>
   <string name="delete_helper_show_deletion_title_failed">失敗</string>
   <string name="delete_helper_show_deletion_message_else">無法請求刪除。</string>
   <string name="delete_helper_ask_spam_selfie">自拍</string>
@@ -551,4 +552,16 @@
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>
   <string name="delete_helper_ask_reason_copyright_other">其它</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">因為這</string>
+  <string name="share_image_via">分享圖片透過</string>
+  <string name="no_achievements_yet">您還沒有做出任何貢獻</string>
+  <string name="account_created">已建立帳號！</string>
+  <string name="text_copy">文字已複製至剪貼簿</string>
+  <string name="notification_mark_read">通知標記為已讀</string>
+  <string name="some_error">發生一些錯誤！</string>
+  <string name="place_state">地點狀態：</string>
+  <string name="place_state_exists">存在</string>
+  <string name="place_state_needs_photo">需要照片</string>
+  <string name="place_type">地點類型：</string>
+  <string name="nearby_search_hint">橋梁、美術館、旅館、其它。</string>
+  <string name="you_must_reset_your_passsword">登入時發生一些問題，您必須重新設定您的密碼！！</string>
 </resources>

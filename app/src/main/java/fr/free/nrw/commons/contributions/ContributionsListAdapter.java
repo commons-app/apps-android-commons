@@ -1,10 +1,11 @@
 package fr.free.nrw.commons.contributions;
 
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 

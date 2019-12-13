@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -11,8 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
@@ -90,7 +92,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
             m.viewPager.setCurrentItem(NEARBY_TAB_POSITION);
 
             // Center the map to the place
-            ((NearbyFragment) m.contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).centerMapToPlace(place);
+            ((NearbyParentFragment) m.contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).centerMapToPlace(place);
         });
     }
 
