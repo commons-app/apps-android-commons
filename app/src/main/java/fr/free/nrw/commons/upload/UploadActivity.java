@@ -484,7 +484,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         super.onDestroy();
         presenter.onDetachView();
         compositeDisposable.clear();
-        mediaLicenseFragment.setCallback(null);
-        uploadCategoriesFragment.setCallback(null);
+        if (mediaLicenseFragment != null) {
+            mediaLicenseFragment.setCallback(null);
+        }
+        if (uploadCategoriesFragment != null) {
+            uploadCategoriesFragment.setCallback(null);
+        }
     }
 }

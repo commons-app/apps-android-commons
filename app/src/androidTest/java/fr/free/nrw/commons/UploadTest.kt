@@ -141,28 +141,38 @@ class UploadTest {
                     .perform(click())
         } catch (ignored: NoMatchingViewException) {}
 
-        onView(allOf<View>(withId(R.id.description_item_edit_text), withParent(withParent(withId(R.id.image_title_container)))))
+        onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
                 .perform(replaceText(commonsFileName))
 
-        onView(withId(R.id.bottom_card_next))
+        onView(allOf<View>(isDisplayed(), withId(R.id.description_item_edit_text)))
+                .perform(replaceText(commonsFileName))
+
+
+        onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
+
+        try {
+            onView(withText("Yes"))
+                    .check(matches(isDisplayed()))
+                    .perform(click())
+        } catch (ignored: NoMatchingViewException) {}
 
         UITestHelper.sleep(1000)
 
-        onView(withId(R.id.category_search))
+        onView(allOf(isDisplayed(), withId(R.id.et_search)))
                 .perform(replaceText("Uploaded with Mobile/Android Tests"))
 
         UITestHelper.sleep(3000)
 
-        onView(withParent(withId(R.id.categories)))
+        onView(allOf(isDisplayed(), withParent(withId(R.id.rv_categories))))
                 .perform(click())
 
-        onView(withId(R.id.category_next))
+        onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
 
         UITestHelper.sleep(500)
 
-        onView(withId(R.id.submit))
+        onView(allOf(isDisplayed(), withId(R.id.btn_submit)))
                 .perform(click())
 
         UITestHelper.sleep(10000)
