@@ -8,12 +8,11 @@ import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.PerformException
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.rule.ActivityTestRule
 import fr.free.nrw.commons.utils.ConfigUtils
-import fr.free.nrw.commons.utils.StringUtils
+import org.apache.commons.lang3.StringUtils
 import org.hamcrest.CoreMatchers.allOf
 import org.junit.Assume
-import androidx.test.rule.ActivityTestRule
-import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 
 class UITestHelper {
@@ -63,7 +62,7 @@ class UITestHelper {
         }
 
         private fun credentialIsSet(credential: String): Boolean {
-            return !(StringUtils.isNullOrWhiteSpace(credential) || credential == "null")
+            return !(StringUtils.isWhitespace(credential) || credential == "null")
         }
 
         private fun checkShouldLogin() {
