@@ -3,7 +3,9 @@
 * Eitvys200
 * Mantak111
 * Manvydasz
+* Naktis
 * Nersip
+* Tomasdd
 * Zygimantus
 -->
 <resources>
@@ -70,9 +72,9 @@
   <string name="enable_gps">Išjungti GPS</string>
   <string name="contributions_subtitle_zero">Nėra įkėlimų kol kas</string>
   <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="other"/>
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 įkėlimas</item>
-    <item quantity="other">%1$d įkėlimai</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Pradedamas %1$d įkėlimas</item>
@@ -161,4 +163,11 @@
   <string name="notifications_talk_page_message">%1$s paliko žinutę jūsų aptarimo puslapyje</string>
   <string name="notifications_thank_you_edit">Dėkoja jums už atliktą pakeitimą</string>
   <string name="notifications_mention">%1$s jus paminėjo %2$s.</string>
+  <string name="block_notification_title">Užblokuota</string>
+  <string name="share_via">Dalintis programą per ...</string>
+  <string name="place_state">Vietos būsena:</string>
+  <string name="place_state_exists">Egzistuoja</string>
+  <string name="place_state_needs_photo">Reikia Nuotraukos</string>
+  <string name="place_type">Vietos tipas:</string>
+  <string name="nearby_search_hint">Tiltas, muziejus, viešbutis ir t.t.</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Lizalizaufa
 * Sagan
 * Рустам Нурыев
@@ -83,7 +84,7 @@
   <string name="title_activity_signup">Теркәл</string>
   <string name="menu_about">Ҡушымта тураһында</string>
   <string name="about_license">\"Викисклад\" ҡушылмаһы - асыҡ коды булған программа. Уны Викимедиала гранттарын алған ҡатнашыусы һәм ирекмәндәр эшләгән. Викимедиа Фонды был ҡушылманы булдырыу,яңыртыу йәки эшләтеүҙә ҡатнашмай.</string>
-  <string name="about_improve">Һеҙ ҙә &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; булдырып, хата йәки берәй тәҡдим тураһында ошонда GitHub&lt;/a&gt; яҙып ебәрә алаһығыҙ.</string>
+  <string name="about_improve">Һеҙ ҙә &lt;a href=\"%1$s\"&gt; булдырып, хата йәки берәй тәҡдим тураһында ошонда GitHub&lt;/a&gt; яҙып ебәрә алаһығыҙ.</string>
   <string name="about_privacy_policy">&lt;u&gt;Сер һаҡлау сәйәсәте&lt;/u&gt;</string>
   <string name="about_credits">&lt;u&gt;Рәхмәттәр&lt;/u&gt;</string>
   <string name="title_activity_about">Аныҡлау</string>

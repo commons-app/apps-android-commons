@@ -23,7 +23,7 @@
   <string name="login_success">പ്രവേശനം വിജയകരം!</string>
   <string name="login_failed">പ്രവേശനം പരാജയപ്പെട്ടു!</string>
   <string name="upload_failed">പ്രമാണം കണ്ടെത്താനായില്ല. ദയവായി മറ്റൊരു പ്രമാണം നോക്കുക.</string>
-  <string name="authentication_failed" fuzzy="true">സാധുതാനിർണ്ണയം പരാജയപ്പെട്ടു!</string>
+  <string name="authentication_failed">സാധുതാനിർണ്ണയം പരാജയപ്പെട്ടു, ദയവായി വീണ്ടും പ്രവേശിക്കുക</string>
   <string name="uploading_started">അപ്‌ലോഡ് തുടങ്ങി!</string>
   <string name="upload_completed_notification_title">%1$s  അപ്‌ലോഡ് ചെയ്തിരിക്കുന്നു!</string>
   <string name="upload_completed_notification_text">താങ്കളുടെ അപ്‌ലോഡ് കാണാനായി ടാപ് ചെയ്യുക</string>
@@ -85,6 +85,7 @@
   <string name="title_activity_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="title_activity_signup">അംഗത്വമെടുക്കുക</string>
   <string name="title_activity_featured_images">തിരഞ്ഞെടുത്ത ചിത്രങ്ങൾ</string>
+  <string name="title_activity_category_details">വർഗ്ഗം</string>
   <string name="menu_about">വിവരണം</string>
   <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;അപാച്ചേ അനുമതിപത്രം പതിപ്പ് 2&lt;/a&gt; പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
   <string name="about_improve" fuzzy="true">സ്രോതസ്സ് രൂപം &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ജിറ്റ്ഹബിൽ&lt;/a&gt; ലഭ്യമാണ്.\nപ്രശ്നങ്ങൾ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;ബഗ്സില്ലയിൽ&lt;/a&gt; അറിയിക്കുക.</string>
@@ -129,6 +130,7 @@
   <string name="detail_panel_cats_loading">ശേഖരിക്കുന്നു…</string>
   <string name="detail_panel_cats_none">ഒന്നും തിരഞ്ഞെടുത്തിട്ടില്ല</string>
   <string name="detail_description_empty">വിവരണമൊന്നുമില്ല</string>
+  <string name="detail_discussion_empty">സംവാദങ്ങളില്ല</string>
   <string name="detail_license_empty">അജ്ഞാതമായ അനുമതി</string>
   <string name="menu_refresh">പുതുക്കുക</string>
   <string name="ok">ശരി</string>
@@ -174,9 +176,9 @@
   <string name="give_permission">അനുമതി നൽകുക</string>
   <string name="login_to_your_account">താങ്കളുടെ അംഗത്വത്തിൽ പ്രവേശിക്കുക</string>
   <string name="view_browser">ബ്രൗസറിൽ കാണുക</string>
-  <string name="nearby_wikidata">വിക്കിഡേറ്റാ</string>
-  <string name="nearby_wikipedia">വിക്കിപീഡിയ</string>
-  <string name="nearby_commons">കോമൺസ്</string>
+  <string name="nearby_wikidata" fuzzy="true">വിക്കിഡേറ്റാ</string>
+  <string name="nearby_wikipedia" fuzzy="true">വിക്കിപീഡിയ</string>
+  <string name="nearby_commons" fuzzy="true">കോമൺസ്</string>
   <string name="about_faq">&lt;u&gt;പതിവുചോദ്യങ്ങൾ&lt;/u&gt;</string>
   <string name="about_translate">&lt;u&gt;പരിഭാഷപ്പെടുത്തുക&lt;/u&gt;</string>
   <string name="about_translate_title">ഭാഷകൾ</string>
@@ -184,4 +186,9 @@
   <string name="about_translate_cancel">റദ്ദാക്കുക</string>
   <string name="retry">വീണ്ടും ശ്രമിക്കുക</string>
   <string name="ends_on">അവസാനിക്കുന്നത്:</string>
+  <string name="place_state">സ്ഥലത്തിന്റെ സ്ഥിതി:</string>
+  <string name="place_state_exists">നിലവിലുണ്ട്</string>
+  <string name="place_state_needs_photo">ചിത്രം വേണം</string>
+  <string name="place_type">സ്ഥലത്തിന്റെ തരം:</string>
+  <string name="nearby_search_hint">പാലം, മ്യൂസിയം, ഹോട്ടൽ തുടങ്ങിയവ</string>
 </resources>

@@ -47,3 +47,6 @@ before_install:
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
   openssl aes-256-cbc -K $encrypted_38ac1a5053f6_key -iv $encrypted_38ac1a5053f6_iv -in play.p12.enc -out play.p12 -d;
   fi
+notifications:
+  webhooks:
+    - https://wiki-commons.zulipchat.com/api/v1/external/travis?api_key=kn4a8YKNqHCBYp7EW2k463txMj35vReq&stream=travis-ci

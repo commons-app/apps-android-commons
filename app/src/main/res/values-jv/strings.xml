@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * NoiX180
 * Notanotheramy
 -->
@@ -24,7 +25,7 @@
   <string name="logging_in_message">Entènana sadhela…</string>
   <string name="login_success">Kasil mlebu log!</string>
   <string name="login_failed">Wurung mlebu log!</string>
-  <string name="upload_failed">Barkas ora katemu. Jajalana barkas liyané.</string>
+  <string name="upload_failed">Berkas ora tinemu. Jajal berkas liyané.</string>
   <string name="authentication_failed">Otèntikasi ora dadi, sumangga mlebu log manèh</string>
   <string name="uploading_started">Wiwit ngunggah!</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
@@ -91,7 +92,7 @@
   <string name="title_activity_featured_images">Gambar Pilihan</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Ngenani</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"%1$s\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pranatan priangga&lt;/a&gt;</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Krèdhit&lt;/a&gt;</string>
   <string name="title_activity_about">Ngenani</string>

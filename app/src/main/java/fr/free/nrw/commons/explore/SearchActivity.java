@@ -1,18 +1,18 @@
 package fr.free.nrw.commons.explore;
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 
@@ -29,6 +29,7 @@ import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -92,9 +93,9 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         searchImageFragment = new SearchImageFragment();
         searchCategoryFragment= new SearchCategoryFragment();
         fragmentList.add(searchImageFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_media));
+        titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase());
         fragmentList.add(searchCategoryFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_categories));
+        titleList.add(getResources().getString(R.string.search_tab_title_categories).toUpperCase());
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
@@ -109,8 +110,13 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
                                 viewPager.setVisibility(View.VISIBLE);
                                 tabLayout.setVisibility(View.VISIBLE);
                                 searchHistoryContainer.setVisibility(View.GONE);
-                                searchImageFragment.updateImageList(query.toString());
-                                searchCategoryFragment.updateCategoryList(query.toString());
+                                if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
+                                    searchImageFragment.updateImageList(query.toString());
+                                }
+
+                                if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
+                                    searchCategoryFragment.updateCategoryList(query.toString());
+                                }
                             }else {
                                 //Open RecentSearchesFragment
                                 recentSearchesFragment.updateRecentSearches();
@@ -141,14 +147,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
     }
 
     /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void notifyDatasetChanged() {
-    }
-
-    /**
      * This method is called on success of API call for image Search.
      * The viewpager will notified that number of items have changed.
      */
@@ -156,24 +154,6 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         if (mediaDetails!=null){
             mediaDetails.notifyDataSetChanged();
         }
-    }
-
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
     }
 
     /**
@@ -260,5 +240,11 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
         if (searchImageFragment!=null){
             searchImageFragment.addImagesToList(query);
         }
+    }
+
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        //Dispose the disposables when the activity is destroyed
+        compositeDisposable.dispose();
     }
 }

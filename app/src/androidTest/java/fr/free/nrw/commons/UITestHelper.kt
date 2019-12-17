@@ -1,5 +1,7 @@
 package fr.free.nrw.commons
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
@@ -10,6 +12,8 @@ import fr.free.nrw.commons.utils.ConfigUtils
 import fr.free.nrw.commons.utils.StringUtils
 import org.hamcrest.CoreMatchers.allOf
 import org.junit.Assume
+import androidx.test.rule.ActivityTestRule
+import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 
 class UITestHelper {
@@ -39,6 +43,7 @@ class UITestHelper {
             try {
                 onView(ViewMatchers.withId(R.id.login_username))
                         .perform(ViewActions.clearText(), ViewActions.typeText(BuildConfig.TEST_USERNAME))
+                closeSoftKeyboard()
                 onView(ViewMatchers.withId(R.id.login_password))
                         .perform(ViewActions.clearText(), ViewActions.typeText(BuildConfig.TEST_PASSWORD))
                 closeSoftKeyboard()
@@ -77,6 +82,13 @@ class UITestHelper {
                     "This can be done in the build config of app/build.gradle or by exporting the environment variable test_user_password\n" +
                     "This message is expected on PR builds on Travis",
                     credentialIsSet(BuildConfig.TEST_PASSWORD))
+        }
+      
+        fun <T: Activity> changeOrientation(activityRule: ActivityTestRule<T>){
+            activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            assert(activityRule.activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+            activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            assert(activityRule.activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
         }
     }
 }

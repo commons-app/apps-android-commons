@@ -5,12 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 
 /**
@@ -19,8 +19,7 @@ import fr.free.nrw.commons.R;
 class SearchImagesRenderer extends Renderer<Media> {
     @BindView(R.id.categoryImageTitle) TextView tvImageName;
     @BindView(R.id.categoryImageAuthor) TextView categoryImageAuthor;
-    @BindView(R.id.categoryImageView)
-    MediaWikiImageView browseImage;
+    @BindView(R.id.categoryImageView) SimpleDraweeView browseImage;
 
     private final ImageClickedListener listener;
 
@@ -52,7 +51,7 @@ class SearchImagesRenderer extends Renderer<Media> {
     public void render() {
         Media item = getContent();
         tvImageName.setText(item.getDisplayTitle());
-        browseImage.setMedia(item);
+        browseImage.setImageURI(item.getThumbUrl());
         setAuthorView(item, categoryImageAuthor);
     }
 

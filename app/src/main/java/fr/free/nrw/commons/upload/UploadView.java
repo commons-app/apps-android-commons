@@ -1,11 +1,13 @@
 package fr.free.nrw.commons.upload;
 
 import android.net.Uri;
+
 import androidx.annotation.IntDef;
-import fr.free.nrw.commons.location.LatLng;
 
 import java.lang.annotation.Retention;
 import java.util.List;
+
+import fr.free.nrw.commons.location.LatLng;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -15,7 +17,6 @@ public interface UploadView {
 //    UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
 //    new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
 
-    List<Description> getDescriptions();
 
     @Retention(SOURCE)
     @IntDef({PLEASE_WAIT, TITLE_CARD, CATEGORIES, LICENSE})
@@ -82,4 +83,6 @@ public interface UploadView {
     void showProgressDialog();
 
     void hideProgressDialog();
+
+    void askUserToLogIn();
 }

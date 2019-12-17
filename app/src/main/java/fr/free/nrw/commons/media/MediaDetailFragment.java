@@ -3,11 +3,9 @@ package fr.free.nrw.commons.media;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -23,6 +21,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
+import org.wikipedia.util.StringUtil;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -34,9 +41,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
@@ -44,9 +51,6 @@ import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
-import fr.free.nrw.commons.utils.DateUtils;
-import fr.free.nrw.commons.utils.StringUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -94,7 +98,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private int initialListTop = 0;
 
     @BindView(R.id.mediaDetailImage)
-    MediaWikiImageView image;
+    SimpleDraweeView image;
     @BindView(R.id.mediaDetailSpacer)
     MediaDetailSpacer spacer;
     @BindView(R.id.mediaDetailTitle)
@@ -129,7 +133,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
-    private DataSetObserver dataObserver;
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
@@ -183,7 +186,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
         ButterKnife.bind(this,view);
-        seeMore.setText(Html.fromHtml(getString(R.string.nominated_see_more)));
+        seeMore.setText(StringUtil.fromHtml(getString(R.string.nominated_see_more)));
 
         if (isCategoryImage){
             authorLayout.setVisibility(VISIBLE);
@@ -227,39 +230,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(getParentFragment()!=null && getParentFragment().getParentFragment()!=null) {
+        if (getParentFragment() != null && getParentFragment().getParentFragment() != null) {
             //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
             // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
-            ((ContributionsFragment) (getParentFragment().getParentFragment())).nearbyNotificationCardView
-                .setVisibility(View.GONE);
+            ((ContributionsFragment) (getParentFragment()
+                    .getParentFragment())).nearbyNotificationCardView
+                    .setVisibility(View.GONE);
         }
         media = detailProvider.getMediaAtPosition(index);
-        if (media == null) {
-            // Ask the detail provider to ping us when we're ready
-            Timber.d("MediaDetailFragment not yet ready to display details; registering observer");
-            dataObserver = new DataSetObserver() {
-                @Override
-                public void onChanged() {
-                    if (!isAdded()) {
-                        return;
-                    }
-                    Timber.d("MediaDetailFragment ready to display delayed details!");
-                    detailProvider.unregisterDataSetObserver(dataObserver);
-                    dataObserver = null;
-                    media=detailProvider.getMediaAtPosition(index);
-                    displayMediaDetails();
-                }
-            };
-            detailProvider.registerDataSetObserver(dataObserver);
-        } else {
-            Timber.d("MediaDetailFragment ready to display details");
-            displayMediaDetails();
-        }
+        displayMediaDetails();
     }
 
     private void displayMediaDetails() {
         //Always load image from Internet to allow viewing the desc, license, and cats
-        image.setMedia(media);
+        setupImageView();
         title.setText(media.getDisplayTitle());
         desc.setHtmlText(media.getDescription());
         license.setText(media.getLicense());
@@ -269,6 +253,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setTextFields);
         compositeDisposable.add(disposable);
+    }
+
+    /**
+     * Uses two image sources.
+     * - low resolution thumbnail is shown initially
+     * - when the high resolution image is available, it replaces the low resolution image
+     */
+    private void setupImageView() {
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
+                .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+                .setOldController(image.getController())
+                .build();
+        image.setController(controller);
     }
 
     @Override
@@ -281,15 +279,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
             scrollListener = null;
         }
-        if (dataObserver != null) {
-            detailProvider.unregisterDataSetObserver(dataObserver);
-            dataObserver = null;
-        }
+
+        compositeDisposable.clear();
         super.onDestroyView();
     }
 
     private void setTextFields(Media media) {
         this.media = media;
+        setupImageView();
         desc.setHtmlText(prettyDescription(media));
         license.setText(prettyLicense(media));
         coordinates.setText(prettyCoordinates(media));
@@ -319,7 +316,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     @OnClick(R.id.mediaDetailLicense)
     public void onMediaDetailLicenceClicked(){
         String url = media.getLicenseUrl();
-        if (!StringUtils.isNullOrWhiteSpace(url) && getActivity() != null) {
+        if (!StringUtils.isBlank(url) && getActivity() != null) {
             Utils.handleWebUrl(getActivity(), Uri.parse(url));
         } else {
             viewUtil.showShortToast(getActivity(), getString(R.string.null_url));
@@ -344,6 +341,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
+        if(AccountUtil.getUserName(getContext()).equals(media.getCreator())){
         final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.simple_spinner_dropdown_list, reasonList);
         final Spinner spinner = new Spinner(getActivity());
@@ -361,19 +359,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if(isDeleted) {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         }
+        }
         //Reviewer correct me if i have misunderstood something over here
         //But how does this  if (delete.getVisibility() == View.VISIBLE) {
         //            enableDeleteButton(true);   makes sense ?
+        else{
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setMessage("Why should this fileckathon-2018  be deleted?");
+        alert.setMessage(getString(R.string.dialog_box_text_nomination,media.getDisplayTitle()));
         final EditText input = new EditText(getActivity());
         alert.setView(input);
         input.requestFocus();
         alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
             String reason = input.getText().toString();
-
-            deleteHelper.makeDeletion(getContext(), media, reason);
-            enableDeleteButton(false);
+            onDeleteClickeddialogtext(reason);
         });
         alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
         });
@@ -404,6 +402,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         d.show();
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
+        }
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
@@ -414,15 +413,34 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    isDeleted = true;
-                    enableDeleteButton(false);
+                    if (getActivity() != null) {
+                        isDeleted = true;
+                        enableDeleteButton(false);
+                    }
                 }));
+
+    }
+
+    @SuppressLint("CheckResult")
+    private void onDeleteClickeddialogtext(String reason) {
+        Single<Boolean> resultSingletext = reasonBuilder.getReason(media, reason)
+                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+        compositeDisposable.add(resultSingletext
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    if (getActivity() != null) {
+                        isDeleted = true;
+                        enableDeleteButton(false);
+                    }
+                }));
+
     }
 
     @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
         if (nominatedForDeletion.getVisibility() == VISIBLE && getActivity() != null) {
-            Utils.handleWebUrl(getActivity(), media.getFilePageTitle().getMobileUri());
+            Utils.handleWebUrl(getActivity(), Uri.parse(media.getPageTitle().getMobileUri()));
         }
     }
 
@@ -516,7 +534,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
-        return DateUtils.dateInLocaleFormat(date);
+        return DateUtil.getDateStringWithSkeletonPattern(date, "dd MMM yyyy");
     }
 
     /**
@@ -540,4 +558,5 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             nominatedForDeletion.setVisibility(GONE);
         }
     }
+
 }

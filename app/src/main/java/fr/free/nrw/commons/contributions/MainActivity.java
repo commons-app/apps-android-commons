@@ -2,8 +2,8 @@ package fr.free.nrw.commons.contributions;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,49 +13,52 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.material.tabs.TabLayout;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.nearby.NearbyFragment;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
+import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
-import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
 
-public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener {
 
-    @Inject
-    SessionManager sessionManager;
-    @Inject ContributionController controller;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.pager)
     public UnswipableViewPager viewPager;
+
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    ContributionController controller;
     @Inject
     public LocationServiceManager locationManager;
     @Inject
@@ -64,17 +67,13 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     QuizChecker quizChecker;
 
 
-    public Intent uploadServiceIntent;
-    public boolean isAuthCookieAcquired = false;
-
     public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
-    public final int CONTRIBUTIONS_TAB_POSITION = 0;
-    public final int NEARBY_TAB_POSITION = 1;
+    public static final int CONTRIBUTIONS_TAB_POSITION = 0;
+    public static final int NEARBY_TAB_POSITION = 1;
 
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
+    public boolean onOrientationChanged;
     private Menu menu;
-
-    private boolean onOrientationChanged = false;
 
     private MenuItem notificationsMenuItem;
     private TextView notificationCount;
@@ -84,10 +83,10 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
-        requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
 
+        initMain();
 
         if (savedInstanceState != null ) {
             onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
@@ -100,23 +99,28 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     }
 
     @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        quizChecker.initQuizCheck(this);
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("viewPagerCurrentItem", viewPager.getCurrentItem());
     }
 
-    @Override
-    protected void onAuthCookieAcquired(String authCookie) {
-        // Do a sync everytime we get here!
+    private void initMain() {
+        //Do not remove this, this triggers the sync service
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(),BuildConfig.CONTRIBUTION_AUTHORITY,true);
         requestSync(sessionManager.getCurrentAccount(), BuildConfig.CONTRIBUTION_AUTHORITY, new Bundle());
-        uploadServiceIntent = new Intent(this, UploadService.class);
+        Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
 
         addTabsAndFragments();
-        isAuthCookieAcquired = true;
         if (contributionsActivityPagerAdapter.getItem(0) != null) {
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired(uploadServiceIntent);
+            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired();
         }
     }
 
@@ -140,10 +144,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         .show()
         );
 
-        if (uploadServiceIntent != null) {
-            // If auth cookie already acquired notify contrib fragment so that it san operate auth required actions
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
-        }
+        ((ContributionsFragment) contributionsActivityPagerAdapter
+                .getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired();
         setTabAndViewPagerSynchronisation();
     }
 
@@ -163,9 +165,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
      * tab won't change and vice versa. So we have to notify each of them.
      */
     private void setTabAndViewPagerSynchronisation() {
-        //viewPager.canScrollHorizontally(false);
         viewPager.setFocusableInTouchMode(true);
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -180,7 +180,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
                         updateMenuItem();
-
                         break;
                     case NEARBY_TAB_POSITION:
                         Timber.d("Nearby tab selected");
@@ -188,7 +187,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
                         // Do all permission and GPS related tasks on tab selected, not on create
-                        ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
+                        NearbyParentFragmentPresenter.getInstance().onTabSelected();
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -235,13 +234,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     }
 
     @Override
-    protected void onAuthFailure() {
-
-    }
-
-    @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         String contributionsFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 0);
         String nearbyFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 1);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -269,15 +263,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Means that nearby fragment is visible (not contributions fragment)
-            NearbyFragment nearbyFragment = (NearbyFragment) contributionsActivityPagerAdapter.getItem(1);
-
-            if(nearbyFragment.isBottomSheetExpanded()) {
-                // Back should first hide the bottom sheet if it is expanded
-                nearbyFragment.listOptionMenuItemClicked();
-            } else {
-                // Otherwise go back to contributions fragment
-                viewPager.setCurrentItem(0);
-            }
+            NearbyParentFragmentPresenter.getInstance().backButtonClicked();
         } else {
             super.onBackPressed();
         }
@@ -307,7 +293,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
-        compositeDisposable.add(Observable.fromCallable(() -> notificationController.getNotifications(false))
+        compositeDisposable.add(notificationController.getNotifications(false)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::initNotificationViews,
@@ -334,12 +320,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 // Display notifications menu item
                 menu.findItem(R.id.notifications).setVisible(true);
                 menu.findItem(R.id.list_sheet).setVisible(false);
-                Timber.d("Contributions activity notifications menu item is visible");
+                Timber.d("Contributions fragment notifications menu item is visible");
             } else {
                 // Display bottom list menu item
                 menu.findItem(R.id.notifications).setVisible(false);
                 menu.findItem(R.id.list_sheet).setVisible(true);
-                Timber.d("Contributions activity list sheet menu item is visible");
+                Timber.d("Nearby fragment list sheet menu item is visible");
             }
         }
     }
@@ -353,7 +339,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 return true;
             case R.id.list_sheet:
                 if (contributionsActivityPagerAdapter.getItem(1) != null) {
-                    ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
+                    ((NearbyParentFragment)contributionsActivityPagerAdapter.getItem(1)).listOptionMenuItemClicked();
                 }
                 return true;
             default:
@@ -361,16 +347,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         }
     }
 
-    private boolean deviceHasCamera() {
-        PackageManager pm = getPackageManager();
-        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
-                pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
-    }
-
     public class ContributionsActivityPagerAdapter extends FragmentPagerAdapter {
         FragmentManager fragmentManager;
-        private boolean isContributionsListFragment = true; // to know what to put in first tab, Contributions of Media Details
-
 
         public ContributionsActivityPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -392,13 +370,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                 case 0:
                     ContributionsFragment retainedContributionsFragment = getContributionsFragment(0);
                     if (retainedContributionsFragment != null) {
-                        //  ContributionsFragment is parent of ContributionsListFragment and
-                        //  MediaDetailsFragment. If below decides which child will be visible.
-                        if (isContributionsListFragment) {
-                            retainedContributionsFragment.setContributionsListFragment();
-                        } else {
-                            retainedContributionsFragment.setMediaDetailPagerFragment();
-                        }
                         return retainedContributionsFragment;
                     } else {
                         // If we reach here, retainedContributionsFragment is null
@@ -407,12 +378,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                     }
 
                 case 1:
-                    NearbyFragment retainedNearbyFragment = getNearbyFragment(1);
+                    NearbyParentFragment retainedNearbyFragment = getNearbyFragment(1);
                     if (retainedNearbyFragment != null) {
                         return retainedNearbyFragment;
                     } else {
                         // If we reach here, retainedNearbyFragment is null
-                        return new NearbyFragment();
+                        return new NearbyParentFragment();
                     }
                 default:
                     return null;
@@ -434,9 +405,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
          * @param position index of tabs, in our case 0 or 1
          * @return
          */
-        private NearbyFragment getNearbyFragment(int position) {
+        private NearbyParentFragment getNearbyFragment(int position) {
             String tag = makeFragmentName(R.id.pager, position);
-            return (NearbyFragment)fragmentManager.findFragmentByTag(tag);
+            return (NearbyParentFragment)fragmentManager.findFragmentByTag(tag);
         }
 
         /**
@@ -450,15 +421,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
             return "android:switcher:" + viewId + ":" + index;
         }
 
-        /**
-         * In first tab we can have ContributionsFragment or Media details fragment. This method
-         * is responsible to update related boolean
-         * @param isContributionsListFragment true when contribution fragment should be visible, false
-         *                                means user clicked to MediaDetails
-         */
-        private void updateContributionFragmentTabContent(boolean isContributionsListFragment) {
-            this.isContributionsListFragment = isContributionsListFragment;
-        }
     }
 
     @Override
@@ -468,40 +430,9 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         controller.handleActivityResult(this, requestCode, resultCode, data);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case LOCATION_REQUEST: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Timber.d("Location permission given");
-                    ((ContributionsFragment)contributionsActivityPagerAdapter
-                            .getItem(0)).locationManager.registerLocationManager();
-                } else {
-                    // If nearby fragment is visible and location permission is not given, send user back to contrib fragment
-                    if (!isContributionsFragmentVisible) {
-                        viewPager.setCurrentItem(CONTRIBUTIONS_TAB_POSITION);
-
-                        // TODO: If contrib fragment is visible and location permission is not given, display permission request button
-                    } else {
-
-                    }
-                }
-                return;
-            }
-
-            default:
-                return;
-        }
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         setNotificationCount();
-        quizChecker.initQuizCheck(this);
     }
 
     @Override

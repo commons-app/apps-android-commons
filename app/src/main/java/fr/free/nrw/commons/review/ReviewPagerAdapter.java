@@ -5,13 +5,12 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import fr.free.nrw.commons.media.model.MwQueryPage;
 
 public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
-    ReviewImageFragment[] reviewImageFragments;
+    private ReviewImageFragment[] reviewImageFragments;
 
 
-    public ReviewPagerAdapter(FragmentManager fm) {
+    ReviewPagerAdapter(FragmentManager fm) {
         super(fm);
         reviewImageFragments = new ReviewImageFragment[]{
                 new ReviewImageFragment(),
@@ -26,16 +25,31 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
         return reviewImageFragments.length;
     }
 
-    public void updateFileInformation(String fileName) {
+    void updateFileInformation() {
         for (int i = 0; i < getCount(); i++) {
             ReviewImageFragment fragment = reviewImageFragments[i];
-            fragment.update(i, fileName);
+            fragment.update(i);
         }
     }
 
-    public void updateCategories() {
-        ReviewImageFragment categoryFragment = reviewImageFragments[ReviewImageFragment.CATEGORY];
-        categoryFragment.updateCategories(ReviewController.categories);
+    /**
+     * This function is called when an image has
+     * been loaded to enable the review buttons.
+     */
+    public void enableButtons() {
+        if (reviewImageFragments != null){
+            reviewImageFragments[0].enableButtons();
+        }
+    }
+
+    /**
+     * This function is called when an image is being loaded
+     * to disable the review buttons
+     */
+    public void disableButtons() {
+        if (reviewImageFragments != null){
+            reviewImageFragments[0].disableButtons();
+        }
     }
 
     @Override

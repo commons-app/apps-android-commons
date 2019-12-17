@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="2dp"
-    android:paddingBottom="0dp"
-    >
+    android:paddingBottom="0dp">
 
     <TextView
         android:id="@+id/contributionSequenceNumber"
@@ -18,11 +18,12 @@
         android:layout_gravity="end|bottom"
         />
 
-    <fr.free.nrw.commons.MediaWikiImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/contributionImage"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        app:actualImageScaleType="fitCenter"
+        app:actualImageScaleType="centerCrop"
+        fresco:placeholderImage="@drawable/ic_image_black_24dp"
         />
 
     <LinearLayout
@@ -38,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"
             android:orientation="vertical"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:padding="@dimen/small_gap"
             >
             <ProgressBar
@@ -77,7 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:visibility="gone"
             android:padding="@dimen/small_gap"
             >
@@ -90,6 +91,7 @@
                 android:text="@string/menu_cancel_upload"
                 android:background="@android:color/transparent"
                 android:padding="8dp"
+                android:layout_marginRight="5dp"
                 />
 
             <ImageButton

@@ -11,6 +11,8 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.widget.RemoteViews;
 
+import androidx.annotation.Nullable;
+
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -23,10 +25,10 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -41,10 +43,17 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    @Inject OkHttpJsonApiClient okHttpJsonApiClient;
+    @Inject MediaClient mediaClient;
 
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pic_of_day_app_widget);
+
+        // Launch App on Button Click
+        Intent viewIntent = new Intent(context, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, 0);
+        views.setOnClickPendingIntent(R.id.camera_button, pendingIntent);
+        appWidgetManager.updateAppWidget(appWidgetId, views);
+
         loadPictureOfTheDay(context, views, appWidgetManager, appWidgetId);
     }
 
@@ -59,7 +68,7 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                                      RemoteViews views,
                                      AppWidgetManager appWidgetManager,
                                      int appWidgetId) {
-        compositeDisposable.add(okHttpJsonApiClient.getPictureOfTheDay()
+        compositeDisposable.add(mediaClient.getPictureOfTheDay()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -70,11 +79,11 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                                 // View in browser
                                 Intent viewIntent = new Intent();
                                 viewIntent.setAction(ACTION_VIEW);
-                                viewIntent.setData(response.getFilePageTitle().getMobileUri());
+                                viewIntent.setData(Uri.parse(response.getPageTitle().getMobileUri()));
                                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, 0);
                                 views.setOnClickPendingIntent(R.id.appwidget_image, pendingIntent);
 
-                                loadImageFromUrl(response.getImageUrl(), context, views, appWidgetManager, appWidgetId);
+                                loadImageFromUrl(response.getThumbUrl(), context, views, appWidgetManager, appWidgetId);
                             }
                         },
                         t -> Timber.e(t, "Fetching picture of the day failed")

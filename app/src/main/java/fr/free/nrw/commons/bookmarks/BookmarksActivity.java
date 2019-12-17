@@ -2,13 +2,14 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import javax.inject.Inject;
 
@@ -134,32 +135,5 @@ public class BookmarksActivity extends NavigationBaseActivity
             return 0;
         }
         return adapter.getMediaAdapter().getCount();
-    }
-
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void notifyDatasetChanged() {
-
-    }
-
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    /**
-     * This method is never called but it was in MediaDetailProvider Interface
-     * so it needs to be overrided.
-     */
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
     }
 }

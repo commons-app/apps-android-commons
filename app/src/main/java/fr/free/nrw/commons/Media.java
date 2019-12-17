@@ -4,6 +4,16 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.gallery.ExtMetadata;
+import org.wikipedia.gallery.ImageInfo;
+import org.wikipedia.page.PageTitle;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -11,20 +21,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import androidx.annotation.Nullable;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.media.model.ExtMetadata;
-import fr.free.nrw.commons.media.model.ImageInfo;
-import fr.free.nrw.commons.media.model.MwQueryPage;
-import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
-import fr.free.nrw.commons.utils.StringUtils;
 
 public class Media implements Parcelable {
 
+    public static final Media EMPTY = new Media("");
     public static Creator<Media> CREATOR = new Creator<Media>() {
         @Override
         public Media createFromParcel(Parcel parcel) {
@@ -37,9 +41,9 @@ public class Media implements Parcelable {
         }
     };
 
-    private static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
     // Primary metadata fields
     protected Uri localUri;
+    private String thumbUrl;
     protected String imageUrl;
     protected String filename;
     protected String description; // monolingual description on input...
@@ -88,9 +92,10 @@ public class Media implements Parcelable {
      * @param creator Media creator
      */
     public Media(Uri localUri, String imageUrl, String filename, String description,
-                 long dataLength, Date dateCreated, @Nullable Date dateUploaded, String creator) {
+                 long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this();
         this.localUri = localUri;
+        this.thumbUrl = imageUrl;
         this.imageUrl = imageUrl;
         this.filename = filename;
         this.description = description;
@@ -105,6 +110,7 @@ public class Media implements Parcelable {
     @SuppressWarnings("unchecked")
     public Media(Parcel in) {
         localUri = in.readParcelable(Uri.class.getClassLoader());
+        thumbUrl = in.readString();
         imageUrl = in.readString();
         filename = in.readString();
         description = in.readString();
@@ -120,6 +126,82 @@ public class Media implements Parcelable {
             in.readStringList(categories);
         }
         descriptions = in.readHashMap(ClassLoader.getSystemClassLoader());
+    }
+
+    /**
+     * Creating Media object from MWQueryPage.
+     * Earlier only basic details were set for the media object but going forward,
+     * a full media object(with categories, descriptions, coordinates etc) can be constructed using this method
+     *
+     * @param page response from the API
+     * @return Media object
+     */
+    @Nullable
+    public static Media from(MwQueryPage page) {
+        ImageInfo imageInfo = page.imageInfo();
+        if (imageInfo == null) {
+            return null;
+        }
+        ExtMetadata metadata = imageInfo.getMetadata();
+        if (metadata == null) {
+            Media media = new Media(null, imageInfo.getOriginalUrl(),
+                    page.title(), "", 0, null, null, null);
+            if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
+                media.setThumbUrl(imageInfo.getThumbUrl());
+            }
+            return media;
+        }
+
+        Media media = new Media(null,
+                imageInfo.getOriginalUrl(),
+                page.title(),
+                "",
+                0,
+                safeParseDate(metadata.dateTime()),
+                safeParseDate(metadata.dateTime()),
+                getArtist(metadata)
+        );
+
+        if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
+            media.setThumbUrl(imageInfo.getThumbUrl());
+        }
+
+        String language = Locale.getDefault().getLanguage();
+        if (StringUtils.isBlank(language)) {
+            language = "default";
+        }
+
+        media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription()));
+        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.getCategories()));
+        String latitude = metadata.getGpsLatitude();
+        String longitude = metadata.getGpsLongitude();
+
+        if (!StringUtils.isBlank(latitude) && !StringUtils.isBlank(longitude)) {
+            LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude), 0);
+            media.setCoordinates(latLng);
+        }
+
+        media.setLicenseInformation(metadata.licenseShortName(), metadata.licenseUrl());
+        return media;
+    }
+
+    /**
+     * This method extracts the Commons Username from the artist HTML information
+     * @param metadata
+     * @return
+     */
+    private static String getArtist(ExtMetadata metadata) {
+        try {
+            String artistHtml = metadata.artist();
+            return artistHtml.substring(artistHtml.indexOf("title=\""), artistHtml.indexOf("\">"))
+                    .replace("title=\"User:", "");
+        } catch (Exception ex) {
+            return "";
+        }
+    }
+
+    public String getThumbUrl() {
+        return thumbUrl;
     }
 
     /**
@@ -144,26 +226,16 @@ public class Media implements Parcelable {
      * Gets media display title
      * @return Media title
      */
-    public String getDisplayTitle() {
-        if (filename == null) {
-            return "";
-        }
-        // FIXME: Gross hack because my regex skills suck maybe or I am too lazy who knows
-        String title = getFilePageTitle().getDisplayText().replaceFirst("^File:", "");
-        Matcher matcher = displayTitlePattern.matcher(title);
-        if (matcher.matches()) {
-            return matcher.group(1);
-        } else {
-            return title;
-        }
+    @NonNull public String getDisplayTitle() {
+        return filename != null ? getPageTitle().getDisplayTextWithoutNamespace().replaceFirst("[.][^.]+$", "") : "";
     }
 
     /**
      * Gets file page title
      * @return New media page title
      */
-    public PageTitle getFilePageTitle() {
-        return new PageTitle("File:" + getFilename().replaceFirst("^File:", ""));
+    @NonNull public PageTitle getPageTitle() {
+        return Utils.getPageTitle(getFilename());
     }
 
     /**
@@ -181,9 +253,6 @@ public class Media implements Parcelable {
      */
     @Nullable
     public String getImageUrl() {
-        if (imageUrl == null && this.getFilename() != null) {
-            imageUrl = Utils.makeThumbBaseUrl(this.getFilename());
-        }
         return imageUrl;
     }
 
@@ -333,53 +402,8 @@ public class Media implements Parcelable {
         return license;
     }
 
-    /**
-     * Creating Media object from MWQueryPage.
-     * Earlier only basic details were set for the media object but going forward,
-     * a full media object(with categories, descriptions, coordinates etc) can be constructed using this method
-     *
-     * @param page response from the API
-     * @return Media object
-     */
-    @Nullable
-    public static Media from(MwQueryPage page) {
-        ImageInfo imageInfo = page.imageInfo();
-        if(imageInfo == null) {
-            return null;
-        }
-        ExtMetadata metadata = imageInfo.getMetadata();
-        if (metadata == null) {
-            return new Media(null, imageInfo.getOriginalUrl(),
-                    page.title(), "", 0, null, null, null);
-        }
-
-        Media media = new Media(null,
-                imageInfo.getOriginalUrl(),
-                page.title(),
-                "",
-                0,
-                DateUtils.getDateFromString(metadata.dateTimeOriginal().value()),
-                DateUtils.getDateFromString(metadata.dateTime().value()),
-                StringUtils.getParsedStringFromHtml(metadata.artist().value())
-        );
-
-        String language = Locale.getDefault().getLanguage();
-        if (StringUtils.isNullOrWhiteSpace(language)) {
-            language = "default";
-        }
-
-        media.setDescriptions(Collections.singletonMap(language, metadata.imageDescription().value()));
-        media.setCategories(MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories().value()));
-        String latitude = metadata.gpsLatitude().value();
-        String longitude = metadata.gpsLongitude().value();
-
-        if(!StringUtils.isNullOrWhiteSpace(latitude) && !StringUtils.isNullOrWhiteSpace(longitude)) {
-            LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude), 0);
-            media.setCoordinates(latLng);
-        }
-
-        media.setLicenseInformation(metadata.licenseShortName().value(), metadata.licenseUrl().value());
-        return media;
+    public void setThumbUrl(String thumbUrl) {
+        this.thumbUrl = thumbUrl;
     }
 
     public String getLicenseUrl() {
@@ -467,6 +491,14 @@ public class Media implements Parcelable {
         }
     }
 
+    @Nullable private static Date safeParseDate(String dateStr) {
+        try {
+            return CommonsDateUtil.getIso8601DateFormatShort().parse(dateStr);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
     /**
      * Method of Parcelable interface
      * @return zero
@@ -485,6 +517,7 @@ public class Media implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeParcelable(localUri, flags);
+        parcel.writeString(thumbUrl);
         parcel.writeString(imageUrl);
         parcel.writeString(filename);
         parcel.writeString(description);

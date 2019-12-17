@@ -10,9 +10,11 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -21,13 +23,14 @@ import org.acra.annotation.AcraCore;
 import org.acra.annotation.AcraDialog;
 import org.acra.annotation.AcraMailSender;
 import org.acra.data.StringFormat;
+import org.wikipedia.AppAdapter;
+import org.wikipedia.language.AppLanguageLookUpTable;
 
 import java.io.File;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.annotation.NonNull;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
@@ -40,7 +43,6 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
-import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -49,7 +51,12 @@ import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static org.acra.ReportField.*;
+import static org.acra.ReportField.ANDROID_VERSION;
+import static org.acra.ReportField.APP_VERSION_CODE;
+import static org.acra.ReportField.APP_VERSION_NAME;
+import static org.acra.ReportField.PHONE_MODEL;
+import static org.acra.ReportField.STACK_TRACE;
+import static org.acra.ReportField.USER_COMMENT;
 
 @AcraCore(
         buildConfigClass = BuildConfig.class,
@@ -97,6 +104,15 @@ public class CommonsApplication extends Application {
 
     private RefWatcher refWatcher;
 
+    private static CommonsApplication INSTANCE;
+    public static CommonsApplication getInstance() {
+        return INSTANCE;
+    }
+
+    private AppLanguageLookUpTable languageLookUpTable;
+    public AppLanguageLookUpTable getLanguageLookUpTable() {
+        return languageLookUpTable;
+    }
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -104,12 +120,16 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        INSTANCE = this;
         ACRA.init(this);
 
         ApplicationlessInjection
                 .getInstance(this)
                 .getCommonsApplicationComponent()
                 .inject(this);
+
+        AppAdapter.set(new CommonsAppAdapter(sessionManager, defaultPrefs));
 
         initTimber();
 
@@ -124,11 +144,9 @@ public class CommonsApplication extends Application {
             // TODO: Remove when we're able to initialize Fresco in test builds.
         }
 
-        if (BuildConfig.DEBUG && !isRoboUnitTest()) {
-            Stetho.initializeWithDefaults(this);
-        }
-
         createNotificationChannel(this);
+
+        languageLookUpTable = new AppLanguageLookUpTable(this);
 
         // This handler will catch exceptions thrown from Observables after they are disposed,
         // or from Observables that are (deliberately or not) missing an onError handler.
@@ -151,7 +169,7 @@ public class CommonsApplication extends Application {
         String logFileName = isBeta ? "CommonsBetaAppLogs" : "CommonsAppLogs";
         String logDirectory = LogUtils.getLogDirectory();
         FileLoggingTree tree = new FileLoggingTree(
-                Log.DEBUG,
+                Log.VERBOSE,
                 logFileName,
                 logDirectory,
                 1000,
@@ -183,6 +201,10 @@ public class CommonsApplication extends Application {
                 manager.createNotificationChannel(channel);
             }
         }
+    }
+
+    public String getUserAgent() {
+        return "Commons/" + ConfigUtils.getVersionNameWithSha(this) + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
     }
 
     /**
@@ -230,6 +252,7 @@ public class CommonsApplication extends Application {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
                     Timber.d("All accounts have been removed");
+                    clearImageCache();
                     //TODO: fix preference manager
                     defaultPrefs.clearAll();
                     defaultPrefs.putBoolean("firstrun", false);
@@ -239,13 +262,20 @@ public class CommonsApplication extends Application {
     }
 
     /**
+     * Clear all images cache held by Fresco
+     */
+    private void clearImageCache() {
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        imagePipeline.clearCaches();
+    }
+
+    /**
      * Deletes all tables and re-creates them.
      */
     private void updateAllDatabases() {
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
-        ModifierSequenceDao.Table.onDelete(db);
         CategoryDao.Table.onDelete(db);
         ContributionDao.Table.onDelete(db);
         BookmarkPicturesDao.Table.onDelete(db);

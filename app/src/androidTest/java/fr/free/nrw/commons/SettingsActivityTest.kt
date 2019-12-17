@@ -134,4 +134,24 @@ class SettingsActivityTest {
                 .inAdapterView(withId(android.R.id.list))
                 .check(matches(isEnabled()))
     }
+
+    @Test
+    fun useAuthorNameTogglesOff() {
+        // Turn off "Use external storage" preference if currently on
+        if (defaultKvStore.getBoolean("useAuthorName", false)) {
+            Espresso.onData(PreferenceMatchers.withKey("useAuthorName"))
+                    .inAdapterView(withId(android.R.id.list))
+                    .perform(click())
+        }
+
+        // Check authorName preference is enabled
+        Espresso.onData(PreferenceMatchers.withKey("authorName"))
+                .inAdapterView(withId(android.R.id.list))
+                .check(matches(not(isEnabled())))
+    }
+
+    @Test
+    fun orientationChange() {
+        UITestHelper.changeOrientation(activityRule)
+    }
 }

@@ -1,13 +1,11 @@
 package fr.free.nrw.commons;
 
-import android.text.Html;
+import androidx.core.text.HtmlCompat;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.core.text.HtmlCompat;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.Single;
 import timber.log.Timber;
 
@@ -19,14 +17,11 @@ import timber.log.Timber;
  */
 @Singleton
 public class MediaDataExtractor {
-    private final MediaWikiApi mediaWikiApi;
-    private final OkHttpJsonApiClient okHttpJsonApiClient;
+    private final MediaClient mediaClient;
 
     @Inject
-    public MediaDataExtractor(MediaWikiApi mwApi,
-                              OkHttpJsonApiClient okHttpJsonApiClient) {
-        this.okHttpJsonApiClient = okHttpJsonApiClient;
-        this.mediaWikiApi = mwApi;
+    public MediaDataExtractor(MediaClient mediaClient) {
+        this.mediaClient = mediaClient;
     }
 
     /**
@@ -36,8 +31,8 @@ public class MediaDataExtractor {
      * @return full Media object with all details including deletion status and talk page
      */
     public Single<Media> fetchMediaDetails(String filename) {
-        Single<Media> mediaSingle = okHttpJsonApiClient.getMedia(filename, false);
-        Single<Boolean> pageExistsSingle = mediaWikiApi.pageExists("Commons:Deletion_requests/" + filename);
+        Single<Media> mediaSingle = getMediaFromFileName(filename);
+        Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
         Single<String> discussionSingle = getDiscussion(filename);
         return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, (media, deletionStatus, discussion) -> {
             media.setDiscussion(discussion);
@@ -49,13 +44,21 @@ public class MediaDataExtractor {
     }
 
     /**
+     * Method can be used to fetch media for a given filename
+     * @param filename Eg. File:Test.jpg
+     * @return return data rich Media object
+     */
+    public Single<Media> getMediaFromFileName(String filename) {
+        return mediaClient.getMedia(filename);
+    }
+
+    /**
      * Fetch talk page from the MediaWiki API
      * @param filename
      * @return
      */
     private Single<String> getDiscussion(String filename) {
-        return mediaWikiApi.fetchMediaByFilename(filename.replace("File", "File talk"))
-                .flatMap(mediaResult -> mediaWikiApi.parseWikicode(mediaResult.getWikiSource()))
+        return mediaClient.getPageHtml(filename.replace("File", "File talk"))
                 .map(discussion -> HtmlCompat.fromHtml(discussion, HtmlCompat.FROM_HTML_MODE_LEGACY).toString())
                 .onErrorReturn(throwable -> {
                     Timber.e(throwable, "Error occurred while fetching discussion");

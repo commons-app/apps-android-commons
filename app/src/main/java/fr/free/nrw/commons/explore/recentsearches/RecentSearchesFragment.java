@@ -1,16 +1,16 @@
 package fr.free.nrw.commons.explore.recentsearches;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.List;
 
@@ -74,7 +74,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         recentSearchesList.setOnItemLongClickListener((parent, view, position, id) -> {
             new AlertDialog.Builder(getContext())
             .setMessage(R.string.delete_search_dialog)
-            .setPositiveButton(R.string.delete,((dialog, which) -> {
+            .setPositiveButton(getString(R.string.delete).toUpperCase(),((dialog, which) -> {
                 recentSearchesDao.delete(recentSearchesDao.find(recentSearches.get(position)));
                 recentSearches = recentSearchesDao.recentSearches(10);
                 adapter = new ArrayAdapter<>(getContext(), R.layout.item_recent_searches, recentSearches);
