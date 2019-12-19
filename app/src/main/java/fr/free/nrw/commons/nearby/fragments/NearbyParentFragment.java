@@ -975,11 +975,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * This function clears the place data from the application, so that when the user leaves the app and
-     * tries to upload an other image the data is not kept (see #2803)
+     * Used to be able to use the MVC pattern
+     * @return the applicationKvStore object
      */
-    public void removeSharedPrefs() {
-        nearbyController.removeSharedPrefs(applicationKvStore, PLACE_OBJECT);
+    public JsonKvStore getApplicationKvStore() {
+        return applicationKvStore;
     }
 
     private void updateBookmarkButtonImage(Place place) {

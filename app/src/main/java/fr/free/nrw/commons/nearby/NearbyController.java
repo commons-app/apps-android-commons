@@ -246,14 +246,7 @@ public class NearbyController {
 
         return baseMarkerOptions;
     }
-    /**
-     * A function which clears the shared preferences
-     * Used to fix #3202
-     */
-    public void removeSharedPrefs(JsonKvStore applicationKvStore, String PLACE_OBJECT) {
-        Timber.d("Remove place objects");
-        applicationKvStore.remove(PLACE_OBJECT);
-    }
+
 
     /**
      * We pass this variable as a group of placeList and boundaryCoordinates

@@ -29,6 +29,7 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED;
 import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED;
 import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNKNOWN;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
@@ -440,4 +441,10 @@ public class NearbyParentFragmentPresenter
             this.placeToCenter = place;
         }
     }
+
+
+	public void removeNearbyPreferences() {
+        Timber.d("Remove place objects");
+        this.nearbyParentFragmentView.getApplicationKvStore().remove(PLACE_OBJECT);
+	}
 }

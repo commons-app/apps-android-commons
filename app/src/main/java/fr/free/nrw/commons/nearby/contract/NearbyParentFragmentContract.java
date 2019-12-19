@@ -44,6 +44,7 @@ public interface NearbyParentFragmentContract {
         void setFilterState();
         void disableFABRecenter();
         void enableFABRecenter();
+        JsonKvStore getApplicationKvStore(); //Passed to NearbyParentFragmentPresenter to solve #2803
     }
 
     interface NearbyListView {

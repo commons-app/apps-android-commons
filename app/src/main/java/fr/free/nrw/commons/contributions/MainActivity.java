@@ -435,23 +435,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         setNotificationCount();
     }
 
-    /**
-     * This function will clear the cache made by the Nearby feature
-     */
-    public void clearNearbyCache() {
-        try {
-            ((NearbyParentFragment) (this.contributionsActivityPagerAdapter.getNearbyFragment(1))).removeSharedPrefs();
-        }
-        catch (Exception e) {
-            try {
-                ((NearbyParentFragment)(this.contributionsActivityPagerAdapter.getNearbyFragment(0))).removeSharedPrefs();
-            }
-            catch (Exception ex) {
-                // The try catch blocks are only here to catch the fragment and do the function, I just don't know
-                // how to ensure we catch it in a better way
-            }
-        }
-    }
 
 
     @Override
@@ -460,7 +443,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         locationManager.unregisterLocationManager();
         // Remove ourself from hashmap to prevent memory leaks
         locationManager = null;
-        this.clearNearbyCache();
+        NearbyParentFragmentPresenter.getInstance().removeNearbyPreferences();
         super.onDestroy();
     }
 }
