@@ -349,4 +349,5 @@
   <string name="delete_helper_show_deletion_message_if">%1$s gouf nominéiert fir ze läschen</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
+  <string name="place_state_needs_photo">Brauch eng Foto</string>
 </resources>
