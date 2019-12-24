@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -179,6 +180,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initBottomSheets();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         nearbyMapFragment = getNearbyMapFragment();
@@ -188,7 +195,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void initViews() {
         Timber.d("init views called");
-        initBottomSheets();
+        bottomSheetDetails.setVisibility(View.VISIBLE);
         loadAnimations();
         setBottomSheetCallbacks();
         decideButtonVisibilities();
@@ -202,7 +209,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        bottomSheetDetails.setVisibility(View.VISIBLE);
     }
 
     public void initNearbyFilter() {
