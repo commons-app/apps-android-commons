@@ -76,7 +76,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 false);
         ButterKnife.bind(this, layoutView);
 
-        String question, explanation, yesButtonText, noButtonText;
+        String question, explanation=null, yesButtonText, noButtonText;
         switch (position) {
             case SPAM:
                 question = getString(R.string.review_spam);
@@ -115,12 +115,17 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
                 //Get existing user name if it is already saved using savedInstanceState else get from reviewController
                 if (savedInstanceState == null) {
-                    user = getReviewActivity().reviewController.firstRevision.getUser();
+                    if (getReviewActivity().reviewController != null) {
+                        user = getReviewActivity().reviewController.firstRevision.getUser();
+                    }
                 } else {
                     user = savedInstanceState.getString(SAVED_USER);
                 }
 
-                explanation = getString(R.string.review_thanks_explanation, user);
+                //if the user is null because of whatsoever reason, review will not be sent anyways
+                if (!TextUtils.isEmpty(user)) {
+                    explanation = getString(R.string.review_thanks_explanation, user);
+                }
 
                 yesButtonText = getString(R.string.review_thanks_yes_button_text);
                 noButtonText = getString(R.string.review_thanks_no_button_text);
