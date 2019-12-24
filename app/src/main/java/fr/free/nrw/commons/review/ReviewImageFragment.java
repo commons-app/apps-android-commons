@@ -76,7 +76,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 false);
         ButterKnife.bind(this, layoutView);
 
-        String question, explanation, yesButtonText, noButtonText;
+        String question, explanation=null, yesButtonText, noButtonText;
         switch (position) {
             case SPAM:
                 question = getString(R.string.review_spam);
