@@ -304,7 +304,7 @@
   <string name="showcase_view_whole_nearby_activity">สถานที่เหล่านี้คือสถานที่ที่อยู่ใกล้คุณ และต้องการภาพสำหรับเพิ่มเข้าไปในบทความบนวิกิพีเดีย\n\nกดที่\'{{Wikimedia:Commons-android-strings-search this area}}\'เพื่อดูแผนที่และสำรวจว่าสิ่งใดบ้างที่ต้องการภาพ และถ่ายมันมาหากคุณสะดวก</string>
   <string name="no_images_found">ไม่พบรูปภาพ!</string>
   <string name="error_loading_images">เกิดข้อผิดพลาดระหว่างการโหลดภาะ</string>
-  <string name="image_uploaded_by">อัพโหลดโดย: %1$a</string>
+  <string name="image_uploaded_by">อัพโหลดโดย: %1$s</string>
   <string name="block_notification">คุณกำลังถูกบล็อคไม่ให้แก้ไขคอมมอนส์</string>
   <string name="appwidget_img">รูปภาพประจำวัน</string>
   <string name="app_widget_heading">รูปภาพประจำวัน</string>
