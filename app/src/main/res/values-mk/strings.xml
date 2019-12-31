@@ -444,7 +444,7 @@
   <string name="bad_token_error_proposed_solution">Подигањето не успеа поради проблеми со уредувачката шифра. Одјавете се и повторно најавете се.</string>
   <string name="error_processing_image">Се појави грешка при обработката на сликата. Обидете се повторно!</string>
   <string name="getting_edit_token">Добивање на шифра за уредување</string>
-  <string name="check_category_adding_template">Додавање на шаблон за категориска проверка</string>
+  <string name="check_category_adding_template">Додавање на предлошка за категориска проверка</string>
   <string name="check_category_notification_title">Барање на категориска проверка за %1$s</string>
   <string name="check_category_edit_summary">Барање на категориска проверка</string>
   <string name="check_category_success_title">Побарана категориска проверка</string>
