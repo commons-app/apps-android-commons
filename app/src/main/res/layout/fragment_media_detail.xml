@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/mainBackground"
+    android:background="@color/black"
     >
 
     <ImageView
@@ -22,8 +22,8 @@
         android:id="@+id/mediaDetailImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:actualImageScaleType="centerCrop"
-        />
+        app:actualImageScaleType="fitCenter" />
+
 
     <ScrollView
         android:id="@+id/mediaDetailScrollView"
