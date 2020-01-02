@@ -519,7 +519,7 @@
   <string name="exif_tag_name_lensModel">Модел на објективот</string>
   <string name="exif_tag_name_serialNumbers">Сериски броеви</string>
   <string name="exif_tag_name_software">Програми</string>
-  <string name="share_text" fuzzy="true">Подигајте слики на Ризницата од телефон. Преземете го прилогот на Ризницата: %1$s</string>
+  <string name="share_text">Подигајте слики непосредно на Ризницата од телефон. Преземете го прилогот на Ризницата сега: %1$s</string>
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
   <string name="no_categories_found">Не пронајдов ниедна категорија</string>
