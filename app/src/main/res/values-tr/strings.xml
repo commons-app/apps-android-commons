@@ -315,7 +315,7 @@
   <string name="about_translate_title">Diller</string>
   <string name="about_translate_message">Çevirileri göndermek istediğiniz dili seçin</string>
   <string name="about_translate_proceed">İlerle</string>
-  <string name="about_translate_cancel">Vazgeç</string>
+  <string name="about_translate_cancel">İptal</string>
   <string name="retry">Tekrar Deneyin</string>
   <string name="showcase_view_got_it_button">Anladım!</string>
   <string name="showcase_view_whole_nearby_activity">Bunlar, Vikpedi makalelerini açıklamak için resimlere ihtiyaç duyan yakınlarınız.\n\n\'BU ALANI ARA\' düğmesine tıklamak haritayı kilitler ve o konumun yakınında yakındaki bir aramayı başlatır.</string>
@@ -536,7 +536,7 @@
   <string name="exif_tag_name_lensModel">Lens Modeli</string>
   <string name="exif_tag_name_serialNumbers">Seri Numaraları</string>
   <string name="exif_tag_name_software">Yazılım</string>
-  <string name="share_text" fuzzy="true">Fotoğrafları telefonunuzda Wikimedia Commons\'a yükleyin Commons uygulamasını indirin: %1$s</string>
+  <string name="share_text">Fotoğrafları doğrudan telefonunuzdan Wikimedia Commons\'a yükleyin. Commons Uygulamasını şimdi indirin: %1$s</string>
   <string name="share_via">Uygulamayı üzerinden paylaş...</string>
   <string name="image_info">Resim Bilgisi</string>
   <string name="no_categories_found">Kategori bulunamadı</string>
