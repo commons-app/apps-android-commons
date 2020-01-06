@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* BaRaN6161 TURK
 * Emperyan
 * Sayginer
 -->
 <resources>
   <string name="crash_dialog_title">Commons çöktü</string>
-  <string name="crash_dialog_text">Hay Aksi! Bir şeyler yanlış gitti!</string>
-  <string name="crash_dialog_comment_prompt">Ne yapıyordunuz bize söyleyin, ardından e-posta yoluyla bizimle paylaşın. Bunu düzeltmemize yardımcı olun!</string>
+  <string name="crash_dialog_text">Hata. Bir şeyler yanlış gitti!</string>
+  <string name="crash_dialog_comment_prompt">Ne yaptığınızı bize söyleyin, ardından bize e-posta ile paylaşın. Düzeltmemize yardımcı olacak!</string>
   <string name="crash_dialog_ok_toast">Teşekkürler!</string>
 </resources>
