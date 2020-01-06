@@ -56,6 +56,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -158,6 +159,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isFABsExpanded;
     private Marker selectedMarker;
     private Place selectedPlace;
+    private Unbinder unbinder;
 
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
@@ -172,7 +174,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_nearby_parent, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         // Inflate the layout for this fragment
         return view;
 
@@ -185,6 +187,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         nearbyListFragment = getListFragment();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 
     private void initViews() {
         Timber.d("init views called");
