@@ -110,7 +110,7 @@
   <string name="media_upload_policy">By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Default License</string>
-  <string name="use_previous">Use previous title/description</string>
+  <string name="use_previous">Use previous title and description</string>
   <string name="allow_gps">Automatically get current location</string>
   <string name="allow_gps_summary">Retrieves current location if image is not geotagged, and geotags image with it. Warning: This will reveal your current location.</string>
   <string name="preference_theme">Night mode</string>
