@@ -555,7 +555,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateListFragment(List<Place> placeList) {
-
+        nearbyListFragment.updateListFragment(placeList);
     }
 
     @Override
