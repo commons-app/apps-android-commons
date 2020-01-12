@@ -35,7 +35,13 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
     private int state;
 
+    private Callback callback;
+
     RecyclerView.SmoothScroller smoothScroller;
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+    }
 
     public NearbyFilterSearchRecyclerViewAdapter(Context context, ArrayList<Label> labels, RecyclerView recyclerView) {
         this.context = context;
@@ -79,7 +85,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
         holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : Color.WHITE);
         holder.placeTypeLayout.setOnClickListener(view -> {
-            NearbyParentFragmentPresenter.getInstance().setCheckboxUnknown();
+            callback.setCheckboxUnknown();
             if (label.isSelected()) {
                 selectedLabels.remove(label);
             } else {
@@ -87,7 +93,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
             }
             label.setSelected(!label.isSelected());
             holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : Color.WHITE);
-            NearbyParentFragmentPresenter.getInstance().filterByMarkerType(selectedLabels, 0, false, false);
+            callback.filterByMarkerType(selectedLabels, 0, false, false);
         });
     }
 
@@ -164,6 +170,13 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
     public void setRecyclerViewAdapterNeutral() {
         state = CheckBoxTriStates.UNKNOWN;
+    }
+
+    public interface  Callback{
+
+        void setCheckboxUnknown();
+
+        void filterByMarkerType(ArrayList<Label> selectedLabels, int i, boolean b, boolean b1);
     }
 
 }

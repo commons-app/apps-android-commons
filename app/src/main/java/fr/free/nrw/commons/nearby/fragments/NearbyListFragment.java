@@ -44,7 +44,6 @@ public class NearbyListFragment extends CommonsDaggerSupportFragment implements 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
     }
 
     @Override

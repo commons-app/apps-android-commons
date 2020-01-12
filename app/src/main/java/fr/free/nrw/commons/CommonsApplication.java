@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -123,6 +124,7 @@ public class CommonsApplication extends Application {
 
         INSTANCE = this;
         ACRA.init(this);
+        Mapbox.getInstance(this, getString(R.string.mapbox_commons_app_token));
 
         ApplicationlessInjection
                 .getInstance(this)

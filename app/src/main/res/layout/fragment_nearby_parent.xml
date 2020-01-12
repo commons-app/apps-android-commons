@@ -10,11 +10,6 @@
         android:layout_height="match_parent"
         android:background="@color/status_bar_blue"
         android:id="@+id/map_layout">
-        
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:focusableInTouchMode="true"/>
 
         <include
             layout="@layout/nearby_filter_all_items"
@@ -27,8 +22,8 @@
             android:layout_width="160dp"
             android:layout_alignParentEnd="true"/>
 
-        <FrameLayout
-            android:id="@+id/container"
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/map_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/nearby_filter"/>
@@ -54,7 +49,6 @@
             android:id="@+id/transparentView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
             android:layout_alignParentLeft="true"
             android:background="#aa969696"
             android:visibility="gone"
