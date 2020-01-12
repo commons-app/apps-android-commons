@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.theme;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import javax.inject.Inject;
@@ -29,7 +30,9 @@ public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
     protected void onResume() {
         // Restart activity if theme is changed
         if (wasPreviouslyDarkTheme != defaultKvStore.getBoolean("theme", false)) {
-            recreate();
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
         }
 
         super.onResume();

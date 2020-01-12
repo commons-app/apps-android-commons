@@ -91,6 +91,7 @@ import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_P
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
+import static fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter.presenterInstance;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 
@@ -473,7 +474,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void removeListFragment() {
         if (nearbyListFragment != null) {
             FragmentManager fm = getChildFragmentManager();
-            fm.beginTransaction().remove(nearbyListFragment).commit();
+            fm.beginTransaction().remove(nearbyListFragment).commitAllowingStateLoss();
             nearbyListFragment = null;
         }
     }
@@ -481,7 +482,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void removeMapFragment() {
         if (nearbyMapFragment != null) {
             FragmentManager fm = getChildFragmentManager();
-            fm.beginTransaction().remove(nearbyMapFragment).commit();
+            fm.beginTransaction().remove(nearbyMapFragment).commitAllowingStateLoss();
             nearbyMapFragment = null;
         }
     }
@@ -624,7 +625,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         throwable -> {
                             Timber.d(throwable);
                             // TODO: find out why NPE occurs here
-                            // showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                            showErrorMessage(getString(R.string.error_fetching_nearby_places));
                             setProgressBarVisibility(false);
                             nearbyParentFragmentPresenter.lockUnlockNearby(false);
                         }));
@@ -1026,6 +1027,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             locationManager.removeLocationListener(nearbyParentFragmentPresenter);
             locationManager.unregisterLocationManager();
         }
+        presenterInstance = null;
     }
 
     @Override
