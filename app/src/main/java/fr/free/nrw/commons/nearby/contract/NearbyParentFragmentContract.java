@@ -18,7 +18,6 @@ import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 public interface NearbyParentFragmentContract {
 
     interface View {
-        void registerLocationUpdates(LocationServiceManager locationServiceManager);
         boolean isNetworkConnectionEstablished();
         void listOptionMenuItemClicked();
         void populatePlaces(LatLng curlatLng);
