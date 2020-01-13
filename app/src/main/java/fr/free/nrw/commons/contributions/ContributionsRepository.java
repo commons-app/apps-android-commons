@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.database.Cursor;
-
 import javax.inject.Inject;
 
 /**
@@ -23,21 +21,20 @@ public class ContributionsRepository {
         return localDataSource.get(uploadsShowing);
     }
 
-
-    /**
-     * Get contribution object from cursor from LocalDataSource
-     * @param cursor
-     * @return
-     */
-    public Contribution getContributionFromCursor(Cursor cursor) {
-        return localDataSource.getContributionFromCursor(cursor);
-    }
-
     /**
      * Deletes a failed upload from DB
      * @param contribution
      */
     public void deleteContributionFromDB(Contribution contribution) {
         localDataSource.deleteContribution(contribution);
+    }
+
+    /**
+     * Get contribution object with title
+     * @param fileName
+     * @return
+     */
+    public Contribution getContributionWithFileName(String fileName) {
+        return localDataSource.getContributionWithFileName(fileName);
     }
 }

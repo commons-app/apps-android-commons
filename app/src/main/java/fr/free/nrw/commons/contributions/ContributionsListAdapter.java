@@ -6,15 +6,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 
 public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionViewHolder> {
 
     private Callback callback;
+    private List<Contribution> contributions;
 
     public ContributionsListAdapter(Callback callback) {
         this.callback = callback;
+        contributions=new ArrayList<>();
     }
 
     @NonNull
@@ -28,7 +33,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
 
     @Override
     public void onBindViewHolder(@NonNull ContributionViewHolder holder, int position) {
-        final Contribution contribution = callback.getContributionForPosition(position);
+        final Contribution contribution = contributions.get(position);
         DisplayableContribution displayableContribution = new DisplayableContribution(contribution,
                 position);
         holder.init(position, displayableContribution);
@@ -36,7 +41,12 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
 
     @Override
     public int getItemCount() {
-        return callback.getNumberOfContributions();
+        return contributions==null?0:contributions.size();
+    }
+
+    public void setContributions(List<Contribution> contributionList) {
+        this.contributions=contributionList;
+        notifyDataSetChanged();
     }
 
     public interface Callback {
@@ -47,10 +57,6 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
 
         void openMediaDetail(int contribution);
 
-        int getNumberOfContributions();
-
         Contribution getContributionForPosition(int position);
-
-        int findItemPositionWithId(String lastVisibleItemID);
     }
 }

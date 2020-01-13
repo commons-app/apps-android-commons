@@ -47,7 +47,7 @@ class ContributionsPresenterTest {
      */
     @Test
     fun testGetContributionFromCursor() {
-        contributionsPresenter?.getContributionsFromCursor(cursor)
+        contributionsPresenter?.getContributionsWithTitle(cursor)
         verify(repository)?.getContributionFromCursor(cursor)
     }
 

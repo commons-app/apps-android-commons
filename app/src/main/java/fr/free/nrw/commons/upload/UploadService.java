@@ -28,10 +28,11 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
-import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
+import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -46,10 +47,10 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
     public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
     public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
-
     @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
-    @Inject ContributionDao contributionDao;
+    @Inject
+    AppDatabase appDatabase;
     @Inject UploadClient uploadClient;
     @Inject MediaClient mediaClient;
 
@@ -105,7 +106,7 @@ public class UploadService extends HandlerService<Contribution> {
             notificationManager.notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
             contribution.setTransferred(transferred);
-            contributionDao.save(contribution);
+            ExecutorUtils.get().submit(() -> appDatabase.getContributionDao().save(contribution));
         }
 
     }
@@ -143,7 +144,7 @@ public class UploadService extends HandlerService<Contribution> {
 
                 contribution.setState(Contribution.STATE_QUEUED);
                 contribution.setTransferred(0);
-                contributionDao.save(contribution);
+                ExecutorUtils.get().submit(() -> appDatabase.getContributionDao().save(contribution));
                 toUpload++;
                 if (curNotification != null && toUpload != 1) {
                     curNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
@@ -163,16 +164,7 @@ public class UploadService extends HandlerService<Contribution> {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (ACTION_START_SERVICE.equals(intent.getAction()) && freshStart) {
-            ContentValues failedValues = new ContentValues();
-            failedValues.put(ContributionDao.Table.COLUMN_STATE, Contribution.STATE_FAILED);
-
-            int updated = getContentResolver().update(ContributionsContentProvider.BASE_URI,
-                    failedValues,
-                    ContributionDao.Table.COLUMN_STATE + " = ? OR " + ContributionDao.Table.COLUMN_STATE + " = ?",
-                    new String[]{ String.valueOf(Contribution.STATE_QUEUED), String.valueOf(Contribution.STATE_IN_PROGRESS) }
-            );
-            Timber.d("Set %d uploads to failed", updated);
-            Timber.d("Flags is %d id is %d", flags, startId);
+            ExecutorUtils.get().submit(() -> appDatabase.getContributionDao().updateStates(Contribution.STATE_FAILED,new int[]{Contribution.STATE_QUEUED,Contribution.STATE_IN_PROGRESS}));
             freshStart = false;
         }
         return START_REDELIVER_INTENT;
@@ -272,7 +264,7 @@ public class UploadService extends HandlerService<Contribution> {
                         contribution.setState(Contribution.STATE_COMPLETED);
                         contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatShort()
                                 .parse(uploadResult.getImageinfo().getTimestamp()));
-                        contributionDao.save(contribution);
+                        ExecutorUtils.get().submit(() -> appDatabase.getContributionDao().save(contribution));
                     }
                 }, throwable -> {
                     Timber.w(throwable, "Exception during upload");
@@ -291,7 +283,7 @@ public class UploadService extends HandlerService<Contribution> {
         notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_FAILED, curNotification.build());
 
         contribution.setState(Contribution.STATE_FAILED);
-        contributionDao.save(contribution);
+        ExecutorUtils.get().submit(() -> appDatabase.getContributionDao().save(contribution));
     }
 
     private String findUniqueFilename(String fileName) throws IOException {

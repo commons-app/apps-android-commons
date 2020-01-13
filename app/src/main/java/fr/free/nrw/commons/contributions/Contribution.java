@@ -6,6 +6,7 @@ import android.os.Parcel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
+import androidx.room.Entity;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,6 +22,7 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
+@Entity
 public class  Contribution extends Media {
 
     //{{According to EXIF data|2009-01-09}}
@@ -55,16 +57,16 @@ public class  Contribution extends Media {
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
 
-    private Uri contentUri;
-    private String source;
-    private String editSummary;
-    private int state;
-    private long transferred;
-    private String decimalCoords;
-    private boolean isMultiple;
-    private String wikiDataEntityId;
-    private Uri contentProviderUri;
-    private String dateCreatedSource;
+    public Uri contentUri;
+    public String source;
+    public String editSummary;
+    public int state;
+    public long transferred;
+    public String decimalCoords;
+    public boolean isMultiple;
+    public String wikiDataEntityId;
+    public Uri contentProviderUri;
+    public String dateCreatedSource;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,

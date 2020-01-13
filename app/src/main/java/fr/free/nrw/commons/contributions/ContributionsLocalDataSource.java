@@ -1,10 +1,11 @@
 package fr.free.nrw.commons.contributions;
 
-import android.database.Cursor;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 
 /**
@@ -12,15 +13,15 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
  */
 class ContributionsLocalDataSource {
 
-    private final ContributionDao contributionsDao;
+    private final ContributionDao contributionDao;
     private final JsonKvStore defaultKVStore;
 
     @Inject
     public ContributionsLocalDataSource(
             @Named("default_preferences") JsonKvStore defaultKVStore,
-            ContributionDao contributionDao) {
+            AppDatabase appDatabase) {
         this.defaultKVStore = defaultKVStore;
-        this.contributionsDao = contributionDao;
+        this.contributionDao = appDatabase.getContributionDao();
     }
 
     /**
@@ -32,11 +33,15 @@ class ContributionsLocalDataSource {
 
     /**
      * Get contribution object from cursor
-     * @param cursor
+     * @param uri
      * @return
      */
-    public Contribution getContributionFromCursor(Cursor cursor) {
-        return contributionsDao.fromCursor(cursor);
+    public Contribution getContributionWithFileName(String uri) {
+        List<Contribution> contributionWithUri = contributionDao.getContributionWithTitle(uri);
+        if(null!=contributionWithUri && contributionWithUri.size()>0){
+            return contributionWithUri.get(0);
+        }
+        return null;
     }
 
     /**
@@ -44,6 +49,6 @@ class ContributionsLocalDataSource {
      * @param contribution
      */
     public void deleteContribution(Contribution contribution) {
-        contributionsDao.delete(contribution);
+        contributionDao.delete(contribution);
     }
 }

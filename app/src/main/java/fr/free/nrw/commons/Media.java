@@ -6,6 +6,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
@@ -26,6 +28,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 
+@Entity
 public class Media implements Parcelable {
 
     public static final Media EMPTY = new Media("");
@@ -42,25 +45,27 @@ public class Media implements Parcelable {
     };
 
     // Primary metadata fields
-    protected Uri localUri;
-    private String thumbUrl;
-    protected String imageUrl;
-    protected String filename;
-    protected String description; // monolingual description on input...
-    protected String discussion;
-    protected long dataLength;
-    protected Date dateCreated;
-    protected @Nullable Date dateUploaded;
-    protected int width;
-    protected int height;
-    protected String license;
-    protected String licenseUrl;
-    protected String creator;
-    protected ArrayList<String> categories; // as loaded at runtime?
-    protected boolean requestedDeletion;
-    private Map<String, String> descriptions; // multilingual descriptions as loaded
-    private HashMap<String, Object> tags = new HashMap<>();
-    private @Nullable LatLng coordinates;
+    @PrimaryKey
+    @NonNull
+    public Uri localUri;
+    public String thumbUrl;
+    public String imageUrl;
+    public String filename;
+    public String description; // monolingual description on input...
+    public String discussion;
+    long dataLength;
+    public Date dateCreated;
+    @Nullable public  Date dateUploaded;
+    public int width;
+    public int height;
+    public String license;
+    public String licenseUrl;
+    public String creator;
+    public ArrayList<String> categories; // as loaded at runtime?
+    public boolean requestedDeletion;
+    public HashMap<String, String> descriptions; // multilingual descriptions as loaded
+    public HashMap<String, String> tags = new HashMap<>();
+    @Nullable public  LatLng coordinates;
 
     /**
      * Provides local constructor
@@ -118,7 +123,7 @@ public class Media implements Parcelable {
         dateCreated = (Date) in.readSerializable();
         dateUploaded = (Date) in.readSerializable();
         creator = in.readString();
-        tags = (HashMap<String, Object>) in.readSerializable();
+        tags = (HashMap<String, String>) in.readSerializable();
         width = in.readInt();
         height = in.readInt();
         license = in.readString();
@@ -218,7 +223,7 @@ public class Media implements Parcelable {
      * @param key Media key
      * @param value Media value
      */
-    public void setTag(String key, Object value) {
+    public void setTag(String key, String value) {
         tags.put(key, value);
     }
 
