@@ -112,7 +112,7 @@
   <string name="media_upload_policy">Dengan mengirim foto ini, saya menyatakan bahwa ini adalah karya saya sendiri yang tidak mengandung bahan atau foto narsis berhak cipta, dan tidak menyalahi &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;kebijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Unduh</string>
   <string name="preference_license">Lisensi standar</string>
-  <string name="use_previous">Gunakan judul/deskripsi sebelumnya</string>
+  <string name="use_previous" fuzzy="true">Gunakan judul/deskripsi sebelumnya</string>
   <string name="allow_gps">Dapatkan lokasi secara otomatis</string>
   <string name="allow_gps_summary">Mengambil lokasi saat ini jika gambar tidak diberi geotag, atau tercantum geotag. \nPeringatan: Ini akan mengungkapkan lokasi Anda saat ini.</string>
   <string name="preference_theme">Modus malam</string>

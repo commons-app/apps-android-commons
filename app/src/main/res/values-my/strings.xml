@@ -89,7 +89,7 @@
   </plurals>
   <string name="menu_download">ဒေါင်းလုပ်ယူရန်</string>
   <string name="preference_license">နဂို လိုင်စင်</string>
-  <string name="use_previous">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် သုံးမည်</string>
+  <string name="use_previous" fuzzy="true">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် သုံးမည်</string>
   <string name="allow_gps">လက်ရှိနေရာကို အလိုအလျောက်ယူရန်</string>
   <string name="preference_theme">ညကြည့်ပုံစံ</string>
   <string name="preference_theme_summary">အမှောင်မြင်ကွင်း သုံးမည်</string>

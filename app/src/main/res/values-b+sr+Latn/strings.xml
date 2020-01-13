@@ -109,7 +109,7 @@
   <string name="media_upload_policy">Slanjem ove slike, ja tvrdim da je u pitanju moj rad, da ne sadrži materijal ili selfije zaštićene autorskim pravima, te da je na ostale načine u skladu sa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smernicama Vikimedijine ostave&lt;/a&gt;.</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Podrazumevana licenca</string>
-  <string name="use_previous">Koristi prethodan naslov/opis</string>
+  <string name="use_previous" fuzzy="true">Koristi prethodan naslov/opis</string>
   <string name="allow_gps">Automatski dobavi trenutnu lokaciju</string>
   <string name="allow_gps_summary">Prima trenutnu lokaciju ako slika nije geotagovana i geotaguje istu njome. Upozorenje: Ovime će da se otkrije Vaša trenutna lokacija.</string>
   <string name="preference_theme">Noćni režim</string>

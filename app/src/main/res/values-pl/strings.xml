@@ -126,7 +126,7 @@
   <string name="media_upload_policy">Przesyłając ten obraz deklaruję, że jest on moją własną pracą, nie zawiera elementów objętych prawem autorskim lub selfie i jest zgodny z &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pl\"&gt;Zasadami i zaleceniami Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Pobieranie</string>
   <string name="preference_license">Domyślna licencja</string>
-  <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
+  <string name="use_previous" fuzzy="true">Użyj poprzedniego tytułu/opisu</string>
   <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
   <string name="allow_gps_summary" fuzzy="true">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
   <string name="preference_theme">Tryb nocny</string>

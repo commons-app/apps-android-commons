@@ -123,7 +123,7 @@
   <string name="media_upload_policy">Αποστέλλοντας αυτήν την εικόνα, δηλώνω πως αυτή η εργασία είναι δική μου, και δεν περιέχει υλικό άλλου συγγραφέα, και εκτός αυτού πρόσκειται στο , thathref=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Κοινές πολιτικές της Wikipedia&lt;/a&gt;.</string>
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
-  <string name="use_previous">Χρήση προηγούμενου τίτλου/περιγραφής</string>
+  <string name="use_previous" fuzzy="true">Χρήση προηγούμενου τίτλου/περιγραφής</string>
   <string name="allow_gps">Αυτόματη ανάκτηση τρέχουσας θέσης</string>
   <string name="allow_gps_summary">Ανακτά την τρέχουσα τοποθεσία εάν η εικόνα δεν είναι γεωσεσημασμένη, και τις γεωσημάνσεις με αυτή. Προειδοποίηση: Αυτό θα αποκαλύψει την τρέχουσα τοποθεσία σας.</string>
   <string name="preference_theme">Νυχτερινή λειτουργία</string>

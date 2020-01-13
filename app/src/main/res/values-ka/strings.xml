@@ -109,7 +109,7 @@
   <string name="media_upload_policy">ამ სურათის ატვირთვით ვაცხადებ, რომ ეს ჩემი პირადი ნამუშევარია და არ შეიცავს საავტორო უფლებებით დაცულ მასალებს ან სელფის, სხვა შემთხვევაში ის პასუხობს &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ვიკისაწყობის პოლიტიკას&lt;/a&gt;.</string>
   <string name="menu_download">ჩამოტვირთვა</string>
   <string name="preference_license">ნაგულისხმევი ლიცენზია</string>
-  <string name="use_previous">წინა სათაურის/აღწერის გამოყენება</string>
+  <string name="use_previous" fuzzy="true">წინა სათაურის/აღწერის გამოყენება</string>
   <string name="allow_gps">ამჟამინდელი მდებარეობის ავტომატური მიღება</string>
   <string name="allow_gps_summary">შლის მიმდინარე ადგილმდებარეობას, თუ სურათი არ არის დატანილი რუკაზე. ყურადღება! ეს ცვლილება გაჩვენებთ თქვენს მიმდინარე ადგილმდებარეობას.</string>
   <string name="preference_theme">ღამის რეჟიმი</string>

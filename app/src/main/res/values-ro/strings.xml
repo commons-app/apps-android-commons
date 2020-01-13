@@ -119,7 +119,7 @@
   <string name="media_upload_policy">Prin prezentarea acestei imagini, declar că aceasta este lucrarea mea proprie, că nu conține materiale protejate prin drepturi de autor sau selfiuri și că aderă la &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Descarcă</string>
   <string name="preference_license">Licență implicită</string>
-  <string name="use_previous">Folosiți titlul/descrierea anterioară</string>
+  <string name="use_previous" fuzzy="true">Folosiți titlul/descrierea anterioară</string>
   <string name="allow_gps">Obține în mod automat locația curentă</string>
   <string name="allow_gps_summary">Preia locația curentă dacă imaginea nu are salvată locația și salvează imaginea cu ea. Avertisment: Aceasta va dezvălui locația dvs. curentă.</string>
   <string name="preference_theme">Mod de noapte</string>

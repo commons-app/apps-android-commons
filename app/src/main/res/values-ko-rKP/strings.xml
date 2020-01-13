@@ -106,7 +106,7 @@
   <string name="media_upload_policy">이 그림에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키매체공용정책&lt;/a&gt;에 위배되지 않는다는것에 동의합니다.</string>
   <string name="menu_download">내리적재</string>
   <string name="preference_license">기본 허가권</string>
-  <string name="use_previous">이전의 제목/설명을 사용하기</string>
+  <string name="use_previous" fuzzy="true">이전의 제목/설명을 사용하기</string>
   <string name="allow_gps">자동으로 현재 위치 얻기</string>
   <string name="allow_gps_summary">영상의 지리정보 꼬리표가 보관되지 않은 경우 현재 위치를 검색하여 영상에 현재 위치로 지리정보 꼬리표를 보관하십시오. 경고: 당신의 현재 위치가 로출됩니다.</string>
   <string name="preference_theme">야간방식</string>

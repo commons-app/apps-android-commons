@@ -129,7 +129,7 @@
   <string name="media_upload_policy">Odesláním tohoto souboru potvrzuji, že je mým vlastním dílem, neobsahuje autorskoprávně chráněný materiál a nejedná se o selfie a ani jinak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;pravidla a doporučení Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stáhnout</string>
   <string name="preference_license">Výchozí licence</string>
-  <string name="use_previous">Použít předchozí název a popis</string>
+  <string name="use_previous" fuzzy="true">Použít předchozí název a popis</string>
   <string name="allow_gps">Automaticky získat aktuální polohu</string>
   <string name="allow_gps_summary">Nabídnout kategorie na základě aktuální polohy (pokud není obrázek opatřen souřadnicemi). Varování: Tímto krokem poskytujete svou současnou polohu.</string>
   <string name="preference_theme">Noční režim</string>
@@ -519,6 +519,22 @@
   <string name="please_wait">Čekejte prosím…</string>
   <string name="images_featured_explanation">Nejlepší obrázky jsou soubory od vysoce zkušených fotografů a ilustrátorů, které vybrala komunita Wikimedia Commons jako jedny z nejkvalitnějších.</string>
   <string name="images_via_nearby_explanation">Obrázky nahrané přes Poblíž jsou obrázky, které jsou nahrané díky objevování míst na mapě.</string>
+  <string name="thanks_received_explanation">Tato funkce umožňuje uživatelům poslat poděkování za užitečné editace – použitím odkazu poděkovat v historii stránky anebo na stránce rozdílu mezi revizemi.</string>
+  <string name="previous_image_title_description">Kopírovat předchozí název a popis</string>
+  <string name="previous_button_tooltip_message">Kliknutím znovu použijete název a popis, který jste zadali v předcházejícím obrázku a upravíte jej tak, aby vyhovoval aktuálnímu obrázku</string>
+  <string name="welcome_do_upload_content_description">Příklady dobrých obrázků k nahrání na Commons</string>
+  <string name="welcome_dont_upload_content_description">Příklady obrázků, které byste neměli nahrávat</string>
+  <string name="skip_image">Přeskočit obrázek</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Stahování se nepodařilo! Nemůžeme stáhnout obrázek bez povolení k přístupu k úložišti.</string>
+  <string name="manage_exif_tags">Spravovat data EXIF</string>
+  <string name="manage_exif_tags_summary">Vybrat EXIF data, která se mají ponechat</string>
+  <string name="exif_tag_name_author">Autor</string>
+  <string name="exif_tag_name_copyright">Autorská práva</string>
+  <string name="exif_tag_name_location">Místo</string>
+  <string name="exif_tag_name_cameraModel">Model fotoaparátu</string>
+  <string name="exif_tag_name_lensModel">Model objektivu</string>
+  <string name="exif_tag_name_serialNumbers">Sériová čísla</string>
+  <string name="exif_tag_name_software">Software</string>
   <string name="share_text">Nahrávejte fotky na Wikimedia Commons přímo s vašeho mobilu. Stáhněte si aplikaci: %1$s</string>
   <string name="share_via">Sdílet aplikaci pomocí…</string>
   <string name="image_info">Informace o obrázku</string>

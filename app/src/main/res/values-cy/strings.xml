@@ -113,7 +113,7 @@
   <string name="media_upload_policy">Wrth gynnig y llun yma, rwy\'n datgan mai fy ngwaith i ydyw ac nad yw\'n cynnwys unrhyw beth dan hawlfrain, na hunlun, a\'i fod yn cadw at &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Bolisiau Comin Wicimedia&lt;/a&gt;.</string>
   <string name="menu_download">Lawrlwytho</string>
   <string name="preference_license">Trwydded Ddiofyn (\'default\')</string>
-  <string name="use_previous">Defnydiwch y teitl/disgrifiad blaenorol</string>
+  <string name="use_previous" fuzzy="true">Defnydiwch y teitl/disgrifiad blaenorol</string>
   <string name="allow_gps">Defnyddiwch y lleoliad cyfredol</string>
   <string name="allow_gps_summary">Adfer eich lleoliad presennol os nad yw\'r ddelwedd yn cynnwys cyfesurynnau. Bydd hyn yn datgelu eich lleoliad chi!</string>
   <string name="preference_theme">Modd fin nos</string>
