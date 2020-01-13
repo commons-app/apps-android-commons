@@ -134,9 +134,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.icon) ImageView icon;
     @BindView(R.id.search_this_area_button) Button searchThisAreaButton;
     @BindView(R.id.map_progress_bar) ProgressBar progressBar;
-    @BindView(R.id.pb_nearby_list)
-    ProgressBar pbNearbyList;
-
     @BindView(R.id.choice_chip_exists) Chip chipExists;
     @BindView(R.id.choice_chip_needs_photo) Chip chipNeedsPhoto;
     @BindView(R.id.choice_chip_group) ChipGroup choiceChipGroup;
@@ -275,14 +272,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         super.onPause();
         mapView.onPause();
         presenter.detachView();
-        if (null != bottomSheetListBehavior)
-            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        if (null != bottomSheetDetailsBehavior)
-            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         registerUnregisterLocationListener(false);
         try {
             if (broadcastReceiver != null && getActivity()!=null) {
-                getActivity().unregisterReceiver(broadcastReceiver);
+                getContext().unregisterReceiver(broadcastReceiver);
             }
 
             if (locationManager != null && presenter != null) {
@@ -518,7 +511,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         title.setOnClickListener(view -> {
             Utils.copy("place", title.getText().toString(), getContext());
             Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
-            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             } else {
@@ -613,7 +606,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if(bottomSheetListBehavior.getState()== BottomSheetBehavior.STATE_COLLAPSED || bottomSheetListBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
             bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         }else if(bottomSheetListBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
-            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
     }
 
@@ -1348,13 +1341,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isResumed() && isVisible()){
+        if (isResumed() && isVisible()) {
             performMapReadyActions();
-        }else{
-            if (null != bottomSheetListBehavior)
-                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-            if (null != bottomSheetDetailsBehavior)
+        } else {
+            if (null != bottomSheetListBehavior) {
                 bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+
+            if (null != bottomSheetDetailsBehavior) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
         }
     }
 }

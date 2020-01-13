@@ -4,19 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:behavior_hideable="false"
-    android:visibility="gone"
-    app:layout_behavior="@string/bottom_sheet_behavior">
+    app:behavior_hideable="true"
+    android:visibility="visible"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    android:background="@android:color/white">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_nearby_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <ProgressBar
-        android:id="@+id/pb_nearby_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_centerInParent="true" />
 </RelativeLayout>
