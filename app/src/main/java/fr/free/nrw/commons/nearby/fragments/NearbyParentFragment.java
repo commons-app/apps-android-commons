@@ -17,19 +17,16 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,9 +52,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
+import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -80,6 +77,7 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
+import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
@@ -101,10 +99,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_MEDIUM_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
@@ -115,7 +111,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         implements NearbyParentFragmentContract.View,
         WikidataEditListener.WikidataP18EditListener, LocationUpdateListener {
 
-    @BindView(R.id.bottom_sheet) View bottomSheetList;
+    @BindView(R.id.bottom_sheet) RelativeLayout rlBottomSheet;
     @BindView(R.id.bottom_sheet_details) View bottomSheetDetails;
     @BindView(R.id.transparentView) View transparentView;
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
@@ -138,8 +134,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.icon) ImageView icon;
     @BindView(R.id.search_this_area_button) Button searchThisAreaButton;
     @BindView(R.id.map_progress_bar) ProgressBar progressBar;
-    @BindView(R.id.container_sheet) FrameLayout frameLayout;
-    @BindView(R.id.loading_nearby_list) ConstraintLayout loadingNearbyLayout;
+    @BindView(R.id.pb_nearby_list)
+    ProgressBar pbNearbyList;
 
     @BindView(R.id.choice_chip_exists) Chip chipExists;
     @BindView(R.id.choice_chip_needs_photo) Chip chipNeedsPhoto;
@@ -150,6 +146,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.checkbox_tri_states) CheckBoxTriStates checkBoxTriStates;
     @BindView(R.id.map_view)
     MapView mapView;
+    @BindView(R.id.rv_nearby_list)
+    RecyclerView rvNearbyList;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -182,9 +180,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
 
-    private NearbyListFragment nearbyListFragment;
-
-    private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
     private boolean isMapBoxReady=false;
     private MapboxMap mapBox;
     IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
@@ -192,7 +187,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Polygon currentLocationPolygon;
     private Place lastPlaceToCenter;
     private fr.free.nrw.commons.location.LatLng lastKnownLocation;
+    private fr.free.nrw.commons.location.LatLng currentLocation=null;
     private NearbyController.NearbyPlacesInfo nearbyPlacesInfo;
+    private NearbyAdapterFactory adapterFactory;
 
 
     @Override
@@ -213,8 +210,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         isDarkTheme = applicationKvStore.getBoolean("theme", false);
         addCheckBoxCallback();
         presenter.attachView(this);
+        initRvNearbyList();
         mapView.onCreate(savedInstanceState);
-        initListFragment();
         mapView.getMapAsync(mapBoxMap -> {
             this.mapBox=mapBoxMap;
             initViews();
@@ -226,27 +223,27 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 uiSettings.setCompassMargins(12, 0, 0, 24);
                 uiSettings.setLogoEnabled(false);
                 uiSettings.setAttributionEnabled(false);
-                uiSettings.setZoomRate(ZOOM_LEVEL);
+                uiSettings.setRotateGesturesEnabled(false);
                 NearbyParentFragment.this.isMapBoxReady=true;
                 performMapReadyActions();
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(51.50550, -0.07520))
+                        .zoom(ZOOM_LEVEL)
+                        .build();
+                mapBoxMap.setCameraPosition(cameraPosition);
             });
 
         });
     }
 
-    private void addCheckBoxCallback() {
-        checkBoxTriStates.setCallback((o, state, b, b1) -> presenter.filterByMarkerType(o,state,b,b1));
+    private void initRvNearbyList() {
+        rvNearbyList.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapterFactory = new NearbyAdapterFactory(this, controller);
+        rvNearbyList.setAdapter(adapterFactory.create(null));
     }
 
-    private void initListFragment() {
-        NearbyListFragment nearbyListFragment;
-        loadingNearbyLayout.setVisibility(View.GONE);
-        frameLayout.setVisibility(View.VISIBLE);
-        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-        nearbyListFragment = new NearbyListFragment();
-        nearbyListFragment.setArguments(null);
-        fragmentTransaction.replace(R.id.container_sheet, nearbyListFragment, TAG_RETAINED_LIST_FRAGMENT);
-        fragmentTransaction.commitAllowingStateLoss();
+    private void addCheckBoxCallback() {
+        checkBoxTriStates.setCallback((o, state, b, b1) -> presenter.filterByMarkerType(o,state,b,b1));
     }
 
     private void performMapReadyActions() {
@@ -278,6 +275,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         super.onPause();
         mapView.onPause();
         presenter.detachView();
+        if (null != bottomSheetListBehavior)
+            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        if (null != bottomSheetDetailsBehavior)
+            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         registerUnregisterLocationListener(false);
         try {
             if (broadcastReceiver != null && getActivity()!=null) {
@@ -331,10 +332,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
      */
     private void initBottomSheets() {
-        bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
+        bottomSheetListBehavior = BottomSheetBehavior.from(rlBottomSheet);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
+        bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     public void initNearbyFilter() {
@@ -465,10 +467,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         });
 
-        bottomSheetList.getLayoutParams().height = getActivity().getWindowManager()
+        rlBottomSheet.getLayoutParams().height = getActivity().getWindowManager()
                 .getDefaultDisplay().getHeight() / 16 * 9;
-        bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
-
+        bottomSheetListBehavior = BottomSheetBehavior.from(rlBottomSheet);
+        bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetBehavior
                 .BottomSheetCallback() {
             @Override
@@ -516,6 +518,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         title.setOnClickListener(view -> {
             Utils.copy("place", title.getText().toString(), getContext());
             Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
+            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             } else {
@@ -555,17 +558,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateListFragment(List<Place> placeList) {
-        nearbyListFragment.updateListFragment(placeList);
+        adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) rvNearbyList.getAdapter());
     }
 
     @Override
     public fr.free.nrw.commons.location.LatLng getLastLocation() {
         return lastKnownLocation;
-    }
-
-    @Override
-    public void registerLocationUpdates(LocationServiceManager locationManager) {
-        locationManager.registerLocationManager();
     }
 
     @Override
@@ -611,8 +609,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void listOptionMenuItemClicked() {
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         if(bottomSheetListBehavior.getState()== BottomSheetBehavior.STATE_COLLAPSED || bottomSheetListBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
-            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         }else if(bottomSheetListBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
             bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -621,12 +619,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void populatePlaces(fr.free.nrw.commons.location.LatLng curlatLng) {
-        LatLng target = mapBox.getCameraPosition().target;
-        fr.free.nrw.commons.location.LatLng targetLatLng=new fr.free.nrw.commons.location.LatLng(target.getLatitude(),target.getLongitude(),0);
-        if (curlatLng.equals(targetLatLng)) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(curlatLng, targetLatLng);
+        if (lastKnownLocation == null) {
+            lastKnownLocation = currentLocation;
+        }
+        if (curlatLng.equals(lastKnownLocation)) { // Means we are checking around current location
+            populatePlacesForCurrentLocation(curlatLng, lastKnownLocation);
         } else {
-            populatePlacesForAnotherLocation(curlatLng, targetLatLng);
+            populatePlacesForAnotherLocation(curlatLng, lastKnownLocation);
         }
     }
 
@@ -639,8 +638,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .subscribe(nearbyPlacesInfo -> updateMapMarkers(nearbyPlacesInfo,true),
                         throwable -> {
                             Timber.d(throwable);
-                            // TODO: find out why NPE occurs here
-                            // showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                            showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
                             setProgressBarVisibility(false);
                             presenter.lockUnlockNearby(false);
                             setFilterState();
@@ -656,8 +654,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .subscribe(nearbyPlacesInfo -> updateMapMarkers(nearbyPlacesInfo,false),
                         throwable -> {
                             Timber.d(throwable);
-                            // TODO: find out why NPE occurs here
-                            // showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                            showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
                             setProgressBarVisibility(false);
                             presenter.lockUnlockNearby(false);
                         }));
@@ -1353,6 +1350,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         super.setUserVisibleHint(isVisibleToUser);
         if(isResumed() && isVisible()){
             performMapReadyActions();
+        }else{
+            if (null != bottomSheetListBehavior)
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            if (null != bottomSheetDetailsBehavior)
+                bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
     }
 }
