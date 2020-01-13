@@ -262,4 +262,8 @@ public class UploadRepository {
     public void setSelectedLicense(String licenseName) {
         localDataSource.setSelectedLicense(licenseName);
     }
+
+    public Place checkNearbyPlaces(double decLatitude, double decLongitude) {
+        return remoteDataSource.getNearbyPlaces(decLatitude, decLongitude);
+    }
 }

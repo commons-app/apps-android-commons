@@ -14,6 +14,7 @@ import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.View;
+import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -81,11 +82,25 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         {
                             view.onImageProcessed(uploadItem, place);
                             GPSExtractor gpsCoords = uploadItem.getGpsCoords();
-                            view.showMapWithImageCoordinates((gpsCoords != null && gpsCoords.imageCoordsExists) ? true : false);
+                            view.showMapWithImageCoordinates(gpsCoords != null && gpsCoords.imageCoordsExists);
                             view.showProgress(false);
+                            if (gpsCoords != null && gpsCoords.imageCoordsExists) {
+                                checkNearbyPlaces(uploadItem);
+                            }
                         },
                         throwable -> Timber.e(throwable, "Error occurred in processing images"));
         compositeDisposable.add(uploadItemDisposable);
+    }
+
+    private void checkNearbyPlaces(UploadItem uploadItem) {
+        Disposable checkNearbyPlaces = Observable.fromCallable(() -> repository
+                .checkNearbyPlaces(uploadItem.getGpsCoords().getDecLatitude(),
+                        uploadItem.getGpsCoords().getDecLongitude()))
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
+                .subscribe(place -> view.onNearbyPlaceFound(uploadItem, place),
+                        throwable -> Timber.e(throwable, "Error occurred in processing images"));
+        compositeDisposable.add(checkNearbyPlaces);
     }
 
     /**
