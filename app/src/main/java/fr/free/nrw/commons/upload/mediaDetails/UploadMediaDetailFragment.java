@@ -299,10 +299,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         setDescriptionsInAdapter(descriptions);
     }
 
+    /**
+     * Shows popup if any nearby location needing pictures matches uploadable picture's GPS location
+     * @param uploadItem
+     * @param place
+     */
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onNearbyPlaceFound(UploadItem uploadItem, Place place) {
-        Timber.d("Place is %s", place.toString());
         DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.upload_nearby_place_found_title),
                 String.format(Locale.getDefault(),

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.repository;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -27,7 +28,7 @@ import io.reactivex.Single;
 @Singleton
 public class UploadRemoteDataSource {
 
-    private static final double NEARBY_RADIUS_IN_KILO_METERS = 5.0; //
+    private static final double NEARBY_RADIUS_IN_KILO_METERS = 0.1; //100 meters
 
     private UploadModel uploadModel;
     private UploadController uploadController;
@@ -195,7 +196,7 @@ public class UploadRemoteDataSource {
     public Place getNearbyPlaces(double latitude, double longitude) {
         try {
             List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(latitude, longitude, 0.0f),
-                    "en",
+                    Locale.getDefault().getLanguage(),
                     NEARBY_RADIUS_IN_KILO_METERS);
             return fromWikidataQuery.size() > 0 ? fromWikidataQuery.get(0) : null;
         } catch (IOException e) {

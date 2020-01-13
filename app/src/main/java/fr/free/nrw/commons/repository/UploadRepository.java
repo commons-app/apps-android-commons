@@ -263,6 +263,12 @@ public class UploadRepository {
         localDataSource.setSelectedLicense(licenseName);
     }
 
+    /**
+     * Returns nearest place matching the passed latitude and longitude
+     * @param decLatitude
+     * @param decLongitude
+     * @return
+     */
     public Place checkNearbyPlaces(double decLatitude, double decLongitude) {
         return remoteDataSource.getNearbyPlaces(decLatitude, decLongitude);
     }
