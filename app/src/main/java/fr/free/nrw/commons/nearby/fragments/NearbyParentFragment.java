@@ -187,6 +187,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private fr.free.nrw.commons.location.LatLng currentLocation=null;
     private NearbyController.NearbyPlacesInfo nearbyPlacesInfo;
     private NearbyAdapterFactory adapterFactory;
+    private boolean isVisibleToUser;
+    private MapboxMap.OnCameraMoveListener cameraMoveListener;
 
 
     @Override
@@ -205,6 +207,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         isDarkTheme = applicationKvStore.getBoolean("theme", false);
+        cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
         addCheckBoxCallback();
         presenter.attachView(this);
         initRvNearbyList();
@@ -244,10 +247,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void performMapReadyActions() {
-        if (isVisible() && isResumed() && isMapBoxReady) {
+        if (isVisible() && isVisibleToUser && isMapBoxReady) {
             checkPermissionsAndPerformAction(() -> {
                 presenter.onMapReady();
                 registerUnregisterLocationListener(false);
+                addOnCameraMoveListener();
             });
         }
     }
@@ -281,6 +285,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (locationManager != null && presenter != null) {
                 locationManager.removeLocationListener(presenter);
                 locationManager.unregisterLocationManager();
+            }
+            if (null != mapBox) {
+                mapBox.removeOnCameraMoveListener(cameraMoveListener);
             }
         }catch (Exception e){
             Timber.e(e);
@@ -1197,7 +1204,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void addOnCameraMoveListener() {
-        mapBox.addOnCameraMoveListener(() -> presenter.onCameraMove(mapBox.getCameraPosition().target));
+        mapBox.addOnCameraMoveListener(cameraMoveListener);
     }
 
     /**
@@ -1341,7 +1348,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isResumed() && isVisible()) {
+        this.isVisibleToUser=isVisibleToUser;
+        if (isResumed() && isVisibleToUser) {
             performMapReadyActions();
         } else {
             if (null != bottomSheetListBehavior) {

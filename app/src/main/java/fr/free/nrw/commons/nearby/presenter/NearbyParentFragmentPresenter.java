@@ -338,7 +338,6 @@ public class NearbyParentFragmentPresenter
     public void onMapReady() {
         if(null!=nearbyParentFragmentView) {
             nearbyParentFragmentView.addSearchThisAreaButtonAction();
-            nearbyParentFragmentView.addOnCameraMoveListener();
             initializeMapOperations();
         }
     }
