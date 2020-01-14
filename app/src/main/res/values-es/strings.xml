@@ -8,6 +8,7 @@
 * Carlosmg.dg
 * Ciencia Al Poder
 * Fitoschido
+* Gastonsaenz
 * JO777
 * Jduranboger
 * Jelou
@@ -134,7 +135,7 @@
   <string name="media_upload_policy">Al subir esta imagen, declaro que se trata de una obra propia, que no contiene material protegido por derechos de autor, o \'\'selfies\'\', y que además se adhiere a las &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;políticas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licencia predeterminada</string>
-  <string name="use_previous">Usar título/descripción anteriores</string>
+  <string name="use_previous" fuzzy="true">Usar título/descripción anteriores</string>
   <string name="allow_gps">Obtener ubicación actual automáticamente</string>
   <string name="allow_gps_summary">Recupera la ubicación actual si la imagen no esta geolocalizada, y le aplica la geolocalizacion. Aviso: Esto revelará tu ubicación actual.</string>
   <string name="preference_theme">Modo nocturno</string>
@@ -328,6 +329,7 @@
   <string name="no_images_found">No se encontró ninguna imagen.</string>
   <string name="error_loading_images">Se produjo un error al cargar las imágenes.</string>
   <string name="image_uploaded_by">Cargada por: %1$s</string>
+  <string name="block_notification_title">Bloqueado</string>
   <string name="block_notification">Estás bloqueado para editar Commons</string>
   <string name="appwidget_img">Foto del día</string>
   <string name="app_widget_heading">Foto del día</string>
@@ -343,7 +345,7 @@
   <string name="search_tab_title_categories">Categorías</string>
   <string name="explore_tab_title_featured">En destaque</string>
   <string name="explore_tab_title_mobile">Cargados vía móvil</string>
-  <string name="successful_wikidata_edit" fuzzy="true">¡La imagen ha sido añadida exitosamente a %1$s en Wikidata!</string>
+  <string name="successful_wikidata_edit">¡La imagen ha sido añadida en %1$s a Wikidata!</string>
   <string name="wikidata_edit_failure">¡Fallo la actualización de la entrada de Wikidata correspondiente!</string>
   <string name="menu_set_wallpaper">Poner como papel tapiz</string>
   <string name="wallpaper_set_successfully">¡El papel tapiz se aplicó correctamente!</string>
@@ -469,7 +471,7 @@
   <string name="check_category_edit_summary">Pidiendo control de categoría</string>
   <string name="check_category_success_title">Verificación de categoría requerida</string>
   <string name="check_category_failure_title">La verificación de categoría falló</string>
-  <string name="check_category_success_message" fuzzy="true">Pedido exitoso de control de categoría para %1$s</string>
+  <string name="check_category_success_message">Pedido de control de categoría para %1$s</string>
   <string name="check_category_failure_message">No se puede pedir el control de categoría para %1$s</string>
   <string name="check_category_toast">Pidiendo control de categoría para %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Añadiendo mensaje eliminado al archivo</string>
@@ -539,7 +541,7 @@
   <string name="exif_tag_name_lensModel">Modelo de lente</string>
   <string name="exif_tag_name_serialNumbers">Números de serie</string>
   <string name="exif_tag_name_software">Programa</string>
-  <string name="share_text">Sube fotos a Wikimedia Commons desde tu celular, descarga la aplicación de Commons: %1$s</string>
+  <string name="share_text" fuzzy="true">Sube fotos a Wikimedia Commons desde tu celular, descarga la aplicación de Commons: %1$s</string>
   <string name="share_via">Compartir la aplicación vía...</string>
   <string name="image_info">Información de la imagen</string>
   <string name="no_categories_found">No se encontró ninguna categoría</string>
@@ -551,7 +553,7 @@
   <string name="delete_helper_make_deletion_toast">Intentando nominar %1$s para su borrado</string>
   <string name="delete_helper_show_deletion_title">Nominar para borrado</string>
   <string name="delete_helper_show_deletion_title_success">Éxito</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Se nominó exitosamente  %1$s para ser borrada.</string>
+  <string name="delete_helper_show_deletion_message_if">Nominando %1$s para borrado.</string>
   <string name="delete_helper_show_deletion_title_failed">Falló</string>
   <string name="delete_helper_show_deletion_message_else">No se pudo solicitar el borrado.</string>
   <string name="delete_helper_ask_spam_selfie">Un autorretrato</string>
@@ -563,8 +565,16 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Otra</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque sí</string>
+  <string name="share_image_via">Compartir imagen via</string>
+  <string name="no_achievements_yet">No ha realizado ninguna contribución aún</string>
   <string name="account_created">Cuenta creada</string>
   <string name="text_copy">Texto copiado en el portapapeles.</string>
   <string name="notification_mark_read">Notificación: marcar como leída</string>
   <string name="some_error">Hubo un error</string>
+  <string name="place_state">Estado del lugar:</string>
+  <string name="place_state_exists">Existe</string>
+  <string name="place_state_needs_photo">Necesita fotografía</string>
+  <string name="place_type">Tipo de lugar:</string>
+  <string name="nearby_search_hint">Puente, museo, hotel…</string>
+  <string name="you_must_reset_your_passsword">Hubo un error con el inicio de sesión, debe restablecer su contraseña !!</string>
 </resources>

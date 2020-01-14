@@ -6,18 +6,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
@@ -26,10 +35,6 @@ import fr.free.nrw.commons.upload.UploadCategoriesAdapterFactory;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import javax.inject.Inject;
 import timber.log.Timber;
 
 public class UploadCategoriesFragment extends UploadBaseFragment implements CategoriesContract.View,
@@ -89,7 +94,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     public void onResume() {
         super.onResume();
-        if (presenter != null && isVisible) {
+        if (presenter != null && isVisible && (categories == null || categories.isEmpty())) {
             presenter.searchForCategories(null);
         }
     }
@@ -193,7 +198,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         super.setUserVisibleHint(isVisibleToUser);
         isVisible = isVisibleToUser;
 
-        if (presenter != null && isResumed()) {
+        if (presenter != null && isResumed() && (categories == null || categories.isEmpty())) {
             presenter.searchForCategories(null);
         }
     }

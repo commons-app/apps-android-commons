@@ -152,7 +152,8 @@
         </service>
         <service
             android:name=".contributions.ContributionsSyncService"
-            android:exported="true">
+            android:exported="true"
+            android:process=":sync">
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
@@ -160,17 +161,6 @@
             <meta-data
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/contributions_sync_adapter" />
-        </service>
-        <service
-            android:name=".modifications.ModificationsSyncService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.content.SyncAdapter" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.content.SyncAdapter"
-                android:resource="@xml/modifications_sync_adapter" />
         </service>
 
         <service
@@ -193,12 +183,7 @@
             android:exported="false"
             android:label="@string/provider_contributions"
             android:syncable="true" />
-        <provider
-            android:name=".modifications.ModificationsContentProvider"
-            android:authorities="${applicationId}.modifications.contentprovider"
-            android:exported="false"
-            android:label="@string/provider_modifications"
-            android:syncable="true" />
+
         <provider
             android:name=".category.CategoryContentProvider"
             android:authorities="${applicationId}.categories.contentprovider"

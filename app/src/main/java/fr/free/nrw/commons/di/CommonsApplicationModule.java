@@ -5,30 +5,29 @@ import android.content.ContentProviderClient;
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.collection.LruCache;
+
+import com.github.varunpant.quadtree.QuadTree;
 import com.google.gson.Gson;
 
-import org.wikipedia.dataclient.WikiSite;
-
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.AppAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import androidx.collection.LruCache;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -37,6 +36,9 @@ import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -85,7 +87,7 @@ public class CommonsApplicationModule {
 
     @Provides
     public AccountUtil providesAccountUtil(Context context) {
-        return new AccountUtil(context);
+        return new AccountUtil();
     }
 
     @Provides
@@ -188,7 +190,23 @@ public class CommonsApplicationModule {
 
     @Named(MAIN_THREAD)
     @Provides
-    public Scheduler providesMainThread(){
+    public Scheduler providesMainThread() {
         return AndroidSchedulers.mainThread();
+    }
+
+    @Named("username")
+    @Provides
+    public String provideLoggedInUsername() {
+        return Objects.toString(AppAdapter.get().getUserName(), "");
+    }
+
+    /**
+     * Provides quad tree
+     *
+     * @return
+     */
+    @Provides
+    public QuadTree providesQuadTres() {
+        return new QuadTree<>(-180, -90, +180, +90);
     }
 }

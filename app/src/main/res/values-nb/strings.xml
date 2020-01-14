@@ -121,7 +121,7 @@
   <string name="media_upload_policy">Ved å laste opp dette bildet erklærer jeg at dette er mitt eget verk, og at det ikke inneholder opphavsrettsbeskyttet materiale eller selvportretter, og ellers er i samsvar med &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons\' retningslinjer&lt;/a&gt;.</string>
   <string name="menu_download">Last ned</string>
   <string name="preference_license">Standardlisens</string>
-  <string name="use_previous">Bruk forrige tittel/beskrivelse</string>
+  <string name="use_previous" fuzzy="true">Bruk forrige tittel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nåværende plassering</string>
   <string name="allow_gps_summary">Hent nåværende plassering om bildet ikke er geotagget, og tagger bildet med plasseringen. Advarsel: Dette vil avsløre hvor du befinner deg for øyeblikket.</string>
   <string name="preference_theme">Nattmodus</string>
@@ -315,6 +315,7 @@
   <string name="no_images_found">Ingen bilder funnet!</string>
   <string name="error_loading_images">Feil oppsto under lasting av bilder.</string>
   <string name="image_uploaded_by">Lastet opp av: %1$s</string>
+  <string name="block_notification_title">Blokkert</string>
   <string name="block_notification">Du er blokkert fra å redigere Commons</string>
   <string name="appwidget_img">Dagens bilde</string>
   <string name="app_widget_heading">Dagens bilde</string>
@@ -330,7 +331,7 @@
   <string name="search_tab_title_categories">Kategorier</string>
   <string name="explore_tab_title_featured">Fremhevet</string>
   <string name="explore_tab_title_mobile">Lastet opp med mobil</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Bildet ble lagt til på %1$s på Wikidata!</string>
+  <string name="successful_wikidata_edit">Bildet ble lagt til på %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Kunne ikke oppdatere tilsvarende Wikidata-element!</string>
   <string name="menu_set_wallpaper">Angi som bakgrunnsbilde</string>
   <string name="wallpaper_set_successfully">Bakgrunnsbildet ble endret!</string>
@@ -456,7 +457,7 @@
   <string name="check_category_edit_summary">Ber om kategorisjekk</string>
   <string name="check_category_success_title">Kategorisjekk forespurt</string>
   <string name="check_category_failure_title">Forespørsel om kategorisjekk virket ikke</string>
-  <string name="check_category_success_message" fuzzy="true">Ba om kategorisjekk for %1$s</string>
+  <string name="check_category_success_message">Ba om kategorisjekk for %1$s</string>
   <string name="check_category_failure_message">Kunne ikke be om kategorisjekk for %1$s</string>
   <string name="check_category_toast">Ber om kategorisjekk for %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Legger til slettebeskjed i fila</string>
@@ -526,7 +527,7 @@
   <string name="exif_tag_name_lensModel">Linsemodell</string>
   <string name="exif_tag_name_serialNumbers">Serienumre</string>
   <string name="exif_tag_name_software">Programvare</string>
-  <string name="share_text">Last opp bilder til Wikimedia Commons med din telefon. Last ned Commons-appen: %1$s</string>
+  <string name="share_text" fuzzy="true">Last opp bilder til Wikimedia Commons med din telefon. Last ned Commons-appen: %1$s</string>
   <string name="share_via">Del appen via …</string>
   <string name="image_info">Bildeinfo</string>
   <string name="no_categories_found">Ingen kategorier funnet</string>
@@ -538,7 +539,7 @@
   <string name="delete_helper_make_deletion_toast">Prøver å nominere %1$s for sletting</string>
   <string name="delete_helper_show_deletion_title">Nominerer for sletting</string>
   <string name="delete_helper_show_deletion_title_success">Gjennomført</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Nominerte %1$s for sletting</string>
+  <string name="delete_helper_show_deletion_message_if">Nominerte %1$s for sletting</string>
   <string name="delete_helper_show_deletion_title_failed">Mislyktes</string>
   <string name="delete_helper_show_deletion_message_else">Kunne ikke be om sletting.</string>
   <string name="delete_helper_ask_spam_selfie">En selfie</string>
@@ -556,4 +557,5 @@
   <string name="text_copy">Tekst kopiert til utklippstavlen</string>
   <string name="notification_mark_read">Varsel merket som lest</string>
   <string name="some_error">En feil oppsto!</string>
+  <string name="you_must_reset_your_passsword">Noe gikk galt under innloggingen, du må tilbakestille passordet ditt!</string>
 </resources>

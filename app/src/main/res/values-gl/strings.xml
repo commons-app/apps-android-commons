@@ -120,7 +120,7 @@
   <string name="media_upload_policy">Publicando esta imaxe, declaro que é da miña obra, que non contén material con dereitos de autor ou selfies e que se adhire ás &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licenza por defecto</string>
-  <string name="use_previous">Usar o título ou a descrición anterior</string>
+  <string name="use_previous" fuzzy="true">Usar o título ou a descrición anterior</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
   <string name="allow_gps_summary">Obter a localización actual se a imaxe non está xeolocalizada, e xeolocaliza a imaxe con ela. Atención: Isto revelará a súa localización actual.</string>
   <string name="preference_theme">Modo nocturno</string>
@@ -175,7 +175,7 @@
   <string name="menu_refresh">Refrescar</string>
   <string name="storage_permission_title">Pedindo permiso de almacenamento</string>
   <string name="read_storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode acceder á súa galería sen isto.</string>
-  <string name="write_storage_permission_rationale">Permiso necesario: Escribir en almacenamento externo. A aplicación non pode acceder á súa cámara/galería sen el.</string>
+  <string name="write_storage_permission_rationale">Permiso necesario: Escribir en almacenamento externo. A aplicación non pode acceder á súa cámara sen el.</string>
   <string name="location_permission_title">Pedindo Permiso de Localización</string>
   <string name="location_permission_rationale">Permiso opcionalː obter a localización actual para suxerir categorías</string>
   <string name="ok">Aceptar</string>
@@ -281,17 +281,17 @@
   <string name="nearby_location_has_not_changed">A localización non cambiou.</string>
   <string name="nearby_location_not_available">A localización non está dispoñible.</string>
   <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
-  <string name="get_directions">Obter direccións</string>
-  <string name="read_article">Ler artigo</string>
+  <string name="get_directions">OBTER DIRECCIÓNS</string>
+  <string name="read_article">LER ARTIGO</string>
   <string name="notifications_welcome">Benvido a Wikimedia Commons, %1$s! Alegrámonos de que estea aquí.</string>
   <string name="notifications_talk_page_message">%1$s deixoulle unha mensaxe na súa páxina de conversa</string>
   <string name="notifications_thank_you_edit">Grazas por realizar unha edición</string>
   <string name="notifications_mention">%1$s mencionouno en %2$s.</string>
   <string name="toggle_view_button">Cambiar modo de visualización</string>
-  <string name="nearby_directions">Como chegar</string>
-  <string name="nearby_wikidata">Wikidata</string>
-  <string name="nearby_wikipedia">Wikipedia</string>
-  <string name="nearby_commons">Commons</string>
+  <string name="nearby_directions">COMO CHEGAR</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
   <string name="about_rate_us">&lt;u&gt;Avalíenos&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">Saltar titorial</string>
@@ -308,12 +308,13 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
-  <string name="showcase_view_whole_nearby_activity">Hai sitios preto de vostede que precisan fotos para ilustrar os seus artigos de Wikipedia.\n\nPremendo en \"Procurar nesta área\" bloquea a localización do mapa e comeza unha procura de lugares na área circundante.</string>
+  <string name="showcase_view_whole_nearby_activity">Hai sitios preto de vostede que precisan fotos para ilustrar os seus artigos de Wikipedia</string>
   <string name="showcase_view_list_icon">Premendo neste botón aparecerá unha lista destes lugares</string>
   <string name="showcase_view_plus_fab">Pode cargar unha imaxe de calquera lugar dende a galería ou a cámara</string>
   <string name="no_images_found">Non se atopou ningunha imaxeǃ</string>
   <string name="error_loading_images">Houbo un erro ó subir as imaxes.</string>
   <string name="image_uploaded_by">Subida porː %1$s</string>
+  <string name="block_notification_title">Bloqueado</string>
   <string name="block_notification">Está bloqueado e non pode editar en Commons</string>
   <string name="appwidget_img">Imaxe do día</string>
   <string name="app_widget_heading">Imaxe do día</string>
@@ -329,7 +330,7 @@
   <string name="search_tab_title_categories">Categorías</string>
   <string name="explore_tab_title_featured">Destacadas</string>
   <string name="explore_tab_title_mobile">Cargada vía móbil</string>
-  <string name="successful_wikidata_edit" fuzzy="true">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
+  <string name="successful_wikidata_edit">A imaxe engadiuse a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Poñer como imaxe de fondo</string>
   <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
@@ -364,11 +365,11 @@
   <string name="nominate_delete">Nomear para borrado</string>
   <string name="delete">Borrar</string>
   <string name="Achievements">Logros</string>
-  <string name="statistics">Estatísticas</string>
+  <string name="statistics">ESTATÍSTICAS</string>
   <string name="statistics_thanks">Agradecementos recibidos</string>
   <string name="statistics_featured">Imaxes destacadas</string>
   <string name="statistics_wikidata_edits">Imaxes vía \"Lugares próximos\"</string>
-  <string name="level">Nivel</string>
+  <string name="level">NIVEL</string>
   <string name="images_uploaded">Imaxes cargadas</string>
   <string name="image_reverts">Imaxes non revertidas</string>
   <string name="images_used_by_wiki">Imaxes usadas</string>
@@ -437,18 +438,35 @@
   <string name="search_this_area">Procurar nesta área</string>
   <string name="nearby_card_permission_title">Solicitude de permisos</string>
   <string name="nearby_card_permission_explanation">Desexa que usemos a súa localizacións actual para amosarlle o lugar máis preto que precisa imaxes?</string>
+  <string name="unable_to_display_nearest_place">Imposible amosar o sitio máis achegado que precisa fotos sen ter permisos de localización</string>
   <string name="never_ask_again">Non volver a preguntar isto nunca</string>
   <string name="display_location_permission_title">Amosar permiso de localización</string>
+  <string name="display_location_permission_explanation">Pedir permisos de localización cando sexa necesario para a funcionalidade de notificación de proximidade.</string>
+  <string name="achievements_fetch_failed">Algo foi mal, non puidemos obter as túas achegas</string>
   <string name="ends_on">Finaliza o:</string>
   <string name="display_campaigns">Amosar campañas</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Preme aquí para ver as campañas en curso</string>
+  <string name="display_campaigns_explanation">Ver as campañas en curso</string>
   <string name="nearby_campaign_dismiss_message">Xa non verá as campañas. Porén, pode volver habilitar esta notificación na configuración.</string>
   <string name="this_function_needs_network_connection">Esta función require conexión de rede, verifique a súa configuración de conexión.</string>
   <string name="bad_token_error_proposed_solution">Erro na suba debido a problemas co identificador de edición. Peche a sesión e volva a entrar.</string>
   <string name="error_processing_image">Houbo un erro ó procesar a imaxe. Por favor, ténteo de novoǃ</string>
+  <string name="getting_edit_token">Obter un identificador para editar</string>
+  <string name="check_category_adding_template">Engadir modelo para o control de categoría</string>
+  <string name="check_category_notification_title">Pedindo control de categoría para %1$s</string>
+  <string name="check_category_edit_summary">Solicitando control de categoría</string>
+  <string name="check_category_success_title">Control de categoría solicitado</string>
+  <string name="check_category_failure_title">A solicitude de control de categoría non funcionou</string>
+  <string name="check_category_success_message">Solicitado o control de categoría para %1$s</string>
+  <string name="check_category_failure_message">Non foi posible solicitar un control de categoría para %1$s</string>
+  <string name="check_category_toast">Solicitando control de categoría para %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Engadindo mensaxe de borrado ó ficheiro</string>
   <string name="nominate_for_deletion_done">Feito</string>
+  <string name="nominate_for_deletion_notify_user">Notificación ó usuario na súa páxina de conversa</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Engadindo o ficheiro ó rexistro de consultas de borrado</string>
+  <string name="nominate_for_deletion_create_deletion_request">Creando a subpáxina para a consulta de borrado</string>
   <string name="notsure">Non seguro</string>
   <string name="send_thank_success_title">Enviando agradecementos: Éxito</string>
+  <string name="send_thank_success_message">Enviado correctamente o agradecemento a %1$s</string>
   <string name="send_thank_send">Enviando agradecementos</string>
   <string name="send_thank_notification_title">Enviando agradecementos</string>
   <string name="send_thank_toast">Enviando agradecementos por %1$s</string>

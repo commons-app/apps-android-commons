@@ -1,11 +1,12 @@
 package fr.free.nrw.commons.bookmarks;
 
 import android.content.Context;
+import android.widget.ListAdapter;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import android.widget.ListAdapter;
 
 import java.util.ArrayList;
 

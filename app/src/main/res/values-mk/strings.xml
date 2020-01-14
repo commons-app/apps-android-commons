@@ -17,10 +17,10 @@
   <string name="menu_settings">Поставки</string>
   <string name="intent_share_upload_label">Подигни на Ризницата</string>
   <string name="username">Корисничко име</string>
-  <string name="password">Лозинка</string>
+  <string name="password">Јавка</string>
   <string name="login_credential">Најавете се на бета-сметката</string>
   <string name="login">Најава</string>
-  <string name="forgot_password">Ја заборавивте лозинката?</string>
+  <string name="forgot_password">Ја заборавивте јавката?</string>
   <string name="signup">Регистрација</string>
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте…</string>
@@ -55,9 +55,9 @@
   <string name="add_title_toast">Ставете ѝ наслов на податотеката</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
-  <string name="login_failed_wrong_credentials">Не можев да ве најавам. Проверете ги корисничкото име и лозинката.</string>
+  <string name="login_failed_wrong_credentials">Не можев да ве најавам. Проверете ги корисничкото име и јавката.</string>
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
-  <string name="login_failed_blocked">Нажалост, корисникот е блокиран на Ризницата</string>
+  <string name="login_failed_blocked">За жал, корисникот е блокиран на Ризницата</string>
   <string name="login_failed_2fa_needed">Мора да го укажете вашиот код за двочинителска заверка.</string>
   <string name="login_failed_generic">Најавата не успеа</string>
   <string name="share_upload_button">Подигни</string>
@@ -113,7 +113,7 @@
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Стандардна лиценца</string>
-  <string name="use_previous">Користи претходен наслов/опис</string>
+  <string name="use_previous" fuzzy="true">Користи претходен наслов/опис</string>
   <string name="allow_gps">Автоматски давај тековна местоположба</string>
   <string name="allow_gps_summary">Става геоознака од тековната местоположба во слика (ако ја нема). Предупредување: ова ви го разоткрива наоѓалиштето.</string>
   <string name="preference_theme">Ноќен режим</string>
@@ -307,6 +307,7 @@
   <string name="no_images_found">Не пронајдов ниедна слика!</string>
   <string name="error_loading_images">Се појави грешка при вчитувањето на сликите.</string>
   <string name="image_uploaded_by">Подигач: %1$s</string>
+  <string name="block_notification_title">Блокирано</string>
   <string name="block_notification">Спречени сте да ја уредувате Ризницата</string>
   <string name="appwidget_img">Слика на денот</string>
   <string name="app_widget_heading">Слика на денот</string>
@@ -322,7 +323,7 @@
   <string name="search_tab_title_categories">Категории</string>
   <string name="explore_tab_title_featured">Избрани</string>
   <string name="explore_tab_title_mobile">Подигнато преку мобилен уред</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Сликата е успешно додадена кон %1$s на Википодатоците!</string>
+  <string name="successful_wikidata_edit">Сликата е додадена кон %1$s на Википодатоците!</string>
   <string name="wikidata_edit_failure">Не успеав да ја изменам соодветната единица на Википодатоците!</string>
   <string name="menu_set_wallpaper">Задај како позадина</string>
   <string name="wallpaper_set_successfully">Позадината е успешно зададена!</string>
@@ -443,7 +444,7 @@
   <string name="bad_token_error_proposed_solution">Подигањето не успеа поради проблеми со уредувачката шифра. Одјавете се и повторно најавете се.</string>
   <string name="error_processing_image">Се појави грешка при обработката на сликата. Обидете се повторно!</string>
   <string name="getting_edit_token">Добивање на шифра за уредување</string>
-  <string name="check_category_adding_template">Додавање на шаблон за категориска проверка</string>
+  <string name="check_category_adding_template">Додавање на предлошка за категориска проверка</string>
   <string name="check_category_notification_title">Барање на категориска проверка за %1$s</string>
   <string name="check_category_edit_summary">Барање на категориска проверка</string>
   <string name="check_category_success_title">Побарана категориска проверка</string>
@@ -518,7 +519,7 @@
   <string name="exif_tag_name_lensModel">Модел на објективот</string>
   <string name="exif_tag_name_serialNumbers">Сериски броеви</string>
   <string name="exif_tag_name_software">Програми</string>
-  <string name="share_text">Подигајте слики на Ризницата од телефон. Преземете го прилогот на Ризницата: %1$s</string>
+  <string name="share_text">Подигајте слики непосредно на Ризницата од телефон. Преземете го прилогот на Ризницата сега: %1$s</string>
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
   <string name="no_categories_found">Не пронајдов ниедна категорија</string>
@@ -548,4 +549,10 @@
   <string name="text_copy">Текстот е ставен во меѓускладот</string>
   <string name="notification_mark_read">Известувањето е означено како прочитано</string>
   <string name="some_error">Се појави грешка!</string>
+  <string name="place_state">Состојба на местото:</string>
+  <string name="place_state_exists">Постои</string>
+  <string name="place_state_needs_photo">Му треба слика</string>
+  <string name="place_type">Вид на место:</string>
+  <string name="nearby_search_hint">Мост, музеј, хотел и тн.</string>
+  <string name="you_must_reset_your_passsword">Нешто не е во ред со најавата. Ќе мора да ставите нова јавка!</string>
 </resources>

@@ -112,7 +112,7 @@
   <string name="media_upload_policy">An mandand costa plancia, i diciaro ch\'a l\'é euvra ëd mè travaj, ch\'a conten nen d\'element sota drit d\'autor o d\'àutoscat, e che comsëssìa a l\'é conforma a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;le régole ëd Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Dëscarié</string>
   <string name="preference_license">Licensa dë stàndard</string>
-  <string name="use_previous">Dovré ël tìtol o la descrission precedent</string>
+  <string name="use_previous">Dovré ël tìtol e la descrission precedent</string>
   <string name="allow_gps">Oten-e an automàtich la posission atual</string>
   <string name="allow_gps_summary">A arcupera la posission atual si la plancia a l\'é nen marcà da na mira geogràfica, e a marca da na mira geogràfica la plancia. Atension: Sòn a dësveilërà soa posission atual.</string>
   <string name="preference_theme">Meud nuité</string>
@@ -306,6 +306,7 @@
   <string name="no_images_found">Gnun-e plance trovà!</string>
   <string name="error_loading_images">A-i é staje n\'eror durant ël cariament ëd le plance.</string>
   <string name="image_uploaded_by">Carià da: %1$s</string>
+  <string name="block_notification_title">Blocà</string>
   <string name="block_notification">Chiel a l\'é stàit blocà e a peul pa modifiché su Commons</string>
   <string name="appwidget_img">Plancia dël di</string>
   <string name="app_widget_heading">Plancia dël di</string>
@@ -321,7 +322,7 @@
   <string name="search_tab_title_categories">Categorìe</string>
   <string name="explore_tab_title_featured">An evidensa</string>
   <string name="explore_tab_title_mobile">Carià da sacociàbil</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Plancia giontà për da bin a %1$s su Wikidata!</string>
+  <string name="successful_wikidata_edit">Plancia giontà a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd Wikidata corëspondenta!</string>
   <string name="menu_set_wallpaper">Definì \'me tapissarìa</string>
   <string name="wallpaper_set_successfully">La tapissarìa a l\'é stàita definìa për da bin!</string>
@@ -447,7 +448,7 @@
   <string name="check_category_edit_summary">Arcesta ëd contròl ëd categorìa</string>
   <string name="check_category_success_title">Contròl ëd categorìa ciamà</string>
   <string name="check_category_failure_title">L\'arcesta dël contròl ëd categorìa a l\'ha nen marcià bin</string>
-  <string name="check_category_success_message" fuzzy="true">Contròl ëd categorìa ciamà con sucess për %1$s</string>
+  <string name="check_category_success_message">Contròl ëd categorìa ciamà %1$s</string>
   <string name="check_category_failure_message">Impossìbil ciamé un contròl ëd categorìa për %1$s</string>
   <string name="check_category_toast">Arcesta an cors dël contròl ëd la categorìa për %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Gionté un mëssagi dë scancelassion a l\'archivi</string>
@@ -517,7 +518,7 @@
   <string name="exif_tag_name_lensModel">Model ëd lent</string>
   <string name="exif_tag_name_serialNumbers">Nùmer ëd serie</string>
   <string name="exif_tag_name_software">Programa</string>
-  <string name="share_text">Carié dle fòto su Wikimedia Commons da sò teléfon Dëscarié l\'aplicassion Commons: %1$s</string>
+  <string name="share_text">Ch\'a caria dle fòto su Wikimedia Commons diretaman da sò teléfon. Ch\'a dëscaria l\'aplicassion Commons adess: %1$s</string>
   <string name="share_via">Partagé l\'aplicassion via...</string>
   <string name="image_info">Anformassion an sla plancia</string>
   <string name="no_categories_found">Gnun-e categorìe trovà</string>
@@ -529,7 +530,7 @@
   <string name="delete_helper_make_deletion_toast">Tentativ ëd signalé %1$s për la dëscancelassion</string>
   <string name="delete_helper_show_deletion_title">Nominé për la dëscancelassion</string>
   <string name="delete_helper_show_deletion_title_success">Sucess</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">%1$s nominà për da bin për la dëscancelassion.</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s nominà për la dëscancelassion.</string>
   <string name="delete_helper_show_deletion_title_failed">Falì</string>
   <string name="delete_helper_show_deletion_message_else">Impossìbil ëd ciamé la dëscancelassion.</string>
   <string name="delete_helper_ask_spam_selfie">N\'autoscat</string>
@@ -547,4 +548,10 @@
   <string name="text_copy">Test copià an sla taulëtta</string>
   <string name="notification_mark_read">Notìfica marcà coma lesùa</string>
   <string name="some_error">A-i é staje n\'eror!</string>
+  <string name="place_state">Stat dël pòst:</string>
+  <string name="place_state_exists">A esist</string>
+  <string name="place_state_needs_photo">A l\'ha damanca ëd na fòto</string>
+  <string name="place_type">Sòrt ëd pòst:</string>
+  <string name="nearby_search_hint">Pont, musé, obergi e via fòrt</string>
+  <string name="you_must_reset_your_passsword">Cheicòs a l\'é andàit mal con la conession, a dev torna inissialisé soa ciav!!</string>
 </resources>

@@ -113,7 +113,7 @@
   <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Llicencia predeterminada</string>
-  <string name="use_previous">Usar un títulu/descripción anterior</string>
+  <string name="use_previous" fuzzy="true">Usar un títulu/descripción anterior</string>
   <string name="allow_gps">Llograr automáticamente l\'allugamientu actual</string>
   <string name="allow_gps_summary">Recupera la posición actual si la imaxe nun tien etiquetes xeográfiques, y marca la imaxe con ella. Atención: Esto revelará\'l to allugamientu actual.</string>
   <string name="preference_theme">Mou nocherniegu</string>
@@ -307,6 +307,7 @@
   <string name="no_images_found">Nun s\'alcontró nenguna imaxe</string>
   <string name="error_loading_images">Asocedió un error al cargar les imáxenes.</string>
   <string name="image_uploaded_by">Xubida por: %1$s</string>
+  <string name="block_notification_title">Bloquiáu</string>
   <string name="block_notification">Tas bloquiáu pa editar en Commons</string>
   <string name="appwidget_img">Semeya del día</string>
   <string name="app_widget_heading">Semeya del día</string>
@@ -322,7 +323,7 @@
   <string name="search_tab_title_categories">Categoríes</string>
   <string name="explore_tab_title_featured">Destacada</string>
   <string name="explore_tab_title_mobile">Xubío dende\'l móvil</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Añadióse correutamente la imaxe a %1$s en Wikidata.</string>
+  <string name="successful_wikidata_edit">Añadióse la imaxe a %1$s en Wikidata.</string>
   <string name="wikidata_edit_failure">Nun pudo anovase la entidá de Wikidata correspondiente.</string>
   <string name="menu_set_wallpaper">Poner como fondu</string>
   <string name="wallpaper_set_successfully">Fondu definíu correutamente</string>
@@ -440,6 +441,18 @@
   <string name="display_campaigns_explanation">Ver les campañes en cursu</string>
   <string name="nearby_campaign_dismiss_message">Yá nun verás más les campañes. Sicasí, si quies puedes reactivar esti avisu na configuración.</string>
   <string name="this_function_needs_network_connection">Esta función rique conexón de rede, comprueba la configuración de conexón.</string>
+  <string name="bad_token_error_proposed_solution">Falló la carga por cuenta de problemes col token d\'edición. Zarra y anicia nuevamente la sesión.</string>
+  <string name="error_processing_image">Asocedió un error al procesar la imaxe. Téntalo nuevamente.</string>
+  <string name="getting_edit_token">Llogrando un token pa editar</string>
+  <string name="check_category_adding_template">Amestando plantía pa control de categoría</string>
+  <string name="check_category_notification_title">Pidiendo control de categoría pa %1$s</string>
+  <string name="check_category_edit_summary">Pidiendo control de categoría</string>
+  <string name="check_category_success_title">Control de categoría solicitáu</string>
+  <string name="check_category_failure_title">Nun funcionó la solicitú de control de categoría</string>
+  <string name="check_category_success_message">Solicitáu control de categoría pa %1$s</string>
+  <string name="check_category_failure_message">Nun pudo pidise\'l control de categoría pa %1$s</string>
+  <string name="check_category_toast">Pidiendo control de categoría pa %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Añadiendo mensaxe de desaniciu al ficheru</string>
   <string name="nominate_for_deletion_done">Fecho</string>
   <string name="nominate_for_deletion_notify_user">Avisando al usuariu na páxina d\'alderique</string>
   <string name="nominate_for_deletion_edit_deletion_request_log">Añadiendo ficheru al rexistru de solicitúes de desaniciu</string>
@@ -452,6 +465,18 @@
   <string name="send_thank_send">Agradecer</string>
   <string name="send_thank_notification_title">Agradecer</string>
   <string name="send_thank_toast">Unviar agradecimientu por %1$s</string>
+  <string name="review_copyright">¿Esto sigue les regles de drechos d\'autor?</string>
+  <string name="review_category">¿Ta correchamente categorizáu?</string>
+  <string name="review_spam">¿Axústase a la tema?</string>
+  <string name="review_thanks">¿Quies dar les gracies al collaborador?</string>
+  <string name="review_spam_explanation">Pulsia NON para nomar esta imaxe pa desaniciar si nun ye pa nada útil.</string>
+  <string name="review_copyright_explanation">Los logotipos, les imáxenes de pantalla y los cartelos de películes son davezu infracciones a los derechos d\'autor.\nPulsia NON para nomar esta imaxe pa desaniciar</string>
+  <string name="review_thanks_explanation">El to agradecimientu animara a %1$s</string>
+  <string name="review_no_category">¡Ai, esto nun ta siquier categorizao!</string>
+  <string name="review_category_explanation">Esta imaxe ta baxo %1$s categoríes.</string>
+  <string name="review_spam_report_question">Esto ta fora de la tema porque ye</string>
+  <string name="review_c_violation_report_question">Ye un frayamientu de derechos d\'autor porque ye</string>
+  <string name="review_category_yes_button_text">Non, mal categorizao</string>
   <string name="review_category_no_button_text">Paez bien</string>
   <string name="review_spam_yes_button_text">Non, fora de contestu</string>
   <string name="review_spam_no_button_text">Paez bien</string>
@@ -494,7 +519,7 @@
   <string name="exif_tag_name_lensModel">Modelu de la lente</string>
   <string name="exif_tag_name_serialNumbers">Númberos de serie</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="share_text">Xubi semeyes a Wikimedia Commons nel to móvil, descarga l\'aplicación de Commons: %1$s</string>
+  <string name="share_text" fuzzy="true">Xubi semeyes a Wikimedia Commons nel to móvil, descarga l\'aplicación de Commons: %1$s</string>
   <string name="share_via">Compartir l\'aplicación per...</string>
   <string name="image_info">Información de la imaxe</string>
   <string name="no_categories_found">Nun s\'alcontró nenguna categoría</string>
@@ -506,7 +531,7 @@
   <string name="delete_helper_make_deletion_toast">Tentando marcar %1$s pal so desaniciu</string>
   <string name="delete_helper_show_deletion_title">Marcando pa desaniciar</string>
   <string name="delete_helper_show_deletion_title_success">Correuto</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Marcóse correutamente %1$s pa desaniciar.</string>
+  <string name="delete_helper_show_deletion_message_if">Marcóse %1$s pa desaniciar.</string>
   <string name="delete_helper_show_deletion_title_failed">Falló</string>
   <string name="delete_helper_show_deletion_message_else">Non pudo pidise\'l desaniciu.</string>
   <string name="delete_helper_ask_spam_selfie">Un autorretratu</string>
@@ -518,4 +543,16 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Otros</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque ye</string>
+  <string name="share_image_via">Compartir imaxe per</string>
+  <string name="no_achievements_yet">Inda nun ficisti nenguna contribución</string>
+  <string name="account_created">¡Cuenta creada!</string>
+  <string name="text_copy">Testu copiáu al cartafueyu</string>
+  <string name="notification_mark_read">Notificación marcada como lleida</string>
+  <string name="some_error">Hebo dalgún error</string>
+  <string name="place_state">Estáu del llugar:</string>
+  <string name="place_state_exists">Existe</string>
+  <string name="place_state_needs_photo">Precisa foto</string>
+  <string name="place_type">Tipu de llugar:</string>
+  <string name="nearby_search_hint">Ponte, muséu, hotel etc.</string>
+  <string name="you_must_reset_your_passsword">¡¡Falló daqué al aniciar sesión, tienes de reaniciar la contraseña!!</string>
 </resources>

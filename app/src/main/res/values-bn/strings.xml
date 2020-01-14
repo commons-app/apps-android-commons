@@ -118,7 +118,7 @@
   <string name="media_upload_policy">এই চিত্র জমা দেয়ার দ্বারা, আমি ঘোষণা দিচ্ছি যে এটি আমার নিজস্ব কাজ, এতে কপিরাইটযুক্ত উপাদান নেই বা এটই সেলফি নয়, এবং &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/bn\"&gt;উইকিমিডিয়া কমন্স নীতি&lt;/a&gt; অনুসরণ করে।</string>
   <string name="menu_download">ডাউনলোড</string>
   <string name="preference_license">পূর্বনির্ধারিত লাইসেন্স</string>
-  <string name="use_previous">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
+  <string name="use_previous" fuzzy="true">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
   <string name="allow_gps">স্বয়ংক্রিয়ভাবে বর্তমান অবস্থান পান</string>
   <string name="allow_gps_summary">বর্তমান অবস্থান চিহ্নিত করুন যদি ছবিতে অবস্থানের তথ্য না থাকে, এবং ছবির অবস্থান হিসেবে নির্বাচন করুন।\nসাবধান: এতে আপনার বর্তমান অবস্থান প্রকাশিত হবে।</string>
   <string name="preference_theme">রাত্রি মোড</string>

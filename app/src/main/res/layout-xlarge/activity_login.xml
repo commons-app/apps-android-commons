@@ -151,7 +151,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/_2fa_code"
                             android:imeOptions="flagNoExtractUi"
-                            android:inputType="textNoSuggestions"
+                            android:inputType="number"
                             android:visibility="gone"
                             tools:visibility="visible" />
 

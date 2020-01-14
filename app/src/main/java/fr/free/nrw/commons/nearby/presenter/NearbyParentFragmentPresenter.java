@@ -5,16 +5,20 @@ import android.view.View;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
+import java.util.List;
+
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.nearby.CheckBoxTriStates;
+import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyController;
+import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
-
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
 
@@ -22,6 +26,9 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED;
+import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNKNOWN;
 
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
@@ -135,6 +142,7 @@ public class NearbyParentFragmentPresenter
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
         this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
+        nearbyParentFragmentView.setCheckBoxAction();
         mapInitialized = true;
     }
 
@@ -189,6 +197,11 @@ public class NearbyParentFragmentPresenter
     @Override
     public void lockUnlockNearby(boolean isNearbyLocked) {
         this.isNearbyLocked = isNearbyLocked;
+        if (isNearbyLocked) {
+            nearbyParentFragmentView.disableFABRecenter();
+        } else {
+            nearbyParentFragmentView.enableFABRecenter();
+        }
     }
 
     public void registerUnregisterLocationListener(boolean removeLocationListener) {
@@ -343,6 +356,45 @@ public class NearbyParentFragmentPresenter
                 nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
             }
         };
+    }
+
+    @Override
+    public void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState, boolean filterForAllNoneType) {
+        if (filterForAllNoneType) { // Means we will set labels based on states
+            switch (state) {
+                case UNKNOWN:
+                    // Do nothing
+                    break;
+                case UNCHECKED:
+                    nearbyMapFragmentView.filterOutAllMarkers();
+                    nearbyParentFragmentView.setRecyclerViewAdapterItemsGreyedOut();
+                    break;
+                case CHECKED:
+                    nearbyMapFragmentView.displayAllMarkers();
+                    nearbyParentFragmentView.setRecyclerViewAdapterAllSelected();
+                    break;
+            }
+        } else {
+            nearbyMapFragmentView.filterMarkersByLabels(selectedLabels,
+                    NearbyFilterState.getInstance().isExistsSelected(),
+                    NearbyFilterState.getInstance().isNeedPhotoSelected(),
+                    filterForPlaceState, filterForAllNoneType);
+        }
+    }
+
+    @Override
+    public void setCheckboxUnknown() {
+        nearbyParentFragmentView.setCheckBoxState(CheckBoxTriStates.UNKNOWN);
+    }
+
+    @Override
+    public void searchViewGainedFocus() {
+        if(nearbyParentFragmentView.isListBottomSheetExpanded()) {
+            // Back should first hide the bottom sheet if it is expanded
+            nearbyParentFragmentView.hideBottomSheet();
+        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible()) {
+            nearbyParentFragmentView.hideBottomDetailsSheet();
+        }
     }
 
     public View.OnClickListener onSearchThisAreaClicked() {

@@ -21,6 +21,7 @@
 * 予弦
 * 佛壁灯
 * 夢蝶葬花
+* 沈澄心
 * 神樂坂秀吉
 * 阿pp
 -->
@@ -43,7 +44,7 @@
   <string name="forgot_password">忘记密码？</string>
   <string name="signup">注册</string>
   <string name="logging_in_title">正在登录</string>
-  <string name="logging_in_message">请稍等...</string>
+  <string name="logging_in_message">请稍候……</string>
   <string name="login_success">登录成功！</string>
   <string name="login_failed">登录失败！</string>
   <string name="upload_failed">找不到文件。请尝试其他文件。</string>
@@ -133,7 +134,7 @@
   <string name="media_upload_policy">通过提交该图片，我声明这是我自己的作品，其不包含受版权保护的材料或自拍像，并遵循&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;维基共享资源&lt;/a&gt;方针。</string>
   <string name="menu_download">下载</string>
   <string name="preference_license">默认许可协议</string>
-  <string name="use_previous">使用之前的标题/描述</string>
+  <string name="use_previous">使用之前的标题及描述</string>
   <string name="allow_gps">自动获取当前位置</string>
   <string name="allow_gps_summary">如果图片没有地理标记，以及地理标签图片的话，就取得当前位置。警告：这将暴露您的当前位置。</string>
   <string name="preference_theme">夜间模式</string>
@@ -327,6 +328,7 @@
   <string name="no_images_found">找不到图片！</string>
   <string name="error_loading_images">加载图片时出错。</string>
   <string name="image_uploaded_by">由%1$s上传: %1$s</string>
+  <string name="block_notification_title">已封禁</string>
   <string name="block_notification">你被禁止编辑共享资源</string>
   <string name="appwidget_img">每日图片</string>
   <string name="app_widget_heading">每日图片</string>
@@ -342,7 +344,7 @@
   <string name="search_tab_title_categories">分类</string>
   <string name="explore_tab_title_featured">特色</string>
   <string name="explore_tab_title_mobile">通过移动端上传</string>
-  <string name="successful_wikidata_edit" fuzzy="true">图片已成功添加到维基数据上的%1$s！</string>
+  <string name="successful_wikidata_edit">图片已添加到维基数据上的%1$s！</string>
   <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
   <string name="menu_set_wallpaper">设为壁纸</string>
   <string name="wallpaper_set_successfully">壁纸已成功设置！</string>
@@ -468,7 +470,7 @@
   <string name="check_category_edit_summary">请求类别检查</string>
   <string name="check_category_success_title">已请求类别检查</string>
   <string name="check_category_failure_title">类别检查请求不起作用</string>
-  <string name="check_category_success_message" fuzzy="true">%1$成功请求类别检查</string>
+  <string name="check_category_success_message">已请求对%1$s进行类别检查</string>
   <string name="check_category_failure_message">%1$不能请求类别检查</string>
   <string name="check_category_toast">正在请求对%1$进行类别检查</string>
   <string name="nominate_for_deletion_edit_file_page">添加文件的删除信息</string>
@@ -537,7 +539,7 @@
   <string name="exif_tag_name_lensModel">镜面模型</string>
   <string name="exif_tag_name_serialNumbers">序列号</string>
   <string name="exif_tag_name_software">软件</string>
-  <string name="share_text">上传照片到手机上的Wikimedia Commons应用 下载Commons应用：%1</string>
+  <string name="share_text" fuzzy="true">上传照片到手机上的Wikimedia Commons应用 下载Commons应用：%1</string>
   <string name="share_via">分享到...</string>
   <string name="image_info">图像信息</string>
   <string name="no_categories_found">找不到分类</string>
@@ -549,7 +551,7 @@
   <string name="delete_helper_make_deletion_toast">尝试将%1作为删除的提案</string>
   <string name="delete_helper_show_deletion_title">正在提出删除准备</string>
   <string name="delete_helper_show_deletion_title_success">成功</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">成功提出将%1删除</string>
+  <string name="delete_helper_show_deletion_message_if">已提出将%1删除</string>
   <string name="delete_helper_show_deletion_title_failed">失败了</string>
   <string name="delete_helper_show_deletion_message_else">不能请求删除</string>
   <string name="delete_helper_ask_spam_selfie">自拍</string>
@@ -567,4 +569,10 @@
   <string name="text_copy">文本已复制至剪贴板</string>
   <string name="notification_mark_read">通知已标记为已读</string>
   <string name="some_error">发生了些错误！</string>
+  <string name="place_state">地点状态：</string>
+  <string name="place_state_exists">存在</string>
+  <string name="place_state_needs_photo">需要照片</string>
+  <string name="place_type">地点类型：</string>
+  <string name="nearby_search_hint">桥梁、博物馆、旅馆等</string>
+  <string name="you_must_reset_your_passsword">登录时出现一些问题，您必须重新设置您的密码！</string>
 </resources>

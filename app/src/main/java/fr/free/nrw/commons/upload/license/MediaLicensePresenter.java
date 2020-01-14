@@ -1,15 +1,14 @@
 package fr.free.nrw.commons.upload.license;
 
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.repository.UploadRepository;
-import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.upload.license.MediaLicenseContract.View;
-
 import java.lang.reflect.Proxy;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.repository.UploadRepository;
+import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.upload.license.MediaLicenseContract.View;
 import timber.log.Timber;
 
 /**

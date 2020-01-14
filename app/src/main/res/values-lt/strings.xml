@@ -5,6 +5,7 @@
 * Manvydasz
 * Naktis
 * Nersip
+* Tomasdd
 * Zygimantus
 -->
 <resources>
@@ -103,7 +104,7 @@
   <string name="share_license_summary" fuzzy="true">Šio paveikslėlio licencija bus %1$s</string>
   <string name="menu_download">Parsisiųsti</string>
   <string name="preference_license">Numatytoji Licencija</string>
-  <string name="use_previous">Naudoti ankstesnį pavadinimą/aprašymą</string>
+  <string name="use_previous" fuzzy="true">Naudoti ankstesnį pavadinimą/aprašymą</string>
   <string name="allow_gps">Automatiškai gauti dabartinę vietą</string>
   <string name="allow_gps_summary" fuzzy="true">Gauti dabartinę vietove, kad būtų pasiūlytos kategorijos, jei paveikslėlis neturi geografinės žymės</string>
   <string name="preference_theme">Naktinis režimas</string>
@@ -162,5 +163,11 @@
   <string name="notifications_talk_page_message">%1$s paliko žinutę jūsų aptarimo puslapyje</string>
   <string name="notifications_thank_you_edit">Dėkoja jums už atliktą pakeitimą</string>
   <string name="notifications_mention">%1$s jus paminėjo %2$s.</string>
+  <string name="block_notification_title">Užblokuota</string>
   <string name="share_via">Dalintis programą per ...</string>
+  <string name="place_state">Vietos būsena:</string>
+  <string name="place_state_exists">Egzistuoja</string>
+  <string name="place_state_needs_photo">Reikia Nuotraukos</string>
+  <string name="place_type">Vietos tipas:</string>
+  <string name="nearby_search_hint">Tiltas, muziejus, viešbutis ir t.t.</string>
 </resources>

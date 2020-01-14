@@ -114,7 +114,7 @@
   <string name="media_upload_policy">Ku ngirimkeun ieu gambar, kami ngedalkeun yén ieu mangrupa karya kami sorangan, yén ieu karya teu ngandung matéri atawa hak pribadi nu ditangtayungan ku hak cipta, sarta mun teu nurut kana &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Kawijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Undeur</string>
   <string name="preference_license">Lisénsi buhun</string>
-  <string name="use_previous">Paké baé judul/pedaran saméméhna</string>
+  <string name="use_previous" fuzzy="true">Paké baé judul/pedaran saméméhna</string>
   <string name="allow_gps">Comot lokasi sacara otomatis</string>
   <string name="allow_gps_summary">Catet lokasi ayeuna lamun gambar tanpa géotag, jeung géotagan gambarna. Perhatian: Ieu bakal ngungkab lokasi anjeun ayeuna.</string>
   <string name="preference_theme">Modus peuting</string>

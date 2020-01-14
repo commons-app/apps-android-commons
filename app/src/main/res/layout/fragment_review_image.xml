@@ -58,6 +58,8 @@
       android:layout_margin="@dimen/activity_margin_horizontal"
       android:background="@android:color/transparent"
       android:text="@string/yes"
+      android:enabled="false"
+      android:alpha="0.5"
       android:textAllCaps="true"
       android:textAlignment="center"
       android:textColor="@color/yes_button_color"/>
@@ -68,6 +70,8 @@
       android:layout_width="0dp"
       android:layout_height="48dp"
       android:layout_weight="1"
+      android:enabled="false"
+      android:alpha="0.5"
       android:layout_margin="@dimen/activity_margin_horizontal"
       android:background="@android:color/transparent"
       android:text="@string/no"

@@ -114,7 +114,7 @@
   <string name="media_upload_policy">Ved at indsende dette billeder erklærer jeg at det er mit eget arbejde, som ikke indeholder materialer med ophavsret eller selvportrætter og generelt overholder &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-politikkerne&lt;/a&gt;.</string>
   <string name="menu_download">Hent</string>
   <string name="preference_license">Standardlicens</string>
-  <string name="use_previous">Brug forrige titel/beskrivelse</string>
+  <string name="use_previous" fuzzy="true">Brug forrige titel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nuværende placering</string>
   <string name="allow_gps_summary">Henter den nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket og geomærker billedet. Advarsel: Dette vil afsløre din nuværende placering.</string>
   <string name="preference_theme">Nat-tilstand</string>
@@ -287,6 +287,7 @@
   <string name="no_images_found">Ingen billeder fundet!</string>
   <string name="error_loading_images">Der opstod en fejl under indlæsningen af billeder.</string>
   <string name="image_uploaded_by">Lagt op af: %1$s</string>
+  <string name="block_notification_title">Blokeret</string>
   <string name="block_notification">Du er blokeret fra at redigere Commons</string>
   <string name="appwidget_img">Dagens billede</string>
   <string name="app_widget_heading">Dagens billede</string>
@@ -382,4 +383,7 @@
   <string name="delete_helper_ask_spam_other">Andet</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Vilkårligt billede fra internettet</string>
   <string name="delete_helper_ask_reason_copyright_other">Andet</string>
+  <string name="place_state_exists">Findes</string>
+  <string name="place_state_needs_photo">Mangler et billede</string>
+  <string name="nearby_search_hint">Bro, museum, hotel, osv.</string>
 </resources>

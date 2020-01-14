@@ -3,10 +3,9 @@ package fr.free.nrw.commons.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import android.util.DisplayMetrics;
 
-import com.mapbox.mapboxsdk.geometry.LatLng;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,17 +35,6 @@ public class UiUtils {
     public static float convertDpToPixel(float dp, Context context) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         return dp * ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-    }
-
-    /**
-     * Converts device specific pixels to dp.
-     * @param px pixels
-     * @param context Context to access display metrics
-     * @return dp equivalent to px value
-     */
-    public static float convertPixelsToDp(float px, Context context) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return px / ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     /**

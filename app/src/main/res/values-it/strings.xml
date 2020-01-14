@@ -124,7 +124,7 @@
   <string name="media_upload_policy">Caricando questa immagine, dichiaro che questa è una mia opera, che non contiene materiale protetto da copyright o ritratti, e che comunque è conforme alle &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Policy di Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Scarica</string>
   <string name="preference_license">Licenza predefinita</string>
-  <string name="use_previous">Utilizza titolo/descrizione precedente</string>
+  <string name="use_previous">Utilizza titolo e descrizione precedente</string>
   <string name="allow_gps">Ottieni automaticamente l\'attuale posizione</string>
   <string name="allow_gps_summary">Recupera la posizione corrente se l\'immagine non è georeferenziata e geotag l\'immagine con essa. Avviso: questo rivelerà la tua posizione attuale.</string>
   <string name="preference_theme">Modalità notte</string>
@@ -315,6 +315,7 @@
   <string name="no_images_found">Nessuna immagine trovata!</string>
   <string name="error_loading_images">Si è verificato un errore durante il caricamento delle immagini.</string>
   <string name="image_uploaded_by">Caricato da: %1$s</string>
+  <string name="block_notification_title">Bloccato</string>
   <string name="block_notification">Sei bloccato dalla modifica su Commons</string>
   <string name="appwidget_img">Foto del giorno</string>
   <string name="app_widget_heading">Foto del giorno</string>

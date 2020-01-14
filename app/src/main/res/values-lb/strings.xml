@@ -107,7 +107,7 @@
   </plurals>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Standardlizenz</string>
-  <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
+  <string name="use_previous" fuzzy="true">Viregen Titel/Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
   <string name="allow_gps_summary">Rifft déi aktuell Plaz of wann e Bild net georeferenzéiert ass a setzt Geotagge vun der aktueller Plaz. Opgepasst: Doduerch gëtt Är aktuell Plaz bekannt.</string>
   <string name="preference_theme">Nuetsmodus</string>
@@ -260,6 +260,7 @@
   <string name="no_images_found">Keng Biller fonnt!</string>
   <string name="error_loading_images">Feeler beim Eropluede vu Biller.</string>
   <string name="image_uploaded_by">Eropgeluede vum: %1$s</string>
+  <string name="block_notification_title">Gespaart</string>
   <string name="block_notification">Dir sidd gespaart a kënnt keng Ännerungen op Commons maachen</string>
   <string name="appwidget_img">Bild vum Dag</string>
   <string name="app_widget_heading">Bild vum Dag</string>
@@ -345,6 +346,8 @@
   <string name="exif_tag_name_software">Software</string>
   <string name="no_categories_found">Keng Kategorie fonnt.</string>
   <string name="upload_cancelled">Eroplueden ofgebrach</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s gouf nominéiert fir ze läschen</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
+  <string name="place_state_needs_photo">Brauch eng Foto</string>
 </resources>

@@ -110,7 +110,7 @@
   <string name="media_upload_policy">By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Default License</string>
-  <string name="use_previous">Use previous title/description</string>
+  <string name="use_previous">Use previous title and description</string>
   <string name="allow_gps">Automatically get current location</string>
   <string name="allow_gps_summary">Retrieves current location if image is not geotagged, and geotags image with it. Warning: This will reveal your current location.</string>
   <string name="preference_theme">Night mode</string>
@@ -172,7 +172,7 @@
   <string name="title_activity_nearby">Nearby Places</string>
   <string name="no_nearby">No nearby places found</string>
   <string name="warning">Warning</string>
-  <string name="upload_image_duplicate">This file already exists on Commons. Are you sure you want to proceed?</string>
+  <string name="upload_image_duplicate">This file already destroyed on Commons. Are you sure you want to proceed?</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
   <string name="media_detail_title">Title</string>
@@ -244,7 +244,7 @@
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 
-  <string name="upload_problem_exist">Potential problems with this image :</string>
+  <string name="upload_problem_exist">Potential problems with this image:</string>
   <string name="upload_problem_image_dark">Image is too dark.</string>
   <string name="upload_problem_image_blurry">Image is blurry.</string>
   <string name="upload_problem_image_duplicate">Image is already on Commons.</string>
@@ -316,6 +316,7 @@
   <string name="error_loading_images">Error occurred while loading images.</string>
   <string name="image_uploaded_by">Uploaded by: %1$s</string>
 
+  <string name="block_notification_title">Blocked</string>
   <string name="block_notification">You are blocked from editing Commons</string>
   <string name="appwidget_img">Pic of the Day</string>
   <string name="app_widget_heading">Pic of the Day</string>
@@ -551,7 +552,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="exif_tag_name_serialNumbers">Serial Numbers</string>
   <string name="exif_tag_name_software">Software</string>
 
-  <string name="share_text">Upload photos to Wikimedia Commons on your phone Download the Commons app: %1$s</string>
+  <string name="share_text">Upload photos to Wikimedia Commons directly from your phone. Download the Commons App now: %1$s</string>
   <string name="share_via">Share app via...</string>
   <string name="image_info">Image Info</string>
   <string name="no_categories_found">No Categories found</string>
@@ -581,4 +582,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="text_copy">Text copied to clipboard</string>
   <string name="notification_mark_read">Notification marked as read</string>
   <string name="some_error">There was some error!</string>
+  <string name="place_state">Place state:</string>
+  <string name="place_state_exists">Exists</string>
+  <string name="place_state_needs_photo">Needs Photo</string>
+  <string name="place_type">Place type:</string>
+  <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
+  <string name="you_must_reset_your_passsword">Something went wrong with login, you must reset your password !!</string>
 </resources>

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
+import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
@@ -15,8 +16,8 @@ import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 
-import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -28,10 +29,9 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
-import fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleMultiSelectListPreference;
+import fr.free.nrw.commons.upload.Language;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import fr.free.nrw.commons.upload.Language;
 
 public class SettingsFragment extends PreferenceFragment {
 
@@ -68,9 +68,8 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
-        LongTitleMultiSelectListPreference multiSelectListPref = (LongTitleMultiSelectListPreference) findPreference("manageExifTags");
+        MultiSelectListPreference multiSelectListPref = (MultiSelectListPreference) findPreference("manageExifTags");
         if (multiSelectListPref != null) {
-            defaultKvStore.putJson(Prefs.MANAGED_EXIF_TAGS, multiSelectListPref.getValues());
             multiSelectListPref.setOnPreferenceChangeListener((preference, newValue) -> {
                 defaultKvStore.putJson(Prefs.MANAGED_EXIF_TAGS, newValue);
                 return true;

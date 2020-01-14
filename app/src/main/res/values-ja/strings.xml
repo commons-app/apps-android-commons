@@ -122,7 +122,7 @@
   <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれていないと宣言します。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">既定のライセンス</string>
-  <string name="use_previous">前回のタイトルと記述を使用</string>
+  <string name="use_previous" fuzzy="true">前回のタイトルと記述を使用</string>
   <string name="allow_gps">現在の位置を自動的に取得</string>
   <string name="allow_gps_summary">Retrieves current location if image is not geotagged, \n画像にジオタグが付いていない場合、現在の位置を取得して画像に添付。ご注意: 自分の現在地が明示されます。</string>
   <string name="preference_theme">夜モード</string>
@@ -316,6 +316,7 @@
   <string name="no_images_found">画像がありません</string>
   <string name="error_loading_images">画像の読み込み中にエラーが発生しました</string>
   <string name="image_uploaded_by">アップロードした人: %1$s</string>
+  <string name="block_notification_title">ブロック済</string>
   <string name="block_notification">あなたはコモンズの編集からブロックそれました。</string>
   <string name="appwidget_img">今日の一枚</string>
   <string name="app_widget_heading">今日の一枚</string>
@@ -331,7 +332,7 @@
   <string name="search_tab_title_categories">カテゴリ</string>
   <string name="explore_tab_title_featured">秀逸</string>
   <string name="explore_tab_title_mobile">モバイル機器からアップロード</string>
-  <string name="successful_wikidata_edit" fuzzy="true">ウィキデータの%1$sに画像を追加しました !</string>
+  <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
   <string name="menu_set_wallpaper">壁紙として設定</string>
   <string name="wallpaper_set_successfully">壁紙の設定ができました!</string>
@@ -456,7 +457,7 @@
   <string name="check_category_edit_summary">カテゴリ確認を申請中です</string>
   <string name="check_category_success_title">カテゴリ確認を申請しました</string>
   <string name="check_category_failure_title">カテゴリ確認の申請が無効です</string>
-  <string name="check_category_success_message" fuzzy="true">%1$sのカテゴリ確認の申請が完了しました</string>
+  <string name="check_category_success_message">%1$sのカテゴリ確認の申請が完了しました</string>
   <string name="check_category_failure_message">%1$sのカテゴリ確認を申請できませんでした</string>
   <string name="check_category_toast"> %1$sのカテゴリ確認を申請中です</string>
   <string name="nominate_for_deletion_edit_file_page">削除されるファイルにメッセージを添付中です</string>
@@ -526,7 +527,7 @@
   <string name="exif_tag_name_lensModel">レンズモデル</string>
   <string name="exif_tag_name_serialNumbers">シリアル番号</string>
   <string name="exif_tag_name_software">ソフトウェア</string>
-  <string name="share_text">スマホからウィキペディア・コモンズに画像を投稿する\nコモンズアプリをダウンロード：%1$s</string>
+  <string name="share_text" fuzzy="true">スマホからウィキペディア・コモンズに画像を投稿する\nコモンズアプリをダウンロード：%1$s</string>
   <string name="share_via">アプリの共有に使うのは…</string>
   <string name="image_info">画像情報</string>
   <string name="no_categories_found">カテゴリが見つかりません</string>
@@ -538,7 +539,7 @@
   <string name="delete_helper_make_deletion_toast">%1$sの削除を提案中です</string>
   <string name="delete_helper_show_deletion_title">削除の対象に指定する</string>
   <string name="delete_helper_show_deletion_title_success">成功しました</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">%1$sの削除依頼が成功しました。</string>
+  <string name="delete_helper_show_deletion_message_if">%1$sの削除依頼が成功しました。</string>
   <string name="delete_helper_show_deletion_title_failed">失敗しました</string>
   <string name="delete_helper_show_deletion_message_else">削除のリクエストができません。</string>
   <string name="delete_helper_ask_spam_selfie">自撮り</string>

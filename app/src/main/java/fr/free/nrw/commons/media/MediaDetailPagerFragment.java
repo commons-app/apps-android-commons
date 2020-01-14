@@ -1,9 +1,5 @@
 package fr.free.nrw.commons.media;
 
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.content.Context.DOWNLOAD_SERVICE;
-import static fr.free.nrw.commons.Utils.handleWebUrl;
-
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
@@ -18,10 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -37,18 +38,18 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import javax.inject.Inject;
-import javax.inject.Named;
 import timber.log.Timber;
+
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.Context.DOWNLOAD_SERVICE;
+import static fr.free.nrw.commons.Utils.handleWebUrl;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
-    @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject BookmarkPicturesDao bookmarkDao;
@@ -255,6 +256,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(true).setVisible(true);
 
                     // Initialize bookmark object
                     bookmark = new Bookmark(
@@ -264,27 +266,39 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
-                    if (m instanceof Contribution ) {
+                    if (m instanceof Contribution) {
                         Contribution c = (Contribution) m;
                         switch (c.getState()) {
                             case Contribution.STATE_FAILED:
-                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
-                                break;
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
-                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_share_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_download_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
+                                        .setVisible(false);
                                 break;
                             case Contribution.STATE_COMPLETED:
                                 // Default set of menu items works fine. Treat same as regular media object
                                 break;
                         }
                     }
+                } else {
+                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_share_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_download_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
+                            .setVisible(false);
                 }
             }
         }

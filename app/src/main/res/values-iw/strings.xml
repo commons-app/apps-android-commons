@@ -7,6 +7,7 @@
 * Deborahjay
 * Erelon
 * ExampleTomer
+* Ghsuvr
 * Guycn2
 * Inkbug
 * Nurick
@@ -36,7 +37,7 @@
   <string name="signup">רישום</string>
   <string name="logging_in_title">כניסה לחשבון</string>
   <string name="logging_in_message">נא להמתין…</string>
-  <string name="login_success">הכניסה הצליחה</string>
+  <string name="login_success">הכניסה הצליחה!</string>
   <string name="login_failed">הכניסה נכשלה!</string>
   <string name="upload_failed">הקובץ לא נמצא. נא לנסות קובץ אחר.</string>
   <string name="authentication_failed">אימות הפרטים נכשל, נא להיכנס מחדש</string>
@@ -68,10 +69,10 @@
   <string name="share_description_hint">תיאור</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
   <string name="login_failed_wrong_credentials">לא ניתן להיכנס לחשבון – נא לבדוק את שם המשתמש ואת הסיסמה</string>
-  <string name="login_failed_throttled">יותר מדי ניסיונות כושלים להיכנס. נא לנסות שוב בעוד מספר דקות.</string>
+  <string name="login_failed_throttled">יותר מדי ניסיונות כניסה כושלים. נא לנסות שוב בעוד מספר דקות.</string>
   <string name="login_failed_blocked">סליחה, החשבון הזה חסום בוויקישיתוף</string>
   <string name="login_failed_2fa_needed">יש לספק את קוד האימות הדו־שלבי שלך.</string>
-  <string name="login_failed_generic">ההעלאלה נכשלה</string>
+  <string name="login_failed_generic">כניסה נכשלה</string>
   <string name="share_upload_button">העלאה</string>
   <string name="multiple_share_base_title">שם האוסף</string>
   <string name="add_set_name_toast">נא לספק שם לערכה הזאת</string>
@@ -125,7 +126,7 @@
   <string name="media_upload_policy">שליחת התמונה הזאת מהווה את הצהרתי על כך שזאת יצירה שלי, שהיא לא מכילה חומר מוגבל בזכויות יוצרים או תמונות עצמיות (סלפי) ומתאימה בכל אופן ל&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;מדיניות של אתר ויקישיתוף של ויקימדיה&lt;/a&gt;.</string>
   <string name="menu_download">הורדה</string>
   <string name="preference_license">רישיון ברירת מחדל</string>
-  <string name="use_previous">להשתמש בכותרת ובתיאור קודמים</string>
+  <string name="use_previous">להשתמש בכותרת ותיאור קודמים</string>
   <string name="allow_gps">לקבל אוטומטית את המיקום הנוכחי</string>
   <string name="allow_gps_summary">אחזור המיקום הנוכחי אם אין בתמונה תגי מיקום, וכן הוספת תגי מיקום לתמונה. אזהרה: פעולה זו תחשוף את המיקום הנוכחי שלך.</string>
   <string name="preference_theme">מצב לילה</string>
@@ -151,7 +152,7 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">ויקישיתוף מארח את רוב התמונות שמשמשות בוויקיפדיה.</string>
-  <string name="tutorial_1_subtext">התמונות שלכם עוזרות לתת השכלה לאנשים מסביב לעולם!</string>
+  <string name="tutorial_1_subtext">התמונות שלכם עוזרות להעניק השכלה לאנשים מסביב לעולם!</string>
   <string name="tutorial_2_text">נא להעלות תמונות שצולמו או נוצרו באופן מלא על־ידיכם:</string>
   <string name="tutorial_2_subtext_1">עצמים טבעיים (פרחים, חיות, הרים)</string>
   <string name="tutorial_2_subtext_2">חפצים שימושיים (אופניים, תחנות רכבת)</string>
@@ -166,13 +167,13 @@
   <string name="tutorial_4_subtext_3">קטגוריות: בית האופרה של סידני מהמערב, מראות מרוחקים על בית האופרה של סידני</string>
   <string name="welcome_wikipedia_text">תרמו את התמונות שלכם. עזרו לערכים בוויקיפדיה להתעורר לחיים!</string>
   <string name="welcome_wikipedia_subtext">התמונות בוויקיפדיה מגיעות מ־Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">התמונות שלכם עוזרות להעניק חינוך לאנשים מסביב לעולם.</string>
+  <string name="welcome_copyright_text">התמונות שלכם עוזרות להעניק השכלה לאנשים מסביב לעולם.</string>
   <string name="welcome_copyright_subtext">נא להימנע מחומרים מוגבלים בזכויות יוצרים שמצאתם באינטרנט וכן מתמונות של כרזות, עטיפות ספרים, וכו\'.</string>
   <string name="welcome_final_text">נראה לך שקלטת?</string>
   <string name="welcome_final_button_text">כן!</string>
   <string name="welcome_help_button_text">&lt;u&gt;מידע נוסף&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">קטגוריות</string>
-  <string name="detail_panel_cats_loading">טעינה...</string>
+  <string name="detail_panel_cats_loading">בטעינה...</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
   <string name="detail_description_empty">אין תיאור</string>
   <string name="detail_discussion_empty">אין דיון</string>
@@ -249,18 +250,18 @@
   <string name="nearby_info_menu_commons_article">דף קובץ בוויקישיתוף</string>
   <string name="nearby_info_menu_wikidata_article">פריט ויקינתונים</string>
   <string name="nearby_info_menu_wikipedia_article">ערך בוויקיפדיה</string>
-  <string name="error_while_cache">שגיאה במשירת תמונות במטמון</string>
-  <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש שם קובץ. אפשר להשתמש בשפה פשוטה עם רווחים. אין לכלול סיומת קובץ</string>
+  <string name="error_while_cache">שגיאה בעת שמירת תמונות במטמון</string>
+  <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש כשם הקובץ. ניתן להשתמש בשפה טבעית עם רווחים. אין לכלול את סיומת הקובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
   <string name="upload_image_too_dark">התמונה הזאת חשוכה מדי, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_image_blurry">התמונה הזאת מטושטשת, האם ברצונך באמת להעלות אותה? ויקישיתוף מיועד רק לתמונות בעלות ערך אנציקלופדי.</string>
   <string name="upload_problem_exist">בעיות פוטנציאליות עם התמונה הזאת:</string>
   <string name="upload_problem_image_dark">התמונה חשוכה מדי.</string>
   <string name="upload_problem_image_blurry">התמונה מטושטשת.</string>
-  <string name="upload_problem_image_duplicate">התמונה כבר בוויקישיתוף.</string>
+  <string name="upload_problem_image_duplicate">התמונה כבר נמצאת בוויקישיתוף.</string>
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
   <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
-  <string name="upload_problem_do_you_continue">האם ברצונך להעלות את התמונה הזאת עדיין?</string>
+  <string name="upload_problem_do_you_continue">האם ברצונך עדיין להעלות את התמונה הזאת?</string>
   <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
@@ -268,17 +269,17 @@
   <string name="login_to_your_account">כניסה לחשבון שלך</string>
   <string name="send_log_file">שליחת קובץ יומן</string>
   <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני כדי לחפש בעיות עם היישום. לתשומת לבך: יומנים יכולים להכיל מידע מזהה</string>
-  <string name="no_web_browser">לא נמצא דפדפן שיוכל לפתוח את הכתובת</string>
+  <string name="no_web_browser">לא נמצא דפדפן כדי לפתוח את כתובת ה־URL</string>
   <string name="null_url">שגיאה! כתובת ה־URL לא נמצאה</string>
-  <string name="nominate_deletion">להציע מחיקה</string>
-  <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה</string>
+  <string name="nominate_deletion">העמדה למחיקה</string>
+  <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה.</string>
   <string name="nominated_see_more">&lt;u&gt;ר\' את האתר לפרטים&lt;/u&gt;</string>
-  <string name="nominating_file_for_deletion">העלאה של %1$s להצבעה למחיקה.</string>
+  <string name="nominating_file_for_deletion">מעמיד את %1$s למחיקה.</string>
   <string name="nominating_for_deletion_status">העמדת קובץ למחיקה: %1$s</string>
   <string name="view_browser">הצגה בדפדפן</string>
   <string name="skip_login">לדלג</string>
   <string name="navigation_item_login">כניסה לחשבון</string>
-  <string name="skip_login_title">האם באמת לדלג על הכניסה לחשבון?</string>
+  <string name="skip_login_title">האם באמת ברצונך לדלג על הכניסה לחשבון?</string>
   <string name="skip_login_message">יהיה עליך להיכנס כדי להעלות תמונות בעתיד.</string>
   <string name="login_alert_message">נא להיכנס לחשבון כדי להשתמש באפשרות הזאת</string>
   <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
@@ -318,7 +319,8 @@
   <string name="showcase_view_plus_fab">באפשרותך להעלות תמונה של כל מקום מהגלריה או מהמצלמה שלך</string>
   <string name="no_images_found">לא נמצאו תמונות!</string>
   <string name="error_loading_images">אירעה שגיאה בטעינת התמונות.</string>
-  <string name="image_uploaded_by">הועלתה על־ידי: %1$s</string>
+  <string name="image_uploaded_by">הועלה על־ידי: %1$s</string>
+  <string name="block_notification_title">חסום</string>
   <string name="block_notification">נחסמת מעריכת ויקישיתוף</string>
   <string name="appwidget_img">תמונת היום</string>
   <string name="app_widget_heading">תמונת היום</string>
@@ -334,7 +336,7 @@
   <string name="search_tab_title_categories">קטגוריות</string>
   <string name="explore_tab_title_featured">מומלץ</string>
   <string name="explore_tab_title_mobile">העלאה דרך נייד</string>
-  <string name="successful_wikidata_edit" fuzzy="true">התמונה נוספה בהצלחה לדף %1$s בוויקינתונים!</string>
+  <string name="successful_wikidata_edit">התמונה נוספה לדף %1$s בוויקינתונים!</string>
   <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
   <string name="menu_set_wallpaper">הגדרה בתור טפט</string>
   <string name="wallpaper_set_successfully">הרקע הוגדר בהצלחה!</string>
@@ -344,11 +346,11 @@
   <string name="result">תוצאה</string>
   <string name="quiz_back_button">העלאה של תמונות שדורשות מחיקה תגרום להחרמתך. האם באמת לסיים את הבוחן?</string>
   <string name="quiz_alert_message">יותר מ־%1$s מהתמונות שהעלית נמחקו. אם תמשיך להעלות תמונות שצריך למחוק, חשבונך כנראה ייחסם.\n\nאולי תרצה לראות שוב את המדריך ואז לעשות בוחן כדי לעזור לך ללמוד אילו סוגים של תמונות צריך או לא צריך להעלות?</string>
-  <string name="selfie_answer">בתמנות עצמיות (סלפי) אין ערך אנציקלופדי. נא לא להעלות תמונות של עצמך אלא אם כן יש עליך ערך בוויקיפדיה.</string>
+  <string name="selfie_answer">בתמונות עצמיות (סלפי) אין ערך אנציקלופדי. נא לא להעלות תמונות של עצמך אלא אם כן יש עליך ערך בוויקיפדיה.</string>
   <string name="taj_mahal_answer">מותר להעלות תמונות של אנדרטאות ונופים ברוב המדינות. נא לשים לב לכך שיצירות אומנות שמוצבות באופן זמני בחוץ מוגבלות לעיתים קרובות בזכויות יוצרים, ואסור להעלות אותן.</string>
-  <string name="screenshot_answer">צילומי מסך של אתרי אינטרנט נחשבים ליצירות נגזרות ונתונים לאותם תנאי זכויות היוצרים כמו האתר עצמו. אפשר להשתמש בהם אחרי אישור מהיוצר. ללא אישור כזה, כל יצירה שמבוססת על העבודה שלהם נחשבת לעותק בלתי־מורשה בבעלות היוצר המקורי.</string>
+  <string name="screenshot_answer">צילומי מסך של אתרי אינטרנט נחשבים ליצירות נגזרות ונתונים לאותם תנאי זכויות היוצרים כמו האתר עצמו. אפשר להשתמש בהם לאחר קבלת אישור מהיוצר. ללא אישור כזה, כל יצירה שמבוססת על העבודה שלהם נחשבת לעותק בלתי־מורשה בבעלות היוצר המקורי.</string>
   <string name="blurry_image_answer">אחת מהמטרות של ויקישיתוף היא לאסוף תמונות איכותיות. לפיכך, אין להעלות תמונות מטושטשות. השתדלו תמיד לצלם תמונות יפות עם תאורה טובה.</string>
-  <string name="construction_event_answer">תמונות שמציגות טכנולוגיה אם תרבות מתקבלות בברכה בוויקישיתוף.</string>
+  <string name="construction_event_answer">תמונות שמציגות טכנולוגיה או תרבות מתקבלות בברכה בוויקישיתוף.</string>
   <string name="warning_for_image_reverts">אזהרה: יותר מ־%1$s מהתמונות שהעלית נמחקו. המשך העלאת תמונות שצריכות להימחק כנראה יוביל לכך שהחשבון שלך ייחסם.</string>
   <string name="congratulatory_message_quiz">ענית נכון על %1$s מהשאלות. ברכות!</string>
   <string name="warning_for_no_answer">יש לבחור אפשרות אחת מתוך שתיים כדי לענות על השאלה</string>
@@ -363,10 +365,10 @@
   <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
   <string name="add_description">+ הוספת תיאור</string>
   <string name="no_recent_searches">אין חיפושים אחרונים</string>
-  <string name="delete_recent_searches_dialog">האם באמת רצית לנקות את היסטוריית החיפוש שלך?</string>
+  <string name="delete_recent_searches_dialog">האם באמת ברצונך לנקות את היסטוריית החיפוש שלך?</string>
   <string name="delete_search_dialog">האם ברצונך למחוק חיפוש זה?</string>
   <string name="search_history_deleted">היסטוריית החיפוש נמחקה</string>
-  <string name="nominate_delete">הגשה למועמדות למחיקה</string>
+  <string name="nominate_delete">העמדה למחיקה</string>
   <string name="delete">מחיקה</string>
   <string name="Achievements">הישגים</string>
   <string name="statistics">סטטיסטיקה</string>
@@ -385,10 +387,10 @@
   <string name="images_used_explanation">מספר התמונות שהעלית לוויקישיתוף ושמשמשות בערכים בוויקיפדיה</string>
   <string name="error_occurred">אירעה שגיאה!</string>
   <string name="notifications_channel_name_all">התראה מוויקישיתוף</string>
-  <string name="preference_author_name_toggle">שימוש בשם יוצר בהתאמה אישית</string>
-  <string name="preference_author_name_toggle_summary">שימוש בשם יוצר בהתאמה אישית במקום שם המשתמש שלך בעת העלאת תמונות</string>
-  <string name="preference_author_name">שם יוצר בהתאמה אישית</string>
-  <string name="preference_author_name_summary">שם יוצר בהתאמה אישית לשימוש במקום שם המשתמש שלך להעלאות</string>
+  <string name="preference_author_name_toggle">שימוש בשם יוצר מותאם אישית</string>
+  <string name="preference_author_name_toggle_summary">שימוש בשם יוצר בהתאמה אישית במקום בשם המשתמש שלך בעת העלאת תמונות</string>
+  <string name="preference_author_name">שם יוצר מותאם אישית</string>
+  <string name="preference_author_name_summary">שם יוצר מותאם אישית לשימוש במקום שם המשתמש שלך להעלאות</string>
   <string name="contributions_fragment">תרומות</string>
   <string name="nearby_fragment">בסביבה</string>
   <string name="notifications">התראות</string>
@@ -437,7 +439,7 @@
   <string name="no_categories_selected">לא נבחרו קטגוריות</string>
   <string name="no_categories_selected_warning_desc">תמונות ללא קטגוריות בדרך כלל אינן שימושיות. לשלוח ללא בחירת קטגוריות?</string>
   <string name="yes_submit">כן, לשלוח</string>
-  <string name="no_go_back">לא, נחזור חזרה</string>
+  <string name="no_go_back">לא, חזור אחורה</string>
   <string name="upload_flow_all_images_in_set">(לכל התמונות בסדרה)</string>
   <string name="search_this_area">חיפוש באזור הזה</string>
   <string name="nearby_card_permission_title">בקשת הרשאה</string>
@@ -460,7 +462,7 @@
   <string name="check_category_edit_summary">בקשת בדיקת קטגוריה</string>
   <string name="check_category_success_title">התבקשה בדיקת קטגוריה</string>
   <string name="check_category_failure_title">בקשת בדיקת קטגוריה לא עבדה</string>
-  <string name="check_category_success_message" fuzzy="true">התבקשה בדיקת קטגוריה עבור %1$s בהצלחה</string>
+  <string name="check_category_success_message">התבקשה בדיקת קטגוריה עבור %1$s בהצלחה</string>
   <string name="check_category_failure_message">בקשת בדיקת הקטגוריה עבור %1$s לא הצליחה</string>
   <string name="check_category_toast">מוגשת בקשה לבדיקת קטגוריה עבור %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">הוספת הודעת מחיקה לקובץ</string>
@@ -530,8 +532,8 @@
   <string name="exif_tag_name_lensModel">דגם העדשה</string>
   <string name="exif_tag_name_serialNumbers">מספרים סידוריים</string>
   <string name="exif_tag_name_software">תוכנה</string>
-  <string name="share_text">כדי להעלות תמונות לוויקינתונים של ויקימדיה בעזרת הטלפון שלך יש להוריד את היישומון של ויקינתונים: %1$s</string>
-  <string name="share_via">שיתוף אפליקציה דרך...</string>
+  <string name="share_text">כדי להעלות תמונות לוויקינתונים של ויקימדיה ישר מהטלפון שלך. אתם מוזמנים להוריד את היישום של ויקינתונים עכשיו: %1$s</string>
+  <string name="share_via">שיתוף היישום דרך...</string>
   <string name="image_info">פרטי תמונה</string>
   <string name="no_categories_found">לא נמצאו קטגוריות</string>
   <string name="upload_cancelled">ההעלאה בוטלה</string>
@@ -542,7 +544,7 @@
   <string name="delete_helper_make_deletion_toast">מתבצע ניסיון להעמדת %1$s למחיקה</string>
   <string name="delete_helper_show_deletion_title">העמדה למחיקה</string>
   <string name="delete_helper_show_deletion_title_success">הצלחה</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">ההעמדה של %1$s למחיקה הצליחה.</string>
+  <string name="delete_helper_show_deletion_message_if">הקובץ %1$s הועמד למחיקה.</string>
   <string name="delete_helper_show_deletion_title_failed">כשלון</string>
   <string name="delete_helper_show_deletion_message_else">לא ניתן לבקש מחיקה</string>
   <string name="delete_helper_ask_spam_selfie">סלפי</string>
@@ -560,4 +562,10 @@
   <string name="text_copy">הטקסט הועתק ללוח</string>
   <string name="notification_mark_read">התראה סומנה כנקראה</string>
   <string name="some_error">אירעה שגיאה כלשהי!</string>
+  <string name="place_state">מצב המקום:</string>
+  <string name="place_state_exists">קיים</string>
+  <string name="place_state_needs_photo">זקוק לתצלום</string>
+  <string name="place_type">סוג המקום:</string>
+  <string name="nearby_search_hint">גשר, מוזאון, מלון, וכו\'.</string>
+  <string name="you_must_reset_your_passsword">משהו השתבש בכניסה למערכת, עליך לאפס את הססמה שלך!</string>
 </resources>

@@ -120,7 +120,7 @@
   <string name="media_upload_policy">Durch das Hochladen dieses Bildes erkläre ich, dass dies mein eigenes Werk ist, das kein urheberrechtlich geschütztes Material oder Selfies enthält und das auch sonst die &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/de\"&gt;Wikimedia-Commons-Richtlinien&lt;/a&gt; einhält.</string>
   <string name="menu_download">Herunterladen</string>
   <string name="preference_license">Standardlizenz</string>
-  <string name="use_previous">Vorherige(n) Titel/Beschreibung verwenden</string>
+  <string name="use_previous" fuzzy="true">Vorherige(n) Titel/Beschreibung verwenden</string>
   <string name="allow_gps">Aktuellen Standort automatisch abrufen</string>
   <string name="allow_gps_summary">Ruft den aktuellen Standort ab, falls das Bild nicht georeferenziert ist und markiert es. Warnung: Diese Aktion verrät deinen aktuellen Standort.</string>
   <string name="preference_theme">Nachtmodus</string>
@@ -517,7 +517,7 @@
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fehlgeschlagen! Wir konnten die Datei nicht ohne externe Speicherberechtigung herunterladen!</string>
   <string name="exif_tag_name_copyright">Urheberrecht</string>
   <string name="exif_tag_name_location">Standort</string>
-  <string name="share_text">Lade Fotos von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App herunter: %1$s</string>
+  <string name="share_text" fuzzy="true">Lade Fotos von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App herunter: %1$s</string>
   <string name="share_via">App teilen über …</string>
   <string name="image_info">Bildinformationen</string>
   <string name="delete_helper_ask_spam_other">Andere</string>

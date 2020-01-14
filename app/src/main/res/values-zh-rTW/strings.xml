@@ -13,6 +13,7 @@
 * Wwycheuk
 * ZhaoGang
 * 和平奮鬥救地球
+* 沈澄心
 * 烈羽
 -->
 <resources>
@@ -122,7 +123,7 @@
   <string name="media_upload_policy">透過提交此圖片，我宣佈這是我個人創作的成品，且不包含受版權保護或自拍內容，並除此之外遵守&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;維基媒體共享資源方針&lt;/a&gt;。</string>
   <string name="menu_download">下載</string>
   <string name="preference_license">預設授權條款</string>
-  <string name="use_previous">使用先前標題、描述</string>
+  <string name="use_previous">使用先前標題及描述</string>
   <string name="allow_gps">自動獲取目前位置</string>
   <string name="allow_gps_summary">如果圖片沒有地理標記，就索取目前位置的地理資訊來標記在圖片上。注意：這會透露出您目前所在的位置。</string>
   <string name="preference_theme">夜間模式</string>
@@ -316,6 +317,7 @@
   <string name="no_images_found">找不到圖片！</string>
   <string name="error_loading_images">當載入圖片時發生錯誤。</string>
   <string name="image_uploaded_by">由：%1$s 上傳</string>
+  <string name="block_notification_title">已封鎖</string>
   <string name="block_notification">您被禁止編輯維基共享資源</string>
   <string name="appwidget_img">每日圖片</string>
   <string name="app_widget_heading">每日圖片</string>
@@ -331,7 +333,7 @@
   <string name="search_tab_title_categories">分類</string>
   <string name="explore_tab_title_featured">特色</string>
   <string name="explore_tab_title_mobile">透過行動設備上傳</string>
-  <string name="successful_wikidata_edit" fuzzy="true">圖片已成功添加到維基數據上的 %1$s！</string>
+  <string name="successful_wikidata_edit">圖片已添加到維基數據上的%1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定為桌布</string>
   <string name="wallpaper_set_successfully">桌布設定成功！</string>
@@ -457,7 +459,7 @@
   <string name="check_category_edit_summary">請求分類檢查</string>
   <string name="check_category_success_title">分類檢查已請求</string>
   <string name="check_category_failure_title">分類檢查請求無效</string>
-  <string name="check_category_success_message" fuzzy="true">成功請求%1$s的分類檢查</string>
+  <string name="check_category_success_message">已請求%1$s的分類檢查</string>
   <string name="check_category_failure_message">無法請求%1$s的分類檢查</string>
   <string name="check_category_toast">請求%1$s的分類檢查</string>
   <string name="nominate_for_deletion_edit_file_page">添加刪除訊息至檔案</string>
@@ -527,7 +529,7 @@
   <string name="exif_tag_name_lensModel">透鏡模型</string>
   <string name="exif_tag_name_serialNumbers">序號</string>
   <string name="exif_tag_name_software">軟體</string>
-  <string name="share_text">在您的手機上更新照片到維基共享資源，下載共享資源應用程式：%1$s</string>
+  <string name="share_text">從您的手機上直接更新照片到維基共享資源，請現在下載共享資源應用程式：%1$s</string>
   <string name="share_via">分享應用程式透過…</string>
   <string name="image_info">圖片資訊</string>
   <string name="no_categories_found">找不到分類</string>
@@ -539,7 +541,7 @@
   <string name="delete_helper_make_deletion_toast">嘗試向%1$s提名刪除</string>
   <string name="delete_helper_show_deletion_title">提名刪除</string>
   <string name="delete_helper_show_deletion_title_success">成功</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">成功向%1$s提名刪除。</string>
+  <string name="delete_helper_show_deletion_message_if">已提名%1$s刪除。</string>
   <string name="delete_helper_show_deletion_title_failed">失敗</string>
   <string name="delete_helper_show_deletion_message_else">無法請求刪除。</string>
   <string name="delete_helper_ask_spam_selfie">自拍</string>
@@ -557,4 +559,10 @@
   <string name="text_copy">文字已複製至剪貼簿</string>
   <string name="notification_mark_read">通知標記為已讀</string>
   <string name="some_error">發生一些錯誤！</string>
+  <string name="place_state">地點狀態：</string>
+  <string name="place_state_exists">存在</string>
+  <string name="place_state_needs_photo">需要照片</string>
+  <string name="place_type">地點類型：</string>
+  <string name="nearby_search_hint">橋梁、美術館、旅館、其它。</string>
+  <string name="you_must_reset_your_passsword">登入時發生一些問題，您必須重新設定您的密碼！！</string>
 </resources>

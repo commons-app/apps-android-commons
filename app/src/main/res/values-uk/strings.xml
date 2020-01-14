@@ -130,7 +130,7 @@
   <string name="media_upload_policy">Подаючи це зображення, я підтверджую, що це моя власна робота, яка не містить захищених авторським правом матеріалів чи селфі, а також відповідає &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/uk\"&gt;правилам Вікісховища&lt;/a&gt;.</string>
   <string name="menu_download">Завантажити</string>
   <string name="preference_license">Усталена ліцензія</string>
-  <string name="use_previous">Використати попередню назву/опис</string>
+  <string name="use_previous" fuzzy="true">Використати попередню назву/опис</string>
   <string name="allow_gps">Автоматично отримати поточне розташування</string>
   <string name="allow_gps_summary">Якщо зображення не містить координат, то буде отримано і поставлено ваше поточне розташування. Будьте уважні, якщо ви не хочете розкривати ваше розташування.</string>
   <string name="preference_theme">Нічний режим</string>
@@ -324,6 +324,7 @@
   <string name="no_images_found">Зображень не знайдено!</string>
   <string name="error_loading_images">Сталася помилка при завантаженні зображень.</string>
   <string name="image_uploaded_by">Завантажено: %1$s</string>
+  <string name="block_notification_title">Заблоковано</string>
   <string name="block_notification">Вам було заблоковано редагування у Вікісховищі</string>
   <string name="appwidget_img">Зображення дня</string>
   <string name="app_widget_heading">Зображення дня</string>
@@ -339,7 +340,7 @@
   <string name="search_tab_title_categories">Категорії</string>
   <string name="explore_tab_title_featured">Обране</string>
   <string name="explore_tab_title_mobile">Завантаження з мобільного</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Зображення успішно додано до сторінки %1$s у Вікіданих!</string>
+  <string name="successful_wikidata_edit">Зображення додано до сторінки %1$s у Вікіданих!</string>
   <string name="wikidata_edit_failure">Не вдалось оновити відповідну сторінку Вікіданих!</string>
   <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
   <string name="wallpaper_set_successfully">Шпалери екрану виставлено успішно!</string>
@@ -466,7 +467,7 @@
   <string name="check_category_edit_summary">Запит на перевірку категорій</string>
   <string name="check_category_success_title">Зроблено запит на перевірку категорій</string>
   <string name="check_category_failure_title">Запит на перевірку категорій не спрацював</string>
-  <string name="check_category_success_message" fuzzy="true">Успішно зроблено запит на перевірку категорій для %1$s</string>
+  <string name="check_category_success_message">Зроблено запит на перевірку категорій для %1$s</string>
   <string name="check_category_failure_message">Не вдалося зробити запит на перевірку категорій для %1$s</string>
   <string name="check_category_toast">Запит на перевірку категорій для %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Додавання до файлу повідомлення про вилучення</string>
@@ -537,7 +538,7 @@
   <string name="exif_tag_name_lensModel">Модель об\'єктиву</string>
   <string name="exif_tag_name_serialNumbers">Серійний номер</string>
   <string name="exif_tag_name_software">Програмне забезпечення</string>
-  <string name="share_text">Вивантажуйте фото у Вікісховище зі свого телефона. Завантажте застосунок: %1$s</string>
+  <string name="share_text" fuzzy="true">Вивантажуйте фото у Вікісховище зі свого телефона. Завантажте застосунок: %1$s</string>
   <string name="share_via">Поділитися програмкою через…</string>
   <string name="image_info">Інформація про зображення</string>
   <string name="no_categories_found">Категорії не знайдені</string>
@@ -549,7 +550,7 @@
   <string name="delete_helper_make_deletion_toast">Номінування %1$s до вилучення</string>
   <string name="delete_helper_show_deletion_title">Номінування до вилучення</string>
   <string name="delete_helper_show_deletion_title_success">Успішно</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Успішно номіновано %1$s до вилучення.</string>
+  <string name="delete_helper_show_deletion_message_if">Номіновано %1$s до вилучення.</string>
   <string name="delete_helper_show_deletion_title_failed">Не вдалося</string>
   <string name="delete_helper_show_deletion_message_else">Неможливо запитати видалення.</string>
   <string name="delete_helper_ask_spam_selfie">Селфі</string>
@@ -567,4 +568,10 @@
   <string name="text_copy">Текст скопійовано до буферу обміну</string>
   <string name="notification_mark_read">Сповіщення позначено прочитаним</string>
   <string name="some_error">Тут якась проблемка виникла :-(</string>
+  <string name="place_state">Стан місця:</string>
+  <string name="place_state_exists">Існує</string>
+  <string name="place_state_needs_photo">Треба фото</string>
+  <string name="place_type">Тип місця:</string>
+  <string name="nearby_search_hint">Міст, музей, готель тощо</string>
+  <string name="you_must_reset_your_passsword">Щось пішло не так із процесом входу, ви маєте скинути пароль !</string>
 </resources>

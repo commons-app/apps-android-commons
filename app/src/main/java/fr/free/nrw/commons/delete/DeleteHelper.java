@@ -11,19 +11,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
+import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.SingleSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -35,20 +38,20 @@ import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_D
  */
 @Singleton
 public class DeleteHelper {
-    private final MediaWikiApi mwApi;
-    private final SessionManager sessionManager;
     private final NotificationHelper notificationHelper;
+    private final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
+    private final String username;
 
     @Inject
-    public DeleteHelper(MediaWikiApi mwApi,
-                        SessionManager sessionManager,
-                        NotificationHelper notificationHelper,
-                        ViewUtilWrapper viewUtil) {
-        this.mwApi = mwApi;
-        this.sessionManager = sessionManager;
+    public DeleteHelper(NotificationHelper notificationHelper,
+                        @Named("commons-page-edit") PageEditClient pageEditClient,
+                        ViewUtilWrapper viewUtil,
+                        @Named("username") String username) {
         this.notificationHelper = notificationHelper;
+        this.pageEditClient = pageEditClient;
         this.viewUtil = viewUtil;
+        this.username = username;
     }
 
     /**
@@ -59,10 +62,11 @@ public class DeleteHelper {
      * @return
      */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
-        viewUtil.showShortToast(context, context.getString((R.string.delete_helper_make_deletion_toast), media.getDisplayTitle()));
-        return Single.fromCallable(() -> delete(media, reason))
-                .flatMap(result -> Single.fromCallable(() ->
-                        showDeletionNotification(context, media, result)));
+        viewUtil.showShortToast(context, "Trying to nominate " + media.getDisplayTitle() + " for deletion");
+
+        return delete(media, reason)
+                .flatMapSingle(result -> Single.just(showDeletionNotification(context, media, result)))
+                .firstOrError();
     }
 
     /**
@@ -71,14 +75,9 @@ public class DeleteHelper {
      * @param reason
      * @return
      */
-    private boolean delete(Media media, String reason) {
-        String editToken;
-        String authCookie;
+    private Observable<Boolean> delete(Media media, String reason) {
+        Timber.d("thread is delete %s", Thread.currentThread().getName());
         String summary = "Nominating " + media.getFilename() + " for deletion.";
-
-        authCookie = sessionManager.getAuthCookie();
-        mwApi.setAuthCookie(authCookie);
-
         Calendar calendar = Calendar.getInstance();
         String fileDeleteString = "{{delete|reason=" + reason +
                 "|subpage=" + media.getFilename() +
@@ -99,26 +98,23 @@ public class DeleteHelper {
         String userPageString = "\n{{subst:idw|" + media.getFilename() +
                 "}} ~~~~";
 
-        try {
-            editToken = mwApi.getEditToken();
-
-            if(editToken == null) {
-                return false;
-            }
-
-            mwApi.prependEdit(editToken, fileDeleteString + "\n",
-                    media.getFilename(), summary);
-            mwApi.edit(editToken, subpageString + "\n",
-                    "Commons:Deletion_requests/" + media.getFilename(), summary);
-            mwApi.appendEdit(editToken, logPageString + "\n",
-                    "Commons:Deletion_requests/" + date, summary);
-            mwApi.appendEdit(editToken, userPageString + "\n",
-                    "User_Talk:" + media.getCreator(), summary);
-        } catch (Exception e) {
-            Timber.e(e);
-            return false;
-        }
-        return true;
+        return pageEditClient.prependEdit(media.getFilename(), fileDeleteString + "\n", summary)
+                .flatMap(result -> {
+                    if (result) {
+                        return pageEditClient.edit("Commons:Deletion_requests/" + media.getFilename(), subpageString + "\n", summary);
+                    }
+                    throw new RuntimeException("Failed to nominate for deletion");
+                }).flatMap(result -> {
+                    if (result) {
+                        return pageEditClient.appendEdit("Commons:Deletion_requests/" + date, logPageString + "\n", summary);
+                    }
+                    throw new RuntimeException("Failed to nominate for deletion");
+                }).flatMap(result -> {
+                    if (result) {
+                        return pageEditClient.appendEdit("User_Talk:" + username, userPageString + "\n", summary);
+                    }
+                    throw new RuntimeException("Failed to nominate for deletion");
+                });
     }
 
     private boolean showDeletionNotification(Context context, Media media, boolean result) {
@@ -189,7 +185,12 @@ public class DeleteHelper {
                 }
             }
 
-            makeDeletion(context, media, reason)
+            Timber.d("thread is askReasonAndExecute %s", Thread.currentThread().getName());
+
+            String finalReason = reason;
+
+            Single.defer((Callable<SingleSource<Boolean>>) () ->
+                    makeDeletion(context, media, finalReason))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(aBoolean -> {

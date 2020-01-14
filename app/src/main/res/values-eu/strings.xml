@@ -117,7 +117,7 @@
   <string name="media_upload_policy">Irudi hau bidaltzen, nire lan propioa dela aitortzen dut, copyrighta duten materiala edo selfiak ez duela, eta beste motatakoak &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Ohikoaren arauak&lt;/a&gt;</string>
   <string name="menu_download">Jaitsi</string>
   <string name="preference_license">Berezko lizentzia</string>
-  <string name="use_previous">Aurreko izenburu/deskribapena erabili</string>
+  <string name="use_previous" fuzzy="true">Aurreko izenburu/deskribapena erabili</string>
   <string name="allow_gps">Oraingo kokapena automatikoki lortu</string>
   <string name="preference_theme">Gau modua</string>
   <string name="preference_theme_summary">Gai iluna erabili</string>

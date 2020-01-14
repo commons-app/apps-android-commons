@@ -11,14 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
@@ -125,8 +126,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
             }
 
             descItemEditText.addTextChangedListener(new AbstractTextWatcher(
-                    descriptionText -> descriptions.get(position)
-                            .setDescriptionText(descriptionText)));
+                    descriptionText -> descriptions.get(position).setDescriptionText(descriptionText)));
             initLanguageSpinner(position, description);
 
             //If the description was manually added by the user, it deserves focus, if not, let the user decide

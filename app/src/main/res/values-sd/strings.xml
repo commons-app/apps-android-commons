@@ -58,7 +58,7 @@
   <string name="login_failed_wrong_credentials">داخل نه ٿيا آهيو - مهرباني ڪري پاسورڊ ۽ کاتي جو نالو چيڪ ڪيو</string>
   <string name="login_failed_throttled">ھيڪانديون ناڪام ڪوششون. مھرباني ڪري ڪجھ منٽن کانپوءِ ٻيھر ڪوشش ڪريو.</string>
   <string name="login_failed_blocked">افسوس، ھي واپرائيندڙ العام تي بندشيل آھي</string>
-  <string name="login_failed_2fa_needed">اوهان هر صورت ۾ پنهنجو ٻن عنصرن وارو تصديقي ڪوڊ ڏيو.</string>
+  <string name="login_failed_2fa_needed">اوهان کي لازمي پنھنجو ٻن عنصرن وارو تصديقي ڪوڊ ڏيو.</string>
   <string name="login_failed_generic">داخل ٿيڻ ناڪام</string>
   <string name="share_upload_button">چاڙھيو</string>
   <string name="multiple_share_base_title">ھن سيٽ کي نالو ڏيو</string>
@@ -71,7 +71,7 @@
   <string name="display_list_button">فھرست</string>
   <string name="gps_disabled">اوهان جي ڊوائيس ۾ جي پي ايس بند آهي. ڇا اوهان ان کي کولڻ چاهيو ٿا؟</string>
   <string name="enable_gps">جي پي ايس چالو ڪيو (اين ايبل جي پي ايس)</string>
-  <string name="contributions_subtitle_zero">اڃان تائين ڪو به ڄاڙهه (اَپلوڊ) نه ٿيو آهي</string>
+  <string name="contributions_subtitle_zero">اڃا تائين ڪوبہ چاڙھ ناھي</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
@@ -109,7 +109,7 @@
   </plurals>
   <string name="menu_download">لاھيو</string>
   <string name="preference_license">ڏنل اجازتنامو</string>
-  <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>
+  <string name="use_previous" fuzzy="true">گذريل عنوان/تشريح استعمال ڪريو</string>
   <string name="allow_gps">خوبخود ھاڻوڪي مڪانيت وٺو</string>
   <string name="allow_gps_summary">ھاڻوڪي مڪانيت ڏئي ٿو جيڪڏھن عڪس جيوٽيگ ناھي ٿيل، ۽ عڪس کي ان سان جيوٽيگ ڪري ٿو. چتاءُ: ھي توھان جي ھاڻوڪي مڪانيت ظاھر ڪندو.</string>
   <string name="preference_theme">رات جو ڏيک</string>
@@ -175,7 +175,7 @@
   <string name="media_detail_license">اجازتنامو</string>
   <string name="media_detail_coordinates">مڪانيت</string>
   <string name="become_a_tester_title">آزمائشي آزمائيندڙ ٿيو</string>
-  <string name="number_of_uploads">منهنجي تازي چاڙهڻ (اَپلوڊ) جي حد (لِمٽ)</string>
+  <string name="number_of_uploads">منھنجي تازي چاڙھ حد</string>
   <string name="maximum_limit">وڌ ۾ وڌ حد (ميگزيمم لِمٽ)</string>
   <string name="maximum_limit_alert">500 کان ٿي ڏيکارڻ کان قاصر آھي</string>
   <string name="logout_verification">ڇا توھان سچ ۾ خارج ٿيڻ ٿا چاھيو؟</string>
@@ -187,7 +187,7 @@
   <string name="upload_image">عڪس چاڙهيو</string>
   <string name="welcome_image_rainbow_bridge">انڊلٺ پل</string>
   <string name="welcome_image_tulip">گل لالا (ٽيولپ)</string>
-  <string name="welcome_image_no_selfies">ڪي به پاڻفيون نه (نو سيلفيز)</string>
+  <string name="welcome_image_no_selfies">سيلفيون نہ ھجن</string>
   <string name="welcome_image_proprietary">سڃاڻپ واري تصوير (پروپرائٽري اميج)</string>
   <string name="welcome_image_welcome_wikipedia">وڪيپيڊيا تي ڀليڪار</string>
   <string name="welcome_image_welcome_copyright">حقن ۽ واسطن جي آجيان (ويلڪم ڪاپي رائيٽ)</string>
@@ -207,9 +207,9 @@
   <string name="navigation_item_featured_images">چونڊ ڪيل</string>
   <string name="navigation_item_review">جائزو</string>
   <string name="nearby_needs_permissions">ويجھيو جڳھون بغير مڪانيت اجازت جي نٿيون ڏيکاري سگھجن</string>
-  <string name="no_description_found">ڪا به وضاحت نه ملي</string>
+  <string name="no_description_found">ڪابہ تشريح نہ لڌي</string>
   <string name="nearby_info_menu_commons_article">ڪامن فائيل جو ورق</string>
-  <string name="nearby_info_menu_wikidata_article">وڪيڊيٽا جزو (وڪيڊيٽا آئيٽم)</string>
+  <string name="nearby_info_menu_wikidata_article">وڪيڊيٽا آئٽم</string>
   <string name="nearby_info_menu_wikipedia_article">وڪيپيڊيا مضمون</string>
   <string name="give_permission">اجازت ڏيو</string>
   <string name="use_external_storage">ٻاھري سنڀار استعمال ڪريو</string>
@@ -344,7 +344,7 @@
   <string name="delete_helper_make_deletion_toast">%1$s کي ڊاھ لاءِ اميدوار ڪرڻ جي جي ڪوشش ڪندي</string>
   <string name="delete_helper_show_deletion_title">ڊاھ لاءِ اميدوار ڪندي</string>
   <string name="delete_helper_show_deletion_title_success">ڪاميابي</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">%1$s ڪاميابيءَ سان ڊاھ لاءِ اميدوار ڪيو ويو.</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s ڊاھ لاءِ اميدوار ڪيو ويو.</string>
   <string name="delete_helper_show_deletion_title_failed">ناڪام</string>
   <string name="delete_helper_show_deletion_message_else">ڊاھ جي درخواست نہ ٿي سگھي.</string>
   <string name="delete_helper_ask_spam_selfie">ھڪ سيلفي</string>

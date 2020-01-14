@@ -126,7 +126,7 @@
   <string name="media_upload_policy">Ao enviar esta imagem, declaro que este é o meu próprio trabalho, que não contém material protegido ou selfies, e, de outra forma, adere a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença padrão</string>
-  <string name="use_previous">Usar o título/descrição anterior</string>
+  <string name="use_previous">Usar o título e descrição anterior</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Se a imagem não estiver georreferenciada, obtém a localização atual e georreferencia a imagem com ela. Aviso: isto revela a sua localização corrente.</string>
   <string name="preference_theme">Modo noturno</string>
@@ -320,6 +320,7 @@
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
   <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
   <string name="image_uploaded_by">Carregada por: %1$s</string>
+  <string name="block_notification_title">Bloqueado</string>
   <string name="block_notification">Está impedido de editar no Commons</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <string name="app_widget_heading">Imagem do Dia</string>
@@ -531,7 +532,7 @@
   <string name="exif_tag_name_lensModel">Modelo de lente</string>
   <string name="exif_tag_name_serialNumbers">Números de série</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="share_text">Faça o carregamento de fotos para o Wikimedia Commons no seu telefone ou baixe o aplicativo Commons: %1$s</string>
+  <string name="share_text">Carregue fotos na wiki Wikimedia Commons, diretamente do seu celular. Baixe o aolicativo Commons agora: %1$s</string>
   <string name="share_via">Compartilhar aplicativo via...</string>
   <string name="image_info">Informação da imagem</string>
   <string name="no_categories_found">Nenhuma categoria encontrada</string>
@@ -561,4 +562,10 @@
   <string name="text_copy">Texto copiado para a área de transferência</string>
   <string name="notification_mark_read">Notificação marcada como lida</string>
   <string name="some_error">Ocorreu algum erro!</string>
+  <string name="place_state">Estado do local:</string>
+  <string name="place_state_exists">Existe</string>
+  <string name="place_state_needs_photo">Precisa de foto</string>
+  <string name="place_type">Tipo de local:</string>
+  <string name="nearby_search_hint">Ponte, museu, hotel etc.</string>
+  <string name="you_must_reset_your_passsword">Algo deu errado com a entrada, você deve redefinir sua senha!</string>
 </resources>

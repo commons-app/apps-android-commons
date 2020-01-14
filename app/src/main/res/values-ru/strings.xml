@@ -132,7 +132,7 @@
   <string name="media_upload_policy">Отправляя это изображение, я подтверждаю, что это моя собственная работа, которая не содержит защищённых авторским правом материалов или селфи, а также отвечает &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;правилам Викисклада&lt;/a&gt;.</string>
   <string name="menu_download">Скачать</string>
   <string name="preference_license">Лицензия по умолчанию</string>
-  <string name="use_previous">Использовать предыдущие название/описание</string>
+  <string name="use_previous" fuzzy="true">Использовать предыдущие название/описание</string>
   <string name="allow_gps">Анализ местоположения</string>
   <string name="allow_gps_summary">Если изображение не содержит геотега, то будет получено и проставлено текущее местоположение. Будьте внимательны, если вы не хотите раскрывать ваше месторасположение.</string>
   <string name="preference_theme">Ночной режим</string>
@@ -326,6 +326,7 @@
   <string name="no_images_found">Изображений не найдено!</string>
   <string name="error_loading_images">Произошла ошибка при загрузке изображений.</string>
   <string name="image_uploaded_by">Загружено участником %1$s</string>
+  <string name="block_notification_title">Блокировка</string>
   <string name="block_notification">Редактирование на Викискладе вам было заблокировано</string>
   <string name="appwidget_img">Изображение дня</string>
   <string name="app_widget_heading">Изображение дня</string>
@@ -341,7 +342,7 @@
   <string name="search_tab_title_categories">Категории</string>
   <string name="explore_tab_title_featured">Избранное</string>
   <string name="explore_tab_title_mobile">Загружено текущим приложением</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Изображение успешно добавлено на страницу викиданных!</string>
+  <string name="successful_wikidata_edit">Изображение добавлено на страницу %1$s Викиданных!</string>
   <string name="wikidata_edit_failure">Не удалось обновить соответствующую страницу викиданных!</string>
   <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
   <string name="wallpaper_set_successfully">Фоновая заставка успешно установлена!</string>
@@ -468,7 +469,7 @@
   <string name="check_category_edit_summary">Запрос о проверке категорий</string>
   <string name="check_category_success_title">Запрошена проверка категории</string>
   <string name="check_category_failure_title">Запрос о проверке категорий не сработал</string>
-  <string name="check_category_success_message" fuzzy="true">Успешно оставлен запрос о проверке категорий файла %1$s</string>
+  <string name="check_category_success_message">Оставлен запрос о проверке категорий для %1$s</string>
   <string name="check_category_failure_message">Не удаётся сделать запрос о проверке категорий для файла %1$s</string>
   <string name="check_category_toast">Проверка категорий файла %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Добавление файлу сообщения об удалении</string>
@@ -538,7 +539,7 @@
   <string name="exif_tag_name_lensModel">Модель объектива</string>
   <string name="exif_tag_name_serialNumbers">Серийный номер</string>
   <string name="exif_tag_name_software">Программное обеспечение</string>
-  <string name="share_text">Чтобы загружать фото на Викисклад (Wikimedia Commons), скачайте одноимённое приложение «Викисклад» (Commons): %1$s</string>
+  <string name="share_text" fuzzy="true">Чтобы загружать фото на Викисклад (Wikimedia Commons), скачайте одноимённое приложение «Викисклад» (Commons): %1$s</string>
   <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
   <string name="no_categories_found">Категории не найдены.</string>
@@ -550,7 +551,7 @@
   <string name="delete_helper_make_deletion_toast">Номинирование %1$s к удалению</string>
   <string name="delete_helper_show_deletion_title">Номинирование к удалению</string>
   <string name="delete_helper_show_deletion_title_success">Успешно</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Успешно номинировано %1$s к удалению.</string>
+  <string name="delete_helper_show_deletion_message_if">Номинировано %1$s на удаление.</string>
   <string name="delete_helper_show_deletion_title_failed">Не удалось</string>
   <string name="delete_helper_show_deletion_message_else">Невозможно запросить удаление.</string>
   <string name="delete_helper_ask_spam_selfie">Селфи</string>
@@ -568,4 +569,10 @@
   <string name="text_copy">Текст скопирован в буфер обмена</string>
   <string name="notification_mark_read">Оповещения маркированы как \"прочитанные\"</string>
   <string name="some_error">Тут какая-то проблемка возникла :-(</string>
+  <string name="place_state">Состояние места:</string>
+  <string name="place_state_exists">Существует</string>
+  <string name="place_state_needs_photo">Нуждается в фото</string>
+  <string name="place_type">Тип места:</string>
+  <string name="nearby_search_hint">Мост, музей, гостиница и т. д.</string>
+  <string name="you_must_reset_your_passsword">Что-то пошло не так со входом, вы должны сбросить пароль!</string>
 </resources>

@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.utils;
 
+import androidx.annotation.NonNull;
+
 import java.text.NumberFormat;
 
 import fr.free.nrw.commons.location.LatLng;
-
-import androidx.annotation.NonNull;
 
 public class LengthUtils {
     /**

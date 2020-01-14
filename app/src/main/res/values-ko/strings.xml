@@ -121,7 +121,7 @@
   <string name="media_upload_policy">이 이미지에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는 것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키미디어 공용 정책&lt;/a&gt;에 위배되지 않는다는 것에 동의합니다.</string>
   <string name="menu_download">다운로드</string>
   <string name="preference_license">기본 라이선스</string>
-  <string name="use_previous">이전의 제목/설명을 사용하기</string>
+  <string name="use_previous" fuzzy="true">이전의 제목/설명을 사용하기</string>
   <string name="allow_gps">자동으로 현재 위치 가져오기</string>
   <string name="allow_gps_summary">영상의 위치 태그가 지정되지 않은 경우 현재 위치를 검색하여 영상에 현재 위치로 위치 태그를 지정하십시오. 경고: 당신의 현재 위치가 노출됩니다.</string>
   <string name="preference_theme">야간 모드</string>
@@ -322,7 +322,7 @@
   <string name="search_tab_title_media">미디어</string>
   <string name="search_tab_title_categories">분류</string>
   <string name="explore_tab_title_mobile">모바일을 통해 업로드됨</string>
-  <string name="successful_wikidata_edit" fuzzy="true">위키데이터의 %1$s에 그림을 성공적으로 추가했습니다!</string>
+  <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 추가했습니다!</string>
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
   <string name="menu_set_wallpaper">배경화면으로 설정</string>
   <string name="wallpaper_set_successfully">배경화면을 성공적으로 설정했습니다!</string>
@@ -482,4 +482,9 @@
   <string name="text_copy">텍스트가 클립보드에 복사되었습니다</string>
   <string name="notification_mark_read">알림을 읽은 것으로 표시</string>
   <string name="some_error">오류가 있었습니다!</string>
+  <string name="place_state">장소 상태:</string>
+  <string name="place_state_exists">존재함</string>
+  <string name="place_state_needs_photo">사진 필요</string>
+  <string name="place_type">장소 유형:</string>
+  <string name="nearby_search_hint">다리, 박물관, 호텔 등.</string>
 </resources>

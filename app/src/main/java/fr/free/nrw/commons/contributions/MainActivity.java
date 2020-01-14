@@ -2,6 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,23 +13,24 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.material.tabs.TabLayout;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
@@ -38,15 +40,15 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
 
-public class MainActivity extends AuthenticatedActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends NavigationBaseActivity implements FragmentManager.OnBackStackChangedListener {
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
@@ -65,14 +67,12 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     QuizChecker quizChecker;
 
 
-    public Intent uploadServiceIntent;
-    public boolean isAuthCookieAcquired = false;
-
     public ContributionsActivityPagerAdapter contributionsActivityPagerAdapter;
     public static final int CONTRIBUTIONS_TAB_POSITION = 0;
     public static final int NEARBY_TAB_POSITION = 1;
 
     public boolean isContributionsFragmentVisible = true; // False means nearby fragment is visible
+    public boolean onOrientationChanged;
     private Menu menu;
 
     private MenuItem notificationsMenuItem;
@@ -82,9 +82,26 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
-        requestAuthToken();
+
         initDrawer();
         setTitle(getString(R.string.navigation_item_home)); // Should I create a new string variable with another name instead?
+
+        initMain();
+
+        if (savedInstanceState != null ) {
+            onOrientationChanged = true; // Will be used in nearby fragment to determine significant update of map
+
+            //If nearby map was visible, call on Tab Selected to call all nearby operations
+            /*if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
+                ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
+            }*/
+        }
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        quizChecker.initQuizCheck(this);
     }
 
     @Override
@@ -93,18 +110,17 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
         outState.putInt("viewPagerCurrentItem", viewPager.getCurrentItem());
     }
 
-    @Override
-    protected void onAuthCookieAcquired(String authCookie) {
-        // Do a sync everytime we get here!
+    private void initMain() {
+        //Do not remove this, this triggers the sync service
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(),BuildConfig.CONTRIBUTION_AUTHORITY,true);
         requestSync(sessionManager.getCurrentAccount(), BuildConfig.CONTRIBUTION_AUTHORITY, new Bundle());
-        uploadServiceIntent = new Intent(this, UploadService.class);
+        Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
 
         addTabsAndFragments();
-        isAuthCookieAcquired = true;
         if (contributionsActivityPagerAdapter.getItem(0) != null) {
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired(uploadServiceIntent);
+            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(0)).onAuthCookieAcquired();
         }
     }
 
@@ -128,10 +144,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
                         .show()
         );
 
-        if (uploadServiceIntent != null) {
-            // If auth cookie already acquired notify contrib fragment so that it san operate auth required actions
-            ((ContributionsFragment)contributionsActivityPagerAdapter.getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired(uploadServiceIntent);
-        }
+        ((ContributionsFragment) contributionsActivityPagerAdapter
+                .getItem(CONTRIBUTIONS_TAB_POSITION)).onAuthCookieAcquired();
         setTabAndViewPagerSynchronisation();
     }
 
@@ -220,13 +234,8 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     }
 
     @Override
-    protected void onAuthFailure() {
-
-    }
-
-    @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         String contributionsFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 0);
         String nearbyFragmentTag = ((ContributionsActivityPagerAdapter) viewPager.getAdapter()).makeFragmentName(R.id.pager, 1);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -284,7 +293,7 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
 
     @SuppressLint("CheckResult")
     private void setNotificationCount() {
-        compositeDisposable.add(Observable.fromCallable(() -> notificationController.getNotifications(false))
+        compositeDisposable.add(notificationController.getNotifications(false)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::initNotificationViews,
@@ -424,7 +433,6 @@ public class MainActivity extends AuthenticatedActivity implements FragmentManag
     protected void onResume() {
         super.onResume();
         setNotificationCount();
-        quizChecker.initQuizCheck(this);
     }
 
     @Override

@@ -20,6 +20,8 @@
 * Woytecr
 -->
 <resources>
+  <string name="title_activity_explore">Odkrywaj</string>
+  <string name="navigation_item_explore">Odkrywaj</string>
   <string name="preference_category_appearance">Wygląd</string>
   <string name="preference_category_general">Ogólne</string>
   <string name="preference_category_feedback">Opinia</string>
@@ -31,6 +33,7 @@
   <string name="intent_share_upload_label">Prześlij do Commons</string>
   <string name="username">Nazwa użytkownika</string>
   <string name="password">Hasło</string>
+  <string name="login_credential">Zaloguj sie do Commons Beta</string>
   <string name="login">Zaloguj się</string>
   <string name="forgot_password">Nie pamiętasz hasła?</string>
   <string name="signup">Zarejestruj się</string>
@@ -74,6 +77,7 @@
   <string name="login_failed_generic">Logowanie nie powiodło się</string>
   <string name="share_upload_button">Prześlij</string>
   <string name="multiple_share_base_title">Nazwij ten zestaw</string>
+  <string name="add_set_name_toast">Podaj nazwę tego zestawu</string>
   <string name="provider_modifications">Zmiany</string>
   <string name="menu_upload_single">Prześlij</string>
   <string name="categories_search_text_hint">Szukaj kategorii</string>
@@ -83,10 +87,10 @@
   <string name="gps_disabled">GPS w twoim urządzeniu jest wyłączony. Czy chcesz go włączyć?</string>
   <string name="enable_gps">Włącz GPS</string>
   <string name="contributions_subtitle_zero">Na razie brak przesłanych plików!</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Przesłano @string/contributions_subtitle_zero</item>
-    <item quantity="one">Przesłano %1$d plik</item>
-    <item quantity="other">Przesłano %1$d pliki</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Rozpoczęto %1$d przesyłanie</item>
@@ -119,9 +123,10 @@
   <plurals name="share_license_summary">
     <item quantity="other">1=Ten obraz będzie udostępniany na licencji %1$s</item>
   </plurals>
+  <string name="media_upload_policy">Przesyłając ten obraz deklaruję, że jest on moją własną pracą, nie zawiera elementów objętych prawem autorskim lub selfie i jest zgodny z &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pl\"&gt;Zasadami i zaleceniami Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Pobieranie</string>
   <string name="preference_license">Domyślna licencja</string>
-  <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
+  <string name="use_previous" fuzzy="true">Użyj poprzedniego tytułu/opisu</string>
   <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
   <string name="allow_gps_summary" fuzzy="true">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
   <string name="preference_theme">Tryb nocny</string>
@@ -154,29 +159,37 @@
   <string name="tutorial_2_subtext_3">Znani ludzie, których spotkałeś (burmistrz, olimpijczyk)</string>
   <string name="tutorial_3_text">Prosimy NIE wysyłać:</string>
   <string name="tutorial_4_text">Przykład przesłania pliku:</string>
+  <string name="tutorial_4_subtext_2">Opis: Sydney Opera House widziany z drugiej strony zatoki</string>
+  <string name="tutorial_4_subtext_3">Kategorie: Sydney Opera House z zachodu, Widoki na Sydney Opera House</string>
   <string name="welcome_wikipedia_text">Dodaj swoje ilustracje. Pomóż ożyć artykułom w Wikipedii!</string>
   <string name="welcome_wikipedia_subtext">Ilustracje w Wikipedii pochodzą z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje ilustracje pomagają w edukacji ludzi na całym świecie.</string>
   <string name="welcome_copyright_subtext">Unikaj materiałów objętych prawami autorskimi znalezionych w Internecie, a także zdjęć plakatów, okładek książek itp.</string>
   <string name="welcome_final_text">Czy wszystko jest jasne?</string>
   <string name="welcome_final_button_text">Tak!</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Więcej informacji&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorie</string>
   <string name="detail_panel_cats_loading">Ładowanie…</string>
   <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
   <string name="detail_description_empty">Brak opisu</string>
+  <string name="detail_discussion_empty">Brak dyskusji</string>
   <string name="detail_license_empty">Nieznana licencja</string>
   <string name="menu_refresh">Odśwież</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
+  <string name="storage_permission_title">Prośba o dostęp do pamięci</string>
+  <string name="read_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Bez tego aplikacja nie będzie w stanie uzyskać dostępu do twojej galerii.</string>
+  <string name="write_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Bez tego aplikacja nie będzie w stanie uzyskać dostępu do aparatu/galerii.</string>
+  <string name="location_permission_title">Prośba o dostęp do lokalizacji</string>
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Pobliskie miejsca</string>
   <string name="no_nearby">Nie znaleziono niczego w pobliżu</string>
   <string name="warning">Ostrzeżenie</string>
+  <string name="upload_image_duplicate">Ten plik już istnieje na Commons. Jesteś pewien, że chcesz kontynuować?</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
   <string name="media_detail_title">Tytuł</string>
   <string name="media_detail_description">Opis</string>
+  <string name="media_detail_discussion">Dyskusja</string>
   <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Data przesłania</string>
   <string name="media_detail_license">Licencja</string>
@@ -186,11 +199,19 @@
   <string name="become_a_tester_description">Dołącz do kanału bety w Google Play i dostań wczesny dostęp do nowych funkcji i łatek</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="maximum_limit">Górna Granica</string>
+  <string name="invalid_zero">Zero nie jest właściwą wartością</string>
+  <string name="invalid_input">Nieprawidłowe dane</string>
   <string name="maximum_limit_alert">Nie można wyświetlić ponad 500</string>
+  <string name="enter_valid">Wprowadź prawidłowy numer</string>
+  <string name="cannot_be_zero">Limit przesyłanych plików nie może wynosić 0</string>
   <string name="login_failed_2fa_not_supported">Uwierzytelnianie dwuskładnikowe obecnie nie jest obsługiwane.</string>
   <string name="logout_verification">Czy na pewno wylogować?</string>
   <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Strona internetowa Commons</string>
+  <string name="commons_facebook">Strona Commons na Facebooku</string>
+  <string name="commons_github">Kod źródłowy Commons na GitHubie</string>
   <string name="background_image">Obraz w tle</string>
+  <string name="no_image_found">Nie znaleziono obrazu</string>
   <string name="no_subcategory_found">Nie znaleziono podkategorii</string>
   <string name="no_parentcategory_found">Nie znaleziono kategorii nadrzędnych</string>
   <string name="upload_image">Załaduj zdjęcie</string>
@@ -215,12 +236,27 @@
   <string name="navigation_item_info">Samouczek</string>
   <string name="navigation_item_notification">Powiadomienia</string>
   <string name="navigation_item_featured_images">Wyróżnione</string>
+  <string name="navigation_item_review">Przejrzyj</string>
+  <string name="nearby_needs_permissions">Miejsca w pobiżu nie mogą zostać wyświetlone bez dostępu do lokalizacji</string>
   <string name="no_description_found">nie znaleziono opisu</string>
   <string name="nearby_info_menu_wikidata_article">Element Wikidanych</string>
   <string name="nearby_info_menu_wikipedia_article">Artykuł na Wikipedii</string>
+  <string name="error_while_cache">Błąd podczas buforowania zdjęć</string>
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
+  <string name="upload_problem_image_dark">Obraz jest zbyt ciemny.</string>
+  <string name="upload_problem_image_blurry">Obraz jest rozmyty.</string>
+  <string name="upload_problem_image_duplicate">Obraz jest już na Commons.</string>
+  <string name="upload_problem_different_geolocation">To zdjęcie zostało zrobione w innym miejscu.</string>
+  <string name="upload_problem_fbmd">Prześlij tylko zdjęcia, które sam wykonałeś. Nie przesyłaj zdjęć znalezionych na kontach innych osób na Facebooku.</string>
+  <string name="upload_problem_do_you_continue">Czy nadal chcesz przesłać to zdjęcie?</string>
+  <string name="internet_downloaded">Prześlij tylko zdjęcia, które sam wykonałeś. Nie przesyłaj zdjęć pobranych z Internetu.</string>
   <string name="give_permission">Uzyskaj uprawnienie</string>
+  <string name="use_external_storage">Użyj pamięci zewnętrznej</string>
+  <string name="use_external_storage_summary">Zapisz zdjęcia zrobione w aplikacji na swoim urzadzeniu</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
+  <string name="send_log_file">Wyślij plik rejestru</string>
+  <string name="send_log_file_description">Wyślij plik rejestru w e-mailu do twórców, aby ułatwić im rozwiązanie aplikemów z aplikacją Uwaga: rejestry mogą potencjalnie zawierać informacje, dzięki którym można cię zidentyfikować</string>
+  <string name="no_web_browser">Nie oznaleziono przeglądarki internetowej, aby otworzyć adres URL</string>
   <string name="null_url">Błąd! Nie znaleziono adresu URL</string>
   <string name="nominate_deletion">Zgłoszone do usunięcia</string>
   <string name="nominated_for_deletion">Ta grafika została zgłoszona do usunięcia.</string>
@@ -229,17 +265,25 @@
   <string name="navigation_item_login">Zaloguj się</string>
   <string name="skip_login_title">Czy na pewno chcesz pominąć logowanie?</string>
   <string name="login_alert_message">Zaloguj się, aby skorzystać z tej funkcji</string>
+  <string name="nearby_location_has_not_changed">Lokalizacja się nie zmieniła.</string>
+  <string name="nearby_location_not_available">Lokalizacja niedostępna.</string>
+  <string name="read_article">Przeczytaj artykuł</string>
   <string name="notifications_welcome">Witamy w Wikimedia Commons, %1$s! Cieszymy się, że tu jesteś.</string>
   <string name="notifications_thank_you_edit">Dziękujemy za dokonanie edycji</string>
   <string name="notifications_mention">%1$s wspomniał o Tobie w %2$s.</string>
   <string name="toggle_view_button">Przełącz widok</string>
-  <string name="nearby_directions" fuzzy="true">WSKAZÓWKI</string>
-  <string name="nearby_wikidata" fuzzy="true">WIKIDANE</string>
-  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
-  <string name="nearby_commons" fuzzy="true">POWSZECHNE</string>
+  <string name="nearby_directions">Wskazówki</string>
+  <string name="nearby_wikidata">Wikidane</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
+  <string name="about_rate_us">&lt;u&gt;Oceń nas&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">Pomiń samouczek</string>
+  <string name="no_internet">Brak połączenia z internetem</string>
+  <string name="internet_established">Nawiązano połączenie z internetem</string>
+  <string name="error_notifications">Błąd w trakcie pobierania powiadomień</string>
   <string name="no_notifications">Nie znaleziono powiadomień</string>
+  <string name="about_translate">&lt;u&gt;Przetłumacz&lt;/u&gt;</string>
   <string name="about_translate_title">Języki</string>
   <string name="about_translate_proceed">Dalej</string>
   <string name="about_translate_cancel">Anuluj</string>
@@ -248,12 +292,19 @@
   <string name="no_images_found">Nie znaleziono grafik!</string>
   <string name="error_loading_images">Wystąpił błąd podczas ładowania grafik.</string>
   <string name="image_uploaded_by">Przesłano przez %1$s</string>
+  <string name="block_notification_title">Zablokowany(-a)</string>
+  <string name="block_notification">Zostałeś zablokowany(-a) w Commons</string>
   <string name="menu_search_button">Szukaj</string>
+  <string name="search_commons">Szukaj na Commons</string>
+  <string name="title_activity_search">Szukaj</string>
   <string name="search_recent_header">Ostatnie wyszukiwania:</string>
   <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
   <string name="error_loading_categories">Wystąpił błąd podczas ładowania kategorii.</string>
   <string name="error_loading_subcategories">Wystąpił błąd podczas ładowania podkategorii.</string>
-  <string name="search_tab_title_categories" fuzzy="true">KATEGORIE</string>
+  <string name="search_tab_title_categories">Kategorie</string>
+  <string name="explore_tab_title_featured">Wyróżnione</string>
+  <string name="explore_tab_title_mobile">Przesłane z aplikacji</string>
+  <string name="successful_wikidata_edit">Dodano do %1$s w Wikidanych!</string>
   <string name="menu_set_wallpaper">Ustaw jako tapetę</string>
   <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
   <string name="quiz">Quiz</string>
@@ -266,28 +317,37 @@
   <string name="warning_for_image_reverts">OSTRZEŻENIE: Ponad %1$s przesłanych prze Ciebie zdjęć zostało usuniętych. Jeśli dalej będziesz przesyłać zdjęcia wymagające usunięcia, Twoje konto zostanie prawdopodobnie zablokowane.</string>
   <string name="congratulatory_message_quiz">Masz %1$s poprawnych odpowiedzi. Gratulacje!</string>
   <string name="warning_for_no_answer">Wybierz jedną z dwóch opcji, aby odpowiedzieć na pytanie</string>
+  <string name="user_not_logged_in">Sesja logowania wygasła, prosimy zalogować się ponownie.</string>
   <string name="quiz_result_share_message">Podziel się quizem ze swoimi znajomymi!</string>
   <string name="continue_message">Kontynuuj</string>
   <string name="correct">Poprawna odpowiedź</string>
   <string name="wrong">Zła odpowiedź</string>
   <string name="quiz_screenshot_question">Czy ten zrzut ekranu nadaje się do przesłania?</string>
+  <string name="share_app_title">Udostępnij aplikację</string>
   <string name="add_description">+ Dodaj opis</string>
   <string name="delete_recent_searches_dialog">Czy na pewno chcesz usunąć swoją historię wyszukiwania?</string>
   <string name="search_history_deleted">Historia wyszukiwania została usunięta</string>
   <string name="nominate_delete">Zgłoś do usunięcia</string>
+  <string name="delete">Usuń</string>
   <string name="Achievements">Osiągnięcia</string>
-  <string name="statistics" fuzzy="true">STATYSTYKA</string>
+  <string name="statistics">Statystyki</string>
+  <string name="statistics_thanks">Otrzymane Dzięki</string>
   <string name="statistics_featured">Wyróżnione ilustracje</string>
-  <string name="level" fuzzy="true">POZIOM</string>
+  <string name="level">Poziom</string>
   <string name="images_uploaded_explanation">Liczba zdjęć przesłanych do Commons za pomocą dowolnego oprogramowania</string>
   <string name="images_reverted_explanation">Procent zdjęć przesłanych do Commons, które nie zostały usunięte</string>
   <string name="images_used_explanation">Liczba zdjęć przesłanych do Commons, które zostały wykorzystane w artykułach Wikimedia</string>
   <string name="error_occurred">Wystąpił błąd!</string>
   <string name="notifications_channel_name_all">Powiadomienia Commons</string>
+  <string name="nearby_fragment">W pobliżu</string>
   <string name="notifications">Powiadomienia</string>
   <string name="step_count">Krok %1$d z %2$d</string>
+  <string name="next">Następny</string>
+  <string name="previous">Poprzedni</string>
+  <string name="submit">Prześlij</string>
   <string name="navigation_item_bookmarks">Zakładki</string>
   <string name="title_activity_bookmarks">Zakładki</string>
+  <string name="title_page_bookmarks_pictures">Zdjęcia</string>
   <string name="provider_bookmarks">Zakładki</string>
   <string name="provider_bookmarks_location">Zakładki</string>
   <string name="desc_language_America">Ameryka</string>
@@ -295,16 +355,38 @@
   <string name="desc_language_Middle_East">Bliski Wschód</string>
   <string name="desc_language_Africa">Afryka</string>
   <string name="desc_language_Asia">Azja</string>
+  <string name="yes_submit">Tak, prześlij</string>
+  <string name="no_go_back">Nie, zawróć</string>
   <string name="review_thanks_yes_button_text">Tak, czemu nie</string>
   <string name="review_thanks_no_button_text">Następny obraz</string>
+  <string name="skip_image">Pomiń ten obraz</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Pobieranie nie powiodło się!. Nie możemy pobrać pliku bez pozwolenia na dostęp do pamięci zewnętrznej.</string>
+  <string name="exif_tag_name_author">Autor</string>
+  <string name="exif_tag_name_copyright">Prawa autorskie</string>
+  <string name="exif_tag_name_location">Lokalizacja</string>
+  <string name="exif_tag_name_cameraModel">Model aparatu</string>
+  <string name="exif_tag_name_lensModel">Model obiektywu</string>
+  <string name="exif_tag_name_serialNumbers">Numery seryjne</string>
+  <string name="exif_tag_name_software">Oprogramowanie</string>
+  <string name="share_via">Udostępnij za pośrednictwem…</string>
   <string name="image_info">Informacje o obrazie</string>
   <string name="no_categories_found">Nie znaleziono kategorii</string>
   <string name="upload_cancelled">Anulowano przesyłanie</string>
   <string name="previous_image_title_description_not_found">Brakuje danych co do poprzedniego tytułu lub opisu obrazu</string>
+  <string name="delete_helper_ask_spam_selfie">Selfie</string>
+  <string name="delete_helper_ask_spam_blurry">Niewyraźne</string>
+  <string name="delete_helper_ask_spam_nonsense">Nonsens</string>
+  <string name="delete_helper_ask_spam_other">Inne</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Zdjęcie prasowe</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Losowe zdjęcie z internetu</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Inne</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Ponieważ jest to</string>
   <string name="share_image_via">Udostępnij obraz przez</string>
   <string name="no_achievements_yet">Nie wykonałeś jeszcze żadnej edycji</string>
   <string name="account_created">Konto zostało utworzone!</string>
   <string name="text_copy">Skopiowano tekst do schowka</string>
   <string name="notification_mark_read">Oznaczono powiadomienia jako przeczytane</string>
   <string name="some_error">Wystąpił błąd!</string>
+  <string name="you_must_reset_your_passsword">Coś poszło nie tak podczas logowania, musisz zresetować hasło!</string>
 </resources>

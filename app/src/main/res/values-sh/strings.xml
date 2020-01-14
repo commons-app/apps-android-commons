@@ -111,7 +111,7 @@
   <string name="media_upload_policy">Slanjem ove slike izjavljujem da je ona moje djelo, da ne sadrži nikakav materijal zaštićen autorskim pravom, ne sadrži selfije, te da je na bilo koji drugi način u skladu s &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smjernicama Ostave&lt;/a&gt;.</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Standardna licenca</string>
-  <string name="use_previous">Koristi prethodan naslov/opis</string>
+  <string name="use_previous" fuzzy="true">Koristi prethodan naslov/opis</string>
   <string name="allow_gps">Automatski dobavljaj trenutnu lokaciju</string>
   <string name="allow_gps_summary">Stavlja geooznaku s trenutne lokacije (ako je nema). Upozorenje: to će vam otkriti nalazište.</string>
   <string name="preference_theme">Noćni režim</string>

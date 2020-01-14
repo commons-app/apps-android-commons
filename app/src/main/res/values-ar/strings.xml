@@ -123,7 +123,7 @@
   <string name="media_upload_policy">بتقديم هذه الصورة، أعلن أن هذا عملي الخاص، وأنه لا يحتوي على مواد محفوظة الحقوق أو صور شخصية، وغير ذلك يلتزم &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;بسياسات ويكيميديا ​​كومنز&lt;/a&gt;.</string>
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة الافتراضية</string>
-  <string name="use_previous">استخدم العنوان/الوصف السابق</string>
+  <string name="use_previous" fuzzy="true">استخدم العنوان/الوصف السابق</string>
   <string name="allow_gps">الحصول تلقائيا على الموقع الحالي</string>
   <string name="allow_gps_summary">يسترد الموقع الحالي إذا لم يتم وسم الصورة جغرافيا، وكان هناك وسم جغرافي عليها، تحذير: سيكشف هذا عن موقعك الحالي.</string>
   <string name="preference_theme">الوضع الليلي</string>
@@ -317,6 +317,7 @@
   <string name="no_images_found">لم يتم العثور على صور!</string>
   <string name="error_loading_images">حدث خطأ أثناء تحميل الصور.</string>
   <string name="image_uploaded_by">%1$s :تم الرفع بواسطة</string>
+  <string name="block_notification_title">ممنوع</string>
   <string name="block_notification">أنت ممنوع من تحرير كومنز</string>
   <string name="appwidget_img">صورة اليوم</string>
   <string name="app_widget_heading">صورة اليوم</string>
@@ -332,7 +333,7 @@
   <string name="search_tab_title_categories">تصنيفات</string>
   <string name="explore_tab_title_featured">متميز</string>
   <string name="explore_tab_title_mobile">تم الرفع عبر المحمول</string>
-  <string name="successful_wikidata_edit" fuzzy="true">تمت إضافة الصورة بنجاح إلى %1$s في ويكي بيانات!</string>
+  <string name="successful_wikidata_edit">تمت إضافة الصورة إلى %1$s في ويكي بيانات!</string>
   <string name="wikidata_edit_failure">فشل في تحديث كيان ويكي بيانات المقابل!</string>
   <string name="menu_set_wallpaper">تعيين كخلفية</string>
   <string name="wallpaper_set_successfully">تم تعيين خلفية بنجاح!</string>
@@ -458,7 +459,7 @@
   <string name="check_category_edit_summary">جارٍ طلب التحقق من التصنيف</string>
   <string name="check_category_success_title">تم طلب التحقق من التصنيف</string>
   <string name="check_category_failure_title">طلب التحقق من التصنيف لم ينجح</string>
-  <string name="check_category_success_message" fuzzy="true">تم طلب التحقق بنجاح من التصنيف %1$s</string>
+  <string name="check_category_success_message">تم طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_failure_message">لا يمكن طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_toast">جارٍ طلب التحقق من التصنيف %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">إضافة رسالة حذف إلى الملف</string>
@@ -528,7 +529,7 @@
   <string name="exif_tag_name_lensModel">طراز العدسة</string>
   <string name="exif_tag_name_serialNumbers">الأرقام التسلسلية</string>
   <string name="exif_tag_name_software">برمجية</string>
-  <string name="share_text">ارفع الصور لويكيميديا ​​كومنز على هاتفك قم بتنزيل تطبيق كومنز: %1$s</string>
+  <string name="share_text" fuzzy="true">ارفع الصور لويكيميديا ​​كومنز على هاتفك قم بتنزيل تطبيق كومنز: %1$s</string>
   <string name="share_via">مشاركة التطبيق عبر...</string>
   <string name="image_info">معلومات الصورة</string>
   <string name="no_categories_found">لم يتم العثور على تصنيفات</string>
@@ -540,7 +541,7 @@
   <string name="delete_helper_make_deletion_toast">تجري محاولة ترشيح %1$s للحذف</string>
   <string name="delete_helper_show_deletion_title">ترشيح للحذف</string>
   <string name="delete_helper_show_deletion_title_success">نجاح</string>
-  <string name="delete_helper_show_deletion_message_if" fuzzy="true">تم بنجاح ترشيح %1$s للحذف.</string>
+  <string name="delete_helper_show_deletion_message_if">تم ترشيح %1$s للحذف.</string>
   <string name="delete_helper_show_deletion_title_failed">فشل</string>
   <string name="delete_helper_show_deletion_message_else">لا يمكن طلب الحذف.</string>
   <string name="delete_helper_ask_spam_selfie">سيلفي</string>
@@ -558,4 +559,10 @@
   <string name="text_copy">تم نسخ النص  إلى الحافظة.</string>
   <string name="notification_mark_read">تم تعليم الإخطار كمقروء</string>
   <string name="some_error">ثمة خطأ ما!</string>
+  <string name="place_state">حالة المكان:</string>
+  <string name="place_state_exists">موجود</string>
+  <string name="place_state_needs_photo">يحتاج صورة</string>
+  <string name="place_type">نوع المكان:</string>
+  <string name="nearby_search_hint">جسر، متحف، فندق، إلخ</string>
+  <string name="you_must_reset_your_passsword">حدث خطأ ما عند الدخول، يجب عليك إعادة تعيين كلمة المرور!!</string>
 </resources>

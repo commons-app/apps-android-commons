@@ -4,6 +4,7 @@
 * Aefgh39622
 * B20180
 * Horus
+* Nitisart Jungtrakungrat
 * Octahedron80
 * Patsagorn Y.
 -->
@@ -113,7 +114,7 @@
   <string name="media_upload_policy">โดยการส่งรูปภาพนี้ ฉันยืนยันว่านี่เป็นงานของฉันเอง ซึ่งไม่ประกอบด้วยเนื้อหาที่ละเมิดลิขสิทธิ์หรือภาพเซลฟี หรืออื่นๆ ตามที่ระบุใน&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;นโยบายของ Wikimedia Commons&lt;/a&gt;</string>
   <string name="menu_download">ดาวน์โหลด</string>
   <string name="preference_license">สัญญาอนุญาตปริยาย</string>
-  <string name="use_previous">ใช้ชื่อเรื่อง/คำอธิบายก่อนหน้านี้</string>
+  <string name="use_previous" fuzzy="true">ใช้ชื่อเรื่อง/คำอธิบายก่อนหน้านี้</string>
   <string name="allow_gps">รับข้อมูลตำแหน่งที่ตั้งปัจจุบันโดยอัตโนมัติ</string>
   <string name="allow_gps_summary">ดึงข้อมูลตำแหน่งที่ตั้งปัจจุบันเพื่อรับข้อเสนอแนะเกี่ยวกับหมวดหมู่ถ้ารูปภาพไม่ได้ติดแท็กตำแหน่งที่ตั้งเอาไว้</string>
   <string name="preference_theme">โหมดกลางคืน</string>
@@ -302,14 +303,38 @@
   <string name="retry">ลองใหม่</string>
   <string name="showcase_view_got_it_button">ตกลง!</string>
   <string name="showcase_view_whole_nearby_activity">สถานที่เหล่านี้คือสถานที่ที่อยู่ใกล้คุณ และต้องการภาพสำหรับเพิ่มเข้าไปในบทความบนวิกิพีเดีย\n\nกดที่\'{{Wikimedia:Commons-android-strings-search this area}}\'เพื่อดูแผนที่และสำรวจว่าสิ่งใดบ้างที่ต้องการภาพ และถ่ายมันมาหากคุณสะดวก</string>
+  <string name="showcase_view_list_icon">การแตะปุ่มนี้จะแสดงรายการสถานที่เหล่านี้</string>
+  <string name="showcase_view_plus_fab">คุณสามารถอัปโหลดรูปภาพสำหรับสถานที่ใด ๆ ได้จากแกลเลอรีหรือกล้องของคุณ</string>
   <string name="no_images_found">ไม่พบรูปภาพ!</string>
   <string name="error_loading_images">เกิดข้อผิดพลาดระหว่างการโหลดภาะ</string>
   <string name="image_uploaded_by">อัพโหลดโดย: %1$a</string>
+  <string name="block_notification_title">ถูกบล็อก</string>
   <string name="block_notification">คุณกำลังถูกบล็อคไม่ให้แก้ไขคอมมอนส์</string>
   <string name="appwidget_img">รูปภาพประจำวัน</string>
   <string name="app_widget_heading">รูปภาพประจำวัน</string>
   <string name="menu_search_button">ค้นหา</string>
+  <string name="search_commons">ค้นหาคอมมอนส์</string>
+  <string name="images_not_found">ไม่พบภาพที่ตรงกับ %1$s</string>
   <string name="title_activity_search">ค้นหา</string>
+  <string name="search_recent_header">การค้นหาล่าสุด:</string>
+  <string name="provider_searches">คิวรีที่ค้นหาเมื่อล่าสุด</string>
+  <string name="error_loading_categories">เกิดข้อผิดพลาดขณะโหลดหมวดหมู่</string>
+  <string name="error_loading_subcategories">เกิดข้อผิดพลาดขณะโหลดหมวดหมู่ย่อย</string>
+  <string name="search_tab_title_media">สื่อ</string>
+  <string name="search_tab_title_categories">หมวดหมู่</string>
+  <string name="explore_tab_title_featured">แนะนำ</string>
+  <string name="explore_tab_title_mobile">อัปโหลดผ่านอุปกรณ์เคลื่อนที่</string>
+  <string name="successful_wikidata_edit">เพิ่มภาพไปยัง %1$s บนวิกิสนเทศแล้ว!</string>
+  <string name="wikidata_edit_failure">ไม่สามารถอัปเดตเอนทิตีวิกิสนเทศที่สอดคล้องกันได้!</string>
+  <string name="menu_set_wallpaper">ตั้งเป็นภาพพื้นหลัง</string>
+  <string name="wallpaper_set_successfully">ตั้งภาพพื้นหลังสำเร็จแล้ว!</string>
+  <string name="quiz">คำถาม</string>
+  <string name="quiz_question_string">รูปภาพนี้สามารถอัปโหลดได้หรือไม่?</string>
+  <string name="question">คำถาม</string>
+  <string name="result">ผลลัพธ์</string>
+  <string name="quiz_back_button">หากคุณยังคงอัปโหลดภาพที่ต้องการให้ลบต่อไป บัญชีของคุณอาจถูกห้ามได้ คุณแน่ใจหรือไม่ว่าต้องการจบคำถาม?</string>
+  <string name="quiz_alert_message">ภาพมากกว่า %1$s ภาพที่คุณอัปโหลดได้ถูกลบแล้ว หากคุณยังคงอัปโหลดภาพที่ต้องการให้ลบต่อไป บัญชีของคุณอาจถูกห้ามได้\n\nคุณต้องการดูบทช่วยสอนอีกครั้งแล้วตอบคำถามเพื่อช่วยคุณเรียนรู้ว่าภาพประเภทใดบ้างที่คุณควรหรือไม่ควรอัปโหลด?</string>
+  <string name="selfie_answer">ภาพเซลฟีไม่มีคุณค่าทางสารานุกรมมากนัก โปรดอย่าอัปโหลดรูปภาพตัวคุณเอง นอกจากคุณมีบทความวิกิพีเดียที่เกี่ยวกับคุณอยู่แล้ว</string>
   <string name="no_image">ไม่มีภาพที่ใช้</string>
   <string name="no_image_reverted">ไม่มีภาพย้อนกลับ</string>
   <string name="no_image_uploaded">ไม่มีภาพที่อัปโหลด</string>

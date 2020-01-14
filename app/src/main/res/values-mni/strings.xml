@@ -43,7 +43,7 @@
   <string name="menu_cancel_upload">ꯇꯣꯛꯄ</string>
   <string name="menu_download">ꯆꯤꯡꯊꯕ</string>
   <string name="preference_license">ꯑꯌꯥꯕꯥ ꯱ ꯍꯦꯛꯇ</string>
-  <string name="use_previous">ꯁꯤꯖꯤꯟꯅꯧ ꯃꯃꯥꯡꯒꯤ ꯃꯃꯤꯡ/ꯑꯀꯨꯞꯄ ꯋꯥꯔꯣꯜ</string>
+  <string name="use_previous" fuzzy="true">ꯁꯤꯖꯤꯟꯅꯧ ꯃꯃꯥꯡꯒꯤ ꯃꯃꯤꯡ/ꯑꯀꯨꯞꯄ ꯋꯥꯔꯣꯜ</string>
   <string name="preference_theme">ꯅꯨꯡꯗꯥꯡ ꯃꯑꯣꯡ</string>
   <string name="preference_theme_summary">ꯑꯃꯝꯕ ꯊꯤꯝ ꯁꯤꯖꯤꯟꯅꯧ</string>
   <string name="license_name_cc_by_sa_four">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ-ꯁꯌꯥꯔꯑꯂꯥꯏꯛ ꯴.꯰</string>
