@@ -143,10 +143,17 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param throwable
      */
     private void handleError(Throwable throwable) {
-        Timber.e(throwable, "Error occurred while loading images inside a category");
         try{
-            ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
-            initErrorView();
+            if (throwable.getMessage().contains("The mapper function returned a null value")){
+                ViewUtil.showShortSnackbar(parentLayout, R.string.no_more_images);
+                initErrorView();
+            }
+            else {
+                Timber.e(throwable, "Error occurred while loading images inside a category");
+                ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
+                initErrorView();
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }
