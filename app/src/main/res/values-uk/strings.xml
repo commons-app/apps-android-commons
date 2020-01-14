@@ -130,7 +130,7 @@
   <string name="media_upload_policy">Подаючи це зображення, я підтверджую, що це моя власна робота, яка не містить захищених авторським правом матеріалів чи селфі, а також відповідає &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/uk\"&gt;правилам Вікісховища&lt;/a&gt;.</string>
   <string name="menu_download">Завантажити</string>
   <string name="preference_license">Усталена ліцензія</string>
-  <string name="use_previous">Використати попередню назву/опис</string>
+  <string name="use_previous" fuzzy="true">Використати попередню назву/опис</string>
   <string name="allow_gps">Автоматично отримати поточне розташування</string>
   <string name="allow_gps_summary">Якщо зображення не містить координат, то буде отримано і поставлено ваше поточне розташування. Будьте уважні, якщо ви не хочете розкривати ваше розташування.</string>
   <string name="preference_theme">Нічний режим</string>

@@ -115,7 +115,7 @@
   <string name="media_upload_policy">Odoslaním tohto súboru potvrdzujem, že je mojím vlastným dielom, neobsahuje autorskoprávne chránený materiál a nejedná sa o selfie a ani inak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Pravidlá a odporúčania Wikimedie Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Predvolená licencia</string>
-  <string name="use_previous">Použiť predchádzajúci názov/popis</string>
+  <string name="use_previous">Použiť predchádzajúci názov a popis</string>
   <string name="allow_gps">Automaticky získať súčasnú polohu</string>
   <string name="allow_gps_summary">Získať súčasnú polohu a pokiaľ obrázok neobsahuje zemepisné súradnice, pridať ich k nemu. Upozornenie: Toto odhalí vašu súčasnú polohu.</string>
   <string name="preference_theme">Nočný režim</string>

@@ -123,7 +123,7 @@
   <string name="media_upload_policy">بتقديم هذه الصورة، أعلن أن هذا عملي الخاص، وأنه لا يحتوي على مواد محفوظة الحقوق أو صور شخصية، وغير ذلك يلتزم &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;بسياسات ويكيميديا ​​كومنز&lt;/a&gt;.</string>
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة الافتراضية</string>
-  <string name="use_previous">استخدم العنوان/الوصف السابق</string>
+  <string name="use_previous" fuzzy="true">استخدم العنوان/الوصف السابق</string>
   <string name="allow_gps">الحصول تلقائيا على الموقع الحالي</string>
   <string name="allow_gps_summary">يسترد الموقع الحالي إذا لم يتم وسم الصورة جغرافيا، وكان هناك وسم جغرافي عليها، تحذير: سيكشف هذا عن موقعك الحالي.</string>
   <string name="preference_theme">الوضع الليلي</string>

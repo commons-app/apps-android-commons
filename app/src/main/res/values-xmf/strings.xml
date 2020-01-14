@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Narazeni
 * Silovan
 -->
 <resources>
@@ -101,7 +102,7 @@
   <string name="media_upload_policy">თე სურათიშ ეხარგუათ ვაცხადენქ, ნამჷ-და თენა ჩქიმი პიჯული ნახანდა რე დო ვეკათუანს ოავტორე ნებეფიტ თხილერ მასალეფს ვარდა სელფის, შხვა შვანს თინა უგამენს &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ვიკიოწკარუეშ პოლიტიკას&lt;/a&gt;.</string>
   <string name="menu_download">გჷნოჭარუა</string>
   <string name="preference_license">გურგოჩამილი ლიცენზია</string>
-  <string name="use_previous">წჷმი სათაურიშ/ეჭარუაშ გჷმორინაფა</string>
+  <string name="use_previous">წჷმი დუდჯოხოშ/ეჭარუაშ გჷმორინაფა</string>
   <string name="allow_gps">ასეიანი ორენიშ ავტომატური მეღება</string>
   <string name="allow_gps_summary">ლასუნს მიმალი ორენს, დო სურათი ვა რე გედვალირი რუკას-და. ხვილაფა! თე თირუა გოძირანა თქვანი მიმალი ორენს.</string>
   <string name="preference_theme">სერიშ რეჟიმი</string>

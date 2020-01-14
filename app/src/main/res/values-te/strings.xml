@@ -113,7 +113,7 @@
   <string name="media_upload_policy">ఈ బొమ్మను పంపించడంతో, ఇది నా స్వంత కృతేనని, ఇందులో కాపీహక్కులు గల వస్తువులు గాని, సెల్ఫీలు గానీ ఏమీ లేవనీ, ఇది &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;వికీమీడియా కామన్స్ విధానాలకు&lt;/a&gt; లోబడి ఉంటుందనీ ప్రకటిస్తున్నాను.</string>
   <string name="menu_download">దింపుకోండి</string>
   <string name="preference_license">అప్రమేయ లైసెన్సు</string>
-  <string name="use_previous">మునుపటి శీర్షిక/వివరణను వాడు</string>
+  <string name="use_previous" fuzzy="true">మునుపటి శీర్షిక/వివరణను వాడు</string>
   <string name="allow_gps">ప్రస్తుత స్థలాన్ని ఆటోమాటిగ్గా తెచ్చుకో</string>
   <string name="allow_gps_summary">బొమ్మలో జియోట్యాగు లేకపోతే, ప్రస్తుత స్థలాన్ని తీసుకుని దాన్నే జియోట్యాగుగా తగిలిస్తుంది.\nహెచ్చరిక: ఇది మీ ప్రస్తుత స్థలాన్ని బయట పెడుతుంది.</string>
   <string name="preference_theme">చీకటి రీతి</string>

@@ -114,7 +114,7 @@
   <string name="media_upload_policy">ಈ ಪಟೊನ್ ಕೊರಿಯರ ಅತ್ತಂದೆ, ಉಂದು ಎನ್ನ ಸ್ವಂತ ಬೆಲೆಗ್ ಯಾನ್ ಘೋಷಣೆ ಮಾಲ್ಪೆ, ಅವು ಹಕ್ಕುಸ್ವಾಮ್ಯತ ವಸ್ತು ಅತ್ತಂದೆ ಸ್ವಂತಲಾ ಅತ್ತ್&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">ಡೌನ್‍ಲೋಡ್</string>
   <string name="preference_license">ಪೂರ್ವನಿಯೋಜಿತ ಲೈಸನ್ಸ್‌.</string>
-  <string name="use_previous">ಒಂದ್ಕಕ್ ಪುದರ್ ಬಕ್ಕ ವಿವರಣೆ ಕೊರ್ಲೆ.</string>
+  <string name="use_previous" fuzzy="true">ಒಂದ್ಕಕ್ ಪುದರ್ ಬಕ್ಕ ವಿವರಣೆ ಕೊರ್ಲೆ.</string>
   <string name="allow_gps">ಸ್ವಯಂ ಚಾಲಿತವಾತ್ ಇರೆನ ಜಾಗೆತ ಗುರುತು.</string>
   <string name="allow_gps_summary">ಇಮೇಜ್ ಜಿಯೋಟ್ಯಾಗ್ಡ್ ಮಾಲ್ತಿಯಾಂಟ ಬುಕ್ಕ ಅಯಿನೊಟ್ಟಗ್ ಜಿಯೋಟ್ಯಾಗ್ಸ್ ಇಮೇಜ್ ಇತ್ತಂಟ್ ಇತ್ತೆತ ಸ್ಥಳೋನ್ ವಾಪಸ್ಸ್ ಪಡೆಯೊಲಿ.\nಎಚ್ಚರಿಕೆ: ಉಂದು ಇರೆನ ಇತ್ತೆತ ಸ್ಥಳೊನ್ ಬಹಿರಂಗ ಮಾಲ್ಪುಂಡು.</string>
   <string name="preference_theme">ಕತ್ತಲೆದ ಕ್ರಮೊ</string>

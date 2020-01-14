@@ -112,7 +112,7 @@
   <string name="media_upload_policy">Með því að senda inn þessa mynd, lýsi ég því hér með yfir að þetta er mitt eigið verk, það inniheldur ekkert höfundarréttarvarið efni eða sjálfsmyndir, og að það samræmist á allan hátt við &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;stefnu Wikimedia Commons varðandi notkun efnis&lt;/a&gt;.</string>
   <string name="menu_download">Sækja</string>
   <string name="preference_license">Sjálfgefið notkunarleyfi</string>
-  <string name="use_previous">Nota fyrri titil/lýsingu</string>
+  <string name="use_previous" fuzzy="true">Nota fyrri titil/lýsingu</string>
   <string name="allow_gps">Ná sjálfvirkt í núverandi staðsetningu</string>
   <string name="allow_gps_summary">Les núverandi staðsetningu til að geta stungið upp á flokkum ef myndin er ekki með hnattstaðsetningarhnitum. Aðvörun: þetta mun koma upp um staðsetninguna þína.</string>
   <string name="preference_theme">Næturhamur</string>

@@ -132,7 +132,7 @@
   <string name="media_upload_policy">Отправляя это изображение, я подтверждаю, что это моя собственная работа, которая не содержит защищённых авторским правом материалов или селфи, а также отвечает &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;правилам Викисклада&lt;/a&gt;.</string>
   <string name="menu_download">Скачать</string>
   <string name="preference_license">Лицензия по умолчанию</string>
-  <string name="use_previous">Использовать предыдущие название/описание</string>
+  <string name="use_previous" fuzzy="true">Использовать предыдущие название/описание</string>
   <string name="allow_gps">Анализ местоположения</string>
   <string name="allow_gps_summary">Если изображение не содержит геотега, то будет получено и проставлено текущее местоположение. Будьте внимательны, если вы не хотите раскрывать ваше месторасположение.</string>
   <string name="preference_theme">Ночной режим</string>

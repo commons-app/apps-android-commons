@@ -113,7 +113,7 @@
   <string name="media_upload_policy">Với việc đăng hình này, tôi tuyên bố rằng nó là tác phẩm của chính mình, rằng nó không chứa nội dung có bản quyền hoặc ảnh tự chụp, và về mặt khác thì hoàn toàn tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép mặc định</string>
-  <string name="use_previous">Sử dụng tiêu đề/miêu tả trước</string>
+  <string name="use_previous" fuzzy="true">Sử dụng tiêu đề/miêu tả trước</string>
   <string name="allow_gps">Lấy vị trí hiện tại tự động</string>
   <string name="allow_gps_summary" fuzzy="true">Định vị hiện tại để nhận gợi ý thể loại trong trường hợp hình ảnh chưa được gắn thẻ địa lý</string>
   <string name="preference_theme">Chế độ ban đêm</string>

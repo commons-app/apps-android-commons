@@ -118,7 +118,7 @@
   <string name="media_upload_policy">Genom att skicka in denna bild intygar jag att detta är mitt eget verk, som inte innehåller upphovsrättsskyddat material eller selfies samt följer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-policys&lt;/a&gt;.</string>
   <string name="menu_download">Ladda ned</string>
   <string name="preference_license">Standardlicens</string>
-  <string name="use_previous">Använd föregående titel/beskrivning</string>
+  <string name="use_previous" fuzzy="true">Använd föregående titel/beskrivning</string>
   <string name="allow_gps">Hämta aktuell plats automatiskt</string>
   <string name="allow_gps_summary">Hämtar aktuell plats om bilden inte är geotaggad och geotaggar bilden med den. Varning: Detta kommer att avslöja din nuvarande position.</string>
   <string name="preference_theme">Nattläge</string>

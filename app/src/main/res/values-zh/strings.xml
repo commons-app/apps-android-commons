@@ -134,7 +134,7 @@
   <string name="media_upload_policy">通过提交该图片，我声明这是我自己的作品，其不包含受版权保护的材料或自拍像，并遵循&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;维基共享资源&lt;/a&gt;方针。</string>
   <string name="menu_download">下载</string>
   <string name="preference_license">默认许可协议</string>
-  <string name="use_previous">使用之前的标题/描述</string>
+  <string name="use_previous">使用之前的标题及描述</string>
   <string name="allow_gps">自动获取当前位置</string>
   <string name="allow_gps_summary">如果图片没有地理标记，以及地理标签图片的话，就取得当前位置。警告：这将暴露您的当前位置。</string>
   <string name="preference_theme">夜间模式</string>

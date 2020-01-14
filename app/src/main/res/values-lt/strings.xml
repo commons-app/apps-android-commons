@@ -104,7 +104,7 @@
   <string name="share_license_summary" fuzzy="true">Šio paveikslėlio licencija bus %1$s</string>
   <string name="menu_download">Parsisiųsti</string>
   <string name="preference_license">Numatytoji Licencija</string>
-  <string name="use_previous">Naudoti ankstesnį pavadinimą/aprašymą</string>
+  <string name="use_previous" fuzzy="true">Naudoti ankstesnį pavadinimą/aprašymą</string>
   <string name="allow_gps">Automatiškai gauti dabartinę vietą</string>
   <string name="allow_gps_summary" fuzzy="true">Gauti dabartinę vietove, kad būtų pasiūlytos kategorijos, jei paveikslėlis neturi geografinės žymės</string>
   <string name="preference_theme">Naktinis režimas</string>
