@@ -213,6 +213,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         addCheckBoxCallback();
         presenter.attachView(this);
         initRvNearbyList();
+        initThemePreferences();
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapBoxMap -> {
             this.mapBox=mapBoxMap;
@@ -236,6 +237,23 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             });
 
         });
+    }
+
+    /**
+     * Initialise background based on theme, this should be doe ideally via styles, that would need another refactor
+     */
+    private void initThemePreferences() {
+        if(isDarkTheme){
+            rvNearbyList.setBackgroundColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
+            checkBoxTriStates.setTextColor(getContext().getResources().getColor(android.R.color.white));
+            checkBoxTriStates.setTextColor(getContext().getResources().getColor(android.R.color.white));
+            nearbyFilterList.setBackgroundColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
+        }else{
+            rvNearbyList.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
+            checkBoxTriStates.setTextColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
+            nearbyFilterList.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
+            nearbyFilterList.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
+        }
     }
 
     private void initRvNearbyList() {
@@ -280,7 +298,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         mapView.onPause();
         compositeDisposable.clear();
         presenter.detachView();
-        registerUnregisterLocationListener(false);
+        registerUnregisterLocationListener(true);
         try {
             if (broadcastReceiver != null && getActivity()!=null) {
                 getContext().unregisterReceiver(broadcastReceiver);
@@ -373,6 +391,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             @Override
             public void filterByMarkerType(ArrayList<Label> selectedLabels, int i, boolean b, boolean b1) {
                 presenter.filterByMarkerType(selectedLabels,i,b,b1);
+            }
+
+            @Override
+            public boolean isDarkTheme() {
+                return isDarkTheme;
             }
         });
         nearbyFilterList.getLayoutParams().width = (int) LayoutUtils.getScreenWidth(getActivity(), 0.75);
@@ -848,7 +871,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onLocationChangedSlightly(fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location significantly changed");
         this.lastKnownLocation=latLng;
-        presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
