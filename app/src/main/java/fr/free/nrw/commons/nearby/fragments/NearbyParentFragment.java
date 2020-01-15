@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -250,6 +251,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void performMapReadyActions() {
         if (isVisible() && isVisibleToUser && isMapBoxReady) {
             checkPermissionsAndPerformAction(() -> {
+                this.lastKnownLocation=locationManager.getLastLocation();
                 presenter.onMapReady();
                 registerUnregisterLocationListener(false);
                 addOnCameraMoveListener();
@@ -276,6 +278,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        compositeDisposable.clear();
         presenter.detachView();
         registerUnregisterLocationListener(false);
         try {
@@ -1117,12 +1120,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Greys out all markers except current location marker
      */
     private void greyOutAllMarkers() {
+        if(currentLocationMarker==null){
+            return;
+        }
         VectorDrawableCompat vectorDrawable;
         vectorDrawable = VectorDrawableCompat.create(
                 getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
         Bitmap icon = UiUtils.getBitmap(vectorDrawable);
         for (Marker marker : mapBox.getMarkers()) {
-            if (currentLocationMarker.getTitle() != marker.getTitle()) {
+            if (!TextUtils.isEmpty(marker.getTitle()) && !TextUtils.isEmpty(currentLocationMarker.getTitle()) && marker.getTitle().equals(currentLocationMarker.getTitle())) {
                 marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
             }
         }
