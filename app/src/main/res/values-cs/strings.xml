@@ -129,7 +129,7 @@
   <string name="media_upload_policy">Odesláním tohoto souboru potvrzuji, že je mým vlastním dílem, neobsahuje autorskoprávně chráněný materiál a nejedná se o selfie a ani jinak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;pravidla a doporučení Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stáhnout</string>
   <string name="preference_license">Výchozí licence</string>
-  <string name="use_previous" fuzzy="true">Použít předchozí název a popis</string>
+  <string name="use_previous">Použít předchozí název a popis</string>
   <string name="allow_gps">Automaticky získat aktuální polohu</string>
   <string name="allow_gps_summary">Nabídnout kategorie na základě aktuální polohy (pokud není obrázek opatřen souřadnicemi). Varování: Tímto krokem poskytujete svou současnou polohu.</string>
   <string name="preference_theme">Noční režim</string>
