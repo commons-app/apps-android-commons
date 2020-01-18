@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.View;
-import android.view.ViewGroup;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -117,14 +116,13 @@ public class DialogUtil {
                                         final Runnable onNegativeBtnClick,
                                         View customView,
                                         boolean cancelable) {
-
         // If the custom view already has a parent, there is already a dialog showing with the view
         // This happens for on resume - return to avoid creating a second dialog - the first one
         // will still show
         if (customView != null && customView.getParent() != null) {
             return;
         }
-        
+
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title);
         builder.setMessage(message);
