@@ -20,6 +20,6 @@
         android:tint="@color/white"
         android:queryHint="@string/nearby_search_hint"
         android:searchIcon="@drawable/ic_search_white_24dp"
-        app:theme="@style/WhiteSearchBarTheme"></SearchView>
+        app:theme="@style/WhiteSearchBarTheme"/>
 
 </LinearLayout>
