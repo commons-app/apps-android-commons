@@ -307,8 +307,9 @@
   <string name="showcase_view_plus_fab">คุณสามารถอัปโหลดรูปภาพสำหรับสถานที่ใด ๆ ได้จากแกลเลอรีหรือกล้องของคุณ</string>
   <string name="no_images_found">ไม่พบรูปภาพ!</string>
   <string name="error_loading_images">เกิดข้อผิดพลาดระหว่างการโหลดภาะ</string>
-  <string name="image_uploaded_by">อัพโหลดโดย: %1$a</string>
+
   <string name="block_notification_title">ถูกบล็อก</string>
+  <string name="image_uploaded_by">อัพโหลดโดย: %1$s</string>
   <string name="block_notification">คุณกำลังถูกบล็อคไม่ให้แก้ไขคอมมอนส์</string>
   <string name="appwidget_img">รูปภาพประจำวัน</string>
   <string name="app_widget_heading">รูปภาพประจำวัน</string>
