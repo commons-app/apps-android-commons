@@ -3,7 +3,6 @@ package fr.free.nrw.commons.category;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 public class CategoryItem implements Parcelable {
     private final String name;
     private boolean selected;
@@ -42,19 +41,16 @@ public class CategoryItem implements Parcelable {
         this.selected = selected;
     }
 
-    
     @Override
     public int describeContents() {
         return 0;
     }
-
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(name);
         parcel.writeInt(selected ? 1 : 0);
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -71,13 +67,11 @@ public class CategoryItem implements Parcelable {
 
     }
 
-    
     @Override
     public int hashCode() {
         return name.hashCode();
     }
 
-    
     @Override
     public String toString() {
         return "CategoryItem: '" + name + '\'';
