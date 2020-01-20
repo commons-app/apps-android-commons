@@ -251,7 +251,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void initErrorView() {
         progressBar.setVisibility(GONE);
         imagesNotFoundView.setVisibility(VISIBLE);
-        imagesNotFoundView.setText(getString(R.string.images_not_found));
+        imagesNotFoundView.setText(getString(R.string.images_not_found,query));
     }
 
     /**
