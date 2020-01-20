@@ -114,7 +114,7 @@
   <string name="media_upload_policy">Ved at indsende dette billeder erklærer jeg at det er mit eget arbejde, som ikke indeholder materialer med ophavsret eller selvportrætter og generelt overholder &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-politikkerne&lt;/a&gt;.</string>
   <string name="menu_download">Hent</string>
   <string name="preference_license">Standardlicens</string>
-  <string name="use_previous" fuzzy="true">Brug forrige titel/beskrivelse</string>
+  <string name="use_previous">Brug forrige titel og beskrivelse</string>
   <string name="allow_gps">Hent automatisk nuværende placering</string>
   <string name="allow_gps_summary">Henter den nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket og geomærker billedet. Advarsel: Dette vil afsløre din nuværende placering.</string>
   <string name="preference_theme">Nat-tilstand</string>

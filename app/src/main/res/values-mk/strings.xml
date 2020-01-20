@@ -21,7 +21,7 @@
   <string name="login_credential">Најавете се на бета-сметката</string>
   <string name="login">Најава</string>
   <string name="forgot_password">Ја заборавивте јавката?</string>
-  <string name="signup">Регистрација</string>
+  <string name="signup">Зачленување</string>
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте…</string>
   <string name="login_success">Најавата е успешна!</string>
@@ -89,7 +89,7 @@
   <string name="categories_skip_explanation">Ставете им категории на сликите, за да можат корисниците полесно да ги најдат на Ризницата.\n\nЗа да ставите категорија, почнете со пишување на нејзиното име.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Нагодувања</string>
-  <string name="title_activity_signup">Регистрација</string>
+  <string name="title_activity_signup">Зачленување</string>
   <string name="title_activity_featured_images">Избрани слики</string>
   <string name="title_activity_category_details">Категорија</string>
   <string name="title_activity_review">Оценување</string>
@@ -113,7 +113,7 @@
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Стандардна лиценца</string>
-  <string name="use_previous" fuzzy="true">Користи претходен наслов/опис</string>
+  <string name="use_previous">Користи претходен наслов и опис</string>
   <string name="allow_gps">Автоматски давај тековна местоположба</string>
   <string name="allow_gps_summary">Става геоознака од тековната местоположба во слика (ако ја нема). Предупредување: ова ви го разоткрива наоѓалиштето.</string>
   <string name="preference_theme">Ноќен режим</string>

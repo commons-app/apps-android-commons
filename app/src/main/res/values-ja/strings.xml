@@ -122,7 +122,7 @@
   <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれていないと宣言します。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">既定のライセンス</string>
-  <string name="use_previous" fuzzy="true">前回のタイトルと記述を使用</string>
+  <string name="use_previous">前回のタイトルと記述を使用</string>
   <string name="allow_gps">現在の位置を自動的に取得</string>
   <string name="allow_gps_summary">Retrieves current location if image is not geotagged, \n画像にジオタグが付いていない場合、現在の位置を取得して画像に添付。ご注意: 自分の現在地が明示されます。</string>
   <string name="preference_theme">夜モード</string>
@@ -527,7 +527,7 @@
   <string name="exif_tag_name_lensModel">レンズモデル</string>
   <string name="exif_tag_name_serialNumbers">シリアル番号</string>
   <string name="exif_tag_name_software">ソフトウェア</string>
-  <string name="share_text" fuzzy="true">スマホからウィキペディア・コモンズに画像を投稿する\nコモンズアプリをダウンロード：%1$s</string>
+  <string name="share_text">スマホから直接、ウィキメディア・コモンズに画像を投稿する。\nコモンズアプリを今すぐダウンロード：%1$s</string>
   <string name="share_via">アプリの共有に使うのは…</string>
   <string name="image_info">画像情報</string>
   <string name="no_categories_found">カテゴリが見つかりません</string>
