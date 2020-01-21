@@ -1152,7 +1152,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
         Bitmap icon = UiUtils.getBitmap(vectorDrawable);
         for (Marker marker : mapBox.getMarkers()) {
-            if (!TextUtils.isEmpty(marker.getTitle()) && !TextUtils.isEmpty(currentLocationMarker.getTitle()) && marker.getTitle().equals(currentLocationMarker.getTitle())) {
+            if (!marker.equals(currentLocationMarker)) {
                 marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
             }
         }

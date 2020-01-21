@@ -24,7 +24,7 @@
 
 
         <!--  I have done this intentionally, the mapview because of some elevation or something,
-        sometimes hangs over the drawer layout and soemtimes draws its onPaused state over the contributions, this seems to be the probable fix  -->
+        sometimes hangs over the drawer layout and sometimes draws its onPaused state over the contributions, this seems to be the probable fix  -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -38,7 +38,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/transparent"></View>
+                android:background="@android:color/transparent" />
 
         </FrameLayout>
 
