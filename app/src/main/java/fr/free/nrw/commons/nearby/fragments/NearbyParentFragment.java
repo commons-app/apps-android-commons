@@ -1383,6 +1383,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         super.setUserVisibleHint(isVisibleToUser);
         this.isVisibleToUser=isVisibleToUser;
         if (isResumed() && isVisibleToUser) {
+            mapView.onStart();
             performMapReadyActions();
         } else {
             if (null != bottomSheetListBehavior) {
