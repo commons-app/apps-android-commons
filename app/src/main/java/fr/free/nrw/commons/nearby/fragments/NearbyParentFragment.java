@@ -283,7 +283,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         mapView.onResume();
         presenter.attachView(this);
         registerNetworkReceiver();
-        performMapReadyActions();
+        if (isResumed() && isVisibleToUser) {
+            startTheMap();
+        }
     }
 
     private void registerNetworkReceiver() {
@@ -1383,8 +1385,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         super.setUserVisibleHint(isVisibleToUser);
         this.isVisibleToUser=isVisibleToUser;
         if (isResumed() && isVisibleToUser) {
-            mapView.onStart();
-            performMapReadyActions();
+            startTheMap();
         } else {
             if (null != bottomSheetListBehavior) {
                 bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -1394,5 +1395,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         }
+    }
+
+    private void startTheMap() {
+        mapView.onStart();
+        performMapReadyActions();
     }
 }
