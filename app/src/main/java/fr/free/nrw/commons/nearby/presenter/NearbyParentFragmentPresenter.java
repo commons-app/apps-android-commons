@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.mapbox.mapboxsdk.annotations.Marker;
 
+import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.upload.UploadContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
@@ -40,13 +42,18 @@ public class NearbyParentFragmentPresenter
         WikidataEditListener.WikidataP18EditListener,
         LocationUpdateListener {
 
-    private NearbyParentFragmentContract.View nearbyParentFragmentView;
     private boolean isNearbyLocked;
     private LatLng curLatLng;
 
     private boolean placesLoadedOnce;
 
     BookmarkLocationsDao bookmarkLocationDao;
+
+    private static final NearbyParentFragmentContract.View DUMMY = (NearbyParentFragmentContract.View) Proxy.newProxyInstance(
+            NearbyParentFragmentContract.View.class.getClassLoader(),
+            new Class[]{NearbyParentFragmentContract.View.class}, (proxy, method, methodArgs) -> null);
+    private NearbyParentFragmentContract.View nearbyParentFragmentView = DUMMY;
+
 
     public NearbyParentFragmentPresenter(BookmarkLocationsDao bookmarkLocationDao){
         this.bookmarkLocationDao=bookmarkLocationDao;
@@ -59,7 +66,7 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void detachView(){
-        this.nearbyParentFragmentView=null;
+        this.nearbyParentFragmentView=DUMMY;
     }
 
     public void initializeMapOperations() {

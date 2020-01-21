@@ -22,11 +22,25 @@
             android:layout_width="160dp"
             android:layout_alignParentEnd="true"/>
 
-        <com.mapbox.mapboxsdk.maps.MapView
-            android:id="@+id/map_view"
+
+        <!--  I have done this intentionally, the mapview because of some elevation or something,
+        sometimes hangs over the drawer layout and soemtimes draws its onPaused state over the contributions, this seems to be the probable fix  -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/nearby_filter"/>
+            android:layout_below="@id/nearby_filter">
+
+            <com.mapbox.mapboxsdk.maps.MapView
+                android:id="@+id/map_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"></View>
+
+        </FrameLayout>
 
 
         <Button
