@@ -269,7 +269,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void performMapReadyActions() {
         if (isVisible() && isVisibleToUser && isMapBoxReady) {
             checkPermissionsAndPerformAction(() -> {
-                this.lastKnownLocation=locationManager.getLastLocation();
+                this.lastKnownLocation = locationManager.getLastLocation();
+                CameraPosition position = new CameraPosition.Builder()
+                        .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation)) // Sets the new camera position
+                        .zoom(ZOOM_LEVEL) // Same zoom level
+                        .build();
+                mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
                 presenter.onMapReady();
                 registerUnregisterLocationListener(false);
                 addOnCameraMoveListener();
@@ -651,7 +656,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (lastKnownLocation == null) {
             lastKnownLocation = currentLocation;
         }
-        if (curlatLng.equals(lastKnownLocation)) { // Means we are checking around current location
+        if (curlatLng.equals(getCameraTarget())) { // Means we are checking around current location
             populatePlacesForCurrentLocation(curlatLng, lastKnownLocation);
         } else {
             populatePlacesForAnotherLocation(curlatLng, lastKnownLocation);
@@ -866,6 +871,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onLocationChangedSignificantly(fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location significantly changed");
         this.lastKnownLocation=latLng;
+        NearbyController.currentLocation=lastKnownLocation;
         presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
@@ -873,12 +879,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onLocationChangedSlightly(fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location significantly changed");
         this.lastKnownLocation=latLng;
+        NearbyController.currentLocation=lastKnownLocation;
     }
 
     @Override
     public void onLocationChangedMedium(fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location changed medium");
         this.lastKnownLocation=latLng;
+        NearbyController.currentLocation=lastKnownLocation;
         //Even if location has only changed medium, if the last fetched nearbyPlacesInfo is Empty, lets anyways ask the presenter
         if(nearbyPlacesInfo==null || nearbyPlacesInfo.placeList.size()==0) {
             presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
