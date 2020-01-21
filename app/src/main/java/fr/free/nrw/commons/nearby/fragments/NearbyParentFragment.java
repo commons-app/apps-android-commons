@@ -270,11 +270,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (isVisible() && isVisibleToUser && isMapBoxReady) {
             checkPermissionsAndPerformAction(() -> {
                 this.lastKnownLocation = locationManager.getLastLocation();
-                CameraPosition position = new CameraPosition.Builder()
-                        .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation)) // Sets the new camera position
-                        .zoom(ZOOM_LEVEL) // Same zoom level
-                        .build();
-                mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+                if (lastKnownLocation != null) {
+                    CameraPosition position = new CameraPosition.Builder()
+                            .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation)) // Sets the new camera position
+                            .zoom(ZOOM_LEVEL) // Same zoom level
+                            .build();
+                    mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
+                }
                 presenter.onMapReady();
                 registerUnregisterLocationListener(false);
                 addOnCameraMoveListener();
@@ -870,6 +874,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onLocationChangedSignificantly(fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location significantly changed");
+        if (null == lastKnownLocation && isMapBoxReady && latLng != null) {//If the map has never ever shown the current location, lets do it know
+            setMapBoxPosition(latLng);
+        }
         this.lastKnownLocation=latLng;
         NearbyController.currentLocation=lastKnownLocation;
         presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
@@ -878,6 +885,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onLocationChangedSlightly(fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location significantly changed");
+        if (null == lastKnownLocation && isMapBoxReady && latLng != null) {//If the map has never ever shown the current location, lets do it know
+            setMapBoxPosition(latLng);
+        }
         this.lastKnownLocation=latLng;
         NearbyController.currentLocation=lastKnownLocation;
     }
@@ -885,12 +895,23 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onLocationChangedMedium(fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location changed medium");
+        if (null == lastKnownLocation && isMapBoxReady && latLng != null) {//If the map has never ever shown the current location, lets do it know
+            setMapBoxPosition(latLng);
+        }
         this.lastKnownLocation=latLng;
         NearbyController.currentLocation=lastKnownLocation;
         //Even if location has only changed medium, if the last fetched nearbyPlacesInfo is Empty, lets anyways ask the presenter
         if(nearbyPlacesInfo==null || nearbyPlacesInfo.placeList.size()==0) {
             presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
         }
+    }
+
+    void setMapBoxPosition(fr.free.nrw.commons.location.LatLng latLng){
+        CameraPosition position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(latLng)) // Sets the new camera position
+                .zoom(ZOOM_LEVEL) // Same zoom level
+                .build();
+        mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
     }
 
     public void backButtonClicked() {

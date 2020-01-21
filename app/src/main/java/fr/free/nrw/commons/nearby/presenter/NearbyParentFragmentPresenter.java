@@ -51,7 +51,24 @@ public class NearbyParentFragmentPresenter
 
     private static final NearbyParentFragmentContract.View DUMMY = (NearbyParentFragmentContract.View) Proxy.newProxyInstance(
             NearbyParentFragmentContract.View.class.getClassLoader(),
-            new Class[]{NearbyParentFragmentContract.View.class}, (proxy, method, methodArgs) -> null);
+            new Class[]{NearbyParentFragmentContract.View.class}, (proxy, method, args) -> {
+                if (method.getName().equals("onMyEvent")) {
+                    return null;
+                } else if (String.class == method.getReturnType()) {
+                    return "";
+                } else if (Integer.class == method.getReturnType()) {
+                    return Integer.valueOf(0);
+                } else if (int.class == method.getReturnType()) {
+                    return 0;
+                } else if (Boolean.class == method.getReturnType()) {
+                    return Boolean.FALSE;
+                } else if (boolean.class == method.getReturnType()) {
+                    return false;
+                } else {
+                    return null;
+                }
+            }
+    );
     private NearbyParentFragmentContract.View nearbyParentFragmentView = DUMMY;
 
 
