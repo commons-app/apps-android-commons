@@ -13,7 +13,7 @@ public class Title{
     }
 
     public void setTitleText(String titleText) {
-        this.titleText = titleText;
+        this.titleText = titleText.trim();
 
         if (!TextUtils.isEmpty(titleText)) {
             set = true;
