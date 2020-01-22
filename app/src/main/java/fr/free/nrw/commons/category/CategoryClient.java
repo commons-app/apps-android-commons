@@ -30,6 +30,7 @@ public class CategoryClient {
 
     /**
      * Searches for categories containing the specified string.
+     * filter passed as lower case to make search case-insensitive(taking only lower case for everything)
      *
      * @param filter    The string to be searched
      * @param itemLimit How many results are returned
@@ -37,7 +38,7 @@ public class CategoryClient {
      * @return
      */
     public Observable<String> searchCategories(String filter, int itemLimit, int offset) {
-        return responseToCategoryName(CategoryInterface.searchCategories(filter, itemLimit, offset));
+        return responseToCategoryName(CategoryInterface.searchCategories(filter.toLowerCase(), itemLimit, offset));
 
     }
 
@@ -55,14 +56,15 @@ public class CategoryClient {
 
     /**
      * Searches for categories starting with the specified string.
-     *
+     * prefix passed as lower case to make search case-insensitive
+     * 
      * @param prefix    The prefix to be searched
      * @param itemLimit How many results are returned
      * @param offset    Starts returning items from the nth result. If offset is 9, the response starts with the 9th item of the search result
      * @return
      */
     public Observable<String> searchCategoriesForPrefix(String prefix, int itemLimit, int offset) {
-        return responseToCategoryName(CategoryInterface.searchCategoriesForPrefix(prefix, itemLimit, offset));
+        return responseToCategoryName(CategoryInterface.searchCategoriesForPrefix(prefix.toLowerCase(), itemLimit, offset));
     }
 
     /**
