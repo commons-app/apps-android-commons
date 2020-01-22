@@ -68,7 +68,7 @@ class CategoryClientTest {
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
         Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
 
-        Mockito.`when`(categoryInterface!!.searchCategoriesForPrefix(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
+        Mockito.`when`(categoryInterface!!.searchCategories(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
                 .thenReturn(Observable.just(mockResponse))
 
         val actualCategoryName = categoryClient!!.searchCategories("tes", 10).blockingFirst()
@@ -128,7 +128,7 @@ class CategoryClientTest {
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
         Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
 
-        Mockito.`when`(categoryInterface!!.getParentCategoryList(ArgumentMatchers.anyString()))
+        Mockito.`when`(categoryInterface!!.searchCategoriesForPrefix(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
                 .thenReturn(Observable.just(mockResponse))
 
         val actualCategoryName = categoryClient!!.searchCategoriesForPrefix("tes", 10).blockingFirst()
