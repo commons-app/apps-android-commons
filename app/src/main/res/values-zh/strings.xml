@@ -539,7 +539,7 @@
   <string name="exif_tag_name_lensModel">镜面模型</string>
   <string name="exif_tag_name_serialNumbers">序列号</string>
   <string name="exif_tag_name_software">软件</string>
-  <string name="share_text" fuzzy="true">上传照片到手机上的Wikimedia Commons应用 下载Commons应用：%1</string>
+  <string name="share_text">直接在您手机上的维基共享资源应用中上传照片。立即下载共享资源应用：%1</string>
   <string name="share_via">分享到...</string>
   <string name="image_info">图像信息</string>
   <string name="no_categories_found">找不到分类</string>

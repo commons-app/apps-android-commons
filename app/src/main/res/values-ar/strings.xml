@@ -274,7 +274,7 @@
   <string name="nominating_file_for_deletion">جارٍ ترشيح %1$s للحذف.</string>
   <string name="nominating_for_deletion_status">جارٍ ترشيح الملف للحذف: %1$s</string>
   <string name="view_browser">عرض في المتصفح</string>
-  <string name="skip_login">تخطي</string>
+  <string name="skip_login">تجاوز</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
   <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
   <string name="skip_login_message">يجب عليك تسجيل الدخول لرفع الصور في المستقبل.</string>
