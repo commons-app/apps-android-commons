@@ -74,10 +74,14 @@ class CategoryClientTest {
         val actualCategoryName = categoryClient!!.searchCategories("tes", 10).blockingFirst()
         val actualCategoryNameCaps = categoryClient!!.searchCategories("Tes", 10).blockingFirst()
         assertEquals(actualCategoryName, actualCategoryNameCaps)
+        assertEquals("Test", actualCategoryName)
+        assertEquals("Test", actualCategoryNameCaps)
 
         val actualCategoryNameWithOffset = categoryClient!!.searchCategories("tes", 10, 10).blockingFirst()
         val actualCategoryNameWithOffsetCaps = categoryClient!!.searchCategories("Tes", 10, 10).blockingFirst()
         assertEquals(actualCategoryNameWithOffset, actualCategoryNameWithOffsetCaps)
+        assertEquals("Test", actualCategoryNameWithOffset)
+        assertEquals("Test", actualCategoryNameWithOffsetCaps)
     }
 
     @Test
@@ -130,10 +134,14 @@ class CategoryClientTest {
         val actualCategoryName = categoryClient!!.searchCategoriesForPrefix("tes", 10).blockingFirst()
         val actualCategoryNameCaps = categoryClient!!.searchCategoriesForPrefix("Tes", 10).blockingFirst()
         assertEquals(actualCategoryName, actualCategoryNameCaps)
+        assertEquals("Test", actualCategoryName)
+        assertEquals("Test", actualCategoryNameCaps)
 
-        val actualCategoryName = categoryClient!!.searchCategoriesForPrefix("tes", 10, 10).blockingFirst()
-        val actualCategoryNameCaps = categoryClient!!.searchCategoriesForPrefix("Tes", 10, 10).blockingFirst()
-        assertEquals(actualCategoryName, actualCategoryNameCaps)
+        val actualCategoryNameWithOffset = categoryClient!!.searchCategoriesForPrefix("tes", 10, 10).blockingFirst()
+        val actualCategoryNameWithOffsetCaps = categoryClient!!.searchCategoriesForPrefix("Tes", 10, 10).blockingFirst()
+        assertEquals(actualCategoryNameWithOffset, actualCategoryNameWithOffsetCaps)
+        assertEquals("Test", actualCategoryNameWithOffset)
+        assertEquals("Test", actualCategoryNameWithOffsetCaps)
     }
 
     @Test
