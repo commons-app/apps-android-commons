@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v2.12.2
+- Fixed crash on startup (hopefully, could not reproduce it)
+
 ## v2.12.1
 - Fixed issue with Nearby loading in wrong location
 - Various crash fixes
