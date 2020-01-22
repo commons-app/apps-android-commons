@@ -7,11 +7,12 @@ package fr.free.nrw.commons.ui.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
+
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.appcompat.widget.AppCompatTextView;
-import android.util.AttributeSet;
+import androidx.core.view.ViewCompat;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.UiUtils;

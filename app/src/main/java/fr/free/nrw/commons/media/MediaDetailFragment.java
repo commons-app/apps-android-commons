@@ -1,12 +1,8 @@
 package fr.free.nrw.commons.media;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,13 +20,25 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
+
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
+import org.wikipedia.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -48,14 +56,10 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import javax.inject.Inject;
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.util.DateUtil;
-import org.wikipedia.util.StringUtil;
 import timber.log.Timber;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 

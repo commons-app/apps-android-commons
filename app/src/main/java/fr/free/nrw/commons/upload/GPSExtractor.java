@@ -2,11 +2,11 @@ package fr.free.nrw.commons.upload;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.exifinterface.media.ExifInterface;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import androidx.exifinterface.media.ExifInterface;
 import timber.log.Timber;
 
 /**

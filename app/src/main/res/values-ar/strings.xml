@@ -123,7 +123,7 @@
   <string name="media_upload_policy">بتقديم هذه الصورة، أعلن أن هذا عملي الخاص، وأنه لا يحتوي على مواد محفوظة الحقوق أو صور شخصية، وغير ذلك يلتزم &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;بسياسات ويكيميديا ​​كومنز&lt;/a&gt;.</string>
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة الافتراضية</string>
-  <string name="use_previous">استخدم العنوان/الوصف السابق</string>
+  <string name="use_previous">استخدم العنوان والوصف السابق</string>
   <string name="allow_gps">الحصول تلقائيا على الموقع الحالي</string>
   <string name="allow_gps_summary">يسترد الموقع الحالي إذا لم يتم وسم الصورة جغرافيا، وكان هناك وسم جغرافي عليها، تحذير: سيكشف هذا عن موقعك الحالي.</string>
   <string name="preference_theme">الوضع الليلي</string>
@@ -274,7 +274,7 @@
   <string name="nominating_file_for_deletion">جارٍ ترشيح %1$s للحذف.</string>
   <string name="nominating_for_deletion_status">جارٍ ترشيح الملف للحذف: %1$s</string>
   <string name="view_browser">عرض في المتصفح</string>
-  <string name="skip_login">تخطي</string>
+  <string name="skip_login">تجاوز</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
   <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
   <string name="skip_login_message">يجب عليك تسجيل الدخول لرفع الصور في المستقبل.</string>
@@ -529,7 +529,7 @@
   <string name="exif_tag_name_lensModel">طراز العدسة</string>
   <string name="exif_tag_name_serialNumbers">الأرقام التسلسلية</string>
   <string name="exif_tag_name_software">برمجية</string>
-  <string name="share_text">ارفع الصور لويكيميديا ​​كومنز على هاتفك قم بتنزيل تطبيق كومنز: %1$s</string>
+  <string name="share_text">ارفع الصور لويكيميديا ​​كومنز مباشرة من هاتفك. قم بتنزيل تطبيق كومنز الآن: %1$s</string>
   <string name="share_via">مشاركة التطبيق عبر...</string>
   <string name="image_info">معلومات الصورة</string>
   <string name="no_categories_found">لم يتم العثور على تصنيفات</string>

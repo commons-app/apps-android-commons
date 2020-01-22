@@ -13,7 +13,7 @@
         <item name="icon">@color/primaryTextColor</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
         <item name="bookmarkButtonColor">@color/button_blue_dark</item>
         <item name="rowButtonColor">@color/button_blue_dark</item>

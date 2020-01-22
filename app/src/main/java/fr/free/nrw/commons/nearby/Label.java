@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 import android.os.Parcel;
+
 import androidx.annotation.DrawableRes;
 
 import java.util.HashMap;

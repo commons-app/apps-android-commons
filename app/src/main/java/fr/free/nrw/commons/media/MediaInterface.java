@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.media;
 
-import org.jetbrains.annotations.NotNull;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
 import java.util.Map;

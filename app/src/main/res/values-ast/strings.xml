@@ -113,7 +113,7 @@
   <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Llicencia predeterminada</string>
-  <string name="use_previous">Usar un títulu/descripción anterior</string>
+  <string name="use_previous" fuzzy="true">Usar un títulu/descripción anterior</string>
   <string name="allow_gps">Llograr automáticamente l\'allugamientu actual</string>
   <string name="allow_gps_summary">Recupera la posición actual si la imaxe nun tien etiquetes xeográfiques, y marca la imaxe con ella. Atención: Esto revelará\'l to allugamientu actual.</string>
   <string name="preference_theme">Mou nocherniegu</string>
@@ -519,7 +519,7 @@
   <string name="exif_tag_name_lensModel">Modelu de la lente</string>
   <string name="exif_tag_name_serialNumbers">Númberos de serie</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="share_text">Xubi semeyes a Wikimedia Commons nel to móvil, descarga l\'aplicación de Commons: %1$s</string>
+  <string name="share_text" fuzzy="true">Xubi semeyes a Wikimedia Commons nel to móvil, descarga l\'aplicación de Commons: %1$s</string>
   <string name="share_via">Compartir l\'aplicación per...</string>
   <string name="image_info">Información de la imaxe</string>
   <string name="no_categories_found">Nun s\'alcontró nenguna categoría</string>

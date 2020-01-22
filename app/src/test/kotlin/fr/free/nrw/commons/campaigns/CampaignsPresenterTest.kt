@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.campaigns
 
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler

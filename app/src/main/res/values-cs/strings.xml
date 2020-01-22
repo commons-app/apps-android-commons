@@ -26,6 +26,7 @@
   <string name="preference_category_appearance">Vzhled</string>
   <string name="preference_category_general">Obecné</string>
   <string name="preference_category_feedback">Zpětná vazba</string>
+  <string name="preference_category_privacy">Soukromí</string>
   <string name="preference_category_location">Lokace</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -107,6 +108,7 @@
   <string name="title_activity_signup">Zaregistrovat se</string>
   <string name="title_activity_featured_images">Nejlepší obrázky</string>
   <string name="title_activity_category_details">Kategorie</string>
+  <string name="title_activity_review">Kontrola</string>
   <string name="menu_about">O aplikaci</string>
   <string name="about_license">Aplikace Wikimedia Commons je open source software vytvářený a spravovaný členy komunity Wikimedia. Nadace Wikimedia se neúčastní tvorby, vývoje či správy aplikace.</string>
   <string name="about_improve">Otevřete nové &lt;a href=\"%1$s\"&gt;hlášení na GitHubu&lt;/a&gt; pro nahlášení chyb a návrhů.</string>
@@ -177,11 +179,13 @@
   <string name="detail_panel_cats_loading">Načítá se…</string>
   <string name="detail_panel_cats_none">Nevybrány</string>
   <string name="detail_description_empty">Bez popisu</string>
+  <string name="detail_discussion_empty">Žádná diskuse</string>
   <string name="detail_license_empty">Neznámá licence</string>
   <string name="menu_refresh">Obnovit</string>
   <string name="storage_permission_title">Požadavek na oprávnění k úložišti</string>
   <string name="read_storage_permission_rationale">Požadované oprávnění: Čtení externího úložiště. Bez něj nemůže aplikace číst vaši galerii.</string>
   <string name="write_storage_permission_rationale">Požadované oprávnění: Zapisování do externího úložiště. Bez něj nemůže aplikace používat vaši kameru/galerii.</string>
+  <string name="location_permission_title">Požadavek na přístup k poloze</string>
   <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Místa v okolí</string>
@@ -192,6 +196,7 @@
   <string name="no">Ne</string>
   <string name="media_detail_title">Název</string>
   <string name="media_detail_description">Popis</string>
+  <string name="media_detail_discussion">Diskuse</string>
   <string name="media_detail_author">Autor</string>
   <string name="media_detail_uploaded_date">Datum nahrání souboru</string>
   <string name="media_detail_license">Licence</string>
@@ -242,6 +247,7 @@
   <string name="navigation_item_info">Průvodce</string>
   <string name="navigation_item_notification">Upozornění</string>
   <string name="navigation_item_featured_images">Nejlepší</string>
+  <string name="navigation_item_review">Zkontrolovat</string>
   <string name="nearby_needs_permissions">Místa v okolí nebude možné zobrazit, neuvedete-li svojí polohu.</string>
   <string name="no_description_found">nebyl nalezen žádný popisek</string>
   <string name="nearby_info_menu_commons_article">Stránka souboru na Commons</string>
@@ -259,6 +265,7 @@
   <string name="upload_problem_different_geolocation">Tento obrázek byl pořízen na jiném místě.</string>
   <string name="upload_problem_fbmd">Prosíme, nahrávejte pouze obrázky, které jste sami pořídili. Nenahrávejte obrázky, které jste našli na něčím Facebookovém profilu.</string>
   <string name="upload_problem_do_you_continue">Pořád chcete tento obrázek nahrát?</string>
+  <string name="internet_downloaded">Prosíme, nahrávejte pouze obrázky, které jste sami vytvořili. Nenahrávejte obrázky, které jste našli na internetu.</string>
   <string name="give_permission">Dát povolení</string>
   <string name="use_external_storage">Použít externí úložiště</string>
   <string name="use_external_storage_summary">Uložit obrázky pořízené fotoaparátem, jenž je součástí této aplikace</string>
@@ -270,6 +277,8 @@
   <string name="nominate_deletion">Navrhnout na smazání</string>
   <string name="nominated_for_deletion">Tento obrázek byl nominován na smazání.</string>
   <string name="nominated_see_more"/>
+  <string name="nominating_file_for_deletion">Nominace %1$s na smazání.</string>
+  <string name="nominating_for_deletion_status">Nominace soubor na smazání: %1$s</string>
   <string name="view_browser">Zobrazit v prohlížeči</string>
   <string name="skip_login">Přeskočit</string>
   <string name="navigation_item_login">Přihlásit se</string>
@@ -281,23 +290,25 @@
   <string name="nearby_location_has_not_changed">Vaše umístění se nezměnilo.</string>
   <string name="nearby_location_not_available">Umístění není dostupné.</string>
   <string name="location_permission_rationale_nearby">Vyžadováno povolení k zobrazení seznamu míst v okolí</string>
-  <string name="get_directions" fuzzy="true">NAVIGOVAT</string>
-  <string name="read_article" fuzzy="true">PŘEČÍST ČLÁNEK</string>
+  <string name="get_directions">Najít trasu</string>
+  <string name="read_article">Přečíst článek</string>
   <string name="notifications_welcome">Vítejte na Wikimedia Commons, %1$s! Jsme rádi, že jste zde.</string>
   <string name="notifications_talk_page_message">%2$s vám napsal na vaši diskusní stránku</string>
   <string name="notifications_thank_you_edit">Děkujeme za vaši editaci</string>
   <string name="notifications_mention">%1$s vás zmínil na %2$s.</string>
   <string name="toggle_view_button">Přepnout pohled</string>
-  <string name="nearby_directions" fuzzy="true">POKYNY</string>
-  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
-  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIE</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
+  <string name="nearby_directions">Trasa</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedie</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Ohodnoťte nás&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;Často kladené otázky&lt;/u&gt;</string>
   <string name="welcome_skip_button">Přeskočit úvod</string>
   <string name="no_internet">Internet je nedostupný</string>
   <string name="internet_established">Internet je dostupný</string>
   <string name="error_notifications">Při načítání upozornění došlo k chybě</string>
+  <string name="error_review">Nastala chyba při načítání obrázku ke kontrole. Prosíme, zkuste to znovu.</string>
+  <string name="error_review_categories">Nastala chyba při načítání kategorií obrázků ke kontrole. Prosíme, zkuste to znovu.</string>
   <string name="no_notifications">Nebyla nalezena žádné oznámení</string>
   <string name="about_translate">&lt;u&gt;Přeložit&lt;/u&gt;</string>
   <string name="about_translate_title">Jazyky</string>
@@ -312,6 +323,7 @@
   <string name="no_images_found">Nebyly nalezeny žádné obrázky!</string>
   <string name="error_loading_images">Při načítání obrázků došlo k chybě.</string>
   <string name="image_uploaded_by">Nahrál/a: %1$s</string>
+  <string name="block_notification_title">Zablokováno</string>
   <string name="block_notification">Máte zablokovanou možnost editace Wikimedia Commons.</string>
   <string name="appwidget_img">Obrázek dne</string>
   <string name="app_widget_heading">Obrázek dne</string>
@@ -323,8 +335,10 @@
   <string name="provider_searches">Nedávno hledané dotazy</string>
   <string name="error_loading_categories">Chyba při načítání kategorií.</string>
   <string name="error_loading_subcategories">Chyba při načítání podkategorií.</string>
-  <string name="search_tab_title_media" fuzzy="true">MÉDIA</string>
-  <string name="search_tab_title_categories" fuzzy="true">KATEGORIE</string>
+  <string name="search_tab_title_media">Mediální soubory</string>
+  <string name="search_tab_title_categories">Kategorie</string>
+  <string name="explore_tab_title_featured">Nejlepší</string>
+  <string name="explore_tab_title_mobile">Nahrané z mobilu</string>
   <string name="successful_wikidata_edit">Obrázek byl přidán do položky %1$s na Wikidatech!</string>
   <string name="wikidata_edit_failure">Nepodařilo se aktualizovat příslušnou položku na Wikidatech!</string>
   <string name="menu_set_wallpaper">Nastavit jako pozadí</string>
@@ -358,13 +372,13 @@
   <string name="delete_search_dialog">Chcete odstranit toto hledání?</string>
   <string name="search_history_deleted">Historie hledání byla odstraněna</string>
   <string name="nominate_delete">Navrhnout na smazání</string>
-  <string name="delete" fuzzy="true">SMAZAT</string>
+  <string name="delete">Smazat</string>
   <string name="Achievements">Dosažené úspěchy</string>
-  <string name="statistics" fuzzy="true">STATISTIKA</string>
+  <string name="statistics">Statistiky</string>
   <string name="statistics_thanks">Obdržená poděkování</string>
   <string name="statistics_featured">Nejlepší obrázky</string>
   <string name="statistics_wikidata_edits">Obrázky přes „Místa v okolí“</string>
-  <string name="level" fuzzy="true">ÚROVEŇ</string>
+  <string name="level">Úroveň</string>
   <string name="images_uploaded">Nahrané obrázky</string>
   <string name="image_reverts">Nerevertované obrázky</string>
   <string name="images_used_by_wiki">Použitých obrázků</string>
@@ -445,9 +459,49 @@
   <string name="this_function_needs_network_connection">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
   <string name="bad_token_error_proposed_solution">Nahrávání se nezdařilo kvůli problémům s editačním tokenem. Zkuste se prosím odhlásit a zkuste to znovu.</string>
   <string name="error_processing_image">Během zpracování obrázku došlo k chybě. Prosím zkuste to znovu!</string>
+  <string name="getting_edit_token">Probíhá získávání tokenu pro editaci</string>
+  <string name="check_category_adding_template">Probíhá přidávání šablony na zkontrolování kategorie</string>
+  <string name="check_category_notification_title">Probíhá žádání o kontrolu kategorie souboru %1$s</string>
+  <string name="check_category_edit_summary">Probíhá žádání o kontrolu kategorie</string>
+  <string name="check_category_success_title">Požadavek na kontrolu kategorie odeslán</string>
+  <string name="check_category_failure_title">Požadavek na kontrolu kategorie se neodeslal</string>
+  <string name="check_category_success_message">Požadavek na kontrolu kategorie %1$s odeslán</string>
+  <string name="check_category_failure_message">Nepodařilo se vyžádat kontrolu kategorie %1$s</string>
+  <string name="check_category_toast">Probíhá žádání o kontrolu kategorie souboru %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Probíhá přidávání požadavku ke smazání na stránku souboru</string>
+  <string name="nominate_for_deletion_done">Hotovo</string>
+  <string name="nominate_for_deletion_notify_user">Probíhá upozorňování uživatele na diskusní stránce</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Probíhá přidávání souboru do seznamu žádostí o smazání</string>
+  <string name="nominate_for_deletion_create_deletion_request">Probíhá vytváření podstránky pro žádost o smazání</string>
+  <string name="notsure">Nejsem si jist/á</string>
+  <string name="send_thank_success_title">Poděkování bylo úspěšně odesláno</string>
+  <string name="send_thank_success_message">Úspěšně jste poděkovali uživateli %1$s</string>
+  <string name="send_thank_failure_message">Poděkování uživateli %1$s se nepodařilo odeslat</string>
+  <string name="send_thank_failure_title">Poděkování se nepodařilo odeslat</string>
+  <string name="send_thank_send">Probíhá odesílání poděkování</string>
+  <string name="send_thank_notification_title">Probíhá odesílání poděkování</string>
+  <string name="send_thank_toast">Probíhá odesílání poděkování uživateli %1$s</string>
+  <string name="review_copyright">Je to v souladu s pravidly autorskými práv?</string>
+  <string name="review_category">Je to správně kategorizováno?</string>
+  <string name="review_spam">Je to v pořádku?</string>
+  <string name="review_thanks">Chtěli byste poděkovat přispěvateli?</string>
+  <string name="review_spam_explanation">Pokud tento soubor není vůbec užitečný, stiskněte NE pro nominaci souboru na smazání.</string>
+  <string name="review_copyright_explanation">Loga, snímky obrazovky a filmové plakáty obvykle porušují autorská práva.\nKlikněte NE pro nominaci tohoto souboru na smazání</string>
+  <string name="review_thanks_explanation">Uživatel %1$s potěší vaše ocenění</string>
+  <string name="review_no_category">Toto není kategorizováno!</string>
+  <string name="review_category_explanation">Tento obrázek patří do %1$s kategórií.</string>
+  <string name="review_spam_report_question">Není to v pořádku, protože</string>
+  <string name="review_c_violation_report_question">Porušuje to autorská prává, protože</string>
+  <string name="review_category_yes_button_text">Ne, špatně kategorizováno</string>
   <string name="review_category_no_button_text">Vypadá to dobře</string>
+  <string name="review_spam_yes_button_text">Ne, není to v pořádku</string>
+  <string name="review_spam_no_button_text">Vypadá to v pořádku</string>
+  <string name="review_copyright_yes_button_text">Ne, porušení autorských práv</string>
+  <string name="review_copyright_no_button_text">Vypadá to v pořádku</string>
   <string name="review_thanks_yes_button_text">Ano, proč ne</string>
   <string name="review_thanks_no_button_text">Další soubor</string>
+  <string name="skip_image_explanation">Kliknutím na toto tlačítko se zobrazí další nedávno nahraný obrázek z Wikimedia Commons</string>
+  <string name="review_image_explanation">Můžete kontrolovat obrázky a zlepšit kvalitu Wikimedia Commons.\n\nTři aspekty, které se posuzují:\n  - Je tento obrázek v pořádku?\n  - Dodržuje tento obrázok pravidla autorských práv?\n  - Je tento obrázek správně kategorizován?\n\nPokud je vše v pořádku, autorovi můžete poděkovat.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Probíhá příjem sdíleného obsahu. Zpracování obrázku může chvíli trvat v závislosti na velikosti obrázku a vašem zařízení</item>
     <item quantity="other">Probíhá příjem sdíleného obsahu. Zpracování obrázků může chvíli trvat v závislosti na velikosti obrázků a vašem zařízení</item>
@@ -463,4 +517,58 @@
   <string name="error_occurred_in_picking_images">Nastala chyba při vybírání obrázků</string>
   <string name="image_chooser_title">Vyberte obrázky, které chcete nahrát</string>
   <string name="please_wait">Čekejte prosím…</string>
+  <string name="images_featured_explanation">Nejlepší obrázky jsou soubory od vysoce zkušených fotografů a ilustrátorů, které vybrala komunita Wikimedia Commons jako jedny z nejkvalitnějších.</string>
+  <string name="images_via_nearby_explanation">Obrázky nahrané přes Poblíž jsou obrázky, které jsou nahrané díky objevování míst na mapě.</string>
+  <string name="thanks_received_explanation">Tato funkce umožňuje uživatelům poslat poděkování za užitečné editace – použitím odkazu poděkovat v historii stránky anebo na stránce rozdílu mezi revizemi.</string>
+  <string name="previous_image_title_description">Kopírovat předchozí název a popis</string>
+  <string name="previous_button_tooltip_message">Kliknutím znovu použijete název a popis, který jste zadali v předcházejícím obrázku a upravíte jej tak, aby vyhovoval aktuálnímu obrázku</string>
+  <string name="welcome_do_upload_content_description">Příklady dobrých obrázků k nahrání na Commons</string>
+  <string name="welcome_dont_upload_content_description">Příklady obrázků, které byste neměli nahrávat</string>
+  <string name="skip_image">Přeskočit obrázek</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Stahování se nepodařilo! Nemůžeme stáhnout obrázek bez povolení k přístupu k úložišti.</string>
+  <string name="manage_exif_tags">Spravovat data EXIF</string>
+  <string name="manage_exif_tags_summary">Vybrat EXIF data, která se mají ponechat</string>
+  <string name="exif_tag_name_author">Autor</string>
+  <string name="exif_tag_name_copyright">Autorská práva</string>
+  <string name="exif_tag_name_location">Místo</string>
+  <string name="exif_tag_name_cameraModel">Model fotoaparátu</string>
+  <string name="exif_tag_name_lensModel">Model objektivu</string>
+  <string name="exif_tag_name_serialNumbers">Sériová čísla</string>
+  <string name="exif_tag_name_software">Software</string>
+  <string name="share_text">Nahrávejte fotky na Wikimedia Commons přímo s vašeho mobilu. Stáhněte si aplikaci: %1$s</string>
+  <string name="share_via">Sdílet aplikaci pomocí…</string>
+  <string name="image_info">Informace o obrázku</string>
+  <string name="no_categories_found">Nebyly nalezeny žádné kategorie</string>
+  <string name="upload_cancelled">Nahrání zrušeno</string>
+  <string name="previous_image_title_description_not_found">Neexistují žádné údaje k titulku a popisu předcházejícího obrázku</string>
+  <string name="dialog_box_text_nomination">Proč by měl být soubor %1$s smazán?</string>
+  <string name="review_is_uploaded_by">Soubor %1$s nahrál/a %2$s</string>
+  <string name="default_description_language">Předvolený jazyk popisů</string>
+  <string name="delete_helper_make_deletion_toast">Pokus o nominaci souboru %1$s na smazání</string>
+  <string name="delete_helper_show_deletion_title">Nominace na smazání</string>
+  <string name="delete_helper_show_deletion_title_success">Úspěch</string>
+  <string name="delete_helper_show_deletion_message_if">Soubor %1$s byl nominován na smazání.</string>
+  <string name="delete_helper_show_deletion_title_failed">Chyba</string>
+  <string name="delete_helper_show_deletion_message_else">Nepodařilo se požádat o smazání.</string>
+  <string name="delete_helper_ask_spam_selfie">Selfie</string>
+  <string name="delete_helper_ask_spam_blurry">Rozmazané</string>
+  <string name="delete_helper_ask_spam_nonsense">Nesmysl</string>
+  <string name="delete_helper_ask_spam_other">Jiné</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Tisková fotka</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Náhodná fotka z internetu</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Jiné</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Pretože to je</string>
+  <string name="share_image_via">Sdílet obrázek pomocí</string>
+  <string name="no_achievements_yet">Zatím nemáte žádné příspěvky</string>
+  <string name="account_created">Účet byl založen!</string>
+  <string name="text_copy">Text byl zkopírován do schránky.</string>
+  <string name="notification_mark_read">Oznámení označené jako přečtené</string>
+  <string name="some_error">Došlo k chybě!</string>
+  <string name="place_state">Stav místa:</string>
+  <string name="place_state_exists">Existuje</string>
+  <string name="place_state_needs_photo">Potřebuje fotku</string>
+  <string name="place_type">Typ místa:</string>
+  <string name="nearby_search_hint">Most, muzeum, hotel atd.</string>
+  <string name="you_must_reset_your_passsword">Při přihlášení nastala chyba, musíte si resetovat vaše heslo!</string>
 </resources>

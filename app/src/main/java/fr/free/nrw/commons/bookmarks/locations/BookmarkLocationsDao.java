@@ -4,9 +4,10 @@ import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.RemoteException;
+
 import androidx.annotation.NonNull;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -264,7 +265,13 @@ public class BookmarkLocationsDao {
             }
             if (from == 10 && to == 11) {
                 from++;
-                db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_pic STRING;");
+                //This is safe, and can be called clean, as we/I do not remember the appropriate version for this
+                //We are anyways switching to room, these things won't be nescessary then
+                try {
+                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_pic STRING;");
+                }catch (SQLiteException exception){
+                    Timber.e(exception);//
+                }
                 return;
             }
         }

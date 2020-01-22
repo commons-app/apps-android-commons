@@ -2,14 +2,12 @@ package fr.free.nrw.commons;
 
 import android.net.Uri;
 import android.text.Html;
-import androidx.annotation.Nullable;
-import androidx.viewpager.widget.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.viewpager.widget.PagerAdapter;
-import org.wikipedia.util.StringUtil;
 
 public class WelcomePagerAdapter extends PagerAdapter {
     private static final int[] PAGE_LAYOUTS = new int[]{

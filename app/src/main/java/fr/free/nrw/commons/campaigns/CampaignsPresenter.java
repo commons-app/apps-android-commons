@@ -1,13 +1,6 @@
 package fr.free.nrw.commons.campaigns;
 
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
-
 import android.annotation.SuppressLint;
-
-import io.reactivex.Scheduler;
-import javax.inject.Named;
-import org.wikipedia.util.DateUtil;
 
 import java.text.ParseException;
 import java.util.Collections;
@@ -15,18 +8,20 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.MvpView;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 /**
  * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on

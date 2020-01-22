@@ -27,6 +27,6 @@ public class NotificationController {
     }
 
     Observable<Boolean> markAsRead(Notification notification) {
-        return notificationClient.markNotificationAsRead(notification.notificationId);
+        return notificationClient.markNotificationAsRead(notification.getNotificationId());
     }
 }

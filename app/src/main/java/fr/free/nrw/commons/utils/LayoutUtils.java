@@ -3,7 +3,6 @@ package fr.free.nrw.commons.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -26,27 +25,6 @@ public class LayoutUtils {
                 view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
                 layoutParams.height = (int) (view.getWidth() * rate);
-                view.setLayoutParams(layoutParams);
-            }
-        });
-    }
-
-    /**
-     * Can be used for keeping aspect radios suggested by material guidelines. See:
-     * https://material.io/design/layout/spacing-methods.html#containers-aspect-ratios
-     * In some cases we don't know exact height, for such cases this method measures
-     * height and sets width by multiplying the width with height.
-     * @param rate Aspect ratios, ie 1 for 1:1. (height * rate = width)
-     * @param view view to change width
-     */
-    public static void setLayoutWidthAllignedToHeight(double rate, View view) {
-        ViewTreeObserver vto = view.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-                layoutParams.width = (int) (view.getHeight() * rate);
                 view.setLayoutParams(layoutParams);
             }
         });

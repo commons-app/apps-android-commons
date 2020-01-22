@@ -11,7 +11,6 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;

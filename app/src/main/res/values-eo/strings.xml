@@ -116,7 +116,7 @@
   <string name="media_upload_policy">Per submetado de ĉi tiu bildo, mi certigas ke ĝi estas mia propra verko, ke ĝi ne enhavas ion protektatan de aŭtorrajtoj, ke ĝi ne estas memfoto, kaj ke ĝi alimaniere observas la &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/eo\"&gt;regularojn de Vikipedia Komunejo&lt;/a&gt;.</string>
   <string name="menu_download">Elŝuti</string>
   <string name="preference_license">Defaŭlta permesilo</string>
-  <string name="use_previous">Uzi la antaŭan titolon/priskribon</string>
+  <string name="use_previous" fuzzy="true">Uzi la antaŭan titolon/priskribon</string>
   <string name="allow_gps">Aŭtomate akiri la nunan pozicion</string>
   <string name="allow_gps_summary">Akiri aktualan lokon se geografia etikedo mankas sur bildo, kaj aldoni tiun etikedon. Averto: tio rivelos vian aktualan lokon.</string>
   <string name="preference_theme">Nokta reĝimo</string>
@@ -521,7 +521,7 @@
   <string name="exif_tag_name_lensModel">Speco de Lenso</string>
   <string name="exif_tag_name_serialNumbers">Numero de Fotilo</string>
   <string name="exif_tag_name_software">Programaro</string>
-  <string name="share_text">Alŝutu fotojn al Vikimedia Komunejo telefone. Elŝutu la Komunejo-aplikaĵon: %1$s</string>
+  <string name="share_text" fuzzy="true">Alŝutu fotojn al Vikimedia Komunejo telefone. Elŝutu la Komunejo-aplikaĵon: %1$s</string>
   <string name="share_via">Diskonigi aplikaĵon per...</string>
   <string name="image_info">Informo pri Bildo</string>
   <string name="no_categories_found">Neniu Kategorio troviĝis</string>

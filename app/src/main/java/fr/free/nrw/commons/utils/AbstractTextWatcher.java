@@ -1,8 +1,9 @@
 package fr.free.nrw.commons.utils;
 
-import androidx.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
+
+import androidx.annotation.NonNull;
 
 public class AbstractTextWatcher implements TextWatcher {
     private final TextChange textChange;

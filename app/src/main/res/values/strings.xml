@@ -110,7 +110,7 @@
   <string name="media_upload_policy">By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Default License</string>
-  <string name="use_previous">Use previous title/description</string>
+  <string name="use_previous">Use previous title and description</string>
   <string name="allow_gps">Automatically get current location</string>
   <string name="allow_gps_summary">Retrieves current location if image is not geotagged, and geotags image with it. Warning: This will reveal your current location.</string>
   <string name="preference_theme">Night mode</string>
@@ -244,7 +244,7 @@
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 
-  <string name="upload_problem_exist">Potential problems with this image :</string>
+  <string name="upload_problem_exist">Potential problems with this image:</string>
   <string name="upload_problem_image_dark">Image is too dark.</string>
   <string name="upload_problem_image_blurry">Image is blurry.</string>
   <string name="upload_problem_image_duplicate">Image is already on Commons.</string>
@@ -552,7 +552,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="exif_tag_name_serialNumbers">Serial Numbers</string>
   <string name="exif_tag_name_software">Software</string>
 
-  <string name="share_text">Upload photos to Wikimedia Commons on your phone Download the Commons app: %1$s</string>
+  <string name="share_text">Upload photos to Wikimedia Commons directly from your phone. Download the Commons App now: %1$s</string>
   <string name="share_via">Share app via...</string>
   <string name="image_info">Image Info</string>
   <string name="no_categories_found">No Categories found</string>

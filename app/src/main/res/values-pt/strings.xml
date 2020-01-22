@@ -126,7 +126,7 @@
   <string name="media_upload_policy">Ao carregar esta imagem, declaro que esta é uma obra própria, que não contém material protegido nem selfies, e que adere às &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pt\"&gt;normas da wiki Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descarregar</string>
   <string name="preference_license">Licença padrão</string>
-  <string name="use_previous">Usar título/descrição anteriores</string>
+  <string name="use_previous" fuzzy="true">Usar título/descrição anteriores</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Se a imagem não estiver georreferenciada, obtém a localização atual e georreferencia a imagem com ela. Aviso: isto revela a sua localização corrente.</string>
   <string name="preference_theme">Modo noturno</string>
@@ -245,7 +245,7 @@
   <string name="navigation_item_notification">Notificações</string>
   <string name="navigation_item_featured_images">Destacadas</string>
   <string name="navigation_item_review">Revisão</string>
-  <string name="nearby_needs_permissions">Os sítios aqui perto não podem ser apresentados sem permissões de localização</string>
+  <string name="nearby_needs_permissions">Os locais próximos não podem ser apresentados sem permissões de localização</string>
   <string name="no_description_found">não foi encontrada nenhuma descrição</string>
   <string name="nearby_info_menu_commons_article">Página do ficheiro na wiki Commons</string>
   <string name="nearby_info_menu_wikidata_article">Item do Wikidata</string>
@@ -286,7 +286,7 @@
   <string name="wikicode_copied">O texto wiki foi copiado para a área de transferência</string>
   <string name="nearby_location_has_not_changed">A localização não foi alterada.</string>
   <string name="nearby_location_not_available">A localização não está disponível.</string>
-  <string name="location_permission_rationale_nearby">É necessária a permissão para mostrar uma lista dos sítios aqui perto</string>
+  <string name="location_permission_rationale_nearby">É necessária permissão para mostrar uma lista dos locais próximos</string>
   <string name="get_directions">Obter indicações</string>
   <string name="read_article">Ler artigo</string>
   <string name="notifications_welcome">Bem-vindo à wiki Wikimedia Commons, %1$s! É um prazer tê-lo aqui.</string>
@@ -314,9 +314,9 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
   <string name="showcase_view_got_it_button">Entendido!</string>
-  <string name="showcase_view_whole_nearby_activity">Estes são os lugares perto de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia.\n\nClicar em \'Pesquisar nesta área\' bloqueia a localização do mapa e inicia uma pesquisa de lugares na área circundante.</string>
-  <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes lugares</string>
-  <string name="showcase_view_plus_fab">Pode carregar uma fotografia para qualquer dos lugares, da sua galeria ou câmara</string>
+  <string name="showcase_view_whole_nearby_activity">Estes são os locais próximos de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia.\n\nClicar em \'Pesquisar nesta área\' bloqueia a localização do mapa e inicia uma pesquisa de locais na área circundante.</string>
+  <string name="showcase_view_list_icon">Tocar neste botão fará surgir uma lista destes locais</string>
+  <string name="showcase_view_plus_fab">Pode carregar uma fotografia de qualquer local, vinda da sua galeria ou câmara</string>
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
   <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
   <string name="image_uploaded_by">Carregada por: %1$s</string>
@@ -397,7 +397,7 @@
   <string name="archived_notifications">Notificações (arquivadas)</string>
   <string name="display_nearby_notification">Apresentar notificação de proximidade</string>
   <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
-  <string name="no_close_nearby">Não foi encontrado nenhum lugar próximo</string>
+  <string name="no_close_nearby">Não foi encontrado nenhum local próximo</string>
   <string name="list_sheet">Lista</string>
   <string name="storage_permission">Autorização de acesso</string>
   <string name="write_storage_permission_rationale_for_image_share">Precisamos da sua autorização para aceder ao armazenamento externo do seu dispositivo para carregar imagens.</string>
@@ -515,7 +515,7 @@
   <string name="image_chooser_title">Escolher imagens a carregar</string>
   <string name="please_wait">Aguarde, por favor...</string>
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
-  <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
+  <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo locais do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
   <string name="previous_image_title_description">Copiar título e descrição anteriores</string>
   <string name="previous_button_tooltip_message">Clique para reutilizar o título e a descrição que inseriu na sua fotografia anterior e adequá-los à atual</string>
@@ -532,7 +532,7 @@
   <string name="exif_tag_name_lensModel">Modelo da lente</string>
   <string name="exif_tag_name_serialNumbers">Números de série</string>
   <string name="exif_tag_name_software">\'\'Software\'\'</string>
-  <string name="share_text">Carregar fotografias na wiki Wikimedia Commons, do seu telemóvel Descarregar a aplicação Commons: %1$s</string>
+  <string name="share_text">Carregue fotografias na wiki Wikimedia Commons, diretamente do seu telemóvel. Descarregue a aplicação Commons agora: %1$s</string>
   <string name="share_via">Partilhar aplicação por...</string>
   <string name="image_info">Informação da imagem</string>
   <string name="no_categories_found">Não foi encontrada nenhuma categoria</string>
@@ -562,5 +562,10 @@
   <string name="text_copy">Texto copiado para a área de transferência</string>
   <string name="notification_mark_read">Notificação marcada como lida</string>
   <string name="some_error">Ocorreu um erro!</string>
+  <string name="place_state">Estado do local:</string>
+  <string name="place_state_exists">Existe</string>
+  <string name="place_state_needs_photo">Necessita fotografia</string>
+  <string name="place_type">Tipo de local:</string>
+  <string name="nearby_search_hint">Ponte, museu, hotel, etc.</string>
   <string name="you_must_reset_your_passsword">Ocorreu algo de errado com a sessão, tem de redefinir a sua palavra-passe!</string>
 </resources>

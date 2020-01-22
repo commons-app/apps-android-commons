@@ -2,6 +2,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/search_view_layout"
     android:paddingVertical="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
@@ -18,7 +19,7 @@
         android:layout_height="match_parent"
         android:tint="@color/white"
         android:queryHint="@string/nearby_search_hint"
-        android:searchIcon="@drawable/ic_search_white_24dp">
-    </SearchView>
+        android:searchIcon="@drawable/ic_search_white_24dp"
+        app:theme="@style/WhiteSearchBarTheme"/>
 
 </LinearLayout>
