@@ -74,7 +74,7 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
-        if (defaultKvStore.getBoolean("has_user_manually_removed_location")) {
+        if (!defaultKvStore.getBoolean("has_user_manually_removed_location")) {
             Type setType = new TypeToken<Set<String>>() {
             }.getType();
             Set<String> defaultExifTagsSet = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
