@@ -14,14 +14,18 @@ import android.preference.SwitchPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import com.google.gson.reflect.TypeToken;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 
+import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -70,10 +74,23 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
+        if (defaultKvStore.getBoolean("has_user_manually_removed_location")) {
+            Type setType = new TypeToken<Set<String>>() {
+            }.getType();
+            Set<String> defaultExifTagsSet = defaultKvStore.getJson(Prefs.MANAGED_EXIF_TAGS, setType);
+            if (null == defaultExifTagsSet) {
+                defaultExifTagsSet = new HashSet<>();
+            }
+            defaultExifTagsSet.add(getString(R.string.exif_tag_location));
+            defaultKvStore.putJson(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet);
+        }
         MultiSelectListPreference multiSelectListPref = (MultiSelectListPreference) findPreference("manageExifTags");
         if (multiSelectListPref != null) {
             multiSelectListPref.setOnPreferenceChangeListener((preference, newValue) -> {
                 defaultKvStore.putJson(Prefs.MANAGED_EXIF_TAGS, newValue);
+                if (newValue instanceof HashSet && !((HashSet) newValue).contains(getString(R.string.exif_tag_location))) {
+                    defaultKvStore.putBoolean("has_user_manually_removed_location", true);
+                }
                 return true;
             });
         }
