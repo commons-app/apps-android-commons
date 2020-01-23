@@ -210,6 +210,7 @@
   <string name="search_tab_title_categories">Категории</string>
   <string name="no_recent_searches">Няма последни търсения</string>
   <string name="nominate_delete">Предлагане за изтриване</string>
+  <string name="statistics">Статистика</string>
   <string name="statistics_wikidata_edits">Изображения чрез „Близки места“</string>
   <string name="preference_author_name_toggle">Използване на персонализирано авторско име</string>
   <string name="preference_author_name_toggle_summary">При качването използвайте персонализирано авторско име вместо потребителското си име</string>
