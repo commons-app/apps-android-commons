@@ -60,31 +60,6 @@ class CategoryClientTest {
     }
 
     @Test
-    fun searchCategoriesCaseTest() {
-        val mwQueryPage = Mockito.mock(MwQueryPage::class.java)
-        Mockito.`when`(mwQueryPage.title()).thenReturn("Category:Test")
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
-        Mockito.`when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-        val mockResponse = Mockito.mock(MwQueryResponse::class.java)
-        Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        Mockito.`when`(categoryInterface!!.searchCategories(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
-                .thenReturn(Observable.just(mockResponse))
-
-        val actualCategoryName = categoryClient!!.searchCategories("tes", 10).blockingFirst()
-        val actualCategoryNameCaps = categoryClient!!.searchCategories("Tes", 10).blockingFirst()
-        assertEquals(actualCategoryName, actualCategoryNameCaps)
-        assertEquals("Test", actualCategoryName)
-        assertEquals("Test", actualCategoryNameCaps)
-
-        val actualCategoryNameWithOffset = categoryClient!!.searchCategories("tes", 10, 10).blockingFirst()
-        val actualCategoryNameWithOffsetCaps = categoryClient!!.searchCategories("Tes", 10, 10).blockingFirst()
-        assertEquals(actualCategoryNameWithOffset, actualCategoryNameWithOffsetCaps)
-        assertEquals("Test", actualCategoryNameWithOffset)
-        assertEquals("Test", actualCategoryNameWithOffsetCaps)
-    }
-
-    @Test
     fun searchCategoriesForPrefixFound() {
         val mwQueryPage = Mockito.mock(MwQueryPage::class.java)
         Mockito.`when`(mwQueryPage.title()).thenReturn("Category:Test")
@@ -117,31 +92,6 @@ class CategoryClientTest {
         categoryClient!!.searchCategoriesForPrefix("tes", 10, 10).subscribe(
                 { fail("SearchCategories returned element when it shouldn't have.") },
                 { s -> throw s })
-    }
-
-    @Test
-    fun searchCategoriesForPrefixCaseTest() {
-        val mwQueryPage = Mockito.mock(MwQueryPage::class.java)
-        Mockito.`when`(mwQueryPage.title()).thenReturn("Category:Test")
-        val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
-        Mockito.`when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-        val mockResponse = Mockito.mock(MwQueryResponse::class.java)
-        Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-
-        Mockito.`when`(categoryInterface!!.searchCategoriesForPrefix(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt()))
-                .thenReturn(Observable.just(mockResponse))
-
-        val actualCategoryName = categoryClient!!.searchCategoriesForPrefix("tes", 10).blockingFirst()
-        val actualCategoryNameCaps = categoryClient!!.searchCategoriesForPrefix("Tes", 10).blockingFirst()
-        assertEquals(actualCategoryName, actualCategoryNameCaps)
-        assertEquals("Test", actualCategoryName)
-        assertEquals("Test", actualCategoryNameCaps)
-
-        val actualCategoryNameWithOffset = categoryClient!!.searchCategoriesForPrefix("tes", 10, 10).blockingFirst()
-        val actualCategoryNameWithOffsetCaps = categoryClient!!.searchCategoriesForPrefix("Tes", 10, 10).blockingFirst()
-        assertEquals(actualCategoryNameWithOffset, actualCategoryNameWithOffsetCaps)
-        assertEquals("Test", actualCategoryNameWithOffset)
-        assertEquals("Test", actualCategoryNameWithOffsetCaps)
     }
 
     @Test
