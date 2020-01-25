@@ -10,6 +10,9 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.CommonsApplication;
 import io.reactivex.Observable;
 
+/**
+ * Handles sending thanks to the Contributor using Service.thank()
+ */
 @Singleton
 public class ThanksClient {
 
@@ -23,6 +26,10 @@ public class ThanksClient {
         this.service = service;
     }
 
+    /**
+     * Handles the Thanking logic
+     * @param revesionID represents whom to thank
+     */
     public Observable<Boolean> thank(long revisionId) {
         try {
             return service.thank(String.valueOf(revisionId), null,

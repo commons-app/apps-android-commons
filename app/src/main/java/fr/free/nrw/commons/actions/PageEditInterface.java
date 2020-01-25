@@ -12,6 +12,9 @@ import retrofit2.http.POST;
 
 import static org.wikipedia.dataclient.Service.MW_API_PREFIX;
 
+/**
+ * Calls the MW API to edit the wiki page
+ */
 public interface PageEditInterface {
 
     @FormUrlEncoded

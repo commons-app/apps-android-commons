@@ -5,6 +5,9 @@ import org.wikipedia.dataclient.Service;
 
 import io.reactivex.Observable;
 
+/**
+ * Uses the PageEditInterface to make edit calls to MW API
+ */
 public class PageEditClient {
 
     private final CsrfTokenClient csrfTokenClient;
@@ -19,6 +22,9 @@ public class PageEditClient {
         this.service = service;
     }
 
+    /**
+     * calls API with text @Field
+     */
     public Observable<Boolean> edit(String pageTitle, String text, String summary) {
         try {
             return pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
@@ -28,6 +34,9 @@ public class PageEditClient {
         }
     }
 
+    /**
+     * calls API with appendtext @Field
+     */
     public Observable<Boolean> appendEdit(String pageTitle, String appendText, String summary) {
         try {
             return pageEditInterface.postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
@@ -37,6 +46,9 @@ public class PageEditClient {
         }
     }
 
+    /**
+     * calls API with prependtext @Field
+     */
     public Observable<Boolean> prependEdit(String pageTitle, String prependText, String summary) {
         try {
             return pageEditInterface.postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
