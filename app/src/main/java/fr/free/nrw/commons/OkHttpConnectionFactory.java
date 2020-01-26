@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 import fr.free.nrw.commons.di.SslUtils;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -37,7 +38,7 @@ public final class OkHttpConnectionFactory {
                 .addInterceptor(new UnsuccessfulResponseInterceptor())
                 .addInterceptor(new CommonHeaderRequestInterceptor());
 
-        if(BuildConfig.FLAVOR.equals("beta")){
+        if(ConfigUtils.isBetaFlavour()){
             builder.sslSocketFactory(SslUtils.INSTANCE.getSslContextForCertificateFile(CommonsApplication.getInstance(), "*.wikimedia.beta.wmflabs.org.cer").getSocketFactory());
         }
         return builder.build();

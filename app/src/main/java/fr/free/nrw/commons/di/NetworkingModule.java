@@ -33,6 +33,7 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
 import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataInterface;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
@@ -66,7 +67,7 @@ public class NetworkingModule {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .cache(new Cache(dir, OK_HTTP_CACHE_SIZE));
 
-        if(BuildConfig.FLAVOR.equals("beta")){
+        if(ConfigUtils.isBetaFlavour()){
             builder.sslSocketFactory(SslUtils.INSTANCE.getSslContextForCertificateFile(context, "*.wikimedia.beta.wmflabs.org.cer").getSocketFactory());
         }
         return builder.build();
