@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import androidx.annotation.Nullable;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -203,4 +204,11 @@ public class BasicKvStore implements KeyValueStore {
         _store.unregisterOnSharedPreferenceChangeListener(l);
     }
 
+    public Set<String> getStringSet(String key){
+        return _store.getStringSet(key, new HashSet<>());
+    }
+
+    public void putStringSet(String key,Set<String> value){
+        _store.edit().putStringSet(key,value).apply();
+    }
 }

@@ -70,7 +70,7 @@
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleMultiSelectListPreference
             android:entries="@array/pref_exifTag_entries"
             android:entryValues="@array/pref_exifTag_values"
-            android:key="manageExifTags"
+            android:key="managedExifTags"
             android:title="@string/manage_exif_tags"
             android:summary="@string/manage_exif_tags_summary"/>
 
