@@ -39,7 +39,7 @@ public final class OkHttpConnectionFactory {
                 .addInterceptor(new CommonHeaderRequestInterceptor());
 
         if(ConfigUtils.isBetaFlavour()){
-            builder.sslSocketFactory(SslUtils.INSTANCE.getSslContextForCertificateFile(CommonsApplication.getInstance(), "*.wikimedia.beta.wmflabs.org.cer").getSocketFactory());
+            builder.sslSocketFactory(SslUtils.INSTANCE.getTrustAllHostsSSLSocketFactory());
         }
         return builder.build();
     }
