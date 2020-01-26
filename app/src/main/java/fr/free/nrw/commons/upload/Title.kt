@@ -14,14 +14,7 @@ class Title {
     }
 
     fun setTitleText(titleText: String?) {
-
-        if(titleText != null){
-            this.titleText = titleText.trim()
-        }
-        else{
-            this.titleText = titleText
-        }
-        this.titleText = titleText
+        this.titleText=titleText?.trim()
         if (!TextUtils.isEmpty(titleText)) {
             isSet = true
         }
