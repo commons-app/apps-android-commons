@@ -8,6 +8,7 @@ import org.wikipedia.dataclient.okhttp.HttpStatusException;
 import java.io.File;
 import java.io.IOException;
 
+import fr.free.nrw.commons.di.SslUtils;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -29,13 +30,17 @@ public final class OkHttpConnectionFactory {
 
     @NonNull
     private static OkHttpClient createClient() {
-        return new OkHttpClient.Builder()
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cookieJar(SharedPreferenceCookieManager.getInstance())
                 .cache(NET_CACHE)
                 .addInterceptor(getLoggingInterceptor())
                 .addInterceptor(new UnsuccessfulResponseInterceptor())
-                .addInterceptor(new CommonHeaderRequestInterceptor())
-                .build();
+                .addInterceptor(new CommonHeaderRequestInterceptor());
+
+        if(BuildConfig.FLAVOR.equals("beta")){
+            builder.sslSocketFactory(SslUtils.INSTANCE.getSslContextForCertificateFile(CommonsApplication.getInstance(), "*.wikimedia.beta.wmflabs.org.cer").getSocketFactory());
+        }
+        return builder.build();
     }
 
     private static HttpLoggingInterceptor getLoggingInterceptor() {
