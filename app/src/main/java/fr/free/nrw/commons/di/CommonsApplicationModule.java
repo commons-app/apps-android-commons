@@ -90,6 +90,10 @@ public class CommonsApplicationModule {
         return new AccountUtil();
     }
 
+    /**
+     * Provides an instance of CategoryContentProviderClient i.e. the categories 
+     * that are there in local storage
+     */
     @Provides
     @Named("category")
     public ContentProviderClient provideCategoryContentProviderClient(Context context) {
@@ -132,6 +136,11 @@ public class CommonsApplicationModule {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY);
     }
 
+    /**
+     * Provides a Json store instance(JsonKvStore) which keeps
+     * the provided Gson in it's instance
+     * @param gson stored inside the store instance
+     */
     @Provides
     @Named("default_preferences")
     public JsonKvStore providesDefaultKvStore(Context context, Gson gson) {
@@ -182,6 +191,10 @@ public class CommonsApplicationModule {
         return ConfigUtils.isBetaFlavour();
     }
 
+    /**
+     * Provide JavaRx IO scheduler which manages IO operations
+     * across various Threads 
+     */
     @Named(IO_THREAD)
     @Provides
     public Scheduler providesIoThread(){
