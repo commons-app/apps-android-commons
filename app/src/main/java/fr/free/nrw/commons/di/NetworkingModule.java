@@ -68,7 +68,7 @@ public class NetworkingModule {
                 .cache(new Cache(dir, OK_HTTP_CACHE_SIZE));
 
         if(ConfigUtils.isBetaFlavour()){
-            builder.sslSocketFactory(SslUtils.INSTANCE.getSslContextForCertificateFile(context, "*.wikimedia.beta.wmflabs.org.cer").getSocketFactory());
+            builder.sslSocketFactory(SslUtils.INSTANCE.getTrustAllHostsSSLSocketFactory());
         }
         return builder.build();
     }
