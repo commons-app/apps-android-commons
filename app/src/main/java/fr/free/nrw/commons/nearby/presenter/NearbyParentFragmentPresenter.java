@@ -260,7 +260,7 @@ public class NearbyParentFragmentPresenter
     @Override
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
             // If our nearby markers are calculated at least once
-            if (NearbyController.currentLocation != null) {
+            if (NearbyController.latestSearchLocation != null) {
                double distance =latLng.distanceTo
                         (LocationUtils.commonsLatLngToMapBoxLatLng(NearbyController.latestSearchLocation));
                 if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
