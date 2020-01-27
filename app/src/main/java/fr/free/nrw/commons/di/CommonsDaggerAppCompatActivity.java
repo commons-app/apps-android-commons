@@ -29,6 +29,10 @@ public abstract class CommonsDaggerAppCompatActivity extends AppCompatActivity i
         return supportFragmentInjector;
     }
 
+    /**
+     * when this Activity is created it injects an instance of this class inside
+     * activityInjector method of ApplicationlessInjection
+     */
     private void inject() {
         ApplicationlessInjection injection = ApplicationlessInjection.getInstance(getApplicationContext());
 

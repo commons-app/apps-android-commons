@@ -40,6 +40,13 @@ import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * The Dependency Provider class for Commons Android. 
+ * 
+ * Provides all sorts of ContentProviderClients used by the app
+ * along with the Liscences, AccountUtility, UploadController, Logged User,
+ * Location manager etc
+ */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {

@@ -22,6 +22,11 @@ import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 
+/**
+ * This Class Represents the Module for dependency injection (using dagger)
+ * so, if a developer needs to add a new Fragment to the commons app
+ * then that must be mentioned here to inject the dependencies 
+ */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class FragmentBuilderModule {
