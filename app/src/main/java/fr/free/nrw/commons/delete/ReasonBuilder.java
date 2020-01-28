@@ -19,6 +19,9 @@ import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import timber.log.Timber;
 
+/**
+ * This class handles the reason for deleting a Media object
+ */
 @Singleton
 public class ReasonBuilder {
 
@@ -38,10 +41,19 @@ public class ReasonBuilder {
         this.viewUtilWrapper = viewUtilWrapper;
     }
 
+    /**
+     * To process the reason and append the media's upload date and uploaded_by_me string
+     * @param media
+     * @param reason
+     * @return  
+     */
     public Single<String> getReason(Media media, String reason) {
         return fetchArticleNumber(media, reason);
     }
 
+    /**
+     * get upload date for the passed Media
+     */
     private String prettyUploadedDate(Media media) {
         Date date = media.getDateUploaded();
         if (date == null || date.toString() == null || date.toString().isEmpty()) {
@@ -59,9 +71,16 @@ public class ReasonBuilder {
         return Single.just("");
     }
 
-    private String appendArticlesUsed(FeedbackResponse object, Media media, String reason) {
+    /**
+     * Takes the uploaded_by_me string, the upload date, name of articles using images
+     * and appends it to the received reason
+     * @param feedBack object
+     * @param media whose upload data is to be fetched
+     * @param reason 
+     */
+    private String appendArticlesUsed(FeedbackResponse feedBack, Media media, String reason) {
         String reason1Template = context.getString(R.string.uploaded_by_myself);
-        reason += String.format(Locale.getDefault(), reason1Template, prettyUploadedDate(media), object.getArticlesUsingImages());
+        reason += String.format(Locale.getDefault(), reason1Template, prettyUploadedDate(media), feedBack.getArticlesUsingImages());
         Timber.i("New Reason %s", reason);
         return reason;
     }
