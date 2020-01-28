@@ -6,7 +6,11 @@ import org.wikipedia.dataclient.Service;
 import io.reactivex.Observable;
 
 /**
- * Uses the PageEditInterface to make edit calls to MW API
+ * This class acts as a Client to facilitate wiki page editing
+ * services to various dependency providing modules such as the Network module, the Review Controller ,etc
+ * 
+ * The methods provided by this class will post to the Media wiki api
+ * documented at: https://commons.wikimedia.org/w/api.php?action=help&modules=edit
  */
 public class PageEditClient {
 
@@ -23,7 +27,10 @@ public class PageEditClient {
     }
 
     /**
-     * calls API with text @Field
+     * This method is used when the content of the page is to be replaced by new content received
+     * @param pagetitle   Title of the page to edit
+     * @param text        Holds the page content
+     * @param summary     Edit summary
      */
     public Observable<Boolean> edit(String pageTitle, String text, String summary) {
         try {
@@ -35,7 +42,10 @@ public class PageEditClient {
     }
 
     /**
-     * calls API with appendtext @Field
+     * This method is used when we need to append something to the end of wiki page content
+     * @param pagetitle   Title of the page to edit
+     * @param appendText  The received page content is added to beginning of the page
+     * @param summary     Edit summary
      */
     public Observable<Boolean> appendEdit(String pageTitle, String appendText, String summary) {
         try {
@@ -47,7 +57,10 @@ public class PageEditClient {
     }
 
     /**
-     * calls API with prependtext @Field
+     * This method is used when we need to add something to the starting of the page
+     * @param pagetitle   Title of the page to edit
+     * @param prependText The received page content is added to beginning of the page
+     * @param summary     Edit summary
      */
     public Observable<Boolean> prependEdit(String pageTitle, String prependText, String summary) {
         try {
