@@ -2,13 +2,13 @@ package fr.free.nrw.commons.wikidata.model
 
 import com.google.gson.annotations.SerializedName
 
-data class SetClaimRequest(@SerializedName("type")
+data class Claim(@SerializedName("type")
                            var type: String? = null,
-                           @SerializedName("mainsnak")
+                 @SerializedName("mainsnak")
                            var mainsnak: SimpleSnak? = null,
-                           @SerializedName("id")
+                 @SerializedName("id")
                            var id: String? = null,
-                           @SerializedName("references")
+                 @SerializedName("references")
                            var references: List<Reference>? = null,
-                           @SerializedName("rank")
+                 @SerializedName("rank")
                            var rank: String? = null)

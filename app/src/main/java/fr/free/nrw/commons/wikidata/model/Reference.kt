@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class Reference(
         @SerializedName("snaks")
-        var snaks: Map<String, ComplexSnak>? = null,
+        var snaks: Map<String, List<ComplexSnak>> = mapOf(),
         @SerializedName("snaks-order")
-        var snaksOrder: List<String>? = null)
+        var snaksOrder: List<String> = listOf())

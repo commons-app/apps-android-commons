@@ -3,7 +3,9 @@ package fr.free.nrw.commons.wikidata;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,7 +26,7 @@ import timber.log.Timber;
 @Singleton
 public class WikidataEditService {
 
-    private final static String COMMONS_APP_TAG = "wikimedia-commons-app";
+    final static String COMMONS_APP_TAG = "wikimedia-commons-app";
     private final static String COMMONS_APP_EDIT_REASON = "Add tag for edits made using Android Commons app";
 
     private final Context context;
@@ -48,7 +50,7 @@ public class WikidataEditService {
      * @param wikidataEntityId
      * @param fileName
      */
-    public void createClaimWithLogging(String wikidataEntityId, String fileName) {
+    public void createClaimWithLogging(String wikidataEntityId, String fileName, Map<String, String> mediaLegends) {
         if (wikidataEntityId == null) {
             Timber.d("Skipping creation of claim as Wikidata entity ID is null");
             return;
@@ -59,12 +61,12 @@ public class WikidataEditService {
             return;
         }
 
-        if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
-            Timber.d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
-            return;
-        }
+//        if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
+//            Timber.d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
+//            return;
+//        }
 
-        editWikidataProperty(wikidataEntityId, fileName);
+        editWikidataProperty(wikidataEntityId, fileName, mediaLegends);
     }
 
     /**
@@ -75,20 +77,14 @@ public class WikidataEditService {
      * @param fileName
      */
     @SuppressLint("CheckResult")
-    private void editWikidataProperty(String wikidataEntityId, String fileName) {
+    private void editWikidataProperty(String wikidataEntityId, String fileName, Map<String, String> mediaLegends) {
         Timber.d("Upload successful with wiki data entity id as %s", wikidataEntityId);
         Timber.d("Attempting to edit Wikidata property %s", wikidataEntityId);
 
         String propertyValue = getFileName(fileName);
 
         Timber.d("Entity id is %s and property value is %s", wikidataEntityId, propertyValue);
-        wikidataClient.createClaim(wikidataEntityId, propertyValue)
-                .flatMap(revisionId -> {
-                    if (revisionId != -1) {
-                        return wikidataClient.addEditTag(revisionId, COMMONS_APP_TAG, COMMONS_APP_EDIT_REASON);
-                    }
-                    throw new RuntimeException("Unable to edit wikidata item");
-                })
+        wikidataClient.setClaim(wikidataEntityId, propertyValue, mediaLegends)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(revisionId -> handleClaimResult(wikidataEntityId, String.valueOf(revisionId)), throwable -> {

@@ -5,9 +5,11 @@ import androidx.annotation.NonNull;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
 import fr.free.nrw.commons.wikidata.model.AddEditTagResponse;
+import fr.free.nrw.commons.wikidata.model.Claim;
 import fr.free.nrw.commons.wikidata.model.WbCreateClaimResponse;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -32,6 +34,16 @@ public interface WikidataInterface {
                                                       @NonNull @Part("value") RequestBody value,
                                                       @NonNull @Part("uselang") RequestBody useLang,
                                                       @NonNull @Part("token") RequestBody token);
+
+    /**
+     * Wikidata create claim API. Posts a new claim for the given entity ID
+     */
+    @Headers("Cache-Control: no-cache")
+    @POST("w/api.php?format=json&errorformat=plaintext&action=wbsetclaim&errorlang=uselang")
+    @FormUrlEncoded
+    Observable<WbCreateClaimResponse> postSetClaim(@NonNull @Field("claim") String request,
+                                                   @NonNull @Field("tags") String tags,
+                                                   @NonNull @Field("token") String token);
 
     /**
      * Add edit tag and reason for any revision

@@ -13,7 +13,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.annotation.Retention;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
@@ -70,6 +72,7 @@ public class  Contribution extends Media {
     public String wikiDataEntityId;
     public Uri contentProviderUri;
     public String dateCreatedSource;
+    public HashMap<String, String> mediaLegends;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
@@ -85,14 +88,16 @@ public class  Contribution extends Media {
         this.height = height;
         this.license = license;
         this.dateCreatedSource = "";
+        this.mediaLegends = new HashMap<>();
     }
 
     public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
-                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
+                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords, HashMap<String, String> mediaLegends) {
         super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
+        this.mediaLegends = mediaLegends;
     }
 
     public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
@@ -102,6 +107,7 @@ public class  Contribution extends Media {
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
         this.state=state;
+        this.mediaLegends = new HashMap<>();
     }
 
     public Contribution(Parcel in) {
@@ -111,6 +117,7 @@ public class  Contribution extends Media {
         state = in.readInt();
         transferred = in.readLong();
         isMultiple = in.readInt() == 1;
+        mediaLegends = in.readHashMap(HashMap.class.getClassLoader());
     }
 
     @Override
@@ -121,6 +128,7 @@ public class  Contribution extends Media {
         parcel.writeInt(state);
         parcel.writeLong(transferred);
         parcel.writeInt(isMultiple ? 1 : 0);
+        parcel.writeMap(mediaLegends);
     }
 
     public void setDateCreatedSource(String dateCreatedSource) {
@@ -275,4 +283,7 @@ public class  Contribution extends Media {
         this.contentProviderUri = contentProviderUri;
     }
 
+    public HashMap<String, String> getMediaLegends() {
+        return mediaLegends;
+    }
 }

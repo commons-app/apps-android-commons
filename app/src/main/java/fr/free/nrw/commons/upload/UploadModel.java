@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -194,7 +195,8 @@ public class UploadModel {
                     item.getFileName(),
                     Description.formatList(item.descriptions), -1,
                     null, null, sessionManager.getAuthorName(),
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords(),
+                    getMapFromDescriptions(item.descriptions));
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
             }
@@ -217,6 +219,14 @@ public class UploadModel {
             }
             return contribution;
         });
+    }
+
+    private HashMap<String, String> getMapFromDescriptions(List<Description> descriptions) {
+        HashMap<String, String> descriptionMap = new HashMap<>();
+        for (Description description : descriptions) {
+            descriptionMap.put(description.getLanguageCode(), description.getDescriptionText());
+        }
+        return descriptionMap;
     }
 
     public void deletePicture(String filePath) {
