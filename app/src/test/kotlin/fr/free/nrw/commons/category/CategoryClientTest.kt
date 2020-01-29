@@ -58,6 +58,7 @@ class CategoryClientTest {
                 { fail("SearchCategories returned element when it shouldn't have.") },
                 { s -> throw s })
     }
+
     @Test
     fun searchCategoriesForPrefixFound() {
         val mwQueryPage = Mockito.mock(MwQueryPage::class.java)
@@ -92,6 +93,7 @@ class CategoryClientTest {
                 { fail("SearchCategories returned element when it shouldn't have.") },
                 { s -> throw s })
     }
+
     @Test
     fun getParentCategoryListFound() {
         val mwQueryPage = Mockito.mock(MwQueryPage::class.java)
