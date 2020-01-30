@@ -327,13 +327,14 @@ class ContributionDaoTest {
     private fun createCursor(created: Long, uploaded: Long, multiple: Boolean, localUri: String) =
             MatrixCursor(Table.ALL_FIELDS, 1).apply {
                 addRow(listOf("111", "filePath", localUri, "image",
-                        created, STATE_QUEUED, 222L, uploaded, 88L, SOURCE_GALLERY, "desc",
+                        created, STATE_QUEUED, 222L, uploaded, 88L, SOURCE_GALLERY, "desc", "{}",
                         "create", if (multiple) 1 else 0, 640, 480, "007", "Q1"))
                 moveToFirst()
             }
 
     private fun createContribution(isMultiple: Boolean, localUri: Uri?, imageUrl: String?, dateUploaded: Date?, filename: String?): Contribution {
-        val contribution = Contribution(localUri, imageUrl, filename, HashMap<String, String>(), "desc",  222L, Date(321L),dateUploaded, "creator",
+        val contribution = Contribution(localUri, imageUrl, filename, HashMap<String, String>(),
+                "desc",  222L, Date(321L),dateUploaded, "creator",
                 "edit summary", ArrayList<String>(), "coords").apply {
             state = STATE_COMPLETED
             transferred = 333L
