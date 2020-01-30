@@ -6,13 +6,16 @@
 * Robin Owain
 -->
 <resources>
+  <string name="title_activity_explore">Archwilio</string>
   <string name="preference_category_appearance">Ymddangosiad</string>
   <string name="preference_category_general">Cyffredinol</string>
   <string name="preference_category_feedback">Adborth</string>
+  <string name="preference_category_privacy">Preifatrwydd</string>
   <string name="preference_category_location">Lleoliad</string>
   <string name="app_name">Comin Wicimedia</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Gosodiadau</string>
+  <string name="intent_share_upload_label">Uwchlwytho i Comin</string>
   <string name="username">Enw defnyddiwr</string>
   <string name="password">Cyfrinair</string>
   <string name="login_credential">Mewngofnodwch i\'ch cyfri Comin Beta</string>
@@ -89,6 +92,7 @@
   <string name="title_activity_signup">Cofrestru</string>
   <string name="title_activity_featured_images">Delweddau nodwedd</string>
   <string name="title_activity_category_details">Categori</string>
+  <string name="title_activity_review">Arolwg gan Gyfoedion</string>
   <string name="menu_about">Amdanom</string>
   <string name="about_license">Ap Cynnwys Agored a grewyd ac a gefnogir gan wirfoddolwyr cymuned Wicimedia yw ap Comin Wicimedia. Does a wnelo Sefydliad Wicimedia ddim byd ag e (ei greu, ei gynnal na\'i ddatblygu).</string>
   <string name="about_improve">\n\nCrewch &lt;a href=\"%1$s\"&gt;ymholiad GitHub&lt;/a&gt; os oes gennych fyg, broblem neu awgrym.</string>
@@ -109,7 +113,7 @@
   <string name="media_upload_policy">Wrth gynnig y llun yma, rwy\'n datgan mai fy ngwaith i ydyw ac nad yw\'n cynnwys unrhyw beth dan hawlfrain, na hunlun, a\'i fod yn cadw at &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Bolisiau Comin Wicimedia&lt;/a&gt;.</string>
   <string name="menu_download">Lawrlwytho</string>
   <string name="preference_license">Trwydded Ddiofyn (\'default\')</string>
-  <string name="use_previous">Defnydiwch y teitl/disgrifiad blaenorol</string>
+  <string name="use_previous" fuzzy="true">Defnydiwch y teitl/disgrifiad blaenorol</string>
   <string name="allow_gps">Defnyddiwch y lleoliad cyfredol</string>
   <string name="allow_gps_summary">Adfer eich lleoliad presennol os nad yw\'r ddelwedd yn cynnwys cyfesurynnau. Bydd hyn yn datgelu eich lleoliad chi!</string>
   <string name="preference_theme">Modd fin nos</string>
@@ -162,10 +166,16 @@
   <string name="detail_discussion_empty">Dim trafodaeth</string>
   <string name="detail_license_empty">Trwydded anhysbys</string>
   <string name="menu_refresh">Adnewyddu</string>
+  <string name="storage_permission_title">Yn gwneud cais am ganiatad i storio</string>
+  <string name="read_storage_permission_rationale">Angen caniatad: darllenwch y storfa allanol. Ni all yr ap gael mynediad i\'ch galeri heb hyn.</string>
+  <string name="write_storage_permission_rationale">Angen caniatad: Golygu\'r storfa allanol. Ni all yr ap gael mynediad i\'ch camera/galeri heb hyn.</string>
+  <string name="location_permission_title">Yn Ceisio Caniatad Lleol</string>
+  <string name="location_permission_rationale">Caniatad opsiynol: Ceisio\'r lleoliad cyfoes ar gyfer categoriau</string>
   <string name="ok">Iawn</string>
   <string name="title_activity_nearby">Lleoedd Cyfagos</string>
   <string name="no_nearby">Ni chafwyd hyd i leoedd cyfagos</string>
   <string name="warning">Rhybudd</string>
+  <string name="upload_image_duplicate">Mae\'r ffeil yma eisioes wedi\'i dileu. Ydych chi\'n sicr eich bod yn dymuno parhau?</string>
   <string name="yes">Ydw</string>
   <string name="no">Nac ydw</string>
   <string name="media_detail_title">Teitl</string>
@@ -176,6 +186,16 @@
   <string name="media_detail_license">Trwydded</string>
   <string name="media_detail_coordinates">Cyfesurynnau</string>
   <string name="media_detail_coordinates_empty">Dim</string>
+  <string name="become_a_tester_title">Dewch yn Brofwr Beta</string>
+  <string name="number_of_uploads">Cyfyngiad fy Uwchlwythiad Diweddar</string>
+  <string name="maximum_limit">Cyfyngiad Uchaf</string>
+  <string name="invalid_zero">Nid yw sero yn ddilys</string>
+  <string name="invalid_input">Nid yw\'r Mewnbwn yn ddilys</string>
+  <string name="maximum_limit_alert">Ni ellir arddangos mwy na 500</string>
+  <string name="enter_valid">Rhowch rif addas</string>
+  <string name="cannot_be_zero">Ni all y cyfyngiad ar yr uwchlwytho fod yn 0</string>
+  <string name="set_limit">Cyfyngiad yr Uwchlwythiad Diweddar</string>
+  <string name="logout_verification">Ti\'n sicr dy fod am allgofnodi?</string>
   <string name="commons_logo">Logo Comin</string>
   <string name="commons_website">Gwefan Comin</string>
   <string name="commons_facebook">Tudalen Adborth Comin</string>
@@ -204,13 +224,30 @@
   <string name="navigation_item_info">Tiwtorial</string>
   <string name="navigation_item_notification">Hysbysiadau</string>
   <string name="navigation_item_featured_images">Ar y llwyfan</string>
+  <string name="no_description_found">dim disgrifiad</string>
+  <string name="nearby_info_menu_commons_article">Tudalen ffeil Comin</string>
   <string name="nearby_info_menu_wikidata_article">Eitem Wicidata</string>
   <string name="nearby_info_menu_wikipedia_article">Erthygl Wicipedia</string>
+  <string name="upload_problem_exist">Problemau potensial gyda\'r ddelwedd :</string>
+  <string name="upload_problem_image_dark">Mae\'r ddelwedd yn rhy dywyll.</string>
+  <string name="upload_problem_image_blurry">Mae\'r ddelwedd wedi pylu.</string>
+  <string name="upload_problem_image_duplicate">Mae\'r ddelwedd hon eisioes ar Comin.</string>
+  <string name="upload_problem_different_geolocation">Cymerwyd y llun mewn lleoliad gwahanol.</string>
+  <string name="upload_problem_do_you_continue">Wyt ti\'n dal yn awyddus i uwchlwytho\'r ddelwedd?</string>
   <string name="give_permission">Rhoi hawl</string>
+  <string name="use_external_storage">Defnyddia storfa allanol</string>
   <string name="login_to_your_account">Mewngofnodwch i\'ch cyfri</string>
   <string name="send_log_file">Danfonwch y ffeil log</string>
+  <string name="null_url">Gwall! Ni chafwyd hyd i\'r URL</string>
+  <string name="nominate_deletion">Enweba ar gyfer ei Dileu</string>
+  <string name="nominated_for_deletion">Enwebwyd y ddelwedd hon ar gyfer ei Dileu</string>
+  <string name="nominating_file_for_deletion">Wrthi\'n enwebu Nominate ar gyfer ei dileu.</string>
+  <string name="nominating_for_deletion_status">Yn enwebu\'r ffeil ar gyfer ei dileu: %1$s</string>
   <string name="view_browser">Gweld yn y porwr</string>
+  <string name="skip_login">Neidio</string>
   <string name="navigation_item_login">Mewngofnodi</string>
+  <string name="skip_login_title">Ti\'n sicr nad wyt am fewngofnodi?</string>
+  <string name="skip_login_message">Bydd yn rhaid i ti fewngofnodi er mwyn uwchlwytho delweddau yn y dyfodol.</string>
   <string name="login_alert_message">Er mwyn defnyddio\'r nodwedd yma, mewngofnodwch!</string>
   <string name="nearby_location_has_not_changed">Nid yw\'r lleoliad wedi newid.</string>
   <string name="nearby_location_not_available">Nid yw\'r lleoliad ar gael.</string>

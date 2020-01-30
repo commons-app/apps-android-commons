@@ -191,7 +191,7 @@
   <string name="view_browser">Browser de bıvinê</string>
   <string name="skip_login">Ser çek</string>
   <string name="navigation_item_login">Cı kewe</string>
-  <string name="nearby_directions" fuzzy="true">TARİFÊ RAYER</string>
+  <string name="nearby_directions">Telimati</string>
   <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
   <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
   <string name="nearby_commons" fuzzy="true">COMMONS</string>

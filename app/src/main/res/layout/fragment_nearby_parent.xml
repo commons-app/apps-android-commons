@@ -8,18 +8,47 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/status_bar_blue">
+        android:background="@color/status_bar_blue"
+        android:id="@+id/map_layout">
+        
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:focusableInTouchMode="true"/>
 
-        <LinearLayout
-            android:orientation="vertical" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <include
+            layout="@layout/nearby_filter_all_items"
+            android:id="@+id/nearby_filter"/>
 
-            <FrameLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        <include layout="@layout/nearby_filter_list"
+            android:id="@+id/nearby_filter_list"
+            android:layout_below="@id/nearby_filter"
+            android:layout_height="160dp"
+            android:layout_width="160dp"
+            android:layout_alignParentEnd="true"/>
 
-        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/nearby_filter"/>
+
+
+        <Button
+            android:id="@+id/search_this_area_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="8dp"
+            android:background="@color/white"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:text="@string/search_this_area"
+            android:textColor="@color/status_bar_blue"
+            android:visibility="gone"
+            app:elevation="6dp"
+            android:layout_below="@id/nearby_filter"/>
 
         <View
             android:id="@+id/transparentView"
@@ -37,9 +66,9 @@
             android:id="@+id/fab_recenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_below="@id/nearby_filter"
             android:clickable="true"
             android:visibility="visible"
             app:backgroundTint="@color/main_background_light"
@@ -49,7 +78,6 @@
             app:srcCompat="@drawable/ic_my_location_black_24dp"
             app:useCompatPadding="true" />
 
-
     </RelativeLayout>
 
     <include layout="@layout/bottom_sheet_nearby" />
@@ -57,21 +85,6 @@
     <include
         android:id="@+id/bottom_sheet_details"
         layout="@layout/bottom_sheet_details" />
-
-    <Button
-        android:id="@+id/search_this_area_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="8dp"
-        android:background="@color/white"
-        android:padding="8dp"
-        android:singleLine="true"
-        android:text="@string/search_this_area"
-        android:textColor="@color/status_bar_blue"
-        android:visibility="gone"
-        app:elevation="6dp" />
 
     <ProgressBar
         android:id="@+id/map_progress_bar"

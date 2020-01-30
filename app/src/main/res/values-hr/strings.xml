@@ -5,6 +5,7 @@
 * Astrind
 * Bugoslav
 * MaGa
+* Neptune, the Mystic
 -->
 <resources>
   <string name="preference_category_appearance">Izgled</string>
@@ -105,7 +106,7 @@
   <string name="media_upload_policy">Slanjem ove slike izjavljujem da je ona moje djelo i ne sadrži materijale zaštićene autorskim pravom ili selfije, te da je u skladu sa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smjernicama Zajedničkog poslužitelja&lt;/a&gt;.</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Podrazumijevana licencija</string>
-  <string name="use_previous">Rabite prethodni naziv/opis</string>
+  <string name="use_previous">Rabite prethodni naziv i opis</string>
   <string name="allow_gps">Automatski pribavi trenutačnu lokaciju</string>
   <string name="allow_gps_summary" fuzzy="true">Ako slika nema oznaku lokacije, pribavi trenutačnu lokaciju kako bi se mogle ponuditi kategorije</string>
   <string name="preference_theme">Noćni način</string>

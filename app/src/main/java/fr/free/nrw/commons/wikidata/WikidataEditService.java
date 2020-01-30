@@ -96,7 +96,7 @@ public class WikidataEditService {
         }
 
         editWikidataProperty(wikidataEntityId, fileName);
-        editWikiBaseDepictsProperty(wikidataEntityId, fileName);
+        //editWikiBaseDepictsProperty(wikidataEntityId, fileName);
     }
 
 

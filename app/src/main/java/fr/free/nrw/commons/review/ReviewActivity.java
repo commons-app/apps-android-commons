@@ -114,7 +114,7 @@ public class ReviewActivity extends NavigationBaseActivity {
         d[2].setColorFilter(getApplicationContext().getResources().getColor(R.color.button_blue), PorterDuff.Mode.SRC_IN);
 
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null && savedInstanceState.getParcelable(SAVED_MEDIA)!=null) {
             updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)); // Use existing media if we have one
         } else {
             runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added

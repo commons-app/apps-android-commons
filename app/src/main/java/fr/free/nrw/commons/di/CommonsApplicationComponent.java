@@ -21,6 +21,10 @@ import fr.free.nrw.commons.upload.UploadModule;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
 
 
+/**
+ * Facilitates Injection from CommonsApplicationModule to all the 
+ * classes seeking a dependency to be injected
+ */
 @Singleton
 @Component(modules = {
         CommonsApplicationModule.class,

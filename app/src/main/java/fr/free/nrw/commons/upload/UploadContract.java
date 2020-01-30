@@ -1,9 +1,9 @@
 package fr.free.nrw.commons.upload;
 
+import java.util.List;
+
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.filepicker.UploadableFile;
-
-import java.util.List;
 
 /**
  * The contract using which the UplaodActivity would communicate with its presenter

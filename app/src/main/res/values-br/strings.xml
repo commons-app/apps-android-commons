@@ -114,7 +114,7 @@
   <string name="media_upload_policy">Dre gas ar skeudenn-mañ e tisklêrian eo bet graet ganin, n\'eus elfenn ebet gwarezet gant ar gwirioù oberour nag emboltredoù enni, hag emañ diouzh &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/fr\"&gt;reolennoù Wikimedia Commons&lt;/a&gt; a-hend-all.</string>
   <string name="menu_download">Pellgargañ</string>
   <string name="preference_license">Aotre-implijout dre ziouer</string>
-  <string name="use_previous">Ober gant an titl/deskrivadur kent</string>
+  <string name="use_previous" fuzzy="true">Ober gant an titl/deskrivadur kent</string>
   <string name="allow_gps">Tapout al lec\'hiadur red ent emgefre</string>
   <string name="allow_gps_summary" fuzzy="true">Kavout al lec\'hiadur red evit pourchas kinnigoù rummadoù ma n\'eo ket douarlec\'hiet ar skeudenn.</string>
   <string name="preference_theme">Mod noz</string>

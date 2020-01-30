@@ -31,11 +31,6 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private static final String[] existsQuery = {COLUMN_FILENAME};
     private static final String existsSelection = COLUMN_FILENAME + " = ?";
     private static final ContentValues[] EMPTY = {};
-    private static int COMMIT_THRESHOLD = 10;
-
-    // Arbitrary limit to cap the number of contributions to ever load. This is a maximum built
-    // into the app, rather than the user's setting. Also see Github issue #52.
-    public static final int ABSOLUTE_CONTRIBUTIONS_LOAD_LIMIT = 500;
 
     @Inject
     UserClient userClient;

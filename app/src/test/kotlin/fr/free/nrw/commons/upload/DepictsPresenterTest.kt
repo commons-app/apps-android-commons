@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload
 
-import com.nhaarman.mockito_kotlin.verify
+//import com.nhaarman.mockito_kotlin.verify
+import org.mockito.Mockito.verify
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.repository.UploadRepository

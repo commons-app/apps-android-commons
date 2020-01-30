@@ -7,19 +7,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.RemoteException;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import fr.free.nrw.commons.settings.Prefs;
-
 import org.apache.commons.lang3.StringUtils;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -27,6 +28,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
+
+import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;

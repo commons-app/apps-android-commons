@@ -9,6 +9,7 @@ import android.net.Uri;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
+import androidx.exifinterface.media.ExifInterface;
 
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
@@ -24,7 +25,6 @@ import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import androidx.exifinterface.media.ExifInterface;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;

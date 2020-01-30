@@ -9,6 +9,7 @@
 * Rancher
 * Vukasin005
 * Zoranzoki21
+* Вукан Ц
 * Милан Јелисавчић
 -->
 <resources>
@@ -119,7 +120,7 @@
   <string name="media_upload_policy">Слањем ове слике, ја тврдим да је у питању мој рад, да не садржи материјал или селфије заштићене ауторским правима, те да је на остале начине у складу са &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;смерницама Викимедијине оставе&lt;/a&gt;.</string>
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Подразумевана лиценца</string>
-  <string name="use_previous">Користи претходан наслов/опис</string>
+  <string name="use_previous" fuzzy="true">Користи претходан наслов/опис</string>
   <string name="allow_gps">Аутоматски добави тренутну локацију</string>
   <string name="allow_gps_summary">Прима тренутну локацију ако слика није геотагована и геотагује исту њоме. Упозорење: Овиме ће да се открије Ваша тренутна локација.</string>
   <string name="preference_theme">Ноћни режим</string>
@@ -496,7 +497,7 @@
   <string name="exif_tag_name_lensModel">Модел објектива</string>
   <string name="exif_tag_name_serialNumbers">Серијски бројеви</string>
   <string name="exif_tag_name_software">Софтвер</string>
-  <string name="share_text">Отпреми фотографије на Викимедијину Оставу са свог телефона. Преузми апликацију Оставе: %1$s</string>
+  <string name="share_text" fuzzy="true">Отпреми фотографије на Викимедијину Оставу са свог телефона. Преузми апликацију Оставе: %1$s</string>
   <string name="share_via">Подели апликацију преко...</string>
   <string name="image_info">Информације о слици</string>
   <string name="no_categories_found">Нису пронађене категорије</string>
@@ -520,4 +521,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_reason_copyright_other">Остало</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
+  <string name="place_state_exists">Постоји</string>
+  <string name="place_state_needs_photo">Потребна слика</string>
+  <string name="nearby_search_hint">Мост, музеј, хотел итд.</string>
 </resources>

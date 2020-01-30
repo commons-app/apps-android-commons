@@ -13,6 +13,10 @@ import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.mockito.*
+import org.mockito.ArgumentMatchers
+import org.mockito.ArgumentMatchers.eq
+import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import java.util.ArrayList
 
@@ -36,6 +40,12 @@ class UploadMediaPresenterTest {
 
     @Mock
     private var uploadItem: UploadModel.UploadItem? = null
+
+    @Mock
+    private var title: Title? = null
+
+    @Mock
+    private var uploadMediaDetails: List<UploadMediaDetail>? = null
 
     @InjectMocks
     var uploadMediaDetailAdapter: UploadMediaDetailAdapter? = null
@@ -149,6 +159,77 @@ class UploadMediaPresenterTest {
             verify(view)?.onImageValidationSuccess()
             uploadMediaPresenter?.setUploadItem(0, uploadItem)
         }
+    }
+
+    /**
+     * Test fetch previous image title when there was one
+     */
+    @Test
+    fun fetchPreviousImageAndTitleTestPositive(){
+        Mockito.`when`(repository?.getPreviousUploadItem(ArgumentMatchers.anyInt())).thenReturn(uploadItem)
+        Mockito.`when`(uploadItem?.uploadMediaDetails).thenReturn(uploadMediaDetails)
+        Mockito.`when`(uploadItem?.title).thenReturn(title)
+        Mockito.`when`(title?.getTitleText()).thenReturn(ArgumentMatchers.anyString())
+
+        uploadMediaPresenter?.fetchPreviousTitleAndDescription(0)
+        verify(view)?.setTitleAndDescription(ArgumentMatchers.anyString(), ArgumentMatchers.any())
+    }
+
+    /**
+     * Test fetch previous image title when there was none
+     */
+    @Test
+    fun fetchPreviousImageAndTitleTestNegative(){
+        Mockito.`when`(repository?.getPreviousUploadItem(ArgumentMatchers.anyInt())).thenReturn(null)
+        uploadMediaPresenter?.fetchPreviousTitleAndDescription(0)
+        verify(view)?.showMessage(ArgumentMatchers.anyInt(),ArgumentMatchers.anyInt())
+    }
+
+    /**
+     * Test bad image invalid location
+     */
+    @Test
+    fun handleBadImageBaseTestInvalidLocation(){
+        uploadMediaPresenter?.handleBadImage(8)
+        verify(repository)?.saveValue(ArgumentMatchers.anyString(),eq(false))
+        verify(view)?.showBadImagePopup(8)
+    }
+
+    /**
+     * Test bad image empty title
+     */
+    @Test
+    fun handleBadImageBaseTestEmptyTitle(){
+        uploadMediaPresenter?.handleBadImage(-3)
+        verify(view)?.showMessage(ArgumentMatchers.anyInt(),ArgumentMatchers.anyInt())
+    }
+
+    /**
+     * Teste show file already exists
+     */
+    @Test
+    fun handleBadImageBaseTestFileNameExists(){
+        uploadMediaPresenter?.handleBadImage(-4)
+        verify(view)?.showDuplicatePicturePopup()
+    }
+
+
+    /**
+     * Test show SimilarImageFragment
+     */
+    @Test
+    fun showSimilarImageFragmentTest(){
+        uploadMediaPresenter?.showSimilarImageFragment(ArgumentMatchers.anyString(),ArgumentMatchers.anyString())
+        verify(view)?.showSimilarImageFragment(ArgumentMatchers.anyString(),ArgumentMatchers.anyString())
+    }
+
+    /**
+     * Test set upload item
+     */
+    @Test
+    fun setUploadItemTest(){
+        uploadMediaPresenter?.setUploadItem(0,uploadItem)
+        verify(repository)?.updateUploadItem(0,uploadItem)
     }
 
 }

@@ -5,15 +5,7 @@ import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.internal.LinkedTreeMap;
-
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-
-import java.util.Date;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +16,15 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.internal.LinkedTreeMap;
+
+import java.util.Date;
+
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;

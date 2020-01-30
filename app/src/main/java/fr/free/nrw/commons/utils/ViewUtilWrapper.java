@@ -16,4 +16,8 @@ public class ViewUtilWrapper {
     public void showShortToast(Context context, String text) {
         ViewUtil.showShortToast(context, text);
     }
+
+    public void showLongToast(Context context, String text) {
+        ViewUtil.showLongToast(context, text);
+    }
 }

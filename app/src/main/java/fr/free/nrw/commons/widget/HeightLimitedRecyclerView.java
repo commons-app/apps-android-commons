@@ -2,10 +2,11 @@ package fr.free.nrw.commons.widget;
 
 import android.app.Activity;
 import android.content.Context;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Ilgaz Er on 8/7/2018.

@@ -92,7 +92,7 @@
   <string name="share_license_summary" fuzzy="true">Slika će se voditi pod licencom %1$s</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license" fuzzy="true">Licenca</string>
-  <string name="use_previous">Koristi prethodni naziv/opis</string>
+  <string name="use_previous">Koristi prethodni naziv i opis</string>
   <string name="allow_gps">Automatski dobavi trenutnu lokaciju</string>
   <string name="allow_gps_summary" fuzzy="true">Dobavi trenutnu lokaciju za davanje prijedloga o kategorijama ako nema geooznaku</string>
   <string name="preference_theme">Noćni režim</string>

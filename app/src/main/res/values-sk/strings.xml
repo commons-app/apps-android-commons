@@ -115,7 +115,7 @@
   <string name="media_upload_policy">Odoslaním tohto súboru potvrdzujem, že je mojím vlastným dielom, neobsahuje autorskoprávne chránený materiál a nejedná sa o selfie a ani inak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Pravidlá a odporúčania Wikimedie Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Predvolená licencia</string>
-  <string name="use_previous">Použiť predchádzajúci názov/popis</string>
+  <string name="use_previous">Použiť predchádzajúci názov a popis</string>
   <string name="allow_gps">Automaticky získať súčasnú polohu</string>
   <string name="allow_gps_summary">Získať súčasnú polohu a pokiaľ obrázok neobsahuje zemepisné súradnice, pridať ich k nemu. Upozornenie: Toto odhalí vašu súčasnú polohu.</string>
   <string name="preference_theme">Nočný režim</string>
@@ -309,6 +309,7 @@
   <string name="no_images_found">Neboli nájdené žiadne obrázky!</string>
   <string name="error_loading_images">Pri načítaní obrázkov došlo k chybe.</string>
   <string name="image_uploaded_by">Nahral/a: %1$s</string>
+  <string name="block_notification_title">Blokované</string>
   <string name="block_notification">Máte zablovanú možnosť úpravy Wikimedie Commons.</string>
   <string name="appwidget_img">Obrázok dňa</string>
   <string name="app_widget_heading">Obrázok dňa</string>
@@ -520,7 +521,7 @@
   <string name="exif_tag_name_lensModel">Model objektívu</string>
   <string name="exif_tag_name_serialNumbers">Sériové čísla</string>
   <string name="exif_tag_name_software">Softvér</string>
-  <string name="share_text">Nahrávajte fotky na Wikimedia Commons na vašom mobile. Stiahnite si aplikáciu Wikimedia Commons: %1$s</string>
+  <string name="share_text">Nahrávajte fotky na Wikimedia Commons priamo z vášho mobilu. Stiahnite si aplikáciu Wikimedia Commons teraz: %1$s</string>
   <string name="share_via">Zdieľať aplikáciu cez...</string>
   <string name="image_info">Informácie o obrázku</string>
   <string name="no_categories_found">Nenájdené žiadne kategórie</string>
@@ -550,4 +551,10 @@
   <string name="text_copy">Text bol skopírovaný do schránky.</string>
   <string name="notification_mark_read">Oznámenie označené ako prečítané</string>
   <string name="some_error">Vyskytla sa chyba!</string>
+  <string name="place_state">Stav miesta:</string>
+  <string name="place_state_exists">Existuje</string>
+  <string name="place_state_needs_photo">Potrebuje fotku</string>
+  <string name="place_type">Typ miesta:</string>
+  <string name="nearby_search_hint">Most, múzeum, hotel atď.</string>
+  <string name="you_must_reset_your_passsword">Pri prihlásení nastala chyba, musíte si resetovať vaše heslo!</string>
 </resources>

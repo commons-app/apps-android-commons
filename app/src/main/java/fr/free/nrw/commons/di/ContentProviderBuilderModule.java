@@ -9,6 +9,11 @@ import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider;
 import fr.free.nrw.commons.upload.structure.depictions.DepictsContentProvider;
 
+/**
+ * This Class Represents the Module for dependency injection (using dagger)
+ * so, if a developer needs to add a new ContentProvider to the commons app
+ * then that must be mentioned here to inject the dependencies 
+ */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class ContentProviderBuilderModule {

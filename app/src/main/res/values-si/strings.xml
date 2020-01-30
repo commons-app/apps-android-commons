@@ -88,7 +88,7 @@
   <string name="share_license_summary" fuzzy="true">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
   <string name="menu_download">බාගන්න</string>
   <string name="preference_license" fuzzy="true">බලපත්‍රය</string>
-  <string name="use_previous">පෙර මාතෘකාව/විස්තරය භාවිතා කරන්න</string>
+  <string name="use_previous" fuzzy="true">පෙර මාතෘකාව/විස්තරය භාවිතා කරන්න</string>
   <string name="allow_gps">වත්මන් ස්ථානය ස්වයංක්රීයව ලබාගන්න</string>
   <string name="preference_theme">රාත්‍රී ආකාරය</string>
   <string name="preference_theme_summary">අඳුරු තේමාව භාවිතා කරන්න</string>

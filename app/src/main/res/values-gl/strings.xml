@@ -120,7 +120,7 @@
   <string name="media_upload_policy">Publicando esta imaxe, declaro que é da miña obra, que non contén material con dereitos de autor ou selfies e que se adhire ás &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licenza por defecto</string>
-  <string name="use_previous">Usar o título ou a descrición anterior</string>
+  <string name="use_previous" fuzzy="true">Usar o título ou a descrición anterior</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
   <string name="allow_gps_summary">Obter a localización actual se a imaxe non está xeolocalizada, e xeolocaliza a imaxe con ela. Atención: Isto revelará a súa localización actual.</string>
   <string name="preference_theme">Modo nocturno</string>
@@ -314,6 +314,7 @@
   <string name="no_images_found">Non se atopou ningunha imaxeǃ</string>
   <string name="error_loading_images">Houbo un erro ó subir as imaxes.</string>
   <string name="image_uploaded_by">Subida porː %1$s</string>
+  <string name="block_notification_title">Bloqueado</string>
   <string name="block_notification">Está bloqueado e non pode editar en Commons</string>
   <string name="appwidget_img">Imaxe do día</string>
   <string name="app_widget_heading">Imaxe do día</string>
@@ -329,7 +330,7 @@
   <string name="search_tab_title_categories">Categorías</string>
   <string name="explore_tab_title_featured">Destacadas</string>
   <string name="explore_tab_title_mobile">Cargada vía móbil</string>
-  <string name="successful_wikidata_edit" fuzzy="true">A imaxe engadiuse con éxito a %1$s en Wikidata!</string>
+  <string name="successful_wikidata_edit">A imaxe engadiuse a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Poñer como imaxe de fondo</string>
   <string name="wallpaper_set_successfully">A imaxe de fondo configurouse correctamenteǃ</string>
@@ -437,18 +438,35 @@
   <string name="search_this_area">Procurar nesta área</string>
   <string name="nearby_card_permission_title">Solicitude de permisos</string>
   <string name="nearby_card_permission_explanation">Desexa que usemos a súa localizacións actual para amosarlle o lugar máis preto que precisa imaxes?</string>
+  <string name="unable_to_display_nearest_place">Imposible amosar o sitio máis achegado que precisa fotos sen ter permisos de localización</string>
   <string name="never_ask_again">Non volver a preguntar isto nunca</string>
   <string name="display_location_permission_title">Amosar permiso de localización</string>
+  <string name="display_location_permission_explanation">Pedir permisos de localización cando sexa necesario para a funcionalidade de notificación de proximidade.</string>
+  <string name="achievements_fetch_failed">Algo foi mal, non puidemos obter as túas achegas</string>
   <string name="ends_on">Finaliza o:</string>
   <string name="display_campaigns">Amosar campañas</string>
-  <string name="display_campaigns_explanation" fuzzy="true">Preme aquí para ver as campañas en curso</string>
+  <string name="display_campaigns_explanation">Ver as campañas en curso</string>
   <string name="nearby_campaign_dismiss_message">Xa non verá as campañas. Porén, pode volver habilitar esta notificación na configuración.</string>
   <string name="this_function_needs_network_connection">Esta función require conexión de rede, verifique a súa configuración de conexión.</string>
   <string name="bad_token_error_proposed_solution">Erro na suba debido a problemas co identificador de edición. Peche a sesión e volva a entrar.</string>
   <string name="error_processing_image">Houbo un erro ó procesar a imaxe. Por favor, ténteo de novoǃ</string>
+  <string name="getting_edit_token">Obter un identificador para editar</string>
+  <string name="check_category_adding_template">Engadir modelo para o control de categoría</string>
+  <string name="check_category_notification_title">Pedindo control de categoría para %1$s</string>
+  <string name="check_category_edit_summary">Solicitando control de categoría</string>
+  <string name="check_category_success_title">Control de categoría solicitado</string>
+  <string name="check_category_failure_title">A solicitude de control de categoría non funcionou</string>
+  <string name="check_category_success_message">Solicitado o control de categoría para %1$s</string>
+  <string name="check_category_failure_message">Non foi posible solicitar un control de categoría para %1$s</string>
+  <string name="check_category_toast">Solicitando control de categoría para %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Engadindo mensaxe de borrado ó ficheiro</string>
   <string name="nominate_for_deletion_done">Feito</string>
+  <string name="nominate_for_deletion_notify_user">Notificación ó usuario na súa páxina de conversa</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Engadindo o ficheiro ó rexistro de consultas de borrado</string>
+  <string name="nominate_for_deletion_create_deletion_request">Creando a subpáxina para a consulta de borrado</string>
   <string name="notsure">Non seguro</string>
   <string name="send_thank_success_title">Enviando agradecementos: Éxito</string>
+  <string name="send_thank_success_message">Enviado correctamente o agradecemento a %1$s</string>
   <string name="send_thank_send">Enviando agradecementos</string>
   <string name="send_thank_notification_title">Enviando agradecementos</string>
   <string name="send_thank_toast">Enviando agradecementos por %1$s</string>

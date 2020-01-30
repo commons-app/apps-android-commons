@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.depictions
 
-import com.nhaarman.mockito_kotlin.verify
+import org.mockito.Mockito.verify
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.depictions.Media.DepictedImagesFragment
 import fr.free.nrw.commons.depictions.Media.DepictedImagesPresenter

@@ -19,8 +19,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.upload.UploadModel.UploadItem;
-
 /**
  * The MVP pattern presenter of Upload GUI
  */
@@ -94,7 +92,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     public List<UploadMediaDetail> getImageDetailList() {
         int titleListCount = 0;
         List<UploadMediaDetail> titleList = new ArrayList<>();
-        for (UploadItem item : repository.getUploads()) {
+        for (UploadModel.UploadItem item : repository.getUploads()) {
             if (!item.getUploadMediaDetails().isEmpty()) {
                 titleList.add(item.getUploadMediaDetails().get(titleListCount));
                 titleListCount++;

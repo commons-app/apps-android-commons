@@ -14,13 +14,11 @@ import java.util.List;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.Single;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 

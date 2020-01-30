@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,10 +28,17 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxSearchView;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -38,6 +47,9 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.Style;
+
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -54,12 +66,16 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.NearbyController;
+import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
+import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.utils.FragmentUtils;
+import fr.free.nrw.commons.utils.LayoutUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -70,9 +86,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
+import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 
@@ -106,12 +123,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.container_sheet) FrameLayout frameLayout;
     @BindView(R.id.loading_nearby_list) ConstraintLayout loadingNearbyLayout;
 
+    @BindView(R.id.choice_chip_exists) Chip chipExists;
+    @BindView(R.id.choice_chip_needs_photo) Chip chipNeedsPhoto;
+    @BindView(R.id.choice_chip_group) ChipGroup choiceChipGroup;
+    @BindView(R.id.search_view) SearchView searchView;
+    @BindView(R.id.search_list_view) RecyclerView recyclerView;
+    @BindView(R.id.nearby_filter_list) View nearbyFilterList;
+    @BindView(R.id.checkbox_tri_states) CheckBoxTriStates checkBoxTriStates;
+
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
     @Inject @Named("default_preferences") JsonKvStore applicationKvStore;
     @Inject BookmarkLocationsDao bookmarkLocationDao;
     @Inject ContributionController controller;
     @Inject WikidataEditListener wikidataEditListener;
+
+    private NearbyFilterSearchRecyclerViewAdapter nearbyFilterSearchRecyclerViewAdapter;
 
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
@@ -176,6 +203,98 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
+    }
+
+    public void initNearbyFilter() {
+        nearbyFilterList.setVisibility(View.GONE);
+
+        searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                nearbyParentFragmentPresenter.searchViewGainedFocus();
+                nearbyFilterList.setVisibility(View.VISIBLE);
+            } else {
+                nearbyFilterList.setVisibility(View.GONE);
+            }
+        });
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL));
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        nearbyFilterSearchRecyclerViewAdapter = new NearbyFilterSearchRecyclerViewAdapter(getContext(),new ArrayList<>(TEXT_TO_DESCRIPTION.values()), recyclerView);
+        nearbyFilterList.getLayoutParams().width = (int) LayoutUtils.getScreenWidth(getActivity(), 0.75);
+        recyclerView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
+        LayoutUtils.setLayoutHeightAllignedToWidth(1, nearbyFilterList);
+
+        compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
+                .takeUntil(RxView.detaches(searchView))
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( query -> {
+                    ((NearbyFilterSearchRecyclerViewAdapter) recyclerView.getAdapter()).getFilter().filter(query.toString());
+                }));
+        initFilterChips();
+    }
+
+    @Override
+    public void setCheckBoxAction() {
+        checkBoxTriStates.addAction();
+        checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
+    }
+
+    @Override
+    public void setCheckBoxState(int state) {
+        checkBoxTriStates.setState(state);
+    }
+
+    @Override
+    public void setFilterState() {
+        Log.d("deneme5","setfilterState");
+        chipNeedsPhoto.setChecked(NearbyFilterState.getInstance().isNeedPhotoSelected());
+        chipExists.setChecked(NearbyFilterState.getInstance().isExistsSelected());
+
+        if (NearbyController.currentLocation != null) {
+            NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+        }
+
+    }
+
+    private void initFilterChips() {
+
+        chipNeedsPhoto.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (NearbyController.currentLocation != null) {
+                checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
+                if (isChecked) {
+                    NearbyFilterState.getInstance().setNeedPhotoSelected(true);
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                } else {
+                    NearbyFilterState.getInstance().setNeedPhotoSelected(false);
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                }
+            } else {
+                chipNeedsPhoto.setChecked(!isChecked);
+            }
+        });
+
+
+        chipExists.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (NearbyController.currentLocation != null) {
+                checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
+                if (isChecked) {
+                    NearbyFilterState.getInstance().setExistsSelected(true);
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                } else {
+                    NearbyFilterState.getInstance().setExistsSelected(false);
+                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                }
+            } else {
+                chipExists.setChecked(!isChecked);
+            }
+        });
     }
 
     /**
@@ -385,6 +504,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         nearbyParentFragmentPresenter.nearbyFragmentsAreReady();
         initViews();
         nearbyParentFragmentPresenter.setActionListeners(applicationKvStore);
+        initNearbyFilter();
     }
 
     @Override
@@ -483,6 +603,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             // showErrorMessage(getString(R.string.error_fetching_nearby_places));
                             setProgressBarVisibility(false);
                             nearbyParentFragmentPresenter.lockUnlockNearby(false);
+                            setFilterState();
                         }));
     }
 
@@ -509,6 +630,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker);
+        setFilterState();
     }
 
     /**
@@ -518,6 +640,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkersForCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         nearbyParentFragmentPresenter.updateMapMarkersForCustomLocation(nearbyPlacesInfo, selectedMarker);
+        setFilterState();
     }
 
 
@@ -560,6 +683,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return true;
         } else {
             return false;
+        }
+    }
+
+    @Override
+    public void setRecyclerViewAdapterAllSelected() {
+        if (nearbyFilterSearchRecyclerViewAdapter != null && NearbyController.currentLocation != null) {
+            nearbyFilterSearchRecyclerViewAdapter.setRecyclerViewAdapterAllSelected();
+        }
+    }
+
+    @Override
+    public void setRecyclerViewAdapterItemsGreyedOut() {
+        if (nearbyFilterSearchRecyclerViewAdapter != null && NearbyController.currentLocation != null) {
+            nearbyFilterSearchRecyclerViewAdapter.setRecyclerViewAdapterItemsGreyedOut();
         }
     }
 
@@ -694,8 +831,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void disableFABRecenter() {
+        fabRecenter.setEnabled(false);
+    }
+
+    @Override
+    public void enableFABRecenter() {
+        fabRecenter.setEnabled(true);
+    }
+
+    @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
-        nearbyMapFragment.removeCurrentLocationMarker();
         nearbyMapFragment.addCurrentLocationMarker(curLatLng);
         CameraPosition position;
 
@@ -727,6 +873,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void hideBottomSheet() {
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    @Override
+    public void hideBottomDetailsSheet() {
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     @Override

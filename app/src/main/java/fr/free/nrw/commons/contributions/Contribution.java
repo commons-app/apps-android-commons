@@ -4,19 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.StringDef;
+
 import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.util.DateUtil;
 
 import java.lang.annotation.Retention;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.TimeZone;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.StringDef;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -27,11 +25,11 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class  Contribution extends Media {
 
-    //{{According to EXIF data|2009-01-09}}
-    private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to EXIF data|%s}}";
+    //{{According to Exif data|2009-01-09}}
+    private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to Exif data|%s}}";
 
-    //{{date|2009|1|9}} → 9 January 2009
-    private static final String TEMPLATE_DATA_OTHER_SOURCE = "{{date|%s}}";
+    //2009-01-09 → 9 January 2009
+    private static final String TEMPLATE_DATA_OTHER_SOURCE = "%s";
 
     public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
         @Override
@@ -140,10 +138,6 @@ public class  Contribution extends Media {
         parcel.writeInt(isMultiple ? 1 : 0);
     }
 
-    public String getDateCreatedSource() {
-        return dateCreatedSource;
-    }
-
     public void setDateCreatedSource(String dateCreatedSource) {
         this.dateCreatedSource = dateCreatedSource;
     }
@@ -220,7 +214,7 @@ public class  Contribution extends Media {
                 .append(licenseTemplateFor(getLicense())).append("\n\n")
                 .append("{{Uploaded from Mobile|platform=Android|version=")
                 .append(ConfigUtils.getVersionNameWithSha(applicationContext)).append("}}\n");
-        if(categories != null && categories.size() != 0) {
+        if(categories!=null&&categories.size()!=0) {
             for (int i = 0; i < categories.size(); i++) {
                 String category = categories.get(i);
                 buffer.append("\n[[Category:").append(category).append("]]");
@@ -268,14 +262,6 @@ public class  Contribution extends Media {
         this.source = source;
     }
 
-    public void setLocalUri(Uri localUri) {
-        this.localUri = localUri;
-    }
-
-    public void setDecimalCoords(String decimalCoords) {
-        this.decimalCoords = decimalCoords;
-    }
-
     @NonNull
     private String licenseTemplateFor(String license) {
         switch (license) {
@@ -311,9 +297,6 @@ public class  Contribution extends Media {
         this.contentProviderUri = contentProviderUri;
     }
 
-    public Uri getContentProviderUri() {
-        return contentProviderUri;
-    }
 
     /**
      * @return array list of entityids for the depictions

@@ -8,7 +8,7 @@ import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
-import fr.free.nrw.commons.utils.StringUtils
+import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 
 class UITestHelper {
@@ -27,6 +27,7 @@ class UITestHelper {
                 //Perform Login
                 onView(ViewMatchers.withId(R.id.login_username))
                         .perform(ViewActions.clearText(), ViewActions.typeText(getTestUsername()))
+                closeSoftKeyboard()
                 onView(ViewMatchers.withId(R.id.login_password))
                         .perform(ViewActions.clearText(), ViewActions.typeText(getTestUserPassword()))
                 closeSoftKeyboard()
@@ -49,14 +50,14 @@ class UITestHelper {
 
         private fun getTestUsername(): String {
             val username = BuildConfig.TEST_USERNAME
-            if (StringUtils.isNullOrWhiteSpace(username) || username == "null") {
+            if (StringUtils.isEmpty(username) || username == "null") {
                 throw NotImplementedError("Configure your beta account's username")
             } else return username
         }
 
         private fun getTestUserPassword(): String {
             val password = BuildConfig.TEST_PASSWORD
-            if (StringUtils.isNullOrWhiteSpace(password) || password == "null") {
+            if (StringUtils.isEmpty(password) || password == "null") {
                 throw NotImplementedError("Configure your beta account's password")
             } else return password
         }

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.search
 
-import com.nhaarman.mockito_kotlin.verify
 import com.pedrogomez.renderers.RVRendererAdapter
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media

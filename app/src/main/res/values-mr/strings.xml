@@ -104,7 +104,7 @@
   <string name="media_upload_policy">हे चित्र इथे चढवत असताना, मी हे घोषीत करतो की हे माझेच काम आहे आणि ह्या कामावर इतर कुणाचाही प्रताधिकार नाही तसेच हे सेल्फ़ी नाहीये, म्हणून हे काम ह्या संकेतांचे पालन करेल &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">अधिभारण करा</string>
   <string name="preference_license">डिफॉल्ट परवाना</string>
-  <string name="use_previous">मागील शीर्षक/वर्णन वापरा</string>
+  <string name="use_previous" fuzzy="true">मागील शीर्षक/वर्णन वापरा</string>
   <string name="allow_gps">आपोआप सध्याचे स्थान मिळवा</string>
   <string name="allow_gps_summary" fuzzy="true">जर छायाचित्राला जिओटॅग नसल्यास तुम्ही तुमच्या स्थानाची निश्चिती करा जेणे करुन संबंधीत वर्ग सुचवले जातील</string>
   <string name="preference_theme">रात्रीच्या वेळेच्या व्यवस्था</string>

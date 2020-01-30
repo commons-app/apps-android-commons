@@ -1,20 +1,24 @@
 package fr.free.nrw.commons.upload;
 
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
-
 import android.content.Context;
 import android.net.Uri;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.upload.UploadService.NotificationUpdateProgressListener;
-import io.reactivex.Observable;
+
+import org.wikipedia.csrf.CsrfTokenClient;
+
 import java.io.File;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.upload.UploadService.NotificationUpdateProgressListener;
+import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import org.wikipedia.csrf.CsrfTokenClient;
+
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
 
 @Singleton
 public class UploadClient {

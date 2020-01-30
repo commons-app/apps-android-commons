@@ -4,8 +4,14 @@ import org.wikipedia.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.Service;
 
 import io.reactivex.Observable;
-import timber.log.Timber;
 
+/**
+ * This class acts as a Client to facilitate wiki page editing
+ * services to various dependency providing modules such as the Network module, the Review Controller ,etc
+ * 
+ * The methods provided by this class will post to the Media wiki api
+ * documented at: https://commons.wikimedia.org/w/api.php?action=help&modules=edit
+ */
 public class PageEditClient {
 
     private final CsrfTokenClient csrfTokenClient;
@@ -20,6 +26,12 @@ public class PageEditClient {
         this.service = service;
     }
 
+    /**
+     * This method is used when the content of the page is to be replaced by new content received
+     * @param pagetitle   Title of the page to edit
+     * @param text        Holds the page content
+     * @param summary     Edit summary
+     */
     public Observable<Boolean> edit(String pageTitle, String text, String summary) {
         try {
             return pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
@@ -29,6 +41,12 @@ public class PageEditClient {
         }
     }
 
+    /**
+     * This method is used when we need to append something to the end of wiki page content
+     * @param pagetitle   Title of the page to edit
+     * @param appendText  The received page content is added to beginning of the page
+     * @param summary     Edit summary
+     */
     public Observable<Boolean> appendEdit(String pageTitle, String appendText, String summary) {
         try {
             return pageEditInterface.postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
@@ -38,6 +56,12 @@ public class PageEditClient {
         }
     }
 
+    /**
+     * This method is used when we need to add something to the starting of the page
+     * @param pagetitle   Title of the page to edit
+     * @param prependText The received page content is added to beginning of the page
+     * @param summary     Edit summary
+     */
     public Observable<Boolean> prependEdit(String pageTitle, String prependText, String summary) {
         try {
             return pageEditInterface.postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
@@ -47,12 +71,4 @@ public class PageEditClient {
         }
     }
 
-    public Observable<Integer> addEditTag(long revisionId, String tagName, String reason) {
-        try {
-            return service.addEditTag(String.valueOf(revisionId), tagName, reason, csrfTokenClient.getTokenBlocking())
-                    .map(mwPostResponse -> mwPostResponse.getSuccessVal());
-        } catch (Throwable throwable) {
-            return Observable.just(-1);
-        }
-    }
 }

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -166,7 +167,7 @@ public class OkHttpJsonApiClient {
                 try {
                     return gson.fromJson(json, FeedbackResponse.class);
                 } catch (Exception e) {
-                    return new FeedbackResponse("", 0, 0, 0, new FeaturedImages(0, 0), 0, "", 0);
+                    return new FeedbackResponse(0, 0, 0, new FeaturedImages(0, 0), 0, "");
                 }
 
 

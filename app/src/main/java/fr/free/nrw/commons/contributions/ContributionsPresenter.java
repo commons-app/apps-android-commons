@@ -1,21 +1,24 @@
 package fr.free.nrw.commons.contributions;
 
-import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
-import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
+
+import javax.inject.Inject;
+
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.contributions.ContributionsContract.UserActionListener;
-import javax.inject.Inject;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
+import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
 
 /**
  * The presenter class for Contributions

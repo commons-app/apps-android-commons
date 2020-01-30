@@ -527,7 +527,7 @@
   <string name="exif_tag_name_lensModel">レンズモデル</string>
   <string name="exif_tag_name_serialNumbers">シリアル番号</string>
   <string name="exif_tag_name_software">ソフトウェア</string>
-  <string name="share_text">スマホからウィキペディア・コモンズに画像を投稿する\nコモンズアプリをダウンロード：%1$s</string>
+  <string name="share_text">スマホから直接、ウィキメディア・コモンズに画像を投稿する。\nコモンズアプリを今すぐダウンロード：%1$s</string>
   <string name="share_via">アプリの共有に使うのは…</string>
   <string name="image_info">画像情報</string>
   <string name="no_categories_found">カテゴリが見つかりません</string>

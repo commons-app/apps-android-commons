@@ -102,7 +102,7 @@
   <string name="media_upload_policy">Door dit plaetje toe te veuge verklaor ich det dit mien eige werk is en det \'t gein auteursrechtelik besjurmp matterjaal of selfies bevatj en angeszins instump mit \'t &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;beleid op Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Standerdlicentie</string>
-  <string name="use_previous">Gebroek veurige naam/besjrieving</string>
+  <string name="use_previous" fuzzy="true">Gebroek veurige naam/besjrieving</string>
   <string name="allow_gps">Haol autematis de hujige locatie op</string>
   <string name="allow_gps_summary" fuzzy="true">Haol de hujige locatie op veur categorieveurstèlle te make wen \'t bild gein geotags haet</string>
   <string name="preference_theme">Nachmodus</string>

@@ -128,7 +128,7 @@
   <string name="media_upload_policy">با بارگذاری این تصویر، تأیید می‌کنم که این اثر کار خودم است و از محتوای دارای حق تکثیر یا سلفی برای ایجاد آن استفاده نکرده‌ام و شرایط ذکر شده در By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;سیاست‌های ویکی‌انبار&lt;/a&gt; را رعایت می‌کند.</string>
   <string name="menu_download">دریافت</string>
   <string name="preference_license">مجوز پیش‌فرض</string>
-  <string name="use_previous">از عنوان/توضیحات پیشین استفاده کنید</string>
+  <string name="use_previous" fuzzy="true">از عنوان/توضیحات پیشین استفاده کنید</string>
   <string name="allow_gps">دریافت خودکار موقعیت کنونی</string>
   <string name="allow_gps_summary">درحال دریافت موقعیت برای پیشنهاد رده در صورتی که برچسب جغرافیایی وجود نداشته باشد.</string>
   <string name="preference_theme">حالت شبانه</string>

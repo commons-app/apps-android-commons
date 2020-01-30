@@ -1,5 +1,11 @@
 package fr.free.nrw.commons.repository;
 
+import java.util.Comparator;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -13,12 +19,6 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-
-import java.util.Comparator;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * This class would act as the data source for remote operations for UploadActivity

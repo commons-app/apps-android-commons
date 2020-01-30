@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import android.database.Cursor;
+
 import javax.inject.Inject;
 
 /**

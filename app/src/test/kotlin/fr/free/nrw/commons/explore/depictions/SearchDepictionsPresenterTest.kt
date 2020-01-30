@@ -1,9 +1,8 @@
 package fr.free.nrw.commons.explore.depictions
 
-import com.nhaarman.mockito_kotlin.verify
+import org.mockito.Mockito.verify
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
 import fr.free.nrw.commons.kvstore.JsonKvStore
-//import fr.free.nrw.commons.mwapi.MediaWikiApi
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Observable
 import io.reactivex.Single
