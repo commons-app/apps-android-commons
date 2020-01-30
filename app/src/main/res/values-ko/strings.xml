@@ -309,8 +309,8 @@
   <string name="error_loading_images">그림을 불러오는 동안 오류가 발생했습니다.</string>
   <string name="image_uploaded_by">올린이: %1$s</string>
   <string name="block_notification">공용 편집이 차단되어 있습니다</string>
-  <string name="appwidget_img">오늘의 사진</string>
-  <string name="app_widget_heading">오늘의 사진</string>
+  <string name="appwidget_img">오늘의 이미지</string>
+  <string name="app_widget_heading">오늘의 이미지</string>
   <string name="menu_search_button">검색</string>
   <string name="search_commons">공용 검색</string>
   <string name="images_not_found">%1$s와(과) 일치하는 그림이 없습니다</string>

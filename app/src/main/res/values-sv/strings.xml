@@ -560,4 +560,6 @@
   <string name="place_type">Platstyp:</string>
   <string name="nearby_search_hint">Bro, museum, hotell, etc.</string>
   <string name="you_must_reset_your_passsword">Någonting gick fel med inloggningen, du måste återställa ditt lösenord!</string>
+  <string name="upload_nearby_place_found_title">Hittade platser i närheten</string>
+  <string name="upload_nearby_place_found_description">Är detta ett foto av platsen %1$s?</string>
 </resources>

@@ -11,6 +11,7 @@
 * Sujan
 * Sushi
 * Tobi 406
+* WikiBayer
 -->
 <resources>
   <string name="title_activity_explore">Entdecken</string>
@@ -314,6 +315,7 @@
   <string name="no_images_found">Keine Bilder gefunden!</string>
   <string name="error_loading_images">Beim Laden der Bilder ist ein Fehler aufgetreten.</string>
   <string name="image_uploaded_by">Hochgeladen von: %1$s</string>
+  <string name="block_notification_title">Gesperrt</string>
   <string name="block_notification">Du bist für das Bearbeiten auf Commons gesperrt</string>
   <string name="appwidget_img">Bild des Tages</string>
   <string name="app_widget_heading">Bild des Tages</string>
@@ -516,12 +518,19 @@
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
   <string name="skip_image">Dieses bild überspringen</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fehlgeschlagen! Wir konnten die Datei nicht ohne externe Speicherberechtigung herunterladen!</string>
+  <string name="exif_tag_name_author">Autor</string>
   <string name="exif_tag_name_copyright">Urheberrecht</string>
   <string name="exif_tag_name_location">Standort</string>
+  <string name="exif_tag_name_serialNumbers">Seriennummer</string>
   <string name="share_text" fuzzy="true">Lade Fotos von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App herunter: %1$s</string>
   <string name="share_via">App teilen über …</string>
   <string name="image_info">Bildinformationen</string>
+  <string name="no_categories_found">Keine Kategorien gefunden</string>
+  <string name="upload_cancelled">Hochladen abbrechen</string>
+  <string name="delete_helper_show_deletion_title_success">Erfolgreich</string>
+  <string name="delete_helper_show_deletion_title_failed">Fehlgeschlagen</string>
   <string name="delete_helper_ask_spam_other">Andere</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Andere</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
 </resources>
