@@ -91,7 +91,7 @@ public class NearbyPlaces {
      * @return list of places obtained
      * @throws IOException if query fails
      */
-    private List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius) throws IOException {
+    public List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius) throws IOException {
         return okHttpJsonApiClient.getNearbyPlaces(cur, lang, radius).blockingSingle();
     }
 }

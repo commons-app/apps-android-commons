@@ -461,10 +461,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_categories_selected">No Categories Selected</string>
   <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to submit without selecting categories?</string>
 
-
   <string name="no_depictions_selected">No Depictions Selected</string>
   <string name="no_depictions_selected_warning_desc">Depictions help when searching for images. Are you sure you want to submit without selecting depictions?</string>
-
 
   <string name="yes_submit">Yes, Submit</string>
   <string name="no_go_back">No, Go Back</string>
@@ -611,4 +609,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
+
+  <string name="upload_nearby_place_found_title">Nearby Place Found</string>
+  <string name="upload_nearby_place_found_description">Is this a photo of Place %1$s?</string>
 </resources>

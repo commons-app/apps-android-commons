@@ -59,7 +59,7 @@ public class UploadMediaDetail {
         return descriptionText;
     }
 
-    void setDescriptionText(String descriptionText) {
+    public void setDescriptionText(String descriptionText) {
         this.descriptionText = descriptionText;
     }
 

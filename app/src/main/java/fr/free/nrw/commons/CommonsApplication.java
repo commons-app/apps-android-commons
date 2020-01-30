@@ -31,6 +31,8 @@ import org.wikipedia.AppAdapter;
 import org.wikipedia.language.AppLanguageLookUpTable;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -47,6 +49,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.upload.structure.depictions.DepictionDao;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -141,6 +144,16 @@ public class CommonsApplication extends Application {
         AppAdapter.set(new CommonsAppAdapter(sessionManager, defaultPrefs));
 
         initTimber();
+
+
+        if (!defaultPrefs.getBoolean("has_user_manually_removed_location")) {
+            Set<String> defaultExifTagsSet = defaultPrefs.getStringSet(Prefs.MANAGED_EXIF_TAGS);
+            if (null == defaultExifTagsSet) {
+                defaultExifTagsSet = new HashSet<>();
+            }
+            defaultExifTagsSet.add(getString(R.string.exif_tag_location));
+            defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet);
+        }
 
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         ImagePipelineConfig.Builder imagePipelineConfigBuilder = ImagePipelineConfig.newBuilder(this)

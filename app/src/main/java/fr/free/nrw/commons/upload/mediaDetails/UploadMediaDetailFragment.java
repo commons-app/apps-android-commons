@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,6 +26,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -298,6 +300,32 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         descriptions = uploadItem.getUploadMediaDetails();
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
         setDescriptionsInAdapter(descriptions);
+    }
+
+    /**
+     * Shows popup if any nearby location needing pictures matches uploadable picture's GPS location
+     * @param uploadItem
+     * @param place
+     */
+    @SuppressLint("StringFormatInvalid")
+    @Override
+    public void onNearbyPlaceFound(UploadItem uploadItem, Place place) {
+        DialogUtil.showAlertDialog(getActivity(),
+                getString(R.string.upload_nearby_place_found_title),
+                String.format(Locale.getDefault(),
+                        getString(R.string.upload_nearby_place_found_description),
+                        place.getName()),
+                () -> {
+
+                },
+                () -> {
+                    etTitle.setText(place.getName());
+                    UploadMediaDetail description = new UploadMediaDetail();
+                    description.setLanguageCode("en");
+                    description.setDescriptionText(place.getLongDescription());
+                    descriptions = Arrays.asList(description);
+                    setDescriptionsInAdapter(descriptions);
+                });
     }
 
     @Override
