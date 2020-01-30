@@ -41,6 +41,7 @@ public class SettingsFragment extends PreferenceFragment {
     @Inject
     CommonsLogSender commonsLogSender;
     private ListPreference listPreference;
+    private String uploadLimitValue;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class SettingsFragment extends PreferenceFragment {
         int currentUploadLimit = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(Integer.toString(currentUploadLimit));
         uploadLimit.setSummary(Integer.toString(currentUploadLimit));
+        uploadLimitValue = uploadLimit.getEditText().getText().toString();
         uploadLimit.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -92,9 +94,13 @@ public class SettingsFragment extends PreferenceFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 0) return;
-
-                int value = Integer.parseInt(s.toString());
+                int value;
+                if (s.length() == 0){
+                    value=100;
+                }
+                else {
+                    value = Integer.parseInt(s.toString());
+                }
 
                 if (value > 500) {
                     uploadLimit.getEditText().setError(getString(R.string.maximum_limit_alert));
@@ -108,6 +114,7 @@ public class SettingsFragment extends PreferenceFragment {
                 defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
                 uploadLimit.setText(Integer.toString(value));
                 uploadLimit.setSummary(Integer.toString(value));
+                uploadLimitValue  = Integer.toString(value);
             }
         });
 
