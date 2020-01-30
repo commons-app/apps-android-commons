@@ -64,7 +64,7 @@ dependencies {
 
     //Mocking
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
-    testImplementation 'org.mockito:mockito-inline:2.8.47'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
     testImplementation 'org.mockito:mockito-core:2.23.0'
     testImplementation "org.powermock:powermock-module-junit4:2.0.0-beta.5"
     testImplementation "org.powermock:powermock-api-mockito2:2.0.0-beta.5"
