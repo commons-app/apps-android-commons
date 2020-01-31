@@ -683,10 +683,14 @@ public class Media implements Parcelable {
         this.caption = caption;
     }
 
+    public void setCaptions(HashMap<String, String> captions) {
+        this.captions = captions;
+    }
+
     /**
      * Sets depictions for the current media obtained fro  Wikibase API
      */
     public void setDepiction(ArrayList<Map<String, String>> depictions) {
-        this.depictionList =depictions;
+        this.depictionList = depictions;
     }
 }

@@ -159,6 +159,7 @@ class ContributionDaoTest {
             // String fields
             assertEquals(SOURCE_CAMERA, it.getAsString(Table.COLUMN_SOURCE))
             assertEquals("desc", it.getAsString(Table.COLUMN_DESCRIPTION))
+            assertEquals("{\"caption\":\"caption\"}", it.getAsString(Table.COLUMN_CAPTION))
             assertEquals("create", it.getAsString(Table.COLUMN_CREATOR))
             assertEquals("007", it.getAsString(Table.COLUMN_LICENSE))
         }
@@ -286,6 +287,11 @@ class ContributionDaoTest {
                 assertEquals(88L, it.transferred)
                 assertEquals(SOURCE_GALLERY, it.source)
                 assertEquals("desc", it.description)
+
+                val stringMap: HashMap<String,String> = HashMap<String, String>(1)
+                stringMap.put("caption", "caption")
+                assertEquals(stringMap, it.captions)
+
                 assertEquals("create", it.creator)
                 assertEquals(640, it.width)
                 assertEquals(480, it.height)
@@ -326,16 +332,21 @@ class ContributionDaoTest {
 
     private fun createCursor(created: Long, uploaded: Long, multiple: Boolean, localUri: String) =
             MatrixCursor(Table.ALL_FIELDS, 1).apply {
+                val stringMap: HashMap<String,String> = HashMap<String, String>(1)
+                stringMap.put("caption", "caption")
                 addRow(listOf("111", "filePath", localUri, "image",
-                        created, STATE_QUEUED, 222L, uploaded, 88L, SOURCE_GALLERY, "desc", "{}",
+                        created, STATE_QUEUED, 222L, uploaded, 88L, SOURCE_GALLERY, "desc", stringMap,
                         "create", if (multiple) 1 else 0, 640, 480, "007", "Q1"))
                 moveToFirst()
             }
 
     private fun createContribution(isMultiple: Boolean, localUri: Uri?, imageUrl: String?, dateUploaded: Date?, filename: String?): Contribution {
-        val contribution = Contribution(localUri, imageUrl, filename, HashMap<String, String>(),
-                "desc",  222L, Date(321L),dateUploaded, "creator",
-                "edit summary", ArrayList<String>(), "coords").apply {
+        val stringMap: HashMap<String,String> = HashMap<String, String>(1)
+        stringMap.put("caption", "caption")
+
+        val contribution = Contribution(localUri, imageUrl, filename, stringMap,
+                "desc",  222L, Date(321L),dateUploaded, "create",
+                "edit", ArrayList<String>(), "coords").apply {
             state = STATE_COMPLETED
             transferred = 333L
             source = SOURCE_CAMERA

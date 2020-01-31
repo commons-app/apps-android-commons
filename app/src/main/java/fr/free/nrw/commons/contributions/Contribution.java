@@ -82,13 +82,13 @@ public class  Contribution extends Media {
      * Ex: key = "en", value: "<caption in short in English>"
      *     key = "de" , value: "<caption in german>"
      */
-    private HashMap<String, String> captions;
+    //private HashMap<String, String> captions;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
-                        String source, HashMap<String, String> caption, String description, String creator, boolean isMultiple,
+                        String source, HashMap<String, String> captions, String description, String creator, boolean isMultiple,
                         int width, int height, String license) {
-        super(localUri, imageUrl, filename, caption, description, dataLength, dateCreated, dateUploaded, creator);
+        super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.contentUri = contentUri;
         this.state = state;
         this.transferred = transferred;
@@ -98,12 +98,13 @@ public class  Contribution extends Media {
         this.height = height;
         this.license = license;
         this.dateCreatedSource = "";
+        //this.captions = captions;
     }
 
     public Contribution(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description, long dataLength,
                         Date dateCreated, Date dateUploaded, String creator, String editSummary, ArrayList<String> depictionsEntityIds, String decimalCoords) {
         super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
-        this.captions = captions;
+        //this.captions = captions;
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
@@ -296,7 +297,6 @@ public class  Contribution extends Media {
     public void setContentProviderUri(Uri contentProviderUri) {
         this.contentProviderUri = contentProviderUri;
     }
-
 
     /**
      * @return array list of entityids for the depictions
