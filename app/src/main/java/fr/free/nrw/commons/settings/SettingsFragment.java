@@ -98,9 +98,16 @@ public class SettingsFragment extends PreferenceFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 0) return;
+                int value=100;
+                if (s.length() == 0){
+                    defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, value);
+                    defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+                    uploadLimit.setText(Integer.toString(value));
+                    uploadLimit.setSummary(Integer.toString(value));
+                    return;
+                }
 
-                int value = Integer.parseInt(s.toString());
+                value = Integer.parseInt(s.toString());
 
                 if (value > 500) {
                     uploadLimit.getEditText().setError(getString(R.string.maximum_limit_alert));
