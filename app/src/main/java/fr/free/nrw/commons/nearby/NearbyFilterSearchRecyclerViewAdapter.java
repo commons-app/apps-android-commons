@@ -27,7 +27,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
     private final LayoutInflater inflater;
     private Context context;
-    private RecyclerView recyclerView;
     private ArrayList<Label> labels;
     private ArrayList<Label> displayedLabels;
     public ArrayList<Label> selectedLabels = new ArrayList<>();
@@ -46,7 +45,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
         this.context = context;
         this.labels = labels;
         this.displayedLabels = labels;
-        this.recyclerView = recyclerView;
         smoothScroller = new
                 LinearSmoothScroller(context) {
                     @Override protected int getVerticalSnapPreference() {
@@ -165,10 +163,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
             }
         }
         notifyDataSetChanged();
-    }
-
-    public void setRecyclerViewAdapterNeutral() {
-        state = CheckBoxTriStates.UNKNOWN;
     }
 
     public interface  Callback{

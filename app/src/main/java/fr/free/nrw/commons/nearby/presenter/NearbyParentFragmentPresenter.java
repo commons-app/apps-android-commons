@@ -191,7 +191,7 @@ public class NearbyParentFragmentPresenter
             Timber.d("SEARCH_CUSTOM_AREA");
             lockUnlockNearby(true);
             nearbyParentFragmentView.setProgressBarVisibility(true);
-            nearbyParentFragmentView.populatePlaces(lastLocation);
+            nearbyParentFragmentView.populatePlaces(nearbyParentFragmentView.getCameraTarget());
         } else { // Means location changed slightly, ie user is walking or driving.
             Timber.d("Means location changed slightly");
             if (!nearbyParentFragmentView.isSearchThisAreaButtonVisible()) { // Do not track users position if the user is checking around
@@ -348,9 +348,11 @@ public class NearbyParentFragmentPresenter
      * @return Returns true if search this area button is used around our current location
      */
     public boolean searchCloseToCurrentLocation() {
+        if (null == nearbyParentFragmentView.getLastFocusLocation()) {
+            return true;
+        }
         double distance = LocationUtils.commonsLatLngToMapBoxLatLng(nearbyParentFragmentView.getCameraTarget())
-                .distanceTo(new com.mapbox.mapboxsdk.geometry.LatLng(NearbyController.currentLocation.getLatitude()
-                        , NearbyController.currentLocation.getLongitude()));
+                .distanceTo(nearbyParentFragmentView.getLastFocusLocation());
         if (distance > NearbyController.currentLocationSearchRadius * 3 / 4) {
             return false;
         } else {

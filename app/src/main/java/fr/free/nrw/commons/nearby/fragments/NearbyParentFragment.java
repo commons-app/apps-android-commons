@@ -191,6 +191,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private NearbyAdapterFactory adapterFactory;
     private boolean isVisibleToUser;
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
+    private fr.free.nrw.commons.location.LatLng lastFocusLocation;
 
 
     @Override
@@ -270,9 +271,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (isVisible() && isVisibleToUser && isMapBoxReady) {
             checkPermissionsAndPerformAction(() -> {
                 this.lastKnownLocation = locationManager.getLastLocation();
+                fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
+                if(null==lastFocusLocation){
+                    target=lastKnownLocation;
+                }
                 if (lastKnownLocation != null) {
                     CameraPosition position = new CameraPosition.Builder()
-                            .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation)) // Sets the new camera position
+                            .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
                             .zoom(ZOOM_LEVEL) // Same zoom level
                             .build();
                     mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
@@ -439,7 +444,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Log.d("deneme5","setfilterState");
         chipNeedsPhoto.setChecked(NearbyFilterState.getInstance().isNeedPhotoSelected());
         chipExists.setChecked(NearbyFilterState.getInstance().isExistsSelected());
-
         if (NearbyController.currentLocation != null) {
             presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
         }
@@ -447,15 +451,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void initFilterChips() {
-
         chipNeedsPhoto.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (NearbyController.currentLocation != null) {
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 if (isChecked) {
-                    NearbyFilterState.getInstance().setNeedPhotoSelected(true);
+                    NearbyFilterState.setNeedPhotoSelected(true);
                     presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 } else {
-                    NearbyFilterState.getInstance().setNeedPhotoSelected(false);
+                    NearbyFilterState.setNeedPhotoSelected(false);
                     presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 }
             } else {
@@ -468,10 +471,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (NearbyController.currentLocation != null) {
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 if (isChecked) {
-                    NearbyFilterState.getInstance().setExistsSelected(true);
+                    NearbyFilterState.setExistsSelected(true);
                     presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 } else {
-                    NearbyFilterState.getInstance().setExistsSelected(false);
+                    NearbyFilterState.setExistsSelected(false);
                     presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 }
             } else {
@@ -605,6 +608,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public LatLng getLastFocusLocation() {
+        return lastFocusLocation==null?null:LocationUtils.commonsLatLngToMapBoxLatLng(lastFocusLocation);
+    }
+
+    @Override
     public boolean isNetworkConnectionEstablished() {
         return NetworkUtils.isInternetConnectionEstablished(getActivity());
     }
@@ -660,10 +668,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (lastKnownLocation == null) {
             lastKnownLocation = currentLocation;
         }
-        if (curlatLng.equals(getCameraTarget())) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(curlatLng, lastKnownLocation);
+        if (curlatLng.equals(lastFocusLocation)|| lastFocusLocation==null) { // Means we are checking around current location
+            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
         } else {
-            populatePlacesForAnotherLocation(curlatLng, lastKnownLocation);
+            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
         }
     }
 
@@ -673,7 +681,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .loadAttractionsFromLocation(curlatLng, searchLatLng, false, true))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(nearbyPlacesInfo -> updateMapMarkers(nearbyPlacesInfo,true),
+                .subscribe(nearbyPlacesInfo -> {
+                            updateMapMarkers(nearbyPlacesInfo, true);
+                            lastFocusLocation=searchLatLng;
+                        },
                         throwable -> {
                             Timber.d(throwable);
                             showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
@@ -689,7 +700,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .loadAttractionsFromLocation(curlatLng, searchLatLng, false, false))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(nearbyPlacesInfo -> updateMapMarkers(nearbyPlacesInfo,false),
+                .subscribe(nearbyPlacesInfo -> {
+                            updateMapMarkers(nearbyPlacesInfo, false);
+                            lastFocusLocation=searchLatLng;
+                        },
                         throwable -> {
                             Timber.d(throwable);
                             showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());

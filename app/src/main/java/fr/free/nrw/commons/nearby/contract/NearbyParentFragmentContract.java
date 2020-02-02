@@ -67,6 +67,8 @@ public interface NearbyParentFragmentContract {
         void updateListFragment(List<Place> placeList);
 
         LatLng getLastLocation();
+
+        com.mapbox.mapboxsdk.geometry.LatLng getLastFocusLocation();
     }
 
     interface NearbyListView {
