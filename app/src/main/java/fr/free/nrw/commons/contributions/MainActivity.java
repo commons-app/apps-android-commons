@@ -42,6 +42,7 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -179,6 +180,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                         Timber.d("Contributions tab selected");
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
+                        ViewUtil.hideKeyboard(tabLayout.getRootView());
                         updateMenuItem();
                         break;
                     case NEARBY_TAB_POSITION:
