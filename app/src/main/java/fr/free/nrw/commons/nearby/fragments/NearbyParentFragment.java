@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby.fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -488,6 +491,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             nearbyParentFragmentPresenter.centerMapToPlace(place,
                     getActivity().getResources().getConfiguration().orientation ==
                             Configuration.ORIENTATION_PORTRAIT);
+        }
+    }
+
+    /**
+     * Hides the keyboard in case the tab is switched
+     */
+    public void hideKeyboard(){
+        if(!searchView.isIconified()) {
+            searchView.clearFocus();
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            final IBinder windowToken = this.getView().getRootView().getWindowToken();
+            if (view != null) {
+                imm.hideSoftInputFromWindow(windowToken, InputMethodManager.HIDE_NOT_ALWAYS);
+            }
         }
     }
 

@@ -179,6 +179,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                         Timber.d("Contributions tab selected");
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
                         isContributionsFragmentVisible = true;
+                        ((NearbyParentFragment)contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).hideKeyboard();
                         updateMenuItem();
                         break;
                     case NEARBY_TAB_POSITION:
