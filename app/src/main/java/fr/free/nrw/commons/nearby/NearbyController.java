@@ -20,7 +20,6 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
