@@ -366,4 +366,14 @@ public class NearbyParentFragmentPresenter
             initializeMapOperations();
         }
     }
+
+    public boolean areLocationsClose(LatLng cameraTarget, LatLng lastKnownLocation) {
+        double distance = LocationUtils.commonsLatLngToMapBoxLatLng(cameraTarget)
+                .distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation));
+        if (distance > NearbyController.currentLocationSearchRadius * 3 / 4) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

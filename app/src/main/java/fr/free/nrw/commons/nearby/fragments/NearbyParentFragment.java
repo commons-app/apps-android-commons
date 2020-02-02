@@ -103,6 +103,7 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
@@ -885,38 +886,39 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    private void handleLocationUpdate(fr.free.nrw.commons.location.LatLng latLng, LocationServiceManager.LocationChangeType locationChangeType){
+        setMapBoxPosition(latLng);
+        this.lastKnownLocation=latLng;
+        NearbyController.currentLocation=lastKnownLocation;
+        presenter.updateMapAndList(locationChangeType);
+    }
+
+    private boolean isUserBrowsing() {
+        boolean isUserBrowsing = !presenter.areLocationsClose(getCameraTarget(), lastKnownLocation);
+        return isUserBrowsing;
+    }
+
     @Override
     public void onLocationChangedSignificantly(fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location significantly changed");
-        if (null == lastKnownLocation && isMapBoxReady && latLng != null) {//If the map has never ever shown the current location, lets do it know
-            setMapBoxPosition(latLng);
+        if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {
+            handleLocationUpdate(latLng,LOCATION_SIGNIFICANTLY_CHANGED);
         }
-        this.lastKnownLocation=latLng;
-        NearbyController.currentLocation=lastKnownLocation;
-        presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location significantly changed");
-        if (null == lastKnownLocation && isMapBoxReady && latLng != null) {//If the map has never ever shown the current location, lets do it know
-            setMapBoxPosition(latLng);
+        if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
+            handleLocationUpdate(latLng,LOCATION_SLIGHTLY_CHANGED);
         }
-        this.lastKnownLocation=latLng;
-        NearbyController.currentLocation=lastKnownLocation;
     }
 
     @Override
     public void onLocationChangedMedium(fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location changed medium");
-        if (null == lastKnownLocation && isMapBoxReady && latLng != null) {//If the map has never ever shown the current location, lets do it know
-            setMapBoxPosition(latLng);
-        }
-        this.lastKnownLocation=latLng;
-        NearbyController.currentLocation=lastKnownLocation;
-        //Even if location has only changed medium, if the last fetched nearbyPlacesInfo is Empty, lets anyways ask the presenter
-        if(nearbyPlacesInfo==null || nearbyPlacesInfo.placeList.size()==0) {
-            presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
+        if (isMapBoxReady && latLng != null && !isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
+            handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
