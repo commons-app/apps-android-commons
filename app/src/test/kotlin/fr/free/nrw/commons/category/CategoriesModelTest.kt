@@ -21,10 +21,10 @@ class CategoriesModelTest {
     internal var categoryItem: CategoryItem? = null
 
     @Spy
-    internal var gson: Gson? = Gson()
+    internal lateinit var gson: Gson
 
     @Spy
-    internal var categoryItemForMethodA: CategoryItem? = CategoryItem("",false)
+    internal lateinit var categoryItemForMethodA: CategoryItem
 
     @Mock
     internal var categoryDao: CategoryDao? = null
@@ -38,6 +38,8 @@ class CategoriesModelTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
+        gson = Gson()
+        categoryItemForMethodA = CategoryItem("",false)
         MockitoAnnotations.initMocks(this)
     }
 
