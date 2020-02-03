@@ -244,7 +244,7 @@
   <string name="navigation_item_about">Hakkında</string>
   <string name="navigation_item_settings">Ayarlar</string>
   <string name="navigation_item_feedback">Geri bildirim</string>
-  <string name="navigation_item_logout">Çıkış</string>
+  <string name="navigation_item_logout">Oturumu kapat</string>
   <string name="navigation_item_info">Eğitim</string>
   <string name="navigation_item_notification">Bildirimler</string>
   <string name="navigation_item_featured_images">Seçkin</string>
@@ -316,7 +316,7 @@
   <string name="about_translate_message">Çeviri göndermek istediğiniz dili seçin</string>
   <string name="about_translate_proceed">İlerle</string>
   <string name="about_translate_cancel">İptal</string>
-  <string name="retry">Tekrar Deneyin</string>
+  <string name="retry">Tekrar dene</string>
   <string name="showcase_view_got_it_button">Anladım!</string>
   <string name="showcase_view_whole_nearby_activity">Bunlar, Vikipedi makalelerini göstermek için resimlere ihtiyaç duyan yerler.\n\n\'BU ALANI ARA\'yı tıklamak haritayı kilitler ve o konumun yakınında yakındaki bir aramayı başlatır.</string>
   <string name="showcase_view_list_icon">Bu düğmeye dokunduğunuzda bu yerlerin bir listesi görüntülenir</string>
