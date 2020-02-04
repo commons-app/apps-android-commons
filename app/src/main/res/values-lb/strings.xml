@@ -107,7 +107,7 @@
   </plurals>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Standardlizenz</string>
-  <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
+  <string name="use_previous">Viregen Titel a Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
   <string name="allow_gps_summary">Rifft déi aktuell Plaz of wann e Bild net georeferenzéiert ass a setzt Geotagge vun der aktueller Plaz. Opgepasst: Doduerch gëtt Är aktuell Plaz bekannt.</string>
   <string name="preference_theme">Nuetsmodus</string>
@@ -350,4 +350,5 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
   <string name="place_state_needs_photo">Brauch eng Foto</string>
+  <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
 </resources>

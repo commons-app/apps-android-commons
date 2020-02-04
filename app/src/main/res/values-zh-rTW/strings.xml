@@ -13,6 +13,7 @@
 * Wwycheuk
 * ZhaoGang
 * 和平奮鬥救地球
+* 沈澄心
 * 烈羽
 -->
 <resources>
@@ -122,7 +123,7 @@
   <string name="media_upload_policy">透過提交此圖片，我宣佈這是我個人創作的成品，且不包含受版權保護或自拍內容，並除此之外遵守&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;維基媒體共享資源方針&lt;/a&gt;。</string>
   <string name="menu_download">下載</string>
   <string name="preference_license">預設授權條款</string>
-  <string name="use_previous">使用先前標題、描述</string>
+  <string name="use_previous">使用先前標題及描述</string>
   <string name="allow_gps">自動獲取目前位置</string>
   <string name="allow_gps_summary">如果圖片沒有地理標記，就索取目前位置的地理資訊來標記在圖片上。注意：這會透露出您目前所在的位置。</string>
   <string name="preference_theme">夜間模式</string>
@@ -564,4 +565,6 @@
   <string name="place_type">地點類型：</string>
   <string name="nearby_search_hint">橋梁、美術館、旅館、其它。</string>
   <string name="you_must_reset_your_passsword">登入時發生一些問題，您必須重新設定您的密碼！！</string>
+  <string name="upload_nearby_place_found_title">找到附近地點</string>
+  <string name="upload_nearby_place_found_description">這是地點%1$s的照片嗎？</string>
 </resources>

@@ -122,7 +122,7 @@
   <string name="media_upload_policy">Lisäämällä kuvan, ilmoitan tämän olevan oma työ ja että se ei sisällä tekijänoikeuden alaista materiaalia tai selfietä ja muuten noudattaa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Lataa</string>
   <string name="preference_license">Oletuslisenssi</string>
-  <string name="use_previous">Käytä edellistä otsikkoa/kuvausta</string>
+  <string name="use_previous" fuzzy="true">Käytä edellistä otsikkoa/kuvausta</string>
   <string name="allow_gps">Hae tämänhetkinen sijainti automaattisesti</string>
   <string name="allow_gps_summary">Noutaa nykyisen sijainnin jos kuva ei ole paikkamerkitty, ja paikkamerkitsee kuvan. Varoitus: tämä paljastaa nykyisen sijaintisi.</string>
   <string name="preference_theme">Yötila</string>

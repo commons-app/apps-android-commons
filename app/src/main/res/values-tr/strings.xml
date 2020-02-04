@@ -130,7 +130,7 @@
   <string name="media_upload_policy">Bu resmi göndererek, bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya selfies içermediğini ve başka türlü &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/tr\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Varsayılan Lisans</string>
-  <string name="use_previous">Önceki başlığı/açıklamayı kullan</string>
+  <string name="use_previous">Önceki başlığı ve açıklamayı kullan</string>
   <string name="allow_gps">Otomatik olarak mevcut konumu al</string>
   <string name="allow_gps_summary">Görüntü coğrafi olarak etiketlenmemişse geçerli konumu alır ve görüntüye coğrafi etiket ekler. Uyarı: Bu, geçerli konumunuzu gösterir.</string>
   <string name="preference_theme">Gece modu</string>
@@ -244,7 +244,7 @@
   <string name="navigation_item_about">Hakkında</string>
   <string name="navigation_item_settings">Ayarlar</string>
   <string name="navigation_item_feedback">Geri bildirim</string>
-  <string name="navigation_item_logout">Çıkış</string>
+  <string name="navigation_item_logout">Oturumu kapat</string>
   <string name="navigation_item_info">Eğitim</string>
   <string name="navigation_item_notification">Bildirimler</string>
   <string name="navigation_item_featured_images">Seçkin</string>
@@ -316,7 +316,7 @@
   <string name="about_translate_message">Çeviri göndermek istediğiniz dili seçin</string>
   <string name="about_translate_proceed">İlerle</string>
   <string name="about_translate_cancel">İptal</string>
-  <string name="retry">Tekrar Deneyin</string>
+  <string name="retry">Tekrar dene</string>
   <string name="showcase_view_got_it_button">Anladım!</string>
   <string name="showcase_view_whole_nearby_activity">Bunlar, Vikipedi makalelerini göstermek için resimlere ihtiyaç duyan yerler.\n\n\'BU ALANI ARA\'yı tıklamak haritayı kilitler ve o konumun yakınında yakındaki bir aramayı başlatır.</string>
   <string name="showcase_view_list_icon">Bu düğmeye dokunduğunuzda bu yerlerin bir listesi görüntülenir</string>
@@ -567,9 +567,11 @@
   <string name="notification_mark_read">Bildirim okundu olarak işaretlendi</string>
   <string name="some_error">Bazı hatalar oldu!</string>
   <string name="place_state">Yer durumu:</string>
-  <string name="place_state_exists">Varlıklar</string>
+  <string name="place_state_exists">Var</string>
   <string name="place_state_needs_photo">Fotoğrafa İhtiyaç Var</string>
   <string name="place_type">Yer türü:</string>
   <string name="nearby_search_hint">Köprü, müze, otel vb.</string>
   <string name="you_must_reset_your_passsword">Giriş ile ilgili bir sorun oluştu, şifrenizi sıfırlamanız gerekir !!</string>
+  <string name="upload_nearby_place_found_title">Yakındaki Yer Bulundu</string>
+  <string name="upload_nearby_place_found_description">Bu fotoğrafın yeri %1$s mı?</string>
 </resources>

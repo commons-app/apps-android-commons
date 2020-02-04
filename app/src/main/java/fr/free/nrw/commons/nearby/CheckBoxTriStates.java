@@ -9,6 +9,8 @@ import android.widget.CompoundButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatCheckBox;
 
+import java.util.List;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 
@@ -24,6 +26,16 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
     static public final int CHECKED = 1;
 
     private int state;
+
+    private Callback callback;
+
+    public interface Callback{
+        void filterByMarkerType(@Nullable List<Label> selectedLabels, int state, boolean b, boolean b1);
+    }
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+    }
 
     /**
      * This is the listener set to the super class which is going to be evoke each
@@ -87,7 +99,7 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
             }
 
             if (NearbyController.currentLocation != null) {
-                NearbyParentFragmentPresenter.getInstance().filterByMarkerType(null, state, false, true);
+                callback.filterByMarkerType(null, state, false, true);
             }
             updateBtn();
         }

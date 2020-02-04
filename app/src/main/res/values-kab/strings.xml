@@ -92,7 +92,7 @@
   <string name="media_upload_policy">S tuzna n tygna-agi, ad d-wekkdeɣ d akken d ayla-w, ur tegbir ara aferdis yettwaḥerzen s izerfan n umeskar, udiɣ tqudeṛ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Tisertiyin n Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Sider</string>
   <string name="preference_license" fuzzy="true">Turagt</string>
-  <string name="use_previous">Seqdec azwel neɣ aglam yezrin</string>
+  <string name="use_previous" fuzzy="true">Seqdec azwel neɣ aglam yezrin</string>
   <string name="allow_gps">Awi s wudem awurman adig amiran</string>
   <string name="allow_gps_summary" fuzzy="true">Awi adig amiran akken ad tsumreḍ taggayt ma yella tugna ur tettwacreḍ ara di tirakalt</string>
   <string name="preference_theme">Askar  n yiḍ</string>

@@ -117,7 +117,7 @@
   <string name="media_upload_policy">En trametre aquesta imatge declaro que és fruit del meu treball, que no conté material amb drets d\'autor o amb autofotos, i que s\'adhereix a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència per defecte</string>
-  <string name="use_previous">Utilitza títol i descripció anteriors</string>
+  <string name="use_previous" fuzzy="true">Utilitza títol i descripció anteriors</string>
   <string name="allow_gps">Obté la ubicació actual automàticament</string>
   <string name="allow_gps_summary">Recupera la ubicació actual si la imatge no està geoetiquetada, i n\'etiqueta la imatge geogràficament. Avís: això revelarà la vostra ubicació actual.</string>
   <string name="preference_theme">Mode nocturn</string>

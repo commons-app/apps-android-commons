@@ -123,7 +123,7 @@
   <string name="media_upload_policy">A kép feltöltésével kijelentem, hogy ez a saját munkám és nem tartalmaz jogvédett anyagot, nem szelfi és megfelel a&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons irányelveinek&lt;/a&gt;.</string>
   <string name="menu_download">Letöltés</string>
   <string name="preference_license">Alapértelmezett licenc</string>
-  <string name="use_previous">Előző cím/leírás használata</string>
+  <string name="use_previous" fuzzy="true">Előző cím/leírás használata</string>
   <string name="allow_gps">Automatikusan megkapja a jelenlegi helyet</string>
   <string name="allow_gps_summary">Ha a kép nem földrajzi címkézett, lekéri a jelenlegi helyet és ellátja a képet földrajzi címkével. Figyelem: ez felfedheti a tartózkodási helyedet.</string>
   <string name="preference_theme">Éjszakai mód</string>

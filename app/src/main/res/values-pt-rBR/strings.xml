@@ -126,7 +126,7 @@
   <string name="media_upload_policy">Ao enviar esta imagem, declaro que este é o meu próprio trabalho, que não contém material protegido ou selfies, e, de outra forma, adere a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença padrão</string>
-  <string name="use_previous">Usar o título/descrição anterior</string>
+  <string name="use_previous">Usar o título e descrição anterior</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Se a imagem não estiver georreferenciada, obtém a localização atual e georreferencia a imagem com ela. Aviso: isto revela a sua localização corrente.</string>
   <string name="preference_theme">Modo noturno</string>
@@ -568,4 +568,6 @@
   <string name="place_type">Tipo de local:</string>
   <string name="nearby_search_hint">Ponte, museu, hotel etc.</string>
   <string name="you_must_reset_your_passsword">Algo deu errado com a entrada, você deve redefinir sua senha!</string>
+  <string name="upload_nearby_place_found_title">Local próximo encontrado</string>
+  <string name="upload_nearby_place_found_description">Esta é uma foto desse lugar %1$s?</string>
 </resources>

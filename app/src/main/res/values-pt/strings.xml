@@ -126,7 +126,7 @@
   <string name="media_upload_policy">Ao carregar esta imagem, declaro que esta é uma obra própria, que não contém material protegido nem selfies, e que adere às &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pt\"&gt;normas da wiki Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descarregar</string>
   <string name="preference_license">Licença padrão</string>
-  <string name="use_previous">Usar título/descrição anteriores</string>
+  <string name="use_previous" fuzzy="true">Usar título/descrição anteriores</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Se a imagem não estiver georreferenciada, obtém a localização atual e georreferencia a imagem com ela. Aviso: isto revela a sua localização corrente.</string>
   <string name="preference_theme">Modo noturno</string>

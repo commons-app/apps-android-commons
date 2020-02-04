@@ -18,6 +18,11 @@ import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import fr.free.nrw.commons.upload.UploadActivity;
 
+/**
+ * This Class handles the dependency injection (using dagger)
+ * so, if a developer needs to add a new activity to the commons app
+ * then that must be mentioned here to inject the dependencies 
+ */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class ActivityBuilderModule {

@@ -120,7 +120,7 @@
   <string name="media_upload_policy">Publicando esta imaxe, declaro que é da miña obra, que non contén material con dereitos de autor ou selfies e que se adhire ás &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licenza por defecto</string>
-  <string name="use_previous">Usar o título ou a descrición anterior</string>
+  <string name="use_previous" fuzzy="true">Usar o título ou a descrición anterior</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
   <string name="allow_gps_summary">Obter a localización actual se a imaxe non está xeolocalizada, e xeolocaliza a imaxe con ela. Atención: Isto revelará a súa localización actual.</string>
   <string name="preference_theme">Modo nocturno</string>

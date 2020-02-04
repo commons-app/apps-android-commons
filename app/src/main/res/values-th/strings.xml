@@ -114,7 +114,7 @@
   <string name="media_upload_policy">โดยการส่งรูปภาพนี้ ฉันยืนยันว่านี่เป็นงานของฉันเอง ซึ่งไม่ประกอบด้วยเนื้อหาที่ละเมิดลิขสิทธิ์หรือภาพเซลฟี หรืออื่นๆ ตามที่ระบุใน&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;นโยบายของ Wikimedia Commons&lt;/a&gt;</string>
   <string name="menu_download">ดาวน์โหลด</string>
   <string name="preference_license">สัญญาอนุญาตปริยาย</string>
-  <string name="use_previous">ใช้ชื่อเรื่อง/คำอธิบายก่อนหน้านี้</string>
+  <string name="use_previous" fuzzy="true">ใช้ชื่อเรื่อง/คำอธิบายก่อนหน้านี้</string>
   <string name="allow_gps">รับข้อมูลตำแหน่งที่ตั้งปัจจุบันโดยอัตโนมัติ</string>
   <string name="allow_gps_summary">ดึงข้อมูลตำแหน่งที่ตั้งปัจจุบันเพื่อรับข้อเสนอแนะเกี่ยวกับหมวดหมู่ถ้ารูปภาพไม่ได้ติดแท็กตำแหน่งที่ตั้งเอาไว้</string>
   <string name="preference_theme">โหมดกลางคืน</string>
@@ -307,7 +307,7 @@
   <string name="showcase_view_plus_fab">คุณสามารถอัปโหลดรูปภาพสำหรับสถานที่ใด ๆ ได้จากแกลเลอรีหรือกล้องของคุณ</string>
   <string name="no_images_found">ไม่พบรูปภาพ!</string>
   <string name="error_loading_images">เกิดข้อผิดพลาดระหว่างการโหลดภาะ</string>
-  <string name="image_uploaded_by">อัพโหลดโดย: %1$a</string>
+  <string name="image_uploaded_by">อัพโหลดโดย: %1$s</string>
   <string name="block_notification_title">ถูกบล็อก</string>
   <string name="block_notification">คุณกำลังถูกบล็อคไม่ให้แก้ไขคอมมอนส์</string>
   <string name="appwidget_img">รูปภาพประจำวัน</string>
