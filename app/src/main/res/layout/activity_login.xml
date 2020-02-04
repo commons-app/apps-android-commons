@@ -24,7 +24,6 @@
             android:layout_marginRight="@dimen/standard_gap"
             android:layout_marginStart="@dimen/standard_gap"
             android:layout_marginTop="@dimen/large_gap"
-            android:clickable="true"
             android:focusableInTouchMode="true"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp">
@@ -32,7 +31,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="center"
                 android:orientation="vertical">
