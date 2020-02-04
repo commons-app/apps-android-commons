@@ -19,6 +19,7 @@ import com.facebook.imagepipeline.producers.Consumer;
 import com.facebook.imagepipeline.producers.FetchState;
 import com.facebook.imagepipeline.producers.NetworkFetcher;
 import com.facebook.imagepipeline.producers.ProducerContext;
+import com.facebook.stetho.Stetho;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -148,6 +149,8 @@ public class CommonsApplication extends Application {
         AppAdapter.set(new CommonsAppAdapter(sessionManager, defaultPrefs));
 
         initTimber();
+
+        Stetho.initializeWithDefaults(this);
 
 
         if (!defaultPrefs.getBoolean("has_user_manually_removed_location")) {

@@ -52,8 +52,11 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
     }
 
     public void setContributions(List<Contribution> contributionList) {
-        this.contributions=contributionList;
-        notifyDataSetChanged();
+        if(null!=contributionList) {
+            this.contributions.clear();
+            this.contributions.addAll(contributionList);
+            notifyDataSetChanged();
+        }
     }
 
     public interface Callback {

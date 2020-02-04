@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,6 +9,7 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import io.reactivex.Observable;
 
 /**
  * The LocalDataSource class for Contributions
@@ -28,7 +31,11 @@ class ContributionsLocalDataSource {
      * Fetch default number of contributions to be show, based on user preferences
      */
     public int get(String key) {
-        return defaultKVStore.getInt(key);
+        String uploads = defaultKVStore.getString(key);
+        if(TextUtils.isEmpty(uploads)){
+            return 0;
+        }
+        return Integer.parseInt(uploads);
     }
 
     /**
@@ -50,5 +57,9 @@ class ContributionsLocalDataSource {
      */
     public void deleteContribution(Contribution contribution) {
         contributionDao.delete(contribution);
+    }
+
+    public Observable<List<Contribution>> getContributions(int numberOfContributions) {
+        return contributionDao.fetchContributions(numberOfContributions);
     }
 }

@@ -113,6 +113,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         }
 
         rvContributionsList.setAdapter(adapter);
+        adapter.setContributions(contributions);
     }
 
     @Override

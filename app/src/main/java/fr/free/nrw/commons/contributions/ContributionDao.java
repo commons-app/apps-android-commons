@@ -7,17 +7,20 @@ import androidx.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.Single;
+
 @Dao
 public interface ContributionDao {
 
-    @Query("SELECT * FROM contribution")
-    List<Contribution> loadAllContributions();
+    @Query("SELECT * FROM contribution LIMIT  :numberOfContributions")
+    Observable<List<Contribution>> fetchContributions(int numberOfContributions);
 
     @Insert
     public void save(Contribution contribution);
 
     @Insert
-    public void save(List<Contribution> contribution);
+    public Single<List<Long>> save(List<Contribution> contribution);
 
     @Delete
     public void delete(Contribution contribution);

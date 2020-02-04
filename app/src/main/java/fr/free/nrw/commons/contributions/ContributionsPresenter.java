@@ -3,6 +3,7 @@ package fr.free.nrw.commons.contributions;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -19,9 +20,12 @@ import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.Scheduler;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -64,7 +68,32 @@ public class ContributionsPresenter implements UserActionListener {
     }
 
     void fetchContributions() {
-        if (NetworkUtils.isInternetConnectionEstablished(CommonsApplication.getInstance())) {
+        repository.fetchContributions(repository.get("uploads"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Contribution>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Contribution> contributions) {
+;                        showContributions(contributions);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.showProgress(false);
+                        //TODO
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+        if (NetworkUtils.isInternetConnectionEstablished(CommonsApplication.getInstance()) && shouldFetchContributions()) {
             view.showProgress(true);
             this.user = sessionManager.getUserName();
             view.showContributions(null);
@@ -74,30 +103,61 @@ public class ContributionsPresenter implements UserActionListener {
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnNext(mwQueryLogEvent -> Timber.d("Received image %s", mwQueryLogEvent.title()))
                     .filter(mwQueryLogEvent -> !mwQueryLogEvent.isDeleted()).doOnNext(mwQueryLogEvent -> Timber.d("Image %s passed filters", mwQueryLogEvent.title()))
-                    .map(image -> new Contribution(null, null, image.title(),
-                            "", -1, image.date(), image.date(), user,
-                            "", "", STATE_COMPLETED)).buffer(100)
-                    .subscribe(imageValues -> {
-                        this.contributionList.addAll(imageValues);
-                        view.showProgress(false);
-                        if (imageValues != null && imageValues.size() > 0) {
-                            view.showWelcomeTip(false);
-                            view.showNoContributionsUI(false);
-                            view.setUploadCount(imageValues.size());
-                            view.showContributions(contributionList);
-                        } else {
-                            view.showWelcomeTip(true);
-                            view.showNoContributionsUI(true);
-                        }
-                       Observable.fromIterable(contributionList)
-                                .subscribeOn(Schedulers.io())
-                                .doOnEach(imageValue -> appDatabase.getContributionDao().save(imageValue.getValue()));
+                    .map(image -> {
+                        Contribution contribution = new Contribution(null, null, image.title(),
+                                "", -1, image.date(), image.date(), user,
+                                "", "", STATE_COMPLETED);
+                        return contribution;
+                    })
+                    .toList()
+                    .subscribe(contributions -> {
+                        showContributions(contributions);
+                        saveContributionsToDB(contributions);
                     }, error -> {
-                        view.showProgress(false);
-                        view.showMessage(error.getLocalizedMessage());
-                        //TODO show error
+                        //DO nothing,
                     }));
         }
+    }
+
+    private void showContributions(List<Contribution> contributions) {
+        view.showProgress(false);
+        if(!(contributions==null && contributions.size()==0)){
+            view.showWelcomeTip(false);
+            view.showNoContributionsUI(false);
+            view.setUploadCount(contributions.size());
+            view.showContributions(contributions);
+            this.contributionList.clear();
+            this.contributionList.addAll(contributions);
+        } else {
+            view.showWelcomeTip(true);
+            view.showNoContributionsUI(true);
+        }
+    }
+
+    private void saveContributionsToDB(List<Contribution> contributions) {
+        appDatabase.getContributionDao().save(contributions)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Long>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(List<Long> longs) {
+                        Log.d("CP","inserted contributios");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("CP","failed to insert contributios");
+                    }
+                });
+    }
+
+    private boolean shouldFetchContributions() {
+        return true;
     }
 
     @Override
@@ -128,18 +188,6 @@ public class ContributionsPresenter implements UserActionListener {
     @Nullable
     @Override
     public Media getItemAtPosition(int i) {
-        return  contributionList==null?null:contributionList.get(i);
-    }
-
-    /**
-     * Get contribution position  with id
-     */
-    public int getChildPositionWithId(String fileName) {
-        for (Contribution contribution : contributionList) {
-            if (contribution.getFilename().equals(fileName)) {
-                return contributionList.indexOf(contribution);
-            }
-        }
-        return -1;
+        return  contributionList==null || contributionList.size()<i?null:contributionList.get(i);
     }
 }

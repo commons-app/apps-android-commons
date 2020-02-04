@@ -1,6 +1,10 @@
 package fr.free.nrw.commons.contributions;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
 
 /**
  * The repository class for contributions
@@ -36,5 +40,9 @@ public class ContributionsRepository {
      */
     public Contribution getContributionWithFileName(String fileName) {
         return localDataSource.getContributionWithFileName(fileName);
+    }
+
+    public Observable<List<Contribution>> fetchContributions(int numberOfContributions) {
+        return localDataSource.getContributions(numberOfContributions);
     }
 }
