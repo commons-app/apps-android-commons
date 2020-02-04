@@ -894,7 +894,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private boolean isUserBrowsing() {
-        boolean isUserBrowsing = !presenter.areLocationsClose(getCameraTarget(), lastKnownLocation);
+        boolean isUserBrowsing = lastKnownLocation!=null && !presenter.areLocationsClose(getCameraTarget(), lastKnownLocation);
         return isUserBrowsing;
     }
 
