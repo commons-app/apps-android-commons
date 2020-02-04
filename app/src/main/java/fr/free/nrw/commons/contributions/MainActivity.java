@@ -35,7 +35,6 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
-import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
@@ -78,6 +77,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
     private MenuItem notificationsMenuItem;
     private TextView notificationCount;
+    private NearbyParentFragment nearbyParentFragment;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,8 +188,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                         tabLayout.getTabAt(NEARBY_TAB_POSITION).select();
                         isContributionsFragmentVisible = false;
                         updateMenuItem();
-                        // Do all permission and GPS related tasks on tab selected, not on create
-                        NearbyParentFragmentPresenter.getInstance().onTabSelected();
                         break;
                     default:
                         tabLayout.getTabAt(CONTRIBUTIONS_TAB_POSITION).select();
@@ -265,7 +263,9 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
             }
         } else if (getSupportFragmentManager().findFragmentByTag(nearbyFragmentTag) != null && !isContributionsFragmentVisible) {
             // Means that nearby fragment is visible (not contributions fragment)
-            NearbyParentFragmentPresenter.getInstance().backButtonClicked();
+            if (null != nearbyParentFragment) {
+                nearbyParentFragment.backButtonClicked();
+            }
         } else {
             super.onBackPressed();
         }
@@ -380,12 +380,13 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
                     }
 
                 case 1:
-                    NearbyParentFragment retainedNearbyFragment = getNearbyFragment(1);
-                    if (retainedNearbyFragment != null) {
-                        return retainedNearbyFragment;
+                    nearbyParentFragment = getNearbyFragment(1);
+                    if (nearbyParentFragment != null) {
+                        return nearbyParentFragment;
                     } else {
                         // If we reach here, retainedNearbyFragment is null
-                        return new NearbyParentFragment();
+                        nearbyParentFragment=new NearbyParentFragment();
+                        return nearbyParentFragment;
                     }
                 default:
                     return null;

@@ -3,8 +3,8 @@
     android:id="@+id/search_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="4dp">
+    android:padding="4dp"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/place_icon"
@@ -14,5 +14,6 @@
     <TextView
         android:id="@+id/place_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"></TextView>
 </LinearLayout>
