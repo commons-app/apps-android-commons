@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.nearby.contract;
 
+import android.content.Context;
+
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 
@@ -9,16 +11,16 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 
 public interface NearbyParentFragmentContract {
 
     interface View {
-        void registerLocationUpdates(LocationServiceManager locationServiceManager);
         boolean isNetworkConnectionEstablished();
-        void addNetworkBroadcastReceiver();
         void listOptionMenuItemClicked();
-        void  populatePlaces(LatLng curlatLng, LatLng searchLatLng);
+        void populatePlaces(LatLng curlatLng);
         boolean isListBottomSheetExpanded();
         void checkPermissionsAndPerformAction(Runnable runnable);
         void displayLoginSkippedWarning();
@@ -29,7 +31,7 @@ public interface NearbyParentFragmentContract {
         void hideBottomSheet();
         void hideBottomDetailsSheet();
         void displayBottomSheetWithInfo(Marker marker);
-        void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener);
+        void addOnCameraMoveListener();
         void addSearchThisAreaButtonAction();
         void setSearchThisAreaButtonVisibility(boolean isVisible);
         void setProgressBarVisibility(boolean isVisible);
@@ -44,7 +46,32 @@ public interface NearbyParentFragmentContract {
         void setFilterState();
         void disableFABRecenter();
         void enableFABRecenter();
+
         JsonKvStore getApplicationKvStore(); //Passed to NearbyParentFragmentPresenter to solve #2803
+  
+        void addCurrentLocationMarker(LatLng curLatLng);
+
+        void updateMapToTrackPosition(LatLng curLatLng);
+
+        Context getContext();
+
+        void updateMapMarkers(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker);
+
+        void filterOutAllMarkers();
+
+        void displayAllMarkers();
+
+        void filterMarkersByLabels(List<Label> selectedLabels, boolean existsSelected, boolean needPhotoSelected, boolean filterForPlaceState, boolean filterForAllNoneType);
+
+        LatLng getCameraTarget();
+
+        void centerMapToPlace(Place placeToCenter);
+
+        void updateListFragment(List<Place> placeList);
+
+        LatLng getLastLocation();
+
+        com.mapbox.mapboxsdk.geometry.LatLng getLastFocusLocation();
     }
 
     interface NearbyListView {
@@ -52,19 +79,21 @@ public interface NearbyParentFragmentContract {
     }
 
     interface UserActions {
-        void onTabSelected();
-        void checkForPermission();
-        void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget);
+        void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType);
         void lockUnlockNearby(boolean isNearbyLocked);
+
+        void attachView(View view);
+
+        void detachView();
+
         void setActionListeners(JsonKvStore applicationKvStore);
         void backButtonClicked();
-        MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap);
+        void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng);
         void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState, boolean filterForAllNoneType);
+
+        void updateMapMarkersToController(List<NearbyBaseMarker> nearbyBaseMarkers);
+
         void searchViewGainedFocus();
         void setCheckboxUnknown();
-    }
-    
-    interface ViewsAreReadyCallback {
-        void nearbyFragmentsAreReady();
     }
 }

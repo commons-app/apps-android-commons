@@ -5,11 +5,13 @@
 * FF11
 * Inkowik
 * Kghbln
+* Killarnee
 * Metalhead64
 * Pyscowicz
 * Sujan
 * Sushi
 * Tobi 406
+* WikiBayer
 -->
 <resources>
   <string name="title_activity_explore">Entdecken</string>
@@ -120,7 +122,7 @@
   <string name="media_upload_policy">Durch das Hochladen dieses Bildes erkläre ich, dass dies mein eigenes Werk ist, das kein urheberrechtlich geschütztes Material oder Selfies enthält und das auch sonst die &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/de\"&gt;Wikimedia-Commons-Richtlinien&lt;/a&gt; einhält.</string>
   <string name="menu_download">Herunterladen</string>
   <string name="preference_license">Standardlizenz</string>
-  <string name="use_previous">Vorherige(n) Titel/Beschreibung verwenden</string>
+  <string name="use_previous">Vorherigen Titel und Beschreibung verwenden</string>
   <string name="allow_gps">Aktuellen Standort automatisch abrufen</string>
   <string name="allow_gps_summary">Ruft den aktuellen Standort ab, falls das Bild nicht georeferenziert ist und markiert es. Warnung: Diese Aktion verrät deinen aktuellen Standort.</string>
   <string name="preference_theme">Nachtmodus</string>
@@ -278,7 +280,7 @@
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
   <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
-  <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Der Standort ist nicht verfügbar.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
   <string name="get_directions">Richtungen abrufen</string>
   <string name="read_article">Artikel lesen</string>
@@ -313,6 +315,7 @@
   <string name="no_images_found">Keine Bilder gefunden!</string>
   <string name="error_loading_images">Beim Laden der Bilder ist ein Fehler aufgetreten.</string>
   <string name="image_uploaded_by">Hochgeladen von: %1$s</string>
+  <string name="block_notification_title">Gesperrt</string>
   <string name="block_notification">Du bist für das Bearbeiten auf Commons gesperrt</string>
   <string name="appwidget_img">Bild des Tages</string>
   <string name="app_widget_heading">Bild des Tages</string>
@@ -515,12 +518,19 @@
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
   <string name="skip_image">Dieses bild überspringen</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fehlgeschlagen! Wir konnten die Datei nicht ohne externe Speicherberechtigung herunterladen!</string>
+  <string name="exif_tag_name_author">Autor</string>
   <string name="exif_tag_name_copyright">Urheberrecht</string>
   <string name="exif_tag_name_location">Standort</string>
-  <string name="share_text">Lade Fotos von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App herunter: %1$s</string>
+  <string name="exif_tag_name_serialNumbers">Seriennummer</string>
+  <string name="share_text" fuzzy="true">Lade Fotos von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App herunter: %1$s</string>
   <string name="share_via">App teilen über …</string>
   <string name="image_info">Bildinformationen</string>
+  <string name="no_categories_found">Keine Kategorien gefunden</string>
+  <string name="upload_cancelled">Hochladen abbrechen</string>
+  <string name="delete_helper_show_deletion_title_success">Erfolgreich</string>
+  <string name="delete_helper_show_deletion_title_failed">Fehlgeschlagen</string>
   <string name="delete_helper_ask_spam_other">Andere</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Andere</string>
   <string name="account_created">Benutzerkonto erstellt!</string>
 </resources>

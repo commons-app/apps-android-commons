@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,21 +18,20 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
@@ -39,16 +40,23 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
-import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.annotations.Polygon;
+import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.maps.UiSettings;
+import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -66,7 +74,12 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
+import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
+import fr.free.nrw.commons.nearby.NearbyAdapterFactory;
+import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
@@ -74,11 +87,13 @@ import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
-import fr.free.nrw.commons.utils.FragmentUtils;
+import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
+import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
+import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
@@ -88,16 +103,18 @@ import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.nearby.Label.TEXT_TO_DESCRIPTION;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
         implements NearbyParentFragmentContract.View,
-        WikidataEditListener.WikidataP18EditListener {
+        WikidataEditListener.WikidataP18EditListener, LocationUpdateListener {
 
-    @BindView(R.id.bottom_sheet) View bottomSheetList;
+    @BindView(R.id.bottom_sheet) RelativeLayout rlBottomSheet;
     @BindView(R.id.bottom_sheet_details) View bottomSheetDetails;
     @BindView(R.id.transparentView) View transparentView;
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
@@ -120,9 +137,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.icon) ImageView icon;
     @BindView(R.id.search_this_area_button) Button searchThisAreaButton;
     @BindView(R.id.map_progress_bar) ProgressBar progressBar;
-    @BindView(R.id.container_sheet) FrameLayout frameLayout;
-    @BindView(R.id.loading_nearby_list) ConstraintLayout loadingNearbyLayout;
-
     @BindView(R.id.choice_chip_exists) Chip chipExists;
     @BindView(R.id.choice_chip_needs_photo) Chip chipNeedsPhoto;
     @BindView(R.id.choice_chip_group) ChipGroup choiceChipGroup;
@@ -130,6 +144,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.search_list_view) RecyclerView recyclerView;
     @BindView(R.id.nearby_filter_list) View nearbyFilterList;
     @BindView(R.id.checkbox_tri_states) CheckBoxTriStates checkBoxTriStates;
+    @BindView(R.id.map_view)
+    MapView mapView;
+    @BindView(R.id.rv_nearby_list)
+    RecyclerView rvNearbyList;
 
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
@@ -147,13 +165,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Animation fab_open;
     private Animation rotate_forward;
 
-    private static final double ZOOM_LEVEL = 14f;
+    private static final float ZOOM_LEVEL = 14f;
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
     private boolean isNetworkErrorOccurred = false;
     private Snackbar snackbar;
     private View view;
-    private NearbyParentFragmentPresenter nearbyParentFragmentPresenter;
+    private NearbyParentFragmentPresenter presenter;
     private boolean isDarkTheme;
     private boolean isFABsExpanded;
     private Marker selectedMarker;
@@ -162,29 +180,183 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
 
-    private NearbyMapFragment nearbyMapFragment;
-    private NearbyListFragment nearbyListFragment;
+    private boolean isMapBoxReady=false;
+    private MapboxMap mapBox;
+    IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
+    private Marker currentLocationMarker;
+    private Polygon currentLocationPolygon;
+    private Place lastPlaceToCenter;
+    private fr.free.nrw.commons.location.LatLng lastKnownLocation;
+    private fr.free.nrw.commons.location.LatLng currentLocation=null;
+    private NearbyController.NearbyPlacesInfo nearbyPlacesInfo;
+    private NearbyAdapterFactory adapterFactory;
+    private boolean isVisibleToUser;
+    private MapboxMap.OnCameraMoveListener cameraMoveListener;
+    private fr.free.nrw.commons.location.LatLng lastFocusLocation;
 
-    public static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
-    private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_nearby_parent, container, false);
         ButterKnife.bind(this, view);
+        initNetworkBroadCastReceiver();
+        presenter=new NearbyParentFragmentPresenter(bookmarkLocationDao);
         // Inflate the layout for this fragment
         return view;
 
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        nearbyMapFragment = getNearbyMapFragment();
-        nearbyListFragment = getListFragment();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        isDarkTheme = applicationKvStore.getBoolean("theme", false);
+        cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
+        addCheckBoxCallback();
+        presenter.attachView(this);
+        initRvNearbyList();
+        initThemePreferences();
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(mapBoxMap -> {
+            this.mapBox=mapBoxMap;
+            initViews();
+            presenter.setActionListeners(applicationKvStore);
+            initNearbyFilter();
+            mapBoxMap.setStyle(isDarkTheme?Style.DARK:Style.OUTDOORS, style -> {
+                UiSettings uiSettings = mapBoxMap.getUiSettings();
+                uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
+                uiSettings.setCompassMargins(12, 0, 0, 24);
+                uiSettings.setLogoEnabled(false);
+                uiSettings.setAttributionEnabled(false);
+                uiSettings.setRotateGesturesEnabled(false);
+                NearbyParentFragment.this.isMapBoxReady=true;
+                performMapReadyActions();
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(51.50550, -0.07520))
+                        .zoom(ZOOM_LEVEL)
+                        .build();
+                mapBoxMap.setCameraPosition(cameraPosition);
+            });
+
+        });
     }
 
+    /**
+     * Initialise background based on theme, this should be doe ideally via styles, that would need another refactor
+     */
+    private void initThemePreferences() {
+        if(isDarkTheme){
+            rvNearbyList.setBackgroundColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
+            checkBoxTriStates.setTextColor(getContext().getResources().getColor(android.R.color.white));
+            checkBoxTriStates.setTextColor(getContext().getResources().getColor(android.R.color.white));
+            nearbyFilterList.setBackgroundColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
+        }else{
+            rvNearbyList.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
+            checkBoxTriStates.setTextColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
+            nearbyFilterList.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
+            nearbyFilterList.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
+        }
+    }
+
+    private void initRvNearbyList() {
+        rvNearbyList.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapterFactory = new NearbyAdapterFactory(this, controller);
+        rvNearbyList.setAdapter(adapterFactory.create(null));
+    }
+
+    private void addCheckBoxCallback() {
+        checkBoxTriStates.setCallback((o, state, b, b1) -> presenter.filterByMarkerType(o,state,b,b1));
+    }
+
+    private void performMapReadyActions() {
+        if (isVisible() && isVisibleToUser && isMapBoxReady) {
+            checkPermissionsAndPerformAction(() -> {
+                this.lastKnownLocation = locationManager.getLastLocation();
+                fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
+                if(null==lastFocusLocation){
+                    target=lastKnownLocation;
+                }
+                if (lastKnownLocation != null) {
+                    CameraPosition position = new CameraPosition.Builder()
+                            .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
+                            .zoom(ZOOM_LEVEL) // Same zoom level
+                            .build();
+                    mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
+                }
+                presenter.onMapReady();
+                registerUnregisterLocationListener(false);
+                addOnCameraMoveListener();
+            });
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+        presenter.attachView(this);
+        registerNetworkReceiver();
+        if (isResumed() && isVisibleToUser) {
+            startTheMap();
+        }
+    }
+
+    private void registerNetworkReceiver() {
+        if (getActivity() != null)
+            getActivity().registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+        compositeDisposable.clear();
+        presenter.detachView();
+        registerUnregisterLocationListener(true);
+        try {
+            if (broadcastReceiver != null && getActivity()!=null) {
+                getContext().unregisterReceiver(broadcastReceiver);
+            }
+
+            if (locationManager != null && presenter != null) {
+                locationManager.removeLocationListener(presenter);
+                locationManager.unregisterLocationManager();
+            }
+            if (null != mapBox) {
+                mapBox.removeOnCameraMoveListener(cameraMoveListener);
+            }
+        }catch (Exception e){
+            Timber.e(e);
+            //Broadcast receivers should always be unregistered inside catch, you never know if they were already registered or not
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mapView.onDestroy();
+    }
 
     private void initViews() {
         Timber.d("init views called");
@@ -199,10 +371,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
      */
     private void initBottomSheets() {
-        bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
+        bottomSheetListBehavior = BottomSheetBehavior.from(rlBottomSheet);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
+        bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     public void initNearbyFilter() {
@@ -210,7 +383,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                nearbyParentFragmentPresenter.searchViewGainedFocus();
+                presenter.searchViewGainedFocus();
                 nearbyFilterList.setVisibility(View.VISIBLE);
             } else {
                 nearbyFilterList.setVisibility(View.GONE);
@@ -226,6 +399,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         recyclerView.setLayoutManager(linearLayoutManager);
 
         nearbyFilterSearchRecyclerViewAdapter = new NearbyFilterSearchRecyclerViewAdapter(getContext(),new ArrayList<>(TEXT_TO_DESCRIPTION.values()), recyclerView);
+        nearbyFilterSearchRecyclerViewAdapter.setCallback(new NearbyFilterSearchRecyclerViewAdapter.Callback() {
+            @Override
+            public void setCheckboxUnknown() {
+                presenter.setCheckboxUnknown();
+            }
+
+            @Override
+            public void filterByMarkerType(ArrayList<Label> selectedLabels, int i, boolean b, boolean b1) {
+                presenter.filterByMarkerType(selectedLabels,i,b,b1);
+            }
+
+            @Override
+            public boolean isDarkTheme() {
+                return isDarkTheme;
+            }
+        });
         nearbyFilterList.getLayoutParams().width = (int) LayoutUtils.getScreenWidth(getActivity(), 0.75);
         recyclerView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
         LayoutUtils.setLayoutHeightAllignedToWidth(1, nearbyFilterList);
@@ -256,24 +445,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Log.d("deneme5","setfilterState");
         chipNeedsPhoto.setChecked(NearbyFilterState.getInstance().isNeedPhotoSelected());
         chipExists.setChecked(NearbyFilterState.getInstance().isExistsSelected());
-
         if (NearbyController.currentLocation != null) {
-            NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+            presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
         }
 
     }
 
     private void initFilterChips() {
-
         chipNeedsPhoto.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (NearbyController.currentLocation != null) {
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 if (isChecked) {
-                    NearbyFilterState.getInstance().setNeedPhotoSelected(true);
-                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                    NearbyFilterState.setNeedPhotoSelected(true);
+                    presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 } else {
-                    NearbyFilterState.getInstance().setNeedPhotoSelected(false);
-                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                    NearbyFilterState.setNeedPhotoSelected(false);
+                    presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 }
             } else {
                 chipNeedsPhoto.setChecked(!isChecked);
@@ -285,11 +472,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (NearbyController.currentLocation != null) {
                 checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
                 if (isChecked) {
-                    NearbyFilterState.getInstance().setExistsSelected(true);
-                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                    NearbyFilterState.setExistsSelected(true);
+                    presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 } else {
-                    NearbyFilterState.getInstance().setExistsSelected(false);
-                    NearbyParentFragmentPresenter.getInstance().filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+                    NearbyFilterState.setExistsSelected(false);
+                    presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
                 }
             } else {
                 chipExists.setChecked(!isChecked);
@@ -322,10 +509,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         });
 
-        bottomSheetList.getLayoutParams().height = getActivity().getWindowManager()
+        rlBottomSheet.getLayoutParams().height = getActivity().getWindowManager()
                 .getDefaultDisplay().getHeight() / 16 * 9;
-        bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
-
+        bottomSheetListBehavior = BottomSheetBehavior.from(rlBottomSheet);
+        bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetBehavior
                 .BottomSheetCallback() {
             @Override
@@ -373,6 +560,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         title.setOnClickListener(view -> {
             Utils.copy("place", title.getText().toString(), getContext());
             Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
+            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             } else {
@@ -382,139 +570,47 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Returns the list fragment added to child fragment manager previously, if exists.
-     */
-    private NearbyListFragment getListFragment() {
-        NearbyListFragment existingFragment = (NearbyListFragment) getChildFragmentManager()
-                .findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
-        if (existingFragment == null) {
-            existingFragment = setListFragment();
-        }
-        return existingFragment;
-    }
-
-    /**
-     * Returns the map fragment added to child fragment manager previously, if exists.
-     */
-    private NearbyMapFragment getNearbyMapFragment() {
-        NearbyMapFragment existingFragment = (NearbyMapFragment) getChildFragmentManager()
-                .findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
-        if (existingFragment == null) {
-            existingFragment = setMapFragment();
-        }
-        return existingFragment;
-    }
-
-    /**
-     * Creates the map fragment and prepares map
-     * @return the map fragment created
-     */
-    private NearbyMapFragment setMapFragment() {
-        // Mapbox access token is configured here. This needs to be called either in your application
-        // object or in the same activity which contains the mapview.
-        Mapbox.getInstance(getActivity(), getString(R.string.mapbox_commons_app_token));
-        NearbyMapFragment mapFragment;
-
-        // Create fragment
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-
-        // Build mapboxMap
-        isDarkTheme = applicationKvStore.getBoolean("theme", false);
-        MapboxMapOptions options = new MapboxMapOptions()
-                .compassGravity(Gravity.BOTTOM | Gravity.LEFT)
-                .compassMargins(new int[]{12, 0, 0, 24})
-                .logoEnabled(false)
-                .attributionEnabled(false)
-                .camera(new CameraPosition.Builder()
-                        .zoom(ZOOM_LEVEL)
-                        .target(new com.mapbox.mapboxsdk.geometry.LatLng(-52.6885, -70.1395))
-                        .build());
-
-        // Create map fragment
-        mapFragment = NearbyMapFragment.newInstance(options);
-
-        // Add map fragment to parent container
-        getChildFragmentManager().executePendingTransactions();
-        transaction.add(R.id.container, mapFragment, TAG_RETAINED_MAP_FRAGMENT);
-        transaction.commit();
-
-        mapFragment.getMapAsync(mapboxMap ->
-                mapboxMap.setStyle(
-                        NearbyParentFragment.this.isDarkTheme ? Style.DARK : Style.OUTDOORS, style -> {
-                            NearbyParentFragment.this.childMapFragmentAttached();
-                            // Map is set up and the style has loaded. Now you can add data or make other map adjustments
-                        }));
-        return mapFragment;
-    }
-
-    /**
-     * Creates the list fragment and put it into container
-     * @return the list fragment created
-     */
-    private NearbyListFragment setListFragment() {
-        NearbyListFragment nearbyListFragment;
-        loadingNearbyLayout.setVisibility(View.GONE);
-        frameLayout.setVisibility(View.VISIBLE);
-        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-        nearbyListFragment = new NearbyListFragment();
-        nearbyListFragment.setArguments(null);
-        fragmentTransaction.replace(R.id.container_sheet, nearbyListFragment, TAG_RETAINED_LIST_FRAGMENT);
-        fragmentTransaction.commitAllowingStateLoss();
-        return nearbyListFragment;
-    }
-
-    private void removeListFragment() {
-        if (nearbyListFragment != null) {
-            FragmentManager fm = getChildFragmentManager();
-            fm.beginTransaction().remove(nearbyListFragment).commit();
-            nearbyListFragment = null;
-        }
-    }
-
-    private void removeMapFragment() {
-        if (nearbyMapFragment != null) {
-            FragmentManager fm = getChildFragmentManager();
-            fm.beginTransaction().remove(nearbyMapFragment).commit();
-            nearbyMapFragment = null;
-        }
-    }
-
-    /**
-     * Calls presenter to center map to any place
-     * @param place the place we want to center map
+     * Centers the map in nearby fragment to a given place
+     * @param place is new center of the map
      */
     public void centerMapToPlace(Place place) {
-        if (nearbyMapFragment != null) {
-            nearbyParentFragmentPresenter.centerMapToPlace(place,
-                    getActivity().getResources().getConfiguration().orientation ==
-                            Configuration.ORIENTATION_PORTRAIT);
+        Timber.d("Map is centered to place");
+        double cameraShift;
+        if(null!=place){
+            lastPlaceToCenter=place;
+        }
+
+        if (null != lastPlaceToCenter) {
+            Configuration configuration = getActivity().getResources().getConfiguration();
+            if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                cameraShift = CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT;
+            } else {
+                cameraShift = CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE;
+            }
+            CameraPosition position = new CameraPosition.Builder()
+                    .target(LocationUtils.commonsLatLngToMapBoxLatLng(
+                            new fr.free.nrw.commons.location.LatLng(lastPlaceToCenter.location.getLatitude() - cameraShift,
+                                    lastPlaceToCenter.getLocation().getLongitude(),
+                                    0))) // Sets the new camera position
+                    .zoom(ZOOM_LEVEL) // Same zoom level
+                    .build();
+            mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
         }
     }
 
-
-    /**
-     * Thanks to this method we make sure NearbyMapFragment is ready and attached. So that we can
-     * prevent NPE caused by null child fragment. This method is called from child fragment when
-     * it is attached.
-     */
-    private void childMapFragmentAttached() {
-        Timber.d("Child map fragment attached");
-        nearbyParentFragmentPresenter = NearbyParentFragmentPresenter.getInstance
-                (nearbyListFragment,this, nearbyMapFragment, locationManager);
-        nearbyParentFragmentPresenter.nearbyFragmentsAreReady();
-        initViews();
-        nearbyParentFragmentPresenter.setActionListeners(applicationKvStore);
-        initNearbyFilter();
+    @Override
+    public void updateListFragment(List<Place> placeList) {
+        adapterFactory.updateAdapterData(placeList, (RVRendererAdapter<Place>) rvNearbyList.getAdapter());
     }
 
     @Override
-    public void addOnCameraMoveListener(MapboxMap.OnCameraMoveListener onCameraMoveListener) {
-        nearbyMapFragment.getMapboxMap().addOnCameraMoveListener(onCameraMoveListener);
+    public fr.free.nrw.commons.location.LatLng getLastLocation() {
+        return lastKnownLocation;
     }
 
     @Override
-    public void registerLocationUpdates(LocationServiceManager locationManager) {
-        locationManager.registerLocationManager();
+    public LatLng getLastFocusLocation() {
+        return lastFocusLocation==null?null:LocationUtils.commonsLatLngToMapBoxLatLng(lastFocusLocation);
     }
 
     @Override
@@ -525,25 +621,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Adds network broadcast receiver to recognize connection established
      */
-    @Override
-    public void addNetworkBroadcastReceiver() {
-        if (!FragmentUtils.isFragmentUIActive(this)) {
-            return;
-        }
-
-        if (broadcastReceiver != null) {
-            return;
-        }
-
-        IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
-
+    private void initNetworkBroadCastReceiver() {
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (getActivity() != null) {
                     if (NetworkUtils.isInternetConnectionEstablished(getActivity())) {
                         if (isNetworkErrorOccurred) {
-                            nearbyParentFragmentPresenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
+                            presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
                             isNetworkErrorOccurred = false;
                         }
 
@@ -564,8 +649,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }
             }
         };
-
-        getActivity().registerReceiver(broadcastReceiver, intentFilter);
     }
 
     /**
@@ -573,20 +656,23 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void listOptionMenuItemClicked() {
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         if(bottomSheetListBehavior.getState()== BottomSheetBehavior.STATE_COLLAPSED || bottomSheetListBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
-            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         }else if(bottomSheetListBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
-            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
     }
 
     @Override
-    public void populatePlaces(fr.free.nrw.commons.location.LatLng curlatLng, fr.free.nrw.commons.location.LatLng searchLatLng) {
-        if (curlatLng.equals(searchLatLng)) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(curlatLng, searchLatLng);
+    public void populatePlaces(fr.free.nrw.commons.location.LatLng curlatLng) {
+        if (lastKnownLocation == null) {
+            lastKnownLocation = currentLocation;
+        }
+        if (curlatLng.equals(lastFocusLocation)|| lastFocusLocation==null) { // Means we are checking around current location
+            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
         } else {
-            populatePlacesForAnotherLocation(curlatLng, searchLatLng);
+            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
         }
     }
 
@@ -596,13 +682,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .loadAttractionsFromLocation(curlatLng, searchLatLng, false, true))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateMapMarkers,
+                .subscribe(nearbyPlacesInfo -> {
+                            updateMapMarkers(nearbyPlacesInfo, true);
+                            lastFocusLocation=searchLatLng;
+                        },
                         throwable -> {
                             Timber.d(throwable);
-                            // TODO: find out why NPE occurs here
-                            // showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                            showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
                             setProgressBarVisibility(false);
-                            nearbyParentFragmentPresenter.lockUnlockNearby(false);
+                            presenter.lockUnlockNearby(false);
                             setFilterState();
                         }));
     }
@@ -613,13 +701,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .loadAttractionsFromLocation(curlatLng, searchLatLng, false, false))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateMapMarkersForCustomLocation,
+                .subscribe(nearbyPlacesInfo -> {
+                            updateMapMarkers(nearbyPlacesInfo, false);
+                            lastFocusLocation=searchLatLng;
+                        },
                         throwable -> {
                             Timber.d(throwable);
-                            // TODO: find out why NPE occurs here
-                            // showErrorMessage(getString(R.string.error_fetching_nearby_places));
+                            showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
                             setProgressBarVisibility(false);
-                            nearbyParentFragmentPresenter.lockUnlockNearby(false);
+                            presenter.lockUnlockNearby(false);
                         }));
     }
 
@@ -628,18 +718,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * location where you are.
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
-    private void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        nearbyParentFragmentPresenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker);
-        setFilterState();
-    }
-
-    /**
-     * Populates places for custom location, should be used for finding nearby places around a
-     * location where you are not at.
-     * @param nearbyPlacesInfo This variable has place list information and distances.
-     */
-    private void updateMapMarkersForCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        nearbyParentFragmentPresenter.updateMapMarkersForCustomLocation(nearbyPlacesInfo, selectedMarker);
+    private void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo,boolean shouldUpdateSelectedMarker) {
+        this.nearbyPlacesInfo=nearbyPlacesInfo;
+        presenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker,shouldUpdateSelectedMarker);
         setFilterState();
     }
 
@@ -665,7 +746,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void addSearchThisAreaButtonAction() {
-        searchThisAreaButton.setOnClickListener(nearbyParentFragmentPresenter.onSearchThisAreaClicked());
+        searchThisAreaButton.setOnClickListener(presenter.onSearchThisAreaClicked());
     }
 
     @Override
@@ -805,6 +886,54 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    private void handleLocationUpdate(fr.free.nrw.commons.location.LatLng latLng, LocationServiceManager.LocationChangeType locationChangeType){
+        setMapBoxPosition(latLng);
+        this.lastKnownLocation=latLng;
+        NearbyController.currentLocation=lastKnownLocation;
+        presenter.updateMapAndList(locationChangeType);
+    }
+
+    private boolean isUserBrowsing() {
+        boolean isUserBrowsing = lastKnownLocation!=null && !presenter.areLocationsClose(getCameraTarget(), lastKnownLocation);
+        return isUserBrowsing;
+    }
+
+    @Override
+    public void onLocationChangedSignificantly(fr.free.nrw.commons.location.LatLng latLng) {
+        Timber.d("Location significantly changed");
+        if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {
+            handleLocationUpdate(latLng,LOCATION_SIGNIFICANTLY_CHANGED);
+        }
+    }
+
+    @Override
+    public void onLocationChangedSlightly(fr.free.nrw.commons.location.LatLng latLng) {
+        Timber.d("Location significantly changed");
+        if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
+            handleLocationUpdate(latLng,LOCATION_SLIGHTLY_CHANGED);
+        }
+    }
+
+    @Override
+    public void onLocationChangedMedium(fr.free.nrw.commons.location.LatLng latLng) {
+        Timber.d("Location changed medium");
+        if (isMapBoxReady && latLng != null && !isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
+            handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
+        }
+    }
+
+    void setMapBoxPosition(fr.free.nrw.commons.location.LatLng latLng){
+        CameraPosition position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(latLng)) // Sets the new camera position
+                .zoom(ZOOM_LEVEL) // Same zoom level
+                .build();
+        mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+    }
+
+    public void backButtonClicked() {
+        presenter.backButtonClicked();
+    }
+
     /**
      * onLogoutComplete is called after shared preferences and data stored in local database are cleared.
      */
@@ -840,12 +969,275 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         fabRecenter.setEnabled(true);
     }
 
+    /**
+     * Adds a marker for the user's current position. Adds a
+     * circle which uses the accuracy * 2, to draw a circle
+     * which represents the user's position with an accuracy
+     * of 95%.
+     *
+     * Should be called only on creation of mapboxMap, there
+     * is other method to update markers location with users
+     * move.
+     * @param curLatLng current location
+     */
+    @Override
+    public void addCurrentLocationMarker(fr.free.nrw.commons.location.LatLng curLatLng) {
+        if (null != curLatLng) {
+            ExecutorUtils.get().submit(() -> {
+                mapView.post(() -> removeCurrentLocationMarker());
+                Timber.d("Adds current location marker");
+
+                Icon icon = IconFactory.getInstance(getContext())
+                        .fromResource(R.drawable.current_location_marker);
+
+                MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
+                        .position(new LatLng(curLatLng.getLatitude(),
+                                curLatLng.getLongitude()));
+                currentLocationMarkerOptions.setIcon(icon); // Set custom icon
+                mapView.post(() -> currentLocationMarker = mapBox.addMarker(currentLocationMarkerOptions));
+
+
+                List<LatLng> circle = UiUtils
+                        .createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
+                                curLatLng.getAccuracy() * 2, 100);
+
+                PolygonOptions currentLocationPolygonOptions = new PolygonOptions()
+                        .addAll(circle)
+                        .strokeColor(getResources().getColor(R.color.current_marker_stroke))
+                        .fillColor(getResources().getColor(R.color.current_marker_fill));
+                mapView.post(() -> currentLocationPolygon = mapBox.addPolygon(currentLocationPolygonOptions));
+
+            });
+        } else {
+            Timber.d("not adding current location marker..current location is null");
+        }
+    }
+
+    private void removeCurrentLocationMarker() {
+        if (currentLocationMarker != null && mapBox!=null) {
+            mapBox.removeMarker(currentLocationMarker);
+            mapBox.removePolygon(currentLocationPolygon);
+        }
+    }
+
+
+    /**
+     * Makes map camera follow users location with animation
+     * @param curLatLng current location of user
+     */
+    @Override
+    public void updateMapToTrackPosition(fr.free.nrw.commons.location.LatLng curLatLng) {
+        Timber.d("Updates map camera to track user position");
+        CameraPosition cameraPosition = new CameraPosition.Builder().target
+                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
+        if(null!=mapBox) {
+            mapBox.setCameraPosition(cameraPosition);
+            mapBox.animateCamera(CameraUpdateFactory
+                    .newCameraPosition(cameraPosition), 1000);
+        }
+    }
+
+    @Override
+    public void updateMapMarkers(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker) {
+        if(mapBox!=null && isMapBoxReady){
+            mapBox.clear();
+            addNearbyMarkersToMapBoxMap(nearbyBaseMarkers, selectedMarker);
+            presenter.updateMapMarkersToController(nearbyBaseMarkers);
+            // Re-enable mapbox gestures on custom location markers load
+            mapBox.getUiSettings().setAllGesturesEnabled(true);
+        }
+    }
+
+    @Override
+    public void filterOutAllMarkers() {
+        greyOutAllMarkers();
+    }
+
+    /**
+     * Displays all markers
+     */
+    @Override
+    public void displayAllMarkers() {
+        for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
+            updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+        }
+    }
+
+    /**
+     * Filters markers based on selectedLabels and chips
+     * @param selectedLabels label list that user clicked
+     * @param displayExists chip for displaying only existing places
+     * @param displayNeedsPhoto chip for displaying only places need photos
+     * @param filterForPlaceState true if we filter places for place state
+     * @param filterForAllNoneType true if we filter places with all none button
+     */
+    @Override
+    public void filterMarkersByLabels(List<Label> selectedLabels, boolean displayExists,
+                                      boolean displayNeedsPhoto,
+                                      boolean filterForPlaceState,
+                                      boolean filterForAllNoneType) {
+        if (selectedLabels.size() == 0 && filterForPlaceState) { // If nothing is selected, display all
+            greyOutAllMarkers();
+            for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
+                if (displayExists && displayNeedsPhoto) {
+                    // Exists and needs photo
+                    if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty() && markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
+                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                    }
+                } else if (displayExists && !displayNeedsPhoto) {
+                    // Exists and all included needs and doesn't needs photo
+                    if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty()) {
+                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                    }
+                } else if (!displayExists && displayNeedsPhoto) {
+                    // All and only needs photo
+                    if (markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
+                        updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                    }
+                } else if (!displayExists && !displayNeedsPhoto) {
+                    // all
+                    updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                }
+
+            }
+        } else {
+            // First greyed out all markers
+            greyOutAllMarkers();
+            for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
+                for (Label label : selectedLabels) {
+                    if (markerPlaceGroup.getPlace().getLabel().toString().equals(label.toString())) {
+
+                        if (displayExists && displayNeedsPhoto) {
+                            // Exists and needs photo
+                            if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty() && markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
+                                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                            }
+                        } else if (displayExists && !displayNeedsPhoto) {
+                            // Exists and all included needs and doesn't needs photo
+                            if (markerPlaceGroup.getPlace().destroyed.trim().isEmpty()) {
+                                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                            }
+                        } else if (!displayExists && displayNeedsPhoto) {
+                            // All and only needs photo
+                            if (markerPlaceGroup.getPlace().pic.trim().isEmpty()) {
+                                updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                            }
+                        } else if (!displayExists && !displayNeedsPhoto) {
+                            // all
+                            updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public fr.free.nrw.commons.location.LatLng getCameraTarget() {
+        return mapBox==null?null:LocationUtils.mapBoxLatLngToCommonsLatLng(mapBox.getCameraPosition().target);
+    }
+
+    /**
+     * Sets marker icon according to marker status. Sets title and distance.
+     * @param isBookmarked true if place is bookmarked
+     * @param place
+     * @param curLatLng current location
+     */
+    public void updateMarker(boolean isBookmarked, Place place, @Nullable fr.free.nrw.commons.location.LatLng curLatLng) {
+        VectorDrawableCompat vectorDrawable;
+        if (isBookmarked) {
+            vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_bookmark_marker, getContext().getTheme()
+            );
+        } else if (!place.pic.trim().isEmpty()) {
+            vectorDrawable = VectorDrawableCompat.create( // Means place has picture
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_green, getContext().getTheme()
+            );
+        } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+            vectorDrawable = VectorDrawableCompat.create( // Means place has picture
+                    getContext().getResources(), R.drawable.ic_custom_map_marker_grey, getContext().getTheme()
+            );
+        } else {
+            vectorDrawable = VectorDrawableCompat.create(
+                    getContext().getResources(), R.drawable.ic_custom_map_marker, getContext().getTheme()
+            );
+        }
+        for (Marker marker : mapBox.getMarkers()) {
+            if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
+
+                Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+                if (curLatLng != null) {
+                    String distance = formatDistanceBetween(curLatLng, place.location);
+                    place.setDistance(distance);
+                }
+
+                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
+                nearbyBaseMarker.title(place.name);
+                nearbyBaseMarker.position(
+                        new com.mapbox.mapboxsdk.geometry.LatLng(
+                                place.location.getLatitude(),
+                                place.location.getLongitude()));
+                nearbyBaseMarker.place(place);
+                nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
+                        .fromBitmap(icon));
+                marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+            }
+        }
+    }
+
+    /**
+     * Greys out all markers except current location marker
+     */
+    private void greyOutAllMarkers() {
+        if(currentLocationMarker==null){
+            return;
+        }
+        VectorDrawableCompat vectorDrawable;
+        vectorDrawable = VectorDrawableCompat.create(
+                getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
+        Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+        for (Marker marker : mapBox.getMarkers()) {
+            if (!marker.equals(currentLocationMarker)) {
+                marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+            }
+        }
+        addCurrentLocationMarker(NearbyController.currentLocation);
+    }
+
+    private void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker) {
+        if (isMapBoxReady && mapBox != null) {
+            mapBox.addMarkers(nearbyBaseMarkers);
+            setMapMarkerActions(selectedMarker);
+            presenter.updateMapMarkersToController(nearbyBaseMarkers);
+        }
+    }
+
+    private void setMapMarkerActions(Marker selectedMarker) {
+        if (mapBox != null) {
+            mapBox.setOnInfoWindowCloseListener(marker -> {
+                if (marker == selectedMarker) {
+                    presenter.markerUnselected();
+                }
+            });
+
+            mapBox.setOnMarkerClickListener(marker -> {
+                if (marker instanceof NearbyMarker) {
+                    presenter.markerSelected(marker);
+                }
+                return false;
+            });
+        }
+    }
+
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
-        nearbyMapFragment.addCurrentLocationMarker(curLatLng);
+        if (curLatLng == null) {
+            return;
+        }
+        addCurrentLocationMarker(curLatLng);
         CameraPosition position;
 
-        if (ViewUtil.isPortrait(getActivity())){
+        if (ViewUtil.isPortrait(getActivity())) {
             position = new CameraPosition.Builder()
                     .target(isListBottomSheetExpanded() ?
                             new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
@@ -853,9 +1245,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
                     .zoom(isListBottomSheetExpanded() ?
                             ZOOM_LEVEL
-                            : nearbyMapFragment.getMapboxMap().getCameraPosition().zoom) // Same zoom level
+                            : mapBox.getCameraPosition().zoom) // Same zoom level
                     .build();
-        }else {
+        } else {
             position = new CameraPosition.Builder()
                     .target(isListBottomSheetExpanded() ?
                             new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
@@ -863,11 +1255,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
                     .zoom(isListBottomSheetExpanded() ?
                             ZOOM_LEVEL
-                            : nearbyMapFragment.getMapboxMap().getCameraPosition().zoom) // Same zoom level
+                            : mapBox.getCameraPosition().zoom) // Same zoom level
                     .build();
         }
 
-        nearbyMapFragment.getMapboxMap().animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+        mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
     }
 
     @Override
@@ -890,6 +1282,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
+    @Override
+    public void addOnCameraMoveListener() {
+        mapBox.addOnCameraMoveListener(cameraMoveListener);
+    }
+
     /**
      * If nearby details bottom sheet state is collapsed: show fab plus
      * If nearby details bottom sheet state is expanded: show fab plus
@@ -908,7 +1305,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 this.getView().requestFocus();
                 break;
             case (BottomSheetBehavior.STATE_HIDDEN):
-                nearbyMapFragment.getMapboxMap().deselectMarkers();
+                if (null != mapBox) {
+                    mapBox.deselectMarkers();
+                }
                 transparentView.setClickable(false);
                 transparentView.setAlpha(0);
                 collapseFABs(isFABsExpanded);
@@ -932,7 +1331,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         bookmarkButton.setOnClickListener(view -> {
             boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(this.selectedPlace);
             updateBookmarkButtonImage(this.selectedPlace);
-            nearbyMapFragment.updateMarker(isBookmarked, this.selectedPlace, locationManager.getLastLocation());
+            updateMarker(isBookmarked, this.selectedPlace, locationManager.getLastLocation());
         });
 
         wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
@@ -1007,32 +1406,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        // this means that this activity will not be recreated now, user is leaving it
-        // or the activity is otherwise finishing
-        if(getActivity().isFinishing()) {
-            // we will not need this fragment anymore, this may also be a good place to signal
-            // to the retained fragment object to perform its own cleanup.
-            removeMapFragment();
-            removeListFragment();
-
-        }
-        if (broadcastReceiver != null) {
-            getActivity().unregisterReceiver(broadcastReceiver);
-            broadcastReceiver = null;
-        }
-
-        if (locationManager != null && nearbyParentFragmentPresenter != null) {
-            locationManager.removeLocationListener(nearbyParentFragmentPresenter);
-            locationManager.unregisterLocationManager();
-        }
-    }
-
-    @Override
     public void onWikidataEditSuccessful() {
-        if (nearbyMapFragment != null && nearbyParentFragmentPresenter != null && locationManager != null) {
-            nearbyParentFragmentPresenter.updateMapAndList(MAP_UPDATED, locationManager.getLastLocation());
+        if (mapBox != null && presenter != null && locationManager != null) {
+            presenter.updateMapAndList(MAP_UPDATED);
         }
     }
 
@@ -1040,4 +1416,42 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         ViewUtil.showLongToast(getActivity(), message);
     }
 
+    public void registerUnregisterLocationListener(boolean removeLocationListener) {
+        try {
+            if (removeLocationListener) {
+                locationManager.unregisterLocationManager();
+                locationManager.removeLocationListener(this);
+                Timber.d("Location service manager unregistered and removed");
+            } else {
+                locationManager.addLocationListener(this);
+                locationManager.registerLocationManager();
+                Timber.d("Location service manager added and registered");
+            }
+        }catch (Exception e){
+            Timber.e(e);
+            //Broadcasts are tricky, should be catchedonR
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        this.isVisibleToUser=isVisibleToUser;
+        if (isResumed() && isVisibleToUser) {
+            startTheMap();
+        } else {
+            if (null != bottomSheetListBehavior) {
+                bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+
+            if (null != bottomSheetDetailsBehavior) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+        }
+    }
+
+    private void startTheMap() {
+        mapView.onStart();
+        performMapReadyActions();
+    }
 }

@@ -127,7 +127,7 @@
   <string name="media_upload_policy">इस तस्वीर को सबमिट करके, मैं घोषणा करता हूं कि यह मेरा अपना काम है, इसमें कॉपीराइट सामग्री या सेल्फी नहीं है, और अन्यथा &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;विकीमीडिया कॉमन्स नीतियां का पालन करता हूँ &lt;/a&gt;</string>
   <string name="menu_download">डाउनलोड</string>
   <string name="preference_license">डिफॉल्ट लाइसेन्स</string>
-  <string name="use_previous">पिछले शीर्षक/विवरण का उपयोग करें</string>
+  <string name="use_previous" fuzzy="true">पिछले शीर्षक/विवरण का उपयोग करें</string>
   <string name="allow_gps">वर्तमान स्थान स्वतः ज्ञात करें</string>
   <string name="allow_gps_summary" fuzzy="true">यदि छवि पर जियोटैग नहीं है तो श्रेणियों के सुझाव हेतु वर्तमान स्थान ज्ञात करें।</string>
   <string name="preference_theme">रात्रि मोड</string>
@@ -271,7 +271,7 @@
   <string name="copy_wikicode">विकिटेक्स्ट को क्लिपबोर्ड पर कॉपी करें</string>
   <string name="wikicode_copied">विकिटेक्सट क्लिपबोर्ड पर कॉपी किया जा चुका है</string>
   <string name="nearby_location_has_not_changed">स्थान परिवर्तन नहीं हुआ।</string>
-  <string name="nearby_location_not_available">स्थान उपलब्ध नहीं।</string>
+  <string name="nearby_location_not_available">स्थान उपलब्ध नहीं है।</string>
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
   <string name="get_directions" fuzzy="true">दिशा - निर्देश प्राप्त करें</string>
   <string name="read_article" fuzzy="true">लेख पढ़ें</string>

@@ -17,11 +17,11 @@
   <string name="menu_settings">Поставки</string>
   <string name="intent_share_upload_label">Подигни на Ризницата</string>
   <string name="username">Корисничко име</string>
-  <string name="password">Лозинка</string>
+  <string name="password">Јавка</string>
   <string name="login_credential">Најавете се на бета-сметката</string>
   <string name="login">Најава</string>
-  <string name="forgot_password">Ја заборавивте лозинката?</string>
-  <string name="signup">Регистрација</string>
+  <string name="forgot_password">Ја заборавивте јавката?</string>
+  <string name="signup">Зачленување</string>
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте…</string>
   <string name="login_success">Најавата е успешна!</string>
@@ -55,9 +55,9 @@
   <string name="add_title_toast">Ставете ѝ наслов на податотеката</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
-  <string name="login_failed_wrong_credentials">Не можев да ве најавам. Проверете ги корисничкото име и лозинката.</string>
+  <string name="login_failed_wrong_credentials">Не можев да ве најавам. Проверете ги корисничкото име и јавката.</string>
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
-  <string name="login_failed_blocked">Нажалост, корисникот е блокиран на Ризницата</string>
+  <string name="login_failed_blocked">За жал, корисникот е блокиран на Ризницата</string>
   <string name="login_failed_2fa_needed">Мора да го укажете вашиот код за двочинителска заверка.</string>
   <string name="login_failed_generic">Најавата не успеа</string>
   <string name="share_upload_button">Подигни</string>
@@ -89,7 +89,7 @@
   <string name="categories_skip_explanation">Ставете им категории на сликите, за да можат корисниците полесно да ги најдат на Ризницата.\n\nЗа да ставите категорија, почнете со пишување на нејзиното име.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Нагодувања</string>
-  <string name="title_activity_signup">Регистрација</string>
+  <string name="title_activity_signup">Зачленување</string>
   <string name="title_activity_featured_images">Избрани слики</string>
   <string name="title_activity_category_details">Категорија</string>
   <string name="title_activity_review">Оценување</string>
@@ -113,7 +113,7 @@
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Стандардна лиценца</string>
-  <string name="use_previous">Користи претходен наслов/опис</string>
+  <string name="use_previous">Користи претходен наслов и опис</string>
   <string name="allow_gps">Автоматски давај тековна местоположба</string>
   <string name="allow_gps_summary">Става геоознака од тековната местоположба во слика (ако ја нема). Предупредување: ова ви го разоткрива наоѓалиштето.</string>
   <string name="preference_theme">Ноќен режим</string>
@@ -272,7 +272,7 @@
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
-  <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
   <string name="get_directions">Дај насоки</string>
   <string name="read_article">Прочитај статија</string>
@@ -444,7 +444,7 @@
   <string name="bad_token_error_proposed_solution">Подигањето не успеа поради проблеми со уредувачката шифра. Одјавете се и повторно најавете се.</string>
   <string name="error_processing_image">Се појави грешка при обработката на сликата. Обидете се повторно!</string>
   <string name="getting_edit_token">Добивање на шифра за уредување</string>
-  <string name="check_category_adding_template">Додавање на шаблон за категориска проверка</string>
+  <string name="check_category_adding_template">Додавање на предлошка за категориска проверка</string>
   <string name="check_category_notification_title">Барање на категориска проверка за %1$s</string>
   <string name="check_category_edit_summary">Барање на категориска проверка</string>
   <string name="check_category_success_title">Побарана категориска проверка</string>
@@ -519,7 +519,7 @@
   <string name="exif_tag_name_lensModel">Модел на објективот</string>
   <string name="exif_tag_name_serialNumbers">Сериски броеви</string>
   <string name="exif_tag_name_software">Програми</string>
-  <string name="share_text">Подигајте слики на Ризницата од телефон. Преземете го прилогот на Ризницата: %1$s</string>
+  <string name="share_text">Подигајте слики непосредно на Ризницата од телефон. Преземете го прилогот на Ризницата сега: %1$s</string>
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
   <string name="no_categories_found">Не пронајдов ниедна категорија</string>
@@ -554,5 +554,7 @@
   <string name="place_state_needs_photo">Му треба слика</string>
   <string name="place_type">Вид на место:</string>
   <string name="nearby_search_hint">Мост, музеј, хотел и тн.</string>
-  <string name="you_must_reset_your_passsword">Нешто не е во ред со најавата. Ќе мора да ставите нова лозинка!</string>
+  <string name="you_must_reset_your_passsword">Нешто не е во ред со најавата. Ќе мора да ставите нова јавка!</string>
+  <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
+  <string name="upload_nearby_place_found_description">Дали ова е слика од местото %1$s?</string>
 </resources>

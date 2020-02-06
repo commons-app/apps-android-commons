@@ -281,7 +281,7 @@
   <string name="copy_wikicode">ウィキテキストをクリップボードにコピーする</string>
   <string name="wikicode_copied">クリップボードにウィキテキストをコピー完了しました</string>
   <string name="nearby_location_has_not_changed">場所は変更されていません。</string>
-  <string name="nearby_location_not_available">位置が無効です。</string>
+  <string name="nearby_location_not_available" fuzzy="true">位置が無効です。</string>
   <string name="location_permission_rationale_nearby">近くの場所を表示するには権限が必要です</string>
   <string name="get_directions">道順を調べる</string>
   <string name="read_article">記事を読む</string>
@@ -527,7 +527,7 @@
   <string name="exif_tag_name_lensModel">レンズモデル</string>
   <string name="exif_tag_name_serialNumbers">シリアル番号</string>
   <string name="exif_tag_name_software">ソフトウェア</string>
-  <string name="share_text">スマホからウィキペディア・コモンズに画像を投稿する\nコモンズアプリをダウンロード：%1$s</string>
+  <string name="share_text">スマホから直接、ウィキメディア・コモンズに画像を投稿する。\nコモンズアプリを今すぐダウンロード：%1$s</string>
   <string name="share_via">アプリの共有に使うのは…</string>
   <string name="image_info">画像情報</string>
   <string name="no_categories_found">カテゴリが見つかりません</string>

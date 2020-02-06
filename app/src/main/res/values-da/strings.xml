@@ -114,7 +114,7 @@
   <string name="media_upload_policy">Ved at indsende dette billeder erklærer jeg at det er mit eget arbejde, som ikke indeholder materialer med ophavsret eller selvportrætter og generelt overholder &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-politikkerne&lt;/a&gt;.</string>
   <string name="menu_download">Hent</string>
   <string name="preference_license">Standardlicens</string>
-  <string name="use_previous">Brug forrige titel/beskrivelse</string>
+  <string name="use_previous">Brug forrige titel og beskrivelse</string>
   <string name="allow_gps">Hent automatisk nuværende placering</string>
   <string name="allow_gps_summary">Henter den nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket og geomærker billedet. Advarsel: Dette vil afsløre din nuværende placering.</string>
   <string name="preference_theme">Nat-tilstand</string>
@@ -258,7 +258,7 @@
   <string name="skip_login">Spring over</string>
   <string name="navigation_item_login">Log på</string>
   <string name="nearby_location_has_not_changed">Sted er ikke ændret.</string>
-  <string name="nearby_location_not_available">Sted ikke tilgængeligt.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Sted ikke tilgængeligt.</string>
   <string name="location_permission_rationale_nearby">Tilladelse kræves for at vise en liste over steder i nærheden</string>
   <string name="get_directions">Få rutevejledninger</string>
   <string name="read_article">Læs artikel</string>
@@ -384,5 +384,6 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Vilkårligt billede fra internettet</string>
   <string name="delete_helper_ask_reason_copyright_other">Andet</string>
   <string name="place_state_exists">Findes</string>
+  <string name="place_state_needs_photo">Mangler et billede</string>
   <string name="nearby_search_hint">Bro, museum, hotel, osv.</string>
 </resources>

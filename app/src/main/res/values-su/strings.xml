@@ -114,7 +114,7 @@
   <string name="media_upload_policy">Ku ngirimkeun ieu gambar, kami ngedalkeun yén ieu mangrupa karya kami sorangan, yén ieu karya teu ngandung matéri atawa hak pribadi nu ditangtayungan ku hak cipta, sarta mun teu nurut kana &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Kawijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Undeur</string>
   <string name="preference_license">Lisénsi buhun</string>
-  <string name="use_previous">Paké baé judul/pedaran saméméhna</string>
+  <string name="use_previous">Paké judul jeung dadaran saméméhna</string>
   <string name="allow_gps">Comot lokasi sacara otomatis</string>
   <string name="allow_gps_summary">Catet lokasi ayeuna lamun gambar tanpa géotag, jeung géotagan gambarna. Perhatian: Ieu bakal ngungkab lokasi anjeun ayeuna.</string>
   <string name="preference_theme">Modus peuting</string>
@@ -170,6 +170,7 @@
   <string name="storage_permission_title">Mundut Idin Panyimpenan</string>
   <string name="read_storage_permission_rationale">Merlukeun idin: Baca teundeunan éksternal. Aplikasi teu bisa muka galeri anjeun lamun teu diidinan.</string>
   <string name="write_storage_permission_rationale">Merlukeun idin: Nulis teundeunan éksternal. Aplikasi teu bisa muka kaméra/galéri lamun teu diidinan.</string>
+  <string name="location_permission_title">Mundut Idin Lokasi</string>
   <string name="location_permission_rationale">Idin pilihan: Paké lokasi kiwari pikeun usulan kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Tempat Sabudeureun</string>
@@ -272,19 +273,19 @@
   <string name="copy_wikicode">Tiron wikitéks kana papan klip</string>
   <string name="wikicode_copied">Wikitéks geus ditiron kana papan klip</string>
   <string name="nearby_location_has_not_changed">Lokasi can robah</string>
-  <string name="nearby_location_not_available">Lokasi teu sayaga</string>
+  <string name="nearby_location_not_available" fuzzy="true">Lokasi teu sayaga</string>
   <string name="location_permission_rationale_nearby">Idin diperlukeun pikeun midangkeun daptar tempat disabudeureun</string>
-  <string name="get_directions" fuzzy="true">MUNDUT ARAH</string>
-  <string name="read_article" fuzzy="true">BACA ARTIKEL</string>
+  <string name="get_directions">Téang tuduh arah</string>
+  <string name="read_article">Baca artikel</string>
   <string name="notifications_welcome">Wilujeng Sumping di Wikimedia Commons, %1$s! Bungah pisan ku ayana anjeun.</string>
   <string name="notifications_talk_page_message">%1$s ninggalkeun talatah di kaca obrolan anjeun</string>
   <string name="notifications_thank_you_edit">Hatur nuhun geus ngédit</string>
   <string name="notifications_mention">%1$s ngagero anjeun di %2$s.</string>
   <string name="toggle_view_button">Pidangan tugel</string>
-  <string name="nearby_directions" fuzzy="true">ARAH</string>
-  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
-  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
+  <string name="nearby_directions">Tuduh Arah</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipédia</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">&lt;u&gt;Béré peunteun&lt;/u&gt;</string>
   <string name="about_faq">&lt;u&gt;NLD&lt;/u&gt;</string>
   <string name="welcome_skip_button">Liwatan Tutorial</string>
@@ -292,6 +293,7 @@
   <string name="internet_established">Internét sayaga</string>
   <string name="error_notifications">Éror pas nyomot iber</string>
   <string name="error_review">Éror pas nyomot gambar ulaseun. Pencét segerkeun pikeun mecakan deui.</string>
+  <string name="error_review_categories">Éror nyomot kategori gambar ulaseun. Pencét segerkeun pikeun mecakan deui.</string>
   <string name="no_notifications">Taya iber</string>
   <string name="about_translate">&lt;u&gt;Tarjamahkeun&lt;/u&gt;</string>
   <string name="about_translate_title">Basa</string>
@@ -305,6 +307,7 @@
   <string name="no_images_found">Taya gambar!</string>
   <string name="error_loading_images">Éror pas muat gambar.</string>
   <string name="image_uploaded_by">Diunjal ku: %1$s</string>
+  <string name="block_notification_title">Dipeungpeuk</string>
   <string name="block_notification">Anjeung dipeungpeuk tina ngédit Commons</string>
   <string name="appwidget_img">Gambar poé ieu</string>
   <string name="app_widget_heading">Gambar poé ieu</string>
@@ -316,11 +319,11 @@
   <string name="provider_searches">Kuéri pamaluran kiwari</string>
   <string name="error_loading_categories">Éror pas muat kategori.</string>
   <string name="error_loading_subcategories">Éror pas muat subkategori.</string>
-  <string name="search_tab_title_media" fuzzy="true">MÉDIA</string>
-  <string name="search_tab_title_categories" fuzzy="true">KATEGORI</string>
-  <string name="explore_tab_title_featured" fuzzy="true">PETINGAN</string>
-  <string name="explore_tab_title_mobile" fuzzy="true">DIUNJAL LIWAT MOBILE</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Gambar ngahasil ditambahkeun ka %1$s di Wikidata!</string>
+  <string name="search_tab_title_media">Média</string>
+  <string name="search_tab_title_categories">Kategori</string>
+  <string name="explore_tab_title_featured">Petingan</string>
+  <string name="explore_tab_title_mobile">Dimuat maké ponsél</string>
+  <string name="successful_wikidata_edit">Gambar ditambahkeun ka %1$s di Wikidata!</string>
   <string name="wikidata_edit_failure">Gagal ngarobah éntitas Wikidata nu patali!</string>
   <string name="menu_set_wallpaper">Jadikeun Wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper ngahasil dipasang!</string>
@@ -328,6 +331,8 @@
   <string name="quiz_question_string">Ieu gambar geus OKÉH jang unjalkeuneun?</string>
   <string name="question">Patanyaan</string>
   <string name="result">Hasil</string>
+  <string name="quiz_back_button">Lamun anjeun haben ngamuat gambar anu kudu dihapus, akun anjeun bisa dipeungpeuk. Nyaán rék mungkas ieu kuis?</string>
+  <string name="quiz_alert_message">Leuwih ti %1$s gambar muatan anjeun dihapus. Lamun anjeun haben ngamuat gambar anu kudu dihapus, akun anjeun bisa dipeungpeuk.\n\nBadé nempo deui tutorial jeung miluan kuis pikeun ngalenyepan gambar anu kumaha anu bisa jeung teu bisa dimuat?</string>
   <string name="selfie_answer">Selfie mah teu ngandung ajén énsiklopedis-énsiklopedis acan. Wayahna ulah ngunjal gambar sorangan iwal anjeun boga artikel Wikipédia ngeunaan anjeun.</string>
   <string name="construction_event_answer">Gambar nu némbongkeun téhnologi atawa budaya kacida dipiharep di Commons.</string>
   <string name="congratulatory_message_quiz">Anjeun meunang %1$s tina jawaban bener. Wilujeng!</string>
@@ -347,13 +352,13 @@
   <string name="delete_search_dialog">Yakin rék miceun ieu pamaluruhan?</string>
   <string name="search_history_deleted">Jujutan pamaluruhan dipiceun</string>
   <string name="nominate_delete">Nominasi Pikeun Dipupus</string>
-  <string name="delete" fuzzy="true">PUPUS</string>
+  <string name="delete">Hapus</string>
   <string name="Achievements">Préstasi</string>
-  <string name="statistics" fuzzy="true">STATISTIK</string>
+  <string name="statistics">Statistika</string>
   <string name="statistics_thanks">Panuhun Katampa</string>
   <string name="statistics_featured">Gambar petingan</string>
   <string name="statistics_wikidata_edits">Gambar liwat \"Tempat Sabudeureun\"</string>
-  <string name="level" fuzzy="true">UNDAK</string>
+  <string name="level">Tingkat</string>
   <string name="images_uploaded">Gambar Diunjal</string>
   <string name="image_reverts">Gambar Teu Dibalikkeun</string>
   <string name="images_used_by_wiki">Gambar Dipaké</string>
@@ -449,7 +454,21 @@
   <string name="image_chooser_title">Pilih Gambar unjalkeuneun</string>
   <string name="please_wait">Mangga tungguan...</string>
   <string name="previous_image_title_description">Tiron judul &amp; pedaran saméméhna</string>
-  <string name="skip_image" fuzzy="true">LIWATAN IEU GAMBAR</string>
+  <string name="skip_image">Iwalkeun ieu gambar</string>
+  <string name="exif_tag_name_author">Karya</string>
+  <string name="exif_tag_name_copyright">Hak cipta</string>
+  <string name="exif_tag_name_location">Perenah</string>
+  <string name="exif_tag_name_cameraModel">Modél kaméra</string>
+  <string name="exif_tag_name_lensModel">Modél Lénsa</string>
+  <string name="exif_tag_name_serialNumbers">Nomer Seri</string>
+  <string name="exif_tag_name_software">Sopwér</string>
+  <string name="share_text">Muat poto ka Wikimedia Commons langsung tina ponsél. Unduh Commons App ayeuna: %1$s</string>
   <string name="share_via">Bagikeun app liwat...</string>
   <string name="image_info">Info Gambar</string>
+  <string name="no_categories_found">Euweuh Kategori kapanggih</string>
+  <string name="upload_cancelled">Muatan bedo</string>
+  <string name="dialog_box_text_nomination">Naha %1$s bet kudu dihapus?</string>
+  <string name="review_is_uploaded_by">%1$s dimuat ku: %2$s</string>
+  <string name="default_description_language">Basa dadaran baku</string>
+  <string name="delete_helper_make_deletion_toast">Nyobaan ngusulkeun %1$s pikeun dihapus</string>
 </resources>

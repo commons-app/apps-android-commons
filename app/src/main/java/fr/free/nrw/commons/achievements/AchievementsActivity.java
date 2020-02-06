@@ -169,9 +169,13 @@ public class AchievementsActivity extends NavigationBaseActivity {
         return true;
     }
 
+    /**
+     * To receive the id of selected item and handle further logic for that selected item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        // take screenshot in form of bitmap and show it in Alert Dialog
         if (id == R.id.share_app_icon) {
             View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
             Bitmap screenShot = Utils.getScreenShot(rootView);
@@ -241,13 +245,18 @@ public class AchievementsActivity extends NavigationBaseActivity {
         }
     }
 
+    /**
+     * To call the API to fetch the count of wiki data edits
+     *  in the form of JavaRx Single object<JSONobject>
+     */
     @SuppressLint("CheckResult")
     private void setWikidataEditCount() {
         String userName = sessionManager.getUserName();
         if (StringUtils.isBlank(userName)) {
             return;
         }
-        compositeDisposable.add(okHttpJsonApiClient.getWikidataEdits(userName)
+        compositeDisposable.add(okHttpJsonApiClient
+                .getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)), e -> {
@@ -255,6 +264,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 }));
     }
 
+    /**
+     * Shows a snack bar which has an action button which on click dismisses the snackbar and invokes the
+     * listener passed
+     */
     private void showSnackBarWithRetry() {
         progressBar.setVisibility(View.GONE);
         ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),

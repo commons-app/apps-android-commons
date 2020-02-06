@@ -123,7 +123,7 @@
   <string name="media_upload_policy">A kép feltöltésével kijelentem, hogy ez a saját munkám és nem tartalmaz jogvédett anyagot, nem szelfi és megfelel a&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons irányelveinek&lt;/a&gt;.</string>
   <string name="menu_download">Letöltés</string>
   <string name="preference_license">Alapértelmezett licenc</string>
-  <string name="use_previous">Előző cím/leírás használata</string>
+  <string name="use_previous" fuzzy="true">Előző cím/leírás használata</string>
   <string name="allow_gps">Automatikusan megkapja a jelenlegi helyet</string>
   <string name="allow_gps_summary">Ha a kép nem földrajzi címkézett, lekéri a jelenlegi helyet és ellátja a képet földrajzi címkével. Figyelem: ez felfedheti a tartózkodási helyedet.</string>
   <string name="preference_theme">Éjszakai mód</string>
@@ -282,7 +282,7 @@
   <string name="copy_wikicode">Wikiszöveg vágólapra másolása</string>
   <string name="wikicode_copied">A wikiszöveg a vágólapra lett másolva</string>
   <string name="nearby_location_has_not_changed">A hely nem változott.</string>
-  <string name="nearby_location_not_available">A hely nem érhető el.</string>
+  <string name="nearby_location_not_available" fuzzy="true">A hely nem érhető el.</string>
   <string name="location_permission_rationale_nearby">Közeli helyek listájának megtekintéséhez engedély szükséges</string>
   <string name="get_directions">Útvonalterv</string>
   <string name="read_article">Szócikk olvasása</string>
@@ -398,6 +398,7 @@
   <string name="next">Következő</string>
   <string name="previous">Előző</string>
   <string name="submit">Küldés</string>
+  <string name="upload_title_duplicate">Már létezik \"%1$s\" nevű fájl. Biztosan folytatod?</string>
   <string name="map_application_missing">Nem található kompatibilis térképalkalmazás az eszközödön. Kérjük rakj fel ilyen appot a funkció használatához.</string>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d feltöltés</item>
@@ -417,6 +418,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Észleltem, hogy ez rossz a magánszférámnak</string>
   <string name="deletion_reason_no_longer_want_public">Meggondoltam magam, nem szeretném, hogy nyilvánosan látható legyen</string>
   <string name="deletion_reason_not_interesting">Sajnos ez a fénykép nem érdekes egy enciklopédia számára</string>
+  <string name="uploaded_by_myself">Feltöltve ekkorː %1$s, %2$d cikkben használva.</string>
   <string name="no_uploads">Üdvözlünk a Commons-ban. \n\nA hozzáadás gombra koppintva feltöltheted első képedet.</string>
   <string name="desc_language_Worldwide">Világszerte</string>
   <string name="desc_language_America">Amerika</string>
@@ -436,10 +438,26 @@
   <string name="unable_to_display_nearest_place">A helymeghatározás nélkül nem használható ez a funkció.</string>
   <string name="never_ask_again">Ne kérdezd meg többször</string>
   <string name="display_location_permission_title">Helymeghatározási engedély</string>
+  <string name="achievements_fetch_failed">Valami hiba történt, nem sikerült az eredményeid betöltése</string>
   <string name="display_campaigns">Kampányok megjelenítése</string>
   <string name="display_campaigns_explanation">Folyamatban lévő kampányok megjelenítése</string>
+  <string name="nearby_campaign_dismiss_message">Többé nem lesznek láthatók a kampányok. Ha akarod, visszakapcsolható a Beállításoknál.</string>
   <string name="this_function_needs_network_connection">Ehhez a funkcióhoz hálózati kapcsolat szükséges, kérlek ellenőrizd az internetbeállításaidat.</string>
+  <string name="bad_token_error_proposed_solution">A feltöltés sikertelen lett, a szerkesztő tokened problémája miatt. Próbálj újra bejelentkezni.</string>
+  <string name="error_processing_image">Hiba történt a kép feltöltése során. Próbáld meg újra!</string>
+  <string name="getting_edit_token">Szerkesztő token beszerzése</string>
+  <string name="check_category_adding_template">Kategóriaellenőrző sablon felhelyezése</string>
+  <string name="check_category_notification_title">Kategória ellenőrzés kérése \"%1$s\" számára</string>
+  <string name="check_category_edit_summary">Kategória ellenőrzés kérése</string>
+  <string name="check_category_success_title">Kategória ellenőrzés megkérve</string>
+  <string name="check_category_failure_title">Kategória ellenőrzés nem működik</string>
+  <string name="check_category_failure_message">Nem sikerült kategória ellenőrzés kérése \"%1$s\" számára</string>
+  <string name="check_category_toast">Kategória ellenőrzés kérése \"%1$s\" számára</string>
+  <string name="nominate_for_deletion_edit_file_page">Törlési üzenet hozzáadása a fájlhoz</string>
   <string name="nominate_for_deletion_done">Kész</string>
+  <string name="nominate_for_deletion_notify_user">Felhasználó értesítése a vitalapon</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Fájl hozzáadása a törléskérő naplóhoz</string>
+  <string name="nominate_for_deletion_create_deletion_request">Törléskérő allap létrehozása</string>
   <string name="notsure">Nem tudom biztosan</string>
   <string name="send_thank_success_title">Köszönet küldése sikeres</string>
   <string name="send_thank_success_message">Köszönet sikeresen elküldve %1$s részére</string>
@@ -469,6 +487,12 @@
   <string name="review_thanks_no_button_text">Következő kép</string>
   <string name="skip_image_explanation">Erre a gombra kattintva egy másik mostanában feltöltött képet kaphatsz a Wikimedia Commonsból.</string>
   <string name="review_image_explanation">Átnézheted a képeket, ezzel növelve a Wikimedia Commons minőségét.\nAz átnézés négy szempontja a következő:\n- Megfelelő a kép?\n- Megfelel a szerzői jogvédelmi szabályoknak?\n- Helyesen van kategorizálva?\n- Ha minden jól megy, meg is köszönheted a közreműködőnek.</string>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Megosztott tartalom letöltése. A kép feldolgozása eltarthat egy ideig a kép méretétől és az eszközödtől függően.</item>
+    <item quantity="other">Megosztott tartalom letöltése. A képek feldolgozása eltarthat egy ideig a képek méretétől és az eszközödtől függően.</item>
+  </plurals>
+  <string name="no_image">Nincs felhasznált kép</string>
+  <string name="no_image_reverted">Nincs visszavont kép</string>
   <string name="no_image_uploaded">Nincs feltöltött kép</string>
   <string name="no_notification">Nincs olvasatlan üzenet</string>
   <string name="no_archived_notification">Nincs archivált üzenet</string>
@@ -480,6 +504,7 @@
   <string name="images_featured_explanation">A \"kiemelt kép\"-eket tapasztalt fényképészek vagy illusztrátorok készítik. A képeket a Wikimedia Commons közössége választja ki a minőségük alapján.</string>
   <string name="thanks_received_explanation">Ez a funkció lehetővé teszi, hogy \"Köszönöm\" üzenetet küldj annak a felhasználónak, aki hasznos szerkesztést végzett. A kattintható link a Laptörténet oldalon található.</string>
   <string name="previous_image_title_description">Előző cím és leírás másolása</string>
+  <string name="previous_button_tooltip_message">Kattints, ha az előző képed címét és leírását újra akarod használni, és az aktuális kép igényeinek megfelelően módosítod.</string>
   <string name="welcome_do_upload_content_description">Példák a Commons-ra feltöltött jó képekre</string>
   <string name="welcome_dont_upload_content_description">Példák nem feltöltendő képekre</string>
   <string name="skip_image">Kép átugrása</string>
@@ -493,7 +518,7 @@
   <string name="exif_tag_name_lensModel">Lencsemodell</string>
   <string name="exif_tag_name_serialNumbers">Sorozatszámok</string>
   <string name="exif_tag_name_software">Szoftver</string>
-  <string name="share_text">A Wikimedia Commons-ba való képfeltöltéshez szükséged lesz  a Commons applikációra: %1$s</string>
+  <string name="share_text">Képek feltöltése Wikimedia Commons-ba közvetlenül a telefonodról. Töltsd le a  Commons applikációt most: %1$s</string>
   <string name="share_via">Alkalmazás megosztása ezzel...</string>
   <string name="image_info">Képinformáció</string>
   <string name="no_categories_found">Nem található kategória</string>
@@ -523,5 +548,10 @@
   <string name="text_copy">Szöveg a vágólapra másolva</string>
   <string name="notification_mark_read">Értesítés olvasottként megjelölve</string>
   <string name="some_error">Hiba történt!</string>
+  <string name="place_state">Hely állapota:</string>
+  <string name="place_state_exists">Létezik</string>
+  <string name="place_state_needs_photo">Fénykép szükséges</string>
+  <string name="place_type">Hely típusa:</string>
+  <string name="nearby_search_hint">Híd, múzeum, szálloda, stb.</string>
   <string name="you_must_reset_your_passsword">A belépés nem sikerült, kérj új jelszót.</string>
 </resources>

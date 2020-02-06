@@ -106,7 +106,7 @@
   <string name="share_license_summary" fuzzy="true">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="menu_download">Undhuh</string>
   <string name="preference_license" fuzzy="true">Lisènsi</string>
-  <string name="use_previous">Anggo sesirah/wedharan sadurungé</string>
+  <string name="use_previous" fuzzy="true">Anggo sesirah/wedharan sadurungé</string>
   <string name="allow_gps">Otomatis masang lokasi saiki</string>
   <string name="preference_theme">Modhe wengi</string>
   <string name="preference_theme_summary">Anggo pakulitan peteng</string>

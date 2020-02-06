@@ -13,8 +13,6 @@ import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.nearby.fragments.NearbyListFragment;
-import fr.free.nrw.commons.nearby.fragments.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.review.ReviewImageFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
@@ -22,6 +20,11 @@ import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 
+/**
+ * This Class Represents the Module for dependency injection (using dagger)
+ * so, if a developer needs to add a new Fragment to the commons app
+ * then that must be mentioned here to inject the dependencies 
+ */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class FragmentBuilderModule {
@@ -34,9 +37,6 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract MediaDetailPagerFragment bindMediaDetailPagerFragment();
-
-    @ContributesAndroidInjector
-    abstract NearbyListFragment bindNearbyListFragment();
 
     @ContributesAndroidInjector
     abstract SettingsFragment bindSettingsFragment();
@@ -58,9 +58,6 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract ContributionsFragment bindContributionsFragment();
-
-    @ContributesAndroidInjector
-    abstract NearbyMapFragment bindNearbyMapFragment();
 
     @ContributesAndroidInjector
     abstract NearbyParentFragment bindNearbyParentFragment();

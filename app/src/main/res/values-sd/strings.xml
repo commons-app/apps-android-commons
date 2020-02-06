@@ -109,7 +109,7 @@
   </plurals>
   <string name="menu_download">لاھيو</string>
   <string name="preference_license">ڏنل اجازتنامو</string>
-  <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>
+  <string name="use_previous" fuzzy="true">گذريل عنوان/تشريح استعمال ڪريو</string>
   <string name="allow_gps">خوبخود ھاڻوڪي مڪانيت وٺو</string>
   <string name="allow_gps_summary">ھاڻوڪي مڪانيت ڏئي ٿو جيڪڏھن عڪس جيوٽيگ ناھي ٿيل، ۽ عڪس کي ان سان جيوٽيگ ڪري ٿو. چتاءُ: ھي توھان جي ھاڻوڪي مڪانيت ظاھر ڪندو.</string>
   <string name="preference_theme">رات جو ڏيک</string>
@@ -230,7 +230,7 @@
   <string name="skip_login_message">توھان کي تصويرون چاڙھڻ لاءِ مستقبل ۾ داخل ٿيڻو پوندو.</string>
   <string name="login_alert_message">هن خصوصيت جي استعمال لاءِ داخل ٿيو</string>
   <string name="nearby_location_has_not_changed">مڪانيت ناھي بدلي.</string>
-  <string name="nearby_location_not_available">مڪانيت موجود ناھي.</string>
+  <string name="nearby_location_not_available" fuzzy="true">مڪانيت موجود ناھي.</string>
   <string name="location_permission_rationale_nearby">ويجھين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گھربل آھي</string>
   <string name="get_directions">ھدايتون وٺو</string>
   <string name="read_article">مضمون پڙھو</string>

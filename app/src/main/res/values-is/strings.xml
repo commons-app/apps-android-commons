@@ -112,7 +112,7 @@
   <string name="media_upload_policy">Með því að senda inn þessa mynd, lýsi ég því hér með yfir að þetta er mitt eigið verk, það inniheldur ekkert höfundarréttarvarið efni eða sjálfsmyndir, og að það samræmist á allan hátt við &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;stefnu Wikimedia Commons varðandi notkun efnis&lt;/a&gt;.</string>
   <string name="menu_download">Sækja</string>
   <string name="preference_license">Sjálfgefið notkunarleyfi</string>
-  <string name="use_previous">Nota fyrri titil/lýsingu</string>
+  <string name="use_previous" fuzzy="true">Nota fyrri titil/lýsingu</string>
   <string name="allow_gps">Ná sjálfvirkt í núverandi staðsetningu</string>
   <string name="allow_gps_summary">Les núverandi staðsetningu til að geta stungið upp á flokkum ef myndin er ekki með hnattstaðsetningarhnitum. Aðvörun: þetta mun koma upp um staðsetninguna þína.</string>
   <string name="preference_theme">Næturhamur</string>
@@ -267,7 +267,7 @@
   <string name="copy_wikicode">Afrita wiki-textann á klippispjaldið</string>
   <string name="wikicode_copied">Wiki-textinn var afritaður á klippispjaldið</string>
   <string name="nearby_location_has_not_changed">Staðsetning hefur ekki breyst.</string>
-  <string name="nearby_location_not_available">Staðsetning ekki tiltæk.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Staðsetning ekki tiltæk.</string>
   <string name="location_permission_rationale_nearby">Heimild þarf til að birta lista yfir staði í nágrenninu</string>
   <string name="get_directions">Fá leiðsögn</string>
   <string name="read_article">Lesa grein</string>

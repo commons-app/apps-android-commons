@@ -121,7 +121,7 @@
   <string name="media_upload_policy">Ved å laste opp dette bildet erklærer jeg at dette er mitt eget verk, og at det ikke inneholder opphavsrettsbeskyttet materiale eller selvportretter, og ellers er i samsvar med &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons\' retningslinjer&lt;/a&gt;.</string>
   <string name="menu_download">Last ned</string>
   <string name="preference_license">Standardlisens</string>
-  <string name="use_previous">Bruk forrige tittel/beskrivelse</string>
+  <string name="use_previous" fuzzy="true">Bruk forrige tittel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nåværende plassering</string>
   <string name="allow_gps_summary">Hent nåværende plassering om bildet ikke er geotagget, og tagger bildet med plasseringen. Advarsel: Dette vil avsløre hvor du befinner deg for øyeblikket.</string>
   <string name="preference_theme">Nattmodus</string>
@@ -280,7 +280,7 @@
   <string name="copy_wikicode">Kopier wikiteksten til utklippstavlen</string>
   <string name="wikicode_copied">Wikiteksten har blitt kopiert til utklippstavlen</string>
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
-  <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
   <string name="get_directions">Få veibeskrivelse</string>
   <string name="read_article">Les artikkel</string>
@@ -527,7 +527,7 @@
   <string name="exif_tag_name_lensModel">Linsemodell</string>
   <string name="exif_tag_name_serialNumbers">Serienumre</string>
   <string name="exif_tag_name_software">Programvare</string>
-  <string name="share_text">Last opp bilder til Wikimedia Commons med din telefon. Last ned Commons-appen: %1$s</string>
+  <string name="share_text" fuzzy="true">Last opp bilder til Wikimedia Commons med din telefon. Last ned Commons-appen: %1$s</string>
   <string name="share_via">Del appen via …</string>
   <string name="image_info">Bildeinfo</string>
   <string name="no_categories_found">Ingen kategorier funnet</string>

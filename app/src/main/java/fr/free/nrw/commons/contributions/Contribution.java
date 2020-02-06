@@ -23,8 +23,8 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class  Contribution extends Media {
 
-    //{{According to EXIF data|2009-01-09}}
-    private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to EXIF data|%s}}";
+    //{{According to Exif data|2009-01-09}}
+    private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to Exif data|%s}}";
 
     //2009-01-09 → 9 January 2009
     private static final String TEMPLATE_DATA_OTHER_SOURCE = "%s";

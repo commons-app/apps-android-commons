@@ -3,21 +3,27 @@ package fr.free.nrw.commons.nearby.presenter;
 import android.view.View;
 
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
 
+import java.lang.reflect.Proxy;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
+import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.contract.NearbyMapContract;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.upload.UploadContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
@@ -33,118 +39,58 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
-                    WikidataEditListener.WikidataP18EditListener,
-                    LocationUpdateListener,
-                    NearbyParentFragmentContract.ViewsAreReadyCallback{
+        WikidataEditListener.WikidataP18EditListener,
+        LocationUpdateListener {
 
-
-    private NearbyParentFragmentContract.View nearbyParentFragmentView;
-    private NearbyMapContract.View nearbyMapFragmentView;
-    private NearbyParentFragmentContract.NearbyListView nearbyListFragmentView;
     private boolean isNearbyLocked;
     private LatLng curLatLng;
 
-    private boolean nearbyViewsAreReady;
-    private boolean onTabSelected;
-    private boolean mapInitialized;
-
-    private Place placeToCenter;
-    private boolean isPortraitMode;
     private boolean placesLoadedOnce;
 
-    private LocationServiceManager locationServiceManager;
+    BookmarkLocationsDao bookmarkLocationDao;
 
-    public static NearbyParentFragmentPresenter presenterInstance;
+    private static final NearbyParentFragmentContract.View DUMMY = (NearbyParentFragmentContract.View) Proxy.newProxyInstance(
+            NearbyParentFragmentContract.View.class.getClassLoader(),
+            new Class[]{NearbyParentFragmentContract.View.class}, (proxy, method, args) -> {
+                if (method.getName().equals("onMyEvent")) {
+                    return null;
+                } else if (String.class == method.getReturnType()) {
+                    return "";
+                } else if (Integer.class == method.getReturnType()) {
+                    return Integer.valueOf(0);
+                } else if (int.class == method.getReturnType()) {
+                    return 0;
+                } else if (Boolean.class == method.getReturnType()) {
+                    return Boolean.FALSE;
+                } else if (boolean.class == method.getReturnType()) {
+                    return false;
+                } else {
+                    return null;
+                }
+            }
+    );
+    private NearbyParentFragmentContract.View nearbyParentFragmentView = DUMMY;
 
-    private NearbyParentFragmentPresenter(NearbyParentFragmentContract.NearbyListView nearbyListFragmentView,
-                                         NearbyParentFragmentContract.View nearbyParentFragmentView,
-                                         NearbyMapContract.View nearbyMapFragmentView,
-                                         LocationServiceManager locationServiceManager) {
-        this.nearbyListFragmentView = nearbyListFragmentView;
-        this.nearbyParentFragmentView = nearbyParentFragmentView;
-        this.nearbyMapFragmentView = nearbyMapFragmentView;
-        this.nearbyMapFragmentView.viewsAreAssignedToPresenter(this);
-        this.locationServiceManager = locationServiceManager;
+
+    public NearbyParentFragmentPresenter(BookmarkLocationsDao bookmarkLocationDao){
+        this.bookmarkLocationDao=bookmarkLocationDao;
     }
 
-    // static method to create instance of Singleton class
-    public static NearbyParentFragmentPresenter getInstance(NearbyParentFragmentContract.NearbyListView nearbyListFragmentView,
-                                                            NearbyParentFragmentContract.View nearbyParentFragmentView,
-                                                            NearbyMapContract.View nearbyMapFragmentView,
-                                                            LocationServiceManager locationServiceManager) {
-        if (presenterInstance == null) {
-            presenterInstance = new NearbyParentFragmentPresenter(nearbyListFragmentView,
-                    nearbyParentFragmentView,
-                    nearbyMapFragmentView,
-                    locationServiceManager);
-        }
-        return presenterInstance;
-    }
-
-    // We call this method when we are sure presenterInstance is not null
-    public static NearbyParentFragmentPresenter getInstance() {
-        return presenterInstance;
-    }
-
-    /**
-     * Note: To initialize nearby operations both views should be ready and tab is selected.
-     * Initializes nearby operations if nearby views are ready
-     */
     @Override
-    public void onTabSelected() {
-        Timber.d("Nearby tab selected");
-        onTabSelected = true;
-        // The condition for initialize operations is both having views ready and tab is selected
-        if (nearbyViewsAreReady && !mapInitialized) {
-            checkForPermission();
-        }
+    public void attachView(NearbyParentFragmentContract.View view){
+        this.nearbyParentFragmentView=view;
     }
 
-    /**
-     * -To initialize nearby operations both views should be ready and tab is selected.
-     * Initializes nearby operations if tab selected, otherwise just sets nearby views are ready
-     */
     @Override
-    public void nearbyFragmentsAreReady() {
-        Timber.d("Nearby fragments are ready to be used by presenter");
-        nearbyViewsAreReady = true;
-        // The condition for initialize operations is both having views ready and tab is selected
-        if (onTabSelected) {
-            checkForPermission();
-        }
-    }
-
-    /**
-     * Initializes nearby operations by following these steps:
-     * -Checks for permission and perform if given
-     */
-    @Override
-    public void checkForPermission() {
-        Timber.d("checking for permission");
-        nearbyParentFragmentView.checkPermissionsAndPerformAction(this::performNearbyOperationsIfPermissionGiven);
-    }
-
-    /**
-     * - Adds search this area button action
-     * - Adds camera move action listener
-     * - Initializes nearby operations, registers listeners, broadcast receivers etc.
-     */
-    public void performNearbyOperationsIfPermissionGiven() {
-        Timber.d("Permission is given, performing actions");
-        this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
-        this.nearbyParentFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
-        initializeMapOperations();
+    public void detachView(){
+        this.nearbyParentFragmentView=DUMMY;
     }
 
     public void initializeMapOperations() {
         lockUnlockNearby(false);
-        registerUnregisterLocationListener(false);
-        nearbyParentFragmentView.addNetworkBroadcastReceiver();
-        updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
+        updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
         this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
-        this.nearbyMapFragmentView.addOnCameraMoveListener(onCameraMove(getMapboxMap()));
         nearbyParentFragmentView.setCheckBoxAction();
-        mapInitialized = true;
     }
 
     /**
@@ -205,34 +151,13 @@ public class NearbyParentFragmentPresenter
         }
     }
 
-    public void registerUnregisterLocationListener(boolean removeLocationListener) {
-        if (removeLocationListener) {
-            locationServiceManager.unregisterLocationManager();
-            locationServiceManager.removeLocationListener(this);
-            Timber.d("Location service manager unregistered and removed");
-        } else {
-            locationServiceManager.addLocationListener(this);
-            nearbyParentFragmentView.registerLocationUpdates(locationServiceManager);
-            Timber.d("Location service manager added and registered");
-        }
-    }
-
-    public LatLng getCameraTarget() {
-        return nearbyMapFragmentView.getCameraTarget();
-    }
-    public MapboxMap getMapboxMap() {
-        return nearbyMapFragmentView.getMapboxMap();
-    }
-
     /**
      * This method should be the single point to update Map and List. Triggered by location
      * changes
      * @param locationChangeType defines if location changed significantly or slightly
-     * @param cameraTarget will be used for search this area mode, when searching around
-     *                    user's camera target
      */
     @Override
-    public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType, LatLng cameraTarget) {
+    public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType) {
         Timber.d("Presenter updates map and list");
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns");
@@ -244,7 +169,7 @@ public class NearbyParentFragmentPresenter
             return;
         }
 
-        LatLng lastLocation = locationServiceManager.getLastLocation();
+        LatLng lastLocation = nearbyParentFragmentView.getLastLocation();
         curLatLng = lastLocation;
 
         if (curLatLng == null) {
@@ -261,14 +186,13 @@ public class NearbyParentFragmentPresenter
             Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
             lockUnlockNearby(true);
             nearbyParentFragmentView.setProgressBarVisibility(true);
-            nearbyParentFragmentView.populatePlaces(lastLocation, lastLocation);
+            nearbyParentFragmentView.populatePlaces(lastLocation);
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
             Timber.d("SEARCH_CUSTOM_AREA");
             lockUnlockNearby(true);
             nearbyParentFragmentView.setProgressBarVisibility(true);
-            nearbyParentFragmentView.populatePlaces(lastLocation, cameraTarget);
-
+            nearbyParentFragmentView.populatePlaces(nearbyParentFragmentView.getCameraTarget());
         } else { // Means location changed slightly, ie user is walking or driving.
             Timber.d("Means location changed slightly");
             if (!nearbyParentFragmentView.isSearchThisAreaButtonVisible()) { // Do not track users position if the user is checking around
@@ -282,28 +206,23 @@ public class NearbyParentFragmentPresenter
      * location where you are not at.
      * @param nearbyPlacesInfo This variable has placeToCenter list information and distances.
      */
-    public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker) {
-        nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList, selectedMarker, this);
-        nearbyMapFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
-        nearbyMapFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
-        lockUnlockNearby(false); // So that new location updates wont come
-        nearbyParentFragmentView.setProgressBarVisibility(false);
-        nearbyListFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
-        handleCenteringTaskIfAny();
-    }
-
-    /**
-     * Populates places for custom location, should be used for finding nearby places around a
-     * location where you are not at.
-     * @param nearbyPlacesInfo This variable has placeToCenter list information and distances.
-     */
-    public void updateMapMarkersForCustomLocation(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker) {
-        nearbyMapFragmentView.updateMapMarkers(nearbyPlacesInfo.curLatLng, nearbyPlacesInfo.placeList, selectedMarker, this);
-        nearbyMapFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
-        lockUnlockNearby(false); // So that new location updates wont come
-        nearbyParentFragmentView.setProgressBarVisibility(false);
-        nearbyListFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
-        handleCenteringTaskIfAny();
+    public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
+        if(null!=nearbyParentFragmentView) {
+            List<NearbyBaseMarker> nearbyBaseMarkers = NearbyController
+                    .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
+                            nearbyPlacesInfo.placeList,
+                            nearbyParentFragmentView.getContext(),
+                            bookmarkLocationDao.getAllBookmarksLocations());
+            nearbyParentFragmentView.updateMapMarkers(nearbyBaseMarkers, selectedMarker);
+            nearbyParentFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
+            if(shouldTrackPosition){
+                nearbyParentFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
+            }
+            lockUnlockNearby(false); // So that new location updates wont come
+            nearbyParentFragmentView.setProgressBarVisibility(false);
+            nearbyParentFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
+            handleCenteringTaskIfAny();
+        }
     }
 
     /**
@@ -313,25 +232,25 @@ public class NearbyParentFragmentPresenter
     private void handleCenteringTaskIfAny() {
         if (!placesLoadedOnce) {
             placesLoadedOnce = true;
-            nearbyMapFragmentView.centerMapToPlace(placeToCenter, isPortraitMode);
+            nearbyParentFragmentView.centerMapToPlace(null);
         }
     }
 
     @Override
     public void onWikidataEditSuccessful() {
-        updateMapAndList(MAP_UPDATED, null);
+        updateMapAndList(MAP_UPDATED);
     }
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
         Timber.d("Location significantly changed");
-        updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED, null);
+        updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
         Timber.d("Location significantly changed");
-        updateMapAndList(LOCATION_SLIGHTLY_CHANGED, null);
+        updateMapAndList(LOCATION_SLIGHTLY_CHANGED);
     }
 
     @Override
@@ -340,11 +259,10 @@ public class NearbyParentFragmentPresenter
     }
 
     @Override
-    public MapboxMap.OnCameraMoveListener onCameraMove(MapboxMap mapboxMap) {
-        return () -> {
+    public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
             // If our nearby markers are calculated at least once
-            if (NearbyController.currentLocation != null) {
-               double distance = mapboxMap.getCameraPosition().target.distanceTo
+            if (NearbyController.latestSearchLocation != null) {
+               double distance =latLng.distanceTo
                         (LocationUtils.commonsLatLngToMapBoxLatLng(NearbyController.latestSearchLocation));
                 if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
                     if (distance > NearbyController.latestSearchRadius) {
@@ -356,7 +274,6 @@ public class NearbyParentFragmentPresenter
             } else {
                 nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
             }
-        };
     }
 
     @Override
@@ -367,19 +284,34 @@ public class NearbyParentFragmentPresenter
                     // Do nothing
                     break;
                 case UNCHECKED:
-                    nearbyMapFragmentView.filterOutAllMarkers();
+                    nearbyParentFragmentView.filterOutAllMarkers();
                     nearbyParentFragmentView.setRecyclerViewAdapterItemsGreyedOut();
                     break;
                 case CHECKED:
-                    nearbyMapFragmentView.displayAllMarkers();
+                    nearbyParentFragmentView.displayAllMarkers();
                     nearbyParentFragmentView.setRecyclerViewAdapterAllSelected();
                     break;
             }
         } else {
-            nearbyMapFragmentView.filterMarkersByLabels(selectedLabels,
+            nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
                     NearbyFilterState.getInstance().isExistsSelected(),
                     NearbyFilterState.getInstance().isNeedPhotoSelected(),
-                    filterForPlaceState, filterForAllNoneType);
+                    filterForPlaceState, false);
+        }
+    }
+
+    @Override
+    public void updateMapMarkersToController(List<NearbyBaseMarker> nearbyBaseMarkers) {
+        NearbyController.markerExistsMap = new HashMap<>();
+        NearbyController.markerNeedPicMap = new HashMap<>();
+        NearbyController.markerLabelList.clear();
+        for (int i = 0; i < nearbyBaseMarkers.size(); i++) {
+            NearbyBaseMarker nearbyBaseMarker = nearbyBaseMarkers.get(i);
+            NearbyController.markerLabelList.add(
+                    new MarkerPlaceGroup(nearbyBaseMarkers.get(i).getMarker(), bookmarkLocationDao.findBookmarkLocation(nearbyBaseMarkers.get(i).getPlace()), nearbyBaseMarker.getPlace()));
+            //TODO: fix bookmark location
+            NearbyController.markerExistsMap.put((nearbyBaseMarkers.get(i).getPlace().hasWikidataLink()), nearbyBaseMarkers.get(i).getMarker());
+            NearbyController.markerNeedPicMap.put(((nearbyBaseMarkers.get(i).getPlace().pic == null) ? true : false), nearbyBaseMarkers.get(i).getMarker());
         }
     }
 
@@ -404,11 +336,9 @@ public class NearbyParentFragmentPresenter
             nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
 
             if (searchCloseToCurrentLocation()){
-                updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED,
-                        null);
+                updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
-                updateMapAndList(SEARCH_CUSTOM_AREA,
-                        getCameraTarget());
+                updateMapAndList(SEARCH_CUSTOM_AREA);
             }
         };
     }
@@ -419,9 +349,11 @@ public class NearbyParentFragmentPresenter
      * @return Returns true if search this area button is used around our current location
      */
     public boolean searchCloseToCurrentLocation() {
-        double distance = LocationUtils.commonsLatLngToMapBoxLatLng(getCameraTarget())
-                .distanceTo(new com.mapbox.mapboxsdk.geometry.LatLng(NearbyController.currentLocation.getLatitude()
-                        , NearbyController.currentLocation.getLongitude()));
+        if (null == nearbyParentFragmentView.getLastFocusLocation()) {
+            return true;
+        }
+        double distance = LocationUtils.commonsLatLngToMapBoxLatLng(nearbyParentFragmentView.getCameraTarget())
+                .distanceTo(nearbyParentFragmentView.getLastFocusLocation());
         if (distance > NearbyController.currentLocationSearchRadius * 3 / 4) {
             return false;
         } else {
@@ -429,16 +361,20 @@ public class NearbyParentFragmentPresenter
         }
     }
 
-    /**
-     * Centers the map in nearby fragment to a given placeToCenter
-     * @param place is new center of the map
-     */
-    public void centerMapToPlace(Place place, boolean isPortraitMode) {
-        if (placesLoadedOnce) {
-            nearbyMapFragmentView.centerMapToPlace(place, isPortraitMode);
+    public void onMapReady() {
+        if(null!=nearbyParentFragmentView) {
+            nearbyParentFragmentView.addSearchThisAreaButtonAction();
+            initializeMapOperations();
+        }
+    }
+
+    public boolean areLocationsClose(LatLng cameraTarget, LatLng lastKnownLocation) {
+        double distance = LocationUtils.commonsLatLngToMapBoxLatLng(cameraTarget)
+                .distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation));
+        if (distance > NearbyController.currentLocationSearchRadius * 3 / 4) {
+            return false;
         } else {
-            this.isPortraitMode = isPortraitMode;
-            this.placeToCenter = place;
+            return true;
         }
     }
 
