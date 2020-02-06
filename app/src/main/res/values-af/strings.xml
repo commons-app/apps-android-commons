@@ -264,7 +264,7 @@
   <string name="copy_wikicode">Kopieer die wikitext na die knipbord</string>
   <string name="wikicode_copied">Die wikitext is na die knipbord gekopieër</string>
   <string name="nearby_location_has_not_changed">Ligging het nie verander nie.</string>
-  <string name="nearby_location_not_available">Ligging nie beskikbaar nie.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Ligging nie beskikbaar nie.</string>
   <string name="location_permission_rationale_nearby">Toestemming word benodig om \'n lys van nabygeleë plekke te vertoon</string>
   <string name="get_directions">Kry aanwysings</string>
   <string name="read_article">Lees artikel</string>

@@ -250,7 +250,7 @@
   <string name="skip_login_message">Bydd yn rhaid i ti fewngofnodi er mwyn uwchlwytho delweddau yn y dyfodol.</string>
   <string name="login_alert_message">Er mwyn defnyddio\'r nodwedd yma, mewngofnodwch!</string>
   <string name="nearby_location_has_not_changed">Nid yw\'r lleoliad wedi newid.</string>
-  <string name="nearby_location_not_available">Nid yw\'r lleoliad ar gael.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Nid yw\'r lleoliad ar gael.</string>
   <string name="nearby_wikidata">Wicidata</string>
   <string name="nearby_wikipedia">Wicipedia</string>
   <string name="nearby_commons">Comin</string>

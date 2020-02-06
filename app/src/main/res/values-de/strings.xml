@@ -280,7 +280,7 @@
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
   <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
-  <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Der Standort ist nicht verfügbar.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
   <string name="get_directions">Richtungen abrufen</string>
   <string name="read_article">Artikel lesen</string>

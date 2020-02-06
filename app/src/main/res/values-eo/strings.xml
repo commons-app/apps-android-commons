@@ -275,7 +275,7 @@
   <string name="copy_wikicode">Kopii la vikitekston en la tondujon</string>
   <string name="wikicode_copied">La vikiteksto kopiiĝis en la tondujon</string>
   <string name="nearby_location_has_not_changed">La pozicio ne ŝanĝiĝis.</string>
-  <string name="nearby_location_not_available">Pozicio ne havebla.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Pozicio ne havebla.</string>
   <string name="location_permission_rationale_nearby">Permeso estas postulata por montri liston de apudaj lokoj</string>
   <string name="get_directions">Ricevi instrukcion</string>
   <string name="read_article">Legi artikolon</string>

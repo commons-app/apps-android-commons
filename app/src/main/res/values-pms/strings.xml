@@ -271,7 +271,7 @@
   <string name="copy_wikicode">Copié ël test wiki ant ël pògia-feuj</string>
   <string name="wikicode_copied">Ël test wiki a l\'é stàit copià ant ël pògia-feuj</string>
   <string name="nearby_location_has_not_changed">Ël leu a l\'é nen cangià.</string>
-  <string name="nearby_location_not_available">Leu nen disponìbil.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Leu nen disponìbil.</string>
   <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
   <string name="get_directions">Oten-e le diression</string>
   <string name="read_article">Lese l\'artìcol</string>

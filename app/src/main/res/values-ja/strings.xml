@@ -281,7 +281,7 @@
   <string name="copy_wikicode">ウィキテキストをクリップボードにコピーする</string>
   <string name="wikicode_copied">クリップボードにウィキテキストをコピー完了しました</string>
   <string name="nearby_location_has_not_changed">場所は変更されていません。</string>
-  <string name="nearby_location_not_available">位置が無効です。</string>
+  <string name="nearby_location_not_available" fuzzy="true">位置が無効です。</string>
   <string name="location_permission_rationale_nearby">近くの場所を表示するには権限が必要です</string>
   <string name="get_directions">道順を調べる</string>
   <string name="read_article">記事を読む</string>

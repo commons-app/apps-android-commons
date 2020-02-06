@@ -266,7 +266,7 @@
   <string name="copy_wikicode">Copia el wikitext al portaretalls</string>
   <string name="wikicode_copied">S\'ha copiat el wikitext al portaretalls</string>
   <string name="nearby_location_has_not_changed">La ubicació no ha canviat.</string>
-  <string name="nearby_location_not_available">La ubicació no és disponible.</string>
+  <string name="nearby_location_not_available" fuzzy="true">La ubicació no és disponible.</string>
   <string name="location_permission_rationale_nearby">Permís necessari per a mostrar una llista de llocs propers</string>
   <string name="get_directions">Com anar-hi</string>
   <string name="read_article">Llegeix l’article</string>

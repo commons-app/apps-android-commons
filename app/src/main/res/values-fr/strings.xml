@@ -294,7 +294,7 @@
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
   <string name="nearby_location_has_not_changed">L’emplacement n’a pas changé.</string>
-  <string name="nearby_location_not_available">Emplacement non disponible.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Emplacement non disponible.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux à proximité</string>
   <string name="get_directions">Obtenir les directions</string>
   <string name="read_article">Lire l’article</string>

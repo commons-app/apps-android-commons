@@ -270,7 +270,7 @@
   <string name="copy_wikicode">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చెయ్యి</string>
   <string name="wikicode_copied">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చేసాం</string>
   <string name="nearby_location_has_not_changed">స్థలం మారలేదు.</string>
-  <string name="nearby_location_not_available">స్థలం అందుబాటులో లేదు.</string>
+  <string name="nearby_location_not_available" fuzzy="true">స్థలం అందుబాటులో లేదు.</string>
   <string name="location_permission_rationale_nearby">చుట్టుపక్కల స్థలాలను చూపించాలంటే అనుమతి కావాలి</string>
   <string name="get_directions">మార్గసూచనలను పొందండి</string>
   <string name="read_article">వ్యాసాన్ని చదవండి</string>

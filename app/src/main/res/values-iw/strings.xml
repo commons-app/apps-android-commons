@@ -286,7 +286,7 @@
   <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
   <string name="wikicode_copied">קוד הוויקי הועתק ללוח</string>
   <string name="nearby_location_has_not_changed">המיקום לא השתנה.</string>
-  <string name="nearby_location_not_available">המיקום אינו זמין.</string>
+  <string name="nearby_location_not_available">ייתכן ש\"בסביבה\" לא יפעל כראוי, משום שהמיקום אינו זמין.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
   <string name="get_directions">קבלת כיוונים</string>
   <string name="read_article">קריאת הערך</string>
@@ -570,4 +570,5 @@
   <string name="nearby_search_hint">גשר, מוזאון, מלון, וכו\'.</string>
   <string name="you_must_reset_your_passsword">משהו השתבש בכניסה למערכת, עליך לאפס את הססמה שלך!</string>
   <string name="upload_nearby_place_found_title">נמצא בקרבת מקום</string>
+  <string name="upload_nearby_place_found_description">האם זאת תמונה של המקום %1$s?</string>
 </resources>

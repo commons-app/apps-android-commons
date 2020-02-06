@@ -280,7 +280,7 @@
   <string name="copy_wikicode">Kopier wikiteksten til utklippstavlen</string>
   <string name="wikicode_copied">Wikiteksten har blitt kopiert til utklippstavlen</string>
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
-  <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
   <string name="get_directions">Få veibeskrivelse</string>
   <string name="read_article">Les artikkel</string>

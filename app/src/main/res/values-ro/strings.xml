@@ -275,7 +275,7 @@
   <string name="copy_wikicode">Copiați wikitext-ul în clipboard</string>
   <string name="wikicode_copied">Wikitext-ul a fost copiat în clipboard</string>
   <string name="nearby_location_has_not_changed">Locația nu s-a schimbat.</string>
-  <string name="nearby_location_not_available">Locația nu este disponibilă.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Locația nu este disponibilă.</string>
   <string name="location_permission_rationale_nearby">Permisiunea necesară pentru a afișa o listă de locații din apropiere</string>
   <string name="get_directions">Obțineți indicații de orientare</string>
   <string name="read_article">Citiți articolul</string>

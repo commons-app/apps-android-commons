@@ -10,6 +10,7 @@
   <string name="preference_category_general">ߝߘߏ߬ߓߊ߬ߡߊ</string>
   <string name="preference_category_feedback">ߞߙߐ߬ߛߌ߬ߕߊ</string>
   <string name="preference_category_privacy">ߜߎ߲߬ߘߎ߬ߢߐ߲߰ߦߊ</string>
+  <string name="preference_category_location">ߘߌ߲߬ߞߌߙߊ</string>
   <string name="app_name">ߞߐߡߐ߲</string>
   <string name="menu_settings">ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ</string>
   <string name="intent_share_upload_label">ߊ߬ ߟߊߦߟߍ߬ ߞߐߡߐ߲ ߞߊ߲߬</string>
@@ -69,6 +70,8 @@
   <string name="menu_about">ߞߊ߬ ߓߍ߲߬</string>
   <string name="about_privacy_policy">&lt;u&gt;ߜߎ߲߬ߘߎ߬ߢߐ߲߰ߦߊ ߞߎߙߎ߲߬ߘߎ&lt;/u&gt;</string>
   <string name="title_activity_about">ߞߊ߬ ߓߍ߲߬</string>
+  <string name="menu_feedback">ߞߙߐ߬ߛߌ߬ߕߊ ߗߋ߫ (ߢ:ߞߏ߲ߘߏ ߟߊ߫)</string>
+  <string name="no_email_client">ߢߎߡߍߙߋ߲ߞߏ߲ߘߏ ߛߊ߲߬ߠߌ߲߬ߢߐ߲߰ ߡߊߞߍߣߍ߲߫ ߕߴߦߋ߲߬</string>
   <string name="provider_categories">ߦߌߟߡߊ߫ ߟߊߓߊ߯ߙߊߣߍ߲߫ ߞߎߘߊ ߟߎ߬</string>
   <string name="waiting_first_sync">ߕߎ߬ߢߊ߬ߢߐ߲߰ߦߊ߬ߟߌ߬ ߝߟߐ ߘߐߞߐ߬ߣߐ߲߬</string>
   <string name="no_uploads_yet">ߌ ߡߊ߬ ߖߌ߬ߦߊ߬ߓߍ߬ ߛߌ߫ ߟߊߦߟߍ߬ ߡߎߣߎ߲߬.</string>
@@ -76,6 +79,16 @@
   <string name="menu_cancel_upload">ߊ߬ ߘߐߛߊ߬</string>
   <string name="menu_download">ߟߊ߬ߖߌ߰ߒ߬ߞߎ߲߬ߠߌ߲</string>
   <string name="preference_theme">ߛߎ ߞߍߗߏ߮</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ߏߛߑߕߙߊߟߌ߫)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ߊߟߏߡߊ߲ߘߎ߯)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ߋߛߑߕߏߣߌ߫)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ߊߛߑߔߊ߲߫)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ߞߙߏߥߊߛߌ߫)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (ߟߎߞߑߛߊ߲ߓߎߙߜ߭)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (ߤߏߟߊ߲ߘߌ߬)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ߣߐߙߑߝ߭ߍߗ߭)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ߔߏߟߐ߲ߢ)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ߙߏߡߊߣߌ߫</string>
   <string name="tutorial_3_text">ߌ ߞߊ߫ ߢߌ߲߬ ߠߎ߬ ߟߊߦߍ߬ߟߍ߫ ߖߊ߰ߣߌ߲߫:</string>
   <string name="tutorial_3_subtext_1">ߌ ߖߍ߬ߘߍ ߥߟߊ߫ ߌ ߕߋߙߌ ߘߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
   <string name="tutorial_3_subtext_2">ߌ ߣߌ߬ ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߎ߬ ߟߊߖߌ߰ ߟߴߌ ߞߎ߲߬ ߓߟߐߟߐ ߟߊ߫</string>
@@ -105,6 +118,16 @@
   <string name="media_detail_coordinates_empty">ߡߊ߫ ߡߊߛߐ߫</string>
   <string name="become_a_tester_title">ߌ ߞߊߘߊ߲߫ ߞߊ߬ ߞߍ߫ ߓߋߕߊ ߣߍߣߍߓߊ߮ ߘߏ߫ ߘߌ߫</string>
   <string name="_2fa_code">2FA Code</string>
+  <string name="number_of_uploads">ߒ ߠߊ߫ ߞߐ߯ߟߊ߫ ߟߊߦߟߍߟߌ ߟߎ߬ ߘߊ߲߭</string>
+  <string name="maximum_limit">ߘߊ߲߭ ߞߐߘߊ߲</string>
+  <string name="invalid_zero">ߘߐ߬ߞߏߟߏ߲ ߓߍ߲߬ߣߍ߲߬ ߕߍ߫</string>
+  <string name="invalid_input">ߟߊ߬ߘߏ߲߬ߕߊ ߓߍ߲߬ߓߊߟߌ</string>
+  <string name="maximum_limit_alert">ߌ ߕߴߛߋ߫ ߊ߬ ߟߊߓߊ߯ߙߊ߫ ߟߊ߫ ߞߊ߬ ߕߊ߬ߡߌ߲߬ ߅߀߀ ߞߊ߲߬</string>
+  <string name="enter_valid">ߝߙߍߕߍ߫ ߓߘߍ ߟߊߘߏ߲߬</string>
+  <string name="cannot_be_zero">ߟߊ߬ߦߟߍ߬ߟߌ ߕߛߋ߫ ߘߊ߲߬ ߠߊ߫ ߀ ߠߊ߫</string>
+  <string name="set_limit">ߟߊ߬ߦߟߍ߬ߟߌ߬ ߞߐ߯ߟߕߊ ߟߎ߬ ߘߊ߲߭</string>
+  <string name="logout_verification">ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲ ߓߐ߫ ߝߛߊߦߌ߫؟</string>
+  <string name="commons_logo">ߞߐߡߐ߲ ߛߌ߲ߞߐ߲</string>
   <string name="commons_website">ߞߐߡߐ߲ ߞߍߦߙߐ</string>
   <string name="commons_facebook">ߞߐߡߐ߲ ߝߋߛߑߓߎߞ ߞߐߜߍ</string>
   <string name="no_image_found">ߖߌ߬ߦߊ߬ߓߍ߫ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
@@ -112,6 +135,7 @@
   <string name="upload_image">ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߟߍ߬</string>
   <string name="welcome_image_mount_zao">ߖ߭ߊߏ߫ ߞߎ߬ߙߎ</string>
   <string name="welcome_image_llamas">ߞߏ߲ߞߏߛߊ߱</string>
+  <string name="welcome_image_rainbow_bridge">ߞߟߐ߬ߟߐ ߞߣߍߦߊ</string>
   <string name="welcome_image_no_selfies">ߖߘߍ߬ ߖߌ߬ߦߊ߬ߓߍ߬ ߕߊ߬ ߕߴߊ߬ ߘߐ߫</string>
   <string name="welcome_image_proprietary">ߖߌ߬ߦߊ߬ߓߍ߫ ߕߌ߰ߟߊ߬ߡߊ</string>
   <string name="welcome_image_welcome_wikipedia">ߌ ߣߌ߫ ߛߣߍ߫ ߥߞߌߡߋߘߌߦߊ ߞߊ߲߬</string>
@@ -194,6 +218,8 @@
   <string name="delete_search_dialog">ߋ߯߹ ߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߢߌߣߌ߲ߠߌ߲ ߣߌ߲߬ ߖߏ߬ߛߌ߬ ߝߋߎ߫؟</string>
   <string name="search_history_deleted">ߢߌߣߌ߲ߠߌ߲ ߞߘߐ߬ߡߊ߲ ߠߎ߬ ߓߘߊ߫ ߖߏ߰ߛߌ߬</string>
   <string name="delete">ߊ߬ ߖߏ߬ߛߌ߫</string>
+  <string name="statistics_thanks">ߞߎߟߎ߲ߖߋߟߌ ߓߘߊ߫ ߟߊߛߐ߬ߘߐ߲߬</string>
+  <string name="statistics_featured">ߖߌ߬ߦߊ߬ߓߍ߫ ߟߊߓߊ߯ߙߕߊ ߟߎ߬</string>
   <string name="statistics_wikidata_edits">ߖߌ߬ߦߊ߬ߓߍ ߞߊߕߙߍ߬ \"ߛߌ߰ߢߐ߲߰ ߦߙߐ\" ߡߊ߬</string>
   <string name="level">ߞߊߓߋ</string>
   <string name="images_uploaded">ߖߌ߬ߦߊ߬ߓߍ ߓߘߊ߫ ߟߊߦߟߍ߬</string>
@@ -237,4 +263,17 @@
   <string name="exif_tag_name_copyright">ߓߊߦߟߍߡߊ߲ ߤߊߞߍ</string>
   <string name="exif_tag_name_location">ߘߌ߲߬ߞߌߙߊ</string>
   <string name="exif_tag_name_cameraModel">ߖߌ߬ߦߊ߬ߕߊ߬ߟߊ߲ ߛߎ߮ߦߊ</string>
+  <string name="delete_helper_show_deletion_title">ߕߐ߯ߦߊߟߌ ߖߏ߰ߛߌ߬ߟߌ ߞߊ߲ߡߊ߬</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s ߕߐ߯ߦߊߟߌ ߦߴߌ ߘߐ߫ ߖߏ߬ߛߌ߬ߟߌ ߞߊ߲ߡߊ߬</string>
+  <string name="delete_helper_show_deletion_title_failed">ߊ߬ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
+  <string name="delete_helper_show_deletion_message_else">ߌ ߕߍ߫ ߛߋ߫ ߖߏ߰ߛߌ߬ߟߌ ߡߊߢߌߣߌ߲߫ ߠߊ߫</string>
+  <string name="delete_helper_ask_spam_blurry">ߢߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲</string>
+  <string name="delete_helper_ask_spam_other">ߘߏ߫ ߜߘߍ߫</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">ߖߌ߬ߦߊ߬ߓߍ ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲</string>
+  <string name="delete_helper_ask_reason_copyright_logo">ߛߌ߲ߞߐ߲</string>
+  <string name="delete_helper_ask_reason_copyright_other">ߘߏ߫ ߜߘߍ߫</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">ߓߊߏ߬ ߊ߬ ߦߋ߫</string>
+  <string name="share_image_via">ߖߌ߬ߦߊ߬ߓߍ ߟߊߖߍ߲ߛߍ߲߫ ߞߊߕߙߍ߬</string>
+  <string name="no_achievements_yet">ߌ ߡߊ߫ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߛߌ߫ ߞߍ߫ ߡߎߣߎ߲߬</string>
+  <string name="some_error">ߝߎ߬ߕߎ߲߬ߕߌ ߘߏ߫ ߕߘߍ߬ ߦߋ߫ ߦߋ߲߬߹</string>
 </resources>

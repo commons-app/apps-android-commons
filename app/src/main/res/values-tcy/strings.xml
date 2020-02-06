@@ -265,7 +265,7 @@
   <string name="copy_wikicode">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ಪುಲೆ.</string>
   <string name="wikicode_copied">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ತ್ಂಡ್.</string>
   <string name="nearby_location_has_not_changed">ಜಾಗೆ ಬದಲಾವಣೆ ಇಜ್ಜಿ.</string>
-  <string name="nearby_location_not_available">ಜಾಗೆತ ಗುರುತು ಇಜ್ಜಿ.</string>
+  <string name="nearby_location_not_available" fuzzy="true">ಜಾಗೆತ ಗುರುತು ಇಜ್ಜಿ.</string>
   <string name="location_permission_rationale_nearby">ಮುಟ್ಟತ ಜಾಗೆತ ಪಟ್ಟಿನ್ ತೋಜಾಯರ ಅನುಮತಿ ಅಗತ್ಯವಾತ್ ಬೋಡು.</string>
   <string name="get_directions" fuzzy="true">ನಿರ್ದೇಶನೊ ಉಂಡಾ.</string>
   <string name="read_article" fuzzy="true">ಲೇಖನೊ ಓದುಲೆ.</string>

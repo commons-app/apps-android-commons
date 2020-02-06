@@ -277,7 +277,7 @@
   <string name="copy_wikicode">Kopiera wikitexten till urklipp</string>
   <string name="wikicode_copied">Wikitexten kopierades till urklipp</string>
   <string name="nearby_location_has_not_changed">Platsen har inte ändrats.</string>
-  <string name="nearby_location_not_available">Platsen är inte tillgänglig.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Platsen är inte tillgänglig.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
   <string name="get_directions">Få vägbeskrivningar</string>
   <string name="read_article">Läs artikel</string>

@@ -10,6 +10,7 @@
 * DannyS712
 * Fitoschido
 * Gastonsaenz
+* Ihojose
 * JO777
 * Jduranboger
 * Jelou
@@ -295,7 +296,7 @@
   <string name="copy_wikicode">Copia el wikitexto al portapapeles</string>
   <string name="wikicode_copied">El wikitexto fue copiado al portapapeles</string>
   <string name="nearby_location_has_not_changed">La ubicación no ha cambiado.</string>
-  <string name="nearby_location_not_available">La ubicación no está disponible.</string>
+  <string name="nearby_location_not_available" fuzzy="true">La ubicación no está disponible.</string>
   <string name="location_permission_rationale_nearby">Se necesita permiso para mostrar una lista de lugares cercanos</string>
   <string name="get_directions">Cómo llegar</string>
   <string name="read_article">Leer artículo</string>
@@ -578,4 +579,5 @@
   <string name="place_type">Tipo de lugar:</string>
   <string name="nearby_search_hint">Puente, museo, hotel…</string>
   <string name="you_must_reset_your_passsword">Hubo un error con el inicio de sesión, debe restablecer su contraseña !!</string>
+  <string name="upload_nearby_place_found_title">Lugar cercano encontrado</string>
 </resources>

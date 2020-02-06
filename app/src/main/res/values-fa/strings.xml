@@ -287,7 +287,7 @@
   <string name="copy_wikicode">از ویکی واژه به کلیپ برد کپی کنید.</string>
   <string name="wikicode_copied">ویکی‌متن در کلیپ‌بورد کپی شد</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
-  <string name="nearby_location_not_available">مکان موجود نیست.</string>
+  <string name="nearby_location_not_available" fuzzy="true">مکان موجود نیست.</string>
   <string name="location_permission_rationale_nearby">برای نمایش مکان‌ّای اطراف نیاز به اجازه است.</string>
   <string name="get_directions">دریافت جهت‌‌ها</string>
   <string name="read_article">خواندن مقاله</string>

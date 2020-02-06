@@ -272,7 +272,7 @@
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
-  <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
   <string name="get_directions">Дај насоки</string>
   <string name="read_article">Прочитај статија</string>

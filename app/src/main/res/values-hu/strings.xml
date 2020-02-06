@@ -282,7 +282,7 @@
   <string name="copy_wikicode">Wikiszöveg vágólapra másolása</string>
   <string name="wikicode_copied">A wikiszöveg a vágólapra lett másolva</string>
   <string name="nearby_location_has_not_changed">A hely nem változott.</string>
-  <string name="nearby_location_not_available">A hely nem érhető el.</string>
+  <string name="nearby_location_not_available" fuzzy="true">A hely nem érhető el.</string>
   <string name="location_permission_rationale_nearby">Közeli helyek listájának megtekintéséhez engedély szükséges</string>
   <string name="get_directions">Útvonalterv</string>
   <string name="read_article">Szócikk olvasása</string>

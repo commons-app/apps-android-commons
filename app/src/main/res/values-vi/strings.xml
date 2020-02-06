@@ -251,7 +251,7 @@
   <string name="nominated_for_deletion">Có đề nghị xóa hình này.</string>
   <string name="view_browser">Hiện lên ở trang xem browse</string>
   <string name="nearby_location_has_not_changed">Vị trí không thay đổi.</string>
-  <string name="nearby_location_not_available">Vị trí không có sẵn.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Vị trí không có sẵn.</string>
   <string name="location_permission_rationale_nearby">Bạn cần cho phép để hiển thị danh sách nơi lân cận</string>
   <string name="get_directions">Hướng dẫn</string>
   <string name="read_article">Đọc bài</string>

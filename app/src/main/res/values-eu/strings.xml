@@ -245,7 +245,7 @@
   <string name="skip_login_message">Argazkiak igotzeko saioa hasi beharko duzu.</string>
   <string name="login_alert_message">Mesedez, hasi saioa funtzio hau erabili ahal izateko</string>
   <string name="nearby_location_has_not_changed">Kokapena ez da aldatu.</string>
-  <string name="nearby_location_not_available">Kokapena ez dago erabilgarri.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Kokapena ez dago erabilgarri.</string>
   <string name="location_permission_rationale_nearby">Baimena beharrezkoa da hurbil dauden lekuen zerrende ikusteko</string>
   <string name="get_directions">Nola iritsi</string>
   <string name="read_article">Artikulua irakurri</string>

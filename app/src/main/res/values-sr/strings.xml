@@ -279,7 +279,7 @@
   <string name="copy_wikicode">Копирај викитекст у оставу</string>
   <string name="wikicode_copied">Викитекст је копиран у оставу</string>
   <string name="nearby_location_has_not_changed">Локација није промењена.</string>
-  <string name="nearby_location_not_available">Локација није доступна.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Локација није доступна.</string>
   <string name="location_permission_rationale_nearby">Потребна је дозвола за приказивање листе локација у близини</string>
   <string name="get_directions">Добити упутства</string>
   <string name="read_article">Прочитај чланак</string>

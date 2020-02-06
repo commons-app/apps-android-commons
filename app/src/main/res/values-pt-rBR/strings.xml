@@ -285,7 +285,7 @@
   <string name="copy_wikicode">Copie o wikitexto para a área de transferência</string>
   <string name="wikicode_copied">O wikitexto foi copiado para a área de transferência</string>
   <string name="nearby_location_has_not_changed">O local não mudou.</string>
-  <string name="nearby_location_not_available">Localização não disponível.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Localização não disponível.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>
   <string name="get_directions">Obter direções</string>
   <string name="read_article">Ler artigo</string>
