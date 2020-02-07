@@ -591,4 +591,8 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
   <string name="upload_nearby_place_found_description">Is this a photo of Place %1$s?</string>
+  <string name="title_app_shortcut_explore">Explore</string>
+  <string name="title_app_shortcut_bookmark">Bookmarks</string>
+  <string name="title_app_shortcut_setting">Settings</string>
+  <string name="title_app_shortcut_review">Reviews</string>
 </resources>
