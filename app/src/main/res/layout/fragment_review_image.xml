@@ -21,7 +21,7 @@
       <TextView
         android:id="@+id/tv_review_question"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:gravity="center_vertical"
         tools:text="testing1"
         android:textAlignment="center"
@@ -44,7 +44,7 @@
   <LinearLayout
     android:id="@+id/ll_container_buttons"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="90dp"
     android:layout_alignParentBottom="true"
     android:orientation="horizontal"
     android:padding="2dp"
@@ -53,7 +53,7 @@
     <Button
       android:id="@+id/button_yes"
       android:layout_width="0dp"
-      android:layout_height="48dp"
+      android:layout_height="68dp"
       android:layout_weight="1"
       android:layout_margin="@dimen/activity_margin_horizontal"
       android:background="@android:color/transparent"
@@ -68,7 +68,7 @@
       android:textAllCaps="true"
       android:id="@+id/button_no"
       android:layout_width="0dp"
-      android:layout_height="48dp"
+      android:layout_height="68dp"
       android:layout_weight="1"
       android:enabled="false"
       android:alpha="0.5"
