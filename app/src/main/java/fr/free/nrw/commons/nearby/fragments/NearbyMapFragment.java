@@ -558,12 +558,19 @@ public class NearbyMapFragment extends CommonsDaggerSupportFragment
      * Greys out all markers except current location marker
      */
     public void greyOutAllMarkers() {
-        VectorDrawableCompat vectorDrawable;
-            vectorDrawable = VectorDrawableCompat.create(
+        if (getContext() == null) {
+            Timber.d("Context is null. Skipping greying out of all markers");
+            return;
+        }
+        VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
                     getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
+        if (vectorDrawable == null) {
+            Timber.d("Vector drawable ic_custom_greyed_out_marker is null");
+            return;
+        }
         Bitmap icon = UiUtils.getBitmap(vectorDrawable);
         for (Marker marker : mapboxMap.getMarkers()) {
-            if (currentLocationMarker.getTitle() != marker.getTitle()) {
+            if (!currentLocationMarker.getTitle().equals(marker.getTitle())) {
                 marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
             }
         }
