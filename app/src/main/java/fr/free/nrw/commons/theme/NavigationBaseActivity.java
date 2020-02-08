@@ -100,6 +100,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             nav_Menu.findItem(R.id.action_settings).setVisible(true);
             nav_Menu.findItem(R.id.action_logout).setVisible(false);
             nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
+            nav_Menu.findItem(R.id.action_review).setVisible(false);
         }else {
             userIcon.setVisibility(View.VISIBLE);
             nav_Menu.findItem(R.id.action_login).setVisible(false);
@@ -107,6 +108,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             nav_Menu.findItem(R.id.action_settings).setVisible(true);
             nav_Menu.findItem(R.id.action_logout).setVisible(true);
             nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
+            nav_Menu.findItem(R.id.action_review).setVisible(true);
         }
     }
 
