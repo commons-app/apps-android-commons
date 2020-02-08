@@ -34,6 +34,11 @@
             android:title= "@string/default_description_language"
             android:summary="English" />
 
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
+            android:key="appDefaultLanguagePref"
+            android:summary="English"
+            android:title="Default app language" />
+
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
             android:key="useAuthorName"
             android:title="@string/preference_author_name_toggle"

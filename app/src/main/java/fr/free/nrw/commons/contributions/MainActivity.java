@@ -4,7 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +28,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -40,6 +45,7 @@ import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -80,6 +86,8 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setAppLanguage(defaultKvStore.getString(Prefs.KEY_APP_LANGUAGE_VALUE));
+        defaultKvStore.getString(Prefs.KEY_APP_LANGUAGE_VALUE);
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
@@ -231,6 +239,29 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         if (tabLayout != null) {
             tabLayout.setVisibility(View.VISIBLE);
         }
+    }
+
+    /**
+     * Sets the string values to be used based on the user's last app language preference.
+     * @param languageCode the code of the language
+     */
+
+    public void setAppLanguage(String languageCode) {
+        if (languageCode == null) {
+            return;
+        }
+
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            conf.setLocale(new Locale(languageCode.toLowerCase()));
+//        } else {
+            conf.locale = new Locale(languageCode);
+//        }
+
+        res.updateConfiguration(conf, dm);
     }
 
     @Override

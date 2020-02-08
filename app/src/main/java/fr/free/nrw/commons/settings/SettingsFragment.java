@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.settings;
 
 import android.Manifest;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -26,6 +27,7 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
@@ -41,6 +43,7 @@ public class SettingsFragment extends PreferenceFragment {
     @Inject
     CommonsLogSender commonsLogSender;
     private ListPreference listPreference;
+    private ListPreference listPreferenceAppLanguage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,8 @@ public class SettingsFragment extends PreferenceFragment {
 
         listPreference = (ListPreference) findPreference("descriptionDefaultLanguagePref");
         prepareLanguages();
+        listPreferenceAppLanguage = (ListPreference) findPreference("appDefaultLanguagePref");
+        prepareAppLanguages();
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
             Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
@@ -141,7 +146,7 @@ public class SettingsFragment extends PreferenceFragment {
     /**
      * Prepares language summary and language codes list and adds them to list preference as pairs.
      * Uses previously saved language if there is any, if not uses phone local as initial language.
-     * Adds preference changed listener and saves value choosen by user to shared preferences
+     * Adds preference changed listener and saves value chosen by user to shared preferences
      * to remember later
      */
     private void prepareLanguages() {
@@ -192,6 +197,72 @@ public class SettingsFragment extends PreferenceFragment {
 
     private String getCurrentLanguageCode() {
         return defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, "");
+    }
+
+    /**
+     * Prepares language summary and language codes list and adds them to app language list preference as pairs.
+     * Uses previously saved language if there is any, if not uses phone local as initial language.
+     * Adds preference changed listener and saves value chosen by user to shared preferences
+     * to remember later
+     */
+    private void prepareAppLanguages() {
+        List<String> languageNamesList = new ArrayList<>();
+        List<String> languageCodesList = new ArrayList<>();
+        List<Language> languages = getLanguagesSupportedByDevice();
+
+        for(Language language: languages) {
+            // Go through all languages and add them to lists
+            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
+                // This if prevents us from adding same language twice
+                languageNamesList.add(language.getLocale().getDisplayName());
+                languageCodesList.add(language.getLocale().getLanguage());
+            }
+        }
+
+        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
+        CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
+        // Add all languages and languages codes to lists preference as pair
+
+        listPreferenceAppLanguage.setEntries(languageNames);
+        listPreferenceAppLanguage.setEntryValues(languageCodes);
+
+        // Gets current language code from shared preferences
+        String languageCode = getCurrentAppLanguageCode();
+
+
+        if(languageCode.equals("")){
+
+            // If current language code is empty, means none selected by user yet so use phone local
+            listPreferenceAppLanguage.setSummary(Locale.getDefault().getDisplayLanguage());
+            listPreferenceAppLanguage.setValue(Locale.getDefault().getLanguage());
+        } else {
+
+            // If any language is selected by user previously, use it
+            int prefIndex = listPreferenceAppLanguage.findIndexOfValue(languageCode);
+            listPreferenceAppLanguage.setSummary(listPreferenceAppLanguage.getEntries()[prefIndex]);
+            listPreferenceAppLanguage.setValue(languageCode);
+        }
+
+        listPreferenceAppLanguage.setOnPreferenceChangeListener((preference, newValue) -> {
+            String userSelectedValue = (String) newValue;
+            int prefIndex = listPreferenceAppLanguage.findIndexOfValue(userSelectedValue);
+            listPreferenceAppLanguage.setSummary(listPreferenceAppLanguage.getEntries()[prefIndex]);
+            saveAppLanguageValue(userSelectedValue);
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            getActivity().finish();
+            startActivity(intent);
+
+            return true;
+        });
+    }
+
+    private String getCurrentAppLanguageCode() {
+        return defaultKvStore.getString(Prefs.KEY_APP_LANGUAGE_VALUE, "");
+    }
+
+    private void saveAppLanguageValue(String userSelectedValue) {
+        defaultKvStore.putString(Prefs.KEY_APP_LANGUAGE_VALUE, userSelectedValue);
     }
 
     private List<Language> getLanguagesSupportedByDevice() {
