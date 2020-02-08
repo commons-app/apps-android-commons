@@ -1,6 +1,5 @@
 package fr.free.nrw.commons
 
-import android.app.Application
 import android.content.ContentProviderClient
 import android.content.Context
 import androidx.collection.LruCache
@@ -15,7 +14,7 @@ import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 
-class TestCommonsApplication : Application() {
+class TestCommonsApplication : CommonsApplication() {
     private var mockApplicationComponent: CommonsApplicationComponent? = null
 
     override fun onCreate() {
@@ -26,6 +25,9 @@ class TestCommonsApplication : Application() {
         }
         super.onCreate()
     }
+
+    // No leakcanary in unit tests.
+    override fun setupLeakCanary(): RefWatcher = RefWatcher.DISABLED
 }
 
 @Suppress("MemberVisibilityCanBePrivate")
