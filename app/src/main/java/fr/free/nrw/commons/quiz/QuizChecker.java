@@ -69,12 +69,12 @@ public class QuizChecker {
     /**
      * to fet the total number of images uploaded
      */
-    private void setUploadCount(Activity activity) {
+    private void setUploadCount() {
         compositeDisposable.add(okHttpJsonApiClient
                 .getUploadCount(sessionManager.getUserName())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(uploadCount -> setTotalUploadCount(activity, uploadCount),
+                .subscribe(this::setTotalUploadCount,
                             t -> Timber.e(t, "Fetching upload count failed")
                     ));
     }
@@ -84,7 +84,7 @@ public class QuizChecker {
      * call function to check for quiz
      * @param uploadCount user's upload count
      */
-    private void setTotalUploadCount(Activity activity, int uploadCount) {
+    private void setTotalUploadCount(int uploadCount) {
         totalUploadCount = uploadCount - revertKvStore.getInt(UPLOAD_SHARED_PREFERENCE, 0);
         if ( totalUploadCount < 0){
             totalUploadCount = 0;
@@ -96,7 +96,7 @@ public class QuizChecker {
     /**
      * To call the API to get reverts count in form of JSONObject
      */
-    private void setRevertCount(Activity activity) {
+    private void setRevertCount() {
         compositeDisposable.add(okHttpJsonApiClient
                 .getAchievements(sessionManager.getUserName())
                     .subscribeOn(Schedulers.io())
@@ -104,7 +104,7 @@ public class QuizChecker {
                     .subscribe(
                             response -> {
                                 if (response != null) {
-                                    setRevertParameter(activity, response.getDeletedUploads());
+                                    setRevertParameter(response.getDeletedUploads());
                                 }
                             }, throwable -> Timber.e(throwable, "Fetching feedback failed"))
             );
@@ -114,7 +114,7 @@ public class QuizChecker {
      * to calculate the number of images reverted after previous quiz
      * @param revertCountFetched count of deleted uploads
      */
-    private void setRevertParameter(Activity activity, int revertCountFetched) {
+    private void setRevertParameter(int revertCountFetched) {
         revertCount = revertCountFetched - revertKvStore.getInt(REVERT_SHARED_PREFERENCE, 0);
         if (revertCount < 0){
             revertCount = 0;
@@ -127,8 +127,8 @@ public class QuizChecker {
      * to check whether the criterion to call quiz is satisfied
      */
     private void calculateRevertParameterAndShowQuiz(Activity activity) {
-        setUploadCount(activity);
-        setRevertCount(activity);
+        setUploadCount();
+        setRevertCount();
         if ( revertCount < 0 || totalUploadCount < 0){
             revertKvStore.putInt(REVERT_SHARED_PREFERENCE, 0);
             revertKvStore.putInt(UPLOAD_SHARED_PREFERENCE, 0);
