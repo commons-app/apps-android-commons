@@ -59,8 +59,7 @@ public class QuizChecker {
     }
 
     public void initQuizCheck(Activity activity) {
-        setUploadCount(activity);
-        setRevertCount(activity);
+        calculateRevertParameterAndShowQuiz(activity);
     }
 
     public void cleanup() {
@@ -92,7 +91,6 @@ public class QuizChecker {
             revertKvStore.putInt(UPLOAD_SHARED_PREFERENCE, 0);
         }
         isUploadCountFetched = true;
-        calculateRevertParameter(activity);
     }
 
     /**
@@ -123,13 +121,14 @@ public class QuizChecker {
             revertKvStore.putInt(REVERT_SHARED_PREFERENCE, 0);
         }
         isRevertCountFetched = true;
-        calculateRevertParameter(activity);
     }
 
     /**
      * to check whether the criterion to call quiz is satisfied
      */
-    private void calculateRevertParameter(Activity activity) {
+    private void calculateRevertParameterAndShowQuiz(Activity activity) {
+        setUploadCount(activity);
+        setRevertCount(activity);
         if ( revertCount < 0 || totalUploadCount < 0){
             revertKvStore.putInt(REVERT_SHARED_PREFERENCE, 0);
             revertKvStore.putInt(UPLOAD_SHARED_PREFERENCE, 0);
