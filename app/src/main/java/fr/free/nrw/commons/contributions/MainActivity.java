@@ -254,13 +254,7 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            conf.setLocale(new Locale(languageCode.toLowerCase()));
-//        } else {
-            conf.locale = new Locale(languageCode);
-//        }
-
+        conf.locale = new Locale(languageCode);
         res.updateConfiguration(conf, dm);
     }
 
