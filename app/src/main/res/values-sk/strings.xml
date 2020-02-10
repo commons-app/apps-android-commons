@@ -274,7 +274,7 @@
   <string name="copy_wikicode">Skopírovať wikitext do schránky</string>
   <string name="wikicode_copied">Wikitext bol skopírovaný do schránky</string>
   <string name="nearby_location_has_not_changed">Poloha sa nezmenila.</string>
-  <string name="nearby_location_not_available" fuzzy="true">Poloha nie je dostupná.</string>
+  <string name="nearby_location_not_available">Funkcia V okolí nemusí pracovať správne, poloha nie je dostupná.</string>
   <string name="location_permission_rationale_nearby">Zobrazenie zoznamu miest v okolí vyžaduje povolenie</string>
   <string name="get_directions">Nájsť trasu</string>
   <string name="read_article">Prečítať článok</string>

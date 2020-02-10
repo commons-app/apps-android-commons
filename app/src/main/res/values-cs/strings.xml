@@ -156,10 +156,10 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Wikimedia Commons je úložištěm většiny obrázků, které jsou používány na Wikipedii.</string>
   <string name="tutorial_1_subtext">Vaše obrázky pomáhají vzdělávat lidi po celém světě</string>
-  <string name="tutorial_2_text">Prosím, nahrávejte obrázky které jste vyfotil nebo nahrál sám:</string>
+  <string name="tutorial_2_text">Prosím, nahrávejte obrázky, které jste vyfotili nebo nahráli sami:</string>
   <string name="tutorial_2_subtext_1">Přírodní objekty (květiny, zvířata, hory)</string>
   <string name="tutorial_2_subtext_2">Užitkové předměty (kola, vlaková nádraží)</string>
-  <string name="tutorial_2_subtext_3">Slavní lidé (váš starosta, olympjští atleti, které jste potkal/a)</string>
+  <string name="tutorial_2_subtext_3">Slavní lidé (váš starosta, olympijští atleti, které jste potkali)</string>
   <string name="tutorial_3_text">Prosím NENAHRÁVEJTE:</string>
   <string name="tutorial_3_subtext_1">Selfie nebo obrázky vašich přátel</string>
   <string name="tutorial_3_subtext_2">Obrázky, které jste nahrál/a z internetu</string>

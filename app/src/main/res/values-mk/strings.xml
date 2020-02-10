@@ -2,6 +2,7 @@
 <!-- Authors:
 * Abijeet Patro
 * Bjankuloski06
+* Violetova
 * Vlad5250
 -->
 <resources>
@@ -17,10 +18,10 @@
   <string name="menu_settings">Поставки</string>
   <string name="intent_share_upload_label">Подигни на Ризницата</string>
   <string name="username">Корисничко име</string>
-  <string name="password">Јавка</string>
+  <string name="password">Лозинка</string>
   <string name="login_credential">Најавете се на бета-сметката</string>
   <string name="login">Најава</string>
-  <string name="forgot_password">Ја заборавивте јавката?</string>
+  <string name="forgot_password">Ја заборавивте лозинката?</string>
   <string name="signup">Зачленување</string>
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте…</string>
@@ -55,7 +56,7 @@
   <string name="add_title_toast">Ставете ѝ наслов на податотеката</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
-  <string name="login_failed_wrong_credentials">Не можев да ве најавам. Проверете ги корисничкото име и јавката.</string>
+  <string name="login_failed_wrong_credentials">Не можев да ве најавам. Проверете ги корисничкото име и лозинката.</string>
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
   <string name="login_failed_blocked">За жал, корисникот е блокиран на Ризницата</string>
   <string name="login_failed_2fa_needed">Мора да го укажете вашиот код за двочинителска заверка.</string>
@@ -272,7 +273,7 @@
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
-  <string name="nearby_location_not_available" fuzzy="true">Местоположбата е недостапна.</string>
+  <string name="nearby_location_not_available">„Во близина“ може да не работи како што треба. Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
   <string name="get_directions">Дај насоки</string>
   <string name="read_article">Прочитај статија</string>
@@ -554,7 +555,7 @@
   <string name="place_state_needs_photo">Му треба слика</string>
   <string name="place_type">Вид на место:</string>
   <string name="nearby_search_hint">Мост, музеј, хотел и тн.</string>
-  <string name="you_must_reset_your_passsword">Нешто не е во ред со најавата. Ќе мора да ставите нова јавка!</string>
+  <string name="you_must_reset_your_passsword">Нешто не е во ред со најавата. Ќе мора да ставите нова лозинка !!</string>
   <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
   <string name="upload_nearby_place_found_description">Дали ова е слика од местото %1$s?</string>
 </resources>
