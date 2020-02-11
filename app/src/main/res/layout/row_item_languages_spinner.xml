@@ -11,10 +11,10 @@
     style="@style/Base.TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp"
+    android:paddingTop="@dimen/dimen_10"
+    android:paddingBottom="@dimen/dimen_10"
+    android:paddingLeft="@dimen/tiny_margin"
+    android:paddingRight="@dimen/tiny_margin"
     android:imeOptions="flagNoExtractUi"
     android:maxLines="1"
     android:singleLine="true"
@@ -25,6 +25,6 @@
   <View
       android:id="@+id/view"
       android:layout_width="match_parent"
-      android:layout_height="1dp"
+      android:layout_height="@dimen/tiny_height"
       android:background="@color/item_white_background" />
 </LinearLayout>

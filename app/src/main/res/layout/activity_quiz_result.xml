@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="@dimen/activity_margin_horizontal"
         android:layout_marginBottom="@dimen/activity_margin_vertical"
         android:layout_marginLeft="@dimen/activity_margin_horizontal"
         android:layout_marginRight="@dimen/activity_margin_horizontal"
@@ -45,15 +45,15 @@
 
                     <com.dinuscxj.progressbar.CircleProgressBar
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="@dimen/dimen_250"
                         android:layout_marginRight="@dimen/activity_margin_horizontal"
                         android:layout_marginLeft="@dimen/activity_margin_horizontal"
                         android:layout_marginTop="@dimen/activity_margin_vertical"
                         android:progress="50"
                         app:progress_end_color="#8C8B98"
                         app:progress_start_color="#3A3381"
-                        app:progress_stroke_width="15dp"
-                        app:progress_text_size="32dp"
+                        app:progress_stroke_width="@dimen/first_fab"
+                        app:progress_text_size="@dimen/large_gap"
                         app:progress_text_format_pattern="4/5"
                         app:style="solid_line"
                         android:id="@+id/result_progress_bar"/>
@@ -73,7 +73,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:layout_width="150dp"
+                    android:layout_width="@dimen/dimen_150"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/activity_margin_horizontal"

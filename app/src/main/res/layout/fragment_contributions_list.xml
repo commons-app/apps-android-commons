@@ -39,8 +39,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginRight="@dimen/medium_height"
+        android:layout_marginBottom="@dimen/activity_margin_horizontal"
         android:orientation="vertical"
         android:gravity="center"
         >
@@ -53,7 +53,7 @@
             android:visibility="gone"
             app:backgroundTint="@color/main_background_light"
             app:useCompatPadding="true"
-            app:elevation="4dp"
+            app:elevation="@dimen/tiny_margin"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
 
@@ -65,7 +65,7 @@
             android:visibility="gone"
             app:backgroundTint="@color/main_background_light"
             app:useCompatPadding="true"
-            app:elevation="4dp"
+            app:elevation="@dimen/tiny_margin"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_photo_white_24dp" />
 
@@ -77,7 +77,7 @@
             android:visibility="visible"
             app:backgroundTint="@color/status_bar_blue"
             app:useCompatPadding="true"
-            app:elevation="4dp"
+            app:elevation="@dimen/tiny_margin"
             app:srcCompat="@drawable/ic_add_white_24dp" />
 
     </LinearLayout>

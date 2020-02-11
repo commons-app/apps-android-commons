@@ -4,12 +4,12 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusableInTouchMode="true"
-    android:minHeight="72dp">
+    android:minHeight="@dimen/large_height">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
         android:layout_marginLeft="@dimen/standard_gap"
         android:layout_marginStart="@dimen/standard_gap"
         android:layout_marginTop="@dimen/standard_gap"
@@ -36,8 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/large_gap"
 
         />
 
