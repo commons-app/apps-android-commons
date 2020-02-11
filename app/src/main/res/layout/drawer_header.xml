@@ -19,6 +19,7 @@
         app:srcCompat="@drawable/commons_logo"/>
 
     <LinearLayout
+        android:id="@+id/user_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
