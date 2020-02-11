@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -136,7 +137,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
         if (allAccounts.length != 0) {
             username.setText(allAccounts[0].name);
         }
-        ImageView userIcon = navHeaderView.findViewById(R.id.user_icon);
+        LinearLayout userIcon = navHeaderView.findViewById(R.id.user_details);
         userIcon.setOnClickListener(v -> {
             drawerLayout.closeDrawer(navigationView);
             AchievementsActivity.startYourself(NavigationBaseActivity.this);
