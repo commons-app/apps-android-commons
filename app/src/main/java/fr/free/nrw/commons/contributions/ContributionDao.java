@@ -24,13 +24,13 @@ import timber.log.Timber;
 
 public class ContributionDao {
   /*
-     This sorts in the following order:
-     Currently Uploading
-     Failed (Sorted in ascending order of time added - FIFO)
-     Queued to Upload (Sorted in ascending order of time added - FIFO)
-     Completed (Sorted in descending order of time added)
+      This sorts in the following order:
+      Currently Uploading
+      Failed (Sorted in ascending order of time added - FIFO)
+      Queued to Upload (Sorted in ascending order of time added - FIFO)
+      Completed (Sorted in descending order of time added)
 
-     This is why Contribution.STATE_COMPLETED is -1.
+      This is why Contribution.STATE_COMPLETED is -1.
   */
   static final String CONTRIBUTION_SORT =
       Table.COLUMN_STATE

@@ -114,7 +114,7 @@ public class DialogUtil {
 
   /*
   Shows alert dialog with custom view
-   */
+  */
   private static void showAlertDialog(
       Activity activity,
       String title,

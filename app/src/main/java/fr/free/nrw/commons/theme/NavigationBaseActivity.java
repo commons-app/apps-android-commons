@@ -311,7 +311,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
   }
 
   /* This is a workaround for a known Android bug which is present in some API levels.
-    https://issuetracker.google.com/issues/36986021
+      https://issuetracker.google.com/issues/36986021
   */
   @Override
   protected void onNewIntent(Intent intent) {

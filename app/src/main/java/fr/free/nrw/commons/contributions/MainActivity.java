@@ -90,7 +90,7 @@ public class MainActivity extends NavigationBaseActivity
 
       // If nearby map was visible, call on Tab Selected to call all nearby operations
       /*if (savedInstanceState.getInt("viewPagerCurrentItem") == 1) {
-          ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
+              ((NearbyFragment)contributionsActivityPagerAdapter.getItem(1)).onTabSelected(onOrientationChanged);
       }*/
     }
   }

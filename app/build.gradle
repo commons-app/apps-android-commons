@@ -18,6 +18,7 @@ if(isRunningOnTravisAndIsNotPRBuild) {
 spotless {
     java {
         googleJavaFormat()
+        indentWithSpaces(4)
         target '**/*.java'
     }
 
@@ -45,6 +46,7 @@ dependencies {
     implementation 'com.facebook.fresco:fresco:1.13.0'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
     implementation 'com.github.maskaravivek:wikimedia-android-data-client:v0.0.30'
+    compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 
     // UI
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'

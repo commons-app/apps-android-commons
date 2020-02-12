@@ -145,7 +145,7 @@ public class CategoryContentProvider extends CommonsDaggerContentProvider {
 
     In here, the only concat created argument is for id. It is cast to an int,
     and will error out otherwise.
-     */
+    */
     int uriType = uriMatcher.match(uri);
     SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
     int rowsUpdated;

@@ -267,7 +267,7 @@ public class ContributionsFragment extends CommonsDaggerSupportFragment
     all over again on same fragment attached to recreated activity, we do this network
     operations on first time fragment attached to an activity. Then they will be retained
     until fragment life time ends.
-     */
+    */
     if (!isFragmentAttachedBefore && getActivity() != null) {
       onAuthCookieAcquired();
       isFragmentAttachedBefore = true;

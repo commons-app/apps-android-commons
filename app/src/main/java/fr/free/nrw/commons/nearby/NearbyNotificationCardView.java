@@ -141,9 +141,9 @@ public class NearbyNotificationCardView extends SwipableCardView {
     super.onVisibilityChanged(changedView, visibility);
     if (visibility == VISIBLE) {
       /*
-       Sometimes we need to preserve previous state of notification card view without getting
-       any data from user. Ie. wen user came back from Media Details fragment to Contrib List
-       fragment, we need to know what was the state of card view, and set it to exact same state.
+      Sometimes we need to preserve previous state of notification card view without getting
+      any data from user. Ie. wen user came back from Media Details fragment to Contrib List
+      fragment, we need to know what was the state of card view, and set it to exact same state.
       */
       switch (cardViewVisibilityState) {
         case READY:

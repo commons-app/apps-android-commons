@@ -9,11 +9,11 @@ import android.widget.TextView;
 public class LongTitleMultiSelectListPreference extends MultiSelectListPreference {
   /*
   public LongTitleMultiSelectListPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-      super(context, attrs, defStyleAttr, defStyleRes);
+          super(context, attrs, defStyleAttr, defStyleRes);
   }
 
   public LongTitleMultiSelectListPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-      super(context, attrs, defStyleAttr);
+          super(context, attrs, defStyleAttr);
   }
   */
   public LongTitleMultiSelectListPreference(Context context, AttributeSet attrs) {
