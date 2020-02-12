@@ -1,9 +1,13 @@
 package fr.free.nrw.commons.upload
 
+import java.io.IOException
 import okhttp3.MediaType
 import okhttp3.RequestBody
-import okio.*
-import java.io.IOException
+import okio.Buffer
+import okio.BufferedSink
+import okio.ForwardingSink
+import okio.Sink
+import okio.buffer
 
 /**
  * Decorates an OkHttp request body to count the number of bytes written when writing it. Can
@@ -53,5 +57,4 @@ class CountingRequestBody(protected var delegate: RequestBody, protected var lis
          */
         fun onRequestProgress(bytesWritten: Long, contentLength: Long)
     }
-
 }

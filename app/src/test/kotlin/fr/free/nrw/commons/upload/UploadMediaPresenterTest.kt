@@ -5,7 +5,9 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter
-import fr.free.nrw.commons.utils.ImageUtils.*
+import fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
+import fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
@@ -17,7 +19,6 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
-
 
 /**
  * The class contains unit test cases for UploadMediaPresenter
@@ -95,56 +96,55 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun handleImageResult() {
-        //Positive case test
+        // Positive case test
         uploadMediaPresenter?.handleImageResult(IMAGE_KEEP)
         verify(view)?.onImageValidationSuccess()
 
-        //Duplicate file name
+        // Duplicate file name
         uploadMediaPresenter?.handleImageResult(FILE_NAME_EXISTS)
         verify(view)?.showDuplicatePicturePopup()
 
-        //Empty Title test
+        // Empty Title test
         uploadMediaPresenter?.handleImageResult(EMPTY_TITLE)
         verify(view)?.showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
 
-        //Bad Picture test
-        //Empty Title test
+        // Bad Picture test
+        // Empty Title test
         uploadMediaPresenter?.handleImageResult(-7)
         verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt())
-
     }
 
     /**
      * Test fetch previous image title when there was one
      */
     @Test
-    fun fetchPreviousImageAndTitleTestPositive(){
+    fun fetchPreviousImageAndTitleTestPositive() {
         Mockito.`when`(repository?.getPreviousUploadItem(ArgumentMatchers.anyInt())).thenReturn(uploadItem)
         Mockito.`when`(uploadItem?.descriptions).thenReturn(descriptions)
         Mockito.`when`(uploadItem?.title).thenReturn(title)
         Mockito.`when`(title?.getTitleText()).thenReturn(ArgumentMatchers.anyString())
 
         uploadMediaPresenter?.fetchPreviousTitleAndDescription(0)
-        verify(view)?.setTitleAndDescription(ArgumentMatchers.anyString(),ArgumentMatchers.any())
+        verify(view)?.setTitleAndDescription(ArgumentMatchers.anyString(), ArgumentMatchers.any())
     }
 
     /**
      * Test fetch previous image title when there was none
      */
     @Test
-    fun fetchPreviousImageAndTitleTestNegative(){
+    fun fetchPreviousImageAndTitleTestNegative() {
         Mockito.`when`(repository?.getPreviousUploadItem(ArgumentMatchers.anyInt())).thenReturn(null)
         uploadMediaPresenter?.fetchPreviousTitleAndDescription(0)
-        verify(view)?.showMessage(ArgumentMatchers.anyInt(),ArgumentMatchers.anyInt())
+        verify(view)?.showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
     }
 
     /**
      * Test bad image invalid location
      */
     @Test
-    fun handleBadImageBaseTestInvalidLocation(){
+    fun handleBadImageBaseTestInvalidLocation() {
         uploadMediaPresenter?.handleBadImage(8)
-        verify(repository)?.saveValue(ArgumentMatchers.anyString(),eq(false))
+        verify(repository)?.saveValue(ArgumentMatchers.anyString(), eq(false))
         verify(view)?.showBadImagePopup(8)
     }
 
@@ -152,37 +152,35 @@ class UploadMediaPresenterTest {
      * Test bad image empty title
      */
     @Test
-    fun handleBadImageBaseTestEmptyTitle(){
+    fun handleBadImageBaseTestEmptyTitle() {
         uploadMediaPresenter?.handleBadImage(-3)
-        verify(view)?.showMessage(ArgumentMatchers.anyInt(),ArgumentMatchers.anyInt())
+        verify(view)?.showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
     }
 
     /**
      * Teste show file already exists
      */
     @Test
-    fun handleBadImageBaseTestFileNameExists(){
+    fun handleBadImageBaseTestFileNameExists() {
         uploadMediaPresenter?.handleBadImage(-4)
         verify(view)?.showDuplicatePicturePopup()
     }
-
 
     /**
      * Test show SimilarImageFragment
      */
     @Test
-    fun showSimilarImageFragmentTest(){
-        uploadMediaPresenter?.showSimilarImageFragment(ArgumentMatchers.anyString(),ArgumentMatchers.anyString())
-        verify(view)?.showSimilarImageFragment(ArgumentMatchers.anyString(),ArgumentMatchers.anyString())
+    fun showSimilarImageFragmentTest() {
+        uploadMediaPresenter?.showSimilarImageFragment(ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
+        verify(view)?.showSimilarImageFragment(ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
     }
 
     /**
      * Test set upload item
      */
     @Test
-    fun setUploadItemTest(){
-        uploadMediaPresenter?.setUploadItem(0,uploadItem)
-        verify(repository)?.updateUploadItem(0,uploadItem)
+    fun setUploadItemTest() {
+        uploadMediaPresenter?.setUploadItem(0, uploadItem)
+        verify(repository)?.updateUploadItem(0, uploadItem)
     }
-
 }

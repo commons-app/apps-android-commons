@@ -18,13 +18,22 @@ import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.Intents.intending
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasType
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withParent
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.utils.ConfigUtils
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Random
 import org.hamcrest.core.AllOf.allOf
 import org.junit.After
 import org.junit.Before
@@ -32,11 +41,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import timber.log.Timber
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -61,7 +65,6 @@ class UploadTest {
         try {
             Intents.init()
         } catch (ex: IllegalStateException) {
-
         }
         UITestHelper.skipWelcome()
         UITestHelper.loginUser()
@@ -96,7 +99,6 @@ class UploadTest {
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-
         }
     }
 
@@ -146,7 +148,6 @@ class UploadTest {
 
         onView(allOf<View>(isDisplayed(), withId(R.id.description_item_edit_text)))
                 .perform(replaceText(commonsFileName))
-
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())

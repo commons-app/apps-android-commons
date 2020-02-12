@@ -10,5 +10,4 @@ class CampaignResponseDTO {
     val campaignConfig: CampaignConfig? = null
     @SerializedName("campaigns")
     val campaigns: List<Campaign>? = null
-
 }

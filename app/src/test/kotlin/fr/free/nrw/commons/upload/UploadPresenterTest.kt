@@ -5,6 +5,7 @@ import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.repository.UploadRepository
 import io.reactivex.Observable
+import java.util.ArrayList
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
@@ -12,8 +13,6 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import java.util.ArrayList
-
 
 /**
  * The clas contains unit test cases for UploadPresenter
@@ -74,10 +73,9 @@ class UploadPresenterTest {
         uploadPresenter?.handleSubmit()
         verify(view)?.isLoggedIn
         verify(view)?.askUserToLogIn()
-
     }
 
-    private fun deletePictureBaseTest(){
+    private fun deletePictureBaseTest() {
         uploadableFiles.clear()
     }
 
@@ -85,7 +83,7 @@ class UploadPresenterTest {
      * Test which asserts If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
      */
     @Test
-    fun hideTopCardWhenReachedTheLastFile(){
+    fun hideTopCardWhenReachedTheLastFile() {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadPresenter?.deletePictureAtIndex(0)
@@ -97,13 +95,13 @@ class UploadPresenterTest {
      * Test media deletion during single upload
      */
     @Test
-    fun testDeleteWhenSingleUpload(){
+    fun testDeleteWhenSingleUpload() {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadPresenter?.deletePictureAtIndex(0)
         verify(view)?.showHideTopCard(false)
         verify(repository)?.deletePicture(ArgumentMatchers.anyString())
-        verify(view)?.showMessage(ArgumentMatchers.anyInt())//As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered
+        verify(view)?.showMessage(ArgumentMatchers.anyInt()) // As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered
         verify(view)?.finish()
     }
 
@@ -111,7 +109,7 @@ class UploadPresenterTest {
      * Test media deletion during multiple upload
      */
     @Test
-    fun testDeleteWhenMultipleFilesUpload(){
+    fun testDeleteWhenMultipleFilesUpload() {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadableFiles.add(anotherUploadableFile)

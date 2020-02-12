@@ -6,7 +6,10 @@ import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Observable
-import org.junit.Assert.*
+import javax.inject.Inject
+import javax.inject.Named
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
@@ -14,9 +17,6 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import org.wikipedia.AppAdapter
-import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * Tests for delete helper

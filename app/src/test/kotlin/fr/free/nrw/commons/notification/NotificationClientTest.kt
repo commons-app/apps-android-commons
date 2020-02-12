@@ -68,5 +68,4 @@ class NotificationClientTest {
         notificationClient.markNotificationAsRead("test")
         verify(service).markRead(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
     }
-
 }

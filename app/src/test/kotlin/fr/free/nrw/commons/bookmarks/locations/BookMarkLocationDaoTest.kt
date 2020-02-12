@@ -7,15 +7,43 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.isA
+import com.nhaarman.mockitokotlin2.isNull
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyZeroInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.*
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_CATEGORY
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_COMMONS_LINK
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_DESCRIPTION
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_IMAGE_URL
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LABEL_ICON
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LABEL_TEXT
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LAT
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LONG
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_NAME
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_PIC
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_WIKIDATA_LINK
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_WIKIPEDIA_LINK
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.onCreate
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.onDelete
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.onUpdate
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
-import junit.framework.Assert.*
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertFalse
+import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,16 +79,14 @@ class BookMarkLocationDaoTest {
     fun setUp() {
         exampleLabel = Label.FOREST
         exampleUri = Uri.parse("wikimedia/uri")
-        exampleLocation = LatLng(40.0,51.4, 1f)
+        exampleLocation = LatLng(40.0, 51.4, 1f)
 
         builder = Sitelinks.Builder()
         builder.setWikipediaLink("wikipediaLink")
         builder.setWikidataLink("wikidataLink")
         builder.setCommonsLink("commonsLink")
 
-
-        examplePlaceBookmark = Place("placeName", exampleLabel, "placeDescription"
-                , exampleLocation, "placeCategory", builder.build(),"picName","placeDestroyed")
+        examplePlaceBookmark = Place("placeName", exampleLabel, "placeDescription", exampleLocation, "placeCategory", builder.build(), "picName", "placeDestroyed")
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -103,8 +129,7 @@ class BookMarkLocationDaoTest {
 
         var result = testObject.allBookmarksLocations
 
-        assertEquals(14,(result.size))
-
+        assertEquals(14, (result.size))
     }
 
     @Test(expected = RuntimeException::class)
@@ -135,7 +160,6 @@ class BookMarkLocationDaoTest {
 
         verify(mockCursor).close()
     }
-
 
     @Test
     fun updateNewLocationBookmark() {
@@ -254,7 +278,7 @@ class BookMarkLocationDaoTest {
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
 
         for (i in 0 until rowCount) {
-            addRow(listOf("placeName", "placeDescription","placeCategory", exampleLabel.text, exampleLabel.icon,
+            addRow(listOf("placeName", "placeDescription", "placeCategory", exampleLabel.text, exampleLabel.icon,
                     exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
                     exampleLocation.latitude, exampleLocation.longitude))
         }

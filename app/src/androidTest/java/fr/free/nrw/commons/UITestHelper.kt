@@ -15,7 +15,7 @@ class UITestHelper {
     companion object {
         fun skipWelcome() {
             try {
-                //Skip tutorial
+                // Skip tutorial
                 onView(ViewMatchers.withId(R.id.finishTutorialButton))
                         .perform(ViewActions.click())
             } catch (ignored: NoMatchingViewException) {
@@ -24,7 +24,7 @@ class UITestHelper {
 
         fun loginUser() {
             try {
-                //Perform Login
+                // Perform Login
                 onView(ViewMatchers.withId(R.id.login_username))
                         .perform(ViewActions.clearText(), ViewActions.typeText(getTestUsername()))
                 closeSoftKeyboard()
@@ -36,7 +36,6 @@ class UITestHelper {
                 sleep(5000)
             } catch (ignored: NoMatchingViewException) {
             }
-
         }
 
         fun sleep(timeInMillis: Long) {
@@ -61,7 +60,7 @@ class UITestHelper {
                 throw NotImplementedError("Configure your beta account's password")
             } else return password
         }
-        fun <T: Activity> changeOrientation(activityRule: ActivityTestRule<T>){
+        fun <T : Activity> changeOrientation(activityRule: ActivityTestRule<T>) {
             activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             assert(activityRule.activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
             activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE

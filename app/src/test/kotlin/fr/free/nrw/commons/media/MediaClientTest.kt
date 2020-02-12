@@ -3,23 +3,25 @@ package fr.free.nrw.commons.media
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import io.reactivex.Observable
-import junit.framework.Assert.*
+import java.util.Date
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertFalse
+import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.*
+import org.mockito.ArgumentCaptor
+import org.mockito.ArgumentMatchers
+import org.mockito.Captor
+import org.mockito.InjectMocks
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 import org.wikipedia.dataclient.mwapi.ImageDetails
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResult
 import org.wikipedia.gallery.ImageInfo
-import org.mockito.ArgumentCaptor
-import java.util.*
-import org.mockito.Captor
-
-
-
 
 class MediaClientTest {
 
@@ -162,15 +164,15 @@ class MediaClientTest {
                 .thenReturn(Observable.just(mockResponse))
 
         assertEquals("Test", mediaClient!!.getPictureOfTheDay().blockingGet().filename)
-        assertEquals(template, filenameCaptor.value);
+        assertEquals(template, filenameCaptor.value)
     }
-  
+
     @Captor
     private val continuationCaptor: ArgumentCaptor<Map<String, String>>? = null
 
     @Test
     fun getMediaListFromCategoryTwice() {
-        val mockContinuation= mapOf(Pair("gcmcontinue", "test"))
+        val mockContinuation = mapOf(Pair("gcmcontinue", "test"))
         val imageInfo = ImageInfo()
 
         val mwQueryPage = mock(MwQueryPage::class.java)

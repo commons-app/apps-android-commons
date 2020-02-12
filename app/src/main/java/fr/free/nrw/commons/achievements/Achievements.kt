@@ -53,12 +53,14 @@ class Achievements {
      * @param imagesUploaded
      * @param revertCount
      */
-    constructor(uniqueUsedImages: Int,
-                articlesUsingImages: Int,
-                thanksReceived: Int,
-                featuredImages: Int,
-                imagesUploaded: Int,
-                revertCount: Int) {
+    constructor(
+        uniqueUsedImages: Int,
+        articlesUsingImages: Int,
+        thanksReceived: Int,
+        featuredImages: Int,
+        imagesUploaded: Int,
+        revertCount: Int
+    ) {
         this.uniqueUsedImages = uniqueUsedImages
         this.articlesUsingImages = articlesUsingImages
         this.thanksReceived = thanksReceived
@@ -90,8 +92,8 @@ class Achievements {
             return Achievements(response.uniqueUsedImages,
                     response.articlesUsingImages,
                     response.thanksReceived,
-                    response.featuredImages.qualityImages
-                            + response.featuredImages.featuredPicturesOnWikimediaCommons, 0,
+                    response.featuredImages.qualityImages +
+                            response.featuredImages.featuredPicturesOnWikimediaCommons, 0,
                     response.deletedUploads)
         }
     }

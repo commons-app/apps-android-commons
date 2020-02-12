@@ -4,14 +4,16 @@ import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
+import java.util.TimeZone
+import kotlin.collections.ArrayList
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 class CampaignsPresenterTest {
     @Mock
@@ -38,9 +40,9 @@ class CampaignsPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        testScheduler=TestScheduler()
-        campaignsSingle= Single.just(campaignResponseDTO)
-        campaignsPresenter= CampaignsPresenter(okHttpJsonApiClient,testScheduler,testScheduler)
+        testScheduler = TestScheduler()
+        campaignsSingle = Single.just(campaignResponseDTO)
+        campaignsPresenter = CampaignsPresenter(okHttpJsonApiClient, testScheduler, testScheduler)
         campaignsPresenter?.onAttachView(view)
         Mockito.`when`(okHttpJsonApiClient?.campaigns).thenReturn(campaignsSingle)
     }
@@ -56,17 +58,17 @@ class CampaignsPresenterTest {
     @Test
     fun getCampaignsTestNonEmptyCampaigns() {
         campaignsPresenter.getCampaigns()
-        var campaigns= ArrayList<Campaign>()
+        var campaigns = ArrayList<Campaign>()
         campaigns.add(campaign!!)
         val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ROOT)
         simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
         Mockito.`when`(campaignResponseDTO?.campaigns).thenReturn(campaigns)
         var calendar = Calendar.getInstance()
-        calendar.add(Calendar.DATE,-1)
+        calendar.add(Calendar.DATE, -1)
         val startDateString = simpleDateFormat.format(calendar.time).toString()
-        calendar= Calendar.getInstance()
-        calendar.add(Calendar.DATE,3)
-        val endDateString= simpleDateFormat.format(calendar.time).toString()
+        calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, 3)
+        val endDateString = simpleDateFormat.format(calendar.time).toString()
         Mockito.`when`(campaign?.endDate).thenReturn(endDateString)
         Mockito.`when`(campaign?.startDate).thenReturn(startDateString)
         Mockito.`when`(campaignResponseDTO?.campaigns).thenReturn(campaigns)

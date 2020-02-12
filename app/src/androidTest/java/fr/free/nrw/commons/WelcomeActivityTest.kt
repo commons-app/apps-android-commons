@@ -73,30 +73,30 @@ class WelcomeActivityTest {
     }
 
     @Test
-    fun swipeBeyondBounds(){
-            var  view_pager=activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
+    fun swipeBeyondBounds() {
+            var view_pager = activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
 
-            view_pager.adapter?.let {  view_pager.currentItem == view_pager.adapter?.count?.minus(1)
-                if (view_pager.currentItem==3){
+            view_pager.adapter?.let { view_pager.currentItem == view_pager.adapter?.count?.minus(1)
+                if (view_pager.currentItem == 3) {
                     onView(withId(R.id.welcomePager))
                             .perform(ViewActions.swipeLeft())
                     assert(true)
                     onView(withId(R.id.welcomePager))
                             .perform(ViewActions.swipeRight())
                     assert(false)
-                }}
+                } }
     }
 
     @Test
-    fun swipeTillLastAndFinish(){
-            var  view_pager=activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
+    fun swipeTillLastAndFinish() {
+            var view_pager = activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
 
-            view_pager.adapter?.let {  view_pager.currentItem == view_pager.adapter?.count?.minus(1)
-                if (view_pager.currentItem==3){
+            view_pager.adapter?.let { view_pager.currentItem == view_pager.adapter?.count?.minus(1)
+                if (view_pager.currentItem == 3) {
                     onView(withId(R.id.finishTutorialButton))
                             .perform(ViewActions.click())
                     assert(activityRule.activity.isDestroyed)
-                }}
+                } }
     }
 
     @Test

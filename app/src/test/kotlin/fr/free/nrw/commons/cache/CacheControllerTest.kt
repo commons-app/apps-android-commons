@@ -24,7 +24,6 @@ class CacheControllerTest {
 
     var value = ArrayList<String>()
 
-
     @Before
     @Throws(Exception::class)
     fun setUp() {

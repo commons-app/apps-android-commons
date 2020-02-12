@@ -1,12 +1,14 @@
 package fr.free.nrw.commons.upload
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
 class GpsCategoryModelTest {
 
-    private lateinit var testObject : GpsCategoryModel
+    private lateinit var testObject: GpsCategoryModel
 
     @Before
     fun setUp() {

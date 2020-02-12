@@ -6,19 +6,38 @@ import android.database.Cursor
 import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
-import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.BuildConfig
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.isA
+import com.nhaarman.mockitokotlin2.isNull
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyZeroInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.BASE_URI
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.uriForId
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.*
-import org.junit.Assert.*
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.ALL_FIELDS
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_ID
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_LAST_USED
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_NAME
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.onCreate
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.onDelete
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.onUpdate
+import java.util.Date
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -303,5 +322,4 @@ class RecentSearchesDaoTest {
             addRow(listOf("1", "butterfly", "123"))
         }
     }
-
 }

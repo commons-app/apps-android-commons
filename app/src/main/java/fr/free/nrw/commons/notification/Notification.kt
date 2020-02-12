@@ -5,12 +5,14 @@ import org.wikipedia.util.DateUtil
 /**
  * Created by root on 18.12.2017.
  */
-data class Notification(var notificationType: NotificationType,
-                   var notificationText: String,
-                   var date: String,
-                   var link: String,
-                   var iconUrl: String,
-                   var notificationId: String) {
+data class Notification(
+    var notificationType: NotificationType,
+    var notificationText: String,
+    var date: String,
+    var link: String,
+    var iconUrl: String,
+    var notificationId: String
+) {
     override fun toString(): String {
         return "Notification" +
                 "notificationType='" + notificationType + '\'' +
@@ -34,5 +36,4 @@ data class Notification(var notificationType: NotificationType,
                     "", wikiNotification.id().toString())
         }
     }
-
 }

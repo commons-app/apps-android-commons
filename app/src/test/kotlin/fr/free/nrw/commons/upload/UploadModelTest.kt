@@ -8,22 +8,23 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.reactivex.Single
+import java.io.FileInputStream
+import java.io.InputStream
+import java.util.UUID
+import javax.inject.Inject
+import javax.inject.Named
 import org.junit.After
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers.*
+import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyBoolean
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
-import java.io.FileInputStream
-import java.io.InputStream
-import java.util.*
-import javax.inject.Inject
-import javax.inject.Named
-
 
 class UploadModelTest {
 
@@ -67,7 +68,6 @@ class UploadModelTest {
                 .thenReturn("")
         `when`(imageProcessingService!!.validateImage(any(UploadModel.UploadItem::class.java), anyBoolean()))
                 .thenReturn(Single.just(IMAGE_OK))
-
     }
 
     @After

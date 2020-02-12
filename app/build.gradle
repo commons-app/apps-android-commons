@@ -20,6 +20,12 @@ spotless {
         googleJavaFormat()
         target '**/*.java'
     }
+
+    kotlin {
+        ktlint().userData(['android': 'true', 'color': 'true',
+                           'max_line_length': '1500', 'reporter': 'checkstyle'])
+        target '**/*.kt'
+    }
 }
 
 dependencies {

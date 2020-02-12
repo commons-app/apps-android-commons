@@ -5,7 +5,6 @@ import android.content.Context
 import fr.free.nrw.commons.HandlerService
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
-import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import org.junit.Before
 import org.junit.Test

@@ -42,6 +42,5 @@ object SslUtils {
             e.printStackTrace()
             return null
         }
-
     }
 }

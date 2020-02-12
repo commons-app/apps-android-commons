@@ -7,15 +7,17 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils
 import fr.free.nrw.commons.utils.ImageUtilsWrapper
 import io.reactivex.Single
+import java.io.FileInputStream
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.any
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
-import java.io.FileInputStream
 
 class u {
     @Mock
@@ -23,9 +25,9 @@ class u {
     @Mock
     internal var imageUtilsWrapper: ImageUtilsWrapper? = null
     @Mock
-    internal var readFBMD: ReadFBMD?=null
+    internal var readFBMD: ReadFBMD? = null
     @Mock
-    internal var readEXIF: EXIFReader?=null
+    internal var readEXIF: EXIFReader? = null
     @Mock
     internal var mediaClient: MediaClient? = null
 

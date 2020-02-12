@@ -1,8 +1,8 @@
 package fr.free.nrw.commons
 
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.NearbyController.loadAttractionsFromLocationToBaseMarkerOptions
-import androidx.test.core.app.ApplicationProvider
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

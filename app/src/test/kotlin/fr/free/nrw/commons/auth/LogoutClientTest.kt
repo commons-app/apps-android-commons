@@ -2,19 +2,21 @@ package fr.free.nrw.commons.auth
 
 import com.nhaarman.mockitokotlin2.verify
 import io.reactivex.Observable
+import javax.inject.Inject
+import javax.inject.Named
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.times
 import org.mockito.MockitoAnnotations
 import org.wikipedia.dataclient.Service
 import org.wikipedia.dataclient.mwapi.MwPostResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResult
-import javax.inject.Inject
-import javax.inject.Named
 
 class LogoutClientTest {
 

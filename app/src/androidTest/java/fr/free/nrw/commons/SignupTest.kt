@@ -32,7 +32,6 @@ class SignupTest {
         try {
             Intents.init()
         } catch (ex: IllegalStateException) {
-
         }
 
         Espresso.onView(withId(R.id.sign_up_button))

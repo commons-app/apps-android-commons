@@ -1,9 +1,25 @@
 package fr.free.nrw.commons.upload
 
-import androidx.exifinterface.media.ExifInterface.*
+import androidx.exifinterface.media.ExifInterface.TAG_ARTIST
+import androidx.exifinterface.media.ExifInterface.TAG_BODY_SERIAL_NUMBER
+import androidx.exifinterface.media.ExifInterface.TAG_CAMARA_OWNER_NAME
+import androidx.exifinterface.media.ExifInterface.TAG_COPYRIGHT
+import androidx.exifinterface.media.ExifInterface.TAG_GPS_ALTITUDE
+import androidx.exifinterface.media.ExifInterface.TAG_GPS_ALTITUDE_REF
+import androidx.exifinterface.media.ExifInterface.TAG_GPS_LATITUDE
+import androidx.exifinterface.media.ExifInterface.TAG_GPS_LATITUDE_REF
+import androidx.exifinterface.media.ExifInterface.TAG_GPS_LONGITUDE
+import androidx.exifinterface.media.ExifInterface.TAG_GPS_LONGITUDE_REF
+import androidx.exifinterface.media.ExifInterface.TAG_LENS_MAKE
+import androidx.exifinterface.media.ExifInterface.TAG_LENS_MODEL
+import androidx.exifinterface.media.ExifInterface.TAG_LENS_SERIAL_NUMBER
+import androidx.exifinterface.media.ExifInterface.TAG_LENS_SPECIFICATION
+import androidx.exifinterface.media.ExifInterface.TAG_MAKE
+import androidx.exifinterface.media.ExifInterface.TAG_MODEL
+import androidx.exifinterface.media.ExifInterface.TAG_SOFTWARE
+import java.util.Arrays
 import junit.framework.Assert.assertTrue
 import org.junit.Test
-import java.util.*
 
 /**
  * Test cases for FileMetadataUtils
@@ -16,7 +32,7 @@ class FileMetadataUtilsTest {
     @Test
     fun getTagsFromPrefAuthor() {
         val author = FileMetadataUtils.getTagsFromPref("Author")
-        val authorRef = arrayOf(TAG_ARTIST, TAG_CAMARA_OWNER_NAME);
+        val authorRef = arrayOf(TAG_ARTIST, TAG_CAMARA_OWNER_NAME)
 
         assertTrue(Arrays.deepEquals(author, authorRef))
     }

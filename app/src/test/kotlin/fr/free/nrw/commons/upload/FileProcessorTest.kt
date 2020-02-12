@@ -1,19 +1,15 @@
 package fr.free.nrw.commons.upload
 
 import android.content.SharedPreferences
-import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.caching.CacheController
 import fr.free.nrw.commons.mwapi.CategoryApi
+import javax.inject.Inject
+import javax.inject.Named
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import javax.inject.Inject
-import javax.inject.Named
-
-import java.io.FileInputStream
-import java.io.FileOutputStream
 
 class FileProcessorTest {
 
@@ -37,7 +33,6 @@ class FileProcessorTest {
 
     @Test
     fun processFileCoordinates() {
-
     }
 
     /**

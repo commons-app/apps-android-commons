@@ -13,5 +13,4 @@ class QuizQuestion internal constructor(var questionNumber: Int, var question: S
     fun setUrl(url: String) {
         this.url = url
     }
-
 }

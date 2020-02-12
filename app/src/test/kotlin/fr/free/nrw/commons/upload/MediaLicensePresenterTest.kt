@@ -44,7 +44,6 @@ class MediaLicensePresenterTest {
         PowerMockito.`when`(Utils.licenseNameFor(ArgumentMatchers.anyString())).thenReturn(1)
     }
 
-
     /**
      * unit test case for method MediaLicensePresenter.getLicense
      */

@@ -41,7 +41,6 @@ class ContributionsPresenterTest {
         contributionsPresenter?.onAttachView(view)
     }
 
-
     /**
      * Test presenter actions onGetContributionFromCursor
      */
@@ -85,7 +84,6 @@ class ContributionsPresenterTest {
         verify(view)?.showNoContributionsUI(true)
     }
 
-
     /**
      * Test presenter actions on loader reset
      */
@@ -105,6 +103,4 @@ class ContributionsPresenterTest {
         contributionsPresenter?.onChanged()
         verify(view)?.onDataSetChanged()
     }
-
-
 }

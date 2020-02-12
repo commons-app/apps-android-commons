@@ -2,9 +2,15 @@ package fr.free.nrw.commons.utils
 
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.FileUtilsWrapper
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
+import java.io.ByteArrayInputStream
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.InputStream
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.io.*
 
 class FileUtilsTest {
     @Test
@@ -56,7 +62,7 @@ class FileUtilsTest {
         return String(bytes)
     }
 
-    private fun toInputStream(str: String) : InputStream {
+    private fun toInputStream(str: String): InputStream {
         return ByteArrayInputStream(str.toByteArray(Charsets.UTF_8))
     }
 }

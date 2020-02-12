@@ -1,9 +1,9 @@
 package fr.free.nrw.commons.utils
 
 import fr.free.nrw.commons.utils.StringSortingUtils.sortBySimilarity
+import java.util.Collections.sort
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.util.Collections.sort
 
 class StringSortingUtilsTest {
 

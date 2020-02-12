@@ -6,21 +6,33 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
-import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.BuildConfig
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.isA
+import com.nhaarman.mockitokotlin2.isNull
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.Utils
-import fr.free.nrw.commons.contributions.Contribution.*
+import fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA
+import fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY
+import fr.free.nrw.commons.contributions.Contribution.STATE_COMPLETED
+import fr.free.nrw.commons.contributions.Contribution.STATE_QUEUED
 import fr.free.nrw.commons.contributions.ContributionDao.Table
 import fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI
 import fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId
-import org.junit.Assert.*
+import java.util.Date
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -340,7 +352,7 @@ class ContributionDaoTest {
             license = "007"
             multiple = isMultiple
             width = 640
-            height = 480  // VGA should be enough for anyone, right?
+            height = 480 // VGA should be enough for anyone, right?
         }
         contribution.wikiDataEntityId = "Q1"
         return contribution
