@@ -6,22 +6,22 @@ import android.os.IBinder;
 
 public class ContributionsSyncService extends Service {
 
-    private static final Object sSyncAdapterLock = new Object();
+  private static final Object sSyncAdapterLock = new Object();
 
-    private static ContributionsSyncAdapter sSyncAdapter = null;
+  private static ContributionsSyncAdapter sSyncAdapter = null;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        synchronized (sSyncAdapterLock) {
-            if (sSyncAdapter == null) {
-                sSyncAdapter = new ContributionsSyncAdapter(this, true);
-            }
-        }
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    synchronized (sSyncAdapterLock) {
+      if (sSyncAdapter == null) {
+        sSyncAdapter = new ContributionsSyncAdapter(this, true);
+      }
     }
+  }
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return sSyncAdapter.getSyncAdapterBinder();
-    }
+  @Override
+  public IBinder onBind(Intent intent) {
+    return sSyncAdapter.getSyncAdapterBinder();
+  }
 }

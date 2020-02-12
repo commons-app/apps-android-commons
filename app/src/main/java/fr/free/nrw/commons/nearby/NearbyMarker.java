@@ -3,25 +3,25 @@ package fr.free.nrw.commons.nearby;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
 public class NearbyMarker extends Marker {
-    private final Place place;
-    private NearbyBaseMarker nearbyBaseMarker;
+  private final Place place;
+  private NearbyBaseMarker nearbyBaseMarker;
 
-    /**
-     * Creates a instance of {@link Marker} using the builder of Marker.
-     *
-     * @param baseMarkerOptions The builder used to construct the Marker.
-     */
-    NearbyMarker(NearbyBaseMarker baseMarkerOptions, Place place) {
-        super(baseMarkerOptions);
-        this.place = place;
-        this.nearbyBaseMarker = baseMarkerOptions;
-    }
+  /**
+   * Creates a instance of {@link Marker} using the builder of Marker.
+   *
+   * @param baseMarkerOptions The builder used to construct the Marker.
+   */
+  NearbyMarker(NearbyBaseMarker baseMarkerOptions, Place place) {
+    super(baseMarkerOptions);
+    this.place = place;
+    this.nearbyBaseMarker = baseMarkerOptions;
+  }
 
-    public NearbyBaseMarker getNearbyBaseMarker() {
-        return nearbyBaseMarker;
-    }
+  public NearbyBaseMarker getNearbyBaseMarker() {
+    return nearbyBaseMarker;
+  }
 
-    public Place getPlace() {
-        return place;
-    }
+  public Place getPlace() {
+    return place;
+  }
 }

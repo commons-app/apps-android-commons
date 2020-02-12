@@ -9,27 +9,26 @@ import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider;
 
 /**
- * This Class Represents the Module for dependency injection (using dagger)
- * so, if a developer needs to add a new ContentProvider to the commons app
- * then that must be mentioned here to inject the dependencies 
+ * This Class Represents the Module for dependency injection (using dagger) so, if a developer needs
+ * to add a new ContentProvider to the commons app then that must be mentioned here to inject the
+ * dependencies
  */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class ContentProviderBuilderModule {
 
-    @ContributesAndroidInjector
-    abstract ContributionsContentProvider bindContributionsContentProvider();
+  @ContributesAndroidInjector
+  abstract ContributionsContentProvider bindContributionsContentProvider();
 
-    @ContributesAndroidInjector
-    abstract CategoryContentProvider bindCategoryContentProvider();
+  @ContributesAndroidInjector
+  abstract CategoryContentProvider bindCategoryContentProvider();
 
-    @ContributesAndroidInjector
-    abstract RecentSearchesContentProvider bindRecentSearchesContentProvider();
+  @ContributesAndroidInjector
+  abstract RecentSearchesContentProvider bindRecentSearchesContentProvider();
 
-    @ContributesAndroidInjector
-    abstract BookmarkPicturesContentProvider bindBookmarkContentProvider();
+  @ContributesAndroidInjector
+  abstract BookmarkPicturesContentProvider bindBookmarkContentProvider();
 
-    @ContributesAndroidInjector
-    abstract BookmarkLocationsContentProvider bindBookmarkLocationContentProvider();
-
+  @ContributesAndroidInjector
+  abstract BookmarkLocationsContentProvider bindBookmarkLocationContentProvider();
 }

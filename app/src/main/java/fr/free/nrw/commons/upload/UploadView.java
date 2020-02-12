@@ -1,88 +1,85 @@
 package fr.free.nrw.commons.upload;
 
+import static java.lang.annotation.RetentionPolicy.SOURCE;
+
 import android.net.Uri;
-
 import androidx.annotation.IntDef;
-
+import fr.free.nrw.commons.location.LatLng;
 import java.lang.annotation.Retention;
 import java.util.List;
 
-import fr.free.nrw.commons.location.LatLng;
-
-import static java.lang.annotation.RetentionPolicy.SOURCE;
-
 public interface UploadView {
-    // Dummy implementation of the view interface to allow us to have a 'null object pattern'
-    // in the presenter and avoid constant NULL checking.
-//    UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
-//    new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
+  // Dummy implementation of the view interface to allow us to have a 'null object pattern'
+  // in the presenter and avoid constant NULL checking.
+  //    UploadView DUMMY = (UploadView) Proxy.newProxyInstance(UploadView.class.getClassLoader(),
+  //    new Class[]{UploadView.class}, (proxy, method, methodArgs) -> null);
 
+  @Retention(SOURCE)
+  @IntDef({PLEASE_WAIT, TITLE_CARD, CATEGORIES, LICENSE})
+  @interface UploadPage {}
 
-    @Retention(SOURCE)
-    @IntDef({PLEASE_WAIT, TITLE_CARD, CATEGORIES, LICENSE})
-    @interface UploadPage {}
+  int PLEASE_WAIT = 0;
 
-    int PLEASE_WAIT = 0;
+  int TITLE_CARD = 1;
+  int CATEGORIES = 2;
+  int LICENSE = 3;
 
-    int TITLE_CARD = 1;
-    int CATEGORIES = 2;
-    int LICENSE = 3;
+  boolean checkIfLoggedIn();
 
-    boolean checkIfLoggedIn();
+  void updateThumbnails(List<UploadModel.UploadItem> uploads);
 
-    void updateThumbnails(List<UploadModel.UploadItem> uploads);
+  void setNextEnabled(boolean available);
 
-    void setNextEnabled(boolean available);
+  void setSubmitEnabled(boolean available);
 
-    void setSubmitEnabled(boolean available);
+  void setPreviousEnabled(boolean available);
 
-    void setPreviousEnabled(boolean available);
+  void setTopCardState(boolean state);
 
-    void setTopCardState(boolean state);
+  void setRightCardVisibility(boolean visible);
 
-    void setRightCardVisibility(boolean visible);
+  void setBottomCardState(boolean state);
 
-    void setBottomCardState(boolean state);
+  void setBackground(Uri mediaUri);
 
-    void setBackground(Uri mediaUri);
+  void setTopCardVisibility(boolean visible);
 
-    void setTopCardVisibility(boolean visible);
+  void setBottomCardVisibility(boolean visible);
 
-    void setBottomCardVisibility(boolean visible);
+  void setBottomCardVisibility(@UploadPage int page, int uploadCount);
 
-    void setBottomCardVisibility(@UploadPage int page, int uploadCount);
+  void updateRightCardContent(boolean gpsPresent);
 
-    void updateRightCardContent(boolean gpsPresent);
+  void updateBottomCardContent(
+      int currentStep, int stepCount, UploadModel.UploadItem uploadItem, boolean isShowingItem);
 
-    void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem, boolean isShowingItem);
+  void updateLicenses(List<String> licenses, String selectedLicense);
 
-    void updateLicenses(List<String> licenses, String selectedLicense);
+  void updateLicenseSummary(String selectedLicense, int imageCount);
 
-    void updateLicenseSummary(String selectedLicense, int imageCount);
+  void updateTopCardContent();
 
-    void updateTopCardContent();
+  void updateSubtitleVisibility(int imageCount);
 
-    void updateSubtitleVisibility(int imageCount);
+  void dismissKeyboard();
 
-    void dismissKeyboard();
+  void showBadPicturePopup(String errorMessage);
 
-    void showBadPicturePopup(String errorMessage);
+  void showDuplicatePicturePopup();
 
-    void showDuplicatePicturePopup();
+  void finish();
 
-    void finish();
+  void launchMapActivity(LatLng decCoords);
 
-    void launchMapActivity(LatLng decCoords);
+  void showErrorMessage(int resourceId);
 
-    void showErrorMessage(int resourceId);
+  void initDefaultCategories();
 
-    void initDefaultCategories();
+  void showNoCategorySelectedWarning();
 
-    void showNoCategorySelectedWarning();
+  void showProgressDialog();
 
-    void showProgressDialog();
+  void hideProgressDialog();
 
-    void hideProgressDialog();
-
-    void askUserToLogIn();
+  void askUserToLogIn();
 }

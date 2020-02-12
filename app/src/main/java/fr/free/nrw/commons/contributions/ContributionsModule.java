@@ -9,7 +9,7 @@ import dagger.Module;
 @Module
 public abstract class ContributionsModule {
 
-    @Binds
-    public abstract ContributionsContract.UserActionListener bindsContibutionsPresenter(
-            ContributionsPresenter presenter);
+  @Binds
+  public abstract ContributionsContract.UserActionListener bindsContibutionsPresenter(
+      ContributionsPresenter presenter);
 }

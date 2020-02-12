@@ -4,52 +4,51 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
-
-import com.pedrogomez.renderers.Renderer;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.pedrogomez.renderers.Renderer;
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
-/**
- * Renders the Categories view
- */
+/** Renders the Categories view */
 public class CategoriesRenderer extends Renderer<CategoryItem> {
-    @BindView(R.id.tvName) CheckedTextView checkedView;
-    private final CategoryClickedListener listener;
+  @BindView(R.id.tvName)
+  CheckedTextView checkedView;
 
-    CategoriesRenderer(CategoryClickedListener listener) {
-        this.listener = listener;
-    }
+  private final CategoryClickedListener listener;
 
-    @Override
-    protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
-        return layoutInflater.inflate(R.layout.layout_categories_item, viewGroup, false);
-    }
+  CategoriesRenderer(CategoryClickedListener listener) {
+    this.listener = listener;
+  }
 
-    @Override
-    protected void setUpView(View view) {
-        ButterKnife.bind(this, view);
-    }
+  @Override
+  protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
+    return layoutInflater.inflate(R.layout.layout_categories_item, viewGroup, false);
+  }
 
-    @Override
-    protected void hookListeners(View view) {
-        view.setOnClickListener(v -> {
-            CategoryItem item = getContent();
-            item.setSelected(!item.isSelected());
-            checkedView.setChecked(item.isSelected());
-            if (listener != null) {
-                listener.categoryClicked(item);
-            }
+  @Override
+  protected void setUpView(View view) {
+    ButterKnife.bind(this, view);
+  }
+
+  @Override
+  protected void hookListeners(View view) {
+    view.setOnClickListener(
+        v -> {
+          CategoryItem item = getContent();
+          item.setSelected(!item.isSelected());
+          checkedView.setChecked(item.isSelected());
+          if (listener != null) {
+            listener.categoryClicked(item);
+          }
         });
-    }
+  }
 
-    @Override
-    public void render() {
-        CategoryItem item = getContent();
-        Timber.e("Rendering: %s", item);
-        checkedView.setChecked(item.isSelected());
-        checkedView.setText(item.getName());
-    }
+  @Override
+  public void render() {
+    CategoryItem item = getContent();
+    Timber.e("Rendering: %s", item);
+    checkedView.setChecked(item.isSelected());
+    checkedView.setText(item.getName());
+  }
 }

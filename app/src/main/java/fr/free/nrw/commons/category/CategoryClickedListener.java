@@ -1,5 +1,5 @@
 package fr.free.nrw.commons.category;
 
 public interface CategoryClickedListener {
-    void categoryClicked(CategoryItem item);
+  void categoryClicked(CategoryItem item);
 }

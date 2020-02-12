@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.di;
 
-import javax.inject.Singleton;
-
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
@@ -17,50 +15,53 @@ import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.FileProcessor;
 import fr.free.nrw.commons.upload.UploadModule;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
-
+import javax.inject.Singleton;
 
 /**
- * Facilitates Injection from CommonsApplicationModule to all the 
- * classes seeking a dependency to be injected
+ * Facilitates Injection from CommonsApplicationModule to all the classes seeking a dependency to be
+ * injected
  */
 @Singleton
-@Component(modules = {
-        CommonsApplicationModule.class,
-        NetworkingModule.class,
-        AndroidInjectionModule.class,
-        AndroidSupportInjectionModule.class,
-        ActivityBuilderModule.class,
-        FragmentBuilderModule.class,
-        ServiceBuilderModule.class,
-        ContentProviderBuilderModule.class, UploadModule.class, ContributionsModule.class
-})
+@Component(
+    modules = {
+      CommonsApplicationModule.class,
+      NetworkingModule.class,
+      AndroidInjectionModule.class,
+      AndroidSupportInjectionModule.class,
+      ActivityBuilderModule.class,
+      FragmentBuilderModule.class,
+      ServiceBuilderModule.class,
+      ContentProviderBuilderModule.class,
+      UploadModule.class,
+      ContributionsModule.class
+    })
 public interface CommonsApplicationComponent extends AndroidInjector<ApplicationlessInjection> {
-    void inject(CommonsApplication application);
+  void inject(CommonsApplication application);
 
-    void inject(ContributionsSyncAdapter syncAdapter);
+  void inject(ContributionsSyncAdapter syncAdapter);
 
-    void inject(LoginActivity activity);
+  void inject(LoginActivity activity);
 
-    void inject(SettingsFragment fragment);
+  void inject(SettingsFragment fragment);
 
-    void inject(ReviewController reviewController);
+  void inject(ReviewController reviewController);
 
-    @Override
-    void inject(ApplicationlessInjection instance);
+  @Override
+  void inject(ApplicationlessInjection instance);
 
-    void inject(PlaceRenderer placeRenderer);
+  void inject(PlaceRenderer placeRenderer);
 
-    void inject(FileProcessor fileProcessor);
+  void inject(FileProcessor fileProcessor);
 
-    void inject(PicOfDayAppWidget picOfDayAppWidget);
+  void inject(PicOfDayAppWidget picOfDayAppWidget);
 
-    void inject(ContributionViewHolder viewHolder);
+  void inject(ContributionViewHolder viewHolder);
 
-    @Component.Builder
-    @SuppressWarnings({"WeakerAccess", "unused"})
-    interface Builder {
-        Builder appModule(CommonsApplicationModule applicationModule);
+  @Component.Builder
+  @SuppressWarnings({"WeakerAccess", "unused"})
+  interface Builder {
+    Builder appModule(CommonsApplicationModule applicationModule);
 
-        CommonsApplicationComponent build();
-    }
+    CommonsApplicationComponent build();
+  }
 }
