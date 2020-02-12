@@ -16,12 +16,12 @@
       android:id="@+id/cv_container_top_card"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="8dp"
-      android:layout_marginEnd="8dp"
-      android:layout_marginLeft="8dp"
-      android:layout_marginRight="8dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="16dp"
+      android:layout_marginBottom="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/standard_gap"
       android:elevation="@dimen/cardview_default_elevation"
       >
     <LinearLayout
@@ -40,7 +40,7 @@
         <TextView
             android:id="@+id/tv_top_card_title"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="@dimen/half_standard_height"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
@@ -51,8 +51,8 @@
             />
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/ib_toggle_top_card"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/half_standard_height"
+            android:layout_height="@dimen/half_standard_height"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
