@@ -9,6 +9,7 @@
     <dimen name="medium_width">12dp</dimen>
 
     <!-- Standard margins / padding -->
+    <dimen name="login_padding">30dp</dimen>
     <dimen name="tiny_height">1dp</dimen>
     <dimen name="miniscule_margin">2dp</dimen>
     <dimen name="tiny_margin">4dp</dimen>
