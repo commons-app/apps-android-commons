@@ -40,19 +40,6 @@
             android:targetPackage="fr.free.nrw.commons.beta" />
     </shortcut>
 
-    <shortcut
-        android:enabled="true"
-        android:icon="@drawable/ic_check_black_24dp"
-        android:shortcutId="Review"
-        android:shortcutLongLabel="@string/title_app_shortcut_review"
-        android:shortcutShortLabel="@string/title_app_shortcut_review"
-        tools:targetApi="n_mr1">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="fr.free.nrw.commons.review.ReviewActivity"
-            android:targetPackage="fr.free.nrw.commons.beta" />
-    </shortcut>
-
 
 </shortcuts>
 
