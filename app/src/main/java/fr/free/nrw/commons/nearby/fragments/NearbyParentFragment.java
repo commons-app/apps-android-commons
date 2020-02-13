@@ -1050,7 +1050,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void filterOutAllMarkers() {
-        removeAllMarkers();
+        hideAllMArkers();
     }
 
     /**
@@ -1078,7 +1078,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                                       boolean filterForAllNoneType) {
         if (selectedLabels.size() == 0 && filterForPlaceState) { // If nothing is selected, display all
             // remove the previous markers before updating them
-            removeAllMarkers();
+            hideAllMArkers();
             for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
                 if (displayExists && displayNeedsPhoto) {
                     // Exists and needs photo
@@ -1103,7 +1103,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         } else {
             // First remove all the markers
-            removeAllMarkers();
+            hideAllMArkers();
             for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
                 for (Label label : selectedLabels) {
                     if (markerPlaceGroup.getPlace().getLabel().toString().equals(label.toString())) {
@@ -1191,7 +1191,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * but it is transparent more than grey(as the name of the icon might suggest)
      * since grey icon may lead the users to believe that it is disabled or prohibited contribution
      */
-    private void removeAllMarkers() {
+    private void hideAllMArkers() {
         if(currentLocationMarker==null){
             return;
         }
