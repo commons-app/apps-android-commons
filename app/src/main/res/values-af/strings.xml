@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Fwolff
 * Joris Darlington Quarshie
 * Naudefj
 -->
@@ -232,7 +233,7 @@
   <string name="error_while_cache">Fout tydens die kas van foto\'s</string>
   <string name="title_info">\'N Unieke beskrywende titel vir die lêer wat as lêernaam sal dien. U mag gewone taal met spasies gebruik. Moenie die lêeruitbreiding insluit nie</string>
   <string name="description_info">Beskryf die media so veel as moontlik: Waarheen is dit geneem? Wat wys dit? Wat is die konteks? Beskryf die voorwerpe of persone. Openbaar inligting wat nie maklik geraai kan word nie, byvoorbeeld die tyd van die dag as dit \'n landskap is. As die media iets ongewoon vertoon, verduidelik dan wat dit ongewoon maak.</string>
-  <string name="upload_image_too_dark">Is hierdie foto te donker, is jy seker dat jy dit wil oplaai? Wikimedia Commons is slegs vir foto\'s met ensiklopediese waarde.</string>
+  <string name="upload_image_too_dark">Hierdie foto is te donker. Wil u hom definitief oplaai? Wikimedia Commons is slegs vir foto\'s met ensiklopediese waarde.</string>
   <string name="upload_image_blurry">Hierdie foto is vaag, is jy seker dat jy dit wil oplaai? Wikimedia Commons is slegs vir foto\'s met ensiklopediese waarde.</string>
   <string name="upload_problem_exist">Potensiële probleme met hierdie beeld:</string>
   <string name="upload_problem_image_dark">Beeld is te donker.</string>

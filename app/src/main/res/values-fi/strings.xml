@@ -3,6 +3,7 @@
 * Abijeet Patro
 * Alluk.
 * Crt
+* FinlandMan
 * Kyykaarme
 * Nike
 * Olli
@@ -274,7 +275,7 @@
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
   <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>
   <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
-  <string name="nearby_location_not_available" fuzzy="true">Sijainti ei käytettävissä.</string>
+  <string name="nearby_location_not_available">Nearby ei välttämättä toimi, sillä sijainti ei käytettävissä.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
   <string name="get_directions">Hanki ohjeet</string>
   <string name="read_article">Lue artikkeli</string>

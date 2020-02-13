@@ -49,7 +49,7 @@
   <string name="upload_progress_notification_title_in_progress">מתבצעת העלאת %1$s</string>
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
-  <string name="upload_failed_notification_subtitle">נא ללחוץ כדי להציג</string>
+  <string name="upload_failed_notification_subtitle">לחץ כדי להציג</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">מועלה קובץ אחד</item>
     <item quantity="other">מועלים %1$d קבצים</item>

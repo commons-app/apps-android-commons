@@ -57,10 +57,17 @@
   <string name="menu_upload_single">ߊ߬ ߟߊߦߟߍ߬</string>
   <string name="categories_search_text_hint">ߦߌߟߡߊ ߟߎ߬ ߢߌߣߌ߲߫</string>
   <string name="menu_save_categories">ߊ߬ ߟߊߞߎ߲߬ߘߎ߬</string>
+  <string name="refresh_button">ߞߵߊ߬ ߟߊߛߎߡߊ߫</string>
   <string name="display_list_button">ߛߙߍߘߍ</string>
   <string name="gps_disabled">GPS ߟߊߞߎߣߎ߲ߣߍ߲߫ ߕߴߌ ߟߊ߫ ߞߍߟߊ߲ ߠߊ߫. ߊ߬ ߟߊߞߎߣߎ߲ ߞߊߘߴߌ ߦߋ߫ ߓߊ߬؟</string>
   <string name="enable_gps">GPS ߟߊߞߎߣߎ߲߫</string>
   <string name="contributions_subtitle_zero">ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߕߴߦߋ߲߬ ߡߎߣߎ߲߬</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <string name="starting_multiple_uploads">{{Plural|ߟߊ߬ߝߟߐ߬ߟߌ=ߞߋߟߋ߲߫ %1$d ߟߊߦߟߍ߬|ߟߊߝߟߐߟߌ %1$d ߟߊ߬ߦߟߍ߬ߟߌ|ߟߊߝߟߐߟߌ %1$d ߟߎ߫ ߟߊߦߍ߬ߟߍ}}</string>
   <string name="categories_not_found">ߞߎߡߘߊ߫ %1$s ߡߊ߫ ߛߐ߬ߘߐ߲߬.</string>
   <string name="categories_activity_title">ߦߌߟߡߊ ߟߎ߬</string>
   <string name="title_activity_settings">ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ</string>
@@ -171,7 +178,9 @@
   <string name="skip_login_title">ߌ ߦߴߊ߬ ߝߍ߬ ߓߊ߬ ߞߵߌ ߜߊ߲߫ ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߞߎ߲߬ߠߊ߫؟</string>
   <string name="skip_login_message">ߌ ߞߊߞߊ߲߫ ߞߵߌ ߜߊ߲߬ߞߎ߲߫ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ߫ ߛߐ߲߬.</string>
   <string name="login_alert_message">ߌ ߜߊ߲߬ߞߎ߲߫ ߖߊ߰ߣߌ߲߫ ߞߊ߬ ߟߊ߬ߓߊ߰ߙߊ߬ߟߌ ߣߌ߲߬ ߠߊߓߊ߯ߙߊ߫</string>
+  <string name="get_directions">ߞߎ߲߬ߕߋߟߋ߲ ߡߊߛߐ߬ߘߐ߲߬</string>
   <string name="read_article">ߞߎߡߘߊ ߘߐߞߊ߬ߙߊ߲߬</string>
+  <string name="notifications_welcome">ߌ ߣߌ߫ ߛߣߍ߫ ߥߞߌߡߋߘߌߦߊ߫ ߞߐߡߐ߲ %1$s߹ ߞߊ߲߬߸ ߊ߲ ߓߘߊ߫ ߛߍߥߊ߫ ߌ ߞߍߟߌ ߟߊ߫ ߦߊ߲߬.</string>
   <string name="notifications_talk_page_message">%1$s ߓߘߊ߫ ߘߏ߫ ߗߋ߫ ߌ ߟߊ߫ ߞߎߡߊ߫ ߞߐߜߍ ߞߊ߲߬.</string>
   <string name="notifications_thank_you_edit">ߌ ߣߌ߫ ߗߋ߫ ߌ ߟߊ߫ ߡߊ߬ߦߟߍ߬ߡߊ߲߬ߠߌ߲ ߠߊ߫</string>
   <string name="notifications_mention">%1$s ߓߘߴߌ ߕߐ߮ ߘߐߕߍ߰ %2$s.</string>
@@ -229,8 +238,11 @@
   <string name="contributions_fragment">ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߠߎ߬</string>
   <string name="nearby_fragment">ߛߌ߰ߢߐ߲߮</string>
   <string name="list_sheet">ߛߙߍߘߍ</string>
+  <string name="image_in_set_label">ߖߌ߬ߦߊ߬ߓߍ߫ %1$d ߘߐߓߍ߲߬ߕߊ</string>
   <string name="next">ߢߍߕߊ</string>
   <string name="previous">ߟߊ߬ߕߎ߲߰ߠߊ ߟߎ߬</string>
+  <string name="submit">ߊ߬ ߞߘߊߡߊ߫</string>
+  <string name="upload_title_duplicate">ߞߐߕߐ߮ ߣߌ߲߬ ߕߐ߮ ߦߋ߫ ߦߋ߲߬ %1$s ߞߘߐ߬ߡߊ߲߫. ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߘߊߓߊ߲߫ ߓߊ߬؟</string>
   <string name="title_page_bookmarks_pictures">ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
   <string name="desc_language_Worldwide">ߞߌߢߍ߲߫ ߝߊ߲߭ ߓߍ߯</string>
   <string name="desc_language_America">ߊߡߋߙߌߞߌ߬</string>
@@ -250,6 +262,16 @@
   <string name="never_ask_again">ߏ߬ ߞߊ߫ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߫ ߏ߬ ߞߐ߫ ߡߎ߰ߡߍ߫</string>
   <string name="display_location_permission_title">ߘߌ߲߬ߞߌߙߊ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߟߊߓߊ߯ߙߊ߫</string>
   <string name="nominate_for_deletion_done">ߊ߬ ߓߘߊ߫ ߞߍ߫</string>
+  <string name="send_thank_success_title">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ: ߓߘߊ߫ ߛߎߘߊ߲߫</string>
+  <string name="send_thank_success_message">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ ߓߘߊ߫ ߛߎߘߊ߲߫  %1$s ߡߊ߬.</string>
+  <string name="send_thank_failure_message">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ ߓߘߊ߫ ߛߎߘߊ߲߫  %1$s ߡߊ߬</string>
+  <string name="send_thank_failure_title">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ: ߓߘߊ߫ ߗߌߙߏ߲߫</string>
+  <string name="send_thank_send">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ</string>
+  <string name="send_thank_notification_title">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ</string>
+  <string name="send_thank_toast">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ  %1$s ߟߊ߫ ߞߏ߫ ߟߊ߫</string>
+  <string name="review_copyright">ߊ߬ ߝߐ߫ ߣߌ߲߬ ߓߍ߲߬ߣߍ߲߫ ߦߋ߫ ߓߊߦߟߍߡߊ߲ߠߌ߲ ߤߊߞߍ ߡߊ߬ ߝߋߎ߫؟</string>
+  <string name="review_category">ߊ߬ ߝߐ߫ ߣߌ߲߬ ߦߌߟߡߊߦߊߣߍ߲߫ ߝߋߎ߫؟</string>
+  <string name="review_thanks">ߊ߬ ߟߐ߯ ߦߴߌ ߟߊ߫ ߞߊ߬ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ߠߊ ߟߎ߬ ߞߎߟߎ߲ߖߋ߫ ߓߊ߬؟</string>
   <string name="review_copyright_yes_button_text">ߒ߬ߒ߫߸ ߓߊߦߟߍߡߊ߲ ߤߊߞߍ ߡߊ߫ ߕߌߢߍ߫</string>
   <string name="review_copyright_no_button_text">ߊ߬ ߞߍߣߍ߲߫ ߦߴߊ߬ ߓߍ߲߬ߣߍ߲߫</string>
   <string name="review_thanks_yes_button_text">ߐ߲߬ߐ߲ߐ߲߫߸ ߡߎ߲߬ߠߊ߫ ߍ߲߬ߍ߲߫</string>
@@ -263,6 +285,9 @@
   <string name="exif_tag_name_copyright">ߓߊߦߟߍߡߊ߲ ߤߊߞߍ</string>
   <string name="exif_tag_name_location">ߘߌ߲߬ߞߌߙߊ</string>
   <string name="exif_tag_name_cameraModel">ߖߌ߬ߦߊ߬ߕߊ߬ߟߊ߲ ߛߎ߮ߦߊ</string>
+  <string name="dialog_box_text_nomination">ߡߎ߲߬ߠߊ߫ %1$s ߖߏ߬ߛߌ߬ߕߐ߫؟</string>
+  <string name="review_is_uploaded_by">%1$s ߟߊߦߟߍ߬ߣߍ߲߬ ߦߋ߫: %2$s ߟߋ߬ ߓߟߏ߫</string>
+  <string name="default_description_language">ߞߊ߲߬ߛߓߍߟߌ ߞߍ߫ ߞߊ߲ ߓߊߖߎߡߊ</string>
   <string name="delete_helper_show_deletion_title">ߕߐ߯ߦߊߟߌ ߖߏ߰ߛߌ߬ߟߌ ߞߊ߲ߡߊ߬</string>
   <string name="delete_helper_show_deletion_message_if">%1$s ߕߐ߯ߦߊߟߌ ߦߴߌ ߘߐ߫ ߖߏ߬ߛߌ߬ߟߌ ߞߊ߲ߡߊ߬</string>
   <string name="delete_helper_show_deletion_title_failed">ߊ߬ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
