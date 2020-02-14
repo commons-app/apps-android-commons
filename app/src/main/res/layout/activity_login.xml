@@ -245,6 +245,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/normal_text"
+        android:paddingBottom="@dimen/login_padding"
         android:textColor="@color/status_bar_blue"
         android:text="@string/about_privacy_policy" />
 
