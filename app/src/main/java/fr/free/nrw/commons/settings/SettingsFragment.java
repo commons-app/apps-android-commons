@@ -248,10 +248,7 @@ public class SettingsFragment extends PreferenceFragment {
             int prefIndex = listPreferenceAppLanguage.findIndexOfValue(userSelectedValue);
             listPreferenceAppLanguage.setSummary(listPreferenceAppLanguage.getEntries()[prefIndex]);
             saveAppLanguageValue(userSelectedValue);
-
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            getActivity().finish();
-            startActivity(intent);
+            ((SettingsActivity) getActivity()).setAppLanguage(userSelectedValue);
 
             return true;
         });

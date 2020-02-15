@@ -1,7 +1,13 @@
 package fr.free.nrw.commons.settings;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
+
+import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -59,5 +65,22 @@ public class SettingsActivity extends NavigationBaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void setAppLanguage(String languageCode) {
+        Prefs.LANGUAGE_CHANGED = true;
+
+        if (languageCode == null) {
+            return;
+        }
+
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(languageCode);
+        res.updateConfiguration(conf, dm);
+
+        finish();
+        startActivity(getIntent());
     }
 }

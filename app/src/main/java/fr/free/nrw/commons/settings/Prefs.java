@@ -10,6 +10,7 @@ public class Prefs {
     public static final String MANAGED_EXIF_TAGS = "managedExifTags";
     public static final String KEY_LANGUAGE_VALUE = "languageDescription";
     public static final String KEY_APP_LANGUAGE_VALUE = "languageApp";
+    public static boolean LANGUAGE_CHANGED = false;
 
     public static class Licenses {
         public static final String CC_BY_SA_3 = "CC BY-SA 3.0";

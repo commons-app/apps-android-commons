@@ -87,7 +87,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setAppLanguage(defaultKvStore.getString(Prefs.KEY_APP_LANGUAGE_VALUE));
-        defaultKvStore.getString(Prefs.KEY_APP_LANGUAGE_VALUE);
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
@@ -458,6 +457,12 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     protected void onResume() {
         super.onResume();
         setNotificationCount();
+
+        if (Prefs.LANGUAGE_CHANGED) {
+            Prefs.LANGUAGE_CHANGED = false;
+            finish();
+            startActivity(getIntent());
+        }
     }
 
     @Override
