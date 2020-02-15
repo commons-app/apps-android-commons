@@ -591,4 +591,7 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
   <string name="upload_nearby_place_found_description">Is this a photo of Place %1$s?</string>
+  <string name="achievements_activity">Achievements Activity</string>
+  <string name="no_show">Don\'t show again</string>
+  <string name="no_contributions_dialog">Show no contributions dialog</string>
 </resources>

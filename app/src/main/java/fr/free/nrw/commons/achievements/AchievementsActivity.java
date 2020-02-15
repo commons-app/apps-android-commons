@@ -4,9 +4,11 @@ import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -109,6 +111,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
     MenuItem item;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private SharedPreferences prefs;
 
     /**
      * This method helps in the creation Achievement screen and
@@ -315,7 +318,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
      * @param uploadCount
      */
     private void setUploadProgress(int uploadCount){
-        if (uploadCount==0){
+        prefs = this.getSharedPreferences(getString(R.string.achievements_activity), Context.MODE_PRIVATE);
+        if (uploadCount==0 && !prefs.getBoolean(getString(R.string.no_contributions_dialog), false)){
             setZeroAchievements();
         }else {
 
@@ -331,6 +335,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
         AlertDialog.Builder builder=new AlertDialog.Builder(this)
                 .setMessage(getString(R.string.no_achievements_yet))
                 .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
+                })
+                .setNegativeButton(getString(R.string.no_show), (dialog, which) -> {
+                    prefs = this.getSharedPreferences(getString(R.string.achievements_activity), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = prefs.edit();
+                    edit.putBoolean(getString(R.string.no_contributions_dialog), true);
+                    edit.apply();
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
