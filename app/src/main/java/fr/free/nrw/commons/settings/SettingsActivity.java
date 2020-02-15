@@ -68,8 +68,6 @@ public class SettingsActivity extends NavigationBaseActivity {
     }
 
     public void setAppLanguage(String languageCode) {
-        Prefs.LANGUAGE_CHANGED = true;
-
         if (languageCode == null) {
             return;
         }
@@ -82,5 +80,6 @@ public class SettingsActivity extends NavigationBaseActivity {
 
         finish();
         startActivity(getIntent());
+        finishAffinity();
     }
 }

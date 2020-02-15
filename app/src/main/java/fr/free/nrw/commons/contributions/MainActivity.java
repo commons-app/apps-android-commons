@@ -457,12 +457,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
     protected void onResume() {
         super.onResume();
         setNotificationCount();
-
-        if (Prefs.LANGUAGE_CHANGED) {
-            Prefs.LANGUAGE_CHANGED = false;
-            finish();
-            startActivity(getIntent());
-        }
     }
 
     @Override
