@@ -502,7 +502,7 @@
   <string name="review_thanks_yes_button_text">Evet neden olmasın</string>
   <string name="review_thanks_no_button_text">Sonraki resim</string>
   <string name="skip_image_explanation">Bu düğmeyi tıkladığınızda, yakın zamanda Wikimedia Commons’a yüklenen bir resim daha gönderilecektir.</string>
-  <string name="review_image_explanation">Görüntüleri inceleyebilir ve Wikimedia Commoms\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse, katılımcıya da teşekkür edebilirsiniz.</string>
+  <string name="review_image_explanation">Görüntüleri inceleyebilir ve Wikimedia Commons\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse, katılımcıya da teşekkür edebilirsiniz.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Paylaşılan içeriği alma. Resmin işlenmesi, resmin boyutuna ve cihazınıza bağlı olarak biraz zaman alabilir.</item>
     <item quantity="other">Paylaşılan içeriği alma. Resmin işlenmesi, resmin boyutuna ve cihazınıza bağlı olarak biraz zaman alabilir.</item>
