@@ -591,4 +591,6 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
   <string name="upload_nearby_place_found_description">Is this a photo of Place %1$s?</string>
+  <string name="remove_bookmark">Removed from bookmarks</string>
+  <string name="add_bookmark">Added to bookmarks</string>
 </resources>
