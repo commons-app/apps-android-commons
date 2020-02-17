@@ -106,8 +106,8 @@
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
   <string name="about_improve">Nyiss egy új &lt;a href=\"%1$s\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Adatvédelmi irányelvek&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Köszönetnyilvánítás&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Adatvédelmi irányelvek&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Köszönetnyilvánítás&lt;/u&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
   <string name="no_email_client">Nincs telepített levelezőprogram</string>
@@ -168,7 +168,7 @@
   <string name="welcome_copyright_subtext">Kerüld az internetről származó szerzői joggal védett anyagokat, valamint a posztereket, könyvborítókat stb.</string>
   <string name="welcome_final_text">Megértetted?</string>
   <string name="welcome_final_button_text">Igen!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;További információ&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;További információ&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategóriák</string>
   <string name="detail_panel_cats_loading">Betöltés…</string>
   <string name="detail_panel_cats_none">Nincs kijelölés</string>
@@ -270,7 +270,7 @@
   <string name="null_url">Hiba! URL nem található.</string>
   <string name="nominate_deletion">Törlésre jelölés</string>
   <string name="nominated_for_deletion">Ezt a képet törlésre jelölték.</string>
-  <string name="nominated_see_more">&lt;u&gt;Weboldal megtekintése további részletekért&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Weboldal megtekintése további részletekért&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">%1$s jelölése törlésre.</string>
   <string name="nominating_for_deletion_status">Fájl törlésre jelölése: %1$s</string>
   <string name="view_browser">Megtekintés böngészőben</string>
@@ -295,8 +295,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Értékelj minket&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;GYIK&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Értékelj minket&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;GYIK&lt;/u&gt;</string>
   <string name="welcome_skip_button">Útmutató átugrása</string>
   <string name="no_internet">Internet nem elérhető</string>
   <string name="internet_established">Internet elérhető</string>
@@ -304,7 +304,7 @@
   <string name="error_review">Hiba az kép ellenőrzésre történő betöltése során. Frissítés után próbáld újra!</string>
   <string name="error_review_categories">Hiba a kategóriák ellenőrzésre történő  betöltése során. Frissítés után próbáld újra!</string>
   <string name="no_notifications">Nincs értesítés</string>
-  <string name="about_translate">&lt;u&gt;Fordítás&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Fordítás&lt;/u&gt;</string>
   <string name="about_translate_title">Nyelvek</string>
   <string name="about_translate_message">Válaszd ki azt a nyelvet, amelyikre való fordítást akarsz beküldeni.</string>
   <string name="about_translate_proceed">Folytatás</string>

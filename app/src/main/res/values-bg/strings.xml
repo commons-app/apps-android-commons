@@ -190,7 +190,7 @@
   <string name="use_external_storage_summary">Съхраняване на направените картини в приложението с камерата на устройството Ви</string>
   <string name="nominate_deletion">Номиниране за изтриване</string>
   <string name="nominated_for_deletion">Изображението е предложено за изтриване.</string>
-  <string name="nominated_see_more">&lt;u&gt;По-подробно ще намерите на уеб страницата&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;По-подробно ще намерите на уеб страницата&lt;/u&gt;</string>
   <string name="skip_login">Пропускане</string>
   <string name="navigation_item_login">Влизане</string>
   <string name="skip_login_message">Ще трябва да влезете, за да качвате картини в бъдеще.</string>

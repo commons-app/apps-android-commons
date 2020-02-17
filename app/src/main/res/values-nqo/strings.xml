@@ -75,7 +75,7 @@
   <string name="title_activity_featured_images">ߟߊߓߊ߯ߙߊߟߌ ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
   <string name="title_activity_category_details">ߦߌߟߡߊ</string>
   <string name="menu_about">ߞߊ߬ ߓߍ߲߬</string>
-  <string name="about_privacy_policy">&lt;u&gt;ߜߎ߲߬ߘߎ߬ߢߐ߲߰ߦߊ ߞߎߙߎ߲߬ߘߎ&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;ߜߎ߲߬ߘߎ߬ߢߐ߲߰ߦߊ ߞߎߙߎ߲߬ߘߎ&lt;/u&gt;</string>
   <string name="title_activity_about">ߞߊ߬ ߓߍ߲߬</string>
   <string name="menu_feedback">ߞߙߐ߬ߛߌ߬ߕߊ ߗߋ߫ (ߢ:ߞߏ߲ߘߏ ߟߊ߫)</string>
   <string name="no_email_client">ߢߎߡߍߙߋ߲ߞߏ߲ߘߏ ߛߊ߲߬ߠߌ߲߬ߢߐ߲߰ ߡߊߞߍߣߍ߲߫ ߕߴߦߋ߲߬</string>
@@ -104,7 +104,7 @@
   <string name="tutorial_4_subtext_1">ߞߎ߲߬ߕߐ߮:ߛߌߘߑߣߋ߫ ߘߐ߬ߓߛߏ߬ߟߌ߬ ߟߎ</string>
   <string name="welcome_final_text">ߌ ߦߴߊ߬ ߖߌ߰ ߟߊ߫ ߞߴߌ ߓߘߴߊ߬ ߛߐ߬ߘߐ߲߬؟</string>
   <string name="welcome_final_button_text">ߐ߲߬ߐ߲߬ߐ߲߫߹</string>
-  <string name="welcome_help_button_text">&lt;u&gt;ߞߟߊ߬ߟߐ߲߬ߠߌ߲߬ ߜߘߍ߫ ߟߎ߫&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;ߞߟߊ߬ߟߐ߲߬ߠߌ߲߬ ߜߘߍ߫ ߟߎ߫&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">ߦߌߟߡߊ ߟߎ߬</string>
   <string name="detail_panel_cats_loading">ߟߊ߬ߢߎ߲߬ߠߌ߲ ߦߵߌ ߘߐ߫...</string>
   <string name="detail_panel_cats_none">ߊ߬ ߡߊ߫ ߓߊߕߐ߬ߡߐ߲߬</string>
@@ -188,11 +188,11 @@
   <string name="nearby_wikidata">ߥߞߌߘߕߊ</string>
   <string name="nearby_wikipedia">ߥߞߌߔߋߘߌߦߊ߫</string>
   <string name="nearby_commons">ߞߐߡߐ߲</string>
-  <string name="about_rate_us">&lt;u&gt;ߊ߲ ߡߐ߬ߟߐ߲ ߦߌ߬ߘߊ߬&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;ߢ.ߡ&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;ߊ߲ ߡߐ߬ߟߐ߲ ߦߌ߬ߘߊ߬&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;ߢ.ߡ&lt;/u&gt;</string>
   <string name="no_internet">ߓߟߐߟߐ߫ ߕߴߦߋ߲߬</string>
   <string name="internet_established">ߓߟߐߟߐ ߦߋ߫ ߦߋ߲߬</string>
-  <string name="about_translate">&lt;u&gt;ߘߟߊߡߌߘߊߟߌ&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;ߘߟߊߡߌߘߊߟߌ&lt;/u&gt;</string>
   <string name="about_translate_title">ߞߊ߲ ߠߎ߬</string>
   <string name="about_translate_message">ߞߊ߲ ߘߏ߫ ߓߊߕߐ߬ߡߐ߲߬ ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߘߟߊߡߌ߬ߘߊ߬ ߡߍ߲ ߘߐ߫.</string>
   <string name="about_translate_cancel">ߊ߬ ߘߐߛߊ߬</string>

@@ -92,8 +92,8 @@
   <string name="menu_about">პროგრამაშ გეშა</string>
   <string name="about_license">ღილე კოდიშ მოღვენი აპლიკაცია, იფაჩუ ლიცენზიათ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. ვიკიოწკარუე დო თიში ლოგო ფონდი ვიკიმედიაშ ოვაჭარე შანეფი რე დო ფონდი ვიკიმედიაშ ოჸიათ გიმირინუაფუ. ჩქი ფონდ ვიკიმედიაწკჷმა მერსხილი ვავორეთ.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყუ&lt;/a&gt; და &lt;a href=\"https://commons-app.gოthub.io/\"&gt;ვებ-ხასჷლა&lt;/a&gt; GitHub-ის. ჩილათაშ ოგინაფალო ვარ-და ზიტყვასქვილშო გაჭყით ახალი &lt;a href=\"%1$s\"&gt;მოთხირი GitHub-ის&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;კონფიდენციალურობაშ პოლიტიკა&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;მარდეფი&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;კონფიდენციალურობაშ პოლიტიკა&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;მარდეფი&lt;/a&gt;</string>
   <string name="title_activity_about">პრგრამაშ გეშა</string>
   <string name="menu_feedback">წჷმიხონარეფიშ ჯღონუა (ელ.ფოსტათ)</string>
   <string name="no_email_client">ელ-ფოსტაშ კლიენტი ვა რე გერინაფილი</string>
@@ -154,7 +154,7 @@
   <string name="welcome_copyright_subtext">მუკიჩილითეთ ოავტორე ნებეფით თხილერი მასალეფიშ ეხარგუას, ნამუეფით თქვა გორით ინტერნეტის, თაშნეშე პლაკატეფიშ, წინგეფიშ გალეგადვალუეფიშ დო თ.უ.</string>
   <string name="welcome_final_text">თქვა ფირქენთო, ნამჷ-და თენა ქიგეგითჷნ?</string>
   <string name="welcome_final_button_text">ქოǃ</string>
-  <string name="welcome_help_button_text">&lt;u&gt;უმოსი ინფორმაცია&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;უმოსი ინფორმაცია&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">კატეგორიეფი</string>
   <string name="detail_panel_cats_loading">იხარგუ...</string>
   <string name="detail_panel_cats_none">მუთუნ ვა რე გიშაგორილი</string>
@@ -249,7 +249,7 @@
   <string name="null_url">ჩილათა! URL ვეგორუ</string>
   <string name="nominate_deletion">ლასუაშ ნომინანტი</string>
   <string name="nominated_for_deletion">თე სურათი ოლასარო რე წჷმორინაფილი</string>
-  <string name="nominated_see_more">&lt;u&gt;დეტალეფშო ვებ-ხასჷლაშ ძირაფა&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;დეტალეფშო ვებ-ხასჷლაშ ძირაფა&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">%1$s ოლასარო რე მიკოწონებული.</string>
   <string name="nominating_for_deletion_status">ოლასარო მიკოწონებული ფაილი: %1$s</string>
   <string name="view_browser">ბრაუზერს გონწყუმა</string>
@@ -261,13 +261,13 @@
   <string name="nearby_wikidata">ვიკიმუნაჩემეფი</string>
   <string name="nearby_wikipedia">ვიკიპედია</string>
   <string name="nearby_commons">ვიკიოწკარუე</string>
-  <string name="about_rate_us">&lt;u&gt;ქეშმაფასით&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;შხკ&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;ქეშმაფასით&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;შხკ&lt;/u&gt;</string>
   <string name="welcome_skip_button">ოხემანჯღვერეშ გიშატება</string>
   <string name="no_internet">ინტერნეტი ვა რე</string>
   <string name="internet_established">ინტერნეტი რე</string>
   <string name="no_notifications">გინაფეფქ ვეგორუ</string>
-  <string name="about_translate">&lt;u&gt;თანგუა&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;თანგუა&lt;/u&gt;</string>
   <string name="about_translate_title">ნინეფი</string>
   <string name="about_translate_proceed">გაგჷნძორება</string>
   <string name="about_translate_cancel">გოუქვაფა</string>

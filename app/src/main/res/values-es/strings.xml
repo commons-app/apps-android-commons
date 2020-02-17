@@ -120,8 +120,8 @@
   <string name="menu_about">Acerca de</string>
   <string name="about_license">La aplicación de código abierto Wikimedia Commons fue creada por, y recibe mantenimiento de, cesionarios y voluntarios de la comunidad de Wikimedia. La Fundación Wikimedia no está involucrada en la creación, el desarrollo ni el mantenimiento de la aplicación.</string>
   <string name="about_improve">Notifica de problemas y sugerencias en &lt;a href=\"%1$s\"&gt;GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Política de privacidad&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Política de privacidad&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Créditos&lt;/u&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo)</string>
   <string name="no_email_client">No se ha instalado ningún cliente de correo</string>
@@ -182,7 +182,7 @@
   <string name="welcome_copyright_subtext">Evita materiales con derechos de autor\nque hayas encontrado en Internet, así como\nimágenes de carteles, portadas de libro, etc.</string>
   <string name="welcome_final_text">¿Crees que ya lo tienes?</string>
   <string name="welcome_final_button_text">¡Sí!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Mas información&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Mas información&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">No hay nada seleccionado</string>
@@ -284,7 +284,7 @@
   <string name="null_url">Error: no se encontró el URL</string>
   <string name="nominate_deletion">Nominar para borrado</string>
   <string name="nominated_for_deletion">Se ha nominado esta imagen para su borrado.</string>
-  <string name="nominated_see_more">&lt;u&gt;Ver página web para detalles&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Ver página web para detalles&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">Nominando %1$d para borrado.</string>
   <string name="nominating_for_deletion_status">Nominando archivo para borrado: %1$s</string>
   <string name="view_browser">Ver en el navegador</string>
@@ -309,8 +309,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Valorarnos&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Preguntas frecuentes&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Valorarnos&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;Preguntas frecuentes&lt;/u&gt;</string>
   <string name="welcome_skip_button">Omitir tutorial</string>
   <string name="no_internet">Internet no disponible</string>
   <string name="internet_established">Internet disponible</string>
@@ -318,7 +318,7 @@
   <string name="error_review">Hubo un error al recuperar la imágen a revisar. Toca refrescar para intentarlo de nuevo.</string>
   <string name="error_review_categories">Ocurrió un error al obtener las categorías de imágenes a revisar. Presiona refrescar para intentar de nuevo.</string>
   <string name="no_notifications">No se encontró ninguna notificación</string>
-  <string name="about_translate">&lt;u&gt;Traducir&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Traducir&lt;/u&gt;</string>
   <string name="about_translate_title">Idiomas</string>
   <string name="about_translate_message">Selecciona el idioma en que quieres enviar traducciones</string>
   <string name="about_translate_proceed">Proceder</string>

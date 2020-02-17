@@ -14,6 +14,7 @@
 * Movses
 * Nitch
 * Okras
+* Pacha Tchernof
 * Patriccck
 * Redredsonia
 * Rubin16
@@ -115,8 +116,8 @@
   <string name="menu_about">О приложении</string>
   <string name="about_license">Приложение «Викисклад» - это программа с открытым кодом, которую создали волонтёры и участники грантов Викимедиа. Фонд Викимедиа не участвует в создании, разработке или обслуживании этого приложения.</string>
   <string name="about_improve">Вы можете создать &lt;a href=\"%1$s\"&gt;запрос на GitHub&lt;/a&gt;, чтобы сообщить об ошибке или внести предложение.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Политика конфиденциальности&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Благодарности&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Политика конфиденциальности&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Благодарности&lt;/u&gt;</string>
   <string name="title_activity_about">О приложении</string>
   <string name="menu_feedback">Отправить отзыв (по эл. почте)</string>
   <string name="no_email_client">Почтовый клиент не установлен</string>
@@ -177,7 +178,7 @@
   <string name="welcome_copyright_subtext">Избегайте материалов, защищённых авторским правом, например, найденных в Интернете, изображений плакатов, книжных обложек и т.п.</string>
   <string name="welcome_final_text">Вам это понятно?</string>
   <string name="welcome_final_button_text">Да!</string>
-  <string name="welcome_help_button_text"/>
+  <string name="welcome_help_button_text" fuzzy="true"/>
   <string name="detail_panel_cats_label">Категории</string>
   <string name="detail_panel_cats_loading">Загрузка…</string>
   <string name="detail_panel_cats_none">Ничего не выбрано</string>
@@ -279,7 +280,7 @@
   <string name="null_url">Ошибка! Ссылка не найдена</string>
   <string name="nominate_deletion">Номинировать к удалению</string>
   <string name="nominated_for_deletion">Этот файл был вынесен на удаление.</string>
-  <string name="nominated_see_more"/>
+  <string name="nominated_see_more" fuzzy="true"/>
   <string name="nominating_file_for_deletion">Номинирование %1$s к удалению.</string>
   <string name="nominating_for_deletion_status">Номинирование файла к удалению: %1$s</string>
   <string name="view_browser">Просмотреть в браузере</string>
@@ -304,8 +305,8 @@
   <string name="nearby_wikidata">Викиданные</string>
   <string name="nearby_wikipedia">Википедия</string>
   <string name="nearby_commons">Викисклад</string>
-  <string name="about_rate_us">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Часто задаваемые вопросы&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;Часто задаваемые вопросы&lt;/u&gt;</string>
   <string name="welcome_skip_button">Пропустить руководство</string>
   <string name="no_internet">Интернет недоступен</string>
   <string name="internet_established">Интернет доступен</string>
@@ -313,7 +314,7 @@
   <string name="error_review">Ошибка при получении изображения на проверку. Пожалуйста, нажмите \"Обновить\", чтобы попробовать снова.</string>
   <string name="error_review_categories">Ошибка при получении категорий изображения для проверки. Пожалуйста нажмите \"Обновить\", чтобы попробовать снова.</string>
   <string name="no_notifications">Уведомлений нет</string>
-  <string name="about_translate">&lt;u&gt;Перевести&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Перевести&lt;/u&gt;</string>
   <string name="about_translate_title">Языки</string>
   <string name="about_translate_message">Выберите язык локализации, на который сможете перевести элементы интерфейса приложения</string>
   <string name="about_translate_proceed">Перейти к переводу</string>
@@ -575,4 +576,5 @@
   <string name="place_type">Тип места:</string>
   <string name="nearby_search_hint">Мост, музей, гостиница и т. д.</string>
   <string name="you_must_reset_your_passsword">Что-то пошло не так со входом, вы должны сбросить пароль!</string>
+  <string name="upload_nearby_place_found_title">Место поблизости найдено</string>
 </resources>

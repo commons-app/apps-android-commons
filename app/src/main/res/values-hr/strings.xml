@@ -92,8 +92,8 @@
   <string name="menu_about">O</string>
   <string name="about_license">Aplikacija The Wikimedia Commons je aplikacija otvorenog kôda koju razvijaju i održavaju volonteri Wikimedijine zajednice. Zaklada Wikimedija nije uključena u stvaranje, razvoj ili održavanje ove aplikacije.</string>
   <string name="about_improve">Da biste prijavili poteškoću ili dali prijedlog, stvorite &lt;a href=\"%1$s\"&gt;novi zahtjev na GitHubu&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Politika privatnosti&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Zasluge&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Politika privatnosti&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Zasluge&lt;/u&gt;</string>
   <string name="title_activity_about">O</string>
   <string name="menu_feedback">Pošaljite povratnu informaciju (putem elektroničke pošte)</string>
   <string name="no_email_client">Klijent za elektroničku poštu nije instaliran</string>
@@ -245,14 +245,14 @@
   <string name="nearby_wikidata">Wikipodatci</string>
   <string name="nearby_wikipedia">Wikipedija</string>
   <string name="nearby_commons">Zajednički poslužitelj</string>
-  <string name="about_rate_us">&lt;u&gt;Ocijenite nas&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;ČPP&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Ocijenite nas&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;ČPP&lt;/u&gt;</string>
   <string name="welcome_skip_button">Preskoči upute</string>
   <string name="no_internet">Internet nije dostupan</string>
   <string name="internet_established">Internet je dostupan</string>
   <string name="error_notifications">Pogrješka dohvaćanja obavijesti</string>
   <string name="no_notifications">Nema obavijesti</string>
-  <string name="about_translate">&lt;u&gt;Prevedi&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Prevedi&lt;/u&gt;</string>
   <string name="about_translate_title">Jezici</string>
   <string name="about_translate_message">Odaberite jezik na koji bi željeli prevoditi</string>
   <string name="about_translate_proceed">Nastavi</string>

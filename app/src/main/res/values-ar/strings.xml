@@ -106,8 +106,8 @@
   <string name="menu_about">حول</string>
   <string name="about_license">تطبيق ويكيميديا ​​كومنز تطبيق مفتوح المصدر تم إنشاؤه وصيانته من قبل المستفيدين والمتطوعين من مجتمع ويكيميديا، لا تشارك مؤسسة ويكيميديا ​​في إنشاء التطبيق أو تطويره أو صيانته.</string>
   <string name="about_improve">أنشئ &lt;a href=\"%1$s\"&gt;مشكلة غيت هب&lt;/a&gt; جديدة لتقارير الأخطاء والاقتراحات.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Pسياسة الخصوصية&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;الإحالات&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Pسياسة الخصوصية&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;الإحالات&lt;/u&gt;</string>
   <string name="title_activity_about">حول</string>
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
   <string name="no_email_client">عميل البريد الإلكتروني غير مثبت</string>
@@ -168,7 +168,7 @@
   <string name="welcome_copyright_subtext">تجنب المواد محفوظة الحقوق الموجودة على الإنترنت وصور الملصقات وأغلفة الكتب، إلخ.</string>
   <string name="welcome_final_text">هل تظن أنك فهمت؟</string>
   <string name="welcome_final_button_text">نعم!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;المزيد من المعلومات&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;المزيد من المعلومات&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">تصنيفات</string>
   <string name="detail_panel_cats_loading">جارٍ التحميل…</string>
   <string name="detail_panel_cats_none">لا شيء محدد</string>
@@ -270,7 +270,7 @@
   <string name="null_url">خطأ! المسار غير موجود</string>
   <string name="nominate_deletion">ترشيح للحذف</string>
   <string name="nominated_for_deletion">الصورة تم ترشيحها للحذف.</string>
-  <string name="nominated_see_more">&lt;u&gt;انظر صفحة الويب للتفاصيل&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;انظر صفحة الويب للتفاصيل&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">جارٍ ترشيح %1$s للحذف.</string>
   <string name="nominating_for_deletion_status">جارٍ ترشيح الملف للحذف: %1$s</string>
   <string name="view_browser">عرض في المتصفح</string>
@@ -295,8 +295,8 @@
   <string name="nearby_wikidata">ويكي بيانات</string>
   <string name="nearby_wikipedia">ويكيبيديا</string>
   <string name="nearby_commons">كومنز</string>
-  <string name="about_rate_us">&lt;u&gt;قيِّمنا&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;الأسئلة المتكررة&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;قيِّمنا&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;الأسئلة المتكررة&lt;/u&gt;</string>
   <string name="welcome_skip_button">تخطي البرنامج التعليمي</string>
   <string name="no_internet">الإنترنت غير متوفر</string>
   <string name="internet_established">الإنترنت متاح</string>
@@ -304,7 +304,7 @@
   <string name="error_review">خطأ في جلب الصورة للمراجعة، اضغط على تحديث للمحاولة مرة أخرى.</string>
   <string name="error_review_categories">خطأ في جلب تصنيات الصورة للمراجعة، اضغط على تحديث للمحاولة مرة أخرى.</string>
   <string name="no_notifications">لم يتم العثور على إشعارات</string>
-  <string name="about_translate">&lt;u&gt;ترجمة&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;ترجمة&lt;/u&gt;</string>
   <string name="about_translate_title">اللغات</string>
   <string name="about_translate_message">اختر اللغة التي ترغب في تقديم ترجمات لها</string>
   <string name="about_translate_proceed">تقدم</string>
