@@ -509,7 +509,7 @@
   <string name="review_thanks_yes_button_text">Sí, por qué no</string>
   <string name="review_thanks_no_button_text">Imagen siguiente</string>
   <string name="skip_image_explanation">Haciendo clic a este botón obtendrá otra imagen de Wikimedia Commons subida recientemente</string>
-  <string name="review_image_explanation">Puedes revisar imágenes y mejorar la calidad de Wikimedia Commoms.\nLos cuatro parámetros de revisión son: \n - Ésta imagen está relacionada a algún campo o categoría? \n - La imagen cumple las reglas de copyright? \n - La imagen está correctamente categorizada? \n - Si todo está correcto, también puedes dar las gracias al colaborador.</string>
+  <string name="review_image_explanation">Puedes revisar imágenes y mejorar la calidad de Wikimedia Commons.\nLos cuatro parámetros de revisión son: \n - Ésta imagen está relacionada a algún campo o categoría? \n - La imagen cumple las reglas de copyright? \n - La imagen está correctamente categorizada? \n - Si todo está correcto, también puedes dar las gracias al colaborador.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recepción de contenido compartido. El procesamiento de la imagen puede tardar cierto tiempo, dependiendo del tamaño de la imagen y de tu dispositivo</item>
     <item quantity="other">Recepción de contenido compartido. El procesamiento de las imágenes puede tardar cierto tiempo, dependiendo del tamaño de las imágenes y de tu dispositivo</item>

@@ -485,7 +485,7 @@
   <string name="review_thanks_yes_button_text">Sí, por qué non</string>
   <string name="review_thanks_no_button_text">Imaxe siguiente</string>
   <string name="skip_image_explanation">Faciendo clic nesti botón recibirás otra imaxe de Wikimedia Commons xubida apocayá</string>
-  <string name="review_image_explanation">Puedes revisar imaxes y ameyorar la calidá de Wikimedia Commoms.\nLos cuatro parámetros de revisión son: \n - ¿Ésta imaxe tien rellación col contestu? \n - ¿La imaxe cumple les riegles de copyright? \n - ¿La imaxe ta correchamente categorizada? \n - Si too ta correuto, tamién puedes dar les gracies al collaborador.</string>
+  <string name="review_image_explanation">Puedes revisar imaxes y ameyorar la calidá de Wikimedia Commons.\nLos cuatro parámetros de revisión son: \n - ¿Ésta imaxe tien rellación col contestu? \n - ¿La imaxe cumple les riegles de copyright? \n - ¿La imaxe ta correchamente categorizada? \n - Si too ta correuto, tamién puedes dar les gracies al collaborador.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recibiendo\'l conteníu compartíu. El procesamientu de la imaxe puede tardar ciertu tiempu, dependiendo del tamañu de la imaxe y del to preséu</item>
     <item quantity="other">Recibiendo\'l conteníu compartíu. El procesamientu de les imaxes puede tardar ciertu tiempu, dependiendo del tamañu de les imaxes y del to preséu</item>
