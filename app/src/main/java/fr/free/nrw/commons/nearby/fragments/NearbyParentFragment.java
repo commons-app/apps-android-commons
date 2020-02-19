@@ -983,6 +983,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void addCurrentLocationMarker(fr.free.nrw.commons.location.LatLng curLatLng) {
         if (null != curLatLng) {
+            //TODO: Ask user to enable location by showing a dialog box or show a location off toast
             ExecutorUtils.get().submit(() -> {
                 mapView.post(() -> removeCurrentLocationMarker());
                 Timber.d("Adds current location marker");
@@ -1321,6 +1322,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     /**
      * Same bottom sheet carries information for all nearby places, so we need to pass information
+     * (title, description, distance and links) to view on nearby marker click
      * (title, description, distance and links) to view on nearby marker click
      * @param place Place of clicked nearby marker
      */
