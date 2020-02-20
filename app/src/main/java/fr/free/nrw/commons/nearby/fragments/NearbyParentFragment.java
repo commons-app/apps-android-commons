@@ -956,6 +956,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void setFABRecenterAction(View.OnClickListener onClickListener) {
+//        fabRecenter.setOnClickListener(view -> {
+//            Toast.makeText(getContext(), "YOLO", Toast.LENGTH_LONG).show();
+//        });
         fabRecenter.setOnClickListener(onClickListener);
     }
 
@@ -983,7 +986,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void addCurrentLocationMarker(fr.free.nrw.commons.location.LatLng curLatLng) {
         if (null != curLatLng) {
-            //TODO: Ask user to enable location by showing a dialog box or show a location off toast
             ExecutorUtils.get().submit(() -> {
                 mapView.post(() -> removeCurrentLocationMarker());
                 Timber.d("Adds current location marker");
@@ -1232,6 +1234,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
+        //TODO: Check if locaton ie on/off. If off ask user to turn it on by toast or a dialog box
+        Timber.d("In ReCenter map");
+        Toast.makeText(getContext(), "YOLO", Toast.LENGTH_LONG).show();
         if (curLatLng == null) {
             return;
         }
