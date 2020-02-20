@@ -100,7 +100,7 @@
   <string name="menu_about">Quant a</string>
   <string name="about_license">L’aplicació de codi obert Wikimedia Commons fou creada per, i rep manteniment de, cessionaris i voluntaris de la comunitat de Wikimedia. La Fundació Wikimedia no està involucrada en la creació, el desenvolupament ni el manteniment de l’aplicació.</string>
   <string name="about_improve">Crea una &lt;a href=\"%1$s\"&gt;incidència de GitHub&lt;/a&gt; nova per a informes d\'error i suggeriments.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Política de privadesa&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Política de privadesa</string>
   <string name="about_credits" fuzzy="true">&lt;u&gt;Crèdits&lt;/u&gt;</string>
   <string name="title_activity_about">Quant a</string>
   <string name="menu_feedback">Envia comentaris (per correu)</string>
@@ -280,7 +280,7 @@
   <string name="nearby_wikipedia">Viquipèdia</string>
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us" fuzzy="true">&lt;u&gt;Valoreu-nos&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;PMF&lt;/u&gt;</string>
+  <string name="about_faq">Preguntes freqüents</string>
   <string name="welcome_skip_button">Omet la guia</string>
   <string name="no_internet">Internet no disponible</string>
   <string name="internet_established">Internet disponible</string>

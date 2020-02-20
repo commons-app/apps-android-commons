@@ -113,8 +113,8 @@
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun hibeleri ve gönüllüleri tarafından oluşturulan ve sürdürülen açık kaynaklı bir uygulamadır. Wikimedia Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımı ile ilgili değildir.</string>
   <string name="about_improve">Hata raporları ve önerileri için yeni bir &lt;a href=\"%1$s\"&gt;GitHub sorunu&lt;/a&gt; oluşturun.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Gizlilik politikası&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Katkılar&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Gizlilik politikası</string>
+  <string name="about_credits">Katkıda bulunanlar</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
   <string name="no_email_client">Yüklü bir e-posta istemcisi yok</string>
@@ -175,7 +175,7 @@
   <string name="welcome_copyright_subtext">İnternetten bulduğunuz telif hakkıyla korunan malzemelerin yanı sıra poster, kitap kapağı vb. kullanımında kaçının.</string>
   <string name="welcome_final_text">Bunu anladınız mı?</string>
   <string name="welcome_final_button_text">Evet!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Daha Fazla Bilgi&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Daha Fazla Bilgi</string>
   <string name="detail_panel_cats_label">Kategoriler</string>
   <string name="detail_panel_cats_loading">Yükleniyor...</string>
   <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
@@ -277,7 +277,7 @@
   <string name="null_url">Hata! URL bulunamadı</string>
   <string name="nominate_deletion">Silme Adayı</string>
   <string name="nominated_for_deletion">Bu görüntü silinmek üzere aday gösterildi.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Web sayfasının detaylarını gör&lt;/u&gt;</string>
+  <string name="nominated_see_more">Web sayfasının detaylarını gör</string>
   <string name="nominating_file_for_deletion">%1$s, silme için aday gösteriliyor.</string>
   <string name="nominating_for_deletion_status">Silme işlemi için aday gösterilen dosya: %1$s</string>
   <string name="view_browser">Tarayıcıda Görüntüle</string>
@@ -289,7 +289,7 @@
   <string name="copy_wikicode">Vikimetini panoya kopyala</string>
   <string name="wikicode_copied">Vikimetin panoya kopyalandı</string>
   <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
-  <string name="nearby_location_not_available" fuzzy="true">Konum kullanılamıyor.</string>
+  <string name="nearby_location_not_available">Etrafında düzgün çalışmayabilir, Konum kullanılamıyor.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
   <string name="get_directions">Yol tarifi al</string>
   <string name="read_article">Makaleyi oku</string>
@@ -302,8 +302,8 @@
   <string name="nearby_wikidata">Vikiveri</string>
   <string name="nearby_wikipedia">Vikipedi</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Bizi oyla&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;SSS&lt;/u&gt;</string>
+  <string name="about_rate_us">Bizi oyla</string>
+  <string name="about_faq">SSS</string>
   <string name="welcome_skip_button">Eğiticiyi Atla</string>
   <string name="no_internet">İnternet kullanılamıyor</string>
   <string name="internet_established">İnternet kullanılabilir</string>
@@ -311,7 +311,7 @@
   <string name="error_review">İncelenmek üzere resim getirilirken hata oluştu. Tekrar denemek için yenile düğmesine basın.</string>
   <string name="error_review_categories">İncelenmek üzere resim kategorileri getirilirken hata oluştu. Tekrar denemek için yenile düğmesine basın.</string>
   <string name="no_notifications">Bildirim bulunamadı</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Çevir&lt;/u&gt;</string>
+  <string name="about_translate">Çevir</string>
   <string name="about_translate_title">Diller</string>
   <string name="about_translate_message">Çeviri göndermek istediğiniz dili seçin</string>
   <string name="about_translate_proceed">İlerle</string>

@@ -6,6 +6,7 @@
 * पर्वत सुबेदी
 * राम प्रसाद जोशी
 * सरोज कुमार ढकाल
+* हिमाल सुबेदी
 -->
 <resources>
   <string name="title_activity_explore">अन्वेषण</string>
@@ -81,8 +82,8 @@
   <string name="menu_about">बारेमा</string>
   <string name="about_license">विकिमिडिया कमन्स अनुप्रयाेग एक स्वतन्त्र स्रोत अनुप्रयाेग हो। यो अनुप्रयाेग विकिमिडिया समुदायका अनुदानप्राप्तकर्ताहरू र स्वयंसेवकहरूद्वारा निर्मित एवम् प्रबन्धित छ। विकिमिडिया फाउण्डेसन यस अनुप्रयाेगकाे निर्माण, विकास र प्रबन्धनमा कुनै पनि प्रकारले संलग्न छैन।</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;गिटहब&lt;/a&gt; मा स्रोत। &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;बगजिल्ला&lt;/a&gt; मा बग छ।</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;गोपनीयता नीति&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;श्रेयहरू&lt;/u&gt;</string>
+  <string name="about_privacy_policy">गोपनीयता नीति</string>
+  <string name="about_credits">श्रेयहरू</string>
   <string name="title_activity_about">बारेमा</string>
   <string name="menu_feedback">सुझाव पठाउने (विडाँक मार्फत)</string>
   <string name="no_email_client">कुनै पनि विडाँक पाठक स्थापना गरिएको छैन</string>
@@ -136,7 +137,7 @@
   <string name="welcome_final_button_text">हो!</string>
   <string name="welcome_help_button_text">थप जानकारी</string>
   <string name="detail_panel_cats_label">श्रेणीहरू</string>
-  <string name="detail_panel_cats_loading">लोड हुदैछ…</string>
+  <string name="detail_panel_cats_loading">खुल्दै छ…</string>
   <string name="detail_panel_cats_none">केहि पनि छानिएन</string>
   <string name="detail_description_empty">वर्णन छैन</string>
   <string name="detail_discussion_empty">छलफल छैन</string>
@@ -195,6 +196,8 @@
   <string name="no_description_found">कुनैपनि विवरण भेटिएन</string>
   <string name="nearby_info_menu_wikidata_article">विकिडाटा सामग्री</string>
   <string name="nearby_info_menu_wikipedia_article">विकिपिडियाकाे लेख</string>
+  <string name="login_to_your_account">आफ्नो खातामा प्रवेश गर्नुहोस्</string>
+  <string name="view_browser">ब्राउजरमा हेर्नुहाेस्</string>
   <string name="skip_login">छोड्नुहोस्</string>
   <string name="navigation_item_login">प्रवेश</string>
   <string name="get_directions">दिशानिर्देशन प्राप्त गर्नुहोस्</string>
@@ -207,11 +210,12 @@
   <string name="nearby_wikidata">विकिडाटा</string>
   <string name="nearby_wikipedia">विकिपिडिया</string>
   <string name="nearby_commons">कमन्स</string>
-  <string name="about_rate_us">&lt;u&gt;मूल्याङ्कन गर्नुहाेस्&lt;/u&gt;</string>
+  <string name="about_rate_us">मूल्याङ्कन गर्नुहाेस्</string>
+  <string name="about_faq">प्राय सोधिएका प्रश्नहरू</string>
   <string name="no_internet">इन्टरनेट उपलब्ध छैन</string>
   <string name="internet_established">इन्टरनेट उपलब्ध छ</string>
   <string name="no_notifications">कुनै सूचनाहरू फेला परेन</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;अनुवाद&lt;/u&gt;</string>
+  <string name="about_translate">अनुवाद</string>
   <string name="about_translate_title">भाषाहरू</string>
   <string name="about_translate_message">तपाइले अनुवाद पेश गर्न चाहानु भएको भाषा चयन गर्नुहोस्</string>
   <string name="about_translate_proceed">अगाडि बढ्नुहोस्</string>
@@ -234,6 +238,8 @@
   <string name="wallpaper_set_successfully">भित्तेपत्र सफलतापूर्वक चयन भयो!</string>
   <string name="question">प्रश्न</string>
   <string name="result">नतिजा</string>
+  <string name="continue_message">निरन्तरता दिनुहोस्</string>
+  <string name="wrong">गलत उत्तर</string>
   <string name="delete">मेटाउनुहाेस्</string>
   <string name="Achievements">उपलब्धिहरू</string>
   <string name="statistics">तथ्याङ्कहरू</string>

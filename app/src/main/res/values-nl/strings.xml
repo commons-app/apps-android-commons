@@ -105,7 +105,7 @@
   <string name="menu_about">Over</string>
   <string name="about_license" fuzzy="true">Opensourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons en haar logo zijn handelsmerken van de Wikimedia Foundation en worden gebruikt met toestemming van de Wikimedia Foundation. We worden niet bekrachtigd door en zijn niet verbonden met de Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"%1$s\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Privacybeleid&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Privacybeleid</string>
   <string name="title_activity_about">Over</string>
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
   <string name="no_email_client">Geen e-mail-client geïnstalleerd</string>
@@ -154,7 +154,7 @@
   <string name="welcome_copyright_subtext">Vermijd auteursrechtelijk beschermd materiaal dat u op internet hebt gevonden zoals  afbeeldingen van posters, boeken, enzovoort.</string>
   <string name="welcome_final_text">Begrijpt u het?</string>
   <string name="welcome_final_button_text">Ja!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Meer informatie&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Meer informatie</string>
   <string name="detail_panel_cats_label">Categorieën</string>
   <string name="detail_panel_cats_loading">Laden...</string>
   <string name="detail_panel_cats_none">Geen selectie</string>
@@ -224,7 +224,7 @@
   <string name="null_url">Fout! URL niet gevonden</string>
   <string name="nominate_deletion">Nomineer voor Verwijdering</string>
   <string name="nominated_for_deletion">Deze afbeelding is genomineerd voor verwijdering.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Zie webpagina voor details&lt;/u&gt;</string>
+  <string name="nominated_see_more">Zie webpagina voor details</string>
   <string name="view_browser">Bekijk in Browser</string>
   <string name="skip_login">Overslaan</string>
   <string name="navigation_item_login">Aanmelden</string>
@@ -244,14 +244,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Waardeer ons&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;Vraag en antwoord&lt;/u&gt;</string>
+  <string name="about_rate_us">Waardeer ons</string>
+  <string name="about_faq">Vraag en antwoord</string>
   <string name="welcome_skip_button">Zelfstudie overslaan</string>
   <string name="no_internet">Geen internet</string>
   <string name="internet_established">Internet beschikbaar</string>
   <string name="error_notifications">Fout bij ophalen berichten.</string>
   <string name="no_notifications">Geen berichten.</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Vertalen&lt;/u&gt;</string>
+  <string name="about_translate">Vertalen</string>
   <string name="about_translate_title">Talen</string>
   <string name="about_translate_message">Selecteer de taal waarvoor u vertalingen wil indienen</string>
   <string name="about_translate_proceed">Ga door</string>

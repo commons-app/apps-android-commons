@@ -104,8 +104,8 @@
   <string name="menu_about">정보</string>
   <string name="about_license">위키미디어 공용 앱은 오픈 소스 애플리케이션이며 위키미디어 공동체 내의 자원봉사자에 의해 유지됩니다. 위키미디어 재단은 애플리케이션의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
   <string name="about_improve">버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;개인정보 정책&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;제작진&lt;/u&gt;</string>
+  <string name="about_privacy_policy">개인정보 정책</string>
+  <string name="about_credits">제작진</string>
   <string name="title_activity_about">정보</string>
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>
   <string name="no_email_client">설치된 이메일 클라이언트가 없습니다</string>
@@ -166,7 +166,7 @@
   <string name="welcome_copyright_subtext">포스터, 책 표지 등의 그림 뿐만 아니라 인터넷에서 찾은 저작권이 있는 자료를 피하세요.</string>
   <string name="welcome_final_text">이해하셨습니까?</string>
   <string name="welcome_final_button_text">예!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;더 많은 정보&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">더 많은 정보</string>
   <string name="detail_panel_cats_label">분류</string>
   <string name="detail_panel_cats_loading">불러오는 중…</string>
   <string name="detail_panel_cats_none">선택하지 않음</string>
@@ -265,7 +265,7 @@
   <string name="null_url">오류! URL을 찾을 수 없습니다</string>
   <string name="nominate_deletion">삭제 신청</string>
   <string name="nominated_for_deletion">이 그림은 삭제가 신청되었습니다.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;상세 내용은 웹페이지를 참고하십시오&lt;/u&gt;</string>
+  <string name="nominated_see_more">상세 내용은 웹페이지를 참고하십시오</string>
   <string name="view_browser">브라우저에서 보기</string>
   <string name="skip_login">건너뛰기</string>
   <string name="navigation_item_login">로그인</string>
@@ -288,14 +288,14 @@
   <string name="nearby_wikidata">위키데이터</string>
   <string name="nearby_wikipedia">위키백과</string>
   <string name="nearby_commons">공용</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;평가&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">평가</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">강좌 건너뛰기</string>
   <string name="no_internet">인터넷 사용 불가</string>
   <string name="internet_established">인터넷 사용 가능</string>
   <string name="error_notifications">알림 가져오기 오류</string>
   <string name="no_notifications">알림이 없습니다</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;번역&lt;/u&gt;</string>
+  <string name="about_translate">번역</string>
   <string name="about_translate_title">언어</string>
   <string name="about_translate_message">번역 제출을 위한 언어를 선택하십시오</string>
   <string name="about_translate_proceed">진행</string>
@@ -446,6 +446,7 @@
   <string name="review_thanks_yes_button_text">예</string>
   <string name="review_thanks_no_button_text">다음 이미지</string>
   <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
+  <string name="review_image_explanation">이미지를 검토하고 위키미디어 공용의 품질을 개선할 수 있습니다.\n 4가지 검토 변수가 있습니다:\n - 이 이미지가 범위 내에 있는가? \n - 이 이미지가 저작권 규정을 준수하고 있는가? \n - 이 이미지가 올바르게 분류되어 있는가? \n - 모든 것이 문제 없다면 기여자에게 감사를 표할 수도 있습니다.</string>
   <string name="no_notification">읽지 않은 알림이 없습니다</string>
   <string name="no_archived_notification">보관된 알림이 없습니다</string>
   <string name="menu_option_archived">보관한 항목 보기</string>

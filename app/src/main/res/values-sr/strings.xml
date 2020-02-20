@@ -103,7 +103,7 @@
   <string name="menu_about">О апликацији</string>
   <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.\n\nАпликација за Викимедијину оставу је апликација отвореног кода која је направљена и која се одржава помоћу грантова и волонтера Викимедијине заједнице. Задужбина Викимедија није укључена у стварање, развој или одржавање апликације.</string>
   <string name="about_improve">Направите нови &lt;a href=\"%1$s\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Политика приватности&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Политика приватности</string>
   <string name="about_credits" fuzzy="true">&lt;u&gt;Заслуге&lt;/u&gt;</string>
   <string name="title_activity_about">О апликацији</string>
   <string name="menu_feedback">Пошаљите повратне информације (путем е-поште)</string>
@@ -301,7 +301,7 @@
   <string name="error_review">Грешка при преузимању слике за преглед. Притисните освежи да бисте покушали поново.</string>
   <string name="error_review_categories">Грешка при преузимању категорија слика за преглед. Притисните освежи да би сте покушали поново.</string>
   <string name="no_notifications">Обавештења нису пронађена</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Превођење&lt;/u&gt;</string>
+  <string name="about_translate">Превођење</string>
   <string name="about_translate_title">Језици</string>
   <string name="about_translate_message">Одаберите језик за који бисте желели да правите преводе</string>
   <string name="about_translate_proceed">Настави</string>

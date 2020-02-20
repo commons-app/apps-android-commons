@@ -107,7 +107,7 @@
   <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
   <string name="about_improve">Einen neuen &lt;a href=\"%1$s\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Datenschutzrichtlinie&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Danksagungen&lt;/u&gt;</string>
+  <string name="about_credits">Urheberschaft</string>
   <string name="title_activity_about">Über</string>
   <string name="menu_feedback">Rückmeldung per E-Mail senden</string>
   <string name="no_email_client">Es ist kein E-Mail-Client installiert</string>
@@ -294,8 +294,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Bewerte uns&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;Häufig gestellte Fragen&lt;/u&gt;</string>
+  <string name="about_rate_us">Bewerte uns</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">Tutorial überspringen</string>
   <string name="no_internet">Internet nicht verfügbar</string>
   <string name="internet_established">Internet verfügbar</string>
@@ -303,7 +303,7 @@
   <string name="error_review">Fehler beim Abruf des Bildes zur Überprüfung. Bitte aktualisieren, um es erneut zu versuchen.</string>
   <string name="error_review_categories">Fehler beim Abruf der Bildkategorien zur Überprüfung. Bitte aktualisieren, um es erneut zu versuchen.</string>
   <string name="no_notifications">Keine Benachrichtigungen gefunden</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Übersetzen&lt;/u&gt;</string>
+  <string name="about_translate">Übersetzen</string>
   <string name="about_translate_title">Sprachen</string>
   <string name="about_translate_message">Wähle die Sprache aus, für die du Übersetzungen durchführen möchtest.</string>
   <string name="about_translate_proceed">Fortfahren</string>
