@@ -3,6 +3,7 @@ package fr.free.nrw.commons.media;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -97,10 +98,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private int initialListTop = 0;
 
-    @BindView(R.id.mediaDetailImage)
-    SimpleDraweeView image;
-    @BindView(R.id.mediaDetailSpacer)
-    MediaDetailSpacer spacer;
+    @BindView(R.id.mediaDetailImageView)
+    SimpleDraweeView image2;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
     @BindView(R.id.mediaDetailDesc)
@@ -197,34 +196,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         // Progressively darken the image in the background when we scroll detail pane up
         scrollListener = this::updateTheDarkness;
         view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
-
-        // Layout layoutListener to size the spacer item relative to the available space.
-        // There may be a .... better way to do this.
-        layoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
-            private int currentHeight = -1;
-
-            @Override
-            public void onGlobalLayout() {
-                int viewHeight = view.getHeight();
-                //int textHeight = title.getLineHeight();
-                int paddingDp = 112;
-                float paddingPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddingDp, getResources().getDisplayMetrics());
-                int newHeight = viewHeight - Math.round(paddingPx);
-
-                if (newHeight != currentHeight) {
-                    currentHeight = newHeight;
-                    ViewGroup.LayoutParams params = spacer.getLayoutParams();
-                    params.height = newHeight;
-                    spacer.setLayoutParams(params);
-
-                    scrollView.scrollTo(0, initialListTop);
-                }
-            }
-        };
-        view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);
         locale = getResources().getConfiguration().locale;
-
         return view;
+    }
+
+    @OnClick(R.id.mediaDetailImageView)
+    public void launchZoomActivity(View view) {
+        Context ctx = view.getContext();
+        ctx.startActivity(
+                new Intent(ctx,ZoomableActivity.class).setData(Uri.parse(media.getImageUrl()))
+        );
     }
 
     @Override
@@ -264,9 +245,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
                 .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
-                .setOldController(image.getController())
+                .setOldController(image2.getController())
                 .build();
-        image.setController(controller);
+        image2.setController(controller);
     }
 
     @Override
@@ -499,7 +480,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (scrollPercentage > transparencyMax) {
             scrollPercentage = transparencyMax;
         }
-        image.setAlpha(1.0f - scrollPercentage);
+        image2.setAlpha(1.0f - scrollPercentage);
     }
 
     private String prettyDescription(Media media) {
