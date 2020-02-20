@@ -99,7 +99,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private int initialListTop = 0;
 
     @BindView(R.id.mediaDetailImageView)
-    SimpleDraweeView image2;
+    SimpleDraweeView image;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
     @BindView(R.id.mediaDetailDesc)
@@ -245,9 +245,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
                 .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
-                .setOldController(image2.getController())
+                .setOldController(image.getController())
                 .build();
-        image2.setController(controller);
+        image.setController(controller);
     }
 
     @Override
@@ -480,7 +480,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if (scrollPercentage > transparencyMax) {
             scrollPercentage = transparencyMax;
         }
-        image2.setAlpha(1.0f - scrollPercentage);
+        image.setAlpha(1.0f - scrollPercentage);
     }
 
     private String prettyDescription(Media media) {
