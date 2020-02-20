@@ -101,7 +101,8 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
                     public void onNewResultImpl(@Nullable Bitmap bitmap) {
                         if (dataSource.isFinished() && bitmap != null) {
                             Timber.d("Bitmap loaded from url %s", item.getImageUrl());
-                            imageView.setImageBitmap(Bitmap.createBitmap(bitmap));
+                            //imageView.setImageBitmap(Bitmap.createBitmap(bitmap));
+                            imageView.post(() -> imageView.setImageBitmap(Bitmap.createBitmap(bitmap)));
                             dataSource.close();
                         }
                     }

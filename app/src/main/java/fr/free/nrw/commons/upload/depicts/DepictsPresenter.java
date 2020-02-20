@@ -116,7 +116,7 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                                 //Understand this is shitty, but yes, doing it the other way is even worse and adapter positions can not be trusted
                                 for (int position = 0; position < depictedItemList.size();
                                         position++) {
-                                    depictedItemList.get(position).setPosition(position);
+                                    //depictedItemList.get(position).setPosition(position);
                                 }
                                 view.setDepictsList(depictedItemList);
                             }
