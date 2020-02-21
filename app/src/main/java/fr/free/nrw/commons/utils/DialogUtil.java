@@ -53,19 +53,6 @@ public class DialogUtil {
     public static void showAlertDialog(Activity activity,
                                        String title,
                                        String message,
-                                       final Runnable onPositiveBtnClick) {
-        showAlertDialog(activity,
-                title,
-                message,
-                activity.getString(R.string.no),
-                activity.getString(R.string.yes),
-                onPositiveBtnClick,
-                onNegativeBtnClick);
-    }
-
-    public static void showAlertDialog(Activity activity,
-                                       String title,
-                                       String message,
                                        String positiveButtonText,
                                        String negativeButtonText,
                                        final Runnable onPositiveBtnClick,
@@ -170,6 +157,7 @@ public class DialogUtil {
      * @param positiveButtonClick
      * @param cancellable
      */
+    //TODO: Refactor the arguments of this method to distribute them vertically instead of horizontally
     public static void showAlertDialog(Activity activity, String title, String message, String positiveButtonText, final Runnable positiveButtonClick, boolean cancellable) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title);
@@ -182,6 +170,35 @@ public class DialogUtil {
                 positiveButtonClick.run();
             }
         });
+
+        AlertDialog dialog = builder.create();
+        showSafely(activity, dialog);
+    }
+    //TODO: Add a template for a dialog box that only has one active button and other button does nothing except close the dialog box
+    public static void showAlertDialog(Activity activity,
+                                       String title,
+                                       String message,
+                                       String positiveButtonText,
+                                       String negativeButtonText,
+                                       final Runnable onPositiveBtnClick) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(title);
+        builder.setMessage(message);
+
+        if (!StringUtils.isBlank(positiveButtonText)) {
+            builder.setPositiveButton(positiveButtonText, (dialogInterface, i) -> {
+                dialogInterface.dismiss();
+                if (onPositiveBtnClick != null) {
+                    onPositiveBtnClick.run();
+                }
+            });
+        }
+
+        if (!StringUtils.isBlank(negativeButtonText)) {
+            builder.setNegativeButton(negativeButtonText, (DialogInterface dialogInterface, int i) -> {
+                dialogInterface.dismiss();
+            });
+        }
 
         AlertDialog dialog = builder.create();
         showSafely(activity, dialog);

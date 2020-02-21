@@ -1237,7 +1237,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         try {
             if (locationManager.getLastLocation() == null) {
                 //DialogUtil locationDialog = new DialogUtil();
-                DialogUtil.showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly", this::turnLocationOn, this::cancel);
+                DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
+                        "Yes", "No",  this::turnLocationOn);
                 //Toast.makeText(getContext(), R.string.nearby_location_not_available, Toast.LENGTH_LONG).show();
             }
         } catch(Exception exc) {
@@ -1277,11 +1278,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void turnLocationOn()  {
 
     }
-
-    private void cancel() {
-
-    }
-
 
     @Override
     public void hideBottomSheet() {
