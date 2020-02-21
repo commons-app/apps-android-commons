@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -100,6 +101,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             nav_Menu.findItem(R.id.action_settings).setVisible(true);
             nav_Menu.findItem(R.id.action_logout).setVisible(false);
             nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
+            nav_Menu.findItem(R.id.action_review).setVisible(false);
         }else {
             userIcon.setVisibility(View.VISIBLE);
             nav_Menu.findItem(R.id.action_login).setVisible(false);
@@ -107,6 +109,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
             nav_Menu.findItem(R.id.action_settings).setVisible(true);
             nav_Menu.findItem(R.id.action_logout).setVisible(true);
             nav_Menu.findItem(R.id.action_bookmarks).setVisible(true);
+            nav_Menu.findItem(R.id.action_review).setVisible(true);
         }
     }
 
@@ -134,7 +137,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
         if (allAccounts.length != 0) {
             username.setText(allAccounts[0].name);
         }
-        ImageView userIcon = navHeaderView.findViewById(R.id.user_icon);
+        LinearLayout userIcon = navHeaderView.findViewById(R.id.user_details);
         userIcon.setOnClickListener(v -> {
             drawerLayout.closeDrawer(navigationView);
             AchievementsActivity.startYourself(NavigationBaseActivity.this);

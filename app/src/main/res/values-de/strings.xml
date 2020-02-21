@@ -3,6 +3,7 @@
 * Abijeet Patro
 * Envlh
 * FF11
+* Ferdinand0101
 * Inkowik
 * Kghbln
 * Killarnee
@@ -105,8 +106,8 @@
   <string name="menu_about">Über</string>
   <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
   <string name="about_improve">Einen neuen &lt;a href=\"%1$s\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Datenschutzrichtlinie&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Danksagungen&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Datenschutzrichtlinie&lt;/u&gt;</string>
+  <string name="about_credits">Urheberschaft</string>
   <string name="title_activity_about">Über</string>
   <string name="menu_feedback">Rückmeldung per E-Mail senden</string>
   <string name="no_email_client">Es ist kein E-Mail-Client installiert</string>
@@ -167,7 +168,7 @@
   <string name="welcome_copyright_subtext">Vermeide urheberrechtlich geschütztes Material, das du im Internet gefunden hast wie Bilder von Postern, Buchcovern etc.</string>
   <string name="welcome_final_text">Verstanden?</string>
   <string name="welcome_final_button_text">Ja!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Weitere Informationen&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Weitere Informationen&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
@@ -268,7 +269,7 @@
   <string name="null_url">Fehler! URL nicht gefunden</string>
   <string name="nominate_deletion">Zur Löschung vorschlagen</string>
   <string name="nominated_for_deletion">Dieses Bild wurde zur Löschung vorgeschlagen.</string>
-  <string name="nominated_see_more">&lt;u&gt;Siehe die Webseite für Einzelheiten&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Siehe die Webseite für Einzelheiten&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">%1$s zur Löschung vorschlagen.</string>
   <string name="nominating_for_deletion_status">Datei zur Löschung vorschlagen: %1$s</string>
   <string name="view_browser">Im Browser ansehen</string>
@@ -293,8 +294,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Bewerte uns&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Häufig gestellte Fragen&lt;/u&gt;</string>
+  <string name="about_rate_us">Bewerte uns</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">Tutorial überspringen</string>
   <string name="no_internet">Internet nicht verfügbar</string>
   <string name="internet_established">Internet verfügbar</string>
@@ -302,7 +303,7 @@
   <string name="error_review">Fehler beim Abruf des Bildes zur Überprüfung. Bitte aktualisieren, um es erneut zu versuchen.</string>
   <string name="error_review_categories">Fehler beim Abruf der Bildkategorien zur Überprüfung. Bitte aktualisieren, um es erneut zu versuchen.</string>
   <string name="no_notifications">Keine Benachrichtigungen gefunden</string>
-  <string name="about_translate">&lt;u&gt;Übersetzen&lt;/u&gt;</string>
+  <string name="about_translate">Übersetzen</string>
   <string name="about_translate_title">Sprachen</string>
   <string name="about_translate_message">Wähle die Sprache aus, für die du Übersetzungen durchführen möchtest.</string>
   <string name="about_translate_proceed">Fortfahren</string>
@@ -522,7 +523,7 @@
   <string name="exif_tag_name_copyright">Urheberrecht</string>
   <string name="exif_tag_name_location">Standort</string>
   <string name="exif_tag_name_serialNumbers">Seriennummer</string>
-  <string name="share_text" fuzzy="true">Lade Fotos von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App herunter: %1$s</string>
+  <string name="share_text">Lade Fotos direkt von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App jetzt herunter: %1$s</string>
   <string name="share_via">App teilen über …</string>
   <string name="image_info">Bildinformationen</string>
   <string name="no_categories_found">Keine Kategorien gefunden</string>

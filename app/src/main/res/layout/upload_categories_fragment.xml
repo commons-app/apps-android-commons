@@ -4,7 +4,7 @@
   android:id="@+id/rl_container_categories"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:padding="16dp"
+  android:padding="@dimen/standard_gap"
   >
   <LinearLayout
     android:layout_width="match_parent"
@@ -15,7 +15,7 @@
       android:id="@+id/tv_title"
       android:textStyle="bold"
       android:layout_width="wrap_content"
-      android:layout_height="24dp"
+      android:layout_height="@dimen/half_standard_height"
       android:layout_marginEnd="@dimen/standard_gap"
       android:layout_marginRight="@dimen/standard_gap"
       android:gravity="center_vertical"
@@ -25,7 +25,7 @@
     <TextView
       android:id="@+id/tv_subtitle"
       android:layout_width="wrap_content"
-      android:layout_height="24dp"
+      android:layout_height="@dimen/half_standard_height"
       android:layout_marginTop="@dimen/tiny_gap"
       android:gravity="center_vertical"
       android:text="@string/upload_flow_all_images_in_set"
@@ -80,7 +80,7 @@
   <View
     android:id="@+id/button_divider"
     android:layout_width="match_parent"
-    android:layout_height="1dp"
+    android:layout_height="@dimen/tiny_height"
     android:layout_above="@+id/ll_container_buttons"
     android:background="@color/divider_grey"/>
 
@@ -89,7 +89,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:padding="16dp"
+    android:padding="@dimen/standard_gap"
     android:orientation="horizontal"
     >
     <androidx.appcompat.widget.AppCompatButton

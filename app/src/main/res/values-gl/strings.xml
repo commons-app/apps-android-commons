@@ -103,8 +103,8 @@
   <string name="menu_about">Acerca de</string>
   <string name="about_license">A aplicación Wikimedia Commons é unha aplicación de código aberto creada e mantida polos cesionarios e voluntarios da comunidade de Wikimedia. A Fundación Wikimedia non está involucrada na creación, desenvolvemento ou mantemento da aplicación.</string>
   <string name="about_improve">Crear unha nova &lt;a href=\"%1$s\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Política de privacidade&lt;/u&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Política de privacidade&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
   <string name="no_email_client">Non hai instalado ningún cliente de correo</string>
@@ -165,7 +165,7 @@
   <string name="welcome_copyright_subtext">Evite os materiais protexidos por dereitos de autoría que se atopen na internet, así como imaxes de pósters, portadas de libros etc.</string>
   <string name="welcome_final_text">Entende como vai?</string>
   <string name="welcome_final_button_text">Si!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Máis Información&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Máis Información&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Ningunha seleccionada</string>
@@ -267,7 +267,7 @@
   <string name="null_url">Errorǃ Nos se atopou a URL</string>
   <string name="nominate_deletion">Nomear para borrado</string>
   <string name="nominated_for_deletion">Esta imaxe foi nomeada para borrar.</string>
-  <string name="nominated_see_more">&lt;u&gt;Consulte a páxina web para ter máis para detalles&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Consulte a páxina web para ter máis para detalles&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">Nomeando %1$d para borrado.</string>
   <string name="nominating_for_deletion_status">Nomeando ficheiro para borradoː %1$s</string>
   <string name="view_browser">Ver en navegador</string>
@@ -292,8 +292,8 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us">&lt;u&gt;Avalíenos&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Avalíenos&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">Saltar titorial</string>
   <string name="no_internet">Internet non dispoñible</string>
   <string name="internet_established">Internet dispoñible</string>
@@ -301,7 +301,7 @@
   <string name="error_review">Houbo un erro ó recuperar a imaxe a revisar. Prema en refrescar para tentalo de novo.</string>
   <string name="error_review_categories">Houbo un erro ó obter as categorías de imaxes a revisar. Prema en refrescar para tentalo de novo.</string>
   <string name="no_notifications">Non se atopou ningunha notificación</string>
-  <string name="about_translate">&lt;u&gt;Traducir&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Traducir&lt;/u&gt;</string>
   <string name="about_translate_title">Linguas</string>
   <string name="about_translate_message">Seleccione a lingua para a que quere enviar as traducións</string>
   <string name="about_translate_proceed">Proceder</string>

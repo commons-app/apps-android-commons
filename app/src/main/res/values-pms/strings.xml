@@ -95,8 +95,8 @@
   <string name="menu_about">A propòsit</string>
   <string name="about_license">L\'aplicassion Wikimedia Commons a l\'é n\'aplicassion a sorgiss duverta creà e mantnùa da \'d përson-e pagà e da \'d volontari ëd la comunità Wikimedia. La Fondassion Wikimedia a l\'é nen amplicà ant la creassion, ël dësvlup, o la manutension dl\'aplicassion.</string>
   <string name="about_improve">Creé na neuva &lt;a href=\"%1$s\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Régole ëd confidensialità&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Aringrassiament&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Régole ëd confidensialità&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Aringrassiament&lt;/u&gt;</string>
   <string name="title_activity_about">A propòsit</string>
   <string name="menu_feedback">Mandé dij coment (për pòsta eletrònica)</string>
   <string name="no_email_client">Gnun clien ëd pòsta eletrònica anstalà</string>
@@ -157,7 +157,7 @@
   <string name="welcome_copyright_subtext">Ch\'a évita ij materiaj coatà da drit d\'autor ch\'a peul trové an sl\'Aragnà parèj coma le plance ëd tilèt, le cuvertin-e dij lìber e via fòrt.</string>
   <string name="welcome_final_text">Second chiel, a va bin?</string>
   <string name="welcome_final_button_text">É!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Pi d\'anformassion&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Pi d\'anformassion&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorìe</string>
   <string name="detail_panel_cats_loading">Cariament…</string>
   <string name="detail_panel_cats_none">Gnun-a selession</string>
@@ -259,7 +259,7 @@
   <string name="null_url">Eror! Liura nen trovà</string>
   <string name="nominate_deletion">Propon-e për la scancelassion</string>
   <string name="nominated_for_deletion">Sa plancia a l\'é stàita nominà për ël dëscancelament.</string>
-  <string name="nominated_see_more">&lt;u&gt;Vëdde la pàgina an sl\'aragnà për ij detaj&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Vëdde la pàgina an sl\'aragnà për ij detaj&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">Nominé %1$s për la dëscancelassion.</string>
   <string name="nominating_for_deletion_status">Nominé n\'archivi për la dëscancelassion: %1$s</string>
   <string name="view_browser">Smon-e ant ël navigador</string>
@@ -284,8 +284,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Ch\'an vàluta&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Chestion frequente&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Ch\'an vàluta&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;Chestion frequente&lt;/u&gt;</string>
   <string name="welcome_skip_button">Sauté lë spiegon</string>
   <string name="no_internet">Aragnà nen disponìbil</string>
   <string name="internet_established">Aragnà disponìbil</string>
@@ -293,7 +293,7 @@
   <string name="error_review">Eror durant l\'acess a la plancia për la revision. Sgnaché su rinfrësché për prové torna.</string>
   <string name="error_review_categories">Eror durant l\'acess a le categorìe ëd plance për la revision. Sgnaché su rinfrësché për prové torna.</string>
   <string name="no_notifications">Gnun-e notìfiche trovà</string>
-  <string name="about_translate">&lt;u&gt;Volté&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Volté&lt;/u&gt;</string>
   <string name="about_translate_title">Lenghe</string>
   <string name="about_translate_message">Selessioné la lenga për la qual a veul mandé dle tradussion</string>
   <string name="about_translate_proceed">Andé anans</string>

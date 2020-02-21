@@ -3,6 +3,7 @@
 * Abijeet Patro
 * Cyclicus
 * Derugon
+* Eneelk
 * Fitoschido
 * Friday83260
 * Gomoko
@@ -118,8 +119,8 @@
   <string name="menu_about">À propos</string>
   <string name="about_license">L’application Wikimedia Commons est une application open source créée et tenue à jour par des délégués et bénévoles de la communauté Wikimedia. La Fondation Wikimedia n’est pas associée à la création, le développement ou l’entretien de l’application.</string>
   <string name="about_improve">Créer un nouveau &lt;a href=\"%1$s\"&gt;rapport sur GitHub&lt;/a&gt; pour signaler des anomalies ou des suggestions.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Règles de confidentialité&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Crédits&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Règles de confidentialité</string>
+  <string name="about_credits">Crédits</string>
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
   <string name="no_email_client">Aucun client de courriel installé</string>
@@ -180,7 +181,7 @@
   <string name="welcome_copyright_subtext">Évitez les œuvres protégées que vous pouvez trouver sur l’Internet ainsi que les images d’affiches, couvertures de livres, etc.</string>
   <string name="welcome_final_text">Vous pensez que c’est bon ?</string>
   <string name="welcome_final_button_text">Oui !</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Davantage d’informations&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Davantage d’informations</string>
   <string name="detail_panel_cats_label">Catégories</string>
   <string name="detail_panel_cats_loading">Chargement...</string>
   <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
@@ -282,7 +283,7 @@
   <string name="null_url">Erreur ! URL non trouvée</string>
   <string name="nominate_deletion">Proposer pour suppression</string>
   <string name="nominated_for_deletion">Cette image a été citée pour suppression.</string>
-  <string name="nominated_see_more">&lt;u&gt;Voir la page web pour les détails&lt;/u&gt;</string>
+  <string name="nominated_see_more">Voir la page web pour les détails</string>
   <string name="nominating_file_for_deletion">Candidater %1$s pour la suppression.</string>
   <string name="nominating_for_deletion_status">Candidate un fichier pour la suppression : %1$s</string>
   <string name="view_browser">Afficher dans le navigateur</string>
@@ -294,7 +295,7 @@
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
   <string name="nearby_location_has_not_changed">L’emplacement n’a pas changé.</string>
-  <string name="nearby_location_not_available" fuzzy="true">Emplacement non disponible.</string>
+  <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux à proximité</string>
   <string name="get_directions">Obtenir les directions</string>
   <string name="read_article">Lire l’article</string>
@@ -307,8 +308,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Évaluez-nous&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">Évaluez-nous</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">Sauter le tutoriel</string>
   <string name="no_internet">Internet indisponible</string>
   <string name="internet_established">Internet disponible</string>
@@ -316,7 +317,7 @@
   <string name="error_review">Erreur durant l’accès à l’image pour relecture. Cliquer sur rafraîchir pour recommencer.</string>
   <string name="error_review_categories">Erreur lors de la récupération des catégories d’image pour relecture. Veuillez rafraîchir pour réessayer.</string>
   <string name="no_notifications">Aucune notification trouvée</string>
-  <string name="about_translate">&lt;u&gt;Traduire&lt;/u&gt;</string>
+  <string name="about_translate">Traduire</string>
   <string name="about_translate_title">Langues</string>
   <string name="about_translate_message">Sélectionner la langue pour laquelle vous voulez soumettre des traductions</string>
   <string name="about_translate_proceed">Continuer</string>

@@ -49,7 +49,7 @@
   <string name="upload_progress_notification_title_in_progress">מתבצעת העלאת %1$s</string>
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
-  <string name="upload_failed_notification_subtitle">נא ללחוץ כדי להציג</string>
+  <string name="upload_failed_notification_subtitle">לחץ כדי להציג</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">מועלה קובץ אחד</item>
     <item quantity="other">מועלים %1$d קבצים</item>
@@ -110,8 +110,8 @@
   <string name="menu_about">אודות</string>
   <string name="about_license">יישום ויקישיתוף (Wikimedia Commons app) הוא יישום קוד פתוח שמפותח ומתוחזק על־ידי מקבלי מלגות ומתנדבים של קהילת ויקימדיה. קרן ויקימדיה אינה מעורבת ביצירה, פיתוח, או תחזוקה של היישום.</string>
   <string name="about_improve">נא ליצור &lt;a href=\"%1$s\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
-  <string name="about_privacy_policy">&lt;u&gt;מדיניות פרטיות&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;יוצרים&lt;/u&gt;</string>
+  <string name="about_privacy_policy">מדיניות פרטיות</string>
+  <string name="about_credits">יוצרים</string>
   <string name="title_activity_about">אודות</string>
   <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>
   <string name="no_email_client">לא מותקן לקוח דואר אלקטרוני</string>
@@ -172,7 +172,7 @@
   <string name="welcome_copyright_subtext">נא להימנע מחומרים מוגבלים בזכויות יוצרים שמצאתם באינטרנט וכן מתמונות של כרזות, עטיפות ספרים, וכו\'.</string>
   <string name="welcome_final_text">נראה לך שקלטת?</string>
   <string name="welcome_final_button_text">כן!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;מידע נוסף&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">מידע נוסף</string>
   <string name="detail_panel_cats_label">קטגוריות</string>
   <string name="detail_panel_cats_loading">בטעינה...</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
@@ -274,7 +274,7 @@
   <string name="null_url">שגיאה! כתובת ה־URL לא נמצאה</string>
   <string name="nominate_deletion">העמדה למחיקה</string>
   <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה.</string>
-  <string name="nominated_see_more">&lt;u&gt;ר\' את האתר לפרטים&lt;/u&gt;</string>
+  <string name="nominated_see_more">ר\' את האתר לפרטים</string>
   <string name="nominating_file_for_deletion">מעמיד את %1$s למחיקה.</string>
   <string name="nominating_for_deletion_status">העמדת קובץ למחיקה: %1$s</string>
   <string name="view_browser">הצגה בדפדפן</string>
@@ -299,8 +299,8 @@
   <string name="nearby_wikidata">ויקינתונים</string>
   <string name="nearby_wikipedia">ויקיפדיה</string>
   <string name="nearby_commons">ויקישיתוף</string>
-  <string name="about_rate_us">&lt;u&gt;תנו לנו ציון&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;שאלות נפוצות&lt;/u&gt;</string>
+  <string name="about_rate_us">דרגו אותנו</string>
+  <string name="about_faq">שאלות נפוצות</string>
   <string name="welcome_skip_button">לדלג על ההדרכה</string>
   <string name="no_internet">האינטרנט אינו זמין</string>
   <string name="internet_established">האינטרנט זמין</string>

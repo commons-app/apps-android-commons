@@ -3,6 +3,7 @@
 * Abijeet Patro
 * Alluk.
 * Crt
+* FinlandMan
 * Kyykaarme
 * Nike
 * Olli
@@ -105,8 +106,8 @@
   <string name="menu_about">Tietoja</string>
   <string name="about_license">Wikimedia Commons -sovellus on vapaan lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ole sitoutunut sovelluksen luomiseen, kehittämiseen tai ylläpitoon.</string>
   <string name="about_improve">Luo uusi &lt;a href=\"%1$s\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Yksityisyydensuoja&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Tekijät&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Yksityisyydensuoja&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Tekijät&lt;/u&gt;</string>
   <string name="title_activity_about">Tietoja</string>
   <string name="menu_feedback">Lähetä palautetta (sähköpostitse)</string>
   <string name="no_email_client">Sähköpostiohjelmaa ei ole asennettu</string>
@@ -167,7 +168,7 @@
   <string name="welcome_copyright_subtext">Vältä tekijänoikeuksien alaista materiaalia, kuten julisteita, kirjan kansia ja useimpia Internetistä löydettyjä kuvia.</string>
   <string name="welcome_final_text">Luuletko ymmärtäneesi tämän?</string>
   <string name="welcome_final_button_text">Kyllä!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Lisätietoa&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Lisätietoa&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Luokat</string>
   <string name="detail_panel_cats_loading">Ladataan…</string>
   <string name="detail_panel_cats_none">Ei yhtään valittu</string>
@@ -274,7 +275,7 @@
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
   <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>
   <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
-  <string name="nearby_location_not_available" fuzzy="true">Sijainti ei käytettävissä.</string>
+  <string name="nearby_location_not_available">Nearby ei välttämättä toimi, sillä sijainti ei käytettävissä.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
   <string name="get_directions">Hanki ohjeet</string>
   <string name="read_article">Lue artikkeli</string>
@@ -287,14 +288,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Arvostele meidät&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;UKK&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Arvostele meidät&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;UKK&lt;/u&gt;</string>
   <string name="welcome_skip_button">Ohita opetus</string>
   <string name="no_internet">Internet ei saatavissa</string>
   <string name="internet_established">Internet saatavana</string>
   <string name="error_notifications">Virhe ilmoitusten haussa</string>
   <string name="no_notifications">Ilmoituksia ei löytynyt</string>
-  <string name="about_translate">&lt;u&gt;Käännä&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Käännä&lt;/u&gt;</string>
   <string name="about_translate_title">Kielet</string>
   <string name="about_translate_message">Valitse kieli, joksi haluaisit kääntää</string>
   <string name="about_translate_proceed">Jatka</string>

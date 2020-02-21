@@ -105,8 +105,8 @@
   <string name="menu_about">このアプリについて</string>
   <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアが製作・管理しているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
   <string name="about_improve">バグとアイディアは &lt;a href=\"%1$s\"&gt;Github&lt;/a&gt; へ。</string>
-  <string name="about_privacy_policy">&lt;u&gt;プライバシー・ポリシー&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;クレジット&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;プライバシー・ポリシー&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;クレジット&lt;/u&gt;</string>
   <string name="title_activity_about">このアプリについて</string>
   <string name="menu_feedback">フィードバックをメールで送信</string>
   <string name="no_email_client">メールアプリケーションが見つかりません</string>
@@ -167,7 +167,7 @@
   <string name="welcome_copyright_subtext">インターネットで見つけた画像、ポスター、書籍の表紙など著作権のある素材は避けてください。</string>
   <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>
-  <string name="welcome_help_button_text">&lt;u&gt;詳細情報&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;詳細情報&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">カテゴリ</string>
   <string name="detail_panel_cats_loading">読み込み中…</string>
   <string name="detail_panel_cats_none">ファイルを選択していません</string>
@@ -269,7 +269,7 @@
   <string name="null_url">エラーが発生しました。URL が見つかりません</string>
   <string name="nominate_deletion">削除の提案</string>
   <string name="nominated_for_deletion">この画像の削除が提案されています。</string>
-  <string name="nominated_see_more">&lt;u&gt;詳しいことはウェブサイトをご参照ください&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;詳しいことはウェブサイトをご参照ください&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">%1$s 件を削除候補に指定しようとしています。</string>
   <string name="nominating_for_deletion_status">削除候補に指定中：%1$s</string>
   <string name="view_browser">ブラウザーで表示</string>
@@ -294,8 +294,8 @@
   <string name="nearby_wikidata">ウィキデータ</string>
   <string name="nearby_wikipedia">ウィキペディア</string>
   <string name="nearby_commons">コモンズ</string>
-  <string name="about_rate_us">&lt;u&gt;評価する&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;よくある質問&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;評価する&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;よくある質問&lt;/u&gt;</string>
   <string name="welcome_skip_button">チュートリアルをスキップする</string>
   <string name="no_internet">インターネットに接続していません</string>
   <string name="internet_established">インターネットに接続しました</string>
@@ -303,7 +303,7 @@
   <string name="error_review">査読用の画像の選出ができませんでした。ボタンをもう一度押してください。</string>
   <string name="error_review_categories">カテゴリ査読用の画像の選出ができませんでした。もう一度ボタンを押してください。</string>
   <string name="no_notifications">通知はありません</string>
-  <string name="about_translate">&lt;u&gt;翻訳&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;翻訳&lt;/u&gt;</string>
   <string name="about_translate_title">言語</string>
   <string name="about_translate_message">どの言語に編集するか選択</string>
   <string name="about_translate_proceed">次へ</string>

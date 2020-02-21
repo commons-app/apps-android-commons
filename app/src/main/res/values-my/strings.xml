@@ -76,7 +76,7 @@
   <string name="title_activity_featured_images">အထူးဓာတ်ပုံများ</string>
   <string name="title_activity_category_details">ကဏ္ဍ</string>
   <string name="menu_about">အကြောင်း</string>
-  <string name="about_privacy_policy">&lt;u&gt;တကိုယ်ရည် မူဝါဒ&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;တကိုယ်ရည် မူဝါဒ&lt;/u&gt;</string>
   <string name="title_activity_about">အကြောင်း</string>
   <string name="menu_feedback">အကြံဉာဏ် ပို့ရန် (အီးမေးလ်မှ)</string>
   <string name="provider_categories">မကြာခင်က သုံးခဲ့သော ကဏ္ဍများ</string>
@@ -126,7 +126,7 @@
   <string name="welcome_copyright_subtext">ပိုစတာရုပ်ပုံ၊ စာအုပ်မျက်နှာဖုံးကဲ့သို့သော အင်တာနက်ပေါ်ရှိ သင်တွေ့ရှိမိသမျှ မူပိုင်ပစ္စည်းများကို ရှောင်ကြဉ်ပါ။</string>
   <string name="welcome_final_text">သင် သဘောပေါက်သည်ဟု ထင်ပါသလား</string>
   <string name="welcome_final_button_text">ဟုတ်ကဲ့</string>
-  <string name="welcome_help_button_text">&lt;u&gt;သတင်းအချက်အလက် ပို၍&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;သတင်းအချက်အလက် ပို၍&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">ကဏ္ဍများ</string>
   <string name="detail_panel_cats_loading">ဝန်ဆွဲတင်နေသည်...</string>
   <string name="detail_panel_cats_none">ဘာမှရွေးချယ်မထားပါ</string>
@@ -204,7 +204,7 @@
   <string name="null_url">အမှား! URL မတွေ့ရှိပါ</string>
   <string name="nominate_deletion">ဖျက်ပစ်ရန် အဆိုပြုပါ</string>
   <string name="nominated_for_deletion">ဤရုပ်ပုံအား ဖျက်ပစ်ရန် အဆိုပြုခံထားရသည်။</string>
-  <string name="nominated_see_more">&lt;u&gt;အသေးစိတ်အတွက် ဝဘ်စာမျက်ကိုကြည့်ပါ&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;အသေးစိတ်အတွက် ဝဘ်စာမျက်ကိုကြည့်ပါ&lt;/u&gt;</string>
   <string name="view_browser">ဘရောက်ဆာတွင် ကြည့်ရန်</string>
   <string name="skip_login">ကျော်ရန်</string>
   <string name="navigation_item_login">အကောင့်ဝင်ရန်</string>
@@ -224,12 +224,12 @@
   <string name="nearby_wikidata">ဝီကီဒေတာ</string>
   <string name="nearby_wikipedia">ဝီကီပီးဒီးယား</string>
   <string name="nearby_commons">ကွန်မွန်းစ်</string>
-  <string name="about_faq">&lt;u&gt;မေးလေ့ရှိသည့် မေးခွန်းများ&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;မေးလေ့ရှိသည့် မေးခွန်းများ&lt;/u&gt;</string>
   <string name="welcome_skip_button">သင်ခန်းစာကို ကျော်သွားရန်</string>
   <string name="no_internet">အင်တာနက် မရရှိပါ</string>
   <string name="internet_established">အင်တာနက် ရရှိ</string>
   <string name="no_notifications">အသိပေးချက်များ မတွေ့ပါ</string>
-  <string name="about_translate">&lt;u&gt;ဘာသာပြန်ပါ&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;ဘာသာပြန်ပါ&lt;/u&gt;</string>
   <string name="about_translate_title">ဘာသာစကားများ</string>
   <string name="about_translate_proceed">ဆက်လက်လုပ်ဆောင်ရန်</string>
   <string name="about_translate_cancel">မလုပ်တော့ပါ</string>
