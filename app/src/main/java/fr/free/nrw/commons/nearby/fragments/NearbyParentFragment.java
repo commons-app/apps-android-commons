@@ -1234,9 +1234,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
-        //TODO: Check if locaton ie on/off. If off ask user to turn it on by toast or a dialog box
+        //TODO: Check if locaton is on/off. If off ask user to turn it on by toast or a dialog box
         Timber.d("In ReCenter map");
-        Toast.makeText(getContext(), "YOLO", Toast.LENGTH_LONG).show();
+        try {
+            if (locationManager.getLastLocation() == null) {
+                Toast.makeText(getContext(), "Please turn on location for nearby to work", Toast.LENGTH_LONG).show();
+            }
+        } catch(Exception exc) {
+            Timber.d(exc);
+        }
         if (curLatLng == null) {
             return;
         }
