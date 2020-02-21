@@ -53,6 +53,19 @@ public class DialogUtil {
     public static void showAlertDialog(Activity activity,
                                        String title,
                                        String message,
+                                       final Runnable onPositiveBtnClick) {
+        showAlertDialog(activity,
+                title,
+                message,
+                activity.getString(R.string.no),
+                activity.getString(R.string.yes),
+                onPositiveBtnClick,
+                onNegativeBtnClick);
+    }
+
+    public static void showAlertDialog(Activity activity,
+                                       String title,
+                                       String message,
                                        String positiveButtonText,
                                        String negativeButtonText,
                                        final Runnable onPositiveBtnClick,

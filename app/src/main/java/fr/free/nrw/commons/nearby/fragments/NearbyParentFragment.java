@@ -87,6 +87,7 @@ import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -956,9 +957,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void setFABRecenterAction(View.OnClickListener onClickListener) {
-//        fabRecenter.setOnClickListener(view -> {
-//            Toast.makeText(getContext(), "YOLO", Toast.LENGTH_LONG).show();
-//        });
         fabRecenter.setOnClickListener(onClickListener);
     }
 
@@ -1238,7 +1236,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Timber.d("In ReCenter map");
         try {
             if (locationManager.getLastLocation() == null) {
-                Toast.makeText(getContext(), "Please turn on location for nearby to work", Toast.LENGTH_LONG).show();
+                //DialogUtil locationDialog = new DialogUtil();
+                DialogUtil.showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly", this::turnLocationOn, this::cancel);
+                //Toast.makeText(getContext(), R.string.nearby_location_not_available, Toast.LENGTH_LONG).show();
             }
         } catch(Exception exc) {
             Timber.d(exc);
@@ -1273,6 +1273,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
     }
+
+    private void turnLocationOn()  {
+
+    }
+
+    private void cancel() {
+
+    }
+
 
     @Override
     public void hideBottomSheet() {
