@@ -193,7 +193,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private NearbyController.NearbyPlacesInfo nearbyPlacesInfo;
     private NearbyAdapterFactory adapterFactory;
     private boolean isVisibleToUser;
-    private static boolean enableLocationOffDialog = true;
+    private static boolean showDialogAgain = true; // controls whether to show the user location off dialog again or not
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
 
@@ -304,7 +304,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (isResumed() && isVisibleToUser) {
             startTheMap();
         }
-        enableLocationDialog();
+        showDialogAgain();
     }
 
     private void registerNetworkReceiver() {
@@ -1239,8 +1239,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (curLatLng == null) {
             showLocationNullDialog();
             return;
-        } else if (!locationManager.isLocationEnabled() && enableLocationOffDialog) {
-            // location is not null but is not enabled. So, user should be prompted
+        } else if (!locationManager.isLocationEnabled() && showDialogAgain) {
+            // location is not null but it is not enabled. So, user should be prompted
             // to enable it.
             showLocationOffDialog();
         }
@@ -1273,26 +1273,36 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void showLocationNullDialog() {
+        // This dialog box will not go away if the user click on No button on the dialog
+        // as Nearby can't work if location is null
         DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
                 "Yes", "No",  this::openLocationSettings);
     }
 
     private void showLocationOffDialog() {
+        // This dialog will not prompt again if the user presses the No button.
+        // It will prompt the user again if Nearby is started again or gps is turned on/off.
         DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
-                "Yes", "No",  this::openLocationSettings, this::disableLocationDialog);
+                "Yes", "No",  this::openLocationSettings, this::disableLocationOffDialog);
     }
 
-    private void openLocationSettings() throws NullPointerException  {
+    private void openLocationSettings() {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        getContext().startActivity(intent);
-        Toast.makeText(getContext(), "Please set location mode to High Accuracy", Toast.LENGTH_SHORT).show();
+        try {
+            getContext().startActivity(intent);
+            Toast.makeText(getContext(), R.string.set_location_mode_high_accuracy, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
+            Timber.e(e);
+        }
     }
 
-    public void enableLocationDialog() {
-        enableLocationOffDialog = true;
+    public void showDialogAgain() {
+        showDialogAgain = true;
     }
-    public void disableLocationDialog() {
-        enableLocationOffDialog = false;
+    
+    public void disableLocationOffDialog() {
+        showDialogAgain = false;
         Timber.d("Location dialog disabled");
     }
 

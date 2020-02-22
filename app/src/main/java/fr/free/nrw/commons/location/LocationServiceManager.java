@@ -216,7 +216,7 @@ public class LocationServiceManager implements LocationListener {
         if (provider.equals("gps")) {
             //TODO: Rename this class object to something better
             NearbyParentFragment nb = new NearbyParentFragment();
-            nb.enableLocationDialog();
+            nb.showDialogAgain();
         }
     }
 

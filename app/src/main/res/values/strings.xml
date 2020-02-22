@@ -234,6 +234,8 @@
   <string name="navigation_item_featured_images">Featured</string>
   <string name="navigation_item_review">Review</string>
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
+  <string name="cannot_open_location_settings">Could not open location settings. Please turn location on manually</string>
+  <string name="set_location_mode_high_accuracy">Please set location mode to High Accuracy</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata item</string>
