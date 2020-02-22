@@ -214,6 +214,11 @@ public class LocationServiceManager implements LocationListener {
         Timber.d("Provider %s disabled", provider);
     }
 
+
+    public boolean isLocationEnabled() {
+        return locationManager.isProviderEnabled("gps");
+    }
+
     public enum LocationChangeType{
         LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
         LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving

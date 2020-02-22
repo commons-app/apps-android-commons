@@ -175,6 +175,17 @@ public class DialogUtil {
         showSafely(activity, dialog);
     }
     //TODO: Add a template for a dialog box that only has one active button and other button does nothing except close the dialog box
+
+    /**
+     * show a dialog with a positive and a negative button but the negative button
+     * does nothing other than closing the dialog box
+     * @param activity
+     * @param title
+     * @param message
+     * @param positiveButtonText
+     * @param negativeButtonText
+     * @param onPositiveBtnClick
+     */
     public static void showAlertDialog(Activity activity,
                                        String title,
                                        String message,

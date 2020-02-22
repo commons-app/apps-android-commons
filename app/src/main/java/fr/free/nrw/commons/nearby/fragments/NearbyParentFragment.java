@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -1233,13 +1234,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
         //TODO: Check if locaton is on/off. If off ask user to turn it on by toast or a dialog box
-        Timber.d("In ReCenter map");
         try {
             if (locationManager.getLastLocation() == null) {
-                //DialogUtil locationDialog = new DialogUtil();
                 DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
                         "Yes", "No",  this::turnLocationOn);
                 //Toast.makeText(getContext(), R.string.nearby_location_not_available, Toast.LENGTH_LONG).show();
+            } else if((locationManager.getLastLocation()!= null) && (!locationManager.isLocationEnabled())) {
+                Toast.makeText(getContext(), "Location is disabled", Toast.LENGTH_SHORT).show();
             }
         } catch(Exception exc) {
             Timber.d(exc);
@@ -1276,7 +1277,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void turnLocationOn()  {
-
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        getContext().startActivity(intent);
     }
 
     @Override
