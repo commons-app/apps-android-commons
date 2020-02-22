@@ -173,8 +173,6 @@ public class DialogUtil {
         AlertDialog dialog = builder.create();
         showSafely(activity, dialog);
     }
-    //TODO: Add a template for a dialog box that only has one active button and other button does nothing except close the dialog box.
-    // And once the NO button is pressed, the user is not shown the diaog box again for the current app session
 
     /**
      * show a dialog with a positive and a negative button but the negative button

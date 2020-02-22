@@ -193,7 +193,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private NearbyController.NearbyPlacesInfo nearbyPlacesInfo;
     private NearbyAdapterFactory adapterFactory;
     private boolean isVisibleToUser;
-    private boolean showLocationDialog = true;
+    private static boolean enableLocationOffDialog = true;
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
 
@@ -304,6 +304,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (isResumed() && isVisibleToUser) {
             startTheMap();
         }
+        enableLocationDialog();
     }
 
     private void registerNetworkReceiver() {
@@ -1236,17 +1237,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
         if (curLatLng == null) {
-            showLocationOffDialog();
+            showLocationNullDialog();
             return;
-        } else {
-            // if current Latitude and Longitude are not null
-            // check if location is on or off
-            if (locationManager.isLocationEnabled()) {
-                // Location is on. Do nothing
-            } else {
-                // location is off and the user should be prompted once to enable it
-                showLocationOffDialogOnce();
-            }
+        } else if (!locationManager.isLocationEnabled() && enableLocationOffDialog) {
+            // location is not null but is not enabled. So, user should be prompted
+            // to enable it.
+            showLocationOffDialog();
         }
         addCurrentLocationMarker(curLatLng);
         CameraPosition position;
@@ -1276,43 +1272,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
     }
 
-    private void showLocationOffDialog() {
-        // This method is called when the current latitude amd longitude are null(curLatLng == null)
-        Timber.d("===============================NULL LOCATION===============================");
+    private void showLocationNullDialog() {
         DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
                 "Yes", "No",  this::openLocationSettings);
-//                DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
-//                        "Yes", "No",  this::openLocationSettings);
-        //Toast.makeText(getContext(), R.string.nearby_location_not_available, Toast.LENGTH_LONG).show();
     }
 
-    private void showLocationOffDialogOnce() {
-        // Show a dialog that prompts the user to enable location for commons to work properly
-        // If the user presses on Yes, open location settings
-        // If the user presses No, don't show dialog again on pressing ReCenter button till location state changes again
-//        if (showLocationDialog) {
-//            Timber.d("===============================Location Dialog enabled===============================");
-//        } else {
-//            Timber.d("===============================Location Dialog disabled===============================");
-//        }
-        //TODO: Check if locaton is on/off. If off ask user to turn it on by toast or a dialog box
-        try {
-            if (locationManager.getLastLocation() == null) {
-                Timber.d("===============================NULL LOCATION===============================");
-                DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
-                        "Yes", "No",  this::openLocationSettings);
-//                DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
-//                        "Yes", "No",  this::openLocationSettings);
-                //Toast.makeText(getContext(), R.string.nearby_location_not_available, Toast.LENGTH_LONG).show();
-            } else if((locationManager.getLastLocation()!= null) && (!locationManager.isLocationEnabled()) && showLocationDialog) {
-                Timber.d("===============================NOT NULL LOCATION===============================");
-//                Toast.makeText(getContext(), "Location is disabled", Toast.LENGTH_SHORT).show();
-                DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
-                        "Yes", "No",  this::openLocationSettings, this::disableLocationDialog);
-            }
-        } catch(Exception exc) {
-            Timber.d(exc);
-        }
+    private void showLocationOffDialog() {
+        DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
+                "Yes", "No",  this::openLocationSettings, this::disableLocationDialog);
     }
 
     private void openLocationSettings() throws NullPointerException  {
@@ -1321,14 +1288,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Toast.makeText(getContext(), "Please set location mode to High Accuracy", Toast.LENGTH_SHORT).show();
     }
 
-    public void disableLocationDialog() {
-        showLocationDialog = false;
-        Timber.d("===============================Location Dialog disabled===============================");
-    }
-    
     public void enableLocationDialog() {
-        showLocationDialog = true;
-        Timber.d("===============================Location Dialog enabled===============================");
+        enableLocationOffDialog = true;
+    }
+    public void disableLocationDialog() {
+        enableLocationOffDialog = false;
+        Timber.d("Location dialog disabled");
     }
 
     @Override

@@ -208,19 +208,16 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onProviderEnabled(String provider) {
         Timber.d("Provider %s enabled", provider);
-//        if (provider.equals("gps")) {
-//            NearbyParentFragment disableDialogNearby = new NearbyParentFragment();
-//            disableDialogNearby.disableLocationDialog();
-//        }
     }
 
     @Override
     public void onProviderDisabled(String provider) {
         Timber.d("Provider %s disabled", provider);
-//        if (provider.equals("gps")) {
-//            NearbyParentFragment enableDialogNearby = new NearbyParentFragment();
-//            enableDialogNearby.enableLocationDialog();
-//        }
+        if (provider.equals("gps")) {
+            //TODO: Rename this class object to something better
+            NearbyParentFragment nb = new NearbyParentFragment();
+            nb.enableLocationDialog();
+        }
     }
 
 
