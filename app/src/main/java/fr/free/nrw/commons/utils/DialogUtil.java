@@ -12,7 +12,6 @@ import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
 public class DialogUtil {
-
     /**
      * Shows a dialog safely.
      * @param activity the activity
@@ -174,7 +173,8 @@ public class DialogUtil {
         AlertDialog dialog = builder.create();
         showSafely(activity, dialog);
     }
-    //TODO: Add a template for a dialog box that only has one active button and other button does nothing except close the dialog box
+    //TODO: Add a template for a dialog box that only has one active button and other button does nothing except close the dialog box.
+    // And once the NO button is pressed, the user is not shown the diaog box again for the current app session
 
     /**
      * show a dialog with a positive and a negative button but the negative button
@@ -192,6 +192,7 @@ public class DialogUtil {
                                        String positiveButtonText,
                                        String negativeButtonText,
                                        final Runnable onPositiveBtnClick) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title);
         builder.setMessage(message);
