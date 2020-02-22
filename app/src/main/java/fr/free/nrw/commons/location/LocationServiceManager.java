@@ -220,7 +220,6 @@ public class LocationServiceManager implements LocationListener {
         }
     }
 
-
     public boolean isLocationEnabled() {
         return locationManager.isProviderEnabled("gps");
     }

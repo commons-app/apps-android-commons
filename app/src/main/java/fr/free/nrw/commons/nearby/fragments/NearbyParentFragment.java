@@ -1356,7 +1356,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Same bottom sheet carries information for all nearby places, so we need to pass information
      * (title, description, distance and links) to view on nearby marker click
-     * (title, description, distance and links) to view on nearby marker click
      * @param place Place of clicked nearby marker
      */
     private void passInfoToSheet(Place place) {
