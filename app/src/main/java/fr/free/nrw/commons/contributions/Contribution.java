@@ -7,6 +7,7 @@ import android.os.Parcel;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,7 +23,7 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
-@Entity
+@Entity(tableName = "contribution")
 public class  Contribution extends Media {
 
     //{{According to Exif data|2009-01-09}}
@@ -56,7 +57,7 @@ public class  Contribution extends Media {
     public static final String SOURCE_CAMERA = "camera";
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
-
+    public long _id;
     public Uri contentUri;
     public String source;
     public String editSummary;

@@ -3,24 +3,29 @@ package fr.free.nrw.commons.contributions;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsContract.UserActionListener;
 import fr.free.nrw.commons.db.AppDatabase;
+import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -37,9 +42,11 @@ import static fr.free.nrw.commons.contributions.Contribution.STATE_COMPLETED;
 public class ContributionsPresenter implements UserActionListener {
 
     private final ContributionsRepository repository;
+    private final Scheduler mainThreadScheduler;
+    private final Scheduler ioThreadScheduler;
     private CompositeDisposable compositeDisposable;
     private ContributionsContract.View view;
-    private List<Contribution> contributionList;
+    private List<Contribution> contributionList=new ArrayList<>();
 
     @Inject
     Context context;
@@ -52,11 +59,14 @@ public class ContributionsPresenter implements UserActionListener {
 
     @Inject
     SessionManager sessionManager;
+    private LifecycleOwner lifeCycleOwner;
 
     @Inject
-    ContributionsPresenter(ContributionsRepository repository) {
+    ContributionsPresenter(ContributionsRepository repository, @Named(CommonsApplicationModule.MAIN_THREAD) Scheduler mainThreadScheduler,@Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
         this.repository = repository;
         compositeDisposable=new CompositeDisposable();
+        this.mainThreadScheduler=mainThreadScheduler;
+        this.ioThreadScheduler=ioThreadScheduler;
     }
 
     private String user;
@@ -67,40 +77,29 @@ public class ContributionsPresenter implements UserActionListener {
         compositeDisposable=new CompositeDisposable();
     }
 
-    void fetchContributions() {
-        repository.fetchContributions(repository.get("uploads"))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Contribution>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+    public void setLifeCycleOwner(LifecycleOwner lifeCycleOwner){
+        this.lifeCycleOwner=lifeCycleOwner;
+    }
 
-                    }
+    public void fetchContributions() {
+        String uploadsString = repository.getString("uploads");
+        int defaultNumberOfUploads=50;
+        if(!TextUtils.isEmpty(uploadsString)){
+            defaultNumberOfUploads=Integer.parseInt(uploadsString);
+        }
 
-                    @Override
-                    public void onNext(List<Contribution> contributions) {
-;                        showContributions(contributions);
-                    }
+        LiveData<List<Contribution>> liveDataContributions = repository.fetchContributions(defaultNumberOfUploads);
+        if(null!=lifeCycleOwner) {
+             liveDataContributions.observe(lifeCycleOwner, this::showContributions);
+        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        view.showProgress(false);
-                        //TODO
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
         if (NetworkUtils.isInternetConnectionEstablished(CommonsApplication.getInstance()) && shouldFetchContributions()) {
             view.showProgress(true);
             this.user = sessionManager.getUserName();
             view.showContributions(null);
-            contributionList=new ArrayList<>();
             compositeDisposable.add(userClient.logEvents(user)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(ioThreadScheduler)
+                    .observeOn(mainThreadScheduler)
                     .doOnNext(mwQueryLogEvent -> Timber.d("Received image %s", mwQueryLogEvent.title()))
                     .filter(mwQueryLogEvent -> !mwQueryLogEvent.isDeleted()).doOnNext(mwQueryLogEvent -> Timber.d("Image %s passed filters", mwQueryLogEvent.title()))
                     .map(image -> {
@@ -110,10 +109,7 @@ public class ContributionsPresenter implements UserActionListener {
                         return contribution;
                     })
                     .toList()
-                    .subscribe(contributions -> {
-                        showContributions(contributions);
-                        saveContributionsToDB(contributions);
-                    }, error -> {
+                    .subscribe(this::saveContributionsToDB, error -> {
                         //DO nothing,
                     }));
         }
@@ -135,28 +131,18 @@ public class ContributionsPresenter implements UserActionListener {
     }
 
     private void saveContributionsToDB(List<Contribution> contributions) {
-        appDatabase.getContributionDao().save(contributions)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<Long>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(List<Long> longs) {
-                        Log.d("CP","inserted contributios");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d("CP","failed to insert contributios");
-                    }
-                });
+        repository.save(contributions)
+                .subscribeOn(ioThreadScheduler)
+                .observeOn(mainThreadScheduler)
+                .subscribe();
+        repository.set("last_fetch_timestamp",System.currentTimeMillis());
     }
 
     private boolean shouldFetchContributions() {
+        long lastFetchTimestamp = repository.getLong("last_fetch_timestamp");
+        if(lastFetchTimestamp!=0){
+            return System.currentTimeMillis()-lastFetchTimestamp>15*60*100;
+        }
         return true;
     }
 
@@ -177,17 +163,24 @@ public class ContributionsPresenter implements UserActionListener {
      */
     @Override
     public void deleteUpload(Contribution contribution) {
-        repository.deleteContributionFromDB(contribution);
+        compositeDisposable.add(repository.deleteContributionFromDB(contribution)
+        .observeOn(mainThreadScheduler)
+        .subscribeOn(ioThreadScheduler)
+        .subscribe());
     }
 
     /**
      * Returns a contribution at the specified cursor position
+     *
      * @param i
      * @return
      */
     @Nullable
     @Override
     public Media getItemAtPosition(int i) {
-        return  contributionList==null || contributionList.size()<i?null:contributionList.get(i);
+        if (i == -1 || contributionList == null || contributionList.size() < i) {
+            return null;
+        }
+        return contributionList.get(i);
     }
 }

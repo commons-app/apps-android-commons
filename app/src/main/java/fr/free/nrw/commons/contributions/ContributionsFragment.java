@@ -124,7 +124,6 @@ public class ContributionsFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
     }
 
     @Nullable
@@ -134,6 +133,7 @@ public class ContributionsFragment
         ButterKnife.bind(this, view);
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
+        contributionsPresenter.setLifeCycleOwner(this);
         campaignView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);

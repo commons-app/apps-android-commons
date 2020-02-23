@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
+import android.app.job.JobScheduler;
 import android.text.TextUtils;
+
+import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
@@ -9,7 +12,7 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * The LocalDataSource class for Contributions
@@ -30,12 +33,15 @@ class ContributionsLocalDataSource {
     /**
      * Fetch default number of contributions to be show, based on user preferences
      */
-    public int get(String key) {
-        String uploads = defaultKVStore.getString(key);
-        if(TextUtils.isEmpty(uploads)){
-            return 0;
-        }
-        return Integer.parseInt(uploads);
+    public String getString(String key) {
+        return defaultKVStore.getString(key);
+    }
+
+    /**
+     * Fetch default number of contributions to be show, based on user preferences
+     */
+    public long getLong(String key) {
+       return defaultKVStore.getLong(key);
     }
 
     /**
@@ -54,12 +60,21 @@ class ContributionsLocalDataSource {
     /**
      * Remove a contribution from the contributions table
      * @param contribution
+     * @return
      */
-    public void deleteContribution(Contribution contribution) {
-        contributionDao.delete(contribution);
+    public Single<Integer> deleteContribution(Contribution contribution) {
+        return contributionDao.delete(contribution);
     }
 
-    public Observable<List<Contribution>> getContributions(int numberOfContributions) {
+    public LiveData<List<Contribution>> getContributions(int numberOfContributions) {
         return contributionDao.fetchContributions(numberOfContributions);
+    }
+
+    public Single<List<Long>> saveContributions(List<Contribution> contributions) {
+        return contributionDao.save(contributions);
+    }
+
+    public void set(String key, long value) {
+        defaultKVStore.putLong(key,value);
     }
 }
