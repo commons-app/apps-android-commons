@@ -63,7 +63,7 @@ class DeleteHelperTest {
                 .thenReturn(Observable.just(true))
 
         `when`(media?.displayTitle).thenReturn("Test file")
-        `when`(media?.filename).thenReturn("Test file.jpg")
+        media?.filename="Test file.jpg"
 
         val makeDeletion = deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
         assertNotNull(makeDeletion)
