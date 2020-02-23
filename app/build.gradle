@@ -109,10 +109,6 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation "androidx.room:room-rxjava2:$room_version"
-
-    //Stetho
-    implementation 'com.facebook.stetho:stetho:1.5.1'
-
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 }
 
