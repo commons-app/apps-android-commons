@@ -14,7 +14,7 @@ import io.reactivex.Single;
 @Dao
 public interface ContributionDao {
 
-    @Query("SELECT * FROM contribution order by dateUploaded DESC LIMIT  :numberOfContributions")
+    @Query("SELECT * FROM contribution order by dateUploaded DESC")
     LiveData<List<Contribution>> fetchContributions(int numberOfContributions);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
