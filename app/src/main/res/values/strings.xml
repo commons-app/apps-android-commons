@@ -593,7 +593,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="upload_nearby_place_found_description">Is this a photo of Place %1$s?</string>
   <string name="remove_bookmark">Removed from bookmarks</string>
   <string name="add_bookmark">Added to bookmarks</string>
-  <string name="wallpaper_set_unsuccessfully">Error setting wallpaper</string>
-  <string name="setting_wallpaper_dialog_title">""</string>
+  <string name="wallpaper_set_unsuccessfully">Something went wrong. Could not set the wallpaper</string>
+  <string name="setting_wallpaper_dialog_title">Set as Wallpaper</string>
   <string name="setting_wallpaper_dialog_message">Setting Wallpaper. Please wait…</string>
 </resources>

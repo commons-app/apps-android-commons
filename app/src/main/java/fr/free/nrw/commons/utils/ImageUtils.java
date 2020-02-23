@@ -228,7 +228,7 @@ public class ImageUtils {
         try {
             wallpaperManager.setBitmap(bitmap);
             ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
-            if (progressDialog.isShowing() && progressDialog != null) {
+            if (progressDialog != null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
         } catch (IOException e) {
