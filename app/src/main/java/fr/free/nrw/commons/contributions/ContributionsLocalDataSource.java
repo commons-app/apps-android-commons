@@ -66,8 +66,8 @@ class ContributionsLocalDataSource {
         return contributionDao.delete(contribution);
     }
 
-    public LiveData<List<Contribution>> getContributions(int numberOfContributions) {
-        return contributionDao.fetchContributions(numberOfContributions);
+    public LiveData<List<Contribution>> getContributions() {
+        return contributionDao.fetchContributions();
     }
 
     public Single<List<Long>> saveContributions(List<Contribution> contributions) {

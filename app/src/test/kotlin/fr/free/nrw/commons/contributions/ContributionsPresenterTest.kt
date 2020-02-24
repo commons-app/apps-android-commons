@@ -65,10 +65,10 @@ class ContributionsPresenterTest {
     @Test
     fun testFetchContributions(){
         Mockito.`when`(repository?.getString(ArgumentMatchers.anyString())).thenReturn("10")
-        Mockito.`when`(repository?.fetchContributions(ArgumentMatchers.anyInt())).thenReturn(liveData)
+        Mockito.`when`(repository?.fetchContributions()).thenReturn(liveData)
         contributionsPresenter?.fetchContributions()
         verify(repository)?.getString(ArgumentMatchers.anyString())
-        verify(repository)?.fetchContributions(10)
+        verify(repository)?.fetchContributions()
     }
 
     /**

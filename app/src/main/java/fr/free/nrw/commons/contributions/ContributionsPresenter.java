@@ -88,7 +88,7 @@ public class ContributionsPresenter implements UserActionListener {
             defaultNumberOfUploads=Integer.parseInt(uploadsString);
         }
 
-        LiveData<List<Contribution>> liveDataContributions = repository.fetchContributions(defaultNumberOfUploads);
+        LiveData<List<Contribution>> liveDataContributions = repository.fetchContributions();
         if(null!=lifeCycleOwner) {
              liveDataContributions.observe(lifeCycleOwner, this::showContributions);
         }

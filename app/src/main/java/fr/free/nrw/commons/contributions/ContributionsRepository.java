@@ -45,8 +45,8 @@ public class ContributionsRepository {
         return localDataSource.getContributionWithFileName(fileName);
     }
 
-    public LiveData<List<Contribution>> fetchContributions(int numberOfContributions) {
-        return localDataSource.getContributions(numberOfContributions);
+    public LiveData<List<Contribution>> fetchContributions() {
+        return localDataSource.getContributions();
     }
 
     public Single<List<Long>> save(List<Contribution> contributions) {
