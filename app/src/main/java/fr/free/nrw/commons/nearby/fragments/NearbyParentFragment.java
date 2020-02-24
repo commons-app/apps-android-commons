@@ -1303,7 +1303,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     public void disableLocationOffDialog() {
         showDialogAgain = false;
-        Timber.d("Location dialog disabled");
     }
 
     @Override
