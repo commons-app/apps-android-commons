@@ -12,6 +12,7 @@ import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
 public class DialogUtil {
+
     /**
      * Shows a dialog safely.
      * @param activity the activity
@@ -173,5 +174,4 @@ public class DialogUtil {
         AlertDialog dialog = builder.create();
         showSafely(activity, dialog);
     }
-
 }
