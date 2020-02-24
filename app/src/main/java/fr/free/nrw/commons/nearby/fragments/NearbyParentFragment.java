@@ -1276,7 +1276,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         // This dialog box will not go away if the user click on No button on the dialog
         // as Nearby can't work if location is null
         DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
-                "Yes", "No",  this::openLocationSettings);
+                "Yes", "No",  this::openLocationSettings, null);
     }
 
     private void showLocationOffDialog() {

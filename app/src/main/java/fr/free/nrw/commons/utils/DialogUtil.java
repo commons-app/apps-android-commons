@@ -174,44 +174,4 @@ public class DialogUtil {
         showSafely(activity, dialog);
     }
 
-    /**
-     * show a dialog with a positive and a negative button but the negative button
-     * does nothing other than closing the dialog box
-     * @param activity
-     * @param title
-     * @param message
-     * @param positiveButtonText
-     * @param negativeButtonText
-     * @param onPositiveBtnClick
-     */
-    public static void showAlertDialog(Activity activity,
-                                       String title,
-                                       String message,
-                                       String positiveButtonText,
-                                       String negativeButtonText,
-                                       final Runnable onPositiveBtnClick) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(title);
-        builder.setMessage(message);
-
-        if (!StringUtils.isBlank(positiveButtonText)) {
-            builder.setPositiveButton(positiveButtonText, (dialogInterface, i) -> {
-                dialogInterface.dismiss();
-                if (onPositiveBtnClick != null) {
-                    onPositiveBtnClick.run();
-                }
-            });
-        }
-
-        if (!StringUtils.isBlank(negativeButtonText)) {
-            builder.setNegativeButton(negativeButtonText, (DialogInterface dialogInterface, int i) -> {
-                dialogInterface.dismiss();
-            });
-        }
-
-        AlertDialog dialog = builder.create();
-        showSafely(activity, dialog);
-    }
-
 }
