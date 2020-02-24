@@ -49,8 +49,8 @@ public class ContributionsRepository {
         return localDataSource.getContributions();
     }
 
-    public Single<List<Long>> save(List<Contribution> contributions) {
-        return localDataSource.saveContributions(contributions);
+    public void save(List<Contribution> contributions) {
+        localDataSource.saveContributions(contributions);
     }
 
     public void set(String key, long value) {

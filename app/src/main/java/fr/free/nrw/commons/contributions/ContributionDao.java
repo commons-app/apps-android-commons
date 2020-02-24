@@ -6,35 +6,42 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import java.util.List;
 
 import io.reactivex.Single;
 
 @Dao
-public interface ContributionDao {
+public abstract class ContributionDao {
 
     @Query("SELECT * FROM contribution order by dateUploaded DESC")
-    LiveData<List<Contribution>> fetchContributions();
+    abstract LiveData<List<Contribution>> fetchContributions();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void save(Contribution contribution);
+    public abstract void save(Contribution contribution);
+
+    @Transaction
+    public void  deleteAllAndSave(List<Contribution> contributions){
+        deleteAll();
+        save(contributions);
+    }
 
     @Insert
-    public Single<List<Long>> save(List<Contribution> contribution);
+    public abstract void save(List<Contribution> contribution);
 
     @Delete
-    public Single<Integer> delete(Contribution contribution);
+    public abstract Single<Integer> delete(Contribution contribution);
 
     @Query("SELECT * from contribution WHERE contentProviderUri=:uri")
-    public List<Contribution> getContributionWithUri(String uri);
+    public abstract List<Contribution> getContributionWithUri(String uri);
 
     @Query("SELECT * from contribution WHERE filename=:fileName")
-    public List<Contribution> getContributionWithTitle(String fileName);
+    public abstract List<Contribution> getContributionWithTitle(String fileName);
 
     @Query("UPDATE contribution SET state=:state WHERE state in (:toUpdateStates)")
-    public void updateStates(int state, int[] toUpdateStates);
+    public abstract void updateStates(int state, int[] toUpdateStates);
 
     @Query("Delete FROM contribution")
-    void deleteAll();
+    public abstract void deleteAll();
 }

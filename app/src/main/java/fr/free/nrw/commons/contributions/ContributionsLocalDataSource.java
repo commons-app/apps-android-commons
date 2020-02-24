@@ -70,8 +70,8 @@ class ContributionsLocalDataSource {
         return contributionDao.fetchContributions();
     }
 
-    public Single<List<Long>> saveContributions(List<Contribution> contributions) {
-        return contributionDao.save(contributions);
+    public void saveContributions(List<Contribution> contributions) {
+        contributionDao.deleteAllAndSave(contributions);
     }
 
     public void set(String key, long value) {

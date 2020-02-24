@@ -48,8 +48,6 @@ public class Media implements Parcelable {
     public Uri localUri;
     public String thumbUrl;
     public String imageUrl;
-    @PrimaryKey
-    @NonNull
     public String filename;
     public String description; // monolingual description on input...
     public String discussion;

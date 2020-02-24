@@ -57,6 +57,8 @@ public class  Contribution extends Media {
     public static final String SOURCE_CAMERA = "camera";
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
+    @PrimaryKey (autoGenerate = true)
+    @NonNull
     public long _id;
     public Uri contentUri;
     public String source;

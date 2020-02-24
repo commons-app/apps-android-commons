@@ -24,6 +24,7 @@ import fr.free.nrw.commons.contributions.ContributionsContract.UserActionListene
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.mwapi.UserClient;
+import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
@@ -106,7 +107,7 @@ public class ContributionsPresenter implements UserActionListener {
                     })
                     .toList()
                     .subscribe(this::saveContributionsToDB, error -> {
-                        Timber.e("Failed to fetch contributions: "+error.getMessage());
+                        Timber.e("Failed to fetch contributions: %s", error.getMessage());
                     }));
         }
     }
@@ -128,35 +129,17 @@ public class ContributionsPresenter implements UserActionListener {
 
     private void saveContributionsToDB(List<Contribution> contributions) {
         Timber.e("Fetched: "+contributions.size()+" contributions "+" saving to db");
-        repository.save(contributions)
-                .subscribeOn(ioThreadScheduler)
-                .observeOn(mainThreadScheduler)
-                .subscribe(new SingleObserver<List<Long>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(List<Long> longs) {
-                        Timber.d("saved to db");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.e("could not save to db: %s", e.getMessage());
-                    }
-                });
+        ExecutorUtils.get().submit(() -> repository.save(contributions));
         repository.set("last_fetch_timestamp",System.currentTimeMillis());
     }
 
     private boolean shouldFetchContributions() {
         long lastFetchTimestamp = repository.getLong("last_fetch_timestamp");
-        Timber.d("last fetch timestamp: "+lastFetchTimestamp);
+        Timber.d("last fetch timestamp: %s", lastFetchTimestamp);
         if(lastFetchTimestamp!=0){
             return System.currentTimeMillis()-lastFetchTimestamp>15*60*100;
         }
-        Timber.d("should  fetch contributions: "+true);
+        Timber.d("should  fetch contributions: %s", true);
         return true;
     }
 
