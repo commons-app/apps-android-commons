@@ -96,8 +96,8 @@
   <string name="menu_about">Amdanom</string>
   <string name="about_license">Ap Cynnwys Agored a grewyd ac a gefnogir gan wirfoddolwyr cymuned Wicimedia yw ap Comin Wicimedia. Does a wnelo Sefydliad Wicimedia ddim byd ag e (ei greu, ei gynnal na\'i ddatblygu).</string>
   <string name="about_improve">\n\nCrewch &lt;a href=\"%1$s\"&gt;ymholiad GitHub&lt;/a&gt; os oes gennych fyg, broblem neu awgrym.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Polisi preifatrwydd&lt;/u&gt;</string>
-  <string name="about_credits">Clod a bri</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Polisi preifatrwydd&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">Clod a bri</string>
   <string name="title_activity_about">Amdanom</string>
   <string name="menu_feedback">Danfonwch Adborth (drwy Ebost)</string>
   <string name="no_email_client">Dim ebost client wedi\'i ganfod</string>
@@ -158,7 +158,7 @@
   <string name="welcome_copyright_subtext">Cadwch yn glir o ddeunydd a hawlfraint arno a ganfyddwch ar y we, ac hefyd lluniau o bosteri, cloriau llyfrau, ayb.</string>
   <string name="welcome_final_text">Ydych chi wedi deall?</string>
   <string name="welcome_final_button_text">Do!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Rhagor o wybodaeth&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Rhagor o wybodaeth&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorïau</string>
   <string name="detail_panel_cats_loading">Wrthi\'n llwytho…</string>
   <string name="detail_panel_cats_none">Dim categorïau wedi eu dewis</string>
@@ -250,7 +250,7 @@
   <string name="skip_login_message">Bydd yn rhaid i ti fewngofnodi er mwyn uwchlwytho delweddau yn y dyfodol.</string>
   <string name="login_alert_message">Er mwyn defnyddio\'r nodwedd yma, mewngofnodwch!</string>
   <string name="nearby_location_has_not_changed">Nid yw\'r lleoliad wedi newid.</string>
-  <string name="nearby_location_not_available">Nid yw\'r lleoliad ar gael.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Nid yw\'r lleoliad ar gael.</string>
   <string name="nearby_wikidata">Wicidata</string>
   <string name="nearby_wikipedia">Wicipedia</string>
   <string name="nearby_commons">Comin</string>

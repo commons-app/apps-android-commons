@@ -93,8 +93,8 @@
   <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app. </string>
   <string name="trademarked_name" translatable="false">Wikimedia Commons</string>
   <string name="about_improve">Create a new &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; for bug reports and suggestions.</string>
-  <string name="about_privacy_policy"><![CDATA[<u>Privacy policy</u>]]></string>
-  <string name="about_credits"><![CDATA[<u>Credits</u>]]></string>
+  <string name="about_privacy_policy">Privacy policy</string>
+  <string name="about_credits">Credits</string>
   <string name="title_activity_about">About</string>
   <string name="menu_feedback">Send Feedback (via Email)</string>
   <string name="no_email_client">No email client installed</string>
@@ -155,7 +155,7 @@
   <string name="welcome_copyright_subtext">Avoid copyrighted materials you found from the Internet as well as images of posters, book covers, etc.</string>
   <string name="welcome_final_text">You think you got it?</string>
   <string name="welcome_final_button_text">Yes!</string>
-  <string name="welcome_help_button_text"><![CDATA[<u>More Information</u>]]></string>
+  <string name="welcome_help_button_text">More Information</string>
   <string name="detail_panel_cats_label">Categories</string>
   <string name="detail_panel_cats_loading">Loading…</string>
   <string name="detail_panel_cats_none">None selected</string>
@@ -264,7 +264,7 @@
   <string name="null_url">Error! URL not found</string>
   <string name="nominate_deletion">Nominate for Deletion</string>
   <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
-  <string name="nominated_see_more"><![CDATA[<u>See webpage for details</u>]]></string>
+  <string name="nominated_see_more">See webpage for details</string>
   <string name="nominating_file_for_deletion">Nominating %1$s for deletion.</string>
   <string name="nominating_for_deletion_status">Nominating file for deletion: %1$s</string>
   <string name="view_browser">View in Browser</string>
@@ -291,8 +291,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us"><![CDATA[<u>Rate us</u>]]></string>
-  <string name="about_faq"><![CDATA[<u>FAQ</u>]]></string>
+  <string name="about_rate_us">Rate us</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">Skip Tutorial</string>
   <string name="no_internet">Internet unavailable</string>
   <string name="internet_established">Internet available</string>
@@ -300,7 +300,7 @@
   <string name="error_review">Error fetching image for review. Press refresh to try again.</string>
   <string name="error_review_categories">Error fetching image categories for review. Press refresh to try again.</string>
   <string name="no_notifications">No notifications found</string>
-  <string name="about_translate"><![CDATA[<u>Translate</u>]]></string>
+  <string name="about_translate">Translate</string>
   <string name="about_translate_title">Languages</string>
   <string name="about_translate_message">Select the language that you would like to submit translations for</string>
   <string name="about_translate_proceed">Proceed</string>
@@ -510,7 +510,7 @@ Upload your first media by tapping on the add button.</string>
     <string name="review_thanks_yes_button_text">Yes, why not</string>
     <string name="review_thanks_no_button_text">Next image</string>
     <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
-    <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commoms.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
+    <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commons.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
 
   <plurals name="receiving_shared_content">
     <item quantity="one">Receiving shared content. Processing the image might take some time depending on the size of the image and your device</item>
@@ -591,4 +591,9 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
   <string name="upload_nearby_place_found_description">Is this a photo of Place %1$s?</string>
+  <string name="remove_bookmark">Removed from bookmarks</string>
+  <string name="add_bookmark">Added to bookmarks</string>
+  <string name="wallpaper_set_unsuccessfully">Something went wrong. Could not set the wallpaper</string>
+  <string name="setting_wallpaper_dialog_title">Set as Wallpaper</string>
+  <string name="setting_wallpaper_dialog_message">Setting Wallpaper. Please wait…</string>
 </resources>

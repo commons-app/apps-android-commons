@@ -179,8 +179,8 @@
   <string name="nearby_wikidata" fuzzy="true">വിക്കിഡേറ്റാ</string>
   <string name="nearby_wikipedia" fuzzy="true">വിക്കിപീഡിയ</string>
   <string name="nearby_commons" fuzzy="true">കോമൺസ്</string>
-  <string name="about_faq">&lt;u&gt;പതിവുചോദ്യങ്ങൾ&lt;/u&gt;</string>
-  <string name="about_translate">&lt;u&gt;പരിഭാഷപ്പെടുത്തുക&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;പതിവുചോദ്യങ്ങൾ&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;പരിഭാഷപ്പെടുത്തുക&lt;/u&gt;</string>
   <string name="about_translate_title">ഭാഷകൾ</string>
   <string name="about_translate_proceed">തുടരുക</string>
   <string name="about_translate_cancel">റദ്ദാക്കുക</string>

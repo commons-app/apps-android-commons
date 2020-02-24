@@ -98,8 +98,8 @@
   <string name="menu_about">O aplikácii</string>
   <string name="about_license">Aplikácia Wikimedia Commons je open-source aplikácia vytváraná a udržiavaná dobrovoľníkmi z wikimedickej komunity. Nadácia Wikimedia sa na vytváraní, vývoji alebo podpore aplikácie nepodieľa.</string>
   <string name="about_improve">Pre nahlásenie bugov a pridanie návrhov vytvorte nové &lt;a href=\"%1$s\"&gt;hlásenie na GitHube&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Zásady ochrany súkromia&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Autori&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Zásady ochrany súkromia</string>
+  <string name="about_credits">Autori</string>
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
   <string name="no_email_client">Nemáte nainštalovaného žiadneho e-mailového klienta</string>
@@ -160,7 +160,7 @@
   <string name="welcome_copyright_subtext">Vyvarujte sa materiálom nájdeným na internete, ktoré podliehajú autorským právam.</string>
   <string name="welcome_final_text">Myslíte, že rozumiete?</string>
   <string name="welcome_final_button_text">Áno!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Viac informácií&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Viac informácií</string>
   <string name="detail_panel_cats_label">Kategórie</string>
   <string name="detail_panel_cats_loading">Načítava sa…</string>
   <string name="detail_panel_cats_none">Nič nebolo vybrané</string>
@@ -262,7 +262,7 @@
   <string name="null_url">Chyba! URL nenájdené</string>
   <string name="nominate_deletion">Navrhnúť na zmazanie</string>
   <string name="nominated_for_deletion">Tento obrázok bol nominovaný na zmazanie.</string>
-  <string name="nominated_see_more">&lt;u&gt;Pre viac informácií pozri web&lt;/u&gt;</string>
+  <string name="nominated_see_more">Zobraziť webovú stránku pre viac informácií</string>
   <string name="nominating_file_for_deletion">Nominácia %1$s na zmazanie.</string>
   <string name="nominating_for_deletion_status">Nominácia súboru na zmazanie: %1$s</string>
   <string name="view_browser">Otvoriť v prehliadači</string>
@@ -274,7 +274,7 @@
   <string name="copy_wikicode">Skopírovať wikitext do schránky</string>
   <string name="wikicode_copied">Wikitext bol skopírovaný do schránky</string>
   <string name="nearby_location_has_not_changed">Poloha sa nezmenila.</string>
-  <string name="nearby_location_not_available">Poloha nie je dostupná.</string>
+  <string name="nearby_location_not_available">Funkcia V okolí nemusí pracovať správne, poloha nie je dostupná.</string>
   <string name="location_permission_rationale_nearby">Zobrazenie zoznamu miest v okolí vyžaduje povolenie</string>
   <string name="get_directions">Nájsť trasu</string>
   <string name="read_article">Prečítať článok</string>
@@ -287,8 +287,8 @@
   <string name="nearby_wikidata">Wikiúdaje</string>
   <string name="nearby_wikipedia">Wikipédia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Ohodnoťte nás&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">Ohodnoťte nás</string>
+  <string name="about_faq">Často kladené otázky</string>
   <string name="welcome_skip_button">Preskočiť návod</string>
   <string name="no_internet">Internet nie je dostupný</string>
   <string name="internet_established">Internet je dostupný</string>
@@ -296,7 +296,7 @@
   <string name="error_review">Nastala chyba pri načítaní obrázku na kontrolu. Prosím, skúste to znova.</string>
   <string name="error_review_categories">Nastala chyba pri načítaní kategórií obrázku na kontrolu. Prosím, skúste to znova.</string>
   <string name="no_notifications">Neboli nájdené žiadne upozornenia</string>
-  <string name="about_translate">&lt;u&gt;Preložiť&lt;/u&gt;</string>
+  <string name="about_translate">Preložiť</string>
   <string name="about_translate_title">Jazyky</string>
   <string name="about_translate_message">Vyberte jazyk, v ktorom chcete zadávať preklady</string>
   <string name="about_translate_proceed">Pokračovať</string>

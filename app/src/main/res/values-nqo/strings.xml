@@ -10,6 +10,7 @@
   <string name="preference_category_general">ߝߘߏ߬ߓߊ߬ߡߊ</string>
   <string name="preference_category_feedback">ߞߙߐ߬ߛߌ߬ߕߊ</string>
   <string name="preference_category_privacy">ߜߎ߲߬ߘߎ߬ߢߐ߲߰ߦߊ</string>
+  <string name="preference_category_location">ߘߌ߲߬ߞߌߙߊ</string>
   <string name="app_name">ߞߐߡߐ߲</string>
   <string name="menu_settings">ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ</string>
   <string name="intent_share_upload_label">ߊ߬ ߟߊߦߟߍ߬ ߞߐߡߐ߲ ߞߊ߲߬</string>
@@ -56,10 +57,17 @@
   <string name="menu_upload_single">ߊ߬ ߟߊߦߟߍ߬</string>
   <string name="categories_search_text_hint">ߦߌߟߡߊ ߟߎ߬ ߢߌߣߌ߲߫</string>
   <string name="menu_save_categories">ߊ߬ ߟߊߞߎ߲߬ߘߎ߬</string>
+  <string name="refresh_button">ߞߵߊ߬ ߟߊߛߎߡߊ߫</string>
   <string name="display_list_button">ߛߙߍߘߍ</string>
   <string name="gps_disabled">GPS ߟߊߞߎߣߎ߲ߣߍ߲߫ ߕߴߌ ߟߊ߫ ߞߍߟߊ߲ ߠߊ߫. ߊ߬ ߟߊߞߎߣߎ߲ ߞߊߘߴߌ ߦߋ߫ ߓߊ߬؟</string>
   <string name="enable_gps">GPS ߟߊߞߎߣߎ߲߫</string>
   <string name="contributions_subtitle_zero">ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߕߴߦߋ߲߬ ߡߎߣߎ߲߬</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <string name="starting_multiple_uploads">{{Plural|ߟߊ߬ߝߟߐ߬ߟߌ=ߞߋߟߋ߲߫ %1$d ߟߊߦߟߍ߬|ߟߊߝߟߐߟߌ %1$d ߟߊ߬ߦߟߍ߬ߟߌ|ߟߊߝߟߐߟߌ %1$d ߟߎ߫ ߟߊߦߍ߬ߟߍ}}</string>
   <string name="categories_not_found">ߞߎߡߘߊ߫ %1$s ߡߊ߫ ߛߐ߬ߘߐ߲߬.</string>
   <string name="categories_activity_title">ߦߌߟߡߊ ߟߎ߬</string>
   <string name="title_activity_settings">ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ</string>
@@ -67,8 +75,10 @@
   <string name="title_activity_featured_images">ߟߊߓߊ߯ߙߊߟߌ ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
   <string name="title_activity_category_details">ߦߌߟߡߊ</string>
   <string name="menu_about">ߞߊ߬ ߓߍ߲߬</string>
-  <string name="about_privacy_policy">&lt;u&gt;ߜߎ߲߬ߘߎ߬ߢߐ߲߰ߦߊ ߞߎߙߎ߲߬ߘߎ&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;ߜߎ߲߬ߘߎ߬ߢߐ߲߰ߦߊ ߞߎߙߎ߲߬ߘߎ&lt;/u&gt;</string>
   <string name="title_activity_about">ߞߊ߬ ߓߍ߲߬</string>
+  <string name="menu_feedback">ߞߙߐ߬ߛߌ߬ߕߊ ߗߋ߫ (ߢ:ߞߏ߲ߘߏ ߟߊ߫)</string>
+  <string name="no_email_client">ߢߎߡߍߙߋ߲ߞߏ߲ߘߏ ߛߊ߲߬ߠߌ߲߬ߢߐ߲߰ ߡߊߞߍߣߍ߲߫ ߕߴߦߋ߲߬</string>
   <string name="provider_categories">ߦߌߟߡߊ߫ ߟߊߓߊ߯ߙߊߣߍ߲߫ ߞߎߘߊ ߟߎ߬</string>
   <string name="waiting_first_sync">ߕߎ߬ߢߊ߬ߢߐ߲߰ߦߊ߬ߟߌ߬ ߝߟߐ ߘߐߞߐ߬ߣߐ߲߬</string>
   <string name="no_uploads_yet">ߌ ߡߊ߬ ߖߌ߬ߦߊ߬ߓߍ߬ ߛߌ߫ ߟߊߦߟߍ߬ ߡߎߣߎ߲߬.</string>
@@ -76,6 +86,16 @@
   <string name="menu_cancel_upload">ߊ߬ ߘߐߛߊ߬</string>
   <string name="menu_download">ߟߊ߬ߖߌ߰ߒ߬ߞߎ߲߬ߠߌ߲</string>
   <string name="preference_theme">ߛߎ ߞߍߗߏ߮</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ߏߛߑߕߙߊߟߌ߫)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ߊߟߏߡߊ߲ߘߎ߯)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ߋߛߑߕߏߣߌ߫)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ߊߛߑߔߊ߲߫)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ߞߙߏߥߊߛߌ߫)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (ߟߎߞߑߛߊ߲ߓߎߙߜ߭)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (ߤߏߟߊ߲ߘߌ߬)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ߣߐߙߑߝ߭ߍߗ߭)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ߔߏߟߐ߲ߢ)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ߙߏߡߊߣߌ߫</string>
   <string name="tutorial_3_text">ߌ ߞߊ߫ ߢߌ߲߬ ߠߎ߬ ߟߊߦߍ߬ߟߍ߫ ߖߊ߰ߣߌ߲߫:</string>
   <string name="tutorial_3_subtext_1">ߌ ߖߍ߬ߘߍ ߥߟߊ߫ ߌ ߕߋߙߌ ߘߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
   <string name="tutorial_3_subtext_2">ߌ ߣߌ߬ ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߎ߬ ߟߊߖߌ߰ ߟߴߌ ߞߎ߲߬ ߓߟߐߟߐ ߟߊ߫</string>
@@ -84,7 +104,7 @@
   <string name="tutorial_4_subtext_1">ߞߎ߲߬ߕߐ߮:ߛߌߘߑߣߋ߫ ߘߐ߬ߓߛߏ߬ߟߌ߬ ߟߎ</string>
   <string name="welcome_final_text">ߌ ߦߴߊ߬ ߖߌ߰ ߟߊ߫ ߞߴߌ ߓߘߴߊ߬ ߛߐ߬ߘߐ߲߬؟</string>
   <string name="welcome_final_button_text">ߐ߲߬ߐ߲߬ߐ߲߫߹</string>
-  <string name="welcome_help_button_text">&lt;u&gt;ߞߟߊ߬ߟߐ߲߬ߠߌ߲߬ ߜߘߍ߫ ߟߎ߫&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;ߞߟߊ߬ߟߐ߲߬ߠߌ߲߬ ߜߘߍ߫ ߟߎ߫&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">ߦߌߟߡߊ ߟߎ߬</string>
   <string name="detail_panel_cats_loading">ߟߊ߬ߢߎ߲߬ߠߌ߲ ߦߵߌ ߘߐ߫...</string>
   <string name="detail_panel_cats_none">ߊ߬ ߡߊ߫ ߓߊߕߐ߬ߡߐ߲߬</string>
@@ -105,6 +125,16 @@
   <string name="media_detail_coordinates_empty">ߡߊ߫ ߡߊߛߐ߫</string>
   <string name="become_a_tester_title">ߌ ߞߊߘߊ߲߫ ߞߊ߬ ߞߍ߫ ߓߋߕߊ ߣߍߣߍߓߊ߮ ߘߏ߫ ߘߌ߫</string>
   <string name="_2fa_code">2FA Code</string>
+  <string name="number_of_uploads">ߒ ߠߊ߫ ߞߐ߯ߟߊ߫ ߟߊߦߟߍߟߌ ߟߎ߬ ߘߊ߲߭</string>
+  <string name="maximum_limit">ߘߊ߲߭ ߞߐߘߊ߲</string>
+  <string name="invalid_zero">ߘߐ߬ߞߏߟߏ߲ ߓߍ߲߬ߣߍ߲߬ ߕߍ߫</string>
+  <string name="invalid_input">ߟߊ߬ߘߏ߲߬ߕߊ ߓߍ߲߬ߓߊߟߌ</string>
+  <string name="maximum_limit_alert">ߌ ߕߴߛߋ߫ ߊ߬ ߟߊߓߊ߯ߙߊ߫ ߟߊ߫ ߞߊ߬ ߕߊ߬ߡߌ߲߬ ߅߀߀ ߞߊ߲߬</string>
+  <string name="enter_valid">ߝߙߍߕߍ߫ ߓߘߍ ߟߊߘߏ߲߬</string>
+  <string name="cannot_be_zero">ߟߊ߬ߦߟߍ߬ߟߌ ߕߛߋ߫ ߘߊ߲߬ ߠߊ߫ ߀ ߠߊ߫</string>
+  <string name="set_limit">ߟߊ߬ߦߟߍ߬ߟߌ߬ ߞߐ߯ߟߕߊ ߟߎ߬ ߘߊ߲߭</string>
+  <string name="logout_verification">ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲ ߓߐ߫ ߝߛߊߦߌ߫؟</string>
+  <string name="commons_logo">ߞߐߡߐ߲ ߛߌ߲ߞߐ߲</string>
   <string name="commons_website">ߞߐߡߐ߲ ߞߍߦߙߐ</string>
   <string name="commons_facebook">ߞߐߡߐ߲ ߝߋߛߑߓߎߞ ߞߐߜߍ</string>
   <string name="no_image_found">ߖߌ߬ߦߊ߬ߓߍ߫ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
@@ -112,6 +142,7 @@
   <string name="upload_image">ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߟߍ߬</string>
   <string name="welcome_image_mount_zao">ߖ߭ߊߏ߫ ߞߎ߬ߙߎ</string>
   <string name="welcome_image_llamas">ߞߏ߲ߞߏߛߊ߱</string>
+  <string name="welcome_image_rainbow_bridge">ߞߟߐ߬ߟߐ ߞߣߍߦߊ</string>
   <string name="welcome_image_no_selfies">ߖߘߍ߬ ߖߌ߬ߦߊ߬ߓߍ߬ ߕߊ߬ ߕߴߊ߬ ߘߐ߫</string>
   <string name="welcome_image_proprietary">ߖߌ߬ߦߊ߬ߓߍ߫ ߕߌ߰ߟߊ߬ߡߊ</string>
   <string name="welcome_image_welcome_wikipedia">ߌ ߣߌ߫ ߛߣߍ߫ ߥߞߌߡߋߘߌߦߊ ߞߊ߲߬</string>
@@ -147,7 +178,9 @@
   <string name="skip_login_title">ߌ ߦߴߊ߬ ߝߍ߬ ߓߊ߬ ߞߵߌ ߜߊ߲߫ ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߞߎ߲߬ߠߊ߫؟</string>
   <string name="skip_login_message">ߌ ߞߊߞߊ߲߫ ߞߵߌ ߜߊ߲߬ߞߎ߲߫ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ߫ ߛߐ߲߬.</string>
   <string name="login_alert_message">ߌ ߜߊ߲߬ߞߎ߲߫ ߖߊ߰ߣߌ߲߫ ߞߊ߬ ߟߊ߬ߓߊ߰ߙߊ߬ߟߌ ߣߌ߲߬ ߠߊߓߊ߯ߙߊ߫</string>
+  <string name="get_directions">ߞߎ߲߬ߕߋߟߋ߲ ߡߊߛߐ߬ߘߐ߲߬</string>
   <string name="read_article">ߞߎߡߘߊ ߘߐߞߊ߬ߙߊ߲߬</string>
+  <string name="notifications_welcome">ߌ ߣߌ߫ ߛߣߍ߫ ߥߞߌߡߋߘߌߦߊ߫ ߞߐߡߐ߲ %1$s߹ ߞߊ߲߬߸ ߊ߲ ߓߘߊ߫ ߛߍߥߊ߫ ߌ ߞߍߟߌ ߟߊ߫ ߦߊ߲߬.</string>
   <string name="notifications_talk_page_message">%1$s ߓߘߊ߫ ߘߏ߫ ߗߋ߫ ߌ ߟߊ߫ ߞߎߡߊ߫ ߞߐߜߍ ߞߊ߲߬.</string>
   <string name="notifications_thank_you_edit">ߌ ߣߌ߫ ߗߋ߫ ߌ ߟߊ߫ ߡߊ߬ߦߟߍ߬ߡߊ߲߬ߠߌ߲ ߠߊ߫</string>
   <string name="notifications_mention">%1$s ߓߘߴߌ ߕߐ߮ ߘߐߕߍ߰ %2$s.</string>
@@ -155,11 +188,11 @@
   <string name="nearby_wikidata">ߥߞߌߘߕߊ</string>
   <string name="nearby_wikipedia">ߥߞߌߔߋߘߌߦߊ߫</string>
   <string name="nearby_commons">ߞߐߡߐ߲</string>
-  <string name="about_rate_us">&lt;u&gt;ߊ߲ ߡߐ߬ߟߐ߲ ߦߌ߬ߘߊ߬&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;ߢ.ߡ&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;ߊ߲ ߡߐ߬ߟߐ߲ ߦߌ߬ߘߊ߬&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;ߢ.ߡ&lt;/u&gt;</string>
   <string name="no_internet">ߓߟߐߟߐ߫ ߕߴߦߋ߲߬</string>
   <string name="internet_established">ߓߟߐߟߐ ߦߋ߫ ߦߋ߲߬</string>
-  <string name="about_translate">&lt;u&gt;ߘߟߊߡߌߘߊߟߌ&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;ߘߟߊߡߌߘߊߟߌ&lt;/u&gt;</string>
   <string name="about_translate_title">ߞߊ߲ ߠߎ߬</string>
   <string name="about_translate_message">ߞߊ߲ ߘߏ߫ ߓߊߕߐ߬ߡߐ߲߬ ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߘߟߊߡߌ߬ߘߊ߬ ߡߍ߲ ߘߐ߫.</string>
   <string name="about_translate_cancel">ߊ߬ ߘߐߛߊ߬</string>
@@ -194,6 +227,8 @@
   <string name="delete_search_dialog">ߋ߯߹ ߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߢߌߣߌ߲ߠߌ߲ ߣߌ߲߬ ߖߏ߬ߛߌ߬ ߝߋߎ߫؟</string>
   <string name="search_history_deleted">ߢߌߣߌ߲ߠߌ߲ ߞߘߐ߬ߡߊ߲ ߠߎ߬ ߓߘߊ߫ ߖߏ߰ߛߌ߬</string>
   <string name="delete">ߊ߬ ߖߏ߬ߛߌ߫</string>
+  <string name="statistics_thanks">ߞߎߟߎ߲ߖߋߟߌ ߓߘߊ߫ ߟߊߛߐ߬ߘߐ߲߬</string>
+  <string name="statistics_featured">ߖߌ߬ߦߊ߬ߓߍ߫ ߟߊߓߊ߯ߙߕߊ ߟߎ߬</string>
   <string name="statistics_wikidata_edits">ߖߌ߬ߦߊ߬ߓߍ ߞߊߕߙߍ߬ \"ߛߌ߰ߢߐ߲߰ ߦߙߐ\" ߡߊ߬</string>
   <string name="level">ߞߊߓߋ</string>
   <string name="images_uploaded">ߖߌ߬ߦߊ߬ߓߍ ߓߘߊ߫ ߟߊߦߟߍ߬</string>
@@ -203,8 +238,11 @@
   <string name="contributions_fragment">ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߠߎ߬</string>
   <string name="nearby_fragment">ߛߌ߰ߢߐ߲߮</string>
   <string name="list_sheet">ߛߙߍߘߍ</string>
+  <string name="image_in_set_label">ߖߌ߬ߦߊ߬ߓߍ߫ %1$d ߘߐߓߍ߲߬ߕߊ</string>
   <string name="next">ߢߍߕߊ</string>
   <string name="previous">ߟߊ߬ߕߎ߲߰ߠߊ ߟߎ߬</string>
+  <string name="submit">ߊ߬ ߞߘߊߡߊ߫</string>
+  <string name="upload_title_duplicate">ߞߐߕߐ߮ ߣߌ߲߬ ߕߐ߮ ߦߋ߫ ߦߋ߲߬ %1$s ߞߘߐ߬ߡߊ߲߫. ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߘߊߓߊ߲߫ ߓߊ߬؟</string>
   <string name="title_page_bookmarks_pictures">ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬</string>
   <string name="desc_language_Worldwide">ߞߌߢߍ߲߫ ߝߊ߲߭ ߓߍ߯</string>
   <string name="desc_language_America">ߊߡߋߙߌߞߌ߬</string>
@@ -224,6 +262,16 @@
   <string name="never_ask_again">ߏ߬ ߞߊ߫ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߫ ߏ߬ ߞߐ߫ ߡߎ߰ߡߍ߫</string>
   <string name="display_location_permission_title">ߘߌ߲߬ߞߌߙߊ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߟߊߓߊ߯ߙߊ߫</string>
   <string name="nominate_for_deletion_done">ߊ߬ ߓߘߊ߫ ߞߍ߫</string>
+  <string name="send_thank_success_title">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ: ߓߘߊ߫ ߛߎߘߊ߲߫</string>
+  <string name="send_thank_success_message">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ ߓߘߊ߫ ߛߎߘߊ߲߫  %1$s ߡߊ߬.</string>
+  <string name="send_thank_failure_message">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ ߓߘߊ߫ ߛߎߘߊ߲߫  %1$s ߡߊ߬</string>
+  <string name="send_thank_failure_title">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ: ߓߘߊ߫ ߗߌߙߏ߲߫</string>
+  <string name="send_thank_send">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ</string>
+  <string name="send_thank_notification_title">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ</string>
+  <string name="send_thank_toast">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ  %1$s ߟߊ߫ ߞߏ߫ ߟߊ߫</string>
+  <string name="review_copyright">ߊ߬ ߝߐ߫ ߣߌ߲߬ ߓߍ߲߬ߣߍ߲߫ ߦߋ߫ ߓߊߦߟߍߡߊ߲ߠߌ߲ ߤߊߞߍ ߡߊ߬ ߝߋߎ߫؟</string>
+  <string name="review_category">ߊ߬ ߝߐ߫ ߣߌ߲߬ ߦߌߟߡߊߦߊߣߍ߲߫ ߝߋߎ߫؟</string>
+  <string name="review_thanks">ߊ߬ ߟߐ߯ ߦߴߌ ߟߊ߫ ߞߊ߬ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ߠߊ ߟߎ߬ ߞߎߟߎ߲ߖߋ߫ ߓߊ߬؟</string>
   <string name="review_copyright_yes_button_text">ߒ߬ߒ߫߸ ߓߊߦߟߍߡߊ߲ ߤߊߞߍ ߡߊ߫ ߕߌߢߍ߫</string>
   <string name="review_copyright_no_button_text">ߊ߬ ߞߍߣߍ߲߫ ߦߴߊ߬ ߓߍ߲߬ߣߍ߲߫</string>
   <string name="review_thanks_yes_button_text">ߐ߲߬ߐ߲ߐ߲߫߸ ߡߎ߲߬ߠߊ߫ ߍ߲߬ߍ߲߫</string>
@@ -237,4 +285,20 @@
   <string name="exif_tag_name_copyright">ߓߊߦߟߍߡߊ߲ ߤߊߞߍ</string>
   <string name="exif_tag_name_location">ߘߌ߲߬ߞߌߙߊ</string>
   <string name="exif_tag_name_cameraModel">ߖߌ߬ߦߊ߬ߕߊ߬ߟߊ߲ ߛߎ߮ߦߊ</string>
+  <string name="dialog_box_text_nomination">ߡߎ߲߬ߠߊ߫ %1$s ߖߏ߬ߛߌ߬ߕߐ߫؟</string>
+  <string name="review_is_uploaded_by">%1$s ߟߊߦߟߍ߬ߣߍ߲߬ ߦߋ߫: %2$s ߟߋ߬ ߓߟߏ߫</string>
+  <string name="default_description_language">ߞߊ߲߬ߛߓߍߟߌ ߞߍ߫ ߞߊ߲ ߓߊߖߎߡߊ</string>
+  <string name="delete_helper_show_deletion_title">ߕߐ߯ߦߊߟߌ ߖߏ߰ߛߌ߬ߟߌ ߞߊ߲ߡߊ߬</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s ߕߐ߯ߦߊߟߌ ߦߴߌ ߘߐ߫ ߖߏ߬ߛߌ߬ߟߌ ߞߊ߲ߡߊ߬</string>
+  <string name="delete_helper_show_deletion_title_failed">ߊ߬ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
+  <string name="delete_helper_show_deletion_message_else">ߌ ߕߍ߫ ߛߋ߫ ߖߏ߰ߛߌ߬ߟߌ ߡߊߢߌߣߌ߲߫ ߠߊ߫</string>
+  <string name="delete_helper_ask_spam_blurry">ߢߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲</string>
+  <string name="delete_helper_ask_spam_other">ߘߏ߫ ߜߘߍ߫</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">ߖߌ߬ߦߊ߬ߓߍ ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲</string>
+  <string name="delete_helper_ask_reason_copyright_logo">ߛߌ߲ߞߐ߲</string>
+  <string name="delete_helper_ask_reason_copyright_other">ߘߏ߫ ߜߘߍ߫</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">ߓߊߏ߬ ߊ߬ ߦߋ߫</string>
+  <string name="share_image_via">ߖߌ߬ߦߊ߬ߓߍ ߟߊߖߍ߲ߛߍ߲߫ ߞߊߕߙߍ߬</string>
+  <string name="no_achievements_yet">ߌ ߡߊ߫ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߛߌ߫ ߞߍ߫ ߡߎߣߎ߲߬</string>
+  <string name="some_error">ߝߎ߬ߕߎ߲߬ߕߌ ߘߏ߫ ߕߘߍ߬ ߦߋ߫ ߦߋ߲߬߹</string>
 </resources>

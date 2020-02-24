@@ -96,8 +96,8 @@
   <string name="menu_about">గురించి</string>
   <string name="about_license">వికీమీడియా కామన్స్ యాప్ ఓపెన్_సోర్సు యాప్. దీన్ని వికీమీడియా సముదాయం లోని స్వచ్ఛంద సేవకులు తయారు చేసి, నిర్వహిస్తున్నారు. దీని తయారీ, అభివృద్ధి, నిర్వహణలో వికీమీడియా కామన్స్‌కు పాత్ర ఏమీ లేదు.</string>
   <string name="about_improve">ఏదైనా సమస్యను గానీ, సూచనను గానీ నివేదించేందుకు &lt;a href=\"%1$s\"&gt;GitHub లో ఒక కొత్త ఇష్యూను&lt;/a&gt; సృష్టించండి.</string>
-  <string name="about_privacy_policy">&lt;u&gt;గోప్యతా విధానం&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;శ్రేయస్సులు&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;గోప్యతా విధానం&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;శ్రేయస్సులు&lt;/u&gt;</string>
   <string name="title_activity_about">గురించి</string>
   <string name="menu_feedback">ఫీడుబ్యాకును పంపండి (ఈమెయిలు ద్వారా)</string>
   <string name="no_email_client">ఈమెయిలు క్లయంటేదీ లేదు</string>
@@ -156,7 +156,7 @@
   <string name="welcome_copyright_subtext">అంతర్జాలంలో దొరికే కాపీహక్కులు కలిగిన వస్తువులు, పోస్టర్లు, పుస్తకాల అట్టల బొమ్మలు మొదలైనవాటిని పెట్టకండి.</string>
   <string name="welcome_final_text">అర్థమైందనుకుంటున్నారా?</string>
   <string name="welcome_final_button_text">అయింది!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;మరింత సమాచారం&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;మరింత సమాచారం&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">వర్గాలు</string>
   <string name="detail_panel_cats_loading">లోడవుతోంది…</string>
   <string name="detail_panel_cats_none">దేన్నీ ఎంచుకోలేదు</string>
@@ -258,7 +258,7 @@
   <string name="null_url">లోపం! URL కనబడలేదు</string>
   <string name="nominate_deletion">తొలగించేందుకు నామినేటు చెయ్యండి</string>
   <string name="nominated_for_deletion">ఆ బొమ్మను తొలగించేందుకు నామినేటు చేసాం.</string>
-  <string name="nominated_see_more">&lt;u&gt;వివరాల కోసం వెబ్‌పేజీని చూడండి&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;వివరాల కోసం వెబ్‌పేజీని చూడండి&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">%1$s ని తొలగింపు కోసం నామినేటు చేస్తున్నాం.</string>
   <string name="nominating_for_deletion_status">ఈ ఫైలును తొలగింపు కోసం నామినేటు చేస్తున్నాం: %1$s</string>
   <string name="view_browser">బ్రౌజరులో చూడండి</string>
@@ -270,7 +270,7 @@
   <string name="copy_wikicode">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చెయ్యి</string>
   <string name="wikicode_copied">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చేసాం</string>
   <string name="nearby_location_has_not_changed">స్థలం మారలేదు.</string>
-  <string name="nearby_location_not_available">స్థలం అందుబాటులో లేదు.</string>
+  <string name="nearby_location_not_available" fuzzy="true">స్థలం అందుబాటులో లేదు.</string>
   <string name="location_permission_rationale_nearby">చుట్టుపక్కల స్థలాలను చూపించాలంటే అనుమతి కావాలి</string>
   <string name="get_directions">మార్గసూచనలను పొందండి</string>
   <string name="read_article">వ్యాసాన్ని చదవండి</string>
@@ -283,8 +283,8 @@
   <string name="nearby_wikidata">వికీడేటా</string>
   <string name="nearby_wikipedia">వికీపీడియా</string>
   <string name="nearby_commons">కామన్స్</string>
-  <string name="about_rate_us">&lt;u&gt;మమ్మల్ని మూల్యాంకన చెయ్యండి&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;మమ్మల్ని మూల్యాంకన చెయ్యండి&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">ట్యుటోరియల్‌ను దాటవెయ్యి</string>
   <string name="no_internet">అంతర్జాలం అందుబాటులో లేదు</string>
   <string name="internet_established">అంతర్జాలం అందుబాటులో ఉంది</string>
@@ -292,7 +292,7 @@
   <string name="error_review">బొమ్మ మునుజూపు తేవడంలో లోపం. మళ్ళీ ప్రయత్నించేందుకు రిఫ్రెష్ చెయ్యండి.</string>
   <string name="error_review_categories">సమీక్షించేందుకు గాను బొమ్మ వర్గాలను తేవడంలో లోపం. మళ్ళీ ప్రయత్నించేందుకు రిఫ్రెష్ చెయ్యండి.</string>
   <string name="no_notifications">గమనింపులేమీ కనబడలేదు</string>
-  <string name="about_translate">&lt;u&gt;అనువదించండి&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;అనువదించండి&lt;/u&gt;</string>
   <string name="about_translate_title">భాషలు</string>
   <string name="about_translate_message">మీ అనువాదాలను సమర్పించేందుకు భాషను ఎంచుకోండి</string>
   <string name="about_translate_proceed">పద</string>

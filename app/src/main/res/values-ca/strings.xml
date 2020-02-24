@@ -100,8 +100,8 @@
   <string name="menu_about">Quant a</string>
   <string name="about_license">L’aplicació de codi obert Wikimedia Commons fou creada per, i rep manteniment de, cessionaris i voluntaris de la comunitat de Wikimedia. La Fundació Wikimedia no està involucrada en la creació, el desenvolupament ni el manteniment de l’aplicació.</string>
   <string name="about_improve">Crea una &lt;a href=\"%1$s\"&gt;incidència de GitHub&lt;/a&gt; nova per a informes d\'error i suggeriments.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Política de privadesa&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Crèdits&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Política de privadesa</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Crèdits&lt;/u&gt;</string>
   <string name="title_activity_about">Quant a</string>
   <string name="menu_feedback">Envia comentaris (per correu)</string>
   <string name="no_email_client">No hi ha cap client de correu instal·lat</string>
@@ -161,7 +161,7 @@
   <string name="welcome_copyright_subtext">No utilitzis material amb copyright que puguis trobar a Internet, ni tampoc imatges de pòsters, portades de llibres, etc.</string>
   <string name="welcome_final_text">Creieu que ho heu entès?</string>
   <string name="welcome_final_button_text">Sí!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Més Informació&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Més Informació&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categories</string>
   <string name="detail_panel_cats_loading">Carregant…</string>
   <string name="detail_panel_cats_none">No se n\'ha seleccionat cap</string>
@@ -254,7 +254,7 @@
   <string name="null_url">Error! No s\'ha trobat l\'URL</string>
   <string name="nominate_deletion">Nomina per a supressió</string>
   <string name="nominated_for_deletion">S\'ha nominat la imatge per a supressió.</string>
-  <string name="nominated_see_more">&lt;u&gt;Vegeu la pàgina web per a més detalls&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Vegeu la pàgina web per a més detalls&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">S\'està nominant %1$s per a ser eliminada.</string>
   <string name="nominating_for_deletion_status">S\'està nominant per a ser eliminat el fitxer: %1$s</string>
   <string name="view_browser">Mostra en el navegador</string>
@@ -266,7 +266,7 @@
   <string name="copy_wikicode">Copia el wikitext al portaretalls</string>
   <string name="wikicode_copied">S\'ha copiat el wikitext al portaretalls</string>
   <string name="nearby_location_has_not_changed">La ubicació no ha canviat.</string>
-  <string name="nearby_location_not_available">La ubicació no és disponible.</string>
+  <string name="nearby_location_not_available" fuzzy="true">La ubicació no és disponible.</string>
   <string name="location_permission_rationale_nearby">Permís necessari per a mostrar una llista de llocs propers</string>
   <string name="get_directions">Com anar-hi</string>
   <string name="read_article">Llegeix l’article</string>
@@ -279,14 +279,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Viquipèdia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Valoreu-nos&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;PMF&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Valoreu-nos&lt;/u&gt;</string>
+  <string name="about_faq">Preguntes freqüents</string>
   <string name="welcome_skip_button">Omet la guia</string>
   <string name="no_internet">Internet no disponible</string>
   <string name="internet_established">Internet disponible</string>
   <string name="error_notifications">S\'ha produït un error en recuperar notificacions</string>
   <string name="no_notifications">No s\'ha trobat cap notificació</string>
-  <string name="about_translate">&lt;u&gt;Tradueix&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Tradueix&lt;/u&gt;</string>
   <string name="about_translate_title">Llengües</string>
   <string name="about_translate_message">Seleccioneu la llengua en què voleu enviar traduccions</string>
   <string name="about_translate_proceed">Procedeix</string>
