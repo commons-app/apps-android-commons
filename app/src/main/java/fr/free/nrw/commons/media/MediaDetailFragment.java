@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Animatable;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.Context;
@@ -24,7 +25,10 @@ import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,6 +44,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -236,6 +241,23 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         compositeDisposable.add(disposable);
     }
 
+    private void updateAspectRatio(ImageInfo imageInfo) {
+        if (imageInfo != null) {
+            image.setAspectRatio(((float)imageInfo.getWidth()/imageInfo.getHeight()));
+        }
+    }
+
+    private final ControllerListener aspectRatioListener = new BaseControllerListener<ImageInfo>() {
+        @Override
+        public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+            updateAspectRatio(imageInfo);
+        }
+        @Override
+        public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
+            updateAspectRatio(imageInfo);
+        }
+    };
+
     /**
      * Uses two image sources.
      * - low resolution thumbnail is shown initially
@@ -245,6 +267,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
                 .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+                .setControllerListener(aspectRatioListener)
                 .setOldController(image.getController())
                 .build();
         image.setController(controller);
