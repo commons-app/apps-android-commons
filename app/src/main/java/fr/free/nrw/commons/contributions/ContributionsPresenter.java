@@ -82,18 +82,14 @@ public class ContributionsPresenter implements UserActionListener {
     }
 
     public void fetchContributions() {
-        String uploadsString = repository.getString("uploads");
-        int defaultNumberOfUploads=50;
-        if(!TextUtils.isEmpty(uploadsString)){
-            defaultNumberOfUploads=Integer.parseInt(uploadsString);
-        }
-
+        Timber.d("fetch  Contributions");
         LiveData<List<Contribution>> liveDataContributions = repository.fetchContributions();
         if(null!=lifeCycleOwner) {
              liveDataContributions.observe(lifeCycleOwner, this::showContributions);
         }
 
         if (NetworkUtils.isInternetConnectionEstablished(CommonsApplication.getInstance()) && shouldFetchContributions()) {
+            Timber.d("fetching contributions: ");
             view.showProgress(true);
             this.user = sessionManager.getUserName();
             view.showContributions(null);
@@ -110,7 +106,7 @@ public class ContributionsPresenter implements UserActionListener {
                     })
                     .toList()
                     .subscribe(this::saveContributionsToDB, error -> {
-                        //DO nothing,
+                        Timber.e("Failed to fetch contributions: "+error.getMessage());
                     }));
         }
     }
@@ -131,18 +127,36 @@ public class ContributionsPresenter implements UserActionListener {
     }
 
     private void saveContributionsToDB(List<Contribution> contributions) {
+        Timber.e("Fetched: "+contributions.size()+" contributions "+" saving to db");
         repository.save(contributions)
                 .subscribeOn(ioThreadScheduler)
                 .observeOn(mainThreadScheduler)
-                .subscribe();
+                .subscribe(new SingleObserver<List<Long>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(List<Long> longs) {
+                        Timber.d("saved to db");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.e("could not save to db: %s", e.getMessage());
+                    }
+                });
         repository.set("last_fetch_timestamp",System.currentTimeMillis());
     }
 
     private boolean shouldFetchContributions() {
         long lastFetchTimestamp = repository.getLong("last_fetch_timestamp");
+        Timber.d("last fetch timestamp: "+lastFetchTimestamp);
         if(lastFetchTimestamp!=0){
             return System.currentTimeMillis()-lastFetchTimestamp>15*60*100;
         }
+        Timber.d("should  fetch contributions: "+true);
         return true;
     }
 
