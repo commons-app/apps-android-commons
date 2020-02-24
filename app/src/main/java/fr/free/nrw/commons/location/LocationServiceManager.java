@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
@@ -212,6 +213,15 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         Timber.d("Provider %s disabled", provider);
+        if (provider.equals("gps")) {
+            //TODO: Rename this class object to something better
+            NearbyParentFragment nb = new NearbyParentFragment();
+            nb.showDialogAgain();
+        }
+    }
+
+    public boolean isLocationEnabled() {
+        return locationManager.isProviderEnabled("gps");
     }
 
     public enum LocationChangeType{
