@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -87,6 +88,7 @@ import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -191,6 +193,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private NearbyController.NearbyPlacesInfo nearbyPlacesInfo;
     private NearbyAdapterFactory adapterFactory;
     private boolean isVisibleToUser;
+    private static boolean showDialogAgain = true; // controls whether to show the user location off dialog again or not
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
 
@@ -301,6 +304,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (isResumed() && isVisibleToUser) {
             startTheMap();
         }
+        showDialogAgain();
     }
 
     private void registerNetworkReceiver() {
@@ -908,6 +912,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSlightly(fr.free.nrw.commons.location.LatLng latLng) {
+        //TODO: Fix the typo in this log - significantly -> slightly
         Timber.d("Location slightly changed");
         if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng,LOCATION_SLIGHTLY_CHANGED);
@@ -1232,7 +1237,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
         if (curLatLng == null) {
+            showLocationNullDialog();
             return;
+        } else if (!locationManager.isLocationEnabled() && showDialogAgain) {
+            // location is not null but it is not enabled. So, user should be prompted
+            // to enable it.
+            showLocationOffDialog();
         }
         addCurrentLocationMarker(curLatLng);
         CameraPosition position;
@@ -1260,6 +1270,40 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
 
         mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+    }
+
+    private void showLocationNullDialog() {
+        // This dialog box will not go away if the user click on No button on the dialog
+        // as Nearby can't work if location is null
+        DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
+                "Yes", "No",  this::openLocationSettings, null);
+    }
+
+    private void showLocationOffDialog() {
+        // This dialog will not prompt again if the user presses the No button.
+        // It will prompt the user again if Nearby is started again or gps is turned on/off.
+        DialogUtil .showAlertDialog(getActivity(), "Turn on location?", "Nearby needs location enabled to work properly",
+                "Yes", "No",  this::openLocationSettings, this::disableLocationOffDialog);
+    }
+
+    private void openLocationSettings() {
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        try {
+            getContext().startActivity(intent);
+            Toast.makeText(getContext(), R.string.set_location_mode_high_accuracy, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
+            Timber.e(e);
+        }
+    }
+
+    public void showDialogAgain() {
+        showDialogAgain = true;
+    }
+
+    public void disableLocationOffDialog() {
+        showDialogAgain = false;
+        Timber.d("Location dialog disabled");
     }
 
     @Override

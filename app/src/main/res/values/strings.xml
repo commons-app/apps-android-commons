@@ -591,4 +591,7 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
   <string name="upload_nearby_place_found_description">Is this a photo of Place %1$s?</string>
+
+  <string name="cannot_open_location_settings">Could not open location settings. Please turn location on manually</string>
+  <string name="set_location_mode_high_accuracy">Please set location mode to High Accuracy</string>
 </resources>

@@ -15,6 +15,7 @@ public class DialogUtil {
 
     /**
      * Shows a dialog safely.
+     *
      * @param activity the activity
      * @param dialog the dialog to be shown
      */
@@ -150,6 +151,7 @@ public class DialogUtil {
 
     /**
      * show a dialog with just a positive button
+     *
      * @param activity
      * @param title
      * @param message
