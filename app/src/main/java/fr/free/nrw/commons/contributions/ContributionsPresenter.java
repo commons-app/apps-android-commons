@@ -175,7 +175,7 @@ public class ContributionsPresenter implements UserActionListener {
     @Nullable
     @Override
     public Media getItemAtPosition(int i) {
-        if (i == -1 || contributionList == null || contributionList.size() < i) {
+        if (i == -1 || contributionList == null || contributionList.size() < i+1) {
             return null;
         }
         return contributionList.get(i);
