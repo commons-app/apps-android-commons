@@ -67,7 +67,6 @@ class ContributionsPresenterTest {
         Mockito.`when`(repository?.getString(ArgumentMatchers.anyString())).thenReturn("10")
         Mockito.`when`(repository?.fetchContributions()).thenReturn(liveData)
         contributionsPresenter?.fetchContributions()
-        verify(repository)?.getString(ArgumentMatchers.anyString())
         verify(repository)?.fetchContributions()
     }
 
