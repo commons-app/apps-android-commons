@@ -150,7 +150,6 @@ public class DialogUtil {
 
     /**
      * show a dialog with just a positive button
-     *
      * @param activity
      * @param title
      * @param message
