@@ -157,7 +157,6 @@ public class DialogUtil {
      * @param positiveButtonClick
      * @param cancellable
      */
-    //TODO: Refactor the arguments of this method to distribute them vertically instead of horizontally
     public static void showAlertDialog(Activity activity, String title, String message, String positiveButtonText, final Runnable positiveButtonClick, boolean cancellable) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title);
@@ -174,4 +173,5 @@ public class DialogUtil {
         AlertDialog dialog = builder.create();
         showSafely(activity, dialog);
     }
+
 }
