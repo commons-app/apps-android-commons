@@ -293,7 +293,7 @@
   <string name="nearby_wikipedia">Википедија</string>
   <string name="nearby_commons">Остава</string>
   <string name="about_rate_us" fuzzy="true">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;ЧПП&lt;/u&gt;</string>
+  <string name="about_faq">Честа питања</string>
   <string name="welcome_skip_button">Прескочи упутство</string>
   <string name="no_internet">Интернет није доступан</string>
   <string name="internet_established">Интернет је доступан</string>
@@ -525,4 +525,6 @@
   <string name="place_state_needs_photo">Потребна слика</string>
   <string name="nearby_search_hint">Мост, музеј, хотел итд.</string>
   <string name="upload_nearby_place_found_title">Оближње место је пронађено</string>
+  <string name="remove_bookmark">Уклоњено из обележивача</string>
+  <string name="add_bookmark">Додато у обележиваче</string>
 </resources>

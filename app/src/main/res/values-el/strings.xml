@@ -106,7 +106,7 @@
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
   <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"%1$s\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Πολιτική απορρήτου&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Πολιτική ιδιωτικότητας</string>
   <string name="about_credits" fuzzy="true">&lt;u&gt;Συντελεστές&lt;/u&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
   <string name="menu_feedback">Αποστολή σχολίων (μέσω Email)</string>
@@ -289,7 +289,7 @@
   <string name="internet_established">Το διαδίκτυο είναι διαθέσιμο</string>
   <string name="error_notifications">Σφάλμα κατά την συγκέντρωση ειδοποιήσεων</string>
   <string name="no_notifications">Δεν βρέθηκαν ειδοποιήσεις</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Μεταφράστε&lt;/u&gt;</string>
+  <string name="about_translate">Μετάφραση</string>
   <string name="about_translate_title">Γλώσσες</string>
   <string name="about_translate_message">Επιλέξτε την γλώσσα που θα θέλατε να υποβάλετε μεταφράσεις για αυτή</string>
   <string name="about_translate_proceed">Συνέχεια</string>

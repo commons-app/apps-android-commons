@@ -506,7 +506,7 @@
   <string name="review_thanks_yes_button_text">是，为什么不呢</string>
   <string name="review_thanks_no_button_text">下一张图片</string>
   <string name="skip_image_explanation">点击这个按钮会给你另外一个来自于Wikimedia Common上传的图片</string>
-  <string name="review_image_explanation">你可以审查图片病提高Wikimedia Commoms的质量。\n审查的四个参数是：\n-图片尺寸是否在规定的范围\n-图片是否遵循版权规则\n-图片是否正确分类\n-如果一切正常你是否也可以感谢贡献者</string>
+  <string name="review_image_explanation">你可以审查图片并提高Wikimedia Commoms的质量。\n审查的四个参数是：\n-图片尺寸是否在规定的范围\n-图片是否遵循版权规则\n-图片是否正确分类\n-如果一切正常你是否也可以感谢贡献者</string>
   <plurals name="receiving_shared_content">
     <item quantity="other">正在处理数据。处理时间取决于图片的尺寸和您的设备</item>
   </plurals>
@@ -575,4 +575,7 @@
   <string name="place_type">地点类型：</string>
   <string name="nearby_search_hint">桥梁、博物馆、旅馆等</string>
   <string name="you_must_reset_your_passsword">登录时出现一些问题，您必须重新设置您的密码！</string>
+  <string name="wallpaper_set_unsuccessfully">出错了。无法设置壁纸</string>
+  <string name="setting_wallpaper_dialog_title">设为壁纸</string>
+  <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
 </resources>

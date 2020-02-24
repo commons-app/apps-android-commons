@@ -571,4 +571,9 @@
   <string name="you_must_reset_your_passsword">משהו השתבש בכניסה למערכת, עליך לאפס את הססמה שלך!</string>
   <string name="upload_nearby_place_found_title">נמצא בקרבת מקום</string>
   <string name="upload_nearby_place_found_description">האם זאת תמונה של המקום %1$s?</string>
+  <string name="remove_bookmark">הוסר מסימניות</string>
+  <string name="add_bookmark">נוסף לסימניות</string>
+  <string name="wallpaper_set_unsuccessfully">משהו השתבש. לא היה אפשר להגדיר את הטפט</string>
+  <string name="setting_wallpaper_dialog_title">להגדיר בתור טפט</string>
+  <string name="setting_wallpaper_dialog_message">הגדרת טפט. נא להמתין...</string>
 </resources>

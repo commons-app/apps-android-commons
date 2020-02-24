@@ -46,7 +46,7 @@
   <string name="forgot_password">Mot de passe oublié ?</string>
   <string name="signup">S’inscrire</string>
   <string name="logging_in_title">Connexion</string>
-  <string name="logging_in_message">Veuillez patienter...</string>
+  <string name="logging_in_message">Veuillez patienter…</string>
   <string name="login_success">Connexion réussie !</string>
   <string name="login_failed">Échec de la connexion !</string>
   <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
@@ -85,7 +85,7 @@
   <string name="login_failed_generic">Échec de connexion</string>
   <string name="share_upload_button">Téléverser</string>
   <string name="multiple_share_base_title">Nommer ce jeu</string>
-  <string name="add_set_name_toast">Veuillez fournir un nom pour cet jeu</string>
+  <string name="add_set_name_toast">Veuillez fournir un nom pour ce jeu</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Téléverser</string>
   <string name="categories_search_text_hint">Rechercher des catégories</string>
@@ -115,7 +115,7 @@
   <string name="title_activity_signup">S’inscrire</string>
   <string name="title_activity_featured_images">Images remarquables</string>
   <string name="title_activity_category_details">Catégorie</string>
-  <string name="title_activity_review">Relecture par pair</string>
+  <string name="title_activity_review">Relecture par les pairs</string>
   <string name="menu_about">À propos</string>
   <string name="about_license">L’application Wikimedia Commons est une application open source créée et tenue à jour par des délégués et bénévoles de la communauté Wikimedia. La Fondation Wikimedia n’est pas associée à la création, le développement ou l’entretien de l’application.</string>
   <string name="about_improve">Créer un nouveau &lt;a href=\"%1$s\"&gt;rapport sur GitHub&lt;/a&gt; pour signaler des anomalies ou des suggestions.</string>
@@ -123,9 +123,9 @@
   <string name="about_credits">Crédits</string>
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
-  <string name="no_email_client">Aucun client de courriel installé</string>
+  <string name="no_email_client">Aucun client de messagerie installé</string>
   <string name="provider_categories">Catégories récemment utilisées</string>
-  <string name="waiting_first_sync">Attente de première synchronisation...</string>
+  <string name="waiting_first_sync">Attente de première synchronisation…</string>
   <string name="no_uploads_yet">Vous n’avez encore téléchargé aucune photo.</string>
   <string name="menu_retry_upload">Réessayer</string>
   <string name="menu_cancel_upload">Annuler</string>
@@ -580,4 +580,9 @@
   <string name="you_must_reset_your_passsword">Quelque chose s’est mal passé lors de la connexion, vous devez réinitialiser votre mot de passe !!</string>
   <string name="upload_nearby_place_found_title">Endroit trouvé à proximité</string>
   <string name="upload_nearby_place_found_description">Est-ce une photo de l’endroit %1$s ?</string>
+  <string name="remove_bookmark">Retiré des favoris</string>
+  <string name="add_bookmark">Ajouté aux favoris</string>
+  <string name="wallpaper_set_unsuccessfully">Un problème est survenu. Impossible d\'installer le fond d\'écran.</string>
+  <string name="setting_wallpaper_dialog_title">Définir comme fond d’écran</string>
+  <string name="setting_wallpaper_dialog_message">Configuration du fond d\'écran. Veuillez attendre...</string>
 </resources>

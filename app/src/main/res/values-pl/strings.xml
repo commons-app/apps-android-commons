@@ -7,6 +7,7 @@
 * DeRudySoulStorm
 * InternerowyGołąb
 * Krottyianock
+* Matma Rex
 * Mazab IZW
 * Rail
 * Railfail536
@@ -110,8 +111,8 @@
   <string name="menu_about">O aplikacji</string>
   <string name="about_license">Aplikacja Wikimedia Commons jest oprogramowaniem typu open-source tworzonym i rozwijanym przez stypendystów i wolontariuszy ze społeczności Wikimedii. Fundacja Wikimedia nie bierze udziału w tworzeniu, rozwijaniu ani utrzymywaniu aplikacji.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"%1$s\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Polityka prywatności&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Twórcy&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Polityka prywatności</string>
+  <string name="about_credits">Twórcy</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
   <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
@@ -167,7 +168,7 @@
   <string name="welcome_copyright_subtext">Unikaj materiałów objętych prawami autorskimi znalezionych w Internecie, a także zdjęć plakatów, okładek książek itp.</string>
   <string name="welcome_final_text">Czy wszystko jest jasne?</string>
   <string name="welcome_final_button_text">Tak!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Więcej informacji&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Więcej informacji</string>
   <string name="detail_panel_cats_label">Kategorie</string>
   <string name="detail_panel_cats_loading">Ładowanie…</string>
   <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
@@ -276,14 +277,14 @@
   <string name="nearby_wikidata">Wikidane</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Oceń nas&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">Oceń nas</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">Pomiń samouczek</string>
   <string name="no_internet">Brak połączenia z internetem</string>
   <string name="internet_established">Nawiązano połączenie z internetem</string>
   <string name="error_notifications">Błąd w trakcie pobierania powiadomień</string>
   <string name="no_notifications">Nie znaleziono powiadomień</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Przetłumacz&lt;/u&gt;</string>
+  <string name="about_translate">Przetłumacz</string>
   <string name="about_translate_title">Języki</string>
   <string name="about_translate_proceed">Dalej</string>
   <string name="about_translate_cancel">Anuluj</string>

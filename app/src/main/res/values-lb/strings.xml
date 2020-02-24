@@ -92,7 +92,7 @@
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
   <string name="about_improve">Leet wgl. &lt;a href=\"%1$s\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Dateschutzrichtlinn&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Merci&lt;/u&gt;</string>
+  <string name="about_credits">Merci</string>
   <string name="title_activity_about">Iwwer</string>
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>
   <string name="no_email_client">Keen E-Mail-Client installéiert</string>
@@ -150,6 +150,7 @@
   <string name="welcome_copyright_subtext">Evitéiert Materialien déi ënner de Copyright falen an déi Dir um Internet fonnt hutt, genee sou wéi Biller vu Pousteren, Bicher, asw.</string>
   <string name="welcome_final_text">Dir mengt Dir huet et verstan?</string>
   <string name="welcome_final_button_text">Jo!</string>
+  <string name="welcome_help_button_text">Méi Informatiounen</string>
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lueden…</string>
   <string name="detail_panel_cats_none">Näischt ausgewielt</string>
@@ -244,13 +245,13 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Bewäert eis&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">Bewäert eis</string>
+  <string name="about_faq">FAQ</string>
   <string name="no_internet">Internet net disponibel</string>
   <string name="internet_established">Internet disponibel</string>
   <string name="error_notifications">Feeler beim Ofruffe vun den Notifikatiounen</string>
   <string name="no_notifications">Keng Notifikatioune fonnt</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Iwwersetzen&lt;/u&gt;</string>
+  <string name="about_translate">Iwwersetzen</string>
   <string name="about_translate_title">Sproochen</string>
   <string name="about_translate_message">Sicht déi Sprooch eraus Fir déi Dir Iwwersetzunge maache wëllt</string>
   <string name="about_translate_proceed">Virufueren</string>
@@ -351,4 +352,6 @@
   <string name="account_created">Benotzerkont ugeluecht!</string>
   <string name="place_state_needs_photo">Brauch eng Foto</string>
   <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
+  <string name="remove_bookmark">Vun de Lieszeechen ewechgeholl</string>
+  <string name="add_bookmark">Bei d\'Lieszeechen derbäigesat</string>
 </resources>

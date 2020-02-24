@@ -321,4 +321,6 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="share_image_via">Deel afbeelding via</string>
   <string name="account_created">Profiel gemaakt!</string>
+  <string name="remove_bookmark">Bladwijzer verwijderd</string>
+  <string name="add_bookmark">Als bladwijzer toegevoegd</string>
 </resources>
