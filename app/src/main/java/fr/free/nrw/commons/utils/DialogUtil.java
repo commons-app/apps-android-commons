@@ -15,9 +15,8 @@ public class DialogUtil {
 
     /**
      * Shows a dialog safely.
-     *
      * @param activity the activity
-     * @param dialog   the dialog to be shown
+     * @param dialog the dialog to be shown
      */
     private static void showSafely(Activity activity, Dialog dialog) {
         if (activity == null || dialog == null) {
