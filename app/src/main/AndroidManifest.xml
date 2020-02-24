@@ -41,6 +41,11 @@
             android:excludeFromRecents="true"
             android:finishOnTaskLaunch="true" />
 
+        <activity
+            android:name=".media.ZoomableActivity"
+            android:label="@string/title_activity_zoomable"
+            android:theme="@style/LightAppTheme.NoActionBar" />
+
         <activity android:name=".auth.LoginActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
