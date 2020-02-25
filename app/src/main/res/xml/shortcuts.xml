@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_explore_24dp"
+        android:icon="@mipmap/ic_explore"
         android:shortcutId="Explore"
         android:shortcutLongLabel="@string/title_app_shortcut_explore"
         android:shortcutShortLabel="@string/title_app_shortcut_explore"
@@ -16,7 +16,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_filled_star_24dp"
+        android:icon="@mipmap/ic_filled_star"
         android:shortcutId="Bookmark"
         android:shortcutLongLabel="@string/title_app_shortcut_bookmark"
         android:shortcutShortLabel="@string/title_app_shortcut_bookmark"
@@ -29,7 +29,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_settings_black_24dp"
+        android:icon="@mipmap/ic_settings_black"
         android:shortcutId="Setting"
         android:shortcutLongLabel="@string/title_app_shortcut_setting"
         android:shortcutShortLabel="@string/title_app_shortcut_setting"
