@@ -78,7 +78,7 @@
             android:name=".contributions.MainActivity"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
-            android:configChanges="screenSize|keyboard" />
+            android:configChanges="screenSize|keyboard|orientation" />
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
