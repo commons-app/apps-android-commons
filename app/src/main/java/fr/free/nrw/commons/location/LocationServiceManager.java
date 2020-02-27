@@ -214,7 +214,6 @@ public class LocationServiceManager implements LocationListener {
     public void onProviderDisabled(String provider) {
         Timber.d("Provider %s disabled", provider);
         if (provider.equals("gps")) {
-            //TODO: Rename this class object to something better
             NearbyParentFragment nearbyParentFragment = new NearbyParentFragment();
             nearbyParentFragment.enableLocationOffDialog();
         }
