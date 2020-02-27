@@ -574,6 +574,9 @@
   <string name="you_must_reset_your_passsword">Giriş ile ilgili bir sorun oluştu, şifrenizi sıfırlamanız gerekir !!</string>
   <string name="upload_nearby_place_found_title">Yakındaki Yer Bulundu</string>
   <string name="upload_nearby_place_found_description">Bu fotoğrafın yeri %1$s mı?</string>
+  <string name="title_app_shortcut_explore">Keşfet</string>
+  <string name="title_app_shortcut_bookmark">Yer imleri</string>
+  <string name="title_app_shortcut_setting">Ayarlar</string>
   <string name="remove_bookmark">Yer işaretlerinden kaldırıldı</string>
   <string name="add_bookmark">Yer işaretlerine eklendi</string>
   <string name="wallpaper_set_unsuccessfully">Bir şeyler yanlış gitti. Duvar kağıdı ayarlanamadı</string>

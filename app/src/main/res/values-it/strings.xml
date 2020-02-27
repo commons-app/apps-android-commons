@@ -500,6 +500,9 @@
   <string name="text_copy">Testo copiato negli appunti</string>
   <string name="notification_mark_read">Notifica segnata come letta</string>
   <string name="some_error">Si è verificato un errore!</string>
+  <string name="title_app_shortcut_explore">Esplora</string>
+  <string name="title_app_shortcut_bookmark">Segnalibri</string>
+  <string name="title_app_shortcut_setting">Impostazioni</string>
   <string name="remove_bookmark">Rimuovi dai preferiti</string>
   <string name="add_bookmark">Aggiungi ai preferiti</string>
 </resources>

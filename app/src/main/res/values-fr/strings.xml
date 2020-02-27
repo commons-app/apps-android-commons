@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* BaRaN6161 TURK
 * Cyclicus
 * Derugon
 * Eneelk
@@ -580,6 +581,9 @@
   <string name="you_must_reset_your_passsword">Quelque chose s’est mal passé lors de la connexion, vous devez réinitialiser votre mot de passe !!</string>
   <string name="upload_nearby_place_found_title">Endroit trouvé à proximité</string>
   <string name="upload_nearby_place_found_description">Est-ce une photo de l’endroit %1$s ?</string>
+  <string name="title_app_shortcut_explore">Explorer</string>
+  <string name="title_app_shortcut_bookmark">Signets</string>
+  <string name="title_app_shortcut_setting">Paramètres</string>
   <string name="remove_bookmark">Retiré des favoris</string>
   <string name="add_bookmark">Ajouté aux favoris</string>
   <string name="wallpaper_set_unsuccessfully">Un problème est survenu. Impossible d\'installer le fond d\'écran.</string>

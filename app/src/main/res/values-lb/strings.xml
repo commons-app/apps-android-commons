@@ -354,4 +354,7 @@
   <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
   <string name="remove_bookmark">Vun de Lieszeechen ewechgeholl</string>
   <string name="add_bookmark">Bei d\'Lieszeechen derbäigesat</string>
+  <string name="wallpaper_set_unsuccessfully">Et ass Eppes schif gaangen. D\'Hannergrondbild konnt net agestallt ginn</string>
+  <string name="setting_wallpaper_dialog_title">Als Hannergrondbild festleeën</string>
+  <string name="setting_wallpaper_dialog_message">Hannergrondbild gëtt agestallt. Waart wgl...</string>
 </resources>
