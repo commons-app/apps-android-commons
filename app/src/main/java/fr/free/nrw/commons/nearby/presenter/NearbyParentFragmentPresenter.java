@@ -248,13 +248,22 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        Timber.d("Location significantly changed");
+        Timber.d("Location slightly changed");
         updateMapAndList(LOCATION_SLIGHTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedMedium(LatLng latLng) {
         Timber.d("Location changed medium");
+    }
+
+    @Override
+    public void changeDialogState(boolean enableDialog) {
+        if (enableDialog) {
+            Timber.d("Location Off dialog enabled");
+        } else {
+            Timber.d("Location Off dialog disabled");
+        }
     }
 
     @Override

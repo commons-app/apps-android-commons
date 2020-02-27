@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
@@ -213,10 +212,11 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         Timber.d("Provider %s disabled", provider);
-        if (provider.equals("gps")) {
-            NearbyParentFragment nearbyParentFragment = new NearbyParentFragment();
-            nearbyParentFragment.enableLocationOffDialog();
+        // Prompt user to enable location using a dialog box
+        for (LocationUpdateListener listener : locationListeners) {
+            listener.changeDialogState(true);
         }
+
     }
 
     public boolean isLocationEnabled() {
