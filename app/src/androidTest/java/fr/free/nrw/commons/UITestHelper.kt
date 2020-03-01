@@ -2,18 +2,17 @@ package fr.free.nrw.commons
 
 import android.app.Activity
 import android.content.pm.ActivityInfo
+import android.text.TextUtils
 import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.PerformException
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.rule.ActivityTestRule
 import fr.free.nrw.commons.utils.ConfigUtils
-import fr.free.nrw.commons.utils.StringUtils
 import org.hamcrest.CoreMatchers.allOf
 import org.junit.Assume
-import androidx.test.rule.ActivityTestRule
-import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 
 class UITestHelper {
@@ -63,7 +62,7 @@ class UITestHelper {
         }
 
         private fun credentialIsSet(credential: String): Boolean {
-            return !(StringUtils.isNullOrWhiteSpace(credential) || credential == "null")
+            return !(TextUtils.isEmpty(credential) || credential == "null")
         }
 
         private fun checkShouldLogin() {
