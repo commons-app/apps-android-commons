@@ -2,6 +2,7 @@
 <!-- Authors:
 * Abijeet Patro
 * Alex Khimich
+* Alexander Yukal
 * Andriykopanytsia
 * Base
 * Movses
@@ -112,8 +113,8 @@
   <string name="menu_about">Про програму</string>
   <string name="about_license">Додаток «Вікісховище» — це програма з відкритим кодом, яку створили отримувачі грантів та волонтери спільноти Вікімедіа. Фонд Вікімедіа не брав участі у створенні, розробці чи обслуговуванні цього додатка.</string>
   <string name="about_improve">Ви можете створити новий &lt;a href=\"%1$s\"&gt;запит на GitHub&lt;/a&gt;, щоб повідомити про помилки, або висловити пропозиції.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Політика конфіденційності&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Автори&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Політика конфіденційності&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Автори&lt;/u&gt;</string>
   <string name="title_activity_about">Про програму</string>
   <string name="menu_feedback">Надіслати відгук (електронною поштою)</string>
   <string name="no_email_client">Не встановлено програми електронної пошти</string>
@@ -130,7 +131,7 @@
   <string name="media_upload_policy">Подаючи це зображення, я підтверджую, що це моя власна робота, яка не містить захищених авторським правом матеріалів чи селфі, а також відповідає &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/uk\"&gt;правилам Вікісховища&lt;/a&gt;.</string>
   <string name="menu_download">Завантажити</string>
   <string name="preference_license">Усталена ліцензія</string>
-  <string name="use_previous">Використати попередню назву/опис</string>
+  <string name="use_previous">Використати попередні назву й опис</string>
   <string name="allow_gps">Автоматично отримати поточне розташування</string>
   <string name="allow_gps_summary">Якщо зображення не містить координат, то буде отримано і поставлено ваше поточне розташування. Будьте уважні, якщо ви не хочете розкривати ваше розташування.</string>
   <string name="preference_theme">Нічний режим</string>
@@ -175,7 +176,7 @@
   <string name="welcome_copyright_subtext">Уникайте захищених авторським правом матеріалів, знайдених в Інтернеті, а також зображень плакатів, обкладинок книг, тощо.</string>
   <string name="welcome_final_text">Ви це зрозуміли?</string>
   <string name="welcome_final_button_text">Так!</string>
-  <string name="welcome_help_button_text"/>
+  <string name="welcome_help_button_text" fuzzy="true"/>
   <string name="detail_panel_cats_label">Категорії</string>
   <string name="detail_panel_cats_loading">Завантаження…</string>
   <string name="detail_panel_cats_none">Нічого не обрано</string>
@@ -277,7 +278,7 @@
   <string name="null_url">Помилка! Посилання не знайдено</string>
   <string name="nominate_deletion">Номінувати на вилучення</string>
   <string name="nominated_for_deletion">Цей файл номіновано на вилучення.</string>
-  <string name="nominated_see_more"/>
+  <string name="nominated_see_more" fuzzy="true"/>
   <string name="nominating_file_for_deletion">Номінування %1$s на вилучення.</string>
   <string name="nominating_for_deletion_status">Номінування файлу на вилучення: %1$s</string>
   <string name="view_browser">Переглянути в браузері</string>
@@ -289,7 +290,7 @@
   <string name="copy_wikicode">Скопіювати вікітекст у буфер обміну</string>
   <string name="wikicode_copied">Вікітекст скопійовано у буфер обміну</string>
   <string name="nearby_location_has_not_changed">Розташування не змінено</string>
-  <string name="nearby_location_not_available">Місцезнаходження недоступне</string>
+  <string name="nearby_location_not_available">Функція «Поблизу» може працювати некоректно, «Розташування» недоступне.</string>
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
   <string name="get_directions">Показати на мапі у зовнішній програмі</string>
   <string name="read_article">Читати статтю</string>
@@ -302,8 +303,8 @@
   <string name="nearby_wikidata">Вікідані</string>
   <string name="nearby_wikipedia">Вікіпедія</string>
   <string name="nearby_commons">Вікісховище</string>
-  <string name="about_rate_us">&lt;u&gt;Оцініть нас&lt;/u&gt;</string>
-  <string name="about_faq">Часті запитання</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Оцініть нас&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">Часті запитання</string>
   <string name="welcome_skip_button">Пропустити інструкцію</string>
   <string name="no_internet">Інтернет недоступний</string>
   <string name="internet_established">Інтернет доступний</string>
@@ -311,7 +312,7 @@
   <string name="error_review">Помилка при отриманні зображення для перевірки. Натисніть «оновити», щоб спробувати ще раз.</string>
   <string name="error_review_categories">Помилка при отриманні категорій зображення для перевірки. Натисніть «оновити», щоб спробувати ще раз.</string>
   <string name="no_notifications">Сповіщень немає</string>
-  <string name="about_translate">&lt;u&gt;Перекласти&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Перекласти&lt;/u&gt;</string>
   <string name="about_translate_title">Мови</string>
   <string name="about_translate_message">Виберіть мову, переклади якою ви хочете відправити</string>
   <string name="about_translate_proceed">Виконується</string>
@@ -538,7 +539,7 @@
   <string name="exif_tag_name_lensModel">Модель об\'єктиву</string>
   <string name="exif_tag_name_serialNumbers">Серійний номер</string>
   <string name="exif_tag_name_software">Програмне забезпечення</string>
-  <string name="share_text" fuzzy="true">Вивантажуйте фото у Вікісховище зі свого телефона. Завантажте застосунок: %1$s</string>
+  <string name="share_text">Вивантажуйте фото у Вікісховище безпосередньо зі свого телефона. Завантажте застосунок: %1$s</string>
   <string name="share_via">Поділитися програмкою через…</string>
   <string name="image_info">Інформація про зображення</string>
   <string name="no_categories_found">Категорії не знайдені</string>
@@ -574,4 +575,11 @@
   <string name="place_type">Тип місця:</string>
   <string name="nearby_search_hint">Міст, музей, готель тощо</string>
   <string name="you_must_reset_your_passsword">Щось пішло не так із процесом входу, ви маєте скинути пароль !</string>
+  <string name="upload_nearby_place_found_title">Знайдено місце поблизу</string>
+  <string name="upload_nearby_place_found_description">Чи це — фото місця %1$s?</string>
+  <string name="remove_bookmark">Вилучено з закладок</string>
+  <string name="add_bookmark">Додано у закладки</string>
+  <string name="wallpaper_set_unsuccessfully">Щось трапилось. Не вдалося встановити шпалери робочого столу</string>
+  <string name="setting_wallpaper_dialog_title">Встановити в якості шпалер робочого столу</string>
+  <string name="setting_wallpaper_dialog_message">Встановлення робочого столу. Будь ласка зачекайте...</string>
 </resources>

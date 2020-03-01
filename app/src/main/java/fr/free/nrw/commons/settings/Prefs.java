@@ -7,7 +7,7 @@ public class Prefs {
     public static final String DEFAULT_LICENSE = "defaultLicense";
     public static final String UPLOADS_SHOWING = "uploadsshowing";
     public static final String IS_CONTRIBUTION_COUNT_CHANGED = "ccontributionCountChanged";
-    public static final String MANAGED_EXIF_TAGS = "managedExifTags";
+    public static final String MANAGED_EXIF_TAGS = "managed_exif_tags";
     public static final String KEY_LANGUAGE_VALUE = "languageDescription";
 
     public static class Licenses {

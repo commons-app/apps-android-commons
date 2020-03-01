@@ -2,6 +2,7 @@
 <!-- Authors:
 * Abijeet Patro
 * Bjankuloski06
+* Violetova
 * Vlad5250
 -->
 <resources>
@@ -21,7 +22,7 @@
   <string name="login_credential">Најавете се на бета-сметката</string>
   <string name="login">Најава</string>
   <string name="forgot_password">Ја заборавивте лозинката?</string>
-  <string name="signup">Регистрација</string>
+  <string name="signup">Зачленување</string>
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте…</string>
   <string name="login_success">Најавата е успешна!</string>
@@ -57,7 +58,7 @@
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
   <string name="login_failed_wrong_credentials">Не можев да ве најавам. Проверете ги корисничкото име и лозинката.</string>
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
-  <string name="login_failed_blocked">Нажалост, корисникот е блокиран на Ризницата</string>
+  <string name="login_failed_blocked">За жал, корисникот е блокиран на Ризницата</string>
   <string name="login_failed_2fa_needed">Мора да го укажете вашиот код за двочинителска заверка.</string>
   <string name="login_failed_generic">Најавата не успеа</string>
   <string name="share_upload_button">Подигни</string>
@@ -89,15 +90,15 @@
   <string name="categories_skip_explanation">Ставете им категории на сликите, за да можат корисниците полесно да ги најдат на Ризницата.\n\nЗа да ставите категорија, почнете со пишување на нејзиното име.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Нагодувања</string>
-  <string name="title_activity_signup">Регистрација</string>
+  <string name="title_activity_signup">Зачленување</string>
   <string name="title_activity_featured_images">Избрани слики</string>
   <string name="title_activity_category_details">Категорија</string>
   <string name="title_activity_review">Оценување</string>
   <string name="menu_about">За извршникот</string>
   <string name="about_license">Прилогот на Ризницата има отворен код. Негови творци и одржувачи се примателите на наменските средства од Викимедиината заедница како и членовите на заедницата. Фондацијата Викимедија нема учество во нејзиното создавање, разработка и одржување.</string>
   <string name="about_improve">Создајте нов &lt;a href=\"%1$s\"&gt;проблем на GitHub&lt;/a&gt; за пријавување на грешки и давање предлози.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Заштита на личните податоци&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Заслуги&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Заштита на личните податоци</string>
+  <string name="about_credits">Заслуги</string>
   <string name="title_activity_about">За извршникот</string>
   <string name="menu_feedback">Испратете Ваше мислење (по е-пошта)</string>
   <string name="no_email_client">Немате воспоставено клиент за е-пошта</string>
@@ -113,7 +114,7 @@
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Стандардна лиценца</string>
-  <string name="use_previous">Користи претходен наслов/опис</string>
+  <string name="use_previous">Користи претходен наслов и опис</string>
   <string name="allow_gps">Автоматски давај тековна местоположба</string>
   <string name="allow_gps_summary">Става геоознака од тековната местоположба во слика (ако ја нема). Предупредување: ова ви го разоткрива наоѓалиштето.</string>
   <string name="preference_theme">Ноќен режим</string>
@@ -158,7 +159,7 @@
   <string name="welcome_copyright_subtext">Избегнуавјте материјали што сте ги нашле на семрежјето, како и слики од плакати, корици од книги и тн.</string>
   <string name="welcome_final_text">Објаснивме добро?</string>
   <string name="welcome_final_button_text">Да!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Повеќе информации&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Повеќе информации</string>
   <string name="detail_panel_cats_label">Категории</string>
   <string name="detail_panel_cats_loading">Вчитувам…</string>
   <string name="detail_panel_cats_none">Ништо не е одбрано</string>
@@ -260,7 +261,7 @@
   <string name="null_url">Грешка! Не ја пронајдов URL</string>
   <string name="nominate_deletion">Предложи за бришење</string>
   <string name="nominated_for_deletion">Сликава е предложена за бришење.</string>
-  <string name="nominated_see_more">&lt;u&gt;Поподробно ќе најдете на мрежното место&lt;/u&gt;</string>
+  <string name="nominated_see_more">Поподробно ќе најдете на мрежното место</string>
   <string name="nominating_file_for_deletion">Предлог за бришење: %1$s.</string>
   <string name="nominating_for_deletion_status">Предлог на податотека за бришење: %1$s</string>
   <string name="view_browser">Погледај во прелистувач</string>
@@ -272,7 +273,7 @@
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
-  <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
+  <string name="nearby_location_not_available">„Во близина“ може да не работи како што треба. Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
   <string name="get_directions">Дај насоки</string>
   <string name="read_article">Прочитај статија</string>
@@ -285,8 +286,8 @@
   <string name="nearby_wikidata">Википодатоци</string>
   <string name="nearby_wikipedia">Википедија</string>
   <string name="nearby_commons">Ризница</string>
-  <string name="about_rate_us">&lt;u&gt;Оценете нè&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;ЧПП&lt;/u&gt;</string>
+  <string name="about_rate_us">Оценете нè</string>
+  <string name="about_faq">ЧПП</string>
   <string name="welcome_skip_button">Прескокни упатство</string>
   <string name="no_internet">Нема семрежен пристап</string>
   <string name="internet_established">Има семрежен пристап</string>
@@ -294,7 +295,7 @@
   <string name="error_review">Грешка при добивањето на сликата за оценка. Превчитајте за да пробате пак.</string>
   <string name="error_review_categories">Грешка при добивањето на категориите за оценка. Превчитајте за да пробате пак.</string>
   <string name="no_notifications">Не пронајдов известувања</string>
-  <string name="about_translate">&lt;u&gt;Преведи&lt;/u&gt;</string>
+  <string name="about_translate">Преведи</string>
   <string name="about_translate_title">Јазици</string>
   <string name="about_translate_message">Изберете за кој јазик сакате да поднесете преводи</string>
   <string name="about_translate_proceed">Продолжи</string>
@@ -444,7 +445,7 @@
   <string name="bad_token_error_proposed_solution">Подигањето не успеа поради проблеми со уредувачката шифра. Одјавете се и повторно најавете се.</string>
   <string name="error_processing_image">Се појави грешка при обработката на сликата. Обидете се повторно!</string>
   <string name="getting_edit_token">Добивање на шифра за уредување</string>
-  <string name="check_category_adding_template">Додавање на шаблон за категориска проверка</string>
+  <string name="check_category_adding_template">Додавање на предлошка за категориска проверка</string>
   <string name="check_category_notification_title">Барање на категориска проверка за %1$s</string>
   <string name="check_category_edit_summary">Барање на категориска проверка</string>
   <string name="check_category_success_title">Побарана категориска проверка</string>
@@ -519,7 +520,7 @@
   <string name="exif_tag_name_lensModel">Модел на објективот</string>
   <string name="exif_tag_name_serialNumbers">Сериски броеви</string>
   <string name="exif_tag_name_software">Програми</string>
-  <string name="share_text" fuzzy="true">Подигајте слики на Ризницата од телефон. Преземете го прилогот на Ризницата: %1$s</string>
+  <string name="share_text">Подигајте слики непосредно на Ризницата од телефон. Преземете го прилогот на Ризницата сега: %1$s</string>
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
   <string name="no_categories_found">Не пронајдов ниедна категорија</string>
@@ -554,5 +555,15 @@
   <string name="place_state_needs_photo">Му треба слика</string>
   <string name="place_type">Вид на место:</string>
   <string name="nearby_search_hint">Мост, музеј, хотел и тн.</string>
-  <string name="you_must_reset_your_passsword">Нешто не е во ред со најавата. Ќе мора да ставите нова лозинка!</string>
+  <string name="you_must_reset_your_passsword">Нешто не е во ред со најавата. Ќе мора да ставите нова лозинка !!</string>
+  <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
+  <string name="upload_nearby_place_found_description">Дали ова е слика од местото %1$s?</string>
+  <string name="title_app_shortcut_explore">Истражете</string>
+  <string name="title_app_shortcut_bookmark">Обележани</string>
+  <string name="title_app_shortcut_setting">Нагодувања</string>
+  <string name="remove_bookmark">Отстрането од обележани</string>
+  <string name="add_bookmark">Додадено во обележани</string>
+  <string name="wallpaper_set_unsuccessfully">Нешто не е во ред. Не можев да ја зададам позадината</string>
+  <string name="setting_wallpaper_dialog_title">Задај како позадина</string>
+  <string name="setting_wallpaper_dialog_message">Ја задавам позадината. Почекајте…</string>
 </resources>

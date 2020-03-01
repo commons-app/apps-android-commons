@@ -92,8 +92,8 @@
   <string name="menu_about">정보</string>
   <string name="about_license">위키매체공용 프로그람은 공개원천 응용프로그람이며 위키매체공동체내의 자원봉사자에 의해 유지됩니다. 위키매체재단은 응용프로그람의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
   <string name="about_improve">프로그람오유나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
-  <string name="about_privacy_policy">&lt;u&gt;개인정보 정책&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;제작진&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;개인정보 정책&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;제작진&lt;/u&gt;</string>
   <string name="title_activity_about">정보</string>
   <string name="menu_feedback">(전자우편으로) 반결합 발신하기</string>
   <string name="no_email_client">설치된 전자우편 의뢰기가 없습니다</string>
@@ -106,7 +106,7 @@
   <string name="media_upload_policy">이 그림에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키매체공용정책&lt;/a&gt;에 위배되지 않는다는것에 동의합니다.</string>
   <string name="menu_download">내리적재</string>
   <string name="preference_license">기본 허가권</string>
-  <string name="use_previous">이전의 제목/설명을 사용하기</string>
+  <string name="use_previous" fuzzy="true">이전의 제목/설명을 사용하기</string>
   <string name="allow_gps">자동으로 현재 위치 얻기</string>
   <string name="allow_gps_summary">영상의 지리정보 꼬리표가 보관되지 않은 경우 현재 위치를 검색하여 영상에 현재 위치로 지리정보 꼬리표를 보관하십시오. 경고: 당신의 현재 위치가 로출됩니다.</string>
   <string name="preference_theme">야간방식</string>
@@ -151,7 +151,7 @@
   <string name="welcome_copyright_subtext">선전화, 책 표지 등의 그림 뿐만 아니라 인터네트에서 찾은 저작권있는 자료는 피하세요.</string>
   <string name="welcome_final_text">리해하셨습니까?</string>
   <string name="welcome_final_button_text">예!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;더많은 정보&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;더많은 정보&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">분류</string>
   <string name="detail_panel_cats_loading">적재하는중…</string>
   <string name="detail_panel_cats_none">선택하지 않음</string>
@@ -235,7 +235,7 @@
   <string name="null_url">오유! URL을 찾을수 없습니다</string>
   <string name="nominate_deletion">지우기 신청</string>
   <string name="nominated_for_deletion">이 그림은 지우도록 신청되였습니다.</string>
-  <string name="nominated_see_more">&lt;u&gt;상세 내용은 웨브페지를 참고하십시오&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;상세 내용은 웨브페지를 참고하십시오&lt;/u&gt;</string>
   <string name="view_browser">열람기에서 보기</string>
   <string name="skip_login">건너뛰기</string>
   <string name="navigation_item_login">가입</string>
@@ -256,14 +256,14 @@
   <string name="nearby_wikidata" fuzzy="true">위키자료</string>
   <string name="nearby_wikipedia" fuzzy="true">위키백과</string>
   <string name="nearby_commons" fuzzy="true">공용</string>
-  <string name="about_rate_us">&lt;u&gt;평가&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;자주하는 질문&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;평가&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;자주하는 질문&lt;/u&gt;</string>
   <string name="welcome_skip_button">강좌 건너뛰기</string>
   <string name="no_internet">인터네트 사용 불가</string>
   <string name="internet_established">인터네트 사용 가능</string>
   <string name="error_notifications">알림 가져오기 오유</string>
   <string name="no_notifications">알림이 없습니다</string>
-  <string name="about_translate">&lt;u&gt;번역&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;번역&lt;/u&gt;</string>
   <string name="about_translate_title">언어</string>
   <string name="about_translate_message">번역 제출을 위한 언어를 선택하십시오</string>
   <string name="about_translate_proceed">진행</string>

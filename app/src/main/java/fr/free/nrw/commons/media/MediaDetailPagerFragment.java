@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -148,7 +150,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
             case R.id.menu_bookmark_current_image:
-                bookmarkDao.updateBookmark(bookmark);
+                boolean bookmarkExists = bookmarkDao.updateBookmark(bookmark);
+                Snackbar snackbar = bookmarkExists ? Snackbar.make(getView(), R.string.add_bookmark, Snackbar.LENGTH_LONG) : Snackbar.make(getView(), R.string.remove_bookmark, Snackbar.LENGTH_LONG);
+                snackbar.show();
                 updateBookmarkState(item);
                 return true;
             case R.id.menu_share_current_image:

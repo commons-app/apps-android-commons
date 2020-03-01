@@ -17,6 +17,9 @@ import fr.free.nrw.commons.BuildConfig;
 
 import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
+/**
+ * Handles WikiMedia commons account Authentication
+ */
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     private static final String[] SYNC_AUTHORITIES = {BuildConfig.CONTRIBUTION_AUTHORITY, BuildConfig.MODIFICATION_AUTHORITY};
 
@@ -28,6 +31,9 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
         this.context = context;
     }
 
+    /**
+     * Provides Bundle with edited Account Properties 
+     */
     @Override
     public Bundle editProperties(AccountAuthenticatorResponse response, String accountType) {
         Bundle bundle = new Bundle();
@@ -40,7 +46,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
                              @NonNull String accountType, @Nullable String authTokenType,
                              @Nullable String[] requiredFeatures, @Nullable Bundle options)
             throws NetworkErrorException {
-
+        // account type not supported returns bundle without loginActivity Intent, it just contains "test" key 
         if (!supportedAccountType(accountType)) {
             Bundle bundle = new Bundle();
             bundle.putString("test", "addAccount");
@@ -100,6 +106,10 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
         return BuildConfig.ACCOUNT_TYPE.equals(type);
     }
 
+    /**
+     * Provides a bundle containing a Parcel 
+     * the Parcel packs an Intent with LoginActivity and Authenticator response (requires valid account type)
+     */
     private Bundle addAccount(AccountAuthenticatorResponse response) {
         Intent intent = new Intent(context, LoginActivity.class);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);

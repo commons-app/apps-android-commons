@@ -23,11 +23,11 @@
   <string name="forgot_password">Passwuert vergiess?</string>
   <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
-  <string name="logging_in_message">Waart w.e.g. …</string>
+  <string name="logging_in_message">Waart wgl. …</string>
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
-  <string name="upload_failed">Fichier net fonnt. probéiert w.e.g. en anere Fichier.</string>
-  <string name="authentication_failed">Authentifizéierung huet net funktionéiert, loggt Iech w.e.g. nach eng Kéier an.</string>
+  <string name="upload_failed">Fichier net fonnt. probéiert wgl. en anere Fichier.</string>
+  <string name="authentication_failed">Authentifizéierung huet net funktionéiert, loggt Iech wgl. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
   <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
@@ -54,7 +54,7 @@
   <string name="share_title_hint">Titel (Obligatoresch)</string>
   <string name="share_description_hint">Beschreiwung</string>
   <string name="login_failed_network">Aloggen huet net funktionéiert - Feeler mam Reseau</string>
-  <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert w.e.g. an e puer Minutten nach eng Kéier.</string>
+  <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert wgl. an e puer Minutten nach eng Kéier.</string>
   <string name="login_failed_blocked">Pardon, dëse Benotzer ass op Commons gespaart</string>
   <string name="login_failed_generic">Aloggen huet net funktionéiert</string>
   <string name="share_upload_button">Eroplueden</string>
@@ -90,9 +90,9 @@
   <string name="title_activity_category_details">Kategorie</string>
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
-  <string name="about_improve">Leet w.e.g. &lt;a href=\"%1$s\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Dateschutzrichtlinn&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Merci&lt;/u&gt;</string>
+  <string name="about_improve">Leet wgl. &lt;a href=\"%1$s\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Dateschutzrichtlinn&lt;/u&gt;</string>
+  <string name="about_credits">Merci</string>
   <string name="title_activity_about">Iwwer</string>
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>
   <string name="no_email_client">Keen E-Mail-Client installéiert</string>
@@ -107,7 +107,7 @@
   </plurals>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Standardlizenz</string>
-  <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
+  <string name="use_previous">Viregen Titel a Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
   <string name="allow_gps_summary">Rifft déi aktuell Plaz of wann e Bild net georeferenzéiert ass a setzt Geotagge vun der aktueller Plaz. Opgepasst: Doduerch gëtt Är aktuell Plaz bekannt.</string>
   <string name="preference_theme">Nuetsmodus</string>
@@ -134,11 +134,11 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Wikimedia Commons späichert déi meescht Biller, déi op Wikipedia benotzt ginn.</string>
   <string name="tutorial_1_subtext">Är Biller hëllefe Leit op der ganzer Welt ze forméieren!</string>
-  <string name="tutorial_2_text">Lued w.e.g. Biller erop déi komplett vun Iech opgeholl oder gemaacht goufen:</string>
+  <string name="tutorial_2_text">Lued wgl. Biller erop déi komplett vun Iech opgeholl oder gemaacht goufen:</string>
   <string name="tutorial_2_subtext_1">Natierlech Objeten (Blummen, Déieren, Bierger)</string>
   <string name="tutorial_2_subtext_2">Nëtzlech Objeten (Vëloen, Garen)</string>
   <string name="tutorial_2_subtext_3">Berühmt Leit (Äre Buergermeeschter, Olympioniken deenen Dir begéint sidd)</string>
-  <string name="tutorial_3_text">W.e.g. NET eroplueden:</string>
+  <string name="tutorial_3_text">Wgl. NET eroplueden:</string>
   <string name="tutorial_3_subtext_1">Selfien oder Biller vun Äre Frënn</string>
   <string name="tutorial_3_subtext_2">Biller déi Dir aus dem Internet erofgelueden hutt</string>
   <string name="tutorial_4_text">Beispill-Upload:</string>
@@ -150,6 +150,7 @@
   <string name="welcome_copyright_subtext">Evitéiert Materialien déi ënner de Copyright falen an déi Dir um Internet fonnt hutt, genee sou wéi Biller vu Pousteren, Bicher, asw.</string>
   <string name="welcome_final_text">Dir mengt Dir huet et verstan?</string>
   <string name="welcome_final_button_text">Jo!</string>
+  <string name="welcome_help_button_text">Méi Informatiounen</string>
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lueden…</string>
   <string name="detail_panel_cats_none">Näischt ausgewielt</string>
@@ -221,7 +222,7 @@
   <string name="upload_problem_image_duplicate">Bild ass schonn op Commons.</string>
   <string name="upload_problem_different_geolocation">Dëst Bild gouf op enger anerer Plaz gemaach.</string>
   <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
-  <string name="internet_downloaded">Lued w.e.g. nëmme Biller erop déi Dir selwer opgeholl hutt. Lued keng Biller erop déi Dir aus dem Internet erofgelueden hutt.</string>
+  <string name="internet_downloaded">Lued wgl. nëmme Biller erop déi Dir selwer opgeholl hutt. Lued keng Biller erop déi Dir aus dem Internet erofgelueden hutt.</string>
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
@@ -235,7 +236,7 @@
   <string name="skip_login">Iwwersprangen</string>
   <string name="navigation_item_login">Aloggen</string>
   <string name="nearby_location_has_not_changed">De Plaz huet net geännert.</string>
-  <string name="nearby_location_not_available">Plaz ass net disponibel.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Plaz ass net disponibel.</string>
   <string name="read_article" fuzzy="true">ARTIKEL LIESEN</string>
   <string name="notifications_welcome">Wëllkomm op Wikimedia Commons, %1$s! Mir si frou datt Dir hei sidd.</string>
   <string name="notifications_thank_you_edit">Merci datt Dir eng Ännerung gemaach hutt</string>
@@ -244,13 +245,13 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Bewäert eis&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">Bewäert eis</string>
+  <string name="about_faq">FAQ</string>
   <string name="no_internet">Internet net disponibel</string>
   <string name="internet_established">Internet disponibel</string>
   <string name="error_notifications">Feeler beim Ofruffe vun den Notifikatiounen</string>
   <string name="no_notifications">Keng Notifikatioune fonnt</string>
-  <string name="about_translate">&lt;u&gt;Iwwersetzen&lt;/u&gt;</string>
+  <string name="about_translate">Iwwersetzen</string>
   <string name="about_translate_title">Sproochen</string>
   <string name="about_translate_message">Sicht déi Sprooch eraus Fir déi Dir Iwwersetzunge maache wëllt</string>
   <string name="about_translate_proceed">Virufueren</string>
@@ -337,7 +338,7 @@
   <string name="no_archived_notification">Dir hutt keng archivéier Notifikatiounen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
   <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>
-  <string name="please_wait">Waart w.e.g. ...</string>
+  <string name="please_wait">Waart wgl. ...</string>
   <string name="skip_image" fuzzy="true">DËST BILD IWWERWSPRANGEN</string>
   <string name="exif_tag_name_author">Auteur</string>
   <string name="exif_tag_name_copyright">Copyright</string>
@@ -349,4 +350,11 @@
   <string name="delete_helper_show_deletion_message_if">%1$s gouf nominéiert fir ze läschen</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
+  <string name="place_state_needs_photo">Brauch eng Foto</string>
+  <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
+  <string name="remove_bookmark">Vun de Lieszeechen ewechgeholl</string>
+  <string name="add_bookmark">Bei d\'Lieszeechen derbäigesat</string>
+  <string name="wallpaper_set_unsuccessfully">Et ass Eppes schif gaangen. D\'Hannergrondbild konnt net agestallt ginn</string>
+  <string name="setting_wallpaper_dialog_title">Als Hannergrondbild festleeën</string>
+  <string name="setting_wallpaper_dialog_message">Hannergrondbild gëtt agestallt. Waart wgl...</string>
 </resources>
