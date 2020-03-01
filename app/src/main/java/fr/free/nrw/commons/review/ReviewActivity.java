@@ -28,16 +28,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.delete.DeleteHelper;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class ReviewActivity extends AuthenticatedActivity {
+public class ReviewActivity extends NavigationBaseActivity {
 
     @BindView(R.id.pager_indicator_review)
     public CirclePageIndicator pagerIndicator;
@@ -59,8 +58,6 @@ public class ReviewActivity extends AuthenticatedActivity {
     TextView imageCaption;
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
-    @Inject
-    MediaWikiApi mwApi;
     @Inject
     ReviewHelper reviewHelper;
     @Inject
@@ -97,15 +94,6 @@ public class ReviewActivity extends AuthenticatedActivity {
     }
 
     @Override
-    protected void onAuthCookieAcquired(String authCookie) {
-
-    }
-
-    @Override
-    protected void onAuthFailure() {
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
@@ -126,13 +114,16 @@ public class ReviewActivity extends AuthenticatedActivity {
         d[2].setColorFilter(getApplicationContext().getResources().getColor(R.color.button_blue), PorterDuff.Mode.SRC_IN);
 
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null && savedInstanceState.getParcelable(SAVED_MEDIA)!=null) {
             updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)); // Use existing media if we have one
         } else {
             runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
         }
 
-        btnSkipImage.setOnClickListener(view -> runRandomizer());
+        btnSkipImage.setOnClickListener(view -> {
+            reviewPagerAdapter.disableButtons();
+            runRandomizer();
+        });
 
         btnSkipImage.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (
@@ -154,6 +145,7 @@ public class ReviewActivity extends AuthenticatedActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
                     if (media != null) {
+                        reviewPagerAdapter.disableButtons();
                         updateImage(media);
                     }
                 }));
@@ -181,6 +173,7 @@ public class ReviewActivity extends AuthenticatedActivity {
                     String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
                     imageCaption.setText(caption);
                     progressBar.setVisibility(View.GONE);
+                    reviewPagerAdapter.enableButtons();
                 }));
         reviewPager.setCurrentItem(0);
     }

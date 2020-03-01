@@ -33,7 +33,10 @@ public class AboutActivity extends NavigationBaseActivity {
     @BindView(R.id.about_license) HtmlTextView aboutLicenseText;
     @BindView(R.id.about_faq) TextView faqText;
     @BindView(R.id.about_improve) HtmlTextView improve;
-
+    @BindView(R.id.about_rate_us) TextView rateUsText;
+    @BindView(R.id.about_privacy_policy) TextView privacyPolicyText;
+    @BindView(R.id.about_translate) TextView translateText;
+    @BindView(R.id.about_credits) TextView creditsText;
     /**
      * This method helps in the creation About screen
      *
@@ -54,22 +57,13 @@ public class AboutActivity extends NavigationBaseActivity {
         String improveText = String.format(getString(R.string.about_improve), Urls.NEW_ISSUE_URL);
         improve.setHtmlText(improveText);
 
-        SpannableString content = new SpannableString(getString(R.string.about_faq));
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        faqText.setText(content);
-
         versionText.setText(ConfigUtils.getVersionNameWithSha(getApplicationContext()));
 
-        TextView rate_us = findViewById(R.id.about_rate_us);
-        TextView privacy_policy = findViewById(R.id.about_privacy_policy);
-        TextView translate = findViewById(R.id.about_translate);
-        TextView credits = findViewById(R.id.about_credits);
-        TextView faq = findViewById(R.id.about_faq);
-        rate_us.setText(StringUtil.fromHtml(getString(R.string.about_rate_us)));
-        privacy_policy.setText(StringUtil.fromHtml(getString(R.string.about_privacy_policy)));
-        translate.setText(StringUtil.fromHtml(getString(R.string.about_translate)));
-        credits.setText(StringUtil.fromHtml(getString(R.string.about_credits)));
-        faq.setText(StringUtil.fromHtml(getString(R.string.about_faq)));
+        Utils.setUnderlinedText(faqText, R.string.about_faq, getApplicationContext());
+        Utils.setUnderlinedText(rateUsText, R.string.about_rate_us, getApplicationContext());
+        Utils.setUnderlinedText(privacyPolicyText, R.string.about_privacy_policy, getApplicationContext());
+        Utils.setUnderlinedText(translateText, R.string.about_translate, getApplicationContext());
+        Utils.setUnderlinedText(creditsText, R.string.about_credits, getApplicationContext());
 
         initDrawer();
     }

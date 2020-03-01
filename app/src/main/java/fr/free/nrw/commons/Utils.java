@@ -6,21 +6,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.page.PageTitle;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.ViewUtil;
-
-import java.util.Locale;
-import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
+
+import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.page.PageTitle;
+
+import java.util.Locale;
+import java.util.regex.Pattern;
+
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -182,6 +186,19 @@ public class Utils {
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(label, text);
         clipboard.setPrimaryClip(clip);
+    }
+
+    /**
+     * This method sets underlined string text to a TextView
+     *
+     * @param textView TextView associated with string resource
+     * @param stringResourceName string resource name
+     * @param context
+     */
+    public static void setUnderlinedText(TextView textView, int stringResourceName, Context context) {
+        SpannableString content = new SpannableString(context.getString(stringResourceName));
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textView.setText(content);
     }
 
 }

@@ -6,6 +6,10 @@ import android.content.Intent;
 
 import dagger.android.AndroidInjector;
 
+/**
+ * Receives broadcast then injects it's instance to the broadcastReceiverInjector method of 
+ * ApplicationlessInjection class
+ */
 public abstract class CommonsDaggerBroadcastReceiver extends BroadcastReceiver {
 
     public CommonsDaggerBroadcastReceiver() {

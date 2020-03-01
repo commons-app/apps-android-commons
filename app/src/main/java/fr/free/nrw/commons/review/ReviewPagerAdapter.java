@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import java.util.List;
-
 public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
     private ReviewImageFragment[] reviewImageFragments;
 
@@ -31,6 +29,26 @@ public class ReviewPagerAdapter extends FragmentStatePagerAdapter {
         for (int i = 0; i < getCount(); i++) {
             ReviewImageFragment fragment = reviewImageFragments[i];
             fragment.update(i);
+        }
+    }
+
+    /**
+     * This function is called when an image has
+     * been loaded to enable the review buttons.
+     */
+    public void enableButtons() {
+        if (reviewImageFragments != null){
+            reviewImageFragments[0].enableButtons();
+        }
+    }
+
+    /**
+     * This function is called when an image is being loaded
+     * to disable the review buttons
+     */
+    public void disableButtons() {
+        if (reviewImageFragments != null){
+            reviewImageFragments[0].disableButtons();
         }
     }
 

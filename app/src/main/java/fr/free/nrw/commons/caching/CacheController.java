@@ -10,13 +10,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.upload.GpsCategoryModel;
 import timber.log.Timber;
 
 @Singleton
 public class CacheController {
 
-    private final GpsCategoryModel gpsCategoryModel;
     private final QuadTree<List<String>> quadTree;
     private double x, y;
     private double xMinus, xPlus, yMinus, yPlus;
@@ -24,9 +22,8 @@ public class CacheController {
     private static final int EARTH_RADIUS = 6378137;
 
     @Inject
-    CacheController(GpsCategoryModel gpsCategoryModel) {
-        this.gpsCategoryModel = gpsCategoryModel;
-        quadTree = new QuadTree<>(-180, -90, +180, +90);
+    public CacheController(QuadTree quadTree) {
+        this.quadTree = quadTree;
     }
 
     public void setQtPoint(double decLongitude, double decLatitude) {
@@ -34,17 +31,6 @@ public class CacheController {
         y = decLatitude;
         Timber.d("New QuadTree created");
         Timber.d("X (longitude) value: %f, Y (latitude) value: %f", x, y);
-    }
-
-    public void cacheCategory() {
-        List<String> pointCatList = new ArrayList<>();
-        if (gpsCategoryModel.getGpsCatExists()) {
-            pointCatList.addAll(gpsCategoryModel.getCategoryList());
-            Timber.d("Categories being cached: %s", pointCatList);
-        } else {
-            Timber.d("No categories found, so no categories cached");
-        }
-        quadTree.set(x, y, pointCatList);
     }
 
     public List<String> findCategory() {

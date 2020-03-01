@@ -95,8 +95,8 @@
   <string name="menu_about">O aplikaciji</string>
   <string name="about_license">Softver otvorenog koda dostupan pod licencom &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache ver. 2&lt;/a&gt; Vikimedijina Ostava i njen logo su zaštitni znaci Vikimedijine Fondacije i koriste se sa dozvolom Vikimedijine Fondacine. Mi ne odobravamo ili podržavmo Vikimedijinu Fondaciju.\n\nAplikacija za Vikimedijinu ostavu je aplikacija otvorenog koda koja je napravljena i koja se održava pomoću grantova i volontera Vikimedijine zajednice. Zadužbina Vikimedija nije uključena u stvaranje, razvoj ili održavanje aplikacije.</string>
   <string name="about_improve">Napravite novi &lt;a href=\"%1$s\"&gt;zahtev na GitHub-u&lt;/a&gt; da biste prijavili greške ili dali predloge.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Politika privatnosti&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Zasluge&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Politika privatnosti&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Zasluge&lt;/u&gt;</string>
   <string name="title_activity_about">O aplikaciji</string>
   <string name="menu_feedback">Pošaljite povratne informacije (putem imejla)</string>
   <string name="no_email_client">Nije instaliran imejl-klijent</string>
@@ -109,7 +109,7 @@
   <string name="media_upload_policy">Slanjem ove slike, ja tvrdim da je u pitanju moj rad, da ne sadrži materijal ili selfije zaštićene autorskim pravima, te da je na ostale načine u skladu sa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smernicama Vikimedijine ostave&lt;/a&gt;.</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Podrazumevana licenca</string>
-  <string name="use_previous">Koristi prethodan naslov/opis</string>
+  <string name="use_previous" fuzzy="true">Koristi prethodan naslov/opis</string>
   <string name="allow_gps">Automatski dobavi trenutnu lokaciju</string>
   <string name="allow_gps_summary">Prima trenutnu lokaciju ako slika nije geotagovana i geotaguje istu njome. Upozorenje: Ovime će da se otkrije Vaša trenutna lokacija.</string>
   <string name="preference_theme">Noćni režim</string>
@@ -246,7 +246,7 @@
   <string name="copy_wikicode">Kopiraj vikitekst u ostavu</string>
   <string name="wikicode_copied">Vikitekst je kopiran u ostavu</string>
   <string name="nearby_location_has_not_changed">Lokacija nije promenjena.</string>
-  <string name="nearby_location_not_available">Lokacija nije dostupna.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Lokacija nije dostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebna je dozvola za prikazivanje liste lokacija u blizini</string>
   <string name="get_directions" fuzzy="true">Dobiti uputstva</string>
   <string name="read_article" fuzzy="true">Pročitaj članak</string>
@@ -259,14 +259,14 @@
   <string name="nearby_wikidata" fuzzy="true">VIKIPODACI</string>
   <string name="nearby_wikipedia" fuzzy="true">VIKIPEDIJA</string>
   <string name="nearby_commons" fuzzy="true">OSTAVA</string>
-  <string name="about_rate_us">&lt;u&gt;Ocenite nas&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;ČPP&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Ocenite nas&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;ČPP&lt;/u&gt;</string>
   <string name="welcome_skip_button">Preskoči tutorijal</string>
   <string name="no_internet">Internet nije dostupan</string>
   <string name="internet_established">Internet je dostupan</string>
   <string name="error_notifications">Greška pri dobavljanju obaveštenja</string>
   <string name="no_notifications">Obaveštenja nisu pronađena</string>
-  <string name="about_translate">&lt;u&gt;Prevođenje&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Prevođenje&lt;/u&gt;</string>
   <string name="about_translate_title">Jezici</string>
   <string name="about_translate_message">Odaberite jezik za koji biste želeli da pravite prevode</string>
   <string name="about_translate_proceed">Nastavi</string>
@@ -290,7 +290,7 @@
   <string name="provider_searches">Nedavno pretraženi upiti</string>
   <string name="error_loading_categories">Došlo je do greške pri učitavanju kategorija.</string>
   <string name="error_loading_subcategories">Došlo je do greške pri učitavanju potkategorija.</string>
-  <string name="successful_wikidata_edit">Slika je uspešno dodata u %1$s na Vikipodacima.</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Slika je uspešno dodata u %1$s na Vikipodacima.</string>
   <string name="wikidata_edit_failure">Ažuriranje odgovarajućeg entiteta na Vikipodacima nije uspelo.</string>
   <string name="menu_set_wallpaper">Postavi kao pozadinu</string>
   <string name="wallpaper_set_successfully">Pozadina je uspešno postavljena.</string>

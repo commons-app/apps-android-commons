@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,13 +20,13 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.chrisbanes.photoview.OnScaleChangedListener;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -182,8 +181,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         etTitle.setOnTouchListener((v, event) -> {
             //2 is for drawable right
             float twelveDpInPixels = convertDpToPixel(12, getContext());
-            if (event.getAction() == MotionEvent.ACTION_UP && etTitle.getCompoundDrawables()[2].getBounds().contains((int)(etTitle.getWidth()-(event.getX()+twelveDpInPixels)),(int)(event.getY()-twelveDpInPixels))){
-                showInfoAlert(R.string.media_detail_title,R.string.title_info);
+            if (event.getAction() == MotionEvent.ACTION_UP && etTitle.getCompoundDrawables() != null
+                    && etTitle.getCompoundDrawables().length > 2 && etTitle
+                    .getCompoundDrawables()[2].getBounds()
+                    .contains((int) (etTitle.getWidth() - (event.getX() + twelveDpInPixels)),
+                            (int) (event.getY() - twelveDpInPixels))) {
+                showInfoAlert(R.string.media_detail_title, R.string.title_info);
                 return true;
             }
             return false;
@@ -222,10 +225,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the recycler veiw
      */
     private void initRecyclerView() {
-        descriptionsAdapter = new DescriptionsAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE,""));
+        descriptionsAdapter = new DescriptionsAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, ""));
         descriptionsAdapter.setCallback(this::showInfoAlert);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(descriptionsAdapter);
+    }
+
+    /**
+     * returns the default locale value of the user's device
+     * @return
+     */
+    private String getUserDefaultLocale() {
+        return getContext().getResources().getConfiguration().locale.getLanguage();
     }
 
     /**
@@ -286,6 +297,32 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         descriptions = uploadItem.getDescriptions();
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
         setDescriptionsInAdapter(descriptions);
+    }
+
+    /**
+     * Shows popup if any nearby location needing pictures matches uploadable picture's GPS location
+     * @param uploadItem
+     * @param place
+     */
+    @SuppressLint("StringFormatInvalid")
+    @Override
+    public void onNearbyPlaceFound(UploadItem uploadItem, Place place) {
+        DialogUtil.showAlertDialog(getActivity(),
+                getString(R.string.upload_nearby_place_found_title),
+                String.format(Locale.getDefault(),
+                        getString(R.string.upload_nearby_place_found_description),
+                        place.getName()),
+                () -> {
+
+                },
+                () -> {
+                    etTitle.setText(place.getName());
+                    Description description = new Description();
+                    description.setLanguageCode("en");
+                    description.setDescriptionText(place.getLongDescription());
+                    descriptions = Arrays.asList(description);
+                    setDescriptionsInAdapter(descriptions);
+                });
     }
 
     @Override
@@ -395,16 +432,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         presenter.fetchPreviousTitleAndDescription(callback.getIndexInViewFlipper(this));
     }
 
-    private void setDescriptionsInAdapter(List<Description> descriptions){
-        if(descriptions==null){
-            descriptions=new ArrayList<>();
+    private void setDescriptionsInAdapter(List<Description> descriptions) {
+        if (descriptions == null) {
+            descriptions = new ArrayList<>();
         }
-
-        if(descriptions.size()==0){
-            descriptions.add(new Description());
+        if (descriptions.size() == 0) {
+            descriptionsAdapter.addDescription(new Description());
+        } else {
+            descriptionsAdapter.setItems(descriptions);
         }
-
-        descriptionsAdapter.setItems(descriptions);
     }
 
 }

@@ -23,10 +23,10 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_gravity="center_horizontal"
-              android:paddingLeft="12dp"
-              android:paddingRight="12dp"
+              android:paddingLeft="@dimen/medium_height"
+              android:paddingRight="@dimen/medium_height"
               android:drawableEnd="@drawable/ic_info_outline_24dp"
-              android:drawablePadding="12dp"
+              android:drawablePadding="@dimen/medium_height"
               android:drawableTint="@color/button_blue_dark"
               android:text="@string/skip_image"
               android:textColor="@color/button_blue_dark"
@@ -45,9 +45,9 @@
 
                     <RelativeLayout
                       android:layout_width="match_parent"
-                      android:layout_height="0dp"
+                      android:layout_height="@dimen/dimen_0"
                       android:layout_weight="1"
-                      android:layout_marginTop="5dp"
+                      android:layout_marginTop="@dimen/tiny_padding"
                       >
 
                     <com.facebook.drawee.view.SimpleDraweeView
@@ -55,7 +55,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_alignParentTop="true"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginTop="@dimen/dimen_0"
                         app:srcCompat="@drawable/commons_logo" />
 
                     <RelativeLayout
@@ -90,7 +90,7 @@
                     <fr.free.nrw.commons.review.ReviewViewPager
                       android:id="@+id/view_pager_review"
                       android:layout_width="match_parent"
-                      android:layout_height="0dp"
+                      android:layout_height="@dimen/dimen_0"
                       android:layout_weight="1"
                       android:fadingEdge="none"/>
 
@@ -100,10 +100,10 @@
                   android:id="@+id/rl_container_bottom_view"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:padding="12dp"
+                  android:padding="@dimen/medium_height"
                   android:layout_alignParentBottom="true"
                   android:background="?attr/colorPrimaryDark"
-                  android:elevation="2dp">
+                  android:elevation="@dimen/miniscule_margin">
                     <com.viewpagerindicator.CirclePageIndicator
                       android:id="@+id/pager_indicator_review"
                       android:layout_width="match_parent"

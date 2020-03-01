@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+// We can get uri using java.Net.Uri, but andoid implimentation is faster (but it's forgiving with handling exceptions though)
 import android.net.Uri;
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import javax.inject.Inject;
 
@@ -18,11 +20,17 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_NAME;
 import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.TABLE_NAME;
 
+/**
+ * Handles private storage for Bookmark locations
+ */
 public class BookmarkLocationsContentProvider extends CommonsDaggerContentProvider {
 
     private static final String BASE_PATH = "bookmarksLocations";
     public static final Uri BASE_URI = Uri.parse("content://" + BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY + "/" + BASE_PATH);
 
+    /**
+     * Append bookmark locations name to the base uri 
+     */
     public static Uri uriForName(String name) {
         return Uri.parse(BASE_URI.toString() + "/" + name);
     }
@@ -34,6 +42,14 @@ public class BookmarkLocationsContentProvider extends CommonsDaggerContentProvid
         return null;
     }
 
+    /**
+     * Queries the SQLite database for the bookmark locations
+     * @param uri : contains the uri for bookmark locations
+     * @param projection
+     * @param selection : handles Where
+     * @param selectionArgs : the condition of Where clause
+     * @param sortOrder : ascending or descending
+     */
     @SuppressWarnings("ConstantConditions")
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
@@ -48,6 +64,13 @@ public class BookmarkLocationsContentProvider extends CommonsDaggerContentProvid
         return cursor;
     }
 
+    /**
+     * Handles the update query of local SQLite Database 
+     * @param uri : contains the uri for bookmark locations
+     * @param contentValues : new values to be entered to db
+     * @param selection : handles Where
+     * @param selectionArgs : the condition of Where clause
+     */
     @SuppressWarnings("ConstantConditions")
     @Override
     public int update(@NonNull Uri uri, ContentValues contentValues, String selection,
@@ -68,6 +91,9 @@ public class BookmarkLocationsContentProvider extends CommonsDaggerContentProvid
         return rowsUpdated;
     }
 
+    /**
+     * Handles the insertion of new bookmark locations record to local SQLite Database
+     */
     @SuppressWarnings("ConstantConditions")
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {

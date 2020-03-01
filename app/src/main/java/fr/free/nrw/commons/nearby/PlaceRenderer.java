@@ -10,6 +10,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.TransitionManager;
+
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.pedrogomez.renderers.Renderer;
 
@@ -18,12 +25,6 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.transition.TransitionManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
@@ -33,11 +34,9 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.nearby.fragments.NearbyMapFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.TAG_RETAINED_MAP_FRAGMENT;
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
@@ -120,7 +119,7 @@ public class PlaceRenderer extends Renderer<Place> {
                 }
             }
             if (onBookmarkClick == null) {
-                ((NearbyParentFragment) fragment.getParentFragment()).centerMapToPlace(place);
+                ((NearbyParentFragment) fragment).centerMapToPlace(place);
             }
         };
         view.setOnClickListener(listener);
@@ -193,8 +192,7 @@ public class PlaceRenderer extends Renderer<Place> {
                     onBookmarkClick.onClick();
                 }
                 else {
-                    ((NearbyMapFragment)(fragment.getParentFragment()).getChildFragmentManager().
-                            findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT)).
+                    ((NearbyParentFragment) (fragment.getParentFragment())).
                             updateMarker(isBookmarked, place, null);
                 }
             }

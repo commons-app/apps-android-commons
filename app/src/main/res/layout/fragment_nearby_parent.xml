@@ -8,28 +8,65 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/status_bar_blue">
+        android:background="@color/status_bar_blue"
+        android:id="@+id/map_layout">
 
-        <LinearLayout
-            android:orientation="vertical" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <include
+            layout="@layout/nearby_filter_all_items"
+            android:id="@+id/nearby_filter"/>
 
-            <FrameLayout
-                android:id="@+id/container"
+        <include layout="@layout/nearby_filter_list"
+            android:id="@+id/nearby_filter_list"
+            android:layout_below="@id/nearby_filter"
+            android:layout_height="@dimen/giant_height"
+            android:layout_width="@dimen/giant_height"
+            android:layout_alignParentEnd="true"/>
+
+
+        <!--  I have done this intentionally, the mapview because of some elevation or something,
+        sometimes hangs over the drawer layout and sometimes draws its onPaused state over the contributions, this seems to be the probable fix  -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/nearby_filter">
+
+            <com.mapbox.mapboxsdk.maps.MapView
+                android:id="@+id/map_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent" />
+
+        </FrameLayout>
+
+
+        <Button
+            android:id="@+id/search_this_area_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/activity_margin_horizontal"
+            android:background="@color/white"
+            android:padding="@dimen/activity_margin_horizontal"
+            android:singleLine="true"
+            android:text="@string/search_this_area"
+            android:textColor="@color/status_bar_blue"
+            android:visibility="gone"
+            app:elevation="@dimen/dimen_6"
+            android:layout_below="@id/nearby_filter"/>
 
         <View
             android:id="@+id/transparentView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
             android:layout_alignParentLeft="true"
             android:background="#aa969696"
             android:visibility="gone"
-            android:elevation="6dp">
+            android:elevation="@dimen/dimen_6">
 
         </View>
 
@@ -37,18 +74,17 @@
             android:id="@+id/fab_recenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_below="@id/nearby_filter"
             android:clickable="true"
             android:visibility="visible"
             app:backgroundTint="@color/main_background_light"
-            app:elevation="6dp"
+            app:elevation="@dimen/dimen_6"
             app:fabSize="normal"
             app:layout_anchorGravity="top|right|end"
             app:srcCompat="@drawable/ic_my_location_black_24dp"
             app:useCompatPadding="true" />
-
 
     </RelativeLayout>
 
@@ -58,27 +94,12 @@
         android:id="@+id/bottom_sheet_details"
         layout="@layout/bottom_sheet_details" />
 
-    <Button
-        android:id="@+id/search_this_area_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="8dp"
-        android:background="@color/white"
-        android:padding="8dp"
-        android:singleLine="true"
-        android:text="@string/search_this_area"
-        android:textColor="@color/status_bar_blue"
-        android:visibility="gone"
-        app:elevation="6dp" />
-
     <ProgressBar
         android:id="@+id/map_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:elevation="6dp"
+        app:elevation="@dimen/dimen_6"
         android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -88,16 +109,16 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginEnd="@dimen/medium_height"
+        android:layout_marginRight="@dimen/medium_height"
         android:clickable="true"
         android:visibility="invisible"
         app:backgroundTint="@color/button_blue"
-        app:elevation="8dp"
+        app:elevation="@dimen/activity_margin_horizontal"
         app:fabSize="normal"
         app:layout_anchor="@id/bottom_sheet_details"
         app:layout_anchorGravity="top|right|end"
-        app:pressedTranslationZ="12dp"
+        app:pressedTranslationZ="@dimen/medium_height"
         app:srcCompat="@drawable/ic_add_white_24dp"
         app:useCompatPadding="true" />
 
@@ -125,11 +146,11 @@
         android:tint="@color/button_blue"
         android:visibility="invisible"
         app:backgroundTint="@color/main_background_light"
-        app:elevation="6dp"
+        app:elevation="@dimen/dimen_6"
         app:fabSize="mini"
         app:layout_anchor="@id/empty_view1"
         app:layout_anchorGravity="center_horizontal"
-        app:pressedTranslationZ="12dp"
+        app:pressedTranslationZ="@dimen/medium_height"
         app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -140,11 +161,11 @@
         android:tint="@color/button_blue"
         android:visibility="invisible"
         app:backgroundTint="@color/main_background_light"
-        app:elevation="6dp"
+        app:elevation="@dimen/dimen_6"
         app:fabSize="mini"
         app:layout_anchor="@id/empty_view"
         app:layout_anchorGravity="center_horizontal"
-        app:pressedTranslationZ="12dp"
+        app:pressedTranslationZ="@dimen/medium_height"
         app:srcCompat="@drawable/ic_photo_white_24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

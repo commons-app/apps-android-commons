@@ -1,9 +1,9 @@
 package fr.free.nrw.commons.upload.categories;
 
+import java.util.List;
+
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.category.CategoryItem;
-
-import java.util.List;
 
 /**
  * The contract with with UploadCategoriesFragment and its presenter would talk to each other

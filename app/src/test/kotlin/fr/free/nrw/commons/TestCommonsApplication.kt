@@ -1,10 +1,11 @@
 package fr.free.nrw.commons
 
+import android.app.Application
 import android.content.ContentProviderClient
 import android.content.Context
 import androidx.collection.LruCache
 import com.google.gson.Gson
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.mock
 import com.squareup.leakcanary.RefWatcher
 import fr.free.nrw.commons.auth.AccountUtil
 import fr.free.nrw.commons.data.DBOpenHelper
@@ -14,7 +15,7 @@ import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 
-class TestCommonsApplication : CommonsApplication() {
+class TestCommonsApplication : Application() {
     private var mockApplicationComponent: CommonsApplicationComponent? = null
 
     override fun onCreate() {
@@ -25,9 +26,6 @@ class TestCommonsApplication : CommonsApplication() {
         }
         super.onCreate()
     }
-
-    // No leakcanary in unit tests.
-    override fun setupLeakCanary(): RefWatcher = RefWatcher.DISABLED
 }
 
 @Suppress("MemberVisibilityCanBePrivate")

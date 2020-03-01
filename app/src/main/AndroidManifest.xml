@@ -47,6 +47,10 @@
 
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
+
+            <meta-data android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+
         </activity>
         <activity android:name=".WelcomeActivity" />
 
@@ -78,7 +82,7 @@
             android:name=".contributions.MainActivity"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
-            android:configChanges="orientation|screenSize|keyboard" />
+            android:configChanges="screenSize|keyboard" />
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
@@ -152,7 +156,8 @@
         </service>
         <service
             android:name=".contributions.ContributionsSyncService"
-            android:exported="true">
+            android:exported="true"
+            android:process=":sync">
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
@@ -160,17 +165,6 @@
             <meta-data
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/contributions_sync_adapter" />
-        </service>
-        <service
-            android:name=".modifications.ModificationsSyncService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.content.SyncAdapter" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.content.SyncAdapter"
-                android:resource="@xml/modifications_sync_adapter" />
         </service>
 
         <service
@@ -193,12 +187,7 @@
             android:exported="false"
             android:label="@string/provider_contributions"
             android:syncable="true" />
-        <provider
-            android:name=".modifications.ModificationsContentProvider"
-            android:authorities="${applicationId}.modifications.contentprovider"
-            android:exported="false"
-            android:label="@string/provider_modifications"
-            android:syncable="true" />
+
         <provider
             android:name=".category.CategoryContentProvider"
             android:authorities="${applicationId}.categories.contentprovider"

@@ -28,7 +28,7 @@
 
         <ImageView
             android:src="@drawable/welcome_copyright"
-            android:layout_width="160dp"
+            android:layout_width="@dimen/giant_height"
             android:layout_height="120dp"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/standard_gap"
@@ -41,7 +41,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="240dp"
+        android:maxWidth="@dimen/very_large_height"
         android:text="@string/welcome_final_text"
         android:layout_gravity="center"
         android:textStyle="bold"

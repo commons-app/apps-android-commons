@@ -3,7 +3,7 @@ package fr.free.nrw.commons.contributions
 import android.database.Cursor
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockitokotlin2.verify
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock

@@ -85,8 +85,8 @@
   <string name="menu_about">Ҡушымта тураһында</string>
   <string name="about_license">\"Викисклад\" ҡушылмаһы - асыҡ коды булған программа. Уны Викимедиала гранттарын алған ҡатнашыусы һәм ирекмәндәр эшләгән. Викимедиа Фонды был ҡушылманы булдырыу,яңыртыу йәки эшләтеүҙә ҡатнашмай.</string>
   <string name="about_improve">Һеҙ ҙә &lt;a href=\"%1$s\"&gt; булдырып, хата йәки берәй тәҡдим тураһында ошонда GitHub&lt;/a&gt; яҙып ебәрә алаһығыҙ.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Сер һаҡлау сәйәсәте&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Рәхмәттәр&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Сер һаҡлау сәйәсәте&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Рәхмәттәр&lt;/u&gt;</string>
   <string name="title_activity_about">Аныҡлау</string>
   <string name="menu_feedback">Фекереңде ебәр(эл.почта аша)</string>
   <string name="no_email_client">Почта клиенты асыҡланмаған</string>
@@ -99,7 +99,7 @@
   <string name="media_upload_policy">Был рәсемде ебәргәндә шуны раҫлайым: был минең шәхси эшем, автор хоҡуҡтарын һаҡлаған материал йәки селфи түгел, шулай уҡ Викискладтың &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;ҡағиҙәләренә тап килә&lt;/a&gt;.</string>
   <string name="menu_download">Тейәргә</string>
   <string name="preference_license">Нығытылған рөхсәтнамә</string>
-  <string name="use_previous">Алдағы атама/һәрәтләмәне ҡулланыу</string>
+  <string name="use_previous" fuzzy="true">Алдағы атама/һәрәтләмәне ҡулланыу</string>
   <string name="allow_gps">Автомат рәүешендә сираттағы урынды алыу</string>
   <string name="allow_gps_summary" fuzzy="true">Әгәр рәсемдең геотегтары булмаһа, категориялар үҙенән-үҙе тәҡдим ителһен өсөн сираттағы урынды алырға</string>
   <string name="preference_theme">Төнгө режим</string>

@@ -1,14 +1,12 @@
 package fr.free.nrw.commons.notification;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * Created by root on 19.12.2017.
@@ -16,27 +14,19 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 @Singleton
 public class NotificationController {
 
-    private MediaWikiApi mediaWikiApi;
-    private SessionManager sessionManager;
+    private NotificationClient notificationClient;
+
 
     @Inject
-    public NotificationController(MediaWikiApi mediaWikiApi, SessionManager sessionManager) {
-        this.mediaWikiApi = mediaWikiApi;
-        this.sessionManager = sessionManager;
+    public NotificationController(NotificationClient notificationClient) {
+        this.notificationClient = notificationClient;
     }
 
-    public List<Notification> getNotifications(boolean archived) throws IOException {
-        if (mediaWikiApi.validateLogin()) {
-            return mediaWikiApi.getNotifications(archived);
-        } else {
-            Boolean authTokenValidated = sessionManager.revalidateAuthToken();
-            if (authTokenValidated != null && authTokenValidated) {
-                return mediaWikiApi.getNotifications(archived);
-            }
-        }
-        return new ArrayList<>();
+    public Single<List<Notification>> getNotifications(boolean archived) {
+        return notificationClient.getNotifications(archived);
     }
-    public boolean markAsRead(Notification notification) throws IOException{
-        return mediaWikiApi.markNotificationAsRead(notification);
+
+    Observable<Boolean> markAsRead(Notification notification) {
+        return notificationClient.markNotificationAsRead(notification.getNotificationId());
     }
 }
