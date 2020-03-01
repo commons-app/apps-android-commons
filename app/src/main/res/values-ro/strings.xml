@@ -102,8 +102,8 @@
   <string name="menu_about">Despre</string>
   <string name="about_license">Aplicația Wikimedia Commons este un software cu sursă deschisă creat și menținut de bursieri și voluntari ai comunității Wikimedia. Fundația Wikimedia nu este implicată în crearea, dezvoltarea sau mentenanța aplicației.</string>
   <string name="about_improve">Creați un nou &lt;a href=\"%1$s\"&gt;tichet pe GitHub&lt;/a&gt; pentru a raporta buguri sau sugestii.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Politica de confidențialitate&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Autori&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Politica de confidențialitate&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Autori&lt;/u&gt;</string>
   <string name="title_activity_about">Despre</string>
   <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
   <string name="no_email_client">Niciun client de email instalat</string>
@@ -119,7 +119,7 @@
   <string name="media_upload_policy">Prin prezentarea acestei imagini, declar că aceasta este lucrarea mea proprie, că nu conține materiale protejate prin drepturi de autor sau selfiuri și că aderă la &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Descarcă</string>
   <string name="preference_license">Licență implicită</string>
-  <string name="use_previous">Folosiți titlul/descrierea anterioară</string>
+  <string name="use_previous" fuzzy="true">Folosiți titlul/descrierea anterioară</string>
   <string name="allow_gps">Obține în mod automat locația curentă</string>
   <string name="allow_gps_summary">Preia locația curentă dacă imaginea nu are salvată locația și salvează imaginea cu ea. Avertisment: Aceasta va dezvălui locația dvs. curentă.</string>
   <string name="preference_theme">Mod de noapte</string>
@@ -164,7 +164,7 @@
   <string name="welcome_copyright_subtext">Evitați materialele cu drepturi de autor găsite pe Internet, precum și imagini ale posterelor, coperților de cărți etc.</string>
   <string name="welcome_final_text">Credeți că ați înțeles?</string>
   <string name="welcome_final_button_text">Da!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Mai multe informații&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Mai multe informații&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Categorii</string>
   <string name="detail_panel_cats_loading">Se încarcă…</string>
   <string name="detail_panel_cats_none">Niciuna selectată</string>
@@ -263,7 +263,7 @@
   <string name="null_url">Eroare! Adresa URL nu a fost găsită</string>
   <string name="nominate_deletion">Nominalizați pentru ștergere</string>
   <string name="nominated_for_deletion">Această imagine a fost nominalizată pentru ștergere.</string>
-  <string name="nominated_see_more">&lt;u&gt;Vedeți pagina web pentru detalii&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Vedeți pagina web pentru detalii&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">Propun %1$s pentru ștergere.</string>
   <string name="nominating_for_deletion_status">Propun fișierul pentru ștergere: %1$s</string>
   <string name="view_browser">Vizualizează cu navigatorul</string>
@@ -275,7 +275,7 @@
   <string name="copy_wikicode">Copiați wikitext-ul în clipboard</string>
   <string name="wikicode_copied">Wikitext-ul a fost copiat în clipboard</string>
   <string name="nearby_location_has_not_changed">Locația nu s-a schimbat.</string>
-  <string name="nearby_location_not_available">Locația nu este disponibilă.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Locația nu este disponibilă.</string>
   <string name="location_permission_rationale_nearby">Permisiunea necesară pentru a afișa o listă de locații din apropiere</string>
   <string name="get_directions">Obțineți indicații de orientare</string>
   <string name="read_article">Citiți articolul</string>
@@ -288,14 +288,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Dă-ne o notă&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Dă-ne o notă&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">Sari peste tutorial</string>
   <string name="no_internet">Nu aveți internet</string>
   <string name="internet_established">Aveți internet</string>
   <string name="error_notifications">Eroare la preluarea notificărilor</string>
   <string name="no_notifications">Nu au fost găsite notificări</string>
-  <string name="about_translate">&lt;u&gt;Traduceți&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Traduceți&lt;/u&gt;</string>
   <string name="about_translate_title">Limbi</string>
   <string name="about_translate_message">Selectați limba în care doriți să trimiteți traduceri pentru</string>
   <string name="about_translate_proceed">Continuă</string>

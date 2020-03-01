@@ -95,8 +95,8 @@
   <string name="menu_about">Um</string>
   <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \</string>
   <string name="about_improve">Útbúðu nýjar &lt;a href=\"%1$s\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Meðferð persónuupplýsinga&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Framlög&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Meðferð persónuupplýsinga&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Framlög&lt;/u&gt;</string>
   <string name="title_activity_about">Um</string>
   <string name="menu_feedback">Senda umsögn (með tölvupósti)</string>
   <string name="no_email_client">Ekkert tölvupóstforrit er uppsett</string>
@@ -112,7 +112,7 @@
   <string name="media_upload_policy">Með því að senda inn þessa mynd, lýsi ég því hér með yfir að þetta er mitt eigið verk, það inniheldur ekkert höfundarréttarvarið efni eða sjálfsmyndir, og að það samræmist á allan hátt við &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;stefnu Wikimedia Commons varðandi notkun efnis&lt;/a&gt;.</string>
   <string name="menu_download">Sækja</string>
   <string name="preference_license">Sjálfgefið notkunarleyfi</string>
-  <string name="use_previous">Nota fyrri titil/lýsingu</string>
+  <string name="use_previous" fuzzy="true">Nota fyrri titil/lýsingu</string>
   <string name="allow_gps">Ná sjálfvirkt í núverandi staðsetningu</string>
   <string name="allow_gps_summary">Les núverandi staðsetningu til að geta stungið upp á flokkum ef myndin er ekki með hnattstaðsetningarhnitum. Aðvörun: þetta mun koma upp um staðsetninguna þína.</string>
   <string name="preference_theme">Næturhamur</string>
@@ -157,7 +157,7 @@
   <string name="welcome_copyright_subtext">Forðastu höfundaréttarvarið efni sem finnst á netinu eins og myndir af veggspjöldum, bókarkápum, o.s.frv.</string>
   <string name="welcome_final_text">Heldurðu að þú hafir náð þessu?</string>
   <string name="welcome_final_button_text">Já!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Frekari upplýsingar&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Frekari upplýsingar&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Flokkar</string>
   <string name="detail_panel_cats_loading">Hleð…</string>
   <string name="detail_panel_cats_none">Ekkert valið</string>
@@ -257,7 +257,7 @@
   <string name="null_url">Villa: Slóð fannst ekki</string>
   <string name="nominate_deletion">Tilnefna til eyðingar</string>
   <string name="nominated_for_deletion">Þessi mynd hefur verið valin til eyðingar.</string>
-  <string name="nominated_see_more">&lt;u&gt;Sjá nánar á vefsíðunni&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Sjá nánar á vefsíðunni&lt;/u&gt;</string>
   <string name="view_browser">Skoða í vafra</string>
   <string name="skip_login">Sleppa</string>
   <string name="navigation_item_login">Skrá inn</string>
@@ -267,7 +267,7 @@
   <string name="copy_wikicode">Afrita wiki-textann á klippispjaldið</string>
   <string name="wikicode_copied">Wiki-textinn var afritaður á klippispjaldið</string>
   <string name="nearby_location_has_not_changed">Staðsetning hefur ekki breyst.</string>
-  <string name="nearby_location_not_available">Staðsetning ekki tiltæk.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Staðsetning ekki tiltæk.</string>
   <string name="location_permission_rationale_nearby">Heimild þarf til að birta lista yfir staði í nágrenninu</string>
   <string name="get_directions">Fá leiðsögn</string>
   <string name="read_article">Lesa grein</string>
@@ -280,14 +280,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Gefðu okkur einkunn&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Algengar spurningar&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Gefðu okkur einkunn&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;Algengar spurningar&lt;/u&gt;</string>
   <string name="welcome_skip_button">Sleppa kennslu</string>
   <string name="no_internet">Nettenging ekki tiltæk</string>
   <string name="internet_established">Nettenging í boði</string>
   <string name="error_notifications">Villa við að sækja tilkynningar</string>
   <string name="no_notifications">Engar tilkynningar fundust</string>
-  <string name="about_translate">&lt;u&gt;Þýða&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Þýða&lt;/u&gt;</string>
   <string name="about_translate_title">Tungumál</string>
   <string name="about_translate_message">Veldu tungumálið sem þú vill senda inn þýðingar fyrir</string>
   <string name="about_translate_proceed">Halda áfram</string>

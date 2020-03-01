@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 
+/**
+ * Represents The View Adapter for the List of Contributions  
+ */
 public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionViewHolder> {
 
     private Callback callback;
@@ -17,6 +20,10 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         this.callback = callback;
     }
 
+    /**
+     * Creates the new View Holder which will be used to display items(contributions)
+     * using the onBindViewHolder(viewHolder,position) 
+     */
     @NonNull
     @Override
     public ContributionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

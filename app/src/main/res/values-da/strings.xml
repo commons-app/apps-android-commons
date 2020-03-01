@@ -100,8 +100,8 @@
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-programmet oprettet og udviklet af frivillige i Wikimediafællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af programmet.</string>
   <string name="about_improve">Opret en ny &lt;a href=\"%1$s\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Privatlivspolitik&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Bidragsydere&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Privatlivspolitik</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Bidragsydere&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbagemelding (med e-mail)</string>
   <string name="no_email_client">Ingen e-postklient installeret</string>
@@ -114,7 +114,7 @@
   <string name="media_upload_policy">Ved at indsende dette billeder erklærer jeg at det er mit eget arbejde, som ikke indeholder materialer med ophavsret eller selvportrætter og generelt overholder &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-politikkerne&lt;/a&gt;.</string>
   <string name="menu_download">Hent</string>
   <string name="preference_license">Standardlicens</string>
-  <string name="use_previous">Brug forrige titel/beskrivelse</string>
+  <string name="use_previous">Brug forrige titel og beskrivelse</string>
   <string name="allow_gps">Hent automatisk nuværende placering</string>
   <string name="allow_gps_summary">Henter den nuværende placering for at tilbyde kategoriforslag hvis billedet ikke er geografisk mærket og geomærker billedet. Advarsel: Dette vil afsløre din nuværende placering.</string>
   <string name="preference_theme">Nat-tilstand</string>
@@ -159,7 +159,7 @@
   <string name="welcome_copyright_subtext">Undgå ophavsretligt beskyttede materialer du har fundet på internettet samt billeder af plakater, bogomslag osv.</string>
   <string name="welcome_final_text">Forstået?</string>
   <string name="welcome_final_button_text">Ja!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Mere information&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Mere information&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Indlæser…</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
@@ -253,12 +253,12 @@
   <string name="null_url">Fejl! Adressen blev ikke fundet</string>
   <string name="nominate_deletion">Nomineret til sletning</string>
   <string name="nominated_for_deletion">Dette billede er blevet nomineret til sletning.</string>
-  <string name="nominated_see_more">&lt;u&gt;Se webside for detaljer&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Se webside for detaljer&lt;/u&gt;</string>
   <string name="view_browser">Se i browser</string>
   <string name="skip_login">Spring over</string>
   <string name="navigation_item_login">Log på</string>
   <string name="nearby_location_has_not_changed">Sted er ikke ændret.</string>
-  <string name="nearby_location_not_available">Sted ikke tilgængeligt.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Sted ikke tilgængeligt.</string>
   <string name="location_permission_rationale_nearby">Tilladelse kræves for at vise en liste over steder i nærheden</string>
   <string name="get_directions">Få rutevejledninger</string>
   <string name="read_article">Læs artikel</string>
@@ -271,13 +271,13 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Vurder os&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;OSS&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Vurder os&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;OSS&lt;/u&gt;</string>
   <string name="welcome_skip_button">Udelad øvelse</string>
   <string name="no_internet">Internet er utilgængeligt</string>
   <string name="internet_established">Internet tilgængeligt</string>
   <string name="no_notifications">Ingen notifikationer fundet</string>
-  <string name="about_translate">&lt;u&gt;Oversæt&lt;/u&gt;</string>
+  <string name="about_translate">Oversæt</string>
   <string name="about_translate_title">Sprog</string>
   <string name="about_translate_message">Vælg det sprog som du ønsker at indsende oversættelser for</string>
   <string name="about_translate_proceed">Fortsæt</string>

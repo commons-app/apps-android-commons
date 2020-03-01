@@ -19,6 +19,8 @@ public interface UploadMediaDetailsContract {
 
         void onImageProcessed(UploadItem uploadItem, Place place);
 
+        void onNearbyPlaceFound(UploadItem uploadItem, Place place);
+
         void showProgress(boolean shouldShow);
 
         void onImageValidationSuccess();

@@ -17,10 +17,6 @@ public class NearbyAdapterFactory {
     private Fragment fragment;
     private ContributionController controller;
 
-    NearbyAdapterFactory(){
-
-    }
-
     public NearbyAdapterFactory(Fragment fragment, ContributionController controller) {
         this.fragment = fragment;
         this.controller = controller;

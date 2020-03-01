@@ -93,8 +93,8 @@
   <string name="title_activity_featured_images">چونڊ تصويرون</string>
   <string name="title_activity_category_details">زمرو</string>
   <string name="menu_about">بابت</string>
-  <string name="about_privacy_policy">&lt;u&gt;ذاتيات پاليسي&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;ساراھون&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;ذاتيات پاليسي&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;ساراھون&lt;/u&gt;</string>
   <string name="title_activity_about">بابت</string>
   <string name="menu_feedback">پذيرائي موڪليو (برقٽپال ذريعي)</string>
   <string name="no_email_client">ڪوبہ برقٽپال ڪلائينٽ تنصيبيل ناھي</string>
@@ -109,7 +109,7 @@
   </plurals>
   <string name="menu_download">لاھيو</string>
   <string name="preference_license">ڏنل اجازتنامو</string>
-  <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>
+  <string name="use_previous" fuzzy="true">گذريل عنوان/تشريح استعمال ڪريو</string>
   <string name="allow_gps">خوبخود ھاڻوڪي مڪانيت وٺو</string>
   <string name="allow_gps_summary">ھاڻوڪي مڪانيت ڏئي ٿو جيڪڏھن عڪس جيوٽيگ ناھي ٿيل، ۽ عڪس کي ان سان جيوٽيگ ڪري ٿو. چتاءُ: ھي توھان جي ھاڻوڪي مڪانيت ظاھر ڪندو.</string>
   <string name="preference_theme">رات جو ڏيک</string>
@@ -151,7 +151,7 @@
   <string name="welcome_copyright_subtext">انٽرنيٽ تان لڌل ڪاپيرائيٽڊ مواد سان گڏوگڏ پوسٽرن، ڪتاب جي جلدن، وغيره جي عڪسن کان پاسو ڪريو.</string>
   <string name="welcome_final_text">توھان سمجھو ٿا توھان سمجھي ويئو؟</string>
   <string name="welcome_final_button_text">ھا!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;وڌيڪ معلومات&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;وڌيڪ معلومات&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">زمرا</string>
   <string name="detail_panel_cats_loading">لاهيندي...</string>
   <string name="detail_panel_cats_none">ڪوبہ چونڊيل ناھي</string>
@@ -220,7 +220,7 @@
   <string name="null_url">خلل: يو آر ايل نه لڌو</string>
   <string name="nominate_deletion">ڊاھ لاءِ اميدوار ڪريو</string>
   <string name="nominated_for_deletion">هن تصوير کي ڊاهڻ لاءِ مقرر ڪيو ويو آهي.</string>
-  <string name="nominated_see_more">&lt;u&gt;تفصيلن لاءِ ويب-صفحو ڏسو&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;تفصيلن لاءِ ويب-صفحو ڏسو&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">%1$s کي ڊاھ لاءِ اميدوار ڪندي.</string>
   <string name="nominating_for_deletion_status">فائيل کي ڊاھ لاءِ اميدوار ڪندي: %1$s</string>
   <string name="view_browser">برائوزر ۾ ڏسو</string>
@@ -230,7 +230,7 @@
   <string name="skip_login_message">توھان کي تصويرون چاڙھڻ لاءِ مستقبل ۾ داخل ٿيڻو پوندو.</string>
   <string name="login_alert_message">هن خصوصيت جي استعمال لاءِ داخل ٿيو</string>
   <string name="nearby_location_has_not_changed">مڪانيت ناھي بدلي.</string>
-  <string name="nearby_location_not_available">مڪانيت موجود ناھي.</string>
+  <string name="nearby_location_not_available" fuzzy="true">مڪانيت موجود ناھي.</string>
   <string name="location_permission_rationale_nearby">ويجھين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گھربل آھي</string>
   <string name="get_directions">ھدايتون وٺو</string>
   <string name="read_article">مضمون پڙھو</string>
@@ -242,13 +242,13 @@
   <string name="nearby_wikidata">وڪيڊيٽا</string>
   <string name="nearby_wikipedia">وڪيپيڊيا</string>
   <string name="nearby_commons">العام</string>
-  <string name="about_rate_us">&lt;u&gt;پذيرائي ڏيو&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;عام سوال&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;پذيرائي ڏيو&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;عام سوال&lt;/u&gt;</string>
   <string name="welcome_skip_button">سبق کي ڇڏيو</string>
   <string name="no_internet">انٽرنيٽ ناهي</string>
   <string name="internet_established">انٽرنيٽ آهي</string>
   <string name="no_notifications">اطلاع نہ لڌا</string>
-  <string name="about_translate">&lt;u&gt;ترجمو&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;ترجمو&lt;/u&gt;</string>
   <string name="about_translate_title">ٻوليون</string>
   <string name="about_translate_proceed">وڌو</string>
   <string name="about_translate_cancel">رد</string>

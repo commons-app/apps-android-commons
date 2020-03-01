@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ExecutorUtils {
 
@@ -17,6 +19,13 @@ public class ExecutorUtils {
 
     public static Executor uiExecutor() {
         return uiExecutor;
+    }
+
+
+    private static final ExecutorService executor = Executors.newFixedThreadPool(3);
+
+    public static ExecutorService get() {
+        return executor;
     }
 
 }
