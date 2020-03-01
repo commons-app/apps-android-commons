@@ -75,3 +75,8 @@
 -keep class org.acra.** { *; }
 -keepattributes SourceFile,LineNumberTable
 -keepattributes *Annotation*
+
+# --- Parcelable ---
+-keepclassmembers class * implements android.os.Parcelable {
+    static ** CREATOR;
+}

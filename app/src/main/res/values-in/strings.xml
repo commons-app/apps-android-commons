@@ -96,8 +96,8 @@
   <string name="menu_about">Tentang</string>
   <string name="about_license">Aplikasi Wikimedia Commons adalah aplikasi sumber-terbuka yang dibuat dan dikelola oleh penerima sumbangan dan sukarelawan dari komunitas Wikimedia. Yayasan Wikimedia tidak terlibat dalam pembuatan, pengembangan, ataupun pemeliharaan aplikasi ini.</string>
   <string name="about_improve">Buat sebuah &lt;a href=\"%1$s\"&gt;isu GitHub&lt;/a&gt; untuk laporan bug dan saran-saran.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Kebijakan privasi&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Kredit&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Kebijakan privasi&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Kredit&lt;/u&gt;</string>
   <string name="title_activity_about">Tentang</string>
   <string name="menu_feedback">Kirim umpan balik (via Surel)</string>
   <string name="no_email_client">Tidak ada app email terinstal</string>
@@ -112,7 +112,7 @@
   <string name="media_upload_policy">Dengan mengirim foto ini, saya menyatakan bahwa ini adalah karya saya sendiri yang tidak mengandung bahan atau foto narsis berhak cipta, dan tidak menyalahi &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;kebijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Unduh</string>
   <string name="preference_license">Lisensi standar</string>
-  <string name="use_previous">Gunakan judul/deskripsi sebelumnya</string>
+  <string name="use_previous" fuzzy="true">Gunakan judul/deskripsi sebelumnya</string>
   <string name="allow_gps">Dapatkan lokasi secara otomatis</string>
   <string name="allow_gps_summary">Mengambil lokasi saat ini jika gambar tidak diberi geotag, atau tercantum geotag. \nPeringatan: Ini akan mengungkapkan lokasi Anda saat ini.</string>
   <string name="preference_theme">Modus malam</string>
@@ -157,7 +157,7 @@
   <string name="welcome_copyright_subtext">Hindari materi berhak cipta yang Anda temukan dari internet serta gambar poster, sampul buku, dll.</string>
   <string name="welcome_final_text">Apakah Anda paham?</string>
   <string name="welcome_final_button_text">Ya!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Informasi lanjut&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Informasi lanjut&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategori</string>
   <string name="detail_panel_cats_loading">Memuat...</string>
   <string name="detail_panel_cats_none">Tidak ada yang dipilih</string>
@@ -259,7 +259,7 @@
   <string name="null_url">Galat! URL tidak ditemukan</string>
   <string name="nominate_deletion">Usulkan agar dihapus</string>
   <string name="nominated_for_deletion">Gambar ini telah diusulkan untuk dihapus.</string>
-  <string name="nominated_see_more">&lt;u&gt;Lihat halaman web untuk rincian&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Lihat halaman web untuk rincian&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">Usulkan %1$s penghapusan.</string>
   <string name="nominating_for_deletion_status">Usulan penghapusan: %1$s</string>
   <string name="view_browser">Lihat di Peramban</string>
@@ -271,7 +271,7 @@
   <string name="copy_wikicode">Salin wikitext ke papan klip</string>
   <string name="wikicode_copied">Wikitext telah disalin ke papan klip</string>
   <string name="nearby_location_has_not_changed">Lokasi belum berubah</string>
-  <string name="nearby_location_not_available">Lokasi tidak tersedia</string>
+  <string name="nearby_location_not_available" fuzzy="true">Lokasi tidak tersedia</string>
   <string name="location_permission_rationale_nearby">Izin diperlukan untuk menampilkan daftar tempat di sekitar</string>
   <string name="get_directions">Dapatkan petunjuk arah</string>
   <string name="read_article">Baca artikel</string>
@@ -284,8 +284,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Beri rating&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;PSA&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Beri rating&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;PSA&lt;/u&gt;</string>
   <string name="welcome_skip_button">Lewati Tutorial</string>
   <string name="no_internet">Internet tidak terhubung</string>
   <string name="internet_established">Internet terhubung</string>
@@ -293,7 +293,7 @@
   <string name="error_review">Galat mengambil gambar untuk ditinjau. Tekan segarkan untuk coba lagi.</string>
   <string name="error_review_categories">Galat mengambil kategori gambar untuk ditinjau. Tekan segarkan untuk coba lagi.</string>
   <string name="no_notifications">Pemberitahuan tidak ditemukan</string>
-  <string name="about_translate">&lt;u&gt;Terjemahkan&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Terjemahkan&lt;/u&gt;</string>
   <string name="about_translate_title">Bahasa</string>
   <string name="about_translate_message">Pilih bahasa untuk terjemahan yang ingin Anda kirimkan</string>
   <string name="about_translate_proceed">Lanjutkan</string>
@@ -321,7 +321,7 @@
   <string name="search_tab_title_categories">Kategori</string>
   <string name="explore_tab_title_featured">Terpilih</string>
   <string name="explore_tab_title_mobile">Diunggah melalui ponsel</string>
-  <string name="successful_wikidata_edit">Gambar berhasil ditambahkan ke %1$s di Wikidata!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Gambar berhasil ditambahkan ke %1$s di Wikidata!</string>
   <string name="wikidata_edit_failure">Gagal mengubah entitas Wikidata yang bersangkutan!</string>
   <string name="menu_set_wallpaper">Jadikan Wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper berhasil dipasang!</string>
@@ -438,7 +438,7 @@
   <string name="image_chooser_title">Pilih Gambar untuk diunggah</string>
   <string name="please_wait">Silakan tunggu…</string>
   <string name="delete_helper_show_deletion_title_success">Sukses</string>
-  <string name="delete_helper_show_deletion_message_if">Berhasil dinominasikan %1$ untuk dihapus.</string>
+  <string name="delete_helper_show_deletion_message_if" fuzzy="true">Berhasil dinominasikan %1$ untuk dihapus.</string>
   <string name="delete_helper_show_deletion_title_failed">Gagal</string>
   <string name="delete_helper_show_deletion_message_else">Tidak dapat meminta penghapusan.</string>
   <string name="delete_helper_ask_spam_selfie">Foto selfi</string>

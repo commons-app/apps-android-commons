@@ -110,8 +110,8 @@
   <string name="menu_about">परिचय</string>
   <string name="about_license">विकिमीडिया कॉमन्स एप्प एक मुक्त स्रोत एप्प है जो कि विकिमीडिया समुदाय के अनुदानप्राप्तकर्ताओं व स्वयंसेवकों द्वारा निर्मित एवं प्रबंधित है। विकिमीडिया फॉऊण्डेशन इस एप्प के निर्माण, विकास व प्रबंधन में किसी प्रकार से भी संलग्न नहीं है।</string>
   <string name="about_improve">त्रुटि की सूचना और सुझावों के लिए &lt;a href=\"%1$s\"&gt; GitHub समस्या &lt;/a&gt; बनाएं</string>
-  <string name="about_privacy_policy">&lt;u&gt;गोपनीयता नीति&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;श्रेय&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;गोपनीयता नीति&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;श्रेय&lt;/u&gt;</string>
   <string name="title_activity_about">परिचय</string>
   <string name="menu_feedback">प्रतिक्रिया दें (ईमेल द्वारा)</string>
   <string name="no_email_client">कोई ईमेल साधन स्थापित नहीं</string>
@@ -127,7 +127,7 @@
   <string name="media_upload_policy">इस तस्वीर को सबमिट करके, मैं घोषणा करता हूं कि यह मेरा अपना काम है, इसमें कॉपीराइट सामग्री या सेल्फी नहीं है, और अन्यथा &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;विकीमीडिया कॉमन्स नीतियां का पालन करता हूँ &lt;/a&gt;</string>
   <string name="menu_download">डाउनलोड</string>
   <string name="preference_license">डिफॉल्ट लाइसेन्स</string>
-  <string name="use_previous">पिछले शीर्षक/विवरण का उपयोग करें</string>
+  <string name="use_previous" fuzzy="true">पिछले शीर्षक/विवरण का उपयोग करें</string>
   <string name="allow_gps">वर्तमान स्थान स्वतः ज्ञात करें</string>
   <string name="allow_gps_summary" fuzzy="true">यदि छवि पर जियोटैग नहीं है तो श्रेणियों के सुझाव हेतु वर्तमान स्थान ज्ञात करें।</string>
   <string name="preference_theme">रात्रि मोड</string>
@@ -171,7 +171,7 @@
   <string name="welcome_copyright_subtext">इंटरनेट से मिली कोई कॉपीराइट सामग्री के साथ साथ पोस्टर, पुस्तक के खड्डे आदि को भी अपलोड करने से बचें।</string>
   <string name="welcome_final_text">क्या आपको लगता है कि आप समझ गए?</string>
   <string name="welcome_final_button_text">हाँ!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;अधिक जानकारी&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;अधिक जानकारी&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">श्रेणियाँ</string>
   <string name="detail_panel_cats_loading">लोड हो रहा है…</string>
   <string name="detail_panel_cats_none">कुछ चयनित नहीं</string>
@@ -261,7 +261,7 @@
   <string name="null_url">त्रुटि! यूआरएल नहीं मिला</string>
   <string name="nominate_deletion">हटाने के लिये नामांकन करें</string>
   <string name="nominated_for_deletion">यह चित्र हटाने के लिये नामांकित किया गया है।</string>
-  <string name="nominated_see_more">&lt;u&gt;विवरण के लिये वेबपेज खोलें&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;विवरण के लिये वेबपेज खोलें&lt;/u&gt;</string>
   <string name="view_browser">ब्राउज़र में देखें</string>
   <string name="skip_login">छोड़ें</string>
   <string name="navigation_item_login">लॉगिन</string>
@@ -271,7 +271,7 @@
   <string name="copy_wikicode">विकिटेक्स्ट को क्लिपबोर्ड पर कॉपी करें</string>
   <string name="wikicode_copied">विकिटेक्सट क्लिपबोर्ड पर कॉपी किया जा चुका है</string>
   <string name="nearby_location_has_not_changed">स्थान परिवर्तन नहीं हुआ।</string>
-  <string name="nearby_location_not_available">स्थान उपलब्ध नहीं।</string>
+  <string name="nearby_location_not_available">स्थान उपलब्ध नहीं है।</string>
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
   <string name="get_directions" fuzzy="true">दिशा - निर्देश प्राप्त करें</string>
   <string name="read_article" fuzzy="true">लेख पढ़ें</string>
@@ -284,14 +284,14 @@
   <string name="nearby_wikidata" fuzzy="true">विकीडाटा</string>
   <string name="nearby_wikipedia" fuzzy="true">विकीपीडिया</string>
   <string name="nearby_commons">कॉमन्स</string>
-  <string name="about_rate_us">&lt;u&gt;हमें रेट करें&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;अक्सर पूछे जाने वाले प्रश्न&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;हमें रेट करें&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;अक्सर पूछे जाने वाले प्रश्न&lt;/u&gt;</string>
   <string name="welcome_skip_button">प्रशिक्षण छोड़ें</string>
   <string name="no_internet">इंटरनेट उपलब्ध नहीं</string>
   <string name="internet_established">इंटरनेट उपलब्ध</string>
   <string name="error_notifications">सूचनाएं लाने में त्रुटि</string>
   <string name="no_notifications">कोई सूचनाएँ नहीं मिलीं</string>
-  <string name="about_translate">&lt;u&gt;अनुवाद&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;अनुवाद&lt;/u&gt;</string>
   <string name="about_translate_title">भाषाएँ</string>
   <string name="about_translate_proceed">आगे बढ़ें</string>
   <string name="about_translate_cancel">रद्द करें</string>
@@ -315,7 +315,7 @@
   <string name="search_tab_title_media" fuzzy="true">मीडिया</string>
   <string name="search_tab_title_categories">श्रेणियाँ</string>
   <string name="explore_tab_title_featured">निर्वाचित</string>
-  <string name="successful_wikidata_edit">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
+  <string name="successful_wikidata_edit" fuzzy="true">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
   <string name="menu_set_wallpaper">वॉलपेपर के रूप में लगायें</string>
   <string name="wallpaper_set_successfully">वॉलपेपर सफलतापूर्वक लग गया!</string>
   <string name="quiz">प्रश्नोत्तरी</string>

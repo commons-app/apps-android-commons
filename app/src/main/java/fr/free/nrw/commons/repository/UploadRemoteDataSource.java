@@ -1,9 +1,19 @@
 package fr.free.nrw.commons.repository;
 
+import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadController;
@@ -11,10 +21,6 @@ import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import java.util.Comparator;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * This class would act as the data source for remote operations for UploadActivity
@@ -22,16 +28,21 @@ import javax.inject.Singleton;
 @Singleton
 public class UploadRemoteDataSource {
 
+    private static final double NEARBY_RADIUS_IN_KILO_METERS = 0.1; //100 meters
+
     private UploadModel uploadModel;
     private UploadController uploadController;
     private CategoriesModel categoriesModel;
+    private NearbyPlaces nearbyPlaces;
 
     @Inject
     public UploadRemoteDataSource(UploadModel uploadModel, UploadController uploadController,
-                                  CategoriesModel categoriesModel) {
+                                  CategoriesModel categoriesModel,
+                                  NearbyPlaces nearbyPlaces) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
         this.categoriesModel = categoriesModel;
+        this.nearbyPlaces = nearbyPlaces;
     }
 
     /**
@@ -165,7 +176,7 @@ public class UploadRemoteDataSource {
     }
 
     /**
-     * ask the UploadModel for the image quality of the UploadItem
+     * ask the UplaodModel for the image quality of the UploadItem
      *
      * @param uploadItem
      * @param shouldValidateTitle
@@ -176,19 +187,20 @@ public class UploadRemoteDataSource {
     }
 
     /**
-     * Ask the CategoriesModel to search categories
-     * @param query
-     * @param imageTitleList
+     * gets nearby places matching with upload item's GPS location
+     *
+     * @param latitude
+     * @param longitude
      * @return
      */
-    public Observable<CategoryItem> searchCategories(String query, List<String> imageTitleList) {
-        return categoriesModel.searchCategories(query, imageTitleList);
-    }
-
-    /**
-     * Ask the CategoriesModel for default categories
-     */
-    public Observable<CategoryItem> getDefaultCategories(List<String> imageTitleList) {
-        return categoriesModel.getDefaultCategories(imageTitleList);
+    public Place getNearbyPlaces(double latitude, double longitude) {
+        try {
+            List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(latitude, longitude, 0.0f),
+                    Locale.getDefault().getLanguage(),
+                    NEARBY_RADIUS_IN_KILO_METERS);
+            return fromWikidataQuery.size() > 0 ? fromWikidataQuery.get(0) : null;
+        } catch (IOException e) {
+            return null;
+        }
     }
 }

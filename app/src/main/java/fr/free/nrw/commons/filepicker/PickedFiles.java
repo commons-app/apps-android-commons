@@ -5,9 +5,10 @@ import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
+import android.webkit.MimeTypeMap;
+
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
-import android.webkit.MimeTypeMap;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,32 +58,29 @@ class PickedFiles implements Constants {
     }
 
     static void copyFilesInSeparateThread(final Context context, final List<UploadableFile> filesToCopy) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                List<File> copiedFiles = new ArrayList<>();
-                int i = 1;
-                for (UploadableFile uploadableFile : filesToCopy) {
-                    File fileToCopy = uploadableFile.getFile();
-                    File dstDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getFolderName(context));
-                    if (!dstDir.exists()) dstDir.mkdirs();
+        new Thread(() -> {
+            List<File> copiedFiles = new ArrayList<>();
+            int i = 1;
+            for (UploadableFile uploadableFile : filesToCopy) {
+                File fileToCopy = uploadableFile.getFile();
+                File dstDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getFolderName(context));
+                if (!dstDir.exists()) dstDir.mkdirs();
 
-                    String[] filenameSplit = fileToCopy.getName().split("\\.");
-                    String extension = "." + filenameSplit[filenameSplit.length - 1];
-                    String filename = String.format("IMG_%s_%d.%s", new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()), i, extension);
+                String[] filenameSplit = fileToCopy.getName().split("\\.");
+                String extension = "." + filenameSplit[filenameSplit.length - 1];
+                String filename = String.format("IMG_%s_%d.%s", new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()), i, extension);
 
-                    File dstFile = new File(dstDir, filename);
-                    try {
-                        dstFile.createNewFile();
-                        copyFile(fileToCopy, dstFile);
-                        copiedFiles.add(dstFile);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    i++;
+                File dstFile = new File(dstDir, filename);
+                try {
+                    dstFile.createNewFile();
+                    copyFile(fileToCopy, dstFile);
+                    copiedFiles.add(dstFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                scanCopiedImages(context, copiedFiles);
+                i++;
             }
+            scanCopiedImages(context, copiedFiles);
         }).run();
     }
 
@@ -100,11 +98,9 @@ class PickedFiles implements Constants {
 
         MediaScannerConnection.scanFile(context,
                 paths, null,
-                new MediaScannerConnection.OnScanCompletedListener() {
-                    public void onScanCompleted(String path, Uri uri) {
-                        Timber.d("Scanned " + path + ":");
-                        Timber.d("-> uri=%s", uri);
-                    }
+                (path, uri) -> {
+                    Timber.d("Scanned " + path + ":");
+                    Timber.d("-> uri=%s", uri);
                 });
     }
 
@@ -120,11 +116,6 @@ class PickedFiles implements Constants {
     static File getCameraPicturesLocation(@NonNull Context context) throws IOException {
         File dir = tempImageDirectory(context);
         return File.createTempFile(UUID.randomUUID().toString(), ".jpg", dir);
-    }
-
-    static File getCameraVideoLocation(@NonNull Context context) throws IOException {
-        File dir = tempImageDirectory(context);
-        return File.createTempFile(UUID.randomUUID().toString(), ".mp4", dir);
     }
 
     /**

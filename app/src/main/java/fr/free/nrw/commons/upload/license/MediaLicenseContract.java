@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.upload.license;
 
-import fr.free.nrw.commons.BasePresenter;
-
 import java.util.List;
+
+import fr.free.nrw.commons.BasePresenter;
 
 /**
  * The contract with with MediaLicenseFragment and its presenter would talk to each other

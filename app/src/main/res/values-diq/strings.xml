@@ -99,8 +99,8 @@
   <string name="title_activity_category_details">Kategoriye</string>
   <string name="menu_about">Heq te cı</string>
   <string name="about_improve">Qandê yew &lt;a href=\"%1$s\"&gt;GitHub-cıkewtış&lt;/a&gt;ê neweyi rê rapor û teklifan bıaferne.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Politikaya nımıtışi&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;İştırakkerdoği&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Politikaya nımıtışi&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;İştırakkerdoği&lt;/u&gt;</string>
   <string name="title_activity_about">Heq te cı</string>
   <string name="menu_feedback">Peyd rışten bırış (E-posta ra)</string>
   <string name="no_email_client">E-posta eyar nêbi</string>
@@ -191,16 +191,16 @@
   <string name="view_browser">Browser de bıvinê</string>
   <string name="skip_login">Ser çek</string>
   <string name="navigation_item_login">Cı kewe</string>
-  <string name="nearby_directions" fuzzy="true">TARİFÊ RAYER</string>
+  <string name="nearby_directions">Telimati</string>
   <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
   <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
   <string name="nearby_commons" fuzzy="true">COMMONS</string>
-  <string name="about_rate_us">&lt;u&gt;Rey bıdê &lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;PZP&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Rey bıdê &lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;PZP&lt;/u&gt;</string>
   <string name="welcome_skip_button">Musnayoği ser çek</string>
   <string name="no_internet">İnternet nêresêno</string>
   <string name="internet_established">İnternet resiyeno</string>
-  <string name="about_translate">&lt;u&gt;Açarne&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Açarne&lt;/u&gt;</string>
   <string name="about_translate_title">Zıwani</string>
   <string name="about_translate_cancel">Bıtexelne</string>
   <string name="retry">Anciya bıcerrebne</string>

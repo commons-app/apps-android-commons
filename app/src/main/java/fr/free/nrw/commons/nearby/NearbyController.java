@@ -3,9 +3,11 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +34,10 @@ public class NearbyController {
     public static LatLng currentLocation; // Users latest fetched location
     public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
     public static double latestSearchRadius = 10.0; // Any last search radius except closest result search
+
+    public static List<MarkerPlaceGroup> markerLabelList = new ArrayList<>();
+    public static Map<Boolean, Marker> markerExistsMap;
+    public static Map<Boolean, Marker> markerNeedPicMap;
 
     @Inject
     public NearbyController(NearbyPlaces nearbyPlaces) {
@@ -158,6 +164,8 @@ public class NearbyController {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
         VectorDrawableCompat vectorDrawable = null;
+        VectorDrawableCompat vectorDrawableGreen = null;
+        VectorDrawableCompat vectorDrawableGrey = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_bookmark_marker, context.getTheme()
@@ -191,13 +199,18 @@ public class NearbyController {
         vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
-                    context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
-            );
+                    context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme());
+            vectorDrawableGreen = VectorDrawableCompat.create(
+                    context.getResources(), R.drawable.ic_custom_map_marker_green, context.getTheme());
+            vectorDrawableGrey = VectorDrawableCompat.create(
+                    context.getResources(), R.drawable.ic_custom_map_marker_grey, context.getTheme());
         } catch (Resources.NotFoundException e) {
             // ignore when running tests.
         }
         if (vectorDrawable != null) {
             Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+            Bitmap iconGreen = UiUtils.getBitmap(vectorDrawableGreen);
+            Bitmap iconGrey = UiUtils.getBitmap(vectorDrawableGrey);
 
             for (Place place : placeList) {
                 String distance = formatDistanceBetween(curLatLng, place.location);
@@ -210,8 +223,21 @@ public class NearbyController {
                                 place.location.getLatitude(),
                                 place.location.getLongitude()));
                 nearbyBaseMarker.place(place);
-                nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                        .fromBitmap(icon));
+                // Check if string is only spaces or empty, if so place doesn't have any picture
+                if (!place.pic.trim().isEmpty()) {
+                    if (iconGreen != null) {
+                        nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                                .fromBitmap(iconGreen));
+                    }
+                } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+                    if (iconGrey != null) {
+                        nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                                .fromBitmap(iconGrey));
+                    }
+                } else {
+                    nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                            .fromBitmap(icon));
+                }
 
                 baseMarkerOptions.add(nearbyBaseMarker);
             }

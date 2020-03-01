@@ -9,12 +9,11 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
-import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 
 public class DBOpenHelper  extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "commons.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
 
     /**
      * Do not use directly - @Inject an instance where it's needed and let
@@ -27,7 +26,6 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         ContributionDao.Table.onCreate(sqLiteDatabase);
-        ModifierSequenceDao.Table.onCreate(sqLiteDatabase);
         CategoryDao.Table.onCreate(sqLiteDatabase);
         BookmarkPicturesDao.Table.onCreate(sqLiteDatabase);
         BookmarkLocationsDao.Table.onCreate(sqLiteDatabase);
@@ -37,7 +35,6 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int from, int to) {
         ContributionDao.Table.onUpdate(sqLiteDatabase, from, to);
-        ModifierSequenceDao.Table.onUpdate(sqLiteDatabase, from, to);
         CategoryDao.Table.onUpdate(sqLiteDatabase, from, to);
         BookmarkPicturesDao.Table.onUpdate(sqLiteDatabase, from, to);
         BookmarkLocationsDao.Table.onUpdate(sqLiteDatabase, from, to);

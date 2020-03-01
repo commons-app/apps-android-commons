@@ -2,14 +2,12 @@ package fr.free.nrw.commons;
 
 import android.net.Uri;
 import android.text.Html;
-import androidx.annotation.Nullable;
-import androidx.viewpager.widget.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.viewpager.widget.PagerAdapter;
-import org.wikipedia.util.StringUtil;
 
 public class WelcomePagerAdapter extends PagerAdapter {
     private static final int[] PAGE_LAYOUTS = new int[]{
@@ -49,7 +47,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
         if (position == PAGE_LAYOUTS.length - 1) {
             // Add link to more information
             TextView moreInfo = layout.findViewById(R.id.welcomeInfo);
-            moreInfo.setText(Html.fromHtml(container.getContext().getString(R.string.welcome_help_button_text)));
+            Utils.setUnderlinedText(moreInfo, R.string.welcome_help_button_text, container.getContext());
             moreInfo.setOnClickListener(view -> Utils.handleWebUrl(
                     container.getContext(),
                     Uri.parse("https://commons.wikimedia.org/wiki/Help:Contents")

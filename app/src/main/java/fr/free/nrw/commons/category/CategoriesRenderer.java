@@ -12,6 +12,9 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
+/**
+ * Renders the Categories view
+ */
 public class CategoriesRenderer extends Renderer<CategoryItem> {
     @BindView(R.id.tvName) CheckedTextView checkedView;
     private final CategoryClickedListener listener;

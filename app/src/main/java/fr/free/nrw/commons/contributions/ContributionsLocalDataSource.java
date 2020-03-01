@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.contributions;
 
 import android.database.Cursor;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
+
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 
 /**
  * The LocalDataSource class for Contributions

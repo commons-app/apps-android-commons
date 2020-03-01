@@ -1,31 +1,28 @@
 package fr.free.nrw.commons.upload;
 
-import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -43,6 +40,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
@@ -51,17 +49,30 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import java.util.Collections;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class UploadActivity extends BaseActivity implements UploadContract.View ,UploadBaseFragment.Callback{
+import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
+
+public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback {
     @Inject
     ContributionController contributionController;
-    @Inject @Named("default_preferences") JsonKvStore directKvStore;
-    @Inject UploadContract.UserActionListener presenter;
-    @Inject CategoriesModel categoriesModel;
-    @Inject SessionManager sessionManager;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore directKvStore;
+    @Inject
+    UploadContract.UserActionListener presenter;
+    @Inject
+    CategoriesModel categoriesModel;
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    UserClient userClient;
+
 
     @BindView(R.id.cv_container_top_card)
     CardView cvContainerTopCard;
@@ -84,7 +95,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     @BindView(R.id.vp_upload)
     ViewPager vpUpload;
 
-    private boolean isTitleExpanded=true;
+    private boolean isTitleExpanded = true;
 
     private CompositeDisposable compositeDisposable;
     private ProgressDialog progressDialog;
@@ -97,8 +108,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
 
     private String source;
     private Place place;
-    private List<UploadableFile> uploadableFiles= Collections.emptyList();
-    private int currentSelectedPosition=0;
+    private List<UploadableFile> uploadableFiles = Collections.emptyList();
+    private int currentSelectedPosition = 0;
 
     @SuppressLint("CheckResult")
     @Override
@@ -133,24 +144,24 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
     private void initThumbnailsRecyclerView() {
         rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
-        thumbnailsAdapter=new ThumbnailsAdapter(() -> currentSelectedPosition);
+        thumbnailsAdapter = new ThumbnailsAdapter(() -> currentSelectedPosition);
         rvThumbnails.setAdapter(thumbnailsAdapter);
 
     }
 
     private void initViewPager() {
-        uploadImagesAdapter=new UploadImageAdapter(getSupportFragmentManager());
+        uploadImagesAdapter = new UploadImageAdapter(getSupportFragmentManager());
         vpUpload.setAdapter(uploadImagesAdapter);
         vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset,
-                    int positionOffsetPixels) {
+                                       int positionOffsetPixels) {
 
             }
 
             @Override
             public void onPageSelected(int position) {
-                currentSelectedPosition=position;
+                currentSelectedPosition = position;
                 if (position >= uploadableFiles.size()) {
                     cvContainerTopCard.setVisibility(View.GONE);
                 } else {
@@ -179,7 +190,22 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         if (!isLoggedIn()) {
             askUserToLogIn();
         }
+        checkBlockStatus();
         checkStoragePermissions();
+    }
+
+    /**
+     * Makes API call to check if user is blocked from Commons. If the user is blocked, a snackbar
+     * is created to notify the user
+     */
+    protected void checkBlockStatus() {
+        compositeDisposable.add(userClient.isUserBlockedFromCommons()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .filter(result -> result)
+                .subscribe(result -> showInfoAlert(R.string.block_notification_title,
+                        R.string.block_notification, UploadActivity.this::finish)
+                ));
     }
 
     private void checkStoragePermissions() {
@@ -236,7 +262,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
 
     @Override
     public void showHideTopCard(boolean shouldShow) {
-        llContainerTopCard.setVisibility(shouldShow?View.VISIBLE:View.GONE);
+        llContainerTopCard.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -290,13 +316,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
                 llContainerTopCard.setVisibility(View.GONE);
             }
             tvTopCardTitle.setText(getResources()
-                    .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(),uploadableFiles.size()));
+                    .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
             fragments = new ArrayList<>();
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
                 uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, source, place);
-                uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback(){
+                uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback() {
                     @Override
                     public void deletePictureAtIndex(int index) {
                         presenter.deletePictureAtIndex(index);
@@ -383,19 +409,22 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         finish();
     }
 
-    private void showInfoAlert(int titleStringID, int messageStringId, String... formatArgs) {
+    private void showInfoAlert(int titleStringID, int messageStringId, Runnable positive, String... formatArgs) {
         new AlertDialog.Builder(this)
                 .setTitle(titleStringID)
                 .setMessage(getString(messageStringId, (Object[]) formatArgs))
                 .setCancelable(true)
-                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .setPositiveButton(android.R.string.ok, (dialog, id) -> {
+                    positive.run();
+                    dialog.cancel();
+                })
                 .create()
                 .show();
     }
 
     @Override
     public void onNextButtonClicked(int index) {
-        if (index < fragments.size()-1) {
+        if (index < fragments.size() - 1) {
             vpUpload.setCurrentItem(index + 1, false);
         } else {
             presenter.handleSubmit();
@@ -426,23 +455,25 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
             notifyDataSetChanged();
         }
 
-        @Override public Fragment getItem(int position) {
+        @Override
+        public Fragment getItem(int position) {
             return fragments.get(position);
         }
 
-        @Override public int getCount() {
+        @Override
+        public int getCount() {
             return fragments.size();
         }
 
         @Override
-        public int getItemPosition(Object object){
+        public int getItemPosition(Object object) {
             return PagerAdapter.POSITION_NONE;
         }
     }
 
 
     @OnClick(R.id.rl_container_title)
-    public void onRlContainerTitleClicked(){
+    public void onRlContainerTitleClicked() {
         rvThumbnails.setVisibility(isTitleExpanded ? View.GONE : View.VISIBLE);
         isTitleExpanded = !isTitleExpanded;
         ibToggleTopCard.setRotation(ibToggleTopCard.getRotation() + 180);
@@ -453,7 +484,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View 
         super.onDestroy();
         presenter.onDetachView();
         compositeDisposable.clear();
-        mediaLicenseFragment.setCallback(null);
-        uploadCategoriesFragment.setCallback(null);
+        if (mediaLicenseFragment != null) {
+            mediaLicenseFragment.setCallback(null);
+        }
+        if (uploadCategoriesFragment != null) {
+            uploadCategoriesFragment.setCallback(null);
+        }
     }
 }

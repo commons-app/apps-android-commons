@@ -6,6 +6,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +15,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
-    public static final int LOCATION_REQUEST = 1;
 
     // Maybe these values can be improved for efficiency
     private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 100;
@@ -93,7 +93,6 @@ public class LocationServiceManager implements LocationListener {
         // Check whether the new location fix is newer or older
         long timeDelta = location.getTime() - currentBestLocation.getTime();
         boolean isSignificantlyNewer = timeDelta > MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
-        boolean isSignificantlyOlder = timeDelta < -MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
         boolean isNewer = timeDelta > 0;
 
         // Check whether the new location fix is more or less accurate

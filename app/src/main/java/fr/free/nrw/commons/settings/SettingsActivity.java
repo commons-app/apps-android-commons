@@ -1,8 +1,9 @@
 package fr.free.nrw.commons.settings;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatDelegate;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatDelegate;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;

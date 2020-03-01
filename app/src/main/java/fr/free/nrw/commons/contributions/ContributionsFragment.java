@@ -1,15 +1,10 @@
 package fr.free.nrw.commons.contributions;
 
-import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
-import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
-
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.LayoutInflater;
@@ -17,12 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.HandlerService;
@@ -41,7 +41,6 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
@@ -57,10 +56,11 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.util.ArrayList;
-import javax.inject.Inject;
-import javax.inject.Named;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
@@ -72,21 +72,19 @@ public class ContributionsFragment
         ICampaignsView, ContributionsContract.View {
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject ContributionDao contributionDao;
-    @Inject MediaWikiApi mediaWikiApi;
     @Inject NearbyController nearbyController;
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject CampaignsPresenter presenter;
     @Inject LocationServiceManager locationManager;
 
-    private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private ContributionsListFragment contributionsListFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
-    public static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
-    public static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
+    private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
+    static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
 
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
@@ -257,10 +255,9 @@ public class ContributionsFragment
         operations on first time fragment attached to an activity. Then they will be retained
         until fragment life time ends.
          */
-        if (((MainActivity)getActivity()).isAuthCookieAcquired && !isFragmentAttachedBefore) {
-            onAuthCookieAcquired(((MainActivity)getActivity()).uploadServiceIntent);
+        if (!isFragmentAttachedBefore && getActivity() != null) {
+            onAuthCookieAcquired();
             isFragmentAttachedBefore = true;
-
         }
     }
 
@@ -268,7 +265,7 @@ public class ContributionsFragment
      * Replace FrameLayout with ContributionsListFragment, user will see contributions list. Creates
      * new one if null.
      */
-    public void showContributionsListFragment() {
+    private void showContributionsListFragment() {
         // show tabs on contribution list is visible
         ((MainActivity) getActivity()).showTabs();
         // show nearby card view on contributions list is visible
@@ -289,7 +286,7 @@ public class ContributionsFragment
      * Replace FrameLayout with MediaDetailPagerFragment, user will see details of selected media.
      * Creates new one if null.
      */
-    public void showMediaDetailPagerFragment() {
+    private void showMediaDetailPagerFragment() {
         // hide tabs on media detail view is visible
         ((MainActivity)getActivity()).hideTabs();
         // hide nearby card view on media detail is visible
@@ -306,17 +303,22 @@ public class ContributionsFragment
 
     /**
      * Called when onAuthCookieAcquired is called on authenticated parent activity
-     * @param uploadServiceIntent
      */
-    public void onAuthCookieAcquired(Intent uploadServiceIntent) {
+    void onAuthCookieAcquired() {
         // Since we call onAuthCookieAcquired method from onAttach, isAdded is still false. So don't use it
 
         if (getActivity() != null) { // If fragment is attached to parent activity
-            getActivity().bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+            getActivity().bindService(getUploadServiceIntent(), uploadServiceConnection, Context.BIND_AUTO_CREATE);
             isUploadServiceConnected = true;
             getActivity().getSupportLoaderManager().initLoader(0, null, contributionsPresenter);
         }
 
+    }
+
+    public Intent getUploadServiceIntent(){
+        Intent intent = new Intent(getActivity(), UploadService.class);
+        intent.setAction(UploadService.ACTION_START_SERVICE);
+        return intent;
     }
 
     /**
@@ -324,7 +326,7 @@ public class ContributionsFragment
      * mediaDetailPagerFragment, and preserve previous state in back stack.
      * Called when user selects a contribution.
      */
-    public void showDetail(int i) {
+    private void showDetail(int i) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             mediaDetailPagerFragment = new MediaDetailPagerFragment();
             showMediaDetailPagerFragment();
@@ -367,10 +369,6 @@ public class ContributionsFragment
 
         ((MainActivity)getActivity()).setNumOfUploads(uploadCount);
 
-    }
-
-    public void betaSetUploadCount(int betaUploadCount) {
-        displayUploadCount(betaUploadCount);
     }
 
     @Override

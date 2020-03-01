@@ -8,6 +8,8 @@ SELECT
      ?wikipediaArticle
      ?commonsArticle
      (SAMPLE(?commonsCategory) as ?commonsCategory)
+     (SAMPLE(?pic) as ?pic)
+     (SAMPLE(?destroyed) as ?destroyed)
    WHERE {
      # Around given location...
      SERVICE wikibase:around {
@@ -16,15 +18,18 @@ SELECT
        bd:serviceParam wikibase:radius "${RAD}" . # Radius in kilometers.
      }
 
-     # ... and without an image.
-     MINUS {?item wdt:P18 []}
-
      # Get the label in the preferred language of the user, or any other language if no label is available in that language.
      OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage. FILTER (lang(?itemLabelPreferredLanguage) = "${LANG}")}
      OPTIONAL {?item rdfs:label ?itemLabelAnyLanguage}
 
      # Get Commons category (P373)
      OPTIONAL { ?item wdt:P373 ?commonsCategory. }
+
+     # Get (P18)
+     OPTIONAL { ?item wdt:P18 ?pic. }
+
+     # Get (P576)
+     OPTIONAL { ?item wdt:P576 ?destroyed. }
 
      # Get the class label in the preferred language of the user, or any other language if no label is available in that language.
      OPTIONAL {
