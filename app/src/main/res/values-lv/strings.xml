@@ -59,7 +59,7 @@
   <string name="title_activity_category_details">Kategorija</string>
   <string name="menu_about">Par</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izejas kods&lt;/a&gt; un &lt;a href=\"https://commons-app.github.io/\"&gt;tīmekļa vietne&lt;/a&gt; GitHub. Izveido jaunu &lt;a href=\"%1$s\"&gt;GitHub pieteikumu&lt;/a&gt; kļūdas ziņojumam vai ieteikumam.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Privātuma politika&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Privātuma politika</string>
   <string name="title_activity_about">Par</string>
   <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
   <string name="provider_categories">Nesen lietotās kategorijas</string>
@@ -79,6 +79,7 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_final_text">Jums šķiet, ka sapratāt?</string>
   <string name="welcome_final_button_text">Jā!</string>
+  <string name="welcome_help_button_text">Vairāk informācijas</string>
   <string name="detail_panel_cats_label">Kategorijas</string>
   <string name="detail_panel_cats_loading">Ielādē…</string>
   <string name="detail_description_empty">Nav apraksta</string>
@@ -134,9 +135,10 @@
   <string name="nearby_directions">Norādes</string>
   <string name="nearby_wikidata">Vikidati</string>
   <string name="nearby_wikipedia">Vikipēdija</string>
-  <string name="about_faq">&lt;u&gt;BUJ&lt;/u&gt;</string>
+  <string name="about_rate_us">Novērtē mūs</string>
+  <string name="about_faq">BUJ</string>
   <string name="welcome_skip_button">Izlaist apmācību</string>
-  <string name="about_translate">&lt;u&gt;Tulkot&lt;/u&gt;</string>
+  <string name="about_translate">Tulkot</string>
   <string name="about_translate_title">Valodas</string>
   <string name="about_translate_proceed">Turpināt</string>
   <string name="about_translate_cancel">Atcelt</string>

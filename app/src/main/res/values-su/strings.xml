@@ -97,8 +97,8 @@
   <string name="menu_about">Ngeunaan</string>
   <string name="about_license">Aplikasi Wikimédia Commons mangrupa aplikasi sumber nembrak nu dijieun jeung dikokolakeun ku panampa hibah sarta rélawan komunitas Wikimédia. Wikimedia Foundation teu pépérodeun dina nyieun, ngamekarkeun, atawa mulasara ieu aplikasi.</string>
   <string name="about_improve">Jieun &lt;a href=\"%1$s\"&gt;isu GitHub anyar&lt;/a&gt; pikeun laporan jeung kamandang bug.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Kawijakan privasi&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Pangajén&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Kawijakan privasi&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Pangajén&lt;/u&gt;</string>
   <string name="title_activity_about">Ngeunaan</string>
   <string name="menu_feedback">Kirim eupan balik (via Surélék)</string>
   <string name="no_email_client">Tanpa klayen surélék kapasang</string>
@@ -159,7 +159,7 @@
   <string name="welcome_copyright_subtext">Singkahan bahan-bahan ti Internét anu boga hak cipta, kaasup poto poster, jilid buku, jsb.</string>
   <string name="welcome_final_text">Anjeun geus ngarti?</string>
   <string name="welcome_final_button_text">Enya</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Info salengkepna&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Info salengkepna&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategori</string>
   <string name="detail_panel_cats_loading">Keur muat…</string>
   <string name="detail_panel_cats_none">Taya nu dipilih</string>
@@ -261,7 +261,7 @@
   <string name="null_url">Salah! URL teu kapanggih</string>
   <string name="nominate_deletion">Usulkeun Dihapus</string>
   <string name="nominated_for_deletion">Ieu gambar geus dinominasikeun pikeun dipupus</string>
-  <string name="nominated_see_more">&lt;u&gt;Témbong kaca wéb pikeun wincikan&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Témbong kaca wéb pikeun wincikan&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">Nominasi %1$s jang pupuseun.</string>
   <string name="nominating_for_deletion_status">Koropak nominasi jang pupuseun: %1$s</string>
   <string name="view_browser">Tempo dina Panyungsi</string>
@@ -286,8 +286,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Béré peunteun&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;NLD&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Béré peunteun&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;NLD&lt;/u&gt;</string>
   <string name="welcome_skip_button">Liwatan Tutorial</string>
   <string name="no_internet">Internét teu sayaga</string>
   <string name="internet_established">Internét sayaga</string>
@@ -295,7 +295,7 @@
   <string name="error_review">Éror pas nyomot gambar ulaseun. Pencét segerkeun pikeun mecakan deui.</string>
   <string name="error_review_categories">Éror nyomot kategori gambar ulaseun. Pencét segerkeun pikeun mecakan deui.</string>
   <string name="no_notifications">Taya iber</string>
-  <string name="about_translate">&lt;u&gt;Tarjamahkeun&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Tarjamahkeun&lt;/u&gt;</string>
   <string name="about_translate_title">Basa</string>
   <string name="about_translate_message">Pilih basa pikeun tarjamahan nu anjeun rék ngirim</string>
   <string name="about_translate_proceed">Tuluykeun</string>

@@ -908,7 +908,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSlightly(fr.free.nrw.commons.location.LatLng latLng) {
-        Timber.d("Location significantly changed");
+        Timber.d("Location slightly changed");
         if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng,LOCATION_SLIGHTLY_CHANGED);
         }
@@ -1050,7 +1050,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void filterOutAllMarkers() {
-        greyOutAllMarkers();
+        hideAllMArkers();
     }
 
     /**
@@ -1077,7 +1077,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                                       boolean filterForPlaceState,
                                       boolean filterForAllNoneType) {
         if (selectedLabels.size() == 0 && filterForPlaceState) { // If nothing is selected, display all
-            greyOutAllMarkers();
+            // remove the previous markers before updating them
+            hideAllMArkers();
             for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
                 if (displayExists && displayNeedsPhoto) {
                     // Exists and needs photo
@@ -1101,8 +1102,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
             }
         } else {
-            // First greyed out all markers
-            greyOutAllMarkers();
+            // First remove all the markers
+            hideAllMArkers();
             for (MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
                 for (Label label : selectedLabels) {
                     if (markerPlaceGroup.getPlace().getLabel().toString().equals(label.toString())) {
@@ -1186,9 +1187,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Greys out all markers except current location marker
+     * Removes all markers except current location marker, an icon has been used
+     * but it is transparent more than grey(as the name of the icon might suggest)
+     * since grey icon may lead the users to believe that it is disabled or prohibited contribution
      */
-    private void greyOutAllMarkers() {
+    private void hideAllMArkers() {
         if(currentLocationMarker==null){
             return;
         }

@@ -8,9 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/never_ask_again"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"/>
+        android:layout_marginTop="@dimen/tiny_padding"
+        android:layout_marginBottom="@dimen/tiny_padding"
+        android:layout_marginEnd="@dimen/dimen_20"
+        android:layout_marginStart="@dimen/dimen_20"/>
 
 </FrameLayout>

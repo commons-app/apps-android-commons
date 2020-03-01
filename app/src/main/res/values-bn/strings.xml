@@ -104,8 +104,8 @@
   <string name="menu_about">পরিচিতি</string>
   <string name="about_license">উইকিমিডিয়া কমন্স অ্যাপ হচ্ছে একটি উন্মুক্ত উৎস সম্বলিত অ্যাপ যা উইকিমিডিয়া সম্প্রদায়ের ব্যবহারকারী ও সেচ্ছাসেবকবৃন্দ কর্তৃক তৈরিকৃত এবং পরিচালিত। উইকিমিডিয়া ফাউন্ডেশন এই অ্যাপ তৈরি, উন্নয়ন বা রক্ষণাবেক্ষণে জড়িত নয়।</string>
   <string name="about_improve">কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"%1$s\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
-  <string name="about_privacy_policy">&lt;u&gt;গোপনীয়তার নীতি&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;কৃতিত্ব&lt;/u&gt;</string>
+  <string name="about_privacy_policy">গোপনীয়তার নীতি</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;কৃতিত্ব&lt;/u&gt;</string>
   <string name="title_activity_about">পরিচিতি</string>
   <string name="menu_feedback">প্রতিক্রিয়া পাঠান (ইমেইলের মাধ্যমে)</string>
   <string name="no_email_client">কোন ই-মেইল ক্লায়েন্ট ইনস্টল করা নেই</string>
@@ -163,7 +163,7 @@
   <string name="welcome_copyright_subtext">পোষ্টারের চিত্র, বইয়ের কভার ইত্যাদির পাশাপাশি ইন্টারনেট থেকে পাওয়া কপিরাইটযুক্ত উপকরণ এড়িয়ে চলুন।</string>
   <string name="welcome_final_text">আপনি মনে করেন আপনি বুঝতে পেরেছেন?</string>
   <string name="welcome_final_button_text">হ্যাঁ!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;আরো তথ্য&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;আরো তথ্য&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">বিষয়শ্রেণীসমূহ</string>
   <string name="detail_panel_cats_loading">লোড হচ্ছে…</string>
   <string name="detail_panel_cats_none">কিছুই নির্বাচন করা হয়নি</string>
@@ -264,11 +264,12 @@
   <string name="nearby_wikidata">উইকিউপাত্ত</string>
   <string name="nearby_wikipedia">উইকিপিডিয়া</string>
   <string name="nearby_commons">কমন্স</string>
-  <string name="about_faq" fuzzy="true">প্রায়শই জিজ্ঞাসিত প্রশ্নসমূহ</string>
+  <string name="about_faq">প্রাজিপ্র</string>
   <string name="welcome_skip_button">টিউটোরিয়াল এড়ান</string>
   <string name="no_internet">ইন্টারনেট অনুপলব্ধ</string>
   <string name="internet_established">ইন্টারনেট উপলব্ধ</string>
   <string name="no_notifications">কোন বিজ্ঞপ্তি পাওয়া যায়নি</string>
+  <string name="about_translate">অনুবাদ করুন</string>
   <string name="about_translate_title">ভাষাসমূহ</string>
   <string name="about_translate_cancel">বাতিল</string>
   <string name="retry">পুনঃচেষ্টা করুন</string>
@@ -326,4 +327,6 @@
   <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="exif_tag_name_location">অবস্থান</string>
   <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>
+  <string name="remove_bookmark">বুকমার্ক থেকে সরানো হয়েছে</string>
+  <string name="add_bookmark">বুকমার্কে যোগ করা হয়েছে</string>
 </resources>

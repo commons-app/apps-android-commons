@@ -110,8 +110,8 @@
   <string name="menu_about">परिचय</string>
   <string name="about_license">विकिमीडिया कॉमन्स एप्प एक मुक्त स्रोत एप्प है जो कि विकिमीडिया समुदाय के अनुदानप्राप्तकर्ताओं व स्वयंसेवकों द्वारा निर्मित एवं प्रबंधित है। विकिमीडिया फॉऊण्डेशन इस एप्प के निर्माण, विकास व प्रबंधन में किसी प्रकार से भी संलग्न नहीं है।</string>
   <string name="about_improve">त्रुटि की सूचना और सुझावों के लिए &lt;a href=\"%1$s\"&gt; GitHub समस्या &lt;/a&gt; बनाएं</string>
-  <string name="about_privacy_policy">&lt;u&gt;गोपनीयता नीति&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;श्रेय&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;गोपनीयता नीति&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;श्रेय&lt;/u&gt;</string>
   <string name="title_activity_about">परिचय</string>
   <string name="menu_feedback">प्रतिक्रिया दें (ईमेल द्वारा)</string>
   <string name="no_email_client">कोई ईमेल साधन स्थापित नहीं</string>
@@ -171,7 +171,7 @@
   <string name="welcome_copyright_subtext">इंटरनेट से मिली कोई कॉपीराइट सामग्री के साथ साथ पोस्टर, पुस्तक के खड्डे आदि को भी अपलोड करने से बचें।</string>
   <string name="welcome_final_text">क्या आपको लगता है कि आप समझ गए?</string>
   <string name="welcome_final_button_text">हाँ!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;अधिक जानकारी&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;अधिक जानकारी&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">श्रेणियाँ</string>
   <string name="detail_panel_cats_loading">लोड हो रहा है…</string>
   <string name="detail_panel_cats_none">कुछ चयनित नहीं</string>
@@ -261,7 +261,7 @@
   <string name="null_url">त्रुटि! यूआरएल नहीं मिला</string>
   <string name="nominate_deletion">हटाने के लिये नामांकन करें</string>
   <string name="nominated_for_deletion">यह चित्र हटाने के लिये नामांकित किया गया है।</string>
-  <string name="nominated_see_more">&lt;u&gt;विवरण के लिये वेबपेज खोलें&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;विवरण के लिये वेबपेज खोलें&lt;/u&gt;</string>
   <string name="view_browser">ब्राउज़र में देखें</string>
   <string name="skip_login">छोड़ें</string>
   <string name="navigation_item_login">लॉगिन</string>
@@ -284,14 +284,14 @@
   <string name="nearby_wikidata" fuzzy="true">विकीडाटा</string>
   <string name="nearby_wikipedia" fuzzy="true">विकीपीडिया</string>
   <string name="nearby_commons">कॉमन्स</string>
-  <string name="about_rate_us">&lt;u&gt;हमें रेट करें&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;अक्सर पूछे जाने वाले प्रश्न&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;हमें रेट करें&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;अक्सर पूछे जाने वाले प्रश्न&lt;/u&gt;</string>
   <string name="welcome_skip_button">प्रशिक्षण छोड़ें</string>
   <string name="no_internet">इंटरनेट उपलब्ध नहीं</string>
   <string name="internet_established">इंटरनेट उपलब्ध</string>
   <string name="error_notifications">सूचनाएं लाने में त्रुटि</string>
   <string name="no_notifications">कोई सूचनाएँ नहीं मिलीं</string>
-  <string name="about_translate">&lt;u&gt;अनुवाद&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;अनुवाद&lt;/u&gt;</string>
   <string name="about_translate_title">भाषाएँ</string>
   <string name="about_translate_proceed">आगे बढ़ें</string>
   <string name="about_translate_cancel">रद्द करें</string>

@@ -14,17 +14,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dimen_10"
             android:text="@string/app_widget_heading"
             android:textColor="@color/white"
             android:layout_centerHorizontal="true"
-            android:textSize="20sp" />
+            android:textSize="@dimen/subheading_text_size" />
 
         <ImageView
             android:id="@+id/camera_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="@dimen/dimen_20"
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_photo_camera_white_24dp" />
 
@@ -37,13 +37,13 @@
         android:textAlignment="center"
         android:layout_gravity="bottom"
         android:textColor="@color/white"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:textSize="12sp"/>
+        android:layout_marginTop="@dimen/filter_padding"
+        android:layout_marginStart="@dimen/tiny_padding"
+        android:layout_marginEnd="@dimen/tiny_padding"
+        android:textSize="@dimen/subtitle_text"/>
 
     <ImageView
-        android:padding="15dp"
+        android:padding="@dimen/filter_padding"
         android:id="@+id/appwidget_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

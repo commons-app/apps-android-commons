@@ -100,8 +100,8 @@
   <string name="menu_about">Honi buruz</string>
   <string name="about_license">Wikimedia Commons iturri-irekiko aplikazioa da Wikimedia komunitateko bolondresek sortu eta mantendutakoa. Wikimedia Fundazioa ez dago aplikazioaren sorreran, garapenean, edota mantenuan ibili.</string>
   <string name="about_improve">&lt;a href=\"%1$s\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu errore eta iradokizunen berri emateko.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Pribatutasun politika&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Kredituak&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Pribatutasun politika&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Kredituak&lt;/u&gt;</string>
   <string name="title_activity_about">Honi buruz</string>
   <string name="menu_feedback">Bidali zure iritzia (e-posta bidez)</string>
   <string name="no_email_client">Posta bezerorik ez da instalatu</string>
@@ -160,7 +160,7 @@
   <string name="welcome_copyright_subtext">Saihestu copyright-a daukaten materialak, Interneten aurkitutakoak edo posterretakoak, liburuen azalak, etab.</string>
   <string name="welcome_final_text">Lortu duzula uste duzu?</string>
   <string name="welcome_final_button_text">Bai!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Informazio gehiago&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Informazio gehiago&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategoriak</string>
   <string name="detail_panel_cats_loading">Kargatzen…</string>
   <string name="detail_panel_cats_none">Bat ere ez da aukeratu</string>
@@ -258,14 +258,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Baloratu gaitzazu&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Maiz egindako galderak&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Baloratu gaitzazu&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;Maiz egindako galderak&lt;/u&gt;</string>
   <string name="welcome_skip_button">Tutoriala jauzi</string>
   <string name="no_internet">Interneta ez dago erabilgarri</string>
   <string name="internet_established">Interneta erabilgarri</string>
   <string name="error_notifications">Errorea jakinarazpenak ekartzean</string>
   <string name="no_notifications">Ez da jakinarazpenik aurkitu</string>
-  <string name="about_translate">&lt;u&gt;Itzuli&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Itzuli&lt;/u&gt;</string>
   <string name="about_translate_title">Hizkuntzak</string>
   <string name="about_translate_message">Aukeratu itzulpenak zein hizkuntzatarako bidali nahi dituzun</string>
   <string name="about_translate_proceed">Jarraitu</string>

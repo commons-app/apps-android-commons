@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.utils;
 
+import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -67,6 +68,8 @@ public class ImageUtils {
     public static final int EMPTY_TITLE = -3;
     public static final int FILE_NAME_EXISTS = -4;
     static final int NO_CATEGORY_SELECTED = -5;
+
+    private static ProgressDialog progressDialog;
 
     @IntDef(
             flag = true,
@@ -188,6 +191,7 @@ public class ImageUtils {
      * @param imageUrl Url of the image
      */
     public static void setWallpaperFromImageUrl(Context context, Uri imageUrl) {
+        showSettingWallpaperProgressBar(context);
         Timber.d("Trying to set wallpaper from url %s", imageUrl.toString());
         ImageRequest imageRequest = ImageRequestBuilder
                 .newBuilderWithSource(imageUrl)
@@ -224,9 +228,21 @@ public class ImageUtils {
         try {
             wallpaperManager.setBitmap(bitmap);
             ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
+            if (progressDialog != null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
         } catch (IOException e) {
             Timber.e(e, "Error setting wallpaper");
+            ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_unsuccessfully));
+            if (progressDialog != null) {
+                progressDialog.cancel();
+            }
         }
+    }
+
+    private static void showSettingWallpaperProgressBar(Context context) {
+        progressDialog = ProgressDialog.show(context, context.getString(R.string.setting_wallpaper_dialog_title),
+                context.getString(R.string.setting_wallpaper_dialog_message), true);
     }
 
     /**

@@ -96,8 +96,8 @@
   <string name="menu_about">Tocante a</string>
   <string name="about_license">La app de Wikimedia Commons ye software de códigu abiertu, creáu y calteníu por becaos y voluntarios de la comunidá de Wikimedia. La Fundación Wikimedia nun participa na creación, desendolcu nin caltenimientu de la app.</string>
   <string name="about_improve">Crea una nueva &lt;a href=\"%1$s\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Política d\'intimidá&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Política d\'intimidá</string>
+  <string name="about_credits">Créditos</string>
   <string name="title_activity_about">Tocante a</string>
   <string name="menu_feedback">Unviar comentarios (per corréu)</string>
   <string name="no_email_client">Nun s\'instaló nengún veceru de corréu</string>
@@ -113,7 +113,7 @@
   <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Llicencia predeterminada</string>
-  <string name="use_previous" fuzzy="true">Usar un títulu/descripción anterior</string>
+  <string name="use_previous">Usar un títulu y descripción anterior</string>
   <string name="allow_gps">Llograr automáticamente l\'allugamientu actual</string>
   <string name="allow_gps_summary">Recupera la posición actual si la imaxe nun tien etiquetes xeográfiques, y marca la imaxe con ella. Atención: Esto revelará\'l to allugamientu actual.</string>
   <string name="preference_theme">Mou nocherniegu</string>
@@ -158,7 +158,7 @@
   <string name="welcome_copyright_subtext">Evite los materiales con drechos d\'autor qu\'atopó per internet, lo mesmo qu\'imaxes de cartelos, portaes de llibros, etc.</string>
   <string name="welcome_final_text">¿Cree que yá sabe cómo va?</string>
   <string name="welcome_final_button_text">¡Si!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Mas información&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Más información</string>
   <string name="detail_panel_cats_label">Categoríes</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Nenguna seleicionada</string>
@@ -260,7 +260,7 @@
   <string name="null_url">¡Error! Nun s\'alcontró la URL</string>
   <string name="nominate_deletion">Marcada pa desaniciar</string>
   <string name="nominated_for_deletion">Esta imaxe marcóse pa desaniciar.</string>
-  <string name="nominated_see_more">&lt;u&gt;Ver la páxina web pa más detalles&lt;/u&gt;</string>
+  <string name="nominated_see_more">Ver la páxina web pa más detalles</string>
   <string name="nominating_file_for_deletion">Nomando %1$d pa desaniciu.</string>
   <string name="nominating_for_deletion_status">Nomando ficheru pa desaniciu: %1$s</string>
   <string name="view_browser">Ver nel restolador</string>
@@ -272,7 +272,7 @@
   <string name="copy_wikicode">Copiar el testu wiki al cartafueyu</string>
   <string name="wikicode_copied">Copióse\'l testu wiki al cartafueyu</string>
   <string name="nearby_location_has_not_changed">L\'allugamientu nun camudó.</string>
-  <string name="nearby_location_not_available" fuzzy="true">L\'allugamientu nun ta disponible.</string>
+  <string name="nearby_location_not_available">La cercanía podría nun funcionar correutamente, l\'allugamientu nun ta disponible.</string>
   <string name="location_permission_rationale_nearby">Ríquese permisu p\'amosar una llista de llugares cercanos</string>
   <string name="get_directions">Cómo llegar</string>
   <string name="read_article">Lleer l\'artículu</string>
@@ -285,8 +285,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Puntúanos&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;EMF&lt;/u&gt;</string>
+  <string name="about_rate_us">Puntúanos</string>
+  <string name="about_faq">EMF (entrugues más frecuentes)</string>
   <string name="welcome_skip_button">Saltar el tutorial</string>
   <string name="no_internet">Internet nun ta disponible</string>
   <string name="internet_established">Internet ta disponible</string>
@@ -294,7 +294,7 @@
   <string name="error_review">Error al recuperar la imaxe a revisar. Primi refrescar pa tentar nuevamente.</string>
   <string name="error_review_categories">Error al recuperar les categoríes d\'imaxe a revisar. Primi refrescar pa tentar nuevamente.</string>
   <string name="no_notifications">Nun s\'alcontraron notificaciones</string>
-  <string name="about_translate">&lt;u&gt;Traducir&lt;/u&gt;</string>
+  <string name="about_translate">Traducir</string>
   <string name="about_translate_title">Llingües</string>
   <string name="about_translate_message">Escueye l\'idioma pal que quies unviar traducciones</string>
   <string name="about_translate_proceed">Siguir</string>
@@ -485,7 +485,7 @@
   <string name="review_thanks_yes_button_text">Sí, por qué non</string>
   <string name="review_thanks_no_button_text">Imaxe siguiente</string>
   <string name="skip_image_explanation">Faciendo clic nesti botón recibirás otra imaxe de Wikimedia Commons xubida apocayá</string>
-  <string name="review_image_explanation">Puedes revisar imaxes y ameyorar la calidá de Wikimedia Commoms.\nLos cuatro parámetros de revisión son: \n - ¿Ésta imaxe tien rellación col contestu? \n - ¿La imaxe cumple les riegles de copyright? \n - ¿La imaxe ta correchamente categorizada? \n - Si too ta correuto, tamién puedes dar les gracies al collaborador.</string>
+  <string name="review_image_explanation">Puedes revisar imaxes y ameyorar la calidá de Wikimedia Commons.\nLos cuatro parámetros de revisión son: \n - ¿Ésta imaxe tien rellación col contestu? \n - ¿La imaxe cumple les riegles de copyright? \n - ¿La imaxe ta correchamente categorizada? \n - Si too ta correuto, tamién puedes dar les gracies al collaborador.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recibiendo\'l conteníu compartíu. El procesamientu de la imaxe puede tardar ciertu tiempu, dependiendo del tamañu de la imaxe y del to preséu</item>
     <item quantity="other">Recibiendo\'l conteníu compartíu. El procesamientu de les imaxes puede tardar ciertu tiempu, dependiendo del tamañu de les imaxes y del to preséu</item>
@@ -519,7 +519,7 @@
   <string name="exif_tag_name_lensModel">Modelu de la lente</string>
   <string name="exif_tag_name_serialNumbers">Númberos de serie</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="share_text" fuzzy="true">Xubi semeyes a Wikimedia Commons nel to móvil, descarga l\'aplicación de Commons: %1$s</string>
+  <string name="share_text">Xubi semeyes a Wikimedia Commons direutamente dende\'l to móvil. Descarga yá la app de Commons: %1$s</string>
   <string name="share_via">Compartir l\'aplicación per...</string>
   <string name="image_info">Información de la imaxe</string>
   <string name="no_categories_found">Nun s\'alcontró nenguna categoría</string>
@@ -555,4 +555,14 @@
   <string name="place_type">Tipu de llugar:</string>
   <string name="nearby_search_hint">Ponte, muséu, hotel etc.</string>
   <string name="you_must_reset_your_passsword">¡¡Falló daqué al aniciar sesión, tienes de reaniciar la contraseña!!</string>
+  <string name="upload_nearby_place_found_title">Llugar cercanu alcontráu</string>
+  <string name="upload_nearby_place_found_description">¿Ye esta una foto del Llugar %1$s?</string>
+  <string name="title_app_shortcut_explore">Esplorar</string>
+  <string name="title_app_shortcut_bookmark">Marcadores</string>
+  <string name="title_app_shortcut_setting">Configuración</string>
+  <string name="remove_bookmark">Desaniciáu de los marcadores</string>
+  <string name="add_bookmark">Amestáu a los marcadores</string>
+  <string name="wallpaper_set_unsuccessfully">Daqué salió mal. Nun pudo ponese\'l fondu d\'escritoriu</string>
+  <string name="setting_wallpaper_dialog_title">Poner como fondu d\'escritoriu</string>
+  <string name="setting_wallpaper_dialog_message">Poniendo fondu d\'escritoriu. Espera…</string>
 </resources>

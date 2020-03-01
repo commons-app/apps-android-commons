@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* BaRaN6161 TURK
 * Cyclicus
 * Derugon
+* Eneelk
 * Fitoschido
 * Friday83260
 * Gomoko
@@ -45,7 +47,7 @@
   <string name="forgot_password">Mot de passe oublié ?</string>
   <string name="signup">S’inscrire</string>
   <string name="logging_in_title">Connexion</string>
-  <string name="logging_in_message">Veuillez patienter...</string>
+  <string name="logging_in_message">Veuillez patienter…</string>
   <string name="login_success">Connexion réussie !</string>
   <string name="login_failed">Échec de la connexion !</string>
   <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
@@ -84,7 +86,7 @@
   <string name="login_failed_generic">Échec de connexion</string>
   <string name="share_upload_button">Téléverser</string>
   <string name="multiple_share_base_title">Nommer ce jeu</string>
-  <string name="add_set_name_toast">Veuillez fournir un nom pour cet jeu</string>
+  <string name="add_set_name_toast">Veuillez fournir un nom pour ce jeu</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Téléverser</string>
   <string name="categories_search_text_hint">Rechercher des catégories</string>
@@ -114,17 +116,17 @@
   <string name="title_activity_signup">S’inscrire</string>
   <string name="title_activity_featured_images">Images remarquables</string>
   <string name="title_activity_category_details">Catégorie</string>
-  <string name="title_activity_review">Relecture par pair</string>
+  <string name="title_activity_review">Relecture par les pairs</string>
   <string name="menu_about">À propos</string>
   <string name="about_license">L’application Wikimedia Commons est une application open source créée et tenue à jour par des délégués et bénévoles de la communauté Wikimedia. La Fondation Wikimedia n’est pas associée à la création, le développement ou l’entretien de l’application.</string>
   <string name="about_improve">Créer un nouveau &lt;a href=\"%1$s\"&gt;rapport sur GitHub&lt;/a&gt; pour signaler des anomalies ou des suggestions.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Règles de confidentialité&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Crédits&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Règles de confidentialité</string>
+  <string name="about_credits">Crédits</string>
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
-  <string name="no_email_client">Aucun client de courriel installé</string>
+  <string name="no_email_client">Aucun client de messagerie installé</string>
   <string name="provider_categories">Catégories récemment utilisées</string>
-  <string name="waiting_first_sync">Attente de première synchronisation...</string>
+  <string name="waiting_first_sync">Attente de première synchronisation…</string>
   <string name="no_uploads_yet">Vous n’avez encore téléchargé aucune photo.</string>
   <string name="menu_retry_upload">Réessayer</string>
   <string name="menu_cancel_upload">Annuler</string>
@@ -180,7 +182,7 @@
   <string name="welcome_copyright_subtext">Évitez les œuvres protégées que vous pouvez trouver sur l’Internet ainsi que les images d’affiches, couvertures de livres, etc.</string>
   <string name="welcome_final_text">Vous pensez que c’est bon ?</string>
   <string name="welcome_final_button_text">Oui !</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Davantage d’informations&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Davantage d’informations</string>
   <string name="detail_panel_cats_label">Catégories</string>
   <string name="detail_panel_cats_loading">Chargement...</string>
   <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
@@ -282,7 +284,7 @@
   <string name="null_url">Erreur ! URL non trouvée</string>
   <string name="nominate_deletion">Proposer pour suppression</string>
   <string name="nominated_for_deletion">Cette image a été citée pour suppression.</string>
-  <string name="nominated_see_more">&lt;u&gt;Voir la page web pour les détails&lt;/u&gt;</string>
+  <string name="nominated_see_more">Voir la page web pour les détails</string>
   <string name="nominating_file_for_deletion">Candidater %1$s pour la suppression.</string>
   <string name="nominating_for_deletion_status">Candidate un fichier pour la suppression : %1$s</string>
   <string name="view_browser">Afficher dans le navigateur</string>
@@ -294,7 +296,7 @@
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
   <string name="nearby_location_has_not_changed">L’emplacement n’a pas changé.</string>
-  <string name="nearby_location_not_available" fuzzy="true">Emplacement non disponible.</string>
+  <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux à proximité</string>
   <string name="get_directions">Obtenir les directions</string>
   <string name="read_article">Lire l’article</string>
@@ -307,8 +309,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Évaluez-nous&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">Évaluez-nous</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">Sauter le tutoriel</string>
   <string name="no_internet">Internet indisponible</string>
   <string name="internet_established">Internet disponible</string>
@@ -316,7 +318,7 @@
   <string name="error_review">Erreur durant l’accès à l’image pour relecture. Cliquer sur rafraîchir pour recommencer.</string>
   <string name="error_review_categories">Erreur lors de la récupération des catégories d’image pour relecture. Veuillez rafraîchir pour réessayer.</string>
   <string name="no_notifications">Aucune notification trouvée</string>
-  <string name="about_translate">&lt;u&gt;Traduire&lt;/u&gt;</string>
+  <string name="about_translate">Traduire</string>
   <string name="about_translate_title">Langues</string>
   <string name="about_translate_message">Sélectionner la langue pour laquelle vous voulez soumettre des traductions</string>
   <string name="about_translate_proceed">Continuer</string>
@@ -579,4 +581,12 @@
   <string name="you_must_reset_your_passsword">Quelque chose s’est mal passé lors de la connexion, vous devez réinitialiser votre mot de passe !!</string>
   <string name="upload_nearby_place_found_title">Endroit trouvé à proximité</string>
   <string name="upload_nearby_place_found_description">Est-ce une photo de l’endroit %1$s ?</string>
+  <string name="title_app_shortcut_explore">Explorer</string>
+  <string name="title_app_shortcut_bookmark">Signets</string>
+  <string name="title_app_shortcut_setting">Paramètres</string>
+  <string name="remove_bookmark">Retiré des favoris</string>
+  <string name="add_bookmark">Ajouté aux favoris</string>
+  <string name="wallpaper_set_unsuccessfully">Un problème est survenu. Impossible d\'installer le fond d\'écran.</string>
+  <string name="setting_wallpaper_dialog_title">Définir comme fond d’écran</string>
+  <string name="setting_wallpaper_dialog_message">Configuration du fond d\'écran. Veuillez attendre...</string>
 </resources>
