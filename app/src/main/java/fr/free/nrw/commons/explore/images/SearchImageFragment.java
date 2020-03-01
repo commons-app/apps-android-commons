@@ -198,7 +198,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
-            ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
+            ((SearchActivity) getContext()).viewPagerNotifyDataSetChanged();
         }
     }
 
