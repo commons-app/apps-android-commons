@@ -104,8 +104,8 @@
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen er åpen kildekode og er skapt og vedlikeholdt av stipendiater og frivillige fra Wikimedia-fellesskapet. Wikimedia Foundation er ikke involvert i utviklingen eller vedlikeholdet av appen.</string>
   <string name="about_improve">Opprett en ny &lt;a href=\"%1$s\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Personvernpolicy&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Bidragsytere&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Personvernpolicy&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Bidragsytere&lt;/u&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
   <string name="no_email_client">Ingen epostklient installert</string>
@@ -166,7 +166,7 @@
   <string name="welcome_copyright_subtext">Unngå opphavsrettsbeskyttet materiale som du har funnet på internett samt bilder av plakater, bokomslag, osv.</string>
   <string name="welcome_final_text">Forstått?</string>
   <string name="welcome_final_button_text">Ja!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Mer informasjon&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Mer informasjon&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Laster …</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
@@ -268,7 +268,7 @@
   <string name="null_url">Feil! URL ikke funnet</string>
   <string name="nominate_deletion">Nominer for sletting</string>
   <string name="nominated_for_deletion">Dette bildet har blitt nominert for sletting.</string>
-  <string name="nominated_see_more">&lt;u&gt;Se nettsiden for detaljer&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Se nettsiden for detaljer&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">Nominerer %1$s for sletting.</string>
   <string name="nominating_for_deletion_status">Nominerer fil for sletting: %1$s</string>
   <string name="view_browser">Vis i nettleseren</string>
@@ -280,7 +280,7 @@
   <string name="copy_wikicode">Kopier wikiteksten til utklippstavlen</string>
   <string name="wikicode_copied">Wikiteksten har blitt kopiert til utklippstavlen</string>
   <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
-  <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Sted ikke tilgjengelig.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
   <string name="get_directions">Få veibeskrivelse</string>
   <string name="read_article">Les artikkel</string>
@@ -293,8 +293,8 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Vurder oss&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Ofte stilte spørsmål&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Vurder oss&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;Ofte stilte spørsmål&lt;/u&gt;</string>
   <string name="welcome_skip_button">Hopp over innledning</string>
   <string name="no_internet">Internett er utilgjengelig</string>
   <string name="internet_established">Internett tilgjengelig</string>
@@ -302,7 +302,7 @@
   <string name="error_review">Feil under henting av bilde for gjennomgang. Trykk oppdater for å prøve igjen.</string>
   <string name="error_review_categories">Feil under henting av bildekategorier for gjennomgang. Trykk oppdater for å prøve igjen.</string>
   <string name="no_notifications">Ingen varsler funnet</string>
-  <string name="about_translate">&lt;u&gt;Oversett&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Oversett&lt;/u&gt;</string>
   <string name="about_translate_title">Språk</string>
   <string name="about_translate_message">Velg språket du ønsker å sende inn oversettelser for</string>
   <string name="about_translate_proceed">Fortsett</string>

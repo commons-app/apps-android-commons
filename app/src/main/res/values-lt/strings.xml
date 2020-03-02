@@ -91,8 +91,8 @@
   <string name="title_activity_signup">Užsiregistruoti</string>
   <string name="title_activity_featured_images">Rinktiniai Paveikslėliai</string>
   <string name="menu_about">Apie</string>
-  <string name="about_privacy_policy">&lt;u&gt;Privatumo politika&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Kūrėjai&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Privatumo politika&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Kūrėjai&lt;/u&gt;</string>
   <string name="title_activity_about">Apie</string>
   <string name="menu_feedback">Siųsti Atsiliepimą (El. paštu)</string>
   <string name="no_email_client">Nėra įdiegtos el. pašto tvarkyklės</string>

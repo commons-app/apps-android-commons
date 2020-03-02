@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.category.CategoryImagesListFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.ViewPagerAdapter;
@@ -37,7 +38,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 public class ExploreActivity
         extends NavigationBaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, CategoryImagesCallback {
 
     private static final String FEATURED_IMAGES_CATEGORY = "Category:Featured_pictures_on_Wikimedia_Commons";
     private static final String MOBILE_UPLOADS_CATEGORY = "Category:Uploaded_with_Mobile/Android";
@@ -145,6 +146,7 @@ public class ExploreActivity
      * This method is called on success of API call for featured images or mobile uploads.
      * The viewpager will notified that number of items have changed.
      */
+    @Override
     public void viewPagerNotifyDataSetChanged() {
         if (mediaDetails != null) {
             mediaDetails.notifyDataSetChanged();
@@ -172,6 +174,7 @@ public class ExploreActivity
      * This method is called when viewPager has reached its end.
      * Fetches more images and adds them to the recycler view and viewpager adapter
      */
+    @Override
     public void requestMoreImages() {
         if (mobileImagesListFragment != null && tabLayout.getSelectedTabPosition() == 1) {
             mobileImagesListFragment.fetchMoreImagesViewPager();

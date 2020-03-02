@@ -99,8 +99,8 @@
   <string name="menu_about">Pri</string>
   <string name="about_license">La aplikaĵo de Vikimedia Komunejo estas malfermitkoda aplijaĵo kreita kaj subtenata de la gratifikitoj kaj voluntuloj de la Vikimedia komunumo. La Vikimedia Fondaĵo ne partoprenas en la kreado, evoluigado, aŭ subtenado de la aplikaĵo.</string>
   <string name="about_improve">Krei novan &lt;a href=\"%1$s\"&gt;problemon ĉe GitHub&lt;/a&gt; por raportoj pri cimoj kaj sugestoj.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Privateca politiko&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Agnoskoj&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Privateca politiko&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Agnoskoj&lt;/u&gt;</string>
   <string name="title_activity_about">Pri</string>
   <string name="menu_feedback">Sendi viajn komentojn (per retpoŝto)</string>
   <string name="no_email_client">Neniu retpoŝtilo instalita</string>
@@ -161,7 +161,7 @@
   <string name="welcome_copyright_subtext">Evitu aĵojn kun aŭtorrajtoj, trovitajn ĉe la Interreto, kaj ankaŭ bildojn de afiŝoj, kovrilojn de libroj, ktp.</string>
   <string name="welcome_final_text">Ĉu vi komprenis?</string>
   <string name="welcome_final_button_text">Jes!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Ekscii pli&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Ekscii pli&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorioj</string>
   <string name="detail_panel_cats_loading">Ŝargado...</string>
   <string name="detail_panel_cats_none">Neniu elektita</string>
@@ -263,7 +263,7 @@
   <string name="null_url">Eraro! URL ne trovita</string>
   <string name="nominate_deletion">Proponi forigon</string>
   <string name="nominated_for_deletion">Oni proponis ke ĉi tiu bildo estu forigota.</string>
-  <string name="nominated_see_more">&lt;u&gt;Vidu la retpaĝon por pliaj detaloj&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Vidu la retpaĝon por pliaj detaloj&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">Proponante forigon de %1$s.</string>
   <string name="nominating_for_deletion_status">Proponante forigon de dosiero: %1$s.</string>
   <string name="view_browser">Malfermi en retumilo</string>
@@ -275,7 +275,7 @@
   <string name="copy_wikicode">Kopii la vikitekston en la tondujon</string>
   <string name="wikicode_copied">La vikiteksto kopiiĝis en la tondujon</string>
   <string name="nearby_location_has_not_changed">La pozicio ne ŝanĝiĝis.</string>
-  <string name="nearby_location_not_available">Pozicio ne havebla.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Pozicio ne havebla.</string>
   <string name="location_permission_rationale_nearby">Permeso estas postulata por montri liston de apudaj lokoj</string>
   <string name="get_directions">Ricevi instrukcion</string>
   <string name="read_article">Legi artikolon</string>
@@ -288,8 +288,8 @@
   <string name="nearby_wikidata">Vikidatumoj</string>
   <string name="nearby_wikipedia">Vikipedio</string>
   <string name="nearby_commons">Komunejo</string>
-  <string name="about_rate_us">&lt;u&gt;Aprezi nin&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Oftaj demandoj&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Aprezi nin&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;Oftaj demandoj&lt;/u&gt;</string>
   <string name="welcome_skip_button">Preterpasi Lernilon</string>
   <string name="no_internet">Interreto ne disponas</string>
   <string name="internet_established">Interreto disponas</string>
@@ -297,7 +297,7 @@
   <string name="error_review">Eraro dum akirado de bildo por revizio. Alklaku \'Aktualigi\' por reprovi.</string>
   <string name="error_review_categories">Eraro dum akirado de bildaj kategorioj por revizio. Alklaku \'Aktualigi\' por reprovi.</string>
   <string name="no_notifications">Neniu sciigo troviĝis</string>
-  <string name="about_translate">&lt;u&gt;Traduki&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Traduki&lt;/u&gt;</string>
   <string name="about_translate_title">Lingvoj</string>
   <string name="about_translate_message">Elekti la lingvon, por kiu vi volas submeti tradukojn</string>
   <string name="about_translate_proceed">Daŭrigi</string>

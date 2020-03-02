@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/dimen_10"
         android:elevation="@dimen/cardview_default_elevation">
 
         <androidx.core.widget.NestedScrollView
@@ -27,7 +27,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/dimen_10"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -38,7 +38,7 @@
                     <TextView
                         android:id="@+id/tv_title"
                         android:layout_width="wrap_content"
-                        android:layout_height="24dp"
+                        android:layout_height="@dimen/half_standard_height"
                         android:layout_marginEnd="@dimen/standard_gap"
                         android:layout_marginRight="@dimen/standard_gap"
                         android:gravity="center_vertical"
@@ -51,8 +51,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginEnd="@dimen/standard_gap"
+                        android:layout_marginRight="@dimen/standard_gap"
                         android:layout_toLeftOf="@id/ib_expand_collapse"
                         android:visibility="gone"
                         app:srcCompat="@drawable/ic_map_white_24dp"
@@ -61,8 +61,8 @@
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/ib_expand_collapse"
                         style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="@dimen/half_standard_height"
+                        android:layout_height="@dimen/half_standard_height"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
@@ -71,7 +71,7 @@
                         android:layout_marginBottom="@dimen/small_gap"
                         android:clickable="false"
                         android:focusable="false"
-                        android:padding="12dp"
+                        android:padding="@dimen/medium_height"
                         app:srcCompat="@drawable/ic_expand_less_black_24dp" />
                 </RelativeLayout>
 
@@ -102,8 +102,8 @@
                         android:id="@+id/rv_descriptions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="@dimen/activity_margin_horizontal"
+                        android:layout_marginBottom="@dimen/activity_margin_horizontal"
                         tools:visibility="visible" />
 
 
@@ -112,8 +112,8 @@
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
                         android:text="@string/previous_image_caption_description"
+                        android:padding="@dimen/miniscule_margin"
                         android:textAlignment="textEnd"
                         android:textColor="@color/button_blue"
                         android:visibility="gone"
@@ -128,7 +128,7 @@
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:minWidth="48dp"
+                            android:minWidth="@dimen/fragment_height"
                             android:text="+" />
 
                         <androidx.appcompat.widget.AppCompatButton

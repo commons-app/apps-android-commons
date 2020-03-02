@@ -205,7 +205,7 @@
   <string name="null_url">Masalah! URL ora tinemu</string>
   <string name="nominate_deletion">Usulaké supaya binusek</string>
   <string name="nominated_for_deletion">Gambar iki kausulaké supaya binusek.</string>
-  <string name="nominated_see_more">&lt;u&gt;Deleng kaca wèb bab rerincèné&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Deleng kaca wèb bab rerincèné&lt;/u&gt;</string>
   <string name="skip_login">Lumpati</string>
   <string name="navigation_item_login">Mlebu log</string>
   <string name="skip_login_title">Apa panjenengan temen ora péngin mlebu log?</string>

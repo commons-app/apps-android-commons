@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
@@ -38,7 +39,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  * Represents search screen of this app
  */
 
-public class SearchActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider{
+public class SearchActivity extends NavigationBaseActivity
+        implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
@@ -162,6 +164,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
      * This method is called on success of API call for image Search.
      * The viewpager will notified that number of items have changed.
      */
+    @Override
     public void viewPagerNotifyDataSetChanged() {
         if (mediaDetails!=null){
             mediaDetails.notifyDataSetChanged();
@@ -248,6 +251,7 @@ public class SearchActivity extends NavigationBaseActivity implements MediaDetai
      * This method is called when viewPager has reached its end.
      * Fetches more images using search query and adds it to the recycler view and viewpager adapter
      */
+    @Override
     public void requestMoreImages() {
         if (searchImageFragment!=null){
             searchImageFragment.addImagesToList(query);

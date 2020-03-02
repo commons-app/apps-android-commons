@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -27,16 +29,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
-import fr.free.nrw.commons.category.CategoryDetailsActivity;
-import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.explore.SearchActivity;
-import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -148,7 +147,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
             case R.id.menu_bookmark_current_image:
-                bookmarkDao.updateBookmark(bookmark);
+                boolean bookmarkExists = bookmarkDao.updateBookmark(bookmark);
+                Snackbar snackbar = bookmarkExists ? Snackbar.make(getView(), R.string.add_bookmark, Snackbar.LENGTH_LONG) : Snackbar.make(getView(), R.string.remove_bookmark, Snackbar.LENGTH_LONG);
+                snackbar.show();
                 updateBookmarkState(item);
                 return true;
             case R.id.menu_share_current_image:
@@ -328,28 +329,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             Timber.d("Returning as activity is destroyed!");
             return;
         }
-        if (i+1 >= adapter.getCount()){
-            try{
-                ((CategoryImagesActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try{
-                ((CategoryDetailsActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try{
-                ((SearchActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try{
-                ((ExploreActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
+        if (i+1 >= adapter.getCount())
+            ((CategoryImagesCallback) getContext()).requestMoreImages();
+
         getActivity().invalidateOptionsMenu();
     }
 

@@ -37,7 +37,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 public class CategoryDetailsActivity extends NavigationBaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider,
-                    AdapterView.OnItemClickListener{
+                    AdapterView.OnItemClickListener, CategoryImagesCallback {
 
 
     private FragmentManager supportFragmentManager;
@@ -219,6 +219,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
      * This method is called on success of API call for Images inside a category.
      * The viewpager will notified that number of items have changed.
      */
+    @Override
     public void viewPagerNotifyDataSetChanged() {
         if (mediaDetails!=null){
             mediaDetails.notifyDataSetChanged();
@@ -229,6 +230,7 @@ public class CategoryDetailsActivity extends NavigationBaseActivity
      * This method is called when viewPager has reached its end.
      * Fetches more images using search query and adds it to the grid view and viewpager adapter
      */
+    @Override
     public void requestMoreImages() {
         if (categoryImagesListFragment!=null){
             categoryImagesListFragment.fetchMoreImagesViewPager();

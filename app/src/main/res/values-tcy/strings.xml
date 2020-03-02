@@ -97,8 +97,8 @@
   <string name="menu_about">ಎಂಕ್ಲೆನ ಬಗ್ಗೆ</string>
   <string name="about_license">ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಅಪ್ಲಿಕೇಶನ್‌ನ್ ವಿಕಿಮೀಡಿಯ ಸಮುದಾಯೊತ ಅನುದಾನ, ಸ್ವಯಂಸೇವಕೆರ್ ರಚನೆ ಬುಕ್ಕೊ ನಿರ್ವಹಣೆ ಮುಕ್ತೊ-ಮೂಲತೊ ಅಪ್ಲಿಕೇಶನ್. ವಿಕಿಮೀಡಿಯ ಫೌಂಡೇಶನ್ ಅಪ್ಲಿಕೇಶನ್‌ನ್ ಸೃಷ್ಟಿ, ಅಭಿವೃದ್ಧಿ, ಅತ್ತಂದೆ ನಿರ್ವಹಣೆಟ್ ಇಜ್ಜಿ.</string>
   <string name="about_improve">ಪೊಸತ್ತ್ ಸೃಷ್ಟಿ &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; ಇರೆನ ವರಿದಿ ಬುಕ್ಕ ಸಲಹೆ.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Privacy policy&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Credits&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Privacy policy&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Credits&lt;/u&gt;</string>
   <string name="title_activity_about">ಎಂಕ್ಲೆನ ಬಗ್ಗೆ</string>
   <string name="menu_feedback">ಇರೆನ ಅಬಿಪ್ರಾಯೊ ಬರೆಲೆ(ಮಿಂಚಂಚೆ).</string>
   <string name="no_email_client">ಇರೆನ ಮಿಂಚಂಚೆ ಇಜ್ಜಿ.</string>
@@ -159,7 +159,7 @@
   <string name="welcome_copyright_subtext">ಇಂಟರ್ನೆಟ್ನ್‌ಡ್ತ್ ಇರ್ ತೊಜಾತ್ ಬರ್ಪಿನ ಕೃತಿಸ್ವಾಮ್ಯತ ವಸ್ತುಲೆನ್ ಅಂಚನೆ ಪೋಸ್ಟರ್ ಚಿತ್ರೊಲು, ಬೂಕುಲೆನ ವರ್ಗೊ ಇತ್ಯಾದಿ ತಪ್ಪಾತ್ ಇಪ್ಪು.</string>
   <string name="welcome_final_text">ಇರೆಗ್ ತಿಕ್ಕ್‌ಂಡ್ಂದು ಇರ್ ಭಾವಿಸುವರಾ?</string>
   <string name="welcome_final_button_text">ಅಂದ್!</string>
-  <string name="welcome_help_button_text">&lt;u&gt; ಹೆಚ್ಚಿನ ಮಾಹಿತಿಲು&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt; ಹೆಚ್ಚಿನ ಮಾಹಿತಿಲು&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">ವರ್ಗೊಲು</string>
   <string name="detail_panel_cats_loading">ದಿಂಜಾವೊಂದುಂಡು……</string>
   <string name="detail_panel_cats_none">ಒಂಜಿಲಾ ಅಯ್ಕೆ ಮಾಲ್ತಿಜ್ಜಿ.</string>
@@ -255,7 +255,7 @@
   <string name="null_url">\nದೋಷೊ! URL ತೋಜಾತ್ ಬರ್ಪುಜ್ಜಿ.</string>
   <string name="nominate_deletion">ಮಾಜಾಯರ ನಾಮನಿರ್ದೇಶನೊ.</string>
   <string name="nominated_for_deletion">ಮಾಜಾಯರ ಈ ಚಿತ್ರೊನ್ ನಾಮನಿರ್ದೇಶನೊ ಮಾಲ್ತೆರ್.</string>
-  <string name="nominated_see_more">&lt;u&gt;ವಿವರಗಾತ್ ವೆಬ್ಪುಟೊನ್ ತೂಲೆ&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;ವಿವರಗಾತ್ ವೆಬ್ಪುಟೊನ್ ತೂಲೆ&lt;/u&gt;</string>
   <string name="view_browser">\nಬ್ರೌಸರ್ಟ್ ತೂಲೆ.</string>
   <string name="skip_login">ಬುಡ್ಲೆ</string>
   <string name="navigation_item_login">ಲಾಗಿನ್ ಆಲೆ.</string>
@@ -265,7 +265,7 @@
   <string name="copy_wikicode">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ಪುಲೆ.</string>
   <string name="wikicode_copied">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ತ್ಂಡ್.</string>
   <string name="nearby_location_has_not_changed">ಜಾಗೆ ಬದಲಾವಣೆ ಇಜ್ಜಿ.</string>
-  <string name="nearby_location_not_available">ಜಾಗೆತ ಗುರುತು ಇಜ್ಜಿ.</string>
+  <string name="nearby_location_not_available" fuzzy="true">ಜಾಗೆತ ಗುರುತು ಇಜ್ಜಿ.</string>
   <string name="location_permission_rationale_nearby">ಮುಟ್ಟತ ಜಾಗೆತ ಪಟ್ಟಿನ್ ತೋಜಾಯರ ಅನುಮತಿ ಅಗತ್ಯವಾತ್ ಬೋಡು.</string>
   <string name="get_directions" fuzzy="true">ನಿರ್ದೇಶನೊ ಉಂಡಾ.</string>
   <string name="read_article" fuzzy="true">ಲೇಖನೊ ಓದುಲೆ.</string>
@@ -278,14 +278,14 @@
   <string name="nearby_wikidata" fuzzy="true">\nವಿಕಿಡಾಟ.</string>
   <string name="nearby_wikipedia" fuzzy="true">\nವಿಕಿಪೀಡಿಯ.</string>
   <string name="nearby_commons" fuzzy="true">ಕಾಮನ್ಸ್.</string>
-  <string name="about_rate_us">&lt;u&gt;Rate us&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Rate us&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">ಟ್ಯುಟೋರಿಯಲ್‌ನ್ ಬುಡ್ಲೆ.</string>
   <string name="no_internet">ಇಂಟರ್ನೆಟ್ ಇಜ್ಜಿ.</string>
   <string name="internet_established">ಇಂಟರ್ನೆಟ್ ಉಂಡು.</string>
   <string name="error_notifications">\nಅಧಿಸೂಚನೆಟ್ ದೋಷೊ ಉಂಡು.</string>
   <string name="no_notifications">ಅಧಿಸೂಚನೆ ಇಜ್ಜಿ.</string>
-  <string name="about_translate">&lt;u&gt;ಅನುವಾದೊ&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;ಅನುವಾದೊ&lt;/u&gt;</string>
   <string name="about_translate_title">ಭಾಸೆಲು</string>
   <string name="about_translate_message">ಇರ್ ಅನುವಾದೊನ್ ಕೊರಿಯರ ಒಪ್ಪಗೆ ಉಂಡಾ, ಭಾಷೆನ್ ಆಯ್ಕೆ ಮಾಲ್ಲುಲೆ.</string>
   <string name="about_translate_proceed">ಮುಂದುವರಿಪುಲೆ.</string>

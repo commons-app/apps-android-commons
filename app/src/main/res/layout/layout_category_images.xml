@@ -4,8 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="2dp"
-    android:paddingBottom="0dp"
+    android:padding="@dimen/miniscule_margin"
+    android:paddingBottom="@dimen/dimen_0"
     >
 
     <TextView
@@ -21,7 +21,7 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/categoryImageView"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="@dimen/very_large_height"
         app:actualImageScaleType="centerCrop"
         />
 

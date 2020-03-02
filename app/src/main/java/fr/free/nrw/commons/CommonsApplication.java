@@ -19,6 +19,7 @@ import com.facebook.imagepipeline.producers.Consumer;
 import com.facebook.imagepipeline.producers.FetchState;
 import com.facebook.imagepipeline.producers.NetworkFetcher;
 import com.facebook.imagepipeline.producers.ProducerContext;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -135,6 +136,7 @@ public class CommonsApplication extends Application {
 
         INSTANCE = this;
         ACRA.init(this);
+        Mapbox.getInstance(this, getString(R.string.mapbox_commons_app_token));
 
         ApplicationlessInjection
                 .getInstance(this)
