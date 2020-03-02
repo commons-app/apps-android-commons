@@ -94,7 +94,7 @@
   <string name="menu_about">O</string>
   <string name="about_license">Aplikacija The Wikimedia Commons je aplikacija otvorenog kôda koju razvijaju i održavaju volonteri Wikimedijine zajednice. Zaklada Wikimedija nije uključena u stvaranje, razvoj ili održavanje ove aplikacije.</string>
   <string name="about_improve">Da biste prijavili poteškoću ili dali prijedlog, stvorite &lt;a href=\"%1$s\"&gt;novi zahtjev na GitHubu&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">Politika privatnosti</string>
+  <string name="about_privacy_policy">Pravila privatnosti</string>
   <string name="about_credits">Zasluge</string>
   <string name="title_activity_about">O</string>
   <string name="menu_feedback">Pošaljite povratnu informaciju (putem elektroničke pošte)</string>

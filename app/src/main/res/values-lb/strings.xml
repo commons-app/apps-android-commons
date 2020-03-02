@@ -91,7 +91,7 @@
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
   <string name="about_improve">Leet wgl. &lt;a href=\"%1$s\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Dateschutzrichtlinn&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Dateschutz</string>
   <string name="about_credits">Merci</string>
   <string name="title_activity_about">Iwwer</string>
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>
@@ -232,6 +232,7 @@
   <string name="null_url">Feeler! URL net fonnt</string>
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
+  <string name="nominated_see_more">Kuckt d\'Internetsäit fir Detailer</string>
   <string name="view_browser">Am Browser weisen</string>
   <string name="skip_login">Iwwersprangen</string>
   <string name="navigation_item_login">Aloggen</string>
@@ -352,6 +353,9 @@
   <string name="account_created">Benotzerkont ugeluecht!</string>
   <string name="place_state_needs_photo">Brauch eng Foto</string>
   <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
+  <string name="title_app_shortcut_explore">Entdecken</string>
+  <string name="title_app_shortcut_bookmark">Lieszeechen</string>
+  <string name="title_app_shortcut_setting">Astellungen</string>
   <string name="remove_bookmark">Vun de Lieszeechen ewechgeholl</string>
   <string name="add_bookmark">Bei d\'Lieszeechen derbäigesat</string>
   <string name="wallpaper_set_unsuccessfully">Et ass Eppes schif gaangen. D\'Hannergrondbild konnt net agestallt ginn</string>

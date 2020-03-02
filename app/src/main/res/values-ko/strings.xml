@@ -488,6 +488,8 @@
   <string name="place_state_needs_photo">사진 필요</string>
   <string name="place_type">장소 유형:</string>
   <string name="nearby_search_hint">다리, 박물관, 호텔 등.</string>
+  <string name="title_app_shortcut_explore">찾아보기</string>
+  <string name="title_app_shortcut_setting">설정</string>
   <string name="wallpaper_set_unsuccessfully">무언가 잘못되었습니다. 배경화면을 설정하지 못했습니다</string>
   <string name="setting_wallpaper_dialog_title">배경화면으로 설정</string>
   <string name="setting_wallpaper_dialog_message">배경화면을 설정 중입니다. 기다려 주십시오...</string>

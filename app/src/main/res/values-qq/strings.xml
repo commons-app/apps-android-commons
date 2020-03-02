@@ -160,4 +160,5 @@
   <string name="nominate_for_deletion_done">{{Identical|Done}}</string>
   <string name="exif_tag_name_author">{{Identical|Author}}</string>
   <string name="exif_tag_name_location">{{Identical|Location}}</string>
+  <string name="title_app_shortcut_bookmark">{{identical|Bookmark}}</string>
 </resources>
