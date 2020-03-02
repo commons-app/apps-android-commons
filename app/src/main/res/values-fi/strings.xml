@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Alluk.
 * Crt
+* FinlandMan
+* Kyykaarme
 * Nike
 * Olli
 * Pahkiqaz
@@ -18,6 +21,7 @@
   <string name="preference_category_appearance">Ulkoasu</string>
   <string name="preference_category_general">Yleinen</string>
   <string name="preference_category_feedback">Palaute</string>
+  <string name="preference_category_privacy">Yksityisyys</string>
   <string name="preference_category_location">Sijainti</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -98,11 +102,12 @@
   <string name="title_activity_signup">Rekisteröidy</string>
   <string name="title_activity_featured_images">Suositellut kuvat</string>
   <string name="title_activity_category_details">Luokka</string>
+  <string name="title_activity_review">Vertaisarviointi</string>
   <string name="menu_about">Tietoja</string>
   <string name="about_license">Wikimedia Commons -sovellus on vapaan lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ole sitoutunut sovelluksen luomiseen, kehittämiseen tai ylläpitoon.</string>
-  <string name="about_improve">Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Yksityisyydensuoja&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Tekijät&lt;/u&gt;</string>
+  <string name="about_improve">Luo uusi &lt;a href=\"%1$s\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Yksityisyydensuoja&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Tekijät&lt;/u&gt;</string>
   <string name="title_activity_about">Tietoja</string>
   <string name="menu_feedback">Lähetä palautetta (sähköpostitse)</string>
   <string name="no_email_client">Sähköpostiohjelmaa ei ole asennettu</string>
@@ -118,7 +123,7 @@
   <string name="media_upload_policy">Lisäämällä kuvan, ilmoitan tämän olevan oma työ ja että se ei sisällä tekijänoikeuden alaista materiaalia tai selfietä ja muuten noudattaa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Lataa</string>
   <string name="preference_license">Oletuslisenssi</string>
-  <string name="use_previous">Käytä edellistä otsikkoa/kuvausta</string>
+  <string name="use_previous" fuzzy="true">Käytä edellistä otsikkoa/kuvausta</string>
   <string name="allow_gps">Hae tämänhetkinen sijainti automaattisesti</string>
   <string name="allow_gps_summary">Noutaa nykyisen sijainnin jos kuva ei ole paikkamerkitty, ja paikkamerkitsee kuvan. Varoitus: tämä paljastaa nykyisen sijaintisi.</string>
   <string name="preference_theme">Yötila</string>
@@ -163,23 +168,27 @@
   <string name="welcome_copyright_subtext">Vältä tekijänoikeuksien alaista materiaalia, kuten julisteita, kirjan kansia ja useimpia Internetistä löydettyjä kuvia.</string>
   <string name="welcome_final_text">Luuletko ymmärtäneesi tämän?</string>
   <string name="welcome_final_button_text">Kyllä!</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Lisätietoa&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Luokat</string>
   <string name="detail_panel_cats_loading">Ladataan…</string>
   <string name="detail_panel_cats_none">Ei yhtään valittu</string>
   <string name="detail_description_empty">Ei kuvausta</string>
+  <string name="detail_discussion_empty">Ei keskustelua</string>
   <string name="detail_license_empty">Tuntematon lisenssi</string>
   <string name="menu_refresh">Päivitä</string>
   <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Sovellus ei voi päästä galleriaasi ilman tätä oikeutta.</string>
-  <string name="write_storage_permission_rationale">Vaadittu oikeus: Kirjoita ulkoiseen tallennustilaan. Sovellus ei voi päästä kameraasi ilman tätä oikeutta.</string>
+  <string name="write_storage_permission_rationale">Vaadittu oikeus: Kirjoita ulkoiseen tallennustilaan. Sovelluksella ei ole pääsyä kameraasi/galleriaasi ilman tätä oikeutta.</string>
   <string name="location_permission_rationale">Valinnainen lupa: Saada tämänhetkinen sijainti loukkasuosituksia varten.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
   <string name="no_nearby">Lähistöltä ei löytynyt paikkoja</string>
   <string name="warning">Varoitus</string>
+  <string name="upload_image_duplicate">Tämä tiedosto on jo Commonsissa. Haluatko varmasti jatkaa?</string>
   <string name="yes">Kyllä</string>
   <string name="no">Ei</string>
   <string name="media_detail_title">Otsikko</string>
   <string name="media_detail_description">Kuvaus</string>
+  <string name="media_detail_discussion">Keskustelu</string>
   <string name="media_detail_author">Tekijä</string>
   <string name="media_detail_uploaded_date">Tallennuspäivämäärä</string>
   <string name="media_detail_license">Lisenssi</string>
@@ -190,8 +199,12 @@
   <string name="_2fa_code">2FA koodi</string>
   <string name="number_of_uploads">Tuorein latausrajani</string>
   <string name="maximum_limit">Maksimimäärä</string>
+  <string name="invalid_zero">Nolla ei ole kelvollinen</string>
+  <string name="invalid_input">Virheellinen syöte</string>
   <string name="maximum_limit_alert">Ei voida näyttää enempää, kuin 500</string>
-  <string name="set_limit" fuzzy="true">Aseta tuore latausraja</string>
+  <string name="enter_valid">Anna kelvollinen numero</string>
+  <string name="cannot_be_zero">Tallennusraja ei voi olla 0</string>
+  <string name="set_limit">Tuore latausraja</string>
   <string name="login_failed_2fa_not_supported">Kaksivaiheinen tunnistus ei ole vielä tuettu.</string>
   <string name="logout_verification">Haluatko varmasti kirjautua ulos?</string>
   <string name="commons_logo">Commons-logo</string>
@@ -225,6 +238,7 @@
   <string name="navigation_item_info">Opas</string>
   <string name="navigation_item_notification">Ilmoitukset</string>
   <string name="navigation_item_featured_images">Suositeltu</string>
+  <string name="navigation_item_review">Tarkasta</string>
   <string name="nearby_needs_permissions">Lähellä olevia paikkoja ei voida näyttää ilman sijaintilupaa</string>
   <string name="no_description_found">kuvausta ei löytynyt</string>
   <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>
@@ -233,10 +247,15 @@
   <string name="error_while_cache">Virhe varastoidessa kuvia</string>
   <string name="title_info">Tiedoston yksilöllinen ja kuvaava otsikko, jota käytetään tiedostonimenä. Voit käyttää tavallista kieltä välilyönnein. Älä sisällytä tiedoston päätettä.</string>
   <string name="description_info">Kuvaile mediaa niin paljon kuin mahdollista: Missä se otettiin? Mitä se esittää? Mikä on asiayhteys? Kuvaile esineitä tai henkilöitä. Tuo ilmi tietoja, joita ei ole helppo arvailla, esimerkiksi vuorokaudenaika, jos se on maisema. Jos media esittää jotain epätavallista, selitä, mikä tekee siitä epätavallisen.</string>
+  <string name="upload_image_too_dark">Tämä kuva on liian tumma, haluatko varmasti ladata sen? Wikimedia Commons on vain kuville, joilla on tietosanakirja-arvoa.</string>
+  <string name="upload_problem_exist">Kuvan mahdolliset ongelmat:</string>
   <string name="upload_problem_image_dark">Kuva on liian tumma.</string>
   <string name="upload_problem_image_blurry">Kuva on epäselvä.</string>
   <string name="upload_problem_image_duplicate">Kuva on jo Commonsissa.</string>
+  <string name="upload_problem_different_geolocation">Tämä kuva otettiin eri paikassa.</string>
+  <string name="upload_problem_fbmd">Tallenna vain kuvia, jotka olet itse ottanut. Älä tallenna kuvia, joita olet löytänyt muiden ihmisten Facebook-tileiltä.</string>
   <string name="upload_problem_do_you_continue">Haluatko silti tallentaa tämän kuvan?</string>
+  <string name="internet_downloaded">Tallenna vain kuvia, jotka olet itse ottanut. Älä tallenna kuvia, joita olet ladannut internetistä.</string>
   <string name="give_permission">Anna lupa</string>
   <string name="use_external_storage">Käytä ulkoista tallennustilaa</string>
   <string name="use_external_storage_summary">Tallenna sovelluksen sisäisen kameran kanssa otetut kuvat laitteellesi</string>
@@ -245,38 +264,38 @@
   <string name="send_log_file_description">Lähetä lokitiedosto kehittäjille sähköpostin välityksellä auttaaksesi sovelluksen ongelmien korjaamisessa. Huomautus: lokit saattavat mahdollisesti sisältää tunnistettavaa tietoa</string>
   <string name="no_web_browser">Ei verkkoselainta jolla avata URL-osoite</string>
   <string name="null_url">Virhe! URL-osoitetta ei löytynyt</string>
-  <string name="nominate_deletion">Ehdotettu poistettavaksi</string>
+  <string name="nominate_deletion">Ehdota poistettavaksi</string>
   <string name="nominated_for_deletion">Tätä kuvaa on ehdotettu poistettavaksi.</string>
   <string name="view_browser">Näytä selaimessa</string>
   <string name="skip_login">Ohita</string>
   <string name="navigation_item_login">Kirjaudu sisään</string>
   <string name="skip_login_title">Haluatko todella ohittaa kirjautumisen?</string>
-  <string name="skip_login_message" fuzzy="true">Et voi ladata kuvia.</string>
+  <string name="skip_login_message">Sinun täytyy kirjautua sisään tallentaaksesi kuvia tulevaisuudessa.</string>
   <string name="login_alert_message">Kirjaudu sisään käyttääksesi tätä ominaisuutta</string>
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
   <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>
   <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
-  <string name="nearby_location_not_available">Sijainti ei käytettävissä.</string>
+  <string name="nearby_location_not_available">Nearby ei välttämättä toimi, sillä sijainti ei käytettävissä.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
-  <string name="get_directions">HANKI OHJEET</string>
-  <string name="read_article">LUE ARTIKKELI</string>
+  <string name="get_directions">Hanki ohjeet</string>
+  <string name="read_article">Lue artikkeli</string>
   <string name="notifications_welcome">Tervetuloa Wikimedia Commonsiin, %1$s! Olemme iloisia että olet täällä.</string>
   <string name="notifications_talk_page_message">%1$s jätti viestin keskustelusivullesi</string>
   <string name="notifications_thank_you_edit">Kiitos muokkaamisestasi</string>
   <string name="notifications_mention">%1$s mainitsi sinut %2$s.</string>
   <string name="toggle_view_button">Vaihda näkymä</string>
-  <string name="nearby_directions">REITTI</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us">&lt;u&gt;Arvostele meidät&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;UKK&lt;/u&gt;</string>
+  <string name="nearby_directions">Reitit</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Arvostele meidät&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;UKK&lt;/u&gt;</string>
   <string name="welcome_skip_button">Ohita opetus</string>
   <string name="no_internet">Internet ei saatavissa</string>
   <string name="internet_established">Internet saatavana</string>
   <string name="error_notifications">Virhe ilmoitusten haussa</string>
   <string name="no_notifications">Ilmoituksia ei löytynyt</string>
-  <string name="about_translate">&lt;u&gt;Käännä&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Käännä&lt;/u&gt;</string>
   <string name="about_translate_title">Kielet</string>
   <string name="about_translate_message">Valitse kieli, joksi haluaisit kääntää</string>
   <string name="about_translate_proceed">Jatka</string>
@@ -289,6 +308,7 @@
   <string name="no_images_found">Kuvia ei löytynyt!</string>
   <string name="error_loading_images">Virhe ladattaessa kuvia.</string>
   <string name="image_uploaded_by">Tallentanut: %1$s</string>
+  <string name="block_notification_title">Estetty</string>
   <string name="block_notification">Sinut on estetty muokkaamasta Commonsia</string>
   <string name="appwidget_img">Päivän kuva</string>
   <string name="app_widget_heading">Päivän kuva</string>
@@ -296,9 +316,13 @@
   <string name="search_commons">Hae Commonsista</string>
   <string name="title_activity_search">Haku</string>
   <string name="search_recent_header">Äskettäiset haut:</string>
-  <string name="search_tab_title_media">MEDIA</string>
-  <string name="search_tab_title_categories">LUOKAT</string>
-  <string name="successful_wikidata_edit">Kuva onnistuneesti lisätty Wikidata-kohteeseen %1$s!</string>
+  <string name="error_loading_categories">Luokkia ladattaessa tapahtui virhe.</string>
+  <string name="error_loading_subcategories">Alaluokkia ladattaessa tapahtui virhe.</string>
+  <string name="search_tab_title_media">Media</string>
+  <string name="search_tab_title_categories">Luokat</string>
+  <string name="explore_tab_title_featured">Suositeltu</string>
+  <string name="explore_tab_title_mobile">Tallennettu mobiilin kautta</string>
+  <string name="successful_wikidata_edit">Kuva lisätty Wikidata-kohteeseen %1$s!</string>
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
   <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>
   <string name="wallpaper_set_successfully">Taustakuva asetettu!</string>
@@ -306,6 +330,7 @@
   <string name="quiz_question_string">Onko tämä kuva OK tallennettavaksi?</string>
   <string name="question">Kysymys</string>
   <string name="result">Tulos</string>
+  <string name="selfie_answer">Selfieillä ei ole paljoa arvoa tietosanakirjassa. Älä tallenna kuvaa itsestäsi, ellei sinusta jo ole Wikipedia-artikkelia.</string>
   <string name="construction_event_answer">Kuvat, jotka esittävät teknologiaa tai kulttuuria ovat erittäin tervetulleita Commonsiin.</string>
   <string name="warning_for_image_reverts">VAROITUS: Enemmän kuin %1$s tallentamistasi kuvista on poistettu. Jos jatkat poistamista vaativien kuvien tallentamista, tilisi todennäköisesti estetään.</string>
   <string name="congratulatory_message_quiz">Sait %1$s vastausta oikein. Onnittelut!</string>
@@ -320,24 +345,41 @@
   <string name="share_coordinates_not_present">Koordinaatteja ei annettu kuvaa valittaessa</string>
   <string name="error_fetching_nearby_places">Virhe paikkoja haettaessa.</string>
   <string name="add_description">+ Lisää kuvaus</string>
+  <string name="no_recent_searches">Ei viimeaikaisia hakuja</string>
   <string name="delete_recent_searches_dialog">Haluatko varmasti tyhjentää hakuhistoriasi?</string>
+  <string name="delete_search_dialog">Haluatko poistaa tämän haun?</string>
   <string name="search_history_deleted">Hakuhistoria poistettu</string>
+  <string name="nominate_delete">Ehdota poistettavaksi</string>
+  <string name="delete">Poista</string>
   <string name="Achievements">Saavutukset</string>
-  <string name="statistics">TILASTOT</string>
+  <string name="statistics">Tilastot</string>
   <string name="statistics_thanks">Kiitos vastaanotettu</string>
   <string name="statistics_featured">Suositellut kuvat</string>
-  <string name="level">TASO</string>
+  <string name="level">Taso</string>
   <string name="images_uploaded">Kuvia tallennettu</string>
   <string name="images_used_by_wiki">Kuvia käytetty</string>
   <string name="achievements_share_message">Jaa saavutuksesi ystäviesi kanssa!</string>
   <string name="error_occurred">Tapahtui virhe!</string>
   <string name="notifications_channel_name_all">Commons-ilmoitus</string>
+  <string name="preference_author_name_toggle">Käytä mukautettua tekijän nimeä</string>
+  <string name="preference_author_name_toggle_summary">Käytä mukautettua tekijän nimeä käyttäjänimesi sijaan kuvia tallentaessa</string>
+  <string name="preference_author_name">Mukautettu tekijän nimi</string>
+  <string name="contributions_fragment">Muokkaukset</string>
   <string name="nearby_fragment">Lähistöllä</string>
   <string name="notifications">Ilmoitukset</string>
+  <string name="archived_notifications">Ilmoitukset (arkistoidut)</string>
+  <string name="display_nearby_notification">Näytä lähistöllä-ilmoitus</string>
   <string name="list_sheet">Lista</string>
+  <string name="step_count">Vaihe %1$d/%2$d</string>
   <string name="next">Seuraava</string>
   <string name="previous">Edellinen</string>
   <string name="submit">Lähetä</string>
+  <string name="upload_title_duplicate">Tiedosto tiedostonimellä %1$s on jo olemassa. Oletko varma, että haluat jatkaa?</string>
+  <string name="map_application_missing">Laitteestasi ei löydy yhteensopivaa karttasovellusta. Asenna karttasovellus käyttääksesi tätä toimintoa.</string>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d tallennus</item>
+    <item quantity="other">%1$d tallennusta</item>
+  </plurals>
   <string name="navigation_item_bookmarks">Kirjanmerkit</string>
   <string name="title_activity_bookmarks">Kirjanmerkit</string>
   <string name="title_page_bookmarks_pictures">Kuvat</string>
@@ -347,11 +389,60 @@
   <string name="bookmark_empty">Et ole lisännyt yhtään kirjanmerkkejä</string>
   <string name="provider_bookmarks_location">Kirjanmerkit</string>
   <string name="deletion_reason_uploaded_by_mistake">Tallensin sen vahingossa</string>
-  <string name="no_uploads" fuzzy="true">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla kamera tai galleriakuvaketta yllä.</string>
+  <string name="deletion_reason_publicly_visible">En tiennyt, että se olisi näkyvissä julkisesti.</string>
+  <string name="deletion_reason_bad_for_my_privacy">Huomasin, että se on haitallinen yksityisyydelleni.</string>
+  <string name="deletion_reason_no_longer_want_public">Muutin mieleni, en halua että se on enää julkisesti näkyvissä.</string>
+  <string name="deletion_reason_not_interesting">Valitettavasti tämä kuva ei ole kiinnostava tietosanakirjaan.</string>
+  <string name="no_uploads">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla lisäyspainiketta.</string>
+  <string name="desc_language_Worldwide">Maailmanlaajuinen</string>
   <string name="desc_language_America">Amerikka</string>
   <string name="desc_language_Europe">Eurooppa</string>
   <string name="desc_language_Middle_East">Lähi-itä</string>
   <string name="desc_language_Africa">Afrikka</string>
   <string name="desc_language_Asia">Aasia</string>
   <string name="desc_language_Pacific">Tyynenmeren alue</string>
+  <string name="no_categories_selected">Luokkia ei valittu</string>
+  <string name="no_go_back">Ei, palaa takaisin</string>
+  <string name="search_this_area">Hae tältä alueelta</string>
+  <string name="nearby_card_permission_explanation">Haluaisitko, että käytämme nykyistä sijaintiasi näyttääksemme lähimmät paikat, jotka tarvitsevat kuvia?</string>
+  <string name="never_ask_again">Älä kysy tätä uudelleen</string>
+  <string name="display_campaigns">Näytä kilpailut</string>
+  <string name="display_campaigns_explanation">Näe meneillään olevat kilpailut</string>
+  <string name="this_function_needs_network_connection">Tämä toiminto tarvitsee verkkoyhteyden. Tarkista yhteysasetuksesi.</string>
+  <string name="nominate_for_deletion_done">Valmis</string>
+  <string name="notsure">Epävarma</string>
+  <string name="review_copyright">Noudattaako tämä tekijänoikeussääntöjä?</string>
+  <string name="review_category">Onko tämä luokiteltu oikein?</string>
+  <string name="review_thanks">Haluaisitko kiittää muokkaajaa?</string>
+  <string name="review_no_category">Oh, tämä ei ole edes luokiteltu!</string>
+  <string name="review_category_no_button_text">Näyttää hyvälle</string>
+  <string name="review_spam_no_button_text">Näyttää hyvälle</string>
+  <string name="review_copyright_yes_button_text">Ei, tekijänoikeusloukkaus</string>
+  <string name="review_copyright_no_button_text">Näyttää hyvälle</string>
+  <string name="review_thanks_yes_button_text">Kyllä, miksi ei</string>
+  <string name="review_thanks_no_button_text">Seuraava kuva</string>
+  <string name="menu_option_archived">Näytä arkistoidut</string>
+  <string name="menu_option_unread">Näytä lukemattomat</string>
+  <string name="image_chooser_title">Valitse tallennettavat tiedostot</string>
+  <string name="please_wait">Odota…</string>
+  <string name="skip_image">Ohita tämä kuva</string>
+  <string name="exif_tag_name_author">Tekijä</string>
+  <string name="exif_tag_name_copyright">Tekijänoikeus</string>
+  <string name="exif_tag_name_location">Sijainti</string>
+  <string name="exif_tag_name_cameraModel">Kameran malli</string>
+  <string name="exif_tag_name_lensModel">Linssin malli</string>
+  <string name="exif_tag_name_serialNumbers">Sarjanumerot</string>
+  <string name="exif_tag_name_software">Ohjelmisto</string>
+  <string name="no_categories_found">Luokkia ei löytynyt</string>
+  <string name="upload_cancelled">Peruutettu tallennus</string>
+  <string name="dialog_box_text_nomination">Miksi %1$s tulisi poistaa?</string>
+  <string name="default_description_language">Kuvauksen oletuskieli</string>
+  <string name="delete_helper_ask_spam_selfie">Selfie</string>
+  <string name="delete_helper_ask_spam_blurry">Sumea</string>
+  <string name="delete_helper_ask_spam_other">Muu</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Lehdistökuva</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Satunnainen kuva internetistä</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Muu</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Koska se on</string>
 </resources>

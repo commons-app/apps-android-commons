@@ -6,7 +6,7 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.Utils
@@ -23,7 +23,7 @@ import org.robolectric.annotation.Config
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [21], application = TestCommonsApplication::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class ContributionDaoTest {
     private val localUri = "http://example.com/"
     private val client: ContentProviderClient = mock()
@@ -177,23 +177,6 @@ class ContributionDaoTest {
             assertFalse(it.containsKey(Table.COLUMN_LOCAL_URI))
             assertFalse(it.containsKey(Table.COLUMN_IMAGE_URL))
             assertFalse(it.containsKey(Table.COLUMN_UPLOADED))
-        }
-    }
-
-    @Test
-    fun saveNewContribution_nullableImageUrlUsesFileAsBackup() {
-        whenever(client.insert(isA(), isA())).thenReturn(contentUri)
-        val contribution = createContribution(true, null, null, null, "filePath")
-
-        testObject.save(contribution)
-
-        assertEquals(contentUri, contribution.contentUri)
-        verify(client).insert(eq(BASE_URI), captor.capture())
-        captor.firstValue.let {
-            // Nullable fields are absent if null
-            assertFalse(it.containsKey(Table.COLUMN_LOCAL_URI))
-            assertFalse(it.containsKey(Table.COLUMN_UPLOADED))
-            assertEquals(Utils.makeThumbBaseUrl("filePath"), it.getAsString(Table.COLUMN_IMAGE_URL))
         }
     }
 

@@ -1,21 +1,18 @@
 package fr.free.nrw.commons.filepicker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.drew.imaging.ImageMetadataReader;
-import com.drew.imaging.ImageProcessingException;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.exif.ExifSubIFDDirectory;
+import androidx.annotation.Nullable;
+import androidx.exifinterface.media.ExifInterface;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-
-import javax.annotation.Nullable;
 
 import fr.free.nrw.commons.upload.FileUtils;
 
@@ -125,16 +122,13 @@ public class UploadableFile implements Parcelable {
      * @return
      */
     private DateTimeWithSource getDateTimeFromExif() {
-        Metadata metadata;
         try {
-            metadata = ImageMetadataReader.readMetadata(file);
-            ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
-            if (directory!=null && directory.containsTag(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL)) {
-                Date date = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
+            ExifInterface exif = new ExifInterface(file.getAbsolutePath());
+            @SuppressLint("RestrictedApi") long dateTime = exif.getDateTime();
+            if (dateTime != -1) {
+                Date date = new Date(dateTime);
                 return new DateTimeWithSource(date, DateTimeWithSource.EXIF_SOURCE);
             }
-        } catch (ImageProcessingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

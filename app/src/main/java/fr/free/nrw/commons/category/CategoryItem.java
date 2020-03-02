@@ -19,7 +19,7 @@ public class CategoryItem implements Parcelable {
         }
     };
 
-    CategoryItem(String name, boolean selected) {
+    public CategoryItem(String name, boolean selected) {
         this.name = name;
         this.selected = selected;
     }

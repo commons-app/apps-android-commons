@@ -7,14 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.RemoteException;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
-import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.StringUtils;
+
+import androidx.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Date;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
+
+import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
@@ -99,7 +104,7 @@ public class ContributionDao {
             cv.put(Table.COLUMN_UPLOADED, contribution.getDateUploaded().getTime());
         }
         cv.put(Table.COLUMN_LENGTH, contribution.getDataLength());
-        //This was always meant to store the date created..If somehow date created is not fetched while actually saving the contribution, lets save today's date
+        //This was always meant to store the date created..If somehow date created is not fetched while actually saving the contribution, lets saveValue today's date
         cv.put(Table.COLUMN_TIMESTAMP, contribution.getDateCreated()==null?System.currentTimeMillis():contribution.getDateCreated().getTime());
         cv.put(Table.COLUMN_STATE, contribution.getState());
         cv.put(Table.COLUMN_TRANSFERRED, contribution.getTransferred());
@@ -144,7 +149,7 @@ public class ContributionDao {
             );
 
             String wikidataEntityId = cursor.getString(cursor.getColumnIndex(COLUMN_WIKI_DATA_ENTITY_ID));
-            if (!StringUtils.isNullOrWhiteSpace(wikidataEntityId)) {
+            if (!StringUtils.isBlank(wikidataEntityId)) {
                 contribution.setWikiDataEntityId(wikidataEntityId);
             }
 
@@ -318,7 +323,7 @@ public class ContributionDao {
             try {
                 db.execSQL(query);
             } catch (SQLiteException e) {
-                Timber.e(e, "Exception performing query: " + query);
+                Timber.e("Exception performing query: " + query + " message: " + e.getMessage());
             }
         }
 

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.explore.images;
 
-
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -20,9 +23,6 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -32,7 +32,7 @@ import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -62,7 +62,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
 
     @Inject RecentSearchesDao recentSearchesDao;
     @Inject
-    OkHttpJsonApiClient okHttpJsonApiClient;
+    MediaClient mediaClient;
     @Inject
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
@@ -141,7 +141,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         bottomProgressBar.setVisibility(GONE);
         queryList.clear();
         imagesAdapter.clear();
-        compositeDisposable.add(okHttpJsonApiClient.getMediaList("search", query)
+        compositeDisposable.add(mediaClient.getMediaListFromSearch(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -158,7 +158,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         this.query = query;
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
-        compositeDisposable.add(okHttpJsonApiClient.getMediaList("search", query)
+        compositeDisposable.add(mediaClient.getMediaListFromSearch(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -198,7 +198,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             progressBar.setVisibility(GONE);
             imagesAdapter.addAll(mediaList);
             imagesAdapter.notifyDataSetChanged();
-            ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
+            ((SearchActivity) getContext()).viewPagerNotifyDataSetChanged();
         }
     }
 
@@ -221,15 +221,22 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
     private void initErrorView() {
         progressBar.setVisibility(GONE);
         imagesNotFoundView.setVisibility(VISIBLE);
-        imagesNotFoundView.setText(getString(R.string.images_not_found, query));
+        imagesNotFoundView.setText(getString(R.string.images_not_found));
     }
 
     /**
      * Handles the UI updates for no internet scenario
      */
     private void handleNoInternet() {
-        progressBar.setVisibility(GONE);
-        ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.no_internet);
+        if (null
+            != getView()) {//We have exposed public methods to update our ui, we will have to add null checks until we make this lifecycle aware
+            if (null != progressBar) {
+                progressBar.setVisibility(GONE);
+            }
+            ViewUtil.showShortSnackbar(imagesRecyclerView, R.string.no_internet);
+        } else {
+            Timber.d("Attempt to update fragment ui after its view was destroyed");
+        }
     }
 
     /**
@@ -256,5 +263,10 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
         else {
             return imagesAdapter.getItem(i);
         }
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        compositeDisposable.clear();
     }
 }

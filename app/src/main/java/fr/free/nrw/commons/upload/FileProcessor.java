@@ -2,22 +2,35 @@ package fr.free.nrw.commons.upload;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.net.Uri;
+
 import androidx.annotation.NonNull;
+import androidx.exifinterface.media.ExifInterface;
+
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import androidx.exifinterface.media.ExifInterface;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.CategoryApi;
+import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.upload.SimilarImageDialogFragment.Callback;
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -25,7 +38,7 @@ import timber.log.Timber;
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
  */
 @Singleton
-public class FileProcessor implements SimilarImageDialogFragment.onResponse {
+public class FileProcessor implements Callback {
 
     @Inject
     CacheController cacheController;
@@ -46,7 +59,7 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
-    FileProcessor() {
+    public FileProcessor() {
     }
 
     public void cleanup() {
@@ -66,7 +79,10 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
     /**
      * Processes filePath coordinates, either from EXIF data or user location
      */
-    GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface) {
+    GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface, Context context) {
+        // Redact EXIF data as indicated in preferences.
+        redactExifTags(exifInterface, getExifTagsToRedact(context));
+
         Timber.d("Calling GPSExtractor");
         imageObj = new GPSExtractor(exifInterface);
         decimalCoords = imageObj.getCoords();
@@ -79,6 +95,55 @@ public class FileProcessor implements SimilarImageDialogFragment.onResponse {
         }
 
         return imageObj;
+    }
+
+    /**
+     * Gets EXIF Tags from preferences to be redacted.
+     *
+     * @param context application context
+     * @return        tags to be redacted
+     */
+    private Set<String> getExifTagsToRedact(Context context) {
+        Type setType = new TypeToken<Set<String>>() {}.getType();
+        Set<String> prefManageEXIFTags = defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS);
+
+        Set<String> redactTags = new HashSet<>(Arrays.asList(
+                context.getResources().getStringArray(R.array.pref_exifTag_values)));
+        Timber.d(redactTags.toString());
+
+        if (prefManageEXIFTags != null) redactTags.removeAll(prefManageEXIFTags);
+
+        return redactTags;
+    }
+
+    /**
+     * Redacts EXIF metadata as indicated in preferences.
+     *
+     * @param exifInterface  ExifInterface object
+     * @param redactTags     tags to be redacted
+     */
+    public static void redactExifTags(ExifInterface exifInterface, Set<String> redactTags) {
+        if(redactTags.isEmpty()) return;
+
+         Disposable disposable = Observable.fromIterable(redactTags)
+                 .flatMap(tag -> Observable.fromArray(FileMetadataUtils.getTagsFromPref(tag)))
+                 .forEach(tag -> {
+                     Timber.d("Checking for tag: %s", tag);
+                     String oldValue = exifInterface.getAttribute(tag);
+                     if (oldValue != null && !oldValue.isEmpty()) {
+                         Timber.d("Exif tag %s with value %s redacted.", tag, oldValue);
+                         exifInterface.setAttribute(tag, null);
+                     }
+                 });
+         CompositeDisposable disposables = new CompositeDisposable();
+         disposables.add(disposable);
+         disposables.clear();
+
+         try {
+             exifInterface.saveAttributes();
+        } catch (IOException e) {
+            Timber.w("EXIF redaction failed: %s", e.toString());
+        }
     }
 
     /**

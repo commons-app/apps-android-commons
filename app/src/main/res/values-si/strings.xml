@@ -88,7 +88,7 @@
   <string name="share_license_summary" fuzzy="true">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
   <string name="menu_download">බාගන්න</string>
   <string name="preference_license" fuzzy="true">බලපත්‍රය</string>
-  <string name="use_previous">පෙර මාතෘකාව/විස්තරය භාවිතා කරන්න</string>
+  <string name="use_previous" fuzzy="true">පෙර මාතෘකාව/විස්තරය භාවිතා කරන්න</string>
   <string name="allow_gps">වත්මන් ස්ථානය ස්වයංක්රීයව ලබාගන්න</string>
   <string name="preference_theme">රාත්‍රී ආකාරය</string>
   <string name="preference_theme_summary">අඳුරු තේමාව භාවිතා කරන්න</string>
@@ -172,8 +172,8 @@
   <string name="use_external_storage">භාහිර ගබඩාව භාවිතා කරන්න</string>
   <string name="login_to_your_account">ඔබගේ ගිණුමට පිවිසෙන්න</string>
   <string name="nearby_location_has_not_changed">ස්ථානය වෙනස් වී නොමැත</string>
-  <string name="nearby_location_not_available">ස්ථානය දී නොමැත</string>
-  <string name="read_article">මෙමේ ලිපිය කියවන්න</string>
+  <string name="nearby_location_not_available" fuzzy="true">ස්ථානය දී නොමැත</string>
+  <string name="read_article" fuzzy="true">මෙමේ ලිපිය කියවන්න</string>
   <string name="notifications_welcome" fuzzy="true">විකිමීඩියා කොමන්ස් වෙත ඔබව සාදරයෙන් පිළිගනිමු! ඔබ මෙහි පැමිණීම ගැන අපි හද පත්ලෙන්ම සතුටු වෙමු.</string>
   <string name="notifications_talk_page_message" fuzzy="true">ඔබගේ කතා පිටුවේ %1$s විසින් පණිවුඩයක් තබා ඇත</string>
 </resources>

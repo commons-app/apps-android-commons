@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +9,17 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.contributions.MainActivity.NEARBY_TAB_POSITION;
 
 /**
  * Custom card view for nearby notification card view on main screen, above contributions list
@@ -66,7 +70,6 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
         progressBar = rootView.findViewById(R.id.progressBar);
 
-        setActionListeners();
     }
 
     @Override
@@ -81,8 +84,16 @@ public class NearbyNotificationCardView extends SwipableCardView {
     }
 
 
-    private void setActionListeners() {
-        this.setOnClickListener(view -> ((MainActivity)getContext()).viewPager.setCurrentItem(1));
+    private void setActionListeners(Place place) {
+        this.setOnClickListener(view -> {
+            MainActivity m = (MainActivity) getContext();
+
+            // Change to nearby tab
+            m.viewPager.setCurrentItem(NEARBY_TAB_POSITION);
+
+            // Center the map to the place
+            ((NearbyParentFragment) m.contributionsActivityPagerAdapter.getItem(NEARBY_TAB_POSITION)).centerMapToPlace(place);
+        });
     }
 
     @Override public boolean onSwipe(View view) {
@@ -120,6 +131,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
         contentLayout.setVisibility(VISIBLE);
         // Make progress bar invisible once data is ready
         progressBar.setVisibility(GONE);
+        setActionListeners(place);
         // And content views visible since they are ready
         notificationTitle.setVisibility(VISIBLE);
         notificationDistance.setVisibility(VISIBLE);

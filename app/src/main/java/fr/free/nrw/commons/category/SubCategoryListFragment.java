@@ -4,14 +4,15 @@ package fr.free.nrw.commons.category;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -26,10 +27,8 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.SearchCategoriesAdapterFactory;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -53,7 +52,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     TextView categoriesNotFoundView;
 
     private String categoryName = null;
-    @Inject MediaWikiApi mwApi;
+    @Inject CategoryClient categoryClient;
 
     private RVRendererAdapter<String> categoriesAdapter;
     private boolean isParentCategory = true;
@@ -86,7 +85,7 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * Checks for internet connection and then initializes the recycler view with 25 categories of the searched query
+     * Checks for internet connection and then initializes the recycler view with all(max 500) categories of the searched query
      * Clearing categoryAdapter every time new keyword is searched so that user can see only new results
      */
     public void initSubCategoryList() {
@@ -96,17 +95,19 @@ public class SubCategoryListFragment extends CommonsDaggerSupportFragment {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        if (!isParentCategory){
-            compositeDisposable.add(Observable.fromCallable(() -> mwApi.getSubCategoryList(categoryName))
+        if (isParentCategory) {
+            compositeDisposable.add(categoryClient.getParentCategoryList("Category:"+categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .collect(ArrayList<String>::new, ArrayList::add)
                     .subscribe(this::handleSuccess, this::handleError));
-        }else {
-            compositeDisposable.add(Observable.fromCallable(() -> mwApi.getParentCategoryList(categoryName))
+        } else {
+            compositeDisposable.add(categoryClient.getSubCategoryList("Category:"+categoryName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .collect(ArrayList<String>::new, ArrayList::add)
                     .subscribe(this::handleSuccess, this::handleError));
         }
     }

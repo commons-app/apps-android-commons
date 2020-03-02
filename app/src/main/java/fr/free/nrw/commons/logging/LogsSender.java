@@ -3,13 +3,13 @@ package fr.free.nrw.commons.logging;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 
 import org.acra.data.CrashReportData;
 import org.acra.sender.ReportSender;
-import org.apache.commons.codec.Charsets;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -107,7 +108,7 @@ public abstract class LogsSender implements ReportSender {
             }
             attachUserInfo(builder);
             attachExtraInfo(builder);
-            byte[] metaData = builder.toString().getBytes(Charsets.UTF_8);
+            byte[] metaData = builder.toString().getBytes(Charset.forName("UTF-8"));
             File zipFile = new File(LogUtils.getLogZipDirectory(), logFileName);
             writeLogToZipFile(metaData, zipFile);
             return FileProvider

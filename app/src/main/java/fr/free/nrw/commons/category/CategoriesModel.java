@@ -13,16 +13,18 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.GpsCategoryModel;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
 import timber.log.Timber;
 
-public class CategoriesModel implements CategoryClickedListener {
+/**
+ * The model class for categories in upload
+ */
+public class CategoriesModel{
     private static final int SEARCH_CATS_LIMIT = 25;
 
-    private final MediaWikiApi mwApi;
+    private final CategoryClient categoryClient;
     private final CategoryDao categoryDao;
     private final JsonKvStore directKvStore;
 
@@ -31,23 +33,32 @@ public class CategoriesModel implements CategoryClickedListener {
 
     @Inject GpsCategoryModel gpsCategoryModel;
     @Inject
-    public CategoriesModel(MediaWikiApi mwApi,
+    public CategoriesModel(CategoryClient categoryClient,
                            CategoryDao categoryDao,
                            @Named("default_preferences") JsonKvStore directKvStore) {
-        this.mwApi = mwApi;
+        this.categoryClient = categoryClient;
         this.categoryDao = categoryDao;
         this.directKvStore = directKvStore;
         this.categoriesCache = new HashMap<>();
         this.selectedCategories = new ArrayList<>();
     }
 
-    //region Misc. utility methods
+    /**
+     * Sorts CategoryItem by similarity
+     * @param filter
+     * @return
+     */
     public Comparator<CategoryItem> sortBySimilarity(final String filter) {
         Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
         return (firstItem, secondItem) -> stringSimilarityComparator
                 .compare(firstItem.getName(), secondItem.getName());
     }
 
+    /**
+     * Returns if the item contains an year
+     * @param item
+     * @return
+     */
     public boolean containsYear(String item) {
         //Check for current and previous year to exclude these categories from removal
         Calendar now = Calendar.getInstance();
@@ -67,6 +78,10 @@ public class CategoriesModel implements CategoryClickedListener {
                 || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*")));
     }
 
+    /**
+     * Updates category count in category dao
+     * @param item
+     */
     public void updateCategoryCount(CategoryItem item) {
         Category category = categoryDao.find(item.getName());
 
@@ -78,29 +93,27 @@ public class CategoriesModel implements CategoryClickedListener {
         category.incTimesUsed();
         categoryDao.save(category);
     }
-    //endregion
-
-    //region Category Caching
-    public void cacheAll(HashMap<String, ArrayList<String>> categories) {
-        categoriesCache.putAll(categories);
-    }
-
-    public HashMap<String, ArrayList<String>> getCategoriesCache() {
-        return categoriesCache;
-    }
 
     boolean cacheContainsKey(String term) {
         return categoriesCache.containsKey(term);
     }
     //endregion
 
-    //region Category searching
+    /**
+     * Regional category search
+     * @param term
+     * @param imageTitleList
+     * @return
+     */
     public Observable<CategoryItem> searchAll(String term, List<String> imageTitleList) {
-        //If user hasn't typed anything in yet, get GPS and recent items
+        //If query text is empty, show him category based on gps and title and recent searches
         if (TextUtils.isEmpty(term)) {
-            return gpsCategories()
-                    .concatWith(titleCategories(imageTitleList))
-                    .concatWith(recentCategories());
+            Observable<CategoryItem> categoryItemObservable = gpsCategories()
+                    .concatWith(titleCategories(imageTitleList));
+            if (hasDirectCategories()) {
+                categoryItemObservable.concatWith(directCategories().concatWith(recentCategories()));
+            }
+            return categoryItemObservable;
         }
 
         //if user types in something that is in cache, return cached category
@@ -110,48 +123,34 @@ public class CategoriesModel implements CategoryClickedListener {
         }
 
         //otherwise, search API for matching categories
-        return mwApi
-                .allCategories(term, SEARCH_CATS_LIMIT)
+        //term passed as lower case to make search case-insensitive(taking only lower case for everything)
+        return categoryClient
+                .searchCategoriesForPrefix(term.toLowerCase(), SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 
-    public Observable<CategoryItem> searchCategories(String term, List<String> imageTitleList) {
-        //If user hasn't typed anything in yet, get GPS and recent items
-        if (TextUtils.isEmpty(term)) {
-            return gpsCategories()
-                    .concatWith(titleCategories(imageTitleList))
-                    .concatWith(recentCategories());
-        }
 
-        return mwApi
-                .searchCategories(term, SEARCH_CATS_LIMIT)
-                .map(s -> new CategoryItem(s, false));
-    }
-
+    /**
+     * Returns cached categories
+     * @param term
+     * @return
+     */
     private ArrayList<String> getCachedCategories(String term) {
         return categoriesCache.get(term);
     }
 
-    public Observable<CategoryItem> defaultCategories(List<String> titleList) {
-        Observable<CategoryItem> directCat = directCategories();
-        if (hasDirectCategories()) {
-            Timber.d("Image has direct Cat");
-            return directCat
-                    .concatWith(gpsCategories())
-                    .concatWith(titleCategories(titleList))
-                    .concatWith(recentCategories());
-        } else {
-            Timber.d("Image has no direct Cat");
-            return gpsCategories()
-                    .concatWith(titleCategories(titleList))
-                    .concatWith(recentCategories());
-        }
-    }
-
+    /**
+     * Returns if we have a category in DirectKV Store
+     * @return
+     */
     private boolean hasDirectCategories() {
         return !directKvStore.getString("Category", "").equals("");
     }
 
+    /**
+     * Returns categories in DirectKVStore
+     * @return
+     */
     private Observable<CategoryItem> directCategories() {
         String directCategory = directKvStore.getString("Category", "");
         List<String> categoryList = new ArrayList<>();
@@ -164,30 +163,50 @@ public class CategoriesModel implements CategoryClickedListener {
         return Observable.fromIterable(categoryList).map(name -> new CategoryItem(name, false));
     }
 
+    /**
+     * Returns GPS categories
+     * @return
+     */
     Observable<CategoryItem> gpsCategories() {
         return Observable.fromIterable(gpsCategoryModel.getCategoryList())
                 .map(name -> new CategoryItem(name, false));
     }
 
+    /**
+     * Returns title based categories
+     * @param titleList
+     * @return
+     */
     private Observable<CategoryItem> titleCategories(List<String> titleList) {
         return Observable.fromIterable(titleList)
                 .concatMap(this::getTitleCategories);
     }
 
+    /**
+     * Return category for single title
+     * title is converted to lower case to make search case-insensitive
+     * @param title
+     * @return
+     */
     private Observable<CategoryItem> getTitleCategories(String title) {
-        return mwApi.searchTitles(title, SEARCH_CATS_LIMIT)
+        return categoryClient.searchCategories(title.toLowerCase(), SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 
+    /**
+     * Returns recent categories
+     * @return
+     */
     private Observable<CategoryItem> recentCategories() {
         return Observable.fromIterable(categoryDao.recentCategories(SEARCH_CATS_LIMIT))
                 .map(s -> new CategoryItem(s, false));
     }
-    //endregion
 
-    //region Category Selection
-    @Override
-    public void categoryClicked(CategoryItem item) {
+    /**
+     * Handles category item selection
+     * @param item
+     */
+    public void onCategoryItemClicked(CategoryItem item) {
         if (item.isSelected()) {
             selectCategory(item);
             updateCategoryCount(item);
@@ -196,22 +215,35 @@ public class CategoriesModel implements CategoryClickedListener {
         }
     }
 
+    /**
+     * Select's category
+     * @param item
+     */
     public void selectCategory(CategoryItem item) {
         selectedCategories.add(item);
     }
 
+    /**
+     * Unselect Category
+     * @param item
+     */
     public void unselectCategory(CategoryItem item) {
         selectedCategories.remove(item);
     }
 
-    public int selectedCategoriesCount() {
-        return selectedCategories.size();
-    }
 
+    /**
+     * Get Selected Categories
+     * @return
+     */
     public List<CategoryItem> getSelectedCategories() {
         return selectedCategories;
     }
 
+    /**
+     * Get Categories String List
+     * @return
+     */
     public List<String> getCategoryStringList() {
         List<String> output = new ArrayList<>();
         for (CategoryItem item : selectedCategories) {
@@ -219,6 +251,12 @@ public class CategoriesModel implements CategoryClickedListener {
         }
         return output;
     }
-    //endregion
 
+    /**
+     * Cleanup the existing in memory cache's
+     */
+    public void cleanUp() {
+        this.categoriesCache.clear();
+        this.selectedCategories.clear();
+    }
 }

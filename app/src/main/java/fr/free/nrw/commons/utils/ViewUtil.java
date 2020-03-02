@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import androidx.annotation.StringRes;
+
 import com.google.android.material.snackbar.Snackbar;
 
-import androidx.annotation.StringRes;
+import timber.log.Timber;
 
 public class ViewUtil {
     /**
@@ -22,7 +24,13 @@ public class ViewUtil {
             return;
         }
 
-        ExecutorUtils.uiExecutor().execute(() -> Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show());
+        ExecutorUtils.uiExecutor().execute(() -> {
+            try {
+                Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show();
+            }catch (IllegalStateException e){
+                Timber.e(e.getMessage());
+            }
+        });
     }
 
     public static void showLongToast(Context context, String text) {

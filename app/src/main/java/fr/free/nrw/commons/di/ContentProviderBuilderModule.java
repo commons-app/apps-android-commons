@@ -7,17 +7,18 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.category.CategoryContentProvider;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 
+/**
+ * This Class Represents the Module for dependency injection (using dagger)
+ * so, if a developer needs to add a new ContentProvider to the commons app
+ * then that must be mentioned here to inject the dependencies 
+ */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class ContentProviderBuilderModule {
 
     @ContributesAndroidInjector
     abstract ContributionsContentProvider bindContributionsContentProvider();
-
-    @ContributesAndroidInjector
-    abstract ModificationsContentProvider bindModificationsContentProvider();
 
     @ContributesAndroidInjector
     abstract CategoryContentProvider bindCategoryContentProvider();

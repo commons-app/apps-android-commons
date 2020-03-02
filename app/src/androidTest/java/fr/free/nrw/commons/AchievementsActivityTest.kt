@@ -16,7 +16,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@MediumTest
 @RunWith(AndroidJUnit4::class)
 class AchievementsActivityTest {
     @get:Rule

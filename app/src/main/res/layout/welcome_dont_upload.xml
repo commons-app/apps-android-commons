@@ -1,141 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/tutorialBackground"
-    android:gravity="center_vertical"
-    >
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/huge_gap"
+    android:paddingRight="@dimen/huge_gap">
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/tutorialBackground"
-        android:gravity="center_vertical"
-        >
-
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="240dp"
-        android:layout_gravity="center_horizontal"
-        >
-
-        <ImageView
-            android:src="@drawable/selfie_x"
-            android:id="@+id/selfie_x"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/welcome_image_no_selfies"
-            />
-
-        <ImageView
-            android:src="@drawable/proprietary_x"
-            android:id="@+id/proprietary_x"
-            android:layout_marginLeft="@dimen/standard_gap"
-            android:layout_marginStart="@dimen/standard_gap"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/welcome_image_proprietary"
-            />
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/welcome_dont_upload_content_description"
+        android:src="@drawable/welcome_dont_upload" />
 
     <TextView
-        android:layout_width="295dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxWidth="240dp"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginBottom="@dimen/standard_gap"
         android:text="@string/tutorial_3_text"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:textSize="@dimen/normal_text"
         android:textAlignment="center"
-        android:paddingTop="@dimen/standard_gap"
-        android:gravity="center_horizontal"
         android:textColor="@android:color/white"
-        />
+        android:textSize="@dimen/normal_text"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bullet"
-            android:paddingRight="4dp"
-            android:textSize="16sp"
-            android:paddingTop="@dimen/standard_gap"
-            android:textColor="@android:color/white"/>
+        <include layout="@layout/welcome_bullet" />
 
         <TextView
-            android:layout_width="295dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxWidth="240dp"
             android:text="@string/tutorial_3_subtext_1"
-            android:layout_gravity="center"
-            android:textAlignment="textStart"
-            android:paddingTop="@dimen/standard_gap"
-            android:gravity="start"
-            android:textColor="@android:color/white"
-            />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bullet"
-            android:paddingRight="4dp"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"/>
+        <include layout="@layout/welcome_bullet" />
 
         <TextView
-            android:layout_width="295dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxWidth="240dp"
             android:text="@string/tutorial_3_subtext_2"
-            android:layout_gravity="center"
-            android:textAlignment="textStart"
-            android:gravity="start"
-            android:textColor="@android:color/white"
-            />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bullet"
-            android:paddingRight="4dp"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"/>
+        <include layout="@layout/welcome_bullet" />
 
         <TextView
-            android:layout_width="295dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxWidth="240dp"
             android:text="@string/tutorial_3_subtext_3"
-            android:layout_gravity="center"
-            android:textAlignment="textStart"
-            android:gravity="start"
-            android:textColor="@android:color/white"
-            />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 </LinearLayout>
-</RelativeLayout>

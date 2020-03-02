@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* HalanTul
+-->
+<resources>
+  <string name="crash_dialog_title">Биики Хааһах моһуогурбут</string>
+  <string name="crash_dialog_text">Бай. Туохпут эрэ сатаммата!</string>
+  <string name="crash_dialog_comment_prompt">Тугу гыммыккын биһиэхэ эликтириэн почтаннан кэпсээ. Бу алҕаһы суох гынарга көмөлөһүө!</string>
+  <string name="crash_dialog_ok_toast">Махтал!</string>
+</resources>

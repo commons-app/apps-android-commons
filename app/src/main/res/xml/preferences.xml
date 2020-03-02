@@ -29,6 +29,11 @@
             android:inputType="number"
             android:maxLength="3" />
 
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
+            android:key="descriptionDefaultLanguagePref"
+            android:title= "@string/default_description_language"
+            android:summary="English" />
+
         <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
             android:key="useAuthorName"
             android:title="@string/preference_author_name_toggle"
@@ -56,6 +61,18 @@
             android:title="@string/display_campaigns"
             android:defaultValue="true"
             android:summary="@string/display_campaigns_explanation" />
+
+    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
+
+    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
+        android:title="@string/preference_category_privacy">
+
+        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleMultiSelectListPreference
+            android:entries="@array/pref_exifTag_entries"
+            android:entryValues="@array/pref_exifTag_values"
+            android:key="managed_exif_tags"
+            android:title="@string/manage_exif_tags"
+            android:summary="@string/manage_exif_tags_summary"/>
 
     </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
 

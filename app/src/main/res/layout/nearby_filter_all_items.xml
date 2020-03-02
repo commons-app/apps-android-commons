@@ -1,0 +1,22 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        android:id="@+id/chip_view"
+        layout="@layout/filter_chip_view"
+        android:background="@color/deleteRed"
+        />
+
+    <include android:id="@+id/search_view_layout" layout="@layout/filter_search_view_layout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_view_layout"
+        android:background="@color/status_bar_blue">
+    </RelativeLayout>
+
+</LinearLayout>

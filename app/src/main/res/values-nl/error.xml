@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Ooswesthoesbes
+* Rots61
 * Siebrand
 -->
 <resources>
   <string name="crash_dialog_title">Commons is gecrasht</string>
   <string name="crash_dialog_text">Oeps. Er is iets misgegaan.</string>
   <string name="crash_dialog_comment_prompt">Vertel ons wat u aan het doen was, en e-mail dat naar ons. Dit help ons om het probleem op te lossen.</string>
-  <string name="crash_dialog_ok_toast">Danke!</string>
+  <string name="crash_dialog_ok_toast">Bedankt!</string>
 </resources>

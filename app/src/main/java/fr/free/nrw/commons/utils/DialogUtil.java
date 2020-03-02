@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.View;
 
+import org.apache.commons.lang3.StringUtils;
+
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
@@ -59,7 +61,7 @@ public class DialogUtil {
         builder.setTitle(title);
         builder.setMessage(message);
 
-        if (!StringUtils.isNullOrWhiteSpace(positiveButtonText)) {
+        if (!StringUtils.isBlank(positiveButtonText)) {
             builder.setPositiveButton(positiveButtonText, (dialogInterface, i) -> {
                 dialogInterface.dismiss();
                 if (onPositiveBtnClick != null) {
@@ -68,7 +70,7 @@ public class DialogUtil {
             });
         }
 
-        if (!StringUtils.isNullOrWhiteSpace(negativeButtonText)) {
+        if (!StringUtils.isBlank(negativeButtonText)) {
             builder.setNegativeButton(negativeButtonText, (DialogInterface dialogInterface, int i) -> {
                 dialogInterface.dismiss();
                 if (onNegativeBtnClick != null) {
@@ -114,6 +116,13 @@ public class DialogUtil {
                                         final Runnable onNegativeBtnClick,
                                         View customView,
                                         boolean cancelable) {
+        // If the custom view already has a parent, there is already a dialog showing with the view
+        // This happens for on resume - return to avoid creating a second dialog - the first one
+        // will still show
+        if (customView != null && customView.getParent() != null) {
+            return;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title);
         builder.setMessage(message);
@@ -131,6 +140,33 @@ public class DialogUtil {
             dialogInterface.dismiss();
             if (onNegativeBtnClick != null) {
                 onNegativeBtnClick.run();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        showSafely(activity, dialog);
+    }
+
+
+    /**
+     * show a dialog with just a positive button
+     * @param activity
+     * @param title
+     * @param message
+     * @param positiveButtonText
+     * @param positiveButtonClick
+     * @param cancellable
+     */
+    public static void showAlertDialog(Activity activity, String title, String message, String positiveButtonText, final Runnable positiveButtonClick, boolean cancellable) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setCancelable(cancellable);
+
+        builder.setPositiveButton(positiveButtonText, (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            if (positiveButtonClick != null) {
+                positiveButtonClick.run();
             }
         });
 

@@ -3,8 +3,12 @@ package fr.free.nrw.commons.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import android.util.DisplayMetrics;
+
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UiUtils {
 
@@ -34,13 +38,26 @@ public class UiUtils {
     }
 
     /**
-     * Converts device specific pixels to dp.
-     * @param px pixels
-     * @param context Context to access display metrics
-     * @return dp equivalent to px value
+     * Creates a series of points that create a circle on the map.
+     * Takes the center latitude, center longitude of the circle,
+     * the radius in meter and the number of nodes of the circle.
+     *
+     * @return List List of LatLng points of the circle.
      */
-    public static float convertPixelsToDp(float px, Context context) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return px / ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    public static List<com.mapbox.mapboxsdk.geometry.LatLng> createCircleArray(
+            double centerLat, double centerLong, float radius, int nodes) {
+        List<com.mapbox.mapboxsdk.geometry.LatLng> circle = new ArrayList<>();
+        float radiusKilometer = radius / 1000;
+        double radiusLong = radiusKilometer
+                / (111.320 * Math.cos(centerLat * Math.PI / 180));
+        double radiusLat = radiusKilometer / 110.574;
+
+        for (int i = 0; i < nodes; i++) {
+            double theta = ((double) i / (double) nodes) * (2 * Math.PI);
+            double nodeLongitude = centerLong + radiusLong * Math.cos(theta);
+            double nodeLatitude = centerLat + radiusLat * Math.sin(theta);
+            circle.add(new com.mapbox.mapboxsdk.geometry.LatLng(nodeLatitude, nodeLongitude));
+        }
+        return circle;
     }
 }

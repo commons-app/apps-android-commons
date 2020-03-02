@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Anaclaudiaml
 * Caio1478
 * Eduardo Addad de Oliveira
+* Fitoschido
 * Fúlvio
 * Gusta
 * HenriqueCrang
@@ -21,6 +23,7 @@
   <string name="preference_category_appearance">Aparência</string>
   <string name="preference_category_general">Geral</string>
   <string name="preference_category_feedback">Comentário</string>
+  <string name="preference_category_privacy">Privacidade</string>
   <string name="preference_category_location">Localização</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -105,9 +108,9 @@
   <string name="title_activity_review">Revisão por pares</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license">O Wikimedia Commons é um aplicativo de código aberto criado e mantido por beneficiários e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção do aplicativo.</string>
-  <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Política de Privacidade&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Créditos&lt;/u&gt;</string>
+  <string name="about_improve">Criar uma nova &lt;a href=\"%1$s\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
+  <string name="about_privacy_policy">Politica de privacidade</string>
+  <string name="about_credits">Créditos</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
   <string name="no_email_client">Nenhum cliente de e-mail instalado</string>
@@ -123,7 +126,7 @@
   <string name="media_upload_policy">Ao enviar esta imagem, declaro que este é o meu próprio trabalho, que não contém material protegido ou selfies, e, de outra forma, adere a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença padrão</string>
-  <string name="use_previous">Usar o título/descrição anterior</string>
+  <string name="use_previous">Usar o título e descrição anterior</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Se a imagem não estiver georreferenciada, obtém a localização atual e georreferencia a imagem com ela. Aviso: isto revela a sua localização corrente.</string>
   <string name="preference_theme">Modo noturno</string>
@@ -168,7 +171,7 @@
   <string name="welcome_copyright_subtext">Evite material com direito autoral que você encontrou na internet assim como imagens de posters, capas de livros, etc.</string>
   <string name="welcome_final_text">Você acha que conseguiu?</string>
   <string name="welcome_final_button_text">Sim!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Mais Informações&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Mais Informações</string>
   <string name="detail_panel_cats_label">Categorias</string>
   <string name="detail_panel_cats_loading">Carregando…</string>
   <string name="detail_panel_cats_none">Nenhum selecionado</string>
@@ -178,7 +181,8 @@
   <string name="menu_refresh">Atualizar</string>
   <string name="storage_permission_title">Solicitando permissão de armazenamento</string>
   <string name="read_storage_permission_rationale">Permissão necessária: leia o armazenamento externo. App não pode acessar sua galeria sem isso.</string>
-  <string name="write_storage_permission_rationale">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera sem isso.</string>
+  <string name="write_storage_permission_rationale">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera/galeria sem isso.</string>
+  <string name="location_permission_title">Autorização para identificar localização</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual de sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lugares próximos</string>
@@ -269,7 +273,7 @@
   <string name="null_url">Erro! URL não encontrado</string>
   <string name="nominate_deletion">Nomear para a exclusão</string>
   <string name="nominated_for_deletion">Esta imagem foi nomeada para eliminação.</string>
-  <string name="nominated_see_more">&lt;u&gt;Veja a página para detalhes&lt;/u&gt;</string>
+  <string name="nominated_see_more">Veja a página para detalhes</string>
   <string name="nominating_file_for_deletion">Nomeando %1$s para exclusão.</string>
   <string name="nominating_for_deletion_status">Nomeando arquivo para exclusão: %1$s</string>
   <string name="view_browser">Exibir no navegador</string>
@@ -281,21 +285,21 @@
   <string name="copy_wikicode">Copie o wikitexto para a área de transferência</string>
   <string name="wikicode_copied">O wikitexto foi copiado para a área de transferência</string>
   <string name="nearby_location_has_not_changed">O local não mudou.</string>
-  <string name="nearby_location_not_available">Localização não disponível.</string>
+  <string name="nearby_location_not_available">As proximidades podem não funcionar corretamente, o local não está disponível.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>
-  <string name="get_directions">OBTER DIREÇÕES</string>
-  <string name="read_article">LER ARTIGO</string>
+  <string name="get_directions">Obter direções</string>
+  <string name="read_article">Ler artigo</string>
   <string name="notifications_welcome">Bem-vindo ao Wikimedia Commons, %1$s! É um prazer tê-lo aqui.</string>
   <string name="notifications_talk_page_message">%1$s deixou uma mensagem na sua página de discussão</string>
   <string name="notifications_thank_you_edit">Obrigado por ter realizado uma edição</string>
   <string name="notifications_mention">%1$s fez menção a você em %2$s.</string>
   <string name="toggle_view_button">Visualização de alternância</string>
-  <string name="nearby_directions">DIREÇÕES</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPÉDIA</string>
-  <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us">&lt;u&gt;Avalie-nos&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="nearby_directions">Direções</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipédia</string>
+  <string name="nearby_commons">Commons</string>
+  <string name="about_rate_us">Avalie-nos</string>
+  <string name="about_faq">Perguntas frequentes</string>
   <string name="welcome_skip_button">Pular tutoril</string>
   <string name="no_internet">A Internet não está disponível</string>
   <string name="internet_established">A Internet está disponível</string>
@@ -303,7 +307,7 @@
   <string name="error_review">Erro ao buscar a imagem para revisão. Pressione atualizar para tentar novamente.</string>
   <string name="error_review_categories">Erro ao buscar categorias de imagem para revisão. Pressione atualizar para tentar novamente.</string>
   <string name="no_notifications">Não foram encontradas notificações</string>
-  <string name="about_translate">&lt;u&gt;Traduzir&lt;/u&gt;</string>
+  <string name="about_translate">Traduzir</string>
   <string name="about_translate_title">Idiomas</string>
   <string name="about_translate_message">Selecione o idioma para a qual quer enviar as traduções</string>
   <string name="about_translate_proceed">Avançar</string>
@@ -316,6 +320,7 @@
   <string name="no_images_found">Não foi encontrada nenhuma imagem!</string>
   <string name="error_loading_images">Ocorreu um erro durante o carregamento das imagens.</string>
   <string name="image_uploaded_by">Carregada por: %1$s</string>
+  <string name="block_notification_title">Bloqueado</string>
   <string name="block_notification">Está impedido de editar no Commons</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <string name="app_widget_heading">Imagem do Dia</string>
@@ -327,11 +332,11 @@
   <string name="provider_searches">Consultas recentemente pesquisadas</string>
   <string name="error_loading_categories">Ocorreu um erro ao carregar categorias.</string>
   <string name="error_loading_subcategories">Ocorreu um erro ao carregar subcategorias.</string>
-  <string name="search_tab_title_media">MÍDIA</string>
-  <string name="search_tab_title_categories">CATEGORIAS</string>
-  <string name="explore_tab_title_featured">DESTACADAS</string>
-  <string name="explore_tab_title_mobile">CARREGADO VIA CELULAR</string>
-  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
+  <string name="search_tab_title_media">Mídia</string>
+  <string name="search_tab_title_categories">Categorias</string>
+  <string name="explore_tab_title_featured">Destacadas</string>
+  <string name="explore_tab_title_mobile">Carregado via celular</string>
+  <string name="successful_wikidata_edit">Imagem adicionada a %1$s na Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
   <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
@@ -364,13 +369,13 @@
   <string name="delete_search_dialog">Deseja eliminar esta pesquisa?</string>
   <string name="search_history_deleted">Histórico de pesquisa excluído</string>
   <string name="nominate_delete">Nomear para exclusão</string>
-  <string name="delete">APAGAR</string>
+  <string name="delete">Apagar</string>
   <string name="Achievements">Conquistas</string>
-  <string name="statistics">ESTATÍSTICAS</string>
+  <string name="statistics">Estatísticas</string>
   <string name="statistics_thanks">Agradecimentos recebidos</string>
   <string name="statistics_featured">Imagens destacadas</string>
   <string name="statistics_wikidata_edits">Imagens via \"Locais próximos\"</string>
-  <string name="level">NÍVEL</string>
+  <string name="level">Nível</string>
   <string name="images_uploaded">Imagens carregadas</string>
   <string name="image_reverts">Imagens não revertidas</string>
   <string name="images_used_by_wiki">Imagens usadas</string>
@@ -455,9 +460,9 @@
   <string name="check_category_adding_template">Adicionando predefinição para verificação de categoria</string>
   <string name="check_category_notification_title">Solicitando verificação de categoria para %1$s</string>
   <string name="check_category_edit_summary">Solicitando verificação de categoria</string>
-  <string name="check_category_success_title">Solicitação de verificação de categoria: Sucesso</string>
-  <string name="check_category_failure_title">Solicitar verificação de categoria: falha</string>
-  <string name="check_category_success_message">Verificação de categoria solicitada com êxito para %1$s</string>
+  <string name="check_category_success_title">Verificação de categoria solicitada</string>
+  <string name="check_category_failure_title">A solicitação de verificação de categoria não funcionou</string>
+  <string name="check_category_success_message">Verificação de categoria solicitada para %1$s</string>
   <string name="check_category_failure_message">Não foi possível solicitar a verificação de categoria para %1$s</string>
   <string name="check_category_toast">Solicitando verificação de categoria para %1$s</string>
   <string name="nominate_for_deletion_edit_file_page">Acionando mensagem de exclusão ao arquivo</string>
@@ -483,17 +488,17 @@
   <string name="review_no_category">Ah, isso nem é categorizado!</string>
   <string name="review_category_explanation">Esta imagem está abaixo das %1$s categorias</string>
   <string name="review_spam_report_question">Está fora do escopo porque é</string>
-  <string name="review_spam_report_problem">spam</string>
   <string name="review_c_violation_report_question">É violação de direitos autorais porque é</string>
-  <string name="review_c_violation_report_problem">copyRightViolation</string>
-  <string name="review_category_yes_button_text">NÃO, MIS-CATEGORIZADO</string>
-  <string name="review_category_no_button_text">PARECE BEM</string>
-  <string name="review_spam_yes_button_text">NÃO, FORA DE ESCOPO</string>
-  <string name="review_spam_no_button_text">PARECE BEM</string>
-  <string name="review_copyright_yes_button_text">NÃO, VIOLAÇÃO DE DIREITOS AUTORAIS</string>
-  <string name="review_copyright_no_button_text">PARECE BEM</string>
-  <string name="review_thanks_yes_button_text">SIM, PORQUE NÃO</string>
-  <string name="review_thanks_no_button_text">PRÓXIMA IMAGEM</string>
+  <string name="review_category_yes_button_text">Não, mal categorizado</string>
+  <string name="review_category_no_button_text">Parece bem</string>
+  <string name="review_spam_yes_button_text">Não, fora do escopo</string>
+  <string name="review_spam_no_button_text">Parece bem</string>
+  <string name="review_copyright_yes_button_text">Não, violação de direitos autorais</string>
+  <string name="review_copyright_no_button_text">Parece bem</string>
+  <string name="review_thanks_yes_button_text">Sim, porque não?</string>
+  <string name="review_thanks_no_button_text">Próxima imagem</string>
+  <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>
+  <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
     <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>
@@ -512,5 +517,65 @@
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo sítios do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos usuários que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
-  <string name="skip_image">PULAR ESTA IMAGEM</string>
+  <string name="previous_image_title_description">Copiar título e descrição anterior</string>
+  <string name="previous_button_tooltip_message">Clique para reutilizar o título e a descrição inseridos em sua foto anterior e modificá-lo para se adequar ao seu atual</string>
+  <string name="welcome_do_upload_content_description">Exemplos de imagens que podem ser carregadas na wiki Commons</string>
+  <string name="welcome_dont_upload_content_description">Exemplos de imagens que não devem ser carregadas</string>
+  <string name="skip_image">Pular esta imagem</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Falha no Download!!. Não podemos fazer o download do arquivo sem permissão de armazenamento externo.</string>
+  <string name="manage_exif_tags">Gerenciar etiquetas EXIF</string>
+  <string name="manage_exif_tags_summary">Selecione quais etiquetas EXIF para manter nos carregados</string>
+  <string name="exif_tag_name_author">Autor</string>
+  <string name="exif_tag_name_copyright">Direitos autorais</string>
+  <string name="exif_tag_name_location">Localização</string>
+  <string name="exif_tag_name_cameraModel">Modelo da câmera</string>
+  <string name="exif_tag_name_lensModel">Modelo de lente</string>
+  <string name="exif_tag_name_serialNumbers">Números de série</string>
+  <string name="exif_tag_name_software">Software</string>
+  <string name="share_text">Carregue fotos na wiki Wikimedia Commons, diretamente do seu celular. Baixe o aolicativo Commons agora: %1$s</string>
+  <string name="share_via">Compartilhar aplicativo via...</string>
+  <string name="image_info">Informação da imagem</string>
+  <string name="no_categories_found">Nenhuma categoria encontrada</string>
+  <string name="upload_cancelled">Carregamento cancelado</string>
+  <string name="previous_image_title_description_not_found">Não há dados para o título ou descrição da imagem anterior</string>
+  <string name="dialog_box_text_nomination">Por que %1$s deve ser excluído?</string>
+  <string name="review_is_uploaded_by">%1$s é carregado por: %2$s</string>
+  <string name="default_description_language">Idioma de descrição padrão</string>
+  <string name="delete_helper_make_deletion_toast">Tentando nomear %1$s para exclusão</string>
+  <string name="delete_helper_show_deletion_title">Nomeação para exclusão</string>
+  <string name="delete_helper_show_deletion_title_success">Sucesso</string>
+  <string name="delete_helper_show_deletion_message_if">Nomeado %1$s para exclusão.</string>
+  <string name="delete_helper_show_deletion_title_failed">Falhou</string>
+  <string name="delete_helper_show_deletion_message_else">Não foi possível pedir eliminação.</string>
+  <string name="delete_helper_ask_spam_selfie">Uma selfie</string>
+  <string name="delete_helper_ask_spam_blurry">Embaçado</string>
+  <string name="delete_helper_ask_spam_nonsense">Absurdo</string>
+  <string name="delete_helper_ask_spam_other">Outro</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Divulgação</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatória da internet</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
+  <string name="delete_helper_ask_reason_copyright_other">Outro</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
+  <string name="share_image_via">Compartilhar imagem via</string>
+  <string name="no_achievements_yet">Você ainda não fez nenhuma contribuição</string>
+  <string name="account_created">Conta criada!</string>
+  <string name="text_copy">Texto copiado para a área de transferência</string>
+  <string name="notification_mark_read">Notificação marcada como lida</string>
+  <string name="some_error">Ocorreu algum erro!</string>
+  <string name="place_state">Estado do local:</string>
+  <string name="place_state_exists">Existe</string>
+  <string name="place_state_needs_photo">Precisa de foto</string>
+  <string name="place_type">Tipo de local:</string>
+  <string name="nearby_search_hint">Ponte, museu, hotel etc.</string>
+  <string name="you_must_reset_your_passsword">Algo deu errado com a entrada, você deve redefinir sua senha!</string>
+  <string name="upload_nearby_place_found_title">Local próximo encontrado</string>
+  <string name="upload_nearby_place_found_description">Esta é uma foto desse lugar %1$s?</string>
+  <string name="title_app_shortcut_explore">Explorar</string>
+  <string name="title_app_shortcut_bookmark">Favoritos</string>
+  <string name="title_app_shortcut_setting">Configurações</string>
+  <string name="remove_bookmark">Removido dos favoritos</string>
+  <string name="add_bookmark">Adicionado aos favoritos</string>
+  <string name="wallpaper_set_unsuccessfully">Algo deu errado. Não foi possível definir o papel de parede</string>
+  <string name="setting_wallpaper_dialog_title">Definir como papel de parede</string>
+  <string name="setting_wallpaper_dialog_message">Definir papel de parede. Por favor, espere…</string>
 </resources>

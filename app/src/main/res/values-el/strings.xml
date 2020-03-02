@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Astralnet
 * Domdomegg
 * Evropi
@@ -10,6 +11,8 @@
 * ManosHacker
 * Nikosgranturismogt
 * Nikosguard
+* Panos78
+* Protnet
 * Tgkarounos
 -->
 <resources>
@@ -18,6 +21,7 @@
   <string name="preference_category_appearance">Εμφάνιση</string>
   <string name="preference_category_general">Γενικά</string>
   <string name="preference_category_feedback">Ανατροφοδότηση</string>
+  <string name="preference_category_privacy">Ιδιωτικότητα</string>
   <string name="preference_category_location">Τοποθεσία</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -101,9 +105,9 @@
   <string name="title_activity_category_details">Κατηγορία</string>
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
-  <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Πολιτική απορρήτου&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Συντελεστές&lt;/u&gt;</string>
+  <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"%1$s\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
+  <string name="about_privacy_policy">Πολιτική ιδιωτικότητας</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Συντελεστές&lt;/u&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
   <string name="menu_feedback">Αποστολή σχολίων (μέσω Email)</string>
   <string name="no_email_client">Δεν υπάρχει εγκατεστημένη εφαρμογή ηλεκτρονικού ταχυδρομείου</string>
@@ -119,7 +123,7 @@
   <string name="media_upload_policy">Αποστέλλοντας αυτήν την εικόνα, δηλώνω πως αυτή η εργασία είναι δική μου, και δεν περιέχει υλικό άλλου συγγραφέα, και εκτός αυτού πρόσκειται στο , thathref=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Κοινές πολιτικές της Wikipedia&lt;/a&gt;.</string>
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
-  <string name="use_previous">Χρήση προηγούμενου τίτλου/περιγραφής</string>
+  <string name="use_previous" fuzzy="true">Χρήση προηγούμενου τίτλου/περιγραφής</string>
   <string name="allow_gps">Αυτόματη ανάκτηση τρέχουσας θέσης</string>
   <string name="allow_gps_summary">Ανακτά την τρέχουσα τοποθεσία εάν η εικόνα δεν είναι γεωσεσημασμένη, και τις γεωσημάνσεις με αυτή. Προειδοποίηση: Αυτό θα αποκαλύψει την τρέχουσα τοποθεσία σας.</string>
   <string name="preference_theme">Νυχτερινή λειτουργία</string>
@@ -164,7 +168,7 @@
   <string name="welcome_copyright_subtext">Αποφύγετε προστατευμένο υλικό  που βρήκατε από το Internet, καθώς και εικόνες, αφίσες, εξώφυλλα βιβλίων, κλπ.</string>
   <string name="welcome_final_text">Τι λες, μπορείς;</string>
   <string name="welcome_final_button_text">Ναι!</string>
-  <string name="welcome_help_button_text"/>
+  <string name="welcome_help_button_text" fuzzy="true"/>
   <string name="detail_panel_cats_label">Κατηγορίες</string>
   <string name="detail_panel_cats_loading">Φόρτωση…</string>
   <string name="detail_panel_cats_none">Καμία επιλεγμένη</string>
@@ -173,7 +177,7 @@
   <string name="menu_refresh">Ανανέωση</string>
   <string name="storage_permission_title">Αιτείται Άδεια Αποθήκευσης</string>
   <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να έχει πρόσβαση στην συλλογή σας χωρίς αυτή.</string>
-  <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Με εξωτερική αποθήκευση. Το πρόγραμμα δεν μπορεί να έχει πρόσβαση στην κάμερα σας χωρίς αυτήν.</string>
+  <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Εγγραφή σε εξωτερική αποθήκευση. Το πρόγραμμα δεν θα έχει πρόσβαση στην κάμερα/συλλογή σας χωρίς αυτήν.</string>
   <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
   <string name="ok">Εντάξει</string>
   <string name="title_activity_nearby">Κοντινοί Τόποι</string>
@@ -184,6 +188,7 @@
   <string name="no">Όχι</string>
   <string name="media_detail_title">Τίτλος</string>
   <string name="media_detail_description">Περιγραφή</string>
+  <string name="media_detail_discussion">Συζήτηση</string>
   <string name="media_detail_author">Συγγραφέας</string>
   <string name="media_detail_uploaded_date">Ημερομηνία φόρτωσης</string>
   <string name="media_detail_license">Άδεια</string>
@@ -256,7 +261,7 @@
   <string name="null_url">Σφάλμα! Η διεύθυνση URL δεν βρέθηκε</string>
   <string name="nominate_deletion">Προτείνετε για διαγραφή</string>
   <string name="nominated_for_deletion">Αυτή εικόνα έχει προταθεί για διαγραφή.</string>
-  <string name="nominated_see_more"/>
+  <string name="nominated_see_more" fuzzy="true"/>
   <string name="view_browser">Προβολή στον περιηγητή</string>
   <string name="skip_login">Παράβλεψη</string>
   <string name="navigation_item_login">Είσοδος</string>
@@ -264,9 +269,9 @@
   <string name="skip_login_message">Θα χρειάζεται να συνδεθείτε για να ανεβάζετε εικόνες στο μέλλον.</string>
   <string name="login_alert_message">Παρακαλούμε συνδεθείτε για να χρησιμοποιήσετε αυτό το χαρακτηριστικό</string>
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
-  <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Ο τόπος δεν είναι διαθέσιμος.</string>
   <string name="location_permission_rationale_nearby">Απαιτείται άδεια για την εμφάνιση λίστας κοντινών σημείων</string>
-  <string name="get_directions">Λάβετε κατευθύνσεις</string>
+  <string name="get_directions">Λήψη κατευθύνσεων</string>
   <string name="read_article">Ανάγνωση άρθρου</string>
   <string name="notifications_welcome">Καλωσήρθατε στο Wikimedia Commons, %1$s! Είμαστε χαρούμενοι που είστε εδώ.</string>
   <string name="notifications_talk_page_message">Ο %1$s άφησε ένα μήνυμα στην σελίδα συζήτησής σας</string>
@@ -274,17 +279,17 @@
   <string name="notifications_mention">Ο %1$s σας ανέφερε στο %2$s.</string>
   <string name="toggle_view_button">Μεταβολή προβολής</string>
   <string name="nearby_directions">Κατευθύνσεις</string>
-  <string name="nearby_wikidata">Βικιδεδομένα</string>
+  <string name="nearby_wikidata">Δεδομένα wiki</string>
   <string name="nearby_wikipedia">Βικιπαίδεια</string>
   <string name="nearby_commons">Κοινά</string>
-  <string name="about_rate_us">&lt;u&gt;Βαθμολογήστε μας&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Συχνές ερωτήσεις&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Βαθμολογήστε μας&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;Συχνές ερωτήσεις&lt;/u&gt;</string>
   <string name="welcome_skip_button">Παράβλεψη εισαγωγής</string>
   <string name="no_internet">Το διαδίκτυο δεν είναι διαθέσιμο</string>
   <string name="internet_established">Το διαδίκτυο είναι διαθέσιμο</string>
   <string name="error_notifications">Σφάλμα κατά την συγκέντρωση ειδοποιήσεων</string>
   <string name="no_notifications">Δεν βρέθηκαν ειδοποιήσεις</string>
-  <string name="about_translate">&lt;u&gt;Μεταφράστε&lt;/u&gt;</string>
+  <string name="about_translate">Μετάφραση</string>
   <string name="about_translate_title">Γλώσσες</string>
   <string name="about_translate_message">Επιλέξτε την γλώσσα που θα θέλατε να υποβάλετε μεταφράσεις για αυτή</string>
   <string name="about_translate_proceed">Συνέχεια</string>
@@ -308,9 +313,9 @@
   <string name="provider_searches">Πρόσφατα αναζητημένα ερωτήματα</string>
   <string name="error_loading_categories">Συνέβη σφάλμα κατά τη φόρτωση κατηγοριών.</string>
   <string name="error_loading_subcategories">Συνέβη σφάλμα κατά τη φόρτωση υποκατηγοριών.</string>
-  <string name="search_tab_title_media">Μέσα ενημέρωσης</string>
+  <string name="search_tab_title_media">Μέσα</string>
   <string name="search_tab_title_categories">Κατηγορίες</string>
-  <string name="successful_wikidata_edit">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
+  <string name="successful_wikidata_edit" fuzzy="true">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
   <string name="menu_set_wallpaper">Ρύθμιση ως ταπετσαρία</string>
   <string name="wallpaper_set_successfully">Η ταπετσαρία ρυθμίστηκε επιτυχώς!</string>
@@ -328,7 +333,7 @@
   <string name="warning_for_image_reverts">Προειδοποίηση: Πάνω από το %1$s των εικόνων που ανεβάσατε έχουν διαγραφεί. Εάν συνεχίσετε να ανεβάζετε εικόνες που απαιτούν διαγραφή, ο λογαριασμός σας πιθανώς θα φραγεί.</string>
   <string name="congratulatory_message_quiz">Είχατε το %1$s των απαντήσεων σωστό. Συγχαρητήρια!</string>
   <string name="warning_for_no_answer">Επιλέξτε μια από τις δύο επιλογές για να απαντήσετε στην ερώτηση</string>
-  <string name="user_not_logged_in">Η συνεδρία σύνδεσης έληξε, παρακαλώ συνδεθείτε ξανά.</string>
+  <string name="user_not_logged_in">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά.</string>
   <string name="quiz_result_share_message">Μοιραστείτε το κουίζ με τους φίλους σας!</string>
   <string name="continue_message">Συνέχεια</string>
   <string name="correct">Σωστή απάντηση</string>
@@ -341,6 +346,7 @@
   <string name="delete_recent_searches_dialog">Είστε σίγουρος ότι θέλετε να καθαρίσετε το ιστορικό αναζήτησης;</string>
   <string name="search_history_deleted">Το ιστορικό αναζήτησης διεγράφη</string>
   <string name="nominate_delete">Ορίστε για Αφαίρεση</string>
+  <string name="delete">Διαγραφή</string>
   <string name="Achievements">Κατορθώματα</string>
   <string name="statistics">Στατιστικά</string>
   <string name="statistics_thanks">Ευχαριστίες που έχουν ληφθεί</string>
@@ -396,9 +402,17 @@
   <string name="no_categories_selected_warning_desc">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
   <string name="yes_submit">Ναι, υποβολή</string>
   <string name="no_go_back">Όχι, Επιστροφή</string>
+  <string name="review_thanks_yes_button_text">Ναι, γιατί όχι</string>
+  <string name="review_thanks_no_button_text">Επόμενη εικόνα</string>
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
   <string name="no_image_uploaded">Δεν έχουν ανεβεί εικόνες</string>
-  <string name="no_notification" fuzzy="true">Δεν έχετε αδιάβαστες Ενημερώσεις.</string>
-  <string name="no_archived_notification" fuzzy="true">Δεν έχετε αρχειοθετημένες Ενημερώσεις.</string>
+  <string name="no_notification">Δεν έχετε αδιάβαστες ενημερώσεις</string>
+  <string name="no_archived_notification">Δεν έχετε αρχειοθετημένες ενημερώσεις</string>
   <string name="please_wait">Παρακαλούμε περιμένετε…</string>
+  <string name="exif_tag_name_author">Δημιουργός</string>
+  <string name="exif_tag_name_copyright">Πνευματικά δικαιώματα</string>
+  <string name="exif_tag_name_location">Τοποθεσία</string>
+  <string name="exif_tag_name_software">Λογισμικό</string>
+  <string name="image_info">Πληροφορίες Εικόνας</string>
+  <string name="delete_helper_show_deletion_title_failed">Απέτυχε</string>
 </resources>

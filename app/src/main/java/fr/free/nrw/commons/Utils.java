@@ -6,23 +6,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.LinkedHashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
+
+import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.page.PageTitle;
+
+import java.util.Locale;
+import java.util.regex.Pattern;
+
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -32,59 +31,8 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class Utils {
 
-    /**
-     * Strips localization symbols from a string.
-     * Removes the suffix after "@" and quotes.
-     *
-     * @param s string possibly containing localization symbols
-     * @return stripped string
-     */
-    public static String stripLocalizedString(String s) {
-        Matcher matcher = Pattern.compile("\\\"(.*)\\\"(@\\w+)?").matcher(s);
-        if (matcher.find()) {
-            return matcher.group(1);
-        } else {
-            return s;
-        }
-    }
-
-    /**
-     * Creates an URL for thumbnail
-     *
-     * @param filename Thumbnail file name
-     * @return URL of thumbnail
-     */
-    public static String makeThumbBaseUrl(@NonNull String filename) {
-        String name = new PageTitle(filename).getPrefixedText();
-        String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
-        return String.format("%s/%s/%s/%s", BuildConfig.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
-    }
-
-    /**
-     * URL Encode an URL in UTF-8 format
-     * @param url Unformatted URL
-     * @return Encoded URL
-     */
-    public static String urlEncode(String url) {
-        try {
-            return URLEncoder.encode(url, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Capitalizes the first character of a string.
-     *
-     * @param string String to alter
-     * @return string with capitalized first character
-     */
-    public static String capitalize(String string) {
-        if (string.length() > 0) {
-            return string.substring(0, 1).toUpperCase(Locale.getDefault()) + string.substring(1);
-        } else {
-            return string;
-        }
+    public static PageTitle getPageTitle(@NonNull String title) {
+        return new PageTitle(title, new WikiSite(BuildConfig.COMMONS_URL));
     }
 
     /**
@@ -104,12 +52,8 @@ public class Utils {
                 return R.string.license_name_cc_by_sa_four;
             case Prefs.Licenses.CC0:
                 return R.string.license_name_cc0;
-            case Prefs.Licenses.CC_BY:  // for backward compatibility to v2.1
-                return R.string.license_name_cc_by_3_0;
-            case Prefs.Licenses.CC_BY_SA:  // for backward compatibility to v2.1
-                return R.string.license_name_cc_by_sa_3_0;
         }
-        throw new RuntimeException("Unrecognized license value: " + license);
+        throw new IllegalStateException("Unrecognized license value: " + license);
     }
 
     /**
@@ -133,7 +77,7 @@ public class Utils {
             case Prefs.Licenses.CC0:
                 return "https://creativecommons.org/publicdomain/zero/1.0/";
             default:
-                throw new RuntimeException("Unrecognized license value: " + license);
+                throw new IllegalStateException("Unrecognized license value: " + license);
         }
     }
 
@@ -201,7 +145,7 @@ public class Utils {
         builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         CustomTabsIntent customTabsIntent = builder.build();
         // Clear previous browser tasks, so that back/exit buttons work as intended.
-        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         customTabsIntent.launchUrl(context, url);
     }
 
@@ -234,15 +178,6 @@ public class Utils {
         return bitmap;
     }
 
-    public static <K,V> Map<K,V>  arraysToMap(K[] kArray, V[] vArray){
-        if(kArray.length!=vArray.length)
-            throw new RuntimeException("arraysToMap array sizes don't match");
-        Map<K,V> map=new LinkedHashMap<>();
-        for (int i=0;i<vArray.length;i++){
-            map.put(kArray[i], vArray[i]);
-        }
-        return map;
-    }
     /*
     *Copies the content to the clipboard
     *
@@ -251,6 +186,19 @@ public class Utils {
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(label, text);
         clipboard.setPrimaryClip(clip);
+    }
+
+    /**
+     * This method sets underlined string text to a TextView
+     *
+     * @param textView TextView associated with string resource
+     * @param stringResourceName string resource name
+     * @param context
+     */
+    public static void setUnderlinedText(TextView textView, int stringResourceName, Context context) {
+        SpannableString content = new SpannableString(context.getString(stringResourceName));
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textView.setText(content);
     }
 
 }

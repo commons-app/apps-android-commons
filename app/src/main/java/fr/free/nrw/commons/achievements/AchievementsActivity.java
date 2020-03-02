@@ -7,11 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.FileProvider;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -24,7 +19,15 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
 import com.dinuscxj.progressbar.CircleProgressBar;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,7 +36,6 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -42,7 +44,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-import fr.free.nrw.commons.utils.StringUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -168,9 +169,13 @@ public class AchievementsActivity extends NavigationBaseActivity {
         return true;
     }
 
+    /**
+     * To receive the id of selected item and handle further logic for that selected item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        // take screenshot in form of bitmap and show it in Alert Dialog
         if (id == R.id.share_app_icon) {
             View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
             Bitmap screenShot = Utils.getScreenShot(rootView);
@@ -198,7 +203,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(Intent.EXTRA_STREAM, fileUri);
             intent.setType("image/png");
-            startActivity(Intent.createChooser(intent, "Share image via"));
+            startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -240,13 +245,18 @@ public class AchievementsActivity extends NavigationBaseActivity {
         }
     }
 
+    /**
+     * To call the API to fetch the count of wiki data edits
+     *  in the form of JavaRx Single object<JSONobject>
+     */
     @SuppressLint("CheckResult")
     private void setWikidataEditCount() {
         String userName = sessionManager.getUserName();
-        if (StringUtils.isNullOrWhiteSpace(userName)) {
+        if (StringUtils.isBlank(userName)) {
             return;
         }
-        compositeDisposable.add(okHttpJsonApiClient.getWikidataEdits(userName)
+        compositeDisposable.add(okHttpJsonApiClient
+                .getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)), e -> {
@@ -254,6 +264,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 }));
     }
 
+    /**
+     * Shows a snack bar which has an action button which on click dismisses the snackbar and invokes the
+     * listener passed
+     */
     private void showSnackBarWithRetry() {
         progressBar.setVisibility(View.GONE);
         ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
@@ -315,8 +329,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private void setZeroAchievements() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this)
-                .setMessage("You haven't made any contributions yet")
-                .setPositiveButton("Ok", (dialog, which) -> {
+                .setMessage(getString(R.string.no_achievements_yet))
+                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -350,12 +364,12 @@ public class AchievementsActivity extends NavigationBaseActivity {
     private void inflateAchievements(Achievements achievements) {
         thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
-                (100*achievements.getUniqueUsedImages()/levelInfo.getMaxUniqueImages() );
+                (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
         imagesUsedByWikiProgressBar.setProgressTextFormatPattern
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
-        String levelUpInfoString = getString(R.string.level);
-        levelUpInfoString += " " + Integer.toString(levelInfo.getLevelNumber());
+        String levelUpInfoString = getString(R.string.level).toUpperCase();
+        levelUpInfoString += " " + levelInfo.getLevelNumber();
         levelNumber.setText(levelUpInfoString);
         imageView.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
                 new ContextThemeWrapper(this, levelInfo.getLevelStyle()).getTheme()));

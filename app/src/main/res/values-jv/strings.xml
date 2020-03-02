@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * NoiX180
 * Notanotheramy
 -->
@@ -24,7 +25,7 @@
   <string name="logging_in_message">Entènana sadhela…</string>
   <string name="login_success">Kasil mlebu log!</string>
   <string name="login_failed">Wurung mlebu log!</string>
-  <string name="upload_failed">Barkas ora katemu. Jajalana barkas liyané.</string>
+  <string name="upload_failed">Berkas ora tinemu. Jajal berkas liyané.</string>
   <string name="authentication_failed">Otèntikasi ora dadi, sumangga mlebu log manèh</string>
   <string name="uploading_started">Wiwit ngunggah!</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
@@ -49,7 +50,7 @@
   <string name="provider_contributions">Unggahanku</string>
   <string name="menu_share">Dum</string>
   <string name="menu_open_in_browser">Deleng ing Pangluru</string>
-  <string name="share_title_hint" fuzzy="true">Sesirah</string>
+  <string name="share_title_hint">Sesirah (Kudu)</string>
   <string name="add_title_toast">Wènèhi barkas iki sesirah</string>
   <string name="share_description_hint">Wedharan</string>
   <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
@@ -70,10 +71,10 @@
   <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
   <string name="enable_gps">Urubaké GPS</string>
   <string name="contributions_subtitle_zero">Durung ana unggahan</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d unggahan</item>
-    <item quantity="other">%1$d unggahan</item>
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Miwiti %1$d unggahan</item>
@@ -91,7 +92,7 @@
   <string name="title_activity_featured_images">Gambar Pilihan</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Ngenani</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"%1$s\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pranatan priangga&lt;/a&gt;</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Krèdhit&lt;/a&gt;</string>
   <string name="title_activity_about">Ngenani</string>
@@ -105,7 +106,7 @@
   <string name="share_license_summary" fuzzy="true">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="menu_download">Undhuh</string>
   <string name="preference_license" fuzzy="true">Lisènsi</string>
-  <string name="use_previous">Anggo sesirah/wedharan sadurungé</string>
+  <string name="use_previous" fuzzy="true">Anggo sesirah/wedharan sadurungé</string>
   <string name="allow_gps">Otomatis masang lokasi saiki</string>
   <string name="preference_theme">Modhe wengi</string>
   <string name="preference_theme_summary">Anggo pakulitan peteng</string>
@@ -204,9 +205,18 @@
   <string name="null_url">Masalah! URL ora tinemu</string>
   <string name="nominate_deletion">Usulaké supaya binusek</string>
   <string name="nominated_for_deletion">Gambar iki kausulaké supaya binusek.</string>
-  <string name="nominated_see_more">&lt;u&gt;Deleng kaca wèb bab rerincèné&lt;/u&gt;</string>
-  <string name="skip_login">Langkahi</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Deleng kaca wèb bab rerincèné&lt;/u&gt;</string>
+  <string name="skip_login">Lumpati</string>
   <string name="navigation_item_login">Mlebu log</string>
   <string name="skip_login_title">Apa panjenengan temen ora péngin mlebu log?</string>
+  <string name="about_translate_proceed">Banjuraké</string>
+  <string name="about_translate_cancel">Wurung</string>
+  <string name="retry">Jajal manèh</string>
+  <string name="showcase_view_got_it_button">Mudheng!</string>
+  <string name="menu_search_button">Golèk</string>
+  <string name="search_commons">Golèk ing Commons</string>
+  <string name="title_activity_search">Golèk</string>
+  <string name="search_recent_header">Golèkan mentas waé:</string>
   <string name="question">Pitakon</string>
+  <string name="continue_message">Banjuraké</string>
 </resources>

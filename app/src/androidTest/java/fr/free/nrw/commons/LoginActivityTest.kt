@@ -11,7 +11,6 @@ import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.intent.matcher.IntentMatchers.isInternal
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.filters.MediumTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import fr.free.nrw.commons.auth.LoginActivity
@@ -23,8 +22,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
-@MediumTest
 @RunWith(AndroidJUnit4::class)
 class LoginActivityTest {
     @get:Rule
@@ -52,5 +49,10 @@ class LoginActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.forgot_password))
                 .perform(ViewActions.click())
         Intents.intended(CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(BuildConfig.FORGOT_PASSWORD_URL)));
+    }
+
+    @Test
+    fun orientationChange() {
+        UITestHelper.changeOrientation(activityRule)
     }
 }

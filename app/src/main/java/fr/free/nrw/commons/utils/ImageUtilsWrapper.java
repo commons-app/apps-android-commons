@@ -3,9 +3,9 @@ package fr.free.nrw.commons.utils;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import fr.free.nrw.commons.location.LatLng;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
-import fr.free.nrw.commons.location.LatLng;
 
 @Singleton
 public class ImageUtilsWrapper {

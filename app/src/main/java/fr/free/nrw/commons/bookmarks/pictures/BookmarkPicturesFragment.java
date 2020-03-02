@@ -2,8 +2,6 @@ package fr.free.nrw.commons.bookmarks.pictures;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +11,9 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -28,7 +29,6 @@ import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.GridViewAdapter;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -97,11 +97,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             gridView.setVisibility(GONE);
             if (gridAdapter != null) {
                 gridAdapter.clear();
-                try {
-                    ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
             }
             initList();
         }
@@ -121,7 +117,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
         progressBar.setVisibility(VISIBLE);
         statusTextView.setVisibility(GONE);
 
-        compositeDisposable.add(Observable.fromCallable(() -> controller.loadBookmarkedPictures())
+        compositeDisposable.add(controller.loadBookmarkedPictures()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -203,11 +199,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
                 return;
             }
             gridAdapter.addItems(collection);
-            try {
-                ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+            ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
         }
         progressBar.setVisibility(GONE);
         statusTextView.setVisibility(GONE);

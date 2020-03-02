@@ -3,9 +3,7 @@ package fr.free.nrw.commons.media;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -15,46 +13,42 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
-import fr.free.nrw.commons.category.CategoryDetailsActivity;
-import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.explore.SearchActivity;
-import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static fr.free.nrw.commons.Utils.handleWebUrl;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
-    @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject BookmarkPicturesDao bookmarkDao;
@@ -153,18 +147,20 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
             case R.id.menu_bookmark_current_image:
-                bookmarkDao.updateBookmark(bookmark);
+                boolean bookmarkExists = bookmarkDao.updateBookmark(bookmark);
+                Snackbar snackbar = bookmarkExists ? Snackbar.make(getView(), R.string.add_bookmark, Snackbar.LENGTH_LONG) : Snackbar.make(getView(), R.string.remove_bookmark, Snackbar.LENGTH_LONG);
+                snackbar.show();
                 updateBookmarkState(item);
                 return true;
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCanonicalUri());
+                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getPageTitle().getCanonicalUri());
                 startActivity(Intent.createChooser(shareIntent, "Share image via..."));
                 return true;
             case R.id.menu_browser_current_image:
                 // View in browser
-                handleWebUrl(requireContext(), m.getFilePageTitle().getMobileUri());
+                handleWebUrl(requireContext(), Uri.parse(m.getPageTitle().getMobileUri()));
                 return true;
             case R.id.menu_download_current_image:
                 // Download
@@ -227,20 +223,19 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         // Modern Android updates the gallery automatically. Yay!
         req.allowScanningByMediaScanner();
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        PermissionUtils.checkPermissionsAndPerformAction(getActivity(), WRITE_EXTERNAL_STORAGE,
+            () -> enqueueRequest(req), () -> Toast.makeText(getContext(),
+                R.string.download_failed_we_cannot_download_the_file_without_storage_permission,
+                Toast.LENGTH_SHORT).show(), R.string.storage_permission,
+            R.string.write_storage_permission_rationale);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE)
-                        != PERMISSION_GRANTED
-                && getView() != null) {
-            Snackbar.make(getView(), R.string.read_storage_permission_rationale,
-                    Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
-                    view -> ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{READ_EXTERNAL_STORAGE}, 1)).show();
-        } else {
-            DownloadManager systemService = (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
-            if (systemService != null) {
-                systemService.enqueue(req);
-            }
+    }
+
+    private void enqueueRequest(DownloadManager.Request req) {
+        DownloadManager systemService =
+            (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
+        if (systemService != null) {
+            systemService.enqueue(req);
         }
     }
 
@@ -262,35 +257,49 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(true).setVisible(true);
 
                     // Initialize bookmark object
                     bookmark = new Bookmark(
                             m.getFilename(),
-                            m.getCreator()
+                            m.getCreator(),
+                            BookmarkPicturesContentProvider.uriForName(m.getFilename())
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
 
-                    if (m instanceof Contribution ) {
+                    if (m instanceof Contribution) {
                         Contribution c = (Contribution) m;
                         switch (c.getState()) {
                             case Contribution.STATE_FAILED:
-                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
-                                break;
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
-                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_share_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_download_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false)
+                                        .setVisible(false);
+                                menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
+                                        .setVisible(false);
                                 break;
                             case Contribution.STATE_COMPLETED:
                                 // Default set of menu items works fine. Treat same as regular media object
                                 break;
                         }
                     }
+                } else {
+                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_share_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_download_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false)
+                            .setVisible(false);
+                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
+                            .setVisible(false);
                 }
             }
         }
@@ -320,28 +329,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             Timber.d("Returning as activity is destroyed!");
             return;
         }
-        if (i+1 >= adapter.getCount()){
-            try{
-                ((CategoryImagesActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try{
-                ((CategoryDetailsActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try{
-                ((SearchActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try{
-                ((ExploreActivity) getContext()).requestMoreImages();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
+        if (i+1 >= adapter.getCount())
+            ((CategoryImagesCallback) getContext()).requestMoreImages();
+
         getActivity().invalidateOptionsMenu();
     }
 
@@ -353,16 +343,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     public void onPageScrollStateChanged(int i) {
     }
 
+    public void onDataSetChanged() {
+        if (null != adapter) {
+            adapter.notifyDataSetChanged();
+        }
+    }
+
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);
 
         int getTotalMediaCount();
-
-        void notifyDatasetChanged();
-
-        void registerDataSetObserver(DataSetObserver observer);
-
-        void unregisterDataSetObserver(DataSetObserver observer);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
