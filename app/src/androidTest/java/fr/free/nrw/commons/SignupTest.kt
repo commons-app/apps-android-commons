@@ -35,6 +35,7 @@ class SignupTest {
 
         }
 
+        UITestHelper.sleep(3000)
         Espresso.onView(withId(R.id.sign_up_button))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
                 .perform(click())

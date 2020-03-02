@@ -135,11 +135,7 @@ class UploadTest {
         val commonsFileName = "MobileTest " + dateFormat.format(Date())
 
         // Try to dismiss the error, if there is one (probably about duplicate files on Commons)
-        try {
-            onView(withText("Yes"))
-                    .check(matches(isDisplayed()))
-                    .perform(click())
-        } catch (ignored: NoMatchingViewException) {}
+        dismissWarning("Yes")
 
         onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
                 .perform(replaceText(commonsFileName))
@@ -151,24 +147,26 @@ class UploadTest {
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
 
-        try {
-            onView(withText("Yes"))
-                    .check(matches(isDisplayed()))
-                    .perform(click())
-        } catch (ignored: NoMatchingViewException) {}
+        UITestHelper.sleep(5000)
+        dismissWarning("Yes")
 
-        UITestHelper.sleep(1000)
+        UITestHelper.sleep(3000)
 
         onView(allOf(isDisplayed(), withId(R.id.et_search)))
                 .perform(replaceText("Uploaded with Mobile/Android Tests"))
 
         UITestHelper.sleep(3000)
 
-        onView(allOf(isDisplayed(), withParent(withId(R.id.rv_categories))))
-                .perform(click())
+        try {
+            onView(allOf(isDisplayed(), withParent(withId(R.id.rv_categories))))
+                    .perform(click())
+        } catch (ignored: NoMatchingViewException) {
+        }
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
+
+        dismissWarning("Yes, Submit")
 
         UITestHelper.sleep(500)
 
@@ -180,5 +178,14 @@ class UploadTest {
         val fileUrl = "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
                 commonsFileName.replace(' ', '_') + ".jpg"
         Timber.i("File should be uploaded to $fileUrl")
+    }
+
+    private fun dismissWarning(warningText: String) {
+        try {
+            onView(withText(warningText))
+                    .check(matches(isDisplayed()))
+                    .perform(click())
+        } catch (ignored: NoMatchingViewException) {
+        }
     }
 }
