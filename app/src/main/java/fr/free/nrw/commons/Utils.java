@@ -145,7 +145,7 @@ public class Utils {
         builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         CustomTabsIntent customTabsIntent = builder.build();
         // Clear previous browser tasks, so that back/exit buttons work as intended.
-        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         customTabsIntent.launchUrl(context, url);
     }
 
