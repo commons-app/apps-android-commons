@@ -117,11 +117,6 @@
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
-            android:name=".depictions.Media.DepictedImagesFragment"
-            android:label="@string/title_activity_featured_images"
-            android:parentActivityName=".contributions.MainActivity" />
-
-        <activity
             android:name=".depictions.WikidataItemDetailsActivity"
             android:label="@string/title_activity_featured_images"
             android:parentActivityName=".contributions.MainActivity" />
@@ -206,7 +201,7 @@
             android:syncable="false" />
 
         <provider
-            android:authorities="{applicationId}.depicts.contentprovider"
+            android:authorities="${applicationId}.depicts.contentprovider"
             android:name=".upload.structure.depictions.DepictsContentProvider"
             android:exported="false"
             android:label="@string/provider_depictions"
