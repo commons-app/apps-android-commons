@@ -76,31 +76,14 @@ class UploadTest {
     }
 
     @Test
-    fun uploadTest() {
+    fun testUploadWithDescription() {
         if (!ConfigUtils.isBetaFlavour()) {
             throw Error("This test should only be run in Beta!")
         }
 
-        // Uri to return by our mock gallery selector
-        // Requires file 'image.jpg' to be placed at root of file structure
-        val imageUri = Uri.parse("file://mnt/sdcard/image.jpg")
+        setupSingleUpload("image.jpg")
 
-        // Build a result to return from the Camera app
-        val intent = Intent()
-        intent.data = imageUri
-        val result = ActivityResult(Activity.RESULT_OK, intent)
-
-        // Stub out the File picker. When an intent is sent to the File picker, this tells
-        // Espresso to respond with the ActivityResult we just created
-        intending(allOf(hasAction(Intent.ACTION_GET_CONTENT), hasType("image/*"))).respondWith(result)
-
-        // Open FAB
-        onView(allOf<View>(withId(R.id.fab_plus), isDisplayed()))
-                .perform(click())
-
-        // Click gallery
-        onView(allOf<View>(withId(R.id.fab_gallery), isDisplayed()))
-                .perform(click())
+        openGallery()
 
         // Validate that an intent to get an image is sent
         intended(allOf(hasAction(Intent.ACTION_GET_CONTENT), hasType("image/*")))
@@ -110,11 +93,7 @@ class UploadTest {
         val commonsFileName = "MobileTest " + dateFormat.format(Date())
 
         // Try to dismiss the error, if there is one (probably about duplicate files on Commons)
-        try {
-            onView(withText("Yes"))
-                    .check(matches(isDisplayed()))
-                    .perform(click())
-        } catch (ignored: NoMatchingViewException) {}
+        dismissWarning("Yes")
 
         onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
                 .perform(replaceText(commonsFileName))
@@ -126,24 +105,26 @@ class UploadTest {
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
 
-        try {
-            onView(withText("Yes"))
-                    .check(matches(isDisplayed()))
-                    .perform(click())
-        } catch (ignored: NoMatchingViewException) {}
+        UITestHelper.sleep(5000)
+        dismissWarning("Yes")
 
-        UITestHelper.sleep(1000)
+        UITestHelper.sleep(3000)
 
         onView(allOf(isDisplayed(), withId(R.id.et_search)))
                 .perform(replaceText("Uploaded with Mobile/Android Tests"))
 
         UITestHelper.sleep(3000)
 
-        onView(allOf(isDisplayed(), withParent(withId(R.id.rv_categories))))
-                .perform(click())
+        try {
+            onView(allOf(isDisplayed(), withParent(withId(R.id.rv_categories))))
+                    .perform(click())
+        } catch (ignored: NoMatchingViewException) {
+        }
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
+
+        dismissWarning("Yes, Submit")
 
         UITestHelper.sleep(500)
 
@@ -155,6 +136,15 @@ class UploadTest {
         val fileUrl = "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
                 commonsFileName.replace(' ', '_') + ".jpg"
         Timber.i("File should be uploaded to $fileUrl")
+    }
+
+    private fun dismissWarning(warningText: String) {
+        try {
+            onView(withText(warningText))
+                    .check(matches(isDisplayed()))
+                    .perform(click())
+        } catch (ignored: NoMatchingViewException) {
+        }
     }
 
     @Test
@@ -175,73 +165,41 @@ class UploadTest {
         val commonsFileName = "MobileTest " + dateFormat.format(Date())
 
         // Try to dismiss the error, if there is one (probably about duplicate files on Commons)
-        dismissWarningDialog()
+        dismissWarning("Yes")
 
-        onView(allOf<View>(withId(R.id.description_item_edit_text), withParent(withParent(withId(R.id.image_title_container)))))
+        onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
                 .perform(replaceText(commonsFileName))
 
-        onView(withId(R.id.bottom_card_next))
+        onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
 
-        UITestHelper.sleep(1000)
+        UITestHelper.sleep(5000)
+        dismissWarning("Yes")
 
-        dismissWarningDialog()
-        dismissWarningDialog()
+        UITestHelper.sleep(3000)
 
-        onView(withId(R.id.bottom_card_next))
-                .perform(click())
+        onView(allOf(isDisplayed(), withId(R.id.et_search)))
+                .perform(replaceText("Uploaded with Mobile/Android Tests"))
 
-        UITestHelper.sleep(1000)
+        UITestHelper.sleep(3000)
 
-        chooseCategoryAndLicense()
-
-        val fileUrl = "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
-                commonsFileName.replace(' ', '_') + ".jpg"
-        Timber.i("File should be uploaded to $fileUrl")
-    }
-
-    @Test
-    fun testUploadWithDescription() {
-        if (!ConfigUtils.isBetaFlavour()) {
-            throw Error("This test should only be run in Beta!")
+        try {
+            onView(allOf(isDisplayed(), withParent(withId(R.id.rv_categories))))
+                    .perform(click())
+        } catch (ignored: NoMatchingViewException) {
         }
 
-        setupSingleUpload("image.jpg")
-
-        openGallery()
-
-        // Validate that an intent to get an image is sent
-        intended(allOf(hasAction(Intent.ACTION_GET_CONTENT), hasType("image/*")))
-
-        // Create filename with the current time (to prevent overwrites)
-        val dateFormat = SimpleDateFormat("yyMMdd-hhmmss")
-        val commonsFileName = "MobileTest " + dateFormat.format(Date())
-
-        // Try to dismiss the error, if there is one (probably about duplicate files on Commons)
-        dismissWarningDialog()
-
-        onView(allOf<View>(withId(R.id.description_item_edit_text), withParent(withParent(withId(R.id.image_title_container)))))
-                .perform(replaceText(commonsFileName))
-
-        onView(withId(R.id.rv_descriptions)).perform(
-                RecyclerViewActions
-                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(1,
-                                MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Test description")))
-
-        onView(withId(R.id.bottom_card_next))
+        onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
 
-        UITestHelper.sleep(1000)
+        dismissWarning("Yes, Submit")
 
-        dismissWarningDialog()
-        dismissWarningDialog()
+        UITestHelper.sleep(500)
 
-        onView(withId(R.id.bottom_card_next))
+        onView(allOf(isDisplayed(), withId(R.id.btn_submit)))
                 .perform(click())
 
-        UITestHelper.sleep(1000)
-
-        chooseCategoryAndLicense()
+        UITestHelper.sleep(10000)
 
         val fileUrl = "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
                 commonsFileName.replace(' ', '_') + ".jpg"
@@ -276,7 +234,7 @@ class UploadTest {
                         .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(1,
                                 MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Test description")))
 
-        onView(withId(R.id.bottom_card_add_desc))
+        onView(withId(R.id.btn_add_description))
                 .perform(click())
 
         onView(withId(R.id.rv_descriptions)).perform(
@@ -289,20 +247,36 @@ class UploadTest {
                         .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(2,
                                 MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Description")))
 
-        onView(withId(R.id.bottom_card_next))
+        onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
 
-        UITestHelper.sleep(1000)
+        UITestHelper.sleep(5000)
+        dismissWarning("Yes")
 
-        dismissWarningDialog()
-        dismissWarningDialog()
+        UITestHelper.sleep(3000)
 
-        onView(withId(R.id.bottom_card_next))
+        onView(allOf(isDisplayed(), withId(R.id.et_search)))
+                .perform(replaceText("Uploaded with Mobile/Android Tests"))
+
+        UITestHelper.sleep(3000)
+
+        try {
+            onView(allOf(isDisplayed(), withParent(withId(R.id.rv_categories))))
+                    .perform(click())
+        } catch (ignored: NoMatchingViewException) {
+        }
+
+        onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
 
-        UITestHelper.sleep(1000)
+        dismissWarning("Yes, Submit")
 
-        chooseCategoryAndLicense()
+        UITestHelper.sleep(500)
+
+        onView(allOf(isDisplayed(), withId(R.id.btn_submit)))
+                .perform(click())
+
+        UITestHelper.sleep(10000)
 
         val fileUrl = "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
                 commonsFileName.replace(' ', '_') + ".jpg"
