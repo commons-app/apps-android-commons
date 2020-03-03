@@ -226,12 +226,12 @@ class UploadTest {
         // Try to dismiss the error, if there is one (probably about duplicate files on Commons)
         dismissWarningDialog()
 
-        onView(allOf<View>(withId(R.id.description_item_edit_text), withParent(withParent(withId(R.id.image_title_container)))))
+        onView(allOf<View>(isDisplayed(), withId(R.id.et_title)))
                 .perform(replaceText(commonsFileName))
 
         onView(withId(R.id.rv_descriptions)).perform(
                 RecyclerViewActions
-                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(1,
+                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(0,
                                 MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Test description")))
 
         onView(withId(R.id.btn_add_description))
@@ -239,12 +239,12 @@ class UploadTest {
 
         onView(withId(R.id.rv_descriptions)).perform(
                 RecyclerViewActions
-                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(2,
+                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(1,
                                 MyViewAction.selectSpinnerItemInChildViewWithId(R.id.spinner_description_languages, 2)))
 
         onView(withId(R.id.rv_descriptions)).perform(
                 RecyclerViewActions
-                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(2,
+                        .actionOnItemAtPosition<DescriptionsAdapter.ViewHolder>(1,
                                 MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Description")))
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
@@ -256,7 +256,7 @@ class UploadTest {
         UITestHelper.sleep(3000)
 
         onView(allOf(isDisplayed(), withId(R.id.et_search)))
-                .perform(replaceText("Uploaded with Mobile/Android Tests"))
+                .perform(replaceText("Test"))
 
         UITestHelper.sleep(3000)
 
