@@ -48,7 +48,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
 
     @Override
     public int getItemCount() {
-        return contributions==null?0:contributions.size();
+        return contributions.size();
     }
 
     public void setContributions(List<Contribution> contributionList) {
