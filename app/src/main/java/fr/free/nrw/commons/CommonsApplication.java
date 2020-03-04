@@ -61,6 +61,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.data.DBOpenHelper.CONTRIBUTIONS_TABLE;
 import static org.acra.ReportField.ANDROID_VERSION;
 import static org.acra.ReportField.APP_VERSION_CODE;
 import static org.acra.ReportField.APP_VERSION_NAME;
@@ -88,8 +89,6 @@ import static org.acra.ReportField.USER_COMMENT;
 )
 
 public class CommonsApplication extends Application {
-    private final String CONTRIBUTIONS_TABLE = "contributions";
-    private final String DROP_TABLE_STATEMENT="DROP TABLE IF EXISTS %s";
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
 
@@ -312,23 +311,10 @@ public class CommonsApplication extends Application {
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
         CategoryDao.Table.onDelete(db);
-        deleteTable(db,CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
+        dbOpenHelper.deleteTable(db,CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
         appDatabase.getContributionDao().deleteAll();
         BookmarkPicturesDao.Table.onDelete(db);
         BookmarkLocationsDao.Table.onDelete(db);
-    }
-
-    /**
-     * Delete table in the given db
-     * @param db
-     * @param tableName
-     */
-    private void deleteTable(SQLiteDatabase db, String tableName) {
-        try {
-            db.execSQL(String.format(DROP_TABLE_STATEMENT, tableName));
-        } catch (SQLiteException e) {
-            e.printStackTrace();
-        }
     }
 
 
