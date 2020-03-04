@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.settings;
 
 import android.Manifest;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -33,6 +32,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.upload.Language;
 import fr.free.nrw.commons.utils.PermissionUtils;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
@@ -40,8 +40,12 @@ public class SettingsFragment extends PreferenceFragment {
     @Inject
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
+
     @Inject
     CommonsLogSender commonsLogSender;
+
+    @Inject
+    SystemThemeUtils systemThemeUtils;
 
     private ListPreference themeListPreference;
     private ListPreference langListPreference;
@@ -139,25 +143,6 @@ public class SettingsFragment extends PreferenceFragment {
             displayLocationPermissionForCardView.setEnabled(false);
             displayCampaignsCardView.setEnabled(false);
         }
-    }
-
-    // Return true is system wide dark theme is enabled else false
-    private boolean getSystemDefaultThemeBool(String theme) {
-        if (getString(R.string.theme_dark_name).equals(theme)) {
-            return true;
-        } else if (getString(R.string.theme_default_name).equals(theme)) {
-            return getSystemDefaultThemeBool(getSystemDefaultTheme());
-        }
-        return false;
-    }
-
-    // Returns the default system wide theme
-    private String getSystemDefaultTheme() {
-        if ((getResources().getConfiguration().uiMode &
-                Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
-            return getString(R.string.theme_dark_name);
-        }
-        return getString(R.string.theme_light_name);
     }
 
     /**

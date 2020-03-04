@@ -4,7 +4,6 @@ import android.accounts.AccountAuthenticatorActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -54,9 +53,9 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Call;
@@ -84,6 +83,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     @Inject
     LoginClient loginClient;
+
+    @Inject
+    SystemThemeUtils systemThemeUtils;
 
     @BindView(R.id.login_button)
     Button loginButton;
@@ -123,8 +125,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .getCommonsApplicationComponent()
                 .inject(this);
 
-        boolean isDarkTheme = getSystemDefaultThemeBool(
-                applicationKvStore.getString(Prefs.KEY_THEME_VALUE, getSystemDefaultTheme()));
+        boolean isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         setTheme(isDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
@@ -142,25 +143,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         } else {
             loginCredentials.setVisibility(View.GONE);
         }
-    }
-
-    // Return true is system wide dark theme is enabled else false
-    private boolean getSystemDefaultThemeBool(String theme) {
-        if (getString(R.string.theme_dark_name).equals(theme)) {
-            return true;
-        } else if (getString(R.string.theme_default_name).equals(theme)) {
-            return getSystemDefaultThemeBool(getSystemDefaultTheme());
-        }
-        return false;
-    }
-
-    // Returns the default system wide theme
-    private String getSystemDefaultTheme() {
-        if ((getResources().getConfiguration().uiMode &
-                Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
-            return getString(R.string.theme_dark_name);
-        }
-        return getString(R.string.theme_light_name);
     }
 
     @OnFocusChange(R.id.login_username)

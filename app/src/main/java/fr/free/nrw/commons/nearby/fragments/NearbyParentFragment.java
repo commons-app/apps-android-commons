@@ -86,13 +86,13 @@ import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
-import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
@@ -156,6 +156,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Inject ContributionController controller;
     @Inject WikidataEditListener wikidataEditListener;
 
+    @Inject
+    SystemThemeUtils systemThemeUtils;
+
     private NearbyFilterSearchRecyclerViewAdapter nearbyFilterSearchRecyclerViewAdapter;
 
     private BottomSheetBehavior bottomSheetListBehavior;
@@ -210,8 +213,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        isDarkTheme = getSystemDefaultThemeBool(
-                applicationKvStore.getString(Prefs.KEY_THEME_VALUE, getSystemDefaultTheme()));
+        isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
         addCheckBoxCallback();
         presenter.attachView(this);
@@ -240,25 +242,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             });
 
         });
-    }
-
-    // Return true is system wide dark theme is enabled else false
-    private boolean getSystemDefaultThemeBool(String theme) {
-        if (getString(R.string.theme_dark_name).equals(theme)) {
-            return true;
-        } else if (getString(R.string.theme_default_name).equals(theme)) {
-            return getSystemDefaultThemeBool(getSystemDefaultTheme());
-        }
-        return false;
-    }
-
-    // Returns the default system wide theme
-    private String getSystemDefaultTheme() {
-        if ((getResources().getConfiguration().uiMode &
-                Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
-            return getString(R.string.theme_dark_name);
-        }
-        return getString(R.string.theme_light_name);
     }
 
     /**
