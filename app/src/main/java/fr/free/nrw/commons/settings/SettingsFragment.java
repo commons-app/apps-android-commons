@@ -143,23 +143,21 @@ public class SettingsFragment extends PreferenceFragment {
 
     // Return true is system wide dark theme is enabled else false
     private boolean getSystemDefaultThemeBool(String theme) {
-        switch (theme) {
-            case "Dark":
-                return true;
-            case "Default":
-                return getSystemDefaultThemeBool(getSystemDefaultTheme());
-            default:
-                return false;
+        if (getString(R.string.theme_dark_name).equals(theme)) {
+            return true;
+        } else if (getString(R.string.theme_default_name).equals(theme)) {
+            return getSystemDefaultThemeBool(getSystemDefaultTheme());
         }
+        return false;
     }
 
     // Returns the default system wide theme
     private String getSystemDefaultTheme() {
         if ((getResources().getConfiguration().uiMode &
                 Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
-            return "Dark";
+            return getString(R.string.theme_dark_name);
         }
-        return "Light";
+        return getString(R.string.theme_light_name);
     }
 
     /**
@@ -170,7 +168,8 @@ public class SettingsFragment extends PreferenceFragment {
      */
     private void prepareTheme() {
 
-        String[] themeOptionsNames = {"Default", "Dark", "Light"};
+        String[] themeOptionsNames = {getString(R.string.theme_default_name),
+                getString(R.string.theme_dark_name), getString(R.string.theme_light_name)};
 
         themeListPreference.setEntries(themeOptionsNames);
         themeListPreference.setEntryValues(themeOptionsNames);
@@ -203,7 +202,7 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private String getCurrentTheme() {
-        return defaultKvStore.getString(Prefs.KEY_THEME_VALUE, "Default");
+        return defaultKvStore.getString(Prefs.KEY_THEME_VALUE, getString(R.string.theme_default_name));
     }
 
     /**
