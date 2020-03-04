@@ -56,7 +56,7 @@ class ReasonBuilderTest {
                 .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
 
         val media = mock(Media::class.java)
-        media?.dateUploaded=Date()
+        media.dateUploaded=Date()
 
         reasonBuilder!!.getReason(media, "test")
         verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))
