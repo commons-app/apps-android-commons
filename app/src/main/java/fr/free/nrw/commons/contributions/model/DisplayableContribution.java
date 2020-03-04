@@ -22,6 +22,7 @@ public class DisplayableContribution extends Contribution {
                 contribution.getWidth(),
                 contribution.getHeight(),
                 contribution.getLicense());
+        this._id=contribution._id;
         this.position = position;
     }
 

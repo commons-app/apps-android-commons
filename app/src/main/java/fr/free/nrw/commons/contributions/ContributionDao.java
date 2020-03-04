@@ -19,11 +19,11 @@ public abstract class ContributionDao {
     abstract LiveData<List<Contribution>> fetchContributions();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract void save(Contribution contribution);
+    public abstract Single<Long> save(Contribution contribution);
 
     @Transaction
     public void  deleteAllAndSave(List<Contribution> contributions){
-        deleteAll();
+        deleteAll(Contribution.STATE_COMPLETED);
         save(contributions);
     }
 
@@ -40,8 +40,11 @@ public abstract class ContributionDao {
     public abstract List<Contribution> getContributionWithTitle(String fileName);
 
     @Query("UPDATE contribution SET state=:state WHERE state in (:toUpdateStates)")
-    public abstract void updateStates(int state, int[] toUpdateStates);
+    public abstract Single<Integer> updateStates(int state, int[] toUpdateStates);
 
     @Query("Delete FROM contribution")
     public abstract void deleteAll();
+
+    @Query("Delete FROM contribution WHERE state = :state")
+    public abstract void deleteAll(int state);
 }

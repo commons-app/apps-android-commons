@@ -1,8 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.app.job.JobScheduler;
-import android.text.TextUtils;
-
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
