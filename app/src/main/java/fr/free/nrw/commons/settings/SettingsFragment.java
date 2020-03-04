@@ -32,7 +32,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.upload.Language;
 import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
@@ -43,9 +42,6 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Inject
     CommonsLogSender commonsLogSender;
-
-    @Inject
-    SystemThemeUtils systemThemeUtils;
 
     private ListPreference themeListPreference;
     private ListPreference langListPreference;
@@ -61,7 +57,7 @@ public class SettingsFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
-        themeListPreference = (ListPreference) findPreference("themePref");
+        themeListPreference = (ListPreference) findPreference(Prefs.KEY_THEME_VALUE);
         prepareTheme();
 
         //Check if the Author Name switch is enabled and appropriately handle the author name usage
@@ -152,14 +148,11 @@ public class SettingsFragment extends PreferenceFragment {
      */
     private void prepareTheme() {
 
-        String[] themeOptionsNames = {getString(R.string.theme_default_name),
-                getString(R.string.theme_dark_name), getString(R.string.theme_light_name)};
-
         String currentTheme = getCurrentTheme();
         if (currentTheme.equals("")){
             // If current theme code is empty, means none selected by user yet so use default
-            themeListPreference.setSummary(themeOptionsNames[0]);
-            themeListPreference.setValue(themeOptionsNames[0]);
+            themeListPreference.setSummary(getString(R.string.theme_default_name));
+            themeListPreference.setValue(getString(R.string.theme_default_value));
         } else {
             // If any theme is selected by user previously, use it
             int prefIndex = themeListPreference.findIndexOfValue(currentTheme);
@@ -171,15 +164,9 @@ public class SettingsFragment extends PreferenceFragment {
             String userSelectedValue = (String) newValue;
             int prefIndex = themeListPreference.findIndexOfValue(userSelectedValue);
             themeListPreference.setSummary(themeListPreference.getEntries()[prefIndex]);
-
-            saveThemeValue(userSelectedValue);
             getActivity().recreate();
             return true;
         });
-    }
-
-    private void saveThemeValue(String userSelectedValue) {
-        defaultKvStore.putString(Prefs.KEY_THEME_VALUE, userSelectedValue);
     }
 
     private String getCurrentTheme() {

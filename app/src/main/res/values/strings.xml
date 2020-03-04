@@ -601,4 +601,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="theme_default_name">Default</string>
   <string name="theme_dark_name">Dark</string>
   <string name="theme_light_name">Light</string>
+  <string name="theme_default_value">0</string>
+  <string name="theme_dark_value">1</string>
+  <string name="theme_light_value">2</string>
 </resources>

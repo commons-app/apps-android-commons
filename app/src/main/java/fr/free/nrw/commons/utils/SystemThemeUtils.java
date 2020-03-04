@@ -23,9 +23,9 @@ public class SystemThemeUtils {
 
     // Return true is system wide dark theme is enabled else false
     public boolean getSystemDefaultThemeBool(String theme) {
-        if (context.getResources().getString(R.string.theme_dark_name).equals(theme)) {
+        if (theme.equals(context.getString(R.string.theme_dark_value))) {
             return true;
-        } else if (context.getResources().getString(R.string.theme_default_name).equals(theme)) {
+        } else if (theme.equals(context.getString(R.string.theme_default_value))) {
             return getSystemDefaultThemeBool(getSystemDefaultTheme());
         }
         return false;
@@ -35,9 +35,9 @@ public class SystemThemeUtils {
     public String getSystemDefaultTheme() {
         if ((context.getResources().getConfiguration().uiMode &
                 Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
-            return context.getResources().getString(R.string.theme_dark_name);
+            return context.getString(R.string.theme_dark_value);
         }
-        return context.getResources().getString(R.string.theme_light_name);
+        return context.getString(R.string.theme_light_value);
     }
 
     // Returns true if the device is in night mode or false otherwise
