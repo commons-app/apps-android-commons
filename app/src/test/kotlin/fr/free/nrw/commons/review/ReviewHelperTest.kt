@@ -32,8 +32,6 @@ class ReviewHelperTest {
     @InjectMocks
     var reviewHelper: ReviewHelper? = null
 
-    lateinit var media: Media
-
     /**
      * Init mocks
      */
@@ -62,7 +60,7 @@ class ReviewHelperTest {
         `when`(reviewInterface?.getFirstRevisionOfFile(ArgumentMatchers.anyString()))
                 .thenReturn(Observable.just(mockResponse))
 
-        media = mock(Media::class.java)
+        val media = mock(Media::class.java)
         media.filename="File:Test.jpg"
         `when`(mediaClient?.getMedia(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(media))
