@@ -114,7 +114,6 @@
   <string name="allow_gps">Automatically get current location</string>
   <string name="allow_gps_summary">Retrieves current location if image is not geotagged, and geotags image with it. Warning: This will reveal your current location.</string>
   <string name="preference_theme">Theme</string>
-  <string name="preference_theme_summary">Default</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

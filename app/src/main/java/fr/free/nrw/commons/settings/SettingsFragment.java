@@ -146,18 +146,14 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     /**
-     * Prepares themes list and adds them to list preference as pairs.
      * Uses previously saved theme if there is any, if not then uses default.
-     * Adds preference theme listener and saves value choosen by user to shared preferences
+     * Adds preference theme listener and saves value chosen by user to shared preferences
      * to remember later
      */
     private void prepareTheme() {
 
         String[] themeOptionsNames = {getString(R.string.theme_default_name),
                 getString(R.string.theme_dark_name), getString(R.string.theme_light_name)};
-
-        themeListPreference.setEntries(themeOptionsNames);
-        themeListPreference.setEntryValues(themeOptionsNames);
 
         String currentTheme = getCurrentTheme();
         if (currentTheme.equals("")){
@@ -193,7 +189,7 @@ public class SettingsFragment extends PreferenceFragment {
     /**
      * Prepares language summary and language codes list and adds them to list preference as pairs.
      * Uses previously saved language if there is any, if not uses phone local as initial language.
-     * Adds preference changed listener and saves value choosen by user to shared preferences
+     * Adds preference changed listener and saves value chosen by user to shared preferences
      * to remember later
      */
     private void prepareLanguages() {

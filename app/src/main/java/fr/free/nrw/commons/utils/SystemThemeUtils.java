@@ -13,14 +13,12 @@ import fr.free.nrw.commons.settings.Prefs;
 public class SystemThemeUtils {
 
     private Context context;
+    private JsonKvStore applicationKvStore;
 
     @Inject
-    @Named("default_preferences")
-    JsonKvStore applicationKvStore;
-
-    @Inject
-    public SystemThemeUtils(Context context) {
+    public SystemThemeUtils(Context context, @Named("default_preferences") JsonKvStore applicationKvStore) {
         this.context = context;
+        this.applicationKvStore = applicationKvStore;
     }
 
     // Return true is system wide dark theme is enabled else false
