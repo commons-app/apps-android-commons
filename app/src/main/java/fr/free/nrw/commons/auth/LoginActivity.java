@@ -4,6 +4,7 @@ import android.accounts.AccountAuthenticatorActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -53,6 +54,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -121,7 +123,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .getCommonsApplicationComponent()
                 .inject(this);
 
-        boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
+        boolean isDarkTheme = getSystemDefaultThemeBool(
+                applicationKvStore.getString(Prefs.KEY_THEME_VALUE, getSystemDefaultTheme()));
         setTheme(isDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
@@ -133,12 +136,33 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit.addTextChangedListener(textWatcher);
         passwordEdit.addTextChangedListener(textWatcher);
         twoFactorEdit.addTextChangedListener(textWatcher);
-        
+
         if (ConfigUtils.isBetaFlavour()) {
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
         }
+    }
+
+    // Return true is system wide dark theme is enabled else false
+    public boolean getSystemDefaultThemeBool(String theme) {
+        switch (theme) {
+            case "Dark":
+                return true;
+            case "Default":
+                return getSystemDefaultThemeBool(getSystemDefaultTheme());
+            default:
+                return false;
+        }
+    }
+
+    // Returns the default system wide theme
+    public String getSystemDefaultTheme() {
+        if ((getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
+            return "Dark";
+        }
+        return "Light";
     }
 
     @OnFocusChange(R.id.login_username)
@@ -264,7 +288,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 new Callback<MwQueryResponse>() {
                     @Override
                     public void onResponse(Call<MwQueryResponse> call,
-                            Response<MwQueryResponse> response) {
+                                           Response<MwQueryResponse> response) {
                         loginClient.login(commonsWikiSite, username, password, null, twoFactorCode,
                                 response.body().query().loginToken(), new LoginCallback() {
                                     @Override
@@ -275,7 +299,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
                                     @Override
                                     public void twoFactorPrompt(@NonNull Throwable caught,
-                                            @Nullable String token) {
+                                                                @Nullable String token) {
                                         Timber.d("Requesting 2FA prompt");
                                         hideProgress();
                                         askUserForTwoFactorAuth();

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.theme;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import javax.inject.Inject;
@@ -8,6 +9,7 @@ import javax.inject.Named;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.settings.Prefs;
 import io.reactivex.disposables.CompositeDisposable;
 
 public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
@@ -21,14 +23,16 @@ public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        wasPreviouslyDarkTheme = defaultKvStore.getBoolean("theme", false);
+        wasPreviouslyDarkTheme = getSystemDefaultThemeBool(
+                defaultKvStore.getString(Prefs.KEY_THEME_VALUE, getSystemDefaultTheme()));
         setTheme(wasPreviouslyDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
     }
 
     @Override
     protected void onResume() {
         // Restart activity if theme is changed
-        if (wasPreviouslyDarkTheme != defaultKvStore.getBoolean("theme", false)) {
+        if (wasPreviouslyDarkTheme != getSystemDefaultThemeBool(
+                defaultKvStore.getString(Prefs.KEY_THEME_VALUE, getSystemDefaultTheme()))) {
             recreate();
         }
 
@@ -40,4 +44,26 @@ public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
         super.onDestroy();
         compositeDisposable.clear();
     }
+
+    // Return true is system wide dark theme is enabled else false
+    public boolean getSystemDefaultThemeBool(String theme) {
+        switch (theme) {
+            case "Dark":
+                return true;
+            case "Default":
+                return getSystemDefaultThemeBool(getSystemDefaultTheme());
+            default:
+                return false;
+        }
+    }
+
+    // Returns the default system wide theme
+    public String getSystemDefaultTheme() {
+        if ((getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
+            return "Dark";
+        }
+        return "Light";
+    }
+
 }

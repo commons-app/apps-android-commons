@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.settings;
 
 import android.Manifest;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -12,18 +13,15 @@ import android.preference.SwitchPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-import com.google.gson.reflect.TypeToken;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -44,7 +42,9 @@ public class SettingsFragment extends PreferenceFragment {
     JsonKvStore defaultKvStore;
     @Inject
     CommonsLogSender commonsLogSender;
-    private ListPreference listPreference;
+
+    private ListPreference themeListPreference;
+    private ListPreference langListPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,11 +57,8 @@ public class SettingsFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
-        SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
-        themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            getActivity().recreate();
-            return true;
-        });
+        themeListPreference = (ListPreference) findPreference("themePref");
+        prepareTheme();
 
         //Check if the Author Name switch is enabled and appropriately handle the author name usage
         SwitchPreference useAuthorName = (SwitchPreference) findPreference("useAuthorName");
@@ -117,7 +114,7 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
-        listPreference = (ListPreference) findPreference("descriptionDefaultLanguagePref");
+        langListPreference = (ListPreference) findPreference("descriptionDefaultLanguagePref");
         prepareLanguages();
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
@@ -144,6 +141,71 @@ public class SettingsFragment extends PreferenceFragment {
         }
     }
 
+    // Return true is system wide dark theme is enabled else false
+    public boolean getSystemDefaultThemeBool(String theme) {
+        switch (theme) {
+            case "Dark":
+                return true;
+            case "Default":
+                return getSystemDefaultThemeBool(getSystemDefaultTheme());
+            default:
+                return false;
+        }
+    }
+
+    // Returns the default system wide theme
+    public String getSystemDefaultTheme() {
+        if ((getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
+            return "Dark";
+        }
+        return "Light";
+    }
+
+    /**
+     * Prepares themes list and adds them to list preference as pairs.
+     * Uses previously saved theme if there is any, if not then uses default.
+     * Adds preference theme listener and saves value choosen by user to shared preferences
+     * to remember later
+     */
+    private void prepareTheme() {
+
+        String[] themeOptionsNames = {"Default", "Dark", "Light"};
+
+        themeListPreference.setEntries(themeOptionsNames);
+        themeListPreference.setEntryValues(themeOptionsNames);
+
+        String currentTheme = getCurrentTheme();
+        if (currentTheme.equals("")){
+            // If current theme code is empty, means none selected by user yet so use default
+            themeListPreference.setSummary(themeOptionsNames[0]);
+            themeListPreference.setValue(themeOptionsNames[0]);
+        } else {
+            // If any theme is selected by user previously, use it
+            int prefIndex = themeListPreference.findIndexOfValue(currentTheme);
+            themeListPreference.setSummary(themeListPreference.getEntries()[prefIndex]);
+            themeListPreference.setValue(currentTheme);
+        }
+
+        themeListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            String userSelectedValue = (String) newValue;
+            int prefIndex = themeListPreference.findIndexOfValue(userSelectedValue);
+            themeListPreference.setSummary(themeListPreference.getEntries()[prefIndex]);
+
+            saveThemeValue(userSelectedValue);
+            getActivity().recreate();
+            return true;
+        });
+    }
+
+    private void saveThemeValue(String userSelectedValue) {
+        defaultKvStore.putString(Prefs.KEY_THEME_VALUE, userSelectedValue);
+    }
+
+    private String getCurrentTheme() {
+        return defaultKvStore.getString(Prefs.KEY_THEME_VALUE, "Default");
+    }
+
     /**
      * Prepares language summary and language codes list and adds them to list preference as pairs.
      * Uses previously saved language if there is any, if not uses phone local as initial language.
@@ -167,26 +229,26 @@ public class SettingsFragment extends PreferenceFragment {
         CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
         CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
         // Add all languages and languages codes to lists preference as pair
-        listPreference.setEntries(languageNames);
-        listPreference.setEntryValues(languageCodes);
+        langListPreference.setEntries(languageNames);
+        langListPreference.setEntryValues(languageCodes);
 
         // Gets current language code from shared preferences
         String languageCode = getCurrentLanguageCode();
-        if(languageCode.equals("")){
+        if (languageCode.equals("")){
             // If current language code is empty, means none selected by user yet so use phone local
-            listPreference.setSummary(Locale.getDefault().getDisplayLanguage());
-            listPreference.setValue(Locale.getDefault().getLanguage());
+            langListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
+            langListPreference.setValue(Locale.getDefault().getLanguage());
         } else {
             // If any language is selected by user previously, use it
-            int prefIndex = listPreference.findIndexOfValue(languageCode);
-            listPreference.setSummary(listPreference.getEntries()[prefIndex]);
-            listPreference.setValue(languageCode);
+            int prefIndex = langListPreference.findIndexOfValue(languageCode);
+            langListPreference.setSummary(langListPreference.getEntries()[prefIndex]);
+            langListPreference.setValue(languageCode);
         }
 
-        listPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+        langListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
             String userSelectedValue = (String) newValue;
-            int prefIndex = listPreference.findIndexOfValue(userSelectedValue);
-            listPreference.setSummary(listPreference.getEntries()[prefIndex]);
+            int prefIndex = langListPreference.findIndexOfValue(userSelectedValue);
+            langListPreference.setSummary(langListPreference.getEntries()[prefIndex]);
             saveLanguageValue(userSelectedValue);
             return true;
         });
