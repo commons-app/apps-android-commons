@@ -76,11 +76,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     private int SPAN_COUNT=3;
     private List<Contribution> contributions;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, view);
