@@ -6,6 +6,7 @@ import android.database.DataSetObserver;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -112,7 +113,7 @@ public class ContributionsPresenter implements UserActionListener {
         }
     }
 
-    private void showContributions(List<Contribution> contributions) {
+    private void showContributions(@NonNull List<Contribution> contributions) {
         view.showProgress(false);
         if (contributions.size() == 0) {
             view.showWelcomeTip(true);
@@ -161,7 +162,6 @@ public class ContributionsPresenter implements UserActionListener {
     @Override
     public void deleteUpload(Contribution contribution) {
         compositeDisposable.add(repository.deleteContributionFromDB(contribution)
-        .observeOn(mainThreadScheduler)
         .subscribeOn(ioThreadScheduler)
         .subscribe());
     }

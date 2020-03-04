@@ -133,7 +133,7 @@ public class ContributionsFragment
         ButterKnife.bind(this, view);
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
-        contributionsPresenter.setLifeCycleOwner(this);
+        contributionsPresenter.setLifeCycleOwner(this.getViewLifecycleOwner());
         campaignView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
