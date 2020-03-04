@@ -27,6 +27,7 @@ import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
@@ -52,7 +53,7 @@ public class UploadService extends HandlerService<Contribution> {
     @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;
     @Inject
-    AppDatabase appDatabase;
+    ContributionDao contributionDao;
     @Inject UploadClient uploadClient;
     @Inject MediaClient mediaClient;
     @Inject
@@ -113,7 +114,7 @@ public class UploadService extends HandlerService<Contribution> {
             notificationManager.notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
             contribution.setTransferred(transferred);
-            appDatabase.getContributionDao().
+            contributionDao.
                     save(contribution).subscribeOn(ioThreadScheduler)
                     .observeOn(mainThreadScheduler)
                     .subscribe();
@@ -160,7 +161,7 @@ public class UploadService extends HandlerService<Contribution> {
                     Timber.d("%d uploads left", toUpload);
                     notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
                 }
-                appDatabase.getContributionDao()
+                contributionDao
                         .save(contribution)
                         .subscribeOn(ioThreadScheduler)
                         .observeOn(mainThreadScheduler)
@@ -192,7 +193,7 @@ public class UploadService extends HandlerService<Contribution> {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (ACTION_START_SERVICE.equals(intent.getAction()) && freshStart) {
-            appDatabase.getContributionDao().updateStates(Contribution.STATE_FAILED, new int[]{Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS})
+            contributionDao.updateStates(Contribution.STATE_FAILED, new int[]{Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS})
                     .observeOn(mainThreadScheduler)
                     .subscribeOn(ioThreadScheduler)
                     .subscribe();
@@ -295,7 +296,7 @@ public class UploadService extends HandlerService<Contribution> {
                         contribution.setState(Contribution.STATE_COMPLETED);
                         contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatShort()
                                 .parse(uploadResult.getImageinfo().getTimestamp()));
-                        appDatabase.getContributionDao()
+                        contributionDao
                                 .save(contribution)
                                 .subscribeOn(ioThreadScheduler)
                                 .observeOn(mainThreadScheduler)
@@ -318,7 +319,7 @@ public class UploadService extends HandlerService<Contribution> {
         notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_FAILED, curNotification.build());
 
         contribution.setState(Contribution.STATE_FAILED);
-        appDatabase.getContributionDao().save(contribution)
+        contributionDao.save(contribution)
                 .subscribeOn(ioThreadScheduler)
                 .observeOn(mainThreadScheduler)
                 .subscribe();

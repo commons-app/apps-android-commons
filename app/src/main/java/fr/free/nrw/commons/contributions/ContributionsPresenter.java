@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -65,7 +66,6 @@ public class ContributionsPresenter implements UserActionListener {
     @Inject
     ContributionsPresenter(ContributionsRepository repository, @Named(CommonsApplicationModule.MAIN_THREAD) Scheduler mainThreadScheduler,@Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
         this.repository = repository;
-        compositeDisposable=new CompositeDisposable();
         this.mainThreadScheduler=mainThreadScheduler;
         this.ioThreadScheduler=ioThreadScheduler;
     }
@@ -93,7 +93,7 @@ public class ContributionsPresenter implements UserActionListener {
             Timber.d("fetching contributions: ");
             view.showProgress(true);
             this.user = sessionManager.getUserName();
-            view.showContributions(null);
+            view.showContributions(Collections.emptyList());
             compositeDisposable.add(userClient.logEvents(user)
                     .subscribeOn(ioThreadScheduler)
                     .observeOn(mainThreadScheduler)
@@ -114,16 +114,16 @@ public class ContributionsPresenter implements UserActionListener {
 
     private void showContributions(List<Contribution> contributions) {
         view.showProgress(false);
-        if(!(contributions==null && contributions.size()==0)){
+        if (contributions.size() == 0) {
+            view.showWelcomeTip(true);
+            view.showNoContributionsUI(true);
+        } else {
             view.showWelcomeTip(false);
             view.showNoContributionsUI(false);
             view.setUploadCount(contributions.size());
             view.showContributions(contributions);
             this.contributionList.clear();
             this.contributionList.addAll(contributions);
-        } else {
-            view.showWelcomeTip(true);
-            view.showNoContributionsUI(true);
         }
     }
 
@@ -175,7 +175,7 @@ public class ContributionsPresenter implements UserActionListener {
     @Nullable
     @Override
     public Media getItemAtPosition(int i) {
-        if (i == -1 || contributionList == null || contributionList.size() < i+1) {
+        if (i == -1 || contributionList.size() < i+1) {
             return null;
         }
         return contributionList.get(i);

@@ -28,7 +28,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -55,6 +55,7 @@ public class CommonsApplicationModule {
     private Context applicationContext;
     public static final String IO_THREAD="io_thread";
     public static final String MAIN_THREAD="main_thread";
+    private AppDatabase appDatabase;
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
@@ -235,6 +236,12 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public AppDatabase provideAppDataBase() {
-        return Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db").build();
+        appDatabase=Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db").build();
+        return appDatabase;
+    }
+
+    @Provides
+    public ContributionDao providesContributiosDao() {
+        return appDatabase.getContributionDao();
     }
 }

@@ -7,7 +7,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import io.reactivex.Single;
 
@@ -22,9 +21,9 @@ class ContributionsLocalDataSource {
     @Inject
     public ContributionsLocalDataSource(
             @Named("default_preferences") JsonKvStore defaultKVStore,
-            AppDatabase appDatabase) {
+            ContributionDao contributionDao) {
         this.defaultKVStore = defaultKVStore;
-        this.contributionDao = appDatabase.getContributionDao();
+        this.contributionDao = contributionDao;
     }
 
     /**
@@ -48,7 +47,7 @@ class ContributionsLocalDataSource {
      */
     public Contribution getContributionWithFileName(String uri) {
         List<Contribution> contributionWithUri = contributionDao.getContributionWithTitle(uri);
-        if(null!=contributionWithUri && contributionWithUri.size()>0){
+        if(!contributionWithUri.isEmpty()){
             return contributionWithUri.get(0);
         }
         return null;

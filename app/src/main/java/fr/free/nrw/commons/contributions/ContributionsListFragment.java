@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -74,7 +75,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     private String lastVisibleItemID;
 
     private int SPAN_COUNT=3;
-    private List<Contribution> contributions;
+    private List<Contribution> contributions=new ArrayList<>();
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
@@ -183,8 +184,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     public void setContributions(List<Contribution> contributionList) {
-        this.contributions=contributionList;
-        adapter.setContributions(contributionList);
+        this.contributions.clear();
+        this.contributions.addAll(contributionList);
+        adapter.setContributions(contributions);
     }
 
     public interface SourceRefresher {
