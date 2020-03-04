@@ -243,7 +243,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     // Return true is system wide dark theme is enabled else false
-    public boolean getSystemDefaultThemeBool(String theme) {
+    private boolean getSystemDefaultThemeBool(String theme) {
         switch (theme) {
             case "Dark":
                 return true;
@@ -255,7 +255,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     // Returns the default system wide theme
-    public String getSystemDefaultTheme() {
+    private String getSystemDefaultTheme() {
         if ((getResources().getConfiguration().uiMode &
                 Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
             return "Dark";
