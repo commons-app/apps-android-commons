@@ -130,7 +130,7 @@ public class ContributionsPresenter implements UserActionListener {
 
     private void saveContributionsToDB(List<Contribution> contributions) {
         Timber.e("Fetched: "+contributions.size()+" contributions "+" saving to db");
-        ExecutorUtils.get().submit(() -> repository.save(contributions));
+        repository.save(contributions).subscribeOn(ioThreadScheduler).subscribe();
         repository.set("last_fetch_timestamp",System.currentTimeMillis());
     }
 

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -66,8 +67,8 @@ class ContributionsLocalDataSource {
         return contributionDao.fetchContributions();
     }
 
-    public void saveContributions(List<Contribution> contributions) {
-        contributionDao.deleteAllAndSave(contributions);
+    public Completable saveContributions(List<Contribution> contributions) {
+        return contributionDao.deleteAllAndSave(contributions);
     }
 
     public void set(String key, long value) {

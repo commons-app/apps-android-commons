@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -49,8 +50,8 @@ public class ContributionsRepository {
         return localDataSource.getContributions();
     }
 
-    public void save(List<Contribution> contributions) {
-        localDataSource.saveContributions(contributions);
+    public Completable save(List<Contribution> contributions) {
+        return localDataSource.saveContributions(contributions);
     }
 
     public void set(String key, long value) {

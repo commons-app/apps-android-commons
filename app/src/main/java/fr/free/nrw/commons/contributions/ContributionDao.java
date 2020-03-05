@@ -10,6 +10,7 @@ import androidx.room.Transaction;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 @Dao
@@ -21,8 +22,12 @@ public abstract class ContributionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract Single<Long> save(Contribution contribution);
 
+    public Completable deleteAllAndSave(List<Contribution> contributions){
+        return Completable.fromAction(() -> deleteAllAndSaveTransaction(contributions));
+    }
+
     @Transaction
-    public void  deleteAllAndSave(List<Contribution> contributions){
+    public void deleteAllAndSaveTransaction(List<Contribution> contributions){
         deleteAll(Contribution.STATE_COMPLETED);
         save(contributions);
     }
