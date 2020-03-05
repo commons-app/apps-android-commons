@@ -41,9 +41,9 @@
         <item>@string/theme_light_name</item>
     </array>
 
-    <array name="pref_theme_entries_values">
-        <item>@string/theme_default_value</item>
-        <item>@string/theme_dark_value</item>
-        <item>@string/theme_light_value</item>
-    </array>
+    <string-array name="pref_theme_entries_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

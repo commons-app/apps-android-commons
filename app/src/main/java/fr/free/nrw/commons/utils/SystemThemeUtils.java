@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.settings.Prefs;
 
@@ -23,9 +22,9 @@ public class SystemThemeUtils {
 
     // Return true is system wide dark theme is enabled else false
     public boolean getSystemDefaultThemeBool(String theme) {
-        if (theme.equals(context.getString(R.string.theme_dark_value))) {
+        if (theme.equals("1")) {
             return true;
-        } else if (theme.equals(context.getString(R.string.theme_default_value))) {
+        } else if (theme.equals("0")) {
             return getSystemDefaultThemeBool(getSystemDefaultTheme());
         }
         return false;
@@ -33,11 +32,8 @@ public class SystemThemeUtils {
 
     // Returns the default system wide theme
     public String getSystemDefaultTheme() {
-        if ((context.getResources().getConfiguration().uiMode &
-                Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
-            return context.getString(R.string.theme_dark_value);
-        }
-        return context.getString(R.string.theme_light_value);
+        return (context.getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES ? "1" : "2";
     }
 
     // Returns true if the device is in night mode or false otherwise

@@ -149,28 +149,25 @@ public class SettingsFragment extends PreferenceFragment {
     private void prepareTheme() {
 
         String currentTheme = getCurrentTheme();
-        if (currentTheme.equals("")){
-            // If current theme code is empty, means none selected by user yet so use default
-            themeListPreference.setSummary(getString(R.string.theme_default_name));
-            themeListPreference.setValue(getString(R.string.theme_default_value));
-        } else {
-            // If any theme is selected by user previously, use it
-            int prefIndex = themeListPreference.findIndexOfValue(currentTheme);
-            themeListPreference.setSummary(themeListPreference.getEntries()[prefIndex]);
-            themeListPreference.setValue(currentTheme);
-        }
+
+        themeListPreference.setSummary(getThemeSummary(currentTheme));
+        themeListPreference.setValue(currentTheme);
 
         themeListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
             String userSelectedValue = (String) newValue;
-            int prefIndex = themeListPreference.findIndexOfValue(userSelectedValue);
-            themeListPreference.setSummary(themeListPreference.getEntries()[prefIndex]);
+            themeListPreference.setSummary(getThemeSummary(userSelectedValue));
             getActivity().recreate();
             return true;
         });
     }
 
+    private CharSequence getThemeSummary(String value) {
+        int prefIndex = themeListPreference.findIndexOfValue(value);
+        return themeListPreference.getEntries()[prefIndex];
+    }
+
     private String getCurrentTheme() {
-        return defaultKvStore.getString(Prefs.KEY_THEME_VALUE, getString(R.string.theme_default_name));
+        return defaultKvStore.getString(Prefs.KEY_THEME_VALUE, "0");
     }
 
     /**
