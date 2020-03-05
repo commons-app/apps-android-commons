@@ -523,15 +523,6 @@ public class ContributionsFragment
         updateClosestNearbyCardViewInfo();
     }
 
-    @Override
-    public void changeDialogState(boolean enableDialog) {
-        if (enableDialog) {
-            Timber.d("Location Off dialog enabled");
-        } else {
-            Timber.d("Location Off dialog disabled");
-        }
-    }
-
     @Override public void onViewCreated(@NonNull View view,
         @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

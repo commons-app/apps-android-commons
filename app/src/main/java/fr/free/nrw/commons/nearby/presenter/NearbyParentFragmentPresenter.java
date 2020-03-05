@@ -258,15 +258,6 @@ public class NearbyParentFragmentPresenter
     }
 
     @Override
-    public void changeDialogState(boolean enableDialog) {
-        if (enableDialog) {
-            Timber.d("Location Off dialog enabled");
-        } else {
-            Timber.d("Location Off dialog disabled");
-        }
-    }
-
-    @Override
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
             // If our nearby markers are calculated at least once
             if (NearbyController.latestSearchLocation != null) {

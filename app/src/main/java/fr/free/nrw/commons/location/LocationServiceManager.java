@@ -212,11 +212,6 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         Timber.d("Provider %s disabled", provider);
-        // Prompt user to enable location using a dialog box
-        for (LocationUpdateListener listener : locationListeners) {
-            listener.changeDialogState(true);
-        }
-
     }
 
     public boolean isLocationEnabled() {
