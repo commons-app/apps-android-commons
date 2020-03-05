@@ -14,9 +14,9 @@ public class SystemThemeUtils {
     private Context context;
     private JsonKvStore applicationKvStore;
 
-    public final String THEME_MODE_DEFAULT = "0";
-    public final String THEME_MODE_DARK = "1";
-    public final String THEME_MODE_LIGHT = "2";
+    public static final String THEME_MODE_DEFAULT = "0";
+    public static final String THEME_MODE_DARK = "1";
+    public static final String THEME_MODE_LIGHT = "2";
 
     @Inject
     public SystemThemeUtils(Context context, @Named("default_preferences") JsonKvStore applicationKvStore) {

@@ -32,8 +32,9 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.upload.Language;
 import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+
+import static fr.free.nrw.commons.utils.SystemThemeUtils.THEME_MODE_DEFAULT;
 
 public class SettingsFragment extends PreferenceFragment {
 
@@ -43,9 +44,6 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Inject
     CommonsLogSender commonsLogSender;
-
-    @Inject
-    SystemThemeUtils systemThemeUtils;
 
     private ListPreference themeListPreference;
     private ListPreference langListPreference;
@@ -167,7 +165,7 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private String getCurrentTheme() {
-        return defaultKvStore.getString(Prefs.KEY_THEME_VALUE, systemThemeUtils.THEME_MODE_DEFAULT);
+        return defaultKvStore.getString(Prefs.KEY_THEME_VALUE, THEME_MODE_DEFAULT);
     }
 
     /**
