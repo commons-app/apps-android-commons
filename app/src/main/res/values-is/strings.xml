@@ -115,8 +115,7 @@
   <string name="use_previous" fuzzy="true">Nota fyrri titil/lýsingu</string>
   <string name="allow_gps">Ná sjálfvirkt í núverandi staðsetningu</string>
   <string name="allow_gps_summary">Les núverandi staðsetningu til að geta stungið upp á flokkum ef myndin er ekki með hnattstaðsetningarhnitum. Aðvörun: þetta mun koma upp um staðsetninguna þína.</string>
-  <string name="preference_theme">Næturhamur</string>
-  <string name="preference_theme_summary">Nota dökkt þema</string>
+  <string name="preference_theme" fuzzy="true">Næturhamur</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

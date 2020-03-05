@@ -119,8 +119,7 @@
   <string name="preference_license">Berezko lizentzia</string>
   <string name="use_previous" fuzzy="true">Aurreko izenburu/deskribapena erabili</string>
   <string name="allow_gps">Oraingo kokapena automatikoki lortu</string>
-  <string name="preference_theme">Gau modua</string>
-  <string name="preference_theme_summary">Gai iluna erabili</string>
+  <string name="preference_theme" fuzzy="true">Gau modua</string>
   <string name="license_name_cc_by_sa_four"> Aitortu-PartekatuBerdin 4.0</string>
   <string name="license_name_cc_by_four">Aitortu 4.0</string>
   <string name="license_name_cc_by_sa"> Aitortu-PartekatuBerdin 3.0</string>

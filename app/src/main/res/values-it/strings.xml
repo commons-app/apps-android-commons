@@ -127,8 +127,7 @@
   <string name="use_previous">Utilizza titolo e descrizione precedente</string>
   <string name="allow_gps">Ottieni automaticamente l\'attuale posizione</string>
   <string name="allow_gps_summary">Recupera la posizione corrente se l\'immagine non è georeferenziata e geotag l\'immagine con essa. Avviso: questo rivelerà la tua posizione attuale.</string>
-  <string name="preference_theme">Modalità notte</string>
-  <string name="preference_theme_summary">Utilizza il tema scuro</string>
+  <string name="preference_theme" fuzzy="true">Modalità notte</string>
   <string name="license_name_cc_by_sa_four"> Attribuzione-Condividi allo stesso modo 4.0</string>
   <string name="license_name_cc_by_four"> Attribuzione 4.0</string>
   <string name="license_name_cc_by_sa"> Attribuzione-Condividi allo stesso modo 3.0</string>

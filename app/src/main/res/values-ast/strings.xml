@@ -116,8 +116,7 @@
   <string name="use_previous">Usar un títulu y descripción anterior</string>
   <string name="allow_gps">Llograr automáticamente l\'allugamientu actual</string>
   <string name="allow_gps_summary">Recupera la posición actual si la imaxe nun tien etiquetes xeográfiques, y marca la imaxe con ella. Atención: Esto revelará\'l to allugamientu actual.</string>
-  <string name="preference_theme">Mou nocherniegu</string>
-  <string name="preference_theme_summary">Usar tema escuru</string>
+  <string name="preference_theme" fuzzy="true">Mou nocherniegu</string>
   <string name="license_name_cc_by_sa_four"> Reconocimientu-CompartirIgual 4.0</string>
   <string name="license_name_cc_by_four"> Reconocimientu 4.0</string>
   <string name="license_name_cc_by_sa"> Reconocimientu-CompartirIgual 3.0</string>

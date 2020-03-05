@@ -116,8 +116,7 @@
   <string name="use_previous" fuzzy="true">మునుపటి శీర్షిక/వివరణను వాడు</string>
   <string name="allow_gps">ప్రస్తుత స్థలాన్ని ఆటోమాటిగ్గా తెచ్చుకో</string>
   <string name="allow_gps_summary">బొమ్మలో జియోట్యాగు లేకపోతే, ప్రస్తుత స్థలాన్ని తీసుకుని దాన్నే జియోట్యాగుగా తగిలిస్తుంది.\nహెచ్చరిక: ఇది మీ ప్రస్తుత స్థలాన్ని బయట పెడుతుంది.</string>
-  <string name="preference_theme">చీకటి రీతి</string>
-  <string name="preference_theme_summary">చీకటి థీమును వాడు</string>
+  <string name="preference_theme" fuzzy="true">చీకటి రీతి</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

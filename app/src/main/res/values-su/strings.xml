@@ -117,8 +117,7 @@
   <string name="use_previous">Paké judul jeung dadaran saméméhna</string>
   <string name="allow_gps">Comot lokasi sacara otomatis</string>
   <string name="allow_gps_summary">Catet lokasi ayeuna lamun gambar tanpa géotag, jeung géotagan gambarna. Perhatian: Ieu bakal ngungkab lokasi anjeun ayeuna.</string>
-  <string name="preference_theme">Modus peuting</string>
-  <string name="preference_theme_summary">Gunakeun téma cakueum</string>
+  <string name="preference_theme" fuzzy="true">Modus peuting</string>
   <string name="license_name_cc_by_sa_four">Atribusi-BabagiSarupa 4.0</string>
   <string name="license_name_cc_by_four">Atribusi 4.0</string>
   <string name="license_name_cc_by_sa">Atribusi-BabagiSarupa 3.0</string>

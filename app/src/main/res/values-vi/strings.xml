@@ -117,8 +117,7 @@
   <string name="use_previous" fuzzy="true">Sử dụng tiêu đề/miêu tả trước</string>
   <string name="allow_gps">Lấy vị trí hiện tại tự động</string>
   <string name="allow_gps_summary" fuzzy="true">Định vị hiện tại để nhận gợi ý thể loại trong trường hợp hình ảnh chưa được gắn thẻ địa lý</string>
-  <string name="preference_theme">Chế độ ban đêm</string>
-  <string name="preference_theme_summary">Dùng chủ đề tối</string>
+  <string name="preference_theme" fuzzy="true">Chế độ ban đêm</string>
   <string name="license_name_cc_by_sa_four">Ghi công–Chia sẻ tương tự 4.0</string>
   <string name="license_name_cc_by_four">Ghi công 4.0</string>
   <string name="license_name_cc_by_sa">Ghi công–Chia sẻ tương tự 3.0</string>

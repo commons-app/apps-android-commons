@@ -114,8 +114,7 @@
   <string name="use_previous" fuzzy="true">Koristi prethodan naslov/opis</string>
   <string name="allow_gps">Automatski dobavljaj trenutnu lokaciju</string>
   <string name="allow_gps_summary">Stavlja geooznaku s trenutne lokacije (ako je nema). Upozorenje: to će vam otkriti nalazište.</string>
-  <string name="preference_theme">Noćni režim</string>
-  <string name="preference_theme_summary">Koristiti tamnu temu</string>
+  <string name="preference_theme" fuzzy="true">Noćni režim</string>
   <string name="license_name_cc_by_sa_four">Autorstvo-Dijeliti pod istim uslovima 4.0</string>
   <string name="license_name_cc_by_four"> Autorstvo 4.0</string>
   <string name="license_name_cc_by_sa"> Autorstvo-Dijeliti pod istim uslovima 3.0</string>

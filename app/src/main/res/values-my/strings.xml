@@ -91,8 +91,7 @@
   <string name="preference_license">နဂို လိုင်စင်</string>
   <string name="use_previous" fuzzy="true">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် သုံးမည်</string>
   <string name="allow_gps">လက်ရှိနေရာကို အလိုအလျောက်ယူရန်</string>
-  <string name="preference_theme">ညကြည့်ပုံစံ</string>
-  <string name="preference_theme_summary">အမှောင်မြင်ကွင်း သုံးမည်</string>
+  <string name="preference_theme" fuzzy="true">ညကြည့်ပုံစံ</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

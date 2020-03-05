@@ -112,8 +112,7 @@
   <string name="use_previous" fuzzy="true">Koristi prethodan naslov/opis</string>
   <string name="allow_gps">Automatski dobavi trenutnu lokaciju</string>
   <string name="allow_gps_summary">Prima trenutnu lokaciju ako slika nije geotagovana i geotaguje istu njome. Upozorenje: Ovime će da se otkrije Vaša trenutna lokacija.</string>
-  <string name="preference_theme">Noćni režim</string>
-  <string name="preference_theme_summary">Koristiti tamnu temu</string>
+  <string name="preference_theme" fuzzy="true">Noćni režim</string>
   <string name="license_name_cc_by_sa_four">Autorstvo-Deliti pod istim uslovima 4.0</string>
   <string name="license_name_cc_by_four">Autorstvo 4.0</string>
   <string name="license_name_cc_by_sa">Autorstvo-Deliti pod istim uslovima 3.0</string>

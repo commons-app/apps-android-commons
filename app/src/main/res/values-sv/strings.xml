@@ -121,8 +121,7 @@
   <string name="use_previous">Använd föregående titel och beskrivning</string>
   <string name="allow_gps">Hämta aktuell plats automatiskt</string>
   <string name="allow_gps_summary">Hämtar aktuell plats om bilden inte är geotaggad och geotaggar bilden med den. Varning: Detta kommer att avslöja din nuvarande position.</string>
-  <string name="preference_theme">Nattläge</string>
-  <string name="preference_theme_summary">Använd mörkt tema</string>
+  <string name="preference_theme" fuzzy="true">Nattläge</string>
   <string name="license_name_cc_by_sa_four">Erkännande-DelaLika 4.0</string>
   <string name="license_name_cc_by_four">Erkännande 4.0</string>
   <string name="license_name_cc_by_sa"> Erkännande-DelaLika 3.0</string>
@@ -562,6 +561,9 @@
   <string name="you_must_reset_your_passsword">Någonting gick fel med inloggningen, du måste återställa ditt lösenord!</string>
   <string name="upload_nearby_place_found_title">Hittade platser i närheten</string>
   <string name="upload_nearby_place_found_description">Är detta ett foto av platsen %1$s?</string>
+  <string name="title_app_shortcut_explore">Utforska</string>
+  <string name="title_app_shortcut_bookmark">Bokmärken</string>
+  <string name="title_app_shortcut_setting">Inställningar</string>
   <string name="remove_bookmark">Togs bort från bokmärken</string>
   <string name="add_bookmark">Lades till i bokmärken</string>
   <string name="wallpaper_set_unsuccessfully">Någonting gick fel. Kunde inte ändra bakgrundsbild</string>

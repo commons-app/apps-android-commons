@@ -118,8 +118,7 @@
   <string name="use_previous">Použiť predchádzajúci názov a popis</string>
   <string name="allow_gps">Automaticky získať súčasnú polohu</string>
   <string name="allow_gps_summary">Získať súčasnú polohu a pokiaľ obrázok neobsahuje zemepisné súradnice, pridať ich k nemu. Upozornenie: Toto odhalí vašu súčasnú polohu.</string>
-  <string name="preference_theme">Nočný režim</string>
-  <string name="preference_theme_summary">Použiť tmavú tému vzhľadu</string>
+  <string name="preference_theme" fuzzy="true">Nočný režim</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -559,4 +558,12 @@
   <string name="you_must_reset_your_passsword">Pri prihlásení nastala chyba, musíte si resetovať vaše heslo!</string>
   <string name="upload_nearby_place_found_title">Miesto v okolí nájdené</string>
   <string name="upload_nearby_place_found_description">Je toto fotka miesta %1$s?</string>
+  <string name="title_app_shortcut_explore">Objaviť</string>
+  <string name="title_app_shortcut_bookmark">Záložky</string>
+  <string name="title_app_shortcut_setting">Nastavenia</string>
+  <string name="remove_bookmark">Odstránené zo záložiek</string>
+  <string name="add_bookmark">Pridané do záložiek</string>
+  <string name="wallpaper_set_unsuccessfully">Niečo sa pokazilo. Tapetu sa nepodarilo nastaviť</string>
+  <string name="setting_wallpaper_dialog_title">Nastaviť ako tapetu</string>
+  <string name="setting_wallpaper_dialog_message">Nastavujem tapetu. Prosím, čakajte...</string>
 </resources>
