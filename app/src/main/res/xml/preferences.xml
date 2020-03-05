@@ -10,6 +10,7 @@
             android:title= "@string/preference_theme"
             android:entries="@array/pref_theme_entries"
             android:entryValues="@array/pref_theme_entries_values"
+            android:defaultValue="0"
             android:summary="@string/theme_default_name" />
 
     </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>

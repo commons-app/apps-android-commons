@@ -148,10 +148,7 @@ public class SettingsFragment extends PreferenceFragment {
      */
     private void prepareTheme() {
 
-        String currentTheme = getCurrentTheme();
-
-        themeListPreference.setSummary(getThemeSummary(currentTheme));
-        themeListPreference.setValue(currentTheme);
+        themeListPreference.setSummary(getThemeSummary(getCurrentTheme()));
 
         themeListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
             getActivity().recreate();
