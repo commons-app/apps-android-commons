@@ -25,6 +25,7 @@ class UITestHelper {
         fun loginUser() {
             try {
                 //Perform Login
+                sleep(3000)
                 onView(ViewMatchers.withId(R.id.login_username))
                         .perform(ViewActions.clearText(), ViewActions.typeText(getTestUsername()))
                 closeSoftKeyboard()
