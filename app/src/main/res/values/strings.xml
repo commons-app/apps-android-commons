@@ -113,8 +113,7 @@
   <string name="use_previous">Use previous title and description</string>
   <string name="allow_gps">Automatically get current location</string>
   <string name="allow_gps_summary">Retrieves current location if image is not geotagged, and geotags image with it. Warning: This will reveal your current location.</string>
-  <string name="preference_theme">Night mode</string>
-  <string name="preference_theme_summary">Use dark theme</string>
+  <string name="preference_theme">Theme</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -599,4 +598,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="wallpaper_set_unsuccessfully">Something went wrong. Could not set the wallpaper</string>
   <string name="setting_wallpaper_dialog_title">Set as Wallpaper</string>
   <string name="setting_wallpaper_dialog_message">Setting Wallpaper. Please wait…</string>
+  <string name="theme_default_name">Default</string>
+  <string name="theme_dark_name">Dark</string>
+  <string name="theme_light_name">Light</string>
 </resources>

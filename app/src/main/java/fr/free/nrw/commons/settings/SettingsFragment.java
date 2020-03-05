@@ -12,18 +12,15 @@ import android.preference.SwitchPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-import com.google.gson.reflect.TypeToken;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,14 +34,19 @@ import fr.free.nrw.commons.upload.Language;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 
+import static fr.free.nrw.commons.utils.SystemThemeUtils.THEME_MODE_DEFAULT;
+
 public class SettingsFragment extends PreferenceFragment {
 
     @Inject
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
+
     @Inject
     CommonsLogSender commonsLogSender;
-    private ListPreference listPreference;
+
+    private ListPreference themeListPreference;
+    private ListPreference langListPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,11 +59,8 @@ public class SettingsFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
-        SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
-        themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            getActivity().recreate();
-            return true;
-        });
+        themeListPreference = (ListPreference) findPreference(Prefs.KEY_THEME_VALUE);
+        prepareTheme();
 
         //Check if the Author Name switch is enabled and appropriately handle the author name usage
         SwitchPreference useAuthorName = (SwitchPreference) findPreference("useAuthorName");
@@ -117,7 +116,7 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
-        listPreference = (ListPreference) findPreference("descriptionDefaultLanguagePref");
+        langListPreference = (ListPreference) findPreference("descriptionDefaultLanguagePref");
         prepareLanguages();
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
@@ -145,9 +144,31 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     /**
+     * Uses previously saved theme if there is any, if not then uses default.
+     */
+    private void prepareTheme() {
+
+        themeListPreference.setSummary(getThemeSummary(getCurrentTheme()));
+
+        themeListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            getActivity().recreate();
+            return true;
+        });
+    }
+
+    private CharSequence getThemeSummary(String value) {
+        int prefIndex = themeListPreference.findIndexOfValue(value);
+        return themeListPreference.getEntries()[prefIndex];
+    }
+
+    private String getCurrentTheme() {
+        return defaultKvStore.getString(Prefs.KEY_THEME_VALUE, THEME_MODE_DEFAULT);
+    }
+
+    /**
      * Prepares language summary and language codes list and adds them to list preference as pairs.
      * Uses previously saved language if there is any, if not uses phone local as initial language.
-     * Adds preference changed listener and saves value choosen by user to shared preferences
+     * Adds preference changed listener and saves value chosen by user to shared preferences
      * to remember later
      */
     private void prepareLanguages() {
@@ -167,26 +188,26 @@ public class SettingsFragment extends PreferenceFragment {
         CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
         CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
         // Add all languages and languages codes to lists preference as pair
-        listPreference.setEntries(languageNames);
-        listPreference.setEntryValues(languageCodes);
+        langListPreference.setEntries(languageNames);
+        langListPreference.setEntryValues(languageCodes);
 
         // Gets current language code from shared preferences
         String languageCode = getCurrentLanguageCode();
-        if(languageCode.equals("")){
+        if (languageCode.equals("")){
             // If current language code is empty, means none selected by user yet so use phone local
-            listPreference.setSummary(Locale.getDefault().getDisplayLanguage());
-            listPreference.setValue(Locale.getDefault().getLanguage());
+            langListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
+            langListPreference.setValue(Locale.getDefault().getLanguage());
         } else {
             // If any language is selected by user previously, use it
-            int prefIndex = listPreference.findIndexOfValue(languageCode);
-            listPreference.setSummary(listPreference.getEntries()[prefIndex]);
-            listPreference.setValue(languageCode);
+            int prefIndex = langListPreference.findIndexOfValue(languageCode);
+            langListPreference.setSummary(langListPreference.getEntries()[prefIndex]);
+            langListPreference.setValue(languageCode);
         }
 
-        listPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+        langListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
             String userSelectedValue = (String) newValue;
-            int prefIndex = listPreference.findIndexOfValue(userSelectedValue);
-            listPreference.setSummary(listPreference.getEntries()[prefIndex]);
+            int prefIndex = langListPreference.findIndexOfValue(userSelectedValue);
+            langListPreference.setSummary(langListPreference.getEntries()[prefIndex]);
             saveLanguageValue(userSelectedValue);
             return true;
         });

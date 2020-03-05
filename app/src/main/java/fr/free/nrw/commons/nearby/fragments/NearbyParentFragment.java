@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -93,6 +92,7 @@ import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
@@ -156,6 +156,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Inject ContributionController controller;
     @Inject WikidataEditListener wikidataEditListener;
 
+    @Inject
+    SystemThemeUtils systemThemeUtils;
+
     private NearbyFilterSearchRecyclerViewAdapter nearbyFilterSearchRecyclerViewAdapter;
 
     private BottomSheetBehavior bottomSheetListBehavior;
@@ -210,7 +213,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        isDarkTheme = applicationKvStore.getBoolean("theme", false);
+        isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
         addCheckBoxCallback();
         presenter.attachView(this);
@@ -821,10 +824,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void showFABs() {
-            NearbyFABUtils.addAnchorToBigFABs(fabPlus, bottomSheetDetails.getId());
-            fabPlus.show();
-            NearbyFABUtils.addAnchorToSmallFABs(fabGallery, getView().findViewById(R.id.empty_view).getId());
-            NearbyFABUtils.addAnchorToSmallFABs(fabCamera, getView().findViewById(R.id.empty_view1).getId());
+        NearbyFABUtils.addAnchorToBigFABs(fabPlus, bottomSheetDetails.getId());
+        fabPlus.show();
+        NearbyFABUtils.addAnchorToSmallFABs(fabGallery, getView().findViewById(R.id.empty_view).getId());
+        NearbyFABUtils.addAnchorToSmallFABs(fabCamera, getView().findViewById(R.id.empty_view1).getId());
     }
 
     /**
