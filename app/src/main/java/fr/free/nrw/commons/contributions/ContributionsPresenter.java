@@ -115,7 +115,7 @@ public class ContributionsPresenter implements UserActionListener {
 
     private void showContributions(@NonNull List<Contribution> contributions) {
         view.showProgress(false);
-        if (contributions.size() == 0) {
+        if (contributions.isEmpty()) {
             view.showWelcomeTip(true);
             view.showNoContributionsUI(true);
         } else {
