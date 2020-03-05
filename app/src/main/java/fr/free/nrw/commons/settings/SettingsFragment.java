@@ -32,6 +32,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.upload.Language;
 import fr.free.nrw.commons.utils.PermissionUtils;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 
 public class SettingsFragment extends PreferenceFragment {
@@ -42,6 +43,9 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Inject
     CommonsLogSender commonsLogSender;
+
+    @Inject
+    SystemThemeUtils systemThemeUtils;
 
     private ListPreference themeListPreference;
     private ListPreference langListPreference;
@@ -143,8 +147,6 @@ public class SettingsFragment extends PreferenceFragment {
 
     /**
      * Uses previously saved theme if there is any, if not then uses default.
-     * Adds preference theme listener and saves value chosen by user to shared preferences
-     * to remember later
      */
     private void prepareTheme() {
 
@@ -154,8 +156,6 @@ public class SettingsFragment extends PreferenceFragment {
         themeListPreference.setValue(currentTheme);
 
         themeListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            String userSelectedValue = (String) newValue;
-            themeListPreference.setSummary(getThemeSummary(userSelectedValue));
             getActivity().recreate();
             return true;
         });
@@ -167,7 +167,7 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private String getCurrentTheme() {
-        return defaultKvStore.getString(Prefs.KEY_THEME_VALUE, "0");
+        return defaultKvStore.getString(Prefs.KEY_THEME_VALUE, systemThemeUtils.THEME_MODE_DEFAULT);
     }
 
     /**
