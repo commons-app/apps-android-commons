@@ -29,7 +29,6 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
@@ -37,6 +36,7 @@ import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.SingleObserver;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -65,6 +65,7 @@ public class UploadService extends HandlerService<Contribution> {
     private NotificationManagerCompat notificationManager;
     private NotificationCompat.Builder curNotification;
     private int toUpload;
+    private CompositeDisposable compositeDisposable;
 
     /**
      * The filePath names of unfinished uploads, used to prevent overwriting
@@ -114,10 +115,10 @@ public class UploadService extends HandlerService<Contribution> {
             notificationManager.notify(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
 
             contribution.setTransferred(transferred);
-            contributionDao.
+            compositeDisposable.add(contributionDao.
                     save(contribution).subscribeOn(ioThreadScheduler)
                     .observeOn(mainThreadScheduler)
-                    .subscribe();
+                    .subscribe());
         }
 
     }
@@ -125,6 +126,7 @@ public class UploadService extends HandlerService<Contribution> {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        compositeDisposable.dispose();
         Timber.d("UploadService.onDestroy; %s are yet to be uploaded", unfinishedUploads);
     }
 
@@ -132,6 +134,7 @@ public class UploadService extends HandlerService<Contribution> {
     public void onCreate() {
         super.onCreate();
         CommonsApplication.createNotificationChannel(getApplicationContext());
+        compositeDisposable = new CompositeDisposable();
         notificationManager = NotificationManagerCompat.from(this);
         curNotification = getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
     }
@@ -161,27 +164,14 @@ public class UploadService extends HandlerService<Contribution> {
                     Timber.d("%d uploads left", toUpload);
                     notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification.build());
                 }
-                contributionDao
+                compositeDisposable.add(contributionDao
                         .save(contribution)
                         .subscribeOn(ioThreadScheduler)
                         .observeOn(mainThreadScheduler)
-                        .subscribe(new SingleObserver<Long>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-
-                            }
-
-                            @Override
-                            public void onSuccess(Long aLong) {
-                                contribution._id = aLong;
-                                UploadService.super.queue(what, contribution);
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-                        });
+                        .subscribe(aLong->{
+                            contribution._id = aLong;
+                            UploadService.super.queue(what, contribution);
+                        }, Throwable::printStackTrace));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown value for what");
@@ -193,10 +183,10 @@ public class UploadService extends HandlerService<Contribution> {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (ACTION_START_SERVICE.equals(intent.getAction()) && freshStart) {
-            contributionDao.updateStates(Contribution.STATE_FAILED, new int[]{Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS})
+            compositeDisposable.add(contributionDao.updateStates(Contribution.STATE_FAILED, new int[]{Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS})
                     .observeOn(mainThreadScheduler)
                     .subscribeOn(ioThreadScheduler)
-                    .subscribe();
+                    .subscribe());
             freshStart = false;
         }
         return START_REDELIVER_INTENT;
@@ -296,11 +286,11 @@ public class UploadService extends HandlerService<Contribution> {
                         contribution.setState(Contribution.STATE_COMPLETED);
                         contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatShort()
                                 .parse(uploadResult.getImageinfo().getTimestamp()));
-                        contributionDao
+                        compositeDisposable.add(contributionDao
                                 .save(contribution)
                                 .subscribeOn(ioThreadScheduler)
                                 .observeOn(mainThreadScheduler)
-                                .subscribe();
+                                .subscribe());
                     }
                 }, throwable -> {
                     Timber.w(throwable, "Exception during upload");
@@ -319,10 +309,10 @@ public class UploadService extends HandlerService<Contribution> {
         notificationManager.notify(contribution.getLocalUri().toString(), NOTIFICATION_UPLOAD_FAILED, curNotification.build());
 
         contribution.setState(Contribution.STATE_FAILED);
-        contributionDao.save(contribution)
+        compositeDisposable.add(contributionDao.save(contribution)
                 .subscribeOn(ioThreadScheduler)
                 .observeOn(mainThreadScheduler)
-                .subscribe();
+                .subscribe());
     }
 
     private String findUniqueFilename(String fileName) throws IOException {
