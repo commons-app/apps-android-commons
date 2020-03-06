@@ -1,12 +1,13 @@
 plugins {
-    id 'com.github.triplet.play' version '2.2.1' apply false
+    id 'com.github.triplet.play' version '2.7.2' apply false
 }
 apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'jacoco-android'
+apply plugin: "com.hiya.jacoco-android"
 apply from: 'quality.gradle'
+
 
 def isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file('../play.p12').exists()
 
