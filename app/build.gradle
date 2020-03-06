@@ -8,7 +8,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "com.hiya.jacoco-android"
 apply from: 'quality.gradle'
 
-
 def isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file('../play.p12').exists()
 
 if(isRunningOnTravisAndIsNotPRBuild) {
