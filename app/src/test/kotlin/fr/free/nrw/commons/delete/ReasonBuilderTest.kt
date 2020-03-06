@@ -55,7 +55,7 @@ class ReasonBuilderTest {
         `when`(okHttpJsonApiClient!!.getAchievements(anyString()))
                 .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
 
-        val media = mock(Media::class.java)
+        val media = Media("test_file")
         media.dateUploaded=Date()
 
         reasonBuilder!!.getReason(media, "test")

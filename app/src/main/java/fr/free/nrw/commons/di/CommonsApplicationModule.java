@@ -241,7 +241,7 @@ public class CommonsApplicationModule {
     }
 
     @Provides
-    public ContributionDao providesContributiosDao() {
+    public ContributionDao providesContributionsDao() {
         return appDatabase.getContributionDao();
     }
 }
