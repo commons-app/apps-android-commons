@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.categories.CategoriesContract
@@ -11,7 +12,6 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
 /**
@@ -19,22 +19,18 @@ import org.mockito.MockitoAnnotations
  */
 class CategoriesPresenterTest {
     @Mock
-    internal var repository: UploadRepository? = null
+    internal lateinit var repository: UploadRepository
     @Mock
-    internal var view: CategoriesContract.View? = null
+    internal lateinit var view: CategoriesContract.View
 
-    var categoriesPresenter: CategoriesPresenter? = null
+    private lateinit var categoriesPresenter: CategoriesPresenter
 
-    var testScheduler: TestScheduler? = null
+    private lateinit var testScheduler: TestScheduler
 
-    val categoryItems: ArrayList<CategoryItem> = ArrayList()
+    private val categoryItems: ArrayList<CategoryItem> = ArrayList()
 
     @Mock
     lateinit var categoryItem: CategoryItem
-
-    var testObservable: Observable<CategoryItem>? = null
-
-    private val imageTitleList = ArrayList<String>()
 
     /**
      * initial setup
@@ -45,9 +41,8 @@ class CategoriesPresenterTest {
         MockitoAnnotations.initMocks(this)
         testScheduler = TestScheduler()
         categoryItems.add(categoryItem)
-        testObservable = Observable.just(categoryItem)
         categoriesPresenter = CategoriesPresenter(repository, testScheduler, testScheduler)
-        categoriesPresenter?.onAttachView(view)
+        categoriesPresenter.onAttachView(view)
     }
 
     /**
@@ -55,16 +50,16 @@ class CategoriesPresenterTest {
      */
     @Test
     fun searchForCategoriesTest() {
-        Mockito.`when`(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        Mockito.`when`(repository?.selectedCategories).thenReturn(categoryItems)
-        Mockito.`when`(repository?.searchAll(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
-        categoriesPresenter?.searchForCategories("test")
-        verify(view)?.showProgress(true)
-        verify(view)?.showError(null)
-        verify(view)?.setCategories(null)
-        testScheduler?.triggerActions()
-        verify(view)?.setCategories(categoryItems)
-        verify(view)?.showProgress(false)
+        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
+        whenever(repository.selectedCategories).thenReturn(categoryItems)
+        whenever(repository.searchAll(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        categoriesPresenter.searchForCategories("test")
+        verify(view).showProgress(true)
+        verify(view).showError(null)
+        verify(view).setCategories(null)
+        testScheduler.triggerActions()
+        verify(view).setCategories(categoryItems)
+        verify(view).showProgress(false)
     }
 
     /**
@@ -72,10 +67,10 @@ class CategoriesPresenterTest {
      */
     @Test
     fun verifyCategoriesTest() {
-        Mockito.`when`(repository?.selectedCategories).thenReturn(categoryItems)
-        categoriesPresenter?.verifyCategories()
-        verify(repository)?.setSelectedCategories(ArgumentMatchers.anyList())
-        verify(view)?.goToNextScreen()
+        whenever(repository.selectedCategories).thenReturn(categoryItems)
+        categoriesPresenter.verifyCategories()
+        verify(repository).setSelectedCategories(ArgumentMatchers.anyList())
+        verify(view).goToNextScreen()
     }
 
     /**
@@ -83,7 +78,7 @@ class CategoriesPresenterTest {
      */
     @Test
     fun onCategoryItemClickedTest() {
-        categoriesPresenter?.onCategoryItemClicked(categoryItem)
-        verify(repository)?.onCategoryClicked(categoryItem)
+        categoriesPresenter.onCategoryItemClicked(categoryItem)
+        verify(repository).onCategoryClicked(categoryItem)
     }
 }
