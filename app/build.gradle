@@ -110,7 +110,7 @@ android {
     buildToolsVersion "28.0.3"
 
     defaultConfig {
-        applicationId 'fr.free.nrw.commons'
+        //applicationId 'fr.free.nrw.commons'
         versionCode 561
         versionName '2.12.3'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
