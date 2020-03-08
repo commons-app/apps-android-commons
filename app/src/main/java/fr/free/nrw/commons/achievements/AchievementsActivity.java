@@ -110,6 +110,9 @@ public class AchievementsActivity extends NavigationBaseActivity {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    // To keep track of the number of wiki edits made by a user
+    private int numberOfEdits = 0;
+
     /**
      * This method helps in the creation Achievement screen and
      * dynamically set the size of imageView
@@ -140,8 +143,8 @@ public class AchievementsActivity extends NavigationBaseActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         hideLayouts();
-        setAchievements();
         setWikidataEditCount();
+        setAchievements();
         initDrawer();
     }
 
@@ -230,12 +233,24 @@ public class AchievementsActivity extends NavigationBaseActivity {
                                         Timber.d("success");
                                         layoutImageReverts.setVisibility(View.INVISIBLE);
                                         imageView.setVisibility(View.INVISIBLE);
-                                        showSnackBarWithRetry();
+                                        // If the number of edits made by the user are more than 150,000
+                                        // in some cases such high number of wiki edit counts cause the 
+                                        // achievements calculator to fail in some cases, for more details
+                                        // refer Issue: #3295
+                                        if (numberOfEdits <= 150000) {
+                                            showSnackBarWithRetry();
+                                        } else {
+                                            showSnackBarUltimateAchievementWithRetry();
+                                        }
                                     }
                                 },
                                 t -> {
                                     Timber.e(t, "Fetching achievements statistics failed");
-                                    showSnackBarWithRetry();
+                                    if (numberOfEdits <= 150000) {
+                                        showSnackBarWithRetry();
+                                    } else {
+                                        showSnackBarUltimateAchievementWithRetry();
+                                    }
                                 }
                         ));
             }
@@ -259,7 +274,10 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(edits -> wikidataEditsText.setText(String.valueOf(edits)), e -> {
+                .subscribe(edits -> {
+                    numberOfEdits += edits;
+                    wikidataEditsText.setText(String.valueOf(edits));
+                }, e -> {
                     Timber.e("Error:" + e);
                 }));
     }
@@ -272,6 +290,17 @@ public class AchievementsActivity extends NavigationBaseActivity {
         progressBar.setVisibility(View.GONE);
         ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
                 R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
+    }
+
+    /**
+     * Shows a snack bar which tells the users that their wiki edit count is so high that it (in some cases)
+     * wreks havoc with the Achievements calculator due to which request may time out
+     * Well this is the Ultimate Achievement 
+     */
+    private void showSnackBarUltimateAchievementWithRetry() {
+        progressBar.setVisibility(View.GONE);
+        ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
+                R.string.achievements_fetch_failed_ultimate_achievement, R.string.retry, view -> setAchievements());
     }
 
     /**
