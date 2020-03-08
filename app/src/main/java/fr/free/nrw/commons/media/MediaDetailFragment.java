@@ -243,7 +243,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void updateAspectRatio(ImageInfo imageInfo) {
         if (imageInfo != null) {
-            image.setAspectRatio(((float)imageInfo.getWidth()/imageInfo.getHeight()));
+            int finalHeight = (scrollView.getWidth()*imageInfo.getHeight()) / imageInfo.getWidth();
+            ViewGroup.LayoutParams params = image.getLayoutParams();
+            params.height = finalHeight;
+            image.setLayoutParams(params);
         }
     }
 
