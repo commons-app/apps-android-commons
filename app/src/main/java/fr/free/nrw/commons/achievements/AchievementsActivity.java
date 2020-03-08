@@ -238,18 +238,18 @@ public class AchievementsActivity extends NavigationBaseActivity {
                                         // achievements calculator to fail in some cases, for more details
                                         // refer Issue: #3295
                                         if (numberOfEdits <= 150000) {
-                                            showSnackBarWithRetry();
+                                            showSnackBarWithRetry(false);
                                         } else {
-                                            showSnackBarUltimateAchievementWithRetry();
+                                            showSnackBarWithRetry(true);
                                         }
                                     }
                                 },
                                 t -> {
                                     Timber.e(t, "Fetching achievements statistics failed");
                                     if (numberOfEdits <= 150000) {
-                                        showSnackBarWithRetry();
+                                        showSnackBarWithRetry(false);
                                     } else {
-                                        showSnackBarUltimateAchievementWithRetry();
+                                        showSnackBarWithRetry(true);
                                     }
                                 }
                         ));
@@ -275,7 +275,7 @@ public class AchievementsActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(edits -> {
-                    numberOfEdits += edits;
+                    numberOfEdits = edits;
                     wikidataEditsText.setText(String.valueOf(edits));
                 }, e -> {
                     Timber.e("Error:" + e);
@@ -285,22 +285,20 @@ public class AchievementsActivity extends NavigationBaseActivity {
     /**
      * Shows a snack bar which has an action button which on click dismisses the snackbar and invokes the
      * listener passed
+     * @param tooManyAchievements if this value is true it means that the number of achievements of the 
+     * user are so high that it wrecks havoc with the Achievements calculator due to which request may time 
+     * out. Well this is the Ultimate Achievement
      */
-    private void showSnackBarWithRetry() {
-        progressBar.setVisibility(View.GONE);
-        ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
-                R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
-    }
-
-    /**
-     * Shows a snack bar which tells the users that their wiki edit count is so high that it (in some cases)
-     * wreks havoc with the Achievements calculator due to which request may time out
-     * Well this is the Ultimate Achievement 
-     */
-    private void showSnackBarUltimateAchievementWithRetry() {
-        progressBar.setVisibility(View.GONE);
-        ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
-                R.string.achievements_fetch_failed_ultimate_achievement, R.string.retry, view -> setAchievements());
+    private void showSnackBarWithRetry(boolean tooManyAchievements) {
+        if (tooManyAchievements) {
+            progressBar.setVisibility(View.GONE);
+            ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
+                    R.string.achievements_fetch_failed_ultimate_achievement, R.string.retry, view -> setAchievements());
+        } else {
+            progressBar.setVisibility(View.GONE);
+            ViewUtil.showDismissibleSnackBar(findViewById(android.R.id.content),
+                    R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
+        }
     }
 
     /**
