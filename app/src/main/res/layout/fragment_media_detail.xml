@@ -40,10 +40,11 @@
 
             <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
                  the detail info offscreen until it's placed properly. May be a better way to do this. -->
-            <fr.free.nrw.commons.media.MediaDetailSpacer
-                android:id="@+id/mediaDetailSpacer"
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/mediaDetailImageView"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/standard_gap" />
+                android:layout_height="@dimen/dimen_250"
+                app:actualImageScaleType="none" />
 
             <LinearLayout
                 android:layout_width="match_parent"
