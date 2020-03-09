@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.location.LatLng;
 
 public class Converters {
-    private static Gson gson= GsonUtil.getDefaultGson();
+    private static Gson gson= ApplicationlessInjection.getInstance(CommonsApplication.getInstance()).getCommonsApplicationComponent().gson();
 
     @TypeConverter
     public static Date fromTimestamp(Long value) {

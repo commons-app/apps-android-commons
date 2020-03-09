@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.di;
 
+import com.google.gson.Gson;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -53,9 +55,12 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
 
     void inject(ContributionViewHolder viewHolder);
 
+    Gson gson();
+
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})
     interface Builder {
+
         Builder appModule(CommonsApplicationModule applicationModule);
 
         CommonsApplicationComponent build();
