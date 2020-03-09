@@ -25,6 +25,14 @@ class TestCommonsApplication : Application() {
                     .build()
         }
         super.onCreate()
+        context=applicationContext
+    }
+
+    companion object{
+        private var context: Context?=null
+        fun getContext(): Context? {
+            return context
+        }
     }
 }
 

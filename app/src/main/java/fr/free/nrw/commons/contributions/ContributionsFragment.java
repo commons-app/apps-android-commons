@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -71,7 +73,6 @@ public class ContributionsFragment
         LocationUpdateListener,
         ICampaignsView, ContributionsContract.View {
     @Inject @Named("default_preferences") JsonKvStore store;
-    @Inject ContributionDao contributionDao;
     @Inject NearbyController nearbyController;
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject CampaignsPresenter presenter;
@@ -118,11 +119,11 @@ public class ContributionsFragment
     };
     private boolean shouldShowMediaDetailsFragment;
     private int numberOfContributions;
+    private boolean isAuthCookieAcquired;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
     }
 
     @Nullable
@@ -132,6 +133,7 @@ public class ContributionsFragment
         ButterKnife.bind(this, view);
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
+        contributionsPresenter.setLifeCycleOwner(this.getViewLifecycleOwner());
         campaignView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
@@ -211,18 +213,8 @@ public class ContributionsFragment
             }
 
             @Override
-            public int getNumberOfContributions() {
-                return numberOfContributions;
-            }
-
-            @Override
             public Contribution getContributionForPosition(int position) {
                 return (Contribution) contributionsPresenter.getItemAtPosition(position);
-            }
-
-            @Override
-            public int findItemPositionWithId(String id) {
-                return contributionsPresenter.getChildPositionWithId(id);
             }
         });
 
@@ -306,11 +298,10 @@ public class ContributionsFragment
      */
     void onAuthCookieAcquired() {
         // Since we call onAuthCookieAcquired method from onAttach, isAdded is still false. So don't use it
-
+        isAuthCookieAcquired=true;
         if (getActivity() != null) { // If fragment is attached to parent activity
             getActivity().bindService(getUploadServiceIntent(), uploadServiceConnection, Context.BIND_AUTO_CREATE);
             isUploadServiceConnected = true;
-            getActivity().getSupportLoaderManager().initLoader(0, null, contributionsPresenter);
         }
 
     }
@@ -336,7 +327,7 @@ public class ContributionsFragment
 
     @Override
     public void refreshSource() {
-        getActivity().getSupportLoaderManager().restartLoader(0, null, contributionsPresenter);
+        contributionsPresenter.fetchContributions();
     }
 
     @Override
@@ -411,6 +402,10 @@ public class ContributionsFragment
         }
 
         fetchCampaigns();
+        if(isAuthCookieAcquired){
+            contributionsPresenter.fetchContributions();
+        }
+
     }
 
     private void checkPermissionsAndShowNearbyCardView() {
@@ -578,9 +573,8 @@ public class ContributionsFragment
     }
 
     @Override
-    public void onDataSetChanged() {
-        contributionsListFragment.onDataSetChanged();
-        mediaDetailPagerFragment.onDataSetChanged();
+    public void showContributions(List<Contribution> contributionList) {
+        contributionsListFragment.setContributions(contributionList);
     }
 
     /**

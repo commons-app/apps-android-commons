@@ -1,11 +1,22 @@
 package fr.free.nrw.commons.contributions
 
 import android.database.Cursor
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
+import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
+import io.reactivex.Scheduler
+import io.reactivex.Single
+import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -15,17 +26,23 @@ import org.mockito.MockitoAnnotations
  */
 class ContributionsPresenterTest {
     @Mock
-    internal var repository: ContributionsRepository? = null
+    internal lateinit var repository: ContributionsRepository
     @Mock
-    internal var view: ContributionsContract.View? = null
+    internal lateinit var view: ContributionsContract.View
 
-    private var contributionsPresenter: ContributionsPresenter? = null
+    private lateinit var contributionsPresenter: ContributionsPresenter
 
     private lateinit var cursor: Cursor
 
     lateinit var contribution: Contribution
 
     lateinit var loader: Loader<Cursor>
+
+    lateinit var liveData: LiveData<List<Contribution>>
+
+    @Rule @JvmField var instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    lateinit var scheduler : Scheduler
 
     /**
      * initial setup
@@ -34,21 +51,24 @@ class ContributionsPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        scheduler=TestScheduler()
         cursor = Mockito.mock(Cursor::class.java)
         contribution = Mockito.mock(Contribution::class.java)
-        contributionsPresenter = ContributionsPresenter(repository)
+        contributionsPresenter = ContributionsPresenter(repository,scheduler,scheduler)
         loader = Mockito.mock(CursorLoader::class.java)
-        contributionsPresenter?.onAttachView(view)
+        contributionsPresenter.onAttachView(view)
+        liveData=MutableLiveData()
     }
 
-
     /**
-     * Test presenter actions onGetContributionFromCursor
+     * Test fetch contributions
      */
     @Test
-    fun testGetContributionFromCursor() {
-        contributionsPresenter?.getContributionsFromCursor(cursor)
-        verify(repository)?.getContributionFromCursor(cursor)
+    fun testFetchContributions(){
+        whenever(repository.getString(ArgumentMatchers.anyString())).thenReturn("10")
+        whenever(repository.fetchContributions()).thenReturn(liveData)
+        contributionsPresenter.fetchContributions()
+        verify(repository).fetchContributions()
     }
 
     /**
@@ -56,55 +76,20 @@ class ContributionsPresenterTest {
      */
     @Test
     fun testDeleteContribution() {
-        contributionsPresenter?.deleteUpload(contribution)
-        verify(repository)?.deleteContributionFromDB(contribution)
+        whenever(repository.deleteContributionFromDB(ArgumentMatchers.any(Contribution::class.java))).thenReturn(Single.just(1))
+        contributionsPresenter.deleteUpload(contribution)
+        verify(repository).deleteContributionFromDB(contribution)
     }
 
     /**
-     * Test presenter actions on loaderFinished and has non zero media objects
+     * Test fetch contribution with filename
      */
     @Test
-    fun testOnLoaderFinishedNonZeroContributions() {
-        Mockito.`when`(cursor.count).thenReturn(1)
-        contributionsPresenter?.onLoadFinished(loader, cursor)
-        verify(view)?.showProgress(false)
-        verify(view)?.showWelcomeTip(false)
-        verify(view)?.showNoContributionsUI(false)
-        verify(view)?.setUploadCount(cursor.count)
+    fun testGetContributionWithFileName(){
+        contributionsPresenter.getContributionsWithTitle("ashish")
+        verify(repository).getContributionWithFileName("ashish")
     }
 
-    /**
-     * Test presenter actions on loaderFinished and has Zero media objects
-     */
-    @Test
-    fun testOnLoaderFinishedZeroContributions() {
-        Mockito.`when`(cursor.count).thenReturn(0)
-        contributionsPresenter?.onLoadFinished(loader, cursor)
-        verify(view)?.showProgress(false)
-        verify(view)?.showWelcomeTip(true)
-        verify(view)?.showNoContributionsUI(true)
-    }
-
-
-    /**
-     * Test presenter actions on loader reset
-     */
-    @Test
-    fun testOnLoaderReset() {
-        contributionsPresenter?.onLoaderReset(loader)
-        verify(view)?.showProgress(false)
-        verify(view)?.showWelcomeTip(true)
-        verify(view)?.showNoContributionsUI(true)
-    }
-
-    /**
-     * Test presenter actions on loader change
-     */
-    @Test
-    fun testOnChanged() {
-        contributionsPresenter?.onChanged()
-        verify(view)?.onDataSetChanged()
-    }
 
 
 }

@@ -98,7 +98,7 @@ public class DeleteHelper {
         String userPageString = "\n{{subst:idw|" + media.getFilename() +
                 "}} ~~~~";
 
-        return pageEditClient.prependEdit(media.getFilename(), fileDeleteString + "\n", summary)
+        return pageEditClient.prependEdit(media.filename, fileDeleteString + "\n", summary)
                 .flatMap(result -> {
                     if (result) {
                         return pageEditClient.edit("Commons:Deletion_requests/" + media.getFilename(), subpageString + "\n", summary);

@@ -85,7 +85,7 @@
             android:name=".contributions.MainActivity"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
-            android:configChanges="screenSize|keyboard" />
+            android:configChanges="screenSize|keyboard|orientation" />
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
@@ -157,18 +157,6 @@
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
-        <service
-            android:name=".contributions.ContributionsSyncService"
-            android:exported="true"
-            android:process=":sync">
-            <intent-filter>
-                <action android:name="android.content.SyncAdapter" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.content.SyncAdapter"
-                android:resource="@xml/contributions_sync_adapter" />
-        </service>
 
         <service
             android:name="org.acra.sender.SenderService"
@@ -184,12 +172,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-        <provider
-            android:name=".contributions.ContributionsContentProvider"
-            android:authorities="${applicationId}.contributions.contentprovider"
-            android:exported="false"
-            android:label="@string/provider_contributions"
-            android:syncable="true" />
 
         <provider
             android:name=".category.CategoryContentProvider"
