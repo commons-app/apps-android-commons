@@ -70,7 +70,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(callback.isDarkTheme()?R.layout.nearby_search_list_item_dark:R.layout.nearby_search_list_item, parent, false);
+        View itemView = inflater.inflate(callback.isDarkTheme() ? R.layout.nearby_search_list_item_dark : R.layout.nearby_search_list_item, parent, false);
         return new RecyclerViewHolder(itemView);
     }
 
@@ -80,7 +80,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
         holder.placeTypeIcon.setImageResource(label.getIcon());
         holder.placeTypeLabel.setText(label.toString());
 
-        holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : callback.isDarkTheme()?Color.BLACK:Color.WHITE);
+        holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : callback.isDarkTheme() ? Color.BLACK : Color.WHITE);
         holder.placeTypeLayout.setOnClickListener(view -> {
             callback.setCheckboxUnknown();
             if (label.isSelected()) {
@@ -89,7 +89,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
                 selectedLabels.add(label);
             }
             label.setSelected(!label.isSelected());
-            holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : Color.WHITE);
+            holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : callback.isDarkTheme() ? Color.BLACK : Color.WHITE);
             callback.filterByMarkerType(selectedLabels, 0, false, false);
         });
     }
