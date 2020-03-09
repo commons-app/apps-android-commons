@@ -18,7 +18,10 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.location.LatLng;
 
 public class Converters {
-    private static Gson gson= ApplicationlessInjection.getInstance(CommonsApplication.getInstance()).getCommonsApplicationComponent().gson();
+
+    public static Gson getGson() {
+        return ApplicationlessInjection.getInstance(CommonsApplication.getInstance()).getCommonsApplicationComponent().gson();
+    }
 
     @TypeConverter
     public static Date fromTimestamp(Long value) {
@@ -42,32 +45,32 @@ public class Converters {
 
     @TypeConverter
     public static String listObjectToString(ArrayList<String> objectList) {
-        return objectList == null ? null : gson.toJson(objectList);
+        return objectList == null ? null : getGson().toJson(objectList);
     }
 
     @TypeConverter
     public static ArrayList<String> stringToArrayListObject(String objectList) {
-        return objectList == null ? null : gson.fromJson(objectList,new TypeToken<ArrayList<String>>(){}.getType());
+        return objectList == null ? null : getGson().fromJson(objectList,new TypeToken<ArrayList<String>>(){}.getType());
     }
 
     @TypeConverter
     public static String mapObjectToString(HashMap<String,String> objectList) {
-        return objectList == null ? null : gson.toJson(objectList);
+        return objectList == null ? null : getGson().toJson(objectList);
     }
 
     @TypeConverter
     public static HashMap<String,String> stringToMap(String objectList) {
-        return objectList == null ? null : gson.fromJson(objectList,new TypeToken<HashMap<String,String>>(){}.getType());
+        return objectList == null ? null : getGson().fromJson(objectList,new TypeToken<HashMap<String,String>>(){}.getType());
     }
 
     @TypeConverter
     public static String latlngObjectToString(LatLng latlng) {
-        return latlng == null ? null : gson.toJson(latlng);
+        return latlng == null ? null : getGson().toJson(latlng);
     }
 
     @TypeConverter
     public static LatLng stringToLatLng(String objectList) {
-        return objectList == null ? null : gson.fromJson(objectList,LatLng.class);
+        return objectList == null ? null : getGson().fromJson(objectList,LatLng.class);
     }
 
 }
