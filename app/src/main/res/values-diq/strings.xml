@@ -11,11 +11,12 @@
 * Orbot707
 -->
 <resources>
-  <string name="title_activity_explore">Keşıf kerê</string>
+  <string name="title_activity_explore">Keşf bıkerê</string>
   <string name="navigation_item_explore">Keşf kerê</string>
   <string name="preference_category_appearance">Asayış</string>
   <string name="preference_category_general">Bıngeh</string>
   <string name="preference_category_feedback">Peyderıştış</string>
+  <string name="preference_category_privacy">Dızdêniye</string>
   <string name="preference_category_location">Lokasyon</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -97,10 +98,11 @@
   <string name="title_activity_signup">Qeyd be</string>
   <string name="title_activity_featured_images">Resımê weçinıteyi</string>
   <string name="title_activity_category_details">Kategoriye</string>
+  <string name="title_activity_review">Weynayışê Hakemi</string>
   <string name="menu_about">Heq te cı</string>
   <string name="about_improve">Qandê yew &lt;a href=\"%1$s\"&gt;GitHub-cıkewtış&lt;/a&gt;ê neweyi rê rapor û teklifan bıaferne.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Politikaya nımıtışi&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;İştırakkerdoği&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Politikaya dızdêni</string>
+  <string name="about_credits">İştırakwani</string>
   <string name="title_activity_about">Heq te cı</string>
   <string name="menu_feedback">Peyd rışten bırış (E-posta ra)</string>
   <string name="no_email_client">E-posta eyar nêbi</string>
@@ -109,7 +111,7 @@
   <string name="menu_cancel_upload">Bıtexelne</string>
   <string name="menu_download">Biya war</string>
   <string name="preference_license">Lisanso hesebiyaye</string>
-  <string name="preference_theme_summary">Mewzuyo tari bıgurene</string>
+  <string name="preference_theme" fuzzy="true">Modo tarı</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -153,6 +155,9 @@
   <string name="media_detail_uploaded_date">Tarixê barkerdışi</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinati</string>
+  <string name="_2fa_code">2FA-Code (Dı faktorın raşt kerdış)</string>
+  <string name="number_of_uploads">Peyên limitê barkerdışê mı</string>
+  <string name="maximum_limit">Maksimum Limit</string>
   <string name="invalid_zero">Sıfır vêrde niyo</string>
   <string name="invalid_input">Cıkerdışo nêvêrde</string>
   <string name="enter_valid">Yew amaro vêrde cı ke</string>
@@ -192,25 +197,28 @@
   <string name="skip_login">Ser çek</string>
   <string name="navigation_item_login">Cı kewe</string>
   <string name="nearby_directions">Telimati</string>
-  <string name="nearby_wikidata" fuzzy="true">WIKIDATA</string>
-  <string name="nearby_wikipedia" fuzzy="true">WIKIPEDIA</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Rey bıdê &lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;PZP&lt;/u&gt;</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
+  <string name="about_rate_us">Rey bıdê</string>
+  <string name="about_faq">PZP</string>
   <string name="welcome_skip_button">Musnayoği ser çek</string>
   <string name="no_internet">İnternet nêresêno</string>
   <string name="internet_established">İnternet resiyeno</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Açarne&lt;/u&gt;</string>
+  <string name="about_translate">Açarnayış</string>
   <string name="about_translate_title">Zıwani</string>
+  <string name="about_translate_proceed">Ravêrê</string>
   <string name="about_translate_cancel">Bıtexelne</string>
   <string name="retry">Anciya bıcerrebne</string>
   <string name="showcase_view_got_it_button">Mı fehm kerd!</string>
-  <string name="appwidget_img">Resmê roce</string>
-  <string name="app_widget_heading">Resmê roce</string>
+  <string name="appwidget_img">Fotrafê roci</string>
+  <string name="app_widget_heading">Fotrafê roci</string>
   <string name="menu_search_button">Cıgeyrayış</string>
   <string name="title_activity_search">Cıgeyrayış</string>
-  <string name="search_tab_title_media" fuzzy="true">MEDYA</string>
-  <string name="search_tab_title_categories" fuzzy="true">KATEGORİYİ</string>
+  <string name="search_tab_title_media">Medya</string>
+  <string name="search_tab_title_categories">Kategoriyi</string>
+  <string name="explore_tab_title_featured">Weçinaye</string>
+  <string name="explore_tab_title_mobile">Raya mobiliya biyo bar</string>
   <string name="quiz">Quiz</string>
   <string name="question">Pers</string>
   <string name="result">Netice</string>
@@ -254,7 +262,9 @@
   <string name="please_wait">Kerem kerên, bıpawên...</string>
   <string name="skip_image" fuzzy="true">NÊ RESIMİ RAVİYARNE</string>
   <string name="image_info">Melumatê resımi</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">İnternet ra resimo raştameye</string>
   <string name="account_created">Hesab vıraziya!</string>
   <string name="text_copy">Metın kopyayê panoyi biyo</string>
   <string name="some_error">Yew xeta biye!</string>
+  <string name="theme_light_name">Akerde</string>
 </resources>

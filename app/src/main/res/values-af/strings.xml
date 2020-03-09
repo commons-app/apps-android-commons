@@ -115,8 +115,7 @@
   <string name="use_previous">Gebruik vorige titel en beskrywing</string>
   <string name="allow_gps">Outomatiess huidige ligging ophaal</string>
   <string name="allow_gps_summary">Haal die huidige ligging op as die prent nie geo-geëtiketteer is nie, en die beeld daarmee geëtiketteer word. Waarskuwing: dit sal u huidige ligging onthul.</string>
-  <string name="preference_theme">Nag-modus</string>
-  <string name="preference_theme_summary">Gebruik donker tema</string>
+  <string name="preference_theme" fuzzy="true">Nag-modus</string>
   <string name="license_name_cc_by_sa_four">Erkenning-DeelAlle 4.0</string>
   <string name="license_name_cc_by_four">Erkenning 4.0</string>
   <string name="license_name_cc_by_sa">Erkenning-DeelAlik 3.0</string>

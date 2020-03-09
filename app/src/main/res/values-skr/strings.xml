@@ -67,8 +67,7 @@
   <string name="menu_cancel_upload">منسوخ</string>
   <string name="menu_download">ڈاؤن لوڈ کرو ، لہاؤ</string>
   <string name="preference_license">پہلے طے تھیا لائسنس</string>
-  <string name="preference_theme">رات آلا مزاج</string>
-  <string name="preference_theme_summary">گھاٹا تھیم ورتو</string>
+  <string name="preference_theme" fuzzy="true">رات آلا مزاج</string>
   <string name="license_name_cc0">سی سی او</string>
   <string name="license_name_cc_by_3_0">سی سی بی وائی ٣.٠</string>
   <string name="license_name_cc_by_sa_4_0">سی سی بی وائی۔ایس اے ٤.٠</string>

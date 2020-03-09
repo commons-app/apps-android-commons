@@ -137,8 +137,7 @@
   <string name="use_previous">使用之前的标题及描述</string>
   <string name="allow_gps">自动获取当前位置</string>
   <string name="allow_gps_summary">如果图片没有地理标记，以及地理标签图片的话，就取得当前位置。警告：这将暴露您的当前位置。</string>
-  <string name="preference_theme">夜间模式</string>
-  <string name="preference_theme_summary">使用黑暗主题</string>
+  <string name="preference_theme" fuzzy="true">夜间模式</string>
   <string name="license_name_cc_by_sa_four">署名-ShareAlike4.0</string>
   <string name="license_name_cc_by_four">署名4.0</string>
   <string name="license_name_cc_by_sa">署名-ShareAlike3.0</string>
@@ -457,6 +456,7 @@
   <string name="display_location_permission_title">显示位置许可</string>
   <string name="display_location_permission_explanation">当需要附近通知卡查看功能时，请求位置许可。</string>
   <string name="achievements_fetch_failed">有错误发生，无法获取你的成就</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">您做出了许多贡献，我们的计算系统无法应对。这是最终的成就。</string>
   <string name="ends_on">结束于：</string>
   <string name="display_campaigns">显示活动</string>
   <string name="display_campaigns_explanation">显示正在进行的活动</string>

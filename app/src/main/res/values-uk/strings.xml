@@ -134,8 +134,7 @@
   <string name="use_previous">Використати попередні назву й опис</string>
   <string name="allow_gps">Автоматично отримати поточне розташування</string>
   <string name="allow_gps_summary">Якщо зображення не містить координат, то буде отримано і поставлено ваше поточне розташування. Будьте уважні, якщо ви не хочете розкривати ваше розташування.</string>
-  <string name="preference_theme">Нічний режим</string>
-  <string name="preference_theme_summary">Використати темну тему</string>
+  <string name="preference_theme">Тема</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -585,4 +584,7 @@
   <string name="wallpaper_set_unsuccessfully">Щось трапилось. Не вдалося встановити шпалери робочого столу</string>
   <string name="setting_wallpaper_dialog_title">Встановити в якості шпалер робочого столу</string>
   <string name="setting_wallpaper_dialog_message">Встановлення робочого столу. Будь ласка зачекайте...</string>
+  <string name="theme_default_name">Стандартна</string>
+  <string name="theme_dark_name">Темна</string>
+  <string name="theme_light_name">Світла</string>
 </resources>

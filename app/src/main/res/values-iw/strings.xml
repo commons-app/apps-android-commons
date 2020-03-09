@@ -130,8 +130,7 @@
   <string name="use_previous">להשתמש בכותרת ותיאור קודמים</string>
   <string name="allow_gps">לקבל אוטומטית את המיקום הנוכחי</string>
   <string name="allow_gps_summary">אחזור המיקום הנוכחי אם אין בתמונה תגי מיקום, וכן הוספת תגי מיקום לתמונה. אזהרה: פעולה זו תחשוף את המיקום הנוכחי שלך.</string>
-  <string name="preference_theme">מצב לילה</string>
-  <string name="preference_theme_summary">שימוש במצב לילה</string>
+  <string name="preference_theme">ערכת נושא</string>
   <string name="license_name_cc_by_sa_four">ייחוס–שיתוף זהה 4.0</string>
   <string name="license_name_cc_by_four">ייחוס 4.0</string>
   <string name="license_name_cc_by_sa">ייחוס–שיתוף זהה 3.0</string>
@@ -450,6 +449,7 @@
   <string name="display_location_permission_title">הצגת הרשאת מיקום</string>
   <string name="display_location_permission_explanation">לבקש הרשאות מיקום לפי הצורך, לשם קבלת התראה על מקומות בסביבה בתצוגת כרטיס.</string>
   <string name="achievements_fetch_failed">משהו השתבש, לא הצלחנו לקבל את ההישגים שלך</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">תרמת כל־כך הרבה שמערכת חישוב ההישגים שלנו לא מתמודדת עם זה. זה ההישג הגדול ביותר.</string>
   <string name="ends_on">מסתיים ב־:</string>
   <string name="display_campaigns">הצגת מסעי פרסום</string>
   <string name="display_campaigns_explanation">ר\' את מסעי פרסום שמתרחשים כרגע</string>
@@ -579,4 +579,7 @@
   <string name="wallpaper_set_unsuccessfully">משהו השתבש. לא היה אפשר להגדיר את הטפט</string>
   <string name="setting_wallpaper_dialog_title">להגדיר בתור טפט</string>
   <string name="setting_wallpaper_dialog_message">הגדרת טפט. נא להמתין...</string>
+  <string name="theme_default_name">ברירת מחדל</string>
+  <string name="theme_dark_name">כהה</string>
+  <string name="theme_light_name">בהירה</string>
 </resources>

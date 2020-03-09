@@ -133,8 +133,7 @@
   <string name="use_previous">Önceki başlığı ve açıklamayı kullan</string>
   <string name="allow_gps">Otomatik olarak mevcut konumu al</string>
   <string name="allow_gps_summary">Görüntü coğrafi olarak etiketlenmemişse geçerli konumu alır ve görüntüye coğrafi etiket ekler. Uyarı: Bu, geçerli konumunuzu gösterir.</string>
-  <string name="preference_theme">Gece modu</string>
-  <string name="preference_theme_summary">Koyu temayı kullanın</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -453,6 +452,7 @@
   <string name="display_location_permission_title">Yerleşim iznini görüntüle</string>
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görüntüleme özelliği için gerektiğinde konum izni isteyin.</string>
   <string name="achievements_fetch_failed">Bir şeyler ters gitti, başarılarınızı elde edemedik</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Başarı hesaplama sistemimizin üstesinden gelemeyeceği pek çok katkı yaptınız. Bu nihai başarıdır.</string>
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
   <string name="display_campaigns_explanation">Devam eden kampanyaları görün</string>
@@ -582,4 +582,7 @@
   <string name="wallpaper_set_unsuccessfully">Bir şeyler yanlış gitti. Duvar kağıdı ayarlanamadı</string>
   <string name="setting_wallpaper_dialog_title">Duvar kağıdı olarak ayarla</string>
   <string name="setting_wallpaper_dialog_message">Duvar Kağıdı ayarlanıyor. Lütfen bekleyin...</string>
+  <string name="theme_default_name">Varsayılan</string>
+  <string name="theme_dark_name">Koyu</string>
+  <string name="theme_light_name">Açık</string>
 </resources>

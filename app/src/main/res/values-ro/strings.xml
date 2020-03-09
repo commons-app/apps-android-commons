@@ -122,8 +122,7 @@
   <string name="use_previous" fuzzy="true">Folosiți titlul/descrierea anterioară</string>
   <string name="allow_gps">Obține în mod automat locația curentă</string>
   <string name="allow_gps_summary">Preia locația curentă dacă imaginea nu are salvată locația și salvează imaginea cu ea. Avertisment: Aceasta va dezvălui locația dvs. curentă.</string>
-  <string name="preference_theme">Mod de noapte</string>
-  <string name="preference_theme_summary">Folosește o temă întunecată</string>
+  <string name="preference_theme" fuzzy="true">Mod de noapte</string>
   <string name="license_name_cc_by_sa_four">Atribuire și distribuire în condiții identice 4.0</string>
   <string name="license_name_cc_by_four">Atribuire 4.0</string>
   <string name="license_name_cc_by_sa">Atribuire și distribuire în condiții identice 3.0</string>

@@ -102,8 +102,7 @@
   <string name="use_previous" fuzzy="true">Алдағы атама/һәрәтләмәне ҡулланыу</string>
   <string name="allow_gps">Автомат рәүешендә сираттағы урынды алыу</string>
   <string name="allow_gps_summary" fuzzy="true">Әгәр рәсемдең геотегтары булмаһа, категориялар үҙенән-үҙе тәҡдим ителһен өсөн сираттағы урынды алырға</string>
-  <string name="preference_theme">Төнгө режим</string>
-  <string name="preference_theme_summary">Ҡараңғы теманы ҡулланыу</string>
+  <string name="preference_theme" fuzzy="true">Төнгө режим</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

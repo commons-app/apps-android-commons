@@ -124,8 +124,7 @@
   <string name="use_previous" fuzzy="true">Bruk forrige tittel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nåværende plassering</string>
   <string name="allow_gps_summary">Hent nåværende plassering om bildet ikke er geotagget, og tagger bildet med plasseringen. Advarsel: Dette vil avsløre hvor du befinner deg for øyeblikket.</string>
-  <string name="preference_theme">Nattmodus</string>
-  <string name="preference_theme_summary">Bruk mørk drakt</string>
+  <string name="preference_theme" fuzzy="true">Nattmodus</string>
   <string name="license_name_cc_by_sa_four">Navngivelse-Del på samme vilkår 4.0</string>
   <string name="license_name_cc_by_four">Navngivelse 4.0</string>
   <string name="license_name_cc_by_sa"> Navngivelse-Del på samme vilkår 3.0</string>

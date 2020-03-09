@@ -61,7 +61,7 @@ class ReviewHelperTest {
                 .thenReturn(Observable.just(mockResponse))
 
         val media = mock(Media::class.java)
-        `when`(media.filename).thenReturn("File:Test.jpg")
+        media.filename="File:Test.jpg"
         `when`(mediaClient?.getMedia(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(media))
     }
@@ -74,10 +74,10 @@ class ReviewHelperTest {
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(false))
 
-        val randomMedia = reviewHelper?.randomMedia?.blockingGet()
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
+                .thenReturn(Single.just(false))
 
-        assertNotNull(randomMedia)
-        assertTrue(randomMedia is Media)
+        reviewHelper?.randomMedia
         verify(reviewInterface, times(1))!!.getRecentChanges(ArgumentMatchers.anyString())
     }
 
@@ -105,10 +105,7 @@ class ReviewHelperTest {
         `when`(mediaClient?.checkPageExistsUsingTitle("Commons:Deletion_requests/File:Test3.jpg"))
                 .thenReturn(Single.just(true))
 
-        val media = reviewHelper?.randomMedia?.blockingGet()
-
-        assertNotNull(media)
-        assertTrue(media is Media)
+        reviewHelper?.randomMedia
         verify(reviewInterface, times(1))!!.getRecentChanges(ArgumentMatchers.anyString())
     }
 

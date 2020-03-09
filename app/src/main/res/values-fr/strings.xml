@@ -140,8 +140,7 @@
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
   <string name="allow_gps">Obtenir automatiquement l’emplacement actuel</string>
   <string name="allow_gps_summary">Récupère l’emplacement actuel si l’image n’est pas marquée géographiquement et marque géographiquement l’image avec. Avertissement : ceci dévoilera votre emplacement actuel.</string>
-  <string name="preference_theme">Mode de nuit</string>
-  <string name="preference_theme_summary">Utiliser un thème sombre</string>
+  <string name="preference_theme">Thème</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa">Attribution – Partage des conditions 3.0</string>
@@ -589,4 +588,7 @@
   <string name="wallpaper_set_unsuccessfully">Un problème est survenu. Impossible d\'installer le fond d\'écran.</string>
   <string name="setting_wallpaper_dialog_title">Définir comme fond d’écran</string>
   <string name="setting_wallpaper_dialog_message">Configuration du fond d\'écran. Veuillez attendre...</string>
+  <string name="theme_default_name">Par défaut</string>
+  <string name="theme_dark_name">Sombre</string>
+  <string name="theme_light_name">Clair</string>
 </resources>

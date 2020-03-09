@@ -116,8 +116,7 @@
   <string name="use_previous" fuzzy="true">Defnydiwch y teitl/disgrifiad blaenorol</string>
   <string name="allow_gps">Defnyddiwch y lleoliad cyfredol</string>
   <string name="allow_gps_summary">Adfer eich lleoliad presennol os nad yw\'r ddelwedd yn cynnwys cyfesurynnau. Bydd hyn yn datgelu eich lleoliad chi!</string>
-  <string name="preference_theme">Modd fin nos</string>
-  <string name="preference_theme_summary">Defnyddiwch thema tywyll</string>
+  <string name="preference_theme" fuzzy="true">Modd fin nos</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>

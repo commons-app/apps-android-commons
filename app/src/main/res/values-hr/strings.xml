@@ -111,8 +111,7 @@
   <string name="use_previous">Rabite prethodni naziv i opis</string>
   <string name="allow_gps">Automatski pribavi trenutačnu lokaciju</string>
   <string name="allow_gps_summary" fuzzy="true">Ako slika nema oznaku lokacije, pribavi trenutačnu lokaciju kako bi se mogle ponuditi kategorije</string>
-  <string name="preference_theme">Noćni način</string>
-  <string name="preference_theme_summary">Rabi tamnu temu</string>
+  <string name="preference_theme">Izgled</string>
   <string name="license_name_cc_by_sa_four"> Imenovanje-Dijeli pod istim uvjetima 4.0</string>
   <string name="license_name_cc_by_four"> Imenovanje 4.0</string>
   <string name="license_name_cc_by_sa"> Imenovanje-Dijeli pod istim uvjetima 3.0</string>
@@ -285,4 +284,7 @@
   <string name="please_wait">Molimo Vas, pričekajte ...</string>
   <string name="skip_image">Preskoči ovu sliku</string>
   <string name="default_description_language">Zadani jezik za opis</string>
+  <string name="theme_default_name">Zadano</string>
+  <string name="theme_dark_name">Tamno</string>
+  <string name="theme_light_name">Svijetlo</string>
 </resources>

@@ -121,8 +121,7 @@
   <string name="use_previous" fuzzy="true">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
   <string name="allow_gps">স্বয়ংক্রিয়ভাবে বর্তমান অবস্থান পান</string>
   <string name="allow_gps_summary">বর্তমান অবস্থান চিহ্নিত করুন যদি ছবিতে অবস্থানের তথ্য না থাকে, এবং ছবির অবস্থান হিসেবে নির্বাচন করুন।\nসাবধান: এতে আপনার বর্তমান অবস্থান প্রকাশিত হবে।</string>
-  <string name="preference_theme">রাত্রি মোড</string>
-  <string name="preference_theme_summary">কালো থিম ব্যবহার করুন</string>
+  <string name="preference_theme" fuzzy="true">রাত্রি মোড</string>
   <string name="license_name_cc_by_sa_four">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৪.০</string>
   <string name="license_name_cc_by_four">অ্যাট্রিবিউশন ৪.০</string>
   <string name="license_name_cc_by_sa">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৩.০</string>

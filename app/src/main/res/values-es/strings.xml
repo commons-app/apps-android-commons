@@ -141,8 +141,7 @@
   <string name="use_previous">Usar título y descripción anteriores</string>
   <string name="allow_gps">Obtener ubicación actual automáticamente</string>
   <string name="allow_gps_summary">Recupera la ubicación actual si la imagen no esta geolocalizada, y le aplica la geolocalizacion. Aviso: Esto revelará tu ubicación actual.</string>
-  <string name="preference_theme">Modo nocturno</string>
-  <string name="preference_theme_summary">Usar tema oscuro</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four"> Atribución-CompartirIgual 4.0</string>
   <string name="license_name_cc_by_four">Atribución 4.0</string>
   <string name="license_name_cc_by_sa"> Atribución-CompartirIgual 3.0</string>
@@ -584,4 +583,7 @@
   <string name="title_app_shortcut_explore">Explorar</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Configuración</string>
+  <string name="theme_default_name">Predeterminado</string>
+  <string name="theme_dark_name">Oscuro</string>
+  <string name="theme_light_name">Claro</string>
 </resources>

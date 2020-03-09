@@ -109,8 +109,7 @@
   <string name="use_previous" fuzzy="true">이전의 제목/설명을 사용하기</string>
   <string name="allow_gps">자동으로 현재 위치 얻기</string>
   <string name="allow_gps_summary">영상의 지리정보 꼬리표가 보관되지 않은 경우 현재 위치를 검색하여 영상에 현재 위치로 지리정보 꼬리표를 보관하십시오. 경고: 당신의 현재 위치가 로출됩니다.</string>
-  <string name="preference_theme">야간방식</string>
-  <string name="preference_theme_summary">어두운 주제 쓰기</string>
+  <string name="preference_theme" fuzzy="true">야간방식</string>
   <string name="license_name_cc_by_sa_four">저작자표시-동일조건변경허락 4.0</string>
   <string name="license_name_cc_by_four">저작자표시 4.0</string>
   <string name="license_name_cc_by_sa">저작자표시-동일조건변경허락 3.0</string>
