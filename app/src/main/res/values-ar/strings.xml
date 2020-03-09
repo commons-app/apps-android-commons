@@ -126,8 +126,7 @@
   <string name="use_previous">استخدم العنوان والوصف السابق</string>
   <string name="allow_gps">الحصول تلقائيا على الموقع الحالي</string>
   <string name="allow_gps_summary">يسترد الموقع الحالي إذا لم يتم وسم الصورة جغرافيا، وكان هناك وسم جغرافي عليها، تحذير: سيكشف هذا عن موقعك الحالي.</string>
-  <string name="preference_theme">الوضع الليلي</string>
-  <string name="preference_theme_summary">استخدم النمط الغامق</string>
+  <string name="preference_theme" fuzzy="true">الوضع الليلي</string>
   <string name="license_name_cc_by_sa_four">النسبة-الترخيص بالمثل 4.0</string>
   <string name="license_name_cc_by_four">الإحالة 4.0</string>
   <string name="license_name_cc_by_sa">النسبة-الترخيص بالمثل 3.0</string>
@@ -565,4 +564,5 @@
   <string name="place_type">نوع المكان:</string>
   <string name="nearby_search_hint">جسر، متحف، فندق، إلخ</string>
   <string name="you_must_reset_your_passsword">حدث خطأ ما عند الدخول، يجب عليك إعادة تعيين كلمة المرور!!</string>
+  <string name="setting_wallpaper_dialog_title">اجعلها خلفية</string>
 </resources>

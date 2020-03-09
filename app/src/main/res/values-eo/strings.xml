@@ -119,8 +119,7 @@
   <string name="use_previous" fuzzy="true">Uzi la antaŭan titolon/priskribon</string>
   <string name="allow_gps">Aŭtomate akiri la nunan pozicion</string>
   <string name="allow_gps_summary">Akiri aktualan lokon se geografia etikedo mankas sur bildo, kaj aldoni tiun etikedon. Averto: tio rivelos vian aktualan lokon.</string>
-  <string name="preference_theme">Nokta reĝimo</string>
-  <string name="preference_theme_summary">Uzi malluman etoson</string>
+  <string name="preference_theme" fuzzy="true">Nokta reĝimo</string>
   <string name="license_name_cc_by_sa_four">Atribuite-Samkondiĉe 4.0</string>
   <string name="license_name_cc_by_four">Atribuite 4.0</string>
   <string name="license_name_cc_by_sa">Atribuite-Samkondiĉe 3.0</string>

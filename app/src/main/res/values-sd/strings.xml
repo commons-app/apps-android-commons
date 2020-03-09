@@ -112,8 +112,7 @@
   <string name="use_previous" fuzzy="true">گذريل عنوان/تشريح استعمال ڪريو</string>
   <string name="allow_gps">خوبخود ھاڻوڪي مڪانيت وٺو</string>
   <string name="allow_gps_summary">ھاڻوڪي مڪانيت ڏئي ٿو جيڪڏھن عڪس جيوٽيگ ناھي ٿيل، ۽ عڪس کي ان سان جيوٽيگ ڪري ٿو. چتاءُ: ھي توھان جي ھاڻوڪي مڪانيت ظاھر ڪندو.</string>
-  <string name="preference_theme">رات جو ڏيک</string>
-  <string name="preference_theme_summary">گھرو نظارو استعمال ڪريو</string>
+  <string name="preference_theme" fuzzy="true">رات جو ڏيک</string>
   <string name="license_name_cc_by_sa_four">انتساب-ھجھڙي ڀاڱيداري 4.0</string>
   <string name="license_name_cc_by_four">وصف 4.0</string>
   <string name="license_name_cc_by_sa">ڪڪ انتساب-ھڪجھڙي_ڀاڱيداري 3.0</string>

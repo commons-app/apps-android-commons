@@ -126,8 +126,7 @@
   <string name="use_previous">Vorherigen Titel und Beschreibung verwenden</string>
   <string name="allow_gps">Aktuellen Standort automatisch abrufen</string>
   <string name="allow_gps_summary">Ruft den aktuellen Standort ab, falls das Bild nicht georeferenziert ist und markiert es. Warnung: Diese Aktion verrät deinen aktuellen Standort.</string>
-  <string name="preference_theme">Nachtmodus</string>
-  <string name="preference_theme_summary">Dunkles Thema verwenden</string>
+  <string name="preference_theme" fuzzy="true">Nachtmodus</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>

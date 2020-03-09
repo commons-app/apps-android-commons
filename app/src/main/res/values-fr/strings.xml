@@ -140,8 +140,7 @@
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
   <string name="allow_gps">Obtenir automatiquement l’emplacement actuel</string>
   <string name="allow_gps_summary">Récupère l’emplacement actuel si l’image n’est pas marquée géographiquement et marque géographiquement l’image avec. Avertissement : ceci dévoilera votre emplacement actuel.</string>
-  <string name="preference_theme">Mode de nuit</string>
-  <string name="preference_theme_summary">Utiliser un thème sombre</string>
+  <string name="preference_theme" fuzzy="true">Mode de nuit</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa">Attribution – Partage des conditions 3.0</string>

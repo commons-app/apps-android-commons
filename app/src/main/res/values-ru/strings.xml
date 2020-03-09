@@ -137,8 +137,7 @@
   <string name="use_previous">Использовать предыдущие название и описание</string>
   <string name="allow_gps">Анализ местоположения</string>
   <string name="allow_gps_summary">Если изображение не содержит геотега, то будет получено и проставлено текущее местоположение. Будьте внимательны, если вы не хотите раскрывать ваше месторасположение.</string>
-  <string name="preference_theme">Ночной режим</string>
-  <string name="preference_theme_summary">Использовать тёмную тему</string>
+  <string name="preference_theme" fuzzy="true">Ночной режим</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

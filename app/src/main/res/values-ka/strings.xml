@@ -112,8 +112,7 @@
   <string name="use_previous" fuzzy="true">წინა სათაურის/აღწერის გამოყენება</string>
   <string name="allow_gps">ამჟამინდელი მდებარეობის ავტომატური მიღება</string>
   <string name="allow_gps_summary">შლის მიმდინარე ადგილმდებარეობას, თუ სურათი არ არის დატანილი რუკაზე. ყურადღება! ეს ცვლილება გაჩვენებთ თქვენს მიმდინარე ადგილმდებარეობას.</string>
-  <string name="preference_theme">ღამის რეჟიმი</string>
-  <string name="preference_theme_summary">მუქი თემის გამოყენება</string>
+  <string name="preference_theme" fuzzy="true">ღამის რეჟიმი</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

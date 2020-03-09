@@ -84,8 +84,7 @@
   <string name="menu_retry_upload">পুনৰ চেষ্টা কৰক</string>
   <string name="menu_cancel_upload">বাতিল কৰক</string>
   <string name="menu_download">ডাউনল’ড কৰক</string>
-  <string name="preference_theme">নিশা ম\'ড</string>
-  <string name="preference_theme_summary">ক\'লা থীম ব্যৱহাৰ কৰক</string>
+  <string name="preference_theme" fuzzy="true">নিশা ম\'ড</string>
   <string name="tutorial_3_text">অনুগ্ৰহ কৰি আপল\'ড নকৰিব:</string>
   <string name="tutorial_3_subtext_1">আপোনাৰ বন্ধুসকলৰ ছেল্ফি বা ছবি</string>
   <string name="tutorial_3_subtext_2">আপুনি ইণ্টাৰনেটৰ পৰা ডাউনল\'ড কৰা ছবিসমূহ</string>

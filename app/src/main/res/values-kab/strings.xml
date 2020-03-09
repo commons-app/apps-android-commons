@@ -95,8 +95,7 @@
   <string name="use_previous" fuzzy="true">Seqdec azwel neɣ aglam yezrin</string>
   <string name="allow_gps">Awi s wudem awurman adig amiran</string>
   <string name="allow_gps_summary" fuzzy="true">Awi adig amiran akken ad tsumreḍ taggayt ma yella tugna ur tettwacreḍ ara di tirakalt</string>
-  <string name="preference_theme">Askar  n yiḍ</string>
-  <string name="preference_theme_summary">Seqdec asentel aberkan</string>
+  <string name="preference_theme" fuzzy="true">Askar  n yiḍ</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

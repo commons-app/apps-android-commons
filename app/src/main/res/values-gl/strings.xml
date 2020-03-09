@@ -122,8 +122,7 @@
   <string name="use_previous" fuzzy="true">Usar o título ou a descrición anterior</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
   <string name="allow_gps_summary">Obter a localización actual se a imaxe non está xeolocalizada, e xeolocaliza a imaxe con ela. Atención: Isto revelará a súa localización actual.</string>
-  <string name="preference_theme">Modo nocturno</string>
-  <string name="preference_theme_summary">Usar tema escuro</string>
+  <string name="preference_theme" fuzzy="true">Modo nocturno</string>
   <string name="license_name_cc_by_sa_four"> Recoñecemento-CompartirIgual 4.0</string>
   <string name="license_name_cc_by_four">Recoñecemento 4.0</string>
   <string name="license_name_cc_by_sa"> Recoñecemento-CompartirIgual 3.0</string>

@@ -85,7 +85,7 @@
   <string name="menu_retry_upload">ߊ߬ ߡߊߝߍߣߍ߲߫ ߕߎ߲߯</string>
   <string name="menu_cancel_upload">ߊ߬ ߘߐߛߊ߬</string>
   <string name="menu_download">ߟߊ߬ߖߌ߰ߒ߬ߞߎ߲߬ߠߌ߲</string>
-  <string name="preference_theme">ߛߎ ߞߍߗߏ߮</string>
+  <string name="preference_theme" fuzzy="true">ߛߎ ߞߍߗߏ߮</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ߏߛߑߕߙߊߟߌ߫)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ߊߟߏߡߊ߲ߘߎ߯)</string>
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ߋߛߑߕߏߣߌ߫)</string>
@@ -262,6 +262,9 @@
   <string name="never_ask_again">ߏ߬ ߞߊ߫ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߫ ߏ߬ ߞߐ߫ ߡߎ߰ߡߍ߫</string>
   <string name="display_location_permission_title">ߘߌ߲߬ߞߌߙߊ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߟߊߓߊ߯ߙߊ߫</string>
   <string name="nominate_for_deletion_done">ߊ߬ ߓߘߊ߫ ߞߍ߫</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">ߞߐߕߐ߮ ߟߊߘߏ߲߬ߠߌ߲ ߖߏ߬ߛߌ߬ߟߌ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߘߊ߲ߖߐ ߘߐ߫</string>
+  <string name="nominate_for_deletion_create_deletion_request">ߖߏ߰ߛߌ߬ߟߌ ߡߊ߬ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߞߐߜߍߙߋ߲ ߛߌ߲ߘߟߌ</string>
+  <string name="notsure">ߒ ߡߊ߫ ߟߊ߫ ߏ߬ ߟߊ߫</string>
   <string name="send_thank_success_title">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ: ߓߘߊ߫ ߛߎߘߊ߲߫</string>
   <string name="send_thank_success_message">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ ߓߘߊ߫ ߛߎߘߊ߲߫  %1$s ߡߊ߬.</string>
   <string name="send_thank_failure_message">ߞߎߟߎ߲ߖߋߟߌ ߗߋߟߌ ߓߘߊ߫ ߛߎߘߊ߲߫  %1$s ߡߊ߬</string>
@@ -272,6 +275,8 @@
   <string name="review_copyright">ߊ߬ ߝߐ߫ ߣߌ߲߬ ߓߍ߲߬ߣߍ߲߫ ߦߋ߫ ߓߊߦߟߍߡߊ߲ߠߌ߲ ߤߊߞߍ ߡߊ߬ ߝߋߎ߫؟</string>
   <string name="review_category">ߊ߬ ߝߐ߫ ߣߌ߲߬ ߦߌߟߡߊߦߊߣߍ߲߫ ߝߋߎ߫؟</string>
   <string name="review_thanks">ߊ߬ ߟߐ߯ ߦߴߌ ߟߊ߫ ߞߊ߬ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ߠߊ ߟߎ߬ ߞߎߟߎ߲ߖߋ߫ ߓߊ߬؟</string>
+  <string name="review_no_category">ߐ߲߬ߤߐ߲߯߹ ߣߌ߲߬ ߝߊ߲߭ ߡߊ߫ ߦߌߟߡߊߦߊ߫ ߟߋ߬߹</string>
+  <string name="review_category_explanation">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߦߋ߫ %1$s ߦߌߟߡߊ ߟߎ߬ ߞߘߐ߫.</string>
   <string name="review_copyright_yes_button_text">ߒ߬ߒ߫߸ ߓߊߦߟߍߡߊ߲ ߤߊߞߍ ߡߊ߫ ߕߌߢߍ߫</string>
   <string name="review_copyright_no_button_text">ߊ߬ ߞߍߣߍ߲߫ ߦߴߊ߬ ߓߍ߲߬ߣߍ߲߫</string>
   <string name="review_thanks_yes_button_text">ߐ߲߬ߐ߲ߐ߲߫߸ ߡߎ߲߬ߠߊ߫ ߍ߲߬ߍ߲߫</string>
