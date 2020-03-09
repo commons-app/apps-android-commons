@@ -8,7 +8,7 @@ import org.hamcrest.Matcher
 object ViewActions {
     fun clickChildViewWithId(id: Int): ViewAction {
         return object : ViewAction {
-            override fun getConstraints(): Matcher<View> {
+            override fun getConstraints(): Matcher<View>? {
                 return null
             }
 
