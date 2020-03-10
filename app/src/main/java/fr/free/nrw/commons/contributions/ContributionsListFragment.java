@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -72,6 +75,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     private String lastVisibleItemID;
 
     private int SPAN_COUNT=3;
+    private List<Contribution> contributions=new ArrayList<>();
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
@@ -104,6 +108,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         }
 
         rvContributionsList.setAdapter(adapter);
+        adapter.setContributions(contributions);
     }
 
     @Override
@@ -178,16 +183,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
-    public void onDataSetChanged() {
-        if (null != adapter) {
-            adapter.notifyDataSetChanged();
-            //Restoring last visible item position in cases of orientation change
-            if (null != lastVisibleItemID) {
-                int itemPositionWithId = callback.findItemPositionWithId(lastVisibleItemID);
-                rvContributionsList.scrollToPosition(itemPositionWithId);
-                lastVisibleItemID = null;//Reset the lastVisibleItemID once we have used it
-            }
-        }
+    public void setContributions(List<Contribution> contributionList) {
+        this.contributions.clear();
+        this.contributions.addAll(contributionList);
+        adapter.setContributions(contributions);
     }
 
     public interface SourceRefresher {
@@ -228,7 +227,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     private String findIdOfItemWithPosition(int position) {
         Contribution contributionForPosition = callback.getContributionForPosition(position);
         if (null != contributionForPosition) {
-            return contributionForPosition.getContentUri().getLastPathSegment();
+            return contributionForPosition.getFilename();
         }
         return null;
     }

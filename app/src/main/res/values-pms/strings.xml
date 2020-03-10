@@ -115,7 +115,7 @@
   <string name="use_previous">Dovré ël tìtol e la descrission precedent</string>
   <string name="allow_gps">Oten-e an automàtich la posission atual</string>
   <string name="allow_gps_summary">A arcupera la posission atual si la plancia a l\'é nen marcà da na mira geogràfica, e a marca da na mira geogràfica la plancia. Atension: Sòn a dësveilërà soa posission atual.</string>
-  <string name="preference_theme" fuzzy="true">Meud nuité</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four">Atribussion-Partagi ugual 4.0</string>
   <string name="license_name_cc_by_four">Atribussion 4.0</string>
   <string name="license_name_cc_by_sa">Atribussion-partagi ugual 3.0</string>
@@ -563,4 +563,7 @@
   <string name="wallpaper_set_unsuccessfully">A-i é cheicòs ch\'a l\'é andà stòrt. Impossìbil buté la tapissarìa</string>
   <string name="setting_wallpaper_dialog_title">Definì \'me tapissarìa</string>
   <string name="setting_wallpaper_dialog_message">Definission dla tapissarìa. Për piasì, ch\'a speta…</string>
+  <string name="theme_default_name">Stàndard</string>
+  <string name="theme_dark_name">Sombr</string>
+  <string name="theme_light_name">Ciàir</string>
 </resources>

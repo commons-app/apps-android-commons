@@ -106,7 +106,7 @@
   <string name="menu_about">Über</string>
   <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
   <string name="about_improve">Einen neuen &lt;a href=\"%1$s\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Datenschutzrichtlinie&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Datenschutzrichtlinie</string>
   <string name="about_credits">Urheberschaft</string>
   <string name="title_activity_about">Über</string>
   <string name="menu_feedback">Rückmeldung per E-Mail senden</string>
@@ -126,7 +126,7 @@
   <string name="use_previous">Vorherigen Titel und Beschreibung verwenden</string>
   <string name="allow_gps">Aktuellen Standort automatisch abrufen</string>
   <string name="allow_gps_summary">Ruft den aktuellen Standort ab, falls das Bild nicht georeferenziert ist und markiert es. Warnung: Diese Aktion verrät deinen aktuellen Standort.</string>
-  <string name="preference_theme" fuzzy="true">Nachtmodus</string>
+  <string name="preference_theme">Farbschema</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
@@ -167,7 +167,7 @@
   <string name="welcome_copyright_subtext">Vermeide urheberrechtlich geschütztes Material, das du im Internet gefunden hast wie Bilder von Postern, Buchcovern etc.</string>
   <string name="welcome_final_text">Verstanden?</string>
   <string name="welcome_final_button_text">Ja!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Weitere Informationen&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Weitere Informationen</string>
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
@@ -268,7 +268,7 @@
   <string name="null_url">Fehler! URL nicht gefunden</string>
   <string name="nominate_deletion">Zur Löschung vorschlagen</string>
   <string name="nominated_for_deletion">Dieses Bild wurde zur Löschung vorgeschlagen.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Siehe die Webseite für Einzelheiten&lt;/u&gt;</string>
+  <string name="nominated_see_more">Siehe die Webseite für Einzelheiten</string>
   <string name="nominating_file_for_deletion">%1$s zur Löschung vorschlagen.</string>
   <string name="nominating_for_deletion_status">Datei zur Löschung vorschlagen: %1$s</string>
   <string name="view_browser">Im Browser ansehen</string>

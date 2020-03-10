@@ -111,7 +111,7 @@
   <string name="use_previous">Viregen Titel a Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
   <string name="allow_gps_summary">Rifft déi aktuell Plaz of wann e Bild net georeferenzéiert ass a setzt Geotagge vun der aktueller Plaz. Opgepasst: Doduerch gëtt Är aktuell Plaz bekannt.</string>
-  <string name="preference_theme" fuzzy="true">Nuetsmodus</string>
+  <string name="preference_theme">Thema</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
@@ -361,4 +361,7 @@
   <string name="wallpaper_set_unsuccessfully">Et ass Eppes schif gaangen. D\'Hannergrondbild konnt net agestallt ginn</string>
   <string name="setting_wallpaper_dialog_title">Als Hannergrondbild festleeën</string>
   <string name="setting_wallpaper_dialog_message">Hannergrondbild gëtt agestallt. Waart wgl...</string>
+  <string name="theme_default_name">Standard</string>
+  <string name="theme_dark_name">Däischter</string>
+  <string name="theme_light_name">Hell</string>
 </resources>

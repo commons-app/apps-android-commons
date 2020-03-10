@@ -113,8 +113,6 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
 
     private void initMain() {
         //Do not remove this, this triggers the sync service
-        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(),BuildConfig.CONTRIBUTION_AUTHORITY,true);
-        requestSync(sessionManager.getCurrentAccount(), BuildConfig.CONTRIBUTION_AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);

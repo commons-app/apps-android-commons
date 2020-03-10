@@ -6,6 +6,8 @@ import android.os.Parcel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,6 +25,7 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
+@Entity(tableName = "contribution")
 public class  Contribution extends Media {
 
     //{{According to Exif data|2009-01-09}}
@@ -56,17 +59,19 @@ public class  Contribution extends Media {
     public static final String SOURCE_CAMERA = "camera";
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
-
-    private Uri contentUri;
-    private String source;
-    private String editSummary;
-    private int state;
-    private long transferred;
-    private String decimalCoords;
-    private boolean isMultiple;
-    private String wikiDataEntityId;
-    private Uri contentProviderUri;
-    private String dateCreatedSource;
+    @PrimaryKey (autoGenerate = true)
+    @NonNull
+    public long _id;
+    public Uri contentUri;
+    public String source;
+    public String editSummary;
+    public int state;
+    public long transferred;
+    public String decimalCoords;
+    public boolean isMultiple;
+    public String wikiDataEntityId;
+    public Uri contentProviderUri;
+    public String dateCreatedSource;
 
     /**
      * Each depiction loaded in depictions activity is associated with a wikidata entity id,

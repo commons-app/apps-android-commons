@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.collection.LruCache;
+import androidx.room.Room;
 
 import com.github.varunpant.quadtree.QuadTree;
 import com.google.gson.Gson;
@@ -27,8 +28,9 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.settings.Prefs;
@@ -53,6 +55,7 @@ public class CommonsApplicationModule {
     private Context applicationContext;
     public static final String IO_THREAD="io_thread";
     public static final String MAIN_THREAD="main_thread";
+    private AppDatabase appDatabase;
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
@@ -239,5 +242,17 @@ public class CommonsApplicationModule {
     @Provides
     public QuadTree providesQuadTres() {
         return new QuadTree<>(-180, -90, +180, +90);
+    }
+
+    @Provides
+    @Singleton
+    public AppDatabase provideAppDataBase() {
+        appDatabase=Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db").build();
+        return appDatabase;
+    }
+
+    @Provides
+    public ContributionDao providesContributionsDao() {
+        return appDatabase.getContributionDao();
     }
 }

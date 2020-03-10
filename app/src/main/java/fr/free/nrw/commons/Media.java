@@ -6,6 +6,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
@@ -26,6 +28,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 
+@Entity
 public class Media implements Parcelable {
 
     public static final Media EMPTY = new Media("");
@@ -42,53 +45,53 @@ public class Media implements Parcelable {
     };
 
     // Primary metadata fields
-    protected Uri localUri;
-    private String thumbUrl;
-    protected String imageUrl;
-    protected String filename;
-    protected String thumbnailTitle;
+    public Uri localUri;
+    public String thumbUrl;
+    public String imageUrl;
+    public String filename;
+    public String thumbnailTitle;
     /**
      * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
      * This is a replacement of the previously used titles for images (titles were not multilingual)
      * Also now captions replace the previous convention of using title for filename
      */
     private String caption;
-    protected String description; // monolingual description on input...
-    protected String discussion;
-    protected long dataLength;
-    protected Date dateCreated;
-    protected @Nullable Date dateUploaded;
-    protected int width;
-    protected int height;
-    protected String license;
-    protected String licenseUrl;
-    protected String creator;
+    public String description; // monolingual description on input...
+    public String discussion;
+    long dataLength;
+    public Date dateCreated;
+    @Nullable public  Date dateUploaded;
+    public int width;
+    public int height;
+    public String license;
+    public String licenseUrl;
+    public String creator;
     /**
      * Wikibase Identifier associated with media files
      */
-    protected String pageId;
-    protected ArrayList<String> categories; // as loaded at runtime?
+    public String pageId;
+    public ArrayList<String> categories; // as loaded at runtime?
     /**
      * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
      * However unlike categories depictions is multi-lingual
      */
-    protected ArrayList<Map<String, String>> depictionList;
+    public ArrayList<Map<String, String>> depictionList;
     /**
      * The above hashmap is fetched from API and to diplay in Explore
      * However this list of depictions is for storing and retrieving depictions from local storage or cache
      */
-    protected ArrayList<String> depictions;
-    protected boolean requestedDeletion;
-    private Map<String, String> descriptions; // multilingual descriptions as loaded
+    public ArrayList<String> depictions;
+    public boolean requestedDeletion;
+    public Map<String, String> descriptions; // multilingual descriptions as loaded
     /**
      * This hasmap stores the list of multilingual captions, where
      * key of the HashMap is the language and value is the caption in the corresponding language
      * Ex: key = "en", value: "<caption in short in English>"
      *     key = "de" , value: "<caption in german>"
      */
-    private HashMap<String, String> captions;
-    private HashMap<String, Object> tags = new HashMap<>();
-    private @Nullable LatLng coordinates;
+    public HashMap<String, String> captions;
+    public HashMap<String, String> tags = new HashMap<>();
+    @Nullable public  LatLng coordinates;
 
     /**
      * Provides local constructor
@@ -152,7 +155,7 @@ public class Media implements Parcelable {
         dateCreated = (Date) in.readSerializable();
         dateUploaded = (Date) in.readSerializable();
         creator = in.readString();
-        tags = (HashMap<String, Object>) in.readSerializable();
+        tags = (HashMap<String, String>) in.readSerializable();
         width = in.readInt();
         height = in.readInt();
         license = in.readString();
@@ -271,7 +274,7 @@ public class Media implements Parcelable {
      * @param key Media key
      * @param value Media value
      */
-    public void setTag(String key, Object value) {
+    public void setTag(String key, String value) {
         tags.put(key, value);
     }
 

@@ -224,6 +224,7 @@ public class UploadModel {
             contribution.setTag("mimeType", item.mimeType);
             contribution.setSource(item.source);
             contribution.setContentProviderUri(item.mediaUri);
+            contribution.setDateUploaded(new Date());
 
             Timber.d("Created timestamp while building contribution is %s, %s",
                     item.getCreatedTimestamp(),

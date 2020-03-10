@@ -6,6 +6,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Build;
 import android.os.Process;
 import android.util.Log;
@@ -44,8 +45,8 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
 import fr.free.nrw.commons.concurrency.ThreadPoolService;
-import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
@@ -61,6 +62,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.data.DBOpenHelper.CONTRIBUTIONS_TABLE;
 import static org.acra.ReportField.ANDROID_VERSION;
 import static org.acra.ReportField.APP_VERSION_CODE;
 import static org.acra.ReportField.APP_VERSION_NAME;
@@ -126,6 +128,9 @@ public class CommonsApplication extends Application {
     public AppLanguageLookUpTable getLanguageLookUpTable() {
         return languageLookUpTable;
     }
+
+    @Inject
+    AppDatabase appDatabase;
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -308,10 +313,12 @@ public class CommonsApplication extends Application {
 
         CategoryDao.Table.onDelete(db);
         DepictionDao.Table.onDelete(db);
-        ContributionDao.Table.onDelete(db);
+        dbOpenHelper.deleteTable(db,CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
+        appDatabase.getContributionDao().deleteAll();
         BookmarkPicturesDao.Table.onDelete(db);
         BookmarkLocationsDao.Table.onDelete(db);
     }
+
 
     /**
      * Interface used to get log-out events
