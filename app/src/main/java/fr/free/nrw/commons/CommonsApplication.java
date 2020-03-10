@@ -6,7 +6,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.os.Build;
 import android.os.Process;
 import android.util.Log;
@@ -16,10 +15,7 @@ import androidx.annotation.NonNull;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.imagepipeline.producers.Consumer;
-import com.facebook.imagepipeline.producers.FetchState;
 import com.facebook.imagepipeline.producers.NetworkFetcher;
-import com.facebook.imagepipeline.producers.ProducerContext;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -45,15 +41,14 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
 import fr.free.nrw.commons.concurrency.ThreadPoolService;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.upload.structure.depictions.DepictionDao;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.internal.functions.Functions;
@@ -129,8 +124,7 @@ public class CommonsApplication extends Application {
         return languageLookUpTable;
     }
 
-    @Inject
-    AppDatabase appDatabase;
+    @Inject ContributionDao contributionDao;
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -312,9 +306,8 @@ public class CommonsApplication extends Application {
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
         CategoryDao.Table.onDelete(db);
-        DepictionDao.Table.onDelete(db);
         dbOpenHelper.deleteTable(db,CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
-        appDatabase.getContributionDao().deleteAll();
+        contributionDao.deleteAll();
         BookmarkPicturesDao.Table.onDelete(db);
         BookmarkLocationsDao.Table.onDelete(db);
     }

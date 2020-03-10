@@ -58,7 +58,7 @@ public class DepictsClient {
                 String.valueOf(offset)
         )
                 .flatMap(depictSearchResponse ->Observable.fromIterable(depictSearchResponse.getSearch()))
-                .map(depictSearchItem -> new DepictedItem(depictSearchItem.getLabel(), depictSearchItem.getDescription(), "", false, depictSearchItem.getId()));
+                .map(DepictedItem::new);
     }
 
     /**

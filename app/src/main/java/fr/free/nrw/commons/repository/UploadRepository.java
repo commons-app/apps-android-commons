@@ -287,12 +287,11 @@ public class UploadRepository {
      * Search all depictions from
      *
      * @param query
-     * @param imageTitleList
      * @return
      */
 
-    public Observable<DepictedItem> searchAllEntities(String query, List<String> imageTitleList) {
-        return remoteDataSource.searchAllEntities(query, imageTitleList);
+    public Observable<DepictedItem> searchAllEntities(String query) {
+        return remoteDataSource.searchAllEntities(query);
     }
 
     public List<String> getDepictionsEntityIdList() {

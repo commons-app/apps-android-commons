@@ -21,7 +21,6 @@ import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -230,8 +229,8 @@ public class UploadRemoteDataSource {
      * get all depictions
      */
 
-    public Observable<DepictedItem> searchAllEntities(String query, List<String> imageTitleList) {
-        return depictModel.searchAllEntities(query, imageTitleList);
+    public Observable<DepictedItem> searchAllEntities(String query) {
+        return depictModel.searchAllEntities(query);
     }
 
     public void setSelectedDepictions(List<String> selectedDepictions) {

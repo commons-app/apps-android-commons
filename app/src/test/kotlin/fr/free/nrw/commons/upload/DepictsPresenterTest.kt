@@ -16,7 +16,6 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
 class DepictsPresenterTest {
@@ -62,7 +61,7 @@ class DepictsPresenterTest {
     fun searchEnglishDepictionsTest() {
         whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
         depictsPresenter?.searchForDepictions("test")
         verify(view)?.showProgress(true)
         verify(view)?.showError(true)
@@ -75,7 +74,7 @@ class DepictsPresenterTest {
     fun searchOtherLanguageDepictions() {
         whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
         depictsPresenter?.searchForDepictions("वी")
         verify(view)?.showProgress(true)
         verify(view)?.showError(true)
@@ -88,7 +87,7 @@ class DepictsPresenterTest {
     fun searchForNonExistingDepictions() {
         whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
         depictsPresenter?.searchForDepictions("******")
         verify(view)?.showProgress(true)
         verify(view)?.setDepictsList(null)
@@ -101,7 +100,7 @@ class DepictsPresenterTest {
     fun setSingleDepiction() {
         whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
         depictsPresenter?.onDepictItemClicked(depictedItem)
         depictsPresenter?.verifyDepictions()
         verify(view)?.goToNextScreen()
@@ -111,7 +110,7 @@ class DepictsPresenterTest {
     fun setMultipleDepictions() {
         whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
         depictsPresenter?.onDepictItemClicked(depictedItem)
         val depictedItem2 = DepictedItem("label2", "desc2", null, false, "entityid2")
         depictsPresenter?.onDepictItemClicked(depictedItem2)
