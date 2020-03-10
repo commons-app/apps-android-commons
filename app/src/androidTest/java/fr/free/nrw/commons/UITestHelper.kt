@@ -22,15 +22,6 @@ class UITestHelper {
             }
         }
 
-        fun skipLogin() {
-            try {
-                //Skip Login
-                onView(ViewMatchers.withId(R.id.skip_login))
-                        .perform(ViewActions.click())
-            } catch (ignored: NoMatchingViewException) {
-            }
-        }
-
         fun loginUser() {
             try {
                 //Perform Login
