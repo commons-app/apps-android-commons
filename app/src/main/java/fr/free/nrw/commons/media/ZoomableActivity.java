@@ -13,9 +13,12 @@ import timber.log.Timber;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
@@ -23,8 +26,10 @@ import com.facebook.drawee.interfaces.DraweeController;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.InputStream;
@@ -36,6 +41,8 @@ public class ZoomableActivity extends AppCompatActivity {
 
     @BindView(R.id.zoomable)
     ZoomableDraweeView photo;
+    @BindView(R.id.zoom_progress_bar)
+    ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,19 @@ public class ZoomableActivity extends AppCompatActivity {
         init();
     }
 
+    private final ControllerListener loadingListener = new BaseControllerListener<ImageInfo>() {
+        @Override
+        public void onSubmit(String id, Object callerContext) {
+        }
+
+        @Override
+        public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+        }
+        @Override
+        public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
+            spinner.setVisibility(View.GONE);
+        }
+    };
     private void init() {
         if( imageUri != null ) {
             GenericDraweeHierarchy hierarchy = GenericDraweeHierarchyBuilder.newInstance(getResources())
@@ -65,6 +85,7 @@ public class ZoomableActivity extends AppCompatActivity {
             photo.setTapListener(new DoubleTapGestureListener(photo));
             DraweeController controller = Fresco.newDraweeControllerBuilder()
                     .setUri(imageUri)
+                    .setControllerListener(loadingListener)
                     .build();
             photo.setController(controller);
         }
