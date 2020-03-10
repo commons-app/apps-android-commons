@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.action.ViewActions.click
@@ -116,7 +117,7 @@ class UploadTest {
         UITestHelper.sleep(3000)
 
         try {
-            onView(allOf(isDisplayed(), withParent(withId(R.id.rv_categories))))
+            onView(allOf(isDisplayed(), UITestHelper.first(withParent(withId(R.id.rv_categories)))))
                     .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
@@ -173,18 +174,18 @@ class UploadTest {
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
                 .perform(click())
 
-        UITestHelper.sleep(5000)
+        UITestHelper.sleep(10000)
         dismissWarning("Yes")
 
         UITestHelper.sleep(3000)
 
         onView(allOf(isDisplayed(), withId(R.id.et_search)))
-                .perform(replaceText("Uploaded with Mobile/Android Tests"))
+                .perform(replaceText("Test"))
 
         UITestHelper.sleep(3000)
 
         try {
-            onView(allOf(isDisplayed(), withParent(withId(R.id.rv_categories))))
+            onView(allOf(isDisplayed(), UITestHelper.first(withParent(withId(R.id.rv_categories)))))
                     .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
@@ -261,7 +262,7 @@ class UploadTest {
         UITestHelper.sleep(3000)
 
         try {
-            onView(allOf(isDisplayed(), withParent(withId(R.id.rv_categories))))
+            onView(allOf(isDisplayed(), UITestHelper.first(withParent(withId(R.id.rv_categories)))))
                     .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
