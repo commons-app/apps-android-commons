@@ -111,6 +111,17 @@ public class CommonsApplicationModule {
     }
 
     /**
+     * This method is used to provide instance of DepictsContentProviderClient
+     * @param context context
+     * @return DepictsContentProviderClient*/
+
+    @Provides
+    @Named("depictions")
+    public ContentProviderClient provideDepictsContentProviderClient(Context context) {
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.DEPICTION_AUTHORITY);
+    }
+
+    /**
      * This method is used to provide instance of RecentSearchContentProviderClient
      * which provides content of Recent Searches from database
      * @param context

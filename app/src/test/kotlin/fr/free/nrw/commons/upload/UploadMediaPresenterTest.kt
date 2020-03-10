@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload
 
+import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
@@ -11,12 +12,13 @@ import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
+import org.mockito.*
 import org.mockito.ArgumentMatchers
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
-import org.mockito.MockitoAnnotations
+import java.util.ArrayList
 
 
 /**
@@ -43,7 +45,13 @@ class UploadMediaPresenterTest {
     private var title: Title? = null
 
     @Mock
-    private var descriptions: List<Description>? = null
+    private var uploadMediaDetails: List<UploadMediaDetail>? = null
+
+    @InjectMocks
+    var uploadMediaDetailAdapter: UploadMediaDetailAdapter? = null
+
+    var recyclerView: RecyclerView? = null
+
 
     private var testObservableUploadItem: Observable<UploadModel.UploadItem>? = null
     private var testSingleImageResult: Single<Int>? = null
@@ -58,6 +66,8 @@ class UploadMediaPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         testObservableUploadItem = Observable.just(uploadItem)
+        uploadMediaDetailAdapter = UploadMediaDetailAdapter();
+        recyclerView?.adapter = uploadMediaDetailAdapter
         testSingleImageResult = Single.just(1)
         testScheduler = TestScheduler()
         uploadMediaPresenter = UploadMediaPresenter(repository, testScheduler, testScheduler)
@@ -103,15 +113,52 @@ class UploadMediaPresenterTest {
         uploadMediaPresenter?.handleImageResult(FILE_NAME_EXISTS)
         verify(view)?.showDuplicatePicturePopup()
 
-        //Empty Title test
-        uploadMediaPresenter?.handleImageResult(EMPTY_TITLE)
+        //Empty Caption test
+        uploadMediaPresenter?.handleImageResult(EMPTY_CAPTION)
         verify(view)?.showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
 
         //Bad Picture test
-        //Empty Title test
+        //Empty Caption test
         uploadMediaPresenter?.handleImageResult(-7)
         verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt())
 
+    }
+
+    @Test
+    fun addSingleCaption() {
+        val uploadMediaDetail = UploadMediaDetail()
+        uploadMediaDetail.captionText = "added caption"
+        uploadMediaDetail.languageCode = "en"
+        val uploadMediaDetailList: ArrayList<UploadMediaDetail> = ArrayList()
+        uploadMediaDetailList.add(uploadMediaDetail)
+        uploadMediaDetailAdapter?.addDescription(uploadMediaDetail)
+        uploadItem?.setMediaDetails(uploadMediaDetailAdapter?.getUploadMediaDetails())
+        Mockito.`when`(repository?.getImageQuality(uploadItem, true)).then {
+            verify(view)?.showProgress(true)
+            testScheduler?.triggerActions()
+            verify(view)?.showProgress(true)
+            verify(view)?.onImageValidationSuccess()
+            uploadMediaPresenter?.setUploadItem(0, uploadItem)
+        }
+    }
+
+    @Test
+    fun addMultipleCaptions() {
+        val uploadMediaDetail = UploadMediaDetail()
+        uploadMediaDetail.captionText = "added caption"
+        uploadMediaDetail.languageCode = "en"
+        uploadMediaDetailAdapter?.addDescription(uploadMediaDetail)
+        uploadMediaDetail.captionText = "added caption"
+        uploadMediaDetail.languageCode = "eo"
+        uploadMediaDetailAdapter?.addDescription(uploadMediaDetail)
+        uploadItem?.setMediaDetails(uploadMediaDetailAdapter?.getUploadMediaDetails())
+        Mockito.`when`(repository?.getImageQuality(uploadItem, true)).then {
+            verify(view)?.showProgress(true)
+            testScheduler?.triggerActions()
+            verify(view)?.showProgress(true)
+            verify(view)?.onImageValidationSuccess()
+            uploadMediaPresenter?.setUploadItem(0, uploadItem)
+        }
     }
 
     /**
@@ -120,12 +167,12 @@ class UploadMediaPresenterTest {
     @Test
     fun fetchPreviousImageAndTitleTestPositive(){
         Mockito.`when`(repository?.getPreviousUploadItem(ArgumentMatchers.anyInt())).thenReturn(uploadItem)
-        Mockito.`when`(uploadItem?.descriptions).thenReturn(descriptions)
+        Mockito.`when`(uploadItem?.uploadMediaDetails).thenReturn(uploadMediaDetails)
         Mockito.`when`(uploadItem?.title).thenReturn(title)
         Mockito.`when`(title?.getTitleText()).thenReturn(ArgumentMatchers.anyString())
 
         uploadMediaPresenter?.fetchPreviousTitleAndDescription(0)
-        verify(view)?.setTitleAndDescription(ArgumentMatchers.anyString(),ArgumentMatchers.any())
+        verify(view)?.setTitleAndDescription(ArgumentMatchers.anyString(), ArgumentMatchers.any())
     }
 
     /**

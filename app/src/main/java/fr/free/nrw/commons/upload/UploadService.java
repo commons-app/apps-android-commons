@@ -39,6 +39,14 @@ import io.reactivex.SingleObserver;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.inject.Inject;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -280,7 +288,15 @@ public class UploadService extends HandlerService<Contribution> {
                         String canonicalFilename = "File:" + uploadResult.getFilename();
                         Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
                                 contribution.getWikiDataEntityId());
+                        // to perform upload of depictions we pass on depiction entityId of the selected depictions to the wikidataEditService
+                        if (contribution.getDepictionsEntityIds() != null) {
+                            for (String s : contribution.getDepictionsEntityIds()) {
+                                wikidataEditService.createClaimWithLogging(s, canonicalFilename);
+                            }
+                        }
                         wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename);
+                        wikidataEditService.createLabelforWikidataEntity(contribution.getWikiDataEntityId(), canonicalFilename,
+                                (Map) contribution.getCaptions());
                         contribution.setFilename(canonicalFilename);
                         contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
                         contribution.setState(Contribution.STATE_COMPLETED);

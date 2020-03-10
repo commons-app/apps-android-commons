@@ -26,6 +26,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.categories.SearchCategoryFragment;
+import fr.free.nrw.commons.explore.depictions.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.images.SearchImageFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -50,6 +51,7 @@ public class SearchActivity extends NavigationBaseActivity
 
     private SearchImageFragment searchImageFragment;
     private SearchCategoryFragment searchCategoryFragment;
+    private SearchDepictionsFragment searchDepictionsFragment;
     private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
     private MediaDetailPagerFragment mediaDetails;
@@ -68,6 +70,7 @@ public class SearchActivity extends NavigationBaseActivity
         setSearchHistoryFragment();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setOffscreenPageLimit(2); // Because we want all the fragments to be alive
         tabLayout.setupWithViewPager(viewPager);
         setTabs();
         searchView.setQueryHint(getString(R.string.search_commons));
@@ -93,11 +96,14 @@ public class SearchActivity extends NavigationBaseActivity
         List<Fragment> fragmentList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
         searchImageFragment = new SearchImageFragment();
+        searchDepictionsFragment = new SearchDepictionsFragment();
         searchCategoryFragment= new SearchCategoryFragment();
         fragmentList.add(searchImageFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase());
         fragmentList.add(searchCategoryFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_categories).toUpperCase());
+        fragmentList.add(searchDepictionsFragment);
+        titleList.add(getResources().getString(R.string.search_tab_title_depictions).toUpperCase());
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
@@ -112,6 +118,11 @@ public class SearchActivity extends NavigationBaseActivity
                                 viewPager.setVisibility(View.VISIBLE);
                                 tabLayout.setVisibility(View.VISIBLE);
                                 searchHistoryContainer.setVisibility(View.GONE);
+
+                                if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
+                                    searchDepictionsFragment.updateDepictionList(query.toString());
+                                }
+
                                 if (FragmentUtils.isFragmentUIActive(searchImageFragment)) {
                                     searchImageFragment.updateImageList(query.toString());
                                 }
@@ -119,6 +130,7 @@ public class SearchActivity extends NavigationBaseActivity
                                 if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
                                     searchCategoryFragment.updateCategoryList(query.toString());
                                 }
+
                             }else {
                                 //Open RecentSearchesFragment
                                 recentSearchesFragment.updateRecentSearches();

@@ -11,6 +11,7 @@ import fr.free.nrw.commons.bookmarks.BookmarksActivity;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
@@ -21,7 +22,7 @@ import fr.free.nrw.commons.upload.UploadActivity;
 /**
  * This Class handles the dependency injection (using dagger)
  * so, if a developer needs to add a new activity to the commons app
- * then that must be mentioned here to inject the dependencies 
+ * then that must be mentioned here to inject the dependencies
  */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -59,6 +60,9 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract CategoryDetailsActivity bindCategoryDetailsActivity();
+
+    @ContributesAndroidInjector
+    abstract WikidataItemDetailsActivity bindDepictionDetailsActivity();
 
     @ContributesAndroidInjector
     abstract ExploreActivity bindExploreActivity();

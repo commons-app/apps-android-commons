@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -55,7 +57,7 @@ public class GridViewAdapter extends ArrayAdapter {
             data = new ArrayList<>();
             return false;
         }
-        if (data.size() <= 0) {
+        if (data.isEmpty()) {
             return false;
         }
         String fileName = data.get(0).getFilename();
@@ -86,11 +88,21 @@ public class GridViewAdapter extends ArrayAdapter {
         SimpleDraweeView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
         TextView author = convertView.findViewById(R.id.categoryImageAuthor);
-        fileName.setText(item.getDisplayTitle());
+        fileName.setText(item.getThumbnailTitle());
         setAuthorView(item, author);
         imageView.setImageURI(item.getThumbUrl());
         return convertView;
     }
+
+    /**
+     * @return the Media item at the given position
+     */
+    @Nullable
+    @Override
+    public Media getItem(int position) {
+        return data.get(position);
+    }
+
 
     /**
      * Shows author information if its present

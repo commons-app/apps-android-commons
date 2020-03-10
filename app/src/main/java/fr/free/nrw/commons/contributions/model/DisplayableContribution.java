@@ -16,6 +16,7 @@ public class DisplayableContribution extends Contribution {
                 contribution.getDateUploaded(),
                 contribution.getTransferred(),
                 contribution.getSource(),
+                contribution.getCaptions(),
                 contribution.getDescription(),
                 contribution.getCreator(),
                 contribution.getMultiple(),

@@ -42,6 +42,7 @@ dependencies {
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
     // Logging
@@ -63,7 +64,7 @@ dependencies {
 
     //Mocking
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
-    testImplementation 'org.mockito:mockito-inline:2.8.47'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
     testImplementation 'org.mockito:mockito-core:2.23.0'
     testImplementation "org.powermock:powermock-module-junit4:2.0.0-beta.5"
     testImplementation "org.powermock:powermock-api-mockito2:2.0.0-beta.5"
@@ -200,6 +201,7 @@ android {
             buildConfigField "String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\""
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\""
             buildConfigField "String", "WIKIDATA_API_HOST", "\"https://www.wikidata.org/w/api.php\""
+            buildConfigField "String", "WIKIDATA_URL", "\"https://www.wikidata.org\""
             buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
             buildConfigField "String", "WIKIMEDIA_CAMPAIGNS_URL", "\"https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json\""
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.wikimedia.org/wikipedia/commons\""
@@ -215,12 +217,14 @@ android {
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.contributions.contentprovider\""
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.modifications.contentprovider\""
             buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.categories.contentprovider\""
+            buildConfigField "String", "DEPICTION_AUTHORITY", "\"fr.free.nrw.commons.depicts.contentprovider\""
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.explore.recentsearches.contentprovider\""
             buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.contentprovider\""
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.locations.contentprovider\""
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
             buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
+            buildConfigField "String", "DEPICTS_PROPERTY", "\"P180\""
 
             dimension 'tier'
         }
@@ -232,6 +236,7 @@ android {
             buildConfigField "String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\""
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.beta.wmflabs.org/w/api.php\""
             buildConfigField "String", "WIKIDATA_API_HOST", "\"https://www.wikidata.org/w/api.php\""
+            buildConfigField "String", "WIKIDATA_URL", "\"https://www.wikidata.org\""
             buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
             buildConfigField "String", "WIKIMEDIA_CAMPAIGNS_URL", "\"https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns_beta_active.json\""
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.beta.wmflabs.org/wikipedia/commons\""
@@ -247,12 +252,14 @@ android {
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.beta.contributions.contentprovider\""
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.beta.modifications.contentprovider\""
             buildConfigField "String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.beta.categories.contentprovider\""
+            buildConfigField "String", "DEPICTION_AUTHORITY", "\"fr.free.nrw.commons.beta.depicts.contentprovider\""
             buildConfigField "String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.beta.explore.recentsearches.contentprovider\""
             buildConfigField "String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.contentprovider\""
             buildConfigField "String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\""
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
             buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
+            buildConfigField "String", "DEPICTS_PROPERTY", "\"P245962\""
 
             dimension 'tier'
         }

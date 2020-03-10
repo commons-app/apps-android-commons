@@ -17,6 +17,15 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Locale;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import androidx.annotation.Nullable;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -57,6 +66,7 @@ public class UploadModel {
     private FileProcessor fileProcessor;
     private final ImageProcessingService imageProcessingService;
     private List<String> selectedCategories;
+    private ArrayList<String> selectedDepictions;
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
@@ -86,6 +96,9 @@ public class UploadModel {
         if (this.selectedCategories != null) {
             this.selectedCategories.clear();
         }
+        if (this.selectedDepictions != null) {
+            this.selectedDepictions.clear();
+        }
     }
 
     public void setSelectedCategories(List<String> selectedCategories) {
@@ -107,7 +120,6 @@ public class UploadModel {
                 .map(uploadableFile -> getUploadItem(uploadableFile, place, source,
                         similarImageInterface));
     }
-
 
     /**
      * pre process a one item at a time
@@ -146,11 +158,15 @@ public class UploadModel {
                 createdTimestampSource);
         if (place != null) {
             uploadItem.title.setTitleText(place.name);
-            if(uploadItem.descriptions.isEmpty()) {
-                uploadItem.descriptions.add(new Description());
+            if(uploadItem.uploadMediaDetails.isEmpty()) {
+                uploadItem.uploadMediaDetails.add(new UploadMediaDetail());
             }
-            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
-            uploadItem.descriptions.get(0).setLanguageCode("en");
+            uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
+            uploadItem.uploadMediaDetails.get(0).setLanguageCode("en");
+            String languageCode = Locale.getDefault().getLanguage();
+                        uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
+            uploadItem.uploadMediaDetails.get(0).setLanguageCode(languageCode);
+            uploadItem.uploadMediaDetails.get(0).setCaptionText(place.name);
         }
         if (!items.contains(uploadItem)) {
             items.add(uploadItem);
@@ -191,15 +207,18 @@ public class UploadModel {
         return Observable.fromIterable(items).map(item ->
         {
             Contribution contribution = new Contribution(item.mediaUri, null,
-                    item.getFileName(),
-                    Description.formatList(item.descriptions), -1,
+                    item.getFileName(), item.uploadMediaDetails.size()!=0? UploadMediaDetail.formatCaptions(item.uploadMediaDetails):new HashMap<>(),
+                    UploadMediaDetail.formatList(item.uploadMediaDetails), -1,
                     null, null, sessionManager.getAuthorName(),
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY, selectedDepictions, item.gpsCoords.getCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
             }
             if (null == selectedCategories) {//Just a fail safe, this should never be null
                 selectedCategories = new ArrayList<>();
+            }
+            if (selectedDepictions == null) {
+                selectedDepictions = new ArrayList<>();
             }
             contribution.setCategories(selectedCategories);
             contribution.setTag("mimeType", item.mimeType);
@@ -238,8 +257,15 @@ public class UploadModel {
 
     public void updateUploadItem(int index, UploadItem uploadItem) {
         UploadItem uploadItem1 = items.get(index);
-        uploadItem1.setDescriptions(uploadItem.descriptions);
+        uploadItem1.setMediaDetails(uploadItem.uploadMediaDetails);
         uploadItem1.setTitle(uploadItem.title);
+    }
+
+    public void setSelectedDepictions(List<String> selectedDepictions) {
+        if (null == selectedDepictions) {
+            selectedDepictions = new ArrayList<>();
+        }
+        this.selectedDepictions = (ArrayList<String>) selectedDepictions;
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -254,7 +280,7 @@ public class UploadModel {
         private boolean selected = false;
         private boolean first = false;
         private Title title;
-        private List<Description> descriptions;
+        private List<UploadMediaDetail> uploadMediaDetails;
         private Place place;
         private boolean visited;
         private boolean error;
@@ -271,7 +297,8 @@ public class UploadModel {
             this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
             title = new Title();
-            descriptions = new ArrayList<>();
+            uploadMediaDetails = new ArrayList<>();
+            uploadMediaDetails.add(new UploadMediaDetail());
             this.place = place;
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
@@ -305,8 +332,8 @@ public class UploadModel {
             return first;
         }
 
-        public List<Description> getDescriptions() {
-            return descriptions;
+        public List<UploadMediaDetail> getUploadMediaDetails() {
+            return uploadMediaDetails;
         }
 
         public boolean isVisited() {
@@ -341,11 +368,6 @@ public class UploadModel {
             return MimeTypeMapWrapper.getExtensionFromMimeType(mimeType);
         }
 
-        public String getFileName() {
-            return title
-                    != null ? Utils.fixExtension(title.toString(), getFileExt()) : null;
-        }
-
         public Place getPlace() {
             return place;
         }
@@ -354,8 +376,9 @@ public class UploadModel {
             this.title = title;
         }
 
-        public void setDescriptions(List<Description> descriptions) {
-            this.descriptions = descriptions;
+
+        public void setMediaDetails(List<UploadMediaDetail> uploadMediaDetails) {
+            this.uploadMediaDetails = uploadMediaDetails;
         }
 
         public Uri getContentUri() {
@@ -375,6 +398,14 @@ public class UploadModel {
         @Override
         public int hashCode() {
             return super.hashCode();
+        }
+
+        /**
+         * Choose a filename for the media.
+         * Currently, the caption is used as a filename. If several languages have been entered, the first language is used.
+         */
+        public String getFileName() {
+            return uploadMediaDetails.get(0).getCaptionText();
         }
     }
 

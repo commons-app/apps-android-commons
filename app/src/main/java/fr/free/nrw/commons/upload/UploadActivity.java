@@ -44,9 +44,11 @@ import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
+import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
+import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -102,6 +104,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private UploadImageAdapter uploadImagesAdapter;
     private List<Fragment> fragments;
     private UploadCategoriesFragment uploadCategoriesFragment;
+    private DepictsFragment depictsFragment;
     private MediaLicenseFragment mediaLicenseFragment;
     private ThumbnailsAdapter thumbnailsAdapter;
 
@@ -288,6 +291,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -357,12 +361,17 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             }
 
             uploadCategoriesFragment = new UploadCategoriesFragment();
+            uploadCategoriesFragment.setMediaDetailList(presenter.getImageDetailList());
             uploadCategoriesFragment.setCallback(this);
+
+            depictsFragment = new DepictsFragment();
+            depictsFragment.setMediaDetailList(presenter.getImageDetailList());
+            depictsFragment.setCallback(this);
 
             mediaLicenseFragment = new MediaLicenseFragment();
             mediaLicenseFragment.setCallback(this);
 
-
+            fragments.add(depictsFragment);
             fragments.add(uploadCategoriesFragment);
             fragments.add(mediaLicenseFragment);
 

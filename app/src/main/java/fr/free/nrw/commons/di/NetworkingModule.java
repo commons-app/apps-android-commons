@@ -28,6 +28,7 @@ import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaDetailInterface;
 import fr.free.nrw.commons.media.MediaInterface;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
@@ -35,6 +36,9 @@ import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataInterface;
+import fr.free.nrw.commons.upload.WikiBaseInterface;
+import fr.free.nrw.commons.upload.depicts.DepictsInterface;
+import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -53,6 +57,7 @@ public class NetworkingModule {
 
     public static final String NAMED_COMMONS_WIKI_SITE = "commons-wikisite";
     private static final String NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite";
+    private static final String NAMED_COMMONS_WIKI = "commonswiki";
 
     public static final String NAMED_COMMONS_CSRF = "commons-csrf";
 
@@ -142,6 +147,13 @@ public class NetworkingModule {
         return new WikiSite(BuildConfig.WIKIDATA_URL);
     }
 
+    @Provides
+    @Singleton
+    @Named(NAMED_COMMONS_WIKI)
+    public WikiSite provideCommonsWiki() {
+        return new WikiSite(BuildConfig.COMMONS_URL);
+    }
+
     /**
      * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
      * @return returns a singleton Gson instance
@@ -170,6 +182,24 @@ public class NetworkingModule {
     @Singleton
     public ReviewInterface provideReviewInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public CaptionInterface provideCaptionInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
+        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, CaptionInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public DepictsInterface provideDepictsInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
+        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, DepictsInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public WikiBaseInterface provideWikiBaseInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
     }
 
     @Provides
@@ -205,6 +235,12 @@ public class NetworkingModule {
     @Singleton
     public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, MediaInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public MediaDetailInterface providesMediaDetailInterface(@Named(NAMED_COMMONS_WIKI) WikiSite commonsWikisite) {
+        return ServiceFactory.get(commonsWikisite, BuildConfig.COMMONS_URL, MediaDetailInterface.class);
     }
 
     @Provides

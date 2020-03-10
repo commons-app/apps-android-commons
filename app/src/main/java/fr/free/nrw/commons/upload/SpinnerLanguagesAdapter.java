@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -122,9 +123,11 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
 
     public class ViewHolder {
 
+        @Nullable
         @BindView(R.id.tv_language)
         TextView tvLanguage;
 
+        @Nullable
         @BindView(R.id.view)
         View view;
 
@@ -136,8 +139,17 @@ public class SpinnerLanguagesAdapter extends ArrayAdapter {
             String languageCode = LangCodeUtils.fixLanguageCode(languageCodesList.get(position));
             final String languageName = StringUtils.capitalize(languageNamesList.get(position));
 
+            if(TextUtils.isEmpty(savedLanguageValue)){
+                savedLanguageValue = Locale.getDefault().getLanguage();
+            }
+
             if (!isDropDownView) {
-                view.setVisibility(View.GONE);
+                    if( !dropDownClicked && savedLanguageValue !=null){
+                    languageCode = LangCodeUtils.fixLanguageCode(savedLanguageValue);
+                }
+                if (view != null) {
+                    view.setVisibility(View.GONE);
+                }
                 if (languageCode.length() > 2)
                     tvLanguage.setText(languageCode.substring(0, 2));
                 else

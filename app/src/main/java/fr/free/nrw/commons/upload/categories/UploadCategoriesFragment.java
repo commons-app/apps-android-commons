@@ -32,6 +32,7 @@ import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadCategoriesAdapterFactory;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -54,7 +55,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Inject
     CategoriesContract.UserActionListener presenter;
     private RVRendererAdapter<CategoryItem> adapter;
-    private List<String> mediaTitleList=new ArrayList<>();
+    private List<UploadMediaDetail> mediaTitleList;
     private Disposable subscribe;
     private List<CategoryItem> categories;
     private boolean isVisible;
@@ -64,7 +65,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         super.onCreate(savedInstanceState);
     }
 
-    public void setMediaTitleList(List<String> mediaTitleList) {
+    public void setMediaDetailList(List<UploadMediaDetail> mediaTitleList) {
         this.mediaTitleList = mediaTitleList;
     }
 

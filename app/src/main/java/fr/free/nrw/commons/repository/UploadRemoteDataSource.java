@@ -19,6 +19,9 @@ import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -33,16 +36,17 @@ public class UploadRemoteDataSource {
     private UploadModel uploadModel;
     private UploadController uploadController;
     private CategoriesModel categoriesModel;
+    private DepictModel depictModel;
     private NearbyPlaces nearbyPlaces;
 
     @Inject
     public UploadRemoteDataSource(UploadModel uploadModel, UploadController uploadController,
-                                  CategoriesModel categoriesModel,
-                                  NearbyPlaces nearbyPlaces) {
+                                  CategoriesModel categoriesModel, NearbyPlaces nearbyPlaces, DepictModel depictModel) {
         this.uploadModel = uploadModel;
         this.uploadController = uploadController;
         this.categoriesModel = categoriesModel;
         this.nearbyPlaces = nearbyPlaces;
+        this.depictModel = depictModel;
     }
 
     /**
@@ -203,4 +207,39 @@ public class UploadRemoteDataSource {
             return null;
         }
     }
+
+    /**
+     * handles category selection/unselection
+     * @param depictedItem
+     */
+
+    public void onDepictedItemClicked(DepictedItem depictedItem) {
+        depictModel.onDepictItemClicked(depictedItem);
+    }
+
+    /**
+     * returns the list of selected depictions
+     * @return
+     */
+
+    public List<DepictedItem> getSelectedDepictions() {
+        return depictModel.getSelectedDepictions();
+    }
+
+    /**
+     * get all depictions
+     */
+
+    public Observable<DepictedItem> searchAllEntities(String query, List<String> imageTitleList) {
+        return depictModel.searchAllEntities(query, imageTitleList);
+    }
+
+    public void setSelectedDepictions(List<String> selectedDepictions) {
+        uploadModel.setSelectedDepictions(selectedDepictions);
+    }
+
+    public List<String> depictionsEntityIdList() {
+        return depictModel.depictionsEntityIdList();
+    }
+
 }

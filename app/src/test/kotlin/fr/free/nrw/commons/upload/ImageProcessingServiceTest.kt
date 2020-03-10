@@ -41,18 +41,18 @@ class u {
         MockitoAnnotations.initMocks(this)
         val mediaUri = mock(Uri::class.java)
         val mockPlace = mock(Place::class.java)
-        val mockTitle = mock(Title::class.java)
+        val mockTitle = mock(List::class.java)
 
         `when`(mockPlace.wikiDataEntityId).thenReturn("Q1")
         `when`(mockPlace.getLocation()).thenReturn(mock(LatLng::class.java))
         `when`(mediaUri.path).thenReturn("filePath")
-        `when`(mockTitle.isEmpty).thenReturn(false)
-        `when`(mockTitle.isSet).thenReturn(true)
+        /*`when`(mockTitle.isEmpty).thenReturn(false)
+        `when`(mockTitle.isSet).thenReturn(true)*/
 
         `when`(uploadItem.mediaUri).thenReturn(mediaUri)
         `when`(uploadItem.imageQuality).thenReturn(ImageUtils.IMAGE_WAIT)
 
-        `when`(uploadItem.title).thenReturn(mockTitle)
+        `when`(uploadItem.uploadMediaDetails).thenReturn(mockTitle as MutableList<UploadMediaDetail>?)
 
         `when`(uploadItem.place).thenReturn(mockPlace)
         `when`(uploadItem.fileName).thenReturn("File:jpg")

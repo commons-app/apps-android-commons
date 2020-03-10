@@ -65,7 +65,7 @@ public class ImageUtils {
     public static final int IMAGE_OK = 0;
     public static final int IMAGE_KEEP = -1;
     public static final int IMAGE_WAIT = -2;
-    public static final int EMPTY_TITLE = -3;
+    public static final int EMPTY_CAPTION = -3;
     public static final int FILE_NAME_EXISTS = -4;
     static final int NO_CATEGORY_SELECTED = -5;
 
@@ -80,7 +80,7 @@ public class ImageUtils {
                     IMAGE_OK,
                     IMAGE_KEEP,
                     IMAGE_WAIT,
-                    EMPTY_TITLE,
+                    EMPTY_CAPTION,
                     FILE_NAME_EXISTS,
                     NO_CATEGORY_SELECTED,
                     IMAGE_GEOLOCATION_DIFFERENT

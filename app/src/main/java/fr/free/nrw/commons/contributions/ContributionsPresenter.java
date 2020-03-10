@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -102,8 +103,8 @@ public class ContributionsPresenter implements UserActionListener {
                     .filter(mwQueryLogEvent -> !mwQueryLogEvent.isDeleted()).doOnNext(mwQueryLogEvent -> Timber.d("Image %s passed filters", mwQueryLogEvent.title()))
                     .map(image -> {
                         Contribution contribution = new Contribution(null, null, image.title(),
-                                "", -1, image.date(), image.date(), user,
-                                "", "", STATE_COMPLETED);
+                            new HashMap<>(), "", -1, image.date(), image.date(), user,
+                            "", "", STATE_COMPLETED);
                         return contribution;
                     })
                     .toList()

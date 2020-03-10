@@ -44,6 +44,10 @@ import static android.view.View.VISIBLE;
 public class CategoryImagesListFragment extends DaggerFragment {
 
     private static int TIMEOUT_SECONDS = 15;
+    /**
+     * counts the total number of items loaded from the API
+     */
+    private int mediaSize = 0;
 
     private GridViewAdapter gridAdapter;
 
@@ -256,6 +260,35 @@ public class CategoryImagesListFragment extends DaggerFragment {
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);
+        for (Media m : collection) {
+            replaceTitlesWithCaptions("M"+m.getPageId(), mediaSize++);
+        }
+    }
+
+    /**
+     * fetch captions for the image using filename and replace title of on the image thumbnail(if captions are available)
+     * else show filename
+     */
+    public void replaceTitlesWithCaptions(String wikibaseIdentifier, int i) {
+        compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .subscribe(subscriber -> {
+                    handleLabelforImage(subscriber, i);
+                }));
+
+    }
+
+    /**
+     * If caption is available for the image, then modify grid adapter
+     * to show captions
+     */
+    private void handleLabelforImage(String s, int position) {
+        if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
+            gridAdapter.getItem(position).setThumbnailTitle(s);
+            gridAdapter.notifyDataSetChanged();
+        }
     }
 
     /**

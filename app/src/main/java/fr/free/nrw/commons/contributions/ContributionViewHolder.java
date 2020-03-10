@@ -12,6 +12,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,6 +25,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.upload.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -43,6 +46,9 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     @Inject
     MediaDataExtractor mediaDataExtractor;
+    @Inject
+    MediaClient mediaClient;
+
 
     @Inject
     @Named("thumbnail-cache")
@@ -51,6 +57,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private DisplayableContribution contribution;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private int position;
+    private static int TIMEOUT_SECONDS = 15;
+    private static final String NO_CAPTION = "No caption";
 
     ContributionViewHolder(View parent, Callback callback) {
         super(parent);
@@ -64,6 +72,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         this.position=position;
         this.contribution = contribution;
         fetchAndDisplayThumbnail(contribution);
+        fetchAndDisplayCaption(contribution);
         titleView.setText(contribution.getDisplayTitle());
 
         seqNumView.setText(String.valueOf(contribution.getPosition() + 1));
@@ -100,6 +109,30 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 progressView.setVisibility(View.GONE);
                 failedImageOptions.setVisibility(View.VISIBLE);
                 break;
+        }
+    }
+
+    /**
+     * In contributions first we show the title for the image stored in cache,
+     * then we fetch captions associated with the image and replace title on the thumbnail with caption
+     *
+     * @param contribution
+     */
+    private void fetchAndDisplayCaption(DisplayableContribution contribution) {
+        if ((contribution.getState() != Contribution.STATE_COMPLETED)) {
+            titleView.setText(contribution.getDisplayTitle());
+        } else {
+            Timber.d("Fetching caption for %s", contribution.getFilename());
+            String wikibaseMediaId = "M"+contribution.getPageId(); // Create Wikibase media id from the page id. Example media id: M80618155 for https://commons.wikimedia.org/wiki/File:Tantanmen.jpeg with has the pageid 80618155
+            compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseMediaId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .subscribe(subscriber -> {
+                        if (!subscriber.trim().equals(NO_CAPTION)) {
+                            titleView.setText(subscriber);
+                        } else titleView.setText(contribution.getDisplayTitle());
+                    }));
         }
     }
 
