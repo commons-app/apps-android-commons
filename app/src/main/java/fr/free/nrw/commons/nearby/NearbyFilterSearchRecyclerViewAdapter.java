@@ -80,7 +80,12 @@ public class NearbyFilterSearchRecyclerViewAdapter
         holder.placeTypeIcon.setImageResource(label.getIcon());
         holder.placeTypeLabel.setText(label.toString());
 
-        holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : callback.isDarkTheme() ? Color.BLACK : Color.WHITE);
+        if (callback.isDarkTheme()) {
+            holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.opak_middle_grey) : ContextCompat.getColor(context, R.color.black));
+        } else {
+            holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : ContextCompat.getColor(context, R.color.white));
+        }
+
         holder.placeTypeLayout.setOnClickListener(view -> {
             callback.setCheckboxUnknown();
             if (label.isSelected()) {
@@ -89,7 +94,13 @@ public class NearbyFilterSearchRecyclerViewAdapter
                 selectedLabels.add(label);
             }
             label.setSelected(!label.isSelected());
-            holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : callback.isDarkTheme() ? Color.BLACK : Color.WHITE);
+
+            if (callback.isDarkTheme()) {
+                holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.opak_middle_grey) : ContextCompat.getColor(context, R.color.black));
+            } else {
+                holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : ContextCompat.getColor(context, R.color.white));
+            }
+
             callback.filterByMarkerType(selectedLabels, 0, false, false);
         });
     }
@@ -165,7 +176,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
         notifyDataSetChanged();
     }
 
-    public interface  Callback{
+    public interface  Callback {
 
         void setCheckboxUnknown();
 
