@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.media.zoomControllers.loading.CircleProgressBarDrawable;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView;
 import timber.log.Timber;
@@ -15,6 +16,9 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.drawable.ScalingUtils;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +54,12 @@ public class ZoomableActivity extends AppCompatActivity {
 
     private void init() {
         if( imageUri != null ) {
+            GenericDraweeHierarchy hierarchy = GenericDraweeHierarchyBuilder.newInstance(getResources())
+                    .setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
+                    .setProgressBarImage(new CircleProgressBarDrawable())
+                    .setProgressBarImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
+                    .build();
+            photo.setHierarchy(hierarchy);
             photo.setAllowTouchInterceptionWhileZoomed(true);
             photo.setIsLongpressEnabled(false);
             photo.setTapListener(new DoubleTapGestureListener(photo));
