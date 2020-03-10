@@ -77,17 +77,7 @@ public class  Contribution extends Media {
      * Each depiction loaded in depictions activity is associated with a wikidata entity id,
      * this Id is in turn used to upload depictions to wikibase
      */
-    private ArrayList<String> depictionsEntityIds;
-    /**
-     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
-     * This is a replacement of the previously used titles for images (titles were not multilingual)
-     * Also now captions replace the previous convention of using title for filename
-     * This hasmap stores the list of multilingual captions, where
-     * key of the HashMap is the language and value is the caption in the corresponding language
-     * Ex: key = "en", value: "<caption in short in English>"
-     *     key = "de" , value: "<caption in german>"
-     */
-    //private HashMap<String, String> captions;
+    public ArrayList<String> depictionsEntityIds;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
@@ -103,13 +93,11 @@ public class  Contribution extends Media {
         this.height = height;
         this.license = license;
         this.dateCreatedSource = "";
-        //this.captions = captions;
     }
 
     public Contribution(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description, long dataLength,
                         Date dateCreated, Date dateUploaded, String creator, String editSummary, ArrayList<String> depictionsEntityIds, String decimalCoords) {
         super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
-        //this.captions = captions;
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
