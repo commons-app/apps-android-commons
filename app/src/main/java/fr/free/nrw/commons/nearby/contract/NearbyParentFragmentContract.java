@@ -28,6 +28,8 @@ public interface NearbyParentFragmentContract {
         void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
         void animateFABs();
         void recenterMap(LatLng curLatLng);
+        void showGPSOffDialog();
+        void openLocationSettings();
         void hideBottomSheet();
         void hideBottomDetailsSheet();
         void displayBottomSheetWithInfo(Marker marker);
@@ -92,5 +94,6 @@ public interface NearbyParentFragmentContract {
 
         void searchViewGainedFocus();
         void setCheckboxUnknown();
+        boolean checkGPSState();
     }
 }
