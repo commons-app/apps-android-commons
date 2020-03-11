@@ -6,7 +6,6 @@ internal object Urls {
     const val WEBSITE_URL = "https://commons-app.github.io"
     const val CREDITS_URL = "https://github.com/commons-app/apps-android-commons/blob/master/CREDITS"
     const val FAQ_URL = "https://github.com/commons-app/apps-android-commons/wiki/Frequently-Asked-Questions"
-    const val PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=fr.free.nrw.commons"
     const val PLAY_STORE_PREFIX = "market://details?id="
     const val PLAY_STORE_URL_PREFIX = "https://play.google.com/store/apps/details?id="
     const val TRANSLATE_WIKI_URL = "https://translatewiki.net/w/i.php?title=Special:Translate&group=commons-android-strings&filter=%21translated&action=translate&language="

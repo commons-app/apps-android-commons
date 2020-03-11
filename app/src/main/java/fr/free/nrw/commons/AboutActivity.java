@@ -122,7 +122,7 @@ public class AboutActivity extends NavigationBaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.share_app_icon:
-                String shareText = String.format(getString(R.string.share_text), Urls.PLAY_STORE_URL);
+                String shareText = String.format(getString(R.string.share_text), Urls.PLAY_STORE_URL_PREFIX + this.getPackageName());
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, shareText);
