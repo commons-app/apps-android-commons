@@ -7,7 +7,7 @@ import fr.free.nrw.commons.wikidata.model.DepictSearchItem
  */
 data class DepictedItem constructor(
   val depictsLabel: String,
-  val description: String,
+  val description: String?,
   var imageUrl: String,
   var isSelected: Boolean,
   val entityId: String
