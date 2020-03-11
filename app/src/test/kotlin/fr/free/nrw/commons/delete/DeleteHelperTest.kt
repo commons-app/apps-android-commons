@@ -63,8 +63,8 @@ class DeleteHelperTest {
                 .thenReturn(Observable.just(true))
 
         `when`(media?.displayTitle).thenReturn("Test file")
-        `when`(media?.getCreator()).thenReturn("Creator (page does not exist)")
         media?.filename="Test file.jpg"
+        media?.creator="Creator (page does not exist)"
 
         val makeDeletion = deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
         assertNotNull(makeDeletion)
@@ -84,6 +84,7 @@ class DeleteHelperTest {
                 .thenReturn(Observable.just(true))
         `when`(media?.displayTitle).thenReturn("Test file")
         `when`(media?.filename).thenReturn("Test file.jpg")
+        `when`(media?.creator).thenReturn("Creator (page does not exist)")
 
         deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
     }
@@ -98,6 +99,7 @@ class DeleteHelperTest {
                 .thenReturn(Observable.just(false))
         `when`(media?.displayTitle).thenReturn("Test file")
         `when`(media?.filename).thenReturn("Test file.jpg")
+        `when`(media?.creator).thenReturn("Creator (page does not exist)")
 
         deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
     }
@@ -112,6 +114,7 @@ class DeleteHelperTest {
                 .thenReturn(Observable.just(true))
         `when`(media?.displayTitle).thenReturn("Test file")
         `when`(media?.filename).thenReturn("Test file.jpg")
+        `when`(media?.creator).thenReturn("Creator (page does not exist)")
 
         deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
     }
