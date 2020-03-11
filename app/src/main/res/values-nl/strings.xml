@@ -5,6 +5,7 @@
 * Bouman4
 * Elroy
 * Festina90
+* Klaas van Buiten
 * KlaasZ4usV
 * Mainframe98
 * Mar(c)
@@ -104,7 +105,7 @@
   <string name="menu_about">Over</string>
   <string name="about_license" fuzzy="true">Opensourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons en haar logo zijn handelsmerken van de Wikimedia Foundation en worden gebruikt met toestemming van de Wikimedia Foundation. We worden niet bekrachtigd door en zijn niet verbonden met de Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"%1$s\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacybeleid&lt;/a&gt;</string>
+  <string name="about_privacy_policy">Privacybeleid</string>
   <string name="title_activity_about">Over</string>
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
   <string name="no_email_client">Geen e-mail-client geïnstalleerd</string>
@@ -115,12 +116,11 @@
   <string name="menu_cancel_upload">Annuleren</string>
   <string name="share_license_summary" fuzzy="true">Deze afbeelding wordt gelicenseerd onder %1$s</string>
   <string name="menu_download">Downloaden</string>
-  <string name="preference_license" fuzzy="true">Licentie</string>
-  <string name="use_previous">Vorige naam/beschrijving gebruiken</string>
+  <string name="preference_license">Standaard licentie</string>
+  <string name="use_previous" fuzzy="true">Vorige naam/beschrijving gebruiken</string>
   <string name="allow_gps">Automatisch huidige locatie ophalen</string>
   <string name="allow_gps_summary" fuzzy="true">Huidige locatie ophalen om categoriesuggesties te maken als het beeld geen geotags heeft</string>
-  <string name="preference_theme">Nachtmodus</string>
-  <string name="preference_theme_summary">Gebruik donker thema</string>
+  <string name="preference_theme" fuzzy="true">Nachtmodus</string>
   <string name="license_name_cc_by_sa_four"> Naamsvermelding-GelijkDelen 4.0</string>
   <string name="license_name_cc_by_four">Naamsvermelding 4.0</string>
   <string name="license_name_cc_by_sa"> Naamsvermelding-GelijkDelen 3.0</string>
@@ -153,6 +153,7 @@
   <string name="welcome_copyright_subtext">Vermijd auteursrechtelijk beschermd materiaal dat u op internet hebt gevonden zoals  afbeeldingen van posters, boeken, enzovoort.</string>
   <string name="welcome_final_text">Begrijpt u het?</string>
   <string name="welcome_final_button_text">Ja!</string>
+  <string name="welcome_help_button_text">Meer informatie</string>
   <string name="detail_panel_cats_label">Categorieën</string>
   <string name="detail_panel_cats_loading">Laden...</string>
   <string name="detail_panel_cats_none">Geen selectie</string>
@@ -175,6 +176,7 @@
   <string name="media_detail_license">Licentie</string>
   <string name="media_detail_coordinates">Coördinaten</string>
   <string name="media_detail_coordinates_empty">Niet opgegeven</string>
+  <string name="become_a_tester_title">Word een bèta tester</string>
   <string name="_2fa_code">2FA-code</string>
   <string name="maximum_limit">Maximum limit</string>
   <string name="invalid_zero">Kan niet nul zijn</string>
@@ -183,7 +185,11 @@
   <string name="commons_logo">Commons logo</string>
   <string name="commons_website">Commons website</string>
   <string name="commons_facebook">Commons Facebookpagina</string>
+  <string name="background_image">Achtergrondafbeelding</string>
+  <string name="no_image_found">Geen afbeelding gevonden</string>
+  <string name="no_subcategory_found">Geen subcategorieën gevonden</string>
   <string name="upload_image">Afbeelding plaatsen</string>
+  <string name="welcome_image_tulip">Tulp</string>
   <string name="welcome_image_no_selfies">Geen selfies</string>
   <string name="cancel">Annuleren</string>
   <string name="navigation_drawer_open">Openen</string>
@@ -199,6 +205,7 @@
   <string name="navigation_item_notification">Meldingen</string>
   <string name="navigation_item_featured_images">Aanbevolen</string>
   <string name="no_description_found">geen beschrijving gevonden</string>
+  <string name="nearby_info_menu_wikidata_article">Wikidata-item</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artikel</string>
   <string name="error_while_cache">Error tijdens het laden van de afbeeldingen</string>
   <string name="upload_problem_image_dark">Afbeelding is te donker.</string>
@@ -216,7 +223,7 @@
   <string name="null_url">Fout! URL niet gevonden</string>
   <string name="nominate_deletion">Nomineer voor Verwijdering</string>
   <string name="nominated_for_deletion">Deze afbeelding is genomineerd voor verwijdering.</string>
-  <string name="nominated_see_more">&lt;u&gt;Zie webpagina voor details&lt;/u&gt;</string>
+  <string name="nominated_see_more">Zie webpagina voor details</string>
   <string name="view_browser">Bekijk in Browser</string>
   <string name="skip_login">Overslaan</string>
   <string name="navigation_item_login">Aanmelden</string>
@@ -226,8 +233,9 @@
   <string name="copy_wikicode">Kopieer de wikitekst naar het klembord</string>
   <string name="wikicode_copied">De wikitekst is gekopieerd naar het klembord</string>
   <string name="nearby_location_has_not_changed">Locatie is niet veranderd.</string>
-  <string name="nearby_location_not_available">Locatie niet beschikbaar.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Locatie niet beschikbaar.</string>
   <string name="location_permission_rationale_nearby">Toestemming vereist om een lijst van nabije plaatsen weer te geven</string>
+  <string name="get_directions">Routebeschrijving</string>
   <string name="read_article">Lees artikel</string>
   <string name="notifications_welcome">Welkom bij Wikimedia Commons, %1$s! We zijn blij dat je hier bent.</string>
   <string name="notifications_talk_page_message">%1$s heeft een bericht op je overlegpagina achtergelaten</string>
@@ -235,29 +243,47 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Waardeer ons&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Vraag en antwoord&lt;/u&gt;</string>
+  <string name="about_rate_us">Waardeer ons</string>
+  <string name="about_faq">Vraag en antwoord</string>
   <string name="welcome_skip_button">Zelfstudie overslaan</string>
   <string name="no_internet">Geen internet</string>
   <string name="internet_established">Internet beschikbaar</string>
   <string name="error_notifications">Fout bij ophalen berichten.</string>
   <string name="no_notifications">Geen berichten.</string>
-  <string name="about_translate">&lt;u&gt;Vertalen&lt;/u&gt;</string>
+  <string name="about_translate">Vertalen</string>
   <string name="about_translate_title">Talen</string>
   <string name="about_translate_message">Selecteer de taal waarvoor u vertalingen wil indienen</string>
   <string name="about_translate_proceed">Ga door</string>
   <string name="about_translate_cancel">Annuleren</string>
   <string name="retry">Opnieuw proberen</string>
   <string name="showcase_view_got_it_button">Begrepen!</string>
+  <string name="no_images_found">Geen afbeeldingen gevonden!</string>
+  <string name="error_loading_images">Er is een fout opgetreden tijdens het laden van de afbeeldingen.</string>
+  <string name="image_uploaded_by">Geüpload door: %1$s</string>
+  <string name="block_notification_title">Geblokkeerd</string>
+  <string name="appwidget_img">Afbeelding van de dag</string>
+  <string name="app_widget_heading">Afbeelding van de dag</string>
   <string name="menu_search_button">Zoeken</string>
   <string name="search_commons">Commons doorzoeken</string>
+  <string name="title_activity_search">Zoeken</string>
+  <string name="search_recent_header">Recente zoekopdrachten:</string>
+  <string name="search_tab_title_media">Media</string>
+  <string name="search_tab_title_categories">Categorieën</string>
+  <string name="explore_tab_title_featured">Uitgelicht</string>
+  <string name="menu_set_wallpaper">Stel in als achtergrond</string>
+  <string name="wallpaper_set_successfully">Achtergrond succesvol ingesteld!</string>
   <string name="quiz">Vragenspel</string>
   <string name="quiz_question_string">Kan je afbeelding worden geplaatst?</string>
   <string name="question">Vraag</string>
   <string name="result">Uitslag</string>
   <string name="continue_message">Doorgaan</string>
+  <string name="correct">Correct antwoord</string>
+  <string name="wrong">Fout antwoord</string>
   <string name="share_app_title">Toepassing delen</string>
   <string name="add_description">+ Beschrijving toevoegen</string>
+  <string name="no_recent_searches">Geen recente zoekopdrachten</string>
+  <string name="delete">Verwijderen</string>
+  <string name="statistics">Statistieken</string>
   <string name="error_occurred">Fout opgetreden!</string>
   <string name="contributions_fragment">Bijdragen</string>
   <string name="nearby_fragment">Dichtbij</string>
@@ -294,4 +320,6 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="share_image_via">Deel afbeelding via</string>
   <string name="account_created">Profiel gemaakt!</string>
+  <string name="remove_bookmark">Bladwijzer verwijderd</string>
+  <string name="add_bookmark">Als bladwijzer toegevoegd</string>
 </resources>

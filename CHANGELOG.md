@@ -1,5 +1,15 @@
 # Wikimedia Commons for Android
 
+## v2.12.3
+- Fixed issue with EXIF data, including coords, being removed from uploads
+
+## v2.12.2
+- Fixed crash on startup 
+
+## v2.12.1
+- Fixed issue with Nearby loading in wrong location
+- Various crash fixes
+
 ## v2.12.0
 - Completed codebase overhaul 
 - Added filters for place type and place state to Nearby

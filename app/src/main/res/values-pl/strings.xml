@@ -7,6 +7,7 @@
 * DeRudySoulStorm
 * InternerowyGołąb
 * Krottyianock
+* Matma Rex
 * Mazab IZW
 * Rail
 * Railfail536
@@ -110,8 +111,8 @@
   <string name="menu_about">O aplikacji</string>
   <string name="about_license">Aplikacja Wikimedia Commons jest oprogramowaniem typu open-source tworzonym i rozwijanym przez stypendystów i wolontariuszy ze społeczności Wikimedii. Fundacja Wikimedia nie bierze udziału w tworzeniu, rozwijaniu ani utrzymywaniu aplikacji.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"%1$s\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Polityka prywatności&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Twórcy&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Polityka prywatności</string>
+  <string name="about_credits">Twórcy</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
   <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
@@ -126,11 +127,10 @@
   <string name="media_upload_policy">Przesyłając ten obraz deklaruję, że jest on moją własną pracą, nie zawiera elementów objętych prawem autorskim lub selfie i jest zgodny z &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pl\"&gt;Zasadami i zaleceniami Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Pobieranie</string>
   <string name="preference_license">Domyślna licencja</string>
-  <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
+  <string name="use_previous" fuzzy="true">Użyj poprzedniego tytułu/opisu</string>
   <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
   <string name="allow_gps_summary" fuzzy="true">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
-  <string name="preference_theme">Tryb nocny</string>
-  <string name="preference_theme_summary">Użyj ciemnej skórki</string>
+  <string name="preference_theme">Motyw</string>
   <string name="license_name_cc_by_sa_four">Uznanie autorstwa-Na tych samych warunkach 4.0</string>
   <string name="license_name_cc_by_four">Uznanie autorstwa 4.0</string>
   <string name="license_name_cc_by_sa"> Uznanie autorstwa-Na tych samych warunkach 3.0</string>
@@ -167,7 +167,7 @@
   <string name="welcome_copyright_subtext">Unikaj materiałów objętych prawami autorskimi znalezionych w Internecie, a także zdjęć plakatów, okładek książek itp.</string>
   <string name="welcome_final_text">Czy wszystko jest jasne?</string>
   <string name="welcome_final_button_text">Tak!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Więcej informacji&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Więcej informacji</string>
   <string name="detail_panel_cats_label">Kategorie</string>
   <string name="detail_panel_cats_loading">Ładowanie…</string>
   <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
@@ -266,7 +266,7 @@
   <string name="skip_login_title">Czy na pewno chcesz pominąć logowanie?</string>
   <string name="login_alert_message">Zaloguj się, aby skorzystać z tej funkcji</string>
   <string name="nearby_location_has_not_changed">Lokalizacja się nie zmieniła.</string>
-  <string name="nearby_location_not_available">Lokalizacja niedostępna.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Lokalizacja niedostępna.</string>
   <string name="read_article">Przeczytaj artykuł</string>
   <string name="notifications_welcome">Witamy w Wikimedia Commons, %1$s! Cieszymy się, że tu jesteś.</string>
   <string name="notifications_thank_you_edit">Dziękujemy za dokonanie edycji</string>
@@ -276,14 +276,14 @@
   <string name="nearby_wikidata">Wikidane</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Oceń nas&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">Oceń nas</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">Pomiń samouczek</string>
   <string name="no_internet">Brak połączenia z internetem</string>
   <string name="internet_established">Nawiązano połączenie z internetem</string>
   <string name="error_notifications">Błąd w trakcie pobierania powiadomień</string>
   <string name="no_notifications">Nie znaleziono powiadomień</string>
-  <string name="about_translate">&lt;u&gt;Przetłumacz&lt;/u&gt;</string>
+  <string name="about_translate">Przetłumacz</string>
   <string name="about_translate_title">Języki</string>
   <string name="about_translate_proceed">Dalej</string>
   <string name="about_translate_cancel">Anuluj</string>
@@ -389,4 +389,7 @@
   <string name="notification_mark_read">Oznaczono powiadomienia jako przeczytane</string>
   <string name="some_error">Wystąpił błąd!</string>
   <string name="you_must_reset_your_passsword">Coś poszło nie tak podczas logowania, musisz zresetować hasło!</string>
+  <string name="theme_default_name">Domyślny</string>
+  <string name="theme_dark_name">Ciemny</string>
+  <string name="theme_light_name">Jasny</string>
 </resources>

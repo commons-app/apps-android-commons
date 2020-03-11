@@ -10,6 +10,13 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.CommonsApplication;
 import io.reactivex.Observable;
 
+/**
+ * Facilitates the Wkikimedia Thanks api extention, as described in the 
+ * api documentation: "The Thanks extension includes an API for sending thanks"
+ * 
+ * In simple terms this class is used by a user to thank someone for adding 
+ * contribution to the commons platform
+ */
 @Singleton
 public class ThanksClient {
 
@@ -23,6 +30,11 @@ public class ThanksClient {
         this.service = service;
     }
 
+    /**
+     * Handles the Thanking logic
+     * @param revesionID The revision ID you would like to thank someone for
+     * @return if thanks was successfully sent to intended recepient, returned as a boolean observable
+     */
     public Observable<Boolean> thank(long revisionId) {
         try {
             return service.thank(String.valueOf(revisionId), null,

@@ -111,8 +111,8 @@
   <string name="menu_about">درباره</string>
   <string name="about_license">اپلیکیشن ویکی‌انبار بنیاد ویکی‌مدیا یک نرم‌افزار آزاد است که توسط کاربران داوطلب و پاداش‌بگیر ایجاد و نگهداری می‌شود. بنیاد ویکی‌مدیا در ایجاد، نگهداری و توسعهٔ آن دخالتی ندارد.</string>
   <string name="about_improve">ایجاد یک &lt;a href=\"%1$s\"&gt;درخواست در گیت‌هاب&lt;/a&gt; برای گزارش باگ و یا پیشنهاد یک خصوصیت جدید.</string>
-  <string name="about_privacy_policy">&lt;u&gt;سیاست حفظ حریم خصوصی&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;مجوز&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;سیاست حفظ حریم خصوصی&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;مجوز&lt;/u&gt;</string>
   <string name="title_activity_about">درباره</string>
   <string name="menu_feedback">ارسال بازخورد (از طریق ایمیل)</string>
   <string name="no_email_client">نرم‌افزار ایمیل نصب نیست</string>
@@ -128,11 +128,10 @@
   <string name="media_upload_policy">با بارگذاری این تصویر، تأیید می‌کنم که این اثر کار خودم است و از محتوای دارای حق تکثیر یا سلفی برای ایجاد آن استفاده نکرده‌ام و شرایط ذکر شده در By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;سیاست‌های ویکی‌انبار&lt;/a&gt; را رعایت می‌کند.</string>
   <string name="menu_download">دریافت</string>
   <string name="preference_license">مجوز پیش‌فرض</string>
-  <string name="use_previous">از عنوان/توضیحات پیشین استفاده کنید</string>
+  <string name="use_previous" fuzzy="true">از عنوان/توضیحات پیشین استفاده کنید</string>
   <string name="allow_gps">دریافت خودکار موقعیت کنونی</string>
   <string name="allow_gps_summary">درحال دریافت موقعیت برای پیشنهاد رده در صورتی که برچسب جغرافیایی وجود نداشته باشد.</string>
-  <string name="preference_theme">حالت شبانه</string>
-  <string name="preference_theme_summary">استفاده از حالت تیره</string>
+  <string name="preference_theme" fuzzy="true">حالت شبانه</string>
   <string name="license_name_cc_by_sa_four">CC Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
@@ -173,7 +172,7 @@
   <string name="welcome_copyright_subtext">از رسانه‌ها و پوسترهایی و غیره حق‌تکثیردار که در اینترنت یا جلد کتاب‌ها می‌بابید، اجتناب کنبد.</string>
   <string name="welcome_final_text">آیا متوجه منظور شدید؟</string>
   <string name="welcome_final_button_text">بله!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;اطلاعات بیشتر&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;اطلاعات بیشتر&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">رده‌ها</string>
   <string name="detail_panel_cats_loading">در حال بارگیری…</string>
   <string name="detail_panel_cats_none">هیچ‌کدام انتخاب‌نشده</string>
@@ -275,7 +274,7 @@
   <string name="null_url">خطا! نشانی یافت نشد</string>
   <string name="nominate_deletion">نامزد شده برای حذف</string>
   <string name="nominated_for_deletion">این تصویر برای حذف شدن علامت گذاری شده.</string>
-  <string name="nominated_see_more"> .</string>
+  <string name="nominated_see_more" fuzzy="true"> .</string>
   <string name="nominating_file_for_deletion">نامزد حذف کردن %1$s.</string>
   <string name="nominating_for_deletion_status">نامزد حذف کردن: %1$s</string>
   <string name="view_browser">مشاهده در مرورگر</string>
@@ -287,7 +286,7 @@
   <string name="copy_wikicode">از ویکی واژه به کلیپ برد کپی کنید.</string>
   <string name="wikicode_copied">ویکی‌متن در کلیپ‌بورد کپی شد</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
-  <string name="nearby_location_not_available">مکان موجود نیست.</string>
+  <string name="nearby_location_not_available" fuzzy="true">مکان موجود نیست.</string>
   <string name="location_permission_rationale_nearby">برای نمایش مکان‌ّای اطراف نیاز به اجازه است.</string>
   <string name="get_directions">دریافت جهت‌‌ها</string>
   <string name="read_article">خواندن مقاله</string>
@@ -300,8 +299,8 @@
   <string name="nearby_wikidata">ویکی‌داده</string>
   <string name="nearby_wikipedia">ویکی‌پدیا</string>
   <string name="nearby_commons">ویکی‌انبار</string>
-  <string name="about_rate_us">&lt;u&gt;رتبه ما&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;سوال‌های متداول&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;رتبه ما&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;سوال‌های متداول&lt;/u&gt;</string>
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
   <string name="internet_established">اینترنت در دسترس است</string>
@@ -309,7 +308,7 @@
   <string name="error_review">در تلاش برای بدست‌آوردن تصویر جهت بازبینی خطایی پیش آمد. لطفا برای تلاش مجدد بر روی ریفرش کلیک کنید.</string>
   <string name="error_review_categories">دریافت رده‌های تصویر برای بازبینی به مشکل برخورد کرد. لطفا برای تلاش مجدد صفحه را رفرش کنید.</string>
   <string name="no_notifications">هشداری پیدا نشد</string>
-  <string name="about_translate">&lt;u&gt;ترجمه&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;ترجمه&lt;/u&gt;</string>
   <string name="about_translate_title">زبان‌ها</string>
   <string name="about_translate_message">لطفا زبانی که مایلید در آنها ترجمه‌های خود را ثبت کنید انتخاب کنید.</string>
   <string name="about_translate_proceed">ادامه</string>

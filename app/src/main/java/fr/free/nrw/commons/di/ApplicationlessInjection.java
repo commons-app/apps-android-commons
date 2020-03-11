@@ -19,6 +19,10 @@ import dagger.android.HasFragmentInjector;
 import dagger.android.HasServiceInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
+/**
+ * Provides injectors for all sorts of components
+ * Ex: Activities, Fragments, Services, ContentProviders
+ */
 public class ApplicationlessInjection
         implements
         HasActivityInjector,

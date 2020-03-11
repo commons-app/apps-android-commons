@@ -8,6 +8,7 @@ import javax.inject.Named;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import io.reactivex.disposables.CompositeDisposable;
 
 public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
@@ -15,20 +16,23 @@ public abstract class BaseActivity extends CommonsDaggerAppCompatActivity {
     @Named("default_preferences")
     public JsonKvStore defaultKvStore;
 
+    @Inject
+    SystemThemeUtils systemThemeUtils;
+
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
     protected boolean wasPreviouslyDarkTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        wasPreviouslyDarkTheme = defaultKvStore.getBoolean("theme", false);
+        wasPreviouslyDarkTheme = systemThemeUtils.isDeviceInNightMode();
         setTheme(wasPreviouslyDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
     }
 
     @Override
     protected void onResume() {
         // Restart activity if theme is changed
-        if (wasPreviouslyDarkTheme != defaultKvStore.getBoolean("theme", false)) {
+        if (wasPreviouslyDarkTheme != systemThemeUtils.isDeviceInNightMode()) {
             recreate();
         }
 

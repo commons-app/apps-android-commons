@@ -98,8 +98,8 @@
   <string name="menu_about">O aplikácii</string>
   <string name="about_license">Aplikácia Wikimedia Commons je open-source aplikácia vytváraná a udržiavaná dobrovoľníkmi z wikimedickej komunity. Nadácia Wikimedia sa na vytváraní, vývoji alebo podpore aplikácie nepodieľa.</string>
   <string name="about_improve">Pre nahlásenie bugov a pridanie návrhov vytvorte nové &lt;a href=\"%1$s\"&gt;hlásenie na GitHube&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Zásady ochrany súkromia&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Autori&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Zásady ochrany súkromia</string>
+  <string name="about_credits">Autori</string>
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
   <string name="no_email_client">Nemáte nainštalovaného žiadneho e-mailového klienta</string>
@@ -115,11 +115,10 @@
   <string name="media_upload_policy">Odoslaním tohto súboru potvrdzujem, že je mojím vlastným dielom, neobsahuje autorskoprávne chránený materiál a nejedná sa o selfie a ani inak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Pravidlá a odporúčania Wikimedie Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Predvolená licencia</string>
-  <string name="use_previous">Použiť predchádzajúci názov/popis</string>
+  <string name="use_previous">Použiť predchádzajúci názov a popis</string>
   <string name="allow_gps">Automaticky získať súčasnú polohu</string>
   <string name="allow_gps_summary">Získať súčasnú polohu a pokiaľ obrázok neobsahuje zemepisné súradnice, pridať ich k nemu. Upozornenie: Toto odhalí vašu súčasnú polohu.</string>
-  <string name="preference_theme">Nočný režim</string>
-  <string name="preference_theme_summary">Použiť tmavú tému vzhľadu</string>
+  <string name="preference_theme">Motív</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -160,7 +159,7 @@
   <string name="welcome_copyright_subtext">Vyvarujte sa materiálom nájdeným na internete, ktoré podliehajú autorským právam.</string>
   <string name="welcome_final_text">Myslíte, že rozumiete?</string>
   <string name="welcome_final_button_text">Áno!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Viac informácií&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Viac informácií</string>
   <string name="detail_panel_cats_label">Kategórie</string>
   <string name="detail_panel_cats_loading">Načítava sa…</string>
   <string name="detail_panel_cats_none">Nič nebolo vybrané</string>
@@ -262,7 +261,7 @@
   <string name="null_url">Chyba! URL nenájdené</string>
   <string name="nominate_deletion">Navrhnúť na zmazanie</string>
   <string name="nominated_for_deletion">Tento obrázok bol nominovaný na zmazanie.</string>
-  <string name="nominated_see_more">&lt;u&gt;Pre viac informácií pozri web&lt;/u&gt;</string>
+  <string name="nominated_see_more">Zobraziť webovú stránku pre viac informácií</string>
   <string name="nominating_file_for_deletion">Nominácia %1$s na zmazanie.</string>
   <string name="nominating_for_deletion_status">Nominácia súboru na zmazanie: %1$s</string>
   <string name="view_browser">Otvoriť v prehliadači</string>
@@ -274,7 +273,7 @@
   <string name="copy_wikicode">Skopírovať wikitext do schránky</string>
   <string name="wikicode_copied">Wikitext bol skopírovaný do schránky</string>
   <string name="nearby_location_has_not_changed">Poloha sa nezmenila.</string>
-  <string name="nearby_location_not_available">Poloha nie je dostupná.</string>
+  <string name="nearby_location_not_available">Funkcia V okolí nemusí pracovať správne, poloha nie je dostupná.</string>
   <string name="location_permission_rationale_nearby">Zobrazenie zoznamu miest v okolí vyžaduje povolenie</string>
   <string name="get_directions">Nájsť trasu</string>
   <string name="read_article">Prečítať článok</string>
@@ -287,8 +286,8 @@
   <string name="nearby_wikidata">Wikiúdaje</string>
   <string name="nearby_wikipedia">Wikipédia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Ohodnoťte nás&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">Ohodnoťte nás</string>
+  <string name="about_faq">Často kladené otázky</string>
   <string name="welcome_skip_button">Preskočiť návod</string>
   <string name="no_internet">Internet nie je dostupný</string>
   <string name="internet_established">Internet je dostupný</string>
@@ -296,7 +295,7 @@
   <string name="error_review">Nastala chyba pri načítaní obrázku na kontrolu. Prosím, skúste to znova.</string>
   <string name="error_review_categories">Nastala chyba pri načítaní kategórií obrázku na kontrolu. Prosím, skúste to znova.</string>
   <string name="no_notifications">Neboli nájdené žiadne upozornenia</string>
-  <string name="about_translate">&lt;u&gt;Preložiť&lt;/u&gt;</string>
+  <string name="about_translate">Preložiť</string>
   <string name="about_translate_title">Jazyky</string>
   <string name="about_translate_message">Vyberte jazyk, v ktorom chcete zadávať preklady</string>
   <string name="about_translate_proceed">Pokračovať</string>
@@ -521,7 +520,7 @@
   <string name="exif_tag_name_lensModel">Model objektívu</string>
   <string name="exif_tag_name_serialNumbers">Sériové čísla</string>
   <string name="exif_tag_name_software">Softvér</string>
-  <string name="share_text" fuzzy="true">Nahrávajte fotky na Wikimedia Commons na vašom mobile. Stiahnite si aplikáciu Wikimedia Commons: %1$s</string>
+  <string name="share_text">Nahrávajte fotky na Wikimedia Commons priamo z vášho mobilu. Stiahnite si aplikáciu Wikimedia Commons teraz: %1$s</string>
   <string name="share_via">Zdieľať aplikáciu cez...</string>
   <string name="image_info">Informácie o obrázku</string>
   <string name="no_categories_found">Nenájdené žiadne kategórie</string>
@@ -557,4 +556,17 @@
   <string name="place_type">Typ miesta:</string>
   <string name="nearby_search_hint">Most, múzeum, hotel atď.</string>
   <string name="you_must_reset_your_passsword">Pri prihlásení nastala chyba, musíte si resetovať vaše heslo!</string>
+  <string name="upload_nearby_place_found_title">Miesto v okolí nájdené</string>
+  <string name="upload_nearby_place_found_description">Je toto fotka miesta %1$s?</string>
+  <string name="title_app_shortcut_explore">Objaviť</string>
+  <string name="title_app_shortcut_bookmark">Záložky</string>
+  <string name="title_app_shortcut_setting">Nastavenia</string>
+  <string name="remove_bookmark">Odstránené zo záložiek</string>
+  <string name="add_bookmark">Pridané do záložiek</string>
+  <string name="wallpaper_set_unsuccessfully">Niečo sa pokazilo. Tapetu sa nepodarilo nastaviť</string>
+  <string name="setting_wallpaper_dialog_title">Nastaviť ako tapetu</string>
+  <string name="setting_wallpaper_dialog_message">Nastavujem tapetu. Prosím, čakajte...</string>
+  <string name="theme_default_name">Predvolený</string>
+  <string name="theme_dark_name">Tmavý</string>
+  <string name="theme_light_name">Svetlý</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* Alexander Yukal
 * Alexandr Efremov
 * Av6
 * Eleferen
@@ -14,6 +15,7 @@
 * Movses
 * Nitch
 * Okras
+* Pacha Tchernof
 * Patriccck
 * Redredsonia
 * Rubin16
@@ -115,8 +117,8 @@
   <string name="menu_about">О приложении</string>
   <string name="about_license">Приложение «Викисклад» - это программа с открытым кодом, которую создали волонтёры и участники грантов Викимедиа. Фонд Викимедиа не участвует в создании, разработке или обслуживании этого приложения.</string>
   <string name="about_improve">Вы можете создать &lt;a href=\"%1$s\"&gt;запрос на GitHub&lt;/a&gt;, чтобы сообщить об ошибке или внести предложение.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Политика конфиденциальности&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Благодарности&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Политика конфиденциальности</string>
+  <string name="about_credits">Создатели</string>
   <string name="title_activity_about">О приложении</string>
   <string name="menu_feedback">Отправить отзыв (по эл. почте)</string>
   <string name="no_email_client">Почтовый клиент не установлен</string>
@@ -132,11 +134,10 @@
   <string name="media_upload_policy">Отправляя это изображение, я подтверждаю, что это моя собственная работа, которая не содержит защищённых авторским правом материалов или селфи, а также отвечает &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;правилам Викисклада&lt;/a&gt;.</string>
   <string name="menu_download">Скачать</string>
   <string name="preference_license">Лицензия по умолчанию</string>
-  <string name="use_previous">Использовать предыдущие название/описание</string>
+  <string name="use_previous">Использовать предыдущие название и описание</string>
   <string name="allow_gps">Анализ местоположения</string>
   <string name="allow_gps_summary">Если изображение не содержит геотега, то будет получено и проставлено текущее местоположение. Будьте внимательны, если вы не хотите раскрывать ваше месторасположение.</string>
-  <string name="preference_theme">Ночной режим</string>
-  <string name="preference_theme_summary">Использовать тёмную тему</string>
+  <string name="preference_theme">Тема оформления</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -177,7 +178,7 @@
   <string name="welcome_copyright_subtext">Избегайте материалов, защищённых авторским правом, например, найденных в Интернете, изображений плакатов, книжных обложек и т.п.</string>
   <string name="welcome_final_text">Вам это понятно?</string>
   <string name="welcome_final_button_text">Да!</string>
-  <string name="welcome_help_button_text"/>
+  <string name="welcome_help_button_text">Подробнее</string>
   <string name="detail_panel_cats_label">Категории</string>
   <string name="detail_panel_cats_loading">Загрузка…</string>
   <string name="detail_panel_cats_none">Ничего не выбрано</string>
@@ -279,7 +280,7 @@
   <string name="null_url">Ошибка! Ссылка не найдена</string>
   <string name="nominate_deletion">Номинировать к удалению</string>
   <string name="nominated_for_deletion">Этот файл был вынесен на удаление.</string>
-  <string name="nominated_see_more"/>
+  <string name="nominated_see_more">См. страницу для получения подробной информации</string>
   <string name="nominating_file_for_deletion">Номинирование %1$s к удалению.</string>
   <string name="nominating_for_deletion_status">Номинирование файла к удалению: %1$s</string>
   <string name="view_browser">Просмотреть в браузере</string>
@@ -291,7 +292,7 @@
   <string name="copy_wikicode">Копирование викикода в буфер обмена</string>
   <string name="wikicode_copied">Викикод скопирован в буфер обмена</string>
   <string name="nearby_location_has_not_changed">Местоположение не изменено.</string>
-  <string name="nearby_location_not_available">Местоположение недоступно.</string>
+  <string name="nearby_location_not_available">Функция «Поблизости» может работать некорректно, определение местоположения недоступно.</string>
   <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка мест поблизости</string>
   <string name="get_directions">Проложить маршрут</string>
   <string name="read_article">Читать статью</string>
@@ -304,8 +305,8 @@
   <string name="nearby_wikidata">Викиданные</string>
   <string name="nearby_wikipedia">Википедия</string>
   <string name="nearby_commons">Викисклад</string>
-  <string name="about_rate_us">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Часто задаваемые вопросы&lt;/u&gt;</string>
+  <string name="about_rate_us">Оцените нас</string>
+  <string name="about_faq">Часто задаваемые вопросы</string>
   <string name="welcome_skip_button">Пропустить руководство</string>
   <string name="no_internet">Интернет недоступен</string>
   <string name="internet_established">Интернет доступен</string>
@@ -313,7 +314,7 @@
   <string name="error_review">Ошибка при получении изображения на проверку. Пожалуйста, нажмите \"Обновить\", чтобы попробовать снова.</string>
   <string name="error_review_categories">Ошибка при получении категорий изображения для проверки. Пожалуйста нажмите \"Обновить\", чтобы попробовать снова.</string>
   <string name="no_notifications">Уведомлений нет</string>
-  <string name="about_translate">&lt;u&gt;Перевести&lt;/u&gt;</string>
+  <string name="about_translate">Перевести</string>
   <string name="about_translate_title">Языки</string>
   <string name="about_translate_message">Выберите язык локализации, на который сможете перевести элементы интерфейса приложения</string>
   <string name="about_translate_proceed">Перейти к переводу</string>
@@ -539,7 +540,7 @@
   <string name="exif_tag_name_lensModel">Модель объектива</string>
   <string name="exif_tag_name_serialNumbers">Серийный номер</string>
   <string name="exif_tag_name_software">Программное обеспечение</string>
-  <string name="share_text" fuzzy="true">Чтобы загружать фото на Викисклад (Wikimedia Commons), скачайте одноимённое приложение «Викисклад» (Commons): %1$s</string>
+  <string name="share_text">Загружайте фото на Викисклад прямо с телефона. Скачайте приложение Wikimedia Commons прямо сейчас: %1$s</string>
   <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
   <string name="no_categories_found">Категории не найдены.</string>
@@ -575,4 +576,17 @@
   <string name="place_type">Тип места:</string>
   <string name="nearby_search_hint">Мост, музей, гостиница и т. д.</string>
   <string name="you_must_reset_your_passsword">Что-то пошло не так со входом, вы должны сбросить пароль!</string>
+  <string name="upload_nearby_place_found_title">Место поблизости найдено</string>
+  <string name="upload_nearby_place_found_description">Является ли это фото местом %1$s?</string>
+  <string name="title_app_shortcut_explore">Обзор</string>
+  <string name="title_app_shortcut_bookmark">Закладки</string>
+  <string name="title_app_shortcut_setting">Настройки</string>
+  <string name="remove_bookmark">Удалено из закладок</string>
+  <string name="add_bookmark">Добавлено в закладки</string>
+  <string name="wallpaper_set_unsuccessfully">Что-то пошло не так. Не удалось установить фоновую заставку</string>
+  <string name="setting_wallpaper_dialog_title">Сделать фоновой заставкой</string>
+  <string name="setting_wallpaper_dialog_message">Идёт установка фоновой заставки...</string>
+  <string name="theme_default_name">По умолчанию</string>
+  <string name="theme_dark_name">Тёмная</string>
+  <string name="theme_light_name">Светлая</string>
 </resources>

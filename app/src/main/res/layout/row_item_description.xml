@@ -10,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:minWidth="1dp"
-        android:padding="0dp"
+        android:minWidth="@dimen/tiny_height"
+        android:padding="@dimen/dimen_0"
         android:spinnerMode="dialog" />
 
     <com.google.android.material.textfield.TextInputLayout

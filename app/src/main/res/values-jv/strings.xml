@@ -106,10 +106,9 @@
   <string name="share_license_summary" fuzzy="true">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
   <string name="menu_download">Undhuh</string>
   <string name="preference_license" fuzzy="true">Lisènsi</string>
-  <string name="use_previous">Anggo sesirah/wedharan sadurungé</string>
+  <string name="use_previous" fuzzy="true">Anggo sesirah/wedharan sadurungé</string>
   <string name="allow_gps">Otomatis masang lokasi saiki</string>
-  <string name="preference_theme">Modhe wengi</string>
-  <string name="preference_theme_summary">Anggo pakulitan peteng</string>
+  <string name="preference_theme" fuzzy="true">Modhe wengi</string>
   <string name="license_name_cc_by_sa_four">Atribusi-DumSaèmper 4.0</string>
   <string name="license_name_cc_by_four">Atribusi 4.0</string>
   <string name="license_name_cc_by_sa">Atribusi-DumSaèmper 3.0</string>
@@ -205,7 +204,7 @@
   <string name="null_url">Masalah! URL ora tinemu</string>
   <string name="nominate_deletion">Usulaké supaya binusek</string>
   <string name="nominated_for_deletion">Gambar iki kausulaké supaya binusek.</string>
-  <string name="nominated_see_more">&lt;u&gt;Deleng kaca wèb bab rerincèné&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Deleng kaca wèb bab rerincèné&lt;/u&gt;</string>
   <string name="skip_login">Lumpati</string>
   <string name="navigation_item_login">Mlebu log</string>
   <string name="skip_login_title">Apa panjenengan temen ora péngin mlebu log?</string>

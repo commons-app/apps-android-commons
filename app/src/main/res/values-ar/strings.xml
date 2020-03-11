@@ -106,8 +106,8 @@
   <string name="menu_about">حول</string>
   <string name="about_license">تطبيق ويكيميديا ​​كومنز تطبيق مفتوح المصدر تم إنشاؤه وصيانته من قبل المستفيدين والمتطوعين من مجتمع ويكيميديا، لا تشارك مؤسسة ويكيميديا ​​في إنشاء التطبيق أو تطويره أو صيانته.</string>
   <string name="about_improve">أنشئ &lt;a href=\"%1$s\"&gt;مشكلة غيت هب&lt;/a&gt; جديدة لتقارير الأخطاء والاقتراحات.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Pسياسة الخصوصية&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;الإحالات&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Pسياسة الخصوصية&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;الإحالات&lt;/u&gt;</string>
   <string name="title_activity_about">حول</string>
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
   <string name="no_email_client">عميل البريد الإلكتروني غير مثبت</string>
@@ -123,11 +123,10 @@
   <string name="media_upload_policy">بتقديم هذه الصورة، أعلن أن هذا عملي الخاص، وأنه لا يحتوي على مواد محفوظة الحقوق أو صور شخصية، وغير ذلك يلتزم &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;بسياسات ويكيميديا ​​كومنز&lt;/a&gt;.</string>
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة الافتراضية</string>
-  <string name="use_previous">استخدم العنوان/الوصف السابق</string>
+  <string name="use_previous">استخدم العنوان والوصف السابق</string>
   <string name="allow_gps">الحصول تلقائيا على الموقع الحالي</string>
   <string name="allow_gps_summary">يسترد الموقع الحالي إذا لم يتم وسم الصورة جغرافيا، وكان هناك وسم جغرافي عليها، تحذير: سيكشف هذا عن موقعك الحالي.</string>
-  <string name="preference_theme">الوضع الليلي</string>
-  <string name="preference_theme_summary">استخدم النمط الغامق</string>
+  <string name="preference_theme" fuzzy="true">الوضع الليلي</string>
   <string name="license_name_cc_by_sa_four">النسبة-الترخيص بالمثل 4.0</string>
   <string name="license_name_cc_by_four">الإحالة 4.0</string>
   <string name="license_name_cc_by_sa">النسبة-الترخيص بالمثل 3.0</string>
@@ -168,7 +167,7 @@
   <string name="welcome_copyright_subtext">تجنب المواد محفوظة الحقوق الموجودة على الإنترنت وصور الملصقات وأغلفة الكتب، إلخ.</string>
   <string name="welcome_final_text">هل تظن أنك فهمت؟</string>
   <string name="welcome_final_button_text">نعم!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;المزيد من المعلومات&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;المزيد من المعلومات&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">تصنيفات</string>
   <string name="detail_panel_cats_loading">جارٍ التحميل…</string>
   <string name="detail_panel_cats_none">لا شيء محدد</string>
@@ -270,11 +269,11 @@
   <string name="null_url">خطأ! المسار غير موجود</string>
   <string name="nominate_deletion">ترشيح للحذف</string>
   <string name="nominated_for_deletion">الصورة تم ترشيحها للحذف.</string>
-  <string name="nominated_see_more">&lt;u&gt;انظر صفحة الويب للتفاصيل&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;انظر صفحة الويب للتفاصيل&lt;/u&gt;</string>
   <string name="nominating_file_for_deletion">جارٍ ترشيح %1$s للحذف.</string>
   <string name="nominating_for_deletion_status">جارٍ ترشيح الملف للحذف: %1$s</string>
   <string name="view_browser">عرض في المتصفح</string>
-  <string name="skip_login">تخطي</string>
+  <string name="skip_login">تجاوز</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
   <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
   <string name="skip_login_message">يجب عليك تسجيل الدخول لرفع الصور في المستقبل.</string>
@@ -282,7 +281,7 @@
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>
   <string name="nearby_location_has_not_changed">الموقع لم يتغير.</string>
-  <string name="nearby_location_not_available">الموقع غير متوفر.</string>
+  <string name="nearby_location_not_available" fuzzy="true">الموقع غير متوفر.</string>
   <string name="location_permission_rationale_nearby">صلاحية مطلوبة لعرض قائمة بالأماكن القريبة</string>
   <string name="get_directions">الحصول على الاتجاهات</string>
   <string name="read_article">قراءة المقالة</string>
@@ -295,8 +294,8 @@
   <string name="nearby_wikidata">ويكي بيانات</string>
   <string name="nearby_wikipedia">ويكيبيديا</string>
   <string name="nearby_commons">كومنز</string>
-  <string name="about_rate_us">&lt;u&gt;قيِّمنا&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;الأسئلة المتكررة&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;قيِّمنا&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;الأسئلة المتكررة&lt;/u&gt;</string>
   <string name="welcome_skip_button">تخطي البرنامج التعليمي</string>
   <string name="no_internet">الإنترنت غير متوفر</string>
   <string name="internet_established">الإنترنت متاح</string>
@@ -304,7 +303,7 @@
   <string name="error_review">خطأ في جلب الصورة للمراجعة، اضغط على تحديث للمحاولة مرة أخرى.</string>
   <string name="error_review_categories">خطأ في جلب تصنيات الصورة للمراجعة، اضغط على تحديث للمحاولة مرة أخرى.</string>
   <string name="no_notifications">لم يتم العثور على إشعارات</string>
-  <string name="about_translate">&lt;u&gt;ترجمة&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;ترجمة&lt;/u&gt;</string>
   <string name="about_translate_title">اللغات</string>
   <string name="about_translate_message">اختر اللغة التي ترغب في تقديم ترجمات لها</string>
   <string name="about_translate_proceed">تقدم</string>
@@ -529,7 +528,7 @@
   <string name="exif_tag_name_lensModel">طراز العدسة</string>
   <string name="exif_tag_name_serialNumbers">الأرقام التسلسلية</string>
   <string name="exif_tag_name_software">برمجية</string>
-  <string name="share_text" fuzzy="true">ارفع الصور لويكيميديا ​​كومنز على هاتفك قم بتنزيل تطبيق كومنز: %1$s</string>
+  <string name="share_text">ارفع الصور لويكيميديا ​​كومنز مباشرة من هاتفك. قم بتنزيل تطبيق كومنز الآن: %1$s</string>
   <string name="share_via">مشاركة التطبيق عبر...</string>
   <string name="image_info">معلومات الصورة</string>
   <string name="no_categories_found">لم يتم العثور على تصنيفات</string>
@@ -565,4 +564,5 @@
   <string name="place_type">نوع المكان:</string>
   <string name="nearby_search_hint">جسر، متحف، فندق، إلخ</string>
   <string name="you_must_reset_your_passsword">حدث خطأ ما عند الدخول، يجب عليك إعادة تعيين كلمة المرور!!</string>
+  <string name="setting_wallpaper_dialog_title">اجعلها خلفية</string>
 </resources>

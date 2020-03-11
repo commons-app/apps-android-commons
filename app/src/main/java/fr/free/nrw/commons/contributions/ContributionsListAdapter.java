@@ -6,17 +6,29 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 
+/**
+ * Represents The View Adapter for the List of Contributions  
+ */
 public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionViewHolder> {
 
     private Callback callback;
+    private List<Contribution> contributions;
 
     public ContributionsListAdapter(Callback callback) {
         this.callback = callback;
+        contributions=new ArrayList<>();
     }
 
+    /**
+     * Creates the new View Holder which will be used to display items(contributions)
+     * using the onBindViewHolder(viewHolder,position) 
+     */
     @NonNull
     @Override
     public ContributionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,7 +40,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
 
     @Override
     public void onBindViewHolder(@NonNull ContributionViewHolder holder, int position) {
-        final Contribution contribution = callback.getContributionForPosition(position);
+        final Contribution contribution = contributions.get(position);
         DisplayableContribution displayableContribution = new DisplayableContribution(contribution,
                 position);
         holder.init(position, displayableContribution);
@@ -36,7 +48,15 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
 
     @Override
     public int getItemCount() {
-        return callback.getNumberOfContributions();
+        return contributions.size();
+    }
+
+    public void setContributions(List<Contribution> contributionList) {
+        if(null!=contributionList) {
+            this.contributions.clear();
+            this.contributions.addAll(contributionList);
+            notifyDataSetChanged();
+        }
     }
 
     public interface Callback {
@@ -47,10 +67,6 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
 
         void openMediaDetail(int contribution);
 
-        int getNumberOfContributions();
-
         Contribution getContributionForPosition(int position);
-
-        int findItemPositionWithId(String lastVisibleItemID);
     }
 }

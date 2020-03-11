@@ -100,8 +100,8 @@
   <string name="menu_about">Honi buruz</string>
   <string name="about_license">Wikimedia Commons iturri-irekiko aplikazioa da Wikimedia komunitateko bolondresek sortu eta mantendutakoa. Wikimedia Fundazioa ez dago aplikazioaren sorreran, garapenean, edota mantenuan ibili.</string>
   <string name="about_improve">&lt;a href=\"%1$s\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu errore eta iradokizunen berri emateko.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Pribatutasun politika&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Kredituak&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Pribatutasun politika&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Kredituak&lt;/u&gt;</string>
   <string name="title_activity_about">Honi buruz</string>
   <string name="menu_feedback">Bidali zure iritzia (e-posta bidez)</string>
   <string name="no_email_client">Posta bezerorik ez da instalatu</string>
@@ -117,10 +117,9 @@
   <string name="media_upload_policy">Irudi hau bidaltzen, nire lan propioa dela aitortzen dut, copyrighta duten materiala edo selfiak ez duela, eta beste motatakoak &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Ohikoaren arauak&lt;/a&gt;</string>
   <string name="menu_download">Jaitsi</string>
   <string name="preference_license">Berezko lizentzia</string>
-  <string name="use_previous">Aurreko izenburu/deskribapena erabili</string>
+  <string name="use_previous" fuzzy="true">Aurreko izenburu/deskribapena erabili</string>
   <string name="allow_gps">Oraingo kokapena automatikoki lortu</string>
-  <string name="preference_theme">Gau modua</string>
-  <string name="preference_theme_summary">Gai iluna erabili</string>
+  <string name="preference_theme" fuzzy="true">Gau modua</string>
   <string name="license_name_cc_by_sa_four"> Aitortu-PartekatuBerdin 4.0</string>
   <string name="license_name_cc_by_four">Aitortu 4.0</string>
   <string name="license_name_cc_by_sa"> Aitortu-PartekatuBerdin 3.0</string>
@@ -160,7 +159,7 @@
   <string name="welcome_copyright_subtext">Saihestu copyright-a daukaten materialak, Interneten aurkitutakoak edo posterretakoak, liburuen azalak, etab.</string>
   <string name="welcome_final_text">Lortu duzula uste duzu?</string>
   <string name="welcome_final_button_text">Bai!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Informazio gehiago&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Informazio gehiago&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategoriak</string>
   <string name="detail_panel_cats_loading">Kargatzen…</string>
   <string name="detail_panel_cats_none">Bat ere ez da aukeratu</string>
@@ -245,7 +244,7 @@
   <string name="skip_login_message">Argazkiak igotzeko saioa hasi beharko duzu.</string>
   <string name="login_alert_message">Mesedez, hasi saioa funtzio hau erabili ahal izateko</string>
   <string name="nearby_location_has_not_changed">Kokapena ez da aldatu.</string>
-  <string name="nearby_location_not_available">Kokapena ez dago erabilgarri.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Kokapena ez dago erabilgarri.</string>
   <string name="location_permission_rationale_nearby">Baimena beharrezkoa da hurbil dauden lekuen zerrende ikusteko</string>
   <string name="get_directions">Nola iritsi</string>
   <string name="read_article">Artikulua irakurri</string>
@@ -258,14 +257,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us">&lt;u&gt;Baloratu gaitzazu&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Maiz egindako galderak&lt;/u&gt;</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Baloratu gaitzazu&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;Maiz egindako galderak&lt;/u&gt;</string>
   <string name="welcome_skip_button">Tutoriala jauzi</string>
   <string name="no_internet">Interneta ez dago erabilgarri</string>
   <string name="internet_established">Interneta erabilgarri</string>
   <string name="error_notifications">Errorea jakinarazpenak ekartzean</string>
   <string name="no_notifications">Ez da jakinarazpenik aurkitu</string>
-  <string name="about_translate">&lt;u&gt;Itzuli&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Itzuli&lt;/u&gt;</string>
   <string name="about_translate_title">Hizkuntzak</string>
   <string name="about_translate_message">Aukeratu itzulpenak zein hizkuntzatarako bidali nahi dituzun</string>
   <string name="about_translate_proceed">Jarraitu</string>

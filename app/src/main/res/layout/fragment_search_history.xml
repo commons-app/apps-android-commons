@@ -19,19 +19,19 @@
             <TextView
                 android:id="@+id/recent_searches_text_view"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/fragment_height"
                 android:layout_gravity="start"
                 android:gravity="center_vertical"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:paddingLeft="@dimen/standard_gap"
+                android:paddingRight="@dimen/standard_gap"
                 android:text="@string/search_recent_header"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/recent_searches_delete_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/fragment_height"
+                android:layout_height="@dimen/fragment_height"
                 android:layout_gravity="end"
                 android:background="?attr/actionBarItemBackground"
                 android:clickable="true"

@@ -55,6 +55,7 @@ import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Call;
@@ -82,6 +83,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     @Inject
     LoginClient loginClient;
+
+    @Inject
+    SystemThemeUtils systemThemeUtils;
 
     @BindView(R.id.login_button)
     Button loginButton;
@@ -121,7 +125,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .getCommonsApplicationComponent()
                 .inject(this);
 
-        boolean isDarkTheme = applicationKvStore.getBoolean("theme", false);
+        boolean isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         setTheme(isDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
@@ -133,7 +137,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit.addTextChangedListener(textWatcher);
         passwordEdit.addTextChangedListener(textWatcher);
         twoFactorEdit.addTextChangedListener(textWatcher);
-        
+
         if (ConfigUtils.isBetaFlavour()) {
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
@@ -264,7 +268,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 new Callback<MwQueryResponse>() {
                     @Override
                     public void onResponse(Call<MwQueryResponse> call,
-                            Response<MwQueryResponse> response) {
+                                           Response<MwQueryResponse> response) {
                         loginClient.login(commonsWikiSite, username, password, null, twoFactorCode,
                                 response.body().query().loginToken(), new LoginCallback() {
                                     @Override
@@ -275,7 +279,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
                                     @Override
                                     public void twoFactorPrompt(@NonNull Throwable caught,
-                                            @Nullable String token) {
+                                                                @Nullable String token) {
                                         Timber.d("Requesting 2FA prompt");
                                         hideProgress();
                                         askUserForTwoFactorAuth();

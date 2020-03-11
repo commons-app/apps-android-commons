@@ -5,6 +5,7 @@
 * Afaz
 * Dude1717
 * Hinaloe
+* Kkairri
 * Nicolas Raoul
 * Omotecho
 * Otokoume
@@ -105,8 +106,8 @@
   <string name="menu_about">このアプリについて</string>
   <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアが製作・管理しているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
   <string name="about_improve">バグとアイディアは &lt;a href=\"%1$s\"&gt;Github&lt;/a&gt; へ。</string>
-  <string name="about_privacy_policy">&lt;u&gt;プライバシー・ポリシー&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;クレジット&lt;/u&gt;</string>
+  <string name="about_privacy_policy">プライバシー・ポリシー</string>
+  <string name="about_credits">クレジット</string>
   <string name="title_activity_about">このアプリについて</string>
   <string name="menu_feedback">フィードバックをメールで送信</string>
   <string name="no_email_client">メールアプリケーションが見つかりません</string>
@@ -125,8 +126,7 @@
   <string name="use_previous">前回のタイトルと記述を使用</string>
   <string name="allow_gps">現在の位置を自動的に取得</string>
   <string name="allow_gps_summary">Retrieves current location if image is not geotagged, \n画像にジオタグが付いていない場合、現在の位置を取得して画像に添付。ご注意: 自分の現在地が明示されます。</string>
-  <string name="preference_theme">夜モード</string>
-  <string name="preference_theme_summary">暗いテーマを使う</string>
+  <string name="preference_theme" fuzzy="true">夜モード</string>
   <string name="license_name_cc_by_sa_four">表示-継承 4.0</string>
   <string name="license_name_cc_by_four">表示 4.0</string>
   <string name="license_name_cc_by_sa">表示-継承 3.0</string>
@@ -156,7 +156,7 @@
   <string name="tutorial_3_text">アップロードが《禁止》のもの:</string>
   <string name="tutorial_3_subtext_1">自撮りもしくは友達を撮影した写真</string>
   <string name="tutorial_3_subtext_2">ウェブからダウンロードした画像</string>
-  <string name="tutorial_3_subtext_3">独自のアプリケーションのスクリーンショット</string>
+  <string name="tutorial_3_subtext_3">フリーでないアプリケーションのスクリーンショット</string>
   <string name="tutorial_4_text">アップロードの例:</string>
   <string name="tutorial_4_subtext_1">題名: シドニーのオペラハウス</string>
   <string name="tutorial_4_subtext_2">説明: シドニーのオペラハウス。湾を挟んで撮影。</string>
@@ -167,7 +167,7 @@
   <string name="welcome_copyright_subtext">インターネットで見つけた画像、ポスター、書籍の表紙など著作権のある素材は避けてください。</string>
   <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>
-  <string name="welcome_help_button_text">&lt;u&gt;詳細情報&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">詳細情報</string>
   <string name="detail_panel_cats_label">カテゴリ</string>
   <string name="detail_panel_cats_loading">読み込み中…</string>
   <string name="detail_panel_cats_none">ファイルを選択していません</string>
@@ -269,7 +269,7 @@
   <string name="null_url">エラーが発生しました。URL が見つかりません</string>
   <string name="nominate_deletion">削除の提案</string>
   <string name="nominated_for_deletion">この画像の削除が提案されています。</string>
-  <string name="nominated_see_more">&lt;u&gt;詳しいことはウェブサイトをご参照ください&lt;/u&gt;</string>
+  <string name="nominated_see_more">詳細はウェブサイトをご覧ください</string>
   <string name="nominating_file_for_deletion">%1$s 件を削除候補に指定しようとしています。</string>
   <string name="nominating_for_deletion_status">削除候補に指定中：%1$s</string>
   <string name="view_browser">ブラウザーで表示</string>
@@ -281,7 +281,7 @@
   <string name="copy_wikicode">ウィキテキストをクリップボードにコピーする</string>
   <string name="wikicode_copied">クリップボードにウィキテキストをコピー完了しました</string>
   <string name="nearby_location_has_not_changed">場所は変更されていません。</string>
-  <string name="nearby_location_not_available">位置が無効です。</string>
+  <string name="nearby_location_not_available" fuzzy="true">位置が無効です。</string>
   <string name="location_permission_rationale_nearby">近くの場所を表示するには権限が必要です</string>
   <string name="get_directions">道順を調べる</string>
   <string name="read_article">記事を読む</string>
@@ -294,8 +294,8 @@
   <string name="nearby_wikidata">ウィキデータ</string>
   <string name="nearby_wikipedia">ウィキペディア</string>
   <string name="nearby_commons">コモンズ</string>
-  <string name="about_rate_us">&lt;u&gt;評価する&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;よくある質問&lt;/u&gt;</string>
+  <string name="about_rate_us">評価する</string>
+  <string name="about_faq">よくある質問</string>
   <string name="welcome_skip_button">チュートリアルをスキップする</string>
   <string name="no_internet">インターネットに接続していません</string>
   <string name="internet_established">インターネットに接続しました</string>
@@ -303,7 +303,7 @@
   <string name="error_review">査読用の画像の選出ができませんでした。ボタンをもう一度押してください。</string>
   <string name="error_review_categories">カテゴリ査読用の画像の選出ができませんでした。もう一度ボタンを押してください。</string>
   <string name="no_notifications">通知はありません</string>
-  <string name="about_translate">&lt;u&gt;翻訳&lt;/u&gt;</string>
+  <string name="about_translate">翻訳</string>
   <string name="about_translate_title">言語</string>
   <string name="about_translate_message">どの言語に編集するか選択</string>
   <string name="about_translate_proceed">次へ</string>
@@ -527,7 +527,7 @@
   <string name="exif_tag_name_lensModel">レンズモデル</string>
   <string name="exif_tag_name_serialNumbers">シリアル番号</string>
   <string name="exif_tag_name_software">ソフトウェア</string>
-  <string name="share_text" fuzzy="true">スマホからウィキペディア・コモンズに画像を投稿する\nコモンズアプリをダウンロード：%1$s</string>
+  <string name="share_text">スマホから直接、ウィキメディア・コモンズに画像を投稿する。\nコモンズアプリを今すぐダウンロード：%1$s</string>
   <string name="share_via">アプリの共有に使うのは…</string>
   <string name="image_info">画像情報</string>
   <string name="no_categories_found">カテゴリが見つかりません</string>
@@ -557,4 +557,15 @@
   <string name="text_copy">テキストをクリップボードにコピー済み</string>
   <string name="notification_mark_read">通知を既読にしました</string>
   <string name="some_error">エラーが発生しました</string>
+  <string name="nearby_search_hint">橋・博物館・ホテルなど</string>
+  <string name="you_must_reset_your_passsword">ログインがうまくいきませんでした。パスワードを変更してください!!</string>
+  <string name="upload_nearby_place_found_title">付近の場所が見つかりました</string>
+  <string name="title_app_shortcut_explore">探してみよう</string>
+  <string name="title_app_shortcut_bookmark">ブックマーク</string>
+  <string name="title_app_shortcut_setting">設定</string>
+  <string name="remove_bookmark">ブックマークから除去</string>
+  <string name="add_bookmark">ブックマークに追加</string>
+  <string name="wallpaper_set_unsuccessfully">問題が発生しました。壁紙を設定できませんでした。</string>
+  <string name="setting_wallpaper_dialog_title">壁紙として設定</string>
+  <string name="setting_wallpaper_dialog_message">壁紙を設定中。お待ちください...</string>
 </resources>

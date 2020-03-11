@@ -6,6 +6,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Build;
 import android.os.Process;
 import android.util.Log;
@@ -15,6 +16,11 @@ import androidx.annotation.NonNull;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.producers.Consumer;
+import com.facebook.imagepipeline.producers.FetchState;
+import com.facebook.imagepipeline.producers.NetworkFetcher;
+import com.facebook.imagepipeline.producers.ProducerContext;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -27,6 +33,8 @@ import org.wikipedia.AppAdapter;
 import org.wikipedia.language.AppLanguageLookUpTable;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,20 +45,23 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
 import fr.free.nrw.commons.concurrency.ThreadPoolService;
-import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.internal.functions.Functions;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.data.DBOpenHelper.CONTRIBUTIONS_TABLE;
 import static org.acra.ReportField.ANDROID_VERSION;
 import static org.acra.ReportField.APP_VERSION_CODE;
 import static org.acra.ReportField.APP_VERSION_NAME;
@@ -83,6 +94,9 @@ public class CommonsApplication extends Application {
 
     @Inject @Named("default_preferences") JsonKvStore defaultPrefs;
 
+    @Inject
+    OkHttpClient okHttpClient;
+
     /**
      * Constants begin
      */
@@ -114,6 +128,9 @@ public class CommonsApplication extends Application {
         return languageLookUpTable;
     }
 
+    @Inject
+    AppDatabase appDatabase;
+
     /**
      * Used to declare and initialize various components and dependencies
      */
@@ -123,6 +140,7 @@ public class CommonsApplication extends Application {
 
         INSTANCE = this;
         ACRA.init(this);
+        Mapbox.getInstance(this, getString(R.string.mapbox_commons_app_token));
 
         ApplicationlessInjection
                 .getInstance(this)
@@ -133,10 +151,26 @@ public class CommonsApplication extends Application {
 
         initTimber();
 
+
+        if (!defaultPrefs.getBoolean("has_user_manually_removed_location")) {
+            Set<String> defaultExifTagsSet = defaultPrefs.getStringSet(Prefs.MANAGED_EXIF_TAGS);
+            if (null == defaultExifTagsSet) {
+                defaultExifTagsSet = new HashSet<>();
+            }
+            defaultExifTagsSet.add(getString(R.string.exif_tag_location));
+            defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet);
+        }
+
 //        Set DownsampleEnabled to True to downsample the image in case it's heavy
-        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
-                .setDownsampleEnabled(true)
-                .build();
+        ImagePipelineConfig.Builder imagePipelineConfigBuilder = ImagePipelineConfig.newBuilder(this)
+                .setDownsampleEnabled(true);
+
+        if(ConfigUtils.isBetaFlavour()){
+            NetworkFetcher networkFetcher=new CustomNetworkFetcher(okHttpClient);
+            imagePipelineConfigBuilder.setNetworkFetcher(networkFetcher);
+        }
+
+        ImagePipelineConfig config = imagePipelineConfigBuilder.build();
         try {
             Fresco.initialize(this, config);
         } catch (Exception e) {
@@ -277,10 +311,12 @@ public class CommonsApplication extends Application {
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
         CategoryDao.Table.onDelete(db);
-        ContributionDao.Table.onDelete(db);
+        dbOpenHelper.deleteTable(db,CONTRIBUTIONS_TABLE);//Delete the contributions table in the existing db on older versions
+        appDatabase.getContributionDao().deleteAll();
         BookmarkPicturesDao.Table.onDelete(db);
         BookmarkLocationsDao.Table.onDelete(db);
     }
+
 
     /**
      * Interface used to get log-out events

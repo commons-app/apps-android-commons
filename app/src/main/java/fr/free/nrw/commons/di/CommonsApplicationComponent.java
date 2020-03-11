@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.di;
 
+import com.google.gson.Gson;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -10,7 +12,6 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionViewHolder;
 import fr.free.nrw.commons.contributions.ContributionsModule;
-import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.settings.SettingsFragment;
@@ -19,6 +20,10 @@ import fr.free.nrw.commons.upload.UploadModule;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
 
 
+/**
+ * Facilitates Injection from CommonsApplicationModule to all the 
+ * classes seeking a dependency to be injected
+ */
 @Singleton
 @Component(modules = {
         CommonsApplicationModule.class,
@@ -32,8 +37,6 @@ import fr.free.nrw.commons.widget.PicOfDayAppWidget;
 })
 public interface CommonsApplicationComponent extends AndroidInjector<ApplicationlessInjection> {
     void inject(CommonsApplication application);
-
-    void inject(ContributionsSyncAdapter syncAdapter);
 
     void inject(LoginActivity activity);
 
@@ -52,9 +55,12 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
 
     void inject(ContributionViewHolder viewHolder);
 
+    Gson gson();
+
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})
     interface Builder {
+
         Builder appModule(CommonsApplicationModule applicationModule);
 
         CommonsApplicationComponent build();

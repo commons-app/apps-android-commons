@@ -97,11 +97,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             gridView.setVisibility(GONE);
             if (gridAdapter != null) {
                 gridAdapter.clear();
-                try {
-                    ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
             }
             initList();
         }
@@ -203,11 +199,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
                 return;
             }
             gridAdapter.addItems(collection);
-            try {
-                ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+            ((BookmarksActivity) getContext()).viewPagerNotifyDataSetChanged();
         }
         progressBar.setVisibility(GONE);
         statusTextView.setVisibility(GONE);

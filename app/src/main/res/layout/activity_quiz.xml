@@ -16,11 +16,11 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
+                app:cardCornerRadius="@dimen/activity_margin_horizontal"
+                android:layout_marginBottom="@dimen/activity_margin_horizontal"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:layout_marginTop="@dimen/activity_margin_horizontal"
                 app:cardUseCompatPadding="true">
 
                 <ScrollView

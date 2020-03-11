@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -142,7 +145,7 @@ public class Utils {
         builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         CustomTabsIntent customTabsIntent = builder.build();
         // Clear previous browser tasks, so that back/exit buttons work as intended.
-        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         customTabsIntent.launchUrl(context, url);
     }
 
@@ -183,6 +186,19 @@ public class Utils {
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(label, text);
         clipboard.setPrimaryClip(clip);
+    }
+
+    /**
+     * This method sets underlined string text to a TextView
+     *
+     * @param textView TextView associated with string resource
+     * @param stringResourceName string resource name
+     * @param context
+     */
+    public static void setUnderlinedText(TextView textView, int stringResourceName, Context context) {
+        SpannableString content = new SpannableString(context.getString(stringResourceName));
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textView.setText(content);
     }
 
 }

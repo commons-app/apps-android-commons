@@ -1,11 +1,11 @@
 plugins {
-    id 'com.github.triplet.play' version '2.2.1' apply false
+    id 'com.github.triplet.play' version '2.7.2' apply false
 }
 apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'jacoco-android'
+apply plugin: "com.hiya.jacoco-android"
 apply from: 'quality.gradle'
 
 def isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file('../play.p12').exists()
@@ -36,8 +36,8 @@ dependencies {
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.github.pedrovgs:renderers:3.3.3'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:7.2.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v7:0.7.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:8.6.2'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v8:0.11.0'
     implementation 'com.github.deano2390:MaterialShowcaseView:1.2.0'
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'
@@ -103,6 +103,14 @@ dependencies {
 
     //swipe_layout
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
+
+    //Room
+    def room_version= '2.2.3'
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation "androidx.room:room-rxjava2:$room_version"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 }
 
 android {
@@ -110,9 +118,9 @@ android {
     buildToolsVersion "28.0.3"
 
     defaultConfig {
-        applicationId 'fr.free.nrw.commons'
-        versionCode 508
-        versionName '2.12.0'
+        //applicationId 'fr.free.nrw.commons'
+        versionCode 561
+        versionName '2.12.3'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 19

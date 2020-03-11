@@ -31,6 +31,9 @@ public class FilePicker implements Constants {
     private static final String KEY_LAST_CAMERA_VIDEO = "last_video";
     private static final String KEY_TYPE = "type";
 
+    /**
+     * Returns the uri of the clicked image so that it can be put in MediaStore
+     */
     private static Uri createCameraPictureFile(@NonNull Context context) throws IOException {
         File imagePath = PickedFiles.getCameraPicturesLocation(context);
         Uri uri = PickedFiles.getUriToFile(context, imagePath);
@@ -42,6 +45,7 @@ public class FilePicker implements Constants {
     }
 
     private static Intent createGalleryIntent(@NonNull Context context, int type) {
+        // storing picked image type to shared preferences
         storeType(context, type);
         return plainGalleryPickerIntent()
                 .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, configuration(context).allowsMultiplePickingInGallery());
@@ -93,6 +97,9 @@ public class FilePicker implements Constants {
         activity.startActivityForResult(intent, RequestCodes.PICK_PICTURE_FROM_GALLERY);
     }
 
+    /**
+     * Opens the camera app to pick image clicked by user 
+     */
     public static void openCameraForImage(Activity activity, int type) {
         Intent intent = createCameraForImageIntent(activity, type);
         activity.startActivityForResult(intent, RequestCodes.TAKE_PICTURE);
@@ -118,6 +125,9 @@ public class FilePicker implements Constants {
         }
     }
 
+    /**
+     * Any activity can use this method to attach their callback to the file picker
+     */
     public static void handleActivityResult(int requestCode, int resultCode, Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
         boolean isHandledPickedFile = (requestCode & RequestCodes.FILE_PICKER_IMAGE_IDENTIFICATOR) > 0;
         if (isHandledPickedFile) {

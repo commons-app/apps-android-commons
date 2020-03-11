@@ -76,7 +76,7 @@
   <string name="title_activity_featured_images">নিৰ্বাচিত ছবি</string>
   <string name="title_activity_category_details">শ্ৰেণী</string>
   <string name="menu_about">বিষয়ে</string>
-  <string name="about_privacy_policy">&lt;u&gt;গোপনিয়তা নীতি&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;গোপনিয়তা নীতি&lt;/u&gt;</string>
   <string name="menu_feedback">প্ৰতিক্ৰিয়া প্ৰেৰণ কৰক (ইমেইল যোগে)</string>
   <string name="no_email_client">কোনো ইমেইল ক্লায়েন্ট ইনষ্টল কৰা নাই</string>
   <string name="waiting_first_sync">প্ৰথম চিংকৰ বাবে অপেক্ষাৰত...</string>
@@ -84,8 +84,7 @@
   <string name="menu_retry_upload">পুনৰ চেষ্টা কৰক</string>
   <string name="menu_cancel_upload">বাতিল কৰক</string>
   <string name="menu_download">ডাউনল’ড কৰক</string>
-  <string name="preference_theme">নিশা ম\'ড</string>
-  <string name="preference_theme_summary">ক\'লা থীম ব্যৱহাৰ কৰক</string>
+  <string name="preference_theme" fuzzy="true">নিশা ম\'ড</string>
   <string name="tutorial_3_text">অনুগ্ৰহ কৰি আপল\'ড নকৰিব:</string>
   <string name="tutorial_3_subtext_1">আপোনাৰ বন্ধুসকলৰ ছেল্ফি বা ছবি</string>
   <string name="tutorial_3_subtext_2">আপুনি ইণ্টাৰনেটৰ পৰা ডাউনল\'ড কৰা ছবিসমূহ</string>
@@ -93,7 +92,7 @@
   <string name="tutorial_4_subtext_1">শীৰ্ষক: ছিডনী অপেৰা হাউছ</string>
   <string name="welcome_final_text">আপুনি বুজিছে বুলি ভাবেনে?</string>
   <string name="welcome_final_button_text">হয়!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;অধিক তথ্য&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;অধিক তথ্য&lt;/u&gt;</string>
   <string name="detail_panel_cats_loading">ল\'ড হৈ আছে…</string>
   <string name="detail_panel_cats_none">একো চয়ন কৰা নাই</string>
   <string name="detail_discussion_empty">একো আলোচনা নাই</string>

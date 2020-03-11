@@ -5,6 +5,7 @@
 * Astrind
 * Bugoslav
 * MaGa
+* Neptune, the Mystic
 -->
 <resources>
   <string name="preference_category_appearance">Izgled</string>
@@ -88,11 +89,13 @@
   <string name="title_activity_settings">Postavke</string>
   <string name="title_activity_signup">Otvori račun</string>
   <string name="title_activity_featured_images">Izabrane slike</string>
+  <string name="title_activity_category_details">Kategorija</string>
+  <string name="title_activity_review">Ocjenjivanje</string>
   <string name="menu_about">O</string>
   <string name="about_license">Aplikacija The Wikimedia Commons je aplikacija otvorenog kôda koju razvijaju i održavaju volonteri Wikimedijine zajednice. Zaklada Wikimedija nije uključena u stvaranje, razvoj ili održavanje ove aplikacije.</string>
   <string name="about_improve">Da biste prijavili poteškoću ili dali prijedlog, stvorite &lt;a href=\"%1$s\"&gt;novi zahtjev na GitHubu&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Politika privatnosti&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Zasluge&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Pravila privatnosti</string>
+  <string name="about_credits">Zasluge</string>
   <string name="title_activity_about">O</string>
   <string name="menu_feedback">Pošaljite povratnu informaciju (putem elektroničke pošte)</string>
   <string name="no_email_client">Klijent za elektroničku poštu nije instaliran</string>
@@ -105,11 +108,10 @@
   <string name="media_upload_policy">Slanjem ove slike izjavljujem da je ona moje djelo i ne sadrži materijale zaštićene autorskim pravom ili selfije, te da je u skladu sa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;smjernicama Zajedničkog poslužitelja&lt;/a&gt;.</string>
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Podrazumijevana licencija</string>
-  <string name="use_previous">Rabite prethodni naziv/opis</string>
+  <string name="use_previous">Rabite prethodni naziv i opis</string>
   <string name="allow_gps">Automatski pribavi trenutačnu lokaciju</string>
   <string name="allow_gps_summary" fuzzy="true">Ako slika nema oznaku lokacije, pribavi trenutačnu lokaciju kako bi se mogle ponuditi kategorije</string>
-  <string name="preference_theme">Noćni način</string>
-  <string name="preference_theme_summary">Rabi tamnu temu</string>
+  <string name="preference_theme">Izgled</string>
   <string name="license_name_cc_by_sa_four"> Imenovanje-Dijeli pod istim uvjetima 4.0</string>
   <string name="license_name_cc_by_four"> Imenovanje 4.0</string>
   <string name="license_name_cc_by_sa"> Imenovanje-Dijeli pod istim uvjetima 3.0</string>
@@ -141,8 +143,8 @@
   <string name="tutorial_3_subtext_2">Slike koje ste preuzeli s interneta</string>
   <string name="tutorial_3_subtext_3">Snimke ekrana zaštićenih aplikacija</string>
   <string name="tutorial_4_text">Primjer postavljanja:</string>
-  <string name="tutorial_4_subtext_1">Naziv: Sydneyska opera</string>
-  <string name="tutorial_4_subtext_2">Opis: Sydneyska opera viđena iz zaljeva</string>
+  <string name="tutorial_4_subtext_1">Naziv: Sydneyjska opera</string>
+  <string name="tutorial_4_subtext_2">Opis: Sydneyjska opera viđena iz zaljeva</string>
   <string name="tutorial_4_subtext_3">Kategorije: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Dijelite Vaše slike. Pomozite da članci na Wikipediji zažive!</string>
   <string name="welcome_wikipedia_subtext">Slike na wikipediji su sa Zajedničkog poslužitelja.</string>
@@ -231,7 +233,7 @@
   <string name="nominated_for_deletion">Slika je predložena za brisanje</string>
   <string name="view_browser">Pogledaj u pregledniku</string>
   <string name="nearby_location_has_not_changed">Lokacija nepromijenjena.</string>
-  <string name="nearby_location_not_available">Lokacija nedostupna.</string>
+  <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebno je dopuštenje za popis mjesta u blizini</string>
   <string name="get_directions">Nabavi upute</string>
   <string name="read_article">Pročitaj članak</string>
@@ -244,14 +246,14 @@
   <string name="nearby_wikidata">Wikipodatci</string>
   <string name="nearby_wikipedia">Wikipedija</string>
   <string name="nearby_commons">Zajednički poslužitelj</string>
-  <string name="about_rate_us">&lt;u&gt;Ocijenite nas&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;ČPP&lt;/u&gt;</string>
+  <string name="about_rate_us">Ocijenite nas</string>
+  <string name="about_faq">ČPP</string>
   <string name="welcome_skip_button">Preskoči upute</string>
   <string name="no_internet">Internet nije dostupan</string>
   <string name="internet_established">Internet je dostupan</string>
   <string name="error_notifications">Pogrješka dohvaćanja obavijesti</string>
   <string name="no_notifications">Nema obavijesti</string>
-  <string name="about_translate">&lt;u&gt;Prevedi&lt;/u&gt;</string>
+  <string name="about_translate">Prevedi</string>
   <string name="about_translate_title">Jezici</string>
   <string name="about_translate_message">Odaberite jezik na koji bi željeli prevoditi</string>
   <string name="about_translate_proceed">Nastavi</string>
@@ -264,6 +266,8 @@
   <string name="no_images_found">Slike nisu pronađene!</string>
   <string name="error_loading_images">Pogrješka prilikom učitavanja slika.</string>
   <string name="image_uploaded_by">Postavio: %1$s</string>
+  <string name="error_loading_categories">Dogodila se pogrješka prilikom učitavanja kategorija.</string>
+  <string name="error_loading_subcategories">Dogodila se pogrješka prilikom učitavanja potkategorija</string>
   <string name="search_tab_title_media">Mediji</string>
   <string name="search_tab_title_categories">Kategorije</string>
   <string name="explore_tab_title_featured">Istaknuto</string>
@@ -274,6 +278,13 @@
   <string name="delete">Izbriši</string>
   <string name="statistics">Statistike</string>
   <string name="level">Razina</string>
+  <string name="error_occurred">Došlo je do pogrješke!</string>
+  <string name="notifications_channel_name_all">Obavijesti Zajedničkoga poslužitelja</string>
+  <string name="error_processing_image">Došlo je do pogrješke tijekom obradbe slike. Molimo Vas, pokušajte ponovo!</string>
+  <string name="please_wait">Molimo Vas, pričekajte ...</string>
   <string name="skip_image">Preskoči ovu sliku</string>
   <string name="default_description_language">Zadani jezik za opis</string>
+  <string name="theme_default_name">Zadano</string>
+  <string name="theme_dark_name">Tamno</string>
+  <string name="theme_light_name">Svijetlo</string>
 </resources>
