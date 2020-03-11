@@ -63,6 +63,7 @@ class DeleteHelperTest {
                 .thenReturn(Observable.just(true))
 
         `when`(media?.displayTitle).thenReturn("Test file")
+        `when`(media?.getCreator()).thenReturn("Creator (page does not exist)")
         media?.filename="Test file.jpg"
 
         val makeDeletion = deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
