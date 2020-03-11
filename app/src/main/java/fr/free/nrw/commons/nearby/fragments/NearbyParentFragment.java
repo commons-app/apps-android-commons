@@ -229,8 +229,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 UiSettings uiSettings = mapBoxMap.getUiSettings();
                 uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
                 uiSettings.setCompassMargins(12, 0, 0, 24);
-                uiSettings.setLogoEnabled(false);
-                uiSettings.setAttributionEnabled(false);
+                uiSettings.setLogoEnabled(true);
+                uiSettings.setAttributionEnabled(true);
                 uiSettings.setRotateGesturesEnabled(false);
                 NearbyParentFragment.this.isMapBoxReady=true;
                 performMapReadyActions();
