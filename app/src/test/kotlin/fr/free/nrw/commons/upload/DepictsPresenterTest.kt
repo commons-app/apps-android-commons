@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload
 //import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.category.CategoryItem
-import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsFragment
@@ -20,26 +19,22 @@ import org.mockito.MockitoAnnotations
 
 class DepictsPresenterTest {
     @Mock
-    internal var repository: UploadRepository? = null
+    internal lateinit var repository: UploadRepository
+
     @Mock
-    internal var view: DepictsContract.View? = null
+    internal lateinit var view: DepictsContract.View
 
-    var depictsPresenter: DepictsPresenter? = null
+    private lateinit var depictsPresenter: DepictsPresenter
 
-    var depictsFragment: DepictsFragment? = null
+    private lateinit var depictsFragment: DepictsFragment
 
-    var testScheduler: TestScheduler? = null
+    private lateinit var testScheduler: TestScheduler
 
-    var depictsClient : DepictsClient? = null
-
-    val depictedItems: ArrayList<DepictedItem> = ArrayList()
+    private val depictedItems: ArrayList<DepictedItem> = ArrayList()
 
     @Mock
     lateinit var depictedItem: DepictedItem
 
-    var testObservable: Observable<DepictedItem>? = null
-
-    private val imageTitleList = ArrayList<UploadMediaDetail>()
 
     /**
      * initial setup
@@ -51,70 +46,77 @@ class DepictsPresenterTest {
         testScheduler = TestScheduler()
         depictedItem = DepictedItem("label", "desc", "", false, "entityId")
         depictedItems.add(depictedItem)
-        testObservable = Observable.just(depictedItem)
-        depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler, depictsClient)
+        depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler, null)
         depictsFragment = DepictsFragment()
-        depictsPresenter?.onAttachView(view)
+        depictsPresenter.onAttachView(view)
     }
 
     @Test
     fun searchEnglishDepictionsTest() {
-        whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
-        depictsPresenter?.searchForDepictions("test")
-        verify(view)?.showProgress(true)
-        verify(view)?.showError(true)
-        verify(view)?.setDepictsList(null)
-        testScheduler?.triggerActions()
-        verify(view)?.showProgress(false)
+        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
+        whenever(repository.selectedDepictions).thenReturn(depictedItems)
+        whenever(repository.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
+        depictsPresenter.searchForDepictions("test")
+        verify(view).showProgress(true)
+        verify(view).setDepictsList(null)
+        testScheduler.triggerActions()
+        verify(view).showProgress(false)
     }
 
     @Test
     fun searchOtherLanguageDepictions() {
-        whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
-        depictsPresenter?.searchForDepictions("वी")
-        verify(view)?.showProgress(true)
-        verify(view)?.showError(true)
-        verify(view)?.setDepictsList(null)
-        testScheduler?.triggerActions()
-        verify(view)?.showProgress(false)
+        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
+        whenever(repository.selectedDepictions).thenReturn(depictedItems)
+        whenever(repository.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
+        depictsPresenter.searchForDepictions("वी")
+        verify(view).showProgress(true)
+        verify(view).setDepictsList(null)
+        testScheduler.triggerActions()
+        verify(view).showProgress(false)
     }
 
     @Test
     fun searchForNonExistingDepictions() {
-        whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
-        depictsPresenter?.searchForDepictions("******")
-        verify(view)?.showProgress(true)
-        verify(view)?.setDepictsList(null)
-        testScheduler?.triggerActions()
-        verify(view)?.setDepictsList(null)
-        verify(view)?.showProgress(false)
+        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
+        whenever(repository.selectedDepictions).thenReturn(depictedItems)
+        whenever(repository.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
+        depictsPresenter.searchForDepictions("******")
+        verify(view).showProgress(true)
+        verify(view).setDepictsList(null)
+        testScheduler.triggerActions()
+        verify(view).setDepictsList(null)
+        verify(view).showProgress(false)
     }
 
     @Test
     fun setSingleDepiction() {
-        whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
-        depictsPresenter?.onDepictItemClicked(depictedItem)
-        depictsPresenter?.verifyDepictions()
-        verify(view)?.goToNextScreen()
+        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
+        whenever(repository.selectedDepictions).thenReturn(depictedItems)
+        whenever(repository.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
+        depictsPresenter.onDepictItemClicked(depictedItem)
+        depictsPresenter.verifyDepictions()
+        verify(view).goToNextScreen()
     }
 
     @Test
     fun setMultipleDepictions() {
-        whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
-        whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
-        depictsPresenter?.onDepictItemClicked(depictedItem)
+        whenever(repository.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
+        whenever(repository.selectedDepictions).thenReturn(depictedItems)
+        whenever(repository.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
+        depictsPresenter.onDepictItemClicked(depictedItem)
         val depictedItem2 = DepictedItem("label2", "desc2", "", false, "entityid2")
-        depictsPresenter?.onDepictItemClicked(depictedItem2)
-        depictsPresenter?.verifyDepictions()
-        verify(view)?.goToNextScreen()
+        depictsPresenter.onDepictItemClicked(depictedItem2)
+        depictsPresenter.verifyDepictions()
+        verify(view).goToNextScreen()
+    }
+
+    @Test
+    fun `on Search Exception Show Error And Stop Progress`() {
+        whenever(repository.searchAllEntities(ArgumentMatchers.anyString()))
+            .thenReturn(Observable.error(Exception()))
+        depictsPresenter.searchForDepictions("******")
+        testScheduler.triggerActions()
+        verify(view).showError(true)
+        verify(view).showProgress(false)
     }
 }
