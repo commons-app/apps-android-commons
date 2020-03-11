@@ -3,7 +3,6 @@ package fr.free.nrw.commons
 import android.app.Activity
 import android.app.Instrumentation
 import android.content.Intent
-import androidx.test.InstrumentationRegistry
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
@@ -50,8 +49,6 @@ class AboutActivityTest {
     fun testLaunchFacebook() {
         Espresso.onView(ViewMatchers.withId(R.id.facebook_launch_icon)).perform(ViewActions.click())
         Intents.intended(IntentMatchers.hasAction(Intent.ACTION_VIEW))
-        Intents.intended(CoreMatchers.anyOf(IntentMatchers.hasPackage(Urls.FACEBOOK_PACKAGE_NAME),
-                IntentMatchers.hasData(Urls.FACEBOOK_WEB_URL)))
     }
 
     @Test
@@ -63,11 +60,8 @@ class AboutActivityTest {
 
     @Test
     fun testLaunchRateUs() {
-        val appPackageName = InstrumentationRegistry.getInstrumentation().targetContext.packageName
         Espresso.onView(ViewMatchers.withId(R.id.about_rate_us)).perform(ViewActions.click())
         Intents.intended(IntentMatchers.hasAction(Intent.ACTION_VIEW))
-        Intents.intended(CoreMatchers.anyOf(IntentMatchers.toPackage(Urls.PLAY_STORE_PACKAGE_NAME),
-                IntentMatchers.hasData("${Urls.PLAY_STORE_URL_PREFIX}$appPackageName")))
     }
 
     @Test

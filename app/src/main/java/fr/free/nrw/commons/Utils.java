@@ -115,7 +115,7 @@ public class Utils {
      * @param context
      */
     public static void rateApp(Context context) {
-        final String appPackageName = BuildConfig.class.getPackage().getName();
+        final String appPackageName = context.getPackageName();
         try {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Urls.PLAY_STORE_PREFIX + appPackageName)));
         }
