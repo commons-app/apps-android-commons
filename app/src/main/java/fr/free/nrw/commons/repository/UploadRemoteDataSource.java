@@ -179,11 +179,10 @@ public class UploadRemoteDataSource {
      * ask the UplaodModel for the image quality of the UploadItem
      *
      * @param uploadItem
-     * @param shouldValidateTitle
      * @return
      */
-    public Single<Integer> getImageQuality(UploadItem uploadItem, boolean shouldValidateTitle) {
-        return uploadModel.getImageQuality(uploadItem, shouldValidateTitle);
+    public Single<Integer> getImageQuality(UploadItem uploadItem) {
+        return uploadModel.getImageQuality(uploadItem);
     }
 
     /**

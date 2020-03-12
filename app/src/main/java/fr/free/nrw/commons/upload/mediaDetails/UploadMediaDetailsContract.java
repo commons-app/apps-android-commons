@@ -43,7 +43,7 @@ public interface UploadMediaDetailsContract {
         void receiveImage(UploadableFile uploadableFile, @Contribution.FileSource String source,
                 Place place);
 
-        void verifyImageQuality(UploadItem uploadItem, boolean validateTitle);
+        void verifyImageQuality(UploadItem uploadItem);
 
         void setUploadItem(int index, UploadItem uploadItem);
 
