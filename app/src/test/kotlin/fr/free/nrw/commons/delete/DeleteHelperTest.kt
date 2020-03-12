@@ -16,7 +16,6 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-//import org.wikipedia.AppAdapter
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -67,8 +66,9 @@ class DeleteHelperTest {
         `when`(media?.displayTitle).thenReturn("Test file")
         media?.filename="Test file.jpg"
 
-        val creatorName = "Creator";
-        `when`(media?.getCreator()).thenReturn("$creatorName (page does not exist)")
+        val creatorName = "Creator"
+        val noPageSuffix = " (page does not exist)"
+        `when`(media?.getCreator()).thenReturn("$creatorName$noPageSuffix")
 
         val makeDeletion = deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
         assertNotNull(makeDeletion)
@@ -120,6 +120,23 @@ class DeleteHelperTest {
         `when`(media?.displayTitle).thenReturn("Test file")
         `when`(media?.filename).thenReturn("Test file.jpg")
         `when`(media?.creator).thenReturn("Creator (page does not exist)")
+
+        deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
+    }
+
+    @Test(expected = RuntimeException::class)
+    fun makeDeletionForEmptyCreatorName() {
+        `when`(pageEditClient?.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+            .thenReturn(Observable.just(true))
+        `when`(pageEditClient?.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+            .thenReturn(Observable.just(true))
+        `when`(pageEditClient?.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+            .thenReturn(Observable.just(true))
+
+        `when`(media?.displayTitle).thenReturn("Test file")
+        media?.filename="Test file.jpg"
+
+        `when`(media?.getCreator()).thenReturn(null)
 
         deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
     }
