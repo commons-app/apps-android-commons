@@ -454,6 +454,7 @@
   <string name="display_location_permission_title">Дозвіл на показ місця перебування</string>
   <string name="display_location_permission_explanation">Запитувати про дозвіл на показ місця перебування, коли це потрібно для функції перегляду місць поблизу.</string>
   <string name="achievements_fetch_failed">Щось пішло не так. Нам не вдалося отримати Ваші досягнення</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Ви зробили так багато, що наша система підрахунку досягнень не може впоратись зі своїм завданням. Це — абсолютне досягнення.</string>
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
   <string name="display_campaigns_explanation">Чинні кампанії</string>

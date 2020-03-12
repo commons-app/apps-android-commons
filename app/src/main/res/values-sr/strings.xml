@@ -266,7 +266,7 @@
   <string name="null_url">Грешка! URL није пронађен</string>
   <string name="nominate_deletion">Номиновање за брисање</string>
   <string name="nominated_for_deletion">Ова слика је била номинована за брисање</string>
-  <string name="nominated_see_more">Погледајте вебстраницу за детаље</string>
+  <string name="nominated_see_more">Погледајте веб-страницу за више информација</string>
   <string name="nominating_file_for_deletion">Предлагање %1$s за брисање.</string>
   <string name="nominating_for_deletion_status">Предлагање датотеке %1$s за брисање.</string>
   <string name="view_browser">Види у претраживачу</string>
@@ -522,11 +522,11 @@
   <string name="delete_helper_ask_reason_copyright_other">Остало</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
   <string name="share_image_via">Подели слику преко</string>
-  <string name="no_achievements_yet">Нисте направили доприносе</string>
-  <string name="account_created">Налог је отворен!</string>
+  <string name="no_achievements_yet">Још нисте допринели</string>
+  <string name="account_created">Налог је отворен.</string>
   <string name="text_copy">Текст је копиран у оставу</string>
   <string name="notification_mark_read">Обавештење је означено прочитаним</string>
-  <string name="some_error">Дошло је до грешке!</string>
+  <string name="some_error">Дошло је до грешке.</string>
   <string name="place_state_exists">Постоји</string>
   <string name="place_state_needs_photo">Потребна слика</string>
   <string name="place_type">Тип места:</string>

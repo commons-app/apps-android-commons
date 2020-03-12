@@ -457,6 +457,7 @@
   <string name="display_location_permission_title">Показать разрешение на геолокацию</string>
   <string name="display_location_permission_explanation">Запрашивать разрешение на геолокацию, которое требуется для нотификаций мест поблизости.</string>
   <string name="achievements_fetch_failed">Что-то пошло не так. Не получается получить список ваших достижений</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Вы сделали так много, что наша система расчёта достижений не справляется. Это финальное достижение.</string>
   <string name="ends_on">Заканчивается:</string>
   <string name="display_campaigns">Показ кампаний</string>
   <string name="display_campaigns_explanation">Просмотр текущих кампаний</string>
