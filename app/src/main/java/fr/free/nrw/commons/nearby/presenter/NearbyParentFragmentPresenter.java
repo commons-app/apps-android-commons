@@ -51,7 +51,6 @@ public class NearbyParentFragmentPresenter
     private LatLng curLatLng;
 
     private boolean placesLoadedOnce;
-    private boolean isGPSEnabled = true;
 
     BookmarkLocationsDao bookmarkLocationDao;
 
@@ -264,16 +263,16 @@ public class NearbyParentFragmentPresenter
         Timber.d("Location changed medium");
     }
 
-    @Override
-    public void onGPSDisabled() {
-        Timber.d("Presenter: GPS is Off");
-        isGPSEnabled = false;
-    }
-
-    @Override
-    public boolean checkGPSState() {
-        return isGPSEnabled;
-    }
+//    @Override
+//    public void onGPSDisabled() {
+//        Timber.d("Presenter: GPS is Off");
+//        isGPSEnabled = false;
+//    }
+//
+//    @Override
+//    public boolean checkGPSState() {
+//        return isGPSEnabled;
+//    }
 
     @Override
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {

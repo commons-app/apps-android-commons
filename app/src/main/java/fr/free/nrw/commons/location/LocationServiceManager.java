@@ -220,11 +220,11 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         Timber.d("Provider %s disabled", provider);
-        if (provider.equals("gps")) {
-            for (LocationUpdateListener listener : locationListeners) {
-                listener.onGPSDisabled();
-            }
-        }
+//        if (provider.equals("gps")) {
+//            for (LocationUpdateListener listener : locationListeners) {
+//                listener.onGPSDisabled();
+//            }
+//        }
     }
 
 //    public boolean isLocationEnabled() {
