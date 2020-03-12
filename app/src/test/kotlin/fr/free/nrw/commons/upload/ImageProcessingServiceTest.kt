@@ -123,14 +123,6 @@ class u {
     }
 
     @Test
-    fun validateImageForFileNameExistsWithCheckTitleOff() {
-        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(true))
-        val validateImage = imageProcessingService!!.validateImage(uploadItem)
-        assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
-    }
-
-    @Test
     fun validateImageForFileNameExistsWithCheckTitleOn() {
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
