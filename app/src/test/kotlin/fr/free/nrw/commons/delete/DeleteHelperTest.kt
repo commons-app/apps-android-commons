@@ -67,8 +67,7 @@ class DeleteHelperTest {
         media?.filename="Test file.jpg"
 
         val creatorName = "Creator"
-        val noPageSuffix = " (page does not exist)"
-        `when`(media?.getCreator()).thenReturn("$creatorName$noPageSuffix")
+        `when`(media?.getCreator()).thenReturn("$creatorName (page does not exist)")
 
         val makeDeletion = deleteHelper?.makeDeletion(context, media, "Test reason")?.blockingGet()
         assertNotNull(makeDeletion)
