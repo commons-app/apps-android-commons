@@ -355,11 +355,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         uploadTitleFormat,
                         uploadItem.getFileName()),
                 () -> {
-
-                },
-                () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     onNextButtonClicked();
+                },
+                () -> {
+
                 });
     }
 
