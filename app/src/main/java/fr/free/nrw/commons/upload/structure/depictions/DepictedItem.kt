@@ -6,7 +6,7 @@ import fr.free.nrw.commons.wikidata.model.DepictSearchItem
  * Model class for Depicted Item in Upload and Explore
  */
 data class DepictedItem constructor(
-  val depictsLabel: String,
+  val depictsLabel: String?,
   val description: String?,
   var imageUrl: String,
   var isSelected: Boolean,

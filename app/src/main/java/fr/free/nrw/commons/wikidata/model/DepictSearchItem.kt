@@ -7,6 +7,6 @@ class DepictSearchItem(
     val id: String,
     val pageid: String,
     val url: String,
-    val label: String,
+    val label: String?,
     val description: String?
 )
