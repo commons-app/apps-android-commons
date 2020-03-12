@@ -197,7 +197,8 @@ public class UploadModel {
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
-            }
+                // If item already has an image, we need to know it. We don't want to override existing image later
+                contribution.setP18Value(item.place.pic);            }
             if (null == selectedCategories) {//Just a fail safe, this should never be null
                 selectedCategories = new ArrayList<>();
             }
