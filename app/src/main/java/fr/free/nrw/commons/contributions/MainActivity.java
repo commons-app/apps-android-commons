@@ -446,4 +446,17 @@ public class MainActivity extends NavigationBaseActivity implements FragmentMana
         locationManager = null;
         super.onDestroy();
     }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        try {
+            super.onRestoreInstanceState(savedInstanceState);
+        }catch (Exception e){
+            e.printStackTrace();
+            Intent intent=new Intent(this,MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    }
 }
