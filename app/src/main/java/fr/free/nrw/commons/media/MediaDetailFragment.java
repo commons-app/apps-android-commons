@@ -9,11 +9,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,6 +66,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static android.content.Context.WINDOW_SERVICE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -243,11 +246,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void updateAspectRatio(ImageInfo imageInfo) {
         if (imageInfo != null) {
-            int finalHeight = (scrollView.getWidth()*imageInfo.getHeight()) / imageInfo.getWidth();
+            int screenWidth = getScreenWidth(getContext());
+            int finalHeight = (screenWidth*imageInfo.getHeight()) / imageInfo.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
             params.height = finalHeight;
             image.setLayoutParams(params);
         }
+    }
+
+    private int getScreenWidth(Context context) {
+        DisplayMetrics dm = new DisplayMetrics();
+        WindowManager windowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        return width;
     }
 
     private final ControllerListener aspectRatioListener = new BaseControllerListener<ImageInfo>() {
