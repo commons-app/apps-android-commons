@@ -82,9 +82,9 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun verifyImageQualityTest() {
-        Mockito.`when`(repository?.getImageQuality(ArgumentMatchers.any(UploadModel.UploadItem::class.java), ArgumentMatchers.any(Boolean::class.java))).thenReturn(testSingleImageResult)
+        Mockito.`when`(repository?.getImageQuality(ArgumentMatchers.any(UploadModel.UploadItem::class.java))).thenReturn(testSingleImageResult)
         Mockito.`when`(uploadItem?.imageQuality).thenReturn(ArgumentMatchers.anyInt())
-        uploadMediaPresenter?.verifyImageQuality(uploadItem, true)
+        uploadMediaPresenter?.verifyImageQuality(uploadItem)
         verify(view)?.showProgress(true)
         testScheduler?.triggerActions()
         verify(view)?.showProgress(false)

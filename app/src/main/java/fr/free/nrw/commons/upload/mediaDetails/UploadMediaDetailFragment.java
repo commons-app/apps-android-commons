@@ -251,7 +251,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
         uploadItem.setDescriptions(descriptionsAdapter.getDescriptions());
-        presenter.verifyImageQuality(uploadItem, true);
+        presenter.verifyImageQuality(uploadItem);
     }
 
     @OnClick(R.id.btn_previous)

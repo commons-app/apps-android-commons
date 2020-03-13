@@ -119,8 +119,8 @@ public class UploadModel {
         return Observable.just(getUploadItem(uploadableFile, place, source, similarImageInterface));
     }
 
-    public Single<Integer> getImageQuality(UploadItem uploadItem, boolean checkTitle) {
-        return imageProcessingService.validateImage(uploadItem, checkTitle);
+    public Single<Integer> getImageQuality(UploadItem uploadItem) {
+        return imageProcessingService.validateImage(uploadItem);
     }
 
     private UploadItem getUploadItem(UploadableFile uploadableFile,
