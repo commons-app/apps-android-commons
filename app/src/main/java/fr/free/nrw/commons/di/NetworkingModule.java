@@ -18,8 +18,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
 
 import dagger.Module;
 import dagger.Provides;
@@ -33,7 +31,6 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
 import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
-import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataInterface;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
@@ -61,19 +58,13 @@ public class NetworkingModule {
     public OkHttpClient provideOkHttpClient(Context context,
                                             HttpLoggingInterceptor httpLoggingInterceptor) {
         File dir = new File(context.getCacheDir(), "okHttpCache");
-        OkHttpClient.Builder builder = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
+        return new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
                 .addInterceptor(httpLoggingInterceptor)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .cache(new Cache(dir, OK_HTTP_CACHE_SIZE));
-
-        if(ConfigUtils.isBetaFlavour()){
-            builder.sslSocketFactory(SslUtils.INSTANCE.getTrustAllHostsSSLSocketFactory());
-        }
-        return builder.build();
+            .readTimeout(60, TimeUnit.SECONDS)
+            .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
+            .build();
     }
-
-
 
     @Provides
     @Singleton
