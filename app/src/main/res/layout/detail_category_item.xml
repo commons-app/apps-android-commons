@@ -10,7 +10,7 @@
         android:id="@+id/mediaDetailCategoryItemText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/subBackground"
+        android:background="?attr/mainBackground"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:minHeight="@dimen/overflow_button_dimen"
