@@ -79,27 +79,19 @@ public class NearbyFilterSearchRecyclerViewAdapter
         Label label = displayedLabels.get(position);
         holder.placeTypeIcon.setImageResource(label.getIcon());
         holder.placeTypeLabel.setText(label.toString());
-
-        if (callback.isDarkTheme()) {
-            holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.opak_middle_grey) : ContextCompat.getColor(context, R.color.black));
-        } else {
-            holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : ContextCompat.getColor(context, R.color.white));
-        }
+        holder.placeTypeLayout.setSelected(label.isSelected());
 
         holder.placeTypeLayout.setOnClickListener(view -> {
             callback.setCheckboxUnknown();
+
             if (label.isSelected()) {
                 selectedLabels.remove(label);
             } else {
                 selectedLabels.add(label);
             }
-            label.setSelected(!label.isSelected());
 
-            if (callback.isDarkTheme()) {
-                holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.opak_middle_grey) : ContextCompat.getColor(context, R.color.black));
-            } else {
-                holder.placeTypeLayout.setBackgroundColor(label.isSelected() ? ContextCompat.getColor(context, R.color.divider_grey) : ContextCompat.getColor(context, R.color.white));
-            }
+            label.setSelected(!label.isSelected());
+            holder.placeTypeLayout.setSelected(label.isSelected());
 
             callback.filterByMarkerType(selectedLabels, 0, false, false);
         });
