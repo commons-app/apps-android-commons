@@ -15,10 +15,10 @@
         android:gravity="center_vertical"
         android:minHeight="@dimen/overflow_button_dimen"
         android:padding="@dimen/quarter_standard_height"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/mediaDetailsText"
         android:textSize="@dimen/description_text_size"
         app:drawablePadding="@dimen/small_gap"
-        app:drawableStart="@drawable/ic_info_outline_dark_24dp"
+        app:drawableStart="?attr/iconInfo24"
         />
 
 </LinearLayout>

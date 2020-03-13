@@ -33,6 +33,10 @@
         <item name="textEnabled">@color/enabled_button_text_color_dark</item>
         <item name="mainCardBackground">@color/main_background_dark</item>
         <item name="mainScreenNearbyPermissionbutton">@style/DarkFlatNearbyPermissionButton</item>
+        <item name="iconInfo24">@drawable/ic_info_outline_24dp</item>
+        <item name="iconMap24" >@drawable/ic_map_white_24dp</item>
+        <item name="mediaDetailsText" >@color/white</item>
+        <item name="mediaDetailsHeadingText">@color/layout_light_grey</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -67,6 +71,10 @@
         <item name="textEnabled">@color/enabled_button_text_color_light</item>
         <item name="mainCardBackground">@color/primaryDarkColor</item>
         <item name="mainScreenNearbyPermissionbutton">@style/LightFlatNearbyPermissionButton</item>
+        <item name="iconInfo24">@drawable/ic_info_outline_dark_24dp</item>
+        <item name="iconMap24">@drawable/ic_map_dark_24dp</item>
+        <item name="mediaDetailsText">@color/enabled_button_text_color_light</item>
+        <item name="mediaDetailsHeadingText">@color/primaryDarkColor</item>
     </style>
 
     <style name="WhiteSearchBarTheme" parent="DarkAppTheme">

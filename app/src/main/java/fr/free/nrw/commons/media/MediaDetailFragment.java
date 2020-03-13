@@ -493,7 +493,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
-        textView.setTextColor(getResources().getColor(R.color.enabled_button_text_color_light));
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(view -> {
                 // Open Category Details page

@@ -93,7 +93,7 @@
                         android:layout_height="match_parent"
                         android:paddingBottom="@dimen/tiny_gap"
                         android:text="@string/media_detail_author"
-                        android:textColor="@color/primaryDarkColor"
+                        android:textColor="?attr/mediaDetailsHeadingText"
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />
 
@@ -120,7 +120,7 @@
                         android:layout_height="match_parent"
                         android:padding="@dimen/tiny_gap"
                         android:text="@string/media_detail_description"
-                        android:textColor="@color/primaryDarkColor"
+                        android:textColor="?attr/mediaDetailsHeadingText"
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />
 
@@ -131,7 +131,7 @@
                         android:layout_gravity="start"
 
                         android:padding="@dimen/small_gap"
-                        android:textColor="@color/enabled_button_text_color_light"
+                        android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
                         tools:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though." />
                 </LinearLayout>
@@ -152,7 +152,7 @@
                         android:layout_height="match_parent"
                         android:padding="@dimen/tiny_gap"
                         android:text="@string/media_detail_license"
-                        android:textColor="@color/primaryDarkColor"
+                        android:textColor="?attr/mediaDetailsHeadingText"
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />
 
@@ -164,10 +164,10 @@
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
                         android:padding="@dimen/small_gap"
-                        android:textColor="@color/enabled_button_text_color_light"
+                        android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
                         app:drawablePadding="@dimen/tiny_gap"
-                        app:drawableStart="@drawable/ic_info_outline_dark_24dp"
+                        app:drawableStart="?attr/iconInfo24"
                         tools:text="License link" />
                 </LinearLayout>
 
@@ -182,7 +182,7 @@
                         android:layout_height="match_parent"
                         android:padding="@dimen/tiny_gap"
                         android:text="@string/media_detail_coordinates"
-                        android:textColor="@color/primaryDarkColor"
+                        android:textColor="?attr/mediaDetailsHeadingText"
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />
 
@@ -194,7 +194,7 @@
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
                         android:padding="@dimen/small_gap"
-                        android:textColor="@color/enabled_button_text_color_light"
+                        android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
                         app:drawablePadding="@dimen/tiny_gap"
                         app:drawableStart="@drawable/ic_map_dark_24dp"
@@ -216,7 +216,7 @@
                         android:paddingBottom="@dimen/tiny_gap"
                         android:paddingTop="@dimen/small_height"
                         android:text="@string/detail_panel_cats_label"
-                        android:textColor="@color/primaryDarkColor"
+                        android:textColor="?attr/mediaDetailsHeadingText"
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />
 
@@ -238,7 +238,7 @@
                         android:layout_height="match_parent"
                         android:padding="@dimen/tiny_gap"
                         android:text="@string/media_detail_uploaded_date"
-                        android:textColor="@color/primaryDarkColor"
+                        android:textColor="?attr/mediaDetailsHeadingText"
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />
 
@@ -248,7 +248,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="start"
                         android:padding="@dimen/small_gap"
-                        android:textColor="@color/enabled_button_text_color_light"
+                        android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
                         tools:text="Uploaded date" />
                 </LinearLayout>
@@ -291,7 +291,7 @@
                         android:layout_height="match_parent"
                         android:padding="@dimen/tiny_gap"
                         android:text="@string/media_detail_discussion"
-                        android:textColor="@color/primaryDarkColor"
+                        android:textColor="?attr/mediaDetailsHeadingText"
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />
 
@@ -301,7 +301,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="start"
                         android:padding="@dimen/small_gap"
-                        android:textColor="@color/enabled_button_text_color_light"
+                        android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size" />
                 </LinearLayout>
 
