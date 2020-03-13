@@ -52,6 +52,8 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
+import com.mapbox.pluginscalebar.ScaleBarOptions;
+import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
@@ -196,6 +198,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isVisibleToUser;
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
+    private ScaleBarPlugin scaleBarPlugin;
+    private ScaleBarOptions scaleBarOptions;
 
 
     @Override
@@ -239,6 +243,25 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .zoom(ZOOM_LEVEL)
                         .build();
                 mapBoxMap.setCameraPosition(cameraPosition);
+                scaleBarPlugin = new ScaleBarPlugin(mapView, mapBoxMap);
+
+                int color = isDarkTheme?R.color.bottom_bar_light:R.color.bottom_bar_dark;
+
+                float size = new TextView(getContext()).getTextSize()-1;
+
+                scaleBarOptions = new ScaleBarOptions(getContext())
+                    .setTextColor(color)
+                    .setTextSize(size)
+                    .setBarHeight((float) (size/3.5))
+                    .setBorderWidth(size/10)
+                    .setMetricUnit(true)
+                    .setRefreshInterval(15)
+                    .setMarginTop(size/2)
+                    .setMarginLeft(size/2)
+                    .setTextBarMargin(size/2);
+
+
+                scaleBarPlugin.create(scaleBarOptions);
             });
 
         });
