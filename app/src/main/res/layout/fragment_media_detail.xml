@@ -86,7 +86,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/authorLinearLayout"
-                    android:background="@color/white"
                     android:orientation="horizontal"
                     android:padding="@dimen/standard_gap">
 
@@ -114,7 +113,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="horizontal"
                     android:padding="@dimen/standard_gap">
 
@@ -147,7 +145,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="horizontal"
                     android:padding="@dimen/standard_gap">
 
@@ -178,7 +175,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="horizontal"
                     android:padding="@dimen/standard_gap">
 
@@ -209,7 +205,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="horizontal"
                     android:padding="@dimen/standard_gap"
                     android:textStyle="bold">
@@ -236,7 +231,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="horizontal"
                     android:padding="@dimen/standard_gap">
 
@@ -290,7 +284,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="horizontal"
                     android:padding="@dimen/standard_gap">
 
