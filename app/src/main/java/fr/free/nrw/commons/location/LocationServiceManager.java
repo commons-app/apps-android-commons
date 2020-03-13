@@ -12,12 +12,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.inject.Inject;
-
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
-import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
-import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
-import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
@@ -32,8 +26,6 @@ public class LocationServiceManager implements LocationListener {
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
     private Set<Activity> locationExplanationDisplayed = new HashSet<>();
-    @Inject
-    BookmarkLocationsDao bookmarkLocationDao;
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -220,20 +212,11 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         Timber.d("Provider %s disabled", provider);
-//        if (provider.equals("gps")) {
-//            for (LocationUpdateListener listener : locationListeners) {
-//                listener.onGPSDisabled();
-//            }
-//        }
     }
 
-//    public boolean isLocationEnabled() {
-//        return locationManager.isProviderEnabled("gps");
-//    }
-//    private void notifyNearbyPresenter() {
-//        NearbyParentFragmentPresenter presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao);
-//        presenter.gpsDisabled();
-//    }
+    public boolean isProviderEnabled(String provider) {
+        return locationManager.isProviderEnabled(provider);
+    }
 
     public enum LocationChangeType{
         LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers

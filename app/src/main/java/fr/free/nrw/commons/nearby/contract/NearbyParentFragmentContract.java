@@ -94,6 +94,5 @@ public interface NearbyParentFragmentContract {
 
         void searchViewGainedFocus();
         void setCheckboxUnknown();
-//        boolean checkGPSState();
     }
 }

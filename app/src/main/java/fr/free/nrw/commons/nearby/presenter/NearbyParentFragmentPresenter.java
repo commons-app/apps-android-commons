@@ -1,9 +1,6 @@
 package fr.free.nrw.commons.nearby.presenter;
 
-import android.content.Intent;
-import android.provider.Settings;
 import android.view.View;
-import android.widget.Toast;
 
 import com.mapbox.mapboxsdk.annotations.Marker;
 
@@ -13,7 +10,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -27,9 +23,7 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
-import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.upload.UploadContract;
-import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
@@ -254,7 +248,7 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        Timber.d("Location slightly changed");
+        Timber.d("Location significantly changed");
         updateMapAndList(LOCATION_SLIGHTLY_CHANGED);
     }
 
@@ -262,17 +256,6 @@ public class NearbyParentFragmentPresenter
     public void onLocationChangedMedium(LatLng latLng) {
         Timber.d("Location changed medium");
     }
-
-//    @Override
-//    public void onGPSDisabled() {
-//        Timber.d("Presenter: GPS is Off");
-//        isGPSEnabled = false;
-//    }
-//
-//    @Override
-//    public boolean checkGPSState() {
-//        return isGPSEnabled;
-//    }
 
     @Override
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
@@ -393,5 +376,4 @@ public class NearbyParentFragmentPresenter
             return true;
         }
     }
-
 }

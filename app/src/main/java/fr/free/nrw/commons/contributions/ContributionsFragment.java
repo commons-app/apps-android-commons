@@ -528,11 +528,6 @@ public class ContributionsFragment
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @Override
-    public void onGPSDisabled() {
-
-    }
-
     /**
      * ask the presenter to fetch the campaigns only if user has not manually disabled it
      */
