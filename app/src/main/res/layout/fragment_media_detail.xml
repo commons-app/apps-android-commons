@@ -197,7 +197,7 @@
                         android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
                         app:drawablePadding="@dimen/tiny_gap"
-                        app:drawableStart="@drawable/ic_map_dark_24dp"
+                        app:drawableStart="?attr/iconMap24"
                         tools:text="Coordinates link" />
                 </LinearLayout>
 
