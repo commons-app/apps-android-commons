@@ -329,7 +329,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             Timber.d("Returning as activity is destroyed!");
             return;
         }
-        if (i+1 >= adapter.getCount())
+        if (i+1 >= adapter.getCount() && getContext() instanceof CategoryImagesCallback)
             ((CategoryImagesCallback) getContext()).requestMoreImages();
 
         getActivity().invalidateOptionsMenu();
