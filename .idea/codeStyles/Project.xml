@@ -71,7 +71,7 @@
       </class>
       <extensions>
         <pair source="cc" header="h" />
-        <pair source="c" header="h"  />
+        <pair source="c" header="h" />
       </extensions>
     </Objective-C-extensions>
     <Python>

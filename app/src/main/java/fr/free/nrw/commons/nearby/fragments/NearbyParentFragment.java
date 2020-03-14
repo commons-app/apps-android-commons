@@ -251,15 +251,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 final float SCALEBAR_HEIGHT = (float) (SIZE/3.5);                  //these values are chosen to keep scalebar size comparable to other text depending upon the screen size and device resolution
                 final float SCALEBAR_BORDER_WIDTH = SIZE/10;
                 final float SCALEBAR_MARGIN = SIZE/2;
-                final int REFRESH_INTERVAL = 15;                                  //minimum refresh time in millisec
 
                 scaleBarOptions = new ScaleBarOptions(getContext())
                     .setTextColor(color)
                     .setTextSize(SIZE)
                     .setBarHeight(SCALEBAR_HEIGHT)
                     .setBorderWidth(SCALEBAR_BORDER_WIDTH)
-                    .setMetricUnit(true)
-                    .setRefreshInterval(REFRESH_INTERVAL)
+                    .setRefreshInterval(15)            //Refresh time for scalebar in millisec
                     .setMarginTop(SCALEBAR_MARGIN)
                     .setMarginLeft(SCALEBAR_MARGIN)
                     .setTextBarMargin(SCALEBAR_MARGIN);
