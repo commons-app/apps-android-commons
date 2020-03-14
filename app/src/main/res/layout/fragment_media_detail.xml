@@ -57,14 +57,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:weightSum="100"
                     android:background="@color/primaryDarkColor"
                     android:orientation="horizontal"
-                    android:padding="@dimen/standard_gap">
+                    android:padding="@dimen/quarter_standard_height">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:padding="@dimen/tiny_gap"
+                        android:layout_weight="30"
+                        android:paddingTop="@dimen/tiny_padding"
+                        android:paddingLeft="@dimen/tiny_gap"
                         android:text="@string/media_detail_title"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/normal_text"
@@ -72,8 +75,9 @@
 
                     <TextView
                         android:id="@+id/mediaDetailTitle"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:layout_gravity="start"
                         android:padding="@dimen/small_gap"
                         android:textColor="@android:color/white"
@@ -85,12 +89,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/authorLinearLayout"
+                    android:weightSum="100"
                     android:orientation="horizontal"
-                    android:padding="@dimen/standard_gap">
+                    android:padding="@dimen/quarter_standard_height">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="30"
                         android:paddingBottom="@dimen/tiny_gap"
                         android:text="@string/media_detail_author"
                         android:textColor="?attr/mediaDetailsHeadingText"
@@ -99,10 +105,10 @@
 
                     <TextView
                         android:id="@+id/mediaDetailAuthor"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:layout_gravity="start"
-
                         android:padding="@dimen/small_gap"
                         android:textColor="@color/layout_light_grey"
                         android:textSize="@dimen/description_text_size"
@@ -112,12 +118,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:weightSum="100"
                     android:orientation="horizontal"
-                    android:padding="@dimen/standard_gap">
+                    android:padding="@dimen/quarter_standard_height">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="30"
                         android:padding="@dimen/tiny_gap"
                         android:text="@string/media_detail_description"
                         android:textColor="?attr/mediaDetailsHeadingText"
@@ -126,10 +134,10 @@
 
                     <fr.free.nrw.commons.ui.widget.HtmlTextView
                         android:id="@+id/mediaDetailDesc"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:layout_gravity="start"
-
                         android:padding="@dimen/small_gap"
                         android:textColor="?attr/mediaDetailsText"
                         android:textSize="@dimen/description_text_size"
@@ -137,19 +145,21 @@
                 </LinearLayout>
 
                 <View
-                    android:background="@color/divider_grey"
+                    android:background="?attr/mediaDetailSpacerColor"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/tiny_gap"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="100"
                     android:orientation="horizontal"
-                    android:padding="@dimen/standard_gap">
+                    android:padding="@dimen/quarter_standard_height">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="30"
                         android:padding="@dimen/tiny_gap"
                         android:text="@string/media_detail_license"
                         android:textColor="?attr/mediaDetailsHeadingText"
@@ -158,8 +168,9 @@
 
                     <fr.free.nrw.commons.ui.widget.CompatTextView
                         android:id="@+id/mediaDetailLicense"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:layout_gravity="start"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
@@ -174,12 +185,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:weightSum="100"
                     android:orientation="horizontal"
-                    android:padding="@dimen/standard_gap">
+                    android:padding="@dimen/quarter_standard_height">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="30"
                         android:padding="@dimen/tiny_gap"
                         android:text="@string/media_detail_coordinates"
                         android:textColor="?attr/mediaDetailsHeadingText"
@@ -188,8 +201,9 @@
 
                     <fr.free.nrw.commons.ui.widget.CompatTextView
                         android:id="@+id/mediaDetailCoordinates"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:layout_gravity="start"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
@@ -204,13 +218,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:weightSum="100"
                     android:orientation="horizontal"
-                    android:padding="@dimen/standard_gap"
+                    android:padding="@dimen/quarter_standard_height"
                     android:textStyle="bold">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="30"
                         android:layout_gravity="start"
                         android:paddingRight="@dimen/tiny_gap"
                         android:paddingBottom="@dimen/tiny_gap"
@@ -222,20 +238,23 @@
 
                     <LinearLayout
                         android:id="@+id/mediaDetailCategoryContainer"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:orientation="vertical" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:weightSum="100"
                     android:orientation="horizontal"
-                    android:padding="@dimen/standard_gap">
+                    android:padding="@dimen/quarter_standard_height">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="30"
                         android:padding="@dimen/tiny_gap"
                         android:text="@string/media_detail_uploaded_date"
                         android:textColor="?attr/mediaDetailsHeadingText"
@@ -244,8 +263,9 @@
 
                     <TextView
                         android:id="@+id/mediaDetailuploadeddate"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:layout_gravity="start"
                         android:padding="@dimen/small_gap"
                         android:textColor="?attr/mediaDetailsText"
@@ -255,11 +275,11 @@
 
                 <LinearLayout
                     android:id="@+id/nominatedDeletionBanner"
-                    android:background="@color/swipe_red"
+                    android:background="?attr/mediaDetailNominationBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/standard_gap"
+                    android:padding="@dimen/quarter_standard_height"
                     android:visibility="gone">
                     <TextView
                         android:layout_width="match_parent"
@@ -283,12 +303,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:weightSum="100"
                     android:orientation="horizontal"
-                    android:padding="@dimen/standard_gap">
+                    android:padding="@dimen/quarter_standard_height">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="30"
                         android:padding="@dimen/tiny_gap"
                         android:text="@string/media_detail_discussion"
                         android:textColor="?attr/mediaDetailsHeadingText"
@@ -297,8 +319,9 @@
 
                     <TextView
                         android:id="@+id/mediaDetailDisc"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
+                        android:layout_weight="70"
                         android:layout_gravity="start"
                         android:padding="@dimen/small_gap"
                         android:textColor="?attr/mediaDetailsText"

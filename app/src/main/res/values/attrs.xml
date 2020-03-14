@@ -30,6 +30,8 @@
     <attr name="iconMap24" format="reference" />
     <attr name="mediaDetailsText" format="reference" />
     <attr name="mediaDetailsHeadingText" format="reference" />
+    <attr name="mediaDetailNominationBackground" format="reference" />
+    <attr name="mediaDetailSpacerColor" format="reference" />
     <attr name="icon" format="reference"/>
 
 
