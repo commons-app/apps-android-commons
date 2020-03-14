@@ -62,6 +62,10 @@ public class GridViewAdapter extends ArrayAdapter {
         String imageName = images.get(0).getFilename();
         return imageName.equals(fileName);
     }
+    private class ViewHolder {
+        SimpleDraweeView imageView;
+        TextView fileName,author;
+    }
 
     @Override
     public boolean isEmpty() {
@@ -78,16 +82,27 @@ public class GridViewAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_category_images, null);
-        }
 
-        Media item = data.get(position);
+        }
         SimpleDraweeView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
         TextView author = convertView.findViewById(R.id.categoryImageAuthor);
+        Media item = data.get(position);
         fileName.setText(item.getDisplayTitle());
-        setAuthorView(item, author);
+        if(item.getCreator()!="")
+        {
+            String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
+
+           String uploadedBy = String.format(Locale.getDefault(), uploadedByTemplate, item.getCreator());
+           author.setText(uploadedBy);
+        }
+        else
+            author.setText("");
+
+        //setAuthorView(item, author);
         imageView.setImageURI(item.getThumbUrl());
         return convertView;
     }
@@ -97,14 +112,14 @@ public class GridViewAdapter extends ArrayAdapter {
      * @param item
      * @param author
      */
-    private void setAuthorView(Media item, TextView author) {
-        if (!TextUtils.isEmpty(item.getCreator())) {
-            String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
-
-            String uploadedBy = String.format(Locale.getDefault(), uploadedByTemplate, item.getCreator());
-            author.setText(uploadedBy);
-        } else {
-            author.setVisibility(View.GONE);
-        }
-    }
+//    private void setAuthorView(Media item, TextView author) {
+//        if (!TextUtils.isEmpty(item.getCreator())) {
+//            String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
+//
+//            String uploadedBy = String.format(Locale.getDefault(), uploadedByTemplate, item.getCreator());
+//            author.setText(uploadedBy);
+//        } else {
+//            author.setVisibility(View.GONE);
+//        }
+//    }
 }
