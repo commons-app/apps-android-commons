@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
 
+import fr.free.nrw.commons.MediaDataExtractor;
+import io.reactivex.disposables.Disposable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -77,6 +79,8 @@ public class ContributionsFragment
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject CampaignsPresenter presenter;
     @Inject LocationServiceManager locationManager;
+    @Inject
+    MediaDataExtractor mediaDataExtractor;
 
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
@@ -215,6 +219,12 @@ public class ContributionsFragment
             @Override
             public Contribution getContributionForPosition(int position) {
                 return (Contribution) contributionsPresenter.getItemAtPosition(position);
+            }
+
+            @Override
+            public void fetchMediaUriFor(Contribution contribution) {
+                Timber.d("Fetching thumbnail for %s", contribution.filename);
+                contributionsPresenter.fetchMediaDetails(contribution);
             }
         });
 
