@@ -62,11 +62,7 @@ public class GridViewAdapter extends ArrayAdapter {
         String imageName = images.get(0).getFilename();
         return imageName.equals(fileName);
     }
-    private class ViewHolder {
-        SimpleDraweeView imageView;
-        TextView fileName,author;
-    }
-
+    
     @Override
     public boolean isEmpty() {
         return data == null || data.isEmpty();
