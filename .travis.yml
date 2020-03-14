@@ -23,7 +23,7 @@ android:
   - extra-android-m2repository
   - android-sdk-license-.+
   - '.+'
-  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+  - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL
 
 
 before_script:
