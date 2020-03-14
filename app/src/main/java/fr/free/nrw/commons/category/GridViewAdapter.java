@@ -62,7 +62,7 @@ public class GridViewAdapter extends ArrayAdapter {
         String imageName = images.get(0).getFilename();
         return imageName.equals(fileName);
     }
-    
+
     @Override
     public boolean isEmpty() {
         return data == null || data.isEmpty();
@@ -83,22 +83,12 @@ public class GridViewAdapter extends ArrayAdapter {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_category_images, null);
 
         }
+        Media item = data.get(position);
         SimpleDraweeView imageView = convertView.findViewById(R.id.categoryImageView);
         TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
         TextView author = convertView.findViewById(R.id.categoryImageAuthor);
-        Media item = data.get(position);
         fileName.setText(item.getDisplayTitle());
-        if(item.getCreator()!="")
-        {
-            String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
-
-           String uploadedBy = String.format(Locale.getDefault(), uploadedByTemplate, item.getCreator());
-           author.setText(uploadedBy);
-        }
-        else
-            author.setText("");
-
-        //setAuthorView(item, author);
+        setAuthorView(item, author);
         imageView.setImageURI(item.getThumbUrl());
         return convertView;
     }
@@ -108,14 +98,11 @@ public class GridViewAdapter extends ArrayAdapter {
      * @param item
      * @param author
      */
-//    private void setAuthorView(Media item, TextView author) {
-//        if (!TextUtils.isEmpty(item.getCreator())) {
-//            String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
-//
-//            String uploadedBy = String.format(Locale.getDefault(), uploadedByTemplate, item.getCreator());
-//            author.setText(uploadedBy);
-//        } else {
-//            author.setVisibility(View.GONE);
-//        }
-//    }
+    private void setAuthorView(Media item, TextView author) {
+        if (item.getCreator()!="") {
+            author.setText("Uploaded By: "+item.getCreator());
+        } else {
+            author.setText("");
+        }
+    }
 }
