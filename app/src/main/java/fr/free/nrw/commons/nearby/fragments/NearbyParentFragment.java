@@ -247,18 +247,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
                 int color = isDarkTheme?R.color.bottom_bar_light:R.color.bottom_bar_dark;
 
-                float size = new TextView(getContext()).getTextSize()-1;
+                final float SIZE = new TextView(getContext()).getTextSize()-1;     //Default text size for scalebar params
+                final float SCALEBAR_HEIGHT = (float) (SIZE/3.5);                  //these values are chosen to keep scalebar size comparable to other text depending upon the screen size and device resolution
+                final float SCALEBAR_BORDER_WIDTH = SIZE/10;
+                final float SCALEBAR_MARGIN = SIZE/2;
+                final int REFRESH_INTERVAL = 15;                                  //minimum refresh time in millisec
 
                 scaleBarOptions = new ScaleBarOptions(getContext())
                     .setTextColor(color)
-                    .setTextSize(size)
-                    .setBarHeight((float) (size/3.5))
-                    .setBorderWidth(size/10)
+                    .setTextSize(SIZE)
+                    .setBarHeight(SCALEBAR_HEIGHT)
+                    .setBorderWidth(SCALEBAR_BORDER_WIDTH)
                     .setMetricUnit(true)
-                    .setRefreshInterval(15)
-                    .setMarginTop(size/2)
-                    .setMarginLeft(size/2)
-                    .setTextBarMargin(size/2);
+                    .setRefreshInterval(REFRESH_INTERVAL)
+                    .setMarginTop(SCALEBAR_MARGIN)
+                    .setMarginLeft(SCALEBAR_MARGIN)
+                    .setTextBarMargin(SCALEBAR_MARGIN);
 
 
                 scaleBarPlugin.create(scaleBarOptions);

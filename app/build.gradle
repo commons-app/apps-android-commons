@@ -13,9 +13,6 @@ def isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file('..
 if(isRunningOnTravisAndIsNotPRBuild) {
     apply plugin: 'com.github.triplet.play'
 }
-repositories {
-    mavenCentral()
-}
 
 dependencies {
 
