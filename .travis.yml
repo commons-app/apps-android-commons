@@ -1,7 +1,8 @@
 language: android
 env:
   global:
-  - ANDROID_TARGET=android-22
+  - ANDROID_API_LEVEL=22
+  - ANDROID_TARGET=android-25
   - ANDROID_ABI=armeabi-v7a
   - ADB_INSTALL_TIMEOUT=20
   - secure: okdkna5DaH/2Fay9vI6Enrx7u9UwRm4/IJXvcaWJcvjF3JTsLQr0r+dlMT2X5E1GsNk4WcoGcfZJcVonULkaW4S96B43g3EyevWbLFWjii0cMUO00OshToKyboSvNUf+d5B6rghrbnxTIBNel2ZBFj8MXHdtz6Az20q8VywqPeBZupo7olyKKS1nYdvoo7ypNScVjDGEjEPonWplztYlSDT1w81Vww4kF9oiOPEzDOPw1lOiD8FTyKLXhK0WYlnc3cnyFjZwVMlKcomnFYPfe/J2zO6OP/XInxYSXRkZ6wiOC5gMPYAYanUAuzm91vsTBQMk6jMCglSM9Nl6dPusGgEqOyTwLVALlgvS3km9HNVsHuVJhU+bmJ6scFBWrAOhbsV2ioSEsQ8NgU0Zv1SC0wN9ZruF4ae03Re+k+eHgwA3taZXrT2pvkkSmfRex6oFZReypcPGFQYiHo31NsO39WPRYYxr4edYisVXw75x/BJyOcUULhG1YmwHYYeXOzbNp0Sf9ADtUDi0oip/BO2tkLxbE+z1GJSmC83fX2YpoK+IwDHNm+4w8OJAJBvdxA3Q4HrJBAbd8jnQYP+sBBaki8t5WuwJmfOucx0vgKJ7pzqRY/MOUVe/dACnjLgFDLuS7MMqr6xU/oMM6/rrt4209tL+GQbn/R98UKtmMRRq1hY=
@@ -15,17 +16,24 @@ android:
   - build-tools-28.0.3
   - extra-google-m2repository
   - extra-android-m2repository
-  - android-22
-  - android-28
+  - android-$ANDROID_API_LEVEL
+  - addon-google_apis-google-$ANDROID_API_LEVEL
+  - extra-android-support
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - android-sdk-license-.+
+  - '.+'
   - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+
+
 before_script:
   - echo no | android create avd -f -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator @test -memory 2048 -no-boot-anim -noaudio -no-window &
+  - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 script:
 - "./gradlew -Pcoverage lintBetaDebug pmd checkstyle jacocoTestBetaDebugUnitTestReport"
-- "./gradlew -Pcoverage connectedCheck jacocoTestReport"
+- ./gradlew build connectedAndroidTest jacocoTestReport --stacktrace
 - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
   mkdir -p app/src/prodRelease/play/release-notes/en-US;
   fi
