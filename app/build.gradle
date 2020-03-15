@@ -110,6 +110,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation "androidx.room:room-rxjava2:$room_version"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    // Pref
+    def preference_version = "1.1.0"
+    // Java language implementation
+    implementation "androidx.preference:preference:$preference_version"
+    // Kotlin
+    implementation "androidx.preference:preference-ktx:$preference_version"
 }
 
 android {
