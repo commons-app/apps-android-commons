@@ -54,11 +54,6 @@ public class WikidataEditService {
             return;
         }
 
-        if (!p18Value.trim().isEmpty()) {
-            Timber.d("Skipping creation of claim as p18Value is not null, we won't override existing image");
-            return;
-        }
-
         if (fileName == null) {
             Timber.d("Skipping creation of claim as fileName entity ID is null");
             return;
@@ -66,6 +61,11 @@ public class WikidataEditService {
 
         if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
             Timber.d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
+            return;
+        }
+
+        if (!p18Value.trim().isEmpty()) {
+            Timber.d("Skipping creation of claim as p18Value is not null, we won't override existing image");
             return;
         }
 
