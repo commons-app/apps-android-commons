@@ -607,5 +607,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="set_location_mode_high_accuracy">Please make sure that location is set to both GPS and mobile networks</string>
   <string name="ask_to_turn_location_on">Turn on location?</string>
   <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
+  <string name="gps_provider">gps</string>
+  <string name="network_provider">network</string>
 
 </resources>
