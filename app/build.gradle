@@ -104,19 +104,17 @@ dependencies {
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
 
     //Room
-    def room_version= '2.2.3'
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    implementation "androidx.room:room-runtime:$ROOM_VERSION"
+    kapt "androidx.room:room-compiler:$ROOM_VERSION" // For Kotlin use kapt instead of annotationProcessor
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
-    implementation "androidx.room:room-rxjava2:$room_version"
+    implementation "androidx.room:room-rxjava2:$ROOM_VERSION"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     // Pref
-    def preference_version = "1.1.0"
     // Java language implementation
-    implementation "androidx.preference:preference:$preference_version"
+    implementation "androidx.preference:preference:$PREFERENCE_VERSION"
     // Kotlin
-    implementation "androidx.preference:preference-ktx:$preference_version"
+    implementation "androidx.preference:preference-ktx:$PREFERENCE_VERSION"
 }
 
 android {
