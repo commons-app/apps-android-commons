@@ -243,19 +243,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 mapBoxMap.setCameraPosition(cameraPosition);
 
                 ScaleBarPlugin scaleBarPlugin = new ScaleBarPlugin(mapView, mapBoxMap);
-                int color = isDarkTheme?R.color.bottom_bar_light:R.color.bottom_bar_dark;
-                final float SIZE = new TextView(getContext()).getTextSize()-1;  //Default text size for scalebar params
-                final float SCALEBAR_HEIGHT = (float) (SIZE/3.5);  //these values are chosen to keep scalebar size comparable to other text
-                final float SCALEBAR_BORDER_WIDTH = SIZE/10;       //depending upon the screen size and device resolution
-                final float SCALEBAR_MARGIN = SIZE/2;
+                int color = isDarkTheme ? R.color.bottom_bar_light : R.color.bottom_bar_dark;
+                //Default text size for scalebar params
+                final float SIZE = new TextView(getContext()).getTextSize() - 1;
+                //these values are chosen to keep scalebar size comparable to other text depending upon the screen size and device resolution
+                final float SCALEBAR_HEIGHT = (float) (SIZE / 3.5);
+                final float SCALEBAR_BORDER_WIDTH = SIZE / 10;
+                final float SCALEBAR_MARGIN = SIZE / 2;
                 ScaleBarOptions scaleBarOptions = new ScaleBarOptions(getContext())
-                        .setTextColor(color)
-                        .setTextSize(SIZE)
-                        .setBarHeight(SCALEBAR_HEIGHT)
-                        .setBorderWidth(SCALEBAR_BORDER_WIDTH)
-                        .setMarginTop(SCALEBAR_MARGIN)
-                        .setMarginLeft(SCALEBAR_MARGIN)
-                        .setTextBarMargin(SCALEBAR_MARGIN);
+                    .setTextColor(color)
+                    .setTextSize(SIZE)
+                    .setBarHeight(SCALEBAR_HEIGHT)
+                    .setBorderWidth(SCALEBAR_BORDER_WIDTH)
+                    .setMarginTop(SCALEBAR_MARGIN)
+                    .setMarginLeft(SCALEBAR_MARGIN)
+                    .setTextBarMargin(SCALEBAR_MARGIN);
                 scaleBarPlugin.create(scaleBarOptions);
             });
         });
