@@ -910,7 +910,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSlightly(fr.free.nrw.commons.location.LatLng latLng) {
-        Timber.d("Location significantly changed");
+        Timber.d("Location slightly changed");
         if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng,LOCATION_SLIGHTLY_CHANGED);
         }
