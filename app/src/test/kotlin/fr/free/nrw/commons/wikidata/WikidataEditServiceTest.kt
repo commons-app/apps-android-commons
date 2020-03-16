@@ -45,6 +45,12 @@ class WikidataEditServiceTest {
     }
 
     @Test
+    fun noClaimsWhenP18IsNotEmpty() {
+        wikidataEditService!!.createClaimWithLogging("Q1", "Test.jpg","Previous.jpg")
+        verifyZeroInteractions(wikidataClient!!)
+    }
+
+    @Test
     fun noClaimsWhenLocationIsNotCorrect() {
         `when`(directKvStore!!.getBoolean("Picture_Has_Correct_Location", true))
                 .thenReturn(false)
