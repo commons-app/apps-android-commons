@@ -437,6 +437,7 @@
   <string name="display_location_permission_title">Zobraziť povolenia prístupu k polohe</string>
   <string name="display_location_permission_explanation">Požiada o oprávnenie k prístupu k polohe, pokiaľ je to potrebné pre funkciu zobrazenia miest v okolí.</string>
   <string name="achievements_fetch_failed">Nastala chyba, nepodarilo sa nám načítať vaše úspechy</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Urobili ste toľko príspevkov, že to náš systém výpočtu úspechov nedokáže zvládnuť. Toto je konečný úspech.</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobraziť kampane</string>
   <string name="display_campaigns_explanation">Zobrazovať prebiehajúce kampane</string>

@@ -121,7 +121,7 @@
   <string name="use_previous">Använd föregående titel och beskrivning</string>
   <string name="allow_gps">Hämta aktuell plats automatiskt</string>
   <string name="allow_gps_summary">Hämtar aktuell plats om bilden inte är geotaggad och geotaggar bilden med den. Varning: Detta kommer att avslöja din nuvarande position.</string>
-  <string name="preference_theme" fuzzy="true">Nattläge</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four">Erkännande-DelaLika 4.0</string>
   <string name="license_name_cc_by_four">Erkännande 4.0</string>
   <string name="license_name_cc_by_sa"> Erkännande-DelaLika 3.0</string>
@@ -440,6 +440,7 @@
   <string name="display_location_permission_title">Visa platsbehörighet</string>
   <string name="display_location_permission_explanation">Fråga efter platsbehörighet vid behov för att visa aviseringskortet för i närheten.</string>
   <string name="achievements_fetch_failed">Någonting gick fel. Vi kunde inte hämta dina prestationer</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Du har gjort så många bidrag att vårt system för att beräkna prestationer inte hinner med. Detta är den ultimata prestationen.</string>
   <string name="ends_on">Slutar den:</string>
   <string name="display_campaigns">Visa kampanjer</string>
   <string name="display_campaigns_explanation">Se pågående kampanjer</string>
@@ -569,4 +570,7 @@
   <string name="wallpaper_set_unsuccessfully">Någonting gick fel. Kunde inte ändra bakgrundsbild</string>
   <string name="setting_wallpaper_dialog_title">Ange som bakgrundsbild</string>
   <string name="setting_wallpaper_dialog_message">Anger som bakgrundsbild. Var god vänta…</string>
+  <string name="theme_default_name">Standard</string>
+  <string name="theme_dark_name">Mörkt</string>
+  <string name="theme_light_name">Ljust</string>
 </resources>

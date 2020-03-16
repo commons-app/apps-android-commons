@@ -123,7 +123,7 @@
   <string name="use_previous">Користи претходан наслов и опис</string>
   <string name="allow_gps">Аутоматски добави тренутну локацију</string>
   <string name="allow_gps_summary">Прима тренутну локацију ако слика није геотагована и геотагује исту њоме. Упозорење: Овиме ће да се открије Ваша тренутна локација.</string>
-  <string name="preference_theme" fuzzy="true">Ноћни режим</string>
+  <string name="preference_theme">Тема</string>
   <string name="license_name_cc_by_sa_four">Ауторство-Делити под истим условима 4.0</string>
   <string name="license_name_cc_by_four">Ауторство 4.0</string>
   <string name="license_name_cc_by_sa">Ауторство-Делити под истим условима 3.0</string>
