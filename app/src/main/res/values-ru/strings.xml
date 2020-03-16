@@ -137,7 +137,7 @@
   <string name="use_previous">Использовать предыдущие название и описание</string>
   <string name="allow_gps">Анализ местоположения</string>
   <string name="allow_gps_summary">Если изображение не содержит геотега, то будет получено и проставлено текущее местоположение. Будьте внимательны, если вы не хотите раскрывать ваше месторасположение.</string>
-  <string name="preference_theme" fuzzy="true">Ночной режим</string>
+  <string name="preference_theme">Тема оформления</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -578,6 +578,15 @@
   <string name="you_must_reset_your_passsword">Что-то пошло не так со входом, вы должны сбросить пароль!</string>
   <string name="upload_nearby_place_found_title">Место поблизости найдено</string>
   <string name="upload_nearby_place_found_description">Является ли это фото местом %1$s?</string>
+  <string name="title_app_shortcut_explore">Обзор</string>
+  <string name="title_app_shortcut_bookmark">Закладки</string>
+  <string name="title_app_shortcut_setting">Настройки</string>
   <string name="remove_bookmark">Удалено из закладок</string>
   <string name="add_bookmark">Добавлено в закладки</string>
+  <string name="wallpaper_set_unsuccessfully">Что-то пошло не так. Не удалось установить фоновую заставку</string>
+  <string name="setting_wallpaper_dialog_title">Сделать фоновой заставкой</string>
+  <string name="setting_wallpaper_dialog_message">Идёт установка фоновой заставки...</string>
+  <string name="theme_default_name">По умолчанию</string>
+  <string name="theme_dark_name">Тёмная</string>
+  <string name="theme_light_name">Светлая</string>
 </resources>

@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Animatable;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,7 +25,10 @@ import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +44,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import androidx.annotation.Nullable;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -97,10 +103,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private int initialListTop = 0;
 
-    @BindView(R.id.mediaDetailImage)
+    @BindView(R.id.mediaDetailImageView)
     SimpleDraweeView image;
-    @BindView(R.id.mediaDetailSpacer)
-    MediaDetailSpacer spacer;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
     @BindView(R.id.mediaDetailDesc)
@@ -197,34 +201,16 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         // Progressively darken the image in the background when we scroll detail pane up
         scrollListener = this::updateTheDarkness;
         view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
-
-        // Layout layoutListener to size the spacer item relative to the available space.
-        // There may be a .... better way to do this.
-        layoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
-            private int currentHeight = -1;
-
-            @Override
-            public void onGlobalLayout() {
-                int viewHeight = view.getHeight();
-                //int textHeight = title.getLineHeight();
-                int paddingDp = 112;
-                float paddingPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddingDp, getResources().getDisplayMetrics());
-                int newHeight = viewHeight - Math.round(paddingPx);
-
-                if (newHeight != currentHeight) {
-                    currentHeight = newHeight;
-                    ViewGroup.LayoutParams params = spacer.getLayoutParams();
-                    params.height = newHeight;
-                    spacer.setLayoutParams(params);
-
-                    scrollView.scrollTo(0, initialListTop);
-                }
-            }
-        };
-        view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);
         locale = getResources().getConfiguration().locale;
-
         return view;
+    }
+
+    @OnClick(R.id.mediaDetailImageView)
+    public void launchZoomActivity(View view) {
+        Context ctx = view.getContext();
+        ctx.startActivity(
+                new Intent(ctx,ZoomableActivity.class).setData(Uri.parse(media.getImageUrl()))
+        );
     }
 
     @Override
@@ -255,6 +241,26 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         compositeDisposable.add(disposable);
     }
 
+    private void updateAspectRatio(ImageInfo imageInfo) {
+        if (imageInfo != null) {
+            int finalHeight = (scrollView.getWidth()*imageInfo.getHeight()) / imageInfo.getWidth();
+            ViewGroup.LayoutParams params = image.getLayoutParams();
+            params.height = finalHeight;
+            image.setLayoutParams(params);
+        }
+    }
+
+    private final ControllerListener aspectRatioListener = new BaseControllerListener<ImageInfo>() {
+        @Override
+        public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+            updateAspectRatio(imageInfo);
+        }
+        @Override
+        public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
+            updateAspectRatio(imageInfo);
+        }
+    };
+
     /**
      * Uses two image sources.
      * - low resolution thumbnail is shown initially
@@ -264,6 +270,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(media.getThumbUrl()))
                 .setImageRequest(ImageRequest.fromUri(media.getImageUrl()))
+                .setControllerListener(aspectRatioListener)
                 .setOldController(image.getController())
                 .build();
         image.setController(controller);

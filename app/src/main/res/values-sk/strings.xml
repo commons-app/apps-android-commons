@@ -118,7 +118,7 @@
   <string name="use_previous">Použiť predchádzajúci názov a popis</string>
   <string name="allow_gps">Automaticky získať súčasnú polohu</string>
   <string name="allow_gps_summary">Získať súčasnú polohu a pokiaľ obrázok neobsahuje zemepisné súradnice, pridať ich k nemu. Upozornenie: Toto odhalí vašu súčasnú polohu.</string>
-  <string name="preference_theme" fuzzy="true">Nočný režim</string>
+  <string name="preference_theme">Motív</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -566,4 +566,7 @@
   <string name="wallpaper_set_unsuccessfully">Niečo sa pokazilo. Tapetu sa nepodarilo nastaviť</string>
   <string name="setting_wallpaper_dialog_title">Nastaviť ako tapetu</string>
   <string name="setting_wallpaper_dialog_message">Nastavujem tapetu. Prosím, čakajte...</string>
+  <string name="theme_default_name">Predvolený</string>
+  <string name="theme_dark_name">Tmavý</string>
+  <string name="theme_light_name">Svetlý</string>
 </resources>

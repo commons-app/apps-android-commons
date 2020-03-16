@@ -456,6 +456,7 @@
   <string name="display_location_permission_title">显示位置许可</string>
   <string name="display_location_permission_explanation">当需要附近通知卡查看功能时，请求位置许可。</string>
   <string name="achievements_fetch_failed">有错误发生，无法获取你的成就</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">您做出了许多贡献，我们的计算系统无法应对。这是最终的成就。</string>
   <string name="ends_on">结束于：</string>
   <string name="display_campaigns">显示活动</string>
   <string name="display_campaigns_explanation">显示正在进行的活动</string>

@@ -126,7 +126,7 @@
   <string name="use_previous">使用先前標題及描述</string>
   <string name="allow_gps">自動獲取目前位置</string>
   <string name="allow_gps_summary">如果圖片沒有地理標記，就索取目前位置的地理資訊來標記在圖片上。注意：這會透露出您目前所在的位置。</string>
-  <string name="preference_theme" fuzzy="true">夜間模式</string>
+  <string name="preference_theme">主題</string>
   <string name="license_name_cc_by_sa_four">姓名標示-相同方式分享4.0</string>
   <string name="license_name_cc_by_four">姓名標示4.0</string>
   <string name="license_name_cc_by_sa"> 姓名標示-相同方式分享3.0</string>
@@ -445,6 +445,7 @@
   <string name="display_location_permission_title">顯示位置權限</string>
   <string name="display_location_permission_explanation">當需要附近地點通知卡片的檢視功能時，要求位置權限。</string>
   <string name="achievements_fetch_failed">發生了一些狀況，我們無法索取您的成果</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">您做出的貢獻多到讓我們的成果系統無法因應，此為終極成果。</string>
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
   <string name="display_campaigns_explanation">查看進行中的活動</string>
@@ -574,4 +575,7 @@
   <string name="wallpaper_set_unsuccessfully">發生錯誤，無法設定桌布</string>
   <string name="setting_wallpaper_dialog_title">設定為桌布</string>
   <string name="setting_wallpaper_dialog_message">正在設定桌布，請稍待…</string>
+  <string name="theme_default_name">預設</string>
+  <string name="theme_dark_name">暗黑</string>
+  <string name="theme_light_name">明亮</string>
 </resources>

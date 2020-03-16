@@ -55,8 +55,8 @@ class ReasonBuilderTest {
         `when`(okHttpJsonApiClient!!.getAchievements(anyString()))
                 .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
 
-        val media = mock(Media::class.java)
-        `when`(media!!.dateUploaded).thenReturn(Date())
+        val media = Media("test_file")
+        media.dateUploaded=Date()
 
         reasonBuilder!!.getReason(media, "test")
         verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))

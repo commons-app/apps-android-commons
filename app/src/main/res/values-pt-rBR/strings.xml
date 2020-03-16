@@ -129,7 +129,7 @@
   <string name="use_previous">Usar o título e descrição anterior</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Se a imagem não estiver georreferenciada, obtém a localização atual e georreferencia a imagem com ela. Aviso: isto revela a sua localização corrente.</string>
-  <string name="preference_theme" fuzzy="true">Modo noturno</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>
   <string name="license_name_cc_by_four">Atribuição 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -448,6 +448,7 @@
   <string name="display_location_permission_title">Exibir permissão de local</string>
   <string name="display_location_permission_explanation">Peça permissão de localização quando necessário para o recurso de exibição de cartão de notificação nas proximidades.</string>
   <string name="achievements_fetch_failed">Algo deu errado, não conseguimos buscar suas conquistas</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Você fez tantas contribuições que nosso sistema de cálculo de conquistas não consegue lidar. Esta é a conquista final.</string>
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Exibir campanhas</string>
   <string name="display_campaigns_explanation">Ver as campanhas em andamento</string>
@@ -577,4 +578,7 @@
   <string name="wallpaper_set_unsuccessfully">Algo deu errado. Não foi possível definir o papel de parede</string>
   <string name="setting_wallpaper_dialog_title">Definir como papel de parede</string>
   <string name="setting_wallpaper_dialog_message">Definir papel de parede. Por favor, espere…</string>
+  <string name="theme_default_name">Padrão</string>
+  <string name="theme_dark_name">Escuro</string>
+  <string name="theme_light_name">Claro</string>
 </resources>

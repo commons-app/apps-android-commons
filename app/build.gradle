@@ -102,7 +102,14 @@ dependencies {
 
     //swipe_layout
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
+
+    //Room
+    def room_version= '2.2.3'
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation "androidx.room:room-rxjava2:$room_version"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 }
 
 android {
