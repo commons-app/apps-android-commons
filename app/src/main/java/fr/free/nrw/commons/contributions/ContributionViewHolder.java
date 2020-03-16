@@ -33,7 +33,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.contributionProgress) ProgressBar progressView;
     @BindView(R.id.failed_image_options) LinearLayout failedImageOptions;
 
-    int position;
+    private int position;
     private Contribution contribution;
 
     ContributionViewHolder(View parent, Callback callback) {

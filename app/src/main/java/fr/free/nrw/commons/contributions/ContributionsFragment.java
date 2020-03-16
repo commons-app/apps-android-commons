@@ -79,8 +79,6 @@ public class ContributionsFragment
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
     @Inject CampaignsPresenter presenter;
     @Inject LocationServiceManager locationManager;
-    @Inject
-    MediaDataExtractor mediaDataExtractor;
 
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
