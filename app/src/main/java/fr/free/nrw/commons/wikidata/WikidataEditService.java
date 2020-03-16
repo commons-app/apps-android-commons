@@ -48,9 +48,14 @@ public class WikidataEditService {
      * @param wikidataEntityId
      * @param fileName
      */
-    public void createClaimWithLogging(String wikidataEntityId, String fileName) {
+    public void createClaimWithLogging(String wikidataEntityId, String fileName, String p18Value) {
         if (wikidataEntityId == null) {
             Timber.d("Skipping creation of claim as Wikidata entity ID is null");
+            return;
+        }
+
+        if (!p18Value.trim().isEmpty()) {
+            Timber.d("Skipping creation of claim as p18Value is not null, we won't override existing image");
             return;
         }
 
