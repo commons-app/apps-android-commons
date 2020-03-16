@@ -244,20 +244,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
                 ScaleBarPlugin scaleBarPlugin = new ScaleBarPlugin(mapView, mapBoxMap);
                 int color = isDarkTheme ? R.color.bottom_bar_light : R.color.bottom_bar_dark;
-                //Default text size for scalebar params
-                final float SIZE = new TextView(getContext()).getTextSize() - 1;
-                //these values are chosen to keep scalebar size comparable to other text depending upon the screen size and device resolution
-                final float SCALEBAR_HEIGHT = (float) (SIZE / 3.5);
-                final float SCALEBAR_BORDER_WIDTH = SIZE / 10;
-                final float SCALEBAR_MARGIN = SIZE / 2;
                 ScaleBarOptions scaleBarOptions = new ScaleBarOptions(getContext())
                     .setTextColor(color)
-                    .setTextSize(SIZE)
-                    .setBarHeight(SCALEBAR_HEIGHT)
-                    .setBorderWidth(SCALEBAR_BORDER_WIDTH)
-                    .setMarginTop(SCALEBAR_MARGIN)
-                    .setMarginLeft(SCALEBAR_MARGIN)
-                    .setTextBarMargin(SCALEBAR_MARGIN);
+                    .setTextSize(R.dimen.description_text_size)
+                    .setBarHeight(R.dimen.tiny_gap)
+                    .setBorderWidth(R.dimen.miniscule_margin)
+                    .setMarginTop(R.dimen.tiny_padding)
+                    .setMarginLeft(R.dimen.tiny_padding)
+                    .setTextBarMargin(R.dimen.tiny_padding);
                 scaleBarPlugin.create(scaleBarOptions);
             });
         });
