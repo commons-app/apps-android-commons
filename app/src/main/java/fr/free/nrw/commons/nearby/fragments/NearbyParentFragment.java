@@ -9,6 +9,8 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -54,6 +56,7 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import fr.free.nrw.commons.utils.DialogUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -92,7 +95,6 @@ import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
@@ -156,9 +158,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Inject ContributionController controller;
     @Inject WikidataEditListener wikidataEditListener;
 
-    @Inject
-    SystemThemeUtils systemThemeUtils;
-
     private NearbyFilterSearchRecyclerViewAdapter nearbyFilterSearchRecyclerViewAdapter;
 
     private BottomSheetBehavior bottomSheetListBehavior;
@@ -213,7 +212,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        isDarkTheme = systemThemeUtils.isDeviceInNightMode();
+        isDarkTheme = applicationKvStore.getBoolean("theme", false);
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
         addCheckBoxCallback();
         presenter.attachView(this);
@@ -229,8 +228,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 UiSettings uiSettings = mapBoxMap.getUiSettings();
                 uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
                 uiSettings.setCompassMargins(12, 0, 0, 24);
-                uiSettings.setLogoEnabled(true);
-                uiSettings.setAttributionEnabled(true);
+                uiSettings.setLogoEnabled(false);
+                uiSettings.setAttributionEnabled(false);
                 uiSettings.setRotateGesturesEnabled(false);
                 NearbyParentFragment.this.isMapBoxReady=true;
                 performMapReadyActions();
@@ -824,10 +823,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void showFABs() {
-        NearbyFABUtils.addAnchorToBigFABs(fabPlus, bottomSheetDetails.getId());
-        fabPlus.show();
-        NearbyFABUtils.addAnchorToSmallFABs(fabGallery, getView().findViewById(R.id.empty_view).getId());
-        NearbyFABUtils.addAnchorToSmallFABs(fabCamera, getView().findViewById(R.id.empty_view1).getId());
+            NearbyFABUtils.addAnchorToBigFABs(fabPlus, bottomSheetDetails.getId());
+            fabPlus.show();
+            NearbyFABUtils.addAnchorToSmallFABs(fabGallery, getView().findViewById(R.id.empty_view).getId());
+            NearbyFABUtils.addAnchorToSmallFABs(fabCamera, getView().findViewById(R.id.empty_view1).getId());
     }
 
     /**
@@ -911,7 +910,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onLocationChangedSlightly(fr.free.nrw.commons.location.LatLng latLng) {
-        Timber.d("Location slightly changed");
+        Timber.d("Location significantly changed");
         if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng,LOCATION_SLIGHTLY_CHANGED);
         }
@@ -1238,6 +1237,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
         if (curLatLng == null) {
+            if (!locationManager.isProviderEnabled("network")) {
+                showLocationOffDialog();
+            }
             return;
         }
         addCurrentLocationMarker(curLatLng);
@@ -1266,6 +1268,27 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
 
         mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+    }
+
+    @Override
+    public void showLocationOffDialog() {
+        // This creates a dialog box that prompts the user to enable location
+        DialogUtil
+            .showAlertDialog(getActivity(), getString(R.string.ask_to_turn_location_on), getString(R.string.nearby_needs_location),
+                getString(R.string.yes), getString(R.string.no),  this::openLocationSettings, null);
+    }
+
+    @Override
+    public void openLocationSettings() {
+        // This method opens the location settings of the device along with a followup toast.
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        try {
+            getContext().startActivity(intent);
+            Toast.makeText(getContext(), R.string.set_location_mode_high_accuracy, Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
+            Timber.e(e);
+        }
     }
 
     @Override
