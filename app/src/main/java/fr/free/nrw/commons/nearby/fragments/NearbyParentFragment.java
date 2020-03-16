@@ -198,8 +198,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isVisibleToUser;
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
-    private ScaleBarPlugin scaleBarPlugin;
-    private ScaleBarOptions scaleBarOptions;
 
 
     @Override
@@ -243,29 +241,23 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .zoom(ZOOM_LEVEL)
                         .build();
                 mapBoxMap.setCameraPosition(cameraPosition);
-                scaleBarPlugin = new ScaleBarPlugin(mapView, mapBoxMap);
 
+                ScaleBarPlugin scaleBarPlugin = new ScaleBarPlugin(mapView, mapBoxMap);
                 int color = isDarkTheme?R.color.bottom_bar_light:R.color.bottom_bar_dark;
-
-                final float SIZE = new TextView(getContext()).getTextSize()-1;     //Default text size for scalebar params
-                final float SCALEBAR_HEIGHT = (float) (SIZE/3.5);                  //these values are chosen to keep scalebar size comparable to other text depending upon the screen size and device resolution
-                final float SCALEBAR_BORDER_WIDTH = SIZE/10;
+                final float SIZE = new TextView(getContext()).getTextSize()-1;  //Default text size for scalebar params
+                final float SCALEBAR_HEIGHT = (float) (SIZE/3.5);  //these values are chosen to keep scalebar size comparable to other text
+                final float SCALEBAR_BORDER_WIDTH = SIZE/10;       //depending upon the screen size and device resolution
                 final float SCALEBAR_MARGIN = SIZE/2;
-
-                scaleBarOptions = new ScaleBarOptions(getContext())
-                    .setTextColor(color)
-                    .setTextSize(SIZE)
-                    .setBarHeight(SCALEBAR_HEIGHT)
-                    .setBorderWidth(SCALEBAR_BORDER_WIDTH)
-                    .setRefreshInterval(15)            //Refresh time for scalebar in millisec
-                    .setMarginTop(SCALEBAR_MARGIN)
-                    .setMarginLeft(SCALEBAR_MARGIN)
-                    .setTextBarMargin(SCALEBAR_MARGIN);
-
-
+                ScaleBarOptions scaleBarOptions = new ScaleBarOptions(getContext())
+                        .setTextColor(color)
+                        .setTextSize(SIZE)
+                        .setBarHeight(SCALEBAR_HEIGHT)
+                        .setBorderWidth(SCALEBAR_BORDER_WIDTH)
+                        .setMarginTop(SCALEBAR_MARGIN)
+                        .setMarginLeft(SCALEBAR_MARGIN)
+                        .setTextBarMargin(SCALEBAR_MARGIN);
                 scaleBarPlugin.create(scaleBarOptions);
             });
-
         });
     }
 
