@@ -68,7 +68,7 @@ public class  Contribution extends Media {
     public String decimalCoords;
     public boolean isMultiple;
     public String wikiDataEntityId;
-    public String p18Value;
+    private String p18Value;
     public Uri contentProviderUri;
     public String dateCreatedSource;
 
