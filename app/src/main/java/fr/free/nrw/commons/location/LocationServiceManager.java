@@ -216,11 +216,11 @@ public class LocationServiceManager implements LocationListener {
     }
 
     public boolean isNetworkProviderEnabled() {
-        return locationManager.isProviderEnabled(String.valueOf(R.string.network_provider));
+        return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
     public boolean isGPSProviderEnabled() {
-        return locationManager.isProviderEnabled(String.valueOf(R.string.gps_provider));
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     public enum LocationChangeType{

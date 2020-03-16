@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -1285,14 +1286,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void openLocationSettings() {
         // This method opens the location settings of the device along with a followup toast.
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        try {
-            getContext().startActivity(intent);
+        PackageManager packageManager = getActivity().getPackageManager();
+
+        if (intent.resolveActivity(packageManager)!= null) {
+            startActivity(intent);
             Toast.makeText(getContext(), R.string.set_location_mode_high_accuracy, Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
+        } else {
             Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
-            Timber.e(e);
         }
-//        PackageManager packageManager = getActivity().getPackageManager();
     }
 
     @Override
