@@ -109,6 +109,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
         }
 
         rvContributionsList.setAdapter(adapter);
+        rvContributionsList.setItemViewCacheSize(0);
         adapter.setContributions(contributions);
     }
 
