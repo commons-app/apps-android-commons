@@ -70,6 +70,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         uploadLimit.setText(String.valueOf(currentUploadLimit));
 
         uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
+
+            if (newValue.toString().length() == 0) {
+                return false;
+            }
+
             int value = Integer.parseInt(newValue.toString());
             if (value > 500) {
                 Snackbar error = Snackbar.make(getView(), R.string.maximum_limit_alert, Snackbar.LENGTH_LONG);
