@@ -40,29 +40,18 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private int position;
     private Contribution contribution;
     private Random random =new Random();
-    private HashMap<Integer,ColorDrawable> drawablesCache=new HashMap();
 
     ContributionViewHolder(View parent, Callback callback) {
         super(parent);
         ButterKnife.bind(this, parent);
         this.callback=callback;
-        populateDrawableCache();
-    }
-    
-    /**
-     * Cache's the drawables to be shown as image placeholders
-     */
-    private void populateDrawableCache() {
-        for (int i = 0; i < 5; i++) {
-            drawablesCache.put(i, new ColorDrawable(
-                Color.argb(100, random.nextInt(256), random.nextInt(256), random.nextInt(256))));
-        }
     }
 
     public void init(int position, Contribution contribution) {
         this.contribution=contribution;
         this.position=position;
-        imageView.getHierarchy().setPlaceholderImage(drawablesCache.get(position%5));
+        imageView.getHierarchy().setPlaceholderImage(new ColorDrawable(
+            Color.argb(100, random.nextInt(256), random.nextInt(256), random.nextInt(256))));
         String imageSource = chooseImageSource(contribution.thumbUrl, contribution.getLocalUri());
         if (!TextUtils.isEmpty(imageSource)) {
             final ImageRequest imageRequest =
