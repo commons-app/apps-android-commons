@@ -278,9 +278,10 @@ public class UploadService extends HandlerService<Contribution> {
                         showFailedNotification(contribution);
                     } else {
                         String canonicalFilename = "File:" + uploadResult.getFilename();
-                        Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
-                                contribution.getWikiDataEntityId());
-                        wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename);
+                        Timber.d("Contribution upload success. Initiating Wikidata edit for"
+                                + " entity id %s if necessary (if P18 is null). P18 value is %s",
+                                contribution.getWikiDataEntityId(), contribution.getP18Value());
+                        wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename, contribution.getP18Value());
                         contribution.setFilename(canonicalFilename);
                         contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
                         contribution.setState(Contribution.STATE_COMPLETED);
