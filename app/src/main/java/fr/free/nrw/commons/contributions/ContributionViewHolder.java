@@ -120,13 +120,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      */
     @Nullable
     private String chooseImageSource(String thumbUrl, Uri localUri) {
-        String imageSource = thumbUrl;
-        if (TextUtils.isEmpty(imageSource)) {
-            imageSource =
-                localUri != null ? localUri.toString()
-                    : null;
-        }
-        return imageSource;
+        return !TextUtils.isEmpty(thumbUrl) ? thumbUrl : (localUri != null ? localUri.toString()
+            : null);
     }
 
     /**
