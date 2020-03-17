@@ -52,6 +52,8 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
+import com.mapbox.pluginscalebar.ScaleBarOptions;
+import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
@@ -239,8 +241,19 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         .zoom(ZOOM_LEVEL)
                         .build();
                 mapBoxMap.setCameraPosition(cameraPosition);
-            });
 
+                ScaleBarPlugin scaleBarPlugin = new ScaleBarPlugin(mapView, mapBoxMap);
+                int color = isDarkTheme ? R.color.bottom_bar_light : R.color.bottom_bar_dark;
+                ScaleBarOptions scaleBarOptions = new ScaleBarOptions(getContext())
+                    .setTextColor(color)
+                    .setTextSize(R.dimen.description_text_size)
+                    .setBarHeight(R.dimen.tiny_gap)
+                    .setBorderWidth(R.dimen.miniscule_margin)
+                    .setMarginTop(R.dimen.tiny_padding)
+                    .setMarginLeft(R.dimen.tiny_padding)
+                    .setTextBarMargin(R.dimen.tiny_padding);
+                scaleBarPlugin.create(scaleBarOptions);
+            });
         });
     }
 
