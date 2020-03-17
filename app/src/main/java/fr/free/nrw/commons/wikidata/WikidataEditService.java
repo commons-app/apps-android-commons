@@ -3,6 +3,7 @@ package fr.free.nrw.commons.wikidata;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -45,10 +46,11 @@ public class WikidataEditService {
 
     /**
      * Create a P18 claim and log the edit with custom tag
-     * @param wikidataEntityId
-     * @param fileName
+     * @param wikidataEntityId a unique id of each Wikidata items
+     * @param fileName name of the file we will upload
+     * @param p18Value pic attribute of Wikidata item
      */
-    public void createClaimWithLogging(String wikidataEntityId, String fileName, String p18Value) {
+    public void createClaimWithLogging(String wikidataEntityId, String fileName, @NonNull String p18Value) {
         if (wikidataEntityId == null) {
             Timber.d("Skipping creation of claim as Wikidata entity ID is null");
             return;
