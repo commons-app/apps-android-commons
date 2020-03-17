@@ -49,7 +49,7 @@
           android:key="authorName"
           app:singleLineTitle="false"
           app:dependency="useAuthorName"
-          android:summary="@string/preference_author_name_summary"
+          app:useSimpleSummaryProvider="true"
           android:title="@string/preference_author_name" />
 
         <SwitchPreference
