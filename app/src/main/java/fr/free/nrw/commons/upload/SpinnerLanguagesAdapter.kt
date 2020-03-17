@@ -15,6 +15,13 @@ import kotlinx.android.synthetic.main.row_item_languages_spinner.*
 import org.apache.commons.lang3.StringUtils
 import java.util.*
 
+/**
+ * This class handles the display of language spinners and their dropdown views for UploadMediaDetailFragment
+ *
+ * @property selectedLanguages - controls the enabled state of dropdown views
+ *
+ * @param context - required by super constructor
+ */
 class SpinnerLanguagesAdapter constructor(
     context: Context,
     private val selectedLanguages: BiMap<*, String>
@@ -24,8 +31,9 @@ class SpinnerLanguagesAdapter constructor(
     private val languageCodesList: List<String>
 
     init {
-        val sortedLanguages =
-            Locale.getAvailableLocales().map(::Language).sortedBy { it.locale.displayName }
+        val sortedLanguages = Locale.getAvailableLocales()
+            .map(::Language)
+            .sortedBy { it.locale.displayName }
         languageNamesList = sortedLanguages.map { it.locale.displayName }
         languageCodesList = sortedLanguages.map { it.locale.language }
     }
@@ -33,7 +41,7 @@ class SpinnerLanguagesAdapter constructor(
     var selectedLangCode = ""
 
     override fun isEnabled(position: Int) = languageCodesList[position].let {
-        it.isNotEmpty() && !(selectedLanguages.containsKey(it) || it == selectedLangCode)
+        it.isNotEmpty() && !selectedLanguages.containsKey(it) && it != selectedLangCode
     }
 
     override fun getCount() = languageNamesList.size
@@ -45,8 +53,7 @@ class SpinnerLanguagesAdapter constructor(
             (tag as DropDownViewHolder).init(
                 languageCodesList[position],
                 languageNamesList[position],
-                selectedLanguages,
-                selectedLangCode
+                isEnabled(position)
             )
         }
 
@@ -64,14 +71,8 @@ class SpinnerLanguagesAdapter constructor(
     }
 
     class DropDownViewHolder(override val containerView: View) : LayoutContainer {
-        fun init(
-            languageCode: String,
-            languageName: String,
-            selectedLanguages: BiMap<*, String>,
-            selectedLangCode: String
-        ) {
-            tv_language.isEnabled =
-                !(selectedLanguages.containsKey(languageCode) && languageCode != selectedLangCode)
+        fun init(languageCode: String, languageName: String, enabled: Boolean) {
+            tv_language.isEnabled = enabled
             if (languageCode.isEmpty()) {
                 tv_language.text = StringUtils.capitalize(languageName)
                 tv_language.textAlignment = View.TEXT_ALIGNMENT_CENTER
@@ -80,7 +81,6 @@ class SpinnerLanguagesAdapter constructor(
                     "${StringUtils.capitalize(languageName)}" +
                             " [${LangCodeUtils.fixLanguageCode(languageCode)}]"
             }
-
         }
     }
 
@@ -95,7 +95,6 @@ class SpinnerLanguagesAdapter constructor(
     fun getIndexOfLanguageCode(languageCode: String): Int {
         return languageCodesList.indexOf(languageCode)
     }
-
 }
 
 private fun ViewGroup.inflate(@LayoutRes resId: Int) =
