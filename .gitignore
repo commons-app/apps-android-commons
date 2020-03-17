@@ -6,7 +6,7 @@
 app/src/main/gen/*
 
 # IDEA/Android Studio Ignore exceptions
-!/.idea/codeStyles/
+!/.idea/codeStyles/codeStyleConfig.xml
 
 # Gradle
 .gradle
