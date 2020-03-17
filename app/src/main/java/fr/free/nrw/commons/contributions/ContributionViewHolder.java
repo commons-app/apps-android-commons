@@ -39,7 +39,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     private int position;
     private Contribution contribution;
-    Random random =new Random();
+    private Random random =new Random();
     private HashMap<Integer,ColorDrawable> drawablesCache=new HashMap();
 
     ContributionViewHolder(View parent, Callback callback) {
