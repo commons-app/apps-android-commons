@@ -56,8 +56,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         themeListPreference = findPreference(Prefs.KEY_THEME_VALUE);
         prepareTheme();
 
-        SwitchPreference useAuthorName = findPreference("useAuthorName");
-
         MultiSelectListPreference multiSelectListPref = findPreference(Prefs.MANAGED_EXIF_TAGS);
         if (multiSelectListPref != null) {
             multiSelectListPref.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -113,17 +111,13 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             return true;
         });
         // Disable some settings when not logged in.
-        if (defaultKvStore.getBoolean("login_skipped", false)){
-            SwitchPreference useExternalStorage = findPreference("useExternalStorage");
-            SwitchPreference displayNearbyCardView = findPreference("displayNearbyCardView");
-            SwitchPreference displayLocationPermissionForCardView = findPreference("displayLocationPermissionForCardView");
-            SwitchPreference displayCampaignsCardView = findPreference("displayCampaignsCardView");
-            useExternalStorage.setEnabled(false);
+        if (defaultKvStore.getBoolean("login_skipped", false)) {
+            findPreference("useExternalStorage").setEnabled(false);
+            findPreference("useAuthorName").setEnabled(false);
+            findPreference("displayNearbyCardView").setEnabled(false);
+            findPreference("displayLocationPermissionForCardView").setEnabled(false);
+            findPreference("displayCampaignsCardView").setEnabled(false);
             uploadLimit.setEnabled(false);
-            useAuthorName.setEnabled(false);
-            displayNearbyCardView.setEnabled(false);
-            displayLocationPermissionForCardView.setEnabled(false);
-            displayCampaignsCardView.setEnabled(false);
         }
     }
 
