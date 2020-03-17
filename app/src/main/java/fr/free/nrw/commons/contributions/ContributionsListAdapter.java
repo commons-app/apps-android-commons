@@ -61,6 +61,11 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         notifyDataSetChanged();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return contributions.get(position)._id;
+    }
+
     public interface Callback {
 
         void retryUpload(Contribution contribution);

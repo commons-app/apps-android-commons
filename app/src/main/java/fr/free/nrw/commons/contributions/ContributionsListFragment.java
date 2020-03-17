@@ -90,6 +90,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private void initAdapter() {
         adapter = new ContributionsListAdapter(callback);
+        adapter.setHasStableIds(true);
     }
 
     @Override

@@ -1,13 +1,15 @@
 package fr.free.nrw.commons.contributions;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -21,6 +23,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
+import java.util.HashMap;
+import java.util.Random;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
@@ -35,25 +39,35 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     private int position;
     private Contribution contribution;
+    Random random =new Random();
+    private HashMap<Integer,ColorDrawable> drawablesCache=new HashMap();
 
     ContributionViewHolder(View parent, Callback callback) {
         super(parent);
         ButterKnife.bind(this, parent);
         this.callback=callback;
+        populateDrawableCache();
+    }
+    
+    /**
+     * Cache's the drawables to be shown as image placeholders
+     */
+    private void populateDrawableCache() {
+        for (int i = 0; i < 5; i++) {
+            drawablesCache.put(i, new ColorDrawable(
+                Color.argb(100, random.nextInt(256), random.nextInt(256), random.nextInt(256))));
+        }
     }
 
     public void init(int position, Contribution contribution) {
         this.contribution=contribution;
         this.position=position;
-        String imageSource = contribution.thumbUrl;
-        if (TextUtils.isEmpty(imageSource)) {
-            imageSource =
-                contribution.getLocalUri() != null ? contribution.getLocalUri().toString()
-                    : null;
-        }
+        imageView.getHierarchy().setPlaceholderImage(drawablesCache.get(position%5));
+        String imageSource = chooseImageSource(contribution.thumbUrl, contribution.getLocalUri());
         if (!TextUtils.isEmpty(imageSource)) {
             final ImageRequest imageRequest =
-                ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource)).setProgressiveRenderingEnabled(true).setProgressiveRenderingEnabled(true)
+                ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
+                    .setProgressiveRenderingEnabled(true)
                     .build();
             imageView.setImageRequest(imageRequest);
         }
@@ -94,6 +108,25 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 failedImageOptions.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    /**
+     * Returns the image source for the image view, first preference is given to thumbUrl if that is
+     * null, moves to local uri and if both are null return null
+     *
+     * @param thumbUrl
+     * @param localUri
+     * @return
+     */
+    @Nullable
+    private String chooseImageSource(String thumbUrl, Uri localUri) {
+        String imageSource = thumbUrl;
+        if (TextUtils.isEmpty(imageSource)) {
+            imageSource =
+                localUri != null ? localUri.toString()
+                    : null;
+        }
+        return imageSource;
     }
 
     /**
