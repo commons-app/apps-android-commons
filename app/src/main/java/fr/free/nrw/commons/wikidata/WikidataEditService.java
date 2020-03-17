@@ -65,7 +65,7 @@ public class WikidataEditService {
         }
 
         if (!p18Value.trim().isEmpty()) {
-            Timber.d("Skipping creation of claim as p18Value is not null, we won't override existing image");
+            Timber.d("Skipping creation of claim as p18Value is not empty, we won't override existing image");
             return;
         }
 
