@@ -39,7 +39,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     private int position;
     private Contribution contribution;
-    private Random random =new Random();
+    private Random random = new Random();
 
     ContributionViewHolder(View parent, Callback callback) {
         super(parent);
@@ -110,8 +110,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     @Nullable
     private String chooseImageSource(String thumbUrl, Uri localUri) {
         return !TextUtils.isEmpty(thumbUrl) ? thumbUrl :
-            (localUri != null ? localUri.toString() :
-                null);
+            localUri != null ? localUri.toString() :
+                null
     }
 
     /**
