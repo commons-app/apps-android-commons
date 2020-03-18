@@ -3,98 +3,107 @@ package fr.free.nrw.commons.settings;
 import android.Manifest;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.SwitchPreference;
-import android.text.Editable;
-import android.text.TextWatcher;
-
+import android.text.InputFilter;
+import android.text.InputType;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
+import fr.free.nrw.commons.upload.Language;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Inject
     @Named("default_preferences")
     JsonKvStore defaultKvStore;
+
     @Inject
     CommonsLogSender commonsLogSender;
 
+    private ListPreference themeListPreference;
+    private ListPreference langListPreference;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         ApplicationlessInjection
-                .getInstance(getActivity().getApplicationContext())
-                .getCommonsApplicationComponent()
-                .inject(this);
+            .getInstance(getActivity().getApplicationContext())
+            .getCommonsApplicationComponent()
+            .inject(this);
 
-        // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.preferences);
+        // Set the preferences from an XML resource
+        setPreferencesFromResource(R.xml.preferences, rootKey);
 
-        SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
-        themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            getActivity().recreate();
-            return true;
-        });
+        themeListPreference = findPreference(Prefs.KEY_THEME_VALUE);
+        prepareTheme();
 
-        //Check if the Author Name switch is enabled and appropriately handle the author name usage
-        SwitchPreference useAuthorName = (SwitchPreference) findPreference("useAuthorName");
-        EditTextPreference authorName = (EditTextPreference) findPreference("authorName");
-        authorName.setEnabled(defaultKvStore.getBoolean("useAuthorName", false));
-        useAuthorName.setOnPreferenceChangeListener((preference, newValue) -> {
-            authorName.setEnabled((Boolean)newValue);
-            return true;
-        });
-
-        final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        int currentUploadLimit = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100);
-        uploadLimit.setText(Integer.toString(currentUploadLimit));
-        uploadLimit.setSummary(Integer.toString(currentUploadLimit));
-        uploadLimit.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() == 0) return;
-
-                int value = Integer.parseInt(s.toString());
-
-                if (value > 500) {
-                    uploadLimit.getEditText().setError(getString(R.string.maximum_limit_alert));
-                    value = 500;
-                } else if (value == 0) {
-                    uploadLimit.getEditText().setError(getString(R.string.cannot_be_zero));
-                    value = 100;
+        MultiSelectListPreference multiSelectListPref = findPreference(Prefs.MANAGED_EXIF_TAGS);
+        if (multiSelectListPref != null) {
+            multiSelectListPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                if (newValue instanceof HashSet && !((HashSet) newValue).contains(getString(R.string.exif_tag_location))) {
+                    defaultKvStore.putBoolean("has_user_manually_removed_location", true);
                 }
+                return true;
+            });
+        }
 
-                defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, value);
-                defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
-                uploadLimit.setText(Integer.toString(value));
-                uploadLimit.setSummary(Integer.toString(value));
+        final EditTextPreference uploadLimit = findPreference("uploads");
+        int currentUploadLimit = defaultKvStore.getInt(Prefs.UPLOADS_SHOWING, 100);
+        uploadLimit.setText(String.valueOf(currentUploadLimit));
+
+        uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
+
+            if (newValue.toString().length() == 0) {
+                return false;
             }
+
+            int value = Integer.parseInt(newValue.toString());
+            if (value > 500) {
+                Snackbar error = Snackbar.make(getView(), R.string.maximum_limit_alert, Snackbar.LENGTH_LONG);
+                error.show();
+                return false;
+            } else if (value == 0) {
+                Snackbar error = Snackbar.make(getView(), R.string.cannot_be_zero, Snackbar.LENGTH_LONG);
+                error.show();
+                return false;
+            }
+            return true;
         });
 
+        uploadLimit.setOnBindEditTextListener(editText -> {
+
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+            editText.selectAll();
+            int maxLength = 3; // set maxLength to 3
+            editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
+
+            int value = Integer.parseInt(editText.getText().toString());
+
+            defaultKvStore.putInt(Prefs.UPLOADS_SHOWING, value);
+            defaultKvStore.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, true);
+            uploadLimit.setText(Integer.toString(value));
+        });
+
+        langListPreference = findPreference("descriptionDefaultLanguagePref");
+        prepareLanguages();
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
             Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
@@ -105,6 +114,88 @@ public class SettingsFragment extends PreferenceFragment {
             checkPermissionsAndSendLogs();
             return true;
         });
+        // Disable some settings when not logged in.
+        if (defaultKvStore.getBoolean("login_skipped", false)) {
+            findPreference("useExternalStorage").setEnabled(false);
+            findPreference("useAuthorName").setEnabled(false);
+            findPreference("displayNearbyCardView").setEnabled(false);
+            findPreference("displayLocationPermissionForCardView").setEnabled(false);
+            findPreference("displayCampaignsCardView").setEnabled(false);
+            uploadLimit.setEnabled(false);
+        }
+    }
+
+    /**
+     * Sets the theme pref
+     */
+    private void prepareTheme() {
+        themeListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            getActivity().recreate();
+            return true;
+        });
+    }
+
+    /**
+     * Prepares language summary and language codes list and adds them to list preference as pairs.
+     * Uses previously saved language if there is any, if not uses phone local as initial language.
+     * Adds preference changed listener and saves value chosen by user to shared preferences
+     * to remember later
+     */
+    private void prepareLanguages() {
+        List<String> languageNamesList = new ArrayList<>();
+        List<String> languageCodesList = new ArrayList<>();
+        List<Language> languages = getLanguagesSupportedByDevice();
+
+        for(Language language: languages) {
+            // Go through all languages and add them to lists
+            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
+                // This if prevents us from adding same language twice
+                languageNamesList.add(language.getLocale().getDisplayName());
+                languageCodesList.add(language.getLocale().getLanguage());
+            }
+        }
+
+        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
+        CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
+        // Add all languages and languages codes to lists preference as pair
+        langListPreference.setEntries(languageNames);
+        langListPreference.setEntryValues(languageCodes);
+
+        // Gets current language code from shared preferences
+        String languageCode = getCurrentLanguageCode();
+        if (languageCode.equals("")){
+            // If current language code is empty, means none selected by user yet so use phone local
+            langListPreference.setValue(Locale.getDefault().getLanguage());
+        } else {
+            // If any language is selected by user previously, use it
+            langListPreference.setValue(languageCode);
+        }
+
+        langListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            String userSelectedValue = (String) newValue;
+            saveLanguageValue(userSelectedValue);
+            return true;
+        });
+    }
+
+    private void saveLanguageValue(String userSelectedValue) {
+        defaultKvStore.putString(Prefs.KEY_LANGUAGE_VALUE, userSelectedValue);
+    }
+
+    private String getCurrentLanguageCode() {
+        return defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, "");
+    }
+
+    private List<Language> getLanguagesSupportedByDevice() {
+        List<Language> languages = new ArrayList<>();
+        Locale[] localesArray = Locale.getAvailableLocales();
+        for (Locale locale : localesArray) {
+            languages.add(new Language(locale));
+        }
+
+        Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
+                .compareTo(t1.getLocale().getDisplayName()));
+        return languages;
     }
 
     /**

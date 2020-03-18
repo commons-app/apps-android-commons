@@ -4,14 +4,18 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
@@ -25,14 +29,11 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
 
-
+@Singleton
 public class UploadModel {
 
     private static UploadItem DUMMY = new UploadItem(
@@ -49,24 +50,22 @@ public class UploadModel {
     private String license;
     private final Map<String, String> licensesByName;
     private List<UploadItem> items = new ArrayList<>();
-    private boolean topCardState = true;
-    private boolean bottomCardState = true;
-    private boolean rightCardState = true;
     private int currentStepIndex = 0;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private SessionManager sessionManager;
     private FileProcessor fileProcessor;
     private final ImageProcessingService imageProcessingService;
+    private List<String> selectedCategories;
 
     @Inject
     UploadModel(@Named("licenses") List<String> licenses,
-                @Named("default_preferences") JsonKvStore store,
-                @Named("licenses_by_name") Map<String, String> licensesByName,
-                Context context,
-                SessionManager sessionManager,
-                FileProcessor fileProcessor,
-                ImageProcessingService imageProcessingService) {
+            @Named("default_preferences") JsonKvStore store,
+            @Named("licenses_by_name") Map<String, String> licensesByName,
+            Context context,
+            SessionManager sessionManager,
+            FileProcessor fileProcessor,
+            ImageProcessingService imageProcessingService) {
         this.licenses = licenses;
         this.store = store;
         this.license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
@@ -77,31 +76,61 @@ public class UploadModel {
         this.imageProcessingService = imageProcessingService;
     }
 
-    void cleanup() {
+    /**
+     * cleanup the resources, I am Singleton, preparing for fresh upload
+     */
+    public void cleanUp() {
         compositeDisposable.clear();
         fileProcessor.cleanup();
+        this.items.clear();
+        if (this.selectedCategories != null) {
+            this.selectedCategories.clear();
+        }
     }
 
+    public void setSelectedCategories(List<String> selectedCategories) {
+        if (null == selectedCategories) {
+            selectedCategories = new ArrayList<>();
+        }
+        this.selectedCategories = selectedCategories;
+    }
+
+    /**
+     * pre process a list of items
+     */
     @SuppressLint("CheckResult")
     Observable<UploadItem> preProcessImages(List<UploadableFile> uploadableFiles,
-                                            Place place,
-                                            String source,
-                                            SimilarImageInterface similarImageInterface) {
-        initDefaultValues();
+            Place place,
+            String source,
+            SimilarImageInterface similarImageInterface) {
         return Observable.fromIterable(uploadableFiles)
-                .map(uploadableFile -> getUploadItem(uploadableFile, place, source, similarImageInterface));
+                .map(uploadableFile -> getUploadItem(uploadableFile, place, source,
+                        similarImageInterface));
     }
 
-    Single<Integer> getImageQuality(UploadItem uploadItem, boolean checkTitle) {
-        return imageProcessingService.validateImage(uploadItem, checkTitle);
+
+    /**
+     * pre process a one item at a time
+     */
+    public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile,
+            Place place,
+            String source,
+            SimilarImageInterface similarImageInterface) {
+        return Observable.just(getUploadItem(uploadableFile, place, source, similarImageInterface));
+    }
+
+    public Single<Integer> getImageQuality(UploadItem uploadItem) {
+        return imageProcessingService.validateImage(uploadItem);
     }
 
     private UploadItem getUploadItem(UploadableFile uploadableFile,
-                                     Place place,
-                                     String source,
-                                     SimilarImageInterface similarImageInterface) {
-        fileProcessor.initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()), context.getContentResolver());
-        UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile.getFileCreatedDate(context);
+            Place place,
+            String source,
+            SimilarImageInterface similarImageInterface) {
+        fileProcessor.initFileDetails(Objects.requireNonNull(uploadableFile.getFilePath()),
+                context.getContentResolver());
+        UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile
+                .getFileCreatedDate(context);
         long fileCreatedDate = -1;
         String createdTimestampSource = "";
         if (dateTimeWithSource != null) {
@@ -109,52 +138,24 @@ public class UploadModel {
             createdTimestampSource = dateTimeWithSource.getSource();
         }
         Timber.d("File created date is %d", fileCreatedDate);
-        GPSExtractor gpsExtractor = fileProcessor.processFileCoordinates(similarImageInterface);
-        return new UploadItem(uploadableFile.getContentUri(), Uri.parse(uploadableFile.getFilePath()), uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate, createdTimestampSource);
-    }
-
-    void onItemsProcessed(Place place, List<UploadItem> uploadItems) {
-        items = uploadItems;
-        if (items.isEmpty()) {
-            return;
-        }
-
-        UploadItem uploadItem = items.get(0);
-        uploadItem.selected = true;
-        uploadItem.first = true;
-
+        GPSExtractor gpsExtractor = fileProcessor
+                .processFileCoordinates(similarImageInterface, context);
+        UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(),
+                Uri.parse(uploadableFile.getFilePath()),
+                uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate,
+                createdTimestampSource);
         if (place != null) {
-            uploadItem.title.setTitleText(place.getName());
-            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription().equals("?")?"":place.getLongDescription());
-            //TODO figure out if default descriptions in other languages exist
+            uploadItem.title.setTitleText(place.name);
+            if(uploadItem.descriptions.isEmpty()) {
+                uploadItem.descriptions.add(new Description());
+            }
+            uploadItem.descriptions.get(0).setDescriptionText(place.getLongDescription());
             uploadItem.descriptions.get(0).setLanguageCode("en");
         }
-    }
-
-    private void initDefaultValues() {
-        currentStepIndex = 0;
-        topCardState = true;
-        bottomCardState = true;
-        rightCardState = true;
-        items = new ArrayList<>();
-    }
-
-    boolean isPreviousAvailable() {
-        return currentStepIndex > 0;
-    }
-
-    boolean isNextAvailable() {
-        return currentStepIndex < (items.size() + 1);
-    }
-
-    boolean isSubmitAvailable() {
-        int count = items.size();
-        boolean hasError = license == null;
-        for (int i = 0; i < count; i++) {
-            UploadItem item = items.get(i);
-            hasError |= item.error;
+        if (!items.contains(uploadItem)) {
+            items.add(uploadItem);
         }
-        return !hasError;
+        return uploadItem;
     }
 
     int getCurrentStep() {
@@ -173,110 +174,20 @@ public class UploadModel {
         return items;
     }
 
-    boolean isTopCardState() {
-        return topCardState;
-    }
-
-    void setTopCardState(boolean topCardState) {
-        this.topCardState = topCardState;
-    }
-
-    boolean isBottomCardState() {
-        return bottomCardState;
-    }
-
-    void setRightCardState(boolean rightCardState) {
-        this.rightCardState = rightCardState;
-    }
-
-    boolean isRightCardState() {
-        return rightCardState;
-    }
-
-    void setBottomCardState(boolean bottomCardState) {
-        this.bottomCardState = bottomCardState;
-    }
-
-    @SuppressLint("CheckResult")
-    public void next() {
-        markCurrentUploadVisited();
-        if (currentStepIndex < items.size() + 1) {
-            currentStepIndex++;
-        }
-        updateItemState();
-    }
-
-    void setCurrentTitleAndDescriptions(Title title, List<Description> descriptions) {
-        setCurrentUploadTitle(title);
-        setCurrentUploadDescriptions(descriptions);
-    }
-
-    private void setCurrentUploadTitle(Title title) {
-        if (currentStepIndex < items.size() && currentStepIndex >= 0) {
-            items.get(currentStepIndex).title = title;
-        }
-    }
-
-    private void setCurrentUploadDescriptions(List<Description> descriptions) {
-        if (currentStepIndex < items.size() && currentStepIndex >= 0) {
-            items.get(currentStepIndex).descriptions = descriptions;
-        }
-    }
-
-    public void previous() {
-        cleanup();
-        markCurrentUploadVisited();
-        if (currentStepIndex > 0) {
-            currentStepIndex--;
-        }
-        updateItemState();
-    }
-
-    void jumpTo(UploadItem item) {
-        currentStepIndex = items.indexOf(item);
-        item.visited = true;
-        updateItemState();
-    }
-
-    UploadItem getCurrentItem() {
-        return isShowingItem() ? items.get(currentStepIndex) : DUMMY;
-    }
-
-    boolean isShowingItem() {
-        return currentStepIndex < items.size();
-    }
-
-    private void updateItemState() {
-        Timber.d("Updating item state");
-        int count = items.size();
-        for (int i = 0; i < count; i++) {
-            UploadItem item = items.get(i);
-            item.selected = (currentStepIndex >= count || i == currentStepIndex);
-            item.error = item.title == null || item.title.isEmpty();
-        }
-    }
-
-    private void markCurrentUploadVisited() {
-        Timber.d("Marking current upload visited");
-        if (currentStepIndex < items.size() && currentStepIndex >= 0) {
-            items.get(currentStepIndex).visited = true;
-        }
-    }
-
     public List<String> getLicenses() {
         return licenses;
     }
 
-    String getSelectedLicense() {
+    public String getSelectedLicense() {
         return license;
     }
 
-    void setSelectedLicense(String licenseName) {
+    public void setSelectedLicense(String licenseName) {
         this.license = licensesByName.get(licenseName);
         store.putString(Prefs.DEFAULT_LICENSE, license);
     }
 
-    Observable<Contribution> buildContributions(List<String> categoryStringList) {
+    public Observable<Contribution> buildContributions() {
         return Observable.fromIterable(items).map(item ->
         {
             Contribution contribution = new Contribution(item.mediaUri, null,
@@ -286,11 +197,17 @@ public class UploadModel {
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
+                // If item already has an image, we need to know it. We don't want to override existing image later
+                contribution.setP18Value(item.place.pic);
             }
-            contribution.setCategories(categoryStringList);
+            if (null == selectedCategories) {//Just a fail safe, this should never be null
+                selectedCategories = new ArrayList<>();
+            }
+            contribution.setCategories(selectedCategories);
             contribution.setTag("mimeType", item.mimeType);
             contribution.setSource(item.source);
             contribution.setContentProviderUri(item.mediaUri);
+            contribution.setDateUploaded(new Date());
 
             Timber.d("Created timestamp while building contribution is %s, %s",
                     item.getCreatedTimestamp(),
@@ -304,21 +221,16 @@ public class UploadModel {
         });
     }
 
-    void keepPicture() {
-        items.get(currentStepIndex).setImageQuality(ImageUtils.IMAGE_KEEP);
-    }
-
-    void deletePicture() {
-        cleanup();
-        updateItemState();
-    }
-
-    void subscribeBadPicture(Consumer<Integer> consumer, boolean checkTitle) {
-        if (isShowingItem()) {
-            compositeDisposable.add(getImageQuality(getCurrentItem(), checkTitle)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(consumer, Timber::e));
+    public void deletePicture(String filePath) {
+        Iterator<UploadItem> iterator = items.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().mediaUri.toString().contains(filePath)) {
+                iterator.remove();
+                break;
+            }
+        }
+        if (items.isEmpty()) {
+            cleanUp();
         }
     }
 
@@ -326,8 +238,15 @@ public class UploadModel {
         return items;
     }
 
+    public void updateUploadItem(int index, UploadItem uploadItem) {
+        UploadItem uploadItem1 = items.get(index);
+        uploadItem1.setDescriptions(uploadItem.descriptions);
+        uploadItem1.setTitle(uploadItem.title);
+    }
+
     @SuppressWarnings("WeakerAccess")
-    static class UploadItem {
+    public static class UploadItem {
+
         private final Uri originalContentUri;
         private final Uri mediaUri;
         private final String mimeType;
@@ -347,15 +266,14 @@ public class UploadModel {
 
         @SuppressLint("CheckResult")
         UploadItem(Uri originalContentUri,
-                   Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
-                   Place place,
-                   long createdTimestamp,
-                   String createdTimestampSource) {
+                Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
+                Place place,
+                long createdTimestamp,
+                String createdTimestampSource) {
             this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
             title = new Title();
             descriptions = new ArrayList<>();
-            descriptions.add(new Description());
             this.place = place;
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
@@ -426,15 +344,39 @@ public class UploadModel {
         }
 
         public String getFileName() {
-            return Utils.fixExtension(title.toString(), getFileExt());
+            return title
+                    != null ? Utils.fixExtension(title.toString(), getFileExt()) : null;
         }
 
         public Place getPlace() {
             return place;
         }
 
+        public void setTitle(Title title) {
+            this.title = title;
+        }
+
+        public void setDescriptions(List<Description> descriptions) {
+            this.descriptions = descriptions;
+        }
+
         public Uri getContentUri() {
             return originalContentUri;
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            if (!(obj instanceof UploadItem)) {
+                return false;
+            }
+            return this.mediaUri.toString().contains(((UploadItem) (obj)).mediaUri.toString());
+
+        }
+
+        //Travis is complaining :P
+        @Override
+        public int hashCode() {
+            return super.hashCode();
         }
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * BHARATHESHA ALASANDEMAJALU
 * Kiranpoojary
 * Lokesha kunchadka
@@ -95,9 +96,9 @@
   <string name="title_activity_category_details">ವರ್ಗೊ</string>
   <string name="menu_about">ಎಂಕ್ಲೆನ ಬಗ್ಗೆ</string>
   <string name="about_license">ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಅಪ್ಲಿಕೇಶನ್‌ನ್ ವಿಕಿಮೀಡಿಯ ಸಮುದಾಯೊತ ಅನುದಾನ, ಸ್ವಯಂಸೇವಕೆರ್ ರಚನೆ ಬುಕ್ಕೊ ನಿರ್ವಹಣೆ ಮುಕ್ತೊ-ಮೂಲತೊ ಅಪ್ಲಿಕೇಶನ್. ವಿಕಿಮೀಡಿಯ ಫೌಂಡೇಶನ್ ಅಪ್ಲಿಕೇಶನ್‌ನ್ ಸೃಷ್ಟಿ, ಅಭಿವೃದ್ಧಿ, ಅತ್ತಂದೆ ನಿರ್ವಹಣೆಟ್ ಇಜ್ಜಿ.</string>
-  <string name="about_improve">ಪೊಸತ್ತ್ ಸೃಷ್ಟಿ &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; ಇರೆನ ವರಿದಿ ಬುಕ್ಕ ಸಲಹೆ.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Privacy policy&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Credits&lt;/u&gt;</string>
+  <string name="about_improve">ಪೊಸತ್ತ್ ಸೃಷ್ಟಿ &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; ಇರೆನ ವರಿದಿ ಬುಕ್ಕ ಸಲಹೆ.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Privacy policy&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Credits&lt;/u&gt;</string>
   <string name="title_activity_about">ಎಂಕ್ಲೆನ ಬಗ್ಗೆ</string>
   <string name="menu_feedback">ಇರೆನ ಅಬಿಪ್ರಾಯೊ ಬರೆಲೆ(ಮಿಂಚಂಚೆ).</string>
   <string name="no_email_client">ಇರೆನ ಮಿಂಚಂಚೆ ಇಜ್ಜಿ.</string>
@@ -113,11 +114,10 @@
   <string name="media_upload_policy">ಈ ಪಟೊನ್ ಕೊರಿಯರ ಅತ್ತಂದೆ, ಉಂದು ಎನ್ನ ಸ್ವಂತ ಬೆಲೆಗ್ ಯಾನ್ ಘೋಷಣೆ ಮಾಲ್ಪೆ, ಅವು ಹಕ್ಕುಸ್ವಾಮ್ಯತ ವಸ್ತು ಅತ್ತಂದೆ ಸ್ವಂತಲಾ ಅತ್ತ್&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">ಡೌನ್‍ಲೋಡ್</string>
   <string name="preference_license">ಪೂರ್ವನಿಯೋಜಿತ ಲೈಸನ್ಸ್‌.</string>
-  <string name="use_previous">ಒಂದ್ಕಕ್ ಪುದರ್ ಬಕ್ಕ ವಿವರಣೆ ಕೊರ್ಲೆ.</string>
+  <string name="use_previous" fuzzy="true">ಒಂದ್ಕಕ್ ಪುದರ್ ಬಕ್ಕ ವಿವರಣೆ ಕೊರ್ಲೆ.</string>
   <string name="allow_gps">ಸ್ವಯಂ ಚಾಲಿತವಾತ್ ಇರೆನ ಜಾಗೆತ ಗುರುತು.</string>
   <string name="allow_gps_summary">ಇಮೇಜ್ ಜಿಯೋಟ್ಯಾಗ್ಡ್ ಮಾಲ್ತಿಯಾಂಟ ಬುಕ್ಕ ಅಯಿನೊಟ್ಟಗ್ ಜಿಯೋಟ್ಯಾಗ್ಸ್ ಇಮೇಜ್ ಇತ್ತಂಟ್ ಇತ್ತೆತ ಸ್ಥಳೋನ್ ವಾಪಸ್ಸ್ ಪಡೆಯೊಲಿ.\nಎಚ್ಚರಿಕೆ: ಉಂದು ಇರೆನ ಇತ್ತೆತ ಸ್ಥಳೊನ್ ಬಹಿರಂಗ ಮಾಲ್ಪುಂಡು.</string>
-  <string name="preference_theme">ಕತ್ತಲೆದ ಕ್ರಮೊ</string>
-  <string name="preference_theme_summary">ಡಾರ್ಕ್ ಥೀಮ್ ಬಲಕೆ ಮಾಲ್ಪುಲೆ.</string>
+  <string name="preference_theme" fuzzy="true">ಕತ್ತಲೆದ ಕ್ರಮೊ</string>
   <string name="license_name_cc_by_sa_four">ಅಸ್ಟ್ರೀಬುಷನ್ - ಸೇರ್ ಎ ಲೈಕ್  4.0.</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -158,7 +158,7 @@
   <string name="welcome_copyright_subtext">ಇಂಟರ್ನೆಟ್ನ್‌ಡ್ತ್ ಇರ್ ತೊಜಾತ್ ಬರ್ಪಿನ ಕೃತಿಸ್ವಾಮ್ಯತ ವಸ್ತುಲೆನ್ ಅಂಚನೆ ಪೋಸ್ಟರ್ ಚಿತ್ರೊಲು, ಬೂಕುಲೆನ ವರ್ಗೊ ಇತ್ಯಾದಿ ತಪ್ಪಾತ್ ಇಪ್ಪು.</string>
   <string name="welcome_final_text">ಇರೆಗ್ ತಿಕ್ಕ್‌ಂಡ್ಂದು ಇರ್ ಭಾವಿಸುವರಾ?</string>
   <string name="welcome_final_button_text">ಅಂದ್!</string>
-  <string name="welcome_help_button_text">&lt;u&gt; ಹೆಚ್ಚಿನ ಮಾಹಿತಿಲು&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt; ಹೆಚ್ಚಿನ ಮಾಹಿತಿಲು&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">ವರ್ಗೊಲು</string>
   <string name="detail_panel_cats_loading">ದಿಂಜಾವೊಂದುಂಡು……</string>
   <string name="detail_panel_cats_none">ಒಂಜಿಲಾ ಅಯ್ಕೆ ಮಾಲ್ತಿಜ್ಜಿ.</string>
@@ -167,7 +167,7 @@
   <string name="menu_refresh">ರಿಫ್ರೆಶ್ ಮಲ್ಪುಲೆ</string>
   <string name="storage_permission_title">ಶೇಖರಣ ಅನುಮತಿ ಕೇಣುನು</string>
   <string name="read_storage_permission_rationale">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಓದಿ. ಇದೆಂಡ್ತ್ ಇರ್ ಗ್ಯಾಲರಿಗ್ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರವೇಶಗ್ ಸಾಧ್ಯ ಇಜ್ಜಿ.</string>
-  <string name="write_storage_permission_rationale">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಬರೆಲೆ. ಇದೆಂಡ್ತ್ ಅಪ್ಲಿಕೇಶನ್ ಇರೆನ ಕ್ಯಾಮರೊನ್ ಪ್ರವೇಶ ಮಾಲ್ಪಯರ ಸಾಧ್ಯಿಜ್ಜಿ.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಬರೆಲೆ. ಇದೆಂಡ್ತ್ ಅಪ್ಲಿಕೇಶನ್ ಇರೆನ ಕ್ಯಾಮರೊನ್ ಪ್ರವೇಶ ಮಾಲ್ಪಯರ ಸಾಧ್ಯಿಜ್ಜಿ.</string>
   <string name="location_permission_rationale">ಐಚ್ಛಿಕ ಅನುಮತಿ: ವರ್ಗೊ ಸಲಹೆಗ್ ಇತ್ತೆತ ಸ್ಥಳೊನ್ ಪಡೆಲೆ.</string>
   <string name="ok">ಅವು</string>
   <string name="title_activity_nearby">ಕೈದಲ್ತಾ ಜಾಗೆಲು</string>
@@ -254,7 +254,7 @@
   <string name="null_url">\nದೋಷೊ! URL ತೋಜಾತ್ ಬರ್ಪುಜ್ಜಿ.</string>
   <string name="nominate_deletion">ಮಾಜಾಯರ ನಾಮನಿರ್ದೇಶನೊ.</string>
   <string name="nominated_for_deletion">ಮಾಜಾಯರ ಈ ಚಿತ್ರೊನ್ ನಾಮನಿರ್ದೇಶನೊ ಮಾಲ್ತೆರ್.</string>
-  <string name="nominated_see_more">&lt;u&gt;ವಿವರಗಾತ್ ವೆಬ್ಪುಟೊನ್ ತೂಲೆ&lt;/u&gt;</string>
+  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;ವಿವರಗಾತ್ ವೆಬ್ಪುಟೊನ್ ತೂಲೆ&lt;/u&gt;</string>
   <string name="view_browser">\nಬ್ರೌಸರ್ಟ್ ತೂಲೆ.</string>
   <string name="skip_login">ಬುಡ್ಲೆ</string>
   <string name="navigation_item_login">ಲಾಗಿನ್ ಆಲೆ.</string>
@@ -264,27 +264,27 @@
   <string name="copy_wikicode">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ಪುಲೆ.</string>
   <string name="wikicode_copied">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ತ್ಂಡ್.</string>
   <string name="nearby_location_has_not_changed">ಜಾಗೆ ಬದಲಾವಣೆ ಇಜ್ಜಿ.</string>
-  <string name="nearby_location_not_available">ಜಾಗೆತ ಗುರುತು ಇಜ್ಜಿ.</string>
+  <string name="nearby_location_not_available" fuzzy="true">ಜಾಗೆತ ಗುರುತು ಇಜ್ಜಿ.</string>
   <string name="location_permission_rationale_nearby">ಮುಟ್ಟತ ಜಾಗೆತ ಪಟ್ಟಿನ್ ತೋಜಾಯರ ಅನುಮತಿ ಅಗತ್ಯವಾತ್ ಬೋಡು.</string>
-  <string name="get_directions">ನಿರ್ದೇಶನೊ ಉಂಡಾ.</string>
-  <string name="read_article">ಲೇಖನೊ ಓದುಲೆ.</string>
+  <string name="get_directions" fuzzy="true">ನಿರ್ದೇಶನೊ ಉಂಡಾ.</string>
+  <string name="read_article" fuzzy="true">ಲೇಖನೊ ಓದುಲೆ.</string>
   <string name="notifications_welcome">ವಿಕಿಮಿಡಿಯ ಕಾಮಸ್ಸ್‌ಗ್ ಸ್ವಾಗತೊ, %1$s! ಇರ್ ಉಲ್ಲಾರ್ಂದ್ ಎಕ್ಲೆಗ್ ಖುಷಿಯಾಂಡ್.</string>
   <string name="notifications_talk_page_message">\n%1$s ಇರೆನ ಚರ್ಚಾಪುಟೊಗ್ ಇಂಜಿ ಮೆಸೆಜ್ ಕೊರ್ಲೆ.</string>
   <string name="notifications_thank_you_edit">ಇರೆನ ಸಂಪೊಲೊಗೆಗ್ ಸೊಲ್ಮೆಲು.</string>
   <string name="notifications_mention">%1$s ಇಂದೆನ್ ಇರ್ ಒರಿಪಾಲೆ %2$s.</string>
   <string name="toggle_view_button">ಟಾಗಲ್ ನ್ ತೂಲೆ.</string>
-  <string name="nearby_directions">ನಿರ್ದೆಶನೊ.</string>
-  <string name="nearby_wikidata">\nವಿಕಿಡಾಟ.</string>
-  <string name="nearby_wikipedia">\nವಿಕಿಪೀಡಿಯ.</string>
-  <string name="nearby_commons">ಕಾಮನ್ಸ್.</string>
-  <string name="about_rate_us">&lt;u&gt;Rate us&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="nearby_directions" fuzzy="true">ನಿರ್ದೆಶನೊ.</string>
+  <string name="nearby_wikidata" fuzzy="true">\nವಿಕಿಡಾಟ.</string>
+  <string name="nearby_wikipedia" fuzzy="true">\nವಿಕಿಪೀಡಿಯ.</string>
+  <string name="nearby_commons" fuzzy="true">ಕಾಮನ್ಸ್.</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Rate us&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">ಟ್ಯುಟೋರಿಯಲ್‌ನ್ ಬುಡ್ಲೆ.</string>
   <string name="no_internet">ಇಂಟರ್ನೆಟ್ ಇಜ್ಜಿ.</string>
   <string name="internet_established">ಇಂಟರ್ನೆಟ್ ಉಂಡು.</string>
   <string name="error_notifications">\nಅಧಿಸೂಚನೆಟ್ ದೋಷೊ ಉಂಡು.</string>
   <string name="no_notifications">ಅಧಿಸೂಚನೆ ಇಜ್ಜಿ.</string>
-  <string name="about_translate">&lt;u&gt;ಅನುವಾದೊ&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;ಅನುವಾದೊ&lt;/u&gt;</string>
   <string name="about_translate_title">ಭಾಸೆಲು</string>
   <string name="about_translate_message">ಇರ್ ಅನುವಾದೊನ್ ಕೊರಿಯರ ಒಪ್ಪಗೆ ಉಂಡಾ, ಭಾಷೆನ್ ಆಯ್ಕೆ ಮಾಲ್ಲುಲೆ.</string>
   <string name="about_translate_proceed">ಮುಂದುವರಿಪುಲೆ.</string>
@@ -308,9 +308,9 @@
   <string name="provider_searches">ಇಂಚೊಗು ನಾಡಿನ ಕೇಣಿಲು</string>
   <string name="error_loading_categories">ವರ್ಗೊಲೆನ್ ಏರಾನಗ ದೋಷ ಆಂಡ್.</string>
   <string name="error_loading_subcategories">ಉಪವರ್ಗೊಲೆನ್ ಏರಾನಗ ದೋಷ ಆಂಡ್.</string>
-  <string name="search_tab_title_media">ಮಾಧ್ಯಮ</string>
-  <string name="search_tab_title_categories">ವರ್ಗೊಲು</string>
-  <string name="successful_wikidata_edit">ವಿಕಿಡೇಟೊಡು ಆಕೃತಿನ್ ಸಫಲವಾದ್ %1$ ಗು ಸೇರಾಂಡ್!</string>
+  <string name="search_tab_title_media" fuzzy="true">ಮಾಧ್ಯಮ</string>
+  <string name="search_tab_title_categories" fuzzy="true">ವರ್ಗೊಲು</string>
+  <string name="successful_wikidata_edit" fuzzy="true">ವಿಕಿಡೇಟೊಡು ಆಕೃತಿನ್ ಸಫಲವಾದ್ %1$ ಗು ಸೇರಾಂಡ್!</string>
   <string name="wikidata_edit_failure">ಹೊಂದಿಕೆ ಆಪಿನ ವಿಕಿಡೇಟಾ ವಸ್ತುನು ಕಾಲನವಿ ಮಲ್ಪುನ ವಿಫಲವಾಂಡ್.</string>
   <string name="menu_set_wallpaper">ಗೋಡೆಕಾಕಜಿ ಆದ್ ಗೋಡಿಸಾಲೆ.</string>
   <string name="wallpaper_set_successfully">ಗೋಡೆಕಾಕಜಿ  ಸಫಲವಾದ್ ಗೋಡಣೆಯಾಂಡ್!</string>
@@ -343,11 +343,11 @@
   <string name="search_history_deleted">ನನಾಡುನ ಇತಿಹಾಸೊ ಮಾಜಾತೆರ್.</string>
   <string name="nominate_delete">ಮಾಜಾವರೆ ನಾಮೀಕರಣ ಮಲ್ಪುಲೆ.</string>
   <string name="Achievements">ಸಾಧನೆಲು.</string>
-  <string name="statistics">ಅಂಕಿಸಂಖ್ಯೆ.</string>
+  <string name="statistics" fuzzy="true">ಅಂಕಿಸಂಖ್ಯೆ.</string>
   <string name="statistics_thanks">ಸೊಲ್ಮೆಲು ಪಂಡೆರ್</string>
   <string name="statistics_featured">ವಿಸೆಸೊ ಪಟ.</string>
   <string name="statistics_wikidata_edits">ಆಕೃತಿಲೆನ ಮೂಲಕ \"ಕೈತಲ್ದ ಜಾಗೊಲು\"</string>
-  <string name="level">LEVEL</string>
+  <string name="level" fuzzy="true">LEVEL</string>
   <string name="images_uploaded">ಪಟೊ ಅಪ್ಲೋಡೆಡ್.</string>
   <string name="image_reverts">ಪಟೊನ್ ಪುನಃ ಪಾಡಿಯರ ಅಪುಜ್ಜಿ.</string>
   <string name="images_used_by_wiki">ಪಟೊನ್ ಬಲಕೆ ಮಾತ್ರೆರ್.</string>

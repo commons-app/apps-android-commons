@@ -4,23 +4,20 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.listener.RequestListener;
-import com.facebook.imagepipeline.listener.RequestLoggingListener;
 
 import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,23 +38,25 @@ public class SimilarImageDialogFragment extends DialogFragment {
     Button positiveButton;
     @BindView(R.id.negative_button)
     Button negativeButton;
-    onResponse mOnResponse;//Implemented interface from shareActivity
+    Callback callback;//Implemented interface from shareActivity
     Boolean gotResponse = false;
 
     public SimilarImageDialogFragment() {
     }
-    public interface onResponse{
+    public interface Callback {
         void onPositiveResponse();
 
         void onNegativeResponse();
+    }
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_similar_image_dialog, container, false);
         ButterKnife.bind(this,view);
-        Set<RequestListener> requestListeners = new HashSet<>();
-        requestListeners.add(new RequestLoggingListener());
 
         originalImage.setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
@@ -83,7 +82,6 @@ public class SimilarImageDialogFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mOnResponse = (onResponse) getActivity();//Interface Implementation
     }
 
     @Override
@@ -97,21 +95,21 @@ public class SimilarImageDialogFragment extends DialogFragment {
     public void onDismiss(DialogInterface dialog) {
 //        I user dismisses dialog by pressing outside the dialog.
         if (!gotResponse) {
-            mOnResponse.onNegativeResponse();
+            callback.onNegativeResponse();
         }
         super.onDismiss(dialog);
     }
 
     @OnClick(R.id.negative_button)
     public void onNegativeButtonClicked() {
-        mOnResponse.onNegativeResponse();
+        callback.onNegativeResponse();
         gotResponse = true;
         dismiss();
     }
 
     @OnClick(R.id.postive_button)
     public void onPositiveButtonClicked() {
-        mOnResponse.onPositiveResponse();
+        callback.onPositiveResponse();
         gotResponse = true;
         dismiss();
     }

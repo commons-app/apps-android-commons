@@ -60,15 +60,14 @@
   <string name="title_activity_featured_images">خاص تصویراں</string>
   <string name="title_activity_category_details">ونکی</string>
   <string name="menu_about">تعارف</string>
-  <string name="about_privacy_policy">&lt;u&gt;رازداری پالیسی&lt;/u&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;رازداری پالیسی&lt;/u&gt;</string>
   <string name="title_activity_about">تعارف</string>
   <string name="provider_categories">حالیہ ورتیاں ڳیاں ونکیاں</string>
   <string name="menu_retry_upload">ولدا کوشش کرو</string>
   <string name="menu_cancel_upload">منسوخ</string>
-  <string name="menu_download">ڈاؤن لوڈ ، لہاوݨ</string>
+  <string name="menu_download">ڈاؤن لوڈ کرو ، لہاؤ</string>
   <string name="preference_license">پہلے طے تھیا لائسنس</string>
-  <string name="preference_theme">رات آلا مزاج</string>
-  <string name="preference_theme_summary">گھاٹا تھیم ورتو</string>
+  <string name="preference_theme" fuzzy="true">رات آلا مزاج</string>
   <string name="license_name_cc0">سی سی او</string>
   <string name="license_name_cc_by_3_0">سی سی بی وائی ٣.٠</string>
   <string name="license_name_cc_by_sa_4_0">سی سی بی وائی۔ایس اے ٤.٠</string>
@@ -128,11 +127,11 @@
   <string name="send_log_file">لاگ فائل بھیڄو</string>
   <string name="skip_login">چھوڑو</string>
   <string name="navigation_item_login">لاگ ان تھیوو</string>
-  <string name="nearby_wikidata">وکی ڈیٹا</string>
-  <string name="nearby_wikipedia">وکی پیڈیا</string>
-  <string name="nearby_commons">عام</string>
-  <string name="about_faq">&lt;u&gt;عام طور تے پچھے ونڄݨ آلے سوال&lt;/u&gt;</string>
-  <string name="about_translate">&lt;u&gt;ترجمہ کرو&lt;/u&gt;</string>
+  <string name="nearby_wikidata" fuzzy="true">وکی ڈیٹا</string>
+  <string name="nearby_wikipedia" fuzzy="true">وکی پیڈیا</string>
+  <string name="nearby_commons" fuzzy="true">عام</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;عام طور تے پچھے ونڄݨ آلے سوال&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;ترجمہ کرو&lt;/u&gt;</string>
   <string name="about_translate_title">زباناں</string>
   <string name="about_translate_proceed">اڳوں تے تھیوو</string>
   <string name="about_translate_cancel">منسوخ</string>
@@ -143,13 +142,13 @@
   <string name="menu_search_button">ڳولو</string>
   <string name="title_activity_search">ڳولو</string>
   <string name="search_recent_header">حالیہ ڳول:</string>
-  <string name="search_tab_title_media">میݙیا</string>
-  <string name="search_tab_title_categories">ونکیاں</string>
+  <string name="search_tab_title_media" fuzzy="true">میݙیا</string>
+  <string name="search_tab_title_categories" fuzzy="true">ونکیاں</string>
   <string name="question">سوال</string>
   <string name="result">نتیجہ</string>
   <string name="continue_message">جاری رکھو</string>
-  <string name="statistics">شماریات</string>
-  <string name="level">سطح</string>
+  <string name="statistics" fuzzy="true">شماریات</string>
+  <string name="level" fuzzy="true">سطح</string>
   <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
   <string name="navigation_item_bookmarks">کتاب نشان</string>
   <string name="title_activity_bookmarks">کتاب نشان</string>
@@ -157,4 +156,5 @@
   <string name="title_page_bookmarks_locations">محل وقوع</string>
   <string name="provider_bookmarks">کتاب نشان</string>
   <string name="provider_bookmarks_location">کتاب نشان</string>
+  <string name="delete_helper_show_deletion_title_failed">ناکام تھیا</string>
 </resources>

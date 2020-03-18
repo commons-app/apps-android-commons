@@ -74,7 +74,6 @@ class WelcomeActivityTest {
 
     @Test
     fun swipeBeyondBounds(){
-        if (!ConfigUtils.isBetaFlavour()){
             var  view_pager=activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
 
             view_pager.adapter?.let {  view_pager.currentItem == view_pager.adapter?.count?.minus(1)
@@ -86,12 +85,10 @@ class WelcomeActivityTest {
                             .perform(ViewActions.swipeRight())
                     assert(false)
                 }}
-        }
     }
 
     @Test
     fun swipeTillLastAndFinish(){
-        if (!ConfigUtils.isBetaFlavour()){
             var  view_pager=activityRule.activity.findViewById<ViewPager>(R.id.welcomePager)
 
             view_pager.adapter?.let {  view_pager.currentItem == view_pager.adapter?.count?.minus(1)
@@ -100,6 +97,10 @@ class WelcomeActivityTest {
                             .perform(ViewActions.click())
                     assert(activityRule.activity.isDestroyed)
                 }}
-        }
+    }
+
+    @Test
+    fun orientationChange() {
+        UITestHelper.changeOrientation(activityRule)
     }
 }

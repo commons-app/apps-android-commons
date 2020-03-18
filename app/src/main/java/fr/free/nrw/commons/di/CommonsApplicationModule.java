@@ -3,15 +3,21 @@ package fr.free.nrw.commons.di;
 import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
-import androidx.collection.LruCache;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.collection.LruCache;
+import androidx.room.Room;
+
+import com.github.varunpant.quadtree.QuadTree;
 import com.google.gson.Gson;
+
+import org.wikipedia.AppAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -22,8 +28,9 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.settings.Prefs;
@@ -31,11 +38,24 @@ import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
+/**
+ * The Dependency Provider class for Commons Android. 
+ * 
+ * Provides all sorts of ContentProviderClients used by the app
+ * along with the Liscences, AccountUtility, UploadController, Logged User,
+ * Location manager etc
+ */
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
     private Context applicationContext;
+    public static final String IO_THREAD="io_thread";
+    public static final String MAIN_THREAD="main_thread";
+    private AppDatabase appDatabase;
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
@@ -77,9 +97,13 @@ public class CommonsApplicationModule {
 
     @Provides
     public AccountUtil providesAccountUtil(Context context) {
-        return new AccountUtil(context);
+        return new AccountUtil();
     }
 
+    /**
+     * Provides an instance of CategoryContentProviderClient i.e. the categories 
+     * that are there in local storage
+     */
     @Provides
     @Named("category")
     public ContentProviderClient provideCategoryContentProviderClient(Context context) {
@@ -122,6 +146,11 @@ public class CommonsApplicationModule {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY);
     }
 
+    /**
+     * Provides a Json store instance(JsonKvStore) which keeps
+     * the provided Gson in it's instance
+     * @param gson stored inside the store instance
+     */
     @Provides
     @Named("default_preferences")
     public JsonKvStore providesDefaultKvStore(Context context, Gson gson) {
@@ -150,6 +179,7 @@ public class CommonsApplicationModule {
 
     @Provides
     @Singleton
+    @Named("thumbnail-cache")
     public LruCache<String, String> provideLruCache() {
         return new LruCache<>(1024);
     }
@@ -169,5 +199,49 @@ public class CommonsApplicationModule {
     @Singleton
     public boolean provideIsBetaVariant() {
         return ConfigUtils.isBetaFlavour();
+    }
+
+    /**
+     * Provide JavaRx IO scheduler which manages IO operations
+     * across various Threads 
+     */
+    @Named(IO_THREAD)
+    @Provides
+    public Scheduler providesIoThread(){
+        return Schedulers.io();
+    }
+
+    @Named(MAIN_THREAD)
+    @Provides
+    public Scheduler providesMainThread() {
+        return AndroidSchedulers.mainThread();
+    }
+
+    @Named("username")
+    @Provides
+    public String provideLoggedInUsername() {
+        return Objects.toString(AppAdapter.get().getUserName(), "");
+    }
+
+    /**
+     * Provides quad tree
+     *
+     * @return
+     */
+    @Provides
+    public QuadTree providesQuadTres() {
+        return new QuadTree<>(-180, -90, +180, +90);
+    }
+
+    @Provides
+    @Singleton
+    public AppDatabase provideAppDataBase() {
+        appDatabase=Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db").build();
+        return appDatabase;
+    }
+
+    @Provides
+    public ContributionDao providesContributionsDao() {
+        return appDatabase.getContributionDao();
     }
 }

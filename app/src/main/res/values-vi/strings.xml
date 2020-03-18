@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Harriettruong3
 * Leducthn
 * Leduyquang753
 * Minh Nguyen
 * Nhatminh01
 * Thanhtai2009
+* Thienhau2003
 * Tuankiet65
+* Vinhtantran
+* Yuki Wulf
 -->
 <resources>
+  <string name="title_activity_explore">Khám phá</string>
+  <string name="navigation_item_explore">Khám phá</string>
   <string name="preference_category_appearance">Giao diện</string>
   <string name="preference_category_general">Tổng quát</string>
   <string name="preference_category_feedback">Phản hồi</string>
+  <string name="preference_category_privacy">Sự riêng tư</string>
   <string name="preference_category_location">Vị trí</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Thiết lập</string>
+  <string name="intent_share_upload_label">Đăng tải lên Commons</string>
   <string name="username">Tên người dùng</string>
   <string name="password">Mật khẩu</string>
   <string name="login_credential">Đăng nhập vào tài khoản Commons Beta của bạn</string>
@@ -27,7 +35,7 @@
   <string name="login_success">Đã đăng nhập thành công!</string>
   <string name="login_failed">Đăng nhập thất bại!</string>
   <string name="upload_failed">Không tìm thấy tập tin. Xin vui lòng thử tập tin khác.</string>
-  <string name="authentication_failed" fuzzy="true">Xác thực thất bại!</string>
+  <string name="authentication_failed">Xác thực thất bại, vui lòng đăng nhập lại</string>
   <string name="uploading_started">Đã bắt đầu tải lên!</string>
   <string name="upload_completed_notification_title">Đã tải lên %1$s!</string>
   <string name="upload_completed_notification_text">Chạm để xem những tập tin tải lên của bạn</string>
@@ -51,7 +59,7 @@
   <string name="provider_contributions">Tập tin tôi tải lên</string>
   <string name="menu_share">Chia sẻ</string>
   <string name="menu_open_in_browser">Mở trong Trình duyệt</string>
-  <string name="share_title_hint" fuzzy="true">Tên</string>
+  <string name="share_title_hint">Tựa đề (Yêu cầu)</string>
   <string name="add_title_toast">Xin hãy đặt tiêu đề cho tập tin này</string>
   <string name="share_description_hint">Miêu tả</string>
   <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
@@ -62,6 +70,7 @@
   <string name="login_failed_generic">Đăng nhập thất bại</string>
   <string name="share_upload_button">Tải lên</string>
   <string name="multiple_share_base_title">Đặt tên nhóm này</string>
+  <string name="add_set_name_toast">Vui lòng đặt tên cho tập tin này</string>
   <string name="provider_modifications">Các thay đổi</string>
   <string name="menu_upload_single">Tải lên</string>
   <string name="categories_search_text_hint">Tìm thể loại</string>
@@ -87,11 +96,12 @@
   <string name="title_activity_settings">Cài đặt</string>
   <string name="title_activity_signup">Mở tài khoản</string>
   <string name="title_activity_featured_images">Hình ảnh chọn lọc</string>
+  <string name="title_activity_category_details">Thể loại</string>
   <string name="menu_about">Giới thiệu</string>
   <string name="about_license">Ứng dụng Wikimedia Commons là ứng dụng mã nguồn mở được sáng tạo và quản lý bởi các tình nguyện viên và những người được tin tưởng của cộng đồng Wikipedia. Wikimedia Foundation không tham gia vào sự tạo lập, phát triển cũng như quản lý của ứng dụng.</string>
-  <string name="about_improve">Báo cáo lỗi cũng như đưa ra các ý tưởng &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;trên GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Chính sách riêng tư&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Công trạng&lt;/u&gt;</string>
+  <string name="about_improve">Báo cáo lỗi cũng như đưa ra các ý tưởng &lt;a href=\"%1$s\"&gt;trên GitHub&lt;/a&gt;.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Chính sách riêng tư&lt;/u&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;u&gt;Công trạng&lt;/u&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
   <string name="no_email_client">Không có chương trình thư điện tử nào được cài đặt</string>
@@ -104,11 +114,10 @@
   <string name="media_upload_policy">Với việc đăng hình này, tôi tuyên bố rằng nó là tác phẩm của chính mình, rằng nó không chứa nội dung có bản quyền hoặc ảnh tự chụp, và về mặt khác thì hoàn toàn tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép mặc định</string>
-  <string name="use_previous">Sử dụng tiêu đề/miêu tả trước</string>
+  <string name="use_previous" fuzzy="true">Sử dụng tiêu đề/miêu tả trước</string>
   <string name="allow_gps">Lấy vị trí hiện tại tự động</string>
   <string name="allow_gps_summary" fuzzy="true">Định vị hiện tại để nhận gợi ý thể loại trong trường hợp hình ảnh chưa được gắn thẻ địa lý</string>
-  <string name="preference_theme">Chế độ ban đêm</string>
-  <string name="preference_theme_summary">Dùng chủ đề tối</string>
+  <string name="preference_theme" fuzzy="true">Chế độ ban đêm</string>
   <string name="license_name_cc_by_sa_four">Ghi công–Chia sẻ tương tự 4.0</string>
   <string name="license_name_cc_by_four">Ghi công 4.0</string>
   <string name="license_name_cc_by_sa">Ghi công–Chia sẻ tương tự 3.0</string>
@@ -149,24 +158,27 @@
   <string name="welcome_copyright_subtext">Tránh dùng các hình ảnh có bản quyền bạn tìm được trên Internet, cũng như các hình chụp áp phích, bìa sách, v.v.</string>
   <string name="welcome_final_text">Bạn hiểu rồi chứ?</string>
   <string name="welcome_final_button_text">Có!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;Thông tin thêm&lt;/u&gt;</string>
+  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Thông tin thêm&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Thể loại</string>
   <string name="detail_panel_cats_loading">Đang tải…</string>
   <string name="detail_panel_cats_none">Chưa chọn</string>
   <string name="detail_description_empty">Không miêu tả</string>
   <string name="detail_license_empty">Giấy phép không rõ</string>
-  <string name="menu_refresh">Làm tươi</string>
+  <string name="menu_refresh">Làm mới</string>
+  <string name="storage_permission_title">Yêu cầu Quyền Lưu trữ</string>
   <string name="read_storage_permission_rationale">Yêu cầu cấp phép: Đọc thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép đọc thiết bị lưu trữ bên ngoài để truy cập kho ảnh của bạn.</string>
-  <string name="write_storage_permission_rationale">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để truy cập máy chụp hình của bạn.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để truy cập máy chụp hình của bạn.</string>
   <string name="location_permission_rationale">Tùy chọn cấp phép: Định vị hiện tại để nhận gợi ý thể loại</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nơi Lân cận</string>
   <string name="no_nearby">Không tìm thấy nơi lân cận</string>
   <string name="warning">Cảnh báo</string>
+  <string name="upload_image_duplicate">Tập tin này đã tồn tại trên Commons. Bạn có chắc muốn tiếp tục</string>
   <string name="yes">Có</string>
   <string name="no">Không</string>
   <string name="media_detail_title">Tiêu đề</string>
   <string name="media_detail_description">Mô tả</string>
+  <string name="media_detail_discussion">Thảo luận</string>
   <string name="media_detail_author">Tác giả</string>
   <string name="media_detail_uploaded_date">Ngày tải lên</string>
   <string name="media_detail_license">Giấy phép</string>
@@ -177,8 +189,10 @@
   <string name="_2fa_code">Mã Hai Nhân tố</string>
   <string name="number_of_uploads">Giới hạn Tải lên Gần đây của Tôi</string>
   <string name="maximum_limit">Tối đa</string>
+  <string name="invalid_input">Thông tin không hợp lệ</string>
   <string name="maximum_limit_alert">Không thể hiển thị hơn 500 cái</string>
-  <string name="set_limit" fuzzy="true">Đặt Giới hạn Tải lên Gần đây</string>
+  <string name="cannot_be_zero">Giới hạn đăng tải không thể là 0</string>
+  <string name="set_limit">Giới hạn đăng tải gần đây</string>
   <string name="login_failed_2fa_not_supported">Hiện chưa hỗ trợ xác thực dùng hai nhân tố.</string>
   <string name="logout_verification">Bạn có chắc chắn muốn đăng xuất?</string>
   <string name="commons_logo">Biểu trưng Commons</string>
@@ -219,6 +233,12 @@
   <string name="error_while_cache">Xuất hiện lỗi khi đưa hình ảnh vào vùng nhớ đệm</string>
   <string name="title_info">Tên ngắn và duy nhất cho tập tin sẽ được dùng làm tên tập tin. Có thể dùng thuật ngữ bình thường với khoảng cách. Đừng bao gồm phần mở rộng tập tin.</string>
   <string name="description_info">Xin vui lòng miêu tả phương tiện càng đầy đủ càng tốt: Chụp ở đâu? Trong hình có gì? Bối cảnh làm sao? Xin vui lòng miêu tả các đối tượng và người trong hình. Cho biết những thông tin khó đoán ra, chẳng hạn giờ trong ngày nếu là phong cảnh. Nếu phương tiện có gì kỳ lạ, xin vui lòng giải thích tại sao nó kỳ lạ.</string>
+  <string name="upload_problem_image_dark">Hình ảnh quá tối.</string>
+  <string name="upload_problem_image_blurry">Hình ảnh bị nhòe.</string>
+  <string name="upload_problem_image_duplicate">Hình ảnh đã có trên Commons.</string>
+  <string name="upload_problem_different_geolocation">Bức ảnh này được chụp ở một địa điểm khác.</string>
+  <string name="upload_problem_fbmd">Vui lòng chỉ đăng tải hình ảnh bạn đã tự chụp. Xin đừng đăng tải hình ảnh bạn tìm thấy trên tài không Facebook của người khác.</string>
+  <string name="upload_problem_do_you_continue">Bạn vẫn muốn đăng tải bức ảnh này?</string>
   <string name="give_permission">Cho phép</string>
   <string name="use_external_storage">Sử dụng thiết bị lưu trữ bên ngoài</string>
   <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
@@ -231,26 +251,26 @@
   <string name="nominated_for_deletion">Có đề nghị xóa hình này.</string>
   <string name="view_browser">Hiện lên ở trang xem browse</string>
   <string name="nearby_location_has_not_changed">Vị trí không thay đổi.</string>
-  <string name="nearby_location_not_available">Vị trí không có sẵn.</string>
+  <string name="nearby_location_not_available" fuzzy="true">Vị trí không có sẵn.</string>
   <string name="location_permission_rationale_nearby">Bạn cần cho phép để hiển thị danh sách nơi lân cận</string>
-  <string name="get_directions">HƯỚNG DẪN</string>
-  <string name="read_article">ĐỌC BÀI</string>
+  <string name="get_directions">Hướng dẫn</string>
+  <string name="read_article">Đọc bài</string>
   <string name="notifications_welcome">Hoan nghênh %1$s đã đến Wikimedia Commons! Chúng tôi rất mừng bạn đến đây.</string>
   <string name="notifications_talk_page_message">%1$s đã nhắn tin tại trang thảo luận của bạn</string>
   <string name="notifications_thank_you_edit">Cảm ơn vì bạn đã thực hiện sửa đổi</string>
   <string name="notifications_mention">%1$s đã nhắc đến bạn tại %2$s.</string>
-  <string name="nearby_directions">HƯỚNG DẪN</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
-  <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us">&lt;u&gt;Đánh giá chúng tôi&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;Câu thường hỏi&lt;/u&gt;</string>
+  <string name="nearby_directions">Hướng dẫn</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_commons">Commons</string>
+  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Đánh giá chúng tôi&lt;/u&gt;</string>
+  <string name="about_faq" fuzzy="true">&lt;u&gt;Câu thường hỏi&lt;/u&gt;</string>
   <string name="welcome_skip_button">Bỏ qua Hướng dẫn</string>
   <string name="no_internet">Internet không có sẵn</string>
   <string name="internet_established">Internet có sẵn</string>
   <string name="error_notifications">Lỗi khi lấy thông báo</string>
   <string name="no_notifications">Không tìm thấy thông báo</string>
-  <string name="about_translate">&lt;u&gt;Biên dịch&lt;/u&gt;</string>
+  <string name="about_translate" fuzzy="true">&lt;u&gt;Biên dịch&lt;/u&gt;</string>
   <string name="about_translate_title">Ngôn ngữ</string>
   <string name="about_translate_message">Chọn ngôn ngữ để gửi bản dịch</string>
   <string name="about_translate_proceed">Tiến hành</string>

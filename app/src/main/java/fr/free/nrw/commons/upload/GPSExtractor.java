@@ -2,23 +2,23 @@ package fr.free.nrw.commons.upload;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.exifinterface.media.ExifInterface;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import androidx.exifinterface.media.ExifInterface;
 import timber.log.Timber;
 
 /**
  * Extracts geolocation to be passed to API for category suggestions. If a picture with geolocation
  * is uploaded, extract latitude and longitude from EXIF data of image.
  */
-class GPSExtractor {
+public class GPSExtractor {
 
     static final GPSExtractor DUMMY= new GPSExtractor();
     private double decLatitude;
     private double decLongitude;
-    boolean imageCoordsExists;
+    public boolean imageCoordsExists;
     private String latitude;
     private String longitude;
     private String latitudeRef;
@@ -96,11 +96,11 @@ class GPSExtractor {
         }
     }
 
-    double getDecLatitude() {
+    public double getDecLatitude() {
         return decLatitude;
     }
 
-    double getDecLongitude() {
+    public double getDecLongitude() {
         return decLongitude;
     }
 
@@ -122,7 +122,7 @@ class GPSExtractor {
             decLongitude = 0 - convertToDegree(longitude);
         }
 
-        String decimalCoords = String.valueOf(decLatitude) + "|" + String.valueOf(decLongitude);
+        String decimalCoords = decLatitude + "|" + decLongitude;
         Timber.d("Latitude and Longitude are %s", decimalCoords);
         return decimalCoords;
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * CYAN
 * Dlsrks1021
 * Doyoon1995
@@ -19,6 +20,7 @@
   <string name="preference_category_appearance">보이기</string>
   <string name="preference_category_general">일반</string>
   <string name="preference_category_feedback">피드백</string>
+  <string name="preference_category_privacy">개인정보</string>
   <string name="preference_category_location">위치</string>
   <string name="app_name">공용</string>
   <string name="bullet">•</string>
@@ -102,8 +104,8 @@
   <string name="menu_about">정보</string>
   <string name="about_license">위키미디어 공용 앱은 오픈 소스 애플리케이션이며 위키미디어 공동체 내의 자원봉사자에 의해 유지됩니다. 위키미디어 재단은 애플리케이션의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
   <string name="about_improve">버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
-  <string name="about_privacy_policy">&lt;u&gt;개인정보 정책&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;제작진&lt;/u&gt;</string>
+  <string name="about_privacy_policy">개인정보 정책</string>
+  <string name="about_credits">제작진</string>
   <string name="title_activity_about">정보</string>
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>
   <string name="no_email_client">설치된 이메일 클라이언트가 없습니다</string>
@@ -119,11 +121,10 @@
   <string name="media_upload_policy">이 이미지에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는 것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키미디어 공용 정책&lt;/a&gt;에 위배되지 않는다는 것에 동의합니다.</string>
   <string name="menu_download">다운로드</string>
   <string name="preference_license">기본 라이선스</string>
-  <string name="use_previous">이전의 제목/설명을 사용하기</string>
+  <string name="use_previous">이전의 제목과 설명을 사용하기</string>
   <string name="allow_gps">자동으로 현재 위치 가져오기</string>
   <string name="allow_gps_summary">영상의 위치 태그가 지정되지 않은 경우 현재 위치를 검색하여 영상에 현재 위치로 위치 태그를 지정하십시오. 경고: 당신의 현재 위치가 노출됩니다.</string>
-  <string name="preference_theme">야간 모드</string>
-  <string name="preference_theme_summary">어두운 테마 사용</string>
+  <string name="preference_theme" fuzzy="true">야간 모드</string>
   <string name="license_name_cc_by_sa_four"> 저작자표시-동일조건변경허락 4.0</string>
   <string name="license_name_cc_by_four">저작자표시 4.0</string>
   <string name="license_name_cc_by_sa"> 저작자표시-동일조건변경허락 3.0</string>
@@ -164,16 +165,18 @@
   <string name="welcome_copyright_subtext">포스터, 책 표지 등의 그림 뿐만 아니라 인터넷에서 찾은 저작권이 있는 자료를 피하세요.</string>
   <string name="welcome_final_text">이해하셨습니까?</string>
   <string name="welcome_final_button_text">예!</string>
-  <string name="welcome_help_button_text">&lt;u&gt;더 많은 정보&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">더 많은 정보</string>
   <string name="detail_panel_cats_label">분류</string>
   <string name="detail_panel_cats_loading">불러오는 중…</string>
   <string name="detail_panel_cats_none">선택하지 않음</string>
   <string name="detail_description_empty">설명 없음</string>
+  <string name="detail_discussion_empty">토론 없음</string>
   <string name="detail_license_empty">알 수 없는 라이선스</string>
   <string name="menu_refresh">새로 고침</string>
   <string name="storage_permission_title">기억 장치 권한 요청 중</string>
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 갤러리에 접근할 수 없습니다.</string>
-  <string name="write_storage_permission_rationale">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라에 접근할 수 없습니다.</string>
+  <string name="write_storage_permission_rationale" fuzzy="true">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라에 접근할 수 없습니다.</string>
+  <string name="location_permission_title">위치 권한 요청 중</string>
   <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
   <string name="ok">확인</string>
   <string name="title_activity_nearby">근처의 장소</string>
@@ -184,6 +187,7 @@
   <string name="no">아니오</string>
   <string name="media_detail_title">제목</string>
   <string name="media_detail_description">설명</string>
+  <string name="media_detail_discussion">토론</string>
   <string name="media_detail_author">저자</string>
   <string name="media_detail_uploaded_date">올린 날짜</string>
   <string name="media_detail_license">라이선스</string>
@@ -199,7 +203,7 @@
   <string name="maximum_limit_alert">500개를 초과하여 표시할 수 없습니다</string>
   <string name="enter_valid">유효한 번호를 입력하십시오</string>
   <string name="cannot_be_zero">업로드 제한은 0으로 둘 수 없습니다</string>
-  <string name="set_limit" fuzzy="true">최근 업로드 제한 설정</string>
+  <string name="set_limit">최근 업로드 제한</string>
   <string name="login_failed_2fa_not_supported">2요소 인증은 현재 지원하지 않습니다.</string>
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
   <string name="commons_logo">공용 로고</string>
@@ -260,7 +264,7 @@
   <string name="null_url">오류! URL을 찾을 수 없습니다</string>
   <string name="nominate_deletion">삭제 신청</string>
   <string name="nominated_for_deletion">이 그림은 삭제가 신청되었습니다.</string>
-  <string name="nominated_see_more">&lt;u&gt;상세 내용은 웹페이지를 참고하십시오&lt;/u&gt;</string>
+  <string name="nominated_see_more">상세 내용은 웹페이지를 참고하십시오</string>
   <string name="view_browser">브라우저에서 보기</string>
   <string name="skip_login">건너뛰기</string>
   <string name="navigation_item_login">로그인</string>
@@ -270,10 +274,10 @@
   <string name="copy_wikicode">위키텍스트를 클립보드에 복사</string>
   <string name="wikicode_copied">위키텍스트를 클립보드에 복사했습니다</string>
   <string name="nearby_location_has_not_changed">위치가 변경되지 않았습니다.</string>
-  <string name="nearby_location_not_available">위치를 사용할 수 없습니다.</string>
+  <string name="nearby_location_not_available" fuzzy="true">위치를 사용할 수 없습니다.</string>
   <string name="location_permission_rationale_nearby">주변 장소의 목록을 표시하기 위한 권한이 필요합니다.</string>
-  <string name="get_directions">방향을 잡다</string>
-  <string name="read_article">문서를 읽으세요</string>
+  <string name="get_directions">방향 얻기</string>
+  <string name="read_article">문서 읽기</string>
   <string name="notifications_welcome">%1$s님, 위키미디어 공용에 오신 것을 환영합니다! 반갑습니다.</string>
   <string name="notifications_talk_page_message">%1$s님이 당신의 사용자 토론 문서에 글을 남겼습니다</string>
   <string name="notifications_thank_you_edit">편집해 주셔서 감사합니다</string>
@@ -283,14 +287,14 @@
   <string name="nearby_wikidata">위키데이터</string>
   <string name="nearby_wikipedia">위키백과</string>
   <string name="nearby_commons">공용</string>
-  <string name="about_rate_us">&lt;u&gt;평가&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">평가</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">강좌 건너뛰기</string>
   <string name="no_internet">인터넷 사용 불가</string>
   <string name="internet_established">인터넷 사용 가능</string>
   <string name="error_notifications">알림 가져오기 오류</string>
   <string name="no_notifications">알림이 없습니다</string>
-  <string name="about_translate">&lt;u&gt;번역&lt;/u&gt;</string>
+  <string name="about_translate">번역</string>
   <string name="about_translate_title">언어</string>
   <string name="about_translate_message">번역 제출을 위한 언어를 선택하십시오</string>
   <string name="about_translate_proceed">진행</string>
@@ -304,8 +308,8 @@
   <string name="error_loading_images">그림을 불러오는 동안 오류가 발생했습니다.</string>
   <string name="image_uploaded_by">올린이: %1$s</string>
   <string name="block_notification">공용 편집이 차단되어 있습니다</string>
-  <string name="appwidget_img">오늘의 사진</string>
-  <string name="app_widget_heading">오늘의 사진</string>
+  <string name="appwidget_img">오늘의 이미지</string>
+  <string name="app_widget_heading">오늘의 이미지</string>
   <string name="menu_search_button">검색</string>
   <string name="search_commons">공용 검색</string>
   <string name="images_not_found">%1$s와(과) 일치하는 그림이 없습니다</string>
@@ -316,7 +320,8 @@
   <string name="error_loading_subcategories">하위 분류를 불러오는 동안 오류가 발생했습니다.</string>
   <string name="search_tab_title_media">미디어</string>
   <string name="search_tab_title_categories">분류</string>
-  <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 성공적으로 추가했습니다!</string>
+  <string name="explore_tab_title_mobile">모바일을 통해 업로드됨</string>
+  <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 추가했습니다!</string>
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
   <string name="menu_set_wallpaper">배경화면으로 설정</string>
   <string name="wallpaper_set_successfully">배경화면을 성공적으로 설정했습니다!</string>
@@ -353,6 +358,7 @@
   <string name="Achievements">성과</string>
   <string name="statistics">통계</string>
   <string name="statistics_featured">알찬 그림</string>
+  <string name="statistics_wikidata_edits">\"주변 장소\" 경유 이미지</string>
   <string name="level">레벨</string>
   <string name="images_uploaded">사진 업로드됨</string>
   <string name="achievements_share_message">친구와 성과를 공유하세요!</string>
@@ -362,6 +368,10 @@
   <string name="images_used_explanation">위키미디어 문서에 사용된, 공용에 업로드한 그림 수</string>
   <string name="error_occurred">오류가 발생했습니다!</string>
   <string name="notifications_channel_name_all">공용 알림</string>
+  <string name="preference_author_name_toggle">사용자 지정 저자 이름을 사용합니다</string>
+  <string name="preference_author_name_toggle_summary">사진을 업로드하는 중에 사용자 이름 대신 사용자 지정 저자 이름을 사용합니다</string>
+  <string name="preference_author_name">저자 이름 사용자 지정</string>
+  <string name="preference_author_name_summary">업로드할 때 사용자 이름 대신 사용할 사용자 지정 저자 이름</string>
   <string name="contributions_fragment">기여</string>
   <string name="nearby_fragment">근처</string>
   <string name="notifications">알림</string>
@@ -415,13 +425,71 @@
   <string name="unable_to_display_nearest_place">위치 권한 없이 사진이 필요한 주변 장소를 표시할 수 없습니다</string>
   <string name="never_ask_again">다시는 묻지 않음</string>
   <string name="display_location_permission_title">위치 권한 표시</string>
+  <string name="this_function_needs_network_connection">이 기능에는 네트워크 연결이 필요합니다. 연결 설정을 확인해 주십시오.</string>
   <string name="bad_token_error_proposed_solution">편집 토큰에 문제가 있어서 업로드를 실패했습니다. 로그아웃한 다음 다시 로그인해 보십시오.</string>
   <string name="error_processing_image">이미지를 처리하는 동안 오류가 발생했습니다. 다시 시도해 주십시오!</string>
-  <string name="no_notification" fuzzy="true">읽지 않은 알림이 없습니다</string>
-  <string name="no_archived_notification" fuzzy="true">보관된 알림이 없습니다</string>
+  <string name="getting_edit_token">편집을 위한 토큰을 가져옵니다</string>
+  <string name="check_category_adding_template">분류 검사를 위한 틀을 추가합니다</string>
+  <string name="check_category_notification_title">%1$s을(를) 위한 분류 검사를 요청합니다</string>
+  <string name="check_category_edit_summary">분류 검사를 요청합니다</string>
+  <string name="check_category_success_title">분류 검사 요청됨</string>
+  <string name="check_category_failure_title">분류 검사 요청이 동작하지 못했습니다</string>
+  <string name="check_category_success_message" fuzzy="true">%1$s을(를) 위한 분류 검사 요청을 성공했습니다</string>
+  <string name="check_category_failure_message">%1$s을(를) 위한 분류 검사를 요청하지 못했습니다</string>
+  <string name="check_category_toast">%1$s을(를) 위한 분류 검사를 요청합니다</string>
+  <string name="nominate_for_deletion_edit_file_page">파일에 삭제 메시지를 추가합니다</string>
+  <string name="nominate_for_deletion_done">완료</string>
+  <string name="notsure">확실치 않음</string>
+  <string name="review_thanks">기여자에게 감사를 표하시겠습니까?</string>
+  <string name="review_category_explanation">이 이미지는 %1$s 분류에 속해 있습니다.</string>
+  <string name="review_thanks_yes_button_text">예</string>
+  <string name="review_thanks_no_button_text">다음 이미지</string>
+  <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
+  <string name="review_image_explanation">이미지를 검토하고 위키미디어 공용의 품질을 개선할 수 있습니다.\n 4가지 검토 변수가 있습니다:\n - 이 이미지가 범위 내에 있는가? \n - 이 이미지가 저작권 규정을 준수하고 있는가? \n - 이 이미지가 올바르게 분류되어 있는가? \n - 모든 것이 문제 없다면 기여자에게 감사를 표할 수도 있습니다.</string>
+  <string name="no_notification">읽지 않은 알림이 없습니다</string>
+  <string name="no_archived_notification">보관된 알림이 없습니다</string>
   <string name="menu_option_archived">보관한 항목 보기</string>
   <string name="menu_option_unread">읽지 않은 항목 보기</string>
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>
   <string name="image_chooser_title">업로드할 이미지 선택</string>
   <string name="please_wait">기다려 주십시오...</string>
+  <string name="previous_image_title_description">이전의 제목 및 설명 복사</string>
+  <string name="skip_image">이 이미지 건너뛰기</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">다운로드를 실패했습니다!! 외장 스토리지 권한 없이 파일을 다운로드할 수 없습니다.</string>
+  <string name="manage_exif_tags">EXIF 태그 관리</string>
+  <string name="exif_tag_name_author">만든이</string>
+  <string name="exif_tag_name_copyright">저작권</string>
+  <string name="exif_tag_name_location">위치</string>
+  <string name="exif_tag_name_cameraModel">카메라 모델</string>
+  <string name="exif_tag_name_lensModel">렌즈 모델</string>
+  <string name="exif_tag_name_serialNumbers">일련 번호</string>
+  <string name="exif_tag_name_software">소프트웨어</string>
+  <string name="share_via">앱 공유...</string>
+  <string name="image_info">이미지 정보</string>
+  <string name="no_categories_found">분류가 없습니다</string>
+  <string name="upload_cancelled">업로드 취소됨</string>
+  <string name="default_description_language">기본 설명 언어</string>
+  <string name="delete_helper_show_deletion_title_success">성공</string>
+  <string name="delete_helper_show_deletion_title_failed">실패</string>
+  <string name="delete_helper_ask_spam_selfie">셀카</string>
+  <string name="delete_helper_ask_spam_other">기타</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷의 임의 사진</string>
+  <string name="delete_helper_ask_reason_copyright_logo">로고</string>
+  <string name="delete_helper_ask_reason_copyright_other">기타</string>
+  <string name="share_image_via">다음을 통해 이미지 공유</string>
+  <string name="no_achievements_yet">아직 기여가 없습니다</string>
+  <string name="account_created">계정을 만들었습니다!</string>
+  <string name="text_copy">텍스트가 클립보드에 복사되었습니다</string>
+  <string name="notification_mark_read">알림을 읽은 것으로 표시</string>
+  <string name="some_error">오류가 있었습니다!</string>
+  <string name="place_state">장소 상태:</string>
+  <string name="place_state_exists">존재함</string>
+  <string name="place_state_needs_photo">사진 필요</string>
+  <string name="place_type">장소 유형:</string>
+  <string name="nearby_search_hint">다리, 박물관, 호텔 등.</string>
+  <string name="title_app_shortcut_explore">찾아보기</string>
+  <string name="title_app_shortcut_setting">설정</string>
+  <string name="wallpaper_set_unsuccessfully">무언가 잘못되었습니다. 배경화면을 설정하지 못했습니다</string>
+  <string name="setting_wallpaper_dialog_title">배경화면으로 설정</string>
+  <string name="setting_wallpaper_dialog_message">배경화면을 설정 중입니다. 기다려 주십시오...</string>
 </resources>

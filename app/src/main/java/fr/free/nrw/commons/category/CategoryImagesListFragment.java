@@ -2,7 +2,6 @@ package fr.free.nrw.commons.category;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,8 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -25,11 +26,10 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.explore.categories.ExploreActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -57,7 +57,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
     private boolean isLoading = true;
     private String categoryName = null;
 
-    @Inject CategoryImageController controller;
+    @Inject MediaClient mediaClient;
     @Inject
     @Named("default_preferences")
     JsonKvStore categoryKvStore;
@@ -102,7 +102,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
      * @param keyword
      */
     private void resetQueryContinueValues(String keyword) {
-        categoryKvStore.remove(keyword);
+        categoryKvStore.remove("query_continue_" + keyword);
     }
 
     /**
@@ -117,7 +117,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
 
         isLoading = true;
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
+        compositeDisposable.add(mediaClient.getMediaListFromCategory(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -223,7 +223,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         }
 
         progressBar.setVisibility(VISIBLE);
-        compositeDisposable.add(Observable.fromCallable(() -> controller.getCategoryImages(categoryName))
+        compositeDisposable.add(mediaClient.getMediaListFromCategory(categoryName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -250,22 +250,9 @@ public class CategoryImagesListFragment extends DaggerFragment {
                 return;
             }
             gridAdapter.addItems(collection);
-            try {
-                ((CategoryImagesActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try {
-                ((CategoryDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            try {
-                ((ExploreActivity) getContext()).viewPagerNotifyDataSetChanged();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+            ((CategoryImagesCallback) getContext()).viewPagerNotifyDataSetChanged();
         }
+
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);

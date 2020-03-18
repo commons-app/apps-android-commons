@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.filepicker;
 
 import android.content.Context;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 
 public class FilePickerConfiguration implements Constants {
 
@@ -9,13 +9,6 @@ public class FilePickerConfiguration implements Constants {
 
     FilePickerConfiguration(Context context) {
         this.context = context;
-    }
-
-    public FilePickerConfiguration setImagesFolderName(String folderName) {
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit().putString(BundleKeys.FOLDER_NAME, folderName)
-                .apply();
-        return this;
     }
 
     public FilePickerConfiguration setAllowMultiplePickInGallery(boolean allowMultiple) {
@@ -28,13 +21,6 @@ public class FilePickerConfiguration implements Constants {
     public FilePickerConfiguration setCopyTakenPhotosToPublicGalleryAppFolder(boolean copy) {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
                 .putBoolean(BundleKeys.COPY_TAKEN_PHOTOS, copy)
-                .apply();
-        return this;
-    }
-
-    public FilePickerConfiguration setCopyPickedImagesToPublicGalleryAppFolder(boolean copy) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit()
-                .putBoolean(BundleKeys.COPY_PICKED_IMAGES, copy)
                 .apply();
         return this;
     }

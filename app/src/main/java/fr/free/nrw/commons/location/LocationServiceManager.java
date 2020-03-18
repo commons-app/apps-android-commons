@@ -1,19 +1,11 @@
 package fr.free.nrw.commons.location;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +14,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
-    public static final int LOCATION_REQUEST = 1;
 
     // Maybe these values can be improved for efficiency
     private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 100;
@@ -42,78 +33,6 @@ public class LocationServiceManager implements LocationListener {
      */
     public LocationServiceManager(Context context) {
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-    }
-
-    /**
-     * Returns the current status of the location provider.
-     *
-     * @return true if the location provider is enabled
-     */
-    public boolean isProviderEnabled() {
-        return (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
-    }
-
-    /**
-     * Returns whether the location permission is granted.
-     * @return true if the location permission is granted
-     */
-    public boolean isLocationPermissionGranted(@NonNull Context context) {
-        return ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    /**
-     * Requests the location permission to be granted.
-     *
-     * @param activity the activity
-     */
-    public void requestPermissions(Activity activity) {
-        if (activity.isFinishing()) {
-            return;
-        }
-        ActivityCompat.requestPermissions(activity,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                LOCATION_REQUEST);
-    }
-
-    /**
-     * The permission explanation dialog box is now displayed just once for a particular activity. We are subscribing
-     * to updates from multiple providers so its important to show the dialog just once. Otherwise it will be displayed
-     * once for every provider, which in our case currently is 2.
-     * @param activity
-     * @return
-     */
-    public boolean isPermissionExplanationRequired(Activity activity) {
-        if (activity.isFinishing()) {
-            return false;
-        }
-        boolean showRequestPermissionRationale = ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION);
-        if (showRequestPermissionRationale && !locationExplanationDisplayed.contains(activity)) {
-            locationExplanationDisplayed.add(activity);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Gets the last known location in cases where there wasn't time to register a listener
-     * (e.g. when Location permission just granted)
-     * @return last known LatLng
-     */
-    @SuppressLint("MissingPermission")
-    public LatLng getLKL(@NonNull Context context) {
-        if (isLocationPermissionGranted(context)) {
-            Location lastKL = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (lastKL == null) {
-                lastKL = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            }
-            if (lastKL == null) {
-                return null;
-            }
-            return LatLng.from(lastKL);
-        } else {
-            return null;
-        }
     }
 
     public LatLng getLastLocation() {
@@ -173,7 +92,6 @@ public class LocationServiceManager implements LocationListener {
         // Check whether the new location fix is newer or older
         long timeDelta = location.getTime() - currentBestLocation.getTime();
         boolean isSignificantlyNewer = timeDelta > MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
-        boolean isSignificantlyOlder = timeDelta < -MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
         boolean isNewer = timeDelta > 0;
 
         // Check whether the new location fix is more or less accurate
@@ -295,12 +213,21 @@ public class LocationServiceManager implements LocationListener {
         Timber.d("Provider %s disabled", provider);
     }
 
+    public boolean isNetworkProviderEnabled() {
+        return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    public boolean isGPSProviderEnabled() {
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
     public enum LocationChangeType{
         LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
         LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving
         LOCATION_MEDIUM_CHANGED,      //Between slight and significant changes, will be used for nearby card view updates.
         LOCATION_NOT_CHANGED,
         PERMISSION_JUST_GRANTED,
-        MAP_UPDATED
+        MAP_UPDATED,
+        SEARCH_CUSTOM_AREA
     }
 }

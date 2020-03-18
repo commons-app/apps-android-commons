@@ -1,55 +1,48 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.Context;
-import android.net.Uri;
-
-import com.drew.imaging.ImageMetadataReader;
-import com.drew.imaging.ImageProcessingException;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.Tag;
-import com.drew.metadata.iptc.IptcDirectory;
-
+import fr.free.nrw.commons.utils.ImageUtils;
+import io.reactivex.Single;
+import java.io.FileInputStream;
 import java.io.IOException;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.utils.ImageUtils;
-import io.reactivex.Single;
-
+/**
+ * We want to discourage users from uploading images to Commons that were taken from Facebook. This
+ * attempts to detect whether an image was downloaded from Facebook by heuristically searching for
+ * metadata that is specific to images that come from Facebook.
+ */
 @Singleton
 public class ReadFBMD {
 
-    @Inject
-    public ReadFBMD() {
+  @Inject
+  public ReadFBMD() {
+  }
 
-    }
+  public Single<Integer> processMetadata(String path) {
+    return Single.fromCallable(() -> {
+      try {
+        int psBlockOffset;
+        int fbmdOffset;
 
-    public Single<Integer> processMetadata(Context context, Uri contentUri) throws IOException {
-        Metadata readMetadata = null;
-        try {
-            readMetadata = ImageMetadataReader.readMetadata(context.getContentResolver().openInputStream(contentUri));
-        } catch (ImageProcessingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        try (FileInputStream fs = new FileInputStream(path)) {
+          byte[] bytes = new byte[4096];
+          fs.read(bytes);
+          fs.close();
+          String fileStr = new String(bytes);
+          psBlockOffset = fileStr.indexOf("8BIM");
+          fbmdOffset = fileStr.indexOf("FBMD");
         }
 
-        IptcDirectory iptcDirectory = readMetadata != null ? readMetadata.getFirstDirectoryOfType(IptcDirectory.class) : null;
-        if (iptcDirectory == null) {
-            return Single.just(ImageUtils.IMAGE_OK);
+        if (psBlockOffset > 0 && fbmdOffset > 0
+            && fbmdOffset > psBlockOffset && fbmdOffset - psBlockOffset < 0x80) {
+          return ImageUtils.FILE_FBMD;
         }
-        /**
-         * We parse through all the tags in the IPTC directory  if the tagname equals "Special Instructions".
-         * And the description string starts with FBMD.
-         * Then the source of image is facebook
-         * */
-        for (Tag tag : iptcDirectory.getTags()) {
-            if (tag.getTagName().equals("Special Instructions") && tag.getDescription().substring(0, 4).equals("FBMD")) {
-                return Single.just(ImageUtils.FILE_FBMD);
-            }
-        }
-        return Single.just(ImageUtils.IMAGE_OK);
-    }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return ImageUtils.IMAGE_OK;
+    });
+  }
 }
 

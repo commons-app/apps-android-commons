@@ -1,120 +1,81 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.Context;
-import android.database.Cursor;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.cursoradapter.widget.CursorAdapter;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.model.DisplayableContribution;
-import fr.free.nrw.commons.upload.UploadService;
-import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
-import timber.log.Timber;
 
-import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+/**
+ * Represents The View Adapter for the List of Contributions  
+ */
+public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionViewHolder> {
 
-class ContributionsListAdapter extends CursorAdapter {
+    private Callback callback;
+    private List<Contribution> contributions;
 
-    private final ContributionDao contributionDao;
-    private UploadService uploadService;
-
-    public ContributionsListAdapter(Context context,
-                                    Cursor c,
-                                    int flags,
-                                    ContributionDao contributionDao, EventListener listener) {
-        super(context, c, flags);
-        this.contributionDao = contributionDao;
-        this.listener=listener;
-    }
-
-    public void setUploadService(UploadService uploadService) {
-        this.uploadService = uploadService;
-    }
-
-    @Override
-    public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        View parent = LayoutInflater.from(context)
-                .inflate(R.layout.layout_contribution, viewGroup, false);
-        parent.setTag(new ContributionViewHolder(parent));
-        return parent;
-    }
-
-    @Override
-    public void bindView(View view, Context context, Cursor cursor) {
-        final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
-        final Contribution contribution = contributionDao.fromCursor(cursor);
-
-        DisplayableContribution displayableContribution = new DisplayableContribution(contribution,
-                cursor.getPosition(),
-                new DisplayableContribution.ContributionActions() {
-                    @Override
-                    public void retryUpload() {
-                        ContributionsListAdapter.this.retryUpload(view.getContext(), contribution);
-                    }
-
-                    @Override
-                    public void deleteUpload() {
-                        ContributionsListAdapter.this.deleteUpload(view.getContext(), contribution);
-                    }
-
-                    @Override
-                    public void onClick() {
-                        ContributionsListAdapter.this.openMediaDetail(contribution);
-                    }
-                });
-        views.bindModel(context, displayableContribution);
+    public ContributionsListAdapter(Callback callback) {
+        this.callback = callback;
+        contributions = new ArrayList<>();
     }
 
     /**
-     * Retry upload when it is failed
-     * @param contribution contribution to be retried
+     * Creates the new View Holder which will be used to display items(contributions)
+     * using the onBindViewHolder(viewHolder,position) 
      */
-    private void retryUpload(@NonNull Context context, Contribution contribution) {
-        if (NetworkUtils.isInternetConnectionEstablished(context)) {
-            if (contribution.getState() == STATE_FAILED
-                    && uploadService!= null) {
-                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
-                Timber.d("Restarting for %s", contribution.toString());
-            } else {
-                Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
-            }
-        } else {
-            ViewUtil.showLongToast(context, R.string.this_function_needs_network_connection);
+    @NonNull
+    @Override
+    public ContributionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ContributionViewHolder viewHolder = new ContributionViewHolder(
+                LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.layout_contribution, parent, false), callback);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ContributionViewHolder holder, int position) {
+        final Contribution contribution = contributions.get(position);
+        if (TextUtils.isEmpty(contribution.getThumbUrl())
+            && contribution.getState() == Contribution.STATE_COMPLETED) {
+            callback.fetchMediaUriFor(contribution);
         }
 
+        holder.init(position, contribution);
     }
 
-    /**
-     * Delete a failed upload attempt
-     * @param contribution contribution to be deleted
-     */
-    private void deleteUpload(@NonNull Context context, Contribution contribution) {
-        if (NetworkUtils.isInternetConnectionEstablished(context)) {
-            if (contribution.getState() == STATE_FAILED) {
-                Timber.d("Deleting failed contrib %s", contribution.toString());
-                contributionDao.delete(contribution);
-            } else {
-                Timber.d("Skipping deletion for non-failed contrib %s", contribution.toString());
-            }
-        } else {
-            ViewUtil.showLongToast(context, R.string.this_function_needs_network_connection);
-        }
-
+    @Override
+    public int getItemCount() {
+        return contributions.size();
     }
 
-    private void openMediaDetail(Contribution contribution){
-        listener.onEvent(contribution.getFilename());
-
+    public void setContributions(@NonNull List<Contribution> contributionList) {
+        contributions = contributionList;
+        notifyDataSetChanged();
     }
-    EventListener listener;
 
-    public interface EventListener {
-        void onEvent(String filename);
+    @Override
+    public long getItemId(int position) {
+        return contributions.get(position)._id;
+    }
+
+    public interface Callback {
+
+        void retryUpload(Contribution contribution);
+
+        void deleteUpload(Contribution contribution);
+
+        void openMediaDetail(int contribution);
+
+        Contribution getContributionForPosition(int position);
+
+        void fetchMediaUriFor(Contribution contribution);
     }
 }

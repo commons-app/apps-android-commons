@@ -53,24 +53,14 @@ class NavigationBaseActivityTest {
         openNavigationDrawerAndNavigateTo(R.id.action_feedback)
     }
 
-    /**
-     * Clicks 'Explore' in the navigation drawer twice, then clicks 'home'
-     * Testing to avoid regression of #2200
-     */
-    @Test
-    fun doubleNavigateToExploreThenReturnHome() {
-        // Explore
-        openNavigationDrawerAndNavigateTo(R.id.action_explore)
-
-        // Explore
-        openNavigationDrawerAndNavigateTo(R.id.action_explore)
-
-        // Home
-        openNavigationDrawerAndNavigateTo(R.id.action_home)
-    }
-
     private fun openNavigationDrawerAndNavigateTo(menuItemId: Int) {
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
+        UITestHelper.sleep(500)
         onView(withId(R.id.navigation_view)).perform(NavigationViewActions.navigateTo(menuItemId))
+    }
+  
+    @Test
+    fun orientationChange() {
+        UITestHelper.changeOrientation(activityRule)
     }
 }

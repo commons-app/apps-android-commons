@@ -2,12 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
 import android.net.Uri;
-import androidx.transition.TransitionManager;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.TransitionManager;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.pedrogomez.renderers.Renderer;
@@ -33,6 +34,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.theme.NavigationBaseActivity.startActivityWithFlags;
@@ -116,9 +118,12 @@ public class PlaceRenderer extends Renderer<Place> {
                     ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(lastPosition, buttonLayout.getHeight());
                 }
             }
-
+            if (onBookmarkClick == null) {
+                ((NearbyParentFragment) fragment).centerMapToPlace(place);
+            }
         };
         view.setOnClickListener(listener);
+
         view.requestFocus();
         view.setOnFocusChangeListener((view1, hasFocus) -> {
             if (!hasFocus && buttonLayout.isShown()) {
@@ -187,7 +192,8 @@ public class PlaceRenderer extends Renderer<Place> {
                     onBookmarkClick.onClick();
                 }
                 else {
-                    ((NearbyMapFragment)((NearbyFragment)((NearbyListFragment)fragment).getParentFragment()).getChildFragmentManager().findFragmentByTag(NearbyMapFragment.class.getSimpleName())).updateMarker(isBookmarked, place);
+                    ((NearbyParentFragment) (fragment.getParentFragment())).
+                            updateMarker(isBookmarked, place, null);
                 }
             }
         });
@@ -223,13 +229,7 @@ public class PlaceRenderer extends Renderer<Place> {
 
         icon.setImageResource(place.getLabel().getIcon());
 
-        directionsButton.setOnClickListener(view -> {
-            //Open map app at given position
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, place.location.getGmmIntentUri());
-            if (mapIntent.resolveActivity(view.getContext().getPackageManager()) != null) {
-                view.getContext().startActivity(mapIntent);
-            }
-        });
+        directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getContext(), this.place.getLocation()));
 
         iconOverflow.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
         iconOverflow.setOnClickListener(v -> popupMenuListener());

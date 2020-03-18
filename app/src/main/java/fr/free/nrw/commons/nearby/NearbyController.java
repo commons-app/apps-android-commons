@@ -3,9 +3,11 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,8 +30,14 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
-    public static double searchedRadius = 10.0; //in kilometers
-    public static LatLng currentLocation;
+    public static double currentLocationSearchRadius = 10.0; //in kilometers
+    public static LatLng currentLocation; // Users latest fetched location
+    public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
+    public static double latestSearchRadius = 10.0; // Any last search radius except closest result search
+
+    public static List<MarkerPlaceGroup> markerLabelList = new ArrayList<>();
+    public static Map<Boolean, Marker> markerExistsMap;
+    public static Map<Boolean, Marker> markerNeedPicMap;
 
     @Inject
     public NearbyController(NearbyPlaces nearbyPlaces) {
@@ -41,21 +49,21 @@ public class NearbyController {
      * Prepares Place list to make their distance information update later.
      *
      * @param curLatLng current location for user
-     * @param latLangToSearchAround the location user wants to search around
+     * @param searchLatLng the location user wants to search around
      * @param returnClosestResult if this search is done to find closest result or all results
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng latLangToSearchAround, boolean returnClosestResult, boolean checkingAroundCurrentLocation) throws IOException {
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean returnClosestResult, boolean checkingAroundCurrentLocation) throws IOException {
 
-        Timber.d("Loading attractions near %s", latLangToSearchAround);
+        Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
-        if (latLangToSearchAround == null) {
+        if (searchLatLng == null) {
             Timber.d("Loading attractions nearby, but curLatLng is null");
             return null;
         }
-        List<Place> places = nearbyPlaces.radiusExpander(latLangToSearchAround, Locale.getDefault().getLanguage(), returnClosestResult);
+        List<Place> places = nearbyPlaces.radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
@@ -91,13 +99,25 @@ public class NearbyController {
                         }
                 );
             }
+            nearbyPlacesInfo.curLatLng = curLatLng;
+            nearbyPlacesInfo.searchLatLng = searchLatLng;
             nearbyPlacesInfo.placeList = places;
             nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
-            if (!returnClosestResult && checkingAroundCurrentLocation) {
-                // Do not update searched radius, if controller is used for nearby card notification
-                searchedRadius = nearbyPlaces.radius;
-                currentLocation = curLatLng;
+
+            // Returning closes result means we use the controller for nearby card. So no need to set search this area flags
+            if (!returnClosestResult) {
+                // To remember latest search either around user or any point on map
+                latestSearchLocation = searchLatLng;
+                latestSearchRadius = nearbyPlaces.radius*1000; // to meter
+
+                // Our radius searched around us, will be used to understand when user search their own location, we will follow them
+                if (checkingAroundCurrentLocation) {
+                    currentLocationSearchRadius = nearbyPlaces.radius*1000; // to meter
+                    currentLocation = curLatLng;
+                }
             }
+
+
             return nearbyPlacesInfo;
         }
         else {
@@ -112,7 +132,7 @@ public class NearbyController {
      * @param placeList list of nearby places in Place data type
      * @return Place list that holds nearby places
      */
-    static List<Place> loadAttractionsFromLocationToPlaces(
+    public static List<Place> loadAttractionsFromLocationToPlaces(
             LatLng curLatLng,
             List<Place> placeList) {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
@@ -144,6 +164,8 @@ public class NearbyController {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
         VectorDrawableCompat vectorDrawable = null;
+        VectorDrawableCompat vectorDrawableGreen = null;
+        VectorDrawableCompat vectorDrawableGrey = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_bookmark_marker, context.getTheme()
@@ -177,13 +199,18 @@ public class NearbyController {
         vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
-                    context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
-            );
+                    context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme());
+            vectorDrawableGreen = VectorDrawableCompat.create(
+                    context.getResources(), R.drawable.ic_custom_map_marker_green, context.getTheme());
+            vectorDrawableGrey = VectorDrawableCompat.create(
+                    context.getResources(), R.drawable.ic_custom_map_marker_grey, context.getTheme());
         } catch (Resources.NotFoundException e) {
             // ignore when running tests.
         }
         if (vectorDrawable != null) {
             Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+            Bitmap iconGreen = UiUtils.getBitmap(vectorDrawableGreen);
+            Bitmap iconGrey = UiUtils.getBitmap(vectorDrawableGrey);
 
             for (Place place : placeList) {
                 String distance = formatDistanceBetween(curLatLng, place.location);
@@ -196,8 +223,21 @@ public class NearbyController {
                                 place.location.getLatitude(),
                                 place.location.getLongitude()));
                 nearbyBaseMarker.place(place);
-                nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                        .fromBitmap(icon));
+                // Check if string is only spaces or empty, if so place doesn't have any picture
+                if (!place.pic.trim().isEmpty()) {
+                    if (iconGreen != null) {
+                        nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                                .fromBitmap(iconGreen));
+                    }
+                } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+                    if (iconGrey != null) {
+                        nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                                .fromBitmap(iconGrey));
+                    }
+                } else {
+                    nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                            .fromBitmap(icon));
+                }
 
                 baseMarkerOptions.add(nearbyBaseMarker);
             }
@@ -212,5 +252,7 @@ public class NearbyController {
     public class NearbyPlacesInfo {
         public List<Place> placeList; // List of nearby places
         public LatLng[] boundaryCoordinates; // Corners of nearby area
+        public LatLng curLatLng; // Current location when this places are populated
+        public LatLng searchLatLng; // Search location for finding this places
     }
 }

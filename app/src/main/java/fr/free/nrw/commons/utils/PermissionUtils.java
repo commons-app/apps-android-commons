@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
+
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
@@ -26,7 +27,7 @@ public class PermissionUtils {
      It open the app settings from where the user can manually give us the required permission.
      * @param activity
      */
-    public static void askUserToManuallyEnablePermissionFromSettings(Activity activity) {
+    private static void askUserToManuallyEnablePermissionFromSettings(Activity activity) {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
         intent.setData(uri);
@@ -49,6 +50,9 @@ public class PermissionUtils {
      * Checks for a particular permission and runs the runnable to perform an action when the permission is granted
      * Also, it shows a rationale if needed
      *
+     * rationaleTitle and rationaleMessage can be invalid @StringRes. If the value is -1 then no permission rationale
+     * will be displayed and permission would be requested
+     *
      * Sample usage:
      *
      * PermissionUtils.checkPermissionsAndPerformAction(activity,
@@ -57,49 +61,87 @@ public class PermissionUtils {
      *                 R.string.storage_permission_title,
      *                 R.string.write_storage_permission_rationale);
      *
+     * If you don't want the permission rationale to be shown then use:
+     *
+     * PermissionUtils.checkPermissionsAndPerformAction(activity,
+     *                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+     *                 () -> initiateCameraUpload(activity),
+     *                 - 1, -1);
+     *
+     *
      *
      * @param activity activity requesting permissions
      * @param permission the permission being requests
      * @param onPermissionGranted the runnable to be executed when the permission is granted
+     * @param rationaleTitle rationale title to be displayed when permission was denied. It can be an invalid @StringRes
+     * @param rationaleMessage rationale message to be displayed when permission was denied. It can be an invalid @StringRes
+     */
+    public static void checkPermissionsAndPerformAction(Activity activity, String permission,
+        Runnable onPermissionGranted, @StringRes int rationaleTitle,
+        @StringRes int rationaleMessage) {
+        checkPermissionsAndPerformAction(activity, permission, onPermissionGranted, null,
+            rationaleTitle, rationaleMessage);
+    }
+
+    /**
+     * Checks for a particular permission and runs the corresponding runnables to perform an action when the permission is granted/denied
+     * Also, it shows a rationale if needed
+     *
+     * Sample usage:
+     *
+     * PermissionUtils.checkPermissionsAndPerformAction(activity,
+     *                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+     *                 () -> initiateCameraUpload(activity),
+     *                 () -> showMessage(),
+     *                 R.string.storage_permission_title,
+     *                 R.string.write_storage_permission_rationale);
+     *
+     *
+     * @param activity activity requesting permissions
+     * @param permission the permission being requests
+     * @param onPermissionGranted the runnable to be executed when the permission is granted
+     * @param onPermissionDenied the runnable to be executed when the permission is denied(but not permanently)
      * @param rationaleTitle rationale title to be displayed when permission was denied
      * @param rationaleMessage rationale message to be displayed when permission was denied
      */
-    public static void checkPermissionsAndPerformAction(Activity activity,
-                                                  String permission,
-                                                  Runnable onPermissionGranted,
-                                                  @StringRes int rationaleTitle,
-                                                  @StringRes int rationaleMessage) {
+    public static void checkPermissionsAndPerformAction(Activity activity, String permission,
+        Runnable onPermissionGranted, Runnable onPermissionDenied, @StringRes int rationaleTitle,
+        @StringRes int rationaleMessage) {
         Dexter.withActivity(activity)
-                .withPermission(permission)
-                .withListener(new BasePermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        onPermissionGranted.run();
-                    }
+            .withPermission(permission)
+            .withListener(new BasePermissionListener() {
+                @Override public void onPermissionGranted(PermissionGrantedResponse response) {
+                    onPermissionGranted.run();
+                }
 
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        if (response.isPermanentlyDenied()) {
-                            DialogUtil.showAlertDialog(activity,
-                                    activity.getString(rationaleTitle),
-                                    activity.getString(rationaleMessage),
-                                    activity.getString(R.string.navigation_item_settings),
-                                    null,
-                                    () -> askUserToManuallyEnablePermissionFromSettings(activity),
-                                    null);
+                @Override public void onPermissionDenied(PermissionDeniedResponse response) {
+                    if (response.isPermanentlyDenied()) {
+                        DialogUtil.showAlertDialog(activity, activity.getString(rationaleTitle),
+                            activity.getString(rationaleMessage),
+                            activity.getString(R.string.navigation_item_settings), null,
+                            () -> askUserToManuallyEnablePermissionFromSettings(activity), null);
+                    } else {
+                        if (null != onPermissionDenied) {
+                            onPermissionDenied.run();
                         }
                     }
+                }
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        DialogUtil.showAlertDialog(activity,
-                                activity.getString(rationaleTitle),
-                                activity.getString(rationaleMessage),
-                                activity.getString(android.R.string.ok),
-                                activity.getString(android.R.string.cancel),
-                                token::continuePermissionRequest,
-                                token::cancelPermissionRequest);
+                @Override
+                public void onPermissionRationaleShouldBeShown(PermissionRequest permission,
+                    PermissionToken token) {
+                    if (rationaleTitle == -1 && rationaleMessage == -1) {
+                        token.continuePermissionRequest();
+                        return;
                     }
-                }).check();
+                    DialogUtil.showAlertDialog(activity, activity.getString(rationaleTitle),
+                        activity.getString(rationaleMessage),
+                        activity.getString(android.R.string.ok),
+                        activity.getString(android.R.string.cancel),
+                        token::continuePermissionRequest, token::cancelPermissionRequest);
+                }
+            })
+            .check();
     }
+
 }

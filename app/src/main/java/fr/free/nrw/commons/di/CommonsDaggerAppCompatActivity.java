@@ -2,9 +2,10 @@ package fr.free.nrw.commons.di;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import javax.inject.Inject;
 
@@ -28,6 +29,10 @@ public abstract class CommonsDaggerAppCompatActivity extends AppCompatActivity i
         return supportFragmentInjector;
     }
 
+    /**
+     * when this Activity is created it injects an instance of this class inside
+     * activityInjector method of ApplicationlessInjection
+     */
     private void inject() {
         ApplicationlessInjection injection = ApplicationlessInjection.getInstance(getApplicationContext());
 

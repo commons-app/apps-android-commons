@@ -1,40 +1,68 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
+
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.ViewHolder;
-import fr.free.nrw.commons.contributions.model.DisplayableContribution;
+import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
+import java.util.HashMap;
+import java.util.Random;
 
-class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
-    @BindView(R.id.contributionImage) MediaWikiImageView imageView;
+public class ContributionViewHolder extends RecyclerView.ViewHolder {
+
+    private final Callback callback;
+    @BindView(R.id.contributionImage)
+    SimpleDraweeView imageView;
     @BindView(R.id.contributionTitle) TextView titleView;
     @BindView(R.id.contributionState) TextView stateView;
     @BindView(R.id.contributionSequenceNumber) TextView seqNumView;
     @BindView(R.id.contributionProgress) ProgressBar progressView;
     @BindView(R.id.failed_image_options) LinearLayout failedImageOptions;
 
-    private DisplayableContribution contribution;
+    private int position;
+    private Contribution contribution;
+    private Random random = new Random();
 
-    ContributionViewHolder(View parent) {
+    ContributionViewHolder(View parent, Callback callback) {
+        super(parent);
         ButterKnife.bind(this, parent);
+        this.callback=callback;
     }
 
-    @Override
-    public void bindModel(Context context, DisplayableContribution contribution) {
+    public void init(int position, Contribution contribution) {
         this.contribution = contribution;
-        imageView.setMedia(contribution);
+        this.position = position;
+        imageView.getHierarchy().setPlaceholderImage(new ColorDrawable(
+            Color.argb(100, random.nextInt(256), random.nextInt(256), random.nextInt(256))));
+        String imageSource = chooseImageSource(contribution.thumbUrl, contribution.getLocalUri());
+        if (!TextUtils.isEmpty(imageSource)) {
+            final ImageRequest imageRequest =
+                ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
+                    .setProgressiveRenderingEnabled(true)
+                    .build();
+            imageView.setImageRequest(imageRequest);
+        }
         titleView.setText(contribution.getDisplayTitle());
 
-        seqNumView.setText(String.valueOf(contribution.getPosition() + 1));
+        seqNumView.setText(String.valueOf(position + 1));
         seqNumView.setVisibility(View.VISIBLE);
 
         switch (contribution.getState()) {
@@ -72,14 +100,26 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
     }
 
     /**
+     * Returns the image source for the image view, first preference is given to thumbUrl if that is
+     * null, moves to local uri and if both are null return null
+     *
+     * @param thumbUrl
+     * @param localUri
+     * @return
+     */
+    @Nullable
+    private String chooseImageSource(String thumbUrl, Uri localUri) {
+        return !TextUtils.isEmpty(thumbUrl) ? thumbUrl :
+            localUri != null ? localUri.toString() :
+                null;
+    }
+
+    /**
      * Retry upload when it is failed
      */
     @OnClick(R.id.retryButton)
     public void retryUpload() {
-        DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
-        if (actions != null) {
-            actions.retryUpload();
-        }
+        callback.retryUpload(contribution);
     }
 
     /**
@@ -87,17 +127,11 @@ class ContributionViewHolder implements ViewHolder<DisplayableContribution> {
      */
     @OnClick(R.id.cancelButton)
     public void deleteUpload() {
-        DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
-        if (actions != null) {
-            actions.deleteUpload();
-        }
+        callback.deleteUpload(contribution);
     }
 
     @OnClick(R.id.contributionImage)
     public void imageClicked(){
-        DisplayableContribution.ContributionActions actions = contribution.getContributionActions();
-        if (actions != null) {
-            actions.onClick();
-        }
+        callback.openMediaDetail(position);
     }
 }

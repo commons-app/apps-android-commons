@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ContentProvider;
 import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 
 import javax.inject.Inject;
@@ -18,6 +19,10 @@ import dagger.android.HasFragmentInjector;
 import dagger.android.HasServiceInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
+/**
+ * Provides injectors for all sorts of components
+ * Ex: Activities, Fragments, Services, ContentProviders
+ */
 public class ApplicationlessInjection
         implements
         HasActivityInjector,

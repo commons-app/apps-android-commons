@@ -3,32 +3,34 @@ package fr.free.nrw.commons.contributions;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.annotation.Retention;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ConfigUtils;
-import fr.free.nrw.commons.utils.StringUtils;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
+@Entity(tableName = "contribution")
 public class  Contribution extends Media {
 
-    //{{According to EXIF data|2009-01-09}}
-    private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to EXIF data|%s}}";
+    //{{According to Exif data|2009-01-09}}
+    private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to Exif data|%s}}";
 
-    //{{date|2009|1|9}} → 9 January 2009
-    private static final String TEMPLATE_DATA_OTHER_SOURCE = "{{date|%d|%d|%d}}";
+    //2009-01-09 → 9 January 2009
+    private static final String TEMPLATE_DATA_OTHER_SOURCE = "%s";
 
     public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
         @Override
@@ -55,17 +57,20 @@ public class  Contribution extends Media {
     public static final String SOURCE_CAMERA = "camera";
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
-
-    private Uri contentUri;
-    private String source;
-    private String editSummary;
-    private int state;
-    private long transferred;
-    private String decimalCoords;
-    private boolean isMultiple;
-    private String wikiDataEntityId;
-    private Uri contentProviderUri;
-    private String dateCreatedSource;
+    @PrimaryKey (autoGenerate = true)
+    @NonNull
+    public long _id;
+    public Uri contentUri;
+    public String source;
+    public String editSummary;
+    public int state;
+    public long transferred;
+    public String decimalCoords;
+    public boolean isMultiple;
+    public String wikiDataEntityId;
+    private String p18Value;
+    public Uri contentProviderUri;
+    public String dateCreatedSource;
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
@@ -91,6 +96,15 @@ public class  Contribution extends Media {
         this.dateCreatedSource = "";
     }
 
+    public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
+                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords, int state) {
+        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
+        this.decimalCoords = decimalCoords;
+        this.editSummary = editSummary;
+        this.dateCreatedSource = "";
+        this.state=state;
+    }
+
     public Contribution(Parcel in) {
         super(in);
         contentUri = in.readParcelable(Uri.class.getClassLoader());
@@ -108,10 +122,6 @@ public class  Contribution extends Media {
         parcel.writeInt(state);
         parcel.writeLong(transferred);
         parcel.writeInt(isMultiple ? 1 : 0);
-    }
-
-    public String getDateCreatedSource() {
-        return dateCreatedSource;
     }
 
     public void setDateCreatedSource(String dateCreatedSource) {
@@ -168,7 +178,7 @@ public class  Contribution extends Media {
                 .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");
 
         String templatizedCreatedDate = getTemplatizedCreatedDate();
-        if (!StringUtils.isNullOrWhiteSpace(templatizedCreatedDate)) {
+        if (!StringUtils.isBlank(templatizedCreatedDate)) {
             buffer.append("|date=").append(templatizedCreatedDate);
         }
 
@@ -200,17 +210,11 @@ public class  Contribution extends Media {
      */
     private String getTemplatizedCreatedDate() {
         if (dateCreated != null) {
+            java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
             if (UploadableFile.DateTimeWithSource.EXIF_SOURCE.equals(dateCreatedSource)) {
-                SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, isoFormat.format(dateCreated)) + "\n";
+                return String.format(Locale.ENGLISH, TEMPLATE_DATE_ACC_TO_EXIF, dateFormat.format(dateCreated)) + "\n";
             } else {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dateCreated);
-                calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return String.format(Locale.ENGLISH, TEMPLATE_DATA_OTHER_SOURCE,
-                        calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH)) + "\n";
+                return String.format(Locale.ENGLISH, TEMPLATE_DATA_OTHER_SOURCE, dateFormat.format(dateCreated)) + "\n";
             }
         }
         return "";
@@ -237,14 +241,6 @@ public class  Contribution extends Media {
         this.source = source;
     }
 
-    public void setLocalUri(Uri localUri) {
-        this.localUri = localUri;
-    }
-
-    public void setDecimalCoords(String decimalCoords) {
-        this.decimalCoords = decimalCoords;
-    }
-
     @NonNull
     private String licenseTemplateFor(String license) {
         switch (license) {
@@ -258,10 +254,6 @@ public class  Contribution extends Media {
                 return "{{self|cc-by-sa-4.0}}";
             case Prefs.Licenses.CC0:
                 return "{{self|cc-zero}}";
-            case Prefs.Licenses.CC_BY:
-                return "{{self|cc-by-3.0}}";
-            case Prefs.Licenses.CC_BY_SA:
-                return "{{self|cc-by-sa-3.0}}";
         }
 
         throw new RuntimeException("Unrecognized license value: " + license);
@@ -280,11 +272,21 @@ public class  Contribution extends Media {
         this.wikiDataEntityId = wikiDataEntityId;
     }
 
+    public String getP18Value() {
+        return p18Value;
+    }
+
+    /**
+     * When the corresponding image property of wiki entity is known as in case of nearby uploads,
+     * it can be set using the setter method
+     * @param p18Value p18 value, image property of the wikidata item
+     */
+    public void setP18Value(String p18Value) {
+        this.p18Value = p18Value;
+    }
+
     public void setContentProviderUri(Uri contentProviderUri) {
         this.contentProviderUri = contentProviderUri;
     }
 
-    public Uri getContentProviderUri() {
-        return contentProviderUri;
-    }
 }

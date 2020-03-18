@@ -1,7 +1,7 @@
-<vector android:height="24dp"
+<vector android:height="@dimen/half_standard_height"
     android:viewportHeight="93.46232"
     android:viewportWidth="102.1415"
-    android:width="24dp"
+    android:width="@dimen/half_standard_height"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:tint="@color/button_color_selector"
     >

@@ -18,11 +18,11 @@
         android:contentDescription="@string/mediaimage_failed"
         />
 
-    <fr.free.nrw.commons.MediaWikiImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/mediaDetailImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:actualImageScaleType="fitCenter"
+        app:actualImageScaleType="centerCrop"
         />
 
     <ScrollView
@@ -40,10 +40,11 @@
 
             <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
                  the detail info offscreen until it's placed properly. May be a better way to do this. -->
-            <fr.free.nrw.commons.media.MediaDetailSpacer
-                android:id="@+id/mediaDetailSpacer"
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/mediaDetailImageView"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/standard_gap" />
+                android:layout_height="@dimen/dimen_250"
+                app:actualImageScaleType="none" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -133,7 +134,7 @@
                         android:textSize="@dimen/normal_text"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <fr.free.nrw.commons.ui.widget.HtmlTextView
                         android:id="@+id/mediaDetailDesc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -177,7 +178,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/description_text_size"
                         app:drawablePadding="@dimen/tiny_gap"
-                        app:drawableStart="@drawable/ic_info_outline_white_24dp"
+                        app:drawableStart="@drawable/ic_info_outline_24dp"
                         tools:text="License link" />
                 </LinearLayout>
 

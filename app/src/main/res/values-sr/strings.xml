@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Abijeet Patro
 * Acamicamacaraca
 * BadDog
 * Liuxinyu970226
@@ -8,6 +9,7 @@
 * Rancher
 * Vukasin005
 * Zoranzoki21
+* Вукан Ц
 * Милан Јелисавчић
 -->
 <resources>
@@ -16,6 +18,7 @@
   <string name="preference_category_appearance">Изглед</string>
   <string name="preference_category_general">Опште</string>
   <string name="preference_category_feedback">Повратне информације</string>
+  <string name="preference_category_privacy">Приватност</string>
   <string name="preference_category_location">Локација</string>
   <string name="app_name">Остава</string>
   <string name="bullet">•</string>
@@ -73,7 +76,7 @@
   <string name="categories_search_text_hint">Претражи категорије</string>
   <string name="menu_save_categories">Сачувај</string>
   <string name="refresh_button">Освежи</string>
-  <string name="display_list_button">Листа</string>
+  <string name="display_list_button">Списак</string>
   <string name="gps_disabled">GPS је онемогућен на вашем уређају. Желите ли да га омогућите?</string>
   <string name="enable_gps">Омогући GPS</string>
   <string name="contributions_subtitle_zero">Још увек нема отпремања</string>
@@ -99,9 +102,9 @@
   <string name="title_activity_category_details">Категорија</string>
   <string name="menu_about">О апликацији</string>
   <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.\n\nАпликација за Викимедијину оставу је апликација отвореног кода која је направљена и која се одржава помоћу грантова и волонтера Викимедијине заједнице. Задужбина Викимедија није укључена у стварање, развој или одржавање апликације.</string>
-  <string name="about_improve">Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
-  <string name="about_privacy_policy">&lt;u&gt;Политика приватности&lt;/u&gt;</string>
-  <string name="about_credits">&lt;u&gt;Заслуге&lt;/u&gt;</string>
+  <string name="about_improve">Направите нови &lt;a href=\"%1$s\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
+  <string name="about_privacy_policy">Политика приватности</string>
+  <string name="about_credits">Заслуге</string>
   <string name="title_activity_about">О апликацији</string>
   <string name="menu_feedback">Пошаљите повратне информације (путем е-поште)</string>
   <string name="no_email_client">Није инсталиран клијент за е-пошту</string>
@@ -110,15 +113,17 @@
   <string name="no_uploads_yet">Још увек нисте отпремили ниједну фотографију.</string>
   <string name="menu_retry_upload">Покушај поново</string>
   <string name="menu_cancel_upload">Откажи</string>
-  <string name="share_license_summary" fuzzy="true">Слика ће се водити под лиценцом %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Слика ће се водити под лиценцом %1$s</item>
+    <item quantity="other">Слике ће се водити под лиценцом %1$s</item>
+  </plurals>
   <string name="media_upload_policy">Слањем ове слике, ја тврдим да је у питању мој рад, да не садржи материјал или селфије заштићене ауторским правима, те да је на остале начине у складу са &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;смерницама Викимедијине оставе&lt;/a&gt;.</string>
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Подразумевана лиценца</string>
-  <string name="use_previous">Користи претходан наслов/опис</string>
+  <string name="use_previous">Користи претходан наслов и опис</string>
   <string name="allow_gps">Аутоматски добави тренутну локацију</string>
   <string name="allow_gps_summary">Прима тренутну локацију ако слика није геотагована и геотагује исту њоме. Упозорење: Овиме ће да се открије Ваша тренутна локација.</string>
-  <string name="preference_theme">Ноћни режим</string>
-  <string name="preference_theme_summary">Коришћење тамне теме</string>
+  <string name="preference_theme">Тема</string>
   <string name="license_name_cc_by_sa_four">Ауторство-Делити под истим условима 4.0</string>
   <string name="license_name_cc_by_four">Ауторство 4.0</string>
   <string name="license_name_cc_by_sa">Ауторство-Делити под истим условима 3.0</string>
@@ -159,15 +164,18 @@
   <string name="welcome_copyright_subtext">Избегавајте материјале које сте нашли на интернету, као и слике плаката, корица књига итд.</string>
   <string name="welcome_final_text">Јесте ли разумели?</string>
   <string name="welcome_final_button_text">Да</string>
-  <string name="welcome_help_button_text"/>
+  <string name="welcome_help_button_text">Више информација</string>
   <string name="detail_panel_cats_label">Категорије</string>
   <string name="detail_panel_cats_loading">Учитавање…</string>
   <string name="detail_panel_cats_none">Ништа није изабрано</string>
   <string name="detail_description_empty">Нема описа</string>
+  <string name="detail_discussion_empty">Нема расправе</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Освежи</string>
+  <string name="storage_permission_title">Захтевање дозволе за складиштење</string>
   <string name="read_storage_permission_rationale">Потребна дозвола: Читање спољашње меморије. Апликација не може да приступи Ваших галерији без овога.</string>
-  <string name="write_storage_permission_rationale">Потребна дозвола: Писање спољашње меморије. Апликација не може да приступи Вашој камери без овога.</string>
+  <string name="write_storage_permission_rationale">Потребна дозвола: Писање у спољашњој меморији. Апликација не може да приступи Вашој камери/галерији без ове дозволе.</string>
+  <string name="location_permission_title">Захтевање дозволе за локацију</string>
   <string name="location_permission_rationale">Необавезна дозвола: преузми тренутну локацију за предлоге категорија</string>
   <string name="ok">У реду</string>
   <string name="title_activity_nearby">Места у близини</string>
@@ -178,7 +186,7 @@
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>
   <string name="media_detail_description">Опис</string>
-  <string name="media_detail_discussion">Разговор</string>
+  <string name="media_detail_discussion">Дискусија</string>
   <string name="media_detail_author">Аутор</string>
   <string name="media_detail_uploaded_date">Датум отпремања</string>
   <string name="media_detail_license">Лиценца</string>
@@ -194,7 +202,7 @@
   <string name="maximum_limit_alert">Није могуће приказати више од 500</string>
   <string name="enter_valid">Унесите важећи број</string>
   <string name="cannot_be_zero">Граница отпремања не може бити 0</string>
-  <string name="set_limit" fuzzy="true">Постави ограничење за недавна отпремања</string>
+  <string name="set_limit">Ограничење за недавна отпремања</string>
   <string name="login_failed_2fa_not_supported">Двофакторска аутентификација тренутно није подржана.</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
   <string name="commons_logo">Лого Оставе</string>
@@ -229,6 +237,7 @@
   <string name="navigation_item_info">Упутство</string>
   <string name="navigation_item_notification">Обавештења</string>
   <string name="navigation_item_featured_images">Изабрана</string>
+  <string name="navigation_item_review">Прегледај</string>
   <string name="nearby_needs_permissions">Оближња места не могу да се приказују без дозволе за локацију</string>
   <string name="no_description_found">опис није пронађен</string>
   <string name="nearby_info_menu_commons_article">Страница датотеке на Остави</string>
@@ -244,7 +253,9 @@
   <string name="upload_problem_image_blurry">Слика је мутна.</string>
   <string name="upload_problem_image_duplicate">Слика је већ на Остави.</string>
   <string name="upload_problem_different_geolocation">Ова слика је снимљена на другој локацији.</string>
+  <string name="upload_problem_fbmd">Молимо Вас да само отпремате слике које сте ви направили. Не отпремајте слике које сте пронашли на другим налозима на Фејсбуку.</string>
   <string name="upload_problem_do_you_continue">Желите ли још увек да отпремите ову слику?</string>
+  <string name="internet_downloaded">Молимо Вас да отпремате слике које сте ви направили. Не отпремајте слике које сте преузели са интернета.</string>
   <string name="give_permission">Давање дозволе</string>
   <string name="use_external_storage">Користи спољашње складиште</string>
   <string name="use_external_storage_summary">Чување слика снимљених камером у апликацији на вашем уређају</string>
@@ -255,7 +266,9 @@
   <string name="null_url">Грешка! URL није пронађен</string>
   <string name="nominate_deletion">Номиновање за брисање</string>
   <string name="nominated_for_deletion">Ова слика је била номинована за брисање</string>
-  <string name="nominated_see_more"/>
+  <string name="nominated_see_more">Погледајте веб-страницу за више информација</string>
+  <string name="nominating_file_for_deletion">Предлагање %1$s за брисање.</string>
+  <string name="nominating_for_deletion_status">Предлагање датотеке %1$s за брисање.</string>
   <string name="view_browser">Види у претраживачу</string>
   <string name="skip_login">Прескочи</string>
   <string name="navigation_item_login">Пријави ме</string>
@@ -265,7 +278,7 @@
   <string name="copy_wikicode">Копирај викитекст у оставу</string>
   <string name="wikicode_copied">Викитекст је копиран у оставу</string>
   <string name="nearby_location_has_not_changed">Локација није промењена.</string>
-  <string name="nearby_location_not_available">Локација није доступна.</string>
+  <string name="nearby_location_not_available">„У близини” можда не ради како треба. Локација није доступна.</string>
   <string name="location_permission_rationale_nearby">Потребна је дозвола за приказивање листе локација у близини</string>
   <string name="get_directions">Добити упутства</string>
   <string name="read_article">Прочитај чланак</string>
@@ -274,30 +287,33 @@
   <string name="notifications_thank_you_edit">Хвала вам за прављење измене</string>
   <string name="notifications_mention">%1$s Вас је поменуо на страници %2$s.</string>
   <string name="toggle_view_button">Пребаци приказ</string>
-  <string name="nearby_directions">УПУТСТВА</string>
-  <string name="nearby_wikidata">ВИКИПОДАЦИ</string>
-  <string name="nearby_wikipedia">ВИКИПЕДИЈА</string>
-  <string name="nearby_commons">ОСТАВА</string>
-  <string name="about_rate_us">&lt;u&gt;Оцените нас&lt;/u&gt;</string>
-  <string name="about_faq">&lt;u&gt;ЧПП&lt;/u&gt;</string>
+  <string name="nearby_directions">Упутства</string>
+  <string name="nearby_wikidata">Википодаци</string>
+  <string name="nearby_wikipedia">Википедија</string>
+  <string name="nearby_commons">Остава</string>
+  <string name="about_rate_us">Оцените нас</string>
+  <string name="about_faq">ЧПП</string>
   <string name="welcome_skip_button">Прескочи упутство</string>
   <string name="no_internet">Интернет није доступан</string>
   <string name="internet_established">Интернет је доступан</string>
   <string name="error_notifications">Грешка при добављању обавештења</string>
+  <string name="error_review">Грешка при преузимању слике за преглед. Притисните освежи да бисте покушали поново.</string>
+  <string name="error_review_categories">Грешка при преузимању категорија слика за преглед. Притисните освежи да би сте покушали поново.</string>
   <string name="no_notifications">Обавештења нису пронађена</string>
-  <string name="about_translate">&lt;u&gt;Превођење&lt;/u&gt;</string>
+  <string name="about_translate">Превођење</string>
   <string name="about_translate_title">Језици</string>
   <string name="about_translate_message">Одаберите језик за који бисте желели да правите преводе</string>
   <string name="about_translate_proceed">Настави</string>
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Покушај поново</string>
   <string name="showcase_view_got_it_button">Разумем</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Ово су места у Вашој близини којима је потребна слика да илуструје њихове википедијске чланке</string>
+  <string name="showcase_view_whole_nearby_activity">Ово су места у Вашој близини којима је потребна слика да илуструје њихове чланке на Википедији.\n\nКликом на \"ПРЕТРАЖИТЕ ОВУ ОБЛАСТ\" закључава се мапа и покреће претрагу у близини те локације.</string>
   <string name="showcase_view_list_icon">Додир овог дугмета даће вам листу ових места</string>
   <string name="showcase_view_plus_fab">Можете да отпремите слику за било које место из своје галерије или камере</string>
   <string name="no_images_found">Слике нису пронађене.</string>
   <string name="error_loading_images">Дошло је до грешке при учитавању слика.</string>
   <string name="image_uploaded_by">Отпремио/ла: %1$s</string>
+  <string name="block_notification_title">Блокирано</string>
   <string name="block_notification">Блокирано вам је уређивање Оставе</string>
   <string name="appwidget_img">Слика дана</string>
   <string name="app_widget_heading">Слика дана</string>
@@ -309,9 +325,11 @@
   <string name="provider_searches">Недавнo претражени упити</string>
   <string name="error_loading_categories">Дошло је до грешке при учитавању категорија.</string>
   <string name="error_loading_subcategories">Дошло је до грешке при учитавању поткатегорија.</string>
-  <string name="search_tab_title_media">МЕДИЈИ</string>
-  <string name="search_tab_title_categories">КАТЕГОРИЈЕ</string>
-  <string name="successful_wikidata_edit">Слика је успешно додата у %1$s на Википодацима.</string>
+  <string name="search_tab_title_media">Медији</string>
+  <string name="search_tab_title_categories">Категорије</string>
+  <string name="explore_tab_title_featured">Изабрано</string>
+  <string name="explore_tab_title_mobile">Отпремљено путем мобилног уређаја</string>
+  <string name="successful_wikidata_edit">Слика је додата у %1$s на Википодацима.</string>
   <string name="wikidata_edit_failure">Ажурирање одговарајућег ентитета на Википодацима није успело.</string>
   <string name="menu_set_wallpaper">Постави као позадину</string>
   <string name="wallpaper_set_successfully">Позадина је успешно постављена.</string>
@@ -335,13 +353,15 @@
   <string name="add_description">+ Додај опис</string>
   <string name="no_recent_searches">Нема недавних претрага</string>
   <string name="delete_recent_searches_dialog">Да ли сте сигурни да желите да очистите своју историју претраге?</string>
+  <string name="delete_search_dialog">Да ли желите да избришете ову претрагу?</string>
   <string name="search_history_deleted">Историја претраге је избрисана</string>
   <string name="nominate_delete">Номиновање за брисање</string>
+  <string name="delete">Избриши</string>
   <string name="Achievements">Достигнућа</string>
-  <string name="statistics">СТАТИСТИКЕ</string>
+  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Примљене захвале</string>
   <string name="statistics_featured">Изабране слике</string>
-  <string name="level">НИВО</string>
+  <string name="level">Ниво</string>
   <string name="images_uploaded">Отпремљене слике</string>
   <string name="image_reverts">Слике које нису опозване</string>
   <string name="images_used_by_wiki">Искоришћене слике</string>
@@ -360,6 +380,7 @@
   <string name="contributions_fragment">Доприноси</string>
   <string name="nearby_fragment">У близини</string>
   <string name="notifications">Обавештења</string>
+  <string name="archived_notifications">Обавештења (архивирана)</string>
   <string name="display_nearby_notification">Прикажи обавештење у близини</string>
   <string name="display_nearby_notification_summary">Притисните овде да бисте видели најближе место којем треба слика</string>
   <string name="no_close_nearby">Нису пронађена места у близини близу вас</string>
@@ -391,8 +412,8 @@
   <string name="deletion_reason_bad_for_my_privacy">Схватио/ла сам да је лоша за моју приватност</string>
   <string name="deletion_reason_no_longer_want_public">Променио/ла сам мишљење, не желим да више јавно буду видљиве</string>
   <string name="deletion_reason_not_interesting">Ова слика није занимљива за енциклопедију</string>
-  <string name="uploaded_by_myself" fuzzy="true">Отпремио/ла сам на</string>
-  <string name="no_uploads" fuzzy="true">Добро дошли на Оставу!\n\nОтпремите прве медије додиром горенаведене иконице камере или галерије.</string>
+  <string name="uploaded_by_myself">Отпремио/ла сам на %1$s, користи се у чланку/цима — %2$d.</string>
+  <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром дугмета за додавање.</string>
   <string name="desc_language_Worldwide">Светски</string>
   <string name="desc_language_America">Америка</string>
   <string name="desc_language_Europe">Европа</string>
@@ -413,14 +434,104 @@
   <string name="display_location_permission_title">Дозвола за приказ локације</string>
   <string name="display_location_permission_explanation">Тражи дозволу за локацију када је то потребно за функцију приказа картице обавештења у близини.</string>
   <string name="achievements_fetch_failed">Нешто није у реду. Није могуће добавити достигнућа.</string>
+  <string name="ends_on">Завршава:</string>
   <string name="display_campaigns">Прикажи кампање</string>
-  <string name="display_campaigns_explanation">Додирните ове да бисте видели кампање у току</string>
+  <string name="display_campaigns_explanation">Погледајте текуће кампање</string>
   <string name="this_function_needs_network_connection">Ова функција захтева мрежну везу. Проверите подешавања везе.</string>
   <string name="bad_token_error_proposed_solution">Отпремање није успело због проблема са токеном за уређивање. Покушајте да се пријавите поново.</string>
+  <string name="error_processing_image">Дошло је до грешке током обраде слике. Молим вас, покушајте поново!</string>
+  <string name="getting_edit_token">Добијање токена за уређивање</string>
+  <string name="check_category_adding_template">Додавање шаблона за проверу категорије</string>
+  <string name="check_category_notification_title">Захтевање провере категорије за %1$s</string>
+  <string name="check_category_edit_summary">Захтевање провере категорије</string>
+  <string name="check_category_success_title">Затражена провера категорије</string>
+  <string name="check_category_failure_title">Захтевање провере категорије не ради</string>
+  <string name="check_category_success_message">Затражена провера категорије за %1$s</string>
+  <string name="check_category_failure_message">Није могуће затражити проверу категорије за %1$s</string>
+  <string name="check_category_toast">Захтевање провере категорије за %1$s</string>
+  <string name="nominate_for_deletion_edit_file_page">Додавање поруке за брисање у датотеку</string>
+  <string name="nominate_for_deletion_done">Урађено</string>
+  <string name="nominate_for_deletion_notify_user">Обавештавање корисника на страници за разговор</string>
+  <string name="nominate_for_deletion_edit_deletion_request_log">Додавање датотеке у дневник захтева за брисање</string>
+  <string name="nominate_for_deletion_create_deletion_request">Креирање подстранице захтева за брисање</string>
+  <string name="notsure">Несигурно</string>
+  <string name="send_thank_success_title">Слање захвалнице: Успешно</string>
+  <string name="send_thank_success_message">Успешно послата захвалница на %1$s</string>
+  <string name="send_thank_failure_message">Није успело слање захвалнице %1$s</string>
+  <string name="send_thank_failure_title">Слање захвалнице: Није успело</string>
+  <string name="send_thank_send">Слање захвалница</string>
+  <string name="send_thank_notification_title">Слање захвалница</string>
+  <string name="send_thank_toast">Слање захвалница за %1$s</string>
+  <string name="review_copyright">Да ли прати правила ауторских права?</string>
+  <string name="review_category">Да ли је ово коректно категоризовано?</string>
+  <string name="review_thanks">Да ли желите да се захвалите доприносиоцу?</string>
+  <string name="review_category_explanation">Ова слика је под %1$s категорије.</string>
+  <string name="review_category_no_button_text">Изгледа добро</string>
+  <string name="review_spam_no_button_text">Изгледа добро</string>
+  <string name="review_copyright_yes_button_text">Не, кршење ауторских права</string>
+  <string name="review_copyright_no_button_text">Изгледа добро</string>
+  <string name="review_thanks_yes_button_text">Да, зашто не</string>
+  <string name="review_thanks_no_button_text">Следећа слика</string>
   <string name="no_image">Нема коришћених датотека</string>
   <string name="no_image_reverted">Нема враћених слика</string>
   <string name="no_image_uploaded">Нема отпремљених слика</string>
+  <string name="no_notification">Немате непрочитаних обавештења.</string>
+  <string name="no_archived_notification">Немате архивираних обавештења</string>
+  <string name="share_logs_using">Подели дневнике користећи</string>
+  <string name="menu_option_archived">Прикажи архивирано</string>
+  <string name="menu_option_unread">Прикажи непрочитано</string>
   <string name="error_occurred_in_picking_images">Дошло је до грешке при избору слика</string>
   <string name="image_chooser_title">Одабир слика за отпремање</string>
   <string name="please_wait">Сачекајте…</string>
+  <string name="previous_image_title_description">Копирај претходни наслов и опис</string>
+  <string name="welcome_do_upload_content_description">Примери добрих слика за отпремање на Оставу</string>
+  <string name="welcome_dont_upload_content_description">Примери слика које нису за отпремање</string>
+  <string name="skip_image">Прескочи ову слику</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преузимање није успело!! Не можемо преузети датотеку без дозволе за приступ спољашњој меморији.</string>
+  <string name="manage_exif_tags">Управљање EXIF ознакама</string>
+  <string name="manage_exif_tags_summary">Одаберите које EXIF желите да сачувате у отпремањима</string>
+  <string name="exif_tag_name_author">Аутор</string>
+  <string name="exif_tag_name_copyright">Ауторско право</string>
+  <string name="exif_tag_name_location">Локација</string>
+  <string name="exif_tag_name_cameraModel">Модел камере</string>
+  <string name="exif_tag_name_lensModel">Модел објектива</string>
+  <string name="exif_tag_name_serialNumbers">Серијски бројеви</string>
+  <string name="exif_tag_name_software">Софтвер</string>
+  <string name="share_text" fuzzy="true">Отпреми фотографије на Викимедијину Оставу са свог телефона. Преузми апликацију Оставе: %1$s</string>
+  <string name="share_via">Подели апликацију преко...</string>
+  <string name="image_info">Информације о слици</string>
+  <string name="no_categories_found">Нису пронађене категорије</string>
+  <string name="upload_cancelled">Отказано отпремање</string>
+  <string name="previous_image_title_description_not_found">Нема података за наслов или опис претходне слике</string>
+  <string name="dialog_box_text_nomination">Зашто би %1$s требало обрисати?</string>
+  <string name="review_is_uploaded_by">Датотека %1$s је отпремљена од стране: %2$s</string>
+  <string name="default_description_language">Подразумевани језик отписа</string>
+  <string name="delete_helper_make_deletion_toast">Покушавање предлагања %1$s за брисање</string>
+  <string name="delete_helper_show_deletion_title">Предлагање за брисање</string>
+  <string name="delete_helper_show_deletion_title_success">Успешно</string>
+  <string name="delete_helper_show_deletion_message_if">Номинован %1$s за брисање.</string>
+  <string name="delete_helper_show_deletion_title_failed">Није успело</string>
+  <string name="delete_helper_show_deletion_message_else">Није могуће затражити брисање.</string>
+  <string name="delete_helper_ask_spam_selfie">Селфи</string>
+  <string name="delete_helper_ask_spam_blurry">Замагљено</string>
+  <string name="delete_helper_ask_spam_nonsense">Бесмислено</string>
+  <string name="delete_helper_ask_spam_other">Остало</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Фото репортажа</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">Насумична фотографија са интерната</string>
+  <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
+  <string name="delete_helper_ask_reason_copyright_other">Остало</string>
+  <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
+  <string name="share_image_via">Подели слику преко</string>
+  <string name="no_achievements_yet">Још нисте допринели</string>
+  <string name="account_created">Налог је отворен.</string>
+  <string name="text_copy">Текст је копиран у оставу</string>
+  <string name="notification_mark_read">Обавештење је означено прочитаним</string>
+  <string name="some_error">Дошло је до грешке.</string>
+  <string name="place_state_exists">Постоји</string>
+  <string name="place_state_needs_photo">Потребна слика</string>
+  <string name="place_type">Тип места:</string>
+  <string name="nearby_search_hint">Мост, музеј, хотел итд.</string>
+  <string name="upload_nearby_place_found_title">Оближње место је пронађено</string>
+  <string name="remove_bookmark">Уклоњено из обележивача</string>
+  <string name="add_bookmark">Додато у обележиваче</string>
 </resources>

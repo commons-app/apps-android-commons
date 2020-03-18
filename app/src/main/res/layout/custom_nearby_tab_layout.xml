@@ -15,11 +15,11 @@
         android:textAllCaps="true"
         android:gravity="center"/>
     <ImageView
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="@dimen/normal_height"
+        android:layout_height="@dimen/normal_height"
         android:id="@+id/nearby_info_image"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:srcCompat="@drawable/ic_info_outline_white_24dp"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        app:srcCompat="@drawable/ic_info_outline_24dp"
         />
 </LinearLayout>

@@ -6,8 +6,8 @@
     android:gravity="center_horizontal">
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:layout_width="320dp"
-        android:layout_height="252dp"
+        android:layout_width="@dimen/question_width"
+        android:layout_height="@dimen/question_height"
         android:scaleType="fitXY"
         android:id="@+id/question_image"
         android:layout_marginHorizontal="@dimen/activity_margin_horizontal"

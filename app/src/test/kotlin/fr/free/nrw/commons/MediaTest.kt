@@ -7,7 +7,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(21), application = TestCommonsApplication::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class MediaTest {
     @Test
     fun displayTitleShouldStripExtension() {

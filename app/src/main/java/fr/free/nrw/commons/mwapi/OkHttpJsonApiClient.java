@@ -1,33 +1,30 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.media.model.MwQueryPage;
-import fr.free.nrw.commons.mwapi.model.MwQueryResponse;
-import fr.free.nrw.commons.mwapi.model.RecentChange;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
-import fr.free.nrw.commons.utils.DateUtils;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -35,10 +32,16 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import timber.log.Timber;
 
+/**
+ * Test methods in ok http api client
+ */
 @Singleton
 public class OkHttpJsonApiClient {
+    private static final String THUMB_SIZE = "640";
+
     private final OkHttpClient okHttpClient;
     private final HttpUrl wikiMediaToolforgeUrl;
     private final String sparqlQueryUrl;
@@ -66,8 +69,13 @@ public class OkHttpJsonApiClient {
     public Single<Integer> getUploadCount(String userName) {
         HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
         urlBuilder
-                .addPathSegments("/uploadsbyuser.py")
+                .addPathSegments("uploadsbyuser.py")
                 .addQueryParameter("user", userName);
+
+        if (ConfigUtils.isBetaFlavour()) {
+            urlBuilder.addQueryParameter("labs", "commonswiki");
+        }
+
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
                 .build();
@@ -75,8 +83,17 @@ public class OkHttpJsonApiClient {
         return Single.fromCallable(() -> {
             Response response = okHttpClient.newCall(request).execute();
             if (response != null && response.isSuccessful()) {
-
-                return Integer.parseInt(response.body().string().trim());
+                ResponseBody responseBody = response.body();
+                if (null != responseBody) {
+                    String responseBodyString = responseBody.string().trim();
+                    if (!TextUtils.isEmpty(responseBodyString)) {
+                        try {
+                            return Integer.parseInt(responseBodyString);
+                        } catch (NumberFormatException e) {
+                            Timber.e(e);
+                        }
+                    }
+                }
             }
             return 0;
         });
@@ -86,8 +103,13 @@ public class OkHttpJsonApiClient {
     public Single<Integer> getWikidataEdits(String userName) {
         HttpUrl.Builder urlBuilder = wikiMediaToolforgeUrl.newBuilder();
         urlBuilder
-                .addPathSegments("/wikidataedits.py")
+                .addPathSegments("wikidataedits.py")
                 .addQueryParameter("user", userName);
+
+        if (ConfigUtils.isBetaFlavour()) {
+            urlBuilder.addQueryParameter("labs", "commonswiki");
+        }
+
         Request request = new Request.Builder()
                 .url(urlBuilder.build())
                 .build();
@@ -101,7 +123,9 @@ public class OkHttpJsonApiClient {
                     return 0;
                 }
                 GetWikidataEditCountResponse countResponse = gson.fromJson(json, GetWikidataEditCountResponse.class);
-                return countResponse.getWikidataEditCount();
+                if (null != countResponse) {
+                    return countResponse.getWikidataEditCount();
+                }
             }
             return 0;
         });
@@ -116,12 +140,12 @@ public class OkHttpJsonApiClient {
      */
     public Single<FeedbackResponse> getAchievements(String userName) {
         final String fetchAchievementUrlTemplate =
-                wikiMediaToolforgeUrl + "/feedback.py";
+                wikiMediaToolforgeUrl + (ConfigUtils.isBetaFlavour() ? "/feedback.py?labs=commonswiki" : "/feedback.py");
         return Single.fromCallable(() -> {
             String url = String.format(
                     Locale.ENGLISH,
                     fetchAchievementUrlTemplate,
-                    new PageTitle(userName).getText());
+                    userName);
             HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
             urlBuilder.addQueryParameter("user", userName);
             Timber.i("Url %s", urlBuilder.toString());
@@ -138,7 +162,7 @@ public class OkHttpJsonApiClient {
                 try {
                     return gson.fromJson(json, FeedbackResponse.class);
                 } catch (Exception e) {
-                    return new FeedbackResponse("", 0, 0, 0, new FeaturedImages(0, 0), 0, "", 0);
+                    return new FeedbackResponse(0, 0, 0, new FeaturedImages(0, 0), 0, "");
                 }
 
 
@@ -201,154 +225,23 @@ public class OkHttpJsonApiClient {
     }
 
     /**
-     * The method returns the picture of the day
+     * Whenever imageInfo is fetched, these common properties can be specified for the API call
+     * https://www.mediawiki.org/wiki/API:Imageinfo
      *
-     * @return Media object corresponding to the picture of the day
-     */
-    @Nullable
-    public Single<Media> getPictureOfTheDay() {
-        String template = "Template:Potd/" + DateUtils.getCurrentDate();
-        HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(commonsBaseUrl)
-                .newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("generator", "images")
-                .addQueryParameter("format", "json")
-                .addQueryParameter("titles", template)
-                .addQueryParameter("prop", "imageinfo")
-                .addQueryParameter("iiprop", "url|extmetadata");
-
-        Request request = new Request.Builder()
-                .url(urlBuilder.build())
-                .build();
-
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response != null && response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                if (json == null) {
-                    return null;
-                }
-                MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
-                return Media.from(mwQueryPage.query().firstPage());
-            }
-            return null;
-        });
-    }
-
-    /**
-     * This method takes search keyword as input and returns a list of  Media objects filtered using search query
-     * It uses the generator query API to get the images searched using a query, 25 at a time.
-     * @param query keyword to search images on commons
+     * @param builder
      * @return
      */
-    @Nullable
-    public Single<List<Media>> searchImages(String query, int offset) {
-        HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(commonsBaseUrl)
-                .newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("generator", "search")
-                .addQueryParameter("format", "json")
-                .addQueryParameter("gsrwhat", "text")
-                .addQueryParameter("gsrnamespace", "6")
-                .addQueryParameter("gsrlimit", "25")
-                .addQueryParameter("gsroffset", String.valueOf(offset))
-                .addQueryParameter("gsrsearch", query)
-                .addQueryParameter("prop", "imageinfo")
-                .addQueryParameter("iiprop", "url|extmetadata");
+    private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
+        builder.addQueryParameter("prop", "imageinfo")
+                .addQueryParameter("iiprop", "url|extmetadata")
+                .addQueryParameter("iiurlwidth", THUMB_SIZE)
+                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl");
 
-        Request request = new Request.Builder()
-                .url(urlBuilder.build())
-                .build();
+        String language = Locale.getDefault().getLanguage();
+        if (!StringUtils.isBlank(language)) {
+            builder.addQueryParameter("iiextmetadatalanguage", language);
+        }
 
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            List<Media> mediaList = new ArrayList<>();
-            if (response != null && response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                if (json == null) {
-                    return mediaList;
-                }
-                MwQueryResponse mwQueryResponse = gson.fromJson(json, MwQueryResponse.class);
-                List<MwQueryPage> pages = mwQueryResponse.query().pages();
-                for (MwQueryPage page : pages) {
-                    mediaList.add(Media.from(page));
-                }
-            }
-            return mediaList;
-        });
-    }
-
-    /**
-     * Returns recent changes on commons
-     * @return list of recent changes made
-     */
-    @Nullable
-    public Single<List<RecentChange>> getRecentFileChanges() {
-        final int RANDOM_SECONDS = 60 * 60 * 24 * 30;
-        final String FILE_NAMESPACE = "6";
-        Random r = new Random();
-        Date now = new Date();
-        Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
-
-        HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(commonsBaseUrl)
-                .newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("format", "json")
-                .addQueryParameter("list", "recentchanges")
-                .addQueryParameter("rcstart", DateUtils.formatMWDate(startDate))
-                .addQueryParameter("rcnamespace", FILE_NAMESPACE)
-                .addQueryParameter("rcprop", "title|ids")
-                .addQueryParameter("rctype", "new|log")
-                .addQueryParameter("rctoponly", "1");
-
-        Request request = new Request.Builder()
-                .url(urlBuilder.build())
-                .build();
-
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
-                return mwQueryPage.query().getRecentchanges();
-            }
-            return new ArrayList<>();
-        });
-    }
-
-    /**
-     * Returns the first revision of the file
-     *
-     * @return Revision object
-     */
-    @Nullable
-    public Single<MwQueryPage.Revision> getFirstRevisionOfFile(String filename) {
-        HttpUrl.Builder urlBuilder = HttpUrl
-                .parse(commonsBaseUrl)
-                .newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("format", "json")
-                .addQueryParameter("prop", "revisions")
-                .addQueryParameter("rvprop", "timestamp|ids|user")
-                .addQueryParameter("titles", filename)
-                .addQueryParameter("rvdir", "newer")
-                .addQueryParameter("rvlimit", "1");
-
-        Request request = new Request.Builder()
-                .url(urlBuilder.build())
-                .build();
-
-        return Single.fromCallable(() -> {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response.body() != null && response.isSuccessful()) {
-                String json = response.body().string();
-                MwQueryResponse mwQueryPage = gson.fromJson(json, MwQueryResponse.class);
-                return mwQueryPage.query().firstPage().revisions().get(0);
-            }
-            return null;
-        });
+        return builder;
     }
 }
