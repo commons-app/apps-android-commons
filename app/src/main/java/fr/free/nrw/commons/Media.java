@@ -45,6 +45,7 @@ public class Media implements Parcelable {
     };
 
     // Primary metadata fields
+    @Nullable
     public Uri localUri;
     public String thumbUrl;
     public String imageUrl;
