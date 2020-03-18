@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
+import fr.free.nrw.commons.upload.GPSExtractor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -232,14 +233,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * returns the default locale value of the user's device
-     * @return
-     */
-    private String getUserDefaultLocale() {
-        return getContext().getResources().getConfiguration().locale.getLanguage();
-    }
-
-    /**
      * show dialog with info
      * @param titleStringID
      * @param messageStringId
@@ -267,17 +260,20 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
+    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
+        GPSExtractor originalPictureExtractor, GPSExtractor similarPictureExtractor) {
         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
         newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
             @Override
             public void onPositiveResponse() {
                 Timber.d("positive response from similar image fragment");
+                presenter.usePictureCoordinatesFrom(similarPictureExtractor);
             }
 
             @Override
             public void onNegativeResponse() {
                 Timber.d("negative response from similar image fragment");
+                presenter.usePictureCoordinatesFrom(originalPictureExtractor);
             }
         });
         Bundle args = new Bundle();

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.repository;
 
+import fr.free.nrw.commons.upload.GPSExtractor;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
@@ -202,4 +203,8 @@ public class UploadRemoteDataSource {
             return null;
         }
     }
+
+  public void usePictureCoordinatesFrom(GPSExtractor gpsExtractor) {
+    uploadModel.usePictureCoordinatesFrom(gpsExtractor);
+  }
 }

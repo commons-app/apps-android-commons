@@ -159,7 +159,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         }
     }
 
-    /**
+  @Override
+  public void usePictureCoordinatesFrom(GPSExtractor gpsExtractor) {
+    repository.usePictureCoordinatesFrom(gpsExtractor);
+  }
+
+  /**
      * handles image quality verifications
      *
      * @param imageResult
@@ -200,12 +205,16 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     /**
      * notifies the user that a similar image exists
-     *
      * @param originalFilePath
      * @param possibleFilePath
+     * @param originalPictureExtractor
+     * @param similarPictureExtractor
      */
     @Override
-    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
-        view.showSimilarImageFragment(originalFilePath, possibleFilePath);
+    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
+        GPSExtractor originalPictureExtractor, GPSExtractor similarPictureExtractor) {
+        view.showSimilarImageFragment(originalFilePath, possibleFilePath, originalPictureExtractor,
+            similarPictureExtractor
+        );
     }
 }
