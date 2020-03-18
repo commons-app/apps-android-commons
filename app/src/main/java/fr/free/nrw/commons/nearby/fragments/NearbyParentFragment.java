@@ -6,9 +6,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -56,6 +58,7 @@ import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import fr.free.nrw.commons.utils.DialogUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -1251,6 +1254,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
         if (curLatLng == null) {
+            if (!(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
+                showLocationOffDialog();
+            }
             return;
         }
         addCurrentLocationMarker(curLatLng);
@@ -1279,6 +1285,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
 
         mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+    }
+
+    @Override
+    public void showLocationOffDialog() {
+        // This creates a dialog box that prompts the user to enable location
+        DialogUtil
+            .showAlertDialog(getActivity(), getString(R.string.ask_to_turn_location_on), getString(R.string.nearby_needs_location),
+                getString(R.string.yes), getString(R.string.no),  this::openLocationSettings, null);
+    }
+
+    @Override
+    public void openLocationSettings() {
+        // This method opens the location settings of the device along with a followup toast.
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        PackageManager packageManager = getActivity().getPackageManager();
+
+        if (intent.resolveActivity(packageManager)!= null) {
+            startActivity(intent);
+            Toast.makeText(getContext(), R.string.recommend_high_accuracy_mode, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
