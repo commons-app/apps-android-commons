@@ -55,7 +55,6 @@ public class CommonsApplicationModule {
     private Context applicationContext;
     public static final String IO_THREAD="io_thread";
     public static final String MAIN_THREAD="main_thread";
-    private AppDatabase appDatabase;
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
@@ -247,12 +246,11 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public AppDatabase provideAppDataBase() {
-        appDatabase=Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db").build();
-        return appDatabase;
+        return Room.databaseBuilder(applicationContext, AppDatabase.class, "commons_room.db").build();
     }
 
     @Provides
-    public ContributionDao providesContributionsDao() {
-        return appDatabase.getContributionDao();
+    public ContributionDao providesContributionsDao(AppDatabase appDatabase) {
+        return appDatabase.contributionDao();
     }
 }

@@ -3,8 +3,6 @@ package fr.free.nrw.commons.upload.depicts;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
-import android.util.Log;
-
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.repository.UploadRepository;
 import fr.free.nrw.commons.upload.UploadModel;
@@ -85,7 +83,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
     @Override
     public void searchForDepictions(String query) {
         List<DepictedItem> depictedItemList = new ArrayList<>();
-        List<String> imageTitleList = getImageTitleList();
         Observable<DepictedItem> distinctDepictsObservable = Observable
                 .fromIterable(repository.getSelectedDepictions())
                 .subscribeOn(ioScheduler)
@@ -97,27 +94,22 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                 })
                 .observeOn(ioScheduler)
                 .concatWith(
-                        repository.searchAllEntities(query, imageTitleList)
+                        repository.searchAllEntities(query)
                 )
                 .distinct();
 
         Disposable searchDepictsDisposable = distinctDepictsObservable
                 .observeOn(mainThreadScheduler)
                 .subscribe(
-                        s -> depictedItemList.add(s),
+                        depictedItemList::add,
                         Timber::e,
                         () -> {
                             view.showProgress(false);
 
-                            if (null == depictedItemList || depictedItemList.isEmpty()) {
+                            if (depictedItemList.isEmpty()) {
                                 view.showError(true);
                             } else {
                                 view.showError(false);
-                                //Understand this is shitty, but yes, doing it the other way is even worse and adapter positions can not be trusted
-                                for (int position = 0; position < depictedItemList.size();
-                                        position++) {
-                                    //depictedItemList.get(position).setPosition(position);
-                                }
                                 view.setDepictsList(depictedItemList);
                             }
                         }
@@ -155,19 +147,5 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                 .subscribe(response -> {
                     view.onImageUrlFetched(response,position);
                 }));
-    }
-
-    /**
-     * Returns image title list from UploadItem
-     * @return
-     */
-    private List<String> getImageTitleList() {
-        List<String> titleList = new ArrayList<>();
-        for (UploadModel.UploadItem item : repository.getUploads()) {
-            if (item.getTitle().isSet()) {
-                titleList.add(item.getTitle().toString());
-            }
-        }
-        return titleList;
     }
 }

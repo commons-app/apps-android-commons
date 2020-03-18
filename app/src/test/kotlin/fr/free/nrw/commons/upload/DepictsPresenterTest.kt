@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload
 
 //import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockitokotlin2.whenever
-import org.mockito.Mockito.verify
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.repository.UploadRepository
@@ -16,7 +15,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 class DepictsPresenterTest {
@@ -50,7 +49,7 @@ class DepictsPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         testScheduler = TestScheduler()
-        depictedItem = DepictedItem("label", "desc", null, false, "entityId")
+        depictedItem = DepictedItem("label", "desc", "", false, "entityId")
         depictedItems.add(depictedItem)
         testObservable = Observable.just(depictedItem)
         depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler, depictsClient)
@@ -62,7 +61,7 @@ class DepictsPresenterTest {
     fun searchEnglishDepictionsTest() {
         whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
         depictsPresenter?.searchForDepictions("test")
         verify(view)?.showProgress(true)
         verify(view)?.showError(true)
@@ -75,7 +74,7 @@ class DepictsPresenterTest {
     fun searchOtherLanguageDepictions() {
         whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
         depictsPresenter?.searchForDepictions("वी")
         verify(view)?.showProgress(true)
         verify(view)?.showError(true)
@@ -88,7 +87,7 @@ class DepictsPresenterTest {
     fun searchForNonExistingDepictions() {
         whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
         depictsPresenter?.searchForDepictions("******")
         verify(view)?.showProgress(true)
         verify(view)?.setDepictsList(null)
@@ -101,7 +100,7 @@ class DepictsPresenterTest {
     fun setSingleDepiction() {
         whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
         depictsPresenter?.onDepictItemClicked(depictedItem)
         depictsPresenter?.verifyDepictions()
         verify(view)?.goToNextScreen()
@@ -111,9 +110,9 @@ class DepictsPresenterTest {
     fun setMultipleDepictions() {
         whenever(repository?.sortBySimilarity(ArgumentMatchers.anyString())).thenReturn(Comparator<CategoryItem> { _, _ -> 1 })
         whenever(repository?.selectedDepictions).thenReturn(depictedItems)
-        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString(), ArgumentMatchers.anyList())).thenReturn(Observable.empty())
+        whenever(repository?.searchAllEntities(ArgumentMatchers.anyString())).thenReturn(Observable.empty())
         depictsPresenter?.onDepictItemClicked(depictedItem)
-        val depictedItem2 = DepictedItem("label2", "desc2", null, false, "entityid2")
+        val depictedItem2 = DepictedItem("label2", "desc2", "", false, "entityid2")
         depictsPresenter?.onDepictItemClicked(depictedItem2)
         depictsPresenter?.verifyDepictions()
         verify(view)?.goToNextScreen()
