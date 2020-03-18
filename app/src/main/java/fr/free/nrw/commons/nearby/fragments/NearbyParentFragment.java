@@ -1290,7 +1290,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         if (intent.resolveActivity(packageManager)!= null) {
             startActivity(intent);
-            Toast.makeText(getContext(), R.string.set_location_mode_high_accuracy, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.recommend_high_accuracy_mode, Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
         }
