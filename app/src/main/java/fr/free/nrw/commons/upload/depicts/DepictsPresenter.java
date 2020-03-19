@@ -5,23 +5,20 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.repository.UploadRepository;
-import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -88,7 +85,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
                 .doOnSubscribe(disposable -> {
-                    view.showError(true);
                     view.showProgress(true);
                     view.setDepictsList(null);
                 })
@@ -102,7 +98,11 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
                 .observeOn(mainThreadScheduler)
                 .subscribe(
                         depictedItemList::add,
-                        Timber::e,
+                        t -> {
+                            view.showProgress(false);
+                            view.showError(true);
+                            Timber.e(t);
+                        },
                         () -> {
                             view.showProgress(false);
 

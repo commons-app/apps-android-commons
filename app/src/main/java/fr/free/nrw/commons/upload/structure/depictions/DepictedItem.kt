@@ -6,8 +6,8 @@ import fr.free.nrw.commons.wikidata.model.DepictSearchItem
  * Model class for Depicted Item in Upload and Explore
  */
 data class DepictedItem constructor(
-  val depictsLabel: String,
-  val description: String,
+  val depictsLabel: String?,
+  val description: String?,
   var imageUrl: String,
   var isSelected: Boolean,
   val entityId: String
@@ -26,6 +26,10 @@ data class DepictedItem constructor(
     this === o -> true
     o is DepictedItem -> depictsLabel == o.depictsLabel
     else -> false
+  }
+
+  override fun hashCode(): Int {
+    return depictsLabel?.hashCode() ?: 0
   }
 
 }
