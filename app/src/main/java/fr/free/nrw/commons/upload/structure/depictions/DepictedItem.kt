@@ -28,4 +28,8 @@ data class DepictedItem constructor(
     else -> false
   }
 
+  override fun hashCode(): Int {
+    return depictsLabel?.hashCode() ?: 0
+  }
+
 }
