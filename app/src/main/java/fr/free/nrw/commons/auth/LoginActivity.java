@@ -145,13 +145,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
-    @OnFocusChange(R.id.login_username)
-    void onUsernameFocusChanged(View view, boolean hasFocus) {
-        if (!hasFocus) {
-            ViewUtil.hideKeyboard(view);
-        }
-    }
-
     @OnFocusChange(R.id.login_password)
     void onPasswordFocusChanged(View view, boolean hasFocus) {
         if (!hasFocus) {
