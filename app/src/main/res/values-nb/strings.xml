@@ -80,7 +80,7 @@
   <string name="gps_disabled">GPS er slått av på denne enheten. Ønsker du å slå den på?</string>
   <string name="enable_gps">Slå på GPS</string>
   <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -384,7 +384,6 @@
   <string name="preference_author_name_toggle">Bruk egendefinert opphavspersonnavn</string>
   <string name="preference_author_name_toggle_summary">Bruk et egendefinert opphavspersonnavn i stedet for brukernavnet ditt når bilder lastes opp</string>
   <string name="preference_author_name">Egendefinert opphavspersonnavn</string>
-  <string name="preference_author_name_summary">Det egendefinerte opphavspersonnavnet som skal brukes i stedet for brukernavnet ditt i opplastinger</string>
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I nærheten</string>
   <string name="notifications">Varsler</string>

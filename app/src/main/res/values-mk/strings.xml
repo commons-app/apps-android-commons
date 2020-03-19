@@ -73,7 +73,7 @@
   <string name="gps_disabled">GPS е исклучен на вашиот уред. Дали сакате да го вклучите?</string>
   <string name="enable_gps">Вклучи GPS</string>
   <string name="contributions_subtitle_zero">Сè уште нема подигања</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -377,7 +377,6 @@
   <string name="preference_author_name_toggle">Употреби прилагодено авторско име</string>
   <string name="preference_author_name_toggle_summary">При подигањето користете прилагодено авторско име наместо вашето корисничко име</string>
   <string name="preference_author_name">Прилагодено авторско име</string>
-  <string name="preference_author_name_summary">Прилагоденото авторско име што ќе се користи место вашето корисничко име при подигања</string>
   <string name="contributions_fragment">Придонеси</string>
   <string name="nearby_fragment">Во близина</string>
   <string name="notifications">Известувања</string>
@@ -569,4 +568,8 @@
   <string name="theme_default_name">По основно</string>
   <string name="theme_dark_name">Темен</string>
   <string name="theme_light_name">Светол</string>
+  <string name="cannot_open_location_settings">Не можев да ги отворам поставките за местоположба. Вклучете ја местоположбата рачно.</string>
+  <string name="recommend_high_accuracy_mode">За да добиете најдобар исход, изберете го режимот на висока уточнетост.</string>
+  <string name="ask_to_turn_location_on">Да ја вклучам местоположбата?</string>
+  <string name="nearby_needs_location">„Во близина“ бара местоположба за да работи</string>
 </resources>

@@ -72,7 +72,7 @@
   <string name="gps_disabled">మీ పరికరంలో GPS అచేతనం చేసి ఉంది. దాన్ని చేతనం చేస్తారా?</string>
   <string name="enable_gps">GPS ను చేతనం చెయ్యి</string>
   <string name="contributions_subtitle_zero">ఇంకా ఎక్కింపులేమీ లేవు</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -374,7 +374,6 @@
   <string name="preference_author_name_toggle">కర్తకు ఐచ్ఛికంగా మరో పేరును వాడండి</string>
   <string name="preference_author_name_toggle_summary">ఫోటోలను ఎక్కించేటపుడు మీ వాడుకరిపేరు కాకుండా మరో ఐచ్ఛికమైన పేరును వాడండి</string>
   <string name="preference_author_name">ఐచ్ఛికమైన కర్త పేరు</string>
-  <string name="preference_author_name_summary">ఎక్కింపుల్లో కర్తగా వాడేందుకు మీ వాడుకరిపేరు కాకుండా మరో పేరు</string>
   <string name="contributions_fragment">తోడ్పాటు</string>
   <string name="nearby_fragment">చుట్టుపక్కల</string>
   <string name="notifications">గమనింపులు</string>

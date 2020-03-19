@@ -77,7 +77,7 @@
   <string name="gps_disabled">GPSa desgaituta dago gailu honetan. Gaitu nahi duzu?</string>
   <string name="enable_gps">GPSa gaitu</string>
   <string name="contributions_subtitle_zero">Oraindik ez da ezer igo</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">igoera (%1$d)</item>
     <item quantity="other">(%1$d) igoera</item>

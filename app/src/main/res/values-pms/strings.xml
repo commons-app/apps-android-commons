@@ -375,7 +375,6 @@
   <string name="preference_author_name_toggle">Ch\'a deuvra un nòm d\'autor përsonalisà</string>
   <string name="preference_author_name_toggle_summary">Ch\'a deuvra un nòm d\'autor përsonalisà al pòst ëd sò stranòm cand a caria dle fòto</string>
   <string name="preference_author_name">Nòm d\'autor përsonalisà</string>
-  <string name="preference_author_name_summary">Ël nòm d\'autor përsonalisà da dovré al pòst ëd sò stranòm për ij cariament</string>
   <string name="contributions_fragment">Contribussion</string>
   <string name="nearby_fragment">Davzin</string>
   <string name="notifications">Notìfiche</string>
@@ -567,4 +566,8 @@
   <string name="theme_default_name">Stàndard</string>
   <string name="theme_dark_name">Sombr</string>
   <string name="theme_light_name">Ciàir</string>
+  <string name="cannot_open_location_settings">Falì a duverté ij paràmeter ëd localisassion. Për piasì, ch\'a anvisca la localisassion a man</string>
+  <string name="recommend_high_accuracy_mode">Për dij mej arzultà, ch\'a serna ël meud Àuta precision.</string>
+  <string name="ask_to_turn_location_on">Anvisché la localisassion?</string>
+  <string name="nearby_needs_location">Nearby a l\'ha damanca dla localisassion abilità për marcé \'me ch\'as dev</string>
 </resources>

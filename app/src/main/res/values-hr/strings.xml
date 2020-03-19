@@ -35,7 +35,7 @@
   <string name="upload_progress_notification_title_finishing">Završeno postavljanje %1$s</string>
   <string name="upload_failed_notification_title">Postavljanje %1$s neuspješno</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Postavlja se %1$d datoteka</item>
     <item quantity="other">Postavljaju se %1$d datoteke</item>
   </plurals>
@@ -75,11 +75,11 @@
     <item quantity="one">%1$d postavljena datoteka</item>
     <item quantity="other">%1$d postavljene datoteke</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Započeto %1$d postavljanje</item>
     <item quantity="other">Započeta %1$d postavljanja</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d postavljanje</item>
     <item quantity="other">%1$d postavljanja</item>
   </plurals>

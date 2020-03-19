@@ -376,7 +376,6 @@
   <string name="preference_author_name_toggle">Користи прилагођено име аутора</string>
   <string name="preference_author_name_toggle_summary">Коришћење прилагођеног имена аутора уместо вашег корисничког имена при отпремању фотографија</string>
   <string name="preference_author_name">Прилагођено име аутора</string>
-  <string name="preference_author_name_summary">Прилагођено име аутора за коришћење уместо вашег корисничког имена у отпремањима</string>
   <string name="contributions_fragment">Доприноси</string>
   <string name="nearby_fragment">У близини</string>
   <string name="notifications">Обавештења</string>
