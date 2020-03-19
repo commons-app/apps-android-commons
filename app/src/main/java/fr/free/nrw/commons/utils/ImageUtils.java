@@ -252,7 +252,7 @@ public class ImageUtils {
      */
     public static String getErrorMessageForResult(Context context, @Result int result) {
         StringBuilder errorMessage = new StringBuilder();
-        if (result <= 0 ) {
+        if (result == IMAGE_OK) {
             Timber.d("No issues to warn user is found");
         } else {
             Timber.d("Issues found to warn user");

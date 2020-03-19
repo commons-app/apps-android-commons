@@ -166,7 +166,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param imageResult
      */
     public void handleImageResult(Integer imageResult) {
-        if ((imageResult & IMAGE_KEEP) != 0 || (imageResult & IMAGE_OK) != 0) {
+        if ((imageResult == IMAGE_OK) || (imageResult & IMAGE_KEEP) != 0) {
             view.onImageValidationSuccess();
         } else {
             handleBadImage(imageResult);
