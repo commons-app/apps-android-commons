@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import androidx.exifinterface.media.ExifInterface
 import timber.log.Timber
+import java.io.IOException
 import java.io.InputStream
 
 /**
@@ -26,6 +27,7 @@ class ImageCoordinates internal constructor(exif: ExifInterface?) {
      * Construct from the file path of the image.
      * @param path file path of the image
      */
+    @Throws(IOException::class)
     internal constructor(path: String) : this(ExifInterface(path))
 
 
