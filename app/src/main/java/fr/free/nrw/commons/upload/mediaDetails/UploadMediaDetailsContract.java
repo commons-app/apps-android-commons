@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
-import fr.free.nrw.commons.upload.GPSExtractor;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import java.util.List;
 
 import fr.free.nrw.commons.BasePresenter;
@@ -50,7 +50,7 @@ public interface UploadMediaDetailsContract {
 
         void fetchPreviousTitleAndDescription(int indexInViewFlipper);
 
-        void usePictureCoordinatesFrom(GPSExtractor gpsExtractor);
+        void usePictureCoordinatesFrom(ImageCoordinates imageCoordinates);
 
     }
 

@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
-import fr.free.nrw.commons.upload.GPSExtractor;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -261,7 +261,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
-        GPSExtractor originalPictureExtractor, GPSExtractor similarPictureExtractor) {
+        ImageCoordinates originalPictureExtractor, ImageCoordinates similarPictureExtractor) {
         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
         newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
             @Override

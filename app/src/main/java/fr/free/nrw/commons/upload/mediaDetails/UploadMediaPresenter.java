@@ -9,7 +9,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.repository.UploadRepository;
-import fr.free.nrw.commons.upload.GPSExtractor;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
@@ -81,7 +81,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 .subscribe(uploadItem ->
                         {
                             view.onImageProcessed(uploadItem, place);
-                            GPSExtractor gpsCoords = uploadItem.getGpsCoords();
+                            ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
                             view.showMapWithImageCoordinates(gpsCoords != null && gpsCoords.imageCoordsExists);
                             view.showProgress(false);
                             if (gpsCoords != null && gpsCoords.imageCoordsExists) {
@@ -160,8 +160,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
   @Override
-  public void usePictureCoordinatesFrom(GPSExtractor gpsExtractor) {
-    repository.usePictureCoordinatesFrom(gpsExtractor);
+  public void usePictureCoordinatesFrom(ImageCoordinates imageCoordinates) {
+    repository.usePictureCoordinatesFrom(imageCoordinates);
   }
 
   /**
@@ -212,7 +212,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
-        GPSExtractor originalPictureExtractor, GPSExtractor similarPictureExtractor) {
+        ImageCoordinates originalPictureExtractor, ImageCoordinates similarPictureExtractor) {
         view.showSimilarImageFragment(originalFilePath, possibleFilePath, originalPictureExtractor,
             similarPictureExtractor
         );

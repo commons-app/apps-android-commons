@@ -57,7 +57,7 @@ public class FileProcessor {
   /**
    * Processes filePath coordinates, either from EXIF data or user location
    */
-  GPSExtractor processFileCoordinates(SimilarImageInterface similarImageInterface,
+  ImageCoordinates processFileCoordinates(SimilarImageInterface similarImageInterface,
       String filePath) {
     ExifInterface exifInterface = null;
     try {
@@ -69,8 +69,8 @@ public class FileProcessor {
     redactExifTags(exifInterface, getExifTagsToRedact());
 
     Timber.d("Calling GPSExtractor");
-    GPSExtractor originalImageExtractor = new GPSExtractor(exifInterface);
-    String decimalCoords = originalImageExtractor.getCoords();
+    ImageCoordinates originalImageExtractor = new ImageCoordinates(exifInterface);
+    String decimalCoords = originalImageExtractor.getDecimalCoords();
     if (decimalCoords == null || !originalImageExtractor.imageCoordsExists) {
       //Find other photos taken around the same time which has gps coordinates
       findOtherImages(originalImageExtractor, new File(filePath),
@@ -143,7 +143,7 @@ public class FileProcessor {
    * @param similarImageInterface
    */
   private void findOtherImages(
-      GPSExtractor originalImageExtractor,
+      ImageCoordinates originalImageExtractor,
       File fileBeingProcessed,
       SimilarImageInterface similarImageInterface) {
     //Time when the original image was created
@@ -156,10 +156,10 @@ public class FileProcessor {
           && file.lastModified() - timeOfCreation >= -(120 * 1000)) {
         //Make sure the photos were taken within 20seconds
         Timber.d("fild date:" + file.lastModified() + " time of creation" + timeOfCreation);
-        GPSExtractor similarPictureExtractor = createGpsExtractor(file);
+        ImageCoordinates similarPictureExtractor = createGpsExtractor(file);
         Timber.d("not null fild EXIF" + similarPictureExtractor.imageCoordsExists + " coords"
-            + similarPictureExtractor.getCoords());
-        if (similarPictureExtractor.getCoords() != null
+            + similarPictureExtractor.getDecimalCoords());
+        if (similarPictureExtractor.getDecimalCoords() != null
             && similarPictureExtractor.imageCoordsExists) {
           // Current image has gps coordinates and it's not current gps locaiton
           Timber.d("This filePath has image coords:" + file.getAbsolutePath());
@@ -176,12 +176,17 @@ public class FileProcessor {
   }
 
   @NotNull
-  private GPSExtractor createGpsExtractor(File file) {
+  private ImageCoordinates createGpsExtractor(File file) {
     try {
-      return new GPSExtractor(contentResolver.openInputStream(Uri.fromFile(file)));
+      return new ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file)));
     } catch (IOException e) {
-      e.printStackTrace();
-      return new GPSExtractor(file.getAbsolutePath());
+      Timber.e(e);
+      try {
+        return new ImageCoordinates(file.getAbsolutePath());
+      } catch (IOException ex) {
+        Timber.e(ex);
+        return null;
+      }
     }
   }
 
@@ -189,22 +194,23 @@ public class FileProcessor {
    * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates. Then
    * initiates the calls to MediaWiki API through an instance of CategoryApi.
    *
-   * @param gpsExtractor
+   * @param imageCoordinates
    */
   @SuppressLint("CheckResult")
-  public void useImageCoords(GPSExtractor gpsExtractor) {
-    useImageCoords(gpsExtractor, gpsExtractor.getCoords());
+  public void useImageCoords(ImageCoordinates imageCoordinates) {
+    useImageCoords(imageCoordinates, imageCoordinates.getDecimalCoords());
   }
 
-  private void useImageCoords(GPSExtractor gpsExtractor, String decimalCoords) {
+  private void useImageCoords(ImageCoordinates imageCoordinates, String decimalCoords) {
     if (decimalCoords != null) {
       Timber.d("Decimal coords of image: %s", decimalCoords);
-      Timber.d("is EXIF data present:" + gpsExtractor.imageCoordsExists +
+      Timber.d("is EXIF data present:" + imageCoordinates.imageCoordsExists +
           " from findOther image");
 
       // Only set cache for this point if image has coords
-      if (gpsExtractor.imageCoordsExists) {
-        cacheController.setQtPoint(gpsExtractor.getDecLongitude(), gpsExtractor.getDecLatitude());
+      if (imageCoordinates.imageCoordsExists) {
+        cacheController
+            .setQtPoint(imageCoordinates.getDecLongitude(), imageCoordinates.getDecLatitude());
       }
 
       List<String> displayCatList = cacheController.findCategory();

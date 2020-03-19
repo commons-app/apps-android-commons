@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.repository;
 
-import fr.free.nrw.commons.upload.GPSExtractor;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import java.util.Comparator;
 import java.util.List;
 
@@ -273,7 +273,7 @@ public class UploadRepository {
         return remoteDataSource.getNearbyPlaces(decLatitude, decLongitude);
     }
 
-  public void usePictureCoordinatesFrom(GPSExtractor gpsExtractor) {
-    remoteDataSource.usePictureCoordinatesFrom(gpsExtractor);
+  public void usePictureCoordinatesFrom(ImageCoordinates imageCoordinates) {
+    remoteDataSource.usePictureCoordinatesFrom(imageCoordinates);
   }
 }

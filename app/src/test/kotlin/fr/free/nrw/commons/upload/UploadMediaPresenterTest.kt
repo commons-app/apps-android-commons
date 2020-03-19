@@ -187,8 +187,8 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun showSimilarImageFragmentTest() {
-        val original: GPSExtractor = mock()
-        val similar: GPSExtractor = mock()
+        val original: ImageCoordinates = mock()
+        val similar: ImageCoordinates = mock()
         uploadMediaPresenter.showSimilarImageFragment("original", "possible", original, similar)
         verify(view).showSimilarImageFragment("original", "possible", original, similar)
     }

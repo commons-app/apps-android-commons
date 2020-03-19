@@ -109,11 +109,11 @@ public class UploadModel {
             createdTimestampSource = dateTimeWithSource.getSource();
         }
         Timber.d("File created date is %d", fileCreatedDate);
-        GPSExtractor gpsExtractor = fileProcessor
+        ImageCoordinates imageCoordinates = fileProcessor
                 .processFileCoordinates(similarImageInterface, uploadableFile.getFilePath());
         UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(),
                 Uri.parse(uploadableFile.getFilePath()),
-                uploadableFile.getMimeType(context), source, gpsExtractor, place, fileCreatedDate,
+                uploadableFile.getMimeType(context), source, imageCoordinates, place, fileCreatedDate,
                 createdTimestampSource);
         if (place != null) {
             uploadItem.title.setTitleText(place.name);
@@ -161,7 +161,7 @@ public class UploadModel {
                     item.getFileName(),
                     Description.formatList(item.descriptions), -1,
                     null, null, sessionManager.getAuthorName(),
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getCoords());
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getDecimalCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
                 // If item already has an image, we need to know it. We don't want to override existing image later
@@ -211,7 +211,7 @@ public class UploadModel {
         uploadItem1.setTitle(uploadItem.title);
     }
 
-    public void usePictureCoordinatesFrom(GPSExtractor originalPictureExtractor) {
+    public void usePictureCoordinatesFrom(ImageCoordinates originalPictureExtractor) {
         fileProcessor.useImageCoords(originalPictureExtractor);
     }
 
@@ -222,7 +222,7 @@ public class UploadModel {
         private final Uri mediaUri;
         private final String mimeType;
         private final String source;
-        private final GPSExtractor gpsCoords;
+        private final ImageCoordinates gpsCoords;
 
         private Title title;
         private List<Description> descriptions;
@@ -233,7 +233,7 @@ public class UploadModel {
 
         @SuppressLint("CheckResult")
         UploadItem(Uri originalContentUri,
-                Uri mediaUri, String mimeType, String source, GPSExtractor gpsCoords,
+                Uri mediaUri, String mimeType, String source, ImageCoordinates gpsCoords,
                 Place place,
                 long createdTimestamp,
                 String createdTimestampSource) {
@@ -258,7 +258,7 @@ public class UploadModel {
             return source;
         }
 
-        public GPSExtractor getGpsCoords() {
+        public ImageCoordinates getGpsCoords() {
             return gpsCoords;
         }
 
