@@ -357,10 +357,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     onNextButtonClicked();
-                },
-                () -> {
+                }, null);
 
-                });
     }
 
     @Override
@@ -370,10 +368,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             DialogUtil.showAlertDialog(getActivity(),
                     getString(R.string.warning),
                     errorMessageForResult,
-                    () -> deleteThisPicture(),
-                    () -> {
-                        uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+                    () -> { uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                         onNextButtonClicked();
+                    },
+                    () -> {
+                        deleteThisPicture();
                     });
         }
         //If the error message is null, we will probably not show anything
