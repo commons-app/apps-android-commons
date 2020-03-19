@@ -69,7 +69,7 @@ public class FileUtils {
         try {
             ExifInterface exifInterface = new ExifInterface(filePath);
             ImageCoordinates imageObj = new ImageCoordinates(exifInterface);
-            if (imageObj.imageCoordsExists) { // If image has geolocation information in its EXIF
+            if (imageObj.getDecimalCoords() != null) { // If image has geolocation information in its EXIF
                 return imageObj.getDecimalCoords();
             } else {
                 return "";

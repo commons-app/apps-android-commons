@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
-import java.lang.reflect.Proxy;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -18,14 +20,10 @@ import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import java.lang.reflect.Proxy;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
-import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 public class UploadMediaPresenter implements UserActionListener, SimilarImageInterface {
 
@@ -82,9 +80,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         {
                             view.onImageProcessed(uploadItem, place);
                             ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
-                            view.showMapWithImageCoordinates(gpsCoords != null && gpsCoords.imageCoordsExists);
+                            view.showMapWithImageCoordinates(gpsCoords != null && gpsCoords.getImageCoordsExists());
                             view.showProgress(false);
-                            if (gpsCoords != null && gpsCoords.imageCoordsExists) {
+                            if (gpsCoords != null && gpsCoords.getImageCoordsExists()) {
                                 checkNearbyPlaces(uploadItem);
                             }
                         },
@@ -207,14 +205,14 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * notifies the user that a similar image exists
      * @param originalFilePath
      * @param possibleFilePath
-     * @param originalPictureExtractor
-     * @param similarPictureExtractor
+     * @param originalImageCoordinates
+     * @param similarImageCoordinates
      */
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
-        ImageCoordinates originalPictureExtractor, ImageCoordinates similarPictureExtractor) {
-        view.showSimilarImageFragment(originalFilePath, possibleFilePath, originalPictureExtractor,
-            similarPictureExtractor
+        ImageCoordinates originalImageCoordinates, ImageCoordinates similarImageCoordinates) {
+        view.showSimilarImageFragment(originalFilePath, possibleFilePath, originalImageCoordinates,
+            similarImageCoordinates
         );
     }
 }

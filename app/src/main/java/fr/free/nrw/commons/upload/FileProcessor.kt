@@ -125,7 +125,7 @@ class FileProcessor @Inject constructor(
         fileBeingProcessed: File,
         similarImageInterface: SimilarImageInterface
     ) {
-        val oneHundredAndTwentySeconds = 120 * 1000
+        val oneHundredAndTwentySeconds = 120 * 1000L
         //Time when the original image was created
         val timeOfCreation = fileBeingProcessed.lastModified()
         LongRange

@@ -211,8 +211,8 @@ public class UploadModel {
         uploadItem1.setTitle(uploadItem.title);
     }
 
-    public void usePictureCoordinatesFrom(ImageCoordinates originalPictureExtractor) {
-        fileProcessor.useImageCoords(originalPictureExtractor);
+    public void usePictureCoordinatesFrom(ImageCoordinates imageCoordinates) {
+        fileProcessor.useImageCoords(imageCoordinates);
     }
 
     @SuppressWarnings("WeakerAccess")
