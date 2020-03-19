@@ -30,6 +30,7 @@ class FileProcessor @Inject constructor(
     private val apiCall: CategoryApi
 ) {
     private val compositeDisposable = CompositeDisposable()
+
     fun cleanup() {
         compositeDisposable.clear()
     }
@@ -37,10 +38,8 @@ class FileProcessor @Inject constructor(
     /**
      * Processes filePath coordinates, either from EXIF data or user location
      */
-    fun processFileCoordinates(
-        similarImageInterface: SimilarImageInterface,
-        filePath: String?
-    ): ImageCoordinates {
+    fun processFileCoordinates(similarImageInterface: SimilarImageInterface, filePath: String?)
+            : ImageCoordinates {
         val exifInterface: ExifInterface? = try {
             ExifInterface(filePath!!)
         } catch (e: IOException) {
@@ -51,7 +50,7 @@ class FileProcessor @Inject constructor(
         redactExifTags(exifInterface, getExifTagsToRedact())
         Timber.d("Calling GPSExtractor")
         val originalImageCoordinates = ImageCoordinates(exifInterface)
-        if (originalImageCoordinates.decimalCoords == null ) {
+        if (originalImageCoordinates.decimalCoords == null) {
             //Find other photos taken around the same time which has gps coordinates
             findOtherImages(
                 originalImageCoordinates,
@@ -83,10 +82,7 @@ class FileProcessor @Inject constructor(
      * @param exifInterface ExifInterface object
      * @param redactTags    tags to be redacted
      */
-    private fun redactExifTags(
-        exifInterface: ExifInterface?,
-        redactTags: Set<String>
-    ) {
+    private fun redactExifTags(exifInterface: ExifInterface?, redactTags: Set<String>) {
         compositeDisposable.add(
             Observable.fromIterable(redactTags)
                 .flatMap { Observable.fromArray(*FileMetadataUtils.getTagsFromPref(it)) }
@@ -139,7 +135,7 @@ class FileProcessor @Inject constructor(
             .listFiles()
             .asSequence()
             .filter { it.lastModified() in timeOfCreationRange }
-            .map { Pair(it, readimageCoordinates(it)) }
+            .map { Pair(it, readImageCoordinates(it)) }
             .firstOrNull { it.second?.decimalCoords != null }
             ?.let { fileCoordinatesPair ->
                 similarImageInterface.showSimilarImageFragment(
@@ -151,17 +147,18 @@ class FileProcessor @Inject constructor(
             }
     }
 
-    private fun readimageCoordinates(file: File) = try {
-        ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file)))
-    } catch (e: IOException) {
-        Timber.e(e)
+    private fun readImageCoordinates(file: File) =
         try {
-            ImageCoordinates(file.absolutePath)
-        } catch (ex: IOException) {
-            Timber.e(ex)
-            null
+            ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file)))
+        } catch (e: IOException) {
+            Timber.e(e)
+            try {
+                ImageCoordinates(file.absolutePath)
+            } catch (ex: IOException) {
+                Timber.e(ex)
+                null
+            }
         }
-    }
 
     /**
      * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates. Then
