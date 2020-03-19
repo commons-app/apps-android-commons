@@ -109,7 +109,7 @@ class UploadMediaPresenterTest {
 
         //Bad Picture test
         //Empty Title test
-        uploadMediaPresenter?.handleImageResult(-7)
+        uploadMediaPresenter?.handleImageResult(IMAGE_DUPLICATE + IMAGE_DARK + IMAGE_BLURRY)
         verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt())
 
     }
@@ -158,11 +158,11 @@ class UploadMediaPresenterTest {
     }
 
     /**
-     * Teste show file already exists
+     * Test shows file already exists
      */
     @Test
     fun handleBadImageBaseTestFileNameExists(){
-        uploadMediaPresenter?.handleBadImage(-4)
+        uploadMediaPresenter?.handleBadImage(FILE_NAME_EXISTS)
         verify(view)?.showDuplicatePicturePopup()
     }
 

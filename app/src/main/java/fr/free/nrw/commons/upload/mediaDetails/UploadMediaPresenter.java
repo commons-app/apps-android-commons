@@ -24,6 +24,7 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_GEOLOCATION_DIFFERENT;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
@@ -165,7 +166,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param imageResult
      */
     public void handleImageResult(Integer imageResult) {
-        if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
+        if ((imageResult & IMAGE_KEEP) != 0 || (imageResult & IMAGE_OK) != 0) {
             view.onImageValidationSuccess();
         } else {
             handleBadImage(imageResult);
@@ -179,22 +180,20 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     public void handleBadImage(Integer errorCode) {
         Timber.d("Handle bad picture with error code %d", errorCode);
-        if (errorCode
-                >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
+
+        if ((errorCode & IMAGE_GEOLOCATION_DIFFERENT) != 0) {
+            // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
             repository.saveValue("Picture_Has_Correct_Location", false);
         }
 
-        switch (errorCode) {
-            case EMPTY_TITLE:
-                Timber.d("Title is empty. Showing toast");
-                view.showMessage(R.string.add_title_toast, R.color.color_error);
-                break;
-            case FILE_NAME_EXISTS:
-                Timber.d("Trying to show duplicate picture popup");
-                view.showDuplicatePicturePopup();
-                break;
-            default:
-                view.showBadImagePopup(errorCode);
+        if ((EMPTY_TITLE & errorCode) != 0) {
+            Timber.d("Title is empty. Showing toast");
+            view.showMessage(R.string.add_title_toast, R.color.color_error);
+        } else if ((FILE_NAME_EXISTS & errorCode) != 0) {
+            Timber.d("Trying to show duplicate picture popup");
+            view.showDuplicatePicturePopup();
+        } else {
+            view.showBadImagePopup(errorCode);
         }
     }
 

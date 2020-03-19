@@ -43,7 +43,7 @@ public class ImageUtils {
     /**
      * Set 1st bit as 1 for blurry image ie. 0010
      */
-    static final int IMAGE_BLURRY = 1 << 1; // 2
+    public static final int IMAGE_BLURRY = 1 << 1; // 2
     /**
      * Set 2nd bit as 1 for duplicate image ie. 0100
      */
@@ -63,11 +63,11 @@ public class ImageUtils {
     */
     public static final int FILE_NO_EXIF = 1 << 5;
     public static final int IMAGE_OK = 0;
-    public static final int IMAGE_KEEP = -1;
-    public static final int IMAGE_WAIT = -2;
-    public static final int EMPTY_TITLE = -3;
-    public static final int FILE_NAME_EXISTS = -4;
-    static final int NO_CATEGORY_SELECTED = -5;
+    public static final int IMAGE_KEEP = 1 << 6;
+    public static final int IMAGE_WAIT = 1 << 7;
+    public static final int EMPTY_TITLE = 1 << 8;
+    public static final int FILE_NAME_EXISTS = 1 << 9;
+    public static final int NO_CATEGORY_SELECTED = 1 << 10;
 
     private static ProgressDialog progressDialog;
 
