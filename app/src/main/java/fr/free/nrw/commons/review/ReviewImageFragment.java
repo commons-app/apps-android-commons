@@ -81,8 +81,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             case SPAM:
                 question = getString(R.string.review_spam);
                 explanation = getString(R.string.review_spam_explanation);
-                yesButtonText = getString(R.string.review_spam_yes_button_text);
-                noButtonText = getString(R.string.review_spam_no_button_text);
+                yesButtonText = getString(R.string.no);
+                noButtonText = getString(R.string.yes);
                 yesButton.setOnClickListener(view -> getReviewActivity()
                         .reviewController.reportSpam(requireActivity(), getReviewCallback()));
                 break;
@@ -90,8 +90,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 enableButtons();
                 question = getString(R.string.review_copyright);
                 explanation = getString(R.string.review_copyright_explanation);
-                yesButtonText = getString(R.string.review_copyright_yes_button_text);
-                noButtonText = getString(R.string.review_copyright_no_button_text);
+                yesButtonText = getString(R.string.no);
+                noButtonText = getString(R.string.yes);
                 yesButton.setOnClickListener(view -> getReviewActivity()
                         .reviewController
                         .reportPossibleCopyRightViolation(requireActivity(), getReviewCallback()));
@@ -100,8 +100,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 enableButtons();
                 question = getString(R.string.review_category);
                 explanation = updateCategoriesQuestion();
-                yesButtonText = getString(R.string.review_category_yes_button_text);
-                noButtonText = getString(R.string.review_category_no_button_text);
+                yesButtonText = getString(R.string.no);
+                noButtonText = getString(R.string.yes);
                 yesButton.setOnClickListener(view -> {
                     getReviewActivity()
                             .reviewController
