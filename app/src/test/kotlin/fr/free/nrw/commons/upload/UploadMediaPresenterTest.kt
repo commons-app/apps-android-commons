@@ -15,6 +15,7 @@ import org.mockito.ArgumentMatchers
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
@@ -96,8 +97,10 @@ class UploadMediaPresenterTest {
     @Test
     fun handleImageResult() {
         //Positive case test
+        uploadMediaPresenter?.handleImageResult(IMAGE_OK)
+        //Keep image case test
         uploadMediaPresenter?.handleImageResult(IMAGE_KEEP)
-        verify(view)?.onImageValidationSuccess()
+        verify(view, times(2))?.onImageValidationSuccess()
 
         //Duplicate file name
         uploadMediaPresenter?.handleImageResult(FILE_NAME_EXISTS)
