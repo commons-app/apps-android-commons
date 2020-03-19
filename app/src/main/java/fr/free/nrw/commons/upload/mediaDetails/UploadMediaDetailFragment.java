@@ -368,12 +368,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             DialogUtil.showAlertDialog(getActivity(),
                     getString(R.string.warning),
                     errorMessageForResult,
-                    () -> { uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+                    () -> {
+                        uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                         onNextButtonClicked();
                     },
-                    () -> {
-                        deleteThisPicture();
-                    });
+                    () -> deleteThisPicture()
+        );
         }
         //If the error message is null, we will probably not show anything
     }
