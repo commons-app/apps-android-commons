@@ -151,7 +151,8 @@ public class QuizChecker {
                 activity.getString(R.string.quiz_alert_message, REVERT_PERCENTAGE_FOR_MESSAGE),
                 activity.getString(R.string.about_translate_proceed),
                 activity.getString(android.R.string.cancel),
-                () -> startQuizActivity(activity), null);
+                () -> startQuizActivity(activity),
+                null);
     }
 
     private void startQuizActivity(Activity activity) {
