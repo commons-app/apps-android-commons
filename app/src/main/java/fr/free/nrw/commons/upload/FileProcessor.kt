@@ -53,7 +53,6 @@ class FileProcessor @Inject constructor(
         if (originalImageCoordinates.decimalCoords == null) {
             //Find other photos taken around the same time which has gps coordinates
             findOtherImages(
-                originalImageCoordinates,
                 File(filePath),
                 similarImageInterface
             )
@@ -121,7 +120,6 @@ class FileProcessor @Inject constructor(
      * @param similarImageInterface
      */
     private fun findOtherImages(
-        originalImageCoordinates: ImageCoordinates,
         fileBeingProcessed: File,
         similarImageInterface: SimilarImageInterface
     ) {
@@ -141,7 +139,6 @@ class FileProcessor @Inject constructor(
                 similarImageInterface.showSimilarImageFragment(
                     fileBeingProcessed.path,
                     fileCoordinatesPair.first.absolutePath,
-                    originalImageCoordinates,
                     fileCoordinatesPair.second
                 )
             }
@@ -167,29 +164,28 @@ class FileProcessor @Inject constructor(
      * @param imageCoordinates
      */
     fun useImageCoords(imageCoordinates: ImageCoordinates) {
-        if (imageCoordinates.decimalCoords != null) {
-            cacheController.setQtPoint(imageCoordinates.decLongitude, imageCoordinates.decLatitude)
-            val displayCatList = cacheController.findCategory()
+        requireNotNull(imageCoordinates.decimalCoords)
+        cacheController.setQtPoint(imageCoordinates.decLongitude, imageCoordinates.decLatitude)
+        val displayCatList = cacheController.findCategory()
 
-            // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
-            if (displayCatList.isEmpty()) {
-                compositeDisposable.add(
-                    apiCall.request(imageCoordinates.decimalCoords)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(Schedulers.io())
-                        .subscribe(
-                            { gpsCategoryModel.categoryList = it },
-                            {
-                                Timber.e(it)
-                                gpsCategoryModel.clear()
-                            }
-                        )
-                )
-                Timber.d("displayCatList size 0, calling MWAPI %s", displayCatList)
-            } else {
-                Timber.d("Cache found, setting categoryList in model to %s", displayCatList)
-                gpsCategoryModel.categoryList = displayCatList
-            }
+        // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
+        if (displayCatList.isEmpty()) {
+            compositeDisposable.add(
+                apiCall.request(imageCoordinates.decimalCoords)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io())
+                    .subscribe(
+                        { gpsCategoryModel.categoryList = it },
+                        {
+                            Timber.e(it)
+                            gpsCategoryModel.clear()
+                        }
+                    )
+            )
+            Timber.d("displayCatList size 0, calling MWAPI %s", displayCatList)
+        } else {
+            Timber.d("Cache found, setting categoryList in model to %s", displayCatList)
+            gpsCategoryModel.categoryList = displayCatList
         }
     }
 }

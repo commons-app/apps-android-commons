@@ -50,7 +50,7 @@ public interface UploadMediaDetailsContract {
 
         void fetchPreviousTitleAndDescription(int indexInViewFlipper);
 
-        void usePictureCoordinatesFrom(ImageCoordinates imageCoordinates);
+        void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex);
 
     }
 

@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
@@ -15,7 +16,6 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
@@ -71,7 +71,7 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun receiveImageTest() {
-        Mockito.`when`(
+        whenever(
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
@@ -94,9 +94,9 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun verifyImageQualityTest() {
-        Mockito.`when`(repository.getImageQuality(ArgumentMatchers.any(UploadModel.UploadItem::class.java)))
+        whenever(repository.getImageQuality(ArgumentMatchers.any(UploadModel.UploadItem::class.java)))
             .thenReturn(testSingleImageResult)
-        Mockito.`when`(uploadItem.imageQuality).thenReturn(ArgumentMatchers.anyInt())
+        whenever(uploadItem.imageQuality).thenReturn(ArgumentMatchers.anyInt())
         uploadMediaPresenter.verifyImageQuality(uploadItem)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
@@ -132,11 +132,11 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun fetchPreviousImageAndTitleTestPositive() {
-        Mockito.`when`(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
+        whenever(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
             .thenReturn(uploadItem)
-        Mockito.`when`(uploadItem.descriptions).thenReturn(descriptions)
-        Mockito.`when`(uploadItem.title).thenReturn(title)
-        Mockito.`when`(title.getTitleText()).thenReturn(ArgumentMatchers.anyString())
+        whenever(uploadItem.descriptions).thenReturn(descriptions)
+        whenever(uploadItem.title).thenReturn(title)
+        whenever(title.getTitleText()).thenReturn(ArgumentMatchers.anyString())
 
         uploadMediaPresenter.fetchPreviousTitleAndDescription(0)
         verify(view).setTitleAndDescription(ArgumentMatchers.anyString(), ArgumentMatchers.any())
@@ -147,7 +147,7 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun fetchPreviousImageAndTitleTestNegative() {
-        Mockito.`when`(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
+        whenever(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
             .thenReturn(null)
         uploadMediaPresenter.fetchPreviousTitleAndDescription(0)
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
@@ -159,7 +159,7 @@ class UploadMediaPresenterTest {
     @Test
     fun handleBadImageBaseTestInvalidLocation() {
         uploadMediaPresenter.handleBadImage(8)
-        verify(repository)?.saveValue(ArgumentMatchers.anyString(), eq(false))
+        verify(repository).saveValue(ArgumentMatchers.anyString(), eq(false))
         verify(view).showBadImagePopup(8)
     }
 
@@ -187,10 +187,9 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun showSimilarImageFragmentTest() {
-        val original: ImageCoordinates = mock()
         val similar: ImageCoordinates = mock()
-        uploadMediaPresenter.showSimilarImageFragment("original", "possible", original, similar)
-        verify(view).showSimilarImageFragment("original", "possible", original, similar)
+        uploadMediaPresenter.showSimilarImageFragment("original", "possible", similar)
+        verify(view).showSimilarImageFragment("original", "possible", similar)
     }
 
     /**
@@ -199,7 +198,7 @@ class UploadMediaPresenterTest {
     @Test
     fun setUploadItemTest() {
         uploadMediaPresenter.setUploadItem(0, uploadItem)
-        verify(repository)?.updateUploadItem(0, uploadItem)
+        verify(repository).updateUploadItem(0, uploadItem)
     }
 
 }

@@ -129,10 +129,6 @@ public class UploadModel {
         return uploadItem;
     }
 
-    int getStepCount() {
-        return items.size() + 2;
-    }
-
     public int getCount() {
         return items.size();
     }
@@ -211,8 +207,9 @@ public class UploadModel {
         uploadItem1.setTitle(uploadItem.title);
     }
 
-    public void usePictureCoordinatesFrom(ImageCoordinates imageCoordinates) {
+    public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
         fileProcessor.useImageCoords(imageCoordinates);
+        items.get(uploadItemIndex).setGpsCoords(imageCoordinates);
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -222,7 +219,11 @@ public class UploadModel {
         private final Uri mediaUri;
         private final String mimeType;
         private final String source;
-        private final ImageCoordinates gpsCoords;
+        private ImageCoordinates gpsCoords;
+
+        public void setGpsCoords(ImageCoordinates gpsCoords) {
+            this.gpsCoords = gpsCoords;
+        }
 
         private Title title;
         private List<Description> descriptions;

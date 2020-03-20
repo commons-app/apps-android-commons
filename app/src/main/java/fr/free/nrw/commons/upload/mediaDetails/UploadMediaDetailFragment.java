@@ -255,19 +255,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
-        ImageCoordinates originalImageCoordinates, ImageCoordinates similarImageCoordinates) {
+        ImageCoordinates similarImageCoordinates) {
         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
         newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
             @Override
             public void onPositiveResponse() {
                 Timber.d("positive response from similar image fragment");
-                presenter.usePictureCoordinatesFrom(similarImageCoordinates);
+                presenter.useSimilarPictureCoordinates(similarImageCoordinates, callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
             }
 
             @Override
             public void onNegativeResponse() {
                 Timber.d("negative response from similar image fragment");
-                presenter.usePictureCoordinatesFrom(originalImageCoordinates);
             }
         });
         Bundle args = new Bundle();

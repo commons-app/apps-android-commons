@@ -204,7 +204,7 @@ public class UploadRemoteDataSource {
         }
     }
 
-  public void usePictureCoordinatesFrom(ImageCoordinates imageCoordinates) {
-    uploadModel.usePictureCoordinatesFrom(imageCoordinates);
+  public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+    uploadModel.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
   }
 }

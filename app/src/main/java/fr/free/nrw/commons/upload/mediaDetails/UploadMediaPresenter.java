@@ -158,8 +158,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
   @Override
-  public void usePictureCoordinatesFrom(ImageCoordinates imageCoordinates) {
-    repository.usePictureCoordinatesFrom(imageCoordinates);
+  public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+    repository.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
   }
 
   /**
@@ -205,13 +205,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * notifies the user that a similar image exists
      * @param originalFilePath
      * @param possibleFilePath
-     * @param originalImageCoordinates
      * @param similarImageCoordinates
      */
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
-        ImageCoordinates originalImageCoordinates, ImageCoordinates similarImageCoordinates) {
-        view.showSimilarImageFragment(originalFilePath, possibleFilePath, originalImageCoordinates,
+        ImageCoordinates similarImageCoordinates) {
+        view.showSimilarImageFragment(originalFilePath, possibleFilePath,
             similarImageCoordinates
         );
     }

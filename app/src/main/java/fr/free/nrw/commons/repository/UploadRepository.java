@@ -273,7 +273,7 @@ public class UploadRepository {
         return remoteDataSource.getNearbyPlaces(decLatitude, decLongitude);
     }
 
-  public void usePictureCoordinatesFrom(ImageCoordinates imageCoordinates) {
-    remoteDataSource.usePictureCoordinatesFrom(imageCoordinates);
+  public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+    remoteDataSource.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
   }
 }
