@@ -337,7 +337,7 @@
   <string name="review_thanks_no_button_text">Nächst BILD</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
-  <string name="no_archived_notification">Dir hutt keng archivéier Notifikatiounen</string>
+  <string name="no_read_notification">Dir hutt keng archivéier Notifikatiounen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
   <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>
   <string name="please_wait">Waart wgl. ...</string>

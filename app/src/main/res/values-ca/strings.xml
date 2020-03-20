@@ -356,7 +356,7 @@
   <string name="contributions_fragment">Contribucions</string>
   <string name="nearby_fragment">A prop</string>
   <string name="notifications">Notificacions</string>
-  <string name="archived_notifications">Notificacions (arxivades)</string>
+  <string name="read_notifications">Notificacions (arxivades)</string>
   <string name="display_nearby_notification">Mostra notificacions properes</string>
   <string name="display_nearby_notification_summary">Feu un toc aquí per a veure el lloc més proper que necessiti fotos</string>
   <string name="no_close_nearby">No s\'han trobat llocs propers prop vostre</string>
@@ -437,9 +437,9 @@
   <string name="no_image_reverted">No s\'ha revertit cap imatge</string>
   <string name="no_image_uploaded">No s\'ha carregat cap imatge</string>
   <string name="no_notification">No teniu cap notificació sense llegir</string>
-  <string name="no_archived_notification">No teniu cap notificació arxivada</string>
+  <string name="no_read_notification">No teniu cap notificació arxivada</string>
   <string name="share_logs_using">Comparteix els registres utilitzant</string>
-  <string name="menu_option_archived">Mostra els arxivats</string>
+  <string name="menu_option_read">Mostra els arxivats</string>
   <string name="menu_option_unread">Mostra aquelles per llegir</string>
   <string name="error_occurred_in_picking_images">S\'ha produït un error en escollir les imatges</string>
   <string name="image_chooser_title">Trieu les imatges per carregar</string>

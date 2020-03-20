@@ -400,7 +400,7 @@
   <string name="contributions_fragment">Вклад</string>
   <string name="nearby_fragment">Поблизости</string>
   <string name="notifications">Уведомления</string>
-  <string name="archived_notifications">Уведомления (архивированные)</string>
+  <string name="read_notifications">Уведомления (архивированные)</string>
   <string name="display_nearby_notification">Уведомлять меня о местах поблизости</string>
   <string name="display_nearby_notification_summary">Нажмите здесь, чтобы увидеть ближайшее место без изображений</string>
   <string name="no_close_nearby">Не найдено мест поблизости</string>
@@ -515,9 +515,9 @@
   <string name="no_image_reverted">Нет откаченых изображений</string>
   <string name="no_image_uploaded">Нет загруженных изображений</string>
   <string name="no_notification">У вас нет непрочитанных уведомлений</string>
-  <string name="no_archived_notification">Нет архивированных уведомлений</string>
+  <string name="no_read_notification">Нет архивированных уведомлений</string>
   <string name="share_logs_using">Поделиться лог-файлами</string>
-  <string name="menu_option_archived">См. архивированные</string>
+  <string name="menu_option_read">См. архивированные</string>
   <string name="menu_option_unread">См. непрочитанные</string>
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
   <string name="image_chooser_title">Выберите изображения для загрузки</string>
