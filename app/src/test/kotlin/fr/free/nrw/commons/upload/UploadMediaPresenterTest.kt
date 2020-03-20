@@ -133,7 +133,7 @@ class UploadMediaPresenterTest {
         uploadMediaDetailList.add(uploadMediaDetail)
         uploadMediaDetailAdapter?.addDescription(uploadMediaDetail)
         uploadItem?.setMediaDetails(uploadMediaDetailAdapter?.getUploadMediaDetails())
-        Mockito.`when`(repository?.getImageQuality(uploadItem, true)).then {
+        Mockito.`when`(repository?.getImageQuality(uploadItem)).then {
             verify(view)?.showProgress(true)
             testScheduler?.triggerActions()
             verify(view)?.showProgress(true)
@@ -152,7 +152,7 @@ class UploadMediaPresenterTest {
         uploadMediaDetail.languageCode = "eo"
         uploadMediaDetailAdapter?.addDescription(uploadMediaDetail)
         uploadItem?.setMediaDetails(uploadMediaDetailAdapter?.getUploadMediaDetails())
-        Mockito.`when`(repository?.getImageQuality(uploadItem, true)).then {
+        Mockito.`when`(repository?.getImageQuality(uploadItem)).then {
             verify(view)?.showProgress(true)
             testScheduler?.triggerActions()
             verify(view)?.showProgress(true)
