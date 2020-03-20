@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.filepicker;
 
 import android.content.Context;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 
 public class FilePickerConfiguration implements Constants {
 

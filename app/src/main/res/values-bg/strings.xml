@@ -214,7 +214,6 @@
   <string name="preference_author_name_toggle">Използване на персонализирано авторско име</string>
   <string name="preference_author_name_toggle_summary">При качването използвайте персонализирано авторско име вместо потребителското си име</string>
   <string name="preference_author_name">Персонализирано авторско име</string>
-  <string name="preference_author_name_summary">Персонализираното авторско име, което ще се използва вместо потребителското ви име при качване</string>
   <string name="archived_notifications">Известия (архивирани)</string>
   <string name="list_sheet">Списък</string>
   <string name="next">Следваща</string>

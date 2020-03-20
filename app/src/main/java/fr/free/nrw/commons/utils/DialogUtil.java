@@ -44,8 +44,8 @@ public class DialogUtil {
         showAlertDialog(activity,
                 title,
                 message,
-                activity.getString(R.string.no),
                 activity.getString(R.string.yes),
+                activity.getString(R.string.no),
                 onPositiveBtnClick,
                 onNegativeBtnClick);
     }
@@ -96,8 +96,8 @@ public class DialogUtil {
         showAlertDialog(activity,
                 title,
                 message,
-                activity.getString(R.string.no),
                 activity.getString(R.string.yes),
+                activity.getString(R.string.no),
                 onPositiveBtnClick,
                 onNegativeBtnClick,
                 customView,

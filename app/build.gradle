@@ -5,6 +5,7 @@ apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: "com.hiya.jacoco-android"
 apply from: 'quality.gradle'
 
@@ -38,6 +39,7 @@ dependencies {
     implementation 'com.github.pedrovgs:renderers:3.3.3'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:8.6.2'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v8:0.11.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-scalebar-v9:0.4.0'
     implementation 'com.github.deano2390:MaterialShowcaseView:1.2.0'
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'
@@ -104,12 +106,17 @@ dependencies {
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
 
     //Room
-    def room_version= '2.2.3'
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    implementation "androidx.room:room-runtime:$ROOM_VERSION"
+    kapt "androidx.room:room-compiler:$ROOM_VERSION" // For Kotlin use kapt instead of annotationProcessor
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
-    implementation "androidx.room:room-rxjava2:$room_version"
+    implementation "androidx.room:room-rxjava2:$ROOM_VERSION"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    // Pref
+    // Java language implementation
+    implementation "androidx.preference:preference:$PREFERENCE_VERSION"
+    // Kotlin
+    implementation "androidx.preference:preference-ktx:$PREFERENCE_VERSION"
 }
 
 android {
@@ -284,4 +291,8 @@ if(isRunningOnTravisAndIsNotPRBuild) {
             versionNameOverride = "$versionNameOverride.$versionCode"
         }
     }
+}
+
+androidExtensions {
+    experimental = true
 }

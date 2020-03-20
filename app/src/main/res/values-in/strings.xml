@@ -374,7 +374,6 @@
   <string name="preference_author_name_toggle">Gunakan nama lain</string>
   <string name="preference_author_name_toggle_summary">Gunakan nama lain, bukan nama pengguna Anda saat mengunggah foto</string>
   <string name="preference_author_name">Nama lain</string>
-  <string name="preference_author_name_summary">Nama lain untuk digunakan sebagai ganti nama pengguna Anda pada unggahan</string>
   <string name="contributions_fragment">Kontribusi</string>
   <string name="nearby_fragment">Sekitar</string>
   <string name="notifications">Pemberitahuan</string>

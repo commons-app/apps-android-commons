@@ -393,7 +393,6 @@
   <string name="preference_author_name_toggle">Use custom author name</string>
   <string name="preference_author_name_toggle_summary">Use a custom author name instead of your username while uploading photos</string>
   <string name="preference_author_name">Custom author name</string>
-  <string name="preference_author_name_summary">The custom author name to use instead of your username in uploads</string>
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Nearby</string>
   <string name="notifications">Notifications</string>
@@ -605,4 +604,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="theme_default_name">Default</string>
   <string name="theme_dark_name">Dark</string>
   <string name="theme_light_name">Light</string>
+
+  <string name="cannot_open_location_settings">Failed to open location settings. Please turn on location manually</string>
+  <string name="recommend_high_accuracy_mode">For best results, choose the High Accuracy mode.</string>
+  <string name="ask_to_turn_location_on">Turn on location?</string>
+  <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
+
 </resources>

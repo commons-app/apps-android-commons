@@ -1,99 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
-        android:title="@string/preference_category_appearance">
+    <PreferenceCategory
+      android:title="@string/preference_category_appearance">
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
+        <ListPreference
             android:key="appThemePref"
             android:title= "@string/preference_theme"
+            app:singleLineTitle="false"
             android:entries="@array/pref_theme_entries"
             android:entryValues="@array/pref_theme_entries_values"
-            android:defaultValue="0"
-            android:summary="@string/theme_default_name" />
+            app:useSimpleSummaryProvider="true"
+            android:defaultValue="0" />
 
-    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
+    </PreferenceCategory>
 
-    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
-        android:title="@string/preference_category_general">
+    <PreferenceCategory
+      android:title="@string/preference_category_general">
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
-            android:key="useExternalStorage"
-            android:title="@string/use_external_storage"
-            android:defaultValue="true"
-            android:summary="@string/use_external_storage_summary" />
+        <SwitchPreference
+          android:defaultValue="true"
+          android:key="useExternalStorage"
+          app:singleLineTitle="false"
+          android:summary="@string/use_external_storage_summary"
+          android:title="@string/use_external_storage" />
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleEditTextPreference
-            android:key="uploads"
-            android:defaultValue="100"
-            android:title= "@string/set_limit"
-            android:inputType="number"
-            android:maxLength="3" />
+        <EditTextPreference
+          android:defaultValue="100"
+          android:key="uploads"
+          app:useSimpleSummaryProvider="true"
+          app:singleLineTitle="false"
+          android:title="@string/set_limit" />
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleListPreference
-            android:key="descriptionDefaultLanguagePref"
-            android:title= "@string/default_description_language"
-            android:summary="English" />
+        <ListPreference
+          android:key="descriptionDefaultLanguagePref"
+          app:useSimpleSummaryProvider="true"
+          app:singleLineTitle="false"
+          android:title="@string/default_description_language" />
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
-            android:key="useAuthorName"
-            android:title="@string/preference_author_name_toggle"
-            android:summary="@string/preference_author_name_toggle_summary"/>
+        <SwitchPreference
+          android:key="useAuthorName"
+          app:singleLineTitle="false"
+          android:summary="@string/preference_author_name_toggle_summary"
+          android:title="@string/preference_author_name_toggle" />
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleEditTextPreference
-            android:key="authorName"
-            android:title="@string/preference_author_name"
-            android:summary="@string/preference_author_name_summary"
-            />
+        <EditTextPreference
+          android:key="authorName"
+          app:singleLineTitle="false"
+          app:dependency="useAuthorName"
+          app:useSimpleSummaryProvider="true"
+          android:title="@string/preference_author_name" />
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
-            android:key="displayNearbyCardView"
-            android:title="@string/display_nearby_notification"
-            android:defaultValue="true"
-            android:summary="@string/display_nearby_notification_summary" />
+        <SwitchPreference
+          android:defaultValue="true"
+          android:key="displayNearbyCardView"
+          app:singleLineTitle="false"
+          android:summary="@string/display_nearby_notification_summary"
+          android:title="@string/display_nearby_notification" />
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
-            android:key="displayLocationPermissionForCardView"
-            android:title="@string/display_location_permission_title"
-            android:defaultValue="true"
-            android:summary="@string/display_location_permission_explanation" />
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleSwitchPreference
-            android:key="displayCampaignsCardView"
-            android:title="@string/display_campaigns"
-            android:defaultValue="true"
-            android:summary="@string/display_campaigns_explanation" />
+        <SwitchPreference
+          android:defaultValue="true"
+          android:key="displayLocationPermissionForCardView"
+          app:singleLineTitle="false"
+          android:summary="@string/display_location_permission_explanation"
+          android:title="@string/display_location_permission_title" />
+        <SwitchPreference
+          android:defaultValue="true"
+          android:key="displayCampaignsCardView"
+          app:singleLineTitle="false"
+          android:summary="@string/display_campaigns_explanation"
+          android:title="@string/display_campaigns" />
 
-    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
+    </PreferenceCategory>
 
-    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
-        android:title="@string/preference_category_privacy">
+    <PreferenceCategory
+      android:title="@string/preference_category_privacy">
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitleMultiSelectListPreference
-            android:entries="@array/pref_exifTag_entries"
-            android:entryValues="@array/pref_exifTag_values"
-            android:key="managed_exif_tags"
-            android:title="@string/manage_exif_tags"
-            android:summary="@string/manage_exif_tags_summary"/>
+        <MultiSelectListPreference
+          android:entries="@array/pref_exifTag_entries"
+          android:entryValues="@array/pref_exifTag_values"
+          android:key="managed_exif_tags"
+          app:singleLineTitle="false"
+          android:summary="@string/manage_exif_tags_summary"
+          android:title="@string/manage_exif_tags" />
 
-    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
+    </PreferenceCategory>
 
     <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.
           Do not reuse this key unless you revive the same feature with the changes mentioned at #1599.-->
 
-    <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory
-        android:title="@string/preference_category_feedback">
+    <PreferenceCategory
+      android:title="@string/preference_category_feedback">
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreference
-            android:key="becomeBetaTester"
-            android:title="@string/become_a_tester_title"
-            android:summary="@string/become_a_tester_description">
-        </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreference>
+        <Preference
+          android:key="becomeBetaTester"
+          android:summary="@string/become_a_tester_description"
+          app:singleLineTitle="false"
+          android:title="@string/become_a_tester_title"/>
 
-        <fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreference
-            android:key="sendLogFile"
-            android:title="@string/send_log_file"
-            android:summary="@string/send_log_file_description"/>
+        <Preference
+          android:key="sendLogFile"
+          android:summary="@string/send_log_file_description"
+          app:singleLineTitle="false"
+          android:title="@string/send_log_file" />
 
-    </fr.free.nrw.commons.ui.LongTitlePreferences.LongTitlePreferenceCategory>
+    </PreferenceCategory>
 </PreferenceScreen>

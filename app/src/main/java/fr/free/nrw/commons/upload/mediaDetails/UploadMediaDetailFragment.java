@@ -357,12 +357,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.cancel),
                 getString(R.string.upload),
                 () -> {
-
-                },
-                () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     onNextButtonClicked();
-                });
+                }, null);
+
     }
 
     @Override
@@ -374,11 +372,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     errorMessageForResult,
                     getString(R.string.cancel),
                     getString(R.string.upload),
-                () -> deleteThisPicture(),
-                    () -> {
+                () -> {
                         uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                         onNextButtonClicked();
-                    });
+                    },
+                    () -> deleteThisPicture()
+        );
         }
         //If the error message is null, we will probably not show anything
     }

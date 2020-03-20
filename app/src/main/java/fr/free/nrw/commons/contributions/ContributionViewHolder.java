@@ -1,34 +1,30 @@
 package fr.free.nrw.commons.contributions;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.collection.LruCache;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import org.apache.commons.lang3.StringUtils;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
-import fr.free.nrw.commons.contributions.model.DisplayableContribution;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.upload.FileUtils;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
+import java.util.HashMap;
+import java.util.Random;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
@@ -41,16 +37,9 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.contributionProgress) ProgressBar progressView;
     @BindView(R.id.failed_image_options) LinearLayout failedImageOptions;
 
-    @Inject
-    MediaDataExtractor mediaDataExtractor;
-
-    @Inject
-    @Named("thumbnail-cache")
-    LruCache<String, String> thumbnailCache;
-
-    private DisplayableContribution contribution;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private int position;
+    private Contribution contribution;
+    private Random random = new Random();
 
     ContributionViewHolder(View parent, Callback callback) {
         super(parent);
@@ -58,15 +47,22 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         this.callback=callback;
     }
 
-    public void init(int position, DisplayableContribution contribution) {
-        ApplicationlessInjection.getInstance(itemView.getContext())
-                .getCommonsApplicationComponent().inject(this);
-        this.position=position;
+    public void init(int position, Contribution contribution) {
         this.contribution = contribution;
-        fetchAndDisplayThumbnail(contribution);
+        this.position = position;
+        imageView.getHierarchy().setPlaceholderImage(new ColorDrawable(
+            Color.argb(100, random.nextInt(256), random.nextInt(256), random.nextInt(256))));
+        String imageSource = chooseImageSource(contribution.thumbUrl, contribution.getLocalUri());
+        if (!TextUtils.isEmpty(imageSource)) {
+            final ImageRequest imageRequest =
+                ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
+                    .setProgressiveRenderingEnabled(true)
+                    .build();
+            imageView.setImageRequest(imageRequest);
+        }
         titleView.setText(contribution.getDisplayTitle());
 
-        seqNumView.setText(String.valueOf(contribution.getPosition() + 1));
+        seqNumView.setText(String.valueOf(position + 1));
         seqNumView.setVisibility(View.VISIBLE);
 
         switch (contribution.getState()) {
@@ -104,40 +100,18 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
-     * This method fetches the thumbnail url from file name
-     * If the thumbnail url is present in cache, then it is used otherwise API call is made to fetch the thumbnail
-     * This can be removed once #2904 is in place and contribution contains all metadata beforehand
-     * @param contribution
+     * Returns the image source for the image view, first preference is given to thumbUrl if that is
+     * null, moves to local uri and if both are null return null
+     *
+     * @param thumbUrl
+     * @param localUri
+     * @return
      */
-    private void fetchAndDisplayThumbnail(DisplayableContribution contribution) {
-        String keyForLRUCache = contribution.getFilename();
-        String cacheUrl = thumbnailCache.get(keyForLRUCache);
-        if (!StringUtils.isBlank(cacheUrl)) {
-            imageView.setImageURI(cacheUrl);
-            return;
-        }
-
-        imageView.setBackground(null);
-        if ((contribution.getState() != Contribution.STATE_COMPLETED) && FileUtils.fileExists(
-                contribution.getLocalUri())) {
-            imageView.setImageURI(contribution.getLocalUri());
-        } else {
-            Timber.d("Fetching thumbnail for %s", contribution.getFilename());
-            Disposable disposable = mediaDataExtractor
-                    .getMediaFromFileName(contribution.getFilename())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(media -> {
-                        thumbnailCache.put(keyForLRUCache, media.getThumbUrl());
-                        imageView.setImageURI(media.getThumbUrl());
-                    });
-            compositeDisposable.add(disposable);
-        }
-
-    }
-
-    public void clear() {
-        compositeDisposable.clear();
+    @Nullable
+    private String chooseImageSource(String thumbUrl, Uri localUri) {
+        return !TextUtils.isEmpty(thumbUrl) ? thumbUrl :
+            localUri != null ? localUri.toString() :
+                null;
     }
 
     /**

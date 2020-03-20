@@ -96,7 +96,7 @@
   <string name="gps_disabled">Le GPS est désactivé sur votre appareil. Voulez-vous l’activer ?</string>
   <string name="enable_gps">Activer le GPS</string>
   <string name="contributions_subtitle_zero">Encore aucun téléversement</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -400,7 +400,6 @@
   <string name="preference_author_name_toggle">Utilisez un nom d\'auteur personnalisé</string>
   <string name="preference_author_name_toggle_summary">Utilisez un nom d\'auteur personnalisé au lieu de votre nom d\'utilisateur lorsque vous téléversez des photos</string>
   <string name="preference_author_name">Nom d\'auteur personnalisé</string>
-  <string name="preference_author_name_summary">Le nom d\'auteur personnalisé à utiliser au lieu du nom d\'utilisateur dans vos téléversements</string>
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Proche</string>
   <string name="notifications">Notifications</string>

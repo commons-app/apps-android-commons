@@ -145,8 +145,8 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         private void initLanguageSpinner(int position, Description description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(
                     spinnerDescriptionLanguages.getContext(),
-                    R.layout.row_item_languages_spinner, selectedLanguages,
-                    savedLanguageValue);
+                    selectedLanguages
+            );
             spinnerDescriptionLanguages.setAdapter(languagesAdapter);
 
             spinnerDescriptionLanguages.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -160,7 +160,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
                     selectedLanguages.remove(adapterView);
                     selectedLanguages.put(adapterView, languageCode);
                     ((SpinnerLanguagesAdapter) adapterView
-                            .getAdapter()).selectedLangCode = languageCode;
+                            .getAdapter()).setSelectedLangCode(languageCode);
                     spinnerDescriptionLanguages.setSelection(position);
                     Timber.d("Description language code is: "+languageCode);
                 }

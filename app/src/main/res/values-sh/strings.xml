@@ -34,7 +34,7 @@
   <string name="upload_progress_notification_title_finishing">Završavanje otpremanja „%1$s”</string>
   <string name="upload_failed_notification_title">Otpremanje „%1$s” nije uspelo</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste pogledali</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Otprema se %1$d datoteka</item>
     <item quantity="other">Otpremaju se %1$d datoteke</item>
   </plurals>
@@ -70,16 +70,16 @@
   <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
   <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero">Još uvijek nema otpremanja</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Počinje %1$d otpremanje</item>
     <item quantity="other">Počinju %1$d otpremanja</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d otpremanje</item>
     <item quantity="other">%1$d otpremanja</item>
   </plurals>
@@ -104,7 +104,7 @@
   <string name="no_uploads_yet">Još uvijek niste otpremili nijednu sliku.</string>
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Otkaži</string>
-  <plurals name="share_license_summary">
+  <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">Ova slika će se izvoditi pod licencom %1$s</item>
     <item quantity="other">Ove slike će se izvoditi pod licencama %1$s</item>
   </plurals>

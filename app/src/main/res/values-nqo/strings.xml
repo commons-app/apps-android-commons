@@ -62,12 +62,12 @@
   <string name="gps_disabled">GPS ߟߊߞߎߣߎ߲ߣߍ߲߫ ߕߴߌ ߟߊ߫ ߞߍߟߊ߲ ߠߊ߫. ߊ߬ ߟߊߞߎߣߎ߲ ߞߊߘߴߌ ߦߋ߫ ߓߊ߬؟</string>
   <string name="enable_gps">GPS ߟߊߞߎߣߎ߲߫</string>
   <string name="contributions_subtitle_zero">ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߕߴߦߋ߲߬ ߡߎߣߎ߲߬</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <string name="starting_multiple_uploads">{{Plural|ߟߊ߬ߝߟߐ߬ߟߌ=ߞߋߟߋ߲߫ %1$d ߟߊߦߟߍ߬|ߟߊߝߟߐߟߌ %1$d ߟߊ߬ߦߟߍ߬ߟߌ|ߟߊߝߟߐߟߌ %1$d ߟߎ߫ ߟߊߦߍ߬ߟߍ}}</string>
+  <string name="starting_multiple_uploads" fuzzy="true">{{Plural|ߟߊ߬ߝߟߐ߬ߟߌ=ߞߋߟߋ߲߫ %1$d ߟߊߦߟߍ߬|ߟߊߝߟߐߟߌ %1$d ߟߊ߬ߦߟߍ߬ߟߌ|ߟߊߝߟߐߟߌ %1$d ߟߎ߫ ߟߊߦߍ߬ߟߍ}}</string>
   <string name="categories_not_found">ߞߎߡߘߊ߫ %1$s ߡߊ߫ ߛߐ߬ߘߐ߲߬.</string>
   <string name="categories_activity_title">ߦߌߟߡߊ ߟߎ߬</string>
   <string name="title_activity_settings">ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ</string>
