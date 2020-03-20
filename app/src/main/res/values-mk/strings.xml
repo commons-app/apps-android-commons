@@ -380,7 +380,7 @@
   <string name="contributions_fragment">Придонеси</string>
   <string name="nearby_fragment">Во близина</string>
   <string name="notifications">Известувања</string>
-  <string name="archived_notifications">Известувања (архивирани)</string>
+  <string name="read_notifications">Известувања (архивирани)</string>
   <string name="display_nearby_notification">Известувај ме за места во близина</string>
   <string name="display_nearby_notification_summary">Допрете тука за да го видите најблиското место без слика</string>
   <string name="no_close_nearby">Не најдов места во ваша близина</string>
@@ -494,9 +494,9 @@
   <string name="no_image_reverted">Нема вратени слики</string>
   <string name="no_image_uploaded">Нема подигнати слики</string>
   <string name="no_notification">Немате непрочитани известувања</string>
-  <string name="no_archived_notification">Немате архивирани известувања</string>
+  <string name="no_read_notification">Немате архивирани известувања</string>
   <string name="share_logs_using">Споделувај дневници користејќи</string>
-  <string name="menu_option_archived">Погл. архивирани</string>
+  <string name="menu_option_read">Погл. архивирани</string>
   <string name="menu_option_unread">Погл. непрочитани</string>
   <string name="error_occurred_in_picking_images">Се јави грешка при избирањето на сликите</string>
   <string name="image_chooser_title">Изберете слики за подигање</string>

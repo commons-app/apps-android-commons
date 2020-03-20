@@ -403,7 +403,7 @@
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Proche</string>
   <string name="notifications">Notifications</string>
-  <string name="archived_notifications">Notifications (archivées)</string>
+  <string name="read_notifications">Notifications (archivées)</string>
   <string name="display_nearby_notification">Afficher la notification de proximité</string>
   <string name="display_nearby_notification_summary">Taper ici pour voir l’endroit le plus proche qui a besoin d’images</string>
   <string name="no_close_nearby">Aucun endroit à proximité trouvé près de chez vous</string>
@@ -517,9 +517,9 @@
   <string name="no_image_reverted">Aucune image retournée</string>
   <string name="no_image_uploaded">Aucune image téléversée</string>
   <string name="no_notification">Vous n\'avez aucune notification non lue</string>
-  <string name="no_archived_notification">Vous n’avez pas de notification archivée</string>
+  <string name="no_read_notification">Vous n’avez pas de notification archivée</string>
   <string name="share_logs_using">Partager les journaux en utilisant</string>
-  <string name="menu_option_archived">Afficher les archivés</string>
+  <string name="menu_option_read">Afficher les archivés</string>
   <string name="menu_option_unread">Afficher les non lus</string>
   <string name="error_occurred_in_picking_images">Erreur lors de la sélection des images</string>
   <string name="image_chooser_title">Choisir les images à téléverser</string>

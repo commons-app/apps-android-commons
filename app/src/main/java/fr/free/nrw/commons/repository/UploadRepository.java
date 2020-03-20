@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.repository;
 
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import java.util.Comparator;
 import java.util.List;
 
@@ -307,4 +308,7 @@ public class UploadRepository {
         return remoteDataSource.getNearbyPlaces(decLatitude, decLongitude);
     }
 
+    public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+        remoteDataSource.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
+    }
 }

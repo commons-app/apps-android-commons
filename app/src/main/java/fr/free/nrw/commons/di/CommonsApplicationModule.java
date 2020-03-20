@@ -2,6 +2,7 @@ package fr.free.nrw.commons.di;
 
 import android.app.Activity;
 import android.content.ContentProviderClient;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 import androidx.collection.LruCache;
@@ -37,8 +38,8 @@ import javax.inject.Singleton;
 import org.wikipedia.AppAdapter;
 
 /**
- * The Dependency Provider class for Commons Android. 
- * 
+ * The Dependency Provider class for Commons Android.
+ *
  * Provides all sorts of ContentProviderClients used by the app
  * along with the Liscences, AccountUtility, UploadController, Logged User,
  * Location manager etc
@@ -94,7 +95,7 @@ public class CommonsApplicationModule {
     }
 
     /**
-     * Provides an instance of CategoryContentProviderClient i.e. the categories 
+     * Provides an instance of CategoryContentProviderClient i.e. the categories
      * that are there in local storage
      */
     @Provides
@@ -201,7 +202,7 @@ public class CommonsApplicationModule {
 
     /**
      * Provide JavaRx IO scheduler which manages IO operations
-     * across various Threads 
+     * across various Threads
      */
     @Named(IO_THREAD)
     @Provides
@@ -240,5 +241,10 @@ public class CommonsApplicationModule {
     @Provides
     public ContributionDao providesContributionsDao(AppDatabase appDatabase) {
         return appDatabase.contributionDao();
+    }
+
+    @Provides
+    public ContentResolver providesContentResolver(Context context){
+        return context.getContentResolver();
     }
 }

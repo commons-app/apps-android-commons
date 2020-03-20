@@ -397,7 +397,7 @@
   <string name="contributions_fragment">Внесок</string>
   <string name="nearby_fragment">Поблизу</string>
   <string name="notifications">Сповіщення</string>
-  <string name="archived_notifications">Сповіщення (архівовані)</string>
+  <string name="read_notifications">Сповіщення (архівовані)</string>
   <string name="display_nearby_notification">Повідомляти мене про місця поблизу</string>
   <string name="display_nearby_notification_summary">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
   <string name="no_close_nearby">Не знайдено місць поблизу Вас</string>
@@ -513,9 +513,9 @@
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
   <string name="no_notification">У вас немає непрочитаних сповіщень</string>
-  <string name="no_archived_notification">Немає архівованих сповіщень</string>
+  <string name="no_read_notification">Немає архівованих сповіщень</string>
   <string name="share_logs_using">Поширення журналів</string>
-  <string name="menu_option_archived">Перегляд архівованих</string>
+  <string name="menu_option_read">Перегляд архівованих</string>
   <string name="menu_option_unread">Перегляд непрочитаних</string>
   <string name="error_occurred_in_picking_images">Сталася помилка при завантаженні зображень</string>
   <string name="image_chooser_title">Оберіть зображення для завантаження</string>
