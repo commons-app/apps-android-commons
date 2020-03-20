@@ -24,7 +24,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import javax.inject.Inject;
 import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
@@ -40,16 +39,17 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.contributionProgress) ProgressBar progressView;
     @BindView(R.id.failed_image_options) LinearLayout failedImageOptions;
 
-    @Inject
-    MediaClient mediaClient;
 
     private int position;
     private Contribution contribution;
     private Random random = new Random();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final MediaClient mediaClient;
 
-    ContributionViewHolder(View parent, Callback callback) {
+    ContributionViewHolder(View parent, Callback callback,
+        MediaClient mediaClient) {
         super(parent);
+        this.mediaClient = mediaClient;
         ButterKnife.bind(this, parent);
         this.callback=callback;
     }
