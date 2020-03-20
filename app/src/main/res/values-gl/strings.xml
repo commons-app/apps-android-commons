@@ -78,7 +78,7 @@
   <string name="gps_disabled">O GPS está desactivado no seu dispositivo. Quere activalo?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">Aínda non hai subas</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -382,7 +382,6 @@
   <string name="preference_author_name_toggle">Usar nome personalizado de autor</string>
   <string name="preference_author_name_toggle_summary">Usar un nome personalizado de autor en lugar do seu nome de usuario á hora de cargar imaxes</string>
   <string name="preference_author_name">Nome personalizado de autor</string>
-  <string name="preference_author_name_summary">O nome personalizado de autor a utilizar nas cargas en lugar do seu nome de usuario</string>
   <string name="contributions_fragment">Contribucións</string>
   <string name="nearby_fragment">Preto</string>
   <string name="notifications">Notificacións</string>

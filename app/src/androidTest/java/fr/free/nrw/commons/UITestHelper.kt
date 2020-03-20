@@ -9,7 +9,11 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
 import org.apache.commons.lang3.StringUtils
+import org.hamcrest.BaseMatcher
+import org.hamcrest.Description
+import org.hamcrest.Matcher
 import timber.log.Timber
+
 
 class UITestHelper {
     companion object {
@@ -34,7 +38,7 @@ class UITestHelper {
                 closeSoftKeyboard()
                 onView(ViewMatchers.withId(R.id.login_button))
                         .perform(ViewActions.click())
-                sleep(5000)
+                sleep(10000)
             } catch (ignored: NoMatchingViewException) {
             }
 
@@ -67,6 +71,23 @@ class UITestHelper {
             assert(activityRule.activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
             activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             assert(activityRule.activity.requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+        }
+
+        fun <T> first(matcher: Matcher<T>): Matcher<T>? {
+            return object : BaseMatcher<T>() {
+                var isFirst = true
+                override fun matches(item: Any): Boolean {
+                    if (isFirst && matcher.matches(item)) {
+                        isFirst = false
+                        return true
+                    }
+                    return false
+                }
+
+                override fun describeTo(description: Description) {
+                    description.appendText("should return first matching item")
+                }
+            }
         }
     }
 }

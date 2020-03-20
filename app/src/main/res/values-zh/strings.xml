@@ -397,7 +397,6 @@
   <string name="preference_author_name_toggle">使用自定义的作者姓名</string>
   <string name="preference_author_name_toggle_summary">在上传照片时使用自定义的作者姓名，而不是用户名</string>
   <string name="preference_author_name">自定义作者姓名</string>
-  <string name="preference_author_name_summary">上传时自定义的作者姓名，不是用户名</string>
   <string name="contributions_fragment">贡献</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>

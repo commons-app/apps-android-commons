@@ -72,7 +72,7 @@
   <string name="gps_disabled">El GPS ta desactiváu nel preséu. ¿Quiés activalu?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -376,7 +376,6 @@
   <string name="preference_author_name_toggle">Usar nome d\'autor personalizáu</string>
   <string name="preference_author_name_toggle_summary">Usar un nome d\'autor personalizáu en cuenta del to nome d\'usuariu al xubir semeyes</string>
   <string name="preference_author_name">Nome d\'autor personalizáu</string>
-  <string name="preference_author_name_summary">El nome d\'autor personalizáu pa usar nes xubíes en cuenta del to nome d\'usuariu</string>
   <string name="contributions_fragment">Collaboraciones</string>
   <string name="nearby_fragment">Cercanu</string>
   <string name="notifications">Avisos</string>

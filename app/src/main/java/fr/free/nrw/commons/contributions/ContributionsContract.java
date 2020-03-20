@@ -26,10 +26,15 @@ public class ContributionsContract {
     }
 
     public interface UserActionListener extends BasePresenter<ContributionsContract.View> {
+
         Contribution getContributionsWithTitle(String uri);
 
         void deleteUpload(Contribution contribution);
 
         Media getItemAtPosition(int i);
+
+        void updateContribution(Contribution contribution);
+
+        void fetchMediaDetails(Contribution contribution);
     }
 }

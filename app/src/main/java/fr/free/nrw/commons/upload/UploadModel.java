@@ -3,31 +3,8 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-
 import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Locale;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import androidx.annotation.Nullable;
-
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper;
@@ -40,6 +17,17 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.BehaviorSubject;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import timber.log.Timber;
 
 @Singleton
@@ -131,8 +119,8 @@ public class UploadModel {
         return Observable.just(getUploadItem(uploadableFile, place, source, similarImageInterface));
     }
 
-    public Single<Integer> getImageQuality(UploadItem uploadItem, boolean checkTitle) {
-        return imageProcessingService.validateImage(uploadItem, checkTitle);
+    public Single<Integer> getImageQuality(UploadItem uploadItem) {
+        return imageProcessingService.validateImage(uploadItem);
     }
 
     private UploadItem getUploadItem(UploadableFile uploadableFile,
@@ -213,6 +201,8 @@ public class UploadModel {
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, selectedDepictions, item.gpsCoords.getCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
+                // If item already has an image, we need to know it. We don't want to override existing image later
+                contribution.setP18Value(item.place.pic);
             }
             if (null == selectedCategories) {//Just a fail safe, this should never be null
                 selectedCategories = new ArrayList<>();

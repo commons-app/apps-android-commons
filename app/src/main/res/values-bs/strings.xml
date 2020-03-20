@@ -26,7 +26,7 @@
   <string name="upload_progress_notification_title_finishing">Postavljanje datoteke %1$s završeno</string>
   <string name="upload_failed_notification_title">Postavljanje datoteke %1$s nije uspjelo</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">postavlja se %1$d datoteka</item>
     <item quantity="other">postavlja se %1$d datoteka</item>
   </plurals>

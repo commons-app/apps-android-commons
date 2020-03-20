@@ -82,7 +82,7 @@
   <string name="gps_disabled">GPS ist auf deinem Gerät deaktiviert. Möchtest du es aktivieren?</string>
   <string name="enable_gps">GPS aktivieren</string>
   <string name="contributions_subtitle_zero">Noch keine hochgeladenen Dateien</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Eine hochgeladene Datei</item>
     <item quantity="other">%1$d hochgeladene Dateien</item>
@@ -385,7 +385,6 @@
   <string name="preference_author_name_toggle">Benutzerdefinierten Namen des Autors verwenden</string>
   <string name="preference_author_name_toggle_summary">Einen benutzerdefinierten Namen des Autors anstelle deines Benutzernamens beim Hochladen von Fotos verwenden</string>
   <string name="preference_author_name">Benutzerdefinierter Name des Autors</string>
-  <string name="preference_author_name_summary">Der benutzerdefinierte Name des Autors, der anstelle deines Benutzernamens in den hochgeladenen Dateien erscheinen soll.</string>
   <string name="contributions_fragment">Beiträge</string>
   <string name="nearby_fragment">In der Nähe</string>
   <string name="notifications">Benachrichtigungen</string>

@@ -111,14 +111,14 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * asks the repository to verify image quality
      *
      * @param uploadItem
-     * @param validateTitle
      */
     @Override
-    public void verifyImageQuality(UploadItem uploadItem, boolean validateTitle) {
+    public void verifyImageQuality(UploadItem uploadItem) {
         view.showProgress(true);
-        Disposable imageQualityDisposable = repository
-                .getImageQuality(uploadItem, true)
-                .subscribeOn(ioScheduler)
+
+        compositeDisposable.add(
+            repository
+                .getImageQuality(uploadItem)
                 .observeOn(mainThreadScheduler)
                 .subscribe(imageResult -> {
                             view.showProgress(false);
@@ -129,9 +129,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                             view.showMessage("" + throwable.getLocalizedMessage(),
                                     R.color.color_error);
                             Timber.e(throwable, "Error occurred while handling image");
-                        });
-
-        compositeDisposable.add(imageQualityDisposable);
+                        })
+        );
     }
 
     /**

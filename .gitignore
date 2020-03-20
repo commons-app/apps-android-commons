@@ -1,9 +1,12 @@
 # IDEA files
 *.iml
-*.iws
 *.ipr
-.idea
+*.iws
+/.idea/*
 app/src/main/gen/*
+
+# IDEA/Android Studio Ignore exceptions
+!/.idea/codeStyles/
 
 # Gradle
 .gradle

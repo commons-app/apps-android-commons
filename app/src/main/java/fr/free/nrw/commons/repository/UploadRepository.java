@@ -193,11 +193,10 @@ public class UploadRepository {
      * query the RemoteDataSource for image quality
      *
      * @param uploadItem
-     * @param shouldValidateTitle
      * @return
      */
-    public Single<Integer> getImageQuality(UploadItem uploadItem, boolean shouldValidateTitle) {
-        return remoteDataSource.getImageQuality(uploadItem, shouldValidateTitle);
+    public Single<Integer> getImageQuality(UploadItem uploadItem) {
+        return remoteDataSource.getImageQuality(uploadItem);
     }
 
     /**

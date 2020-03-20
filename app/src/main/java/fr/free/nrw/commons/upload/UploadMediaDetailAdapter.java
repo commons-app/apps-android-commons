@@ -202,8 +202,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         private void initLanguageSpinner(int position, UploadMediaDetail description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(
                     spinnerDescriptionLanguages.getContext(),
-                    R.layout.row_item_languages_spinner, selectedLanguages,
-                    savedLanguageValue);
+                    selectedLanguages
+            );
             spinnerDescriptionLanguages.setAdapter(languagesAdapter);
 
             spinnerDescriptionLanguages.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -217,7 +217,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                     selectedLanguages.remove(adapterView);
                     selectedLanguages.put(adapterView, languageCode);
                     ((SpinnerLanguagesAdapter) adapterView
-                            .getAdapter()).selectedLangCode = languageCode;
+                            .getAdapter()).setSelectedLangCode(languageCode);
                     spinnerDescriptionLanguages.setSelection(position);
                     Timber.d("Description language code is: "+languageCode);
                 }

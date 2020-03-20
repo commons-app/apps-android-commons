@@ -65,7 +65,7 @@ class UploadModelTest {
                 .thenReturn(mock(FileInputStream::class.java))
         `when`(fileUtilsWrapper!!.getGeolocationOfFile(anyString()))
                 .thenReturn("")
-        `when`(imageProcessingService!!.validateImage(any(UploadModel.UploadItem::class.java), anyBoolean()))
+        `when`(imageProcessingService!!.validateImage(any(UploadModel.UploadItem::class.java)))
                 .thenReturn(Single.just(IMAGE_OK))
 
     }

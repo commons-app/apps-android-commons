@@ -386,7 +386,6 @@
   <string name="preference_author_name_toggle">専用の投稿者名を使う</string>
   <string name="preference_author_name_toggle_summary">画像の投稿にはユーザー名ではなく専用の投稿者名を使う</string>
   <string name="preference_author_name">投稿専用の名前</string>
-  <string name="preference_author_name_summary">ユーザー名ではなく、投稿専用の投稿者名</string>
   <string name="contributions_fragment">投稿記録</string>
   <string name="nearby_fragment">付近</string>
   <string name="notifications">お知らせ</string>

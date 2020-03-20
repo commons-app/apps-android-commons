@@ -35,7 +35,7 @@
   <string name="upload_progress_notification_title_finishing">Završeno postavljanje %1$s</string>
   <string name="upload_failed_notification_title">Postavljanje %1$s neuspješno</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Postavlja se %1$d datoteka</item>
     <item quantity="other">Postavljaju se %1$d datoteke</item>
   </plurals>
@@ -75,11 +75,11 @@
     <item quantity="one">%1$d postavljena datoteka</item>
     <item quantity="other">%1$d postavljene datoteke</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Započeto %1$d postavljanje</item>
     <item quantity="other">Započeta %1$d postavljanja</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d postavljanje</item>
     <item quantity="other">%1$d postavljanja</item>
   </plurals>
@@ -280,10 +280,19 @@
   <string name="level">Razina</string>
   <string name="error_occurred">Došlo je do pogrješke!</string>
   <string name="notifications_channel_name_all">Obavijesti Zajedničkoga poslužitelja</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Toliko ste pridonijeli projektu da se naš sustav za računanje postignuća ne može nositi s time. To je vrhunsko postignuće.</string>
   <string name="error_processing_image">Došlo je do pogrješke tijekom obradbe slike. Molimo Vas, pokušajte ponovo!</string>
   <string name="please_wait">Molimo Vas, pričekajte ...</string>
   <string name="skip_image">Preskoči ovu sliku</string>
   <string name="default_description_language">Zadani jezik za opis</string>
+  <string name="title_app_shortcut_explore">Istraži</string>
+  <string name="title_app_shortcut_bookmark">Oznake</string>
+  <string name="title_app_shortcut_setting">Postavke</string>
+  <string name="remove_bookmark">Uklonjeno iz oznaka</string>
+  <string name="add_bookmark">Dodano u oznake</string>
+  <string name="wallpaper_set_unsuccessfully">Nešto je pošlo po zlu. Ne možemo postaviti pozadinu</string>
+  <string name="setting_wallpaper_dialog_title">Postavi kao pozadinu</string>
+  <string name="setting_wallpaper_dialog_message">Postavljanje pozadine. Molimo, pričekajte...</string>
   <string name="theme_default_name">Zadano</string>
   <string name="theme_dark_name">Tamno</string>
   <string name="theme_light_name">Svijetlo</string>

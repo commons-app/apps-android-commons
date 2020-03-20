@@ -97,7 +97,7 @@
   <string name="gps_disabled">El GPS está desactivado en tu dispositivo. ¿Quieres activarlo?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">No hay subidas aún</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -401,7 +401,6 @@
   <string name="preference_author_name_toggle">Usar nombre de autor personalizado</string>
   <string name="preference_author_name_toggle_summary">Usar un nombre de autor personalizado en vez de tu nombre de usuario al subir fotos</string>
   <string name="preference_author_name">Nombre de autor personalizado</string>
-  <string name="preference_author_name_summary">El nombre de autor personalizado para usar en las subidas en vez de tu nombre de usuario</string>
   <string name="contributions_fragment">Contribuciones</string>
   <string name="nearby_fragment">Cercanos</string>
   <string name="notifications">Notificaciones</string>

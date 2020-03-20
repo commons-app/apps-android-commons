@@ -72,7 +72,7 @@
   <string name="gps_disabled">اوهان جي ڊوائيس ۾ جي پي ايس بند آهي. ڇا اوهان ان کي کولڻ چاهيو ٿا؟</string>
   <string name="enable_gps">جي پي ايس چالو ڪيو (اين ايبل جي پي ايس)</string>
   <string name="contributions_subtitle_zero">اڃا تائين ڪوبہ چاڙھ ناھي</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
