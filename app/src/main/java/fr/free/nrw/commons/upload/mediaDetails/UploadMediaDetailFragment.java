@@ -355,7 +355,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         uploadTitleFormat,
                         uploadItem.getFileName()),
                 getString(R.string.cancel),
-                getString(R.string.upload_proceed),
+                getString(R.string.upload),
                 () -> {
 
                 },
@@ -370,10 +370,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         String errorMessageForResult = getErrorMessageForResult(getContext(), errorCode);
         if (!StringUtils.isBlank(errorMessageForResult)) {
             DialogUtil.showAlertDialog(getActivity(),
-                    getString(R.string.duplicate_image_found),
+                    getString(R.string.upload_problem_image),
                     errorMessageForResult,
                     getString(R.string.cancel),
-                    getString(R.string.upload_proceed),
+                    getString(R.string.upload),
                 () -> deleteThisPicture(),
                     () -> {
                         uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
