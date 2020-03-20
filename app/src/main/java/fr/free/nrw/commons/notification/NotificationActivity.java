@@ -186,7 +186,7 @@ public class NotificationActivity extends NavigationBaseActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.archived:
-                if (item.getTitle().equals(getString(R.string.menu_option_archived))) {
+                if (item.getTitle().equals(getString(R.string.menu_option_read))) {
                     NotificationActivity.startYourself(NotificationActivity.this, "read");
                 }else if (item.getTitle().equals(getString(R.string.menu_option_unread))) {
                     onBackPressed();
@@ -252,7 +252,7 @@ public class NotificationActivity extends NavigationBaseActivity {
     private void setPageTitle() {
         if (getSupportActionBar() != null) {
             if (getIntent().getStringExtra("title").equals("read")) {
-                getSupportActionBar().setTitle(R.string.archived_notifications);
+                getSupportActionBar().setTitle(R.string.read_notifications);
             } else {
                 getSupportActionBar().setTitle(R.string.notifications);
             }
@@ -261,7 +261,7 @@ public class NotificationActivity extends NavigationBaseActivity {
 
     private void setEmptyView() {
         if (getIntent().getStringExtra("title").equals("read")) {
-            noNotificationText.setText(R.string.no_archived_notification);
+            noNotificationText.setText(R.string.no_read_notification);
         }else {
             noNotificationText.setText(R.string.no_notification);
         }
@@ -272,7 +272,7 @@ public class NotificationActivity extends NavigationBaseActivity {
             notificationMenuItem.setTitle(R.string.menu_option_unread);
 
         }else {
-            notificationMenuItem.setTitle(R.string.menu_option_archived);
+            notificationMenuItem.setTitle(R.string.menu_option_read);
 
         }
     }

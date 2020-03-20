@@ -396,7 +396,7 @@
   <string name="contributions_fragment">Katkılar</string>
   <string name="nearby_fragment">Yakınındakiler</string>
   <string name="notifications">Bildirimler</string>
-  <string name="archived_notifications">Bildirimler (arşivlenmiş)</string>
+  <string name="read_notifications">Bildirimler (arşivlenmiş)</string>
   <string name="display_nearby_notification">Yakındaki bildirimi görüntüle</string>
   <string name="display_nearby_notification_summary">Resimlere en yakın yeri görmek için buraya dokunun</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
@@ -510,9 +510,9 @@
   <string name="no_image_reverted">Resim döndürülmedi</string>
   <string name="no_image_uploaded">Resim yüklenmedi</string>
   <string name="no_notification">Okunmamış bildirimleriniz yok</string>
-  <string name="no_archived_notification">Arşivlenmiş bildiriminiz yok</string>
+  <string name="no_read_notification">Arşivlenmiş bildiriminiz yok</string>
   <string name="share_logs_using">Kullanarak günlükleri paylaş</string>
-  <string name="menu_option_archived">Arşivlenmişleri görüntüle</string>
+  <string name="menu_option_read">Arşivlenmişleri görüntüle</string>
   <string name="menu_option_unread">Okunmamışları görüntüle</string>
   <string name="error_occurred_in_picking_images">Resimler toplanırken hata oluştu</string>
   <string name="image_chooser_title">Yüklenecek Görüntüleri Seçin</string>

@@ -389,7 +389,7 @@
   <string name="contributions_fragment">貢獻</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
-  <string name="archived_notifications">通知（已存檔）</string>
+  <string name="read_notifications">通知（已存檔）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
   <string name="display_nearby_notification_summary">在此輕觸來查看缺少圖片的最近地點</string>
   <string name="no_close_nearby">查無靠近您的附近地點</string>
@@ -503,9 +503,9 @@
   <string name="no_image_reverted">沒有圖片被還原回復</string>
   <string name="no_image_uploaded">沒有圖片被上傳</string>
   <string name="no_notification">您有尚未讀取的通知</string>
-  <string name="no_archived_notification">您沒有已存檔通知</string>
+  <string name="no_read_notification">您沒有已存檔通知</string>
   <string name="share_logs_using">分享日誌使用</string>
-  <string name="menu_option_archived">檢視已存檔</string>
+  <string name="menu_option_read">檢視已存檔</string>
   <string name="menu_option_unread">檢視未讀</string>
   <string name="error_occurred_in_picking_images">當挑選圖片時發生錯誤</string>
   <string name="image_chooser_title">選擇要上傳的圖片</string>
