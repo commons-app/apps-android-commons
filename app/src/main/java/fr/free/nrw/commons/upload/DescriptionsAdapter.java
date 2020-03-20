@@ -18,13 +18,13 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
-import fr.free.nrw.commons.utils.BiMap;
 import timber.log.Timber;
 
 public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
@@ -32,12 +32,12 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
     private List<Description> descriptions;
     private Callback callback;
 
-    private BiMap<AdapterView, String> selectedLanguages;
+    private HashMap<AdapterView, String> selectedLanguages;
     private String savedLanguageValue;
 
     public DescriptionsAdapter(String savedLanguageValue) {
         descriptions = new ArrayList<>();
-        selectedLanguages = new BiMap<>();
+        selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
     }
 
@@ -47,7 +47,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
 
     public void setItems(List<Description> descriptions) {
         this.descriptions = descriptions;
-        selectedLanguages = new BiMap<>();
+        selectedLanguages = new HashMap<>();
         notifyDataSetChanged();
     }
 

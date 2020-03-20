@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import androidx.annotation.LayoutRes
 import androidx.core.os.ConfigurationCompat
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.BiMap
 import fr.free.nrw.commons.utils.LangCodeUtils
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_item_languages_spinner.*
@@ -24,7 +23,7 @@ import java.util.*
  */
 class SpinnerLanguagesAdapter constructor(
     context: Context,
-    private val selectedLanguages: BiMap<*, String>
+    private val selectedLanguages: HashMap<*, String>
 ) : ArrayAdapter<Any?>(context, -1) {
 
     private val languageNamesList: List<String>
