@@ -50,6 +50,7 @@ import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
@@ -201,6 +202,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isVisibleToUser;
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
+    private LatLngBounds latLngBounds;
 
 
     @Override
@@ -633,6 +635,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public boolean isCurrentLocationMarkerVisible() {
+        if (latLngBounds == null) {
+            Timber.d("Map projection bounds are null");
+            return false;
+        } else {
+            Timber.d("Current location marker %s" , latLngBounds.contains(currentLocationMarker.getPosition()) ? "visible" : "invisible");
+            return latLngBounds.contains(currentLocationMarker.getPosition());
+        }
+    }
+
+    @Override
+    public void setProjectorLatLngBounds() {
+        latLngBounds = mapBox.getProjection().getVisibleRegion().latLngBounds;
+    }
+
+    @Override
     public boolean isNetworkConnectionEstablished() {
         return NetworkUtils.isInternetConnectionEstablished(getActivity());
     }
@@ -906,9 +924,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void handleLocationUpdate(fr.free.nrw.commons.location.LatLng latLng, LocationServiceManager.LocationChangeType locationChangeType){
-        setMapBoxPosition(latLng);
-        this.lastKnownLocation=latLng;
-        NearbyController.currentLocation=lastKnownLocation;
+        this.lastKnownLocation = latLng;
+        NearbyController.currentLocation = lastKnownLocation;
         presenter.updateMapAndList(locationChangeType);
     }
 
@@ -939,14 +956,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (isMapBoxReady && latLng != null && !isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
         }
-    }
-
-    void setMapBoxPosition(fr.free.nrw.commons.location.LatLng latLng){
-        CameraPosition position = new CameraPosition.Builder()
-                .target(LocationUtils.commonsLatLngToMapBoxLatLng(latLng)) // Sets the new camera position
-                .zoom(ZOOM_LEVEL) // Same zoom level
-                .build();
-        mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
     }
 
     public void backButtonClicked() {
