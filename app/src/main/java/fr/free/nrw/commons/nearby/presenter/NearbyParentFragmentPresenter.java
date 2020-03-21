@@ -8,8 +8,6 @@ import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -21,9 +19,7 @@ import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
-import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
-import fr.free.nrw.commons.upload.UploadContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
@@ -194,7 +190,7 @@ public class NearbyParentFragmentPresenter
             nearbyParentFragmentView.populatePlaces(nearbyParentFragmentView.getCameraTarget());
         } else { // Means location changed slightly, ie user is walking or driving.
             Timber.d("Means location changed slightly");
-            if (!nearbyParentFragmentView.isSearchThisAreaButtonVisible()) { // Do not track users position if the user is checking around
+            if (nearbyParentFragmentView.isCurrentLocationMarkerVisible()){ // Means user wants to see their live location
                 nearbyParentFragmentView.recenterMap(curLatLng);
             }
         }
@@ -259,6 +255,7 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
+        nearbyParentFragmentView.setProjectorLatLngBounds();
             // If our nearby markers are calculated at least once
             if (NearbyController.latestSearchLocation != null) {
                double distance =latLng.distanceTo
