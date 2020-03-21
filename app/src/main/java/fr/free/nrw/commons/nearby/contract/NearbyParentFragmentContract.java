@@ -71,6 +71,9 @@ public interface NearbyParentFragmentContract {
         LatLng getLastLocation();
 
         com.mapbox.mapboxsdk.geometry.LatLng getLastFocusLocation();
+
+        boolean isCurrentLocationMarkerVisible();
+        void setProjectorLatLngBounds();
     }
 
     interface NearbyListView {
