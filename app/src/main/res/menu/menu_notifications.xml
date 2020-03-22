@@ -6,5 +6,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:icon="@drawable/ic_more_vert_white_24dp"
-        android:title="@string/menu_option_archived" />
+        android:title="@string/menu_option_read" />
 </menu>

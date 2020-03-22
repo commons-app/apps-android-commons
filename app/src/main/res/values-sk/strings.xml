@@ -38,7 +38,7 @@
   <string name="upload_progress_notification_title_finishing">Dokončenie nahrávania %1$s</string>
   <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>
   <string name="upload_failed_notification_subtitle">Kliknutím zobrazíte</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">nahráva sa %1$d súbor</item>
     <item quantity="other">nahrávajú sa %1$d súbory</item>
   </plurals>
@@ -74,16 +74,16 @@
   <string name="gps_disabled">GPS nie je povolené vo vašom zariadení. Chceli by ste ho povoliť?</string>
   <string name="enable_gps">Povoliť GPS</string>
   <string name="contributions_subtitle_zero">Žiadne nahrané súbory</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Spúšťam nahrávanie %1$d súboru</item>
     <item quantity="other">Spúšťam nahrávanie %1$d súborov</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d nahranie</item>
     <item quantity="other">%1$d nahrania</item>
   </plurals>
@@ -108,7 +108,7 @@
   <string name="no_uploads_yet">Ešte ste nenahrali žiadne fotografie.</string>
   <string name="menu_retry_upload">Znova</string>
   <string name="menu_cancel_upload">Zrušiť</string>
-  <plurals name="share_license_summary">
+  <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">Tento obrázok bude licenciovaný pod licenciou %1$s</item>
     <item quantity="other">Tieto obrázky budú licenciované pod licenciou %1$s</item>
   </plurals>
@@ -378,11 +378,10 @@
   <string name="preference_author_name_toggle">Použiť vlastné meno autora</string>
   <string name="preference_author_name_toggle_summary">Pri nahrávaní fotografií použiť vlastné meno autora namiesto používateľského mena</string>
   <string name="preference_author_name">Vlastné meno autora</string>
-  <string name="preference_author_name_summary">Vlastné meno autora, ktoré sa použije namiesto používateľského mena</string>
   <string name="contributions_fragment">Príspevky</string>
   <string name="nearby_fragment">V okolí</string>
   <string name="notifications">Upozornenia</string>
-  <string name="archived_notifications">Upozornenia (prečítané)</string>
+  <string name="read_notifications">Upozornenia (prečítané)</string>
   <string name="display_nearby_notification">Zobraziť notifikáciu o miestach v okolí</string>
   <string name="display_nearby_notification_summary">Kliknutím sem sa zobrazí najbližšie miesto, ktoré potrebuje obrázky</string>
   <string name="no_close_nearby">Vo vašej blízkosti neboli nájdené žiadne miesta</string>
@@ -397,7 +396,7 @@
   <string name="submit">Odoslať</string>
   <string name="upload_title_duplicate">Súbor s názvom %1$s už existuje. Naozaj chcete pokračovať?</string>
   <string name="map_application_missing">Nebola nájdená žiadna kompatibilná aplikácia s mapami. Pre použitie tejto fukncie si, prosím, nainštalujte aplikáciu poskytujúcu mapy.</string>
-  <plurals name="upload_count_title">
+  <plurals name="upload_count_title" fuzzy="true">
     <item quantity="one">%1$d nahranie</item>
     <item quantity="other">%1$d nahrania</item>
   </plurals>
@@ -488,7 +487,7 @@
   <string name="review_thanks_no_button_text">Ďalší súbor</string>
   <string name="skip_image_explanation">Kliknutím na toto tlačidlo sa zobrazí ďalší nedávno nahraný obrázok z Wikimedia Commons</string>
   <string name="review_image_explanation">Môžete kontrolovať obrázky a zlepšiť kvalitu Wikimedia Commons.\n\nTri aspekty, ktoré sa posudzujú, sú:\n  - Je tento obrázok v poriadku?\n  - Dodržiava tento obrázok pravidlá autorských práv?\n  - Je tento obrázok správne kategorizovaný?\n\nAk je všetko v poriadku, autorovi môžete taktiež poďakovať.</string>
-  <plurals name="receiving_shared_content">
+  <plurals name="receiving_shared_content" fuzzy="true">
     <item quantity="one">Prebieha príjem zdieľaného obsahu. Spracovanie obrázku môže chvíľu trvať v závislosti od veľkosti obrázku a vášho zariadenia</item>
     <item quantity="other">Prebieha príjem zdieľaného obsahu. Spracovanie obrázkov môže chvíľu trvať v závislosti od veľkosti obrázkov a vášho zariadenia</item>
   </plurals>
@@ -496,9 +495,9 @@
   <string name="no_image_reverted">Žiadne revertované obrázky</string>
   <string name="no_image_uploaded">Žiadne nahrané obrázky</string>
   <string name="no_notification">Nemáte žiadne neprečítané upozornenia</string>
-  <string name="no_archived_notification">Nemáte žiadne prečítané upozornenia</string>
+  <string name="no_read_notification">Nemáte žiadne prečítané upozornenia</string>
   <string name="share_logs_using">Zdieľať log pomocou</string>
-  <string name="menu_option_archived">Zobraziť prečítané</string>
+  <string name="menu_option_read">Zobraziť prečítané</string>
   <string name="menu_option_unread">Zobraziť neprečítané</string>
   <string name="error_occurred_in_picking_images">Nastala chyba pri vyberaní obrázkov</string>
   <string name="image_chooser_title">Vyberte obrázky, ktoré chcete nahrať</string>

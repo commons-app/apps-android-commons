@@ -77,7 +77,7 @@
   <string name="gps_disabled">GPS:en är inaktiverad på denna enhet. Vill du aktivera den?</string>
   <string name="enable_gps">Aktivera GPS</string>
   <string name="contributions_subtitle_zero">Inga uppladdningar ännu</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -381,11 +381,10 @@
   <string name="preference_author_name_toggle">Använd anpassat författarnamn</string>
   <string name="preference_author_name_toggle_summary">Använd ett anpassat författarnamn istället för ditt användarnamn när du laddar upp foton</string>
   <string name="preference_author_name">Anpassat författarnamn</string>
-  <string name="preference_author_name_summary">Det anpassade författarnamnet att använda istället för ditt användarnamn i uppladdningar</string>
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I närheten</string>
   <string name="notifications">Aviseringar</string>
-  <string name="archived_notifications">Aviseringar (arkiverade)</string>
+  <string name="read_notifications">Aviseringar (arkiverade)</string>
   <string name="display_nearby_notification">Visa avisering för i närheten</string>
   <string name="display_nearby_notification_summary">Tryck här för att se den närmaste platsen som behöver bilder</string>
   <string name="no_close_nearby">Inga platser i närheten hittades som är nära dig</string>
@@ -499,9 +498,9 @@
   <string name="no_image_reverted">Inga bilder återställdes</string>
   <string name="no_image_uploaded">Inga bilder laddades upp</string>
   <string name="no_notification">Du har inga olästa aviseringar</string>
-  <string name="no_archived_notification">Du har inga arkiverade aviseringar</string>
+  <string name="no_read_notification">Du har inga arkiverade aviseringar</string>
   <string name="share_logs_using">Dela loggar med</string>
-  <string name="menu_option_archived">Visa arkiverade</string>
+  <string name="menu_option_read">Visa arkiverade</string>
   <string name="menu_option_unread">Visa olästa</string>
   <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
   <string name="image_chooser_title">Välj bilder att ladda upp</string>

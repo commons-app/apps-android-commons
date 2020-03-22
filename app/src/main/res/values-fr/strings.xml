@@ -96,7 +96,7 @@
   <string name="gps_disabled">Le GPS est désactivé sur votre appareil. Voulez-vous l’activer ?</string>
   <string name="enable_gps">Activer le GPS</string>
   <string name="contributions_subtitle_zero">Encore aucun téléversement</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -400,11 +400,10 @@
   <string name="preference_author_name_toggle">Utilisez un nom d\'auteur personnalisé</string>
   <string name="preference_author_name_toggle_summary">Utilisez un nom d\'auteur personnalisé au lieu de votre nom d\'utilisateur lorsque vous téléversez des photos</string>
   <string name="preference_author_name">Nom d\'auteur personnalisé</string>
-  <string name="preference_author_name_summary">Le nom d\'auteur personnalisé à utiliser au lieu du nom d\'utilisateur dans vos téléversements</string>
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Proche</string>
   <string name="notifications">Notifications</string>
-  <string name="archived_notifications">Notifications (archivées)</string>
+  <string name="read_notifications">Notifications (archivées)</string>
   <string name="display_nearby_notification">Afficher la notification de proximité</string>
   <string name="display_nearby_notification_summary">Taper ici pour voir l’endroit le plus proche qui a besoin d’images</string>
   <string name="no_close_nearby">Aucun endroit à proximité trouvé près de chez vous</string>
@@ -518,9 +517,9 @@
   <string name="no_image_reverted">Aucune image retournée</string>
   <string name="no_image_uploaded">Aucune image téléversée</string>
   <string name="no_notification">Vous n\'avez aucune notification non lue</string>
-  <string name="no_archived_notification">Vous n’avez pas de notification archivée</string>
+  <string name="no_read_notification">Vous n’avez pas de notification archivée</string>
   <string name="share_logs_using">Partager les journaux en utilisant</string>
-  <string name="menu_option_archived">Afficher les archivés</string>
+  <string name="menu_option_read">Afficher les archivés</string>
   <string name="menu_option_unread">Afficher les non lus</string>
   <string name="error_occurred_in_picking_images">Erreur lors de la sélection des images</string>
   <string name="image_chooser_title">Choisir les images à téléverser</string>

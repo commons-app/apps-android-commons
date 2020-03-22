@@ -82,7 +82,7 @@
   <string name="gps_disabled">GPS ei ole käytössä. Haluatko ottaa sen käyttöön?</string>
   <string name="enable_gps">Ota GPS käyttöön</string>
   <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -287,14 +287,14 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Arvostele meidät&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;UKK&lt;/u&gt;</string>
+  <string name="about_rate_us">Arvostele meidät</string>
+  <string name="about_faq">UKK</string>
   <string name="welcome_skip_button">Ohita opetus</string>
   <string name="no_internet">Internet ei saatavissa</string>
   <string name="internet_established">Internet saatavana</string>
   <string name="error_notifications">Virhe ilmoitusten haussa</string>
   <string name="no_notifications">Ilmoituksia ei löytynyt</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Käännä&lt;/u&gt;</string>
+  <string name="about_translate">Käännä</string>
   <string name="about_translate_title">Kielet</string>
   <string name="about_translate_message">Valitse kieli, joksi haluaisit kääntää</string>
   <string name="about_translate_proceed">Jatka</string>
@@ -366,7 +366,7 @@
   <string name="contributions_fragment">Muokkaukset</string>
   <string name="nearby_fragment">Lähistöllä</string>
   <string name="notifications">Ilmoitukset</string>
-  <string name="archived_notifications">Ilmoitukset (arkistoidut)</string>
+  <string name="read_notifications">Ilmoitukset (arkistoidut)</string>
   <string name="display_nearby_notification">Näytä lähistöllä-ilmoitus</string>
   <string name="list_sheet">Lista</string>
   <string name="step_count">Vaihe %1$d/%2$d</string>
@@ -420,7 +420,7 @@
   <string name="review_copyright_no_button_text">Näyttää hyvälle</string>
   <string name="review_thanks_yes_button_text">Kyllä, miksi ei</string>
   <string name="review_thanks_no_button_text">Seuraava kuva</string>
-  <string name="menu_option_archived">Näytä arkistoidut</string>
+  <string name="menu_option_read">Näytä arkistoidut</string>
   <string name="menu_option_unread">Näytä lukemattomat</string>
   <string name="image_chooser_title">Valitse tallennettavat tiedostot</string>
   <string name="please_wait">Odota…</string>

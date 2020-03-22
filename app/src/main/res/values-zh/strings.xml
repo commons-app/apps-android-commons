@@ -397,11 +397,10 @@
   <string name="preference_author_name_toggle">使用自定义的作者姓名</string>
   <string name="preference_author_name_toggle_summary">在上传照片时使用自定义的作者姓名，而不是用户名</string>
   <string name="preference_author_name">自定义作者姓名</string>
-  <string name="preference_author_name_summary">上传时自定义的作者姓名，不是用户名</string>
   <string name="contributions_fragment">贡献</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
-  <string name="archived_notifications">通知（已存档）</string>
+  <string name="read_notifications">通知（已存档）</string>
   <string name="display_nearby_notification">显示附近通知</string>
   <string name="display_nearby_notification_summary">点击此处查看最近需要图片的地方</string>
   <string name="no_close_nearby">附近找不到靠近您的地方</string>
@@ -514,9 +513,9 @@
   <string name="no_image_reverted">没有被撤回的图片</string>
   <string name="no_image_uploaded">还没有上传图片</string>
   <string name="no_notification">您没有任何未读通知</string>
-  <string name="no_archived_notification">您没有已存档的通知</string>
+  <string name="no_read_notification">您没有已存档的通知</string>
   <string name="share_logs_using">分享日志于</string>
-  <string name="menu_option_archived">查看已存档</string>
+  <string name="menu_option_read">查看已存档</string>
   <string name="menu_option_unread">查看未读</string>
   <string name="error_occurred_in_picking_images">选择图片时出错</string>
   <string name="image_chooser_title">选择要上传的图片</string>

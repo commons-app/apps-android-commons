@@ -374,11 +374,10 @@
   <string name="preference_author_name_toggle">Gunakan nama lain</string>
   <string name="preference_author_name_toggle_summary">Gunakan nama lain, bukan nama pengguna Anda saat mengunggah foto</string>
   <string name="preference_author_name">Nama lain</string>
-  <string name="preference_author_name_summary">Nama lain untuk digunakan sebagai ganti nama pengguna Anda pada unggahan</string>
   <string name="contributions_fragment">Kontribusi</string>
   <string name="nearby_fragment">Sekitar</string>
   <string name="notifications">Pemberitahuan</string>
-  <string name="archived_notifications">Pemberitahuan (diarsipkan)</string>
+  <string name="read_notifications">Pemberitahuan (diarsipkan)</string>
   <string name="display_nearby_notification">Tampilkan pemberitahuan sekitar</string>
   <string name="display_nearby_notification_summary">Tekan di sini untuk melihat tempat terdekat yang membutuhkan gambar</string>
   <string name="no_close_nearby">Tidak ada tempat sekitaran yang ditemukan di dekat Anda</string>
@@ -431,7 +430,7 @@
   <string name="never_ask_again">Jangan pernah menanyakan ini lagi</string>
   <string name="display_location_permission_title">Tampilkan izin lokasi</string>
   <string name="display_campaigns">Sinahang penyobyahan</string>
-  <string name="menu_option_archived">Lihat arsip</string>
+  <string name="menu_option_read">Lihat arsip</string>
   <string name="menu_option_unread">Lihat yang belum terbaca</string>
   <string name="error_occurred_in_picking_images">Terjadi kesalahan ketika memilih gambar</string>
   <string name="image_chooser_title">Pilih Gambar untuk diunggah</string>

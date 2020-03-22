@@ -92,7 +92,7 @@
   <string name="no_uploads_yet">तपाईंले हालसम्म कुनै पनि फोटो उर्ध्वभरण गर्नुभएको छैन</string>
   <string name="menu_retry_upload">पुन: प्रयास गर्नुहोस्</string>
   <string name="menu_cancel_upload">रद्द गर्नुहोस्</string>
-  <string name="share_license_summary">यी तस्वीरहरू  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
+  <string name="share_license_summary" fuzzy="true">यी तस्वीरहरू  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
   <string name="menu_download">डाउनलोड गर्ने</string>
   <string name="preference_license">पूर्वनिर्धारित अनुमति पत्र</string>
   <string name="use_previous">अघिल्लो शीर्षक र वर्णनकाे प्रयोग गर्नुहोस्</string>
@@ -254,7 +254,7 @@
   <string name="contributions_fragment">योगदानहरू</string>
   <string name="nearby_fragment">नजिकैको</string>
   <string name="notifications">सूचनाहरू</string>
-  <string name="archived_notifications">सूचनाहरू (अभिलेख)</string>
+  <string name="read_notifications">सूचनाहरू (अभिलेख)</string>
   <string name="list_sheet">सूची</string>
   <string name="storage_permission">भण्डारण अनुमति</string>
   <string name="next">अर्को</string>

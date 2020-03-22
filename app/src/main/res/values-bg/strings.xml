@@ -214,8 +214,7 @@
   <string name="preference_author_name_toggle">Използване на персонализирано авторско име</string>
   <string name="preference_author_name_toggle_summary">При качването използвайте персонализирано авторско име вместо потребителското си име</string>
   <string name="preference_author_name">Персонализирано авторско име</string>
-  <string name="preference_author_name_summary">Персонализираното авторско име, което ще се използва вместо потребителското ви име при качване</string>
-  <string name="archived_notifications">Известия (архивирани)</string>
+  <string name="read_notifications">Известия (архивирани)</string>
   <string name="list_sheet">Списък</string>
   <string name="next">Следваща</string>
   <string name="submit">Изпращане</string>
@@ -245,9 +244,9 @@
   <string name="no_image_reverted">Няма върнати изображения</string>
   <string name="no_image_uploaded">Няма качени изображения</string>
   <string name="no_notification">Нямате непрочетени известия</string>
-  <string name="no_archived_notification">Нямате архивирани известия</string>
+  <string name="no_read_notification">Нямате архивирани известия</string>
   <string name="share_logs_using">Споделяне на дневници, използвайки</string>
-  <string name="menu_option_archived">Преглеждане на архивирани</string>
+  <string name="menu_option_read">Преглеждане на архивирани</string>
   <string name="menu_option_unread">Преглеждане на непрочетени</string>
   <string name="error_occurred_in_picking_images">Възникна грешка при избирането на изображенията</string>
   <string name="image_chooser_title">Изберете изображения за качване</string>

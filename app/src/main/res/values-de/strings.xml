@@ -82,7 +82,7 @@
   <string name="gps_disabled">GPS ist auf deinem Gerät deaktiviert. Möchtest du es aktivieren?</string>
   <string name="enable_gps">GPS aktivieren</string>
   <string name="contributions_subtitle_zero">Noch keine hochgeladenen Dateien</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Eine hochgeladene Datei</item>
     <item quantity="other">%1$d hochgeladene Dateien</item>
@@ -385,11 +385,10 @@
   <string name="preference_author_name_toggle">Benutzerdefinierten Namen des Autors verwenden</string>
   <string name="preference_author_name_toggle_summary">Einen benutzerdefinierten Namen des Autors anstelle deines Benutzernamens beim Hochladen von Fotos verwenden</string>
   <string name="preference_author_name">Benutzerdefinierter Name des Autors</string>
-  <string name="preference_author_name_summary">Der benutzerdefinierte Name des Autors, der anstelle deines Benutzernamens in den hochgeladenen Dateien erscheinen soll.</string>
   <string name="contributions_fragment">Beiträge</string>
   <string name="nearby_fragment">In der Nähe</string>
   <string name="notifications">Benachrichtigungen</string>
-  <string name="archived_notifications">Benachrichtigungen (archiviert)</string>
+  <string name="read_notifications">Benachrichtigungen (archiviert)</string>
   <string name="display_nearby_notification">Benachrichtigungen in der Nähe anzeigen</string>
   <string name="display_nearby_notification_summary">Hier tippen, um Orte in der Nähe anzusehen, die Bilder benötigen.</string>
   <string name="no_close_nearby">Keine Orte in deiner Umgebung gefunden.</string>
@@ -502,9 +501,9 @@
   <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
   <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
   <string name="no_notification">Du hast keine ungelesenen Benachrichtigungen</string>
-  <string name="no_archived_notification">Du hast keine archivierten Benachrichtigungen</string>
+  <string name="no_read_notification">Du hast keine archivierten Benachrichtigungen</string>
   <string name="share_logs_using">Lognutzung teilen</string>
-  <string name="menu_option_archived">Archivierte ansehen</string>
+  <string name="menu_option_read">Archivierte ansehen</string>
   <string name="menu_option_unread">Ungelesene ansehen</string>
   <string name="error_occurred_in_picking_images">Beim Auswählen der Bilder ist ein Fehler aufgetreten</string>
   <string name="image_chooser_title">Hochzuladende Bilder auswählen</string>

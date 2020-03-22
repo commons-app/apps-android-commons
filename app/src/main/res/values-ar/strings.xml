@@ -50,7 +50,7 @@
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d رفع ملف</item>
     <item quantity="other">%1$d رفع ملفات</item>
   </plurals>
@@ -86,16 +86,16 @@
   <string name="gps_disabled">عطل نظام الملاحة العالمي GPS بجهازك. أترغب في التنشيط؟</string>
   <string name="enable_gps">تفعيل GPS</string>
   <string name="contributions_subtitle_zero">لا مرفوعات بعد</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">جارٍ بدء %1$d رفع</item>
     <item quantity="other">جارٍ بدء %1$d مرفوعات</item>
   </plurals>
-  <string name="multiple_uploads_title">{{جمع|واحد=%1$d رفع|%1$d رفع}}</string>
+  <string name="multiple_uploads_title" fuzzy="true">{{جمع|واحد=%1$d رفع|%1$d رفع}}</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
   <string name="categories_skip_explanation">أضف تصنيفات لجعل صورك أكثر قابلية للاكتشاف على ويكيميديا ​​كومنز.\n\nابدأ الكتابة لإضافة تصنيفات.</string>
   <string name="categories_activity_title">تصنيفات</string>
@@ -117,7 +117,7 @@
   <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
   <string name="menu_retry_upload">إعادة المحاولة</string>
   <string name="menu_cancel_upload">إلغاء</string>
-  <plurals name="share_license_summary">
+  <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">سيتم ترخيص هذه الصورة تحت %1$s</item>
     <item quantity="other">سيتم ترخيص هذه الصور تحت %1$s</item>
   </plurals>
@@ -387,11 +387,10 @@
   <string name="preference_author_name_toggle">استخدم اسم مؤلف مخصصا</string>
   <string name="preference_author_name_toggle_summary">استخدم اسم مؤلف مخصصا بدلا من اسم المستخدم الخاص بك أثناء رفع الصور</string>
   <string name="preference_author_name">اسم المؤلف المخصص</string>
-  <string name="preference_author_name_summary">اسم المؤلف المخصص لاستخدامه بدلا من اسم المستخدم الخاص بك في المرفوعات</string>
   <string name="contributions_fragment">مساهمات</string>
   <string name="nearby_fragment">مجاور</string>
   <string name="notifications">الإشعارات</string>
-  <string name="archived_notifications">الإخطارات (مؤرشفة)</string>
+  <string name="read_notifications">الإخطارات (مؤرشفة)</string>
   <string name="display_nearby_notification">عرض الإخطار القريب</string>
   <string name="display_nearby_notification_summary">انقر هنا لرؤية أقرب مكان يحتاج إلى صور</string>
   <string name="no_close_nearby">لم يتم العثور على أماكن قريبة بالقرب منك</string>
@@ -406,7 +405,7 @@
   <string name="submit">إرسال</string>
   <string name="upload_title_duplicate">يوجد ملف باسم الملف %1$s، هل أنت متأكد أنك تريد المتابعة؟</string>
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
-  <plurals name="upload_count_title">
+  <plurals name="upload_count_title" fuzzy="true">
     <item quantity="one">%1$d رفع</item>
     <item quantity="other">%1$d مرفوعات</item>
   </plurals>
@@ -497,7 +496,7 @@
   <string name="review_thanks_no_button_text">الصورة التالية</string>
   <string name="skip_image_explanation">النقر فوق هذا الزر سيمنحك صورة أخرى مرفوعة مؤخرا من ويكيميديا ​​كومنز</string>
   <string name="review_image_explanation">يمكنك مراجعة الصور وتحسين جودة ويكيميديا ​​كومنز.\n وسائط اللمراجعة الأربعة هي:\n - هل هذه الصورة في النطاق؟\n - هل تتبع هذه الصورة قواعد حقوق النشر؟\n - هل هذه الصورة مصنفة بشكل صحيح؟\n - إذا سارت الأمور على ما يرام يمكنك أيضا شكر المساهم.</string>
-  <plurals name="receiving_shared_content">
+  <plurals name="receiving_shared_content" fuzzy="true">
     <item quantity="one">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصورة بعض الوقت بناءً على حجم الصور وجهازك</item>
     <item quantity="other">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
   </plurals>
@@ -505,9 +504,9 @@
   <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
   <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
   <string name="no_notification">ليست لديك إشعارات غير مقروءة</string>
-  <string name="no_archived_notification">ليست لديك إشعارات مؤرشفة</string>
+  <string name="no_read_notification">ليست لديك إشعارات مؤرشفة</string>
   <string name="share_logs_using">مشاركة السجلات باستخدام</string>
-  <string name="menu_option_archived">عرض المؤرشفة</string>
+  <string name="menu_option_read">عرض المؤرشفة</string>
   <string name="menu_option_unread">عرض غير المقروءة</string>
   <string name="error_occurred_in_picking_images">حدث خطأ أثناء التقاط الصور</string>
   <string name="image_chooser_title">اختيار الصور للرفع</string>

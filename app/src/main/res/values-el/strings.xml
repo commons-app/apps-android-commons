@@ -83,7 +83,7 @@
   <string name="gps_disabled">Το GPS στην συσκευή είναι απενεργοποιημένο. Θέλετε να το ενεργοποιήσετε;</string>
   <string name="enable_gps">  Ενεργοποιήσετε το GPS</string>
   <string name="contributions_subtitle_zero">Δεν έχουν ακόμη επιφορτωθεί αρχεία</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Δεν υπάρχουν φορτώσεις ακόμη</item>
     <item quantity="one">%1$d φόρτωση</item>
     <item quantity="other">%1$d φορτώσεις</item>
@@ -406,7 +406,7 @@
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
   <string name="no_image_uploaded">Δεν έχουν ανεβεί εικόνες</string>
   <string name="no_notification">Δεν έχετε αδιάβαστες ενημερώσεις</string>
-  <string name="no_archived_notification">Δεν έχετε αρχειοθετημένες ενημερώσεις</string>
+  <string name="no_read_notification">Δεν έχετε αρχειοθετημένες ενημερώσεις</string>
   <string name="please_wait">Παρακαλούμε περιμένετε…</string>
   <string name="exif_tag_name_author">Δημιουργός</string>
   <string name="exif_tag_name_copyright">Πνευματικά δικαιώματα</string>

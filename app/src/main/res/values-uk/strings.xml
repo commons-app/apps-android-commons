@@ -83,7 +83,7 @@
   <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
   <string name="contributions_subtitle_zero">Ще нема завантажень</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d завантаження</item>
     <item quantity="few">%1$d завантаження</item>
@@ -123,7 +123,7 @@
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
   <string name="menu_retry_upload">Повторити</string>
   <string name="menu_cancel_upload">Скасувати</string>
-  <plurals name="share_license_summary">
+  <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">Це зображення буде ліцензовано на умовах %1$s</item>
     <item quantity="few">Ці зображення буде ліцензовано на умовах %1$s</item>
     <item quantity="many">Ці зображення буде ліцензовано на умовах %1$s</item>
@@ -186,7 +186,7 @@
   <string name="storage_permission_title">Запит дозволу на зберігання</string>
   <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Без цього дозволу програма не зможе отримати доступ до вашої галереї.</string>
   <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери/галереї без цього дозволу.</string>
-  <string name="location_permission_title">Запит на визначення місцезнаходження</string>
+  <string name="location_permission_title">Запит на визначення розташування</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -394,11 +394,10 @@
   <string name="preference_author_name_toggle">Використати альтернативне ім\'я автора</string>
   <string name="preference_author_name_toggle_summary">При завантаженні фото використовувати альтернативне ім\'я для зазначення авторства замість власного імені користувача</string>
   <string name="preference_author_name">Альтернативне ім\'я автора</string>
-  <string name="preference_author_name_summary">Альтернативне ім\'я для зазначення авторства, що буде використовуватись замість Вашого імені користувача у завантаженнях</string>
   <string name="contributions_fragment">Внесок</string>
   <string name="nearby_fragment">Поблизу</string>
   <string name="notifications">Сповіщення</string>
-  <string name="archived_notifications">Сповіщення (архівовані)</string>
+  <string name="read_notifications">Сповіщення (архівовані)</string>
   <string name="display_nearby_notification">Повідомляти мене про місця поблизу</string>
   <string name="display_nearby_notification_summary">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
   <string name="no_close_nearby">Не знайдено місць поблизу Вас</string>
@@ -413,7 +412,7 @@
   <string name="submit">Надіслати</string>
   <string name="upload_title_duplicate">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?</string>
   <string name="map_application_missing">На Вашому пристрої не знайдено сумісного додатка з картами. Будь ласка, встановіть додаток з картами, якщо хочете скористатись цією функцією.</string>
-  <plurals name="upload_count_title">
+  <plurals name="upload_count_title" fuzzy="true">
     <item quantity="one">%1$d завантаження</item>
     <item quantity="few">%1$d завантаження</item>
     <item quantity="many">%1$d завантажень</item>
@@ -505,7 +504,7 @@
   <string name="review_thanks_no_button_text">Наступне зображення</string>
   <string name="skip_image_explanation">Натискання цієї кнопки дасть вам інше недавно завантажене зображення з Вікісховища</string>
   <string name="review_image_explanation">Ви можете перевіряти зображення і покращувати якість Вікісховища.\nЄ чотири параметри перевірки:\n— Чи зображення відповідає призначенню Вікісховища?\n— Чи зображення відповідає правилам авторського права?\n— Чи зображення коректно категоризоване?\n— Якщо все добре, то ви можете подякувати завантажувачу.</string>
-  <plurals name="receiving_shared_content">
+  <plurals name="receiving_shared_content" fuzzy="true">
     <item quantity="one">Отримання спільного контенту. Обробка зображення може зайняти трохи часу, залежно від розміру зображення і від Вашого пристрою</item>
     <item quantity="few">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
     <item quantity="many">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
@@ -514,9 +513,9 @@
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
   <string name="no_notification">У вас немає непрочитаних сповіщень</string>
-  <string name="no_archived_notification">Немає архівованих сповіщень</string>
+  <string name="no_read_notification">Немає архівованих сповіщень</string>
   <string name="share_logs_using">Поширення журналів</string>
-  <string name="menu_option_archived">Перегляд архівованих</string>
+  <string name="menu_option_read">Перегляд архівованих</string>
   <string name="menu_option_unread">Перегляд непрочитаних</string>
   <string name="error_occurred_in_picking_images">Сталася помилка при завантаженні зображень</string>
   <string name="image_chooser_title">Оберіть зображення для завантаження</string>
@@ -588,4 +587,8 @@
   <string name="theme_default_name">Стандартна</string>
   <string name="theme_dark_name">Темна</string>
   <string name="theme_light_name">Світла</string>
+  <string name="cannot_open_location_settings">Не вдалося відкрити налаштування місця розташування. Будь ласка, увімкніть визначення місця розташування вручну</string>
+  <string name="recommend_high_accuracy_mode">Щоб отримати кращі результати, виберіть режим високої точності.</string>
+  <string name="ask_to_turn_location_on">Увімкнути визначення місця розташування?</string>
+  <string name="nearby_needs_location">«Поблизу» потребує увімкненого визначення місця розташування, щоб працювати належним чином</string>
 </resources>

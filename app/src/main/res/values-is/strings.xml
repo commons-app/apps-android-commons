@@ -71,7 +71,7 @@
   <string name="gps_disabled">GPS er óvirkt í tækinu þínu. Viltu virkja það?</string>
   <string name="enable_gps">Virkja GPS</string>
   <string name="contributions_subtitle_zero">Engar innsendingar ennþá</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -369,11 +369,10 @@
   <string name="preference_author_name_toggle">Nota sérsniðið nafn höfundar</string>
   <string name="preference_author_name_toggle_summary">Nota sérsniðið nafn höfundar í stað notandanafnsins þíns þegar ljósmyndir eru sendar inn</string>
   <string name="preference_author_name">Sérsniðið nafn höfundar</string>
-  <string name="preference_author_name_summary">Sérsniðið nafn höfundar sem nota á í stað notandanafnsins þíns þegar myndir eru sendar inn</string>
   <string name="contributions_fragment">Framlög</string>
   <string name="nearby_fragment">Nálægt</string>
   <string name="notifications">Tilkynningar</string>
-  <string name="archived_notifications">Tilkynningar (í geymslu)</string>
+  <string name="read_notifications">Tilkynningar (í geymslu)</string>
   <string name="display_nearby_notification">Birta tilkynningu um nágrenni</string>
   <string name="display_nearby_notification_summary">Ýttu hér til að sjá nálægasta staðinn sem þarfnast mynda</string>
   <string name="no_close_nearby">Engir staðir fundust í nágrenninu</string>
@@ -449,7 +448,7 @@
   <string name="no_image_reverted">Engar myndir endurstilltar</string>
   <string name="no_image_uploaded">Engar myndir sendar inn</string>
   <string name="no_notification">Þú ert ekki með neinar ólesnar tilkynningar</string>
-  <string name="menu_option_archived">Skoða í geymslu</string>
+  <string name="menu_option_read">Skoða í geymslu</string>
   <string name="menu_option_unread">Skoða ólesið</string>
   <string name="error_occurred_in_picking_images">Villa kom upp við að velja myndir</string>
   <string name="image_chooser_title">Veldu myndir til að senda inn</string>

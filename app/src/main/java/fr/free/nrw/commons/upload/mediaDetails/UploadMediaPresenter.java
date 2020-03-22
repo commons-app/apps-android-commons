@@ -1,15 +1,17 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
-import java.lang.reflect.Proxy;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.repository.UploadRepository;
-import fr.free.nrw.commons.upload.GPSExtractor;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
@@ -18,15 +20,10 @@ import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import java.lang.reflect.Proxy;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
-import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_GEOLOCATION_DIFFERENT;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 public class UploadMediaPresenter implements UserActionListener, SimilarImageInterface {
 
@@ -82,10 +79,10 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 .subscribe(uploadItem ->
                         {
                             view.onImageProcessed(uploadItem, place);
-                            GPSExtractor gpsCoords = uploadItem.getGpsCoords();
-                            view.showMapWithImageCoordinates(gpsCoords != null && gpsCoords.imageCoordsExists);
+                            ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
+                            view.showMapWithImageCoordinates(gpsCoords != null && gpsCoords.getImageCoordsExists());
                             view.showProgress(false);
-                            if (gpsCoords != null && gpsCoords.imageCoordsExists) {
+                            if (gpsCoords != null && gpsCoords.getImageCoordsExists()) {
                                 checkNearbyPlaces(uploadItem);
                             }
                         },
@@ -160,13 +157,18 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         }
     }
 
-    /**
+  @Override
+  public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+    repository.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
+  }
+
+  /**
      * handles image quality verifications
      *
      * @param imageResult
      */
     public void handleImageResult(Integer imageResult) {
-        if ((imageResult == IMAGE_OK) || (imageResult & IMAGE_KEEP) != 0) {
+        if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
             view.onImageValidationSuccess();
         } else {
             handleBadImage(imageResult);
@@ -180,31 +182,36 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     public void handleBadImage(Integer errorCode) {
         Timber.d("Handle bad picture with error code %d", errorCode);
-
-        if ((errorCode & IMAGE_GEOLOCATION_DIFFERENT) != 0) {
-            // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
+        if (errorCode
+                >= 8) { // If location of image and nearby does not match, then set shared preferences to disable wikidata edits
             repository.saveValue("Picture_Has_Correct_Location", false);
         }
 
-        if ((EMPTY_TITLE & errorCode) != 0) {
-            Timber.d("Title is empty. Showing toast");
-            view.showMessage(R.string.add_title_toast, R.color.color_error);
-        } else if ((FILE_NAME_EXISTS & errorCode) != 0) {
-            Timber.d("Trying to show duplicate picture popup");
-            view.showDuplicatePicturePopup();
-        } else {
-            view.showBadImagePopup(errorCode);
+        switch (errorCode) {
+            case EMPTY_TITLE:
+                Timber.d("Title is empty. Showing toast");
+                view.showMessage(R.string.add_title_toast, R.color.color_error);
+                break;
+            case FILE_NAME_EXISTS:
+                Timber.d("Trying to show duplicate picture popup");
+                view.showDuplicatePicturePopup();
+                break;
+            default:
+                view.showBadImagePopup(errorCode);
         }
     }
 
     /**
      * notifies the user that a similar image exists
-     *
      * @param originalFilePath
      * @param possibleFilePath
+     * @param similarImageCoordinates
      */
     @Override
-    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
-        view.showSimilarImageFragment(originalFilePath, possibleFilePath);
+    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
+        ImageCoordinates similarImageCoordinates) {
+        view.showSimilarImageFragment(originalFilePath, possibleFilePath,
+            similarImageCoordinates
+        );
     }
 }

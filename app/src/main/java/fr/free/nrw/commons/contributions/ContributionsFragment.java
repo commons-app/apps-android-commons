@@ -445,8 +445,8 @@ public class ContributionsFragment
         DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.nearby_card_permission_title),
                 getString(R.string.nearby_card_permission_explanation),
-                this::displayYouWontSeeNearbyMessage,
                 this::requestLocationPermission,
+                this::displayYouWontSeeNearbyMessage,
                 checkBoxView,
                 false);
     }

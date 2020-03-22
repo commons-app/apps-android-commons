@@ -50,7 +50,7 @@
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
   <string name="upload_failed_notification_subtitle">לחץ כדי להציג</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">מועלה קובץ אחד</item>
     <item quantity="other">מועלים %1$d קבצים</item>
   </plurals>
@@ -86,16 +86,16 @@
   <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
   <string name="enable_gps">הפעלת GPS</string>
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">התחלת העלאה</item>
     <item quantity="other">התחלת 1$d% העלאות</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">העלאה אחת</item>
     <item quantity="other">%1$d העלאות</item>
   </plurals>
@@ -120,7 +120,7 @@
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
   <string name="menu_retry_upload">לנסות שוב</string>
   <string name="menu_cancel_upload">ביטול</string>
-  <plurals name="share_license_summary">
+  <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
     <item quantity="other">התמונות האלה תפורסמנה ברישיון %1$s</item>
   </plurals>
@@ -390,11 +390,10 @@
   <string name="preference_author_name_toggle">שימוש בשם יוצר מותאם אישית</string>
   <string name="preference_author_name_toggle_summary">שימוש בשם יוצר בהתאמה אישית במקום בשם המשתמש שלך בעת העלאת תמונות</string>
   <string name="preference_author_name">שם יוצר מותאם אישית</string>
-  <string name="preference_author_name_summary">שם יוצר מותאם אישית לשימוש במקום שם המשתמש שלך להעלאות</string>
   <string name="contributions_fragment">תרומות</string>
   <string name="nearby_fragment">בסביבה</string>
   <string name="notifications">התראות</string>
-  <string name="archived_notifications">התראות (בארכיון)</string>
+  <string name="read_notifications">התראות (בארכיון)</string>
   <string name="display_nearby_notification">הצגת התראות סמוכות</string>
   <string name="display_nearby_notification_summary">יש לגעת כאן כדי לצפות במקום הקרוב ביותר שדורש תמונות</string>
   <string name="no_close_nearby">לא נמצאו מקומות בסביבתך</string>
@@ -409,7 +408,7 @@
   <string name="submit">שליחה</string>
   <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?</string>
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
-  <plurals name="upload_count_title">
+  <plurals name="upload_count_title" fuzzy="true">
     <item quantity="one">העלאה אחת</item>
     <item quantity="other">%1$d העלאות</item>
   </plurals>
@@ -500,7 +499,7 @@
   <string name="review_thanks_no_button_text">התמונה הבאה</string>
   <string name="skip_image_explanation">לחיצה על הכפתור הזה תציג בפניך תמונה נוספת שנוספה לאחרונה לוויקישיתוף</string>
   <string name="review_image_explanation">ניתן לסקור את התמונות ולשפר את האיכות של ויקישיתוף.\nארבע יסודות הסקירה הם:\n- האם התמונה קשורה לנושא?\n- האם התמונה תואמת לכללי זכויות היוצרים?\n- האם התמונה נמצאת בקטגוריה הנכונה?\n- אם הכול בסדר, ניתן גם להודות למי שתרם אותה.</string>
-  <plurals name="receiving_shared_content">
+  <plurals name="receiving_shared_content" fuzzy="true">
     <item quantity="one">מתקבל תוכן שיתופי. עיבוד התמונה עשוי לארוך זמן מה כתלות בגודל התמונה והמכשיר שלך</item>
     <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
   </plurals>
@@ -508,9 +507,9 @@
   <string name="no_image_reverted">לא שוחזרו תמונות</string>
   <string name="no_image_uploaded">לא הועלו תמונות</string>
   <string name="no_notification">אין לך התראות שלא נקראו</string>
-  <string name="no_archived_notification">אין לך התראות בארכיון</string>
+  <string name="no_read_notification">אין לך התראות בארכיון</string>
   <string name="share_logs_using">שיתוף יומנים בעזרת</string>
-  <string name="menu_option_archived">הצגת ארכיון</string>
+  <string name="menu_option_read">הצגת ארכיון</string>
   <string name="menu_option_unread">הצגת התראות שלא נקראו</string>
   <string name="error_occurred_in_picking_images">אירעה שגיאה בעת בחירת תמונות</string>
   <string name="image_chooser_title">נא לבחור תמונות להעלאה</string>
@@ -582,4 +581,7 @@
   <string name="theme_default_name">ברירת מחדל</string>
   <string name="theme_dark_name">כהה</string>
   <string name="theme_light_name">בהירה</string>
+  <string name="cannot_open_location_settings">פתיחת הגדרות המיקום נכשלה. נא להפעיל את איתור המיקום ידנית</string>
+  <string name="recommend_high_accuracy_mode">לתוצאות המיטביות יש להשתמש במצב דיוק גבוה.</string>
+  <string name="ask_to_turn_location_on">להפעיל מיקום?</string>
 </resources>

@@ -232,7 +232,7 @@
   <string name="preference_author_name_toggle">Nameyê nuştekariyo xısusiyi bıgurene</string>
   <string name="preference_author_name">Nameyê nuştekariyo xısusi</string>
   <string name="contributions_fragment">İştıraki</string>
-  <string name="archived_notifications">Xeberi (arşifkerdeyi)</string>
+  <string name="read_notifications">Xeberi (arşifkerdeyi)</string>
   <string name="list_sheet">Liste</string>
   <string name="next">Bahdoyên</string>
   <string name="previous">Verên</string>
@@ -256,8 +256,8 @@
   <string name="nominate_for_deletion_done">Temam</string>
   <string name="review_thanks_yes_button_text">Eya, çıra mebo</string>
   <string name="no_notification">Beyanatên şımayê nêwendeyi çıniyê</string>
-  <string name="no_archived_notification">Beyanatên şımayê arçivkerdeyi çıniyê</string>
-  <string name="menu_option_archived">Arşivkerdeyan bıvêne</string>
+  <string name="no_read_notification">Beyanatên şımayê arçivkerdeyi çıniyê</string>
+  <string name="menu_option_read">Arşivkerdeyan bıvêne</string>
   <string name="menu_option_unread">Nêwendeyan bıvêne</string>
   <string name="please_wait">Kerem kerên, bıpawên...</string>
   <string name="skip_image" fuzzy="true">NÊ RESIMİ RAVİYARNE</string>

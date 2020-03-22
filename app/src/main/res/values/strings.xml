@@ -390,11 +390,10 @@
   <string name="preference_author_name_toggle">Use custom author name</string>
   <string name="preference_author_name_toggle_summary">Use a custom author name instead of your username while uploading photos</string>
   <string name="preference_author_name">Custom author name</string>
-  <string name="preference_author_name_summary">The custom author name to use instead of your username in uploads</string>
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Nearby</string>
   <string name="notifications">Notifications</string>
-  <string name="archived_notifications">Notifications (archived)</string>
+  <string name="read_notifications">Notifications (read)</string>
   <string name="display_nearby_notification">Display nearby notification</string>
   <string name="display_nearby_notification_summary">Tap here to see the nearest place that needs pictures</string>
   <string name="no_close_nearby">No nearby places found close to you</string>
@@ -522,9 +521,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_image_uploaded">No images uploaded</string>
 
   <string name="no_notification">You have no unread notifications</string>
-  <string name="no_archived_notification">You have no archived notifications</string>
+  <string name="no_read_notification">You have no read notifications</string>
   <string name="share_logs_using">Share logs using</string>
-  <string name="menu_option_archived">View archived</string>
+  <string name="menu_option_read">View read</string>
   <string name="menu_option_unread">View unread</string>
 
   <string name="error_occurred_in_picking_images">Error occurred while picking images</string>
@@ -599,7 +598,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="wallpaper_set_unsuccessfully">Something went wrong. Could not set the wallpaper</string>
   <string name="setting_wallpaper_dialog_title">Set as Wallpaper</string>
   <string name="setting_wallpaper_dialog_message">Setting Wallpaper. Please wait…</string>
-  <string name="theme_default_name">Default</string>
+  <string name="theme_default_name">Follow system</string>
   <string name="theme_dark_name">Dark</string>
   <string name="theme_light_name">Light</string>
 

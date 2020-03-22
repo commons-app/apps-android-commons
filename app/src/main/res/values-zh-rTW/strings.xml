@@ -386,11 +386,10 @@
   <string name="preference_author_name_toggle">使用自定義作者名稱</string>
   <string name="preference_author_name_toggle_summary">使用自定義作者名稱來取代在上傳照片時您的使用者名稱</string>
   <string name="preference_author_name">自定義作者名稱</string>
-  <string name="preference_author_name_summary">自定義作者名稱用來取代在上傳時您的使用者名稱</string>
   <string name="contributions_fragment">貢獻</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
-  <string name="archived_notifications">通知（已存檔）</string>
+  <string name="read_notifications">通知（已存檔）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
   <string name="display_nearby_notification_summary">在此輕觸來查看缺少圖片的最近地點</string>
   <string name="no_close_nearby">查無靠近您的附近地點</string>
@@ -504,9 +503,9 @@
   <string name="no_image_reverted">沒有圖片被還原回復</string>
   <string name="no_image_uploaded">沒有圖片被上傳</string>
   <string name="no_notification">您有尚未讀取的通知</string>
-  <string name="no_archived_notification">您沒有已存檔通知</string>
+  <string name="no_read_notification">您沒有已存檔通知</string>
   <string name="share_logs_using">分享日誌使用</string>
-  <string name="menu_option_archived">檢視已存檔</string>
+  <string name="menu_option_read">檢視已存檔</string>
   <string name="menu_option_unread">檢視未讀</string>
   <string name="error_occurred_in_picking_images">當挑選圖片時發生錯誤</string>
   <string name="image_chooser_title">選擇要上傳的圖片</string>
@@ -548,8 +547,8 @@
   <string name="delete_helper_ask_spam_blurry">糢糊</string>
   <string name="delete_helper_ask_spam_nonsense">無意義</string>
   <string name="delete_helper_ask_spam_other">其它</string>
-  <string name="delete_helper_ask_reason_copyright_press_photo">攝影作品</string>
-  <string name="delete_helper_ask_reason_copyright_internet_photo">來自網路的隨意照片</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">按壓照片</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">來自網路的隨機照片</string>
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>
   <string name="delete_helper_ask_reason_copyright_other">其它</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">因為這</string>
@@ -578,4 +577,8 @@
   <string name="theme_default_name">預設</string>
   <string name="theme_dark_name">暗黑</string>
   <string name="theme_light_name">明亮</string>
+  <string name="cannot_open_location_settings">開啟位置設定失敗，請手動打開位置</string>
+  <string name="recommend_high_accuracy_mode">為了獲得最佳結果，請選擇高精準度模式。</string>
+  <string name="ask_to_turn_location_on">打開位置？</string>
+  <string name="nearby_needs_location">附近功能需要啟用位置才能運作正常</string>
 </resources>

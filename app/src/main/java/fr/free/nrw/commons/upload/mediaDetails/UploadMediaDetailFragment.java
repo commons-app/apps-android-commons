@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,30 +14,17 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.github.chrisbanes.photoview.PhotoView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.github.chrisbanes.photoview.PhotoView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -45,6 +34,7 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.Description;
 import fr.free.nrw.commons.upload.DescriptionsAdapter;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
 import fr.free.nrw.commons.upload.Title;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
@@ -54,9 +44,14 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import javax.inject.Inject;
+import javax.inject.Named;
+import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetailsContract.View {
@@ -232,14 +227,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * returns the default locale value of the user's device
-     * @return
-     */
-    private String getUserDefaultLocale() {
-        return getContext().getResources().getConfiguration().locale.getLanguage();
-    }
-
-    /**
      * show dialog with info
      * @param titleStringID
      * @param messageStringId
@@ -267,12 +254,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
+    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
+        ImageCoordinates similarImageCoordinates) {
         SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
         newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
             @Override
             public void onPositiveResponse() {
                 Timber.d("positive response from similar image fragment");
+                presenter.useSimilarPictureCoordinates(similarImageCoordinates, callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
             }
 
             @Override
@@ -355,12 +344,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         uploadTitleFormat,
                         uploadItem.getFileName()),
                 () -> {
-
-                },
-                () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     onNextButtonClicked();
-                });
+                }, null);
+
     }
 
     @Override
@@ -370,11 +357,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             DialogUtil.showAlertDialog(getActivity(),
                     getString(R.string.warning),
                     errorMessageForResult,
-                    () -> deleteThisPicture(),
                     () -> {
                         uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                         onNextButtonClicked();
-                    });
+                    },
+                    () -> deleteThisPicture()
+        );
         }
         //If the error message is null, we will probably not show anything
     }
