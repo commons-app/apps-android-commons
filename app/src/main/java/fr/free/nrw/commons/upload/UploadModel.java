@@ -4,23 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
@@ -179,7 +165,7 @@ public class UploadModel {
                     UploadMediaDetail.formatList(item.uploadMediaDetails), -1,
                     null, null, sessionManager.getAuthorName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, selectedDepictions, item.gpsCoords.getDecimalCoords(),
-                    getMapFromDescriptions(item.getUploadMediaDetails().get(0).getDescriptionText()));
+                getMediaLegends(item));
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
                 // If item already has an image, we need to know it. We don't want to override existing image later
@@ -209,12 +195,13 @@ public class UploadModel {
         });
     }
 
-    private HashMap<String, String> getMapFromDescriptions(List<Description> descriptions) {
-        HashMap<String, String> descriptionMap = new HashMap<>();
-        for (Description description : descriptions) {
-            descriptionMap.put(description.getLanguageCode(), description.getDescriptionText());
+    private HashMap<String, String> getMediaLegends(UploadItem uploadItem) {
+        HashMap<String, String> captionsMap = new HashMap<>();
+        for (UploadMediaDetail uploadMediaDetail : uploadItem.getUploadMediaDetails()) {
+            captionsMap
+                .put(uploadMediaDetail.getLanguageCode(), uploadMediaDetail.getCaptionText());
         }
-        return descriptionMap;
+        return captionsMap;
     }
 
     public void deletePicture(String filePath) {
