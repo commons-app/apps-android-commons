@@ -504,7 +504,7 @@
   <string name="images_featured_explanation">Elstaraj bildoj estas tiuj bildoj far tre spertaj fotografistoj kaj ilustristoj, kiujn la komunumo de Vikimedia Komunejo elektis kiel iujn de la plej alta kvalito en la retejo.</string>
   <string name="images_via_nearby_explanation">Bildoj Alŝutitaj per Apudaj lokoj estas bildoj alŝutitaj per trovado de lokoj sur la mapo.</string>
   <string name="thanks_received_explanation">Tiu funkcio ebligas sendi Dankantan sciigon al farinto de utila redakto – per malgranda dankiga ligilo ĉe la paĝo de historio aŭ diferenco.</string>
-  <string name="previous_image_title_description">Kopii antaŭajn titolon &amp; priskribon</string>
+  <string name="previous_image_caption_description">Kopii antaŭajn titolon &amp; priskribon</string>
   <string name="previous_button_tooltip_message">Alklaku por reuzi la titolon kaj priskribon vi enigis por via antaŭa bildo kaj modifi ĝin por via aktuala bildo</string>
   <string name="welcome_do_upload_content_description">Ekzemploj de alŝutindaj bildoj por Komunejo</string>
   <string name="welcome_dont_upload_content_description">Ekzemploj de ne alŝutindaj bildoj</string>
@@ -538,7 +538,7 @@
   <string name="delete_helper_ask_spam_blurry">Malklara</string>
   <string name="delete_helper_ask_spam_nonsense">Sensencaĵo</string>
   <string name="delete_helper_ask_spam_other">Alia</string>
-  <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara foo</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara showImageWithItem</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda foto el Interreto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
   <string name="delete_helper_ask_reason_copyright_other">Alia</string>

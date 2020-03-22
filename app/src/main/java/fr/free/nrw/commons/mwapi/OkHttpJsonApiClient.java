@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,11 +21,14 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
+import fr.free.nrw.commons.depictions.SubClass.models.Binding;
+import fr.free.nrw.commons.depictions.SubClass.models.SparqlQueryResponse;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.upload.FileUtils;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
@@ -208,6 +213,94 @@ public class OkHttpJsonApiClient {
         });
     }
 
+    /**
+     * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item.
+     * Example: bridge -> suspended bridge, aqueduct, etc
+     */
+    public Observable<ArrayList<DepictedItem>> getChildQIDs(String qid) throws IOException {
+        String queryString = FileUtils.readFromResource("/queries/subclasses_query.rq");
+        String query = queryString.
+                replace("${QID}", qid)
+                .replace("${LANG}", "\""+Locale.getDefault().getLanguage()+"\"");
+        Timber.e(query);
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(sparqlQueryUrl)
+                .newBuilder()
+                .addQueryParameter("query", query)
+                .addQueryParameter("format", "json");
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+        return Observable.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            String json = response.body().string();
+            SparqlQueryResponse example  = gson.fromJson(json, SparqlQueryResponse.class);
+            List<Binding> bindings = example.getResults().getBindings();
+            ArrayList<DepictedItem> subItems = new ArrayList<>();
+            for (Binding binding : bindings) {
+                if (binding.getSubclassLabel().getXmlLang() != null) {
+                    String label = binding.getSubclassLabel().getValue();
+                    String entityId = binding.getSubclass().getValue();
+                    entityId = entityId.substring(entityId.lastIndexOf("/") - 1);
+                    subItems.add(new DepictedItem(label, "", "", false,entityId ));
+                    Timber.e(label);
+                }
+            }
+            return subItems;
+        }).doOnError(throwable -> {
+            Timber.e(throwable.toString());
+        });
+    }
+
+    /**
+     * Get the QIDs of all Wikidata items that are subclasses of the given Wikidata item.
+     * Example: bridge -> suspended bridge, aqueduct, etc
+     */
+    public Observable<ArrayList<DepictedItem>> getParentQIDs(String qid) throws IOException {
+        String queryString = FileUtils.readFromResource("/queries/parentclasses_query.rq");
+        String query = queryString.
+                replace("${QID}", qid)
+                .replace("${LANG}", "\""+Locale.getDefault().getLanguage()+"\"");
+        Timber.e(query);
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(sparqlQueryUrl)
+                .newBuilder()
+                .addQueryParameter("query", query)
+                .addQueryParameter("format", "json");
+        Request request = new Request.Builder()
+                .url(urlBuilder.build())
+                .build();
+        return Observable.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            try {
+                String json = response.body().string();
+                JSONObject jsonObject = new JSONObject(json);
+                ArrayList<DepictedItem> subItems = new ArrayList<>();
+                JSONObject results = (JSONObject) jsonObject.get("results");
+                JSONArray bindings = (JSONArray) results.get("bindings");
+                for (int i = 0; i < bindings.length(); i++) {
+                    Timber.e(bindings.get(i).getClass().toString());
+                    JSONObject object = (JSONObject) bindings.get(i);
+                    JSONObject parentClassLabel = (JSONObject) object.get("parentClassLabel");
+                    if (parentClassLabel.get("value") != null) {
+                        String labelString = parentClassLabel.getString("value");
+                        JSONObject parentClass = (JSONObject) object.get("parentClass");
+                        if (parentClass.get("value") != null) {
+                            String entityId = parentClass.getString("value");
+                            entityId = entityId.substring(entityId.lastIndexOf("/") + 1);
+                            subItems.add(new DepictedItem(labelString, "", "", false, entityId));
+                        }
+                    }
+                }
+                return subItems;
+            } catch (Exception e) {
+                return new ArrayList<DepictedItem>();
+            }
+        }).doOnError(throwable -> {
+            Timber.e("line578"+throwable.toString());
+        });
+    }
+
     public Single<CampaignResponseDTO> getCampaigns() {
         return Single.fromCallable(() -> {
             Request request = new Request.Builder().url(campaignsUrl)
@@ -222,26 +315,5 @@ public class OkHttpJsonApiClient {
             }
             return null;
         });
-    }
-
-    /**
-     * Whenever imageInfo is fetched, these common properties can be specified for the API call
-     * https://www.mediawiki.org/wiki/API:Imageinfo
-     *
-     * @param builder
-     * @return
-     */
-    private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
-        builder.addQueryParameter("prop", "imageinfo")
-                .addQueryParameter("iiprop", "url|extmetadata")
-                .addQueryParameter("iiurlwidth", THUMB_SIZE)
-                .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl");
-
-        String language = Locale.getDefault().getLanguage();
-        if (!StringUtils.isBlank(language)) {
-            builder.addQueryParameter("iiextmetadatalanguage", language);
-        }
-
-        return builder;
     }
 }

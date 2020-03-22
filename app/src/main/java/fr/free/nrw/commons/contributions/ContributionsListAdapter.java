@@ -1,18 +1,14 @@
 package fr.free.nrw.commons.contributions;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.media.MediaClient;
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.free.nrw.commons.R;
 
 /**
  * Represents The View Adapter for the List of Contributions  
@@ -20,10 +16,13 @@ import fr.free.nrw.commons.R;
 public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionViewHolder> {
 
     private Callback callback;
+    private final MediaClient mediaClient;
     private List<Contribution> contributions;
 
-    public ContributionsListAdapter(Callback callback) {
+    public ContributionsListAdapter(Callback callback,
+        MediaClient mediaClient) {
         this.callback = callback;
+        this.mediaClient = mediaClient;
         contributions = new ArrayList<>();
     }
 
@@ -36,7 +35,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
     public ContributionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ContributionViewHolder viewHolder = new ContributionViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.layout_contribution, parent, false), callback);
+                        .inflate(R.layout.layout_contribution, parent, false), callback, mediaClient);
         return viewHolder;
     }
 

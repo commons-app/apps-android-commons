@@ -28,6 +28,7 @@ import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -272,12 +273,20 @@ public class UploadService extends HandlerService<Contribution> {
                         showFailedNotification(contribution);
                     } else {
                         String canonicalFilename = "File:" + uploadResult.getFilename();
-                      Timber.d("Contribution upload success. Initiating Wikidata edit for"
-                              + " entity id %s if necessary (if P18 is null). P18 value is %s",
-                          contribution.getWikiDataEntityId(), contribution.getP18Value());
-                      wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(),
-                          canonicalFilename, contribution.getP18Value(),
-                          contribution.getMediaLegends());
+                        Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
+                                contribution.getWikiDataEntityId());
+                        // to perform upload of depictions we pass on depiction entityId of the selected depictions to the wikidataEditService
+                        final String p18Value = contribution.getP18Value();
+                        if (contribution.getDepictionsEntityIds() != null) {
+                            for (String s : contribution.getDepictionsEntityIds()) {
+                                wikidataEditService.createClaimWithLogging(s, canonicalFilename,
+                                    p18Value, contribution.getMediaLegends());
+                            }
+                        }
+                        wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename,
+                            p18Value, contribution.getMediaLegends());
+                        wikidataEditService.createLabelforWikidataEntity(contribution.getWikiDataEntityId(), canonicalFilename,
+                                (Map) contribution.getCaptions());
                         contribution.setFilename(canonicalFilename);
                         contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
                         contribution.setState(Contribution.STATE_COMPLETED);

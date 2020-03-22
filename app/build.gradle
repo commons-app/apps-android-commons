@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
     // Logging
@@ -65,7 +66,7 @@ dependencies {
 
     //Mocking
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
-    testImplementation 'org.mockito:mockito-inline:2.8.47'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
     testImplementation 'org.mockito:mockito-core:2.23.0'
     testImplementation "org.powermock:powermock-module-junit4:2.0.0-beta.5"
     testImplementation "org.powermock:powermock-api-mockito2:2.0.0-beta.5"
@@ -107,9 +108,10 @@ dependencies {
 
     //Room
     implementation "androidx.room:room-runtime:$ROOM_VERSION"
+    implementation "androidx.room:room-ktx:$ROOM_VERSION"
+    implementation "androidx.room:room-rxjava2:$ROOM_VERSION"
     kapt "androidx.room:room-compiler:$ROOM_VERSION" // For Kotlin use kapt instead of annotationProcessor
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
-    implementation "androidx.room:room-rxjava2:$ROOM_VERSION"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     // Pref
@@ -207,6 +209,7 @@ android {
             buildConfigField "String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\""
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\""
             buildConfigField "String", "WIKIDATA_API_HOST", "\"https://www.wikidata.org/w/api.php\""
+            buildConfigField "String", "WIKIDATA_URL", "\"https://www.wikidata.org\""
             buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
             buildConfigField "String", "WIKIMEDIA_CAMPAIGNS_URL", "\"https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json\""
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.wikimedia.org/wikipedia/commons\""
@@ -228,6 +231,7 @@ android {
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
             buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
+            buildConfigField "String", "DEPICTS_PROPERTY", "\"P180\""
 
             dimension 'tier'
         }
@@ -239,6 +243,7 @@ android {
             buildConfigField "String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\""
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.beta.wmflabs.org/w/api.php\""
             buildConfigField "String", "WIKIDATA_API_HOST", "\"https://www.wikidata.org/w/api.php\""
+            buildConfigField "String", "WIKIDATA_URL", "\"https://www.wikidata.org\""
             buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
             buildConfigField "String", "WIKIMEDIA_CAMPAIGNS_URL", "\"https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns_beta_active.json\""
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.beta.wmflabs.org/wikipedia/commons\""
@@ -260,6 +265,7 @@ android {
             buildConfigField "String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\""
             buildConfigField "String", "TEST_USERNAME", "\"" + System.getenv("test_user_name") + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + System.getenv("test_user_password") + "\""
+            buildConfigField "String", "DEPICTS_PROPERTY", "\"P245962\""
 
             dimension 'tier'
         }

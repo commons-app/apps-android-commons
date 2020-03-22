@@ -7,7 +7,7 @@ import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.upload.Description;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 
@@ -36,7 +36,7 @@ public interface UploadMediaDetailsContract {
 
         void showMapWithImageCoordinates(boolean shouldShow);
 
-        void setTitleAndDescription(String title, List<Description> descriptions);
+        void setTitleAndDescription(String title, List<UploadMediaDetail> uploadMediaDetails);
     }
 
     interface UserActionListener extends BasePresenter<View> {

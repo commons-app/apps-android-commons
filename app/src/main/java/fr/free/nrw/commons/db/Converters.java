@@ -1,21 +1,16 @@
 package fr.free.nrw.commons.db;
 
 import android.net.Uri;
-
 import androidx.room.TypeConverter;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.wikipedia.json.GsonUtil;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.location.LatLng;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Converters {
 
@@ -59,7 +54,7 @@ public class Converters {
     }
 
     @TypeConverter
-    public static HashMap<String,String> stringToMap(String objectList) {
+    public static HashMap<String,String> stringToHashMap(String objectList) {
         return objectList == null ? null : getGson().fromJson(objectList,new TypeToken<HashMap<String,String>>(){}.getType());
     }
 
@@ -71,6 +66,26 @@ public class Converters {
     @TypeConverter
     public static LatLng stringToLatLng(String objectList) {
         return objectList == null ? null : getGson().fromJson(objectList,LatLng.class);
+    }
+
+    @TypeConverter
+    public static String listOfMapToString(ArrayList<Map<String,String>> listOfMaps) {
+        return listOfMaps == null ? null : getGson().toJson(listOfMaps);
+    }
+
+    @TypeConverter
+    public static ArrayList<Map<String,String>> stringToListOfMap(String listOfMaps) {
+        return listOfMaps == null ? null :getGson().fromJson(listOfMaps,new TypeToken<ArrayList<Map<String,String>>>(){}.getType());
+    }
+
+    @TypeConverter
+    public static String mapToString(Map<String,String> map) {
+        return map == null ? null : getGson().toJson(map);
+    }
+
+    @TypeConverter
+    public static Map<String,String> stringToMap(String map) {
+        return map == null ? null :getGson().fromJson(map,new TypeToken<Map<String,String>>(){}.getType());
     }
 
 }

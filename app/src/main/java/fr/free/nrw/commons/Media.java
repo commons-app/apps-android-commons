@@ -50,6 +50,13 @@ public class Media implements Parcelable {
     public String thumbUrl;
     public String imageUrl;
     public String filename;
+    public String thumbnailTitle;
+    /**
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     */
+    private String caption;
     public String description; // monolingual description on input...
     public String discussion;
     long dataLength;
@@ -60,9 +67,30 @@ public class Media implements Parcelable {
     public String license;
     public String licenseUrl;
     public String creator;
+    /**
+     * Wikibase Identifier associated with media files
+     */
+    public String pageId;
     public ArrayList<String> categories; // as loaded at runtime?
+    /**
+     * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
+     * However unlike categories depictions is multi-lingual
+     */
+    public ArrayList<Map<String, String>> depictionList;
+    /**
+     * The above hashmap is fetched from API and to diplay in Explore
+     * However this list of depictions is for storing and retrieving depictions from local storage or cache
+     */
+    public ArrayList<String> depictions;
     public boolean requestedDeletion;
-    public HashMap<String, String> descriptions; // multilingual descriptions as loaded
+    public Map<String, String> descriptions; // multilingual descriptions as loaded
+    /**
+     * This hasmap stores the list of multilingual captions, where
+     * key of the HashMap is the language and value is the caption in the corresponding language
+     * Ex: key = "en", value: "<caption in short in English>"
+     *     key = "de" , value: "<caption in german>"
+     */
+    public HashMap<String, String> captions;
     public HashMap<String, String> tags = new HashMap<>();
     @Nullable public  LatLng coordinates;
 
@@ -71,7 +99,9 @@ public class Media implements Parcelable {
      */
     protected Media() {
         this.categories = new ArrayList<>();
+        this.depictions = new ArrayList<>();
         this.descriptions = new HashMap<>();
+        this.captions = new HashMap<>();
     }
 
     /**
@@ -89,25 +119,28 @@ public class Media implements Parcelable {
      * @param localUri Media URI
      * @param imageUrl Media image URL
      * @param filename Media filename
+     * @param captions Media captions
      * @param description Media description
      * @param dataLength Media date length
      * @param dateCreated Media creation date
      * @param dateUploaded Media date uploaded
      * @param creator Media creator
      */
-    public Media(Uri localUri, String imageUrl, String filename, String description,
+    public Media(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description,
                  long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this();
         this.localUri = localUri;
         this.thumbUrl = imageUrl;
         this.imageUrl = imageUrl;
         this.filename = filename;
+        this.captions = captions;
         this.description = description;
         this.dataLength = dataLength;
         this.dateCreated = dateCreated;
         this.dateUploaded = dateUploaded;
         this.creator = creator;
         this.categories = new ArrayList<>();
+        this.depictions = new ArrayList<>();
         this.descriptions = new HashMap<>();
     }
 
@@ -117,6 +150,7 @@ public class Media implements Parcelable {
         thumbUrl = in.readString();
         imageUrl = in.readString();
         filename = in.readString();
+        caption = in.readString();
         description = in.readString();
         dataLength = in.readLong();
         dateCreated = (Date) in.readSerializable();
@@ -129,7 +163,11 @@ public class Media implements Parcelable {
         if (categories != null) {
             in.readStringList(categories);
         }
+        if (depictions != null) {
+            in.readStringList(depictions);
+        }
         descriptions = in.readHashMap(ClassLoader.getSystemClassLoader());
+        captions = in.readHashMap(ClassLoader.getSystemClassLoader());
     }
 
     /**
@@ -144,12 +182,12 @@ public class Media implements Parcelable {
     public static Media from(MwQueryPage page) {
         ImageInfo imageInfo = page.imageInfo();
         if (imageInfo == null) {
-            return null;
+            return new Media(); // null is not allowed
         }
         ExtMetadata metadata = imageInfo.getMetadata();
         if (metadata == null) {
             Media media = new Media(null, imageInfo.getOriginalUrl(),
-                    page.title(), "", 0, null, null, null);
+                    page.title(), new HashMap<>() , "", 0, null, null, null);
             if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
                 media.setThumbUrl(imageInfo.getThumbUrl());
             }
@@ -159,6 +197,7 @@ public class Media implements Parcelable {
         Media media = new Media(null,
                 imageInfo.getOriginalUrl(),
                 page.title(),
+                new HashMap<>(),
                 "",
                 0,
                 safeParseDate(metadata.dateTime()),
@@ -169,6 +208,8 @@ public class Media implements Parcelable {
         if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
             media.setThumbUrl(imageInfo.getThumbUrl());
         }
+
+        media.setPageId(String.valueOf(page.pageId()));
 
         String language = Locale.getDefault().getLanguage();
         if (StringUtils.isBlank(language)) {
@@ -204,6 +245,18 @@ public class Media implements Parcelable {
         }
     }
 
+    /**
+     * @return pageId for the current media object*/
+    public String getPageId() {
+        return pageId;
+    }
+
+    /**
+     *sets pageId for the current media object
+     */
+    private void setPageId(String pageId) {
+        this.pageId = pageId;
+    }
     public String getThumbUrl() {
         return thumbUrl;
     }
@@ -232,6 +285,21 @@ public class Media implements Parcelable {
      */
     @NonNull public String getDisplayTitle() {
         return filename != null ? getPageTitle().getDisplayTextWithoutNamespace().replaceFirst("[.][^.]+$", "") : "";
+    }
+
+    /**
+     * Set Caption(if available) as the thumbnail title of the image
+     */
+    public void setThumbnailTitle(String title) {
+        this.thumbnailTitle = title;
+    }
+
+    /**
+     * @return title to be shown on image thumbnail
+     * If caption is available for the image then it returns caption else filename
+     */
+    public String getThumbnailTitle() {
+        return thumbnailTitle != null? thumbnailTitle : getDisplayTitle();
     }
 
     /**
@@ -298,6 +366,37 @@ public class Media implements Parcelable {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     *
+     * @return caption
+     */
+    public String getCaption() {
+        return caption;
+    }
+
+    /**
+     * @return depictions associated with the current media
+     */
+    public ArrayList<Map<String, String>> getDepiction() {
+        return depictionList;
+    }
+
+    /**
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     *
+     * key of the HashMap is the language and value is the caption in the corresponding language
+     *
+     * returns list of captions stored in hashmap
+     */
+    public HashMap<String, String> getCaptions() {
+        return captions;
     }
 
     /**
@@ -454,6 +553,13 @@ public class Media implements Parcelable {
     }
 
     /**
+     * @return array list of depictions associated with the current media
+     */
+    public ArrayList<String> getDepictions() {
+        return (ArrayList<String>) depictions.clone();
+    }
+
+    /**
      * Sets the categories the file falls under.
      * </p>
      * Does not append: i.e. will clear the current categories
@@ -463,6 +569,11 @@ public class Media implements Parcelable {
     public void setCategories(List<String> categories) {
         this.categories.clear();
         this.categories.addAll(categories);
+    }
+
+    public void setDepictions(List<String> depictions) {
+        this.depictions.clear();
+        this.depictions.addAll(depictions);
     }
 
     /**
@@ -524,6 +635,7 @@ public class Media implements Parcelable {
         parcel.writeString(thumbUrl);
         parcel.writeString(imageUrl);
         parcel.writeString(filename);
+        parcel.writeString(caption);
         parcel.writeString(description);
         parcel.writeLong(dataLength);
         parcel.writeSerializable(dateCreated);
@@ -534,7 +646,9 @@ public class Media implements Parcelable {
         parcel.writeInt(height);
         parcel.writeString(license);
         parcel.writeStringList(categories);
+        parcel.writeStringList(depictions);
         parcel.writeMap(descriptions);
+        parcel.writeMap(captions);
     }
 
     /**
@@ -559,5 +673,28 @@ public class Media implements Parcelable {
      */
     public void setLicense(String license) {
         this.license = license;
+    }
+
+    /**
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     *
+     * This function sets captions
+     * @param caption
+     */
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public void setCaptions(HashMap<String, String> captions) {
+        this.captions = captions;
+    }
+
+    /**
+     * Sets depictions for the current media obtained fro  Wikibase API
+     */
+    public void setDepiction(ArrayList<Map<String, String>> depictions) {
+        this.depictionList = depictions;
     }
 }

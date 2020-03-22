@@ -12,6 +12,7 @@ import androidx.room.PrimaryKey;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.annotation.Retention;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -75,11 +76,17 @@ public class  Contribution extends Media {
     public String dateCreatedSource;
     public HashMap<String, String> mediaLegends;
 
+    /**
+     * Each depiction loaded in depictions activity is associated with a wikidata entity id,
+     * this Id is in turn used to upload depictions to wikibase
+     */
+    public ArrayList<String> depictionsEntityIds;
+
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
-                        String source, String description, String creator, boolean isMultiple,
+                        String source, HashMap<String, String> captions, String description, String creator, boolean isMultiple,
                         int width, int height, String license) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
+        super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.contentUri = contentUri;
         this.state = state;
         this.transferred = transferred;
@@ -92,18 +99,19 @@ public class  Contribution extends Media {
         this.mediaLegends = new HashMap<>();
     }
 
-    public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
-                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords, HashMap<String, String> mediaLegends) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
+    public Contribution(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description, long dataLength,
+                        Date dateCreated, Date dateUploaded, String creator, String editSummary, ArrayList<String> depictionsEntityIds, String decimalCoords, HashMap<String, String> mediaLegends) {
+        super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
+        this.depictionsEntityIds = depictionsEntityIds;
         this.mediaLegends = mediaLegends;
     }
 
-    public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
+    public Contribution(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description, long dataLength,
                         Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords, int state) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
+        super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
@@ -174,6 +182,13 @@ public class  Contribution extends Media {
 
     public void setDateUploaded(Date date) {
         this.dateUploaded = date;
+    }
+
+    /**
+     * sets depiction entity ids for the given contribution
+     */
+    public void setDepictions(ArrayList<String> depictionsEntityIds) {
+        this.depictionsEntityIds = depictionsEntityIds;
     }
 
     public String getPageContents(Context applicationContext) {
@@ -295,6 +310,13 @@ public class  Contribution extends Media {
 
     public void setContentProviderUri(Uri contentProviderUri) {
         this.contentProviderUri = contentProviderUri;
+    }
+
+    /**
+     * @return array list of entityids for the depictions
+     */
+    public ArrayList<String> getDepictionsEntityIds() {
+        return depictionsEntityIds;
     }
 
     public HashMap<String, String> getMediaLegends() {

@@ -33,7 +33,9 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.Description;
-import fr.free.nrw.commons.upload.DescriptionsAdapter;
+//import fr.free.nrw.commons.upload.DescriptionsAdapter;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
 import fr.free.nrw.commons.upload.Title;
@@ -54,7 +56,7 @@ import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
-        UploadMediaDetailsContract.View {
+        UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -74,12 +76,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatButton btnNext;
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
-    private DescriptionsAdapter descriptionsAdapter;
+    private UploadMediaDetailAdapter uploadMediaDetailAdapter;
     @BindView(R.id.btn_copy_prev_title_desc)
     AppCompatButton btnCopyPreviousTitleDesc;
 
     private UploadModel.UploadItem uploadItem;
-    private List<Description> descriptions;
+    private List<UploadMediaDetail> descriptions;
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
@@ -217,13 +219,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * init the recycler veiw
+     * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        descriptionsAdapter = new DescriptionsAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, ""));
-        descriptionsAdapter.setCallback(this::showInfoAlert);
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter();
+        uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
+        uploadMediaDetailAdapter.setEventListener(this::onEvent);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvDescriptions.setAdapter(descriptionsAdapter);
+        rvDescriptions.setAdapter(uploadMediaDetailAdapter);
     }
 
     /**
@@ -237,7 +240,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        uploadItem.setDescriptions(descriptionsAdapter.getDescriptions());
+        uploadItem.setMediaDetails(uploadMediaDetailAdapter.getUploadMediaDetails());
         presenter.verifyImageQuality(uploadItem);
     }
 
@@ -248,9 +251,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_add_description)
     public void onButtonAddDescriptionClicked() {
-        Description description = new Description();
-        description.setManuallyAdded(true);//This was manually added by the user
-        descriptionsAdapter.addDescription(description);
+        UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
+        uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
+        uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
     }
 
     @Override
@@ -279,11 +282,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onImageProcessed(UploadItem uploadItem, Place place) {
         this.uploadItem = uploadItem;
-        if (uploadItem.getTitle() != null) {
-            etTitle.setText(uploadItem.getTitle().toString());
+        if (uploadItem.getFileName() != null) {
+            setDescriptionsInAdapter(uploadItem.getUploadMediaDetails());
         }
 
-        descriptions = uploadItem.getDescriptions();
+        descriptions = uploadItem.getUploadMediaDetails();
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
         setDescriptionsInAdapter(descriptions);
     }
@@ -306,7 +309,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 },
                 () -> {
                     etTitle.setText(place.getName());
-                    Description description = new Description();
+                    UploadMediaDetail description = new UploadMediaDetail();
                     description.setLanguageCode("en");
                     description.setDescriptionText(place.getLongDescription());
                     descriptions = Arrays.asList(description);
@@ -372,9 +375,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void setTitleAndDescription(String title, List<Description> descriptions) {
+    public void setTitleAndDescription(String title, List<UploadMediaDetail> uploadMediaDetails) {
         etTitle.setText(title);
-        setDescriptionsInAdapter(descriptions);
+        setDescriptionsInAdapter(uploadMediaDetails);
     }
 
     private void deleteThisPicture() {
@@ -408,6 +411,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 uploadItem.getGpsCoords().getDecLongitude(), 0.0f));
     }
 
+    @Override
+    public void onEvent(Boolean data) {
+        btnNext.setEnabled(data);
+        btnNext.setClickable(data);
+        btnNext.setAlpha(data ? 1.0f: 0.5f);
+    }
+
 
     public interface UploadMediaDetailFragmentCallback extends Callback {
 
@@ -420,15 +430,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         presenter.fetchPreviousTitleAndDescription(callback.getIndexInViewFlipper(this));
     }
 
-    private void setDescriptionsInAdapter(List<Description> descriptions) {
-        if (descriptions == null) {
-            descriptions = new ArrayList<>();
+    private void setDescriptionsInAdapter(List<UploadMediaDetail> uploadMediaDetails){
+        if(uploadMediaDetails==null){
+            uploadMediaDetails=new ArrayList<>();
         }
-        if (descriptions.size() == 0) {
-            descriptionsAdapter.addDescription(new Description());
-        } else {
-            descriptionsAdapter.setItems(descriptions);
-        }
-    }
 
+        if(uploadMediaDetails.size()==0){
+            uploadMediaDetails.add(new UploadMediaDetail());
+        }
+        uploadMediaDetailAdapter.setItems(uploadMediaDetails);
+    }
 }

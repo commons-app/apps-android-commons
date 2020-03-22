@@ -452,8 +452,9 @@
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>
   <string name="image_chooser_title">업로드할 이미지 선택</string>
   <string name="please_wait">기다려 주십시오...</string>
-  <string name="previous_image_title_description">이전의 제목 및 설명 복사</string>
+  <string name="previous_image_caption_description">이전의 제목 및 설명 복사</string>
   <string name="skip_image">이 이미지 건너뛰기</string>
+  <string name="previous_image_title_description">이전의 제목 및 설명 복사</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">다운로드를 실패했습니다!! 외장 스토리지 권한 없이 파일을 다운로드할 수 없습니다.</string>
   <string name="manage_exif_tags">EXIF 태그 관리</string>
   <string name="exif_tag_name_author">만든이</string>

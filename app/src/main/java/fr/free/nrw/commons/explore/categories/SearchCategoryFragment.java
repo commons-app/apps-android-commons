@@ -217,7 +217,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private void initErrorView() {
         progressBar.setVisibility(GONE);
         categoriesNotFoundView.setVisibility(VISIBLE);
-        categoriesNotFoundView.setText(getString(R.string.categories_not_found));
+        categoriesNotFoundView.setText(getString(R.string.categories_not_found,query));
     }
 
     /**

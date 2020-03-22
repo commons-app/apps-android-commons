@@ -8,26 +8,28 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.facebook.drawee.view.SimpleDraweeView;
-
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
-
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
-import java.util.HashMap;
+import fr.free.nrw.commons.media.MediaClient;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import timber.log.Timber;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
+    private static final long TIMEOUT_SECONDS = 15;
+    private static final String NO_CAPTION = "No caption";
     private final Callback callback;
     @BindView(R.id.contributionImage)
     SimpleDraweeView imageView;
@@ -37,18 +39,24 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.contributionProgress) ProgressBar progressView;
     @BindView(R.id.failed_image_options) LinearLayout failedImageOptions;
 
+
     private int position;
     private Contribution contribution;
     private Random random = new Random();
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final MediaClient mediaClient;
 
-    ContributionViewHolder(View parent, Callback callback) {
+    ContributionViewHolder(View parent, Callback callback,
+        MediaClient mediaClient) {
         super(parent);
+        this.mediaClient = mediaClient;
         ButterKnife.bind(this, parent);
         this.callback=callback;
     }
 
     public void init(int position, Contribution contribution) {
         this.contribution = contribution;
+        fetchAndDisplayCaption(contribution);
         this.position = position;
         imageView.getHierarchy().setPlaceholderImage(new ColorDrawable(
             Color.argb(100, random.nextInt(256), random.nextInt(256), random.nextInt(256))));
@@ -60,7 +68,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                     .build();
             imageView.setImageRequest(imageRequest);
         }
-        titleView.setText(contribution.getDisplayTitle());
 
         seqNumView.setText(String.valueOf(position + 1));
         seqNumView.setVisibility(View.VISIBLE);
@@ -96,6 +103,30 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 progressView.setVisibility(View.GONE);
                 failedImageOptions.setVisibility(View.VISIBLE);
                 break;
+        }
+    }
+
+    /**
+     * In contributions first we show the title for the image stored in cache,
+     * then we fetch captions associated with the image and replace title on the thumbnail with caption
+     *
+     * @param contribution
+     */
+    private void fetchAndDisplayCaption(Contribution contribution) {
+        if ((contribution.getState() != Contribution.STATE_COMPLETED)) {
+            titleView.setText(contribution.getDisplayTitle());
+        } else {
+            Timber.d("Fetching caption for %s", contribution.getFilename());
+            String wikibaseMediaId = "M"+contribution.getPageId(); // Create Wikibase media id from the page id. Example media id: M80618155 for https://commons.wikimedia.org/wiki/File:Tantanmen.jpeg with has the pageid 80618155
+            compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseMediaId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    .subscribe(subscriber -> {
+                        if (!subscriber.trim().equals(NO_CAPTION)) {
+                            titleView.setText(subscriber);
+                        } else titleView.setText(contribution.getDisplayTitle());
+                    }));
         }
     }
 

@@ -2,7 +2,9 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,16 +29,17 @@ import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import fr.free.nrw.commons.utils.BiMap;
 import timber.log.Timber;
 
-public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapter.ViewHolder> {
+public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDetailAdapter.ViewHolder> {
 
-    private List<Description> descriptions;
+    private List<UploadMediaDetail> uploadMediaDetails;
     private Callback callback;
+    private EventListener eventListener;
 
     private BiMap<AdapterView, String> selectedLanguages;
     private String savedLanguageValue;
 
-    public DescriptionsAdapter(String savedLanguageValue) {
-        descriptions = new ArrayList<>();
+    public UploadMediaDetailAdapter() {
+        uploadMediaDetails = new ArrayList<>();
         selectedLanguages = new BiMap<>();
         this.savedLanguageValue = savedLanguageValue;
     }
@@ -45,8 +48,12 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         this.callback = callback;
     }
 
-    public void setItems(List<Description> descriptions) {
-        this.descriptions = descriptions;
+    public void setEventListener(EventListener eventListener) {
+        this.eventListener = eventListener;
+    }
+
+    public void setItems(List<UploadMediaDetail> uploadMediaDetails) {
+        this.uploadMediaDetails = uploadMediaDetails;
         selectedLanguages = new BiMap<>();
         notifyDataSetChanged();
     }
@@ -65,7 +72,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
 
     @Override
     public int getItemCount() {
-        return descriptions.size();
+        return uploadMediaDetails.size();
     }
 
     /**
@@ -73,13 +80,13 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
      *
      * @return List of descriptions
      */
-    public List<Description> getDescriptions() {
-        return descriptions;
+    public List<UploadMediaDetail> getUploadMediaDetails() {
+        return uploadMediaDetails;
     }
 
-    public void addDescription(Description description) {
-        this.descriptions.add(description);
-        notifyItemInserted(descriptions.size());
+    public void addDescription(UploadMediaDetail uploadMediaDetail) {
+        this.uploadMediaDetails.add(uploadMediaDetail);
+        //notifyItemInserted(uploadMediaDetails.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -91,6 +98,9 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         @BindView(R.id.description_item_edit_text)
         AppCompatEditText descItemEditText;
 
+        @BindView(R.id.caption_item_edit_text)
+        AppCompatEditText captionItemEditText;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -98,14 +108,54 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
         }
 
         public void init(int position) {
-            Description description = descriptions.get(position);
-            Timber.d("Description is " + description);
-            if (!TextUtils.isEmpty(description.getDescriptionText())) {
-                descItemEditText.setText(description.getDescriptionText());
+            UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(position);
+            Timber.d("UploadMediaDetail is " + uploadMediaDetail);
+            if (!TextUtils.isEmpty(uploadMediaDetail.getCaptionText())) {
+                captionItemEditText.setText(uploadMediaDetail.getCaptionText());
+            } else {
+                captionItemEditText.setText("");
+            }
+
+            if (!TextUtils.isEmpty(uploadMediaDetail.getDescriptionText())) {
+                descItemEditText.setText(uploadMediaDetail.getDescriptionText());
             } else {
                 descItemEditText.setText("");
             }
+
+            captionItemEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (s.length() != 0) {
+                        eventListener.onEvent(true);
+                    } else eventListener.onEvent(false);
+                }
+            });
+
             if (position == 0) {
+                captionItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
+                        null);
+                captionItemEditText.setOnTouchListener((v, event) -> {
+                    //2 is for drawable right
+                    if (event.getAction() == MotionEvent.ACTION_UP && (event.getRawX() >= (captionItemEditText.getRight() - captionItemEditText.getCompoundDrawables()[2].getBounds().width()))) {
+                        if (getAdapterPosition() == 0) {
+                            callback.showAlert(R.string.media_detail_caption,
+                                    R.string.caption_info);
+                        }
+                        return true;
+                    }
+                    return false;
+                });
+
                 descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
                         null);
                 descItemEditText.setOnTouchListener((v, event) -> {
@@ -122,18 +172,25 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
                 });
 
             } else {
+                captionItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 descItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             }
 
+            captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
+                    captionText -> uploadMediaDetails.get(position)
+                            .setCaptionText(captionText)));
+            initLanguageSpinner(position, uploadMediaDetail);
+
             descItemEditText.addTextChangedListener(new AbstractTextWatcher(
-                    descriptionText -> descriptions.get(position).setDescriptionText(descriptionText)));
-            initLanguageSpinner(position, description);
+                    descriptionText -> uploadMediaDetails.get(position)
+                            .setDescriptionText(descriptionText)));
+            initLanguageSpinner(position, uploadMediaDetail);
 
             //If the description was manually added by the user, it deserves focus, if not, let the user decide
-            if (description.isManuallyAdded()) {
-                descItemEditText.requestFocus();
+            if (uploadMediaDetail.isManuallyAdded()) {
+                captionItemEditText.requestFocus();
             } else {
-                descItemEditText.clearFocus();
+                captionItemEditText.clearFocus();
             }
         }
 
@@ -142,7 +199,7 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
          * @param position
          * @param description
          */
-        private void initLanguageSpinner(int position, Description description) {
+        private void initLanguageSpinner(int position, UploadMediaDetail description) {
             SpinnerLanguagesAdapter languagesAdapter = new SpinnerLanguagesAdapter(
                     spinnerDescriptionLanguages.getContext(),
                     selectedLanguages
@@ -203,6 +260,10 @@ public class DescriptionsAdapter extends RecyclerView.Adapter<DescriptionsAdapte
     public interface Callback {
 
         void showAlert(int mediaDetailDescription, int descriptionInfo);
+    }
+
+    public interface EventListener {
+        void onEvent(Boolean data);
     }
 
     /**

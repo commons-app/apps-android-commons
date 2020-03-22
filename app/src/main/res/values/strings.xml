@@ -46,9 +46,10 @@
   <string name="provider_contributions">My uploads</string>
   <string name="menu_share">Share</string>
   <string name="menu_open_in_browser">View in Browser</string>
-  <string name="share_title_hint">Title (Required)</string>
-  <string name="add_title_toast">Please provide a title for this file</string>
+  <string name="share_title_hint">Caption (Required)</string>
+  <string name="add_caption_toast">Please provide a caption for this file</string>
   <string name="share_description_hint">Description</string>
+  <string name="share_caption_hint">Caption (limit 255 characters)</string>
   <string name="login_failed_network">Unable to login - network failure</string>
   <string name="login_failed_wrong_credentials">Unable to login - please check your username and password</string>
   <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
@@ -61,6 +62,7 @@
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Upload</string>
   <string name="categories_search_text_hint">Search categories</string>
+  <string name="depicts_search_text_hint">Search for items that your media depicts (mountain, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Save</string>
   <string name="refresh_button">Refresh</string>
   <string name="display_list_button">List</string>
@@ -82,6 +84,10 @@
     <item quantity="other">%1$d uploads</item>
   </plurals>
   <string name="categories_not_found">No categories matching %1$s found</string>
+  <string name="depictions_not_found">No Wikidata items matching %1$s found</string>
+  <string name="no_child_classes">%1$s has no child classes</string>
+  <string name="no_parent_classes">%1$s has no parent classes</string>
+  <string name="depictions_image_not_found">No Image for Depiction</string>
   <string name="categories_skip_explanation">Add categories to make your images more discoverable on Wikimedia Commons.\nStart typing to add categories.</string>
   <string name="categories_activity_title">Categories</string>
   <string name="title_activity_settings">Settings</string>
@@ -99,6 +105,7 @@
   <string name="menu_feedback">Send Feedback (via Email)</string>
   <string name="no_email_client">No email client installed</string>
   <string name="provider_categories">Recently used categories</string>
+  <string name="provider_depictions">Recently used depictions</string>
   <string name="waiting_first_sync">Waiting for first sync…</string>
   <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
   <string name="menu_retry_upload">Retry</string>
@@ -158,6 +165,8 @@
   <string name="detail_panel_cats_label">Categories</string>
   <string name="detail_panel_cats_loading">Loading…</string>
   <string name="detail_panel_cats_none">None selected</string>
+  <string name="detail_caption_empty">No caption</string>
+  <string name="detail_depiction_empty">No depiction</string>
   <string name="detail_description_empty">No description</string>
   <string name="detail_discussion_empty">No discussion</string>
   <string name="detail_license_empty">Unknown license</string>
@@ -174,7 +183,9 @@
   <string name="upload_image_duplicate">This file already destroyed on Commons. Are you sure you want to proceed?</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
+  <string name="media_detail_caption">Caption</string>
   <string name="media_detail_title">Title</string>
+  <string name="media_detail_depiction">Depictions</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Author</string>
@@ -240,6 +251,7 @@
   <string name="error_while_cache">Error while caching pictures</string>
   <string name="title_info">A unique descriptive title for the file, which will serve as a filename. You may use plain language with spaces. Do not include the file extension</string>
   <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
+  <string name="caption_info">Please write a brief description of the image. (Limit to 255 characters)</string>
   <string name="upload_image_too_dark">This picture is too dark, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
   <string name="upload_image_blurry">This picture is blurry, are you sure you want to upload it? Wikimedia Commons is only for pictures with encyclopedic value.</string>
 
@@ -326,9 +338,11 @@
   <string name="search_recent_header">Recent searches:</string>
   <string name="provider_searches">Recently searched queries</string>
   <string name="error_loading_categories">Error occurred while loading categories.</string>
+  <string name="error_loading_depictions">Error occurred while loading depictions.</string>
   <string name="error_loading_subcategories">Error occurred while loading subcategories.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Categories</string>
+  <string name="search_tab_title_depictions">Items</string>
   <string name="explore_tab_title_featured">Featured</string>
   <string name="explore_tab_title_mobile">Uploaded via mobile</string>
 
@@ -445,6 +459,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_categories_selected">No Categories Selected</string>
   <string name="no_categories_selected_warning_desc">Images without categories are rarely usable. Are you sure you want to submit without selecting categories?</string>
 
+  <string name="no_depictions_selected">No Depictions Selected</string>
+  <string name="no_depictions_selected_warning_desc">Depictions help when searching for images. Are you sure you want to submit without selecting depictions?</string>
+
   <string name="yes_submit">Yes, Submit</string>
   <string name="no_go_back">No, Go Back</string>
 
@@ -533,7 +550,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="images_featured_explanation">Featured pictures are images from highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
   <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
   <string name="thanks_received_explanation" >This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
-  <string name="previous_image_title_description">Copy previous title &amp; description</string>
+  <string name="previous_image_caption_description">Copy previous captions &amp; description</string>
   <string name="previous_button_tooltip_message">Click to reuse the title and description you entered in your previous picture and modify it to fit your current one</string>
   <string name="welcome_do_upload_content_description">Examples of good images to upload to Commons</string>
   <string name="welcome_dont_upload_content_description">Examples of images not to upload</string>
@@ -555,6 +572,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="share_via">Share app via...</string>
   <string name="image_info">Image Info</string>
   <string name="no_categories_found">No Categories found</string>
+  <string name="no_depiction_found">No Depictions found</string>
   <string name="upload_cancelled">Cancelled Upload</string>
   <string name="previous_image_title_description_not_found">There is no data for previous image\'s title or description</string>
   <string name="dialog_box_text_nomination">Why should %1$s be deleted?</string>
@@ -587,6 +605,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="place_type">Place type:</string>
   <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
   <string name="you_must_reset_your_passsword">Something went wrong with login, you must reset your password !!</string>
+  <string name="title_for_media">MEDIA</string>
+  <string name="title_for_child_classes">CHILD CLASSES</string>
+  <string name="title_for_parent_classes">PARENT CLASSES</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
   <string name="upload_nearby_place_found_description">Is this a photo of Place %1$s?</string>

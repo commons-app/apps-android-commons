@@ -23,6 +23,9 @@ class WikidataEditServiceTest {
     @Mock
     internal var wikidataClient: WikidataClient? = null
 
+    @Mock
+    internal var wikibaseClient: WikiBaseClient? = null
+
     @InjectMocks
     var wikidataEditService: WikidataEditService? = null
 

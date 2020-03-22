@@ -1,0 +1,4 @@
+SELECT ?subclass ?subclassLabel WHERE {
+    ?subclass wdt:P279 wd:${QID}.
+    SERVICE wikibase:label { bd:serviceParam wikibase:language ${LANG}. }
+}

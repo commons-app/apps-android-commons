@@ -54,14 +54,18 @@ import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
+import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Map;
+
 import timber.log.Timber;
 
 import static android.view.View.GONE;
@@ -107,6 +111,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     SimpleDraweeView image;
     @BindView(R.id.mediaDetailTitle)
     TextView title;
+    @BindView(R.id.caption_layout)
+    LinearLayout captionLayout;
+    @BindView(R.id.depicts_layout)
+    LinearLayout depictsLayout;
+    @BindView(R.id.media_detail_caption)
+    TextView mediaCaption;
     @BindView(R.id.mediaDetailDesc)
     HtmlTextView desc;
     @BindView(R.id.mediaDetailAuthor)
@@ -125,6 +135,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     LinearLayout nominatedForDeletion;
     @BindView(R.id.mediaDetailCategoryContainer)
     LinearLayout categoryContainer;
+    @BindView(R.id.media_detail_depiction_container)
+    LinearLayout depictionContainer;
     @BindView(R.id.authorLinearLayout)
     LinearLayout authorLayout;
     @BindView(R.id.nominateDeletion)
@@ -133,8 +145,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     ScrollView scrollView;
 
     private ArrayList<String> categoryNames;
+    /**
+     * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
+     * However unlike categories depictions is multi-lingual
+     * Ex: key: en value: monument
+     */
+    private ArrayList<Map<String, String>> depictions;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
+    private boolean depictionLoaded = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
 
@@ -187,6 +206,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
 
+        depictions = new ArrayList<>();
+
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
         ButterKnife.bind(this,view);
@@ -234,7 +255,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         desc.setHtmlText(media.getDescription());
         license.setText(media.getLicense());
 
-        Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename())
+        Disposable disposable = mediaDataExtractor.fetchMediaDetails(media.getFilename(), media.getPageId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setTextFields);
@@ -299,9 +320,18 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         coordinates.setText(prettyCoordinates(media));
         uploadedDate.setText(prettyUploadedDate(media));
         mediaDiscussion.setText(prettyDiscussion(media));
+        if (prettyCaption(media).equals(getContext().getString(R.string.detail_caption_empty))) {
+            captionLayout.setVisibility(GONE);
+        } else mediaCaption.setText(prettyCaption(media));
+
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
+
+        depictions.clear();
+        depictions.addAll(media.getDepiction());
+
+        depictionLoaded = true;
 
         categoriesLoaded = true;
         categoriesPresent = (categoryNames.size() > 0);
@@ -309,7 +339,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             // Stick in a filler element.
             categoryNames.add(getString(R.string.detail_panel_cats_none));
         }
+
         rebuildCatList();
+
+        if(depictions != null && depictions.size() != 0) {
+            rebuildDepictionList();
+        }
+        else depictsLayout.setVisibility(GONE);
 
         if (media.getCreator() == null || media.getCreator().equals("")) {
             authorLayout.setVisibility(GONE);
@@ -318,6 +354,19 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
 
         checkDeletion(media);
+    }
+
+    /**
+     * Populates media details fragment with depiction list
+     */
+    private void rebuildDepictionList() {
+        depictionContainer.removeAllViews();
+        for (int i = 0; i<depictions.size(); i++) {
+            String depictionName = depictions.get(i).get("label");
+            String entityId = depictions.get(i).get("id");
+            View depictLabel = buildDepictLabel(depictionName, entityId, depictionContainer);
+            depictionContainer.addView(depictLabel);
+        }
     }
 
     @OnClick(R.id.mediaDetailLicense)
@@ -486,6 +535,26 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
     }
 
+    /**
+     * Add view to depictions obtained also tapping on depictions should open the url
+     */
+    private View buildDepictLabel(String depictionName, String entityId, LinearLayout depictionContainer) {
+        final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_depicts_item, depictionContainer, false);
+        final CompatTextView textView = item.findViewById(R.id.media_detail_depicted_item_text);
+
+        textView.setText(depictionName);
+        if (depictionLoaded) {
+            item.setOnClickListener(view -> {
+                DepictedItem depictedItem = new DepictedItem(depictionName, "", "", false, entityId);
+                Intent intent = new Intent(getContext(), WikidataItemDetailsActivity.class);
+                intent.putExtra("wikidataItemName", depictedItem.getDepictsLabel());
+                intent.putExtra("entityId", depictedItem.getEntityId());
+                getContext().startActivity(intent);
+            });
+        }
+        return item;
+    }
+
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
         final CompatTextView textView = item.findViewById(R.id.mediaDetailCategoryItemText);
@@ -513,6 +582,21 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             scrollPercentage = transparencyMax;
         }
         image.setAlpha(1.0f - scrollPercentage);
+    }
+
+    /**
+    * Returns captions for media details
+     *
+     * @param media object of class media
+     * @return caption as string
+     */
+    private String prettyCaption(Media media) {
+        String caption = media.getCaption().trim();
+        if (caption.equals("")) {
+            return getString(R.string.detail_caption_empty);
+        } else {
+            return caption;
+        }
     }
 
     private String prettyDescription(Media media) {

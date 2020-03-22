@@ -13,6 +13,8 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -111,6 +113,10 @@ public class UploadRepository {
      */
     public void setSelectedCategories(List<String> categoryStringList) {
         remoteDataSource.setSelectedCategories(categoryStringList);
+    }
+
+    public void setSelectedDepictions(List<String> selectedDepictions) {
+        remoteDataSource.setSelectedDepictions(selectedDepictions);
     }
 
     /**
@@ -263,6 +269,35 @@ public class UploadRepository {
         localDataSource.setSelectedLicense(licenseName);
     }
 
+    public void onDepictItemClicked(DepictedItem depictedItem) {
+        remoteDataSource.onDepictedItemClicked(depictedItem);
+    }
+
+    /**
+     * Fetches and returns the selected depictions for the current upload
+     *
+     * @return
+     */
+
+    public List<DepictedItem> getSelectedDepictions() {
+        return remoteDataSource.getSelectedDepictions();
+    }
+
+    /**
+     * Search all depictions from
+     *
+     * @param query
+     * @return
+     */
+
+    public Observable<DepictedItem> searchAllEntities(String query) {
+        return remoteDataSource.searchAllEntities(query);
+    }
+
+    public List<String> getDepictionsEntityIdList() {
+        return remoteDataSource.depictionsEntityIdList();
+    }
+
     /**
      * Returns nearest place matching the passed latitude and longitude
      * @param decLatitude
@@ -273,7 +308,7 @@ public class UploadRepository {
         return remoteDataSource.getNearbyPlaces(decLatitude, decLongitude);
     }
 
-  public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
-    remoteDataSource.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
-  }
+    public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+        remoteDataSource.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
+    }
 }
