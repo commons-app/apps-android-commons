@@ -27,7 +27,7 @@
         android:layout_margin="@dimen/dimen_6"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:text="Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?"/>
+        android:text="@string/use_location_from_similar_image"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
