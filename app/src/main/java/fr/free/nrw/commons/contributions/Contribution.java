@@ -70,6 +70,7 @@ public class  Contribution extends Media {
     public String decimalCoords;
     public boolean isMultiple;
     public String wikiDataEntityId;
+    private String p18Value;
     public Uri contentProviderUri;
     public String dateCreatedSource;
     public HashMap<String, String> mediaLegends;
@@ -277,6 +278,19 @@ public class  Contribution extends Media {
      */
     public void setWikiDataEntityId(String wikiDataEntityId) {
         this.wikiDataEntityId = wikiDataEntityId;
+    }
+
+    public String getP18Value() {
+        return p18Value;
+    }
+
+    /**
+     * When the corresponding image property of wiki entity is known as in case of nearby uploads,
+     * it can be set using the setter method
+     * @param p18Value p18 value, image property of the wikidata item
+     */
+    public void setP18Value(String p18Value) {
+        this.p18Value = p18Value;
     }
 
     public void setContentProviderUri(Uri contentProviderUri) {

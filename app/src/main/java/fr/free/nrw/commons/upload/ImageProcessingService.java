@@ -1,22 +1,20 @@
 package fr.free.nrw.commons.upload;
 
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
+
 import android.content.Context;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 /**
  * Methods for pre-processing images to be uploaded
@@ -41,38 +39,33 @@ public class ImageProcessingService {
         this.mediaClient = mediaClient;
     }
 
-    /**
-     * Check image quality before upload
-     * - checks duplicate image
-     * - checks dark image
-     * - checks geolocation for image
-     * - check for valid title
-     */
-    Single<Integer> validateImage(UploadModel.UploadItem uploadItem, boolean checkTitle) {
-        int currentImageQuality = uploadItem.getImageQuality();
-        Timber.d("Current image quality is %d", currentImageQuality);
-        if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
-            return Single.just(ImageUtils.IMAGE_OK);
-        }
-        Timber.d("Checking the validity of image");
-        String filePath = uploadItem.getMediaUri().getPath();
-        Single<Integer> duplicateImage = checkDuplicateImage(filePath);
-        Single<Integer> wrongGeoLocation = checkImageGeoLocation(uploadItem.getPlace(), filePath);
-        Single<Integer> darkImage = checkDarkImage(filePath);
-        Single<Integer> itemTitle = checkTitle ? validateItemTitle(uploadItem) : Single.just(ImageUtils.IMAGE_OK);
-        Single<Integer> checkFBMD = checkFBMD(filePath);
-        Single<Integer> checkEXIF = checkEXIF(filePath);
-
-        Single<Integer> zipResult = Single.zip(duplicateImage, wrongGeoLocation, darkImage, itemTitle,
-                (duplicate, wrongGeo, dark, title) -> {
-                    Timber.d("Result for duplicate: %d, geo: %d, dark: %d, title: %d", duplicate, wrongGeo, dark, title);
-                    return duplicate | wrongGeo | dark | title;
-                });
-        return Single.zip(zipResult, checkFBMD , checkEXIF , (zip , fbmd , exif)->{
-            Timber.d("zip:" + zip + "fbmd:" + fbmd + "exif:" + exif);
-            return zip | fbmd | exif;
-                });
+  /**
+   * Check image quality before upload - checks duplicate image - checks dark image - checks
+   * geolocation for image - check for valid title
+   */
+  Single<Integer> validateImage(UploadModel.UploadItem uploadItem) {
+    int currentImageQuality = uploadItem.getImageQuality();
+    Timber.d("Current image quality is %d", currentImageQuality);
+    if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
+      return Single.just(ImageUtils.IMAGE_OK);
     }
+    Timber.d("Checking the validity of image");
+    String filePath = uploadItem.getMediaUri().getPath();
+
+    return Single.zip(
+        checkDuplicateImage(filePath),
+        checkImageGeoLocation(uploadItem.getPlace(), filePath),
+        checkDarkImage(filePath),
+        validateItemTitle(uploadItem),
+        checkFBMD(filePath),
+        checkEXIF(filePath),
+        (duplicateImage, wrongGeoLocation, darkImage, itemTitle, fbmd, exif) -> {
+          Timber.d("duplicate: %d, geo: %d, dark: %d, title: %d" + "fbmd:" + fbmd + "exif:" + exif,
+              duplicateImage, wrongGeoLocation, darkImage, itemTitle);
+          return duplicateImage | wrongGeoLocation | darkImage | itemTitle | fbmd | exif;
+        }
+    );
+  }
 
     /**
      * We want to discourage users from uploading images to Commons that were taken from Facebook.
@@ -113,7 +106,8 @@ public class ImageProcessingService {
                 .map(doesFileExist -> {
                     Timber.d("Result for valid title is %s", doesFileExist);
                     return doesFileExist ? FILE_NAME_EXISTS : IMAGE_OK;
-                });
+                })
+                .subscribeOn(Schedulers.io());
     }
 
     /**
@@ -124,14 +118,14 @@ public class ImageProcessingService {
      */
     private Single<Integer> checkDuplicateImage(String filePath) {
         Timber.d("Checking for duplicate image %s", filePath);
-        return Single.fromCallable(() ->
-                fileUtilsWrapper.getFileInputStream(filePath))
+        return Single.fromCallable(() -> fileUtilsWrapper.getFileInputStream(filePath))
                 .map(fileUtilsWrapper::getSHA1)
                 .flatMap(mediaClient::checkFileExistsUsingSha)
                 .map(b -> {
                     Timber.d("Result for duplicate image %s", b);
                     return b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK;
-                });
+                })
+                .subscribeOn(Schedulers.io());
     }
 
     /**
@@ -164,7 +158,8 @@ public class ImageProcessingService {
                         return Single.just(ImageUtils.IMAGE_OK);
                     }
                     return imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation());
-                });
+                })
+                .subscribeOn(Schedulers.io());
     }
 }
 

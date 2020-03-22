@@ -348,68 +348,74 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
-        if(AccountUtil.getUserName(getContext()).equals(media.getCreator())){
-        final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.simple_spinner_dropdown_list, reasonList);
-        final Spinner spinner = new Spinner(getActivity());
-        spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        spinner.setAdapter(languageAdapter);
-        spinner.setGravity(17);
+            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getCreator())) {
+                final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
+                    R.layout.simple_spinner_dropdown_list, reasonList);
+                final Spinner spinner = new Spinner(getActivity());
+                spinner.setLayoutParams(
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                spinner.setAdapter(languageAdapter);
+                spinner.setGravity(17);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(spinner);
-        builder.setTitle(R.string.nominate_delete)
-                .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> onDeleteClicked(spinner));
-        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> dialog.dismiss());
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        if(isDeleted) {
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-        }
-        }
-        //Reviewer correct me if i have misunderstood something over here
-        //But how does this  if (delete.getVisibility() == View.VISIBLE) {
-        //            enableDeleteButton(true);   makes sense ?
-        else{
-        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setMessage(getString(R.string.dialog_box_text_nomination,media.getDisplayTitle()));
-        final EditText input = new EditText(getActivity());
-        alert.setView(input);
-        input.requestFocus();
-        alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
-            String reason = input.getText().toString();
-            onDeleteClickeddialogtext(reason);
-        });
-        alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
-        });
-        AlertDialog d = alert.create();
-        input.addTextChangedListener(new TextWatcher() {
-            private void handleText() {
-                final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                if (input.getText().length() == 0) {
-                    okButton.setEnabled(false);
-                } else {
-                    okButton.setEnabled(true);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setView(spinner);
+                builder.setTitle(R.string.nominate_delete)
+                    .setPositiveButton(R.string.about_translate_proceed,
+                        (dialog, which) -> onDeleteClicked(spinner));
+                builder.setNegativeButton(R.string.about_translate_cancel,
+                    (dialog, which) -> dialog.dismiss());
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                if (isDeleted) {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
                 }
             }
+            //Reviewer correct me if i have misunderstood something over here
+            //But how does this  if (delete.getVisibility() == View.VISIBLE) {
+            //            enableDeleteButton(true);   makes sense ?
+            else {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setMessage(
+                    getString(R.string.dialog_box_text_nomination, media.getDisplayTitle()));
+                final EditText input = new EditText(getActivity());
+                alert.setView(input);
+                input.requestFocus();
+                alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
+                    String reason = input.getText().toString();
+                    onDeleteClickeddialogtext(reason);
+                });
+                alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
+                });
+                AlertDialog d = alert.create();
+                input.addTextChangedListener(new TextWatcher() {
+                    private void handleText() {
+                        final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                        if (input.getText().length() == 0) {
+                            okButton.setEnabled(false);
+                        } else {
+                            okButton.setEnabled(true);
+                        }
+                    }
 
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                handleText();
-            }
+                    @Override
+                    public void afterTextChanged(Editable arg0) {
+                        handleText();
+                    }
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+                });
+                d.show();
+                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             }
-        });
-        d.show();
-        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-    }
         }
+
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {

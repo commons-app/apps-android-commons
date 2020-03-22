@@ -362,11 +362,10 @@
   <string name="preference_author_name_toggle">ನಿಷ್ಟ ಲೇಖಕ ಪುದರ್ ಬಳಸುಲೆ.</string>
   <string name="preference_author_name_toggle_summary">ಚಿತ್ರೊಲೆನ್ ಮಿತೇರಾನಗ ಇರೆನ ಬಳಕೆಪುದರುದ ಬದಲ್ ಒಂಜಿ ನಿಷ್ಟ ಲೇಖಕ ಪುದರ್ ಬಳಸುಲೆ.</string>
   <string name="preference_author_name">ನಿಷ್ಟ ಲೇಖಕ ಪುದರ್</string>
-  <string name="preference_author_name_summary">ಮಿತೇರುಲೆಡ್  ಇರೆನ  ಬಳಕೆಪುದರ್ದ ಬದಲ್  ಬಳಸರೆ ನಿಷ್ಟ ಲೇಖಕ ಪುದರ್.</string>
   <string name="contributions_fragment">ಕಾಣಿಕೆಲು</string>
   <string name="nearby_fragment">ಕೈತಲ್‍ದ</string>
   <string name="notifications">ಅಧಿಸೂಚನೆಲು</string>
-  <string name="archived_notifications" fuzzy="true">ಅಧಿಸೂಚನೆಲು(ಅನುರಕ್ಷಿತ)</string>
+  <string name="read_notifications" fuzzy="true">ಅಧಿಸೂಚನೆಲು(ಅನುರಕ್ಷಿತ)</string>
   <string name="display_nearby_notification">ಕೈತಲ್ದ ಅಧಿಸೂಚನೆ ತೋಜಾಲೆ</string>
   <string name="display_nearby_notification_summary">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
   <string name="no_close_nearby">ಇರೆನ ಮುಟ್ಟೊಡು ಕೈತಲ್ದ ಜಾಗೊಲು ತಿಕ್ಕುಜಾ.</string>
@@ -396,8 +395,8 @@
   <string name="deletion_reason_uploaded_by_mistake">ಯಾನ್ ಅವೆನ್ ತತ್ತ್\'ದ್ ಮಿತೇರಾಯೆ.</string>
   <string name="deletion_reason_publicly_visible">ಅವು ಸಾರ್ವತ್ರಿಕವಾದ್ ತೋಜುಂಡು ಇಂದ್ ಎಂಕ್ ಗೊತ್ತಿತ್ತಿಜಿ.</string>
   <string name="deletion_reason_bad_for_my_privacy">ಅವು ಎನ್ನ ಖಾಸಗಿತೆನೊಕು ಹಾಳ್ಂದ್ ಎಂಕ್ ತೆರಿಂಡ್.</string>
-  <string name="no_archived_notification" fuzzy="true">ಇರೆಗ್ ಅನುರಕ್ಷಿತ ಅಧಿಸೂಚನೆ ಇಜ್ಜಿ</string>
-  <string name="menu_option_archived">ಅನುರಕ್ಷಿತ ತೂಲೆ</string>
+  <string name="no_read_notification" fuzzy="true">ಇರೆಗ್ ಅನುರಕ್ಷಿತ ಅಧಿಸೂಚನೆ ಇಜ್ಜಿ</string>
+  <string name="menu_option_read">ಅನುರಕ್ಷಿತ ತೂಲೆ</string>
   <string name="menu_option_unread">ಓದಂದಿನ ತೂಲೆ</string>
   <string name="error_occurred_in_picking_images">ಆಕೃತಿಲೆನ್ ಪೆಜ್ಜಿನಗ ದೋಷ ಆಂಡ್</string>
   <string name="image_chooser_title">ಮಿತರಾರೆ ಆಕೃತಿಲೆನ್ ಆಯುಲೆ</string>

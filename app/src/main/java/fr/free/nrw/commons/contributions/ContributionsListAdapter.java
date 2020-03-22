@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.contributions;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.model.DisplayableContribution;
 
 /**
  * Represents The View Adapter for the List of Contributions  
@@ -22,7 +24,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
 
     public ContributionsListAdapter(Callback callback) {
         this.callback = callback;
-        contributions=new ArrayList<>();
+        contributions = new ArrayList<>();
     }
 
     /**
@@ -41,9 +43,12 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
     @Override
     public void onBindViewHolder(@NonNull ContributionViewHolder holder, int position) {
         final Contribution contribution = contributions.get(position);
-        DisplayableContribution displayableContribution = new DisplayableContribution(contribution,
-                position);
-        holder.init(position, displayableContribution);
+        if (TextUtils.isEmpty(contribution.getThumbUrl())
+            && contribution.getState() == Contribution.STATE_COMPLETED) {
+            callback.fetchMediaUriFor(contribution);
+        }
+
+        holder.init(position, contribution);
     }
 
     @Override
@@ -51,12 +56,14 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         return contributions.size();
     }
 
-    public void setContributions(List<Contribution> contributionList) {
-        if(null!=contributionList) {
-            this.contributions.clear();
-            this.contributions.addAll(contributionList);
-            notifyDataSetChanged();
-        }
+    public void setContributions(@NonNull List<Contribution> contributionList) {
+        contributions = contributionList;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return contributions.get(position)._id;
     }
 
     public interface Callback {
@@ -68,5 +75,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         void openMediaDetail(int contribution);
 
         Contribution getContributionForPosition(int position);
+
+        void fetchMediaUriFor(Contribution contribution);
     }
 }

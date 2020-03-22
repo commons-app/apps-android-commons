@@ -92,12 +92,12 @@
   <string name="no_uploads_yet">तपाईंले हालसम्म कुनै पनि फोटो उर्ध्वभरण गर्नुभएको छैन</string>
   <string name="menu_retry_upload">पुन: प्रयास गर्नुहोस्</string>
   <string name="menu_cancel_upload">रद्द गर्नुहोस्</string>
-  <string name="share_license_summary">यी तस्वीरहरू  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
+  <string name="share_license_summary" fuzzy="true">यी तस्वीरहरू  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
   <string name="menu_download">डाउनलोड गर्ने</string>
   <string name="preference_license">पूर्वनिर्धारित अनुमति पत्र</string>
   <string name="use_previous">अघिल्लो शीर्षक र वर्णनकाे प्रयोग गर्नुहोस्</string>
   <string name="allow_gps">स्वचालित रूपमा हालको स्थान प्राप्त गर्नुहोस्</string>
-  <string name="preference_theme" fuzzy="true">रात्री रिती</string>
+  <string name="preference_theme">थिम</string>
   <string name="license_name_cc_by_sa_four">एट्रिब्युसन- सेयरअलाइक ४.०</string>
   <string name="license_name_cc_by_four">एट्रिब्युसन ४.०</string>
   <string name="license_name_cc_by_sa">एट्रिब्युसन- सेयरअलाइक ३.०</string>
@@ -254,7 +254,7 @@
   <string name="contributions_fragment">योगदानहरू</string>
   <string name="nearby_fragment">नजिकैको</string>
   <string name="notifications">सूचनाहरू</string>
-  <string name="archived_notifications">सूचनाहरू (अभिलेख)</string>
+  <string name="read_notifications">सूचनाहरू (अभिलेख)</string>
   <string name="list_sheet">सूची</string>
   <string name="storage_permission">भण्डारण अनुमति</string>
   <string name="next">अर्को</string>
@@ -298,5 +298,12 @@
   <string name="no_achievements_yet">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन</string>
   <string name="account_created">खाता सृजना गरियो!</string>
   <string name="upload_nearby_place_found_title">नजिकैको स्थान भेटियो</string>
+  <string name="title_app_shortcut_explore">अन्वेषण</string>
+  <string name="title_app_shortcut_bookmark">पुस्तक चिनोहरू</string>
+  <string name="title_app_shortcut_setting">सेटिङ्गहरू</string>
   <string name="add_bookmark">पुस्तक चिनाेमा थपियाे</string>
+  <string name="setting_wallpaper_dialog_title">भित्तेपत्रकाे रूपमा चयन गर्नुहोस्</string>
+  <string name="theme_default_name">पुनर्निर्धारित</string>
+  <string name="theme_dark_name">गाढा</string>
+  <string name="theme_light_name">हल्का</string>
 </resources>

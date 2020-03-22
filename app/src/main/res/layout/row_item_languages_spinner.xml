@@ -22,9 +22,4 @@
     tools:text="en"
     />
 
-  <View
-      android:id="@+id/view"
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/tiny_height"
-      android:background="@color/item_white_background" />
 </LinearLayout>

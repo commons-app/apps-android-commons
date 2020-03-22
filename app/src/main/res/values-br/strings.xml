@@ -38,7 +38,7 @@
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
   <string name="upload_failed_notification_subtitle">Pouezit evit diskwel</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d restr o vezañ karget</item>
     <item quantity="other">%1$d restr o vezañ karget</item>
   </plurals>
@@ -74,16 +74,16 @@
   <string name="gps_disabled">Diwerededkaet eo ar GPS war hoc\'h ardivink.\nHa c\'hoant ho peus da weredekaat anezhañ ?</string>
   <string name="enable_gps">Gweredekaat ar GPS</string>
   <string name="contributions_subtitle_zero">Enporzhiadenn ebet c\'hoazh !</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d bellgargadenn loc\'het</item>
     <item quantity="other">%1$d pellgargadennoù loc\'het</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d bellgargadenn</item>
     <item quantity="other">%1$d pellgargadennoù</item>
   </plurals>
@@ -107,7 +107,7 @@
   <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
   <string name="menu_retry_upload">Klask en-dro</string>
   <string name="menu_cancel_upload">Nullañ</string>
-  <plurals name="share_license_summary">
+  <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
     <item quantity="other">gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
   </plurals>
@@ -319,7 +319,7 @@
   <string name="error_occurred">Ur fazi zo bet !</string>
   <string name="preference_author_name_toggle">Implijit un anv aozer personelaet</string>
   <string name="nearby_fragment">Nepell</string>
-  <string name="archived_notifications">Kemennoù(diellaouet)</string>
+  <string name="read_notifications">Kemennoù(diellaouet)</string>
   <string name="next">War-lerc\'h</string>
   <string name="previous">Kent</string>
   <string name="submit">Kas</string>

@@ -74,4 +74,8 @@ class ContributionsLocalDataSource {
     public void set(String key, long value) {
         defaultKVStore.putLong(key,value);
     }
+
+    public Single<Integer> updateContribution(Contribution contribution) {
+        return contributionDao.update(contribution);
+    }
 }

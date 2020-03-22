@@ -2,20 +2,17 @@ package fr.free.nrw.commons.wikidata;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
+import androidx.annotation.NonNull;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Locale;
+import java.util.Map;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import timber.log.Timber;
 
 /**
@@ -47,10 +44,12 @@ public class WikidataEditService {
 
     /**
      * Create a P18 claim and log the edit with custom tag
-     * @param wikidataEntityId
-     * @param fileName
+     * @param wikidataEntityId a unique id of each Wikidata items
+     * @param fileName name of the file we will upload
+     * @param p18Value pic attribute of Wikidata item
      */
-    public void createClaimWithLogging(String wikidataEntityId, String fileName, Map<String, String> mediaLegends) {
+    public void createClaimWithLogging(String wikidataEntityId, String fileName,
+        @NonNull String p18Value, Map<String, String> mediaLegends) {
         if (wikidataEntityId == null) {
             Timber.d("Skipping creation of claim as Wikidata entity ID is null");
             return;
@@ -61,10 +60,17 @@ public class WikidataEditService {
             return;
         }
 
-//        if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
-//            Timber.d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
-//            return;
-//        }
+      if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
+        Timber
+            .d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
+        return;
+      }
+
+      if (!p18Value.trim().isEmpty()) {
+        Timber
+            .d("Skipping creation of claim as p18Value is not empty, we won't override existing image");
+        return;
+      }
 
         editWikidataProperty(wikidataEntityId, fileName, mediaLegends);
     }

@@ -69,7 +69,7 @@
   <string name="gps_disabled">GPS ass op Ärem Apparat ausgeschalt. Wëllt Dir en aktivéieren?</string>
   <string name="enable_gps">GPS aktivéieren</string>
   <string name="contributions_subtitle_zero">Nach keng eropgeluede Fichieren</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">N@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -134,7 +134,7 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Wikimedia Commons späichert déi meescht Biller, déi op Wikipedia benotzt ginn.</string>
   <string name="tutorial_1_subtext">Är Biller hëllefe Leit op der ganzer Welt ze forméieren!</string>
-  <string name="tutorial_2_text">Lued wgl. Biller erop déi komplett vun Iech opgeholl oder gemaacht goufen:</string>
+  <string name="tutorial_2_text">Luet wgl. nëmme Biller erop déi komplett vun Iech opgeholl oder gemaach goufen:</string>
   <string name="tutorial_2_subtext_1">Natierlech Objeten (Blummen, Déieren, Bierger)</string>
   <string name="tutorial_2_subtext_2">Nëtzlech Objeten (Vëloen, Garen)</string>
   <string name="tutorial_2_subtext_3">Berühmt Leit (Äre Buergermeeschter, Olympioniken deenen Dir begéint sidd)</string>
@@ -222,7 +222,7 @@
   <string name="upload_problem_image_duplicate">Bild ass schonn op Commons.</string>
   <string name="upload_problem_different_geolocation">Dëst Bild gouf op enger anerer Plaz gemaach.</string>
   <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
-  <string name="internet_downloaded">Lued wgl. nëmme Biller erop déi Dir selwer opgeholl hutt. Lued keng Biller erop déi Dir aus dem Internet erofgelueden hutt.</string>
+  <string name="internet_downloaded">Luet wgl. nëmme Biller erop déi Dir selwer opgeholl hutt. Luet keng Biller erop déi Dir aus dem Internet erofgelueden hutt.</string>
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
@@ -322,6 +322,7 @@
   <string name="yes_submit">Jo, schécken</string>
   <string name="no_go_back">Neen, zréck goen</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Dir hutt esou vill Kontributioune gemaach datt eise Berechnungssystem iwwerfuerdert ass. Dëst ass déi bescht Leeschtung.</string>
   <string name="nominate_for_deletion_done">Fäerdeg</string>
   <string name="notsure">Net sécher</string>
   <string name="send_thank_send">Merci schécken</string>
@@ -336,7 +337,7 @@
   <string name="review_thanks_no_button_text">Nächst BILD</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
-  <string name="no_archived_notification">Dir hutt keng archivéier Notifikatiounen</string>
+  <string name="no_read_notification">Dir hutt keng archivéier Notifikatiounen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
   <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>
   <string name="please_wait">Waart wgl. ...</string>

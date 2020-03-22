@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
 
+import fr.free.nrw.commons.MediaDataExtractor;
+import io.reactivex.disposables.Disposable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -215,6 +217,12 @@ public class ContributionsFragment
             @Override
             public Contribution getContributionForPosition(int position) {
                 return (Contribution) contributionsPresenter.getItemAtPosition(position);
+            }
+
+            @Override
+            public void fetchMediaUriFor(Contribution contribution) {
+                Timber.d("Fetching thumbnail for %s", contribution.filename);
+                contributionsPresenter.fetchMediaDetails(contribution);
             }
         });
 
@@ -437,8 +445,8 @@ public class ContributionsFragment
         DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.nearby_card_permission_title),
                 getString(R.string.nearby_card_permission_explanation),
-                this::displayYouWontSeeNearbyMessage,
                 this::requestLocationPermission,
+                this::displayYouWontSeeNearbyMessage,
                 checkBoxView,
                 false);
     }

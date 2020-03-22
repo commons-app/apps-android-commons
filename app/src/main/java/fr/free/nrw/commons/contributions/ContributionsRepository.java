@@ -61,4 +61,8 @@ public class ContributionsRepository {
     public long getLong(String key) {
         return localDataSource.getLong(key);
     }
+
+    public Single<Integer> updateContribution(Contribution contribution) {
+        return localDataSource.updateContribution(contribution);
+    }
 }

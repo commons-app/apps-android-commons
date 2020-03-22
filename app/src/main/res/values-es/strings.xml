@@ -97,7 +97,7 @@
   <string name="gps_disabled">El GPS está desactivado en tu dispositivo. ¿Quieres activarlo?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">No hay subidas aún</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -401,11 +401,10 @@
   <string name="preference_author_name_toggle">Usar nombre de autor personalizado</string>
   <string name="preference_author_name_toggle_summary">Usar un nombre de autor personalizado en vez de tu nombre de usuario al subir fotos</string>
   <string name="preference_author_name">Nombre de autor personalizado</string>
-  <string name="preference_author_name_summary">El nombre de autor personalizado para usar en las subidas en vez de tu nombre de usuario</string>
   <string name="contributions_fragment">Contribuciones</string>
   <string name="nearby_fragment">Cercanos</string>
   <string name="notifications">Notificaciones</string>
-  <string name="archived_notifications">Notificaciones (archivadas)</string>
+  <string name="read_notifications">Notificaciones (archivadas)</string>
   <string name="display_nearby_notification">Mostrar notificaciones de cercanía</string>
   <string name="display_nearby_notification_summary">Toca aquí para ver el lugar más cercano que necesita fotos</string>
   <string name="no_close_nearby">No se encontraron lugares cercanos cerca de ti</string>
@@ -518,9 +517,9 @@
   <string name="no_image_reverted">Ninguna imagen revertida</string>
   <string name="no_image_uploaded">Ninguna imagen subida</string>
   <string name="no_notification">No tienes notificaciones sin leer</string>
-  <string name="no_archived_notification">No tienes notificaciones archivadas</string>
+  <string name="no_read_notification">No tienes notificaciones archivadas</string>
   <string name="share_logs_using">Compartir registros usando</string>
-  <string name="menu_option_archived">Ver archivados</string>
+  <string name="menu_option_read">Ver archivados</string>
   <string name="menu_option_unread">Ver no leidas</string>
   <string name="error_occurred_in_picking_images">Ocurrió un error mientras se elegían imagenes</string>
   <string name="image_chooser_title">Elige imágenes para cargar</string>

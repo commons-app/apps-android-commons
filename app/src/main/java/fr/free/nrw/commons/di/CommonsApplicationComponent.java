@@ -53,8 +53,6 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
 
     void inject(PicOfDayAppWidget picOfDayAppWidget);
 
-    void inject(ContributionViewHolder viewHolder);
-
     Gson gson();
 
     @Component.Builder

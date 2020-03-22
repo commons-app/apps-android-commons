@@ -123,7 +123,7 @@
   <string name="use_previous">Користи претходан наслов и опис</string>
   <string name="allow_gps">Аутоматски добави тренутну локацију</string>
   <string name="allow_gps_summary">Прима тренутну локацију ако слика није геотагована и геотагује исту њоме. Упозорење: Овиме ће да се открије Ваша тренутна локација.</string>
-  <string name="preference_theme" fuzzy="true">Ноћни режим</string>
+  <string name="preference_theme">Тема</string>
   <string name="license_name_cc_by_sa_four">Ауторство-Делити под истим условима 4.0</string>
   <string name="license_name_cc_by_four">Ауторство 4.0</string>
   <string name="license_name_cc_by_sa">Ауторство-Делити под истим условима 3.0</string>
@@ -266,7 +266,7 @@
   <string name="null_url">Грешка! URL није пронађен</string>
   <string name="nominate_deletion">Номиновање за брисање</string>
   <string name="nominated_for_deletion">Ова слика је била номинована за брисање</string>
-  <string name="nominated_see_more">Погледајте вебстраницу за детаље</string>
+  <string name="nominated_see_more">Погледајте веб-страницу за више информација</string>
   <string name="nominating_file_for_deletion">Предлагање %1$s за брисање.</string>
   <string name="nominating_for_deletion_status">Предлагање датотеке %1$s за брисање.</string>
   <string name="view_browser">Види у претраживачу</string>
@@ -376,11 +376,10 @@
   <string name="preference_author_name_toggle">Користи прилагођено име аутора</string>
   <string name="preference_author_name_toggle_summary">Коришћење прилагођеног имена аутора уместо вашег корисничког имена при отпремању фотографија</string>
   <string name="preference_author_name">Прилагођено име аутора</string>
-  <string name="preference_author_name_summary">Прилагођено име аутора за коришћење уместо вашег корисничког имена у отпремањима</string>
   <string name="contributions_fragment">Доприноси</string>
   <string name="nearby_fragment">У близини</string>
   <string name="notifications">Обавештења</string>
-  <string name="archived_notifications">Обавештења (архивирана)</string>
+  <string name="read_notifications">Обавештења (архивирана)</string>
   <string name="display_nearby_notification">Прикажи обавештење у близини</string>
   <string name="display_nearby_notification_summary">Притисните овде да бисте видели најближе место којем треба слика</string>
   <string name="no_close_nearby">Нису пронађена места у близини близу вас</string>
@@ -476,9 +475,9 @@
   <string name="no_image_reverted">Нема враћених слика</string>
   <string name="no_image_uploaded">Нема отпремљених слика</string>
   <string name="no_notification">Немате непрочитаних обавештења.</string>
-  <string name="no_archived_notification">Немате архивираних обавештења</string>
+  <string name="no_read_notification">Немате архивираних обавештења</string>
   <string name="share_logs_using">Подели дневнике користећи</string>
-  <string name="menu_option_archived">Прикажи архивирано</string>
+  <string name="menu_option_read">Прикажи архивирано</string>
   <string name="menu_option_unread">Прикажи непрочитано</string>
   <string name="error_occurred_in_picking_images">Дошло је до грешке при избору слика</string>
   <string name="image_chooser_title">Одабир слика за отпремање</string>
@@ -522,11 +521,11 @@
   <string name="delete_helper_ask_reason_copyright_other">Остало</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
   <string name="share_image_via">Подели слику преко</string>
-  <string name="no_achievements_yet">Нисте направили доприносе</string>
-  <string name="account_created">Налог је отворен!</string>
+  <string name="no_achievements_yet">Још нисте допринели</string>
+  <string name="account_created">Налог је отворен.</string>
   <string name="text_copy">Текст је копиран у оставу</string>
   <string name="notification_mark_read">Обавештење је означено прочитаним</string>
-  <string name="some_error">Дошло је до грешке!</string>
+  <string name="some_error">Дошло је до грешке.</string>
   <string name="place_state_exists">Постоји</string>
   <string name="place_state_needs_photo">Потребна слика</string>
   <string name="place_type">Тип места:</string>

@@ -7,20 +7,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
@@ -35,10 +23,16 @@ import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
-import io.reactivex.SingleObserver;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -278,10 +272,12 @@ public class UploadService extends HandlerService<Contribution> {
                         showFailedNotification(contribution);
                     } else {
                         String canonicalFilename = "File:" + uploadResult.getFilename();
-                        Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
-                                contribution.getWikiDataEntityId());
-                        wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(),
-                                canonicalFilename, contribution.getMediaLegends());
+                      Timber.d("Contribution upload success. Initiating Wikidata edit for"
+                              + " entity id %s if necessary (if P18 is null). P18 value is %s",
+                          contribution.getWikiDataEntityId(), contribution.getP18Value());
+                      wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(),
+                          canonicalFilename, contribution.getP18Value(),
+                          contribution.getMediaLegends());
                         contribution.setFilename(canonicalFilename);
                         contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
                         contribution.setState(Contribution.STATE_COMPLETED);

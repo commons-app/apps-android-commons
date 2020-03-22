@@ -1,15 +1,17 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
-import java.lang.reflect.Proxy;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
+import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.repository.UploadRepository;
-import fr.free.nrw.commons.upload.GPSExtractor;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
@@ -18,14 +20,10 @@ import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import java.lang.reflect.Proxy;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
-import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_TITLE;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 public class UploadMediaPresenter implements UserActionListener, SimilarImageInterface {
 
@@ -81,10 +79,10 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 .subscribe(uploadItem ->
                         {
                             view.onImageProcessed(uploadItem, place);
-                            GPSExtractor gpsCoords = uploadItem.getGpsCoords();
-                            view.showMapWithImageCoordinates(gpsCoords != null && gpsCoords.imageCoordsExists);
+                            ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
+                            view.showMapWithImageCoordinates(gpsCoords != null && gpsCoords.getImageCoordsExists());
                             view.showProgress(false);
-                            if (gpsCoords != null && gpsCoords.imageCoordsExists) {
+                            if (gpsCoords != null && gpsCoords.getImageCoordsExists()) {
                                 checkNearbyPlaces(uploadItem);
                             }
                         },
@@ -111,14 +109,14 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * asks the repository to verify image quality
      *
      * @param uploadItem
-     * @param validateTitle
      */
     @Override
-    public void verifyImageQuality(UploadItem uploadItem, boolean validateTitle) {
+    public void verifyImageQuality(UploadItem uploadItem) {
         view.showProgress(true);
-        Disposable imageQualityDisposable = repository
-                .getImageQuality(uploadItem, true)
-                .subscribeOn(ioScheduler)
+
+        compositeDisposable.add(
+            repository
+                .getImageQuality(uploadItem)
                 .observeOn(mainThreadScheduler)
                 .subscribe(imageResult -> {
                             view.showProgress(false);
@@ -129,9 +127,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                             view.showMessage("" + throwable.getLocalizedMessage(),
                                     R.color.color_error);
                             Timber.e(throwable, "Error occurred while handling image");
-                        });
-
-        compositeDisposable.add(imageQualityDisposable);
+                        })
+        );
     }
 
     /**
@@ -160,7 +157,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         }
     }
 
-    /**
+  @Override
+  public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+    repository.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
+  }
+
+  /**
      * handles image quality verifications
      *
      * @param imageResult
@@ -201,12 +203,15 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     /**
      * notifies the user that a similar image exists
-     *
      * @param originalFilePath
      * @param possibleFilePath
+     * @param similarImageCoordinates
      */
     @Override
-    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath) {
-        view.showSimilarImageFragment(originalFilePath, possibleFilePath);
+    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
+        ImageCoordinates similarImageCoordinates) {
+        view.showSimilarImageFragment(originalFilePath, possibleFilePath,
+            similarImageCoordinates
+        );
     }
 }

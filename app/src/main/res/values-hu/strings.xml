@@ -385,7 +385,7 @@
   <string name="contributions_fragment">Közreműködések</string>
   <string name="nearby_fragment">Közelben</string>
   <string name="notifications">Értesítések</string>
-  <string name="archived_notifications">Archivált értesítések</string>
+  <string name="read_notifications">Archivált értesítések</string>
   <string name="display_nearby_notification">Közeli értesítések megjelenítése</string>
   <string name="no_close_nearby">Nem található közeli hely</string>
   <string name="list_sheet">Lista</string>
@@ -494,8 +494,8 @@
   <string name="no_image_reverted">Nincs visszavont kép</string>
   <string name="no_image_uploaded">Nincs feltöltött kép</string>
   <string name="no_notification">Nincs olvasatlan üzenet</string>
-  <string name="no_archived_notification">Nincs archivált üzenet</string>
-  <string name="menu_option_archived">Archiváltak megtekintése</string>
+  <string name="no_read_notification">Nincs archivált üzenet</string>
+  <string name="menu_option_read">Archiváltak megtekintése</string>
   <string name="menu_option_unread">Olvasatlanok megtekintése</string>
   <string name="error_occurred_in_picking_images">Hiba történt a képek betöltése során</string>
   <string name="image_chooser_title">Feltöltendő képek kiválasztása</string>

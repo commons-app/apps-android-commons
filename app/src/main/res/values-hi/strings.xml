@@ -87,7 +87,7 @@
   <string name="gps_disabled">आपके डिवाइस में जीपीएस अक्षम है। क्या आप इसे सक्षम करना चाहेंगे?</string>
   <string name="enable_gps">जीपीएस सक्षम करें</string>
   <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -351,7 +351,7 @@
   <string name="contributions_fragment">योगदान</string>
   <string name="nearby_fragment">निकट</string>
   <string name="notifications">सूचनायें</string>
-  <string name="archived_notifications">सूचनाएँ (पुरालेखित)</string>
+  <string name="read_notifications">सूचनाएँ (पुरालेखित)</string>
   <string name="list_sheet">सूची</string>
   <string name="storage_permission">स्टोरेज अनुमति</string>
   <string name="next">अगला</string>
@@ -395,7 +395,7 @@
   <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>
   <string name="no_image_uploaded">कोई चित्र अपलोड नहीं किया</string>
   <string name="no_notification" fuzzy="true">आपके पास कोई अपठित सूचना नहीं है</string>
-  <string name="no_archived_notification" fuzzy="true">आपकी कोई सूचना पुरालेखित नहीं है</string>
-  <string name="menu_option_archived">पुरालेखित देखें</string>
+  <string name="no_read_notification" fuzzy="true">आपकी कोई सूचना पुरालेखित नहीं है</string>
+  <string name="menu_option_read">पुरालेखित देखें</string>
   <string name="menu_option_unread">अपठित देखें</string>
 </resources>

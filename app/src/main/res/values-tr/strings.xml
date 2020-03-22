@@ -168,7 +168,7 @@
   <string name="tutorial_4_subtext_1">Başlık: Sidney Opera Binası</string>
   <string name="tutorial_4_subtext_2">Açıklama: Sidney Opera Binası\'nın körfezin karşısından görünümü</string>
   <string name="tutorial_4_subtext_3">Kategoriler: Batıdan Sidney Opera Binası, Sidney Opera Binası uzaktan manzaraları</string>
-  <string name="welcome_wikipedia_text">Resimlerinize katkıda bulunun. Wikipedia makalelerinin hayata geçirilmesine yardım edin!</string>
+  <string name="welcome_wikipedia_text">Resimlerinize katkıda bulunun. Vikipedi maddelerin hayata geçirilmesine yardım edin!</string>
   <string name="welcome_wikipedia_subtext">Vikipedi\'ye Wikimedia Commons\'tan gelen görüntüler.</string>
   <string name="welcome_copyright_text">Resimleriniz tüm dünyadaki insanları eğitmeye yardımcı olur.</string>
   <string name="welcome_copyright_subtext">İnternetten bulduğunuz telif hakkıyla korunan malzemelerin yanı sıra poster, kitap kapağı vb. kullanımında kaçının.</string>
@@ -393,11 +393,10 @@
   <string name="preference_author_name_toggle">Özel yazar adı kullan</string>
   <string name="preference_author_name_toggle_summary">Fotoğraf yüklerken kullanıcı adınız yerine özel bir yazar adı kullanın</string>
   <string name="preference_author_name">Özel yazar adı</string>
-  <string name="preference_author_name_summary">Yüklemelerde kullanıcı adınız yerine kullanılacak özel yazar adı</string>
   <string name="contributions_fragment">Katkılar</string>
   <string name="nearby_fragment">Yakınındakiler</string>
   <string name="notifications">Bildirimler</string>
-  <string name="archived_notifications">Bildirimler (arşivlenmiş)</string>
+  <string name="read_notifications">Bildirimler (arşivlenmiş)</string>
   <string name="display_nearby_notification">Yakındaki bildirimi görüntüle</string>
   <string name="display_nearby_notification_summary">Resimlere en yakın yeri görmek için buraya dokunun</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
@@ -511,9 +510,9 @@
   <string name="no_image_reverted">Resim döndürülmedi</string>
   <string name="no_image_uploaded">Resim yüklenmedi</string>
   <string name="no_notification">Okunmamış bildirimleriniz yok</string>
-  <string name="no_archived_notification">Arşivlenmiş bildiriminiz yok</string>
+  <string name="no_read_notification">Arşivlenmiş bildiriminiz yok</string>
   <string name="share_logs_using">Kullanarak günlükleri paylaş</string>
-  <string name="menu_option_archived">Arşivlenmişleri görüntüle</string>
+  <string name="menu_option_read">Arşivlenmişleri görüntüle</string>
   <string name="menu_option_unread">Okunmamışları görüntüle</string>
   <string name="error_occurred_in_picking_images">Resimler toplanırken hata oluştu</string>
   <string name="image_chooser_title">Yüklenecek Görüntüleri Seçin</string>
@@ -585,4 +584,8 @@
   <string name="theme_default_name">Varsayılan</string>
   <string name="theme_dark_name">Koyu</string>
   <string name="theme_light_name">Açık</string>
+  <string name="cannot_open_location_settings">Konum ayarları açılamadı. Lütfen konumu manüel olarak açın</string>
+  <string name="recommend_high_accuracy_mode">En iyi sonuçlar için Yüksek Hassasiyet modunu seçin.</string>
+  <string name="ask_to_turn_location_on">Konum açılsın mı?</string>
+  <string name="nearby_needs_location">Yakında ihtiyaç duyulan konumun düzgün çalışması için etkin</string>
 </resources>

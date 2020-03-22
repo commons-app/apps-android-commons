@@ -72,7 +72,7 @@
   <string name="gps_disabled">మీ పరికరంలో GPS అచేతనం చేసి ఉంది. దాన్ని చేతనం చేస్తారా?</string>
   <string name="enable_gps">GPS ను చేతనం చెయ్యి</string>
   <string name="contributions_subtitle_zero">ఇంకా ఎక్కింపులేమీ లేవు</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -374,11 +374,10 @@
   <string name="preference_author_name_toggle">కర్తకు ఐచ్ఛికంగా మరో పేరును వాడండి</string>
   <string name="preference_author_name_toggle_summary">ఫోటోలను ఎక్కించేటపుడు మీ వాడుకరిపేరు కాకుండా మరో ఐచ్ఛికమైన పేరును వాడండి</string>
   <string name="preference_author_name">ఐచ్ఛికమైన కర్త పేరు</string>
-  <string name="preference_author_name_summary">ఎక్కింపుల్లో కర్తగా వాడేందుకు మీ వాడుకరిపేరు కాకుండా మరో పేరు</string>
   <string name="contributions_fragment">తోడ్పాటు</string>
   <string name="nearby_fragment">చుట్టుపక్కల</string>
   <string name="notifications">గమనింపులు</string>
-  <string name="archived_notifications">గమనింపులు (ఆర్కైవు చేసినవి)</string>
+  <string name="read_notifications">గమనింపులు (ఆర్కైవు చేసినవి)</string>
   <string name="display_nearby_notification">చుట్టుపక్కల గమనింపును చూపించు</string>
   <string name="display_nearby_notification_summary">బొమ్మలు అవసరమైన చుట్టుపక్కల స్థలాన్ని చూసేందుకు ఇక్కడ నొక్కండి</string>
   <string name="no_close_nearby">మీ చుట్టుపక్కల స్థలాలేమీ కనబడలేదు</string>
@@ -491,9 +490,9 @@
   <string name="no_image_reverted">బొమ్మలు వేటినీ వెనక్కి తిరక్కొట్టలేదు</string>
   <string name="no_image_uploaded">బొమ్మలేమీ ఎక్కించలేదు</string>
   <string name="no_notification">మీకు చదవని గమనింపులేమీ లేవు</string>
-  <string name="no_archived_notification">మీకు ఆర్కైవు చేసిన గమనింపులేమీ లేవు</string>
+  <string name="no_read_notification">మీకు ఆర్కైవు చేసిన గమనింపులేమీ లేవు</string>
   <string name="share_logs_using">దీన్ని వాడి లాగ్‌లను పంచుకోండి</string>
-  <string name="menu_option_archived">ఆర్కైవులను చూడండి</string>
+  <string name="menu_option_read">ఆర్కైవులను చూడండి</string>
   <string name="menu_option_unread">చదవని వాటిని చూడండి</string>
   <string name="error_occurred_in_picking_images">బొమ్మలను ఎంచుకునేటపుడు లోపం దొర్లింది</string>
   <string name="image_chooser_title">ఎక్కించేందుకు బొమ్మలను ఎంచుకోండి</string>

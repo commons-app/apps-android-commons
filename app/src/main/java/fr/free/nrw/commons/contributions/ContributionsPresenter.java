@@ -12,6 +12,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import fr.free.nrw.commons.MediaDataExtractor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -62,6 +63,10 @@ public class ContributionsPresenter implements UserActionListener {
 
     @Inject
     SessionManager sessionManager;
+
+    @Inject
+    MediaDataExtractor mediaDataExtractor;
+
     private LifecycleOwner lifeCycleOwner;
 
     @Inject
@@ -179,5 +184,25 @@ public class ContributionsPresenter implements UserActionListener {
             return null;
         }
         return contributionList.get(i);
+    }
+
+    @Override
+    public void updateContribution(Contribution contribution) {
+        compositeDisposable.add(repository
+            .updateContribution(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .subscribe());
+    }
+
+    @Override
+    public void fetchMediaDetails(Contribution contribution) {
+        compositeDisposable.add(mediaDataExtractor
+            .getMediaFromFileName(contribution.filename)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(media -> {
+                contribution.thumbUrl=media.thumbUrl;
+                updateContribution(contribution);
+            }));
     }
 }

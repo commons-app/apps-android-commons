@@ -8,6 +8,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
+import androidx.room.Update;
+import io.reactivex.disposables.Disposable;
 import java.util.List;
 
 import io.reactivex.Completable;
@@ -52,4 +54,7 @@ public abstract class ContributionDao {
 
     @Query("Delete FROM contribution WHERE state = :state")
     public abstract void deleteAll(int state);
+
+    @Update
+    public abstract Single<Integer> update(Contribution contribution);
 }

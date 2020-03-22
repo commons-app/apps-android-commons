@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.repository;
 
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
@@ -179,11 +180,10 @@ public class UploadRemoteDataSource {
      * ask the UplaodModel for the image quality of the UploadItem
      *
      * @param uploadItem
-     * @param shouldValidateTitle
      * @return
      */
-    public Single<Integer> getImageQuality(UploadItem uploadItem, boolean shouldValidateTitle) {
-        return uploadModel.getImageQuality(uploadItem, shouldValidateTitle);
+    public Single<Integer> getImageQuality(UploadItem uploadItem) {
+        return uploadModel.getImageQuality(uploadItem);
     }
 
     /**
@@ -203,4 +203,8 @@ public class UploadRemoteDataSource {
             return null;
         }
     }
+
+  public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+    uploadModel.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
+  }
 }

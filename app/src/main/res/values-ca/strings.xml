@@ -76,7 +76,7 @@
   <string name="gps_disabled">El vostre dispositiu no té el GPS habilitat. El voleu habilitar?</string>
   <string name="enable_gps">Habilita el GPS</string>
   <string name="contributions_subtitle_zero">Encara no hi ha cap càrrega</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -353,11 +353,10 @@
   <string name="preference_author_name_toggle">Utilitza un nom d\'autor personalitzat</string>
   <string name="preference_author_name_toggle_summary">Utilitza un nom d\'autor personalitzat en comptes del vostre nom d\'usuari a l\'hora de pujar fotos</string>
   <string name="preference_author_name">Nom de l\'autor personalitzat</string>
-  <string name="preference_author_name_summary">El nom d\'autor personalitzat que s\'utilitzarà en comptes del vostre nom d\'usuari en les pujades</string>
   <string name="contributions_fragment">Contribucions</string>
   <string name="nearby_fragment">A prop</string>
   <string name="notifications">Notificacions</string>
-  <string name="archived_notifications">Notificacions (arxivades)</string>
+  <string name="read_notifications">Notificacions (arxivades)</string>
   <string name="display_nearby_notification">Mostra notificacions properes</string>
   <string name="display_nearby_notification_summary">Feu un toc aquí per a veure el lloc més proper que necessiti fotos</string>
   <string name="no_close_nearby">No s\'han trobat llocs propers prop vostre</string>
@@ -438,9 +437,9 @@
   <string name="no_image_reverted">No s\'ha revertit cap imatge</string>
   <string name="no_image_uploaded">No s\'ha carregat cap imatge</string>
   <string name="no_notification">No teniu cap notificació sense llegir</string>
-  <string name="no_archived_notification">No teniu cap notificació arxivada</string>
+  <string name="no_read_notification">No teniu cap notificació arxivada</string>
   <string name="share_logs_using">Comparteix els registres utilitzant</string>
-  <string name="menu_option_archived">Mostra els arxivats</string>
+  <string name="menu_option_read">Mostra els arxivats</string>
   <string name="menu_option_unread">Mostra aquelles per llegir</string>
   <string name="error_occurred_in_picking_images">S\'ha produït un error en escollir les imatges</string>
   <string name="image_chooser_title">Trieu les imatges per carregar</string>

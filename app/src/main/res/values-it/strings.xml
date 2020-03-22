@@ -83,7 +83,7 @@
   <string name="gps_disabled">Il GPS è disabilitato nel dispositivo. Vuoi attivarlo?</string>
   <string name="enable_gps">Attiva GPS</string>
   <string name="contributions_subtitle_zero">Non è stato ancora caricato niente</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -381,11 +381,10 @@
   <string name="preference_author_name_toggle">Usa il nome dell\'autore personalizzato</string>
   <string name="preference_author_name_toggle_summary">Utilizza un nome dell\'autore personalizzato al posto del tuo nome utente durante il caricamento delle foto</string>
   <string name="preference_author_name">Nome dell\'autore personalizzato</string>
-  <string name="preference_author_name_summary">Il nome dell\'autore personalizzato da usare al posto del tuo nome utente nei caricamenti</string>
   <string name="contributions_fragment">Contributi</string>
   <string name="nearby_fragment">Nelle vicinanze</string>
   <string name="notifications">Notifiche</string>
-  <string name="archived_notifications">Notifiche (archiviate)</string>
+  <string name="read_notifications">Notifiche (archiviate)</string>
   <string name="display_nearby_notification">Mostra notifica nelle vicinanze</string>
   <string name="display_nearby_notification_summary">Tocca qui per vedere il luogo più vicino che ha bisogno di immagini</string>
   <string name="no_close_nearby">Nessun posto nelle vicinanze trovato vicino a te</string>
@@ -465,9 +464,9 @@
   <string name="no_image_reverted">Nessuna immagine ripristinata</string>
   <string name="no_image_uploaded">Nessuna immagine caricata</string>
   <string name="no_notification">Non hai alcuna notifica non letta</string>
-  <string name="no_archived_notification">Non hai notifiche archiviate</string>
+  <string name="no_read_notification">Non hai notifiche archiviate</string>
   <string name="share_logs_using">Condividi i registri usando</string>
-  <string name="menu_option_archived">Vedi archiviate</string>
+  <string name="menu_option_read">Vedi archiviate</string>
   <string name="menu_option_unread">Vedi non lette</string>
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="image_chooser_title">Scegli le immagini da caricare</string>

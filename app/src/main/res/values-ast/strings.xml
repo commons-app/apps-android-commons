@@ -72,7 +72,7 @@
   <string name="gps_disabled">El GPS ta desactiváu nel preséu. ¿Quiés activalu?</string>
   <string name="enable_gps">Activar GPS</string>
   <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -376,11 +376,10 @@
   <string name="preference_author_name_toggle">Usar nome d\'autor personalizáu</string>
   <string name="preference_author_name_toggle_summary">Usar un nome d\'autor personalizáu en cuenta del to nome d\'usuariu al xubir semeyes</string>
   <string name="preference_author_name">Nome d\'autor personalizáu</string>
-  <string name="preference_author_name_summary">El nome d\'autor personalizáu pa usar nes xubíes en cuenta del to nome d\'usuariu</string>
   <string name="contributions_fragment">Collaboraciones</string>
   <string name="nearby_fragment">Cercanu</string>
   <string name="notifications">Avisos</string>
-  <string name="archived_notifications">Avisos (archivaos)</string>
+  <string name="read_notifications">Avisos (archivaos)</string>
   <string name="display_nearby_notification">Amosar notificaciones de cercanía</string>
   <string name="display_nearby_notification_summary">Toca equí para ver el llugar más cercanu que precisa semeyes</string>
   <string name="no_close_nearby">Nun s\'atoparon llugares cercanos nos alredores</string>
@@ -493,9 +492,9 @@
   <string name="no_image_reverted">Nun se revertió nenguna imaxe</string>
   <string name="no_image_uploaded">Nun se xubió nenguna imaxe</string>
   <string name="no_notification">Nun tienes avisos ensin lleer</string>
-  <string name="no_archived_notification">Nun tienes avisos archivaos</string>
+  <string name="no_read_notification">Nun tienes avisos archivaos</string>
   <string name="share_logs_using">Compartir rexistros usando</string>
-  <string name="menu_option_archived">Ver los archivaos</string>
+  <string name="menu_option_read">Ver los archivaos</string>
   <string name="menu_option_unread">Ver los nun lleíos</string>
   <string name="error_occurred_in_picking_images">Asocedió un error al escoyer les imaxes</string>
   <string name="image_chooser_title">Escueyi les imaxes pa xubir</string>
