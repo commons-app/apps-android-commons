@@ -16,6 +16,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
+import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
@@ -109,8 +110,10 @@ class UploadMediaPresenterTest {
     @Test
     fun handleImageResult() {
         //Positive case test
+        uploadMediaPresenter.handleImageResult(IMAGE_OK)
+        //Keep image case test
         uploadMediaPresenter.handleImageResult(IMAGE_KEEP)
-        verify(view).onImageValidationSuccess()
+        verify(view, times(2)).onImageValidationSuccess()
 
         //Duplicate file name
         uploadMediaPresenter.handleImageResult(FILE_NAME_EXISTS)
@@ -122,7 +125,7 @@ class UploadMediaPresenterTest {
 
         //Bad Picture test
         //Empty Title test
-        uploadMediaPresenter.handleImageResult(-7)
+        uploadMediaPresenter.handleImageResult(IMAGE_DUPLICATE + IMAGE_DARK + IMAGE_BLURRY)
         verify(view).showBadImagePopup(ArgumentMatchers.anyInt())
 
     }
@@ -158,9 +161,9 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun handleBadImageBaseTestInvalidLocation() {
-        uploadMediaPresenter.handleBadImage(8)
+        uploadMediaPresenter.handleBadImage(IMAGE_GEOLOCATION_DIFFERENT)
         verify(repository).saveValue(ArgumentMatchers.anyString(), eq(false))
-        verify(view).showBadImagePopup(8)
+        verify(view).showBadImagePopup(IMAGE_GEOLOCATION_DIFFERENT)
     }
 
     /**
@@ -168,16 +171,16 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun handleBadImageBaseTestEmptyTitle() {
-        uploadMediaPresenter.handleBadImage(-3)
+        uploadMediaPresenter.handleBadImage(EMPTY_TITLE)
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
     }
 
     /**
-     * Teste show file already exists
+     * Test show file already exists
      */
     @Test
     fun handleBadImageBaseTestFileNameExists() {
-        uploadMediaPresenter.handleBadImage(-4)
+        uploadMediaPresenter.handleBadImage(FILE_NAME_EXISTS)
         verify(view).showDuplicatePicturePopup()
     }
 
