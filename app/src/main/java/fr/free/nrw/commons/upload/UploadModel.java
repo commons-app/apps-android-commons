@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
@@ -18,15 +17,16 @@ import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.BehaviorSubject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 @Singleton
@@ -37,23 +37,23 @@ public class UploadModel {
     private final Context context;
     private String license;
     private final Map<String, String> licensesByName;
-    private List<UploadItem> items = new ArrayList<>();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final List<UploadItem> items = new ArrayList<>();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private SessionManager sessionManager;
-    private FileProcessor fileProcessor;
+    private final SessionManager sessionManager;
+    private final FileProcessor fileProcessor;
     private final ImageProcessingService imageProcessingService;
     private List<String> selectedCategories;
     private ArrayList<String> selectedDepictions;
 
     @Inject
-    UploadModel(@Named("licenses") List<String> licenses,
-            @Named("default_preferences") JsonKvStore store,
-            @Named("licenses_by_name") Map<String, String> licensesByName,
-            Context context,
-            SessionManager sessionManager,
-            FileProcessor fileProcessor,
-            ImageProcessingService imageProcessingService) {
+    UploadModel(@Named("licenses") final List<String> licenses,
+            @Named("default_preferences") final JsonKvStore store,
+            @Named("licenses_by_name") final Map<String, String> licensesByName,
+            final Context context,
+            final SessionManager sessionManager,
+            final FileProcessor fileProcessor,
+            final ImageProcessingService imageProcessingService) {
         this.licenses = licenses;
         this.store = store;
         this.license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
@@ -80,31 +80,29 @@ public class UploadModel {
     }
 
     public void setSelectedCategories(List<String> selectedCategories) {
-        if (null == selectedCategories) {
-            selectedCategories = new ArrayList<>();
-        }
-        this.selectedCategories = selectedCategories;
+        this.selectedCategories = newListOf(selectedCategories);
     }
 
     /**
      * pre process a one item at a time
      */
-    public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile,
-            Place place,
-            String source,
-            SimilarImageInterface similarImageInterface) {
-        return Observable.just(getUploadItem(uploadableFile, place, source, similarImageInterface));
+    public Observable<UploadItem> preProcessImage(final UploadableFile uploadableFile,
+            final Place place,
+            final String source,
+            final SimilarImageInterface similarImageInterface) {
+        return Observable.just(
+            createAndAddUploadItem(uploadableFile, place, source, similarImageInterface));
     }
 
-    public Single<Integer> getImageQuality(UploadItem uploadItem) {
+    public Single<Integer> getImageQuality(final UploadItem uploadItem) {
         return imageProcessingService.validateImage(uploadItem);
     }
 
-    private UploadItem getUploadItem(UploadableFile uploadableFile,
-            Place place,
-            String source,
-            SimilarImageInterface similarImageInterface) {
-        UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile
+    private UploadItem createAndAddUploadItem(final UploadableFile uploadableFile,
+            final Place place,
+            final String source,
+            final SimilarImageInterface similarImageInterface) {
+        final UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile
                 .getFileCreatedDate(context);
         long fileCreatedDate = -1;
         String createdTimestampSource = "";
@@ -113,23 +111,15 @@ public class UploadModel {
             createdTimestampSource = dateTimeWithSource.getSource();
         }
         Timber.d("File created date is %d", fileCreatedDate);
-        ImageCoordinates imageCoordinates = fileProcessor
+        final ImageCoordinates imageCoordinates = fileProcessor
                 .processFileCoordinates(similarImageInterface, uploadableFile.getFilePath());
-        UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(),
+        final UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(),
                 Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), source, imageCoordinates, place, fileCreatedDate,
                 createdTimestampSource);
         if (place != null) {
             uploadItem.title.setTitleText(place.name);
-            if(uploadItem.uploadMediaDetails.isEmpty()) {
-                uploadItem.uploadMediaDetails.add(new UploadMediaDetail());
-            }
-            uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
-            uploadItem.uploadMediaDetails.get(0).setLanguageCode("en");
-            String languageCode = Locale.getDefault().getLanguage();
-                        uploadItem.uploadMediaDetails.get(0).setDescriptionText(place.getLongDescription());
-            uploadItem.uploadMediaDetails.get(0).setLanguageCode(languageCode);
-            uploadItem.uploadMediaDetails.get(0).setCaptionText(place.name);
+            uploadItem.getUploadMediaDetails().set(0, new UploadMediaDetail(place));
         }
         if (!items.contains(uploadItem)) {
             items.add(uploadItem);
@@ -153,7 +143,7 @@ public class UploadModel {
         return license;
     }
 
-    public void setSelectedLicense(String licenseName) {
+    public void setSelectedLicense(final String licenseName) {
         this.license = licensesByName.get(licenseName);
         store.putString(Prefs.DEFAULT_LICENSE, license);
     }
@@ -161,11 +151,11 @@ public class UploadModel {
     public Observable<Contribution> buildContributions() {
         return Observable.fromIterable(items).map(item ->
         {
-            Contribution contribution = new Contribution(item.mediaUri, null,
+            final Contribution contribution = new Contribution(item.mediaUri, null,
                     item.getFileName(), item.uploadMediaDetails.size()!=0? UploadMediaDetail.formatCaptions(item.uploadMediaDetails):new HashMap<>(),
                     UploadMediaDetail.formatList(item.uploadMediaDetails), -1,
                     null, null, sessionManager.getAuthorName(),
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY, selectedDepictions, item.gpsCoords.getDecimalCoords());
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY, new ArrayList<>(selectedDepictions), item.gpsCoords.getDecimalCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
                 // If item already has an image, we need to know it. We don't want to override existing image later
@@ -195,8 +185,8 @@ public class UploadModel {
         });
     }
 
-    public void deletePicture(String filePath) {
-        Iterator<UploadItem> iterator = items.iterator();
+    public void deletePicture(final String filePath) {
+        final Iterator<UploadItem> iterator = items.iterator();
         while (iterator.hasNext()) {
             if (iterator.next().mediaUri.toString().contains(filePath)) {
                 iterator.remove();
@@ -212,20 +202,22 @@ public class UploadModel {
         return items;
     }
 
-    public void updateUploadItem(int index, UploadItem uploadItem) {
-        UploadItem uploadItem1 = items.get(index);
+    public void updateUploadItem(final int index, final UploadItem uploadItem) {
+        final UploadItem uploadItem1 = items.get(index);
         uploadItem1.setMediaDetails(uploadItem.uploadMediaDetails);
         uploadItem1.setTitle(uploadItem.title);
     }
 
-    public void setSelectedDepictions(List<String> selectedDepictions) {
-      if (null == selectedDepictions) {
-        selectedDepictions = new ArrayList<>();
-      }
-      this.selectedDepictions = (ArrayList<String>) selectedDepictions;
+    public void setSelectedDepictions(final List<String> selectedDepictions) {
+        this.selectedDepictions = newListOf(selectedDepictions);
     }
 
-    public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+    @NotNull
+    private <T> ArrayList<T> newListOf(final List<T> items) {
+        return items != null ? new ArrayList<>(items) : new ArrayList<>();
+    }
+
+    public void useSimilarPictureCoordinates(final ImageCoordinates imageCoordinates, final int uploadItemIndex) {
         fileProcessor.useImageCoords(imageCoordinates);
         items.get(uploadItemIndex).setGpsCoords(imageCoordinates);
     }
@@ -238,29 +230,22 @@ public class UploadModel {
         private final String mimeType;
         private final String source;
         private ImageCoordinates gpsCoords;
-
-        public void setGpsCoords(ImageCoordinates gpsCoords) {
-            this.gpsCoords = gpsCoords;
-        }
-
         private Title title;
         private List<UploadMediaDetail> uploadMediaDetails;
-        private Place place;
-        private long createdTimestamp;
-        private String createdTimestampSource;
-        private BehaviorSubject<Integer> imageQuality;
-
+        private final Place place;
+        private final long createdTimestamp;
+        private final String createdTimestampSource;
+        private final BehaviorSubject<Integer> imageQuality;
         @SuppressLint("CheckResult")
-        UploadItem(Uri originalContentUri,
-                Uri mediaUri, String mimeType, String source, ImageCoordinates gpsCoords,
-                Place place,
-                long createdTimestamp,
-                String createdTimestampSource) {
+        UploadItem(final Uri originalContentUri,
+                final Uri mediaUri, final String mimeType, final String source, final ImageCoordinates gpsCoords,
+                final Place place,
+                final long createdTimestamp,
+                final String createdTimestampSource) {
             this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
             title = new Title();
-            uploadMediaDetails = new ArrayList<>();
-            uploadMediaDetails.add(new UploadMediaDetail());
+            uploadMediaDetails = Collections.singletonList(new UploadMediaDetail());
             this.place = place;
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
@@ -302,7 +287,7 @@ public class UploadModel {
             return this.imageQuality.getValue();
         }
 
-        public void setImageQuality(int imageQuality) {
+        public void setImageQuality(final int imageQuality) {
             this.imageQuality.onNext(imageQuality);
         }
 
@@ -310,12 +295,12 @@ public class UploadModel {
             return place;
         }
 
-        public void setTitle(Title title) {
+        public void setTitle(final Title title) {
             this.title = title;
         }
 
 
-        public void setMediaDetails(List<UploadMediaDetail> uploadMediaDetails) {
+        public void setMediaDetails(final List<UploadMediaDetail> uploadMediaDetails) {
             this.uploadMediaDetails = uploadMediaDetails;
         }
 
@@ -324,7 +309,7 @@ public class UploadModel {
         }
 
         @Override
-        public boolean equals(@Nullable Object obj) {
+        public boolean equals(@Nullable final Object obj) {
             if (!(obj instanceof UploadItem)) {
                 return false;
             }
@@ -344,6 +329,10 @@ public class UploadModel {
         public String getFileName() {
             return uploadMediaDetails.get(0).getCaptionText();
         }
-    }
 
+        public void setGpsCoords(final ImageCoordinates gpsCoords) {
+            this.gpsCoords = gpsCoords;
+        }
+
+    }
 }
