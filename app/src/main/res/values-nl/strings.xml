@@ -288,7 +288,7 @@
   <string name="contributions_fragment">Bijdragen</string>
   <string name="nearby_fragment">Dichtbij</string>
   <string name="notifications">Meldingen</string>
-  <string name="read_notifications">Meldingen (in het archief)</string>
+  <string name="read_notifications" fuzzy="true">Meldingen (in het archief)</string>
   <string name="display_nearby_notification">Meldingen dichtbij weergeven</string>
   <string name="list_sheet">Lijst</string>
   <string name="storage_permission">Toestemming om op te slaan</string>
@@ -307,7 +307,7 @@
   <string name="no_image_uploaded">Geen afbeeldingen geüpload</string>
   <string name="no_read_notification" fuzzy="true">U hebt geen gearchiveerde melding</string>
   <string name="share_logs_using">Logboeken delen via</string>
-  <string name="menu_option_read">Gearchiveerd bekijken</string>
+  <string name="menu_option_read" fuzzy="true">Gearchiveerd bekijken</string>
   <string name="menu_option_unread">Ongelezen bekijken</string>
   <string name="image_chooser_title">Kies de afbeeldingen die u wilt plaatsen</string>
   <string name="please_wait">Een ogenblik geduld…</string>

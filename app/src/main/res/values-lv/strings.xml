@@ -188,7 +188,7 @@
   <string name="send_thank_send">Sūta pateicību</string>
   <string name="send_thank_notification_title">Sūta pateicību</string>
   <string name="review_thanks_no_button_text">Nākamais attēls</string>
-  <string name="menu_option_read">Skatīt arhivētos</string>
+  <string name="menu_option_read" fuzzy="true">Skatīt arhivētos</string>
   <string name="menu_option_unread">Skatīt nelasītos</string>
   <string name="please_wait">Lūdzu, uzgaidiet...</string>
   <string name="skip_image">Izlaist šo attēlu</string>

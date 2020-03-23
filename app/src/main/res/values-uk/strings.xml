@@ -123,10 +123,11 @@
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
   <string name="menu_retry_upload">Повторити</string>
   <string name="menu_cancel_upload">Скасувати</string>
-  <plurals name="share_license_summary" fuzzy="true">
+  <plurals name="share_license_summary">
     <item quantity="one">Це зображення буде ліцензовано на умовах %1$s</item>
     <item quantity="few">Ці зображення буде ліцензовано на умовах %1$s</item>
     <item quantity="many">Ці зображення буде ліцензовано на умовах %1$s</item>
+    <item quantity="other">Ці зображення буде ліцензовано на умовах %1$s</item>
   </plurals>
   <string name="media_upload_policy">Подаючи це зображення, я підтверджую, що це моя власна робота, яка не містить захищених авторським правом матеріалів чи селфі, а також відповідає &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/uk\"&gt;правилам Вікісховища&lt;/a&gt;.</string>
   <string name="menu_download">Завантажити</string>
@@ -397,7 +398,7 @@
   <string name="contributions_fragment">Внесок</string>
   <string name="nearby_fragment">Поблизу</string>
   <string name="notifications">Сповіщення</string>
-  <string name="read_notifications">Сповіщення (архівовані)</string>
+  <string name="read_notifications">Сповіщення (прочитані)</string>
   <string name="display_nearby_notification">Повідомляти мене про місця поблизу</string>
   <string name="display_nearby_notification_summary">Торкніться тут, щоб побачити найближчі місця, які ще не мають зображень</string>
   <string name="no_close_nearby">Не знайдено місць поблизу Вас</string>
@@ -412,10 +413,11 @@
   <string name="submit">Надіслати</string>
   <string name="upload_title_duplicate">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?</string>
   <string name="map_application_missing">На Вашому пристрої не знайдено сумісного додатка з картами. Будь ласка, встановіть додаток з картами, якщо хочете скористатись цією функцією.</string>
-  <plurals name="upload_count_title" fuzzy="true">
+  <plurals name="upload_count_title">
     <item quantity="one">%1$d завантаження</item>
     <item quantity="few">%1$d завантаження</item>
     <item quantity="many">%1$d завантажень</item>
+    <item quantity="other">%1$d завантажень</item>
   </plurals>
   <string name="navigation_item_bookmarks">Закладки</string>
   <string name="title_activity_bookmarks">Закладки</string>
@@ -504,18 +506,19 @@
   <string name="review_thanks_no_button_text">Наступне зображення</string>
   <string name="skip_image_explanation">Натискання цієї кнопки дасть вам інше недавно завантажене зображення з Вікісховища</string>
   <string name="review_image_explanation">Ви можете перевіряти зображення і покращувати якість Вікісховища.\nЄ чотири параметри перевірки:\n— Чи зображення відповідає призначенню Вікісховища?\n— Чи зображення відповідає правилам авторського права?\n— Чи зображення коректно категоризоване?\n— Якщо все добре, то ви можете подякувати завантажувачу.</string>
-  <plurals name="receiving_shared_content" fuzzy="true">
+  <plurals name="receiving_shared_content">
     <item quantity="one">Отримання спільного контенту. Обробка зображення може зайняти трохи часу, залежно від розміру зображення і від Вашого пристрою</item>
     <item quantity="few">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
     <item quantity="many">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
+    <item quantity="other">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
   </plurals>
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
   <string name="no_notification">У вас немає непрочитаних сповіщень</string>
-  <string name="no_read_notification">Немає архівованих сповіщень</string>
+  <string name="no_read_notification">Немає прочитаних сповіщень</string>
   <string name="share_logs_using">Поширення журналів</string>
-  <string name="menu_option_read">Перегляд архівованих</string>
+  <string name="menu_option_read">Перегляд прочитаних</string>
   <string name="menu_option_unread">Перегляд непрочитаних</string>
   <string name="error_occurred_in_picking_images">Сталася помилка при завантаженні зображень</string>
   <string name="image_chooser_title">Оберіть зображення для завантаження</string>
@@ -584,11 +587,12 @@
   <string name="wallpaper_set_unsuccessfully">Щось трапилось. Не вдалося встановити шпалери робочого столу</string>
   <string name="setting_wallpaper_dialog_title">Встановити в якості шпалер робочого столу</string>
   <string name="setting_wallpaper_dialog_message">Встановлення робочого столу. Будь ласка зачекайте...</string>
-  <string name="theme_default_name">Стандартна</string>
+  <string name="theme_default_name">На взірець системи</string>
   <string name="theme_dark_name">Темна</string>
   <string name="theme_light_name">Світла</string>
   <string name="cannot_open_location_settings">Не вдалося відкрити налаштування місця розташування. Будь ласка, увімкніть визначення місця розташування вручну</string>
   <string name="recommend_high_accuracy_mode">Щоб отримати кращі результати, виберіть режим високої точності.</string>
   <string name="ask_to_turn_location_on">Увімкнути визначення місця розташування?</string>
   <string name="nearby_needs_location">«Поблизу» потребує увімкненого визначення місця розташування, щоб працювати належним чином</string>
+  <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу для зображення справа?</string>
 </resources>

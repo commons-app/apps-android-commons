@@ -381,7 +381,7 @@
   <string name="contributions_fragment">Kontribuoj</string>
   <string name="nearby_fragment">Apude</string>
   <string name="notifications">Sciigoj</string>
-  <string name="read_notifications">Sciigoj (enarkivigitaj)</string>
+  <string name="read_notifications" fuzzy="true">Sciigoj (enarkivigitaj)</string>
   <string name="display_nearby_notification">Montri sciigojn pri apudaĵoj</string>
   <string name="display_nearby_notification_summary">Tuŝetu ĉi tie por vidi apudan lokon kiu bezonas bildojn</string>
   <string name="no_close_nearby">Neniu proksima loko trovita ĉe vi.</string>
@@ -494,9 +494,9 @@
   <string name="no_image_reverted">Neniu bildo estis malfarita</string>
   <string name="no_image_uploaded">Neniu alŝutita bildo</string>
   <string name="no_notification">Vi ne havas nelegitajn sciigojn</string>
-  <string name="no_read_notification">Vi ne havas enarkivigitajn sciigojn</string>
+  <string name="no_read_notification" fuzzy="true">Vi ne havas enarkivigitajn sciigojn</string>
   <string name="share_logs_using">Konigi protokolojn per</string>
-  <string name="menu_option_read">Vidi enarkivigitojn</string>
+  <string name="menu_option_read" fuzzy="true">Vidi enarkivigitojn</string>
   <string name="menu_option_unread">Vidi nelegitojn</string>
   <string name="error_occurred_in_picking_images">Eraro okazis dum elektado de bildoj</string>
   <string name="image_chooser_title">Elekti alŝutotajn bildojn</string>

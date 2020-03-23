@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Fierodelveneto
+-->
+<resources>
+  <string name="crash_dialog_title">Commons el ga vuo on erore inprevedibiłe</string>
+  <string name="crash_dialog_text">Ocio! Calcosa xé ndà roerso!</string>
+  <string name="crash_dialog_comment_prompt">Dine cosa che te jeri drio far, dopo mandanelo par email. Te ne jutarè a catar sołusion a ła problemadega!</string>
+  <string name="crash_dialog_ok_toast">Grasie!</string>
+</resources>

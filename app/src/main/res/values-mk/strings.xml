@@ -380,7 +380,7 @@
   <string name="contributions_fragment">Придонеси</string>
   <string name="nearby_fragment">Во близина</string>
   <string name="notifications">Известувања</string>
-  <string name="read_notifications">Известувања (архивирани)</string>
+  <string name="read_notifications">Известувања (прочитани)</string>
   <string name="display_nearby_notification">Известувај ме за места во близина</string>
   <string name="display_nearby_notification_summary">Допрете тука за да го видите најблиското место без слика</string>
   <string name="no_close_nearby">Не најдов места во ваша близина</string>
@@ -494,9 +494,9 @@
   <string name="no_image_reverted">Нема вратени слики</string>
   <string name="no_image_uploaded">Нема подигнати слики</string>
   <string name="no_notification">Немате непрочитани известувања</string>
-  <string name="no_read_notification">Немате архивирани известувања</string>
+  <string name="no_read_notification">Немате прочитани известувања</string>
   <string name="share_logs_using">Споделувај дневници користејќи</string>
-  <string name="menu_option_read">Погл. архивирани</string>
+  <string name="menu_option_read">Погл. прочитани</string>
   <string name="menu_option_unread">Погл. непрочитани</string>
   <string name="error_occurred_in_picking_images">Се јави грешка при избирањето на сликите</string>
   <string name="image_chooser_title">Изберете слики за подигање</string>
@@ -565,11 +565,12 @@
   <string name="wallpaper_set_unsuccessfully">Нешто не е во ред. Не можев да ја зададам позадината</string>
   <string name="setting_wallpaper_dialog_title">Задај како позадина</string>
   <string name="setting_wallpaper_dialog_message">Ја задавам позадината. Почекајте…</string>
-  <string name="theme_default_name">По основно</string>
+  <string name="theme_default_name">Според системот</string>
   <string name="theme_dark_name">Темен</string>
   <string name="theme_light_name">Светол</string>
   <string name="cannot_open_location_settings">Не можев да ги отворам поставките за местоположба. Вклучете ја местоположбата рачно.</string>
   <string name="recommend_high_accuracy_mode">За да добиете најдобар исход, изберете го режимот на висока уточнетост.</string>
   <string name="ask_to_turn_location_on">Да ја вклучам местоположбата?</string>
   <string name="nearby_needs_location">„Во близина“ бара местоположба за да работи</string>
+  <string name="use_location_from_similar_image">Дали ги направивте ови две слики на истото место? Дали сакате да ја искористите географската ширина/должина од десната слика?</string>
 </resources>

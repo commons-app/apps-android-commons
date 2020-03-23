@@ -9,6 +9,7 @@
 * ExampleTomer
 * Ghsuvr
 * Guycn2
+* IKhitron
 * Inkbug
 * Nurick
 * Steeve815
@@ -393,7 +394,7 @@
   <string name="contributions_fragment">תרומות</string>
   <string name="nearby_fragment">בסביבה</string>
   <string name="notifications">התראות</string>
-  <string name="read_notifications">התראות (בארכיון)</string>
+  <string name="read_notifications">התראות (שנקראו)</string>
   <string name="display_nearby_notification">הצגת התראות סמוכות</string>
   <string name="display_nearby_notification_summary">יש לגעת כאן כדי לצפות במקום הקרוב ביותר שדורש תמונות</string>
   <string name="no_close_nearby">לא נמצאו מקומות בסביבתך</string>
@@ -507,9 +508,9 @@
   <string name="no_image_reverted">לא שוחזרו תמונות</string>
   <string name="no_image_uploaded">לא הועלו תמונות</string>
   <string name="no_notification">אין לך התראות שלא נקראו</string>
-  <string name="no_read_notification">אין לך התראות בארכיון</string>
+  <string name="no_read_notification">אין לך התראות שנקראו</string>
   <string name="share_logs_using">שיתוף יומנים בעזרת</string>
-  <string name="menu_option_read">הצגת ארכיון</string>
+  <string name="menu_option_read">הצגת התראות שנקראו</string>
   <string name="menu_option_unread">הצגת התראות שלא נקראו</string>
   <string name="error_occurred_in_picking_images">אירעה שגיאה בעת בחירת תמונות</string>
   <string name="image_chooser_title">נא לבחור תמונות להעלאה</string>
@@ -578,10 +579,11 @@
   <string name="wallpaper_set_unsuccessfully">משהו השתבש. לא היה אפשר להגדיר את הטפט</string>
   <string name="setting_wallpaper_dialog_title">להגדיר בתור טפט</string>
   <string name="setting_wallpaper_dialog_message">הגדרת טפט. נא להמתין...</string>
-  <string name="theme_default_name">ברירת מחדל</string>
+  <string name="theme_default_name">מערכת מעקב</string>
   <string name="theme_dark_name">כהה</string>
   <string name="theme_light_name">בהירה</string>
   <string name="cannot_open_location_settings">פתיחת הגדרות המיקום נכשלה. נא להפעיל את איתור המיקום ידנית</string>
   <string name="recommend_high_accuracy_mode">לתוצאות המיטביות יש להשתמש במצב דיוק גבוה.</string>
   <string name="ask_to_turn_location_on">להפעיל מיקום?</string>
+  <string name="nearby_needs_location">פעולת \"בסביבה\" זקוקה לשירותי מיקומי פועלים כדי לעבוד כמו שצריך</string>
 </resources>

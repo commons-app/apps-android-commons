@@ -293,7 +293,7 @@
   <string name="wallpaper_set_unsuccessfully">Nešto je pošlo po zlu. Ne možemo postaviti pozadinu</string>
   <string name="setting_wallpaper_dialog_title">Postavi kao pozadinu</string>
   <string name="setting_wallpaper_dialog_message">Postavljanje pozadine. Molimo, pričekajte...</string>
-  <string name="theme_default_name">Zadano</string>
+  <string name="theme_default_name" fuzzy="true">Zadano</string>
   <string name="theme_dark_name">Tamno</string>
   <string name="theme_light_name">Svijetlo</string>
 </resources>

@@ -392,7 +392,7 @@
   <string name="contributions_fragment">Contribuições</string>
   <string name="nearby_fragment">Próximo</string>
   <string name="notifications">Notificações</string>
-  <string name="read_notifications">Notificações (arquivadas)</string>
+  <string name="read_notifications" fuzzy="true">Notificações (arquivadas)</string>
   <string name="display_nearby_notification">Exibir notificação próxima</string>
   <string name="display_nearby_notification_summary">Toque aqui para ver o local mais próximo que precisa de fotos</string>
   <string name="no_close_nearby">Nenhum lugar próximo encontrado perto de você</string>
@@ -506,9 +506,9 @@
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
   <string name="no_notification">Não tem nenhuma notificação por ler</string>
-  <string name="no_read_notification">Não tem nenhuma notificação arquivada</string>
+  <string name="no_read_notification" fuzzy="true">Não tem nenhuma notificação arquivada</string>
   <string name="share_logs_using">Compartilhar registros usando</string>
-  <string name="menu_option_read">Ver arquivadas</string>
+  <string name="menu_option_read" fuzzy="true">Ver arquivadas</string>
   <string name="menu_option_unread">Ver não lidas</string>
   <string name="error_occurred_in_picking_images">Ocorreu um erro ao escolher imagens</string>
   <string name="image_chooser_title">Escolha imagens para fazer o carregamento</string>
@@ -577,7 +577,7 @@
   <string name="wallpaper_set_unsuccessfully">Algo deu errado. Não foi possível definir o papel de parede</string>
   <string name="setting_wallpaper_dialog_title">Definir como papel de parede</string>
   <string name="setting_wallpaper_dialog_message">Definir papel de parede. Por favor, espere…</string>
-  <string name="theme_default_name">Padrão</string>
+  <string name="theme_default_name" fuzzy="true">Padrão</string>
   <string name="theme_dark_name">Escuro</string>
   <string name="theme_light_name">Claro</string>
   <string name="cannot_open_location_settings">Falha ao abrir as configurações de localização. Ative o local manualmente</string>

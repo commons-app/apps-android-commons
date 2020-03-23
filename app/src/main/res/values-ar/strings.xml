@@ -390,7 +390,7 @@
   <string name="contributions_fragment">مساهمات</string>
   <string name="nearby_fragment">مجاور</string>
   <string name="notifications">الإشعارات</string>
-  <string name="read_notifications">الإخطارات (مؤرشفة)</string>
+  <string name="read_notifications" fuzzy="true">الإخطارات (مؤرشفة)</string>
   <string name="display_nearby_notification">عرض الإخطار القريب</string>
   <string name="display_nearby_notification_summary">انقر هنا لرؤية أقرب مكان يحتاج إلى صور</string>
   <string name="no_close_nearby">لم يتم العثور على أماكن قريبة بالقرب منك</string>
@@ -504,9 +504,9 @@
   <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
   <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
   <string name="no_notification">ليست لديك إشعارات غير مقروءة</string>
-  <string name="no_read_notification">ليست لديك إشعارات مؤرشفة</string>
+  <string name="no_read_notification" fuzzy="true">ليست لديك إشعارات مؤرشفة</string>
   <string name="share_logs_using">مشاركة السجلات باستخدام</string>
-  <string name="menu_option_read">عرض المؤرشفة</string>
+  <string name="menu_option_read" fuzzy="true">عرض المؤرشفة</string>
   <string name="menu_option_unread">عرض غير المقروءة</string>
   <string name="error_occurred_in_picking_images">حدث خطأ أثناء التقاط الصور</string>
   <string name="image_chooser_title">اختيار الصور للرفع</string>
@@ -575,7 +575,7 @@
   <string name="wallpaper_set_unsuccessfully">هناك خطأ ما. تعذر تعيين الخلفية</string>
   <string name="setting_wallpaper_dialog_title">اجعلها خلفية</string>
   <string name="setting_wallpaper_dialog_message">إعداد الخلفية. أرجو الإنتظار…</string>
-  <string name="theme_default_name">افتراضي</string>
+  <string name="theme_default_name" fuzzy="true">افتراضي</string>
   <string name="theme_dark_name">غامق</string>
   <string name="theme_light_name">فاتح</string>
 </resources>

@@ -377,7 +377,7 @@
   <string name="contributions_fragment">తోడ్పాటు</string>
   <string name="nearby_fragment">చుట్టుపక్కల</string>
   <string name="notifications">గమనింపులు</string>
-  <string name="read_notifications">గమనింపులు (ఆర్కైవు చేసినవి)</string>
+  <string name="read_notifications" fuzzy="true">గమనింపులు (ఆర్కైవు చేసినవి)</string>
   <string name="display_nearby_notification">చుట్టుపక్కల గమనింపును చూపించు</string>
   <string name="display_nearby_notification_summary">బొమ్మలు అవసరమైన చుట్టుపక్కల స్థలాన్ని చూసేందుకు ఇక్కడ నొక్కండి</string>
   <string name="no_close_nearby">మీ చుట్టుపక్కల స్థలాలేమీ కనబడలేదు</string>
@@ -490,9 +490,9 @@
   <string name="no_image_reverted">బొమ్మలు వేటినీ వెనక్కి తిరక్కొట్టలేదు</string>
   <string name="no_image_uploaded">బొమ్మలేమీ ఎక్కించలేదు</string>
   <string name="no_notification">మీకు చదవని గమనింపులేమీ లేవు</string>
-  <string name="no_read_notification">మీకు ఆర్కైవు చేసిన గమనింపులేమీ లేవు</string>
+  <string name="no_read_notification" fuzzy="true">మీకు ఆర్కైవు చేసిన గమనింపులేమీ లేవు</string>
   <string name="share_logs_using">దీన్ని వాడి లాగ్‌లను పంచుకోండి</string>
-  <string name="menu_option_read">ఆర్కైవులను చూడండి</string>
+  <string name="menu_option_read" fuzzy="true">ఆర్కైవులను చూడండి</string>
   <string name="menu_option_unread">చదవని వాటిని చూడండి</string>
   <string name="error_occurred_in_picking_images">బొమ్మలను ఎంచుకునేటపుడు లోపం దొర్లింది</string>
   <string name="image_chooser_title">ఎక్కించేందుకు బొమ్మలను ఎంచుకోండి</string>
