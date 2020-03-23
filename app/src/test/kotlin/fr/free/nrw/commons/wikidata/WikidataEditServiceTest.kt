@@ -2,12 +2,14 @@ package fr.free.nrw.commons.wikidata
 
 import android.content.Context
 import com.nhaarman.mockitokotlin2.verifyZeroInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.wikidata.model.AddEditTagResponse
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
+import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.*
@@ -15,19 +17,19 @@ import org.mockito.MockitoAnnotations
 
 class WikidataEditServiceTest {
     @Mock
-    internal var context: Context? = null
-    @Mock
-    internal var wikidataEditListener: WikidataEditListener? = null
-    @Mock
-    internal var directKvStore: JsonKvStore? = null
-    @Mock
-    internal var wikidataClient: WikidataClient? = null
+    internal lateinit var context: Context
 
     @Mock
-    internal var wikibaseClient: WikiBaseClient? = null
+    internal lateinit var directKvStore: JsonKvStore
+
+    @Mock
+    internal lateinit var wikidataClient: WikidataClient
+
+    @Mock
+    internal lateinit var wikibaseClient: WikiBaseClient
 
     @InjectMocks
-    var wikidataEditService: WikidataEditService? = null
+    lateinit var wikidataEditService: WikidataEditService
 
     @Before
     @Throws(Exception::class)
@@ -37,40 +39,40 @@ class WikidataEditServiceTest {
 
     @Test
     fun noClaimsWhenEntityIdIsNull() {
-        wikidataEditService!!.createClaimWithLogging(null, "Test.jpg","")
-        verifyZeroInteractions(wikidataClient!!)
+        wikidataEditService.createClaimWithLogging(null, "Test.jpg", "")
+        verifyZeroInteractions(wikidataClient)
     }
 
     @Test
     fun noClaimsWhenFileNameIsNull() {
-        wikidataEditService!!.createClaimWithLogging("Q1", null,"")
-        verifyZeroInteractions(wikidataClient!!)
+        wikidataEditService.createClaimWithLogging("Q1", null, "")
+        verifyZeroInteractions(wikidataClient)
     }
 
     @Test
     fun noClaimsWhenP18IsNotEmpty() {
-        wikidataEditService!!.createClaimWithLogging("Q1", "Test.jpg","Previous.jpg")
-        verifyZeroInteractions(wikidataClient!!)
+        wikidataEditService.createClaimWithLogging("Q1", "Test.jpg", "Previous.jpg")
+        verifyZeroInteractions(wikidataClient)
     }
 
     @Test
     fun noClaimsWhenLocationIsNotCorrect() {
-        `when`(directKvStore!!.getBoolean("Picture_Has_Correct_Location", true))
-                .thenReturn(false)
-        wikidataEditService!!.createClaimWithLogging("Q1", "Test.jpg","")
-        verifyZeroInteractions(wikidataClient!!)
+        whenever(directKvStore.getBoolean("Picture_Has_Correct_Location", true))
+            .thenReturn(false)
+        wikidataEditService.createClaimWithLogging("Q1", "Test.jpg", "")
+        verifyZeroInteractions(wikidataClient)
     }
 
     @Test
     fun createClaimWithLogging() {
-        `when`(directKvStore!!.getBoolean("Picture_Has_Correct_Location", true))
-                .thenReturn(true)
-        `when`(wikidataClient!!.createClaim(ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(1L))
-        `when`(wikidataClient!!.addEditTag(anyLong(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(mock(AddEditTagResponse::class.java)))
-        wikidataEditService!!.createClaimWithLogging("Q1", "Test.jpg","")
-        verify(wikidataClient!!, times(1))
-                .createClaim(ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
+        whenever(directKvStore.getBoolean("Picture_Has_Correct_Location", true))
+            .thenReturn(true)
+        whenever(wikidataClient.createClaim(anyString(), anyString()))
+            .thenReturn(Observable.just(1L))
+        whenever(wikidataClient.addEditTag(anyLong(), anyString(), anyString()))
+            .thenReturn(Observable.just(mock(AddEditTagResponse::class.java)))
+        whenever(wikibaseClient.getFileEntityId(any())).thenReturn(Observable.just(1L))
+        wikidataEditService.createClaimWithLogging("Q1", "Test.jpg", "")
+        verify(wikidataClient, times(1)).createClaim(anyString(), anyString())
     }
 }
