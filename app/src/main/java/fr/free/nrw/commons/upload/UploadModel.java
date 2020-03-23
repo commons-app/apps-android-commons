@@ -17,6 +17,7 @@ import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.BehaviorSubject;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -246,6 +247,7 @@ public class UploadModel {
             this.createdTimestampSource = createdTimestampSource;
             title = new Title();
             uploadMediaDetails = Collections.singletonList(new UploadMediaDetail());
+            uploadMediaDetails = new ArrayList<>(Arrays.asList(new UploadMediaDetail()));
             this.place = place;
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;

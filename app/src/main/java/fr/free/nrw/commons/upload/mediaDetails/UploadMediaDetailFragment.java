@@ -43,8 +43,8 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -304,7 +304,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 },
                 () -> {
                     etTitle.setText(place.getName());
-                    descriptions = Collections.singletonList(new UploadMediaDetail(place));
+                    descriptions = new ArrayList<>(Arrays.asList(new UploadMediaDetail()));
                     setDescriptionsInAdapter(descriptions);
                 });
     }
