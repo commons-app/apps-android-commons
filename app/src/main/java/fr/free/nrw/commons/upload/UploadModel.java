@@ -160,6 +160,7 @@ public class UploadModel {
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getDecimalCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
+                contribution.setWikiItemName(item.place.getName());
                 // If item already has an image, we need to know it. We don't want to override existing image later
                 contribution.setP18Value(item.place.pic);
             }
@@ -205,7 +206,6 @@ public class UploadModel {
         UploadItem uploadItem1 = items.get(index);
         uploadItem1.setDescriptions(uploadItem.descriptions);
         uploadItem1.setTitle(uploadItem.title);
-        store.putString("Title", uploadItem.place.getName());
     }
 
     public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
