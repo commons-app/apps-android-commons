@@ -55,7 +55,8 @@ class DepictedImagesPresenterTest {
 
     @Test
     fun initList() {
-        Mockito.`when`(depictsClient?.fetchImagesForDepictedItem(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())).thenReturn(testObservable)
+        Mockito.`when`(depictsClient?.fetchImagesForDepictedItem(ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyInt())).thenReturn(testObservable)
         depictedImagesPresenter?.initList("rabbit")
         depictedImagesPresenter?.handleSuccess(mediaList)
         verify(view)?.handleSuccess(mediaList)

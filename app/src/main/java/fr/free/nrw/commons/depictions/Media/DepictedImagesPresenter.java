@@ -1,25 +1,21 @@
 package fr.free.nrw.commons.depictions.Media;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
+
 import android.annotation.SuppressLint;
-
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 /**
  * Presenter for DepictedImagesFragment
@@ -31,7 +27,6 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
                     DepictedImagesContract.View.class.getClassLoader(),
                     new Class[]{DepictedImagesContract.View.class},
                     (proxy, method, methodArgs) -> null);
-    private static int TIMEOUT_SECONDS = 15;
     DepictsClient depictsClient;
     MediaClient mediaClient;
     @Named("default_preferences")
@@ -76,10 +71,9 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
         view.setLoadingStatus(true);
         view.progressBarVisible(true);
         view.setIsLastPage(false);
-        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25, 0)
+        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 0)
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(this::handleSuccess, this::handleError));
     }
 
@@ -90,10 +84,9 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
     @Override
     public void fetchMoreImages() {
         view.progressBarVisible(true);
-        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, 25, queryList.size())
+        compositeDisposable.add(depictsClient.fetchImagesForDepictedItem(entityId, queryList.size())
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribe(this::handlePaginationSuccess, this::handleError));
     }
 
@@ -150,9 +143,8 @@ public class DepictedImagesPresenter implements DepictedImagesContract.UserActio
         compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .subscribe(subscriber -> {
-                    view.handleLabelforImage(subscriber, position);
+                .subscribe(caption -> {
+                    view.handleLabelforImage(caption, position);
                 }));
 
     }

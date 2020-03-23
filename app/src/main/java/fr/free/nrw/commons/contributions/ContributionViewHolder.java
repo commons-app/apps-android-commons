@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
+
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -117,7 +119,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
             titleView.setText(contribution.getDisplayTitle());
         } else {
             Timber.d("Fetching caption for %s", contribution.getFilename());
-            String wikibaseMediaId = "M"+contribution.getPageId(); // Create Wikibase media id from the page id. Example media id: M80618155 for https://commons.wikimedia.org/wiki/File:Tantanmen.jpeg with has the pageid 80618155
+            String wikibaseMediaId = PAGE_ID_PREFIX + contribution.getPageId(); // Create Wikibase media id from the page id. Example media id: M80618155 for https://commons.wikimedia.org/wiki/File:Tantanmen.jpeg with has the pageid 80618155
             compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseMediaId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

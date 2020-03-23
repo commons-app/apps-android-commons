@@ -1,14 +1,7 @@
 package fr.free.nrw.commons.depictions.SubClass;
 
-import java.io.IOException;
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
@@ -16,13 +9,16 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
+import java.io.IOException;
+import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 /**
 * Presenter for parent classes and child classes of Depicted items in Explore
@@ -155,13 +151,8 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
      */
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried depictions");
-        try {
-            view.initErrorView();
-            view.showSnackbar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        view.initErrorView();
+        view.showSnackbar();
     }
 
 }

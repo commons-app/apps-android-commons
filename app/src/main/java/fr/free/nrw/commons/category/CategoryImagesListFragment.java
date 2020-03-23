@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.category;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,15 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
@@ -33,10 +29,11 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 /**
  * Displays images for a particular category with load more on scrolling incorporated
@@ -261,7 +258,7 @@ public class CategoryImagesListFragment extends DaggerFragment {
         isLoading = false;
         statusTextView.setVisibility(GONE);
         for (Media m : collection) {
-            replaceTitlesWithCaptions("M"+m.getPageId(), mediaSize++);
+            replaceTitlesWithCaptions(PAGE_ID_PREFIX + m.getPageId(), mediaSize++);
         }
     }
 

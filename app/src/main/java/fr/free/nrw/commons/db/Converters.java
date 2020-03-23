@@ -12,6 +12,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class supplies converters to write/read types to/from the database.
+ */
 public class Converters {
 
     public static Gson getGson() {

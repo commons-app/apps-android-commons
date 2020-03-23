@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.wikidata;
 
+import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.annotation.NonNull;
@@ -198,7 +200,7 @@ public class WikidataEditService {
         String data = jsonData.toString();
 
         Observable.defer((Callable<ObservableSource<Boolean>>) () ->
-                wikiBaseClient.postEditEntity("M" + fileEntityId, data))
+                wikiBaseClient.postEditEntity(PAGE_ID_PREFIX + fileEntityId, data))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(success -> {

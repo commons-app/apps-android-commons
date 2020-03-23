@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.depictions.Media;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,26 +14,20 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.depictions.GridViewAdapter;
+import fr.free.nrw.commons.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
+import java.util.List;
+import javax.inject.Inject;
+import timber.log.Timber;
 
 /**
  * Fragment for showing image list after selected an item from SearchActivity In Explore
@@ -38,6 +35,7 @@ import static android.view.View.VISIBLE;
 public class DepictedImagesFragment extends DaggerFragment implements DepictedImagesContract.View {
 
 
+    public static final String PAGE_ID_PREFIX = "M";
     @BindView(R.id.statusMessage)
     TextView statusTextView;
     @BindView(R.id.loadingImagesProgressBar)
@@ -87,7 +85,9 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
         presenter.initList(entityId);
         if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
             handleNoInternet();
-        } else presenter.initList(entityId);
+        } else {
+            presenter.initList(entityId);
+        }
     }
 
     /**
@@ -150,9 +150,9 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
      * Seat caption to the image at the given position
      */
     @Override
-    public void handleLabelforImage(String s, int position) {
-        if (!s.trim().equals(getString(R.string.detail_caption_empty))) {
-            gridAdapter.getItem(position).setThumbnailTitle(s);
+    public void handleLabelforImage(String caption, int position) {
+        if (!caption.trim().equals(getString(R.string.detail_caption_empty))) {
+            gridAdapter.getItem(position).setThumbnailTitle(caption);
             gridAdapter.notifyDataSetChanged();
         }
     }
@@ -250,15 +250,15 @@ public class DepictedImagesFragment extends DaggerFragment implements DepictedIm
 
             try {
                 ((WikidataItemDetailsActivity) getContext()).viewPagerNotifyDataSetChanged();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (RuntimeException e) {
+                Timber.e(e);
             }
         }
         progressBar.setVisibility(GONE);
         isLoading = false;
         statusTextView.setVisibility(GONE);
-        for (Media m : collection) {
-            presenter.replaceTitlesWithCaptions("M"+m.getPageId(), mediaSize++);
+        for (Media media : collection) {
+            presenter.replaceTitlesWithCaptions(PAGE_ID_PREFIX +media.getPageId(), mediaSize++);
         }
     }
 }

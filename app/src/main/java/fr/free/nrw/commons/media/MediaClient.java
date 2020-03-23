@@ -2,36 +2,28 @@ package fr.free.nrw.commons.media;
 
 
 import android.annotation.SuppressLint;
-
 import androidx.annotation.NonNull;
-
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.internal.LinkedTreeMap;
-
-import java.util.Date;
-
-
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 /**
@@ -186,24 +178,21 @@ public class MediaClient {
     public Single<String> getCaptionByWikibaseIdentifier(String wikibaseIdentifier) {
         return mediaDetailInterface.getCaptionForImage(Locale.getDefault().getLanguage(), wikibaseIdentifier)
                 .map(mediaDetailResponse -> {
-                    if (mediaDetailResponse != null && mediaDetailResponse.getSuccess() != null && mediaDetailResponse.getSuccess() == 1 && mediaDetailResponse.getEntities() != null) {
-                        Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
-                        try {
-                            Map.Entry<String, CommonsWikibaseItem> entry = entities.entrySet().iterator().next();
-                            CommonsWikibaseItem commonsWikibaseItem = entry.getValue();
-                                Map<String, Caption> labels = commonsWikibaseItem.getLabels();
-                                Map.Entry<String, Caption> captionEntry = labels.entrySet().iterator().next();
-                                Caption caption = captionEntry.getValue();
+                    if (isSuccess(mediaDetailResponse)) {
+                        for (CommonsWikibaseItem wikibaseItem : mediaDetailResponse.getEntities().values()) {
+                            for (Caption caption : wikibaseItem.getLabels().values()) {
                                 return caption.getValue();
-
-                        } catch (Exception e) {
-                            return NO_CAPTION;
+                            }
                         }
                     }
-                        return NO_CAPTION;
-
+                    return NO_CAPTION;
                 })
                 .singleOrError();
+    }
+
+    private boolean isSuccess(MediaDetailResponse response) {
+        return response != null && response.getSuccess() != null
+            && response.getSuccess() == 1 && response.getEntities() != null;
     }
 
     /**
@@ -214,9 +203,7 @@ public class MediaClient {
      */
     public Single<JsonObject> getCaptionAndDepictions(String filename)  {
         return mediaDetailInterface.fetchStructuredDataByFilename(Locale.getDefault().getLanguage(), filename)
-                .map(mediaDetailResponse -> {
-                        return fetchCaptionandDepictionsFromMediaDetailResponse(mediaDetailResponse);
-                })
+                .map(this::fetchCaptionandDepictionsFromMediaDetailResponse)
                 .singleOrError();
     }
 
@@ -228,7 +215,7 @@ public class MediaClient {
     @SuppressLint("CheckResult")
     private JsonObject fetchCaptionandDepictionsFromMediaDetailResponse(MediaDetailResponse mediaDetailResponse) {
         JsonObject mediaDetails = new JsonObject();
-        if (mediaDetailResponse != null && mediaDetailResponse.getSuccess() != null && mediaDetailResponse.getSuccess() == 1 && mediaDetailResponse.getEntities() != null) {
+        if (isSuccess(mediaDetailResponse)) {
             Map<String, CommonsWikibaseItem> entities = mediaDetailResponse.getEntities();
             try {
                 Map.Entry<String, CommonsWikibaseItem> entry = entities.entrySet().iterator().next();
@@ -247,7 +234,6 @@ public class MediaClient {
                 try {
                     LinkedTreeMap statements = (LinkedTreeMap) commonsWikibaseItem.getStatements();
                     ArrayList<LinkedTreeMap> depictsItemList = (ArrayList<LinkedTreeMap>) statements.get(BuildConfig.DEPICTS_PROPERTY);
-                    String depictions = null;
                     JsonArray jsonArray = new JsonArray();
                     for (int i = 0; i < depictsItemList.size(); i++) {
                         LinkedTreeMap depictedItem = depictsItemList.get(i);
@@ -268,7 +254,6 @@ public class MediaClient {
             } catch (Exception e) {
                 JsonElement jsonElement = new JsonPrimitive(NO_CAPTION);
                 mediaDetails.add("Caption", jsonElement);
-                jsonElement = null;
                 jsonElement = new JsonPrimitive(NO_DEPICTION);
                 mediaDetails.add("Depiction", jsonElement);
             }

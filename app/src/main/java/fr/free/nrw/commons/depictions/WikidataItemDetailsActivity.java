@@ -33,7 +33,7 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 public class WikidataItemDetailsActivity extends NavigationBaseActivity implements MediaDetailPagerFragment.MediaDetailProvider, AdapterView.OnItemClickListener {
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
-    private MediaDetailPagerFragment mediaDetails;
+    private MediaDetailPagerFragment mediaDetailPagerFragment;
     /**
      * Name of the depicted item
      * Ex: Rabbit
@@ -78,8 +78,8 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
      * The viewpager will notified that number of items have changed.
      */
     public void viewPagerNotifyDataSetChanged() {
-        if (mediaDetails!=null){
-            mediaDetails.notifyDataSetChanged();
+        if (mediaDetailPagerFragment !=null){
+            mediaDetailPagerFragment.notifyDataSetChanged();
         }
     }
 
@@ -129,18 +129,18 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         mediaContainer.setVisibility(View.VISIBLE);
-        if (mediaDetails == null || !mediaDetails.isVisible()) {
+        if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
-            mediaDetails = new MediaDetailPagerFragment(false, true);
+            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.mediaContainer, mediaDetails)
+                    .replace(R.id.mediaContainer, mediaDetailPagerFragment)
                     .addToBackStack(null)
                     .commit();
             supportFragmentManager.executePendingTransactions();
         }
-        mediaDetails.showImage(position);
+        mediaDetailPagerFragment.showImage(position);
         forceInitBackButton();
     }
 

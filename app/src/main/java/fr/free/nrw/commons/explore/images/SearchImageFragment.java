@@ -41,6 +41,7 @@ import timber.log.Timber;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
 
 /**
  * Displays the image search screen.
@@ -205,7 +206,7 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
             imagesAdapter.notifyDataSetChanged();
             ((SearchActivity)getContext()).viewPagerNotifyDataSetChanged();
             for (Media m : mediaList) {
-                replaceTitlesWithCaptions("M"+m.getPageId(), mediaSize++);
+                replaceTitlesWithCaptions(PAGE_ID_PREFIX + m.getPageId(), mediaSize++);
             }
         }
     }
@@ -215,13 +216,13 @@ public class SearchImageFragment extends CommonsDaggerSupportFragment {
      * When captions are retrieved they replace title
      */
 
-        public void replaceTitlesWithCaptions(String wikibaseIdentifier, int i) {
+        public void replaceTitlesWithCaptions(String wikibaseIdentifier, int position) {
             compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     .subscribe(subscriber -> {
-                        handleLabelforImage(subscriber, i);
+                        handleLabelforImage(subscriber, position);
                     }));
 
         }

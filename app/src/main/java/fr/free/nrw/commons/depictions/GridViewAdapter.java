@@ -57,7 +57,7 @@ public class GridViewAdapter extends ArrayAdapter {
                 data = new ArrayList<>();
                 return false;
             }
-            if (data.size() <= 0) {
+            if (data.size() == 0) {
                 return false;
             }
             String fileName = data.get(0).getFilename();

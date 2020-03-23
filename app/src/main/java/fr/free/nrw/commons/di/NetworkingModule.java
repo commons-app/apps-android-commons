@@ -54,7 +54,6 @@ public class NetworkingModule {
 
     public static final String NAMED_COMMONS_WIKI_SITE = "commons-wikisite";
     private static final String NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite";
-    private static final String NAMED_COMMONS_WIKI = "commonswiki";
 
     public static final String NAMED_COMMONS_CSRF = "commons-csrf";
 
@@ -138,12 +137,6 @@ public class NetworkingModule {
         return new WikiSite(BuildConfig.WIKIDATA_URL);
     }
 
-    @Provides
-    @Singleton
-    @Named(NAMED_COMMONS_WIKI)
-    public WikiSite provideCommonsWiki() {
-        return new WikiSite(BuildConfig.COMMONS_URL);
-    }
 
     /**
      * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
@@ -230,7 +223,7 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    public MediaDetailInterface providesMediaDetailInterface(@Named(NAMED_COMMONS_WIKI) WikiSite commonsWikisite) {
+    public MediaDetailInterface providesMediaDetailInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikisite) {
         return ServiceFactory.get(commonsWikisite, BuildConfig.COMMONS_URL, MediaDetailInterface.class);
     }
 

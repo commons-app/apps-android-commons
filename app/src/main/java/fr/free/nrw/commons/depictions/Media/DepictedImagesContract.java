@@ -34,7 +34,7 @@ public interface DepictedImagesContract {
         /**
          * Seat caption to the image at the given position
          */
-        void handleLabelforImage(String s, int position);
+        void handleLabelforImage(String caption, int position);
 
         /**
          * Display snackbar

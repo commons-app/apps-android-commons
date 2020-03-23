@@ -1,26 +1,23 @@
 package fr.free.nrw.commons.explore.depictions;
 
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
-
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 
 /**
  * The presenter class for SearchDepictionsFragment
@@ -105,13 +102,8 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
      */
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried depictions");
-        try {
-            view.initErrorView();
-            view.showSnackbar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        view.initErrorView();
+        view.showSnackbar();
     }
 
     /**

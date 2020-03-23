@@ -1,20 +1,18 @@
 package fr.free.nrw.commons;
 
+import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
+
 import androidx.core.text.HtmlCompat;
-
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
+import fr.free.nrw.commons.media.MediaClient;
+import io.reactivex.Single;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import fr.free.nrw.commons.media.MediaClient;
-import io.reactivex.Single;
+import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 /**
@@ -25,10 +23,15 @@ import timber.log.Timber;
  */
 @Singleton
 public class MediaDataExtractor {
-    private final MediaClient mediaClient;
+
+  private static final int LABEL_BEGIN_INDEX = 3;
+  private static final int LABEL_END_OFFSET = 3;
+  private static final int ID_BEGIN_INDEX = 1;
+  private static final int ID_END_OFFSET = 1;
+  private final MediaClient mediaClient;
 
     @Inject
-    public MediaDataExtractor(MediaClient mediaClient) {
+    public MediaDataExtractor(final MediaClient mediaClient) {
         this.mediaClient = mediaClient;
     }
 
@@ -38,31 +41,35 @@ public class MediaDataExtractor {
      * @param filename for which the details are to be fetched
      * @return full Media object with all details including deletion status and talk page
      */
-    public Single<Media> fetchMediaDetails(String filename, String pageId) {
-        Single<Media> mediaSingle = getMediaFromFileName(filename);
-        Single<Boolean> pageExistsSingle = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename);
-        Single<String> discussionSingle = getDiscussion(filename);
-        Single<String> captionSingle = getCaption("M"+pageId);
-        Single<JsonObject> depictionSingle = getDepictions(filename);
-        return Single.zip(mediaSingle, pageExistsSingle, discussionSingle, captionSingle, depictionSingle, (media, deletionStatus, discussion, caption, depiction) -> {
-            media.setDiscussion(discussion);
-            media.setCaption(caption);
-            media.setDepiction(formatDepictions(depiction));
-            if (deletionStatus) {
-                media.setRequestedDeletion();
-            }
-            return media;
-        });
+    public Single<Media> fetchMediaDetails(final String filename, final String pageId) {
+      return Single.zip(getMediaFromFileName(filename),
+            mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename),
+            getDiscussion(filename),
+            getCaption(PAGE_ID_PREFIX + pageId),
+            getDepictions(filename),
+            this::combineToMedia);
     }
 
-    /**
+  @NotNull
+  private Media combineToMedia(final Media media, final Boolean deletionStatus, final String discussion,
+      final String caption, final JsonObject depiction) {
+    media.setDiscussion(discussion);
+    media.setCaption(caption);
+    media.setDepiction(formatDepictions(depiction));
+    if (deletionStatus) {
+        media.setRequestedDeletion();
+    }
+    return media;
+  }
+
+  /**
      * Obtains captions using filename
      * @param wikibaseIdentifier
      *
      * @return caption for the image in user's locale
      * Ex: "a nice painting" (english locale) and "No Caption" in case the caption is not available for the image
      */
-    private Single<String> getCaption(String wikibaseIdentifier) {
+    private Single<String> getCaption(final String wikibaseIdentifier) {
         return mediaClient.getCaptionByWikibaseIdentifier(wikibaseIdentifier);
     }
 
@@ -72,27 +79,23 @@ public class MediaDataExtractor {
      * @return List containing map for depictions, the map has two keys,
      *  first key is for the label and second is for the url of the item
      */
-    private ArrayList<Map<String, String>> formatDepictions(JsonObject mediaResponse) {
+    private ArrayList<Map<String, String>> formatDepictions(final JsonObject mediaResponse) {
         try {
-            JsonArray depictionArray = (JsonArray) mediaResponse.get("Depiction");
-            ArrayList<Map<String, String>> depictedItemList = new ArrayList<>();
-            try {
-                for (int i = 0; i <depictionArray.size() ; i++) {
-                    JsonObject depictedItem = (JsonObject) depictionArray.get(i);
-                    Map <String, String> depictedObject = new HashMap<>();
-                    String label = depictedItem.get("label").toString();
-                    String id =  depictedItem.get("id").toString();
-                    String transformedLabel = label.substring(3, label.length()-3);
-                    String transformedId = id.substring(1,id.length() - 1);
-                    depictedObject.put("label", transformedLabel); //remove the additional characters obtained in label and ID object to extract the relevant string (since the string also contains extra quites that are not required)
-                    depictedObject.put("id", transformedId);
-                    depictedItemList.add(depictedObject);
-                }
-                return depictedItemList;
-            } catch (NullPointerException e) {
-                return new ArrayList<>();
+            final JsonArray depictionArray = (JsonArray) mediaResponse.get("Depiction");
+            final ArrayList<Map<String, String>> depictedItemList = new ArrayList<>();
+            for (int i = 0; i <depictionArray.size() ; i++) {
+                final JsonObject depictedItem = (JsonObject) depictionArray.get(i);
+                final Map <String, String> depictedObject = new HashMap<>();
+                final String label = depictedItem.get("label").toString();
+                final String id =  depictedItem.get("id").toString();
+                final String transformedLabel = label.substring(LABEL_BEGIN_INDEX, label.length()- LABEL_END_OFFSET);
+                final String transformedId = id.substring(ID_BEGIN_INDEX,id.length() - ID_END_OFFSET);
+                depictedObject.put("label", transformedLabel); //remove the additional characters obtained in label and ID object to extract the relevant string (since the string also contains extra quites that are not required)
+                depictedObject.put("id", transformedId);
+                depictedItemList.add(depictedObject);
             }
-        } catch (ClassCastException c) {
+            return depictedItemList;
+        } catch (final ClassCastException | NullPointerException ignore) {
             return new ArrayList<>();
         }
     }
@@ -102,13 +105,9 @@ public class MediaDataExtractor {
      * @param filename the filename we will return the caption for
      * @return a map containing caption and depictions (empty string in the map if no caption/depictions)
      */
- private Single<JsonObject> getDepictions(String filename)  {
+ private Single<JsonObject> getDepictions(final String filename)  {
          return mediaClient.getCaptionAndDepictions(filename)
-                .map(mediaResponse -> {
-                    return mediaResponse;
-                }).doOnError(throwable -> {
-                    Timber.e(throwable+ "error while fetching depictions");
-                 });
+             .doOnError(throwable -> Timber.e(throwable, "error while fetching depictions"));
     }
 
     /**
@@ -116,7 +115,7 @@ public class MediaDataExtractor {
      * @param filename Eg. File:Test.jpg
      * @return return data rich Media object
      */
-    public Single<Media> getMediaFromFileName(String filename) {
+    public Single<Media> getMediaFromFileName(final String filename) {
         return mediaClient.getMedia(filename);
     }
 
@@ -125,7 +124,7 @@ public class MediaDataExtractor {
      * @param filename
      * @return
      */
-    private Single<String> getDiscussion(String filename) {
+    private Single<String> getDiscussion(final String filename) {
         return mediaClient.getPageHtml(filename.replace("File", "File talk"))
                 .map(discussion -> HtmlCompat.fromHtml(discussion, HtmlCompat.FROM_HTML_MODE_LEGACY).toString())
                 .onErrorReturn(throwable -> {
