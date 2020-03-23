@@ -2,23 +2,19 @@ package fr.free.nrw.commons.media;
 
 
 import androidx.annotation.NonNull;
-
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 /**
@@ -76,6 +72,24 @@ public class MediaClient {
                         mediaInterface.getMediaListFromCategory(category, 10, continuationStore.get("category_" + category)) : //if true
                         mediaInterface.getMediaListFromCategory(category, 10, Collections.emptyMap()),
                 "category_" + category); //if false
+
+    }
+
+    /**
+     * This method takes the userName as input and returns a list of  Media objects filtered using
+     * allimages query It uses the allimages query API to get the images contributed by the userName,
+     * 10 at a time.
+     *
+     * @param userName the username
+     * @return
+     */
+    public Single<List<Media>> getMediaListForUser(String userName) {
+        return responseToMediaList(
+            continuationStore.containsKey("user_" + userName) ?
+                mediaInterface.getMediaListFromCategory(userName, 10,
+                    continuationStore.get("user_" + userName)) : //if true
+                mediaInterface.getMediaListFromCategory(userName, 10, Collections.emptyMap()),
+            "user_" + userName); //if false
 
     }
 

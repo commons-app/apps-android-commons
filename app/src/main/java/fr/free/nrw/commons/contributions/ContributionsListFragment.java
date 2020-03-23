@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.contributions;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,37 +13,32 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Created by root on 01.06.2018.
  */
 
 public class ContributionsListFragment extends CommonsDaggerSupportFragment {
+
+    private static final int PAGE_SIZE = 10;
 
     private static final String VISIBLE_ITEM_ID = "visible_item_id";
     @BindView(R.id.contributionsList)
@@ -68,6 +66,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
 
     private boolean isFabOpen = false;
+
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
 
     private ContributionsListAdapter adapter;
 
@@ -102,14 +103,43 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     private void initRecyclerView() {
+        LinearLayoutManager layoutManager;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            rvContributionsList.setLayoutManager(new GridLayoutManager(getContext(),SPAN_COUNT));
+            layoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
+            rvContributionsList.setLayoutManager(layoutManager);
         } else {
-            rvContributionsList.setLayoutManager(new LinearLayoutManager(getContext()));
+            layoutManager = new LinearLayoutManager(getContext());
+            rvContributionsList.setLayoutManager(layoutManager);
         }
 
         rvContributionsList.setAdapter(adapter);
         adapter.setContributions(contributions);
+        rvContributionsList.addOnScrollListener(new OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                if (!isLoading && !isLastPage) {
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0
+                        && totalItemCount >= PAGE_SIZE) {
+                        loadMoreItems();
+                    }
+                }
+            }
+        });
+    }
+
+    private void loadMoreItems() {
+
     }
 
     @Override

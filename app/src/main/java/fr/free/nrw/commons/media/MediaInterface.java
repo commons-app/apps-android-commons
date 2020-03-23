@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.media;
 
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-
-import java.util.Map;
-
 import io.reactivex.Observable;
+import java.util.Map;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -16,6 +14,11 @@ public interface MediaInterface {
     String MEDIA_PARAMS="&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" +
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl";
+
+    String USER_MEDIA_PARAMS = "&prop=imageinfo&aiprop=url|extmetadata&iiurlwidth=640" +
+        "&aiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal"
+        +
+        "|Artist|LicenseShortName|LicenseUrl";
     /**
      * Checks if a page exists or not.
      *
@@ -46,6 +49,21 @@ public interface MediaInterface {
             "&generator=categorymembers&gcmtype=file&gcmsort=timestamp&gcmdir=desc" + //Category parameters
             MEDIA_PARAMS)
     Observable<MwQueryResponse> getMediaListFromCategory(@Query("gcmtitle") String category, @Query("gcmlimit") int itemLimit, @QueryMap Map<String, String> continuation);
+
+    /**
+     * This method retrieves a list of Media objects for a given user name
+     *
+     * @param username     the category name. Must start with "Category:"
+     * @param itemLimit    how many images are returned
+     * @param continuation the continuation string from the previous query or empty map
+     * @return
+     */
+    @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
+        "&generator=categorymembers&gcmtype=file&gcmsort=timestamp&gcmdir=desc" +
+        //Category parameters
+        MEDIA_PARAMS)
+    Observable<MwQueryResponse> getMediaListForUser(@Query("aiuser") String username,
+        @Query("ailimit") int itemLimit, @QueryMap Map<String, String> continuation);
 
     /**
      * This method retrieves a list of Media objects filtered using image generator query
