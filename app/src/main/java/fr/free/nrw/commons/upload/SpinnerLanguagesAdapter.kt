@@ -40,7 +40,7 @@ class SpinnerLanguagesAdapter constructor(
     var selectedLangCode = ""
 
     override fun isEnabled(position: Int) = languageCodesList[position].let {
-        it.isNotEmpty() && !selectedLanguages.containsKey(it) && it != selectedLangCode
+        it.isNotEmpty() && !selectedLanguages.containsValue(it) && it != selectedLangCode
     }
 
     override fun getCount() = languageNamesList.size
