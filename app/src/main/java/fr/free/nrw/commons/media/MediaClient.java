@@ -88,7 +88,7 @@ public class MediaClient {
             continuationStore.containsKey("user_" + userName) ?
                 mediaInterface.getMediaListFromCategory(userName, 10,
                     continuationStore.get("user_" + userName)) : //if true
-                mediaInterface.getMediaListFromCategory(userName, 10, Collections.emptyMap()),
+                mediaInterface.getMediaListForUser(userName, 10, Collections.emptyMap()),
             "user_" + userName); //if false
 
     }
@@ -122,8 +122,8 @@ public class MediaClient {
                 .map(Media::from)
                 .collect(ArrayList<Media>::new, List::add);
     }
-  
-     /**
+
+    /**
      * Fetches Media object from the imageInfo API
      *
      * @param titles the tiles to be searched for. Can be filename or template name

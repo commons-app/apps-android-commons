@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,21 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-
-import fr.free.nrw.commons.MediaDataExtractor;
-import io.reactivex.disposables.Disposable;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.HandlerService;
@@ -60,11 +55,9 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
-import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class ContributionsFragment
         extends CommonsDaggerSupportFragment
@@ -135,7 +128,6 @@ public class ContributionsFragment
         ButterKnife.bind(this, view);
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
-        contributionsPresenter.setLifeCycleOwner(this.getViewLifecycleOwner());
         campaignView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
@@ -335,7 +327,7 @@ public class ContributionsFragment
 
     @Override
     public void refreshSource() {
-        contributionsPresenter.fetchContributions();
+
     }
 
     @Override
@@ -410,10 +402,6 @@ public class ContributionsFragment
         }
 
         fetchCampaigns();
-        if(isAuthCookieAcquired){
-            contributionsPresenter.fetchContributions();
-        }
-
     }
 
     private void checkPermissionsAndShowNearbyCardView() {
@@ -561,28 +549,8 @@ public class ContributionsFragment
     }
 
     @Override
-    public void showWelcomeTip(boolean shouldShow) {
-        contributionsListFragment.showWelcomeTip(shouldShow);
-    }
-
-    @Override
     public void showProgress(boolean shouldShow) {
         contributionsListFragment.showProgress(shouldShow);
-    }
-
-    @Override
-    public void showNoContributionsUI(boolean shouldShow) {
-        contributionsListFragment.showNoContributionsUI(shouldShow);
-    }
-
-    @Override
-    public void setUploadCount(int count) {
-        this.numberOfContributions=count;
-    }
-
-    @Override
-    public void showContributions(List<Contribution> contributionList) {
-        contributionsListFragment.setContributions(contributionList);
     }
 
     /**

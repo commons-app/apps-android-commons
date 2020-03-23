@@ -15,8 +15,8 @@ public interface MediaInterface {
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl";
 
-    String USER_MEDIA_PARAMS = "&prop=imageinfo&aiprop=url|extmetadata&iiurlwidth=640" +
-        "&aiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal"
+    String USER_MEDIA_PARAMS = "&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" +
+        "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal"
         +
         "|Artist|LicenseShortName|LicenseUrl";
     /**
@@ -59,11 +59,11 @@ public interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
-        "&generator=categorymembers&gcmtype=file&gcmsort=timestamp&gcmdir=desc" +
+        "&generator=allimages&gaisort=timestamp" +
         //Category parameters
-        MEDIA_PARAMS)
-    Observable<MwQueryResponse> getMediaListForUser(@Query("aiuser") String username,
-        @Query("ailimit") int itemLimit, @QueryMap Map<String, String> continuation);
+        USER_MEDIA_PARAMS)
+    Observable<MwQueryResponse> getMediaListForUser(@Query("gaiuser") String username,
+        @Query("gailimit") int itemLimit, @QueryMap Map<String, String> continuation);
 
     /**
      * This method retrieves a list of Media objects filtered using image generator query

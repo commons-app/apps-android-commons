@@ -3,18 +3,12 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.gallery.ExtMetadata;
-import org.wikipedia.gallery.ImageInfo;
-import org.wikipedia.page.PageTitle;
-
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
+import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,10 +17,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
-import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.dataclient.mwapi.ImageDetails;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.gallery.ExtMetadata;
+import org.wikipedia.gallery.ImageInfo;
+import org.wikipedia.page.PageTitle;
 
 @Entity
 public class Media implements Parcelable {
@@ -98,6 +94,46 @@ public class Media implements Parcelable {
         this.creator = creator;
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
+    }
+
+    public Media(Uri localUri,
+        String thumbUrl,
+        String imageUrl,
+        String filename,
+        String description,
+        String discussion,
+        long dataLength,
+        Date dateCreated,
+        Date dateUploaded,
+        int width,
+        int height,
+        String license,
+        String licenseUrl,
+        String creator,
+        ArrayList<String> categories,
+        boolean requestedDeletion,
+        HashMap<String, String> descriptions,
+        HashMap<String, String> tags,
+        LatLng coordinates) {
+        this.localUri = localUri;
+        this.thumbUrl = thumbUrl;
+        this.imageUrl = imageUrl;
+        this.filename = filename;
+        this.description = description;
+        this.discussion = discussion;
+        this.dataLength = dataLength;
+        this.dateCreated = dateCreated;
+        this.dateUploaded = dateUploaded;
+        this.width = width;
+        this.height = height;
+        this.license = license;
+        this.licenseUrl = licenseUrl;
+        this.creator = creator;
+        this.categories = categories;
+        this.requestedDeletion = requestedDeletion;
+        this.descriptions = descriptions;
+        this.tags = tags;
+        this.coordinates = coordinates;
     }
 
     /**

@@ -31,12 +31,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
+import timber.log.Timber;
 
 /**
  * Created by root on 01.06.2018.
  */
 
-public class ContributionsListFragment extends CommonsDaggerSupportFragment {
+public class ContributionsListFragment extends CommonsDaggerSupportFragment implements
+    ContributionsListContract.View {
 
     private static final int PAGE_SIZE = 10;
 
@@ -58,6 +60,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @Inject @Named("default_preferences") JsonKvStore kvStore;
     @Inject ContributionController controller;
+
+    @Inject
+    ContributionsListPresenter contributionsListPresenter;
 
     private Animation fab_close;
     private Animation fab_open;
@@ -81,6 +86,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, view);
+        Timber.d("RecyclerList Inside onCreateView.");
+        contributionsListPresenter.onAttachView(this);
+        contributionsListPresenter.setLifeCycleOwner(this.getViewLifecycleOwner());
         initAdapter();
         return view;
     }
@@ -103,6 +111,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     private void initRecyclerView() {
+        Timber.d("RecyclerList Recycler view Init.");
         LinearLayoutManager layoutManager;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             layoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
@@ -136,10 +145,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
                 }
             }
         });
+
+      contributionsListPresenter.setupLiveData();
+      contributionsListPresenter.fetchContributions();
     }
 
     private void loadMoreItems() {
-
+        Timber.d("RecyclerList Inside load more items.");
+        isLoading = true;
+        contributionsListPresenter.fetchContributions();
     }
 
     @Override
@@ -212,6 +226,21 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     public void showNoContributionsUI(boolean shouldShow) {
         noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
+    }
+
+    @Override
+    public void setUploadCount(int count) {
+
+    }
+
+    @Override
+    public void showContributions(List<Contribution> contributionList) {
+
+    }
+
+    @Override
+    public void showMessage(String localizedMessage) {
+
     }
 
     public void setContributions(List<Contribution> contributionList) {

@@ -2,6 +2,7 @@ package fr.free.nrw.commons;
 
 import androidx.annotation.NonNull;
 
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import org.wikipedia.dataclient.SharedPreferenceCookieManager;
 import org.wikipedia.dataclient.okhttp.HttpStatusException;
 
@@ -40,7 +41,7 @@ public final class OkHttpConnectionFactory {
 
     private static HttpLoggingInterceptor getLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor()
-                .setLevel(HttpLoggingInterceptor.Level.BASIC);
+                .setLevel(Level.BODY);
 
         httpLoggingInterceptor.redactHeader("Authorization");
         httpLoggingInterceptor.redactHeader("Cookie");

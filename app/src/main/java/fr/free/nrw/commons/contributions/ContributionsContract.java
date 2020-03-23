@@ -12,15 +12,7 @@ public class ContributionsContract {
 
     public interface View {
 
-        void showWelcomeTip(boolean numberOfUploads);
-
         void showProgress(boolean shouldShow);
-
-        void showNoContributionsUI(boolean shouldShow);
-
-        void setUploadCount(int count);
-
-        void showContributions(List<Contribution> contributionList);
 
         void showMessage(String localizedMessage);
     }

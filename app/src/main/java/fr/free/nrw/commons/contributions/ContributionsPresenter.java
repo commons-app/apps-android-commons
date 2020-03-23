@@ -17,7 +17,6 @@ import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import io.reactivex.Scheduler;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -41,21 +40,7 @@ public class ContributionsPresenter implements UserActionListener {
     private List<Contribution> contributionList=new ArrayList<>();
 
     @Inject
-    Context context;
-
-    @Inject
-    UserClient userClient;
-
-    @Inject
-    SessionManager sessionManager;
-
-    @Inject
     MediaDataExtractor mediaDataExtractor;
-
-    @Inject
-    MediaClient mediaClient;
-
-    private LifecycleOwner lifeCycleOwner;
 
     @Inject
     ContributionsPresenter(ContributionsRepository repository, @Named(CommonsApplicationModule.MAIN_THREAD) Scheduler mainThreadScheduler,@Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
@@ -64,77 +49,10 @@ public class ContributionsPresenter implements UserActionListener {
         this.ioThreadScheduler=ioThreadScheduler;
     }
 
-    private String user;
-
     @Override
     public void onAttachView(ContributionsContract.View view) {
         this.view = view;
         compositeDisposable=new CompositeDisposable();
-    }
-
-    public void setLifeCycleOwner(LifecycleOwner lifeCycleOwner){
-        this.lifeCycleOwner=lifeCycleOwner;
-    }
-
-    public void fetchContributions() {
-        Timber.d("fetch  Contributions");
-        LiveData<List<Contribution>> liveDataContributions = repository.fetchContributions();
-        if(null!=lifeCycleOwner) {
-             liveDataContributions.observe(lifeCycleOwner, this::showContributions);
-        }
-
-        if (NetworkUtils.isInternetConnectionEstablished(CommonsApplication.getInstance()) && shouldFetchContributions()) {
-            Timber.d("fetching contributions: ");
-            view.showProgress(true);
-            this.user = sessionManager.getUserName();
-            view.showContributions(Collections.emptyList());
-            compositeDisposable.add(userClient.logEvents(user)
-                    .subscribeOn(ioThreadScheduler)
-                    .observeOn(mainThreadScheduler)
-                    .doOnNext(mwQueryLogEvent -> Timber.d("Received image %s", mwQueryLogEvent.title()))
-                    .filter(mwQueryLogEvent -> !mwQueryLogEvent.isDeleted()).doOnNext(mwQueryLogEvent -> Timber.d("Image %s passed filters", mwQueryLogEvent.title()))
-                    .map(image -> {
-                        Contribution contribution = new Contribution(null, null, image.title(),
-                                "", -1, image.date(), image.date(), user,
-                                "", "", STATE_COMPLETED);
-                        return contribution;
-                    })
-                    .toList()
-                    .subscribe(this::saveContributionsToDB, error -> {
-                        Timber.e("Failed to fetch contributions: %s", error.getMessage());
-                    }));
-        }
-    }
-
-    private void showContributions(@NonNull List<Contribution> contributions) {
-        view.showProgress(false);
-        if (contributions.isEmpty()) {
-            view.showWelcomeTip(true);
-            view.showNoContributionsUI(true);
-        } else {
-            view.showWelcomeTip(false);
-            view.showNoContributionsUI(false);
-            view.setUploadCount(contributions.size());
-            view.showContributions(contributions);
-            this.contributionList.clear();
-            this.contributionList.addAll(contributions);
-        }
-    }
-
-    private void saveContributionsToDB(List<Contribution> contributions) {
-        Timber.e("Fetched: "+contributions.size()+" contributions "+" saving to db");
-        repository.save(contributions).subscribeOn(ioThreadScheduler).subscribe();
-        repository.set("last_fetch_timestamp",System.currentTimeMillis());
-    }
-
-    private boolean shouldFetchContributions() {
-        long lastFetchTimestamp = repository.getLong("last_fetch_timestamp");
-        Timber.d("last fetch timestamp: %s", lastFetchTimestamp);
-        if(lastFetchTimestamp!=0){
-            return System.currentTimeMillis()-lastFetchTimestamp>15*60*100;
-        }
-        Timber.d("should  fetch contributions: %s", true);
-        return true;
     }
 
     @Override

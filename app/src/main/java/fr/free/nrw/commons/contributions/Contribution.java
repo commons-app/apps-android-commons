@@ -1,27 +1,23 @@
 package fr.free.nrw.commons.contributions;
 
+import static java.lang.annotation.RetentionPolicy.SOURCE;
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.lang.annotation.Retention;
-import java.util.Date;
-import java.util.Locale;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ConfigUtils;
-
-import static java.lang.annotation.RetentionPolicy.SOURCE;
+import java.lang.annotation.Retention;
+import java.util.Date;
+import java.util.Locale;
+import org.apache.commons.lang3.StringUtils;
 
 @Entity(tableName = "contribution")
 public class  Contribution extends Media {
@@ -78,7 +74,17 @@ public class  Contribution extends Media {
         this.state=state;
     }
 
+    public Contribution(Media media) {
+        super(media.localUri, media.thumbUrl, media.imageUrl, media.filename, media.description,
+            media.discussion,
+            media.getDataLength(), media.dateCreated, media.getDateUploaded(), media.getWidth(),
+            media.getHeight(),
+            media.license, media.getLicenseUrl(), media.creator, media.getCategories(),
+            media.requestedDeletion,
+            media.descriptions, media.tags, media.coordinates);
 
+        this.state = STATE_COMPLETED;
+    }
 
     public void setDateCreatedSource(String dateCreatedSource) {
         this.dateCreatedSource = dateCreatedSource;
