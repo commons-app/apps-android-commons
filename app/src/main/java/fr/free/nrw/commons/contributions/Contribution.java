@@ -263,6 +263,7 @@ public class  Contribution extends Media {
     public String getWikiDataEntityId() {
         return wikiDataEntityId;
     }
+
     public String getWikiItemName() {
         return wikiItemName;
     }
