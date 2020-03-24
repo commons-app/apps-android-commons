@@ -1,6 +1,6 @@
 **Description (required)**
 
-Fixes #{GitHub issue number} {Github issue title}
+Fixes #{GitHub issue number}
 
 What changes did you make and why?
 

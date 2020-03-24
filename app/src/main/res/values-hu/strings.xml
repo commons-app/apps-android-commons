@@ -385,7 +385,7 @@
   <string name="contributions_fragment">Közreműködések</string>
   <string name="nearby_fragment">Közelben</string>
   <string name="notifications">Értesítések</string>
-  <string name="read_notifications">Archivált értesítések</string>
+  <string name="read_notifications" fuzzy="true">Archivált értesítések</string>
   <string name="display_nearby_notification">Közeli értesítések megjelenítése</string>
   <string name="no_close_nearby">Nem található közeli hely</string>
   <string name="list_sheet">Lista</string>
@@ -494,8 +494,8 @@
   <string name="no_image_reverted">Nincs visszavont kép</string>
   <string name="no_image_uploaded">Nincs feltöltött kép</string>
   <string name="no_notification">Nincs olvasatlan üzenet</string>
-  <string name="no_read_notification">Nincs archivált üzenet</string>
-  <string name="menu_option_read">Archiváltak megtekintése</string>
+  <string name="no_read_notification" fuzzy="true">Nincs archivált üzenet</string>
+  <string name="menu_option_read" fuzzy="true">Archiváltak megtekintése</string>
   <string name="menu_option_unread">Olvasatlanok megtekintése</string>
   <string name="error_occurred_in_picking_images">Hiba történt a képek betöltése során</string>
   <string name="image_chooser_title">Feltöltendő képek kiválasztása</string>
@@ -553,7 +553,7 @@
   <string name="place_type">Hely típusa:</string>
   <string name="nearby_search_hint">Híd, múzeum, szálloda, stb.</string>
   <string name="you_must_reset_your_passsword">A belépés nem sikerült, kérj új jelszót.</string>
-  <string name="theme_default_name">Alapértelmezett</string>
+  <string name="theme_default_name" fuzzy="true">Alapértelmezett</string>
   <string name="theme_dark_name">Sötét</string>
   <string name="theme_light_name">Világos</string>
 </resources>

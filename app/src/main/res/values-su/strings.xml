@@ -369,7 +369,7 @@
   <string name="contributions_fragment">Kontribusi</string>
   <string name="nearby_fragment">Sabudeureun</string>
   <string name="notifications">Iber</string>
-  <string name="read_notifications">Iber (arsip)</string>
+  <string name="read_notifications" fuzzy="true">Iber (arsip)</string>
   <string name="display_nearby_notification">Témbongkeun iber sabudeureun</string>
   <string name="no_close_nearby">Taya tempat sabudeureun nu kairong jang anjeun</string>
   <string name="list_sheet">Daptar</string>
@@ -445,9 +445,9 @@
   <string name="no_image_reverted">Taya gambar nu dibalikkeun</string>
   <string name="no_image_uploaded">Taya gambar diunjal</string>
   <string name="no_notification">Anjeun teu boga iber nu can dibaca</string>
-  <string name="no_read_notification">Anjeun teu boga iber arsip</string>
+  <string name="no_read_notification" fuzzy="true">Anjeun teu boga iber arsip</string>
   <string name="share_logs_using">Bagikeun log pamakéan</string>
-  <string name="menu_option_read">Tempo arsip</string>
+  <string name="menu_option_read" fuzzy="true">Tempo arsip</string>
   <string name="menu_option_unread">Tempo nu can dibaca</string>
   <string name="error_occurred_in_picking_images">Éror pas keur nyomot gambar</string>
   <string name="image_chooser_title">Pilih Gambar unjalkeuneun</string>

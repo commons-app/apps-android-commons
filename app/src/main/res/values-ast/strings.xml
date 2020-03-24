@@ -379,7 +379,7 @@
   <string name="contributions_fragment">Collaboraciones</string>
   <string name="nearby_fragment">Cercanu</string>
   <string name="notifications">Avisos</string>
-  <string name="read_notifications">Avisos (archivaos)</string>
+  <string name="read_notifications" fuzzy="true">Avisos (archivaos)</string>
   <string name="display_nearby_notification">Amosar notificaciones de cercanía</string>
   <string name="display_nearby_notification_summary">Toca equí para ver el llugar más cercanu que precisa semeyes</string>
   <string name="no_close_nearby">Nun s\'atoparon llugares cercanos nos alredores</string>
@@ -492,9 +492,9 @@
   <string name="no_image_reverted">Nun se revertió nenguna imaxe</string>
   <string name="no_image_uploaded">Nun se xubió nenguna imaxe</string>
   <string name="no_notification">Nun tienes avisos ensin lleer</string>
-  <string name="no_read_notification">Nun tienes avisos archivaos</string>
+  <string name="no_read_notification" fuzzy="true">Nun tienes avisos archivaos</string>
   <string name="share_logs_using">Compartir rexistros usando</string>
-  <string name="menu_option_read">Ver los archivaos</string>
+  <string name="menu_option_read" fuzzy="true">Ver los archivaos</string>
   <string name="menu_option_unread">Ver los nun lleíos</string>
   <string name="error_occurred_in_picking_images">Asocedió un error al escoyer les imaxes</string>
   <string name="image_chooser_title">Escueyi les imaxes pa xubir</string>

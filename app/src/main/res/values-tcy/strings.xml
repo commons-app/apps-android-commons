@@ -396,7 +396,7 @@
   <string name="deletion_reason_publicly_visible">ಅವು ಸಾರ್ವತ್ರಿಕವಾದ್ ತೋಜುಂಡು ಇಂದ್ ಎಂಕ್ ಗೊತ್ತಿತ್ತಿಜಿ.</string>
   <string name="deletion_reason_bad_for_my_privacy">ಅವು ಎನ್ನ ಖಾಸಗಿತೆನೊಕು ಹಾಳ್ಂದ್ ಎಂಕ್ ತೆರಿಂಡ್.</string>
   <string name="no_read_notification" fuzzy="true">ಇರೆಗ್ ಅನುರಕ್ಷಿತ ಅಧಿಸೂಚನೆ ಇಜ್ಜಿ</string>
-  <string name="menu_option_read">ಅನುರಕ್ಷಿತ ತೂಲೆ</string>
+  <string name="menu_option_read" fuzzy="true">ಅನುರಕ್ಷಿತ ತೂಲೆ</string>
   <string name="menu_option_unread">ಓದಂದಿನ ತೂಲೆ</string>
   <string name="error_occurred_in_picking_images">ಆಕೃತಿಲೆನ್ ಪೆಜ್ಜಿನಗ ದೋಷ ಆಂಡ್</string>
   <string name="image_chooser_title">ಮಿತರಾರೆ ಆಕೃತಿಲೆನ್ ಆಯುಲೆ</string>

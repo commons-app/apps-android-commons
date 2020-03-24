@@ -124,7 +124,7 @@
   <string name="use_previous">이전의 제목과 설명을 사용하기</string>
   <string name="allow_gps">자동으로 현재 위치 가져오기</string>
   <string name="allow_gps_summary">영상의 위치 태그가 지정되지 않은 경우 현재 위치를 검색하여 영상에 현재 위치로 위치 태그를 지정하십시오. 경고: 당신의 현재 위치가 노출됩니다.</string>
-  <string name="preference_theme" fuzzy="true">야간 모드</string>
+  <string name="preference_theme">테마</string>
   <string name="license_name_cc_by_sa_four"> 저작자표시-동일조건변경허락 4.0</string>
   <string name="license_name_cc_by_four">저작자표시 4.0</string>
   <string name="license_name_cc_by_sa"> 저작자표시-동일조건변경허락 3.0</string>
@@ -374,7 +374,7 @@
   <string name="contributions_fragment">기여</string>
   <string name="nearby_fragment">근처</string>
   <string name="notifications">알림</string>
-  <string name="read_notifications">알림 (보관됨)</string>
+  <string name="read_notifications">알림 (읽음)</string>
   <string name="display_nearby_notification">주변 알림 표시</string>
   <string name="display_nearby_notification_summary">사진이 필요한 주변 장소를 보려면 여기를 탭하세요</string>
   <string name="no_close_nearby">당신에게 가까운 주변 장소를 찾지 못했습니다</string>
@@ -446,8 +446,8 @@
   <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
   <string name="review_image_explanation">이미지를 검토하고 위키미디어 공용의 품질을 개선할 수 있습니다.\n 4가지 검토 변수가 있습니다:\n - 이 이미지가 범위 내에 있는가? \n - 이 이미지가 저작권 규정을 준수하고 있는가? \n - 이 이미지가 올바르게 분류되어 있는가? \n - 모든 것이 문제 없다면 기여자에게 감사를 표할 수도 있습니다.</string>
   <string name="no_notification">읽지 않은 알림이 없습니다</string>
-  <string name="no_read_notification">보관된 알림이 없습니다</string>
-  <string name="menu_option_read">보관한 항목 보기</string>
+  <string name="no_read_notification">읽은 알림이 없습니다</string>
+  <string name="menu_option_read">읽은 항목 보기</string>
   <string name="menu_option_unread">읽지 않은 항목 보기</string>
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>
   <string name="image_chooser_title">업로드할 이미지 선택</string>
@@ -492,4 +492,6 @@
   <string name="wallpaper_set_unsuccessfully">무언가 잘못되었습니다. 배경화면을 설정하지 못했습니다</string>
   <string name="setting_wallpaper_dialog_title">배경화면으로 설정</string>
   <string name="setting_wallpaper_dialog_message">배경화면을 설정 중입니다. 기다려 주십시오...</string>
+  <string name="theme_dark_name">어두움</string>
+  <string name="theme_light_name">밝음</string>
 </resources>

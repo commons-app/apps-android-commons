@@ -254,7 +254,7 @@
   <string name="contributions_fragment">योगदानहरू</string>
   <string name="nearby_fragment">नजिकैको</string>
   <string name="notifications">सूचनाहरू</string>
-  <string name="read_notifications">सूचनाहरू (अभिलेख)</string>
+  <string name="read_notifications" fuzzy="true">सूचनाहरू (अभिलेख)</string>
   <string name="list_sheet">सूची</string>
   <string name="storage_permission">भण्डारण अनुमति</string>
   <string name="next">अर्को</string>
@@ -303,7 +303,7 @@
   <string name="title_app_shortcut_setting">सेटिङ्गहरू</string>
   <string name="add_bookmark">पुस्तक चिनाेमा थपियाे</string>
   <string name="setting_wallpaper_dialog_title">भित्तेपत्रकाे रूपमा चयन गर्नुहोस्</string>
-  <string name="theme_default_name">पुनर्निर्धारित</string>
+  <string name="theme_default_name" fuzzy="true">पुनर्निर्धारित</string>
   <string name="theme_dark_name">गाढा</string>
   <string name="theme_light_name">हल्का</string>
 </resources>

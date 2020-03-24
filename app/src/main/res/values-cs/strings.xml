@@ -395,7 +395,7 @@
   <string name="contributions_fragment">Příspěvky</string>
   <string name="nearby_fragment">Poblíž</string>
   <string name="notifications">Upozornění</string>
-  <string name="read_notifications">Upozornění (přečtená)</string>
+  <string name="read_notifications" fuzzy="true">Upozornění (přečtená)</string>
   <string name="display_nearby_notification">Zobrazit upozornění v okolí</string>
   <string name="display_nearby_notification_summary">Klepnutím sem zobrazíte nejbližší místo, které potřebuje obrázky</string>
   <string name="no_close_nearby">Nebyla nalezena žádná místa v okolí</string>
@@ -508,9 +508,9 @@
   <string name="no_image_reverted">Žádné revertované obrázky</string>
   <string name="no_image_uploaded">Žádné nahrané obrázky</string>
   <string name="no_notification">Nemáte žádná nepřečtená upozornění</string>
-  <string name="no_read_notification">Nemáte nepřečtená upozornění</string>
+  <string name="no_read_notification" fuzzy="true">Nemáte nepřečtená upozornění</string>
   <string name="share_logs_using">Sdílet logy pomocí</string>
-  <string name="menu_option_read">Zobrazit přečtené</string>
+  <string name="menu_option_read" fuzzy="true">Zobrazit přečtené</string>
   <string name="menu_option_unread">Zobrazit nepřečtené</string>
   <string name="error_occurred_in_picking_images">Nastala chyba při vybírání obrázků</string>
   <string name="image_chooser_title">Vyberte obrázky, které chcete nahrát</string>

@@ -127,7 +127,7 @@
     <item quantity="one">Bu görüntü, %1$s lisansı altında olacak</item>
     <item quantity="other">Bu görüntüler, %1$s lisansı altında olacak</item>
   </plurals>
-  <string name="media_upload_policy">Bu resmi göndererek, bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya selfies içermediğini ve başka türlü &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/tr\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
+  <string name="media_upload_policy">Bu resmi göndererek, bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya selfi içermediğini ve başka türlü &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/tr\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Varsayılan Lisans</string>
   <string name="use_previous">Önceki başlığı ve açıklamayı kullan</string>
@@ -396,7 +396,7 @@
   <string name="contributions_fragment">Katkılar</string>
   <string name="nearby_fragment">Yakınındakiler</string>
   <string name="notifications">Bildirimler</string>
-  <string name="read_notifications">Bildirimler (arşivlenmiş)</string>
+  <string name="read_notifications">Bildirimler (okunmuş)</string>
   <string name="display_nearby_notification">Yakındaki bildirimi görüntüle</string>
   <string name="display_nearby_notification_summary">Resimlere en yakın yeri görmek için buraya dokunun</string>
   <string name="no_close_nearby">Size yakın bir yer bulunamadı</string>
@@ -510,9 +510,9 @@
   <string name="no_image_reverted">Resim döndürülmedi</string>
   <string name="no_image_uploaded">Resim yüklenmedi</string>
   <string name="no_notification">Okunmamış bildirimleriniz yok</string>
-  <string name="no_read_notification">Arşivlenmiş bildiriminiz yok</string>
+  <string name="no_read_notification">Okuduğunuz bildiriminiz yok</string>
   <string name="share_logs_using">Kullanarak günlükleri paylaş</string>
-  <string name="menu_option_read">Arşivlenmişleri görüntüle</string>
+  <string name="menu_option_read">Okumayı görüntüle</string>
   <string name="menu_option_unread">Okunmamışları görüntüle</string>
   <string name="error_occurred_in_picking_images">Resimler toplanırken hata oluştu</string>
   <string name="image_chooser_title">Yüklenecek Görüntüleri Seçin</string>
@@ -581,11 +581,12 @@
   <string name="wallpaper_set_unsuccessfully">Bir şeyler yanlış gitti. Duvar kağıdı ayarlanamadı</string>
   <string name="setting_wallpaper_dialog_title">Duvar kağıdı olarak ayarla</string>
   <string name="setting_wallpaper_dialog_message">Duvar Kağıdı ayarlanıyor. Lütfen bekleyin...</string>
-  <string name="theme_default_name">Varsayılan</string>
+  <string name="theme_default_name">Sistemi izle</string>
   <string name="theme_dark_name">Koyu</string>
   <string name="theme_light_name">Açık</string>
   <string name="cannot_open_location_settings">Konum ayarları açılamadı. Lütfen konumu manüel olarak açın</string>
   <string name="recommend_high_accuracy_mode">En iyi sonuçlar için Yüksek Hassasiyet modunu seçin.</string>
   <string name="ask_to_turn_location_on">Konum açılsın mı?</string>
   <string name="nearby_needs_location">Yakında ihtiyaç duyulan konumun düzgün çalışması için etkin</string>
+  <string name="use_location_from_similar_image">Bu iki fotoğrafı aynı yerde mi çektiniz? Sağdaki resmin enlem/boylamını kullanmak ister misiniz?</string>
 </resources>

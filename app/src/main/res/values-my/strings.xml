@@ -287,7 +287,7 @@
   <string name="contributions_fragment">ဆောင်ရွက်ချက်များ</string>
   <string name="nearby_fragment">အနီးအနား</string>
   <string name="notifications">အသိပေးချက်များ</string>
-  <string name="read_notifications">အသိပေးချက်များ (မော်ကွန်းတင်ပြီး)</string>
+  <string name="read_notifications" fuzzy="true">အသိပေးချက်များ (မော်ကွန်းတင်ပြီး)</string>
   <string name="display_nearby_notification">အနီးအနားအသိပေးချက်ကို ပြသရန်</string>
   <string name="list_sheet">စာရင်း</string>
   <string name="storage_permission">သိုလှောင်ခန်း ခွင်ပြုချက်</string>
@@ -348,7 +348,7 @@
   <string name="review_copyright_no_button_text">အဆင်ပြေပုံပေါက်ပါသည်</string>
   <string name="review_thanks_no_button_text">နောက်ရုပ်ပုံ</string>
   <string name="no_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
-  <string name="no_read_notification">မော်ကွန်းတင်ပြီးသော အသိပေးချက်များ မရှိပါ</string>
+  <string name="no_read_notification" fuzzy="true">မော်ကွန်းတင်ပြီးသော အသိပေးချက်များ မရှိပါ</string>
   <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
   <string name="previous_image_title_description">ယခင် ခေါင်းစဉ်/ဖော်ပြချက် မိတ္တူကူးရန်</string>
   <string name="welcome_dont_upload_content_description">နမူနာရုပ်ပုံများ အက်ပလုပ်တင်ရန် မဟုတ်ပါ</string>

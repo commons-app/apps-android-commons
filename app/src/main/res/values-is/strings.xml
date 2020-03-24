@@ -372,7 +372,7 @@
   <string name="contributions_fragment">Framlög</string>
   <string name="nearby_fragment">Nálægt</string>
   <string name="notifications">Tilkynningar</string>
-  <string name="read_notifications">Tilkynningar (í geymslu)</string>
+  <string name="read_notifications" fuzzy="true">Tilkynningar (í geymslu)</string>
   <string name="display_nearby_notification">Birta tilkynningu um nágrenni</string>
   <string name="display_nearby_notification_summary">Ýttu hér til að sjá nálægasta staðinn sem þarfnast mynda</string>
   <string name="no_close_nearby">Engir staðir fundust í nágrenninu</string>
@@ -448,7 +448,7 @@
   <string name="no_image_reverted">Engar myndir endurstilltar</string>
   <string name="no_image_uploaded">Engar myndir sendar inn</string>
   <string name="no_notification">Þú ert ekki með neinar ólesnar tilkynningar</string>
-  <string name="menu_option_read">Skoða í geymslu</string>
+  <string name="menu_option_read" fuzzy="true">Skoða í geymslu</string>
   <string name="menu_option_unread">Skoða ólesið</string>
   <string name="error_occurred_in_picking_images">Villa kom upp við að velja myndir</string>
   <string name="image_chooser_title">Veldu myndir til að senda inn</string>

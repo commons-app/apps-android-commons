@@ -57,7 +57,12 @@
   <string name="upload_progress_notification_title_finishing">Завершение загрузки %1$s</string>
   <string name="upload_failed_notification_title">Загрузка %1$s не удалась</string>
   <string name="upload_failed_notification_subtitle">Нажмите для просмотра</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%1$d {{PLURAL:%1$d|one=файл загружается|few=файла загружается|файлов загружается}}</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d файл загружается</item>
+    <item quantity="few">%1$d файла загружается</item>
+    <item quantity="many">%1$d файлов загружается</item>
+    <item quantity="other">%1$d файлов загружается</item>
+  </plurals>
   <string name="title_activity_contributions">Мои недавние загрузки</string>
   <string name="contribution_state_queued">В очереди</string>
   <string name="contribution_state_failed">Ошибка загрузки.</string>
@@ -96,14 +101,16 @@
     <item quantity="few">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
+  <plurals name="starting_multiple_uploads">
     <item quantity="one">Начинается %1$d загрузка</item>
     <item quantity="few">Начинается %1$d загрузки</item>
+    <item quantity="many">Начинается %1$d загрузок</item>
     <item quantity="other">Начинается %1$d загрузок</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d загрузка</item>
     <item quantity="few">%1$d загрузки</item>
+    <item quantity="many">%1$d загрузок</item>
     <item quantity="other">%1$d загрузок</item>
   </plurals>
   <string name="categories_not_found">Не найдено категорий, соответствующих %1$s</string>
@@ -127,8 +134,10 @@
   <string name="no_uploads_yet">Вы ещё не загрузили ни одного изображения.</string>
   <string name="menu_retry_upload">Повторить</string>
   <string name="menu_cancel_upload">Отмена</string>
-  <plurals name="share_license_summary" fuzzy="true">
+  <plurals name="share_license_summary">
     <item quantity="one">Это изображение будет лицензировано под %1$s</item>
+    <item quantity="few">Эти изображения будут лицензированы под %1$s</item>
+    <item quantity="many">Эти изображения будут лицензированы под %1$s</item>
     <item quantity="other">Эти изображения будут лицензированы под %1$s</item>
   </plurals>
   <string name="media_upload_policy">Отправляя это изображение, я подтверждаю, что это моя собственная работа, которая не содержит защищённых авторским правом материалов или селфи, а также отвечает &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;правилам Викисклада&lt;/a&gt;.</string>
@@ -400,7 +409,7 @@
   <string name="contributions_fragment">Вклад</string>
   <string name="nearby_fragment">Поблизости</string>
   <string name="notifications">Уведомления</string>
-  <string name="read_notifications">Уведомления (архивированные)</string>
+  <string name="read_notifications" fuzzy="true">Уведомления (архивированные)</string>
   <string name="display_nearby_notification">Уведомлять меня о местах поблизости</string>
   <string name="display_nearby_notification_summary">Нажмите здесь, чтобы увидеть ближайшее место без изображений</string>
   <string name="no_close_nearby">Не найдено мест поблизости</string>
@@ -415,9 +424,10 @@
   <string name="submit">Отправить</string>
   <string name="upload_title_duplicate">Уже существует файл с именем %1$s. Вы уверены, что хотите продолжить?</string>
   <string name="map_application_missing">Не найдено совместимое картографическое приложение на вашем устройстве. Установите его, чтобы вы могли использовать эту функцию.</string>
-  <plurals name="upload_count_title" fuzzy="true">
+  <plurals name="upload_count_title">
     <item quantity="one">%1$d загрузка</item>
     <item quantity="few">%1$d загрузки</item>
+    <item quantity="many">%1$d загрузок</item>
     <item quantity="other">%1$d загрузок</item>
   </plurals>
   <string name="navigation_item_bookmarks">Закладки</string>
@@ -507,17 +517,19 @@
   <string name="review_thanks_no_button_text">Следующий файл</string>
   <string name="skip_image_explanation">Нажатие этой кнопки приводит к показу следующего недавно загруженного изображения с Викисклада</string>
   <string name="review_image_explanation">Вы можете проверить файлы, и, таким образом, улучшить их качество на Викискладе.\n Есть четыре проверки:\n - Уместен ли файл на Викискладе?\n - Соответствует ли файл правилам об авторском праве?\n - Правильно ли файл категоризирован?\n - Если всё хорошо, можете поблагодарить загрузившего этот файл.</string>
-  <plurals name="receiving_shared_content" fuzzy="true">
+  <plurals name="receiving_shared_content">
     <item quantity="one">Получение общего содержимого. Обработка изображения может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
+    <item quantity="few">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
+    <item quantity="many">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
     <item quantity="other">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
   </plurals>
   <string name="no_image">Нет использованных изображений</string>
   <string name="no_image_reverted">Нет откаченых изображений</string>
   <string name="no_image_uploaded">Нет загруженных изображений</string>
   <string name="no_notification">У вас нет непрочитанных уведомлений</string>
-  <string name="no_read_notification">Нет архивированных уведомлений</string>
+  <string name="no_read_notification" fuzzy="true">Нет архивированных уведомлений</string>
   <string name="share_logs_using">Поделиться лог-файлами</string>
-  <string name="menu_option_read">См. архивированные</string>
+  <string name="menu_option_read" fuzzy="true">См. архивированные</string>
   <string name="menu_option_unread">См. непрочитанные</string>
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
   <string name="image_chooser_title">Выберите изображения для загрузки</string>
@@ -586,7 +598,7 @@
   <string name="wallpaper_set_unsuccessfully">Что-то пошло не так. Не удалось установить фоновую заставку</string>
   <string name="setting_wallpaper_dialog_title">Сделать фоновой заставкой</string>
   <string name="setting_wallpaper_dialog_message">Идёт установка фоновой заставки...</string>
-  <string name="theme_default_name">По умолчанию</string>
+  <string name="theme_default_name" fuzzy="true">По умолчанию</string>
   <string name="theme_dark_name">Тёмная</string>
   <string name="theme_light_name">Светлая</string>
   <string name="cannot_open_location_settings">Не удалось открыть настройки местоположения. Пожалуйста, включите местоположение вручную</string>

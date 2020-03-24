@@ -366,7 +366,7 @@
   <string name="review_thanks_no_button_text">Næste billede</string>
   <string name="no_image">Ingen billeder brugt</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
-  <string name="menu_option_read">Vis arkiverede</string>
+  <string name="menu_option_read" fuzzy="true">Vis arkiverede</string>
   <string name="menu_option_unread">Vis ulæste</string>
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
@@ -386,7 +386,7 @@
   <string name="place_state_needs_photo">Mangler et billede</string>
   <string name="nearby_search_hint">Bro, museum, hotel, osv.</string>
   <string name="title_app_shortcut_bookmark">Bogmærker</string>
-  <string name="theme_default_name">Standard</string>
+  <string name="theme_default_name" fuzzy="true">Standard</string>
   <string name="theme_dark_name">Mørkt</string>
   <string name="theme_light_name">Lyst</string>
 </resources>

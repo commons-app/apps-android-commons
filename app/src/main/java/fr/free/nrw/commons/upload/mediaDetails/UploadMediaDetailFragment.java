@@ -222,7 +222,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        uploadMediaDetailAdapter = new UploadMediaDetailAdapter();
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, ""));
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this::onEvent);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -305,15 +305,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         getString(R.string.upload_nearby_place_found_description),
                         place.getName()),
                 () -> {
-
-                },
-                () -> {
                     etTitle.setText(place.getName());
                     UploadMediaDetail description = new UploadMediaDetail();
                     description.setLanguageCode("en");
                     description.setDescriptionText(place.getLongDescription());
                     descriptions = Arrays.asList(description);
                     setDescriptionsInAdapter(descriptions);
+                },
+                () -> {
+
                 });
     }
 

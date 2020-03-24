@@ -404,7 +404,7 @@
   <string name="contributions_fragment">Contribuciones</string>
   <string name="nearby_fragment">Cercanos</string>
   <string name="notifications">Notificaciones</string>
-  <string name="read_notifications">Notificaciones (archivadas)</string>
+  <string name="read_notifications">Notificaciones (leídas)</string>
   <string name="display_nearby_notification">Mostrar notificaciones de cercanía</string>
   <string name="display_nearby_notification_summary">Toca aquí para ver el lugar más cercano que necesita fotos</string>
   <string name="no_close_nearby">No se encontraron lugares cercanos cerca de ti</string>
@@ -517,9 +517,9 @@
   <string name="no_image_reverted">Ninguna imagen revertida</string>
   <string name="no_image_uploaded">Ninguna imagen subida</string>
   <string name="no_notification">No tienes notificaciones sin leer</string>
-  <string name="no_read_notification">No tienes notificaciones archivadas</string>
+  <string name="no_read_notification">No tienes ninguna notificación leída</string>
   <string name="share_logs_using">Compartir registros usando</string>
-  <string name="menu_option_read">Ver archivados</string>
+  <string name="menu_option_read">Ver leídas</string>
   <string name="menu_option_unread">Ver no leidas</string>
   <string name="error_occurred_in_picking_images">Ocurrió un error mientras se elegían imagenes</string>
   <string name="image_chooser_title">Elige imágenes para cargar</string>
@@ -582,7 +582,7 @@
   <string name="title_app_shortcut_explore">Explorar</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Configuración</string>
-  <string name="theme_default_name">Predeterminado</string>
+  <string name="theme_default_name">Seguir sistema</string>
   <string name="theme_dark_name">Oscuro</string>
   <string name="theme_light_name">Claro</string>
 </resources>
