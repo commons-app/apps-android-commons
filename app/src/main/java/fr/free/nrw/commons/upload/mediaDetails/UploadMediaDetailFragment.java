@@ -244,7 +244,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         getString(R.string.upload_nearby_place_found_description),
                         place.getName()),
                 () -> {
-                    descriptions = new ArrayList<>(Arrays.asList(new UploadMediaDetail()));
+                    descriptions = new ArrayList<>(Arrays.asList(new UploadMediaDetail(place)));
                     setDescriptionsInAdapter(descriptions);
                 },
                 () -> {
