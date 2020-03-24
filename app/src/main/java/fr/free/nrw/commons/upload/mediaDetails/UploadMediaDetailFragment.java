@@ -302,15 +302,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         getString(R.string.upload_nearby_place_found_description),
                         place.getName()),
                 () -> {
-
-                },
-                () -> {
                     etTitle.setText(place.getName());
                     Description description = new Description();
                     description.setLanguageCode("en");
                     description.setDescriptionText(place.getLongDescription());
                     descriptions = Arrays.asList(description);
                     setDescriptionsInAdapter(descriptions);
+                },
+                () -> {
+
                 });
     }
 
