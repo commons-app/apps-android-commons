@@ -120,9 +120,8 @@ public class WikidataEditService {
      * Show a success toast when the edit is made successfully
      */
     private void showSuccessToast(String wikiItemName) {
-        String title = wikiItemName;
         String successStringTemplate = context.getString(R.string.successful_wikidata_edit);
-        String successMessage = String.format(Locale.getDefault(), successStringTemplate, title);
+        String successMessage = String.format(Locale.getDefault(), successStringTemplate, wikiItemName);
         ViewUtil.showLongToast(context, successMessage);
     }
 

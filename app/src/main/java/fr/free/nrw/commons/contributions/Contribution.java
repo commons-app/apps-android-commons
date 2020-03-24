@@ -113,6 +113,7 @@ public class  Contribution extends Media {
         state = in.readInt();
         transferred = in.readLong();
         isMultiple = in.readInt() == 1;
+        wikiItemName = in.readString();
     }
 
     @Override
@@ -123,6 +124,7 @@ public class  Contribution extends Media {
         parcel.writeInt(state);
         parcel.writeLong(transferred);
         parcel.writeInt(isMultiple ? 1 : 0);
+        parcel.writeString(wikiItemName);
     }
 
     public void setDateCreatedSource(String dateCreatedSource) {
