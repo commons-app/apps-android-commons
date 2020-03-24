@@ -351,7 +351,7 @@
   <string name="contributions_fragment">योगदान</string>
   <string name="nearby_fragment">निकट</string>
   <string name="notifications">सूचनायें</string>
-  <string name="read_notifications">सूचनाएँ (पुरालेखित)</string>
+  <string name="read_notifications" fuzzy="true">सूचनाएँ (पुरालेखित)</string>
   <string name="list_sheet">सूची</string>
   <string name="storage_permission">स्टोरेज अनुमति</string>
   <string name="next">अगला</string>
@@ -396,6 +396,6 @@
   <string name="no_image_uploaded">कोई चित्र अपलोड नहीं किया</string>
   <string name="no_notification" fuzzy="true">आपके पास कोई अपठित सूचना नहीं है</string>
   <string name="no_read_notification" fuzzy="true">आपकी कोई सूचना पुरालेखित नहीं है</string>
-  <string name="menu_option_read">पुरालेखित देखें</string>
+  <string name="menu_option_read" fuzzy="true">पुरालेखित देखें</string>
   <string name="menu_option_unread">अपठित देखें</string>
 </resources>

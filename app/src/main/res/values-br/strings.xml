@@ -319,7 +319,7 @@
   <string name="error_occurred">Ur fazi zo bet !</string>
   <string name="preference_author_name_toggle">Implijit un anv aozer personelaet</string>
   <string name="nearby_fragment">Nepell</string>
-  <string name="read_notifications">Kemennoù(diellaouet)</string>
+  <string name="read_notifications" fuzzy="true">Kemennoù(diellaouet)</string>
   <string name="next">War-lerc\'h</string>
   <string name="previous">Kent</string>
   <string name="submit">Kas</string>

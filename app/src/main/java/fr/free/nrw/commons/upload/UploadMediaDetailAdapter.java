@@ -19,8 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
-import fr.free.nrw.commons.utils.BiMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import timber.log.Timber;
 
@@ -30,12 +30,12 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     private Callback callback;
     private EventListener eventListener;
 
-    private BiMap<AdapterView, String> selectedLanguages;
-    private String savedLanguageValue;
+    private HashMap<AdapterView, String> selectedLanguages;
+    private final String savedLanguageValue;
 
-    public UploadMediaDetailAdapter() {
+    public UploadMediaDetailAdapter(String savedLanguageValue) {
         uploadMediaDetails = new ArrayList<>();
-        selectedLanguages = new BiMap<>();
+        selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
     }
 
@@ -49,7 +49,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
     public void setItems(List<UploadMediaDetail> uploadMediaDetails) {
         this.uploadMediaDetails = uploadMediaDetails;
-        selectedLanguages = new BiMap<>();
+        selectedLanguages = new HashMap<>();
         notifyDataSetChanged();
     }
 
@@ -81,7 +81,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
     public void addDescription(UploadMediaDetail uploadMediaDetail) {
         this.uploadMediaDetails.add(uploadMediaDetail);
-        //notifyItemInserted(uploadMediaDetails.size());
+        notifyItemInserted(uploadMediaDetails.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

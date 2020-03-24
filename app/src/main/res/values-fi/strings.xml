@@ -366,7 +366,7 @@
   <string name="contributions_fragment">Muokkaukset</string>
   <string name="nearby_fragment">Lähistöllä</string>
   <string name="notifications">Ilmoitukset</string>
-  <string name="read_notifications">Ilmoitukset (arkistoidut)</string>
+  <string name="read_notifications" fuzzy="true">Ilmoitukset (arkistoidut)</string>
   <string name="display_nearby_notification">Näytä lähistöllä-ilmoitus</string>
   <string name="list_sheet">Lista</string>
   <string name="step_count">Vaihe %1$d/%2$d</string>
@@ -420,7 +420,7 @@
   <string name="review_copyright_no_button_text">Näyttää hyvälle</string>
   <string name="review_thanks_yes_button_text">Kyllä, miksi ei</string>
   <string name="review_thanks_no_button_text">Seuraava kuva</string>
-  <string name="menu_option_read">Näytä arkistoidut</string>
+  <string name="menu_option_read" fuzzy="true">Näytä arkistoidut</string>
   <string name="menu_option_unread">Näytä lukemattomat</string>
   <string name="image_chooser_title">Valitse tallennettavat tiedostot</string>
   <string name="please_wait">Odota…</string>

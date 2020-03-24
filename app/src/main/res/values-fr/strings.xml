@@ -403,7 +403,7 @@
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Proche</string>
   <string name="notifications">Notifications</string>
-  <string name="read_notifications">Notifications (archivées)</string>
+  <string name="read_notifications">Notifications (lues)</string>
   <string name="display_nearby_notification">Afficher la notification de proximité</string>
   <string name="display_nearby_notification_summary">Taper ici pour voir l’endroit le plus proche qui a besoin d’images</string>
   <string name="no_close_nearby">Aucun endroit à proximité trouvé près de chez vous</string>
@@ -517,9 +517,9 @@
   <string name="no_image_reverted">Aucune image retournée</string>
   <string name="no_image_uploaded">Aucune image téléversée</string>
   <string name="no_notification">Vous n\'avez aucune notification non lue</string>
-  <string name="no_read_notification">Vous n’avez pas de notification archivée</string>
+  <string name="no_read_notification">Vous n’avez pas de notification à lire</string>
   <string name="share_logs_using">Partager les journaux en utilisant</string>
-  <string name="menu_option_read">Afficher les archivés</string>
+  <string name="menu_option_read">Afficher les lus</string>
   <string name="menu_option_unread">Afficher les non lus</string>
   <string name="error_occurred_in_picking_images">Erreur lors de la sélection des images</string>
   <string name="image_chooser_title">Choisir les images à téléverser</string>
@@ -588,7 +588,12 @@
   <string name="wallpaper_set_unsuccessfully">Un problème est survenu. Impossible d\'installer le fond d\'écran.</string>
   <string name="setting_wallpaper_dialog_title">Définir comme fond d’écran</string>
   <string name="setting_wallpaper_dialog_message">Configuration du fond d\'écran. Veuillez attendre...</string>
-  <string name="theme_default_name">Par défaut</string>
+  <string name="theme_default_name">Suivre le système</string>
   <string name="theme_dark_name">Sombre</string>
   <string name="theme_light_name">Clair</string>
+  <string name="cannot_open_location_settings">Échec d’ouverture des paramètres d’emplacement. Veuillez activer la localisation manuellement</string>
+  <string name="recommend_high_accuracy_mode">Pour de meilleurs résultats, choisir le mode Haute Précision.</string>
+  <string name="ask_to_turn_location_on">Activer la localisation ?</string>
+  <string name="nearby_needs_location">À proximité nécessite que la localisation soit activée pour bien fonctionner</string>
+  <string name="use_location_from_similar_image">Avez-vous pris ces deux photos du même endroit ? Voulez-vous utiliser les latitude/longitude de l’image sur la droite ?</string>
 </resources>

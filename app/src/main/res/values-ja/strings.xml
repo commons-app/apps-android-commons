@@ -389,7 +389,7 @@
   <string name="contributions_fragment">投稿記録</string>
   <string name="nearby_fragment">付近</string>
   <string name="notifications">お知らせ</string>
-  <string name="read_notifications">お知らせ（過去ログ）</string>
+  <string name="read_notifications" fuzzy="true">お知らせ（過去ログ）</string>
   <string name="display_nearby_notification">近くの場所のお知らせを表示する</string>
   <string name="display_nearby_notification_summary">ここをタップして、近くで画像を募集中の場所を表示</string>
   <string name="no_close_nearby">現在地の近くに該当する場所が見つかりません</string>
@@ -501,9 +501,9 @@
   <string name="no_image_reverted">却下された画像はありません</string>
   <string name="no_image_uploaded">投稿した画像はありません</string>
   <string name="no_notification">未読のお知らせはありません</string>
-  <string name="no_read_notification">過去ログ化したお知らせはありません</string>
+  <string name="no_read_notification" fuzzy="true">過去ログ化したお知らせはありません</string>
   <string name="share_logs_using">ログの共有に使うアプリ</string>
-  <string name="menu_option_read">アーカイブ済みを表示</string>
+  <string name="menu_option_read" fuzzy="true">アーカイブ済みを表示</string>
   <string name="menu_option_unread">未読を見る</string>
   <string name="error_occurred_in_picking_images">画像の選択中にエラーが発生しました</string>
   <string name="image_chooser_title">アップロードする画像を選ぶ</string>

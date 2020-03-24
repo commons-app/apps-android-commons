@@ -337,7 +337,8 @@
   <string name="review_thanks_no_button_text">Nächst BILD</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
-  <string name="no_read_notification">Dir hutt keng archivéier Notifikatiounen</string>
+  <string name="no_read_notification" fuzzy="true">Dir hutt keng archivéier Notifikatiounen</string>
+  <string name="menu_option_read">Déi geliest weisen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
   <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>
   <string name="please_wait">Waart wgl. ...</string>
@@ -362,7 +363,7 @@
   <string name="wallpaper_set_unsuccessfully">Et ass Eppes schif gaangen. D\'Hannergrondbild konnt net agestallt ginn</string>
   <string name="setting_wallpaper_dialog_title">Als Hannergrondbild festleeën</string>
   <string name="setting_wallpaper_dialog_message">Hannergrondbild gëtt agestallt. Waart wgl...</string>
-  <string name="theme_default_name">Standard</string>
+  <string name="theme_default_name">System suivéieren</string>
   <string name="theme_dark_name">Däischter</string>
   <string name="theme_light_name">Hell</string>
 </resources>

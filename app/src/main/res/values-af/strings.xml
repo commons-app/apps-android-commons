@@ -372,7 +372,7 @@
   <string name="contributions_fragment">bydraes</string>
   <string name="nearby_fragment">Naby</string>
   <string name="notifications">Kennisgewings</string>
-  <string name="read_notifications">Kennisgewings (geargiveer)</string>
+  <string name="read_notifications" fuzzy="true">Kennisgewings (geargiveer)</string>
   <string name="display_nearby_notification">Vertoon kennisgewing in die buurt</string>
   <string name="display_nearby_notification_summary">Tik hier om die naaste plek te sien waar u foto\'s benodig</string>
   <string name="no_close_nearby">Geen nabygeleë plekke gevind nie</string>

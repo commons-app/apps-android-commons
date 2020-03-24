@@ -389,7 +389,7 @@
   <string name="contributions_fragment">貢獻</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
-  <string name="read_notifications">通知（已存檔）</string>
+  <string name="read_notifications">通知（已讀）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
   <string name="display_nearby_notification_summary">在此輕觸來查看缺少圖片的最近地點</string>
   <string name="no_close_nearby">查無靠近您的附近地點</string>
@@ -503,9 +503,9 @@
   <string name="no_image_reverted">沒有圖片被還原回復</string>
   <string name="no_image_uploaded">沒有圖片被上傳</string>
   <string name="no_notification">您有尚未讀取的通知</string>
-  <string name="no_read_notification">您沒有已存檔通知</string>
+  <string name="no_read_notification">您沒有已讀的通知</string>
   <string name="share_logs_using">分享日誌使用</string>
-  <string name="menu_option_read">檢視已存檔</string>
+  <string name="menu_option_read">檢視已讀</string>
   <string name="menu_option_unread">檢視未讀</string>
   <string name="error_occurred_in_picking_images">當挑選圖片時發生錯誤</string>
   <string name="image_chooser_title">選擇要上傳的圖片</string>
@@ -574,11 +574,12 @@
   <string name="wallpaper_set_unsuccessfully">發生錯誤，無法設定桌布</string>
   <string name="setting_wallpaper_dialog_title">設定為桌布</string>
   <string name="setting_wallpaper_dialog_message">正在設定桌布，請稍待…</string>
-  <string name="theme_default_name">預設</string>
+  <string name="theme_default_name">追蹤系統</string>
   <string name="theme_dark_name">暗黑</string>
   <string name="theme_light_name">明亮</string>
   <string name="cannot_open_location_settings">開啟位置設定失敗，請手動打開位置</string>
   <string name="recommend_high_accuracy_mode">為了獲得最佳結果，請選擇高精準度模式。</string>
   <string name="ask_to_turn_location_on">打開位置？</string>
   <string name="nearby_needs_location">附近功能需要啟用位置才能運作正常</string>
+  <string name="use_location_from_similar_image">您是否在同一地點拍攝了這兩張圖片？您要使用圖片右側的緯度/經度嗎？</string>
 </resources>

@@ -376,7 +376,7 @@
   <string name="contributions_fragment">مشارکت‌ها</string>
   <string name="nearby_fragment">در نزدیکی</string>
   <string name="notifications">آگاه‌سازی‌ها</string>
-  <string name="read_notifications">اعلان‌ها (بایگانی‌شده)</string>
+  <string name="read_notifications" fuzzy="true">اعلان‌ها (بایگانی‌شده)</string>
   <string name="display_nearby_notification">نمایش اعلان اطراف</string>
   <string name="no_close_nearby">هیچ‌ مکان نزدیکی به شما یافته نشد</string>
   <string name="list_sheet">فهرست</string>
@@ -453,8 +453,8 @@
   <string name="no_image_reverted">تصویر برگردانده نشد</string>
   <string name="no_image_uploaded">هیچ تصویری بارگذاری نشد</string>
   <string name="no_notification">شما هیچ اعلان خوانده‌نشده‌ای ندارید</string>
-  <string name="no_read_notification">شما هیچ پیغام بایگانی شده‌ای ندارید</string>
-  <string name="menu_option_read">نمایش بایگانی‌شده</string>
+  <string name="no_read_notification" fuzzy="true">شما هیچ پیغام بایگانی شده‌ای ندارید</string>
+  <string name="menu_option_read" fuzzy="true">نمایش بایگانی‌شده</string>
   <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
   <string name="image_chooser_title">انتخاب تصویر برای بارگذاری</string>
   <string name="please_wait">لطفاً صبر کنید...</string>

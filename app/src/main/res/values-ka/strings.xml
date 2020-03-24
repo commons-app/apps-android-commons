@@ -306,7 +306,7 @@
   <string name="contributions_fragment">წვლილი</string>
   <string name="nearby_fragment">ახლოს</string>
   <string name="notifications">შეტყობინებები</string>
-  <string name="read_notifications">შეტყობინებები (არქივი)</string>
+  <string name="read_notifications" fuzzy="true">შეტყობინებები (არქივი)</string>
   <string name="list_sheet">სია</string>
   <string name="storage_permission">მეხსიერების ნებართვა</string>
   <string name="step_count">ნაბიჯი %1$d %2$d-დან</string>

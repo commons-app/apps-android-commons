@@ -378,7 +378,7 @@
   <string name="contributions_fragment">Contribuții</string>
   <string name="nearby_fragment">În apropiere</string>
   <string name="notifications">Notificări</string>
-  <string name="read_notifications">Notificări (arhivate)</string>
+  <string name="read_notifications" fuzzy="true">Notificări (arhivate)</string>
   <string name="display_nearby_notification">Afișați notificarea din apropiere</string>
   <string name="display_nearby_notification_summary">Apăsați aici pentru a vedea cel mai apropiat loc care are nevoie de imagini</string>
   <string name="no_close_nearby">Nu există locuri apropiate găsite în apropierea dvs.</string>

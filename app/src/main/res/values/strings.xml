@@ -627,5 +627,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="recommend_high_accuracy_mode">For best results, choose the High Accuracy mode.</string>
   <string name="ask_to_turn_location_on">Turn on location?</string>
   <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
+  <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
 
 </resources>

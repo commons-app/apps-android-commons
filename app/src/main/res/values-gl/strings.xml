@@ -385,7 +385,7 @@
   <string name="contributions_fragment">Contribucións</string>
   <string name="nearby_fragment">Preto</string>
   <string name="notifications">Notificacións</string>
-  <string name="read_notifications">Notificacións (arquivadas)</string>
+  <string name="read_notifications" fuzzy="true">Notificacións (arquivadas)</string>
   <string name="display_nearby_notification">Amosar notificacións de proximidade</string>
   <string name="display_nearby_notification_summary">Prema aquí para ver o lugar máis preto que necesita fotos</string>
   <string name="no_close_nearby">Non se atoparon lugares preto de ti</string>
@@ -482,9 +482,9 @@
   <string name="no_image_reverted">Ningunha imaxe revertida</string>
   <string name="no_image_uploaded">Ningunha imaxe subida</string>
   <string name="no_notification">Non ten ningunha notificación sen ler</string>
-  <string name="no_read_notification">Non ten notificacións arquivadas</string>
+  <string name="no_read_notification" fuzzy="true">Non ten notificacións arquivadas</string>
   <string name="share_logs_using">Compartir os rexistros usando</string>
-  <string name="menu_option_read">Ver arquivadas</string>
+  <string name="menu_option_read" fuzzy="true">Ver arquivadas</string>
   <string name="menu_option_unread">Ver as non lidas</string>
   <string name="error_occurred_in_picking_images">Houbo un erro ó escoller as imaxes</string>
   <string name="image_chooser_title">Escoller imaxes a subir</string>

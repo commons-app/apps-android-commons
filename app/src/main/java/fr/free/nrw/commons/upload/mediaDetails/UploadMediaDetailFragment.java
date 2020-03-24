@@ -31,6 +31,7 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
 import fr.free.nrw.commons.upload.Title;
@@ -221,7 +222,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        uploadMediaDetailAdapter = new UploadMediaDetailAdapter();
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, ""));
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this::onEvent);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -300,12 +301,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         getString(R.string.upload_nearby_place_found_description),
                         place.getName()),
                 () -> {
-
-                },
-                () -> {
                     etTitle.setText(place.getName());
                     descriptions = new ArrayList<>(Arrays.asList(new UploadMediaDetail()));
                     setDescriptionsInAdapter(descriptions);
+                },
+                () -> {
+
                 });
     }
 
