@@ -287,29 +287,35 @@ public class UploadService extends HandlerService<Contribution> {
             showFailedNotification(contribution);
         } else {
             String canonicalFilename = "File:" + uploadResult.getFilename();
+            final String wikiDataEntityId = contribution.getWikiDataEntityId();
             Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
-                    contribution.getWikiDataEntityId());
+                wikiDataEntityId);
             // to perform upload of depictions we pass on depiction entityId of the selected depictions to the wikidataEditService
             final String p18Value = contribution.getP18Value();
+            final String wikiItemName = contribution.getWikiItemName();
             if (contribution.getDepictionsEntityIds() != null) {
                 for (String depictionEntityId : contribution.getDepictionsEntityIds()) {
-                    wikidataEditService.createClaimWithLogging(depictionEntityId, canonicalFilename,
-                        p18Value);
+                    wikidataEditService.createClaimWithLogging(depictionEntityId,
+                        wikiItemName, canonicalFilename, p18Value);
                 }
             }
-            wikidataEditService.createClaimWithLogging(contribution.getWikiDataEntityId(), canonicalFilename,
-                p18Value);
+            Timber.d("Contribution upload success. Initiating Wikidata edit for"
+                    + " entity id %s if necessary (if P18 is null). P18 value is %s",
+                wikiDataEntityId, p18Value);
+            wikidataEditService.createClaimWithLogging(
+                wikiDataEntityId, wikiItemName, canonicalFilename,p18Value);
+
             wikidataEditService.createLabelforWikidataEntity(canonicalFilename, contribution.getCaptions());
             contribution.setFilename(canonicalFilename);
             contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
             contribution.setState(Contribution.STATE_COMPLETED);
             contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatShort()
-                    .parse(uploadResult.getImageinfo().getTimestamp()));
+                .parse(uploadResult.getImageinfo().getTimestamp()));
             compositeDisposable.add(contributionDao
-                    .save(contribution)
-                    .subscribeOn(ioThreadScheduler)
-                    .observeOn(mainThreadScheduler)
-                    .subscribe());
+                .save(contribution)
+                .subscribeOn(ioThreadScheduler)
+                .observeOn(mainThreadScheduler)
+                .subscribe());
         }
     }
 
