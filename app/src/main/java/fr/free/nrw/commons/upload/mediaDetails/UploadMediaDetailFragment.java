@@ -167,7 +167,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private void initRecyclerView() {
         uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, ""));
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
-        uploadMediaDetailAdapter.setEventListener(this::onEvent);
+        uploadMediaDetailAdapter.setEventListener(this);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDescriptions.setAdapter(uploadMediaDetailAdapter);
     }
@@ -346,10 +346,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void onEvent(Boolean data) {
-        btnNext.setEnabled(data);
-        btnNext.setClickable(data);
-        btnNext.setAlpha(data ? 1.0f: 0.5f);
+    public void onPrimaryCaptionTextChange(boolean isNotEmpty) {
+        btnNext.setEnabled(isNotEmpty);
+        btnNext.setClickable(isNotEmpty);
+        btnNext.setAlpha(isNotEmpty ? 1.0f: 0.5f);
     }
 
 
