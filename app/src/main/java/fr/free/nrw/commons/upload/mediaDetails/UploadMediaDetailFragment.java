@@ -3,15 +3,10 @@ package fr.free.nrw.commons.upload.mediaDetails;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -24,7 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -34,7 +28,6 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
-import fr.free.nrw.commons.upload.Title;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
@@ -43,7 +36,6 @@ import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -66,8 +58,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatImageButton ibExpandCollapse;
     @BindView(R.id.ll_container_media_detail)
     LinearLayout llContainerMediaDetail;
-    @BindView(R.id.et_title)
-    EditText etTitle;
     @BindView(R.id.rv_descriptions)
     RecyclerView rvDescriptions;
     @BindView(R.id.backgroundImage)
@@ -94,7 +84,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private String source;
     private Place place;
 
-    private Title title;
     private boolean isExpanded = true;
 
     private UploadMediaDetailFragmentCallback callback;
@@ -131,24 +120,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                 callback.getTotalNumberOfSteps()));
-        title = new Title();
         initRecyclerView();
         initPresenter();
-        Disposable disposable = RxTextView.textChanges(etTitle)
-                .subscribe(text -> {
-                    if (!TextUtils.isEmpty(text)) {
-                        btnNext.setEnabled(true);
-                        btnNext.setClickable(true);
-                        btnNext.setAlpha(1.0f);
-                        title.setTitleText(text.toString());
-                        uploadItem.setTitle(title);
-                    } else {
-                        btnNext.setAlpha(0.5f);
-                        btnNext.setEnabled(false);
-                        btnNext.setClickable(false);
-                    }
-                });
-        compositeDisposable.add(disposable);
         presenter.receiveImage(uploadableFile, source, place);
 
         if (callback.getIndexInViewFlipper(this) == 0) {
@@ -168,36 +141,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         attachImageViewScaleChangeListener();
 
-        addEtTitleTouchListener();
-    }
-
-    /**
-     * Handles the drawable click listener for Edit Text
-     */
-    private void addEtTitleTouchListener() {
-        etTitle.setOnTouchListener((v, event) -> {
-            //2 is for drawable right
-            float twelveDpInPixels = convertDpToPixel(12, getContext());
-            if (event.getAction() == MotionEvent.ACTION_UP && etTitle.getCompoundDrawables() != null
-                    && etTitle.getCompoundDrawables().length > 2 && etTitle
-                    .getCompoundDrawables()[2].getBounds()
-                    .contains((int) (etTitle.getWidth() - (event.getX() + twelveDpInPixels)),
-                            (int) (event.getY() - twelveDpInPixels))) {
-                showInfoAlert(R.string.media_detail_title, R.string.title_info);
-                return true;
-            }
-            return false;
-        });
-    }
-
-    /**
-     * converts dp to pixel
-     * @param dp
-     * @param context
-     * @return
-     */
-    private float convertDpToPixel(float dp, Context context) {
-        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     /**
@@ -301,7 +244,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         getString(R.string.upload_nearby_place_found_description),
                         place.getName()),
                 () -> {
-                    etTitle.setText(place.getName());
                     descriptions = new ArrayList<>(Arrays.asList(new UploadMediaDetail()));
                     setDescriptionsInAdapter(descriptions);
                 },
@@ -368,8 +310,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void setTitleAndDescription(String title, List<UploadMediaDetail> uploadMediaDetails) {
-        etTitle.setText(title);
+    public void setCaptionsAndDescriptions(List<UploadMediaDetail> uploadMediaDetails) {
         setDescriptionsInAdapter(uploadMediaDetails);
     }
 

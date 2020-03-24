@@ -62,7 +62,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.init(position);
+        holder.bind(position);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             Timber.i("descItemEditText:" + descItemEditText);
         }
 
-        public void init(int position) {
+        public void bind(int position) {
             UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(position);
             Timber.d("UploadMediaDetail is " + uploadMediaDetail);
             captionItemEditText.setText(uploadMediaDetail.getCaptionText());

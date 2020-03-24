@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload
 
-import androidx.recyclerview.widget.RecyclerView
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.filepicker.UploadableFile
@@ -14,11 +13,12 @@ import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
-import org.mockito.*
 import org.mockito.ArgumentMatchers
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.verify
+import org.mockito.MockitoAnnotations
 import java.util.*
 
 
@@ -42,9 +42,6 @@ class UploadMediaPresenterTest {
 
     @Mock
     private lateinit var uploadItem: UploadModel.UploadItem
-
-    @Mock
-    private lateinit var title: Title
 
     @Mock
     private lateinit var uploadMediaDetails: List<UploadMediaDetail>
@@ -171,11 +168,9 @@ class UploadMediaPresenterTest {
         whenever(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
             .thenReturn(uploadItem)
         whenever(uploadItem.uploadMediaDetails).thenReturn(uploadMediaDetails)
-        whenever(uploadItem.title).thenReturn(title)
-        whenever(title.getTitleText()).thenReturn(ArgumentMatchers.anyString())
 
         uploadMediaPresenter.fetchPreviousTitleAndDescription(0)
-        verify(view).setTitleAndDescription(ArgumentMatchers.anyString(), ArgumentMatchers.any())
+        verify(view).setCaptionsAndDescriptions(ArgumentMatchers.any())
     }
 
     /**
