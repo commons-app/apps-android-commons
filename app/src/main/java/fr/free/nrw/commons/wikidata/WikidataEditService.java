@@ -50,7 +50,7 @@ public class WikidataEditService {
      * @param fileName name of the file we will upload
      * @param p18Value pic attribute of Wikidata item
      */
-    public void createClaimWithLogging(String wikidataEntityId, String fileName, @NonNull String p18Value) {
+    public void createClaimWithLogging(String wikidataEntityId, String wikiItemName, String fileName, @NonNull String p18Value) {
         if (wikidataEntityId == null) {
             Timber.d("Skipping creation of claim as Wikidata entity ID is null");
             return;
@@ -71,7 +71,7 @@ public class WikidataEditService {
             return;
         }
 
-        editWikidataProperty(wikidataEntityId, fileName);
+        editWikidataProperty(wikidataEntityId, wikiItemName, fileName);
     }
 
     /**
@@ -82,7 +82,7 @@ public class WikidataEditService {
      * @param fileName
      */
     @SuppressLint("CheckResult")
-    private void editWikidataProperty(String wikidataEntityId, String fileName) {
+    private void editWikidataProperty(String wikidataEntityId, String wikiItemName, String fileName) {
         Timber.d("Upload successful with wiki data entity id as %s", wikidataEntityId);
         Timber.d("Attempting to edit Wikidata property %s", wikidataEntityId);
 
@@ -98,18 +98,18 @@ public class WikidataEditService {
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(revisionId -> handleClaimResult(wikidataEntityId, String.valueOf(revisionId)), throwable -> {
+                .subscribe(revisionId -> handleClaimResult(wikidataEntityId, wikiItemName, String.valueOf(revisionId)), throwable -> {
                     Timber.e(throwable, "Error occurred while making claim");
                     ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
     }
 
-    private void handleClaimResult(String wikidataEntityId, String revisionId) {
+    private void handleClaimResult(String wikidataEntityId, String wikiItemName, String revisionId) {
         if (revisionId != null) {
             if (wikidataEditListener != null) {
                 wikidataEditListener.onSuccessfulWikidataEdit();
             }
-            showSuccessToast();
+            showSuccessToast(wikiItemName);
         } else {
             Timber.d("Unable to make wiki data edit for entity %s", wikidataEntityId);
             ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
@@ -119,10 +119,9 @@ public class WikidataEditService {
     /**
      * Show a success toast when the edit is made successfully
      */
-    private void showSuccessToast() {
-        String title = directKvStore.getString("Title", "");
+    private void showSuccessToast(String wikiItemName) {
         String successStringTemplate = context.getString(R.string.successful_wikidata_edit);
-        String successMessage = String.format(Locale.getDefault(), successStringTemplate, title);
+        String successMessage = String.format(Locale.getDefault(), successStringTemplate, wikiItemName);
         ViewUtil.showLongToast(context, successMessage);
     }
 

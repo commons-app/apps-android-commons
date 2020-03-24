@@ -68,6 +68,7 @@ public class  Contribution extends Media {
     public String decimalCoords;
     public boolean isMultiple;
     public String wikiDataEntityId;
+    public String wikiItemName;
     private String p18Value;
     public Uri contentProviderUri;
     public String dateCreatedSource;
@@ -112,6 +113,7 @@ public class  Contribution extends Media {
         state = in.readInt();
         transferred = in.readLong();
         isMultiple = in.readInt() == 1;
+        wikiItemName = in.readString();
     }
 
     @Override
@@ -122,6 +124,7 @@ public class  Contribution extends Media {
         parcel.writeInt(state);
         parcel.writeLong(transferred);
         parcel.writeInt(isMultiple ? 1 : 0);
+        parcel.writeString(wikiItemName);
     }
 
     public void setDateCreatedSource(String dateCreatedSource) {
@@ -263,6 +266,10 @@ public class  Contribution extends Media {
         return wikiDataEntityId;
     }
 
+    public String getWikiItemName() {
+        return wikiItemName;
+    }
+
     /**
      * When the corresponding wikidata entity is known as in case of nearby uploads, it can be set
      * using the setter method
@@ -270,6 +277,10 @@ public class  Contribution extends Media {
      */
     public void setWikiDataEntityId(String wikiDataEntityId) {
         this.wikiDataEntityId = wikiDataEntityId;
+    }
+
+    public void setWikiItemName(String wikiItemName) {
+        this.wikiItemName = wikiItemName;
     }
 
     public String getP18Value() {
