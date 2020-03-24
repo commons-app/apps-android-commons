@@ -37,19 +37,19 @@ class WikidataEditServiceTest {
 
     @Test
     fun noClaimsWhenEntityIdIsNull() {
-        wikidataEditService!!.createClaimWithLogging(null, "Test.jpg","")
+        wikidataEditService!!.createClaimWithLogging(null, null,"Test.jpg","")
         verifyZeroInteractions(wikidataClient!!)
     }
 
     @Test
     fun noClaimsWhenFileNameIsNull() {
-        wikidataEditService!!.createClaimWithLogging("Q1", null,"")
+        wikidataEditService!!.createClaimWithLogging("Q1", "Test", null,"")
         verifyZeroInteractions(wikidataClient!!)
     }
 
     @Test
     fun noClaimsWhenP18IsNotEmpty() {
-        wikidataEditService!!.createClaimWithLogging("Q1", "Test.jpg","Previous.jpg")
+        wikidataEditService!!.createClaimWithLogging("Q1", "Test","Test.jpg","Previous.jpg")
         verifyZeroInteractions(wikidataClient!!)
     }
 
@@ -57,7 +57,7 @@ class WikidataEditServiceTest {
     fun noClaimsWhenLocationIsNotCorrect() {
         `when`(directKvStore!!.getBoolean("Picture_Has_Correct_Location", true))
                 .thenReturn(false)
-        wikidataEditService!!.createClaimWithLogging("Q1", "Test.jpg","")
+        wikidataEditService!!.createClaimWithLogging("Q1", "","Test.jpg","")
         verifyZeroInteractions(wikidataClient!!)
     }
 
@@ -69,7 +69,7 @@ class WikidataEditServiceTest {
                 .thenReturn(Observable.just(1L))
         `when`(wikidataClient!!.addEditTag(anyLong(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
                 .thenReturn(Observable.just(mock(AddEditTagResponse::class.java)))
-        wikidataEditService!!.createClaimWithLogging("Q1", "Test.jpg","")
+        wikidataEditService!!.createClaimWithLogging("Q1", "Test","Test.jpg","")
         verify(wikidataClient!!, times(1))
                 .createClaim(ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
     }
