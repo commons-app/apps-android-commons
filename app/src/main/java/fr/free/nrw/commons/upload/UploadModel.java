@@ -243,7 +243,6 @@ public class UploadModel {
                 final String createdTimestampSource) {
             this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
-            uploadMediaDetails = Collections.singletonList(new UploadMediaDetail());
             uploadMediaDetails = new ArrayList<>(Arrays.asList(new UploadMediaDetail()));
             this.place = place;
             this.mediaUri = mediaUri;
