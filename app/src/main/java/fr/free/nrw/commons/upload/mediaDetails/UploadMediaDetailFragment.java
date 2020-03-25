@@ -354,8 +354,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 String.format(Locale.getDefault(),
                         uploadTitleFormat,
                         uploadItem.getFileName()),
-                getString(R.string.cancel),
                 getString(R.string.upload),
+                getString(R.string.cancel),
                 () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     onNextButtonClicked();
@@ -370,8 +370,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             DialogUtil.showAlertDialog(getActivity(),
                     getString(R.string.upload_problem_image),
                     errorMessageForResult,
-                    getString(R.string.cancel),
                     getString(R.string.upload),
+                    getString(R.string.cancel),
                 () -> {
                         uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                         onNextButtonClicked();
