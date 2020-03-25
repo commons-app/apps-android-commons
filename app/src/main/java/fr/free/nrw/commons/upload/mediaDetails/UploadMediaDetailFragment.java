@@ -339,10 +339,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void showDuplicatePicturePopup() {
         String uploadTitleFormat = getString(R.string.upload_title_duplicate);
         DialogUtil.showAlertDialog(getActivity(),
-                getString(R.string.warning),
+                getString(R.string.duplicate_image_found),
                 String.format(Locale.getDefault(),
                         uploadTitleFormat,
                         uploadItem.getFileName()),
+                getString(R.string.upload),
+                getString(R.string.cancel),
                 () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     onNextButtonClicked();
@@ -355,9 +357,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         String errorMessageForResult = getErrorMessageForResult(getContext(), errorCode);
         if (!StringUtils.isBlank(errorMessageForResult)) {
             DialogUtil.showAlertDialog(getActivity(),
-                    getString(R.string.warning),
+                    getString(R.string.upload_problem_image),
                     errorMessageForResult,
-                    () -> {
+                    getString(R.string.upload),
+                    getString(R.string.cancel),
+                () -> {
                         uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                         onNextButtonClicked();
                     },
