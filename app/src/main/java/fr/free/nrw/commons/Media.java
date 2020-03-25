@@ -3,18 +3,12 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.gallery.ExtMetadata;
-import org.wikipedia.gallery.ImageInfo;
-import org.wikipedia.page.PageTitle;
-
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
+import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,10 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
-import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.gallery.ExtMetadata;
+import org.wikipedia.gallery.ImageInfo;
+import org.wikipedia.page.PageTitle;
 
 @Entity
 public class Media implements Parcelable {
@@ -90,7 +85,7 @@ public class Media implements Parcelable {
      * Ex: key = "en", value: "<caption in short in English>"
      *     key = "de" , value: "<caption in german>"
      */
-    public HashMap<String, String> captions;
+    public Map<String, String> captions;
     public HashMap<String, String> tags = new HashMap<>();
     @Nullable public  LatLng coordinates;
 
@@ -126,7 +121,7 @@ public class Media implements Parcelable {
      * @param dateUploaded Media date uploaded
      * @param creator Media creator
      */
-    public Media(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description,
+    public Media(Uri localUri, String imageUrl, String filename, Map<String, String> captions, String description,
                  long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this();
         this.localUri = localUri;
@@ -395,7 +390,7 @@ public class Media implements Parcelable {
      *
      * returns list of captions stored in hashmap
      */
-    public HashMap<String, String> getCaptions() {
+    public Map<String, String> getCaptions() {
         return captions;
     }
 

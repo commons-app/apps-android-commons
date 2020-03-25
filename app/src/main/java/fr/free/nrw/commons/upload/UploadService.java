@@ -13,6 +13,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -35,18 +36,8 @@ import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
-import io.reactivex.SingleObserver;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.inject.Inject;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -275,53 +266,57 @@ public class UploadService extends HandlerService<Contribution> {
                                 uploadStash.getFilekey());
                     }
                 })
-                .subscribe(uploadResult -> {
-                    Timber.d("Stash upload response 2 is %s", uploadResult.toString());
-
-                    notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
-
-                    String resultStatus = uploadResult.getResult();
-                    if (!resultStatus.equals("Success")) {
-                        Timber.d("Contribution upload failed. Wikidata entity won't be edited");
-                        showFailedNotification(contribution);
-                    } else {
-                        String canonicalFilename = "File:" + uploadResult.getFilename();
-                        final String wikiDataEntityId = contribution.getWikiDataEntityId();
-                        Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
-                            wikiDataEntityId);
-                        // to perform upload of depictions we pass on depiction entityId of the selected depictions to the wikidataEditService
-                        final String p18Value = contribution.getP18Value();
-                        final String wikiItemName = contribution.getWikiItemName();
-                        if (contribution.getDepictionsEntityIds() != null) {
-                            for (String depictionEntityId : contribution.getDepictionsEntityIds()) {
-                                wikidataEditService.createClaimWithLogging(depictionEntityId,
-                                    wikiItemName, canonicalFilename, p18Value);
-                            }
-                        }
-                        Timber.d("Contribution upload success. Initiating Wikidata edit for"
-                                + " entity id %s if necessary (if P18 is null). P18 value is %s",
-                            wikiDataEntityId, p18Value);
-                        wikidataEditService.createClaimWithLogging(
-                            wikiDataEntityId, wikiItemName, canonicalFilename,p18Value);
-
-                        wikidataEditService.createLabelforWikidataEntity(
-                            wikiDataEntityId, canonicalFilename, contribution.getCaptions());
-                        contribution.setFilename(canonicalFilename);
-                        contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
-                        contribution.setState(Contribution.STATE_COMPLETED);
-                        contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatShort()
-                                .parse(uploadResult.getImageinfo().getTimestamp()));
-                        compositeDisposable.add(contributionDao
-                                .save(contribution)
-                                .subscribeOn(ioThreadScheduler)
-                                .observeOn(mainThreadScheduler)
-                                .subscribe());
-                    }
-                }, throwable -> {
+                .subscribe(
+                    uploadResult -> onUpload(contribution, notificationTag, uploadResult),
+                    throwable -> {
                     Timber.w(throwable, "Exception during upload");
                     notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
                     showFailedNotification(contribution);
                 });
+    }
+
+    private void onUpload(Contribution contribution, String notificationTag,
+        UploadResult uploadResult) throws ParseException {
+        Timber.d("Stash upload response 2 is %s", uploadResult.toString());
+
+        notificationManager.cancel(notificationTag, NOTIFICATION_UPLOAD_IN_PROGRESS);
+
+        String resultStatus = uploadResult.getResult();
+        if (!resultStatus.equals("Success")) {
+            Timber.d("Contribution upload failed. Wikidata entity won't be edited");
+            showFailedNotification(contribution);
+        } else {
+            String canonicalFilename = "File:" + uploadResult.getFilename();
+            final String wikiDataEntityId = contribution.getWikiDataEntityId();
+            Timber.d("Contribution upload success. Initiating Wikidata edit for entity id %s",
+                wikiDataEntityId);
+            // to perform upload of depictions we pass on depiction entityId of the selected depictions to the wikidataEditService
+            final String p18Value = contribution.getP18Value();
+            final String wikiItemName = contribution.getWikiItemName();
+            if (contribution.getDepictionsEntityIds() != null) {
+                for (String depictionEntityId : contribution.getDepictionsEntityIds()) {
+                    wikidataEditService.createClaimWithLogging(depictionEntityId,
+                        wikiItemName, canonicalFilename, p18Value);
+                }
+            }
+            Timber.d("Contribution upload success. Initiating Wikidata edit for"
+                    + " entity id %s if necessary (if P18 is null). P18 value is %s",
+                wikiDataEntityId, p18Value);
+            wikidataEditService.createClaimWithLogging(
+                wikiDataEntityId, wikiItemName, canonicalFilename,p18Value);
+
+            wikidataEditService.createLabelforWikidataEntity(canonicalFilename, contribution.getCaptions());
+            contribution.setFilename(canonicalFilename);
+            contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
+            contribution.setState(Contribution.STATE_COMPLETED);
+            contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatShort()
+                .parse(uploadResult.getImageinfo().getTimestamp()));
+            compositeDisposable.add(contributionDao
+                .save(contribution)
+                .subscribeOn(ioThreadScheduler)
+                .observeOn(mainThreadScheduler)
+                .subscribe());
+        }
     }
 
     @SuppressLint("StringFormatInvalid")

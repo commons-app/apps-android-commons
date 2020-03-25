@@ -1,24 +1,8 @@
 package fr.free.nrw.commons.di;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
-
 import com.google.gson.Gson;
-
-import org.wikipedia.csrf.CsrfTokenClient;
-import org.wikipedia.dataclient.Service;
-import org.wikipedia.dataclient.ServiceFactory;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.json.GsonUtil;
-import org.wikipedia.login.LoginClient;
-
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
@@ -32,14 +16,25 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
 import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
-import fr.free.nrw.commons.wikidata.WikidataInterface;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
 import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
+import fr.free.nrw.commons.wikidata.WikidataInterface;
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
+import org.wikipedia.csrf.CsrfTokenClient;
+import org.wikipedia.dataclient.Service;
+import org.wikipedia.dataclient.ServiceFactory;
+import org.wikipedia.dataclient.WikiSite;
+import org.wikipedia.json.GsonUtil;
+import org.wikipedia.login.LoginClient;
 import timber.log.Timber;
 
 @Module
@@ -76,7 +71,7 @@ public class NetworkingModule {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
             Timber.tag("OkHttp").v(message);
         });
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpLoggingInterceptor.level(BuildConfig.DEBUG ? Level.BODY: HttpLoggingInterceptor.Level.BASIC);
         return httpLoggingInterceptor;
     }
 

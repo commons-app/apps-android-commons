@@ -32,14 +32,12 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.upload.Description;
-//import fr.free.nrw.commons.upload.DescriptionsAdapter;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
-import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;
 import fr.free.nrw.commons.upload.Title;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.upload.UploadModel;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -54,6 +52,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
+
+//import fr.free.nrw.commons.upload.DescriptionsAdapter;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
@@ -282,10 +282,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onImageProcessed(UploadItem uploadItem, Place place) {
         this.uploadItem = uploadItem;
-        if (uploadItem.getFileName() != null) {
-            setDescriptionsInAdapter(uploadItem.getUploadMediaDetails());
-        }
-
         descriptions = uploadItem.getUploadMediaDetails();
         photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
         setDescriptionsInAdapter(descriptions);
@@ -306,10 +302,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         place.getName()),
                 () -> {
                     etTitle.setText(place.getName());
-                    UploadMediaDetail description = new UploadMediaDetail();
-                    description.setLanguageCode("en");
-                    description.setDescriptionText(place.getLongDescription());
-                    descriptions = Arrays.asList(description);
+                    descriptions = new ArrayList<>(Arrays.asList(new UploadMediaDetail()));
                     setDescriptionsInAdapter(descriptions);
                 },
                 () -> {
@@ -431,13 +424,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     private void setDescriptionsInAdapter(List<UploadMediaDetail> uploadMediaDetails){
-        if(uploadMediaDetails==null){
-            uploadMediaDetails=new ArrayList<>();
-        }
-
-        if(uploadMediaDetails.size()==0){
-            uploadMediaDetails.add(new UploadMediaDetail());
-        }
         uploadMediaDetailAdapter.setItems(uploadMediaDetails);
     }
 }

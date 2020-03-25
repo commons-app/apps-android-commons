@@ -10,7 +10,6 @@ import com.google.gson.JsonObject;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -26,7 +25,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import org.wikipedia.csrf.CsrfTokenClient;
-import org.wikipedia.dataclient.Service;
 import timber.log.Timber;
 
 /**
@@ -46,42 +44,31 @@ public class WikidataEditService {
     private final CaptionInterface captionInterface;
     private final WikiBaseClient wikiBaseClient;
     private final WikidataClient wikidataClient;
-    private final MediaClient mediaClient;
     private final CsrfTokenClient csrfTokenClient;
-    private final Service service;
 
     @Inject
-    public WikidataEditService(Context context,
-                               WikidataEditListener wikidataEditListener,
-                               MediaClient mediaClient,
-                               @Named("default_preferences") JsonKvStore directKvStore,
-                               WikiBaseClient wikiBaseClient,
-                               CaptionInterface captionInterface,
-                               WikidataClient wikidataClient,
-                               @Named("commons-csrf") CsrfTokenClient csrfTokenClient,
-                               @Named("commons-service") Service service) {
+    public WikidataEditService(final Context context,
+      final WikidataEditListener wikidataEditListener,
+      @Named("default_preferences") final JsonKvStore directKvStore,
+      final WikiBaseClient wikiBaseClient,
+      final CaptionInterface captionInterface,
+      final WikidataClient wikidataClient,
+      @Named("commons-csrf") final CsrfTokenClient csrfTokenClient) {
         this.context = context;
         this.wikidataEditListener = wikidataEditListener;
         this.directKvStore = directKvStore;
         this.captionInterface = captionInterface;
         this.wikiBaseClient = wikiBaseClient;
-        this.mediaClient = mediaClient;
         this.wikidataClient = wikidataClient;
         this.csrfTokenClient = csrfTokenClient;
-        this.service = service;
-    }
+  }
 
     /**
      * Create a P18 claim and log the edit with custom tag
-<<<<<<< HEAD
      *
-     * @param wikidataEntityId
-     * @param fileName
-=======
      * @param wikidataEntityId a unique id of each Wikidata items
      * @param fileName name of the file we will upload
      * @param p18Value pic attribute of Wikidata item
->>>>>>> origin/master
      */
     public void createClaimWithLogging(String wikidataEntityId, String wikiItemName, String fileName, String p18Value) {
         if (wikidataEntityId == null) {
@@ -104,8 +91,8 @@ public class WikidataEditService {
             return;
         }
 
-        editWikidataProperty(wikidataEntityId, wikiItemName, fileName);
-        //editWikiBaseDepictsProperty(wikidataEntityId, fileName);
+        editWikidataProperty(wikidataEntityId, wikiItemName, fileName);;
+        editWikiBaseDepictsProperty(wikidataEntityId, fileName);
     }
 
 
@@ -122,7 +109,7 @@ public class WikidataEditService {
         Timber.d("Upload successful with wiki data entity id as %s", wikidataEntityId);
         Timber.d("Attempting to edit Wikidata property %s", wikidataEntityId);
 
-        String propertyValue = getFileName(fileName);
+        final String propertyValue = getFileName(fileName);
 
         Timber.d("Entity id is %s and property value is %s", wikidataEntityId, propertyValue);
         wikidataClient.createClaim(wikidataEntityId, propertyValue)
@@ -148,7 +135,7 @@ public class WikidataEditService {
      * @param fileName
      */
     @SuppressLint("CheckResult")
-    private void editWikiBaseDepictsProperty(String wikidataEntityId, String fileName) {
+    private void editWikiBaseDepictsProperty(final String wikidataEntityId, final String fileName) {
         wikiBaseClient.getFileEntityId(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -166,37 +153,37 @@ public class WikidataEditService {
     }
 
     @SuppressLint("CheckResult")
-    private void addDepictsProperty(String entityId, String fileEntityId) {
+    private void addDepictsProperty(String entityId, final String fileEntityId) {
         if (ConfigUtils.isBetaFlavour()) {
             entityId = "Q10"; // Wikipedia:Sandbox (Q10)
         }
 
-        JsonObject value = new JsonObject();
+        final JsonObject value = new JsonObject();
         value.addProperty("entity-type", "item");
         value.addProperty("numeric-id", entityId.replace("Q", ""));
         value.addProperty("id", entityId);
 
-        JsonObject dataValue = new JsonObject();
+        final JsonObject dataValue = new JsonObject();
         dataValue.add("value", value);
         dataValue.addProperty("type", "wikibase-entityid");
 
-        JsonObject mainSnak = new JsonObject();
+        final JsonObject mainSnak = new JsonObject();
         mainSnak.addProperty("snaktype", "value");
         mainSnak.addProperty("property", BuildConfig.DEPICTS_PROPERTY);
         mainSnak.add("datavalue", dataValue);
 
-        JsonObject claim = new JsonObject();
+        final JsonObject claim = new JsonObject();
         claim.add("mainsnak", mainSnak);
         claim.addProperty("type", "statement");
         claim.addProperty("rank", "preferred");
 
-        JsonArray claims = new JsonArray();
+        final JsonArray claims = new JsonArray();
         claims.add(claim);
 
-        JsonObject jsonData = new JsonObject();
+        final JsonObject jsonData = new JsonObject();
         jsonData.add("claims", claims);
 
-        String data = jsonData.toString();
+        final String data = jsonData.toString();
 
         Observable.defer((Callable<ObservableSource<Boolean>>) () ->
                 wikiBaseClient.postEditEntity(PAGE_ID_PREFIX + fileEntityId, data))
@@ -253,18 +240,19 @@ public class WikidataEditService {
      * Adding captions as labels after image is successfully uploaded
      */
     @SuppressLint("CheckResult")
-    public void createLabelforWikidataEntity(String wikiDataEntityId, String fileName, Map<String, String> captions) {
+    public void createLabelforWikidataEntity(final String fileName,
+        final Map<String, String> captions) {
         Observable.fromCallable(() -> wikiBaseClient.getFileEntityId(fileName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
-                        for (Map.Entry<String, String> entry : captions.entrySet()) {
-                            Map<String, String> caption = new HashMap<>();
+                        for (final Map.Entry<String, String> entry : captions.entrySet()) {
+                            final Map<String, String> caption = new HashMap<>();
                             caption.put(entry.getKey(), entry.getValue());
                             try {
-                                wikidataAddLabels(wikiDataEntityId, fileEntityId.toString(), caption);
-                            } catch (Throwable throwable) {
+                                wikidataAddLabels(fileEntityId.toString(), caption);
+                            } catch (final Throwable throwable) {
                                 throwable.printStackTrace();
                             }
                         }
@@ -280,13 +268,12 @@ public class WikidataEditService {
     /**
      * Adds label to Wikidata using the fileEntityId and the edit token, obtained from csrfTokenClient
      *
-     * @param wikiDataEntityId entityId for the current contribution
      * @param fileEntityId
      * @param caption
      */
 
     @SuppressLint("CheckResult")
-    private void wikidataAddLabels(String wikiDataEntityId, String fileEntityId, Map<String, String> caption) throws Throwable {
+    private void wikidataAddLabels(final String fileEntityId, final Map<String, String> caption) {
         Observable.fromCallable(() -> {
             try {
                 return csrfTokenClient.getTokenBlocking();

@@ -1,29 +1,25 @@
 package fr.free.nrw.commons.contributions;
 
+import static java.lang.annotation.RetentionPolicy.SOURCE;
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.lang.annotation.Retention;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ConfigUtils;
-
-import static java.lang.annotation.RetentionPolicy.SOURCE;
+import java.lang.annotation.Retention;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
 @Entity(tableName = "contribution")
 public class  Contribution extends Media {
@@ -83,7 +79,7 @@ public class  Contribution extends Media {
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
-                        String source, HashMap<String, String> captions, String description, String creator, boolean isMultiple,
+                        String source, Map<String, String> captions, String description, String creator, boolean isMultiple,
                         int width, int height, String license) {
         super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.contentUri = contentUri;
@@ -97,7 +93,7 @@ public class  Contribution extends Media {
         this.dateCreatedSource = "";
     }
 
-    public Contribution(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description, long dataLength,
+    public Contribution(Uri localUri, String imageUrl, String filename, Map<String, String> captions, String description, long dataLength,
                         Date dateCreated, Date dateUploaded, String creator, String editSummary, ArrayList<String> depictionsEntityIds, String decimalCoords) {
         super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.decimalCoords = decimalCoords;
@@ -106,7 +102,7 @@ public class  Contribution extends Media {
         this.depictionsEntityIds = depictionsEntityIds;
     }
 
-    public Contribution(Uri localUri, String imageUrl, String filename, HashMap<String, String> captions, String description, long dataLength,
+    public Contribution(Uri localUri, String imageUrl, String filename, Map<String, String> captions, String description, long dataLength,
                         Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords, int state) {
         super(localUri, imageUrl, filename, captions, description, dataLength, dateCreated, dateUploaded, creator);
         this.decimalCoords = decimalCoords;
