@@ -175,7 +175,9 @@
   <string name="title_activity_nearby">Околни места</string>
   <string name="no_nearby">Не најдов околни места</string>
   <string name="warning">Предупредување</string>
+  <string name="duplicate_image_found">Пронајдена дуплирана слика</string>
   <string name="upload_image_duplicate">Податотекава веќе постои на Ризницата. Дали сигурно сакате да продолжите?</string>
+  <string name="upload">Подигни</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="media_detail_title">Наслов</string>
@@ -249,6 +251,7 @@
   <string name="upload_problem_different_geolocation">Оваа слика е направена на друго место.</string>
   <string name="upload_problem_fbmd">Подигајте само слики кои самите сте ги направиле. Не подигајте слики пронајдени на туѓи профили на Фејсбук.</string>
   <string name="upload_problem_do_you_continue">Дали сепак сакате да ја подигнете?</string>
+  <string name="upload_problem_image">Пронајдени проблеми во сликата</string>
   <string name="internet_downloaded">Подигајте само слики кои самите сте ги направиле. Не подигајте слики што сте ги нашле некаде на семрежјето.</string>
   <string name="give_permission">Дај дозвола</string>
   <string name="use_external_storage">Користи надворешен склад</string>

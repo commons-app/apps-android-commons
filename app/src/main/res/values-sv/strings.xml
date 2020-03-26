@@ -179,7 +179,9 @@
   <string name="title_activity_nearby">Platser i närheten</string>
   <string name="no_nearby">Inga platser i närheten hittades</string>
   <string name="warning">Varning</string>
+  <string name="duplicate_image_found">Dubblettbild hittades</string>
   <string name="upload_image_duplicate">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
+  <string name="upload">Ladda upp</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="media_detail_title">Titel</string>
@@ -253,6 +255,7 @@
   <string name="upload_problem_different_geolocation">Bilden togs på en annan plats.</string>
   <string name="upload_problem_fbmd">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har hittat på andra personers Facebook-konton.</string>
   <string name="upload_problem_do_you_continue">Vill du fortfarande ladda upp denna bild?</string>
+  <string name="upload_problem_image">Problem hittades i bilden</string>
   <string name="internet_downloaded">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har laddat ned från Internet.</string>
   <string name="give_permission">Ge behörighet</string>
   <string name="use_external_storage">Använd extern lagring</string>
@@ -384,7 +387,7 @@
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I närheten</string>
   <string name="notifications">Aviseringar</string>
-  <string name="read_notifications" fuzzy="true">Aviseringar (arkiverade)</string>
+  <string name="read_notifications">Aviseringar (lästa)</string>
   <string name="display_nearby_notification">Visa avisering för i närheten</string>
   <string name="display_nearby_notification_summary">Tryck här för att se den närmaste platsen som behöver bilder</string>
   <string name="no_close_nearby">Inga platser i närheten hittades som är nära dig</string>
@@ -498,9 +501,9 @@
   <string name="no_image_reverted">Inga bilder återställdes</string>
   <string name="no_image_uploaded">Inga bilder laddades upp</string>
   <string name="no_notification">Du har inga olästa aviseringar</string>
-  <string name="no_read_notification" fuzzy="true">Du har inga arkiverade aviseringar</string>
+  <string name="no_read_notification">Du har inga lästa aviseringar</string>
   <string name="share_logs_using">Dela loggar med</string>
-  <string name="menu_option_read" fuzzy="true">Visa arkiverade</string>
+  <string name="menu_option_read">Visa lästa</string>
   <string name="menu_option_unread">Visa olästa</string>
   <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
   <string name="image_chooser_title">Välj bilder att ladda upp</string>
@@ -569,7 +572,12 @@
   <string name="wallpaper_set_unsuccessfully">Någonting gick fel. Kunde inte ändra bakgrundsbild</string>
   <string name="setting_wallpaper_dialog_title">Ange som bakgrundsbild</string>
   <string name="setting_wallpaper_dialog_message">Anger som bakgrundsbild. Var god vänta…</string>
-  <string name="theme_default_name" fuzzy="true">Standard</string>
+  <string name="theme_default_name">Följ systemet</string>
   <string name="theme_dark_name">Mörkt</string>
   <string name="theme_light_name">Ljust</string>
+  <string name="cannot_open_location_settings">Misslyckades att öppna platsinställningar. Aktivera plats manuellt</string>
+  <string name="recommend_high_accuracy_mode">För bästa resultat väljer du alternativet \"Öka precisionen\".</string>
+  <string name="ask_to_turn_location_on">Aktivera plats?</string>
+  <string name="nearby_needs_location">I närheten behöver ha plats aktiverat för att fungera ordentligt</string>
+  <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
 </resources>

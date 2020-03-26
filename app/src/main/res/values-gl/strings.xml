@@ -102,8 +102,8 @@
   <string name="menu_about">Acerca de</string>
   <string name="about_license">A aplicación Wikimedia Commons é unha aplicación de código aberto creada e mantida polos cesionarios e voluntarios da comunidade de Wikimedia. A Fundación Wikimedia non está involucrada na creación, desenvolvemento ou mantemento da aplicación.</string>
   <string name="about_improve">Crear unha nova &lt;a href=\"%1$s\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Política de privacidade&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
+  <string name="about_privacy_policy">Política de privacidade</string>
+  <string name="about_credits">Créditos</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
   <string name="no_email_client">Non hai instalado ningún cliente de correo</string>
@@ -119,10 +119,10 @@
   <string name="media_upload_policy">Publicando esta imaxe, declaro que é da miña obra, que non contén material con dereitos de autor ou selfies e que se adhire ás &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licenza por defecto</string>
-  <string name="use_previous" fuzzy="true">Usar o título ou a descrición anterior</string>
+  <string name="use_previous">Usar o título e descrición anteriores</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
   <string name="allow_gps_summary">Obter a localización actual se a imaxe non está xeolocalizada, e xeolocaliza a imaxe con ela. Atención: Isto revelará a súa localización actual.</string>
-  <string name="preference_theme" fuzzy="true">Modo nocturno</string>
+  <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four"> Recoñecemento-CompartirIgual 4.0</string>
   <string name="license_name_cc_by_four">Recoñecemento 4.0</string>
   <string name="license_name_cc_by_sa"> Recoñecemento-CompartirIgual 3.0</string>
@@ -163,7 +163,7 @@
   <string name="welcome_copyright_subtext">Evite os materiais protexidos por dereitos de autoría que se atopen na internet, así como imaxes de pósters, portadas de libros etc.</string>
   <string name="welcome_final_text">Entende como vai?</string>
   <string name="welcome_final_button_text">Si!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Máis Información&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Máis Información</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Ningunha seleccionada</string>
@@ -265,7 +265,7 @@
   <string name="null_url">Errorǃ Nos se atopou a URL</string>
   <string name="nominate_deletion">Nomear para borrado</string>
   <string name="nominated_for_deletion">Esta imaxe foi nomeada para borrar.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Consulte a páxina web para ter máis para detalles&lt;/u&gt;</string>
+  <string name="nominated_see_more">Ver páxina web para máis detalles</string>
   <string name="nominating_file_for_deletion">Nomeando %1$d para borrado.</string>
   <string name="nominating_for_deletion_status">Nomeando ficheiro para borradoː %1$s</string>
   <string name="view_browser">Ver en navegador</string>
@@ -277,7 +277,7 @@
   <string name="copy_wikicode">Copiar o texto wiki ó portapapeis</string>
   <string name="wikicode_copied">Texto wiki copiado ó portapapeis</string>
   <string name="nearby_location_has_not_changed">A localización non cambiou.</string>
-  <string name="nearby_location_not_available" fuzzy="true">A localización non está dispoñible.</string>
+  <string name="nearby_location_not_available">A localización non está dispoñible. A identificación de sitios próximos pode non funcionar correctamente.</string>
   <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
   <string name="get_directions">OBTER DIRECCIÓNS</string>
   <string name="read_article">LER ARTIGO</string>
@@ -290,8 +290,8 @@
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
   <string name="nearby_commons">COMMONS</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Avalíenos&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">Avalíenos</string>
+  <string name="about_faq">FAQ</string>
   <string name="welcome_skip_button">Saltar titorial</string>
   <string name="no_internet">Internet non dispoñible</string>
   <string name="internet_established">Internet dispoñible</string>
@@ -299,7 +299,7 @@
   <string name="error_review">Houbo un erro ó recuperar a imaxe a revisar. Prema en refrescar para tentalo de novo.</string>
   <string name="error_review_categories">Houbo un erro ó obter as categorías de imaxes a revisar. Prema en refrescar para tentalo de novo.</string>
   <string name="no_notifications">Non se atopou ningunha notificación</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Traducir&lt;/u&gt;</string>
+  <string name="about_translate">Traducir</string>
   <string name="about_translate_title">Linguas</string>
   <string name="about_translate_message">Seleccione a lingua para a que quere enviar as traducións</string>
   <string name="about_translate_proceed">Proceder</string>
@@ -385,7 +385,7 @@
   <string name="contributions_fragment">Contribucións</string>
   <string name="nearby_fragment">Preto</string>
   <string name="notifications">Notificacións</string>
-  <string name="read_notifications" fuzzy="true">Notificacións (arquivadas)</string>
+  <string name="read_notifications">Notificacións (lidas)</string>
   <string name="display_nearby_notification">Amosar notificacións de proximidade</string>
   <string name="display_nearby_notification_summary">Prema aquí para ver o lugar máis preto que necesita fotos</string>
   <string name="no_close_nearby">Non se atoparon lugares preto de ti</string>
@@ -484,7 +484,7 @@
   <string name="no_notification">Non ten ningunha notificación sen ler</string>
   <string name="no_read_notification" fuzzy="true">Non ten notificacións arquivadas</string>
   <string name="share_logs_using">Compartir os rexistros usando</string>
-  <string name="menu_option_read" fuzzy="true">Ver arquivadas</string>
+  <string name="menu_option_read">Ver lidas</string>
   <string name="menu_option_unread">Ver as non lidas</string>
   <string name="error_occurred_in_picking_images">Houbo un erro ó escoller as imaxes</string>
   <string name="image_chooser_title">Escoller imaxes a subir</string>
@@ -501,6 +501,7 @@
   <string name="image_info">Información da imaxe</string>
   <string name="no_categories_found">Non se atoparon categorías</string>
   <string name="upload_cancelled">Cancelouse a carga</string>
+  <string name="delete_helper_show_deletion_title">Nomeando para borrado</string>
   <string name="delete_helper_show_deletion_title_success">Todo correcto</string>
   <string name="delete_helper_show_deletion_title_failed">Fallou</string>
   <string name="delete_helper_ask_spam_selfie">Un autorretrato</string>
@@ -512,4 +513,17 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_reason_copyright_other">Outro</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
+  <string name="share_image_via">Compartir imaxe vía</string>
+  <string name="account_created">Conta creada!</string>
+  <string name="place_state_exists">Existe</string>
+  <string name="place_state_needs_photo">Precisa fotografía</string>
+  <string name="nearby_search_hint">Ponte, museo, hotel etc.</string>
+  <string name="title_app_shortcut_explore">Explorar</string>
+  <string name="title_app_shortcut_bookmark">Favoritos</string>
+  <string name="title_app_shortcut_setting">Axustes</string>
+  <string name="remove_bookmark">Eliminado de favoritos</string>
+  <string name="add_bookmark">Engadido a favoritos</string>
+  <string name="setting_wallpaper_dialog_title">Definir como fondo de pantalla</string>
+  <string name="theme_dark_name">Escuro</string>
+  <string name="theme_light_name">Claro</string>
 </resources>
