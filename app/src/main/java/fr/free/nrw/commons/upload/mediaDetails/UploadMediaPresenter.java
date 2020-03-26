@@ -151,7 +151,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     public void fetchPreviousTitleAndDescription(int indexInViewFlipper) {
         UploadItem previousUploadItem = repository.getPreviousUploadItem(indexInViewFlipper);
         if (null != previousUploadItem) {
-            view.setTitleAndDescription(previousUploadItem.getTitle().getTitleText(), previousUploadItem.getUploadMediaDetails());
+            view.setCaptionsAndDescriptions(previousUploadItem.getUploadMediaDetails());
         } else {
             view.showMessage(R.string.previous_image_title_description_not_found, R.color.color_error);
         }

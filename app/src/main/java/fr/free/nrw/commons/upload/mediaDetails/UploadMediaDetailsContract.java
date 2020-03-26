@@ -36,7 +36,7 @@ public interface UploadMediaDetailsContract {
 
         void showMapWithImageCoordinates(boolean shouldShow);
 
-        void setTitleAndDescription(String title, List<UploadMediaDetail> uploadMediaDetails);
+        void setCaptionsAndDescriptions(List<UploadMediaDetail> uploadMediaDetails);
     }
 
     interface UserActionListener extends BasePresenter<View> {

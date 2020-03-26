@@ -62,7 +62,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.init(position);
+        holder.bind(position);
     }
 
     @Override
@@ -102,14 +102,18 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             Timber.i("descItemEditText:" + descItemEditText);
         }
 
-        public void init(int position) {
+        public void bind(int position) {
             UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(position);
             Timber.d("UploadMediaDetail is " + uploadMediaDetail);
             captionItemEditText.setText(uploadMediaDetail.getCaptionText());
             descItemEditText.setText(uploadMediaDetail.getDescriptionText());
 
             captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
-                value -> eventListener.onEvent(value.length() != 0)) );
+                value -> {
+                    if (position == 0) {
+                        eventListener.onPrimaryCaptionTextChange(value.length() != 0);
+                    }
+                }));
 
             if (position == 0) {
                 captionItemEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getInfoIcon(),
@@ -231,7 +235,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     }
 
     public interface EventListener {
-        void onEvent(Boolean data);
+        void onPrimaryCaptionTextChange(boolean isNotEmpty);
     }
 
     /**

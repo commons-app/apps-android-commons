@@ -119,7 +119,6 @@ public class UploadModel {
                 uploadableFile.getMimeType(context), source, imageCoordinates, place, fileCreatedDate,
                 createdTimestampSource);
         if (place != null) {
-            uploadItem.title.setTitleText(place.name);
             uploadItem.getUploadMediaDetails().set(0, new UploadMediaDetail(place));
         }
         if (!items.contains(uploadItem)) {
@@ -207,7 +206,6 @@ public class UploadModel {
     public void updateUploadItem(final int index, final UploadItem uploadItem) {
         final UploadItem uploadItem1 = items.get(index);
         uploadItem1.setMediaDetails(uploadItem.uploadMediaDetails);
-        uploadItem1.setTitle(uploadItem.title);
     }
 
     public void setSelectedDepictions(final List<String> selectedDepictions) {
@@ -232,7 +230,6 @@ public class UploadModel {
         private final String mimeType;
         private final String source;
         private ImageCoordinates gpsCoords;
-        private Title title;
         private List<UploadMediaDetail> uploadMediaDetails;
         private final Place place;
         private final long createdTimestamp;
@@ -246,8 +243,6 @@ public class UploadModel {
                 final String createdTimestampSource) {
             this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
-            title = new Title();
-            uploadMediaDetails = Collections.singletonList(new UploadMediaDetail());
             uploadMediaDetails = new ArrayList<>(Arrays.asList(new UploadMediaDetail()));
             this.place = place;
             this.mediaUri = mediaUri;
@@ -278,10 +273,6 @@ public class UploadModel {
             return createdTimestamp;
         }
 
-        public Title getTitle() {
-            return title;
-        }
-
         public Uri getMediaUri() {
             return mediaUri;
         }
@@ -297,11 +288,6 @@ public class UploadModel {
         public Place getPlace() {
             return place;
         }
-
-        public void setTitle(final Title title) {
-            this.title = title;
-        }
-
 
         public void setMediaDetails(final List<UploadMediaDetail> uploadMediaDetails) {
             this.uploadMediaDetails = uploadMediaDetails;
