@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import org.wikipedia.csrf.CsrfTokenClient;
+import org.wikipedia.dataclient.mwapi.MwPostResponse;
+import timber.log.Timber;
 
 /**
  * Wikibase Client for calling WikiBase APIs
@@ -16,27 +18,43 @@ import org.wikipedia.csrf.CsrfTokenClient;
 @Singleton
 public class WikiBaseClient {
 
-    private final WikiBaseInterface wikiBaseInterface;
-    private final CsrfTokenClient csrfTokenClient;
+  private final WikiBaseInterface wikiBaseInterface;
+  private final CsrfTokenClient csrfTokenClient;
 
-    @Inject
-    public WikiBaseClient(WikiBaseInterface wikiBaseInterface,
-                          @Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient) {
-        this.wikiBaseInterface = wikiBaseInterface;
-        this.csrfTokenClient = csrfTokenClient;
-    }
+  @Inject
+  public WikiBaseClient(WikiBaseInterface wikiBaseInterface,
+      @Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient) {
+    this.wikiBaseInterface = wikiBaseInterface;
+    this.csrfTokenClient = csrfTokenClient;
+  }
 
-    public Observable<Boolean> postEditEntity(String fileEntityId, String data) {
-        try {
-            return wikiBaseInterface.postEditEntity(fileEntityId, csrfTokenClient.getTokenBlocking(), data)
-                    .map(response -> (response.getSuccessVal() == 1));
-        } catch (Throwable throwable) {
-            return Observable.just(false);
-        }
-    }
+  public Observable<Boolean> postEditEntity(String fileEntityId, String data) {
+    return csrfToken()
+        .switchMap(editToken -> wikiBaseInterface.postEditEntity(fileEntityId, editToken, data)
+            .map(response -> (response.getSuccessVal() == 1)));
+  }
 
-    public Observable<Long> getFileEntityId(UploadResult uploadResult) {
-        return wikiBaseInterface.getFileEntityId(uploadResult.createCanonicalFileName())
-                .map(response -> (long) (response.query().pages().get(0).pageId()));
-    }
+  public Observable<Long> getFileEntityId(UploadResult uploadResult) {
+    return wikiBaseInterface.getFileEntityId(uploadResult.createCanonicalFileName())
+        .map(response -> (long) (response.query().pages().get(0).pageId()));
+  }
+
+  public Observable<MwPostResponse> addLabelstoWikidata(Long fileEntityId,
+      String languageCode, String captionValue) {
+    return csrfToken()
+        .switchMap(editToken -> wikiBaseInterface
+            .addLabelstoWikidata(fileEntityId.toString(), editToken, languageCode, captionValue));
+
+  }
+
+  private Observable<String> csrfToken() {
+    return Observable.fromCallable(() -> {
+      try {
+        return csrfTokenClient.getTokenBlocking();
+      } catch (Throwable throwable) {
+        Timber.e(throwable);
+        return "";
+      }
+    });
+  }
 }

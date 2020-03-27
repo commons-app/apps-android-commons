@@ -46,7 +46,7 @@ data class UploadMediaDetail constructor(
          */
         @JvmStatic
         fun formatCaptions(uploadMediaDetails: List<UploadMediaDetail>) =
-            uploadMediaDetails.associate { it.languageCode to it.captionText }
+            uploadMediaDetails.associate { it.languageCode to it.captionText }.filter { it.value.isNotBlank() }
 
         /**
          * Formats the list of descriptions into the format Commons requires for uploads.

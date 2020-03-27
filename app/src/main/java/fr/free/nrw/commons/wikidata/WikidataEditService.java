@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.wikidata;
 
 import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,7 +12,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadResult;
 import fr.free.nrw.commons.upload.WikidataItem;
 import fr.free.nrw.commons.upload.WikidataPlace;
-import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -27,7 +25,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
-import org.wikipedia.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.mwapi.MwPostResponse;
 import timber.log.Timber;
 
@@ -45,26 +42,20 @@ public class WikidataEditService {
     private final Context context;
     private final WikidataEditListener wikidataEditListener;
     private final JsonKvStore directKvStore;
-    private final CaptionInterface captionInterface;
-    private final WikiBaseClient wikiBaseClient;
+  private final WikiBaseClient wikiBaseClient;
     private final WikidataClient wikidataClient;
-    private final CsrfTokenClient csrfTokenClient;
 
-    @Inject
+  @Inject
     public WikidataEditService(final Context context,
       final WikidataEditListener wikidataEditListener,
       @Named("default_preferences") final JsonKvStore directKvStore,
       final WikiBaseClient wikiBaseClient,
-      final CaptionInterface captionInterface,
-      final WikidataClient wikidataClient,
-      @Named(NAMED_COMMONS_CSRF) final CsrfTokenClient csrfTokenClient) {
+      final WikidataClient wikidataClient) {
         this.context = context;
         this.wikidataEditListener = wikidataEditListener;
         this.directKvStore = directKvStore;
-        this.captionInterface = captionInterface;
         this.wikiBaseClient = wikiBaseClient;
         this.wikidataClient = wikidataClient;
-        this.csrfTokenClient = csrfTokenClient;
   }
 
     /**
@@ -162,7 +153,7 @@ public class WikidataEditService {
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
                         for (final Map.Entry<String, String> entry : captions.entrySet()) {
-                          wikidataAddLabels(fileEntityId, entry.getKey(), entry.getValue());
+                          addCaption(fileEntityId, entry.getKey(), entry.getValue());
                         }
                     } else {
                         Timber.d("Error acquiring EntityId for image");
@@ -180,12 +171,9 @@ public class WikidataEditService {
      */
 
     @SuppressLint("CheckResult")
-    private void wikidataAddLabels(final Long fileEntityId, final String languageCode,
+    private void addCaption(final Long fileEntityId, final String languageCode,
         final String captionValue) {
-
-      csrfToken()
-          .subscribeOn(Schedulers.io())
-          .switchMap(editToken -> captionInterface.addLabelstoWikidata(fileEntityId, editToken, languageCode, captionValue))
+      wikiBaseClient.addLabelstoWikidata(fileEntityId, languageCode, captionValue)
           .subscribe(mwPostResponse -> onAddCaptionResponse(fileEntityId, mwPostResponse),
               throwable -> {
                 Timber.e(throwable, "Error occurred while setting Captions");
@@ -200,17 +188,6 @@ public class WikidataEditService {
     } else {
       Timber.d("Error occurred while setting Captions, fileEntityId = %s", fileEntityId);
     }
-  }
-
-  private Observable<String> csrfToken() {
-    return Observable.fromCallable(() -> {
-      try {
-        return csrfTokenClient.getTokenBlocking();
-      } catch (Throwable throwable) {
-        throwable.printStackTrace();
-        return null;
-      }
-    });
   }
 
   public void createImageClaim(@Nullable final WikidataPlace wikidataPlace, final UploadResult imageUpload) {

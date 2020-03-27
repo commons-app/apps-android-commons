@@ -18,7 +18,6 @@ import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
-import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
 import fr.free.nrw.commons.wikidata.WikidataInterface;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -161,12 +160,6 @@ public class NetworkingModule {
     @Singleton
     public ReviewInterface provideReviewInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
-    }
-
-    @Provides
-    @Singleton
-    public CaptionInterface provideCaptionInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
-        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, CaptionInterface.class);
     }
 
     @Provides
