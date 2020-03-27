@@ -57,7 +57,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="100"
                     android:background="@color/primaryDarkColor"
                     android:orientation="horizontal"
                     android:padding="@dimen/quarter_standard_height">
@@ -91,7 +90,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/authorLinearLayout"
-                    android:weightSum="100"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/quarter_standard_height"
                     android:paddingRight="@dimen/quarter_standard_height"
@@ -124,7 +122,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="100"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/quarter_standard_height"
                     android:paddingRight="@dimen/quarter_standard_height"
@@ -199,7 +196,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="100"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/quarter_standard_height"
                     android:paddingRight="@dimen/quarter_standard_height"
@@ -236,7 +232,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="100"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/quarter_standard_height"
                     android:paddingRight="@dimen/quarter_standard_height"
@@ -267,7 +262,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="100"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/quarter_standard_height"
                     android:paddingRight="@dimen/quarter_standard_height"
@@ -280,6 +274,7 @@
                         android:layout_weight="30"
                         android:paddingLeft="@dimen/tiny_padding"
                         android:paddingTop="@dimen/dimen_6"
+                        android:gravity="center"
                         android:text="@string/media_detail_uploaded_date"
                         android:textColor="?attr/mediaDetailsHeadingText"
                         android:textSize="@dimen/normal_text"
@@ -329,7 +324,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="100"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/quarter_standard_height"
                     android:paddingRight="@dimen/quarter_standard_height"
