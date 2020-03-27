@@ -1,17 +1,18 @@
 package fr.free.nrw.commons.upload.structure.depictions
 
+import fr.free.nrw.commons.upload.WikidataItem
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 
 /**
  * Model class for Depicted Item in Upload and Explore
  */
 data class DepictedItem constructor(
-  val depictsLabel: String?,
+  override val name: String,
   val description: String?,
   var imageUrl: String,
   var isSelected: Boolean,
-  val entityId: String
-) {
+  override val id: String
+):WikidataItem {
   constructor(depictSearchItem: DepictSearchItem) : this(
     depictSearchItem.label,
     depictSearchItem.description,
@@ -24,12 +25,12 @@ data class DepictedItem constructor(
 
   override fun equals(o: Any?) = when {
     this === o -> true
-    o is DepictedItem -> depictsLabel == o.depictsLabel
+    o is DepictedItem -> name == o.name
     else -> false
   }
 
   override fun hashCode(): Int {
-    return depictsLabel?.hashCode() ?: 0
+    return name?.hashCode() ?: 0
   }
 
 }

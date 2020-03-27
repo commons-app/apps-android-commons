@@ -1,15 +1,17 @@
 package fr.free.nrw.commons.media;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Animatable;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,29 +24,17 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.controller.BaseControllerListener;
-import com.facebook.drawee.controller.ControllerListener;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.image.ImageInfo;
-import com.facebook.imagepipeline.request.ImageRequest;
-
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.util.DateUtil;
-import org.wikipedia.util.StringUtil;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
-import javax.inject.Inject;
-
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import androidx.annotation.Nullable;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
+import com.facebook.imagepipeline.request.ImageRequest;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
@@ -64,12 +54,14 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
-
+import javax.inject.Inject;
+import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
@@ -547,8 +539,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             item.setOnClickListener(view -> {
                 DepictedItem depictedItem = new DepictedItem(depictionName, "", "", false, entityId);
                 Intent intent = new Intent(getContext(), WikidataItemDetailsActivity.class);
-                intent.putExtra("wikidataItemName", depictedItem.getDepictsLabel());
-                intent.putExtra("entityId", depictedItem.getEntityId());
+                intent.putExtra("wikidataItemName", depictedItem.getName());
+                intent.putExtra("entityId", depictedItem.getId());
                 getContext().startActivity(intent);
             });
         }

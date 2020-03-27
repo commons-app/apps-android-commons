@@ -1,16 +1,14 @@
 package fr.free.nrw.commons.wikidata;
 
-import org.wikipedia.csrf.CsrfTokenClient;
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
 
+import fr.free.nrw.commons.upload.UploadResult;
+import fr.free.nrw.commons.upload.WikiBaseInterface;
+import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-
-import fr.free.nrw.commons.upload.WikiBaseInterface;
-import fr.free.nrw.commons.utils.ConfigUtils;
-import io.reactivex.Observable;
-
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
+import org.wikipedia.csrf.CsrfTokenClient;
 
 /**
  * Wikibase Client for calling WikiBase APIs
@@ -37,8 +35,8 @@ public class WikiBaseClient {
         }
     }
 
-    public Observable<Long> getFileEntityId(String fileName) {
-        return wikiBaseInterface.getFileEntityId(fileName)
+    public Observable<Long> getFileEntityId(UploadResult uploadResult) {
+        return wikiBaseInterface.getFileEntityId(uploadResult.createCanonicalFileName())
                 .map(response -> (long) (response.query().pages().get(0).pageId()));
     }
 }

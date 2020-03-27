@@ -78,7 +78,7 @@ public class SearchDepictionsRenderer extends Renderer<DepictedItem> {
     @Override
     public void render() {
         DepictedItem item = getContent();
-        tvDepictionLabel.setText(item.getDepictsLabel());
+        tvDepictionLabel.setText(item.getName());
         tvDepictionDesc.setText(item.getDescription());
         imageView.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_wikidata_logo_24dp));
 

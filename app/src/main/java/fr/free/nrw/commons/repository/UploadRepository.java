@@ -115,10 +115,6 @@ public class UploadRepository {
         remoteDataSource.setSelectedCategories(categoryStringList);
     }
 
-    public void setSelectedDepictions(List<String> selectedDepictions) {
-        remoteDataSource.setSelectedDepictions(selectedDepictions);
-    }
-
     /**
      * handles the category selection/deselection
      *
@@ -292,10 +288,6 @@ public class UploadRepository {
 
     public Observable<DepictedItem> searchAllEntities(String query) {
         return remoteDataSource.searchAllEntities(query);
-    }
-
-    public List<String> getDepictionsEntityIdList() {
-        return remoteDataSource.depictionsEntityIdList();
     }
 
     /**

@@ -50,7 +50,7 @@ public class DepictionRenderer extends Renderer<DepictedItem> {
     public void render() {
         DepictedItem item = getContent();
         checkedView.setChecked(item.isSelected());
-        depictsLabel.setText(item.getDepictsLabel());
+        depictsLabel.setText(item.getName());
         description.setText(item.getDescription());
     }
 }

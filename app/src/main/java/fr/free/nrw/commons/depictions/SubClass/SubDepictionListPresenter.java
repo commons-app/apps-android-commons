@@ -141,7 +141,7 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
             this.queryList.addAll(mediaList);
             view.onSuccess(mediaList);
             for (DepictedItem m : mediaList) {
-                fetchThumbnailForEntityId(m.getEntityId(), size++);
+                fetchThumbnailForEntityId(m.getId(), size++);
             }
         }
     }

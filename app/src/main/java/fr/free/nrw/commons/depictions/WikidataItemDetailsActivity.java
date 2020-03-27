@@ -197,8 +197,8 @@ public class WikidataItemDetailsActivity extends NavigationBaseActivity implemen
     public static void startYourself(Context context, DepictedItem depictedItem) {
         Intent intent = new Intent(context, WikidataItemDetailsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra("wikidataItemName", depictedItem.getDepictsLabel());
-        intent.putExtra("entityId", depictedItem.getEntityId());
+        intent.putExtra("wikidataItemName", depictedItem.getName());
+        intent.putExtra("entityId", depictedItem.getId());
         context.startActivity(intent);
     }
 }

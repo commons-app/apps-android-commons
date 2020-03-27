@@ -4,13 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import androidx.annotation.Nullable;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -18,9 +18,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subjects.BehaviorSubject;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -44,8 +42,8 @@ public class UploadModel {
     private final SessionManager sessionManager;
     private final FileProcessor fileProcessor;
     private final ImageProcessingService imageProcessingService;
-    private List<String> selectedCategories;
-    private ArrayList<String> selectedDepictions;
+    private List<String> selectedCategories = new ArrayList<>();
+    private List<DepictedItem> selectedDepictions = new ArrayList<>();
 
     @Inject
     UploadModel(@Named("licenses") final List<String> licenses,
@@ -71,13 +69,9 @@ public class UploadModel {
     public void cleanUp() {
         compositeDisposable.clear();
         fileProcessor.cleanup();
-        this.items.clear();
-        if (this.selectedCategories != null) {
-            this.selectedCategories.clear();
-        }
-        if (this.selectedDepictions != null) {
-            this.selectedDepictions.clear();
-        }
+        items.clear();
+        selectedCategories.clear();
+        selectedDepictions.clear();
     }
 
     public void setSelectedCategories(List<String> selectedCategories) {
@@ -151,29 +145,8 @@ public class UploadModel {
     public Observable<Contribution> buildContributions() {
         return Observable.fromIterable(items).map(item ->
         {
-            final Contribution contribution = new Contribution(item.mediaUri, null,
-                    item.getFileName(), item.uploadMediaDetails.size()!=0? UploadMediaDetail.formatCaptions(item.uploadMediaDetails):new HashMap<>(),
-                    UploadMediaDetail.formatList(item.uploadMediaDetails), -1,
-                    null, null, sessionManager.getAuthorName(),
-                    CommonsApplication.DEFAULT_EDIT_SUMMARY, new ArrayList<>(selectedDepictions), item.gpsCoords.getDecimalCoords());
-            if (item.place != null) {
-                contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());
-                contribution.setWikiItemName(item.place.getName());
-                // If item already has an image, we need to know it. We don't want to override existing image later
-                contribution.setP18Value(item.place.pic);
-            }
-            if (null == selectedCategories) {//Just a fail safe, this should never be null
-                selectedCategories = new ArrayList<>();
-            }
-            if (selectedDepictions == null) {
-                selectedDepictions = new ArrayList<>();
-            }
-            contribution.setCategories(selectedCategories);
-            contribution.setTag("mimeType", item.mimeType);
-            contribution.setSource(item.source);
-            contribution.setContentProviderUri(item.mediaUri);
-            contribution.setDateUploaded(new Date());
-
+            final Contribution contribution = new Contribution(
+                item, sessionManager, selectedDepictions, selectedCategories);
             Timber.d("Created timestamp while building contribution is %s, %s",
                     item.getCreatedTimestamp(),
                     new Date(item.getCreatedTimestamp()));
@@ -208,18 +181,26 @@ public class UploadModel {
         uploadItem1.setMediaDetails(uploadItem.uploadMediaDetails);
     }
 
-    public void setSelectedDepictions(final List<String> selectedDepictions) {
-        this.selectedDepictions = newListOf(selectedDepictions);
+    public void onDepictItemClicked(DepictedItem depictedItem) {
+        if (depictedItem.isSelected()) {
+            selectedDepictions.add(depictedItem);
+        } else {
+            selectedDepictions.remove(depictedItem);
+        }
     }
 
     @NotNull
-    private <T> ArrayList<T> newListOf(final List<T> items) {
+    private <T> List<T> newListOf(final List<T> items) {
         return items != null ? new ArrayList<>(items) : new ArrayList<>();
     }
 
     public void useSimilarPictureCoordinates(final ImageCoordinates imageCoordinates, final int uploadItemIndex) {
         fileProcessor.useImageCoords(imageCoordinates);
         items.get(uploadItemIndex).setGpsCoords(imageCoordinates);
+    }
+
+    public List<DepictedItem> getSelectedDepictions() {
+        return selectedDepictions;
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -323,5 +304,8 @@ public class UploadModel {
             this.gpsCoords = gpsCoords;
         }
 
+        public String getMimeType() {
+            return mimeType;
+        }
     }
 }

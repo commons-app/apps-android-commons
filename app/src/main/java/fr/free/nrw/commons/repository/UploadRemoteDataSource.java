@@ -213,7 +213,7 @@ public class UploadRemoteDataSource {
      */
 
     public void onDepictedItemClicked(DepictedItem depictedItem) {
-        depictModel.onDepictItemClicked(depictedItem);
+        uploadModel.onDepictItemClicked(depictedItem);
     }
 
     /**
@@ -222,7 +222,7 @@ public class UploadRemoteDataSource {
      */
 
     public List<DepictedItem> getSelectedDepictions() {
-        return depictModel.getSelectedDepictions();
+        return uploadModel.getSelectedDepictions();
     }
 
     /**
@@ -231,14 +231,6 @@ public class UploadRemoteDataSource {
 
     public Observable<DepictedItem> searchAllEntities(String query) {
         return depictModel.searchAllEntities(query);
-    }
-
-    public void setSelectedDepictions(List<String> selectedDepictions) {
-        uploadModel.setSelectedDepictions(selectedDepictions);
-    }
-
-    public List<String> depictionsEntityIdList() {
-        return depictModel.depictionsEntityIdList();
     }
 
     public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {

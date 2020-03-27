@@ -7,9 +7,12 @@ import com.google.gson.reflect.TypeToken;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.upload.WikidataPlace;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,52 +46,87 @@ public class Converters {
 
     @TypeConverter
     public static String listObjectToString(ArrayList<String> objectList) {
-        return objectList == null ? null : getGson().toJson(objectList);
+        return writeObjectToString(objectList);
     }
 
     @TypeConverter
     public static ArrayList<String> stringToArrayListObject(String objectList) {
-        return objectList == null ? null : getGson().fromJson(objectList,new TypeToken<ArrayList<String>>(){}.getType());
+        return readObjectWithTypeToken(objectList);
     }
 
     @TypeConverter
     public static String mapObjectToString(HashMap<String,String> objectList) {
-        return objectList == null ? null : getGson().toJson(objectList);
+        return writeObjectToString(objectList);
     }
 
     @TypeConverter
     public static HashMap<String,String> stringToHashMap(String objectList) {
-        return objectList == null ? null : getGson().fromJson(objectList,new TypeToken<HashMap<String,String>>(){}.getType());
+        return readObjectWithTypeToken(objectList, new TypeToken<HashMap<String,String>>(){});
     }
 
     @TypeConverter
     public static String latlngObjectToString(LatLng latlng) {
-        return latlng == null ? null : getGson().toJson(latlng);
+        return writeObjectToString(latlng);
     }
 
     @TypeConverter
     public static LatLng stringToLatLng(String objectList) {
-        return objectList == null ? null : getGson().fromJson(objectList,LatLng.class);
+        return readObjectFromString(objectList,LatLng.class);
     }
 
     @TypeConverter
     public static String listOfMapToString(ArrayList<Map<String,String>> listOfMaps) {
-        return listOfMaps == null ? null : getGson().toJson(listOfMaps);
+        return writeObjectToString(listOfMaps);
     }
 
     @TypeConverter
     public static ArrayList<Map<String,String>> stringToListOfMap(String listOfMaps) {
-        return listOfMaps == null ? null :getGson().fromJson(listOfMaps,new TypeToken<ArrayList<Map<String,String>>>(){}.getType());
+        return readObjectWithTypeToken(listOfMaps);
     }
 
     @TypeConverter
     public static String mapToString(Map<String,String> map) {
-        return map == null ? null : getGson().toJson(map);
+        return writeObjectToString(map);
     }
 
     @TypeConverter
     public static Map<String,String> stringToMap(String map) {
-        return map == null ? null :getGson().fromJson(map,new TypeToken<Map<String,String>>(){}.getType());
+        return readObjectWithTypeToken(map);
     }
 
+    @TypeConverter
+    public static String wikidataPlaceToString(WikidataPlace wikidataPlace) {
+        return writeObjectToString(wikidataPlace);
+    }
+
+    @TypeConverter
+    public static WikidataPlace stringToWikidataPlace(String wikidataPlace) {
+        return readObjectFromString(wikidataPlace, WikidataPlace.class);
+    }
+
+    @TypeConverter
+    public static String depictionListToString(List<DepictedItem> depictedItems) {
+        return writeObjectToString(depictedItems);
+    }
+
+    @TypeConverter
+    public static List<DepictedItem> stringToList(String depictedItems) {
+        return readObjectWithTypeToken(depictedItems);
+    }
+
+    private static String writeObjectToString(Object object) {
+        return object == null ? null : getGson().toJson(object);
+    }
+
+    private static<T> T readObjectFromString(String objectAsString, Class<T> clazz) {
+        return objectAsString == null ? null : getGson().fromJson(objectAsString, clazz);
+    }
+
+    private static <T> T readObjectWithTypeToken(String objectWithTypeParam) {
+        return readObjectWithTypeToken(objectWithTypeParam, new TypeToken<T>() {});
+    }
+
+    private static <T> T readObjectWithTypeToken(String objectList, TypeToken<T> typeToken) {
+        return objectList == null ? null : getGson().fromJson(objectList, typeToken.getType());
+    }
 }

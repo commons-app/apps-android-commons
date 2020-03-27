@@ -4,13 +4,16 @@ import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_I
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.upload.UploadResult;
+import fr.free.nrw.commons.upload.WikidataItem;
+import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -24,6 +27,7 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import org.jetbrains.annotations.NotNull;
 import org.wikipedia.csrf.CsrfTokenClient;
 import timber.log.Timber;
 
@@ -35,8 +39,8 @@ import timber.log.Timber;
 @Singleton
 public class WikidataEditService {
 
-    private final static String COMMONS_APP_TAG = "wikimedia-commons-app";
-    private final static String COMMONS_APP_EDIT_REASON = "Add tag for edits made using Android Commons app";
+    private static final String COMMONS_APP_TAG = "wikimedia-commons-app";
+    private static final String COMMONS_APP_EDIT_REASON = "Add tag for edits made using Android Commons app";
 
     private final Context context;
     private final WikidataEditListener wikidataEditListener;
@@ -64,87 +68,22 @@ public class WikidataEditService {
   }
 
     /**
-     * Create a P18 claim and log the edit with custom tag
-     *
-     * @param wikidataEntityId a unique id of each Wikidata items
-     * @param fileName name of the file we will upload
-     * @param p18Value pic attribute of Wikidata item
-     */
-    public void createClaimWithLogging(String wikidataEntityId, String wikiItemName, String fileName, String p18Value) {
-        if (wikidataEntityId == null) {
-            Timber.d("Skipping creation of claim as Wikidata entity ID is null");
-            return;
-        }
-
-        if (fileName == null) {
-            Timber.d("Skipping creation of claim as fileName entity ID is null");
-            return;
-        }
-
-        if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
-            Timber.d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
-            return;
-        }
-
-        if (p18Value != null && !p18Value.trim().isEmpty()) {
-            Timber.d("Skipping creation of claim as p18Value is not empty, we won't override existing image");
-            return;
-        }
-
-        editWikidataProperty(wikidataEntityId, wikiItemName, fileName);;
-        editWikiBaseDepictsProperty(wikidataEntityId, fileName);
-    }
-
-
-
-    /**
-     * Edits the wikidata entity by adding the P18 property to it.
-     * Adding the P18 edit requires calling the wikidata API to create a claim against the entity
-     *
-     * @param wikidataEntityId
-     * @param fileName
-     */
-    @SuppressLint("CheckResult")
-    private void editWikidataProperty(String wikidataEntityId, String wikiItemName, String fileName) {
-        Timber.d("Upload successful with wiki data entity id as %s", wikidataEntityId);
-        Timber.d("Attempting to edit Wikidata property %s", wikidataEntityId);
-
-        final String propertyValue = getFileName(fileName);
-
-        Timber.d("Entity id is %s and property value is %s", wikidataEntityId, propertyValue);
-        wikidataClient.createClaim(wikidataEntityId, propertyValue)
-                .flatMap(revisionId -> {
-                    if (revisionId != -1) {
-                        return wikidataClient.addEditTag(revisionId, COMMONS_APP_TAG, COMMONS_APP_EDIT_REASON);
-                    }
-                    throw new RuntimeException("Unable to edit wikidata item");
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(revisionId -> handleClaimResult(wikidataEntityId, wikiItemName, String.valueOf(revisionId)), throwable -> {
-                    Timber.e(throwable, "Error occurred while making claim");
-                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
-                });
-    }
-
-    /**
      * Edits the wikibase entity by adding DEPICTS property.
      * Adding DEPICTS property requires call to the wikibase API to set tag against the entity.
-     *
-     * @param wikidataEntityId
-     * @param fileName
+     * @param uploadResult
+     * @param depictedItem
      */
     @SuppressLint("CheckResult")
-    private void editWikiBaseDepictsProperty(final String wikidataEntityId, final String fileName) {
-        wikiBaseClient.getFileEntityId(fileName)
+    private void editWikidataDepictsProperty(final UploadResult uploadResult, final WikidataItem depictedItem) {
+        wikiBaseClient.getFileEntityId(uploadResult)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
                         Timber.d("EntityId for image was received successfully: %s", fileEntityId);
-                        addDepictsProperty(wikidataEntityId, fileEntityId.toString());
+                        addDepictsProperty(fileEntityId.toString(), depictedItem);
                     } else {
-                        Timber.d("Error acquiring EntityId for image: %s", fileName);
+                        Timber.d("Error acquiring EntityId for image: %s", uploadResult);
                     }
                     }, throwable -> {
                     Timber.e(throwable, "Error occurred while getting EntityID to set DEPICTS property");
@@ -153,47 +92,20 @@ public class WikidataEditService {
     }
 
     @SuppressLint("CheckResult")
-    private void addDepictsProperty(String entityId, final String fileEntityId) {
-        if (ConfigUtils.isBetaFlavour()) {
-            entityId = "Q10"; // Wikipedia:Sandbox (Q10)
-        }
+    private void addDepictsProperty(final String fileEntityId, final WikidataItem depictedItem) {
+      // Wikipedia:Sandbox (Q10)
+      final String data = depictionJson(ConfigUtils.isBetaFlavour() ?"Q10" : depictedItem.getId());
 
-        final JsonObject value = new JsonObject();
-        value.addProperty("entity-type", "item");
-        value.addProperty("numeric-id", entityId.replace("Q", ""));
-        value.addProperty("id", entityId);
-
-        final JsonObject dataValue = new JsonObject();
-        dataValue.add("value", value);
-        dataValue.addProperty("type", "wikibase-entityid");
-
-        final JsonObject mainSnak = new JsonObject();
-        mainSnak.addProperty("snaktype", "value");
-        mainSnak.addProperty("property", BuildConfig.DEPICTS_PROPERTY);
-        mainSnak.add("datavalue", dataValue);
-
-        final JsonObject claim = new JsonObject();
-        claim.add("mainsnak", mainSnak);
-        claim.addProperty("type", "statement");
-        claim.addProperty("rank", "preferred");
-
-        final JsonArray claims = new JsonArray();
-        claims.add(claim);
-
-        final JsonObject jsonData = new JsonObject();
-        jsonData.add("claims", claims);
-
-        final String data = jsonData.toString();
-
-        Observable.defer((Callable<ObservableSource<Boolean>>) () ->
+      Observable.defer((Callable<ObservableSource<Boolean>>) () ->
                 wikiBaseClient.postEditEntity(PAGE_ID_PREFIX + fileEntityId, data))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(success -> {
-                            if (success)
-                                Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
-                            else
-                                Timber.d("Unable to set DEPICTS property for %s", fileEntityId);
+                            if (success) {
+                              Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
+                            } else {
+                              Timber.d("Unable to set DEPICTS property for %s", fileEntityId);
+                            }
                         },
                         throwable -> {
                             Timber.e(throwable, "Error occurred while setting DEPICTS property");
@@ -201,60 +113,56 @@ public class WikidataEditService {
                         });
     }
 
-    private void handleClaimResult(String wikidataEntityId, String wikiItemName, String revisionId) {
-        if (revisionId != null) {
-            if (wikidataEditListener != null) {
-                wikidataEditListener.onSuccessfulWikidataEdit();
-            }
-            showSuccessToast(wikiItemName);
-        } else {
-            Timber.d("Unable to make wiki data edit for entity %s", wikidataEntityId);
-            ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
-        }
-    }
+  @NotNull
+  private String depictionJson(final String entityId) {
+    final JsonObject value = new JsonObject();
+    value.addProperty("entity-type", "item");
+    value.addProperty("numeric-id", entityId.replace("Q", ""));
+    value.addProperty("id", entityId);
 
+    final JsonObject dataValue = new JsonObject();
+    dataValue.add("value", value);
+    dataValue.addProperty("type", "wikibase-entityid");
 
-    /**
+    final JsonObject mainSnak = new JsonObject();
+    mainSnak.addProperty("snaktype", "value");
+    mainSnak.addProperty("property", WikidataProperties.DEPICTS.getPropertyName());
+    mainSnak.add("datavalue", dataValue);
+
+    final JsonObject claim = new JsonObject();
+    claim.add("mainsnak", mainSnak);
+    claim.addProperty("type", "statement");
+    claim.addProperty("rank", "preferred");
+
+    final JsonArray claims = new JsonArray();
+    claims.add(claim);
+
+    final JsonObject jsonData = new JsonObject();
+    jsonData.add("claims", claims);
+
+    return jsonData.toString();
+  }
+
+  /**
      * Show a success toast when the edit is made successfully
      */
-    private void showSuccessToast(String wikiItemName) {
-        String successStringTemplate = context.getString(R.string.successful_wikidata_edit);
-        String successMessage = String.format(Locale.getDefault(), successStringTemplate, wikiItemName);
+    private void showSuccessToast(final String wikiItemName) {
+        final String successStringTemplate = context.getString(R.string.successful_wikidata_edit);
+        final String successMessage = String.format(Locale.getDefault(), successStringTemplate, wikiItemName);
         ViewUtil.showLongToast(context, successMessage);
-    }
-
-    /**
-     * Formats and returns the filename as accepted by the wiki base API
-     * https://www.mediawiki.org/wiki/Wikibase/API#wbcreateclaim
-     *
-     * @param fileName
-     * @return
-     */
-    private String getFileName(String fileName) {
-        fileName = String.format("\"%s\"", fileName.replace("File:", ""));
-        Timber.d("Wikidata property name is %s", fileName);
-        return fileName;
     }
 
     /**
      * Adding captions as labels after image is successfully uploaded
      */
     @SuppressLint("CheckResult")
-    public void createLabelforWikidataEntity(final String fileName,
-        final Map<String, String> captions) {
-        Observable.fromCallable(() -> wikiBaseClient.getFileEntityId(fileName))
+    public void createCaptions(final UploadResult uploadResult, final Map<String, String> captions) {
+        Observable.fromCallable(() -> wikiBaseClient.getFileEntityId(uploadResult))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
                         for (final Map.Entry<String, String> entry : captions.entrySet()) {
-                            final Map<String, String> caption = new HashMap<>();
-                            caption.put(entry.getKey(), entry.getValue());
-                            try {
-                                wikidataAddLabels(fileEntityId.toString(), caption);
-                            } catch (final Throwable throwable) {
-                                throwable.printStackTrace();
-                            }
+                          wikidataAddLabels(fileEntityId.toString(), entry.getKey(), entry.getValue());
                         }
                     } else {
                         Timber.d("Error acquiring EntityId for image");
@@ -269,11 +177,10 @@ public class WikidataEditService {
      * Adds label to Wikidata using the fileEntityId and the edit token, obtained from csrfTokenClient
      *
      * @param fileEntityId
-     * @param caption
      */
 
     @SuppressLint("CheckResult")
-    private void wikidataAddLabels(final String fileEntityId, final Map<String, String> caption) {
+    private void wikidataAddLabels(final String fileEntityId, final String languageCode, final String captionValue) {
         Observable.fromCallable(() -> {
             try {
                 return csrfTokenClient.getTokenBlocking();
@@ -286,7 +193,7 @@ public class WikidataEditService {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(editToken  -> {
                     if (editToken  != null) {
-                        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId, editToken, caption.get(0), caption))
+                        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId, editToken, languageCode, captionValue))
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(revisionId ->
@@ -310,4 +217,45 @@ public class WikidataEditService {
                     ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
                 });
     }
+
+  public void createImageClaim(@Nullable final WikidataPlace wikidataPlace, final UploadResult imageUpload) {
+    if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
+      Timber.d("Image location and nearby place location mismatched, so Wikidata item won't be edited");
+      return;
+    }
+    editWikidataImageProperty(wikidataPlace, imageUpload);
+  }
+
+  @SuppressLint("CheckResult")
+  private void editWikidataImageProperty(final WikidataItem wikidataItem, final UploadResult imageUpload) {
+    wikidataClient.createImageClaim(wikidataItem, String.format("\"%s\"", imageUpload.getFilename()))
+        .flatMap(revisionId -> {
+          if (revisionId != -1) {
+            return wikidataClient.addEditTag(revisionId, COMMONS_APP_TAG, COMMONS_APP_EDIT_REASON);
+          }
+          throw new RuntimeException("Unable to edit wikidata item");
+        })
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(revisionId -> handleImageClaimResult(wikidataItem, String.valueOf(revisionId)), throwable -> {
+          Timber.e(throwable, "Error occurred while making claim");
+          ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+        });
+  }
+
+  private void handleImageClaimResult(final WikidataItem wikidataItem, final String revisionId) {
+    if (revisionId != null) {
+      if (wikidataEditListener != null) {
+        wikidataEditListener.onSuccessfulWikidataEdit();
+      }
+      showSuccessToast(wikidataItem.getName());
+    } else {
+      Timber.d("Unable to make wiki data edit for entity %s", wikidataItem);
+      ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+    }
+  }
+
+  public void createDepictsProperty(final UploadResult uploadResult, final WikidataItem depictedItem) {
+    editWikidataDepictsProperty(uploadResult, depictedItem);
+  }
 }

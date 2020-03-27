@@ -67,12 +67,12 @@ class WikidataEditServiceTest {
     fun createClaimWithLogging() {
         whenever(directKvStore.getBoolean("Picture_Has_Correct_Location", true))
             .thenReturn(true)
-        whenever(wikidataClient.createClaim(anyString(), anyString()))
+        whenever(wikidataClient.createImageClaim(anyString(), anyString()))
             .thenReturn(Observable.just(1L))
         whenever(wikidataClient.addEditTag(anyLong(), anyString(), anyString()))
             .thenReturn(Observable.just(mock(AddEditTagResponse::class.java)))
         whenever(wikibaseClient.getFileEntityId(any())).thenReturn(Observable.just(1L))
         wikidataEditService.createClaimWithLogging("Q1", "", "Test.jpg", "")
-        verify(wikidataClient, times(1)).createClaim(anyString(), anyString())
+        verify(wikidataClient, times(1)).createImageClaim(anyString(), anyString())
     }
 }

@@ -126,7 +126,6 @@ public class DepictsPresenter implements DepictsContract.UserActionListener {
     public void verifyDepictions() {
         List<DepictedItem> selectedDepictions = repository.getSelectedDepictions();
         if (selectedDepictions != null && !selectedDepictions.isEmpty()) {
-            repository.setSelectedDepictions(repository.getDepictionsEntityIdList());
             view.goToNextScreen();
         } else {
             view.noDepictionSelected();

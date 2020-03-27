@@ -62,7 +62,7 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
 
     @Override
     public long getItemId(int position) {
-        return contributions.get(position)._id;
+        return contributions.get(position).get_id();
     }
 
     public interface Callback {

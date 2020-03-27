@@ -158,7 +158,7 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
             view.onSuccess(mediaList);
             offset=queryList.size();
             for (DepictedItem m : mediaList) {
-                fetchThumbnailForEntityId(m.getEntityId(), size++);
+                fetchThumbnailForEntityId(m.getId(), size++);
             }
         }
     }

@@ -44,7 +44,7 @@ class WikidataClientTest {
                 any(RequestBody::class.java),
                 any(RequestBody::class.java)))
                 .thenReturn(Observable.just(mock(WbCreateClaimResponse::class.java)))
-        wikidataClient!!.createClaim("Q1", "test.jpg")
+        wikidataClient!!.createImageClaim("Q1", "test.jpg")
     }
 
     @Test

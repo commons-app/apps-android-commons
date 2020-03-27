@@ -56,11 +56,7 @@ data class UploadMediaDetail constructor(
          */
         @JvmStatic
         fun formatList(descriptions: List<UploadMediaDetail>) =
-            descriptions.joinToString {
-                if (it.descriptionText.isNotEmpty())
-                    "{{${it.languageCode}|1=${it.descriptionText}}}"
-                else
-                    ""
-            }
+            descriptions.filter { it.descriptionText.isNotEmpty() }
+                .joinToString { "{{${it.languageCode}|1=${it.descriptionText}}}" }
     }
 }
