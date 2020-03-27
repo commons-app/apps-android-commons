@@ -13,14 +13,12 @@ import fr.free.nrw.commons.upload.UploadResult;
 import fr.free.nrw.commons.upload.WikidataItem;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.mediaDetails.CaptionInterface;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -29,6 +27,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
 import org.wikipedia.csrf.CsrfTokenClient;
+import org.wikipedia.dataclient.mwapi.MwPostResponse;
 import timber.log.Timber;
 
 /**
@@ -157,12 +156,12 @@ public class WikidataEditService {
      */
     @SuppressLint("CheckResult")
     public void createCaptions(final UploadResult uploadResult, final Map<String, String> captions) {
-        Observable.fromCallable(() -> wikiBaseClient.getFileEntityId(uploadResult))
+        wikiBaseClient.getFileEntityId(uploadResult)
                 .subscribeOn(Schedulers.io())
                 .subscribe(fileEntityId -> {
                     if (fileEntityId != null) {
                         for (final Map.Entry<String, String> entry : captions.entrySet()) {
-                          wikidataAddLabels(fileEntityId.toString(), entry.getKey(), entry.getValue());
+                          wikidataAddLabels(fileEntityId, entry.getKey(), entry.getValue());
                         }
                     } else {
                         Timber.d("Error acquiring EntityId for image");
@@ -180,43 +179,38 @@ public class WikidataEditService {
      */
 
     @SuppressLint("CheckResult")
-    private void wikidataAddLabels(final String fileEntityId, final String languageCode, final String captionValue) {
-        Observable.fromCallable(() -> {
-            try {
-                return csrfTokenClient.getTokenBlocking();
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-                return null;
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(editToken  -> {
-                    if (editToken  != null) {
-                        Observable.fromCallable(() -> captionInterface.addLabelstoWikidata(fileEntityId, editToken, languageCode, captionValue))
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(revisionId ->
-                                {
-                                    if (revisionId != null) {
-                                        Timber.d("Caption successfully set, revision id = %s", revisionId);
-                                    } else {
-                                        Timber.d("Error occurred while setting Captions, fileEntityId = %s", fileEntityId);
-                                    }
+    private void wikidataAddLabels(final Long fileEntityId, final String languageCode,
+        final String captionValue) {
 
-                                },
-                                        throwable -> {
-                                            Timber.e(throwable, "Error occurred while setting Captions");
-                                            ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
-                                        });
-                    }else {
-                        Timber.d("Error acquiring EntityId for image");
-                    }
-                }, throwable -> {
-                    Timber.e(throwable, "Error occurred while getting EntityID for the File");
-                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
-                });
+      csrfToken()
+          .subscribeOn(Schedulers.io())
+          .switchMap(editToken -> captionInterface.addLabelstoWikidata(fileEntityId, editToken, languageCode, captionValue))
+          .subscribe(mwPostResponse -> onAddCaptionResponse(fileEntityId, mwPostResponse),
+              throwable -> {
+                Timber.e(throwable, "Error occurred while setting Captions");
+                ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+              }
+          );
     }
+
+  private void onAddCaptionResponse(Long fileEntityId, MwPostResponse revisionId) {
+    if (revisionId != null) {
+      Timber.d("Caption successfully set, revision id = %s", revisionId);
+    } else {
+      Timber.d("Error occurred while setting Captions, fileEntityId = %s", fileEntityId);
+    }
+  }
+
+  private Observable<String> csrfToken() {
+    return Observable.fromCallable(() -> {
+      try {
+        return csrfTokenClient.getTokenBlocking();
+      } catch (Throwable throwable) {
+        throwable.printStackTrace();
+        return null;
+      }
+    });
+  }
 
   public void createImageClaim(@Nullable final WikidataPlace wikidataPlace, final UploadResult imageUpload) {
     if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {

@@ -2,7 +2,7 @@ package fr.free.nrw.commons.upload
 
 import org.wikipedia.gallery.ImageInfo
 
-private const val RESULT_SUCCESS = "Sucess"
+private const val RESULT_SUCCESS = "Success"
 
 data class UploadResult(
     val result: String,

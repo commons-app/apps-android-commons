@@ -20,7 +20,7 @@ public interface CaptionInterface {
      */
     @FormUrlEncoded
     @POST(MW_API_PREFIX + "action=wbsetlabel&language=en")
-    Observable<MwPostResponse> addLabelstoWikidata(@Field("id") String FileEntityId,
+    Observable<MwPostResponse> addLabelstoWikidata(@Field("id") Long FileEntityId,
                                                    @Field("token") String editToken,
                                                    @Field("language") String language,
                                                    @Field("value") String captionValue);

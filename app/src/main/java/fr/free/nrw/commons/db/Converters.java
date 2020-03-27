@@ -51,7 +51,7 @@ public class Converters {
 
     @TypeConverter
     public static ArrayList<String> stringToArrayListObject(String objectList) {
-        return readObjectWithTypeToken(objectList);
+        return readObjectWithTypeToken(objectList, new TypeToken<ArrayList<String>>() {});
     }
 
     @TypeConverter
@@ -81,7 +81,7 @@ public class Converters {
 
     @TypeConverter
     public static ArrayList<Map<String,String>> stringToListOfMap(String listOfMaps) {
-        return readObjectWithTypeToken(listOfMaps);
+        return readObjectWithTypeToken(listOfMaps, new TypeToken<ArrayList<Map<String, String>>>() {});
     }
 
     @TypeConverter
@@ -91,7 +91,7 @@ public class Converters {
 
     @TypeConverter
     public static Map<String,String> stringToMap(String map) {
-        return readObjectWithTypeToken(map);
+        return readObjectWithTypeToken(map, new TypeToken<Map<String, String>>() {});
     }
 
     @TypeConverter
@@ -111,7 +111,7 @@ public class Converters {
 
     @TypeConverter
     public static List<DepictedItem> stringToList(String depictedItems) {
-        return readObjectWithTypeToken(depictedItems);
+        return readObjectWithTypeToken(depictedItems, new TypeToken<List<DepictedItem>>() {});
     }
 
     private static String writeObjectToString(Object object) {
@@ -120,10 +120,6 @@ public class Converters {
 
     private static<T> T readObjectFromString(String objectAsString, Class<T> clazz) {
         return objectAsString == null ? null : getGson().fromJson(objectAsString, clazz);
-    }
-
-    private static <T> T readObjectWithTypeToken(String objectWithTypeParam) {
-        return readObjectWithTypeToken(objectWithTypeParam, new TypeToken<T>() {});
     }
 
     private static <T> T readObjectWithTypeToken(String objectList, TypeToken<T> typeToken) {
