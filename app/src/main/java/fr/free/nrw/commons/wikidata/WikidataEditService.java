@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.wikidata;
 
 import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
+import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -56,7 +57,7 @@ public class WikidataEditService {
       final WikiBaseClient wikiBaseClient,
       final CaptionInterface captionInterface,
       final WikidataClient wikidataClient,
-      @Named("commons-csrf") final CsrfTokenClient csrfTokenClient) {
+      @Named(NAMED_COMMONS_CSRF) final CsrfTokenClient csrfTokenClient) {
         this.context = context;
         this.wikidataEditListener = wikidataEditListener;
         this.directKvStore = directKvStore;
