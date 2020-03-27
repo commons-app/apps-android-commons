@@ -1,12 +1,12 @@
 package fr.free.nrw.commons.wikidata
 
+import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.wikidata.model.AddEditTagResponse
-import fr.free.nrw.commons.wikidata.model.WbCreateClaimResponse
 import io.reactivex.Observable
-import okhttp3.RequestBody
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers.*
+import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
@@ -32,25 +32,29 @@ class WikidataClientTest {
         `when`(mwQueryResult!!.csrfToken()).thenReturn("test_token")
         `when`(mwQueryResponse.query()).thenReturn(mwQueryResult)
         `when`(wikidataInterface!!.getCsrfToken())
-                .thenReturn(Observable.just(mwQueryResponse))
+            .thenReturn(Observable.just(mwQueryResponse))
     }
 
     @Test
     fun createClaim() {
-        `when`(wikidataInterface!!.postCreateClaim(any(RequestBody::class.java),
-                any(RequestBody::class.java),
-                any(RequestBody::class.java),
-                any(RequestBody::class.java),
-                any(RequestBody::class.java),
-                any(RequestBody::class.java)))
-                .thenReturn(Observable.just(mock(WbCreateClaimResponse::class.java)))
-        wikidataClient!!.createImageClaim("Q1", "test.jpg")
+        `when`(
+            wikidataInterface!!.postCreateClaim(
+                any(),
+                any(),
+                any(),
+                any(),
+                any(),
+                any()
+            )
+        )
+            .thenReturn(Observable.just(mock()))
+        wikidataClient!!.createImageClaim(mock(), "test.jpg")
     }
 
     @Test
     fun addEditTag() {
         `when`(wikidataInterface!!.addEditTag(anyString(), anyString(), anyString(), anyString()))
-                .thenReturn(Observable.just(mock(AddEditTagResponse::class.java)))
+            .thenReturn(Observable.just(mock(AddEditTagResponse::class.java)))
         wikidataClient!!.addEditTag(1L, "test", "test")
     }
 }
