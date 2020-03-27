@@ -243,9 +243,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         compositeDisposable.add(disposable);
     }
 
-    // The imageSpacer is Basically a transparent overlay for the SimpleDraweeView 
-    // which holds the image to be displayed( moreover this image is out of
-    // the scroll view )
+    /**
+     * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
+     * which holds the image to be displayed( moreover this image is out of
+     * the scroll view )
+     * @param imageInfo used to calculate height of the ImageSpacer
+     */
     private void updateAspectRatio(ImageInfo imageInfo) {
         if (imageInfo != null) {
             int finalHeight = (scrollView.getWidth()*imageInfo.getHeight()) / imageInfo.getWidth();
