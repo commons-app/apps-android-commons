@@ -36,6 +36,7 @@
         android:numColumns="auto_fit"
         android:listSelector="@null"
         android:fadingEdge="none"
+        android:scrollbars="none"
         />
 
 </RelativeLayout>
