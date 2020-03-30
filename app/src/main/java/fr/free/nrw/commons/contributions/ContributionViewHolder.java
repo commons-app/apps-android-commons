@@ -50,8 +50,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     public void init(int position, Contribution contribution) {
         this.contribution = contribution;
         this.position = position;
-        imageView.getHierarchy().setPlaceholderImage(new ColorDrawable(
-            Color.argb(100, random.nextInt(256), random.nextInt(256), random.nextInt(256))));
         String imageSource = chooseImageSource(contribution.thumbUrl, contribution.getLocalUri());
         if (!TextUtils.isEmpty(imageSource)) {
             final ImageRequest imageRequest =
