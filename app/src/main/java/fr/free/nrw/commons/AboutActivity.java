@@ -152,7 +152,7 @@ public class AboutActivity extends NavigationBaseActivity {
                     String langCode = CommonsApplication.getInstance().getLanguageLookUpTable().getCodes().get(spinner.getSelectedItemPosition());
                     Utils.handleWebUrl(AboutActivity.this, Uri.parse(Urls.TRANSLATE_WIKI_URL + langCode));
                 });
-        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> finish());
+        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> dialog.cancel());
         builder.create().show();
 
     }
