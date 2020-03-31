@@ -50,9 +50,13 @@
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">%1$d رفع ملف</item>
-    <item quantity="other">%1$d رفع ملفات</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="zero">%1$d ملف جاري رفعه</item>
+    <item quantity="one">%1$d ملف جاري رفعه</item>
+    <item quantity="two">%1$d ملف جاري رفعه</item>
+    <item quantity="few">%1$d ملف جاري رفعه</item>
+    <item quantity="many">%1$d ملف جاري رفعه</item>
+    <item quantity="other">%1$d ملفات جاري رفعها</item>
   </plurals>
   <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
@@ -86,16 +90,30 @@
   <string name="gps_disabled">عطل نظام الملاحة العالمي GPS بجهازك. أترغب في التنشيط؟</string>
   <string name="enable_gps">تفعيل GPS</string>
   <string name="contributions_subtitle_zero">لا مرفوعات بعد</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
+    <item quantity="two">(%1$d)</item>
+    <item quantity="few">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
+  <plurals name="starting_multiple_uploads">
+    <item quantity="zero">جارٍ بدء %1$d رفع</item>
     <item quantity="one">جارٍ بدء %1$d رفع</item>
+    <item quantity="two">جارٍ بدء %1$d رفع</item>
+    <item quantity="few">جارٍ بدء %1$d رفع</item>
+    <item quantity="many">جارٍ بدء %1$d رفع</item>
     <item quantity="other">جارٍ بدء %1$d مرفوعات</item>
   </plurals>
-  <string name="multiple_uploads_title" fuzzy="true">{{جمع|واحد=%1$d رفع|%1$d رفع}}</string>
+  <plurals name="multiple_uploads_title">
+    <item quantity="zero">%1$d رفع</item>
+    <item quantity="one">%1$d رفع</item>
+    <item quantity="two">%1$d رفع</item>
+    <item quantity="few">%1$d رفع</item>
+    <item quantity="many">%1$d رفع</item>
+    <item quantity="other">%1$d رفع</item>
+  </plurals>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
   <string name="categories_skip_explanation">أضف تصنيفات لجعل صورك أكثر قابلية للاكتشاف على ويكيميديا ​​كومنز.\n\nابدأ الكتابة لإضافة تصنيفات.</string>
   <string name="categories_activity_title">تصنيفات</string>
@@ -117,8 +135,12 @@
   <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
   <string name="menu_retry_upload">إعادة المحاولة</string>
   <string name="menu_cancel_upload">إلغاء</string>
-  <plurals name="share_license_summary" fuzzy="true">
+  <plurals name="share_license_summary">
+    <item quantity="zero">سيتم ترخيص هذه الصور تحت %1$s</item>
     <item quantity="one">سيتم ترخيص هذه الصورة تحت %1$s</item>
+    <item quantity="two">سيتم ترخيص هاتين الصورتين تحت ترخيص %1$s</item>
+    <item quantity="few">سيتم ترخيص هذه الصور تحت %1$s</item>
+    <item quantity="many">سيتم ترخيص هذه الصور تحت %1$s</item>
     <item quantity="other">سيتم ترخيص هذه الصور تحت %1$s</item>
   </plurals>
   <string name="media_upload_policy">بتقديم هذه الصورة، أعلن أن هذا عملي الخاص، وأنه لا يحتوي على مواد محفوظة الحقوق أو صور شخصية، وغير ذلك يلتزم &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;بسياسات ويكيميديا ​​كومنز&lt;/a&gt;.</string>
@@ -185,7 +207,9 @@
   <string name="title_activity_nearby">الأماكن القريبة</string>
   <string name="no_nearby">الأماكن القريبة غير متوفرة</string>
   <string name="warning">تحذير</string>
+  <string name="duplicate_image_found">تم العثور على صورة مكررة</string>
   <string name="upload_image_duplicate">هذا الملف موجود بالفعل في كومنز، هل أنت متأكد أنك تريد المتابعة؟</string>
+  <string name="upload">رفع</string>
   <string name="yes">نعم</string>
   <string name="no">لا</string>
   <string name="media_detail_title">العنوان</string>
@@ -259,6 +283,7 @@
   <string name="upload_problem_different_geolocation">تم التقاط هذه الصورة في موقع مختلف.</string>
   <string name="upload_problem_fbmd">من فضلك فقط ارفع الصور التي التقطها بنفسك. لا ترفع الصور التي وجدتها على حسابات الآخرين في فيسبوك.</string>
   <string name="upload_problem_do_you_continue">هل ما زلت تريد رفع هذه الصورة؟</string>
+  <string name="upload_problem_image">تم العثور على مشاكل في الصورة</string>
   <string name="internet_downloaded">يُرجَى فقط رفع الصور التي التقطتها بنفسك، لا ترفع الصور التي قمت بتنزيلها من الإنترنت.</string>
   <string name="give_permission">إعطاء السماح</string>
   <string name="use_external_storage">استخدم تخزينا خارجيا</string>
@@ -390,7 +415,7 @@
   <string name="contributions_fragment">مساهمات</string>
   <string name="nearby_fragment">مجاور</string>
   <string name="notifications">الإشعارات</string>
-  <string name="read_notifications" fuzzy="true">الإخطارات (مؤرشفة)</string>
+  <string name="read_notifications">الإخطارات (مقروءة)</string>
   <string name="display_nearby_notification">عرض الإخطار القريب</string>
   <string name="display_nearby_notification_summary">انقر هنا لرؤية أقرب مكان يحتاج إلى صور</string>
   <string name="no_close_nearby">لم يتم العثور على أماكن قريبة بالقرب منك</string>
@@ -405,8 +430,12 @@
   <string name="submit">إرسال</string>
   <string name="upload_title_duplicate">يوجد ملف باسم الملف %1$s، هل أنت متأكد أنك تريد المتابعة؟</string>
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
-  <plurals name="upload_count_title" fuzzy="true">
+  <plurals name="upload_count_title">
+    <item quantity="zero">%1$d رفع</item>
     <item quantity="one">%1$d رفع</item>
+    <item quantity="two">%1$d رفع</item>
+    <item quantity="few">%1$d رفع</item>
+    <item quantity="many">%1$d رفع</item>
     <item quantity="other">%1$d مرفوعات</item>
   </plurals>
   <string name="navigation_item_bookmarks">العلامات</string>
@@ -496,17 +525,21 @@
   <string name="review_thanks_no_button_text">الصورة التالية</string>
   <string name="skip_image_explanation">النقر فوق هذا الزر سيمنحك صورة أخرى مرفوعة مؤخرا من ويكيميديا ​​كومنز</string>
   <string name="review_image_explanation">يمكنك مراجعة الصور وتحسين جودة ويكيميديا ​​كومنز.\n وسائط اللمراجعة الأربعة هي:\n - هل هذه الصورة في النطاق؟\n - هل تتبع هذه الصورة قواعد حقوق النشر؟\n - هل هذه الصورة مصنفة بشكل صحيح؟\n - إذا سارت الأمور على ما يرام يمكنك أيضا شكر المساهم.</string>
-  <plurals name="receiving_shared_content" fuzzy="true">
+  <plurals name="receiving_shared_content">
+    <item quantity="zero">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
     <item quantity="one">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصورة بعض الوقت بناءً على حجم الصور وجهازك</item>
+    <item quantity="two">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
+    <item quantity="few">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
+    <item quantity="many">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
     <item quantity="other">جارٍ تلقي محتوى مشترك، قد تستغرق معالجة الصور بعض الوقت بناءً على حجم الصور وجهازك</item>
   </plurals>
   <string name="no_image">لا صور مستخدمة</string>
   <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
   <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
   <string name="no_notification">ليست لديك إشعارات غير مقروءة</string>
-  <string name="no_read_notification" fuzzy="true">ليست لديك إشعارات مؤرشفة</string>
+  <string name="no_read_notification">ليست لديك إشعارات مقروءة</string>
   <string name="share_logs_using">مشاركة السجلات باستخدام</string>
-  <string name="menu_option_read" fuzzy="true">عرض المؤرشفة</string>
+  <string name="menu_option_read">عرض المقروءة</string>
   <string name="menu_option_unread">عرض غير المقروءة</string>
   <string name="error_occurred_in_picking_images">حدث خطأ أثناء التقاط الصور</string>
   <string name="image_chooser_title">اختيار الصور للرفع</string>
@@ -575,7 +608,12 @@
   <string name="wallpaper_set_unsuccessfully">هناك خطأ ما. تعذر تعيين الخلفية</string>
   <string name="setting_wallpaper_dialog_title">اجعلها خلفية</string>
   <string name="setting_wallpaper_dialog_message">إعداد الخلفية. أرجو الإنتظار…</string>
-  <string name="theme_default_name" fuzzy="true">افتراضي</string>
+  <string name="theme_default_name">اتبع النظام</string>
   <string name="theme_dark_name">غامق</string>
   <string name="theme_light_name">فاتح</string>
+  <string name="cannot_open_location_settings">فشل في فتح إعدادات الموقع. يرجى تشغيل الموقع يدويا</string>
+  <string name="recommend_high_accuracy_mode">للحصول على أفضل النتائج، اختر وضع High Accuracy.</string>
+  <string name="ask_to_turn_location_on">تشغيل الموقع؟</string>
+  <string name="nearby_needs_location">خدمة قريب من هنا تحتاج إلى تفعيل خدمة الموقع للعمل بشكل صحيح</string>
+  <string name="use_location_from_similar_image">هل قمت بتصوير هاتين الصورتين في نفس المكان؟ هل تريد استخدام دائرة العرض / خط الطول للصورة على اليمين؟</string>
 </resources>

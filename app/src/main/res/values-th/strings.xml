@@ -97,8 +97,8 @@
   <string name="menu_about">เกี่ยวกับ</string>
   <string name="about_license">แอปวิกิมีเดียคอมมอนส์เป็นแอปโอเพนซอร์สที่สร้างขึ้นและดูแลโดยผู้มีสิทธิและอาสาสมัครของชุมชนวิกิมีเดีย มูลนิธิวิกิมีเดียไม่มีส่วนเกี่ยวข้องในการสร้าง พัฒนา หรือการบำรุงรักษาแอปใดๆ ทั้งสิ้น</string>
   <string name="about_improve">สร้าง &lt;a href=\"%1$s\"&gt;GitHub issue&lt;/a&gt; ใหม่เพื่อรายงานบั๊กและส่งข้อเสนอแนะ</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;นโยบายความเป็นส่วนตัว&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;เครดิต&lt;/u&gt;</string>
+  <string name="about_privacy_policy">นโยบายความเป็นส่วนตัว</string>
+  <string name="about_credits">เครดิต</string>
   <string name="title_activity_about">เกี่ยวกับ</string>
   <string name="menu_feedback">ส่งคำติชม (ผ่านทางอีเมล)</string>
   <string name="no_email_client">ไม่ได้ติดตั้งไคลเอนต์อีเมล</string>
@@ -114,10 +114,10 @@
   <string name="media_upload_policy">โดยการส่งรูปภาพนี้ ฉันยืนยันว่านี่เป็นงานของฉันเอง ซึ่งไม่ประกอบด้วยเนื้อหาที่ละเมิดลิขสิทธิ์หรือภาพเซลฟี หรืออื่นๆ ตามที่ระบุใน&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;นโยบายของ Wikimedia Commons&lt;/a&gt;</string>
   <string name="menu_download">ดาวน์โหลด</string>
   <string name="preference_license">สัญญาอนุญาตปริยาย</string>
-  <string name="use_previous" fuzzy="true">ใช้ชื่อเรื่อง/คำอธิบายก่อนหน้านี้</string>
+  <string name="use_previous">ใช้ชื่อเรื่องและคำอธิบายก่อนหน้านี้</string>
   <string name="allow_gps">รับข้อมูลตำแหน่งที่ตั้งปัจจุบันโดยอัตโนมัติ</string>
   <string name="allow_gps_summary">ดึงข้อมูลตำแหน่งที่ตั้งปัจจุบันเพื่อรับข้อเสนอแนะเกี่ยวกับหมวดหมู่ถ้ารูปภาพไม่ได้ติดแท็กตำแหน่งที่ตั้งเอาไว้</string>
-  <string name="preference_theme" fuzzy="true">โหมดกลางคืน</string>
+  <string name="preference_theme">ธีม</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -158,7 +158,7 @@
   <string name="welcome_copyright_subtext">หลีกเลี่ยงเนื้อหาที่คุณพบในอินเทอร์เน็ต เช่น รูปภาพในโปสเตอร์ ปกหนังสือ ฯลฯ</string>
   <string name="welcome_final_text">คุณคิดว่าคุณเข้าใจแล้วใช่ไหม?</string>
   <string name="welcome_final_button_text">ใช่!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;ข้อมูลเพิ่มเติม&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">ข้อมูลเพิ่มเติม</string>
   <string name="detail_panel_cats_label">หมวดหมู่</string>
   <string name="detail_panel_cats_loading">กำลังโหลด…</string>
   <string name="detail_panel_cats_none">ไม่ได้เลือกไว้</string>
@@ -175,7 +175,9 @@
   <string name="title_activity_nearby">สถานที่ใกล้เคียง</string>
   <string name="no_nearby">ไม่พบสถานที่ใกล้เคียง</string>
   <string name="warning">คำเตือน</string>
+  <string name="duplicate_image_found">พบภาพซ้ำซ้อน</string>
   <string name="upload_image_duplicate">มีไฟล์นี้อยู่แล้วบนคอมมอนส์ คุณต้องการจะดำเนินการต่อหรือไม่</string>
+  <string name="upload">อัปโหลด</string>
   <string name="yes">ใช่</string>
   <string name="no">ไม่</string>
   <string name="media_detail_title">ชื่อเรื่อง</string>
@@ -249,6 +251,7 @@
   <string name="upload_problem_different_geolocation">ภาพนี้ถูกถ่ายในตำแหน่งอื่น</string>
   <string name="upload_problem_fbmd">กรุณาอัพโหลดเฉพาะภาพที่คุณเป็นคนถ่ายหรือสร้างสรรค์ขึ้นมาเองเท่านั้น อย่าอัพโหลดรูปภาพที่คุณได้มาจากบุคคลอื่นจากบัญชีเฟซบุคของพวกเขา</string>
   <string name="upload_problem_do_you_continue">คุณยังต้องการอัพโหลดภาพนี้อยู่หรือไม่</string>
+  <string name="upload_problem_image">พบปัญหาในภาพ</string>
   <string name="internet_downloaded">กรุณาอัพโหลดเฉพาะภาพที่คุณเป็นคนถ่ายหรือสร้างสรรค์ขึ้นมาเองเท่านั้น อย่าอัพโหลดรูปภาพที่คุณได้มาจากการดาวน์โหลดบนอินเทอร์เน็ต</string>
   <string name="give_permission">ให้สิทธิ์</string>
   <string name="use_external_storage">ใช้ที่จัดเก็บข้อมูลภายนอก</string>
@@ -260,7 +263,7 @@
   <string name="null_url">ข้อผิดพลาด! ไม่พบ URL</string>
   <string name="nominate_deletion">เสนอการลบ</string>
   <string name="nominated_for_deletion">ภาพนี้ถูกเสนอการลบแล้ว</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;ดูที่เว็บไซต์สำหรับข้อมูลเพิ่มเติม&lt;/u&gt;</string>
+  <string name="nominated_see_more">ดูที่เว็บไซต์สำหรับข้อมูลเพิ่มเติม</string>
   <string name="nominating_file_for_deletion">แจ้งลบไฟล์ %1$s</string>
   <string name="nominating_for_deletion_status">รายชื่อไฟล์ที่แจ้งไปแล้ว: %1$s</string>
   <string name="view_browser">ดูในเบราว์เซอร์</string>
@@ -272,7 +275,7 @@
   <string name="copy_wikicode">คัดลอก Wikitext ไปที่คลิปบอร์ด</string>
   <string name="wikicode_copied">คัดลอกแล้ว</string>
   <string name="nearby_location_has_not_changed">ไม่ได้เปลี่ยนตำแหน่งที่ตั้ง</string>
-  <string name="nearby_location_not_available" fuzzy="true">ตำแหน่งที่ตั้งไม่พร้อมใช้งาน</string>
+  <string name="nearby_location_not_available">ฟีเจอร์สถานที่ใกล้ฉันอาจไม่ทำงาน ตำแหน่งที่ตั้งไม่พร้อมใช้งาน</string>
   <string name="location_permission_rationale_nearby">ต้องการสิทธิเพื่อแสดงรายการสถานที่ใกล้เคียง</string>
   <string name="get_directions">ดูเส้นทาง</string>
   <string name="read_article">อ่านบทความ</string>
@@ -285,8 +288,8 @@
   <string name="nearby_wikidata">วิกิสนเทศ</string>
   <string name="nearby_wikipedia">วิกิพีเดีย</string>
   <string name="nearby_commons">คอมมอนส์</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;ให้คะแนนเรา&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
+  <string name="about_rate_us">ให้คะแนน</string>
+  <string name="about_faq">คำถามที่พบบ่อย</string>
   <string name="welcome_skip_button">ข้ามบทช่วยสอน</string>
   <string name="no_internet">อินเทอร์เน็ตไม่พร้อมใช้งาน</string>
   <string name="internet_established">อินเทอร์เน็ตพร้อมใช้งาน</string>
@@ -294,7 +297,7 @@
   <string name="error_review">เกิดข้อผิดพลาดสำหรับการแสดงตัวอย่าง กรุณาลองใหม่อีกครั้ง</string>
   <string name="error_review_categories">เกิดข้อผิดพลาดสำหรับการแสดงตัวอย่าง กรุณาลองใหม่อีกครั้ง</string>
   <string name="no_notifications">ไม่พบการแจ้งความ</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;แปล&lt;/u&gt;</string>
+  <string name="about_translate">แปลภาษา</string>
   <string name="about_translate_title">ภาษา</string>
   <string name="about_translate_message">เลือกภาษาที่คุณต้องการส่งการแปล</string>
   <string name="about_translate_proceed">ดำเนินการต่อ</string>

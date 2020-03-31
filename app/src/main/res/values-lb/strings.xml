@@ -164,6 +164,7 @@
   <string name="title_activity_nearby">Plazen nobäi</string>
   <string name="no_nearby">Keng Plazen nobäi fonnt</string>
   <string name="warning">Warnung</string>
+  <string name="upload">Eroplueden</string>
   <string name="yes">Jo</string>
   <string name="no">Neen</string>
   <string name="media_detail_title">Titel</string>
@@ -337,7 +338,7 @@
   <string name="review_thanks_no_button_text">Nächst BILD</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
-  <string name="no_read_notification" fuzzy="true">Dir hutt keng archivéier Notifikatiounen</string>
+  <string name="no_read_notification">Dir hutt keng net-geliest Notifikatiounen</string>
   <string name="menu_option_read">Déi geliest weisen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
   <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>

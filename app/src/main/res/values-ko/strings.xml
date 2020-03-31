@@ -182,7 +182,9 @@
   <string name="title_activity_nearby">근처의 장소</string>
   <string name="no_nearby">근처에 장소가 없습니다</string>
   <string name="warning">경고</string>
+  <string name="duplicate_image_found">중복 이미지가 있습니다</string>
   <string name="upload_image_duplicate">이 파일은 이미 공용에 존재합니다. 계속하시겠습니까?</string>
+  <string name="upload">업로드</string>
   <string name="yes">예</string>
   <string name="no">아니오</string>
   <string name="media_detail_title">제목</string>
@@ -254,6 +256,7 @@
   <string name="upload_problem_image_duplicate">이미지가 이미 공용에 있습니다.</string>
   <string name="upload_problem_different_geolocation">이 사진은 다른 위치에서 찍었습니다.</string>
   <string name="upload_problem_do_you_continue">그래도 이 사진을 업로드하시겠습니까?</string>
+  <string name="upload_problem_image">이미지에 문제가 있습니다</string>
   <string name="give_permission">권한 부여</string>
   <string name="use_external_storage">외부 저장소 사용하기</string>
   <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
