@@ -69,7 +69,7 @@ class NearbyParentFragmentPresenterTest {
     }
 
     /**
-     * Test testUpdateMapAndList returns with zero interactions when location is locked
+     * Test updateMapAndList method returns with zero interactions when location is locked
      */
     @Test
     fun testUpdateMapAndListWhenLocationLocked() {
@@ -79,7 +79,7 @@ class NearbyParentFragmentPresenterTest {
     }
 
     /**
-     * Test testUpdateMapAndList returns with zero interactions when network connection
+     * Test updateMapAndList method returns with zero interactions when network connection
      * is not established
      */
     @Test
@@ -92,7 +92,7 @@ class NearbyParentFragmentPresenterTest {
     }
 
     /**
-     * Test testUpdateMapAndList returns with zero interactions when last location is null
+     * Test updateMapAndList method returns with zero interactions when last location is null
      */
     @Test
     fun testUpdateMapAndListWhenLastLocationIsNull() {
@@ -106,7 +106,7 @@ class NearbyParentFragmentPresenterTest {
     }
 
     /**
-     * Test testUpdateMapAndList updates parent fragment view with latest location of user
+     * Test updateMapAndList method updates parent fragment view with latest location of user
      * at significant location change
      */
     @Test
@@ -119,7 +119,7 @@ class NearbyParentFragmentPresenterTest {
     }
 
     /**
-     * Test testUpdateMapAndList updates parent fragment view with camera target location
+     * Test updateMapAndList method updates parent fragment view with camera target location
      * at search custom area mode
      */
     @Test
@@ -130,5 +130,36 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(cameraTarget)
         nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA)
         verify(nearbyParentFragmentView).populatePlaces(cameraTarget)
+    }
+
+    /**
+     * Test testUpdateMapAndList tracks users location if current location marker is visible and
+     * location is slightly changed
+     */
+    @Test
+    fun testUserTrackedWhenCurrentLocationMarkerVisible() {
+        nearbyPresenter.setNearbyLocked(false)
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(true)
+        nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
+        verify(nearbyParentFragmentView).recenterMap(latestLocation)
+    }
+
+    /**
+     * Test testUpdateMapAndList doesn't track users location if current location marker is
+     * invisible and location is slightly changed
+     */
+    @Test
+    fun testUserNotTrackedWhenCurrentLocationMarkerInvisible() {
+        nearbyPresenter.setNearbyLocked(false)
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(false)
+        nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
+        verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
+        verify(nearbyParentFragmentView).getLastLocation()
+        verify(nearbyParentFragmentView).isCurrentLocationMarkerVisible()
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 }
