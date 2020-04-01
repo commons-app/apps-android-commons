@@ -241,7 +241,7 @@ public class OkHttpJsonApiClient {
                 if (binding.getSubclassLabel().getXmlLang() != null) {
                     String label = binding.getSubclassLabel().getValue();
                     String entityId = binding.getSubclass().getValue();
-                    entityId = entityId.substring(entityId.lastIndexOf("/") - 1);
+                    entityId = entityId.substring(entityId.lastIndexOf("/") + 1);
                     subItems.add(new DepictedItem(label, "", "", false,entityId ));
                     Timber.e(label);
                 }
