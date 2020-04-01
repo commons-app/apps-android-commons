@@ -373,4 +373,12 @@ public class NearbyParentFragmentPresenter
             return true;
         }
     }
+
+    public boolean isNearbyLocked() {
+        return isNearbyLocked;
+    }
+
+    public void setNearbyLocked(boolean nearbyLocked) {
+        isNearbyLocked = nearbyLocked;
+    }
 }

@@ -1,13 +1,17 @@
 package fr.free.nrw.commons.nearby
 
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
 
@@ -27,7 +31,7 @@ class NearbyParentFragmentPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        nearbyPresenter = NearbyParentFragmentPresenter(bookmarkLocationsDao)
+        nearbyPresenter = Mockito.spy(NearbyParentFragmentPresenter(bookmarkLocationsDao))
         nearbyPresenter.attachView(nearbyParentFragmentView)
     }
 
@@ -42,7 +46,7 @@ class NearbyParentFragmentPresenterTest {
     }
 
     /**
-     * Test lock unlock nearby method to lock nearby
+     * Test lockUnlockNearby method to lock nearby case
      */
     @Test
     fun testLockUnlockNearbyForLocked() {
@@ -50,13 +54,49 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).disableFABRecenter()
     }
 
-
     /**
-     * Test lock unlock nearby method to unlock nearby
+     * Test lockUnlockNearby method to unlock nearby case
      */
     @Test
     fun testLockUnlockNearbyForUnlocked() {
         nearbyPresenter.lockUnlockNearby(false)
         verify(nearbyParentFragmentView).enableFABRecenter()
+    }
+
+    /**
+     * Test testUpdateMapAndList returns with zero interactions when location is locked
+     */
+    @Test
+    fun testUpdateMapAndListWhenLocationLocked() {
+        nearbyPresenter.setNearbyLocked(true)
+        nearbyPresenter.updateMapAndList(null)
+        verifyZeroInteractions(nearbyParentFragmentView)
+    }
+
+    /**
+     * Test testUpdateMapAndList returns with zero interactions when network connection
+     * is not established
+     */
+    @Test
+    fun testUpdateMapAndListWhenNoNetworkConnection() {
+        nearbyPresenter.setNearbyLocked(false)
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(false)
+        nearbyPresenter.updateMapAndList(null)
+        verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
+        verifyNoMoreInteractions(nearbyParentFragmentView)
+    }
+
+    /**
+     * Test testUpdateMapAndList returns with zero interactions when last location is null
+     */
+    @Test
+    fun testUpdateMapAndListWhenLastLocationIsNull() {
+        nearbyPresenter.setNearbyLocked(false)
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(null)
+        nearbyPresenter.updateMapAndList(null)
+        verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
+        verify(nearbyParentFragmentView).getLastLocation()
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 }
