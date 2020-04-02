@@ -208,7 +208,7 @@ class NearbyParentFragmentPresenterTest {
      * We expect zero interaction from view when state is UNKNOWN
      */
     @Test
-    fun filterByMarkerTypeMultiSelectUNKNOWN() {
+    fun testFilterByMarkerTypeMultiSelectUNKNOWN() {
         val state = CheckBoxTriStates.UNKNOWN
         nearbyPresenter.filterByMarkerType(selectedLabels,state,false,true)
         verifyZeroInteractions(nearbyParentFragmentView)
@@ -222,7 +222,7 @@ class NearbyParentFragmentPresenterTest {
      * the state is UNCHECKED
      */
     @Test
-    fun filterByMarkerTypeMultiSelectUNCHECKED() {
+    fun testFilterByMarkerTypeMultiSelectUNCHECKED() {
         val state = CheckBoxTriStates.UNCHECKED
         nearbyPresenter.filterByMarkerType(selectedLabels,state,false,true)
         verify(nearbyParentFragmentView).filterOutAllMarkers()
@@ -238,7 +238,7 @@ class NearbyParentFragmentPresenterTest {
      * the state is CHECKED
      */
     @Test
-    fun filterByMarkerTypeMultiSelectCHECKED() {
+    fun testFilterByMarkerTypeMultiSelectCHECKED() {
         val state = CheckBoxTriStates.CHECKED
         nearbyPresenter.filterByMarkerType(selectedLabels, state, false,true)
         verify(nearbyParentFragmentView).displayAllMarkers()
@@ -246,10 +246,34 @@ class NearbyParentFragmentPresenterTest {
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
+    /**
+     * We expect just filterMarkersByLabels is called when filterForAllNoneType is false
+     */
     @Test
-    fun filterByMarkerTypeSingleSelectCHECKED() {
+    fun testFilterByMarkerTypeSingleSelect() {
         nearbyPresenter.filterByMarkerType(selectedLabels, 0, true,false)
         verify(nearbyParentFragmentView).filterMarkersByLabels(any(), any(), any(), any(), any());
         verifyNoMoreInteractions(nearbyParentFragmentView)
+    }
+
+    /**
+     * Test if bottom sheet gets hidden after search view gained focus
+     */
+    @Test
+    fun testSearchViewFocusWhenBottomSheetExpanded() {
+        whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(true)
+        nearbyPresenter.searchViewGainedFocus()
+        verify(nearbyParentFragmentView).hideBottomSheet()
+    }
+
+    /**
+     * Test if bottom details sheet gets hidden after search view gained focus
+     */
+    @Test
+    fun testSearchViewFocusWhenDetailsBottomSheetVisible() {
+        whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(false)
+        whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible()).thenReturn(true)
+        nearbyPresenter.searchViewGainedFocus()
+        verify(nearbyParentFragmentView).hideBottomDetailsSheet()
     }
 }
