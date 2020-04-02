@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 
+import fr.free.nrw.commons.depictions.SubClass.models.SubclassDescription;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -242,7 +243,13 @@ public class OkHttpJsonApiClient {
                     String label = binding.getSubclassLabel().getValue();
                     String entityId = binding.getSubclass().getValue();
                     entityId = entityId.substring(entityId.lastIndexOf("/") + 1);
-                    subItems.add(new DepictedItem(label, "", "", false,entityId ));
+                    String description = "";
+                    SubclassDescription subclassDescription = binding.getSubclassDescription();
+                    if (subclassDescription != null
+                        && subclassDescription.getXmlLang() != null) {
+                        description = subclassDescription.getValue();
+                    }
+                    subItems.add(new DepictedItem(label, description, "", false,entityId ));
                     Timber.e(label);
                 }
             }
@@ -288,7 +295,13 @@ public class OkHttpJsonApiClient {
                         if (parentClass.get("value") != null) {
                             String entityId = parentClass.getString("value");
                             entityId = entityId.substring(entityId.lastIndexOf("/") + 1);
-                            subItems.add(new DepictedItem(labelString, "", "", false, entityId));
+                            String description = "";
+                            if (!object.isNull("parentClassDescription")) {
+                                JSONObject parentClassDescription = (JSONObject) object
+                                    .get("parentClassDescription");
+                                description = parentClassDescription.getString("value");
+                            }
+                            subItems.add(new DepictedItem(labelString, description, "", false, entityId));
                         }
                     }
                 }
