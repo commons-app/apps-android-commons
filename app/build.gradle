@@ -244,6 +244,7 @@ android {
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.beta.wmflabs.org/wikipedia/commons\""
             buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/\""
             buildConfigField "String", "COMMONS_URL", "\"https://commons.wikimedia.beta.wmflabs.org\""
+            buildConfigField "String", "COMMONS_URL_SEARCH", "\"https://commons.wikimedia.org\""
             buildConfigField "String", "WIKIDATA_URL", "\"https://www.wikidata.org\""
             buildConfigField "String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/wiki/\""
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
