@@ -8,7 +8,7 @@ import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatcher
+import org.junit.Assert.*
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -275,5 +275,46 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible()).thenReturn(true)
         nearbyPresenter.searchViewGainedFocus()
         verify(nearbyParentFragmentView).hideBottomDetailsSheet()
+    }
+
+    /**
+     * Test if the search is close to current location, when last location is null we expect it to
+     * return true
+     */
+    @Test
+    fun testSearchCloseToCurrentLocationNullLastLocation() {
+        whenever(nearbyParentFragmentView.getLastFocusLocation()).thenReturn(null)
+        val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
+        assertTrue(isClose!!)
+    }
+
+    /**
+     * Test if the search is close to current location, when far
+     */
+    @Test
+    fun testSearchCloseToCurrentLocationWhenFar() {
+        whenever(nearbyParentFragmentView.getLastFocusLocation()).
+            thenReturn(Mockito.spy(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0)))
+        whenever(nearbyParentFragmentView.getCameraTarget()).
+                thenReturn(Mockito.spy(LatLng(2.0,1.0,0.0F)))
+        //111.19 km real distance, return false if 148306.444306 >  currentLocationSearchRadius
+        NearbyController.currentLocationSearchRadius = 148306.0
+        val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
+        assertFalse(isClose!!)
+    }
+
+    /**
+     * Test if the search is close to current location, when close
+     */
+    @Test
+    fun testSearchCloseToCurrentLocationWhenClose() {
+        whenever(nearbyParentFragmentView.getLastFocusLocation()).
+            thenReturn(Mockito.spy(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0)))
+        whenever(nearbyParentFragmentView.getCameraTarget()).
+            thenReturn(Mockito.spy(LatLng(2.0,1.0,0.0F)))
+        //111.19 km real distance, return false if 148253.333 >  currentLocationSearchRadius
+        NearbyController.currentLocationSearchRadius = 148307.0
+        val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
+        assertTrue(isClose!!)
     }
 }
