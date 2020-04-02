@@ -1,9 +1,6 @@
 package fr.free.nrw.commons.nearby
 
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
-import com.nhaarman.mockitokotlin2.verifyZeroInteractions
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
@@ -11,6 +8,7 @@ import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatcher
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -242,9 +240,16 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun filterByMarkerTypeMultiSelectCHECKED() {
         val state = CheckBoxTriStates.CHECKED
-        nearbyPresenter.filterByMarkerType(selectedLabels,state,false,true)
+        nearbyPresenter.filterByMarkerType(selectedLabels, state, false,true)
         verify(nearbyParentFragmentView).displayAllMarkers()
         verify(nearbyParentFragmentView).setRecyclerViewAdapterAllSelected()
+        verifyNoMoreInteractions(nearbyParentFragmentView)
+    }
+
+    @Test
+    fun filterByMarkerTypeSingleSelectCHECKED() {
+        nearbyPresenter.filterByMarkerType(selectedLabels, 0, true,false)
+        verify(nearbyParentFragmentView).filterMarkersByLabels(any(), any(), any(), any(), any());
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 }
