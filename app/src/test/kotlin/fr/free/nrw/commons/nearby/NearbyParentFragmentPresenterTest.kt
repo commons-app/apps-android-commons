@@ -29,6 +29,8 @@ class NearbyParentFragmentPresenterTest {
     @Mock
     internal lateinit var cameraTarget: LatLng
     private lateinit var nearbyPresenter: NearbyParentFragmentPresenter
+    private lateinit var latestLocationSpy: LatLng
+    private lateinit var mapboxCameraTarget: com.mapbox.mapboxsdk.geometry.LatLng
     /**
      * initial setup
      */
@@ -161,5 +163,39 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).getLastLocation()
         verify(nearbyParentFragmentView).isCurrentLocationMarkerVisible()
         verifyNoMoreInteractions(nearbyParentFragmentView)
+    }
+
+    /**
+     * Test search this area button became visible after user moved the camera target to far
+     * away from current target. Distance between these two point is 111.19 km, so our camera target
+     * is at outside of previously searched region if we set latestSearchRadius below 111.19. Thus
+     * setSearchThisAreaButtonVisibility(true) should be verified
+     */
+    @Test
+    fun testSearchThisAreaButtonVisibleWhenMoveToFarPosition() {
+        NearbyController.latestSearchLocation = Mockito.spy(LatLng(2.0,1.0,0.0F))
+        mapboxCameraTarget = Mockito.spy(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0))
+        // Distance between these two point is 111.19 km
+        NearbyController.latestSearchRadius = 111.0*1000 // To meter
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        nearbyPresenter.onCameraMove(mapboxCameraTarget)
+        verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(true)
+    }
+
+    /**
+     * Test search this area button became visible after user moved the camera target to far
+     * away from current target. Distance between these two point is 111.19 km, so our camera target
+     * is at inside of previously searched region if we set latestSearchRadius above 111.19. Thus
+     * setSearchThisAreaButtonVisibility(false) should be verified
+     */
+    @Test
+    fun testSearchThisAreaButtonInvisibleWhenMoveToClosePosition() {
+        NearbyController.latestSearchLocation = Mockito.spy(LatLng(2.0,1.0,0.0F))
+        mapboxCameraTarget = Mockito.spy(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0))
+        // Distance between these two point is 111.19 km
+        NearbyController.latestSearchRadius = 112.0*1000 // To meter
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        nearbyPresenter.onCameraMove(mapboxCameraTarget)
+        verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(false)
     }
 }
