@@ -13,7 +13,9 @@ public class Binding {
     @SerializedName("subclassLabel")
     @Expose
     private SubclassLabel subclassLabel;
-
+    @SerializedName("subclassDescription")
+    @Expose
+    private SubclassDescription subclassDescription;
     /**
      * No args constructor for use in serialization
      *
@@ -26,10 +28,11 @@ public class Binding {
      * @param subclassLabel
      * @param subclass
      */
-    public Binding(Subclass subclass, SubclassLabel subclassLabel) {
+    public Binding(Subclass subclass, SubclassLabel subclassLabel, SubclassDescription subclassDescription) {
         super();
         this.subclass = subclass;
         this.subclassLabel = subclassLabel;
+        this.subclassDescription = subclassDescription;
     }
 
     public Subclass getSubclass() {
@@ -44,8 +47,16 @@ public class Binding {
         return subclassLabel;
     }
 
+    public SubclassDescription getSubclassDescription(){
+        return subclassDescription;
+    }
+
     public void setSubclassLabel(SubclassLabel subclassLabel) {
         this.subclassLabel = subclassLabel;
+    }
+
+    public void setSubclassDescription(SubclassDescription subclassDescription) {
+        this.subclassDescription = subclassDescription;
     }
 
 }
