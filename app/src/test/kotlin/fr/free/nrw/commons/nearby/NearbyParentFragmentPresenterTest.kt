@@ -28,9 +28,13 @@ class NearbyParentFragmentPresenterTest {
     internal lateinit var latestLocation: LatLng
     @Mock
     internal lateinit var cameraTarget: LatLng
+    @Mock
+    internal lateinit var selectedLabels: List<Label>
+
     private lateinit var nearbyPresenter: NearbyParentFragmentPresenter
     private lateinit var latestLocationSpy: LatLng
     private lateinit var mapboxCameraTarget: com.mapbox.mapboxsdk.geometry.LatLng
+
     /**
      * initial setup
      */
@@ -168,8 +172,8 @@ class NearbyParentFragmentPresenterTest {
     /**
      * Test search this area button became visible after user moved the camera target to far
      * away from current target. Distance between these two point is 111.19 km, so our camera target
-     * is at outside of previously searched region if we set latestSearchRadius below 111.19. Thus
-     * setSearchThisAreaButtonVisibility(true) should be verified
+     * is at outside of previously searched region if we set latestSearchRadius below 111.19. Thus,
+     * setSearchThisAreaButtonVisibility(true) should be verified.
      */
     @Test
     fun testSearchThisAreaButtonVisibleWhenMoveToFarPosition() {
@@ -185,8 +189,8 @@ class NearbyParentFragmentPresenterTest {
     /**
      * Test search this area button became visible after user moved the camera target to far
      * away from current target. Distance between these two point is 111.19 km, so our camera target
-     * is at inside of previously searched region if we set latestSearchRadius above 111.19. Thus
-     * setSearchThisAreaButtonVisibility(false) should be verified
+     * is at inside of previously searched region if we set latestSearchRadius above 111.19. Thus,
+     * setSearchThisAreaButtonVisibility(false) should be verified.
      */
     @Test
     fun testSearchThisAreaButtonInvisibleWhenMoveToClosePosition() {
@@ -197,5 +201,50 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         nearbyPresenter.onCameraMove(mapboxCameraTarget)
         verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(false)
+    }
+
+    /**
+     * Multi selection should overwrite single selection of marker types. Ie. when user choose
+     *"parks", then they multi select to display all or none, we overwrite previous "park" filter.
+     *
+     * We expect zero interaction from view when state is UNKNOWN
+     */
+    @Test
+    fun filterByMarkerTypeMultiSelectUNKNOWN() {
+        val state = CheckBoxTriStates.UNKNOWN
+        nearbyPresenter.filterByMarkerType(selectedLabels,state,false,true)
+        verifyZeroInteractions(nearbyParentFragmentView)
+    }
+
+    /**
+     * Multi selection should overwrite single selection of marker types. Ie. when user choose
+     *"parks", then they multi select to display all or none, we overwrite previous "park" filter.
+     *
+     * We expect just filterOutAllMarkers and setRecyclerViewAdapterItemsGreyedOut is called when
+     * the state is UNCHECKED
+     */
+    @Test
+    fun filterByMarkerTypeMultiSelectUNCHECKED() {
+        val state = CheckBoxTriStates.UNCHECKED
+        nearbyPresenter.filterByMarkerType(selectedLabels,state,false,true)
+        verify(nearbyParentFragmentView).filterOutAllMarkers()
+        verify(nearbyParentFragmentView).setRecyclerViewAdapterItemsGreyedOut()
+        verifyNoMoreInteractions(nearbyParentFragmentView)
+    }
+
+    /**
+     * Multi selection should overwrite single selection of marker types. Ie. when user choose
+     *"parks", then they multi select to display all or none, we overwrite previous "park" filter.
+     *
+     * We expect just displayAllMarkers and setRecyclerViewAdapterAllSelected is called when
+     * the state is CHECKED
+     */
+    @Test
+    fun filterByMarkerTypeMultiSelectCHECKED() {
+        val state = CheckBoxTriStates.CHECKED
+        nearbyPresenter.filterByMarkerType(selectedLabels,state,false,true)
+        verify(nearbyParentFragmentView).displayAllMarkers()
+        verify(nearbyParentFragmentView).setRecyclerViewAdapterAllSelected()
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 }
