@@ -258,8 +258,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         DisplayMetrics dm = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-        return width;
+        return dm.widthPixels;
     }
 
     private final ControllerListener aspectRatioListener = new BaseControllerListener<ImageInfo>() {
