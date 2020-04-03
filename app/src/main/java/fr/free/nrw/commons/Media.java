@@ -166,7 +166,7 @@ public class Media implements Parcelable {
         try {
             String artistHtml = metadata.artist();
             return artistHtml.substring(artistHtml.indexOf("title=\""), artistHtml.indexOf("\">"))
-                    .replace("title=\"User:", "");
+                    .replaceAll("(.*):", "").replace("(page does not exist)", "");
         } catch (Exception ex) {
             return "";
         }
