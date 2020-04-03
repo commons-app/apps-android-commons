@@ -243,7 +243,6 @@ public class OkHttpJsonApiClient {
                 if (binding.getSubclassLabel().getXmlLang() != null) {
                     String label = binding.getSubclassLabel().getValue();
                     String entityId = binding.getSubclass().getValue();
-<<<<<<< HEAD
                     entityId = entityId.substring(entityId.lastIndexOf("/") + 1);
                     String description = "";
                     SubclassDescription subclassDescription = binding.getSubclassDescription();
@@ -252,12 +251,6 @@ public class OkHttpJsonApiClient {
                         description = subclassDescription.getValue();
                     }
                     subItems.add(new DepictedItem(label, description, "", false,entityId ));
-||||||| dec68ed92
-
-=======
-                    entityId = entityId.substring(entityId.lastIndexOf("/") + 1);
-                    subItems.add(new DepictedItem(label, "", "", false,entityId ));
->>>>>>> upstream/structured-data
                     Timber.e(label);
                 }
             }
