@@ -285,7 +285,7 @@ public class UploadService extends HandlerService<Contribution> {
                         contribution.setFilename(canonicalFilename);
                         contribution.setImageUrl(uploadResult.getImageinfo().getOriginalUrl());
                         contribution.setState(Contribution.STATE_COMPLETED);
-                        contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatShort()
+                        contribution.setDateUploaded(CommonsDateUtil.getIso8601DateFormatTimestamp()
                                 .parse(uploadResult.getImageinfo().getTimestamp()));
                         compositeDisposable.add(contributionDao
                                 .save(contribution)

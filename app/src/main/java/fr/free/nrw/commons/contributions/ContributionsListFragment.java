@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -186,8 +185,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     }
 
     public void setContributions(List<Contribution> contributionList) {
-        Collections.sort(contributionList, new ContributionComparator());
-        Collections.reverse(contributionList);
         this.contributions.clear();
         this.contributions.addAll(contributionList);
         adapter.setContributions(contributions);
