@@ -25,6 +25,7 @@
     <color name="secondaryTextColor">#000000</color>
 
     <color name="deleteRed">#D32F2F</color>
+    <color name="deleteRedDark">#90960a0a</color>
     <color name="deleteButton">#44000000</color>
     <color name="deleteButtonDark">#88000000</color>
     <color name="deleteButtonLight">#44ffffff</color>

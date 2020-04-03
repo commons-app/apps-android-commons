@@ -274,7 +274,6 @@
                         android:layout_weight="30"
                         android:paddingLeft="@dimen/tiny_padding"
                         android:paddingTop="@dimen/dimen_6"
-                        android:gravity="center"
                         android:text="@string/media_detail_uploaded_date"
                         android:textColor="?attr/mediaDetailsHeadingText"
                         android:textSize="@dimen/normal_text"

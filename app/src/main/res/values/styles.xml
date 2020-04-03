@@ -37,7 +37,7 @@
         <item name="iconMap24" >@drawable/ic_map_white_24dp</item>
         <item name="mediaDetailsText" >@color/white</item>
         <item name="mediaDetailsHeadingText">@color/layout_light_grey</item>
-        <item name="mediaDetailNominationBackground">@color/deleteRed</item>
+        <item name="mediaDetailNominationBackground">@color/deleteRedDark</item>
         <item name="mediaDetailSpacerColor">@color/browser_actions_divider_color</item>
     </style>
 
