@@ -37,7 +37,7 @@ public class CategoryClient {
      * @return
      */
     public Observable<String> searchCategories(String filter, int itemLimit, int offset) {
-        return responseToCategoryName(CategoryInterface.searchCategories("intitle:"+filter, itemLimit, offset));
+        return responseToCategoryName(CategoryInterface.searchCategories(filter, itemLimit, offset));
 
     }
 
