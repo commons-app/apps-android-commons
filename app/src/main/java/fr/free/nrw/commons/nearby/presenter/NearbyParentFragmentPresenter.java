@@ -83,6 +83,7 @@ public class NearbyParentFragmentPresenter
         this.nearbyParentFragmentView=DUMMY;
     }
 
+    @VisibleForTesting
     public void initializeMapOperations() {
         lockUnlockNearby(false);
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
