@@ -89,8 +89,8 @@ object DialogUtil {
         activity: Activity,
         title: String,
         message: String,
-        onPositiveBtnClick: Runnable,
-        onNegativeBtnClick: Runnable,
+        onPositiveBtnClick: Runnable?,
+        onNegativeBtnClick: Runnable?,
         customView: View,
         cancelable: Boolean
     ) {
