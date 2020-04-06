@@ -32,7 +32,6 @@ class NearbyParentFragmentPresenterTest {
     internal lateinit var selectedLabels: List<Label>
 
     private lateinit var nearbyPresenter: NearbyParentFragmentPresenter
-    private lateinit var latestLocationSpy: LatLng
     private lateinit var mapboxCameraTarget: com.mapbox.mapboxsdk.geometry.LatLng
 
     /**
@@ -317,9 +316,9 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testSearchCloseToCurrentLocationWhenFar() {
         whenever(nearbyParentFragmentView.getLastFocusLocation()).
-            thenReturn(Mockito.spy(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0)))
+            thenReturn(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0))
         whenever(nearbyParentFragmentView.getCameraTarget()).
-                thenReturn(Mockito.spy(LatLng(2.0,1.0,0.0F)))
+                thenReturn(LatLng(2.0,1.0,0.0F))
         //111.19 km real distance, return false if 148306.444306 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148306.0
         val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
@@ -332,9 +331,9 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testSearchCloseToCurrentLocationWhenClose() {
         whenever(nearbyParentFragmentView.getLastFocusLocation()).
-            thenReturn(Mockito.spy(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0)))
+            thenReturn(com.mapbox.mapboxsdk.geometry.LatLng(1.0,1.0,0.0))
         whenever(nearbyParentFragmentView.getCameraTarget()).
-            thenReturn(Mockito.spy(LatLng(2.0,1.0,0.0F)))
+            thenReturn(LatLng(2.0,1.0,0.0F))
         //111.19 km real distance, return false if 148253.333 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148307.0
         val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
