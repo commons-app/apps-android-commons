@@ -61,24 +61,21 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?
     ) {
-        val builder = AlertDialog.Builder(activity).apply {
+        showSafely(activity, AlertDialog.Builder(activity).apply {
             setTitle(title)
             setMessage(message)
-        }
-        if (positiveButtonText.isBlank()) {
-            builder.setPositiveButton(positiveButtonText) { dialogInterface: DialogInterface, _: Int ->
-                dialogInterface.dismiss()
-                onPositiveBtnClick?.run()
+
+            if (positiveButtonText.isBlank()) {
+                setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
+                    onPositiveBtnClick?.run()
+                }
             }
-        }
-        if (negativeButtonText.isBlank()) {
-            builder.setNegativeButton(negativeButtonText) { dialogInterface: DialogInterface, _: Int ->
-                dialogInterface.dismiss()
-                onNegativeBtnClick?.run()
+            if (negativeButtonText.isBlank()) {
+                setNegativeButton(negativeButtonText) { _: DialogInterface, _: Int ->
+                    onNegativeBtnClick?.run()
+                }
             }
-        }
-        val dialog = builder.create()
-        showSafely(activity, dialog)
+        }.create())
     }
 
     /*
@@ -128,22 +125,18 @@ object DialogUtil {
             return
         }
 
-        val builder = AlertDialog.Builder(activity).apply {
+        showSafely(activity, AlertDialog.Builder(activity).apply {
             setTitle(title)
             setMessage(message)
             setView(customView)
             setCancelable(cancelable)
-        }
-        builder.setPositiveButton(positiveButtonText) { dialogInterface: DialogInterface, _: Int ->
-            dialogInterface.dismiss()
-            onPositiveBtnClick?.run()
-        }
-        builder.setNegativeButton(negativeButtonText) { dialogInterface: DialogInterface, _: Int ->
-            dialogInterface.dismiss()
-            onNegativeBtnClick?.run()
-        }
-        val dialog = builder.create()
-        showSafely(activity, dialog)
+            setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
+                onPositiveBtnClick?.run()
+            }
+            setNegativeButton(negativeButtonText) { _: DialogInterface, _: Int ->
+                onNegativeBtnClick?.run()
+            }
+        }.create())
     }
 
     /**
@@ -164,16 +157,13 @@ object DialogUtil {
         positiveButtonClick: Runnable?,
         cancellable: Boolean
     ) {
-        val builder = AlertDialog.Builder(activity).apply {
+        showSafely(activity, AlertDialog.Builder(activity).apply {
             setTitle(title)
             setMessage(message)
             setCancelable(cancellable)
-        }
-        builder.setPositiveButton(positiveButtonText) { dialogInterface: DialogInterface, _: Int ->
-            dialogInterface.dismiss()
-            positiveButtonClick?.run()
-        }
-        val dialog = builder.create()
-        showSafely(activity, dialog)
+            setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
+                positiveButtonClick?.run()
+            }
+        }.create())
     }
 }
