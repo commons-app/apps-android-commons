@@ -86,10 +86,10 @@ public class WelcomeActivity extends BaseActivity {
         if (pager.getCurrentItem() != 0) {
             pager.setCurrentItem(pager.getCurrentItem() - 1, true);
         } else {
-            if(defaultKvStore.getBoolean("firstrun",true)){
+            if (defaultKvStore.getBoolean("firstrun", true)) {
                 finishAffinity();
-            } else{
-                finish();
+            } else {
+                super.onBackPressed();
             }
         }
     }
