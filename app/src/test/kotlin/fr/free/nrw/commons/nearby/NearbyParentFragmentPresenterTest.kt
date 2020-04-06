@@ -123,6 +123,23 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        verify(nearbyPresenter).lockUnlockNearby(true)
+        verify(nearbyParentFragmentView).setProgressBarVisibility(true)
+        verify(nearbyParentFragmentView).populatePlaces(latestLocation)
+    }
+
+    /**
+     * Test updateMapAndList method updates parent fragment view with latest location of user
+     * at map is updated location change type
+     */
+    @Test
+    fun testPlacesPopulatedForLatestLocationWhenLocationMapUpdated() {
+        nearbyPresenter.isNearbyLocked = false
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.MAP_UPDATED)
+        verify(nearbyPresenter).lockUnlockNearby(true)
+        verify(nearbyParentFragmentView).setProgressBarVisibility(true)
         verify(nearbyParentFragmentView).populatePlaces(latestLocation)
     }
 
