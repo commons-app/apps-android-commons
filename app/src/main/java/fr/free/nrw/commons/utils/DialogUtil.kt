@@ -17,8 +17,8 @@ object DialogUtil {
     private fun showSafely(activity: Activity?, dialog: Dialog?) {
 
         if (activity == null || dialog == null) {
-            Timber.d("Show called with null activity / dialog. Ignoring.");
-            return;
+            Timber.d("Show called with null activity / dialog. Ignoring.")
+            return
         }
 
         if (activity.isFinishing || activity.isDestroyed) {
@@ -125,7 +125,7 @@ object DialogUtil {
         // This happens for on resume - return to avoid creating a second dialog - the first one
         // will still show
         if (customView?.parent != null) {
-            return;
+            return
         }
 
         val builder = AlertDialog.Builder(activity).apply {
