@@ -6,7 +6,6 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.view.View
 import fr.free.nrw.commons.R
-import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 
 object DialogUtil {
@@ -15,9 +14,14 @@ object DialogUtil {
      * @param activity the activity
      * @param dialog the dialog to be shown
      */
-    private fun showSafely(activity: Activity, dialog: Dialog) {
-        val isActivityDestroyed = activity.isDestroyed
-        if (activity.isFinishing || isActivityDestroyed) {
+    private fun showSafely(activity: Activity?, dialog: Dialog?) {
+
+        if (activity == null || dialog == null) {
+            Timber.d("Show called with null activity / dialog. Ignoring.");
+            return;
+        }
+
+        if (activity.isFinishing || activity.isDestroyed) {
             Timber.e("Activity is not running. Could not show dialog. ")
             return
         }
@@ -28,7 +32,8 @@ object DialogUtil {
         }
     }
 
-    @JvmStatic fun showAlertDialog(
+    @JvmStatic
+    fun showAlertDialog(
         activity: Activity,
         title: String,
         message: String,
@@ -53,26 +58,23 @@ object DialogUtil {
         message: String,
         positiveButtonText: String,
         negativeButtonText: String,
-        onPositiveBtnClick: Runnable,
-        onNegativeBtnClick: Runnable
+        onPositiveBtnClick: Runnable?,
+        onNegativeBtnClick: Runnable?
     ) {
-        val builder = AlertDialog.Builder(activity)
-        builder.setTitle(title)
-        builder.setMessage(message)
-        if (!StringUtils.isBlank(positiveButtonText)) {
-            builder.setPositiveButton(
-                positiveButtonText
-            ) { dialogInterface: DialogInterface, _: Int ->
+        val builder = AlertDialog.Builder(activity).apply {
+            setTitle(title)
+            setMessage(message)
+        }
+        if (positiveButtonText.isBlank()) {
+            builder.setPositiveButton(positiveButtonText) { dialogInterface: DialogInterface, _: Int ->
                 dialogInterface.dismiss()
-                onPositiveBtnClick.run()
+                onPositiveBtnClick?.run()
             }
         }
-        if (!StringUtils.isBlank(negativeButtonText)) {
-            builder.setNegativeButton(
-                negativeButtonText
-            ) { dialogInterface: DialogInterface, _: Int ->
+        if (negativeButtonText.isBlank()) {
+            builder.setNegativeButton(negativeButtonText) { dialogInterface: DialogInterface, _: Int ->
                 dialogInterface.dismiss()
-                onNegativeBtnClick.run()
+                onNegativeBtnClick?.run()
             }
         }
         val dialog = builder.create()
@@ -84,7 +86,10 @@ object DialogUtil {
     */
     @JvmStatic
     fun showAlertDialog(
-        activity: Activity, title: String, message: String, onPositiveBtnClick: Runnable,
+        activity: Activity,
+        title: String,
+        message: String,
+        onPositiveBtnClick: Runnable,
         onNegativeBtnClick: Runnable,
         customView: View,
         cancelable: Boolean
@@ -111,31 +116,31 @@ object DialogUtil {
         message: String,
         positiveButtonText: String,
         negativeButtonText: String,
-        onPositiveBtnClick: Runnable,
-        onNegativeBtnClick: Runnable,
-        customView: View,
+        onPositiveBtnClick: Runnable?,
+        onNegativeBtnClick: Runnable?,
+        customView: View?,
         cancelable: Boolean
     ) {
         // If the custom view already has a parent, there is already a dialog showing with the view
         // This happens for on resume - return to avoid creating a second dialog - the first one
         // will still show
-
-        val builder = AlertDialog.Builder(activity)
-        builder.setTitle(title)
-        builder.setMessage(message)
-        builder.setView(customView)
-        builder.setCancelable(cancelable)
-        builder.setPositiveButton(
-            positiveButtonText
-        ) { dialogInterface: DialogInterface, _: Int ->
-            dialogInterface.dismiss()
-            onPositiveBtnClick.run()
+        if (customView?.parent != null) {
+            return;
         }
-        builder.setNegativeButton(
-            negativeButtonText
-        ) { dialogInterface: DialogInterface, _: Int ->
+
+        val builder = AlertDialog.Builder(activity).apply {
+            setTitle(title)
+            setMessage(message)
+            setView(customView)
+            setCancelable(cancelable)
+        }
+        builder.setPositiveButton(positiveButtonText) { dialogInterface: DialogInterface, _: Int ->
             dialogInterface.dismiss()
-            onNegativeBtnClick.run()
+            onPositiveBtnClick?.run()
+        }
+        builder.setNegativeButton(negativeButtonText) { dialogInterface: DialogInterface, _: Int ->
+            dialogInterface.dismiss()
+            onNegativeBtnClick?.run()
         }
         val dialog = builder.create()
         showSafely(activity, dialog)
@@ -156,18 +161,17 @@ object DialogUtil {
         title: String,
         message: String,
         positiveButtonText: String,
-        positiveButtonClick: Runnable,
+        positiveButtonClick: Runnable?,
         cancellable: Boolean
     ) {
-        val builder = AlertDialog.Builder(activity)
-        builder.setTitle(title)
-        builder.setMessage(message)
-        builder.setCancelable(cancellable)
-        builder.setPositiveButton(
-            positiveButtonText
-        ) { dialogInterface: DialogInterface, _: Int ->
+        val builder = AlertDialog.Builder(activity).apply {
+            setTitle(title)
+            setMessage(message)
+            setCancelable(cancellable)
+        }
+        builder.setPositiveButton(positiveButtonText) { dialogInterface: DialogInterface, _: Int ->
             dialogInterface.dismiss()
-            positiveButtonClick.run()
+            positiveButtonClick?.run()
         }
         val dialog = builder.create()
         showSafely(activity, dialog)
