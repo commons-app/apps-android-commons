@@ -77,7 +77,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testUpdateMapAndListWhenLocationLocked() {
-        nearbyPresenter.setNearbyLocked(true)
+        nearbyPresenter.isNearbyLocked = true
         nearbyPresenter.updateMapAndList(null)
         verifyZeroInteractions(nearbyParentFragmentView)
     }
@@ -88,7 +88,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testUpdateMapAndListWhenNoNetworkConnection() {
-        nearbyPresenter.setNearbyLocked(false)
+        nearbyPresenter.isNearbyLocked = false
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(false)
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
@@ -100,7 +100,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testUpdateMapAndListWhenLastLocationIsNull() {
-        nearbyPresenter.setNearbyLocked(false)
+        nearbyPresenter.isNearbyLocked = false
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(null)
         nearbyPresenter.updateMapAndList(null)
@@ -115,7 +115,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testPlacesPopulatedForLatestLocationWhenLocationSignificantlyChanged() {
-        nearbyPresenter.setNearbyLocked(false)
+        nearbyPresenter.isNearbyLocked = false
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
@@ -128,7 +128,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testPlacesPopulatedForCameraTargetLocationWhenSearchCustomArea() {
-        nearbyPresenter.setNearbyLocked(false)
+        nearbyPresenter.isNearbyLocked = false
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(cameraTarget)
@@ -142,7 +142,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testUserTrackedWhenCurrentLocationMarkerVisible() {
-        nearbyPresenter.setNearbyLocked(false)
+        nearbyPresenter.isNearbyLocked = false
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(true)
@@ -156,7 +156,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testUserNotTrackedWhenCurrentLocationMarkerInvisible() {
-        nearbyPresenter.setNearbyLocked(false)
+        nearbyPresenter.isNearbyLocked = false
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(false)

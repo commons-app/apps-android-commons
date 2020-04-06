@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby.presenter;
 
 import android.view.View;
 
+import androidx.annotation.VisibleForTesting;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
 import java.lang.reflect.Proxy;
@@ -37,7 +38,8 @@ public class NearbyParentFragmentPresenter
         WikidataEditListener.WikidataP18EditListener,
         LocationUpdateListener {
 
-    private boolean isNearbyLocked;
+    @VisibleForTesting
+    public boolean isNearbyLocked;
     private LatLng curLatLng;
 
     private boolean placesLoadedOnce;
@@ -372,13 +374,5 @@ public class NearbyParentFragmentPresenter
         } else {
             return true;
         }
-    }
-
-    public boolean isNearbyLocked() {
-        return isNearbyLocked;
-    }
-
-    public void setNearbyLocked(boolean nearbyLocked) {
-        isNearbyLocked = nearbyLocked;
     }
 }
