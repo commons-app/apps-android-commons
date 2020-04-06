@@ -154,6 +154,8 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(cameraTarget)
         nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA)
+        verify(nearbyPresenter).lockUnlockNearby(true)
+        verify(nearbyParentFragmentView).setProgressBarVisibility(true)
         verify(nearbyParentFragmentView).populatePlaces(cameraTarget)
     }
 
