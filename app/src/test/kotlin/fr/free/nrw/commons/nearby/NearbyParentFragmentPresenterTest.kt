@@ -41,7 +41,7 @@ class NearbyParentFragmentPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        nearbyPresenter = Mockito.spy(NearbyParentFragmentPresenter(bookmarkLocationsDao))
+        nearbyPresenter = NearbyParentFragmentPresenter(bookmarkLocationsDao)
         nearbyPresenter.attachView(nearbyParentFragmentView)
     }
 
@@ -51,8 +51,8 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testInitializeNearbyMapOperations() {
         nearbyPresenter.initializeMapOperations()
-        verify(nearbyPresenter).lockUnlockNearby(false)
-        verify(nearbyPresenter).updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        verify(nearbyParentFragmentView).enableFABRecenter()
+        testPlacesPopulatedForLatestLocationWhenLocationSignificantlyChanged()
         verify(nearbyParentFragmentView).addSearchThisAreaButtonAction()
         verify(nearbyParentFragmentView).setCheckBoxAction()
     }
@@ -121,8 +121,8 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.isNearbyLocked = false
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
-        nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-        verify(nearbyPresenter).lockUnlockNearby(true)
+        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        verify(nearbyParentFragmentView).disableFABRecenter();
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
         verify(nearbyParentFragmentView).populatePlaces(latestLocation)
     }
@@ -136,8 +136,8 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.isNearbyLocked = false
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
-        nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.MAP_UPDATED)
-        verify(nearbyPresenter).lockUnlockNearby(true)
+        nearbyPresenter.updateMapAndList(LocationChangeType.MAP_UPDATED)
+        verify(nearbyParentFragmentView).disableFABRecenter()
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
         verify(nearbyParentFragmentView).populatePlaces(latestLocation)
     }
@@ -152,8 +152,8 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(cameraTarget)
-        nearbyPresenter.updateMapAndList(LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA)
-        verify(nearbyPresenter).lockUnlockNearby(true)
+        nearbyPresenter.updateMapAndList(LocationChangeType.SEARCH_CUSTOM_AREA)
+        verify(nearbyParentFragmentView).disableFABRecenter()
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
         verify(nearbyParentFragmentView).populatePlaces(cameraTarget)
     }
