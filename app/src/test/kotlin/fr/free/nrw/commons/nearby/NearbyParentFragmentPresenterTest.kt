@@ -4,11 +4,13 @@ import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
+import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.junit.Assert.*
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -50,6 +52,8 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testInitializeNearbyMapOperations() {
         nearbyPresenter.initializeMapOperations()
+        verify(nearbyPresenter).lockUnlockNearby(false)
+        verify(nearbyPresenter).updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         verify(nearbyParentFragmentView).addSearchThisAreaButtonAction()
         verify(nearbyParentFragmentView).setCheckBoxAction()
     }
