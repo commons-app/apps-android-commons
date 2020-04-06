@@ -72,8 +72,7 @@ import static org.acra.ReportField.USER_COMMENT;
 )
 
 @AcraMailSender(
-        mailTo = "commons-app-android-private@googlegroups.com",
-        reportAsFile = false
+        mailTo = "commons-app-android-private@googlegroups.com"
 )
 
 @AcraDialog(
