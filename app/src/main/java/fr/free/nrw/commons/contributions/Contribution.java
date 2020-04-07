@@ -38,18 +38,6 @@ public class Contribution extends Media {
     //2009-01-09 → 9 January 2009
     private static final String TEMPLATE_DATA_OTHER_SOURCE = "%s";
 
-    public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
-        @Override
-        public Contribution createFromParcel(Parcel parcel) {
-            return new Contribution(parcel);
-        }
-
-        @Override
-        public Contribution[] newArray(int i) {
-            return new Contribution[0];
-        }
-    };
-
     // No need to be bitwise - they're mutually exclusive
     public static final int STATE_COMPLETED = -1;
     public static final int STATE_FAILED = 1;
@@ -63,6 +51,7 @@ public class Contribution extends Media {
     public static final String SOURCE_CAMERA = "camera";
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
+    
     @PrimaryKey (autoGenerate = true)
     @NonNull
     private long _id;
@@ -91,7 +80,6 @@ public class Contribution extends Media {
         this.depictedItems.addAll(depictedItems);
         this.wikidataPlace = WikidataPlace.from(item.getPlace());
         this.categories.addAll(categories);
-        tags.put("mimeType", item.getMimeType());
         this.source = item.getSource();
         this.contentProviderUri = item.getMediaUri();
     }
@@ -103,22 +91,6 @@ public class Contribution extends Media {
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
         this.state=state;
-    }
-
-    public Contribution(Parcel in) {
-        super(in);
-        source = in.readString();
-        state = in.readInt();
-        transferred = in.readLong();
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        super.writeToParcel(parcel, flags);
-        parcel.writeString(source);
-        parcel.writeInt(state);
-        parcel.writeLong(transferred);
-        parcel.writeParcelable(wikidataPlace, flags);
     }
 
     public void setDateCreatedSource(String dateCreatedSource) {
@@ -291,4 +263,46 @@ public class Contribution extends Media {
     public void setDepictedItems(final List<DepictedItem> depictedItems) {
         this.depictedItems = depictedItems;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeLong(this._id);
+        dest.writeString(this.source);
+        dest.writeString(this.editSummary);
+        dest.writeInt(this.state);
+        dest.writeLong(this.transferred);
+        dest.writeString(this.decimalCoords);
+        dest.writeParcelable(this.contentProviderUri, flags);
+        dest.writeString(this.dateCreatedSource);
+    }
+
+    protected Contribution(Parcel in) {
+        super(in);
+        this._id = in.readLong();
+        this.source = in.readString();
+        this.editSummary = in.readString();
+        this.state = in.readInt();
+        this.transferred = in.readLong();
+        this.decimalCoords = in.readString();
+        this.contentProviderUri = in.readParcelable(Uri.class.getClassLoader());
+        this.dateCreatedSource = in.readString();
+    }
+
+    public static final Creator<Contribution> CREATOR = new Creator<Contribution>() {
+        @Override
+        public Contribution createFromParcel(Parcel source) {
+            return new Contribution(source);
+        }
+
+        @Override
+        public Contribution[] newArray(int size) {
+            return new Contribution[size];
+        }
+    };
 }

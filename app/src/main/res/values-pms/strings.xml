@@ -173,7 +173,9 @@
   <string name="title_activity_nearby">Pòst davzin</string>
   <string name="no_nearby">Trovà gnente ant ij parage</string>
   <string name="warning">Avertensa</string>
+  <string name="duplicate_image_found">Plancia dobia trovà</string>
   <string name="upload_image_duplicate">St\'archivi a esist già su Commons. É-lo sigur ëd vorèj continué?</string>
+  <string name="upload">Carié</string>
   <string name="yes">Bò</string>
   <string name="no">Nò</string>
   <string name="media_detail_title">Tìtol</string>
@@ -247,6 +249,7 @@
   <string name="upload_problem_different_geolocation">Sa fòto a l\'é stàita fàita ant un pòst diferent.</string>
   <string name="upload_problem_fbmd">Për piasì, ch\'a caria mach dle fòto che a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha trovà an sij cont Facebook d\'àutra gent.</string>
   <string name="upload_problem_do_you_continue">Veul-lo istess carié sta plancia?</string>
+  <string name="upload_problem_image">Trovà un problema con la plancia</string>
   <string name="internet_downloaded">Për piasì, ch\'a caria mach dle fòto ch\'a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha dëscarià da \'ns l\'aragnà.</string>
   <string name="give_permission">Dé ël përmess</string>
   <string name="use_external_storage">Dovré n\'anmagasinament estern</string>

@@ -104,7 +104,7 @@
   <string name="menu_about">정보</string>
   <string name="about_license">위키미디어 공용 앱은 오픈 소스 애플리케이션이며 위키미디어 공동체 내의 자원봉사자에 의해 유지됩니다. 위키미디어 재단은 애플리케이션의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
   <string name="about_improve">버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
-  <string name="about_privacy_policy">개인정보 정책</string>
+  <string name="about_privacy_policy">개인정보처리방침</string>
   <string name="about_credits">제작진</string>
   <string name="title_activity_about">정보</string>
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>
@@ -182,7 +182,9 @@
   <string name="title_activity_nearby">근처의 장소</string>
   <string name="no_nearby">근처에 장소가 없습니다</string>
   <string name="warning">경고</string>
+  <string name="duplicate_image_found">중복 이미지가 있습니다</string>
   <string name="upload_image_duplicate">이 파일은 이미 공용에 존재합니다. 계속하시겠습니까?</string>
+  <string name="upload">업로드</string>
   <string name="yes">예</string>
   <string name="no">아니오</string>
   <string name="media_detail_title">제목</string>
@@ -254,6 +256,7 @@
   <string name="upload_problem_image_duplicate">이미지가 이미 공용에 있습니다.</string>
   <string name="upload_problem_different_geolocation">이 사진은 다른 위치에서 찍었습니다.</string>
   <string name="upload_problem_do_you_continue">그래도 이 사진을 업로드하시겠습니까?</string>
+  <string name="upload_problem_image">이미지에 문제가 있습니다</string>
   <string name="give_permission">권한 부여</string>
   <string name="use_external_storage">외부 저장소 사용하기</string>
   <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>

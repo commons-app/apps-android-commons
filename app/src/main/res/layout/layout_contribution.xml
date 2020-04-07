@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/very_large_height"
         app:actualImageScaleType="centerCrop"
+        android:background="?attr/mainBackground"
         fresco:placeholderImage="@drawable/ic_image_black_24dp"
         />
 

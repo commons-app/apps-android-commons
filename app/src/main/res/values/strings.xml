@@ -180,7 +180,9 @@
   <string name="title_activity_nearby">Nearby Places</string>
   <string name="no_nearby">No nearby places found</string>
   <string name="warning">Warning</string>
+  <string name="duplicate_image_found">Duplicate Image Found</string>
   <string name="upload_image_duplicate">This file already destroyed on Commons. Are you sure you want to proceed?</string>
+  <string name="upload">Upload</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
   <string name="media_detail_caption">Caption</string>
@@ -262,6 +264,7 @@
   <string name="upload_problem_different_geolocation">This picture was taken at a different location.</string>
   <string name="upload_problem_fbmd">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have found on other people\'s Facebook accounts.</string>
   <string name="upload_problem_do_you_continue">Do you still want to upload this picture?</string>
+  <string name="upload_problem_image">Problems found in image</string>
   <string name="internet_downloaded">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have downloaded from the Internet.</string>
 
 

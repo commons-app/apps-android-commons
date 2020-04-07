@@ -27,17 +27,6 @@ import org.wikipedia.page.PageTitle;
 public class Media implements Parcelable {
 
     public static final Media EMPTY = new Media("");
-    public static Creator<Media> CREATOR = new Creator<Media>() {
-        @Override
-        public Media createFromParcel(Parcel parcel) {
-            return new Media(parcel);
-        }
-
-        @Override
-        public Media[] newArray(int i) {
-            return new Media[0];
-        }
-    };
 
     // Primary metadata fields
     @Nullable
@@ -71,14 +60,14 @@ public class Media implements Parcelable {
      * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
      * However unlike categories depictions is multi-lingual
      */
-    public ArrayList<Map<String, String>> depictionList;
+    public List<Map<String, String>> depictionList;
     /**
      * The above hashmap is fetched from API and to diplay in Explore
      * However this list of depictions is for storing and retrieving depictions from local storage or cache
      */
     public ArrayList<String> depictions;
     public boolean requestedDeletion;
-    public Map<String, String> descriptions; // multilingual descriptions as loaded
+    public HashMap<String, String> descriptions; // multilingual descriptions as loaded
     /**
      * This hasmap stores the list of multilingual captions, where
      * key of the HashMap is the language and value is the caption in the corresponding language
@@ -137,32 +126,6 @@ public class Media implements Parcelable {
         this.categories = new ArrayList<>();
         this.depictions = new ArrayList<>();
         this.descriptions = new HashMap<>();
-    }
-
-    @SuppressWarnings("unchecked")
-    public Media(Parcel in) {
-        localUri = in.readParcelable(Uri.class.getClassLoader());
-        thumbUrl = in.readString();
-        imageUrl = in.readString();
-        filename = in.readString();
-        caption = in.readString();
-        description = in.readString();
-        dataLength = in.readLong();
-        dateCreated = (Date) in.readSerializable();
-        dateUploaded = (Date) in.readSerializable();
-        creator = in.readString();
-        tags = (HashMap<String, String>) in.readSerializable();
-        width = in.readInt();
-        height = in.readInt();
-        license = in.readString();
-        if (categories != null) {
-            in.readStringList(categories);
-        }
-        if (depictions != null) {
-            in.readStringList(depictions);
-        }
-        descriptions = in.readHashMap(ClassLoader.getSystemClassLoader());
-        captions = in.readHashMap(ClassLoader.getSystemClassLoader());
     }
 
     /**
@@ -609,42 +572,7 @@ public class Media implements Parcelable {
         }
     }
 
-    /**
-     * Method of Parcelable interface
-     * @return zero
-     */
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    /**
-     * Creates a way to transfer information between two or more
-     * activities.
-     * @param parcel Instance of Parcel
-     * @param flags Parcel flag
-     */
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeParcelable(localUri, flags);
-        parcel.writeString(thumbUrl);
-        parcel.writeString(imageUrl);
-        parcel.writeString(filename);
-        parcel.writeString(caption);
-        parcel.writeString(description);
-        parcel.writeLong(dataLength);
-        parcel.writeSerializable(dateCreated);
-        parcel.writeSerializable(dateUploaded);
-        parcel.writeString(creator);
-        parcel.writeSerializable(tags);
-        parcel.writeInt(width);
-        parcel.writeInt(height);
-        parcel.writeString(license);
-        parcel.writeStringList(categories);
-        parcel.writeStringList(depictions);
-        parcel.writeMap(descriptions);
-        parcel.writeMap(captions);
-    }
 
     /**
      * Set requested deletion to true
@@ -692,4 +620,104 @@ public class Media implements Parcelable {
     public void setDepiction(ArrayList<Map<String, String>> depictions) {
         this.depictionList = depictions;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    /**
+     * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
+     * However unlike categories depictions is multi-lingual
+     */
+    public ArrayList<Map<String, String>> depictionList;
+    /**
+     * The above hashmap is fetched from API and to diplay in Explore
+     * However this list of depictions is for storing and retrieving depictions from local storage or cache
+     */
+    public ArrayList<String> depictions;
+    public boolean requestedDeletion;
+    public HashMap<String, String> descriptions; // multilingual descriptions as loaded
+    /**
+     * This hasmap stores the list of multilingual captions, where
+     * key of the HashMap is the language and value is the caption in the corresponding language
+     * Ex: key = "en", value: "<caption in short in English>"
+     *     key = "de" , value: "<caption in german>"
+     */
+    public Map<String, String> captions;
+    public HashMap<String, String> tags = new HashMap<>();
+    @Nullable public  LatLng coordinates;
+    /**
+     * Creates a way to transfer information between two or more
+     * activities.
+     * @param dest Instance of Parcel
+     * @param flags Parcel flag
+     */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.localUri, flags);
+        dest.writeString(this.thumbUrl);
+        dest.writeString(this.imageUrl);
+        dest.writeString(this.filename);
+        dest.writeString(this.thumbnailTitle);
+        dest.writeString(this.caption);
+        dest.writeString(this.description);
+        dest.writeString(this.discussion);
+        dest.writeLong(this.dataLength);
+        dest.writeLong(this.dateCreated != null ? this.dateCreated.getTime() : -1);
+        dest.writeLong(this.dateUploaded != null ? this.dateUploaded.getTime() : -1);
+        dest.writeInt(this.width);
+        dest.writeInt(this.height);
+        dest.writeString(this.license);
+        dest.writeString(this.licenseUrl);
+        dest.writeString(this.creator);
+        dest.writeString(this.pageId);
+        dest.writeStringList(this.categories);
+        dest.writeList(this.depictionList);
+        dest.writeByte(this.requestedDeletion ? (byte) 1 : (byte) 0);
+        dest.writeSerializable(this.descriptions);
+        dest.writeSerializable(this.tags);
+        dest.writeParcelable(this.coordinates, flags);
+    }
+
+    protected Media(Parcel in) {
+        this.localUri = in.readParcelable(Uri.class.getClassLoader());
+        this.thumbUrl = in.readString();
+        this.imageUrl = in.readString();
+        this.filename = in.readString();
+        this.thumbnailTitle = in.readString();
+        this.caption = in.readString();
+        this.description = in.readString();
+        this.discussion = in.readString();
+        this.dataLength = in.readLong();
+        long tmpDateCreated = in.readLong();
+        this.dateCreated = tmpDateCreated == -1 ? null : new Date(tmpDateCreated);
+        long tmpDateUploaded = in.readLong();
+        this.dateUploaded = tmpDateUploaded == -1 ? null : new Date(tmpDateUploaded);
+        this.width = in.readInt();
+        this.height = in.readInt();
+        this.license = in.readString();
+        this.licenseUrl = in.readString();
+        this.creator = in.readString();
+        this.pageId = in.readString();
+        final ArrayList<String> list = new ArrayList<>();
+        in.readStringList(list);
+        this.categories=list;
+        in.readList(depictionList,null);
+        this.requestedDeletion = in.readByte() != 0;
+        this.descriptions = (HashMap<String, String>) in.readSerializable();
+        this.tags = (HashMap<String, String>) in.readSerializable();
+        this.coordinates = in.readParcelable(LatLng.class.getClassLoader());
+    }
+
+    public static final Creator<Media> CREATOR = new Creator<Media>() {
+        @Override
+        public Media createFromParcel(Parcel source) {
+            return new Media(source);
+        }
+
+        @Override
+        public Media[] newArray(int size) {
+            return new Media[size];
+        }
+    };
 }
