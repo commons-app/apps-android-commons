@@ -1,15 +1,13 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
-import fr.free.nrw.commons.upload.ImageCoordinates;
-import java.util.List;
-
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadModel.UploadItem;
+import java.util.List;
 
 /**
  * The contract with with UploadMediaDetails and its presenter would talk to each other
@@ -41,8 +39,7 @@ public interface UploadMediaDetailsContract {
 
     interface UserActionListener extends BasePresenter<View> {
 
-        void receiveImage(UploadableFile uploadableFile, @Contribution.FileSource String source,
-                Place place);
+        void receiveImage(UploadableFile uploadableFile, Place place);
 
         void verifyImageQuality(UploadItem uploadItem);
 

@@ -81,7 +81,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     JsonKvStore defaultKvStore;
 
     private UploadableFile uploadableFile;
-    private String source;
     private Place place;
 
     private boolean isExpanded = true;
@@ -97,9 +96,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         super.onCreate(savedInstanceState);
     }
 
-    public void setImageTobeUploaded(UploadableFile uploadableFile, String source, Place place) {
+    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place) {
         this.uploadableFile = uploadableFile;
-        this.source = source;
         this.place = place;
     }
 
@@ -122,7 +120,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 callback.getTotalNumberOfSteps()));
         initRecyclerView();
         initPresenter();
-        presenter.receiveImage(uploadableFile, source, place);
+        presenter.receiveImage(uploadableFile, place);
 
         if (callback.getIndexInViewFlipper(this) == 0) {
             btnPrevious.setEnabled(false);

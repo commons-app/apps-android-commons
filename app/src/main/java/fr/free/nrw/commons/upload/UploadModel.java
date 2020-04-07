@@ -82,11 +82,10 @@ public class UploadModel {
      * pre process a one item at a time
      */
     public Observable<UploadItem> preProcessImage(final UploadableFile uploadableFile,
-            final Place place,
-            final String source,
-            final SimilarImageInterface similarImageInterface) {
+        final Place place,
+        final SimilarImageInterface similarImageInterface) {
         return Observable.just(
-            createAndAddUploadItem(uploadableFile, place, source, similarImageInterface));
+            createAndAddUploadItem(uploadableFile, place, similarImageInterface));
     }
 
     public Single<Integer> getImageQuality(final UploadItem uploadItem) {
@@ -94,9 +93,8 @@ public class UploadModel {
     }
 
     private UploadItem createAndAddUploadItem(final UploadableFile uploadableFile,
-            final Place place,
-            final String source,
-            final SimilarImageInterface similarImageInterface) {
+        final Place place,
+        final SimilarImageInterface similarImageInterface) {
         final UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile
                 .getFileCreatedDate(context);
         long fileCreatedDate = -1;
@@ -110,7 +108,7 @@ public class UploadModel {
                 .processFileCoordinates(similarImageInterface, uploadableFile.getFilePath());
         final UploadItem uploadItem = new UploadItem(uploadableFile.getContentUri(),
                 Uri.parse(uploadableFile.getFilePath()),
-                uploadableFile.getMimeType(context), source, imageCoordinates, place, fileCreatedDate,
+                uploadableFile.getMimeType(context), imageCoordinates, place, fileCreatedDate,
                 createdTimestampSource);
         if (place != null) {
             uploadItem.getUploadMediaDetails().set(0, new UploadMediaDetail(place));
@@ -209,7 +207,6 @@ public class UploadModel {
         private final Uri originalContentUri;
         private final Uri mediaUri;
         private final String mimeType;
-        private final String source;
         private ImageCoordinates gpsCoords;
         private List<UploadMediaDetail> uploadMediaDetails;
         private final Place place;
@@ -218,17 +215,17 @@ public class UploadModel {
         private final BehaviorSubject<Integer> imageQuality;
         @SuppressLint("CheckResult")
         UploadItem(final Uri originalContentUri,
-                final Uri mediaUri, final String mimeType, final String source, final ImageCoordinates gpsCoords,
-                final Place place,
-                final long createdTimestamp,
-                final String createdTimestampSource) {
+            final Uri mediaUri, final String mimeType,
+            final ImageCoordinates gpsCoords,
+            final Place place,
+            final long createdTimestamp,
+            final String createdTimestampSource) {
             this.originalContentUri = originalContentUri;
             this.createdTimestampSource = createdTimestampSource;
             uploadMediaDetails = new ArrayList<>(Arrays.asList(new UploadMediaDetail()));
             this.place = place;
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
-            this.source = source;
             this.gpsCoords = gpsCoords;
             this.createdTimestamp = createdTimestamp;
             imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
@@ -236,10 +233,6 @@ public class UploadModel {
 
         public String getCreatedTimestampSource() {
             return createdTimestampSource;
-        }
-
-        public String getSource() {
-            return source;
         }
 
         public ImageCoordinates getGpsCoords() {

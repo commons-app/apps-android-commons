@@ -170,13 +170,12 @@ public class UploadRemoteDataSource {
      *
      * @param uploadableFile
      * @param place
-     * @param source
      * @param similarImageInterface
      * @return
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile, Place place,
-                                                  String source, SimilarImageInterface similarImageInterface) {
-        return uploadModel.preProcessImage(uploadableFile, place, source, similarImageInterface);
+        SimilarImageInterface similarImageInterface) {
+        return uploadModel.preProcessImage(uploadableFile, place, similarImageInterface);
     }
 
     /**

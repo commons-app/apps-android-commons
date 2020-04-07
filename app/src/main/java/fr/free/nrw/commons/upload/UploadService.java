@@ -44,7 +44,6 @@ public class UploadService extends HandlerService<Contribution> {
     public static final int ACTION_UPLOAD_FILE = 1;
 
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
-    public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
     public static final String EXTRA_FILES = EXTRA_PREFIX + ".files";
     @Inject WikidataEditService wikidataEditService;
     @Inject SessionManager sessionManager;

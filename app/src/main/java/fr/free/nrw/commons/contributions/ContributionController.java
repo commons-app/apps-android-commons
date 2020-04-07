@@ -1,19 +1,13 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-
 import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
 import fr.free.nrw.commons.filepicker.FilePicker;
@@ -23,12 +17,11 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-
-import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
-import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
-import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
-import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
-import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 @Singleton
 public class ContributionController {
@@ -109,7 +102,7 @@ public class ContributionController {
 
             @Override
             public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles, FilePicker.ImageSource source, int type) {
-                Intent intent = handleImagesPicked(activity, imagesFiles, getSourceFromImageSource(source));
+                Intent intent = handleImagesPicked(activity, imagesFiles);
                 activity.startActivity(intent);
             }
         });
@@ -125,11 +118,9 @@ public class ContributionController {
      * Attaches place object for nearby uploads
      */
     private Intent handleImagesPicked(Context context,
-                                      List<UploadableFile> imagesFiles,
-                                      String source) {
+        List<UploadableFile> imagesFiles) {
         Intent shareIntent = new Intent(context, UploadActivity.class);
         shareIntent.setAction(ACTION_INTERNAL_UPLOADS);
-        shareIntent.putExtra(EXTRA_SOURCE, source);
         shareIntent.putParcelableArrayListExtra(EXTRA_FILES, new ArrayList<>(imagesFiles));
         Place place = defaultKvStore.getJson(PLACE_OBJECT, Place.class);
         if (place != null) {
@@ -139,13 +130,4 @@ public class ContributionController {
         return shareIntent;
     }
 
-    /**
-     * Get image upload source
-     */
-    private String getSourceFromImageSource(FilePicker.ImageSource source) {
-        if (source.equals(FilePicker.ImageSource.CAMERA_IMAGE)) {
-            return SOURCE_CAMERA;
-        }
-        return SOURCE_GALLERY;
-    }
 }

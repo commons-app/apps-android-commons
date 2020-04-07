@@ -176,14 +176,12 @@ public class UploadRepository {
      *
      * @param uploadableFile
      * @param place
-     * @param source
      * @param similarImageInterface
      * @return
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile, Place place,
-                                                  String source, SimilarImageInterface similarImageInterface) {
-        return remoteDataSource
-                .preProcessImage(uploadableFile, place, source, similarImageInterface);
+        SimilarImageInterface similarImageInterface) {
+        return remoteDataSource.preProcessImage(uploadableFile, place, similarImageInterface);
     }
 
     /**

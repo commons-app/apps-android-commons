@@ -64,16 +64,14 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     /**
      * Receives the corresponding uploadable file, processes it and return the view with and uplaod item
-     *
-     * @param uploadableFile
-     * @param source
+     *  @param uploadableFile
      * @param place
      */
     @Override
-    public void receiveImage(UploadableFile uploadableFile, String source, Place place) {
+    public void receiveImage(UploadableFile uploadableFile, Place place) {
         view.showProgress(true);
         Disposable uploadItemDisposable = repository
-                .preProcessImage(uploadableFile, place, source, this)
+                .preProcessImage(uploadableFile, place, this)
                 .subscribeOn(ioScheduler)
                 .observeOn(mainThreadScheduler)
                 .subscribe(uploadItem ->
