@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -227,13 +228,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     .setVisibility(View.GONE);
         }
         media = detailProvider.getMediaAtPosition(index);
-
-        scrollView.post(new Runnable() {
-            @Override
-            public void run() {
-                displayMediaDetails();
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
+            new OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    displayMediaDetails();
+                }
             }
-        });
+        );
     }
 
     private void displayMediaDetails() {
