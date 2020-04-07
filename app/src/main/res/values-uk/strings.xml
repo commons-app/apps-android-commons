@@ -193,7 +193,9 @@
   <string name="title_activity_nearby">Місця поблизу</string>
   <string name="no_nearby">Не знайдено місць поблизу</string>
   <string name="warning">Попередження</string>
+  <string name="duplicate_image_found">Виявлено дублікат зображення</string>
   <string name="upload_image_duplicate">Цей файл вже існує на Вікісховищі. Ви впевнені, що хочете продовжити?</string>
+  <string name="upload">Вивантажити</string>
   <string name="yes">Так</string>
   <string name="no">Ні</string>
   <string name="media_detail_title">Назва</string>
@@ -267,6 +269,7 @@
   <string name="upload_problem_different_geolocation">Зображення виконано в іншому місці.</string>
   <string name="upload_problem_fbmd">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли у Фейсбуці.</string>
   <string name="upload_problem_do_you_continue">Ви все одно хочете завантажити це зображення?</string>
+  <string name="upload_problem_image">Виявлено проблеми із зображенням</string>
   <string name="internet_downloaded">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли в інтернеті.</string>
   <string name="give_permission">Надати дозвіл</string>
   <string name="use_external_storage">Використовувати зовнішнє сховище</string>
@@ -594,5 +597,5 @@
   <string name="recommend_high_accuracy_mode">Щоб отримати кращі результати, виберіть режим високої точності.</string>
   <string name="ask_to_turn_location_on">Увімкнути визначення місця розташування?</string>
   <string name="nearby_needs_location">«Поблизу» потребує увімкненого визначення місця розташування, щоб працювати належним чином</string>
-  <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу для зображення справа?</string>
+  <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу зображення справа?</string>
 </resources>

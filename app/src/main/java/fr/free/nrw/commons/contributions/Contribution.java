@@ -30,18 +30,6 @@ public class  Contribution extends Media {
     //2009-01-09 → 9 January 2009
     private static final String TEMPLATE_DATA_OTHER_SOURCE = "%s";
 
-    public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
-        @Override
-        public Contribution createFromParcel(Parcel parcel) {
-            return new Contribution(parcel);
-        }
-
-        @Override
-        public Contribution[] newArray(int i) {
-            return new Contribution[0];
-        }
-    };
-
     // No need to be bitwise - they're mutually exclusive
     public static final int STATE_COMPLETED = -1;
     public static final int STATE_FAILED = 1;
@@ -111,26 +99,7 @@ public class  Contribution extends Media {
         this.state=state;
     }
 
-    public Contribution(Parcel in) {
-        super(in);
-        contentUri = in.readParcelable(Uri.class.getClassLoader());
-        source = in.readString();
-        state = in.readInt();
-        transferred = in.readLong();
-        isMultiple = in.readInt() == 1;
-        wikiItemName = in.readString();
-    }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        super.writeToParcel(parcel, flags);
-        parcel.writeParcelable(contentUri, flags);
-        parcel.writeString(source);
-        parcel.writeInt(state);
-        parcel.writeLong(transferred);
-        parcel.writeInt(isMultiple ? 1 : 0);
-        parcel.writeString(wikiItemName);
-    }
 
     public void setDateCreatedSource(String dateCreatedSource) {
         this.dateCreatedSource = dateCreatedSource;
@@ -318,4 +287,56 @@ public class  Contribution extends Media {
     public ArrayList<String> getDepictionsEntityIds() {
         return depictionsEntityIds;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeLong(this._id);
+        dest.writeParcelable(this.contentUri, flags);
+        dest.writeString(this.source);
+        dest.writeString(this.editSummary);
+        dest.writeInt(this.state);
+        dest.writeLong(this.transferred);
+        dest.writeString(this.decimalCoords);
+        dest.writeByte(this.isMultiple ? (byte) 1 : (byte) 0);
+        dest.writeString(this.wikiDataEntityId);
+        dest.writeString(this.wikiItemName);
+        dest.writeString(this.p18Value);
+        dest.writeParcelable(this.contentProviderUri, flags);
+        dest.writeString(this.dateCreatedSource);
+    }
+
+    protected Contribution(Parcel in) {
+        super(in);
+        this._id = in.readLong();
+        this.contentUri = in.readParcelable(Uri.class.getClassLoader());
+        this.source = in.readString();
+        this.editSummary = in.readString();
+        this.state = in.readInt();
+        this.transferred = in.readLong();
+        this.decimalCoords = in.readString();
+        this.isMultiple = in.readByte() != 0;
+        this.wikiDataEntityId = in.readString();
+        this.wikiItemName = in.readString();
+        this.p18Value = in.readString();
+        this.contentProviderUri = in.readParcelable(Uri.class.getClassLoader());
+        this.dateCreatedSource = in.readString();
+    }
+
+    public static final Creator<Contribution> CREATOR = new Creator<Contribution>() {
+        @Override
+        public Contribution createFromParcel(Parcel source) {
+            return new Contribution(source);
+        }
+
+        @Override
+        public Contribution[] newArray(int size) {
+            return new Contribution[size];
+        }
+    };
 }

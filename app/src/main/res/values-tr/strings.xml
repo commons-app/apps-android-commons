@@ -191,7 +191,9 @@
   <string name="title_activity_nearby">Yakındaki Yerler</string>
   <string name="no_nearby">Yakınlardaki yer bulunamadı</string>
   <string name="warning">Uyarı</string>
+  <string name="duplicate_image_found">Yinelenen Resim Bulundu</string>
   <string name="upload_image_duplicate">Bu dosya Commons\'ta zaten yok edildi. Devam etmek istediğinizden emin misiniz?</string>
+  <string name="upload">Yükle</string>
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
   <string name="media_detail_title">Başlık</string>
@@ -265,6 +267,7 @@
   <string name="upload_problem_different_geolocation">Bu resim farklı bir yerde çekilmiş.</string>
   <string name="upload_problem_fbmd">Lütfen yalnızca kendi çektiğiniz resimleri yükleyin. Başkalarının Facebook hesaplarında bulduğunuz resimleri yüklemeyin.</string>
   <string name="upload_problem_do_you_continue">Hâlâ bu resmi yüklemek istiyor musunuz?</string>
+  <string name="upload_problem_image">Resimde bulunan sorunlar</string>
   <string name="internet_downloaded">Lütfen yalnızca kendi çektiğiniz resimleri yükleyin. İnternetten indirdiğiniz resimleri yüklemeyin.</string>
   <string name="give_permission">İzin ver</string>
   <string name="use_external_storage">Harici depolamayı kullanın</string>
