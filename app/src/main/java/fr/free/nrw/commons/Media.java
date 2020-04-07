@@ -60,7 +60,7 @@ public class Media implements Parcelable {
      * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
      * However unlike categories depictions is multi-lingual
      */
-    public List<Map<String, String>> depictionList;
+    public ArrayList<Map<String, String>> depictionList;
     /**
      * The above hashmap is fetched from API and to diplay in Explore
      * However this list of depictions is for storing and retrieving depictions from local storage or cache
@@ -625,27 +625,7 @@ public class Media implements Parcelable {
     public int describeContents() {
         return 0;
     }
-    /**
-     * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
-     * However unlike categories depictions is multi-lingual
-     */
-    public ArrayList<Map<String, String>> depictionList;
-    /**
-     * The above hashmap is fetched from API and to diplay in Explore
-     * However this list of depictions is for storing and retrieving depictions from local storage or cache
-     */
-    public ArrayList<String> depictions;
-    public boolean requestedDeletion;
-    public HashMap<String, String> descriptions; // multilingual descriptions as loaded
-    /**
-     * This hasmap stores the list of multilingual captions, where
-     * key of the HashMap is the language and value is the caption in the corresponding language
-     * Ex: key = "en", value: "<caption in short in English>"
-     *     key = "de" , value: "<caption in german>"
-     */
-    public Map<String, String> captions;
-    public HashMap<String, String> tags = new HashMap<>();
-    @Nullable public  LatLng coordinates;
+
     /**
      * Creates a way to transfer information between two or more
      * activities.
