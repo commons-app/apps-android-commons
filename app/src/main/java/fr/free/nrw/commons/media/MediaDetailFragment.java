@@ -9,14 +9,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,7 +33,6 @@ import com.facebook.imagepipeline.request.ImageRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
-import org.wikipedia.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,7 +63,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static android.content.Context.WINDOW_SERVICE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
