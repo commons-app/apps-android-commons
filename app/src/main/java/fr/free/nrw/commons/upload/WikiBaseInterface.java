@@ -32,13 +32,13 @@ public interface WikiBaseInterface {
     /**
      * Upload Captions for the image when upload is successful
      *
-     * @param FileEntityId enityId for the uploaded file
+     * @param fileEntityId enityId for the uploaded file
      * @param editToken editToken for the file
      * @param captionValue value of the caption to be uploaded
      */
     @FormUrlEncoded
-    @POST(MW_API_PREFIX + "action=wbsetlabel&language=en")
-    Observable<MwPostResponse> addLabelstoWikidata(@Field("id") String FileEntityId,
+    @POST(MW_API_PREFIX + "action=wbsetlabel")
+    Observable<MwPostResponse> addLabelstoWikidata(@Field("id") String fileEntityId,
         @Field("token") String editToken,
         @Field("language") String language,
         @Field("value") String captionValue);

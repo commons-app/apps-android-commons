@@ -171,7 +171,7 @@ public class WikidataEditService {
      */
 
     @SuppressLint("CheckResult")
-    private void addCaption(final Long fileEntityId, final String languageCode,
+    private void addCaption(final long fileEntityId, final String languageCode,
         final String captionValue) {
       wikiBaseClient.addLabelstoWikidata(fileEntityId, languageCode, captionValue)
           .subscribe(mwPostResponse -> onAddCaptionResponse(fileEntityId, mwPostResponse),

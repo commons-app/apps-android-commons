@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.wikidata;
 
+import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
 
 import fr.free.nrw.commons.upload.UploadResult;
@@ -39,11 +40,11 @@ public class WikiBaseClient {
         .map(response -> (long) (response.query().pages().get(0).pageId()));
   }
 
-  public Observable<MwPostResponse> addLabelstoWikidata(Long fileEntityId,
+  public Observable<MwPostResponse> addLabelstoWikidata(long fileEntityId,
       String languageCode, String captionValue) {
     return csrfToken()
         .switchMap(editToken -> wikiBaseInterface
-            .addLabelstoWikidata(fileEntityId.toString(), editToken, languageCode, captionValue));
+            .addLabelstoWikidata(PAGE_ID_PREFIX + fileEntityId, editToken, languageCode, captionValue));
 
   }
 
