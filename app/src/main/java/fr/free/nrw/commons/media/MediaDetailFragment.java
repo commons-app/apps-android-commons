@@ -227,7 +227,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     .setVisibility(View.GONE);
         }
         media = detailProvider.getMediaAtPosition(index);
-        displayMediaDetails();
+
+        scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                displayMediaDetails();
+            }
+        });
     }
 
     private void displayMediaDetails() {
@@ -246,19 +252,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void updateAspectRatio(ImageInfo imageInfo) {
         if (imageInfo != null) {
-            int screenWidth = getScreenWidth(getContext());
+            int screenWidth = scrollView.getWidth();
             int finalHeight = (screenWidth*imageInfo.getHeight()) / imageInfo.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
             params.height = finalHeight;
             image.setLayoutParams(params);
         }
-    }
-
-    private int getScreenWidth(Context context) {
-        DisplayMetrics dm = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(dm);
-        return dm.widthPixels;
     }
 
     private final ControllerListener aspectRatioListener = new BaseControllerListener<ImageInfo>() {
