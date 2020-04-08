@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadResult;
 import fr.free.nrw.commons.upload.WikidataItem;
@@ -15,12 +16,11 @@ import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Map;
-import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -58,50 +58,29 @@ public class WikidataEditService {
         this.wikidataClient = wikidataClient;
   }
 
-    /**
-     * Edits the wikibase entity by adding DEPICTS property.
-     * Adding DEPICTS property requires call to the wikibase API to set tag against the entity.
-     * @param uploadResult
-     * @param depictedItem
-     */
-    @SuppressLint("CheckResult")
-    private void editWikidataDepictsProperty(final UploadResult uploadResult, final WikidataItem depictedItem) {
-        wikiBaseClient.getFileEntityId(uploadResult)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(fileEntityId -> {
-                    if (fileEntityId != null) {
-                        Timber.d("EntityId for image was received successfully: %s", fileEntityId);
-                        addDepictsProperty(fileEntityId.toString(), depictedItem);
-                    } else {
-                        Timber.d("Error acquiring EntityId for image: %s", uploadResult);
-                    }
-                    }, throwable -> {
-                    Timber.e(throwable, "Error occurred while getting EntityID to set DEPICTS property");
-                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
-                });
-    }
+  /**
+   * Edits the wikibase entity by adding DEPICTS property.
+   * Adding DEPICTS property requires call to the wikibase API to set tag against the entity.
+   */
+  @SuppressLint("CheckResult")
+  private Observable<Boolean> addDepictsProperty(final String fileEntityId,
+      final WikidataItem depictedItem) {
+    // Wikipedia:Sandbox (Q10)
+    final String data = depictionJson(ConfigUtils.isBetaFlavour() ? "Q10" : depictedItem.getId());
 
-    @SuppressLint("CheckResult")
-    private void addDepictsProperty(final String fileEntityId, final WikidataItem depictedItem) {
-      // Wikipedia:Sandbox (Q10)
-      final String data = depictionJson(ConfigUtils.isBetaFlavour() ?"Q10" : depictedItem.getId());
-
-      Observable.defer((Callable<ObservableSource<Boolean>>) () ->
-                wikiBaseClient.postEditEntity(PAGE_ID_PREFIX + fileEntityId, data))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(success -> {
-                            if (success) {
-                              Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
-                            } else {
-                              Timber.d("Unable to set DEPICTS property for %s", fileEntityId);
-                            }
-                        },
-                        throwable -> {
-                            Timber.e(throwable, "Error occurred while setting DEPICTS property");
-                            ViewUtil.showLongToast(context, throwable.toString());
-                        });
+    return wikiBaseClient.postEditEntity(PAGE_ID_PREFIX + fileEntityId, data)
+        .doOnNext(success -> {
+          if (success) {
+            Timber.d("DEPICTS property was set successfully for %s", fileEntityId);
+          } else {
+            Timber.d("Unable to set DEPICTS property for %s", fileEntityId);
+          }
+        })
+        .doOnError( throwable -> {
+          Timber.e(throwable, "Error occurred while setting DEPICTS property");
+          ViewUtil.showLongToast(context, throwable.toString());
+        })
+        .subscribeOn(Schedulers.io());
     }
 
   @NotNull
@@ -143,48 +122,28 @@ public class WikidataEditService {
         ViewUtil.showLongToast(context, successMessage);
     }
 
-    /**
-     * Adding captions as labels after image is successfully uploaded
-     */
-    @SuppressLint("CheckResult")
-    public void createCaptions(final UploadResult uploadResult, final Map<String, String> captions) {
-        wikiBaseClient.getFileEntityId(uploadResult)
-                .subscribeOn(Schedulers.io())
-                .subscribe(fileEntityId -> {
-                    if (fileEntityId != null) {
-                        for (final Map.Entry<String, String> entry : captions.entrySet()) {
-                          addCaption(fileEntityId, entry.getKey(), entry.getValue());
-                        }
-                    } else {
-                        Timber.d("Error acquiring EntityId for image");
-                    }
-                }, throwable -> {
-                    Timber.e(throwable, "Error occurred while getting EntityID for the file");
-                    ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
-                });
-    }
-
-    /**
+  /**
      * Adds label to Wikidata using the fileEntityId and the edit token, obtained from csrfTokenClient
      *
      * @param fileEntityId
+     * @return
      */
 
     @SuppressLint("CheckResult")
-    private void addCaption(final long fileEntityId, final String languageCode,
+    private Observable<Boolean> addCaption(final long fileEntityId, final String languageCode,
         final String captionValue) {
-      wikiBaseClient.addLabelstoWikidata(fileEntityId, languageCode, captionValue)
-          .subscribe(mwPostResponse -> onAddCaptionResponse(fileEntityId, mwPostResponse),
-              throwable -> {
-                Timber.e(throwable, "Error occurred while setting Captions");
-                ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
-              }
-          );
+      return wikiBaseClient.addLabelstoWikidata(fileEntityId, languageCode, captionValue)
+          .doOnNext(mwPostResponse ->  onAddCaptionResponse(fileEntityId, mwPostResponse) )
+          .doOnError(throwable -> {
+            Timber.e(throwable, "Error occurred while setting Captions");
+            ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+          })
+          .map(mwPostResponse -> mwPostResponse != null);
     }
 
-  private void onAddCaptionResponse(Long fileEntityId, MwPostResponse revisionId) {
-    if (revisionId != null) {
-      Timber.d("Caption successfully set, revision id = %s", revisionId);
+  private void onAddCaptionResponse(Long fileEntityId, MwPostResponse response) {
+    if (response != null) {
+      Timber.d("Caption successfully set, revision id = %s", response);
     } else {
       Timber.d("Error occurred while setting Captions, fileEntityId = %s", fileEntityId);
     }
@@ -227,7 +186,43 @@ public class WikidataEditService {
     }
   }
 
-  public void createDepictsProperty(final UploadResult uploadResult, final WikidataItem depictedItem) {
-    editWikidataDepictsProperty(uploadResult, depictedItem);
+  public Disposable addDepictionsAndCaptions(UploadResult uploadResult, Contribution contribution) {
+    return wikiBaseClient.getFileEntityId(uploadResult)
+        .doOnError(throwable -> {
+          Timber.e(throwable, "Error occurred while getting EntityID to set DEPICTS property");
+          ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+        })
+        .subscribeOn(Schedulers.io())
+        .switchMap(fileEntityId -> {
+              if (fileEntityId != null) {
+                Timber.d("EntityId for image was received successfully: %s", fileEntityId);
+                return Observable.concat(
+                    depictionEdits(contribution, fileEntityId),
+                    captionEdits(contribution, fileEntityId)
+                );
+              } else {
+                Timber.d("Error acquiring EntityId for image: %s", uploadResult);
+                return Observable.empty();
+              }
+            }
+        ).subscribe(
+        success -> Timber.d("edit response: %s", success),
+        throwable -> Timber.e(throwable, "posting edits failed")
+    );
+  }
+
+  private Observable<Boolean> captionEdits(Contribution contribution, Long fileEntityId) {
+    return Observable.fromIterable(contribution.getCaptions().entrySet())
+        .concatMap(entry -> addCaption(fileEntityId, entry.getKey(), entry.getValue()));
+  }
+
+  private Observable<Boolean> depictionEdits(Contribution contribution, Long fileEntityId) {
+    final ArrayList<WikidataItem> depictedItems = new ArrayList<>(contribution.getDepictedItems());
+    final WikidataPlace wikidataPlace = contribution.getWikidataPlace();
+    if (wikidataPlace != null) {
+      depictedItems.add(wikidataPlace);
+    }
+    return Observable.fromIterable(depictedItems)
+        .concatMap( wikidataItem -> addDepictsProperty(fileEntityId.toString(), wikidataItem));
   }
 }

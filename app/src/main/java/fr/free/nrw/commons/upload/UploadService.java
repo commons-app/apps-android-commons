@@ -19,7 +19,6 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
@@ -286,17 +285,12 @@ public class UploadService extends HandlerService<Contribution> {
 
     private void onSuccessfulUpload(Contribution contribution, UploadResult uploadResult)
         throws ParseException {
-        for (DepictedItem depictedItem : contribution.getDepictedItems()) {
-            wikidataEditService.createDepictsProperty(uploadResult, depictedItem);
-        }
+        compositeDisposable
+            .add(wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution));
         WikidataPlace wikidataPlace = contribution.getWikidataPlace();
-        if (wikidataPlace != null){
-            wikidataEditService.createDepictsProperty(uploadResult, wikidataPlace);
-            if(wikidataPlace.getImageValue() == null) {
-                wikidataEditService.createImageClaim(wikidataPlace, uploadResult);
-            }
+        if (wikidataPlace != null && wikidataPlace.getImageValue() == null) {
+            wikidataEditService.createImageClaim(wikidataPlace, uploadResult);
         }
-        wikidataEditService.createCaptions(uploadResult, contribution.getCaptions());
         saveCompletedContribution(contribution, uploadResult);
     }
 
