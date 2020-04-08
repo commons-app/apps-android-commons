@@ -563,7 +563,7 @@ public class Media implements Parcelable {
         this.license = in.readString();
         this.licenseUrl = in.readString();
         this.creator = in.readString();
-        this.creator = in.readString();
+        this.user = in.readString();
         this.categories = in.createStringArrayList();
         this.requestedDeletion = in.readByte() != 0;
         this.descriptions = (HashMap<String, String>) in.readSerializable();
