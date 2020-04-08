@@ -25,9 +25,10 @@ public class CommonsDateUtil {
      * Gets the timestamp pattern for a date
      * @return timestamp
      */
-    public static SimpleDateFormat getIso8601DateFormatTimestamp() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ROOT);
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return simpleDateFormat;
+        public static SimpleDateFormat getIso8601DateFormatTimestamp() {
+            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX",
+                Locale.ROOT);
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            return simpleDateFormat;
     }
 }
