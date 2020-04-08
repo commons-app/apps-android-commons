@@ -107,7 +107,7 @@ public class ContributionsPresenter implements UserActionListener {
                     .filter(mwQueryLogEvent -> !mwQueryLogEvent.isDeleted()).doOnNext(mwQueryLogEvent -> Timber.d("Image %s passed filters", mwQueryLogEvent.title()))
                     .map(image -> {
                         Contribution contribution = new Contribution(null, null, image.title(),
-                                "", -1, image.date(), image.date(), user,
+                                "", -1, image.date(), image.date(), user, user,
                                 "", "", STATE_COMPLETED);
                         return contribution;
                     })

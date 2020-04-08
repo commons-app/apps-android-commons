@@ -156,7 +156,7 @@ public class UploadModel {
             Contribution contribution = new Contribution(item.mediaUri, null,
                     item.getFileName(),
                     Description.formatList(item.descriptions), -1,
-                    null, null, sessionManager.getAuthorName(),
+                    null, null, sessionManager.getAuthorName(), sessionManager.getUserName(),
                     CommonsApplication.DEFAULT_EDIT_SUMMARY, item.gpsCoords.getDecimalCoords());
             if (item.place != null) {
                 contribution.setWikiDataEntityId(item.place.getWikiDataEntityId());

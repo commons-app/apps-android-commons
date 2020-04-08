@@ -49,6 +49,7 @@ public class Media implements Parcelable {
     public String license;
     public String licenseUrl;
     public String creator;
+    public String user;
     public ArrayList<String> categories; // as loaded at runtime?
     public boolean requestedDeletion;
     public HashMap<String, String> descriptions; // multilingual descriptions as loaded
@@ -83,9 +84,10 @@ public class Media implements Parcelable {
      * @param dateCreated Media creation date
      * @param dateUploaded Media date uploaded
      * @param creator Media creator
+     * @param user username
      */
     public Media(Uri localUri, String imageUrl, String filename, String description,
-                 long dataLength, Date dateCreated, Date dateUploaded, String creator) {
+                 long dataLength, Date dateCreated, Date dateUploaded, String creator, String user) {
         this();
         this.localUri = localUri;
         this.thumbUrl = imageUrl;
@@ -96,6 +98,7 @@ public class Media implements Parcelable {
         this.dateCreated = dateCreated;
         this.dateUploaded = dateUploaded;
         this.creator = creator;
+        this.user = user;
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
     }
@@ -117,7 +120,7 @@ public class Media implements Parcelable {
         ExtMetadata metadata = imageInfo.getMetadata();
         if (metadata == null) {
             Media media = new Media(null, imageInfo.getOriginalUrl(),
-                    page.title(), "", 0, null, null, null);
+                    page.title(), "", 0, null, null, null, null);
             if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
                 media.setThumbUrl(imageInfo.getThumbUrl());
             }
@@ -131,7 +134,8 @@ public class Media implements Parcelable {
                 0,
                 safeParseDate(metadata.dateTime()),
                 safeParseDate(metadata.dateTime()),
-                getArtist(metadata)
+                getArtist(metadata),
+                imageInfo.getUser()
         );
 
         if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
@@ -164,9 +168,16 @@ public class Media implements Parcelable {
      */
     private static String getArtist(ExtMetadata metadata) {
         try {
+            final String anchorStartTagTerminalChars = "\">";
+            final String anchorCloseTag = "</a>";
+
             String artistHtml = metadata.artist();
-            return artistHtml.substring(artistHtml.indexOf("title=\""), artistHtml.indexOf("\">"))
-                    .replaceAll("(.*):", "").replace("(page does not exist)", "");
+            return artistHtml
+                .substring(
+                    artistHtml.indexOf(anchorStartTagTerminalChars),
+                    artistHtml.indexOf(anchorCloseTag)
+                )
+                .substring(anchorStartTagTerminalChars.length());
         } catch (Exception ex) {
             return "";
         }
@@ -324,6 +335,10 @@ public class Media implements Parcelable {
      */
     public String getCreator() {
         return creator;
+    }
+
+    public String getUser() {
+        return user;
     }
 
     /**
@@ -523,6 +538,7 @@ public class Media implements Parcelable {
         dest.writeString(this.license);
         dest.writeString(this.licenseUrl);
         dest.writeString(this.creator);
+        dest.writeString(this.user);
         dest.writeStringList(this.categories);
         dest.writeByte(this.requestedDeletion ? (byte) 1 : (byte) 0);
         dest.writeSerializable(this.descriptions);
@@ -546,6 +562,7 @@ public class Media implements Parcelable {
         this.height = in.readInt();
         this.license = in.readString();
         this.licenseUrl = in.readString();
+        this.creator = in.readString();
         this.creator = in.readString();
         this.categories = in.createStringArrayList();
         this.requestedDeletion = in.readByte() != 0;

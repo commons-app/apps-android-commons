@@ -63,10 +63,10 @@ class SearchImagesRenderer extends Renderer<Media> {
      * formats author name as "Uploaded by: authorName" and sets it in textview
      */
     private void setAuthorView(Media item, TextView author) {
-        if (item.getCreator() != null && !item.getCreator().equals("")) {
+        if (item.getUser() != null && !item.getUser().equals("")) {
             author.setVisibility(View.VISIBLE);
             String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
-            author.setText(String.format(uploadedByTemplate, item.getCreator()));
+            author.setText(String.format(uploadedByTemplate, item.getUser()));
         } else {
             author.setVisibility(View.GONE);
         }

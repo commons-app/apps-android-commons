@@ -98,9 +98,9 @@ public class GridViewAdapter extends ArrayAdapter {
      * @param author
      */
     private void setAuthorView(Media item, TextView author) {
-        if (!TextUtils.isEmpty(item.getCreator())) {
+        if (!TextUtils.isEmpty(item.getUser())) {
             author.setVisibility(View.VISIBLE);
-            author.setText(getContext().getString(R.string.image_uploaded_by, item.getCreator()));
+            author.setText(getContext().getString(R.string.image_uploaded_by, item.getUser()));
         } else {
             author.setVisibility(View.GONE);
         }

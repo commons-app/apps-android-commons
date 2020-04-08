@@ -13,7 +13,7 @@ import retrofit2.http.QueryMap;
  * Interface for interacting with Commons media related APIs
  */
 public interface MediaInterface {
-    String MEDIA_PARAMS="&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640" +
+    String MEDIA_PARAMS="&prop=imageinfo&iiprop=url|extmetadata|user&iiurlwidth=640" +
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl";
     /**

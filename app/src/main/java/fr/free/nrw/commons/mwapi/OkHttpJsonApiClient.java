@@ -233,7 +233,7 @@ public class OkHttpJsonApiClient {
      */
     private HttpUrl.Builder appendMediaProperties(HttpUrl.Builder builder) {
         builder.addQueryParameter("prop", "imageinfo")
-                .addQueryParameter("iiprop", "url|extmetadata")
+                .addQueryParameter("iiprop", "url|extmetadata|user")
                 .addQueryParameter("iiurlwidth", THUMB_SIZE)
                 .addQueryParameter("iiextmetadatafilter", "DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl");
 

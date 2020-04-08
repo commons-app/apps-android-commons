@@ -63,9 +63,9 @@ public class  Contribution extends Media {
 
     public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date dateCreated,
                         int state, long dataLength, Date dateUploaded, long transferred,
-                        String source, String description, String creator, boolean isMultiple,
+                        String source, String description, String creator, String user, boolean isMultiple,
                         int width, int height, String license) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
+        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator, user);
         this.contentUri = contentUri;
         this.state = state;
         this.transferred = transferred;
@@ -78,16 +78,16 @@ public class  Contribution extends Media {
     }
 
     public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
-                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
+                        Date dateCreated, Date dateUploaded, String creator, String user, String editSummary, String decimalCoords) {
+        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator, user);
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
     }
 
     public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
-                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords, int state) {
-        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
+                        Date dateCreated, Date dateUploaded, String creator, String user, String editSummary, String decimalCoords, int state) {
+        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator, user);
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         this.dateCreatedSource = "";
