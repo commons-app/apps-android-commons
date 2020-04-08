@@ -108,8 +108,11 @@ class PickedFiles implements Constants {
         InputStream pictureInputStream = context.getContentResolver().openInputStream(photoUri);
         File directory = tempImageDirectory(context);
         File photoFile = new File(directory, UUID.randomUUID().toString() + "." + getMimeType(context, photoUri));
-        photoFile.createNewFile();
-        writeToFile(pictureInputStream, photoFile);
+        if (photoFile.createNewFile()) {
+            writeToFile(pictureInputStream, photoFile);
+        } else {
+            throw new IOException("could not create photoFile to write upon");
+        }
         return new UploadableFile(photoUri, photoFile);
     }
 
