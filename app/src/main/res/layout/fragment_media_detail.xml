@@ -75,69 +75,46 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        style="@style/MediaDetailTextBody"
                         android:id="@+id/mediaDetailTitle"
                         android:layout_width="@dimen/widget_margin"
-                        android:layout_height="match_parent"
-                        android:layout_weight="70"
-                        android:layout_gravity="start"
-                        android:padding="@dimen/small_gap"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/description_text_size"
+                        android:layout_height="match_parent"
                         tools:text="Title of the media" />
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/MediaDetailLinear1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/authorLinearLayout"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/quarter_standard_height"
-                    android:paddingRight="@dimen/quarter_standard_height"
-                    android:paddingTop="@dimen/tiny_gap"
-                    android:paddingBottom="@dimen/tiny_gap">
+                    android:orientation="horizontal">
 
                     <TextView
+                        style="@style/MediaDetailTextHeading"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:layout_weight="30"
-                        android:paddingTop="@dimen/dimen_6"
-                        android:paddingLeft="@dimen/tiny_gap"
-                        android:text="@string/media_detail_author"
-                        android:textColor="?attr/mediaDetailsHeadingText"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        android:text="@string/media_detail_author" />
 
                     <TextView
+                        style="@style/MediaDetailTextBody"
                         android:id="@+id/mediaDetailAuthor"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:layout_weight="70"
-                        android:layout_gravity="start"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="@color/layout_light_grey"
-                        android:textSize="@dimen/description_text_size"
                         tools:text="Media author user name goes here." />
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/MediaDetailLinear1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/quarter_standard_height"
-                    android:paddingRight="@dimen/quarter_standard_height"
-                    android:paddingTop="@dimen/tiny_gap"
-                    android:paddingBottom="@dimen/tiny_gap">
+                    android:orientation="horizontal">
 
                     <TextView
+                        style="@style/MediaDetailTextHeading"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:layout_weight="30"
-                        android:paddingTop="@dimen/dimen_6"
-                        android:paddingLeft="@dimen/tiny_padding"
-                        android:text="@string/media_detail_description"
-                        android:textColor="?attr/mediaDetailsHeadingText"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        android:text="@string/media_detail_description" />
 
                     <fr.free.nrw.commons.ui.widget.HtmlTextView
                         android:id="@+id/mediaDetailDesc"
@@ -157,25 +134,16 @@
                     android:layout_height="@dimen/tiny_gap"/>
 
                 <LinearLayout
+                    style="@style/MediaDetailLinear1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="100"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/quarter_standard_height"
-                    android:paddingRight="@dimen/quarter_standard_height"
-                    android:paddingTop="@dimen/tiny_gap"
-                    android:paddingBottom="@dimen/tiny_gap">
+                    android:orientation="horizontal">
 
                     <TextView
+                        style="@style/MediaDetailTextHeading"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:layout_weight="30"
-                        android:paddingLeft="@dimen/tiny_padding"
-                        android:paddingTop="@dimen/dimen_6"
-                        android:text="@string/media_detail_license"
-                        android:textColor="?attr/mediaDetailsHeadingText"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        android:text="@string/media_detail_license" />
 
                     <fr.free.nrw.commons.ui.widget.CompatTextView
                         android:id="@+id/mediaDetailLicense"
@@ -194,24 +162,16 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/MediaDetailLinear1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/quarter_standard_height"
-                    android:paddingRight="@dimen/quarter_standard_height"
-                    android:paddingTop="@dimen/tiny_gap"
-                    android:paddingBottom="@dimen/tiny_gap">
+                    android:orientation="horizontal">
 
                     <TextView
+                        style="@style/MediaDetailTextHeading"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:layout_weight="30"
-                        android:paddingLeft="@dimen/tiny_padding"
-                        android:paddingTop="@dimen/dimen_6"
-                        android:text="@string/media_detail_coordinates"
-                        android:textColor="?attr/mediaDetailsHeadingText"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        android:text="@string/media_detail_coordinates" />
 
                     <fr.free.nrw.commons.ui.widget.CompatTextView
                         android:id="@+id/mediaDetailCoordinates"
@@ -230,26 +190,17 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/MediaDetailLinear1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingLeft="@dimen/quarter_standard_height"
-                    android:paddingRight="@dimen/quarter_standard_height"
-                    android:paddingTop="@dimen/tiny_gap"
-                    android:paddingBottom="@dimen/tiny_gap"
                     android:textStyle="bold">
 
                     <TextView
+                        style="@style/MediaDetailTextHeading"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:layout_weight="30"
-                        android:layout_gravity="start"
-                        android:paddingLeft="@dimen/tiny_padding"
-                        android:paddingTop="@dimen/dimen_6"
-                        android:text="@string/detail_panel_cats_label"
-                        android:textColor="?attr/mediaDetailsHeadingText"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        android:text="@string/detail_panel_cats_label" />
 
                     <LinearLayout
                         android:id="@+id/mediaDetailCategoryContainer"
@@ -260,34 +211,22 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/MediaDetailLinear1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/quarter_standard_height"
-                    android:paddingRight="@dimen/quarter_standard_height"
-                    android:paddingTop="@dimen/tiny_gap"
-                    android:paddingBottom="@dimen/tiny_gap">
+                    android:orientation="horizontal">
 
                     <TextView
+                        style="@style/MediaDetailTextHeading"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:layout_weight="30"
-                        android:paddingLeft="@dimen/tiny_padding"
-                        android:paddingTop="@dimen/dimen_6"
-                        android:text="@string/media_detail_uploaded_date"
-                        android:textColor="?attr/mediaDetailsHeadingText"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        android:text="@string/media_detail_uploaded_date" />
 
                     <TextView
+                        style="@style/MediaDetailTextBody"
                         android:id="@+id/mediaDetailuploadeddate"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:layout_weight="70"
-                        android:layout_gravity="start"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="?attr/mediaDetailsText"
-                        android:textSize="@dimen/description_text_size"
                         tools:text="Uploaded date" />
                 </LinearLayout>
 
@@ -321,34 +260,22 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/MediaDetailLinear1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/quarter_standard_height"
-                    android:paddingRight="@dimen/quarter_standard_height"
-                    android:paddingTop="@dimen/tiny_gap"
-                    android:paddingBottom="@dimen/tiny_gap">
+                    android:orientation="horizontal">
 
                     <TextView
+                        style="@style/MediaDetailTextHeading"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:layout_weight="30"
-                        android:paddingLeft="@dimen/tiny_padding"
-                        android:paddingTop="@dimen/dimen_6"
-                        android:text="@string/media_detail_discussion"
-                        android:textColor="?attr/mediaDetailsHeadingText"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        android:text="@string/media_detail_discussion" />
 
                     <TextView
+                        style="@style/MediaDetailTextBody"
                         android:id="@+id/mediaDetailDisc"
                         android:layout_width="@dimen/widget_margin"
-                        android:layout_height="match_parent"
-                        android:layout_weight="70"
-                        android:layout_gravity="start"
-                        android:padding="@dimen/small_gap"
-                        android:textColor="?attr/mediaDetailsText"
-                        android:textSize="@dimen/description_text_size" />
+                        android:layout_height="match_parent" />
                 </LinearLayout>
 
                 <Button
