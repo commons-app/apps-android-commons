@@ -625,6 +625,7 @@ public class Media implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
     /**
      * Creates a way to transfer information between two or more
      * activities.
