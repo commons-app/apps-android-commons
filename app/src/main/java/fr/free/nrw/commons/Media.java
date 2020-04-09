@@ -120,7 +120,7 @@ public class Media implements Parcelable {
         ExtMetadata metadata = imageInfo.getMetadata();
         if (metadata == null) {
             Media media = new Media(null, imageInfo.getOriginalUrl(),
-                    page.title(), "", 0, null, null, null, null);
+                    page.title(), "", 0, null, null, null, imageInfo.getUser());
             if (!StringUtils.isBlank(imageInfo.getThumbUrl())) {
                 media.setThumbUrl(imageInfo.getThumbUrl());
             }
@@ -174,10 +174,9 @@ public class Media implements Parcelable {
             String artistHtml = metadata.artist();
             return artistHtml
                 .substring(
-                    artistHtml.indexOf(anchorStartTagTerminalChars),
+                    artistHtml.indexOf(anchorStartTagTerminalChars) + anchorStartTagTerminalChars.length(),
                     artistHtml.indexOf(anchorCloseTag)
-                )
-                .substring(anchorStartTagTerminalChars.length());
+                );
         } catch (Exception ex) {
             return "";
         }

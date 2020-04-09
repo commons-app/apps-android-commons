@@ -52,7 +52,7 @@ class SearchImagesRenderer extends Renderer<Media> {
         Media item = getContent();
         tvImageName.setText(item.getDisplayTitle());
         browseImage.setImageURI(item.getThumbUrl());
-        setAuthorView(item, categoryImageAuthor);
+        setUploaderView(item, categoryImageAuthor);
     }
 
     interface ImageClickedListener {
@@ -60,15 +60,15 @@ class SearchImagesRenderer extends Renderer<Media> {
     }
 
     /**
-     * formats author name as "Uploaded by: authorName" and sets it in textview
+     * formats uploader name as "Uploaded by: userName" and sets it in textview
      */
-    private void setAuthorView(Media item, TextView author) {
+    private void setUploaderView(Media item, TextView uploader) {
         if (item.getUser() != null && !item.getUser().equals("")) {
-            author.setVisibility(View.VISIBLE);
+            uploader.setVisibility(View.VISIBLE);
             String uploadedByTemplate = getContext().getString(R.string.image_uploaded_by);
-            author.setText(String.format(uploadedByTemplate, item.getUser()));
+            uploader.setText(String.format(uploadedByTemplate, item.getUser()));
         } else {
-            author.setVisibility(View.GONE);
+            uploader.setVisibility(View.GONE);
         }
     }
 }
