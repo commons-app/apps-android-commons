@@ -131,11 +131,11 @@ object DialogUtil {
         activity: Activity,
         title: String,
         message: String,
-        positiveButtonText: String? = let { "" },
-        negativeButtonText: String? = let { "" },
+        positiveButtonText: String? = null,
+        negativeButtonText: String? = null,
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
-        customView: View?,
+        customView: View? = null,
         cancelable: Boolean = false
     ) {
 
