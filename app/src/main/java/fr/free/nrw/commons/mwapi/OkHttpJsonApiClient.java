@@ -249,7 +249,7 @@ public class OkHttpJsonApiClient {
                         && subclassDescription.getXmlLang() != null) {
                         description = subclassDescription.getValue();
                     }
-                    subItems.add(new DepictedItem(label, description, "", false,entityId ));
+                    subItems.add(new DepictedItem(label, description, "", false, entityId));
                     Timber.e(label);
                 }
             }
