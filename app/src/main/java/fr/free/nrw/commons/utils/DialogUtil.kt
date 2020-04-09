@@ -61,26 +61,17 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?
     ) {
-        showSafely(activity, AlertDialog.Builder(activity).apply {
-            setTitle(title)
-            setMessage(message)
-
-            if (positiveButtonText.isBlank()) {
-                setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
-                    onPositiveBtnClick?.run()
-                }
-            }
-            if (negativeButtonText.isBlank()) {
-                setNegativeButton(negativeButtonText) { _: DialogInterface, _: Int ->
-                    onNegativeBtnClick?.run()
-                }
-            }
-        }.create())
+        showAlertDialog(
+            activity,
+            title,
+            message,
+            positiveButtonText,
+            negativeButtonText,
+            onPositiveBtnClick,
+            onNegativeBtnClick
+        )
     }
 
-    /*
-    Shows alert dialog with custom view
-    */
     @JvmStatic
     fun showAlertDialog(
         activity: Activity,
@@ -104,23 +95,54 @@ object DialogUtil {
         )
     }
 
-    /*
-    Shows alert dialog with custom view
-     */
-    private fun showAlertDialog(
+    @JvmStatic
+    fun showAlertDialog(
         activity: Activity,
         title: String,
         message: String,
-        positiveButtonText: String,
-        negativeButtonText: String,
+        positiveButtonText: String?,
+        onPositiveBtnClick: Runnable?,
+        cancellable: Boolean
+    ) {
+        showAlertDialog(
+            activity,
+            title,
+            message,
+            positiveButtonText,
+            onPositiveBtnClick,
+            cancellable
+        )
+    }
+
+    /**
+     * show a dialog
+     * @param activity
+     * @param title
+     * @param message
+     * @param positiveButtonText
+     * @param negativeButtonText
+     * @param onPositiveBtnClick
+     * @param onNegativeBtnClick
+     * @param customView
+     * @param cancelable
+     */
+    @JvmStatic
+    fun showAlertDialog(
+        activity: Activity,
+        title: String,
+        message: String,
+        positiveButtonText: String? = let { "" },
+        negativeButtonText: String? = let { "" },
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
-        customView: View?,
-        cancelable: Boolean
+        customView: View? = null,
+        cancelable: Boolean? = let { false }
     ) {
-        // If the custom view already has a parent, there is already a dialog showing with the view
-        // This happens for on resume - return to avoid creating a second dialog - the first one
-        // will still show
+
+        /* If the custom view already has a parent, there is already a dialog showing with the view
+         * This happens for on resume - return to avoid creating a second dialog - the first one
+         * will still show
+         */
         if (customView?.parent != null) {
             return
         }
@@ -129,40 +151,20 @@ object DialogUtil {
             setTitle(title)
             setMessage(message)
             setView(customView)
-            setCancelable(cancelable)
-            setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
-                onPositiveBtnClick?.run()
+            cancelable?.let { setCancelable(it) }
+            positiveButtonText?.let {
+                if (positiveButtonText.isBlank()) {
+                    setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
+                        onPositiveBtnClick?.run()
+                    }
+                }
             }
-            setNegativeButton(negativeButtonText) { _: DialogInterface, _: Int ->
-                onNegativeBtnClick?.run()
-            }
-        }.create())
-    }
-
-    /**
-     * show a dialog with just a positive button
-     * @param activity
-     * @param title
-     * @param message
-     * @param positiveButtonText
-     * @param positiveButtonClick
-     * @param cancellable
-     */
-    @JvmStatic
-    fun showAlertDialog(
-        activity: Activity,
-        title: String,
-        message: String,
-        positiveButtonText: String,
-        positiveButtonClick: Runnable?,
-        cancellable: Boolean
-    ) {
-        showSafely(activity, AlertDialog.Builder(activity).apply {
-            setTitle(title)
-            setMessage(message)
-            setCancelable(cancellable)
-            setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
-                positiveButtonClick?.run()
+            negativeButtonText?.let {
+                if (negativeButtonText.isBlank()) {
+                    setNegativeButton(negativeButtonText) { _: DialogInterface, _: Int ->
+                        onNegativeBtnClick?.run()
+                    }
+                }
             }
         }.create())
     }
