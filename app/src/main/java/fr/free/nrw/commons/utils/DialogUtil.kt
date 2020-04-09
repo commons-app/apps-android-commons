@@ -135,8 +135,8 @@ object DialogUtil {
         negativeButtonText: String? = let { "" },
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
-        customView: View? = let { null },
-        cancelable: Boolean? = let { false }
+        customView: View?,
+        cancelable: Boolean = false
     ) {
 
         /* If the custom view already has a parent, there is already a dialog showing with the view
@@ -151,7 +151,7 @@ object DialogUtil {
             setTitle(title)
             setMessage(message)
             setView(customView)
-            cancelable?.let { setCancelable(it) }
+            setCancelable(cancelable)
             positiveButtonText?.let {
                 if (positiveButtonText.isBlank()) {
                     setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
