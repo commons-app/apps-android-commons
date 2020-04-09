@@ -9,11 +9,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +33,6 @@ import com.facebook.imagepipeline.request.ImageRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.util.DateUtil;
-import org.wikipedia.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -245,7 +244,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                     .setVisibility(View.GONE);
         }
         media = detailProvider.getMediaAtPosition(index);
-        displayMediaDetails();
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
+            new OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    displayMediaDetails();
+                }
+            }
+        );
     }
 
     private void displayMediaDetails() {
@@ -264,7 +271,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void updateAspectRatio(ImageInfo imageInfo) {
         if (imageInfo != null) {
-            int finalHeight = (scrollView.getWidth()*imageInfo.getHeight()) / imageInfo.getWidth();
+            int screenWidth = scrollView.getWidth();
+            int finalHeight = (screenWidth*imageInfo.getHeight()) / imageInfo.getWidth();
             ViewGroup.LayoutParams params = image.getLayoutParams();
             params.height = finalHeight;
             image.setLayoutParams(params);
