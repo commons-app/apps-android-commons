@@ -47,7 +47,9 @@ object DialogUtil {
             activity.getString(R.string.yes),
             activity.getString(R.string.no),
             onPositiveBtnClick,
-            onNegativeBtnClick
+            onNegativeBtnClick,
+            null,
+            false
         )
     }
 
@@ -68,7 +70,9 @@ object DialogUtil {
             positiveButtonText,
             negativeButtonText,
             onPositiveBtnClick,
-            onNegativeBtnClick
+            onNegativeBtnClick,
+            null,
+            false
         )
     }
 
@@ -109,7 +113,10 @@ object DialogUtil {
             title,
             message,
             positiveButtonText,
+            null,
             onPositiveBtnClick,
+            null,
+            null,
             cancellable
         )
     }
