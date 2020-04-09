@@ -603,7 +603,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private String prettyDescription(Media media) {
         // @todo use UI language when multilingual descs are available
-        String desc = media.getDescription(locale.getLanguage()).trim();
+        String desc = media.getDescription();
         if (desc.equals("")) {
             return getString(R.string.detail_description_empty);
         } else {
@@ -649,7 +649,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     private void checkDeletion(Media media){
-        if (media.getRequestedDeletion()){
+        if (media.isRequestedDeletion()){
             delete.setVisibility(GONE);
             nominatedForDeletion.setVisibility(VISIBLE);
         } else if (!isCategoryImage) {

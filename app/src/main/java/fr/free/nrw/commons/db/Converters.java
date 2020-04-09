@@ -9,9 +9,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,18 +48,18 @@ public class Converters {
     }
 
     @TypeConverter
-    public static List<String> stringToArrayListObject(String objectList) {
+    public static List<String> stringToListObject(String objectList) {
         return readObjectWithTypeToken(objectList, new TypeToken<List<String>>() {});
     }
 
     @TypeConverter
-    public static String mapObjectToString(HashMap<String,String> objectList) {
+    public static String mapObjectToString(Map<String,String> objectList) {
         return writeObjectToString(objectList);
     }
 
     @TypeConverter
-    public static HashMap<String,String> stringToHashMap(String objectList) {
-        return readObjectWithTypeToken(objectList, new TypeToken<HashMap<String,String>>(){});
+    public static Map<String,String> stringToMap(String objectList) {
+        return readObjectWithTypeToken(objectList, new TypeToken<Map<String,String>>(){});
     }
 
     @TypeConverter
@@ -75,23 +73,13 @@ public class Converters {
     }
 
     @TypeConverter
-    public static String listOfMapToString(ArrayList<Map<String,String>> listOfMaps) {
+    public static String listOfMapToString(List<Map<String,String>> listOfMaps) {
         return writeObjectToString(listOfMaps);
     }
 
     @TypeConverter
-    public static ArrayList<Map<String,String>> stringToListOfMap(String listOfMaps) {
-        return readObjectWithTypeToken(listOfMaps, new TypeToken<ArrayList<Map<String, String>>>() {});
-    }
-
-    @TypeConverter
-    public static String mapToString(Map<String,String> map) {
-        return writeObjectToString(map);
-    }
-
-    @TypeConverter
-    public static Map<String,String> stringToMap(String map) {
-        return readObjectWithTypeToken(map, new TypeToken<Map<String, String>>() {});
+    public static List<Map<String,String>> stringToListOfMap(String listOfMaps) {
+        return readObjectWithTypeToken(listOfMaps, new TypeToken<List<Map<String, String>>>() {});
     }
 
     @TypeConverter

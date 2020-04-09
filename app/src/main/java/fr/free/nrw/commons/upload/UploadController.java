@@ -115,10 +115,6 @@ public class UploadController {
             contribution.setDescription("");
         }
 
-        if (contribution.getCaption() == null) {
-            contribution.setCaption("");
-        }
-
         final String license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         contribution.setLicense(license);
 

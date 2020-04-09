@@ -2,8 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.depictions.Media.DepictedImagesFragment.PAGE_ID_PREFIX;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
@@ -60,7 +58,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         this.contribution = contribution;
         fetchAndDisplayCaption(contribution);
         this.position = position;
-        String imageSource = chooseImageSource(contribution.thumbUrl, contribution.getLocalUri());
+        String imageSource = chooseImageSource(contribution.getThumbUrl(), contribution.getLocalUri());
         if (!TextUtils.isEmpty(imageSource)) {
             final ImageRequest imageRequest =
                 ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))

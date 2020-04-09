@@ -10,9 +10,9 @@ import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.wikipedia.dataclient.mwapi.MwQueryLogEvent;
 
 @Entity(tableName = "contribution")
@@ -37,23 +37,33 @@ public class Contribution extends Media {
      */
     private List<DepictedItem> depictedItems = new ArrayList<>();
     private String mimeType;
+    /**
+     * This hasmap stores the list of multilingual captions, where
+     * key of the HashMap is the language and value is the caption in the corresponding language
+     * Ex: key = "en", value: "<caption in short in English>"
+     *     key = "de" , value: "<caption in german>"
+     */
+    private Map<String, String> captions = new HashMap<>();
 
     public Contribution() {
     }
 
     public Contribution(final UploadItem item, final SessionManager sessionManager,
-        final List<DepictedItem> depictedItems,
-        final List<String> categories) {
-        super(item.getMediaUri(), null, item.getFileName(), UploadMediaDetail.formatCaptions(item.getUploadMediaDetails()), UploadMediaDetail.formatList(item.getUploadMediaDetails()), -1, null, new Date(), sessionManager.getAuthorName());
+        final List<DepictedItem> depictedItems, final List<String> categories) {
+        super(item.getMediaUri(),
+            item.getFileName(),
+            UploadMediaDetail.formatList(item.getUploadMediaDetails()),
+            sessionManager.getAuthorName(),
+            categories);
+        captions =  UploadMediaDetail.formatCaptions(item.getUploadMediaDetails());
         decimalCoords = item.getGpsCoords().getDecimalCoords();
         dateCreatedSource = "";
         this.depictedItems = depictedItems;
         wikidataPlace = WikidataPlace.from(item.getPlace());
-        this.categories = categories;
     }
 
     public Contribution(final MwQueryLogEvent queryLogEvent, final String user) {
-        super(null, null, queryLogEvent.title(), new HashMap<>(), "", -1, queryLogEvent.date(), queryLogEvent.date(), user);
+        super(queryLogEvent.title(),queryLogEvent.date(), user);
         decimalCoords = "";
         dateCreatedSource = "";
         state = STATE_COMPLETED;
@@ -81,19 +91,6 @@ public class Contribution extends Media {
 
     public void setState(final int state) {
         this.state = state;
-    }
-
-    public void setDateUploaded(final Date date) {
-        dateUploaded = date;
-    }
-
-    @Override
-    public void setFilename(final String filename) {
-        this.filename = filename;
-    }
-
-    public void setImageUrl(final String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     /**
@@ -131,6 +128,31 @@ public class Contribution extends Media {
         this.depictedItems = depictedItems;
     }
 
+    public void setMimeType(String mimeType) {
+      this.mimeType = mimeType;
+    }
+
+    public String getMimeType() {
+      return mimeType;
+    }
+
+    /**
+     * Captions are a feature part of Structured data. They are meant to store short, multilingual descriptions about files
+     * This is a replacement of the previously used titles for images (titles were not multilingual)
+     * Also now captions replace the previous convention of using title for filename
+     *
+     * key of the HashMap is the language and value is the caption in the corresponding language
+     *
+     * returns list of captions stored in hashmap
+     */
+    public Map<String, String> getCaptions() {
+      return captions;
+    }
+
+    public void setCaptions(Map<String, String> captions) {
+      this.captions = captions;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -144,6 +166,7 @@ public class Contribution extends Media {
         dest.writeLong(transferred);
         dest.writeString(decimalCoords);
         dest.writeString(dateCreatedSource);
+        dest.writeSerializable((HashMap) captions);
     }
 
     protected Contribution(final Parcel in) {
@@ -153,6 +176,7 @@ public class Contribution extends Media {
         transferred = in.readLong();
         decimalCoords = in.readString();
         dateCreatedSource = in.readString();
+        captions = (HashMap<String, String>) in.readSerializable()
     }
 
     public static final Creator<Contribution> CREATOR = new Creator<Contribution>() {
@@ -166,12 +190,4 @@ public class Contribution extends Media {
             return new Contribution[size];
         }
     };
-
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
 }

@@ -177,11 +177,11 @@ public class ContributionsPresenter implements UserActionListener {
     @Override
     public void fetchMediaDetails(Contribution contribution) {
         compositeDisposable.add(mediaDataExtractor
-            .getMediaFromFileName(contribution.filename)
+            .getMediaFromFileName(contribution.getFilename())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(media -> {
-                contribution.thumbUrl=media.thumbUrl;
+                contribution.setThumbUrl(media.getThumbUrl());
                 updateContribution(contribution);
             }));
     }
