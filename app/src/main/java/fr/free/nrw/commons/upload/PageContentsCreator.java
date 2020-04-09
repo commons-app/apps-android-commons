@@ -7,8 +7,8 @@ import fr.free.nrw.commons.filepicker.UploadableFile.DateTimeWithSource;
 import fr.free.nrw.commons.settings.Prefs.Licenses;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
@@ -56,7 +56,7 @@ class PageContentsCreator {
         .append(licenseTemplateFor(contribution.getLicense())).append("\n\n")
         .append("{{Uploaded from Mobile|platform=Android|version=")
         .append(ConfigUtils.getVersionNameWithSha(context)).append("}}\n");
-    final ArrayList<String> categories = contribution.getCategories();
+    final List<String> categories = contribution.getCategories();
     if (categories != null && categories.size() != 0) {
       for (int i = 0; i < categories.size(); i++) {
         buffer.append("\n[[Category:").append(categories.get(i)).append("]]");

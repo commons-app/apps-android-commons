@@ -75,7 +75,7 @@ public class UploadModel {
     }
 
     public void setSelectedCategories(List<String> selectedCategories) {
-        this.selectedCategories = newListOf(selectedCategories);
+        this.selectedCategories = selectedCategories;
     }
 
     /**
@@ -144,7 +144,7 @@ public class UploadModel {
         return Observable.fromIterable(items).map(item ->
         {
             final Contribution contribution = new Contribution(
-                item, sessionManager, selectedDepictions, selectedCategories);
+                item, sessionManager, newListOf(selectedDepictions), newListOf(selectedCategories));
             Timber.d("Created timestamp while building contribution is %s, %s",
                     item.getCreatedTimestamp(),
                     new Date(item.getCreatedTimestamp()));

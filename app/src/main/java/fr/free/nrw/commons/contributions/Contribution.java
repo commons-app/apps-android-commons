@@ -10,7 +10,6 @@ import fr.free.nrw.commons.upload.UploadModel.UploadItem;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -44,13 +43,13 @@ public class Contribution extends Media {
 
     public Contribution(final UploadItem item, final SessionManager sessionManager,
         final List<DepictedItem> depictedItems,
-        final Collection<String> categories) {
+        final List<String> categories) {
         super(item.getMediaUri(), null, item.getFileName(), UploadMediaDetail.formatCaptions(item.getUploadMediaDetails()), UploadMediaDetail.formatList(item.getUploadMediaDetails()), -1, null, new Date(), sessionManager.getAuthorName());
         decimalCoords = item.getGpsCoords().getDecimalCoords();
         dateCreatedSource = "";
-        this.depictedItems.addAll(depictedItems);
+        this.depictedItems = depictedItems;
         wikidataPlace = WikidataPlace.from(item.getPlace());
-        this.categories.addAll(categories);
+        this.categories = categories;
     }
 
     public Contribution(final MwQueryLogEvent queryLogEvent, final String user) {

@@ -53,7 +53,7 @@ public class Media implements Parcelable {
      * Wikibase Identifier associated with media files
      */
     public String pageId;
-    public ArrayList<String> categories; // as loaded at runtime?
+    private List<String> categories; // as loaded at runtime?
     /**
      * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
      * However unlike categories depictions is multi-lingual
@@ -447,8 +447,8 @@ public class Media implements Parcelable {
      * @return file categories as an ArrayList of Strings
      */
     @SuppressWarnings("unchecked")
-    public ArrayList<String> getCategories() {
-        return (ArrayList<String>) categories.clone(); // feels dirty
+    public List<String> getCategories() {
+        return categories;
     }
 
 
@@ -460,8 +460,7 @@ public class Media implements Parcelable {
      * @param categories file categories as a list of Strings
      */
     public void setCategories(List<String> categories) {
-        this.categories.clear();
-        this.categories.addAll(categories);
+        this.categories = categories;
     }
 
     /**

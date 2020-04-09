@@ -45,13 +45,13 @@ public class Converters {
     }
 
     @TypeConverter
-    public static String listObjectToString(ArrayList<String> objectList) {
+    public static String listObjectToString(List<String> objectList) {
         return writeObjectToString(objectList);
     }
 
     @TypeConverter
-    public static ArrayList<String> stringToArrayListObject(String objectList) {
-        return readObjectWithTypeToken(objectList, new TypeToken<ArrayList<String>>() {});
+    public static List<String> stringToArrayListObject(String objectList) {
+        return readObjectWithTypeToken(objectList, new TypeToken<List<String>>() {});
     }
 
     @TypeConverter
