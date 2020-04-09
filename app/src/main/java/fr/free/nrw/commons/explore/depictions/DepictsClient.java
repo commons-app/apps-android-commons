@@ -12,7 +12,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -113,8 +112,7 @@ public class DepictsClient {
                         Media media = new Media(null,
                                 getUrl(s.getTitle()),
                                 s.getTitle(),
-                                new HashMap<>(),
-                                "",
+                            "",
                                 0,
                                 safeParseDate(s.getTimestamp()),
                                 safeParseDate(s.getTimestamp()),

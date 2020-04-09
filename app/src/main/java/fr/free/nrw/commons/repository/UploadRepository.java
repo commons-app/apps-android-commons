@@ -115,10 +115,6 @@ public class UploadRepository {
         remoteDataSource.setSelectedCategories(categoryStringList);
     }
 
-    public void setSelectedDepictions(List<String> selectedDepictions) {
-        remoteDataSource.setSelectedDepictions(selectedDepictions);
-    }
-
     /**
      * handles the category selection/deselection
      *
@@ -180,14 +176,12 @@ public class UploadRepository {
      *
      * @param uploadableFile
      * @param place
-     * @param source
      * @param similarImageInterface
      * @return
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile, Place place,
-                                                  String source, SimilarImageInterface similarImageInterface) {
-        return remoteDataSource
-                .preProcessImage(uploadableFile, place, source, similarImageInterface);
+        SimilarImageInterface similarImageInterface) {
+        return remoteDataSource.preProcessImage(uploadableFile, place, similarImageInterface);
     }
 
     /**
@@ -292,10 +286,6 @@ public class UploadRepository {
 
     public Observable<DepictedItem> searchAllEntities(String query) {
         return remoteDataSource.searchAllEntities(query);
-    }
-
-    public List<String> getDepictionsEntityIdList() {
-        return remoteDataSource.depictionsEntityIdList();
     }
 
     /**

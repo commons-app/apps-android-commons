@@ -46,7 +46,7 @@ data class UploadMediaDetail constructor(
          */
         @JvmStatic
         fun formatCaptions(uploadMediaDetails: List<UploadMediaDetail>) =
-            uploadMediaDetails.associate { it.languageCode to it.captionText }
+            uploadMediaDetails.associate { it.languageCode to it.captionText }.filter { it.value.isNotBlank() }
 
         /**
          * Formats the list of descriptions into the format Commons requires for uploads.
@@ -56,11 +56,7 @@ data class UploadMediaDetail constructor(
          */
         @JvmStatic
         fun formatList(descriptions: List<UploadMediaDetail>) =
-            descriptions.joinToString {
-                if (it.descriptionText.isNotEmpty())
-                    "{{${it.languageCode}|1=${it.descriptionText}}}"
-                else
-                    ""
-            }
+            descriptions.filter { it.descriptionText.isNotEmpty() }
+                .joinToString { "{{${it.languageCode}|1=${it.descriptionText}}}" }
     }
 }

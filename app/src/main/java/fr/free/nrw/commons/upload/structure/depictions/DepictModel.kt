@@ -2,7 +2,7 @@ package fr.free.nrw.commons.upload.structure.depictions
 
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import io.reactivex.Observable
-import java.util.Locale
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -12,24 +12,6 @@ class DepictModel @Inject constructor(private val depictsInterface: DepictsInter
 
   companion object {
     private const val SEARCH_DEPICTS_LIMIT = 25
-  }
-
-  val selectedDepictions = mutableListOf<DepictedItem>()
-
-  fun onDepictItemClicked(depictedItem: DepictedItem) {
-    if (depictedItem.isSelected) {
-      selectDepictItem(depictedItem)
-    } else {
-      unselectDepiction(depictedItem)
-    }
-  }
-
-  private fun unselectDepiction(depictedItem: DepictedItem) {
-    selectedDepictions.remove(depictedItem)
-  }
-
-  private fun selectDepictItem(depictedItem: DepictedItem) {
-    selectedDepictions.add(depictedItem)
   }
 
   /**
@@ -44,5 +26,4 @@ class DepictModel @Inject constructor(private val depictsInterface: DepictsInter
       .map(::DepictedItem)
   }
 
-  fun depictionsEntityIdList() = selectedDepictions.map { it.entityId }
 }

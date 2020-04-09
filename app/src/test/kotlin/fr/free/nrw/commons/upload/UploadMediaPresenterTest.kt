@@ -74,11 +74,10 @@ class UploadMediaPresenterTest {
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.anyString(),
                 ArgumentMatchers.any(UploadMediaPresenter::class.java)
             )
         ).thenReturn(testObservableUploadItem)
-        uploadMediaPresenter.receiveImage(uploadableFile, ArgumentMatchers.anyString(), place)
+        uploadMediaPresenter.receiveImage(uploadableFile, place)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).onImageProcessed(

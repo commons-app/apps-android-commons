@@ -89,13 +89,13 @@ public class UploadDepictsRenderer extends Renderer<DepictedItem> {
     public void render() {
         DepictedItem item = getContent();
         checkedView.setChecked(item.isSelected());
-        depictsLabel.setText(item.getDepictsLabel());
+        depictsLabel.setText(item.getName());
         description.setText(item.getDescription());
         if (!TextUtils.isEmpty(item.getImageUrl())) {
             if (!item.getImageUrl().equals(NO_IMAGE_FOR_DEPICTION))
                 setImageView(Uri.parse(item.getImageUrl()), imageView);
         }else{
-            listener.fetchThumbnailUrlForEntity(item.getEntityId(),item.getPosition());
+            listener.fetchThumbnailUrlForEntity(item.getId(),item.getPosition());
         }
     }
 

@@ -55,9 +55,9 @@ public class MediaDataExtractor {
       final String caption, final JsonObject depiction) {
     media.setDiscussion(discussion);
     media.setCaption(caption);
-    media.setDepiction(formatDepictions(depiction));
+    media.setDepictionList(formatDepictions(depiction));
     if (deletionStatus) {
-        media.setRequestedDeletion();
+        media.setRequestedDeletion(true);
     }
     return media;
   }
