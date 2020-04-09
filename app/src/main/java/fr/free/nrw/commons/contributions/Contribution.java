@@ -176,7 +176,7 @@ public class Contribution extends Media {
         transferred = in.readLong();
         decimalCoords = in.readString();
         dateCreatedSource = in.readString();
-        captions = (HashMap<String, String>) in.readSerializable()
+        captions = (HashMap<String, String>) in.readSerializable();
     }
 
     public static final Creator<Contribution> CREATOR = new Creator<Contribution>() {
