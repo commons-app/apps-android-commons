@@ -153,17 +153,13 @@ object DialogUtil {
             setView(customView)
             setCancelable(cancelable)
             positiveButtonText?.let {
-                if (positiveButtonText.isBlank()) {
-                    setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
-                        onPositiveBtnClick?.run()
-                    }
+                setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
+                    onPositiveBtnClick?.run()
                 }
             }
             negativeButtonText?.let {
-                if (negativeButtonText.isBlank()) {
-                    setNegativeButton(negativeButtonText) { _: DialogInterface, _: Int ->
-                        onNegativeBtnClick?.run()
-                    }
+                setNegativeButton(negativeButtonText) { _: DialogInterface, _: Int ->
+                    onNegativeBtnClick?.run()
                 }
             }
         }.create())
