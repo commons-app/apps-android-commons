@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Abijeet Patro
+* Bluetpp
 * Harriettruong3
 * Leducthn
 * Leduyquang753
@@ -100,7 +101,7 @@
   <string name="menu_about">Giới thiệu</string>
   <string name="about_license">Ứng dụng Wikimedia Commons là ứng dụng mã nguồn mở được sáng tạo và quản lý bởi các tình nguyện viên và những người được tin tưởng của cộng đồng Wikipedia. Wikimedia Foundation không tham gia vào sự tạo lập, phát triển cũng như quản lý của ứng dụng.</string>
   <string name="about_improve">Báo cáo lỗi cũng như đưa ra các ý tưởng &lt;a href=\"%1$s\"&gt;trên GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Chính sách riêng tư&lt;/u&gt;</string>
+  <string name="about_privacy_policy">Chính sách riêng tư</string>
   <string name="about_credits" fuzzy="true">&lt;u&gt;Công trạng&lt;/u&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
@@ -117,7 +118,7 @@
   <string name="use_previous" fuzzy="true">Sử dụng tiêu đề/miêu tả trước</string>
   <string name="allow_gps">Lấy vị trí hiện tại tự động</string>
   <string name="allow_gps_summary" fuzzy="true">Định vị hiện tại để nhận gợi ý thể loại trong trường hợp hình ảnh chưa được gắn thẻ địa lý</string>
-  <string name="preference_theme" fuzzy="true">Chế độ ban đêm</string>
+  <string name="preference_theme">Giao diện</string>
   <string name="license_name_cc_by_sa_four">Ghi công–Chia sẻ tương tự 4.0</string>
   <string name="license_name_cc_by_four">Ghi công 4.0</string>
   <string name="license_name_cc_by_sa">Ghi công–Chia sẻ tương tự 3.0</string>
@@ -158,7 +159,7 @@
   <string name="welcome_copyright_subtext">Tránh dùng các hình ảnh có bản quyền bạn tìm được trên Internet, cũng như các hình chụp áp phích, bìa sách, v.v.</string>
   <string name="welcome_final_text">Bạn hiểu rồi chứ?</string>
   <string name="welcome_final_button_text">Có!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Thông tin thêm&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Thêm thông tin</string>
   <string name="detail_panel_cats_label">Thể loại</string>
   <string name="detail_panel_cats_loading">Đang tải…</string>
   <string name="detail_panel_cats_none">Chưa chọn</string>
@@ -250,6 +251,7 @@
   <string name="nominate_deletion">Bầu chọn để xóa</string>
   <string name="nominated_for_deletion">Có đề nghị xóa hình này.</string>
   <string name="view_browser">Hiện lên ở trang xem browse</string>
+  <string name="navigation_item_login">Đăng nhập</string>
   <string name="nearby_location_has_not_changed">Vị trí không thay đổi.</string>
   <string name="nearby_location_not_available" fuzzy="true">Vị trí không có sẵn.</string>
   <string name="location_permission_rationale_nearby">Bạn cần cho phép để hiển thị danh sách nơi lân cận</string>
