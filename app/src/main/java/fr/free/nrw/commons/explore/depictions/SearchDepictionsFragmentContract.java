@@ -32,7 +32,7 @@ public interface SearchDepictionsFragmentContract {
         /**
          * load depictions
          */
-        void loadingDepictions();
+        void loadingDepictions(boolean isLoading);
 
         /**
          * clear adapter
