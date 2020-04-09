@@ -37,6 +37,7 @@ public class Contribution extends Media {
      * this Id is in turn used to upload depictions to wikibase
      */
     private List<DepictedItem> depictedItems = new ArrayList<>();
+    private String mimeType;
 
     public Contribution() {
     }
@@ -166,4 +167,12 @@ public class Contribution extends Media {
             return new Contribution[size];
         }
     };
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
+
+    public String getMimeType() {
+        return mimeType;
+    }
 }

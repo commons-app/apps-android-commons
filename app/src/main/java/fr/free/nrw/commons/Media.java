@@ -43,11 +43,9 @@ public class Media implements Parcelable {
     private String caption;
     public String description; // monolingual description on input...
     public String discussion;
-    long dataLength;
+    private long dataLength;
     public Date dateCreated;
     @Nullable public  Date dateUploaded;
-    public int width;
-    public int height;
     public String license;
     public String licenseUrl;
     public String creator;
@@ -61,11 +59,6 @@ public class Media implements Parcelable {
      * However unlike categories depictions is multi-lingual
      */
     public ArrayList<Map<String, String>> depictionList;
-    /**
-     * The above hashmap is fetched from API and to diplay in Explore
-     * However this list of depictions is for storing and retrieving depictions from local storage or cache
-     */
-    public ArrayList<String> depictions;
     public boolean requestedDeletion;
     public HashMap<String, String> descriptions; // multilingual descriptions as loaded
     /**
@@ -75,7 +68,6 @@ public class Media implements Parcelable {
      *     key = "de" , value: "<caption in german>"
      */
     public Map<String, String> captions;
-    public HashMap<String, String> tags = new HashMap<>();
     @Nullable public  LatLng coordinates;
 
     /**
@@ -83,7 +75,6 @@ public class Media implements Parcelable {
      */
     protected Media() {
         this.categories = new ArrayList<>();
-        this.depictions = new ArrayList<>();
         this.descriptions = new HashMap<>();
         this.captions = new HashMap<>();
     }
@@ -124,7 +115,6 @@ public class Media implements Parcelable {
         this.dateUploaded = dateUploaded;
         this.creator = creator;
         this.categories = new ArrayList<>();
-        this.depictions = new ArrayList<>();
         this.descriptions = new HashMap<>();
     }
 
@@ -215,26 +205,9 @@ public class Media implements Parcelable {
     private void setPageId(String pageId) {
         this.pageId = pageId;
     }
+
     public String getThumbUrl() {
         return thumbUrl;
-    }
-
-    /**
-     * Gets tag of media
-     * @param key Media key
-     * @return Media tag
-     */
-    public Object getTag(String key) {
-        return tags.get(key);
-    }
-
-    /**
-     * Modifies( or creates a) tag of media
-     * @param key Media key
-     * @param value Media value
-     */
-    public void setTag(String key, String value) {
-        tags.put(key, value);
     }
 
     /**
@@ -424,38 +397,6 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Gets the width of the media.
-     * @return file width as an int
-     */
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * Sets the width of the media.
-     * @param width file width as an int
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    /**
-     * Gets the height of the media.
-     * @return file height as an int
-     */
-    public int getHeight() {
-        return height;
-    }
-
-    /**
-     * Sets the height of the media.
-     * @param height file height as an int
-     */
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    /**
      * Gets the license name of the file.
      * @return license as a String
      */
@@ -510,12 +451,6 @@ public class Media implements Parcelable {
         return (ArrayList<String>) categories.clone(); // feels dirty
     }
 
-    /**
-     * @return array list of depictions associated with the current media
-     */
-    public ArrayList<String> getDepictions() {
-        return (ArrayList<String>) depictions.clone();
-    }
 
     /**
      * Sets the categories the file falls under.
@@ -527,11 +462,6 @@ public class Media implements Parcelable {
     public void setCategories(List<String> categories) {
         this.categories.clear();
         this.categories.addAll(categories);
-    }
-
-    public void setDepictions(List<String> depictions) {
-        this.depictions.clear();
-        this.depictions.addAll(depictions);
     }
 
     /**
@@ -645,8 +575,6 @@ public class Media implements Parcelable {
         dest.writeLong(this.dataLength);
         dest.writeLong(this.dateCreated != null ? this.dateCreated.getTime() : -1);
         dest.writeLong(this.dateUploaded != null ? this.dateUploaded.getTime() : -1);
-        dest.writeInt(this.width);
-        dest.writeInt(this.height);
         dest.writeString(this.license);
         dest.writeString(this.licenseUrl);
         dest.writeString(this.creator);
@@ -655,7 +583,6 @@ public class Media implements Parcelable {
         dest.writeList(this.depictionList);
         dest.writeByte(this.requestedDeletion ? (byte) 1 : (byte) 0);
         dest.writeSerializable(this.descriptions);
-        dest.writeSerializable(this.tags);
         dest.writeParcelable(this.coordinates, flags);
     }
 
@@ -673,8 +600,6 @@ public class Media implements Parcelable {
         this.dateCreated = tmpDateCreated == -1 ? null : new Date(tmpDateCreated);
         long tmpDateUploaded = in.readLong();
         this.dateUploaded = tmpDateUploaded == -1 ? null : new Date(tmpDateUploaded);
-        this.width = in.readInt();
-        this.height = in.readInt();
         this.license = in.readString();
         this.licenseUrl = in.readString();
         this.creator = in.readString();
@@ -685,7 +610,6 @@ public class Media implements Parcelable {
         in.readList(depictionList,null);
         this.requestedDeletion = in.readByte() != 0;
         this.descriptions = (HashMap<String, String>) in.readSerializable();
-        this.tags = (HashMap<String, String>) in.readSerializable();
         this.coordinates = in.readParcelable(LatLng.class.getClassLoader());
     }
 

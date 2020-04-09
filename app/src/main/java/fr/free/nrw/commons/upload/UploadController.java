@@ -152,7 +152,7 @@ public class UploadController {
 
         if (mimeType != null) {
             Timber.d("MimeType is: %s", mimeType);
-            contribution.setTag("mimeType", mimeType);
+            contribution.setMimeType(mimeType);
             if(mimeType.startsWith("image/") && contribution.getDateCreated() == null){
                 contribution.setDateCreated(resolveDateTakenOrNow(contentResolver, contribution));
             }
@@ -162,7 +162,7 @@ public class UploadController {
     }
 
     private String resolveMimeType(final ContentResolver contentResolver, final Contribution contribution) {
-        final String mimeType = (String) contribution.getTag("mimeType");
+        final String mimeType = contribution.getMimeType();
         if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
             return contentResolver.getType(contribution.getLocalUri());
         }
