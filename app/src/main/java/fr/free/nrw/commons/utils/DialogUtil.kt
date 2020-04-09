@@ -135,7 +135,7 @@ object DialogUtil {
         negativeButtonText: String? = let { "" },
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
-        customView: View? = null,
+        customView: View? = let { null },
         cancelable: Boolean? = let { false }
     ) {
 
