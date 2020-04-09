@@ -153,12 +153,12 @@ object DialogUtil {
             setView(customView)
             setCancelable(cancelable)
             positiveButtonText?.let {
-                setPositiveButton(positiveButtonText) { _: DialogInterface, _: Int ->
+                setPositiveButton(it) { _: DialogInterface, _: Int ->
                     onPositiveBtnClick?.run()
                 }
             }
             negativeButtonText?.let {
-                setNegativeButton(negativeButtonText) { _: DialogInterface, _: Int ->
+                setNegativeButton(it) { _: DialogInterface, _: Int ->
                     onNegativeBtnClick?.run()
                 }
             }
