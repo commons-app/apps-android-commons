@@ -88,7 +88,6 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
         size = 0;
       }
       saveQuery();
-
       compositeDisposable.add(depictsClient.searchForDepictions(query, 25, offset)
             .subscribeOn(ioScheduler)
             .observeOn(mainThreadScheduler)
