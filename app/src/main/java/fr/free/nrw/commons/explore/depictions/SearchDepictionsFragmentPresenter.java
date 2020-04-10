@@ -150,6 +150,7 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
         if (mediaList == null || mediaList.isEmpty()) {
             if(queryList.isEmpty()){
                 view.initErrorView();
+                view.setNoDepictionFound();
             }else{
                 view.setIsLastPage(true);
             }

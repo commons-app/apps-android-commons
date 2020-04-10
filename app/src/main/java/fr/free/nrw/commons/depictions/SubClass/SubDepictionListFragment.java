@@ -168,10 +168,13 @@ public class SubDepictionListFragment extends DaggerFragment implements SubDepic
         hasMoreImages = false;
         progressBar.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
+    }
+
+    @Override
+    public void setNoSubDepiction() {
         depictionNotFound.setVisibility(VISIBLE);
         String no_depiction = getString(isParentClass? R.string.no_parent_classes: R.string.no_child_classes);
         depictionNotFound.setText(String.format(Locale.getDefault(), no_depiction, depictsName));
-
     }
 
     @Override

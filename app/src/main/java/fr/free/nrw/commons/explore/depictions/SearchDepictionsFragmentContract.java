@@ -19,6 +19,11 @@ public interface SearchDepictionsFragmentContract {
         void initErrorView();
 
         /**
+         * Sets view when no depiction found for a query
+         */
+        void setNoDepictionFound();
+
+        /**
          * Handles the UI updates for no internet scenario
          */
         void handleNoInternet();

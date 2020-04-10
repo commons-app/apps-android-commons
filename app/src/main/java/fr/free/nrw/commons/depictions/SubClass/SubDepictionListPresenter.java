@@ -134,6 +134,7 @@ public class SubDepictionListPresenter implements SubDepictionListContract.UserA
         if (mediaList == null || mediaList.isEmpty()) {
             if(queryList.isEmpty()){
                 view.initErrorView();
+                view.setNoSubDepiction();
             }else{
                 view.setIsLastPage(true);
             }

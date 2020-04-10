@@ -150,6 +150,13 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
         isLoading = false;
         progressBar.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
+    }
+
+    /**
+     * Sets view when no depiction found for a query
+     */
+    @Override
+    public void setNoDepictionFound(){
         depictionNotFound.setVisibility(VISIBLE);
         String no_depiction = getString(R.string.depictions_not_found);
         depictionNotFound.setText(String.format(Locale.getDefault(), no_depiction, presenter.getQuery()));

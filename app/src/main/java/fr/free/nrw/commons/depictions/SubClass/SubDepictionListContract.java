@@ -19,6 +19,8 @@ public interface SubDepictionListContract {
 
         void initErrorView();
 
+        void setNoSubDepiction();
+
         void showSnackbar();
 
         void setIsLastPage(boolean b);

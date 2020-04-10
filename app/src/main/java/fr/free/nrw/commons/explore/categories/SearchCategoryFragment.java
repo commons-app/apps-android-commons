@@ -203,7 +203,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading queried categories");
         try {
-            initErrorView();
+            bottomProgressBar.setVisibility(View.GONE);
             ViewUtil.showShortSnackbar(categoriesRecyclerView, R.string.error_loading_categories);
         }catch (Exception e){
             e.printStackTrace();
@@ -216,6 +216,7 @@ public class SearchCategoryFragment extends CommonsDaggerSupportFragment {
      */
     private void initErrorView() {
         progressBar.setVisibility(GONE);
+        bottomProgressBar.setVisibility(View.GONE);
         categoriesNotFoundView.setVisibility(VISIBLE);
         categoriesNotFoundView.setText(getString(R.string.categories_not_found,query));
     }
