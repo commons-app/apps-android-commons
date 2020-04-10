@@ -147,6 +147,7 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
      */
     @Override
     public void initErrorView() {
+        isLoading = false;
         progressBar.setVisibility(GONE);
         bottomProgressBar.setVisibility(GONE);
         depictionNotFound.setVisibility(VISIBLE);
@@ -195,10 +196,11 @@ public class SearchDepictionsFragment extends CommonsDaggerSupportFragment imple
     }
 
     @Override
-    public void loadingDepictions() {
+    public void loadingDepictions(boolean isLoading) {
         depictionNotFound.setVisibility(GONE);
         bottomProgressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
+        this.isLoading = isLoading;
     }
 
     @Override

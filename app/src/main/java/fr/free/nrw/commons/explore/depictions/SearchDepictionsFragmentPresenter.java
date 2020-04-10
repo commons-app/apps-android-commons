@@ -82,19 +82,19 @@ public class SearchDepictionsFragmentPresenter extends CommonsDaggerSupportFragm
      */
     @Override
     public void updateDepictionList(String query, int pageSize, boolean reInitialise) {
-        this.query = query;
-        view.loadingDepictions();
-        if (reInitialise) {
-            size = 0;
-        }
-        saveQuery();
-        compositeDisposable.add(depictsClient.searchForDepictions(query, 25, offset)
-                .subscribeOn(ioScheduler)
-                .observeOn(mainThreadScheduler)
-                .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .doOnSubscribe(disposable -> saveQuery())
-                .collect(ArrayList<DepictedItem>::new, ArrayList::add)
-                .subscribe(this::handleSuccess, this::handleError));
+      this.query = query;
+      view.loadingDepictions(true);
+      if (reInitialise) {
+        size = 0;
+      }
+      saveQuery();
+      compositeDisposable.add(depictsClient.searchForDepictions(query, 25, offset)
+            .subscribeOn(ioScheduler)
+            .observeOn(mainThreadScheduler)
+            .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .doOnSubscribe(disposable -> saveQuery())
+            .collect(ArrayList<DepictedItem>::new, ArrayList::add)
+            .subscribe(this::handleSuccess, this::handleError));
     }
 
     /**
