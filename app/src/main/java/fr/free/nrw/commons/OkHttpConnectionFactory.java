@@ -41,7 +41,7 @@ public final class OkHttpConnectionFactory {
 
     private static HttpLoggingInterceptor getLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor()
-                .setLevel(BuildConfig.DEBUG ? Level.BODY: Level.BASIC);
+                .setLevel(Level.BASIC);
 
         httpLoggingInterceptor.redactHeader("Authorization");
         httpLoggingInterceptor.redactHeader("Cookie");
