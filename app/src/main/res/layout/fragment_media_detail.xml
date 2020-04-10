@@ -63,16 +63,10 @@
 
 
                     <TextView
-
+                        style="@style/MediaDetailTextLabelTitle"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
-                        android:layout_weight="30"
-                        android:paddingTop="@dimen/dimen_6"
-                        android:paddingLeft="@dimen/tiny_padding"
-                        android:text="@string/media_detail_title"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"
-                        android:textStyle="bold" />
+                        android:text="@string/media_detail_title" />
 
                     <TextView
                         style="@style/MediaDetailTextBody"
@@ -84,14 +78,14 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/MediaDetailLinear1"
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/authorLinearLayout"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextHeading"
+                        style="@style/MediaDetailTextLabel"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_author" />
@@ -105,13 +99,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/MediaDetailLinear1"
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextHeading"
+                        style="@style/MediaDetailTextLabel"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_description" />
@@ -134,13 +128,13 @@
                     android:layout_height="@dimen/tiny_gap"/>
 
                 <LinearLayout
-                    style="@style/MediaDetailLinear1"
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextHeading"
+                        style="@style/MediaDetailTextLabel"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_license" />
@@ -162,13 +156,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/MediaDetailLinear1"
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextHeading"
+                        style="@style/MediaDetailTextLabel"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_coordinates" />
@@ -190,14 +184,14 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/MediaDetailLinear1"
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:textStyle="bold">
 
                     <TextView
-                        style="@style/MediaDetailTextHeading"
+                        style="@style/MediaDetailTextLabel"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/detail_panel_cats_label" />
@@ -211,13 +205,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/MediaDetailLinear1"
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextHeading"
+                        style="@style/MediaDetailTextLabel"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_uploaded_date" />
@@ -260,13 +254,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/MediaDetailLinear1"
+                    style="@style/MediaDetailContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextHeading"
+                        style="@style/MediaDetailTextLabel"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_discussion" />
@@ -283,7 +277,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/standard_gap"
-                    android:background="@color/button_blue"
+                    android:background="@drawable/bg_copy_wikitext_button"
                     android:text="@string/copy_wikicode"
                     android:textColor="@color/primaryTextColor" />
 

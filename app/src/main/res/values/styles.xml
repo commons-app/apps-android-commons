@@ -139,20 +139,27 @@
         <item name="centerRegion">#906078</item>
     </style>
 
-    <style name="MediaDetailLinear1">
+    <style name="MediaDetailContainer">
         <item name="android:paddingLeft">@dimen/quarter_standard_height</item>
         <item name="android:paddingRight">@dimen/quarter_standard_height</item>
         <item name="android:paddingTop">@dimen/tiny_gap</item>
         <item name="android:paddingBottom">@dimen/tiny_gap</item>
     </style>
 
-    <style name="MediaDetailTextHeading">
+    <style name="MediaDetailTextLabel">
         <item name="android:layout_weight">30</item>
         <item name="android:paddingTop">@dimen/dimen_6</item>
         <item name="android:paddingLeft">@dimen/tiny_gap</item>
-        <item name="android:textColor">?attr/mediaDetailsHeadingText</item>
         <item name="android:textSize">@dimen/normal_text</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MediaDetailTextLabelTitle" parent="@style/MediaDetailTextLabel">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="MediaDetailTextLabelGeneric" parent="@style/MediaDetailTextLabel">
+        <item name="android:textColor">?attr/mediaDetailsHeadingText</item>
     </style>
 
     <style name="MediaDetailTextBody">

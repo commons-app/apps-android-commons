@@ -9,12 +9,12 @@
         <shape
             android:shape="rectangle">
             <solid
-                android:color="@color/deleteRed"/>
+                android:color="?attr/mediaDetailNominationBackground"/>
             <corners
                 android:radius="@dimen/progressbar_stroke" />
             <stroke
                 android:width="5px"
-                android:color="@color/deleteRed" />
+                android:color="?attr/mediaDetailNominationBackground" />
         </shape>
     </item>
 
