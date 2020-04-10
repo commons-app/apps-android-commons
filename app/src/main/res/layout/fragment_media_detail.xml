@@ -85,7 +85,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextLabel"
+                        style="@style/MediaDetailTextLabelGeneric"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_author" />
@@ -105,7 +105,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextLabel"
+                        style="@style/MediaDetailTextLabelGeneric"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_description" />
@@ -134,7 +134,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextLabel"
+                        style="@style/MediaDetailTextLabelGeneric"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_license" />
@@ -162,7 +162,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextLabel"
+                        style="@style/MediaDetailTextLabelGeneric"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_coordinates" />
@@ -191,7 +191,7 @@
                     android:textStyle="bold">
 
                     <TextView
-                        style="@style/MediaDetailTextLabel"
+                        style="@style/MediaDetailTextLabelGeneric"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/detail_panel_cats_label" />
@@ -211,7 +211,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextLabel"
+                        style="@style/MediaDetailTextLabelGeneric"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_uploaded_date" />
@@ -260,7 +260,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/MediaDetailTextLabel"
+                        style="@style/MediaDetailTextLabelGeneric"
                         android:layout_width="@dimen/widget_margin"
                         android:layout_height="match_parent"
                         android:text="@string/media_detail_discussion" />
