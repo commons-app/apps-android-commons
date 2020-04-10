@@ -123,9 +123,8 @@ public class CategoriesModel{
         }
 
         //otherwise, search API for matching categories
-        //term passed as lower case to make search case-insensitive(taking only lower case for everything)
         return categoryClient
-                .searchCategoriesForPrefix(term.toLowerCase(), SEARCH_CATS_LIMIT)
+                .searchCategoriesForPrefix(term, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 
@@ -184,12 +183,11 @@ public class CategoriesModel{
 
     /**
      * Return category for single title
-     * title is converted to lower case to make search case-insensitive
      * @param title
      * @return
      */
     private Observable<CategoryItem> getTitleCategories(String title) {
-        return categoryClient.searchCategories(title.toLowerCase(), SEARCH_CATS_LIMIT)
+        return categoryClient.searchCategories(title, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
 
