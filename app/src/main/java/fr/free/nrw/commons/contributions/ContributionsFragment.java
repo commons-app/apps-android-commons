@@ -19,17 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-
-import fr.free.nrw.commons.MediaDataExtractor;
-import io.reactivex.disposables.Disposable;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.campaigns.Campaign;
@@ -61,6 +52,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.MainActivity.CONTRIBUTIONS_TAB_POSITION;
@@ -108,7 +102,7 @@ public class ContributionsFragment
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder)
+            uploadService = (UploadService) ((UploadService.UploadServiceLocalBinder) binder)
                     .getService();
             isUploadServiceConnected = true;
         }

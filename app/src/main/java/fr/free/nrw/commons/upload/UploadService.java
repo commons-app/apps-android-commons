@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Binder;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -23,7 +25,7 @@ import javax.inject.Named;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.HandlerService;
+import fr.free.nrw.commons.di.CommonsDaggerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -35,13 +37,13 @@ import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditService;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
-import io.reactivex.SingleObserver;
+
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
+
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class UploadService extends HandlerService<Contribution> {
+public class UploadService extends CommonsDaggerService {
 
     private static final String EXTRA_PREFIX = "fr.free.nrw.commons.upload";
 
@@ -77,10 +79,6 @@ public class UploadService extends HandlerService<Contribution> {
     // Seriously, Android?
     public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
     public static final int NOTIFICATION_UPLOAD_FAILED = 3;
-
-    public UploadService() {
-        super("UploadService");
-    }
 
     protected class NotificationUpdateProgressListener{
 
@@ -130,6 +128,19 @@ public class UploadService extends HandlerService<Contribution> {
         Timber.d("UploadService.onDestroy; %s are yet to be uploaded", unfinishedUploads);
     }
 
+    public class UploadServiceLocalBinder extends Binder {
+        public UploadService getService() {
+            return UploadService.this;
+        }
+    }
+
+    private final IBinder localBinder = new UploadServiceLocalBinder();
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return localBinder;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -139,7 +150,6 @@ public class UploadService extends HandlerService<Contribution> {
         curNotification = getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL);
     }
 
-    @Override
     protected void handle(int what, Contribution contribution) {
         switch (what) {
             case ACTION_UPLOAD_FILE:
@@ -150,7 +160,6 @@ public class UploadService extends HandlerService<Contribution> {
         }
     }
 
-    @Override
     public void queue(int what, Contribution contribution) {
         Timber.d("Upload service queue has contribution with wiki data entity id as %s", contribution.getWikiDataEntityId());
         switch (what) {
@@ -170,7 +179,7 @@ public class UploadService extends HandlerService<Contribution> {
                         .observeOn(mainThreadScheduler)
                         .subscribe(aLong->{
                             contribution._id = aLong;
-                            UploadService.super.queue(what, contribution);
+                            handle(what, contribution);
                         }, Throwable::printStackTrace));
                 break;
             default:

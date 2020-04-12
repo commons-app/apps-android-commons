@@ -23,7 +23,6 @@ import java.util.Date;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -60,7 +59,7 @@ public class UploadController {
     public ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder).getService();
+            uploadService = ((UploadService.UploadServiceLocalBinder) binder).getService();
             isUploadServiceConnected = true;
         }
 
