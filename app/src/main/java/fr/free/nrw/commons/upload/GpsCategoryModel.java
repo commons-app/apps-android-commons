@@ -33,8 +33,4 @@ public class GpsCategoryModel {
         clear();
         categorySet.addAll(categoryList != null ? categoryList : new ArrayList<>());
     }
-
-    public void add(String categoryString) {
-        categorySet.add(categoryString);
-    }
 }

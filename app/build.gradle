@@ -18,7 +18,6 @@ if(isRunningOnTravisAndIsNotPRBuild) {
 dependencies {
 
     // Utils
-    implementation 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
     implementation 'in.yuvi:http.fluent:1.3'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.okhttp3:okhttp:4.2.0'
