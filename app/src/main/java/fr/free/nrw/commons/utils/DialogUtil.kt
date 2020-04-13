@@ -3,7 +3,6 @@ package fr.free.nrw.commons.utils
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.view.View
 import fr.free.nrw.commons.R
 import timber.log.Timber
@@ -152,14 +151,10 @@ object DialogUtil {
             setView(customView)
             setCancelable(cancelable)
             positiveButtonText?.let {
-                setPositiveButton(it) { _: DialogInterface, _: Int ->
-                    onPositiveBtnClick?.run()
-                }
+                setPositiveButton(it) { _, _ -> onPositiveBtnClick?.run() }
             }
             negativeButtonText?.let {
-                setNegativeButton(it) { _: DialogInterface, _: Int ->
-                    onNegativeBtnClick?.run()
-                }
+                setNegativeButton(it) { _, _ -> onNegativeBtnClick?.run() }
             }
         }.create())
     }
