@@ -80,7 +80,7 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
         customView: View,
-        cancellable: Boolean
+        cancelable: Boolean
     ) {
         createAndShowDialogSafely(
             activity = activity,
@@ -91,7 +91,7 @@ object DialogUtil {
             onPositiveBtnClick = onPositiveBtnClick,
             onNegativeBtnClick = onNegativeBtnClick,
             customView = customView,
-            cancellable = cancellable
+            cancelable = cancelable
         )
     }
 
@@ -102,7 +102,7 @@ object DialogUtil {
         message: String,
         positiveButtonText: String?,
         onPositiveBtnClick: Runnable?,
-        cancellable: Boolean
+        cancelable: Boolean
     ) {
         createAndShowDialogSafely(
             activity = activity,
@@ -110,7 +110,7 @@ object DialogUtil {
             message = message,
             positiveButtonText = positiveButtonText,
             onPositiveBtnClick = onPositiveBtnClick,
-            cancellable = cancellable
+            cancelable = cancelable
         )
     }
 
@@ -124,7 +124,7 @@ object DialogUtil {
      * @param onPositiveBtnClick
      * @param onNegativeBtnClick
      * @param customView
-     * @param cancellable
+     * @param cancelable
      */
     private fun createAndShowDialogSafely(
         activity: Activity,
@@ -135,7 +135,7 @@ object DialogUtil {
         onPositiveBtnClick: Runnable? = null,
         onNegativeBtnClick: Runnable? = null,
         customView: View? = null,
-        cancellable: Boolean = false
+        cancelable: Boolean = false
     ) {
 
         /* If the custom view already has a parent, there is already a dialog showing with the view
@@ -150,7 +150,7 @@ object DialogUtil {
             setTitle(title)
             setMessage(message)
             setView(customView)
-            setCancelable(cancellable)
+            setCancelable(cancelable)
             positiveButtonText?.let {
                 setPositiveButton(it) { _: DialogInterface, _: Int ->
                     onPositiveBtnClick?.run()
