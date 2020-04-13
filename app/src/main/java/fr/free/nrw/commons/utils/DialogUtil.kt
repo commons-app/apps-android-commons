@@ -40,16 +40,14 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?
     ) {
-        showAlertDialog(
+        createAndShowDialogSafely(
             activity,
             title,
             message,
             activity.getString(R.string.yes),
             activity.getString(R.string.no),
             onPositiveBtnClick,
-            onNegativeBtnClick,
-            null,
-            false
+            onNegativeBtnClick
         )
     }
 
@@ -63,16 +61,14 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?
     ) {
-        showAlertDialog(
+        createAndShowDialogSafely(
             activity,
             title,
             message,
             positiveButtonText,
             negativeButtonText,
             onPositiveBtnClick,
-            onNegativeBtnClick,
-            null,
-            false
+            onNegativeBtnClick
         )
     }
 
@@ -86,7 +82,7 @@ object DialogUtil {
         customView: View,
         cancelable: Boolean
     ) {
-        showAlertDialog(
+        createAndShowDialogSafely(
             activity,
             title,
             message,
@@ -108,7 +104,7 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         cancellable: Boolean
     ) {
-        showAlertDialog(
+        createAndShowDialogSafely(
             activity,
             title,
             message,
@@ -133,8 +129,7 @@ object DialogUtil {
      * @param customView
      * @param cancelable
      */
-    @JvmStatic
-    fun showAlertDialog(
+    private fun createAndShowDialogSafely(
         activity: Activity,
         title: String,
         message: String,
