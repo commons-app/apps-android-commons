@@ -41,13 +41,13 @@ object DialogUtil {
         onNegativeBtnClick: Runnable?
     ) {
         createAndShowDialogSafely(
-            activity,
-            title,
-            message,
-            activity.getString(R.string.yes),
-            activity.getString(R.string.no),
-            onPositiveBtnClick,
-            onNegativeBtnClick
+            activity = activity,
+            title = title,
+            message = message,
+            positiveButtonText = activity.getString(R.string.yes),
+            negativeButtonText = activity.getString(R.string.no),
+            onPositiveBtnClick = onPositiveBtnClick,
+            onNegativeBtnClick = onNegativeBtnClick
         )
     }
 
@@ -62,13 +62,13 @@ object DialogUtil {
         onNegativeBtnClick: Runnable?
     ) {
         createAndShowDialogSafely(
-            activity,
-            title,
-            message,
-            positiveButtonText,
-            negativeButtonText,
-            onPositiveBtnClick,
-            onNegativeBtnClick
+            activity = activity,
+            title = title,
+            message = message,
+            positiveButtonText = positiveButtonText,
+            negativeButtonText = negativeButtonText,
+            onPositiveBtnClick = onPositiveBtnClick,
+            onNegativeBtnClick = onNegativeBtnClick
         )
     }
 
@@ -80,18 +80,18 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
         customView: View,
-        cancelable: Boolean
+        cancellable: Boolean
     ) {
         createAndShowDialogSafely(
-            activity,
-            title,
-            message,
-            activity.getString(R.string.yes),
-            activity.getString(R.string.no),
-            onPositiveBtnClick,
-            onNegativeBtnClick,
-            customView,
-            cancelable
+            activity = activity,
+            title = title,
+            message = message,
+            positiveButtonText = activity.getString(R.string.yes),
+            negativeButtonText = activity.getString(R.string.no),
+            onPositiveBtnClick = onPositiveBtnClick,
+            onNegativeBtnClick = onNegativeBtnClick,
+            customView = customView,
+            cancellable = cancellable
         )
     }
 
@@ -105,15 +105,12 @@ object DialogUtil {
         cancellable: Boolean
     ) {
         createAndShowDialogSafely(
-            activity,
-            title,
-            message,
-            positiveButtonText,
-            null,
-            onPositiveBtnClick,
-            null,
-            null,
-            cancellable
+            activity = activity,
+            title = title,
+            message = message,
+            positiveButtonText = positiveButtonText,
+            onPositiveBtnClick = onPositiveBtnClick,
+            cancellable = cancellable
         )
     }
 
@@ -127,7 +124,7 @@ object DialogUtil {
      * @param onPositiveBtnClick
      * @param onNegativeBtnClick
      * @param customView
-     * @param cancelable
+     * @param cancellable
      */
     private fun createAndShowDialogSafely(
         activity: Activity,
@@ -135,10 +132,10 @@ object DialogUtil {
         message: String,
         positiveButtonText: String? = null,
         negativeButtonText: String? = null,
-        onPositiveBtnClick: Runnable?,
-        onNegativeBtnClick: Runnable?,
+        onPositiveBtnClick: Runnable? = null,
+        onNegativeBtnClick: Runnable? = null,
         customView: View? = null,
-        cancelable: Boolean = false
+        cancellable: Boolean = false
     ) {
 
         /* If the custom view already has a parent, there is already a dialog showing with the view
@@ -153,7 +150,7 @@ object DialogUtil {
             setTitle(title)
             setMessage(message)
             setView(customView)
-            setCancelable(cancelable)
+            setCancelable(cancellable)
             positiveButtonText?.let {
                 setPositiveButton(it) { _: DialogInterface, _: Int ->
                     onPositiveBtnClick?.run()
