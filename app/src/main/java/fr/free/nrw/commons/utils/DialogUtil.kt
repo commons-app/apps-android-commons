@@ -134,7 +134,7 @@ object DialogUtil {
         onPositiveBtnClick: Runnable? = null,
         onNegativeBtnClick: Runnable? = null,
         customView: View? = null,
-        cancelable: Boolean = false
+        cancelable: Boolean = true
     ) {
 
         /* If the custom view already has a parent, there is already a dialog showing with the view
