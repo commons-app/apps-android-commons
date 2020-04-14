@@ -18,7 +18,7 @@ import timber.log.Timber;
 @Singleton
 public class NearbyPlaces {
 
-    public static final double INITIAL_RADIUS = 1.0; // in kilometers
+    private static final double INITIAL_RADIUS = 1.0; // in kilometers
     private static final double RADIUS_MULTIPLIER = 1.618;
     public double radius = INITIAL_RADIUS;
 

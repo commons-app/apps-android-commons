@@ -8,11 +8,11 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
-import fr.free.nrw.commons.nearby.NearbyPlaces
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.io.File
@@ -24,6 +24,12 @@ import javax.inject.Named
 /**
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
  */
+
+private const val DEFAULT_SUGGESTION_RADIUS_IN_METRES = 100
+private const val MAX_SUGGESTION_RADIUS_IN_METRES = 1000
+private const val RADIUS_STEP_SIZE_IN_METRES = 100
+private const val MIN_NEARBY_RESULTS = 5
+
 class FileProcessor @Inject constructor(
     private val context: Context,
     private val contentResolver: ContentResolver,
@@ -181,17 +187,30 @@ class FileProcessor @Inject constructor(
                     }
                 )
         )
+
         compositeDisposable.add(
-            okHttpJsonApiClient.getNearbyPlaces(
-                imageCoordinates.latLng,
-                Locale.getDefault().language,
-                NearbyPlaces.INITIAL_RADIUS
-            )
-                .subscribeOn(Schedulers.io())
-                .subscribe(
-                    { depictsModel.nearbyPlaces = it },
-                    { Timber.e(it) }
-                )
+            suggestNearbyDepictions(imageCoordinates)
         )
+    }
+
+    private val radiiProgressionInMetres =
+        (DEFAULT_SUGGESTION_RADIUS_IN_METRES..MAX_SUGGESTION_RADIUS_IN_METRES step RADIUS_STEP_SIZE_IN_METRES)
+
+    private fun suggestNearbyDepictions(imageCoordinates: ImageCoordinates): Disposable {
+        return Observable.fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
+            .concatMap {
+                okHttpJsonApiClient.getNearbyPlaces(
+                    imageCoordinates.latLng,
+                    Locale.getDefault().language,
+                    it
+                )
+            }
+            .subscribeOn(Schedulers.io())
+            .filter { it.size >= MIN_NEARBY_RESULTS }
+            .take(1)
+            .subscribe(
+                { depictsModel.nearbyPlaces = it },
+                { Timber.e(it) }
+            )
     }
 }
