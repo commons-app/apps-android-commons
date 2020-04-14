@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
+import io.reactivex.Completable;
 import org.acra.ACRA;
 import org.acra.annotation.AcraCore;
 import org.acra.annotation.AcraDialog;
@@ -267,17 +268,18 @@ public class CommonsApplication extends Application {
         }
 
         sessionManager.logout()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    Timber.d("All accounts have been removed");
-                    clearImageCache();
-                    //TODO: fix preference manager
-                    defaultPrefs.clearAll();
-                    defaultPrefs.putBoolean("firstrun", false);
-                    updateAllDatabases();
-                    logoutListener.onLogoutComplete();
-                });
+            .andThen(Completable.fromAction(() ->{
+                Timber.d("All accounts have been removed");
+                clearImageCache();
+                //TODO: fix preference manager
+                defaultPrefs.clearAll();
+                defaultPrefs.putBoolean("firstrun", false);
+                updateAllDatabases();
+                }
+            ))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(logoutListener::onLogoutComplete, Timber::e);
     }
 
     /**
