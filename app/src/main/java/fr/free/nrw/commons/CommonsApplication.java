@@ -275,14 +275,11 @@ public class CommonsApplication extends Application {
                 defaultPrefs.clearAll();
                 defaultPrefs.putBoolean("firstrun", false);
                 updateAllDatabases();
-
                 }
-            )).doOnError(Timber::e)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    logoutListener.onLogoutComplete();
-                });
+            ))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(logoutListener::onLogoutComplete, Timber::e);
     }
 
     /**
