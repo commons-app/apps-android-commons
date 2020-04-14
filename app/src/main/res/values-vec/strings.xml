@@ -5,7 +5,7 @@
 <resources>
   <string name="title_activity_explore">Esplora</string>
   <string name="navigation_item_explore">Esplora</string>
-  <string name="preference_category_appearance">Aspeto grafego</string>
+  <string name="preference_category_appearance">Siera de ła grafega</string>
   <string name="preference_category_general">Xenerałe</string>
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privacy</string>
