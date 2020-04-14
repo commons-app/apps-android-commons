@@ -189,7 +189,9 @@
   <string name="title_activity_nearby">מקומות בסביבה</string>
   <string name="no_nearby">לא נמצאו מקומות בסביבה</string>
   <string name="warning">אזהרה</string>
+  <string name="duplicate_image_found">נמצאה תמונה כפולה</string>
   <string name="upload_image_duplicate">הקובץ הזה כבר קיים בוויקישיתוף. האם להמשיך?</string>
+  <string name="upload">העלאה</string>
   <string name="yes">כן</string>
   <string name="no">לא</string>
   <string name="media_detail_title">כותרת</string>
@@ -263,6 +265,7 @@
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
   <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
   <string name="upload_problem_do_you_continue">האם ברצונך עדיין להעלות את התמונה הזאת?</string>
+  <string name="upload_problem_image">נמצאו בעיות בתמונה</string>
   <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
   <string name="give_permission">לתת הרשאה</string>
   <string name="use_external_storage">להשתמש באחסון חיצוני</string>
@@ -586,4 +589,5 @@
   <string name="recommend_high_accuracy_mode">לתוצאות המיטביות יש להשתמש במצב דיוק גבוה.</string>
   <string name="ask_to_turn_location_on">להפעיל מיקום?</string>
   <string name="nearby_needs_location">פעולת \"בסביבה\" זקוקה לשירותי מיקומי פועלים כדי לעבוד כמו שצריך</string>
+  <string name="use_location_from_similar_image">האם צילמת את שתי התמונות באותו המקום? האם ברצונך להשתמש בקו הרוחב וקו האורך של התמונה משמאל?</string>
 </resources>
