@@ -183,7 +183,6 @@ public class CategoryImagesListFragment extends DaggerFragment {
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                view.setFastScrollEnabled(scrollState != SCROLL_STATE_IDLE);
             }
 
             @Override
