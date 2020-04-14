@@ -5,7 +5,7 @@
 <resources>
   <string name="title_activity_explore">Esplora</string>
   <string name="navigation_item_explore">Esplora</string>
-  <string name="preference_category_appearance">Aspeto grafego</string>
+  <string name="preference_category_appearance">Siera de ła grafega</string>
   <string name="preference_category_general">Xenerałe</string>
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privacy</string>
@@ -102,7 +102,7 @@
   <string name="waiting_first_sync">Speta par ła prima sincronixasion...</string>
   <string name="no_uploads_yet">No te ghe njiancora cargà na foto</string>
   <string name="menu_retry_upload">Riproa</string>
-  <string name="menu_cancel_upload">Dasa stare</string>
+  <string name="menu_cancel_upload">Descançełare</string>
   <plurals name="share_license_summary">
     <item quantity="one">Sta imajine ła vegnarà ridasada in baxe a ła liçensa %1$s</item>
     <item quantity="other">Ste imajini łe vegnarà ridasae in baxe a ła liçensa %1$s</item>
@@ -208,7 +208,7 @@
   <string name="welcome_image_welcome_wikipedia">Benvegnuo Wikipedia</string>
   <string name="welcome_image_welcome_copyright">Benvegnuo Copyright</string>
   <string name="welcome_image_sydney_opera_house">Teatro de l\'opara de Sydney</string>
-  <string name="cancel">D\'asa star</string>
+  <string name="cancel">Descançełare</string>
   <string name="navigation_drawer_open">Verxi</string>
   <string name="navigation_drawer_close">Sara</string>
   <string name="navigation_item_home">Pajina prinçipale</string>
@@ -288,7 +288,7 @@
   <string name="about_translate_title">Lengue</string>
   <string name="about_translate_message">Eleji ła lengua e ła tradusion che te ne vołi enviar</string>
   <string name="about_translate_proceed">Va vanti</string>
-  <string name="about_translate_cancel">Scançeła</string>
+  <string name="about_translate_cancel">Descançełare</string>
   <string name="retry">Riproa</string>
   <string name="showcase_view_got_it_button">Capìo!</string>
   <string name="showcase_view_whole_nearby_activity">Sti cuà i xé i posti rente a ti che i vołe imajini par mostrar łe so voxi de Wikipedia.\n\nSchiciando so \"SERCA STA AREA\" se bloca ła mapa e se fa partire na riserca n\'tei posti cuà rente a ła poxision.</string>

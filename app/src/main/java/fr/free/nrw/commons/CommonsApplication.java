@@ -24,6 +24,7 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
@@ -259,17 +260,18 @@ public class CommonsApplication extends Application {
         }
 
         sessionManager.logout()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    Timber.d("All accounts have been removed");
-                    clearImageCache();
-                    //TODO: fix preference manager
-                    defaultPrefs.clearAll();
-                    defaultPrefs.putBoolean("firstrun", false);
-                    updateAllDatabases();
-                    logoutListener.onLogoutComplete();
-                });
+            .andThen(Completable.fromAction(() ->{
+                Timber.d("All accounts have been removed");
+                clearImageCache();
+                //TODO: fix preference manager
+                defaultPrefs.clearAll();
+                defaultPrefs.putBoolean("firstrun", false);
+                updateAllDatabases();
+                }
+            ))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(logoutListener::onLogoutComplete, Timber::e);
     }
 
     /**

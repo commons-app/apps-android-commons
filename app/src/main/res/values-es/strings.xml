@@ -199,7 +199,9 @@
   <string name="title_activity_nearby">Lugares cercanos</string>
   <string name="no_nearby">No se encontraron lugares cercanos</string>
   <string name="warning">Atención</string>
+  <string name="duplicate_image_found">Se encontró una imagen duplicada</string>
   <string name="upload_image_duplicate">Este archivo ya existe en Commons. ¿Deseas continuar?</string>
+  <string name="upload">Cargar</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Título</string>
@@ -273,6 +275,7 @@
   <string name="upload_problem_different_geolocation">Esta imagen fue tomada en una ubicación diferente.</string>
   <string name="upload_problem_fbmd">Por favor sube solo fotografías que tu mismo hayas tomado. No subas imágenes o fotografías que hayas encontrado en las cuentas de Facebook de otros.</string>
   <string name="upload_problem_do_you_continue">¿Todavía quieres cargar esta imagen?</string>
+  <string name="upload_problem_image">Problemas encontrados en la imagen</string>
   <string name="internet_downloaded">Carga únicamente fotografías que hayas creado tú. No cargues imágenes o fotografías que hayas descargado de Internet.</string>
   <string name="give_permission">Otorgar permiso</string>
   <string name="use_external_storage">Utilizar almacenamiento externo</string>

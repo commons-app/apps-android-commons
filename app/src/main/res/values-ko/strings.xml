@@ -104,7 +104,7 @@
   <string name="menu_about">정보</string>
   <string name="about_license">위키미디어 공용 앱은 오픈 소스 애플리케이션이며 위키미디어 공동체 내의 자원봉사자에 의해 유지됩니다. 위키미디어 재단은 애플리케이션의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
   <string name="about_improve">버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
-  <string name="about_privacy_policy">개인정보처리방침</string>
+  <string name="about_privacy_policy">개인정보보호정책</string>
   <string name="about_credits">제작진</string>
   <string name="title_activity_about">정보</string>
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>
@@ -406,7 +406,7 @@
   <string name="log_collection_started">로그 수집이 시작되었습니다. 이 앱을 다시 시작하고 기록을 원하는 동작을 수행한 다음 \'로그 파일 보내기\'를 다시 탭해 주십시오</string>
   <string name="deletion_reason_uploaded_by_mistake">실수로 업로드했습니다</string>
   <string name="deletion_reason_publicly_visible">공개가 되는 줄 몰랐습니다</string>
-  <string name="deletion_reason_bad_for_my_privacy">제 프라이버시에 부적절하다는 것을 인식했습니다</string>
+  <string name="deletion_reason_bad_for_my_privacy">제 개인정보에 부적절하다는 것을 인식했습니다</string>
   <string name="deletion_reason_no_longer_want_public">생각이 바뀌어서 더 이상 공개하고 싶지 않습니다</string>
   <string name="deletion_reason_not_interesting">죄송합니다. 이 사진은 백과사전의 관심 대상이 아닙니다</string>
   <string name="no_uploads">공용에 오신 것을 환영합니다!\n\n추가 버튼에 탭하여 당신의 첫 미디어를 올리십시오.</string>
