@@ -55,8 +55,8 @@ object DialogUtil {
         activity: Activity,
         title: String,
         message: String,
-        positiveButtonText: String,
-        negativeButtonText: String,
+        positiveButtonText: String?,
+        negativeButtonText: String?,
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?
     ) {
@@ -78,7 +78,7 @@ object DialogUtil {
         message: String,
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
-        customView: View,
+        customView: View?,
         cancelable: Boolean
     ) {
         createAndShowDialogSafely(
