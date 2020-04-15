@@ -57,8 +57,6 @@ android {
     }
 }
 
-apply from: 'gradle/src/checkstyle.gradle'
-
 dependencies {
 
     String retrofitVersion = '2.4.0'
