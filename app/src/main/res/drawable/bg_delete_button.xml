@@ -12,9 +12,6 @@
                 android:color="?attr/mediaDetailNominationBackground"/>
             <corners
                 android:radius="@dimen/progressbar_stroke" />
-            <stroke
-                android:width="5px"
-                android:color="?attr/mediaDetailNominationBackground" />
         </shape>
     </item>
 
