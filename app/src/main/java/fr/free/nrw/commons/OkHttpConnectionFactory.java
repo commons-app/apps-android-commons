@@ -59,7 +59,7 @@ public final class OkHttpConnectionFactory {
 
     public static class UnsuccessfulResponseInterceptor implements Interceptor {
 
-        private static final String ERRORS_PREFIX = "{\"errors";
+        private static final String ERRORS_PREFIX = "{\"error";
 
         @Override @NonNull public Response intercept(@NonNull final Chain chain) throws IOException {
             final Response rsp = chain.proceed(chain.request());
