@@ -40,6 +40,7 @@ import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.internal.functions.Functions;
 import io.reactivex.plugins.RxJavaPlugins;
