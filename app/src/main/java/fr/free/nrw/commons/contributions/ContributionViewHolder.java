@@ -114,9 +114,9 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         if ((contribution.getState() != Contribution.STATE_COMPLETED)) {
             titleView.setText(contribution.getDisplayTitle());
         } else {
-            Timber.d("Fetching caption for %s", contribution.getFilename());
             final String pageId = contribution.getPageId();
             if (pageId != null) {
+                Timber.d("Fetching caption for %s", contribution.getFilename());
                 String wikibaseMediaId = PAGE_ID_PREFIX
                     + pageId; // Create Wikibase media id from the page id. Example media id: M80618155 for https://commons.wikimedia.org/wiki/File:Tantanmen.jpeg with has the pageid 80618155
                 compositeDisposable.add(mediaClient.getCaptionByWikibaseIdentifier(wikibaseMediaId)
