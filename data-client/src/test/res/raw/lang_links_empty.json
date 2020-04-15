@@ -1,0 +1,19 @@
+{
+  "batchcomplete": "",
+  "query": {
+    "normalized": [
+      {
+        "fromencoded": false,
+        "from": "Hot_Molasses",
+        "to": "Hot Molasses"
+      }
+    ],
+    "pages": [
+      {
+        "pageid": 47002725,
+        "ns": 0,
+        "title": "Hot Molasses"
+      }
+    ]
+  }
+}
