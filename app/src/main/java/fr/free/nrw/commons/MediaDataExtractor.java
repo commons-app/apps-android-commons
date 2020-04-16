@@ -45,7 +45,7 @@ public class MediaDataExtractor {
       return Single.zip(getMediaFromFileName(filename),
             mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + filename),
             getDiscussion(filename),
-            getCaption(PAGE_ID_PREFIX + pageId),
+            pageId != null ? getCaption(PAGE_ID_PREFIX + pageId) : Single.just(""),
             getDepictions(filename),
             this::combineToMedia);
     }

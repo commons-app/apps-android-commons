@@ -258,7 +258,10 @@ public class CategoryImagesListFragment extends DaggerFragment {
         isLoading = false;
         statusTextView.setVisibility(GONE);
         for (Media m : collection) {
-            replaceTitlesWithCaptions(PAGE_ID_PREFIX + m.getPageId(), mediaSize++);
+            final String pageId = m.getPageId();
+            if (pageId != null) {
+                replaceTitlesWithCaptions(PAGE_ID_PREFIX + pageId, mediaSize++);
+            }
         }
     }
 
