@@ -6,36 +6,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryClickedListener;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadCategoriesAdapterFactory;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
 import timber.log.Timber;
 
 public class UploadCategoriesFragment extends UploadBaseFragment implements CategoriesContract.View,
@@ -55,7 +49,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Inject
     CategoriesContract.UserActionListener presenter;
     private RVRendererAdapter<CategoryItem> adapter;
-    private List<UploadMediaDetail> mediaTitleList;
     private Disposable subscribe;
     private List<CategoryItem> categories;
     private boolean isVisible;
@@ -63,10 +56,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    public void setMediaDetailList(List<UploadMediaDetail> mediaTitleList) {
-        this.mediaTitleList = mediaTitleList;
     }
 
     @Nullable
@@ -153,12 +142,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     @Override
-    public void addCategory(CategoryItem category) {
-        adapter.add(category);
-        adapter.notifyItemInserted(adapter.getItemCount());
-    }
-
-    @Override
     public void goToNextScreen() {
         callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
@@ -172,11 +155,6 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
                 getString(R.string.no_go_back),
                 () -> goToNextScreen(),
                 null);
-
-    }
-
-    @Override
-    public void setSelectedCategories(List<CategoryItem> selectedCategories) {
 
     }
 

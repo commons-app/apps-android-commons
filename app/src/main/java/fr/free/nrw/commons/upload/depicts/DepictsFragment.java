@@ -7,36 +7,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadDepictsAdapterFactory;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.upload.structure.depictions.UploadDepictsCallback;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
 import timber.log.Timber;
 
 
@@ -47,8 +41,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @BindView(R.id.depicts_title)
     TextView depictsTitle;
-    @BindView(R.id.depicts_subtitle)
-    TextView depictsSubtitile;
     @BindView(R.id.depicts_search_container)
     TextInputLayout depictsSearchContainer;
     @BindView(R.id.depicts_search)
@@ -61,7 +53,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @Inject
     DepictsContract.UserActionListener presenter;
     private RVRendererAdapter<DepictedItem> adapter;
-    private List<UploadMediaDetail> mediaTitleList;
     private Disposable subscribe;
 
     @Nullable
@@ -202,10 +193,4 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         }
     }
 
-    /**
-     * sets mediaList of UploadMediaDetail object
-     */
-    public void setMediaDetailList(List<UploadMediaDetail> imageDetailList) {
-        this.mediaTitleList = imageDetailList;
-    }
 }

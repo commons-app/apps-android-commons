@@ -35,8 +35,6 @@ public interface UploadContract {
 
         void handleSubmit();
 
-        List<UploadMediaDetail> getImageDetailList();
-
         void deletePictureAtIndex(int index);
     }
 }

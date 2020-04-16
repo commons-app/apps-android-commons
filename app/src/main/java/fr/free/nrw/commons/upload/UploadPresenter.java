@@ -84,23 +84,6 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         }
     }
 
-    /**
-     * Returns list of UploadMedia Details
-     * to be passed on to categories and depicts fragment
-     */
-
-    public List<UploadMediaDetail> getImageDetailList() {
-        int titleListCount = 0;
-        List<UploadMediaDetail> titleList = new ArrayList<>();
-        for (UploadModel.UploadItem item : repository.getUploads()) {
-            if (!item.getUploadMediaDetails().isEmpty()) {
-                titleList.add(item.getUploadMediaDetails().get(titleListCount));
-                titleListCount++;
-            }
-        }
-        return titleList;
-    }
-
     @Override
     public void deletePictureAtIndex(int index) {
         List<UploadableFile> uploadableFiles = view.getUploadableFiles();
