@@ -1,29 +1,14 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
-
 import com.google.gson.Gson;
-
-import fr.free.nrw.commons.depictions.SubClass.models.SubclassDescription;
-import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import fr.free.nrw.commons.achievements.FeaturedImages;
 import fr.free.nrw.commons.achievements.FeedbackResponse;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.depictions.SubClass.models.Binding;
 import fr.free.nrw.commons.depictions.SubClass.models.SparqlQueryResponse;
+import fr.free.nrw.commons.depictions.SubClass.models.SubclassDescription;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
@@ -34,11 +19,19 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import timber.log.Timber;
 
 /**
@@ -177,13 +170,13 @@ public class OkHttpJsonApiClient {
         });
     }
 
-    public Observable<List<Place>> getNearbyPlaces(LatLng cur, String lang, double radius) throws IOException {
+    public Observable<List<Place>> getNearbyPlaces(LatLng cur, String language, double radius) throws IOException {
         String wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
         String query = wikidataQuery
                 .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
                 .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
                 .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
-                .replace("${LANG}", lang);
+                .replace("${LANG}", language);
 
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(sparqlQueryUrl)

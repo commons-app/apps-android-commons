@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -186,12 +185,11 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     /**
      * Search for depictions for the following query
+     *
      * @param query query string
      */
     private void searchForDepictions(String query) {
-        if (!TextUtils.isEmpty(query)) {
-            presenter.searchForDepictions(query);
-        }
+        presenter.searchForDepictions(query);
     }
 
 }

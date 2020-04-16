@@ -1,21 +1,17 @@
 package fr.free.nrw.commons.category;
 
 import android.text.TextUtils;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.GpsCategoryModel;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 /**
@@ -27,19 +23,19 @@ public class CategoriesModel{
     private final CategoryClient categoryClient;
     private final CategoryDao categoryDao;
     private final JsonKvStore directKvStore;
+    private final GpsCategoryModel gpsCategoryModel;
 
-    private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories;
 
-    @Inject GpsCategoryModel gpsCategoryModel;
     @Inject
     public CategoriesModel(CategoryClient categoryClient,
-                           CategoryDao categoryDao,
-                           @Named("default_preferences") JsonKvStore directKvStore) {
+        CategoryDao categoryDao,
+        @Named("default_preferences") JsonKvStore directKvStore,
+        final GpsCategoryModel gpsCategoryModel) {
         this.categoryClient = categoryClient;
         this.categoryDao = categoryDao;
         this.directKvStore = directKvStore;
-        this.categoriesCache = new HashMap<>();
+        this.gpsCategoryModel = gpsCategoryModel;
         this.selectedCategories = new ArrayList<>();
     }
 
@@ -94,10 +90,6 @@ public class CategoriesModel{
         categoryDao.save(category);
     }
 
-    boolean cacheContainsKey(String term) {
-        return categoriesCache.containsKey(term);
-    }
-    //endregion
 
     /**
      * Regional category search
@@ -108,18 +100,16 @@ public class CategoriesModel{
     public Observable<CategoryItem> searchAll(String term, List<String> imageTitleList) {
         //If query text is empty, show him category based on gps and title and recent searches
         if (TextUtils.isEmpty(term)) {
-            Observable<CategoryItem> categoryItemObservable = gpsCategories()
-                    .concatWith(titleCategories(imageTitleList));
+            Observable<CategoryItem> categoryItemObservable =
+                Observable.concat(gpsCategories(), titleCategories(imageTitleList));
             if (hasDirectCategories()) {
-                categoryItemObservable.concatWith(directCategories().concatWith(recentCategories()));
+                return Observable.concat(
+                    categoryItemObservable,
+                    directCategories(),
+                    recentCategories()
+                );
             }
             return categoryItemObservable;
-        }
-
-        //if user types in something that is in cache, return cached category
-        if (cacheContainsKey(term)) {
-            return Observable.fromIterable(getCachedCategories(term))
-                    .map(name -> new CategoryItem(name, false));
         }
 
         //otherwise, search API for matching categories
@@ -129,15 +119,6 @@ public class CategoriesModel{
                 .map(name -> new CategoryItem(name, false));
     }
 
-
-    /**
-     * Returns cached categories
-     * @param term
-     * @return
-     */
-    private ArrayList<String> getCachedCategories(String term) {
-        return categoriesCache.get(term);
-    }
 
     /**
      * Returns if we have a category in DirectKV Store
@@ -256,7 +237,6 @@ public class CategoriesModel{
      * Cleanup the existing in memory cache's
      */
     public void cleanUp() {
-        this.categoriesCache.clear();
         this.selectedCategories.clear();
     }
 }
