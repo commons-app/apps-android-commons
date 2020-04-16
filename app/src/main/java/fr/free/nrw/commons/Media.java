@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.media.Depictions;
 import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil;
 import java.text.ParseException;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.gallery.ExtMetadata;
@@ -56,7 +56,7 @@ public class Media implements Parcelable {
      * Depicts is a feature part of Structured data. Multiple Depictions can be added for an image just like categories.
      * However unlike categories depictions is multi-lingual
      */
-    private List<Map<String, String>> depictionList= new ArrayList<>();
+    private Depictions depictions;
     private boolean requestedDeletion;
     @Nullable private  LatLng coordinates;
 
@@ -305,11 +305,9 @@ public class Media implements Parcelable {
     /**
      * @return depictions associated with the current media
      */
-    public List<Map<String, String>> getDepiction() {
-        return depictionList;
+    public Depictions getDepiction() {
+        return depictions;
     }
-
-
 
     /**
      * Sets the file description.
@@ -489,8 +487,8 @@ public class Media implements Parcelable {
     }
 
     /* Sets depictions for the current media obtained fro  Wikibase API*/
-    public void setDepictionList(List<Map<String, String>> depictions) {
-        this.depictionList = depictions;
+    public void setDepictions(Depictions depictions) {
+        this.depictions = depictions;
     }
 
     public void setLocalUri(@Nullable final Uri localUri) {
@@ -509,8 +507,8 @@ public class Media implements Parcelable {
         this.licenseUrl = licenseUrl;
     }
 
-    public List<Map<String, String>> getDepictionList() {
-        return depictionList;
+    public Depictions getDepictions() {
+        return depictions;
     }
 
     @Override
@@ -542,7 +540,7 @@ public class Media implements Parcelable {
         dest.writeString(this.creator);
         dest.writeString(this.pageId);
         dest.writeStringList(this.categories);
-        dest.writeList(this.depictionList);
+        dest.writeParcelable(this.depictions, flags);
         dest.writeByte(this.requestedDeletion ? (byte) 1 : (byte) 0);
         dest.writeParcelable(this.coordinates, flags);
     }
@@ -568,7 +566,7 @@ public class Media implements Parcelable {
         final ArrayList<String> list = new ArrayList<>();
         in.readStringList(list);
         this.categories=list;
-        in.readList(depictionList,null);
+        in.readParcelable(Depictions.class.getClassLoader());
         this.requestedDeletion = in.readByte() != 0;
         this.coordinates = in.readParcelable(LatLng.class.getClassLoader());
     }

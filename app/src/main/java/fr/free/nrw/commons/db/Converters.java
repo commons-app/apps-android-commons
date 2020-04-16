@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.media.Depictions;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.Date;
@@ -100,6 +101,16 @@ public class Converters {
     @TypeConverter
     public static List<DepictedItem> stringToList(String depictedItems) {
         return readObjectWithTypeToken(depictedItems, new TypeToken<List<DepictedItem>>() {});
+    }
+
+    @TypeConverter
+    public static String aptionsAndDepictionsToString(Depictions depictedItems) {
+        return writeObjectToString(depictedItems);
+    }
+
+    @TypeConverter
+    public static Depictions stringToCaptionsAndDepictions(String depictedItems) {
+        return readObjectFromString(depictedItems, Depictions.class);
     }
 
     private static String writeObjectToString(Object object) {

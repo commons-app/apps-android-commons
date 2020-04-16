@@ -2,13 +2,12 @@ package org.wikipedia.wikidata;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwResponse;
 import org.wikipedia.json.PostProcessingTypeAdapter;
-
-import java.util.Collections;
-import java.util.Map;
 
 @SuppressWarnings("unused")
 public class Entities extends MwResponse implements PostProcessingTypeAdapter.PostProcessable {
@@ -17,6 +16,10 @@ public class Entities extends MwResponse implements PostProcessingTypeAdapter.Po
 
     @Nullable public Map<String, Entity> entities() {
         return entities;
+    }
+
+    public int getSuccess() {
+        return success;
     }
 
     @Nullable public Entity getFirst() {
@@ -39,6 +42,7 @@ public class Entities extends MwResponse implements PostProcessingTypeAdapter.Po
         @Nullable private Map<String, Label> labels;
         @Nullable private Map<String, Label> descriptions;
         @Nullable private Map<String, SiteLink> sitelinks;
+        @Nullable private Map<String, List<Statement_partial>> statements;
         @Nullable private String missing;
 
         @NonNull public String id() {
@@ -55,6 +59,11 @@ public class Entities extends MwResponse implements PostProcessingTypeAdapter.Po
 
         @NonNull public Map<String, SiteLink> sitelinks() {
             return sitelinks != null ? sitelinks : Collections.emptyMap();
+        }
+
+        @Nullable
+        public Map<String, List<Statement_partial>> getStatements() {
+            return statements;
         }
 
         boolean isMissing() {

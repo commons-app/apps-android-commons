@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.upload.depicts;
 
-import com.google.gson.JsonObject;
-
-import fr.free.nrw.commons.depictions.models.DepictionResponse;
 import fr.free.nrw.commons.wikidata.model.DepictSearchResponse;
 import io.reactivex.Observable;
+import org.wikipedia.wikidata.ClaimsResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -26,5 +24,5 @@ public interface DepictsInterface {
     Observable<DepictSearchResponse> searchForDepicts(@Query("search") String query, @Query("limit") String limit, @Query("language") String language, @Query("uselang") String uselang, @Query("continue") String offset);
 
     @GET("/w/api.php?action=wbgetclaims&format=json&property=P18")
-    Observable<JsonObject> getImageForEntity(@Query("entity") String entityId);
+    Observable<ClaimsResponse> getImageForEntity(@Query("entity") String entityId);
 }
