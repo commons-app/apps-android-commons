@@ -2,6 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static fr.free.nrw.commons.contributions.ContributionsFragment.MEDIA_DETAIL_PAGER_FRAGMENT_TAG;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,14 +26,13 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import java.util.ArrayList;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider;
 import java.util.List;
 import javax.inject.Inject;
-import javax.inject.Named;
 import timber.log.Timber;
 
 /**
@@ -38,9 +40,7 @@ import timber.log.Timber;
  */
 
 public class ContributionsListFragment extends CommonsDaggerSupportFragment implements
-    ContributionsListContract.View {
-
-    private static final int PAGE_SIZE = 10;
+    ContributionsListContract.View, ContributionsListAdapter.Callback {
 
     private static final String VISIBLE_ITEM_ID = "visible_item_id";
     @BindView(R.id.contributionsList)
@@ -58,11 +58,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     @BindView(R.id.fab_layout)
     LinearLayout fab_layout;
 
-    @Inject @Named("default_preferences") JsonKvStore kvStore;
     @Inject ContributionController controller;
 
     @Inject
     ContributionsListPresenter contributionsListPresenter;
+
+    private MediaDetailPagerFragment mediaDetailPagerFragment;
 
     private Animation fab_close;
     private Animation fab_open;
@@ -72,33 +73,28 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     private boolean isFabOpen = false;
 
-    private boolean isLoading = false;
-    private boolean isLastPage = false;
-
     private ContributionsListAdapter adapter;
 
     private Callback callback;
     private String lastVisibleItemID;
 
     private int SPAN_COUNT=3;
-    private List<Contribution> contributions=new ArrayList<>();
+
+    ContributionsListFragment(Callback callback) {
+        this.callback = callback;
+    }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
         ButterKnife.bind(this, view);
-        Timber.d("RecyclerList Inside onCreateView.");
         contributionsListPresenter.onAttachView(this);
-        contributionsListPresenter.setLifeCycleOwner(this.getViewLifecycleOwner());
+        contributionsListPresenter.setLifeCycleOwner(getViewLifecycleOwner());
         initAdapter();
         return view;
     }
 
-    public void setCallback(Callback callback) {
-        this.callback = callback;
-    }
-
     private void initAdapter() {
-        adapter = new ContributionsListAdapter(callback);
+        adapter = new ContributionsListAdapter(this);
         adapter.setHasStableIds(true);
     }
 
@@ -122,38 +118,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         }
 
         rvContributionsList.setAdapter(adapter);
-        adapter.setContributions(contributions);
-        rvContributionsList.addOnScrollListener(new OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-                if (!isLoading && !isLastPage) {
-                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0
-                        && totalItemCount >= PAGE_SIZE) {
-                        loadMoreItems();
-                    }
-                }
-            }
-        });
+        rvContributionsList.addOnScrollListener(contributionsListPresenter.getScrollListener(layoutManager));
 
       contributionsListPresenter.setupLiveData();
       contributionsListPresenter.fetchContributions();
-    }
-
-    private void loadMoreItems() {
-        Timber.d("RecyclerList Inside load more items.");
-        isLoading = true;
-        contributionsListPresenter.fetchContributions();
     }
 
     @Override
@@ -220,7 +188,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      *
      * @param shouldShow True when contributions list should be hidden.
      */
-    public void showProgress(boolean shouldShow) {
+    public void showProgress(final boolean shouldShow) {
         progressBar.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
@@ -229,24 +197,37 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     @Override
-    public void setUploadCount(int count) {
-
-    }
-
-    @Override
     public void showContributions(List<Contribution> contributionList) {
-
+        adapter.setContributions(contributionList);
     }
 
     @Override
-    public void showMessage(String localizedMessage) {
-
+    public void retryUpload(Contribution contribution) {
+        callback.retryUpload(contribution);
     }
 
-    public void setContributions(List<Contribution> contributionList) {
-        this.contributions.clear();
-        this.contributions.addAll(contributionList);
-        adapter.setContributions(contributions);
+    @Override
+    public void deleteUpload(Contribution contribution) {
+        contributionsListPresenter.deleteUpload(contribution);
+    }
+
+    @Override
+    public void openMediaDetail(int position) {
+        callback.showDetail(position);
+    }
+
+    @Override
+    public void fetchMediaUriFor(Contribution contribution) {
+        Timber.d("Fetching thumbnail for %s", contribution.filename);
+        contributionsListPresenter.fetchMediaDetails(contribution);
+    }
+
+    public Media getMediaAtPosition(int i) {
+        return adapter.getContributionForPosition(i);
+    }
+
+    public int getTotalMediaCount() {
+        return adapter.getItemCount();
     }
 
     public interface SourceRefresher {
@@ -277,7 +258,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         }
     }
 
-
     /**
      * Gets the id of the contribution from the db
      * @param position
@@ -285,11 +265,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      */
     @Nullable
     private String findIdOfItemWithPosition(int position) {
-        Contribution contributionForPosition = callback.getContributionForPosition(position);
+        Contribution contributionForPosition = adapter.getContributionForPosition(position);
         if (null != contributionForPosition) {
             return contributionForPosition.getFilename();
         }
         return null;
     }
 
+    public interface Callback {
+        void retryUpload(Contribution contribution);
+        void showDetail(int position);
+    }
 }

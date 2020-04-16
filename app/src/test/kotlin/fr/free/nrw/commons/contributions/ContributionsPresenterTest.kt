@@ -61,17 +61,6 @@ class ContributionsPresenterTest {
     }
 
     /**
-     * Test fetch contributions
-     */
-    @Test
-    fun testFetchContributions(){
-        whenever(repository.getString(ArgumentMatchers.anyString())).thenReturn("10")
-        whenever(repository.fetchContributions()).thenReturn(liveData)
-        contributionsPresenter.fetchContributions()
-        verify(repository).fetchContributions()
-    }
-
-    /**
      * Test presenter actions onDeleteContribution
      */
     @Test

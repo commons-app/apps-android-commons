@@ -12,8 +12,6 @@ public class ContributionsContract {
 
     public interface View {
 
-        void showProgress(boolean shouldShow);
-
         void showMessage(String localizedMessage);
     }
 
@@ -22,8 +20,6 @@ public class ContributionsContract {
         Contribution getContributionsWithTitle(String uri);
 
         void deleteUpload(Contribution contribution);
-
-        Media getItemAtPosition(int i);
 
         void updateContribution(Contribution contribution);
 

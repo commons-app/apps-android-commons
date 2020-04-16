@@ -1,21 +1,19 @@
 package fr.free.nrw.commons.contributions;
 
-import static fr.free.nrw.commons.contributions.Contribution.STATE_COMPLETED;
-
-import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
-import fr.free.nrw.commons.contributions.ContributionsContract.View;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -48,6 +46,10 @@ public class ContributionsListPresenter implements UserActionListener {
   private List<Contribution> contributionList = new ArrayList<>();
   private LifecycleOwner lifeCycleOwner;
   private String user;
+  private static final int PAGE_SIZE = 10;
+  private static final int START_LOADING_SIZE = 5;
+  private boolean isLoading;
+  private boolean isLastPage;
 
   @Inject
   ContributionsListPresenter(ContributionsRepository repository,
@@ -68,40 +70,69 @@ public class ContributionsListPresenter implements UserActionListener {
     this.lifeCycleOwner = lifeCycleOwner;
   }
 
+  public OnScrollListener getScrollListener(LinearLayoutManager layoutManager) {
+    return new OnScrollListener() {
+      @Override
+      public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+        super.onScrollStateChanged(recyclerView, newState);
+      }
+
+      @Override
+      public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+        final int visibleItemCount = layoutManager.getChildCount();
+        final int totalItemCount = layoutManager.getItemCount();
+        final int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+        if (!isLoading && !isLastPage) {
+          if ((visibleItemCount + firstVisibleItemPosition + START_LOADING_SIZE) >= totalItemCount
+              && firstVisibleItemPosition >= 0
+              && totalItemCount >= PAGE_SIZE) {
+            loadMoreItems();
+          }
+        }
+      }
+    };
+  }
+
   public void fetchContributions() {
-    Timber.d("RecyclerList fetchContribution.");
-    if (NetworkUtils.isInternetConnectionEstablished(CommonsApplication.getInstance())
-        && shouldFetchContributions()) {
+    if (NetworkUtils.isInternetConnectionEstablished(CommonsApplication.getInstance())) {
       view.showProgress(true);
       this.user = sessionManager.getUserName();
 
-      Timber.d("RecyclerList fetching contributions: %s", this.user);
       view.showContributions(Collections.emptyList());
       compositeDisposable.add(mediaClient.getMediaListForUser(user)
           .subscribeOn(ioThreadScheduler)
           .observeOn(mainThreadScheduler)
           .map(mediaList -> {
-            Timber.d("RecyclerList Fetched %d contributions.", mediaList.size());
             List<Contribution> contributions = new ArrayList<>();
             for (Media media : mediaList) {
               contributions.add(new Contribution(media));
             }
             return contributions;
           })
-          .subscribe(this::saveContributionsToDB, error -> {
+          .subscribe(results -> {
+            isLoading = false;
+            saveContributionsToDB(results);
+          }, error -> {
             Timber.e("Failed to fetch contributions: %s", error.getMessage());
           }));
     }
   }
 
-  public void setupLiveData() {
+  private void loadMoreItems() {
+    Timber.d("RecyclerList Inside load more items.");
+    isLoading = true;
+    fetchContributions();
+  }
+
+  void setupLiveData() {
     LiveData<List<Contribution>> liveDataContributions = repository.fetchContributions();
     if (null != lifeCycleOwner) {
       liveDataContributions.observe(lifeCycleOwner, this::showContributions);
     }
   }
 
-  private void showContributions(@NonNull List<Contribution> contributions) {
+  private void showContributions(@NonNull final List<Contribution> contributions) {
     view.showProgress(false);
     if (contributions.isEmpty()) {
       view.showWelcomeTip(true);
@@ -109,28 +140,15 @@ public class ContributionsListPresenter implements UserActionListener {
     } else {
       view.showWelcomeTip(false);
       view.showNoContributionsUI(false);
-      view.setUploadCount(contributions.size());
       view.showContributions(contributions);
-      this.contributionList.clear();
-      this.contributionList.addAll(contributions);
+      contributionList.clear();
+      contributionList.addAll(contributions);
     }
   }
 
   private void saveContributionsToDB(List<Contribution> contributions) {
-    Timber.d("RecyclerList saved contributions to db %d.", contributions.size());
-    Timber.e("Fetched: " + contributions.size() + " contributions " + " saving to db");
     repository.save(contributions).subscribeOn(ioThreadScheduler).subscribe();
     repository.set("last_fetch_timestamp", System.currentTimeMillis());
-  }
-
-  private boolean shouldFetchContributions() {
-    long lastFetchTimestamp = repository.getLong("last_fetch_timestamp");
-    Timber.d("last fetch timestamp: %s", lastFetchTimestamp);
-    if (lastFetchTimestamp != 0) {
-      return System.currentTimeMillis() - lastFetchTimestamp > 15 * 60 * 100;
-    }
-    Timber.d("should  fetch contributions: %s", true);
-    return true;
   }
 
   @Override

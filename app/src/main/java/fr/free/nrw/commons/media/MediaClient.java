@@ -86,7 +86,7 @@ public class MediaClient {
     public Single<List<Media>> getMediaListForUser(String userName) {
         return responseToMediaList(
             continuationStore.containsKey("user_" + userName) ?
-                mediaInterface.getMediaListFromCategory(userName, 10,
+                mediaInterface.getMediaListForUser(userName, 10,
                     continuationStore.get("user_" + userName)) : //if true
                 mediaInterface.getMediaListForUser(userName, 10, Collections.emptyMap()),
             "user_" + userName); //if false

@@ -17,11 +17,7 @@ public class ContributionsListContract {
 
     void showNoContributionsUI(boolean shouldShow);
 
-    void setUploadCount(int count);
-
     void showContributions(List<Contribution> contributionList);
-
-    void showMessage(String localizedMessage);
   }
 
   public interface UserActionListener extends BasePresenter<View> {

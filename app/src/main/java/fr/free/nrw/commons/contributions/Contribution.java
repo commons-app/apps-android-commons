@@ -310,4 +310,15 @@ public class  Contribution extends Media {
             return new Contribution[size];
         }
     };
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.valueOf(_id);
+    }
+
+    @Override
+    public int hashCode() {
+        return toString().hashCode();
+    }
 }

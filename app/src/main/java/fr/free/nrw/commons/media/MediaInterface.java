@@ -59,7 +59,7 @@ public interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
-        "&generator=allimages&gaisort=timestamp" +
+        "&generator=allimages&gaisort=timestamp&gaidir=older" +
         //Category parameters
         USER_MEDIA_PARAMS)
     Observable<MwQueryResponse> getMediaListForUser(@Query("gaiuser") String username,

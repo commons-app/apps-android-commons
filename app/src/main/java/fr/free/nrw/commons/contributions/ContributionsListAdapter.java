@@ -1,18 +1,15 @@
 package fr.free.nrw.commons.contributions;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.free.nrw.commons.R;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Represents The View Adapter for the List of Contributions  
@@ -56,9 +53,18 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         return contributions.size();
     }
 
-    public void setContributions(@NonNull List<Contribution> contributionList) {
-        contributions = contributionList;
+    public void setContributions(@NonNull final List<Contribution> contributionList) {
+        contributions.addAll(contributionList);
+        final HashSet<Contribution> hashSet = new HashSet<>(contributions);
+        contributions.clear();
+        contributions.addAll(hashSet);
+        Collections.sort(contributions,
+            (o1, o2) -> -o1.getDateUploaded().compareTo(o2.getDateUploaded()));
         notifyDataSetChanged();
+    }
+
+    public Contribution getContributionForPosition(int position) {
+        return contributions.get(position);
     }
 
     @Override
@@ -73,8 +79,6 @@ public class ContributionsListAdapter extends RecyclerView.Adapter<ContributionV
         void deleteUpload(Contribution contribution);
 
         void openMediaDetail(int contribution);
-
-        Contribution getContributionForPosition(int position);
 
         void fetchMediaUriFor(Contribution contribution);
     }
