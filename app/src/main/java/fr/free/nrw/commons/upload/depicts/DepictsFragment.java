@@ -103,12 +103,13 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @Override
     public void noDepictionSelected() {
         DialogUtil.showAlertDialog(getActivity(),
-                getString(R.string.no_depictions_selected),
-                getString(R.string.no_depictions_selected_warning_desc),
-                getString(R.string.no_go_back),
-                getString(R.string.yes_submit),
-                null,
-                () -> goToNextScreen());
+            getString(R.string.no_depictions_selected),
+            getString(R.string.no_depictions_selected_warning_desc),
+            getString(R.string.yes_submit),
+            getString(R.string.no_go_back),
+            this::goToNextScreen,
+            null
+        );
     }
 
     @Override
